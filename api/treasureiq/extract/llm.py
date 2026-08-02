@@ -26,30 +26,24 @@ what this returns:
 
 from __future__ import annotations
 
-import json
 import logging
-import os
 from decimal import Decimal
 from pathlib import Path
-from typing import Any
 
 from pydantic import BaseModel, Field
 
+from treasureiq.extract.providers import LLMProvider, load_provider
 from treasureiq.schema import Confidence, EmploymentStatus, Requirements
 
 logger = logging.getLogger(__name__)
 
-MODEL = "claude-opus-5"
-
-# Extraction is a bounded reading task, not a reasoning problem: low effort
-# keeps cost and latency down across a whole catalogue without measurably
-# changing what gets recovered. Raise it only if evaluation says otherwise.
-EFFORT = "low"
-
 # Bumped whenever the prompt or schema changes in a way that would produce
 # different output for the same input. Part of the cache key, so a prompt
 # revision invalidates stale entries instead of silently serving them.
-EXTRACTOR_VERSION = "1"
+# Bumped to "2" for the move to the provider abstraction (Ollama default,
+# Anthropic optional): the prompt is unchanged, but the extraction path is
+# not, and cache entries are cheap to regenerate.
+EXTRACTOR_VERSION = "2"
 
 SYSTEM_PROMPT = """\
 Sei un estrattore di requisiti di accesso da testi della Pubblica \
@@ -253,23 +247,15 @@ class ExtractionCache:
 class RequirementsExtractor:
     """Extracts eligibility criteria, preferring cache over API calls."""
 
-    def __init__(self, cache_dir: Path, *, api_key: str | None = None) -> None:
+    def __init__(self, cache_dir: Path, *, provider: LLMProvider | None = None) -> None:
         self.cache = ExtractionCache(cache_dir)
-        self._api_key = api_key or os.environ.get("ANTHROPIC_API_KEY")
-        self._client: Any | None = None
+        self._provider = provider or load_provider(role="extract")
         self.stats = {"cache_hits": 0, "api_calls": 0, "failures": 0, "skipped": 0}
 
     @property
     def available(self) -> bool:
         """Whether live extraction is possible in this environment."""
-        return bool(self._api_key)
-
-    def _get_client(self) -> Any:
-        if self._client is None:
-            import anthropic  # imported lazily so cache-only runs need no SDK
-
-            self._client = anthropic.Anthropic(api_key=self._api_key)
-        return self._client
+        return self._provider.available
 
     def extract(
         self, *, text: str, title: str, raw_hash: str
@@ -291,7 +277,13 @@ class RequirementsExtractor:
             return None
 
         try:
-            result = self._call_api(text=text, title=title)
+            # This runs from the (synchronous) ingestion CLI, never from an
+            # async context, so the sync wrapper is the correct call here.
+            result = self._provider.parse(
+                system=SYSTEM_PROMPT,
+                user=f"# Servizio\n{title}\n\n# Testo pubblicato dal comune\n{text}",
+                output_model=ExtractionResult,
+            )
         except Exception as exc:
             # Ingestion continues on regex results. Logged loudly because a
             # silent downgrade would quietly degrade the readiness figures.
@@ -303,43 +295,6 @@ class RequirementsExtractor:
         self.stats["api_calls"] += 1
         req, notes = result.to_requirements()
         return req, notes, Confidence.EXTRACTED
-
-    def _call_api(self, *, text: str, title: str) -> ExtractionResult:
-        client = self._get_client()
-        response = client.messages.parse(
-            model=MODEL,
-            max_tokens=4096,
-            output_config={"effort": EFFORT},
-            # The system prompt is identical across every record in a catalogue
-            # run, so caching it turns a per-record cost into a one-off. The
-            # volatile part (the service text) goes in the user turn, after the
-            # breakpoint, which is what keeps the prefix stable.
-            system=[
-                {
-                    "type": "text",
-                    "text": SYSTEM_PROMPT,
-                    "cache_control": {"type": "ephemeral"},
-                }
-            ],
-            messages=[
-                {
-                    "role": "user",
-                    "content": (
-                        f"# Servizio\n{title}\n\n"
-                        f"# Testo pubblicato dal comune\n{text}"
-                    ),
-                }
-            ],
-            output_format=ExtractionResult,
-        )
-
-        if response.stop_reason == "refusal":
-            raise RuntimeError(
-                f"request refused: {getattr(response.stop_details, 'category', None)}"
-            )
-        if response.parsed_output is None:
-            raise RuntimeError(f"no parsed output (stop_reason={response.stop_reason})")
-        return response.parsed_output
 
     def report(self) -> str:
         s = self.stats

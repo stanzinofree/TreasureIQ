@@ -22,8 +22,19 @@ services:
       # Signs the demo session cookie. Override in any real deployment — the
       # default is public in this repository and therefore not a secret.
       TREASUREIQ_SECRET: ${TREASUREIQ_SECRET:-treasureiq-demo-not-secret}
-      # Optional: only needed to re-run extraction against changed sources.
+      # Which LLM backend serves extraction/chat. Default is the local,
+      # offline-friendly Ollama daemon; set to "anthropic" to use the API
+      # fallback instead.
+      TREASUREIQ_LLM_PROVIDER: ${TREASUREIQ_LLM_PROVIDER:-ollama}
+      # host.docker.internal lets the container reach an Ollama daemon
+      # running on the host, since Ollama itself is not containerised here.
+      OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-http://host.docker.internal:11434}
+      # Optional: only needed when TREASUREIQ_LLM_PROVIDER=anthropic.
       ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+    extra_hosts:
+      # Required for host.docker.internal to resolve on Linux hosts; a no-op
+      # on Docker Desktop/OrbStack, where it already resolves.
+      - "host.docker.internal:host-gateway"
     volumes:
       # Read-only: the API serves these snapshots and must never rewrite them.
       # Refreshing them is the ingestion CLI's job, run deliberately.

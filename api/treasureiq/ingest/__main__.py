@@ -42,6 +42,17 @@ SOURCES = [
         "seed": "albano_058003.json",
         "connector": "wp_rest",
     },
+    {
+        # Comparator (D-18). Of the 119 comuni in the province of Rome, 20 expose
+        # a working /servizi API; Fonte Nuova ranks 1st with 34, Albano 2nd with
+        # 32, and the two are close in size (~35k vs ~41k residents). Two measured
+        # comuni make the recovery-cost metric comparative instead of absolute.
+        "codice_istat": "058122",
+        "ente": "Comune di Fonte Nuova",
+        "base_url": "https://comune.fontenuova.rm.it",
+        "seed": "fontenuova_058122.json",
+        "connector": "wp_rest",
+    },
 ]
 
 
@@ -207,13 +218,22 @@ def _merge_pages_into_servizi(
 
 
 def _changed_hashes(old: list[dict], new: list[dict]) -> set[str]:
-    """IDs whose upstream payload hash moved — i.e. the comune edited them."""
-    old_hashes = {o["id"]: o.get("source", {}).get("raw_hash") for o in old}
+    """IDs whose full record changed relative to the committed snapshot.
+
+    Started as an upstream-hash-only comparison, but that missed a real case:
+    D-16 added recovery-cost instrumentation fields computed by *our* own
+    ingestion code, not the comune's. Those can change (or appear for the
+    first time) with `source.raw_hash` completely unchanged, since the
+    upstream WP payload never moved. Comparing the full record — not just the
+    hash — is what makes a same-source, different-instrumentation run
+    register as a real diff instead of silently being skipped as "già
+    aggiornato".
+    """
+    old_by_id = {o["id"]: o for o in old}
     return {
         o["id"]
         for o in new
-        if o["id"] in old_hashes
-        and o.get("source", {}).get("raw_hash") != old_hashes[o["id"]]
+        if o["id"] in old_by_id and old_by_id[o["id"]] != o
     }
 
 

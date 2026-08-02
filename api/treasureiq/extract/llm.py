@@ -26,9 +26,13 @@ what this returns:
 
 from __future__ import annotations
 
+import difflib
 import logging
+import unicodedata
+from dataclasses import dataclass
 from decimal import Decimal
 from pathlib import Path
+from typing import Sequence
 
 from pydantic import BaseModel, Field
 
@@ -114,6 +118,106 @@ class FieldQuote(BaseModel):
 
     field: str = Field(description="Nome del campo estratto.")
     text: str = Field(description="Frase letterale dal testo originale.")
+
+
+@dataclass(frozen=True)
+class Segment:
+    """One boundary-tracked unit of the assembled corpus.
+
+    Either the page body itself (`page_number=None`) or a single page of one
+    PDF attachment (`page_number` 1-based, matching what a citizen sees if
+    they open the PDF). `start` is the character offset of this segment
+    within the *pre-truncation* corpus the connector assembled — callers must
+    slice `text` down to whatever the model actually saw (D-15's
+    `MAX_CORPUS_CHARS` cap) before handing segments to `attribute_quote`, so a
+    quote can never be attributed to text the model never read.
+    """
+
+    kind: str  # "pagina" | "allegato"
+    url: str
+    page_number: int | None
+    start: int
+    text: str
+
+
+#: Normalisation differences (whitespace collapse, curly vs straight quotes,
+#: accents, case) are common between what the model returns and what `pypdf`
+#: or `strip_html` produced, and are not evidence of a wrong source — so they
+#: are ignored for comparison only. The stored quote itself is never touched.
+def _normalise_for_match(text: str) -> str:
+    text = unicodedata.normalize("NFKD", text)
+    text = "".join(ch for ch in text if not unicodedata.combining(ch))
+    text = (
+        text.replace("’", "'")
+        .replace("‘", "'")
+        .replace("“", '"')
+        .replace("”", '"')
+        .replace("«", '"')
+        .replace("»", '"')
+    )
+    text = text.lower()
+    return " ".join(text.split())
+
+
+#: Fuzzy fallback threshold: the longest common substring, on normalised
+#: text, must cover at least this fraction of the *quote's* own length. High
+#: on purpose — the invariant is "unattributed beats wrong source", so a
+#: near-match that isn't overwhelmingly the quote itself must not land on a
+#: document. Combined with a minimum absolute length so a short quote can't
+#: be satisfied by a coincidental fragment.
+_FUZZY_MIN_RATIO = 0.92
+_FUZZY_MIN_MATCH_CHARS = 20
+
+
+def attribute_quote(quote_text: str, segments: Sequence[Segment]) -> Segment | None:
+    """Find which segment a quote-gated quote actually came from.
+
+    Tries an exact (normalised) substring match first. Falls back to the
+    longest common substring on normalised text, accepted only above
+    `_FUZZY_MIN_RATIO`. If more than one segment reaches that bar — exact or
+    fuzzy — the match is ambiguous and this returns `None` rather than guess:
+    per the invariant, "unattributed" is always preferred to a wrong
+    citation. Returns `None` immediately if the quote itself is blank.
+    """
+    normalised_quote = _normalise_for_match(quote_text)
+    if not normalised_quote:
+        return None
+
+    candidates = [seg for seg in segments if seg.text]
+
+    exact_matches = [
+        seg for seg in candidates if normalised_quote in _normalise_for_match(seg.text)
+    ]
+    if len(exact_matches) == 1:
+        return exact_matches[0]
+    if len(exact_matches) > 1:
+        # The same phrase turns up verbatim in more than one segment (short
+        # quotes, boilerplate) — attributing to either would be a guess, and
+        # the invariant is "unattributed" over "maybe wrong".
+        return None
+
+    best_segment: Segment | None = None
+    best_ratio = 0.0
+    ambiguous = False
+    for seg in candidates:
+        normalised_page = _normalise_for_match(seg.text)
+        matcher = difflib.SequenceMatcher(None, normalised_quote, normalised_page, autojunk=False)
+        match = matcher.find_longest_match(0, len(normalised_quote), 0, len(normalised_page))
+        if match.size < _FUZZY_MIN_MATCH_CHARS:
+            continue
+        ratio = match.size / len(normalised_quote)
+        if ratio < _FUZZY_MIN_RATIO:
+            continue
+        if ratio > best_ratio:
+            best_ratio = ratio
+            best_segment = seg
+            ambiguous = False
+        elif ratio == best_ratio and best_segment is not None:
+            ambiguous = True
+
+    if ambiguous:
+        return None
+    return best_segment
 
 
 class ExtractionResult(BaseModel):

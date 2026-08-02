@@ -33,13 +33,20 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/voucher-estate-2026-per-minori/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/23188",
-   "fetched_at": "2026-08-02T18:41:45.840201Z",
+   "fetched_at": "2026-08-02T20:48:10.150480Z",
    "raw_hash": "8fd27f0a53986dac"
   },
   "confidence": "extracted",
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
-  ]
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
  },
  {
   "spec_version": "0.1.0",
@@ -75,13 +82,20 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/permesso-rosa/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/21109",
-   "fetched_at": "2026-08-02T18:41:45.841518Z",
+   "fetched_at": "2026-08-02T20:48:10.152009Z",
    "raw_hash": "b313eafdce34528c"
   },
   "confidence": "inferred",
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
-  ]
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
  },
  {
   "spec_version": "0.1.0",
@@ -119,14 +133,21 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/erogazione-contributi-libri-di-testo-o-sussidi-didattici-digitali/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/15549",
-   "fetched_at": "2026-08-02T18:41:45.842327Z",
+   "fetched_at": "2026-08-02T20:48:10.152602Z",
    "raw_hash": "fd246704ae7aa854"
   },
   "confidence": "extracted",
   "extraction_notes": [
    "Il servizio richiede l'ISEE ma non pubblica la soglia: verifica sulla pagina del comune.",
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
-  ]
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
  },
  {
   "spec_version": "0.1.0",
@@ -162,13 +183,20 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/trasporto-scolastico-alunni-con-disabilita-frequentanti-le-scuole-del-ii-ciclo-superiori/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/21610",
-   "fetched_at": "2026-08-02T18:41:45.843114Z",
+   "fetched_at": "2026-08-02T20:48:10.153185Z",
    "raw_hash": "3a80b33d4ca5de21"
   },
   "confidence": "extracted",
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
-  ]
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
  },
  {
   "spec_version": "0.1.0",
@@ -206,14 +234,21 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/servizio-di-trasporto-scolastico/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/17575",
-   "fetched_at": "2026-08-02T18:41:45.843765Z",
+   "fetched_at": "2026-08-02T20:48:10.153767Z",
    "raw_hash": "1021ecbda05bf75f"
   },
   "confidence": "extracted",
   "extraction_notes": [
    "Il servizio richiede l'ISEE ma non pubblica la soglia: verifica sulla pagina del comune.",
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
-  ]
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
  },
  {
   "spec_version": "0.1.0",
@@ -249,13 +284,20 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/voucher-di-conciliazione-vita-lavoro-rimborso-spese-2025/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/20631",
-   "fetched_at": "2026-08-02T18:41:45.844259Z",
+   "fetched_at": "2026-08-02T20:48:10.154233Z",
    "raw_hash": "aeae28c85c754d07"
   },
   "confidence": "extracted",
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
-  ]
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
  },
  {
   "spec_version": "0.1.0",
@@ -293,14 +335,21 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/voucher-contributi-economici-per-il-rimborsi-del-pagamento-delle-rette-degli-asili-nido-privati-in-favore-dei-minori-residenti-nel-comune-di-albano-laziale/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/17206",
-   "fetched_at": "2026-08-02T18:41:45.845114Z",
+   "fetched_at": "2026-08-02T20:48:10.155082Z",
    "raw_hash": "da0911fe0af13fc0"
   },
   "confidence": "extracted",
   "extraction_notes": [
    "Il servizio richiede l'ISEE ma non pubblica la soglia: verifica sulla pagina del comune.",
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
-  ]
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
  },
  {
   "spec_version": "0.1.0",
@@ -336,13 +385,20 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/separazioni-e-divorzi-in-comune/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/19120",
-   "fetched_at": "2026-08-02T18:41:45.845537Z",
+   "fetched_at": "2026-08-02T20:48:10.155513Z",
    "raw_hash": "168dd3432838c8ad"
   },
   "confidence": "inferred",
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
-  ]
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
  },
  {
   "spec_version": "0.1.0",
@@ -378,13 +434,20 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/assistenza-di-un-operatore-educativo-per-lautonomia-oepac-ex-aec/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/18277",
-   "fetched_at": "2026-08-02T18:41:45.845854Z",
+   "fetched_at": "2026-08-02T20:48:10.155819Z",
    "raw_hash": "9c60f19be356103d"
   },
   "confidence": "extracted",
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
-  ]
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
  },
  {
   "spec_version": "0.1.0",
@@ -420,13 +483,20 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/servizio-di-illuminazione-votiva/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/17940",
-   "fetched_at": "2026-08-02T18:41:45.846114Z",
+   "fetched_at": "2026-08-02T20:48:10.156074Z",
    "raw_hash": "4897b09a0acc82f7"
   },
   "confidence": "inferred",
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
-  ]
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
  },
  {
   "spec_version": "0.1.0",
@@ -462,13 +532,20 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/iscrizione-anagrafe-della-popolazione-residente/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/18066",
-   "fetched_at": "2026-08-02T18:41:45.846476Z",
+   "fetched_at": "2026-08-02T20:48:10.156404Z",
    "raw_hash": "a0ce8b442bbd075d"
   },
   "confidence": "inferred",
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
-  ]
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
  },
  {
   "spec_version": "0.1.0",
@@ -506,14 +583,21 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/compartecipazione-rsa/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/18065",
-   "fetched_at": "2026-08-02T18:41:45.846845Z",
+   "fetched_at": "2026-08-02T20:48:10.156753Z",
    "raw_hash": "d0c03e588b8d9a8a"
   },
   "confidence": "extracted",
   "extraction_notes": [
    "Il servizio richiede l'ISEE ma non pubblica la soglia: verifica sulla pagina del comune.",
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
-  ]
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
  },
  {
   "spec_version": "0.1.0",
@@ -549,13 +633,20 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/richiesta-occupazione-suolo-pubblico/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/18064",
-   "fetched_at": "2026-08-02T18:41:45.847020Z",
+   "fetched_at": "2026-08-02T20:48:10.156924Z",
    "raw_hash": "f350f84433703d2b"
   },
   "confidence": "inferred",
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
-  ]
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
  },
  {
   "spec_version": "0.1.0",
@@ -591,13 +682,20 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/richiesta-accesso-agli-atti-documentale/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/18063",
-   "fetched_at": "2026-08-02T18:41:45.847664Z",
+   "fetched_at": "2026-08-02T20:48:10.157137Z",
    "raw_hash": "9441e34f3fbcf76f"
   },
   "confidence": "inferred",
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
-  ]
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
  },
  {
   "spec_version": "0.1.0",
@@ -633,13 +731,20 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/luci-votive/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/17814",
-   "fetched_at": "2026-08-02T18:41:45.847974Z",
+   "fetched_at": "2026-08-02T20:48:10.157418Z",
    "raw_hash": "baa9afdebbb64f99"
   },
   "confidence": "inferred",
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
-  ]
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
  },
  {
   "spec_version": "0.1.0",
@@ -677,14 +782,21 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/contributo-integrativo-per-il-pagamento-dei-canoni-di-locazione/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/17644",
-   "fetched_at": "2026-08-02T18:41:45.848391Z",
+   "fetched_at": "2026-08-02T20:48:10.157796Z",
    "raw_hash": "32de2ea3e1d75b4c"
   },
   "confidence": "extracted",
   "extraction_notes": [
    "Il servizio richiede l'ISEE ma non pubblica la soglia: verifica sulla pagina del comune.",
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
-  ]
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
  },
  {
   "spec_version": "0.1.0",
@@ -722,14 +834,21 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/servizio-mensa-scolastica/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/17573",
-   "fetched_at": "2026-08-02T18:41:45.849012Z",
+   "fetched_at": "2026-08-02T20:48:10.158394Z",
    "raw_hash": "93795f5dd224f2eb"
   },
   "confidence": "extracted",
   "extraction_notes": [
    "Il servizio richiede l'ISEE ma non pubblica la soglia: verifica sulla pagina del comune.",
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
-  ]
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
  },
  {
   "spec_version": "0.1.0",
@@ -767,14 +886,21 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/borse-di-studio-iostudio/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/17574",
-   "fetched_at": "2026-08-02T18:41:45.849713Z",
+   "fetched_at": "2026-08-02T20:48:10.159074Z",
    "raw_hash": "e2afc44320904577"
   },
   "confidence": "extracted",
   "extraction_notes": [
    "Il servizio richiede l'ISEE ma non pubblica la soglia: verifica sulla pagina del comune.",
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
-  ]
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
  },
  {
   "spec_version": "0.1.0",
@@ -810,13 +936,20 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/richiesta-di-rilascio-contrassegno-disabili/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/16092",
-   "fetched_at": "2026-08-02T18:41:45.850051Z",
+   "fetched_at": "2026-08-02T20:48:10.159381Z",
    "raw_hash": "c8f743d5aacb2974"
   },
   "confidence": "inferred",
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
-  ]
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
  },
  {
   "spec_version": "0.1.0",
@@ -852,13 +985,20 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/centri-di-facilitazione-digitale/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/16003",
-   "fetched_at": "2026-08-02T18:41:45.850383Z",
+   "fetched_at": "2026-08-02T20:48:10.159656Z",
    "raw_hash": "dad1e400d28c19e7"
   },
   "confidence": "inferred",
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
-  ]
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
  },
  {
   "spec_version": "0.1.0",
@@ -894,13 +1034,20 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/carta-identita/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/15861",
-   "fetched_at": "2026-08-02T18:41:45.850797Z",
+   "fetched_at": "2026-08-02T20:48:10.160067Z",
    "raw_hash": "eccd60ff40e18627"
   },
   "confidence": "inferred",
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
-  ]
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
  },
  {
   "spec_version": "0.1.0",
@@ -936,13 +1083,20 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/servizio-raccolta-pannolini-pannoloni/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/15626",
-   "fetched_at": "2026-08-02T18:41:45.851024Z",
+   "fetched_at": "2026-08-02T20:48:10.160299Z",
    "raw_hash": "303f7c707b72051c"
   },
   "confidence": "inferred",
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
-  ]
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
  },
  {
   "spec_version": "0.1.0",
@@ -978,13 +1132,20 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/interventi-per-la-valorizzazione-del-ruolo-di-cura-e-di-assistenza-del-caregiver-familiare/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/15606",
-   "fetched_at": "2026-08-02T18:41:45.851149Z",
+   "fetched_at": "2026-08-02T20:48:10.160429Z",
    "raw_hash": "af7bd94bdd5eb1b0"
   },
   "confidence": "inferred",
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
-  ]
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
  },
  {
   "spec_version": "0.1.0",
@@ -1022,14 +1183,21 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/assistenza-domiciliare-diretta-o-indiretta-in-favore-di-persone-affette-da-patologia-di-alzheimer/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/15593",
-   "fetched_at": "2026-08-02T18:41:45.851503Z",
+   "fetched_at": "2026-08-02T20:48:10.160788Z",
    "raw_hash": "e5fbc73b86d55a8c"
   },
   "confidence": "extracted",
   "extraction_notes": [
    "Il servizio richiede l'ISEE ma non pubblica la soglia: verifica sulla pagina del comune.",
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
-  ]
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
  },
  {
   "spec_version": "0.1.0",
@@ -1065,13 +1233,20 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/iscrizione-anagrafica-per-cittadini-europei/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/14294",
-   "fetched_at": "2026-08-02T18:41:45.852587Z",
+   "fetched_at": "2026-08-02T20:48:10.161845Z",
    "raw_hash": "9dbf49b18fa05e3b"
   },
   "confidence": "inferred",
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
-  ]
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
  },
  {
   "spec_version": "0.1.0",
@@ -1107,13 +1282,20 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/certificato-di-nascita-per-cittadini-europei/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/14293",
-   "fetched_at": "2026-08-02T18:41:45.852758Z",
+   "fetched_at": "2026-08-02T20:48:10.162019Z",
    "raw_hash": "b5f302c3711f121c"
   },
   "confidence": "inferred",
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
-  ]
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
  },
  {
   "spec_version": "0.1.0",
@@ -1149,13 +1331,20 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/certificati-anagrafici/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/14273",
-   "fetched_at": "2026-08-02T18:41:45.852961Z",
+   "fetched_at": "2026-08-02T20:48:10.162214Z",
    "raw_hash": "cae6fadf6f10e66f"
   },
   "confidence": "inferred",
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
-  ]
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
  },
  {
   "spec_version": "0.1.0",
@@ -1191,13 +1380,20 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/s-u-a-p/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/14255",
-   "fetched_at": "2026-08-02T18:41:45.853236Z",
+   "fetched_at": "2026-08-02T20:48:10.162484Z",
    "raw_hash": "f801cf4fffdde672"
   },
   "confidence": "inferred",
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
-  ]
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
  },
  {
   "spec_version": "0.1.0",
@@ -1233,13 +1429,20 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/richiesta-assegno-di-maternita/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/9136",
-   "fetched_at": "2026-08-02T18:41:45.853502Z",
+   "fetched_at": "2026-08-02T20:48:10.162749Z",
    "raw_hash": "f23a327de73ea761"
   },
   "confidence": "inferred",
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
-  ]
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
  },
  {
   "spec_version": "0.1.0",
@@ -1275,11 +1478,18 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/richiesta-pubblicazione-di-matrimonio/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/9135",
-   "fetched_at": "2026-08-02T18:41:45.853889Z",
+   "fetched_at": "2026-08-02T20:48:10.163097Z",
    "raw_hash": "c0223ea80e6646ef"
   },
   "confidence": "declared",
-  "extraction_notes": []
+  "extraction_notes": [],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
  },
  {
   "spec_version": "0.1.0",
@@ -1315,13 +1525,20 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/progetto-hermes-percorsi-di-inclusione-sociale-annualita-2025-2026/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/9137",
-   "fetched_at": "2026-08-02T18:41:45.854149Z",
+   "fetched_at": "2026-08-02T20:48:10.163330Z",
    "raw_hash": "9523f8d983bee811"
   },
   "confidence": "inferred",
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
-  ]
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
  },
  {
   "spec_version": "0.1.0",
@@ -1357,13 +1574,20 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/adotta-unarea-verde/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/15670",
-   "fetched_at": "2026-08-02T18:41:45.854280Z",
+   "fetched_at": "2026-08-02T20:48:10.163451Z",
    "raw_hash": "0f5e7661118e07f0"
   },
   "confidence": "inferred",
   "extraction_notes": [
    "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
-  ]
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
  },
  {
   "spec_version": "0.1.0",
@@ -1399,7 +1623,7 @@
    "connector": "wp_pages",
    "url": "https://comune.albanolaziale.rm.it/aree-tematiche/servizi-demografici/statistiche/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/pages/14130",
-   "fetched_at": "2026-08-02T18:41:47.994835Z",
+   "fetched_at": "2026-08-02T20:48:12.379596Z",
    "raw_hash": "13c204042ed2ae1f"
   },
   "confidence": "extracted",
@@ -1408,7 +1632,19 @@
    "Il testo non contiene informazioni sui requisiti di accesso per diventare rilevatore statistico, né sulle condizioni per partecipare al bando.",
    "Valore per 'figli_minori_required' scartato: il modello non ha saputo indicare la frase di origine nel testo.",
    "Valore per 'disabilita_required' scartato: il modello non ha saputo indicare la frase di origine nel testo."
-  ]
+  ],
+  "recovery_level": "L1_manuale",
+  "pdfs_linked": 2,
+  "pdfs_opened": 1,
+  "pdfs_skipped": [
+   {
+    "url": "https://comune.albanolaziale.rm.it/wp-content/uploads/2026/07/GraduatoriaSito-07.2026.pdf",
+    "reason": "nessun testo estraibile (probabile scansione/immagine)"
+   }
+  ],
+  "chars_processed": 2607,
+  "extraction_seconds": 0.7788431670051068,
+  "requirements_recovered": 0
  },
  {
   "spec_version": "0.1.0",
@@ -1444,13 +1680,20 @@
    "connector": "wp_pages",
    "url": "https://comune.albanolaziale.rm.it/aree-tematiche/servizi-sociali/area-assistenza-e-integrazione/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/pages/12698",
-   "fetched_at": "2026-08-02T18:41:47.995393Z",
+   "fetched_at": "2026-08-02T20:48:12.381525Z",
    "raw_hash": "5600078bf687ed2a"
   },
   "confidence": "extracted",
   "extraction_notes": [
    "Il testo non fornisce informazioni sui requisiti di accesso specifici per i servizi menzionati."
-  ]
+  ],
+  "recovery_level": "L1_manuale",
+  "pdfs_linked": 0,
+  "pdfs_opened": 0,
+  "pdfs_skipped": [],
+  "chars_processed": 3122,
+  "extraction_seconds": 0.0013257910031825304,
+  "requirements_recovered": 0
  },
  {
   "spec_version": "0.1.0",
@@ -1486,7 +1729,7 @@
    "connector": "wp_pages",
    "url": "https://comune.albanolaziale.rm.it/aree-tematiche/scuola-e-istruzione/progetti-per-la-scuola/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/pages/12516",
-   "fetched_at": "2026-08-02T18:41:49.518411Z",
+   "fetched_at": "2026-08-02T20:48:14.218633Z",
    "raw_hash": "d29efdc810488e8c"
   },
   "confidence": "extracted",
@@ -1498,7 +1741,27 @@
    "Il testo non menziona alcun requisito di ISEE, età, residenza, disabilità, numero di componenti del nucleo familiare, presenza di figli minori, stato occupazionale o altre condizioni di accesso.",
    "Valore per 'figli_minori_required' scartato: il modello non ha saputo indicare la frase di origine nel testo.",
    "Valore per 'disabilita_required' scartato: il modello non ha saputo indicare la frase di origine nel testo."
-  ]
+  ],
+  "recovery_level": "L1_manuale",
+  "pdfs_linked": 8,
+  "pdfs_opened": 5,
+  "pdfs_skipped": [
+   {
+    "url": "https://comune.albanolaziale.rm.it/wp-content/uploads/2024/03/Legalit___Rapporto_questionari.pdf",
+    "reason": "limite di 5 allegati per pagina raggiunto"
+   },
+   {
+    "url": "https://comune.albanolaziale.rm.it/wp-content/uploads/2024/03/Proposta__1_.pdf",
+    "reason": "limite di 5 allegati per pagina raggiunto"
+   },
+   {
+    "url": "https://comune.albanolaziale.rm.it/wp-content/uploads/2024/03/1._Questionario_legalit___studenti_19.5.2016__1_.pdf",
+    "reason": "limite di 5 allegati per pagina raggiunto"
+   }
+  ],
+  "chars_processed": 12000,
+  "extraction_seconds": 1.8368701669969596,
+  "requirements_recovered": 0
  },
  {
   "spec_version": "0.1.0",
@@ -1542,7 +1805,7 @@
    "connector": "wp_pages",
    "url": "https://comune.albanolaziale.rm.it/aree-tematiche/scuola-e-istruzione/servizio-mensa/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/pages/12468",
-   "fetched_at": "2026-08-02T18:42:01.631547Z",
+   "fetched_at": "2026-08-02T20:48:17.430315Z",
    "raw_hash": "99877e272abad85a"
   },
   "confidence": "extracted",
@@ -1558,14 +1821,50 @@
    "Non è indicata alcuna soglia ISEE, né altre condizioni di accesso come età, residenza, numero di componenti del nucleo familiare, presenza di figli minorenni o disabilità",
    "Valore per 'figli_minori_required' scartato: il modello non ha saputo indicare la frase di origine nel testo.",
    "Valore per 'disabilita_required' scartato: il modello non ha saputo indicare la frase di origine nel testo.",
-   "Fonte per 'other': pagina web https://comune.albanolaziale.rm.it/aree-tematiche/scuola-e-istruzione/servizio-mensa/ — \"Per tutti i soggetti che hanno esigenze alimentari particolari, transitorie o permanenti, e necessitano quindi di un pasto scolastico speciale\"",
+   "Fonte per 'other' non identificata con precisione nel corpus assemblato — \"Per tutti i soggetti che hanno esigenze alimentari particolari, transitorie o permanenti, e necessitano quindi di un pasto scolastico speciale\"",
    "Fonte per 'other' non identificata con precisione nel corpus assemblato — \"Compilare con scrittura chiara e leggibile il modulo richiesta di pasto speciale, indicando scuola, classe e sezione\"",
    "Fonte per 'other' non identificata con precisione nel corpus assemblato — \"Solo se la richiesta di pasto speciale deriva da comprovati motivi di salute (allergie, intolleranze, patologie cliniche ecc) è necessario fornire il certificato medico debitamente timbrato e firmato dal proprio medico curante o analogo specialista\"",
    "Fonte per 'other' non identificata con precisione nel corpus assemblato — \"Per motivazioni di natura etico-religiosa sarà sufficiente compilare solo il modulo richiesta di pasto speciale\"",
    "Fonte per 'other' non identificata con precisione nel corpus assemblato — \"Inviare la documentazione per mail a scuolealbano@bioristoroitalia.it e ufficiodietetico@bioristoroitalia.it\"",
    "Fonte per 'other': allegato https://comune.albanolaziale.rm.it/wp-content/uploads/2024/03/Modulo-diete-speciali.pdf, pagina 1 — \"Inviare la documentazione completa via FAX al numero 06/96.40.169\"",
    "Fonte per 'other': allegato https://comune.albanolaziale.rm.it/wp-content/uploads/2024/03/Modulo-diete-speciali.pdf, pagina 1 — \"Inviare la documentazione attraverso il portale utente RistoCloud\""
-  ]
+  ],
+  "recovery_level": "L2_estratto",
+  "pdfs_linked": 12,
+  "pdfs_opened": 5,
+  "pdfs_skipped": [
+   {
+    "url": "https://comune.albanolaziale.rm.it/wp-content/uploads/2025/06/refezione-scolasica-2025.pdf",
+    "reason": "nessun testo estraibile (probabile scansione/immagine)"
+   },
+   {
+    "url": "https://comune.albanolaziale.rm.it/wp-content/uploads/2024/03/Verbale-Commissione-Mensa-del-12.12.2023.pdf",
+    "reason": "nessun testo estraibile (probabile scansione/immagine)"
+   },
+   {
+    "url": "https://comune.albanolaziale.rm.it/wp-content/uploads/2024/03/Verbale-Commissione-Mensa-del-28.09.2023.pdf",
+    "reason": "nessun testo estraibile (probabile scansione/immagine)"
+   },
+   {
+    "url": "https://comune.albanolaziale.rm.it/wp-content/uploads/2024/10/20240919135539197.pdf",
+    "reason": "nessun testo estraibile (probabile scansione/immagine)"
+   },
+   {
+    "url": "https://comune.albanolaziale.rm.it/wp-content/uploads/2024/10/Verbale-Commissione-Mensa-14-10-2024.pdf",
+    "reason": "nessun testo estraibile (probabile scansione/immagine)"
+   },
+   {
+    "url": "https://comune.albanolaziale.rm.it/wp-content/uploads/2025/11/Verbale-Mensa-20-ottobre-2025.pdf",
+    "reason": "nessun testo estraibile (probabile scansione/immagine)"
+   },
+   {
+    "url": "https://comune.albanolaziale.rm.it/wp-content/uploads/2025/12/Verbale-Commissione-Mensa-18-dicembre.pdf",
+    "reason": "nessun testo estraibile (probabile scansione/immagine)"
+   }
+  ],
+  "chars_processed": 12000,
+  "extraction_seconds": 3.211349999997765,
+  "requirements_recovered": 7
  },
  {
   "spec_version": "0.1.0",
@@ -1601,7 +1900,7 @@
    "connector": "wp_pages",
    "url": "https://comune.albanolaziale.rm.it/aree-tematiche/ambiente/raccolta-differenziata/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/pages/11600",
-   "fetched_at": "2026-08-02T18:42:06.516050Z",
+   "fetched_at": "2026-08-02T20:48:20.745078Z",
    "raw_hash": "f643d1cdd60ed570"
   },
   "confidence": "extracted",
@@ -1615,7 +1914,39 @@
    "Il testo non contiene alcun requisito di accesso, ma solo informazioni sul servizio di raccolta differenziata, orari, calendari, e istruzioni per la corretta gestione dei rifiuti.",
    "Valore per 'figli_minori_required' scartato: il modello non ha saputo indicare la frase di origine nel testo.",
    "Valore per 'disabilita_required' scartato: il modello non ha saputo indicare la frase di origine nel testo."
-  ]
+  ],
+  "recovery_level": "L1_manuale",
+  "pdfs_linked": 11,
+  "pdfs_opened": 5,
+  "pdfs_skipped": [
+   {
+    "url": "https://comune.albanolaziale.rm.it/wp-content/uploads/2024/02/diffrenziata_elenco_per_raccolta2.pdf",
+    "reason": "nessun testo estraibile (probabile scansione/immagine)"
+   },
+   {
+    "url": "https://comune.albanolaziale.rm.it/wp-content/uploads/2024/02/file_ruotato.pdf",
+    "reason": "7130025 byte, oltre il limite di 2097152 byte"
+   },
+   {
+    "url": "https://comune.albanolaziale.rm.it/wp-content/uploads/2024/02/Consigli_della_nonna_Albano_Laziale_2.pdf",
+    "reason": "limite di 5 allegati per pagina raggiunto"
+   },
+   {
+    "url": "https://comune.albanolaziale.rm.it/wp-content/uploads/2024/02/ordinanza_rifiuti.pdf",
+    "reason": "limite di 5 allegati per pagina raggiunto"
+   },
+   {
+    "url": "https://comune.albanolaziale.rm.it/wp-content/uploads/2024/02/conferimento_sansioni_amministrative.pdf",
+    "reason": "limite di 5 allegati per pagina raggiunto"
+   },
+   {
+    "url": "https://comune.albanolaziale.rm.it/wp-content/uploads/2024/02/segnalazioni_reclami_suggerimenti_1.pdf",
+    "reason": "limite di 5 allegati per pagina raggiunto"
+   }
+  ],
+  "chars_processed": 12000,
+  "extraction_seconds": 3.3145151660428382,
+  "requirements_recovered": 0
  },
  {
   "spec_version": "0.1.0",
@@ -1657,7 +1988,7 @@
    "connector": "wp_pages",
    "url": "https://comune.albanolaziale.rm.it/modulistica-2/modulistica-settore-5/edilia-residenziale-pubblica/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/pages/11182",
-   "fetched_at": "2026-08-02T18:42:10.260459Z",
+   "fetched_at": "2026-08-02T20:48:23.538684Z",
    "raw_hash": "f01923a782b0e44d"
   },
   "confidence": "extracted",
@@ -1680,12 +2011,76 @@
    "Il valore del reddito annuo complessivo del nucleo familiare non è indicato nel testo.",
    "Valore per 'figli_minori_required' scartato: il modello non ha saputo indicare la frase di origine nel testo.",
    "Valore per 'disabilita_required' scartato: il modello non ha saputo indicare la frase di origine nel testo.",
-   "Fonte per 'other' non identificata con precisione nel corpus assemblato — \"non essere titolare, esso stesso né altro componente il proprio nucleo familiare del diritto di proprietà, uso, usufrutto , abitazione su di un alloggio adeguato alle esigenze del nucleo familiare nell’ambito territoriale del Comune cui si riferisce il presente bando di concorso e nel Comune di residenza qualora diverso da quello in cui si svolge l’attività lavorativa\"",
-   "Fonte per 'other' non identificata con precisione nel corpus assemblato — \"non essere titolare dei diritti di cui alla precedente lettera c) sui beni patrimoniali ubicati in qualsiasi località del territorio nazionale, il cui valore complessivo non superi quello stabilito ai sensi dell’art. 21 del regolamento regionale 20 settembre 2000 n. 2 pari a 100.000,00 €\"",
+   "Fonte per 'other': allegato https://comune.albanolaziale.rm.it/wp-content/uploads/2024/01/alloggi_di_edilizia_residenziale_pubblica_bando_1_11d9e1.pdf, pagina 2 — \"non essere titolare, esso stesso né altro componente il proprio nucleo familiare del diritto di proprietà, uso, usufrutto , abitazione su di un alloggio adeguato alle esigenze del nucleo familiare nell’ambito territoriale del Comune cui si riferisce il presente bando di concorso e nel Comune di residenza qualora diverso da quello in cui si svolge l’attività lavorativa\"",
+   "Fonte per 'other': allegato https://comune.albanolaziale.rm.it/wp-content/uploads/2024/01/alloggi_di_edilizia_residenziale_pubblica_bando_1_11d9e1.pdf, pagina 2 — \"non essere titolare dei diritti di cui alla precedente lettera c) sui beni patrimoniali ubicati in qualsiasi località del territorio nazionale, il cui valore complessivo non superi quello stabilito ai sensi dell’art. 21 del regolamento regionale 20 settembre 2000 n. 2 pari a 100.000,00 €\"",
    "Fonte per 'other' non identificata con precisione nel corpus assemblato — \"assenza di precedente assegnazione in locazione ovvero in proprietà originaria o derivata, immediata o futura, di alloggio realizzato con contributi pubblici ed assenza di finanziamento agevolato in qualunque forma, concesso dallo Stato o da altri Enti Pubblici\"",
    "Fonte per 'other' non identificata con precisione nel corpus assemblato — \"reddito annuo complessivo del nucleo familiare non superiore al limite per l’accesso all’edilizia residenziale pubblica destinata all’assistenza abitativa stabilito dalla Regione Lazio\"",
    "Fonte per 'other' non identificata con precisione nel corpus assemblato — \"non aver ceduto in tutto o in parte, fuori dei casi previsti dalla legge, l’alloggio eventualmente assegnato in precedenza in locazione semplice oppure non aver occupato senza titolo un alloggio di edilizia residenziale pubblica destinata all’assistenza abitativa\""
-  ]
+  ],
+  "recovery_level": "L2_estratto",
+  "pdfs_linked": 19,
+  "pdfs_opened": 5,
+  "pdfs_skipped": [
+   {
+    "url": "https://comune.albanolaziale.rm.it/wp-content/uploads/2024/01/GRADUATORIA_ALLOGGI_ERP_GEN_GIU_2019d9e1.pdf",
+    "reason": "3870354 byte, oltre il limite di 2097152 byte"
+   },
+   {
+    "url": "https://comune.albanolaziale.rm.it/wp-content/uploads/2024/01/cecchina_rilievid9e1.pdf",
+    "reason": "limite di 5 allegati per pagina raggiunto"
+   },
+   {
+    "url": "https://comune.albanolaziale.rm.it/wp-content/uploads/2024/01/particelle_cecchinad9e1.pdf",
+    "reason": "limite di 5 allegati per pagina raggiunto"
+   },
+   {
+    "url": "https://comune.albanolaziale.rm.it/wp-content/uploads/2024/01/assenso_cecchinad9e1.pdf",
+    "reason": "limite di 5 allegati per pagina raggiunto"
+   },
+   {
+    "url": "https://comune.albanolaziale.rm.it/wp-content/uploads/2024/01/delibera_44_26_novembred9e1.pdf",
+    "reason": "limite di 5 allegati per pagina raggiunto"
+   },
+   {
+    "url": "https://comune.albanolaziale.rm.it/wp-content/uploads/2024/01/elenco_particelle_miramared9e1.pdf",
+    "reason": "limite di 5 allegati per pagina raggiunto"
+   },
+   {
+    "url": "https://comune.albanolaziale.rm.it/wp-content/uploads/2024/01/grafico_miramared9e1.pdf",
+    "reason": "limite di 5 allegati per pagina raggiunto"
+   },
+   {
+    "url": "https://comune.albanolaziale.rm.it/wp-content/uploads/2024/01/assenso_miramared9e1.pdf",
+    "reason": "limite di 5 allegati per pagina raggiunto"
+   },
+   {
+    "url": "https://comune.albanolaziale.rm.it/wp-content/uploads/2024/01/Graduatoria_alloggi_ERP_2017___lugliod9e1.pdf",
+    "reason": "limite di 5 allegati per pagina raggiunto"
+   },
+   {
+    "url": "https://comune.albanolaziale.rm.it/wp-content/uploads/2024/01/GRADUATORIA_ALLOGGI_ERP_2017d9e1.pdf",
+    "reason": "limite di 5 allegati per pagina raggiunto"
+   },
+   {
+    "url": "https://comune.albanolaziale.rm.it/wp-content/uploads/2024/01/graduatoriaERP_det_1288_del_29_12_2014d9e1.pdf",
+    "reason": "limite di 5 allegati per pagina raggiunto"
+   },
+   {
+    "url": "https://comune.albanolaziale.rm.it/wp-content/uploads/2024/01/alloggi_di_edilizia_residenziale_pubblica_domanda_Ad9e1.pdf",
+    "reason": "limite di 5 allegati per pagina raggiunto"
+   },
+   {
+    "url": "https://comune.albanolaziale.rm.it/wp-content/uploads/2024/01/alloggi_di_edilizia_residenziale_pubblica_domanda_Bd9e1.pdf",
+    "reason": "limite di 5 allegati per pagina raggiunto"
+   },
+   {
+    "url": "https://comune.albanolaziale.rm.it/wp-content/uploads/2024/01/ALLEGATO_GRADUATORIA_DOMANDE_DAL_01072017_AL_31122017_ALBOd9e1.pdf",
+    "reason": "limite di 5 allegati per pagina raggiunto"
+   }
+  ],
+  "chars_processed": 12000,
+  "extraction_seconds": 2.7932253750041127,
+  "requirements_recovered": 5
  },
  {
   "spec_version": "0.1.0",
@@ -1726,7 +2121,7 @@
    "connector": "wp_pages",
    "url": "https://comune.albanolaziale.rm.it/modulistica-2/modulistica-settore-5/modulistica-manutenzioni/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/pages/14539",
-   "fetched_at": "2026-08-02T18:42:12.818498Z",
+   "fetched_at": "2026-08-02T20:48:25.739965Z",
    "raw_hash": "c4514c2b817a0d0e"
   },
   "confidence": "extracted",
@@ -1742,7 +2137,31 @@
    "Fonte per 'other' non identificata con precisione nel corpus assemblato — \"Tutte le richieste inoltrate al Settore V servizio II dovranno essere corredate della marca da bollo di euro 16,00\"",
    "Fonte per 'other' non identificata con precisione nel corpus assemblato — \"Le richieste di autorizzazione occupazione suolo pubblico permanente per passo carrabile dovranno essere inoltrate al Settore V servizio III a partire dal 02.05.2018\"",
    "Fonte per 'other' non identificata con precisione nel corpus assemblato — \"Bonus idrico integrativo per utenti domestici residenti in condizioni di disagio economico sociale ai sensi dell’art. 8 della Delibera ARERA 897/2017/R/IDR\""
-  ]
+  ],
+  "recovery_level": "L2_estratto",
+  "pdfs_linked": 9,
+  "pdfs_opened": 5,
+  "pdfs_skipped": [
+   {
+    "url": "https://comune.albanolaziale.rm.it/wp-content/uploads/2024/01/fatturazione_elettronica_dati_da_inserired9e1.pdf",
+    "reason": "nessun testo estraibile (probabile scansione/immagine)"
+   },
+   {
+    "url": "https://comune.albanolaziale.rm.it/wp-content/uploads/2024/01/02_DichiarazioneAppaltatored9e1.pdf",
+    "reason": "nessun testo estraibile (probabile scansione/immagine)"
+   },
+   {
+    "url": "https://comune.albanolaziale.rm.it/wp-content/uploads/2024/01/Competenze-procedure-e-responsabilita-inerenti-scarichi-agg.-dicembre-2011.doc.pdf",
+    "reason": "limite di 5 allegati per pagina raggiunto"
+   },
+   {
+    "url": "https://comune.albanolaziale.rm.it/wp-content/uploads/2024/01/DenunciaPozzi__modello_C_pozzi_dgls_275d9e1.pdf",
+    "reason": "limite di 5 allegati per pagina raggiunto"
+   }
+  ],
+  "chars_processed": 12000,
+  "extraction_seconds": 2.2009110000217333,
+  "requirements_recovered": 4
  },
  {
   "spec_version": "0.1.0",
@@ -1778,7 +2197,7 @@
    "connector": "wp_pages",
    "url": "https://comune.albanolaziale.rm.it/modulistica-2/modulistica-settore-5/modulistica-patrimonio/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/pages/14513",
-   "fetched_at": "2026-08-02T18:42:13.983975Z",
+   "fetched_at": "2026-08-02T20:48:26.265283Z",
    "raw_hash": "df9248e2ff59e610"
   },
   "confidence": "extracted",
@@ -1786,7 +2205,14 @@
    "Il testo non contiene alcun requisito di accesso ai servizi descritti. Si tratta esclusivamente di modulistica per l'assolvimento dell'imposta di bollo e per la richiesta di risarcimento danni, che non prevedono criteri di eleggibilità.",
    "Valore per 'figli_minori_required' scartato: il modello non ha saputo indicare la frase di origine nel testo.",
    "Valore per 'disabilita_required' scartato: il modello non ha saputo indicare la frase di origine nel testo."
-  ]
+  ],
+  "recovery_level": "L1_manuale",
+  "pdfs_linked": 2,
+  "pdfs_opened": 2,
+  "pdfs_skipped": [],
+  "chars_processed": 10379,
+  "extraction_seconds": 0.5251099159941077,
+  "requirements_recovered": 0
  },
  {
   "spec_version": "0.1.0",
@@ -1822,7 +2248,7 @@
    "connector": "wp_pages",
    "url": "https://comune.albanolaziale.rm.it/centrale-unica-di-committenza-dei-comune-dialbano-laziale-castel-gandolfo-e-grottaferrata/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/pages/14192",
-   "fetched_at": "2026-08-02T18:42:18.115765Z",
+   "fetched_at": "2026-08-02T20:48:28.855334Z",
    "raw_hash": "a6c02497db6ef608"
   },
   "confidence": "extracted",
@@ -1831,7 +2257,19 @@
    "Il testo non menziona alcun requisito di accesso per i soggetti che desiderano iscriversi all’Albo Fornitori e Professionisti. Non sono indicati criteri di eleggibilità come ISEE, età, numero di componenti del nucleo familiare, presenza di figli minori, disabilità, stato occupazionale, residenza, ecc.",
    "Valore per 'figli_minori_required' scartato: il modello non ha saputo indicare la frase di origine nel testo.",
    "Valore per 'disabilita_required' scartato: il modello non ha saputo indicare la frase di origine nel testo."
-  ]
+  ],
+  "recovery_level": "L1_manuale",
+  "pdfs_linked": 5,
+  "pdfs_opened": 4,
+  "pdfs_skipped": [
+   {
+    "url": "https://comune.albanolaziale.rm.it/wp-content/uploads/2024/04/CastelGandolfo_CUC_CONV_REG_signed_signed.pdf",
+    "reason": "3903009 byte, oltre il limite di 2097152 byte"
+   }
+  ],
+  "chars_processed": 12000,
+  "extraction_seconds": 2.589846957998816,
+  "requirements_recovered": 0
  },
  {
   "spec_version": "0.1.0",
@@ -1872,7 +2310,7 @@
    "connector": "wp_pages",
    "url": "https://comune.albanolaziale.rm.it/aree-tematiche/tributi/imu/imu-anni-2012-2013-2014/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/pages/12989",
-   "fetched_at": "2026-08-02T18:42:24.109244Z",
+   "fetched_at": "2026-08-02T20:48:30.871238Z",
    "raw_hash": "0c9e7147043ed1cf"
   },
   "confidence": "extracted",
@@ -1894,6 +2332,50 @@
    "Fonte per 'other': allegato https://comune.albanolaziale.rm.it/wp-content/uploads/2024/03/AVVISO_IMU_terreni_2014.pdf, pagina 2 — \"Il versamento deve essere effettuato in una unica rata entro il 16.12.2014.\"",
    "Fonte per 'other' non identificata con precisione nel corpus assemblato — \"Terreni agricoli ubicati ad una altitudine compresa fra 281 metri e 600 metri sono esenti solo se posseduti da coltivatori diretti e imprenditori agricoli professionali di cui all’art 1 del DLgs 99/2004 e iscritti nella previdenza agricola.\"",
    "Fonte per 'other' non identificata con precisione nel corpus assemblato — \"Ai fini del calcolo dell’IMU sui terreni agricoli, la base imponibile si calcola come segue: Al reddito dominicale risultante in catasto, rivalutato del 25%, deve essere applicato un moltiplicatore pari a 135 (110 per i coltivatori diretti e gli imprenditori agricoli professionali).\""
-  ]
+  ],
+  "recovery_level": "L2_estratto",
+  "pdfs_linked": 14,
+  "pdfs_opened": 5,
+  "pdfs_skipped": [
+   {
+    "url": "https://comune.albanolaziale.rm.it/wp-content/uploads/2024/03/IMU_anno_2013.pdf",
+    "reason": "limite di 5 allegati per pagina raggiunto"
+   },
+   {
+    "url": "https://comune.albanolaziale.rm.it/wp-content/uploads/2024/03/IMU_2012_dichiarazione_modello.pdf",
+    "reason": "limite di 5 allegati per pagina raggiunto"
+   },
+   {
+    "url": "https://comune.albanolaziale.rm.it/wp-content/uploads/2024/03/IMU_1012_dichiarazione_istruzioni.pdf",
+    "reason": "limite di 5 allegati per pagina raggiunto"
+   },
+   {
+    "url": "https://comune.albanolaziale.rm.it/wp-content/uploads/2024/03/Circolare_n_1_IMU_TARES__1.pdf",
+    "reason": "limite di 5 allegati per pagina raggiunto"
+   },
+   {
+    "url": "https://comune.albanolaziale.rm.it/wp-content/uploads/2024/03/Circolare_n._2df.pdf",
+    "reason": "limite di 5 allegati per pagina raggiunto"
+   },
+   {
+    "url": "https://comune.albanolaziale.rm.it/wp-content/uploads/2024/03/Risoluzione_5_DF_2013__1.pdf",
+    "reason": "limite di 5 allegati per pagina raggiunto"
+   },
+   {
+    "url": "https://comune.albanolaziale.rm.it/wp-content/uploads/2024/03/Agenzia_delle_Entrate_Risoluzione_33E_2013_dd._21.05.2013__1.pdf",
+    "reason": "limite di 5 allegati per pagina raggiunto"
+   },
+   {
+    "url": "https://comune.albanolaziale.rm.it/wp-content/uploads/2024/03/IMU_aliquote_2012.pdf",
+    "reason": "limite di 5 allegati per pagina raggiunto"
+   },
+   {
+    "url": "https://comune.albanolaziale.rm.it/wp-content/uploads/2024/03/02_ICI_aliquote_anni_precedenti.pdf",
+    "reason": "limite di 5 allegati per pagina raggiunto"
+   }
+  ],
+  "chars_processed": 12000,
+  "extraction_seconds": 2.0152370000141673,
+  "requirements_recovered": 4
  }
 ]

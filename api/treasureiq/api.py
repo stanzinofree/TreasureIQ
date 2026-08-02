@@ -70,7 +70,18 @@ COMUNI = {
         # Measured 2026-08-02 via dati.gov.it CKAN package_search. Zero is the
         # finding, not a placeholder.
         "datasets_on_dati_gov": 0,
-    }
+    },
+    "058122": {
+        "nome": "Fonte Nuova",
+        "ente": "Comune di Fonte Nuova",
+        "seed": "fontenuova_058122.json",
+        # Measured the same day, the same way, as Albano's zero above:
+        #   package_search?q=holder_name:"Comune di Fonte Nuova" -> 5
+        # The comparator therefore discriminates on this dimension rather than
+        # mirroring Albano — it exposes more services AND publishes nationally,
+        # yet fewer of its records yield a recoverable requirement.
+        "datasets_on_dati_gov": 5,
+    },
 }
 
 app = FastAPI(

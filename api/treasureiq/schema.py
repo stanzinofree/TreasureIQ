@@ -210,6 +210,41 @@ class Requirements(BaseModel):
         )
 
 
+class RecoveryLevel(str, Enum):
+    """D-16: which rung of the recovery ladder a record landed on.
+
+    This is instrumentation about how closed the comune's data was, never a
+    signal `match/engine.py` may read (D-16 constraint) — it must not move a
+    verdict or a criterion state.
+
+    L1_MANUALE     — nothing machine-readable recovered; the citizen must
+                     open the source document(s) themselves.
+    L2_ESTRATTO    — the body or a linked PDF had readable text and at least
+                     one quote-gated requirement was recovered from it.
+    L3_ILLEGGIBILE — a PDF exists but yielded no usable text (scanned,
+                     image-only, encrypted, or a parse failure). Worse than
+                     L1_MANUALE, not the same: the diagnosis is "nobody can
+                     read this," not "we have not read it yet." Must never be
+                     merged into L1_MANUALE.
+    """
+
+    L1_MANUALE = "L1_manuale"
+    L2_ESTRATTO = "L2_estratto"
+    L3_ILLEGGIBILE = "L3_illeggibile"
+
+
+class PdfSkip(BaseModel):
+    """One PDF attachment that was not opened, and why (D-16).
+
+    Every skip is logged explicitly (D-15) — a silent skip would understate
+    the recovery cost, which is precisely the number this instrumentation
+    exists to report honestly.
+    """
+
+    url: str
+    reason: str
+
+
 class Source(BaseModel):
     """Provenance. Every claim TreasureIQ makes must be traceable back here."""
 
@@ -267,6 +302,48 @@ class Opportunity(BaseModel):
         default_factory=list,
         description="What the extractor was unsure about. Surfaced in the UI "
         "so the citizen knows where the machine guessed.",
+    )
+
+    # -- D-16/D-17 recovery-cost instrumentation -----------------------------
+    # Optional, `None` by default so seeds written before this existed keep
+    # validating unchanged. Populated only by connectors that actually
+    # measured a recovery attempt (currently `ingest/wp_pages.py`); every
+    # other connector leaves them unset. Instrumentation ONLY — nothing here
+    # may be read by `match/engine.py` or influence a verdict, a criterion
+    # state, or the D-05 quote-gate. A value that was not measured is `None`,
+    # never a guessed zero.
+    recovery_level: RecoveryLevel | None = Field(
+        default=None,
+        description="Which rung of the D-16 recovery ladder this record "
+        "landed on. None when unmeasured.",
+    )
+    pdfs_linked: int | None = Field(
+        default=None, description="PDF attachments found linked from the body."
+    )
+    pdfs_opened: int | None = Field(
+        default=None,
+        description="Of those linked, how many yielded usable text.",
+    )
+    pdfs_skipped: list[PdfSkip] | None = Field(
+        default=None,
+        description="PDFs not opened, each with its reason (cap, size, "
+        "download failure, unreadable...).",
+    )
+    chars_processed: int | None = Field(
+        default=None,
+        description="Characters of assembled corpus actually handed to the "
+        "extractor for this record.",
+    )
+    extraction_seconds: float | None = Field(
+        default=None,
+        description="Wall-clock time spent recovering this record's "
+        "criteria (PDF fetch/parse + extraction attempt).",
+    )
+    requirements_recovered: int | None = Field(
+        default=None,
+        description="Count of quote-gated requirement fields that survived "
+        "into `requirements` for this record. None when extraction never "
+        "ran; a real 0 when it ran and recovered nothing.",
     )
 
     @field_validator("summary")

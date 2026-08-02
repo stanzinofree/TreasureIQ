@@ -1,0 +1,1689 @@
+[
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058122:4813",
+  "title": "Domanda di partecipazione per la concessione del contributo per il pagamento dei canoni di locazione – Annualità 2025",
+  "summary": "Per presentare la domanda è necessario essere in possesso della seguente documentazione:",
+  "body": "Per presentare la domanda è necessario essere in possesso della seguente documentazione: | Permesso di soggiorno in corso di validità (per cittadini extra UE); | Contratto di locazione ad uso abitativo regolarmente registrato; | Attestazione di registrazione del contratto presso l’Agenzia delle Entrate; | Eventuale attestazione di registrazione di proroga o rinnovo del contratto; | Attestazione ISEE in corso di validità 2026; | Dichiarazione sottoscritta dal proprietario dell’alloggio, corredata di copia fotostatica di documento d’identità in corso di validità, sulla regolarità dei versamenti dell’affittuario per l’anno 2025;",
+  "kind": "contributo_economico",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [
+    "Richiesta attestazione ISEE (soglia non pubblicata)"
+   ],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2026-04-07",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Fonte Nuova",
+   "ente_codice_istat": "058122",
+   "connector": "wp_rest",
+   "url": "https://comune.fontenuova.rm.it/servizio/domanda-di-partecipazione-per-la-concessione-del-contributo-per-il-pagamento-dei-canoni-di-locazione-annualita-2025/",
+   "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/4813",
+   "fetched_at": "2026-08-02T20:23:49.623053Z",
+   "raw_hash": "35868ca16b7e921d"
+  },
+  "confidence": "extracted",
+  "extraction_notes": [
+   "Il servizio richiede l'ISEE ma non pubblica la soglia: verifica sulla pagina del comune.",
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058122:4479",
+  "title": "Domanda finalizzata alla formazione di una graduatoria per l’assegnazione di voucher per la fruizione di servizi educativi per l’infanzia nell’anno 2025",
+  "summary": "Per presentare domanda, occorre:",
+  "body": "Per presentare domanda, occorre: | ISEE 2025 per “Prestazioni sociali agevolate rivolte a minorenni” del nucleo familiare | DSU sottoscritta dal dichiarante | Copia dei giustificativi di spesa coerenti con le dichiarazioni e debitamente quietanzati | In caso di cittadino di uno Stato non appartenente all’U.E., permesso di soggiorno o carta di soggiorno in corso di validità",
+  "kind": "voucher",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [
+    "Richiesta attestazione ISEE (soglia non pubblicata)"
+   ],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2026-02-09",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Fonte Nuova",
+   "ente_codice_istat": "058122",
+   "connector": "wp_rest",
+   "url": "https://comune.fontenuova.rm.it/servizio/domanda-finalizzata-alla-formazione-di-una-graduatoria-per-lassegnazione-di-voucher-per-la-fruizione-di-servizi-educativi-per-linfanzia-nellanno-2025/",
+   "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/4479",
+   "fetched_at": "2026-08-02T20:23:49.623981Z",
+   "raw_hash": "5f59969db296598d"
+  },
+  "confidence": "extracted",
+  "extraction_notes": [
+   "Il servizio richiede l'ISEE ma non pubblica la soglia: verifica sulla pagina del comune.",
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058122:3911",
+  "title": "Prericonoscimento",
+  "summary": "I documenti necessari, da inviare tramite mail per la richiesta e, successivamente, da presentare in originale presso l'Ufficio Stato Civile, sono i seguenti:",
+  "body": "I documenti necessari, da inviare tramite mail per la richiesta e, successivamente, da presentare in originale presso l'Ufficio Stato Civile, sono i seguenti: | Documenti di identità | Certificato medico di ginecologo o ostetrico, sia pubblico che privato, riportante le esatte generalità della puerpera (nome, cognome, luogo e data di nascita), attestante lo stato di gravidanza, i mesi di gestazione e la data presunta del parto. Non è possibile presentare il certificato del medico curante inviato all'INPS, né quello per lo stato di gravidanza a rischio. | Solo nel caso di cittadini stranieri: attestazione di capacità al prericonoscimento, rilasciata dal proprio Consolato o Ambasciata e legalizzata in Prefettura ove previsto.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-09-19",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Fonte Nuova",
+   "ente_codice_istat": "058122",
+   "connector": "wp_rest",
+   "url": "https://comune.fontenuova.rm.it/servizio/prericonoscimento/",
+   "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/3911",
+   "fetched_at": "2026-08-02T20:23:49.625125Z",
+   "raw_hash": "43d602fa04a91068"
+  },
+  "confidence": "inferred",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058122:3849",
+  "title": "Pagamenti pagoPA",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | Codice avviso di pagamento (IUV), ricevuto dal Comune o generato online | Strumento di pagamento elettronico (es. carta di credito, debito, ecc.)",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-09-16",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Fonte Nuova",
+   "ente_codice_istat": "058122",
+   "connector": "wp_rest",
+   "url": "https://comune.fontenuova.rm.it/servizio/pagamenti-pagopa/",
+   "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/3849",
+   "fetched_at": "2026-08-02T20:23:49.625554Z",
+   "raw_hash": "19cf63c73ceb36b1"
+  },
+  "confidence": "inferred",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058122:3797",
+  "title": "TARIP",
+  "summary": "Sistema di tariffa puntuale per la gestione dei rifiuti, che addebita agli utenti una quota in base alla quantità di rifiuti prodotti.",
+  "body": "Sistema di tariffa puntuale per la gestione dei rifiuti, che addebita agli utenti una quota in base alla quantità di rifiuti prodotti. | prenotazione appuntamento presso l'ufficio comunale per esigenze rilegate alla TARIP",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-09-08",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Fonte Nuova",
+   "ente_codice_istat": "058122",
+   "connector": "wp_rest",
+   "url": "https://comune.fontenuova.rm.it/servizio/tarip/",
+   "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/3797",
+   "fetched_at": "2026-08-02T20:23:49.625901Z",
+   "raw_hash": "6a2bfdd1b8eddb10"
+  },
+  "confidence": "inferred",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058122:2622",
+  "title": "Rilascio cartelli di passo carrabile",
+  "summary": "Per ottenere l'autorizzazione e la regolarizzazione dei cartelli di passo carrabile, è necessario fornire i seguenti elementi:",
+  "body": "Per ottenere l'autorizzazione e la regolarizzazione dei cartelli di passo carrabile, è necessario fornire i seguenti elementi: | Domanda compilata: È necessario compilare un'apposita domanda utilizzando il modulo fornito dal Comune. | Documento di identità in corso di validità | Marca da bollo da 16 euro",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-12-17",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Fonte Nuova",
+   "ente_codice_istat": "058122",
+   "connector": "wp_rest",
+   "url": "https://comune.fontenuova.rm.it/servizio/rilascio-cartelli-di-passo-carrabile/",
+   "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2622",
+   "fetched_at": "2026-08-02T20:23:49.626317Z",
+   "raw_hash": "0478c8f09679bcd4"
+  },
+  "confidence": "inferred",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058122:2621",
+  "title": "Richiesta pubblicazione di matrimonio",
+  "summary": "Accesso SPID per la compilazione on line dell'istanza di richiesta di pubblicazione, oppure recarsi fisicamente presso l'ufficio Stato Civile del Comune di Fonte Nuova, con documento di identità in corso di validità, e compilare l'apposito modulo di richiesta.",
+  "body": "Accesso SPID per la compilazione on line dell'istanza di richiesta di pubblicazione, oppure recarsi fisicamente presso l'ufficio Stato Civile del Comune di Fonte Nuova, con documento di identità in corso di validità, e compilare l'apposito modulo di richiesta. | Accesso SPID | Documento di identità in corso di validità",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-12-17",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Fonte Nuova",
+   "ente_codice_istat": "058122",
+   "connector": "wp_rest",
+   "url": "https://comune.fontenuova.rm.it/servizio/richiesta-pubblicazione-di-matrimonio/",
+   "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2621",
+   "fetched_at": "2026-08-02T20:23:49.626744Z",
+   "raw_hash": "6d66bb8d52efffc6"
+  },
+  "confidence": "inferred",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058122:2620",
+  "title": "Richiedere agevolazioni scolastiche",
+  "summary": "Per accedere al servizio è necessario:",
+  "body": "Per accedere al servizio è necessario: | Identità digitale SPID/CIE | ISEE in corso di validità",
+  "kind": "agevolazione",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [
+    "Richiesta attestazione ISEE (soglia non pubblicata)"
+   ],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-12-17",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Fonte Nuova",
+   "ente_codice_istat": "058122",
+   "connector": "wp_rest",
+   "url": "https://comune.fontenuova.rm.it/servizio/richiedere-agevolazioni-scolastiche/",
+   "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2620",
+   "fetched_at": "2026-08-02T20:23:49.627024Z",
+   "raw_hash": "e6ca6bbe57ad70b5"
+  },
+  "confidence": "extracted",
+  "extraction_notes": [
+   "Il servizio richiede l'ISEE ma non pubblica la soglia: verifica sulla pagina del comune.",
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058122:2619",
+  "title": "Iscrizione albo presidenti di seggio",
+  "summary": "Per iscriversi all'albo dei presidenti di seggio nel Comune di Pastena, è necessario fornire i seguenti documenti e informazioni:",
+  "body": "Per iscriversi all'albo dei presidenti di seggio nel Comune di Pastena, è necessario fornire i seguenti documenti e informazioni: | Documento di identità: Sarà richiesto un documento di identità valido, come la carta d'identità o il passaporto, per confermare la tua cittadinanza italiana e la tua identità personale. | Certificato di iscrizione alle liste elettorali: Dovrai presentare una prova di iscrizione alle liste elettorali del Comune. Questo documento conferma che sei un elettore registrato nel Comune. | Modulo di domanda: Sarà necessario compilare un modulo di domanda specifico per l'iscrizione all'albo dei presidenti di seggio. Il modulo potrà essere fornito dall'Ufficio Elettorale del Comune.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-12-17",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Fonte Nuova",
+   "ente_codice_istat": "058122",
+   "connector": "wp_rest",
+   "url": "https://comune.fontenuova.rm.it/servizio/iscrizione-albo-presidenti-di-seggio/",
+   "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2619",
+   "fetched_at": "2026-08-02T20:23:49.627754Z",
+   "raw_hash": "774a675391832b78"
+  },
+  "confidence": "inferred",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058122:2618",
+  "title": "Rilascio, rinnovo, aggiornamento e duplicato della tessera elettorale",
+  "summary": "Per richiedere la tessera elettorale presso il Comune, sono generalmente richiesti i seguenti documenti e informazioni:",
+  "body": "Per richiedere la tessera elettorale presso il Comune, sono generalmente richiesti i seguenti documenti e informazioni: | Documento di identità in corso di validità | Certificato di iscrizione alle liste elettorali o una prova di iscrizione alle liste elettorali del Comune, che conferma la tua eleggibilità e idoneità a richiedere la tessera elettorale. | Modulo di richiesta compilato in tutte le sue parti.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-12-17",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Fonte Nuova",
+   "ente_codice_istat": "058122",
+   "connector": "wp_rest",
+   "url": "https://comune.fontenuova.rm.it/servizio/rilascio-rinnovo-aggiornamento-e-duplicato-della-tessera-elettorale/",
+   "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2618",
+   "fetched_at": "2026-08-02T20:23:49.628249Z",
+   "raw_hash": "48ce62a37d6afcd3"
+  },
+  "confidence": "inferred",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058122:2617",
+  "title": "Richiesta copia integrale atto di nascita",
+  "summary": "Per richiedere un copia integrale atto di nascita presso un ufficio comunale, è obbligatorio presentare un documento d'identità in corso di validità. Il documento d'identità serve a confermare l'identità del richiedente e garantire che la richiesta venga effettuata da una persona autorizzata. I documenti d'identità accettati di solito includono:",
+  "body": "Per richiedere un copia integrale atto di nascita presso un ufficio comunale, è obbligatorio presentare un documento d'identità in corso di validità. Il documento d'identità serve a confermare l'identità del richiedente e garantire che la richiesta venga effettuata da una persona autorizzata. I documenti d'identità accettati di solito includono: | Carta d'identità: La carta d'identità rilasciata dalle autorità competenti del paese di residenza è un documento comunemente accettato per la verifica dell'identità. | Passaporto: Il passaporto è un documento di identità riconosciuto a livello internazionale e può essere accettato come prova di identità. | Patente di guida: La patente di guida, sebbene principalmente un documento per la guida, può essere accettata come documento d'identità valido in alcuni casi. | Permesso di soggiorno: Nel caso di cittadini stranieri residenti nel paese, il permesso di soggiorno può essere richiesto come documento di identità.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-12-17",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Fonte Nuova",
+   "ente_codice_istat": "058122",
+   "connector": "wp_rest",
+   "url": "https://comune.fontenuova.rm.it/servizio/richiesta-copia-integrale-atto-di-nascita/",
+   "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2617",
+   "fetched_at": "2026-08-02T20:23:49.629121Z",
+   "raw_hash": "8f328ccc7c2338f0"
+  },
+  "confidence": "inferred",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058122:2616",
+  "title": "Iscrizione albo scrutatori",
+  "summary": "Per presentare la domanda di iscrizione all'albo degli scrutatori del Comune, sono richiesti i seguenti documenti:",
+  "body": "Per presentare la domanda di iscrizione all'albo degli scrutatori del Comune, sono richiesti i seguenti documenti: | Documento di identità. | Modulo di domanda: compila il modulo di domanda specifico fornito dall'Ufficio Elettorale del Comune e allegato in questa pagina (\"Domanda di inserimento nell'Albo delle persone idonee all'Ufficio di Scrutatore di seggio elettorale\")",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-12-17",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Fonte Nuova",
+   "ente_codice_istat": "058122",
+   "connector": "wp_rest",
+   "url": "https://comune.fontenuova.rm.it/servizio/iscrizione-albo-scrutatori/",
+   "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2616",
+   "fetched_at": "2026-08-02T20:23:49.629570Z",
+   "raw_hash": "471e12e651f77d4b"
+  },
+  "confidence": "inferred",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058122:2615",
+  "title": "Richiesta accesso agli atti",
+  "summary": "Un documento d'identità in corso di validità. I documenti d'identità accettati di solito includono:",
+  "body": "Un documento d'identità in corso di validità. I documenti d'identità accettati di solito includono: | Carta d'identità: La carta d'identità, rilasciata dalle autorità competenti del paese di residenza, è un documento comunemente accettato per la verifica dell'identità. | Passaporto: Il passaporto è un documento di identità riconosciuto a livello internazionale e può essere accettato come prova di identità certa. | Patente di guida: La patente di guida, sebbene sia principalmente un documento per la guida, può essere accettata come documento d'identità valido solo in alcuni casi. | Permesso di soggiorno: Nel caso di cittadini stranieri residenti nel paese, il permesso di soggiorno può essere richiesto come documento di identità.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-12-17",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Fonte Nuova",
+   "ente_codice_istat": "058122",
+   "connector": "wp_rest",
+   "url": "https://comune.fontenuova.rm.it/servizio/richiesta-accesso-agli-atti/",
+   "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2615",
+   "fetched_at": "2026-08-02T20:23:49.630290Z",
+   "raw_hash": "7aa1063bad2e7a95"
+  },
+  "confidence": "inferred",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058122:2614",
+  "title": "Richiesta accesso agli atti in materia edilizia per un edificio",
+  "summary": "Documentazione da presentare:",
+  "body": "Documentazione da presentare: | Modulo compilato in ogni sua parte e firmato; | Copia del documento di identità in corso di validità del richiedente o del delegato; | Eventuale delega del proprietario dell’immobile per la presentazione della richiesta (se proprietario diverso dal richiedente); | Pagamento diritti segreteria per accesso agli atti (da effettuare tramite il portale dei pagamenti pagoPA del Comune di Fonte Nuova).",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-12-17",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Fonte Nuova",
+   "ente_codice_istat": "058122",
+   "connector": "wp_rest",
+   "url": "https://comune.fontenuova.rm.it/servizio/richiesta-accesso-agli-atti-in-materia-edilizia-per-un-edificio/",
+   "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2614",
+   "fetched_at": "2026-08-02T20:23:49.630888Z",
+   "raw_hash": "36d7ecfd05f4d297"
+  },
+  "confidence": "inferred",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058122:2613",
+  "title": "Domanda per bonus economici",
+  "summary": "Per fare la domanda per i bonus economici offerti dal Comune, è necessario avere a disposizione i seguenti dati e documenti:",
+  "body": "Per fare la domanda per i bonus economici offerti dal Comune, è necessario avere a disposizione i seguenti dati e documenti: | Isee: L'Isee (Indicatore della Situazione Economica Equivalente) è un documento che attesta il livello di reddito e la situazione economica del nucleo familiare. È uno strumento utilizzato per determinare l'ammissibilità e l'entità dei bonus economici. Assicurati di ottenere l'Isee aggiornato prima di fare la domanda. | Documentazione utile al riconoscimento del Bonus: Potrebbe essere richiesta documentazione specifica che attesti il diritto al bonus economico scelto. Ad esempio, se il bonus è rivolto alle famiglie con figli a carico, potrebbe essere richiesta la documentazione relativa alla composizione del nucleo familiare e alla presenza dei figli. Consulta le informazioni fornite dal Comune per identificare la documentazione specifica richiesta per il bonus a cui desideri accedere. | Eventuale documentazione potere di firma: Nel caso in cui la richiesta non sia eseguita direttamente dal diretto interessato, potrebbe essere richiesta la documentazione che attesti il potere di firma del rappresentante legale. Ad esempio, se la domanda è presentata da un genitore a nome del figlio minore, potrebbe essere richiesta una copia del documento di identità del genitore e una dichiarazione di delega.",
+  "kind": "contributo_economico",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [
+    "Richiesta attestazione ISEE (soglia non pubblicata)"
+   ],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-12-17",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Fonte Nuova",
+   "ente_codice_istat": "058122",
+   "connector": "wp_rest",
+   "url": "https://comune.fontenuova.rm.it/servizio/domanda-per-bonus-economici/",
+   "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2613",
+   "fetched_at": "2026-08-02T20:23:49.631875Z",
+   "raw_hash": "0f1028514bde923d"
+  },
+  "confidence": "extracted",
+  "extraction_notes": [
+   "Il servizio richiede l'ISEE ma non pubblica la soglia: verifica sulla pagina del comune.",
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058122:2612",
+  "title": "Iscrizione trasporto scolastico",
+  "summary": "Per richiedere l'iscrizione al servizio di trasporto scolastico sono necessari i seguenti requisiti e documenti:",
+  "body": "Per richiedere l'iscrizione al servizio di trasporto scolastico sono necessari i seguenti requisiti e documenti: | SPID (Sistema Pubblico per la gestione dell'Identità Digitale) | Documentazione attestante eventuali disabilità | Eventuale permesso di soggiorno del genitore che presenta la richiesta | ISEE in corso di validità",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": true,
+   "employment_status": [],
+   "other": [
+    "Richiesta attestazione ISEE (soglia non pubblicata)"
+   ],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-12-17",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Fonte Nuova",
+   "ente_codice_istat": "058122",
+   "connector": "wp_rest",
+   "url": "https://comune.fontenuova.rm.it/servizio/iscrizione-trasporto-scolastico/",
+   "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2612",
+   "fetched_at": "2026-08-02T20:23:49.632449Z",
+   "raw_hash": "f4f7d3fbb405ed18"
+  },
+  "confidence": "extracted",
+  "extraction_notes": [
+   "Il servizio richiede l'ISEE ma non pubblica la soglia: verifica sulla pagina del comune.",
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058122:2609",
+  "title": "Iscrizione alla mensa scolastica",
+  "summary": "Per richiedere l'iscrizione alla mensa scolastica sono necessari i seguenti requisiti e documenti:",
+  "body": "Per richiedere l'iscrizione alla mensa scolastica sono necessari i seguenti requisiti e documenti: | SPID (Sistema Pubblico per la gestione dell'Identità Digitale), Carta identità elettronica (CIE) o Carta Nazionale dei Servizi (CNS) | Documentazione attestante eventuali disabilità | Eventuali restrizioni alimentari o considerazioni dietetiche particolari corredati da certificazione medica | Eventuale permesso di soggiorno del genitore che presenta la richiesta | ISEE in corso di validità",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": true,
+   "employment_status": [],
+   "other": [
+    "Richiesta attestazione ISEE (soglia non pubblicata)"
+   ],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-12-17",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Fonte Nuova",
+   "ente_codice_istat": "058122",
+   "connector": "wp_rest",
+   "url": "https://comune.fontenuova.rm.it/servizio/iscrizione-alla-mensa-scolastica/",
+   "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2609",
+   "fetched_at": "2026-08-02T20:23:49.633041Z",
+   "raw_hash": "db3d1f120f175622"
+  },
+  "confidence": "extracted",
+  "extraction_notes": [
+   "Il servizio richiede l'ISEE ma non pubblica la soglia: verifica sulla pagina del comune.",
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058122:2606",
+  "title": "Iscrizione alla scuola dell’infanzia",
+  "summary": "Per effettuare l'iscrizione alla scuola dell'infanzia nel Comune, sono generalmente richiesti i seguenti elementi:",
+  "body": "Per effettuare l'iscrizione alla scuola dell'infanzia nel Comune, sono generalmente richiesti i seguenti elementi: | Identità digitale SPID: Per accedere al servizio, è necessario disporre di un'identità digitale SPID valida. Verifica di aver registrato un account SPID attraverso uno dei provider di identità abilitati e che le tue credenziali di accesso (username e password) siano corrette. | Documentazione attestante eventuali disabilità | Eventuale permesso di soggiorno del genitore o tutore che presenta la richiesta | ISEE in corso di validità",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": true,
+   "employment_status": [],
+   "other": [
+    "Richiesta attestazione ISEE (soglia non pubblicata)"
+   ],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-12-17",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Fonte Nuova",
+   "ente_codice_istat": "058122",
+   "connector": "wp_rest",
+   "url": "https://comune.fontenuova.rm.it/servizio/iscrizione-alla-scuola-dellinfanzia/",
+   "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2606",
+   "fetched_at": "2026-08-02T20:23:49.633683Z",
+   "raw_hash": "43f0a9445f795410"
+  },
+  "confidence": "extracted",
+  "extraction_notes": [
+   "Il servizio richiede l'ISEE ma non pubblica la soglia: verifica sulla pagina del comune.",
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058122:2603",
+  "title": "Richiesta certificato di morte",
+  "summary": "Per richiedere il certificato è obbligatorio presentare un documento d'identità in corso di validità. Il documento d'identità serve a confermare l'identità del richiedente e garantire che la richiesta venga effettuata da una persona autorizzata. I documenti d'identità accettati di solito includono:",
+  "body": "Per richiedere il certificato è obbligatorio presentare un documento d'identità in corso di validità. Il documento d'identità serve a confermare l'identità del richiedente e garantire che la richiesta venga effettuata da una persona autorizzata. I documenti d'identità accettati di solito includono: | Carta d'identità: La carta d'identità rilasciata dalle autorità competenti del paese di residenza è un documento comunemente accettato per la verifica dell'identità. | Passaporto: Il passaporto è un documento di identità riconosciuto a livello internazionale e può essere accettato come prova di identità. | Patente di guida: La patente di guida, sebbene principalmente un documento per la guida, può essere accettata come documento d'identità valido in alcuni casi. | Permesso di soggiorno: Nel caso di cittadini stranieri residenti nel paese, il permesso di soggiorno può essere richiesto come documento di identità.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-12-17",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Fonte Nuova",
+   "ente_codice_istat": "058122",
+   "connector": "wp_rest",
+   "url": "https://comune.fontenuova.rm.it/servizio/richiesta-certificato-di-morte/",
+   "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2603",
+   "fetched_at": "2026-08-02T20:23:49.634384Z",
+   "raw_hash": "98dec7f6ccd51409"
+  },
+  "confidence": "inferred",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058122:2602",
+  "title": "Richiesta copia integrale atto di morte",
+  "summary": "La copia integrale dell'atto di morte può essere richiesta dagli eredi del defunto o da una persona da loro delegata, purché siano a conoscenza del cognome, nome, data e luogo di nascita del defunto, nonché della data e del luogo di morte. Può essere richiesta se:",
+  "body": "La copia integrale dell'atto di morte può essere richiesta dagli eredi del defunto o da una persona da loro delegata, purché siano a conoscenza del cognome, nome, data e luogo di nascita del defunto, nonché della data e del luogo di morte. Può essere richiesta se: | Copia del documento di identità in corso di validità e motivazione della richiesta | È importante notare che potrebbe essere necessario fornire documenti aggiuntivi o prove della tua relazione con il defunto, come un documento di identità, un atto di parentela o una delega, se sei un delegato degli eredi.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-12-17",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Fonte Nuova",
+   "ente_codice_istat": "058122",
+   "connector": "wp_rest",
+   "url": "https://comune.fontenuova.rm.it/servizio/richiesta-copia-integrale-atto-di-morte/",
+   "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2602",
+   "fetched_at": "2026-08-02T20:23:49.634892Z",
+   "raw_hash": "0a9e3d3ced665f7b"
+  },
+  "confidence": "inferred",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058122:2601",
+  "title": "Richiesta estratto di morte",
+  "summary": "Per richiedere l'estratto di morte è obbligatorio presentare un documento d'identità in corso di validità. Il documento d'identità serve a confermare l'identità del richiedente e garantire che la richiesta venga effettuata da una persona autorizzata. I documenti d'identità accettati di solito includono:",
+  "body": "Per richiedere l'estratto di morte è obbligatorio presentare un documento d'identità in corso di validità. Il documento d'identità serve a confermare l'identità del richiedente e garantire che la richiesta venga effettuata da una persona autorizzata. I documenti d'identità accettati di solito includono: | Carta d'identità: La carta d'identità rilasciata dalle autorità competenti del paese di residenza è un documento comunemente accettato per la verifica dell'identità. | Passaporto: Il passaporto è un documento di identità riconosciuto a livello internazionale e può essere accettato come prova di identità. | Patente di guida: La patente di guida, sebbene principalmente un documento per la guida, può essere accettata come documento d'identità valido in alcuni casi. | Permesso di soggiorno: Nel caso di cittadini stranieri residenti nel paese, il permesso di soggiorno può essere richiesto come documento di identità.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-12-17",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Fonte Nuova",
+   "ente_codice_istat": "058122",
+   "connector": "wp_rest",
+   "url": "https://comune.fontenuova.rm.it/servizio/richiesta-estratto-di-morte/",
+   "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2601",
+   "fetched_at": "2026-08-02T20:23:49.635581Z",
+   "raw_hash": "b3d74a21b44f329b"
+  },
+  "confidence": "inferred",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058122:2600",
+  "title": "Richiesta certificato di nascita",
+  "summary": "Il certificato di nascita può essere richiesto da chiunque abbia un legittimo interesse e sia in possesso delle informazioni necessarie, come nome, cognome, data e luogo di nascita del soggetto. Per i nati dopo il 1° luglio 1997 il certificato di nascita deve essere richiesto nel comune dove l'atto è stato formato: Nel comune dove è avvenuto l'evento; | Nel comune di residenza della madre al momen",
+  "body": "Il certificato di nascita può essere richiesto da chiunque abbia un legittimo interesse e sia in possesso delle informazioni necessarie, come nome, cognome, data e luogo di nascita del soggetto. Per i nati dopo il 1° luglio 1997 il certificato di nascita deve essere richiesto nel comune dove l'atto è stato formato: Nel comune dove è avvenuto l'evento; | Nel comune di residenza della madre al momento del parto; | Nel comune di residenza del padre se diverso, da quello della madre. | Documento di identità del richiedente in corso di validità.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-12-17",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Fonte Nuova",
+   "ente_codice_istat": "058122",
+   "connector": "wp_rest",
+   "url": "https://comune.fontenuova.rm.it/servizio/richiesta-certificato-di-nascita/",
+   "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2600",
+   "fetched_at": "2026-08-02T20:23:49.636059Z",
+   "raw_hash": "6d2de6bb9927fd9e"
+  },
+  "confidence": "inferred",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058122:2599",
+  "title": "Richiesta estratto di nascita",
+  "summary": "Per richiedere un estratto di nascita presso un ufficio comunale, è obbligatorio presentare un documento d'identità in corso di validità. Il documento d'identità serve a confermare l'identità del richiedente e garantire che la richiesta venga effettuata da una persona autorizzata. I documenti d'identità accettati di solito includono:",
+  "body": "Per richiedere un estratto di nascita presso un ufficio comunale, è obbligatorio presentare un documento d'identità in corso di validità. Il documento d'identità serve a confermare l'identità del richiedente e garantire che la richiesta venga effettuata da una persona autorizzata. I documenti d'identità accettati di solito includono: | Carta d'identità: La carta d'identità rilasciata dalle autorità competenti del paese di residenza è un documento comunemente accettato per la verifica dell'identità. | Passaporto: Il passaporto è un documento di identità riconosciuto a livello internazionale e può essere accettato come prova di identità. | Patente di guida: La patente di guida, sebbene principalmente un documento per la guida, può essere accettata come documento d'identità valido in alcuni casi. | Permesso di soggiorno: Nel caso di cittadini stranieri residenti nel paese, il permesso di soggiorno può essere richiesto come documento di identità.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-12-17",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Fonte Nuova",
+   "ente_codice_istat": "058122",
+   "connector": "wp_rest",
+   "url": "https://comune.fontenuova.rm.it/servizio/richiesta-estratto-di-nascita/",
+   "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2599",
+   "fetched_at": "2026-08-02T20:23:49.636763Z",
+   "raw_hash": "95e0df320b872709"
+  },
+  "confidence": "inferred",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058122:2598",
+  "title": "Richiesta certificato di matrimonio",
+  "summary": "Per richiedere il certificato di matrimonio è richiesto di fornire un documento di identità del richiedente in corso di validità. Questo documento di identità deve essere un documento ufficiale riconosciuto dallo Stato, tra cui:",
+  "body": "Per richiedere il certificato di matrimonio è richiesto di fornire un documento di identità del richiedente in corso di validità. Questo documento di identità deve essere un documento ufficiale riconosciuto dallo Stato, tra cui: | Carta d'identità: La carta d'identità rilasciata dalle autorità competenti del paese di residenza è un documento comunemente accettato per la verifica dell'identità. | Passaporto: Il passaporto è un documento di identità riconosciuto a livello internazionale e può essere accettato come prova di identità. | Patente di guida: La patente di guida, sebbene principalmente un documento per la guida, può essere accettata come documento d'identità valido in alcuni casi.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-12-17",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Fonte Nuova",
+   "ente_codice_istat": "058122",
+   "connector": "wp_rest",
+   "url": "https://comune.fontenuova.rm.it/servizio/richiesta-certificato-di-matrimonio/",
+   "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2598",
+   "fetched_at": "2026-08-02T20:23:49.637298Z",
+   "raw_hash": "fa9d26027b4e958b"
+  },
+  "confidence": "inferred",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058122:2597",
+  "title": "Richiesta copia integrale atto di matrimonio",
+  "summary": "Per richiedere la Copia Integrale dell'atto di matrimonio presso il Comune, è necessario fornire un documento di identità in corso di validità e una motivazione adeguata per la richiesta.",
+  "body": "Per richiedere la Copia Integrale dell'atto di matrimonio presso il Comune, è necessario fornire un documento di identità in corso di validità e una motivazione adeguata per la richiesta. | Documento di identità in corso di validità | Motivazione della richiesta",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-12-17",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Fonte Nuova",
+   "ente_codice_istat": "058122",
+   "connector": "wp_rest",
+   "url": "https://comune.fontenuova.rm.it/servizio/richiesta-copia-integrale-atto-di-matrimonio/",
+   "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2597",
+   "fetched_at": "2026-08-02T20:23:49.637561Z",
+   "raw_hash": "ed3366fb1daf1bb1"
+  },
+  "confidence": "inferred",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058122:2596",
+  "title": "Richiesta estratto di matrimonio",
+  "summary": "Documento d'identità valido: Assicurati di avere con te un documento d'identità: carta d'identità, passaporto o patente di guida. Il documento deve essere in corso di validità e rilasciato dalle autorità competenti.",
+  "body": "Documento d'identità valido: Assicurati di avere con te un documento d'identità: carta d'identità, passaporto o patente di guida. Il documento deve essere in corso di validità e rilasciato dalle autorità competenti. | Documento d'identità in corso di validità | Eventuali documenti di supporto richiesti (ad esempio, delega se richiesto l'estratto per una persona terza)",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-12-17",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Fonte Nuova",
+   "ente_codice_istat": "058122",
+   "connector": "wp_rest",
+   "url": "https://comune.fontenuova.rm.it/servizio/richiesta-estratto-di-matrimonio/",
+   "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2596",
+   "fetched_at": "2026-08-02T20:23:49.637874Z",
+   "raw_hash": "e5158535f0e432bd"
+  },
+  "confidence": "inferred",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058122:2595",
+  "title": "Iscrizione anagrafica per cittadini europei",
+  "summary": "Per accedere al servizio, assicurati di avere: carta d’identità, passaporto o documento valido per l’espatrio; | codice fiscale italiano, se lo possiedi; | dati anagrafici e codice fiscale di una persona della famiglia presso cui ti trasferisci; | estremi catastali dell’immobile dove abiterai se sei il proprietario, estremi del contratto di locazione e | carta d’identità del proprietario dell’immo",
+  "body": "Per accedere al servizio, assicurati di avere: carta d’identità, passaporto o documento valido per l’espatrio; | codice fiscale italiano, se lo possiedi; | dati anagrafici e codice fiscale di una persona della famiglia presso cui ti trasferisci; | estremi catastali dell’immobile dove abiterai se sei il proprietario, estremi del contratto di locazione e | carta d’identità del proprietario dell’immobile se non sei tu. | Altri documenti possono essere necessari in base ai casi specifici. | Se ti trasferisci per lavoro | documentazione che dimostri la tua qualità di lavoratore subordinato o autonomo. | Se ti trasferisci per studio e non sei lavoratore | documentazione che attesti la tua iscrizione presso un istituto di formazione; | autodichiarazione del possesso di risorse economiche sufficienti per non ricorrere all’assistenza sociale dello Stato. | copia di un’assicurazione sanitaria che copra i rischi sul territorio nazionale e valida per almeno un anno o per la durata del corso di studi (non è valida la Tessera europea di assicurazione malattia). | Se ti trasferisci senza essere lavoratore o studente | autodichiarazione del possesso di risorse economiche sufficienti per non ricorrere all’assistenza sociale dello Stato; | copia di un’assicurazione sanitaria che copra i rischi sul territorio nazionale e valida per almeno un anno o per la durata del corso di studi (non è valida la Tessera europea di assicurazione malattia) | Se ti stai ricongiungendo con un familiare | certificato di matrimonio, se il ricongiungimento avviene tra coniugi; | certificato di nascita con l’indicazione di paternità e maternità, se il ricongiungimento avviene tra figlio e genitore.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-12-17",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Fonte Nuova",
+   "ente_codice_istat": "058122",
+   "connector": "wp_rest",
+   "url": "https://comune.fontenuova.rm.it/servizio/iscrizione-anagrafica-per-cittadini-europei/",
+   "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2595",
+   "fetched_at": "2026-08-02T20:23:49.638850Z",
+   "raw_hash": "ceb66dc7597d102d"
+  },
+  "confidence": "inferred",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058122:2594",
+  "title": "Cambio di residenza",
+  "summary": "Per comunicare il cambio di residenza. assicurati di avere:",
+  "body": "Per comunicare il cambio di residenza. assicurati di avere: | i dati della nuova abitazione; | i dati di coloro che già vi risiedono; | i dati delle persone che si sono trasferite con te.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-12-17",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Fonte Nuova",
+   "ente_codice_istat": "058122",
+   "connector": "wp_rest",
+   "url": "https://comune.fontenuova.rm.it/servizio/cambio-di-residenza/",
+   "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2594",
+   "fetched_at": "2026-08-02T20:23:49.639118Z",
+   "raw_hash": "2281c55d78a94e52"
+  },
+  "confidence": "inferred",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058122:2593",
+  "title": "Certificato di nascita per cittadini europei",
+  "summary": "Per richiedere il certificato di nascita, assicurati di avere il tuo codice fiscale italiano .",
+  "body": "Per richiedere il certificato di nascita, assicurati di avere il tuo codice fiscale italiano . | Codice fiscale italiano.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-12-17",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Fonte Nuova",
+   "ente_codice_istat": "058122",
+   "connector": "wp_rest",
+   "url": "https://comune.fontenuova.rm.it/servizio/certificato-di-nascita-per-cittadini-europei/",
+   "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2593",
+   "fetched_at": "2026-08-02T20:23:49.639300Z",
+   "raw_hash": "d73f6219de0454b0"
+  },
+  "confidence": "inferred",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058122:2592",
+  "title": "Sportello Unico Attività Produttive (SUAP)",
+  "summary": "Per accedere ai servizi del SUAP, assicurati di avere:",
+  "body": "Per accedere ai servizi del SUAP, assicurati di avere: | le credenziali Spid oppure la Carta Nazionale dei Servizi; | la firma digitale e la posta elettronica certificata (PEC). | Sul portale Impresainungiorno e a sportello, puoi verificare tutta la documentazione necessaria per svolgere una pratica specifica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-12-17",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Fonte Nuova",
+   "ente_codice_istat": "058122",
+   "connector": "wp_rest",
+   "url": "https://comune.fontenuova.rm.it/servizio/sportello-unico-attivita-produttive-suap/",
+   "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2592",
+   "fetched_at": "2026-08-02T20:23:49.639595Z",
+   "raw_hash": "a0eaf9e532b76a52"
+  },
+  "confidence": "inferred",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058122:2591",
+  "title": "Certificati anagrafici",
+  "summary": "Per richiedere certificati anagrafici, assicurati di avere:",
+  "body": "Per richiedere certificati anagrafici, assicurati di avere: | i tuoi dati in quanto richiedente; | i dati dell’intestatario, nel caso stessi richiedendo un certificato per un’altra persona.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-12-17",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Fonte Nuova",
+   "ente_codice_istat": "058122",
+   "connector": "wp_rest",
+   "url": "https://comune.fontenuova.rm.it/servizio/certificati-anagrafici/",
+   "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2591",
+   "fetched_at": "2026-08-02T20:23:49.639844Z",
+   "raw_hash": "1244964bf304be16"
+  },
+  "confidence": "inferred",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058122:2590",
+  "title": "IMU (Imposta Municipale Propria)",
+  "summary": "Per pagare l'IMU, avrai bisogno dei seguenti elementi:",
+  "body": "Per pagare l'IMU, avrai bisogno dei seguenti elementi: | Dati catastali dell'immobile: Per calcolare l'IMU, devi conoscere il valore catastale del tuo immobile. Questi dati sono contenuti nella visura catastale, che puoi ottenere presso l'Ufficio del Catasto o tramite servizi online dell'Agenzia delle Entrate. | Aliquota IMU: Devi conoscere l'aliquota IMU specifica per il Comune e per il tipo di immobile. Le aliquote sono disponibili sul sito web del Comune o contattando direttamente l'Ufficio Tributi del Comune. | Eventuali detrazioni o esenzioni: In base al tuo status e all'uso dell'immobile, potrebbero essere applicabili specifiche detrazioni o esenzioni. Le informazioni su queste agevolazioni possono essere ottenute presso l'Ufficio Tributi del Comune. | Modello F24: Il pagamento dell'IMU si effettua utilizzando il modello F24, disponibile sul sito dell'Agenzia delle Entrate o presso le poste. | Modalità di pagamento: Infine, avrai bisogno di un metodo per effettuare il pagamento. Puoi pagare il modello F24 presso qualsiasi ufficio postale o banca, oppure tramite il tuo servizio di home banking, se disponibile.",
+  "kind": "agevolazione",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-12-17",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Fonte Nuova",
+   "ente_codice_istat": "058122",
+   "connector": "wp_rest",
+   "url": "https://comune.fontenuova.rm.it/servizio/imu-imposta-municipale-propria/",
+   "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2590",
+   "fetched_at": "2026-08-02T20:23:49.640468Z",
+   "raw_hash": "189c46144eef9431"
+  },
+  "confidence": "inferred",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058122:2589",
+  "title": "Carta d’Identità Elettronica",
+  "summary": "Il cittadino dovrà recarsi in Comune munito di:",
+  "body": "Il cittadino dovrà recarsi in Comune munito di: | Una fotografia su sfondo chiaro, con posa frontale, a capo scoperto - ad eccezione dei casi in cui la copertura del capo sia imposta da motivi religiosi, purché il viso sia ben visibile. Le caratteristiche delle fotografie sono indicate sul sito del Ministero degli Interni; | Tessera Sanitaria/Codice fiscale (Carta Nazionale dei Servizi); | Carta di identità scaduta o in scadenza; | Nel caso di furto o smarrimento della precedente Carta d'Identità: Denuncia di furto o smarrimento resa presso le Autorità competenti in originale, oppure documento d’identità in corso di validità. In alternativa occorre la presenza di due testimoni maggiorenni muniti di valido documento d’identità; | Nel caso di minore accompagnato da un solo genitore, modulo di assenso per il rilascio della carta valida per l'espatrio; | Permesso di soggiorno o carta di soggiorno, in corso di validità; | Passaporto o documento di riconoscimento del minore straniero (comunitario o extracomunitario), rilasciato dal paese di origine, da presentare in caso di richiesta della prima carta di identità.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-12-17",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Fonte Nuova",
+   "ente_codice_istat": "058122",
+   "connector": "wp_rest",
+   "url": "https://comune.fontenuova.rm.it/servizio/carta-di-identita-elettronica/",
+   "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2589",
+   "fetched_at": "2026-08-02T20:23:49.641160Z",
+   "raw_hash": "cff7e52b018a89bd"
+  },
+  "confidence": "inferred",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058122:2588",
+  "title": "Rilascio del contrassegno per veicoli a servizio dei disabili",
+  "summary": "I documenti necessari per la presentazione dell’istanza sono i seguenti:",
+  "body": "I documenti necessari per la presentazione dell’istanza sono i seguenti: | Due foto formato tessera | Pagamento di € 15,00 per spese di istruttoria da effettuare tramite PagoPA del sito istituzionale del Comune di Fonte Nuova (nome pagamento spontaneo: “POLIZIA LOCALE – CONTRASSEGNO DISABILI”) o direttamente dall’istanza online | Certificato Medico Legale della A.S.L. con esito FAVOREVOLE o certificato Inps che accerti il diritto di rilascio del contrassegno (in caso di domanda di rilascio nuovo contrassegno) | Certificato del medico curante che attesti “il persistere delle condizioni sanitarie che hanno dato luogo al rilascio del contrassegno” (in caso di domanda di rinnovo per ulteriori cinque anni) | Certificato originale rilasciato dall’Azienda Sanitaria Locale (ASL) attestante la ridotta capacità di deambulazione (in caso di domanda per rinnovo per un periodo inferiore ai cinque anni | Denuncia di furto/smarrimento (in caso di domanda di duplicato per furto/smarrimento) | Copia del documento di identità del richiedente ai fini dell’autocertificazione di cui D.P.R 445/2000 (in caso di istanza presentata fisicamente presso l’Ufficio di Polizia Locale) | Modulo compilato in tutte le sue parti (in caso di istanza presentata fisicamente presso l’Ufficio di Polizia Locale)",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-12-17",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Fonte Nuova",
+   "ente_codice_istat": "058122",
+   "connector": "wp_rest",
+   "url": "https://comune.fontenuova.rm.it/servizio/rilascio-del-contrassegno-per-veicoli-a-servizio-dei-disabili/",
+   "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2588",
+   "fetched_at": "2026-08-02T20:23:49.641829Z",
+   "raw_hash": "b77816674cb491e0"
+  },
+  "confidence": "inferred",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ }
+]

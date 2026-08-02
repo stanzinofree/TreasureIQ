@@ -25,6 +25,13 @@ This connector never sets `Requirements.source_typed`. Pages carry no typed
 CMB2 field whatsoever; `source_typed` is a provenance guard (`schema.py:169`)
 attesting that a genuinely typed field was read, not a convenience flag —
 setting it here would be a false provenance claim.
+
+D-16/D-17 recovery-cost instrumentation lives here too: `_normalise` measures
+what it actually cost to recover this record's criteria (PDFs linked/opened/
+skipped, characters processed, wall-clock seconds, requirements recovered)
+and lands the record on one of the three ladder rungs. Instrumentation only —
+see `schema.Opportunity`'s docstring on those fields: nothing computed here is
+read by `match/engine.py`, and an unmeasured value is `None`, never a guess.
 """
 
 from __future__ import annotations
@@ -32,15 +39,18 @@ from __future__ import annotations
 import io
 import logging
 import re
+import time
 from datetime import date, datetime
 from typing import Any
 
-from treasureiq.extract.llm import RequirementsExtractor
+from treasureiq.extract.llm import RequirementsExtractor, Segment, attribute_quote
 from treasureiq.ingest.base import Connector
 from treasureiq.ingest.wp_comuni import guess_kind, strip_html
 from treasureiq.schema import (
     Confidence,
     Opportunity,
+    PdfSkip,
+    RecoveryLevel,
     Requirements,
     Source,
     TargetGroup,
@@ -90,6 +100,39 @@ def _filename_rank(url: str) -> int:
     if _DEPRIORITISED_FILENAME_RE.search(url):
         return 2
     return 1
+
+
+def _count_recovered_fields(req: Requirements) -> int:
+    """D-16: how many quote-gated requirement fields survived into `req`.
+
+    Counts only fields that carry real information beyond the schema's
+    defaults — `residenza_required` starts `True` unconditionally, so it only
+    counts here when a quote moved it to `False` (the one case that reflects
+    an actual extraction, per `extract/llm.py:to_requirements`). This never
+    reads quotes directly; it counts the post-gate `Requirements` object that
+    `match/engine.py` also consumes, so the count reflects exactly what
+    survived D-05's gate, nothing more.
+    """
+    count = 0
+    if req.isee_max is not None:
+        count += 1
+    if req.isee_min is not None:
+        count += 1
+    if req.eta_min is not None:
+        count += 1
+    if req.eta_max is not None:
+        count += 1
+    if req.nucleo_min is not None:
+        count += 1
+    if req.figli_minori_required is not None:
+        count += 1
+    if req.disabilita_required is not None:
+        count += 1
+    if req.residenza_required is False:
+        count += 1
+    count += len(req.employment_status)
+    count += len(req.other)
+    return count
 
 
 class WPPagesConnector(Connector):
@@ -226,26 +269,82 @@ class WPPagesConnector(Connector):
         page_url = record.get("link") or self.base_url
 
         pdf_urls = _PDF_LINK_RE.findall(body_html)
-        pdf_segments, pdf_notes = self._collect_pdf_segments(pdf_urls)
+        pdf_urls_unique = list(dict.fromkeys(pdf_urls))
 
+        # D-16: wall-clock cost of recovering this record's criteria, from
+        # here through the extraction attempt below. Always measured — even a
+        # record with no PDFs and an unavailable extractor still pays this
+        # cost, and a real (small) number beats a null for a code path that
+        # genuinely ran.
+        recovery_started = time.perf_counter()
+
+        pdf_segments, pdf_notes, pdf_skipped, pdf_illegible_count = (
+            self._collect_pdf_segments(pdf_urls)
+        )
+
+        # Assemble the corpus and record each segment's character offset
+        # within it *before* truncation, so attribution can later tell which
+        # segments (or which tail of a segment) the model actually saw.
         # Body first, so a body-only match is attributed to the page itself
         # before any PDF segment is even considered.
-        segments: list[dict[str, Any]] = [
-            {"kind": "pagina", "url": page_url, "pages": [body_text]}
-        ]
-        segments.extend(pdf_segments)
-
-        corpus = body_text
+        boundary_segments: list[Segment] = []
+        corpus_parts: list[str] = [body_text]
+        offset = len(body_text)
+        boundary_segments.append(
+            Segment(kind="pagina", url=page_url, page_number=None, start=0, text=body_text)
+        )
         for seg in pdf_segments:
-            corpus = f"{corpus}\n\n# Allegato: {seg['url']}\n" + "\n".join(seg["pages"])
+            header = f"\n\n# Allegato: {seg['url']}\n"
+            corpus_parts.append(header)
+            offset += len(header)
+            for page_index, page_text in enumerate(seg["pages"], start=1):
+                if page_index > 1:
+                    corpus_parts.append("\n")
+                    offset += 1
+                boundary_segments.append(
+                    Segment(
+                        kind="allegato",
+                        url=seg["url"],
+                        page_number=page_index,
+                        start=offset,
+                        text=page_text,
+                    )
+                )
+                corpus_parts.append(page_text)
+                offset += len(page_text)
+
+        corpus = "".join(corpus_parts)
+        visible_len = len(corpus)
         if len(corpus) > MAX_CORPUS_CHARS:
             corpus = corpus[:MAX_CORPUS_CHARS]
+            visible_len = MAX_CORPUS_CHARS
+
+        # Segments (or the tail of a segment) beyond `visible_len` were never
+        # sent to the model — a quote cannot legitimately be attributed to
+        # them, cap or not (D-15's MAX_CORPUS_CHARS).
+        visible_segments = [
+            Segment(
+                kind=seg.kind,
+                url=seg.url,
+                page_number=seg.page_number,
+                start=seg.start,
+                text=seg.text[: max(0, visible_len - seg.start)],
+            )
+            for seg in boundary_segments
+            if seg.start < visible_len
+        ]
 
         requirements = Requirements()
         notes: list[str] = list(pdf_notes)
         confidence = Confidence.INFERRED
 
+        # D-16: `None` unless extraction actually ran (cache hit, live call,
+        # or an attempted-but-failed live call) — never a guessed zero.
+        chars_processed: int | None = None
+        requirements_recovered: int | None = None
+
         if self._extractor is not None and self._extractor.available:
+            chars_processed = len(corpus)
             raw_hash = self.hash_payload(record)
             outcome = self._extractor.extract(
                 text=corpus, title=title, raw_hash=raw_hash
@@ -253,7 +352,8 @@ class WPPagesConnector(Connector):
             if outcome is not None:
                 requirements, extraction_notes, confidence = outcome
                 notes.extend(extraction_notes)
-                notes.extend(self._attribute_quotes(raw_hash, segments))
+                notes.extend(self._attribute_quotes(raw_hash, visible_segments))
+                requirements_recovered = _count_recovered_fields(requirements)
             else:
                 notes.append(
                     "Estrazione non eseguita (nessuna cache disponibile e "
@@ -264,6 +364,24 @@ class WPPagesConnector(Connector):
                 "Estrazione LLM non eseguita: nessun provider disponibile "
                 "in questo ambiente."
             )
+
+        extraction_seconds = time.perf_counter() - recovery_started
+
+        pdfs_linked = len(pdf_urls_unique)
+        pdfs_opened = len(pdf_segments)
+
+        # D-16 ladder: L2 whenever something quote-gated actually survived
+        # (regardless of whether it came from the body or an attachment). L3
+        # only when a PDF exists but every linked PDF failed for a genuine
+        # readability reason (scan/image, encrypted, parse failure) and none
+        # opened — the diagnosis "nobody can read this," never folded into
+        # L1's "we have not read it yet." Anything else is L1_manuale.
+        if requirements_recovered is not None and requirements_recovered >= 1:
+            recovery_level = RecoveryLevel.L2_ESTRATTO
+        elif pdfs_linked > 0 and pdfs_opened == 0 and pdf_illegible_count > 0:
+            recovery_level = RecoveryLevel.L3_ILLEGGIBILE
+        else:
+            recovery_level = RecoveryLevel.L1_MANUALE
 
         # NEVER set Requirements.source_typed here — see module docstring.
 
@@ -297,11 +415,18 @@ class WPPagesConnector(Connector):
             source=source,
             confidence=confidence,
             extraction_notes=notes,
+            recovery_level=recovery_level,
+            pdfs_linked=pdfs_linked,
+            pdfs_opened=pdfs_opened,
+            pdfs_skipped=pdf_skipped,
+            chars_processed=chars_processed,
+            extraction_seconds=extraction_seconds,
+            requirements_recovered=requirements_recovered,
         )
 
     def _collect_pdf_segments(
         self, pdf_urls: list[str]
-    ) -> tuple[list[dict[str, Any]], list[str]]:
+    ) -> tuple[list[dict[str, Any]], list[str], list[PdfSkip], int]:
         """Download and extract text from up to `MAX_PDFS_PER_PAGE` attachments.
 
         `pypdf` is imported lazily (only pages that actually link a PDF pay
@@ -309,10 +434,27 @@ class WPPagesConnector(Connector):
         `anthropic`). Every skip — cap reached, too large, download failure,
         unreadable — is logged and returned as a human-readable note, per
         D-15: "log every skip explicitly."
+
+        Also returns the D-16 skip audit (`PdfSkip` per skip) and how many of
+        those skips were a genuine readability failure (parse failure or no
+        extractable text) rather than a budget choice (cap reached, too
+        large) or a transient network failure (download failed) — this
+        distinction is what separates `L3_illeggibile` from a plain
+        `L1_manuale` in `_normalise`.
         """
         notes: list[str] = []
+        skipped: list[PdfSkip] = []
+        illegible_count = 0
         if not pdf_urls:
-            return [], notes
+            return [], notes, skipped, illegible_count
+
+        def _skip(absolute_url: str, note: str, reason: str, *, illegible: bool) -> None:
+            nonlocal illegible_count
+            logger.info("skipping PDF %s: %s", absolute_url, reason)
+            notes.append(note)
+            skipped.append(PdfSkip(url=absolute_url, reason=reason))
+            if illegible:
+                illegible_count += 1
 
         ranked = sorted(dict.fromkeys(pdf_urls), key=_filename_rank)
 
@@ -323,8 +465,12 @@ class WPPagesConnector(Connector):
 
             if opened >= MAX_PDFS_PER_PAGE:
                 reason = f"limite di {MAX_PDFS_PER_PAGE} allegati per pagina raggiunto"
-                logger.info("skipping PDF %s: %s", absolute_url, reason)
-                notes.append(f"Allegato PDF ignorato ({reason}): {absolute_url}")
+                _skip(
+                    absolute_url,
+                    f"Allegato PDF ignorato ({reason}): {absolute_url}",
+                    reason,
+                    illegible=False,
+                )
                 continue
 
             content_length = 0
@@ -336,22 +482,34 @@ class WPPagesConnector(Connector):
 
             if content_length and content_length > MAX_PDF_BYTES:
                 reason = f"{content_length} byte, oltre il limite di {MAX_PDF_BYTES} byte"
-                logger.info("skipping PDF %s: %s", absolute_url, reason)
-                notes.append(f"Allegato PDF ignorato (troppo grande, {reason}): {absolute_url}")
+                _skip(
+                    absolute_url,
+                    f"Allegato PDF ignorato (troppo grande, {reason}): {absolute_url}",
+                    reason,
+                    illegible=False,
+                )
                 continue
 
             try:
                 response = self._client.get(absolute_url)
                 response.raise_for_status()
             except Exception as exc:
-                logger.info("skipping PDF %s: download failed: %s", absolute_url, exc)
-                notes.append(f"Allegato PDF non scaricabile: {absolute_url} ({exc})")
+                _skip(
+                    absolute_url,
+                    f"Allegato PDF non scaricabile: {absolute_url} ({exc})",
+                    f"download fallito: {exc}",
+                    illegible=False,
+                )
                 continue
 
             if len(response.content) > MAX_PDF_BYTES:
                 reason = f"{len(response.content)} byte, oltre il limite di {MAX_PDF_BYTES} byte"
-                logger.info("skipping PDF %s: %s", absolute_url, reason)
-                notes.append(f"Allegato PDF ignorato (troppo grande, {reason}): {absolute_url}")
+                _skip(
+                    absolute_url,
+                    f"Allegato PDF ignorato (troppo grande, {reason}): {absolute_url}",
+                    reason,
+                    illegible=False,
+                )
                 continue
 
             try:
@@ -360,23 +518,31 @@ class WPPagesConnector(Connector):
                 reader = pypdf.PdfReader(io.BytesIO(response.content))
                 pages_text = [(p.extract_text() or "") for p in reader.pages]
             except Exception as exc:
-                logger.info("skipping PDF %s: parse failed: %s", absolute_url, exc)
-                notes.append(f"Allegato PDF illeggibile (parsing fallito): {absolute_url} ({exc})")
+                _skip(
+                    absolute_url,
+                    f"Allegato PDF illeggibile (parsing fallito): {absolute_url} ({exc})",
+                    f"parsing fallito: {exc}",
+                    illegible=True,
+                )
                 continue
 
             if not any(t.strip() for t in pages_text):
                 reason = "nessun testo estraibile (probabile scansione/immagine)"
-                logger.info("skipping PDF %s: %s", absolute_url, reason)
-                notes.append(f"Allegato PDF ignorato ({reason}): {absolute_url}")
+                _skip(
+                    absolute_url,
+                    f"Allegato PDF ignorato ({reason}): {absolute_url}",
+                    reason,
+                    illegible=True,
+                )
                 continue
 
             opened += 1
             segments.append({"kind": "allegato", "url": absolute_url, "pages": pages_text})
 
-        return segments, notes
+        return segments, notes, skipped, illegible_count
 
     def _attribute_quotes(
-        self, raw_hash: str, segments: list[dict[str, Any]]
+        self, raw_hash: str, segments: list[Segment]
     ) -> list[str]:
         """Cite each accepted quote back to the page or the PDF it came from.
 
@@ -387,6 +553,16 @@ class WPPagesConnector(Connector):
         same technique `extract/spike.py` uses for gate inspection) because
         `RequirementsExtractor.extract()` only returns the post-gate
         `Requirements`, not the quotes that justified them.
+
+        Matching (`extract.llm.attribute_quote`) is normalised — whitespace,
+        quote/apostrophe style, accents and case do not count as a mismatch —
+        with a high-confidence fuzzy fallback for paraphrase/OCR noise.
+        `segments` must already be sliced to what the model actually saw (see
+        `_normalise`'s `visible_segments`), so a quote can never be attributed
+        to text truncated out of the corpus by `MAX_CORPUS_CHARS`. When no
+        segment clears the bar, the quote is reported unattributed rather
+        than guessed — D-05's invariant applied to provenance, not just
+        existence.
         """
         if self._extractor is None:
             return []
@@ -396,32 +572,23 @@ class WPPagesConnector(Connector):
 
         notes: list[str] = []
         for quote in raw.quotes:
-            source_note = None
-            for seg in segments:
-                for page_index, page_text in enumerate(seg["pages"], start=1):
-                    if quote.text and quote.text in page_text:
-                        if seg["kind"] == "allegato":
-                            source_note = (
-                                f"Fonte per '{quote.field}': allegato {seg['url']}"
-                                + (
-                                    f", pagina {page_index}"
-                                    if len(seg["pages"]) > 1
-                                    else ""
-                                )
-                                + f' — "{quote.text}"'
-                            )
-                        else:
-                            source_note = (
-                                f"Fonte per '{quote.field}': pagina web {seg['url']}"
-                                f' — "{quote.text}"'
-                            )
-                        break
-                if source_note:
-                    break
-            if source_note is None:
+            match = attribute_quote(quote.text, segments) if quote.text else None
+            if match is not None:
+                if match.kind == "allegato":
+                    source_note = (
+                        f"Fonte per '{quote.field}': allegato {match.url}"
+                        + (f", pagina {match.page_number}" if match.page_number else "")
+                        + f' — "{quote.text}"'
+                    )
+                else:
+                    source_note = (
+                        f"Fonte per '{quote.field}': pagina web {match.url}"
+                        f' — "{quote.text}"'
+                    )
+            else:
                 # Should be rare under D-05 (quotes are meant to be verbatim),
-                # but a paraphrase or truncation could slip through — log it
-                # rather than guess a source.
+                # but a paraphrase, OCR noise or truncation could still defeat
+                # matching — log it rather than guess a source.
                 source_note = (
                     f"Fonte per '{quote.field}' non identificata con precisione "
                     f'nel corpus assemblato — "{quote.text}"'

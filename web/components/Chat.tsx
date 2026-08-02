@@ -28,6 +28,7 @@ import { useId, useRef, useState } from "react";
 import { Seal } from "@/components/Seal";
 import {
   chat,
+  comuneNearby,
   login,
   type ChatCost,
   type ChatOut,
@@ -134,7 +135,7 @@ function CostStrip({ cost }: { cost: ChatCost }) {
             <rect x="0" y="8" width={avgPct * 0.96} height="4" fill="var(--sumi-faint)" />
           )}
           {totalPct != null && (
-            <rect x="0" y="1" width={totalPct * 0.96} height="4" fill="var(--yamabuki)" />
+            <rect x="0" y="1" width={totalPct * 0.96} height="4" fill="var(--fuji)" />
           )}
         </svg>
       )}
@@ -354,6 +355,9 @@ export default function Chat() {
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [locating, setLocating] = useState(false);
+  const [locateNote, setLocateNote] = useState<string | null>(null);
+  const [manualLogin, setManualLogin] = useState(false);
   const nextId = useRef(0);
 
   function newId() {
@@ -398,8 +402,87 @@ export default function Chat() {
     if (lastUser) send(lastUser.content);
   }
 
+  /**
+   * Geolocation tells us where the citizen is *standing*, never where they
+   * are *resident* — the two are routinely different (someone at the URP
+   * desk, at work in a neighbouring comune, visiting family). So the button
+   * only ever pre-fills the input with a question the citizen still has to
+   * send themselves; it never asserts residency on their behalf, and a
+   * denied permission is treated as an ordinary answer, not an error.
+   */
+  function locate() {
+    if (typeof navigator === "undefined" || !("geolocation" in navigator)) {
+      setLocateNote(
+        "Il tuo browser non supporta la geolocalizzazione: scrivi tu il nome del comune.",
+      );
+      return;
+    }
+    setLocating(true);
+    setLocateNote(null);
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        try {
+          const nearby = await comuneNearby(
+            position.coords.latitude,
+            position.coords.longitude,
+          );
+          if (nearby) {
+            setInput(
+              `Sei a ${nearby.nome}? Confermi che è il tuo comune di residenza?`,
+            );
+          } else {
+            setLocateNote(
+              "Non troviamo un comune supportato vicino a te: scrivi tu il nome del comune.",
+            );
+          }
+        } catch {
+          setLocateNote(
+            "Non riesco a verificare la tua posizione in questo momento: scrivi tu il nome del comune.",
+          );
+        } finally {
+          setLocating(false);
+        }
+      },
+      (geoError) => {
+        // Permission denial is a normal, expected answer — not an error state.
+        setLocating(false);
+        setLocateNote(
+          geoError.code === geoError.PERMISSION_DENIED
+            ? "Nessun problema: scrivi tu il nome del tuo comune."
+            : "Non riesco a determinare la tua posizione: scrivi tu il nome del comune.",
+        );
+      },
+      { timeout: 8000 },
+    );
+  }
+
   return (
     <section className="chat" aria-label="Conversazione con TreasureIQ">
+      <div className="locate">
+        <button
+          type="button"
+          className="locate__button"
+          onClick={locate}
+          disabled={locating}
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M12 2c-4.4 0-8 3.6-8 8 0 6 8 12 8 12s8-6 8-12c0-4.4-3.6-8-8-8Z"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            />
+            <circle cx="12" cy="10" r="2.6" fill="currentColor" />
+          </svg>
+          {locating ? "Localizzazione…" : "Usa la mia posizione"}
+        </button>
+      </div>
+      {locateNote && (
+        <p className="locate__note" role="status">
+          {locateNote}
+        </p>
+      )}
+
       <div className="chat__log" aria-live="polite">
         {messages.length === 0 && (
           <p className="chat__hint">
@@ -472,6 +555,35 @@ export default function Chat() {
           </button>
         </div>
       </form>
+
+      {/* A visible but non-pushy way to reach the mock identity flow without
+          waiting for the chat to ask for it (D-09 covers *why* the chat asks
+          mid-conversation; this is the other, citizen-initiated door). */}
+      {!manualLogin && (
+        <div className="spid-entry">
+          <button
+            type="button"
+            className="spid-entry__button"
+            onClick={() => setManualLogin(true)}
+          >
+            Accedi con SPID/CIE (simulazione) per risposte sul tuo profilo
+          </button>
+        </div>
+      )}
+      {manualLogin && (
+        <EscalationGate
+          escalation={{
+            needed: true,
+            missing_fields: [],
+            reason:
+              "Puoi accedere in qualsiasi momento per ricevere risposte calcolate sul tuo profilo, invece che generiche.",
+          }}
+          onResolved={() => {
+            setManualLogin(false);
+            retryLastQuestion();
+          }}
+        />
+      )}
     </section>
   );
 }

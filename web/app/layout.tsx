@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Link from "next/link";
 import { Wordmark } from "@/components/Seal";
+import StatusPill from "@/components/StatusPill";
 import "./globals.css";
 
 // Fonts are vendored under app/fonts/ rather than pulled with next/font/google.
@@ -66,6 +67,7 @@ export default function RootLayout({
             <nav className="nav" aria-label="Principale">
               <Link href="/opportunita">Opportunità</Link>
               <Link href="/dati">Qualità dei dati</Link>
+              <StatusPill />
             </nav>
           </header>
           <main id="main">{children}</main>

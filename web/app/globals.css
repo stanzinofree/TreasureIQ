@@ -1,8 +1,15 @@
 /* TreasureIQ — visual system
  *
- * Direction: Japanese civic. The two borrowed devices are not decoration —
- * both are real instruments of Japanese local government, which is what earns
- * them a place in a product about Italian local government.
+ * Direction: Japanese civic, v2 (2026-08-03, see .kapi/design-note.md).
+ * v1 read as a document: correct, institutional, inert. This is a live civic
+ * service, so the surface says so — high-key white, generous air, rounded
+ * display type, and a few genuinely saturated accents used as punctuation.
+ * Semi-institutional, but alive: a well-designed municipal service in Tokyo,
+ * not corporate SaaS and not neon-on-black.
+ *
+ * The two borrowed devices are not decoration — both are real instruments of
+ * Japanese local government, which is what earns them a place in a product
+ * about Italian local government.
  *
  *   hanko (判子)  the official seal. Here its *completeness* encodes the
  *                 completeness of the comune's published data: a full stamp
@@ -14,34 +21,40 @@
  *                 stays warm without becoming childish in front of someone
  *                 checking whether they can afford school transport.
  *
- * Palette is drawn from traditional Japanese colour names, chosen to sit far
- * away from the institutional blue every Italian PA site already uses.
+ * Token NAMES are unchanged from v1 — only the values moved. Verdict and
+ * criterion colours keep their *meaning*; only chroma changed, and `Seal`
+ * still encodes every state in shape as well as colour.
  */
 
 :root {
-  /* --- Surface: byakuroku, a pale green-grey. Calm, and deliberately not the
-     warm cream that has become the default for this kind of page. --- */
-  --paper: #edf2ee;
-  --paper-raised: #f7faf8;
-  --paper-sunken: #e2e9e4;
+  /* --- Surface: near-white with a faint warm cast, not the sage-grey wash
+     of v1. Cards lift off the page instead of blending into it. --- */
+  --paper: #fbfaf6;
+  --paper-raised: #ffffff;
+  --paper-sunken: #f1f0ea;
 
   /* --- Ink: sumi, warm near-black with a green cast so it belongs to the
-     paper rather than sitting on top of it. --- */
+     paper rather than sitting on top of it. Unchanged — body text stays
+     maximally readable regardless of how vivid the surface gets. --- */
   --sumi: #1b211d;
   --sumi-soft: #4a554e;
-  --sumi-faint: #7c8781;
+  --sumi-faint: #63706a; /* darkened from v1 to clear 4.5:1 on the new near-white paper */
 
-  /* --- Accents --- */
-  --ai: #23405e;        /* indigo: navigation, authority, links */
-  --ai-wash: #dde5ee;
-  --shu: #d4482f;       /* vermilion: the seal, and only blocking states */
-  --shu-wash: #f8e2dd;
-  --wakatake: #3f7a5e;  /* young bamboo: a criterion the citizen meets */
-  --wakatake-wash: #dfeee6;
-  --yamabuki: #a8710c;  /* golden: unverifiable — darkened for text contrast */
-  --yamabuki-wash: #f7ecd6;
+  /* --- Accents: saturated on white, not dark-mode-vivid. Every token below
+     keeps its v1 role; only chroma moved. --- */
+  --ai: #4f46e5;         /* saturated indigo-violet: navigation, authority, links, focus */
+  --ai-wash: #e9e7fb;
+  --shu: #e8391f;        /* hot vermilion: the seal, and only blocking states */
+  --shu-wash: #fce4de;
+  --wakatake: #1f9d55;   /* fresh, high-chroma green: a criterion the citizen meets */
+  --wakatake-wash: #dff5e6;
+  --yamabuki: #d97706;   /* bright golden amber: unverifiable / unknown */
+  --yamabuki-wash: #fbecd2;
+  --fuji: #e6007e;       /* new: fluo magenta-pink, one accent for energy — used
+                             sparingly (the cost strip, small emphases), never
+                             for a verdict or a blocking state */
 
-  --kasumi: #d3ddd6;    /* mist: hairlines and dividers */
+  --kasumi: #e5e9e2;    /* mist: lighter hairlines, structure without weight */
 
   /* --- Type --- */
   --font-display: var(--font-zen-maru), "Hiragino Maru Gothic ProN", system-ui,
@@ -449,7 +462,7 @@ a {
   transition: background 140ms ease;
 }
 .button:hover {
-  background: #1a3149;
+  background: #3c33b8; /* darkened --ai, same hue family */
 }
 .button--ghost {
   background: transparent;
@@ -503,9 +516,152 @@ a {
 .chat-hero {
   text-align: center;
 }
+
+/* Big, rounded, welcoming display type — the one place on the page allowed
+   to be loud. Zen Maru Gothic's roundness is the whole argument for warmth,
+   so let it run larger here than the informational h1s on /opportunita and
+   /dati, which stay at the quieter global size. */
+.chat-hero h1 {
+  font-size: clamp(2.5rem, 7vw, 4.25rem);
+  letter-spacing: -0.02em;
+}
 .chat-hero .lede {
   margin-left: auto;
   margin-right: auto;
+  max-width: 52ch;
+}
+
+/* ------------------------------------------------------------ geolocation */
+
+/* Sits below the hero, above the chat: an optional shortcut, never a gate.
+   Ghost styling on purpose — it must read as "try this if you want", not
+   compete with the input for attention. */
+.locate {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--ma-2);
+}
+
+.locate__button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ma-2);
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--ai);
+  background: var(--ai-wash);
+  border: none;
+  border-radius: 999px;
+  padding: var(--ma-2) var(--ma-4);
+  cursor: pointer;
+}
+.locate__button:hover {
+  background: #ded9fa;
+}
+.locate__button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.locate__note {
+  text-align: center;
+  color: var(--sumi-faint);
+  font-size: 0.86rem;
+  margin: 0 0 var(--ma-4);
+}
+
+/* ------------------------------------------------------------ SPID entry */
+
+/* A visible but non-pushy way to reach the mock identity picker outside of
+   the mid-conversation escalation. Text-button styling: it must never look
+   as authoritative as a real SPID/CIE button on a real PA site. */
+.spid-entry {
+  text-align: center;
+  margin-top: var(--ma-2);
+}
+
+.spid-entry__button {
+  font-family: var(--font-body);
+  font-size: 0.86rem;
+  color: var(--sumi-faint);
+  background: none;
+  border: none;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  padding: var(--ma-2);
+}
+.spid-entry__button:hover {
+  color: var(--ai);
+}
+
+/* --------------------------------------------------------------- status pill */
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ma-2);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  color: var(--sumi-soft);
+  background: var(--paper-sunken);
+  border: 1px solid var(--kasumi);
+  border-radius: 999px;
+  padding: var(--ma-1) var(--ma-3);
+  text-decoration: none;
+}
+.status-pill:hover {
+  border-color: var(--sumi-faint);
+}
+
+.status-pill__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  flex: none;
+  background: var(--sumi-faint);
+}
+.status-pill[data-overall="ok"] .status-pill__dot {
+  background: var(--wakatake);
+}
+.status-pill[data-overall="degraded"] .status-pill__dot {
+  background: var(--yamabuki);
+}
+.status-pill[data-overall="down"] .status-pill__dot {
+  background: var(--shu);
+}
+
+/* -------------------------------------------------------------- footer stats */
+
+.footer-stats {
+  margin-top: var(--ma-8);
+  padding-top: var(--ma-6);
+  border-top: 1px solid var(--kasumi);
+}
+
+.footer-stats__grid {
+  display: grid;
+  gap: var(--ma-4) var(--ma-8);
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  margin-bottom: var(--ma-4);
+}
+
+.footer-stat__value {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--sumi);
+  font-variant-numeric: tabular-nums;
+}
+
+.footer-stat__label {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--sumi-faint);
+  margin-top: 2px;
 }
 
 .chat {
@@ -612,9 +768,12 @@ a {
   border-top: 1px solid var(--kasumi);
 }
 
-/* D-17 — data-recovery cost strip: a caption, not a panel. Amber/faint only,
-   never `--shu` (reserved for blocking states) — this is a property of the
-   comune's data, not a failure of the current answer. */
+/* D-17 — data-recovery cost strip: a caption, not a panel. `--fuji` is used
+   here deliberately (design-note v2): this is the one place on the page that
+   gets the fluo accent, because it is a genuinely interesting number, not a
+   blocking state — never `--shu` (reserved for blocking states) and never
+   `--yamabuki` (reserved for "unverifiable"), since this is a property of the
+   comune's data-recovery cost, not a failure of the current answer. */
 .cost-strip {
   display: flex;
   align-items: center;

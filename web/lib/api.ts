@@ -159,3 +159,50 @@ export const chat = (message: string, history: ChatTurn[] = []) =>
     method: "POST",
     body: JSON.stringify({ message, history }),
   });
+
+/** Footer vital signs (B14 contract). Every field is independently nullable
+ * — another arm is building the endpoint concurrently, and a field that
+ * hasn't been measured yet must render as absent, never as zero. */
+export interface StatsOut {
+  app_version: string | null;
+  comuni_measured: number | null;
+  records_total: number | null;
+  requirements_verified: number | null;
+  avg_recovery_seconds: number | null;
+  sources_below_full_openness_pct: number | null;
+}
+
+export const stats = () => call<StatsOut>("/api/stats");
+
+/** Per-source health for the header status pill (B14 contract). `reachable`,
+ * `last_ingested` and `records` are all independently nullable: a source
+ * that has never been probed is "unknown", not "down". */
+export interface SourceStatus {
+  codice_istat: string;
+  nome: string;
+  reachable: boolean | null;
+  last_ingested: string | null;
+  records: number | null;
+}
+
+export interface StatusOut {
+  overall: "ok" | "degraded" | "down" | null;
+  sources: SourceStatus[] | null;
+}
+
+export const status = () => call<StatusOut>("/api/status");
+
+/** Result of `GET /api/comune-nearby?lat=&lon=` — nullable: there may be no
+ * supported comune near the citizen's current position. This is a proximity
+ * lookup only; it never asserts residency (see D-09 and the geolocation
+ * copy in `Chat.tsx`). */
+export interface ComuneNearby {
+  codice_istat: string;
+  nome: string;
+  distance_km: number | null;
+}
+
+export const comuneNearby = (lat: number, lon: number) =>
+  call<ComuneNearby | null>(
+    `/api/comune-nearby?lat=${encodeURIComponent(lat)}&lon=${encodeURIComponent(lon)}`,
+  );

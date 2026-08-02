@@ -8,6 +8,7 @@
  */
 
 import Chat from "@/components/Chat";
+import FooterStats from "@/components/FooterStats";
 
 export default function Home() {
   return (
@@ -31,6 +32,7 @@ export default function Home() {
           <a href="/opportunita">Vista esperta delle opportunità</a> ·{" "}
           <a href="/dati">Qualità dei dati dei comuni</a>.
         </p>
+        <FooterStats />
       </footer>
     </div>
   );

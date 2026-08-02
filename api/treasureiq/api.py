@@ -19,7 +19,7 @@ from __future__ import annotations
 import json
 import logging
 import os
-from datetime import date
+from datetime import date, datetime
 from decimal import Decimal
 from functools import lru_cache
 from pathlib import Path
@@ -44,6 +44,15 @@ from treasureiq.match.engine import (
 )
 from treasureiq.readiness import ReadinessReport, score_comune
 from treasureiq.schema import CitizenProfile, Opportunity
+from treasureiq.stats import (
+    APP_VERSION,
+    AppStats,
+    SourceStatus,
+    SystemStatus,
+    build_system_status,
+    compute_app_stats,
+    nearest_comune,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -90,7 +99,7 @@ app = FastAPI(
         "Incrocia gli open data della PA con il profilo del cittadino per "
         "trovare le opportunita' a cui ha davvero accesso."
     ),
-    version="0.1.0",
+    version=APP_VERSION,
 )
 
 # The web client is served from a different origin in development.
@@ -258,6 +267,81 @@ class ReadinessOut(BaseModel):
     dimensions: list[DimensionOut]
 
 
+class StatsOut(BaseModel):
+    """`/api/stats` — the project's own honest headline numbers.
+
+    Every field is computed from ingestion evidence already on disk; a
+    number that was never measured is `null`, not an estimate.
+    """
+
+    app_version: str
+    comuni_measured: int
+    records_total: int
+    requirements_verified: int
+    avg_recovery_seconds: float | None
+    sources_below_full_openness_pct: float | None
+
+
+def to_stats_out(stats: AppStats) -> StatsOut:
+    return StatsOut(
+        app_version=stats.app_version,
+        comuni_measured=stats.comuni_measured,
+        records_total=stats.records_total,
+        requirements_verified=stats.requirements_verified,
+        avg_recovery_seconds=stats.avg_recovery_seconds,
+        sources_below_full_openness_pct=stats.sources_below_full_openness_pct,
+    )
+
+
+class SourceStatusOut(BaseModel):
+    codice_istat: str
+    nome: str
+    reachable: bool | None
+    last_ingested: datetime | None
+    records: int
+
+
+class StatusOut(BaseModel):
+    """`/api/status` — derived from committed seed snapshots, never a live probe."""
+
+    overall: str
+    sources: list[SourceStatusOut]
+
+
+def to_status_out(status: SystemStatus) -> StatusOut:
+    return StatusOut(
+        overall=status.overall,
+        sources=[
+            SourceStatusOut(
+                codice_istat=s.codice_istat,
+                nome=s.nome,
+                reachable=s.reachable,
+                last_ingested=s.last_ingested,
+                records=s.records,
+            )
+            for s in status.sources
+        ],
+    )
+
+
+class ComuneNearbyOut(BaseModel):
+    codice_istat: str
+    nome: str
+
+
+class NearbyOut(BaseModel):
+    """`/api/comune-nearby` — a device location, never a residency claim.
+
+    R-9: geolocation says where a device is right now, not where its owner
+    is resident. `note` exists so this cannot be misread by whoever consumes
+    the response next; nothing downstream should ever treat `comune_nearby`
+    as an attribute of the citizen.
+    """
+
+    comune_nearby: ComuneNearbyOut | None
+    note: str
+
+
 class CostOut(BaseModel):
     """D-17 instrumentation: how closed the comune's own data is.
 
@@ -394,6 +478,51 @@ def readiness(codice_istat: str) -> ReadinessOut:
 @app.get("/api/readiness", response_model=list[ReadinessOut])
 def readiness_all() -> list[ReadinessOut]:
     return [readiness(istat) for istat in COMUNI]
+
+
+@app.get("/api/stats", response_model=StatsOut)
+def stats() -> StatsOut:
+    """Public headline numbers for the landing page — no session required.
+
+    A missing snapshot for one comune must not take the whole endpoint down
+    with a 503 (unlike `load_opportunities`, used by session-scoped routes
+    where a missing seed really is an error): it just contributes zero
+    records to the aggregate, the same way `build_system_status` treats it.
+    """
+    records_by_comune: dict[str, list[Opportunity]] = {}
+    for istat, meta in COMUNI.items():
+        path = SEED_DIR / meta["seed"]
+        if not path.exists():
+            records_by_comune[istat] = []
+            continue
+        raw = json.loads(path.read_text("utf-8"))
+        records_by_comune[istat] = [Opportunity.model_validate(item) for item in raw]
+    return to_stats_out(compute_app_stats(comuni=COMUNI, records_by_comune=records_by_comune))
+
+
+@app.get("/api/status", response_model=StatusOut)
+def status() -> StatusOut:
+    """Public system status — derived from disk, never a live probe (see `stats.py`)."""
+    return to_status_out(build_system_status(comuni=COMUNI, seed_dir=SEED_DIR))
+
+
+@app.get("/api/comune-nearby", response_model=NearbyOut)
+def comune_nearby(lat: float, lon: float) -> NearbyOut:
+    """Resolve a device coordinate to a supported comune.
+
+    R-9: this is location, not residency. See `NearbyOut` and
+    `stats.nearest_comune` — nothing here may be used to assert who the
+    citizen is or where they live.
+    """
+    centroid = nearest_comune(lat=lat, lon=lon)
+    return NearbyOut(
+        comune_nearby=(
+            ComuneNearbyOut(codice_istat=centroid.codice_istat, nome=centroid.nome)
+            if centroid is not None
+            else None
+        ),
+        note="posizione, non residenza",
+    )
 
 
 @app.post("/api/chat", response_model=ChatOut)

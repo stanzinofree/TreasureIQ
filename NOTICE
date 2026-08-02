@@ -1,0 +1,33 @@
+TreasureIQ
+Copyright 2026 Alessandro Middei
+
+This product was created for the SuperAgents Civic Hackathon (Play New, 2026).
+
+Licensed under the Apache License, Version 2.0. See the LICENSE file for the
+full terms, and section 4 of that licence for what you must carry forward if
+you redistribute this work or a modified version of it.
+
+---
+
+Data sources
+
+TreasureIQ ingests data published by Italian public administrations. That data
+belongs to the bodies that publish it and is not covered by this licence:
+
+  Comune di Albano Laziale — service catalogue, retrieved from the Design
+  Comuni Italia WordPress REST API at comune.albanolaziale.rm.it.
+
+Snapshots of that data are committed under data/seed/ so the application can be
+run without network access. They are a point-in-time copy for demonstration and
+may not reflect what the comune currently publishes; the authoritative source
+is always the comune's own page, which every result in the interface links to.
+
+---
+
+Eligibility results
+
+This software reports whether the data a comune published is sufficient to
+establish eligibility. It does not decide entitlement and it is not an official
+channel of any public administration. Where criteria are absent or stated only
+in prose, the interface says so rather than guessing, and directs the reader to
+the comune's published page.

@@ -29,6 +29,13 @@ from fastapi.middleware.cors import CORSMiddleware
 from itsdangerous import BadSignature, URLSafeSerializer
 from pydantic import BaseModel
 
+from treasureiq.chat.respond import (
+    DEFAULT_COMUNE_ISTAT,
+    MAX_MESSAGE_CHARS,
+    ChatAnswer,
+    build_chat_answer,
+    compute_recovery_stats,
+)
 from treasureiq.match.engine import (
     MatchResult,
     Verdict,
@@ -78,11 +85,15 @@ app = FastAPI(
 # The web client is served from a different origin in development.
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=os.environ.get(
-        "TREASUREIQ_CORS_ORIGINS", "http://localhost:3000,http://127.0.0.1:3000"
-    ).split(","),
+    allow_origins=[
+        origin.strip()
+        for origin in os.environ.get(
+            "TREASUREIQ_CORS_ORIGINS", "http://localhost:3000,http://127.0.0.1:3000"
+        ).split(",")
+        if origin.strip()
+    ],
     allow_credentials=True,
-    allow_methods=["GET", "POST"],
+    allow_methods=["GET", "POST", "DELETE"],
     allow_headers=["*"],
 )
 
@@ -236,6 +247,36 @@ class ReadinessOut(BaseModel):
     dimensions: list[DimensionOut]
 
 
+class CostOut(BaseModel):
+    """D-17 instrumentation: how closed the comune's own data is.
+
+    This is the civic metric the project exists to surface — deliberately
+    the only "cost" left in the response (D-18). Our own chat-turn runtime
+    latency is not this project's story and was removed rather than kept
+    alongside it. Any field can be `null`: an unmeasured record is not a
+    zero-cost one.
+    """
+
+    recovery_seconds_total: float | None
+    recovery_seconds_avg_comune: float | None
+    levels: dict[str, int]
+
+
+class ChatIn(BaseModel):
+    message: str
+
+
+class ChatOut(BaseModel):
+    reply: str
+    topic: str
+    data_gap: str | None
+    needs_clarification: bool
+    spid_required: bool
+    spid_reason: str | None
+    matches: list[MatchOut]
+    cost: CostOut
+
+
 def to_readiness_out(report: ReadinessReport) -> ReadinessOut:
     return ReadinessOut(
         ente=report.ente,
@@ -342,3 +383,54 @@ def readiness(codice_istat: str) -> ReadinessOut:
 @app.get("/api/readiness", response_model=list[ReadinessOut])
 def readiness_all() -> list[ReadinessOut]:
     return [readiness(istat) for istat in COMUNI]
+
+
+@app.post("/api/chat", response_model=ChatOut)
+async def chat(body: ChatIn, request: Request) -> ChatOut:
+    """Anonymous-by-default chat over Albano public data.
+
+    The model never decides eligibility here (D-01 in `.kapi/spec.md`): it
+    only classifies the citizen's free text into a closed intent schema
+    (`treasureiq.chat.intent`) and, at the end, rephrases Italian strings
+    `match/engine.py` already produced (`treasureiq.chat.respond`). Every
+    criterion state and verdict in `matches` traces back to the engine
+    untouched. If the model is unavailable, `build_chat_answer` falls back
+    to the deterministic `summarise()` text rather than letting this route
+    fail.
+    """
+    message = body.message.strip()
+    if not message:
+        raise HTTPException(422, "Il messaggio non può essere vuoto.")
+    if len(message) > MAX_MESSAGE_CHARS:
+        raise HTTPException(
+            422,
+            f"Il messaggio è troppo lungo (massimo {MAX_MESSAGE_CHARS} caratteri).",
+        )
+
+    profile = profile_from_cookie(request.cookies.get(SESSION_COOKIE))
+    comune_istat = profile.comune_istat if profile is not None else DEFAULT_COMUNE_ISTAT
+    records = list(load_opportunities(comune_istat))
+
+    answer: ChatAnswer = await build_chat_answer(
+        message=message, profile=profile, records=records
+    )
+
+    stats = compute_recovery_stats(
+        comune_records=records,
+        answer_records=[r.opportunity for r in answer.matches],
+    )
+
+    return ChatOut(
+        reply=answer.reply,
+        topic=answer.topic.value,
+        data_gap=answer.data_gap,
+        needs_clarification=answer.needs_clarification,
+        spid_required=answer.spid_required,
+        spid_reason=answer.spid_reason,
+        matches=[to_match_out(r) for r in answer.matches],
+        cost=CostOut(
+            recovery_seconds_total=stats.seconds_total,
+            recovery_seconds_avg_comune=stats.seconds_avg_comune,
+            levels=stats.levels,
+        ),
+    )

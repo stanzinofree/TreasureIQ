@@ -107,3 +107,55 @@ export const opportunities = (includeIneligible = false) =>
   call<Match[]>(`/api/opportunities?include_ineligible=${includeIneligible}`);
 export const readiness = (istat: string) =>
   call<Readiness>(`/api/readiness/${istat}`);
+
+/** The chat contract (K3) — must stay field-for-field identical to the
+ * `ChatOut` pydantic model in `api/treasureiq/api.py`. `data_gap` carries the
+ * distinction the whole project exists to make: "the comune never published
+ * this" (`not_published`) is not the same failure as "nothing matched"
+ * (`none_found`), and the two must never collapse into one string.
+ */
+export type DataGap = "not_published" | "none_found";
+
+export interface Escalation {
+  needed: boolean;
+  missing_fields: string[];
+  reason: string;
+}
+
+/** Per-level counts of how a criterion's evidence was recovered — a manual
+ * field, one extracted from prose by the quote-gated LLM, or one that stayed
+ * illegible. Counts, so an absent level is `null`, never `0` (D-17: a missing
+ * measurement must never look like a measured zero). */
+export interface CostLevels {
+  L1_manuale: number | null;
+  L2_estratto: number | null;
+  L3_illeggibile: number | null;
+}
+
+/** D-17 — the data-recovery cost behind one answer, added alongside B5. Every
+ * field is independently nullable; render nothing for a null field rather
+ * than a zero or a placeholder. */
+export interface ChatCost {
+  recovery_seconds_total: number | null;
+  recovery_seconds_avg_comune: number | null;
+  levels: CostLevels | null;
+}
+
+export interface ChatOut {
+  reply: string;
+  matches: Match[];
+  data_gap: DataGap | null;
+  escalation: Escalation | null;
+  cost: ChatCost | null;
+}
+
+export interface ChatTurn {
+  role: "user" | "assistant";
+  content: string;
+}
+
+export const chat = (message: string, history: ChatTurn[] = []) =>
+  call<ChatOut>("/api/chat", {
+    method: "POST",
+    body: JSON.stringify({ message, history }),
+  });

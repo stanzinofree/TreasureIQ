@@ -488,3 +488,163 @@ a {
     padding: 0 var(--ma-4) var(--ma-16);
   }
 }
+
+/* ------------------------------------------------------------------ chat */
+
+/* Google-like: a centred column, not a full-bleed layout. The hero and the
+   chat share one measure so the eye doesn't have to re-anchor between the
+   motto and the input. */
+.chat-page {
+  max-width: 640px;
+  margin: 0 auto;
+  padding-top: var(--ma-8);
+}
+
+.chat-hero {
+  text-align: center;
+}
+.chat-hero .lede {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.chat {
+  display: grid;
+  gap: var(--ma-4);
+}
+
+.chat__log {
+  display: grid;
+  gap: var(--ma-4);
+}
+
+.chat__hint {
+  color: var(--sumi-faint);
+  font-size: 0.92rem;
+  text-align: center;
+}
+
+.bubble {
+  border-radius: var(--radius);
+  padding: var(--ma-4) var(--ma-6);
+  max-width: 88%;
+}
+
+.bubble--user {
+  justify-self: end;
+  background: var(--paper-sunken);
+  border: 1px solid var(--kasumi);
+}
+
+.bubble--assistant {
+  justify-self: stretch;
+  max-width: 100%;
+  background: var(--paper-raised);
+  border: 1px solid var(--kasumi);
+  box-shadow: var(--shadow-rest);
+}
+
+.chat__answer {
+  margin-top: var(--ma-4);
+  display: grid;
+  gap: var(--ma-4);
+}
+
+/* The "none found" state is deliberately not amber: amber (`.notice`'s
+   default) already means "the comune's data ran out" (`unknown_source`,
+   `not_published`) elsewhere in this app. Reusing it here would say the
+   comune failed to publish something, when actually nothing matched the
+   question at all — a different failure with a different remedy. */
+.notice--muted {
+  background: var(--paper-sunken);
+  color: var(--sumi-soft);
+  border-left: 4px solid var(--sumi-faint);
+  padding-left: var(--ma-3);
+}
+
+.escalation h3 {
+  margin-bottom: var(--ma-2);
+}
+
+.chat__form {
+  display: grid;
+  gap: var(--ma-2);
+}
+
+.chat__label {
+  /* Visually hidden but present for assistive tech: the placeholder carries
+     the visible hint, the label carries the accessible name. */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.chat__row {
+  display: flex;
+  gap: var(--ma-3);
+}
+
+.chat__input {
+  flex: 1;
+  font: inherit;
+  font-size: 1.05rem;
+  padding: var(--ma-3) var(--ma-4);
+  border: 1.5px solid var(--kasumi);
+  border-radius: var(--radius);
+  background: var(--paper-raised);
+  color: var(--sumi);
+}
+.chat__input:focus-visible {
+  border-color: var(--ai);
+}
+
+.chat-footer {
+  text-align: center;
+  color: var(--sumi-soft);
+  font-size: 0.9rem;
+  padding-top: var(--ma-6);
+  border-top: 1px solid var(--kasumi);
+}
+
+/* D-17 — data-recovery cost strip: a caption, not a panel. Amber/faint only,
+   never `--shu` (reserved for blocking states) — this is a property of the
+   comune's data, not a failure of the current answer. */
+.cost-strip {
+  display: flex;
+  align-items: center;
+  gap: var(--ma-3);
+  font-size: 0.82rem;
+  color: var(--sumi-faint);
+}
+
+.cost-strip__bars {
+  flex: none;
+  display: block;
+}
+
+.cost-strip__text {
+  margin: 0;
+  max-width: none;
+}
+
+.cost-strip__text strong {
+  color: var(--sumi-soft);
+  font-weight: 600;
+}
+
+.cost-strip__levels {
+  font-family: var(--font-mono);
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 640px) {
+  .bubble {
+    max-width: 100%;
+  }
+}

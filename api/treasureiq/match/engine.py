@@ -189,6 +189,13 @@ def _check_residency(
             CriterionState.UNKNOWN_SOURCE,
             "Il bando richiede la residenza ma non specifica in quale comune.",
         )
+    if profile.comune_istat is None:
+        return CriterionResult(
+            "residenza",
+            label,
+            CriterionState.UNKNOWN_PROFILE,
+            "Indica il tuo comune di residenza per verificare questo requisito.",
+        )
     if profile.comune_istat in qualifying:
         return CriterionResult(
             "residenza",
@@ -250,6 +257,13 @@ def _check_age(req: Requirements, profile: CitizenProfile) -> CriterionResult:
     label = "Età"
     if req.eta_min is None and req.eta_max is None:
         return _absent(req, "eta", label, "età")
+    if profile.eta is None:
+        return CriterionResult(
+            "eta",
+            label,
+            CriterionState.UNKNOWN_PROFILE,
+            "Indica la tua età per verificare questo requisito.",
+        )
     if req.eta_min is not None and profile.eta < req.eta_min:
         return CriterionResult(
             "eta",
@@ -273,6 +287,14 @@ def _check_household(req: Requirements, profile: CitizenProfile) -> CriterionRes
     label = "Nucleo familiare"
     if req.nucleo_min is None:
         return _absent(req, "nucleo", label, "nucleo familiare")
+    if profile.nucleo_familiare is None:
+        return CriterionResult(
+            "nucleo",
+            label,
+            CriterionState.UNKNOWN_PROFILE,
+            "Indica quante persone ci sono nel tuo nucleo familiare per verificare "
+            "questo requisito.",
+        )
     if profile.nucleo_familiare < req.nucleo_min:
         return CriterionResult(
             "nucleo",
@@ -290,6 +312,13 @@ def _check_minors(req: Requirements, profile: CitizenProfile) -> CriterionResult
     label = "Figli minori"
     if req.figli_minori_required is None:
         return _absent(req, "figli_minori", label, "figli minori")
+    if profile.figli_minori is None:
+        return CriterionResult(
+            "figli_minori",
+            label,
+            CriterionState.UNKNOWN_PROFILE,
+            "Indica se hai figli minori per verificare questo requisito.",
+        )
     if req.figli_minori_required and profile.figli_minori == 0:
         return CriterionResult(
             "figli_minori",
@@ -306,6 +335,13 @@ def _check_disability(req: Requirements, profile: CitizenProfile) -> CriterionRe
     label = "Disabilità"
     if req.disabilita_required is None:
         return _absent(req, "disabilita", label, "disabilità")
+    if profile.disabilita is None:
+        return CriterionResult(
+            "disabilita",
+            label,
+            CriterionState.UNKNOWN_PROFILE,
+            "Indica se hai una condizione di disabilità per verificare questo requisito.",
+        )
     if req.disabilita_required and not profile.disabilita:
         return CriterionResult(
             "disabilita",

@@ -311,16 +311,20 @@ class CitizenProfile(BaseModel):
         default=None,
         description="Optional even in production: matching never requires it.",
     )
-    comune_istat: str = Field(description="Residency, the primary hard filter.")
-    comune_nome: str
+    comune_istat: str | None = Field(
+        default=None,
+        description="Residency, the primary hard filter. None means 'not yet stated' "
+        "— see matching rules.",
+    )
+    comune_nome: str | None = Field(default=None)
 
-    eta: int = Field(ge=0, le=130)
+    eta: int | None = Field(default=None, ge=0, le=130)
     isee: ISEE | None = Field(
         default=None, description="None means 'not declared' — see matching rules."
     )
-    nucleo_familiare: int = Field(default=1, ge=1)
-    figli_minori: int = Field(default=0, ge=0)
-    disabilita: bool = False
+    nucleo_familiare: int | None = Field(default=None, ge=1)
+    figli_minori: int | None = Field(default=None, ge=0)
+    disabilita: bool | None = None
     employment_status: EmploymentStatus | None = None
 
     interests: list[TargetGroup] = Field(

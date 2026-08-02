@@ -81,14 +81,30 @@ un'allucinazione sicura di sé.
 ## Eseguire il progetto
 
 Lo snapshot dei dati reali e la cache di estrazione sono **committati nel
-repository**: l'applicazione gira interamente senza rete e senza API key.
+repository**, e i font sono ospitati localmente: l'applicazione si costruisce e
+gira interamente senza rete e senza API key.
 
-### Requisiti
+```bash
+git clone https://github.com/stanzinofree/TreasureIQ.git
+cd TreasureIQ
+docker compose up --build
+```
 
-- Python 3.11+
-- Node.js 20+
+Poi apri <http://localhost:3000>.
 
-### API
+L'API è pubblicata su <http://localhost:8010> — non 8000, che su molte macchine
+con OrbStack o Docker Desktop è già occupata, con l'effetto che le richieste
+raggiungono il processo sbagliato e restituiscono 404 in un modo che sembra un
+bug dell'applicazione.
+
+### Eseguire senza Docker
+
+<details>
+<summary>Avvio manuale di API e web</summary>
+
+Requisiti: Python 3.11+, Node.js 20+.
+
+#### API
 
 ```bash
 cd api
@@ -99,7 +115,7 @@ PYTHONPATH=. .venv/bin/python -m uvicorn treasureiq.api:app --host 127.0.0.1 --p
 > La porta è 8010, non 8000: su molte macchine con OrbStack o Docker Desktop la
 > 8000 è già occupata e `localhost:8000` finisce altrove restituendo 404.
 
-### Web
+#### Web
 
 ```bash
 cd web
@@ -108,6 +124,8 @@ npm run dev
 ```
 
 Apri <http://localhost:3000>.
+
+</details>
 
 ### Ingestion (opzionale, richiede rete)
 
@@ -161,6 +179,25 @@ disonesta.
 
 ---
 
+## Come è stato costruito
+
+Il codice di questo progetto è stato scritto con **KAPI**, il mio agente
+digitale, costruito su Claude di Anthropic.
+
+Ha fatto la ricognizione sulle fonti dal vivo invece di fidarsi della
+documentazione, e proprio così ha trovato le cose che contano: che il `rest_base`
+del post type `servizio` è `servizi`, che i comuni limitrofi non espongono
+alcuna API, e che il campo dei requisiti è compilato su un servizio su
+trentadue. Ha scritto i connettori, il motore di eleggibilità e il Data
+Readiness Score, e li ha verificati eseguendoli sui dati reali a ogni passo —
+diversi difetti in questo repository sono stati trovati perché il codice è stato
+messo in esecuzione, non riletto.
+
+Le decisioni di prodotto, la direzione visiva e il taglio dell'argomento verso
+le pubbliche amministrazioni sono mie.
+
+---
+
 ## Licenza
 
 [Apache License 2.0](LICENSE) — vedi anche [NOTICE](NOTICE).
@@ -169,3 +206,5 @@ Apache anziché MIT per una ragione precisa: il progetto chiede a pubbliche
 amministrazioni e a loro fornitori di adottare uno schema e un metodo, e la
 concessione esplicita di brevetto rimuove un'obiezione che una revisione legale
 solleverebbe.
+
+Copyright 2026 Alessandro Middei.

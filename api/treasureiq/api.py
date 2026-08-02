@@ -41,7 +41,12 @@ from treasureiq.schema import CitizenProfile, Opportunity
 logger = logging.getLogger(__name__)
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-SEED_DIR = REPO_ROOT / "data" / "seed"
+
+# In a container the snapshots are mounted rather than copied in, so the path
+# cannot be derived from this file's location. Env var wins; the repo-relative
+# path is the fallback that makes `uvicorn` work straight from a clone.
+DATA_DIR = Path(os.environ.get("TREASUREIQ_DATA_DIR", REPO_ROOT / "data"))
+SEED_DIR = DATA_DIR / "seed"
 SESSION_COOKIE = "treasureiq_session"
 
 # Demo secret. Real deployments must set TREASUREIQ_SECRET; this default exists

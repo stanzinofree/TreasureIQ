@@ -4,8 +4,24 @@
  * so the browser will not attach it cross-origin without this and every
  * authenticated request would silently 401 in development.
  */
-export const API =
-  process.env.NEXT_PUBLIC_TREASUREIQ_API ?? "http://localhost:8010";
+// Two different addresses reach the same API, and which one is correct depends
+// on who is asking.
+//
+//   Browser        → the host-published port (http://localhost:8010).
+//   Server render  → inside compose, "localhost" is the web container itself,
+//                    so server components must use the service name on the
+//                    compose network (http://api:8000).
+//
+// Getting this wrong is invisible in `next dev` on a laptop, where both happen
+// to be the same machine, and only shows up once the app is containerised —
+// which is exactly where a reviewer will run it.
+const isServer = typeof window === "undefined";
+
+export const API = isServer
+  ? process.env.TREASUREIQ_API_INTERNAL ??
+    process.env.NEXT_PUBLIC_TREASUREIQ_API ??
+    "http://localhost:8010"
+  : process.env.NEXT_PUBLIC_TREASUREIQ_API ?? "http://localhost:8010";
 
 export type Verdict = "eligible" | "likely" | "undetermined" | "not_eligible";
 export type CriterionState =

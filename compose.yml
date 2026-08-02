@@ -1,0 +1,51 @@
+# TreasureIQ — clone and run.
+#
+#     docker compose up --build
+#     open http://localhost:3000
+#
+# No API key and no network access to the comune are needed: the snapshots in
+# data/seed/ and the extraction cache in data/extraction-cache/ are committed,
+# which is what makes the demo reproducible for anyone reviewing it.
+
+services:
+  api:
+    build:
+      context: ./api
+    # 8010 rather than 8000: on machines running OrbStack or Docker Desktop the
+    # 8000 port is frequently already bound, and requests to localhost:8000 then
+    # reach the wrong process and 404 in a way that looks like an app bug.
+    ports:
+      - "8010:8000"
+    environment:
+      TREASUREIQ_DATA_DIR: /data
+      TREASUREIQ_CORS_ORIGINS: "http://localhost:3000,http://127.0.0.1:3000"
+      # Signs the demo session cookie. Override in any real deployment — the
+      # default is public in this repository and therefore not a secret.
+      TREASUREIQ_SECRET: ${TREASUREIQ_SECRET:-treasureiq-demo-not-secret}
+      # Optional: only needed to re-run extraction against changed sources.
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+    volumes:
+      # Read-only: the API serves these snapshots and must never rewrite them.
+      # Refreshing them is the ingestion CLI's job, run deliberately.
+      - ./data:/data:ro
+    restart: unless-stopped
+
+  web:
+    build:
+      context: ./web
+      args:
+        # The browser resolves this, not the compose network, so it points at
+        # the host-published port rather than at http://api:8000.
+        NEXT_PUBLIC_TREASUREIQ_API: http://localhost:8010
+    ports:
+      - "3000:3000"
+    environment:
+      # Server-side rendering runs inside this container, where "localhost" is
+      # the web service itself. Server components must reach the API over the
+      # compose network; the browser still uses the published host port baked
+      # into the client bundle at build time.
+      TREASUREIQ_API_INTERNAL: http://api:8000
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped

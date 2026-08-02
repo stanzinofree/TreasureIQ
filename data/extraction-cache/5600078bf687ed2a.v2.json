@@ -1,0 +1,18 @@
+{
+ "isee_max": null,
+ "isee_min": null,
+ "isee_mentioned_without_threshold": false,
+ "eta_min": null,
+ "eta_max": null,
+ "nucleo_min": null,
+ "figli_minori_required": null,
+ "disabilita_required": null,
+ "residenza_required": null,
+ "employment_status": [],
+ "other": [],
+ "quotes": [],
+ "deadline_iso": null,
+ "notes": [
+  "Il testo non fornisce informazioni sui requisiti di accesso specifici per i servizi menzionati."
+ ]
+}

@@ -17,12 +17,20 @@ import logging
 import sys
 from pathlib import Path
 
+from treasureiq.extract.llm import load_extractor
 from treasureiq.ingest.wp_comuni import WPComuniConnector
+from treasureiq.ingest.wp_pages import WPPagesConnector
 from treasureiq.readiness import score_comune
 from treasureiq.schema import Opportunity
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 SEED_DIR = REPO_ROOT / "data" / "seed"
+
+#: D-15 budget knob: how many candidate `pages` the six keyword searches may
+#: surface before the content filter and the LLM extractor ever run. Bounds
+#: total ingestion wall-clock (each extracted page costs ~10-60s depending on
+#: how many PDF attachments it links; see `.kapi/spike-d07.md`).
+PAGES_MAX_CANDIDATES = 15
 
 #: Sources with a committed snapshot. Adding a comune here is the only change
 #: needed to bring it into the demo, provided a connector can read it.
@@ -93,10 +101,44 @@ def run(argv: list[str] | None = None) -> int:
             continue
 
         stats = connector.stats
-        print(f"  letti {stats.records_seen}, normalizzati {stats.records_emitted}")
+        print(f"  servizi: letti {stats.records_seen}, normalizzati {stats.records_emitted}")
         if stats.errors:
-            print(f"  {len(stats.errors)} record scartati")
+            print(f"  servizi: {len(stats.errors)} record scartati")
             exit_code = 1
+
+        # D-03/D-15: bandi/concorsi/volontariato live as prose `pages`, not
+        # typed `servizi`. Ingested by a second connector, quote-gated
+        # through the LLM extractor, then merged below — never abort the
+        # whole comune if this leg fails, the servizi records still stand.
+        try:
+            extractor = load_extractor()
+            with WPPagesConnector(
+                base_url=source["base_url"],
+                ente=source["ente"],
+                codice_istat=source["codice_istat"],
+                extractor=extractor,
+                max_pages=PAGES_MAX_CANDIDATES,
+            ) as pages_connector:
+                page_records = pages_connector.fetch()
+            pages_stats = pages_connector.stats
+            print(
+                f"  pagine: lette {pages_stats.records_seen}, "
+                f"normalizzate {pages_stats.records_emitted}, "
+                f"scartate dal filtro {len(pages_connector.dropped)}"
+            )
+            if pages_stats.errors:
+                print(f"  pagine: {len(pages_stats.errors)} record scartati")
+                exit_code = 1
+            if args.verbose:
+                print(f"  pagine: {extractor.report()}")
+                for line in pages_connector.dropped:
+                    print(f"    scartata: {line}")
+        except Exception as exc:
+            print(f"  pagine non raggiungibili: {exc}", file=sys.stderr)
+            exit_code = 1
+            page_records = []
+
+        records = _merge_pages_into_servizi(records, page_records)
 
         report = score_comune(
             ente=source["ente"],
@@ -133,6 +175,35 @@ def run(argv: list[str] | None = None) -> int:
             print("  dry run: nulla è stato scritto (usa --write per applicare)")
 
     return exit_code
+
+
+def _normalise_source_url(url: str) -> str:
+    """Comparable key for dedup: case and trailing slash must not create a false split."""
+    return str(url).strip().rstrip("/").lower()
+
+
+def _merge_pages_into_servizi(
+    servizi: list[Opportunity], pages: list[Opportunity]
+) -> list[Opportunity]:
+    """One seed per comune: `pages` records that duplicate a `servizio` are dropped.
+
+    Dedup key is the normalised `source.url` (DISCRETION, `.kapi/spec.md`):
+    the same municipal notice can appear as both a typed `servizio` and a
+    prose `page` when its content overlaps both post types. The `servizio`
+    wins because it carries richer typed fields (R-5) — the `page` record,
+    and everything the LLM extracted from it, is discarded in that case.
+    """
+    servizi_urls = {_normalise_source_url(o.source.url) for o in servizi}
+    merged = list(servizi)
+    dropped = 0
+    for page in pages:
+        if _normalise_source_url(page.source.url) in servizi_urls:
+            dropped += 1
+            continue
+        merged.append(page)
+    if dropped:
+        print(f"  pagine: {dropped} scartate come duplicati di un servizio già tipizzato")
+    return merged
 
 
 def _changed_hashes(old: list[dict], new: list[dict]) -> set[str]:

@@ -1,0 +1,46 @@
+{
+ "isee_max": null,
+ "isee_min": null,
+ "isee_mentioned_without_threshold": false,
+ "eta_min": null,
+ "eta_max": null,
+ "nucleo_min": null,
+ "figli_minori_required": false,
+ "disabilita_required": false,
+ "residenza_required": null,
+ "employment_status": [],
+ "other": [
+  "Non possedere un alloggio adeguato alle esigenze del nucleo familiare nel comune di Albano Laziale o nel comune di residenza (se diverso).",
+  "Non possedere diritti su beni patrimoniali il cui valore complessivo non superi 100.000,00 €, calcolato in base a specifiche normative.",
+  "Non aver ricevuto precedenti assegnazioni di alloggi realizzati con contributi pubblici o finanziamenti agevolati, salvo casi specifici.",
+  "Reddito annuo complessivo del nucleo familiare non superiore al limite stabilito dalla Regione Lazio (attualmente non specificato nel testo).",
+  "Non aver ceduto l’alloggio assegnato in precedenza, né aver occupato un alloggio di edilizia residenziale pubblica senza titolo."
+ ],
+ "quotes": [
+  {
+   "field": "other",
+   "text": "non essere titolare, esso stesso né altro componente il proprio nucleo familiare del diritto di proprietà, uso, usufrutto , abitazione su di un alloggio adeguato alle esigenze del nucleo familiare nell’ambito territoriale del Comune cui si riferisce il presente bando di concorso e nel Comune di residenza qualora diverso da quello in cui si svolge l’attività lavorativa"
+  },
+  {
+   "field": "other",
+   "text": "non essere titolare dei diritti di cui alla precedente lettera c) sui beni patrimoniali ubicati in qualsiasi località del territorio nazionale, il cui valore complessivo non superi quello stabilito ai sensi dell’art. 21 del regolamento regionale 20 settembre 2000 n. 2 pari a 100.000,00 €"
+  },
+  {
+   "field": "other",
+   "text": "assenza di precedente assegnazione in locazione ovvero in proprietà originaria o derivata, immediata o futura, di alloggio realizzato con contributi pubblici ed assenza di finanziamento agevolato in qualunque forma, concesso dallo Stato o da altri Enti Pubblici"
+  },
+  {
+   "field": "other",
+   "text": "reddito annuo complessivo del nucleo familiare non superiore al limite per l’accesso all’edilizia residenziale pubblica destinata all’assistenza abitativa stabilito dalla Regione Lazio"
+  },
+  {
+   "field": "other",
+   "text": "non aver ceduto in tutto o in parte, fuori dei casi previsti dalla legge, l’alloggio eventualmente assegnato in precedenza in locazione semplice oppure non aver occupato senza titolo un alloggio di edilizia residenziale pubblica destinata all’assistenza abitativa"
+  }
+ ],
+ "deadline_iso": null,
+ "notes": [
+  "Il limite di reddito stabilito dalla Regione Lazio non è specificato nel testo.",
+  "Il valore del reddito annuo complessivo del nucleo familiare non è indicato nel testo."
+ ]
+}

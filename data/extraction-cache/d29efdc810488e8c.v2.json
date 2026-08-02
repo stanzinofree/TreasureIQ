@@ -1,0 +1,19 @@
+{
+ "isee_max": null,
+ "isee_min": null,
+ "isee_mentioned_without_threshold": false,
+ "eta_min": null,
+ "eta_max": null,
+ "nucleo_min": null,
+ "figli_minori_required": false,
+ "disabilita_required": false,
+ "residenza_required": null,
+ "employment_status": [],
+ "other": [],
+ "quotes": [],
+ "deadline_iso": "2016-01-31",
+ "notes": [
+  "La scadenza per la presentazione degli elaborati è indicata come 'entro il giorno 31/1/2016', ma non è chiaro se si riferisca al 2015 o al 2016. Il testo non specifica con precisione l'anno.",
+  "Il testo non menziona alcun requisito di ISEE, età, residenza, disabilità, numero di componenti del nucleo familiare, presenza di figli minori, stato occupazionale o altre condizioni di accesso."
+ ]
+}

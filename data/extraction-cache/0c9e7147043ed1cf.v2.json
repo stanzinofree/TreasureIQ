@@ -1,0 +1,41 @@
+{
+ "isee_max": null,
+ "isee_min": null,
+ "isee_mentioned_without_threshold": false,
+ "eta_min": null,
+ "eta_max": null,
+ "nucleo_min": null,
+ "figli_minori_required": false,
+ "disabilita_required": false,
+ "residenza_required": null,
+ "employment_status": [],
+ "other": [
+  "I terreni agricoli ubicati nel Comune di Albano Laziale, che nell’elenco ISTAT risulta ubicato ad una altitudine di m 400, sono assoggettati al pagamento dell’IMU nella misura ordinaria del 10.60 per mille.",
+  "Il versamento deve essere effettuato in una unica rata entro il 16.12.2014.",
+  "Terreni agricoli ubicati ad una altitudine compresa fra 281 metri e 600 metri sono esenti solo se posseduti da coltivatori diretti e imprenditori agricoli professionali di cui all’art 1 del DLgs 99/2004 e iscritti nella previdenza agricola.",
+  "Ai fini del calcolo dell’IMU sui terreni agricoli, la base imponibile si calcola come segue: Al reddito dominicale risultante in catasto, rivalutato del 25%, deve essere applicato un moltiplicatore pari a 135 (110 per i coltivatori diretti e gli imprenditori agricoli professionali)."
+ ],
+ "quotes": [
+  {
+   "field": "other",
+   "text": "I terreni agricoli ubicati nel Comune di Albano Laziale, che nell’elenco ISTAT risulta ubicato ad una altitudine di m 400, sono assoggettati al pagamento dell’IMU nella misura ordinaria del 10.60 per mille."
+  },
+  {
+   "field": "other",
+   "text": "Il versamento deve essere effettuato in una unica rata entro il 16.12.2014."
+  },
+  {
+   "field": "other",
+   "text": "Terreni agricoli ubicati ad una altitudine compresa fra 281 metri e 600 metri sono esenti solo se posseduti da coltivatori diretti e imprenditori agricoli professionali di cui all’art 1 del DLgs 99/2004 e iscritti nella previdenza agricola."
+  },
+  {
+   "field": "other",
+   "text": "Ai fini del calcolo dell’IMU sui terreni agricoli, la base imponibile si calcola come segue: Al reddito dominicale risultante in catasto, rivalutato del 25%, deve essere applicato un moltiplicatore pari a 135 (110 per i coltivatori diretti e gli imprenditori agricoli professionali)."
+  }
+ ],
+ "deadline_iso": "2014-12-16",
+ "notes": [
+  "Il testo non specifica se la residenza nel comune è un requisito per l’accesso all’esenzione IMU, quindi non è possibile determinare il valore di 'residenza_required'.",
+  "Non sono presenti informazioni relative all’ISEE, all’età, al numero di componenti del nucleo familiare, alla presenza di figli minori o di disabilità."
+ ]
+}

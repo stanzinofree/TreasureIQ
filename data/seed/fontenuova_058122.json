@@ -35,7 +35,7 @@
    "connector": "wp_rest",
    "url": "https://comune.fontenuova.rm.it/servizio/domanda-di-partecipazione-per-la-concessione-del-contributo-per-il-pagamento-dei-canoni-di-locazione-annualita-2025/",
    "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/4813",
-   "fetched_at": "2026-08-02T20:23:49.623053Z",
+   "fetched_at": "2026-08-02T21:12:12.248683Z",
    "raw_hash": "35868ca16b7e921d"
   },
   "confidence": "extracted",
@@ -87,7 +87,7 @@
    "connector": "wp_rest",
    "url": "https://comune.fontenuova.rm.it/servizio/domanda-finalizzata-alla-formazione-di-una-graduatoria-per-lassegnazione-di-voucher-per-la-fruizione-di-servizi-educativi-per-linfanzia-nellanno-2025/",
    "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/4479",
-   "fetched_at": "2026-08-02T20:23:49.623981Z",
+   "fetched_at": "2026-08-02T21:12:12.249753Z",
    "raw_hash": "5f59969db296598d"
   },
   "confidence": "extracted",
@@ -137,7 +137,7 @@
    "connector": "wp_rest",
    "url": "https://comune.fontenuova.rm.it/servizio/prericonoscimento/",
    "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/3911",
-   "fetched_at": "2026-08-02T20:23:49.625125Z",
+   "fetched_at": "2026-08-02T21:12:12.250865Z",
    "raw_hash": "43d602fa04a91068"
   },
   "confidence": "inferred",
@@ -186,7 +186,7 @@
    "connector": "wp_rest",
    "url": "https://comune.fontenuova.rm.it/servizio/pagamenti-pagopa/",
    "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/3849",
-   "fetched_at": "2026-08-02T20:23:49.625554Z",
+   "fetched_at": "2026-08-02T21:12:12.251346Z",
    "raw_hash": "19cf63c73ceb36b1"
   },
   "confidence": "inferred",
@@ -235,7 +235,7 @@
    "connector": "wp_rest",
    "url": "https://comune.fontenuova.rm.it/servizio/tarip/",
    "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/3797",
-   "fetched_at": "2026-08-02T20:23:49.625901Z",
+   "fetched_at": "2026-08-02T21:12:12.251728Z",
    "raw_hash": "6a2bfdd1b8eddb10"
   },
   "confidence": "inferred",
@@ -284,7 +284,7 @@
    "connector": "wp_rest",
    "url": "https://comune.fontenuova.rm.it/servizio/rilascio-cartelli-di-passo-carrabile/",
    "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2622",
-   "fetched_at": "2026-08-02T20:23:49.626317Z",
+   "fetched_at": "2026-08-02T21:12:12.252170Z",
    "raw_hash": "0478c8f09679bcd4"
   },
   "confidence": "inferred",
@@ -333,7 +333,7 @@
    "connector": "wp_rest",
    "url": "https://comune.fontenuova.rm.it/servizio/richiesta-pubblicazione-di-matrimonio/",
    "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2621",
-   "fetched_at": "2026-08-02T20:23:49.626744Z",
+   "fetched_at": "2026-08-02T21:12:12.252597Z",
    "raw_hash": "6d66bb8d52efffc6"
   },
   "confidence": "inferred",
@@ -384,7 +384,7 @@
    "connector": "wp_rest",
    "url": "https://comune.fontenuova.rm.it/servizio/richiedere-agevolazioni-scolastiche/",
    "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2620",
-   "fetched_at": "2026-08-02T20:23:49.627024Z",
+   "fetched_at": "2026-08-02T21:12:12.252858Z",
    "raw_hash": "e6ca6bbe57ad70b5"
   },
   "confidence": "extracted",
@@ -434,7 +434,7 @@
    "connector": "wp_rest",
    "url": "https://comune.fontenuova.rm.it/servizio/iscrizione-albo-presidenti-di-seggio/",
    "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2619",
-   "fetched_at": "2026-08-02T20:23:49.627754Z",
+   "fetched_at": "2026-08-02T21:12:12.253544Z",
    "raw_hash": "774a675391832b78"
   },
   "confidence": "inferred",
@@ -483,7 +483,7 @@
    "connector": "wp_rest",
    "url": "https://comune.fontenuova.rm.it/servizio/rilascio-rinnovo-aggiornamento-e-duplicato-della-tessera-elettorale/",
    "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2618",
-   "fetched_at": "2026-08-02T20:23:49.628249Z",
+   "fetched_at": "2026-08-02T21:12:12.254049Z",
    "raw_hash": "48ce62a37d6afcd3"
   },
   "confidence": "inferred",
@@ -532,7 +532,7 @@
    "connector": "wp_rest",
    "url": "https://comune.fontenuova.rm.it/servizio/richiesta-copia-integrale-atto-di-nascita/",
    "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2617",
-   "fetched_at": "2026-08-02T20:23:49.629121Z",
+   "fetched_at": "2026-08-02T21:12:12.254911Z",
    "raw_hash": "8f328ccc7c2338f0"
   },
   "confidence": "inferred",
@@ -581,7 +581,7 @@
    "connector": "wp_rest",
    "url": "https://comune.fontenuova.rm.it/servizio/iscrizione-albo-scrutatori/",
    "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2616",
-   "fetched_at": "2026-08-02T20:23:49.629570Z",
+   "fetched_at": "2026-08-02T21:12:12.255369Z",
    "raw_hash": "471e12e651f77d4b"
   },
   "confidence": "inferred",
@@ -630,7 +630,7 @@
    "connector": "wp_rest",
    "url": "https://comune.fontenuova.rm.it/servizio/richiesta-accesso-agli-atti/",
    "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2615",
-   "fetched_at": "2026-08-02T20:23:49.630290Z",
+   "fetched_at": "2026-08-02T21:12:12.256079Z",
    "raw_hash": "7aa1063bad2e7a95"
   },
   "confidence": "inferred",
@@ -679,7 +679,7 @@
    "connector": "wp_rest",
    "url": "https://comune.fontenuova.rm.it/servizio/richiesta-accesso-agli-atti-in-materia-edilizia-per-un-edificio/",
    "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2614",
-   "fetched_at": "2026-08-02T20:23:49.630888Z",
+   "fetched_at": "2026-08-02T21:12:12.256581Z",
    "raw_hash": "36d7ecfd05f4d297"
   },
   "confidence": "inferred",
@@ -730,7 +730,7 @@
    "connector": "wp_rest",
    "url": "https://comune.fontenuova.rm.it/servizio/domanda-per-bonus-economici/",
    "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2613",
-   "fetched_at": "2026-08-02T20:23:49.631875Z",
+   "fetched_at": "2026-08-02T21:12:12.257541Z",
    "raw_hash": "0f1028514bde923d"
   },
   "confidence": "extracted",
@@ -782,7 +782,7 @@
    "connector": "wp_rest",
    "url": "https://comune.fontenuova.rm.it/servizio/iscrizione-trasporto-scolastico/",
    "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2612",
-   "fetched_at": "2026-08-02T20:23:49.632449Z",
+   "fetched_at": "2026-08-02T21:12:12.258224Z",
    "raw_hash": "f4f7d3fbb405ed18"
   },
   "confidence": "extracted",
@@ -834,7 +834,7 @@
    "connector": "wp_rest",
    "url": "https://comune.fontenuova.rm.it/servizio/iscrizione-alla-mensa-scolastica/",
    "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2609",
-   "fetched_at": "2026-08-02T20:23:49.633041Z",
+   "fetched_at": "2026-08-02T21:12:12.258804Z",
    "raw_hash": "db3d1f120f175622"
   },
   "confidence": "extracted",
@@ -886,7 +886,7 @@
    "connector": "wp_rest",
    "url": "https://comune.fontenuova.rm.it/servizio/iscrizione-alla-scuola-dellinfanzia/",
    "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2606",
-   "fetched_at": "2026-08-02T20:23:49.633683Z",
+   "fetched_at": "2026-08-02T21:12:12.259440Z",
    "raw_hash": "43f0a9445f795410"
   },
   "confidence": "extracted",
@@ -936,7 +936,7 @@
    "connector": "wp_rest",
    "url": "https://comune.fontenuova.rm.it/servizio/richiesta-certificato-di-morte/",
    "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2603",
-   "fetched_at": "2026-08-02T20:23:49.634384Z",
+   "fetched_at": "2026-08-02T21:12:12.260141Z",
    "raw_hash": "98dec7f6ccd51409"
   },
   "confidence": "inferred",
@@ -985,7 +985,7 @@
    "connector": "wp_rest",
    "url": "https://comune.fontenuova.rm.it/servizio/richiesta-copia-integrale-atto-di-morte/",
    "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2602",
-   "fetched_at": "2026-08-02T20:23:49.634892Z",
+   "fetched_at": "2026-08-02T21:12:12.260645Z",
    "raw_hash": "0a9e3d3ced665f7b"
   },
   "confidence": "inferred",
@@ -1034,7 +1034,7 @@
    "connector": "wp_rest",
    "url": "https://comune.fontenuova.rm.it/servizio/richiesta-estratto-di-morte/",
    "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2601",
-   "fetched_at": "2026-08-02T20:23:49.635581Z",
+   "fetched_at": "2026-08-02T21:12:12.261327Z",
    "raw_hash": "b3d74a21b44f329b"
   },
   "confidence": "inferred",
@@ -1083,7 +1083,7 @@
    "connector": "wp_rest",
    "url": "https://comune.fontenuova.rm.it/servizio/richiesta-certificato-di-nascita/",
    "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2600",
-   "fetched_at": "2026-08-02T20:23:49.636059Z",
+   "fetched_at": "2026-08-02T21:12:12.261786Z",
    "raw_hash": "6d2de6bb9927fd9e"
   },
   "confidence": "inferred",
@@ -1132,7 +1132,7 @@
    "connector": "wp_rest",
    "url": "https://comune.fontenuova.rm.it/servizio/richiesta-estratto-di-nascita/",
    "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2599",
-   "fetched_at": "2026-08-02T20:23:49.636763Z",
+   "fetched_at": "2026-08-02T21:12:12.262503Z",
    "raw_hash": "95e0df320b872709"
   },
   "confidence": "inferred",
@@ -1181,7 +1181,7 @@
    "connector": "wp_rest",
    "url": "https://comune.fontenuova.rm.it/servizio/richiesta-certificato-di-matrimonio/",
    "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2598",
-   "fetched_at": "2026-08-02T20:23:49.637298Z",
+   "fetched_at": "2026-08-02T21:12:12.263042Z",
    "raw_hash": "fa9d26027b4e958b"
   },
   "confidence": "inferred",
@@ -1230,7 +1230,7 @@
    "connector": "wp_rest",
    "url": "https://comune.fontenuova.rm.it/servizio/richiesta-copia-integrale-atto-di-matrimonio/",
    "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2597",
-   "fetched_at": "2026-08-02T20:23:49.637561Z",
+   "fetched_at": "2026-08-02T21:12:12.263343Z",
    "raw_hash": "ed3366fb1daf1bb1"
   },
   "confidence": "inferred",
@@ -1279,7 +1279,7 @@
    "connector": "wp_rest",
    "url": "https://comune.fontenuova.rm.it/servizio/richiesta-estratto-di-matrimonio/",
    "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2596",
-   "fetched_at": "2026-08-02T20:23:49.637874Z",
+   "fetched_at": "2026-08-02T21:12:12.263683Z",
    "raw_hash": "e5158535f0e432bd"
   },
   "confidence": "inferred",
@@ -1328,7 +1328,7 @@
    "connector": "wp_rest",
    "url": "https://comune.fontenuova.rm.it/servizio/iscrizione-anagrafica-per-cittadini-europei/",
    "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2595",
-   "fetched_at": "2026-08-02T20:23:49.638850Z",
+   "fetched_at": "2026-08-02T21:12:12.264704Z",
    "raw_hash": "ceb66dc7597d102d"
   },
   "confidence": "inferred",
@@ -1377,7 +1377,7 @@
    "connector": "wp_rest",
    "url": "https://comune.fontenuova.rm.it/servizio/cambio-di-residenza/",
    "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2594",
-   "fetched_at": "2026-08-02T20:23:49.639118Z",
+   "fetched_at": "2026-08-02T21:12:12.264968Z",
    "raw_hash": "2281c55d78a94e52"
   },
   "confidence": "inferred",
@@ -1426,7 +1426,7 @@
    "connector": "wp_rest",
    "url": "https://comune.fontenuova.rm.it/servizio/certificato-di-nascita-per-cittadini-europei/",
    "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2593",
-   "fetched_at": "2026-08-02T20:23:49.639300Z",
+   "fetched_at": "2026-08-02T21:12:12.265159Z",
    "raw_hash": "d73f6219de0454b0"
   },
   "confidence": "inferred",
@@ -1475,7 +1475,7 @@
    "connector": "wp_rest",
    "url": "https://comune.fontenuova.rm.it/servizio/sportello-unico-attivita-produttive-suap/",
    "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2592",
-   "fetched_at": "2026-08-02T20:23:49.639595Z",
+   "fetched_at": "2026-08-02T21:12:12.265439Z",
    "raw_hash": "a0eaf9e532b76a52"
   },
   "confidence": "inferred",
@@ -1524,7 +1524,7 @@
    "connector": "wp_rest",
    "url": "https://comune.fontenuova.rm.it/servizio/certificati-anagrafici/",
    "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2591",
-   "fetched_at": "2026-08-02T20:23:49.639844Z",
+   "fetched_at": "2026-08-02T21:12:12.265678Z",
    "raw_hash": "1244964bf304be16"
   },
   "confidence": "inferred",
@@ -1573,7 +1573,7 @@
    "connector": "wp_rest",
    "url": "https://comune.fontenuova.rm.it/servizio/imu-imposta-municipale-propria/",
    "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2590",
-   "fetched_at": "2026-08-02T20:23:49.640468Z",
+   "fetched_at": "2026-08-02T21:12:12.266289Z",
    "raw_hash": "189c46144eef9431"
   },
   "confidence": "inferred",
@@ -1622,7 +1622,7 @@
    "connector": "wp_rest",
    "url": "https://comune.fontenuova.rm.it/servizio/carta-di-identita-elettronica/",
    "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2589",
-   "fetched_at": "2026-08-02T20:23:49.641160Z",
+   "fetched_at": "2026-08-02T21:12:12.266994Z",
    "raw_hash": "cff7e52b018a89bd"
   },
   "confidence": "inferred",
@@ -1671,7 +1671,7 @@
    "connector": "wp_rest",
    "url": "https://comune.fontenuova.rm.it/servizio/rilascio-del-contrassegno-per-veicoli-a-servizio-dei-disabili/",
    "api_url": "https://comune.fontenuova.rm.it/wp-json/wp/v2/servizi/2588",
-   "fetched_at": "2026-08-02T20:23:49.641829Z",
+   "fetched_at": "2026-08-02T21:12:12.267834Z",
    "raw_hash": "b77816674cb491e0"
   },
   "confidence": "inferred",

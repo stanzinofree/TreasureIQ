@@ -43,7 +43,7 @@ import time
 from datetime import date, datetime
 from typing import Any
 
-from treasureiq.extract.llm import RequirementsExtractor, Segment, attribute_quote
+from treasureiq.extract.llm import RequirementsExtractor, Segment
 from treasureiq.ingest.base import Connector
 from treasureiq.ingest.wp_comuni import guess_kind, strip_html
 from treasureiq.schema import (
@@ -347,12 +347,15 @@ class WPPagesConnector(Connector):
             chars_processed = len(corpus)
             raw_hash = self.hash_payload(record)
             outcome = self._extractor.extract(
-                text=corpus, title=title, raw_hash=raw_hash
+                text=corpus,
+                title=title,
+                raw_hash=raw_hash,
+                visible_segments=visible_segments,
+                full_segments=boundary_segments,
             )
             if outcome is not None:
                 requirements, extraction_notes, confidence = outcome
                 notes.extend(extraction_notes)
-                notes.extend(self._attribute_quotes(raw_hash, visible_segments))
                 requirements_recovered = _count_recovered_fields(requirements)
             else:
                 notes.append(
@@ -540,58 +543,3 @@ class WPPagesConnector(Connector):
             segments.append({"kind": "allegato", "url": absolute_url, "pages": pages_text})
 
         return segments, notes, skipped, illegible_count
-
-    def _attribute_quotes(
-        self, raw_hash: str, segments: list[Segment]
-    ) -> list[str]:
-        """Cite each accepted quote back to the page or the PDF it came from.
-
-        D-05 applied at the attachment level: a quote drawn from an
-        attachment must cite the attachment (URL, and page number when
-        `pypdf` provides one), never be flattened onto the page URL. Reads
-        the raw model output back from the extractor's on-disk cache (the
-        same technique `extract/spike.py` uses for gate inspection) because
-        `RequirementsExtractor.extract()` only returns the post-gate
-        `Requirements`, not the quotes that justified them.
-
-        Matching (`extract.llm.attribute_quote`) is normalised — whitespace,
-        quote/apostrophe style, accents and case do not count as a mismatch —
-        with a high-confidence fuzzy fallback for paraphrase/OCR noise.
-        `segments` must already be sliced to what the model actually saw (see
-        `_normalise`'s `visible_segments`), so a quote can never be attributed
-        to text truncated out of the corpus by `MAX_CORPUS_CHARS`. When no
-        segment clears the bar, the quote is reported unattributed rather
-        than guessed — D-05's invariant applied to provenance, not just
-        existence.
-        """
-        if self._extractor is None:
-            return []
-        raw = self._extractor.cache.get(raw_hash)
-        if raw is None:
-            return []
-
-        notes: list[str] = []
-        for quote in raw.quotes:
-            match = attribute_quote(quote.text, segments) if quote.text else None
-            if match is not None:
-                if match.kind == "allegato":
-                    source_note = (
-                        f"Fonte per '{quote.field}': allegato {match.url}"
-                        + (f", pagina {match.page_number}" if match.page_number else "")
-                        + f' — "{quote.text}"'
-                    )
-                else:
-                    source_note = (
-                        f"Fonte per '{quote.field}': pagina web {match.url}"
-                        f' — "{quote.text}"'
-                    )
-            else:
-                # Should be rare under D-05 (quotes are meant to be verbatim),
-                # but a paraphrase, OCR noise or truncation could still defeat
-                # matching — log it rather than guess a source.
-                source_note = (
-                    f"Fonte per '{quote.field}' non identificata con precisione "
-                    f'nel corpus assemblato — "{quote.text}"'
-                )
-            notes.append(source_note)
-        return notes

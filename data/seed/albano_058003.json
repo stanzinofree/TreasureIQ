@@ -33,7 +33,7 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/voucher-estate-2026-per-minori/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/23188",
-   "fetched_at": "2026-08-02T20:48:10.150480Z",
+   "fetched_at": "2026-08-02T21:13:58.026617Z",
    "raw_hash": "8fd27f0a53986dac"
   },
   "confidence": "extracted",
@@ -82,7 +82,7 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/permesso-rosa/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/21109",
-   "fetched_at": "2026-08-02T20:48:10.152009Z",
+   "fetched_at": "2026-08-02T21:13:58.028236Z",
    "raw_hash": "b313eafdce34528c"
   },
   "confidence": "inferred",
@@ -133,7 +133,7 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/erogazione-contributi-libri-di-testo-o-sussidi-didattici-digitali/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/15549",
-   "fetched_at": "2026-08-02T20:48:10.152602Z",
+   "fetched_at": "2026-08-02T21:13:58.029047Z",
    "raw_hash": "fd246704ae7aa854"
   },
   "confidence": "extracted",
@@ -183,7 +183,7 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/trasporto-scolastico-alunni-con-disabilita-frequentanti-le-scuole-del-ii-ciclo-superiori/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/21610",
-   "fetched_at": "2026-08-02T20:48:10.153185Z",
+   "fetched_at": "2026-08-02T21:13:58.029876Z",
    "raw_hash": "3a80b33d4ca5de21"
   },
   "confidence": "extracted",
@@ -234,7 +234,7 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/servizio-di-trasporto-scolastico/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/17575",
-   "fetched_at": "2026-08-02T20:48:10.153767Z",
+   "fetched_at": "2026-08-02T21:13:58.030632Z",
    "raw_hash": "1021ecbda05bf75f"
   },
   "confidence": "extracted",
@@ -284,7 +284,7 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/voucher-di-conciliazione-vita-lavoro-rimborso-spese-2025/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/20631",
-   "fetched_at": "2026-08-02T20:48:10.154233Z",
+   "fetched_at": "2026-08-02T21:13:58.030933Z",
    "raw_hash": "aeae28c85c754d07"
   },
   "confidence": "extracted",
@@ -335,7 +335,7 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/voucher-contributi-economici-per-il-rimborsi-del-pagamento-delle-rette-degli-asili-nido-privati-in-favore-dei-minori-residenti-nel-comune-di-albano-laziale/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/17206",
-   "fetched_at": "2026-08-02T20:48:10.155082Z",
+   "fetched_at": "2026-08-02T21:13:58.031443Z",
    "raw_hash": "da0911fe0af13fc0"
   },
   "confidence": "extracted",
@@ -385,7 +385,7 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/separazioni-e-divorzi-in-comune/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/19120",
-   "fetched_at": "2026-08-02T20:48:10.155513Z",
+   "fetched_at": "2026-08-02T21:13:58.031693Z",
    "raw_hash": "168dd3432838c8ad"
   },
   "confidence": "inferred",
@@ -434,7 +434,7 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/assistenza-di-un-operatore-educativo-per-lautonomia-oepac-ex-aec/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/18277",
-   "fetched_at": "2026-08-02T20:48:10.155819Z",
+   "fetched_at": "2026-08-02T21:13:58.031892Z",
    "raw_hash": "9c60f19be356103d"
   },
   "confidence": "extracted",
@@ -483,7 +483,7 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/servizio-di-illuminazione-votiva/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/17940",
-   "fetched_at": "2026-08-02T20:48:10.156074Z",
+   "fetched_at": "2026-08-02T21:13:58.032050Z",
    "raw_hash": "4897b09a0acc82f7"
   },
   "confidence": "inferred",
@@ -532,7 +532,7 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/iscrizione-anagrafe-della-popolazione-residente/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/18066",
-   "fetched_at": "2026-08-02T20:48:10.156404Z",
+   "fetched_at": "2026-08-02T21:13:58.032246Z",
    "raw_hash": "a0ce8b442bbd075d"
   },
   "confidence": "inferred",
@@ -583,7 +583,7 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/compartecipazione-rsa/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/18065",
-   "fetched_at": "2026-08-02T20:48:10.156753Z",
+   "fetched_at": "2026-08-02T21:13:58.032459Z",
    "raw_hash": "d0c03e588b8d9a8a"
   },
   "confidence": "extracted",
@@ -633,7 +633,7 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/richiesta-occupazione-suolo-pubblico/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/18064",
-   "fetched_at": "2026-08-02T20:48:10.156924Z",
+   "fetched_at": "2026-08-02T21:13:58.032564Z",
    "raw_hash": "f350f84433703d2b"
   },
   "confidence": "inferred",
@@ -682,7 +682,7 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/richiesta-accesso-agli-atti-documentale/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/18063",
-   "fetched_at": "2026-08-02T20:48:10.157137Z",
+   "fetched_at": "2026-08-02T21:13:58.032697Z",
    "raw_hash": "9441e34f3fbcf76f"
   },
   "confidence": "inferred",
@@ -731,7 +731,7 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/luci-votive/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/17814",
-   "fetched_at": "2026-08-02T20:48:10.157418Z",
+   "fetched_at": "2026-08-02T21:13:58.032867Z",
    "raw_hash": "baa9afdebbb64f99"
   },
   "confidence": "inferred",
@@ -782,7 +782,7 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/contributo-integrativo-per-il-pagamento-dei-canoni-di-locazione/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/17644",
-   "fetched_at": "2026-08-02T20:48:10.157796Z",
+   "fetched_at": "2026-08-02T21:13:58.033097Z",
    "raw_hash": "32de2ea3e1d75b4c"
   },
   "confidence": "extracted",
@@ -834,7 +834,7 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/servizio-mensa-scolastica/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/17573",
-   "fetched_at": "2026-08-02T20:48:10.158394Z",
+   "fetched_at": "2026-08-02T21:13:58.033471Z",
    "raw_hash": "93795f5dd224f2eb"
   },
   "confidence": "extracted",
@@ -886,7 +886,7 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/borse-di-studio-iostudio/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/17574",
-   "fetched_at": "2026-08-02T20:48:10.159074Z",
+   "fetched_at": "2026-08-02T21:13:58.034326Z",
    "raw_hash": "e2afc44320904577"
   },
   "confidence": "extracted",
@@ -936,7 +936,7 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/richiesta-di-rilascio-contrassegno-disabili/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/16092",
-   "fetched_at": "2026-08-02T20:48:10.159381Z",
+   "fetched_at": "2026-08-02T21:13:58.034712Z",
    "raw_hash": "c8f743d5aacb2974"
   },
   "confidence": "inferred",
@@ -985,7 +985,7 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/centri-di-facilitazione-digitale/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/16003",
-   "fetched_at": "2026-08-02T20:48:10.159656Z",
+   "fetched_at": "2026-08-02T21:13:58.035055Z",
    "raw_hash": "dad1e400d28c19e7"
   },
   "confidence": "inferred",
@@ -1034,7 +1034,7 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/carta-identita/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/15861",
-   "fetched_at": "2026-08-02T20:48:10.160067Z",
+   "fetched_at": "2026-08-02T21:13:58.035581Z",
    "raw_hash": "eccd60ff40e18627"
   },
   "confidence": "inferred",
@@ -1083,7 +1083,7 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/servizio-raccolta-pannolini-pannoloni/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/15626",
-   "fetched_at": "2026-08-02T20:48:10.160299Z",
+   "fetched_at": "2026-08-02T21:13:58.035883Z",
    "raw_hash": "303f7c707b72051c"
   },
   "confidence": "inferred",
@@ -1132,7 +1132,7 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/interventi-per-la-valorizzazione-del-ruolo-di-cura-e-di-assistenza-del-caregiver-familiare/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/15606",
-   "fetched_at": "2026-08-02T20:48:10.160429Z",
+   "fetched_at": "2026-08-02T21:13:58.036060Z",
    "raw_hash": "af7bd94bdd5eb1b0"
   },
   "confidence": "inferred",
@@ -1183,7 +1183,7 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/assistenza-domiciliare-diretta-o-indiretta-in-favore-di-persone-affette-da-patologia-di-alzheimer/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/15593",
-   "fetched_at": "2026-08-02T20:48:10.160788Z",
+   "fetched_at": "2026-08-02T21:13:58.036461Z",
    "raw_hash": "e5fbc73b86d55a8c"
   },
   "confidence": "extracted",
@@ -1233,7 +1233,7 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/iscrizione-anagrafica-per-cittadini-europei/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/14294",
-   "fetched_at": "2026-08-02T20:48:10.161845Z",
+   "fetched_at": "2026-08-02T21:13:58.037523Z",
    "raw_hash": "9dbf49b18fa05e3b"
   },
   "confidence": "inferred",
@@ -1282,7 +1282,7 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/certificato-di-nascita-per-cittadini-europei/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/14293",
-   "fetched_at": "2026-08-02T20:48:10.162019Z",
+   "fetched_at": "2026-08-02T21:13:58.037704Z",
    "raw_hash": "b5f302c3711f121c"
   },
   "confidence": "inferred",
@@ -1331,7 +1331,7 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/certificati-anagrafici/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/14273",
-   "fetched_at": "2026-08-02T20:48:10.162214Z",
+   "fetched_at": "2026-08-02T21:13:58.037904Z",
    "raw_hash": "cae6fadf6f10e66f"
   },
   "confidence": "inferred",
@@ -1380,7 +1380,7 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/s-u-a-p/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/14255",
-   "fetched_at": "2026-08-02T20:48:10.162484Z",
+   "fetched_at": "2026-08-02T21:13:58.038174Z",
    "raw_hash": "f801cf4fffdde672"
   },
   "confidence": "inferred",
@@ -1429,7 +1429,7 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/richiesta-assegno-di-maternita/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/9136",
-   "fetched_at": "2026-08-02T20:48:10.162749Z",
+   "fetched_at": "2026-08-02T21:13:58.038439Z",
    "raw_hash": "f23a327de73ea761"
   },
   "confidence": "inferred",
@@ -1478,7 +1478,7 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/richiesta-pubblicazione-di-matrimonio/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/9135",
-   "fetched_at": "2026-08-02T20:48:10.163097Z",
+   "fetched_at": "2026-08-02T21:13:58.038811Z",
    "raw_hash": "c0223ea80e6646ef"
   },
   "confidence": "declared",
@@ -1525,7 +1525,7 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/progetto-hermes-percorsi-di-inclusione-sociale-annualita-2025-2026/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/9137",
-   "fetched_at": "2026-08-02T20:48:10.163330Z",
+   "fetched_at": "2026-08-02T21:13:58.039022Z",
    "raw_hash": "9523f8d983bee811"
   },
   "confidence": "inferred",
@@ -1574,7 +1574,7 @@
    "connector": "wp_rest",
    "url": "https://comune.albanolaziale.rm.it/servizio/adotta-unarea-verde/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/15670",
-   "fetched_at": "2026-08-02T20:48:10.163451Z",
+   "fetched_at": "2026-08-02T21:13:58.039132Z",
    "raw_hash": "0f5e7661118e07f0"
   },
   "confidence": "inferred",
@@ -1623,7 +1623,7 @@
    "connector": "wp_pages",
    "url": "https://comune.albanolaziale.rm.it/aree-tematiche/servizi-demografici/statistiche/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/pages/14130",
-   "fetched_at": "2026-08-02T20:48:12.379596Z",
+   "fetched_at": "2026-08-02T21:14:00.242384Z",
    "raw_hash": "13c204042ed2ae1f"
   },
   "confidence": "extracted",
@@ -1643,7 +1643,7 @@
    }
   ],
   "chars_processed": 2607,
-  "extraction_seconds": 0.7788431670051068,
+  "extraction_seconds": 0.6898657910060138,
   "requirements_recovered": 0
  },
  {
@@ -1680,7 +1680,7 @@
    "connector": "wp_pages",
    "url": "https://comune.albanolaziale.rm.it/aree-tematiche/servizi-sociali/area-assistenza-e-integrazione/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/pages/12698",
-   "fetched_at": "2026-08-02T20:48:12.381525Z",
+   "fetched_at": "2026-08-02T21:14:00.243438Z",
    "raw_hash": "5600078bf687ed2a"
   },
   "confidence": "extracted",
@@ -1692,7 +1692,7 @@
   "pdfs_opened": 0,
   "pdfs_skipped": [],
   "chars_processed": 3122,
-  "extraction_seconds": 0.0013257910031825304,
+  "extraction_seconds": 0.00023604201851412654,
   "requirements_recovered": 0
  },
  {
@@ -1729,7 +1729,7 @@
    "connector": "wp_pages",
    "url": "https://comune.albanolaziale.rm.it/aree-tematiche/scuola-e-istruzione/progetti-per-la-scuola/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/pages/12516",
-   "fetched_at": "2026-08-02T20:48:14.218633Z",
+   "fetched_at": "2026-08-02T21:14:01.668793Z",
    "raw_hash": "d29efdc810488e8c"
   },
   "confidence": "extracted",
@@ -1760,7 +1760,7 @@
    }
   ],
   "chars_processed": 12000,
-  "extraction_seconds": 1.8368701669969596,
+  "extraction_seconds": 1.4250771250226535,
   "requirements_recovered": 0
  },
  {
@@ -1785,11 +1785,6 @@
    "disabilita_required": null,
    "employment_status": [],
    "other": [
-    "Per tutti i soggetti che hanno esigenze alimentari particolari, transitorie o permanenti, e necessitano quindi di un pasto scolastico speciale",
-    "Compilare con scrittura chiara e leggibile il modulo richiesta di pasto speciale, indicando scuola, classe e sezione",
-    "Solo se la richiesta di pasto speciale deriva da comprovati motivi di salute (allergie, intolleranze, patologie cliniche ecc) è necessario fornire il certificato medico debitamente timbrato e firmato dal proprio medico curante o analogo specialista",
-    "Per motivazioni di natura etico-religiosa sarà sufficiente compilare solo il modulo richiesta di pasto speciale",
-    "Inviare la documentazione per mail a scuolealbano@bioristoroitalia.it e ufficiodietetico@bioristoroitalia.it",
     "Inviare la documentazione completa via FAX al numero 06/96.40.169",
     "Inviare la documentazione attraverso il portale utente RistoCloud"
    ],
@@ -1805,7 +1800,7 @@
    "connector": "wp_pages",
    "url": "https://comune.albanolaziale.rm.it/aree-tematiche/scuola-e-istruzione/servizio-mensa/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/pages/12468",
-   "fetched_at": "2026-08-02T20:48:17.430315Z",
+   "fetched_at": "2026-08-02T21:14:05.478575Z",
    "raw_hash": "99877e272abad85a"
   },
   "confidence": "extracted",
@@ -1821,11 +1816,11 @@
    "Non è indicata alcuna soglia ISEE, né altre condizioni di accesso come età, residenza, numero di componenti del nucleo familiare, presenza di figli minorenni o disabilità",
    "Valore per 'figli_minori_required' scartato: il modello non ha saputo indicare la frase di origine nel testo.",
    "Valore per 'disabilita_required' scartato: il modello non ha saputo indicare la frase di origine nel testo.",
-   "Fonte per 'other' non identificata con precisione nel corpus assemblato — \"Per tutti i soggetti che hanno esigenze alimentari particolari, transitorie o permanenti, e necessitano quindi di un pasto scolastico speciale\"",
-   "Fonte per 'other' non identificata con precisione nel corpus assemblato — \"Compilare con scrittura chiara e leggibile il modulo richiesta di pasto speciale, indicando scuola, classe e sezione\"",
-   "Fonte per 'other' non identificata con precisione nel corpus assemblato — \"Solo se la richiesta di pasto speciale deriva da comprovati motivi di salute (allergie, intolleranze, patologie cliniche ecc) è necessario fornire il certificato medico debitamente timbrato e firmato dal proprio medico curante o analogo specialista\"",
-   "Fonte per 'other' non identificata con precisione nel corpus assemblato — \"Per motivazioni di natura etico-religiosa sarà sufficiente compilare solo il modulo richiesta di pasto speciale\"",
-   "Fonte per 'other' non identificata con precisione nel corpus assemblato — \"Inviare la documentazione per mail a scuolealbano@bioristoroitalia.it e ufficiodietetico@bioristoroitalia.it\"",
+   "Valore per 'other' scartato: la citazione dichiarata dal modello non è stata trovata nel testo che gli è stato mostrato — probabile invenzione: \"Per tutti i soggetti che hanno esigenze alimentari particolari, transitorie o permanenti, e necessitano quindi di un pasto scolastico speciale\"",
+   "Valore per 'other' scartato: la citazione dichiarata dal modello non è stata trovata nel testo che gli è stato mostrato — probabile invenzione: \"Compilare con scrittura chiara e leggibile il modulo richiesta di pasto speciale, indicando scuola, classe e sezione\"",
+   "Valore per 'other' scartato: la citazione dichiarata dal modello non è stata trovata nel testo che gli è stato mostrato — probabile invenzione: \"Solo se la richiesta di pasto speciale deriva da comprovati motivi di salute (allergie, intolleranze, patologie cliniche ecc) è necessario fornire il certificato medico debitamente timbrato e firmato dal proprio medico curante o analogo specialista\"",
+   "Valore per 'other' scartato: la citazione dichiarata dal modello non è stata trovata nel testo che gli è stato mostrato — probabile invenzione: \"Per motivazioni di natura etico-religiosa sarà sufficiente compilare solo il modulo richiesta di pasto speciale\"",
+   "Valore per 'other' scartato: la citazione dichiarata dal modello non è stata trovata nel testo che gli è stato mostrato — probabile invenzione: \"Inviare la documentazione per mail a scuolealbano@bioristoroitalia.it e ufficiodietetico@bioristoroitalia.it\"",
    "Fonte per 'other': allegato https://comune.albanolaziale.rm.it/wp-content/uploads/2024/03/Modulo-diete-speciali.pdf, pagina 1 — \"Inviare la documentazione completa via FAX al numero 06/96.40.169\"",
    "Fonte per 'other': allegato https://comune.albanolaziale.rm.it/wp-content/uploads/2024/03/Modulo-diete-speciali.pdf, pagina 1 — \"Inviare la documentazione attraverso il portale utente RistoCloud\""
   ],
@@ -1863,8 +1858,8 @@
    }
   ],
   "chars_processed": 12000,
-  "extraction_seconds": 3.211349999997765,
-  "requirements_recovered": 7
+  "extraction_seconds": 3.8093732920242473,
+  "requirements_recovered": 2
  },
  {
   "spec_version": "0.1.0",
@@ -1900,7 +1895,7 @@
    "connector": "wp_pages",
    "url": "https://comune.albanolaziale.rm.it/aree-tematiche/ambiente/raccolta-differenziata/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/pages/11600",
-   "fetched_at": "2026-08-02T20:48:20.745078Z",
+   "fetched_at": "2026-08-02T21:14:12.651947Z",
    "raw_hash": "f643d1cdd60ed570"
   },
   "confidence": "extracted",
@@ -1945,7 +1940,7 @@
    }
   ],
   "chars_processed": 12000,
-  "extraction_seconds": 3.3145151660428382,
+  "extraction_seconds": 7.173020291957073,
   "requirements_recovered": 0
  },
  {
@@ -1971,10 +1966,7 @@
    "employment_status": [],
    "other": [
     "Non possedere un alloggio adeguato alle esigenze del nucleo familiare nel comune di Albano Laziale o nel comune di residenza (se diverso).",
-    "Non possedere diritti su beni patrimoniali il cui valore complessivo non superi 100.000,00 €, calcolato in base a specifiche normative.",
-    "Non aver ricevuto precedenti assegnazioni di alloggi realizzati con contributi pubblici o finanziamenti agevolati, salvo casi specifici.",
-    "Reddito annuo complessivo del nucleo familiare non superiore al limite stabilito dalla Regione Lazio (attualmente non specificato nel testo).",
-    "Non aver ceduto l’alloggio assegnato in precedenza, né aver occupato un alloggio di edilizia residenziale pubblica senza titolo."
+    "Non possedere diritti su beni patrimoniali il cui valore complessivo non superi 100.000,00 €, calcolato in base a specifiche normative."
    ],
    "source_typed": false
   },
@@ -1988,7 +1980,7 @@
    "connector": "wp_pages",
    "url": "https://comune.albanolaziale.rm.it/modulistica-2/modulistica-settore-5/edilia-residenziale-pubblica/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/pages/11182",
-   "fetched_at": "2026-08-02T20:48:23.538684Z",
+   "fetched_at": "2026-08-02T21:14:17.412151Z",
    "raw_hash": "f01923a782b0e44d"
   },
   "confidence": "extracted",
@@ -2013,9 +2005,9 @@
    "Valore per 'disabilita_required' scartato: il modello non ha saputo indicare la frase di origine nel testo.",
    "Fonte per 'other': allegato https://comune.albanolaziale.rm.it/wp-content/uploads/2024/01/alloggi_di_edilizia_residenziale_pubblica_bando_1_11d9e1.pdf, pagina 2 — \"non essere titolare, esso stesso né altro componente il proprio nucleo familiare del diritto di proprietà, uso, usufrutto , abitazione su di un alloggio adeguato alle esigenze del nucleo familiare nell’ambito territoriale del Comune cui si riferisce il presente bando di concorso e nel Comune di residenza qualora diverso da quello in cui si svolge l’attività lavorativa\"",
    "Fonte per 'other': allegato https://comune.albanolaziale.rm.it/wp-content/uploads/2024/01/alloggi_di_edilizia_residenziale_pubblica_bando_1_11d9e1.pdf, pagina 2 — \"non essere titolare dei diritti di cui alla precedente lettera c) sui beni patrimoniali ubicati in qualsiasi località del territorio nazionale, il cui valore complessivo non superi quello stabilito ai sensi dell’art. 21 del regolamento regionale 20 settembre 2000 n. 2 pari a 100.000,00 €\"",
-   "Fonte per 'other' non identificata con precisione nel corpus assemblato — \"assenza di precedente assegnazione in locazione ovvero in proprietà originaria o derivata, immediata o futura, di alloggio realizzato con contributi pubblici ed assenza di finanziamento agevolato in qualunque forma, concesso dallo Stato o da altri Enti Pubblici\"",
-   "Fonte per 'other' non identificata con precisione nel corpus assemblato — \"reddito annuo complessivo del nucleo familiare non superiore al limite per l’accesso all’edilizia residenziale pubblica destinata all’assistenza abitativa stabilito dalla Regione Lazio\"",
-   "Fonte per 'other' non identificata con precisione nel corpus assemblato — \"non aver ceduto in tutto o in parte, fuori dei casi previsti dalla legge, l’alloggio eventualmente assegnato in precedenza in locazione semplice oppure non aver occupato senza titolo un alloggio di edilizia residenziale pubblica destinata all’assistenza abitativa\""
+   "Valore per 'other' scartato: la citazione dichiarata dal modello non è stata trovata nel testo che gli è stato mostrato — probabile invenzione: \"assenza di precedente assegnazione in locazione ovvero in proprietà originaria o derivata, immediata o futura, di alloggio realizzato con contributi pubblici ed assenza di finanziamento agevolato in qualunque forma, concesso dallo Stato o da altri Enti Pubblici\"",
+   "Valore per 'other' scartato: la citazione dichiarata dal modello non è stata trovata nel testo che gli è stato mostrato — probabile invenzione: \"reddito annuo complessivo del nucleo familiare non superiore al limite per l’accesso all’edilizia residenziale pubblica destinata all’assistenza abitativa stabilito dalla Regione Lazio\"",
+   "Valore per 'other' scartato: la citazione dichiarata dal modello non è stata trovata nel testo che gli è stato mostrato — probabile invenzione: \"non aver ceduto in tutto o in parte, fuori dei casi previsti dalla legge, l’alloggio eventualmente assegnato in precedenza in locazione semplice oppure non aver occupato senza titolo un alloggio di edilizia residenziale pubblica destinata all’assistenza abitativa\""
   ],
   "recovery_level": "L2_estratto",
   "pdfs_linked": 19,
@@ -2079,8 +2071,8 @@
    }
   ],
   "chars_processed": 12000,
-  "extraction_seconds": 2.7932253750041127,
-  "requirements_recovered": 5
+  "extraction_seconds": 4.759765333030373,
+  "requirements_recovered": 2
  },
  {
   "spec_version": "0.1.0",
@@ -2104,10 +2096,7 @@
    "disabilita_required": null,
    "employment_status": [],
    "other": [
-    "Assolvimento imposta di bollo per il rilascio dell’atto conclusivo del procedimento",
-    "Tutte le richieste inoltrate al Settore V servizio II dovranno essere corredate della marca da bollo di euro 16,00",
-    "Le richieste di autorizzazione occupazione suolo pubblico permanente per passo carrabile dovranno essere inoltrate al Settore V servizio III a partire dal 02.05.2018",
-    "Bonus idrico integrativo per utenti domestici residenti in condizioni di disagio economico sociale ai sensi dell’art. 8 della Delibera ARERA 897/2017/R/IDR"
+    "Assolvimento imposta di bollo per il rilascio dell’atto conclusivo del procedimento"
    ],
    "source_typed": false
   },
@@ -2121,7 +2110,7 @@
    "connector": "wp_pages",
    "url": "https://comune.albanolaziale.rm.it/modulistica-2/modulistica-settore-5/modulistica-manutenzioni/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/pages/14539",
-   "fetched_at": "2026-08-02T20:48:25.739965Z",
+   "fetched_at": "2026-08-02T21:14:20.034159Z",
    "raw_hash": "c4514c2b817a0d0e"
   },
   "confidence": "extracted",
@@ -2134,9 +2123,9 @@
    "La residenza non è menzionata come requisito esplicito, anche se il bonus idrico integrativo è rivolto a utenti residenti in condizioni di disagio economico sociale. Questo non è sufficiente per indicare residenza_required come true.",
    "Non sono state indicate scadenze per la presentazione delle domande.",
    "Fonte per 'other': pagina web https://comune.albanolaziale.rm.it/modulistica-2/modulistica-settore-5/modulistica-manutenzioni/ — \"Assolvimento imposta di bollo per il rilascio dell’atto conclusivo del procedimento\"",
-   "Fonte per 'other' non identificata con precisione nel corpus assemblato — \"Tutte le richieste inoltrate al Settore V servizio II dovranno essere corredate della marca da bollo di euro 16,00\"",
-   "Fonte per 'other' non identificata con precisione nel corpus assemblato — \"Le richieste di autorizzazione occupazione suolo pubblico permanente per passo carrabile dovranno essere inoltrate al Settore V servizio III a partire dal 02.05.2018\"",
-   "Fonte per 'other' non identificata con precisione nel corpus assemblato — \"Bonus idrico integrativo per utenti domestici residenti in condizioni di disagio economico sociale ai sensi dell’art. 8 della Delibera ARERA 897/2017/R/IDR\""
+   "Valore per 'other' scartato: la citazione dichiarata dal modello non è stata trovata nel testo che gli è stato mostrato — probabile invenzione: \"Tutte le richieste inoltrate al Settore V servizio II dovranno essere corredate della marca da bollo di euro 16,00\"",
+   "Valore per 'other' scartato: la citazione dichiarata dal modello non è stata trovata nel testo che gli è stato mostrato — probabile invenzione: \"Le richieste di autorizzazione occupazione suolo pubblico permanente per passo carrabile dovranno essere inoltrate al Settore V servizio III a partire dal 02.05.2018\"",
+   "Valore per 'other' scartato: la citazione dichiarata dal modello non è stata trovata nel testo che gli è stato mostrato — probabile invenzione: \"Bonus idrico integrativo per utenti domestici residenti in condizioni di disagio economico sociale ai sensi dell’art. 8 della Delibera ARERA 897/2017/R/IDR\""
   ],
   "recovery_level": "L2_estratto",
   "pdfs_linked": 9,
@@ -2160,8 +2149,8 @@
    }
   ],
   "chars_processed": 12000,
-  "extraction_seconds": 2.2009110000217333,
-  "requirements_recovered": 4
+  "extraction_seconds": 2.6216539159649983,
+  "requirements_recovered": 1
  },
  {
   "spec_version": "0.1.0",
@@ -2197,7 +2186,7 @@
    "connector": "wp_pages",
    "url": "https://comune.albanolaziale.rm.it/modulistica-2/modulistica-settore-5/modulistica-patrimonio/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/pages/14513",
-   "fetched_at": "2026-08-02T20:48:26.265283Z",
+   "fetched_at": "2026-08-02T21:14:20.610736Z",
    "raw_hash": "df9248e2ff59e610"
   },
   "confidence": "extracted",
@@ -2211,7 +2200,7 @@
   "pdfs_opened": 2,
   "pdfs_skipped": [],
   "chars_processed": 10379,
-  "extraction_seconds": 0.5251099159941077,
+  "extraction_seconds": 0.5763352499925531,
   "requirements_recovered": 0
  },
  {
@@ -2248,7 +2237,7 @@
    "connector": "wp_pages",
    "url": "https://comune.albanolaziale.rm.it/centrale-unica-di-committenza-dei-comune-dialbano-laziale-castel-gandolfo-e-grottaferrata/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/pages/14192",
-   "fetched_at": "2026-08-02T20:48:28.855334Z",
+   "fetched_at": "2026-08-02T21:14:23.262526Z",
    "raw_hash": "a6c02497db6ef608"
   },
   "confidence": "extracted",
@@ -2268,7 +2257,7 @@
    }
   ],
   "chars_processed": 12000,
-  "extraction_seconds": 2.589846957998816,
+  "extraction_seconds": 2.6515351249836385,
   "requirements_recovered": 0
  },
  {
@@ -2293,10 +2282,7 @@
    "disabilita_required": null,
    "employment_status": [],
    "other": [
-    "I terreni agricoli ubicati nel Comune di Albano Laziale, che nell’elenco ISTAT risulta ubicato ad una altitudine di m 400, sono assoggettati al pagamento dell’IMU nella misura ordinaria del 10.60 per mille.",
-    "Il versamento deve essere effettuato in una unica rata entro il 16.12.2014.",
-    "Terreni agricoli ubicati ad una altitudine compresa fra 281 metri e 600 metri sono esenti solo se posseduti da coltivatori diretti e imprenditori agricoli professionali di cui all’art 1 del DLgs 99/2004 e iscritti nella previdenza agricola.",
-    "Ai fini del calcolo dell’IMU sui terreni agricoli, la base imponibile si calcola come segue: Al reddito dominicale risultante in catasto, rivalutato del 25%, deve essere applicato un moltiplicatore pari a 135 (110 per i coltivatori diretti e gli imprenditori agricoli professionali)."
+    "Il versamento deve essere effettuato in una unica rata entro il 16.12.2014."
    ],
    "source_typed": false
   },
@@ -2310,7 +2296,7 @@
    "connector": "wp_pages",
    "url": "https://comune.albanolaziale.rm.it/aree-tematiche/tributi/imu/imu-anni-2012-2013-2014/",
    "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/pages/12989",
-   "fetched_at": "2026-08-02T20:48:30.871238Z",
+   "fetched_at": "2026-08-02T21:14:31.884727Z",
    "raw_hash": "0c9e7147043ed1cf"
   },
   "confidence": "extracted",
@@ -2328,10 +2314,10 @@
    "Non sono presenti informazioni relative all’ISEE, all’età, al numero di componenti del nucleo familiare, alla presenza di figli minori o di disabilità.",
    "Valore per 'figli_minori_required' scartato: il modello non ha saputo indicare la frase di origine nel testo.",
    "Valore per 'disabilita_required' scartato: il modello non ha saputo indicare la frase di origine nel testo.",
-   "Fonte per 'other' non identificata con precisione nel corpus assemblato — \"I terreni agricoli ubicati nel Comune di Albano Laziale, che nell’elenco ISTAT risulta ubicato ad una altitudine di m 400, sono assoggettati al pagamento dell’IMU nella misura ordinaria del 10.60 per mille.\"",
+   "Valore per 'other' scartato: la citazione dichiarata dal modello non è stata trovata nel testo che gli è stato mostrato — probabile invenzione: \"I terreni agricoli ubicati nel Comune di Albano Laziale, che nell’elenco ISTAT risulta ubicato ad una altitudine di m 400, sono assoggettati al pagamento dell’IMU nella misura ordinaria del 10.60 per mille.\"",
    "Fonte per 'other': allegato https://comune.albanolaziale.rm.it/wp-content/uploads/2024/03/AVVISO_IMU_terreni_2014.pdf, pagina 2 — \"Il versamento deve essere effettuato in una unica rata entro il 16.12.2014.\"",
-   "Fonte per 'other' non identificata con precisione nel corpus assemblato — \"Terreni agricoli ubicati ad una altitudine compresa fra 281 metri e 600 metri sono esenti solo se posseduti da coltivatori diretti e imprenditori agricoli professionali di cui all’art 1 del DLgs 99/2004 e iscritti nella previdenza agricola.\"",
-   "Fonte per 'other' non identificata con precisione nel corpus assemblato — \"Ai fini del calcolo dell’IMU sui terreni agricoli, la base imponibile si calcola come segue: Al reddito dominicale risultante in catasto, rivalutato del 25%, deve essere applicato un moltiplicatore pari a 135 (110 per i coltivatori diretti e gli imprenditori agricoli professionali).\""
+   "Valore per 'other' scartato: la citazione dichiarata dal modello non è stata trovata nel testo che gli è stato mostrato — probabile invenzione: \"Terreni agricoli ubicati ad una altitudine compresa fra 281 metri e 600 metri sono esenti solo se posseduti da coltivatori diretti e imprenditori agricoli professionali di cui all’art 1 del DLgs 99/2004 e iscritti nella previdenza agricola.\"",
+   "Valore per 'other' scartato: la citazione dichiarata dal modello non è stata trovata nel testo che gli è stato mostrato — probabile invenzione: \"Ai fini del calcolo dell’IMU sui terreni agricoli, la base imponibile si calcola come segue: Al reddito dominicale risultante in catasto, rivalutato del 25%, deve essere applicato un moltiplicatore pari a 135 (110 per i coltivatori diretti e gli imprenditori agricoli professionali).\""
   ],
   "recovery_level": "L2_estratto",
   "pdfs_linked": 14,
@@ -2375,7 +2361,7 @@
    }
   ],
   "chars_processed": 12000,
-  "extraction_seconds": 2.0152370000141673,
-  "requirements_recovered": 4
+  "extraction_seconds": 8.621568707982078,
+  "requirements_recovered": 1
  }
 ]

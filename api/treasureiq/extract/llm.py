@@ -47,6 +47,15 @@ logger = logging.getLogger(__name__)
 # Bumped to "2" for the move to the provider abstraction (Ollama default,
 # Anthropic optional): the prompt is unchanged, but the extraction path is
 # not, and cache entries are cheap to regenerate.
+#
+# NOT bumped for the move to verified quotes (D-05 gate): `ExtractionResult`
+# itself — what is on disk, keyed by this version — is unchanged; it still
+# holds only the model's raw claims and declared quotes. Verification now
+# runs in `to_requirements`, against segments supplied fresh at call time by
+# the connector, on every cache hit as much as every live call — so an
+# existing cache entry re-verifies correctly without needing a live re-run.
+# A cache entry from before `Segment` existed still carries the same shape;
+# what changed is what we do with it, not what it stores.
 EXTRACTOR_VERSION = "2"
 
 SYSTEM_PROMPT = """\
@@ -248,31 +257,143 @@ class ExtractionResult(BaseModel):
     notes: list[str] = Field(default_factory=list)
 
     def quoted_fields(self) -> set[str]:
+        """Fields for which the model *declared* a quote — not yet verified.
+
+        Kept for `extract/spike.py`'s D-07 measurement (declared-quote rate
+        before verification is even attempted). `to_requirements` below does
+        not trust this set on its own any more — see `_verify_quotes`.
+        """
         return {q.field for q in self.quotes}
 
-    def to_requirements(self) -> tuple[Requirements, list[str]]:
-        """Convert to the internal schema, dropping unsupported claims.
+    def _verify_quotes(
+        self,
+        visible_segments: Sequence["Segment"],
+        full_segments: Sequence["Segment"],
+    ) -> list[tuple[str, str, "Segment | None", str]]:
+        """Check every declared quote against the corpus the model actually saw.
 
-        A numeric value without a supporting quote is discarded rather than
-        trusted. This is the cheapest available guard against a confident
-        fabrication: the model has to point at the text, and if it cannot, the
-        value does not survive. Discards are reported in the notes so the gap
-        is visible instead of silent.
+        A declared quote is not evidence by itself (D-05's real guarantee):
+        it must be locatable in `visible_segments`, the corpus slice the
+        model was shown, via the existing `attribute_quote` matcher. Returns
+        one `(field, status, segment, quote_text)` tuple per declared quote,
+        in the model's original order — preserved (rather than collapsed
+        into a dict) because `other` is a list and can carry several quotes
+        for the same field name, one per item.
+
+        `status` is one of:
+
+        - `"verified"` — found in `visible_segments`; `segment` is the match.
+        - `"quote_unverifiable_truncated"` — absent from `visible_segments`
+          but present in `full_segments` (the untruncated corpus). Our own
+          `MAX_CORPUS_CHARS` budget cut it before the model could read it —
+          this is our limitation, not a model fabrication.
+        - `"quote_not_found"` — absent from the corpus entirely, truncated or
+          not. The model invented a plausible sentence; this is exactly what
+          D-05 exists to catch.
+
+        Quotes with blank text are skipped entirely (never trusted, never
+        counted).
+        """
+        results: list[tuple[str, str, Segment | None, str]] = []
+        for q in self.quotes:
+            if not q.text:
+                continue
+            match = attribute_quote(q.text, visible_segments) if visible_segments else None
+            if match is not None:
+                results.append((q.field, "verified", match, q.text))
+                continue
+            found_untruncated = (
+                attribute_quote(q.text, full_segments) if full_segments else None
+            )
+            if found_untruncated is not None:
+                results.append((q.field, "quote_unverifiable_truncated", None, q.text))
+            else:
+                results.append((q.field, "quote_not_found", None, q.text))
+        return results
+
+    def to_requirements(
+        self,
+        visible_segments: Sequence["Segment"] = (),
+        full_segments: Sequence["Segment"] = (),
+    ) -> tuple[Requirements, list[str], dict[str, int]]:
+        """Convert to the internal schema, dropping unverifiable claims.
+
+        A declared quote is not enough (D-05): it must actually be found in
+        the corpus segments the model was shown, or the value does not
+        survive. This is the real guard against a confident fabrication —
+        the model has to point at real text, not merely claim to. Every
+        discard is reported in the notes, and counted in the returned
+        `counters` dict (`quote_verified` / `quote_not_found` /
+        `quote_unverifiable_truncated`), so the gap is visible instead of
+        silent and the cost can be attributed correctly (D-05/D-16).
+
+        Callers with no segment information at all (an older caller, or a
+        measurement tool that never assembled a corpus) get every declared
+        quote treated as unverifiable — never silently trusted.
         """
         notes = list(self.notes)
-        quoted = self.quoted_fields()
+        verified_quotes = self._verify_quotes(visible_segments, full_segments)
+        counters = {
+            "quote_verified": 0,
+            "quote_not_found": 0,
+            "quote_unverifiable_truncated": 0,
+        }
         req = Requirements()
+
+        # Singular fields carry at most one quote each, so the first
+        # occurrence is authoritative. `other` is a list and can carry
+        # several quotes for the same field name — handled separately below,
+        # positionally, since `FieldQuote` has no index of its own.
+        verification: dict[str, tuple[str, Segment | None, str]] = {}
+        other_quote_entries: list[tuple[str, Segment | None, str]] = []
+        for field, status, segment, quote_text in verified_quotes:
+            if field == "other":
+                other_quote_entries.append((status, segment, quote_text))
+            elif field not in verification:
+                verification[field] = (status, segment, quote_text)
+
+        def _source_note(field: str, quote_text: str, segment: "Segment") -> str:
+            if segment.kind == "allegato":
+                location = f"allegato {segment.url}" + (
+                    f", pagina {segment.page_number}" if segment.page_number else ""
+                )
+            else:
+                location = f"pagina web {segment.url}"
+            return f"Fonte per '{field}': {location} — \"{quote_text}\""
+
+        def _drop_note(field: str, quote_text: str, status: str) -> str:
+            if status == "quote_not_found":
+                return (
+                    f"Valore per '{field}' scartato: la citazione dichiarata dal "
+                    f"modello non è stata trovata nel testo che gli è stato "
+                    f'mostrato — probabile invenzione: "{quote_text}"'
+                )
+            return (
+                f"Valore per '{field}' scartato: la citazione non è verificabile "
+                f"perché il testo oltre il limite di caratteri inviato al modello "
+                f'non gli è stato mostrato — limite nostro, non invenzione del '
+                f'modello: "{quote_text}"'
+            )
 
         def supported(field: str, value: object) -> bool:
             if value is None:
                 return False
-            if field not in quoted:
+            info = verification.get(field)
+            if info is None:
                 notes.append(
                     f"Valore per '{field}' scartato: il modello non ha saputo "
                     f"indicare la frase di origine nel testo."
                 )
                 return False
-            return True
+            status, segment, quote_text = info
+            if status == "verified":
+                counters["quote_verified"] += 1
+                assert segment is not None
+                notes.append(_source_note(field, quote_text, segment))
+                return True
+            counters[status] += 1
+            notes.append(_drop_note(field, quote_text, status))
+            return False
 
         if supported("isee_max", self.isee_max):
             req.isee_max = Decimal(str(self.isee_max)).quantize(Decimal("0.01"))
@@ -293,7 +414,9 @@ class ExtractionResult(BaseModel):
         # benefits nearly always require residency. Only an explicit statement
         # in the text moves it, and only downward — an unstated requirement is
         # not evidence that it doesn't apply.
-        if self.residenza_required is False and "residenza_required" in quoted:
+        if self.residenza_required is False and supported(
+            "residenza_required", self.residenza_required
+        ):
             req.residenza_required = False
 
         for raw in self.employment_status:
@@ -302,7 +425,33 @@ class ExtractionResult(BaseModel):
             except ValueError:
                 notes.append(f"Stato occupazionale non riconosciuto: '{raw}'.")
 
-        req.other = [item.strip() for item in self.other if item.strip()]
+        # `other` is quote-gated exactly like every other field (the system
+        # prompt requires a citation "per OGNI campo valorizzato", `other`
+        # included). The model has no way to index which quote justifies
+        # which item, so quotes are matched to items positionally, in the
+        # order the model produced both lists — the natural order for a
+        # model asked to state a criterion and then cite it.
+        kept_other: list[str] = []
+        for idx, raw_item in enumerate(self.other):
+            item = raw_item.strip()
+            if not item:
+                continue
+            if idx >= len(other_quote_entries):
+                notes.append(
+                    f"Valore per 'other' scartato: il modello non ha saputo "
+                    f"indicare la frase di origine nel testo (\"{item}\")."
+                )
+                continue
+            status, segment, quote_text = other_quote_entries[idx]
+            if status == "verified":
+                counters["quote_verified"] += 1
+                assert segment is not None
+                notes.append(_source_note("other", quote_text, segment))
+                kept_other.append(item)
+            else:
+                counters[status] += 1
+                notes.append(_drop_note("other", quote_text, status))
+        req.other = kept_other
 
         if self.isee_mentioned_without_threshold and req.isee_max is None:
             req.other.append("Richiesta attestazione ISEE (soglia non pubblicata)")
@@ -311,7 +460,7 @@ class ExtractionResult(BaseModel):
                 "verifica sulla pagina del comune."
             )
 
-        return req, notes
+        return req, notes, counters
 
 
 class ExtractionCache:
@@ -354,26 +503,54 @@ class RequirementsExtractor:
     def __init__(self, cache_dir: Path, *, provider: LLMProvider | None = None) -> None:
         self.cache = ExtractionCache(cache_dir)
         self._provider = provider or load_provider(role="extract")
-        self.stats = {"cache_hits": 0, "api_calls": 0, "failures": 0, "skipped": 0}
+        self.stats = {
+            "cache_hits": 0,
+            "api_calls": 0,
+            "failures": 0,
+            "skipped": 0,
+            "quote_verified": 0,
+            "quote_not_found": 0,
+            "quote_unverifiable_truncated": 0,
+        }
 
     @property
     def available(self) -> bool:
         """Whether live extraction is possible in this environment."""
         return self._provider.available
 
+    def _accumulate_quote_stats(self, counters: dict[str, int]) -> None:
+        for key, value in counters.items():
+            self.stats[key] = self.stats.get(key, 0) + value
+
     def extract(
-        self, *, text: str, title: str, raw_hash: str
+        self,
+        *,
+        text: str,
+        title: str,
+        raw_hash: str,
+        visible_segments: Sequence[Segment] = (),
+        full_segments: Sequence[Segment] = (),
     ) -> tuple[Requirements, list[str], Confidence] | None:
         """Extract requirements for one record.
 
         Returns None when extraction could not run at all — no cache entry and
         no API key, or the call failed. The caller keeps whatever the regex
         extractor produced rather than losing the record.
+
+        `visible_segments` (the corpus slice the model was actually shown)
+        and `full_segments` (the same corpus before `MAX_CORPUS_CHARS`
+        truncation) drive the D-05 quote gate in `to_requirements` — every
+        declared quote is verified against them, on both a cache hit and a
+        live call, so a stale cache entry can never bypass verification.
+        Callers that omit them (an older call site, a measurement tool with
+        no assembled corpus) get every quote treated as unverifiable rather
+        than silently trusted.
         """
         cached = self.cache.get(raw_hash)
         if cached is not None:
             self.stats["cache_hits"] += 1
-            req, notes = cached.to_requirements()
+            req, notes, counters = cached.to_requirements(visible_segments, full_segments)
+            self._accumulate_quote_stats(counters)
             return req, notes, Confidence.EXTRACTED
 
         if not self.available:
@@ -397,14 +574,19 @@ class RequirementsExtractor:
 
         self.cache.put(raw_hash, result)
         self.stats["api_calls"] += 1
-        req, notes = result.to_requirements()
+        req, notes, counters = result.to_requirements(visible_segments, full_segments)
+        self._accumulate_quote_stats(counters)
         return req, notes, Confidence.EXTRACTED
 
     def report(self) -> str:
         s = self.stats
         return (
             f"extraction: {s['cache_hits']} cached, {s['api_calls']} live, "
-            f"{s['failures']} failed, {s['skipped']} skipped (no API key)"
+            f"{s['failures']} failed, {s['skipped']} skipped (no API key); "
+            f"quotes: {s['quote_verified']} verificate, "
+            f"{s['quote_not_found']} non trovate (probabile invenzione), "
+            f"{s['quote_unverifiable_truncated']} non verificabili "
+            f"(troncate dal limite di caratteri)"
         )
 
 

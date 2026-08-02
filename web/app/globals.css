@@ -807,3 +807,249 @@ a {
     max-width: 100%;
   }
 }
+
+/* -------------------------------------------------------------- sr-only */
+
+/* Visually hidden, present for assistive tech — the same clip technique as
+   `.chat__label`, generalised. Used for chart-equivalent data tables and
+   table captions that would otherwise repeat a visible heading. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ------------------------------------------------------ monitoraggio (B16) */
+
+.status-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--ma-4);
+}
+
+.status-row {
+  display: grid;
+  grid-template-columns: 12px 1fr;
+  gap: var(--ma-3);
+  align-items: start;
+  padding: var(--ma-3) 0;
+  border-bottom: 1px solid var(--kasumi);
+}
+
+.status-row:last-child {
+  border-bottom: none;
+}
+
+.status-row__dot {
+  width: 10px;
+  height: 10px;
+  margin-top: 6px;
+  border-radius: 999px;
+  background: var(--sumi-faint);
+}
+
+.status-row[data-reachable="reachable"] .status-row__dot {
+  background: var(--wakatake);
+}
+.status-row[data-reachable="unreachable"] .status-row__dot {
+  background: var(--shu);
+}
+/* Deliberately the same neutral as the resting dot: "non verificato" must
+   never read as a colour state at all, only as text. */
+.status-row[data-reachable="unverified"] .status-row__dot {
+  background: var(--sumi-faint);
+}
+
+.status-row__head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--ma-3);
+  flex-wrap: wrap;
+}
+
+.status-row__badge {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  letter-spacing: 0.04em;
+  color: var(--sumi-faint);
+}
+
+.status-row__meta {
+  margin: var(--ma-1) 0 0;
+  font-size: 0.88rem;
+  color: var(--sumi-soft);
+}
+
+/* -------------------------------------------------------- data-table (B16) */
+
+/* A plain honest table, not a bar race — spec D-17: with three of four
+   entities at zero, a chart would read as padding. */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+.data-table caption {
+  text-align: left;
+}
+
+.data-table th,
+.data-table td {
+  text-align: left;
+  padding: var(--ma-3) var(--ma-4) var(--ma-3) 0;
+  border-bottom: 1px solid var(--kasumi);
+  vertical-align: top;
+}
+
+.data-table thead th {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sumi-faint);
+  font-weight: 600;
+  border-bottom: 2px solid var(--kasumi);
+}
+
+.data-table tbody th[scope="row"] {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.data-table__num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* Zero-scored comuni and the regional reference row read as distinct from a
+   live-measured row — a lighter ink, never a colour that could be mistaken
+   for a blocking state. */
+.data-table tr[data-zero="true"] th,
+.data-table tr[data-zero="true"] td,
+.data-table tr[data-region="true"] th,
+.data-table tr[data-region="true"] td {
+  color: var(--sumi-soft);
+}
+
+/* ---------------------------------------------------- recovery split (B16) */
+
+.recovery-split {
+  display: grid;
+  gap: var(--ma-3);
+  margin-bottom: var(--ma-8);
+}
+
+.recovery-split__bar {
+  display: flex;
+  gap: 2px;
+  height: 14px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: var(--paper-sunken);
+}
+
+.recovery-split__segment {
+  display: block;
+  height: 100%;
+}
+
+.recovery-split__legend {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ma-2) var(--ma-6);
+  font-size: 0.88rem;
+  color: var(--sumi-soft);
+}
+
+.recovery-split__legend li {
+  display: flex;
+  align-items: center;
+  gap: var(--ma-2);
+}
+
+.recovery-split__swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  flex: none;
+}
+
+/* ------------------------------------------------------- cost chart (B16) */
+
+.cost-chart {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--ma-3);
+}
+
+.cost-chart__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 2fr auto auto;
+  gap: var(--ma-3);
+  align-items: center;
+}
+
+.cost-chart__label {
+  font-size: 0.88rem;
+  color: var(--sumi-soft);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cost-chart__track {
+  height: 10px;
+  border-radius: 999px;
+  background: var(--paper-sunken);
+  overflow: hidden;
+}
+
+.cost-chart__bar {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+}
+
+.cost-chart__value {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.82rem;
+  color: var(--sumi-faint);
+  white-space: nowrap;
+}
+
+.cost-chart__badge {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  color: var(--sumi-faint);
+  border: 1px solid var(--kasumi);
+  border-radius: var(--radius-sm);
+  padding: 1px var(--ma-2);
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .cost-chart__row {
+    grid-template-columns: 1fr;
+    gap: var(--ma-1);
+  }
+  .cost-chart__label {
+    white-space: normal;
+  }
+}

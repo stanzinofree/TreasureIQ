@@ -67,6 +67,7 @@ export default function RootLayout({
             <nav className="nav" aria-label="Principale">
               <Link href="/opportunita">Opportunità</Link>
               <Link href="/dati">Qualità dei dati</Link>
+              <Link href="/info">Come funziona</Link>
               <StatusPill />
             </nav>
           </header>

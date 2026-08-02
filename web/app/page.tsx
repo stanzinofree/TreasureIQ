@@ -30,7 +30,9 @@ export default function Home() {
         <p>
           Preferisci sfogliare tu i dati?{" "}
           <a href="/opportunita">Vista esperta delle opportunità</a> ·{" "}
-          <a href="/dati">Qualità dei dati dei comuni</a>.
+          <a href="/dati">Qualità dei dati dei comuni</a> ·{" "}
+          <a href="/info">Come funziona TreasureIQ</a> ·{" "}
+          <a href="/monitoraggio">Stato del servizio</a>.
         </p>
         <FooterStats />
       </footer>

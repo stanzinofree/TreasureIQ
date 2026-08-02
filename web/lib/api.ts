@@ -108,6 +108,13 @@ export const opportunities = (includeIneligible = false) =>
 export const readiness = (istat: string) =>
   call<Readiness>(`/api/readiness/${istat}`);
 
+/** Every comune with a committed seed snapshot (today: Albano, Fonte Nuova).
+ * Comuni measured at zero without a snapshot (Ariccia, Genzano, Marino) are
+ * not in this list — they never had a reachable service API to ingest from,
+ * so there is nothing for the API to score. Their diagnosis is cited on
+ * `/dati` as measurement evidence, not fetched from here. */
+export const readinessAll = () => call<Readiness[]>("/api/readiness");
+
 /** The chat contract (K3) — must stay field-for-field identical to the
  * `ChatOut` pydantic model in `api/treasureiq/api.py`. `data_gap` carries the
  * distinction the whole project exists to make: "the comune never published

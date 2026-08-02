@@ -1,0 +1,490 @@
+/* TreasureIQ — visual system
+ *
+ * Direction: Japanese civic. The two borrowed devices are not decoration —
+ * both are real instruments of Japanese local government, which is what earns
+ * them a place in a product about Italian local government.
+ *
+ *   hanko (判子)  the official seal. Here its *completeness* encodes the
+ *                 completeness of the comune's published data: a full stamp
+ *                 means verified eligibility, a broken ring means the data
+ *                 could not confirm it. The signature element of the product.
+ *
+ *   maru (丸)     roundness. The friendliness lives in the letterforms and
+ *                 the corner radii rather than in illustrations, so the page
+ *                 stays warm without becoming childish in front of someone
+ *                 checking whether they can afford school transport.
+ *
+ * Palette is drawn from traditional Japanese colour names, chosen to sit far
+ * away from the institutional blue every Italian PA site already uses.
+ */
+
+:root {
+  /* --- Surface: byakuroku, a pale green-grey. Calm, and deliberately not the
+     warm cream that has become the default for this kind of page. --- */
+  --paper: #edf2ee;
+  --paper-raised: #f7faf8;
+  --paper-sunken: #e2e9e4;
+
+  /* --- Ink: sumi, warm near-black with a green cast so it belongs to the
+     paper rather than sitting on top of it. --- */
+  --sumi: #1b211d;
+  --sumi-soft: #4a554e;
+  --sumi-faint: #7c8781;
+
+  /* --- Accents --- */
+  --ai: #23405e;        /* indigo: navigation, authority, links */
+  --ai-wash: #dde5ee;
+  --shu: #d4482f;       /* vermilion: the seal, and only blocking states */
+  --shu-wash: #f8e2dd;
+  --wakatake: #3f7a5e;  /* young bamboo: a criterion the citizen meets */
+  --wakatake-wash: #dfeee6;
+  --yamabuki: #a8710c;  /* golden: unverifiable — darkened for text contrast */
+  --yamabuki-wash: #f7ecd6;
+
+  --kasumi: #d3ddd6;    /* mist: hairlines and dividers */
+
+  /* --- Type --- */
+  --font-display: var(--font-zen-maru), "Hiragino Maru Gothic ProN", system-ui,
+    sans-serif;
+  --font-body: var(--font-zen-kaku), "Hiragino Kaku Gothic ProN", system-ui,
+    sans-serif;
+  --font-mono: var(--font-dm-mono), ui-monospace, monospace;
+
+  /* Ma (間) — the interval. A single 8px-derived scale so vertical rhythm
+     stays even; the airiness is the point, not an accident of padding. */
+  --ma-1: 4px;
+  --ma-2: 8px;
+  --ma-3: 12px;
+  --ma-4: 16px;
+  --ma-6: 24px;
+  --ma-8: 32px;
+  --ma-12: 48px;
+  --ma-16: 64px;
+  --ma-24: 96px;
+
+  --radius: 14px;
+  --radius-sm: 8px;
+
+  --shadow-rest: 0 1px 2px rgba(27, 33, 29, 0.06);
+  --shadow-lift: 0 4px 16px rgba(27, 33, 29, 0.09);
+
+  --measure: 68ch;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--sumi);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.65;
+  /* Optical texture: a faint dot lattice reading as washi grain. Low enough
+     contrast to be felt rather than seen, and it does not tile visibly at any
+     zoom level. */
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    rgba(27, 33, 29, 0.045) 1px,
+    transparent 0
+  );
+  background-size: 22px 22px;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  margin: 0;
+}
+
+h1 {
+  font-size: clamp(2rem, 4.5vw, 3rem);
+}
+h2 {
+  font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+}
+h3 {
+  font-size: 1.1rem;
+}
+
+p {
+  margin: 0;
+  max-width: var(--measure);
+}
+
+a {
+  color: var(--ai);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1.5px;
+}
+
+/* Accessibility floor. Focus must be obvious on every surface — a citizen
+   navigating this by keyboard is exactly the user we cannot afford to lose. */
+:focus-visible {
+  outline: 3px solid var(--ai);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: var(--ma-2);
+  background: var(--sumi);
+  color: var(--paper);
+  padding: var(--ma-2) var(--ma-4);
+  border-radius: var(--radius-sm);
+  z-index: 100;
+}
+.skip-link:focus {
+  left: var(--ma-4);
+}
+
+/* ---------------------------------------------------------------- layout */
+
+.shell {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 var(--ma-6) var(--ma-24);
+}
+
+.masthead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ma-4);
+  padding: var(--ma-6) 0;
+  border-bottom: 1px solid var(--kasumi);
+  margin-bottom: var(--ma-12);
+  flex-wrap: wrap;
+}
+
+.wordmark {
+  display: flex;
+  align-items: center;
+  gap: var(--ma-3);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: -0.02em;
+  color: var(--sumi);
+  text-decoration: none;
+}
+
+.wordmark__mark {
+  width: 30px;
+  height: 30px;
+  flex: none;
+}
+
+.nav {
+  display: flex;
+  gap: var(--ma-6);
+  align-items: center;
+  font-size: 0.94rem;
+}
+
+.nav a {
+  color: var(--sumi-soft);
+  text-decoration: none;
+  padding-bottom: 2px;
+  border-bottom: 2px solid transparent;
+}
+.nav a:hover,
+.nav a[aria-current="page"] {
+  color: var(--sumi);
+  border-bottom-color: var(--shu);
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--sumi-faint);
+  margin: 0 0 var(--ma-3);
+}
+
+.lede {
+  font-size: 1.1rem;
+  color: var(--sumi-soft);
+  margin-top: var(--ma-4);
+}
+
+/* ------------------------------------------------------- opportunity card */
+
+.feed {
+  display: grid;
+  gap: var(--ma-4);
+  margin-top: var(--ma-8);
+}
+
+.card {
+  display: grid;
+  grid-template-columns: 84px 1fr;
+  gap: var(--ma-5, 20px);
+  align-items: start;
+  background: var(--paper-raised);
+  border: 1px solid var(--kasumi);
+  border-radius: var(--radius);
+  padding: var(--ma-6);
+  box-shadow: var(--shadow-rest);
+  transition: box-shadow 160ms ease, transform 160ms ease;
+}
+
+.card:hover,
+.card:focus-within {
+  box-shadow: var(--shadow-lift);
+  transform: translateY(-1px);
+}
+
+/* The left edge restates the verdict in colour, so the state survives for
+   anyone who can't distinguish the seal's hues. Colour is never the only
+   carrier: the seal's *shape* differs per state too. */
+.card[data-verdict="eligible"] {
+  border-left: 4px solid var(--wakatake);
+}
+.card[data-verdict="likely"] {
+  border-left: 4px solid var(--yamabuki);
+}
+.card[data-verdict="undetermined"] {
+  border-left: 4px solid var(--sumi-faint);
+}
+.card[data-verdict="not_eligible"] {
+  border-left: 4px solid var(--shu);
+}
+
+.card__title {
+  font-family: var(--font-display);
+  font-size: 1.16rem;
+  font-weight: 700;
+  line-height: 1.35;
+  margin: 0 0 var(--ma-2);
+}
+
+.card__headline {
+  color: var(--sumi-soft);
+  font-size: 0.97rem;
+  margin-bottom: var(--ma-4);
+}
+
+.card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ma-2) var(--ma-4);
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: var(--sumi-faint);
+  letter-spacing: 0.04em;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ma-1);
+  padding: 2px var(--ma-2);
+  border-radius: 999px;
+  background: var(--paper-sunken);
+  color: var(--sumi-soft);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+}
+
+.criteria {
+  list-style: none;
+  margin: var(--ma-4) 0 0;
+  padding: var(--ma-4) 0 0;
+  border-top: 1px dashed var(--kasumi);
+  display: grid;
+  gap: var(--ma-2);
+}
+
+.criterion {
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  gap: var(--ma-3);
+  font-size: 0.9rem;
+  color: var(--sumi-soft);
+}
+
+.criterion__glyph {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  line-height: 1.5;
+}
+.criterion[data-state="met"] .criterion__glyph {
+  color: var(--wakatake);
+}
+.criterion[data-state="not_met"] .criterion__glyph {
+  color: var(--shu);
+}
+.criterion[data-state="unknown_source"] .criterion__glyph,
+.criterion[data-state="unknown_profile"] .criterion__glyph {
+  color: var(--yamabuki);
+}
+
+.notice {
+  margin-top: var(--ma-4);
+  padding: var(--ma-3) var(--ma-4);
+  border-radius: var(--radius-sm);
+  background: var(--yamabuki-wash);
+  color: #6b4708;
+  font-size: 0.88rem;
+}
+
+/* ----------------------------------------------------------- readiness */
+
+.dimension {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--ma-2) var(--ma-4);
+  padding: var(--ma-4) 0;
+  border-bottom: 1px solid var(--kasumi);
+}
+
+.dimension__label {
+  font-weight: 600;
+}
+
+.dimension__score {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.95rem;
+}
+
+.dimension__evidence,
+.dimension__remedy {
+  grid-column: 1 / -1;
+  font-size: 0.9rem;
+  color: var(--sumi-soft);
+}
+
+.dimension__remedy {
+  margin-top: var(--ma-2);
+  padding-left: var(--ma-4);
+  border-left: 3px solid var(--shu);
+  color: var(--sumi);
+}
+
+.meter {
+  grid-column: 1 / -1;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--paper-sunken);
+  overflow: hidden;
+}
+.meter__fill {
+  height: 100%;
+  background: var(--ai);
+  border-radius: 999px;
+}
+
+/* ---------------------------------------------------------------- forms */
+
+.field {
+  display: grid;
+  gap: var(--ma-2);
+  margin-bottom: var(--ma-4);
+}
+
+.field label {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.field input,
+.field select {
+  font: inherit;
+  font-size: 1rem;
+  padding: var(--ma-3) var(--ma-4);
+  border: 1.5px solid var(--kasumi);
+  border-radius: var(--radius-sm);
+  background: var(--paper-raised);
+  color: var(--sumi);
+}
+
+.field input:focus-visible,
+.field select:focus-visible {
+  border-color: var(--ai);
+}
+
+.field__hint {
+  font-size: 0.84rem;
+  color: var(--sumi-faint);
+}
+
+.button {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  padding: var(--ma-3) var(--ma-6);
+  border: none;
+  border-radius: 999px;
+  background: var(--ai);
+  color: #fff;
+  cursor: pointer;
+  transition: background 140ms ease;
+}
+.button:hover {
+  background: #1a3149;
+}
+.button--ghost {
+  background: transparent;
+  color: var(--ai);
+  border: 1.5px solid var(--ai);
+}
+
+.panel {
+  background: var(--paper-raised);
+  border: 1px solid var(--kasumi);
+  border-radius: var(--radius);
+  padding: var(--ma-8);
+  box-shadow: var(--shadow-rest);
+}
+
+.stack {
+  display: grid;
+  gap: var(--ma-6);
+}
+
+.grid-2 {
+  display: grid;
+  gap: var(--ma-4);
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+}
+
+@media (max-width: 640px) {
+  body {
+    font-size: 16px;
+  }
+  .card {
+    grid-template-columns: 48px 1fr;
+    padding: var(--ma-4);
+  }
+  .shell {
+    padding: 0 var(--ma-4) var(--ma-16);
+  }
+}

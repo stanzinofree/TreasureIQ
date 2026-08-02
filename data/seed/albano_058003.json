@@ -1,0 +1,1368 @@
+[
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058003:23188",
+  "title": "Voucher conciliazione vita-lavoro estate 2026",
+  "summary": "Per richiedere il voucher è necessario compilare la domanda online e allegare la documentazione richiesta. documento di identità del richiedente permesso di soggiorno in corso di validità, per cittadini extra UE ISEE MINORENNI 2026 non superiore ad euro 20.000,00; documentazione lavorativa dei genitori o dell’unico genitore presente nel nucleo in caso di disoccupazione o inoccupazione, Patto di Se",
+  "body": "Per richiedere il voucher è necessario compilare la domanda online e allegare la documentazione richiesta. documento di identità del richiedente permesso di soggiorno in corso di validità, per cittadini extra UE ISEE MINORENNI 2026 non superiore ad euro 20.000,00; documentazione lavorativa dei genitori o dell’unico genitore presente nel nucleo in caso di disoccupazione o inoccupazione, Patto di Servizio Personalizzato o attestazione di partecipazione a percorsi di politica attiva del lavoro o formazione documentazione della spesa sostenuta, come fattura o documento equivalente dichiarazione del centro estivo relativa all’autorizzazione all’apertura e al funzionamento per minori o giovani con disabilità grave, certificazione ai sensi della Legge 104/1992, art. 3, comma 3 per le spese di assistenza, documentazione che indichi settimane di attività, costo del servizio e nominativo dell’operatore",
+  "kind": "voucher",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": "20000.00",
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": true,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2026-06-15",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Albano Laziale",
+   "ente_codice_istat": "058003",
+   "connector": "wp_rest",
+   "url": "https://comune.albanolaziale.rm.it/servizio/voucher-estate-2026-per-minori/",
+   "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/23188",
+   "fetched_at": "2026-08-02T10:40:55.363059Z",
+   "raw_hash": "8fd27f0a53986dac"
+  },
+  "confidence": "extracted",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ]
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058003:21109",
+  "title": "Permesso Rosa",
+  "summary": "Per richiedere il Permesso Rosa è necessario presentare l'istanza corredata della documentazione prevista dal regolamento comunale.",
+  "body": "Per richiedere il Permesso Rosa è necessario presentare l'istanza corredata della documentazione prevista dal regolamento comunale. | copia fronte-retro di un documento di identità in corso di validità; | copia del codice fiscale; | certificato medico attestante lo stato di gravidanza con indicazione della data presunta del parto (solo per le richiedenti in gravidanza); | attestazione di versamento di € 10,00 con causale “oneri istruttori per rilascio permesso rosa”; il bollettino di pagamento, avviso PagoPa, viene rilasciato dal Comando al momento della presentazione della domanda; | eventuale precedente permesso in caso di richiesta di estensione; | denuncia rilasciata dalle Autorità competenti in caso di smarrimento o furto (per richiesta duplicato).",
+  "kind": "servizio",
+  "targets": [
+   "famiglie"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2026-04-21",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Albano Laziale",
+   "ente_codice_istat": "058003",
+   "connector": "wp_rest",
+   "url": "https://comune.albanolaziale.rm.it/servizio/permesso-rosa/",
+   "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/21109",
+   "fetched_at": "2026-08-02T10:40:55.363646Z",
+   "raw_hash": "b313eafdce34528c"
+  },
+  "confidence": "inferred",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ]
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058003:15549",
+  "title": "Erogazione contributi libri di testo o sussidi didattici digitali",
+  "summary": "Per presentare la domanda è necessario disporre della seguente documentazione:",
+  "body": "Per presentare la domanda è necessario disporre della seguente documentazione: | Attestazione ISEE in corso di validità (scadenza 31/12/2026): - ISEE minorenni (in caso di genitori non coniugati e non conviventi); - ISEE ordinario negli altri casi; | Autocertificazione della frequenza scolastica per l’a.s. 2026/2027 (scaricabile qui sotto alla pagina); | Copia documento di identità valido del richiedente. Si precisa che il termine RICHIEDENTE si riferisce al Genitore/tutore/esercente la responsabilità genitoriale, il termine UTENTE si riferisce allo/a studente/ssa. Per gli studenti maggiorenni che effettuano la domanda in maniera autonoma i dati del RICHIEDENTE e i dati dell’UTENTE sono gli stessi.",
+  "kind": "contributo_economico",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [
+    "Richiesta attestazione ISEE (soglia non pubblicata)"
+   ],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2026-03-23",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Albano Laziale",
+   "ente_codice_istat": "058003",
+   "connector": "wp_rest",
+   "url": "https://comune.albanolaziale.rm.it/servizio/erogazione-contributi-libri-di-testo-o-sussidi-didattici-digitali/",
+   "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/15549",
+   "fetched_at": "2026-08-02T10:40:55.363994Z",
+   "raw_hash": "fd246704ae7aa854"
+  },
+  "confidence": "extracted",
+  "extraction_notes": [
+   "Il servizio richiede l'ISEE ma non pubblica la soglia: verifica sulla pagina del comune.",
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ]
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058003:21610",
+  "title": "Trasporto scolastico alunni con disabilità frequentanti le scuole del II ciclo (Superiori)",
+  "summary": "Per presentare la domanda è necessario:",
+  "body": "Per presentare la domanda è necessario: | Certificazione di disabilità e diagnosi funzionale rilasciata dalla ASL competente (verbale di accertamento dell’handicap ex L. 104/92 in corso di validità); | Fotocopia certificazione ai sensi della Legge 104/92 art.3 comma 3 | Fotocopia del documento di identità del familiare richiedente o dell’alunno se maggiorenne. | Scaricare il \"Modulo domanda per trasporto scolastico alunni disabili (II ciclo)\" presente in questa sezione | Inviare il modulo debitamente compilato e con gli allegati richiesti all'indirizzo protocollo@cert.comune.albanolaziale.rm.it",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": true,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2026-03-20",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Albano Laziale",
+   "ente_codice_istat": "058003",
+   "connector": "wp_rest",
+   "url": "https://comune.albanolaziale.rm.it/servizio/trasporto-scolastico-alunni-con-disabilita-frequentanti-le-scuole-del-ii-ciclo-superiori/",
+   "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/21610",
+   "fetched_at": "2026-08-02T10:40:55.364326Z",
+   "raw_hash": "3a80b33d4ca5de21"
+  },
+  "confidence": "extracted",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ]
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058003:17575",
+  "title": "Trasporto scolastico",
+  "summary": "Per presentare la domanda è necessario disporre:",
+  "body": "Per presentare la domanda è necessario disporre: | Spid o CIE per autenticazione del genitore o del tutore legale | ISEE ordinario in corso di validità | ISEE minorenni (In caso di minorenne con genitori non coniugati tra loro e non conviventi) | NOTA BENE: Alle famiglie aventi e che intendono usufruire dell’esonero, si consiglia di effettuare la domanda di iscrizione ai servizi mensa e trasporto durante il periodo di validità del bando, anche se non si ha ancora avuto conferma di iscrizione da parte della scuola prescelta e di procedere eventualmente con successiva disdetta al servizio.",
+  "kind": "bando",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [
+    "Richiesta attestazione ISEE (soglia non pubblicata)"
+   ],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2026-03-19",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Albano Laziale",
+   "ente_codice_istat": "058003",
+   "connector": "wp_rest",
+   "url": "https://comune.albanolaziale.rm.it/servizio/servizio-di-trasporto-scolastico/",
+   "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/17575",
+   "fetched_at": "2026-08-02T10:40:55.364647Z",
+   "raw_hash": "1021ecbda05bf75f"
+  },
+  "confidence": "extracted",
+  "extraction_notes": [
+   "Il servizio richiede l'ISEE ma non pubblica la soglia: verifica sulla pagina del comune.",
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ]
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058003:20631",
+  "title": "Voucher di conciliazione vita/lavoro – Rimborso spese 2025",
+  "summary": "Per poter presentare la domanda è necessario:",
+  "body": "Per poter presentare la domanda è necessario: | Essere residenti nel Comune di Albano Laziale (minore e almeno un genitore). | Avere figli minori a carico (compresi adottati o affidati). | Possedere cittadinanza italiana, UE o extra-UE con permesso di soggiorno valido. | Avere un ISEE 2025 non superiore a € 20.000 (ISEE minorenni ove richiesto). | Avere uno o entrambi i genitori occupati, oppure disoccupati/inoccupati inseriti in percorsi formativi o in misure di politica attiva (documentabili). | SPID o CIE per l’accesso al portale online | Documentazione delle spese sostenute dal 01/01/2025 al 31/12/2025.",
+  "kind": "voucher",
+  "targets": [
+   "famiglie"
+  ],
+  "requirements": {
+   "isee_max": "20000.00",
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": true,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-12-11",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Albano Laziale",
+   "ente_codice_istat": "058003",
+   "connector": "wp_rest",
+   "url": "https://comune.albanolaziale.rm.it/servizio/voucher-di-conciliazione-vita-lavoro-rimborso-spese-2025/",
+   "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/20631",
+   "fetched_at": "2026-08-02T10:40:55.364980Z",
+   "raw_hash": "aeae28c85c754d07"
+  },
+  "confidence": "extracted",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ]
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058003:17206",
+  "title": "Voucher / contributi economici asilo nido – 2025",
+  "summary": "Alla domanda dovranno essere allegati i seguenti documenti, pena l'esclusione:",
+  "body": "Alla domanda dovranno essere allegati i seguenti documenti, pena l'esclusione: | Fotocopia del documento d’identità del richiedente; | Permesso di soggiorno in corso di validità per i cittadini provenienti da Paesi extra UE; | Copia della documentazione attestante la spesa sostenuta (fattura o altro titolo equipollente) emessa dall’asilo nido privato, intestata al soggetto che presenta la domanda di concessione del contributo economico, relativa alla fruizione del servizio da parte del minore e attestante le mensilità 2025 di frequenza; | Dichiarazione rilasciata, ai sensi del D.P.R. 445/2000 e ss.mm.ii., dal Rappresentante Legale della struttura di essere in possesso dell'autorizzazione all'apertura ed al funzionamento del Servizio di asilo nido privato. | Dichiarazione del richiedente rilasciata, ai sensi del D.P.R. 445/2000 e ss.mm.ii di non aver beneficiato di altri interventi aventi la stessa finalità (a titolo esemplificativo ma non esaustivo contributo INPS, voucher regionale ecc…) o aver già usufruito di una agevolazione della stessa natura che però non ha garantito la copertura del costo del servizio asili nido prevista dal presente avviso secondo le soglie ISEE minorenni di cui all’Art. 2. In questo caso previa rendicontazione verrà riconosciuta la quota parte non rimborsata.",
+  "kind": "voucher",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [
+    "Richiesta attestazione ISEE (soglia non pubblicata)"
+   ],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-11-28",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Albano Laziale",
+   "ente_codice_istat": "058003",
+   "connector": "wp_rest",
+   "url": "https://comune.albanolaziale.rm.it/servizio/voucher-contributi-economici-per-il-rimborsi-del-pagamento-delle-rette-degli-asili-nido-privati-in-favore-dei-minori-residenti-nel-comune-di-albano-laziale/",
+   "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/17206",
+   "fetched_at": "2026-08-02T10:40:55.365792Z",
+   "raw_hash": "da0911fe0af13fc0"
+  },
+  "confidence": "extracted",
+  "extraction_notes": [
+   "Il servizio richiede l'ISEE ma non pubblica la soglia: verifica sulla pagina del comune.",
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ]
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058003:19120",
+  "title": "Separazioni e divorzi in Comune",
+  "summary": "Modulo di richiesta compilato Documenti di identità dei coniugi Eventuali dichiarazioni sostitutive dell'atto di notorietà Pagamento del diritto fisso (€ 16,00): Tramite servizio PagoPA, oppure Con versamento alla Tesoreria Comunale: Banca Monte dei Paschi di Siena Filiale: Via Parco della Rimembranza, 10 – Albano Laziale IBAN: IT31R0103038860000000622239 Codice BIC: PASCITM1R90",
+  "body": "Modulo di richiesta compilato Documenti di identità dei coniugi Eventuali dichiarazioni sostitutive dell'atto di notorietà Pagamento del diritto fisso (€ 16,00): Tramite servizio PagoPA, oppure Con versamento alla Tesoreria Comunale: Banca Monte dei Paschi di Siena Filiale: Via Parco della Rimembranza, 10 – Albano Laziale IBAN: IT31R0103038860000000622239 Codice BIC: PASCITM1R90",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-09-25",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Albano Laziale",
+   "ente_codice_istat": "058003",
+   "connector": "wp_rest",
+   "url": "https://comune.albanolaziale.rm.it/servizio/separazioni-e-divorzi-in-comune/",
+   "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/19120",
+   "fetched_at": "2026-08-02T10:40:55.366233Z",
+   "raw_hash": "168dd3432838c8ad"
+  },
+  "confidence": "inferred",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ]
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058003:18277",
+  "title": "Assistenza di un operatore educativo per l’autonomia (OEPAC EX-AEC)",
+  "summary": "Necessario allegare la seguente documentazione",
+  "body": "Necessario allegare la seguente documentazione | Certificato per l'inclusione scolastica, rilasciato da ASL, con richiesta del servizio specifico \"AEC/OEPAC | Verbale di riconoscimento handicap ai sensi della L. 104/92",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": true,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-04-16",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Albano Laziale",
+   "ente_codice_istat": "058003",
+   "connector": "wp_rest",
+   "url": "https://comune.albanolaziale.rm.it/servizio/assistenza-di-un-operatore-educativo-per-lautonomia-oepac-ex-aec/",
+   "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/18277",
+   "fetched_at": "2026-08-02T10:40:55.366469Z",
+   "raw_hash": "9c60f19be356103d"
+  },
+  "confidence": "extracted",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ]
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058003:17940",
+  "title": "Servizio di illuminazione votiva",
+  "summary": "Modulo Allaccio nuova utenza , intervento di manutenzione per guasto o sostituzione lampade, riallaccio utenza, sostituzione intestatario utenza, disdetta contratto Modulo sospensione utenza",
+  "body": "Modulo Allaccio nuova utenza , intervento di manutenzione per guasto o sostituzione lampade, riallaccio utenza, sostituzione intestatario utenza, disdetta contratto Modulo sospensione utenza",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-04-04",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Albano Laziale",
+   "ente_codice_istat": "058003",
+   "connector": "wp_rest",
+   "url": "https://comune.albanolaziale.rm.it/servizio/servizio-di-illuminazione-votiva/",
+   "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/17940",
+   "fetched_at": "2026-08-02T10:40:55.366640Z",
+   "raw_hash": "4897b09a0acc82f7"
+  },
+  "confidence": "inferred",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ]
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058003:18066",
+  "title": "Iscrizione anagrafe della popolazione residente",
+  "summary": "Occorre:",
+  "body": "Occorre: | SPID/CIE; | documenti d'identità di eventuali componenti familiari; | Contratto di locazione o contratto di comodato d'uso gratuito se previsto; | Modulo di assenso genitore per minorenni e documento d'identità se previsto; | Permesso di soggiorno se cittadini extracomunitari.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-03-27",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Albano Laziale",
+   "ente_codice_istat": "058003",
+   "connector": "wp_rest",
+   "url": "https://comune.albanolaziale.rm.it/servizio/iscrizione-anagrafe-della-popolazione-residente/",
+   "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/18066",
+   "fetched_at": "2026-08-02T10:40:55.366860Z",
+   "raw_hash": "a0ce8b442bbd075d"
+  },
+  "confidence": "inferred",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ]
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058003:18065",
+  "title": "Compartecipazione RSA",
+  "summary": "Occorre",
+  "body": "Occorre | SPID/CIE; | Documento d'identità del beneficiario; | Autorizzazione ASL al ricovero in struttura; | Comunicazione della struttura che attesti l'avvenuto ricovero e il costo giornaliero; | Attestazione ISEE valida anno corrente per prestazioni socio sanitarie residenziali per persone maggiorenni (no dsu).",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [
+    "Richiesta attestazione ISEE (soglia non pubblicata)"
+   ],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-03-27",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Albano Laziale",
+   "ente_codice_istat": "058003",
+   "connector": "wp_rest",
+   "url": "https://comune.albanolaziale.rm.it/servizio/compartecipazione-rsa/",
+   "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/18065",
+   "fetched_at": "2026-08-02T10:40:55.367091Z",
+   "raw_hash": "d0c03e588b8d9a8a"
+  },
+  "confidence": "extracted",
+  "extraction_notes": [
+   "Il servizio richiede l'ISEE ma non pubblica la soglia: verifica sulla pagina del comune.",
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ]
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058003:18064",
+  "title": "Richiesta occupazione suolo pubblico",
+  "summary": "Occorre:",
+  "body": "Occorre: | SPID/CIE; | Planimetria quotata dell'area interessata.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-03-27",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Albano Laziale",
+   "ente_codice_istat": "058003",
+   "connector": "wp_rest",
+   "url": "https://comune.albanolaziale.rm.it/servizio/richiesta-occupazione-suolo-pubblico/",
+   "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/18064",
+   "fetched_at": "2026-08-02T10:40:55.367189Z",
+   "raw_hash": "f350f84433703d2b"
+  },
+  "confidence": "inferred",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ]
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058003:18063",
+  "title": "Richiesta accesso agli atti documentale Legge n. 241/1990",
+  "summary": "Per la presentazione dell'istanza di accesso agli atti occorre:",
+  "body": "Per la presentazione dell'istanza di accesso agli atti occorre: | SPID/CIE; | documento d’identità del delegante se necessario.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-03-27",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Albano Laziale",
+   "ente_codice_istat": "058003",
+   "connector": "wp_rest",
+   "url": "https://comune.albanolaziale.rm.it/servizio/richiesta-accesso-agli-atti-documentale/",
+   "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/18063",
+   "fetched_at": "2026-08-02T10:40:55.367318Z",
+   "raw_hash": "9441e34f3fbcf76f"
+  },
+  "confidence": "inferred",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ]
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058003:17814",
+  "title": "Luci votive – Pagamento canone annuale",
+  "summary": "Il pagamento del canone annuale è subordinato all'attivazione del servizio. Per attivare il servizio \"Luce votiva\" è sufficiente compilare il modulo scaricabile dal sito comunale e inviarlo/presentarlo all'ufficio Servizi cimiteriali.",
+  "body": "Il pagamento del canone annuale è subordinato all'attivazione del servizio. Per attivare il servizio \"Luce votiva\" è sufficiente compilare il modulo scaricabile dal sito comunale e inviarlo/presentarlo all'ufficio Servizi cimiteriali.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-03-10",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Albano Laziale",
+   "ente_codice_istat": "058003",
+   "connector": "wp_rest",
+   "url": "https://comune.albanolaziale.rm.it/servizio/luci-votive/",
+   "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/17814",
+   "fetched_at": "2026-08-02T10:40:55.367477Z",
+   "raw_hash": "baa9afdebbb64f99"
+  },
+  "confidence": "inferred",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ]
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058003:17644",
+  "title": "Contributo integrativo per il pagamento dei canoni di locazione",
+  "summary": "La domanda deve necessariamente comprendere la seguente documentazione:",
+  "body": "La domanda deve necessariamente comprendere la seguente documentazione: | Documento identità in corso di validità | Permesso di soggiorno o carta di soggiorno in corso di validità, per gli inquilini cittadini di uno Stato non appartenente all’Unione Europea; | Contratto di locazione ad uso abitativo, regolarmente registrato ed intestato al richiedente, per il quale è richiesto il contributo; | ISEE ordinario in corso di validità; | Copia delle ricevute di pagamento del canone di locazione per l’anno 2024",
+  "kind": "contributo_economico",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [
+    "Richiesta attestazione ISEE (soglia non pubblicata)"
+   ],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-02-19",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Albano Laziale",
+   "ente_codice_istat": "058003",
+   "connector": "wp_rest",
+   "url": "https://comune.albanolaziale.rm.it/servizio/contributo-integrativo-per-il-pagamento-dei-canoni-di-locazione/",
+   "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/17644",
+   "fetched_at": "2026-08-02T10:40:55.367695Z",
+   "raw_hash": "32de2ea3e1d75b4c"
+  },
+  "confidence": "extracted",
+  "extraction_notes": [
+   "Il servizio richiede l'ISEE ma non pubblica la soglia: verifica sulla pagina del comune.",
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ]
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058003:17573",
+  "title": "Mensa scolastica",
+  "summary": "Per attivare il servizio bisogna compilare la domanda online.",
+  "body": "Per attivare il servizio bisogna compilare la domanda online. | Spid o CIE per autenticazione del genitore o del tutore legale | ISEE ordinario in corso di validità | ISEE per prestazioni agevolate rivolte ai minorenni in corso di validità (In caso di minorenni con genitori non coniugati tra loro e non conviventi) | NOTA BENE: Alle famiglie aventi e che intendono usufruire dell’esonero, si consiglia di effettuare la domanda di iscrizione ai servizi mensa e trasporto durante il periodo di validità del bando, anche se non si ha ancora avuto conferma di iscrizione da parte della scuola prescelta e di procedere eventualmente con successiva disdetta al servizio.",
+  "kind": "bando",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [
+    "Richiesta attestazione ISEE (soglia non pubblicata)"
+   ],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-02-13",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Albano Laziale",
+   "ente_codice_istat": "058003",
+   "connector": "wp_rest",
+   "url": "https://comune.albanolaziale.rm.it/servizio/servizio-mensa-scolastica/",
+   "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/17573",
+   "fetched_at": "2026-08-02T10:40:55.368042Z",
+   "raw_hash": "93795f5dd224f2eb"
+  },
+  "confidence": "extracted",
+  "extraction_notes": [
+   "Il servizio richiede l'ISEE ma non pubblica la soglia: verifica sulla pagina del comune.",
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ]
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058003:17574",
+  "title": "Borse di Studio “IoStudio”",
+  "summary": "Le famiglie interessate devono autenticarsi attraverso le credenziali SPID o CIE (Carta identità elettronica) e compilare la scheda dell'istanza in ogni sua parte allegando la seguente documentazione: il Modello di autocertificazione della frequenza scolastica compilato",
+  "body": "Le famiglie interessate devono autenticarsi attraverso le credenziali SPID o CIE (Carta identità elettronica) e compilare la scheda dell'istanza in ogni sua parte allegando la seguente documentazione: il Modello di autocertificazione della frequenza scolastica compilato | Attestazione ISEE in corso di validità (scadenza al 31/12/2026). ISEE minorenni (in caso di minorenni con genitori non coniugati tra loro e non conviventi). Per tutti gli altri casi ISEE ordinario | In caso di studente minorenne, copia del documento di identità in corso di validità del genitore/tutore richiedente, oltre al documento e codice fiscale dello studente | In caso di studente maggiorenne allegare solo il documento e codice fiscale del ragazzo/a",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [
+    "Richiesta attestazione ISEE (soglia non pubblicata)"
+   ],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-02-11",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Albano Laziale",
+   "ente_codice_istat": "058003",
+   "connector": "wp_rest",
+   "url": "https://comune.albanolaziale.rm.it/servizio/borse-di-studio-iostudio/",
+   "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/17574",
+   "fetched_at": "2026-08-02T10:40:55.368396Z",
+   "raw_hash": "e2afc44320904577"
+  },
+  "confidence": "extracted",
+  "extraction_notes": [
+   "Il servizio richiede l'ISEE ma non pubblica la soglia: verifica sulla pagina del comune.",
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ]
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058003:16092",
+  "title": "Richiesta di rilascio contrassegno disabili",
+  "summary": "Compilare il modulo allegando la seguente documentazione:",
+  "body": "Compilare il modulo allegando la seguente documentazione: | Certificazione medica | Copia documento d'identità | Foto formato tessera recente | Contrassegno precedente (In caso di rinnovo) | Marca da bollo di 16,00 € (Solo per rilascio o rinnovo contrassegno temporaneo)",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-23",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Albano Laziale",
+   "ente_codice_istat": "058003",
+   "connector": "wp_rest",
+   "url": "https://comune.albanolaziale.rm.it/servizio/richiesta-di-rilascio-contrassegno-disabili/",
+   "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/16092",
+   "fetched_at": "2026-08-02T10:40:55.368579Z",
+   "raw_hash": "c8f743d5aacb2974"
+  },
+  "confidence": "inferred",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ]
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058003:16003",
+  "title": "Centri di facilitazione digitale",
+  "summary": "Per accedere al servizio bisogna recarsi di persona presso il centro di facilitazione digitale | compilare il modulo online inserendo i seguenti dati",
+  "body": "Per accedere al servizio bisogna recarsi di persona presso il centro di facilitazione digitale | compilare il modulo online inserendo i seguenti dati | selezionare ufficio e sportello | scegliere data e orario tra quelli disponibili | inserire dati del dichiarante",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-08-07",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Albano Laziale",
+   "ente_codice_istat": "058003",
+   "connector": "wp_rest",
+   "url": "https://comune.albanolaziale.rm.it/servizio/centri-di-facilitazione-digitale/",
+   "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/16003",
+   "fetched_at": "2026-08-02T10:40:55.368742Z",
+   "raw_hash": "dad1e400d28c19e7"
+  },
+  "confidence": "inferred",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ]
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058003:15861",
+  "title": "Carta d’identità (CIE)",
+  "summary": "Per accedere al servizio e autenticarsi sono necessari SPID o CIE. Il giorno scelto durante la procedura di prenotazione, il cittadino dovrà recarsi in anagrafe munito della seguente documentazione:",
+  "body": "Per accedere al servizio e autenticarsi sono necessari SPID o CIE. Il giorno scelto durante la procedura di prenotazione, il cittadino dovrà recarsi in anagrafe munito della seguente documentazione: | Documento di identificazione (Carta identità precedente) | Codice fiscale | Foto formato tessera recente | Pagamento in contanti se non è ancora avvenuto tramite procedura online | In caso di furto o smarrimento, è necessario presentare la denuncia | Modulo di assenso in caso di minore accompagnato da un solo genitore",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-07-18",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Albano Laziale",
+   "ente_codice_istat": "058003",
+   "connector": "wp_rest",
+   "url": "https://comune.albanolaziale.rm.it/servizio/carta-identita/",
+   "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/15861",
+   "fetched_at": "2026-08-02T10:40:55.369021Z",
+   "raw_hash": "eccd60ff40e18627"
+  },
+  "confidence": "inferred",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ]
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058003:15626",
+  "title": "Servizio raccolta pannolini/pannoloni",
+  "summary": "Per attivare il servizio bisogna prima compilare il modulo allegato ed inviare i seguenti documenti:",
+  "body": "Per attivare il servizio bisogna prima compilare il modulo allegato ed inviare i seguenti documenti: | copia ricevuta dell’ultimo versamento Tari (obbligatorio) | copia del documento di identità del sottoscrittore (obbligatorio)",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-07-01",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Albano Laziale",
+   "ente_codice_istat": "058003",
+   "connector": "wp_rest",
+   "url": "https://comune.albanolaziale.rm.it/servizio/servizio-raccolta-pannolini-pannoloni/",
+   "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/15626",
+   "fetched_at": "2026-08-02T10:40:55.369236Z",
+   "raw_hash": "303f7c707b72051c"
+  },
+  "confidence": "inferred",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ]
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058003:15606",
+  "title": "Interventi per la valorizzazione del ruolo di cura e di assistenza del caregiver familiare",
+  "summary": "Dati anagrafici per la compilazione della modulistica",
+  "body": "Dati anagrafici per la compilazione della modulistica",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-06-27",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Albano Laziale",
+   "ente_codice_istat": "058003",
+   "connector": "wp_rest",
+   "url": "https://comune.albanolaziale.rm.it/servizio/interventi-per-la-valorizzazione-del-ruolo-di-cura-e-di-assistenza-del-caregiver-familiare/",
+   "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/15606",
+   "fetched_at": "2026-08-02T10:40:55.369387Z",
+   "raw_hash": "af7bd94bdd5eb1b0"
+  },
+  "confidence": "inferred",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ]
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058003:15593",
+  "title": "Assistenza domiciliare diretta o indiretta in favore di persone affette da patologia di Alzheimer",
+  "summary": "Per partecipare al presente avviso occorre presentare la domanda al P.U.A. su apposita modulistica allegata, corredata della seguente documentazione:",
+  "body": "Per partecipare al presente avviso occorre presentare la domanda al P.U.A. su apposita modulistica allegata, corredata della seguente documentazione: | Certificazione rilasciata dai Centri per disturbi cognitivi e demenze (C.D.C.D.) del territorio nazionale o da un servizio accreditato, con relativa valutazione del Clinical Demential Rating Scale; | Attestazione ISEE in corso di validità; | Copia del documento di riconoscimento in corso di validità;",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [
+    "Richiesta attestazione ISEE (soglia non pubblicata)"
+   ],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-06-26",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Albano Laziale",
+   "ente_codice_istat": "058003",
+   "connector": "wp_rest",
+   "url": "https://comune.albanolaziale.rm.it/servizio/assistenza-domiciliare-diretta-o-indiretta-in-favore-di-persone-affette-da-patologia-di-alzheimer/",
+   "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/15593",
+   "fetched_at": "2026-08-02T10:40:55.369658Z",
+   "raw_hash": "e5fbc73b86d55a8c"
+  },
+  "confidence": "extracted",
+  "extraction_notes": [
+   "Il servizio richiede l'ISEE ma non pubblica la soglia: verifica sulla pagina del comune.",
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ]
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058003:14294",
+  "title": "Iscrizione anagrafica per cittadini europei",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | • carta d’identità, passaporto o documento valido per l’espatrio; • codice fiscale italiano, se lo possiedi; • dati anagrafici e codice fiscale di una persona della famiglia presso cui ti trasferisci; • estremi catastali dell’immobile dove abiterai se sei il proprietario, estremi del contratto di locazione e carta d’identità del proprietario dell’immobile se non sei tu. Altri documenti possono essere necessari in base ai casi specifici. | Se ti trasferisci per lavoro • documentazione che dimostri la tua qualità di lavoratore subordinato o autonomo. | Se ti trasferisci per studio e non sei lavoratore: • documentazione che attesti la tua iscrizione presso un istituto di formazione ; • autodichiarazione del possesso di risorse economiche sufficienti per non ricorrere all’assistenza sociale dello Stato ; copia di un’assicurazione sanitaria che copra i rischi sul territorio nazionale e valida per almeno un anno o per la durata del corso di studi (non è valida la Tessera europea di assicurazione malattia). | Se ti trasferisci senza essere lavoratore o studente: • autodichiarazione del possesso di risorse economiche sufficienti per non ricorrere all’assistenza sociale dello Stato ; • copia di un’assicurazione sanitaria che copra i rischi sul territorio nazionale e valida per almeno un anno o per la durata del corso di studi (non è valida la Tessera europea di assicurazione malattia). | Se ti stai ricongiungendo con un familiare: • certificato di matrimonio, se il ricongiungimento avviene tra coniugi; • certificato di nascita con l’indicazione di paternità e maternità, se il ricongiungimento avviene tra figlio e genitore.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-04-23",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Albano Laziale",
+   "ente_codice_istat": "058003",
+   "connector": "wp_rest",
+   "url": "https://comune.albanolaziale.rm.it/servizio/iscrizione-anagrafica-per-cittadini-europei/",
+   "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/14294",
+   "fetched_at": "2026-08-02T10:40:55.370690Z",
+   "raw_hash": "9dbf49b18fa05e3b"
+  },
+  "confidence": "inferred",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ]
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058003:14293",
+  "title": "Certificato di nascita per cittadini europei",
+  "summary": "Per richiedere il certificato di nascita, assicurati di avere:",
+  "body": "Per richiedere il certificato di nascita, assicurati di avere: | il tuo codice fiscale italiano",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-04-23",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Albano Laziale",
+   "ente_codice_istat": "058003",
+   "connector": "wp_rest",
+   "url": "https://comune.albanolaziale.rm.it/servizio/certificato-di-nascita-per-cittadini-europei/",
+   "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/14293",
+   "fetched_at": "2026-08-02T10:40:55.370906Z",
+   "raw_hash": "b5f302c3711f121c"
+  },
+  "confidence": "inferred",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ]
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058003:14273",
+  "title": "Certificati anagrafici",
+  "summary": "Per richiedere certificati anagrafici, assicurati di avere:",
+  "body": "Per richiedere certificati anagrafici, assicurati di avere: | i tuoi dati in quanto richiedente | i dati dell’intestatario, nel caso stessi richiedendo un certificato per un’altra persona",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-04-23",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Albano Laziale",
+   "ente_codice_istat": "058003",
+   "connector": "wp_rest",
+   "url": "https://comune.albanolaziale.rm.it/servizio/certificati-anagrafici/",
+   "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/14273",
+   "fetched_at": "2026-08-02T10:40:55.371066Z",
+   "raw_hash": "cae6fadf6f10e66f"
+  },
+  "confidence": "inferred",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ]
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058003:14255",
+  "title": "Sportello Unico Attività Produttive (SUAP)",
+  "summary": "Per accedere ai servizi del SUAP, assicurati di avere:",
+  "body": "Per accedere ai servizi del SUAP, assicurati di avere: | le credenziali SPID oppure la Carta Nazionale dei Servizi | la firma digitale e la posta elettronica certificata (PEC) | Sul portale Impresainungiorno e a sportello, puoi verificare tutta la documentazione necessaria per svolgere una pratica specifica",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-04-22",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Albano Laziale",
+   "ente_codice_istat": "058003",
+   "connector": "wp_rest",
+   "url": "https://comune.albanolaziale.rm.it/servizio/s-u-a-p/",
+   "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/14255",
+   "fetched_at": "2026-08-02T10:40:55.371263Z",
+   "raw_hash": "f801cf4fffdde672"
+  },
+  "confidence": "inferred",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ]
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058003:9136",
+  "title": "Assegno di maternità",
+  "summary": "Per accedere al servizio è necessaria la seguente documentazione:",
+  "body": "Per accedere al servizio è necessaria la seguente documentazione: | SPID/CIE; | Fotocopia del documento d'identità; per i cittadini extracomunitari, fotocopia del permesso di soggiorno o del certificato di rifugiato politico o di protezione sussidiaria; | copia delle coordinate codice IBAN del conto corrente/libretto postale; | dichiarazione ente erogatore, se previsto.",
+  "kind": "contributo_economico",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-04-11",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Albano Laziale",
+   "ente_codice_istat": "058003",
+   "connector": "wp_rest",
+   "url": "https://comune.albanolaziale.rm.it/servizio/richiesta-assegno-di-maternita/",
+   "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/9136",
+   "fetched_at": "2026-08-02T10:40:55.371462Z",
+   "raw_hash": "f23a327de73ea761"
+  },
+  "confidence": "inferred",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ]
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058003:9135",
+  "title": "Richiesta pubblicazione di matrimonio",
+  "summary": "Per avanzare la richiesta è necessario presentare:",
+  "body": "Per avanzare la richiesta è necessario presentare: | SPID/CIE; | Richiesta del parroco o del Ministro del Culto e per i cittadini stranieri il Nulla Osta al matrimonio rilasciato dal consolato o dall'Ambasciata. | Codice fiscale e passaporto (se stranieri); | Documento di riconoscimento degli eventuali testimoni. | i requisiti sono: la richiesta va effettuata presso il comune dove uno dei due futuri sposi è residente. | entrambi gli sposi devono aver compiuto 18 anni oppure 16 anni previa autorizzazione del Tribunale dei minori. | devono essere entrambi di stato libero, ovvero devono passare minimo 300 giorni dallo scioglimento, dall’annullamento o dalla cessazione degli effetti civili del precedente matrimonio.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": 18,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-04-11",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Albano Laziale",
+   "ente_codice_istat": "058003",
+   "connector": "wp_rest",
+   "url": "https://comune.albanolaziale.rm.it/servizio/richiesta-pubblicazione-di-matrimonio/",
+   "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/9135",
+   "fetched_at": "2026-08-02T10:40:55.371756Z",
+   "raw_hash": "c0223ea80e6646ef"
+  },
+  "confidence": "declared",
+  "extraction_notes": []
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058003:9137",
+  "title": "Progetto Hermes – percorsi di inclusione sociale annualità 2025-2026",
+  "summary": "È necessaria:",
+  "body": "È necessaria: | lo SPID/CIE per l'accesso al portale; | documento identità fronte/retro del richiedente; | idoneità psicofisico in particolare per lo svolgimento di attività socialmente utili, attestato da regolare certificato rilasciato dal medico curante.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2023-11-30",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Albano Laziale",
+   "ente_codice_istat": "058003",
+   "connector": "wp_rest",
+   "url": "https://comune.albanolaziale.rm.it/servizio/progetto-hermes-percorsi-di-inclusione-sociale-annualita-2025-2026/",
+   "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/9137",
+   "fetched_at": "2026-08-02T10:40:55.371952Z",
+   "raw_hash": "9523f8d983bee811"
+  },
+  "confidence": "inferred",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ]
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:058003:15670",
+  "title": "Adotta un’area verde",
+  "summary": "Per attivare il servizio bisogna compilare il modulo allegato.",
+  "body": "Per attivare il servizio bisogna compilare il modulo allegato.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2020-07-04",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Albano Laziale",
+   "ente_codice_istat": "058003",
+   "connector": "wp_rest",
+   "url": "https://comune.albanolaziale.rm.it/servizio/adotta-unarea-verde/",
+   "api_url": "https://comune.albanolaziale.rm.it/wp-json/wp/v2/servizi/15670",
+   "fetched_at": "2026-08-02T10:40:55.372050Z",
+   "raw_hash": "0f5e7661118e07f0"
+  },
+  "confidence": "inferred",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ]
+ }
+]

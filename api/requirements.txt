@@ -1,0 +1,16 @@
+# TreasureIQ API dependencies.
+#
+# Lower bounds rather than exact pins: this is an application people are meant
+# to clone and run, and hard pins would break on any environment whose wheels
+# differ. The lock for reproducible deploys belongs in the container image.
+
+fastapi>=0.141,<1.0
+uvicorn[standard]>=0.52,<1.0
+pydantic>=2.13,<3.0
+httpx>=0.28,<1.0
+itsdangerous>=2.2,<3.0
+
+# Optional. The extraction cache in data/extraction-cache/ is committed, so the
+# application runs end to end without this package and without an API key.
+# Install it only to re-run extraction against sources that changed.
+anthropic>=0.120,<1.0

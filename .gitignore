@@ -1,0 +1,51 @@
+# --- Python ---
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# --- Node / Next.js ---
+node_modules/
+.next/
+out/
+next-env.d.ts
+*.tsbuildinfo
+.npm/
+
+# --- Secrets and local environment ---
+# Real credentials never enter the repository. `.env.example` is committed as
+# documentation of which variables exist; anything holding actual values is not.
+.env
+.env.*
+!.env.example
+.secrets
+.envrc
+*.pem
+*.key
+
+# --- Tooling state (per-machine, not part of the project) ---
+.codegraph/
+.serena/
+.kapi/
+.claude/
+
+# --- OS / editor ---
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# --- Runtime artefacts ---
+*.log
+.coverage
+htmlcov/
+
+# NOTE: data/seed/ and data/extraction-cache/ are deliberately NOT ignored.
+# They are the committed snapshots that let anyone clone the repository and run
+# the full demo with no network access and no API key — which the hackathon
+# requires and which is the point of the reproducibility argument.

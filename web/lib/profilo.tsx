@@ -66,6 +66,13 @@ type ProfiloContextValue = {
 
 const ProfiloContext = createContext<ProfiloContextValue | null>(null);
 
+/** Whether this load of the application has already cleared its session.
+ *
+ * Module scope on purpose: it outlives every client-side navigation and is
+ * reset only by a real page load, which is precisely the line between
+ * "arriving" and "moving around inside". */
+let giaAzzerato = false;
+
 function contaFatti(p: Profilo): number {
   return [
     p.nome,
@@ -119,6 +126,20 @@ export function ProfiloProvider({ children }: { children: React.ReactNode }) {
   // is not showing. Identity is re-established by signing in, which takes one
   // click and is the moment the citizen actually chooses it.
   useEffect(() => {
+    // Once per load of the application, not once per visit to this page.
+    //
+    // This provider lives on the chat page, so it also mounts every time the
+    // reader navigates *back* to the chat from anywhere else in the site — and
+    // logging out there meant that signing in, going to /opportunita and
+    // returning to ask another question silently ended the session. The next
+    // page then rendered empty and looked broken, which is exactly how this
+    // was found.
+    //
+    // A module-level flag survives client-side navigation and dies with a real
+    // page load, which is the distinction wanted: arriving at the application
+    // means arriving as nobody; moving around inside it does not.
+    if (giaAzzerato) return;
+    giaAzzerato = true;
     logout().catch(() => {
       /* nothing to end — already the clean slate we wanted */
     });

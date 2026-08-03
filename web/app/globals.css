@@ -2240,3 +2240,97 @@ a {
   text-transform: uppercase;
   color: var(--yamabuki-deep);
 }
+
+/* ------------------------------------------------- integration cost table */
+
+/* Cost per record, not cost in total: a comune needing a bespoke connector for
+   fifteen records is dearer to read than one needing a parser for forty, and a
+   total hides exactly that. Bars are plain divs and every one carries its
+   figure in writing beside it — a chart whose values cannot be read off it is
+   decoration. */
+.costo-lista {
+  list-style: none;
+  margin: var(--ma-6) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--ma-6);
+}
+.costo-riga {
+  border-top: 1px solid var(--kasumi);
+  padding-top: var(--ma-4);
+}
+.costo-riga__testa {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--ma-2);
+}
+.costo-riga__testa h3 {
+  margin: 0;
+  font-size: 1.02rem;
+}
+.costo-riga__modo {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: var(--sumi-faint);
+}
+.costo-barra {
+  height: 10px;
+  margin: var(--ma-3) 0 var(--ma-2);
+  background: var(--paper-sunken);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.costo-barra__fill {
+  height: 100%;
+  background: var(--ai-vivid);
+}
+.costo-riga__cifra {
+  margin: 0;
+  font-size: 0.92rem;
+  max-width: none;
+}
+.costo-riga__cifra strong {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+}
+.costo-conteggi {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--ma-3);
+  margin: var(--ma-4) 0 0;
+}
+.costo-conteggi dt {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sumi-faint);
+}
+.costo-conteggi dd {
+  margin: 2px 0 0;
+  font-family: var(--font-mono);
+  font-size: 1.05rem;
+}
+.costo-riga__nota {
+  margin: var(--ma-3) 0 0;
+  font-size: 0.82rem;
+  color: var(--sumi-faint);
+  max-width: none;
+}
+/* An expired discovery is a fact about our own upkeep, not about the comune,
+   so it takes the amber this app already uses for "not verified" rather than
+   the vermilion it reserves for a citizen being blocked. */
+.costo-riga__scaduta {
+  color: var(--yamabuki-deep);
+}
+.costo-riga__fuori {
+  font-style: italic;
+}
+.costo-metodo {
+  margin: var(--ma-6) 0 0;
+  font-size: 0.86rem;
+  color: var(--sumi-soft);
+}

@@ -40,6 +40,7 @@ from treasureiq.chat.respond import (
     compute_recovery_stats,
 )
 from treasureiq.chat.intent import Topic
+from treasureiq.costo import SOGLIA_RISCOPERTA, costo_comune
 from treasureiq.integration import (
     MODE_LABELS,
     Ente,
@@ -55,7 +56,7 @@ from treasureiq.match.engine import (
 )
 from treasureiq.readiness import ReadinessReport, score_comune
 from treasureiq.recovery import ComuneRecovery, compute_comune_recovery
-from treasureiq.schema import CitizenProfile, Opportunity
+from treasureiq.schema import CitizenProfile, Livello, Opportunity
 from treasureiq.stats import (
     APP_VERSION,
     AppStats,
@@ -101,6 +102,18 @@ COMUNI = {
         # mirroring Albano — it exposes more services AND publishes nationally,
         # yet fewer of its records yield a recoverable requirement.
         "datasets_on_dati_gov": 5,
+    },
+    # Ariccia had a snapshot on disk and no entry here, so fifteen records
+    # ingested through the HTML connector were invisible to every endpoint.
+    # It is also the most instructive comune we have measured: the only one
+    # that needed a bespoke connector, and the one whose cost per record is
+    # nearly double the others because that connector is amortised over
+    # fifteen records instead of forty.
+    "058009": {
+        "nome": "Ariccia",
+        "ente": "Comune di Ariccia",
+        "seed": "ariccia_058009.json",
+        "datasets_on_dati_gov": 0,
     },
 }
 
@@ -848,6 +861,85 @@ def opportunities(
     records = list(load_opportunities(profile.comune_istat))
     results = match(records, profile, include_ineligible=include_ineligible)
     return [to_match_out(r) for r in results]
+
+
+class VoceCostoOut(BaseModel):
+    chiave: str
+    etichetta: str
+    valore: float
+    evidenza: str
+
+
+class CostoOut(BaseModel):
+    """What one comune costs TreasureIQ to keep readable (D-26 rule 2).
+
+    Never presented as a bill to the citizen and never as a grade for the
+    administration: it is our own integration cost, and the components are
+    shipped with it so a reader can check the arithmetic rather than trust the
+    total.
+    """
+
+    ente: str
+    codice_istat: str
+    modo: str
+    scoperta_il: date
+    eta_scoperta_giorni: int
+    scoperta_scaduta: bool
+    soglia_riscoperta_giorni: int
+    record_totali: int
+    record_strutturati: int
+    record_recuperati_da_prosa: int
+    record_non_recuperati: int
+    #: Reported as evidence, deliberately absent from the score: wall-clock
+    #: time measures our machine and their file sizes as much as their
+    #: openness.
+    secondi_recupero: float | None
+    costo_totale: float
+    costo_per_record: float | None
+    voci: list[VoceCostoOut]
+
+
+def _costo_out(codice_istat: str) -> CostoOut:
+    meta = COMUNI.get(codice_istat)
+    ente = load_enti().get(codice_istat)
+    if meta is None or ente is None:
+        raise HTTPException(404, f"Comune {codice_istat} non disponibile")
+    records = [r for r in load_opportunities(codice_istat) if r.livello is Livello.COMUNALE]
+    c = costo_comune(ente=ente, records=records)
+    return CostoOut(
+        ente=c.ente,
+        codice_istat=c.codice_istat,
+        modo=c.modo.value,
+        scoperta_il=c.scoperta_il,
+        eta_scoperta_giorni=c.eta_scoperta_giorni,
+        scoperta_scaduta=c.scoperta_scaduta,
+        soglia_riscoperta_giorni=SOGLIA_RISCOPERTA.days,
+        record_totali=c.record_totali,
+        record_strutturati=c.record_strutturati,
+        record_recuperati_da_prosa=c.record_recuperati_da_prosa,
+        record_non_recuperati=c.record_non_recuperati,
+        secondi_recupero=c.secondi_recupero,
+        costo_totale=c.costo_totale,
+        costo_per_record=c.costo_per_record,
+        voci=[
+            VoceCostoOut(
+                chiave=v.chiave, etichetta=v.etichetta, valore=v.valore, evidenza=v.evidenza
+            )
+            for v in c.voci
+        ],
+    )
+
+
+@app.get("/api/costo", response_model=list[CostoOut])
+def costi() -> list[CostoOut]:
+    """Every measured comune's integration cost, cheapest per record first.
+
+    Ordered by cost *per record* rather than by total: a comune needing a
+    bespoke connector for fifteen records is more expensive to read than one
+    needing a parser for forty, and the total hides exactly that.
+    """
+    out = [_costo_out(istat) for istat in COMUNI if istat in load_enti()]
+    return sorted(out, key=lambda c: (c.costo_per_record is None, c.costo_per_record or 0))
 
 
 @app.get("/api/readiness/{codice_istat}", response_model=ReadinessOut)

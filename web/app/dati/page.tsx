@@ -27,10 +27,13 @@ import {
   readinessAll,
   recoveryAll,
   integrationAll,
+  costi,
   type Readiness,
   type Recovery,
   type Integration,
+  type Costo,
 } from "@/lib/api";
+import CostoTable from "@/components/CostoTable";
 import RecoveryCostChart from "@/components/RecoveryCostChart";
 
 export const dynamic = "force-dynamic";
@@ -74,11 +77,12 @@ const ZERO_COMUNI: {
   codice_istat: string;
   diagnosis: string;
 }[] = [
-  {
-    ente: "Comune di Ariccia",
-    codice_istat: "058009",
-    diagnosis: "WordPress con REST disattivato di proposito — 410 su /wp-json e /it/wp-json.",
-  },
+  // Ariccia is no longer here. Its API really is dead — 410 on /wp-json, by
+  // deliberate configuration — but a bespoke HTML connector was written for it
+  // and recovered fifteen records, so listing it as zero would now contradict
+  // the cost table further down this same page. What its case actually shows
+  // is the point of the whole exercise: the data was there, and reaching it
+  // without an API costs nearly double per record.
   {
     ente: "Comune di Genzano di Roma",
     codice_istat: "058043",
@@ -129,6 +133,16 @@ export default async function DataQuality() {
     reports = await readinessAll();
   } catch {
     reports = [];
+  }
+
+  // Same fail-soft shape as everything else on this page: the integration
+  // cost is worth showing when it is there, and never worth taking the
+  // readiness tables down for.
+  let costiReports: Costo[] = [];
+  try {
+    costiReports = await costi();
+  } catch {
+    costiReports = [];
   }
 
   // Recovery cost is a separate call so a failure here costs only the one
@@ -364,6 +378,7 @@ export default async function DataQuality() {
         </p>
         <div style={{ marginTop: "var(--ma-6)" }}>
           <RecoveryCostChart reports={recoveryReports} measuredAt={EVIDENCE_MEASURED_AT} />
+          <CostoTable costi={costiReports} />
         </div>
       </section>
     </div>

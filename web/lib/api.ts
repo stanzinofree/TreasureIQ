@@ -167,11 +167,12 @@ export const opportunities = (includeIneligible = false) =>
 export const readiness = (istat: string) =>
   call<Readiness>(`/api/readiness/${istat}`);
 
-/** Every comune with a committed seed snapshot (today: Albano, Fonte Nuova).
- * Comuni measured at zero without a snapshot (Ariccia, Genzano, Marino) are
- * not in this list — they never had a reachable service API to ingest from,
- * so there is nothing for the API to score. Their diagnosis is cited on
- * `/dati` as measurement evidence, not fetched from here. */
+/** Every comune with a committed seed snapshot: Albano and Fonte Nuova through
+ * their service APIs, Ariccia through the bespoke HTML connector — it had no
+ * reachable API, which is precisely why it costs nearly double per record.
+ * Genzano and Marino remain measured at zero with no snapshot, so there is
+ * nothing here to score; their diagnosis is cited on `/dati` as measurement
+ * evidence rather than fetched from here. */
 export const readinessAll = () => call<Readiness[]>("/api/readiness");
 
 /** One opportunity's recovery cost (`RecordCostOut` in `api.py`). */
@@ -440,3 +441,38 @@ export const inviaSegnalazione = (codiceIstat: string) =>
     method: "POST",
     body: JSON.stringify({ codice_istat: codiceIstat }),
   });
+
+/** One component of a comune's integration cost, with the fact behind it. */
+export interface VoceCosto {
+  chiave: string;
+  etichetta: string;
+  valore: number;
+  evidenza: string;
+}
+
+/** What one comune costs TreasureIQ to keep readable (D-26 rule 2).
+ *
+ * Never a bill to the citizen and never a grade for the administration: it is
+ * our own integration cost. The components ship with the total so a reader can
+ * check the arithmetic instead of trusting the number. */
+export interface Costo {
+  ente: string;
+  codice_istat: string;
+  modo: string;
+  scoperta_il: string;
+  eta_scoperta_giorni: number;
+  scoperta_scaduta: boolean;
+  soglia_riscoperta_giorni: number;
+  record_totali: number;
+  record_strutturati: number;
+  record_recuperati_da_prosa: number;
+  record_non_recuperati: number;
+  /** Evidence only, deliberately outside the score: wall-clock time measures
+   * our machine and their file sizes as much as their openness. */
+  secondi_recupero: number | null;
+  costo_totale: number;
+  costo_per_record: number | null;
+  voci: VoceCosto[];
+}
+
+export const costi = () => call<Costo[]>("/api/costo");

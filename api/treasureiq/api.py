@@ -1020,6 +1020,9 @@ def approfondimento(body: ApprofondimentoIn, request: Request) -> Approfondiment
         topic=topic,
         profile=profile,
         comune_nome=comune_nome,
+        # Carries the comune's own web host, so pages belonging to a different
+        # municipality can be dropped: institutional is not the same as yours.
+        ente=load_enti().get(comune_istat),
     )
     return ApprofondimentoOut(
         esito=esito,

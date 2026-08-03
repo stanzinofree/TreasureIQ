@@ -1,0 +1,19 @@
+{
+ "query": "volontariato albo associazioni Fonte Nuova",
+ "provider": "brave",
+ "fetched_at": "2026-08-03T17:12:34.739876Z",
+ "results": [
+  {
+   "title": "Associazioni – Comune di Fonte",
+   "url": "https://www.comune.fonte.tv.it/associazioni/"
+  },
+  {
+   "title": "Albo comunale delle Associazioni. AGGIORNAMENTO – Comune di Ferrandina",
+   "url": "https://comune.ferrandina.mt.it/novita/albo-comunale-delle-associazioni-aggiornamento/"
+  },
+  {
+   "title": "COMUNE DI FONTE",
+   "url": "http://www.comune.fonte.tv.it/c026029/zf/index.php/associazioni/index/dettaglio/associazione/14"
+  }
+ ]
+}

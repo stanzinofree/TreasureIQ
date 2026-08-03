@@ -42,6 +42,7 @@ import re
 from dataclasses import dataclass, field
 from datetime import date
 from decimal import Decimal
+from urllib.parse import urlparse
 
 from pydantic import BaseModel, Field
 
@@ -409,8 +410,9 @@ def approfondisci_nel_comune(
     topic: Topic,
     profile: CitizenProfile | None,
     comune_nome: str,
+    ente: Ente | None = None,
     today: date | None = None,
-) -> tuple[list[MatchResult], str]:
+) -> tuple[list[MatchResult], str, list[WebResultAnswer]]:
     """Check the comune's own published records for a topic, and say so either
     way.
 
@@ -451,7 +453,7 @@ def approfondisci_nel_comune(
             "Non significa che non esista: significa che non è scritto in un "
             "posto che si possa leggere."
         )
-        web = _pagine_istituzionali(topic=topic, comune_nome=comune_nome)
+        web = _pagine_istituzionali(topic=topic, comune_nome=comune_nome, ente=ente)
         if web:
             esito += (
                 " Cercando fra i portali istituzionali abbiamo però trovato "
@@ -467,7 +469,42 @@ def approfondisci_nel_comune(
     return results, esito, web
 
 
-def _pagine_istituzionali(*, topic: Topic, comune_nome: str) -> list[WebResultAnswer]:
+def _host_del_comune(ente: Ente | None) -> str | None:
+    """The comune's own web host, as IPA records it."""
+    if ente is None or ente.ipa is None or not ente.ipa.sito:
+        return None
+    sito = ente.ipa.sito.strip()
+    if "//" not in sito:
+        sito = f"https://{sito}"
+    host = urlparse(sito).hostname or ""
+    return host.lower().removeprefix("www.") or None
+
+
+def _e_di_un_altro_comune(url: str, *, host_proprio: str | None) -> bool:
+    """Whether a page belongs to a municipality that is not this one.
+
+    The institutional filter answers "is this a public body"; it cannot answer
+    "is this *your* public body". Searching "mensa scolastica tariffe Fonte
+    Nuova" returned Bologna's school-meals page and `comune.fonte.tv.it` — Fonte
+    in Treviso, a different comune with a similar name — both perfectly
+    institutional and both wrong for the person asking. Tariffs, deadlines and
+    offices differ by comune, so another municipality's page is not weaker
+    evidence about yours: it is evidence about somebody else, and acting on it
+    costs a wasted trip at best.
+
+    National and regional bodies are left alone: INPS and ARERA publish rules
+    that genuinely apply everywhere, which is why they were worth reaching in
+    the first place.
+    """
+    host = (urlparse(url).hostname or "").lower().removeprefix("www.")
+    if not host.startswith(("comune.", "comuni.", "citta.", "cittadi.")):
+        return False
+    return host != host_proprio
+
+
+def _pagine_istituzionali(
+    *, topic: Topic, comune_nome: str, ente: Ente | None = None
+) -> list[WebResultAnswer]:
     """Cached institutional pages for a topic in one comune (D-28).
 
     Reads the cache and nothing else: the search ran at ingestion, so a
@@ -482,9 +519,15 @@ def _pagine_istituzionali(*, topic: Topic, comune_nome: str) -> list[WebResultAn
     entry = load_websearch(f"{fragment} {comune_nome}")
     if entry is None:
         return []
+    host_proprio = _host_del_comune(ente)
+    tenute = [
+        r
+        for r in entry.results
+        if not _e_di_un_altro_comune(str(r.url), host_proprio=host_proprio)
+    ]
     return [
         WebResultAnswer(title=r.title, url=str(r.url))
-        for r in entry.results[:MAX_WEB_RESULTS_IN_REPLY]
+        for r in tenute[:MAX_WEB_RESULTS_IN_REPLY]
     ]
 
 

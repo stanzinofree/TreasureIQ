@@ -57,6 +57,23 @@ import {
  * publishing structured data (M1/M2/M3) has nothing to ask it to open. */
 const SEGNALAZIONE_ACCESS_MODES = new Set(["M4_connettore", "M5_nessuno", "M6_web_aperto"]);
 
+/**
+ * What the wait says while it lasts.
+ *
+ * The old single line read "Sto leggendo i dati del comune…", which named a
+ * comune nobody had established — the same claim the hero used to make about
+ * residency. These describe only what is actually happening: reading a
+ * snapshot, comparing requirements, checking what was published. None of them
+ * names an administration, a place or a result.
+ */
+const ATTESA = [
+  "Sto leggendo…",
+  "Cerco fra i servizi pubblicati…",
+  "Confronto i requisiti…",
+  "Verifico cosa è stato pubblicato davvero…",
+  "Ci sono quasi…",
+];
+
 const GLYPH: Record<string, string> = {
   met: "●",
   not_met: "✕",
@@ -491,6 +508,20 @@ export default function Chat() {
   const accesso = profilo.accesso === true;
   const [manualLogin, setManualLogin] = useState(false);
   const [scheda, setScheda] = useState<Match | null>(null);
+  const [passoAttesa, setPassoAttesa] = useState(0);
+
+  // The wait message moves on every few seconds so a slow answer looks like
+  // work in progress rather than a stall. It restarts from the first line each
+  // time, so the sequence reads as a progression instead of resuming
+  // mid-thought from the previous question.
+  useEffect(() => {
+    if (!busy) {
+      setPassoAttesa(0);
+      return;
+    }
+    const t = setInterval(() => setPassoAttesa((n) => n + 1), 2600);
+    return () => clearInterval(t);
+  }, [busy]);
 
   /** Municipal results found by the follow-up check arrive as a new answer in
    *  the transcript, not as a panel beside it: they are verdicts, and every
@@ -534,16 +565,20 @@ export default function Chat() {
   const logRef = useRef<HTMLDivElement>(null);
 
   // Keep the newest exchange in view as the transcript grows, the way a
-  // messaging app does. Only when the reader is already at the bottom: yanking
-  // someone away from an answer they are still reading, because a later one
-  // arrived, is worse than making them scroll.
+  // messaging app does. The page is the scroller now, not the transcript, so
+  // this moves the window — scrolling a box that no longer scrolls did
+  // nothing at all.
+  //
+  // Only when the reader is already near the bottom: being yanked away from an
+  // answer still being read, because a later one arrived, is worse than having
+  // to scroll.
   useEffect(() => {
-    const log = logRef.current;
-    if (!log) return;
-    const distanzaDalFondo = log.scrollHeight - log.scrollTop - log.clientHeight;
-    if (distanzaDalFondo > 240) return;
-    log.scrollTo({
-      top: log.scrollHeight,
+    if (!logRef.current) return;
+    const distanzaDalFondo =
+      document.documentElement.scrollHeight - window.scrollY - window.innerHeight;
+    if (distanzaDalFondo > 400) return;
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
       behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
         ? "auto"
         : "smooth",
@@ -799,7 +834,7 @@ export default function Chat() {
 
         {busy && (
           <p className="chat__hint" aria-hidden="true">
-            Sto leggendo i dati del comune…
+            {ATTESA[passoAttesa % ATTESA.length]}
           </p>
         )}
       </div>

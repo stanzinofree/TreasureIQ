@@ -684,10 +684,14 @@ a {
   display: flex;
   flex-direction: column;
   gap: var(--ma-6);
-  min-height: 0;
-  overflow-y: auto;
   padding: var(--ma-6) 0 var(--ma-6) var(--ma-2);
   border-right: 1px solid var(--kasumi);
+  /* Held against the masthead while the conversation scrolls past it. Its own
+     overflow only engages once the index outgrows the screen. */
+  position: sticky;
+  top: var(--masthead-h, 58px);
+  max-height: calc(100dvh - var(--masthead-h, 58px));
+  overflow-y: auto;
 }
 .pannello__sez h2 {
   display: flex;
@@ -881,12 +885,18 @@ a {
    renders nothing while it is empty, so `:has()` is what actually decides the
    track count — an empty 3fr column would otherwise shove the conversation
    off-centre and leave a quarter of the screen blank. */
+/* The page scrolls, not a box inside it.
+   Locking the workspace to the viewport turned the transcript into a nested
+   scroller, and a long answer then had to be scrolled *within* the column
+   while the page itself stayed still — the wheel did the wrong thing, and the
+   last card sat clipped behind the composer. The panel and the composer stay
+   put by being sticky, which gets the same fixed frame without taking the
+   scroll away from the document. */
 .workspace {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: var(--ma-8);
-  align-items: stretch;
-  height: calc(100dvh - var(--masthead-h, 58px) - var(--ma-6));
+  align-items: start;
 }
 
 /* Two tracks only once the conversation has actually started. A returning
@@ -930,29 +940,22 @@ a {
 }
 
 /* Narrow screens: the panel stops being a column and becomes a short header
-   above the conversation, and the workspace stops being viewport-locked.
-   Trapping a phone-sized chat inside a nested scroller fights the browser's
-   own address-bar behaviour and loses — on a phone the page itself is the
-   scroller. This block has to sit *after* the desktop rules above: same
-   specificity, so the cascade decides, and an earlier media query would be
-   overwritten by them. */
+   above the conversation, scrolling away with it rather than holding a strip
+   of a screen the chat needs all of. This block has to sit *after* the
+   desktop rules above: same specificity, so the cascade decides, and an
+   earlier media query would simply be overwritten by them. */
 @media (max-width: 1024px) {
   .workspace {
     grid-template-columns: 1fr;
-    height: auto;
     gap: var(--ma-4);
   }
   .pannello {
+    position: static;
+    max-height: none;
     overflow: visible;
     border-right: 0;
     border-bottom: 1px solid var(--kasumi);
     padding: var(--ma-4) 0;
-  }
-  .chat,
-  .chat__log {
-    min-height: 0;
-    overflow: visible;
-    flex: none;
   }
   .fatti {
     gap: var(--ma-2);
@@ -1319,23 +1322,15 @@ a {
   display: flex;
   flex-direction: column;
   gap: var(--ma-4);
-  flex: 1;
-  min-height: 0;
 }
 
 .chat__log {
   display: flex;
   flex-direction: column;
   gap: var(--ma-4);
-  flex: 1;
-  min-height: 0;
-  overflow-y: auto;
-  overscroll-behavior: contain;
   /* Symmetric: padding on one side only shifted every centred line in the
      transcript off-axis from the hero above it. */
   padding-inline: var(--ma-2);
-  /* Anchor targets from the side index must not land under the top edge. */
-  scroll-padding-top: var(--ma-4);
 }
 
 .chat__hint {
@@ -1518,9 +1513,20 @@ a {
   margin-bottom: var(--ma-2);
 }
 
+/* Pinned to the bottom of the window while the page scrolls behind it, so the
+   place you type is always where you left it. Sticky rather than fixed: it
+   still belongs to the column, so it inherits the width and cannot overlap
+   the panel. The opaque background and the negative-margin bleed stop the
+   last card showing through the gap beneath it. */
 .chat__form {
   display: grid;
   gap: var(--ma-2);
+  position: sticky;
+  bottom: 0;
+  z-index: 5;
+  background: var(--paper);
+  padding: var(--ma-4) var(--ma-2) var(--ma-4);
+  margin-inline: calc(-1 * var(--ma-2));
 }
 
 .chat__label {

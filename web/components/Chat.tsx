@@ -27,6 +27,7 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { Seal } from "@/components/Seal";
 import Segnalazione from "@/components/Segnalazione";
+import SchedaDettaglio from "@/components/SchedaDettaglio";
 import { useProfilo } from "@/lib/profilo";
 import { useRisultati } from "@/lib/risultati";
 
@@ -213,7 +214,15 @@ interface ChatMessage {
   reply?: ChatOut;
 }
 
-function MatchCard({ match, ancora }: { match: Match; ancora: string }) {
+function MatchCard({
+  match,
+  ancora,
+  onApri,
+}: {
+  match: Match;
+  ancora: string;
+  onApri: () => void;
+}) {
   const decided = match.criteria.filter(
     (c) => c.state === "met" || c.state === "not_met",
   );
@@ -273,9 +282,16 @@ function MatchCard({ match, ancora }: { match: Match; ancora: string }) {
           ))}
         </ul>
 
-        <p style={{ marginTop: "var(--ma-4)", fontSize: "0.9rem" }}>
+        {/* Detail before departure. The link out stays, but the card now
+            offers everything a citizen needs *before* leaving — which office
+            to ask, by when, what was and was not checked — rather than
+            handing them to a municipal site to find it themselves. */}
+        <p className="card__azioni">
+          <button type="button" className="card__dettagli" onClick={onApri}>
+            Vedi i dettagli
+          </button>
           <a href={match.source_url} target="_blank" rel="noreferrer">
-            Apri la pagina ufficiale del comune →
+            Apri la pagina ufficiale →
           </a>
         </p>
       </div>
@@ -532,6 +548,7 @@ export default function Chat() {
   const { registra: registraTrovate, azzeraTrovate } = useRisultati();
   const accesso = profilo.accesso === true;
   const [manualLogin, setManualLogin] = useState(false);
+  const [scheda, setScheda] = useState<Match | null>(null);
   const nextId = useRef(0);
   const logRef = useRef<HTMLDivElement>(null);
 
@@ -749,6 +766,7 @@ export default function Chat() {
                             key={match.id}
                             match={match}
                             ancora={ancoraDi(m.id, match.id)}
+                            onApri={() => setScheda(match)}
                           />
                         ))}
                       </div>
@@ -848,6 +866,8 @@ export default function Chat() {
           }}
         />
       )}
+
+      {scheda && <SchedaDettaglio match={scheda} onClose={() => setScheda(null)} />}
     </section>
   );
 }

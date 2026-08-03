@@ -224,6 +224,23 @@ class CriterionOut(BaseModel):
     detail: str
 
 
+class UfficioOut(BaseModel):
+    """Where a citizen can ask a human about this record.
+
+    Carries its own provenance: `fonte` is the page the contacts were read
+    from and `verificato_il` when that was last checked. A phone number shown
+    without either is a number nobody can be held to — and the cost of a wrong
+    one is a person standing at a closed counter.
+    """
+
+    nome: str
+    telefono: str | None
+    email: str | None
+    orari: str | None
+    fonte: str
+    verificato_il: date
+
+
 class MatchOut(BaseModel):
     id: str
     title: str
@@ -238,9 +255,15 @@ class MatchOut(BaseModel):
     needs_source_check: bool
     source_url: str
     ente: str
+    ente_codice_istat: str | None
     deadline: date | None
     confidence: str
     livello: str
+    #: The publishing body's public desk, when one has been recorded for it.
+    #: `None` for national and regional records: `enti.json` holds comuni, and
+    #: pointing someone at a municipal URP for an ARERA measure would send
+    #: them to a counter that cannot help.
+    ufficio: UfficioOut | None
 
 
 VERDICT_LABELS = {
@@ -270,9 +293,35 @@ def to_match_out(result: MatchResult) -> MatchOut:
         needs_source_check=result.needs_source_check,
         source_url=str(o.source.url),
         ente=o.source.ente,
+        ente_codice_istat=o.source.ente_codice_istat,
         deadline=o.deadline,
         confidence=o.confidence.value,
         livello=o.livello.value,
+        ufficio=_ufficio_di(o.source.ente_codice_istat),
+    )
+
+
+def _ufficio_di(codice_istat: str | None) -> UfficioOut | None:
+    """The publishing body's desk, if one has been recorded and verified.
+
+    Returns `None` rather than a partial guess: no ISTAT code (national and
+    regional records), no matching ente, or no URP on file all mean the same
+    thing to a citizen — we cannot tell you who to call — and saying so is the
+    only honest answer available.
+    """
+    if codice_istat is None:
+        return None
+    ente = load_enti().get(codice_istat)
+    if ente is None or ente.urp is None:
+        return None
+    urp = ente.urp
+    return UfficioOut(
+        nome=urp.nome,
+        telefono=urp.telefono,
+        email=urp.email,
+        orari=urp.orari,
+        fonte=str(urp.fonte),
+        verificato_il=urp.verificato_il,
     )
 
 

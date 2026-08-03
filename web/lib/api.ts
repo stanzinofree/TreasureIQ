@@ -37,6 +37,17 @@ export interface Criterion {
   detail: string;
 }
 
+/** A public desk, with the provenance of its own contact details: `fonte` is
+ * the page they were read from, `verificato_il` when that was last checked. */
+export interface Ufficio {
+  nome: string;
+  telefono: string | null;
+  email: string | null;
+  orari: string | null;
+  fonte: string;
+  verificato_il: string;
+}
+
 export interface Match {
   id: string;
   title: string;
@@ -51,6 +62,12 @@ export interface Match {
   needs_source_check: boolean;
   source_url: string;
   ente: string;
+  ente_codice_istat: string | null;
+  /** The publishing body's public desk, when one has been recorded and
+   * verified. Null for national and regional records: pointing someone at a
+   * municipal URP for an ARERA measure sends them to a counter that cannot
+   * help them. */
+  ufficio: Ufficio | null;
   deadline: string | null;
   confidence: string;
   /** D-20 — which administrative tier published this (`Livello` in

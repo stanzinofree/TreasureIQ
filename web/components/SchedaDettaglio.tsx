@@ -1,0 +1,257 @@
+"use client";
+
+/**
+ * The full record, opened from a card and read before leaving for the site.
+ *
+ * The card in the transcript answers one question — does this apply to me —
+ * and stays short so a conversation stays readable. Everything the citizen
+ * needs *before* acting lives here: which office to ask, by when, what was
+ * checked, what nobody published, and only then the link out.
+ *
+ * Nothing is invented to fill a section. A missing office, a missing deadline
+ * and an unpublished criterion each say so in words, because "not published"
+ * is a finding about the administration, not an empty slot in our layout.
+ */
+
+import { useEffect, useRef } from "react";
+import { Seal } from "@/components/Seal";
+import type { Criterion, Match } from "@/lib/api";
+
+const LIVELLO_LABEL: Record<string, string> = {
+  comunale: "Comunale",
+  regionale: "Regionale",
+  nazionale: "Nazionale",
+};
+
+const STATO_LABEL: Record<Criterion["state"], string> = {
+  met: "Soddisfatto",
+  not_met: "Non soddisfatto",
+  unknown_source: "Non pubblicato",
+  unknown_profile: "Manca il tuo dato",
+};
+
+function dataIt(iso: string): string {
+  const [y, m, d] = iso.split("-");
+  return `${d}/${m}/${y}`;
+}
+
+export default function SchedaDettaglio({
+  match,
+  onClose,
+}: {
+  match: Match;
+  onClose: () => void;
+}) {
+  const panelRef = useRef<HTMLDivElement>(null);
+  const chiudiRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    // Focus moves in on open and back out on close, and Tab is kept inside:
+    // a dialog a keyboard user can tab out of, into a page they cannot see,
+    // is a trap of the worse kind.
+    const tornaA = document.activeElement as HTMLElement | null;
+    chiudiRef.current?.focus();
+
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") {
+        onClose();
+        return;
+      }
+      if (e.key !== "Tab") return;
+      const fuochi = panelRef.current?.querySelectorAll<HTMLElement>(
+        'a[href], button, [tabindex]:not([tabindex="-1"])',
+      );
+      if (!fuochi?.length) return;
+      const primo = fuochi[0];
+      const ultimo = fuochi[fuochi.length - 1];
+      if (e.shiftKey && document.activeElement === primo) {
+        e.preventDefault();
+        ultimo.focus();
+      } else if (!e.shiftKey && document.activeElement === ultimo) {
+        e.preventDefault();
+        primo.focus();
+      }
+    }
+
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      tornaA?.focus?.();
+    };
+  }, [onClose]);
+
+  const decisi = match.criteria.filter(
+    (c) => c.state === "met" || c.state === "not_met",
+  );
+  const nonPubblicati = match.criteria.filter((c) => c.state === "unknown_source");
+  const mancanti = match.criteria.filter((c) => c.state === "unknown_profile");
+
+  return (
+    <div className="modale" onClick={onClose}>
+      <div
+        className="modale__pannello"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="scheda-titolo"
+        ref={panelRef}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <header className="modale__testa">
+          <Seal verdict={match.verdict} size={40} />
+          <div>
+            <h2 id="scheda-titolo">{match.title}</h2>
+            <p className="modale__esito">{match.headline}</p>
+          </div>
+          <button
+            type="button"
+            className="modale__chiudi"
+            onClick={onClose}
+            ref={chiudiRef}
+            aria-label="Chiudi la scheda"
+          >
+            ✕
+          </button>
+        </header>
+
+        <div className="modale__tag">
+          <span className="tag" data-verdict={match.verdict}>
+            {match.verdict_label}
+          </span>
+          <span className="tag">{LIVELLO_LABEL[match.livello] ?? match.livello}</span>
+          <span className="tag">{match.kind}</span>
+        </div>
+
+        <dl className="modale__dati">
+          <div>
+            <dt>Ente</dt>
+            <dd>{match.ente}</dd>
+          </div>
+          <div>
+            <dt>Termini</dt>
+            <dd>
+              {match.deadline ? (
+                dataIt(match.deadline)
+              ) : (
+                <span className="modale__assente">
+                  Nessuna scadenza pubblicata — verifica sulla pagina ufficiale
+                </span>
+              )}
+            </dd>
+          </div>
+        </dl>
+
+        {/* Who to ask. Shown with the date the contacts were last checked and
+            a link to where they were read: a phone number with no provenance
+            is one nobody can be held to, and a wrong one costs a person a
+            trip to a closed counter. */}
+        <section className="modale__sez">
+          <h3>A chi chiedere</h3>
+          {match.ufficio ? (
+            <>
+              <p className="modale__ufficio-nome">{match.ufficio.nome}</p>
+              <dl className="modale__dati">
+                {match.ufficio.telefono && (
+                  <div>
+                    <dt>Telefono</dt>
+                    <dd>
+                      <a href={`tel:${match.ufficio.telefono.split(" ")[0]}`}>
+                        {match.ufficio.telefono}
+                      </a>
+                    </dd>
+                  </div>
+                )}
+                {match.ufficio.email && (
+                  <div>
+                    <dt>Email</dt>
+                    <dd>
+                      <a href={`mailto:${match.ufficio.email}`}>{match.ufficio.email}</a>
+                    </dd>
+                  </div>
+                )}
+                {match.ufficio.orari && (
+                  <div>
+                    <dt>Orari</dt>
+                    <dd>{match.ufficio.orari}</dd>
+                  </div>
+                )}
+              </dl>
+              <p className="modale__provenienza">
+                Contatti letti da{" "}
+                <a href={match.ufficio.fonte} target="_blank" rel="noreferrer">
+                  questa pagina
+                </a>
+                , verificati il {dataIt(match.ufficio.verificato_il)}.
+              </p>
+            </>
+          ) : (
+            <p className="modale__assente">
+              Non abbiamo un ufficio di riferimento verificato per questo ente.
+              {match.livello !== "comunale" &&
+                " È una misura nazionale: lo sportello del tuo comune non la gestisce."}
+            </p>
+          )}
+        </section>
+
+        {decisi.length > 0 && (
+          <section className="modale__sez">
+            <h3>Cosa è stato verificato</h3>
+            <ul className="modale__criteri">
+              {decisi.map((c) => (
+                <li key={c.key} data-stato={c.state}>
+                  <strong>{c.label}</strong> — {c.detail}
+                  <span className="modale__stato">{STATO_LABEL[c.state]}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        {(nonPubblicati.length > 0 || mancanti.length > 0) && (
+          <section className="modale__sez">
+            <h3>Cosa non è stato possibile verificare</h3>
+            <ul className="modale__criteri">
+              {nonPubblicati.map((c) => (
+                <li key={c.key} data-stato={c.state}>
+                  <strong>{c.label}</strong> — {c.detail}
+                  <span className="modale__stato">{STATO_LABEL[c.state]}</span>
+                </li>
+              ))}
+              {mancanti.map((c) => (
+                <li key={c.key} data-stato={c.state}>
+                  <strong>{c.label}</strong> — {c.detail}
+                  <span className="modale__stato">{STATO_LABEL[c.state]}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        {match.notes.length > 0 && (
+          <section className="modale__sez">
+            <h3>Note dell&apos;estrazione</h3>
+            <ul className="modale__note">
+              {match.notes.map((n, i) => (
+                <li key={i}>{n}</li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        <footer className="modale__piede">
+          <a
+            className="button"
+            href={match.source_url}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Apri la pagina ufficiale →
+          </a>
+          <p className="modale__avviso">
+            L&apos;ultima parola è dell&apos;ente: questa scheda riporta quello
+            che ha pubblicato, non una decisione.
+          </p>
+        </footer>
+      </div>
+    </div>
+  );
+}

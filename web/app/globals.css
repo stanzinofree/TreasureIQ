@@ -1825,3 +1825,195 @@ a {
     white-space: normal;
   }
 }
+
+/* ------------------------------------------------------------ record modal */
+
+/* Everything a citizen needs before leaving for the administration's own site:
+   who to ask, by when, what was checked and what nobody published. Opened from
+   a card, which stays short so the conversation stays readable. */
+.modale {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: var(--ma-8) var(--ma-4);
+  background: rgba(27, 33, 29, 0.42);
+  overflow-y: auto;
+}
+
+.modale__pannello {
+  background: var(--paper-raised);
+  border: 1px solid var(--kasumi);
+  border-radius: var(--radius);
+  box-shadow: 0 24px 60px rgba(27, 33, 29, 0.18);
+  width: 100%;
+  max-width: 660px;
+  padding: var(--ma-6);
+  display: grid;
+  gap: var(--ma-6);
+}
+
+.modale__testa {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: var(--ma-4);
+  align-items: start;
+}
+.modale__testa h2 {
+  font-size: 1.25rem;
+  line-height: 1.25;
+  margin: 0;
+}
+.modale__esito {
+  margin: var(--ma-2) 0 0;
+  color: var(--sumi-soft);
+  font-size: 0.94rem;
+  max-width: none;
+}
+.modale__chiudi {
+  border: 1px solid var(--kasumi);
+  background: var(--paper);
+  border-radius: 999px;
+  width: 34px;
+  height: 34px;
+  cursor: pointer;
+  color: var(--sumi-soft);
+  font-size: 0.9rem;
+  line-height: 1;
+}
+.modale__chiudi:hover {
+  color: var(--sumi);
+}
+
+.modale__tag {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ma-2);
+}
+
+.modale__dati {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--ma-4);
+  margin: 0;
+}
+.modale__dati dt {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--sumi-faint);
+  margin-bottom: 2px;
+}
+.modale__dati dd {
+  margin: 0;
+  font-size: 0.94rem;
+}
+
+.modale__sez h3 {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sumi-faint);
+  margin: 0 0 var(--ma-3);
+  font-weight: 600;
+}
+.modale__ufficio-nome {
+  margin: 0 0 var(--ma-3);
+  font-weight: 600;
+  max-width: none;
+}
+
+/* An absent office, deadline or criterion is a finding about the publishing
+   body, not a gap in this layout — so it reads as a sentence, in the same
+   amber the rest of the app uses for "we could not verify this". */
+.modale__assente {
+  color: var(--yamabuki-deep);
+  font-size: 0.92rem;
+}
+.modale__provenienza {
+  margin: var(--ma-3) 0 0;
+  font-size: 0.8rem;
+  color: var(--sumi-faint);
+  max-width: none;
+}
+
+.modale__criteri,
+.modale__note {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--ma-3);
+  font-size: 0.92rem;
+}
+.modale__criteri li {
+  padding-left: var(--ma-4);
+  border-left: 3px solid var(--kasumi);
+}
+.modale__criteri li[data-stato="met"] {
+  border-left-color: var(--wakatake);
+}
+.modale__criteri li[data-stato="not_met"] {
+  border-left-color: var(--shu);
+}
+.modale__criteri li[data-stato="unknown_source"],
+.modale__criteri li[data-stato="unknown_profile"] {
+  border-left-color: var(--yamabuki);
+}
+.modale__stato {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--sumi-faint);
+  margin-top: 2px;
+}
+
+.modale__piede {
+  border-top: 1px solid var(--kasumi);
+  padding-top: var(--ma-6);
+  display: grid;
+  gap: var(--ma-3);
+  justify-items: start;
+}
+.modale__avviso {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--sumi-faint);
+  max-width: none;
+}
+
+.card__azioni {
+  margin-top: var(--ma-4);
+  font-size: 0.9rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ma-4);
+  align-items: center;
+}
+.card__dettagli {
+  border: 1px solid var(--kasumi);
+  background: var(--paper);
+  border-radius: 999px;
+  padding: var(--ma-2) var(--ma-4);
+  font: inherit;
+  font-size: 0.88rem;
+  color: var(--ai-deep);
+  cursor: pointer;
+}
+.card__dettagli:hover {
+  border-color: var(--ai-line);
+  background: var(--ai-wash);
+}
+
+@media (max-width: 640px) {
+  .modale {
+    padding: var(--ma-4) var(--ma-2);
+  }
+  .modale__pannello {
+    padding: var(--ma-4);
+  }
+}

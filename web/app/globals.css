@@ -2377,3 +2377,97 @@ a {
   gap: var(--ma-4);
   max-width: none;
 }
+
+/* ------------------------------------------------------------ access ladder */
+
+/* D-21 drawn. Rungs run from the cheapest to read down to the dearest, and a
+   rung with nobody on it is still drawn: an empty M1 is the most informative
+   row on the page, because it says that not one measured comune publishes
+   eligibility criteria in the typed field the national model provides. */
+.scala {
+  list-style: none;
+  counter-reset: gradino;
+  margin: var(--ma-6) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--ma-4);
+}
+.scala__gradino {
+  border-left: 4px solid var(--ai-vivid);
+  padding: var(--ma-3) 0 var(--ma-3) var(--ma-4);
+}
+/* Emptiness is a finding, not an absence of one — so the row stays legible
+   and only loses its accent, rather than disappearing. */
+.scala__gradino[data-vuoto="true"] {
+  border-left-color: var(--kasumi);
+  opacity: 0.72;
+}
+.scala__testa {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--ma-2);
+}
+.scala__testa h3 {
+  margin: 0;
+  font-size: 0.98rem;
+}
+.scala__conta {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sumi-faint);
+}
+.scala__spiega {
+  margin: var(--ma-2) 0 0;
+  font-size: 0.88rem;
+  color: var(--sumi-soft);
+  max-width: 74ch;
+}
+.scala__comuni {
+  list-style: none;
+  margin: var(--ma-3) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--ma-2);
+}
+.scala__comuni li {
+  display: grid;
+  grid-template-columns: minmax(140px, 1fr) minmax(80px, 2fr) auto;
+  align-items: center;
+  gap: var(--ma-3);
+  font-size: 0.88rem;
+}
+.scala__barra {
+  height: 8px;
+  background: var(--paper-sunken);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.scala__barra-fill {
+  display: block;
+  height: 100%;
+  background: var(--ai-vivid);
+}
+.scala__cifra {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--sumi-faint);
+  white-space: nowrap;
+}
+.scala__nota {
+  margin: var(--ma-6) 0 0;
+  padding-left: var(--ma-4);
+  border-left: 3px solid var(--yamabuki);
+  font-size: 0.92rem;
+  color: var(--sumi-soft);
+}
+
+@media (max-width: 640px) {
+  .scala__comuni li {
+    grid-template-columns: 1fr;
+    gap: var(--ma-1);
+  }
+}

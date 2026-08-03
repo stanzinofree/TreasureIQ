@@ -18,7 +18,16 @@
  * visually distinct from both working and broken.
  */
 
-import { status, type InternalDatum, type SourceStatus, type StatusOut, type SystemComponent } from "@/lib/api";
+import {
+  costi,
+  status,
+  type Costo,
+  type InternalDatum,
+  type SourceStatus,
+  type StatusOut,
+  type SystemComponent,
+} from "@/lib/api";
+import ScalaAccesso from "@/components/ScalaAccesso";
 
 export const dynamic = "force-dynamic";
 
@@ -120,6 +129,16 @@ export default async function Monitoraggio() {
     report = null;
   }
 
+  // Fail-soft, like every other panel here: the ladder is worth showing
+  // when the cost endpoint answers and never worth taking the status
+  // report down for.
+  let costiReport: Costo[] = [];
+  try {
+    costiReport = await costi();
+  } catch {
+    costiReport = [];
+  }
+
   if (!report) {
     return (
       <div className="panel">
@@ -147,6 +166,11 @@ export default async function Monitoraggio() {
           davvero.
         </p>
       </section>
+
+      {/* The ladder goes above the three status groups on purpose. Those
+          answer "is it working"; this answers "what did it take", which is the
+          question the project exists to make askable. */}
+      <ScalaAccesso costi={costiReport} />
 
       <div className="systems">
         <section className="systems__group">

@@ -28,6 +28,8 @@ import { useEffect, useId, useRef, useState } from "react";
 import { Seal, Wordmark } from "@/components/Seal";
 import Segnalazione from "@/components/Segnalazione";
 import SchedaDettaglio from "@/components/SchedaDettaglio";
+import AccessoSimulato from "@/components/AccessoSimulato";
+import { PRESETS } from "@/lib/profili-demo";
 import { useProfilo } from "@/lib/profilo";
 import { useRisultati } from "@/lib/risultati";
 
@@ -60,70 +62,6 @@ const GLYPH: Record<string, string> = {
   unknown_profile: "◌",
 };
 
-const PRESETS = [
-  {
-    id: "famiglia",
-    name: "Famiglia con figlio minore",
-    detail: "38 anni · ISEE 12.000 € · nucleo di 3",
-    profile: {
-      eta: 38,
-      isee: "12000",
-      nucleo_familiare: 3,
-      figli_minori: 1,
-      employment_status: "occupato",
-      interests: ["famiglie", "studenti"],
-    },
-  },
-  {
-    id: "pensionato",
-    name: "Pensionato che vive solo",
-    detail: "71 anni · ISEE 30.000 € · nucleo di 1",
-    profile: {
-      eta: 71,
-      isee: "30000",
-      nucleo_familiare: 1,
-      figli_minori: 0,
-      employment_status: "pensionato",
-      interests: ["anziani"],
-    },
-  },
-  {
-    id: "studente",
-    name: "Studente in cerca di lavoro",
-    detail: "23 anni · ISEE 8.000 € · nucleo di 2",
-    profile: {
-      eta: 23,
-      isee: "8000",
-      nucleo_familiare: 2,
-      figli_minori: 0,
-      employment_status: "disoccupato",
-      interests: ["studenti", "disoccupati"],
-    },
-  },
-  {
-    // The comfortable case, and the one worth showing: a household well above
-    // every means threshold gets a clean, immediate "no" with the figure that
-    // decided it. A service that only ever says yes teaches nobody anything.
-    //
-    // The figure is an ISEE, not an income. A four-person household earning
-    // over 60.000 € has an ISEE far below that — the indicator weighs assets
-    // and household size — so writing 60.000 here would put a number on screen
-    // that misdescribes the family it claims to represent. 28.000 € is the
-    // realistic reading for this profile, and it clears the bonus sociale
-    // ceiling of 9.796 € several times over, which is the point of the demo.
-    id: "capofamiglia",
-    name: "Capofamiglia, reddito alto",
-    detail: "45 anni · ISEE 28.000 € · nucleo di 4",
-    profile: {
-      eta: 45,
-      isee: "28000",
-      nucleo_familiare: 4,
-      figli_minori: 2,
-      employment_status: "occupato",
-      interests: ["famiglie"],
-    },
-  },
-] as const;
 
 const LEVEL_LABEL: Record<keyof CostLevels, string> = {
   L1_manuale: "manuale",
@@ -858,16 +796,26 @@ export default function Chat() {
           </button>
         </div>
       )}
+      {/* Identity is a handoff, so it gets its own screen rather than a panel
+          wedged into the transcript. The mid-conversation gate above stays
+          inline: there it is attached to the one answer that needs it, and
+          losing that context would cost more than the consistency gains. */}
       {manualLogin && (
-        <EscalationGate
-          escalation={{
-            needed: true,
-            missing_fields: [],
-            reason:
-              "Puoi accedere in qualsiasi momento per ricevere risposte calcolate sul tuo profilo, invece che generiche.",
-          }}
-          onResolved={() => {
+        <AccessoSimulato
+          onAnnulla={() => setManualLogin(false)}
+          onFatto={(preset) => {
             setManualLogin(false);
+            registra({
+              eta: preset.profile.eta,
+              interessi: [...preset.profile.interests],
+              comune: {
+                nome: "Albano Laziale",
+                istat: "058003",
+                origine: "accesso",
+                confermato: true,
+              },
+              accesso: true,
+            });
             // Signing in changes the basis of every verdict already on
             // screen. The question is asked again below, but the index has to
             // be emptied first: it only ever appends, so without this the

@@ -63,6 +63,9 @@ export interface Match {
   source_url: string;
   ente: string;
   ente_codice_istat: string | null;
+  /** When this record was last read from the publishing body. Nothing here is
+   * live, and how old a snapshot is belongs next to what it says. */
+  letto_il: string;
   /** The publishing body's public desk, when one has been recorded and
    * verified. Null for national and regional records: pointing someone at a
    * municipal URP for an ARERA measure sends them to a counter that cannot

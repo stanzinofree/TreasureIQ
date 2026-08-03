@@ -2040,3 +2040,125 @@ a {
     padding: var(--ma-4);
   }
 }
+
+/* --------------------------------------------------------- sign-in overlay */
+
+/* Its own screen, because identity is a handoff: in production the citizen
+   leaves for SPID or CIE and comes back. Deliberately *not* dressed as the
+   real sign-in page — no provider mark or colours. Teaching people to trust
+   that appearance in a mock is how credential phishing works, and no
+   credential is checked here at all. */
+.accesso {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--ma-6) var(--ma-4);
+  background: var(--paper);
+  overflow-y: auto;
+}
+
+.accesso__pannello {
+  width: 100%;
+  max-width: 620px;
+  display: grid;
+  gap: var(--ma-4);
+}
+
+.accesso__avviso {
+  justify-self: start;
+  margin: 0;
+  padding: var(--ma-1) var(--ma-3);
+  border-radius: 2px;
+  background: var(--yamabuki-wash);
+  color: var(--yamabuki-deep);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  max-width: none;
+}
+
+.accesso__pannello h2 {
+  margin: 0;
+  font-size: clamp(1.5rem, 3.5vw, 2rem);
+}
+.accesso__spiega {
+  margin: 0;
+  color: var(--sumi-soft);
+}
+.accesso__motivo {
+  margin: 0;
+  padding: var(--ma-3) var(--ma-4);
+  border-left: 3px solid var(--ai-line);
+  background: var(--ai-wash);
+  font-size: 0.94rem;
+}
+
+.accesso__lista {
+  list-style: none;
+  margin: var(--ma-2) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--ma-3);
+}
+.accesso__profilo {
+  width: 100%;
+  display: grid;
+  gap: 2px;
+  text-align: left;
+  padding: var(--ma-4);
+  border: 1px solid var(--kasumi);
+  border-radius: var(--radius);
+  background: var(--paper-raised);
+  font: inherit;
+  cursor: pointer;
+  transition: border-color 120ms ease, background 120ms ease;
+}
+.accesso__profilo:hover:not(:disabled) {
+  border-color: var(--ai-line);
+  background: var(--ai-wash);
+}
+.accesso__profilo:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+.accesso__nome {
+  font-weight: 600;
+}
+.accesso__detail {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--sumi-faint);
+}
+.accesso__attesa {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--ai-deep);
+}
+
+.accesso__annulla {
+  justify-self: start;
+  border: 0;
+  background: none;
+  padding: var(--ma-2) 0;
+  font: inherit;
+  font-size: 0.9rem;
+  color: var(--ai);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.accesso__annulla:hover:not(:disabled) {
+  color: var(--ai-deep);
+}
+
+/* The exact date beside the relative one: "12 giorni fa" is easy to feel and
+   impossible to check. */
+.modale__quando {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: var(--sumi-faint);
+}

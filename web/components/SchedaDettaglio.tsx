@@ -31,8 +31,27 @@ const STATO_LABEL: Record<Criterion["state"], string> = {
 };
 
 function dataIt(iso: string): string {
-  const [y, m, d] = iso.split("-");
+  const [y, m, d] = iso.slice(0, 10).split("-");
   return `${d}/${m}/${y}`;
+}
+
+/** "oggi", "ieri", "3 giorni fa" — the age of a reading, in the terms someone
+ *  judges freshness by. The exact date rides alongside it, because "12 giorni
+ *  fa" is easy to feel and impossible to check. */
+function eta(iso: string): string {
+  // Calendar days, not elapsed hours. Measuring the gap in milliseconds made
+  // a record read yesterday evening report itself as "oggi", because fifteen
+  // hours floors to zero — the one direction this must never round, since it
+  // overstates how fresh the data is.
+  const letto = new Date(iso);
+  const aMezzanotte = (d: Date) =>
+    new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime();
+  const giorni = Math.round((aMezzanotte(new Date()) - aMezzanotte(letto)) / 86_400_000);
+  if (giorni <= 0) return "oggi";
+  if (giorni === 1) return "ieri";
+  if (giorni < 30) return `${giorni} giorni fa`;
+  const mesi = Math.floor(giorni / 30);
+  return mesi === 1 ? "un mese fa" : `${mesi} mesi fa`;
 }
 
 export default function SchedaDettaglio({
@@ -125,6 +144,17 @@ export default function SchedaDettaglio({
           <div>
             <dt>Ente</dt>
             <dd>{match.ente}</dd>
+          </div>
+          {/* The age of the reading belongs beside what it says. Nothing here
+              is live: this is a snapshot, and a service that hides how old its
+              snapshot is asks to be trusted about something it has not
+              checked recently. */}
+          <div>
+            <dt>Letto</dt>
+            <dd>
+              {eta(match.letto_il)}{" "}
+              <span className="modale__quando">({dataIt(match.letto_il)})</span>
+            </dd>
           </div>
           <div>
             <dt>Termini</dt>

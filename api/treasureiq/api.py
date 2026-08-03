@@ -256,6 +256,11 @@ class MatchOut(BaseModel):
     source_url: str
     ente: str
     ente_codice_istat: str | None
+    #: When this record was last read from the publishing body. Shown to the
+    #: citizen because an answer's age is part of the answer: nothing here is
+    #: live, and a service that hides how old its snapshot is asks to be
+    #: trusted about something it has not checked recently.
+    letto_il: datetime
     deadline: date | None
     confidence: str
     livello: str
@@ -294,6 +299,7 @@ def to_match_out(result: MatchResult) -> MatchOut:
         source_url=str(o.source.url),
         ente=o.source.ente,
         ente_codice_istat=o.source.ente_codice_istat,
+        letto_il=o.source.fetched_at,
         deadline=o.deadline,
         confidence=o.confidence.value,
         livello=o.livello.value,

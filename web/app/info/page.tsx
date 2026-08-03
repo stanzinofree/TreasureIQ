@@ -159,6 +159,31 @@ export default async function Info() {
           <a href="/manifesto">manifesto del progetto</a>.
         </p>
       </section>
+
+      {/* Colophon. This used to live in a site-wide footer, which repeated the
+          masthead's own navigation and — on the chat page — would have had to
+          sit under the composer, stacking a second bar along the bottom edge
+          the conversation already owns. Licence and provenance belong on the
+          page that explains the project, not on every page. */}
+      <section className="prose">
+        <h2>Licenza e provenienza</h2>
+        <p className="lede">
+          TreasureIQ è software libero, rilasciato sotto licenza Apache 2.0: il
+          codice è leggibile, riusabile e verificabile da chiunque —{" "}
+          <a href="https://github.com/stanzinofree/TreasureIQ" target="_blank" rel="noreferrer">
+            il sorgente è su GitHub
+          </a>
+          . Un servizio che dice a un cittadino cosa gli spetta deve poter
+          essere controllato nel merito, non creduto sulla parola.
+        </p>
+        <p className="lede">
+          I dati provengono dai portali delle amministrazioni pubbliche e da
+          fonti pubbliche nazionali. Nessuno di essi è una fonte di
+          eleggibilità: TreasureIQ riporta quello che è stato pubblicato e
+          indica dove verificarlo, ma l&apos;ultima parola resta
+          all&apos;amministrazione che eroga il servizio.
+        </p>
+      </section>
     </div>
   );
 }

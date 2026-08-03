@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Link from "next/link";
 import { Wordmark } from "@/components/Seal";
-import SiteFooter from "@/components/SiteFooter";
 import StatusPill from "@/components/StatusPill";
 import "./globals.css";
 
@@ -43,7 +42,7 @@ const mono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "TreasureIQ — le opportunità del tuo comune",
+  title: "TreasureIQ — scopri cosa ti spetta",
   description:
     "Incrocia gli open data della PA con il tuo profilo e ti dice a quali agevolazioni hai davvero accesso.",
 };
@@ -83,10 +82,13 @@ export default function RootLayout({
             </div>
           </div>
         </header>
+        {/* No site footer. It duplicated this masthead's own navigation, and
+            on the chat page it would have sat under the composer — two bars
+            competing for the bottom edge the conversation needs. Licence,
+            provenance and the rest live on /info. */}
         <main id="main">
           <div className="shell">{children}</div>
         </main>
-        <SiteFooter />
       </body>
     </html>
   );

@@ -1073,53 +1073,9 @@ a {
   margin-top: 2px;
 }
 
-/* -------------------------------------------------------------- site footer */
-
-.site-footer {
-  margin-top: var(--ma-16);
-  border-top: 1px solid var(--kasumi);
-  background: var(--paper-sunken);
-}
-
-/* Short on purpose: the four-column block with its own live stats stood
-   taller than the chat it sat under, and every one of those numbers is
-   already on /monitoraggio. Two lines is enough for a footer. */
-.site-footer__inner {
-  max-width: 1760px;
-  margin: 0 auto;
-  padding: var(--ma-6) var(--ma-4);
-}
-
-.site-footer__links {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: var(--ma-3) var(--ma-6);
-}
-.site-footer__links .wordmark {
-  font-size: 1rem;
-  margin-right: var(--ma-2);
-}
-.site-footer__links a {
-  color: var(--sumi-soft);
-  text-decoration: none;
-  font-size: 0.94rem;
-}
-.site-footer__links a:hover {
-  color: var(--sumi);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-.site-footer__legal {
-  margin: var(--ma-4) 0 0;
-  font-size: 0.82rem;
-  color: var(--sumi-faint);
-  max-width: 90ch;
-}
-.site-footer__legal a {
-  color: var(--sumi-faint);
-}
+/* The site footer is gone: it repeated the masthead's navigation, and on the
+   chat page it would have sat under the composer, contending for the bottom
+   edge the conversation owns. Licence and provenance moved to /info. */
 
 /* ------------------------------------------------------ status systems (v3) */
 

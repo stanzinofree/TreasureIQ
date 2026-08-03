@@ -31,15 +31,21 @@ export default function Home() {
           <Pannello />
 
           <div className="workspace__main">
+            {/* Not "al tuo comune": the answers already draw on the national
+                layer as much as the municipal one — the bonus sociale bollette
+                is a state measure, and its card says so. The comune is the
+                most granular administration we read, not the only one, and a
+                title that says otherwise undersells the product and misleads
+                about where an answer came from. */}
             <section className="hero-band">
               <div className="hero-band__inner">
-                <h1>Chiedi al tuo comune</h1>
+                <h1>Chiedi cosa ti spetta</h1>
                 <p className="lede">
                   Scrivi la tua domanda in italiano. TreasureIQ la confronta con
-                  i servizi che il comune ha davvero pubblicato e risponde solo
-                  con quello che i dati confermano — o ti dice, con la stessa
-                  chiarezza, quando il comune non lo ha ancora scritto da
-                  nessuna parte.
+                  quello che Stato, Regione e il tuo comune hanno davvero
+                  pubblicato, e risponde solo con ciò che i dati confermano — o
+                  ti dice, con la stessa chiarezza, quando nessuno di loro lo ha
+                  ancora scritto da nessuna parte.
                 </p>
               </div>
             </section>

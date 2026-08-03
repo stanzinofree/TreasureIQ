@@ -974,10 +974,23 @@ class ApprofondimentoIn(BaseModel):
     topic: str
 
 
+class PaginaWebOut(BaseModel):
+    title: str
+    url: str
+    #: Always true. These pages were found by a search engine, not read from a
+    #: dataset: nothing here was parsed, quote-gated or checked against the
+    #: requirements the way a record is. The flag exists so the interface can
+    #: never present one as if it had been.
+    non_verificato: bool = True
+
+
 class ApprofondimentoOut(BaseModel):
     esito: str
     comune_nome: str
     matches: list[MatchOut]
+    #: Last rung of the access ladder (D-21 `M6_web_aperto`), reached only when
+    #: the comune's structured records turned up nothing.
+    pagine: list[PaginaWebOut] = []
 
 
 @app.post("/api/approfondimento", response_model=ApprofondimentoOut)
@@ -1002,7 +1015,7 @@ def approfondimento(body: ApprofondimentoIn, request: Request) -> Approfondiment
     comune_nome = meta["nome"] if meta else "Il tuo comune"
     records = list(load_opportunities(comune_istat))
 
-    results, esito = approfondisci_nel_comune(
+    results, esito, pagine = approfondisci_nel_comune(
         records=records,
         topic=topic,
         profile=profile,
@@ -1012,6 +1025,7 @@ def approfondimento(body: ApprofondimentoIn, request: Request) -> Approfondiment
         esito=esito,
         comune_nome=comune_nome,
         matches=[to_match_out(r) for r in results],
+        pagine=[PaginaWebOut(title=p.title, url=p.url) for p in pagine],
     )
 
 

@@ -14,7 +14,7 @@
  */
 
 import { useState } from "react";
-import { approfondimento, type Approfondimento as Esito } from "@/lib/api";
+import { approfondimento, type Approfondimento as Esito, type PaginaWeb } from "@/lib/api";
 
 export default function Approfondisci({
   topic,
@@ -29,12 +29,14 @@ export default function Approfondisci({
     "pronto",
   );
   const [esito, setEsito] = useState<string | null>(null);
+  const [pagine, setPagine] = useState<PaginaWeb[]>([]);
 
   async function chiedi() {
     setStato("attesa");
     try {
       const out = await approfondimento(topic);
       setEsito(out.esito);
+      setPagine(out.pagine ?? []);
       setStato("fatto");
       if (out.matches.length > 0) onSchede(out);
     } catch {
@@ -47,9 +49,26 @@ export default function Approfondisci({
 
   if (stato === "fatto" || stato === "errore") {
     return (
-      <p className="approfondisci__esito" role="status" data-stato={stato}>
-        {esito}
-      </p>
+      <div className="approfondisci__esito" role="status" data-stato={stato}>
+        <p>{esito}</p>
+
+        {/* The weakest evidence in the app, and labelled as such. These are
+            pages a search engine returned from public-body domains — nothing
+            was parsed, quote-gated or checked against any requirement, so they
+            are offered as somewhere to start looking, never as an answer. */}
+        {pagine.length > 0 && (
+          <ul className="approfondisci__pagine">
+            {pagine.map((p) => (
+              <li key={p.url}>
+                <a href={p.url} target="_blank" rel="noreferrer">
+                  {p.title}
+                </a>
+                <span className="approfondisci__nonverif">non verificata</span>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     );
   }
 

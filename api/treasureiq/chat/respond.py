@@ -364,56 +364,6 @@ def _apertura(*, results: list[MatchResult]) -> str:
     return f"Ho trovato {totale}: {dettaglio}. Il dettaglio di ciascuna qui sotto."
 
 
-def approfondisci_nel_comune(
-    *,
-    records: list[Opportunity],
-    topic: Topic,
-    profile: CitizenProfile | None,
-    comune_nome: str,
-    today: date | None = None,
-) -> tuple[list[MatchResult], str]:
-    """Check the comune's own published records for a topic, and say so either
-    way.
-
-    The ordinary answer already searches municipal and national records
-    together, so a benefit the comune publishes would have surfaced there —
-    this does not find what the first pass missed. What it adds is the
-    statement the first pass never makes: when the only answer was a national
-    measure, nothing on screen said whether the comune had published anything
-    of its own. A silent absence reads as "not looked for"; this turns it into
-    a finding, which is the only form an absence can honestly take in a
-    service whose subject is what administrations do and do not publish.
-
-    Deterministic end to end. The topic is carried over from the answer that
-    prompted it, so no model runs here and the same request always produces
-    the same result.
-    """
-    comunali = [r for r in records if r.livello is Livello.COMUNALE]
-    candidati = _search_opportunities(records=comunali, topic=topic)
-    profilo = profile if profile is not None else CitizenProfile()
-    results = match(candidati, profilo, today=today, include_ineligible=True)
-
-    if not comunali:
-        esito = (
-            f"Non abbiamo ancora nessuno snapshot dei dati pubblicati da {comune_nome}, "
-            "quindi su questo tema non possiamo dire nulla sul comune."
-        )
-    elif not results:
-        esito = (
-            f"{comune_nome} non ha pubblicato nulla su questo tema fra i "
-            f"{len(comunali)} servizi che abbiamo letto dal suo portale. "
-            "Non significa che non esista: significa che non è scritto in un "
-            "posto che si possa leggere."
-        )
-    else:
-        esito = (
-            f"{comune_nome} ha pubblicato qualcosa su questo tema: "
-            f"{len(results)} risultati fra i {len(comunali)} servizi letti dal "
-            "suo portale."
-        )
-    return results, esito
-
-
 def _is_spid_decisive(result: MatchResult) -> tuple[bool, str | None]:
     """Whether identity is the *only* thing standing between this citizen and
     a clean answer for this one opportunity (D-09). Computed from
@@ -476,12 +426,19 @@ def approfondisci_nel_comune(
     Deterministic end to end. The topic is carried over from the answer that
     prompted it, so no model runs here and the same request always produces
     the same result.
+
+    The last rung (D-21's `M6_web_aperto`) is only reached when the structured
+    records turn up nothing: institutional pages found by search are weaker
+    evidence than a published record, so they are what remains when the strong
+    evidence is absent, never a supplement to it. The cache is read, never
+    filled here — the fetch happened at ingestion (D-28).
     """
     comunali = [r for r in records if r.livello is Livello.COMUNALE]
     candidati = _search_opportunities(records=comunali, topic=topic)
     profilo = profile if profile is not None else CitizenProfile()
     results = match(candidati, profilo, today=today, include_ineligible=True)
 
+    web: list[WebResultAnswer] = []
     if not comunali:
         esito = (
             f"Non abbiamo ancora nessuno snapshot dei dati pubblicati da {comune_nome}, "
@@ -494,13 +451,41 @@ def approfondisci_nel_comune(
             "Non significa che non esista: significa che non è scritto in un "
             "posto che si possa leggere."
         )
+        web = _pagine_istituzionali(topic=topic, comune_nome=comune_nome)
+        if web:
+            esito += (
+                " Cercando fra i portali istituzionali abbiamo però trovato "
+                "queste pagine: non sono dati strutturati e non le abbiamo "
+                "verificate, ma è da lì che conviene partire."
+            )
     else:
         esito = (
             f"{comune_nome} ha pubblicato qualcosa su questo tema: "
             f"{len(results)} risultati fra i {len(comunali)} servizi letti dal "
             "suo portale."
         )
-    return results, esito
+    return results, esito, web
+
+
+def _pagine_istituzionali(*, topic: Topic, comune_nome: str) -> list[WebResultAnswer]:
+    """Cached institutional pages for a topic in one comune (D-28).
+
+    Reads the cache and nothing else: the search ran at ingestion, so a
+    citizen's question never reaches the network and never waits on a search
+    provider's quota. A missing entry means the query was never run — or ran
+    and was refused, since empty answers are deliberately not cached — and both
+    are correctly reported by returning nothing rather than by searching now.
+    """
+    fragment = WEBSEARCH_QUERY_FRAGMENTS.get(topic)
+    if fragment is None:
+        return []
+    entry = load_websearch(f"{fragment} {comune_nome}")
+    if entry is None:
+        return []
+    return [
+        WebResultAnswer(title=r.title, url=str(r.url))
+        for r in entry.results[:MAX_WEB_RESULTS_IN_REPLY]
+    ]
 
 
 def _is_spid_decisive(result: MatchResult) -> tuple[bool, str | None]:

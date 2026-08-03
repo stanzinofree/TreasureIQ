@@ -2214,3 +2214,29 @@ a {
   padding-top: var(--ma-4);
   border-top: 1px dashed var(--kasumi);
 }
+
+/* The weakest evidence the app shows, and marked as such on every row. These
+   are pages a search engine returned from public-body domains: nothing was
+   parsed, quote-gated or checked against a requirement, so they are a place
+   to start looking and never an answer. */
+.approfondisci__pagine {
+  list-style: none;
+  margin: var(--ma-3) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--ma-2);
+  font-size: 0.9rem;
+}
+.approfondisci__pagine li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--ma-2);
+}
+.approfondisci__nonverif {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--yamabuki-deep);
+}

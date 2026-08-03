@@ -138,10 +138,22 @@ export const logout = () => call<unknown>("/api/session", { method: "DELETE" });
  * The ordinary answer already searches municipal and national records
  * together, so this reaches nothing the first pass missed; it exists to say
  * out loud what the first pass leaves unsaid when every result was national. */
+export interface PaginaWeb {
+  title: string;
+  url: string;
+  /** Always true. Found by a search engine, not read from a dataset: nothing
+   * here was parsed, quote-gated or checked against requirements the way a
+   * record is, and the interface must never present one as if it had been. */
+  non_verificato: boolean;
+}
+
 export interface Approfondimento {
   esito: string;
   comune_nome: string;
   matches: Match[];
+  /** Last rung of the ladder, present only when the structured records
+   * turned up nothing. */
+  pagine: PaginaWeb[];
 }
 
 export const approfondimento = (topic: string) =>

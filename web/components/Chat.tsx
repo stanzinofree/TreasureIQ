@@ -99,6 +99,29 @@ const PRESETS = [
       interests: ["studenti", "disoccupati"],
     },
   },
+  {
+    // The comfortable case, and the one worth showing: a household well above
+    // every means threshold gets a clean, immediate "no" with the figure that
+    // decided it. A service that only ever says yes teaches nobody anything.
+    //
+    // The figure is an ISEE, not an income. A four-person household earning
+    // over 60.000 € has an ISEE far below that — the indicator weighs assets
+    // and household size — so writing 60.000 here would put a number on screen
+    // that misdescribes the family it claims to represent. 28.000 € is the
+    // realistic reading for this profile, and it clears the bonus sociale
+    // ceiling of 9.796 € several times over, which is the point of the demo.
+    id: "capofamiglia",
+    name: "Capofamiglia, reddito alto",
+    detail: "45 anni · ISEE 28.000 € · nucleo di 4",
+    profile: {
+      eta: 45,
+      isee: "28000",
+      nucleo_familiare: 4,
+      figli_minori: 2,
+      employment_status: "occupato",
+      interests: ["famiglie"],
+    },
+  },
 ] as const;
 
 const LEVEL_LABEL: Record<keyof CostLevels, string> = {

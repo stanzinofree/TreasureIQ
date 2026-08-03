@@ -5,6 +5,11 @@ Usage:
                                              [--pausa 15] [--tentativi 3]
                                              [--out /out]
 
+With `BRAVE_SEARCH_API_KEY` in the environment the queries go through the
+Brave Search API and `--pausa` can drop to a second or two — the quota is
+published and there is no bot detection to trip. Without it they fall back to
+SearXNG, where the pacing matters and the default is deliberately slow.
+
 Why this exists rather than a loop at the call site: the upstream engines
 SearXNG federates to rate-limit hard. Forty queries fired back to back earned
 `suspended_time=180` from both Google CSE and Brave, after which every search

@@ -3,8 +3,23 @@
 When every institutional source is exhausted on the INFORMAZIONE rail — no
 typed field, no CKAN dataset, no scrapeable page — the last thing TreasureIQ
 can offer is a link to check yourself. This module is how that link gets
-found: a query against a self-hosted SearXNG instance, run **at ingestion
-only**, its result cached to disk and committed.
+found: a query run **at ingestion only**, its result cached to disk and
+committed.
+
+Two providers, chosen by whether a key is present:
+
+  * **Brave Search API** when `BRAVE_SEARCH_API_KEY` is set in the
+    environment. Preferred, because it is sanctioned automated access: a
+    documented endpoint with a published quota, rather than a meta-search
+    whose upstreams decide query by query whether today's traffic looks like a
+    robot.
+  * **SearXNG** otherwise, under `docker compose --profile ingest`. It works,
+    but forty paced queries once earned simultaneous suspensions from every
+    engine behind it, after which each search returned nothing — and nothing
+    is precisely what this project must never mistake for an absence.
+
+The key is read from the environment and handed straight to a request header.
+It is never written into this repository, a settings file, or a log line.
 
 Three properties make this safe rather than merely convenient (R-15, the
 highest risk in the project — a fabricated or stale web result handed to a
@@ -152,6 +167,100 @@ def load_cached(query: str, cache_dir: Path) -> WebSearchCacheEntry | None:
         return None
 
 
+BRAVE_ENDPOINT = "https://api.search.brave.com/res/v1/web/search"
+
+#: Name of the environment variable holding the Brave Search API key. The key
+#: itself never appears in this repository, in a settings file, or in a log
+#: line: it is read from the environment at ingestion time and passed straight
+#: to the request header.
+BRAVE_KEY_ENV = "BRAVE_SEARCH_API_KEY"
+
+
+def _filtra(
+    grezzi: list[tuple[str | None, str | None]], *, query: str, provider: str
+) -> list[WebResult]:
+    """Keep the public-body results, in order, up to `MAX_RESULTS`.
+
+    Filtering happens before the top-N cut. Slicing first would let three
+    commercial pages consume the whole budget and return nothing — which reads,
+    from the caller's side, exactly like "nothing published on this", the one
+    confusion this project cannot afford.
+    """
+    tenuti: list[WebResult] = []
+    scartati = 0
+    for title, url in grezzi:
+        if not title or not url:
+            continue
+        if not is_institutional(url):
+            scartati += 1
+            continue
+        tenuti.append(WebResult(title=title, url=url))
+        if len(tenuti) == MAX_RESULTS:
+            break
+    if scartati:
+        logger.info(
+            "%s %r: %d risultati non istituzionali scartati, %d tenuti",
+            provider,
+            query,
+            scartati,
+            len(tenuti),
+        )
+    return tenuti
+
+
+def search_brave(
+    query: str,
+    *,
+    api_key: str,
+    timeout: float = DEFAULT_TIMEOUT,
+) -> list[WebResult]:
+    """Run one query against the Brave Search API.
+
+    Preferred over the SearXNG path when a key is configured, because it is
+    *sanctioned* automated access: a documented endpoint with a published quota
+    instead of a meta-search whose upstreams decide, query by query, whether
+    today's traffic looks like a robot. Firing forty paced queries through the
+    latter earned suspensions from every engine at once and returned empty
+    results — which this project must never mistake for an absence.
+
+    Raises on any connection error or non-200: per D-28/R-15 the caller must
+    not substitute a hand-written result, and an exception is the only signal
+    that cannot be confused with "found nothing".
+    """
+    response = httpx.get(
+        BRAVE_ENDPOINT,
+        params={"q": query, "country": "IT", "search_lang": "it", "count": 20},
+        headers={"Accept": "application/json", "X-Subscription-Token": api_key},
+        timeout=timeout,
+    )
+    response.raise_for_status()
+    payload = response.json()
+    grezzi = [
+        (hit.get("title"), hit.get("url"))
+        for hit in (payload.get("web") or {}).get("results") or []
+    ]
+    return _filtra(grezzi, query=query, provider="brave")
+
+
+def search_web(
+    query: str,
+    *,
+    base_url: str = DEFAULT_SEARXNG_URL,
+    timeout: float = DEFAULT_TIMEOUT,
+) -> tuple[list[WebResult], str]:
+    """Search with whichever provider is configured, and say which one it was.
+
+    The provider travels with the results because it belongs in the cache
+    entry: an answer found through the official API and one scraped through a
+    meta-search are not equally trustworthy months later, and whoever reads
+    this cache next deserves to know which they are holding.
+    """
+    chiave = os.environ.get(BRAVE_KEY_ENV, "").strip()
+    if chiave:
+        return search_brave(query, api_key=chiave, timeout=timeout), "brave"
+    return search_searxng(query, base_url=base_url, timeout=timeout), PROVIDER
+
+
 def search_searxng(
     query: str,
     *,
@@ -172,31 +281,8 @@ def search_searxng(
     response.raise_for_status()
     payload = response.json()
 
-    # Filter first, then take the top few. Slicing before filtering would let
-    # three commercial pages consume the whole budget and return nothing, which
-    # is how this rail would silently go quiet exactly when it is needed.
-    results: list[WebResult] = []
-    scartati = 0
-    for hit in payload.get("results", []):
-        title = hit.get("title")
-        url = hit.get("url")
-        if not title or not url:
-            continue
-        if not is_institutional(url):
-            scartati += 1
-            continue
-        results.append(WebResult(title=title, url=url))
-        if len(results) == MAX_RESULTS:
-            break
-
-    if scartati:
-        logger.info(
-            "web search %r: %d risultati non istituzionali scartati, %d tenuti",
-            query,
-            scartati,
-            len(results),
-        )
-    return results
+    grezzi = [(hit.get("title"), hit.get("url")) for hit in payload.get("results", [])]
+    return _filtra(grezzi, query=query, provider=PROVIDER)
 
 
 def run_and_cache(
@@ -222,10 +308,10 @@ def run_and_cache(
     so the cache stays silent and the caller sees an empty entry it can
     retry.
     """
-    results = search_searxng(query, base_url=base_url, timeout=timeout)
+    results, provider = search_web(query, base_url=base_url, timeout=timeout)
     entry = WebSearchCacheEntry(
         query=query,
-        provider=PROVIDER,
+        provider=provider,
         fetched_at=datetime.now(timezone.utc),
         results=results,
     )

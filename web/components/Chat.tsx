@@ -506,7 +506,7 @@ export default function Chat() {
   const [locating, setLocating] = useState(false);
   const [locateNote, setLocateNote] = useState<string | null>(null);
   const { registra, profilo } = useProfilo();
-  const { registra: registraTrovate } = useRisultati();
+  const { registra: registraTrovate, azzeraTrovate } = useRisultati();
   const accesso = profilo.accesso === true;
   const [manualLogin, setManualLogin] = useState(false);
   const nextId = useRef(0);
@@ -813,6 +813,14 @@ export default function Chat() {
           }}
           onResolved={() => {
             setManualLogin(false);
+            // Signing in changes the basis of every verdict already on
+            // screen. The question is asked again below, but the index has to
+            // be emptied first: it only ever appends, so without this the
+            // freshly computed result would sit next to the one calculated
+            // before the citizen's data was known — the same benefit listed
+            // twice, with two different answers and nothing saying which is
+            // current.
+            azzeraTrovate();
             retryLastQuestion();
           }}
         />

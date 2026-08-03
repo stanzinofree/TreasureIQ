@@ -42,6 +42,14 @@ type RisultatiContextValue = {
   commutaEsito: (v: Verdict) => void;
   azzeraFiltri: () => void;
   registra: (nuove: Trovata[]) => void;
+  /**
+   * Drop the whole index. Called when the basis of every verdict changes —
+   * signing in, or signing out. The transcript above keeps its history,
+   * because a conversation records what was actually said; the index does not,
+   * because it claims to describe the current state and would otherwise show
+   * "Escluso" from a calculation made before the citizen's data was known.
+   */
+  azzeraTrovate: () => void;
   /** Which values actually occur, so the UI never offers an empty filter. */
   livelliPresenti: Livello[];
   esitiPresenti: { verdict: Verdict; label: string }[];
@@ -69,6 +77,12 @@ export function RisultatiProvider({ children }: { children: React.ReactNode }) {
       const viste = new Set(correnti.map((t) => t.ancora));
       return [...correnti, ...nuove.filter((t) => !viste.has(t.ancora))];
     });
+  }, []);
+
+  const azzeraTrovate = useCallback(() => {
+    setTrovate([]);
+    setLivelli(new Set());
+    setEsiti(new Set());
   }, []);
 
   const commutaLivello = useCallback((l: Livello) => setLivelli((s) => commuta(s, l)), []);
@@ -99,10 +113,20 @@ export function RisultatiProvider({ children }: { children: React.ReactNode }) {
       commutaEsito,
       azzeraFiltri,
       registra,
+      azzeraTrovate,
       livelliPresenti,
       esitiPresenti: [...esitiVisti].map(([verdict, label]) => ({ verdict, label })),
     };
-  }, [trovate, livelli, esiti, commutaLivello, commutaEsito, azzeraFiltri, registra]);
+  }, [
+    trovate,
+    livelli,
+    esiti,
+    commutaLivello,
+    commutaEsito,
+    azzeraFiltri,
+    registra,
+    azzeraTrovate,
+  ]);
 
   return <RisultatiContext.Provider value={value}>{children}</RisultatiContext.Provider>;
 }

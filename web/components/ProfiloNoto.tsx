@@ -14,6 +14,7 @@
  */
 
 import { useProfilo } from "@/lib/profilo";
+import { useRisultati } from "@/lib/risultati";
 
 function Chip({ label, value, nota }: { label: string; value: string; nota?: string }) {
   return (
@@ -27,6 +28,7 @@ function Chip({ label, value, nota }: { label: string; value: string; nota?: str
 
 export default function ProfiloNoto() {
   const { profilo, dimentica, quantiFatti } = useProfilo();
+  const { azzeraTrovate } = useRisultati();
 
   // Nothing known yet: render nothing. Not a placeholder, not a skeleton —
   // an empty slot is the honest state, and it keeps the hero uncluttered for
@@ -70,7 +72,15 @@ export default function ProfiloNoto() {
       <button
         type="button"
         className="fatti__clear"
-        onClick={dimentica}
+        onClick={() => {
+          // Leaving invalidates the index for the same reason arriving does:
+          // every verdict in it was computed from data the service is about to
+          // stop holding. The transcript keeps its history — a conversation
+          // records what was said — but the summary of "what we found" cannot
+          // outlive the profile it was found for.
+          dimentica();
+          azzeraTrovate();
+        }}
         title={
           profilo.accesso
             ? "Cancella questi dati e chiude la sessione"

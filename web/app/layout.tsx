@@ -68,7 +68,6 @@ export default function RootLayout({
                 own scrollable row on narrow screens instead of wrapping the
                 whole masthead onto three lines. */}
             <nav className="nav" aria-label="Principale">
-              <Link href="/opportunita">Opportunità</Link>
               <Link href="/dati">Qualità dei dati</Link>
               <Link href="/manifesto">Manifesto</Link>
               <Link href="/info">Come funziona</Link>

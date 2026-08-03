@@ -1196,8 +1196,11 @@ a {
 
 /* ----------------------------------------------------------------- manifesto */
 
+/* Little padding at the top: the masthead already sits above this, and a
+   64px gap under it left the page opening on emptiness rather than on the
+   statement it exists to make. */
 .manifesto-hero {
-  padding: var(--ma-16) var(--ma-6);
+  padding: var(--ma-6) var(--ma-6) var(--ma-12);
   border-bottom: 1px solid var(--kasumi);
 }
 .manifesto-hero__inner {
@@ -2351,13 +2354,22 @@ a {
    this page is modelled on: the heading names the commitment, the paragraph
    makes it. Two columns on a wide screen so the list reads as a set of
    positions rather than a long scroll of prose. */
+/* Flex, not grid, because ten items never fill a four-column grid: the last
+   row was left with two orphans pinned to the left edge. Wrapping flex items
+   with a centred last line is the one layout that handles any count without
+   inventing filler principles to make the arithmetic come out. */
 .principi {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: var(--ma-8) var(--ma-12);
+}
+.principi > .principio {
+  flex: 1 1 300px;
+  max-width: 380px;
 }
 .principio h2 {
   font-size: 1.06rem;

@@ -9,7 +9,8 @@
  * this project exists to name:
  *
  *   - matches: an answer built from data the engine could evaluate. Rendered
- *     with the same `Seal` / `data-verdict` / `criteria` idiom as `/opportunita`.
+ *     with the same `Seal` / `data-verdict` / `criteria` idiom the cards use
+ *     everywhere else.
  *   - data_gap "not_published": the comune never wrote this down. Reuses the
  *     amber `.notice` treatment already used for `unknown_source` criteria
  *     elsewhere in the app — same meaning, same colour.
@@ -271,8 +272,8 @@ function DataGapNotice({ kind }: { kind: "not_published" | "none_found" }) {
   return (
     <p className="notice notice--muted" data-gap="none_found">
       <strong>Non ho trovato nulla.</strong> Nessun servizio pubblicato sembra
-      corrispondere a questa domanda. Prova a riformularla, oppure guarda la{" "}
-      <a href="/opportunita">vista esperta</a>.
+      corrispondere a questa domanda. Prova a riformularla, oppure guarda{" "}
+      <a href="/dati">quali dati abbiamo letto</a>.
     </p>
   );
 }

@@ -128,6 +128,32 @@ class UrpContact(BaseModel):
     orari: str | None = None
 
 
+class IpaRecord(BaseModel):
+    """The body's entry in the Indice della Pubblica Amministrazione.
+
+    IPA is the official registry every Italian public body is required to keep
+    current, published as open data with an API meant for programmatic use.
+    That makes it a better source for "who do I write to" than a web search
+    could ever be: no ranking to second-guess, no lookalike domain to mistake
+    for the real one, and no rate limit standing between us and the answer.
+
+    What it does *not* carry is opening hours — IPA records the institutional
+    channel, not the counter timetable. Those stay in `UrpContact`, read from
+    the comune's own page and dated there. Two sources, each cited for what it
+    actually knows.
+    """
+
+    codice_ipa: str
+    denominazione: str
+    #: The address for legally valid correspondence. This is the channel that
+    #: obliges an answer, which is why it is worth showing a citizen at all.
+    pec: str | None = None
+    indirizzo: str | None = None
+    sito: str | None = None
+    fonte: str
+    verificato_il: date
+
+
 class Ente(BaseModel):
     """One public body's integration record: cost, mode, contact — dated."""
 
@@ -139,6 +165,7 @@ class Ente(BaseModel):
     datasets_on_dati_gov: int | None = None
     calendario_raccolta_open_data_comuni: int | None = None
     urp: UrpContact | None = None
+    ipa: IpaRecord | None = None
 
 
 @lru_cache(maxsize=1)

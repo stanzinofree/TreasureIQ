@@ -241,6 +241,14 @@ class UfficioOut(BaseModel):
     orari: str | None
     fonte: str
     verificato_il: date
+    #: From IPA, the register every public body must keep current. Separate
+    #: from the fields above because it answers a different question and comes
+    #: from a different source: this is the channel that legally obliges a
+    #: reply, while the phone and the hours above are what the comune posted on
+    #: its own page. Each is cited for what it actually knows.
+    pec: str | None = None
+    pec_fonte: str | None = None
+    pec_verificata_il: date | None = None
 
 
 class MatchOut(BaseModel):
@@ -323,6 +331,7 @@ def _ufficio_di(codice_istat: str | None) -> UfficioOut | None:
     if ente is None or ente.urp is None:
         return None
     urp = ente.urp
+    ipa = ente.ipa
     return UfficioOut(
         nome=urp.nome,
         telefono=urp.telefono,
@@ -330,6 +339,9 @@ def _ufficio_di(codice_istat: str | None) -> UfficioOut | None:
         orari=urp.orari,
         fonte=str(urp.fonte),
         verificato_il=urp.verificato_il,
+        pec=ipa.pec if ipa else None,
+        pec_fonte=ipa.fonte if ipa and ipa.pec else None,
+        pec_verificata_il=ipa.verificato_il if ipa and ipa.pec else None,
     )
 
 

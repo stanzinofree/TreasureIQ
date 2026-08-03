@@ -46,6 +46,13 @@ export interface Ufficio {
   orari: string | null;
   fonte: string;
   verificato_il: string;
+  /** From IPA, the register public bodies must keep current. Kept apart from
+   * the fields above because it answers a different question — this is the
+   * channel that legally obliges a reply — and comes from a different source,
+   * so it is cited separately. */
+  pec: string | null;
+  pec_fonte: string | null;
+  pec_verificata_il: string | null;
 }
 
 export interface Match {

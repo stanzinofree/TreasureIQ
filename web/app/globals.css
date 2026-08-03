@@ -2205,3 +2205,12 @@ a {
 .approfondisci__esito[data-stato="errore"] {
   border-left-color: var(--shu);
 }
+
+/* The certified channel, set apart from the counter details above it: it
+   answers a different question and comes from a different register, so it
+   should not read as one more line of the same list. */
+.modale__pec {
+  margin-top: var(--ma-4);
+  padding-top: var(--ma-4);
+  border-top: 1px dashed var(--kasumi);
+}

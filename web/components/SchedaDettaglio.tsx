@@ -206,12 +206,41 @@ export default function SchedaDettaglio({
                 )}
               </dl>
               <p className="modale__provenienza">
-                Contatti letti da{" "}
-                <a href={match.ufficio.fonte} target="_blank" rel="noreferrer">
-                  questa pagina
-                </a>
-                , verificati il {dataIt(match.ufficio.verificato_il)}.
+                Telefono, email e orari letti dal sito del comune (
+                {match.ufficio.fonte}), verificati il{" "}
+                {dataIt(match.ufficio.verificato_il)}.
               </p>
+
+              {/* The certified address is kept apart from the counter details
+                  above. It answers a different question — this is the channel
+                  that obliges an answer, not the one that is quickest — and it
+                  comes from a different source, so it carries its own. */}
+              {match.ufficio.pec && (
+                <div className="modale__pec">
+                  <dl className="modale__dati">
+                    <div>
+                      <dt>PEC — richiesta formale</dt>
+                      <dd>
+                        <a href={`mailto:${match.ufficio.pec}`}>{match.ufficio.pec}</a>
+                      </dd>
+                    </div>
+                  </dl>
+                  <p className="modale__provenienza">
+                    Dall&apos;
+                    <a
+                      href={match.ufficio.pec_fonte ?? "https://indicepa.gov.it"}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Indice della Pubblica Amministrazione
+                    </a>
+                    , il registro che ogni ente è tenuto a mantenere aggiornato
+                    {match.ufficio.pec_verificata_il &&
+                      ` — letto il ${dataIt(match.ufficio.pec_verificata_il)}`}
+                    . Una PEC obbliga l&apos;ente a risponderti.
+                  </p>
+                </div>
+              )}
             </>
           ) : (
             <p className="modale__assente">

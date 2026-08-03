@@ -510,97 +510,16 @@ def _is_spid_decisive(result: MatchResult) -> tuple[bool, str | None]:
     return True, reason
 
 
-def _engine_lines(*, results: list[MatchResult]) -> list[str]:
-    """The only text the verbalisation model is ever allowed to see or echo.
-
-    The leading dash delimits one result from the next for the model; it is
-    not punctuation meant for a citizen, which is why `_fallback_reply` builds
-    its own version instead of reusing these lines verbatim.
-    """
-    return [f"- {r.opportunity.title}: {summarise(r)}" for r in results]
-
-
-def _fallback_reply(*, results: list[MatchResult]) -> str:
-    """Deterministic, model-free reply. Always available, always correct."""
-    return " ".join(f"{r.opportunity.title}: {summarise(r)}" for r in results)
-
-
-#: Any run of digits, including the grouped/decimal forms `summarise` emits
-#: for money and ISEE thresholds ("12.000,00", "9.796,00") and bare counts.
-_NUMBER = re.compile(r"\d[\d.,]*\d|\d")
-
-
-def _figures(text: str) -> list[str]:
-    """Every number in `text`, in order, with separators intact."""
-    return _NUMBER.findall(text)
-
-
-def _preserves_figures(*, source: str, rewritten: str) -> bool:
-    """Whether a rewrite carries exactly the figures it was given.
-
-    The verbalisation prompt already forbids inventing or altering numbers,
-    but a prompt is a request, not a guarantee: asked to rephrase an ISEE
-    ceiling, the local model returned "12.000,0.00 €" for "12.000,00 €" — a
-    corrupted monetary threshold, shown to a citizen as the reason they do not
-    qualify. Comparing the ordered figures is a cheap, exact check, and it
-    fails closed: any drift and the deterministic text is used instead.
-
-    Order matters. A rewrite that swaps two thresholds keeps the same multiset
-    while inverting the meaning, so the sequence is compared, not the set.
-    """
-    return _figures(source) == _figures(rewritten)
-
-
-#: Leading list markers the model tends to copy from its input.
-_BULLET = re.compile(r"^[\s]*[-–—•*]+[\s]+", re.MULTILINE)
-
-
-def _strip_bullets(text: str) -> str:
-    """Drop list markers the model echoed back from `_engine_lines`.
-
-    The dash in front of each engine line is a delimiter for the model, and
-    the model reliably reproduces it, so a citizen was reading answers that
-    opened with a bare "- ". Presentation only: this removes markers, never
-    words or figures, so it runs before the figure check and cannot affect it.
-    """
-    return _BULLET.sub("", text).strip()
-
-
-async def _verbalise(*, results: list[MatchResult], provider: LLMProvider) -> str:
-    """Rephrase engine strings. Falls back to them verbatim if the model fails.
-
-    This is the fallback D-01/D-06 require explicitly: if Ollama is down or
-    the call errors for any reason, the endpoint must still answer, using the
-    deterministic `summarise()`-derived text rather than 500ing. A rewrite that
-    alters any figure is treated as exactly that kind of failure.
-    """
-    fallback = _fallback_reply(results=results)
-    source = "\n".join(_engine_lines(results=results))
-    try:
-        out = await provider.aparse(
-            system=VERBALISE_SYSTEM_PROMPT,
-            user=source,
-            output_model=VerbalisedReply,
-        )
-        text = _strip_bullets(out.text)
-        if not text:
-            return fallback
-        if not _preserves_figures(source=source, rewritten=text):
-            logger.warning(
-                "chat verbalisation altered figures (%s -> %s), using "
-                "deterministic summary",
-                _figures(source),
-                _figures(text),
-            )
-            return fallback
-        return text
-    except Exception:
-        logger.warning(
-            "chat verbalisation failed, falling back to deterministic summary",
-            exc_info=True,
-        )
-        return fallback
-
+# The verbalisation model is gone from this rail.
+#
+# Its job was to rephrase the engine's own sentences so a reply would not read
+# like machine output. But the card under every reply already stated the same
+# title and the same sentence, so the model was asked to disguise a duplicate
+# rather than remove one — and it kept corrupting the figures inside it while
+# trying, which the figure guard then had to throw away. `_apertura` says what
+# the cards cannot and repeats nothing they do, so nothing is left here for a
+# model to rewrite and no figure left for it to damage. The removed code,
+# guard included, is in the history if a rail ever needs prose again.
 
 def _bare_ente_name(ente: Ente) -> str:
     """`ente.ente` minus its "Comune di " prefix, for query building and

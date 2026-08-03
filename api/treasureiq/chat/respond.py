@@ -330,13 +330,59 @@ def _is_spid_decisive(result: MatchResult) -> tuple[bool, str | None]:
 
 
 def _engine_lines(*, results: list[MatchResult]) -> list[str]:
-    """The only text the verbalisation model is ever allowed to see or echo."""
+    """The only text the verbalisation model is ever allowed to see or echo.
+
+    The leading dash delimits one result from the next for the model; it is
+    not punctuation meant for a citizen, which is why `_fallback_reply` builds
+    its own version instead of reusing these lines verbatim.
+    """
     return [f"- {r.opportunity.title}: {summarise(r)}" for r in results]
 
 
 def _fallback_reply(*, results: list[MatchResult]) -> str:
     """Deterministic, model-free reply. Always available, always correct."""
-    return " ".join(_engine_lines(results=results))
+    return " ".join(f"{r.opportunity.title}: {summarise(r)}" for r in results)
+
+
+#: Any run of digits, including the grouped/decimal forms `summarise` emits
+#: for money and ISEE thresholds ("12.000,00", "9.796,00") and bare counts.
+_NUMBER = re.compile(r"\d[\d.,]*\d|\d")
+
+
+def _figures(text: str) -> list[str]:
+    """Every number in `text`, in order, with separators intact."""
+    return _NUMBER.findall(text)
+
+
+def _preserves_figures(*, source: str, rewritten: str) -> bool:
+    """Whether a rewrite carries exactly the figures it was given.
+
+    The verbalisation prompt already forbids inventing or altering numbers,
+    but a prompt is a request, not a guarantee: asked to rephrase an ISEE
+    ceiling, the local model returned "12.000,0.00 €" for "12.000,00 €" — a
+    corrupted monetary threshold, shown to a citizen as the reason they do not
+    qualify. Comparing the ordered figures is a cheap, exact check, and it
+    fails closed: any drift and the deterministic text is used instead.
+
+    Order matters. A rewrite that swaps two thresholds keeps the same multiset
+    while inverting the meaning, so the sequence is compared, not the set.
+    """
+    return _figures(source) == _figures(rewritten)
+
+
+#: Leading list markers the model tends to copy from its input.
+_BULLET = re.compile(r"^[\s]*[-–—•*]+[\s]+", re.MULTILINE)
+
+
+def _strip_bullets(text: str) -> str:
+    """Drop list markers the model echoed back from `_engine_lines`.
+
+    The dash in front of each engine line is a delimiter for the model, and
+    the model reliably reproduces it, so a citizen was reading answers that
+    opened with a bare "- ". Presentation only: this removes markers, never
+    words or figures, so it runs before the figure check and cannot affect it.
+    """
+    return _BULLET.sub("", text).strip()
 
 
 async def _verbalise(*, results: list[MatchResult], provider: LLMProvider) -> str:
@@ -344,17 +390,29 @@ async def _verbalise(*, results: list[MatchResult], provider: LLMProvider) -> st
 
     This is the fallback D-01/D-06 require explicitly: if Ollama is down or
     the call errors for any reason, the endpoint must still answer, using the
-    deterministic `summarise()`-derived text rather than 500ing.
+    deterministic `summarise()`-derived text rather than 500ing. A rewrite that
+    alters any figure is treated as exactly that kind of failure.
     """
     fallback = _fallback_reply(results=results)
+    source = "\n".join(_engine_lines(results=results))
     try:
         out = await provider.aparse(
             system=VERBALISE_SYSTEM_PROMPT,
-            user="\n".join(_engine_lines(results=results)),
+            user=source,
             output_model=VerbalisedReply,
         )
-        text = out.text.strip()
-        return text or fallback
+        text = _strip_bullets(out.text)
+        if not text:
+            return fallback
+        if not _preserves_figures(source=source, rewritten=text):
+            logger.warning(
+                "chat verbalisation altered figures (%s -> %s), using "
+                "deterministic summary",
+                _figures(source),
+                _figures(text),
+            )
+            return fallback
+        return text
     except Exception:
         logger.warning(
             "chat verbalisation failed, falling back to deterministic summary",
@@ -773,11 +831,21 @@ async def build_chat_answer(
 
     # Always evaluate every candidate (`include_ineligible=True`): the citizen
     # still deserves to know *why* they don't qualify, per `match.engine`'s
-    # own design, if every candidate turns out NOT_ELIGIBLE.
-    raw_results = match(candidates, active_profile, today=today, include_ineligible=True)
-    results = [r for r in raw_results if r.verdict is not Verdict.NOT_ELIGIBLE]
-    if not results:
-        results = raw_results
+    # own design.
+    #
+    # Ineligible results are kept in the answer rather than filtered out. They
+    # already sort last (`match` orders by verdict first), so they never
+    # displace something the citizen can actually use — but dropping them
+    # produced the worst answer this rail can give: asked about a high
+    # electricity bill, a family whose ISEE sat just over the bonus ceiling was
+    # shown a waste-collection service and never told the bonus existed. The
+    # one relevant record had been silently removed for being a "no". A no with
+    # a reason is an answer; substituting an unrelated yes is not.
+    #
+    # Filtering only when *every* candidate is ineligible, as this did before,
+    # is the same bug with a narrower trigger: it needs just one irrelevant
+    # survivor to hide the relevant refusal.
+    results = match(candidates, active_profile, today=today, include_ineligible=True)
 
     top = results[:MAX_MATCHES_IN_REPLY]
 

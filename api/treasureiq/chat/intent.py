@@ -118,10 +118,19 @@ TOPIC_KEYWORDS: dict[Topic, tuple[str, ...]] = {
     Topic.SOSTEGNO_UTENZE: (
         "bolletta",
         "bollette",
-        "utenze",
         "energia elettrica",
-        "gas",
         "utenza elettrica",
+        "fornitura elettrica",
+        "bonus sociale",
+        "luce e gas",
+        # Bare "utenze" and bare "gas" are deliberately absent. Retrieval here
+        # is plain substring matching, and both words carry a second, unrelated
+        # sense in municipal prose: waste-collection pages count "utenze
+        # domestiche" (the households served, not their bills), which is enough
+        # to pull "Raccolta differenziata" into an answer about an electricity
+        # bill. The specific phrases above still reach every record that is
+        # genuinely about utility costs — "Bonus sociale bollette (energia
+        # elettrica, gas, servizio idrico)" matches on three of them.
     ),
     Topic.ASSISTENZA_DISABILITA: ("disabilit", "alzheimer", "assistenza domiciliare"),
     Topic.CONTRASSEGNO_DISABILI: ("contrassegno disabili", "permesso disabili"),

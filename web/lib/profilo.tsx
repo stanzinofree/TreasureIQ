@@ -24,7 +24,8 @@
  * with each question.
  */
 
-import { createContext, useCallback, useContext, useMemo, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
+import { me } from "@/lib/api";
 
 export type Origine = "dichiarato" | "geolocalizzazione" | "accesso";
 
@@ -91,6 +92,38 @@ export function ProfiloProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const dimentica = useCallback(() => setProfilo({}), []);
+
+  // The session cookie outlives the page, so without this a reload left the
+  // strip empty while the server still answered using the profile — the
+  // interface claiming to know nothing while the answers proved otherwise.
+  // A 401 is the ordinary logged-out case, not an error worth showing.
+  useEffect(() => {
+    let annullato = false;
+    me()
+      .then((p) => {
+        if (annullato) return;
+        setProfilo((corrente) => ({
+          ...corrente,
+          eta: p.eta ?? corrente.eta,
+          interessi: p.interests?.length ? p.interests : corrente.interessi,
+          comune: p.comune_nome
+            ? {
+                nome: p.comune_nome,
+                istat: p.comune_istat,
+                origine: "accesso",
+                confermato: true,
+              }
+            : corrente.comune,
+          accesso: true,
+        }));
+      })
+      .catch(() => {
+        /* no session: the empty strip is already the correct state */
+      });
+    return () => {
+      annullato = true;
+    };
+  }, []);
 
   const value = useMemo(
     () => ({ profilo, registra, dimentica, quantiFatti: contaFatti(profilo) }),

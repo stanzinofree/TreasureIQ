@@ -41,6 +41,7 @@ from treasureiq.chat.respond import (
 )
 from treasureiq.chat.intent import Topic
 from treasureiq.costo import SOGLIA_RISCOPERTA, costo_comune
+from treasureiq.storico import serie
 from treasureiq.integration import (
     MODE_LABELS,
     Ente,
@@ -148,6 +149,10 @@ serializer = URLSafeSerializer(SECRET, salt="treasureiq-session")
 #: AGEVOLAZIONE rail alongside the municipal seed — not tied to any single ISTAT
 #: code, so it is loaded once and merged in rather than keyed by comune.
 CURATED_SEED = "nazionale_curated.json"
+
+#: Dated cost history, written at ingestion and read here. Absent until an
+#: ingestion has run, which `serie()` reports as an empty list.
+STORICO_DB = SEED_DIR.parent / "storico.db"
 
 
 @lru_cache(maxsize=1)
@@ -940,6 +945,48 @@ def costi() -> list[CostoOut]:
     """
     out = [_costo_out(istat) for istat in COMUNI if istat in load_enti()]
     return sorted(out, key=lambda c: (c.costo_per_record is None, c.costo_per_record or 0))
+
+
+class PuntoStoricoOut(BaseModel):
+    rilevato_il: date
+    codice_istat: str
+    ente: str
+    modo: str
+    record_totali: int
+    record_strutturati: int
+    record_recuperati: int
+    record_non_recuperati: int
+    costo_totale: float
+    costo_per_record: float | None
+    scoperta_scaduta: bool
+
+
+@app.get("/api/storico", response_model=list[PuntoStoricoOut])
+def storico(codice_istat: str | None = None) -> list[PuntoStoricoOut]:
+    """Dated cost observations, oldest first.
+
+    Written at ingestion and read here: an empty list means no ingestion has
+    recorded anything yet, which is the ordinary state of a fresh checkout and
+    not a fault. Callers render an empty history rather than an error, because
+    a chart with no points is the honest picture of a history nobody kept.
+    """
+    punti = serie(STORICO_DB, codice_istat=codice_istat)
+    return [
+        PuntoStoricoOut(
+            rilevato_il=p.rilevato_il,
+            codice_istat=p.codice_istat,
+            ente=p.ente,
+            modo=p.modo,
+            record_totali=p.record_totali,
+            record_strutturati=p.record_strutturati,
+            record_recuperati=p.record_recuperati,
+            record_non_recuperati=p.record_non_recuperati,
+            costo_totale=p.costo_totale,
+            costo_per_record=p.costo_per_record,
+            scoperta_scaduta=p.scoperta_scaduta,
+        )
+        for p in punti
+    ]
 
 
 @app.get("/api/readiness/{codice_istat}", response_model=ReadinessOut)

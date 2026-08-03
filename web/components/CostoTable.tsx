@@ -121,6 +121,21 @@ export default function CostoTable({ costi }: { costi: Costo[] }) {
         nostra macchina e il peso dei loro allegati quanto la loro apertura, e
         due esecuzioni su computer diversi non sarebbero confrontabili.
       </p>
+
+      {/* Stated as a plan, in the future tense, and separated from the
+          measurements above. A roadmap described as if it were running is the
+          easiest thing to write and the fastest way to lose the credibility
+          the rest of this page is spending its numbers to earn. */}
+      <p className="costo-metodo costo-metodo--futuro">
+        <strong>Non ancora fatto.</strong> Oggi la scoperta della via
+        d&apos;accesso è manuale e ogni misura qui sopra è stata rilevata a
+        mano. Il passo successivo previsto è un processo che sorvegli le
+        scadenze di questa tabella, interroghi periodicamente l&apos;Indice
+        della Pubblica Amministrazione per accorgersi di fonti nuove, e
+        rimisuri i portali per conto proprio — così che il costo di scoperta
+        non ricada su chi arriva per primo. Non c&apos;è, e finché non ci sarà
+        queste cifre restano fotografie datate, non un monitoraggio.
+      </p>
     </section>
   );
 }

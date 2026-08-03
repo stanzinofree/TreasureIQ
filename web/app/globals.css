@@ -2334,3 +2334,13 @@ a {
   font-size: 0.86rem;
   color: var(--sumi-soft);
 }
+
+/* A plan, set apart from the measurements above it. Describing roadmap as if
+   it were running is the fastest way to lose the credibility the numbers on
+   this page are spending themselves to earn. */
+.costo-metodo--futuro {
+  margin-top: var(--ma-4);
+  padding-left: var(--ma-4);
+  border-left: 3px dashed var(--kasumi);
+  color: var(--sumi-faint);
+}

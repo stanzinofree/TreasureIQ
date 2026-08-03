@@ -229,6 +229,37 @@ def attribute_quote(quote_text: str, segments: Sequence[Segment]) -> Segment | N
     return best_segment
 
 
+def quote_appears_in(quote_text: str, segments: Sequence[Segment]) -> bool:
+    """Does this quote exist anywhere in the corpus, regardless of where?
+
+    `attribute_quote` answers a narrower question — *which single document*
+    should be cited — and deliberately returns `None` when several segments
+    match equally well, because citing the wrong one is worse than citing
+    none. That ambiguity is not evidence of fabrication, and the quote gate
+    must not read it as such: municipal pages routinely repeat, verbatim, the
+    text of the PDF they link, so a genuine quote matching both the body and
+    its attachment is the normal case rather than a suspicious one.
+
+    Verification therefore asks only whether the text is really there. A quote
+    that matches two segments is verified but unattributed — the value stands,
+    it just cannot name a single source.
+    """
+    normalised_quote = _normalise_for_match(quote_text)
+    if len(normalised_quote) < _FUZZY_MIN_MATCH_CHARS:
+        return False
+    for seg in segments:
+        normalised_page = _normalise_for_match(seg.text)
+        matcher = difflib.SequenceMatcher(
+            None, normalised_quote, normalised_page, autojunk=False
+        )
+        match = matcher.find_longest_match(0, len(normalised_quote), 0, len(normalised_page))
+        if match.size < _FUZZY_MIN_MATCH_CHARS:
+            continue
+        if match.size / len(normalised_quote) >= _FUZZY_MIN_RATIO:
+            return True
+    return False
+
+
 class ExtractionResult(BaseModel):
     """Raw model output, before validation into a `Requirements`.
 
@@ -302,10 +333,18 @@ class ExtractionResult(BaseModel):
             if match is not None:
                 results.append((q.field, "verified", match, q.text))
                 continue
+            # No single attributable segment. Before calling this a fabrication,
+            # ask the weaker question: is the text there at all? It usually is —
+            # `attribute_quote` also returns `None` when several segments match
+            # equally, which happens whenever a page repeats its own PDF. The
+            # value is verified; it simply cannot cite one document.
+            if visible_segments and quote_appears_in(q.text, visible_segments):
+                results.append((q.field, "verified", None, q.text))
+                continue
             found_untruncated = (
-                attribute_quote(q.text, full_segments) if full_segments else None
+                quote_appears_in(q.text, full_segments) if full_segments else False
             )
-            if found_untruncated is not None:
+            if found_untruncated:
                 results.append((q.field, "quote_unverifiable_truncated", None, q.text))
             else:
                 results.append((q.field, "quote_not_found", None, q.text))
@@ -352,7 +391,15 @@ class ExtractionResult(BaseModel):
             elif field not in verification:
                 verification[field] = (status, segment, quote_text)
 
-        def _source_note(field: str, quote_text: str, segment: "Segment") -> str:
+        def _source_note(field: str, quote_text: str, segment: "Segment | None") -> str:
+            if segment is None:
+                # Verified but unattributable: the same sentence appears in more
+                # than one document we read, so naming one would be a guess. The
+                # quote still stands as evidence — see `quote_appears_in`.
+                return (
+                    f"Fonte per '{field}': testo ripetuto in più documenti letti, "
+                    f'nessuno citabile in via esclusiva — "{quote_text}"'
+                )
             if segment.kind == "allegato":
                 location = f"allegato {segment.url}" + (
                     f", pagina {segment.page_number}" if segment.page_number else ""
@@ -388,7 +435,8 @@ class ExtractionResult(BaseModel):
             status, segment, quote_text = info
             if status == "verified":
                 counters["quote_verified"] += 1
-                assert segment is not None
+                # `segment` may be None: verified in the corpus but present in
+                # several documents at once, so not attributable to one.
                 notes.append(_source_note(field, quote_text, segment))
                 return True
             counters[status] += 1

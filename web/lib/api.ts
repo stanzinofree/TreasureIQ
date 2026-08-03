@@ -115,6 +115,48 @@ export const readiness = (istat: string) =>
  * `/dati` as measurement evidence, not fetched from here. */
 export const readinessAll = () => call<Readiness[]>("/api/readiness");
 
+/** One opportunity's recovery cost (`RecordCostOut` in `api.py`). */
+export interface RecordCost {
+  id: string;
+  title: string;
+  recovery_level: string | null;
+  extraction_seconds: number | null;
+  pdfs_linked: number | null;
+  pdfs_opened: number | null;
+  pdfs_skipped: number | null;
+  chars_processed: number | null;
+  requirements_recovered: number | null;
+}
+
+/** D-16 recovery cost per comune (`RecoveryOut` in `api.py`).
+ *
+ * `typed_records` and `unmeasured_records` must be rendered as different
+ * things. A typed record cost nothing because the comune already published it
+ * structured — that is the outcome the whole project argues for. An unmeasured
+ * record is one we never looked at. Showing them as one bar would credit a
+ * comune for data nobody checked.
+ */
+export interface Recovery {
+  ente: string;
+  codice_istat: string;
+  records_total: number;
+  typed_records: number;
+  recovered_records: number;
+  unmeasured_records: number;
+  levels: Record<string, number>;
+  seconds_total: number | null;
+  seconds_avg: number | null;
+  pdfs_linked_total: number;
+  pdfs_opened_total: number;
+  pdfs_skipped_total: number;
+  requirements_recovered_total: number;
+  records: RecordCost[];
+}
+
+export const recovery = (istat: string) =>
+  call<Recovery>(`/api/recovery/${istat}`);
+export const recoveryAll = () => call<Recovery[]>("/api/recovery");
+
 /** The chat contract (K3) — must stay field-for-field identical to the
  * `ChatOut` pydantic model in `api/treasureiq/api.py`. `data_gap` carries the
  * distinction the whole project exists to make: "the comune never published

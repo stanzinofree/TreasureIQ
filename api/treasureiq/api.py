@@ -43,6 +43,7 @@ from treasureiq.match.engine import (
     summarise,
 )
 from treasureiq.readiness import ReadinessReport, score_comune
+from treasureiq.recovery import ComuneRecovery, compute_comune_recovery
 from treasureiq.schema import CitizenProfile, Opportunity
 from treasureiq.stats import (
     APP_VERSION,
@@ -393,6 +394,83 @@ def to_readiness_out(report: ReadinessReport) -> ReadinessOut:
     )
 
 
+class RecordCostOut(BaseModel):
+    id: str
+    title: str
+    recovery_level: str | None
+    extraction_seconds: float | None
+    pdfs_linked: int | None
+    pdfs_opened: int | None
+    pdfs_skipped: int | None
+    chars_processed: int | None
+    requirements_recovered: int | None
+
+
+class RecoveryOut(BaseModel):
+    """D-16 recovery cost for one comune.
+
+    `typed_records` and `unmeasured_records` are deliberately separate fields:
+    the first cost nothing because the comune published them structured, the
+    second we simply never measured. See `recovery.py` — merging them would
+    flatter a comune for data we never looked at.
+    """
+
+    ente: str
+    codice_istat: str
+    records_total: int
+    typed_records: int
+    recovered_records: int
+    unmeasured_records: int
+    levels: dict[str, int]
+    seconds_total: float | None
+    seconds_avg: float | None
+    pdfs_linked_total: int
+    pdfs_opened_total: int
+    pdfs_skipped_total: int
+    requirements_recovered_total: int
+    records: list[RecordCostOut]
+
+
+def to_recovery_out(report: ComuneRecovery) -> RecoveryOut:
+    return RecoveryOut(
+        ente=report.ente,
+        codice_istat=report.codice_istat,
+        records_total=report.records_total,
+        typed_records=report.typed_records,
+        recovered_records=report.recovered_records,
+        unmeasured_records=report.unmeasured_records,
+        levels=report.levels,
+        seconds_total=(
+            round(report.seconds_total, 2) if report.seconds_total is not None else None
+        ),
+        seconds_avg=(
+            round(report.seconds_avg, 2) if report.seconds_avg is not None else None
+        ),
+        pdfs_linked_total=report.pdfs_linked_total,
+        pdfs_opened_total=report.pdfs_opened_total,
+        pdfs_skipped_total=report.pdfs_skipped_total,
+        requirements_recovered_total=report.requirements_recovered_total,
+        records=[
+            RecordCostOut(
+                id=r.id,
+                title=r.title,
+                recovery_level=r.recovery_level,
+                extraction_seconds=(
+                    round(r.extraction_seconds, 2)
+                    if r.extraction_seconds is not None
+                    else None
+                ),
+                pdfs_linked=r.pdfs_linked,
+                pdfs_opened=r.pdfs_opened,
+                pdfs_skipped=r.pdfs_skipped,
+                chars_processed=r.chars_processed,
+                requirements_recovered=r.requirements_recovered,
+            )
+            for r in report.records
+        ],
+    )
+
+
 # --------------------------------------------------------------------------
 # Routes
 # --------------------------------------------------------------------------
@@ -478,6 +556,26 @@ def readiness(codice_istat: str) -> ReadinessOut:
 @app.get("/api/readiness", response_model=list[ReadinessOut])
 def readiness_all() -> list[ReadinessOut]:
     return [readiness(istat) for istat in COMUNI]
+
+
+@app.get("/api/recovery/{codice_istat}", response_model=RecoveryOut)
+def recovery(codice_istat: str) -> RecoveryOut:
+    """Public — what it cost to make this comune's data machine-readable."""
+    meta = COMUNI.get(codice_istat)
+    if meta is None:
+        raise HTTPException(404, f"Comune {codice_istat} non disponibile")
+    return to_recovery_out(
+        compute_comune_recovery(
+            ente=meta["ente"],
+            codice_istat=codice_istat,
+            records=list(load_opportunities(codice_istat)),
+        )
+    )
+
+
+@app.get("/api/recovery", response_model=list[RecoveryOut])
+def recovery_all() -> list[RecoveryOut]:
+    return [recovery(istat) for istat in COMUNI]
 
 
 @app.get("/api/stats", response_model=StatsOut)

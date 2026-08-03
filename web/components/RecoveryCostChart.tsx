@@ -2,14 +2,25 @@
  * "Within Albano" register (D-17/D-18, B16) — the one place on `/dati` where a
  * chart is honest, because N≈50 records actually supports a distribution.
  *
- * The ten rows below are Albano's prose pages (bandi, avvisi, contributi)
- * that went through the quote-gated PDF extractor — the only records in the
- * seed carrying D-16 recovery instrumentation. None of the four endpoints
- * this page is allowed to call (`/api/stats`, `/api/status`,
- * `/api/readiness[/{istat}]`) expose per-record cost, so this dataset is
- * committed evidence read from `data/seed/albano_058003.json` at the last
- * ingestion run, the same way the province survey is committed evidence —
- * marked with its measurement date rather than presented as live.
+ * Reads `GET /api/recovery`, which rolls up the D-16 instrumentation each
+ * ingestion run writes into the committed snapshots. This used to be a
+ * transcribed constant, because no endpoint exposed per-record cost; it now
+ * comes from the API so the chart cannot drift away from the seed behind it.
+ *
+ * The comparison across comuni is the point, and it only reads correctly if
+ * two different zeroes stay apart:
+ *
+ *   typed      — the comune published it through its own structured `/servizi`
+ *                API. Nothing had to be recovered, so the cost is really zero.
+ *                Fonte Nuova is entirely this case: 34 typed servizi, no prose
+ *                pages at all. That is the outcome the project argues for, and
+ *                it should read as a win, not as an empty chart.
+ *   recovered  — prose we had to open, read and quote-gate. Albano's ten
+ *                `wp_pages` records. This is where the cost lives.
+ *
+ * A comune with nothing to recover therefore renders as a statement, not as a
+ * bar of length zero — a zero-length bar would read as "fast", when the truth
+ * is "there was no work to do".
  *
  * No chart library, no CDN: hand-rolled SVG-free HTML/CSS bars, per the
  * project's offline-build guarantee and the dataviz skill's mark specs.
@@ -20,17 +31,9 @@
  * everywhere else (see `Seal`, `.criterion__glyph`).
  */
 
-export type RecoveryLevel = "L1_manuale" | "L2_estratto" | "L3_illeggibile";
+import type { Recovery, RecordCost } from "@/lib/api";
 
-export interface RecoveryCostRow {
-  title: string;
-  kind: string;
-  level: RecoveryLevel;
-  seconds: number;
-  pdfsLinked: number;
-  pdfsOpened: number;
-  requirementsRecovered: number;
-}
+export type RecoveryLevel = "L1_manuale" | "L2_estratto" | "L3_illeggibile";
 
 const LEVEL_META: Record<
   RecoveryLevel,
@@ -43,131 +46,183 @@ const LEVEL_META: Record<
 
 const LEVEL_ORDER: RecoveryLevel[] = ["L2_estratto", "L1_manuale", "L3_illeggibile"];
 
-/** Measured 2026-08-02, from the committed ingestion snapshot
- * (`data/seed/albano_058003.json`): the ten `wp_pages` records — bandi,
- * avvisi and contributi recovered from prose, as opposed to the 32 `servizi`
- * records ingested from the structured API, which carry no recovery cost
- * because nothing had to be extracted from them. */
-export const ALBANO_RECOVERY_ROWS: RecoveryCostRow[] = [
-  { title: "IMU – Anni 2012-2013-2014", kind: "servizio", level: "L2_estratto", seconds: 8.6216, pdfsLinked: 14, pdfsOpened: 5, requirementsRecovered: 1 },
-  { title: "Raccolta differenziata", kind: "servizio", level: "L1_manuale", seconds: 7.1730, pdfsLinked: 11, pdfsOpened: 5, requirementsRecovered: 0 },
-  { title: "Edilizia Residenziale Pubblica (Case popolari)", kind: "bando", level: "L2_estratto", seconds: 4.7598, pdfsLinked: 19, pdfsOpened: 5, requirementsRecovered: 2 },
-  { title: "Servizio Mensa", kind: "contributo_economico", level: "L2_estratto", seconds: 3.8094, pdfsLinked: 12, pdfsOpened: 5, requirementsRecovered: 2 },
-  { title: "Centrale Unica di Committenza dei Comune di Albano Laziale, Castel Gandolfo e Grottaferrata", kind: "bando", level: "L1_manuale", seconds: 2.6515, pdfsLinked: 5, pdfsOpened: 4, requirementsRecovered: 0 },
-  { title: "Modulistica – Manutenzioni", kind: "contributo_economico", level: "L2_estratto", seconds: 2.6217, pdfsLinked: 9, pdfsOpened: 5, requirementsRecovered: 1 },
-  { title: "Progetti per la scuola", kind: "bando", level: "L1_manuale", seconds: 1.4251, pdfsLinked: 8, pdfsOpened: 5, requirementsRecovered: 0 },
-  { title: "Statistica", kind: "bando", level: "L1_manuale", seconds: 0.6899, pdfsLinked: 2, pdfsOpened: 1, requirementsRecovered: 0 },
-  { title: "Modulistica – Patrimonio", kind: "servizio", level: "L1_manuale", seconds: 0.5763, pdfsLinked: 2, pdfsOpened: 2, requirementsRecovered: 0 },
-  { title: "Area Assistenza e Integrazione", kind: "contributo_economico", level: "L1_manuale", seconds: 0.0002, pdfsLinked: 0, pdfsOpened: 0, requirementsRecovered: 0 },
-];
+function isKnownLevel(level: string | null): level is RecoveryLevel {
+  return level !== null && level in LEVEL_META;
+}
 
 function formatSeconds(s: number): string {
   return s < 0.01 ? "<0,01 s" : `${s.toLocaleString("it-IT", { maximumFractionDigits: 1 })} s`;
 }
 
-export default function RecoveryCostChart({
-  rows,
-  measuredAt,
-}: {
-  rows: RecoveryCostRow[];
-  measuredAt: string;
-}) {
-  const sorted = [...rows].sort((a, b) => b.seconds - a.seconds);
-  const max = Math.max(...rows.map((r) => r.seconds), 0.001);
+/** One comune's block: the split bar, the per-record bars, and the table. */
+function ComuneRecoveryBlock({ report }: { report: Recovery }) {
+  const rows = report.records.filter((r) => isKnownLevel(r.recovery_level));
   const counts = LEVEL_ORDER.map((level) => ({
     level,
-    n: rows.filter((r) => r.level === level).length,
-  }));
-  const total = rows.length;
+    n: report.levels[level] ?? 0,
+  })).filter((c) => c.n > 0);
+  const total = report.recovered_records;
+  const max = Math.max(...rows.map((r) => r.extraction_seconds ?? 0), 0.001);
+
+  return (
+    <section style={{ marginTop: "var(--ma-4)" }}>
+      <h4 className="field__label">{report.ente}</h4>
+
+      <p className="field__hint">
+        {report.typed_records} servizi già tipizzati dal comune — costo di recupero
+        nullo, perché non c&apos;era nulla da estrarre.{" "}
+        {total > 0
+          ? `${total} pagine in prosa hanno invece richiesto estrazione.`
+          : "Nessuna pagina in prosa da recuperare."}
+        {report.unmeasured_records > 0
+          ? ` ${report.unmeasured_records} record non misurati.`
+          : ""}
+      </p>
+
+      {total === 0 ? (
+        /* Not a chart. A comune that publishes everything structured has no
+           distribution to draw, and drawing an empty one would invent a
+           deficiency that isn't there. */
+        <p className="field__hint">
+          <strong style={{ fontWeight: 600 }}>Niente da recuperare.</strong> Tutto
+          quello che {report.ente} pubblica passa dalla sua API dei servizi, già
+          in forma leggibile da una macchina. È il caso migliore: il costo non
+          ricade sul cittadino.
+        </p>
+      ) : (
+        <>
+          {/* Recovery split — L1/L2/L3, D-16's ladder. A stacked bar restates
+              the same counts visually, but the counts in text are what
+              actually carries the information (colour is redundant here). */}
+          <div
+            className="recovery-split"
+            role="img"
+            aria-label={counts
+              .map((c) => `${LEVEL_META[c.level].label}: ${c.n} su ${total}`)
+              .join(", ")}
+          >
+            <div className="recovery-split__bar">
+              {counts.map(({ level, n }) => (
+                <span
+                  key={level}
+                  className="recovery-split__segment"
+                  style={{
+                    width: `${(n / total) * 100}%`,
+                    background: LEVEL_META[level].swatchVar,
+                  }}
+                  aria-hidden="true"
+                />
+              ))}
+            </div>
+            <ul className="recovery-split__legend">
+              {counts.map(({ level, n }) => (
+                <li key={level}>
+                  <span
+                    className="recovery-split__swatch"
+                    style={{ background: LEVEL_META[level].swatchVar }}
+                    aria-hidden="true"
+                  />
+                  {LEVEL_META[level].label}: <strong style={{ fontWeight: 600 }}>{n}</strong> su{" "}
+                  {total}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Cost per opportunity, sorted worst-first by the API — this doubles
+              as "which bandi cost most to open": the ordering is the answer. */}
+          <ol
+            className="cost-chart"
+            aria-label={`Secondi di estrazione per bando, ${report.ente}, dal più costoso`}
+          >
+            {rows.map((row) => {
+              const level = row.recovery_level as RecoveryLevel;
+              const seconds = row.extraction_seconds ?? 0;
+              return (
+                <li key={row.id} className="cost-chart__row">
+                  <span className="cost-chart__label" title={row.title}>
+                    {row.title}
+                  </span>
+                  <span className="cost-chart__track">
+                    <span
+                      className="cost-chart__bar"
+                      style={{
+                        width: `${Math.max(2, (seconds / max) * 100)}%`,
+                        background: LEVEL_META[level].swatchVar,
+                      }}
+                    />
+                  </span>
+                  <span className="cost-chart__value">{formatSeconds(seconds)}</span>
+                  <span className="cost-chart__badge">{LEVEL_META[level].short}</span>
+                </li>
+              );
+            })}
+          </ol>
+
+          {/* Screen-reader / no-JS equivalent: the same numbers as a table. */}
+          <table className="sr-only">
+            <caption>Costo di estrazione per bando, {report.ente}</caption>
+            <thead>
+              <tr>
+                <th scope="col">Bando o servizio</th>
+                <th scope="col">Livello di recupero</th>
+                <th scope="col">Secondi di estrazione</th>
+                <th scope="col">PDF collegati</th>
+                <th scope="col">PDF aperti</th>
+                <th scope="col">Requisiti recuperati</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((row) => (
+                <tr key={row.id}>
+                  <td>{row.title}</td>
+                  <td>{LEVEL_META[row.recovery_level as RecoveryLevel].label}</td>
+                  <td>{formatSeconds(row.extraction_seconds ?? 0)}</td>
+                  <td>{row.pdfs_linked ?? "—"}</td>
+                  <td>{row.pdfs_opened ?? "—"}</td>
+                  <td>{row.requirements_recovered ?? "—"}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </>
+      )}
+    </section>
+  );
+}
+
+export default function RecoveryCostChart({
+  reports,
+  measuredAt,
+}: {
+  reports: Recovery[];
+  measuredAt: string;
+}) {
+  if (reports.length === 0) {
+    return (
+      <p className="field__hint">
+        Costo di recupero non disponibile: nessuno snapshot leggibile.
+      </p>
+    );
+  }
+
+  // Comuni that actually paid a recovery cost first — the ones with a
+  // distribution to show carry the section, and "nothing to recover" reads
+  // better as the contrast that follows than as the opening.
+  const ordered = [...reports].sort(
+    (a, b) => b.recovered_records - a.recovered_records,
+  );
 
   return (
     <div>
-      {/* Recovery split — L1/L2/L3, D-16's ladder. A stacked bar restates
-          the same three counts visually, but the counts in text are what
-          actually carries the information (colour is redundant here). */}
-      <div className="recovery-split" role="img" aria-label={
-        counts.map((c) => `${LEVEL_META[c.level].label}: ${c.n} su ${total}`).join(", ")
-      }>
-        <div className="recovery-split__bar">
-          {counts.map(({ level, n }) =>
-            n > 0 ? (
-              <span
-                key={level}
-                className="recovery-split__segment"
-                style={{ width: `${(n / total) * 100}%`, background: LEVEL_META[level].swatchVar }}
-                aria-hidden="true"
-              />
-            ) : null,
-          )}
-        </div>
-        <ul className="recovery-split__legend">
-          {counts.map(({ level, n }) => (
-            <li key={level}>
-              <span
-                className="recovery-split__swatch"
-                style={{ background: LEVEL_META[level].swatchVar }}
-                aria-hidden="true"
-              />
-              {LEVEL_META[level].label}: <strong style={{ fontWeight: 600 }}>{n}</strong> su {total}
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      {/* Cost per opportunity, sorted worst-first — this doubles as "which
-          bandi cost most to open": the ordering is the answer. */}
-      <ol className="cost-chart" aria-label="Secondi di estrazione per bando, dal più costoso">
-        {sorted.map((row) => (
-          <li key={row.title} className="cost-chart__row">
-            <span className="cost-chart__label" title={row.title}>
-              {row.title}
-            </span>
-            <span className="cost-chart__track">
-              <span
-                className="cost-chart__bar"
-                style={{
-                  width: `${Math.max(2, (row.seconds / max) * 100)}%`,
-                  background: LEVEL_META[row.level].swatchVar,
-                }}
-              />
-            </span>
-            <span className="cost-chart__value">{formatSeconds(row.seconds)}</span>
-            <span className="cost-chart__badge">{LEVEL_META[row.level].short}</span>
-          </li>
-        ))}
-      </ol>
+      {ordered.map((report) => (
+        <ComuneRecoveryBlock key={report.codice_istat} report={report} />
+      ))}
 
       <p className="field__hint" style={{ marginTop: "var(--ma-3)" }}>
-        Misurato il {measuredAt}, dall&apos;ultima ingestion di Albano Laziale —
-        instantanea committata, non una chiamata dal vivo.
+        Misurato il {measuredAt}, dalle istantanee committate delle ultime
+        ingestion — non una chiamata dal vivo ai comuni.
       </p>
-
-      {/* Screen-reader / no-JS equivalent: the same ten numbers as a table. */}
-      <table className="sr-only">
-        <caption>Costo di estrazione per bando, Albano Laziale, misurato il {measuredAt}</caption>
-        <thead>
-          <tr>
-            <th scope="col">Bando o servizio</th>
-            <th scope="col">Livello di recupero</th>
-            <th scope="col">Secondi di estrazione</th>
-            <th scope="col">PDF collegati</th>
-            <th scope="col">PDF aperti</th>
-            <th scope="col">Requisiti recuperati</th>
-          </tr>
-        </thead>
-        <tbody>
-          {sorted.map((row) => (
-            <tr key={row.title}>
-              <td>{row.title}</td>
-              <td>{LEVEL_META[row.level].label}</td>
-              <td>{formatSeconds(row.seconds)}</td>
-              <td>{row.pdfsLinked}</td>
-              <td>{row.pdfsOpened}</td>
-              <td>{row.requirementsRecovered}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
     </div>
   );
 }

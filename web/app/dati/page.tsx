@@ -23,8 +23,8 @@
  *     L1/L2/L3 recovery split, which bandi cost the most to open.
  */
 
-import { readinessAll, type Readiness } from "@/lib/api";
-import RecoveryCostChart, { ALBANO_RECOVERY_ROWS } from "@/components/RecoveryCostChart";
+import { readinessAll, recoveryAll, type Readiness, type Recovery } from "@/lib/api";
+import RecoveryCostChart from "@/components/RecoveryCostChart";
 
 export const dynamic = "force-dynamic";
 
@@ -92,6 +92,16 @@ export default async function DataQuality() {
     reports = await readinessAll();
   } catch {
     reports = [];
+  }
+
+  // Recovery cost is a separate call so a failure here costs only the one
+  // chart: the readiness tables above it are the page's spine and must still
+  // render if the recovery roll-up is unavailable.
+  let recoveryReports: Recovery[] = [];
+  try {
+    recoveryReports = await recoveryAll();
+  } catch {
+    recoveryReports = [];
   }
   const albano = reports.find((r) => r.codice_istat === "058003") ?? null;
   const fonteNuova = reports.find((r) => r.codice_istat === "058122") ?? null;
@@ -263,16 +273,19 @@ export default async function DataQuality() {
 
       {/* --------------------------------------------------- within Albano */}
       <section className="panel">
-        <p className="eyebrow">Dentro Albano Laziale</p>
+        <p className="eyebrow">Dentro i comuni misurati</p>
         <h2>Cosa costa davvero aprire un bando</h2>
         <p className="lede">
-          Qui il campione regge un grafico: i dieci bandi, avvisi e contributi
-          di Albano recuperati da testo libero e allegati PDF, con il tempo di
-          calcolo speso a estrarne i requisiti e il livello della scala di
-          recupero (D-16) su cui ciascuno è atterrato.
+          Qui il campione regge un grafico: i bandi, avvisi e contributi
+          recuperati da testo libero e allegati PDF, con il tempo di calcolo
+          speso a estrarne i requisiti e il livello della scala di recupero
+          (D-16) su cui ciascuno è atterrato. Il confronto fra i due comuni
+          misurati è la parte interessante: Fonte Nuova non compare con un
+          grafico vuoto, ma con un costo che non esiste, perché pubblica tutto
+          già strutturato.
         </p>
         <div style={{ marginTop: "var(--ma-6)" }}>
-          <RecoveryCostChart rows={ALBANO_RECOVERY_ROWS} measuredAt={EVIDENCE_MEASURED_AT} />
+          <RecoveryCostChart reports={recoveryReports} measuredAt={EVIDENCE_MEASURED_AT} />
         </div>
       </section>
     </div>

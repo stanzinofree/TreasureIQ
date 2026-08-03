@@ -24,10 +24,16 @@
  * first.
  */
 
-import { useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { Seal } from "@/components/Seal";
 import Segnalazione from "@/components/Segnalazione";
 import { useProfilo } from "@/lib/profilo";
+import { useRisultati } from "@/lib/risultati";
+
+/** Stable DOM id for one card, so the side index can link straight to it. */
+function ancoraDi(messageId: string, matchId: string): string {
+  return `scheda-${messageId}-${matchId}`.replace(/[^a-zA-Z0-9_-]/g, "-");
+}
 import {
   chat,
   comuneNearby,
@@ -184,7 +190,7 @@ interface ChatMessage {
   reply?: ChatOut;
 }
 
-function MatchCard({ match }: { match: Match }) {
+function MatchCard({ match, ancora }: { match: Match; ancora: string }) {
   const decided = match.criteria.filter(
     (c) => c.state === "met" || c.state === "not_met",
   );
@@ -192,7 +198,7 @@ function MatchCard({ match }: { match: Match }) {
   const askProfile = match.criteria.filter((c) => c.state === "unknown_profile");
 
   return (
-    <article className="card" data-verdict={match.verdict}>
+    <article id={ancora} className="card" data-verdict={match.verdict}>
       <Seal verdict={match.verdict} size={40} />
       <div>
         <h3 className="card__title">{match.title}</h3>
@@ -500,8 +506,27 @@ export default function Chat() {
   const [locating, setLocating] = useState(false);
   const [locateNote, setLocateNote] = useState<string | null>(null);
   const { registra } = useProfilo();
+  const { registra: registraTrovate } = useRisultati();
   const [manualLogin, setManualLogin] = useState(false);
   const nextId = useRef(0);
+  const logRef = useRef<HTMLDivElement>(null);
+
+  // Keep the newest exchange in view as the transcript grows, the way a
+  // messaging app does. Only when the reader is already at the bottom: yanking
+  // someone away from an answer they are still reading, because a later one
+  // arrived, is worse than making them scroll.
+  useEffect(() => {
+    const log = logRef.current;
+    if (!log) return;
+    const distanzaDalFondo = log.scrollHeight - log.scrollTop - log.clientHeight;
+    if (distanzaDalFondo > 240) return;
+    log.scrollTo({
+      top: log.scrollHeight,
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ? "auto"
+        : "smooth",
+    });
+  }, [messages, busy]);
 
   function newId() {
     nextId.current += 1;
@@ -522,10 +547,23 @@ export default function Chat() {
     setBusy(true);
     try {
       const out = await chat(trimmed, history);
+      const id = newId();
       setMessages((prev) => [
         ...prev,
-        { id: newId(), role: "assistant", content: out.reply, reply: out },
+        { id, role: "assistant", content: out.reply, reply: out },
       ]);
+      // Feed the side index. It stores pointers into this transcript, never
+      // copies of the verdicts — the card stays the single place any result
+      // is stated.
+      registraTrovate(
+        out.matches.map((match) => ({
+          ancora: ancoraDi(id, match.id),
+          titolo: match.title,
+          verdict: match.verdict,
+          verdictLabel: match.verdict_label,
+          livello: match.livello,
+        })),
+      );
     } catch {
       setError(
         "Non riesco a raggiungere il servizio. Verifica che l'API sia in esecuzione su localhost:8010.",
@@ -638,7 +676,7 @@ export default function Chat() {
         </p>
       )}
 
-      <div className="chat__log" aria-live="polite">
+      <div className="chat__log" aria-live="polite" ref={logRef}>
         {messages.length === 0 && (
           <p className="chat__hint">
             Ad esempio: &laquo;ho la bolletta elettrica troppo alta&raquo;,
@@ -679,7 +717,15 @@ export default function Chat() {
                     {m.reply.matches.length > 0 && (
                       <div className="feed">
                         {m.reply.matches.map((match) => (
-                          <MatchCard key={match.id} match={match} />
+                          // The anchor is per message, not per opportunity:
+                          // the same benefit asked about twice produces two
+                          // cards, and the side index has to point at the one
+                          // the reader picked.
+                          <MatchCard
+                            key={match.id}
+                            match={match}
+                            ancora={ancoraDi(m.id, match.id)}
+                          />
                         ))}
                       </div>
                     )}

@@ -3,44 +3,51 @@
  *
  * A citizen arrives here, not at a login screen — identity is an escalation
  * the chat asks for only when it would change the answer (D-09), not the
- * price of admission. The hero sits on the same paper as the rest of the site
- * so the page opens without a seam, and the chat follows directly beneath it.
+ * price of admission.
  *
- * Above the title is the one slot that changes as the conversation learns
- * something: `ProfiloNoto` shows every fact currently being used to compute
- * answers, and shows nothing until there is one. It used to be a hardcoded
- * "Comune di Albano Laziale", which announced a residency to visitors who had
- * never stated one.
+ * Two columns: a narrow panel holding what the service knows and an index of
+ * what it found, and the conversation itself taking the rest. The chat is the
+ * product, so it holds the width, the height and every verdict — the panel
+ * only ever points back into it.
  *
- * The server shell stays a server shell: `ProfiloProvider` is the client
- * boundary, and the motto and title still render with no JS of their own.
+ * The hero collapses once the conversation starts. That is done in CSS, with
+ * `:has()` on the transcript, rather than by lifting Chat's message state up
+ * here: the title and motto stay server-rendered with no JS of their own, and
+ * there is no second copy of "has the conversation begun" to keep in sync.
+ *
+ * `ProfiloProvider` and `RisultatiProvider` are the only client boundaries.
  */
 
 import Chat from "@/components/Chat";
-import ProfiloNoto from "@/components/ProfiloNoto";
+import Pannello from "@/components/Pannello";
 import { ProfiloProvider } from "@/lib/profilo";
+import { RisultatiProvider } from "@/lib/risultati";
 
 export default function Home() {
   return (
     <ProfiloProvider>
-      <div>
-        <section className="hero-band">
-          <div className="hero-band__inner">
-            <ProfiloNoto />
-            <h1>Chiedi al tuo comune</h1>
-            <p className="lede">
-              Scrivi la tua domanda in italiano. TreasureIQ la confronta con i
-              servizi che il comune ha davvero pubblicato e risponde solo con
-              quello che i dati confermano — o ti dice, con la stessa chiarezza,
-              quando il comune non lo ha ancora scritto da nessuna parte.
-            </p>
-          </div>
-        </section>
+      <RisultatiProvider>
+        <div className="workspace">
+          <Pannello />
 
-        <div className="chat-page">
-          <Chat />
+          <div className="workspace__main">
+            <section className="hero-band">
+              <div className="hero-band__inner">
+                <h1>Chiedi al tuo comune</h1>
+                <p className="lede">
+                  Scrivi la tua domanda in italiano. TreasureIQ la confronta con
+                  i servizi che il comune ha davvero pubblicato e risponde solo
+                  con quello che i dati confermano — o ti dice, con la stessa
+                  chiarezza, quando il comune non lo ha ancora scritto da
+                  nessuna parte.
+                </p>
+              </div>
+            </section>
+
+            <Chat />
+          </div>
         </div>
-      </div>
+      </RisultatiProvider>
     </ProfiloProvider>
   );
 }

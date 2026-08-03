@@ -83,6 +83,10 @@
 
   /* Ma (間) — the interval. A single 8px-derived scale so vertical rhythm
      stays even; the airiness is the point, not an accident of padding. */
+  /* Height of the sticky masthead. The chat workspace subtracts it from the
+     viewport to sit exactly one screen tall; keep the two in step. */
+  --masthead-h: 58px;
+
   --ma-1: 4px;
   --ma-2: 8px;
   --ma-3: 12px;
@@ -194,6 +198,13 @@ a {
 }
 
 /* ---------------------------------------------------------------- layout */
+
+/* The full-height chat workspace measures itself against the viewport, so the
+   shell must not add trailing space under it — the composer would sit that far
+   above the bottom edge. Other pages keep their footer breathing room. */
+.shell:has(.workspace) {
+  padding-bottom: 0;
+}
 
 .shell {
   /* The page uses the screen: structure runs the full width and only prose is
@@ -638,6 +649,7 @@ a {
   .manifesto-chain {
     grid-template-columns: repeat(3, 1fr);
   }
+
 }
 
 /* ------------------------------------------------------------------ chat */
@@ -663,6 +675,112 @@ a {
   margin: 0 auto;
   text-align: center;
 }
+/* The side panel. Scrolls on its own so a long index never drags the page,
+   and holds no verdict of its own — every row is a link back into the
+   transcript, where the card states the result once. */
+.pannello {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ma-6);
+  min-height: 0;
+  overflow-y: auto;
+  padding: var(--ma-6) 0 var(--ma-6) var(--ma-2);
+  border-right: 1px solid var(--kasumi);
+}
+.pannello__sez h2 {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--ma-2);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sumi-faint);
+  font-weight: 600;
+  margin: 0 0 var(--ma-3);
+}
+.pannello__conta {
+  font-size: 0.72rem;
+  color: var(--sumi-faint);
+}
+.pannello__reset {
+  border: 0;
+  background: none;
+  padding: 0;
+  font: inherit;
+  font-size: 0.68rem;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--ai);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.pannello__gruppo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ma-2) var(--ma-4);
+  margin-bottom: var(--ma-3);
+}
+.pannello__check {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ma-2);
+  font-size: 0.88rem;
+  cursor: pointer;
+  min-height: 32px;
+}
+.pannello__check input {
+  accent-color: var(--ai);
+  width: 16px;
+  height: 16px;
+}
+.pannello__vuoto {
+  font-size: 0.86rem;
+  color: var(--sumi-faint);
+  margin: 0;
+}
+.pannello__indice {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--ma-1);
+}
+.pannello__indice a {
+  display: grid;
+  gap: 2px;
+  padding: var(--ma-2);
+  border-radius: 8px;
+  border-left: 3px solid var(--kasumi);
+  text-decoration: none;
+  color: var(--sumi);
+}
+.pannello__indice a:hover {
+  background: var(--paper-raised);
+}
+/* The index inherits the card's verdict colour so the two read as the same
+   result seen twice, not as two different claims. */
+.pannello__indice a[data-verdict="not_eligible"] {
+  border-left-color: var(--shu);
+}
+.pannello__indice a[data-verdict="eligible"] {
+  border-left-color: var(--wakatake);
+}
+.pannello__indice a[data-verdict="likely"] {
+  border-left-color: var(--yamabuki);
+}
+.pannello__titolo {
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+.pannello__esito {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--sumi-faint);
+}
+
 /* "Sto usando ..." — the facts currently feeding the answers. It replaces the
    hardcoded comune that used to sit here, and it is absent, not empty, until
    there is something true to put in it (see ProfiloNoto). Quiet by design:
@@ -672,9 +790,8 @@ a {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
   gap: var(--ma-2);
-  margin: 0 0 var(--ma-6);
+  margin: 0;
 }
 .fatti__intro {
   font-family: var(--font-mono);
@@ -753,16 +870,74 @@ a {
   line-height: 1.65;
 }
 
-/* The chat column below the band: centred and comfortable, but wider than v2
-   so the input reads as a primary surface rather than a squeezed slot. */
-.chat-page {
-  max-width: 760px;
-  margin: 0 auto;
-  padding-top: var(--ma-8);
+/* Two columns: a narrow panel, and the conversation taking everything else.
+   The whole thing is one viewport tall so the composer can sit at the bottom
+   of the screen instead of at the bottom of a growing document. `dvh` rather
+   than `vh` because mobile browser chrome slides away, and `vh` would leave
+   the composer under it. */
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 9fr);
+  gap: var(--ma-8);
+  align-items: stretch;
+  height: calc(100dvh - var(--masthead-h, 58px));
 }
 
-.chat-hero {
-  text-align: center;
+.workspace__main {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  /* The chat is centred and held to a comfortable measure inside its column:
+     a 9/12 share of a 1760px shell would otherwise run message lines far past
+     what is pleasant to read. */
+  width: 100%;
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+/* Once the transcript holds anything, the hero gives its room to the
+   conversation. Driven by `:has()` on a real bubble rather than by lifted
+   React state, so the title stays server-rendered and there is no second
+   copy of "has this started" to keep in sync. */
+.workspace__main:has(.bubble) .hero-band {
+  padding: var(--ma-4) var(--ma-4) var(--ma-2);
+}
+.workspace__main:has(.bubble) .hero-band h1 {
+  font-size: 1.15rem;
+  letter-spacing: -0.01em;
+}
+.workspace__main:has(.bubble) .hero-band .lede {
+  display: none;
+}
+
+/* Narrow screens: the panel stops being a column and becomes a short header
+   above the conversation, and the workspace stops being viewport-locked.
+   Trapping a phone-sized chat inside a nested scroller fights the browser's
+   own address-bar behaviour and loses — on a phone the page itself is the
+   scroller. This block has to sit *after* the desktop rules above: same
+   specificity, so the cascade decides, and an earlier media query would be
+   overwritten by them. */
+@media (max-width: 1024px) {
+  .workspace {
+    grid-template-columns: 1fr;
+    height: auto;
+    gap: var(--ma-4);
+  }
+  .pannello {
+    overflow: visible;
+    border-right: 0;
+    border-bottom: 1px solid var(--kasumi);
+    padding: var(--ma-4) 0;
+  }
+  .chat,
+  .chat__log {
+    min-height: 0;
+    overflow: visible;
+    flex: none;
+  }
+  .fatti {
+    gap: var(--ma-2);
+  }
 }
 
 /* ------------------------------------------------------------ geolocation */
@@ -1158,14 +1333,32 @@ a {
   }
 }
 
+/* The transcript scrolls, the composer does not. Older exchanges travel up
+   and off the top while the place you type stays exactly where you left it,
+   which is what makes a conversation feel like one rather than like a page
+   that keeps growing a longer scrollbar. `min-height: 0` on both the column
+   and the log is what actually allows the log to shrink and scroll inside a
+   flex parent — without it the log wins the height argument and the composer
+   is pushed off-screen. */
 .chat {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: var(--ma-4);
+  flex: 1;
+  min-height: 0;
 }
 
 .chat__log {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: var(--ma-4);
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-right: var(--ma-2);
+  /* Anchor targets from the side index must not land under the top edge. */
+  scroll-padding-top: var(--ma-4);
 }
 
 .chat__hint {

@@ -126,6 +126,22 @@ export const login = (body: Record<string, unknown>) =>
   call<Profile>("/api/session", { method: "POST", body: JSON.stringify(body) });
 
 export const logout = () => call<unknown>("/api/session", { method: "DELETE" });
+
+/** What the citizen's own comune published on a topic — stated either way.
+ * The ordinary answer already searches municipal and national records
+ * together, so this reaches nothing the first pass missed; it exists to say
+ * out loud what the first pass leaves unsaid when every result was national. */
+export interface Approfondimento {
+  esito: string;
+  comune_nome: string;
+  matches: Match[];
+}
+
+export const approfondimento = (topic: string) =>
+  call<Approfondimento>("/api/approfondimento", {
+    method: "POST",
+    body: JSON.stringify({ topic }),
+  });
 export const me = () => call<Profile>("/api/me");
 export const opportunities = (includeIneligible = false) =>
   call<Match[]>(`/api/opportunities?include_ineligible=${includeIneligible}`);
@@ -292,6 +308,10 @@ export interface InfoOut {
 
 export interface ChatOut {
   reply: string;
+  /** The topic this answer was retrieved for. The API has always sent it;
+   * declaring it lets the follow-up check reuse it instead of re-running
+   * intent extraction, which keeps that request deterministic. */
+  topic: string | null;
   matches: Match[];
   data_gap: DataGap | null;
   escalation: Escalation | null;

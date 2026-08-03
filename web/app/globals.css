@@ -2162,3 +2162,40 @@ a {
   font-size: 0.76rem;
   color: var(--sumi-faint);
 }
+
+/* -------------------------------------------------- follow-up check */
+
+/* Offered when every result came from a higher tier. Quiet, and phrased as a
+   question rather than a promise of deeper searching: the ordinary answer has
+   already read the comune's own records, so what this adds is a stated
+   absence, not a second search. */
+.approfondisci {
+  margin: var(--ma-4) 0 0;
+  max-width: none;
+}
+.approfondisci__button {
+  border: 1px dashed var(--kasumi);
+  background: none;
+  border-radius: 999px;
+  padding: var(--ma-2) var(--ma-4);
+  font: inherit;
+  font-size: 0.88rem;
+  color: var(--ai-deep);
+  cursor: pointer;
+}
+.approfondisci__button:hover:not(:disabled) {
+  border-style: solid;
+  border-color: var(--ai-line);
+  background: var(--ai-wash);
+}
+.approfondisci__esito {
+  margin: var(--ma-4) 0 0;
+  padding-left: var(--ma-4);
+  border-left: 3px solid var(--yamabuki);
+  font-size: 0.92rem;
+  color: var(--sumi-soft);
+  max-width: none;
+}
+.approfondisci__esito[data-stato="errore"] {
+  border-left-color: var(--shu);
+}

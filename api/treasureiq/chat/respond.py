@@ -65,7 +65,7 @@ from treasureiq.match.engine import (
     match,
     summarise,
 )
-from treasureiq.schema import CitizenProfile, Opportunity
+from treasureiq.schema import CitizenProfile, Livello, Opportunity
 
 logger = logging.getLogger(__name__)
 
@@ -301,6 +301,56 @@ def _search_opportunities(
         if any(keyword in haystack for keyword in keywords):
             hits.append(opportunity)
     return hits
+
+
+def approfondisci_nel_comune(
+    *,
+    records: list[Opportunity],
+    topic: Topic,
+    profile: CitizenProfile | None,
+    comune_nome: str,
+    today: date | None = None,
+) -> tuple[list[MatchResult], str]:
+    """Check the comune's own published records for a topic, and say so either
+    way.
+
+    The ordinary answer already searches municipal and national records
+    together, so a benefit the comune publishes would have surfaced there —
+    this does not find what the first pass missed. What it adds is the
+    statement the first pass never makes: when the only answer was a national
+    measure, nothing on screen said whether the comune had published anything
+    of its own. A silent absence reads as "not looked for"; this turns it into
+    a finding, which is the only form an absence can honestly take in a
+    service whose subject is what administrations do and do not publish.
+
+    Deterministic end to end. The topic is carried over from the answer that
+    prompted it, so no model runs here and the same request always produces
+    the same result.
+    """
+    comunali = [r for r in records if r.livello is Livello.COMUNALE]
+    candidati = _search_opportunities(records=comunali, topic=topic)
+    profilo = profile if profile is not None else CitizenProfile()
+    results = match(candidati, profilo, today=today, include_ineligible=True)
+
+    if not comunali:
+        esito = (
+            f"Non abbiamo ancora nessuno snapshot dei dati pubblicati da {comune_nome}, "
+            "quindi su questo tema non possiamo dire nulla sul comune."
+        )
+    elif not results:
+        esito = (
+            f"{comune_nome} non ha pubblicato nulla su questo tema fra i "
+            f"{len(comunali)} servizi che abbiamo letto dal suo portale. "
+            "Non significa che non esista: significa che non è scritto in un "
+            "posto che si possa leggere."
+        )
+    else:
+        esito = (
+            f"{comune_nome} ha pubblicato qualcosa su questo tema: "
+            f"{len(results)} risultati fra i {len(comunali)} servizi letti dal "
+            "suo portale."
+        )
+    return results, esito
 
 
 def _is_spid_decisive(result: MatchResult) -> tuple[bool, str | None]:

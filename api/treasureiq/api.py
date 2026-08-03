@@ -35,9 +35,11 @@ from treasureiq.chat.respond import (
     MAX_MESSAGE_CHARS,
     ChatAnswer,
     InfoAnswer,
+    approfondisci_nel_comune,
     build_chat_answer,
     compute_recovery_stats,
 )
+from treasureiq.chat.intent import Topic
 from treasureiq.integration import (
     MODE_LABELS,
     Ente,
@@ -952,6 +954,53 @@ def create_segnalazione(body: SegnalazioneIn) -> dict[str, int]:
 def get_segnalazioni() -> dict[str, int]:
     """Public per-comune counter — itself the published fact D-25 asks for."""
     return _read_segnalazioni()
+
+
+class ApprofondimentoIn(BaseModel):
+    #: Carried over from the answer that prompted this, so no model runs here
+    #: and the same request always yields the same result.
+    topic: str
+
+
+class ApprofondimentoOut(BaseModel):
+    esito: str
+    comune_nome: str
+    matches: list[MatchOut]
+
+
+@app.post("/api/approfondimento", response_model=ApprofondimentoOut)
+def approfondimento(body: ApprofondimentoIn, request: Request) -> ApprofondimentoOut:
+    """Ask explicitly what the citizen's own comune published on a topic.
+
+    The ordinary answer already searches municipal and national records
+    together, so this does not reach anything the first pass missed. It exists
+    to state the thing the first pass leaves unsaid: when the only result was
+    a national measure, nothing told the citizen whether their comune had
+    published anything of its own. An absence nobody states reads as an
+    absence nobody looked for.
+    """
+    try:
+        topic = Topic(body.topic)
+    except ValueError:
+        raise HTTPException(422, f"Tema non riconosciuto: {body.topic}") from None
+
+    profile = profile_from_cookie(request.cookies.get(SESSION_COOKIE))
+    comune_istat = profile.comune_istat if profile is not None else DEFAULT_COMUNE_ISTAT
+    meta = COMUNI.get(comune_istat)
+    comune_nome = meta["nome"] if meta else "Il tuo comune"
+    records = list(load_opportunities(comune_istat))
+
+    results, esito = approfondisci_nel_comune(
+        records=records,
+        topic=topic,
+        profile=profile,
+        comune_nome=comune_nome,
+    )
+    return ApprofondimentoOut(
+        esito=esito,
+        comune_nome=comune_nome,
+        matches=[to_match_out(r) for r in results],
+    )
 
 
 @app.post("/api/chat", response_model=ChatOut)

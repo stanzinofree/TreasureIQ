@@ -26,6 +26,7 @@
 
 import { useEffect, useId, useRef, useState } from "react";
 import { Seal, Wordmark } from "@/components/Seal";
+import Approfondisci from "@/components/Approfondisci";
 import Segnalazione from "@/components/Segnalazione";
 import SchedaDettaglio from "@/components/SchedaDettaglio";
 import AccessoSimulato from "@/components/AccessoSimulato";
@@ -41,6 +42,7 @@ import {
   chat,
   comuneNearby,
   login,
+  type Approfondimento,
   type ChatCost,
   type ChatOut,
   type ChatTurn,
@@ -117,8 +119,10 @@ function CostStrip({ cost }: { cost: ChatCost }) {
           {avgPct != null && (
             <rect x="0" y="8" width={avgPct * 0.96} height="4" fill="var(--sumi-faint)" />
           )}
+          {/* --fuji was retired with the palette change, and this bar had been
+              painting itself with an undefined custom property ever since. */}
           {totalPct != null && (
-            <rect x="0" y="1" width={totalPct * 0.96} height="4" fill="var(--fuji)" />
+            <rect x="0" y="1" width={totalPct * 0.96} height="4" fill="var(--ai)" />
           )}
         </svg>
       )}
@@ -487,6 +491,45 @@ export default function Chat() {
   const accesso = profilo.accesso === true;
   const [manualLogin, setManualLogin] = useState(false);
   const [scheda, setScheda] = useState<Match | null>(null);
+
+  /** Municipal results found by the follow-up check arrive as a new answer in
+   *  the transcript, not as a panel beside it: they are verdicts, and every
+   *  verdict in this app is stated in exactly one place. */
+  function aggiungiComunali(esito: Approfondimento) {
+    const id = newId();
+    setMessages((prev) => [
+      ...prev,
+      {
+        id,
+        role: "assistant",
+        content: esito.esito,
+        reply: {
+          reply: esito.esito,
+          topic: null,
+          kind: "agevolazione",
+          data_gap: null,
+          needs_clarification: false,
+          matches: esito.matches,
+          spid_required: false,
+          spid_reason: null,
+          access_mode: null,
+          citizen_effort: null,
+          info: null,
+          cost: null,
+          escalation: null,
+        } as unknown as ChatOut,
+      },
+    ]);
+    registraTrovate(
+      esito.matches.map((match) => ({
+        ancora: ancoraDi(id, match.id),
+        titolo: match.title,
+        verdict: match.verdict,
+        verdictLabel: match.verdict_label,
+        livello: match.livello,
+      })),
+    );
+  }
   const nextId = useRef(0);
   const logRef = useRef<HTMLDivElement>(null);
 
@@ -723,6 +766,17 @@ export default function Chat() {
                         ))}
                       </div>
                     )}
+
+                    {/* Offered only when nothing municipal came back: with a
+                        comunale result already on screen the question is
+                        answered, and asking it again would be noise. */}
+                    {m.reply.topic &&
+                      !m.reply.matches.some((x) => x.livello === "comunale") && (
+                        <Approfondisci
+                          topic={m.reply.topic}
+                          onSchede={(esito) => aggiungiComunali(esito)}
+                        />
+                      )}
 
                     {m.reply.matches.length === 0 && m.reply.data_gap && (
                       <DataGapNotice kind={m.reply.data_gap} />

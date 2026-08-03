@@ -25,7 +25,7 @@
  */
 
 import { useEffect, useId, useRef, useState } from "react";
-import { Seal } from "@/components/Seal";
+import { Seal, Wordmark } from "@/components/Seal";
 import Segnalazione from "@/components/Segnalazione";
 import SchedaDettaglio from "@/components/SchedaDettaglio";
 import { useProfilo } from "@/lib/profilo";
@@ -727,6 +727,20 @@ export default function Chat() {
 
         {messages.map((m) => (
           <div key={m.id} className={`bubble bubble--${m.role}`}>
+            {/* Who is speaking, said once per bubble. Alignment alone carries
+                it for a sighted reader on a wide screen and for nobody else:
+                on a phone the bubbles nearly touch both edges, and a screen
+                reader hears an undifferentiated run of paragraphs. */}
+            <p className="bubble__chi">
+              {m.role === "user" ? (
+                "Tu"
+              ) : (
+                <>
+                  <Wordmark size={18} />
+                  TIQ
+                </>
+              )}
+            </p>
             <p>{m.content}</p>
 
             {m.reply && (
@@ -820,7 +834,7 @@ export default function Chat() {
             disabled={busy}
           />
           <button type="submit" className="button" disabled={busy || !input.trim()}>
-            Chiedi
+            Invia
           </button>
         </div>
       </form>

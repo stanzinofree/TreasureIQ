@@ -1354,18 +1354,41 @@ a {
   max-width: 88%;
 }
 
+/* `align-self`, not `justify-self`: the transcript became a flex column when
+   it started scrolling, and in a flex column `justify-self` does nothing at
+   all — which is why the citizen's own message had quietly stopped sitting
+   on the right and was spanning the width like an answer. */
 .bubble--user {
-  justify-self: end;
+  align-self: flex-end;
   background: var(--paper-sunken);
   border: 1px solid var(--kasumi);
 }
 
 .bubble--assistant {
-  justify-self: stretch;
+  align-self: stretch;
   max-width: 100%;
   background: var(--paper-raised);
   border: 1px solid var(--kasumi);
   box-shadow: var(--shadow-rest);
+}
+
+/* Who is speaking. Said in words rather than left to alignment alone: on a
+   phone both bubbles nearly touch both edges, and a screen reader hears an
+   undifferentiated run of paragraphs either way. */
+.bubble__chi {
+  display: flex;
+  align-items: center;
+  gap: var(--ma-2);
+  margin: 0 0 var(--ma-2);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--sumi-faint);
+  max-width: none;
+}
+.bubble--user .bubble__chi {
+  justify-content: flex-end;
 }
 
 .chat__answer {

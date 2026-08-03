@@ -25,7 +25,7 @@
  */
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
-import { logout, me } from "@/lib/api";
+import { logout } from "@/lib/api";
 
 export type Origine = "dichiarato" | "geolocalizzazione" | "accesso";
 
@@ -105,36 +105,23 @@ export function ProfiloProvider({ children }: { children: React.ReactNode }) {
     });
   }, []);
 
-  // The session cookie outlives the page, so without this a reload left the
-  // strip empty while the server still answered using the profile — the
-  // interface claiming to know nothing while the answers proved otherwise.
-  // A 401 is the ordinary logged-out case, not an error worth showing.
+  // Arriving means arriving as nobody.
+  //
+  // This used to rehydrate from /api/me, which fixed one contradiction and
+  // created a worse one: the signed cookie lasts eight hours, so opening the
+  // chat greeted a visitor with an age and a comune they had not given in
+  // this visit — the service recognising someone who never introduced
+  // themselves, which is exactly what the product promises not to do.
+  //
+  // Ending the session instead of reading it keeps the two sides honest in
+  // the other direction: nothing is known here, and nothing is known on the
+  // server either, so no answer can quietly be shaped by a profile the strip
+  // is not showing. Identity is re-established by signing in, which takes one
+  // click and is the moment the citizen actually chooses it.
   useEffect(() => {
-    let annullato = false;
-    me()
-      .then((p) => {
-        if (annullato) return;
-        setProfilo((corrente) => ({
-          ...corrente,
-          eta: p.eta ?? corrente.eta,
-          interessi: p.interests?.length ? p.interests : corrente.interessi,
-          comune: p.comune_nome
-            ? {
-                nome: p.comune_nome,
-                istat: p.comune_istat,
-                origine: "accesso",
-                confermato: true,
-              }
-            : corrente.comune,
-          accesso: true,
-        }));
-      })
-      .catch(() => {
-        /* no session: the empty strip is already the correct state */
-      });
-    return () => {
-      annullato = true;
-    };
+    logout().catch(() => {
+      /* nothing to end — already the clean slate we wanted */
+    });
   }, []);
 
   const value = useMemo(

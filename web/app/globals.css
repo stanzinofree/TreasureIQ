@@ -200,10 +200,12 @@ a {
 /* ---------------------------------------------------------------- layout */
 
 /* The full-height chat workspace measures itself against the viewport, so the
-   shell must not add trailing space under it — the composer would sit that far
-   above the bottom edge. Other pages keep their footer breathing room. */
+   shell must not add its usual deep trailing space — the composer would sit
+   that far above the bottom edge. It keeps a small margin, matched by the
+   workspace's own height calculation, so the composer has room to breathe
+   now that no footer sits beneath it. */
 .shell:has(.workspace) {
-  padding-bottom: 0;
+  padding-bottom: var(--ma-6);
 }
 
 .shell {
@@ -875,23 +877,40 @@ a {
    of the screen instead of at the bottom of a growing document. `dvh` rather
    than `vh` because mobile browser chrome slides away, and `vh` would leave
    the composer under it. */
+/* One column on arrival, two once the panel has something to say. `Pannello`
+   renders nothing while it is empty, so `:has()` is what actually decides the
+   track count — an empty 3fr column would otherwise shove the conversation
+   off-centre and leave a quarter of the screen blank. */
 .workspace {
   display: grid;
-  grid-template-columns: minmax(0, 3fr) minmax(0, 9fr);
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--ma-8);
   align-items: stretch;
-  height: calc(100dvh - var(--masthead-h, 58px));
+  height: calc(100dvh - var(--masthead-h, 58px) - var(--ma-6));
+}
+
+/* Two tracks only once the conversation has actually started. A returning
+   visitor still carries a session cookie, so their facts are known the moment
+   the page loads — but a panel summarising a conversation that has not begun
+   is a summary of nothing, and it would take a quarter of the first screen to
+   say so. Both conditions must hold: something to show, and somewhere it
+   refers to. */
+.workspace:has(.pannello):has(.bubble) {
+  grid-template-columns: minmax(0, 3fr) minmax(0, 9fr);
+}
+
+.workspace:not(:has(.bubble)) .pannello {
+  display: none;
 }
 
 .workspace__main {
   display: flex;
   flex-direction: column;
   min-height: 0;
-  /* The chat is centred and held to a comfortable measure inside its column:
-     a 9/12 share of a 1760px shell would otherwise run message lines far past
-     what is pleasant to read. */
+  /* Centred and held to a comfortable measure: the full width of a 1760px
+     shell would run message lines far past what is pleasant to read. */
   width: 100%;
-  max-width: 820px;
+  max-width: 1040px;
   margin: 0 auto;
 }
 
@@ -1312,7 +1331,9 @@ a {
   min-height: 0;
   overflow-y: auto;
   overscroll-behavior: contain;
-  padding-right: var(--ma-2);
+  /* Symmetric: padding on one side only shifted every centred line in the
+     transcript off-axis from the hero above it. */
+  padding-inline: var(--ma-2);
   /* Anchor targets from the side index must not land under the top edge. */
   scroll-padding-top: var(--ma-4);
 }
@@ -1321,6 +1342,10 @@ a {
   color: var(--sumi-faint);
   font-size: 0.92rem;
   text-align: center;
+  /* `text-align` centres the text inside the box; the box itself still has
+     the global `p { max-width: --measure }` and would sit hard left without
+     auto margins. That was the hint reading off-axis from the hero above it. */
+  margin-inline: auto;
 }
 
 .bubble {

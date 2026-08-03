@@ -42,7 +42,7 @@ const mono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "TreasureIQ — scopri cosa ti spetta",
+  title: "TreasureIQ — chatta con i tuoi dati",
   description:
     "Incrocia gli open data della PA con il tuo profilo e ti dice a quali agevolazioni hai davvero accesso.",
 };

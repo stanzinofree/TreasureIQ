@@ -13,6 +13,7 @@
  */
 
 import ProfiloNoto from "@/components/ProfiloNoto";
+import { useProfilo } from "@/lib/profilo";
 import { useRisultati } from "@/lib/risultati";
 
 const LIVELLO_LABEL: Record<string, string> = {
@@ -32,8 +33,16 @@ export default function Pannello() {
     livelliPresenti,
     esitiPresenti,
   } = useRisultati();
+  const { quantiFatti } = useProfilo();
 
   const filtriAttivi = filtri.livelli.size + filtri.esiti.size > 0;
+
+  // Render nothing at all — not an empty column — until there is something to
+  // put in it. The grid collapses to a single track when this element is
+  // absent (see `.workspace:has(.pannello)`), so on arrival the conversation
+  // gets the whole width and sits centred, instead of being pushed aside by a
+  // panel holding nothing.
+  if (quantiFatti === 0 && trovate.length === 0) return null;
 
   return (
     <aside className="pannello" aria-label="Riepilogo della conversazione">

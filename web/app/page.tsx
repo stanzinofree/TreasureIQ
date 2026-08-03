@@ -39,7 +39,7 @@ export default function Home() {
                 about where an answer came from. */}
             <section className="hero-band">
               <div className="hero-band__inner">
-                <h1>Chiedi cosa ti spetta</h1>
+                <h1>Chatta con i tuoi dati</h1>
                 <p className="lede">
                   Scrivi la tua domanda in italiano. TreasureIQ la confronta con
                   quello che Stato, Regione e il tuo comune hanno davvero

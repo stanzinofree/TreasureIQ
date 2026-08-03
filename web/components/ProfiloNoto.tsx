@@ -64,8 +64,20 @@ export default function ProfiloNoto() {
         <Chip label="Accesso" value="simulato" nota="nessun codice fiscale letto" />
       ) : null}
 
-      <button type="button" className="fatti__clear" onClick={dimentica}>
-        Dimentica
+      {/* The label has to say that this ends the session, not just that it
+          tidies the strip: someone signed in would not guess that "dimentica"
+          logs them out, and finding out afterwards is the wrong moment. */}
+      <button
+        type="button"
+        className="fatti__clear"
+        onClick={dimentica}
+        title={
+          profilo.accesso
+            ? "Cancella questi dati e chiude la sessione"
+            : "Cancella questi dati"
+        }
+      >
+        {profilo.accesso ? "Esci e dimentica" : "Dimentica"}
       </button>
     </div>
   );

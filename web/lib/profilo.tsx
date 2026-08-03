@@ -25,7 +25,7 @@
  */
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
-import { me } from "@/lib/api";
+import { logout, me } from "@/lib/api";
 
 export type Origine = "dichiarato" | "geolocalizzazione" | "accesso";
 
@@ -91,7 +91,19 @@ export function ProfiloProvider({ children }: { children: React.ReactNode }) {
     });
   }, []);
 
-  const dimentica = useCallback(() => setProfilo({}), []);
+  // Clearing the strip has to end the session too. Dropping only the local
+  // copy left the signed cookie in place, so the interface claimed to know
+  // nothing while every answer was still being computed from the profile —
+  // the same contradiction as the missing rehydration, in the other
+  // direction. The local state is cleared first and regardless: a failed
+  // network call must not leave the citizen looking at data they just asked
+  // to be rid of.
+  const dimentica = useCallback(() => {
+    setProfilo({});
+    logout().catch(() => {
+      /* already logged out, or offline — the local state is gone either way */
+    });
+  }, []);
 
   // The session cookie outlives the page, so without this a reload left the
   // strip empty while the server still answered using the profile — the

@@ -505,8 +505,9 @@ export default function Chat() {
   const [error, setError] = useState<string | null>(null);
   const [locating, setLocating] = useState(false);
   const [locateNote, setLocateNote] = useState<string | null>(null);
-  const { registra } = useProfilo();
+  const { registra, profilo } = useProfilo();
   const { registra: registraTrovate } = useRisultati();
+  const accesso = profilo.accesso === true;
   const [manualLogin, setManualLogin] = useState(false);
   const nextId = useRef(0);
   const logRef = useRef<HTMLDivElement>(null);
@@ -785,8 +786,13 @@ export default function Chat() {
 
       {/* A visible but non-pushy way to reach the mock identity flow without
           waiting for the chat to ask for it (D-09 covers *why* the chat asks
-          mid-conversation; this is the other, citizen-initiated door). */}
-      {!manualLogin && (
+          mid-conversation; this is the other, citizen-initiated door).
+
+          Hidden once a session exists, not merely while the panel is open:
+          tied only to the panel, it reappeared the moment a login succeeded,
+          inviting someone who had just signed in to sign in again. The panel
+          in "Sto usando" is where an active session is managed. */}
+      {!manualLogin && !accesso && (
         <div className="spid-entry">
           <button
             type="button"

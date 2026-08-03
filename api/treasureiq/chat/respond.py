@@ -1,10 +1,16 @@
 """Turns one citizen chat message into an answer, with the engine deciding.
 
-The contract (`.kapi/spec.md` D-01, D-05, D-09) is narrow on purpose: the
-runtime model does intent extraction (`treasureiq.chat.intent`) and, at the
-very end, rephrases strings `match/engine.py` already produced. It never
-emits a verdict and never states a number that is not already sitting in a
-`CriterionResult.detail` or `summarise()` string.
+The contract (`.kapi/spec.md` D-01, D-05, D-09) is narrow on purpose, and has
+since narrowed further: the runtime model now does intent extraction
+(`treasureiq.chat.intent`) and nothing else on this rail. It emits no verdict
+and states no number at all.
+
+The rephrasing step it used to perform at the very end is gone. Its output
+duplicated the card rendered directly beneath it — same title, same sentence —
+so the model was being asked to disguise a repetition rather than remove one,
+and it kept corrupting the figures it was handed while doing so. `_apertura`
+composes the lead-in deterministically from counts instead, saying only what
+the cards do not.
 
 Anonymous by default (D-09): with no session cookie, a `CitizenProfile` is
 built from whatever slots the citizen volunteered in their message, with
@@ -83,18 +89,6 @@ DEFAULT_COMUNE_NOME = "Albano Laziale"
 #: How many ranked matches ride along in one chat answer. Kept small: this is
 #: a chat bubble, not the `/opportunita` table.
 MAX_MATCHES_IN_REPLY = 3
-
-VERBALISE_SYSTEM_PROMPT = """Riscrivi in italiano naturale, breve e cordiale, le frasi \
-che ricevi qui sotto, come se le stessi spiegando di persona a uno sportello. Non \
-aggiungere numeri, soglie, nomi di servizi, scadenze o giudizi di eleggibilità che non \
-siano già presenti nel testo ricevuto: il tuo unico compito è renderlo più scorrevole, \
-non arricchirlo. Se non sei sicuro di una riformulazione, restituisci il testo così \
-com'è. Restituisci solo il testo riscritto, nessun commento."""
-
-
-class VerbalisedReply(BaseModel):
-    text: str = Field(max_length=1000)
-
 
 @dataclass
 class RecoveryStats:
@@ -301,6 +295,143 @@ def _search_opportunities(
         if any(keyword in haystack for keyword in keywords):
             hits.append(opportunity)
     return hits
+
+
+def _apertura(*, results: list[MatchResult]) -> str:
+    """The sentence the assistant says before the cards.
+
+    It used to be `"{title}: {summarise(result)}"` per result, run through the
+    verbalisation model. Two problems compounded. The card underneath states
+    exactly the same title and the same sentence, so the answer was given
+    twice, verbatim — which is what makes a reply read as canned however it is
+    worded. And the model, whose whole job was to make that duplicate sound
+    different, kept altering the figures inside it, so the figure guard
+    correctly threw the rewrite away and the duplicate came back anyway.
+
+    So this stops restating the verdicts and does the job the cards cannot: it
+    says how many results there are and how they divide, then hands over. No
+    title, no threshold, no criterion — nothing a card repeats, and nothing a
+    model needs to touch, which is why this rail no longer calls one.
+    """
+    if not results:
+        return "Non ho trovato niente di pertinente."
+
+    eleggibili = [r for r in results if r.verdict is Verdict.ELIGIBLE]
+    esclusi = [r for r in results if r.verdict is Verdict.NOT_ELIGIBLE]
+    da_confermare = [
+        r for r in results if r.verdict in (Verdict.LIKELY, Verdict.UNDETERMINED)
+    ]
+
+    def plurale(n: int, uno: str, molti: str) -> str:
+        return f"{n} {uno}" if n == 1 else f"{n} {molti}"
+
+    pezzi: list[str] = []
+    if eleggibili:
+        pezzi.append(plurale(len(eleggibili), "ti spetta", "ti spettano"))
+    if da_confermare:
+        pezzi.append(plurale(len(da_confermare), "da confermare", "da confermare"))
+    if esclusi:
+        pezzi.append(plurale(len(esclusi), "esclusa", "escluse"))
+
+    totale = plurale(len(results), "cosa pertinente", "cose pertinenti")
+    dettaglio = ", ".join(pezzi)
+
+    # One result needs no arithmetic read back to it: "1 cosa pertinente: 1
+    # esclusa" is a sentence that counts out loud for no reason.
+    if len(results) == 1:
+        solo = pezzi[0].split(" ", 1)[1]
+        return f"Ho trovato una cosa pertinente, {solo}. Il dettaglio qui sotto."
+
+    return f"Ho trovato {totale}: {dettaglio}. Il dettaglio di ciascuna qui sotto."
+
+
+def approfondisci_nel_comune(
+    *,
+    records: list[Opportunity],
+    topic: Topic,
+    profile: CitizenProfile | None,
+    comune_nome: str,
+    today: date | None = None,
+) -> tuple[list[MatchResult], str]:
+    """Check the comune's own published records for a topic, and say so either
+    way.
+
+    The ordinary answer already searches municipal and national records
+    together, so a benefit the comune publishes would have surfaced there —
+    this does not find what the first pass missed. What it adds is the
+    statement the first pass never makes: when the only answer was a national
+    measure, nothing on screen said whether the comune had published anything
+    of its own. A silent absence reads as "not looked for"; this turns it into
+    a finding, which is the only form an absence can honestly take in a
+    service whose subject is what administrations do and do not publish.
+
+    Deterministic end to end. The topic is carried over from the answer that
+    prompted it, so no model runs here and the same request always produces
+    the same result.
+    """
+    comunali = [r for r in records if r.livello is Livello.COMUNALE]
+    candidati = _search_opportunities(records=comunali, topic=topic)
+    profilo = profile if profile is not None else CitizenProfile()
+    results = match(candidati, profilo, today=today, include_ineligible=True)
+
+    if not comunali:
+        esito = (
+            f"Non abbiamo ancora nessuno snapshot dei dati pubblicati da {comune_nome}, "
+            "quindi su questo tema non possiamo dire nulla sul comune."
+        )
+    elif not results:
+        esito = (
+            f"{comune_nome} non ha pubblicato nulla su questo tema fra i "
+            f"{len(comunali)} servizi che abbiamo letto dal suo portale. "
+            "Non significa che non esista: significa che non è scritto in un "
+            "posto che si possa leggere."
+        )
+    else:
+        esito = (
+            f"{comune_nome} ha pubblicato qualcosa su questo tema: "
+            f"{len(results)} risultati fra i {len(comunali)} servizi letti dal "
+            "suo portale."
+        )
+    return results, esito
+
+
+def _is_spid_decisive(result: MatchResult) -> tuple[bool, str | None]:
+    """Whether identity is the *only* thing standing between this citizen and
+    a clean answer for this one opportunity (D-09). Computed from
+    `result.criteria` alone: an `UNKNOWN_PROFILE` criterion is decisive only
+    when nothing else about the record is unresolved — no `UNKNOWN_SOURCE`
+    criterion, no free-text `other` requirement, and the opportunity is not
+    already a hard `NOT_ELIGIBLE`. If the comune's own data is also
+    incomplete, resolving identity would not actually produce a certain
+    verdict, so escalating to SPID would be a false promise.
+    """
+    if result.verdict is Verdict.NOT_ELIGIBLE:
+        return False, None
+    unknown_profile = [c for c in result.criteria if c.state is CriterionState.UNKNOWN_PROFILE]
+    if not unknown_profile:
+        return False, None
+    unknown_source = [c for c in result.criteria if c.state is CriterionState.UNKNOWN_SOURCE]
+    if unknown_source or result.opportunity.requirements.other:
+        return False, None
+    labels = ", ".join(c.label for c in unknown_profile)
+    reason = (
+        f"Per questa opportunità manca solo la verifica di: {labels}. "
+        "Accedi con SPID/CIE per avere una risposta certa."
+    )
+    return True, reason
+
+
+# The verbalisation model is gone from this rail.
+#
+# Its job was to rephrase the engine's own sentences so the reply would not
+# read like machine output. But the card under every reply already stated the
+# same title and the same sentence, so the model was being asked to disguise a
+# duplicate rather than remove it — and it kept corrupting the figures inside
+# it while trying, which the figure guard then had to throw away. `_apertura`
+# above says what the cards cannot say and repeats nothing they do, so there
+# is nothing left here for a model to rewrite and no figure left for it to
+# damage. The removed code, guard included, is in the history if a rail ever
+# needs prose again.
 
 
 def approfondisci_nel_comune(
@@ -948,7 +1079,7 @@ async def build_chat_answer(
         # The comune published the topic but not one evaluable criterion for
         # it: a data gap, not "nothing found".
         return ChatAnswer(
-            reply=_fallback_reply(results=top),
+            reply=_apertura(results=top),
             topic=intent.topic,
             kind=QuestionKind.AGEVOLAZIONE,
             data_gap="not_published",
@@ -966,7 +1097,7 @@ async def build_chat_answer(
             spid_required, spid_reason = True, reason
             break
 
-    reply = await _verbalise(results=top, provider=provider)
+    reply = _apertura(results=top)
 
     return ChatAnswer(
         reply=reply,

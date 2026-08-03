@@ -26,6 +26,8 @@
 
 import { useId, useRef, useState } from "react";
 import { Seal } from "@/components/Seal";
+import Segnalazione from "@/components/Segnalazione";
+import { useProfilo } from "@/lib/profilo";
 import {
   chat,
   comuneNearby,
@@ -35,8 +37,14 @@ import {
   type ChatTurn,
   type CostLevels,
   type Escalation,
+  type InfoOut,
   type Match,
 } from "@/lib/api";
+
+/** B22 (D-25) — the segnalazione form only makes sense once every
+ * institutional channel is exhausted (D-21's access-mode ladder): a comune
+ * publishing structured data (M1/M2/M3) has nothing to ask it to open. */
+const SEGNALAZIONE_ACCESS_MODES = new Set(["M4_connettore", "M5_nessuno", "M6_web_aperto"]);
 
 const GLYPH: Record<string, string> = {
   met: "●",
@@ -91,6 +99,13 @@ const LEVEL_LABEL: Record<keyof CostLevels, string> = {
   L1_manuale: "manuale",
   L2_estratto: "estratto da PDF",
   L3_illeggibile: "illeggibile",
+};
+
+/** D-20 — which tier published this opportunity, always shown. */
+const LIVELLO_LABEL: Record<Match["livello"], string> = {
+  nazionale: "Nazionale",
+  regionale: "Regionale",
+  comunale: "Comunale",
 };
 
 /**
@@ -185,6 +200,9 @@ function MatchCard({ match }: { match: Match }) {
 
         <div className="card__meta">
           <span className="tag">{match.verdict_label}</span>
+          <span className="tag tag--livello" data-livello={match.livello}>
+            {LIVELLO_LABEL[match.livello]}
+          </span>
           <span>{match.kind.replace(/_/g, " ")}</span>
           {match.deadline && <span>scade il {match.deadline}</span>}
         </div>
@@ -255,6 +273,114 @@ function DataGapNotice({ kind }: { kind: "not_published" | "none_found" }) {
   );
 }
 
+/** Only `http`/`https` URLs render as a link (R-15 — a hostile cached
+ * result must never resolve to a clickable `javascript:` or bare string).
+ * Anything else still shows as plain, quoted text so the citizen sees
+ * exactly what the source gave us. */
+function isWebUrl(url: string): boolean {
+  return /^https?:\/\//i.test(url);
+}
+
+/**
+ * D-19 — the INFORMAZIONE rail. Document, office, coverage and diagnosis are
+ * facts about a public body's data; nothing here is a verdict, a criterion,
+ * or a SPID prompt. If this component ever grows an eligibility badge, the
+ * two-rails boundary the whole feature exists to draw has broken.
+ */
+function InfoAnswer({ info }: { info: InfoOut }) {
+  return (
+    <div className="info-answer">
+      {info.document && (
+        <p className="info-answer__document">
+          <a href={info.document.url} target="_blank" rel="noreferrer">
+            {info.document.title}
+          </a>
+        </p>
+      )}
+
+      <p className="info-answer__coverage">
+        {info.coverage_count > 0
+          ? `${info.coverage_count} ${info.coverage_count === 1 ? "risultato trovato" : "risultati trovati"} su questo argomento.`
+          : "Nessun risultato pubblicato dal comune su questo argomento."}
+      </p>
+
+      {info.diagnosis.length > 0 && (
+        <ul className="info-answer__diagnosis">
+          {info.diagnosis.map((line) => (
+            <li key={line}>{line}</li>
+          ))}
+        </ul>
+      )}
+
+      {info.integration_cost.length > 0 && (
+        <ul className="info-answer__diagnosis info-answer__cost">
+          {info.integration_cost.map((line) => (
+            <li key={line}>{line}</li>
+          ))}
+        </ul>
+      )}
+
+      {info.office && (
+        <p className="info-answer__office">
+          <strong>{info.office.nome}</strong>
+          {info.office.telefono ? (
+            <> — tel. {info.office.telefono}</>
+          ) : (
+            <> — nessun numero di telefono pubblicato dal comune</>
+          )}
+          {info.office.email && <> · {info.office.email}</>}
+          {info.office.orari && <> · {info.office.orari}</>}
+        </p>
+      )}
+
+      {info.web_results.length > 0 && (
+        <div className="info-answer__web" data-state="non_verificato" role="note">
+          <p className="info-answer__web-label">Ricerca web · non verificato</p>
+          <ul>
+            {info.web_results.slice(0, 3).map((result) => (
+              <li key={result.url}>
+                <span className="info-answer__web-title">{result.title}</span>
+                {isWebUrl(result.url) ? (
+                  <a
+                    className="info-answer__web-url"
+                    href={result.url}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {result.url}
+                  </a>
+                ) : (
+                  <span className="info-answer__web-url">{result.url}</span>
+                )}
+              </li>
+            ))}
+          </ul>
+          <p className="info-answer__web-note">
+            Non è una risposta di TreasureIQ: sono pagine trovate sul web, da
+            verificare tu stesso prima di fidartene.
+          </p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+/** D-29 — what is left on the citizen's shoulders after this answer, shown
+ * as its own line, never folded into `CostStrip`. The two numbers answer
+ * different questions: what closed data cost TreasureIQ to recover, versus
+ * what TreasureIQ could not take off the citizen. */
+function EffortCaption({ effort }: { effort: number | null }) {
+  if (effort == null || effort <= 0) {
+    return null;
+  }
+  return (
+    <p className="effort-caption">
+      Cosa resta da fare a te: <strong>{effort}</strong>{" "}
+      {effort === 1 ? "azione" : "azioni"}.
+    </p>
+  );
+}
+
 function EscalationGate({
   escalation,
   onResolved,
@@ -264,6 +390,7 @@ function EscalationGate({
 }) {
   const [busy, setBusy] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const { registra } = useProfilo();
 
   async function enter(preset: (typeof PRESETS)[number]) {
     setBusy(preset.id);
@@ -273,6 +400,21 @@ function EscalationGate({
         comune_istat: "058003",
         comune_nome: "Albano Laziale",
         ...preset.profile,
+      });
+      // Publish what signing in actually established, so the citizen can see
+      // the facts their answers are now computed from. `accesso` is recorded
+      // without a codice fiscale on purpose: this flow is a simulation and
+      // never reads one, and the strip says so rather than implying otherwise.
+      registra({
+        eta: preset.profile.eta,
+        interessi: [...preset.profile.interests],
+        comune: {
+          nome: "Albano Laziale",
+          istat: "058003",
+          origine: "accesso",
+          confermato: true,
+        },
+        accesso: true,
       });
       onResolved();
     } catch {
@@ -357,6 +499,7 @@ export default function Chat() {
   const [error, setError] = useState<string | null>(null);
   const [locating, setLocating] = useState(false);
   const [locateNote, setLocateNote] = useState<string | null>(null);
+  const { registra } = useProfilo();
   const [manualLogin, setManualLogin] = useState(false);
   const nextId = useRef(0);
 
@@ -427,6 +570,18 @@ export default function Chat() {
             position.coords.longitude,
           );
           if (nearby) {
+            // Recorded, but explicitly unconfirmed: GPS says where someone is
+            // standing, never where they are resident. The strip renders the
+            // difference so a borrowed phone or a visit to family can't
+            // silently become a residency claim.
+            registra({
+              comune: {
+                nome: nearby.nome,
+                istat: nearby.codice_istat,
+                origine: "geolocalizzazione",
+                confermato: false,
+              },
+            });
             setInput(
               `Sei a ${nearby.nome}? Confermi che è il tuo comune di residenza?`,
             );
@@ -499,24 +654,50 @@ export default function Chat() {
               <div className="chat__answer">
                 {m.reply.cost && <CostStrip cost={m.reply.cost} />}
 
-                {m.reply.matches.length > 0 && (
-                  <div className="feed">
-                    {m.reply.matches.map((match) => (
-                      <MatchCard key={match.id} match={match} />
-                    ))}
-                  </div>
+                {m.reply.kind === "informazione" ? (
+                  // D-19 — the INFORMAZIONE rail never renders a verdict, a
+                  // criterion or a SPID gate. If `info` itself is missing,
+                  // this bubble stays empty rather than falling through to
+                  // AGEVOLAZIONE furniture below.
+                  m.reply.info && (
+                    <>
+                      <InfoAnswer info={m.reply.info} />
+                      {m.reply.access_mode &&
+                        SEGNALAZIONE_ACCESS_MODES.has(m.reply.access_mode) &&
+                        m.reply.info.codice_istat &&
+                        m.reply.info.ente && (
+                          <Segnalazione
+                            codiceIstat={m.reply.info.codice_istat}
+                            ente={m.reply.info.ente}
+                            office={m.reply.info.office}
+                          />
+                        )}
+                    </>
+                  )
+                ) : (
+                  <>
+                    {m.reply.matches.length > 0 && (
+                      <div className="feed">
+                        {m.reply.matches.map((match) => (
+                          <MatchCard key={match.id} match={match} />
+                        ))}
+                      </div>
+                    )}
+
+                    {m.reply.matches.length === 0 && m.reply.data_gap && (
+                      <DataGapNotice kind={m.reply.data_gap} />
+                    )}
+
+                    {m.reply.escalation?.needed && (
+                      <EscalationGate
+                        escalation={m.reply.escalation}
+                        onResolved={retryLastQuestion}
+                      />
+                    )}
+                  </>
                 )}
 
-                {m.reply.matches.length === 0 && m.reply.data_gap && (
-                  <DataGapNotice kind={m.reply.data_gap} />
-                )}
-
-                {m.reply.escalation?.needed && (
-                  <EscalationGate
-                    escalation={m.reply.escalation}
-                    onResolved={retryLastQuestion}
-                  />
-                )}
+                <EffortCaption effort={m.reply.citizen_effort} />
               </div>
             )}
           </div>

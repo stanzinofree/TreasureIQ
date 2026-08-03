@@ -15,8 +15,9 @@ from __future__ import annotations
 
 import json
 import math
+import os
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 from treasureiq.readiness import score_comune
@@ -44,7 +45,7 @@ class AppStats:
 
 @dataclass
 class SourceStatus:
-    """One comune's row in `/api/status`.
+    """One comune's row in `/api/status` (the "Fonti" group).
 
     `reachable` is `None` when it was not (and could not honestly be)
     checked — never a guessed `True`.
@@ -58,9 +59,45 @@ class SourceStatus:
 
 
 @dataclass
+class SystemComponent:
+    """One row in the "Sistemi" group: a part of TreasureIQ itself.
+
+    `stato` is one of `"ok" | "degraded" | "down" | "unknown"`. `"unknown"`
+    is a real, honest state — the component is not monitored at request time
+    (e.g. the local LLM, used only during ingestion) and must never be read
+    as "down". We do not probe these on every page load; we report what the
+    evidence on disk and the config actually tell us.
+    """
+
+    nome: str
+    stato: str
+    detail: str
+
+
+@dataclass
+class InternalDatum:
+    """One row in the "Stato dati interni" group: a headline number about
+    what TreasureIQ has actually recovered, with an honest status.
+
+    `value` is a string ready to render (e.g. "1.234", "12,4 s") so the
+    client never formats a number it did not measure; `stato` colours it
+    within its own row only.
+    """
+
+    nome: str
+    stato: str
+    value: str
+    detail: str
+
+
+@dataclass
 class SystemStatus:
     overall: str  # "ok" | "degraded" | "down"
     sources: list[SourceStatus] = field(default_factory=list)
+    #: "Stato sistemi" — TreasureIQ's own components.
+    sistemi: list[SystemComponent] = field(default_factory=list)
+    #: "Stato dati interni" — headline numbers on what was recovered.
+    dati_interni: list[InternalDatum] = field(default_factory=list)
 
 
 @dataclass
@@ -200,6 +237,150 @@ def compute_app_stats(
     )
 
 
+def _format_count(value: int) -> str:
+    """Format an integer with the Italian thousands separator (dot)."""
+    return f"{value:,}".replace(",", ".")
+
+
+def _build_sistemi(
+    records_by_comune: dict[str, list[Opportunity]],
+) -> list[SystemComponent]:
+    """The "Sistemi" group: TreasureIQ's own components.
+
+    Everything here is derived from evidence the request already has or from
+    config — nothing is probed live (the project does not hit a service on
+    every page load). An unmonitored component reports `unknown`, which is a
+    real state, not a masked "down".
+    """
+    all_records = [r for rs in records_by_comune.values() for r in rs]
+    fetched_ats = [r.source.fetched_at for r in all_records if r.source.fetched_at]
+    last_ingested = max(fetched_ats) if fetched_ats else None
+
+    if last_ingested is None:
+        ingestion = SystemComponent(
+            "Ingestion",
+            "down",
+            "nessuna ingestion mai completata",
+        )
+    else:
+        age = datetime.now(timezone.utc) - last_ingested
+        if age < timedelta(days=30):
+            ingestion = SystemComponent(
+                "Ingestion",
+                "ok",
+                f"ultima ingestion il {last_ingested.strftime('%d/%m/%Y')}",
+            )
+        elif age < timedelta(days=365):
+            ingestion = SystemComponent(
+                "Ingestion",
+                "degraded",
+                f"ultima ingestion datata ({last_ingested.strftime('%d/%m/%Y')})",
+            )
+        else:
+            ingestion = SystemComponent(
+                "Ingestion",
+                "down",
+                f"ultima ingestion molto datata ({last_ingested.strftime('%d/%m/%Y')})",
+            )
+
+    provider = os.environ.get("TREASUREIQ_LLM_PROVIDER", "ollama")
+
+    return [
+        SystemComponent(
+            "API",
+            "ok",
+            "ha risposto a questa richiesta",
+        ),
+        SystemComponent(
+            "Motore di regole",
+            "ok",
+            "deterministico e in-process, sempre disponibile",
+        ),
+        ingestion,
+        SystemComponent(
+            "Modello linguistico",
+            "unknown",
+            f"provider {provider}; usato solo durante l'ingestion, non monitorato a runtime",
+        ),
+        SystemComponent(
+            "Ricerca web (SearXNG)",
+            "unknown",
+            "solo ingestion-time dietro profilo compose, non sondato a runtime",
+        ),
+    ]
+
+
+def _build_dati_interni(
+    *,
+    comuni: dict[str, dict],
+    records_by_comune: dict[str, list[Opportunity]],
+) -> list[InternalDatum]:
+    """The "Stato dati interni" group: headline numbers on what was recovered.
+
+    Reuses `compute_app_stats` so the aggregates match `/api/stats` exactly,
+    plus a per-comune readiness score from the same `score_comune` the
+    readiness endpoint uses — one source of truth, no re-authored numbers.
+    """
+    app = compute_app_stats(comuni=comuni, records_by_comune=records_by_comune)
+    items: list[InternalDatum] = [
+        InternalDatum(
+            "Record analizzati",
+            "ok" if app.records_total > 0 else "down",
+            _format_count(app.records_total),
+            f"su {app.comuni_measured} comuni misurati",
+        ),
+        InternalDatum(
+            "Requisiti verificati",
+            "ok" if app.requirements_verified > 0 else "unknown",
+            _format_count(app.requirements_verified),
+            "confermati dal controllo citazioni sulla fonte",
+        ),
+    ]
+
+    if app.avg_recovery_seconds is not None:
+        items.append(
+            InternalDatum(
+                "Tempo medio di recupero",
+                "ok",
+                f"{round(app.avg_recovery_seconds)} s",
+                "per record recuperato da testo libero",
+            )
+        )
+    if app.sources_below_full_openness_pct is not None:
+        pct = app.sources_below_full_openness_pct
+        stato = "ok" if pct == 0 else ("degraded" if pct < 100 else "down")
+        items.append(
+            InternalDatum(
+                "Fonti sotto piena apertura",
+                stato,
+                f"{round(pct)}%",
+                "dei comuni misurati",
+            )
+        )
+
+    for istat, records in records_by_comune.items():
+        if not records:
+            continue
+        meta = comuni[istat]
+        report = score_comune(
+            ente=meta["ente"],
+            codice_istat=istat,
+            records=records,
+            datasets_on_dati_gov=meta.get("datasets_on_dati_gov", 0),
+        )
+        stato = "ok" if report.score >= 100 else ("degraded" if report.score > 0 else "down")
+        items.append(
+            InternalDatum(
+                f"Qualità dati · {report.ente}",
+                stato,
+                f"{report.score:.1f} / 100",
+                f"{report.total_records} servizi",
+            )
+        )
+
+    return items
+
+
 def build_system_status(
     *,
     comuni: dict[str, dict],
@@ -214,12 +395,16 @@ def build_system_status(
     wrote: does the seed file exist, how many records does it hold, and what
     is the most recent `source.fetched_at` among them. `reachable` is left
     `None` throughout — "not checked" — because a value this route cannot
-    honestly produce must not be invented as `True`.
+    honestly produce must not be invented as `True`. The same evidence feeds
+    the "Sistemi" and "Stato dati interni" groups (`_build_sistemi`,
+    `_build_dati_interni`).
     """
+    records_by_comune: dict[str, list[Opportunity]] = {}
     sources: list[SourceStatus] = []
     for istat, meta in comuni.items():
         path = seed_dir / meta["seed"]
         if not path.exists():
+            records_by_comune[istat] = []
             sources.append(
                 SourceStatus(
                     codice_istat=istat,
@@ -233,6 +418,7 @@ def build_system_status(
 
         raw = json.loads(path.read_text("utf-8"))
         records = [Opportunity.model_validate(item) for item in raw]
+        records_by_comune[istat] = records
         fetched_ats = [r.source.fetched_at for r in records]
         last_ingested = max(fetched_ats) if fetched_ats else None
         sources.append(
@@ -254,4 +440,12 @@ def build_system_status(
     else:
         overall = "down"
 
-    return SystemStatus(overall=overall, sources=sources)
+    return SystemStatus(
+        overall=overall,
+        sources=sources,
+        sistemi=_build_sistemi(records_by_comune),
+        dati_interni=_build_dati_interni(
+            comuni=comuni,
+            records_by_comune=records_by_comune,
+        ),
+    )

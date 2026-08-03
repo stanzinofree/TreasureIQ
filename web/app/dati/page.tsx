@@ -23,7 +23,14 @@
  *     L1/L2/L3 recovery split, which bandi cost the most to open.
  */
 
-import { readinessAll, recoveryAll, type Readiness, type Recovery } from "@/lib/api";
+import {
+  readinessAll,
+  recoveryAll,
+  integrationAll,
+  type Readiness,
+  type Recovery,
+  type Integration,
+} from "@/lib/api";
 import RecoveryCostChart from "@/components/RecoveryCostChart";
 
 export const dynamic = "force-dynamic";
@@ -64,18 +71,22 @@ function Dimension({ dimension }: { dimension: Readiness["dimensions"][number] }
  * genuinely zero, not merely unmeasured: each was actually checked. */
 const ZERO_COMUNI: {
   ente: string;
+  codice_istat: string;
   diagnosis: string;
 }[] = [
   {
     ente: "Comune di Ariccia",
+    codice_istat: "058009",
     diagnosis: "WordPress con REST disattivato di proposito — 410 su /wp-json e /it/wp-json.",
   },
   {
     ente: "Comune di Genzano di Roma",
+    codice_istat: "058043",
     diagnosis: "Drupal + Halley Informatica; nessun endpoint /wp-json (404). Stesso fornitore di Ciampino, che espone altrettanto nulla — è un limite di piattaforma, non solo di questo comune.",
   },
   {
     ente: "Comune di Marino",
+    codice_istat: "058057",
     diagnosis: "Il sito risponde 200 su ogni percorso, incluse le rotte API, ma è un redirect via JavaScript verso un altro dominio: dietro quel 200 non c'è nessun dato reale. Un monitoraggio ingenuo lo classificherebbe sano.",
   },
 ];
@@ -84,6 +95,32 @@ const EVIDENCE_MEASURED_AT = "2 agosto 2026";
 
 function nationalCatalogueEvidence(r: Readiness): string | undefined {
   return r.dimensions.find((d) => d.key === "national_catalogue")?.evidence;
+}
+
+/** D-21 access-mode + integration-cost cell — mode, label and the dated
+ * probe it came from, rendered exactly as `/api/integration` returns them
+ * (never re-authored client-side, D-24). `datasets_on_dati_gov` is `null`
+ * where it was never probed (Marino) and reads "non misurato": collapsing
+ * that into "0" would be the same conflation this project exists to fight. */
+function AccessCell({ integration }: { integration: Integration | undefined }) {
+  if (!integration) {
+    return <span className="field__hint">non misurato</span>;
+  }
+  const { label, access_mode, probe_dated, probe_method, datasets_on_dati_gov } = integration;
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "var(--ma-1)" }}>
+      <span>
+        <strong style={{ fontWeight: 600 }}>{label}</strong> ({access_mode})
+      </span>
+      <span className="field__hint">
+        misurato il {probe_dated} — {probe_method}
+      </span>
+      <span className="field__hint">
+        dataset su dati.gov.it:{" "}
+        {datasets_on_dati_gov === null ? "non misurato" : datasets_on_dati_gov}
+      </span>
+    </div>
+  );
 }
 
 export default async function DataQuality() {
@@ -103,6 +140,22 @@ export default async function DataQuality() {
   } catch {
     recoveryReports = [];
   }
+
+  // Same fail-soft shape as recovery above: a failure here must not take
+  // down the readiness table, it just leaves the new column blank.
+  let integrationReports: Integration[] = [];
+  try {
+    integrationReports = await integrationAll();
+  } catch {
+    integrationReports = [];
+  }
+  const integrationFor = (istat: string) =>
+    integrationReports.find((i) => i.codice_istat === istat);
+  // D-21's comparative benchmark (F-1): how many comuni in Italia publish
+  // the waste calendar as open data, pulled from the measured field rather
+  // than hardcoded, so it stays reproducible if the probe is re-run.
+  const benchmark342 = integrationReports.find((i) => i.benchmark_342 != null)?.benchmark_342;
+
   const albano = reports.find((r) => r.codice_istat === "058003") ?? null;
   const fonteNuova = reports.find((r) => r.codice_istat === "058122") ?? null;
 
@@ -206,6 +259,7 @@ export default async function DataQuality() {
                 <th scope="col">Punteggio</th>
                 <th scope="col">Catalogo nazionale</th>
                 <th scope="col">Diagnosi</th>
+                <th scope="col">Accesso e costo di integrazione (D-21)</th>
               </tr>
             </thead>
             <tbody>
@@ -215,6 +269,9 @@ export default async function DataQuality() {
                   <td className="data-table__num">{albano.score.toFixed(1)} / 100</td>
                   <td>{nationalCatalogueEvidence(albano) ?? "—"}</td>
                   <td>Misurato in diretta — vedi la pagella sopra.</td>
+                  <td>
+                    <AccessCell integration={integrationFor(albano.codice_istat)} />
+                  </td>
                 </tr>
               )}
               {fonteNuova && (
@@ -228,6 +285,9 @@ export default async function DataQuality() {
                     (34 contro 32) e presente sul catalogo nazionale — eppure
                     non è detto che recuperi più requisiti utilizzabili.
                   </td>
+                  <td>
+                    <AccessCell integration={integrationFor(fonteNuova.codice_istat)} />
+                  </td>
                 </tr>
               )}
               {ZERO_COMUNI.map((z) => (
@@ -236,6 +296,9 @@ export default async function DataQuality() {
                   <td className="data-table__num">0.0 / 100</td>
                   <td>nessun dataset su dati.gov.it</td>
                   <td>{z.diagnosis}</td>
+                  <td>
+                    <AccessCell integration={integrationFor(z.codice_istat)} />
+                  </td>
                 </tr>
               ))}
               <tr data-region="true">
@@ -246,6 +309,9 @@ export default async function DataQuality() {
                   Non un comune: il livello dove la catena di apertura dei
                   dati smette di rompersi. Sotto il livello regionale, ogni
                   ente misurato in questa tabella è a zero dataset nazionali.
+                </td>
+                <td className="field__hint">
+                  non applicabile — non è un ente misurato in D-21.
                 </td>
               </tr>
             </tbody>
@@ -258,6 +324,18 @@ export default async function DataQuality() {
           live di questa pagina — quei tre comuni non hanno mai avuto un&apos;API
           di servizio raggiungibile da cui ingerire nulla.
         </p>
+        {benchmark342 != null && (
+          <p className="lede" style={{ marginTop: "var(--ma-4)" }}>
+            Il calendario della raccolta differenziata è già pubblicato come
+            open data da{" "}
+            <strong style={{ fontWeight: 600 }}>{benchmark342} comuni italiani</strong> (dati.gov.it,
+            misurato il {EVIDENCE_MEASURED_AT}). Non è una richiesta impossibile: è
+            ciò che altri comuni fanno già. Nessuno dei cinque enti misurati
+            qui lo pubblica in quella forma — e il costo di integrazione
+            riportato sopra è quello che paga TreasureIQ al loro posto, mai il
+            cittadino.
+          </p>
+        )}
 
         <p className="lede" style={{ marginTop: "var(--ma-6)" }}>
           Il quadro peggiora, non migliora, se si allarga lo sguardo: su 119

@@ -18,7 +18,6 @@ from __future__ import annotations
 
 import argparse
 import logging
-import sys
 import time
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -242,7 +241,7 @@ def summarise(results: list[PageResult]) -> str:
     for f_name, count in populate_counts.items():
         lines.append(f"  {f_name}: {count}")
     lines.append(f"total discard notes (quote-gate rejections): {total_discards}")
-    lines.append(f"threshold: >=40% => GO ollama; <40% => NO-GO, flip to anthropic")
+    lines.append("threshold: >=40% => GO ollama; <40% => NO-GO, flip to anthropic")
     lines.append("DECISION: " + ("GO — ollama" if pct >= 40.0 else "NO-GO — ollama"))
 
     return "\n".join(lines)

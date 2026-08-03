@@ -1,0 +1,761 @@
+[
+ {
+  "spec_version": "0.1.0",
+  "id": "html_scrape:058009:fd47cfdbd7423a6f",
+  "title": "Apertura termini presentazione domande per l’ammissione al contributo regionale per la fornitura gratuita (totale o parziale) dei libri di testo/sussidi didattici digitali – A.S. 2026/2027.",
+  "summary": "Apertura termini presentazione domande per l’ammissione al contributo regionale per la fornitura gratuita (totale o parziale) dei libri di testo/sussidi didattici digitali – A.S. 2026/2027. Apertura termini presentazione domande per l’ammissione al contributo regionale per la fornitura gratuita (totale o parziale) dei libri di testo/sussidi didattici digitali – A.S. 2026/2027. Data : 31 luglio 202",
+  "body": "Apertura termini presentazione domande per l’ammissione al contributo regionale per la fornitura gratuita (totale o parziale) dei libri di testo/sussidi didattici digitali – A.S. 2026/2027. Apertura termini presentazione domande per l’ammissione al contributo regionale per la fornitura gratuita (totale o parziale) dei libri di testo/sussidi didattici digitali – A.S. 2026/2027. Data : 31 luglio 2026 Condividi Facebook Twitter Linkedin WhatsApp Telegram Vedi azioni Invia Stampa Ascolta Categorie: Scuola Argomenti: Istruzione Indice della pagina Descrizione A cura di Allegati Contenuti correlati Municipium Descrizione Contributi per la fornitura gratuita (totale o parziale) dei libri di testo, dizionari, libri di lettura scolastici, sussidi didattici digitali o notebook per gli studenti delle scuole secondarie di I e II grado, statali e paritarie – Anno Scolastico 2026/2027 Municipium A cura di Servizi informatici Vai alla Pagina Municipium Allegati All. 2_Informativa Privacy_26_27_ Alunni e Famiglie PDF Scarica All. 1_Informativa Privacy_26_27_ Comuni PDF Scarica SCHEMA DI DOMANDA_26-27 PDF Scarica Modulo trasmissione fatture_26-27 PDF Scarica BANDO_2627_ok PDF Scarica Municipium Contenuti correlati Graduatoria Definitiva Asilo Nido - Anno Educativo 2026/2027 Asili Nido accreditati sul territorio comunale di n. 39 posti per i minori da 3 mesi a 3 anni – Anno educativo 2026/2027 BORSE DI STUDIO “IOSTUDIO” PER GLI STUDENTI DELLE SCUOLE SECONDARIE DI SECONDO GRADO STATALI E PARITARIE E PERCORSI TRIENNALI FORMATIVI DI IeFP - ANNO SCOLASTICO 2025/2026 Servizio di mensa scolastica anno scolastico 2025/2026 Borse di studio “io studio” per gli studenti delle scuole secondarie di secondo grado statali e paritarie e percorsi triennali formativi di I e FP – Anno scolastico 2024/2025 Open Day dell'I.C. \"Vito Volterra\" - Sabato 17 gennaio Riapertura termini presentazione domande per l’ammissione al contributo regionale relativo al trasporto degli alunni con disabilità – II ciclo – A.S. 2025/2026. Affidamento in concessione del servizio di mensa scolastica per gli AA.SS. 2025/2026, 2026/2027 e 2027/2028 – CIG B7F6AEAC5F – pubblicazione bando di gara telematica Apertura termini presentazione domande per l’ammissione al contributo regionale relativo al trasporto degli alunni con disabilità – II ciclo – A.S. 2025/2026. Ultimo aggiornamento: 31 luglio 2026, 14:01",
+  "kind": "contributo_economico",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": null,
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ariccia",
+   "ente_codice_istat": "058009",
+   "connector": "html_scrape",
+   "url": "https://comune.ariccia.rm.it/it/news/apertura-termini-presentazione-domande-per-lammissione-al-contributo-regionale-per-la-fornitura-gratuita-totale-o-parziale-dei-libri-di-testo-sussidi-didattici-digitali-a-s-2026-2027",
+   "api_url": null,
+   "fetched_at": "2026-08-03T08:36:19.214519Z",
+   "raw_hash": "fd47cfdbd7423a6f"
+  },
+  "confidence": "extracted",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il testo non fornisce informazioni sui requisiti di accesso al contributo regionale per la fornitura gratuita dei libri di testo/sussidi didattici digitali. Non sono indicati criteri come ISEE, età, numero di componenti del nucleo familiare, presenza di figli minorenni, disabilità, stato occupazionale, residenza, o altre condizioni specifiche."
+  ],
+  "recovery_level": "L1_manuale",
+  "pdfs_linked": 0,
+  "pdfs_opened": 0,
+  "pdfs_skipped": [],
+  "chars_processed": 2385,
+  "extraction_seconds": 0.0014149579801596701,
+  "requirements_recovered": 0
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "html_scrape:058009:674ce18fec98d2b7",
+  "title": "Arrivano le ecoisole per la raccolta differenziata",
+  "summary": "Arrivano le ecoisole per la raccolta differenziata Consegna delle tessere d’accesso all’ecoisola a partire dal 13 luglio a lunedì 20 luglio 2026 per i condomini di via delle cerquette, via ramo d’oro e via Innocenzo XII. Il ritiro delle tessere è obbligatorio. Data : 10 luglio 2026 Condividi Facebook Twitter Linkedin WhatsApp Telegram Vedi azioni Invia Stampa Ascolta Categorie: Ambiente Argomenti:",
+  "body": "Arrivano le ecoisole per la raccolta differenziata Consegna delle tessere d’accesso all’ecoisola a partire dal 13 luglio a lunedì 20 luglio 2026 per i condomini di via delle cerquette, via ramo d’oro e via Innocenzo XII. Il ritiro delle tessere è obbligatorio. Data : 10 luglio 2026 Condividi Facebook Twitter Linkedin WhatsApp Telegram Vedi azioni Invia Stampa Ascolta Categorie: Ambiente Argomenti: Igiene pubblica Indice della pagina Descrizione A cura di Allegati Contenuti correlati Municipium Descrizione Consegna delle tessere d’accesso all’ecoisola a partire dal 13 luglio a lunedì 20 luglio 2026 per i condomini di via delle cerquette, via ramo d’oro e via innocenzo XII. Il ritiro delle tessere è obbligatorio. Municipium A cura di Servizi informatici Vai alla Pagina Municipium Allegati Nota Card Ecoisole PDF Scarica Municipium Contenuti correlati Chiusura centro comunale di raccolta per i giorni 5 e 6 Aprile 2026 Comunicazione dello sciopero del 09 marzo 2026 aziende private settore igiene ambientale Comunicazione di chiusura del CCR di via Campoleone il 18 febbraio 2026 Chiusura definitiva ecocentro via delle Cerquette dal 18/10/2025 Sciopero nazionale aziende settore igiene ambientale Sciopero nazionale Avviso possibile interruzione servizio di raccolta rifiuti per il giorno lunedì 22 settembre causa sciopero Disinfestazione adulticida contro insetti alati - Intervento rimandato Disinfestazione adulticida sul territorio Ultimo aggiornamento: 10 luglio 2026, 12:49",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [
+    "Consegna delle tessere d’accesso all’ecoisola a partire dal 13 luglio a lunedì 20 luglio 2026 per i condomini di via delle cerquette, via ramo d’oro e via Innocenzo XII. Il ritiro delle tessere è obbligatorio."
+   ],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": null,
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ariccia",
+   "ente_codice_istat": "058009",
+   "connector": "html_scrape",
+   "url": "https://comune.ariccia.rm.it/it/news/arrivano-le-ecoisole-per-la-raccolta-differenziata",
+   "api_url": null,
+   "fetched_at": "2026-08-03T08:36:19.466292Z",
+   "raw_hash": "674ce18fec98d2b7"
+  },
+  "confidence": "extracted",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il testo non specifica requisiti di accesso come ISEE, età, disabilità, stato occupazionale, residenza, numero di componenti del nucleo familiare o presenza di figli minorenni. L’unico requisito menzionato è la consegna obbligatoria delle tessere per i condomini specificati. La data di scadenza per la consegna è indicata come 20 luglio 2026.",
+   "Fonte per 'other': pagina web https://comune.ariccia.rm.it/it/news/arrivano-le-ecoisole-per-la-raccolta-differenziata — \"Consegna delle tessere d’accesso all’ecoisola a partire dal 13 luglio a lunedì 20 luglio 2026 per i condomini di via delle cerquette, via ramo d’oro e via Innocenzo XII. Il ritiro delle tessere è obbligatorio.\""
+  ],
+  "recovery_level": "L2_estratto",
+  "pdfs_linked": 0,
+  "pdfs_opened": 0,
+  "pdfs_skipped": [],
+  "chars_processed": 1490,
+  "extraction_seconds": 0.003331333980895579,
+  "requirements_recovered": 1
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "html_scrape:058009:feb44f5096683ac2",
+  "title": "ARERA - Portale trasparenza servizio di gestione dei rifiuti urbani Trasparenza rifiuti",
+  "summary": "ARERA - Portale trasparenza servizio di gestione dei rifiuti urbani Ultimo aggiornamento: 27 marzo 2025, 10:13 Argomenti : Gestione rifiuti Carta dei servizi Ariccia- versione REV TRIB675_def.pdf Accedi al Portale Vedi azioni Invia Stampa Ascolta Approfondimenti Lo stemma Città in cifre Come arrivare Portale trasparenza Elezioni Bandi di gara Post-it lavoro Numeri di emergenza Scuole Imposte e Tri",
+  "body": "ARERA - Portale trasparenza servizio di gestione dei rifiuti urbani Ultimo aggiornamento: 27 marzo 2025, 10:13 Argomenti : Gestione rifiuti Carta dei servizi Ariccia- versione REV TRIB675_def.pdf Accedi al Portale Vedi azioni Invia Stampa Ascolta Approfondimenti Lo stemma Città in cifre Come arrivare Portale trasparenza Elezioni Bandi di gara Post-it lavoro Numeri di emergenza Scuole Imposte e Tributi",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": null,
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ariccia",
+   "ente_codice_istat": "058009",
+   "connector": "html_scrape",
+   "url": "https://comune.ariccia.rm.it/it/page/132600",
+   "api_url": null,
+   "fetched_at": "2026-08-03T08:36:19.786584Z",
+   "raw_hash": "feb44f5096683ac2"
+  },
+  "confidence": "extracted",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il testo non contiene informazioni sui requisiti di accesso per il servizio di gestione dei rifiuti urbani."
+  ],
+  "recovery_level": "L1_manuale",
+  "pdfs_linked": 0,
+  "pdfs_opened": 0,
+  "pdfs_skipped": [],
+  "chars_processed": 404,
+  "extraction_seconds": 0.0008996250107884407,
+  "requirements_recovered": 0
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "html_scrape:058009:545da6abfba3566f",
+  "title": "Segnala disservizio",
+  "summary": "Invia una segnalazione Dati personali Nome * Cognome * Telefono * Email * Segnalazione Categoria * Seleziona una categoria Incidente stradale Titolo * Testo * Posizione Visualizza Mappa Immagini Immagini 1 + Carica immagine 1 + Immagini 2 + Carica immagine 2 + Immagini 3 + Carica immagine 3 + Immagini 4 + Carica immagine 4 + Allegati Allegato 1 + Carica allegato 1 + Allegato 2 + Carica allegato 2",
+  "body": "Invia una segnalazione Dati personali Nome * Cognome * Telefono * Email * Segnalazione Categoria * Seleziona una categoria Incidente stradale Titolo * Testo * Posizione Visualizza Mappa Immagini Immagini 1 + Carica immagine 1 + Immagini 2 + Carica immagine 2 + Immagini 3 + Carica immagine 3 + Immagini 4 + Carica immagine 4 + Allegati Allegato 1 + Carica allegato 1 + Allegato 2 + Carica allegato 2 + Allegato 3 + Carica allegato 3 + Allegato 4 + Carica allegato 4 + Accettazione informativa sui dati personali Procedendo con la compilazione e con l'invio di questo modulo Lei acconsente al trattamento dei dati personali forniti, ai sensi e per gli effetti dell'articolo 13 del Regolamento EU 2016/679 e della della normativa nazionale applicabile in materia di trattamento dei dati personali, per la finalità e nei limiti indicati dalla informativa privacy che la invitiamo a leggere con attenzione. Invia",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": null,
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ariccia",
+   "ente_codice_istat": "058009",
+   "connector": "html_scrape",
+   "url": "https://comune.ariccia.rm.it/it/new-issue",
+   "api_url": null,
+   "fetched_at": "2026-08-03T08:36:20.507741Z",
+   "raw_hash": "545da6abfba3566f"
+  },
+  "confidence": "extracted",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il testo non descrive alcun requisito di accesso, ma solo la procedura per segnalare un disservizio."
+  ],
+  "recovery_level": "L1_manuale",
+  "pdfs_linked": 0,
+  "pdfs_opened": 0,
+  "pdfs_skipped": [],
+  "chars_processed": 908,
+  "extraction_seconds": 0.0006991249974817038,
+  "requirements_recovered": 0
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "html_scrape:058009:834fe1667f48f4cf",
+  "title": "Anagrafe e stato civile",
+  "summary": "Anagrafe e stato civile In evidenza Avvio del procedimento di pubblicazione di matrimonio Procedimento di pubblicazione di matrimonio. Vai alla Pagina Esplora Anagrafe e stato civile Accesso ai servizi dell'ANPR Procedimento di accesso ai servizi dell'ANPR Vai alla Pagina Affidamento delle ceneri Procedimento di affidamento delle ceneri Vai alla Pagina Ammissione al voto da parte di elettore omess",
+  "body": "Anagrafe e stato civile In evidenza Avvio del procedimento di pubblicazione di matrimonio Procedimento di pubblicazione di matrimonio. Vai alla Pagina Esplora Anagrafe e stato civile Accesso ai servizi dell'ANPR Procedimento di accesso ai servizi dell'ANPR Vai alla Pagina Affidamento delle ceneri Procedimento di affidamento delle ceneri Vai alla Pagina Ammissione al voto da parte di elettore omesso con le revisioni Procedimento di ammissione al voto da parte di elettore omesso con le revisioni Vai alla Pagina Annotazione del diritto al voto assistito sulla tessera elettorale Procedimento di annotazione del diritto al voto assistito sulla tessera elettorale Vai alla Pagina Assegnazione della numerazione civica Procedimento di assegnazione della numerazione civica Vai alla Pagina Attribuzione del cognome paterno o materno al momento della nascita Procedimento di attribuzione del cognome paterno o materno al momento della nascita Vai alla Pagina Autenticazione di sottoscrizioni su istanze e dichiarazioni sostitutive di atto di notorietà Procedimento di autenticazione di sottoscrizioni su istanze e dichiarazioni sostitutive di atto di notorietà Vai alla Pagina Autenticazione di sottoscrizioni su istanze e dichiarazioni sostitutive di atto di notorietà a domicilio Procedimento di autenticazione di sottoscrizioni su istanze e dichiarazioni sostitutive di atto di notorietà a domicilio Vai alla Pagina Autorizzazione alla cremazione Procedimento di autorizzazione alla cremazione. Vai alla Pagina Autorizzazione alla dispersione delle ceneri Procedimento di autorizzazione alla dispersione delle ceneri Vai alla Pagina Avvio del procedimento di divorzio o separazione Procedimento di avvio del procedimento di divorzio o separazione Vai alla Pagina Avvio del procedimento di pubblicazione di matrimonio Procedimento di pubblicazione di matrimonio. Vai alla Pagina Avvio del procedimento di pubblicazione di matrimonio da parte di incaricato Procedimento di pubblicazione di matrimonio da parte di incaricato Vai alla Pagina Cancellazione anagrafica per irreperibilità Procedimento di cancellazione anagrafica per irreperibilità Vai alla Pagina Cancellazione dall'albo degli scrutatori Procedimento di cancellazione dall'albo degli scrutatori Vai alla Pagina Cancellazione dall'albo dei giudici popolari Procedimento di cancellazione dall'albo dei giudici popolari Vai alla Pagina Cancellazione dalla lista elettorale aggiunta Procedimento di cancellazione dalla lista elettorale aggiunta Vai alla Pagina Cessazione della convivenza di fatto Procedimento di cessazione della convivenza di fatto Vai alla Pagina Cittadinanza italiana per cittadini stranieri maggiorenni residenti dalla nascita Procedimento di cittadinanza italiana per cittadini stranieri maggiorenni residenti dalla nascita Vai alla Pagina Comunicazione della volontà di esprimere il voto presso il proprio domicilio Procedimento di comunicazione della volontà di esprimere il voto presso il proprio domicilio Vai alla Pagina Comunicazione della volontà di esprimere il voto presso ospedali e case di riposo Procedimento di comunicazione della volontà di esprimere il voto presso ospedali e case di riposo Vai alla Pagina Consultazione e copia delle liste elettorali Procedimento di consultazione e copia delle liste elettorali Vai alla Pagina Costituzione dell'unione civile Procedimento di costituzione dell'unione civile Vai alla Pagina Costituzione della convivenza di fatto Procedimento di costituzione della convivenza di fatto Vai alla Pagina Delega per la celebrazione di un matrimonio o un'unione civile Procedimento di delega per la celebrazione di un matrimonio o un'unione civile Vai alla Pagina Dichiarazione di cambio abitazione o residenza Procedimento di cambio abitazione o residenza Vai alla Pagina Dichiarazione di morte Procedimento di dichiarazione di morte Vai alla Pagina Dichiarazione di nascita Procedimento di dichiarazione di nascita Vai alla Pagina Indicazione del nome composto da più elementi Procedimento di indicazione del nome composto da più elementi per cittadini maggiorenni Vai alla Pagina Iscrizione all'albo degli scrutatori Procedimento di iscrizione all'albo degli scrutatori Vai alla Pagina",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": null,
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ariccia",
+   "ente_codice_istat": "058009",
+   "connector": "html_scrape",
+   "url": "https://comune.ariccia.rm.it/it/page/116405?fromService=1",
+   "api_url": null,
+   "fetched_at": "2026-08-03T08:36:21.271905Z",
+   "raw_hash": "834fe1667f48f4cf"
+  },
+  "confidence": "extracted",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il testo non contiene alcun requisito di accesso ai servizi elencati."
+  ],
+  "recovery_level": "L1_manuale",
+  "pdfs_linked": 0,
+  "pdfs_opened": 0,
+  "pdfs_skipped": [],
+  "chars_processed": 4213,
+  "extraction_seconds": 0.00048295798478648067,
+  "requirements_recovered": 0
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "html_scrape:058009:1ccecd40c918d5b5",
+  "title": "Anagrafe e stato civile",
+  "summary": "Anagrafe e stato civile In evidenza Avvio del procedimento di pubblicazione di matrimonio Procedimento di pubblicazione di matrimonio. Vai alla Pagina Esplora Anagrafe e stato civile Accesso ai servizi dell'ANPR Procedimento di accesso ai servizi dell'ANPR Vai alla Pagina Affidamento delle ceneri Procedimento di affidamento delle ceneri Vai alla Pagina Ammissione al voto da parte di elettore omess",
+  "body": "Anagrafe e stato civile In evidenza Avvio del procedimento di pubblicazione di matrimonio Procedimento di pubblicazione di matrimonio. Vai alla Pagina Esplora Anagrafe e stato civile Accesso ai servizi dell'ANPR Procedimento di accesso ai servizi dell'ANPR Vai alla Pagina Affidamento delle ceneri Procedimento di affidamento delle ceneri Vai alla Pagina Ammissione al voto da parte di elettore omesso con le revisioni Procedimento di ammissione al voto da parte di elettore omesso con le revisioni Vai alla Pagina Annotazione del diritto al voto assistito sulla tessera elettorale Procedimento di annotazione del diritto al voto assistito sulla tessera elettorale Vai alla Pagina Assegnazione della numerazione civica Procedimento di assegnazione della numerazione civica Vai alla Pagina Attribuzione del cognome paterno o materno al momento della nascita Procedimento di attribuzione del cognome paterno o materno al momento della nascita Vai alla Pagina Autenticazione di sottoscrizioni su istanze e dichiarazioni sostitutive di atto di notorietà Procedimento di autenticazione di sottoscrizioni su istanze e dichiarazioni sostitutive di atto di notorietà Vai alla Pagina Autenticazione di sottoscrizioni su istanze e dichiarazioni sostitutive di atto di notorietà a domicilio Procedimento di autenticazione di sottoscrizioni su istanze e dichiarazioni sostitutive di atto di notorietà a domicilio Vai alla Pagina Autorizzazione alla cremazione Procedimento di autorizzazione alla cremazione. Vai alla Pagina Autorizzazione alla dispersione delle ceneri Procedimento di autorizzazione alla dispersione delle ceneri Vai alla Pagina Avvio del procedimento di divorzio o separazione Procedimento di avvio del procedimento di divorzio o separazione Vai alla Pagina Avvio del procedimento di pubblicazione di matrimonio Procedimento di pubblicazione di matrimonio. Vai alla Pagina Avvio del procedimento di pubblicazione di matrimonio da parte di incaricato Procedimento di pubblicazione di matrimonio da parte di incaricato Vai alla Pagina Cancellazione anagrafica per irreperibilità Procedimento di cancellazione anagrafica per irreperibilità Vai alla Pagina Cancellazione dall'albo degli scrutatori Procedimento di cancellazione dall'albo degli scrutatori Vai alla Pagina Cancellazione dall'albo dei giudici popolari Procedimento di cancellazione dall'albo dei giudici popolari Vai alla Pagina Cancellazione dalla lista elettorale aggiunta Procedimento di cancellazione dalla lista elettorale aggiunta Vai alla Pagina Cessazione della convivenza di fatto Procedimento di cessazione della convivenza di fatto Vai alla Pagina Cittadinanza italiana per cittadini stranieri maggiorenni residenti dalla nascita Procedimento di cittadinanza italiana per cittadini stranieri maggiorenni residenti dalla nascita Vai alla Pagina Comunicazione della volontà di esprimere il voto presso il proprio domicilio Procedimento di comunicazione della volontà di esprimere il voto presso il proprio domicilio Vai alla Pagina Comunicazione della volontà di esprimere il voto presso ospedali e case di riposo Procedimento di comunicazione della volontà di esprimere il voto presso ospedali e case di riposo Vai alla Pagina Consultazione e copia delle liste elettorali Procedimento di consultazione e copia delle liste elettorali Vai alla Pagina Costituzione dell'unione civile Procedimento di costituzione dell'unione civile Vai alla Pagina Costituzione della convivenza di fatto Procedimento di costituzione della convivenza di fatto Vai alla Pagina Delega per la celebrazione di un matrimonio o un'unione civile Procedimento di delega per la celebrazione di un matrimonio o un'unione civile Vai alla Pagina Dichiarazione di cambio abitazione o residenza Procedimento di cambio abitazione o residenza Vai alla Pagina Dichiarazione di morte Procedimento di dichiarazione di morte Vai alla Pagina Dichiarazione di nascita Procedimento di dichiarazione di nascita Vai alla Pagina Indicazione del nome composto da più elementi Procedimento di indicazione del nome composto da più elementi per cittadini maggiorenni Vai alla Pagina Iscrizione all'albo degli scrutatori Procedimento di iscrizione all'albo degli scrutatori Vai alla Pagina",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": null,
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ariccia",
+   "ente_codice_istat": "058009",
+   "connector": "html_scrape",
+   "url": "https://comune.ariccia.rm.it/it/page/anagrafe-e-stato-civile?fromService=1",
+   "api_url": null,
+   "fetched_at": "2026-08-03T08:36:24.190557Z",
+   "raw_hash": "1ccecd40c918d5b5"
+  },
+  "confidence": "extracted",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il testo non contiene alcun requisito di accesso ai servizi elencati."
+  ],
+  "recovery_level": "L1_manuale",
+  "pdfs_linked": 0,
+  "pdfs_opened": 0,
+  "pdfs_skipped": [],
+  "chars_processed": 4213,
+  "extraction_seconds": 0.0019744589808396995,
+  "requirements_recovered": 0
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "html_scrape:058009:8d2e5ae667f8a5b9",
+  "title": "Salta al contenuto principale",
+  "summary": "Avvisi 22 luglio 2026 Parco Chigi riapre al pubblico: appuntamento da domenica 26 luglio 2026 Riapre Parco Chigi - Zona Monumentale - Ingresso in via dell'uccelliera Patrimonio culturale Leggi di più Avvisi 31 luglio 2026 Apertura termini presentazione domande per l’ammissione al contributo regionale per la fornitura gratuita (totale o parziale) dei libri di testo/sussidi didattici digitali – A.S.",
+  "body": "Avvisi 22 luglio 2026 Parco Chigi riapre al pubblico: appuntamento da domenica 26 luglio 2026 Riapre Parco Chigi - Zona Monumentale - Ingresso in via dell'uccelliera Patrimonio culturale Leggi di più Avvisi 31 luglio 2026 Apertura termini presentazione domande per l’ammissione al contributo regionale per la fornitura gratuita (totale o parziale) dei libri di testo/sussidi didattici digitali – A.S. 2026/2027. Apertura termini presentazione domande per l’ammissione al contributo regionale per la fornitura gratuita (totale o parziale) dei libri di testo/sussidi didattici digitali – A.S. 2026/2027. Istruzione Leggi di più Avvisi 30 luglio 2026 Avviso AGLI UTILIZZATORI DI LINEE FERROVIARIE LOCALI Ferrovie Locali Trasporto pubblico Leggi di più Avvisi 30 luglio 2026 Graduatoria Definitiva Asilo Nido - Anno Educativo 2026/2027 Graduatoria rettificata e relativa Determina di approvazione Istruzione Leggi di più Avvisi 28 luglio 2026 Convocazione Consiglio Comunale 29 Luglio 2026 Convocazione Consiglio Comunale 29 Luglio 2026 Comunicazione istituzionale Comunicazione politica Leggi di più Avvisi 13 luglio 2026 PUBBLICAZIONE RELAZIONE di INIZIO MANDATO PUBBLICAZIONE RELAZIONE di INIZIO MANDATO Comunicazione istituzionale Leggi di più Avvisi 10 luglio 2026 Arrivano le ecoisole per la raccolta differenziata Consegna delle tessere d’accesso all’ecoisola a partire dal 13 luglio a lunedì 20 luglio 2026 per i condomini di via delle cerquette, via ramo d’oro e via Innocenzo XII. Il ritiro delle tessere è obbligatorio. Igiene pubblica Leggi di più Tutte le notizie Argomenti in evidenza Comunicazione istituzionale Tutte le comunicazioni istituzionali Leggi di più Assistenza sociale Informazioni su supporto e assistenza sociale Leggi di più Elezioni e Referendum Leggi di più Elezioni Trasparenti 2026 Leggi di più Siti tematici Albo Pretorio Raccolta atti amministrativi per i quali è previsto l'obbligo di pubblicità legale Amministrazione trasparente Un'amministrazione aperta, al servizio del cittadino. Sportello telematico Lo sportello telematico polifunzionale Municipium APP L'app del Comune Galleria fotografica Galleria Fotografica della Città di Ariccia, contenente immagini di Ariccia e delle sue bellezze Palazzo Chigi in Ariccia Il portale ufficiale di Palazzo Chigi in Ariccia Geoportale - GIS Il Geoportale è un luogo virtuale nato per rispondere con semplicità e immediatezza alla richiesta di informazioni sulle attività di programmazione e governo del territorio. Servizio di Igiene Urbana Sito web istituzionale sul servizio di igiene ambientale nel Comune di Ariccia. ARERA - Portale trasparenza servizio di gestione dei rifiuti urbani Trasparenza rifiuti Questionario gradimento servizi comunali Esprimi il tuo gradimento sui servizi comunali Whistleblowing Portale segnalare un illecicito, un'irregolarità o un fenomeno corruttivo Calcolo IMU Il calcolo IMU Sezione Bandi di Gara e Bandi di Concorso Imposte Informazioni sulle imposte ed i tributi Dussman - Area dedicata alla scuola Qui troverai tutte le informazioni relative alla ristorazione scolastica (notizie, menu, stato presenze e pagamenti, modulistica, contatti). Trasporto Scolastico l servizio di trasporto scolastico è rivolto agli alunni delle scuole dell’infanzia (ex materne), delle scuole primarie (ex elementari) e delle scuole secondarie di primo grado (ex medie). Biblioteca Attiva - Eventi Contatto Eventi Piano Emergenza Comunale Il Piano di Emergenza è il documento che contiene le informazioni e le indicazioni mediante le quali tutti i soggetti chiamati a intervenire nella gestione degli eventi calamitosi possono operare con modalità efficaci ed efficienti Streaming dei Consigli Comunali Orari farmacie di turno anno 2025 Orari turni farmacie Ariccia 2025 Servizi on line Pagamenti Spontanei - Accesso Anagrafe Enti Terzi - Pagamenti Multe",
+  "kind": "contributo_economico",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": null,
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ariccia",
+   "ente_codice_istat": "058009",
+   "connector": "html_scrape",
+   "url": "https://comune.ariccia.rm.it/it/#main-content",
+   "api_url": null,
+   "fetched_at": "2026-08-03T08:36:25.646733Z",
+   "raw_hash": "8d2e5ae667f8a5b9"
+  },
+  "confidence": "extracted",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il testo non contiene informazioni relative a criteri di accesso, soglie ISEE, età, nucleo familiare, figli minorenni, disabilità, stato occupazionale, residenza, quote, scadenze o altri criteri specifici."
+  ],
+  "recovery_level": "L1_manuale",
+  "pdfs_linked": 0,
+  "pdfs_opened": 0,
+  "pdfs_skipped": [],
+  "chars_processed": 3851,
+  "extraction_seconds": 0.0007656670059077442,
+  "requirements_recovered": 0
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "html_scrape:058009:73f719972c30645f",
+  "title": "Accedi all'area personale",
+  "summary": "Autenticati Da qui potrai verificare i tuoi dati ed accedere ai servizi autenticati. È necessario autenticarsi per visualizzare la sezione richiesta. Entra con SPID Entra con il Sistema Pubblico per la gestione dell'Identità Digitale SPID è il sistema di accesso che consente di utilizzare, con un'identità digitale unica, i servizi online della Pubblica Amministrazione e dei privati accreditati. Se",
+  "body": "Autenticati Da qui potrai verificare i tuoi dati ed accedere ai servizi autenticati. È necessario autenticarsi per visualizzare la sezione richiesta. Entra con SPID Entra con il Sistema Pubblico per la gestione dell'Identità Digitale SPID è il sistema di accesso che consente di utilizzare, con un'identità digitale unica, i servizi online della Pubblica Amministrazione e dei privati accreditati. Se sei già in possesso di un'identità digitale, accedi con le credenziali del tuo gestore. Se non hai ancora un'identità digitale, richiedila ad uno dei gestori. Entra con SPID Poste Italiane SpA\" http://www.sielte.it\" Trust Technologies srl\" TeamSystem\" ArubaPEC S.p.A.\" InfoCert S.p.A.\" Intesi Group S.p.A.\" EHT\" InfoCamere S.C.p.A.\" Namirial S.p.a. Trust Service Provider\" Lepida S.p.A.\" Register.it S.p.A.\" Entra con CIE La Carta di Identità Elettronica (CIE) è la chiave di accesso, garantita dallo Stato e rilasciata dal Ministero dell’Interno, che permette al cittadino di autenticarsi in tutta sicurezza ai servizi online di enti e pubbliche amministrazioni che ne consentono l’utilizzo. Entra con CIE Entra con eIDAS La nuova identità digitale europea passa dalla modifica del regolamento eIDAS (electronic IDentification Authentication and Signature), che dal 2014 fornisce la base per l’identificazione elettronica transfrontaliera, l’autenticazione e la certificazione dei siti web all’interno dell’UE. Entra con eIDAS Entra con CNS / TS-CNS La Carta Nazionale dei Servizi (CNS) è una smart card per accedere ai servizi online della Pubblica Amministrazione su tutto il territorio nazionale. La TS-CNS oltre ai servizi sanitari normalmente offerti dalla tessera sanitaria permette l'accesso ai servizi in rete offerti dalla Pubblica Amministrazione in assoluta sicurezza e nel rispetto della privacy. Per usare la tessera sanitaria come CNS ed accedere ai servizi pubblici on-line, è necessaria l'attivazione presso uno degli sportelli abilitati presso la propria regione di appartenenza. Per utilizzare la Carta d'Identità Elettronica (CIE), cliccare qui per il download dell'apposita applicazione. Entra con CNS / TS-CNS",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [
+    "È necessario autenticarsi per visualizzare la sezione richiesta."
+   ],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": null,
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ariccia",
+   "ente_codice_istat": "058009",
+   "connector": "html_scrape",
+   "url": "https://comune.ariccia.rm.it/it/private",
+   "api_url": null,
+   "fetched_at": "2026-08-03T08:36:27.068442Z",
+   "raw_hash": "73f719972c30645f"
+  },
+  "confidence": "extracted",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Non sono indicati requisiti specifici per l'accesso all'area personale, ma solo i metodi di autenticazione disponibili.",
+   "Fonte per 'other': pagina web https://comune.ariccia.rm.it/it/private — \"È necessario autenticarsi per visualizzare la sezione richiesta.\"",
+   "Valore per 'other' scartato: la citazione dichiarata dal modello non è stata trovata nel testo che gli è stato mostrato — probabile invenzione: \"Per accedere ai servizi autenticati è possibile utilizzare SPID, CIE, eIDAS, CNS / TS-CNS.\""
+  ],
+  "recovery_level": "L2_estratto",
+  "pdfs_linked": 0,
+  "pdfs_opened": 0,
+  "pdfs_skipped": [],
+  "chars_processed": 2132,
+  "extraction_seconds": 0.01545358297880739,
+  "requirements_recovered": 1
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "html_scrape:058009:6e9b22564aa1257e",
+  "title": "Amministrazione",
+  "summary": "Amministrazione Tutte le informazioni sulla struttura amministrativa del Comune. Scopri gli organi politici, gli uffici e il personale e consulta i documenti pubblici, le statistiche e i bandi di gara. Organi di governo Le informazioni sulla Giunta e il Consiglio comunale, incluse le convocazioni, le registrazioni delle sedute e i verbali Vai alla Pagina Aree amministrative La struttura organizzat",
+  "body": "Amministrazione Tutte le informazioni sulla struttura amministrativa del Comune. Scopri gli organi politici, gli uffici e il personale e consulta i documenti pubblici, le statistiche e i bandi di gara. Organi di governo Le informazioni sulla Giunta e il Consiglio comunale, incluse le convocazioni, le registrazioni delle sedute e i verbali Vai alla Pagina Aree amministrative La struttura organizzativa è suddivisa in aree di competenze che gestiscono i servizi erogati alla comunità. Vai alla Pagina Uffici Le informazioni e i contatti degli Uffici di Città, gli uffici aperti al pubblico e gli uffici assistenziali. Vai alla Pagina Enti e fondazioni I consorzi, gli enti e le società partecipate di cui il Comune fa parte per rappresentare al meglio gli interessi della comunità. Vai alla Pagina Politici Tutti i rappresentanti dei cittadini che compongono gli organi di indirizzo politico del Comune Vai alla Pagina Personale amministrativo Personale da contattare per informazioni e supporto ai servizi erogati dagli uffici. Vai alla Pagina Documenti e dati Bandi di concorso, avvisi, graduatorie, statistiche e documenti pubblici. Vai alla Pagina",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": null,
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ariccia",
+   "ente_codice_istat": "058009",
+   "connector": "html_scrape",
+   "url": "https://comune.ariccia.rm.it/it/menu/amministrazione",
+   "api_url": null,
+   "fetched_at": "2026-08-03T08:36:27.316130Z",
+   "raw_hash": "6e9b22564aa1257e"
+  },
+  "confidence": "extracted",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il testo non contiene informazioni sui requisiti di accesso a un servizio, ma descrive la struttura amministrativa del comune."
+  ],
+  "recovery_level": "L1_manuale",
+  "pdfs_linked": 0,
+  "pdfs_opened": 0,
+  "pdfs_skipped": [],
+  "chars_processed": 1152,
+  "extraction_seconds": 0.0030981249874457717,
+  "requirements_recovered": 0
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "html_scrape:058009:9f986e9079e7dd3b",
+  "title": "Novità",
+  "summary": "Novità Le notizie, i comunicati e gli avvisi per restare aggiornati sulle ultime novità, opportunità e cosa succede nel territorio comunale. In evidenza Avvisi 22 luglio 2026 Parco Chigi riapre al pubblico: appuntamento da domenica 26 luglio 2026 Riapre Parco Chigi - Zona Monumentale - Ingresso in via dell'uccelliera Patrimonio culturale Leggi di più Avvisi 10 luglio 2026 Arrivano le ecoisole per",
+  "body": "Novità Le notizie, i comunicati e gli avvisi per restare aggiornati sulle ultime novità, opportunità e cosa succede nel territorio comunale. In evidenza Avvisi 22 luglio 2026 Parco Chigi riapre al pubblico: appuntamento da domenica 26 luglio 2026 Riapre Parco Chigi - Zona Monumentale - Ingresso in via dell'uccelliera Patrimonio culturale Leggi di più Avvisi 10 luglio 2026 Arrivano le ecoisole per la raccolta differenziata Consegna delle tessere d’accesso all’ecoisola a partire dal 13 luglio a lunedì 20 luglio 2026 per i condomini di via delle cerquette, via ramo d’oro e via Innocenzo XII. Il ritiro delle tessere è obbligatorio. Igiene pubblica Leggi di più Avvisi 27 maggio 2026 Proclamato il nuovo Sindaco di Ariccia A conclusione delle procedure previste dalla normativa vigente, successive alle consultazioni elettorali comunali, Gianluca Staccoli è stato proclamato Sindaco di Ariccia. Comunicazione istituzionale Comunicazione politica Elezioni Leggi di più Esplora tutte le novità Invia Avvisi 31 luglio 2026 Apertura termini presentazione domande per l’ammissione al contributo regionale per la fornitura gratuita (totale o parziale) dei libri di testo/sussidi didattici digitali – A.S. 2026/2027. Apertura termini presentazione domande per l’ammissione al contributo regionale per la fornitura gratuita (totale o parziale) dei libri di testo/sussidi didattici digitali – A.S. 2026/2027. Istruzione Leggi di più Avvisi 30 luglio 2026 Avviso AGLI UTILIZZATORI DI LINEE FERROVIARIE LOCALI Ferrovie Locali Trasporto pubblico Leggi di più Avvisi 30 luglio 2026 Graduatoria Definitiva Asilo Nido - Anno Educativo 2026/2027 Graduatoria rettificata e relativa Determina di approvazione Istruzione Leggi di più Avvisi 28 luglio 2026 Convocazione Consiglio Comunale 29 Luglio 2026 Convocazione Consiglio Comunale 29 Luglio 2026 Comunicazione istituzionale Comunicazione politica Leggi di più Avvisi 22 luglio 2026 Parco Chigi riapre al pubblico: appuntamento da domenica 26 luglio 2026 Riapre Parco Chigi - Zona Monumentale - Ingresso in via dell'uccelliera Patrimonio culturale Leggi di più Avvisi 13 luglio 2026 PUBBLICAZIONE RELAZIONE di INIZIO MANDATO PUBBLICAZIONE RELAZIONE di INIZIO MANDATO Comunicazione istituzionale Leggi di più Esplora per categoria Notizie Gli ultimi aggiornamenti sugli avvenimenti e la vita culturale nel Comune. Vai alla Pagina Comunicati Le comunicazioni ufficiali del Sindaco, degli organi politici e degli uffici comunali. Vai alla Pagina Avvisi Bandi di gara, avvisi di concorso e tutte le opportunità per cittadini e imprese. Vai alla Pagina",
+  "kind": "contributo_economico",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": null,
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ariccia",
+   "ente_codice_istat": "058009",
+   "connector": "html_scrape",
+   "url": "https://comune.ariccia.rm.it/it/menu/news",
+   "api_url": null,
+   "fetched_at": "2026-08-03T08:36:27.632738Z",
+   "raw_hash": "9f986e9079e7dd3b"
+  },
+  "confidence": "extracted",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il testo non contiene informazioni sui requisiti di accesso a servizi, agevolazioni o bandi, ma solo notizie, comunicati e avvisi generali."
+  ],
+  "recovery_level": "L1_manuale",
+  "pdfs_linked": 0,
+  "pdfs_opened": 0,
+  "pdfs_skipped": [],
+  "chars_processed": 2584,
+  "extraction_seconds": 0.003363249998074025,
+  "requirements_recovered": 0
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "html_scrape:058009:a56563eefde4396a",
+  "title": "Servizi",
+  "summary": "Servizi Esplora tutti i servizi Invia 590 servizi trovati in ordine alfabetico Abbattimento di alberi Procedimento di abbattimento di alberi Vai alla Pagina Accertamento di compatibilità paesaggistica ordinaria Procedimento di accertamento di compatibilità paesaggistica ordinaria Vai alla Pagina Accertamento di compatibilità paesaggistica postuma Procedimento di accertamento di compatibilità paesa",
+  "body": "Servizi Esplora tutti i servizi Invia 590 servizi trovati in ordine alfabetico Abbattimento di alberi Procedimento di abbattimento di alberi Vai alla Pagina Accertamento di compatibilità paesaggistica ordinaria Procedimento di accertamento di compatibilità paesaggistica ordinaria Vai alla Pagina Accertamento di compatibilità paesaggistica postuma Procedimento di accertamento di compatibilità paesaggistica postuma Vai alla Pagina Accertamento esecutivo: riesame a seguito della notifica di atto o provvedimento amministrativo Procedimento di riesame a seguito della notifica di atto o provvedimento amministrativo Vai alla Pagina Accesso ai servizi dell'ANPR Procedimento di accesso ai servizi dell'ANPR Vai alla Pagina Carica altri risultati SERVIZI IN EVIDENZA Accesso documentale Avvio del procedimento di pubblicazione di matrimonio Concessione dell'assegno di maternità Contrassegno per veicoli a servizio dei disabili: rilascio del contrassegno permanente Esplora per categoria Agricoltura e pesca Vai alla Pagina Ambiente Vai alla Pagina Anagrafe e stato civile Vai alla Pagina Appalti pubblici Vai alla Pagina Autorizzazioni Vai alla Pagina Catasto e urbanistica Vai alla Pagina Cultura e tempo libero Vai alla Pagina Educazione e formazione Vai alla Pagina Imprese e commercio Vai alla Pagina Mobilità e trasporti Vai alla Pagina Salute, benessere e assistenza Vai alla Pagina Tributi, finanze e contravvenzioni Vai alla Pagina Vita lavorativa Vai alla Pagina",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": null,
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ariccia",
+   "ente_codice_istat": "058009",
+   "connector": "html_scrape",
+   "url": "https://comune.ariccia.rm.it/it/menu/servizi",
+   "api_url": null,
+   "fetched_at": "2026-08-03T08:36:48.860117Z",
+   "raw_hash": "a56563eefde4396a"
+  },
+  "confidence": "extracted",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il testo non descrive alcun servizio con requisiti di accesso specifici. Si tratta di un elenco di servizi disponibili, senza informazioni sui criteri di accesso."
+  ],
+  "recovery_level": "L1_manuale",
+  "pdfs_linked": 0,
+  "pdfs_opened": 0,
+  "pdfs_skipped": [],
+  "chars_processed": 1471,
+  "extraction_seconds": 20.0746528749587,
+  "requirements_recovered": 0
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "html_scrape:058009:1e3e97db4aa421aa",
+  "title": "Vivere il Comune",
+  "summary": "Vivere il Comune Tutte le informazioni sui luoghi di interesse Eventi in evidenza In questo momento non sono previsti eventi. Per consultare gli eventi clicca il bottone a fianco. Tutti gli eventi passati Luoghi in evidenza Municipio La sede municipale comunale Accesso all'informazione Comunicazione istituzionale Comunicazione politica Leggi di più Palazzo Chigi Museo e centro di molteplici attivi",
+  "body": "Vivere il Comune Tutte le informazioni sui luoghi di interesse Eventi in evidenza In questo momento non sono previsti eventi. Per consultare gli eventi clicca il bottone a fianco. Tutti gli eventi passati Luoghi in evidenza Municipio La sede municipale comunale Accesso all'informazione Comunicazione istituzionale Comunicazione politica Leggi di più Palazzo Chigi Museo e centro di molteplici attività culturali Turismo Leggi di più Farmacia comunale Crocifisso Le farmacie comunali offrono servizi sanitari e socio-sanitari essenziali per la comunità. Risposta alle emergenze Leggi di più Tutti i luoghi",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": null,
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ariccia",
+   "ente_codice_istat": "058009",
+   "connector": "html_scrape",
+   "url": "https://comune.ariccia.rm.it/it/menu/vivere-il-comune",
+   "api_url": null,
+   "fetched_at": "2026-08-03T08:37:05.004089Z",
+   "raw_hash": "1e3e97db4aa421aa"
+  },
+  "confidence": "extracted",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il testo non contiene informazioni sui requisiti di accesso a servizi, agevolazioni o bandi."
+  ],
+  "recovery_level": "L1_manuale",
+  "pdfs_linked": 0,
+  "pdfs_opened": 0,
+  "pdfs_skipped": [],
+  "chars_processed": 605,
+  "extraction_seconds": 15.562703042000066,
+  "requirements_recovered": 0
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "html_scrape:058009:d3b241ed01b7d722",
+  "title": "Tutti gli argomenti",
+  "summary": "Argomenti Gli argomenti rispondono a un'esigenza di organizzazione dei contenuti del sito istituzionale per temi e rappresentano le principali categorie di contenuti, informazioni e documenti specifici. In evidenza Accesso all'informazione Assistenza sociale Trasparenza amministrativa Esplora per categoria Accesso all'informazione Vai alla Pagina Acqua Vai alla Pagina Agricoltura Vai alla Pagina A",
+  "body": "Argomenti Gli argomenti rispondono a un'esigenza di organizzazione dei contenuti del sito istituzionale per temi e rappresentano le principali categorie di contenuti, informazioni e documenti specifici. In evidenza Accesso all'informazione Assistenza sociale Trasparenza amministrativa Esplora per categoria Accesso all'informazione Vai alla Pagina Acqua Vai alla Pagina Agricoltura Vai alla Pagina Animale domestico Vai alla Pagina Aria Vai alla Pagina Assistenza agli invalidi Vai alla Pagina Assistenza sociale Vai alla Pagina Associazioni Vai alla Pagina Bilancio Vai alla Pagina Commercio al minuto Vai alla Pagina Commercio all'ingrosso Vai alla Pagina Commercio ambulante Vai alla Pagina Comunicazione istituzionale Vai alla Pagina Comunicazione politica Vai alla Pagina Concorsi Vai alla Pagina Elezioni Vai alla Pagina Energie rinnovabili Vai alla Pagina Estero Vai alla Pagina Foreste Vai alla Pagina Formazione professionale Vai alla Pagina Gestione rifiuti Vai alla Pagina Igiene pubblica Vai alla Pagina Immigrazione Vai alla Pagina Imposte Vai alla Pagina Imprese Vai alla Pagina Inquinamento Vai alla Pagina Integrazione sociale Vai alla Pagina Istruzione Vai alla Pagina Lavoro Vai alla Pagina Matrimonio Vai alla Pagina Mobilità sostenibile Vai alla Pagina Morte Vai alla Pagina Nascita Vai alla Pagina Parcheggi Vai alla Pagina Patrimonio culturale Vai alla Pagina Piano di sviluppo Vai alla Pagina Politica commerciale Vai alla Pagina Polizia Vai alla Pagina Prodotti alimentari Vai alla Pagina Protezione civile Vai alla Pagina Residenza Vai alla Pagina Risposta alle emergenze Vai alla Pagina Sistema giuridico Vai alla Pagina Spazio Verde Vai alla Pagina Sport Vai alla Pagina Sviluppo sostenibile Vai alla Pagina Tassa sui servizi Vai alla Pagina Tempo libero Vai alla Pagina Trasparenza amministrativa Vai alla Pagina Trasporto pubblico Vai alla Pagina Turismo Vai alla Pagina Urbanizzazione Vai alla Pagina",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": null,
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ariccia",
+   "ente_codice_istat": "058009",
+   "connector": "html_scrape",
+   "url": "https://comune.ariccia.rm.it/it/topics",
+   "api_url": null,
+   "fetched_at": "2026-08-03T08:37:25.522222Z",
+   "raw_hash": "d3b241ed01b7d722"
+  },
+  "confidence": "extracted",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il testo non descrive alcun servizio, agevolazione o bando con requisiti di accesso. Si tratta di una lista di argomenti e categorie di informazioni presenti sul sito istituzionale del comune."
+  ],
+  "recovery_level": "L1_manuale",
+  "pdfs_linked": 0,
+  "pdfs_opened": 0,
+  "pdfs_skipped": [],
+  "chars_processed": 1931,
+  "extraction_seconds": 19.867024457955267,
+  "requirements_recovered": 0
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "html_scrape:058009:ca68feaef76595b3",
+  "title": "Avvisi",
+  "summary": "Avvisi Avvisi 31 luglio 2026 Apertura termini presentazione domande per l’ammissione al contributo regionale per la fornitura gratuita (totale o parziale) dei libri di testo/sussidi didattici digitali – A.S. 2026/2027. Apertura termini presentazione domande per l’ammissione al contributo regionale per la fornitura gratuita (totale o parziale) dei libri di testo/sussidi didattici digitali – A.S. 20",
+  "body": "Avvisi Avvisi 31 luglio 2026 Apertura termini presentazione domande per l’ammissione al contributo regionale per la fornitura gratuita (totale o parziale) dei libri di testo/sussidi didattici digitali – A.S. 2026/2027. Apertura termini presentazione domande per l’ammissione al contributo regionale per la fornitura gratuita (totale o parziale) dei libri di testo/sussidi didattici digitali – A.S. 2026/2027. Istruzione Leggi di più Avvisi 30 luglio 2026 Avviso AGLI UTILIZZATORI DI LINEE FERROVIARIE LOCALI Ferrovie Locali Trasporto pubblico Leggi di più Avvisi 30 luglio 2026 Graduatoria Definitiva Asilo Nido - Anno Educativo 2026/2027 Graduatoria rettificata e relativa Determina di approvazione Istruzione Leggi di più Avvisi 28 luglio 2026 Convocazione Consiglio Comunale 29 Luglio 2026 Convocazione Consiglio Comunale 29 Luglio 2026 Comunicazione istituzionale Comunicazione politica Leggi di più Avvisi 22 luglio 2026 Parco Chigi riapre al pubblico: appuntamento da domenica 26 luglio 2026 Riapre Parco Chigi - Zona Monumentale - Ingresso in via dell'uccelliera Patrimonio culturale Leggi di più Avvisi 13 luglio 2026 PUBBLICAZIONE RELAZIONE di INIZIO MANDATO PUBBLICAZIONE RELAZIONE di INIZIO MANDATO Comunicazione istituzionale Leggi di più Avvisi 10 luglio 2026 Arrivano le ecoisole per la raccolta differenziata Consegna delle tessere d’accesso all’ecoisola a partire dal 13 luglio a lunedì 20 luglio 2026 per i condomini di via delle cerquette, via ramo d’oro e via Innocenzo XII. Il ritiro delle tessere è obbligatorio. Igiene pubblica Leggi di più Avvisi 30 giugno 2026 Avviso ai cittadini – OPERATORE EDUCATIVO PER LA COMUNICAZIONE AUMENTATIVA ALTERNATIVA (C.A.A.) – ANNO SCOLASTICO 2026/2027 Avviso ai cittadini – OPERATORE EDUCATIVO PER LA COMUNICAZIONE AUMENTATIVA ALTERNATIVA (C.A.A.) – ANNO SCOLASTICO 2026/2027 Assistenza sociale Leggi di più Avvisi 29 giugno 2026 Bonus Sociale per Disagio Fisico Il bonus elettrico per disagio fisico è una misura volta a ridurre la spesa sostenuta per la fornitura di energia elettrica dai nuclei familiari in cui è presente un componente che si trova in condizioni di disagio fisico. Assistenza sociale Leggi di più Avvisi 24 giugno 2026 Progetto Affido – Un LEGAME in più su cui contare Progetto del Consorzio dei Laghi dedicato all’affido familiare e al sostegno delle famiglie in difficoltà. Assistenza sociale Leggi di più Avvisi 23 giugno 2026 Avviso ai cittadini – OPERATORE EDUCATIVO PER L’AUTONOMIA E LA COMUNICAZIONE PRESSO IL CENTRO ESTIVO COMUNALE Avviso ai cittadini – OPERATORE EDUCATIVO PER L’AUTONOMIA E LA COMUNICAZIONE PRESSO IL CENTRO ESTIVO COMUNALE Assistenza sociale Leggi di più Avvisi 17 giugno 2026 Sospensione Servizio Pubblico Ascensore Inclinato Sospensione Servizio Pubblico Ascensore Inclinato Trasporto pubblico Leggi di più Avvisi 12 giugno 2026 Proclamato il lutto cittadino per la scomparsa del giovane Emanuele De Negri Proclamato il lutto cittadino per la scomparsa del giovane Emanuele De Negri Comunicazione istituzionale Comunicazione politica Morte Leggi di più Avvisi 10 giugno 2026 AVVISO PUBBLICO DI SELEZIONE, PER ESAMI, PER LA COPERTURA DI N.1 POSTO DI DIRIGENTE TECNICO - a TEMPO PIENO E INDETERMINATO – AREA II – “LAVORI PUBBLICI E POLITICHE TERRITORIALI” Avviso di differimento della prova orale Concorsi Lavoro Leggi di più Avvisi 8 giugno 2026 Convocazione Consiglio Comunale per il 15/06/2026 Convocazione Consiglio Comunale per il 15/06/2026 ore 15:00 presso la Sala Maestra di Palazzo Chigi Comunicazione istituzionale Comunicazione politica Leggi di più Categorie Ambiente (19) Anagrafe (5) Commercio (5) Comune (58) Cultura (10) Edilizia (3) Emergenza (3) Giovani (3) Lavoro (51) Mobilità (29) Politica (33) Salute (5) Scuola (27) Servizi (32) Sociale (48) sociali (5) Sport (3) Turismo (6) Viabilità (10)",
+  "kind": "contributo_economico",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": null,
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ariccia",
+   "ente_codice_istat": "058009",
+   "connector": "html_scrape",
+   "url": "https://comune.ariccia.rm.it/it/news?type=3",
+   "api_url": null,
+   "fetched_at": "2026-08-03T08:37:55.073097Z",
+   "raw_hash": "ca68feaef76595b3"
+  },
+  "confidence": "extracted",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il testo non contiene alcun requisito di accesso ai servizi menzionati. Si tratta di una lista di avvisi e comunicazioni di vario tipo, senza alcun riferimento a criteri di eleggibilità per un servizio, un'agevolazione o un bando."
+  ],
+  "recovery_level": "L1_manuale",
+  "pdfs_linked": 0,
+  "pdfs_opened": 0,
+  "pdfs_skipped": [],
+  "chars_processed": 3818,
+  "extraction_seconds": 29.02625995798735,
+  "requirements_recovered": 0
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "html_scrape:058009:c7b0c2039950d5fa",
+  "title": "Parco Chigi riapre al pubblico: appuntamento da domenica 26 luglio 2026",
+  "summary": "Parco Chigi riapre al pubblico: appuntamento da domenica 26 luglio 2026 Riapre Parco Chigi - Zona Monumentale - Ingresso in via dell'uccelliera Data : 22 luglio 2026 Condividi Facebook Twitter Linkedin WhatsApp Telegram Vedi azioni Invia Stampa Ascolta Categorie: Comune Argomenti: Patrimonio culturale Indice della pagina Descrizione A cura di Contenuti correlati Municipium Descrizione Parco Chigi",
+  "body": "Parco Chigi riapre al pubblico: appuntamento da domenica 26 luglio 2026 Riapre Parco Chigi - Zona Monumentale - Ingresso in via dell'uccelliera Data : 22 luglio 2026 Condividi Facebook Twitter Linkedin WhatsApp Telegram Vedi azioni Invia Stampa Ascolta Categorie: Comune Argomenti: Patrimonio culturale Indice della pagina Descrizione A cura di Contenuti correlati Municipium Descrizione Parco Chigi riapre gratuitamente a tutti. L’Amministrazione Comunale informa che, a partire da domenica 26 luglio 2026, Parco Chigi sarà nuovamente aperto e fruibile gratuitamente da tutti i cittadini. Il Parco resterà aperto tutti i giorni, con accesso garantito sia nelle ore mattutine che pomeridiane, consentendo a residenti e visitatori di godere liberamente di uno dei luoghi più suggestivi e rappresentativi del nostro territorio. Parco Chigi sarà fruibile dall’ingresso su Via dell’Uccelliera dal lunedì alla domenica dalle ore 9,00 alle ore 13,00 e dalle ore 15,30 alle ore 18,30 in corrispondenza con il periodo estivo. La riapertura rappresenta un importante momento di restituzione alla comunità di un prezioso patrimonio storico, naturalistico e paesaggistico, offrendo uno spazio dedicato al relax, alle passeggiate e al contatto con la natura. L’Amministrazione invita tutti i cittadini a vivere e valorizzare questo straordinario bene comune, nel rispetto dell’ambiente e delle regole di buona convivenza. Vi aspettiamo domenica 26 luglio per la riapertura di Parco Chigi! Municipium A cura di Servizi informatici Vai alla Pagina Municipium Contenuti correlati Convocazione Consiglio Comunale 29 Luglio 2026 PUBBLICAZIONE RELAZIONE di INIZIO MANDATO Avviso ai cittadini – OPERATORE EDUCATIVO PER L’AUTONOMIA E LA COMUNICAZIONE PRESSO IL CENTRO ESTIVO COMUNALE Sospensione Servizio Pubblico Ascensore Inclinato Proclamato il lutto cittadino per la scomparsa del giovane Emanuele De Negri Sospensione servizio di aperture straordinarie per il rilascio delle carte di identità elettroniche Proclamato il nuovo Sindaco di Ariccia Sospensione Servizio Pubblico Ascensore Inclinato Si informa che, nelle giornate di lunedì 25 e martedì 26 maggio 2026, le pratiche anagrafiche e il rilascio delle CIE saranno sospesi, in quanto il personale sarà interamente impegnato nello svolgimento degli adempimenti elettorali relativi alle elezioni Ultimo aggiornamento: 31 luglio 2026, 08:53",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": null,
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ariccia",
+   "ente_codice_istat": "058009",
+   "connector": "html_scrape",
+   "url": "https://comune.ariccia.rm.it/it/news/riapre-parco-chigi?type=3",
+   "api_url": null,
+   "fetched_at": "2026-08-03T08:38:18.784628Z",
+   "raw_hash": "c7b0c2039950d5fa"
+  },
+  "confidence": "extracted",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il testo non menziona alcun requisito di accesso, né condizioni specifiche per accedere al servizio. L'accesso è gratuito e aperto a tutti.",
+   "Valore per 'figli_minori_required' scartato: il modello non ha saputo indicare la frase di origine nel testo.",
+   "Valore per 'disabilita_required' scartato: il modello non ha saputo indicare la frase di origine nel testo."
+  ],
+  "recovery_level": "L1_manuale",
+  "pdfs_linked": 0,
+  "pdfs_opened": 0,
+  "pdfs_skipped": [],
+  "chars_processed": 2378,
+  "extraction_seconds": 21.79361275001429,
+  "requirements_recovered": 0
+ }
+]

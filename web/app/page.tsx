@@ -3,39 +3,44 @@
  *
  * A citizen arrives here, not at a login screen — identity is an escalation
  * the chat asks for only when it would change the answer (D-09), not the
- * price of admission. This is a server shell on purpose: the motto and
- * footer render with no client JS, and `Chat` is the one interactive island.
+ * price of admission. The hero sits on the same paper as the rest of the site
+ * so the page opens without a seam, and the chat follows directly beneath it.
+ *
+ * Above the title is the one slot that changes as the conversation learns
+ * something: `ProfiloNoto` shows every fact currently being used to compute
+ * answers, and shows nothing until there is one. It used to be a hardcoded
+ * "Comune di Albano Laziale", which announced a residency to visitors who had
+ * never stated one.
+ *
+ * The server shell stays a server shell: `ProfiloProvider` is the client
+ * boundary, and the motto and title still render with no JS of their own.
  */
 
 import Chat from "@/components/Chat";
-import FooterStats from "@/components/FooterStats";
+import ProfiloNoto from "@/components/ProfiloNoto";
+import { ProfiloProvider } from "@/lib/profilo";
 
 export default function Home() {
   return (
-    <div className="stack chat-page">
-      <section className="chat-hero">
-        <p className="eyebrow">Comune di Albano Laziale</p>
-        <h1>Chiedi al tuo comune</h1>
-        <p className="lede">
-          Scrivi la tua domanda in italiano. TreasureIQ la confronta con i
-          servizi che il comune ha davvero pubblicato e risponde solo con
-          quello che i dati confermano — o ti dice, con la stessa chiarezza,
-          quando il comune non lo ha ancora scritto da nessuna parte.
-        </p>
-      </section>
+    <ProfiloProvider>
+      <div>
+        <section className="hero-band">
+          <div className="hero-band__inner">
+            <ProfiloNoto />
+            <h1>Chiedi al tuo comune</h1>
+            <p className="lede">
+              Scrivi la tua domanda in italiano. TreasureIQ la confronta con i
+              servizi che il comune ha davvero pubblicato e risponde solo con
+              quello che i dati confermano — o ti dice, con la stessa chiarezza,
+              quando il comune non lo ha ancora scritto da nessuna parte.
+            </p>
+          </div>
+        </section>
 
-      <Chat />
-
-      <footer className="chat-footer">
-        <p>
-          Preferisci sfogliare tu i dati?{" "}
-          <a href="/opportunita">Vista esperta delle opportunità</a> ·{" "}
-          <a href="/dati">Qualità dei dati dei comuni</a> ·{" "}
-          <a href="/info">Come funziona TreasureIQ</a> ·{" "}
-          <a href="/monitoraggio">Stato del servizio</a>.
-        </p>
-        <FooterStats />
-      </footer>
-    </div>
+        <div className="chat-page">
+          <Chat />
+        </div>
+      </div>
+    </ProfiloProvider>
   );
 }

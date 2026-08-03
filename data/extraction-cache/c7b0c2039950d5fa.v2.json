@@ -1,0 +1,18 @@
+{
+ "isee_max": null,
+ "isee_min": null,
+ "isee_mentioned_without_threshold": false,
+ "eta_min": null,
+ "eta_max": null,
+ "nucleo_min": null,
+ "figli_minori_required": false,
+ "disabilita_required": false,
+ "residenza_required": null,
+ "employment_status": [],
+ "other": [],
+ "quotes": [],
+ "deadline_iso": null,
+ "notes": [
+  "Il testo non menziona alcun requisito di accesso, né condizioni specifiche per accedere al servizio. L'accesso è gratuito e aperto a tutti."
+ ]
+}

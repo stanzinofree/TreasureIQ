@@ -19,6 +19,7 @@ from __future__ import annotations
 import json
 import logging
 import os
+import threading
 from datetime import date, datetime
 from decimal import Decimal
 from functools import lru_cache
@@ -33,8 +34,16 @@ from treasureiq.chat.respond import (
     DEFAULT_COMUNE_ISTAT,
     MAX_MESSAGE_CHARS,
     ChatAnswer,
+    InfoAnswer,
     build_chat_answer,
     compute_recovery_stats,
+)
+from treasureiq.integration import (
+    MODE_LABELS,
+    Ente,
+    cost_lines,
+    diagnosis_lines,
+    load_enti,
 )
 from treasureiq.match.engine import (
     MatchResult,
@@ -48,7 +57,6 @@ from treasureiq.schema import CitizenProfile, Opportunity
 from treasureiq.stats import (
     APP_VERSION,
     AppStats,
-    SourceStatus,
     SystemStatus,
     build_system_status,
     compute_app_stats,
@@ -121,6 +129,22 @@ app.add_middleware(
 serializer = URLSafeSerializer(SECRET, salt="treasureiq-session")
 
 
+#: Hand-curated national/regional layer (D-20). Reachable through every comune's
+#: AGEVOLAZIONE rail alongside the municipal seed — not tied to any single ISTAT
+#: code, so it is loaded once and merged in rather than keyed by comune.
+CURATED_SEED = "nazionale_curated.json"
+
+
+@lru_cache(maxsize=1)
+def load_curated_opportunities() -> tuple[Opportunity, ...]:
+    """Load the hand-curated national/regional records. Cached, same as the seed."""
+    path = SEED_DIR / CURATED_SEED
+    if not path.exists():
+        return ()
+    raw = json.loads(path.read_text("utf-8"))
+    return tuple(Opportunity.model_validate(item) for item in raw)
+
+
 @lru_cache(maxsize=8)
 def load_opportunities(codice_istat: str) -> tuple[Opportunity, ...]:
     """Load one comune's snapshot. Cached — the seed is immutable at runtime."""
@@ -134,7 +158,7 @@ def load_opportunities(codice_istat: str) -> tuple[Opportunity, ...]:
             f"Snapshot mancante per {meta['nome']}. Esegui prima l'ingestion.",
         )
     raw = json.loads(path.read_text("utf-8"))
-    return tuple(Opportunity.model_validate(item) for item in raw)
+    return tuple(Opportunity.model_validate(item) for item in raw) + load_curated_opportunities()
 
 
 # --------------------------------------------------------------------------
@@ -216,6 +240,7 @@ class MatchOut(BaseModel):
     ente: str
     deadline: date | None
     confidence: str
+    livello: str
 
 
 VERDICT_LABELS = {
@@ -247,6 +272,7 @@ def to_match_out(result: MatchResult) -> MatchOut:
         ente=o.source.ente,
         deadline=o.deadline,
         confidence=o.confidence.value,
+        livello=o.livello.value,
     )
 
 
@@ -302,11 +328,32 @@ class SourceStatusOut(BaseModel):
     records: int
 
 
+class SystemComponentOut(BaseModel):
+    nome: str
+    stato: str
+    detail: str
+
+
+class InternalDatumOut(BaseModel):
+    nome: str
+    stato: str
+    value: str
+    detail: str
+
+
 class StatusOut(BaseModel):
-    """`/api/status` — derived from committed seed snapshots, never a live probe."""
+    """`/api/status` — derived from committed seed snapshots, never a live probe.
+
+    Carries the full "Stato sistemi": `sources` (le Fonti) plus `sistemi`
+    (TreasureIQ's own components) and `dati_interni` (headline numbers on
+    what was recovered). The latter two are additive — `overall` and
+    `sources` keep their old shape so existing clients do not break.
+    """
 
     overall: str
     sources: list[SourceStatusOut]
+    sistemi: list[SystemComponentOut] = []
+    dati_interni: list[InternalDatumOut] = []
 
 
 def to_status_out(status: SystemStatus) -> StatusOut:
@@ -321,6 +368,14 @@ def to_status_out(status: SystemStatus) -> StatusOut:
                 records=s.records,
             )
             for s in status.sources
+        ],
+        sistemi=[
+            SystemComponentOut(nome=c.nome, stato=c.stato, detail=c.detail)
+            for c in status.sistemi
+        ],
+        dati_interni=[
+            InternalDatumOut(nome=d.nome, stato=d.stato, value=d.value, detail=d.detail)
+            for d in status.dati_interni
         ],
     )
 
@@ -362,13 +417,100 @@ class ChatIn(BaseModel):
     message: str
 
 
+class DocumentOut(BaseModel):
+    title: str
+    url: str
+
+
+class OfficeOut(BaseModel):
+    nome: str
+    telefono: str | None
+    email: str | None
+    orari: str | None
+
+
+class WebResultOut(BaseModel):
+    title: str
+    url: str
+    non_verificato: bool
+
+
+class InfoOut(BaseModel):
+    """The INFORMAZIONE rail's payload (D-19): document/office/coverage plus
+    the deterministic diagnosis/cost/web blocks `chat.respond` composed from
+    `integration.py` — never a verdict, never criteria, never SPID."""
+
+    document: DocumentOut | None
+    office: OfficeOut | None
+    coverage_count: int
+    diagnosis: list[str]
+    integration_cost: list[str]
+    web_results: list[WebResultOut]
+    # B22 (D-25) — which comune this answer is about, so the segnalazione
+    # counter can be attributed correctly. `None` when no ente was resolved
+    # (nothing to count the segnalazione against).
+    codice_istat: str | None
+    ente: str | None
+
+
+@lru_cache(maxsize=1)
+def _enti_by_urp_nome() -> dict[str, tuple[str, str]]:
+    """Reverse index: URP display name -> (codice_istat, ente name).
+
+    B22's segnalazione counter needs to know which comune an INFORMAZIONE
+    answer concerns, but `InfoAnswer` (chat/respond.py, out of scope for
+    this brief) does not carry it. Each ente's URP name in `data/enti.json`
+    is unique and is exactly what `respond.py` copies into `info.office.nome`
+    — matching on it is an exact lookup, not a guess.
+    """
+    return {
+        ente.urp.nome: (ente.codice_istat, ente.ente)
+        for ente in load_enti().values()
+        if ente.urp is not None
+    }
+
+
+def to_info_out(info: InfoAnswer) -> InfoOut:
+    target = _enti_by_urp_nome().get(info.office.nome) if info.office is not None else None
+    return InfoOut(
+        document=(
+            DocumentOut(title=info.document.title, url=info.document.url)
+            if info.document is not None
+            else None
+        ),
+        office=(
+            OfficeOut(
+                nome=info.office.nome,
+                telefono=info.office.telefono,
+                email=info.office.email,
+                orari=info.office.orari,
+            )
+            if info.office is not None
+            else None
+        ),
+        coverage_count=info.coverage_count,
+        diagnosis=info.diagnosis,
+        integration_cost=info.integration_cost,
+        web_results=[
+            WebResultOut(title=r.title, url=r.url, non_verificato=r.non_verificato)
+            for r in info.web_results
+        ],
+        codice_istat=target[0] if target is not None else None,
+        ente=target[1] if target is not None else None,
+    )
+
+
 class ChatOut(BaseModel):
     reply: str
     topic: str
+    kind: str
     data_gap: str | None
     needs_clarification: bool
     spid_required: bool
     spid_reason: str | None
+    access_mode: str | None
+    citizen_effort: int
+    info: InfoOut | None
     matches: list[MatchOut]
     cost: CostOut
 
@@ -469,6 +611,108 @@ def to_recovery_out(report: ComuneRecovery) -> RecoveryOut:
             for r in report.records
         ],
     )
+
+
+class IntegrationOut(BaseModel):
+    """Per-ente integration cost + access mode (D-21), for the `/dati` page.
+
+    `diagnosis` and `integration_cost` are the SAME deterministic sentences
+    `integration.py`'s `diagnosis_lines`/`cost_lines` compose for the chat's
+    INFORMAZIONE rail (D-24) — rendered here, not re-authored, so the two
+    surfaces never say something different about the same measurement.
+    `datasets_on_dati_gov` stays `None` where it was never probed (Marino):
+    the client must render that as "non misurato", never as `0` (D-16).
+    """
+
+    ente: str
+    codice_istat: str
+    access_mode: str
+    label: str
+    probe_dated: date
+    probe_method: str
+    diagnosis: list[str]
+    integration_cost: list[str]
+    datasets_on_dati_gov: int | None
+    benchmark_342: int | None
+    segnalazioni_count: int
+
+
+def to_integration_out(ente: Ente) -> IntegrationOut:
+    counts = _read_segnalazioni()
+    return IntegrationOut(
+        ente=ente.ente,
+        codice_istat=ente.codice_istat,
+        access_mode=ente.access_mode.value,
+        label=MODE_LABELS[ente.access_mode],
+        probe_dated=ente.probe.dated,
+        probe_method=ente.probe.method,
+        diagnosis=diagnosis_lines(ente),
+        integration_cost=cost_lines(ente),
+        datasets_on_dati_gov=ente.datasets_on_dati_gov,
+        benchmark_342=ente.calendario_raccolta_open_data_comuni,
+        segnalazioni_count=counts.get(ente.codice_istat, 0),
+    )
+
+
+# --------------------------------------------------------------------------
+# Segnalazioni (B22, D-25) — the form generates a request, it does not send
+# one. This is only ever an anonymous per-comune counter: no IP, no session,
+# no citizen text is ever stored here.
+# --------------------------------------------------------------------------
+
+SEGNALAZIONI_PATH = DATA_DIR / "segnalazioni.json"
+_segnalazioni_lock = threading.Lock()
+_segnalazioni_memory: dict[str, int] = {}
+_segnalazioni_memory_only = False
+
+
+def _read_segnalazioni() -> dict[str, int]:
+    if _segnalazioni_memory_only:
+        return dict(_segnalazioni_memory)
+    if not SEGNALAZIONI_PATH.exists():
+        return {}
+    try:
+        return json.loads(SEGNALAZIONI_PATH.read_text("utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+
+
+def _increment_segnalazione(codice_istat: str) -> int:
+    """Increment the counter for one comune and persist it.
+
+    Read-modify-write is serialized by `_segnalazioni_lock`; the write
+    itself is atomic (temp file + `os.replace` on the same filesystem), so
+    concurrent requests cannot corrupt `data/segnalazioni.json`.
+
+    Falls back to an in-memory counter, with a logged warning, if the data
+    directory turns out to be read-only (e.g. a `./data:/data:ro` compose
+    mount) — the count still works for the running process, it just does
+    not survive a restart. The bare-metal demo on :8010 has a writable
+    `data/`, where it does.
+    """
+    global _segnalazioni_memory_only
+    with _segnalazioni_lock:
+        if _segnalazioni_memory_only:
+            _segnalazioni_memory[codice_istat] = _segnalazioni_memory.get(codice_istat, 0) + 1
+            return _segnalazioni_memory[codice_istat]
+
+        counts = _read_segnalazioni()
+        counts[codice_istat] = counts.get(codice_istat, 0) + 1
+        try:
+            tmp_path = SEGNALAZIONI_PATH.with_suffix(".json.tmp")
+            tmp_path.write_text(json.dumps(counts), encoding="utf-8")
+            os.replace(tmp_path, SEGNALAZIONI_PATH)
+        except OSError:
+            logger.warning(
+                "data dir not writable, falling back to in-memory segnalazioni counter"
+            )
+            _segnalazioni_memory_only = True
+            _segnalazioni_memory.update(counts)
+        return counts[codice_istat]
+
+
+class SegnalazioneIn(BaseModel):
+    codice_istat: str
 
 
 # --------------------------------------------------------------------------
@@ -578,6 +822,19 @@ def recovery_all() -> list[RecoveryOut]:
     return [recovery(istat) for istat in COMUNI]
 
 
+@app.get("/api/integration", response_model=list[IntegrationOut])
+def integration() -> list[IntegrationOut]:
+    """Public — per-ente access mode + integration cost (D-21).
+
+    `load_enti()` returns the cached snapshot of `data/enti.json`, which is
+    committed, static data mounted read-only at runtime — refresh it by
+    re-running ingestion, never by editing the file under the API. The route
+    holds no reference of its own, so a restart picks up a refreshed snapshot
+    without this module changing.
+    """
+    return [to_integration_out(ente) for ente in load_enti().values()]
+
+
 @app.get("/api/stats", response_model=StatsOut)
 def stats() -> StatsOut:
     """Public headline numbers for the landing page — no session required.
@@ -623,6 +880,25 @@ def comune_nearby(lat: float, lon: float) -> NearbyOut:
     )
 
 
+@app.post("/api/segnalazioni")
+def create_segnalazione(body: SegnalazioneIn) -> dict[str, int]:
+    """Record that a citizen generated an open-data request for one comune.
+
+    Anonymous by construction (D-25): the only input accepted is the ISTAT
+    code, nothing else is read from the request body or from `request`
+    itself — no IP, no cookie, no citizen text.
+    """
+    if body.codice_istat not in load_enti():
+        raise HTTPException(404, f"Comune {body.codice_istat} non disponibile")
+    return {body.codice_istat: _increment_segnalazione(body.codice_istat)}
+
+
+@app.get("/api/segnalazioni")
+def get_segnalazioni() -> dict[str, int]:
+    """Public per-comune counter — itself the published fact D-25 asks for."""
+    return _read_segnalazioni()
+
+
 @app.post("/api/chat", response_model=ChatOut)
 async def chat(body: ChatIn, request: Request) -> ChatOut:
     """Anonymous-by-default chat over Albano public data.
@@ -661,10 +937,16 @@ async def chat(body: ChatIn, request: Request) -> ChatOut:
     return ChatOut(
         reply=answer.reply,
         topic=answer.topic.value,
+        kind=answer.kind.value,
         data_gap=answer.data_gap,
         needs_clarification=answer.needs_clarification,
         spid_required=answer.spid_required,
         spid_reason=answer.spid_reason,
+        access_mode=answer.access_mode,
+        # AGEVOLAZIONE answers never set this (D-29 is an INFORMAZIONE-rail
+        # concept there); 0 residual actions, not a fabricated estimate.
+        citizen_effort=answer.citizen_effort or 0,
+        info=to_info_out(answer.info) if answer.info is not None else None,
         matches=[to_match_out(r) for r in answer.matches],
         cost=CostOut(
             recovery_seconds_total=stats.seconds_total,

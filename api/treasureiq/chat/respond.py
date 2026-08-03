@@ -32,14 +32,32 @@ criterion at all. The model never sets `data_gap` itself.
 from __future__ import annotations
 
 import logging
+import re
 from dataclasses import dataclass, field
 from datetime import date
 from decimal import Decimal
 
 from pydantic import BaseModel, Field
 
-from treasureiq.chat.intent import ChatIntent, Topic, TOPIC_KEYWORDS, extract_intent
+from treasureiq.chat.intent import (
+    AMBIGUOUS_ROLE_TOPICS,
+    INFORMATIONAL_BY_NATURE_TOPICS,
+    TOPIC_KEYWORDS,
+    BeneficiaryRole,
+    ChatIntent,
+    QuestionKind,
+    Topic,
+    extract_intent,
+)
 from treasureiq.extract.providers import LLMProvider, load_provider
+from treasureiq.integration import (
+    AccessMode,
+    Ente,
+    cost_lines,
+    diagnosis_lines,
+    load_enti,
+    load_websearch,
+)
 from treasureiq.match.engine import (
     CriterionState,
     MatchResult,
@@ -92,15 +110,71 @@ class RecoveryStats:
     levels: dict[str, int] = field(default_factory=dict)
 
 
+#: How many web results ride along in one INFORMAZIONE answer (D-28).
+MAX_WEB_RESULTS_IN_REPLY = 3
+
+#: Deterministic query fragment per topic, fed to `integration.load_websearch`
+#: only after every institutional source is exhausted (D-28). Keyed by topic
+#: rather than free text so the query a comune's own INFORMAZIONE answer runs
+#: is auditable the same way `TOPIC_KEYWORDS` is: no model chooses it. A
+#: topic with no entry here simply never triggers a web lookup — `None` is
+#: never fabricated into a query.
+WEBSEARCH_QUERY_FRAGMENTS: dict[Topic, str] = {
+    Topic.RIFIUTI: "calendario raccolta vetro",
+}
+
+
+@dataclass
+class DocumentAnswer:
+    title: str
+    url: str
+
+
+@dataclass
+class OfficeAnswer:
+    nome: str
+    telefono: str | None
+    email: str | None
+    orari: str | None
+
+
+@dataclass
+class WebResultAnswer:
+    title: str
+    url: str
+    non_verificato: bool = True
+
+
+@dataclass
+class InfoAnswer:
+    """Everything an INFORMAZIONE answer carries besides its reply text —
+    document, office, coverage, and the deterministic diagnosis/cost/web
+    blocks composed by `integration.py` (D-24, D-28). No verdict, no
+    criteria, no SPID field exists on this type at all (D-19): the shape
+    itself makes the AGEVOLAZIONE-only fields impossible to smuggle in.
+    """
+
+    document: DocumentAnswer | None
+    office: OfficeAnswer | None
+    coverage_count: int
+    diagnosis: list[str]
+    integration_cost: list[str]
+    web_results: list[WebResultAnswer]
+
+
 @dataclass
 class ChatAnswer:
     reply: str
     topic: Topic
+    kind: QuestionKind
     data_gap: str | None
     needs_clarification: bool
     matches: list[MatchResult]
     spid_required: bool
     spid_reason: str | None
+    access_mode: str | None = None
+    citizen_effort: int | None = None
+    info: InfoAnswer | None = None
 
 
 def _resolve_comune(*, hint: str | None) -> tuple[str | None, str | None]:
@@ -167,14 +241,56 @@ def _is_residency_decisive(result: MatchResult) -> bool:
     return not other_unresolved and not result.opportunity.requirements.other
 
 
-def _search_opportunities(*, records: list[Opportunity], topic: Topic) -> list[Opportunity]:
+def _backfill_ambiguous_topic(*, intent: ChatIntent) -> ChatIntent:
+    """Recover the topic for a reply to an ambiguous-role clarifying question
+    (D-19 round 2) that, on its own, carries no topic word at all — e.g.
+    "per me, nel mio comune Albano Laziale" answering "è per te o vuoi fare
+    volontariato?" This endpoint is stateless (no dialogue history), so
+    `extract_intent` sees only that second message and correctly falls back
+    to `SCONOSCIUTO` there being no topic word in it.
+
+    This is not a second classification mechanism: it never inspects the
+    message text. It only uses `AMBIGUOUS_ROLE_TOPICS`, a closed, already
+    deterministic mapping — if `beneficiary_role` is confirmed (R-9: only
+    ever set from a marker in the citizen's own text, see
+    `intent._confirm_beneficiary_role`) and exactly one topic in that
+    mapping uses that role, the topic must be that one, because a role only
+    exists in this schema for the topic that asked for it. Never fires when
+    the role maps to more than one topic — no speculative disambiguation.
+    """
+    if intent.topic is not Topic.SCONOSCIUTO or intent.beneficiary_role is None:
+        return intent
+    matching_topics = [
+        topic
+        for topic, roles in AMBIGUOUS_ROLE_TOPICS.items()
+        if intent.beneficiary_role in roles
+    ]
+    if len(matching_topics) != 1:
+        return intent
+    return intent.model_copy(update={"topic": matching_topics[0]})
+
+
+def _search_opportunities(
+    *,
+    records: list[Opportunity],
+    topic: Topic,
+    role: BeneficiaryRole | None = None,
+) -> list[Opportunity]:
     """Deterministic keyword search — the retrieval step, not the model.
 
     Plain lowercase substring matching over title/summary/body. This is what
     decides which opportunities are even worth handing to `match/engine.py`;
     it never decides eligibility.
+
+    `role` only matters for the small set of topics in `AMBIGUOUS_ROLE_TOPICS`
+    (D-19 round 2): a known role there picks a different, narrower keyword
+    set than `TOPIC_KEYWORDS`, because the recipient and the volunteer read
+    different documents. Every other topic ignores `role` entirely — the
+    default keyword set is unaffected, so the AGEVOLAZIONE rail (which never
+    passes `role`) and any non-ambiguous topic behave exactly as before.
     """
-    keywords = TOPIC_KEYWORDS.get(topic, ())
+    role_keywords = AMBIGUOUS_ROLE_TOPICS.get(topic, {}).get(role) if role is not None else None
+    keywords = role_keywords if role_keywords is not None else TOPIC_KEYWORDS.get(topic, ())
     if not keywords:
         return []
     hits: list[Opportunity] = []
@@ -247,6 +363,304 @@ async def _verbalise(*, results: list[MatchResult], provider: LLMProvider) -> st
         return fallback
 
 
+def _bare_ente_name(ente: Ente) -> str:
+    """`ente.ente` minus its "Comune di " prefix, for query building and
+    matching a citizen's free-text comune name."""
+    return ente.ente.removeprefix("Comune di ").strip()
+
+
+#: Italian toponym prefixes that turn a bare ente name into a *different*
+#: place — "Marino" is a comune, "San Marino" is a different country.
+#: A token-boundary match alone does not catch this ("\bMarino\b" still
+#: matches inside "San Marino"), so a bare-name match immediately preceded
+#: by one of these is rejected rather than accepted (see
+#: `_resolve_informazione_ente`).
+_TOPONYM_PREFIXES = {"san", "santa", "sant"}
+
+#: Short forms a citizen realistically types, beyond the ente's full bare
+#: name (which `_resolve_informazione_ente` always tries too). Curated by
+#: hand, not derived, because a generic "first token" rule would also match
+#: on "Fonte" alone — a common Italian noun ("fonte di finanziamento") that
+#: must NOT resolve to Fonte Nuova. Adding a 6th ente means deciding this by
+#: hand as well; the full-name fallback still works with no entry here.
+_ENTE_ALIAS_TOKENS: dict[str, tuple[tuple[str, ...], ...]] = {
+    "058003": (("albano",),),
+    "058043": (("genzano",),),
+}
+
+
+def _match_token_sequence(*, tokens: list[str], sequence: tuple[str, ...]) -> bool:
+    """Whether `sequence` occurs in `tokens` as a contiguous, whole-token
+    run, and is not itself the tail of a longer Italian toponym (see
+    `_TOPONYM_PREFIXES`)."""
+    span = len(sequence)
+    if span == 0:
+        return False
+    for start in range(len(tokens) - span + 1):
+        if tuple(tokens[start : start + span]) != sequence:
+            continue
+        preceding = tokens[start - 1] if start > 0 else None
+        if preceding in _TOPONYM_PREFIXES:
+            continue
+        return True
+    return False
+
+
+def _resolve_informazione_ente(*, hint: str | None) -> Ente | None:
+    """Match a citizen-stated comune name against every ente TreasureIQ has
+    an integration record for (`data/enti.json`), not only Albano.
+
+    Unlike `_resolve_comune` (used on the AGEVOLAZIONE rail, where a wrong
+    match could feed a residency criterion an unearned verdict), this rail
+    never runs `match/engine.py` and only ever composes typed document/
+    office/cost/diagnosis fields (D-19) — so naming a comune this chat has
+    no eligibility seed for (e.g. Ariccia) is still safe to resolve.
+
+    Matching is whole-token, not substring: `bare in needle` used to also
+    fire on any hint that merely *contained* a short ente name as a
+    fragment (e.g. a surname like "Marinoni"), and a naive word-boundary
+    regex would still fire on "San Marino" as if the citizen meant the
+    comune of Marino. Both are rejected here.
+
+    Returns `None`, never a guess, when the hint is absent or matches
+    nothing — the caller must treat `None` as "comune not established", and
+    must NOT substitute Albano as if the citizen had said it (R-9): failing
+    to resolve is a safe, cautious outcome; resolving wrongly is a
+    confident, false one.
+    """
+    if not hint:
+        return None
+    tokens = re.findall(r"[\w']+", hint.casefold())
+    for ente in load_enti().values():
+        full_name = tuple(_bare_ente_name(ente).casefold().split())
+        sequences = (*_ENTE_ALIAS_TOKENS.get(ente.codice_istat, ()), full_name)
+        if any(_match_token_sequence(tokens=tokens, sequence=seq) for seq in sequences if seq):
+            return ente
+    return None
+
+
+def _websearch_query(*, topic: Topic, ente: Ente) -> str | None:
+    """The deterministic query for the `M6_web_aperto` rung (D-28), or
+    `None` when this topic has no query template — a topic without one
+    simply never triggers a web lookup, it is never guessed."""
+    fragment = WEBSEARCH_QUERY_FRAGMENTS.get(topic)
+    if fragment is None:
+        return None
+    return f"{fragment} {_bare_ente_name(ente)}"
+
+
+def _citizen_effort(
+    *,
+    document: DocumentAnswer | None,
+    office: OfficeAnswer | None,
+    web_results: list[WebResultAnswer],
+) -> int:
+    """D-29: a plain count of concrete residual actions left to the citizen
+    — never estimated, never combined with `recovery_cost`. One action per
+    unverified link to check, one for a document to read, one for an office
+    actually reachable (a URP entry with neither phone nor email, like Fonte
+    Nuova's, is not an action the citizen can take)."""
+    effort = len(web_results)
+    if document is not None:
+        effort += 1
+    if office is not None and (office.telefono or office.email):
+        effort += 1
+    return effort
+
+
+def _compose_informazione_reply(
+    *,
+    document: DocumentAnswer | None,
+    office: OfficeAnswer | None,
+    coverage_count: int,
+    diagnosis: list[str],
+    integration_cost: list[str],
+    web_results: list[WebResultAnswer],
+) -> str:
+    """Every sentence here is composed from typed fields (D-24): there is no
+    verbalisation step on this rail at all, so the D-24 invariant — no cost
+    or diagnosis sentence ever reaches a model — holds by construction, not
+    by discipline at a call site.
+    """
+    parts: list[str] = []
+    if document is not None:
+        parts.append(
+            f"Ho trovato un documento su questo argomento: {document.title} — "
+            f"{document.url}."
+        )
+    elif coverage_count == 0 and not web_results:
+        parts.append("Il Comune non ha pubblicato un documento specifico su questo argomento.")
+    if office is not None:
+        contatti = ", ".join(v for v in (office.telefono, office.email) if v)
+        if contatti:
+            parts.append(f"Puoi rivolgerti a {office.nome} ({contatti}).")
+        else:
+            parts.append(f"Puoi rivolgerti a {office.nome}, che non pubblica un recapito diretto.")
+    parts.extend(diagnosis)
+    parts.extend(integration_cost)
+    if web_results:
+        parts.append(
+            "Non risulta una fonte istituzionale per questo dato; ho trovato questi "
+            "risultati sul web aperto, non verificati:"
+        )
+        parts.extend(f"- {result.title}: {result.url}" for result in web_results)
+    return " ".join(parts)
+
+
+def _build_informazione_answer(
+    *, intent: ChatIntent, records: list[Opportunity]
+) -> ChatAnswer:
+    """The INFORMAZIONE rail (D-19): document + office + coverage + cost,
+    never a verdict, never criteria, never SPID. No call into
+    `match/engine.py` anywhere in this function.
+
+    Three distinct outcomes for the comune, none of which silently
+    substitutes Albano for an unconfirmed one (R-9): the citizen named a
+    comune this chat recognises (proceed below); the citizen named one it
+    does not recognise (say so, point at their own URP, offer nothing
+    Albano-specific); or the citizen named none at all (ask, rather than
+    presenting Albano's own office/cost as if it were theirs).
+    """
+    ente = _resolve_informazione_ente(hint=intent.comune_hint)
+
+    if intent.topic in AMBIGUOUS_ROLE_TOPICS and intent.beneficiary_role is None:
+        # This topic conflates two citizens under one word (D-19 round 2):
+        # the answer a recipient needs and the answer a volunteer needs come
+        # from different documents. A question we ask without using it is a
+        # question for show — so this asks only for the topics where the
+        # role actually changes `_search_opportunities`' keyword set (see
+        # `AMBIGUOUS_ROLE_TOPICS`), never for every topic. Bundled with the
+        # comune question in the same turn because this endpoint is
+        # stateless and single-turn (D-09): there is no second chance to ask.
+        return ChatAnswer(
+            reply=(
+                "Per rispondere con precisione mi servono due cose: il comune a cui ti "
+                "riferisci e se questo servizio è per te o se vuoi offrirti come "
+                "volontario per aiutare altre persone."
+            ),
+            topic=intent.topic,
+            kind=QuestionKind.INFORMAZIONE,
+            data_gap=None,
+            needs_clarification=True,
+            matches=[],
+            spid_required=False,
+            spid_reason=None,
+            access_mode=None,
+            citizen_effort=0,
+            info=None,
+        )
+
+    if ente is None and not intent.comune_hint:
+        return ChatAnswer(
+            reply=(
+                "Per rispondere con precisione mi serve sapere il tuo comune di "
+                "residenza: a quale comune ti riferisci?"
+            ),
+            topic=intent.topic,
+            kind=QuestionKind.INFORMAZIONE,
+            data_gap=None,
+            needs_clarification=True,
+            matches=[],
+            spid_required=False,
+            spid_reason=None,
+            access_mode=None,
+            citizen_effort=0,
+            info=None,
+        )
+
+    if ente is None:
+        return ChatAnswer(
+            reply=(
+                f"Il comune che hai indicato ({intent.comune_hint}) non è tra quelli "
+                "che questo sistema conosce: non posso verificarne l'ufficio o i dati. "
+                "Contatta direttamente l'URP del tuo comune per questa informazione."
+            ),
+            topic=intent.topic,
+            kind=QuestionKind.INFORMAZIONE,
+            data_gap="comune_sconosciuto",
+            needs_clarification=False,
+            matches=[],
+            spid_required=False,
+            spid_reason=None,
+            access_mode=None,
+            citizen_effort=1,
+            info=None,
+        )
+
+    candidates = (
+        _search_opportunities(
+            records=records, topic=intent.topic, role=intent.beneficiary_role
+        )
+        if ente.codice_istat == DEFAULT_COMUNE_ISTAT
+        else []
+    )
+    document = (
+        DocumentAnswer(title=candidates[0].title, url=str(candidates[0].source.url))
+        if candidates
+        else None
+    )
+    office = (
+        OfficeAnswer(
+            nome=ente.urp.nome,
+            telefono=ente.urp.telefono,
+            email=ente.urp.email,
+            orari=ente.urp.orari,
+        )
+        if ente.urp is not None
+        else None
+    )
+    diagnosis = diagnosis_lines(ente)
+    integration_cost = cost_lines(ente)
+
+    web_results: list[WebResultAnswer] = []
+    access_mode = ente.access_mode.value
+    institutional_exhausted = not candidates and ente.access_mode in (
+        AccessMode.M4_CONNETTORE,
+        AccessMode.M5_NESSUNO,
+    )
+    if institutional_exhausted:
+        query = _websearch_query(topic=intent.topic, ente=ente)
+        if query is not None:
+            entry = load_websearch(query)
+            if entry is not None and entry.results:
+                web_results = [
+                    WebResultAnswer(title=result.title, url=result.url)
+                    for result in entry.results[:MAX_WEB_RESULTS_IN_REPLY]
+                ]
+                access_mode = AccessMode.M6_WEB_APERTO.value
+
+    coverage_count = len(candidates)
+    reply = _compose_informazione_reply(
+        document=document,
+        office=office,
+        coverage_count=coverage_count,
+        diagnosis=diagnosis,
+        integration_cost=integration_cost,
+        web_results=web_results,
+    )
+
+    return ChatAnswer(
+        reply=reply,
+        topic=intent.topic,
+        kind=QuestionKind.INFORMAZIONE,
+        data_gap=None if (document is not None or web_results) else "not_published",
+        needs_clarification=False,
+        matches=[],
+        spid_required=False,
+        spid_reason=None,
+        access_mode=access_mode,
+        citizen_effort=_citizen_effort(document=document, office=office, web_results=web_results),
+        info=InfoAnswer(
+            document=document,
+            office=office,
+            coverage_count=coverage_count,
+            diagnosis=diagnosis,
+            integration_cost=integration_cost,
+            web_results=web_results,
+        ),
+    )
+
+
 def compute_recovery_stats(
     *, comune_records: list[Opportunity], answer_records: list[Opportunity]
 ) -> RecoveryStats:
@@ -307,6 +721,15 @@ async def build_chat_answer(
     """
     provider: LLMProvider = load_provider(role="chat")
     intent = await extract_intent(message=message, provider=provider)
+    intent = _backfill_ambiguous_topic(intent=intent)
+
+    # R-8/D-19: `_backfill_ambiguous_topic` can restore a topic (VOLONTARIATO,
+    # RIFIUTI) that `extract_intent` classified as SCONOSCIUTO and therefore
+    # never saw the informational override for. Re-assert it here so an
+    # informational-by-nature topic can never fall through to the engine and
+    # produce a verdict, whatever `kind` the model emitted on the bare reply.
+    if intent.topic in INFORMATIONAL_BY_NATURE_TOPICS:
+        intent = intent.model_copy(update={"kind": QuestionKind.INFORMAZIONE})
 
     if intent.topic is Topic.SCONOSCIUTO:
         return ChatAnswer(
@@ -317,12 +740,16 @@ async def build_chat_answer(
                 "all'ufficio competente."
             ),
             topic=intent.topic,
+            kind=intent.kind,
             data_gap="none_found",
             needs_clarification=True,
             matches=[],
             spid_required=False,
             spid_reason=None,
         )
+
+    if intent.kind is QuestionKind.INFORMAZIONE:
+        return _build_informazione_answer(intent=intent, records=records)
 
     active_profile = profile or _profile_from_slots(intent=intent)
     candidates = _search_opportunities(records=records, topic=intent.topic)
@@ -336,6 +763,7 @@ async def build_chat_answer(
                 "un riscontro diretto."
             ),
             topic=intent.topic,
+            kind=QuestionKind.AGEVOLAZIONE,
             data_gap="not_published",
             needs_clarification=False,
             matches=[],
@@ -365,6 +793,7 @@ async def build_chat_answer(
         return ChatAnswer(
             reply="In quale comune vivi?",
             topic=intent.topic,
+            kind=QuestionKind.AGEVOLAZIONE,
             data_gap=None,
             needs_clarification=True,
             matches=[],
@@ -387,6 +816,7 @@ async def build_chat_answer(
                 "rivolgiti all'URP del Comune di Albano Laziale."
             ),
             topic=intent.topic,
+            kind=QuestionKind.AGEVOLAZIONE,
             data_gap=None,
             needs_clarification=False,
             matches=top,
@@ -402,6 +832,7 @@ async def build_chat_answer(
         return ChatAnswer(
             reply=_fallback_reply(results=top),
             topic=intent.topic,
+            kind=QuestionKind.AGEVOLAZIONE,
             data_gap="not_published",
             needs_clarification=False,
             matches=top,
@@ -422,6 +853,7 @@ async def build_chat_answer(
     return ChatAnswer(
         reply=reply,
         topic=intent.topic,
+        kind=QuestionKind.AGEVOLAZIONE,
         data_gap=None,
         needs_clarification=False,
         matches=top,

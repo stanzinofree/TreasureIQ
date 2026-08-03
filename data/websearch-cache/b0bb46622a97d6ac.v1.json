@@ -1,0 +1,19 @@
+{
+ "query": "calendario raccolta vetro Ariccia",
+ "provider": "searxng",
+ "fetched_at": "2026-08-03T06:20:30.388158Z",
+ "results": [
+  {
+   "title": "Calendario raccolta differenziata - Aricicla",
+   "url": "https://www.aricicla.com/calendario"
+  },
+  {
+   "title": "Calendari raccolta rifiuti - Comune di Ariccia",
+   "url": "https://www.comune.ariccia.rm.it/it/garbage-calendars"
+  },
+  {
+   "title": "Gestione rifiuti - Comune di Ariccia",
+   "url": "https://comune.ariccia.rm.it/it/topics/gestione-rifiuti"
+  }
+ ]
+}

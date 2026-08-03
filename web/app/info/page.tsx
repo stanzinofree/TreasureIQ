@@ -154,7 +154,9 @@ export default async function Info() {
           Vuoi vedere la misura completa, comune per comune?{" "}
           <a href="/dati">Qualità dei dati</a> mostra il punteggio, cosa manca
           e — quando i dati sono stati recuperati da un testo libero — quanto
-          è costato in tempo di calcolo capire cosa c&apos;era scritto.
+          è costato in tempo di calcolo capire cosa c&apos;era scritto. Se ti
+          interessa il perché dietro tutto questo, leggi il{" "}
+          <a href="/manifesto">manifesto del progetto</a>.
         </p>
       </section>
     </div>

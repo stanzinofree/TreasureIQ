@@ -60,3 +60,19 @@ services:
       api:
         condition: service_healthy
     restart: unless-stopped
+
+  # Ingestion-time only (D-28/R-15): the web-search fallback that backs the
+  # `M6_web_aperto` readiness rung. Behind `profiles: ["ingest"]` so a plain
+  # `docker compose up` never starts it — no network call at runtime is a
+  # property of this file, not a convention someone can forget to follow.
+  # Run it deliberately with:
+  #   docker compose --profile ingest up -d searxng
+  #   python -m treasureiq.ingest.websearch "<query>" --write
+  searxng:
+    image: searxng/searxng:latest
+    profiles: ["ingest"]
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./searxng:/etc/searxng:ro
+    restart: "no"

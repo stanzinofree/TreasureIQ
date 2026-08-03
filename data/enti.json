@@ -1,0 +1,161 @@
+[
+  {
+    "ente": "Comune di Albano Laziale",
+    "codice_istat": "058003",
+    "access_mode": "M2_prosa_api",
+    "probe": {
+      "method": "HTTP GET diretto su /wp-json/wp/v2/types",
+      "dated": "2026-08-03",
+      "dettagli": {
+        "wp_rest": "live",
+        "post_type_esposti": "posts, pages, servizi, pnrr, unita_organizzative",
+        "post_type_assenti": "bandi, concorsi"
+      }
+    },
+    "dati_gov_probe": {
+      "method": "dati.gov.it CKAN /opendata/api/3/action/package_search?q=holder_name:\"Comune di Albano Laziale\"",
+      "dated": "2026-08-02",
+      "dettagli": {}
+    },
+    "datasets_on_dati_gov": 0,
+    "calendario_raccolta_open_data_comuni": 342,
+    "urp": {
+      "nome": "URP — Ufficio Relazioni con il Pubblico",
+      "telefono": "0693295224 / 0693295226",
+      "email": "urp@comune.albanolaziale.rm.it",
+      "orari": "lun-ven 8:30–11:00; lun e gio anche 15:30–17:30",
+      "fonte": "sito del Comune (comune.albanolaziale.rm.it/urp)",
+      "verificato_il": "2026-08-03"
+    }
+  },
+  {
+    "ente": "Comune di Fonte Nuova",
+    "codice_istat": "058122",
+    "access_mode": "M2_prosa_api",
+    "probe": {
+      "method": "HTTP GET diretto su /wp-json/wp/v2/servizi",
+      "dated": "2026-08-03",
+      "dettagli": {
+        "wp_rest": "live",
+        "servizi_pubblicati": "34 — il più alto della provincia"
+      }
+    },
+    "dati_gov_probe": {
+      "method": "dati.gov.it CKAN /opendata/api/3/action/package_search?q=holder_name:\"Comune di Fonte Nuova\"",
+      "dated": "2026-08-02",
+      "dettagli": {}
+    },
+    "datasets_on_dati_gov": 5,
+    "calendario_raccolta_open_data_comuni": 342,
+    "urp": {
+      "nome": "URP — Ufficio Relazioni con il Pubblico (nessun recapito pubblicato)",
+      "pagina": "https://comune.fontenuova.rm.it/amministrazione/unita_organizzativa/urp-ufficio-relazioni-con-il-pubblico/",
+      "fonte": "sito del Comune, wp-json wp/v2/unita_organizzative?search=urp (comune.fontenuova.rm.it): la scheda URP esiste e non espone telefono ne email",
+      "verificato_il": "2026-08-03"
+    }
+  },
+  {
+    "ente": "Comune di Ariccia",
+    "codice_istat": "058009",
+    "access_mode": "M4_connettore",
+    "probe": {
+      "method": "HTTP GET diretto su /wp-json e /it/",
+      "dated": "2026-08-03",
+      "dettagli": {
+        "wp_json": "410 Gone",
+        "it_path": "200, ~127 KB, espone /it/menu/servizi",
+        "calendario_raccolta_rifiuti": "pubblicato su aricicla.com (TeknoService, gestore privato), SPA Wix: /calendario e / restituiscono HTML identico, senza wix-warmup-data e senza alcuna stringa di giorno/vetro — solo link, mai ingerito"
+      }
+    },
+    "dati_gov_probe": {
+      "method": "dati.gov.it CKAN /opendata/api/3/action/package_search?q=holder_name:\"Comune di Ariccia\"",
+      "dated": "2026-08-02",
+      "dettagli": {}
+    },
+    "datasets_on_dati_gov": 0,
+    "calendario_raccolta_open_data_comuni": 342,
+    "urp": {
+      "nome": "Centralino comunale — nessun recapito URP dedicato individuato",
+      "telefono": "06934851",
+      "orari": "tutti i giorni 8:30–11:00; lunedì e giovedì anche 15:30–17:00",
+      "fonte": "sito del Comune, pagina Ufficio politiche abitative — stesso centralino (comune.ariccia.rm.it/it/unita_organizzative/21515)",
+      "verificato_il": "2026-08-03"
+    },
+    "integration_cost": {
+      "misurato_il": "2026-08-03",
+      "metodo": "esecuzione reale di `python -m treasureiq.ingest --comune 058009 --write`, connettore HTML generico (api/treasureiq/ingest/html_pages.py), estrazione quote-gated con lo stesso RequirementsExtractor del percorso API",
+      "connettore_righe": 317,
+      "connettore_pattern": 3,
+      "pagine_candidate": 83,
+      "pagine_lette": 15,
+      "pagine_scartate_dal_limite": 68,
+      "copertura_portale_pct": 18,
+      "secondi": 121.2,
+      "record_recuperati": 15,
+      "recovery_level": {
+        "L1_manuale": 13,
+        "L2_estratto": 2
+      },
+      "requisiti_popolati": 17,
+      "requisiti_con_citazione_verbatim": 2,
+      "requisiti_strutturali_residenza": 15,
+      "valori_respinti_dal_quote_gate": 1,
+      "readiness_risultante": 14.2,
+      "nota": "Il gate D-05 ha respinto un valore che il modello aveva dichiarato con una citazione assente dal testo mostrato. Il connettore legge 15 delle 83 pagine candidate: la copertura si ferma al 18% del portale prima che il costo diventi insostenibile."
+    }
+  },
+  {
+    "ente": "Comune di Genzano di Roma",
+    "codice_istat": "058043",
+    "access_mode": "M4_connettore",
+    "probe": {
+      "method": "HTTP GET diretto su /wp-json e /it/",
+      "dated": "2026-08-03",
+      "dettagli": {
+        "cms": "Drupal + Halley Informatica",
+        "wp_json": "404",
+        "it_path": "200, ~96 KB"
+      }
+    },
+    "dati_gov_probe": {
+      "method": "dati.gov.it CKAN /opendata/api/3/action/package_search?q=holder_name:\"Comune di Genzano di Roma\"",
+      "dated": "2026-08-02",
+      "dettagli": {}
+    },
+    "datasets_on_dati_gov": 0,
+    "calendario_raccolta_open_data_comuni": 342,
+    "urp": {
+      "nome": "Ufficio URP-Protocollo",
+      "telefono": "06 93711387",
+      "email": "urp@comune.genzanodiroma.roma.it",
+      "fonte": "sito del Comune (comune.genzanodiroma.roma.it/unita-organizzativa/ufficio-urp-protocollo)",
+      "verificato_il": "2026-08-03"
+    },
+    "integration_cost": {
+      "misurato_il": null,
+      "metodo": "non tentato",
+      "nota": "Connettore non eseguito su questo ente entro il round 2. L'etichetta M4_connettore resta derivata dalla sonda (wp-json 404, /it/ 200) e non da un recupero pagato: a differenza di Ariccia, qui il costo e' dedotto, non misurato."
+    }
+  },
+  {
+    "ente": "Comune di Marino",
+    "codice_istat": "058057",
+    "access_mode": "M5_nessuno",
+    "probe": {
+      "method": "HTTP GET diretto su più percorsi",
+      "dated": "2026-08-03",
+      "dettagli": {
+        "esito": "200 su ogni percorso testato, ma il corpo è sempre uno stub di redirect JavaScript verso un altro dominio — nessun dato reale dietro il 200"
+      }
+    },
+    "calendario_raccolta_open_data_comuni": 342,
+    "urp": {
+      "nome": "URP — Ufficio Relazioni con il Pubblico / Sportello Informativo",
+      "telefono": "06.93662.644",
+      "email": "comunicazione-urp@comune.marino.rm.it",
+      "orari": "dal lunedì al venerdì 9:00–12:00",
+      "fonte": "sito del Comune (comune.marino.rm.it/servizi/urp/servizio_139.html)",
+      "verificato_il": "2026-08-03"
+    }
+  }
+]

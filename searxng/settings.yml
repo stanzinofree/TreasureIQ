@@ -1,0 +1,20 @@
+# Minimal SearXNG config for the ingestion-time web-search fallback (D-28).
+#
+# This instance is never in the request path of a citizen-facing answer: it
+# runs only under `docker compose --profile ingest`, queried by hand from
+# `python -m treasureiq.ingest.websearch`. `formats: [json]` is required —
+# without it SearXNG answers `format=json` with 403, not JSON.
+
+use_default_settings: true
+
+general:
+  instance_name: "treasureiq-ingest-searxng"
+
+search:
+  formats:
+    - html
+    - json
+
+server:
+  secret_key: "treasureiq-ingest-only-not-a-secret"
+  limiter: false

@@ -18,6 +18,7 @@ import sys
 from pathlib import Path
 
 from treasureiq.extract.llm import load_extractor
+from treasureiq.ingest.html_pages import HTMLPagesConnector
 from treasureiq.ingest.wp_comuni import WPComuniConnector
 from treasureiq.ingest.wp_pages import WPPagesConnector
 from treasureiq.readiness import score_comune
@@ -52,6 +53,33 @@ SOURCES = [
         "base_url": "https://comune.fontenuova.rm.it",
         "seed": "fontenuova_058122.json",
         "connector": "wp_rest",
+    },
+    {
+        # D-22/D-24 yardstick: no public API (`/wp-json` measured 410 Gone,
+        # `data/enti.json`), 0 dati.gov.it datasets, server-side HTML only —
+        # exactly the case `HTMLPagesConnector` exists for. `/it/menu/servizi`
+        # is the measured servizi index (`.kapi/spec.md` amendments round 2,
+        # F-3); `/it/` is the homepage.
+        "codice_istat": "058009",
+        "ente": "Comune di Ariccia",
+        "base_url": "https://comune.ariccia.rm.it",
+        "seed": "ariccia_058009.json",
+        "connector": "html",
+        "listing_paths": ("/it/", "/it/menu/servizi"),
+    },
+    {
+        # Second M4 measurement (D-21 comparative benchmark): `/wp-json`
+        # measured 404, Drupal + Halley — a different template than Ariccia's,
+        # so the connector's selectors are exercised against a second stack,
+        # not just re-run on the one they were written for. No measured
+        # servizi-index path here (scope cut, see B24 return notes) — homepage
+        # only.
+        "codice_istat": "058043",
+        "ente": "Comune di Genzano di Roma",
+        "base_url": "https://www.comune.genzanodiroma.roma.it",
+        "seed": "genzano_058043.json",
+        "connector": "html",
+        "listing_paths": ("/",),
     },
 ]
 
@@ -97,59 +125,99 @@ def run(argv: list[str] | None = None) -> int:
     exit_code = 0
     for source in sources:
         print(f"\n{source['ente']} ({source['codice_istat']})")
-        try:
-            with WPComuniConnector(
-                base_url=source["base_url"],
-                ente=source["ente"],
-                codice_istat=source["codice_istat"],
-            ) as connector:
-                records = connector.fetch()
-        except Exception as exc:
-            # One unreachable source must not abort the others: a partial
-            # refresh with a clear failure beats an all-or-nothing run.
-            print(f"  fonte non raggiungibile: {exc}", file=sys.stderr)
-            exit_code = 1
-            continue
 
-        stats = connector.stats
-        print(f"  servizi: letti {stats.records_seen}, normalizzati {stats.records_emitted}")
-        if stats.errors:
-            print(f"  servizi: {len(stats.errors)} record scartati")
-            exit_code = 1
-
-        # D-03/D-15: bandi/concorsi/volontariato live as prose `pages`, not
-        # typed `servizi`. Ingested by a second connector, quote-gated
-        # through the LLM extractor, then merged below — never abort the
-        # whole comune if this leg fails, the servizi records still stand.
-        try:
-            extractor = load_extractor()
-            with WPPagesConnector(
-                base_url=source["base_url"],
-                ente=source["ente"],
-                codice_istat=source["codice_istat"],
-                extractor=extractor,
-                max_pages=PAGES_MAX_CANDIDATES,
-            ) as pages_connector:
-                page_records = pages_connector.fetch()
-            pages_stats = pages_connector.stats
-            print(
-                f"  pagine: lette {pages_stats.records_seen}, "
-                f"normalizzate {pages_stats.records_emitted}, "
-                f"scartate dal filtro {len(pages_connector.dropped)}"
-            )
-            if pages_stats.errors:
-                print(f"  pagine: {len(pages_stats.errors)} record scartati")
+        if source["connector"] == "html":
+            # D-22: no `/wp-json` on these sites (`data/enti.json` M4 probe) —
+            # the WP legs below would just log a 404/410 for nothing, so this
+            # source skips them entirely and runs the generic HTML connector
+            # instead. Fail-soft matches the WP legs: one unreachable comune
+            # must not abort the others.
+            try:
+                extractor = load_extractor()
+                with HTMLPagesConnector(
+                    base_url=source["base_url"],
+                    ente=source["ente"],
+                    codice_istat=source["codice_istat"],
+                    listing_paths=source["listing_paths"],
+                    extractor=extractor,
+                    max_pages=PAGES_MAX_CANDIDATES,
+                ) as html_connector:
+                    records = html_connector.fetch()
+                stats = html_connector.stats
+                print(
+                    f"  pagine html: lette {stats.records_seen}, "
+                    f"normalizzate {stats.records_emitted}, "
+                    f"scartate dal filtro {len(html_connector.dropped)}"
+                )
+                print(
+                    f"  pagine html: recupero {html_connector.pages_fetched} "
+                    f"richieste in {html_connector.fetch_seconds:.1f}s"
+                )
+                if stats.errors:
+                    print(f"  pagine html: {len(stats.errors)} record scartati")
+                    exit_code = 1
+                if args.verbose:
+                    print(f"  pagine html: {extractor.report()}")
+                    for line in html_connector.dropped:
+                        print(f"    scartata: {line}")
+            except Exception as exc:
+                print(f"  fonte non raggiungibile: {exc}", file=sys.stderr)
                 exit_code = 1
-            if args.verbose:
-                print(f"  pagine: {extractor.report()}")
-                for line in pages_connector.dropped:
-                    print(f"    scartata: {line}")
-        except Exception as exc:
-            print(f"  pagine non raggiungibili: {exc}", file=sys.stderr)
-            exit_code = 1
-            page_records = []
+                continue
+        else:
+            try:
+                with WPComuniConnector(
+                    base_url=source["base_url"],
+                    ente=source["ente"],
+                    codice_istat=source["codice_istat"],
+                ) as connector:
+                    records = connector.fetch()
+            except Exception as exc:
+                # One unreachable source must not abort the others: a partial
+                # refresh with a clear failure beats an all-or-nothing run.
+                print(f"  fonte non raggiungibile: {exc}", file=sys.stderr)
+                exit_code = 1
+                continue
 
-        records = _merge_pages_into_servizi(records, page_records)
+            stats = connector.stats
+            print(f"  servizi: letti {stats.records_seen}, normalizzati {stats.records_emitted}")
+            if stats.errors:
+                print(f"  servizi: {len(stats.errors)} record scartati")
+                exit_code = 1
+
+            # D-03/D-15: bandi/concorsi/volontariato live as prose `pages`, not
+            # typed `servizi`. Ingested by a second connector, quote-gated
+            # through the LLM extractor, then merged below — never abort the
+            # whole comune if this leg fails, the servizi records still stand.
+            try:
+                extractor = load_extractor()
+                with WPPagesConnector(
+                    base_url=source["base_url"],
+                    ente=source["ente"],
+                    codice_istat=source["codice_istat"],
+                    extractor=extractor,
+                    max_pages=PAGES_MAX_CANDIDATES,
+                ) as pages_connector:
+                    page_records = pages_connector.fetch()
+                pages_stats = pages_connector.stats
+                print(
+                    f"  pagine: lette {pages_stats.records_seen}, "
+                    f"normalizzate {pages_stats.records_emitted}, "
+                    f"scartate dal filtro {len(pages_connector.dropped)}"
+                )
+                if pages_stats.errors:
+                    print(f"  pagine: {len(pages_stats.errors)} record scartati")
+                    exit_code = 1
+                if args.verbose:
+                    print(f"  pagine: {extractor.report()}")
+                    for line in pages_connector.dropped:
+                        print(f"    scartata: {line}")
+            except Exception as exc:
+                print(f"  pagine non raggiungibili: {exc}", file=sys.stderr)
+                exit_code = 1
+                page_records = []
+
+            records = _merge_pages_into_servizi(records, page_records)
 
         report = score_comune(
             ente=source["ente"],

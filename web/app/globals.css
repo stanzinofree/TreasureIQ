@@ -27,34 +27,52 @@
  */
 
 :root {
-  /* --- Surface: near-white with a faint warm cast, not the sage-grey wash
-     of v1. Cards lift off the page instead of blending into it. --- */
-  --paper: #fbfaf6;
+  /* --- Surface: a very faint byakuroku green-grey, fresher than the warm
+     cream of v2. L* stays high so dark text keeps AA — vibrancy lives in the
+     accents and the hero, never by dimming the paper under body text. --- */
+  --paper: #f6f7f1;
   --paper-raised: #ffffff;
-  --paper-sunken: #f1f0ea;
+  --paper-sunken: #eef0ea;
 
   /* --- Ink: sumi, warm near-black with a green cast so it belongs to the
      paper rather than sitting on top of it. Unchanged — body text stays
      maximally readable regardless of how vivid the surface gets. --- */
   --sumi: #1b211d;
   --sumi-soft: #4a554e;
-  --sumi-faint: #63706a; /* darkened from v1 to clear 4.5:1 on the new near-white paper */
+  --sumi-faint: #5c6a62; /* deepened to clear 4.5:1 on the new green-tinted paper */
 
-  /* --- Accents: saturated on white, not dark-mode-vivid. Every token below
-     keeps its v1 role; only chroma moved. --- */
-  --ai: #4f46e5;         /* saturated indigo-violet: navigation, authority, links, focus */
-  --ai-wash: #e9e7fb;
+  /* --- Accents: saturated on white, not dark-mode-vivid. Every token keeps
+     its v2 role; v3 adds a *-deep pair for each hue used as small text, so
+     the vivid value is free to be an accent (fills, borders, large display)
+     while AA body/labels use the deepened partner. Vivid is for energy;
+     text stays legible. --- */
+  /* Electric cyan, the Tokyo-signage register. Three tiers, all measured on
+     paper (#f6f7f1) rather than eyeballed: the vivid tone is 1.87:1 there, so
+     it can only ever be a *fill* carrying --sumi on top (8.14:1) — never text,
+     never a hairline. Reverting to the previous indigo means changing these
+     four values and nothing else: #4f46e5 / #0d92a6→#3f3ac2 / #3f3ac2 / #e9e7fb. */
+  --ai-vivid: #00c9e0;   /* fills only, dark ink on top: 8.14:1 */
+  --ai-line: #0d92a6;    /* 3.43:1 on paper: borders, icons, focus ring (non-text AA) */
+  --ai: #0a7c8d;         /* electric cyan deepened: navigation, authority, links (4.55:1 on paper) */
+  --ai-deep: #0a6675;    /* cyan deepened further for small text where 4.5:1 is tight (6.15:1) */
+  --ai-wash: #e2f4f7;
   --shu: #e8391f;        /* hot vermilion: the seal, and only blocking states */
+  --shu-deep: #b3261a;   /* vermilion deepened for AA body text */
   --shu-wash: #fce4de;
   --wakatake: #1f9d55;   /* fresh, high-chroma green: a criterion the citizen meets */
+  --wakatake-deep: #137c42; /* green deepened for AA body text */
   --wakatake-wash: #dff5e6;
   --yamabuki: #d97706;   /* bright golden amber: unverifiable / unknown */
+  --yamabuki-deep: #92590a; /* amber deepened for AA body text */
   --yamabuki-wash: #fbecd2;
-  --fuji: #e6007e;       /* new: fluo magenta-pink, one accent for energy — used
-                             sparingly (the cost strip, small emphases), never
-                             for a verdict or a blocking state */
+  /* The magenta that used to carry "energy" is gone. With the hero no longer a
+     colour block and cyan taking the accent role, it was a third hue doing no
+     work its neighbours weren't already doing — and a palette that spends
+     colour on decoration can't also claim colour means something. What it
+     marked (the recovery cost) now reads as distinct through the mono face and
+     a hairline rule instead of through its own tint. */
 
-  --kasumi: #e5e9e2;    /* mist: lighter hairlines, structure without weight */
+  --kasumi: #dde3da;    /* mist: hairline, slightly cooler so it reads on green paper */
 
   /* --- Type --- */
   --font-display: var(--font-zen-maru), "Hiragino Maru Gothic ProN", system-ui,
@@ -178,32 +196,76 @@ a {
 /* ---------------------------------------------------------------- layout */
 
 .shell {
-  max-width: 1080px;
+  /* The page uses the screen: structure runs the full width and only prose is
+     held to --measure (see `p`), so lines stay readable without the layout
+     hugging a narrow column. The cap is high and the gutter small — the
+     breathing room the brief asks for is bought vertically, in type size and
+     leading, not in dead margin down the sides. */
+  max-width: 1760px;
   margin: 0 auto;
-  padding: 0 var(--ma-6) var(--ma-24);
+  padding: 0 var(--ma-4) var(--ma-16);
 }
 
+/* Full-bleed sticky masthead. Solid paper background (no backdrop blur — the
+   no-glassmorphism rule holds) so text scrolling under it never bleeds
+   through and focus stays obvious. */
 .masthead {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--paper);
+  border-bottom: 1px solid var(--kasumi);
+}
+
+.masthead__inner {
+  max-width: 1760px;
+  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--ma-4);
-  padding: var(--ma-6) 0;
-  border-bottom: 1px solid var(--kasumi);
-  margin-bottom: var(--ma-12);
+  padding: var(--ma-2) var(--ma-6);
   flex-wrap: wrap;
+}
+
+/* Logo lives top-right (placeholder — Alex will design the real mark). The
+   seal is a natural stand-in: it is the product's signature already. */
+.masthead__right {
+  display: flex;
+  align-items: center;
+  gap: var(--ma-4);
+}
+
+.masthead__logo {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius);
+  border: 1.5px solid var(--kasumi);
+  background: var(--paper-raised);
+  color: var(--sumi);
+  transition: border-color 140ms ease, transform 140ms ease;
+}
+.masthead__logo:hover {
+  border-color: var(--ai);
+}
+.masthead__logo .wordmark__mark {
+  width: 26px;
+  height: 26px;
 }
 
 .wordmark {
   display: flex;
   align-items: center;
-  gap: var(--ma-3);
+  gap: var(--ma-2);
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   letter-spacing: -0.02em;
   color: var(--sumi);
   text-decoration: none;
+  white-space: nowrap;
 }
 
 .wordmark__mark {
@@ -214,9 +276,11 @@ a {
 
 .nav {
   display: flex;
-  gap: var(--ma-6);
+  gap: var(--ma-5, 20px);
   align-items: center;
   font-size: 0.94rem;
+  flex-wrap: wrap;
+  flex: 1 1 auto;
 }
 
 .nav a {
@@ -326,6 +390,15 @@ a {
   letter-spacing: 0.05em;
 }
 
+/* D-20 — which tier published this opportunity. `--ai` (authority) rather
+   than a verdict colour: this badge never says whether the citizen
+   qualifies, only who is answerable for the data. */
+.tag--livello {
+  background: var(--ai-wash);
+  color: var(--ai);
+  font-weight: 600;
+}
+
 .criteria {
   list-style: none;
   margin: var(--ma-4) 0 0;
@@ -348,15 +421,17 @@ a {
   font-weight: 500;
   line-height: 1.5;
 }
+/* v3: glyphs are small text, so they use the deepened partners of the vivid
+   accents to hold AA; the vivid values stay for fills, borders and display. */
 .criterion[data-state="met"] .criterion__glyph {
-  color: var(--wakatake);
+  color: var(--wakatake-deep);
 }
 .criterion[data-state="not_met"] .criterion__glyph {
-  color: var(--shu);
+  color: var(--shu-deep);
 }
 .criterion[data-state="unknown_source"] .criterion__glyph,
 .criterion[data-state="unknown_profile"] .criterion__glyph {
-  color: var(--yamabuki);
+  color: var(--yamabuki-deep);
 }
 
 .notice {
@@ -456,13 +531,18 @@ a {
   padding: var(--ma-3) var(--ma-6);
   border: none;
   border-radius: 999px;
-  background: var(--ai);
-  color: #fff;
+  /* Vivid cyan carrying dark ink, not white-on-deep-teal. White text never
+     clears AA on any tone of this hue — the best case measures 3.70:1 — while
+     --sumi on the vivid fill reaches 8.14:1. So the legible choice and the
+     electric one are the same choice here, which is why the primary action is
+     the brightest object on the page. */
+  background: var(--ai-vivid);
+  color: var(--sumi);
   cursor: pointer;
   transition: background 140ms ease;
 }
 .button:hover {
-  background: #3c33b8; /* darkened --ai, same hue family */
+  background: #00b2c7; /* darkened --ai-vivid, still 6.39:1 under --sumi */
 }
 .button--ghost {
   background: transparent;
@@ -500,35 +580,195 @@ a {
   .shell {
     padding: 0 var(--ma-4) var(--ma-16);
   }
+  /* Two rows, not three: wordmark and status share the top line, the nav
+     links get their own scrollable row underneath. Left to wrap freely the
+     masthead ate 180px of an 844px screen before any content appeared. */
+  .masthead__inner {
+    padding: var(--ma-2) var(--ma-4);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      "brand status"
+      "nav   nav";
+    row-gap: var(--ma-1);
+    align-items: center;
+  }
+  .masthead__inner > .wordmark {
+    grid-area: brand;
+  }
+  .masthead__right {
+    grid-area: status;
+    justify-self: end;
+  }
+  .nav {
+    grid-area: nav;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    /* The row scrolls sideways rather than wrapping; hide the scrollbar but
+       keep it reachable by touch, keyboard and trackpad. */
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 calc(-1 * var(--ma-4));
+    padding-inline: var(--ma-4);
+  }
+  .nav::-webkit-scrollbar {
+    display: none;
+  }
+  /* Touch targets: each link keeps a thumb-sized hit area and never splits
+     across lines mid-label. */
+  .nav a {
+    padding: var(--ma-2) 0;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+  }
+  .site-footer__top {
+    grid-template-columns: 1fr;
+    gap: var(--ma-8);
+  }
+  .manifesto-chain {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .datum-row {
+    grid-template-columns: 1fr;
+    gap: var(--ma-1);
+  }
+}
+
+/* Tablet: the data chain breathes into 3 columns, the footer into two. */
+@media (max-width: 1024px) {
+  .manifesto-chain {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .site-footer__top {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 /* ------------------------------------------------------------------ chat */
 
-/* Google-like: a centred column, not a full-bleed layout. The hero and the
-   chat share one measure so the eye doesn't have to re-anchor between the
-   motto and the input. */
+/* The hero sits on the same paper as everything else — no colour band. A
+   full-bleed block made the page start with a seam: a loud surface the eye had
+   to cross before reaching the one thing that matters, the question box. The
+   weight now comes from type and space, which is what the brief asks the
+   Japanese influence to be (equilibrio, spazio negativo, ritmo tipografico)
+   rather than from a slab of pigment.
+
+   The one bright thing is the comune chip, and it is bright because it carries
+   information: which municipality's published data you are standing in. Vivid
+   cyan can be a fill (--sumi on it measures 8.14:1) though never text, so the
+   chip is exactly the shape that tier is legal in. */
+.hero-band {
+  background: transparent;
+  color: inherit;
+  padding: var(--ma-12) var(--ma-6) var(--ma-8);
+}
+.hero-band__inner {
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+/* "Sto usando ..." — the facts currently feeding the answers. It replaces the
+   hardcoded comune that used to sit here, and it is absent, not empty, until
+   there is something true to put in it (see ProfiloNoto). Quiet by design:
+   this is a receipt, not a banner, so it takes the mono face and hairlines
+   rather than any accent colour. */
+.fatti {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ma-2);
+  margin: 0 0 var(--ma-6);
+}
+.fatti__intro {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--sumi-faint);
+}
+.fatto {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--ma-2);
+  padding: var(--ma-1) var(--ma-3);
+  border: 1px solid var(--kasumi);
+  border-radius: 999px;
+  background: var(--paper-raised);
+  font-size: 0.86rem;
+}
+.fatto__label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sumi-faint);
+}
+.fatto__value {
+  color: var(--sumi);
+  font-weight: 500;
+}
+/* An unconfirmed fact must not look like a confirmed one. Amber is already
+   the palette's "we cannot verify this" colour, so it carries the same
+   meaning here as it does on a criterion the comune never published. */
+.fatto__nota {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--yamabuki-deep);
+}
+.fatti__clear {
+  border: 0;
+  background: none;
+  padding: var(--ma-1) var(--ma-2);
+  font: inherit;
+  font-size: 0.8rem;
+  color: var(--ai);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.fatti__clear:hover {
+  color: var(--ai-deep);
+}
+
+.hero-band .hero-eyebrow {
+  display: inline-block;
+  background: var(--ai-vivid);
+  color: var(--sumi);
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: var(--ma-1) var(--ma-3);
+  border-radius: 2px;
+  margin: 0 0 var(--ma-6);
+}
+.hero-band h1 {
+  font-size: clamp(2.6rem, 7vw, 4.6rem);
+  letter-spacing: -0.03em;
+  line-height: 1.02;
+  color: var(--sumi);
+}
+.hero-band .lede {
+  color: var(--sumi-soft);
+  margin: var(--ma-6) auto 0;
+  max-width: 58ch;
+  font-size: 1.14rem;
+  line-height: 1.65;
+}
+
+/* The chat column below the band: centred and comfortable, but wider than v2
+   so the input reads as a primary surface rather than a squeezed slot. */
 .chat-page {
-  max-width: 640px;
+  max-width: 760px;
   margin: 0 auto;
   padding-top: var(--ma-8);
 }
 
 .chat-hero {
   text-align: center;
-}
-
-/* Big, rounded, welcoming display type — the one place on the page allowed
-   to be loud. Zen Maru Gothic's roundness is the whole argument for warmth,
-   so let it run larger here than the informational h1s on /opportunita and
-   /dati, which stay at the quieter global size. */
-.chat-hero h1 {
-  font-size: clamp(2.5rem, 7vw, 4.25rem);
-  letter-spacing: -0.02em;
-}
-.chat-hero .lede {
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 52ch;
 }
 
 /* ------------------------------------------------------------ geolocation */
@@ -664,6 +904,312 @@ a {
   margin-top: 2px;
 }
 
+/* -------------------------------------------------------------- site footer */
+
+.site-footer {
+  margin-top: var(--ma-16);
+  border-top: 1px solid var(--kasumi);
+  background: var(--paper-sunken);
+}
+
+.site-footer__inner {
+  max-width: 1760px;
+  margin: 0 auto;
+  padding: var(--ma-12) var(--ma-6) var(--ma-8);
+}
+
+.site-footer__top {
+  display: grid;
+  grid-template-columns: 1.4fr repeat(3, 1fr);
+  gap: var(--ma-8);
+  margin-bottom: var(--ma-12);
+}
+
+.site-footer__brand .wordmark {
+  font-size: 1.2rem;
+  margin-bottom: var(--ma-3);
+}
+.site-footer__tagline {
+  color: var(--sumi-soft);
+  font-size: 0.92rem;
+  max-width: 34ch;
+}
+
+.site-footer__col h3 {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sumi-faint);
+  margin: 0 0 var(--ma-4);
+  font-weight: 600;
+}
+.site-footer__col ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--ma-3);
+}
+.site-footer__col a {
+  color: var(--sumi-soft);
+  text-decoration: none;
+  font-size: 0.94rem;
+}
+.site-footer__col a:hover {
+  color: var(--sumi);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.site-footer__legal {
+  border-top: 1px solid var(--kasumi);
+  padding-top: var(--ma-6);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--ma-4);
+  font-size: 0.82rem;
+  color: var(--sumi-faint);
+}
+.site-footer__legal a {
+  color: var(--sumi-faint);
+}
+
+/* ------------------------------------------------------ status systems (v3) */
+
+/* The header pill now reads the whole "Stato sistemi", not just the fonti.
+   One overall dot plus three small group dots — shape + colour, so the state
+   survives colour-blindness (dot arrangement, not just hue). */
+.status-pill__dots {
+  display: flex;
+  gap: 3px;
+}
+.status-pill__dot--sm {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--sumi-faint);
+}
+.status-pill__dot--sm[data-stato="ok"] {
+  background: var(--wakatake);
+}
+.status-pill__dot--sm[data-stato="degraded"] {
+  background: var(--yamabuki);
+}
+.status-pill__dot--sm[data-stato="down"] {
+  background: var(--shu);
+}
+.status-pill__dot--sm[data-stato="unknown"] {
+  background: var(--sumi-faint);
+  outline: 1px dashed var(--sumi-faint);
+}
+
+/* /monitoraggio — three groups (Fonti · Sistemi · Stato dati interni). */
+.systems {
+  display: grid;
+  gap: var(--ma-8);
+}
+
+.systems__group {
+  padding-top: var(--ma-6);
+  border-top: 1px solid var(--kasumi);
+}
+.systems__group:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+.systems__group-head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--ma-3);
+  flex-wrap: wrap;
+  margin-bottom: var(--ma-4);
+}
+.systems__group-head h2 {
+  font-size: 1.3rem;
+}
+.systems__group-note {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.04em;
+  color: var(--sumi-faint);
+}
+
+/* Generic status dot for the new groups (stato, not reachable). */
+.status-row[data-stato="ok"] .status-row__dot {
+  background: var(--wakatake);
+}
+.status-row[data-stato="degraded"] .status-row__dot {
+  background: var(--yamabuki);
+}
+.status-row[data-stato="down"] .status-row__dot {
+  background: var(--shu);
+}
+.status-row[data-stato="unknown"] .status-row__dot {
+  background: var(--sumi-faint);
+  outline: 1px dashed var(--sumi-faint);
+}
+
+/* Stato dati interni rows: a big value with an honest caption. */
+.datum-row {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--ma-3);
+  align-items: baseline;
+  padding: var(--ma-3) 0;
+  border-bottom: 1px solid var(--kasumi);
+}
+.datum-row:last-child {
+  border-bottom: none;
+}
+.datum-row__value {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.datum-row__body .datum-row__detail {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--sumi-soft);
+}
+.datum-row__body .datum-row__detail strong {
+  font-weight: 600;
+  color: var(--sumi);
+}
+.datum-row[data-stato="down"] .datum-row__value {
+  color: var(--shu-deep);
+}
+.datum-row[data-stato="degraded"] .datum-row__value {
+  color: var(--yamabuki-deep);
+}
+.datum-row[data-stato="ok"] .datum-row__value {
+  color: var(--wakatake-deep);
+}
+.datum-row[data-stato="unknown"] .datum-row__value {
+  color: var(--sumi-soft);
+}
+
+/* ----------------------------------------------------------------- manifesto */
+
+.manifesto-hero {
+  padding: var(--ma-16) var(--ma-6);
+  border-bottom: 1px solid var(--kasumi);
+}
+.manifesto-hero__inner {
+  max-width: 860px;
+  margin: 0 auto;
+}
+.manifesto-hero h1 {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  margin: var(--ma-3) 0 var(--ma-4);
+}
+.manifesto-hero .lede {
+  font-size: 1.12rem;
+  color: var(--sumi-soft);
+}
+
+/* The data chain — a horizontal process, which is honest here because the
+   pipeline is genuinely a sequence in TreasureIQ's code. Numbering carries
+   real order, so 01–06 is information, not decoration. */
+.manifesto-chain {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: var(--ma-3);
+}
+.step {
+  background: var(--paper-raised);
+  border: 1px solid var(--kasumi);
+  border-radius: var(--radius);
+  padding: var(--ma-4);
+  position: relative;
+}
+.step__num {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: var(--ai-deep);
+  font-weight: 600;
+}
+.step__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.02rem;
+  margin: var(--ma-2) 0 var(--ma-2);
+  color: var(--sumi);
+}
+.step__desc {
+  margin: 0;
+  font-size: 0.86rem;
+  color: var(--sumi-soft);
+}
+
+.principle {
+  border-left: 4px solid var(--ai);
+  background: var(--paper-raised);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: var(--ma-6);
+}
+.principle h3 {
+  font-size: 1.12rem;
+  margin-bottom: var(--ma-2);
+}
+.principle p {
+  color: var(--sumi-soft);
+}
+
+.area-tags {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ma-3);
+}
+.area-tags li {
+  background: var(--paper-raised);
+  border: 1.5px solid var(--kasumi);
+  border-radius: 999px;
+  padding: var(--ma-2) var(--ma-4);
+  font-weight: 600;
+  color: var(--sumi);
+}
+
+.manifesto-cta {
+  background: var(--ai-wash);
+  border-radius: var(--radius);
+  padding: var(--ma-8);
+}
+.manifesto-cta h2 {
+  color: var(--ai-deep);
+}
+
+/* ------------------------------------------------------- seal stamp entrance */
+
+/* The seal is the signature — let it land like a hanko impressing the paper.
+   Motion is a single quick opacity/scale, and it is disabled entirely under
+   `prefers-reduced-motion` (handled by the global reduced-motion block). */
+.seal {
+  animation: seal-stamp 380ms cubic-bezier(0.2, 0.9, 0.3, 1.2);
+}
+@keyframes seal-stamp {
+  0% {
+    transform: scale(0.86);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.04);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
 .chat {
   display: grid;
   gap: var(--ma-4);
@@ -718,6 +1264,111 @@ a {
   padding-left: var(--ma-3);
 }
 
+/* D-19 — the INFORMAZIONE rail. Deliberately plain: no card, no seal, no
+   verdict border — this bubble answers "what does the comune say and who do
+   I call", never "are you eligible". */
+.info-answer {
+  display: grid;
+  gap: var(--ma-2);
+  font-size: 0.92rem;
+  color: var(--sumi-soft);
+}
+
+.info-answer__document a {
+  font-weight: 600;
+}
+
+.info-answer__diagnosis {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--ma-1);
+  color: var(--sumi-faint);
+  font-size: 0.88rem;
+}
+
+.info-answer__office {
+  margin: 0;
+}
+
+/* D-26 rule 2 — this cost is TreasureIQ's, never the citizen's. It shares the
+   "interesting number" register with `.cost-strip`, deliberately distinct from
+   the plain `.info-answer__diagnosis` lines above it, so a reader never
+   mistakes what recovery cost us for a requirement placed on them. That
+   distinction now comes from the mono face and the rule, not from a private
+   hue: the retired magenta was the only thing separating them, and a colour
+   spent on emphasis alone is a colour that can no longer mean anything. */
+.info-answer__cost {
+  border-left: 2px solid var(--ai-line);
+  padding-left: var(--ma-3);
+}
+
+/* D-28 / R-15 — the highest-risk surface in the app: a web result must never
+   read as a verified municipal answer. `--yamabuki` (already "unverifiable"
+   elsewhere) plus an explicit label plus the FULL url as link text, not a
+   domain-hiding "vedi qui" — three redundant signals so the distinction
+   survives colour-blindness, a skim, and a copy change. */
+.info-answer__web {
+  background: var(--yamabuki-wash);
+  border-radius: var(--radius-sm);
+  padding: var(--ma-3) var(--ma-4);
+  display: grid;
+  gap: var(--ma-2);
+}
+
+.info-answer__web-label {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #6b4708;
+}
+
+.info-answer__web ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--ma-2);
+}
+
+.info-answer__web-title {
+  display: block;
+  font-weight: 600;
+  color: #6b4708;
+}
+
+.info-answer__web-url {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  word-break: break-all;
+  color: #6b4708;
+}
+
+.info-answer__web-note {
+  margin: 0;
+  font-size: 0.82rem;
+  color: #6b4708;
+}
+
+/* D-29 — kept off `.cost-strip` on purpose: this is what remains on the
+   citizen, `.cost-strip` is what recovering the data cost TreasureIQ. The
+   two numbers must never sit on the same line or imply one paid for the
+   other. */
+.effort-caption {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--sumi-faint);
+}
+
+.effort-caption strong {
+  color: var(--sumi-soft);
+  font-weight: 600;
+}
+
 .escalation h3 {
   margin-bottom: var(--ma-2);
 }
@@ -768,10 +1419,9 @@ a {
   border-top: 1px solid var(--kasumi);
 }
 
-/* D-17 — data-recovery cost strip: a caption, not a panel. `--fuji` is used
-   here deliberately (design-note v2): this is the one place on the page that
-   gets the fluo accent, because it is a genuinely interesting number, not a
-   blocking state — never `--shu` (reserved for blocking states) and never
+/* D-17 — data-recovery cost strip: a caption, not a panel. It reads as an
+   interesting number rather than an alarm, so it takes the cyan accent and the
+   mono face — never `--shu` (reserved for blocking states) and never
    `--yamabuki` (reserved for "unverifiable"), since this is a property of the
    comune's data-recovery cost, not a failure of the current answer. */
 .cost-strip {

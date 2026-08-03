@@ -1,26 +1,41 @@
 /**
- * Service status — which sources TreasureIQ can currently answer from.
+ * Service status — "Stato sistemi", the full picture (v3).
  *
  * Sourced from `GET /api/status`, which is itself derived from disk (the last
- * committed ingestion), never a live probe of the comune's own site. That is
- * not a shortcut: pinging a municipal server on every page load a citizen
- * happens to open would hammer infrastructure we do not own, in exchange for
- * a number that tells nobody anything about the one thing that matters here
- * — what got recovered at the last real ingestion run. `reachable` is
- * therefore `null` by design until a run has actually checked, and a `null`
- * must never be read as "down": it is rendered as "non verificato", visually
- * distinct from both "raggiungibile" and "irraggiungibile".
+ * committed ingestion), never a live probe of the comune's own site. Three
+ * groups, all from the same honest evidence:
+ *
+ *   - Fonti — which comuni TreasureIQ can currently answer from, and how many
+ *     records each holds.
+ *   - Sistemi — TreasureIQ's own components. Components that are only used at
+ *     ingestion time (the local LLM, the SearXNG web search) are NOT probed on
+ *     every page load, so they report "non verificato" — a real state, never a
+ *     masked "down".
+ *   - Stato dati interni — headline numbers on what was actually recovered.
+ *
+ * `reachable`/`stato` are nullable by design until a run has checked them, and
+ * a `null` must never be read as "down": it renders as "non verificato",
+ * visually distinct from both working and broken.
  */
 
-import { status, type SourceStatus, type StatusOut } from "@/lib/api";
+import { status, type InternalDatum, type SourceStatus, type StatusOut, type SystemComponent } from "@/lib/api";
 
 export const dynamic = "force-dynamic";
 
+type State = "ok" | "degraded" | "down" | "unknown";
+
 const OVERALL_LABEL: Record<string, string> = {
-  ok: "Tutte le fonti rispondono",
-  degraded: "Alcune fonti in difficoltà",
-  down: "Fonti irraggiungibili",
+  ok: "Tutti i sistemi rispondono",
+  degraded: "Alcuni sistemi in difficoltà",
+  down: "Sistemi irraggiungibili",
   unknown: "Stato non verificato",
+};
+
+const STATE_LABEL: Record<State, string> = {
+  ok: "operativo",
+  degraded: "in difficoltà",
+  down: "non disponibile",
+  unknown: "non verificato",
 };
 
 function formatDate(iso: string | null): string {
@@ -38,17 +53,17 @@ function formatDate(iso: string | null): string {
 
 function reachabilityLabel(reachable: boolean | null): {
   label: string;
-  state: "reachable" | "unreachable" | "unverified";
+  state: State;
 } {
-  if (reachable === true) return { label: "raggiungibile", state: "reachable" };
-  if (reachable === false) return { label: "irraggiungibile", state: "unreachable" };
-  return { label: "non verificato", state: "unverified" };
+  if (reachable === true) return { label: "raggiungibile", state: "ok" };
+  if (reachable === false) return { label: "irraggiungibile", state: "down" };
+  return { label: "non verificato", state: "unknown" };
 }
 
 function SourceRow({ source }: { source: SourceStatus }) {
   const r = reachabilityLabel(source.reachable);
   return (
-    <li className="status-row" data-reachable={r.state}>
+    <li className="status-row" data-stato={r.state}>
       <span className="status-row__dot" aria-hidden="true" />
       <div className="status-row__body">
         <div className="status-row__head">
@@ -64,6 +79,36 @@ function SourceRow({ source }: { source: SourceStatus }) {
         </p>
       </div>
     </li>
+  );
+}
+
+function ComponentRow({ component }: { component: SystemComponent }) {
+  return (
+    <li className="status-row" data-stato={component.stato}>
+      <span className="status-row__dot" aria-hidden="true" />
+      <div className="status-row__body">
+        <div className="status-row__head">
+          <strong>{component.nome}</strong>
+          <span className="status-row__badge">
+            {STATE_LABEL[component.stato as State] ?? component.stato}
+          </span>
+        </div>
+        <p className="status-row__meta">{component.detail}</p>
+      </div>
+    </li>
+  );
+}
+
+function DatumRow({ datum }: { datum: InternalDatum }) {
+  return (
+    <div className="datum-row" data-stato={datum.stato}>
+      <span className="datum-row__value">{datum.value}</span>
+      <div className="datum-row__body">
+        <p className="datum-row__detail">
+          <strong>{datum.nome}.</strong> {datum.detail}
+        </p>
+      </div>
+    </div>
   );
 }
 
@@ -92,43 +137,84 @@ export default async function Monitoraggio() {
   return (
     <div className="stack">
       <section>
-        <p className="eyebrow">Monitoraggio del servizio</p>
+        <p className="eyebrow">Stato sistemi</p>
         <h1>{OVERALL_LABEL[overall] ?? OVERALL_LABEL.unknown}</h1>
         <p className="lede">
-          Quello che TreasureIQ ha effettivamente recuperato da ciascuna fonte,
-          e quando. Non un cruscotto di uptime: un&apos;istantanea onesta di
-          cosa è stato ingerito l&apos;ultima volta e da dove.
+          Tre gruppi, una sola fonte di verità: quello che TreasureIQ ha
+          effettivamente recuperato da ciascuna fonte, lo stato delle proprie
+          componenti e i numeri su cosa è stato ingerito l&apos;ultima volta.
+          Non un cruscotto di uptime: un&apos;istantanea onesta di cosa c&apos;è
+          davvero.
         </p>
       </section>
 
-      <section className="panel">
-        <ul className="status-list">
-          {(report.sources ?? []).map((s) => (
-            <SourceRow key={s.codice_istat} source={s} />
-          ))}
-        </ul>
-        {(report.sources ?? []).length === 0 && (
-          <p className="lede">Nessuna fonte configurata.</p>
-        )}
-      </section>
+      <div className="systems">
+        <section className="systems__group">
+          <div className="systems__group-head">
+            <h2>Fonti</h2>
+            <span className="systems__group-note">
+              i comuni da cui TreasureIQ risponde
+            </span>
+          </div>
+          <div className="panel">
+            <ul className="status-list">
+              {(report.sources ?? []).map((s) => (
+                <SourceRow key={s.codice_istat} source={s} />
+              ))}
+            </ul>
+            {(report.sources ?? []).length === 0 && (
+              <p className="lede">Nessuna fonte configurata.</p>
+            )}
+          </div>
+        </section>
+
+        <section className="systems__group">
+          <div className="systems__group-head">
+            <h2>Sistemi</h2>
+            <span className="systems__group-note">
+              le componenti di TreasureIQ stessa
+            </span>
+          </div>
+          <div className="panel">
+            <ul className="status-list">
+              {(report.sistemi ?? []).map((c) => (
+                <ComponentRow key={c.nome} component={c} />
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        <section className="systems__group">
+          <div className="systems__group-head">
+            <h2>Stato dati interni</h2>
+            <span className="systems__group-note">
+              cosa è stato effettivamente recuperato
+            </span>
+          </div>
+          <div className="panel">
+            {(report.dati_interni ?? []).map((d) => (
+              <DatumRow key={d.nome} datum={d} />
+            ))}
+          </div>
+        </section>
+      </div>
 
       <section className="panel">
         <h2>Perché &ldquo;non verificato&rdquo; e non un pallino verde o rosso</h2>
         <p className="lede">
           Questa pagina non manda una richiesta al sito del comune ogni volta
           che qualcuno la apre. Farlo vorrebbe dire interrogare
-          un&apos;infrastruttura pubblica che non gestiamo, ad ogni
-          visita, per un numero che cambia in continuazione e non racconta la
-          cosa che conta davvero: cosa il comune ha reso disponibile
-          l&apos;ultima volta che l&apos;abbiamo effettivamente letto.
+          un&apos;infrastruttura pubblica che non gestiamo, ad ogni visita, per
+          un numero che racconta poco. E non sonda neppure le proprie componenti
+          a ogni visita: il modello linguistico locale e la ricerca web vivono
+          solo durante l&apos;ingestion.
         </p>
         <p className="lede">
           &ldquo;Non verificato&rdquo; è quindi uno stato reale, non un errore
-          nascosto: significa che nessuna ingestion recente ha controllato la
-          raggiungibilità di quella fonte. Non significa che la fonte sia
-          rotta, e non deve mai essere letto come se lo fosse — è la stessa
-          onestà sui limiti dei dati che il resto del progetto applica ai
-          requisiti dei bandi.
+          nascosto: significa che nessun controllo recente ha riguardato quella
+          voce. Non significa che sia rotta, e non deve mai essere letto come se
+          lo fosse — è la stessa onestà sui limiti dei dati che il resto del
+          progetto applica ai requisiti dei bandi.
         </p>
       </section>
     </div>

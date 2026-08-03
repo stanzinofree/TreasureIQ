@@ -1,0 +1,18 @@
+{
+ "isee_max": null,
+ "isee_min": null,
+ "isee_mentioned_without_threshold": false,
+ "eta_min": null,
+ "eta_max": null,
+ "nucleo_min": null,
+ "figli_minori_required": false,
+ "disabilita_required": false,
+ "residenza_required": null,
+ "employment_status": [],
+ "other": [],
+ "quotes": [],
+ "deadline_iso": null,
+ "notes": [
+  "Il testo non specifica alcun requisito di accesso per il servizio di mensa scolastica, né soglie ISEE, età, condizioni familiari, disabilità, stato occupazionale, residenza o altre condizioni. Il servizio è rivolto agli alunni delle scuole comunali e agli insegnanti aventi diritto al pasto, ma non sono indicati criteri specifici per accedervi."
+ ]
+}

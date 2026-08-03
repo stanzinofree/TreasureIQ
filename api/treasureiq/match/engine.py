@@ -27,7 +27,6 @@ from enum import Enum
 from treasureiq.schema import (
     CitizenProfile,
     Confidence,
-    EmploymentStatus,
     Opportunity,
     Requirements,
 )

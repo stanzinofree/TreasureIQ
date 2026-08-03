@@ -53,6 +53,10 @@ export interface Match {
   ente: string;
   deadline: string | null;
   confidence: string;
+  /** D-20 — which administrative tier published this (`Livello` in
+   * `schema.py`). Always shown on the card: it is what tells the citizen
+   * whether this benefit is theirs to lose if the comune goes quiet. */
+  livello: "nazionale" | "regionale" | "comunale";
 }
 
 export interface Dimension {
@@ -157,6 +161,28 @@ export const recovery = (istat: string) =>
   call<Recovery>(`/api/recovery/${istat}`);
 export const recoveryAll = () => call<Recovery[]>("/api/recovery");
 
+/** Per-ente access mode + integration cost (`IntegrationOut` in `api.py`,
+ * D-21). `diagnosis` and `integration_cost` are the same deterministic
+ * sentences the chat's INFORMAZIONE rail composes for the same ente — this
+ * page renders them, never re-authors them, so the two surfaces agree.
+ * `datasets_on_dati_gov` is `null` where it was never probed (Marino) and
+ * must render as "non misurato", never as `0` (D-16). */
+export interface Integration {
+  ente: string;
+  codice_istat: string;
+  access_mode: string;
+  label: string;
+  probe_dated: string;
+  probe_method: string;
+  diagnosis: string[];
+  integration_cost: string[];
+  datasets_on_dati_gov: number | null;
+  benchmark_342: number | null;
+  segnalazioni_count: number;
+}
+
+export const integrationAll = () => call<Integration[]>("/api/integration");
+
 /** The chat contract (K3) — must stay field-for-field identical to the
  * `ChatOut` pydantic model in `api/treasureiq/api.py`. `data_gap` carries the
  * distinction the whole project exists to make: "the comune never published
@@ -190,12 +216,79 @@ export interface ChatCost {
   levels: CostLevels | null;
 }
 
+/** D-19 — the router classifies the shape of the question, not just its
+ * topic, before anything else runs. AGEVOLAZIONE is the eligibility rail
+ * (verdict, criteria, SPID); INFORMAZIONE is the document/office rail below
+ * and never carries any of that furniture. */
+export type QuestionKind = "informazione" | "agevolazione";
+
+/** A source page found for an INFORMAZIONE answer, when one exists. */
+export interface InfoDocument {
+  title: string;
+  url: string;
+}
+
+/** The office a citizen can actually call, mirrors `UrpContact` in
+ * `integration.py`. Every field but `nome` is independently nullable — a
+ * comune that never published a phone number is a measured fact, and the
+ * UI must render that absence, never a guessed centralino. */
+export interface InfoOffice {
+  nome: string;
+  telefono: string | null;
+  email: string | null;
+  orari: string | null;
+}
+
+/** One cached web-search hit (D-28, `M6_web_aperto`) — verbatim title and
+ * URL, nothing else. `non_verificato` is always `true` on this rail; the
+ * field exists so the client renders the label from data, not from a
+ * hardcoded assumption about which array it is looking at. */
+export interface InfoWebResult {
+  title: string;
+  url: string;
+  non_verificato: boolean;
+}
+
+/** Composition of an INFORMAZIONE answer (mirrors respond.py's `InfoAnswer`
+ * / B20b's API mapping). `diagnosis` and `integration_cost` are each a list
+ * of measured-fact lines — kept as two separate lists (not concatenated)
+ * because they answer different questions: what was checked, and what
+ * checking it cost. `coverage_count` is a raw count of matching records;
+ * the client composes the sentence around it. */
+export interface InfoOut {
+  document: InfoDocument | null;
+  office: InfoOffice | null;
+  coverage_count: number;
+  diagnosis: string[];
+  integration_cost: string[];
+  web_results: InfoWebResult[];
+  /** B22 (D-25) — which comune this INFORMAZIONE answer is about, resolved
+   * server-side from the office it already carries (`_enti_by_urp_nome` in
+   * `api.py`). `null` when no ente could be resolved — nothing to count a
+   * segnalazione against. */
+  codice_istat: string | null;
+  ente: string | null;
+}
+
 export interface ChatOut {
   reply: string;
   matches: Match[];
   data_gap: DataGap | null;
   escalation: Escalation | null;
   cost: ChatCost | null;
+  /** D-19 rail marker. */
+  kind: QuestionKind;
+  /** D-29 — residual actions left on the citizen after this answer (a
+   * count, never an estimate). `null` off the INFORMAZIONE rail. Always
+   * rendered apart from `cost`: the two answer different questions and
+   * must never be summed or share a line. */
+  citizen_effort: number | null;
+  /** The access rung this answer was composed at (e.g. `M6_web_aperto`).
+   * `null` off the INFORMAZIONE rail. */
+  access_mode: string | null;
+  /** `null` on the AGEVOLAZIONE rail — an eligibility answer never carries
+   * INFORMAZIONE furniture, and vice versa (D-19). */
+  info: InfoOut | null;
 }
 
 export interface ChatTurn {
@@ -234,9 +327,31 @@ export interface SourceStatus {
   records: number | null;
 }
 
+/** One row in the "Sistemi" group of `/api/status` — a TreasureIQ component.
+ * `stato` is "ok" | "degraded" | "down" | "unknown"; "unknown" is a real,
+ * honest state (unmonitored at runtime), never a masked "down". */
+export interface SystemComponent {
+  nome: string;
+  stato: "ok" | "degraded" | "down" | "unknown";
+  detail: string;
+}
+
+/** One row in the "Stato dati interni" group. `value` is pre-formatted on the
+ * server so the client never re-formats a number it did not measure. */
+export interface InternalDatum {
+  nome: string;
+  stato: "ok" | "degraded" | "down" | "unknown";
+  value: string;
+  detail: string;
+}
+
 export interface StatusOut {
   overall: "ok" | "degraded" | "down" | null;
   sources: SourceStatus[] | null;
+  /** "Stato sistemi" — TreasureIQ's own components. Additive with the rest. */
+  sistemi: SystemComponent[] | null;
+  /** "Stato dati interni" — headline numbers on what was recovered. */
+  dati_interni: InternalDatum[] | null;
 }
 
 export const status = () => call<StatusOut>("/api/status");
@@ -255,3 +370,14 @@ export const comuneNearby = (lat: number, lon: number) =>
   call<ComuneNearby | null>(
     `/api/comune-nearby?lat=${encodeURIComponent(lat)}&lon=${encodeURIComponent(lon)}`,
   );
+
+/** B22 (D-25) — the anonymous per-comune segnalazione counter, keyed by
+ * `codice_istat`. Never carries anything besides a count: no IP, no
+ * session, no citizen text (`SegnalazioneIn`/routes in `api.py`). */
+export const segnalazioni = () => call<Record<string, number>>("/api/segnalazioni");
+
+export const inviaSegnalazione = (codiceIstat: string) =>
+  call<Record<string, number>>("/api/segnalazioni", {
+    method: "POST",
+    body: JSON.stringify({ codice_istat: codiceIstat }),
+  });

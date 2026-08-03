@@ -99,6 +99,20 @@ class Confidence(str, Enum):
     INFERRED = "inferred"
 
 
+class Livello(str, Enum):
+    """Which administrative tier published this opportunity (D-20).
+
+    Municipal connectors only ever produce `COMUNALE`; the hand-curated
+    national/regional layer (`data/seed/nazionale_curated.json`) is the only
+    producer of the other two. Defaulted so every seed written before this
+    field existed keeps validating unchanged.
+    """
+
+    NAZIONALE = "nazionale"
+    REGIONALE = "regionale"
+    COMUNALE = "comunale"
+
+
 class Money(BaseModel):
     """An amount, possibly a range, possibly open-ended."""
 
@@ -297,6 +311,11 @@ class Opportunity(BaseModel):
     source: Source
     confidence: Confidence = Field(
         description="Trust level of the structured fields as a whole."
+    )
+    livello: Livello = Field(
+        default=Livello.COMUNALE,
+        description="Administrative tier that published this record (D-20). "
+        "Defaulted to COMUNALE so existing municipal seeds validate unchanged.",
     )
     extraction_notes: list[str] = Field(
         default_factory=list,

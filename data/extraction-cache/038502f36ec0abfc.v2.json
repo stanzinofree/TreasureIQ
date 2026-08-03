@@ -1,0 +1,41 @@
+{
+ "isee_max": null,
+ "isee_min": null,
+ "isee_mentioned_without_threshold": false,
+ "eta_min": null,
+ "eta_max": null,
+ "nucleo_min": null,
+ "figli_minori_required": false,
+ "disabilita_required": false,
+ "residenza_required": null,
+ "employment_status": [],
+ "other": [
+  "Il servizio è rivolto agli utenti che necessitano il ritiro di sfalci e potature presso la loro abitazione",
+  "Il servizio può essere attivato annualmente, solo se in regola con i pagamenti Tarip",
+  "L’iscrizione al servizio di raccolta sfalci e/o potature nel territorio comunale di Ariccia prevede un abbonamento annuale al servizio di raccolta avente un importo di € 35,00",
+  "La presentazione della richiesta prevede l’obbligo di allegare copia del bonifico attestante l’avvenuto pagamento dell’abbonamento annuale"
+ ],
+ "quotes": [
+  {
+   "field": "other",
+   "text": "Il servizio è rivolto agli utenti che necessitano il ritiro di sfalci e potature presso la loro abitazione"
+  },
+  {
+   "field": "other",
+   "text": "Il servizio può essere attivato annualmente, solo se in regola con i pagamenti Tarip"
+  },
+  {
+   "field": "other",
+   "text": "L’iscrizione al servizio di raccolta sfalci e/o potature nel territorio comunale di Ariccia prevede un abbonamento annuale al servizio di raccolta avente un importo di € 35,00"
+  },
+  {
+   "field": "other",
+   "text": "La presentazione della richiesta prevede l’obbligo di allegare copia del bonifico attestante l’avvenuto pagamento dell’abbonamento annuale"
+  }
+ ],
+ "deadline_iso": null,
+ "notes": [
+  "Non è specificata una data di scadenza per la presentazione della domanda",
+  "Non è chiaro se la residenza nel comune è un requisito necessario per accedere al servizio"
+ ]
+}

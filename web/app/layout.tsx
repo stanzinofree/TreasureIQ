@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Link from "next/link";
 import { Wordmark } from "@/components/Seal";
+import SiteFooter from "@/components/SiteFooter";
 import StatusPill from "@/components/StatusPill";
 import "./globals.css";
 
@@ -58,21 +59,34 @@ export default function RootLayout({
         <a className="skip-link" href="#main">
           Vai al contenuto
         </a>
-        <div className="shell">
-          <header className="masthead">
+        <header className="masthead">
+          <div className="masthead__inner">
             <Link href="/" className="wordmark">
-              <Wordmark />
               TreasureIQ
             </Link>
+            {/* The wordmark sits outside the nav: it is the home link, not a
+                nav item, and keeping it separate lets the links become their
+                own scrollable row on narrow screens instead of wrapping the
+                whole masthead onto three lines. */}
             <nav className="nav" aria-label="Principale">
               <Link href="/opportunita">Opportunità</Link>
               <Link href="/dati">Qualità dei dati</Link>
+              <Link href="/manifesto">Manifesto</Link>
               <Link href="/info">Come funziona</Link>
-              <StatusPill />
             </nav>
-          </header>
-          <main id="main">{children}</main>
-        </div>
+            <div className="masthead__right">
+              <StatusPill />
+              {/* Logo placeholder, top-right — Alex will design the real mark. */}
+              <Link href="/" className="masthead__logo" aria-label="TreasureIQ — home">
+                <Wordmark />
+              </Link>
+            </div>
+          </div>
+        </header>
+        <main id="main">
+          <div className="shell">{children}</div>
+        </main>
+        <SiteFooter />
       </body>
     </html>
   );

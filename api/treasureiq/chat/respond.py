@@ -114,7 +114,26 @@ MAX_WEB_RESULTS_IN_REPLY = 3
 #: topic with no entry here simply never triggers a web lookup — `None` is
 #: never fabricated into a query.
 WEBSEARCH_QUERY_FRAGMENTS: dict[Topic, str] = {
-    Topic.RIFIUTI: "calendario raccolta vetro",
+    Topic.RIFIUTI: "calendario raccolta differenziata",
+    Topic.SOSTEGNO_UTENZE: "bonus sociale bollette requisiti",
+    Topic.CONTRIBUTO_AFFITTO: "contributo affitto morosità incolpevole bando",
+    Topic.MENSA_SCOLASTICA: "mensa scolastica tariffe iscrizione",
+    Topic.TRASPORTO_SCOLASTICO: "trasporto scolastico scuolabus iscrizione",
+    Topic.CONTRIBUTO_LIBRI: "contributo libri di testo bando",
+    Topic.BORSA_STUDIO: "borsa di studio bando",
+    Topic.ASSEGNO_MATERNITA: "assegno di maternità requisiti",
+    Topic.VOUCHER_CONCILIAZIONE: "voucher conciliazione lavoro famiglia",
+    Topic.ASSISTENZA_DISABILITA: "assistenza domiciliare disabilità",
+    Topic.CONTRASSEGNO_DISABILI: "contrassegno disabili rilascio",
+    Topic.ANAGRAFE_CARTA_IDENTITA: "carta d'identità elettronica appuntamento",
+    Topic.ACCESSO_ATTI: "accesso agli atti modulo",
+    Topic.OCCUPAZIONE_SUOLO: "occupazione suolo pubblico domanda",
+    Topic.CAREGIVER_DOMICILIARE: "caregiver familiare contributo",
+    Topic.MATRIMONIO_SEPARAZIONE: "matrimonio civile pubblicazioni",
+    Topic.INCLUSIONE_SOCIALE: "inclusione sociale servizi sociali",
+    Topic.SUAP_IMPRESE: "SUAP sportello unico attività produttive",
+    Topic.AREA_VERDE: "aree verdi parchi",
+    Topic.VOLONTARIATO: "volontariato albo associazioni",
 }
 
 

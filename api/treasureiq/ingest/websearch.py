@@ -39,6 +39,7 @@ import os
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
+from urllib.parse import urlparse
 
 import httpx
 from pydantic import BaseModel
@@ -47,6 +48,55 @@ logger = logging.getLogger(__name__)
 
 CACHE_VERSION = 1
 MAX_RESULTS = 3
+
+#: Only these hosts may reach a citizen. An open web search for "bonus sociale
+#: bollette Albano Laziale" returns, above the real ones, a commercial energy
+#: blog and a Facebook group — and this rail exists precisely for the moments
+#: when the institutional sources ran out, which is when a citizen is least
+#: able to tell the difference. A result outside this list is dropped, never
+#: shown with a warning: a page presented as an answer is trusted whatever the
+#: label says.
+#:
+#: Suffix match on the host, so `comune.albanolaziale.rm.it` passes via
+#: `.rm.it`-less rules below and `notgov.it` cannot pass as `gov.it`.
+ISTITUZIONALI: tuple[str, ...] = (
+    ".gov.it",
+    ".gob.it",
+    "inps.it",
+    "arera.it",
+    "agenziaentrate.gov.it",
+    "lavoro.gov.it",
+    "salute.gov.it",
+    "regione.lazio.it",
+    "cittametropolitanaroma.it",
+    "anci.it",
+    "europa.eu",
+)
+
+#: Municipal sites do not share one suffix, so they are recognised by shape:
+#: `comune.<qualcosa>.<provincia>.it` and the handful of variants Italian
+#: comuni actually use.
+_COMUNE_HOST = ("comune.", "comuni.", "citta.", "cittadi.")
+
+
+def is_institutional(url: str) -> bool:
+    """Whether a URL belongs to a public body.
+
+    Deliberately strict and deliberately dumb: an allowlist of suffixes plus a
+    municipal host shape. Anything clever here — scoring, "looks official",
+    trusting the search engine's own ranking — would eventually let a
+    convincing commercial page through, and the whole point of this filter is
+    that a citizen who has run out of institutional sources cannot afford to
+    adjudicate that themselves.
+    """
+    try:
+        host = urlparse(url).hostname or ""
+    except ValueError:
+        return False
+    host = host.lower().removeprefix("www.")
+    if any(host == s.lstrip(".") or host.endswith(s) for s in ISTITUZIONALI):
+        return True
+    return any(host.startswith(p) for p in _COMUNE_HOST) and host.endswith(".it")
 
 DEFAULT_SEARXNG_URL = "http://localhost:8080"
 DEFAULT_TIMEOUT = 15.0
@@ -122,13 +172,30 @@ def search_searxng(
     response.raise_for_status()
     payload = response.json()
 
+    # Filter first, then take the top few. Slicing before filtering would let
+    # three commercial pages consume the whole budget and return nothing, which
+    # is how this rail would silently go quiet exactly when it is needed.
     results: list[WebResult] = []
-    for hit in payload.get("results", [])[:MAX_RESULTS]:
+    scartati = 0
+    for hit in payload.get("results", []):
         title = hit.get("title")
         url = hit.get("url")
         if not title or not url:
             continue
+        if not is_institutional(url):
+            scartati += 1
+            continue
         results.append(WebResult(title=title, url=url))
+        if len(results) == MAX_RESULTS:
+            break
+
+    if scartati:
+        logger.info(
+            "web search %r: %d risultati non istituzionali scartati, %d tenuti",
+            query,
+            scartati,
+            len(results),
+        )
     return results
 
 
@@ -143,8 +210,17 @@ def run_and_cache(
 
     A connection error or non-200 propagates to the caller unhandled — the
     CLI turns that into a non-zero exit and writes nothing (D-28's
-    degradation rule). A 200 with zero hits still produces and writes a real
-    entry with `results: []`.
+    degradation rule).
+
+    An empty result set is *not* written either, and that is the important
+    part. A 200 with zero hits does not mean the web holds nothing on the
+    subject; in practice it has meant the upstream engines were rate-limiting
+    or serving a CAPTCHA, and forty such entries were once cached in a single
+    run. Persisted, they are indistinguishable at read time from a genuine
+    absence — and this project states absences to citizens as findings. An
+    absence we cannot tell apart from a failure must not be recorded as one,
+    so the cache stays silent and the caller sees an empty entry it can
+    retry.
     """
     results = search_searxng(query, base_url=base_url, timeout=timeout)
     entry = WebSearchCacheEntry(
@@ -153,6 +229,13 @@ def run_and_cache(
         fetched_at=datetime.now(timezone.utc),
         results=results,
     )
+    if not results:
+        logger.warning(
+            "web search %r returned nothing — not cached: an empty answer here "
+            "usually means the engines refused us, not that nothing exists",
+            query,
+        )
+        return entry
     cache_dir.mkdir(parents=True, exist_ok=True)
     cache_path(query, cache_dir).write_text(
         entry.model_dump_json(indent=1), encoding="utf-8"

@@ -2638,3 +2638,160 @@ a {
     gap: var(--ma-1);
   }
 }
+
+/* ---------------------------------------------------------- flow diagram */
+
+/* The cycle, drawn. The label on each step says who acts, because the ratio
+   is the argument: one step of eight touches the model, and in that one it
+   produces neither verdicts nor numbers. */
+.ciclo {
+  list-style: none;
+  counter-reset: passo;
+  margin: var(--ma-8) 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0;
+}
+.ciclo__passo {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--ma-4);
+  padding: var(--ma-4) 0;
+  position: relative;
+}
+/* The connector line, drawn behind the numbers rather than between them, so
+   the sequence reads as one movement instead of eight cards. */
+.ciclo__passo::before {
+  content: "";
+  position: absolute;
+  left: 17px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--kasumi);
+}
+.ciclo__passo:first-child::before {
+  top: 50%;
+}
+.ciclo__passo:last-child::before {
+  bottom: 50%;
+}
+.ciclo__n {
+  position: relative;
+  z-index: 1;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.86rem;
+  background: var(--paper-raised);
+  border: 2px solid var(--kasumi);
+}
+/* Colour by actor, not by order: what matters is who is acting. */
+.ciclo__passo[data-attore="modello"] .ciclo__n {
+  border-color: var(--ai-vivid);
+  background: var(--ai-wash);
+}
+.ciclo__passo[data-attore="regola"] .ciclo__n {
+  border-color: var(--wakatake);
+}
+.ciclo__passo[data-attore="dati"] .ciclo__n {
+  border-color: var(--sumi-faint);
+}
+.ciclo__corpo h3 {
+  margin: 0;
+  font-size: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--ma-3);
+}
+.ciclo__ramo {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--yamabuki-deep);
+  border: 1px dashed var(--yamabuki);
+  border-radius: 999px;
+  padding: 1px var(--ma-2);
+}
+.ciclo__corpo p {
+  margin: var(--ma-2) 0 0;
+  color: var(--sumi-soft);
+  font-size: 0.92rem;
+  max-width: 68ch;
+}
+.ciclo__attore {
+  display: inline-block;
+  margin-top: var(--ma-2);
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sumi-faint);
+}
+.ciclo__nota {
+  margin: var(--ma-8) 0 0;
+  padding-left: var(--ma-4);
+  border-left: 3px solid var(--ai-vivid);
+  color: var(--sumi-soft);
+  font-size: 0.92rem;
+}
+
+/* ------------------------------------------------------ open-data checklist */
+
+.specifiche {
+  list-style: none;
+  margin: var(--ma-6) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--ma-4);
+}
+.specifica {
+  border-left: 4px solid var(--kasumi);
+  padding: var(--ma-3) 0 var(--ma-3) var(--ma-4);
+}
+/* The colour says how often we found it, so a reader can see at a glance
+   which gaps are systematic rather than incidental. */
+.specifica[data-stato="assente"] {
+  border-left-color: var(--shu);
+}
+.specifica[data-stato="parziale"] {
+  border-left-color: var(--yamabuki);
+}
+.specifica[data-stato="presente"] {
+  border-left-color: var(--wakatake);
+}
+.specifica__testa {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--ma-2);
+}
+.specifica__testa code {
+  font-family: var(--font-mono);
+  font-size: 0.92rem;
+  background: var(--paper-sunken);
+  padding: 1px var(--ma-2);
+  border-radius: 3px;
+}
+.specifica__stato {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--sumi-faint);
+}
+.specifica__cosa {
+  margin: var(--ma-2) 0 0;
+  font-size: 0.94rem;
+}
+.specifica__senza {
+  margin: var(--ma-2) 0 0;
+  font-size: 0.88rem;
+  color: var(--sumi-faint);
+}

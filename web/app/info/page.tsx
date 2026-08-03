@@ -11,6 +11,8 @@
 
 import { readiness, type Readiness } from "@/lib/api";
 import Link from "next/link";
+import CicloFlusso from "@/components/CicloFlusso";
+import SpecificheOpenData from "@/components/SpecificheOpenData";
 
 export const dynamic = "force-dynamic";
 
@@ -30,7 +32,8 @@ export default async function Info() {
 
   return (
     <div className="stack">
-      <section>
+      <section className="manifesto-hero">
+        <div className="manifesto-hero__inner">
         {/* This page and /manifesto once opened with the same headline, which
             made them read as two drafts of one page. The split now holds: the
             manifesto says what we hold ourselves to, this says how the
@@ -49,7 +52,10 @@ export default async function Info() {
           Se invece cerchi il perché e le cose a cui non rinunciamo, sono nel{" "}
           <Link href="/manifesto">manifesto</Link>.
         </p>
+        </div>
       </section>
+
+      <CicloFlusso />
 
       <section className="panel">
         <h2>Il verdetto lo decide una regola, non un&apos;intelligenza artificiale</h2>
@@ -175,6 +181,8 @@ export default async function Info() {
           sit under the composer, stacking a second bar along the bottom edge
           the conversation already owns. Licence and provenance belong on the
           page that explains the project, not on every page. */}
+      <SpecificheOpenData />
+
       <section className="prose">
         <h2>Licenza e provenienza</h2>
         <p className="lede">

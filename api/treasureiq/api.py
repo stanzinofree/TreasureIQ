@@ -335,6 +335,14 @@ def to_match_out(result: MatchResult) -> MatchOut:
     )
 
 
+def _pec_di(codice_istat: str | None) -> str | None:
+    """The body's certified address, from IPA. `None` when we have not read one."""
+    if codice_istat is None:
+        return None
+    ente = load_enti().get(codice_istat)
+    return ente.ipa.pec if ente is not None and ente.ipa is not None else None
+
+
 def _ufficio_di(codice_istat: str | None) -> UfficioOut | None:
     """The publishing body's desk, if one has been recorded and verified.
 
@@ -514,6 +522,11 @@ class OfficeOut(BaseModel):
     telefono: str | None
     email: str | None
     orari: str | None
+    #: The certified address from IPA. Preferred over `email` as the recipient
+    #: of a formal request, because a PEC obliges the body to reply while an
+    #: ordinary inbox does not — and a citizen asking their comune to publish
+    #: its data deserves the channel that cannot simply be ignored.
+    pec: str | None = None
 
 
 class WebResultOut(BaseModel):
@@ -571,6 +584,11 @@ def to_info_out(info: InfoAnswer) -> InfoOut:
                 telefono=info.office.telefono,
                 email=info.office.email,
                 orari=info.office.orari,
+                # Resolved from the same `target` the rest of this function
+                # uses — a `(codice_istat, ente)` pair keyed by URP name — so
+                # the certified address cannot end up belonging to a different
+                # body than the office printed beside it.
+                pec=_pec_di(target[0]) if target is not None else None,
             )
             if info.office is not None
             else None

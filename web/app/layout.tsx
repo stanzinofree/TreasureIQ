@@ -69,6 +69,7 @@ export default function RootLayout({
                 whole masthead onto three lines. */}
             <nav className="nav" aria-label="Principale">
               <Link href="/dati">Qualità dei dati</Link>
+              <Link href="/monitoraggio">Monitoraggio</Link>
               <Link href="/manifesto">Manifesto</Link>
               <Link href="/info">Come funziona</Link>
             </nav>

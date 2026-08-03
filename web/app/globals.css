@@ -1203,9 +1203,11 @@ a {
   padding: var(--ma-6) var(--ma-6) var(--ma-12);
   border-bottom: 1px solid var(--kasumi);
 }
+/* Full width. Held to 860px the statement sat in a narrow gutter with two
+   thirds of the screen empty beside it, which is the opposite of what an
+   opening line is for. The prose inside keeps its own measure. */
 .manifesto-hero__inner {
-  max-width: 860px;
-  margin: 0 auto;
+  max-width: none;
 }
 .manifesto-hero h1 {
   font-size: clamp(2rem, 5vw, 3.2rem);

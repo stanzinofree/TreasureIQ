@@ -84,7 +84,15 @@ export default function Segnalazione({
   }, [codiceIstat]);
 
   const { subject, body } = buildRequest(ente);
-  const recipient = office?.email && isPlausibleEmail(office.email) ? office.email : "";
+
+  // The certified address wins when we have one. A PEC obliges the body to
+  // answer; an ordinary inbox can be ignored without consequence, and someone
+  // asking their comune to open its data deserves the channel that cannot be.
+  // Both come from sources that carry their own provenance — IPA for the PEC,
+  // the comune's own page for the URP address — so neither is a guess.
+  const pec = office?.pec && isPlausibleEmail(office.pec) ? office.pec : "";
+  const urp = office?.email && isPlausibleEmail(office.email) ? office.email : "";
+  const recipient = pec || urp;
   const mailtoHref = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
   async function generate() {

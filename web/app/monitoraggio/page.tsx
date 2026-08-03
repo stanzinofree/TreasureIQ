@@ -188,8 +188,12 @@ export default async function Monitoraggio() {
         <section className="systems__group">
           <div className="systems__group-head">
             <h2>Fonti</h2>
+            {/* The (MVP) is load-bearing. Three comuni out of roughly eight
+                thousand is a proof that the method works, not a service that
+                covers the country, and a reader who mistakes one for the other
+                will conclude we are tiny rather than that we are early. */}
             <span className="systems__group-note">
-              i comuni da cui TreasureIQ risponde
+              i comuni da cui TreasureIQ risponde oggi <strong>(MVP)</strong>
             </span>
           </div>
           <div className="panel">

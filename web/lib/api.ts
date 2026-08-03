@@ -294,6 +294,9 @@ export interface InfoOffice {
   telefono: string | null;
   email: string | null;
   orari: string | null;
+  /** Certified address from IPA. Preferred as the recipient of a formal
+   * request: a PEC obliges a reply, an ordinary inbox does not. */
+  pec: string | null;
 }
 
 /** One cached web-search hit (D-28, `M6_web_aperto`) — verbatim title and

@@ -10,6 +10,7 @@
  */
 
 import { readiness, type Readiness } from "@/lib/api";
+import Link from "next/link";
 
 export const dynamic = "force-dynamic";
 
@@ -30,14 +31,23 @@ export default async function Info() {
   return (
     <div className="stack">
       <section>
+        {/* This page and /manifesto once opened with the same headline, which
+            made them read as two drafts of one page. The split now holds: the
+            manifesto says what we hold ourselves to, this says how the
+            machinery actually works — the rule that decides, the sentence that
+            has to be found in the source, the rungs we climb down. */}
         <p className="eyebrow">Come funziona TreasureIQ</p>
-        <h1>I dati del tuo comune, letti al posto tuo</h1>
+        <h1>Il meccanismo, per intero</h1>
         <p className="lede">
-          TreasureIQ legge le pagine pubbliche del tuo comune — servizi,
-          bandi, avvisi, contributi — e le confronta con la tua situazione,
-          per dirti a quali hai davvero accesso. Non inventa nulla: se una
-          risposta non può essere confermata dai dati pubblicati, te lo dice
-          chiaramente, invece di indovinare.
+          TreasureIQ legge le pagine pubbliche di un comune — servizi, bandi,
+          avvisi, contributi — e le confronta con la situazione di chi chiede,
+          per dire a quali ha davvero accesso. Qui c&apos;è come: cosa decide un
+          esito, cosa succede a un requisito che non si ritrova nella fonte, e
+          fin dove scendiamo per arrivare a un dato.
+        </p>
+        <p className="lede">
+          Se invece cerchi il perché e le cose a cui non rinunciamo, sono nel{" "}
+          <Link href="/manifesto">manifesto</Link>.
         </p>
       </section>
 

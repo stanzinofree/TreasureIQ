@@ -2344,3 +2344,36 @@ a {
   border-left: 3px dashed var(--kasumi);
   color: var(--sumi-faint);
 }
+
+/* --------------------------------------------------------- manifesto list */
+
+/* Sections headed by a single noun, in the manner of the Openpolis manifesto
+   this page is modelled on: the heading names the commitment, the paragraph
+   makes it. Two columns on a wide screen so the list reads as a set of
+   positions rather than a long scroll of prose. */
+.principi {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--ma-8) var(--ma-12);
+}
+.principio h2 {
+  font-size: 1.06rem;
+  margin: 0 0 var(--ma-2);
+  padding-bottom: var(--ma-2);
+  border-bottom: 2px solid var(--ai-vivid);
+  display: inline-block;
+}
+.principio p {
+  margin: 0;
+  color: var(--sumi-soft);
+  max-width: 62ch;
+}
+.manifesto-cta__azioni {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ma-4);
+  max-width: none;
+}

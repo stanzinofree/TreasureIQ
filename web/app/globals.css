@@ -623,10 +623,6 @@ a {
     align-items: center;
     white-space: nowrap;
   }
-  .site-footer__top {
-    grid-template-columns: 1fr;
-    gap: var(--ma-8);
-  }
   .manifesto-chain {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -636,13 +632,11 @@ a {
   }
 }
 
-/* Tablet: the data chain breathes into 3 columns, the footer into two. */
+/* Tablet: the data chain breathes into 3 columns. The footer needs no
+   breakpoint of its own — one wrapping row of links already collapses. */
 @media (max-width: 1024px) {
   .manifesto-chain {
     grid-template-columns: repeat(3, 1fr);
-  }
-  .site-footer__top {
-    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -912,65 +906,41 @@ a {
   background: var(--paper-sunken);
 }
 
+/* Short on purpose: the four-column block with its own live stats stood
+   taller than the chat it sat under, and every one of those numbers is
+   already on /monitoraggio. Two lines is enough for a footer. */
 .site-footer__inner {
   max-width: 1760px;
   margin: 0 auto;
-  padding: var(--ma-12) var(--ma-6) var(--ma-8);
+  padding: var(--ma-6) var(--ma-4);
 }
 
-.site-footer__top {
-  display: grid;
-  grid-template-columns: 1.4fr repeat(3, 1fr);
-  gap: var(--ma-8);
-  margin-bottom: var(--ma-12);
+.site-footer__links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--ma-3) var(--ma-6);
 }
-
-.site-footer__brand .wordmark {
-  font-size: 1.2rem;
-  margin-bottom: var(--ma-3);
+.site-footer__links .wordmark {
+  font-size: 1rem;
+  margin-right: var(--ma-2);
 }
-.site-footer__tagline {
-  color: var(--sumi-soft);
-  font-size: 0.92rem;
-  max-width: 34ch;
-}
-
-.site-footer__col h3 {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--sumi-faint);
-  margin: 0 0 var(--ma-4);
-  font-weight: 600;
-}
-.site-footer__col ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: var(--ma-3);
-}
-.site-footer__col a {
+.site-footer__links a {
   color: var(--sumi-soft);
   text-decoration: none;
   font-size: 0.94rem;
 }
-.site-footer__col a:hover {
+.site-footer__links a:hover {
   color: var(--sumi);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
 
 .site-footer__legal {
-  border-top: 1px solid var(--kasumi);
-  padding-top: var(--ma-6);
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: var(--ma-4);
+  margin: var(--ma-4) 0 0;
   font-size: 0.82rem;
   color: var(--sumi-faint);
+  max-width: 90ch;
 }
 .site-footer__legal a {
   color: var(--sumi-faint);
@@ -978,32 +948,10 @@ a {
 
 /* ------------------------------------------------------ status systems (v3) */
 
-/* The header pill now reads the whole "Stato sistemi", not just the fonti.
-   One overall dot plus three small group dots — shape + colour, so the state
-   survives colour-blindness (dot arrangement, not just hue). */
-.status-pill__dots {
-  display: flex;
-  gap: 3px;
-}
-.status-pill__dot--sm {
-  width: 7px;
-  height: 7px;
-  border-radius: 999px;
-  background: var(--sumi-faint);
-}
-.status-pill__dot--sm[data-stato="ok"] {
-  background: var(--wakatake);
-}
-.status-pill__dot--sm[data-stato="degraded"] {
-  background: var(--yamabuki);
-}
-.status-pill__dot--sm[data-stato="down"] {
-  background: var(--shu);
-}
-.status-pill__dot--sm[data-stato="unknown"] {
-  background: var(--sumi-faint);
-  outline: 1px dashed var(--sumi-faint);
-}
+/* The per-group dots that used to sit beside the label are gone: the pill
+   answers one question (is the service up?) with one indicator, and the
+   breakdown lives on /monitoraggio where there is room to say what each
+   number means. */
 
 /* /monitoraggio — three groups (Fonti · Sistemi · Stato dati interni). */
 .systems {

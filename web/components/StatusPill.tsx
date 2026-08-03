@@ -1,19 +1,19 @@
 "use client";
 
 /**
- * Header pill (v3) — "Stato sistemi", not just "Fonti attive".
+ * Header pill — one indicator, one meaning: is the service up?
  *
- * Sourced from the extended `GET /api/status`, which carries three groups:
- * Fonti (the comuni), Sistemi (TreasureIQ's own components) and Stato dati
- * interni (headline recovery numbers).
+ * `GET /api/status` carries three groups (Fonti, Sistemi, Stato dati interni)
+ * and the pill used to show a dot for each. That was three questions asked in
+ * a corner of the masthead, and the third one has no business being there:
+ * "Fonti sotto piena apertura: 100%" measures how openly comuni publish their
+ * data, so it is red today, will stay red until they open it, and says nothing
+ * about whether anything is working. A permanent red dot next to a working
+ * service teaches people to ignore the indicator.
  *
- * The label reports *availability* only — the worst of Fonti and Sistemi.
- * Dati interni deliberately stays out of it: those entries measure how open
- * the published data is, so "Fonti sotto piena apertura: 100%" is red by
- * design and says nothing about whether the service is up. Folding it into
- * the label made a healthy system announce itself as "irraggiungibile",
- * which is the exact false alarm this project exists to avoid. It keeps its
- * own dot instead.
+ * So the pill answers availability only — the worst of Fonti and Sistemi — and
+ * `/monitoraggio` carries the breakdown, including the data-openness figures
+ * that belong in a report rather than in a status light.
  *
  * Every field is nullable and the endpoint itself may be unreachable — a real
  * state, not an error to hide: it renders "non verificato" rather than a
@@ -42,20 +42,6 @@ function worst(states: State[]): State {
   return "unknown";
 }
 
-const GROUP_LABEL: Record<"fonti" | "sistemi" | "dati", string> = {
-  fonti: "Fonti",
-  sistemi: "Sistemi",
-  dati: "Qualità dei dati",
-};
-
-// Screen readers get Italian, not the raw enum: "Dati interni: down" is jargon.
-const STATE_LABEL: Record<State, string> = {
-  ok: "regolare",
-  degraded: "sotto soglia",
-  down: "critico",
-  unknown: "non verificato",
-};
-
 export default function StatusPill() {
   const [data, setData] = useState<StatusOut | null>(null);
   const [failed, setFailed] = useState(false);
@@ -72,7 +58,6 @@ export default function StatusPill() {
 
   const sources = data?.sources ?? null;
   const sistemi = data?.sistemi ?? null;
-  const dati = data?.dati_interni ?? null;
 
   const fontiState: State = sources
     ? worst(sources.map((s) => ((s.records ?? 0) > 0 ? "ok" : "down")))
@@ -80,55 +65,20 @@ export default function StatusPill() {
   const sistemiState: State = sistemi
     ? worst(sistemi.map((s) => s.stato))
     : "unknown";
-  const datiState: State = dati ? worst(dati.map((d) => d.stato)) : "unknown";
 
-  // Availability only — `datiState` is a data-quality reading, not an outage.
   const overall: State =
-    !failed && (sources || sistemi)
-      ? worst([fontiState, sistemiState])
-      : "unknown";
-
-  const groups: { key: "fonti" | "sistemi" | "dati"; state: State }[] = [
-    { key: "fonti", state: fontiState },
-    { key: "sistemi", state: sistemiState },
-    { key: "dati", state: datiState },
-  ];
+    !failed && (sources || sistemi) ? worst([fontiState, sistemiState]) : "unknown";
 
   const reachableCount = sources?.filter((s) => (s.records ?? 0) > 0).length ?? null;
-
-  // The third dot is often red while the service is perfectly up, so the
-  // tooltip has to say what it measures — otherwise it reads as a fault.
-  const hint = [
+  const hint =
     reachableCount != null && sources != null
-      ? `${reachableCount} di ${sources.length} fonti con dati`
-      : null,
-    datiState === "down" || datiState === "degraded"
-      ? "qualità dei dati pubblicati sotto soglia (non è un guasto)"
-      : null,
-  ]
-    .filter(Boolean)
-    .join(" · ");
+      ? `${reachableCount} di ${sources.length} fonti con dati — vai al monitoraggio`
+      : "Vai al monitoraggio";
 
   return (
-    <Link
-      href="/monitoraggio"
-      className="status-pill"
-      data-overall={overall}
-      title={hint ? `${hint} — vai allo stato sistemi` : "Vai allo stato sistemi"}
-    >
+    <Link href="/monitoraggio" className="status-pill" data-overall={overall} title={hint}>
       <span className="status-pill__dot" aria-hidden="true" />
       <span>{LABEL[overall]}</span>
-      <span className="status-pill__dots" aria-label="Stato per gruppo" role="group">
-        {groups.map((g) => (
-          <span
-            key={g.key}
-            className="status-pill__dot--sm"
-            data-stato={g.state}
-            role="img"
-            aria-label={`${GROUP_LABEL[g.key]}: ${STATE_LABEL[g.state]}`}
-          />
-        ))}
-      </span>
     </Link>
   );
 }

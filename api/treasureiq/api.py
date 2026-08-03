@@ -57,7 +57,7 @@ from treasureiq.match.engine import (
 )
 from treasureiq.readiness import ReadinessReport, score_comune
 from treasureiq.recovery import ComuneRecovery, compute_comune_recovery
-from treasureiq.schema import CitizenProfile, Livello, Opportunity
+from treasureiq.schema import CitizenProfile, Confidence, Livello, Opportunity
 from treasureiq.stats import (
     APP_VERSION,
     AppStats,
@@ -932,6 +932,93 @@ def _costo_out(codice_istat: str) -> CostoOut:
             )
             for v in c.voci
         ],
+    )
+
+
+class FonteAggregata(BaseModel):
+    tipo: str
+    enti: int
+    servizi: int
+
+
+class PanoramicaOut(BaseModel):
+    """Aggregate figures for the monitoring dashboard.
+
+    Aggregate on purpose. Broken down per comune, the same numbers answered a
+    question nobody asked — the reader of a status page wants to know the shape
+    of what we hold, not to compare three municipalities line by line. The
+    per-comune detail lives on /dati, where comparing them is the point.
+    """
+
+    servizi_totali: int
+    enti_totali: int
+    comuni_misurati: int
+    #: Grouped by the tier that published them, which is the division that
+    #: changes what a record means: a national measure applies everywhere, a
+    #: municipal one only where it was published.
+    fonti: list[FonteAggregata]
+    criteri_strutturati: int
+    criteri_recuperati: int
+    criteri_non_recuperati: int
+    ultimo_accesso: datetime | None
+    #: How many comuni sit on each rung of D-21, keyed by access mode.
+    gradini: dict[str, int]
+
+
+@app.get("/api/panoramica", response_model=PanoramicaOut)
+def panoramica() -> PanoramicaOut:
+    """One aggregate picture of everything read so far."""
+    tutti: list[Opportunity] = []
+    for istat in COMUNI:
+        tutti.extend(load_opportunities(istat))
+    # `load_opportunities` merges the curated national layer into every comune,
+    # so the same national record arrives once per comune. Deduplicated by id,
+    # or a two-comune deployment would report twice the sources it has.
+    unici = {r.id: r for r in tutti}.values()
+
+    per_tipo: dict[str, dict[str, set | int]] = {}
+    ETICHETTA = {
+        Livello.NAZIONALE: "Stato",
+        Livello.REGIONALE: "Regioni",
+        Livello.COMUNALE: "Comuni",
+    }
+    for r in unici:
+        etichetta = ETICHETTA.get(r.livello, "Altro")
+        voce = per_tipo.setdefault(etichetta, {"enti": set(), "servizi": 0})
+        voce["enti"].add(r.source.ente)  # type: ignore[union-attr]
+        voce["servizi"] = int(voce["servizi"]) + 1  # type: ignore[arg-type]
+
+    fonti = [
+        FonteAggregata(tipo=t, enti=len(v["enti"]), servizi=int(v["servizi"]))  # type: ignore[arg-type]
+        for t, v in sorted(per_tipo.items(), key=lambda kv: -int(kv[1]["servizi"]))
+    ]
+
+    comunali = [r for r in unici if r.livello is Livello.COMUNALE]
+    strutturati = sum(
+        1
+        for r in comunali
+        if r.confidence is Confidence.DECLARED and not r.requirements.is_empty
+    )
+    recuperati = sum(1 for r in comunali if (r.requirements_recovered or 0) > 0)
+
+    letture = [r.source.fetched_at for r in unici if r.source.fetched_at]
+    enti = load_enti()
+    gradini: dict[str, int] = {}
+    for istat in COMUNI:
+        ente = enti.get(istat)
+        if ente is not None:
+            gradini[ente.access_mode.value] = gradini.get(ente.access_mode.value, 0) + 1
+
+    return PanoramicaOut(
+        servizi_totali=len(unici),
+        enti_totali=sum(f.enti for f in fonti),
+        comuni_misurati=len([i for i in COMUNI if i in enti]),
+        fonti=fonti,
+        criteri_strutturati=strutturati,
+        criteri_recuperati=recuperati,
+        criteri_non_recuperati=len(comunali) - strutturati - recuperati,
+        ultimo_accesso=max(letture) if letture else None,
+        gradini=gradini,
     )
 
 

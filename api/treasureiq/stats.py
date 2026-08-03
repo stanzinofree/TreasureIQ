@@ -346,17 +346,14 @@ def _build_dati_interni(
                 "per record recuperato da testo libero",
             )
         )
-    if app.sources_below_full_openness_pct is not None:
-        pct = app.sources_below_full_openness_pct
-        stato = "ok" if pct == 0 else ("degraded" if pct < 100 else "down")
-        items.append(
-            InternalDatum(
-                "Fonti sotto piena apertura",
-                stato,
-                f"{round(pct)}%",
-                "dei comuni misurati",
-            )
-        )
+    # "Fonti sotto piena apertura: 100%" used to sit here and has been removed.
+    # It failed three ways at once. The wording was a double negative nobody
+    # parses on first read. It was scored `down`, which painted a permanent red
+    # light beside a service that works — and taught anyone watching to ignore
+    # the indicator. And it is now redundant: the access ladder on /monitoraggio
+    # states the same fact by showing an empty M1 rung, which is both precise
+    # about *how* closed the sources are and impossible to misread as an
+    # outage.
 
     for istat, records in records_by_comune.items():
         if not records:

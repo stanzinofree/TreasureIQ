@@ -20,13 +20,16 @@
 
 import {
   costi,
+  panoramica,
   status,
   type Costo,
+  type Panoramica as PanoramicaDati,
   type InternalDatum,
   type SourceStatus,
   type StatusOut,
   type SystemComponent,
 } from "@/lib/api";
+import Panoramica from "@/components/Panoramica";
 import ScalaAccesso from "@/components/ScalaAccesso";
 
 export const dynamic = "force-dynamic";
@@ -132,6 +135,13 @@ export default async function Monitoraggio() {
   // Fail-soft, like every other panel here: the ladder is worth showing
   // when the cost endpoint answers and never worth taking the status
   // report down for.
+  let quadro: PanoramicaDati | null = null;
+  try {
+    quadro = await panoramica();
+  } catch {
+    quadro = null;
+  }
+
   let costiReport: Costo[] = [];
   try {
     costiReport = await costi();
@@ -170,6 +180,8 @@ export default async function Monitoraggio() {
       {/* The ladder goes above the three status groups on purpose. Those
           answer "is it working"; this answers "what did it take", which is the
           question the project exists to make askable. */}
+      <Panoramica dati={quadro} />
+
       <ScalaAccesso costi={costiReport} />
 
       <div className="systems">

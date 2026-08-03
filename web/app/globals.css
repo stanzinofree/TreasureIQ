@@ -2483,3 +2483,156 @@ a {
     gap: var(--ma-1);
   }
 }
+
+/* ------------------------------------------------------------- dashboard */
+
+/* Leads with the finding, not with the inventory. "94 servizi letti" is an
+   inventory; "84 su 91 senza condizioni leggibili" is the reason the project
+   exists, and it is the number a reader should leave with. */
+.panoramica__titolo {
+  font-size: clamp(1.15rem, 2.4vw, 1.5rem);
+  line-height: 1.45;
+  color: var(--sumi);
+  margin: var(--ma-4) 0 var(--ma-6);
+  max-width: 46ch;
+}
+.panoramica__titolo strong {
+  font-family: var(--font-mono);
+  font-weight: 500;
+}
+.panoramica__sotto {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sumi-faint);
+  margin: var(--ma-12) 0 var(--ma-4);
+}
+
+/* One bar, three shares. Proportion is what the eye reads here, so the parts
+   are sized by value — but each carries its own count underneath, because a
+   share nobody can put a number to is an impression, not evidence. */
+.quote {
+  display: flex;
+  height: 18px;
+  border-radius: 999px;
+  overflow: hidden;
+  gap: 2px;
+  background: var(--paper-sunken);
+}
+.quote__parte[data-tipo="strutturati"] {
+  background: var(--wakatake);
+}
+.quote__parte[data-tipo="recuperati"] {
+  background: var(--ai-vivid);
+}
+.quote__parte[data-tipo="illeggibili"] {
+  background: var(--yamabuki);
+}
+.quote__legenda {
+  list-style: none;
+  margin: var(--ma-4) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--ma-4);
+}
+.quote__legenda li {
+  border-top: 3px solid var(--kasumi);
+  padding-top: var(--ma-2);
+}
+.quote__legenda li[data-tipo="strutturati"] {
+  border-top-color: var(--wakatake);
+}
+.quote__legenda li[data-tipo="recuperati"] {
+  border-top-color: var(--ai-vivid);
+}
+.quote__legenda li[data-tipo="illeggibili"] {
+  border-top-color: var(--yamabuki);
+}
+.quote__cifra {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  line-height: 1.1;
+}
+.quote__etichetta {
+  display: block;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-top: 2px;
+}
+.quote__spiega {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--sumi-faint);
+  margin-top: 2px;
+}
+
+.vitali {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: var(--ma-6);
+  margin: var(--ma-12) 0 0;
+  padding-top: var(--ma-6);
+  border-top: 1px solid var(--kasumi);
+}
+.vitale__cifra {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 1.7rem;
+  line-height: 1.1;
+}
+.vitale__etichetta {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--sumi-faint);
+  margin-top: var(--ma-1);
+}
+
+.fonti-agg {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--ma-3);
+}
+.fonti-agg li {
+  display: grid;
+  grid-template-columns: minmax(90px, 1fr) minmax(80px, 3fr) auto;
+  align-items: center;
+  gap: var(--ma-3);
+  font-size: 0.9rem;
+}
+.fonti-agg__tipo {
+  font-weight: 600;
+}
+.fonti-agg__barra {
+  height: 10px;
+  background: var(--paper-sunken);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.fonti-agg__fill {
+  display: block;
+  height: 100%;
+  background: var(--ai);
+}
+.fonti-agg__cifra {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: var(--sumi-faint);
+  white-space: nowrap;
+}
+.fonti-agg__nota {
+  margin: var(--ma-4) 0 0;
+  font-size: 0.84rem;
+  color: var(--sumi-faint);
+}
+
+@media (max-width: 640px) {
+  .fonti-agg li {
+    grid-template-columns: 1fr;
+    gap: var(--ma-1);
+  }
+}

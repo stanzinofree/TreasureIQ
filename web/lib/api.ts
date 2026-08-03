@@ -162,8 +162,9 @@ export const approfondimento = (topic: string) =>
     body: JSON.stringify({ topic }),
   });
 export const me = () => call<Profile>("/api/me");
-export const opportunities = (includeIneligible = false) =>
-  call<Match[]>(`/api/opportunities?include_ineligible=${includeIneligible}`);
+// `opportunities` is gone from here with the page that used it. The endpoint
+// still exists server-side; a client wrapper nobody calls would just be a
+// hint that a removed page might come back.
 export const readiness = (istat: string) =>
   call<Readiness>(`/api/readiness/${istat}`);
 
@@ -476,3 +477,25 @@ export interface Costo {
 }
 
 export const costi = () => call<Costo[]>("/api/costo");
+
+export interface FonteAggregata {
+  tipo: string;
+  enti: number;
+  servizi: number;
+}
+
+/** Aggregate figures for the monitoring dashboard. Aggregate on purpose: the
+ * per-comune breakdown lives on /dati, where comparing them is the point. */
+export interface Panoramica {
+  servizi_totali: number;
+  enti_totali: number;
+  comuni_misurati: number;
+  fonti: FonteAggregata[];
+  criteri_strutturati: number;
+  criteri_recuperati: number;
+  criteri_non_recuperati: number;
+  ultimo_accesso: string | null;
+  gradini: Record<string, number>;
+}
+
+export const panoramica = () => call<Panoramica>("/api/panoramica");

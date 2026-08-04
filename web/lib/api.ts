@@ -314,6 +314,20 @@ export interface InfoWebResult {
   non_verificato: boolean;
 }
 
+/** Una riga di «cosa posso confermare». Mai una percentuale: un numero del
+ * genere avrebbe l'aria di una misura senza esserlo. */
+export interface Prova {
+  stato: "confermato" | "parziale" | "mancante";
+  testo: string;
+}
+
+/** Un passo che il cittadino puo' fare adesso. `tipo` dice come renderlo. */
+export interface Azione {
+  testo: string;
+  url: string | null;
+  tipo: "apri" | "chiama" | "email";
+}
+
 /** Composition of an INFORMAZIONE answer (mirrors respond.py's `InfoAnswer`
  * / B20b's API mapping). `diagnosis` and `integration_cost` are each a list
  * of measured-fact lines — kept as two separate lists (not concatenated)
@@ -333,6 +347,16 @@ export interface InfoOut {
    * l'etichetta esiste perché la differenza si veda senza doverla dedurre dal
    * testo della risposta. */
   letto_dal_vivo: boolean;
+  /** Provenienza del dato, mai un diritto: `ufficiale`, `parziale`,
+   * `non_verificato`, `non_pubblicato`. Sul rail INFORMAZIONE un verdetto non
+   * esiste (D-19) e questo campo non deve diventarne uno per abitudine. */
+  stato: "ufficiale" | "parziale" | "non_verificato" | "non_pubblicato";
+  /** Le righe di «cosa posso confermare», gia' composte dal backend: la UI le
+   * rende, non le deduce dal testo della risposta. */
+  prove: Prova[];
+  /** I passi successivi, scritti per esteso invece che contati. */
+  azioni: Azione[];
+  ente_nome: string | null;
   /** B22 (D-25) — which comune this INFORMAZIONE answer is about, resolved
    * server-side from the office it already carries (`_enti_by_urp_nome` in
    * `api.py`). `null` when no ente could be resolved — nothing to count a

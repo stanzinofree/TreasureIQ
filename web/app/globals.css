@@ -3155,3 +3155,221 @@ a {
   background: var(--paper-sunken) !important;
   color: var(--sumi) !important;
 }
+
+/* --- Risposta civica -----------------------------------------------------
+ *
+ * La gerarchia è il contenuto: stato, sintesi, servizio, cosa confermo, cosa
+ * puoi fare, ufficio, fonte, tecnico. Prima era tutto un paragrafo solo, e in
+ * quel paragrafo il nome del connettore pesava quanto il numero di telefono.
+ */
+
+.civica {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ma-3);
+}
+
+.civica__stato {
+  align-self: flex-start;
+  margin: 0;
+  padding: 2px var(--ma-2);
+  border: 1px solid currentColor;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Il verde solo dove qualcosa è davvero confermato; l'ambra per ciò che manca
+ * — è già il codice che il resto dell'app usa per `unknown_source`. Nessun
+ * rosso: un dato non pubblicato non è un errore di nessuno. */
+.civica__stato[data-stato="ufficiale"] { color: var(--verde, #1b7f5a); }
+.civica__stato[data-stato="parziale"] { color: var(--ambra, #8a6100); }
+.civica__stato[data-stato="non_verificato"] { color: var(--sumi-soft); }
+.civica__stato[data-stato="non_pubblicato"] { color: var(--ambra, #8a6100); }
+
+.civica__sintesi {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+.civica__servizio {
+  border: 1px solid var(--paper-sunken);
+  background: var(--paper-raised);
+  padding: var(--ma-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ma-2);
+  align-items: flex-start;
+}
+
+.civica__servizio h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.35;
+}
+
+.civica__ente {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--sumi-faint);
+}
+
+.civica__cta {
+  display: inline-block;
+  padding: var(--ma-2) var(--ma-3);
+  background: var(--ai);
+  color: var(--paper-raised);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.civica__cta:hover { filter: brightness(1.1); }
+
+/* Il dominio sotto il bottone, non l'URL steso dentro la frase. */
+.civica__dominio {
+  font-size: 0.76rem;
+  color: var(--sumi-faint);
+}
+
+.civica__blocco h4 {
+  margin: 0 0 var(--ma-2);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--sumi-faint);
+}
+
+.civica__prove {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.civica__prove li {
+  display: flex;
+  gap: var(--ma-2);
+  align-items: baseline;
+  font-size: 0.92rem;
+}
+
+.civica__prove li[data-stato="confermato"] > span { color: var(--verde, #1b7f5a); }
+.civica__prove li[data-stato="parziale"] > span { color: var(--ambra, #8a6100); }
+.civica__prove li[data-stato="mancante"] > span { color: var(--sumi-faint); }
+.civica__prove li[data-stato="mancante"] { color: var(--sumi-soft); }
+
+.civica__azioni {
+  margin: 0;
+  padding-inline-start: 1.2em;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.92rem;
+}
+
+.civica__ufficio {
+  margin: 0 0 var(--ma-2);
+  font-weight: 600;
+}
+
+.civica__contatti {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ma-3);
+}
+
+.civica__contatto {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 12rem;
+  padding: var(--ma-2);
+  border: 1px solid var(--paper-sunken);
+  background: var(--paper-raised);
+  font-size: 0.9rem;
+}
+
+.civica__contatto-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--sumi-faint);
+}
+
+/* Gli orari come li scrive il comune, una riga per interruzione: comprimerli
+ * in una riga sola costringe a decifrarli, riscriverli sarebbe interpretarli. */
+.civica__contatto--orari span:not(.civica__contatto-label) {
+  font-variant-numeric: tabular-nums;
+}
+
+.civica__nota {
+  font-size: 0.78rem;
+  color: var(--sumi-faint);
+}
+
+.civica__blocco--web {
+  border-inline-start: 3px solid var(--ambra, #8a6100);
+  padding-inline-start: var(--ma-2);
+}
+
+.civica__web {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ma-2);
+  font-size: 0.9rem;
+}
+
+.civica__web li { display: flex; flex-direction: column; }
+
+/* Consultabile, non invadente: la misura del costo d'accesso è il prodotto,
+ * ma non è la risposta alla domanda di chi ha scritto. */
+.civica__tecnico {
+  border-top: 1px solid var(--paper-sunken);
+  padding-top: var(--ma-2);
+  font-size: 0.85rem;
+  color: var(--sumi-soft);
+}
+
+.civica__tecnico summary {
+  cursor: pointer;
+  color: var(--sumi-faint);
+  font-size: 0.8rem;
+}
+
+.civica__tecnico ul {
+  margin: var(--ma-2) 0 0;
+  padding-inline-start: 1.1em;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.civica__vivo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--ma-2);
+  margin: 0;
+  padding: var(--ma-2);
+  border-inline-start: 3px solid var(--ai);
+  background: var(--paper-sunken);
+  font-size: 0.88rem;
+  color: var(--sumi-soft);
+}
+
+.civica__vivo-bollo {
+  flex: none;
+  padding: 0 var(--ma-2);
+  border: 1px solid var(--ai);
+  color: var(--ai);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}

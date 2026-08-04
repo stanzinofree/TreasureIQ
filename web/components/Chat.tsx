@@ -33,6 +33,7 @@ import Segnalazione from "@/components/Segnalazione";
 import SchedaDettaglio from "@/components/SchedaDettaglio";
 import AccessoSimulato from "@/components/AccessoSimulato";
 import SceltaComune from "@/components/SceltaComune";
+import RispostaCivica from "@/components/RispostaCivica";
 import { PRESETS } from "@/lib/profili-demo";
 import { useProfilo } from "@/lib/profilo";
 import { useRisultati } from "@/lib/risultati";
@@ -835,11 +836,15 @@ export default function Chat() {
                 </>
               )}
             </p>
-            <p>{m.content}</p>
+            {/* Sul rail INFORMAZIONE la sintesi è la prima riga della scheda,
+                non un paragrafo sciolto sopra di essa: `RispostaCivica` la
+                rende insieme allo stato, così le due cose che qualificano
+                tutto il resto stanno dove si guarda per prime. */}
+            {!(m.reply?.info) && <p>{m.content}</p>}
 
             {m.reply && (
               <div className="chat__answer">
-                {m.reply.cost && <CostStrip cost={m.reply.cost} />}
+                {m.reply.cost && !m.reply.info && <CostStrip cost={m.reply.cost} />}
 
                 {m.reply.kind === "informazione" ? (
                   // D-19 — the INFORMAZIONE rail never renders a verdict, a
@@ -848,7 +853,7 @@ export default function Chat() {
                   // AGEVOLAZIONE furniture below.
                   m.reply.info && (
                     <>
-                      <InfoAnswer info={m.reply.info} />
+                      <RispostaCivica reply={m.content} info={m.reply.info} />
                       {m.reply.access_mode &&
                         SEGNALAZIONE_ACCESS_MODES.has(m.reply.access_mode) &&
                         m.reply.info.codice_istat &&

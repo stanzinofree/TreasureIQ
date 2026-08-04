@@ -42,6 +42,7 @@ import logging
 import re
 from dataclasses import dataclass, field
 from datetime import date
+from enum import Enum
 from decimal import Decimal
 from urllib.parse import urlparse
 
@@ -162,6 +163,62 @@ class WebResultAnswer:
     non_verificato: bool = True
 
 
+class StatoFonte(str, Enum):
+    """Che cosa abbiamo trovato, non che cosa spetta al cittadino.
+
+    Sul rail INFORMAZIONE non esiste un verdetto e non deve nascerne uno
+    dalla porta di servizio (D-19): questi valori descrivono la **provenienza**
+    del dato — da dove viene e quanto è completo — mai il diritto di qualcuno
+    a ottenere qualcosa.
+    """
+
+    UFFICIALE = "ufficiale"
+    """Pagina del sito del comune, letta da noi."""
+
+    PARZIALE = "parziale"
+    """Il comune pubblica qualcosa, ma non tutto ciò che serviva."""
+
+    NON_VERIFICATO = "non_verificato"
+    """Solo pagine trovate con una ricerca sul web (D-28)."""
+
+    NON_PUBBLICATO = "non_pubblicato"
+    """Cercato dove doveva essere, non c'è."""
+
+
+class StatoProva(str, Enum):
+    """Lo stato di una singola cosa che possiamo o non possiamo confermare."""
+
+    CONFERMATO = "confermato"
+    PARZIALE = "parziale"
+    MANCANTE = "mancante"
+
+
+@dataclass
+class Prova:
+    """Una riga di «cosa posso confermare».
+
+    Ogni riga è un fatto sul dato, composto da campi tipizzati: mai una
+    percentuale di affidabilità, che sarebbe un numero inventato con l'aria
+    di una misura.
+    """
+
+    stato: StatoProva
+    testo: str
+
+
+@dataclass
+class Azione:
+    """Una cosa che il cittadino può fare adesso, con dove farla.
+
+    Sostituisce «cosa resta da fare a te: 2 azioni», che contava senza dire
+    cosa — un numero che non aiuta nessuno a fare il passo successivo.
+    """
+
+    testo: str
+    url: str | None = None
+    tipo: str = "apri"
+
+
 @dataclass
 class InfoAnswer:
     """Everything an INFORMAZIONE answer carries besides its reply text —
@@ -182,6 +239,15 @@ class InfoAnswer:
     #: all'interfaccia come un dato, non come una sfumatura nel testo della
     #: risposta: chi legge deve poterla vedere senza doverla dedurre.
     letto_dal_vivo: bool = False
+    #: Da dove viene il dato e quanto è completo — mai a chi spetta cosa.
+    stato: StatoFonte = StatoFonte.NON_PUBBLICATO
+    #: Le righe di «cosa posso confermare», in ordine di importanza.
+    prove: list[Prova] = field(default_factory=list)
+    #: I passi successivi, scritti per esteso invece che contati.
+    azioni: list[Azione] = field(default_factory=list)
+    #: Il nome dell'ente, per la scheda: l'interfaccia non deve ricavarlo
+    #: dal testo della risposta.
+    ente_nome: str | None = None
 
 
 @dataclass
@@ -755,43 +821,155 @@ def _citizen_effort(
     return effort
 
 
-def _compose_informazione_reply(
+def _prove_e_stato(
     *,
     document: DocumentAnswer | None,
     office: OfficeAnswer | None,
-    coverage_count: int,
-    diagnosis: list[str],
-    integration_cost: list[str],
+    web_results: list[WebResultAnswer],
+    letto_dal_vivo: bool,
+) -> tuple[StatoFonte, list[Prova]]:
+    """«Cosa posso confermare», composto dai campi e da nient'altro.
+
+    Ogni riga è un fatto verificabile sul dato — da dove viene, cosa contiene,
+    cosa gli manca — mai una percentuale di affidabilità: un numero del genere
+    avrebbe l'aria di una misura senza esserlo, ed è esattamente il tipo di
+    finta precisione che questo progetto esiste per non produrre.
+
+    Le assenze si dichiarano (D-35): «i requisiti non risultano pubblicati» è
+    una riga come le altre, non una riga che manca.
+    """
+    prove: list[Prova] = []
+
+    if document is not None:
+        prove.append(
+            Prova(
+                StatoProva.CONFERMATO,
+                "La pagina viene dal sito ufficiale del comune",
+            )
+        )
+    elif web_results:
+        prove.append(
+            Prova(
+                StatoProva.PARZIALE,
+                "Queste pagine vengono da una ricerca sul web, non da una fonte "
+                "istituzionale",
+            )
+        )
+    else:
+        prove.append(
+            Prova(StatoProva.MANCANTE, "Il comune non pubblica una pagina su questo argomento")
+        )
+
+    if letto_dal_vivo:
+        prove.append(
+            Prova(
+                StatoProva.PARZIALE,
+                "Letto ora dal portale del comune: verbatim dalla fonte, non "
+                "verificato da noi",
+            )
+        )
+
+    if office is not None:
+        recapiti = [v for v in (office.telefono, office.email) if v]
+        if recapiti:
+            prove.append(
+                Prova(StatoProva.CONFERMATO, "Sono disponibili i contatti dell'ufficio competente")
+            )
+        else:
+            prove.append(
+                Prova(StatoProva.MANCANTE, "L'ufficio non pubblica un recapito diretto")
+            )
+        if not office.orari:
+            prove.append(
+                Prova(StatoProva.MANCANTE, "Gli orari di apertura non risultano pubblicati")
+            )
+    else:
+        prove.append(
+            Prova(StatoProva.MANCANTE, "Il comune non pubblica un ufficio di riferimento")
+        )
+
+    if document is not None and any(p.stato is StatoProva.MANCANTE for p in prove):
+        stato = StatoFonte.PARZIALE
+    elif document is not None:
+        stato = StatoFonte.UFFICIALE
+    elif web_results:
+        stato = StatoFonte.NON_VERIFICATO
+    else:
+        stato = StatoFonte.NON_PUBBLICATO
+    return stato, prove
+
+
+def _azioni_possibili(
+    *,
+    document: DocumentAnswer | None,
+    office: OfficeAnswer | None,
+    web_results: list[WebResultAnswer],
+) -> list[Azione]:
+    """I passi successivi, scritti e non contati.
+
+    Al massimo tre: una lista più lunga smette di essere un consiglio e
+    diventa un modulo da compilare.
+    """
+    azioni: list[Azione] = []
+    if document is not None:
+        azioni.append(Azione("Apri la pagina ufficiale del servizio", document.url, "apri"))
+    elif web_results:
+        azioni.append(Azione("Apri la pagina trovata e controlla che sia del tuo comune",
+                             web_results[0].url, "apri"))
+
+    if office is not None:
+        if office.telefono:
+            azioni.append(
+                Azione(f"Chiama {office.nome} per sapere quali documenti servono",
+                       f"tel:{office.telefono.replace(' ', '')}", "chiama")
+            )
+        elif office.email:
+            azioni.append(
+                Azione(f"Scrivi a {office.nome} per sapere quali documenti servono",
+                       f"mailto:{office.email}", "email")
+            )
+
+    if not azioni:
+        azioni.append(
+            Azione("Contatta l'URP del tuo comune: da qui non risulta pubblicato nulla")
+        )
+    return azioni[:3]
+
+
+def _compose_informazione_reply(
+    *,
+    ente_nome: str,
+    document: DocumentAnswer | None,
     web_results: list[WebResultAnswer],
 ) -> str:
-    """Every sentence here is composed from typed fields (D-24): there is no
-    verbalisation step on this rail at all, so the D-24 invariant — no cost
-    or diagnosis sentence ever reaches a model — holds by construction, not
-    by discipline at a call site.
+    """La frase di apertura, e nient'altro.
+
+    Componeva anche il documento col suo URL, i recapiti dell'ufficio, la
+    diagnosi del portale e il costo d'integrazione — tutti campi che
+    l'interfaccia riceve già tipizzati in `InfoAnswer` e rende per conto suo.
+    Il risultato era che ogni risposta diceva le stesse cose due volte: una
+    volta impastate in un paragrafo e una volta in blocchi, con dentro
+    `M2_prosa_api` e `/wp-json/wp/v2/types` in mezzo a un discorso rivolto a
+    un cittadino.
+
+    Ora la prosa risponde alla domanda e si ferma. Tutto il resto è nei campi,
+    dove l'interfaccia può dargli il peso che merita — e il tecnico può
+    starsene chiuso finché qualcuno non lo apre.
+
+    Resta composta da campi tipizzati (D-24): su questo rail non esiste alcun
+    passaggio di verbalizzazione, quindi l'invariante regge per costruzione.
     """
-    parts: list[str] = []
     if document is not None:
-        parts.append(
-            f"Ho trovato un documento su questo argomento: {document.title} — "
-            f"{document.url}."
-        )
-    elif coverage_count == 0 and not web_results:
-        parts.append("Il Comune non ha pubblicato un documento specifico su questo argomento.")
-    if office is not None:
-        contatti = ", ".join(v for v in (office.telefono, office.email) if v)
-        if contatti:
-            parts.append(f"Puoi rivolgerti a {office.nome} ({contatti}).")
-        else:
-            parts.append(f"Puoi rivolgerti a {office.nome}, che non pubblica un recapito diretto.")
-    parts.extend(diagnosis)
-    parts.extend(integration_cost)
+        return f"Ho trovato una pagina ufficiale del {ente_nome} su questo argomento."
     if web_results:
-        parts.append(
-            "Non risulta una fonte istituzionale per questo dato; ho trovato questi "
-            "risultati sul web aperto, non verificati:"
+        return (
+            f"{ente_nome}: non ho trovato una fonte istituzionale su questo argomento. "
+            "Queste pagine vengono da una ricerca sul web e non le ho verificate."
         )
-        parts.extend(f"- {result.title}: {result.url}" for result in web_results)
-    return " ".join(parts)
+    return (
+        f"{ente_nome} non ha pubblicato niente su questo argomento in una forma che "
+        "io possa leggere. Qui sotto c'è l'ufficio a cui chiederlo."
+    )
 
 
 async def _build_informazione_answer(
@@ -927,13 +1105,14 @@ async def _build_informazione_answer(
 
     coverage_count = len(candidates)
     reply = _compose_informazione_reply(
+        ente_nome=ente.ente,
         document=document,
-        office=office,
-        coverage_count=coverage_count,
-        diagnosis=diagnosis,
-        integration_cost=integration_cost,
         web_results=web_results,
     )
+    stato, prove = _prove_e_stato(
+        document=document, office=office, web_results=web_results, letto_dal_vivo=False
+    )
+    azioni = _azioni_possibili(document=document, office=office, web_results=web_results)
 
     return ChatAnswer(
         reply=reply,
@@ -953,6 +1132,10 @@ async def _build_informazione_answer(
             diagnosis=diagnosis,
             integration_cost=integration_cost,
             web_results=web_results,
+            stato=stato,
+            prove=prove,
+            azioni=azioni,
+            ente_nome=ente.ente,
         ),
     )
 
@@ -1106,6 +1289,13 @@ def _chat_live(
         if ufficio and ufficio_url
         else None
     )
+    ufficio_risposta = (
+        OfficeAnswer(nome=ufficio, telefono=None, email=None, orari=orari) if ufficio else None
+    )
+    stato, prove = _prove_e_stato(
+        document=documento, office=ufficio_risposta, web_results=[], letto_dal_vivo=True
+    )
+    azioni = _azioni_possibili(document=documento, office=ufficio_risposta, web_results=[])
     return ChatAnswer(
         reply=reply,
         topic=topic,
@@ -1119,11 +1309,10 @@ def _chat_live(
         citizen_effort=citizen_effort,
         info=InfoAnswer(
             document=documento,
-            office=(
-                OfficeAnswer(nome=ufficio, telefono=None, email=None, orari=orari)
-                if ufficio
-                else None
-            ),
+            office=ufficio_risposta,
+            stato=stato,
+            prove=prove,
+            azioni=azioni,
             coverage_count=0,
             diagnosis=diagnosi,
             letto_dal_vivo=True,

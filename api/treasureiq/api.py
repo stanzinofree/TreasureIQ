@@ -591,6 +591,24 @@ class WebResultOut(BaseModel):
     non_verificato: bool
 
 
+class ProvaOut(BaseModel):
+    """Una riga di «cosa posso confermare». `stato` e' uno fra confermato,
+    parziale, mancante — mai una percentuale, che avrebbe l'aria di una
+    misura senza esserlo."""
+
+    stato: str
+    testo: str
+
+
+class AzioneOut(BaseModel):
+    """Un passo che il cittadino puo' fare adesso. `tipo` dice al client come
+    renderlo: apri, chiama, email."""
+
+    testo: str
+    url: str | None = None
+    tipo: str = "apri"
+
+
 class InfoOut(BaseModel):
     """The INFORMAZIONE rail's payload (D-19): document/office/coverage plus
     the deterministic diagnosis/cost/web blocks `chat.respond` composed from
@@ -607,6 +625,15 @@ class InfoOut(BaseModel):
     #: (D-32). Il client ne fa un'etichetta: un dato letto al volo e un dato
     #: verificato non devono avere lo stesso aspetto.
     letto_dal_vivo: bool = False
+    #: Provenienza del dato, mai un diritto: «ufficiale», «parziale»,
+    #: «non_verificato», «non_pubblicato». Sul rail INFORMAZIONE un verdetto
+    #: non esiste e non deve entrare dalla porta di servizio (D-19).
+    stato: str = "non_pubblicato"
+    #: Le righe di «cosa posso confermare», gia' composte dai campi.
+    prove: list[ProvaOut] = []
+    #: I passi successivi, scritti per esteso invece che contati.
+    azioni: list[AzioneOut] = []
+    ente_nome: str | None = None
     # B22 (D-25) — which comune this answer is about, so the segnalazione
     # counter can be attributed correctly. `None` when no ente was resolved
     # (nothing to count the segnalazione against).
@@ -635,6 +662,10 @@ def to_info_out(info: InfoAnswer) -> InfoOut:
     target = _enti_by_urp_nome().get(info.office.nome) if info.office is not None else None
     return InfoOut(
         letto_dal_vivo=info.letto_dal_vivo,
+        stato=info.stato.value,
+        ente_nome=info.ente_nome,
+        prove=[ProvaOut(stato=p.stato.value, testo=p.testo) for p in info.prove],
+        azioni=[AzioneOut(testo=a.testo, url=a.url, tipo=a.tipo) for a in info.azioni],
         document=(
             DocumentOut(title=info.document.title, url=info.document.url)
             if info.document is not None

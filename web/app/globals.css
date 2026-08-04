@@ -3692,3 +3692,28 @@ a {
     grid-template-columns: 3.5rem 1fr;
   }
 }
+
+/* Due colonne: quattro tessere entrano in uno schermo qualunque sia l'altezza
+ * della finestra, e il problema dello spazio verticale non si ripresenta la
+ * prossima volta che una riga si allunga. Sotto i 44rem tornano in colonna:
+ * una tessera stretta a meta' non e' piu' leggibile come tessera. */
+.accesso__lista {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* Il pannello si allarga per reggere due colonne, ma il testo introduttivo
+ * no: una riga lunga il doppio si legge peggio, e quel paragrafo e' la parte
+ * che spiega perche' qui non serve nessuna credenziale vera. */
+.accesso__pannello {
+  max-width: 860px;
+}
+
+.accesso__spiega {
+  max-width: 62ch;
+}
+
+@media (max-width: 44rem) {
+  .accesso__lista {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

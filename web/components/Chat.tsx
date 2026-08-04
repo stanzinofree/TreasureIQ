@@ -26,7 +26,8 @@
  */
 
 import { useEffect, useId, useRef, useState } from "react";
-import { Seal, Wordmark } from "@/components/Seal";
+import { Seal } from "@/components/Seal";
+import { Marchio } from "@/components/Logo";
 import Approfondisci from "@/components/Approfondisci";
 import Segnalazione from "@/components/Segnalazione";
 import SchedaDettaglio from "@/components/SchedaDettaglio";
@@ -753,7 +754,7 @@ export default function Chat() {
                 "Tu"
               ) : (
                 <>
-                  <Wordmark size={18} />
+                  <Marchio size={20} />
                   TIQ
                 </>
               )}

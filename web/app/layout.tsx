@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Link from "next/link";
-import { Wordmark } from "@/components/Seal";
+import { LogoEsteso } from "@/components/Logo";
 import StatusPill from "@/components/StatusPill";
 import "./globals.css";
 
@@ -62,8 +62,8 @@ export default function RootLayout({
         </a>
         <header className="masthead">
           <div className="masthead__inner">
-            <Link href="/" className="wordmark">
-              TreasureIQ
+            <Link href="/" className="wordmark" aria-label="TreasureIQ — home">
+              <LogoEsteso conPayoff />
             </Link>
             {/* The wordmark sits outside the nav: it is the home link, not a
                 nav item, and keeping it separate lets the links become their
@@ -77,10 +77,6 @@ export default function RootLayout({
             </nav>
             <div className="masthead__right">
               <StatusPill />
-              {/* Logo placeholder, top-right — Alex will design the real mark. */}
-              <Link href="/" className="masthead__logo" aria-label="TreasureIQ — home">
-                <Wordmark />
-              </Link>
             </div>
           </div>
         </header>

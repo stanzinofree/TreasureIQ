@@ -2874,3 +2874,44 @@ a {
   margin: 0 0 var(--ma-2);
   font-weight: 600;
 }
+
+/* --------------------------------------------------------------- brand mark */
+
+/* Mark and name locked together. The usage rules forbid distorting the mark,
+   so nothing here scales its two parts independently. */
+.marchio {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ma-3);
+}
+.marchio__testo {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.05;
+}
+.marchio__nome {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.16rem;
+  letter-spacing: -0.02em;
+  color: var(--sumi);
+}
+.marchio__iq {
+  color: var(--ai-vivid);
+}
+/* The payoff is the part that can be lost without losing the brand, so it is
+   the first thing dropped when the masthead runs out of room. */
+.marchio__payoff {
+  font-family: var(--font-body);
+  font-size: 0.62rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--sumi-faint);
+  margin-top: 2px;
+}
+
+@media (max-width: 900px) {
+  .marchio__payoff {
+    display: none;
+  }
+}

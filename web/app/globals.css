@@ -3574,7 +3574,7 @@ a {
   align-items: baseline;
   justify-content: space-between;
   gap: var(--ma-2);
-  padding: 5px var(--ma-3);
+  padding: 3px var(--ma-3);
   background: var(--ai-deep);
   color: #fff;
 }
@@ -3595,9 +3595,9 @@ a {
 
 .tessera__corpo {
   display: grid;
-  grid-template-columns: 4.5rem 1fr;
+  grid-template-columns: 4rem 1fr;
   gap: var(--ma-3);
-  padding: var(--ma-3);
+  padding: var(--ma-2) var(--ma-3);
   align-items: start;
 }
 
@@ -3618,7 +3618,7 @@ a {
 
 .tessera__dati {
   display: grid;
-  gap: var(--ma-2);
+  gap: 2px;
   min-width: 0;
 }
 
@@ -3648,8 +3648,17 @@ a {
 
 .tessera__campo--nome b {
   font-weight: 600;
-  font-size: 1.08rem;
+  font-size: 1.05rem;
   letter-spacing: 0.01em;
+  line-height: 1.2;
+}
+
+/* La situazione sotto il nome, senza etichetta: si legge da sola. */
+.tessera__ruolo {
+  font-size: 0.9rem;
+  line-height: 1.25;
+  color: var(--sumi);
+  margin-bottom: 4px;
 }
 
 .tessera__mono {
@@ -3660,15 +3669,15 @@ a {
 
 .tessera__nota {
   display: block;
-  padding: 0 var(--ma-3) var(--ma-3);
-  font-size: 0.85rem;
-  line-height: 1.4;
+  margin-top: 4px;
+  font-size: 0.84rem;
+  line-height: 1.35;
   color: var(--sumi-soft);
 }
 
 .tessera__piede {
   display: block;
-  padding: 4px var(--ma-3);
+  padding: 3px var(--ma-3);
   border-top: 1px dashed var(--kasumi);
   background: var(--paper-sunken);
   font-family: var(--font-mono);

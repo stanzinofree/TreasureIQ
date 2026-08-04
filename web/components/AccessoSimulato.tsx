@@ -133,21 +133,22 @@ export default function AccessoSimulato({
                 <span className="tessera__corpo">
                   <RitrattoFinto id={p.id} />
                   <span className="tessera__dati">
+                    {/* Due etichette, non tre. «Situazione» stava sopra una
+                        riga che si spiega da sola, e ogni etichetta in piu'
+                        e' una riga in piu' su quattro tessere: la lista non
+                        entrava in uno schermo, e in demo scorrere costa. */}
                     <span className="tessera__campo tessera__campo--nome">
                       <em>Nome</em>
                       <b>{p.persona}</b>
                     </span>
-                    <span className="tessera__campo">
-                      <em>Situazione</em>
-                      <b>{p.name}</b>
-                    </span>
+                    <span className="tessera__ruolo">{p.name}</span>
                     <span className="tessera__campo">
                       <em>Dati che TreasureIQ riceverebbe</em>
                       <b className="tessera__mono">{p.detail}</b>
                     </span>
+                    <span className="tessera__nota">{p.situazione}</span>
                   </span>
                 </span>
-                <span className="tessera__nota">{p.situazione}</span>
                 {/* La dicitura sta SULLA tessera, non solo sopra l'elenco:
                     ritagliata in uno screenshot, la card deve continuare a
                     dire di se' che e' finta. */}

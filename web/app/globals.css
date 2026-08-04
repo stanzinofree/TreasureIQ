@@ -3121,3 +3121,37 @@ a {
   text-transform: uppercase;
   color: var(--sumi-faint);
 }
+
+/* I due bottoni della conferma. Stanno accanto al comune perché è quello che
+ * qualificano: il GPS dice dove sei adesso, non dove risiedi, e finché
+ * nessuno lo conferma resta un'ipotesi. */
+.fatti__conferma {
+  display: inline-flex;
+  gap: var(--ma-2);
+  align-items: center;
+}
+
+.fatti__conferma button {
+  border: 1px solid var(--ai);
+  background: none;
+  color: var(--ai);
+  padding: 2px var(--ma-2);
+  font: inherit;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.fatti__conferma button:hover {
+  background: var(--ai);
+  color: var(--paper-raised);
+}
+
+.fatti__conferma--no {
+  border-color: var(--paper-sunken) !important;
+  color: var(--sumi-soft) !important;
+}
+
+.fatti__conferma--no:hover {
+  background: var(--paper-sunken) !important;
+  color: var(--sumi) !important;
+}

@@ -60,6 +60,12 @@ type ProfiloContextValue = {
   registra: (fatti: Partial<Profilo>) => void;
   /** Drop everything. The citizen can always take it back. */
   dimentica: () => void;
+  /** Drop only the comune, keeping everything else.
+   *
+   * `registra` cannot do this: it deliberately skips `undefined` so a partial
+   * update never erases a fact by omission. Saying "no, it's another comune"
+   * IS an erasure, and it must not take a name or an age down with it. */
+  dimenticaComune: () => void;
   /** How many facts are currently known — drives the empty state. */
   quantiFatti: number;
 };
@@ -105,6 +111,14 @@ export function ProfiloProvider({ children }: { children: React.ReactNode }) {
   // direction. The local state is cleared first and regardless: a failed
   // network call must not leave the citizen looking at data they just asked
   // to be rid of.
+  const dimenticaComune = useCallback(() => {
+    setProfilo((corrente) => {
+      const next = { ...corrente };
+      delete next.comune;
+      return next;
+    });
+  }, []);
+
   const dimentica = useCallback(() => {
     setProfilo({});
     logout().catch(() => {
@@ -146,8 +160,14 @@ export function ProfiloProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const value = useMemo(
-    () => ({ profilo, registra, dimentica, quantiFatti: contaFatti(profilo) }),
-    [profilo, registra, dimentica],
+    () => ({
+      profilo,
+      registra,
+      dimentica,
+      dimenticaComune,
+      quantiFatti: contaFatti(profilo),
+    }),
+    [profilo, registra, dimentica, dimenticaComune],
   );
 
   return <ProfiloContext.Provider value={value}>{children}</ProfiloContext.Provider>;

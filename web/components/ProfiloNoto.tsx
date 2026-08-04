@@ -27,7 +27,7 @@ function Chip({ label, value, nota }: { label: string; value: string; nota?: str
 }
 
 export default function ProfiloNoto() {
-  const { profilo, dimentica, quantiFatti } = useProfilo();
+  const { profilo, registra, dimentica, dimenticaComune, quantiFatti } = useProfilo();
   const { azzeraTrovate } = useRisultati();
 
   // Nothing known yet: render nothing. Not a placeholder, not a skeleton —
@@ -54,6 +54,36 @@ export default function ProfiloNoto() {
                 : undefined
           }
         />
+      )}
+
+      {/* Confermare è un gesto, non una domanda. La versione precedente
+          scriveva «confermi che è il tuo comune di residenza?» dentro la
+          casella della domanda: partiva verso il motore, che cercava un
+          servizio comunale corrispondente, non lo trovava, e rispondeva di non
+          saper collegare la richiesta. I bottoni stanno qui perché qui sta il
+          comune a cui si riferiscono.
+
+          Il GPS dice dove sei adesso, non dove risiedi — chi è in trasferta è
+          altrove — quindi la conferma serve davvero e non è una formalità
+          (R-9). */}
+      {profilo.comune && !profilo.comune.confermato && (
+        <span className="fatti__conferma">
+          <button
+            type="button"
+            onClick={() =>
+              registra({ comune: { ...profilo.comune!, confermato: true } })
+            }
+          >
+            Sì, è il mio comune
+          </button>
+          <button
+            type="button"
+            className="fatti__conferma--no"
+            onClick={dimenticaComune}
+          >
+            No, è un altro
+          </button>
+        </span>
       )}
 
       {profilo.interessi?.length ? (

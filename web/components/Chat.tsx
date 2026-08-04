@@ -709,9 +709,14 @@ export default function Chat() {
                 confermato: false,
               },
             });
-            setInput(
-              `Sei a ${nearby.nome}? Confermi che è il tuo comune di residenza?`,
-            );
+            // Nessun testo precompilato nella casella della domanda. La
+            // domanda «confermi che è il tuo comune?» è rivolta al cittadino,
+            // e scriverla lì dentro la trasformava in una domanda che il
+            // cittadino faceva a noi: partiva verso il motore, che non
+            // trovava nessun servizio corrispondente e rispondeva di non
+            // saperla collegare. Confermare è un gesto dell'interfaccia — i
+            // due bottoni stanno nella striscia, accanto al comune a cui si
+            // riferiscono.
           } else {
             setLocateNote(
               "Non troviamo un comune supportato vicino a te: scrivi tu il nome del comune.",

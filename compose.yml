@@ -36,6 +36,11 @@ services:
       OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-http://host.docker.internal:11434}
       # Optional: only needed when TREASUREIQ_LLM_PROVIDER=anthropic.
       ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      # Gradino 3 (D-32): per un comune fuori copertura, il cui portale non
+      # espone gli uffici in una forma leggibile, la chat cerca sul web mentre
+      # il cittadino aspetta. Il risultato non e' mai un dato di TreasureIQ e
+      # viaggia marcato come tale.
+      SEARXNG_URL: ${SEARXNG_URL:-http://searxng:8080}
     extra_hosts:
       # Required for host.docker.internal to resolve on Linux hosts; a no-op
       # on Docker Desktop/OrbStack, where it already resolves.

@@ -39,6 +39,7 @@ from __future__ import annotations
 
 import asyncio
 import logging
+import os
 import re
 from dataclasses import dataclass, field
 from datetime import date
@@ -68,6 +69,7 @@ from treasureiq.integration import (
     load_websearch,
 )
 from treasureiq.ingest.censimento import Indirizzabilita
+from treasureiq.ingest.websearch import DEFAULT_SEARXNG_URL, search_web
 from treasureiq.sonda_live import comune_per_codice, leggi_orari_urp, risolvi_comune
 from treasureiq.match.engine import (
     CriterionState,
@@ -1023,7 +1025,7 @@ def _prove_e_stato(
             Prova(
                 StatoProva.PARZIALE,
                 "Queste pagine vengono da una ricerca sul web, non da una fonte "
-                "istituzionale",
+                "che abbiamo letto",
             )
         )
     else:
@@ -1255,7 +1257,10 @@ async def _build_informazione_answer(
         # non ne esiste una migliore, e per un comune che ISTAT e IPA
         # conoscono ne esiste una migliore.
         live = await _risposta_live(
-            hint=intent.comune_hint, topic=intent.topic, comune_istat=comune_istat
+            hint=intent.comune_hint,
+            topic=intent.topic,
+            comune_istat=comune_istat,
+            parole=parole,
         )
         if live is not None:
             return live
@@ -1371,8 +1376,69 @@ async def _build_informazione_answer(
     )
 
 
+#: Quanto si aspetta una ricerca web dentro una risposta. Corto come la sonda:
+#: dall'altra parte c'è un cittadino, non un batch notturno.
+TIMEOUT_RICERCA_LIVE = 6.0
+
+
+def _query_ricerca_live(*, comune_nome: str, topic: Topic, ufficio: str | None) -> str:
+    """La query, composta da campi e mai dal modello.
+
+    L'ufficio che il cittadino ha nominato vale più del frammento generico del
+    topic: chi chiede «i numeri dell'ufficio anagrafe» sta cercando quella
+    pagina lì, non la sezione servizi del comune.
+    """
+    if ufficio:
+        return f"ufficio {ufficio} comune di {comune_nome} contatti orari"
+    frammento = WEBSEARCH_QUERY_FRAGMENTS.get(topic)
+    if frammento:
+        return f"{frammento} {comune_nome}"
+    return f"URP ufficio relazioni con il pubblico comune di {comune_nome}"
+
+
+def _cerca_sul_web(query: str) -> list[WebResultAnswer]:
+    """Una ricerca web, ora, per un comune che non abbiamo censito.
+
+    Il gradino 3 di D-32. I due precedenti — lo snapshot curato e la lettura
+    dal vivo del portale — restano davanti a questo e non vengono mai saltati:
+    si arriva qui solo quando il portale ha risposto ma non espone i propri
+    uffici in una forma leggibile da una macchina. Fino a ieri lì ci si
+    fermava, e la chat diceva «cercalo a mano sul sito» per una pagina che un
+    motore di ricerca trova al primo colpo.
+
+    D-28 tiene la ricerca web fuori dall'ingestione, e resta fuori: quello che
+    torna di qui non entra in nessuno snapshot, non diventa un record, non
+    conta nella copertura. È un suggerimento a tempo, marcato `non_verificato`
+    per costruzione (`WebResultAnswer`), da confermare con l'URP prima di
+    fidarsene. Un dato di `enti.json` è stato letto, misurato e datato; questo
+    è stato solo trovato, e la differenza deve restare visibile.
+
+    Non solleva mai: un motore giù, lento o che ci rifiuta è una risposta in
+    meno, non una domanda fallita. Una lista vuota, però, non va mai
+    presentata come «non esiste nulla» (R-15): significa solo che di qui non
+    abbiamo visto niente.
+    """
+    try:
+        risultati, _ = search_web(
+            query,
+            base_url=os.environ.get("SEARXNG_URL", "").strip() or DEFAULT_SEARXNG_URL,
+            timeout=TIMEOUT_RICERCA_LIVE,
+        )
+    except Exception:  # noqa: BLE001 — vedi docstring
+        logger.warning("ricerca live fallita per %r", query, exc_info=True)
+        return []
+    return [
+        WebResultAnswer(title=r.title, url=r.url)
+        for r in risultati[:MAX_WEB_RESULTS_IN_REPLY]
+    ]
+
+
 async def _risposta_live(
-    *, hint: str | None, topic: Topic, comune_istat: str | None = None
+    *,
+    hint: str | None,
+    topic: Topic,
+    comune_istat: str | None = None,
+    parole: str = "",
 ) -> ChatAnswer | None:
     """Il gradino 2 (D-32): leggere ora il portale di un comune fuori copertura.
 
@@ -1481,6 +1547,33 @@ async def _risposta_live(
             citizen_effort=2,
         )
 
+    # Gradino 3 (D-32). Il portale ha risposto e non espone i propri uffici in
+    # una forma leggibile: fermarsi qui significava dire «cercalo a mano sul
+    # sito» per una pagina che un motore di ricerca trova al primo colpo.
+    # Cerchiamo noi, e diciamo con chiarezza che quello che torna non è un
+    # nostro dato.
+    ufficio_chiesto = _ufficio_chiesto(parole)
+    web = await asyncio.to_thread(
+        _cerca_sul_web,
+        _query_ricerca_live(comune_nome=comune.nome, topic=topic, ufficio=ufficio_chiesto),
+    )
+    if web:
+        return _chat_live(
+            reply=(
+                f"{comune.nome} ha un portale, ma non espone i propri uffici in una "
+                "forma che si possa leggere da qui, quindi non è fra i comuni che "
+                "copriamo. Ho cercato sul web mentre aspettavi: queste pagine sembrano "
+                "quelle giuste, ma non le ho verificate."
+            ),
+            topic=topic,
+            diagnosi=diagnosi,
+            comune_sito=comune.sito,
+            web_results=web,
+            access_mode=AccessMode.M6_WEB_APERTO.value,
+            data_gap="not_published",
+            citizen_effort=len(web) + 1,
+        )
+
     return _chat_live(
         reply=(
             f"{comune.nome} ha un portale, ma non espone i propri uffici in una forma "
@@ -1509,12 +1602,20 @@ def _chat_live(
     access_mode: str | None = None,
     data_gap: str | None = None,
     citizen_effort: int = 2,
+    web_results: list[WebResultAnswer] | None = None,
 ) -> ChatAnswer:
     """Confeziona una risposta live come INFORMAZIONE, mai come verdetto.
 
     `matches` resta vuoto e `spid_required` falso per costruzione: niente di
     letto dal vivo può diventare un giudizio di eleggibilità (D-01/D-32).
+
+    `web_results` arriva solo dal gradino 3 (`_cerca_sul_web`) e resta una
+    cosa diversa da tutto il resto: pagine trovate, non lette da noi. La
+    scheda le mostra sotto la loro etichetta e `letto_dal_vivo` non le
+    riguarda — quel bollo dice «letto dal portale del comune», che qui non è
+    successo.
     """
+    web = web_results or []
     documento = (
         DocumentAnswer(title=f"{ufficio} — pagina del comune", url=ufficio_url)
         if ufficio and ufficio_url
@@ -1524,9 +1625,24 @@ def _chat_live(
         OfficeAnswer(nome=ufficio, telefono=None, email=None, orari=orari) if ufficio else None
     )
     stato, prove = _prove_e_stato(
-        document=documento, office=ufficio_risposta, web_results=[], letto_dal_vivo=True
+        document=documento,
+        office=ufficio_risposta,
+        web_results=web,
+        letto_dal_vivo=documento is not None or ufficio_risposta is not None,
     )
-    azioni = _azioni_possibili(document=documento, office=ufficio_risposta, web_results=[])
+    if web:
+        # «Il comune non pubblica un ufficio di riferimento» qui sarebbe falso:
+        # Ciampino lo pubblica, siamo noi che non riusciamo a leggerlo. La riga
+        # che segue dice la cosa vera al posto suo.
+        prove = [p for p in prove if "non pubblica un ufficio" not in p.testo]
+        prove.append(
+            Prova(
+                StatoProva.MANCANTE,
+                "Di questo comune non abbiamo una fonte censita: queste pagine "
+                "vanno confermate con l'URP prima di fidarsene",
+            )
+        )
+    azioni = _azioni_possibili(document=documento, office=ufficio_risposta, web_results=web)
     return ChatAnswer(
         reply=reply,
         topic=topic,
@@ -1546,13 +1662,13 @@ def _chat_live(
             azioni=azioni,
             coverage_count=0,
             diagnosis=diagnosi,
-            letto_dal_vivo=True,
+            letto_dal_vivo=documento is not None or ufficio_risposta is not None,
             integration_cost=[
                 "Lettura dal vivo, non un dato ingerito: nessuno snapshot di questo "
                 "comune è stato salvato e nulla di quanto sopra entra nei dati del "
                 "progetto finché non viene verificato."
             ],
-            web_results=[],
+            web_results=web,
         ),
     )
 

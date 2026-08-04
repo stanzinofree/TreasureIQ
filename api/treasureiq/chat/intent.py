@@ -62,6 +62,12 @@ class Topic(str, Enum):
     AREA_VERDE = "area_verde"
     RIFIUTI = "rifiuti"
     VOLONTARIATO = "volontariato"
+    #: IMU, TARI, ufficio tributi. Riconosciuto anche se il seed di Albano non
+    #: lo copre: un cittadino che chiede dell'ufficio tributi ha fatto una
+    #: domanda civica legittima, e senza questa voce il modello la mappava sul
+    #: topic superstite più vicino — l'anagrafe — rispondendo con la pagina
+    #: sbagliata invece che con «non risulta pubblicato».
+    TRIBUTI = "tributi"
     #: The model could not map the message onto any of the above. Never
     #: guessed into just to avoid this value — see the system prompt.
     SCONOSCIUTO = "sconosciuto"
@@ -115,7 +121,7 @@ TOPIC_KEYWORDS: dict[Topic, tuple[str, ...]] = {
         "asilo nido",
         "centro estivo",
     ),
-    Topic.ASSEGNO_MATERNITA: ("maternit", "gravidanza", "permesso rosa"),
+    Topic.ASSEGNO_MATERNITA: ("maternit-", "gravidanza", "permesso rosa"),
     Topic.CONTRIBUTO_AFFITTO: ("affitto", "locazione", "canone di locazione", "sfratto"),
     Topic.SOSTEGNO_UTENZE: (
         "bolletta",
@@ -134,7 +140,7 @@ TOPIC_KEYWORDS: dict[Topic, tuple[str, ...]] = {
         # genuinely about utility costs — "Bonus sociale bollette (energia
         # elettrica, gas, servizio idrico)" matches on three of them.
     ),
-    Topic.ASSISTENZA_DISABILITA: ("disabilit", "alzheimer", "assistenza domiciliare"),
+    Topic.ASSISTENZA_DISABILITA: ("disabilit-", "alzheimer", "assistenza domiciliare"),
     Topic.CONTRASSEGNO_DISABILI: ("contrassegno disabili", "permesso disabili"),
     Topic.ANAGRAFE_CARTA_IDENTITA: ("carta d'identit", "carta identit", "anagrafe"),
     Topic.ACCESSO_ATTI: ("accesso agli atti", "atti amministrativi"),
@@ -158,6 +164,15 @@ TOPIC_KEYWORDS: dict[Topic, tuple[str, ...]] = {
         "anziani",
         "associazioni",
         "servizio civile",
+    ),
+    Topic.TRIBUTI: (
+        "tributi",
+        "imu",
+        "tari",
+        "tassa rifiuti",
+        "tassa sui rifiuti",
+        "tasse comunali",
+        "imposta municipale",
     ),
     Topic.SCONOSCIUTO: (),
 }
@@ -325,7 +340,10 @@ def _topic_hint_lines() -> str:
     for topic, keywords in TOPIC_KEYWORDS.items():
         if topic is Topic.SCONOSCIUTO:
             continue
-        lines.append(f'- "{topic.value}": {", ".join(keywords)}')
+        # Il trattino finale è notazione per il matcher (radice tronca, vedi
+        # `_keyword_hit`): al modello va mostrata la parola, non la notazione.
+        esempi = ", ".join(k.rstrip("-") for k in keywords)
+        lines.append(f'- "{topic.value}": {esempi}')
     return "\n".join(lines)
 
 

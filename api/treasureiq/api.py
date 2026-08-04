@@ -571,6 +571,12 @@ def comuni(q: str = "") -> list[ComuneScelta]:
 class DocumentOut(BaseModel):
     title: str
     url: str
+    #: La descrizione che il comune dà del servizio, verbatim. `None` quando
+    #: il record non la porta: un servizio senza descrizione è una lacuna del
+    #: comune da mostrare, non un buco da riempire con una frase nostra.
+    descrizione: str | None = None
+    #: Il giorno in cui abbiamo letto questa pagina.
+    verificato_il: date | None = None
 
 
 class OfficeOut(BaseModel):
@@ -607,6 +613,8 @@ class AzioneOut(BaseModel):
     testo: str
     url: str | None = None
     tipo: str = "apri"
+    dettaglio: str | None = None
+    etichetta: str = "Apri"
 
 
 class InfoOut(BaseModel):
@@ -665,9 +673,23 @@ def to_info_out(info: InfoAnswer) -> InfoOut:
         stato=info.stato.value,
         ente_nome=info.ente_nome,
         prove=[ProvaOut(stato=p.stato.value, testo=p.testo) for p in info.prove],
-        azioni=[AzioneOut(testo=a.testo, url=a.url, tipo=a.tipo) for a in info.azioni],
+        azioni=[
+            AzioneOut(
+                testo=a.testo,
+                url=a.url,
+                tipo=a.tipo,
+                dettaglio=a.dettaglio,
+                etichetta=a.etichetta,
+            )
+            for a in info.azioni
+        ],
         document=(
-            DocumentOut(title=info.document.title, url=info.document.url)
+            DocumentOut(
+                title=info.document.title,
+                url=info.document.url,
+                descrizione=info.document.descrizione,
+                verificato_il=info.document.verificato_il,
+            )
             if info.document is not None
             else None
         ),

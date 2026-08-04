@@ -146,6 +146,12 @@ WEBSEARCH_QUERY_FRAGMENTS: dict[Topic, str] = {
 class DocumentAnswer:
     title: str
     url: str
+    #: La descrizione che il comune stesso dà del servizio, una riga sola e
+    #: mai riscritta. Aiuta più del dominio a capire se è la pagina giusta.
+    descrizione: str | None = None
+    #: Quando abbiamo letto questa pagina. Sta in fondo alla scheda e in
+    #: piccolo: aumenta la fiducia solo se non pretende di essere la risposta.
+    verificato_il: date | None = None
 
 
 @dataclass
@@ -217,6 +223,13 @@ class Azione:
     testo: str
     url: str | None = None
     tipo: str = "apri"
+    #: Perché farla, in una riga. Il titolo dell'azione e la sua spiegazione
+    #: stavano in una frase sola («Chiama URP — Ufficio Relazioni con il
+    #: Pubblico per sapere quali documenti servono»), che come link diventa
+    #: una riga di prosa sottolineata invece che un pulsante.
+    dettaglio: str | None = None
+    #: L'etichetta del pulsante: «Apri», «Chiama», «Scrivi».
+    etichetta: str = "Apri"
 
 
 @dataclass
@@ -432,6 +445,14 @@ async def _eredita_dal_contesto(
     return intent.model_copy(update=aggiornamenti) if aggiornamenti else intent
 
 
+def _keywords_for(*, topic: Topic, role: BeneficiaryRole | None = None) -> tuple[str, ...]:
+    """The keyword set that defines this topic, for retrieval and for judging
+    a candidate's relevance alike. One source, so the two can never disagree
+    on what the citizen asked about."""
+    role_keywords = AMBIGUOUS_ROLE_TOPICS.get(topic, {}).get(role) if role is not None else None
+    return role_keywords if role_keywords is not None else TOPIC_KEYWORDS.get(topic, ())
+
+
 def _search_opportunities(
     *,
     records: list[Opportunity],
@@ -451,8 +472,7 @@ def _search_opportunities(
     default keyword set is unaffected, so the AGEVOLAZIONE rail (which never
     passes `role`) and any non-ambiguous topic behave exactly as before.
     """
-    role_keywords = AMBIGUOUS_ROLE_TOPICS.get(topic, {}).get(role) if role is not None else None
-    keywords = role_keywords if role_keywords is not None else TOPIC_KEYWORDS.get(topic, ())
+    keywords = _keywords_for(topic=topic, role=role)
     if not keywords:
         return []
     hits: list[Opportunity] = []
@@ -460,9 +480,139 @@ def _search_opportunities(
         haystack = " ".join(
             part for part in (opportunity.title, opportunity.summary, opportunity.body) if part
         ).lower()
-        if any(keyword in haystack for keyword in keywords):
+        if _keyword_hit(haystack=haystack, keywords=keywords):
             hits.append(opportunity)
     return hits
+
+
+def _keyword_hit(*, haystack: str, keywords: tuple[str, ...]) -> bool:
+    """Whether any keyword occurs in `haystack`, as a word and not by accident.
+
+    Una parola sola deve cominciare dove comincia una parola: "tari" dentro
+    "sanitaria" e "tributi" dentro "contributi" sono coincidenze di lettere,
+    non l'argomento chiesto — e questa funzione decide quale pagina finisce
+    davanti al cittadino. Chiesto l'ufficio tributi, la chat rispondeva con
+    l'erogazione dei contributi per i libri di testo.
+
+    Le radici tronche, scritte per prendere ogni desinenza, finiscono con un
+    trattino in `TOPIC_KEYWORDS` («disabilit-», «maternit-»): solo quelle
+    rinunciano al confine di destra. Senza questa distinzione, o si perde
+    «disabilità», o «tari» prende «tariffa» — e prendeva «tariffa», tanto che
+    la domanda sull'ufficio tributi tornava con la raccolta dei pannolini.
+
+    Le chiavi di più parole restano sottostringhe: una frase intera che
+    ricorre per caso non è un rischio reale.
+    """
+    for keyword in keywords:
+        if " " in keyword:
+            if keyword in haystack:
+                return True
+        elif keyword.endswith("-"):
+            if re.search(rf"\b{re.escape(keyword[:-1])}", haystack):
+                return True
+        elif re.search(rf"\b{re.escape(keyword)}\b", haystack):
+            return True
+    return False
+
+
+def _parole_del_cittadino(*, message: str, storia: list[str]) -> str:
+    """Il messaggio corrente più i precedenti del cittadino, in minuscolo."""
+    return " ".join([*storia, message]).lower()
+
+
+#: Parole che compaiono in qualunque domanda civica e in qualunque pagina
+#: comunale. Contarle come punti di contatto significherebbe dichiarare
+#: pertinente ogni pagina rispetto a ogni domanda.
+_PAROLE_GENERICHE = frozenset(
+    {
+        "comune",
+        "documenti",
+        "informazioni",
+        "orari",
+        "pagina",
+        "quali",
+        "servizio",
+        "servizi",
+        "sportello",
+        "ufficio",
+        "uffici",
+    }
+)
+
+
+def _parole_piene(testo: str) -> set[str]:
+    """Le parole di contenuto di un testo: almeno quattro lettere, non
+    generiche. Il taglio è grossolano di proposito — serve a dire se due testi
+    parlano della stessa cosa, non a capirli."""
+    return {
+        parola
+        for parola in re.findall(r"[a-zàèéìòù']{4,}", testo.lower())
+        if parola not in _PAROLE_GENERICHE
+    }
+
+
+def _pertinente(
+    *,
+    topic: Topic,
+    role: BeneficiaryRole | None,
+    parole: str,
+    candidato: Opportunity,
+    ente: Ente | None = None,
+) -> bool:
+    """Whether a retrieved record is *about* what the citizen asked.
+
+    `_search_opportunities` cerca anche nel corpo della pagina, ed è giusto che
+    lo faccia: serve a trovare i candidati. Ma il corpo nomina di passaggio
+    cose di cui la pagina non parla — la pagina dei pannolini chiede «copia
+    dell'ultimo versamento TARI» fra i documenti da allegare, e tanto bastava
+    perché una domanda sull'ufficio tributi ricevesse quella. L'argomento di
+    una pagina sta nel titolo e nella sua descrizione; il corpo è contesto.
+
+    Due vie, e basta una.
+
+    La prima chiede due riscontri, non uno: le parole chiave del topic devono
+    stare nella frase del cittadino *e* nel titolo della pagina. Il topic lo
+    sceglie un modello, e un modello davanti a una domanda fuori catalogo non
+    risponde «nessuna categoria»: risponde con la più vicina che esiste — e
+    trova per quella una pagina perfettamente coerente. Chiesto l'ufficio
+    tributi, ha proposto prima l'anagrafe e poi la raccolta differenziata: due
+    pagine giuste sotto una domanda che non era la loro. Il riscontro sulle
+    parole del cittadino è la stessa guardia già applicata al comune (R-9).
+
+    La seconda via è il titolo che condivide una parola piena con quelle del
+    cittadino: così una domanda posta con parole diverse da quelle del
+    catalogo («dove butto la plastica») trova comunque la sua pagina.
+
+    Si guardano anche i messaggi precedenti del cittadino, perché il topic può
+    venire da quelli (`_eredita_dal_contesto`) — mai le nostre risposte, che
+    renderebbero la guardia autoreferenziale.
+    """
+    titolo = f"{candidato.title} {candidato.summary or ''}".lower()
+    keywords = _keywords_for(topic=topic, role=role)
+    # Il nome del comune non è un argomento. Compare in quasi ogni pagina del
+    # suo sito e in quasi ogni domanda posta per esteso: contarlo fra le
+    # parole in comune rendeva pertinente qualunque pagina — «orari
+    # dell'ufficio tributi di Albano Laziale» tornava con la raccolta
+    # differenziata perché anche quella pagina dice «Albano Laziale».
+    escluse = _parole_piene(_bare_ente_name(ente)) if ente is not None else set()
+    if _keyword_hit(haystack=parole, keywords=keywords) and _keyword_hit(
+        haystack=titolo, keywords=keywords
+    ):
+        return True
+    return bool((_parole_piene(parole) - escluse) & (_parole_piene(titolo) - escluse))
+
+
+def _document_answer(candidato: Opportunity) -> DocumentAnswer:
+    """La scheda del servizio come la pubblica il comune, mai riscritta."""
+    sommario = (candidato.summary or "").strip()
+    return DocumentAnswer(
+        title=candidato.title,
+        url=str(candidato.source.url),
+        descrizione=sommario or None,
+        verificato_il=candidato.source.fetched_at.date()
+        if candidato.source.fetched_at is not None
+        else None,
+    )
 
 
 def _apertura(*, results: list[MatchResult]) -> str:
@@ -821,12 +971,33 @@ def _citizen_effort(
     return effort
 
 
+#: Parole che seguono "ufficio" senza nominarne uno: "ufficio competente" non
+#: è un ufficio, è un modo di dire.
+_UFFICIO_GENERICO = frozenset({"comunale", "competente", "comune", "giusto", "preposto"})
+
+
+def _ufficio_chiesto(parole: str) -> str | None:
+    """L'ufficio che il cittadino ha nominato, se ne ha nominato uno.
+
+    Serve a non spacciare per suoi gli orari di un altro ufficio: chiesto
+    l'ufficio tributi, la scheda mostrava gli orari dell'URP senza dire che
+    erano quelli dell'URP — un dato giusto sotto la domanda sbagliata, che è
+    il modo più efficace di mandare qualcuno davanti a una porta chiusa.
+    """
+    trovati = re.findall(r"uffici[oi]\s+(?:di\s+|del\s+|delle?\s+)?([a-zàèéìòù']{3,})", parole)
+    for nome in trovati:
+        if nome not in _UFFICIO_GENERICO:
+            return nome
+    return None
+
+
 def _prove_e_stato(
     *,
     document: DocumentAnswer | None,
     office: OfficeAnswer | None,
     web_results: list[WebResultAnswer],
     letto_dal_vivo: bool,
+    ufficio_chiesto: str | None = None,
 ) -> tuple[StatoFonte, list[Prova]]:
     """«Cosa posso confermare», composto dai campi e da nient'altro.
 
@@ -883,6 +1054,14 @@ def _prove_e_stato(
             prove.append(
                 Prova(StatoProva.MANCANTE, "Gli orari di apertura non risultano pubblicati")
             )
+        elif ufficio_chiesto and ufficio_chiesto not in office.nome.lower():
+            prove.append(
+                Prova(
+                    StatoProva.MANCANTE,
+                    f"Gli orari dell'ufficio {ufficio_chiesto} non risultano "
+                    f"pubblicati: quelli qui sotto sono di {office.nome}",
+                )
+            )
     else:
         prove.append(
             Prova(StatoProva.MANCANTE, "Il comune non pubblica un ufficio di riferimento")
@@ -912,26 +1091,54 @@ def _azioni_possibili(
     """
     azioni: list[Azione] = []
     if document is not None:
-        azioni.append(Azione("Apri la pagina ufficiale del servizio", document.url, "apri"))
+        azioni.append(
+            Azione(
+                "Consulta il servizio",
+                document.url,
+                "apri",
+                dettaglio="Apri la pagina ufficiale del comune",
+                etichetta="Apri",
+            )
+        )
     elif web_results:
-        azioni.append(Azione("Apri la pagina trovata e controlla che sia del tuo comune",
-                             web_results[0].url, "apri"))
+        azioni.append(
+            Azione(
+                "Controlla la pagina trovata",
+                web_results[0].url,
+                "apri",
+                dettaglio="Non l'abbiamo verificata: guarda che sia del tuo comune",
+                etichetta="Apri",
+            )
+        )
 
     if office is not None:
         if office.telefono:
             azioni.append(
-                Azione(f"Chiama {office.nome} per sapere quali documenti servono",
-                       f"tel:{office.telefono.replace(' ', '')}", "chiama")
+                Azione(
+                    "Verifica i documenti necessari",
+                    f"tel:{office.telefono.replace(' ', '')}",
+                    "chiama",
+                    dettaglio=f"Contatta {office.nome} prima di presentare la richiesta",
+                    etichetta="Chiama",
+                )
             )
         elif office.email:
             azioni.append(
-                Azione(f"Scrivi a {office.nome} per sapere quali documenti servono",
-                       f"mailto:{office.email}", "email")
+                Azione(
+                    "Verifica i documenti necessari",
+                    f"mailto:{office.email}",
+                    "email",
+                    dettaglio=f"Scrivi a {office.nome} prima di presentare la richiesta",
+                    etichetta="Scrivi",
+                )
             )
 
     if not azioni:
         azioni.append(
-            Azione("Contatta l'URP del tuo comune: da qui non risulta pubblicato nulla")
+            Azione(
+                "Contatta l'URP del tuo comune",
+                dettaglio="Da qui non risulta pubblicato nulla su questo argomento",
+            )
         )
     return azioni[:3]
 
@@ -960,7 +1167,12 @@ def _compose_informazione_reply(
     passaggio di verbalizzazione, quindi l'invariante regge per costruzione.
     """
     if document is not None:
-        return f"Ho trovato una pagina ufficiale del {ente_nome} su questo argomento."
+        # La prima riga deve già rispondere, non annunciare che una risposta
+        # esiste: «ho trovato una pagina su questo argomento» costringe a
+        # leggere la scheda per sapere di cosa parla. Il titolo del servizio è
+        # del comune e va riportato tale e quale — riformularlo qui sarebbe
+        # verbalizzazione, che su questo rail non esiste (D-24).
+        return f"Il {ente_nome} pubblica un servizio ufficiale: «{document.title}»."
     if web_results:
         return (
             f"{ente_nome}: non ho trovato una fonte istituzionale su questo argomento. "
@@ -973,7 +1185,11 @@ def _compose_informazione_reply(
 
 
 async def _build_informazione_answer(
-    *, intent: ChatIntent, records: list[Opportunity], comune_istat: str | None = None
+    *,
+    intent: ChatIntent,
+    records: list[Opportunity],
+    comune_istat: str | None = None,
+    parole: str = "",
 ) -> ChatAnswer:
     """The INFORMAZIONE rail (D-19): document + office + coverage + cost,
     never a verdict, never criteria, never SPID. No call into
@@ -1061,18 +1277,29 @@ async def _build_informazione_answer(
             info=None,
         )
 
-    candidates = (
+    # Il topic del modello vale solo se le parole del cittadino lo reggono
+    # (`_riscontro_lessicale`). Senza questa condizione una domanda fuori
+    # catalogo — l'ufficio tributi — riceveva la pagina del topic più vicino
+    # che il catalogo copre, l'anagrafe, presentata come la risposta.
+    trovati = (
         _search_opportunities(
             records=records, topic=intent.topic, role=intent.beneficiary_role
         )
         if ente.codice_istat == DEFAULT_COMUNE_ISTAT
         else []
     )
-    document = (
-        DocumentAnswer(title=candidates[0].title, url=str(candidates[0].source.url))
-        if candidates
-        else None
-    )
+    candidates = [
+        c
+        for c in trovati
+        if _pertinente(
+            topic=intent.topic,
+            role=intent.beneficiary_role,
+            parole=parole,
+            candidato=c,
+            ente=ente,
+        )
+    ]
+    document = _document_answer(candidates[0]) if candidates else None
     office = (
         OfficeAnswer(
             nome=ente.urp.nome,
@@ -1110,7 +1337,11 @@ async def _build_informazione_answer(
         web_results=web_results,
     )
     stato, prove = _prove_e_stato(
-        document=document, office=office, web_results=web_results, letto_dal_vivo=False
+        document=document,
+        office=office,
+        web_results=web_results,
+        letto_dal_vivo=False,
+        ufficio_chiesto=_ufficio_chiesto(parole),
     )
     azioni = _azioni_possibili(document=document, office=office, web_results=web_results)
 
@@ -1447,7 +1678,10 @@ async def build_chat_answer(
 
     if intent.kind is QuestionKind.INFORMAZIONE:
         return await _build_informazione_answer(
-            intent=intent, records=records, comune_istat=comune_istat
+            intent=intent,
+            records=records,
+            comune_istat=comune_istat,
+            parole=_parole_del_cittadino(message=message, storia=storia or []),
         )
 
     if not comune_coperto:

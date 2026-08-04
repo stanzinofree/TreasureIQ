@@ -288,6 +288,12 @@ export type QuestionKind = "informazione" | "agevolazione";
 export interface InfoDocument {
   title: string;
   url: string;
+  /** La descrizione che il comune dà del servizio, verbatim. `null` quando il
+   * record non la porta: una riga in meno, mai una riga inventata. */
+  descrizione: string | null;
+  /** Il giorno in cui abbiamo letto la pagina (ISO). Va in fondo e in
+   * piccolo: la data conferma, non risponde. */
+  verificato_il: string | null;
 }
 
 /** The office a citizen can actually call, mirrors `UrpContact` in
@@ -323,9 +329,15 @@ export interface Prova {
 
 /** Un passo che il cittadino puo' fare adesso. `tipo` dice come renderlo. */
 export interface Azione {
+  /** Il titolo dell'azione: cosa ottieni, non come si fa. */
   testo: string;
   url: string | null;
   tipo: "apri" | "chiama" | "email";
+  /** Perché farla, in una riga. Separato dal titolo perché una frase sola
+   * lunga, resa come link, torna a sembrare prosa invece che un pulsante. */
+  dettaglio: string | null;
+  /** L'etichetta del pulsante. */
+  etichetta: string;
 }
 
 /** Composition of an INFORMAZIONE answer (mirrors respond.py's `InfoAnswer`

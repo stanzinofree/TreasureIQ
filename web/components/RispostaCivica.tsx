@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+
 import type { InfoOut } from "@/lib/api";
 
 /**
@@ -30,12 +32,54 @@ import type { InfoOut } from "@/lib/api";
  * non replicando etichette senza valore.
  */
 
-const ETICHETTE_STATO: Record<InfoOut["stato"], string> = {
-  ufficiale: "Fonte ufficiale",
-  parziale: "Informazioni parziali",
-  non_verificato: "Non verificato",
-  non_pubblicato: "Niente di pubblicato",
+/** Da dove viene il dato e quanto è completo sono due domande diverse, e una
+ * fonte può essere ufficiale e incompleta insieme: un'etichetta sola le
+ * appiattiva su un giudizio unico, e «Fonte ufficiale» finiva per suggerire
+ * che ci fosse tutto. Il primo bollo dice la provenienza, il secondo — quando
+ * serve — dice quanto manca. */
+const ETICHETTE_STATO: Record<InfoOut["stato"], string[]> = {
+  ufficiale: ["Fonte ufficiale"],
+  parziale: ["Fonte ufficiale", "Informazioni parziali"],
+  non_verificato: ["Ricerca web", "Non verificato"],
+  non_pubblicato: ["Niente di pubblicato"],
 };
+
+/** La data di lettura, scritta come la scriverebbe una persona. */
+function dataVerifica(iso: string): string {
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return iso;
+  return d.toLocaleDateString("it-IT", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+}
+
+/** Copia negli appunti senza dire di averlo fatto se non è vero. */
+function Copia({ valore, cosa }: { valore: string; cosa: string }) {
+  const [fatto, setFatto] = useState(false);
+  return (
+    <button
+      type="button"
+      className="civica__copia"
+      aria-label={`Copia ${cosa}`}
+      onClick={async () => {
+        try {
+          await navigator.clipboard.writeText(valore);
+          setFatto(true);
+          setTimeout(() => setFatto(false), 2000);
+        } catch {
+          // Il browser può negare gli appunti (permesso, contesto non
+          // sicuro). Non fingiamo la riuscita: il valore resta selezionabile
+          // a mano, che è esattamente ciò che il cittadino farebbe comunque.
+          setFatto(false);
+        }
+      }}
+    >
+      {fatto ? "Copiato" : "Copia"}
+    </button>
+  );
+}
 
 const SEGNI: Record<string, string> = {
   confermato: "✓",
@@ -78,8 +122,17 @@ export default function RispostaCivica({
 
   return (
     <div className="civica">
-      <p className="civica__stato" data-stato={info.stato}>
-        {ETICHETTE_STATO[info.stato]}
+      <p className="civica__bolli">
+        {ETICHETTE_STATO[info.stato].map((etichetta, i) => (
+          <span
+            key={etichetta}
+            className="civica__stato"
+            data-stato={info.stato}
+            data-ruolo={i === 0 ? "provenienza" : "completezza"}
+          >
+            {etichetta}
+          </span>
+        ))}
       </p>
 
       <p className="civica__sintesi">{reply}</p>
@@ -96,21 +149,33 @@ export default function RispostaCivica({
         <div className="civica__servizio">
           <h3>{documento.title}</h3>
           {info.ente_nome && <p className="civica__ente">{info.ente_nome}</p>}
-          <a
-            className="civica__cta"
-            href={documento.url}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Apri la fonte ufficiale
-          </a>
-          <span className="civica__dominio">{dominioDi(documento.url)}</span>
+          {documento.descrizione && (
+            <p className="civica__descrizione">{documento.descrizione}</p>
+          )}
+          <p className="civica__servizio-piede">
+            <a
+              className="civica__cta"
+              href={documento.url}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Apri la fonte ufficiale
+            </a>
+            <span className="civica__dominio">{dominioDi(documento.url)}</span>
+          </p>
+          {documento.verificato_il && (
+            <p className="civica__verifica">
+              Letta da TreasureIQ il {dataVerifica(documento.verificato_il)}
+            </p>
+          )}
         </div>
       )}
 
       {info.prove.length > 0 && (
         <section className="civica__blocco">
-          <h4>Cosa posso confermare</h4>
+          {/* «Cosa sappiamo dalla fonte», non «cosa posso confermare»: il
+              soggetto della riga è il dato del comune, non noi. */}
+          <h4>Cosa sappiamo dalla fonte</h4>
           <ul className="civica__prove">
             {info.prove.map((p) => (
               <li key={p.testo} data-stato={p.stato}>
@@ -125,15 +190,28 @@ export default function RispostaCivica({
       {info.azioni.length > 0 && (
         <section className="civica__blocco">
           <h4>Cosa puoi fare adesso</h4>
+          {/* Un'azione è un pulsante con sopra scritto cosa ottieni: titolo,
+              spiegazione, comando. Come lista di link lunghi sottolineati
+              tornava a leggersi come testo redazionale. */}
           <ol className="civica__azioni">
-            {info.azioni.map((a) => (
-              <li key={a.testo}>
-                {a.url ? (
-                  <a href={a.url} target="_blank" rel="noreferrer">
-                    {a.testo}
+            {info.azioni.map((a, i) => (
+              <li key={a.testo} className="civica__azione">
+                <span className="civica__azione-num" aria-hidden="true">
+                  {i + 1}
+                </span>
+                <span className="civica__azione-testo">
+                  <strong>{a.testo}</strong>
+                  {a.dettaglio && <span>{a.dettaglio}</span>}
+                </span>
+                {a.url && (
+                  <a
+                    className="civica__azione-cta"
+                    href={a.url}
+                    target={a.tipo === "apri" ? "_blank" : undefined}
+                    rel={a.tipo === "apri" ? "noreferrer" : undefined}
+                  >
+                    {a.etichetta}
                   </a>
-                ) : (
-                  a.testo
                 )}
               </li>
             ))}
@@ -155,6 +233,15 @@ export default function RispostaCivica({
                     {t}
                   </a>
                 ))}
+                <span className="civica__contatto-azioni">
+                  <a
+                    className="civica__mini-cta"
+                    href={`tel:${telefoni[0].replace(/\s/g, "")}`}
+                  >
+                    Chiama
+                  </a>
+                  <Copia valore={telefoni.join(" ")} cosa="il telefono" />
+                </span>
               </div>
             )}
 
@@ -162,6 +249,12 @@ export default function RispostaCivica({
               <div className="civica__contatto">
                 <span className="civica__contatto-label">Email</span>
                 <a href={`mailto:${office.email}`}>{office.email}</a>
+                <span className="civica__contatto-azioni">
+                  <a className="civica__mini-cta" href={`mailto:${office.email}`}>
+                    Scrivi
+                  </a>
+                  <Copia valore={office.email} cosa="l'email" />
+                </span>
               </div>
             )}
 
@@ -169,8 +262,17 @@ export default function RispostaCivica({
               <div className="civica__contatto">
                 <span className="civica__contatto-label">PEC</span>
                 <a href={`mailto:${office.pec}`}>{office.pec}</a>
+                {/* «Obbliga a una risposta» non è vero: la PEC dà ricevute con
+                    valore legale e tracciabilità, non un dovere di risposta che
+                    dipende dal procedimento. Qui si dice cosa fa davvero. */}
                 <span className="civica__nota">
-                  obbliga a una risposta
+                  Comunicazione tracciata, con ricevute di invio e consegna
+                </span>
+                <span className="civica__contatto-azioni">
+                  <a className="civica__mini-cta" href={`mailto:${office.pec}`}>
+                    Scrivi via PEC
+                  </a>
+                  <Copia valore={office.pec} cosa="la PEC" />
                 </span>
               </div>
             )}

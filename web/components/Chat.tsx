@@ -831,8 +831,12 @@ export default function Chat() {
                 "Tu"
               ) : (
                 <>
-                  <Marchio size={20} />
+                  <Marchio size={22} />
                   TIQ
+                  {/* Chi risponde, non un marchio in miniatura: senza questa
+                      riga «TIQ» è una sigla tecnica accanto a un'icona, e chi
+                      legge non sa con cosa sta parlando. */}
+                  <span className="bubble__ruolo">Assistente civico</span>
                 </>
               )}
             </p>

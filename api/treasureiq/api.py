@@ -28,7 +28,7 @@ from pathlib import Path
 from fastapi import Depends, FastAPI, HTTPException, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 from itsdangerous import BadSignature, URLSafeSerializer
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from treasureiq.chat.respond import (
     DEFAULT_COMUNE_ISTAT,
@@ -55,6 +55,7 @@ from treasureiq.match.engine import (
     match,
     summarise,
 )
+from treasureiq.sonda_live import cerca_comuni
 from treasureiq.readiness import ReadinessReport, score_comune
 from treasureiq.recovery import ComuneRecovery, compute_comune_recovery
 from treasureiq.schema import CitizenProfile, Confidence, Livello, Opportunity
@@ -520,6 +521,50 @@ class ChatIn(BaseModel):
     #: from nothing — which is why the chat asked for the comune twice and lost
     #: the subject in between.
     history: list[ChatTurnIn] = []
+    #: Il comune che il cittadino ha SCELTO da una lista, non quello che una
+    #: frase lascia intendere. Quando c'è, vince su qualunque accenno testuale:
+    #: un codice ISTAT non ha omonimi, non dipende da come è scritto il nome e
+    #: non può essere inventato da un modello. È la via che chiude in un colpo
+    #: sia l'ambiguità fra i due Castro sia l'allucinazione del comune.
+    comune_istat: str | None = Field(default=None, max_length=6)
+
+
+class ComuneScelta(BaseModel):
+    """Una voce della tendina dei comuni.
+
+    `ha_portale` è falso per i 29 comuni che ISTAT conosce e di cui IPA non
+    pubblica il sito (fra cui Roma): vanno mostrati lo stesso — sono comuni
+    veri e nasconderli farebbe sembrare l'elenco incompleto — ma chi sceglie
+    deve sapere in anticipo che lì non andremo a leggere niente.
+    """
+
+    codice_istat: str
+    nome: str
+    provincia: str
+    regione: str
+    ha_portale: bool
+
+
+@app.get("/api/comuni", response_model=list[ComuneScelta])
+def comuni(q: str = "") -> list[ComuneScelta]:
+    """Cerca fra i 7.896 comuni italiani, per far scegliere invece di indovinare.
+
+    L'elenco è quello di ISTAT unito ai siti di IPA (`data/comuni-istat.json`):
+    chiuso, pubblico e completo, quindi una query che non trova niente non
+    significa "comune non coperto" ma "questo nome non è un comune italiano" —
+    un refuso, o il nome di una frazione. La differenza conta, ed è per questo
+    che il client deve poterla dire con parole diverse.
+    """
+    return [
+        ComuneScelta(
+            codice_istat=c.codice_istat,
+            nome=c.nome,
+            provincia=c.provincia,
+            regione=c.regione,
+            ha_portale=bool(c.sito),
+        )
+        for c in cerca_comuni(q)
+    ]
 
 
 class DocumentOut(BaseModel):
@@ -1346,6 +1391,8 @@ async def chat(body: ChatIn, request: Request) -> ChatOut:
         # one answer become the input to the next, and a mistake made once
         # would then justify itself for the rest of the conversation.
         storia=[t.content for t in body.history if t.role == "user"],
+        # Una scelta esplicita batte qualunque inferenza: vedi ChatIn.
+        comune_istat=body.comune_istat,
     )
 
     stats = compute_recovery_stats(

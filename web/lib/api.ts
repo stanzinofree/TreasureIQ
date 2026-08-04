@@ -365,11 +365,39 @@ export interface ChatTurn {
   content: string;
 }
 
-export const chat = (message: string, history: ChatTurn[] = []) =>
+export const chat = (
+  message: string,
+  history: ChatTurn[] = [],
+  comuneIstat: string | null = null,
+) =>
   call<ChatOut>("/api/chat", {
     method: "POST",
-    body: JSON.stringify({ message, history }),
+    body: JSON.stringify({ message, history, comune_istat: comuneIstat }),
   });
+
+/** Una voce dell'elenco dei comuni italiani (ISTAT unito ai siti di IPA).
+ *
+ * `ha_portale` è falso per i 29 comuni che ISTAT conosce e di cui IPA non
+ * pubblica il sito — fra questi Roma, che il registro chiama «Roma Capitale».
+ * Vanno mostrati lo stesso: sono comuni veri, e nasconderli farebbe sembrare
+ * l'elenco incompleto. Ma chi sceglie deve sapere prima di cliccare che lì
+ * non andremo a leggere niente. */
+export interface ComuneScelta {
+  codice_istat: string;
+  nome: string;
+  provincia: string;
+  regione: string;
+  ha_portale: boolean;
+}
+
+/** Cerca fra i 7.896 comuni italiani.
+ *
+ * L'elenco è chiuso e completo, quindi zero risultati NON significa «comune
+ * non coperto»: significa che quel nome non è un comune italiano — un refuso,
+ * o il nome di una frazione. Chi chiama deve dire le due cose in modo
+ * diverso. */
+export const cercaComuni = (q: string) =>
+  call<ComuneScelta[]>(`/api/comuni?q=${encodeURIComponent(q)}`);
 
 /** Footer vital signs (B14 contract). Every field is independently nullable
  * — another arm is building the endpoint concurrently, and a field that

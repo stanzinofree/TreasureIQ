@@ -67,7 +67,7 @@ from treasureiq.integration import (
     load_websearch,
 )
 from treasureiq.ingest.censimento import Indirizzabilita
-from treasureiq.sonda_live import leggi_orari_urp, risolvi_comune
+from treasureiq.sonda_live import comune_per_codice, leggi_orari_urp, risolvi_comune
 from treasureiq.match.engine import (
     CriterionState,
     MatchResult,
@@ -979,6 +979,26 @@ async def _risposta_live(*, hint: str | None, topic: Topic) -> ChatAnswer | None
     if comune.sito:
         diagnosi.append(f"Portale istituzionale: {comune.sito} (fonte: IPA).")
 
+    if comune.sito is None:
+        # ISTAT sa che questo comune esiste, IPA non ci dà il suo sito: sono
+        # 29 casi, fra cui Roma, che il registro chiama "Roma Capitale" e non
+        # "Comune di Roma". Non è un portale che non risponde — è un indirizzo
+        # che non abbiamo. Confondere le due cose direbbe al cittadino che il
+        # suo comune è irraggiungibile quando il problema è nostro (D-35).
+        return _chat_live(
+            reply=(
+                f"{comune.nome} esiste e lo riconosco ({comune.provincia}, codice "
+                f"{comune.codice_istat}), ma nell'indice delle pubbliche "
+                "amministrazioni non risulta l'indirizzo del suo portale, quindi non "
+                "ho un posto dove andare a leggere. È un buco nostro, non suo."
+            ),
+            topic=topic,
+            diagnosi=diagnosi,
+            comune_sito=None,
+            data_gap="not_published",
+            citizen_effort=3,
+        )
+
     if letto is None or letto.indirizzabilita is Indirizzabilita.IRRAGGIUNGIBILE:
         return _chat_live(
             reply=(
@@ -1153,6 +1173,7 @@ async def build_chat_answer(
     profile: CitizenProfile | None,
     records: list[Opportunity],
     storia: list[str] | None = None,
+    comune_istat: str | None = None,
     today: date | None = None,
 ) -> ChatAnswer:
     """Answer one citizen turn. Never raises for model unavailability.
@@ -1172,12 +1193,19 @@ async def build_chat_answer(
     intent = await extract_intent(message=message, provider=provider)
 
     # Il comune non è un campo che convenga chiedere a un modello: l'elenco è
-    # chiuso, pubblico e lo abbiamo su disco. `_confirm_comune_hint` scarta
-    # quello inventato (R-9), e quello che resta è un buco da riempire qui,
-    # leggendo la frase del cittadino contro i 7.896 comuni italiani. Non può
-    # inventare: `risolvi_comune` risponde solo se un nome di comune compare
-    # davvero nel testo ed è uno solo.
-    if not (intent.comune_hint or "").strip():
+    # chiuso, pubblico e lo abbiamo su disco. Tre vie, in ordine di certezza.
+    #
+    # 1. Il cittadino l'ha SCELTO da una lista: c'è un codice ISTAT, e non si
+    #    guarda nient'altro. Niente omonimi, niente grafie, niente modello.
+    # 2. `_confirm_comune_hint` ha lasciato passare un accenno perché le sue
+    #    parole erano davvero nella frase (R-9).
+    # 3. Nessuna delle due: si legge la frase contro i 7.896 comuni italiani.
+    #    `risolvi_comune` risponde solo se un nome compare davvero ed è uno
+    #    solo, quindi non può reintrodurre ciò che la guardia ha scartato.
+    scelto = comune_per_codice(comune_istat)
+    if scelto is not None:
+        intent = intent.model_copy(update={"comune_hint": scelto.nome})
+    elif not (intent.comune_hint or "").strip():
         dedotto = risolvi_comune(message)
         if dedotto is not None:
             intent = intent.model_copy(update={"comune_hint": dedotto.nome})

@@ -89,6 +89,15 @@ _PAROLE_VUOTE = frozenset({"di", "del", "della", "dei", "delle", "in", "nel", "n
                            "sull", "su", "a", "al", "alla", "d", "l", "e", "con"})
 
 
+#: Come si nomina un comune parlando: "comune di Roma", "città di Torino".
+#: Nessun nome nell'elenco ISTAT contiene queste parole, quindi vanno tolte
+#: dalla query prima di cercare, o la ricerca non trova il caso più comune.
+_PREFISSO_COMUNE = re.compile(
+    r"^\s*(?:il\s+|la\s+)?(?:comune|citt[àa]|municipio|paese)\s+(?:di\s+|d['’]\s*)?",
+    re.IGNORECASE,
+)
+
+
 def _norm(testo: str) -> str:
     """Chiave di confronto: senza accenti, senza punteggiatura, minuscola."""
     piatto = unicodedata.normalize("NFKD", testo)
@@ -122,6 +131,69 @@ def _indice() -> dict[str, list[ComuneNoto]]:
 def _senza_parole_vuote(testo: str) -> str:
     """La forma in cui un cittadino scrive un nome ufficiale."""
     return " ".join(t for t in _norm(testo).split() if t not in _PAROLE_VUOTE)
+
+
+def cerca_comuni(query: str, *, limite: int = 8) -> list[ComuneNoto]:
+    """I comuni italiani che assomigliano a quello che il cittadino ha scritto.
+
+    Serve a far scegliere invece di indovinare. Chi scrive "Roma" può
+    intendere Roma, e chi scrive "Castro" deve poter dire quale dei due: una
+    lista da cui si sceglie produce un `codice_istat` certo, che è l'unica
+    forma in cui questo dato non causa equivoci più avanti.
+
+    Ordinamento per quanto la corrispondenza è stretta — esatta, poi per
+    inizio, poi per contenuto — e a parità in ordine alfabetico, così la
+    stessa query dà sempre la stessa lista: una tendina che cambia ordine fra
+    due battute è una tendina in cui si clicca la riga sbagliata.
+    """
+    # "comune di Roma" è il modo normale di nominare un comune, e senza questo
+    # non trovava niente: nessun nome nell'elenco contiene la parola "comune".
+    ripulita = _PREFISSO_COMUNE.sub("", query.strip())
+    chiave = _norm(ripulita)
+    if len(chiave) < 2:
+        return []
+    compatta = _senza_parole_vuote(ripulita)
+
+    trovati: dict[str, tuple[int, str, ComuneNoto]] = {}
+    for comune in _tutti():
+        nome = _norm(comune.nome)
+        senza = _senza_parole_vuote(comune.nome)
+        if chiave in (nome, senza) or compatta in (nome, senza):
+            rango = 0
+        elif nome.startswith(chiave) or senza.startswith(chiave):
+            rango = 1
+        elif chiave in nome or chiave in senza:
+            rango = 2
+        else:
+            continue
+        precedente = trovati.get(comune.codice_istat)
+        if precedente is None or rango < precedente[0]:
+            trovati[comune.codice_istat] = (rango, nome, comune)
+
+    ordinati = sorted(trovati.values(), key=lambda t: (t[0], t[1]))
+    return [comune for _, _, comune in ordinati[:limite]]
+
+
+@lru_cache(maxsize=1)
+def _tutti() -> list[ComuneNoto]:
+    """Tutti i comuni, in ordine di codice: la base della ricerca testuale."""
+    visti: dict[str, ComuneNoto] = {}
+    for gruppo in _indice().values():
+        for comune in gruppo:
+            visti.setdefault(comune.codice_istat, comune)
+    return sorted(visti.values(), key=lambda c: c.codice_istat)
+
+
+def comune_per_codice(codice_istat: str | None) -> ComuneNoto | None:
+    """Il comune scelto dal cittadino, per codice.
+
+    È la via che non può sbagliare: un codice ISTAT non è ambiguo, non ha
+    omonimi e non dipende da come qualcuno ha scritto il nome. Quando c'è
+    questo, non si guarda nessun accenno testuale.
+    """
+    if not codice_istat:
+        return None
+    return next((c for c in _tutti() if c.codice_istat == codice_istat), None)
 
 
 def risolvi_comune(hint: str | None) -> ComuneNoto | None:

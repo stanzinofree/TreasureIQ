@@ -2915,3 +2915,117 @@ a {
     display: none;
   }
 }
+
+/* --- Scelta del comune ---------------------------------------------------
+ *
+ * Sta sopra la domanda perché il comune vale per tutta la conversazione,
+ * mentre la domanda cambia a ogni turno. Il peso visivo è deliberatamente
+ * basso: è un campo che si compila una volta, non l'azione principale della
+ * pagina.
+ */
+
+.scelta-comune {
+  position: relative;
+  margin-block-end: var(--ma-3);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--ma-2);
+}
+
+.scelta-comune__etichetta {
+  font-size: 0.82rem;
+  color: var(--sumi-faint);
+}
+
+.scelta-comune input {
+  flex: 1 1 14rem;
+  min-width: 0;
+  padding: var(--ma-2);
+  border: 1px solid var(--paper-sunken);
+  background: var(--paper-raised);
+  color: var(--sumi);
+  font: inherit;
+  font-size: 0.95rem;
+}
+
+.scelta-comune input:focus-visible {
+  outline: 2px solid var(--ai);
+  outline-offset: 1px;
+}
+
+.scelta-comune__esiti {
+  position: absolute;
+  inset-inline: 0;
+  top: 100%;
+  z-index: 20;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background: var(--paper-raised);
+  border: 1px solid var(--paper-sunken);
+  max-height: 17rem;
+  overflow-y: auto;
+}
+
+.scelta-comune__esiti button {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--ma-2);
+  width: 100%;
+  padding: var(--ma-2);
+  border: 0;
+  background: none;
+  text-align: start;
+  font: inherit;
+  color: var(--sumi);
+  cursor: pointer;
+}
+
+.scelta-comune__esiti button:hover,
+.scelta-comune__esiti button:focus-visible {
+  background: var(--paper-sunken);
+  outline: none;
+}
+
+.scelta-comune__nome {
+  font-weight: 600;
+}
+
+.scelta-comune__dove {
+  font-size: 0.82rem;
+  color: var(--sumi-faint);
+}
+
+/* Un comune che ISTAT conosce e di cui IPA non pubblica il portale. Non è un
+ * errore e non va nascosto: è un'assenza dichiarata, e chi sceglie deve
+ * saperla prima di cliccare, non dopo aver ricevuto una risposta vuota. */
+.scelta-comune__senza-portale {
+  font-size: 0.78rem;
+  color: var(--sumi-soft);
+  border: 1px solid var(--paper-sunken);
+  padding: 0 var(--ma-1, 4px);
+}
+
+.scelta-comune__stato {
+  flex-basis: 100%;
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--sumi-faint);
+}
+
+.scelta-comune__stato--vuoto {
+  color: var(--sumi-soft);
+}
+
+.scelta-comune__cambia {
+  border: 0;
+  background: none;
+  padding: 0;
+  font: inherit;
+  font-size: 0.85rem;
+  color: var(--ai);
+  text-decoration: underline;
+  cursor: pointer;
+}

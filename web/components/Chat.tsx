@@ -32,6 +32,7 @@ import Approfondisci from "@/components/Approfondisci";
 import Segnalazione from "@/components/Segnalazione";
 import SchedaDettaglio from "@/components/SchedaDettaglio";
 import AccessoSimulato from "@/components/AccessoSimulato";
+import SceltaComune from "@/components/SceltaComune";
 import { PRESETS } from "@/lib/profili-demo";
 import { useProfilo } from "@/lib/profilo";
 import { useRisultati } from "@/lib/risultati";
@@ -48,6 +49,7 @@ import {
   type ChatCost,
   type ChatOut,
   type ChatTurn,
+  type ComuneScelta,
   type CostLevels,
   type Escalation,
   type InfoOut,
@@ -509,6 +511,9 @@ export default function Chat() {
   const { registra: registraTrovate, azzeraTrovate } = useRisultati();
   const accesso = profilo.accesso === true;
   const [manualLogin, setManualLogin] = useState(false);
+  // Scelto da un elenco, non dedotto da una frase: viaggia con ogni domanda
+  // come `codice_istat`, che non ha omonimi e non può essere inventato.
+  const [comune, setComune] = useState<ComuneScelta | null>(null);
   const [scheda, setScheda] = useState<Match | null>(null);
   const [passoAttesa, setPassoAttesa] = useState(0);
 
@@ -605,7 +610,7 @@ export default function Chat() {
     setInput("");
     setBusy(true);
     try {
-      const out = await chat(trimmed, history);
+      const out = await chat(trimmed, history, comune?.codice_istat ?? null);
       const id = newId();
       setMessages((prev) => [
         ...prev,
@@ -864,6 +869,12 @@ export default function Chat() {
           {error}
         </p>
       )}
+
+      {/* Sopra la domanda, non dentro: il comune vale per tutta la
+          conversazione, mentre la domanda cambia a ogni turno. Sceglierlo da
+          qui produce un codice ISTAT, che è l'unica forma di questo dato che
+          non può essere né ambigua né inventata. */}
+      <SceltaComune scelto={comune} onScegli={setComune} />
 
       <form className="chat__form" onSubmit={handleSubmit}>
         <label className="chat__label" htmlFor={inputId}>

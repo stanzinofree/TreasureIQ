@@ -3717,3 +3717,72 @@ a {
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+/* ── Mappa del sistema (/info) ──────────────────────────────────────────────
+ * Il diagramma scala con la colonna e non scrolla mai in orizzontale: una
+ * figura che si legge solo trascinandola non spiega niente. */
+.mappa {
+  margin: var(--ma-4) 0;
+}
+
+.mappa svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.mappa__fascia {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  fill: var(--sumi-faint);
+}
+
+.mappa__titolo {
+  font-size: 14px;
+  font-weight: 600;
+  fill: var(--sumi);
+  text-anchor: middle;
+}
+
+.mappa__riga {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  fill: var(--sumi-soft);
+  text-anchor: middle;
+}
+
+/* Niente `text-anchor` qui: il CSS vincerebbe sull'attributo SVG, e le
+ * etichette delle frecce verticali devono poter stare allineate a sinistra. */
+.mappa__etichetta {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  fill: var(--sumi-faint);
+}
+
+.mappa__nota {
+  font-size: 12.5px;
+  fill: var(--sumi-soft);
+}
+
+.mappa__legenda {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ma-3);
+  margin-top: var(--ma-2);
+  font-size: 0.82rem;
+  color: var(--sumi-soft);
+}
+
+.mappa__bollo {
+  display: inline-block;
+  width: 0.8rem;
+  height: 0.8rem;
+  margin-inline-end: 6px;
+  border: 1.5px solid var(--kasumi);
+  vertical-align: -1px;
+}
+
+.mappa__bollo--offline { background: var(--paper-raised); }
+.mappa__bollo--vivo { background: var(--ai-wash); border-color: var(--ai); }
+.mappa__bollo--esterno { background: var(--paper-sunken); }

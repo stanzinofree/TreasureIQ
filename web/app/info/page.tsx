@@ -12,6 +12,7 @@
 import { readiness, type Readiness } from "@/lib/api";
 import Link from "next/link";
 import CicloFlusso from "@/components/CicloFlusso";
+import MappaSistema from "@/components/MappaSistema";
 import SpecificheOpenData from "@/components/SpecificheOpenData";
 
 export const dynamic = "force-dynamic";
@@ -53,6 +54,18 @@ export default async function Info() {
           <Link href="/manifesto">manifesto</Link>.
         </p>
         </div>
+      </section>
+
+      <section className="panel">
+        <h2>Chi parla con chi, e quando</h2>
+        <p className="lede">
+          Due fasce, e non si mescolano mai. Sopra, quello che gira prima che
+          qualcuno faccia una domanda: finisce in file versionati, che chiunque
+          può rileggere. Sotto, quello che succede mentre il cittadino aspetta.
+          È questa separazione che permette a una risposta di dire da dove
+          viene, invece di dirlo a parole.
+        </p>
+        <MappaSistema />
       </section>
 
       <CicloFlusso />

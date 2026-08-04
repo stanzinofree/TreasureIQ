@@ -1,0 +1,140 @@
+# API TreasureIQ
+
+Base URL in sviluppo: `http://localhost:8010`. Dal browser non si usa mai
+direttamente: il front-end chiama percorsi relativi (`/api/…`) sulla propria
+origine e Next li inoltra al container dell'API — vedi `rewrites` in
+`web/next.config.mjs`.
+
+OpenAPI generato: `GET /openapi.json`. Questo documento spiega **cosa
+significano** le risposte, che è la parte che uno schema non dice.
+
+---
+
+## Le due regole che spiegano quasi tutto
+
+**Un campo vuoto è una misura, non un buco da riempire.** Ogni `null` in queste
+risposte vuol dire «il comune non l'ha pubblicato» oppure «non l'abbiamo
+misurato», mai «zero». Un `telefono: null` va reso come assenza dichiarata, non
+sostituito con un centralino plausibile.
+
+**Il binario cambia la forma della risposta, non solo il contenuto.** `kind`
+vale `agevolazione` o `informazione` (D-19). Sul binario informativo non
+esistono verdetto, criteri e SPID: non sono `null`, proprio non ci sono nel
+tipo. Sul binario delle agevolazioni non esiste `info`. Un client che prova a
+leggere i campi dell'altro binario ha sbagliato binario.
+
+---
+
+## Chat
+
+### `POST /api/chat`
+
+Il cuore del sistema. Una domanda in italiano, una risposta strutturata.
+
+```json
+{
+  "message": "quando ritirano il vetro?",
+  "comune_istat": "058003",
+  "history": ["sono di Albano"]
+}
+```
+
+| Campo | Note |
+|---|---|
+| `message` | La frase del cittadino, così com'è. |
+| `comune_istat` | Il comune **scelto da una lista**, non dedotto. Quando c'è, non si guarda nient'altro. |
+| `history` | Solo i messaggi precedenti del *cittadino*, mai le nostre risposte: una risposta che diventa input della successiva è un cortocircuito. |
+
+Risposta (campi principali):
+
+| Campo | Significato |
+|---|---|
+| `reply` | La frase di apertura, e nient'altro. Tutto il resto è nei campi tipizzati: la UI non deve estrarre dati dal testo. |
+| `kind` | `agevolazione` \| `informazione`. Decide quale metà della risposta è popolata. |
+| `matches[]` | Solo su `agevolazione`. Ogni voce ha `verdict`, `criteria[]` e `headline`. |
+| `info` | Solo su `informazione`. Documento, ufficio, prove, azioni. `null` altrove. |
+| `data_gap` | `not_published` \| `none_found` \| `comune_sconosciuto` \| `null`. |
+| `access_mode` | Il gradino a cui la risposta è stata composta: `M2_prosa_api`, `M4_connettore`, `M6_web_aperto`… |
+| `citizen_effort` | Quante azioni restano **al cittadino** dopo la risposta. Un conteggio, mai una stima, e non va mai sommato a `cost`. |
+| `cost` | Quanto è costato a *noi* recuperare quel dato. Risponde a una domanda diversa da `citizen_effort`. |
+
+### `criteria[].state`, sul binario agevolazioni
+
+| Stato | Vuol dire |
+|---|---|
+| `met` | Il requisito è soddisfatto. |
+| `not_met` | Non è soddisfatto. |
+| `unknown_source` | **Il comune non l'ha pubblicato.** Non è un sì e non è un no: è una lacuna nei dati, e va mostrata come tale. |
+| `unknown_profile` | Manca un dato del cittadino, che può fornirlo. |
+
+Il verdetto viene da confronti espliciti sui campi (`match/engine.py`). Nessun
+modello linguistico partecipa a questa decisione (D-01).
+
+### `info`, sul binario informativo
+
+| Campo | Significato |
+|---|---|
+| `document` | La pagina del comune: titolo verbatim, URL, descrizione, data di lettura. |
+| `office` | Ufficio competente. Ogni campo è nullable per conto suo. |
+| `stato` | `ufficiale` \| `parziale` \| `non_verificato` \| `non_pubblicato`. Provenienza e completezza, mai un diritto. |
+| `letto_dal_vivo` | `true` solo se il portale è stato letto **durante questa richiesta**. Un dato letto al volo e uno verificato non devono avere lo stesso aspetto. |
+| `prove[]` | Le righe di «cosa sappiamo dalla fonte», già composte: `confermato` \| `parziale` \| `mancante`. Le assenze sono righe, non righe che mancano. |
+| `azioni[]` | I passi successivi: `testo`, `dettaglio`, `url`, `tipo`, `etichetta`. |
+| `web_results[]` | Pagine trovate con una ricerca, `non_verificato: true` per costruzione. **Non sono una fonte**: sono un suggerimento da confermare. |
+
+### `POST /api/approfondimento`
+
+`{ "topic": "rifiuti" }` — il costo di recupero dettagliato per un argomento già
+risposto. Riusa il topic invece di riclassificare, così resta deterministico.
+
+---
+
+## Sessione e profilo
+
+| Rotta | Cosa fa |
+|---|---|
+| `POST /api/session` | Apre una sessione con un profilo **simulato**. Nessuna credenziale viene verificata, nessun codice fiscale viene letto. Cookie `HttpOnly`, 8 ore. |
+| `DELETE /api/session` | Chiude e dimentica. |
+| `GET /api/me` | Il profilo in sessione, o 401. |
+| `GET /api/opportunities` | Le opportunità del comune del profilo, già valutate. `?include_ineligible=true` tiene anche i «no» — un no con una ragione è una risposta. |
+
+---
+
+## Comuni
+
+| Rotta | Cosa fa |
+|---|---|
+| `GET /api/comuni?q=Castro` | Cerca fra i 7.896 comuni italiani. Fra due omonimi restituisce entrambi: la scelta è del cittadino, non nostra. |
+| `GET /api/comune-nearby?lat=&lon=` | Il comune più vicino a una coordinata. Serve al pulsante «usa la mia posizione», che resta sempre facoltativo. |
+
+---
+
+## Misura (la parte che questo progetto esiste per fare)
+
+| Rotta | Cosa fa |
+|---|---|
+| `GET /api/readiness` | La pagella 0–100 di ogni comune censito. |
+| `GET /api/readiness/{codice_istat}` | La pagella di uno, con le dimensioni e i **rimedi**: cosa dovrebbe fare quel comune. |
+| `GET /api/recovery` · `/{codice_istat}` | Quanto è costato recuperare i dati, per record e in aggregato. |
+| `GET /api/integration` | Come si arriva a ciascun ente: connettore, modalità di accesso, diagnosi. |
+| `GET /api/costo` | Il costo d'integrazione in forma aggregata. |
+| `GET /api/panoramica` | Il quadro d'insieme per la pagina pubblica. |
+| `GET /api/storico?codice_istat=` | Come si è mossa nel tempo la misura di un comune. |
+| `GET /api/stats` · `/api/status` · `/api/health` | Conteggi, stato delle fonti, liveness. |
+
+### Segnalazioni
+
+`GET`/`POST /api/segnalazioni` — un cittadino può segnalare che su un comune
+manca qualcosa. Non è un modulo di reclamo: è il modo in cui una lacuna
+misurata diventa un numero accanto al nome di quel comune.
+
+---
+
+## Cosa NON c'è, e non per dimenticanza
+
+- **Nessuna rotta che restituisca un diritto.** La risposta più forte che questa
+  API dà è «nessun requisito pubblicato ti esclude», con l'elenco di quelli che
+  il comune non ha pubblicato.
+- **Nessuna scrittura verso i portali dei comuni.** Si legge e basta.
+- **Nessun endpoint che accetti testo libero da rendere all'utente.** Il testo
+  che torna al cittadino è composto da campi tipizzati (D-24).

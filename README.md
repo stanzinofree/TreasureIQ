@@ -16,15 +16,23 @@ Il Comune di Albano Laziale pubblica 32 servizi tramite un'API aperta. Il tema
 WordPress che usa — il modello **Design Comuni Italia** — prevede un campo
 dedicato ai requisiti di accesso, `_dci_servizio_vincoli`.
 
-| Misurazione (2 agosto 2026) | Valore |
+| Misurazione (snapshot del 2 agosto 2026) | Valore |
 |---|---|
-| Servizi pubblicati via API | 32 |
-| Campo requisiti **presente** | 32 / 32 |
-| Campo requisiti **compilato** | **1 / 32** |
-| Servizi che citano l'ISEE nel testo | 10 / 32 |
-| …di cui con una cifra accanto all'ISEE | 4 / 32 |
-| …di cui con soglia effettivamente estraibile | 2 / 32 |
+| Record comunali nello snapshot | 42 — 32 via API WordPress, 10 da pagine HTML |
+| Campo requisiti **presente** | 32 / 32 sui record via API |
+| Campo requisiti **compilato** | **1 / 42** |
+| …e nemmeno quello è tipizzato | 0 / 42 |
+| Record che citano l'ISEE nel testo | 10 / 42 |
+| …di cui con una cifra accanto all'ISEE | 4 / 42 |
+| …di cui con soglia effettivamente estraibile | 2 / 42 |
 | Dataset del comune su dati.gov.it | **0** |
+
+Nella chat i record diventano 45: ai 42 comunali si aggiungono 3 misure
+nazionali e regionali curate a mano (`data/seed/nazionale_curated.json`), che
+esistono perché un cittadino con la bolletta alta ha diritto di sapere del bonus
+sociale anche se il suo comune non lo pubblica. Sono marcate come tali e non
+entrano in nessuna pagella comunale: misurare un comune su dati scritti da noi
+sarebbe misurare noi stessi.
 
 Ogni numero è riproducibile contro lo snapshot committato in `data/seed/`.
 
@@ -39,19 +47,44 @@ che quel campo non è tipizzato.
 
 ## Come funziona
 
+Due processi e un'ingestione che gira a parte. Non è un'architettura a
+microservizi, e chiamarla così farebbe scena senza essere vero.
+
+**Prima della domanda** — gira quando vogliamo noi, e finisce in file versionati:
+
 ```
-ingest/          → connettori per fonti di qualità diversa (WP REST, CKAN, HTML)
+ingest/          → connettori per fonti di qualità diversa (WP REST, HTML)
     ↓              ogni connettore misura quanta struttura ha recuperato
 schema.py        → Opportunity: schema comune, proposto come spec aperta
     ↓
-extract/         → recupero dei criteri dalla prosa (LLM), con cache committata
+extract/         → recupero dei criteri dalla prosa (modello), cache committata
     ↓
-match/           → verdetto di eleggibilità, deterministico
+data/seed/       → snapshot in git: ogni numero del README è riproducibile
     ↓
 readiness.py     → pagella 0-100 sulla qualità dei dati del comune
-    ↓
-api.py + web/    → feed per il cittadino, pagella per la PA
 ```
+
+**Mentre il cittadino aspetta** — `web` (Next) parla solo con `api` (FastAPI),
+sulla stessa origine:
+
+```
+domanda in italiano
+    ↓
+chat/intent.py   → che FORMA ha la domanda. È tutto ciò che fa il modello
+    ↓
+    ├─ agevolazione → match/engine.py: confronto sui campi, nessun modello
+    └─ informazione → documento + ufficio dallo snapshot
+            ↓ (se il comune non è censito)
+         sonda_live → legge il portale ORA, verbatim, non conserva
+            ↓ (se il portale non espone gli uffici)
+         ricerca web → SearXNG, marcato «non verificato», da confermare
+    ↓
+scheda civica    → ogni riga con la sua provenienza
+```
+
+I tre gradini si scendono **in ordine**, e un dato trovato non si presenta mai
+come un dato letto. Il diagramma completo è su `/info`; le rotte sono
+documentate in [`docs/api.md`](docs/api.md).
 
 ### Tre scelte che reggono il progetto
 
@@ -90,7 +123,17 @@ cd TreasureIQ
 docker compose up --build
 ```
 
-Poi apri <http://localhost:3000>.
+Poi apri <http://localhost:3000>, oppure il dominio OrbStack se lo usi:
+<https://web.treasureiq.orb.local>. Funzionano entrambi senza configurare
+niente, perché il browser chiama percorsi relativi sulla propria origine e Next
+li inoltra all'API.
+
+Prima di una demo conviene scaldare la cache dei comuni fuori copertura, così la
+prima domanda non aspetta la rete:
+
+```bash
+make scalda-cache COMUNI='Ciampino Camposampiero'
+```
 
 L'API è pubblicata su <http://localhost:8010> — non 8000, che su molte macchine
 con OrbStack o Docker Desktop è già occupata, con l'effetto che le richieste
@@ -147,6 +190,15 @@ cache committata e i risultati restano identici.
 
 ---
 
+## Demo e documentazione
+
+| File | Cosa contiene |
+|---|---|
+| [`demo/copione.md`](demo/copione.md) | Copione da 3 minuti: quattro casi, battute cronometrate, i punti dove fermare l'immagine. |
+| [`demo/copione-10min.md`](demo/copione-10min.md) | Versione estesa: aggiunge il profilo simulato, gli omonimi e la pagella. |
+| [`docs/api.md`](docs/api.md) | Le rotte, e soprattutto cosa significano le risposte. |
+| `/info` | La mappa del sistema e il ciclo completo, dalla domanda alla risposta. |
+
 ## Autenticazione
 
 Il flusso di accesso è una **simulazione di SPID**. Nessuna credenziale viene
@@ -166,11 +218,20 @@ disonesta.
 
 ## Limiti dichiarati
 
-- **Un solo comune con dati strutturati.** I comuni limitrofi non espongono API
-  (Ariccia e Castel Gandolfo rispondono 410, Genzano 404): il piano di replicare
-  lo stesso connettore non regge, e servono connettori per livelli di qualità
-  diversi. I connettori CKAN e HTML non sono ancora implementati.
-- **Nessun verdetto è "eleggibile".** Nessun record di Albano pubblica requisiti
+- **Tre comuni censiti, non l'Italia.** Albano Laziale (45 record, pagella
+  34.3), Fonte Nuova (37, 43.5), Ariccia (18, 14.9). I comuni limitrofi in gran
+  parte non espongono API — Castel Gandolfo risponde 410, Genzano 404 — e per
+  questo esistono connettori diversi per livelli di qualità diversi. Il
+  connettore CKAN non è ancora implementato.
+- **Censiti e riconosciuti sono due numeri diversi.** Tre comuni hanno uno
+  snapshot; 7.896 sono riconosciuti per nome e, se il loro portale si lascia
+  leggere, ricevono una risposta letta al momento. Vanno detti come due numeri
+  diversi, sempre.
+- **La ricerca web non è una fonte.** È l'ultimo gradino, serve solo dove il
+  portale non espone i propri uffici, e quello che restituisce arriva marcato
+  `non_verificato` e da confermare con l'URP. Non entra in nessuno snapshot e
+  non conta nella copertura.
+- **Nessun verdetto è "eleggibile".** Nessun record pubblica requisiti
   tipizzati, quindi nessun match può essere confermato. Non è un difetto del
   motore: è il risultato onesto sui dati reali, ed è la tesi del progetto resa
   visibile.

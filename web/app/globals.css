@@ -317,16 +317,10 @@ a {
   margin: 0 0 var(--ma-3);
 }
 
-/* Set wider than body prose. At 1.1rem the shared --measure came out around
-   490px, so an intro under a full-width heading broke after eight or nine
-   words and left the rest of the line empty — the wrapping that looks like a
-   mistake even when the line length is technically correct. 82ch is still
-   inside the range a reader can track back to the start of. */
 .lede {
   font-size: 1.1rem;
   color: var(--sumi-soft);
   margin-top: var(--ma-4);
-  max-width: 82ch;
 }
 
 /* ------------------------------------------------------- opportunity card */
@@ -577,28 +571,31 @@ a {
   box-shadow: var(--shadow-rest);
 }
 
-/* The content pages get their own column width.
-   The shell is 1760px because the chat wants the screen; a prose page inside
-   it left every paragraph wrapping at --measure — around 610px — with a
-   thousand pixels of nothing to its right. The text was not too narrow, the
-   container was too wide, and widening the text instead would have produced
-   180-character lines nobody can track back to the start of.
-   Data-heavy blocks opt back out below. */
+/* One column, and everything fills it.
+   The page had four max-widths that did not agree — 68ch on prose, 82ch on
+   intros, 1180px on the container — so every text block stopped short and sat
+   against the left edge with a ragged gap beside it. That reads as broken even
+   when each individual value is defensible.
+   The container is now the only thing setting line length, at a width prose
+   can actually fill, and the per-element caps inside are switched off below.
+   Nothing here is centred: centring a left-aligned paragraph under a
+   full-width heading trades one misalignment for another. */
 .stack {
   display: grid;
   gap: var(--ma-6);
-  max-width: 1180px;
+  max-width: 940px;
   margin-inline: auto;
 }
 
-/* Tables, ladders and bar rows read better across the full shell: they are
-   scanned column by column, not read line by line, so the argument above does
-   not apply to them. */
-.stack > .panel--largo {
+/* The container decides the measure now, so the inherited caps would only
+   reintroduce the gap they were meant to prevent. */
+.stack p,
+.stack .lede,
+.stack li {
   max-width: none;
-  width: calc(100vw - var(--ma-8));
-  margin-inline: calc(50% - 50vw + var(--ma-4));
 }
+
+
 
 .grid-2 {
   display: grid;
@@ -895,7 +892,6 @@ a {
 .hero-band .lede {
   color: var(--sumi-soft);
   margin: var(--ma-6) auto 0;
-  max-width: 58ch;
   font-size: 1.14rem;
   line-height: 1.65;
 }
@@ -2393,9 +2389,11 @@ a {
   justify-content: center;
   gap: var(--ma-8) var(--ma-12);
 }
+/* Two columns at this width, so ten principles make five full rows and no
+   row is left with a single orphan against the left edge. */
 .principi > .principio {
-  flex: 1 1 300px;
-  max-width: 380px;
+  flex: 1 1 380px;
+  max-width: none;
 }
 .principio h2 {
   font-size: 1.06rem;
@@ -2407,7 +2405,6 @@ a {
 .principio p {
   margin: 0;
   color: var(--sumi-soft);
-  max-width: 62ch;
 }
 .manifesto-cta__azioni {
   display: flex;
@@ -2462,7 +2459,6 @@ a {
   margin: var(--ma-2) 0 0;
   font-size: 0.88rem;
   color: var(--sumi-soft);
-  max-width: 74ch;
 }
 .scala__comuni {
   list-style: none;
@@ -2520,7 +2516,6 @@ a {
   line-height: 1.45;
   color: var(--sumi);
   margin: var(--ma-4) 0 var(--ma-6);
-  max-width: 46ch;
 }
 .panoramica__titolo strong {
   font-family: var(--font-mono);
@@ -2746,7 +2741,6 @@ a {
   margin: var(--ma-2) 0 0;
   color: var(--sumi-soft);
   font-size: 0.92rem;
-  max-width: 68ch;
 }
 .ciclo__attore {
   display: inline-block;

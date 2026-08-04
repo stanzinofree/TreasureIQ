@@ -4,24 +4,30 @@
  * so the browser will not attach it cross-origin without this and every
  * authenticated request would silently 401 in development.
  */
-// Two different addresses reach the same API, and which one is correct depends
-// on who is asking.
+// Due indirizzi diversi raggiungono la stessa API, e quale sia quello giusto
+// dipende da chi lo chiede.
 //
-//   Browser        → the host-published port (http://localhost:8010).
-//   Server render  → inside compose, "localhost" is the web container itself,
-//                    so server components must use the service name on the
-//                    compose network (http://api:8000).
+//   Browser        → nessun indirizzo: percorsi relativi. Next inoltra `/api/*`
+//                    al container dell'API (vedi `rewrites` in
+//                    `next.config.mjs`), quindi la chiamata resta sulla stessa
+//                    origine della pagina, qualunque essa sia.
+//   Server render  → dentro compose "localhost" è il container web stesso, e i
+//                    server component devono usare il nome del servizio sulla
+//                    rete di compose (http://api:8000).
 //
-// Getting this wrong is invisible in `next dev` on a laptop, where both happen
-// to be the same machine, and only shows up once the app is containerised —
-// which is exactly where a reviewer will run it.
+// L'indirizzo assoluto lato browser è durato finché la pagina si è aperta solo
+// su http://localhost:3000. Servita da un dominio vero — i domini .orb.local di
+// OrbStack, che sono in HTTPS — la stessa riga chiedeva a una pagina https di
+// chiamare http://localhost:8010: altra origine e contenuto misto insieme, che
+// il browser blocca prima ancora di guardare l'header CORS. Un indirizzo
+// relativo non ha questo problema su nessun dominio, presente o futuro.
 const isServer = typeof window === "undefined";
 
 export const API = isServer
   ? process.env.TREASUREIQ_API_INTERNAL ??
     process.env.NEXT_PUBLIC_TREASUREIQ_API ??
     "http://localhost:8010"
-  : process.env.NEXT_PUBLIC_TREASUREIQ_API ?? "http://localhost:8010";
+  : "";
 
 export type Verdict = "eligible" | "likely" | "undetermined" | "not_eligible";
 export type CriterionState =

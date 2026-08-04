@@ -3535,3 +3535,15 @@ a {
   text-transform: none;
   color: var(--sumi-faint);
 }
+
+/* Il titolo del servizio e' quello del comune, e a volte il comune ci mette
+ * dentro nove uffici in fila ("Anagrafe, Stato civile, Elettorale,
+ * Statistica, Leva, Protocollo, Polizia mortuaria e Servizi cimiteriali, URP,
+ * Notifiche"). Non lo accorciamo — sarebbe riscrivere la fonte — ma nella
+ * scheda ne mostriamo tre righe: il resto e' sulla pagina, a un clic. */
+.civica__servizio h3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

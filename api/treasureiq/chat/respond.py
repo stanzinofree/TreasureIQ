@@ -1509,11 +1509,15 @@ async def _risposta_live(
 
     if letto.ha_orari:
         return _chat_live(
+            # La citazione non sta più qui dentro. Ripetuta nella prosa e poi
+            # resa nel blocco orari, la stessa riga compariva due volte: la
+            # prima come muro di testo con dentro «Lunedì 09:00 - 12:30 |
+            # Martedì…», la seconda leggibile. La prosa dice da dove viene il
+            # dato, la scheda lo mostra — ognuno il proprio mestiere (D-24).
             reply=(
-                f"{comune.nome} non è fra i comuni di cui abbiamo i dati, così sono "
-                f"andato a leggere il suo portale adesso. Alla voce «{letto.ufficio}» "
-                f"c'è scritto: «{letto.citazione}». È la pagina del comune, riportata "
-                "alla lettera — non l'abbiamo verificata né messa nei nostri dati."
+                f"{comune.nome} non è fra i comuni di cui abbiamo i dati: sono andato "
+                "a leggere il suo portale adesso. Gli orari qui sotto sono quelli "
+                "scritti sulla pagina del comune, riportati alla lettera."
             ),
             topic=topic,
             diagnosi=diagnosi,

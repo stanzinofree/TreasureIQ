@@ -30,7 +30,10 @@ next-env.d.ts
 # --- Tooling state (per-machine, not part of the project) ---
 .codegraph/
 .serena/
-.kapi/
+.kapi/*
+# La spec è il documento di progetto: le decisioni (D-xx) e i vincoli vivono
+# lì, e senza versionarla il perché delle scelte resta fuori dalla storia.
+!.kapi/spec.md
 .claude/
 
 # --- OS / editor ---
@@ -49,3 +52,6 @@ htmlcov/
 # They are the committed snapshots that let anyone clone the repository and run
 # the full demo with no network access and no API key — which the hackathon
 # requires and which is the point of the reproducibility argument.
+# D-33: dati acquisiti a runtime, mai versionati.
+# I dati curati stanno in data/, che è tracciata.
+data-live/

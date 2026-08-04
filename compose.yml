@@ -11,6 +11,11 @@ services:
   api:
     build:
       context: ./api
+      # Esplicito, e non per pedanteria: senza questo compose costruisce
+      # l'ULTIMO stage del Dockerfile, che è `dev` (quello dei test). L'API
+      # partiva eseguendo pytest e si riavviava all'infinito. Lo stage che
+      # serve i cittadini è `base`, e lo si dice qui.
+      target: base
     # 8010 rather than 8000: on machines running OrbStack or Docker Desktop the
     # 8000 port is frequently already bound, and requests to localhost:8000 then
     # reach the wrong process and 404 in a way that looks like an app bug.
@@ -39,6 +44,13 @@ services:
       # Read-only: the API serves these snapshots and must never rewrite them.
       # Refreshing them is the ingestion CLI's job, run deliberately.
       - ./data:/data:ro
+      # D-33 — due cicli di vita, due mount. Sopra: i seed curati, immutabili
+      # a runtime e versionati in git. Qui: quello che l'API legge dai portali
+      # mentre un cittadino aspetta (D-32), scrivibile e fuori da git. La
+      # separazione la impone il filesystem, non la disciplina di chi scrive:
+      # un risultato non verificato archiviato fra i dati curati ne
+      # erediterebbe l'autorità senza averla mai guadagnata.
+      - ./data-live:/live
     restart: unless-stopped
 
   web:

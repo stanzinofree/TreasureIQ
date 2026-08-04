@@ -37,6 +37,7 @@ criterion at all. The model never sets `data_gap` itself.
 
 from __future__ import annotations
 
+import asyncio
 import logging
 import re
 from dataclasses import dataclass, field
@@ -65,6 +66,8 @@ from treasureiq.integration import (
     load_enti,
     load_websearch,
 )
+from treasureiq.ingest.censimento import Indirizzabilita
+from treasureiq.sonda_live import leggi_orari_urp, risolvi_comune
 from treasureiq.match.engine import (
     CriterionState,
     MatchResult,
@@ -786,7 +789,7 @@ def _compose_informazione_reply(
     return " ".join(parts)
 
 
-def _build_informazione_answer(
+async def _build_informazione_answer(
     *, intent: ChatIntent, records: list[Opportunity]
 ) -> ChatAnswer:
     """The INFORMAZIONE rail (D-19): document + office + coverage + cost,
@@ -848,6 +851,13 @@ def _build_informazione_answer(
         )
 
     if ente is None:
+        # D-32: fuori copertura si legge dal vivo il portale del comune stesso,
+        # prima di rifiutare. Il rifiuto resta la risposta giusta solo finché
+        # non ne esiste una migliore, e per un comune che ISTAT e IPA
+        # conoscono ne esiste una migliore.
+        live = await _risposta_live(hint=intent.comune_hint, topic=intent.topic)
+        if live is not None:
+            return live
         return ChatAnswer(
             reply=(
                 f"Il comune che hai indicato ({intent.comune_hint}) non è tra quelli "
@@ -936,6 +946,158 @@ def _build_informazione_answer(
             diagnosis=diagnosis,
             integration_cost=integration_cost,
             web_results=web_results,
+        ),
+    )
+
+
+async def _risposta_live(*, hint: str | None, topic: Topic) -> ChatAnswer | None:
+    """Il gradino 2 (D-32): leggere ora il portale di un comune fuori copertura.
+
+    `None` quando non c'è un comune italiano riconoscibile dietro l'accenno,
+    e allora chi chiama tiene il proprio rifiuto: questa funzione aggiunge una
+    risposta dove non ce n'era, non ne sostituisce una corretta.
+
+    La sonda è HTTP sincrono e qui siamo dentro l'event loop, quindi gira su
+    un thread: sei secondi di attesa bloccante fermerebbero ogni altra
+    richiesta dell'API, non solo questa.
+    """
+    comune = risolvi_comune(hint)
+    if comune is None:
+        return None
+
+    try:
+        letto = await asyncio.to_thread(leggi_orari_urp, comune)
+    except Exception as exc:  # noqa: BLE001 — la rete che cade non è un 500
+        logger.warning("sonda live fallita per %s: %s", comune.nome, exc)
+        letto = None
+
+    diagnosi = [
+        f"{comune.nome} ({comune.provincia}) non è fra i comuni di cui abbiamo "
+        "letto e verificato i dati: qui sotto c'è quello che il suo portale "
+        "dice di sé, letto in questo momento.",
+    ]
+    if comune.sito:
+        diagnosi.append(f"Portale istituzionale: {comune.sito} (fonte: IPA).")
+
+    if letto is None or letto.indirizzabilita is Indirizzabilita.IRRAGGIUNGIBILE:
+        return _chat_live(
+            reply=(
+                f"{comune.nome} non è fra i comuni che abbiamo già letto, e in questo "
+                "momento il suo portale non risponde. Non posso dirti nulla sui suoi "
+                "uffici senza inventarmelo."
+            ),
+            topic=topic,
+            diagnosi=diagnosi,
+            comune_sito=comune.sito,
+            data_gap="not_published",
+            citizen_effort=2,
+        )
+
+    if letto.ha_orari:
+        return _chat_live(
+            reply=(
+                f"{comune.nome} non è fra i comuni di cui abbiamo i dati, così sono "
+                f"andato a leggere il suo portale adesso. Alla voce «{letto.ufficio}» "
+                f"c'è scritto: «{letto.citazione}». È la pagina del comune, riportata "
+                "alla lettera — non l'abbiamo verificata né messa nei nostri dati."
+            ),
+            topic=topic,
+            diagnosi=diagnosi,
+            comune_sito=comune.sito,
+            ufficio=letto.ufficio,
+            orari=letto.citazione,
+            ufficio_url=letto.ufficio_url,
+            access_mode=AccessMode.M2_PROSA_API.value,
+            citizen_effort=1,
+        )
+
+    if letto.indirizzabilita is Indirizzabilita.API_UFFICI:
+        coda = (
+            f"L'ufficio «{letto.ufficio}» c'è, ma la sua pagina non pubblica un orario."
+            if letto.ufficio
+            else "Fra gli uffici pubblicati non ce n'è uno riconoscibile come URP."
+        )
+        return _chat_live(
+            reply=(
+                f"{comune.nome} pubblica l'elenco dei propri uffici in una forma "
+                f"leggibile, e l'ho letto adesso. {coda} Per l'orario conviene "
+                "chiamare o scrivere al comune."
+            ),
+            topic=topic,
+            diagnosi=diagnosi,
+            comune_sito=comune.sito,
+            ufficio=letto.ufficio,
+            ufficio_url=letto.ufficio_url,
+            access_mode=AccessMode.M2_PROSA_API.value,
+            data_gap="not_published",
+            citizen_effort=2,
+        )
+
+    return _chat_live(
+        reply=(
+            f"{comune.nome} ha un portale, ma non espone i propri uffici in una forma "
+            "che si possa leggere da qui: per sapere l'orario bisogna aprire il sito e "
+            "cercarlo a mano. È il motivo per cui questo comune non è ancora fra quelli "
+            "che copriamo."
+        ),
+        topic=topic,
+        diagnosi=diagnosi,
+        comune_sito=comune.sito,
+        access_mode=AccessMode.M4_CONNETTORE.value,
+        data_gap="not_published",
+        citizen_effort=3,
+    )
+
+
+def _chat_live(
+    *,
+    reply: str,
+    topic: Topic,
+    diagnosi: list[str],
+    comune_sito: str | None,
+    ufficio: str | None = None,
+    ufficio_url: str | None = None,
+    orari: str | None = None,
+    access_mode: str | None = None,
+    data_gap: str | None = None,
+    citizen_effort: int = 2,
+) -> ChatAnswer:
+    """Confeziona una risposta live come INFORMAZIONE, mai come verdetto.
+
+    `matches` resta vuoto e `spid_required` falso per costruzione: niente di
+    letto dal vivo può diventare un giudizio di eleggibilità (D-01/D-32).
+    """
+    documento = (
+        DocumentAnswer(title=f"{ufficio} — pagina del comune", url=ufficio_url)
+        if ufficio and ufficio_url
+        else None
+    )
+    return ChatAnswer(
+        reply=reply,
+        topic=topic,
+        kind=QuestionKind.INFORMAZIONE,
+        data_gap=data_gap,
+        needs_clarification=False,
+        matches=[],
+        spid_required=False,
+        spid_reason=None,
+        access_mode=access_mode,
+        citizen_effort=citizen_effort,
+        info=InfoAnswer(
+            document=documento,
+            office=(
+                OfficeAnswer(nome=ufficio, telefono=None, email=None, orari=orari)
+                if ufficio
+                else None
+            ),
+            coverage_count=0,
+            diagnosis=diagnosi,
+            integration_cost=[
+                "Lettura dal vivo, non un dato ingerito: nessuno snapshot di questo "
+                "comune è stato salvato e nulla di quanto sopra entra nei dati del "
+                "progetto finché non viene verificato."
+            ],
+            web_results=[],
         ),
     )
 
@@ -1039,7 +1201,7 @@ async def build_chat_answer(
         )
 
     if intent.kind is QuestionKind.INFORMAZIONE:
-        return _build_informazione_answer(intent=intent, records=records)
+        return await _build_informazione_answer(intent=intent, records=records)
 
     active_profile = profile or _profile_from_slots(intent=intent)
     candidates = _search_opportunities(records=records, topic=intent.topic)

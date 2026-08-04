@@ -1,0 +1,4 @@
+# Test-only dependencies. Installed exclusively in the `dev` stage of the
+# Dockerfile (see `make test`), never in the image that serves citizens.
+
+pytest>=8.3,<9.0

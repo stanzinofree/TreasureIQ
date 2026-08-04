@@ -1254,7 +1254,23 @@ def approfondimento(body: ApprofondimentoIn, request: Request) -> Approfondiment
         raise HTTPException(422, f"Tema non riconosciuto: {body.topic}") from None
 
     profile = profile_from_cookie(request.cookies.get(SESSION_COOKIE))
-    comune_istat = profile.comune_istat if profile is not None else DEFAULT_COMUNE_ISTAT
+    # No session, no comune. Defaulting to Albano here meant the button "e il
+    # mio comune?" answered about somebody else's comune, in a sentence naming
+    # it — the same unfounded residency claim the hero used to make, and worse
+    # because this one is dressed as a finding. When we do not know, the honest
+    # answer is to ask.
+    comune_istat = profile.comune_istat if profile is not None else None
+    if comune_istat is None:
+        return ApprofondimentoOut(
+            esito=(
+                "Per controllare cosa ha pubblicato il tuo comune devo sapere "
+                "qual è. Scrivimelo nella chat, oppure usa «Usa la mia "
+                "posizione» qui sopra."
+            ),
+            comune_nome="",
+            matches=[],
+            pagine=[],
+        )
     meta = COMUNI.get(comune_istat)
     comune_nome = meta["nome"] if meta else "Il tuo comune"
     records = list(load_opportunities(comune_istat))

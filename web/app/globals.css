@@ -317,10 +317,16 @@ a {
   margin: 0 0 var(--ma-3);
 }
 
+/* Set wider than body prose. At 1.1rem the shared --measure came out around
+   490px, so an intro under a full-width heading broke after eight or nine
+   words and left the rest of the line empty — the wrapping that looks like a
+   mistake even when the line length is technically correct. 82ch is still
+   inside the range a reader can track back to the start of. */
 .lede {
   font-size: 1.1rem;
   color: var(--sumi-soft);
   margin-top: var(--ma-4);
+  max-width: 82ch;
 }
 
 /* ------------------------------------------------------- opportunity card */
@@ -571,9 +577,27 @@ a {
   box-shadow: var(--shadow-rest);
 }
 
+/* The content pages get their own column width.
+   The shell is 1760px because the chat wants the screen; a prose page inside
+   it left every paragraph wrapping at --measure — around 610px — with a
+   thousand pixels of nothing to its right. The text was not too narrow, the
+   container was too wide, and widening the text instead would have produced
+   180-character lines nobody can track back to the start of.
+   Data-heavy blocks opt back out below. */
 .stack {
   display: grid;
   gap: var(--ma-6);
+  max-width: 1180px;
+  margin-inline: auto;
+}
+
+/* Tables, ladders and bar rows read better across the full shell: they are
+   scanned column by column, not read line by line, so the argument above does
+   not apply to them. */
+.stack > .panel--largo {
+  max-width: none;
+  width: calc(100vw - var(--ma-8));
+  margin-inline: calc(50% - 50vw + var(--ma-4));
 }
 
 .grid-2 {

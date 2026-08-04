@@ -427,13 +427,24 @@ export const status = () => call<StatusOut>("/api/status");
 export interface ComuneNearby {
   codice_istat: string;
   nome: string;
-  distance_km: number | null;
 }
 
-export const comuneNearby = (lat: number, lon: number) =>
-  call<ComuneNearby | null>(
+/** The endpoint wraps its answer — `{comune_nearby, note}` — and this type
+ * described the inner object as if it were the whole body. The mismatch was
+ * silent in TypeScript and loud on screen: every field read as `undefined`,
+ * so the confirmation prompt asked the citizen "Sei a undefined?". Unwrapped
+ * here, once, rather than at each call site. */
+interface ComuneNearbyBody {
+  comune_nearby: ComuneNearby | null;
+  note: string;
+}
+
+export const comuneNearby = async (lat: number, lon: number) => {
+  const body = await call<ComuneNearbyBody>(
     `/api/comune-nearby?lat=${encodeURIComponent(lat)}&lon=${encodeURIComponent(lon)}`,
   );
+  return body.comune_nearby;
+};
 
 /** B22 (D-25) — the anonymous per-comune segnalazione counter, keyed by
  * `codice_istat`. Never carries anything besides a count: no IP, no

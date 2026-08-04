@@ -13,7 +13,7 @@
  * difference between them is the whole subject of this project.
  */
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { approfondimento, type Approfondimento as Esito, type PaginaWeb } from "@/lib/api";
 
 export default function Approfondisci({
@@ -30,6 +30,7 @@ export default function Approfondisci({
   );
   const [esito, setEsito] = useState<string | null>(null);
   const [pagine, setPagine] = useState<PaginaWeb[]>([]);
+  const contenitore = useRef<HTMLParagraphElement | HTMLDivElement | null>(null);
 
   async function chiedi() {
     setStato("attesa");
@@ -39,6 +40,18 @@ export default function Approfondisci({
       setPagine(out.pagine ?? []);
       setStato("fatto");
       if (out.matches.length > 0) onSchede(out);
+      // The answer replaces this button in place, so nothing moves the page:
+      // on a full transcript the result appeared below the fold and looked
+      // like nothing had happened. Chat's own auto-scroll only fires on new
+      // messages, and this is not one.
+      requestAnimationFrame(() => {
+        contenitore.current?.scrollIntoView({
+          block: "nearest",
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+            ? "auto"
+            : "smooth",
+        });
+      });
     } catch {
       setEsito(
         "Non riesco a controllare i dati del comune in questo momento. Riprova.",
@@ -49,7 +62,7 @@ export default function Approfondisci({
 
   if (stato === "fatto" || stato === "errore") {
     return (
-      <div className="approfondisci__esito" role="status" data-stato={stato}>
+      <div className="approfondisci__esito" role="status" data-stato={stato} ref={contenitore}>
         <p>{esito}</p>
 
         {/* The weakest evidence in the app, and labelled as such. These are
@@ -73,7 +86,7 @@ export default function Approfondisci({
   }
 
   return (
-    <p className="approfondisci">
+    <p className="approfondisci" ref={contenitore}>
       <button
         type="button"
         className="approfondisci__button"

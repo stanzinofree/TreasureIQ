@@ -1170,6 +1170,18 @@ async def build_chat_answer(
     """
     provider: LLMProvider = load_provider(role="chat")
     intent = await extract_intent(message=message, provider=provider)
+
+    # Il comune non è un campo che convenga chiedere a un modello: l'elenco è
+    # chiuso, pubblico e lo abbiamo su disco. `_confirm_comune_hint` scarta
+    # quello inventato (R-9), e quello che resta è un buco da riempire qui,
+    # leggendo la frase del cittadino contro i 7.896 comuni italiani. Non può
+    # inventare: `risolvi_comune` risponde solo se un nome di comune compare
+    # davvero nel testo ed è uno solo.
+    if not (intent.comune_hint or "").strip():
+        dedotto = risolvi_comune(message)
+        if dedotto is not None:
+            intent = intent.model_copy(update={"comune_hint": dedotto.nome})
+
     intent = _backfill_ambiguous_topic(intent=intent)
     intent = await _eredita_dal_contesto(
         intent=intent, messaggio=message, storia=storia or [], provider=provider

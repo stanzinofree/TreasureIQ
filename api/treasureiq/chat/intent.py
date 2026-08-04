@@ -18,6 +18,8 @@ and outside the model keeps the retrieval step auditable.
 from __future__ import annotations
 
 import logging
+import re
+import unicodedata
 from enum import Enum
 
 from pydantic import BaseModel, Field
@@ -232,6 +234,43 @@ def _confirm_beneficiary_role(
     return role if any(marker in haystack for marker in markers) else None
 
 
+def _confirm_comune_hint(*, message: str, hint: str | None) -> str | None:
+    """Scarta un comune che il cittadino non ha nominato.
+
+    Asked "orari ufficio anagrafe Camposampiero", the model returned
+    `comune_hint="Albano Laziale"` — the comune named in its own system
+    prompt, not in the citizen's sentence. The answer that followed was
+    Albano's office, its phone number and its opening hours, presented to
+    someone asking about a comune 500 km away. Nothing downstream could catch
+    it: every later step treats `comune_hint` as something the citizen said.
+
+    So it is checked here, the same way `_confirm_beneficiary_role` checks the
+    role (R-9): the hint survives only if its own words appear in the
+    citizen's text. Never invents a hint, only ever discards one that is not
+    evidenced — comparison is accent- and case-insensitive because "Forlì" and
+    "Forli" are the same comune typed by two different people.
+    """
+    if hint is None or not hint.strip():
+        return None
+
+    def piatto(testo: str) -> str:
+        senza_accenti = "".join(
+            c
+            for c in unicodedata.normalize("NFKD", testo.casefold())
+            if not unicodedata.combining(c)
+        )
+        return re.sub(r"[^\w\s]", " ", senza_accenti)
+
+    parole_messaggio = set(piatto(message).split())
+    parole_hint = [p for p in piatto(hint).split() if len(p) > 2]
+    if not parole_hint:
+        return None
+    # Ogni parola del nome deve comparire: "Reggio" da solo non conferma
+    # "Reggio Emilia", e mezzo nome è esattamente il modo in cui si finisce
+    # nel comune sbagliato.
+    return hint if all(p in parole_messaggio for p in parole_hint) else None
+
+
 class ProfileSlots(BaseModel):
     """Anagraphic/economic facts the citizen volunteered in free text.
 
@@ -351,6 +390,9 @@ async def extract_intent(*, message: str, provider: LLMProvider) -> ChatIntent:
         updates: dict[str, object] = {}
         if confirmed_role != parsed.beneficiary_role:
             updates["beneficiary_role"] = confirmed_role
+        confirmed_hint = _confirm_comune_hint(message=message, hint=parsed.comune_hint)
+        if confirmed_hint != parsed.comune_hint:
+            updates["comune_hint"] = confirmed_hint
         if (
             parsed.topic in INFORMATIONAL_BY_NATURE_TOPICS
             and parsed.kind is not QuestionKind.INFORMAZIONE

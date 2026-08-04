@@ -284,6 +284,80 @@ def _backfill_ambiguous_topic(*, intent: ChatIntent) -> ChatIntent:
     return intent.model_copy(update={"topic": matching_topics[0]})
 
 
+def _tema_sostenuto(*, topic: Topic, testo: str) -> bool:
+    """Whether the text actually contains a word belonging to this topic.
+
+    Same closed keyword vocabulary `_search_opportunities` retrieves with, so
+    the two cannot disagree about what a topic looks like. A topic with no
+    keywords defined is treated as supported: absence of a rule is not
+    evidence against the model.
+    """
+    parole = TOPIC_KEYWORDS.get(topic, ())
+    if not parole:
+        return True
+    minuscolo = testo.casefold()
+    return any(k in minuscolo for k in parole)
+
+
+async def _eredita_dal_contesto(
+    *, intent: ChatIntent, messaggio: str, storia: list[str], provider: LLMProvider
+) -> ChatIntent:
+    """Carry forward the comune and the subject the citizen already gave.
+
+    A turn that supplies only a comune ("sono di Albano Laziale") has no topic
+    of its own, and a turn that supplies only a follow-up ("quali sono gli
+    orari?") has no comune. Read in isolation each is unanswerable, and the
+    chat was reading them in isolation — so it asked for the comune twice and
+    lost the subject in between.
+
+    Both are recovered from the citizen's own earlier messages, re-extracted
+    through the same closed schema rather than parsed here: whatever is
+    inherited has to come from the same mechanism that would have accepted it
+    when it was first said, or the two paths could disagree about what a
+    sentence means.
+
+    Nothing is inherited over something the current turn actually states —
+    saying a new comune must replace the old one, not be ignored in favour of
+    it.
+    """
+    # Empty string, not None, is what the extractor returns for "no comune
+    # mentioned" — so a `is None` check inherited nothing and the chat kept
+    # asking which comune it was talking to.
+    serve_comune = not (intent.comune_hint or "").strip()
+
+    # A topic the message does not support is a guess, and a guess blocks the
+    # real subject from being carried forward. Asked "quali sono gli orari?"
+    # the model answered `rifiuti`, a topic whose every keyword is absent from
+    # those four words. The check is deterministic and uses the same closed
+    # vocabulary retrieval uses: if no keyword of the assigned topic appears in
+    # what the citizen actually wrote, the assignment is not evidenced and the
+    # earlier subject wins.
+    serve_tema = intent.topic is Topic.SCONOSCIUTO or not _tema_sostenuto(
+        topic=intent.topic, testo=messaggio
+    )
+
+    if not (serve_comune or serve_tema) or not storia:
+        return intent
+
+    aggiornamenti: dict[str, object] = {}
+    # Most recent first: the last thing said wins, as it would in speech.
+    for passato in reversed(storia[-6:]):
+        if not (serve_comune or serve_tema):
+            break
+        try:
+            vecchio = await extract_intent(message=passato, provider=provider)
+        except Exception:  # noqa: BLE001 — a failed re-read is not fatal
+            continue
+        if serve_comune and vecchio.comune_hint:
+            aggiornamenti["comune_hint"] = vecchio.comune_hint
+            serve_comune = False
+        if serve_tema and vecchio.topic is not Topic.SCONOSCIUTO:
+            aggiornamenti["topic"] = vecchio.topic
+            serve_tema = False
+
+    return intent.model_copy(update=aggiornamenti) if aggiornamenti else intent
+
+
 def _search_opportunities(
     *,
     records: list[Opportunity],
@@ -916,6 +990,7 @@ async def build_chat_answer(
     message: str,
     profile: CitizenProfile | None,
     records: list[Opportunity],
+    storia: list[str] | None = None,
     today: date | None = None,
 ) -> ChatAnswer:
     """Answer one citizen turn. Never raises for model unavailability.
@@ -923,10 +998,20 @@ async def build_chat_answer(
     `records` is the full, already-loaded set of opportunities for the
     citizen's comune (Albano, currently the only one with data) — this
     function only filters and evaluates, it never fetches.
+
+    `storia` is the citizen's own earlier messages, oldest first. Without it
+    every turn started from nothing: asked "dove si trova l'ufficio anagrafe",
+    told "sono di Albano Laziale", and then asked "quali sono gli orari", the
+    chat asked which comune a second time and had lost the subject as well.
+    Only the citizen's own words are carried — never our replies, which would
+    let one answer become the input to the next.
     """
     provider: LLMProvider = load_provider(role="chat")
     intent = await extract_intent(message=message, provider=provider)
     intent = _backfill_ambiguous_topic(intent=intent)
+    intent = await _eredita_dal_contesto(
+        intent=intent, messaggio=message, storia=storia or [], provider=provider
+    )
 
     # R-8/D-19: `_backfill_ambiguous_topic` can restore a topic (VOLONTARIATO,
     # RIFIUTI) that `extract_intent` classified as SCONOSCIUTO and therefore

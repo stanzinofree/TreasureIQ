@@ -508,8 +508,18 @@ class CostOut(BaseModel):
     levels: dict[str, int]
 
 
+class ChatTurnIn(BaseModel):
+    role: str
+    content: str
+
+
 class ChatIn(BaseModel):
     message: str
+    #: The exchange so far. The client had been sending this all along and the
+    #: model did not declare it, so Pydantic dropped it and every turn started
+    #: from nothing — which is why the chat asked for the comune twice and lost
+    #: the subject in between.
+    history: list[ChatTurnIn] = []
 
 
 class DocumentOut(BaseModel):
@@ -1329,7 +1339,13 @@ async def chat(body: ChatIn, request: Request) -> ChatOut:
     records = list(load_opportunities(comune_istat))
 
     answer: ChatAnswer = await build_chat_answer(
-        message=message, profile=profile, records=records
+        message=message,
+        profile=profile,
+        records=records,
+        # Only what the citizen said. Feeding our own replies back in would let
+        # one answer become the input to the next, and a mistake made once
+        # would then justify itself for the rest of the conversation.
+        storia=[t.content for t in body.history if t.role == "user"],
     )
 
     stats = compute_recovery_stats(

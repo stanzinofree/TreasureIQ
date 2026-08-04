@@ -298,6 +298,21 @@ function isWebUrl(url: string): boolean {
 function InfoAnswer({ info }: { info: InfoOut }) {
   return (
     <div className="info-answer">
+      {/* D-32 — letto adesso dal portale del comune, non preso da uno
+          snapshot curato. Sta in cima perché qualifica tutto ciò che segue:
+          messo in fondo si leggerebbe dopo aver già creduto all'orario. Non è
+          la stessa etichetta dei risultati web più sotto — quelli vengono da
+          un motore di ricerca, questo dalla fonte, ed è una differenza a
+          favore che sarebbe sbagliato appiattire. */}
+      {info.letto_dal_vivo && (
+        <p className="info-answer__vivo" role="note">
+          <span className="info-answer__vivo-bollo">letto ora</span>
+          Dal portale del comune, in questo momento e alla lettera. Non è un
+          dato che abbiamo verificato né conservato: controllalo alla fonte
+          prima di fare un viaggio.
+        </p>
+      )}
+
       {info.document && (
         <p className="info-answer__document">
           <a href={info.document.url} target="_blank" rel="noreferrer">
@@ -306,11 +321,18 @@ function InfoAnswer({ info }: { info: InfoOut }) {
         </p>
       )}
 
-      <p className="info-answer__coverage">
-        {info.coverage_count > 0
-          ? `${info.coverage_count} ${info.coverage_count === 1 ? "risultato trovato" : "risultati trovati"} su questo argomento.`
-          : "Nessun risultato pubblicato dal comune su questo argomento."}
-      </p>
+      {/* La copertura conta i NOSTRI record. Su una risposta letta dal vivo
+          non ce ne sono per definizione — il comune non è fra quelli che
+          leggiamo — e scrivere «nessun risultato pubblicato dal comune»
+          sotto un orario appena letto dal portale di quel comune dice al
+          cittadino l'esatto contrario di quello che ha davanti. */}
+      {!info.letto_dal_vivo && (
+        <p className="info-answer__coverage">
+          {info.coverage_count > 0
+            ? `${info.coverage_count} ${info.coverage_count === 1 ? "risultato trovato" : "risultati trovati"} su questo argomento.`
+            : "Nessun risultato pubblicato dal comune su questo argomento."}
+        </p>
+      )}
 
       {info.diagnosis.length > 0 && (
         <ul className="info-answer__diagnosis">

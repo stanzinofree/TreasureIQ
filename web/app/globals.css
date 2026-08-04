@@ -3029,3 +3029,37 @@ a {
   text-decoration: underline;
   cursor: pointer;
 }
+
+/* --- Dato letto dal vivo -------------------------------------------------
+ *
+ * Sta in cima alla risposta perché qualifica tutto ciò che segue: in fondo si
+ * leggerebbe dopo aver già creduto all'orario. Volutamente diversa
+ * dall'etichetta dei risultati web (`.info-answer__web`): quelli vengono da un
+ * motore di ricerca, questo dal portale del comune. È una differenza a favore,
+ * e appiattirla su un unico «non verificato» butterebbe via l'unica cosa che
+ * rende questa lettura migliore di una ricerca.
+ */
+
+.info-answer__vivo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--ma-2);
+  margin: 0 0 var(--ma-3);
+  padding: var(--ma-2);
+  border-inline-start: 3px solid var(--ai);
+  background: var(--paper-sunken);
+  font-size: 0.88rem;
+  color: var(--sumi-soft);
+}
+
+.info-answer__vivo-bollo {
+  flex: none;
+  padding: 0 var(--ma-2);
+  border: 1px solid var(--ai);
+  color: var(--ai);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}

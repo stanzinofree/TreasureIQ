@@ -118,7 +118,11 @@ ORARIO_RE = re.compile(
     # primo turno pubblicherebbe metà orario. Il punto NON è un separatore:
     # è ciò che impedisce a «9.00-13.00. Costo 12.50 euro» di diventare un
     # orario che chiude alle 12.50.
-    rf"(?:{_GIORNI})\b.{{0,120}}?\b{_ORA}(?:\s*(?:[-–—/]|alle|ed?|,)\s*{_ORA})*",
+    # «ore» è opzionale fra il separatore e l'ora perché mezza Italia scrive
+    # «dalle ore 9:00 alle ore 12:00», e senza questo la citazione si fermava
+    # all'apertura — di nuovo un orario che sembra dire "chiude alle 9".
+    rf"(?:{_GIORNI})\b.{{0,120}}?\b{_ORA}"
+    rf"(?:\s*(?:[-–—/]|alle|ed?|,)\s*(?:ore\s*)?{_ORA})*",
     re.IGNORECASE | re.DOTALL,
 )
 
@@ -169,7 +173,18 @@ _RAGGIO_ETICHETTA = 140
 #: Distanza massima fra due righe dello stesso orario settimanale. Oltre
 #: questa, la pagina sta parlando di un altro ufficio o di un'altra cosa, e
 #: unirle in una citazione sola le farebbe sembrare la stessa tabella.
-_SALTO_MASSIMO = 40
+#:
+#: Ottanta e non quaranta perché le righe portano spesso la causale accanto
+#: all'orario — «Lunedì 09:00-10:00 – Carta Identità Elettronica (su
+#: appuntamento) | Lunedì 10:00-13:00 – Altre pratiche» — e a quaranta la
+#: citazione si fermava alla prima riga, dicendo che l'ufficio chiude alle
+#: dieci quando chiude alle tredici.
+_SALTO_MASSIMO = 80
+
+#: Quanto lontano guardare, dopo la fine della citazione, per capire se la
+#: pagina continua a elencare orari. Serve solo a dichiarare il taglio, mai
+#: ad allungare la citazione.
+_ORIZZONTE_CONTINUAZIONE = 400
 
 
 class Indirizzabilita(str, Enum):
@@ -275,9 +290,24 @@ def _cita(testo: str, trovato: re.Match[str]) -> str:
         # lasciava in citazione l'indirizzo e il centralino.
         inizio = max(inizio, trovato.start() - _CONTORNO)
         fine = max(trovato.end(), min(fine, inizio + MAX_CITAZIONE))
+        # Al confine di parola: tagliare a lunghezza fissa spezzava un orario
+        # a metà — «Martedì - 13:00-14 […]» — che ha l'aria di un dato rotto
+        # invece che di una citazione accorciata.
+        spazio = testo.rfind(" ", trovato.end(), fine)
+        if spazio > 0:
+            fine = spazio
+
+    # La pagina continua a elencare orari oltre dove ci siamo fermati? Allora
+    # la citazione è parziale e lo deve dire. È il caso di Villanova di
+    # Camposampiero, dove l'anagrafe apre lunedì 9-10 per le CIE e 10-13 per
+    # tutto il resto: citare la sola prima riga è verbatim e insieme falso,
+    # perché chi legge capisce che alle dieci chiude. Non si allunga la
+    # citazione per coprire l'intera tabella — si ammette che c'è dell'altro e
+    # si lascia il link alla fonte, che è l'unica cosa completa per davvero.
+    continua = ORARIO_RE.search(testo, fine, fine + _ORIZZONTE_CONTINUAZIONE) is not None
 
     prefisso = "[…] " if inizio > naturale_inizio else ""
-    suffisso = " […]" if fine < naturale_fine else ""
+    suffisso = " […]" if continua or fine < naturale_fine else ""
     return f"{prefisso}{testo[inizio:fine].strip()}{suffisso}"
 
 

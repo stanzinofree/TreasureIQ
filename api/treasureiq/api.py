@@ -37,6 +37,7 @@ from treasureiq.chat.respond import (
     InfoAnswer,
     approfondisci_nel_comune,
     build_chat_answer,
+    RecoveryStats,
     compute_recovery_stats,
 )
 from treasureiq.chat.intent import Topic
@@ -601,6 +602,11 @@ class InfoOut(BaseModel):
     diagnosis: list[str]
     integration_cost: list[str]
     web_results: list[WebResultOut]
+    #: Vero quando l'ufficio e l'orario qui sopra sono stati letti dal portale
+    #: del comune durante questa domanda, non presi da uno snapshot curato
+    #: (D-32). Il client ne fa un'etichetta: un dato letto al volo e un dato
+    #: verificato non devono avere lo stesso aspetto.
+    letto_dal_vivo: bool = False
     # B22 (D-25) — which comune this answer is about, so the segnalazione
     # counter can be attributed correctly. `None` when no ente was resolved
     # (nothing to count the segnalazione against).
@@ -628,6 +634,7 @@ def _enti_by_urp_nome() -> dict[str, tuple[str, str]]:
 def to_info_out(info: InfoAnswer) -> InfoOut:
     target = _enti_by_urp_nome().get(info.office.nome) if info.office is not None else None
     return InfoOut(
+        letto_dal_vivo=info.letto_dal_vivo,
         document=(
             DocumentOut(title=info.document.title, url=info.document.url)
             if info.document is not None
@@ -1395,9 +1402,20 @@ async def chat(body: ChatIn, request: Request) -> ChatOut:
         comune_istat=body.comune_istat,
     )
 
-    stats = compute_recovery_stats(
-        comune_records=records,
-        answer_records=[r.opportunity for r in answer.matches],
+    # `records` sono quelli del comune coperto (oggi Albano). Su una risposta
+    # letta dal vivo parlano di un altro comune, e la striscia dei costi
+    # mostrava «media di recupero dati da PDF del comune: 3 s» sotto un orario
+    # di Camposampiero: un numero vero, riferito a qualcun altro, che passa
+    # per una misura di ciò che si sta leggendo. Nessuna misura è meglio di
+    # una misura che riguarda un'altra cosa (D-16).
+    letta_dal_vivo = answer.info is not None and answer.info.letto_dal_vivo
+    stats = (
+        RecoveryStats(seconds_total=None, seconds_avg_comune=None, levels={})
+        if letta_dal_vivo
+        else compute_recovery_stats(
+            comune_records=records,
+            answer_records=[r.opportunity for r in answer.matches],
+        )
     )
 
     return ChatOut(

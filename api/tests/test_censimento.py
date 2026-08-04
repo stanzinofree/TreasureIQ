@@ -71,10 +71,45 @@ def test_i_campi_in_fila_non_sono_una_frase():
     assert "08.30 - 11.00" in citazione
 
 
+def test_una_tabella_piu_lunga_della_citazione_dichiara_il_taglio():
+    """Difetto reale, Villanova di Camposampiero: l'anagrafe apre lunedì 9-10
+    per le CIE e 10-13 per tutto il resto, e citare la sola prima riga è
+    verbatim e insieme falso — chi legge capisce che alle dieci chiude."""
+    testo = (
+        "Orari di ricevimento | Lunedì - 09:00-10:00 – Carta Identità Elettronica "
+        "(su appuntamento) | Lunedì - 10:00-13:00 – Altre pratiche | Martedì - "
+        "9:00-10:00 – Carta Identità | Mercoledì: CHIUSO | Giovedì - 9:00-13:00"
+    )
+    citazione = cita(testo)
+    assert "10:00-13:00" in citazione, "la seconda fascia dello stesso giorno deve entrare"
+    assert "Mercoledì: CHIUSO" in citazione, "e le chiusure fanno parte dell'orario"
+
+
+def test_una_tabella_troppo_lunga_dichiara_il_taglio():
+    """Quando la settimana non sta nella citazione, il marcatore è l'unica
+    cosa che impedisce a un estratto di spacciarsi per l'orario completo."""
+    righe = " | ".join(
+        f"{giorno} - 09:00-13:00 e 14:00-18:00 – sportello al pubblico"
+        for giorno in ("Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato")
+    )
+    citazione = cita(f"Orari di ricevimento | {righe}")
+    assert citazione.endswith("[…]")
+    assert len(citazione) <= 260
+
+
+def test_niente_taglio_dichiarato_quando_non_c_e_altro():
+    """Il marcatore deve comparire solo quando è vero: metterlo sempre lo
+    renderebbe rumore e smetterebbe di voler dire qualcosa."""
+    assert not cita("Orari lunedì 9.00 - 12.00. Sede in via Roma.").endswith("[…]")
+
+
 @pytest.mark.parametrize(
     "testo, atteso",
     [
         ("Apertura lunedì dalle 9:00 alle 13:00.", "9:00"),
+        # Come lo scrive mezza Italia, e come lo scrive Castro (LE): senza
+        # l'«ore» opzionale la citazione si fermava all'apertura.
+        ("Dal lunedì al venerdì: dalle ore 9:00 alle ore 12:00.", "12:00"),
         ("Ricevimento del pubblico mercoledì 9.00-13.00 e 14.00-16.00.", "14.00-16.00"),
     ],
 )

@@ -177,6 +177,11 @@ class InfoAnswer:
     diagnosis: list[str]
     integration_cost: list[str]
     web_results: list[WebResultAnswer]
+    #: Letto dal portale del comune mentre il cittadino aspettava (D-32),
+    #: invece che da uno snapshot curato. La differenza deve arrivare
+    #: all'interfaccia come un dato, non come una sfumatura nel testo della
+    #: risposta: chi legge deve poterla vedere senza doverla dedurre.
+    letto_dal_vivo: bool = False
 
 
 @dataclass
@@ -790,7 +795,7 @@ def _compose_informazione_reply(
 
 
 async def _build_informazione_answer(
-    *, intent: ChatIntent, records: list[Opportunity]
+    *, intent: ChatIntent, records: list[Opportunity], comune_istat: str | None = None
 ) -> ChatAnswer:
     """The INFORMAZIONE rail (D-19): document + office + coverage + cost,
     never a verdict, never criteria, never SPID. No call into
@@ -855,7 +860,9 @@ async def _build_informazione_answer(
         # prima di rifiutare. Il rifiuto resta la risposta giusta solo finché
         # non ne esiste una migliore, e per un comune che ISTAT e IPA
         # conoscono ne esiste una migliore.
-        live = await _risposta_live(hint=intent.comune_hint, topic=intent.topic)
+        live = await _risposta_live(
+            hint=intent.comune_hint, topic=intent.topic, comune_istat=comune_istat
+        )
         if live is not None:
             return live
         return ChatAnswer(
@@ -950,7 +957,9 @@ async def _build_informazione_answer(
     )
 
 
-async def _risposta_live(*, hint: str | None, topic: Topic) -> ChatAnswer | None:
+async def _risposta_live(
+    *, hint: str | None, topic: Topic, comune_istat: str | None = None
+) -> ChatAnswer | None:
     """Il gradino 2 (D-32): leggere ora il portale di un comune fuori copertura.
 
     `None` quando non c'è un comune italiano riconoscibile dietro l'accenno,
@@ -961,7 +970,12 @@ async def _risposta_live(*, hint: str | None, topic: Topic) -> ChatAnswer | None
     un thread: sei secondi di attesa bloccante fermerebbero ogni altra
     richiesta dell'API, non solo questa.
     """
-    comune = risolvi_comune(hint)
+    # Il codice scelto vale più del nome che se ne ricava. Ripartire dal nome
+    # rimetteva in gioco l'ambiguità che la scelta serve a togliere: scelto
+    # «Castro (LE)» dalla tendina, `risolvi_comune("Castro")` trovava due
+    # comuni, rinunciava, e il cittadino si vedeva il vecchio rifiuto — con la
+    # sua scelta esplicita già in mano al sistema.
+    comune = comune_per_codice(comune_istat) or risolvi_comune(hint)
     if comune is None:
         return None
 
@@ -1112,6 +1126,7 @@ def _chat_live(
             ),
             coverage_count=0,
             diagnosis=diagnosi,
+            letto_dal_vivo=True,
             integration_cost=[
                 "Lettura dal vivo, non un dato ingerito: nessuno snapshot di questo "
                 "comune è stato salvato e nulla di quanto sopra entra nei dati del "
@@ -1241,7 +1256,9 @@ async def build_chat_answer(
         )
 
     if intent.kind is QuestionKind.INFORMAZIONE:
-        return await _build_informazione_answer(intent=intent, records=records)
+        return await _build_informazione_answer(
+            intent=intent, records=records, comune_istat=comune_istat
+        )
 
     active_profile = profile or _profile_from_slots(intent=intent)
     candidates = _search_opportunities(records=records, topic=intent.topic)

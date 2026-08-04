@@ -327,6 +327,12 @@ export interface InfoOut {
   diagnosis: string[];
   integration_cost: string[];
   web_results: InfoWebResult[];
+  /** Vero quando ufficio e orario sono stati letti dal portale del comune
+   * durante questa domanda, non presi da uno snapshot curato (D-32). Un dato
+   * letto al volo e un dato verificato non devono avere lo stesso aspetto:
+   * l'etichetta esiste perché la differenza si veda senza doverla dedurre dal
+   * testo della risposta. */
+  letto_dal_vivo: boolean;
   /** B22 (D-25) — which comune this INFORMAZIONE answer is about, resolved
    * server-side from the office it already carries (`_enti_by_urp_nome` in
    * `api.py`). `null` when no ente could be resolved — nothing to count a

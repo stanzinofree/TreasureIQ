@@ -925,12 +925,15 @@ a {
    is a summary of nothing, and it would take a quarter of the first screen to
    say so. Both conditions must hold: something to show, and somewhere it
    refers to. */
-.workspace:has(.pannello):has(.bubble) {
+/* La condizione era «qualcosa da mostrare E una conversazione a cui si
+   riferisce». La seconda metà non regge più da quando il comune si sceglie
+   prima di scrivere: chi lo sceglieva vedeva sparire il campo e nient'altro,
+   cioè nessuna conferma di aver detto dove vive. Il pannello esiste solo se
+   contiene almeno un fatto (`ProfiloNoto` restituisce null altrimenti),
+   quindi la sua sola presenza è già la condizione «qualcosa da mostrare» —
+   e non è mai il riassunto di niente. */
+.workspace:has(.pannello) {
   grid-template-columns: minmax(0, 3fr) minmax(0, 9fr);
-}
-
-.workspace:not(:has(.bubble)) .pannello {
-  display: none;
 }
 
 .workspace__main {
@@ -3062,4 +3065,16 @@ a {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   white-space: nowrap;
+}
+
+/* Il comune si può dire, non si deve. Chi non lo dice riceve comunque una
+ * risposta: il sistema cerca un nome di comune nella frase, e se non lo trova
+ * lo chiede. L'etichetta lo dichiara perché un campo sopra la domanda, senza
+ * qualificazione, si legge come un passaggio obbligato. */
+.scelta-comune__facoltativo {
+  margin-inline-start: var(--ma-1, 4px);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--sumi-faint);
 }

@@ -49,7 +49,6 @@ import {
   type ChatCost,
   type ChatOut,
   type ChatTurn,
-  type ComuneScelta,
   type CostLevels,
   type Escalation,
   type InfoOut,
@@ -533,9 +532,6 @@ export default function Chat() {
   const { registra: registraTrovate, azzeraTrovate } = useRisultati();
   const accesso = profilo.accesso === true;
   const [manualLogin, setManualLogin] = useState(false);
-  // Scelto da un elenco, non dedotto da una frase: viaggia con ogni domanda
-  // come `codice_istat`, che non ha omonimi e non può essere inventato.
-  const [comune, setComune] = useState<ComuneScelta | null>(null);
   const [scheda, setScheda] = useState<Match | null>(null);
   const [passoAttesa, setPassoAttesa] = useState(0);
 
@@ -632,7 +628,11 @@ export default function Chat() {
     setInput("");
     setBusy(true);
     try {
-      const out = await chat(trimmed, history, comune?.codice_istat ?? null);
+      // Il codice del comune attivo, da qualunque strada sia arrivato —
+      // scelto dall'elenco, rilevato dal GPS o portato dall'accesso. Il
+      // profilo è l'unico posto dove sta, così non può esistere un comune
+      // mostrato nella barra laterale e un altro usato per rispondere.
+      const out = await chat(trimmed, history, profilo.comune?.istat ?? null);
       const id = newId();
       setMessages((prev) => [
         ...prev,
@@ -892,11 +892,29 @@ export default function Chat() {
         </p>
       )}
 
-      {/* Sopra la domanda, non dentro: il comune vale per tutta la
-          conversazione, mentre la domanda cambia a ogni turno. Sceglierlo da
-          qui produce un codice ISTAT, che è l'unica forma di questo dato che
-          non può essere né ambigua né inventata. */}
-      <SceltaComune scelto={comune} onScegli={setComune} />
+      {/* Solo finché il comune non si sa da nessun'altra parte. Se la
+          geolocalizzazione o l'accesso l'hanno già stabilito, la striscia
+          «sto usando» lo mostra già e lo si può togliere da lì: chiederlo una
+          seconda volta qui sotto faceva sembrare che la prima risposta non
+          fosse arrivata. Ed è facoltativo — si può chiedere senza dirlo, e il
+          sistema lo cerca nella frase. */}
+      {!profilo.comune && (
+        <SceltaComune
+          onScegli={(scelto) =>
+            registra({
+              comune: {
+                nome: `${scelto.nome} (${scelto.provincia})`,
+                istat: scelto.codice_istat,
+                // Scelto da un elenco dal cittadino stesso: è una
+                // dichiarazione, non una posizione rilevata, e a differenza
+                // del GPS non ha bisogno di essere confermata.
+                origine: "dichiarato",
+                confermato: true,
+              },
+            })
+          }
+        />
+      )}
 
       <form className="chat__form" onSubmit={handleSubmit}>
         <label className="chat__label" htmlFor={inputId}>

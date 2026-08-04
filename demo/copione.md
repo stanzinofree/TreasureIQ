@@ -249,8 +249,9 @@ Non serve segnalarmeli — questi li so. Segnalami tutto il resto.
 - **La tendina copre il campo domanda** mentre è aperta. È il comportamento
   normale di un menu a discesa, ma se clicchi la domanda con la lista aperta
   colpisci una riga.
-- **Il campo «Comune» scorre via** insieme ai messaggi: dopo qualche turno non
-  si vede più quale comune è attivo.
+- **Il campo comune non riappare** dopo aver scelto: per cambiarlo si usa
+  «Dimentica» nella striscia in alto a sinistra. È voluto — una sola strada
+  per un solo dato — ma in demo va saputo.
 - **Torre Annunziata** unisce in una citazione gli orari di due sedi diverse.
   Leggibile, ma confuso: tienilo in secondo piano.
 - **Bitetto** cattura solo il giovedì pomeriggio, perché la pagina spezza la

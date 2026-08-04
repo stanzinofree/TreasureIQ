@@ -19,11 +19,9 @@ import { cercaComuni, type ComuneScelta } from "@/lib/api";
  * una frazione. Sono due frasi diverse e qui restano diverse.
  */
 export default function SceltaComune({
-  scelto,
   onScegli,
 }: {
-  scelto: ComuneScelta | null;
-  onScegli: (comune: ComuneScelta | null) => void;
+  onScegli: (comune: ComuneScelta) => void;
 }) {
   const inputId = useId();
   const [testo, setTesto] = useState("");
@@ -64,38 +62,10 @@ export default function SceltaComune({
     return () => clearTimeout(attesa);
   }, [testo]);
 
-  if (scelto) {
-    return (
-      <div className="scelta-comune scelta-comune--fatta">
-        <span className="scelta-comune__etichetta">Comune</span>
-        <strong>
-          {scelto.nome} ({scelto.provincia})
-        </strong>
-        {!scelto.ha_portale && (
-          <span className="scelta-comune__senza-portale">
-            di questo comune non conosciamo il portale
-          </span>
-        )}
-        <button
-          type="button"
-          className="scelta-comune__cambia"
-          onClick={() => {
-            onScegli(null);
-            setTesto("");
-            setEsiti([]);
-            setCercato(false);
-          }}
-        >
-          cambia
-        </button>
-      </div>
-    );
-  }
-
   return (
     <div className="scelta-comune">
       <label htmlFor={inputId} className="scelta-comune__etichetta">
-        Il tuo comune
+        Il tuo comune <span className="scelta-comune__facoltativo">facoltativo</span>
       </label>
       <input
         id={inputId}
@@ -112,7 +82,20 @@ export default function SceltaComune({
         <ul className="scelta-comune__esiti">
           {esiti.map((c) => (
             <li key={c.codice_istat}>
-              <button type="button" onClick={() => onScegli(c)}>
+              {/* Su `mousedown`, non su `click`: la lista si ricostruisce a
+                  ogni ricerca completata, e un click parte solo se premuta e
+                  rilascio cadono sullo stesso nodo. Chi clicca mentre sta
+                  ancora scrivendo — cioè quasi tutti — poteva veder sparire la
+                  riga da sotto il dito e non selezionare niente.
+                  `preventDefault` evita che la pressione tolga il fuoco
+                  all'input prima che la scelta sia registrata. */}
+              <button
+                type="button"
+                onMouseDown={(e) => {
+                  e.preventDefault();
+                  onScegli(c);
+                }}
+                onClick={() => onScegli(c)}>
                 <span className="scelta-comune__nome">{c.nome}</span>
                 <span className="scelta-comune__dove">
                   {c.provincia} · {c.regione}

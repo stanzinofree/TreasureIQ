@@ -1189,6 +1189,7 @@ async def build_chat_answer(
     records: list[Opportunity],
     storia: list[str] | None = None,
     comune_istat: str | None = None,
+    comune_coperto: bool = True,
     today: date | None = None,
 ) -> ChatAnswer:
     """Answer one citizen turn. Never raises for model unavailability.
@@ -1258,6 +1259,31 @@ async def build_chat_answer(
     if intent.kind is QuestionKind.INFORMAZIONE:
         return await _build_informazione_answer(
             intent=intent, records=records, comune_istat=comune_istat
+        )
+
+    if not comune_coperto:
+        # Il cittadino ha scelto un comune di cui non abbiamo i dati. Sul rail
+        # delle agevolazioni non esiste un ripiego onesto: un'agevolazione
+        # dipende da criteri che quel comune pubblica, e i criteri di un altro
+        # comune non sono un'approssimazione — sono le regole di qualcun altro.
+        # La lettura dal vivo non serve nemmeno come consolazione, perché
+        # alimenterebbe un verdetto (D-01).
+        nome = comune_per_codice(comune_istat)
+        dove = nome.nome if nome is not None else "questo comune"
+        return ChatAnswer(
+            reply=(
+                f"Di {dove} non abbiamo ancora letto i dati, quindi non posso dirti "
+                "cosa ti spetta: le soglie e i requisiti li stabilisce il tuo comune, "
+                "e quelli di un altro comune non valgono per te. Posso però dirti "
+                "cosa pubblica il tuo, se mi chiedi di un ufficio o di un documento."
+            ),
+            topic=intent.topic,
+            kind=QuestionKind.AGEVOLAZIONE,
+            data_gap="not_published",
+            needs_clarification=False,
+            matches=[],
+            spid_required=False,
+            spid_reason=None,
         )
 
     active_profile = profile or _profile_from_slots(intent=intent)

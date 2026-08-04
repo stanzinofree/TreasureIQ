@@ -1387,8 +1387,19 @@ async def chat(body: ChatIn, request: Request) -> ChatOut:
         )
 
     profile = profile_from_cookie(request.cookies.get(SESSION_COOKIE))
-    comune_istat = profile.comune_istat if profile is not None else DEFAULT_COMUNE_ISTAT
-    records = list(load_opportunities(comune_istat))
+
+    # Un comune scelto esplicitamente decide quali record si guardano, e se non
+    # ne abbiamo non se ne guardano affatto. Prima i record erano sempre quelli
+    # del comune coperto: chiesto «c'è un aiuto per la mensa?» avendo scelto
+    # Camposampiero, uscivano tre agevolazioni di Albano come se riguardassero
+    # chi aveva domandato. Non è una risposta imprecisa, è la risposta di un
+    # altro comune — e il sistema sapeva già di non essere lì (R-9).
+    scelto = body.comune_istat if body.comune_istat in COMUNI else None
+    comune_istat = scelto or (
+        profile.comune_istat if profile is not None else DEFAULT_COMUNE_ISTAT
+    )
+    comune_coperto = body.comune_istat is None or body.comune_istat in COMUNI
+    records = list(load_opportunities(comune_istat)) if comune_coperto else []
 
     answer: ChatAnswer = await build_chat_answer(
         message=message,
@@ -1400,6 +1411,7 @@ async def chat(body: ChatIn, request: Request) -> ChatOut:
         storia=[t.content for t in body.history if t.role == "user"],
         # Una scelta esplicita batte qualunque inferenza: vedi ChatIn.
         comune_istat=body.comune_istat,
+        comune_coperto=comune_coperto,
     )
 
     # `records` sono quelli del comune coperto (oggi Albano). Su una risposta

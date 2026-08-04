@@ -15,19 +15,21 @@ import "./globals.css";
 // Zen Maru Gothic is a *rounded* Japanese gothic — the warmth of the interface
 // lives in the letterforms themselves rather than in illustration, which keeps
 // the page friendly without undercutting the seriousness of what it reports.
+// Poppins for headings, Inter for text — the brand board's pairing. Vendored
+// like everything else here rather than pulled by `next/font/google`, which
+// downloads at build time and would make `docker compose build` depend on
+// reaching fonts.googleapis.com. The project claims it runs with no network
+// access; self-hosting is what makes that claim true. Latin subsets only,
+// 56 KB for the three files. Both families are SIL OFL 1.1.
 const display = localFont({
-  src: [
-    { path: "./fonts/ZenMaruGothic-Medium.woff2", weight: "500", style: "normal" },
-    { path: "./fonts/ZenMaruGothic-Bold.woff2", weight: "700", style: "normal" },
-  ],
+  src: [{ path: "./fonts/Poppins-SemiBold.woff2", weight: "600", style: "normal" }],
   variable: "--font-zen-maru",
   display: "swap",
 });
 const body = localFont({
   src: [
-    { path: "./fonts/ZenKakuGothicNew-Regular.woff2", weight: "400", style: "normal" },
-    { path: "./fonts/ZenKakuGothicNew-Medium.woff2", weight: "500", style: "normal" },
-    { path: "./fonts/ZenKakuGothicNew-Bold.woff2", weight: "700", style: "normal" },
+    { path: "./fonts/Inter-Regular.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/Inter-Medium.woff2", weight: "500", style: "normal" },
   ],
   variable: "--font-zen-kaku",
   display: "swap",

@@ -30,54 +30,54 @@
   /* --- Surface: a very faint byakuroku green-grey, fresher than the warm
      cream of v2. L* stays high so dark text keeps AA — vibrancy lives in the
      accents and the hero, never by dimming the paper under body text. --- */
-  --paper: #f6f7f1;
+  --paper: #f2f4f7;      /* brand light grey */
   --paper-raised: #ffffff;
-  --paper-sunken: #eef0ea;
+  --paper-sunken: #e6eaf0;
 
-  /* --- Ink: sumi, warm near-black with a green cast so it belongs to the
-     paper rather than sitting on top of it. Unchanged — body text stays
-     maximally readable regardless of how vivid the surface gets. --- */
-  --sumi: #1b211d;
-  --sumi-soft: #4a554e;
-  --sumi-faint: #5c6a62; /* deepened to clear 4.5:1 on the new green-tinted paper */
+  /* --- Ink: brand navy. 15.23:1 on the paper above, so body text is never
+     the thing that has to be argued about. --- */
+  --sumi: #0b1d3a;
+  --sumi-soft: #3b4a63;
+  --sumi-faint: #5a6880;
 
-  /* --- Accents: saturated on white, not dark-mode-vivid. Every token keeps
-     its v2 role; v3 adds a *-deep pair for each hue used as small text, so
-     the vivid value is free to be an accent (fills, borders, large display)
-     while AA body/labels use the deepened partner. Vivid is for energy;
-     text stays legible. --- */
-  /* Electric cyan, the Tokyo-signage register. Three tiers, all measured on
-     paper (#f6f7f1) rather than eyeballed: the vivid tone is 1.87:1 there, so
-     it can only ever be a *fill* carrying --sumi on top (8.14:1) — never text,
-     never a hairline. Reverting to the previous indigo means changing these
-     four values and nothing else: #4f46e5 / #0d92a6→#3f3ac2 / #3f3ac2 / #e9e7fb. */
-  --ai-vivid: #00c9e0;   /* fills only, dark ink on top: 8.14:1 */
-  --ai-line: #0d92a6;    /* 3.43:1 on paper: borders, icons, focus ring (non-text AA) */
-  --ai: #0a7c8d;         /* electric cyan deepened: navigation, authority, links (4.55:1 on paper) */
-  --ai-deep: #0a6675;    /* cyan deepened further for small text where 4.5:1 is tight (6.15:1) */
-  --ai-wash: #e2f4f7;
-  --shu: #e8391f;        /* hot vermilion: the seal, and only blocking states */
-  --shu-deep: #b3261a;   /* vermilion deepened for AA body text */
-  --shu-wash: #fce4de;
-  --wakatake: #1f9d55;   /* fresh, high-chroma green: a criterion the citizen meets */
-  --wakatake-deep: #137c42; /* green deepened for AA body text */
-  --wakatake-wash: #dff5e6;
-  --yamabuki: #d97706;   /* bright golden amber: unverifiable / unknown */
-  --yamabuki-deep: #92590a; /* amber deepened for AA body text */
-  --yamabuki-wash: #fbecd2;
-  /* The magenta that used to carry "energy" is gone. With the hero no longer a
-     colour block and cyan taking the accent role, it was a third hue doing no
-     work its neighbours weren't already doing — and a palette that spends
-     colour on decoration can't also claim colour means something. What it
-     marked (the recovery cost) now reads as distinct through the mono face and
-     a hairline rule instead of through its own tint. */
+  /* --- Accents, from the brand board, tiered by what each can legally do.
+     Measured on #f2f4f7 rather than assumed:
 
-  --kasumi: #dde3da;    /* mist: hairline, slightly cooler so it reads on green paper */
+       #0057B8 blue    6.24:1 — the workhorse. Text, links, focus, and a fill
+                       carrying white (6.87:1). The only brand colour that can
+                       do both jobs.
+       #2ED3B7 teal    1.71:1 — fill only. Navy on it reaches 8.89:1; as text
+                       or as a hairline it is invisible.
+       #F6C445 yellow  1.48:1 — fill only, 10.31:1 under navy.
+
+     So teal and yellow never carry text and never draw a line: they are
+     surfaces with dark ink laid on them. Deepened partners exist for the
+     moments those meanings need to be written rather than filled. --- */
+  --ai-vivid: #2ed3b7;   /* brand teal — fills only, navy on top: 8.89:1 */
+  --ai-line: #0057b8;    /* brand blue — borders, icons, focus ring */
+  --ai: #0057b8;         /* brand blue — links, navigation, authority (6.24:1) */
+  --ai-deep: #00408a;    /* blue deepened for small text */
+  --ai-wash: #e2f7f3;
+  --shu: #d92d20;        /* blocking states, and the seal */
+  --shu-deep: #a52016;
+  --shu-wash: #fde7e5;
+  --wakatake: #12b76a;   /* a criterion the citizen meets */
+  --wakatake-deep: #067647;
+  --wakatake-wash: #dcfae6;
+  --yamabuki: #f6c445;   /* brand yellow — unverifiable / unknown */
+  --yamabuki-deep: #8a6206; /* deepened so the same meaning can be written */
+  --yamabuki-wash: #fef4d6;
+
+  --kasumi: #d6dce6;    /* mist: hairline, slightly cooler so it reads on green paper */
 
   /* --- Type --- */
-  --font-display: var(--font-zen-maru), "Hiragino Maru Gothic ProN", system-ui,
+  /* Brand pairing: Poppins for headings, Inter for text. The CSS variables
+     keep their old names so nothing downstream has to change; only what they
+     point at did. Fallbacks are system faces with similar metrics, so a
+     failed font load shifts the layout as little as possible. */
+  --font-display: var(--font-zen-maru), "Segoe UI", system-ui, -apple-system,
     sans-serif;
-  --font-body: var(--font-zen-kaku), "Hiragino Kaku Gothic ProN", system-ui,
+  --font-body: var(--font-zen-kaku), system-ui, -apple-system, "Segoe UI",
     sans-serif;
   --font-mono: var(--font-dm-mono), ui-monospace, monospace;
 
@@ -2863,4 +2863,14 @@ a {
   border-left: 3px solid var(--yamabuki);
   font-size: 0.9rem;
   color: var(--sumi-soft);
+}
+
+/* The opening claim above the headline. Small, blue, and set apart: it states
+   the premise the headline then answers, so it must not compete with it. */
+.hero-claim {
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  color: var(--ai);
+  margin: 0 0 var(--ma-2);
+  font-weight: 600;
 }

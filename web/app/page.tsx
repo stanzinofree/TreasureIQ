@@ -39,13 +39,13 @@ export default function Home() {
                 about where an answer came from. */}
             <section className="hero-band">
               <div className="hero-band__inner">
-                <h1>Chatta con i tuoi dati</h1>
+                <p className="hero-claim">Ogni cittadino ha diritti.</p>
+                <h1>Trovarli non dovrebbe essere una caccia al tesoro.</h1>
                 <p className="lede">
-                  Scrivi la tua domanda in italiano. TreasureIQ la confronta con
-                  quello che Stato, Regione e il tuo comune hanno davvero
-                  pubblicato, e risponde solo con ciò che i dati confermano — o
-                  ti dice, con la stessa chiarezza, quando nessuno di loro lo ha
-                  ancora scritto da nessuna parte.
+                  TreasureIQ legge ciò che Stato, Regioni e Comuni hanno
+                  pubblicato e lo confronta con la tua situazione. Ti mostra
+                  cosa puoi ottenere e, quando i dati non bastano, evidenzia
+                  esattamente cosa manca.
                 </p>
               </div>
             </section>

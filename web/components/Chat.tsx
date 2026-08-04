@@ -532,6 +532,9 @@ export default function Chat() {
   const { registra: registraTrovate, azzeraTrovate } = useRisultati();
   const accesso = profilo.accesso === true;
   const [manualLogin, setManualLogin] = useState(false);
+  //: Aperto solo su richiesta. Un campo sempre esposto sopra la domanda si
+  //: legge come un passaggio obbligato, e questo dato è facoltativo.
+  const [sceltaAperta, setSceltaAperta] = useState(false);
   const [scheda, setScheda] = useState<Match | null>(null);
   const [passoAttesa, setPassoAttesa] = useState(0);
 
@@ -755,6 +758,47 @@ export default function Chat() {
           </svg>
           {locating ? "Localizzazione…" : "Usa la mia posizione"}
         </button>
+
+        {/* Due modi di rispondere alla stessa domanda, quindi due bottoni
+            accanto: prima stavano in due punti diversi della pagina, e il
+            secondo — un campo sopra la domanda — si leggeva come un passaggio
+            obbligato invece che come l'alternativa al primo.
+
+            «di interesse», non «il tuo»: chi chiede per un genitore anziano
+            non sta dicendo dove vive, e dare per scontata la residenza è
+            esattamente cio' che R-9 vieta. */}
+        {!profilo.comune && (
+          <button
+            type="button"
+            className="locate__button locate__button--secondario"
+            onClick={() => setSceltaAperta((aperta) => !aperta)}
+            aria-expanded={sceltaAperta}
+          >
+            oppure dimmi il comune di interesse
+          </button>
+        )}
+
+        {/* In linea, non in un modale. Per un campo solo, una finestra
+            costerebbe focus trap, Escape, clic fuori, blocco dello scroll e
+            tastiera su mobile: cinque cose da azzeccare per mostrare un
+            input. */}
+        {sceltaAperta && !profilo.comune && (
+          <SceltaComune
+            onScegli={(scelto) => {
+              registra({
+                comune: {
+                  nome: `${scelto.nome} (${scelto.provincia})`,
+                  istat: scelto.codice_istat,
+                  // Dichiarato dal cittadino, non rilevato: a differenza del
+                  // GPS non ha bisogno di essere confermato.
+                  origine: "dichiarato",
+                  confermato: true,
+                },
+              });
+              setSceltaAperta(false);
+            }}
+          />
+        )}
       </div>
       {locateNote && (
         <p className="locate__note" role="status">
@@ -890,30 +934,6 @@ export default function Chat() {
         <p className="notice" role="alert">
           {error}
         </p>
-      )}
-
-      {/* Solo finché il comune non si sa da nessun'altra parte. Se la
-          geolocalizzazione o l'accesso l'hanno già stabilito, la striscia
-          «sto usando» lo mostra già e lo si può togliere da lì: chiederlo una
-          seconda volta qui sotto faceva sembrare che la prima risposta non
-          fosse arrivata. Ed è facoltativo — si può chiedere senza dirlo, e il
-          sistema lo cerca nella frase. */}
-      {!profilo.comune && (
-        <SceltaComune
-          onScegli={(scelto) =>
-            registra({
-              comune: {
-                nome: `${scelto.nome} (${scelto.provincia})`,
-                istat: scelto.codice_istat,
-                // Scelto da un elenco dal cittadino stesso: è una
-                // dichiarazione, non una posizione rilevata, e a differenza
-                // del GPS non ha bisogno di essere confermata.
-                origine: "dichiarato",
-                confermato: true,
-              },
-            })
-          }
-        />
       )}
 
       <form className="chat__form" onSubmit={handleSubmit}>

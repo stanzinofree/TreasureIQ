@@ -43,7 +43,7 @@ mostrarlo davvero a freddo basta saltare il comando.
 
 ## 1 — Comune coperto: il dato curato
 
-**Fai:** scegli **Albano Laziale** dal campo comune · chiedi «*quali sono gli
+**Fai:** «oppure dimmi il comune di interesse» → **Albano Laziale** · chiedi «*quali sono gli
 orari dell'ufficio anagrafe?*»
 
 **Deve succedere:** risponde dal seed, con documento e contatti dell'URP.
@@ -59,7 +59,7 @@ solo come metro di paragone. Dura dieci secondi.
 **Il momento che vende il progetto.** Fai scegliere il comune al pubblico fra
 quelli della tabella più sotto, o usa Camposampiero che è il più pulito.
 
-**Fai:** scegli **Camposampiero** · chiedi «*quali sono gli orari dell'ufficio
+**Fai:** «oppure dimmi il comune di interesse» → **Camposampiero** · chiedi «*quali sono gli orari dell'ufficio
 anagrafe?*»
 
 **Deve succedere:** etichetta blu **LETTO ORA** in cima, poi la citazione:
@@ -83,7 +83,7 @@ cioè di un altro comune.
 
 ## 3 — Comune mai visto, portale non leggibile: il rifiuto onesto
 
-**Fai:** scegli **Trento** · chiedi «*orari dell'ufficio anagrafe*»
+**Fai:** «oppure dimmi il comune di interesse» → **Trento** · chiedi «*orari dell'ufficio anagrafe*»
 
 **Deve succedere:**
 
@@ -101,7 +101,8 @@ risposta plausibile è un danno.
 
 ## 4 — Due comuni con lo stesso nome
 
-**Fai:** scrivi **Castro** nel campo comune, senza sceglierne uno
+**Fai:** «oppure dimmi il comune di interesse» → scrivi **Castro**, senza
+sceglierne uno
 
 **Deve succedere:** la tendina mostra **Castro (BG · Lombardia)** e **Castro
 (LE · Puglia)** come due voci distinte.
@@ -115,7 +116,8 @@ nessun modo per un modello di inventarlo.
 
 ## 5 — Roma: riconosciuta, ma senza portale
 
-**Fai:** scrivi **Roma** e scegli la voce «Roma»
+**Fai:** «oppure dimmi il comune di interesse» → scrivi **Roma** e scegli la
+voce «Roma»
 
 **Deve succedere:** nella tendina la voce porta l'etichetta `portale
 sconosciuto`. Alla domanda risponde:
@@ -137,7 +139,8 @@ e vale anche quando fa fare brutta figura a noi.
 
 ## 6 — Un nome che non è un comune
 
-**Fai:** scrivi **Vattelapesca** (o un refuso qualunque)
+**Fai:** «oppure dimmi il comune di interesse» → scrivi **Vattelapesca** (o un
+refuso qualunque)
 
 **Deve succedere:**
 
@@ -152,7 +155,7 @@ e vale anche quando fa fare brutta figura a noi.
 
 ## 7 — Le agevolazioni restano fuori dal gradino 2
 
-**Fai:** scegli **Camposampiero** · chiedi «*c'è un aiuto per la mensa
+**Fai:** «oppure dimmi il comune di interesse» → **Camposampiero** · chiedi «*c'è un aiuto per la mensa
 scolastica?*»
 
 **Deve succedere:** zero risultati, e questa risposta:
@@ -249,9 +252,10 @@ Non serve segnalarmeli — questi li so. Segnalami tutto il resto.
 - **La tendina copre il campo domanda** mentre è aperta. È il comportamento
   normale di un menu a discesa, ma se clicchi la domanda con la lista aperta
   colpisci una riga.
-- **Il campo comune non riappare** dopo aver scelto: per cambiarlo si usa
-  «Dimentica» nella striscia in alto a sinistra. È voluto — una sola strada
-  per un solo dato — ma in demo va saputo.
+- **Per cambiare comune si usa «Dimentica»** nella striscia in alto a
+  sinistra: il bottone «oppure dimmi il comune di interesse» sparisce una
+  volta che il comune è noto. È voluto — una sola strada per un solo dato —
+  ma in demo va saputo.
 - **Torre Annunziata** unisce in una citazione gli orari di due sedi diverse.
   Leggibile, ma confuso: tienilo in secondo piano.
 - **Bitetto** cattura solo il giovedì pomeriggio, perché la pagina spezza la

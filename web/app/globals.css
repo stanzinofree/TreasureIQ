@@ -991,8 +991,15 @@ a {
    Ghost styling on purpose — it must read as "try this if you want", not
    compete with the input for attention. */
 .locate {
+  /* Due modi di rispondere alla stessa domanda — rilevare la posizione o
+     dire il comune — quindi affiancati e con lo stesso peso. Prima il secondo
+     era un campo sopra la domanda, cioè in un altro punto della pagina e con
+     l'aria di un passaggio obbligato. */
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
+  gap: var(--ma-2);
   margin-bottom: var(--ma-2);
 }
 
@@ -1010,6 +1017,42 @@ a {
   padding: var(--ma-2) var(--ma-4);
   cursor: pointer;
 }
+/* Secondario per gerarchia, non per importanza: la posizione e' un clic solo
+   e va offerta per prima, ma dire il comune resta una strada intera — non un
+   ripiego. Da qui il testo pieno invece di un semplice «altro». */
+.locate__button--secondario {
+  background: none;
+  border: 1px solid var(--paper-sunken);
+  color: var(--sumi-soft);
+  font-weight: 500;
+}
+
+.locate__button--secondario:hover {
+  background: var(--paper-sunken);
+}
+
+/* Aperto in linea sotto i due bottoni. Niente `max-width` qui: con un tetto,
+   `flex-basis: 100%` viene ridotto al tetto e il selettore torna a starci
+   sulla stessa riga dei bottoni, che è esattamente il posto sbagliato. La
+   larghezza si limita sull'input, dove non interferisce con l'a capo. */
+.locate .scelta-comune {
+  flex-basis: 100%;
+  justify-content: center;
+  margin-block: var(--ma-2) 0;
+}
+
+.locate .scelta-comune input {
+  flex: 0 1 26rem;
+}
+
+/* La tendina si allinea all'input, non al contenitore largo quanto la riga. */
+.locate .scelta-comune__esiti {
+  inset-inline: auto;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(34rem, 100%);
+}
+
 .locate__button:hover {
   background: #ded9fa;
 }

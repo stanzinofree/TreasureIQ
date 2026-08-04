@@ -740,6 +740,13 @@ class IntegrationOut(BaseModel):
     datasets_on_dati_gov: int | None
     benchmark_342: int | None
     segnalazioni_count: int
+    #: Where a request to open this body's data should be addressed. The
+    #: certified address first: a PEC obliges a reply, an ordinary inbox does
+    #: not, and someone who has just read how little their comune publishes
+    #: deserves the channel that cannot be ignored.
+    pec: str | None = None
+    urp_email: str | None = None
+    urp_nome: str | None = None
 
 
 def to_integration_out(ente: Ente) -> IntegrationOut:
@@ -756,6 +763,9 @@ def to_integration_out(ente: Ente) -> IntegrationOut:
         datasets_on_dati_gov=ente.datasets_on_dati_gov,
         benchmark_342=ente.calendario_raccolta_open_data_comuni,
         segnalazioni_count=counts.get(ente.codice_istat, 0),
+        pec=ente.ipa.pec if ente.ipa is not None else None,
+        urp_email=ente.urp.email if ente.urp is not None else None,
+        urp_nome=ente.urp.nome if ente.urp is not None else None,
     )
 
 

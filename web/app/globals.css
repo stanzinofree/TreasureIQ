@@ -2813,3 +2813,54 @@ a {
   font-size: 0.88rem;
   color: var(--sumi-faint);
 }
+
+/* ------------------------------------------------------ open-data request */
+
+.apertura {
+  list-style: none;
+  margin: var(--ma-6) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--ma-4);
+}
+.apertura__ente {
+  border-top: 1px solid var(--kasumi);
+  padding-top: var(--ma-4);
+}
+.apertura__testa {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ma-3);
+}
+.apertura__testa h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+.apertura__conteggio {
+  display: block;
+  margin-top: 2px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--sumi-faint);
+}
+.apertura__corpo {
+  margin-top: var(--ma-4);
+}
+.apertura__nota {
+  margin-top: var(--ma-6);
+}
+
+/* The pointer from a closed answer in the chat to the place something can be
+   done about it. Quiet: it is a suggestion beside an answer, not a call to
+   action competing with the answer itself. */
+.chiedi-inline {
+  margin: var(--ma-4) 0 0;
+  padding-left: var(--ma-4);
+  border-left: 3px solid var(--yamabuki);
+  font-size: 0.9rem;
+  color: var(--sumi-soft);
+}

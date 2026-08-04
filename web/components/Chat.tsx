@@ -814,6 +814,24 @@ export default function Chat() {
                         />
                       )}
 
+                    {/* Closure shows up on this rail too, and the request was
+                        only ever offered on the other one. A card whose
+                        criteria are all "non pubblicato" is exactly the moment
+                        the citizen has evidence in front of them — and it is
+                        the moment they used to be given nothing to do with it. */}
+                    {m.reply.matches.some(
+                      (x) =>
+                        x.livello === "comunale" &&
+                        x.criteria.some((c) => c.state === "unknown_source"),
+                    ) && (
+                      <p className="chiedi-inline">
+                        Molti requisiti qui non sono stati pubblicati.{" "}
+                        <a href="/dati#apertura">
+                          Puoi chiedere al tuo comune di aprirli →
+                        </a>
+                      </p>
+                    )}
+
                     {m.reply.matches.length === 0 && m.reply.data_gap && (
                       <DataGapNotice kind={m.reply.data_gap} />
                     )}

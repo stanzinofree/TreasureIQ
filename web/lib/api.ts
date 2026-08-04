@@ -236,6 +236,11 @@ export interface Integration {
   datasets_on_dati_gov: number | null;
   benchmark_342: number | null;
   segnalazioni_count: number;
+  /** Where a request to open this body's data goes. Certified address first:
+   * a PEC obliges a reply, an ordinary inbox does not. */
+  pec: string | null;
+  urp_email: string | null;
+  urp_nome: string | null;
 }
 
 export const integrationAll = () => call<Integration[]>("/api/integration");

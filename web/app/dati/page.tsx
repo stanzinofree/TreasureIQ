@@ -33,6 +33,7 @@ import {
   type Integration,
   type Costo,
 } from "@/lib/api";
+import ChiediApertura from "@/components/ChiediApertura";
 import CostoTable from "@/components/CostoTable";
 import RecoveryCostChart from "@/components/RecoveryCostChart";
 
@@ -379,6 +380,7 @@ export default async function DataQuality() {
         <div style={{ marginTop: "var(--ma-6)" }}>
           <RecoveryCostChart reports={recoveryReports} measuredAt={EVIDENCE_MEASURED_AT} />
           <CostoTable costi={costiReports} />
+          <ChiediApertura enti={integrationReports} />
         </div>
       </section>
     </div>

@@ -11,6 +11,8 @@
 export const PRESETS = [
   {
     id: "famiglia",
+    persona: "Giulia Bianchi",
+    situazione: "Lavora, un figlio piccolo, un ISEE che apre parecchie porte.",
     name: "Famiglia con figlio minore",
     detail: "38 anni · ISEE 12.000 € · nucleo di 3",
     profile: {
@@ -24,6 +26,8 @@ export const PRESETS = [
   },
   {
     id: "pensionato",
+    persona: "Mario Rossi",
+    situazione: "Vive solo, pensione media: sopra molte soglie, sotto qualche altra.",
     name: "Pensionato che vive solo",
     detail: "71 anni · ISEE 30.000 € · nucleo di 1",
     profile: {
@@ -37,6 +41,8 @@ export const PRESETS = [
   },
   {
     id: "studente",
+    persona: "Luca Verdi",
+    situazione: "Fuori corso e senza lavoro, cerca contributi per studio e affitto.",
     name: "Studente in cerca di lavoro",
     detail: "23 anni · ISEE 8.000 € · nucleo di 2",
     profile: {
@@ -60,6 +66,8 @@ export const PRESETS = [
     // realistic reading for this profile, and it clears the bonus sociale
     // ceiling of 9.796 € several times over, which is the point of the demo.
     id: "capofamiglia",
+    persona: "Anna Neri",
+    situazione: "Quattro persone in casa e un reddito che esclude la maggior parte dei bonus.",
     name: "Capofamiglia, reddito alto",
     detail: "45 anni · ISEE 28.000 € · nucleo di 4",
     profile: {

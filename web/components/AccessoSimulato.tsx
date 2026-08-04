@@ -1,5 +1,6 @@
 "use client";
 
+
 /**
  * The sign-in step, as its own screen.
  *
@@ -19,6 +20,8 @@
 import { useEffect, useRef, useState } from "react";
 import { login } from "@/lib/api";
 import { PRESETS, type Preset } from "@/lib/profili-demo";
+
+import RitrattoFinto from "./RitrattoFinto";
 
 export default function AccessoSimulato({
   motivo,
@@ -116,8 +119,41 @@ export default function AccessoSimulato({
                 disabled={busy !== null}
                 ref={i === 0 ? primoRef : undefined}
               >
-                <span className="accesso__nome">{p.name}</span>
-                <span className="accesso__detail">{p.detail}</span>
+                {/* Formato tessera, non riproduzione: la CIE si evoca — due
+                    colonne, campi in etichetta, banda in testa — e non si
+                    imita. Niente emblema, niente logo, niente numero
+                    documento: un finto documento che sembra vero e' l'unica
+                    cosa che questa demo non puo' mostrare. Il nome e' un
+                    segnaposto italiano, riconoscibile come inventato a colpo
+                    d'occhio. */}
+                <span className="tessera__banda">
+                  <span className="tessera__emittente">TreasureIQ</span>
+                  <span className="tessera__tipo">Profilo di prova</span>
+                </span>
+                <span className="tessera__corpo">
+                  <RitrattoFinto id={p.id} />
+                  <span className="tessera__dati">
+                    <span className="tessera__campo tessera__campo--nome">
+                      <em>Nome</em>
+                      <b>{p.persona}</b>
+                    </span>
+                    <span className="tessera__campo">
+                      <em>Situazione</em>
+                      <b>{p.name}</b>
+                    </span>
+                    <span className="tessera__campo">
+                      <em>Dati che TreasureIQ riceverebbe</em>
+                      <b className="tessera__mono">{p.detail}</b>
+                    </span>
+                  </span>
+                </span>
+                <span className="tessera__nota">{p.situazione}</span>
+                {/* La dicitura sta SULLA tessera, non solo sopra l'elenco:
+                    ritagliata in uno screenshot, la card deve continuare a
+                    dire di se' che e' finta. */}
+                <span className="tessera__piede" aria-hidden="true">
+                  Simulazione · nessuna credenziale reale · nessun documento valido
+                </span>
                 {busy === p.id && <span className="accesso__attesa">Accesso…</span>}
               </button>
             </li>

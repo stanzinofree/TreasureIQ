@@ -3547,3 +3547,139 @@ a {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+/* ── Profili di prova, formato tessera ──────────────────────────────────────
+ * L'idea e' la carta d'identita', e si ferma all'idea: banda emittente in
+ * testa, ritratto a sinistra, campi con la loro etichetta a destra, striscia
+ * in fondo. Nessun emblema della Repubblica, nessun logo CIE, nessun numero
+ * documento, nessun codice a barre: un finto documento che sembra vero non
+ * deve esistere, tantomeno dentro un video pubblico.
+ *
+ * Il formato serve a far capire in un colpo d'occhio cosa si sta scegliendo —
+ * una persona con una situazione, non quattro righe di parametri — e a
+ * ricordare, mentre lo si sceglie, che in un servizio vero quei dati
+ * arriverebbero da SPID o CIE e non da qui.
+ */
+
+.accesso__profilo {
+  padding: 0;
+  overflow: hidden;
+  gap: 0;
+  display: block;
+  text-align: start;
+}
+
+.tessera__banda {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--ma-2);
+  padding: 5px var(--ma-3);
+  background: var(--ai-deep);
+  color: #fff;
+}
+
+.tessera__emittente {
+  font-weight: 600;
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+}
+
+.tessera__tipo {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+.tessera__corpo {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr;
+  gap: var(--ma-3);
+  padding: var(--ma-3);
+  align-items: start;
+}
+
+/* Il riquadro della foto: bordo netto e proporzione da fototessera. */
+.tessera__ritratto {
+  display: block;
+  border: 1px solid var(--kasumi);
+  background: #eef2f7;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.tessera__ritratto svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.tessera__dati {
+  display: grid;
+  gap: var(--ma-2);
+  min-width: 0;
+}
+
+/* Ogni campo e' etichetta minuscola sopra, valore sotto: e' quello che rende
+ * una tessera leggibile come tessera invece che come elenco puntato. */
+.tessera__campo {
+  display: grid;
+  gap: 1px;
+  min-width: 0;
+}
+
+.tessera__campo em {
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sumi-faint);
+}
+
+.tessera__campo b {
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: var(--sumi);
+  overflow-wrap: anywhere;
+}
+
+.tessera__campo--nome b {
+  font-weight: 600;
+  font-size: 1.08rem;
+  letter-spacing: 0.01em;
+}
+
+.tessera__mono {
+  font-family: var(--font-mono);
+  font-size: 0.78rem !important;
+  color: var(--sumi-soft) !important;
+}
+
+.tessera__nota {
+  display: block;
+  padding: 0 var(--ma-3) var(--ma-3);
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: var(--sumi-soft);
+}
+
+.tessera__piede {
+  display: block;
+  padding: 4px var(--ma-3);
+  border-top: 1px dashed var(--kasumi);
+  background: var(--paper-sunken);
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sumi-faint);
+}
+
+@media (max-width: 26rem) {
+  .tessera__corpo {
+    grid-template-columns: 3.5rem 1fr;
+  }
+}

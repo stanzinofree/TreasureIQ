@@ -61,7 +61,11 @@ questi, oppure usa Camposampiero che è il più pulito.
 
 Risponde citando la pagina del comune, letta in quel momento:
 
-> Lunedì 09:00 - 12:30 | Martedì 09:00 - 12:30 | Mercoledì 09:00 - 12:30 …
+> Lunedì 09:00 - 12:30 | Martedì 09:00 - 12:30 | Mercoledì 09:00 - 12:30 e
+> 15:00 - 18:00 | **Giovedì: chiuso** | Venerdì 09:00 - 12:30 | Sabato 09:00 - 12:00
+
+Il «Giovedì: chiuso» è il dettaglio da far notare: non è un orario copiato a
+metà, è la settimana intera com'è scritta sulla pagina, chiusure comprese.
 
 **Cosa dire mentre appare:** questo comune non è nei nostri dati. Non l'abbiamo
 mai ingerito, non c'è nessuno snapshot. Il sistema ha riconosciuto il comune
@@ -91,7 +95,7 @@ un buco riempito con una risposta plausibile è un danno.
 
 | Comune | Ufficio letto | Citazione |
 |---|---|---|
-| **Camposampiero** (PD) | Anagrafe | «Lunedì 09:00 - 12:30 \| Martedì 09:00 - 12:30 \| Mercoledì 09:00 - 12:30 e …» |
+| **Camposampiero** (PD) | «Anagrafe, Stato civile, … URP, Notifiche» | «Lunedì 09:00 - 12:30 \| Martedì 09:00 - 12:30 \| Mercoledì 09:00 - 12:30 e 15:00 - 18:00 \| **Giovedì: chiuso** \| Venerdì 09:00 - 12:30 \| Sabato 09:00 - 12:00» |
 | **Arquata Scrivia** (AL) | Anagrafe e Stato Civile | «Orari al Pubblico lunedì pomeriggio dalle 15.00 alle 17.30, da martedì a venerdì dalle 9.00 alle 12.00, sabato dalle 9.00 alle 11.30» |
 | **Torre Annunziata** (NA) | Anagrafe | «dal lunedì al mercoledì: 7:30-18:00 \| giovedì: 7:30-19:00 \| venerdì: 7:00-18:00 …» |
 | **Bitetto** (BA) | — | «GIOVEDI \| IL POMERIGGIO: 15.30 alle 17.30» |

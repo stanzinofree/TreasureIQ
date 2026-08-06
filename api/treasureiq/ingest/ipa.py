@@ -32,6 +32,8 @@ import sys
 from datetime import date
 from pathlib import Path
 
+from urllib.parse import urlsplit
+
 import httpx
 
 logger = logging.getLogger(__name__)
@@ -85,12 +87,100 @@ def _pulisci(valore: str | None) -> str | None:
     return None if not valore or valore.lower() == "null" else valore
 
 
+def _host(url: str | None) -> str | None:
+    """L'host di un sito, normalizzato per il confronto.
+
+    Il registro scrive gli indirizzi in mille modi — con e senza schema, con e
+    senza `www.`, con la barra finale — e confrontarli come stringhe perderebbe
+    metà degli agganci.
+    """
+    grezzo = (url or "").strip()
+    if not grezzo:
+        return None
+    if "//" not in grezzo:
+        grezzo = f"https://{grezzo}"
+    host = (urlsplit(grezzo).hostname or "").lower()
+    if host.startswith("www."):
+        host = host[4:]
+    return host or None
+
+
+def arricchisci_comuni(comuni: list[dict], righe: list[dict]) -> tuple[int, int]:
+    """Scrive `codice_ipa` su ogni comune che si riesce ad agganciare.
+
+    L'aggancio primario è l'host del sito istituzionale, perché il campo
+    `sito` dei nostri comuni viene da questo stesso registro: è la chiave che
+    li lega davvero. Il ripiego su nome e provincia serve ai comuni che hanno
+    cambiato dominio da quando il file è stato costruito.
+
+    Il codice viene salvato in **maiuscolo**: il registro lo distribuisce
+    minuscolo (`c_a138`), e i portali MyPortal a quella forma rispondono `200`
+    con zero contenuti invece che con un errore — cioè un comune che sembra
+    non pubblicare niente.
+
+    Chi non si aggancia resta senza il campo, non con una stringa vuota: a
+    valle un codice assente e un codice vuoto si comportano diversamente, e
+    solo il primo dice la verità.
+    """
+    per_host: dict[str, str] = {}
+    per_nome: dict[tuple[str, str], str] = {}
+    for riga in righe:
+        codice = (riga.get("cod_amm") or "").strip().upper()
+        if not codice:
+            continue
+        host = _host(riga.get("sito_istituzionale"))
+        if host:
+            per_host.setdefault(host, codice)
+        chiave = (
+            (riga.get("Comune") or "").strip().casefold(),
+            (riga.get("Provincia") or "").strip().casefold(),
+        )
+        if chiave[0]:
+            per_nome.setdefault(chiave, codice)
+
+    agganciati = 0
+    for comune in comuni:
+        codice = per_host.get(_host(comune.get("sito")) or "")
+        if codice is None:
+            codice = per_nome.get(
+                (comune.get("nome", "").strip().casefold(), comune.get("provincia", "").strip().casefold())
+            )
+        if codice:
+            comune["codice_ipa"] = codice
+            agganciati += 1
+    return agganciati, len(comuni) - agganciati
+
+
 def main(argv: list[str] | None = None) -> int:
     logging.basicConfig(level=logging.INFO, format="%(message)s")
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--enti", default="data/enti.json")
+    p.add_argument(
+        "--comuni",
+        metavar="FILE",
+        help=(
+            "Invece degli enti, arricchisci l'elenco nazionale dei comuni con il "
+            "codice IPA (serve a indirizzare le API dei portali MyPortal)."
+        ),
+    )
     p.add_argument("--dry-run", action="store_true")
     args = p.parse_args(argv)
+
+    if args.comuni:
+        percorso = Path(args.comuni)
+        comuni = json.loads(percorso.read_text("utf-8"))
+        with httpx.Client() as client:
+            righe = _scarica(client, _risorsa_txt(client))
+        logger.info("IPA: %d amministrazioni nel registro", len(righe))
+        agganciati, mancanti = arricchisci_comuni(comuni, righe)
+        logger.info("IPA: %d comuni agganciati, %d senza codice", agganciati, mancanti)
+        if args.dry_run:
+            return 0
+        percorso.write_text(
+            json.dumps(comuni, ensure_ascii=False, indent=1) + "\n", encoding="utf-8"
+        )
+        logger.info("scritto %s", percorso)
+        return 0
 
     percorso = Path(args.enti)
     enti = json.loads(percorso.read_text("utf-8"))

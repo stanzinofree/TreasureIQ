@@ -1,0 +1,18 @@
+{
+ "isee_max": null,
+ "isee_min": null,
+ "isee_mentioned_without_threshold": false,
+ "eta_min": null,
+ "eta_max": null,
+ "nucleo_min": null,
+ "figli_minori_required": false,
+ "disabilita_required": false,
+ "residenza_required": null,
+ "employment_status": [],
+ "other": [],
+ "quotes": [],
+ "deadline_iso": null,
+ "notes": [
+  "Il testo non descrive alcun servizio, agevolazione o bando comunale con requisiti di accesso. Si tratta di una descrizione storica e archeologica di Benevento, senza alcun riferimento a criteri di accesso, domande, scadenze o soglie."
+ ]
+}

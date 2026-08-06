@@ -55,3 +55,8 @@ htmlcov/
 # D-33: dati acquisiti a runtime, mai versionati.
 # I dati curati stanno in data/, che è tracciata.
 data-live/
+
+# Catture di rete (HAR): decine di megabyte di traffico registrato, utili per
+# capire l'API di una piattaforma e inutili da conservare. Quello che si e'
+# imparato da una cattura sta nel codice — vedi `ingest/myportal.py`.
+*.har

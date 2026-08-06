@@ -1,0 +1,30 @@
+meta {
+  name: Sessione
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{base}}/api/session
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "comune_istat": "058003",
+    "eta": 34,
+    "isee": "12000",
+    "nucleo_familiare": 3,
+    "figli_minori": 1,
+    "disabilita": false
+  }
+}
+
+docs {
+  Apre una sessione col profilo del cittadino. Nessun dato personale viene
+  salvato oltre la sessione stessa.
+  
+  `comune_istat` decide da quali fonti si risponde: senza, TreasureIQ non
+  indovina il comune dal testo — lo chiede.
+}

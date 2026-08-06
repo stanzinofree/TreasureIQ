@@ -202,5 +202,90 @@
    "fonte": "https://indicepa.gov.it/ipa-dati/dataset/amministrazioni",
    "verificato_il": "2026-08-03"
   }
+ },
+ {
+  "ente": "Comune di Lucca",
+  "codice_istat": "046017",
+  "access_mode": "M2_prosa_api",
+  "probe": {
+   "method": "GET /wp-json/wp/v2/servizi",
+   "dated": "2026-08-05",
+   "dettagli": {
+    "url": "https://www.comune.lucca.it/wp-json/wp/v2/servizi",
+    "stato_http": "200",
+    "servizi_dichiarati": "287",
+    "piattaforma": "wp_design_comuni",
+    "vincoli_nel_campo_tipizzato": "vuoto"
+   }
+  },
+  "datasets_on_dati_gov": 0
+ },
+ {
+  "ente": "Comune di Benevento",
+  "codice_istat": "062008",
+  "access_mode": "M2_prosa_api",
+  "probe": {
+   "method": "GET /wp-json/wp/v2/servizi",
+   "dated": "2026-08-05",
+   "dettagli": {
+    "url": "https://comune.benevento.it/wp-json/wp/v2/servizi",
+    "stato_http": "200",
+    "servizi_dichiarati": "103",
+    "piattaforma": "wp_design_comuni",
+    "vincoli_nel_campo_tipizzato": "compilato"
+   }
+  },
+  "datasets_on_dati_gov": 0
+ },
+ {
+  "ente": "Comune di Ostuni",
+  "codice_istat": "074012",
+  "access_mode": "M2_prosa_api",
+  "probe": {
+   "method": "GET /wp-json/wp/v2/servizi",
+   "dated": "2026-08-05",
+   "dettagli": {
+    "url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi",
+    "stato_http": "200",
+    "servizi_dichiarati": "87",
+    "piattaforma": "wp_design_comuni",
+    "vincoli_nel_campo_tipizzato": "vuoto"
+   }
+  },
+  "datasets_on_dati_gov": 0
+ },
+ {
+  "ente": "Comune di Malvagna",
+  "codice_istat": "083044",
+  "access_mode": "M2_prosa_api",
+  "probe": {
+   "method": "GET /wp-json/wp/v2/servizi",
+   "dated": "2026-08-05",
+   "dettagli": {
+    "url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi",
+    "stato_http": "200",
+    "servizi_dichiarati": "81",
+    "piattaforma": "wp_design_comuni",
+    "vincoli_nel_campo_tipizzato": "vuoto"
+   }
+  },
+  "datasets_on_dati_gov": 0
+ },
+ {
+  "ente": "Comune di Mesagne",
+  "codice_istat": "074010",
+  "access_mode": "M2_prosa_api",
+  "probe": {
+   "method": "GET /wp-json/wp/v2/servizi",
+   "dated": "2026-08-05",
+   "dettagli": {
+    "url": "https://www.comune.mesagne.br.it/wp-json/wp/v2/servizi",
+    "stato_http": "200",
+    "servizi_dichiarati": "79",
+    "piattaforma": "wp_design_comuni",
+    "vincoli_nel_campo_tipizzato": "compilato"
+   }
+  },
+  "datasets_on_dati_gov": 0
  }
 ]

@@ -645,6 +645,34 @@ export default function Chat() {
       // Feed the side index. It stores pointers into this transcript, never
       // copies of the verdicts — the card stays the single place any result
       // is stated.
+      // Quello che TIQ ha capito della domanda diventa un filtro visibile.
+      //
+      // I dati c'erano gia' — estratti, usati per rispondere, e mai mostrati:
+      // una persona che scriveva «ho 54 anni e sono di Roncaro» non vedeva da
+      // nessuna parte che l'avessimo capita, e non aveva modo di correggerci
+      // se avessimo capito il comune sbagliato.
+      const capito = out.profilo_capito;
+      if (capito) {
+        registra({
+          ...(capito.eta != null ? { eta: capito.eta } : {}),
+          // Il tema capito diventa un interesse mostrato: e' la risposta a
+          // «cosa sto cercando», che finora la persona non vedeva scritta.
+          ...(out.topic && out.topic !== "sconosciuto"
+            ? { interessi: [out.topic.replace(/_/g, " ")] }
+            : {}),
+          ...(capito.comune_istat && capito.comune_nome
+            ? {
+                comune: {
+                  nome: capito.comune_nome,
+                  istat: capito.comune_istat,
+                  origine: "dichiarato" as const,
+                  confermato: capito.comune_coperto === true,
+                },
+              }
+            : {}),
+        });
+      }
+
       registraTrovate(
         out.matches.map((match) => ({
           ancora: ancoraDi(id, match.id),
@@ -844,7 +872,14 @@ export default function Chat() {
                 non un paragrafo sciolto sopra di essa: `RispostaCivica` la
                 rende insieme allo stato, così le due cose che qualificano
                 tutto il resto stanno dove si guarda per prime. */}
-            {!(m.reply?.info) && <p>{m.content}</p>}
+            {/* Il testo si nasconde solo quando la scheda civica lo ripete.
+                Una scheda fatta di sole ricerche live non ripete niente: ha i
+                link e non la frase, e nasconderla lasciava la risposta vuota —
+                a Roncaro (PV) la persona vedeva una card bianca mentre l'API
+                aveva riconosciuto il comune e cercato sul suo sito. */}
+            {(!m.reply?.info || !(m.reply.info.document || m.reply.info.office)) && (
+              <p>{m.content}</p>
+            )}
 
             {m.reply && (
               <div className="chat__answer">

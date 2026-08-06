@@ -103,7 +103,10 @@
   --shadow-rest: 0 1px 2px rgba(27, 33, 29, 0.06);
   --shadow-lift: 0 4px 16px rgba(27, 33, 29, 0.09);
 
-  --measure: 68ch;
+  /* Alzata da 68ch: era il cap che mandava a capo i paragrafi a meta'
+     pagina. Chi sta dentro `.stack` non la usa affatto (vedi sotto): la
+     larghezza la decide il contenitore, che e' l'unico posto giusto. */
+  --measure: 84ch;
 }
 
 *,
@@ -583,7 +586,10 @@ a {
 .stack {
   display: grid;
   gap: var(--ma-6);
-  max-width: 940px;
+  /* Allargato da 940px: a 940 il testo finiva la riga a meta' schermo e
+     lasciava una fascia vuota larga quanto il testo stesso, che legge come
+     una pagina rotta anche quando ogni singolo valore e' difendibile. */
+  max-width: 1240px;
   margin-inline: auto;
 }
 
@@ -3786,3 +3792,143 @@ a {
 .mappa__bollo--offline { background: var(--paper-raised); }
 .mappa__bollo--vivo { background: var(--ai-wash); border-color: var(--ai); }
 .mappa__bollo--esterno { background: var(--paper-sunken); }
+
+/* ── Analytics e connettori ──────────────────────────────────────────────── */
+
+.pagina {
+  /* Nessuna larghezza propria: la decide `.stack`, come per il resto del
+     sito. Un secondo contenitore con una sua misura era esattamente il
+     disaccordo fra max-width che `.stack` era nato per chiudere. */
+  padding: var(--ma-8) var(--ma-4) var(--ma-24);
+}
+.pagina h1 {
+  font-family: var(--font-display);
+  margin: 0 0 var(--ma-2);
+}
+.pagina h2 {
+  font-family: var(--font-display);
+  margin: var(--ma-12) 0 var(--ma-2);
+  padding-left: var(--ma-3);
+  border-left: 3px solid var(--ai);
+}
+.occhiello {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ai);
+  margin: 0 0 var(--ma-2);
+}
+.sottotitolo {
+  color: var(--sumi-soft);
+  margin: 0 0 var(--ma-4);
+}
+.nota {
+  color: var(--sumi-soft);
+  font-size: 14px;
+  margin: 0 0 var(--ma-4);
+}
+.vuoto {
+  color: var(--sumi-soft);
+  border: 1px dashed var(--kasumi);
+  border-radius: var(--radius);
+  padding: var(--ma-6);
+}
+
+.tessere {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--ma-3);
+  margin: var(--ma-6) 0;
+}
+.tessera {
+  background: var(--paper-raised);
+  border: 1px solid var(--kasumi);
+  border-radius: var(--radius);
+  padding: var(--ma-4);
+}
+.tessera b {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 26px;
+  color: var(--ai);
+}
+.tessera span {
+  font-size: 13px;
+  color: var(--sumi-soft);
+}
+
+/* Le tabelle larghe scorrono dentro il proprio riquadro: la pagina non deve
+   mai scorrere in orizzontale, o su telefono si perde la prima colonna. */
+.tabella-scorrevole {
+  overflow-x: auto;
+  border: 1px solid var(--kasumi);
+  border-radius: var(--radius);
+  margin: var(--ma-4) 0;
+}
+.tabella-scorrevole table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.tabella-scorrevole caption {
+  text-align: left;
+  padding: var(--ma-3) var(--ma-4) 0;
+  color: var(--sumi-soft);
+  font-size: 13px;
+}
+.tabella-scorrevole th,
+.tabella-scorrevole td {
+  padding: var(--ma-2) var(--ma-4);
+  text-align: left;
+  border-bottom: 1px solid var(--kasumi);
+  white-space: nowrap;
+}
+.tabella-scorrevole thead th {
+  font-family: var(--font-display);
+  font-weight: 500;
+  background: var(--paper-sunken);
+}
+.tabella-scorrevole tbody tr:last-child th,
+.tabella-scorrevole tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.schede-connettori {
+  list-style: none;
+  padding: 0;
+  margin: var(--ma-4) 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--ma-3);
+}
+.schede-connettori li {
+  background: var(--paper-raised);
+  border: 1px solid var(--kasumi);
+  border-left: 4px solid var(--ai);
+  border-radius: var(--radius);
+  padding: var(--ma-4);
+}
+.schede-connettori h3 {
+  font-family: var(--font-display);
+  font-size: 15px;
+  margin: 0 0 var(--ma-1);
+}
+.diffusione {
+  font-size: 13px;
+  color: var(--sumi-soft);
+  margin: 0 0 var(--ma-2);
+}
+.schede-connettori code {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  background: var(--paper-sunken);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  word-break: break-all;
+}
+.nota-connettore {
+  font-size: 12.5px;
+  color: var(--sumi-soft);
+  margin: var(--ma-2) 0 0;
+}

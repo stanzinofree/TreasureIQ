@@ -27,6 +27,7 @@ import json
 import logging
 import sqlite3
 import sys
+from collections.abc import Iterable
 from dataclasses import dataclass
 from datetime import date
 from pathlib import Path
@@ -56,6 +57,125 @@ CREATE TABLE IF NOT EXISTS costo_snapshot (
     secondi_recupero     REAL,
     PRIMARY KEY (rilevato_il, codice_istat)
 );
+
+-- The census of every Italian municipal portal, whether or not we ingest it.
+--
+-- `costo_snapshot` above answers "what did the comuni we read cost us". This
+-- one answers a question nobody has been publishing: what does the whole
+-- country actually expose, and is that changing. The two are kept apart on
+-- purpose — a comune appears here from the first sweep, years before anyone
+-- writes a connector for it, and conflating "measured" with "ingested" would
+-- quietly turn a national map into a report about our own backlog.
+--
+-- Same rule as above: one row per comune per day, replaced if the sweep is
+-- run twice in a day. Re-running a sweep is a correction, not a second
+-- observation of the country.
+--
+-- Every column that was not measured stays NULL. A census that fills gaps
+-- with zeros measures its own imagination, and these rows are meant to be
+-- charted — a zero and an unknown look identical on a chart and mean
+-- opposite things.
+CREATE TABLE IF NOT EXISTS portale_snapshot (
+    rilevato_il          TEXT    NOT NULL,
+    codice_istat         TEXT    NOT NULL,
+    nome                 TEXT    NOT NULL,
+    provincia            TEXT,
+    regione              TEXT,
+    -- Carried on every row so a chart can weight by citizens, not by comuni.
+    -- Denormalised deliberately: ISTAT restates population per edition, and a
+    -- join against today's figures would silently rewrite last year's chart.
+    popolazione          INTEGER,
+    url_dichiarato       TEXT,
+    url_finale           TEXT,
+    https_ok             INTEGER,
+    stato_http           INTEGER,
+    indirizzabilita      TEXT    NOT NULL,
+    recuperabilita       TEXT    NOT NULL,
+    piattaforma          TEXT    NOT NULL,
+    -- Verbatim string that decided the classification. Same doctrine as
+    -- `citazione_orari`: an enum without its evidence is an opinion wearing a
+    -- serious face, and unreviewable a year later.
+    piattaforma_prova    TEXT,
+    rest_base            TEXT,
+    -- Size of the published catalogue. Summed over comuni with an API, this
+    -- is the exact volume of a recurring seed — not an extrapolation.
+    n_servizi            INTEGER,
+    -- Date of the most recent published content: separates a live portal from
+    -- a shop window that has an API and stopped updating in 2019.
+    ultimo_contenuto     TEXT,
+    -- How much of the AgID service model this portal actually exposes, 0..1,
+    -- measured on one real service card. NULL when no card could be read —
+    -- which is not the same as a portal that publishes an empty one.
+    aderenza             REAL,
+    -- The sections found, comma-separated. Kept alongside the ratio because
+    -- the civic question is not "how conformant" but "which part is missing":
+    -- a portal without `tempi_e_scadenze` costs a citizen a deadline.
+    sezioni_esposte      TEXT,
+    -- Whether the eligibility-constraints field exists and whether anyone
+    -- filled it: `compilato`, `vuoto`, `assente`, or NULL when not measured.
+    --
+    -- The three platforms that expose typed fields all provide this field —
+    -- `_dci_servizio_vincoli`, `sys_vincoli`, `pnrr_constraints` — so for the
+    -- first time the question "does this comune say who qualifies" has a
+    -- national answer. `assente` is the vendor's choice and `vuoto` the
+    -- comune's: kept apart, because merging them blames the wrong party.
+    vincoli              TEXT,
+    -- Who decided `piattaforma`: the probe during the sweep (`sonda`) or a
+    -- later rule applied to the stored fingerprint (`riclassificazione`).
+    --
+    -- This exists to protect the metric that matters most. Backfilling old
+    -- rows with new rules makes a comune look like it moved from `ignota` to
+    -- `hgate` when nothing changed on its portal — what changed was our
+    -- knowledge. Counting that as "a comune became machine-readable" would
+    -- inflate the one number this project would most like to be true.
+    classificato_da      TEXT,
+    -- Which denominator `aderenza` was computed against: `modello_intero`
+    -- when read from HTML, `schema_esposto` when read from typed fields.
+    -- Grouping across the two without this produces a ranking that puts the
+    -- most compliant vendor last, because its API serialises only part of
+    -- what its theme implements.
+    base_misura          TEXT,
+    -- Sections the vendor's schema declares, filled or not. Only readable
+    -- where sections are typed fields (today: the WordPress Design Comuni
+    -- theme). A section declared and left empty is the founding finding of
+    -- this project, and it apportions blame correctly: the vendor built the
+    -- field, the comune did not fill it. NULL where the distinction cannot be
+    -- made, never guessed.
+    sezioni_dichiarate   TEXT,
+    -- Why a measurement is missing, when it is. Keeps our own limits out of
+    -- the vendors' numbers: a card our scraper failed to reach must never
+    -- read as a vendor that publishes nothing.
+    nota_misura          TEXT,
+    -- Hash of the structural shape the reader latched onto. No vendor
+    -- publishes a version number; this stands in for one. Stable across
+    -- deployments of the same vendor, so when it moves on many comuni at
+    -- once, that vendor changed its template and a connector is about to
+    -- break — known before a citizen hits it.
+    impronta_declinazione TEXT,
+    -- The exact card the adherence was measured on. Same doctrine as
+    -- `piattaforma_prova`: a score whose evidence cannot be reopened is an
+    -- opinion, and this one gets published next to a company's name.
+    scheda_campione      TEXT,
+    -- Product-level `Server` header, when the portal sends one.
+    server               TEXT,
+    -- Coarse, stable signals for portals that declare nothing: cookie names,
+    -- route extensions, first-level asset directories. Half the comuni are
+    -- mute, and they are not all different from each other — they are a few
+    -- vendors who do not sign their work. This column is the key that groups
+    -- them later, by querying the store instead of re-sweeping the country.
+    impronta_grezza      TEXT,
+    richieste            INTEGER NOT NULL DEFAULT 0,
+    secondi              REAL,
+    errore               TEXT,
+    PRIMARY KEY (rilevato_il, codice_istat)
+);
+
+-- The two axes every analytics question starts from: "how many comuni are on
+-- each platform, on each date" and "how did one comune change over time".
+CREATE INDEX IF NOT EXISTS idx_portale_data_piattaforma
+    ON portale_snapshot (rilevato_il, piattaforma);
+CREATE INDEX IF NOT EXISTS idx_portale_comune
+    ON portale_snapshot (codice_istat, rilevato_il);
 """
 
 
@@ -86,6 +206,11 @@ def apri(db_path: Path, *, scrittura: bool = False) -> sqlite3.Connection:
         db_path.parent.mkdir(parents=True, exist_ok=True)
         conn = sqlite3.connect(db_path)
         conn.executescript(SCHEMA)
+        # Anche in scrittura: chi aggiorna righe esistenti le legge prima, e
+        # una connessione che restituisce tuple al posto di `Row` fa fallire
+        # quel codice solo al primo accesso per nome — cioè in produzione,
+        # non nel test che apre in lettura.
+        conn.row_factory = sqlite3.Row
         return conn
     conn = sqlite3.connect(f"file:{db_path}?mode=ro", uri=True)
     conn.row_factory = sqlite3.Row
@@ -166,6 +291,298 @@ def serie(db_path: Path, *, codice_istat: str | None = None) -> list[PuntoStoric
         )
         for r in righe
     ]
+
+
+@dataclass
+class RigaPortale:
+    """One municipal portal, as measured on one day.
+
+    Mirrors `EsitoCensimento` but deliberately does not import it: the store
+    must stay readable without pulling in the network layer, and the census
+    must stay free to grow fields the store has not learned yet.
+    """
+
+    rilevato_il: date
+    codice_istat: str
+    nome: str
+    provincia: str | None
+    regione: str | None
+    popolazione: int | None
+    url_dichiarato: str | None
+    url_finale: str | None
+    https_ok: bool | None
+    stato_http: int | None
+    indirizzabilita: str
+    recuperabilita: str
+    piattaforma: str
+    piattaforma_prova: str | None
+    rest_base: str | None
+    aderenza: float | None
+    sezioni_esposte: str | None
+    sezioni_dichiarate: str | None
+    classificato_da: str | None
+    vincoli: str | None
+    base_misura: str | None
+    nota_misura: str | None
+    impronta_declinazione: str | None
+    scheda_campione: str | None
+    server: str | None
+    impronta_grezza: str | None
+    n_servizi: int | None
+    ultimo_contenuto: date | None
+    richieste: int
+    secondi: float | None
+    errore: str | None
+
+
+_COLONNE_PORTALE = (
+    "rilevato_il", "codice_istat", "nome", "provincia", "regione", "popolazione",
+    "url_dichiarato", "url_finale", "https_ok", "stato_http", "indirizzabilita",
+    "recuperabilita", "piattaforma", "piattaforma_prova", "rest_base", "aderenza",
+    "sezioni_esposte", "sezioni_dichiarate", "classificato_da", "vincoli", "base_misura",
+    "nota_misura",
+    "impronta_declinazione", "scheda_campione", "server",
+    "impronta_grezza", "n_servizi",
+    "ultimo_contenuto", "richieste", "secondi", "errore",
+)
+
+
+def registra_portali(db_path: Path, righe: Iterable[RigaPortale]) -> int:
+    """Write a sweep's rows, replacing that day's measurement if it exists.
+
+    Committed in one transaction: a sweep interrupted halfway through would
+    otherwise leave a partial day in the store that looks, to every chart
+    downstream, exactly like a day when half of Italy went offline.
+    """
+    valori = [
+        (
+            r.rilevato_il.isoformat(), r.codice_istat, r.nome, r.provincia, r.regione,
+            r.popolazione, r.url_dichiarato, r.url_finale,
+            None if r.https_ok is None else int(r.https_ok),
+            r.stato_http, r.indirizzabilita, r.recuperabilita, r.piattaforma,
+            r.piattaforma_prova, r.rest_base, r.aderenza, r.sezioni_esposte,
+            r.sezioni_dichiarate, r.classificato_da, r.vincoli, r.base_misura, r.nota_misura,
+            r.impronta_declinazione, r.scheda_campione, r.server, r.impronta_grezza,
+            r.n_servizi,
+            r.ultimo_contenuto.isoformat() if r.ultimo_contenuto else None,
+            r.richieste, r.secondi, r.errore,
+        )
+        for r in righe
+    ]
+    if not valori:
+        return 0
+    segnaposto = ", ".join("?" * len(_COLONNE_PORTALE))
+    sql = (
+        f"INSERT OR REPLACE INTO portale_snapshot ({', '.join(_COLONNE_PORTALE)}) "
+        f"VALUES ({segnaposto})"
+    )
+    with apri(db_path, scrittura=True) as conn:
+        conn.executemany(sql, valori)
+        conn.commit()
+    return len(valori)
+
+
+def date_censimento(db_path: Path) -> list[date]:
+    """Sweep dates present in the store, oldest first."""
+    if not db_path.exists():
+        return []
+    with apri(db_path) as conn:
+        righe = conn.execute(
+            "SELECT DISTINCT rilevato_il FROM portale_snapshot ORDER BY rilevato_il ASC"
+        ).fetchall()
+    return [date.fromisoformat(r["rilevato_il"]) for r in righe]
+
+
+def panoramica_piattaforme(db_path: Path, *, rilevato_il: date | None = None) -> list[dict]:
+    """Per-platform totals for one sweep: comuni, citizens, published services.
+
+    Citizens are reported alongside comuni because the two tell opposite
+    stories — a platform used by three hundred small comuni and one used by
+    Rome are the same row on a count and nowhere near it on a map of who is
+    actually served.
+    """
+    if not db_path.exists():
+        return []
+    giorno = rilevato_il or (date_censimento(db_path) or [None])[-1]
+    if giorno is None:
+        return []
+    with apri(db_path) as conn:
+        righe = conn.execute(
+            """
+            SELECT piattaforma,
+                   COUNT(*)                AS comuni,
+                   COUNT(DISTINCT regione)  AS regioni,
+                   -- La regione dove il prodotto pesa di più, e quanto: è ciò
+                   -- che separa un fornitore nazionale da una piattaforma
+                   -- messa a disposizione da una Regione ai propri comuni.
+                   (SELECT p2.regione FROM portale_snapshot p2
+                     WHERE p2.rilevato_il = portale_snapshot.rilevato_il
+                       AND p2.piattaforma = portale_snapshot.piattaforma
+                     GROUP BY p2.regione ORDER BY COUNT(*) DESC LIMIT 1) AS regione_prima,
+                   (SELECT COUNT(*) FROM portale_snapshot p3
+                     WHERE p3.rilevato_il = portale_snapshot.rilevato_il
+                       AND p3.piattaforma = portale_snapshot.piattaforma
+                       AND p3.regione = (SELECT p4.regione FROM portale_snapshot p4
+                         WHERE p4.rilevato_il = portale_snapshot.rilevato_il
+                           AND p4.piattaforma = portale_snapshot.piattaforma
+                         GROUP BY p4.regione ORDER BY COUNT(*) DESC LIMIT 1)) AS comuni_prima,
+                   -- Senza COALESCE di proposito: se nessuna riga ha la
+                   -- popolazione il totale resta NULL, non zero. Uno zero
+                   -- disegnerebbe una barra vuota accanto a "0 cittadini
+                   -- serviti", che è una frase falsa detta da un grafico.
+                   SUM(popolazione)              AS popolazione,
+                   SUM(COALESCE(n_servizi, 0))   AS servizi,
+                   SUM(CASE WHEN n_servizi IS NOT NULL THEN 1 ELSE 0 END) AS con_catalogo
+            FROM portale_snapshot
+            WHERE rilevato_il = ?
+            GROUP BY piattaforma
+            ORDER BY comuni DESC
+            """,
+            (giorno.isoformat(),),
+        ).fetchall()
+    return [dict(r) | {"rilevato_il": giorno} for r in righe]
+
+
+def aderenza_fornitori(db_path: Path, *, rilevato_il: date | None = None) -> list[dict]:
+    """How well each vendor implements the AgID service model.
+
+    Reported per vendor rather than per comune because that is where the
+    decision was made: a comune on a platform that omits `tempi_e_scadenze`
+    cannot publish a deadline no matter how diligent its staff are.
+
+    `impronte` counts the distinct structural fingerprints seen. One means the
+    vendor ships a uniform template; several mean deployments have drifted,
+    and a connector written against one of them will not fit the others.
+    """
+    if not db_path.exists():
+        return []
+    giorno = rilevato_il or (date_censimento(db_path) or [None])[-1]
+    if giorno is None:
+        return []
+    with apri(db_path) as conn:
+        righe = conn.execute(
+            """
+            SELECT piattaforma,
+                   base_misura,
+                   COUNT(*)                          AS comuni,
+                   COUNT(aderenza)                   AS misurati,
+                   ROUND(AVG(aderenza), 3)           AS aderenza_media,
+                   MIN(aderenza)                     AS aderenza_minima,
+                   COUNT(DISTINCT impronta_declinazione) AS impronte
+            FROM portale_snapshot
+            WHERE rilevato_il = ?
+            GROUP BY piattaforma, base_misura
+            HAVING misurati > 0
+            ORDER BY comuni DESC
+            """,
+            (giorno.isoformat(),),
+        ).fetchall()
+    return [dict(r) | {"rilevato_il": giorno} for r in righe]
+
+
+def sezioni_mancanti(db_path: Path, *, rilevato_il: date | None = None) -> list[dict]:
+    """Which model sections Italian portals omit most often.
+
+    Counted over every measured comune, because the interesting answer is
+    national: the section missing most often is the one the country is
+    quietly failing to publish.
+    """
+    from treasureiq.ingest.modello_agid import SezioneAgid
+
+    if not db_path.exists():
+        return []
+    giorno = rilevato_il or (date_censimento(db_path) or [None])[-1]
+    if giorno is None:
+        return []
+    with apri(db_path) as conn:
+        righe = conn.execute(
+            "SELECT sezioni_esposte FROM portale_snapshot "
+            "WHERE rilevato_il = ? AND sezioni_esposte IS NOT NULL",
+            (giorno.isoformat(),),
+        ).fetchall()
+    misurati = len(righe)
+    esposte = [set((r["sezioni_esposte"] or "").split(",")) for r in righe]
+    conteggio = [
+        {
+            "sezione": s.value,
+            "manca_su": sum(1 for e in esposte if s.value not in e),
+            "misurati": misurati,
+        }
+        for s in SezioneAgid
+    ]
+    return sorted(conteggio, key=lambda x: x["manca_su"], reverse=True)
+
+
+def vincoli_nazionali(db_path: Path, *, rilevato_il: date | None = None) -> list[dict]:
+    """Chi pubblica i requisiti di accesso, e chi lascia il campo vuoto.
+
+    Solo i comuni su piattaforme con campi tipizzati compaiono qui: altrove la
+    domanda non si puo' porre, e riportarli come "non pubblicano" sarebbe
+    accusarli di un silenzio che non abbiamo misurato.
+    """
+    if not db_path.exists():
+        return []
+    giorno = rilevato_il or (date_censimento(db_path) or [None])[-1]
+    if giorno is None:
+        return []
+    with apri(db_path) as conn:
+        righe = conn.execute(
+            "SELECT vincoli AS stato, COUNT(*) AS comuni FROM portale_snapshot "
+            "WHERE rilevato_il = ? AND vincoli IS NOT NULL GROUP BY vincoli "
+            "ORDER BY comuni DESC",
+            (giorno.isoformat(),),
+        ).fetchall()
+    return [dict(r) for r in righe]
+
+
+def evoluzione(db_path: Path, *, da: date, a: date) -> list[dict]:
+    """Comuni whose platform or addressability changed between two sweeps.
+
+    This is the question the whole table exists to answer. A portal moving
+    from `solo_html` to an API is a comune that became machine-readable, and
+    counting those over a year measures something about Italian public
+    administration that is currently nobody's published number.
+
+    Comuni absent from either sweep are left out rather than reported as
+    changed: appearing in a sweep for the first time is a fact about our
+    coverage, not about them.
+    """
+    if not db_path.exists():
+        return []
+    with apri(db_path) as conn:
+        righe = conn.execute(
+            """
+            SELECT p.codice_istat, p.nome, p.popolazione,
+                   d.piattaforma      AS piattaforma_da,
+                   p.piattaforma      AS piattaforma_a,
+                   d.indirizzabilita  AS indirizzabilita_da,
+                   p.indirizzabilita  AS indirizzabilita_a,
+                   d.impronta_declinazione AS impronta_da,
+                   p.impronta_declinazione AS impronta_a,
+                   d.aderenza         AS aderenza_da,
+                   p.aderenza         AS aderenza_a
+            FROM portale_snapshot p
+            JOIN portale_snapshot d
+              ON d.codice_istat = p.codice_istat AND d.rilevato_il = ?
+            WHERE p.rilevato_il = ?
+              -- Un cambio di piattaforma vale solo se entrambe le righe sono
+              -- state decise dalla sonda. Se una delle due viene da una
+              -- riclassificazione, la differenza racconta noi, non il comune.
+              AND NOT (IFNULL(d.classificato_da, 'sonda') = 'riclassificazione'
+                       OR IFNULL(p.classificato_da, 'sonda') = 'riclassificazione')
+              AND (d.piattaforma <> p.piattaforma
+                   OR d.indirizzabilita <> p.indirizzabilita
+                   -- A moved fingerprint is the template change itself. When
+                   -- it moves on many comuni of one vendor on the same night,
+                   -- that is a connector about to break, and this is where it
+                   -- surfaces first.
+                   OR IFNULL(d.impronta_declinazione, '')
+                      <> IFNULL(p.impronta_declinazione, ''))
+            ORDER BY COALESCE(p.popolazione, 0) DESC
+            """,
+            (da.isoformat(), a.isoformat()),
+        ).fetchall()
+    return [dict(r) for r in righe]
 
 
 def main(argv: list[str] | None = None) -> int:

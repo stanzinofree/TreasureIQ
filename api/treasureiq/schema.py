@@ -317,6 +317,16 @@ class Opportunity(BaseModel):
         description="Administrative tier that published this record (D-20). "
         "Defaulted to COMUNALE so existing municipal seeds validate unchanged.",
     )
+    regione: str | None = Field(
+        default=None,
+        description=(
+            "Which region published this, for `REGIONALE` records only. Without "
+            "it a Sicilian resident was offered a Lazio concession: the same "
+            "class of error as answering about the wrong comune, with a bigger "
+            "label on it. `None` on national and municipal records, where the "
+            "question does not arise."
+        ),
+    )
     extraction_notes: list[str] = Field(
         default_factory=list,
         description="What the extractor was unsure about. Surfaced in the UI "

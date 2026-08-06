@@ -19,6 +19,8 @@ from __future__ import annotations
 import json
 import logging
 import os
+import time
+from collections import defaultdict
 import threading
 from datetime import date, datetime
 from decimal import Decimal
@@ -42,7 +44,14 @@ from treasureiq.chat.respond import (
 )
 from treasureiq.chat.intent import Topic
 from treasureiq.costo import SOGLIA_RISCOPERTA, costo_comune
-from treasureiq.storico import serie
+from treasureiq.storico import (
+    aderenza_fornitori,
+    date_censimento,
+    panoramica_piattaforme,
+    serie,
+    sezioni_mancanti,
+    vincoli_nazionali,
+)
 from treasureiq.integration import (
     MODE_LABELS,
     Ente,
@@ -56,7 +65,7 @@ from treasureiq.match.engine import (
     match,
     summarise,
 )
-from treasureiq.sonda_live import cerca_comuni
+from treasureiq.sonda_live import cerca_comuni, comune_per_codice
 from treasureiq.readiness import ReadinessReport, score_comune
 from treasureiq.recovery import ComuneRecovery, compute_comune_recovery
 from treasureiq.schema import CitizenProfile, Confidence, Livello, Opportunity
@@ -80,10 +89,23 @@ DATA_DIR = Path(os.environ.get("TREASUREIQ_DATA_DIR", REPO_ROOT / "data"))
 SEED_DIR = DATA_DIR / "seed"
 SESSION_COOKIE = "treasureiq_session"
 
-# Demo secret. Real deployments must set TREASUREIQ_SECRET; this default exists
-# so `docker compose up` works out of the box for a reviewer, and is safe only
-# because the session carries no privilege — just a self-declared profile.
-SECRET = os.environ.get("TREASUREIQ_SECRET", "treasureiq-demo-not-secret")
+#: Segreto di firma della sessione. Il default esiste perche' `docker compose
+#: up` deve funzionare senza configurare niente, ma un segreto noto significa
+#: sessioni falsificabili — cioe' un profilo scelto da chi attacca, con l'ISEE
+#: e la disabilita' che vuole lui.
+#:
+#: Percio' fuori da sviluppo l'avvio fallisce invece di proseguire: un default
+#: comodo che non si lamenta e' un default che finisce in produzione.
+SECRET_DI_PROVA = "treasureiq-demo-not-secret"
+SECRET = os.environ.get("TREASUREIQ_SECRET", SECRET_DI_PROVA)
+AMBIENTE = os.environ.get("TREASUREIQ_ENV", "sviluppo").strip().lower()
+
+if SECRET == SECRET_DI_PROVA and AMBIENTE not in {"sviluppo", "dev", "test"}:
+    raise RuntimeError(
+        "TREASUREIQ_SECRET e' rimasto al valore di prova mentre TREASUREIQ_ENV="
+        f"{AMBIENTE!r}. Con un segreto noto le sessioni si falsificano: "
+        "imposta un segreto vero, oppure dichiara l'ambiente come 'sviluppo'."
+    )
 
 #: Comuni whose seed snapshots ship with the repository.
 COMUNI = {
@@ -118,15 +140,103 @@ COMUNI = {
         "seed": "ariccia_058009.json",
         "datasets_on_dati_gov": 0,
     },
+    "046017": {
+        # Citta' d'arte con 287 servizi pubblicati: il catalogo piu' ampio fra i comuni letti.
+        # Misurato il 5 agosto 2026: 287 servizi via `/wp-json/wp/v2/servizi`,
+        # campo requisiti «vuoto», 2 dataset su dati.gov.it.
+        "nome": "Lucca",
+        "ente": "Comune di Lucca",
+        "seed": "lucca_046017.json",
+        "datasets_on_dati_gov": 2,
+    },
+    "062008": {
+        # Uno dei 38 comuni italiani che il campo dei requisiti lo compila davvero: senza almeno
+    # un comune cosi', TreasureIQ potrebbe solo rispondere «il tuo comune non lo dice».
+        # Misurato il 5 agosto 2026: 103 servizi via `/wp-json/wp/v2/servizi`,
+        # campo requisiti «compilato», 11 dataset su dati.gov.it.
+        "nome": "Benevento",
+        "ente": "Comune di Benevento",
+        "seed": "benevento_062008.json",
+        "datasets_on_dati_gov": 11,
+    },
+    "074012": {
+        # Nessun dataset su dati.gov.it e requisiti non pubblicati: il caso ordinario.
+        # Misurato il 5 agosto 2026: 87 servizi via `/wp-json/wp/v2/servizi`,
+        # campo requisiti «vuoto», 0 dataset su dati.gov.it.
+        "nome": "Ostuni",
+        "ente": "Comune di Ostuni",
+        "seed": "ostuni_074012.json",
+        "datasets_on_dati_gov": 0,
+    },
+    "083044": {
+        # Poche centinaia di abitanti e 81 servizi pubblicati: la copertura non dipende dalla
+    # dimensione dell'ente.
+        # Misurato il 5 agosto 2026: 81 servizi via `/wp-json/wp/v2/servizi`,
+        # campo requisiti «vuoto», 0 dataset su dati.gov.it.
+        "nome": "Malvagna",
+        "ente": "Comune di Malvagna",
+        "seed": "malvagna_083044.json",
+        "datasets_on_dati_gov": 0,
+    },
+    "074010": {
+        # Secondo comune con i requisiti compilati, su una piattaforma identica a quella di chi
+    # non li compila: la differenza e' una scelta del comune, non del fornitore.
+        # Misurato il 5 agosto 2026: 79 servizi via `/wp-json/wp/v2/servizi`,
+        # campo requisiti «compilato», 8 dataset su dati.gov.it.
+        "nome": "Mesagne",
+        "ente": "Comune di Mesagne",
+        "seed": "mesagne_074010.json",
+        "datasets_on_dati_gov": 8,
+    },
 }
+
+#: I gruppi in cui Swagger organizza le rotte. Le descrizioni non sono
+#: decorative: dicono a chi legge quale contratto sta guardando, perche' le
+#: quattro famiglie hanno garanzie diverse — una risposta al cittadino non
+#: inventa mai un requisito, una riga di censimento non e' mai una stima.
+TAG_METADATA = [
+    {
+        "name": "Cittadino",
+        "description": (
+            "Cio' che serve a una persona per sapere se ha diritto a qualcosa. "
+            "Nessuna risposta qui contiene un requisito che non sia scritto in un "
+            "documento pubblicato: dove la fonte tace, la risposta dice che tace."
+        ),
+    },
+    {
+        "name": "Censimento nazionale",
+        "description": (
+            "La misura di tutti i portali comunali italiani: su quale piattaforma "
+            "girano, quanto aderiscono al modello AgID, se pubblicano i requisiti "
+            "di accesso. Ogni campo non misurato resta vuoto, mai zero."
+        ),
+    },
+    {
+        "name": "Qualita dei dati",
+        "description": (
+            "Quanto costa leggere cio' che un ente pubblica, e quanto di cio' che "
+            "pubblica e' leggibile. Serve a rendere visibile il lavoro che oggi "
+            "ricade sul cittadino."
+        ),
+    },
+    {"name": "Sistema", "description": "Stato dei componenti e delle fonti."},
+]
 
 app = FastAPI(
     title="TreasureIQ",
     description=(
         "Incrocia gli open data della PA con il profilo del cittadino per "
-        "trovare le opportunita' a cui ha davvero accesso."
+        "trovare le opportunita' a cui ha davvero accesso.\n\n"
+        "**Due garanzie valgono su tutte le rotte.** Un requisito compare solo se "
+        "esiste nel documento pubblicato, citato verbatim; e un campo che non "
+        "abbiamo potuto misurare resta vuoto invece di essere riempito con uno "
+        "zero, perche' su un grafico zero e sconosciuto hanno lo stesso aspetto e "
+        "significato opposto."
     ),
     version=APP_VERSION,
+    openapi_tags=TAG_METADATA,
+    contact={"name": "TreasureIQ", "url": "https://github.com/stanzinofree/TreasureIQ"},
+    license_info={"name": "Vedi LICENSE nel repository"},
 )
 
 # The web client is served from a different origin in development.
@@ -145,6 +255,61 @@ app.add_middleware(
 )
 
 serializer = URLSafeSerializer(SECRET, salt="treasureiq-session")
+
+
+#: Quante domande al modello accettiamo da uno stesso chiamante, e in quanto
+#: tempo.
+#:
+#: La soglia e' bassa di proposito: l'uso legittimo e' una conversazione, non
+#: un ciclo. E il motivo non e' il carico — `/api/chat` invoca un modello,
+#: quindi ogni richiesta ha un costo in denaro, e senza un limite chiunque
+#: conosca l'URL puo' trasformare quel costo in un problema nostro.
+LIMITE_MODELLO = int(os.environ.get("TREASUREIQ_LIMITE_MODELLO", "20"))
+FINESTRA_MODELLO = int(os.environ.get("TREASUREIQ_FINESTRA_MODELLO", "60"))
+
+#: Chiamate recenti per chiamante. In memoria di proposito: un contatore
+#: perfetto vorrebbe uno store condiviso, ma con un processo solo questo
+#: ferma l'abuso vero — che e' un ciclo, non un utente distratto — e non
+#: aggiunge un'altra cosa da tenere in piedi.
+_chiamate_modello: dict[str, list[float]] = defaultdict(list)
+
+
+def _chiamante(request: Request) -> str:
+    """Chi sta chiamando: la sessione se c'e', altrimenti l'indirizzo.
+
+    La sessione viene prima perche' e' piu' precisa di un IP condiviso da un
+    ufficio o da una rete mobile: limitare per IP soltanto punirebbe piu'
+    persone per colpa di una.
+    """
+    cookie = request.cookies.get(SESSION_COOKIE)
+    if cookie:
+        return f"sessione:{cookie[:32]}"
+    client = request.client
+    return f"ip:{client.host if client else 'ignoto'}"
+
+
+def limita_modello(request: Request) -> None:
+    """Ferma chi chiama il modello troppo spesso. Solleva 429 con `Retry-After`.
+
+    Il `Retry-After` non e' cortesia formale: senza, un client automatico
+    riprova subito e trasforma il limite in un ciclo piu' stretto.
+    """
+    ora = time.monotonic()
+    chiave = _chiamante(request)
+    recenti = [t for t in _chiamate_modello[chiave] if ora - t < FINESTRA_MODELLO]
+    if len(recenti) >= LIMITE_MODELLO:
+        attesa = int(FINESTRA_MODELLO - (ora - recenti[0])) + 1
+        _chiamate_modello[chiave] = recenti
+        raise HTTPException(
+            status_code=429,
+            detail=(
+                f"Troppe domande in poco tempo: al massimo {LIMITE_MODELLO} "
+                f"ogni {FINESTRA_MODELLO} secondi."
+            ),
+            headers={"Retry-After": str(attesa)},
+        )
+    recenti.append(ora)
+    _chiamate_modello[chiave] = recenti
 
 
 #: Hand-curated national/regional layer (D-20). Reachable through every comune's
@@ -546,7 +711,7 @@ class ComuneScelta(BaseModel):
     ha_portale: bool
 
 
-@app.get("/api/comuni", response_model=list[ComuneScelta])
+@app.get("/api/comuni", response_model=list[ComuneScelta], tags=["Cittadino"])
 def comuni(q: str = "") -> list[ComuneScelta]:
     """Cerca fra i 7.896 comuni italiani, per far scegliere invece di indovinare.
 
@@ -720,8 +885,33 @@ def to_info_out(info: InfoAnswer) -> InfoOut:
     )
 
 
+class ProfiloCapitoOut(BaseModel):
+    """Quello che TreasureIQ ha capito di te, restituito perche' tu lo veda.
+
+    Serve a due cose diverse e ugualmente importanti. La prima e' fiducia: chi
+    legge una risposta su diritti propri deve poter controllare su quali dati
+    e' stata costruita. La seconda e' correzione: se abbiamo capito «Pergine
+    Valsugana» e intendevi «Pergine Valdarno», l'unico modo perche' tu te ne
+    accorga e' vederlo scritto.
+
+    Ogni campo non capito resta vuoto, mai riempito con un valore di comodo.
+    """
+
+    comune_nome: str | None = None
+    comune_istat: str | None = None
+    comune_coperto: bool | None = None
+    eta: int | None = None
+    isee: str | None = None
+    nucleo_familiare: int | None = None
+    figli_minori: int | None = None
+    disabilita: bool | None = None
+
+
 class ChatOut(BaseModel):
     reply: str
+    #: Cosa abbiamo capito della domanda. Il pannello laterale lo mostra come
+    #: filtri attivi, cosi' il cittadino puo' smentirci.
+    profilo_capito: ProfiloCapitoOut | None = None
     topic: str
     kind: str
     data_gap: str | None
@@ -733,6 +923,42 @@ class ChatOut(BaseModel):
     info: InfoOut | None
     matches: list[MatchOut]
     cost: CostOut
+
+
+def _profilo_capito(*, answer, profile, message: str) -> ProfiloCapitoOut:
+    """Cosa abbiamo capito, messo in chiaro perche' il cittadino possa smentirlo.
+
+    Le cifre le rilegge l'estrazione deterministica invece di fidarsi di cosa
+    ha capito il modello: e' la stessa regola che vale per le soglie nei
+    verdetti, e qui serve anche a non mostrare a schermo un'eta' che nessuno
+    ha scritto.
+    """
+    from treasureiq.chat.intent import slot_dal_testo
+    from treasureiq.chat.respond import _comune_nominato
+
+    letti = slot_dal_testo(message)
+    nominato = _comune_nominato(message)
+    comune = nominato or (comune_per_codice(profile.comune_istat) if profile else None)
+    coperto = comune.codice_istat in load_enti() if comune is not None else None
+
+    return ProfiloCapitoOut(
+        comune_nome=(
+            f"{comune.nome} ({comune.provincia})"
+            if comune is not None and getattr(comune, "provincia", None)
+            else (comune.nome if comune is not None else None)
+        ),
+        comune_istat=comune.codice_istat if comune is not None else None,
+        comune_coperto=coperto,
+        eta=letti.get("eta") or (profile.eta if profile else None),
+        isee=(
+            str(letti["isee"])
+            if "isee" in letti
+            else (str(profile.isee) if profile and profile.isee is not None else None)
+        ),
+        nucleo_familiare=profile.nucleo_familiare if profile else None,
+        figli_minori=profile.figli_minori if profile else None,
+        disabilita=profile.disabilita if profile else None,
+    )
 
 
 def to_readiness_out(report: ReadinessReport) -> ReadinessOut:
@@ -950,12 +1176,12 @@ class SegnalazioneIn(BaseModel):
 # --------------------------------------------------------------------------
 
 
-@app.get("/api/health")
+@app.get("/api/health", tags=["Sistema"])
 def health() -> dict[str, object]:
     return {"status": "ok", "comuni": list(COMUNI)}
 
 
-@app.post("/api/session", response_model=CitizenProfile)
+@app.post("/api/session", response_model=CitizenProfile, tags=["Cittadino"])
 def create_session(body: LoginRequest, response: Response) -> CitizenProfile:
     """Mock SPID login. Issues a signed cookie carrying the profile.
 
@@ -989,18 +1215,18 @@ def create_session(body: LoginRequest, response: Response) -> CitizenProfile:
     return profile
 
 
-@app.delete("/api/session")
+@app.delete("/api/session", tags=["Cittadino"])
 def end_session(response: Response) -> dict[str, str]:
     response.delete_cookie(SESSION_COOKIE)
     return {"status": "logged_out"}
 
 
-@app.get("/api/me", response_model=CitizenProfile)
+@app.get("/api/me", response_model=CitizenProfile, tags=["Cittadino"])
 def me(profile: CitizenProfile = Depends(current_profile)) -> CitizenProfile:
     return profile
 
 
-@app.get("/api/opportunities", response_model=list[MatchOut])
+@app.get("/api/opportunities", response_model=list[MatchOut], tags=["Cittadino"])
 def opportunities(
     profile: CitizenProfile = Depends(current_profile),
     include_ineligible: bool = False,
@@ -1108,7 +1334,7 @@ class PanoramicaOut(BaseModel):
     gradini: dict[str, int]
 
 
-@app.get("/api/panoramica", response_model=PanoramicaOut)
+@app.get("/api/panoramica", response_model=PanoramicaOut, tags=["Qualita dei dati"])
 def panoramica() -> PanoramicaOut:
     """One aggregate picture of everything read so far."""
     tutti: list[Opportunity] = []
@@ -1165,7 +1391,7 @@ def panoramica() -> PanoramicaOut:
     )
 
 
-@app.get("/api/costo", response_model=list[CostoOut])
+@app.get("/api/costo", response_model=list[CostoOut], tags=["Qualita dei dati"])
 def costi() -> list[CostoOut]:
     """Every measured comune's integration cost, cheapest per record first.
 
@@ -1191,7 +1417,7 @@ class PuntoStoricoOut(BaseModel):
     scoperta_scaduta: bool
 
 
-@app.get("/api/storico", response_model=list[PuntoStoricoOut])
+@app.get("/api/storico", response_model=list[PuntoStoricoOut], tags=["Qualita dei dati"])
 def storico(codice_istat: str | None = None) -> list[PuntoStoricoOut]:
     """Dated cost observations, oldest first.
 
@@ -1219,7 +1445,7 @@ def storico(codice_istat: str | None = None) -> list[PuntoStoricoOut]:
     ]
 
 
-@app.get("/api/readiness/{codice_istat}", response_model=ReadinessOut)
+@app.get("/api/readiness/{codice_istat}", response_model=ReadinessOut, tags=["Qualita dei dati"])
 def readiness(codice_istat: str) -> ReadinessOut:
     """Public — no session required. The score is about the comune, not a person."""
     meta = COMUNI.get(codice_istat)
@@ -1235,12 +1461,12 @@ def readiness(codice_istat: str) -> ReadinessOut:
     return to_readiness_out(report)
 
 
-@app.get("/api/readiness", response_model=list[ReadinessOut])
+@app.get("/api/readiness", response_model=list[ReadinessOut], tags=["Qualita dei dati"])
 def readiness_all() -> list[ReadinessOut]:
     return [readiness(istat) for istat in COMUNI]
 
 
-@app.get("/api/recovery/{codice_istat}", response_model=RecoveryOut)
+@app.get("/api/recovery/{codice_istat}", response_model=RecoveryOut, tags=["Qualita dei dati"])
 def recovery(codice_istat: str) -> RecoveryOut:
     """Public — what it cost to make this comune's data machine-readable."""
     meta = COMUNI.get(codice_istat)
@@ -1255,12 +1481,12 @@ def recovery(codice_istat: str) -> RecoveryOut:
     )
 
 
-@app.get("/api/recovery", response_model=list[RecoveryOut])
+@app.get("/api/recovery", response_model=list[RecoveryOut], tags=["Qualita dei dati"])
 def recovery_all() -> list[RecoveryOut]:
     return [recovery(istat) for istat in COMUNI]
 
 
-@app.get("/api/integration", response_model=list[IntegrationOut])
+@app.get("/api/integration", response_model=list[IntegrationOut], tags=["Qualita dei dati"])
 def integration() -> list[IntegrationOut]:
     """Public — per-ente access mode + integration cost (D-21).
 
@@ -1273,7 +1499,7 @@ def integration() -> list[IntegrationOut]:
     return [to_integration_out(ente) for ente in load_enti().values()]
 
 
-@app.get("/api/stats", response_model=StatsOut)
+@app.get("/api/stats", response_model=StatsOut, tags=["Qualita dei dati"])
 def stats() -> StatsOut:
     """Public headline numbers for the landing page — no session required.
 
@@ -1293,13 +1519,13 @@ def stats() -> StatsOut:
     return to_stats_out(compute_app_stats(comuni=COMUNI, records_by_comune=records_by_comune))
 
 
-@app.get("/api/status", response_model=StatusOut)
+@app.get("/api/status", response_model=StatusOut, tags=["Sistema"])
 def status() -> StatusOut:
     """Public system status — derived from disk, never a live probe (see `stats.py`)."""
     return to_status_out(build_system_status(comuni=COMUNI, seed_dir=SEED_DIR))
 
 
-@app.get("/api/comune-nearby", response_model=NearbyOut)
+@app.get("/api/comune-nearby", response_model=NearbyOut, tags=["Cittadino"])
 def comune_nearby(lat: float, lon: float) -> NearbyOut:
     """Resolve a device coordinate to a supported comune.
 
@@ -1318,7 +1544,7 @@ def comune_nearby(lat: float, lon: float) -> NearbyOut:
     )
 
 
-@app.post("/api/segnalazioni")
+@app.post("/api/segnalazioni", tags=["Cittadino"])
 def create_segnalazione(body: SegnalazioneIn) -> dict[str, int]:
     """Record that a citizen generated an open-data request for one comune.
 
@@ -1331,7 +1557,7 @@ def create_segnalazione(body: SegnalazioneIn) -> dict[str, int]:
     return {body.codice_istat: _increment_segnalazione(body.codice_istat)}
 
 
-@app.get("/api/segnalazioni")
+@app.get("/api/segnalazioni", tags=["Cittadino"])
 def get_segnalazioni() -> dict[str, int]:
     """Public per-comune counter — itself the published fact D-25 asks for."""
     return _read_segnalazioni()
@@ -1362,7 +1588,7 @@ class ApprofondimentoOut(BaseModel):
     pagine: list[PaginaWebOut] = []
 
 
-@app.post("/api/approfondimento", response_model=ApprofondimentoOut)
+@app.post("/api/approfondimento", response_model=ApprofondimentoOut, tags=["Cittadino"], dependencies=[Depends(limita_modello)])
 def approfondimento(body: ApprofondimentoIn, request: Request) -> ApprofondimentoOut:
     """Ask explicitly what the citizen's own comune published on a topic.
 
@@ -1417,7 +1643,7 @@ def approfondimento(body: ApprofondimentoIn, request: Request) -> Approfondiment
     )
 
 
-@app.post("/api/chat", response_model=ChatOut)
+@app.post("/api/chat", response_model=ChatOut, tags=["Cittadino"], dependencies=[Depends(limita_modello)])
 async def chat(body: ChatIn, request: Request) -> ChatOut:
     """Anonymous-by-default chat over Albano public data.
 
@@ -1485,6 +1711,7 @@ async def chat(body: ChatIn, request: Request) -> ChatOut:
 
     return ChatOut(
         reply=answer.reply,
+        profilo_capito=_profilo_capito(answer=answer, profile=profile, message=body.message),
         topic=answer.topic.value,
         kind=answer.kind.value,
         data_gap=answer.data_gap,
@@ -1503,3 +1730,143 @@ async def chat(body: ChatIn, request: Request) -> ChatOut:
             levels=stats.levels,
         ),
     )
+
+
+class PiattaformaOut(BaseModel):
+    """Quanti comuni girano su una piattaforma, e quanto pubblicano."""
+
+    piattaforma: str
+    comuni: int
+    popolazione: int | None = None
+    servizi: int
+    con_catalogo: int
+    #: In quante regioni compare, e quanto pesa nella sua principale. Un
+    #: prodotto nazionale sta ovunque; una piattaforma regionale sta in una
+    #: regione sola, ed è una differenza che il conteggio dei comuni nasconde.
+    regioni: int = 0
+    regione_prima: str | None = None
+    comuni_prima: int = 0
+
+
+class FornitoreOut(BaseModel):
+    """L'aderenza al modello AgID di un fornitore, con la sua base di misura.
+
+    `base_misura` non è un dettaglio da nascondere in fondo: raggruppare
+    `modello_intero` e `schema_esposto` in una classifica sola mette ultimo il
+    fornitore più conforme, perché la sua API serializza due box su undici.
+    """
+
+    piattaforma: str
+    base_misura: str | None = None
+    comuni: int
+    misurati: int
+    aderenza_media: float | None = None
+    aderenza_minima: float | None = None
+    impronte: int
+
+
+class SezioneOut(BaseModel):
+    sezione: str
+    manca_su: int
+    misurati: int
+
+
+class VincoliOut(BaseModel):
+    """Quanti comuni pubblicano i requisiti di accesso, e quanti no.
+
+    `assente` e' una scelta del fornitore, `vuoto` una del comune: tenerli
+    distinti e' la ragione per cui questa misura vale qualcosa.
+    """
+
+    stato: str
+    comuni: int
+
+
+class CensimentoOut(BaseModel):
+    rilevato_il: date | None = None
+    date_disponibili: list[date] = []
+    piattaforme: list[PiattaformaOut] = []
+    fornitori: list[FornitoreOut] = []
+    sezioni_mancanti: list[SezioneOut] = []
+    vincoli: list[VincoliOut] = []
+
+
+@app.get("/api/censimento", response_model=CensimentoOut, tags=["Censimento nazionale"])
+def censimento() -> CensimentoOut:
+    """Il censimento dei portali comunali, nell'ultimo rilevamento.
+
+    Vuoto finché nessuno sweep è stato registrato, che è lo stato normale di
+    un checkout fresco: le pagine disegnano un censimento vuoto invece di un
+    errore, perché non aver ancora misurato non è un guasto.
+    """
+    giorni = date_censimento(STORICO_DB)
+    if not giorni:
+        return CensimentoOut()
+    ultimo = giorni[-1]
+    return CensimentoOut(
+        rilevato_il=ultimo,
+        date_disponibili=giorni,
+        piattaforme=[PiattaformaOut(**r) for r in _senza(panoramica_piattaforme(STORICO_DB))],
+        fornitori=[FornitoreOut(**r) for r in _senza(aderenza_fornitori(STORICO_DB))],
+        sezioni_mancanti=[SezioneOut(**r) for r in sezioni_mancanti(STORICO_DB)],
+        vincoli=[VincoliOut(**r) for r in vincoli_nazionali(STORICO_DB)],
+    )
+
+
+def _senza(righe: list[dict]) -> list[dict]:
+    """Toglie la data ripetuta su ogni riga: sta già in testa alla risposta."""
+    return [{k: v for k, v in r.items() if k != "rilevato_il"} for r in righe]
+
+
+class ConnettoreOut(BaseModel):
+    """Una piattaforma e quanto sappiamo leggerla, oggi."""
+
+    piattaforma: str
+    #: `catalogo` = sappiamo contarne i servizi. `modello` = sappiamo leggerne
+    #: le schede col modello AgID. `firma` = la riconosciamo e basta.
+    livello: str
+    firma: str
+    rotta_servizi: str | None = None
+    note: str | None = None
+
+
+@app.get("/api/connettori", response_model=list[ConnettoreOut], tags=["Censimento nazionale"])
+def connettori() -> list[ConnettoreOut]:
+    """Il catalogo delle sonde: cosa sappiamo leggere, piattaforma per piattaforma.
+
+    Costruito dal codice, non da una tabella scritta a mano: una piattaforma
+    che perde la sua declinazione sparisce da qui il giorno stesso, invece di
+    restare in vetrina a promettere una lettura che non facciamo più.
+    """
+    from treasureiq.ingest.censimento import _ROTTE_SERVIZI
+    from treasureiq.ingest.modello_agid import DECLINAZIONI
+    from treasureiq.ingest.piattaforma import Piattaforma
+
+    fuori_catalogo = {Piattaforma.IGNOTA, Piattaforma.NON_MISURATA}
+    esiti: list[ConnettoreOut] = []
+    for piattaforma in Piattaforma:
+        if piattaforma in fuori_catalogo:
+            continue
+        rotta = _ROTTE_SERVIZI.get(piattaforma)
+        ha_modello = piattaforma.value in DECLINAZIONI
+        wp = piattaforma is Piattaforma.WP_DESIGN_COMUNI
+        if ha_modello and (rotta or wp):
+            livello = "modello"
+        elif wp:
+            livello = "catalogo"
+        else:
+            livello = "firma"
+        esiti.append(
+            ConnettoreOut(
+                piattaforma=piattaforma.value,
+                livello=livello,
+                firma="riconosciuta",
+                rotta_servizi=(rotta[0] if rotta else ("/wp-json/wp/v2/servizi" if wp else None)),
+                note=(
+                    "campi tipizzati: si distingue esposto da compilato"
+                    if wp
+                    else None
+                ),
+            )
+        )
+    return esiti

@@ -81,6 +81,58 @@ SOURCES = [
         "connector": "html",
         "listing_paths": ("/",),
     },
+    # ── Comuni entrati dal censimento nazionale del 5 agosto 2026 ────────────
+    #
+    # Fino a questo punto la lista era scritta a mano perche' non sapevamo
+    # quali altri comuni fossero leggibili. Ora il censimento lo dice per tutti
+    # e 7.896: questi cinque sono su `wp_design_comuni`, cioe' esattamente il
+    # tema che `wp_rest` gia' legge, scelti per coprire nord, centro, sud e
+    # isole invece dei soli Castelli Romani.
+    #
+    # Benevento e Mesagne sono la ragione principale della scelta: sono fra i
+    # 38 comuni italiani che il campo dei requisiti lo compilano davvero.
+    # Senza almeno un comune cosi', TreasureIQ puo' solo rispondere «il tuo
+    # comune non lo dice» — vero, ma indistinguibile da un sistema che non sa
+    # cercare.
+    {
+        "codice_istat": "046017",
+        "ente": "Comune di Lucca",
+        "base_url": "https://www.comune.lucca.it",
+        "seed": "lucca_046017.json",
+        "connector": "wp_rest",
+    },
+    {
+        # Requisiti pubblicati: il caso positivo che mancava alla demo.
+        "codice_istat": "062008",
+        "ente": "Comune di Benevento",
+        "base_url": "https://comune.benevento.it",
+        "seed": "benevento_062008.json",
+        "connector": "wp_rest",
+    },
+    {
+        "codice_istat": "074012",
+        "ente": "Comune di Ostuni",
+        "base_url": "https://www.comune.ostuni.br.it",
+        "seed": "ostuni_074012.json",
+        "connector": "wp_rest",
+    },
+    {
+        # Comune piccolo e isolano: serve a mostrare che la copertura non
+        # dipende dalla dimensione dell'ente.
+        "codice_istat": "083044",
+        "ente": "Comune di Malvagna",
+        "base_url": "https://www.comune.malvagna.me.it",
+        "seed": "malvagna_083044.json",
+        "connector": "wp_rest",
+    },
+    {
+        # Requisiti pubblicati, come Benevento.
+        "codice_istat": "074010",
+        "ente": "Comune di Mesagne",
+        "base_url": "https://www.comune.mesagne.br.it",
+        "seed": "mesagne_074010.json",
+        "connector": "wp_rest",
+    },
 ]
 
 

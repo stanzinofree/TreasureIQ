@@ -175,6 +175,21 @@ export default async function Monitoraggio() {
           Non un cruscotto di uptime: un&apos;istantanea onesta di cosa c&apos;è
           davvero.
         </p>
+        {/* Il sito misura due popolazioni diverse e senza questo riquadro
+            sembrerebbe contraddirsi: 91 servizi qui, 57.603 in Analytics.
+            Sono due domande diverse, e il fatto che convergano e' il
+            risultato piu' forte che abbiamo — ma solo se lo diciamo. */}
+        <p className="lede">
+          <strong>Questa pagina misura i comuni che TreasureIQ legge oggi</strong>,
+          servizio per servizio. Per la misura su <em>tutti</em> i comuni italiani
+          — 7.896 portali censiti — c&apos;è <a href="/analytics">Analytics</a>.
+        </p>
+        <p className="lede">
+          Le due strade non si parlano e arrivano alla stessa conclusione: qui
+          quasi tutti i servizi letti non pubblicano condizioni verificabili, là
+          il <strong>94%</strong> dei comuni ha il campo dei requisiti e lo lascia
+          vuoto. Metodi diversi, popolazioni diverse, stesso risultato.
+        </p>
       </section>
 
       {/* The ladder goes above the three status groups on purpose. Those

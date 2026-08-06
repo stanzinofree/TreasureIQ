@@ -19,3 +19,4 @@ anthropic>=0.120,<1.0
 # PDF (D-15). Without it, PDF attachments are skipped and logged rather than
 # failing the run — install it to recover requirements locked in bandi PDFs.
 pypdf>=5.1,<6.0
+snowballstemmer>=3.0

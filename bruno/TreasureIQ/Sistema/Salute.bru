@@ -1,0 +1,16 @@
+meta {
+  name: Salute
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{base}}/api/health
+  body: none
+  auth: none
+}
+
+docs {
+  Risponde anche quando le fonti sono ferme: dice che il servizio e' in piedi,
+  non che i dati siano freschi. Per quello serve `Stato sistemi`.
+}

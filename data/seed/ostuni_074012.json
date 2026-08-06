@@ -1,0 +1,4480 @@
+[
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1770",
+  "title": "Richiedere permesso per passo carrabile",
+  "summary": "È necessario allegare: in caso di richiesta inoltrata da un delegato, delega e documento d'identità del beneficiario del servizio; | in caso di richiesta inoltrata dall'amministratore di condominio, mandato dell'assemblea condominiale; | in caso di voltura, copia della concessione da volturare (non obbligatoria ) e numero del cartello (se disponibile); | in caso di voltura o cessazione, numero del",
+  "body": "È necessario allegare: in caso di richiesta inoltrata da un delegato, delega e documento d'identità del beneficiario del servizio; | in caso di richiesta inoltrata dall'amministratore di condominio, mandato dell'assemblea condominiale; | in caso di voltura, copia della concessione da volturare (non obbligatoria ) e numero del cartello (se disponibile); | in caso di voltura o cessazione, numero della concessione (se disponibile); | versamento dei diritti di segreteria di € 30,00 attraverso il PORTALE DEI PAGAMENTI (PAGOPA) attivo sulla homepage del sito istituzionale comune.ostuni.br.it , scegliendo la voce “Altre tipologie di pagamento” – “Diritti di segreteria e spese di notifica” | Per utilizzare il servizio online occorre avere: | SPID | CIE",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-02-25",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/richiedere-permesso-per-passo-carrabile/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1770",
+   "fetched_at": "2026-08-05T16:06:39.402401Z",
+   "raw_hash": "8103425ce48606d4"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1769",
+  "title": "Richiesta contrassegno unificato disabili europeo",
+  "summary": "Per la richiesta presso l'ufficio servono: 2 fototessera recenti; | copia del documento di identità del richiedente (da non allegare se l'istanza è presentata in modalità telematica); | in caso di prima richiesta, certificato rilasciato dall'Azienda Sanitaria Locale che certifichi le problematiche di deambulazione; | in caso di rinnovo, certificato del medico curante; | in caso di furto o smarrime",
+  "body": "Per la richiesta presso l'ufficio servono: 2 fototessera recenti; | copia del documento di identità del richiedente (da non allegare se l'istanza è presentata in modalità telematica); | in caso di prima richiesta, certificato rilasciato dall'Azienda Sanitaria Locale che certifichi le problematiche di deambulazione; | in caso di rinnovo, certificato del medico curante; | in caso di furto o smarrimento del permesso, copia della denuncia di furto o smarrimento; | per i contrassegni temporanei: 2 marche da bollo da 16 euro. | Per la richiesta tramite il portale online e' richiesta identita' digitale | Spid/CIE",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-02-25",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/richiedere-permesso-per-parcheggio-invalidi/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1769",
+   "fetched_at": "2026-08-05T16:06:39.402909Z",
+   "raw_hash": "7f75c2c31a753121"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1767",
+  "title": "Richiedere permesso di accesso ad area ZTL",
+  "summary": "Per utilizzare il servizio online occorre",
+  "body": "Per utilizzare il servizio online occorre | SPID | CIE",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-02-25",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/richiedere-permesso-di-accesso-ad-area-ztl/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1767",
+   "fetched_at": "2026-08-05T16:06:39.403066Z",
+   "raw_hash": "8048bf88dbdc6dd0"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1766",
+  "title": "Richiedere l’accesso agli atti",
+  "summary": "Se l'istanza è presentata tramite PEC è necessario allegare un documento d'identità in corso di validità o firmare digitalmente il modello di richiesta Per utilizzare il servizio online occorre avere:",
+  "body": "Se l'istanza è presentata tramite PEC è necessario allegare un documento d'identità in corso di validità o firmare digitalmente il modello di richiesta Per utilizzare il servizio online occorre avere: | SPID | CIE",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-02-24",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/richiesta-di-accesso-agli-atti/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1766",
+   "fetched_at": "2026-08-05T16:06:39.403263Z",
+   "raw_hash": "585af130b19ecac1"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1752",
+  "title": "Comunicazione delle attività di locazione breve",
+  "summary": "OBBLIGHI RELATIVI AL CIN – CODICE IDENTIFICATIVO NAZIONALE: In base all’ art. 13-ter (Disciplina delle locazioni per finalità turistiche, delle locazioni brevi, delle attività turistico-ricettive e del codice identificativo nazionale) del Decreto Legge 18 ottobre 2023, n. 145, convertito con modificazioni dalla L. 15 dicembre 2023, n. 191 , i gestori delle locazioni turistiche (sia in forma impren",
+  "body": "OBBLIGHI RELATIVI AL CIN – CODICE IDENTIFICATIVO NAZIONALE: In base all’ art. 13-ter (Disciplina delle locazioni per finalità turistiche, delle locazioni brevi, delle attività turistico-ricettive e del codice identificativo nazionale) del Decreto Legge 18 ottobre 2023, n. 145, convertito con modificazioni dalla L. 15 dicembre 2023, n. 191 , i gestori delle locazioni turistiche (sia in forma imprenditoriale sia in forma non imprenditoriale) devono registrarsi nella BDSR – Banca Dati nazionale delle Strutture Ricettive ( https://bdsr.ministeroturismo.gov.it/ ), gestita dal Ministero del Turismo. Ciò al fine di acquisire il CIN – Codice Identificativo Nazionale , previa registrazione nella Banca Dati delle Strutture Ricettive e delle Locazioni Turistiche della Regione Puglia (attraverso il portale www.dms.puglia.it ) per ottenere il CIR – Codice Identificativo . Il CIN va richiesto entro 30 giorni dalla data di attribuzione del Codice Identificativo Regionale. Ai sensi del comma 6 dell’art. 13-ter , chiunque propone o concede in locazione, per finalità turistiche, una unità immobiliare ad uso abitativo o una porzione di essa, è tenuto ad esporre il CIN all’esterno dello stabile in cui è collocato l’appartamento, assicurando il rispetto di eventuali vincoli urbanistici e paesaggistici, nonché ad indicarlo in ogni annuncio ovunque pubblicato e comunicato. I soggetti che esercitano attività di intermediazione immobiliare e i soggetti che gestiscono portali telematici hanno l’obbligo di indicare, negli annunci ovunque pubblicati e comunicati, il CIN dell'unità immobiliare destinata alla locazione per finalità turistiche. REQUISITI DI SICUREZZA DEGLI IMMOBILI: Le unità immobiliari ad uso abitativo oggetto di locazione per finalità turistiche, gestite nelle forme imprenditoriali, sono munite dei requisiti di sicurezza degli impianti, come prescritti dalla normativa statale e regionale vigente. In ogni caso, tutte le unità immobiliari (sia gestite in forma imprenditoriale, sia gestite in forma non imprenditoriale) sono dotate di dispositivi per la rilevazione di gas combustibili e del monossido di carbonio funzionanti nonché di estintori portatili a norma di legge da ubicare in posizioni accessibili e visibili, in particolare in prossimità degli accessi e in vicinanza delle aree di maggior pericolo e, in ogni caso, da installare in ragione di uno ogni 200 metri quadrati di pavimento, o frazione, con un minimo di un estintore per piano. Per la tipologia di estintori si fa riferimento alle indicazioni contenute al punto 4.4 dell'allegato I al decreto del Ministro dell'interno 3 settembre 2021, pubblicato nella Gazzetta Ufficiale n. 259 del 29 ottobre 2021. POLIZZA ASSICURATIVA: In base al comma 11 dell’art. 10 bis della legge regionale n. 49/2017 e ss. mm. e ii. , così come modificato dall'articolo 15 della legge regionale n. 15/2025, i soggetti che esercitano l’attività di locazione turistica, imprenditoriale o non imprenditoriale, sono tenuti a stipulare una polizza assicurativa per i rischi derivanti dalla responsabilità civile verso i clienti, commisurata alla capacità ricettiva. ULTERIORI ADEMPIMENTI: I gestori delle locazioni turistiche (imprenditoriali e non imprenditoriali) devono ottemperare anche ai seguenti adempimenti: trasmettere all’ARET Pugliapromozione, tramite il sistema applicativo SPOT Easy (clicca qui per scaricare il manuale utente), i dati sulla movimentazione turistica (arrivi, partenze, assenza di movimento ed esercizio chiuso) a fini statistici; per maggiori informazioni consultare anche la sezione “Come fare per” del portale www.dms.puglia.it ; | osservare gli obblighi previsti dall’ art. 109 del Testo unico delle leggi di pubblica sicurezza, di cui al regio decreto 18 giugno 1931, n. 773 utilizzando il portale alloggiatiweb.poliziadistato.it ; | riscuotere dagli alloggiati e riversare al Comune territorialmente competente l’imposta di soggiorno | comunicare tempestivamente allo Sportello Unico per le Attività Produttive eventuali periodi di sospensione temporanea dell’attività; | comunicare tempestivamente allo Sportello Unico per le Attività Produttive l’eventuale cessazione dell’attività. | OBBLIGHI RELATIVI AL CIN – CODICE IDENTIFICATIVO NAZIONALE | REQUISITI DI SICUREZZA DEGLI IMMOBILI | POLIZZA ASSICURATIVA | ULTERIORI ADEMPIMENTI INDICATI",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-23",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/comunicazione-delle-attivita-di-locazione-breve/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1752",
+   "fetched_at": "2026-08-05T16:06:39.405641Z",
+   "raw_hash": "bb1296a704a7ae41"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1713",
+  "title": "CUP – Canone unico patrimoniale",
+  "summary": null,
+  "body": null,
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-16",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/canone-unico-patrimoniale/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1713",
+   "fetched_at": "2026-08-05T16:06:39.405931Z",
+   "raw_hash": "2603e3519a56529d"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1712",
+  "title": "TARI – Tassa sui Rifiuti",
+  "summary": "Per poter accedere al servizio serve:",
+  "body": "Per poter accedere al servizio serve: | atto di acquisto o contratto di locazione/comodato d’uso | visura camerale | planimetria dell’immobile",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-16",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/tari/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1712",
+   "fetched_at": "2026-08-05T16:06:39.406126Z",
+   "raw_hash": "882719f1c98db464"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1703",
+  "title": "IMU – Imposta municipale propria",
+  "summary": "Per effettuare il calcolo ed il pagamento è necessario conoscere:",
+  "body": "Per effettuare il calcolo ed il pagamento è necessario conoscere: | i dati catastali dei propri immobili; | il valore delle aliquote deliberate dal comune. L'ufficio mette a disposizione tutte le informazioni per poter procedere al corretto adempimento dell'Imposta municipale propria (IMU) attraverso la modulistica e le delibere comunali, ma non effettua il conteggio dell'imposta ordinaria.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-09",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/consultare-la-tua-situazione-contributiva-imu/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1703",
+   "fetched_at": "2026-08-05T16:06:39.406401Z",
+   "raw_hash": "550fdd4a8a7bf2bb"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1693",
+  "title": "Imposta di soggiorno",
+  "summary": "Attenersi al manuale d'uso",
+  "body": "Attenersi al manuale d'uso | Credenziali d'accesso | Per il completamento degli adempimenti annualità 2025, sarà operativo fino al 31/01/2026 il portale TOURIST TAX",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-09",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/imposta-di-soggiorno/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1693",
+   "fetched_at": "2026-08-05T16:06:39.406566Z",
+   "raw_hash": "92ebcd18a0e7c3d6"
+  },
+  "confidence": "declared",
+  "livello": "comunale",
+  "extraction_notes": [],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1690",
+  "title": "Pagamenti con PagoPA",
+  "summary": "Per i pagamenti spontanei, non serve alcuna documentazione.",
+  "body": "Per i pagamenti spontanei, non serve alcuna documentazione. | Per i pagamenti non spontanei, serve l'avviso di pagamento.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-09",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/pagamenti-con-pagopa/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1690",
+   "fetched_at": "2026-08-05T16:06:39.406690Z",
+   "raw_hash": "81fc1e050f49f07b"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1689",
+  "title": "Identità SPID in Comune",
+  "summary": "un documento italiano in corso di validità (carta di identità, patente, passaporto) | la tua tessera sanitaria (o tesserino codice fiscale, o il certificato di attribuzione di uno dei due) | la tua e-mail e il tuo numero di cellulare",
+  "body": "un documento italiano in corso di validità (carta di identità, patente, passaporto) | la tua tessera sanitaria (o tesserino codice fiscale, o il certificato di attribuzione di uno dei due) | la tua e-mail e il tuo numero di cellulare",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-09",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/identita-spid-in-comune/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1689",
+   "fetched_at": "2026-08-05T16:06:39.406844Z",
+   "raw_hash": "c59fb1c96c57a8cf"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1684",
+  "title": "Iscrizione al Forum della Società Civile",
+  "summary": "Copia dello statuto | Copia dell'atto costitutivo debitamente sottoscritto",
+  "body": "Copia dello statuto | Copia dell'atto costitutivo debitamente sottoscritto",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-08",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/iscrizione-al-forum-della-societa-civile/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1684",
+   "fetched_at": "2026-08-05T16:06:39.406987Z",
+   "raw_hash": "864c83661b674b74"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1658",
+  "title": "Anagrafe Online – Accesso alla banca dati Anagrafe",
+  "summary": "In caso di disponibilità di accesso al servizio online, assicurati di avere:",
+  "body": "In caso di disponibilità di accesso al servizio online, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) | tutta la documentazione prevista per la presentazione della pratica",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-07",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/anagrafe-online-accesso-alla-banca-dati-anagrafe/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1658",
+   "fetched_at": "2026-08-05T16:06:39.407258Z",
+   "raw_hash": "f6125fb62866baed"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1623",
+  "title": "Cittadini stranieri (non comunitari) iscrizione anagrafica",
+  "summary": "Per accedere al servizio occorre:",
+  "body": "Per accedere al servizio occorre: | La documentazione necessaria per l'iscrizione in ANPR",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-10-17",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/cittadini-stranieri-non-comunitari-iscrizione-anagrafica/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1623",
+   "fetched_at": "2026-08-05T16:06:39.407426Z",
+   "raw_hash": "39501b0ab31a9c4d"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1622",
+  "title": "Cittadini dell’Unione Europea: iscrizione anagrafica",
+  "summary": "In caso di iscrizione anagrafica con provenienza dall'estero o per ricomparsa (per l'iscrizione con provenienza da altro Comune italiano è sufficiente il possesso dei requisiti anagrafici), è sempre necessario presentare, alternativamente, la seguente documentazione: | documento di identità valida per l’espatrio o passaporto; | per i familiari, idonea documentazione rilasciata dall'autorità del Pa",
+  "body": "In caso di iscrizione anagrafica con provenienza dall'estero o per ricomparsa (per l'iscrizione con provenienza da altro Comune italiano è sufficiente il possesso dei requisiti anagrafici), è sempre necessario presentare, alternativamente, la seguente documentazione: | documento di identità valida per l’espatrio o passaporto; | per i familiari, idonea documentazione rilasciata dall'autorità del Paese di origine attestante il legame familiare. | Per i familiari non comunitari: passaporto e carta di soggiorno rilasciata dalla Questura. | Di seguito è riportata la documentazione necessaria per l'iscrizione delle varie categorie di cittadini, e le eventuali situazioni particolari. Iscrizione dall'estero o ricomparsa Cittadino lavoratore l cittadino dell'Unione - già lavoratore dipendente o autonomo in Italia - conserva il diritto di soggiorno se: A seguito di malattia o infortunio è temporaneamente inabile al lavoro. | È disoccupato (involontariamente): deve avere lavorato per almeno un anno e deve essere iscritto presso il Centro per l’impiego o aver dichiarato l’immediata disponibilità allo svolgimento di attività lavorativa | E’ disoccupato (involontariamente) al termine di un contratto di lavoro a tempo determinato della durata inferiore ad un anno ovvero si è trovato in tale stato durante il primo anno di soggiorno in Italia. Deve essere iscritto presso il Centro per l’impiego o aver dichiarato l’immediata disponibilità allo svolgimento di attività lavorativa. In questo caso mantiene lo status di lavoratore subordinato per un anno di tempo. | E’ iscritto ad un corso di formazione professionale (Tranne il caso di disoccupazione involontaria, per poter mantenere lo status di lavoratore subordinato deve esistere un collegamento tra la precedente attività ed il corso di formazione seguito) | La donna che smette di lavorare o di cercare un impiego a causa di una gravidanza, conserva lo status di lavoratore purché riprenda il lavoro o trovi un nuovo impiego entro un ragionevole periodo di tempo dopo il parto, periodo che non può essere inferiore a 3 mesi (sentenza Corte di Giustizia europea C-507/12). | Cittadino con risorse economiche Documentazione attestante il possesso di risorse economiche sufficienti o auto-dichiarazione resa ai sensi del D.P.R. 445/2000 | Documentazione attestante la titolarità di una polizza di assicurazione sanitaria o iscrizione al Servizio Sanitario nazionale. | Cittadino iscritto a un corso di studi Documentazione attestante l’iscrizione al corso di studi | Documentazione attestante il possesso di risorse economiche sufficienti o auto-dichiarazione resa ai sensi del D.P.R. 445/2000. | Documentazione attestante la titolarità di una polizza di assicurazione sanitaria o iscrizione al Servizio Sanitario nazionale. | Quale familiare del cittadino iscritto ad un corso di studi, sono da intendersi esclusivamente il congiure/unito civilmente e i figli (art.7, comma 4, della Direttiva 2004/38/CE) Cittadino religioso | La dichiarazione del responsabile della Comunità religiosa, attestante la natura dell’incarico ricoperto, l’assunzione dell’onere del vitto e dell’alloggio, vistato dalla Curia vescovile o da equivalente Autorità religiosa presente in Italia. | La dichiarazione del responsabile della Comunità di assunzione delle spese sanitarie o polizza di copertura sanitaria.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-10-17",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/cittadini-dellunione-europea-iscrizione-anagrafica/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1622",
+   "fetched_at": "2026-08-05T16:06:39.409110Z",
+   "raw_hash": "8ae9b7c8e7a8fe2d"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1621",
+  "title": "Cancellazioni anagrafiche",
+  "summary": "Per accedere al servizio occorre:",
+  "body": "Per accedere al servizio occorre: | Nulla",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-10-17",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/cancellazioni-anagrafiche/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1621",
+   "fetched_at": "2026-08-05T16:06:39.409323Z",
+   "raw_hash": "e99dfd3af463c989"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1620",
+  "title": "Iscrizione anagrafica per nascita",
+  "summary": "Per accedere al servizio occorre:",
+  "body": "Per accedere al servizio occorre: | dichiarazione di nascita nei registri di stato civile",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-10-17",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/iscrizione-anagrafica-per-nascita/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1620",
+   "fetched_at": "2026-08-05T16:06:39.409427Z",
+   "raw_hash": "59b601efd1997801"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1619",
+  "title": "Cambio di residenza",
+  "summary": "Le istanze cartacee dovranno essere sottoscritte di fronte all’ufficiale di anagrafe o inviate per raccomandata con allegato la fotocopia di un documento d’identità valido. | Le istanze potranno essere inviate anche in via telematica ad una delle seguenti condizioni:",
+  "body": "Le istanze cartacee dovranno essere sottoscritte di fronte all’ufficiale di anagrafe o inviate per raccomandata con allegato la fotocopia di un documento d’identità valido. | Le istanze potranno essere inviate anche in via telematica ad una delle seguenti condizioni: | che la dichiarazione sia sottoscritta con firma digitale; | che l'autore sia identificato dal sistema informatico con l'uso della Carta d'identità elettronica, della carta nazionale dei servizi, o comunque con strumenti che consentano l'individuazione del soggetto che effettua la dichiarazione; | che la dichiarazione sia trasmessa attraverso la casella di posta elettronica certificata del dichiarante; | che la copia della dichiarazione recante la firma autografa e la copia del documento d'identità del dichiarante siano acquisite mediante scanner e trasmesse tramite posta elettronica semplice. | Per gli stranieri, al fine dell’iscrizione nell’Anagrafe della popolazione, rimane il vincolo: del possesso del permesso di soggiorno per i cittadini stranieri non comunitari che dovrà essere dimostrato al momento della richiesta dell’iscrizione; | del possesso dei requisiti di soggiorno per i cittadini dell’Unione Europea.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-10-17",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/cambio-di-residenza/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1619",
+   "fetched_at": "2026-08-05T16:06:39.409971Z",
+   "raw_hash": "759c7b09cd03f4d4"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1618",
+  "title": "Certificati anagrafici online dal sito dell’Anagrafe Nazionale",
+  "summary": "All'area riservata ai cittadini del sito dell'Anagrafe della Popolazione Residente - ANPR - si accede tramite: uno dei seguenti sistemi:",
+  "body": "All'area riservata ai cittadini del sito dell'Anagrafe della Popolazione Residente - ANPR - si accede tramite: uno dei seguenti sistemi: | credenziali SPID | credenziali CIE",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-10-17",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/rilascio-certificati-anagrafici-2/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1618",
+   "fetched_at": "2026-08-05T16:06:39.410146Z",
+   "raw_hash": "05f800a9890be92d"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1617",
+  "title": "Rilascio certificati anagrafici",
+  "summary": "Per accedere al servizio occorre:",
+  "body": "Per accedere al servizio occorre: | Modulo di richiesta compilato",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-10-17",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/rilascio-certificati-anagrafici/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1617",
+   "fetched_at": "2026-08-05T16:06:39.410234Z",
+   "raw_hash": "3a2405cdd0732e29"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1598",
+  "title": "Carta d’Identità Elettronica CIE",
+  "summary": "Per accedere al servizio occorre:",
+  "body": "Per accedere al servizio occorre: | carta d'identità scaduta o, in caso di primo rilascio, documento d'identità valido (passaporto, patente, libretto di pensione con foto). | 1 fotografia formato tessera (cm.3,5 x 4,5), recente (effettuata da non oltre 6 mesi), frontali, senza occhiali scuri. Le caratteristiche tecnico-qualitative delle fotografie per le carte d’identità sono state previste e definite dal Ministero dell'Interno con nota n.400/A/2005/1501/P/23.13.17 del 5/12/2005. Per il cittadino è anche possibile portare una fotografia su supporto digitale USB rispettando, oltre alle suddette caratteristiche, anche le seguenti: definizione immagine: almeno 400 dpi - dimensione del file: massimo 500kb - formato del file: JPG. Per informazioni dettagliate consultare le modalità di acquisizione della fotografia | I cittadini stranieri non comunitari devono mostrare il permesso di soggiorno , in quanto la durata della CIE può variare a seconda della tipologia del permesso in loro possesso. | l richiedente deve presentarsi personalmente all'Ufficio Anagrafe al momento della richiesta, se si tratta di minore deve essere accompagnato da almeno un genitore. | Per i minori di anni 18 , la carta d'identità deve essere richiesta da almeno un genitore (che deve anche effettuare il riconoscimento del minore: minore e genitore/i devono presentarsi entrambi e contemporaneamente all'Ufficio Anagrafe). Serve l'autorizzazione di entrambi i genitori per renderla valida per l'espatrio (atto di assenso); nel caso in cui non sia possibile ottenere l'assenso di entrambi i genitori, può essere richiesto il nulla osta al Giudice Tutelare. In caso di mancanza di assenso dei genitori o del Giudice Tutelare | l documento verrà rilasciato non valido per l'espatrio.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-10-17",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/carta-didentita-elettronica-cie/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1598",
+   "fetched_at": "2026-08-05T16:06:39.411269Z",
+   "raw_hash": "9a49ee5fdd7db871"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1591",
+  "title": "Autorizzazione all’occupazione temporanea di area demaniale marittima",
+  "summary": "Al modello di domanda D1, inviato o presentato al Comune, deve essere allegata la seguente documentazione:",
+  "body": "Al modello di domanda D1, inviato o presentato al Comune, deve essere allegata la seguente documentazione: | Copia documento di identità del richiedente (se persona fisica) o del rappresentante legale (se persona giuridica); | Stralcio aereo fotogrammetrico in scala 1:5000/1:2000, con individuazione dell’area d'intervento; | Relazione esplicativa dell’evento da realizzare; | Planimetria in scala opportuna (1/100 - 1/200) con lo stato dei luoghi e la rappresentazione delle strutture da installare e delle loro dimensioni. Se la domanda viene consegnata o spedita in forma cartacea, la documentazione tecnica allegata dovrà avere un formato A3 con trasposizione su supporto informatico dei relativi files firmati digitalmente; | Certificato di collaudo o di omologazione delle strutture da installare, qualora il suddetto certificato sia previsto dalla normativa di settore (ad esempio gonfiabili, giostre, simulatori di realtà virtuale etc.); | Autorizzazione doganale ex art. 19, d.lgs. n. 374/1990 oppure comunicazione all’Agenzia delle Dogane e dei Monopoli, a seconda delle strutture da installare. | 7. Pagamento delle spese di istruttoria di € 120,00 - tramite l’utilizzo del sistema pagoPA (in attuazione dell’art. 5 del D.Lgs. n. 82/2005 “Codice dell’Amministrazione Digitale” e del D.L. 179/2012, come convertito in legge) da effettuarsi mediante collegamento al seguente link cliccando su “Pagamento Spontaneo” e poi “Diritti di Segreteria” e seguendo le istruzioni del sito.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-10-17",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/autorizzazione-alloccupazione-temporanea-di-area-demaniale-marittima/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1591",
+   "fetched_at": "2026-08-05T16:06:39.412225Z",
+   "raw_hash": "fb54a1db3d868bab"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1590",
+  "title": "Richieste o modifiche concessioni Demanio marittimo",
+  "summary": "Per accedere al servizio occorre:",
+  "body": "Per accedere al servizio occorre: | Elaborati tecnici a firma di professionista abilitato alla libera professione.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-10-17",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/richieste-o-modifiche-concessioni-demanio-marittimo/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1590",
+   "fetched_at": "2026-08-05T16:06:39.412418Z",
+   "raw_hash": "227d56f84899089b"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1589",
+  "title": "Leva",
+  "summary": "Per accedere al servizio occorre:",
+  "body": "Per accedere al servizio occorre: | Modulo compilato | Imposta di bollo e diritti di segreteria laddove previsti",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-10-17",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/leva/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1589",
+   "fetched_at": "2026-08-05T16:06:39.412533Z",
+   "raw_hash": "7fb7379de984f668"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1588",
+  "title": "Giudici Popolari",
+  "summary": "Per la presentazione della richiesta da parte dei diretti interessati, è necessario compilare il relativo modulo",
+  "body": "Per la presentazione della richiesta da parte dei diretti interessati, è necessario compilare il relativo modulo | Modulo compilato",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-10-17",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/giudici-popolari/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1588",
+   "fetched_at": "2026-08-05T16:06:39.412636Z",
+   "raw_hash": "90c77bc4aaeeb1b0"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1587",
+  "title": "Elezioni: voto dei cittadini dell’Unione Europea residenti in Italia",
+  "summary": "Per poter essere iscritti nelle liste elettorali i requisiti sono:",
+  "body": "Per poter essere iscritti nelle liste elettorali i requisiti sono: | essere Cittadini Europei alla data delle elezioni; | essere residenti nel Comune, o aver presentato la richiesta di iscrizione nell'anagrafe della popolazione; | possedere i diritti elettorali nello Stato di origine; | non avere a carico un provvedimento giudiziario che comporti, per lo Stato di origine, la perdita dell'elettorato attivo.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-10-17",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/elezioni-voto-dei-cittadini-dellunione-europea-residenti-in-italia/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1587",
+   "fetched_at": "2026-08-05T16:06:39.412887Z",
+   "raw_hash": "10108289ad777c40"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1586",
+  "title": "Voto a domicilio per elettori affetti da infermità ed intrasportabili",
+  "summary": "La procedura Il primo passaggio che l’elettore deve fare, nell’imminenza di qualsiasi consultazione elettorale, è la richiesta della certificazione sanitaria che attesti la grave infermità (dipendenza da elettromedicali o “intrasportabilità”). La certificazione la rilascia esclusivamente l’ASL solo attraverso propri medici incaricati della ASL,la certificazione deve essere rilasciata in data non a",
+  "body": "La procedura Il primo passaggio che l’elettore deve fare, nell’imminenza di qualsiasi consultazione elettorale, è la richiesta della certificazione sanitaria che attesti la grave infermità (dipendenza da elettromedicali o “intrasportabilità”). La certificazione la rilascia esclusivamente l’ASL solo attraverso propri medici incaricati della ASL,la certificazione deve essere rilasciata in data non anteriore ai 45 giorni dalla data delle consultazioni elettorali. La certificazione, per i soli “intrasportabili”, deve avere una prognosi non inferiore ai 60 giorni. | Il secondo passaggio è di presentare la richiesta di votazione presso la propria dimora, al Sindaco del comune nelle cui liste elettorali si è iscritti. Alla richiesta va allegata una dichiarazione in carta libera, attestante la volontà di esprimere il voto presso l'abitazione in cui dimorano e recante l'indicazione dell'indirizzo completo di questa; oltre alla certificazione rilasciata dal medico incaricato dell’Azienda ASL. La domanda al Sindaco va presentata in un periodo compreso tra il quarantesimo e il ventesimo giorno antecedente la data della votazione. | Alla domanda presentata al Comune devono essere allegati: | fotocopia di un documento di riconoscimento | fotocopia tessera elettorale | il certificato rilasciato da un medico del Servizio di Medicina Legale dell'Asl, che conferma l'esistenza di una infermità fisica che comporta la dipendenza continuativa e vitale da apparecchiature elettromedicali tale da impedire all'elettore di recarsi al seggio. | Il Comune una volta ricevuta e verificata la completezza della documentazione deve includere i nomi degli elettori ammessi al voto a domicilio in appositi elenchi distinti per sezioni e consegnarli in occasione delle elezioni al presidente di ciascuna sezione, il quale, all’atto della costituzione del seggio, provvede a prenderne nota sulla lista elettorale della sezione. Il Sindaco, nel frattempo, rilascia ai richiedenti un’attestazione dell’avvenuta inclusione negli elenchi e pianifica il supporto tecnico e operativo a disposizione degli uffici elettorali di sezione per la raccolta del voto domiciliare. Nel caso in cui gli elettori si trovino presso una dimora ubicata in un comune diverso da quello d’iscrizione nelle liste elettorali, il sindaco del comune d’iscrizione, oltre agli adempimenti già visti, comunica i relativi nominativi ai Sindaci dei Comuni dove dimorano gli elettori affetti da gravi infermità e dove quindi avverrà la raccolta del voto a domicilio. Questi ultimi provvedono a predisporre gli elenchi e a consegnarli ai presidenti degli uffici elettorali di sezione nelle cui circoscrizioni sono ubicate le dimore degli elettori.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-10-17",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/voto-a-domicilio-per-elettori-affetti-da-infermita-ed-intrasportabili/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1586",
+   "fetched_at": "2026-08-05T16:06:39.414181Z",
+   "raw_hash": "60b1ec341e8b72ad"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1585",
+  "title": "Elezioni e voto assistito",
+  "summary": "Gli interessati, per poter ottenere tale agevolazione, devono presentarsi presso l’ufficio elettorale del Comune, consegnando, oltre alla Tessera elettorale, anche uno dei seguenti documenti: Certificato rilasciato dal Servizio di Medicina legale/Igiene Pubblica (ASL), che dichiari che l’elettore è impossibilitato in modo permanente ad esercitare autonomamente il diritto di voto. Detti certificati",
+  "body": "Gli interessati, per poter ottenere tale agevolazione, devono presentarsi presso l’ufficio elettorale del Comune, consegnando, oltre alla Tessera elettorale, anche uno dei seguenti documenti: Certificato rilasciato dal Servizio di Medicina legale/Igiene Pubblica (ASL), che dichiari che l’elettore è impossibilitato in modo permanente ad esercitare autonomamente il diritto di voto. Detti certificati debbono attestare che la infermità fisica impedisce all'elettore di esprimere il voto senza l'aiuto di altro elettore; i certificati stessi devono essere rilasciati immediatamente e gratuitamente, nonché in esenzione da qualsiasi diritto od applicazione di marche. | Nessun elettore può esercitare la funzione di accompagnatore per più di un invalido. Sul suo certificato elettorale è fatta apposita annotazione dal presidente del seggio, nel quale ha assolto tale compito. | I presidenti di seggio devono richiedere agli accompagnatori il certificato elettorale, per constatare se hanno già in precedenza esercitato la funzione predetta. | L’ufficio elettorale applicherà sulla Tessera, nella parte interna sinistra, a fianco dello spazio per i timbri del seggio elettorale, l’apposito timbro “AVD\" con la firma del funzionario incaricato. ( L. n. 17 del 05.02.2003 “nuove norme per l’esercizio del diritto di voto da parte degli elettori affetti da grave infermità”)",
+  "kind": "agevolazione",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-10-17",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/elezioni-e-voto-assistito/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1585",
+   "fetched_at": "2026-08-05T16:06:39.414784Z",
+   "raw_hash": "0f95bfac2324cc53"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1583",
+  "title": "Iscrizione all’Albo Presidenti di Seggio Elettorale (e il segretario di seggio elettorale)",
+  "summary": "La compilazione dell'apposito modulo di domanda",
+  "body": "La compilazione dell'apposito modulo di domanda | Modulo compilato",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-10-17",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/iscrizione-allalbo-presidenti-di-seggio-elettorale-e-il-segretario-di-seggio-elettorale/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1583",
+   "fetched_at": "2026-08-05T16:06:39.414914Z",
+   "raw_hash": "606cb856e653b10d"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1582",
+  "title": "Certificazione di iscrizione alle liste elettorali",
+  "summary": "Per la richiesta non servono particolari formalità, se non un documento d'identità del richiedente.",
+  "body": "Per la richiesta non servono particolari formalità, se non un documento d'identità del richiedente. | Nel caso di richieste di rilascio di certificati elettorali tramite PEC per la presentazione di referendum popolari o di iniziative di legge popolare, qualora la richiesta pervenisse da un delegato di un rappresentante legale del soggetto promotore dell'iniziativa, la delega deve essere firmata digitalmente ai sensi di quanto previsto dall’art.38-bis, c.3, del d.L.n.77/2021, e qualora la firma digitale non fosse presente, non si potrà dar seguito al rilascio della certificazione.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-10-17",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/certificazione-di-iscrizione-alle-liste-elettorali/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1582",
+   "fetched_at": "2026-08-05T16:06:39.415197Z",
+   "raw_hash": "662ace5a6fcd667e"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1581",
+  "title": "Tessera Elettorale",
+  "summary": "Un documento d'identità personale e, per il rilascio di un duplicato, oltre alla domanda scritta:",
+  "body": "Un documento d'identità personale e, per il rilascio di un duplicato, oltre alla domanda scritta: | in caso di furto la denuncia presentata alle autorità di Polizia; | in caso di deterioramento, la tessera deteriorata; | in caso di esaurimento degli spazi per i timbri, la tessera con gli spazi esauriti",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-10-17",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/tessera-elettorale/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1581",
+   "fetched_at": "2026-08-05T16:06:39.415370Z",
+   "raw_hash": "17487c32cf6a3977"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1580",
+  "title": "Le liste elettorali",
+  "summary": "L'iscrizione o la cancellazione dalle liste avviene al verificarsi delle condizioni previste dalla normativa:",
+  "body": "L'iscrizione o la cancellazione dalle liste avviene al verificarsi delle condizioni previste dalla normativa: | compimento del 18mo anno di età; | emigrazione o immigrazione da altro Comune; | perdita o riacquisto della capacità elettorale | ecc.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-10-17",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/le-liste-elettorali/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1580",
+   "fetched_at": "2026-08-05T16:06:39.415519Z",
+   "raw_hash": "54f44cda1e6bab8e"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1579",
+  "title": "Denuncia di morte",
+  "summary": "Per la redazione dell'atto di morte è sufficiente la denuncia del decesso da parte di una persona che ne sia a conoscenza, o l'avviso di decesso se l'evento è avvenuto in un luogo di cura. Successivamente, serve:",
+  "body": "Per la redazione dell'atto di morte è sufficiente la denuncia del decesso da parte di una persona che ne sia a conoscenza, o l'avviso di decesso se l'evento è avvenuto in un luogo di cura. Successivamente, serve: | certificato di decesso compilato dal medico curante o dalla guardia medica su apposito modulo che attesti l’avvenuto decesso e la causa di morte; | certificato di accertamento di morte compilato dal medico necroscopo; | scheda di morte (Modello ISTAT D/4) compilato dal medico curante nella parte riguardante le cause del decesso. Il modello Istat è reperibile dal medico o presso l’Ufficio Statistica del Comune dove è avvenuto il decesso (entro il mese in cui è avvenuto il decesso).",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-10-17",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/denuncia-di-morte/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1579",
+   "fetched_at": "2026-08-05T16:06:39.415855Z",
+   "raw_hash": "b01f201512b24e8f"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1578",
+  "title": "Acquisizione della cittadinanza italiana",
+  "summary": "Le istanze per l'acquisto della cittadinanza per matrimonio e per residenza (naturalizzazione) vanno presentate al Prefetto di Brindisi",
+  "body": "Le istanze per l'acquisto della cittadinanza per matrimonio e per residenza (naturalizzazione) vanno presentate al Prefetto di Brindisi | I moduli sono reperibili e scaricabili anche sul sito internet del Ministero dell'Interno",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-10-17",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/acquisizione-della-cittadinanza-italiana-stato-civile/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1578",
+   "fetched_at": "2026-08-05T16:06:39.416012Z",
+   "raw_hash": "af50b9e27d2609c3"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1575",
+  "title": "Matrimonio e unioni civili",
+  "summary": "Per accedere al servizio occorre:",
+  "body": "Per accedere al servizio occorre: | Rivolgersi direttamente all’ufficio di stato civile",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-10-15",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/matrimonio-e-unioni-civili/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1575",
+   "fetched_at": "2026-08-05T16:06:39.416112Z",
+   "raw_hash": "2023b8888db94f82"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1574",
+  "title": "Pubblicazioni di matrimonio",
+  "summary": "La pubblicazione deve essere richiesta, anche da uno solo degli sposi, all'Ufficiale dello Stato Civile del Comune in cui uno dei due nubendi ha la residenza. Per la richiesta di pubblicazione di matrimonio, devono essere presentati i seguenti documenti:",
+  "body": "La pubblicazione deve essere richiesta, anche da uno solo degli sposi, all'Ufficiale dello Stato Civile del Comune in cui uno dei due nubendi ha la residenza. Per la richiesta di pubblicazione di matrimonio, devono essere presentati i seguenti documenti: | documenti d'identità dei nubendi | richiesta di pubblicazione da parte del parroco o ministro di culto competente per territorio, in caso di matrimonio concordatario (religioso e culti ammessi nello Stato) | per gli stranieri nulla osta o certificato di capacità matrimoniale, rilasciato dalla competente autorità diplomatica straniera presente sul territorio italiano debitamente legalizzato nei casi previsti; nel caso in cui il cittadino fosse in possesso di due o più cittadinanze, dovrà esser presentato il nulla osta della cittadinanza prevalente, ovvero quella in cui è registrato anagraficamente o, qualora non fosse registrato nell'Anagrafe italiana, una a sua scelta purché documentabile. Nel caso in cui tra le cittadinanze possedute vi fosse quella italiana, questa prevale sempre e pertanto non vi è necessità del nulla osta; | per i minorenni che abbiano compiuto comunque i 16 anni, decreto di autorizzazione del Tribunale dei minori. o certificato di capacità matrimoniale | Altri documenti necessari alle pubblicazioni già in possesso di altre pubbliche amministrazioni, vengono richiesti direttamente a tali enti da parte dell'Ufficiale di Stato Civile.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-10-15",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/pubblicazioni-di-matrimonio/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1574",
+   "fetched_at": "2026-08-05T16:06:39.416743Z",
+   "raw_hash": "9a0b2685fa7d935d"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1573",
+  "title": "Dichiarazione di nascita",
+  "summary": "Per accedere al servizio occorre:",
+  "body": "Per accedere al servizio occorre: | documento d'identità del dichiarante/i | attestazione di nascita (certificato di assistenza al parto) rilasciata dall'ostetrica o dalla struttura sanitaria dove è avvenuto il parto, o in alternativa la \"constatazione di avvenuto parto\" o una dichiarazione sostitutiva",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-10-15",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/dichiarazione-di-nascita/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1573",
+   "fetched_at": "2026-08-05T16:06:39.416970Z",
+   "raw_hash": "2372119c12732c3b"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1571",
+  "title": "Cambio di nome e/o di cognome",
+  "summary": "Tutti i documenti necessari sono consultabili sul sito della prefettura di Brindisi",
+  "body": "Tutti i documenti necessari sono consultabili sul sito della prefettura di Brindisi | istanza motivata in bollo da € 16,00 | fotocopia non autenticata di un documento di identità | dichiarazione sostitutiva di certificazione (sottoscritta dal richiedente o dai genitori se minorenne) | eventuale documentazione utile a sostenere le motivazioni della richiesta; | solo per il cambio di cognome: atti di assenso dei familiari controinteressati accompagnati dalla fotocopia non autenticata di un documento di identità degli stessi;",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-10-15",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/cambio-di-nome-e-o-di-cognome/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1571",
+   "fetched_at": "2026-08-05T16:06:39.417242Z",
+   "raw_hash": "22991d395b3ac26f"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1545",
+  "title": "Segnalazione certificata di inizio attività edilizia (SCIA) alternativa al permesso di costruire (PDC)",
+  "summary": "Per accedere al servizio, occorre compilare la modulistica",
+  "body": "Per accedere al servizio, occorre compilare la modulistica | La modulistica è reperibile al seguente link alla voce \"SCIA alternativa - Segnalazione Certificata di Inizio Attività alternativa al Permesso Di Costruire\"",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-09-20",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/segnalazione-certificata-di-inizio-attivita-edilizia-scia-alternativa-al-permesso-di-costruire-pdc/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1545",
+   "fetched_at": "2026-08-05T16:06:39.417394Z",
+   "raw_hash": "17872d4c5aea2b46"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1544",
+  "title": "Rilascio dell’attestazione di idoneità abitativa",
+  "summary": "Per accedere al servizio, occorre compilare la modulistica",
+  "body": "Per accedere al servizio, occorre compilare la modulistica | La modulistica è reperibile al seguente link alla voce \"Richiesta idoneità alloggiativa\"",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-09-20",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/rilascio-dellattestazione-di-idoneita-abitativa/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1544",
+   "fetched_at": "2026-08-05T16:06:39.417519Z",
+   "raw_hash": "2115ff186c5a66ac"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1543",
+  "title": "Rilascio del permesso di costruire (PDC)",
+  "summary": "Per accedere al servizio, occorre compilare la modulistica",
+  "body": "Per accedere al servizio, occorre compilare la modulistica | La modulistica è reperibile al seguente link alla voce \"Permesso di costruire\"",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-09-20",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/rilascio-del-permesso-di-costruire-pdc/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1543",
+   "fetched_at": "2026-08-05T16:06:39.417624Z",
+   "raw_hash": "fdbf75803e59f5f1"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1542",
+  "title": "Rilascio del parere preventivo in ambito edilizio",
+  "summary": "Per accedere al servizio occorre:",
+  "body": "Per accedere al servizio occorre: | un progetto preliminare con annessa relazione tecnica in cui vengano evidenziati gli elementi urbanistici, edilizi e paesaggistici necessari a porre il S.U.E.T. nelle condizioni necessarie ad esprimere il richiesto parere preventivo | Pagamento dei diritti di segreteria",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-09-20",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/rilascio-del-parere-preventivo-in-ambito-edilizio/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1542",
+   "fetched_at": "2026-08-05T16:06:39.417788Z",
+   "raw_hash": "c5d206e38237731c"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1541",
+  "title": "Rilascio del certificato di destinazione urbanistica (CDU)",
+  "summary": "Per procedere alla richiesta è necessario fornire:",
+  "body": "Per procedere alla richiesta è necessario fornire: | Estratto catastale in scala 1:2000 aggiornato rilasciato dall’Agenzia del Territorio in data non anteriore a 3 mesi, nel quale andrà individuata con contorno rosso l’area oggetto di richiesta. Si ricorda che in caso di tipo catastale non originale (fotocopia) dovrà essere riportata sulla stessa la seguente dichiarazione datata e firmata: “Si dichiara che il presente stralcio di mappa è conforme all’originale depositato presso l’Agenzia del Territorio”; | n. 2 marche da bollo da € 16,00 (di cui una applicata alla domanda di certificato); | Diritti di segreteria pari ad €50,00 a cui aggiungere €30,00 per ogni particella catastale.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-09-20",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/rilascio-del-certificato-di-destinazione-urbanistica-cdu/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1541",
+   "fetched_at": "2026-08-05T16:06:39.418103Z",
+   "raw_hash": "032bd7f763758bab"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1540",
+  "title": "Fine dei lavori edilizi",
+  "summary": "Per accedere al servizio, occorre compilare la modulistica",
+  "body": "Per accedere al servizio, occorre compilare la modulistica | La modulistica è reperibile al seguente link alla voce \"Comunicazione Fine Lavori\"",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-09-20",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/fine-dei-lavori-edilizi/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1540",
+   "fetched_at": "2026-08-05T16:06:39.418208Z",
+   "raw_hash": "5ec9e4cedea925ef"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1539",
+  "title": "Domanda di proroga per l’inizio o la fine dei lavori edilizi relativi a un permesso di costruire",
+  "summary": "Per accedere al servizio, occorre compilare la modulistica",
+  "body": "Per accedere al servizio, occorre compilare la modulistica | La modulistica è reperibile al seguente link",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-09-20",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/domanda-di-proroga-per-linizio-o-la-fine-dei-lavori-edilizi-relativi-a-un-permesso-di-costruire/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1539",
+   "fetched_at": "2026-08-05T16:06:39.418360Z",
+   "raw_hash": "8f921bd49f450021"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1538",
+  "title": "Deposito dell’atto di aggiornamento catastale (frazionamento)",
+  "summary": "Per accedere al servizio, assicurati di avere",
+  "body": "Per accedere al servizio, assicurati di avere | la richiesta tipo di frazionamento reperibile al seguente link",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-09-20",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/deposito-dellatto-di-aggiornamento-catastale-frazionamento/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1538",
+   "fetched_at": "2026-08-05T16:06:39.418497Z",
+   "raw_hash": "bdb949b98a905a79"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1537",
+  "title": "Comunicazione di inizio lavori (CIL)",
+  "summary": "Per accedere al servizio, occorre compilare la modulistica",
+  "body": "Per accedere al servizio, occorre compilare la modulistica | La modulistica è reperibile al seguente link alla voce \"CIL - Comunicazione Inizio Lavori per opere temporanee\"",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-09-20",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/comunicazione-di-inizio-lavori-cil/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1537",
+   "fetched_at": "2026-08-05T16:06:39.418627Z",
+   "raw_hash": "8495192f02fe9ef6"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1536",
+  "title": "Segnalazione certificata di agibilità",
+  "summary": "Per accedere al servizio, occorre compilare la modulistica",
+  "body": "Per accedere al servizio, occorre compilare la modulistica | La modulistica è reperibile al seguente link , alla voce \"Segnalazione Certificata Agibilità",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-09-20",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/segnalazione-certificata-di-agibilita/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1536",
+   "fetched_at": "2026-08-05T16:06:39.418749Z",
+   "raw_hash": "aa9cb3d279ac4f56"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1535",
+  "title": "Accertamento di compatibilità paesaggistica",
+  "summary": "Per accedere al servizio, occorre compilare la modulistica",
+  "body": "Per accedere al servizio, occorre compilare la modulistica | La modulistica è reperibile al seguente link , alla voce \"Autorizzazione Paesaggistica\"",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-09-20",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/accertamento-di-compatibilita-paesaggistica/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1535",
+   "fetched_at": "2026-08-05T16:06:39.418864Z",
+   "raw_hash": "ee9a3878868ac56f"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1534",
+  "title": "Accesso ai servizi del SUET",
+  "summary": "Per accedere al servizio, occorre compilare la modulistica",
+  "body": "Per accedere al servizio, occorre compilare la modulistica | La modulistica è reperibile al seguente link",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-09-20",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/accesso-ai-servizi-del-suet/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1534",
+   "fetched_at": "2026-08-05T16:06:39.418961Z",
+   "raw_hash": "b628b255819d8374"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1533",
+  "title": "Segnalazione Certificata di Inizio Attività (SCIA)",
+  "summary": "Per accedere al servizio, occorre compilare la modulistica",
+  "body": "Per accedere al servizio, occorre compilare la modulistica | La modulistica è reperibile al seguente link alla voce \"SCIA - Segnalazione Certificata di Inizio Attività\"",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-09-20",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/segnalazione-certificata-di-inizio-attivita-scia/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1533",
+   "fetched_at": "2026-08-05T16:06:39.419078Z",
+   "raw_hash": "27c030aa595b471f"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1532",
+  "title": "CILA – Comunicazione di inizio lavori asseverata",
+  "summary": "Per accedere al servizio, occorre compilare la modulistica",
+  "body": "Per accedere al servizio, occorre compilare la modulistica | La modulistica è reperibile al seguente link alla voce \"Comunicazione Inizio Lavori Asseverata\"",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-09-20",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/cila-comunicazione-di-inizio-lavori-asseverata/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1532",
+   "fetched_at": "2026-08-05T16:06:39.419196Z",
+   "raw_hash": "8c8eadcca2433818"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1518",
+  "title": "Autorizzazioni ambientali",
+  "summary": "Per usufruire del servizio e' necessario:",
+  "body": "Per usufruire del servizio e' necessario: | Per autorizzazione allo scarico per acque reflue domestiche elenco doc. previsti all’Allegato 5 del R.R. n.26/2011 e ss.mm. e ii.); | Per autorizzazione allo scarico di acque reflue in deroga alla normativa vigente (ai sensi dell’art.10bis del R.R: n. 26/2011 e ss.mm.e ii.) elenco doc. previsti all’Allegato 6 del R.R. n.26/2011 e ss.mm. e ii.); | Per Nulla Osta impatto acustico rel. Tecnica impatto acustico (ai sensi della L.R. n.3/2002 - Legge n. 447/1995 - DPCM 14.11.1997).",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-09-10",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/autorizzazioni-ambientali/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1518",
+   "fetched_at": "2026-08-05T16:06:39.419464Z",
+   "raw_hash": "32ab1267c5ee907e"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1517",
+  "title": "Esposizione a radioattivita’ naturale (Gas Radon)",
+  "summary": "E' necessaria:",
+  "body": "E' necessaria: | Relazione Tecnica Asseverata di Monitoraggio | Comunicazione tramite protocollo",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-09-10",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/esposizione-a-radioattivita-naturale-gas-radon/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1517",
+   "fetched_at": "2026-08-05T16:06:39.419575Z",
+   "raw_hash": "9bce98561650f538"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1516",
+  "title": "Classificazione di industria insalubre",
+  "summary": "E' necessario:",
+  "body": "E' necessario: | Comunicazione indirizzata al Servizio Ambiente e al Sindaco per l'attivazione di una attività compresa nell'elenco di cui al DM 5 settembre 1994, con 15 giorni di preavviso.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-09-10",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/classificazione-di-industria-insalubre/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1516",
+   "fetched_at": "2026-08-05T16:06:39.419706Z",
+   "raw_hash": "b8dd605bcbbfbef5"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1515",
+  "title": "Accesso ai servizi del SUAP (Sportello Unico Attività Produttive)",
+  "summary": "Per utilizzare il servizio e' necessario:",
+  "body": "Per utilizzare il servizio e' necessario: | SPID (sistema pubblico di identità digitale) | carta d’identità elettronica (CIE) | carta nazionale dei servizi (CNS)",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-09-10",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/accesso-ai-servizi-del-suap-sportello-unico-attivita-produttive/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1515",
+   "fetched_at": "2026-08-05T16:06:39.419878Z",
+   "raw_hash": "b5c3f2abe28c9090"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1514",
+  "title": "Accesso ai servizi dell’ANPR",
+  "summary": "Per accedere al servizio:",
+  "body": "Per accedere al servizio: | assicurati di avere SPID (sistema pubblico di identità digitale) | carta d’identità elettronica (CIE) | o carta nazionale dei servizi (CNS)",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-09-06",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/accesso-ai-servizi-dellanpr/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1514",
+   "fetched_at": "2026-08-05T16:06:39.420038Z",
+   "raw_hash": "a042415a9c4a2684"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1508",
+  "title": "Segnalazione di presunta violazione delle norme ambientali",
+  "summary": "Per accedere al servizio occorre:",
+  "body": "Per accedere al servizio occorre: | Copia documento carta d’identità | Documentazione fotografica | Planimetria dell’area interessata dall’esposto",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-06-13",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/segnalazione-di-presunta-violazione-delle-norme-ambientali/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1508",
+   "fetched_at": "2026-08-05T16:06:39.420187Z",
+   "raw_hash": "3b66e0b98512cb1e"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1507",
+  "title": "Segnalazione presenza di cani randagi e animali selvatici",
+  "summary": "Nella segnalazione deve essere indicato:",
+  "body": "Nella segnalazione deve essere indicato: | Il luogo | Le modalità dell'intervento | Le caratteristiche degli animali | Documentazione fotografica ed eventuali video | Documento d’identità del segnalante",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-06-13",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/segnalazione-presenza-di-cani-randagi-e-animali-selvatici/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1507",
+   "fetched_at": "2026-08-05T16:06:39.420353Z",
+   "raw_hash": "26a1b3d51ae50d3e"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1506",
+  "title": "Locazione immobili comunali con destinazione commerciale",
+  "summary": "La documentazione da presentare in allegato all’istanza di partecipazione sarà indicata nel bando.",
+  "body": "La documentazione da presentare in allegato all’istanza di partecipazione sarà indicata nel bando. | Documentazione variabile a seconda del bando",
+  "kind": "bando",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-06-13",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/locazione-immobili-comunali-con-destinazione-commerciale/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1506",
+   "fetched_at": "2026-08-05T16:06:39.420472Z",
+   "raw_hash": "c716b67f60da31df"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1505",
+  "title": "Concessione contributi sostenibilità ambientale",
+  "summary": "La documentazione da presentare in allegato all’istanza di partecipazione sarà indicata nel bando.",
+  "body": "La documentazione da presentare in allegato all’istanza di partecipazione sarà indicata nel bando. | Documentazione variabile a seconda del bando",
+  "kind": "contributo_economico",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-06-13",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/concessione-contributi-sostenibilita-ambientale/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1505",
+   "fetched_at": "2026-08-05T16:06:39.420575Z",
+   "raw_hash": "35711452262bf071"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1504",
+  "title": "Autorizzazioni paesaggistiche",
+  "summary": "La domanda dovrà essere corredata dalla Relazione “Relazione Paesaggistica” (prevista dall'art. 146 co. 3 del D.Lgs 42/04, individuata con DPCM 12 dicembre 2005 e precisata nella forma semplificata con DPR 31/2017). La Relazione Paesaggistica ha il compito di coadiuvare la Commissione Locale per il Paesaggio nella valutazione della compatibilità ed è finalizzata al rilascio dell'Autorizzazione. La",
+  "body": "La domanda dovrà essere corredata dalla Relazione “Relazione Paesaggistica” (prevista dall'art. 146 co. 3 del D.Lgs 42/04, individuata con DPCM 12 dicembre 2005 e precisata nella forma semplificata con DPR 31/2017). La Relazione Paesaggistica ha il compito di coadiuvare la Commissione Locale per il Paesaggio nella valutazione della compatibilità ed è finalizzata al rilascio dell'Autorizzazione. La relazione paesaggistica deve: | sempre accompagnare la richiesta di rilascio dell'Autorizzazione Paesaggistica, nel caso di interventi edilizi su immobili soggetti a vincolo paesaggistico; | deve essere allegata a tutti i progetti edilizi presentati dal 31/7/2006.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-06-13",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/autorizzazioni-paesaggistiche/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1504",
+   "fetched_at": "2026-08-05T16:06:39.420888Z",
+   "raw_hash": "5c33c4480c0c8105"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1503",
+  "title": "Assegnazione di un alloggio e box auto",
+  "summary": "La documentazione da presentare allegata all’istanza di partecipazione sarà indicata nel bando.",
+  "body": "La documentazione da presentare allegata all’istanza di partecipazione sarà indicata nel bando. | Documentazione variabile a seconda del bando",
+  "kind": "bando",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-06-13",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/assegnazione-di-un-alloggio-e-box-auto/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1503",
+   "fetched_at": "2026-08-05T16:06:39.421023Z",
+   "raw_hash": "434a4b3c99211bf5"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1502",
+  "title": "Richiesta allacciamento alla rete irrigua delle acque depurate",
+  "summary": "Istanza con allegati:",
+  "body": "Istanza con allegati: | Fotocopia di un documento di riconoscimento in corso di validità del richiedente; | Estratto catastale con la individuazione delle particelle catastali dei terreni per cui viene richiesta la erogazione irrigua; | Atto notorio recante il consenso del proprietario dei terreni all’utilizzo dell’acqua rigenerata per l’irrigazione del fondo (esclusivamente se il richiedente non è proprietario dei terreni).",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-06-13",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/richiesta-allacciamento-alla-rete-irrigua-delle-acque-depurate/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1502",
+   "fetched_at": "2026-08-05T16:06:39.421247Z",
+   "raw_hash": "def86c86b93c3f5c"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1499",
+  "title": "Servizi di igiene urbana",
+  "summary": "Per accedere al servizio occore:",
+  "body": "Per accedere al servizio occore: | Copia documento carta d’identità in caso di segnalazione. | Breve descrizione del disservizio allegando documentazione fotografica e coordinate GPS. | Indicare un recapito telefonico contestualmente alla segnalazione.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-06-07",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/servizi-di-igiene-urbana/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1499",
+   "fetched_at": "2026-08-05T16:06:39.421408Z",
+   "raw_hash": "0037d093443f003e"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1492",
+  "title": "Concessione del patrocinio",
+  "summary": "Per accedere al servizio occore:",
+  "body": "Per accedere al servizio occore: | La domanda in carta semplice | La documentazione a supporto della richiesta di patrocinio.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-06-07",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/concessione-del-patrocinio/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1492",
+   "fetched_at": "2026-08-05T16:06:39.421520Z",
+   "raw_hash": "b39fd8b463ea19ec"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1491",
+  "title": "Concessione di un contributo economico per l’organizzazione di manifestazioni, eventi o iniziative",
+  "summary": "Compilazione del Modulo di domanda (Allegato 1) e della Scheda Comunicazione (Allegato 3) | Descrizione dettagliata dell’evento, inclusi obiettivi, logistica, artisti coinvolti e risorse necessarie. | Ottenimento di tutte le autorizzazioni necessarie.",
+  "body": "Compilazione del Modulo di domanda (Allegato 1) e della Scheda Comunicazione (Allegato 3) | Descrizione dettagliata dell’evento, inclusi obiettivi, logistica, artisti coinvolti e risorse necessarie. | Ottenimento di tutte le autorizzazioni necessarie. | Compilazione del Modulo di domanda (Allegato 1) e della Scheda Comunicazione (Allegato 3) | Descrizione dettagliata dell’evento, inclusi obiettivi, logistica, artisti coinvolti e risorse necessarie. | Ottenimento di tutte le autorizzazioni necessarie. | Criteri Le proposte devono essere coerenti con gli obiettivi turistico-culturali del Comune. | Il Comune può modificare luoghi, date e modalità degli eventi proposti. | Sono escluse le richieste di soggetti con contenziosi o debiti con il Comune. | Obblighi del beneficiario Gestire interamente l’organizzazione dell’evento. | Ottenere tutte le autorizzazioni necessarie. | Coprire eventuali costi aggiuntivi. | Rispettare il patrimonio pubblico e ridurre al minimo l’impatto ambientale. | Presentare rendicontazione dettagliata delle spese per ottenere il contributo economico.",
+  "kind": "contributo_economico",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-06-07",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/concessione-di-un-contributo-economico-per-lorganizzazione-di-manifestazioni-eventi-o-iniziative/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1491",
+   "fetched_at": "2026-08-05T16:06:39.421812Z",
+   "raw_hash": "6352b3a20cf69c6d"
+  },
+  "confidence": "declared",
+  "livello": "comunale",
+  "extraction_notes": [],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1490",
+  "title": "Concessione uso impianti sportivi e palestre scolastiche comunali",
+  "summary": "Per accedere al servizio occore:",
+  "body": "Per accedere al servizio occore: | La documentazione necessaria prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-06-07",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/concessione-uso-impianti-sportivi-e-palestre-scolastiche-comunali/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1490",
+   "fetched_at": "2026-08-05T16:06:39.421932Z",
+   "raw_hash": "5ffa01f928a43c79"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1448",
+  "title": "Esonero quota di iscrizione del servizio di mensa scolastica",
+  "summary": "Per accedere al servizio occorre:",
+  "body": "Per accedere al servizio occorre: | ISEE in corso di validità | documento di identità del richiedente",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [
+    "Richiesta attestazione ISEE (soglia non pubblicata)"
+   ],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-06-07",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/esonero-quota-di-iscrizione-del-servizio-di-mensa-scolastica/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1448",
+   "fetched_at": "2026-08-05T16:06:39.422043Z",
+   "raw_hash": "f6b7641b5cb94fe8"
+  },
+  "confidence": "extracted",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il servizio richiede l'ISEE ma non pubblica la soglia: verifica sulla pagina del comune.",
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1441",
+  "title": "Servizio Mensa scolastica: iscrizione al servizio",
+  "summary": "Per accedere al servizio, è necessario avere a disposizione: SPID (sistema pubblico di identità digitale) | tutta la documentazione prevista per la presentazione della pratica | Per effettuare il pagamento, occorre seguire il percorso per il pagamento telematico presente sulla piattaforma Rete del Sociale, utilizzando il sistema Pago-PA con una delle seguenti modalità:",
+  "body": "Per accedere al servizio, è necessario avere a disposizione: SPID (sistema pubblico di identità digitale) | tutta la documentazione prevista per la presentazione della pratica | Per effettuare il pagamento, occorre seguire il percorso per il pagamento telematico presente sulla piattaforma Rete del Sociale, utilizzando il sistema Pago-PA con una delle seguenti modalità: | pagamento online, con carta di credito, addebito in conto, ecc, previa autenticazione con credenziali SPID o CIE (Carta di Identità Elettronica); | scaricando e/o stampando l'avviso di pagamento per poter perfezionare l’operazione presso uno dei punti di pagamento PagoPA (es. punti vendita Lottomatica, uffici postali, ecc.).",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-06-07",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/servizio-mensa-scolastica-iscrizione-al-servizio/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1441",
+   "fetched_at": "2026-08-05T16:06:39.422381Z",
+   "raw_hash": "ed9233c715b80445"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1469",
+  "title": "Concessione in uso Sala Mostre – Biblioteca",
+  "summary": "Per accedere al servizio è necessario",
+  "body": "Per accedere al servizio è necessario | compilare la richiesta in ogni sua parte | eventualmente allegare lo statuto dell’associazione e/o il programma dell’iniziativa | Nel caso in cui la richiesta venga accolta si dovrà procedere al pagamento dovuto secondo il vigente tariffario",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-06-04",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/concessione-in-uso-sala-mostre-biblioteca/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1469",
+   "fetched_at": "2026-08-05T16:06:39.422583Z",
+   "raw_hash": "5cccde7f4bcb8e24"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1468",
+  "title": "Prestito interbibliotecario",
+  "summary": "Per accedere al servizio è necessario esibire la tessera di iscrizione alla Biblioteca che può essere rilasciata al momento della richiesta. Per tesserarsi è necessario:",
+  "body": "Per accedere al servizio è necessario esibire la tessera di iscrizione alla Biblioteca che può essere rilasciata al momento della richiesta. Per tesserarsi è necessario: | munirsi di un documento di riconoscimento | compilare l’apposita modulistica",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-06-04",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/prestito-interbibliotecario/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1468",
+   "fetched_at": "2026-08-05T16:06:39.422741Z",
+   "raw_hash": "4982d7e58c3889ea"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1467",
+  "title": "Attività di lettura",
+  "summary": "Per accedere al servizio è sufficiente",
+  "body": "Per accedere al servizio è sufficiente | indicare i dati anagrafici del bambino e del genitore che lo accompagnerà | possedere tessera di iscrizione alla Biblioteca",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-06-04",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/attivita-di-lettura/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1467",
+   "fetched_at": "2026-08-05T16:06:39.422863Z",
+   "raw_hash": "afdf100e73c2ee9d"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1466",
+  "title": "Consultazione in sede – Biblioteca",
+  "summary": "Per accedere al servizio è necessario esibire la tessera di iscrizione alla Biblioteca che può essere rilasciata al momento della richiesta. Per tesserarsi è necessario:",
+  "body": "Per accedere al servizio è necessario esibire la tessera di iscrizione alla Biblioteca che può essere rilasciata al momento della richiesta. Per tesserarsi è necessario: | munirsi di un documento di riconoscimento | compilare l’apposita modulistica",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-06-04",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/consultazione-in-sede-biblioteca/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1466",
+   "fetched_at": "2026-08-05T16:06:39.423022Z",
+   "raw_hash": "060c486ac8f3ffcb"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1465",
+  "title": "Emeroteca – Biblioteca",
+  "summary": "Per accedere al servizio è necessario esibire la tessera di iscrizione alla Biblioteca che può essere rilasciata al momento della richiesta. Per tesserarsi è necessario:",
+  "body": "Per accedere al servizio è necessario esibire la tessera di iscrizione alla Biblioteca che può essere rilasciata al momento della richiesta. Per tesserarsi è necessario: | munirsi di un documento di riconoscimento | compilare l’apposita modulistica",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-06-04",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/emeroteca-biblioteca/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1465",
+   "fetched_at": "2026-08-05T16:06:39.423173Z",
+   "raw_hash": "dee6925644677200"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1464",
+  "title": "Postazioni informatiche – Biblioteca",
+  "summary": "Per accedere al servizio è necessario esibire la tessera di iscrizione alla Biblioteca che può essere rilasciata al momento della richiesta. Per tesserarsi è necessario:",
+  "body": "Per accedere al servizio è necessario esibire la tessera di iscrizione alla Biblioteca che può essere rilasciata al momento della richiesta. Per tesserarsi è necessario: | munirsi di un documento di riconoscimento | compilare l’apposita modulistica",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-06-04",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/postazioni-informatiche-biblioteca/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1464",
+   "fetched_at": "2026-08-05T16:06:39.423327Z",
+   "raw_hash": "0b44f2073bba82d0"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1463",
+  "title": "Prestito Libri",
+  "summary": "Per accedere al servizio è necessario esibire la tessera di iscrizione alla Biblioteca che può essere rilasciata al momento della richiesta. Per tesserarsi è necessario:",
+  "body": "Per accedere al servizio è necessario esibire la tessera di iscrizione alla Biblioteca che può essere rilasciata al momento della richiesta. Per tesserarsi è necessario: | munirsi di un documento di riconoscimento | compilare l’apposita modulistica",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-06-04",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/prestito-libri/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1463",
+   "fetched_at": "2026-08-05T16:06:39.423478Z",
+   "raw_hash": "e943c911d65621c1"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1462",
+  "title": "Visite guidate",
+  "summary": "Per accedere al servizio la scuola dovrà dettagliare la richiesta indicando",
+  "body": "Per accedere al servizio la scuola dovrà dettagliare la richiesta indicando | le classi | l’età | il numero partecipanti | ...",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-06-04",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/visite-guidate/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1462",
+   "fetched_at": "2026-08-05T16:06:39.423588Z",
+   "raw_hash": "04790b4d4b9257b9"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1451",
+  "title": "Piscina comunale",
+  "summary": "Per accedere al servizio occorre:",
+  "body": "Per accedere al servizio occorre: | Modulo di richiesta utilizzo piscina | Certificazione di invalidità | Documento di riconoscimento | Certificato ISEE",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [
+    "Richiesta attestazione ISEE (soglia non pubblicata)"
+   ],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-06-04",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/piscina-comunale/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1451",
+   "fetched_at": "2026-08-05T16:06:39.423704Z",
+   "raw_hash": "88993fabc8e66375"
+  },
+  "confidence": "extracted",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il servizio richiede l'ISEE ma non pubblica la soglia: verifica sulla pagina del comune.",
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1450",
+  "title": "Esonero costo del trasporto scolastico",
+  "summary": "Per accedere al servizio occorre:",
+  "body": "Per accedere al servizio occorre: | ISEE in corso di validità | documento di identità del richiedente",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [
+    "Richiesta attestazione ISEE (soglia non pubblicata)"
+   ],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-06-04",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/esonero-costo-del-trasporto-scolastico/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1450",
+   "fetched_at": "2026-08-05T16:06:39.423799Z",
+   "raw_hash": "44a26b2480c26110"
+  },
+  "confidence": "extracted",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il servizio richiede l'ISEE ma non pubblica la soglia: verifica sulla pagina del comune.",
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1447",
+  "title": "Bonus Disagio Fisico",
+  "summary": "Per accedere al servizio occorre:",
+  "body": "Per accedere al servizio occorre: | Allegato B “Disagio Fisico” | Certificazione ASL che attesta la necessità di utilizzo delle apparecchiature elettromedicali.",
+  "kind": "contributo_economico",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-06-04",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/bonus-disagio-fisico/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1447",
+   "fetched_at": "2026-08-05T16:06:39.423894Z",
+   "raw_hash": "787585fcbc740169"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1446",
+  "title": "Assegno di maternità",
+  "summary": "Per accedere al servizio occorre:",
+  "body": "Per accedere al servizio occorre: | compilare il modulo autonomamente o con il supporto del Segretariato Sociale.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-06-04",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/assegno-di-maternita/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1446",
+   "fetched_at": "2026-08-05T16:06:39.423983Z",
+   "raw_hash": "734fcc452c43c0ac"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1444",
+  "title": "Assistenza economica straordinaria",
+  "summary": "Per accedere al servizio occorre:",
+  "body": "Per accedere al servizio occorre: | ISEE in corso di validità | Documento di identità del richiedente | Eventuali attestazioni di spesa",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [
+    "Richiesta attestazione ISEE (soglia non pubblicata)"
+   ],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-06-04",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/assistenza-economica-straordinaria/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1444",
+   "fetched_at": "2026-08-05T16:06:39.424091Z",
+   "raw_hash": "feaf6ab5b44224c4"
+  },
+  "confidence": "extracted",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il servizio richiede l'ISEE ma non pubblica la soglia: verifica sulla pagina del comune.",
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1443",
+  "title": "Taxi Sociale",
+  "summary": "Per accedere al servizio occorre:",
+  "body": "Per accedere al servizio occorre: | ISEE in corso di validità | Verbale di invalidità qualora in possesso | Documento di identità del richiedente",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [
+    "Richiesta attestazione ISEE (soglia non pubblicata)"
+   ],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-06-04",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/taxi-sociale/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1443",
+   "fetched_at": "2026-08-05T16:06:39.424203Z",
+   "raw_hash": "1004180e74efd73e"
+  },
+  "confidence": "extracted",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il servizio richiede l'ISEE ma non pubblica la soglia: verifica sulla pagina del comune.",
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1435",
+  "title": "Trasporto scolastico: iscrizione al servizio",
+  "summary": "- L'autenticazione tramite SPID (sistema pubblico di identità digitale) o CIE; - Effettuare il pagamento della tassa di iscrizione (salvo i casi di esonero)",
+  "body": "- L'autenticazione tramite SPID (sistema pubblico di identità digitale) o CIE; - Effettuare il pagamento della tassa di iscrizione (salvo i casi di esonero) | Domanda Compilata | Ricevuta di pagamento della tassa di iscrizione",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-05-28",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/trasporto-scolastico-iscrizione-al-servizio/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1435",
+   "fetched_at": "2026-08-05T16:06:39.424365Z",
+   "raw_hash": "18117e07113680b6"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1434",
+  "title": "Cedole librarie per genitori",
+  "summary": "Per gli alunni residenti nel Comune di Ostuni e che frequentano una delle due scuole primarie le cedole librarie, in triplice copia (per il Comune, per la scuola e per la libreria), vengono fornite direttamente dal Circolo didattico alle famiglie. La scuola provvederà a consegnarle già compilate, con l’indicazione dei testi scolastici adottati dal Collegio dei Docenti per la classe frequentata. Oc",
+  "body": "Per gli alunni residenti nel Comune di Ostuni e che frequentano una delle due scuole primarie le cedole librarie, in triplice copia (per il Comune, per la scuola e per la libreria), vengono fornite direttamente dal Circolo didattico alle famiglie. La scuola provvederà a consegnarle già compilate, con l’indicazione dei testi scolastici adottati dal Collegio dei Docenti per la classe frequentata. Occorre poi recarsi in libreria con le cedole. | Essere genitori di alunni residenti nel Comune di Ostuni e che frequentano una delle due scuole primarie",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-05-28",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/cedole-librarie-per-genitori/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1434",
+   "fetched_at": "2026-08-05T16:06:39.424665Z",
+   "raw_hash": "f502da25e3c73213"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:074012:1431",
+  "title": "Contributi per l’acquisto di libri di testo per la scuola secondaria",
+  "summary": "Per accedere al servizio occorre:",
+  "body": "Per accedere al servizio occorre: | Avere il modulo ISEE | Essere genitori di alunni frequentanti scuole secondarie di primo e secondo grado, residenti nel territorio del comune. | Essere dotati dello SPID.",
+  "kind": "contributo_economico",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [
+    "Richiesta attestazione ISEE (soglia non pubblicata)"
+   ],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-05-28",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_rest",
+   "url": "https://www.comune.ostuni.br.it/servizio/il-comune-eroga-ai-genitori-di-ragazzi-che-frequentano-le-scuole-di-secondo-grado-contributi-a-rimborso-totale-o-parziale-per-lacquisto-di-libri-di-testo-scolastici/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/servizi/1431",
+   "fetched_at": "2026-08-05T16:06:39.424912Z",
+   "raw_hash": "9750734ad06ef49f"
+  },
+  "confidence": "extracted",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il servizio richiede l'ISEE ma non pubblica la soglia: verifica sulla pagina del comune.",
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_pages:074012:3277",
+  "title": "Garante dei diritti delle persone con disabilità.",
+  "summary": "SERVIZI: TARIFFA TARI: AGEVOLAZIONE 10% PER FAMIGLIE CON PRESENZA DI PERSONE CON DISABILITA’ AL 100% | ESENZIONE DAL PAGAMENTO DEL CANONE DI PASSI CARRABILI, RAMPE E SIMILI DESTINATI A SOGGETTI PORTATORI DI HANDICAP | RICHIESTA CONTRASSEGNO UNIFICATO DISABILI EUROPEO (CUDE) | RICHIESTA DI ACCESSO AD AREA ZTL PERSONE CON DISABILITA' | SERVIZIO DI TAXI SOCIALE | FREQUENZA GRATUITA DELLA PISCINA COMU",
+  "body": "SERVIZI: TARIFFA TARI: AGEVOLAZIONE 10% PER FAMIGLIE CON PRESENZA DI PERSONE CON DISABILITA’ AL 100% | ESENZIONE DAL PAGAMENTO DEL CANONE DI PASSI CARRABILI, RAMPE E SIMILI DESTINATI A SOGGETTI PORTATORI DI HANDICAP | RICHIESTA CONTRASSEGNO UNIFICATO DISABILI EUROPEO (CUDE) | RICHIESTA DI ACCESSO AD AREA ZTL PERSONE CON DISABILITA' | SERVIZIO DI TAXI SOCIALE | FREQUENZA GRATUITA DELLA PISCINA COMUNALE A PERSONE CON INVALIDITA’ DEL 100% | LE AGEVOLAZIONI FISCALI DELLA AGENZIA DELLE ENTRATE PER LE PERSONE CON DISABILITA’ | RELAZIONI SEMESTRALI: RELAZIONE SEMESTRE 12/08/2026 – 28/02/2026 | DOCUMENTI D’INTERESSE: CONVENZIONE ONU DEI DIRITTI DELLE PERSONE CON DISABILITA’ | DECRETO DI NOMINA DEL GARANTE PER I DIRITTI DELLE PERSONE CON DISABILITA’ | REGOLAMENTO COMUNALE DEL GARANTE PER I DIRITTI DELLE PERSONE CON DISABILITA’ | L. 67/2006 LEGGE ANTIDISCRIMINAZIONE | AVVISI: Regione Puglia e ARPAL Puglia – Avviso Pubblico per la formazione dell’Elenco degli Assistenti Familiari – LINK",
+  "kind": "agevolazione",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": true,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2026-03-03",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_pages",
+   "url": "https://www.comune.ostuni.br.it/garante-dei-diritti-delle-persone-con-disabilita/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/pages/3277",
+   "fetched_at": "2026-08-05T16:07:15.123167Z",
+   "raw_hash": "15b4a4658bf3ad21"
+  },
+  "confidence": "extracted",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Allegato PDF illeggibile (parsing fallito): https://www.lavoro.gov.it/temi-e-priorita/disabilita-e-non-autosufficienza/focus-on/Convenzione-ONU/Documents/Convenzione%20ONU.pdf (No module named 'pypdf')",
+   "Allegato PDF illeggibile (parsing fallito): https://dgegovpa.it/Ostuni/albo/dati/20250012C.PDF (No module named 'pypdf')",
+   "Non è chiaro se le agevolazioni sono accessibili solo a chi ha un certificato di disabilità o se la disabilità deve essere dichiarata in un certo modo.",
+   "Fonte per 'disabilita_required': pagina web https://www.comune.ostuni.br.it/garante-dei-diritti-delle-persone-con-disabilita/ — \"AGEVOLAZIONE 10% PER FAMIGLIE CON PRESENZA DI PERSONE CON DISABILITA’ AL 100%\""
+  ],
+  "recovery_level": "L2_estratto",
+  "pdfs_linked": 2,
+  "pdfs_opened": 0,
+  "pdfs_skipped": [
+   {
+    "url": "https://www.lavoro.gov.it/temi-e-priorita/disabilita-e-non-autosufficienza/focus-on/Convenzione-ONU/Documents/Convenzione%20ONU.pdf",
+    "reason": "parsing fallito: No module named 'pypdf'"
+   },
+   {
+    "url": "https://dgegovpa.it/Ostuni/albo/dati/20250012C.PDF",
+    "reason": "parsing fallito: No module named 'pypdf'"
+   }
+  ],
+  "chars_processed": 990,
+  "extraction_seconds": 32.92108958296012,
+  "requirements_recovered": 1
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_pages:074012:1714",
+  "title": "Tributi locali",
+  "summary": "L’Ufficio Tributi informa che per le notifiche degli atti di accertamento/rimborso riferiti ai Tributi IMU (Imposta Municipale propria) e TARI (Tassa sui rifiuti) utilizzerà la piattaforma SEND – Servizio Notifiche digitali. | Send, Servizio Notifiche Digitali (https://notifichedigitali.it/ ), è la piattaforma istituita dall’art. 26 del Decreto Legge 76/2020 che digitalizza l’invio delle comunicaz",
+  "body": "L’Ufficio Tributi informa che per le notifiche degli atti di accertamento/rimborso riferiti ai Tributi IMU (Imposta Municipale propria) e TARI (Tassa sui rifiuti) utilizzerà la piattaforma SEND – Servizio Notifiche digitali. | Send, Servizio Notifiche Digitali (https://notifichedigitali.it/ ), è la piattaforma istituita dall’art. 26 del Decreto Legge 76/2020 che digitalizza l’invio delle comunicazioni legali da parte delle Amministrazioni ai cittadini. | Con l’ adozione di SEND da parte del Comune di Ostuni per l’invio delle notifiche relative agli atti di accertamento/rimborso IMU e TARI, i cittadini che lo desiderano potranno scegliere di gestire queste comunicazioni a valore legale interamente in digitale, dalla ricezione al pagamento dei relativi importi, ove previsto. | È sufficiente: | ● essere in possesso di un domicilio digitale, cioè di un indirizzo PEC, presente nei registri pubblici come INAD (l’indice nazionale dei domicili digitali) o indicato dal destinatario direttamente accedendo a SEND con SPID o CIE dal sito https://cittadini.notifichedigitali.it/ | ● oppure attivare il servizio su IO, l’app dei servizi pubblici (ioapp.it) per essere informati della presenza di una notifica tramite un avviso di cortesia, da cui visualizzare l’atto e pagare contestualmente eventuali importi dovuti; | Se non possiedi o non hai indicato un indirizzo PEC e non hai attivato il servizio su app IO ma hai inserito su SEND la tua email e/o il tuo numero di cellulare, riceverai un avviso di cortesia per segnalarti la presenza di una notifica e il relativo link per accedere a SEND e visualizzare la notifica e i documenti associati. Se accedi a SEND dall’apposito link entro 5 giorni (120 ore) dalla ricezione della notifica, questa risulterà legalmente recapitata e non riceverai raccomandate cartacee. Da SEND potrai scaricare i documenti e l’eventuale avviso di pagamento pagoPA che potrai pagare nelle modalità previste (online o presso sportelli). | In assenza di recapiti digitali, la piattaforma SEND si occuperà di inviare, tramite la tradizionale raccomandata cartacea, un Avviso di Avvenuta Ricezione al cui interno sarà presente un QR code per accedere all’atto intero sulla piattaforma SEND loggandosi con SPID o CIE. In alternativa, sarà possibile richiedere – a pagamento – una copia cartacea dell’atto intero notificato recandosi presso uno dei punti di ritiro SEND la cui lista è consultabile a questo link: notifichedigitail.it/punti-di-ritiro/ | Orari al pubblico | PER IMU TARI TASI | Accedi al portale dei servizi online | Lunedì dalle ore 9,00 alle ore 12,00 | Mercoledì dalle ore 9,00 alle ore 12,00 | Giovedì dalle ore 16,00 alle 18,00 | IL PUBBLICO SARA’ RICEVUTO SOLO ED ESCLUSIVAMENTE PREVIO APPUNTAMENTO | Per informazioni telefonare il martedì e il venerdì dalle ore 09,00 alle 11,00 al numero VERDE GRATUITO 800596626 oppure inviare una e-mail all’indirizzo tributi@comune.ostuni.br.it | PER CANONE UNICO PATRIMONIALE | – Pubblicità – giornaliera e annuale | – Pubbliche Affissioni | – Occupazione del suolo pubblico – giornaliera e annuale (passi carrabili) | – Canone Mercatale | Orari di ricevimento | Lunedì e mercoledì dalle ore 09:00 alle ore 12:00 | Giovedì dalle ore 16:00 alle ore 18:00 | Contatti | Tel.: 0831.307306 email: canoneunico@comune.ostuni.br.it | PER IMPOSTA DI SOGGIORNO | Martedì dalle ore 9,00 alle ore 13,00 solo su appuntamento | Per informazioni, l’help desk telefonico è attivo il lunedì e il giovedì dalle ore 9,00 alle ore 13,00 al numero 333-6141323 | Mail di contatto: imposta.soggiorno@comune.ostuni.br.it | IMU – Imposta Municipale Unica TARI – Tassa sui Rifiuti CUP – Canone Unico Patrimoniale Imposta di Soggiorno | Scopri di più",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-17",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Ostuni",
+   "ente_codice_istat": "074012",
+   "connector": "wp_pages",
+   "url": "https://www.comune.ostuni.br.it/pagina-di-prova/",
+   "api_url": "https://www.comune.ostuni.br.it/wp-json/wp/v2/pages/1714",
+   "fetched_at": "2026-08-05T16:07:47.113811Z",
+   "raw_hash": "a5d092116245c668"
+  },
+  "confidence": "extracted",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il testo non descrive alcun requisito di accesso, ma informazioni relative alla notifica digitale di atti di accertamento/rimborso IMU e TARI, nonché orari di ricevimento e contatti per diversi servizi tributari.",
+   "Valore per 'figli_minori_required' scartato: il modello non ha saputo indicare la frase di origine nel testo.",
+   "Valore per 'disabilita_required' scartato: il modello non ha saputo indicare la frase di origine nel testo."
+  ],
+  "recovery_level": "L1_manuale",
+  "pdfs_linked": 0,
+  "pdfs_opened": 0,
+  "pdfs_skipped": [],
+  "chars_processed": 3711,
+  "extraction_seconds": 31.989165916107595,
+  "requirements_recovered": 0
+ }
+]

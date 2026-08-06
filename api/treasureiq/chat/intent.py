@@ -43,6 +43,10 @@ class Topic(str, Enum):
     """
 
     TRASPORTO_SCOLASTICO = "trasporto_scolastico"
+    #: Abbonamenti e agevolazioni sul trasporto pubblico locale. Distinto dallo
+    #: scuolabus: chi chiede «bandi per i mezzi pubblici» non sta chiedendo del
+    #: pulmino della scuola, e senza questa voce non agganciava niente.
+    TRASPORTO_PUBBLICO = "trasporto_pubblico"
     MENSA_SCOLASTICA = "mensa_scolastica"
     CONTRIBUTO_LIBRI = "contributo_libri"
     BORSA_STUDIO = "borsa_studio"
@@ -112,6 +116,14 @@ class QuestionKind(str, Enum):
 #: involved in this step, so it stays auditable and cheap.
 TOPIC_KEYWORDS: dict[Topic, tuple[str, ...]] = {
     Topic.TRASPORTO_SCOLASTICO: ("trasporto scolastico", "scuolabus"),
+    Topic.TRASPORTO_PUBBLICO: (
+        "trasporto pubblico",
+        "mezzi pubblici",
+        "abbonamento",
+        "autobus",
+        "tpl",
+        "metropolitana",
+    ),
     Topic.MENSA_SCOLASTICA: ("mensa",),
     Topic.CONTRIBUTO_LIBRI: ("libri di testo", "sussidi didattici", "libri scolastici"),
     Topic.BORSA_STUDIO: ("borsa di studio", "iostudio"),
@@ -428,3 +440,50 @@ async def extract_intent(*, message: str, provider: LLMProvider) -> ChatIntent:
     except Exception:
         logger.warning("intent extraction failed, falling back to sconosciuto", exc_info=True)
         return ChatIntent(topic=Topic.SCONOSCIUTO)
+
+
+#: «ho 38 anni», «38enne», «ho compiuto 38 anni». L'età sta sempre accanto
+#: alla parola, e leggerla con un'espressione regolare costa niente.
+_ETA_NEL_TESTO = re.compile(
+    r"\b(?:ho\s+|di\s+|età\s+|eta\s+)?(?P<eta>\d{1,3})\s*(?:anni|enne\b)", re.I
+)
+
+#: «ISEE 12.000», «isee di 12000 euro», «isee 9.360,50».
+_ISEE_NEL_TESTO = re.compile(
+    r"\bisee\b[^\d]{0,20}(?P<isee>\d{1,3}(?:[.\s]\d{3})*(?:,\d{1,2})?|\d{3,6}(?:,\d{1,2})?)",
+    re.I,
+)
+
+
+def slot_dal_testo(messaggio: str) -> dict:
+    """Età e ISEE letti dal testo, senza passare dal modello.
+
+    Il modello questi due li sbaglia in due modi diversi e ugualmente cari: a
+    volte non li vede — «ho 38 anni» restava fuori dal profilo, e la scheda
+    continuava a chiedere l'età al cittadino che l'aveva appena scritta — e a
+    volte li riscrive, che su una cifra è peggio di non vederla.
+
+    È la stessa regola che vale per le soglie nei verdetti: le cifre non le
+    produce il modello. Qui si applica anche in ingresso.
+    """
+    trovati: dict = {}
+    if not messaggio:
+        return trovati
+
+    eta = _ETA_NEL_TESTO.search(messaggio)
+    if eta:
+        valore = int(eta.group("eta"))
+        # Oltre i 130 non è un'età: è un importo o un numero civico finito
+        # accanto alla parola sbagliata.
+        if 0 < valore <= 130:
+            trovati["eta"] = valore
+
+    isee = _ISEE_NEL_TESTO.search(messaggio)
+    if isee:
+        grezzo = isee.group("isee").replace(".", "").replace(" ", "").replace(",", ".")
+        try:
+            trovati["isee"] = float(grezzo)
+        except ValueError:
+            pass
+    return trovati
+

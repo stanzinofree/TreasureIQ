@@ -1,0 +1,4052 @@
+[
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2154",
+  "title": "Mensa scolastica: iscrizione al servizio",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-05",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:ristorazione.scolastica;iscrizione",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2154",
+   "fetched_at": "2026-08-05T16:07:48.112606Z",
+   "raw_hash": "d0f7ff3461cb54ed"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2153",
+  "title": "Rimborso per errato versamento",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-05",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:rimborso.errato.versamento;domanda",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2153",
+   "fetched_at": "2026-08-05T16:07:48.112967Z",
+   "raw_hash": "699e92502121b6ef"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2152",
+  "title": "Rateizzazione del pagamento di un tributo",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-05",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:rateizzazione.pagamento.tributi;domanda",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2152",
+   "fetched_at": "2026-08-05T16:07:48.113177Z",
+   "raw_hash": "a60908a3c095dc7c"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2151",
+  "title": "Rilascio dell’attestazione di iscrizione anagrafica per cittadini comunitari",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-05",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:iscrizione.anagrafica;attestato;cittadini.comunitari;domanda",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2151",
+   "fetched_at": "2026-08-05T16:07:48.113388Z",
+   "raw_hash": "634d555c2dfccd68"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2150",
+  "title": "Rilascio dell’attestazione di soggiorno permanente per cittadini comunitari",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-05",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:soggiorno.permanente;attestato;domanda",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2150",
+   "fetched_at": "2026-08-05T16:07:48.113581Z",
+   "raw_hash": "5e7b42c287112a86"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2149",
+  "title": "Dichiarazione di cambio abitazione o residenza",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-05",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:cambio.abitazione.residenza;dichiarazione",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2149",
+   "fetched_at": "2026-08-05T16:07:48.113753Z",
+   "raw_hash": "7466c1c4d2152912"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2148",
+  "title": "Consultazione e copia delle liste elettorali",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-05",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:liste.elettorali;consultazione.copia;domanda",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2148",
+   "fetched_at": "2026-08-05T16:07:48.113905Z",
+   "raw_hash": "969afd57c98738f4"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2147",
+  "title": "Costituzione della convivenza di fatto",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-05",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:convivenza.fatto;costituzione;dichiarazione",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2147",
+   "fetched_at": "2026-08-05T16:07:48.114080Z",
+   "raw_hash": "70fe34196c6e2247"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2146",
+  "title": "Cessazione della convivenza di fatto",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-05",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:convivenza.fatto;cessazione;dichiarazione",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2146",
+   "fetched_at": "2026-08-05T16:07:48.114230Z",
+   "raw_hash": "643686acad4a161b"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2145",
+  "title": "Iscrizione all’albo dei giudici popolari",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-05",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:albo.giudici.popolari;iscrizione",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2145",
+   "fetched_at": "2026-08-05T16:07:48.114383Z",
+   "raw_hash": "a842712ff1499176"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2144",
+  "title": "Iscrizione all’albo dei presidenti di seggio",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-05",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:albo.presidenti.seggio;iscrizione",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2144",
+   "fetched_at": "2026-08-05T16:07:48.114537Z",
+   "raw_hash": "cc6d8f515035d12c"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2143",
+  "title": "Iscrizione all’albo degli scrutatori",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-05",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:albo.scrutatori;iscrizione",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2143",
+   "fetched_at": "2026-08-05T16:07:48.114689Z",
+   "raw_hash": "230c172ddcf35582"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2142",
+  "title": "Cancellazione dall’albo degli scrutatori",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-05",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:albo.scrutatori;cancellazione",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2142",
+   "fetched_at": "2026-08-05T16:07:48.114849Z",
+   "raw_hash": "adc7365d66b42b97"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2141",
+  "title": "Costituzione dell’unione civile",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-05",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:unione.civile;costituzione;domanda",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2141",
+   "fetched_at": "2026-08-05T16:07:48.115007Z",
+   "raw_hash": "8dac927efb34f444"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2140",
+  "title": "Rilascio di copia del rapporto di rilievo di un incidente stradale",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-05",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:informazioni.incidenti;rilascio;domanda",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2140",
+   "fetched_at": "2026-08-05T16:07:48.115174Z",
+   "raw_hash": "2e77e1f57865ff7d"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2139",
+  "title": "Manomissione di suolo pubblico: rilascio dell’autorizzazione per la manomissione di suolo pubblico",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-05",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:opere.depositi.cantieri.stradali;autorizzazione",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2139",
+   "fetched_at": "2026-08-05T16:07:48.115340Z",
+   "raw_hash": "2c3e891a7796418f"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2138",
+  "title": "Manomissione di suolo pubblico: comunicazione di inizio lavori",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-05",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:opere.depositi.cantieri.stradali;inizio.lavori",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2138",
+   "fetched_at": "2026-08-05T16:07:48.115479Z",
+   "raw_hash": "c9d7060de12bc604"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2137",
+  "title": "Manomissione di suolo pubblico: comunicazione di fine lavori",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-05",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:opere.depositi.cantieri.stradali;fine.lavori",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2137",
+   "fetched_at": "2026-08-05T16:07:48.115615Z",
+   "raw_hash": "229c6ffd0493ddd6"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2136",
+  "title": "Assegnazione della numerazione civica",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-05",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:numerazione.civica;assegnazione;domanda",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2136",
+   "fetched_at": "2026-08-05T16:07:48.115756Z",
+   "raw_hash": "5d2db2c5d904a577"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2135",
+  "title": "Asilo nido: iscrizione al servizio",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-05",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:asilo.nido;iscrizione",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2135",
+   "fetched_at": "2026-08-05T16:07:48.115889Z",
+   "raw_hash": "84df75c95d843eef"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2134",
+  "title": "Accesso documentale",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-05",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:accesso.documentale;domanda",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2134",
+   "fetched_at": "2026-08-05T16:07:48.116026Z",
+   "raw_hash": "e2ddc1240c5af5ee"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2133",
+  "title": "Accesso civico semplice",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-05",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:accesso.civico;semplice",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2133",
+   "fetched_at": "2026-08-05T16:07:48.116171Z",
+   "raw_hash": "770fca31a0041f8b"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2132",
+  "title": "Accesso civico generalizzato",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-05",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:accesso.civico;generalizzato",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2132",
+   "fetched_at": "2026-08-05T16:07:48.116300Z",
+   "raw_hash": "e2f5cdd879d7c717"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2131",
+  "title": "Riesame della domanda di accesso civico generalizzato",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-05",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:accesso.civico;riesame.domanda",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2131",
+   "fetched_at": "2026-08-05T16:07:48.116438Z",
+   "raw_hash": "a941f489338f09e6"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2130",
+  "title": "Comunicazione della volontà di esprimere il voto presso il proprio domicilio",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-04",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:diritto.voto;domicilio;dichiarazione",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2130",
+   "fetched_at": "2026-08-05T16:07:48.116614Z",
+   "raw_hash": "4f02318da8dcde8d"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2129",
+  "title": "Rilascio del certificato di servizio prestato presso l’ente",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-04",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:servizio.prestato.presso.ente;attestato;domanda",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2129",
+   "fetched_at": "2026-08-05T16:07:48.116773Z",
+   "raw_hash": "d7620308de96c0b2"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2128",
+  "title": "Esercizio del potere sostitutivo",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-04",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:esercizio.potere.sostitutivo;domanda",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2128",
+   "fetched_at": "2026-08-05T16:07:48.116935Z",
+   "raw_hash": "3f4adb50cf725337"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2127",
+  "title": "Esercizio dei diritti in materia di protezione dei dati personali",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-04",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:dati.personali;esercizio.diritti.protezione;domanda",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2127",
+   "fetched_at": "2026-08-05T16:07:48.117093Z",
+   "raw_hash": "2773eb33c6c09c34"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2125",
+  "title": "Rilascio della tessera elettorale",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-04",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://www.comune.malvagna.me.it/t/servizio/rilascio-della-tessera-elettorale/",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2125",
+   "fetched_at": "2026-08-05T16:07:48.117250Z",
+   "raw_hash": "c5428a7548055714"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2124",
+  "title": "Compensazione tra crediti e debiti tributari",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-04",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:compensazione.crediti.debiti;domanda",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2124",
+   "fetched_at": "2026-08-05T16:07:48.117405Z",
+   "raw_hash": "6a0cbef27982b1fd"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2123",
+  "title": "Cancellazione dall’albo dei giudici popolari",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-04",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:albo.giudici.popolari;cancellazione",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2123",
+   "fetched_at": "2026-08-05T16:07:48.117549Z",
+   "raw_hash": "18fe11b4d07deabf"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2122",
+  "title": "Rilascio della carta d’identità elettronica per maggiorenni",
+  "summary": "Per accedere al servizio, assicurati di avere tutta la documentazione prevista.",
+  "body": "Per accedere al servizio, assicurati di avere tutta la documentazione prevista. | Per accedere al servizio, assicurati di avere tutta la documentazione prevista.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-04",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:carta.identita;elettronica;maggiorenni;domanda",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2122",
+   "fetched_at": "2026-08-05T16:07:48.117659Z",
+   "raw_hash": "197438f7e9e10977"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2121",
+  "title": "Rilascio della carta d’identità elettronica per minorenni",
+  "summary": "Per accedere al servizio, assicurati di avere tutta la documentazione prevista.",
+  "body": "Per accedere al servizio, assicurati di avere tutta la documentazione prevista. | Per accedere al servizio, assicurati di avere tutta la documentazione prevista.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-04",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:carta.identita;elettronica;minorenni;domanda",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2121",
+   "fetched_at": "2026-08-05T16:07:48.117769Z",
+   "raw_hash": "bab91d5a0097749e"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2120",
+  "title": "Rilascio della carta d’identità elettronica a domicilio con un delegato",
+  "summary": "Per accedere al servizio, assicurati di avere tutta la documentazione prevista.",
+  "body": "Per accedere al servizio, assicurati di avere tutta la documentazione prevista. | Per accedere al servizio, assicurati di avere tutta la documentazione prevista.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-04",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:carta.identita;elettronica;delegato;domanda",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2120",
+   "fetched_at": "2026-08-05T16:07:48.117877Z",
+   "raw_hash": "f12378ff148ba561"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2118",
+  "title": "Trasporto di cadavere, ceneri o resti mortali all’estero",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-04",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:trasporto.ceneri.resti;estero;autorizzazione",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2118",
+   "fetched_at": "2026-08-05T16:07:48.118014Z",
+   "raw_hash": "6f4b34b6391fa044"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2117",
+  "title": "Cambio di custodia per veicoli sottoposti a sequestro o fermo amministrativo",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-04",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:fermo.amministrativo.sequestro.veicolo;cambio.custodia;domanda",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2117",
+   "fetched_at": "2026-08-05T16:07:48.118172Z",
+   "raw_hash": "06be2aca053f9bc1"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2116",
+  "title": "Avvio del procedimento di pubblicazione di matrimonio",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-04",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:pubblicazione.matrimonio",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2116",
+   "fetched_at": "2026-08-05T16:07:48.118345Z",
+   "raw_hash": "757f473ec8ef8c29"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2115",
+  "title": "Riversamento del pagamento di tributi",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-04",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:riversamento.pagamento.tributi;domanda",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2115",
+   "fetched_at": "2026-08-05T16:07:48.118492Z",
+   "raw_hash": "2e731c0a889cd9c5"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2114",
+  "title": "Occupazione di suolo pubblico per svolgere attività elettorali e referendarie: rilascio della concessione",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-04",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:occupazione.suolo.pubblico;attivita.elettorali.referendarie;domanda",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2114",
+   "fetched_at": "2026-08-05T16:07:48.118677Z",
+   "raw_hash": "3ab450b95d9dfe1f"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2113",
+  "title": "Modifica temporanea della viabilità",
+  "summary": "Per accedere al servizio, assicurati di avere",
+  "body": "Per accedere al servizio, assicurati di avere | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-04",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:viabilita;modifica;domanda",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2113",
+   "fetched_at": "2026-08-05T16:07:48.118823Z",
+   "raw_hash": "bfa7d5fff50579ae"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2112",
+  "title": "Rateizzazione del pagamento di una sanzione relativa a Ordinanze e Regolamenti comunali",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-04",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Asanzioni%3Bamministrative.violazioni.ordinanze.regolamenti%3Brateizzazione%3Bdomanda",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2112",
+   "fetched_at": "2026-08-05T16:07:48.119017Z",
+   "raw_hash": "ea0268b113a178e3"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2111",
+  "title": "Realizzazione di un’area di carico/scarico merci per attività commerciali e artigianali",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-04",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Acarico.scarico.merci%3Brealizzazione.area%3Bdomanda",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2111",
+   "fetched_at": "2026-08-05T16:07:48.119208Z",
+   "raw_hash": "dd4563a9a82715bb"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2110",
+  "title": "Discarico della cartella di pagamento o di ingiunzione di pagamento relativo a un tributo",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-04",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Apagamento.tributi%3Bdiscarico.cartella.esattoriale%3Bdomanda",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2110",
+   "fetched_at": "2026-08-05T16:07:48.119403Z",
+   "raw_hash": "de931f341f19b894"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2109",
+  "title": "Riconciliazione tra coniugi",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-04",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Ariconciliazione.coniugi%3Bdomanda",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2109",
+   "fetched_at": "2026-08-05T16:07:48.119545Z",
+   "raw_hash": "cccdc3e9240b8a05"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2108",
+  "title": "Occupare suolo pubblico per svolgere attività non imprenditoriali e attività benefiche: rilascio della concessione",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-04",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:occupazione.suolo.pubblico;attivita.benefiche;nuova.occupazione",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2108",
+   "fetched_at": "2026-08-05T16:07:48.119711Z",
+   "raw_hash": "48b5a577dcc27287"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2107",
+  "title": "Accesso documentale come consigliere comunale",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-04",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Aaccedere.atti.consiglieri.comunali",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2107",
+   "fetched_at": "2026-08-05T16:07:48.119859Z",
+   "raw_hash": "7a9343111b956e24"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2106",
+  "title": "Contrassegno per veicoli a servizio dei disabili: rilascio del contrassegno temporaneo",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-04",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Aveicoli.disabili%3Bcircolazione.sosta%3Btemporaneo%3Brilascio%3Bdomanda",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2106",
+   "fetched_at": "2026-08-05T16:07:48.120003Z",
+   "raw_hash": "04734a74412df197"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2105",
+  "title": "Occupare suolo pubblico per l’apertura di cantieri e per svolgere attività di scarico merci e traslochi: rilascio della concessione",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-04",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Aoccupazione.suolo.pubblico%3Bcantieri.traslochi%3Bnuova",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2105",
+   "fetched_at": "2026-08-05T16:07:48.120168Z",
+   "raw_hash": "2ecadf0cc290fe94"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2104",
+  "title": "Segnalazione di un presunto maltrattamento di animali",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-04",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Aanimali%3Bsegnalare.presunto.maltrattamento%3Bsegnalazione",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2104",
+   "fetched_at": "2026-08-05T16:07:48.120318Z",
+   "raw_hash": "9cc282426c28d0aa"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2102",
+  "title": "Autorizzazione all’esumazione, estumulazione straordinaria o traslazione",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-04",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Aesumazione.estumulazione%3Bautorizzazione",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2102",
+   "fetched_at": "2026-08-05T16:07:48.120471Z",
+   "raw_hash": "9bbcad8d11e8de61"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2101",
+  "title": "Sepoltura di un cadavere per inumazione o tumulazione",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-04",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Ainumazione.tumulazione%3Bautorizzazione",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2101",
+   "fetched_at": "2026-08-05T16:07:48.120618Z",
+   "raw_hash": "b5bdd09066ac1cf0"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2100",
+  "title": "Trasporto di cadavere, ceneri o resti mortali in territorio italiano",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-04",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Atrasporto.ceneri.resti%3Bterritorio.italiano%3Bautorizzazione",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2100",
+   "fetched_at": "2026-08-05T16:07:48.120762Z",
+   "raw_hash": "411ef778de010a3a"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2098",
+  "title": "Cambio della domiciliazione delle comunicazioni relative a un procedimento",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-04",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Agenerale%3Bmodifica.domicilio",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2098",
+   "fetched_at": "2026-08-05T16:07:48.120901Z",
+   "raw_hash": "42622d80790466e7"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2097",
+  "title": "Segnalazione di presunta violazione delle norme ambientali",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-04",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Aviolazione.norme.materia.ambientale%3Bsegnalazione",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2097",
+   "fetched_at": "2026-08-05T16:07:48.121036Z",
+   "raw_hash": "c2fea189678ec9dd"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2096",
+  "title": "Segnalazione di ritrovamento di una carcassa animale",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-04",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Asegnalazione.carcassa.animale",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2096",
+   "fetched_at": "2026-08-05T16:07:48.121183Z",
+   "raw_hash": "12c7daa07d74e653"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2095",
+  "title": "Messa a norma di un impianto termico",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-04",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Aimpianto.termico%3Bmessa.norma%3Bcomunicazione",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2095",
+   "fetched_at": "2026-08-05T16:07:48.121378Z",
+   "raw_hash": "a70efe4c697399d9"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2094",
+  "title": "Abbattimento di alberi",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-04",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Aabbattere.alberi%3Bautorizzazione",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2094",
+   "fetched_at": "2026-08-05T16:07:48.121635Z",
+   "raw_hash": "9efa18ddb7b97112"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2093",
+  "title": "Contrassegno rosa per donne gravide o con figli fino a due anni: rilascio del contrassegno",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-04",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Aparcheggi.rosa.contrassegno",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2093",
+   "fetched_at": "2026-08-05T16:07:48.121789Z",
+   "raw_hash": "bf44d07032665548"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2092",
+  "title": "Opposizione all’accesso civico generalizzato da parte di controinteressati",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-04",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Aaccesso.civico%3Bgeneralizzato%3Bopposizione",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2092",
+   "fetched_at": "2026-08-05T16:07:48.121923Z",
+   "raw_hash": "1ad5f1dae63b1c8a"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2091",
+  "title": "Riesame dell’opposizione all’accesso civico generalizzato da parte di controinteressati",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-02",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Aaccesso.civico%3Bgeneralizzato%3Bopposizione%3Briesame",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2091",
+   "fetched_at": "2026-08-05T16:07:48.122041Z",
+   "raw_hash": "7ec895f83801d7a6"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2090",
+  "title": "Vidimazione del registro dei volontari per gli enti del terzo settore",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-02",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Avidimazione.registro.volontari.terzo.settore%3Bdomanda",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2090",
+   "fetched_at": "2026-08-05T16:07:48.122140Z",
+   "raw_hash": "831e95b6f1558aa3"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2089",
+  "title": "Verifica della numerazione civica",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-02",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Anumerazione.civica%3Bverifica%3Bdomanda",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2089",
+   "fetched_at": "2026-08-05T16:07:48.122217Z",
+   "raw_hash": "f896135f33c74e21"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2088",
+  "title": "Rilascio dei codici PIN e PUK a seguito di smarrimento",
+  "summary": "Per accedere al servizio, assicurati di avere tutta la documentazione prevista",
+  "body": "Per accedere al servizio, assicurati di avere tutta la documentazione prevista | Per accedere al servizio, assicurati di avere tutta la documentazione prevista",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-02",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Acarta.identita%3Belettronica%3Bpin.puk%3Bdomanda",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2088",
+   "fetched_at": "2026-08-05T16:07:48.122272Z",
+   "raw_hash": "eaddf599ddbfc45c"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2087",
+  "title": "Modifica della numerazione civica",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-02",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Anumerazione.civica%3Bmodifica%3Bdomanda",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2087",
+   "fetched_at": "2026-08-05T16:07:48.122393Z",
+   "raw_hash": "8cbab348d7c29857"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2085",
+  "title": "Soppressione della numerazione civica",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-02",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Anumerazione.civica%3Bsoppressione%3Bdomanda",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2085",
+   "fetched_at": "2026-08-05T16:07:48.122469Z",
+   "raw_hash": "80d264d29e040424"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2084",
+  "title": "Concessione di agevolazioni scolastiche",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "agevolazione",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-02",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Aagevolazioni.scolastiche",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2084",
+   "fetched_at": "2026-08-05T16:07:48.122526Z",
+   "raw_hash": "cb29df5a1e489da7"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2083",
+  "title": "Contrassegno rosa per donne gravide o con figli fino a due anni: rinnovo del contrassegno",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-02",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Aparcheggi.rosa.contrassegno%3Brinnovo",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2083",
+   "fetched_at": "2026-08-05T16:07:48.122603Z",
+   "raw_hash": "7035ec5276f91d5a"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2082",
+  "title": "Accesso ai servizi dell’ANPR",
+  "summary": "Per accedere al servizio, assicurati di avere SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS).",
+  "body": "Per accedere al servizio, assicurati di avere SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS). | Per accedere al servizio, assicurati di avere SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS).",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-02",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Aaccedere.servizi.anpr",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2082",
+   "fetched_at": "2026-08-05T16:07:48.122740Z",
+   "raw_hash": "770738ea620b7785"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2078",
+  "title": "Accesso ai servizi del SUAP (Sportello Unico Attività Produttive)",
+  "summary": "Per accedere al servizio, assicurati di avere SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS).",
+  "body": "Per accedere al servizio, assicurati di avere SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS). | Per accedere al servizio, assicurati di avere SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS).",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-02",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3Ac_c347%3Aaccedere.servizi.suap",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2078",
+   "fetched_at": "2026-08-05T16:07:48.122873Z",
+   "raw_hash": "fb1a0159534deb9e"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2076",
+  "title": "Accesso ai servizi del SUE (Sportello Unico Edilizia)",
+  "summary": "Per accedere al servizio, assicurati di avere SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS).",
+  "body": "Per accedere al servizio, assicurati di avere SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS). | Per accedere al servizio, assicurati di avere SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS).",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2025-01-01",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:c_c347:accedere.servizi.sue",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2076",
+   "fetched_at": "2026-08-05T16:07:48.122985Z",
+   "raw_hash": "6a631dafaf2bc8e3"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2035",
+  "title": "Prenota Appuntamento",
+  "summary": "Occorre effettuare il Login oppure inserire i propri dati manualmente, al fine di procedere con la prenotazione",
+  "body": "Occorre effettuare il Login oppure inserire i propri dati manualmente, al fine di procedere con la prenotazione | Sapere l'ufficio alla quale volersi rivolgere",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-12-18",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://www.comune.malvagna.me.it/t/servizio/prenota-appuntamento/",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2035",
+   "fetched_at": "2026-08-05T16:07:48.123043Z",
+   "raw_hash": "f59081a45b2d1c63"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2033",
+  "title": "Cambio di Residenza",
+  "summary": "Per comunicare il cambio di residenza , assicurati di avere",
+  "body": "Per comunicare il cambio di residenza , assicurati di avere | i dati della nuova abitazione i dati di coloro che già vi risiedono i dati delle persone che si sono trasferiti da te",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-12-18",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://www.comune.malvagna.me.it/t/servizio/cambio-di-residenza/",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2033",
+   "fetched_at": "2026-08-05T16:07:48.123100Z",
+   "raw_hash": "0b20f8e93957f99b"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2032",
+  "title": "PagoPA",
+  "summary": "Dati anagrafici dell’interessato",
+  "body": "Dati anagrafici dell’interessato | Per i Pagamenti Online serve essere dotati di Carta di Credito",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-12-18",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://www.comune.malvagna.me.it/t/servizio/pagopa/",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2032",
+   "fetched_at": "2026-08-05T16:07:48.123148Z",
+   "raw_hash": "b1660c1cedcb2c71"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2017",
+  "title": "Segnalazioni disservizi",
+  "summary": "Per accedere al servizio, assicurati di avere: informazioni sul tipo di disservizio e sul luogo all'interno del territorio comunale;",
+  "body": "Per accedere al servizio, assicurati di avere: informazioni sul tipo di disservizio e sul luogo all'interno del territorio comunale; | informazioni sul tipo di disservizio e sul luogo all'interno del territorio comunale;",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-12-07",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://www.comune.malvagna.me.it/t/servizio/segnalazioni-disservizi/",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2017",
+   "fetched_at": "2026-08-05T16:07:48.123208Z",
+   "raw_hash": "a4a5b4695bad09a0"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2011",
+  "title": "Passo carrabile: autorizzazione all’apertura",
+  "summary": "rrrr",
+  "body": "rrrr",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-11-30",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:passo.carrabile;autorizzazione;domanda",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2011",
+   "fetched_at": "2026-08-05T16:07:48.123242Z",
+   "raw_hash": "6226236beb36a02c"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2010",
+  "title": "RICHIEDERE UNA PUBBLICAZIONE DI MATRIMONIO",
+  "summary": "sdds",
+  "body": "sdds",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-11-30",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Apubblicazione.matrimonio?source=701",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2010",
+   "fetched_at": "2026-08-05T16:07:48.123267Z",
+   "raw_hash": "abfd94ae4b29c8e1"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2009",
+  "title": "RICHIEDERE L’ACCESSO AGLI ATTI",
+  "summary": "dfdfdfdfdf",
+  "body": "dfdfdfdfdf",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-11-30",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure%3As_italia%3Aaccesso.documentale%3Bdomanda?source=27",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2009",
+   "fetched_at": "2026-08-05T16:07:48.123295Z",
+   "raw_hash": "5869aad201d15100"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:2008",
+  "title": "RICHIEDERE PERMESSO PER PARCHEGGIO INVALIDI",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS) tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-11-30",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://sportellotelematico.comune.malvagna.me.it/procedure:s_italia:veicoli.disabili;circolazione.sosta;rilascio;domanda",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/2008",
+   "fetched_at": "2026-08-05T16:07:48.123363Z",
+   "raw_hash": "c25d9cc660af549c"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:1989",
+  "title": "IMU",
+  "summary": "Per accedere al servizio, assicurati di avere:",
+  "body": "Per accedere al servizio, assicurati di avere: | SPID (sistema pubblico di identità digitale), carta d’identità elettronica (CIE) o carta nazionale dei servizi (CNS)tutta la documentazione prevista per la presentazione della pratica.",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-09-10",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://www.comune.malvagna.me.it/t/servizio/imu/",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/1989",
+   "fetched_at": "2026-08-05T16:07:48.123429Z",
+   "raw_hash": "97ba431f3b93beef"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:1971",
+  "title": "Ricevimento Pubblico",
+  "summary": "solo la prenotazione",
+  "body": "solo la prenotazione | Solo la prenotazione",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2024-07-23",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://www.comune.malvagna.me.it/t/servizio/ricevimento-pubblico/",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/1971",
+   "fetched_at": "2026-08-05T16:07:48.123460Z",
+   "raw_hash": "76394498bca79a2f"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "wp_rest:083044:482",
+  "title": "Dichiarazione di nascita",
+  "summary": "Per utilizzare il servizio on line occorre avere SPID o CIE:",
+  "body": "Per utilizzare il servizio on line occorre avere SPID o CIE:",
+  "kind": "servizio",
+  "targets": [
+   "tutti"
+  ],
+  "requirements": {
+   "isee_max": null,
+   "isee_min": null,
+   "eta_min": null,
+   "eta_max": null,
+   "residenza_required": true,
+   "residenza_comuni": [],
+   "nucleo_min": null,
+   "figli_minori_required": null,
+   "disabilita_required": null,
+   "employment_status": [],
+   "other": [],
+   "source_typed": false
+  },
+  "amount": null,
+  "opens_at": "2023-05-21",
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Comune di Malvagna",
+   "ente_codice_istat": "083044",
+   "connector": "wp_rest",
+   "url": "https://www.comune.malvagna.me.it/t/servizio/prenotazioni/",
+   "api_url": "https://www.comune.malvagna.me.it/wp-json/wp/v2/servizi/482",
+   "fetched_at": "2026-08-05T16:07:48.123499Z",
+   "raw_hash": "6f346b3e84f8d957"
+  },
+  "confidence": "inferred",
+  "livello": "comunale",
+  "extraction_notes": [
+   "Il comune non compila il campo 'vincoli' previsto dal modello Design Comuni Italia: requisiti dedotti dal testo."
+  ],
+  "recovery_level": null,
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": null
+ }
+]

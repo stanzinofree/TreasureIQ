@@ -41,7 +41,8 @@ import asyncio
 import logging
 import os
 import re
-from dataclasses import dataclass, field
+from functools import lru_cache
+from dataclasses import dataclass, replace, field
 from datetime import date
 from enum import Enum
 from decimal import Decimal
@@ -53,6 +54,7 @@ from treasureiq.chat.intent import (
     AMBIGUOUS_ROLE_TOPICS,
     INFORMATIONAL_BY_NATURE_TOPICS,
     TOPIC_KEYWORDS,
+    slot_dal_testo,
     BeneficiaryRole,
     ChatIntent,
     QuestionKind,
@@ -78,6 +80,7 @@ from treasureiq.match.engine import (
     match,
     summarise,
 )
+from treasureiq.integration import load_enti
 from treasureiq.schema import CitizenProfile, Livello, Opportunity
 
 logger = logging.getLogger(__name__)
@@ -297,7 +300,7 @@ def _resolve_comune(*, hint: str | None) -> tuple[str | None, str | None]:
     return None, None
 
 
-def _profile_from_slots(*, intent: ChatIntent) -> CitizenProfile:
+def _profile_from_slots(*, intent: ChatIntent, messaggio: str = "") -> CitizenProfile:
     """Build an anonymous profile from whatever the citizen volunteered.
 
     Every field the citizen did not state is handed to the engine as a real
@@ -305,15 +308,26 @@ def _profile_from_slots(*, intent: ChatIntent) -> CitizenProfile:
     now, so there is nothing here to reconcile afterwards.
     """
     slots = intent.slots
+    # Le cifre non le produce il modello, nemmeno in ingresso: qui legge il
+    # testo un'espressione regolare, e vince su quanto ha capito il modello.
+    #
+    # Il caso che ha prodotto questa riga: «ho 38 anni e sono di pergine» —
+    # il modello non vedeva il 38, e la scheda continuava a chiedere l'età
+    # alla persona che l'aveva appena scritta.
+    letti = slot_dal_testo(messaggio)
     comune_istat, comune_nome = _resolve_comune(hint=intent.comune_hint)
     return CitizenProfile(
         comune_istat=comune_istat,
         comune_nome=comune_nome,
-        eta=slots.eta,
+        eta=letti.get("eta", slots.eta),
         # `str(float)` round-trips exactly through `Decimal` for the plain
         # decimal ISEE figures a citizen would type; see `ProfileSlots.isee`
         # for why the slot itself is a `float`, not a `Decimal`.
-        isee=Decimal(str(slots.isee)) if slots.isee is not None else None,
+        isee=(
+            Decimal(str(letti["isee"]))
+            if "isee" in letti
+            else (Decimal(str(slots.isee)) if slots.isee is not None else None)
+        ),
         nucleo_familiare=slots.nucleo_familiare,
         figli_minori=slots.figli_minori,
         disabilita=slots.disabilita,
@@ -484,7 +498,43 @@ def _search_opportunities(
         ).lower()
         if _keyword_hit(haystack=haystack, keywords=keywords):
             hits.append(opportunity)
-    return hits
+    return _senza_scadute(hits)
+
+
+def _senza_scadute(trovate: list[Opportunity]) -> list[Opportunity]:
+    """Toglie le opportunità la cui scadenza è già passata.
+
+    Un bando scaduto non è un'informazione incompleta: è un falso positivo che
+    fa perdere tempo a chi ne ha meno. Una persona che legge «Voucher asilo
+    nido 2025» non ha modo di sapere, dalla scheda, che il termine è passato
+    otto mesi fa.
+
+    Scadenza assente vuol dire due cose diverse — sempre aperto, oppure non
+    pubblicata — e `Opportunity.is_expired` è falso in entrambi i casi: nel
+    dubbio si mostra, perché nascondere qualcosa che potrebbe spettare è un
+    danno peggiore che mostrare qualcosa di incerto.
+    """
+    vive = [o for o in trovate if not o.is_expired]
+    # Chi ha un anno passato nel titolo va in fondo, non via.
+    #
+    # Il comune non ha pubblicato nessuna scadenza — `deadline` è `None` su
+    # tutte e tre le schede che hanno prodotto questa regola — quindi dire che
+    # sono chiuse sarebbe una deduzione nostra. Ma «Voucher asilo nido 2025»
+    # in agosto 2026 non è una proposta seria da mettere per prima, e chi
+    # legge quell'anno lo vede da sé.
+    return sorted(vive, key=_anno_probabilmente_passato)
+
+
+def _anno_probabilmente_passato(opportunity: Opportunity) -> int:
+    """1 se il titolo porta un anno già finito, 0 altrimenti.
+
+    Legge l'anno scritto, non lo indovina: è la differenza fra riferire ciò
+    che il comune ha pubblicato e concludere qualcosa al posto suo.
+    """
+    anni = re.findall(r"\b(20\d{2})\b", opportunity.title or "")
+    if not anni:
+        return 0
+    return 1 if max(int(a) for a in anni) < date.today().year else 0
 
 
 def _keyword_hit(*, haystack: str, keywords: tuple[str, ...]) -> bool:
@@ -504,6 +554,16 @@ def _keyword_hit(*, haystack: str, keywords: tuple[str, ...]) -> bool:
 
     Le chiavi di più parole restano sottostringhe: una frase intera che
     ricorre per caso non è un rischio reale.
+
+    In coda, e solo se nessun confronto letterale ha agganciato, si confrontano
+    le **radici**: «asili nido» non conteneva la chiave «asilo», «agevolazioni»
+    non conteneva «agevolazione», e il cittadino scrive al plurale molto più
+    spesso di quanto scriva al singolare.
+
+    La radice viene per ultima di proposito. Le distinzioni che questa funzione
+    protegge sopravvivono — `tari`→`tar` resta diverso da `tariffa`→`tariff`,
+    `tributi`→`trib` da `contributi`→`contrib` — ma un confronto più largo
+    provato per primo renderebbe inutili le guardie scritte sopra.
     """
     for keyword in keywords:
         if " " in keyword:
@@ -514,7 +574,46 @@ def _keyword_hit(*, haystack: str, keywords: tuple[str, ...]) -> bool:
                 return True
         elif re.search(rf"\b{re.escape(keyword)}\b", haystack):
             return True
-    return False
+    return _radici_in_comune(haystack=haystack, keywords=keywords)
+
+
+@lru_cache(maxsize=1)
+def _stemmer():
+    """Lo stemmer italiano, caricato una volta sola."""
+    import snowballstemmer
+
+    return snowballstemmer.stemmer("italian")
+
+
+@lru_cache(maxsize=8192)
+def _radice(parola: str) -> str:
+    return _stemmer().stemWord(parola)
+
+
+def _radici(testo: str) -> frozenset[str]:
+    """Le radici delle parole di un testo, senza le troppo corte.
+
+    Sotto le tre lettere una radice non distingue più niente: «di», «un» e
+    «al» aggancerebbero qualunque cosa.
+    """
+    return frozenset(
+        r for p in re.findall(r"\w+", testo.lower()) if len(r := _radice(p)) >= 3
+    )
+
+
+def _radici_in_comune(*, haystack: str, keywords: tuple[str, ...]) -> bool:
+    """Confronto per radice, per le chiavi di una parola sola.
+
+    Le chiavi di più parole e le radici già tronche restano fuori: le prime
+    perché una frase va confrontata intera, le seconde perché sono già una
+    radice scritta a mano, e stemmarne una troncata darebbe risultati che
+    nessuno ha previsto.
+    """
+    semplici = [k for k in keywords if " " not in k and not k.endswith("-")]
+    if not semplici:
+        return False
+    presenti = _radici(haystack)
+    return any(_radice(k) in presenti for k in semplici)
 
 
 def _parole_del_cittadino(*, message: str, storia: list[str]) -> str:
@@ -1722,7 +1821,169 @@ def compute_recovery_stats(
     )
 
 
-async def build_chat_answer(
+
+#: Sotto questa lunghezza un token non e' un toponimo: e' una preposizione o
+#: un articolo, e cercarlo fra i nomi dei comuni produce solo omonimie.
+_MINIMO_TOPONIMO = 5
+
+
+def _comuni_che_iniziano_per(message: str) -> list:
+    """I comuni il cui nome comincia con una parola del messaggio.
+
+    Serve al caso che ha prodotto questo codice: «sono di pergine» non
+    risolveva, perche' il risolutore esatto vuole il nome intero e di Pergine
+    ce ne sono due — Valsugana in Trentino e Valdarno in Toscana.
+
+    Senza questo, il messaggio non produceva nessun comune e la risposta
+    ricadeva sul comune del profilo: i voucher di Albano Laziale a una persona
+    che aveva scritto Pergine.
+
+    Torna la lista, non una scelta: con due candidati la cosa giusta e'
+    chiedere quale, non tirare a indovinare.
+    """
+    from treasureiq.sonda_live import _tutti as comuni_noti
+
+    parole = {
+        p.strip(".,;:!?'\"")
+        for p in (message or "").lower().split()
+        if len(p.strip(".,;:!?'\"")) >= _MINIMO_TOPONIMO
+    }
+    if not parole:
+        return []
+    trovati = []
+    for comune in comuni_noti():
+        prima = comune.nome.lower().split()[0]
+        if prima in parole:
+            trovati.append(comune)
+    return trovati
+
+
+def _quale_comune(candidati, intent) -> ChatAnswer:
+    """Piu' comuni possibili: si chiede, non si sceglie.
+
+    Scegliere il primo in ordine alfabetico sarebbe un sorteggio travestito da
+    risposta, e chi legge non avrebbe modo di sapere che c'e' stato.
+    """
+    elenco = ", ".join(f"{c.nome} ({c.provincia})" for c in candidati[:5])
+    return ChatAnswer(
+        reply=(
+            f"In Italia ci sono piu' comuni con questo nome: {elenco}. "
+            "Quale ti interessa? Preferisco chiedertelo piuttosto che sceglierne "
+            "uno a caso e darti informazioni di un altro territorio."
+        ),
+        topic=intent.topic,
+        kind=intent.kind,
+        data_gap="comune_ambiguo",
+        needs_clarification=True,
+        matches=[],
+        spid_required=False,
+        spid_reason=None,
+    )
+
+
+#: Quanti risultati live accompagnano una risposta su un comune non coperto.
+#: Pochi di proposito: sono da verificare uno per uno, e una lista lunga di
+#: cose da verificare non e' un servizio, e' un compito.
+MASSIMO_LIVE = 3
+
+
+def _prova_live(*, risposta: ChatAnswer, comune, message: str) -> ChatAnswer:
+    """Cerca adesso sul sito del comune, quando non abbiamo dati suoi.
+
+    Non produce un verdetto e non puo' produrlo: i risultati arrivano marcati
+    `non_verificato`, senza criteri confrontati e senza «ti spetta». La regola
+    che protegge il progetto resta intatta — un dato letto ora non decide una
+    idoneita' — ma smette di impedire l'unica cosa utile che si puo' fare
+    lo stesso: dire alla persona *dove guardare*.
+
+    Non e' un ripiego elegante: e' un servizio peggiore di una risposta vera,
+    ed e' meglio di un rifiuto.
+    """
+    if risposta.matches or risposta.info is not None:
+        return risposta
+    sito = (getattr(comune, "sito", None) or "").strip()
+    if not sito:
+        return risposta
+    dominio = sito.replace("https://", "").replace("http://", "").strip("/")
+    trovati = _cerca_sul_web(f"site:{dominio} {message}")[:MASSIMO_LIVE]
+    if not trovati:
+        return risposta
+    return replace(
+        risposta,
+        info=InfoAnswer(
+            document=None,
+            office=None,
+            coverage_count=0,
+            diagnosis=[],
+            integration_cost=[],
+            web_results=trovati,
+            letto_dal_vivo=True,
+            stato=StatoFonte.NON_PUBBLICATO,
+        ),
+    )
+
+
+def _premessa_fuori_copertura(nominato, risposta: ChatAnswer | None = None) -> str:
+    """La frase che apre una risposta su un comune che non leggiamo.
+
+    Sta davanti al resto, non al posto del resto: quello che segue vale
+    comunque, perche' le agevolazioni nazionali e regionali non dipendono da
+    quale comune sappiamo leggere.
+    """
+    provincia = f" ({nominato.provincia})" if getattr(nominato, "provincia", None) else ""
+    base = (
+        f"Non ho ancora letto i dati del Comune di {nominato.nome}{provincia}, "
+        "quindi non posso dirti con certezza cosa ti spetta."
+    )
+    # La frase si dice solo se sotto c'e' davvero qualcosa. Prometterla a
+    # vuoto e' peggio di non prometterla: chi legge cerca risultati che non
+    # esistono e conclude che l'interfaccia sia rotta, invece che la ricerca
+    # non abbia trovato niente.
+    trovati = (
+        risposta is not None
+        and risposta.info is not None
+        and risposta.info.letto_dal_vivo
+        and bool(risposta.info.web_results)
+    )
+    if trovati:
+        return (
+            base + " Ho però cercato adesso sul sito del comune: qui sotto trovi "
+            "quello che ho visto, **da verificare tu** — non l'ho controllato "
+            "contro una fonte ingerita."
+        )
+    return base + " Quello che segue vale comunque, perché non dipende dal comune."
+
+
+def _fuori_copertura(nominato, intent) -> ChatAnswer:
+    """Il cittadino ha nominato un comune che non leggiamo.
+
+    Dirlo e' l'unica risposta onesta. L'alternativa — rispondere con i dati di
+    un comune diverso — non e' una risposta imprecisa: e' la risposta di un
+    altro territorio, e chi legge non ha modo di accorgersene.
+
+    Il nome del comune compare per esteso proprio per questo: se sbagliamo a
+    riconoscerlo, la persona lo vede subito e puo' correggerci.
+    """
+    return ChatAnswer(
+        reply=(
+            f"Non copro ancora il Comune di {nominato.nome}"
+            f"{f' ({nominato.provincia})' if getattr(nominato, 'provincia', None) else ''}. "
+            "Preferisco dirtelo piuttosto che risponderti con i dati di un altro "
+            "comune: sarebbero informazioni sbagliate per te, e non avresti modo "
+            "di accorgertene. Se ti interessa un comune che leggo, scrivimene il "
+            "nome."
+        ),
+        topic=intent.topic,
+        kind=intent.kind,
+        data_gap="comune_non_coperto",
+        needs_clarification=True,
+        matches=[],
+        spid_required=False,
+        spid_reason=None,
+    )
+
+
+async def _componi_risposta(
     *,
     message: str,
     profile: CitizenProfile | None,
@@ -1759,6 +2020,17 @@ async def build_chat_answer(
     #    `risolvi_comune` risponde solo se un nome compare davvero ed è uno
     #    solo, quindi non può reintrodurre ciò che la guardia ha scartato.
     scelto = comune_per_codice(comune_istat)
+
+    # Le parole del cittadino devono poter contraddire il profilo.
+    #
+    # Prima non potevano: se il profilo aveva un comune — e per difetto ce
+    # l'aveva, Albano Laziale — `risolvi_comune(message)` non veniva nemmeno
+    # chiamata. Una persona che scriveva «sono di Pergine» riceveva i voucher
+    # di Albano senza che da nessuna parte comparisse la parola Albano.
+    #
+    # Non e' una risposta imprecisa: e' la risposta di un altro comune, ed e'
+    # il solo errore che questo progetto non puo' permettersi, perche' e'
+    # indistinguibile da una risposta giusta per chi legge.
     if scelto is not None:
         intent = intent.model_copy(update={"comune_hint": scelto.nome})
     elif not (intent.comune_hint or "").strip():
@@ -1783,9 +2055,9 @@ async def build_chat_answer(
         return ChatAnswer(
             reply=(
                 "Non sono riuscito a collegare la tua richiesta a un servizio del "
-                "Comune di Albano Laziale. Puoi provare a riformularla, oppure "
-                "rivolgerti direttamente all'URP del Comune per essere indirizzato "
-                "all'ufficio competente."
+                f"Comune di {scelto.nome if scelto is not None else 'riferimento'}. "
+                "Puoi provare a riformularla, oppure rivolgerti direttamente "
+                "all'URP del Comune per essere indirizzato all'ufficio competente."
             ),
             topic=intent.topic,
             kind=intent.kind,
@@ -1829,7 +2101,7 @@ async def build_chat_answer(
             spid_reason=None,
         )
 
-    active_profile = profile or _profile_from_slots(intent=intent)
+    active_profile = profile or _profile_from_slots(intent=intent, messaggio=message)
     candidates = _search_opportunities(records=records, topic=intent.topic)
 
     if not candidates:
@@ -1948,3 +2220,153 @@ async def build_chat_answer(
         spid_required=spid_required,
         spid_reason=spid_reason,
     )
+
+
+async def build_chat_answer(
+    *,
+    message: str,
+    profile: CitizenProfile | None,
+    records: list[Opportunity],
+    storia: list[str] | None = None,
+    comune_istat: str | None = None,
+    comune_coperto: bool = True,
+    today: date | None = None,
+) -> ChatAnswer:
+    """Compone la risposta, e se il comune non e' coperto lo dice **in testa**.
+
+    L'avviso sta davanti al resto e non al posto del resto. Fermarsi al «non
+    copro il tuo comune» e' onesto sulla fonte e inutile per chi ha fatto la
+    domanda: nasconde le misure nazionali e regionali, che valgono comunque.
+
+    Il caso che ha prodotto questo guscio: una persona di Sant'Orsola Terme
+    chiedeva dei mezzi pubblici e riceveva un rifiuto, mentre in archivio
+    c'era «Agevolazioni tariffarie regionali per il trasporto pubblico».
+
+    La decisione sta qui e non dentro `_componi_risposta` perche' riguarda
+    *quali fonti* si guardano, non *come* si risponde — e perche' la funzione
+    interna ha sei punti di uscita, ognuno dei quali avrebbe dovuto
+    ricordarsi di anteporre la stessa frase.
+    """
+    nominato = _comune_nominato(message)
+    regione = _regione_del_cittadino(nominato=nominato, comune_istat=comune_istat)
+    # Una misura regionale di un'altra regione non riguarda chi fa la domanda,
+    # e vale anche quando il suo comune lo leggiamo: prima questo filtro
+    # scattava solo fuori copertura, e un residente a Benevento si vedeva
+    # offrire un'agevolazione della Regione Lazio.
+    records = _senza_regioni_altrui(records, regione=regione)
+    if nominato is not None and nominato.codice_istat not in load_enti():
+        risposta = await _componi_risposta(
+            message=message, profile=profile, storia=storia, today=today,
+            records=_solo_sovracomunali(records, regione=nominato.regione),
+            comune_istat=None,
+            comune_coperto=False,
+        )
+        # `ChatAnswer` e' una dataclass, non un modello pydantic: si copia con
+        # `replace`, non con `model_copy`.
+        risposta = _prova_live(risposta=risposta, comune=nominato, message=message)
+        return replace(
+            risposta,
+            reply=_premessa_fuori_copertura(nominato, risposta) + "\n\n" + risposta.reply,
+        )
+    return await _componi_risposta(
+        message=message, profile=profile, storia=storia, today=today, records=records, comune_istat=comune_istat, comune_coperto=comune_coperto
+    )
+
+
+def _regione_del_cittadino(*, nominato, comune_istat: str | None) -> str | None:
+    """La regione di chi fa la domanda, dal comune nominato o dal profilo."""
+    if nominato is not None and getattr(nominato, "regione", None):
+        return nominato.regione
+    if comune_istat:
+        suo = comune_per_codice(comune_istat)
+        if suo is not None:
+            return suo.regione
+    return None
+
+
+def _senza_regioni_altrui(records, *, regione: str | None):
+    """Toglie le misure regionali di regioni diverse dalla propria.
+
+    Se non sappiamo dove abita la persona non togliamo niente: nascondere una
+    misura che potrebbe spettarle e' peggio che mostrargliene una che non la
+    riguarda, purche' l'ente che la pubblica sia scritto sulla scheda.
+    """
+    if not regione:
+        return records
+    mia = regione.strip().casefold()
+    tenuti = []
+    for r in records:
+        if r.livello is Livello.REGIONALE:
+            sua = (getattr(r, "regione", None) or "").strip().casefold()
+            if sua and sua != mia:
+                continue
+        tenuti.append(r)
+    return tenuti
+
+
+def _regione_del_cittadino(*, nominato, comune_istat: str | None) -> str | None:
+    """La regione di chi fa la domanda, dal comune nominato o dal profilo."""
+    if nominato is not None and getattr(nominato, "regione", None):
+        return nominato.regione
+    if comune_istat:
+        suo = comune_per_codice(comune_istat)
+        if suo is not None:
+            return suo.regione
+    return None
+
+
+def _senza_regioni_altrui(records, *, regione: str | None):
+    """Toglie le misure regionali di regioni diverse dalla propria.
+
+    Se non sappiamo dove abita la persona non togliamo niente: nascondere una
+    misura che potrebbe spettarle e' peggio che mostrarne una che non la
+    riguarda, visto che l'ente che la pubblica e' scritto sulla scheda.
+    """
+    if not regione:
+        return records
+    mia = regione.strip().casefold()
+    tenuti = []
+    for r in records:
+        if r.livello is Livello.REGIONALE:
+            sua = (getattr(r, "regione", None) or "").strip().casefold()
+            if sua and sua != mia:
+                continue
+        tenuti.append(r)
+    return tenuti
+
+
+def _solo_sovracomunali(records, *, regione: str | None):
+    """Le misure che valgono anche senza leggere il comune del cittadino.
+
+    Cadono quelle comunali, perche' sono di un altro comune. Ma cade anche una
+    misura **regionale di un'altra regione**: offrire un'agevolazione del Lazio
+    a chi vive in Trentino e' esattamente l'errore che abbiamo appena chiuso
+    sui comuni, con un'etichetta piu' grande davanti.
+
+    Restano sempre le nazionali, che non dipendono da dove si abita.
+    """
+    tenuti = []
+    for r in records:
+        if r.livello is Livello.COMUNALE:
+            continue
+        if r.livello is Livello.REGIONALE:
+            sua = (getattr(r, "regione", None) or "").strip().casefold()
+            if sua and regione and sua != regione.strip().casefold():
+                continue
+        tenuti.append(r)
+    return tenuti
+
+
+def _comune_nominato(message: str):
+    """Il comune che il cittadino ha nominato, se se ne riconosce uno solo.
+
+    Prima il confronto esatto sui 7.896 comuni, poi quello per prefisso —
+    «sono di pergine» non risolveva perche' il confronto esatto vuole il nome
+    intero. Con piu' candidati non sceglie: torna `None`, e la risposta
+    prosegue come se nessun comune fosse stato nominato.
+    """
+    nominato = risolvi_comune(message)
+    if nominato is not None:
+        return nominato
+    candidati = _comuni_che_iniziano_per(message)
+    return candidati[0] if len(candidati) == 1 else None

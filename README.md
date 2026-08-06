@@ -45,6 +45,54 @@ che quel campo non è tipizzato.
 
 ---
 
+
+### E non è un caso isolato: misurato su tutta Italia
+
+Il 5 agosto 2026 TreasureIQ ha censito **tutti i 7.896 comuni italiani** —
+34.229 richieste, circa quattro per comune, novanta minuti.
+
+| | |
+|---|---|
+| Comuni censiti | **7.896** — tutti |
+| Servizi comunali contati | **57.603** |
+| Piattaforme riconosciute | 20, il 89,9% dei comuni |
+| Comuni con aderenza al modello AgID misurata | 1.854 |
+
+E il numero che il progetto esisteva per trovare. Sugli **811 comuni** dove la
+domanda si può porre — quelli su piattaforme con campi tipizzati, dove il campo
+dei requisiti esiste *come campo*:
+
+| | Comuni | |
+|---|---|---|
+| Campo presente, **lasciato vuoto** | **764** | **94,2%** |
+| Requisiti pubblicati | 38 | 4,7% |
+| Campo assente dallo schema | 9 | 1,1% |
+
+Le ultime due righe non vanno sommate: `assente` è una scelta del fornitore,
+`vuoto` una del comune, e confonderle darebbe la colpa a chi non ce l'ha.
+
+Due misure indipendenti, su popolazioni diverse, arrivano alla stessa
+conclusione: il 92% dei servizi che leggiamo servizio per servizio, e il 94%
+dei comuni misurati uno per uno.
+
+### Chi serve davvero i comuni italiani
+
+Il tema WordPress finanziato da AgID è **sesto**.
+
+| Piattaforma | Comuni | Quota |
+|---|---|---|
+| PeopleWeb (Siscom) | 1.124 | 14,2% |
+| Municipium (Maggioli) | 1.009 | 12,8% |
+| HGATE | 957 | 12,1% |
+| *non riconosciuta* | 800 | 10,1% |
+| WordPress generico | 724 | 9,2% |
+| **WordPress Design Comuni** | 715 | 9,1% |
+
+E **323 comuni** stanno su piattaforme condivise messe a disposizione dalla
+propria Regione — Friuli-Venezia Giulia, Veneto, Rete Civica Lepida in
+Emilia-Romagna. È il modello che altrove ogni comune affronta da solo.
+
+
 ## Come funziona
 
 Due processi e un'ingestione che gira a parte. Non è un'architettura a
@@ -269,3 +317,15 @@ concessione esplicita di brevetto rimuove un'obiezione che una revisione legale
 solleverebbe.
 
 Copyright 2026 Alessandro Middei.
+
+## Documentazione
+
+| | |
+|---|---|
+| [docs/architettura.md](docs/architettura.md) | com'è fatto il sistema, con le dimensioni misurate |
+| [docs/roadmap.md](docs/roadmap.md) | in che ordine procedere, e perché quell'ordine |
+| [docs/da-fare.md](docs/da-fare.md) | cosa è rotto, cosa manca, quanto costa ciascuna cosa |
+| [docs/connettori.md](docs/connettori.md) | quali piattaforme leggiamo e fin dove |
+| [docs/evoluzione.md](docs/evoluzione.md) | cosa costruire dopo l'MVP, e cosa scartare |
+| [docs/sicurezza.md](docs/sicurezza.md) | abuso, cortesia verso i portali, dati sensibili |
+| [docs/api.md](docs/api.md) | Swagger su `/docs`, collection Bruno in `bruno/` |

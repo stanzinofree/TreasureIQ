@@ -5,8 +5,18 @@ direttamente: il front-end chiama percorsi relativi (`/api/…`) sulla propria
 origine e Next li inoltra al container dell'API — vedi `rewrites` in
 `web/next.config.mjs`.
 
-OpenAPI generato: `GET /openapi.json`. Questo documento spiega **cosa
-significano** le risposte, che è la parte che uno schema non dice.
+**Swagger interattivo:** `http://localhost:8010/docs` — le rotte sono raggruppate
+in quattro famiglie (Cittadino, Censimento nazionale, Qualità dei dati, Sistema),
+perché hanno garanzie diverse e conviene sapere quale si sta guardando.
+Schema grezzo: `GET /openapi.json`.
+
+**Collection Bruno:** `bruno/TreasureIQ/`. Apri la cartella in
+[Bruno](https://usebruno.com), scegli l'ambiente `locale` e parti da
+*Cittadino → Sessione*: le altre richieste del gruppo hanno bisogno della
+sessione aperta, ed è il motivo per cui ha `seq: 1`.
+
+Questo documento spiega **cosa significano** le risposte, che è la parte che uno
+schema non dice.
 
 ---
 

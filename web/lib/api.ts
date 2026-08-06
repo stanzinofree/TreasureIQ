@@ -383,7 +383,22 @@ export interface InfoOut {
   ente: string | null;
 }
 
+/** Quello che TreasureIQ ha capito della domanda, restituito perche' il
+ *  cittadino lo veda e possa smentirlo. Ogni campo non capito resta assente,
+ *  mai riempito con un valore di comodo. */
+export interface ProfiloCapito {
+  comune_nome: string | null;
+  comune_istat: string | null;
+  comune_coperto: boolean | null;
+  eta: number | null;
+  isee: string | null;
+  nucleo_familiare: number | null;
+  figli_minori: number | null;
+  disabilita: boolean | null;
+}
+
 export interface ChatOut {
+  profilo_capito: ProfiloCapito | null;
   reply: string;
   /** The topic this answer was retrieved for. The API has always sent it;
    * declaring it lets the follow-up check reuse it instead of re-running
@@ -594,3 +609,64 @@ export interface Panoramica {
 }
 
 export const panoramica = () => call<Panoramica>("/api/panoramica");
+
+/* ── Censimento dei portali comunali ─────────────────────────────────────── */
+
+export interface PiattaformaRiga {
+  piattaforma: string;
+  comuni: number;
+  /** `null` finché nessun dataset di popolazione è stato caricato. Mai zero:
+   *  uno zero disegnerebbe "nessun cittadino servito", che è falso. */
+  popolazione: number | null;
+  servizi: number;
+  con_catalogo: number;
+  /** In quante regioni compare. Uno = piattaforma regionale, venti = prodotto nazionale. */
+  regioni: number;
+  regione_prima: string | null;
+  comuni_prima: number;
+}
+
+export interface FornitoreRiga {
+  piattaforma: string;
+  /** Contro quale denominatore è calcolata l'aderenza. Due basi diverse non
+   *  vanno messe nella stessa classifica: vedi la nota nella pagina. */
+  base_misura: string | null;
+  comuni: number;
+  misurati: number;
+  aderenza_media: number | null;
+  aderenza_minima: number | null;
+  impronte: number;
+}
+
+export interface SezioneRiga {
+  sezione: string;
+  manca_su: number;
+  misurati: number;
+}
+
+export interface VincoliRiga {
+  /** `compilato` | `vuoto` | `assente`. */
+  stato: string;
+  comuni: number;
+}
+
+export interface Censimento {
+  rilevato_il: string | null;
+  date_disponibili: string[];
+  piattaforme: PiattaformaRiga[];
+  fornitori: FornitoreRiga[];
+  sezioni_mancanti: SezioneRiga[];
+  vincoli: VincoliRiga[];
+}
+
+export interface Connettore {
+  piattaforma: string;
+  livello: "modello" | "catalogo" | "firma";
+  firma: string;
+  rotta_servizi: string | null;
+  note: string | null;
+}
+
+export const getCensimento = () => call<Censimento>("/api/censimento");
+
+export const getConnettori = () => call<Connettore[]>("/api/connettori");

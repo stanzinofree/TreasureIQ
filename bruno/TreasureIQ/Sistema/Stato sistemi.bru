@@ -1,0 +1,18 @@
+meta {
+  name: Stato sistemi
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{base}}/api/status
+  body: none
+  auth: none
+}
+
+docs {
+  Cosa TreasureIQ ha effettivamente recuperato da ciascuna fonte, lo stato dei
+  componenti e quando e' stata fatta l'ultima ingestione.
+  
+  Non e' un cruscotto di uptime: e' un'istantanea di cosa c'e' davvero.
+}

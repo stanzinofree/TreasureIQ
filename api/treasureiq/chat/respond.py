@@ -402,6 +402,26 @@ def _tema_sostenuto(*, topic: Topic, testo: str) -> bool:
     return any(k in minuscolo for k in parole)
 
 
+def _topic_da_storia(*, storia: list[str]) -> Topic | None:
+    """Il topic implicato dalle parole che il cittadino ha scritto prima.
+
+    D-47 hard rule: il topic non si eredita mai fidandosi solo del modello —
+    nemmeno rilanciando `extract_intent` su un turno passato, perché quella
+    è comunque una classificazione del modello, fatta una seconda volta. Qui
+    si guarda solo se le parole del topic (lo stesso vocabolario chiuso di
+    `TOPIC_KEYWORDS` che usa `_search_opportunities`) compaiono per davvero
+    in un turno precedente — corroborato dalle parole, mai dedotto.
+
+    Più recente per primo: l'ultima cosa detta vince, come nel parlato.
+    """
+    for passato in reversed(storia):
+        haystack = passato.lower()
+        for topic, keywords in TOPIC_KEYWORDS.items():
+            if keywords and _keyword_hit(haystack=haystack, keywords=keywords):
+                return topic
+    return None
+
+
 async def _eredita_dal_contesto(
     *, intent: ChatIntent, messaggio: str, storia: list[str], provider: LLMProvider
 ) -> ChatIntent:
@@ -413,11 +433,14 @@ async def _eredita_dal_contesto(
     chat was reading them in isolation — so it asked for the comune twice and
     lost the subject in between.
 
-    Both are recovered from the citizen's own earlier messages, re-extracted
-    through the same closed schema rather than parsed here: whatever is
-    inherited has to come from the same mechanism that would have accepted it
-    when it was first said, or the two paths could disagree about what a
-    sentence means.
+    The comune is recovered from the citizen's own earlier messages,
+    re-extracted through the same closed schema rather than parsed here:
+    whatever is inherited has to come from the same mechanism that would have
+    accepted it when it was first said, or the two paths could disagree about
+    what a sentence means. The topic is recovered differently (D-47 hard
+    rule): never by trusting the model's classification of an old turn again,
+    only by finding that topic's own keywords in what the citizen actually
+    wrote — see `_topic_da_storia`.
 
     Nothing is inherited over something the current turn actually states —
     saying a new comune must replace the old one, not be ignored in favour of
@@ -443,20 +466,23 @@ async def _eredita_dal_contesto(
         return intent
 
     aggiornamenti: dict[str, object] = {}
-    # Most recent first: the last thing said wins, as it would in speech.
-    for passato in reversed(storia[-6:]):
-        if not (serve_comune or serve_tema):
-            break
-        try:
-            vecchio = await extract_intent(message=passato, provider=provider)
-        except Exception:  # noqa: BLE001 — a failed re-read is not fatal
-            continue
-        if serve_comune and vecchio.comune_hint:
-            aggiornamenti["comune_hint"] = vecchio.comune_hint
-            serve_comune = False
-        if serve_tema and vecchio.topic is not Topic.SCONOSCIUTO:
-            aggiornamenti["topic"] = vecchio.topic
+
+    if serve_tema:
+        ereditato = _topic_da_storia(storia=storia[-6:])
+        if ereditato is not None:
+            aggiornamenti["topic"] = ereditato
             serve_tema = False
+
+    if serve_comune:
+        # Most recent first: the last thing said wins, as it would in speech.
+        for passato in reversed(storia[-6:]):
+            try:
+                vecchio = await extract_intent(message=passato, provider=provider)
+            except Exception:  # noqa: BLE001 — a failed re-read is not fatal
+                continue
+            if vecchio.comune_hint:
+                aggiornamenti["comune_hint"] = vecchio.comune_hint
+                break
 
     return intent.model_copy(update=aggiornamenti) if aggiornamenti else intent
 
@@ -2007,7 +2033,7 @@ async def _componi_risposta(
     let one answer become the input to the next.
     """
     provider: LLMProvider = load_provider(role="chat")
-    intent = await extract_intent(message=message, provider=provider)
+    intent = await extract_intent(message=message, provider=provider, storia=storia)
 
     # Il comune non è un campo che convenga chiedere a un modello: l'elenco è
     # chiuso, pubblico e lo abbiamo su disco. Tre vie, in ordine di certezza.

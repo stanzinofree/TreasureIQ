@@ -16,18 +16,50 @@
 import { useProfilo } from "@/lib/profilo";
 import { useRisultati } from "@/lib/risultati";
 
-function Chip({ label, value, nota }: { label: string; value: string; nota?: string }) {
+function Chip({
+  label,
+  value,
+  nota,
+  onRimuovi,
+}: {
+  label: string;
+  value: string;
+  nota?: string;
+  /** Omitted for facts that cannot honestly be un-known once they exist —
+   * "Accesso" chief among them, since it is the login itself, not a fact
+   * learned during it. */
+  onRimuovi?: () => void;
+}) {
   return (
     <span className="fatto">
       <span className="fatto__label">{label}</span>
       <span className="fatto__value">{value}</span>
       {nota && <span className="fatto__nota">{nota}</span>}
+      {onRimuovi && (
+        <button
+          type="button"
+          onClick={onRimuovi}
+          aria-label="togli questo dato"
+          style={{
+            border: 0,
+            background: "none",
+            font: "inherit",
+            color: "inherit",
+            cursor: "pointer",
+            padding: "0 0 0 0.35em",
+            lineHeight: 1,
+          }}
+        >
+          ×
+        </button>
+      )}
     </span>
   );
 }
 
 export default function ProfiloNoto() {
-  const { profilo, registra, dimentica, dimenticaComune, quantiFatti } = useProfilo();
+  const { profilo, registra, dimentica, dimenticaComune, dimenticaFatto, dimenticaInteresse, quantiFatti } =
+    useProfilo();
   const { azzeraTrovate } = useRisultati();
 
   // Nothing known yet: render nothing. Not a placeholder, not a skeleton —
@@ -39,8 +71,16 @@ export default function ProfiloNoto() {
     <div className="fatti" aria-label="Informazioni che il servizio ha su di te">
       <span className="fatti__intro">Sto usando</span>
 
-      {profilo.nome && <Chip label="Nome" value={profilo.nome} />}
-      {profilo.eta !== undefined && <Chip label="Età" value={`${profilo.eta} anni`} />}
+      {profilo.nome && (
+        <Chip label="Nome" value={profilo.nome} onRimuovi={() => dimenticaFatto("nome")} />
+      )}
+      {profilo.eta !== undefined && (
+        <Chip
+          label="Età"
+          value={`${profilo.eta} anni`}
+          onRimuovi={() => dimenticaFatto("eta")}
+        />
+      )}
 
       {profilo.comune && (
         <Chip
@@ -53,6 +93,7 @@ export default function ProfiloNoto() {
                 ? "da confermare"
                 : undefined
           }
+          onRimuovi={dimenticaComune}
         />
       )}
 
@@ -86,9 +127,14 @@ export default function ProfiloNoto() {
         </span>
       )}
 
-      {profilo.interessi?.length ? (
-        <Chip label="Interessi" value={profilo.interessi.join(", ")} />
-      ) : null}
+      {profilo.interessi?.map((tag) => (
+        <Chip
+          key={tag}
+          label="Interesse"
+          value={tag}
+          onRimuovi={() => dimenticaInteresse(tag)}
+        />
+      ))}
 
       {profilo.codiceFiscale ? (
         <Chip label="Codice fiscale" value={mascheraCF(profilo.codiceFiscale)} />

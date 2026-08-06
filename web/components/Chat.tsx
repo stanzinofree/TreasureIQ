@@ -34,6 +34,7 @@ import SchedaDettaglio from "@/components/SchedaDettaglio";
 import AccessoSimulato from "@/components/AccessoSimulato";
 import SceltaComune from "@/components/SceltaComune";
 import RispostaCivica from "@/components/RispostaCivica";
+import PonteScala from "@/components/PonteScala";
 import { PRESETS } from "@/lib/profili-demo";
 import { useProfilo } from "@/lib/profilo";
 import { useRisultati } from "@/lib/risultati";
@@ -701,6 +702,43 @@ export default function Chat() {
     if (lastUser) send(lastUser.content);
   }
 
+  const [avvioBusy, setAvvioBusy] = useState<string | null>(null);
+
+  // Un tap, non tre: sceglie il profilo, apre la sessione server e manda
+  // subito la domanda pronta di quella persona. Segue enter() sopra — stessa
+  // login(), stesso registra() — non il flusso di AccessoSimulato.onFatto,
+  // che non apre mai una sessione server.
+  async function avviaPersona(preset: (typeof PRESETS)[number]) {
+    if (avvioBusy || busy) return;
+    setAvvioBusy(preset.id);
+    try {
+      await login({
+        comune_istat: "058003",
+        comune_nome: "Albano Laziale",
+        ...preset.profile,
+      });
+      registra({
+        eta: preset.profile.eta,
+        interessi: [...preset.profile.interests],
+        comune: {
+          nome: "Albano Laziale",
+          istat: "058003",
+          origine: "accesso",
+          confermato: true,
+        },
+        accesso: true,
+      });
+      azzeraTrovate();
+      await send(preset.domanda);
+    } catch {
+      setError(
+        "Non riesco a raggiungere il servizio. Verifica che l'API sia in esecuzione su localhost:8010.",
+      );
+    } finally {
+      setAvvioBusy(null);
+    }
+  }
+
   /**
    * Geolocation tells us where the citizen is *standing*, never where they
    * are *resident* — the two are routinely different (someone at the URP
@@ -842,10 +880,54 @@ export default function Chat() {
 
       <div className="chat__log" aria-live="polite" ref={logRef}>
         {messages.length === 0 && (
-          <p className="chat__hint">
-            Ad esempio: &laquo;ho la bolletta elettrica troppo alta&raquo;,
-            &laquo;ci sono bandi per informatici in scadenza?&raquo;
-          </p>
+          <>
+            <p className="chat__hint">
+              Ad esempio: &laquo;ho la bolletta elettrica troppo alta&raquo;,
+              &laquo;ci sono bandi per informatici in scadenza?&raquo;
+            </p>
+            {/* Un tap sola: sceglie il profilo di prova e manda subito la
+                domanda pronta di quella persona, invece di lasciare che chi
+                guarda la demo componga da zero un esempio funzionante. */}
+            <div className="grid-2" style={{ marginTop: "var(--ma-3)" }}>
+              {PRESETS.map((p) => (
+                <button
+                  key={p.id}
+                  type="button"
+                  className="panel"
+                  onClick={() => avviaPersona(p)}
+                  disabled={avvioBusy !== null || busy}
+                  style={{
+                    textAlign: "left",
+                    cursor: "pointer",
+                    padding: "var(--ma-4)",
+                    background: "var(--paper)",
+                    font: "inherit",
+                    opacity: avvioBusy && avvioBusy !== p.id ? 0.5 : 1,
+                  }}
+                >
+                  <span
+                    style={{
+                      fontFamily: "var(--font-display)",
+                      fontWeight: 700,
+                      display: "block",
+                      marginBottom: "var(--ma-1)",
+                    }}
+                  >
+                    {p.persona}
+                  </span>
+                  <span
+                    style={{
+                      fontFamily: "var(--font-mono)",
+                      fontSize: "0.78rem",
+                      color: "var(--sumi-faint)",
+                    }}
+                  >
+                    {avvioBusy === p.id ? "Accesso in corso…" : p.situazione}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </>
         )}
 
         {messages.map((m) => (
@@ -903,6 +985,17 @@ export default function Chat() {
                             office={m.reply.info.office}
                           />
                         )}
+                      {m.reply.info.codice_istat && (
+                        <PonteScala
+                          istat={m.reply.info.codice_istat}
+                          nome={
+                            m.reply.info.ente_nome ??
+                            profilo.comune?.nome ??
+                            m.reply.info.ente ??
+                            "il comune"
+                          }
+                        />
+                      )}
                     </>
                   )
                 ) : (
@@ -923,6 +1016,18 @@ export default function Chat() {
                         ))}
                       </div>
                     )}
+                    {(() => {
+                      const comunale = m.reply!.matches.find(
+                        (match) => match.livello === "comunale" && match.ente_codice_istat,
+                      );
+                      if (!comunale || !comunale.ente_codice_istat) return null;
+                      return (
+                        <PonteScala
+                          istat={comunale.ente_codice_istat}
+                          nome={comunale.ente ?? profilo.comune?.nome ?? "il comune"}
+                        />
+                      );
+                    })()}
 
                     {/* Offered only when nothing municipal came back: with a
                         comunale result already on screen the question is

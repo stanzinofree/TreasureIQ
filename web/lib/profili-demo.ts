@@ -11,10 +11,11 @@
 export const PRESETS = [
   {
     id: "famiglia",
-    persona: "Giulia Bianchi",
+    persona: "Luigi",
     situazione: "Lavora, un figlio piccolo, un ISEE che apre parecchie porte.",
     name: "Famiglia con figlio minore",
     detail: "38 anni · ISEE 12.000 € · nucleo di 3",
+    domanda: "Ci sono contributi per i libri di testo per mio figlio?",
     profile: {
       eta: 38,
       isee: "12000",
@@ -26,10 +27,11 @@ export const PRESETS = [
   },
   {
     id: "pensionato",
-    persona: "Mario Rossi",
+    persona: "Mirella",
     situazione: "Vive solo, pensione media: sopra molte soglie, sotto qualche altra.",
     name: "Pensionato che vive solo",
     detail: "71 anni · ISEE 30.000 € · nucleo di 1",
+    domanda: "C'è un aiuto per chi vive solo con la pensione?",
     profile: {
       eta: 71,
       isee: "30000",
@@ -41,10 +43,11 @@ export const PRESETS = [
   },
   {
     id: "studente",
-    persona: "Luca Verdi",
+    persona: "Giada",
     situazione: "Fuori corso e senza lavoro, cerca contributi per studio e affitto.",
     name: "Studente in cerca di lavoro",
     detail: "23 anni · ISEE 8.000 € · nucleo di 2",
+    domanda: "Ci sono aiuti per l'affitto per una studentessa senza lavoro?",
     profile: {
       eta: 23,
       isee: "8000",
@@ -66,10 +69,11 @@ export const PRESETS = [
     // realistic reading for this profile, and it clears the bonus sociale
     // ceiling of 9.796 € several times over, which is the point of the demo.
     id: "capofamiglia",
-    persona: "Anna Neri",
+    persona: "Stefania",
     situazione: "Quattro persone in casa e un reddito che esclude la maggior parte dei bonus.",
     name: "Capofamiglia, reddito alto",
     detail: "45 anni · ISEE 28.000 € · nucleo di 4",
+    domanda: "Ho la bolletta della luce troppo alta, ho diritto a uno sconto?",
     profile: {
       eta: 45,
       isee: "28000",

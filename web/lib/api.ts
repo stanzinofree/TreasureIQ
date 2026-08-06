@@ -140,6 +140,18 @@ export const login = (body: Record<string, unknown>) =>
 
 export const logout = () => call<unknown>("/api/session", { method: "DELETE" });
 
+/** Unset one fact in the live session, in place — never a full re-login.
+ * `login()` rebuilds the profile from scratch, so replaying it after a
+ * removal silently reinstates server-side defaults (nucleo_familiare back to
+ * 1, not back to "unknown") on fields the citizen never touched. `valore` is
+ * only meaningful for campo="interessi", to drop one tag instead of the
+ * whole list. */
+export const dimenticaCampo = (campo: string, valore?: string) =>
+  call<Profile>("/api/session/dimentica", {
+    method: "POST",
+    body: JSON.stringify(valore ? { campo, valore } : { campo }),
+  });
+
 /** What the citizen's own comune published on a topic — stated either way.
  * The ordinary answer already searches municipal and national records
  * together, so this reaches nothing the first pass missed; it exists to say
@@ -541,6 +553,19 @@ export const comuneNearby = async (lat: number, lon: number) => {
   );
   return body.comune_nearby;
 };
+
+/** Result of `GET /api/censimento/comune/{codice_istat}` — nullable: `null`
+ * finché quel comune non è mai stato spazzolato dal censimento nazionale
+ * (checkout fresco, o comune fuori censimento). Non è un errore, e il
+ * chiamante non deve inventare cifre quando lo vede: sta zitto (D-41/D-44). */
+export interface PortaleComune {
+  piattaforma: string;
+  aderenza: number | null;
+  rilevato_il: string;
+}
+
+export const portaleComune = async (istat: string) =>
+  call<PortaleComune | null>(`/api/censimento/comune/${encodeURIComponent(istat)}`);
 
 /** B22 (D-25) — the anonymous per-comune segnalazione counter, keyed by
  * `codice_istat`. Never carries anything besides a count: no IP, no

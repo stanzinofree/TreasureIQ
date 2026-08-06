@@ -13,7 +13,7 @@ from __future__ import annotations
 
 import pytest
 
-from treasureiq.chat.intent import _confirm_comune_hint
+from treasureiq.chat.intent import ChatIntent, Topic, _confirm_comune_hint
 
 
 def conferma(messaggio: str, hint: str | None) -> str | None:
@@ -193,3 +193,95 @@ def test_regione_sconosciuta_non_nasconde_niente():
 
     lazio = Opportunity.model_construct(title="SIRGAT", livello=Livello.REGIONALE, regione="Lazio")
     assert _senza_regioni_altrui([lazio], regione=None) == [lazio]
+
+
+# --- D-47: contesto multi-turno --------------------------------------------
+#
+# «ci sono agevolazioni per la mensa ad Albano?» seguito da un turno che non
+# nomina di nuovo ne' l'argomento ne' il comune deve comunque arrivare a
+# un'intenzione completa, senza richiedere il comune una seconda volta. Il
+# topic pero' non si eredita mai fidandosi solo del modello (D-47 hard rule):
+# si eredita solo se le sue parole compaiono per davvero nella storia.
+
+
+class _ProviderFinto:
+    """Un `LLMProvider` finto: risponde in base a quale messaggio riconosce
+    nel prompt (che include il turno da classificare, sempre in coda),
+    cosi' il riestrazione dei turni passati (`_eredita_dal_contesto`) puo'
+    essere testata senza un modello vero."""
+
+    def __init__(self, risposte: dict[str, ChatIntent]):
+        self._risposte = risposte
+
+    async def aparse(self, *, system, user, output_model):
+        for frammento, intent in self._risposte.items():
+            if frammento in user:
+                return intent
+        return output_model(topic=Topic.SCONOSCIUTO)
+
+
+def test_topic_si_eredita_solo_se_le_sue_parole_sono_nella_storia():
+    """Corroborazione deterministica: nessun modello coinvolto."""
+    from treasureiq.chat.respond import _topic_da_storia
+
+    assert (
+        _topic_da_storia(storia=["ci sono agevolazioni per la mensa ad Albano?"])
+        == Topic.MENSA_SCOLASTICA
+    )
+    assert _topic_da_storia(storia=["buongiorno, avrei una domanda"]) is None
+
+
+def test_il_turno_successivo_eredita_argomento_e_comune_senza_richiederlo():
+    """«ci sono agevolazioni per la mensa ad Albano?» poi «e gli orari
+    dell'ufficio?» — il secondo turno non nomina ne' la mensa ne' Albano, ma
+    deve risolvere entrambi dalla storia, senza richiedere di nuovo il
+    comune."""
+    import asyncio
+
+    from treasureiq.chat.respond import _eredita_dal_contesto
+
+    primo_turno = "ci sono agevolazioni per la mensa ad Albano Laziale?"
+    provider = _ProviderFinto(
+        {primo_turno: ChatIntent(topic=Topic.MENSA_SCOLASTICA, comune_hint="Albano Laziale")}
+    )
+
+    ereditato = asyncio.run(
+        _eredita_dal_contesto(
+            intent=ChatIntent(topic=Topic.SCONOSCIUTO),
+            messaggio="e gli orari dell'ufficio?",
+            storia=[primo_turno],
+            provider=provider,
+        )
+    )
+
+    assert ereditato.topic is Topic.MENSA_SCOLASTICA
+    assert ereditato.comune_hint == "Albano Laziale"
+
+
+def test_le_cifre_non_si_ereditano_mai_dalla_storia():
+    """Guardia: un'eta' detta due turni fa non deve attaccarsi in silenzio a
+    una domanda di oggi che non la ripete."""
+    import asyncio
+
+    from treasureiq.chat.intent import ChatIntent, ProfileSlots, extract_intent
+
+    turno_precedente = "ho 38 anni e vivo a Pergine"
+    # Il modello finto simula proprio il difetto da cui ci si guarda: rilegge
+    # l'eta' dal contesto anche se il messaggio corrente non la ripete.
+    provider = _ProviderFinto(
+        {
+            turno_precedente: ChatIntent(
+                topic=Topic.SOSTEGNO_UTENZE, slots=ProfileSlots(eta=38)
+            )
+        }
+    )
+
+    intent = asyncio.run(
+        extract_intent(
+            message="quali sono gli orari dell'ufficio anagrafe?",
+            provider=provider,
+            storia=[turno_precedente],
+        )
+    )
+
+    assert intent.slots.eta is None

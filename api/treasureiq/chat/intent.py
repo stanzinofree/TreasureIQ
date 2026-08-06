@@ -405,16 +405,40 @@ lascia sempre vuoto: non indovinare mai.
 Non decidi se il cittadino ha diritto a qualcosa: quello lo fa un altro sistema."""
 
 
-async def extract_intent(*, message: str, provider: LLMProvider) -> ChatIntent:
+async def extract_intent(
+    *, message: str, provider: LLMProvider, storia: list[str] | None = None
+) -> ChatIntent:
     """Classify one citizen message. Never raises — falls back to `SCONOSCIUTO`.
 
     A model outage must not take the whole `/api/chat` endpoint down with it
     (see the module docstring in `treasureiq.chat.respond`); losing the
     ability to classify intent still leaves a safe, honest answer available.
+
+    `storia` (D-47), when given, is the citizen's own last few turns — passed
+    to the model as LABELED context only, so a short follow-up like «e per lo
+    scuolabus?» can be read against what was asked before it. The
+    classification TARGET stays `message`, never the history: `comune_hint`
+    and `beneficiary_role` are still confirmed against `message` alone below
+    (R-9), and any slot the model could only have picked up from `storia`
+    rather than from `message` itself is discarded — a citizen who said «ho
+    38 anni» two turns ago must not have that age silently attached to an
+    unrelated question today. Deterministic *carryover* of a whole topic or
+    comune across turns is not this function's job: see
+    `treasureiq.chat.respond._eredita_dal_contesto`, which never trusts the
+    model alone for that (D-47 hard rule).
     """
     try:
+        user_message = message
+        if storia:
+            turni_precedenti = "\n".join(f"- {turno}" for turno in storia[-3:])
+            user_message = (
+                "Turni precedenti del cittadino (solo per capire il contesto, "
+                "NON classificare questi):\n"
+                f"{turni_precedenti}\n\n"
+                f"Messaggio da classificare: {message}"
+            )
         parsed = await provider.aparse(
-            system=INTENT_SYSTEM_PROMPT, user=message, output_model=ChatIntent
+            system=INTENT_SYSTEM_PROMPT, user=user_message, output_model=ChatIntent
         )
         confirmed_role = _confirm_beneficiary_role(message=message, role=parsed.beneficiary_role)
         updates: dict[str, object] = {}
@@ -423,6 +447,20 @@ async def extract_intent(*, message: str, provider: LLMProvider) -> ChatIntent:
         confirmed_hint = _confirm_comune_hint(message=message, hint=parsed.comune_hint)
         if confirmed_hint != parsed.comune_hint:
             updates["comune_hint"] = confirmed_hint
+        if storia:
+            # The one thing labeling `storia` in the prompt cannot guarantee
+            # is that the model keeps a slot's *value* out of an unrelated
+            # turn — only `message` itself, read with the same regex the
+            # profile-builder trusts over the model (`slot_dal_testo`), can
+            # confirm a number belongs to *this* turn.
+            confermati = slot_dal_testo(message)
+            slot_updates: dict[str, object] = {}
+            if parsed.slots.eta is not None and "eta" not in confermati:
+                slot_updates["eta"] = None
+            if parsed.slots.isee is not None and "isee" not in confermati:
+                slot_updates["isee"] = None
+            if slot_updates:
+                updates["slots"] = parsed.slots.model_copy(update=slot_updates)
         if (
             parsed.topic in INFORMATIONAL_BY_NATURE_TOPICS
             and parsed.kind is not QuestionKind.INFORMAZIONE

@@ -443,6 +443,32 @@ def panoramica_piattaforme(db_path: Path, *, rilevato_il: date | None = None) ->
     return [dict(r) | {"rilevato_il": giorno} for r in righe]
 
 
+def portale_del_comune(db_path: Path, codice_istat: str) -> dict | None:
+    """The latest measured platform and AgID adherence for one comune.
+
+    `None` when the comune has never been swept, which is the normal state
+    for a fresh checkout and for comuni outside the census — not an error.
+    Reads the last row by `rilevato_il` rather than recomputing anything, on
+    the index it was built for: `(codice_istat, rilevato_il)`.
+    """
+    if not db_path.exists():
+        return None
+    with apri(db_path) as conn:
+        riga = conn.execute(
+            """
+            SELECT piattaforma, aderenza, rilevato_il
+            FROM portale_snapshot
+            WHERE codice_istat = ?
+            ORDER BY rilevato_il DESC
+            LIMIT 1
+            """,
+            (codice_istat,),
+        ).fetchone()
+    if riga is None:
+        return None
+    return dict(riga) | {"rilevato_il": date.fromisoformat(riga["rilevato_il"])}
+
+
 def aderenza_fornitori(db_path: Path, *, rilevato_il: date | None = None) -> list[dict]:
     """How well each vendor implements the AgID service model.
 

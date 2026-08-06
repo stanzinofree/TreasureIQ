@@ -48,6 +48,7 @@ from treasureiq.storico import (
     aderenza_fornitori,
     date_censimento,
     panoramica_piattaforme,
+    portale_del_comune,
     serie,
     sezioni_mancanti,
     vincoli_nazionali,
@@ -1221,6 +1222,72 @@ def end_session(response: Response) -> dict[str, str]:
     return {"status": "logged_out"}
 
 
+class DimenticaCampoRequest(BaseModel):
+    campo: str
+    #: Only meaningful for campo="interessi": drop this one tag rather than
+    #: the whole list. Omitted (or falsy) clears the entire field.
+    valore: str | None = None
+
+
+#: Fields `create_session` fills from `LoginRequest`'s defaults rather than
+#: from None — `nucleo_familiare=1`, `figli_minori=0`, `disabilita=False`.
+#: Unsetting them here has to write None explicitly, or the profile stays
+#: "concrete" and an engine None-guard that should fire on the criterion
+#: never does.
+_CAMPI_DIMENTICABILI = {
+    "comune",
+    "eta",
+    "isee",
+    "nucleo_familiare",
+    "figli_minori",
+    "disabilita",
+    "employment_status",
+    "interessi",
+}
+
+
+@app.post("/api/session/dimentica", response_model=CitizenProfile, tags=["Cittadino"])
+def dimentica_campo(
+    body: DimenticaCampoRequest,
+    response: Response,
+    profile: CitizenProfile = Depends(current_profile),
+) -> CitizenProfile:
+    """Unset one fact in the live session without rebuilding it.
+
+    Replaying `create_session` after a removal would rebuild the profile from
+    `LoginRequest` defaults and silently reinstate fields the citizen never
+    touched — `nucleo_familiare` back to the concrete `1`, not back to
+    "unknown". This mutates the existing signed profile in place instead:
+    every field but the one named in `campo` keeps its current value, and the
+    cookie is re-signed rather than replaced.
+    """
+    if body.campo not in _CAMPI_DIMENTICABILI:
+        raise HTTPException(400, f"Campo sconosciuto: {body.campo}")
+
+    if body.campo == "comune":
+        updates: dict[str, object] = {"comune_istat": None, "comune_nome": None}
+    elif body.campo == "interessi":
+        updates = {
+            "interests": (
+                [i for i in profile.interests if i != body.valore]
+                if body.valore
+                else []
+            )
+        }
+    else:
+        updates = {body.campo: None}
+
+    updated = profile.model_copy(update=updates)
+    response.set_cookie(
+        SESSION_COOKIE,
+        serializer.dumps(json.loads(updated.model_dump_json())),
+        httponly=True,
+        samesite="lax",
+        max_age=60 * 60 * 8,
+    )
+    return updated
+
+
 @app.get("/api/me", response_model=CitizenProfile, tags=["Cittadino"])
 def me(profile: CitizenProfile = Depends(current_profile)) -> CitizenProfile:
     return profile
@@ -1816,6 +1883,30 @@ def censimento() -> CensimentoOut:
 def _senza(righe: list[dict]) -> list[dict]:
     """Toglie la data ripetuta su ogni riga: sta già in testa alla risposta."""
     return [{k: v for k, v in r.items() if k != "rilevato_il"} for r in righe]
+
+
+class PortaleComuneOut(BaseModel):
+    piattaforma: str
+    aderenza: float | None = None
+    rilevato_il: date
+
+
+@app.get(
+    "/api/censimento/comune/{codice_istat}",
+    response_model=PortaleComuneOut | None,
+    tags=["Censimento nazionale"],
+)
+def portale_comune(codice_istat: str) -> PortaleComuneOut | None:
+    """La piattaforma e l'aderenza AgID misurate per un comune, se ci sono.
+
+    `None` finché quel comune non è mai stato spazzolato, che è lo stato
+    normale di un checkout fresco o di un comune fuori censimento — non un
+    errore.
+    """
+    riga = portale_del_comune(STORICO_DB, codice_istat)
+    if riga is None:
+        return None
+    return PortaleComuneOut(**riga)
 
 
 class ConnettoreOut(BaseModel):

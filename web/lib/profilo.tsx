@@ -25,7 +25,7 @@
  */
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
-import { logout } from "@/lib/api";
+import { dimenticaCampo as dimenticaCampoServer, logout } from "@/lib/api";
 
 export type Origine = "dichiarato" | "geolocalizzazione" | "accesso";
 
@@ -66,9 +66,35 @@ type ProfiloContextValue = {
    * update never erases a fact by omission. Saying "no, it's another comune"
    * IS an erasure, and it must not take a name or an age down with it. */
   dimenticaComune: () => void;
+  /** Drop a single fact — età, interessi (the whole list) or nome — keeping
+   * everything else, same reasoning as `dimenticaComune`. If a session is
+   * open, the server has to be told too: without it, the verdict keeps being
+   * computed from a fact the strip no longer shows (R-F). */
+  dimenticaFatto: (campo: "eta" | "interessi" | "nome") => void;
+  /** Drop one interest tag without touching the rest of the list. */
+  dimenticaInteresse: (tag: string) => void;
   /** How many facts are currently known — drives the empty state. */
   quantiFatti: number;
 };
+
+/** Unset one fact on the live server session, in place.
+ *
+ * A full re-`login()` was the first attempt here and it was wrong: the
+ * server rebuilds the profile from `LoginRequest` defaults, so replaying it
+ * after a removal silently reinstates fields the citizen never touched
+ * (`nucleo_familiare` back to the concrete `1`, not back to "unknown") and
+ * an engine None-guard that should fire on the untouched field never does.
+ * `dimenticaCampo` mutates the existing signed profile instead — every field
+ * but the one named here keeps its current value.
+ *
+ * `valore` is only meaningful for campo "interessi", to drop one tag rather
+ * than the whole list. */
+function dimenticaCampoSessione(campo: string, valore?: string): void {
+  dimenticaCampoServer(campo, valore).catch(() => {
+    /* best-effort correction — a failed call cannot re-add the fact the
+       citizen just asked to remove, so there is nothing to roll back */
+  });
+}
 
 const ProfiloContext = createContext<ProfiloContextValue | null>(null);
 
@@ -104,18 +130,37 @@ export function ProfiloProvider({ children }: { children: React.ReactNode }) {
     });
   }, []);
 
-  // Clearing the strip has to end the session too. Dropping only the local
-  // copy left the signed cookie in place, so the interface claimed to know
-  // nothing while every answer was still being computed from the profile —
-  // the same contradiction as the missing rehydration, in the other
-  // direction. The local state is cleared first and regardless: a failed
-  // network call must not leave the citizen looking at data they just asked
-  // to be rid of.
+  // Dropping only the local copy left the signed cookie in place, so the
+  // interface claimed to know nothing while every answer was still being
+  // computed from the comune — the same contradiction as the missing
+  // rehydration, in the other direction. The local state is cleared first
+  // and regardless: a failed network call must not leave the citizen looking
+  // at data they just asked to be rid of.
   const dimenticaComune = useCallback(() => {
     setProfilo((corrente) => {
+      if (corrente.accesso) dimenticaCampoSessione("comune");
       const next = { ...corrente };
       delete next.comune;
       return next;
+    });
+  }, []);
+
+  const dimenticaFatto = useCallback((campo: "eta" | "interessi" | "nome") => {
+    setProfilo((corrente) => {
+      // "nome" is client-only — CitizenProfile carries no such field, so
+      // there is nothing to correct server-side.
+      if (corrente.accesso && campo !== "nome") dimenticaCampoSessione(campo);
+      const next = { ...corrente };
+      delete next[campo];
+      return next;
+    });
+  }, []);
+
+  const dimenticaInteresse = useCallback((tag: string) => {
+    setProfilo((corrente) => {
+      if (corrente.accesso) dimenticaCampoSessione("interessi", tag);
+      const interessi = corrente.interessi?.filter((i) => i !== tag);
+      return { ...corrente, interessi: interessi?.length ? interessi : undefined };
     });
   }, []);
 
@@ -165,9 +210,11 @@ export function ProfiloProvider({ children }: { children: React.ReactNode }) {
       registra,
       dimentica,
       dimenticaComune,
+      dimenticaFatto,
+      dimenticaInteresse,
       quantiFatti: contaFatti(profilo),
     }),
-    [profilo, registra, dimentica, dimenticaComune],
+    [profilo, registra, dimentica, dimenticaComune, dimenticaFatto, dimenticaInteresse],
   );
 
   return <ProfiloContext.Provider value={value}>{children}</ProfiloContext.Provider>;

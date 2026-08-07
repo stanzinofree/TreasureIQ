@@ -20,6 +20,33 @@ l'altra metà del progetto.
 
 ---
 
+## Cosa si legge diretto via REST, cosa resta scrape
+
+Per un comune a modello AgID il portale espone, via REST, più degli uffici già
+sondati: il catalogo **servizi** — Custom Post Type `servizi` — e la sua
+tassonomia **`categorie_servizio`**, le 15 categorie standard del modello.
+Saperlo in anticipo serve a tre cose a costo zero-runtime: instradare diretto
+invece che verso la ricerca web quando un cittadino chiede «come faccio X»,
+proporre le categorie come chip a cascata, e usare la lista servizi come coda
+di ingestion di domani — ogni scheda porta la sua modulistica.
+
+Il confine fra REST e scrape è misurato comune per comune, non assunto:
+
+| Superficie | Via | Condizione |
+|---|---|---|
+| `servizi` | REST | CPT `servizi`, sempre presente sui comuni a modello AgID sondati |
+| `amministrazione trasparente` (bandi/agevolazioni) | REST **quando il tema lo espone** | il CPT `amm-trasparente` compare in `/wp-json/wp/v2/types`; su Figline c'è, una nota precedente che lo dava scrape-only era sbagliata |
+| `contatti URP` | scrape | mai visto come CPT REST sui comuni sondati finora, nonostante candidati come `punti_di_contatto` esistano nel vocabolario del tema |
+
+L'aderenza AgID di un comune (vedi [architettura.md](architettura.md)) si
+calcola su una checklist **fissa di 4 superfici** — servizi, uffici,
+trasparenza, contatti — lette dagli stessi campi già sondati dalla mappa del
+connettore: nessuna rilettura del portale, nessun input digitato a mano. La
+via scrape esiste come ripiego ma non incrementa mai il numero di superfici
+"esposte": è una via di lettura, non una copertura.
+
+---
+
 ## Stato per piattaforma
 
 | Piattaforma | Comuni | Quota | Livello | Servizi letti | Regioni |

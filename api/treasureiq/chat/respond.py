@@ -2069,6 +2069,30 @@ def compute_recovery_stats(
 #: un articolo, e cercarlo fra i nomi dei comuni produce solo omonimie.
 _MINIMO_TOPONIMO = 5
 
+#: Connettivi lunghi >=5 che compaiono DENTRO i nomi ("Val DELLA Torre") ma non
+#: distinguono nulla. Il filtro di lunghezza non li ferma: "della" ha 5 lettere.
+#: Senza questo, una domanda come "bolletta DELLA luce" — che non nomina nessun
+#: comune — agganciava le decine di "X della Y" e faceva partire una
+#: disambiguazione su comuni mai nominati, scartando il comune di profilo.
+#: Un nome reale che li contiene ("San Fermo della Battaglia") risolve comunque
+#: attraverso le sue parole distintive (fermo, battaglia), quindi escluderli e'
+#: sicuro. Non includere "santa"/"santo"/"monte"/"villa": quelli distinguono.
+_CONNETTIVI_NOME = frozenset(
+    {"della", "delle", "dello", "degli", "sulla", "sullo", "sugli", "sopra", "sotto"}
+)
+
+#: Parole italiane comunissime che sono ANCHE nomi (o parole di nomi) di comuni.
+#: Diverse dai connettivi: quelle non distinguono, queste sono sostantivi pieni
+#: che un cittadino scrive con il loro senso comune, non come toponimo. «minori»
+#: e' Minori (SA) — comune singolo, quindi candidato unico che scavalcava in
+#: silenzio: chi scriveva «contributi per i miei nipotini minori» finiva a
+#: leggere il sito di Minori invece del proprio comune. «minore» e' la parola di
+#: «Gorla Minore», ma «gorla» (5 lettere, distintiva) resta e risolve comunque
+#: il nome intero — escludere la parola comune non toglie il comune vero. I
+#: comuni cosi' nominati restano raggiungibili dal selettore, che usa l'ISTAT e
+#: non passa da qui.
+_PAROLE_NON_TOPONIMI = frozenset({"minori", "minore"})
+
 
 @lru_cache(maxsize=1)
 def _tutti_comuni() -> tuple:
@@ -2120,6 +2144,8 @@ def _comuni_che_iniziano_per(message: str) -> list:
         for p in (message or "").lower().split()
         if len(p.strip(".,;:!?'\"")) >= _MINIMO_TOPONIMO
     }
+    parole -= _CONNETTIVI_NOME
+    parole -= _PAROLE_NON_TOPONIMI
     if not parole:
         return []
     freq = _frequenza_parole_nome()
@@ -2238,8 +2264,9 @@ def _premessa_fuori_copertura(
     """
     provincia = f" ({nominato.provincia})" if getattr(nominato, "provincia", None) else ""
     base = (
-        f"Non ho una scansione verificata dei dati del Comune di {nominato.nome}{provincia}, "
-        "quindi non posso dirti con certezza cosa ti spetta."
+        f"Per il [[Comune di {nominato.nome}{provincia}]] non c'e' ancora uno standard "
+        "ne' un connettore che ne abbia letto i dati, quindi non ho una scansione "
+        "verificata e non posso dirti con certezza cosa ti spetta."
     )
     # Se il comune e' raggiungibile dal connettore, dichiariamo la via — senza
     # promettere un bottone che non c'e': e' una capacita', non un'azione da
@@ -2263,9 +2290,9 @@ def _premessa_fuori_copertura(
     )
     if trovati:
         return (
-            base + " Ho però cercato adesso sul sito del comune: qui sotto trovi "
-            "quello che ho visto, **da verificare tu** — non l'ho controllato "
-            "contro una fonte ingerita."
+            base + " Sono quindi andato con una scansione live del sito del comune: "
+            "qui sotto trovi quello che ho visto, **da verificare tu** — non l'ho "
+            "controllato contro una fonte ingerita."
         )
     # Vicolo cieco: la ricerca non ha collegato la domanda a nessun servizio.
     # Una frase sola, non tre «non ho trovato niente» impilati. Rimanda a cio'
@@ -2321,6 +2348,31 @@ def _numeri_utili_al_volo(codice_istat: str | None) -> "NumeriUtili | None":
         fonte=contatti.fonte,
         fonte_tipo="scansione web",
         letto_il=datetime.now(timezone.utc).isoformat(),
+    )
+
+
+def _numeri_utili_da_store(codice_istat: str | None) -> "NumeriUtili | None":
+    """Il biglietto da visita di un comune COPERTO: recapiti già scansionati.
+
+    Gemello di `_numeri_utili_al_volo`, ma NON sonda: legge lo store (D-S4),
+    così l'happy-path della chat non paga uno scrape live a ogni risposta. La
+    fonte resta la scansione, e `letto_il` è `scansionato_il` del record — non
+    un `now()` al volo — perché quello è il momento in cui i recapiti sono
+    stati davvero letti. Muto se non c'è record o non ci sono recapiti.
+    """
+    record = carica_scansione(codice_istat)
+    contatti = getattr(record, "contatti", None) if record is not None else None
+    if contatti is None:
+        return None
+    if not (contatti.telefoni or contatti.email or contatti.pec):
+        return None
+    return NumeriUtili(
+        telefoni=list(contatti.telefoni),
+        email=list(contatti.email),
+        pec=list(contatti.pec),
+        fonte=contatti.fonte,
+        fonte_tipo="scansione web",
+        letto_il=record.scansionato_il,
     )
 
 
@@ -2906,6 +2958,11 @@ async def build_chat_answer(
             )
     return replace(
         risposta,
+        # Comune coperto: mettiamo a sinistra il suo biglietto da visita —
+        # recapiti dallo store, non uno scrape live (D-S4). Muto se assenti.
+        numeri_utili=(
+            _numeri_utili_da_store(comune.codice_istat) if comune is not None else None
+        ),
         scan=_scan_stato_per_comune(comune.codice_istat if comune is not None else None),
     )
 
@@ -3004,10 +3061,20 @@ def _comuni_candidati(message: str) -> list:
     QUANTI candidati ci sono per decidere se chiedere quale (D-54): prima
     l'ambiguita' spariva qui dentro, ora la si porta fuori.
     """
-    esatto = risolvi_comune(message)
+    # Le parole-non-toponimo vanno tolte PRIMA anche del confronto esatto: «minori»
+    # e' una chiave esatta dell'indice (Minori, SA), quindi senza ripulire qui il
+    # match esatto vince e la sottrazione dentro `_comuni_che_iniziano_per` non
+    # entra nemmeno in gioco. Tolgo le parole intere, non i pezzi: «gorla minore»
+    # resta «gorla» e risolve ancora il nome intero per prefisso.
+    ripulito = " ".join(
+        p
+        for p in (message or "").split()
+        if p.strip(".,;:!?'\"").lower() not in _PAROLE_NON_TOPONIMI
+    )
+    esatto = risolvi_comune(ripulito)
     if esatto is not None:
         return [esatto]
-    return _comuni_che_iniziano_per(message)
+    return _comuni_che_iniziano_per(ripulito)
 
 
 def _comune_nominato(message: str):

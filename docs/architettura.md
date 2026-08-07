@@ -85,6 +85,26 @@ Per ogni scheda letta:
 - **stato dei vincoli** — se il campo che dice *chi ha diritto* esiste, e se
   qualcuno l'ha riempito.
 
+### L'aderenza è una misura del fornitore, non del comune
+
+L'aderenza dice quante sezioni del modello AgID quel portale espone davvero —
+`A chi è rivolto`, `Come fare`, `Cosa serve`, `Tempi e scadenze`. È una misura
+del **fornitore prima che del comune**, ed è la ragione per cui vale la pena
+calcolarla: dice a chi va chiesto conto, perché è il fornitore ad aver scelto
+la declinazione — chi con `<h4>`, chi con `<h3>`, chi solo per metà — non il
+comune che quella declinazione l'ha subita.
+
+Va letta **come media su più comuni, mai su una pagina sola**: sotto `/servizi`
+vivono anche pagine informative che il modello non ce l'hanno per disegno, e
+misurare quelle fa sembrare inadempiente chi non lo è. Sul campo, ComWeb
+misurato su una pagina sbagliata dava **0,10**; su ventitré comuni dà **0,70**.
+Stesso fornitore, stesso codice: solo il denominatore era sbagliato.
+
+L'impronta accompagna l'aderenza come sostituto del numero di versione che
+nessun fornitore pubblica: finché regge, la declinazione è quella; quando
+cambia — di solito sulla stessa notte, su tutti i comuni di quel fornitore —
+sappiamo cosa sta per rompersi, prima che se ne accorga un cittadino.
+
 ---
 
 ## Il censimento nazionale

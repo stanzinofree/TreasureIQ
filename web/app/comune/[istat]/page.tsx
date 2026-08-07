@@ -12,7 +12,7 @@
  */
 
 import { fetchSchedaComune, type SchedaComune } from "@/lib/api";
-import { FORM_APERTURA_DATI_URL, LINK_ESTERNO } from "@/lib/moduli";
+import { linkAperturaDati, LINK_ESTERNO } from "@/lib/moduli";
 
 export const dynamic = "force-dynamic";
 
@@ -29,6 +29,64 @@ function dataLeggibile(iso: string): string {
   });
 }
 
+/** Iconcina per superficie AgID: un glifo per riconoscere a colpo d'occhio di
+ * cosa parla la mini-card, senza emoji (design system). SVG 18px, stroke
+ * `currentColor` così eredita il colore-stato dalla card. Mappa sulle quattro
+ * superfici canoniche; qualunque nome fuori mappa cade su un pallino neutro. */
+function IconaSuperficie({ nome }: { nome: string }) {
+  const comune = {
+    width: 18,
+    height: 18,
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: 1.6,
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const,
+    "aria-hidden": true,
+  };
+  switch (nome) {
+    case "servizi":
+      return (
+        <svg {...comune}>
+          <rect x="3" y="3" width="7" height="7" rx="1" />
+          <rect x="14" y="3" width="7" height="7" rx="1" />
+          <rect x="3" y="14" width="7" height="7" rx="1" />
+          <rect x="14" y="14" width="7" height="7" rx="1" />
+        </svg>
+      );
+    case "uffici":
+      return (
+        <svg {...comune}>
+          <path d="M4 21V5a1 1 0 0 1 1-1h9a1 1 0 0 1 1 1v16" />
+          <path d="M15 9h4a1 1 0 0 1 1 1v11" />
+          <path d="M2 21h20M8 8h3M8 12h3M8 16h3" />
+        </svg>
+      );
+    case "trasparenza":
+      return (
+        <svg {...comune}>
+          <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+          <path d="M18 21H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h8l5 5v12a1 1 0 0 1-1 1z" />
+          <path d="M9 13h6M9 17h6" />
+        </svg>
+      );
+    case "contatti":
+      return (
+        <svg {...comune}>
+          <path d="M4 4h16v13H7l-3 3z" />
+          <path d="M8 9h8M8 12h5" />
+        </svg>
+      );
+    default:
+      return (
+        <svg {...comune}>
+          <circle cx="12" cy="12" r="4" />
+        </svg>
+      );
+  }
+}
+
 /** Il blocco connettore: l'unico punto della scheda dove una % può comparire,
  * e solo per `connettore_tipo === "agid"` (D-S2). Ogni altro tier ha un
  * copy onesto, mai una cifra nuda. */
@@ -42,14 +100,28 @@ function BloccoConnettore({ scheda }: { scheda: SchedaComune }) {
           <span className="field__hint"> = {esposte}/{definite} superfici</span>
         </p>
         <ul className="scheda-comune__superfici">
-          {superfici.map((s) => (
-            <li key={s.nome} className="scheda-comune__superficie">
-              <span>{s.nome}</span>
-              <span className="scheda-comune__superficie-via">
-                {s.via === "REST" ? "via REST" : s.via === "scrape" ? "via scrape" : "non raggiunta"}
-              </span>
-            </li>
-          ))}
+          {superfici.map((s) => {
+            const stato =
+              s.via === "REST" ? "rest" : s.via === "scrape" ? "scrape" : "assente";
+            return (
+              <li
+                key={s.nome}
+                className={`scheda-comune__superficie scheda-comune__superficie--${stato}`}
+              >
+                <span className="scheda-comune__superficie-icona">
+                  <IconaSuperficie nome={s.nome} />
+                </span>
+                <span className="scheda-comune__superficie-nome">{s.nome}</span>
+                <span className="scheda-comune__superficie-via">
+                  {s.via === "REST"
+                    ? "via REST"
+                    : s.via === "scrape"
+                      ? "via scrape"
+                      : "non raggiunta"}
+                </span>
+              </li>
+            );
+          })}
         </ul>
       </>
     );
@@ -88,9 +160,9 @@ export default async function SchedaComunePage({
   }
 
   return (
-    <div className="stack">
+    <div className="stack scheda-comune">
       <section className="scheda-comune__testata">
-        {scheda.logo_url && (
+        {scheda.logo_url ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={scheda.logo_url}
@@ -99,6 +171,13 @@ export default async function SchedaComunePage({
             loading="lazy"
             decoding="async"
           />
+        ) : (
+          // Nessun logo letto dal portale (comune solo-HTML, o stemma non
+          // esposto). Invece del vuoto, un monogramma: la testata ha sempre un
+          // segno grafico, e non fingiamo uno stemma che non abbiamo.
+          <span className="scheda-comune__logo scheda-comune__logo--mono" aria-hidden>
+            {scheda.nome.trim().charAt(0).toUpperCase()}
+          </span>
         )}
         <div>
           <p className="eyebrow">Apertura del portale</p>
@@ -212,20 +291,30 @@ export default async function SchedaComunePage({
         </section>
       )}
 
-      <section className="panel">
-        <h2>Vuoi che questo comune apra più dati?</h2>
-        <p className="lede">
-          Il modulo è esterno a TreasureIQ: nessun dato personale passa da noi.
-        </p>
-        <a
-          className="button"
-          href={FORM_APERTURA_DATI_URL}
-          target={LINK_ESTERNO.target}
-          rel={LINK_ESTERNO.rel}
-        >
-          Chiedi al tuo comune di aprire i dati
-        </a>
-      </section>
+      {(() => {
+        // Precompila la mail verso i recapiti veri del Comune; null se non ne
+        // pubblica nessuno — allora la sezione sparisce invece di offrire un
+        // bottone che non porta da nessuna parte.
+        const mailtoApertura = linkAperturaDati(scheda.nome, scheda.contatti);
+        if (mailtoApertura === null) return null;
+        return (
+          <section className="panel">
+            <h2>Vuoi che questo comune apra più dati?</h2>
+            <p className="lede">
+              Apre una mail già scritta verso il Comune di {scheda.nome}: la
+              mandi tu, dal tuo client. Nessun dato personale passa da TreasureIQ.
+            </p>
+            <a
+              className="button scheda-comune__apri"
+              href={mailtoApertura}
+              target={LINK_ESTERNO.target}
+              rel={LINK_ESTERNO.rel}
+            >
+              Chiedi al tuo comune di aprire i dati
+            </a>
+          </section>
+        );
+      })()}
     </div>
   );
 }

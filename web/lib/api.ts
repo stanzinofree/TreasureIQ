@@ -332,12 +332,6 @@ export const integrationAll = () => call<Integration[]>("/api/integration");
  */
 export type DataGap = "not_published" | "none_found" | "cambio_persona";
 
-export interface Escalation {
-  needed: boolean;
-  missing_fields: string[];
-  reason: string;
-}
-
 /** Per-level counts of how a criterion's evidence was recovered — a manual
  * field, one extracted from prose by the quote-gated LLM, or one that stayed
  * illegible. Counts, so an absent level is `null`, never `0` (D-17: a missing
@@ -486,7 +480,6 @@ export interface ChatOut {
   topic: string | null;
   matches: Match[];
   data_gap: DataGap | null;
-  escalation: Escalation | null;
   cost: ChatCost | null;
   /** D-19 rail marker. */
   kind: QuestionKind;
@@ -511,8 +504,9 @@ export interface ChatOut {
   /** Candidati di disambiguazione quando il nome comune è ambiguo. La UI li
    * rende come schede cliccabili: un tap sceglie e rimanda la domanda. */
   comuni_ambigui: ComuneAmbiguo[] | null;
-  /** B6 — stato dello scan del comune coperto, se presente. Solo tipo qui:
-   * nessun consumatore lo rende ancora. */
+  /** B6 — stato dello scan del comune, se presente. Consumato da <ScanLive>
+   * (via ScanProvider): banda «sto aggiornando» + bottone «Ricarica», mostrati
+   * uguali in chat e nel pannello. */
   scan?: ScanStato | null;
 }
 

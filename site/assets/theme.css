@@ -1,0 +1,246 @@
+/*
+ * TreasureIQ — sito vetrina.
+ * Stile «civico giapponese»: carta chiara, inchiostro navy, accenti misurati,
+ * il sigillo (hanko) come firma di completezza. Registro unico e chiaro come
+ * l'app — niente dark mode, niente gradient gratuiti, niente emoji.
+ *
+ * I font sono quelli dell'app: Zen Maru Gothic (display, tondo e civile),
+ * Zen Kaku Gothic New (corpo), DM Mono (codice e cifre).
+ */
+@import url("https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap");
+
+:root {
+  /* carta e inchiostro */
+  --paper: #f2f4f7;
+  --paper-raised: #ffffff;
+  --paper-sunken: #e6eaf0;
+  --sumi: #0b1d3a;       /* navy — testo forte */
+  --sumi-soft: #3b4a63;  /* testo secondario */
+  --sumi-faint: #5a6880; /* didascalie */
+  --line: #d4dae4;
+  /* accenti */
+  --ai: #0057b8;         /* blu di marca — link, autorità */
+  --ai-vivid: #2ed3b7;   /* teal — riempimenti */
+  --yamabuki: #f6c445;   /* giallo — evidenza, scintilla */
+  --shu: #d92d20;        /* rosso — blocco, mancante */
+  --wakatake: #12b76a;   /* verde — verificato */
+  /* misure */
+  --ma-2: 8px; --ma-3: 12px; --ma-4: 16px; --ma-6: 24px; --ma-8: 32px; --ma-12: 48px; --ma-16: 64px;
+  --radius: 14px;
+  --radius-s: 8px;
+  --ombra: 0 1px 2px rgba(11, 29, 58, 0.06), 0 8px 24px rgba(11, 29, 58, 0.06);
+  --leggibile: 72ch;
+  --font-display: "Zen Maru Gothic", system-ui, sans-serif;
+  --font-body: "Zen Kaku Gothic New", system-ui, sans-serif;
+  --font-mono: "DM Mono", ui-monospace, "SFMono-Regular", monospace;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--sumi);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ---------- masthead ---------- */
+.masthead {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ma-4);
+  padding: var(--ma-3) var(--ma-6);
+  background: rgba(242, 244, 247, 0.86);
+  backdrop-filter: saturate(1.4) blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+.marchio { display: inline-flex; align-items: center; gap: var(--ma-3); text-decoration: none; color: var(--sumi); }
+.marchio img { display: block; }
+.marchio__nome { font-family: var(--font-display); font-weight: 700; font-size: 20px; letter-spacing: -0.01em; }
+.marchio__iq { color: var(--ai); }
+.masthead nav { display: flex; gap: var(--ma-6); align-items: center; }
+.masthead nav a { color: var(--sumi-soft); text-decoration: none; font-weight: 500; font-size: 15px; }
+.masthead nav a:hover { color: var(--ai); }
+.masthead nav a.repo {
+  border: 1.5px solid var(--sumi);
+  border-radius: 999px;
+  padding: 6px 16px;
+  color: var(--sumi);
+}
+.masthead nav a.repo:hover { background: var(--sumi); color: var(--paper-raised); }
+
+/* ---------- hero (vetrina) ---------- */
+.hero {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: var(--ma-16) var(--ma-6) var(--ma-12);
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: var(--ma-12);
+  align-items: center;
+}
+.hero__kicker {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ai);
+  border: 1px solid var(--ai);
+  border-radius: 999px;
+  padding: 4px 12px;
+  margin-bottom: var(--ma-6);
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(34px, 5vw, 52px);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  margin: 0 0 var(--ma-4);
+}
+.hero h1 em { font-style: normal; color: var(--ai); }
+.hero p.lead { font-size: 20px; color: var(--sumi-soft); margin: 0 0 var(--ma-8); max-width: 46ch; }
+.hero__azioni { display: flex; gap: var(--ma-4); flex-wrap: wrap; }
+.bottone {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-body); font-weight: 700; font-size: 16px;
+  text-decoration: none; border-radius: var(--radius-s); padding: 12px 22px;
+  border: 1.5px solid transparent; cursor: pointer;
+}
+.bottone--primario { background: var(--ai); color: #fff; }
+.bottone--primario:hover { background: #01458f; }
+.bottone--fantasma { border-color: var(--sumi); color: var(--sumi); }
+.bottone--fantasma:hover { background: var(--sumi); color: var(--paper-raised); }
+.hero__mostra {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--ombra);
+  background: var(--paper-raised);
+}
+.hero__mostra img { display: block; width: 100%; height: auto; }
+.hero__mostra figcaption {
+  padding: var(--ma-3) var(--ma-4);
+  font-size: 13px;
+  color: var(--sumi-faint);
+  border-top: 1px solid var(--line);
+  font-family: var(--font-mono);
+}
+
+/* ---------- fasce ---------- */
+.fascia { max-width: 1080px; margin: 0 auto; padding: var(--ma-12) var(--ma-6); }
+.fascia--sunken { background: var(--paper-sunken); max-width: none; }
+.fascia--sunken > .dentro { max-width: 1080px; margin: 0 auto; }
+.fascia h2 {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(24px, 3vw, 32px); letter-spacing: -0.01em;
+  margin: 0 0 var(--ma-3);
+}
+.fascia > .occhiello, .fascia .dentro > .occhiello {
+  font-family: var(--font-mono); font-size: 13px; text-transform: uppercase;
+  letter-spacing: 0.05em; color: var(--ai); margin: 0 0 var(--ma-2);
+}
+.fascia p.sotto { color: var(--sumi-soft); max-width: var(--leggibile); margin: 0 0 var(--ma-8); }
+
+/* griglia di tessere */
+.tessere { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--ma-6); }
+.tessera {
+  background: var(--paper-raised); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: var(--ma-6);
+  box-shadow: var(--ombra);
+}
+.tessera h3 { font-family: var(--font-display); font-weight: 700; font-size: 19px; margin: 0 0 var(--ma-2); }
+.tessera h3 .bollo {
+  display: inline-block; width: 10px; height: 10px; border-radius: 3px;
+  margin-right: 8px; vertical-align: middle;
+}
+.tessera p { margin: 0; color: var(--sumi-soft); font-size: 15.5px; }
+.tessera code { font-family: var(--font-mono); font-size: 0.9em; color: var(--ai); background: var(--paper-sunken); padding: 1px 5px; border-radius: 4px; }
+
+/* numeri veri */
+.cifre { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: var(--ma-6); }
+.cifra { text-align: left; }
+.cifra .n { font-family: var(--font-display); font-weight: 700; font-size: clamp(34px, 5vw, 46px); color: var(--ai); line-height: 1; letter-spacing: -0.02em; }
+.cifra .et { display: block; margin-top: var(--ma-2); color: var(--sumi-soft); font-size: 15px; }
+
+/* passi numerati (come funziona) */
+.passi { display: grid; gap: var(--ma-6); counter-reset: passo; }
+.passo { display: grid; grid-template-columns: 44px 1fr; gap: var(--ma-4); align-items: start; }
+.passo::before {
+  counter-increment: passo; content: counter(passo);
+  font-family: var(--font-display); font-weight: 700; font-size: 18px;
+  width: 44px; height: 44px; display: grid; place-items: center;
+  background: var(--paper-raised); border: 1.5px solid var(--ai); color: var(--ai);
+  border-radius: 50%;
+}
+.passo h3 { font-family: var(--font-display); font-size: 18px; margin: 6px 0 4px; }
+.passo p { margin: 0; color: var(--sumi-soft); font-size: 15.5px; }
+
+/* ---------- layout documento ---------- */
+.doc { max-width: 1160px; margin: 0 auto; padding: var(--ma-8) var(--ma-6) var(--ma-16); display: grid; grid-template-columns: 240px 1fr; gap: var(--ma-12); }
+.doc__nav { position: sticky; top: 84px; align-self: start; font-size: 15px; }
+.doc__nav .gruppo { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--sumi-faint); margin: 0 0 var(--ma-3); }
+.doc__nav ul { list-style: none; margin: 0 0 var(--ma-6); padding: 0; display: grid; gap: 2px; }
+.doc__nav a { display: block; padding: 6px 12px; border-radius: var(--radius-s); color: var(--sumi-soft); text-decoration: none; border-left: 2px solid transparent; }
+.doc__nav a:hover { background: var(--paper-sunken); color: var(--sumi); }
+.doc__nav a[aria-current="page"] { color: var(--ai); font-weight: 700; border-left-color: var(--ai); background: var(--paper-raised); }
+
+.prosa { max-width: var(--leggibile); }
+.prosa h1 { font-family: var(--font-display); font-weight: 700; font-size: clamp(28px, 4vw, 38px); letter-spacing: -0.02em; margin: 0 0 var(--ma-6); line-height: 1.12; }
+.prosa h2 { font-family: var(--font-display); font-weight: 700; font-size: 25px; margin: var(--ma-12) 0 var(--ma-4); padding-top: var(--ma-2); border-top: 1px solid var(--line); }
+.prosa h3 { font-family: var(--font-display); font-weight: 500; font-size: 20px; margin: var(--ma-8) 0 var(--ma-3); }
+.prosa p, .prosa li { color: var(--sumi-soft); }
+.prosa strong { color: var(--sumi); }
+.prosa a { color: var(--ai); text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1px; }
+.prosa ul, .prosa ol { padding-left: 1.3em; }
+.prosa li { margin: 4px 0; }
+.prosa blockquote { margin: var(--ma-6) 0; padding: var(--ma-3) var(--ma-6); border-left: 3px solid var(--ai-vivid); background: var(--paper-raised); border-radius: 0 var(--radius-s) var(--radius-s) 0; color: var(--sumi-soft); }
+.prosa code { font-family: var(--font-mono); font-size: 0.88em; background: var(--paper-sunken); color: var(--sumi); padding: 1px 6px; border-radius: 5px; }
+.prosa pre { background: var(--sumi); color: #e8edf6; border-radius: var(--radius); padding: var(--ma-4) var(--ma-6); overflow-x: auto; font-size: 14.5px; box-shadow: var(--ombra); }
+.prosa pre code { background: none; color: inherit; padding: 0; font-size: inherit; }
+.prosa table { width: 100%; border-collapse: collapse; margin: var(--ma-6) 0; font-size: 15px; display: block; overflow-x: auto; }
+.prosa th, .prosa td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); }
+.prosa th { font-family: var(--font-display); color: var(--sumi); font-weight: 700; background: var(--paper-raised); }
+.prosa td { color: var(--sumi-soft); }
+.prosa hr { border: none; border-top: 1px solid var(--line); margin: var(--ma-12) 0; }
+
+/* ---------- sigillo (hanko) e footer ---------- */
+.hanko {
+  display: inline-grid; place-items: center; width: 84px; height: 84px;
+  border: 2.5px solid var(--shu); border-radius: 16px; color: var(--shu);
+  font-family: var(--font-display); font-weight: 700; font-size: 13px; line-height: 1.15;
+  text-align: center; transform: rotate(-4deg); padding: 6px;
+  background: rgba(217, 45, 32, 0.03);
+}
+.site-footer { border-top: 1px solid var(--line); background: var(--paper-sunken); }
+.site-footer .dentro { max-width: 1080px; margin: 0 auto; padding: var(--ma-12) var(--ma-6); display: flex; gap: var(--ma-12); justify-content: space-between; flex-wrap: wrap; align-items: start; }
+.site-footer p { color: var(--sumi-faint); font-size: 14px; max-width: 44ch; }
+.site-footer a { color: var(--ai); }
+.site-footer .colonne { display: flex; gap: var(--ma-12); flex-wrap: wrap; }
+.site-footer h4 { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--sumi-faint); margin: 0 0 var(--ma-3); }
+.site-footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.site-footer ul a { text-decoration: none; color: var(--sumi-soft); font-size: 15px; }
+.site-footer ul a:hover { color: var(--ai); }
+
+/* ---------- responsive ---------- */
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; gap: var(--ma-8); padding-top: var(--ma-12); }
+  .doc { grid-template-columns: 1fr; }
+  .doc__nav { position: static; border-bottom: 1px solid var(--line); padding-bottom: var(--ma-6); }
+  .masthead nav { gap: var(--ma-4); }
+  .masthead nav a:not(.repo) { display: none; }
+}
+
+/* accessibilità: rispetta chi non vuole animazioni */
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }

@@ -4404,16 +4404,86 @@ a {
   align-items: flex-start;
   gap: var(--ma-6);
   flex-wrap: wrap;
-}
-.scheda-comune__logo {
-  width: 64px;
-  height: 64px;
-  object-fit: contain;
-  border-radius: var(--radius-sm);
+  /* Testata come biglietto, non riga nuda: fondo carta rialzata, accento
+     civico a sinistra (stessa autorità dei link, `--ai`), così la pagina apre
+     con un segno invece che con testo sospeso nel bianco. */
+  padding: var(--ma-5) var(--ma-6);
   background: var(--paper-raised);
   border: 1px solid var(--kasumi);
-  padding: var(--ma-2);
+  border-left: 3px solid var(--ai);
+  border-radius: var(--radius-sm);
+}
+/* Le sezioni della scheda (Connettore, Servizi, Contatti…) sono `.panel`
+   generici: nudi, leggevano «scarni». Qui, scoped sotto `.scheda-comune`, li
+   allineo al linguaggio della testata — accento civico `--ai`, ritmo, un tick
+   sul titolo — senza toccare `.panel` altrove. */
+.scheda-comune.stack {
+  gap: var(--ma-6);
+  /* Stacco dalla nav sticky: la card hero non deve incollarsi all'header. */
+  margin-top: var(--ma-5);
+}
+.scheda-comune .panel {
+  position: relative;
+  border-left: 3px solid transparent;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+.scheda-comune .panel:hover {
+  border-left-color: var(--ai);
+  box-shadow: 0 1px 0 var(--kasumi), 0 6px 18px -14px var(--sumi);
+}
+/* Titolo di sezione con tick civico a sinistra: stesso segno del bordo testata,
+   trasforma un «Connettore» sospeso in un'etichetta con autorità. */
+.scheda-comune .panel > h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.55em;
+  margin-top: 0;
+  font-size: 1.1rem;
+}
+.scheda-comune .panel > h2::before {
+  content: "";
   flex: none;
+  width: 3px;
+  height: 0.95em;
+  background: var(--ai);
+  border-radius: 2px;
+}
+.scheda-comune__logo {
+  /* Lo stemma prende tutta l'altezza della testata (nome → ultimo scan):
+     `align-self: stretch` lo allunga fin dove arriva la colonna di testo,
+     `min-height` gli dà corpo anche quando il testo è corto. Largo fisso,
+     alto elastico. */
+  width: 108px;
+  align-self: stretch;
+  min-height: 108px;
+  height: auto;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  border: 1px solid var(--kasumi);
+  padding: var(--ma-3);
+  flex: none;
+}
+/* Monogramma quando lo stemma non c'è: stesso ingombro del logo, iniziale in
+   mono su fondo civico. Un segno, non uno stemma finto. */
+.scheda-comune__logo--mono {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: var(--ai-wash, #e3edf9);
+  color: var(--ai-deep);
+  font-family: var(--font-mono);
+  font-size: 2.6rem;
+  font-weight: 700;
+  line-height: 1;
+}
+/* Bottone «Chiedi al comune»: staccato dal testo sopra — prima incollato.
+   `.button` è un <a> inline: `margin-top` non spinge finché resta inline,
+   quindi `inline-block` per far valere lo stacco verticale. */
+.scheda-comune__apri {
+  display: inline-block;
+  margin-top: var(--ma-5);
 }
 .scheda-comune__aderenza-cifra {
   margin: 0 0 var(--ma-4);
@@ -4424,27 +4494,80 @@ a {
   font-size: 1.4rem;
   color: var(--ai-deep);
 }
+/* Le quattro superfici AgID come mini-card in griglia 2×2 (auto-fit sotto i
+   ~440px → una colonna), non più righe piatte separate da un filo. Ogni card
+   porta un'iconcina e un badge-stato colorato: blu autorità = via REST, giallo
+   «meno certo» = via scrape, grigio spento = non raggiunta. */
 .scheda-comune__superfici {
   list-style: none;
-  margin: 0;
+  margin: var(--ma-4) 0 0;
   padding: 0;
   display: grid;
-  gap: var(--ma-2);
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--ma-3);
 }
 .scheda-comune__superficie {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: var(--ma-3);
-  padding: var(--ma-2) 0;
-  border-top: 1px solid var(--kasumi);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: var(--ma-2) var(--ma-3);
+  padding: var(--ma-3);
+  border: 1px solid var(--kasumi);
+  border-left: 3px solid var(--sumi-faint);
+  border-radius: var(--radius-sm);
+  background: var(--paper-raised);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.scheda-comune__superficie:hover {
+  box-shadow: 0 2px 10px rgba(11, 29, 58, 0.08);
+}
+.scheda-comune__superficie-icona {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-sm);
+  background: var(--paper-sunken);
+  color: var(--sumi-faint);
+}
+.scheda-comune__superficie-nome {
+  font-weight: 600;
+  color: var(--sumi);
+  text-transform: capitalize;
 }
 .scheda-comune__superficie-via {
+  grid-column: 2;
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   letter-spacing: 0.06em;
   color: var(--sumi-faint);
   white-space: nowrap;
+}
+/* Stato = accento sinistro + tinta dell'iconcina. */
+.scheda-comune__superficie--rest {
+  border-left-color: var(--ai);
+}
+.scheda-comune__superficie--rest .scheda-comune__superficie-icona {
+  background: var(--ai-wash);
+  color: var(--ai);
+}
+.scheda-comune__superficie--rest .scheda-comune__superficie-via {
+  color: var(--ai-deep);
+}
+.scheda-comune__superficie--scrape {
+  border-left-color: var(--yamabuki);
+}
+.scheda-comune__superficie--scrape .scheda-comune__superficie-icona {
+  background: var(--yamabuki-wash);
+  color: var(--yamabuki-deep);
+}
+.scheda-comune__superficie--scrape .scheda-comune__superficie-via {
+  color: var(--yamabuki-deep);
+}
+.scheda-comune__superficie--assente {
+  border-left-color: var(--kasumi);
+  opacity: 0.7;
 }
 .scheda-comune__chip-riga {
   display: flex;
@@ -4523,4 +4646,96 @@ a {
   color: var(--yamabuki-deep);
   font-size: 0.78rem;
   font-weight: 600;
+  /* La banda intera pulsa piano: dice «in corso» a colpo d'occhio anche senza
+     leggere. A scan finito <ScanLive> passa dalla banda al bottone «Ricarica»,
+     quindi il lampeggio si ferma da solo — nessuna classe di stop da gestire. */
+  animation: scan-refresh-pulse 1.15s ease-in-out infinite;
+}
+/* La data dell'ultima lettura, dentro la banda: secondaria, non deve rubare
+   l'occhio al «sto leggendo». */
+.scan-refresh__data {
+  font-weight: 500;
+  opacity: 0.8;
+}
+/* Cornice comune ai due punti in cui vive la spia (chat e pannello): stacco
+   verticale dal contenuto vicino. La variante cambia solo il respiro, non la
+   logica — lo stato è unico (lib/scan). */
+.scan-live--chat {
+  display: block;
+  margin: var(--ma-3) 0;
+}
+.scan-live--pannello {
+  display: block;
+  margin: var(--ma-3) 0 0;
+}
+/* Bottone «Ricarica con dati aggiornati»: compare al posto della banda quando
+   il refresh ha riscritto il record. Rilancia l'ultima domanda coi dati freschi.
+   Stile coerente coi toni yamabuki della banda, ma cliccabile e a piena riga nel
+   pannello, compatto in chat. */
+.scan-ricarica {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ma-2);
+  padding: var(--ma-2) var(--ma-3);
+  border: 1px solid var(--yamabuki-deep);
+  border-radius: 999px;
+  background: var(--yamabuki-wash);
+  color: var(--yamabuki-deep);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 120ms ease, transform 120ms ease;
+}
+.scan-ricarica:hover {
+  background: var(--yamabuki-deep);
+  color: var(--paper, #fff);
+}
+.scan-ricarica:active {
+  transform: translateY(1px);
+}
+.scan-ricarica__icona {
+  font-size: 0.95rem;
+  line-height: 1;
+}
+.scan-live--pannello .scan-ricarica {
+  width: 100%;
+  justify-content: center;
+}
+/* Pallino guida davanti al testo: stesso battito, più marcato, così il moto si
+   vede anche se il contrasto della banda è tenue in cattura video. */
+.scan-refresh__pulse {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 999px;
+  background: var(--yamabuki-deep);
+  flex: none;
+  animation: scan-refresh-blink 1.15s ease-in-out infinite;
+}
+@keyframes scan-refresh-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+@keyframes scan-refresh-blink {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(0.6);
+    opacity: 0.35;
+  }
+}
+/* Rispetto di chi ha ridotto le animazioni di sistema: niente battito, la
+   banda resta visibile e leggibile, solo ferma. */
+@media (prefers-reduced-motion: reduce) {
+  .scan-refresh,
+  .scan-refresh__pulse {
+    animation: none;
+  }
 }

@@ -28,7 +28,6 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { Seal } from "@/components/Seal";
 import { Marchio } from "@/components/Logo";
-import Approfondisci from "@/components/Approfondisci";
 import EcoProfilo from "@/components/EcoProfilo";
 import Segnalazione from "@/components/Segnalazione";
 import SchedaDettaglio from "@/components/SchedaDettaglio";
@@ -38,8 +37,11 @@ import RispostaCivica from "@/components/RispostaCivica";
 import PonteScala from "@/components/PonteScala";
 import { PRESETS } from "@/lib/profili-demo";
 import { useProfilo } from "@/lib/profilo";
-import { FORM_FEEDBACK_URL, LINK_ESTERNO } from "@/lib/moduli";
+import { linkFeedback, LINK_ESTERNO } from "@/lib/moduli";
+import { conTagVerifica } from "@/lib/testo";
 import { useRisultati } from "@/lib/risultati";
+import { useScan } from "@/lib/scan";
+import ScanLive from "@/components/ScanLive";
 
 /** Stable DOM id for one card, so the side index can link straight to it. */
 function ancoraDi(messageId: string, matchId: string): string {
@@ -53,7 +55,6 @@ import {
   fetchSchedaServizio,
   fetchServiziCategoria,
   login,
-  type Approfondimento,
   type Bando,
   type CategoriaServizio,
   type ChatCost,
@@ -61,13 +62,11 @@ import {
   type ChatTurn,
   type ComuneAmbiguo,
   type CostLevels,
-  type Escalation,
   type ConnettoreSonda,
   type InfoOut,
   type InfoWebResult,
   type MappaConnettore,
   type Match,
-  type ScanStato,
   type SchedaServizio,
   type ServizioLink,
 } from "@/lib/api";
@@ -178,7 +177,7 @@ function CostStrip({ cost }: { cost: ChatCost }) {
         {levelEntries.length > 0 && (
           <span className="cost-strip__levels">
             {" "}
-            {levelEntries.map((key) => `${LEVEL_LABEL[key]} ${levels![key]}`).join(" · ")}
+            {levelEntries.map((key) => `${LEVEL_LABEL[key]} ×${levels![key]}`).join(" · ")}
           </span>
         )}
       </p>
@@ -303,48 +302,6 @@ function DataGapNotice({ kind }: { kind: "not_published" | "none_found" }) {
  * exactly what the source gave us. */
 function isWebUrl(url: string): boolean {
   return /^https?:\/\//i.test(url);
-}
-
-/** Evidenzia quattro token nel testo TIQ:
- *  - `**...**` → giallo `.tag-verifica` (l'avvertenza «da verificare tu»);
- *  - `«Modello AgID»` → verde `.tag-connettore` (il nome del MODELLO connettore,
- *    stesso chip del badge). E' il nome del modello, mai il vendor;
- *  - `[[...]]` → `.tag-comune` (il nome del comune fuori copertura, chip colorato);
- *  - `__...__` → `<strong>` grassetto vero (per «Attenzione»), distinto dal
- *    chip giallo del «da verificare».
- * Tutto il resto resta testo. Un solo split su regex alternata così i token
- * non si calpestano. */
-function conTagVerifica(testo: string) {
-  return testo
-    .split(/(\*\*.+?\*\*|«Modello AgID»|\[\[.+?\]\]|__.+?__)/g)
-    .map((frammento, i) => {
-      if (!frammento) return null;
-      if (frammento.startsWith("**") && frammento.endsWith("**")) {
-        return (
-          <span className="tag-verifica" key={i}>
-            {frammento.slice(2, -2)}
-          </span>
-        );
-      }
-      if (frammento.startsWith("[[") && frammento.endsWith("]]")) {
-        return (
-          <span className="tag-comune" key={i}>
-            {frammento.slice(2, -2)}
-          </span>
-        );
-      }
-      if (frammento.startsWith("__") && frammento.endsWith("__")) {
-        return <strong key={i}>{frammento.slice(2, -2)}</strong>;
-      }
-      if (frammento === "«Modello AgID»") {
-        return (
-          <span className="tag-connettore" key={i}>
-            {frammento}
-          </span>
-        );
-      }
-      return <span key={i}>{frammento}</span>;
-    });
 }
 
 /**
@@ -884,127 +841,9 @@ function EffortCaption({ effort }: { effort: number | null }) {
 // D-S6 (B6): scan assente/stantio (>6gg) → refresh partito in background,
 // dati di QUESTO turno restano quelli in cache — nessuna attesa sincrona.
 // `stato === "fresco"` → nessun indicatore, la risposta non lo segnala.
-function ScanRefreshNotice({ scan }: { scan: ScanStato | null | undefined }) {
-  if (!scan || scan.stato !== "aggiornamento_in_corso") {
-    return null;
-  }
-  return (
-    <p className="scan-refresh">
-      Sto aggiornando i dati del comune · intanto vedi gli attuali
-      {scan.ultimo_scan ? ` (ultimo scan: ${scan.ultimo_scan})` : ""}.
-    </p>
-  );
-}
-
-function EscalationGate({
-  escalation,
-  onResolved,
-}: {
-  escalation: Escalation;
-  onResolved: () => void;
-}) {
-  const [busy, setBusy] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
-  const { registra } = useProfilo();
-
-  async function enter(preset: (typeof PRESETS)[number]) {
-    setBusy(preset.id);
-    setError(null);
-    try {
-      await login({
-        comune_istat: "058003",
-        comune_nome: "Albano Laziale",
-        ...preset.profile,
-      });
-      // Publish what signing in actually established, so the citizen can see
-      // the facts their answers are now computed from. `accesso` is recorded
-      // without a codice fiscale on purpose: this flow is a simulation and
-      // never reads one, and the strip says so rather than implying otherwise.
-      registra({
-        eta: preset.profile.eta,
-        interessi: [...preset.profile.interests],
-        comune: {
-          nome: "Albano Laziale",
-          istat: "058003",
-          origine: "accesso",
-          confermato: true,
-        },
-        accesso: true,
-      });
-      onResolved();
-    } catch {
-      setError(
-        "Non riesco a raggiungere il servizio. Verifica che l'API sia in esecuzione su localhost:8010.",
-      );
-      setBusy(null);
-    }
-  }
-
-  return (
-    <div className="panel escalation" data-gap="escalation">
-      <h3>Serve la tua identità</h3>
-      <p className="lede" style={{ fontSize: "0.95rem" }}>
-        {escalation.reason}
-      </p>
-      {escalation.missing_fields.length > 0 && (
-        <p className="field__hint">
-          Dato mancante: {escalation.missing_fields.join(", ")}
-        </p>
-      )}
-      <p style={{ fontSize: "0.85rem", color: "var(--sumi-faint)" }}>
-        Questa è una simulazione del flusso SPID: nessuna credenziale viene
-        verificata e nessun dato lascia il tuo computer. Scegli un profilo per
-        continuare la conversazione.
-      </p>
-
-      <div className="grid-2" style={{ marginTop: "var(--ma-4)" }}>
-        {PRESETS.map((p) => (
-          <button
-            key={p.id}
-            type="button"
-            className="panel"
-            onClick={() => enter(p)}
-            disabled={busy !== null}
-            style={{
-              textAlign: "left",
-              cursor: "pointer",
-              padding: "var(--ma-4)",
-              background: "var(--paper)",
-              font: "inherit",
-              opacity: busy && busy !== p.id ? 0.5 : 1,
-            }}
-          >
-            <span
-              style={{
-                fontFamily: "var(--font-display)",
-                fontWeight: 700,
-                display: "block",
-                marginBottom: "var(--ma-1)",
-              }}
-            >
-              {p.name}
-            </span>
-            <span
-              style={{
-                fontFamily: "var(--font-mono)",
-                fontSize: "0.78rem",
-                color: "var(--sumi-faint)",
-              }}
-            >
-              {busy === p.id ? "Accesso in corso…" : p.detail}
-            </span>
-          </button>
-        ))}
-      </div>
-
-      {error && (
-        <p className="notice" role="alert" style={{ marginTop: "var(--ma-4)" }}>
-          {error}
-        </p>
-      )}
-    </div>
-  );
-}
+// La spia (banda che lampeggia + bottone «Ricarica») vive ora in <ScanLive>,
+// alimentata da un unico store condiviso (lib/scan): stesso stato in chat e
+// nel pannello a sinistra, un solo poller. Vedi ScanProvider.
 
 // D-56/R-LOGOUT: azzerare una sessione CIE/SPID perché il turno sembra
 // parlare di un'altra persona è quasi-irreversibile (bisogna rientrare).
@@ -1048,6 +887,7 @@ export default function Chat() {
   const [locateNote, setLocateNote] = useState<string | null>(null);
   const { registra, profilo, dimentica } = useProfilo();
   const { registra: registraTrovate, azzeraTrovate } = useRisultati();
+  const { aggiornaScan, nonceRicarica } = useScan();
   const accesso = profilo.accesso === true;
   const [manualLogin, setManualLogin] = useState(false);
   //: Aperto solo su richiesta. Un campo sempre esposto sopra la domanda si
@@ -1069,45 +909,13 @@ export default function Chat() {
     return () => clearInterval(t);
   }, [busy]);
 
-  /** Municipal results found by the follow-up check arrive as a new answer in
-   *  the transcript, not as a panel beside it: they are verdicts, and every
-   *  verdict in this app is stated in exactly one place. */
-  function aggiungiComunali(esito: Approfondimento) {
-    const id = newId();
-    setMessages((prev) => [
-      ...prev,
-      {
-        id,
-        role: "assistant",
-        content: esito.esito,
-        reply: {
-          reply: esito.esito,
-          topic: null,
-          kind: "agevolazione",
-          data_gap: null,
-          needs_clarification: false,
-          matches: esito.matches,
-          spid_required: false,
-          spid_reason: null,
-          access_mode: null,
-          citizen_effort: null,
-          info: null,
-          cost: null,
-          escalation: null,
-        } as unknown as ChatOut,
-      },
-    ]);
-    registraTrovate(
-      esito.matches.map((match) => ({
-        ancora: ancoraDi(id, match.id),
-        titolo: match.title,
-        verdict: match.verdict,
-        verdictLabel: match.verdict_label,
-        livello: match.livello,
-      })),
-    );
-  }
   const nextId = useRef(0);
+  // Guardia sincrona contro il doppio invio. `busy` e' stato React: due submit
+  // nello stesso tick lo leggono entrambi false e partono due richieste — due
+  // bolle uguali e, su comune non coperto, due scansioni live concorrenti di
+  // cui una puo' fallire ("Non riesco a raggiungere il servizio"). Il ref
+  // cambia all'istante, quindi il secondo invio si ferma qui.
+  const invioInCorso = useRef(false);
   const logRef = useRef<HTMLDivElement>(null);
 
   // Keep the newest exchange in view as the transcript grows, the way a
@@ -1138,7 +946,8 @@ export default function Chat() {
 
   async function send(text: string, comuneIstatScelto?: string) {
     const trimmed = text.trim();
-    if (!trimmed || busy) return;
+    if (!trimmed || busy || invioInCorso.current) return;
+    invioInCorso.current = true;
 
     setError(null);
     const history: ChatTurn[] = messages.map((m) => ({
@@ -1166,6 +975,17 @@ export default function Chat() {
         ...prev,
         { id, role: "assistant", content: out.reply, reply: out },
       ]);
+      // Alimenta l'unica spia scan condivisa (chat + pannello). L'istat viene
+      // dal connettore della risposta, con ripiego sul comune scelto/profilo:
+      // se lo stato è "fresco", <ScanLive> non mostra nulla; se è
+      // "aggiornamento_in_corso", parte il poller e compare la banda.
+      aggiornaScan(
+        out.scan,
+        out.connettore?.codice_istat ??
+          comuneIstatScelto ??
+          profilo.comune?.istat ??
+          null,
+      );
       // Feed the side index. It stores pointers into this transcript, never
       // copies of the verdicts — the card stays the single place any result
       // is stated.
@@ -1224,11 +1044,18 @@ export default function Chat() {
           // Recapiti letti al volo su comune fuori copertura → banner a
           // sinistra. Li leghiamo all'ISTAT del comune così il pannello non
           // li mostra per un comune diverso da quello a cui appartengono.
-          ...(out.numeri_utili && capito.comune_istat && capito.comune_nome
+          // Su comune COPERTO scelto dal chip di profilo, `capito` non
+          // echeggia istat/nome (il comune non viene dal testo): ripieghiamo
+          // sul comune di profilo, a cui la risposta si riferisce comunque.
+          // Senza questo, i numeri utili tornavano dall'API ma non venivano
+          // mai legati, e a sinistra restava solo il link scheda.
+          ...(out.numeri_utili &&
+          (capito.comune_istat ?? profilo.comune?.istat) &&
+          (capito.comune_nome ?? profilo.comune?.nome)
             ? {
                 numeriUtili: {
-                  istat: capito.comune_istat,
-                  comune: capito.comune_nome,
+                  istat: (capito.comune_istat ?? profilo.comune?.istat)!,
+                  comune: (capito.comune_nome ?? profilo.comune?.nome)!,
                   telefoni: out.numeri_utili.telefoni,
                   email: out.numeri_utili.email,
                   pec: out.numeri_utili.pec,
@@ -1256,6 +1083,7 @@ export default function Chat() {
       );
     } finally {
       setBusy(false);
+      invioInCorso.current = false;
     }
   }
 
@@ -1264,10 +1092,25 @@ export default function Chat() {
     send(input);
   }
 
-  function retryLastQuestion() {
+  function retryLastQuestion(comuneIstat?: string) {
     const lastUser = [...messages].reverse().find((m) => m.role === "user");
-    if (lastUser) send(lastUser.content);
+    if (lastUser) send(lastUser.content, comuneIstat);
   }
+
+  // «Ricarica con dati aggiornati» (da <ScanLive>, in chat o nel pannello):
+  // rilancia l'ultima domanda ora che il refresh ha riscritto il record. Il
+  // bottone non chiama send direttamente — bumpa `nonceRicarica` nello store, e
+  // qui reagiamo, così il rilancio usa sempre la closure fresca di send. nonce
+  // parte da 0: il primo giro (mount) non deve rilanciare nulla.
+  const nonceVisto = useRef(0);
+  useEffect(() => {
+    if (nonceRicarica === 0 || nonceRicarica === nonceVisto.current) return;
+    nonceVisto.current = nonceRicarica;
+    retryLastQuestion();
+    // retryLastQuestion legge messages/send correnti a ogni render; qui basta
+    // reagire al bump del nonce.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [nonceRicarica]);
 
   // Disambiguazione a un tap: l'utente sceglie il comune giusto da una scheda,
   // rimandiamo la STESSA domanda con l'ISTAT scelto — niente da ridigitare.
@@ -1303,7 +1146,11 @@ export default function Chat() {
         accesso: true,
       });
       azzeraTrovate();
-      await send(preset.domanda);
+      // Passiamo l'ISTAT esplicito: la registra() qui sopra non e' ancora
+      // applicata alla closure di send, quindi `profilo.comune?.istat` sarebbe
+      // ancora vuoto e la chiamata partirebbe con comune_istat=null — niente
+      // comune, niente numeri utili, niente scheda a sinistra sul primo turno.
+      await send(preset.domanda, "058003");
     } catch {
       setError(
         "Non riesco a raggiungere il servizio. Verifica che l'API sia in esecuzione su localhost:8010.",
@@ -1533,7 +1380,14 @@ export default function Chat() {
                 link e non la frase, e nasconderla lasciava la risposta vuota —
                 a Roncaro (PV) la persona vedeva una card bianca mentre l'API
                 aveva riconosciuto il comune e cercato sul suo sito. */}
-            {(!m.reply?.info || !(m.reply.info.document || m.reply.info.office)) && (
+            {/* La risposta al cittadino compare UNA volta sola. Sul rail
+                INFORMAZIONE la rende `RispostaCivica` (con i suoi bolli e la
+                gerarchia della scheda), quindi qui la sopprimiamo: prima il
+                testo usciva sia qui (tag resi) sia dentro `civica__sintesi`
+                (marcatori grezzi), impilando due copie della stessa pappardella.
+                Fuori da quel rail — rail AGEVOLAZIONE, oppure INFORMAZIONE senza
+                `info` — RispostaCivica non gira e il testo lo rendiamo qui. */}
+            {(m.reply?.kind !== "informazione" || !m.reply.info) && (
               <p>{conTagVerifica(m.content)}</p>
             )}
 
@@ -1571,7 +1425,15 @@ export default function Chat() {
 
             {m.reply && (
               <div className="chat__answer">
-                {m.reply.cost && !m.reply.info && <CostStrip cost={m.reply.cost} />}
+                {/* Il costo di recupero PDF si mostra SOLO quando abbiamo
+                    davvero servito dati ingeriti: rail agevolazione con almeno
+                    un match. Su disambiguazione e fuori-copertura la «media del
+                    comune» è un numero che non riguarda questo comune (non lo
+                    ingeriamo) — mostrarlo era una cifra fabbricata. */}
+                {m.reply.kind === "agevolazione" &&
+                  m.reply.matches.length > 0 &&
+                  m.reply.cost &&
+                  !m.reply.info && <CostStrip cost={m.reply.cost} />}
 
                 {/* Comune a rail sia informazione che agevolazione: il badge
                     connettore sta qui, sopra i due rami, perché la sonda è
@@ -1668,31 +1530,10 @@ export default function Chat() {
                       );
                     })()}
 
-                    {/* Offered only when nothing municipal came back: with a
-                        comunale result already on screen the question is
-                        answered, and asking it again would be noise.
-
-                        Hidden when the comune is one we do not read: "did my
-                        comune publish this?" has no honest answer there — we
-                        have no snapshot to check — and it would only produce
-                        "il comune non lo ha pubblicato", which reads as an
-                        absence we never actually verified. The live search on
-                        the main rail already covers those comuni. */}
-                    {m.reply.topic &&
-                      profilo.comune?.coperto !== false &&
-                      !m.reply.comuni_ambigui?.length &&
-                      !m.reply.matches.some((x) => x.livello === "comunale") && (
-                        <Approfondisci
-                          topic={m.reply.topic}
-                          onSchede={(esito) => aggiungiComunali(esito)}
-                        />
-                      )}
-
-                    {/* Closure shows up on this rail too, and the request was
-                        only ever offered on the other one. A card whose
-                        criteria are all "non pubblicato" is exactly the moment
-                        the citizen has evidence in front of them — and it is
-                        the moment they used to be given nothing to do with it. */}
+                    {/* Una scheda i cui requisiti sono tutti «non pubblicato» è
+                        il momento in cui il cittadino ha la prova davanti agli
+                        occhi: è lì che ha senso offrirgli un'azione concreta —
+                        chiedere al proprio comune di aprire quei dati. */}
                     {m.reply.matches.some(
                       (x) =>
                         x.livello === "comunale" &&
@@ -1732,16 +1573,8 @@ export default function Chat() {
                         <DataGapNotice kind={m.reply.data_gap} />
                       )}
 
-                    {m.reply.escalation?.needed && (
-                      <EscalationGate
-                        escalation={m.reply.escalation}
-                        onResolved={retryLastQuestion}
-                      />
-                    )}
                   </>
                 )}
-
-                <ScanRefreshNotice scan={m.reply.scan} />
 
                 <EffortCaption effort={m.reply.citizen_effort} />
               </div>
@@ -1756,13 +1589,18 @@ export default function Chat() {
         )}
       </div>
 
+      {/* Spia scan del comune, sotto l'intera conversazione: banda che lampeggia
+          mentre il refresh gira, poi bottone «Ricarica con dati aggiornati».
+          Stesso stato mostrato nel pannello a sinistra (un solo store). */}
+      <ScanLive variante="chat" />
+
       {/* Feedback esterno (D-S7): discreto, sotto l'intera conversazione, non
           per-messaggio. Compare appena c'è almeno una risposta da giudicare —
           prima di allora non c'è niente su cui dare un parere. */}
       {messages.some((m) => m.role === "assistant") && (
         <p className="chiedi-inline">
           Com&apos;è andata?{" "}
-          <a href={FORM_FEEDBACK_URL} {...LINK_ESTERNO}>
+          <a href={linkFeedback()} {...LINK_ESTERNO}>
             Lascia un feedback →
           </a>
         </p>
@@ -1842,7 +1680,10 @@ export default function Chat() {
             // twice, with two different answers and nothing saying which is
             // current.
             azzeraTrovate();
-            retryLastQuestion();
+            // ISTAT esplicito: la registra() qui sopra non e' ancora nella
+            // closure di send, quindi senza passarlo il re-invio partirebbe con
+            // comune_istat=null e la scheda numeri utili non comparirebbe.
+            retryLastQuestion("058003");
           }}
         />
       )}

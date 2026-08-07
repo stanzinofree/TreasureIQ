@@ -114,6 +114,29 @@ def test_pergine_fa_partire_la_domanda_di_disambiguazione(monkeypatch):
     assert "Laterina Pergine Valdarno" in risposta.reply
 
 
+def test_minori_e_una_parola_comune_non_il_comune_di_minori():
+    """«contributi per i miei nipotini minori» chiedeva i minori (i bambini),
+    non il comune di Minori (SA). Il match esatto sull'indice trattava «minori»
+    come toponimo e faceva partire una scansione live di Minori, scavalcando il
+    comune del cittadino. Ora la parola comune non produce candidati."""
+    from treasureiq.chat.respond import _comuni_candidati
+
+    assert _comuni_candidati(
+        "non voglio le persone anziane ma i contributi per i miei nipotini minori"
+    ) == []
+    assert _comuni_candidati("sono di minori") == []
+
+
+def test_gorla_minore_risolve_ancora_via_parola_distintiva():
+    """Togliere «minore» non deve togliere il comune vero: «gorla» resta e
+    risolve il nome intero — qui l'omonimia Maggiore/Minore fa chiedere quale,
+    che è la cosa giusta, non un sorteggio."""
+    from treasureiq.chat.respond import _comuni_candidati
+
+    nomi_trovati = {c.nome for c in _comuni_candidati("vivo a gorla minore")}
+    assert "Gorla Minore" in nomi_trovati
+
+
 def test_il_modo_normale_di_nominare_un_comune():
     """«comune di X» è come parla la gente, e nessun nome ISTAT contiene la
     parola «comune»: senza ripulire il prefisso la ricerca dava zero."""

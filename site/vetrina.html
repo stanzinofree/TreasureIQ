@@ -1,0 +1,154 @@
+<!-- Vetrina (home). Frammento di corpo: build.py lo avvolge in masthead+footer.
+     I segnaposto {{base}} e {{home}} li sostituisce il generatore. -->
+
+<section class="hero">
+  <div>
+    <span class="hero__kicker">Chat civica · dati veri</span>
+    <h1>Le agevolazioni del tuo Comune, dette senza <em>mentire</em>.</h1>
+    <p class="lead">Il cittadino chiede in parole sue. TreasureIQ legge quello
+      che il portale del suo Comune pubblica davvero e risponde: ti spetta, non
+      risulta, oppure il Comune non l'ha ancora pubblicato. Mai una risposta
+      inventata.</p>
+    <div class="hero__azioni">
+      <a class="bottone bottone--primario" href="https://github.com/stanzinofree/TreasureIQ">Guarda il codice</a>
+      <a class="bottone bottone--fantasma" href="{{base}}/architettura.html">Com'è fatto</a>
+    </div>
+  </div>
+  <figure class="hero__mostra">
+    <img src="{{base}}/assets/demo.gif" alt="La chat di TreasureIQ mentre risponde a un cittadino di Ciampino" loading="lazy"/>
+    <figcaption>Caso reale: Ciampino, in un tap.</figcaption>
+  </figure>
+</section>
+
+<section class="fascia fascia--sunken">
+  <div class="dentro">
+    <p class="occhiello">Il problema, in una frase</p>
+    <h2>Il campo dei requisiti spesso esiste come campo. È solo lasciato vuoto.</h2>
+    <p class="sotto">Sui comuni dove la domanda si può porre — quelli con dati
+      tipizzati — il campo che dice «a chi spetta» è presente nel modello ma
+      vuoto nel <strong>94,2%</strong> dei casi. Non è un buco tecnico: è una
+      decisione, di chi il modulo l'ha compilato. TreasureIQ la rende visibile
+      invece di riempirla al posto suo.</p>
+    <div class="cifre">
+      <div class="cifra"><span class="n">94,2%</span><span class="et">comuni col campo requisiti lasciato vuoto</span></div>
+      <div class="cifra"><span class="n">4,7%</span><span class="et">comuni che i requisiti li hanno pubblicati</span></div>
+      <div class="cifra"><span class="n">0</span><span class="et">verdetti inventati dal modello</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="fascia" id="come-funziona">
+  <p class="occhiello">Come funziona</p>
+  <h2>Quattro passi, nessuna scorciatoia sui fatti.</h2>
+  <p class="sotto">Il modello capisce la domanda. Non decide se hai diritto:
+    quello lo fa una regola deterministica sui dati letti dal portale.</p>
+  <div class="passi">
+    <div class="passo">
+      <div>
+        <h3>Il cittadino chiede in linguaggio naturale</h3>
+        <p>«Ho 71 anni, ci sono contributi per i libri dei miei nipoti?» Nessun
+          modulo, nessun codice servizio da sapere in anticipo.</p>
+      </div>
+    </div>
+    <div class="passo">
+      <div>
+        <h3>TreasureIQ capisce Comune e situazione</h3>
+        <p>Estrae il comune e i dati anagrafici solo se li leggi nel messaggio.
+          Se il nome è ambiguo chiede quale, non tira a indovinare.</p>
+      </div>
+    </div>
+    <div class="passo">
+      <div>
+        <h3>Legge i dati veri dal portale</h3>
+        <p>Interroga la REST del portale AgID — il tipo <code>servizi</code> e le
+          sue categorie — e ricava le sezioni del modello: a chi è rivolto, come
+          fare, cosa serve, i requisiti.</p>
+      </div>
+    </div>
+    <div class="passo">
+      <div>
+        <h3>Dà un verdetto onesto</h3>
+        <p>Ti spetta, non risulti idoneo, oppure «il Comune non l'ha pubblicato».
+          L'ultima non è un errore: è il dato che manca, mostrato come tale.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="fascia fascia--sunken">
+  <div class="dentro">
+    <p class="occhiello">Cosa c'è sotto</p>
+    <h2>Le parti che fanno la differenza.</h2>
+    <div class="tessere">
+      <div class="tessera">
+        <h3><span class="bollo" style="background:var(--ai)"></span>Il connettore REST</h3>
+        <p>Un connettore per il <em>modello</em> AgID, non per un prodotto: legge
+          il Custom Post Type <code>servizi</code> e la tassonomia
+          <code>categorie_servizio</code> (~15 categorie). Confine onesto: i
+          servizi si leggono diretti via REST, i contatti URP restano scrape.</p>
+      </div>
+      <div class="tessera">
+        <h3><span class="bollo" style="background:var(--yamabuki)"></span>L'aderenza è del fornitore</h3>
+        <p>Quante sezioni del modello un portale espone davvero è una misura di
+          chi l'ha costruito, non del Comune. Va letta come media su più comuni:
+          ComWeb su una pagina sbagliata dà 0,10, su ventitré comuni dà 0,70.</p>
+      </div>
+      <div class="tessera">
+        <h3><span class="bollo" style="background:var(--ai-vivid)"></span>La scheda dei numeri utili</h3>
+        <p>Telefoni, email e PEC del Comune. Due fonti distinte: se il Comune è
+          coperto arrivano dallo store già scansionato; se è fuori copertura
+          vengono letti al volo dal portale. Il timestamp è quello vero.</p>
+      </div>
+      <div class="tessera">
+        <h3><span class="bollo" style="background:var(--wakatake)"></span>Dati che si rinfrescano</h3>
+        <p>Una scansione «scade» dopo sei giorni. Oggi si rinfresca in background
+          quando una ricerca tocca un comune vecchio; domani, uno scheduler la
+          rinfrescherà da sola, prima ancora che qualcuno chieda.</p>
+      </div>
+      <div class="tessera">
+        <h3><span class="bollo" style="background:var(--shu)"></span>Il verdetto non lo decide il modello</h3>
+        <p>Il linguaggio lo capisce l'LLM; se hai diritto lo stabilisce una
+          regola deterministica sui dati letti. Il numero passato al verdetto è
+          sempre quello del portale, mai un valore verbalizzato dal modello.</p>
+      </div>
+      <div class="tessera">
+        <h3><span class="bollo" style="background:var(--sumi)"></span>Nessun nuovo standard</h3>
+        <p>TreasureIQ non chiede ai Comuni di adottare nulla. Legge lo standard
+          AgID che già esiste, e quando un dato non c'è lo dice — invece di
+          coprire il vuoto con una risposta plausibile.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="fascia" id="numeri">
+  <p class="occhiello">I numeri veri · censimento del 5 agosto 2026</p>
+  <h2>Non un campione. Tutta Italia.</h2>
+  <p class="sotto">In circa novanta minuti, 34.229 richieste, quattro per comune.
+    Due misure indipendenti su popolazioni diverse arrivano alla stessa
+    conclusione: il dato che serve al cittadino, quasi ovunque, non è pubblicato.</p>
+  <div class="cifre" style="margin-bottom:var(--ma-12)">
+    <div class="cifra"><span class="n">7.896</span><span class="et">comuni censiti — tutti</span></div>
+    <div class="cifra"><span class="n">57.603</span><span class="et">servizi comunali contati</span></div>
+    <div class="cifra"><span class="n">20</span><span class="et">piattaforme riconosciute, l'89,9% dei comuni</span></div>
+    <div class="cifra"><span class="n">1.854</span><span class="et">comuni con aderenza AgID misurata</span></div>
+  </div>
+  <p class="occhiello">Chi serve davvero i comuni italiani</p>
+  <p class="sotto">Il tema WordPress finanziato da AgID è <strong>sesto</strong>.
+    È il motivo per cui un connettore legato a un solo prodotto non basta: serve
+    leggere il modello, non il fornitore.</p>
+  <table style="width:100%;border-collapse:collapse;max-width:640px">
+    <thead><tr><th style="text-align:left;padding:10px 14px;border-bottom:1px solid var(--line)">Piattaforma</th><th style="text-align:right;padding:10px 14px;border-bottom:1px solid var(--line)">Comuni</th><th style="text-align:right;padding:10px 14px;border-bottom:1px solid var(--line)">Quota</th></tr></thead>
+    <tbody>
+      <tr><td style="padding:10px 14px;border-bottom:1px solid var(--line)">PeopleWeb (Siscom)</td><td style="text-align:right;padding:10px 14px;border-bottom:1px solid var(--line)">1.124</td><td style="text-align:right;padding:10px 14px;border-bottom:1px solid var(--line)">14,2%</td></tr>
+      <tr><td style="padding:10px 14px;border-bottom:1px solid var(--line)">Municipium (Maggioli)</td><td style="text-align:right;padding:10px 14px;border-bottom:1px solid var(--line)">1.009</td><td style="text-align:right;padding:10px 14px;border-bottom:1px solid var(--line)">12,8%</td></tr>
+      <tr><td style="padding:10px 14px;border-bottom:1px solid var(--line)">HGATE</td><td style="text-align:right;padding:10px 14px;border-bottom:1px solid var(--line)">957</td><td style="text-align:right;padding:10px 14px;border-bottom:1px solid var(--line)">12,1%</td></tr>
+      <tr><td style="padding:10px 14px;border-bottom:1px solid var(--line)">WordPress generico</td><td style="text-align:right;padding:10px 14px;border-bottom:1px solid var(--line)">724</td><td style="text-align:right;padding:10px 14px;border-bottom:1px solid var(--line)">9,2%</td></tr>
+      <tr><td style="padding:10px 14px;border-bottom:1px solid var(--line)"><strong>WordPress Design Comuni</strong></td><td style="text-align:right;padding:10px 14px;border-bottom:1px solid var(--line)">715</td><td style="text-align:right;padding:10px 14px;border-bottom:1px solid var(--line)">9,1%</td></tr>
+    </tbody>
+  </table>
+  <div class="hero__azioni" style="margin-top:var(--ma-12)">
+    <a class="bottone bottone--primario" href="{{base}}/architettura.html">Leggi l'architettura</a>
+    <a class="bottone bottone--fantasma" href="https://github.com/stanzinofree/TreasureIQ">Vai al repository</a>
+  </div>
+</section>

@@ -68,7 +68,7 @@ Risposta (campi principali):
 | `citizen_effort` | Quante azioni restano **al cittadino** dopo la risposta. Un conteggio, mai una stima, e non va mai sommato a `cost`. |
 | `cost` | Quanto è costato a *noi* recuperare quel dato. Risponde a una domanda diversa da `citizen_effort`. |
 | `connettore` | Presente su un comune **fuori copertura** che espone comunque un connettore leggibile: `{indirizzabile, uffici, rest_base}`. Dice per quale strada lo *raggiungeremmo*, non cosa spetta. `null` sui comuni coperti (già letti) o su chi non espone nulla. |
-| `numeri_utili` | I recapiti URP letti al volo su un comune fuori copertura: `{telefoni, email, pec, fonte, fonte_tipo, letto_il}`. Marcati `non verificato` per costruzione — è ciò che il portale espone adesso, a chi chiedere, non un dato controllato. `null` altrimenti. |
+| `numeri_utili` | I recapiti URP: telefoni, email, PEC. **Due fonti distinte, mai da confondere.** Su un comune **coperto** vengono dallo store — la scansione già salvata, `letto_il` è `scansionato_il`, il momento vero della scansione, mai un `now()` al volo. Su un comune **fuori copertura** vengono letti dal vivo in quella richiesta — `letto_il` è davvero adesso, perché il portale è stato letto ora. Marcati `non verificato` per costruzione in entrambi i casi: nessun numero è "verificato", è quello che il portale espone. `null` se non c'è nulla da mostrare. |
 | `comuni_ambigui[]` | Quando il nome nel messaggio combacia con più comuni omonimi: `[{nome, provincia, codice_istat}]` da rendere come schede cliccabili. La scelta è del cittadino, non nostra. Vuoto quando il comune è univoco o già scelto. |
 
 ### `criteria[].state`, sul binario agevolazioni
@@ -128,6 +128,7 @@ non un dato che abbiamo controllato. La guardia sui numeri vale qui come altrove
 |---|---|
 | `GET /api/comuni?q=Castro` | Cerca fra i 7.896 comuni italiani. Fra due omonimi restituisce entrambi: la scelta è del cittadino, non nostra. |
 | `GET /api/comune-nearby?lat=&lon=` | Il comune più vicino a una coordinata. Serve al pulsante «usa la mia posizione», che resta sempre facoltativo. |
+| `GET /api/comune/{codice_istat}` | La scheda di un comune: aderenza AgID, catalogo servizi/uffici, recapiti e orari, così come l'ultima scansione li ha registrati. Se non esiste ancora uno scan, ne parte uno adesso — il timestamp mostrato resta sempre quello reale della scansione, mai un `now()` composto lì per lì. Comune ignoto → 404. |
 
 ---
 

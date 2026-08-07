@@ -48,6 +48,12 @@ Thumbs.db
 .coverage
 htmlcov/
 
+# --- Sito vetrina generato ---
+# La sorgente del sito (site/build.py, site/vetrina.html, site/assets/) è
+# tracciata; l'HTML costruito no — lo rigenera GitHub Actions a ogni push.
+site/_site/
+site/_preview/
+
 # NOTE: data/seed/ and data/extraction-cache/ are deliberately NOT ignored.
 # They are the committed snapshots that let anyone clone the repository and run
 # the full demo with no network access and no API key — which the hackathon

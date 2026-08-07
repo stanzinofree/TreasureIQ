@@ -67,6 +67,22 @@ costi al massimo l'ultimo blocco.
 
 *Forma:* ~200 righe. Non è un sistema, è la disciplina che manca.
 
+**Cosa c'è oggi, e cosa manca ancora — la distinzione va tenuta netta.** Una
+scansione comunale è "stantia" oltre 6 giorni (`GIORNI_STANTIA`, D-S6 in
+`scansioni.py`). Il refresh oggi è **reattivo**: parte in background quando una
+ricerca tocca un comune con una scansione vecchia (refresh-on-search), più
+un'utilità a riga di comando (`--sonda`/`--invecchia`) manuale, usata per
+scaldare la demo. È deciso esplicitamente (D-S10) che **nessuno scheduler gira
+nel sistema attuale** — quelle utility sono comandi da lanciare, non un job che
+si sveglia da solo.
+
+Lo scheduler descritto qui sopra è il pezzo **mancante**: un processo
+**proattivo** che rinfresca le scansioni scadute per conto suo, senza
+aspettare che un cittadino faccia la domanda che le fa scattare. È lavoro
+futuro, non un refactor del refresh-on-search — le due cose convivono anche a
+scheduler acceso: il refresh-on-search resta lo short-circuit per il comune
+che qualcuno sta chiedendo *adesso*, lo scheduler tiene fresco il resto.
+
 ---
 
 ## Le tre cose scartate, e cosa le rimetterebbe in gioco

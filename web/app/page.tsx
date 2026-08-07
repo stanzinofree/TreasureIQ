@@ -15,20 +15,24 @@
  * here: the title and motto stay server-rendered with no JS of their own, and
  * there is no second copy of "has the conversation begun" to keep in sync.
  *
- * `ProfiloProvider` and `RisultatiProvider` are the only client boundaries.
+ * `ProfiloProvider`, `RisultatiProvider` and `ScanProvider` are the only
+ * client boundaries. `ScanProvider` holds the comune's live-scan status so the
+ * chat and the panel show one shared indicator (band + «Ricarica»), not two.
  */
 
 import Chat from "@/components/Chat";
 import Pannello from "@/components/Pannello";
 import { ProfiloProvider } from "@/lib/profilo";
 import { RisultatiProvider } from "@/lib/risultati";
+import { ScanProvider } from "@/lib/scan";
 
 export default function Home() {
   return (
     <ProfiloProvider>
       <RisultatiProvider>
-        <div className="workspace">
-          <Pannello />
+        <ScanProvider>
+          <div className="workspace">
+            <Pannello />
 
           <div className="workspace__main">
             {/* Not "al tuo comune": the answers already draw on the national
@@ -52,7 +56,8 @@ export default function Home() {
 
             <Chat />
           </div>
-        </div>
+          </div>
+        </ScanProvider>
       </RisultatiProvider>
     </ProfiloProvider>
   );

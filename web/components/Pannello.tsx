@@ -13,6 +13,7 @@
  */
 
 import ProfiloNoto from "@/components/ProfiloNoto";
+import ScanLive from "@/components/ScanLive";
 import { useProfilo, type NumeriUtiliProfilo } from "@/lib/profilo";
 import { useRisultati } from "@/lib/risultati";
 
@@ -118,6 +119,11 @@ export default function Pannello() {
           Scheda del comune →
         </a>
       )}
+
+      {/* Spia scan del comune (banda che lampeggia → bottone «Ricarica»), stesso
+          stato mostrato in chat. Sta sotto la scheda perché lì si parla del
+          comune. Non renderizza nulla se nessuno scan è in corso. */}
+      <ScanLive variante="pannello" />
 
       {numeri && <NumeriUtiliBanner numeri={numeri} />}
 

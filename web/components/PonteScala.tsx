@@ -37,11 +37,16 @@ export default function PonteScala({
   const aderenzaPct =
     portale.aderenza != null ? Math.round(portale.aderenza * 100) : null;
 
+  // `nome` puo' gia' arrivare col prefisso "Comune di ..." (es. `match.ente`):
+  // senza toglierlo si legge "Il Comune di Comune di Albano Laziale".
+  const nomePulito = nome.replace(/^\s*comune\s+di\s+/i, "");
+
   return (
     <p className="chiedi-inline">
-      Il Comune di {nome} usa {portale.piattaforma}
+      Il Comune di {nomePulito} usa {portale.piattaforma}
       {aderenzaPct != null ? ` (aderenza ${aderenzaPct}%)` : ""} —{" "}
-      <a href="/analytics">vedi com&rsquo;è messa l&rsquo;Italia →</a>
+      {/* nbsp: la freccia resta attaccata all'ultima parola, non orfana a capo */}
+      <a href="/analytics">vedi com&rsquo;è messa l&rsquo;Italia{" "}→</a>
     </p>
   );
 }

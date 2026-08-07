@@ -1,153 +1,109 @@
-# SPEC — chat-polish-freeze (ciclo 2)
+# SPEC — Scheda-comune + aderenza connettore (MVP video)
 
-    run_id:      chat-polish-freeze
-    opened:      2026-08-06
-    deadline:    2026-08-14 23:59 (T-8)
-    predecessor: chat-first-mvp (spec preservato in spec.mvp1.md.bak)
-    branch:      feat/chat-first-mvp — 67 commit avanti su main (e23ca3e)
+Ciclo 5 · task: `scenario-cards-freeze` · brainstorm 2026-08-07
 
----
+## GOAL
+Standardizzare i flussi/card della chat per il video con una cornice onesta,
+uguale sui casi Figline/Benevento/Perugia: «quanto riesco a vedere · come farlo
+aprire di più · dimmi come vado». Cuore: **aderenza al connettore** (numero reale,
+calcolato dai probe) + **scheda-comune** ricca dentro TIQ + **2 form** (apertura
+dati, feedback). Motore di retrieval CONGELATO: si aggiunge uno strato di
+persistenza+presentazione attorno, non dentro il matching.
 
-## Goal
-
-Congelare il sistema in uno stato **girabile a video**, poi girare il video ≤3 min
-(metà del punteggio, ancora inesistente). Il freeze include un blocco di migliorie
-chat/UX + tre fix di sistema che rendono la consegna valutabile e onesta.
-
-Il video racconta **due metà**: il caso del singolo cittadino (chat, eleggibilità,
-"il comune non l'ha pubblicato") **e** la scala nazionale (censimento ~249 comuni,
-connettore per modello AgID). Un ponte in-chat unisce le due metà.
-
-## Scope
-
-**Dentro il freeze:**
-- Chat/UX: avvio-a-un-tap · ponte-scala-in-chat · fix motore NLP · filtri
-  selezionati/deselezionabili · contesto chat multi-turno.
-- Sistema: merge su `main` + riproducibilità da clone pulito · taratura
-  freschezza/DRS per servizi permanenti.
-- Deliverable: video ≤3 min + form di consegna.
-
-**Fuori (DEFERRED):** vedi sezione.
-
----
+## CONTESTO
+- Oggi gli scan sono LIVE per-richiesta; il censimento è snapshot una-tantum.
+  Nessuna persistenza dello scan, nessun timestamp «ultimo scan».
+- Dottrina esistente (respond.py:219/1263, api.py:779): VIETATE le percentuali
+  inventate in chat («affidabilità %» = numero con l'aria di precisione). Ogni
+  cifra mostrata deve avere denominatore reale e provenienza visibile.
+- Sonda già disponibile: `mappa_connettore` → servizi-REST (esposto+rest_base+
+  categorie), uffici (unità organizzative), `contatti_via`, `amministrazione_
+  trasparente_via`, bandi. Basta per calcolare l'aderenza AgID senza nuovi scan.
+- `readiness.score_comune` (0-100, 5 dim) esiste ma è sui RECORD INGERITI →
+  non uniforme sui 3 casi (Figline/Benevento non ingeriti). NON è l'aderenza.
 
 ## DECISIONS
+- **D-01** (ereditata): nessun verdetto di eleggibilità da letture live. La
+  scheda-comune e le card sono NAVIGAZIONE, non responso.
+- **D-B7** (ereditata): il modello non tocca/genera cifre. Ogni numero della
+  scheda è estratto verbatim dai probe.
+- **D-S1 — Aderenza = superfici AgID machine-readable esposte via REST /
+  superfici definite.** Lo scrape NON conta verso l'aderenza (è ripiego nostro,
+  prova del buco del comune). Misura l'apertura vera, premia la conformità.
+- **D-S2 — Solo il connettore AgID emette una % calcolata.** WP-Custom (solo
+  HTML) → tier «solo HTML, dettaglio non ancora mappato», NIENTE %. Sconosciuto
+  → stato «non ancora sondato», nessun numero. Mai una cifra su connettori senza
+  reader.
+- **D-S3 — «% del pubblicato letto» / «copertura ricerca» = MORTA.** Denominatore
+  (totale pubblicato dal comune) inconoscibile → sarebbe numero inventato. Non si
+  mostra. L'apertura si dice SOLO come aderenza-connettore (D-S1).
+- **D-S4 — Provenienza visibile su ogni numero.** «servizi via API: 103», «ultimo
+  scan: 7 ago», «aderenza AgID 80% = 4/5 superfici». Nessuna cifra nuda.
+- **D-S5 — Store di scansione persistente** (prerequisito): record per-comune con
+  timestamp + cache (servizi/aderenza/contatti/orari/logo). Serve sia al refresh
+  sia alla scheda con «ultimo scan».
+- **D-S6 — Refresh-on-search:** comune riconosciuto, scan >6 giorni → parte il
+  refresh, indicatore «sto aggiornando · attendi o vedi gli attuali?». Se scan
+  fresco → serve la cache.
+- **D-S7 — Form esterni, non TIQ-hosted.** Apertura-dati e feedback = link esterni
+  (Google Form o simile), `target=_blank rel=noopener`. Nessuna PII su di noi per
+  l'MVP. URL placeholder finché non forniti.
+- **D-S8 — Logo/asset SOLO dal portale del comune** (stesso host della sonda,
+  guardia SSRF già copre). Mai CDN terzi. Degrado muto se assente (come
+  numeri_utili): niente logo, niente errore. Il logo esposto è esso stesso indice
+  di apertura.
+- **D-S9 — Freeze retrieval:** pesi/matching/scala NON si toccano in questo ciclo.
+  Calibrazione pesi = workstream separato, fuori spec.
 
-- **D-40** Freeze = i cinque item chat/UX + due fix di sistema (merge/riproducibilità,
-  freschezza/DRS). "Gerarchia scheda risposta" e "nessuna modifica" scartate dal
-  cittadino. Confine duro: nessuna feature nuova oltre questi.
+## DISCRETION (arm decide, entro le decisioni)
+- Composizione esatta della checklist AgID (4-6 superfici): almeno servizi-REST,
+  uffici-REST, trasparenza-REST, contatti-REST; bandi-REST se già cablato.
+- Forma dello store (file JSON per-comune vs sqlite): scegliere il più semplice
+  che regge timestamp + cache; niente nuova dipendenza pesante.
+- UI della scheda-comune (layout), purché stile «civico giapponese» esistente,
+  no Inter/gradient/emoji, numeri con provenienza.
+- Lock/concorrenza refresh: accettabile doppia-scansione occasionale per l'MVP
+  (no lock complesso) purché non rompa nulla.
+- Soglia demo: per mostrare il refresh dal vivo, forzare stale un comune (seed
+  timestamp indietro). Onesto se trasparente.
 
-- **D-41** Il video mostra caso singolo **+** scala nazionale. La scala usa dati già
-  misurati (censimento, `piattaforma_prova`, aderenza per fornitore). **Nessuna nuova
-  misurazione** per il video: si racconta ciò che esiste.
-
-- **D-42** **Sequenza gated dalla girabilità.** Ordine: (1) merge su main +
-  `docker compose up --build` pulito da clone fresco → la consegna deve essere
-  clonabile-ed-eseguibile; (2) le migliorie chat/UX che il video richiede;
-  (3) freschezza/DRS; (4) video girato ~Aug 10–12, buffer fino Aug 14. Il codice
-  si **congela ~Aug 11**: dopo, solo fix bloccanti. Nessun refactor tardo.
-
-- **D-43** **Avvio a un tap.** Empty-state della chat con chip cliccabili: le 4 persone
-  (Luigi · Giada · Stefania · Mirella) ciascuna con la propria domanda pronta. Un tap
-  carica persona + invia la domanda. Riusa `PRESETS`/`AccessoSimulato`/`profili-demo`.
-  Il demo parte senza digitare profili né domande → fluido a video, mostra i 4 casi in
-  sequenza.
-
-- **D-44** **Ponte alla scala nazionale in chat.** Dopo una risposta *comunale*, una
-  riga sola: "questo comune usa la piattaforma X (aderenza N) — vedi com'è messa
-  l'Italia →" che porta a `/analytics`. Unico gesto che cuce le due metà del video
-  senza cambio-pagina a freddo. Dati dal censimento, non ricalcolati.
-
-- **D-45** **Filtri profilo selezionati e deselezionabili.** `profilo_capito` (età,
-  comune, topic/interessi) reso come chip visibili che il cittadino può **togliere**
-  quando abbiamo dedotto male, correggendoci a vista. Vive in `web/lib/profilo.tsx` +
-  `ProfiloNoto.tsx`/`Pannello.tsx`. La provenienza (`dichiarato`/`geolocalizzazione`/
-  `accesso`) è già tracciata e resta visibile.
-
-- **D-46** **Togliere un dato dedotto non falsa mai il verdetto.** Rimuovere un campo
-  del profilo lo riporta a `unknown_profile` → verdetto degrada a UNKNOWN, **mai** si
-  ribalta in NOT_MET (spirito R-9). Il motore già ha None-guards per profilo mancante.
-
-- **D-47** **Fix motore NLP.** `chat/intent.py` + `respond.py`: migliorare la
-  comprensione del topic e onorare il **contesto multi-turno** (la history è già
-  passata da `send()` a `/api/chat`; l'engine deve usarla — follow-up risolti contro
-  comune/topic del turno precedente senza richiederli di nuovo). Il topic resta
-  **corroborato dalle parole**, mai dedotto dal solo modello (memoria
-  topic-modello-serve-riscontro). `test_intent_guardie.py` resta verde.
-
-- **D-48** **Taratura freschezza/DRS.** Un servizio permanente (scuolabus) non va
-  penalizzato dal punteggio di freschezza come un bando scaduto. La freschezza pesa
-  solo dove ha senso (misure con scadenza), non sui servizi stabili.
-
-- **D-49** **Subagent solo su modelli economici** (Haiku/Sonnet), mai Opus. I crediti
-  sono un vincolo del progetto (memoria subagent-modelli-economici).
-
-- **D-50** La guardia sui numeri nel verbalizzatore resta: le cifre non passano dal
-  modello (D-24 del ciclo 1 vale ancora).
-
-## DISCRETION (l'arm decide, entro il goal)
-
-- Copy esatto dei chip di avvio e della riga-ponte.
-- Interazione filtro: solo-rimozione vs toggle-ripristino (parti dalla rimozione).
-- Quante persone in empty-state (4 se stanno, altrimenti griglia compatta).
-- Se il ponte-scala mostra il numero di aderenza inline o solo il link.
-
-## DEFERRED (non questo ciclo)
-
-- Gerarchia visiva della scheda risposta (scartata dal cittadino).
-- Connettori CKAN/HTML oltre l'attuale MyPortal/AgID.
-- Secondo/terzo comune oltre a quelli già caricati.
-- Invio reale della segnalazione (resta genera-non-invia, D-25 ciclo 1).
+## DEFERRED (progettato, non costruito per il video)
+- **Job batch schedulato ogni 5 min** (rotazione: primi X con scan >6gg, poi gli
+  altri). Invisibile in demo, infra pesante (scheduler+lock+politeness), contro il
+  freeze. Design registrato qui, build post-video.
+- Reader connettore WP-Custom (scrape indice servizi HTML — es. Pergine /Servizi).
+- Re-scan automatico dei comuni non toccati dal refresh-on-search.
 
 ## RISKS
+- **8 giorni al video, scope ampio** (scheda-page + store + refresh + aderenza +
+  logo + 2 form). Mitigazione: linea di taglio — se il tempo stringe cade PRIMA il
+  refresh-on-search (la scheda regge con «ultimo scan: adesso», live). Minimo
+  irrinunciabile: aderenza% + scheda + form.
+- **Aderenza scambiata per giudizio.** Copy deve dire «apertura del portale», non
+  «qualità del servizio». Separata da readiness (dati ingeriti) — assi diversi.
+- **Logo 404/timeout** → deve degradare muto, mai bloccare la scheda.
+- **Cache fresca in demo** → refresh non scatta senza forzare stale (vedi
+  DISCRETION).
 
-- **R-V (massimo) — video tardivo.** 8 giorni, over-scope mangia il tempo di ripresa.
-  Mitigazione: gate di girabilità (D-42), freeze codice ~Aug 11, video è priorità 0.
-
-- **R-M — merge su main regredisce.** 67 commit; il clone fresco deve fare
-  `docker compose up --build` pulito. Mitigazione: verifica da directory fresca
-  prima di dichiarare fatto; porta 8010≠8000 (OrbStack), ingest non-riproducibile
-  (memoria ingest-non-riproducibile) → niente A/B end-to-end come prova.
-
-- **R-N — i fix NLP destabilizzano.** Cambi a intent.py possono regredire le guardie.
-  Mitigazione: `test_intent_guardie.py` verde è acceptance, non opzionale.
-
-- **R-F — deselezione corrompe il verdetto.** Coperto da D-46; è anche acceptance.
-
-- **R-P — freschezza mal-tarata nasconde uno stale vero.** Non spegnere la freschezza,
-  ridimensionarla solo sui servizi permanenti; un bando scaduto resta penalizzato.
-
-## ACCEPTANCE (testabile)
-
-1. **Clone pulito gira.** Da directory fresca su `main`: `docker compose up --build`
-   porta su chat funzionante (API 8010, web) senza passi manuali non documentati.
-2. **main aggiornato.** `main` contiene il lavoro chat-first (branch merged o PR).
-3. **Avvio a un tap.** Empty-state mostra le 4 persone; un tap carica profilo + invia
-   la domanda; compare la risposta senza altra digitazione.
-4. **Ponte-scala.** Dopo una risposta comunale appare la riga verso `/analytics` con la
-   piattaforma del comune; il link porta alla pagina scala.
-5. **Filtri deselezionabili.** I campi dedotti (età/comune/topic) sono chip rimovibili;
-   rimuoverne uno aggiorna il profilo visibile.
-6. **Deselezione sicura.** Rimosso un campo, il verdetto relativo diventa UNKNOWN, mai
-   NOT_MET. Prova: caso con criterio `met` → rimuovi il campo → criterio a
-   `unknown_profile`.
-7. **Contesto multi-turno.** Un follow-up ("e per mia madre?") risolve contro comune/
-   topic del turno precedente senza richiedere di nuovo il comune.
-8. **Guardie NLP verdi.** `test_intent_guardie.py` passa; nessuna regressione sui
-   test topic esistenti.
-9. **Freschezza tarata.** Un servizio permanente d'esempio non risulta "scaduto/stale";
-   un bando scaduto resta penalizzato. Prova numerica sullo snapshot committato.
-10. **Video ≤3 min** girato, che mostra caso singolo + scala, entro il buffer.
-
----
-
-## Note di stato (ancoraggio, verificato Aug 6)
-
-    Chat maturo (web/components/Chat.tsx, 1064 righe): due rail AGEVOLAZIONE/
-    INFORMAZIONE, Seal per verdetto, CostStrip, EffortCaption, coverage, geoloc
-    con residenza≠posizione, comune esplicito (no allucinazione).
-    profilo_capito già calcolato e usato per registra(); i "filtri visibili"
-    esistono come concetto, D-45 li rende rimovibili.
-    NLP: api/treasureiq/chat/{intent,respond}.py; motore match/engine.py con
-    None-guards; test_intent_guardie.py presente.
-    Censimento: dati scala già misurati (piattaforma_prova, aderenza fornitore).
+## ACCEPTANCE
+1. Aderenza AgID calcolata dai probe (mai digitata) su checklist 4 superfici
+   (servizi/uffici/trasparenza/contatti REST). Dato reale sondato 2026-08-07:
+   Figline 3/4=75% (servizi+uffici+trasparenza REST, contatti scrape),
+   Benevento 2/4=50%, Perugia 2/4=50% (servizi+uffici REST, trasparenza+contatti
+   scrape). `punti_di_contatto` REST assente su tutti e 3 = gap reale mostrato,
+   non nascosto (aggancio card apertura-dati). Numero = esposte/definite, con
+   provenienza. `amm-trasparente` E' REST ed e' discriminante (Figline sì, altri no).
+2. Connettore non-AgID → tier/stato, MAI una %.
+3. «% del pubblicato letto» non appare da nessuna parte.
+4. Store di scansione persiste timestamp + cache per-comune; «ultimo scan: <data>»
+   reale nella scheda e nella sidebar.
+5. Refresh-on-search: scan >6gg → refresh + indicatore «attendi/attuali»; scan
+   fresco → cache servita senza refresh.
+6. Scheda-comune dentro TIQ: connettore, aderenza, ultimo scan, servizi esposti,
+   contatti ufficiali (da scansione), orari uffici, ISTAT, link pagina ufficiale,
+   logo (se disponibile, muto se no). Linkata dalla sidebar dati.
+7. 2 form esterni (apertura dati dentro la scheda-comune; feedback su ogni chat),
+   link `target=_blank rel=noopener`.
+8. Ogni numero mostrato ha provenienza visibile; nessuna cifra nuda o inventata.
+9. Retrieval invariato: nessuna modifica a pesi/matching/scala. Suite verde.
+10. Job batch NON costruito (solo progettato in DEFERRED).

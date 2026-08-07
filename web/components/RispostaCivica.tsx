@@ -3,6 +3,7 @@
 import { useState } from "react";
 
 import type { InfoOut } from "@/lib/api";
+import { conTagVerifica } from "@/lib/testo";
 
 /**
  * La risposta come scheda civica, non come dump narrativo.
@@ -135,7 +136,7 @@ export default function RispostaCivica({
         ))}
       </p>
 
-      <p className="civica__sintesi">{reply}</p>
+      <p className="civica__sintesi">{conTagVerifica(reply)}</p>
 
       {info.letto_dal_vivo && (
         <p className="civica__vivo" role="note">

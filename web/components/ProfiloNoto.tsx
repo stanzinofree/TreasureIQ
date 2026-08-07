@@ -71,9 +71,8 @@ export default function ProfiloNoto() {
     <div className="fatti" aria-label="Informazioni che il servizio ha su di te">
       <span className="fatti__intro">Sto usando</span>
 
-      {profilo.nome && (
-        <Chip label="Nome" value={profilo.nome} onRimuovi={() => dimenticaFatto("nome")} />
-      )}
+      {/* Nessun chip «Nome»: `profilo.nome` non è mai popolato da alcun
+          registra() (solo `comune.nome` esiste). Era JSX fantasma — rimosso. */}
       {profilo.eta !== undefined && (
         <Chip
           label="Età"
@@ -139,8 +138,13 @@ export default function ProfiloNoto() {
 
           Il GPS dice dove sei adesso, non dove risiedi — chi è in trasferta è
           altrove — quindi la conferma serve davvero e non è una formalità
-          (R-9). */}
-      {profilo.comune && !profilo.comune.confermato && (
+          (R-9). Solo per `geolocalizzazione`: un comune `dichiarato` (digitato
+          in chat) o da `accesso` è già affermato dal cittadino, richiederne la
+          conferma sarebbe una riconferma inutile — stessa condizione del
+          chip-nota «da confermare» qui sopra. */}
+      {profilo.comune &&
+        !profilo.comune.confermato &&
+        profilo.comune.origine === "geolocalizzazione" && (
         <span className="fatti__conferma">
           <button
             type="button"

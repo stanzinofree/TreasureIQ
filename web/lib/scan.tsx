@@ -49,6 +49,10 @@ export function ScanProvider({ children }: { children: ReactNode }) {
   const [istat, setIstat] = useState<string | null>(null);
   const [finito, setFinito] = useState(false);
   const [nonceRicarica, setNonce] = useState(0);
+  // Bump a ogni aggiornaScan: entra nelle deps del poller così l'effetto
+  // riparte da zero anche quando comune e stato non cambiano (stessa domanda
+  // due volte). Senza, il vecchio interval sopravviverebbe col suo `tentativi`.
+  const [epoca, setEpoca] = useState(0);
   const baseline = useRef<string | null>(null);
 
   const aggiornaScan = useCallback(
@@ -57,6 +61,7 @@ export function ScanProvider({ children }: { children: ReactNode }) {
       setIstat(i ?? null);
       setFinito(false);
       baseline.current = null;
+      setEpoca((n) => n + 1);
     },
     [],
   );
@@ -68,10 +73,16 @@ export function ScanProvider({ children }: { children: ReactNode }) {
     if (!attivo || !istat) return;
     baseline.current = null;
     let tentativi = 0;
+    // Guardia contro le risposte tardive di un ciclo già superato: se il comune
+    // cambia (o aggiornaScan riparte) mentre una fetch è in volo, il cleanup
+    // alza `annullato` e la risposta stantia non scrive baseline né setFinito
+    // per il comune sbagliato.
+    let annullato = false;
     const timer = setInterval(async () => {
       tentativi += 1;
       try {
         const scheda = await fetchSchedaComune(istat);
+        if (annullato) return;
         if (scheda) {
           if (baseline.current === null) {
             baseline.current = scheda.scansionato_il;
@@ -84,13 +95,17 @@ export function ScanProvider({ children }: { children: ReactNode }) {
       } catch {
         // Scheda non pronta o rete muta: si riprova al giro dopo, il cap chiude.
       }
+      if (annullato) return;
       if (tentativi >= 12) {
         setFinito(true);
         clearInterval(timer);
       }
     }, 4000);
-    return () => clearInterval(timer);
-  }, [scan?.stato, istat]);
+    return () => {
+      annullato = true;
+      clearInterval(timer);
+    };
+  }, [scan?.stato, istat, epoca]);
 
   return (
     <Ctx.Provider

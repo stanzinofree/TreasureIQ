@@ -497,9 +497,10 @@ export interface ChatOut {
   /** Presente solo fuori copertura, dopo la sonda AgID: dice se il connettore
    * raggiungerebbe questo comune. `null` sui comuni coperti o non sondati. */
   connettore: ConnettoreSonda | null;
-  /** Recapiti letti al volo dal portale del comune fuori copertura. Non è una
-   * risposta di TreasureIQ: la UI lo mostra come banner nel pannello a
-   * sinistra. `null` sui comuni coperti o quando lo scrape non trova nulla. */
+  /** Recapiti del comune. Su un comune coperto vengono dallo store (`_da_store`);
+   * fuori copertura sono letti al volo dal portale. Non è una risposta di
+   * TreasureIQ: la UI lo mostra come card nel pannello a sinistra. `null` solo
+   * quando non c'è nessun recapito né a store né dallo scrape. */
   numeri_utili: NumeriUtili | null;
   /** Candidati di disambiguazione quando il nome comune è ambiguo. La UI li
    * rende come schede cliccabili: un tap sceglie e rimanda la domanda. */
@@ -633,7 +634,8 @@ export const fetchSchedaComune = (codiceIstat: string) =>
  *  non li rende uguali. */
 export interface ScanStato {
   stato: "fresco" | "aggiornamento_in_corso";
-  ultimo_scan: string;
+  // null per un comune mai scansionato: il backend non inventa una data.
+  ultimo_scan: string | null;
 }
 
 /** Recapiti del comune letti al volo dal portale. Nessun numero è verificato.

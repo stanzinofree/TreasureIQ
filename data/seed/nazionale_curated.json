@@ -1,0 +1,157 @@
+[
+ {
+  "spec_version": "0.1.0",
+  "id": "curated:nazionale:arera-bonus-sociale-bollette",
+  "title": "Bonus sociale bollette (energia elettrica, gas, servizio idrico)",
+  "summary": "Sconto automatico in bolletta per energia elettrica, gas e acqua per le famiglie con ISEE basso.",
+  "body": null,
+  "kind": "agevolazione",
+  "targets": [
+   "famiglie"
+  ],
+  "requirements": {
+   "isee_max": "9796.00",
+   "other": [
+    "la fornitura (ossia il contratto elettrico/gas/idrico) è intestata a uno dei componenti il nucleo ISEE."
+   ],
+   "source_typed": false,
+   "residenza_required": false
+  },
+  "amount": {
+   "min_eur": null,
+   "max_eur": null,
+   "note": "Importo variabile per numero di componenti e consumo; determinato annualmente da ARERA."
+  },
+  "opens_at": null,
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "ARERA - Autorita' di Regolazione per Energia Reti e Ambiente",
+   "ente_codice_istat": null,
+   "connector": "curated",
+   "url": "https://www.arera.it/consumatori/bonus-sociale/bonus-sociale-per-disagio-economico/quali-sono-i-requisiti",
+   "api_url": null,
+   "fetched_at": "2026-08-03T08:00:00Z",
+   "raw_hash": "d9be7442b163993b"
+  },
+  "confidence": "extracted",
+  "extraction_notes": [
+   "Soglia ISEE 20.000 euro per nuclei con almeno 4 figli a carico non modellata: Requirements non supporta soglie ISEE condizionate al numero di figli."
+  ],
+  "recovery_level": "L2_estratto",
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": 2,
+  "livello": "nazionale",
+  "quotes": [
+   {
+    "field": "isee_max",
+    "text": "l'ISEE non è superiore a 9.796 euro per famiglie con massimo 3 figli a carico"
+   },
+   {
+    "field": "other",
+    "text": "la fornitura (ossia il contratto elettrico/gas/idrico) è intestata a uno dei componenti il nucleo ISEE."
+   }
+  ]
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "curated:nazionale:inps-assegno-unico-universale",
+  "title": "Assegno Unico e Universale per i figli a carico",
+  "summary": "Assegno mensile INPS per le famiglie con figli a carico, universale e commisurato all'ISEE.",
+  "body": null,
+  "kind": "contributo_economico",
+  "targets": [
+   "famiglie",
+   "minori"
+  ],
+  "requirements": {
+   "eta_max": 21,
+   "disabilita_nucleo_required": true,
+   "source_typed": false,
+   "residenza_required": false
+  },
+  "amount": {
+   "min_eur": null,
+   "max_eur": null,
+   "note": "Importo mensile commisurato all'ISEE del nucleo, rivalutato annualmente."
+  },
+  "opens_at": null,
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "INPS - Istituto Nazionale della Previdenza Sociale",
+   "ente_codice_istat": null,
+   "connector": "curated",
+   "url": "https://www.inps.it/it/it/dettaglio-scheda.it.schede-servizio-strumento.schede-servizi.assegno-unico-e-universale-per-i-figli-a-carico-55984.assegno-unico-e-universale-per-i-figli-a-carico.html",
+   "api_url": null,
+   "fetched_at": "2026-08-03T08:00:00Z",
+   "raw_hash": "36adcf12adbdd915"
+  },
+  "confidence": "extracted",
+  "extraction_notes": [
+   "\"senza limiti di eta' per figli disabili a carico\": eccezione non modellata in eta_max, che si applica al caso generale.",
+   "L'assegno e' universale: erogato anche in assenza di ISEE o con ISEE superiore alla soglia massima (46.582,71 euro per il 2026); l'ISEE incide sull'importo, non sull'eleggibilita', quindi non e' stato modellato come isee_max."
+  ],
+  "recovery_level": "L2_estratto",
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": 1,
+  "livello": "nazionale",
+  "quotes": [
+   {
+    "field": "eta_max",
+    "text": "fino al compimento dei 21 anni"
+   }
+  ]
+ },
+ {
+  "spec_version": "0.1.0",
+  "id": "curated:regionale:lazio-sirgat-agevolazioni-tpl",
+  "title": "Agevolazioni tariffarie regionali per il trasporto pubblico e il trasporto scolastico (SIRGAT)",
+  "summary": "Il portale SIRGAT della Regione Lazio pubblica gli incentivi regionali sugli abbonamenti al trasporto pubblico locale, incluso il trasporto scolastico, ma solo come conteggio di abbonamenti agevolati: nessun criterio di eleggibilita' e' pubblicato in forma machine-readable, quindi nessun campo puo' essere popolato con una quota verbatim.",
+  "body": null,
+  "kind": "agevolazione",
+  "targets": [
+   "studenti",
+   "famiglie"
+  ],
+  "requirements": {
+   "source_typed": false,
+   "residenza_required": false
+  },
+  "amount": null,
+  "opens_at": null,
+  "deadline": null,
+  "deadline_confidence": null,
+  "source": {
+   "ente": "Regione Lazio",
+   "ente_codice_istat": null,
+   "connector": "curated",
+   "url": "https://agevolazionitariffarietpl.regione.lazio.it/",
+   "api_url": null,
+   "fetched_at": "2026-08-03T08:00:00Z",
+   "raw_hash": "78e9bfc442f8696c"
+  },
+  "confidence": "inferred",
+  "extraction_notes": [
+   "SIRGAT (\"SIRGAT Incentivi TPL\") e' un'applicazione che pubblica conteggi di abbonamenti agevolati, non testo di criteri di eleggibilita': nessun requisito e' stato estratto, per rispetto del quote-gate D-05 (nessuna quota verbatim disponibile)."
+  ],
+  "recovery_level": "L2_estratto",
+  "pdfs_linked": null,
+  "pdfs_opened": null,
+  "pdfs_skipped": null,
+  "chars_processed": null,
+  "extraction_seconds": null,
+  "requirements_recovered": 0,
+  "livello": "regionale",
+  "quotes": [],
+  "regione": "Lazio"
+ }
+]

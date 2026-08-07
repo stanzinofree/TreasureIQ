@@ -1,0 +1,25 @@
+{
+ "isee_max": null,
+ "isee_min": null,
+ "isee_mentioned_without_threshold": false,
+ "eta_min": null,
+ "eta_max": null,
+ "nucleo_min": null,
+ "figli_minori_required": false,
+ "disabilita_required": false,
+ "residenza_required": null,
+ "employment_status": [],
+ "other": [
+  "Il servizio è rivolto alle famiglie con bambini da 0 a 36 mesi, anziani, disabili e persone affette da particolari patologie."
+ ],
+ "quotes": [
+  {
+   "field": "other",
+   "text": "Il servizio è rivolto alle famiglie con bambini da 0 a 36 mesi, anziani, disabili e persone affette da particolari patologie."
+  }
+ ],
+ "deadline_iso": null,
+ "notes": [
+  "Non è chiaro se la condizione di accesso per disabili e patologie richieda una certificazione specifica."
+ ]
+}

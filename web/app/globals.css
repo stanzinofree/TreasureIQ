@@ -1,8 +1,15 @@
 /* TreasureIQ — visual system
  *
- * Direction: Japanese civic. The two borrowed devices are not decoration —
- * both are real instruments of Japanese local government, which is what earns
- * them a place in a product about Italian local government.
+ * Direction: Japanese civic, v2 (2026-08-03, see .kapi/design-note.md).
+ * v1 read as a document: correct, institutional, inert. This is a live civic
+ * service, so the surface says so — high-key white, generous air, rounded
+ * display type, and a few genuinely saturated accents used as punctuation.
+ * Semi-institutional, but alive: a well-designed municipal service in Tokyo,
+ * not corporate SaaS and not neon-on-black.
+ *
+ * The two borrowed devices are not decoration — both are real instruments of
+ * Japanese local government, which is what earns them a place in a product
+ * about Italian local government.
  *
  *   hanko (判子)  the official seal. Here its *completeness* encodes the
  *                 completeness of the comune's published data: a full stamp
@@ -14,44 +21,72 @@
  *                 stays warm without becoming childish in front of someone
  *                 checking whether they can afford school transport.
  *
- * Palette is drawn from traditional Japanese colour names, chosen to sit far
- * away from the institutional blue every Italian PA site already uses.
+ * Token NAMES are unchanged from v1 — only the values moved. Verdict and
+ * criterion colours keep their *meaning*; only chroma changed, and `Seal`
+ * still encodes every state in shape as well as colour.
  */
 
 :root {
-  /* --- Surface: byakuroku, a pale green-grey. Calm, and deliberately not the
-     warm cream that has become the default for this kind of page. --- */
-  --paper: #edf2ee;
-  --paper-raised: #f7faf8;
-  --paper-sunken: #e2e9e4;
+  /* --- Surface: a very faint byakuroku green-grey, fresher than the warm
+     cream of v2. L* stays high so dark text keeps AA — vibrancy lives in the
+     accents and the hero, never by dimming the paper under body text. --- */
+  --paper: #f2f4f7;      /* brand light grey */
+  --paper-raised: #ffffff;
+  --paper-sunken: #e6eaf0;
 
-  /* --- Ink: sumi, warm near-black with a green cast so it belongs to the
-     paper rather than sitting on top of it. --- */
-  --sumi: #1b211d;
-  --sumi-soft: #4a554e;
-  --sumi-faint: #7c8781;
+  /* --- Ink: brand navy. 15.23:1 on the paper above, so body text is never
+     the thing that has to be argued about. --- */
+  --sumi: #0b1d3a;
+  --sumi-soft: #3b4a63;
+  --sumi-faint: #5a6880;
 
-  /* --- Accents --- */
-  --ai: #23405e;        /* indigo: navigation, authority, links */
-  --ai-wash: #dde5ee;
-  --shu: #d4482f;       /* vermilion: the seal, and only blocking states */
-  --shu-wash: #f8e2dd;
-  --wakatake: #3f7a5e;  /* young bamboo: a criterion the citizen meets */
-  --wakatake-wash: #dfeee6;
-  --yamabuki: #a8710c;  /* golden: unverifiable — darkened for text contrast */
-  --yamabuki-wash: #f7ecd6;
+  /* --- Accents, from the brand board, tiered by what each can legally do.
+     Measured on #f2f4f7 rather than assumed:
 
-  --kasumi: #d3ddd6;    /* mist: hairlines and dividers */
+       #0057B8 blue    6.24:1 — the workhorse. Text, links, focus, and a fill
+                       carrying white (6.87:1). The only brand colour that can
+                       do both jobs.
+       #2ED3B7 teal    1.71:1 — fill only. Navy on it reaches 8.89:1; as text
+                       or as a hairline it is invisible.
+       #F6C445 yellow  1.48:1 — fill only, 10.31:1 under navy.
+
+     So teal and yellow never carry text and never draw a line: they are
+     surfaces with dark ink laid on them. Deepened partners exist for the
+     moments those meanings need to be written rather than filled. --- */
+  --ai-vivid: #2ed3b7;   /* brand teal — fills only, navy on top: 8.89:1 */
+  --ai-line: #0057b8;    /* brand blue — borders, icons, focus ring */
+  --ai: #0057b8;         /* brand blue — links, navigation, authority (6.24:1) */
+  --ai-deep: #00408a;    /* blue deepened for small text */
+  --ai-wash: #e2f7f3;
+  --shu: #d92d20;        /* blocking states, and the seal */
+  --shu-deep: #a52016;
+  --shu-wash: #fde7e5;
+  --wakatake: #12b76a;   /* a criterion the citizen meets */
+  --wakatake-deep: #067647;
+  --wakatake-wash: #dcfae6;
+  --yamabuki: #f6c445;   /* brand yellow — unverifiable / unknown */
+  --yamabuki-deep: #8a6206; /* deepened so the same meaning can be written */
+  --yamabuki-wash: #fef4d6;
+
+  --kasumi: #d6dce6;    /* mist: hairline, slightly cooler so it reads on green paper */
 
   /* --- Type --- */
-  --font-display: var(--font-zen-maru), "Hiragino Maru Gothic ProN", system-ui,
+  /* Brand pairing: Poppins for headings, Inter for text. The CSS variables
+     keep their old names so nothing downstream has to change; only what they
+     point at did. Fallbacks are system faces with similar metrics, so a
+     failed font load shifts the layout as little as possible. */
+  --font-display: var(--font-zen-maru), "Segoe UI", system-ui, -apple-system,
     sans-serif;
-  --font-body: var(--font-zen-kaku), "Hiragino Kaku Gothic ProN", system-ui,
+  --font-body: var(--font-zen-kaku), system-ui, -apple-system, "Segoe UI",
     sans-serif;
   --font-mono: var(--font-dm-mono), ui-monospace, monospace;
 
   /* Ma (間) — the interval. A single 8px-derived scale so vertical rhythm
      stays even; the airiness is the point, not an accident of padding. */
+  /* Height of the sticky masthead. The chat workspace subtracts it from the
+     viewport to sit exactly one screen tall; keep the two in step. */
+  --masthead-h: 58px;
+
   --ma-1: 4px;
   --ma-2: 8px;
   --ma-3: 12px;
@@ -68,7 +103,10 @@
   --shadow-rest: 0 1px 2px rgba(27, 33, 29, 0.06);
   --shadow-lift: 0 4px 16px rgba(27, 33, 29, 0.09);
 
-  --measure: 68ch;
+  /* Alzata da 68ch: era il cap che mandava a capo i paragrafi a meta'
+     pagina. Chi sta dentro `.stack` non la usa affatto (vedi sotto): la
+     larghezza la decide il contenitore, che e' l'unico posto giusto. */
+  --measure: 84ch;
 }
 
 *,
@@ -164,33 +202,86 @@ a {
 
 /* ---------------------------------------------------------------- layout */
 
-.shell {
-  max-width: 1080px;
-  margin: 0 auto;
-  padding: 0 var(--ma-6) var(--ma-24);
+/* The full-height chat workspace measures itself against the viewport, so the
+   shell must not add its usual deep trailing space — the composer would sit
+   that far above the bottom edge. It keeps a small margin, matched by the
+   workspace's own height calculation, so the composer has room to breathe
+   now that no footer sits beneath it. */
+.shell:has(.workspace) {
+  padding-bottom: var(--ma-6);
 }
 
+.shell {
+  /* The page uses the screen: structure runs the full width and only prose is
+     held to --measure (see `p`), so lines stay readable without the layout
+     hugging a narrow column. The cap is high and the gutter small — the
+     breathing room the brief asks for is bought vertically, in type size and
+     leading, not in dead margin down the sides. */
+  max-width: 1760px;
+  margin: 0 auto;
+  padding: 0 var(--ma-4) var(--ma-16);
+}
+
+/* Full-bleed sticky masthead. Solid paper background (no backdrop blur — the
+   no-glassmorphism rule holds) so text scrolling under it never bleeds
+   through and focus stays obvious. */
 .masthead {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--paper);
+  border-bottom: 1px solid var(--kasumi);
+}
+
+.masthead__inner {
+  max-width: 1760px;
+  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--ma-4);
-  padding: var(--ma-6) 0;
-  border-bottom: 1px solid var(--kasumi);
-  margin-bottom: var(--ma-12);
+  padding: var(--ma-2) var(--ma-6);
   flex-wrap: wrap;
+}
+
+/* Logo lives top-right (placeholder — Alex will design the real mark). The
+   seal is a natural stand-in: it is the product's signature already. */
+.masthead__right {
+  display: flex;
+  align-items: center;
+  gap: var(--ma-4);
+}
+
+.masthead__logo {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius);
+  border: 1.5px solid var(--kasumi);
+  background: var(--paper-raised);
+  color: var(--sumi);
+  transition: border-color 140ms ease, transform 140ms ease;
+}
+.masthead__logo:hover {
+  border-color: var(--ai);
+}
+.masthead__logo .wordmark__mark {
+  width: 26px;
+  height: 26px;
 }
 
 .wordmark {
   display: flex;
   align-items: center;
-  gap: var(--ma-3);
+  gap: var(--ma-2);
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   letter-spacing: -0.02em;
   color: var(--sumi);
   text-decoration: none;
+  white-space: nowrap;
 }
 
 .wordmark__mark {
@@ -201,9 +292,11 @@ a {
 
 .nav {
   display: flex;
-  gap: var(--ma-6);
+  gap: var(--ma-5, 20px);
   align-items: center;
   font-size: 0.94rem;
+  flex-wrap: wrap;
+  flex: 1 1 auto;
 }
 
 .nav a {
@@ -313,6 +406,15 @@ a {
   letter-spacing: 0.05em;
 }
 
+/* D-20 — which tier published this opportunity. `--ai` (authority) rather
+   than a verdict colour: this badge never says whether the citizen
+   qualifies, only who is answerable for the data. */
+.tag--livello {
+  background: var(--ai-wash);
+  color: var(--ai);
+  font-weight: 600;
+}
+
 .criteria {
   list-style: none;
   margin: var(--ma-4) 0 0;
@@ -335,15 +437,17 @@ a {
   font-weight: 500;
   line-height: 1.5;
 }
+/* v3: glyphs are small text, so they use the deepened partners of the vivid
+   accents to hold AA; the vivid values stay for fills, borders and display. */
 .criterion[data-state="met"] .criterion__glyph {
-  color: var(--wakatake);
+  color: var(--wakatake-deep);
 }
 .criterion[data-state="not_met"] .criterion__glyph {
-  color: var(--shu);
+  color: var(--shu-deep);
 }
 .criterion[data-state="unknown_source"] .criterion__glyph,
 .criterion[data-state="unknown_profile"] .criterion__glyph {
-  color: var(--yamabuki);
+  color: var(--yamabuki-deep);
 }
 
 .notice {
@@ -353,6 +457,9 @@ a {
   background: var(--yamabuki-wash);
   color: #6b4708;
   font-size: 0.88rem;
+  /* `.notice` e' un <p>: il global `p { max-width: --measure }` (prosa ~62ch)
+     lo restringeva sotto la larghezza della card. Qui e' un box, non prosa. */
+  max-width: none;
 }
 
 /* ----------------------------------------------------------- readiness */
@@ -443,13 +550,18 @@ a {
   padding: var(--ma-3) var(--ma-6);
   border: none;
   border-radius: 999px;
-  background: var(--ai);
-  color: #fff;
+  /* Vivid cyan carrying dark ink, not white-on-deep-teal. White text never
+     clears AA on any tone of this hue — the best case measures 3.70:1 — while
+     --sumi on the vivid fill reaches 8.14:1. So the legible choice and the
+     electric one are the same choice here, which is why the primary action is
+     the brightest object on the page. */
+  background: var(--ai-vivid);
+  color: var(--sumi);
   cursor: pointer;
   transition: background 140ms ease;
 }
 .button:hover {
-  background: #1a3149;
+  background: #00b2c7; /* darkened --ai-vivid, still 6.39:1 under --sumi */
 }
 .button--ghost {
   background: transparent;
@@ -465,10 +577,34 @@ a {
   box-shadow: var(--shadow-rest);
 }
 
+/* One column, and everything fills it.
+   The page had four max-widths that did not agree — 68ch on prose, 82ch on
+   intros, 1180px on the container — so every text block stopped short and sat
+   against the left edge with a ragged gap beside it. That reads as broken even
+   when each individual value is defensible.
+   The container is now the only thing setting line length, at a width prose
+   can actually fill, and the per-element caps inside are switched off below.
+   Nothing here is centred: centring a left-aligned paragraph under a
+   full-width heading trades one misalignment for another. */
 .stack {
   display: grid;
   gap: var(--ma-6);
+  /* Allargato da 940px: a 940 il testo finiva la riga a meta' schermo e
+     lasciava una fascia vuota larga quanto il testo stesso, che legge come
+     una pagina rotta anche quando ogni singolo valore e' difendibile. */
+  max-width: 1240px;
+  margin-inline: auto;
 }
+
+/* The container decides the measure now, so the inherited caps would only
+   reintroduce the gap they were meant to prevent. */
+.stack p,
+.stack .lede,
+.stack li {
+  max-width: none;
+}
+
+
 
 .grid-2 {
   display: grid;
@@ -486,5 +622,4120 @@ a {
   }
   .shell {
     padding: 0 var(--ma-4) var(--ma-16);
+  }
+  /* Two rows, not three: wordmark and status share the top line, the nav
+     links get their own scrollable row underneath. Left to wrap freely the
+     masthead ate 180px of an 844px screen before any content appeared. */
+  .masthead__inner {
+    padding: var(--ma-2) var(--ma-4);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      "brand status"
+      "nav   nav";
+    row-gap: var(--ma-1);
+    align-items: center;
+  }
+  .masthead__inner > .wordmark {
+    grid-area: brand;
+  }
+  .masthead__right {
+    grid-area: status;
+    justify-self: end;
+  }
+  .nav {
+    grid-area: nav;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    /* The row scrolls sideways rather than wrapping; hide the scrollbar but
+       keep it reachable by touch, keyboard and trackpad. */
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 calc(-1 * var(--ma-4));
+    padding-inline: var(--ma-4);
+  }
+  .nav::-webkit-scrollbar {
+    display: none;
+  }
+  /* Touch targets: each link keeps a thumb-sized hit area and never splits
+     across lines mid-label. */
+  .nav a {
+    padding: var(--ma-2) 0;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+  }
+  .manifesto-chain {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .datum-row {
+    grid-template-columns: 1fr;
+    gap: var(--ma-1);
+  }
+}
+
+/* Tablet: the data chain breathes into 3 columns. The footer needs no
+   breakpoint of its own — one wrapping row of links already collapses. */
+@media (max-width: 1024px) {
+  .manifesto-chain {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+}
+
+/* ------------------------------------------------------------------ chat */
+
+/* The hero sits on the same paper as everything else — no colour band. A
+   full-bleed block made the page start with a seam: a loud surface the eye had
+   to cross before reaching the one thing that matters, the question box. The
+   weight now comes from type and space, which is what the brief asks the
+   Japanese influence to be (equilibrio, spazio negativo, ritmo tipografico)
+   rather than from a slab of pigment.
+
+   The one bright thing is the comune chip, and it is bright because it carries
+   information: which municipality's published data you are standing in. Vivid
+   cyan can be a fill (--sumi on it measures 8.14:1) though never text, so the
+   chip is exactly the shape that tier is legal in. */
+.hero-band {
+  background: transparent;
+  color: inherit;
+  padding: var(--ma-12) var(--ma-6) var(--ma-8);
+}
+.hero-band__inner {
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+/* The side panel. Scrolls on its own so a long index never drags the page,
+   and holds no verdict of its own — every row is a link back into the
+   transcript, where the card states the result once. */
+.pannello {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ma-6);
+  padding: var(--ma-6) 0 var(--ma-6) var(--ma-2);
+  border-right: 1px solid var(--kasumi);
+  /* Held against the masthead while the conversation scrolls past it. Its own
+     overflow only engages once the index outgrows the screen. */
+  position: sticky;
+  top: var(--masthead-h, 58px);
+  max-height: calc(100dvh - var(--masthead-h, 58px));
+  overflow-y: auto;
+}
+.pannello__sez h2 {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--ma-2);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sumi-faint);
+  font-weight: 600;
+  margin: 0 0 var(--ma-3);
+}
+.pannello__conta {
+  font-size: 0.72rem;
+  color: var(--sumi-faint);
+}
+.pannello__reset {
+  border: 0;
+  background: none;
+  padding: 0;
+  font: inherit;
+  font-size: 0.68rem;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--ai);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.pannello__gruppo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ma-2) var(--ma-4);
+  margin-bottom: var(--ma-3);
+}
+.pannello__check {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ma-2);
+  font-size: 0.88rem;
+  cursor: pointer;
+  min-height: 32px;
+}
+.pannello__check input {
+  accent-color: var(--ai);
+  width: 16px;
+  height: 16px;
+}
+.pannello__vuoto {
+  font-size: 0.86rem;
+  color: var(--sumi-faint);
+  margin: 0;
+}
+.pannello__indice {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--ma-1);
+}
+.pannello__indice a {
+  display: grid;
+  gap: 2px;
+  padding: var(--ma-2);
+  border-radius: 8px;
+  border-left: 3px solid var(--kasumi);
+  text-decoration: none;
+  color: var(--sumi);
+}
+.pannello__indice a:hover {
+  background: var(--paper-raised);
+}
+/* The index inherits the card's verdict colour so the two read as the same
+   result seen twice, not as two different claims. */
+.pannello__indice a[data-verdict="not_eligible"] {
+  border-left-color: var(--shu);
+}
+.pannello__indice a[data-verdict="eligible"] {
+  border-left-color: var(--wakatake);
+}
+.pannello__indice a[data-verdict="likely"] {
+  border-left-color: var(--yamabuki);
+}
+.pannello__titolo {
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+.pannello__esito {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--sumi-faint);
+}
+
+/* "Sto usando ..." — the facts currently feeding the answers. It replaces the
+   hardcoded comune that used to sit here, and it is absent, not empty, until
+   there is something true to put in it (see ProfiloNoto). Quiet by design:
+   this is a receipt, not a banner, so it takes the mono face and hairlines
+   rather than any accent colour. */
+.fatti {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ma-2);
+  margin: 0;
+}
+.fatti__intro {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--sumi-faint);
+}
+.fatto {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--ma-2);
+  padding: var(--ma-1) var(--ma-3);
+  border: 1px solid var(--kasumi);
+  border-radius: 999px;
+  background: var(--paper-raised);
+  font-size: 0.86rem;
+}
+.fatto__label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sumi-faint);
+}
+.fatto__value {
+  color: var(--sumi);
+  font-weight: 500;
+}
+/* An unconfirmed fact must not look like a confirmed one. Amber is already
+   the palette's "we cannot verify this" colour, so it carries the same
+   meaning here as it does on a criterion the comune never published. */
+.fatto__nota {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--yamabuki-deep);
+}
+.fatti__clear {
+  border: 0;
+  background: none;
+  padding: var(--ma-1) var(--ma-2);
+  font: inherit;
+  font-size: 0.8rem;
+  color: var(--ai);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.fatti__clear:hover {
+  color: var(--ai-deep);
+}
+
+.hero-band .hero-eyebrow {
+  display: inline-block;
+  background: var(--ai-vivid);
+  color: var(--sumi);
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: var(--ma-1) var(--ma-3);
+  border-radius: 2px;
+  margin: 0 0 var(--ma-6);
+}
+.hero-band h1 {
+  font-size: clamp(2.6rem, 7vw, 4.6rem);
+  letter-spacing: -0.03em;
+  line-height: 1.02;
+  color: var(--sumi);
+}
+.hero-band .lede {
+  color: var(--sumi-soft);
+  margin: var(--ma-6) auto 0;
+  font-size: 1.14rem;
+  line-height: 1.65;
+}
+
+/* Two columns: a narrow panel, and the conversation taking everything else.
+   The whole thing is one viewport tall so the composer can sit at the bottom
+   of the screen instead of at the bottom of a growing document. `dvh` rather
+   than `vh` because mobile browser chrome slides away, and `vh` would leave
+   the composer under it. */
+/* One column on arrival, two once the panel has something to say. `Pannello`
+   renders nothing while it is empty, so `:has()` is what actually decides the
+   track count — an empty 3fr column would otherwise shove the conversation
+   off-centre and leave a quarter of the screen blank. */
+/* The page scrolls, not a box inside it.
+   Locking the workspace to the viewport turned the transcript into a nested
+   scroller, and a long answer then had to be scrolled *within* the column
+   while the page itself stayed still — the wheel did the wrong thing, and the
+   last card sat clipped behind the composer. The panel and the composer stay
+   put by being sticky, which gets the same fixed frame without taking the
+   scroll away from the document. */
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--ma-8);
+  align-items: start;
+}
+
+/* Two tracks only once the conversation has actually started. A returning
+   visitor still carries a session cookie, so their facts are known the moment
+   the page loads — but a panel summarising a conversation that has not begun
+   is a summary of nothing, and it would take a quarter of the first screen to
+   say so. Both conditions must hold: something to show, and somewhere it
+   refers to. */
+/* La condizione era «qualcosa da mostrare E una conversazione a cui si
+   riferisce». La seconda metà non regge più da quando il comune si sceglie
+   prima di scrivere: chi lo sceglieva vedeva sparire il campo e nient'altro,
+   cioè nessuna conferma di aver detto dove vive. Il pannello esiste solo se
+   contiene almeno un fatto (`ProfiloNoto` restituisce null altrimenti),
+   quindi la sua sola presenza è già la condizione «qualcosa da mostrare» —
+   e non è mai il riassunto di niente. */
+.workspace:has(.pannello) {
+  grid-template-columns: minmax(0, 3fr) minmax(0, 9fr);
+}
+
+.workspace__main {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  /* Centred and held to a comfortable measure: the full width of a 1760px
+     shell would run message lines far past what is pleasant to read. */
+  width: 100%;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+/* Once the transcript holds anything, the hero gives its room to the
+   conversation. Driven by `:has()` on a real bubble rather than by lifted
+   React state, so the title stays server-rendered and there is no second
+   copy of "has this started" to keep in sync. */
+.workspace__main:has(.bubble) .hero-band {
+  padding: var(--ma-4) var(--ma-4) var(--ma-2);
+}
+.workspace__main:has(.bubble) .hero-band h1 {
+  font-size: 1.15rem;
+  letter-spacing: -0.01em;
+}
+.workspace__main:has(.bubble) .hero-band .lede {
+  display: none;
+}
+
+/* Narrow screens: the panel stops being a column and becomes a short header
+   above the conversation, scrolling away with it rather than holding a strip
+   of a screen the chat needs all of. This block has to sit *after* the
+   desktop rules above: same specificity, so the cascade decides, and an
+   earlier media query would simply be overwritten by them. */
+@media (max-width: 1024px) {
+  .workspace {
+    grid-template-columns: 1fr;
+    gap: var(--ma-4);
+  }
+  .pannello {
+    position: static;
+    max-height: none;
+    overflow: visible;
+    border-right: 0;
+    border-bottom: 1px solid var(--kasumi);
+    padding: var(--ma-4) 0;
+  }
+  .fatti {
+    gap: var(--ma-2);
+  }
+}
+
+/* ------------------------------------------------------------ geolocation */
+
+/* Sits below the hero, above the chat: an optional shortcut, never a gate.
+   Ghost styling on purpose — it must read as "try this if you want", not
+   compete with the input for attention. */
+.locate {
+  /* Due modi di rispondere alla stessa domanda — rilevare la posizione o
+     dire il comune — quindi affiancati e con lo stesso peso. Prima il secondo
+     era un campo sopra la domanda, cioè in un altro punto della pagina e con
+     l'aria di un passaggio obbligato. */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: var(--ma-2);
+  margin-bottom: var(--ma-2);
+}
+
+.locate__button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ma-2);
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--ai);
+  background: var(--ai-wash);
+  border: none;
+  border-radius: 999px;
+  padding: var(--ma-2) var(--ma-4);
+  cursor: pointer;
+}
+/* Secondario per gerarchia, non per importanza: la posizione e' un clic solo
+   e va offerta per prima, ma dire il comune resta una strada intera — non un
+   ripiego. Da qui il testo pieno invece di un semplice «altro». */
+.locate__button--secondario {
+  background: none;
+  border: 1px solid var(--paper-sunken);
+  color: var(--sumi-soft);
+  font-weight: 500;
+}
+
+.locate__button--secondario:hover {
+  background: var(--paper-sunken);
+}
+
+/* Aperto in linea sotto i due bottoni. Niente `max-width` qui: con un tetto,
+   `flex-basis: 100%` viene ridotto al tetto e il selettore torna a starci
+   sulla stessa riga dei bottoni, che è esattamente il posto sbagliato. La
+   larghezza si limita sull'input, dove non interferisce con l'a capo. */
+.locate .scelta-comune {
+  flex-basis: 100%;
+  justify-content: center;
+  margin-block: var(--ma-2) 0;
+}
+
+.locate .scelta-comune input {
+  flex: 0 1 26rem;
+}
+
+/* La tendina si allinea all'input, non al contenitore largo quanto la riga. */
+.locate .scelta-comune__esiti {
+  inset-inline: auto;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(34rem, 100%);
+}
+
+.locate__button:hover {
+  background: #ded9fa;
+}
+.locate__button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.locate__note {
+  text-align: center;
+  color: var(--sumi-faint);
+  font-size: 0.86rem;
+  margin: 0 0 var(--ma-4);
+}
+
+/* ------------------------------------------------------------ SPID entry */
+
+/* A visible but non-pushy way to reach the mock identity picker outside of
+   the mid-conversation escalation. Text-button styling: it must never look
+   as authoritative as a real SPID/CIE button on a real PA site. */
+.spid-entry {
+  text-align: center;
+  margin-top: var(--ma-2);
+}
+
+.spid-entry__button {
+  font-family: var(--font-body);
+  font-size: 0.86rem;
+  color: var(--sumi-faint);
+  background: none;
+  border: none;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  padding: var(--ma-2);
+}
+.spid-entry__button:hover {
+  color: var(--ai);
+}
+
+/* --------------------------------------------------------------- status pill */
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ma-2);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  color: var(--sumi-soft);
+  background: var(--paper-sunken);
+  border: 1px solid var(--kasumi);
+  border-radius: 999px;
+  padding: var(--ma-1) var(--ma-3);
+  text-decoration: none;
+}
+.status-pill:hover {
+  border-color: var(--sumi-faint);
+}
+
+.status-pill__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  flex: none;
+  background: var(--sumi-faint);
+}
+.status-pill[data-overall="ok"] .status-pill__dot {
+  background: var(--wakatake);
+}
+.status-pill[data-overall="degraded"] .status-pill__dot {
+  background: var(--yamabuki);
+}
+.status-pill[data-overall="down"] .status-pill__dot {
+  background: var(--shu);
+}
+
+/* -------------------------------------------------------------- footer stats */
+
+.footer-stats {
+  margin-top: var(--ma-8);
+  padding-top: var(--ma-6);
+  border-top: 1px solid var(--kasumi);
+}
+
+.footer-stats__grid {
+  display: grid;
+  gap: var(--ma-4) var(--ma-8);
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  margin-bottom: var(--ma-4);
+}
+
+.footer-stat__value {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--sumi);
+  font-variant-numeric: tabular-nums;
+}
+
+.footer-stat__label {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--sumi-faint);
+  margin-top: 2px;
+}
+
+/* The site footer is gone: it repeated the masthead's navigation, and on the
+   chat page it would have sat under the composer, contending for the bottom
+   edge the conversation owns. Licence and provenance moved to /info. */
+
+/* ------------------------------------------------------ status systems (v3) */
+
+/* The per-group dots that used to sit beside the label are gone: the pill
+   answers one question (is the service up?) with one indicator, and the
+   breakdown lives on /monitoraggio where there is room to say what each
+   number means. */
+
+/* /monitoraggio — three groups (Fonti · Sistemi · Stato dati interni). */
+.systems {
+  display: grid;
+  gap: var(--ma-8);
+}
+
+.systems__group {
+  padding-top: var(--ma-6);
+  border-top: 1px solid var(--kasumi);
+}
+.systems__group:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+.systems__group-head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--ma-3);
+  flex-wrap: wrap;
+  margin-bottom: var(--ma-4);
+}
+.systems__group-head h2 {
+  font-size: 1.3rem;
+}
+.systems__group-note {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.04em;
+  color: var(--sumi-faint);
+}
+
+/* Generic status dot for the new groups (stato, not reachable). */
+.status-row[data-stato="ok"] .status-row__dot {
+  background: var(--wakatake);
+}
+.status-row[data-stato="degraded"] .status-row__dot {
+  background: var(--yamabuki);
+}
+.status-row[data-stato="down"] .status-row__dot {
+  background: var(--shu);
+}
+.status-row[data-stato="unknown"] .status-row__dot {
+  background: var(--sumi-faint);
+  outline: 1px dashed var(--sumi-faint);
+}
+
+/* Stato dati interni rows: a big value with an honest caption. */
+.datum-row {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--ma-3);
+  align-items: baseline;
+  padding: var(--ma-3) 0;
+  border-bottom: 1px solid var(--kasumi);
+}
+.datum-row:last-child {
+  border-bottom: none;
+}
+.datum-row__value {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.datum-row__body .datum-row__detail {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--sumi-soft);
+}
+.datum-row__body .datum-row__detail strong {
+  font-weight: 600;
+  color: var(--sumi);
+}
+.datum-row[data-stato="down"] .datum-row__value {
+  color: var(--shu-deep);
+}
+.datum-row[data-stato="degraded"] .datum-row__value {
+  color: var(--yamabuki-deep);
+}
+.datum-row[data-stato="ok"] .datum-row__value {
+  color: var(--wakatake-deep);
+}
+.datum-row[data-stato="unknown"] .datum-row__value {
+  color: var(--sumi-soft);
+}
+
+/* ----------------------------------------------------------------- manifesto */
+
+/* Little padding at the top: the masthead already sits above this, and a
+   64px gap under it left the page opening on emptiness rather than on the
+   statement it exists to make. */
+.manifesto-hero {
+  padding: var(--ma-6) var(--ma-6) var(--ma-12);
+  border-bottom: 1px solid var(--kasumi);
+}
+/* Full width. Held to 860px the statement sat in a narrow gutter with two
+   thirds of the screen empty beside it, which is the opposite of what an
+   opening line is for. The prose inside keeps its own measure. */
+.manifesto-hero__inner {
+  max-width: none;
+}
+.manifesto-hero h1 {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  margin: var(--ma-3) 0 var(--ma-4);
+}
+.manifesto-hero .lede {
+  font-size: 1.12rem;
+  color: var(--sumi-soft);
+}
+
+/* The data chain — a horizontal process, which is honest here because the
+   pipeline is genuinely a sequence in TreasureIQ's code. Numbering carries
+   real order, so 01–06 is information, not decoration. */
+.manifesto-chain {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: var(--ma-3);
+}
+.step {
+  background: var(--paper-raised);
+  border: 1px solid var(--kasumi);
+  border-radius: var(--radius);
+  padding: var(--ma-4);
+  position: relative;
+}
+.step__num {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: var(--ai-deep);
+  font-weight: 600;
+}
+.step__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.02rem;
+  margin: var(--ma-2) 0 var(--ma-2);
+  color: var(--sumi);
+}
+.step__desc {
+  margin: 0;
+  font-size: 0.86rem;
+  color: var(--sumi-soft);
+}
+
+.principle {
+  border-left: 4px solid var(--ai);
+  background: var(--paper-raised);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: var(--ma-6);
+}
+.principle h3 {
+  font-size: 1.12rem;
+  margin-bottom: var(--ma-2);
+}
+.principle p {
+  color: var(--sumi-soft);
+}
+
+.area-tags {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ma-3);
+}
+.area-tags li {
+  background: var(--paper-raised);
+  border: 1.5px solid var(--kasumi);
+  border-radius: 999px;
+  padding: var(--ma-2) var(--ma-4);
+  font-weight: 600;
+  color: var(--sumi);
+}
+
+.manifesto-cta {
+  background: var(--ai-wash);
+  border-radius: var(--radius);
+  padding: var(--ma-8);
+}
+.manifesto-cta h2 {
+  color: var(--ai-deep);
+}
+
+/* ------------------------------------------------------- seal stamp entrance */
+
+/* The seal is the signature — let it land like a hanko impressing the paper.
+   Motion is a single quick opacity/scale, and it is disabled entirely under
+   `prefers-reduced-motion` (handled by the global reduced-motion block). */
+.seal {
+  animation: seal-stamp 380ms cubic-bezier(0.2, 0.9, 0.3, 1.2);
+}
+@keyframes seal-stamp {
+  0% {
+    transform: scale(0.86);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.04);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* The transcript scrolls, the composer does not. Older exchanges travel up
+   and off the top while the place you type stays exactly where you left it,
+   which is what makes a conversation feel like one rather than like a page
+   that keeps growing a longer scrollbar. `min-height: 0` on both the column
+   and the log is what actually allows the log to shrink and scroll inside a
+   flex parent — without it the log wins the height argument and the composer
+   is pushed off-screen. */
+.chat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ma-4);
+}
+
+.chat__log {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ma-4);
+  /* Symmetric: padding on one side only shifted every centred line in the
+     transcript off-axis from the hero above it. */
+  padding-inline: var(--ma-2);
+}
+
+.chat__hint {
+  color: var(--sumi-faint);
+  font-size: 0.92rem;
+  text-align: center;
+  /* `text-align` centres the text inside the box; the box itself still has
+     the global `p { max-width: --measure }` and would sit hard left without
+     auto margins. That was the hint reading off-axis from the hero above it. */
+  margin-inline: auto;
+}
+
+.bubble {
+  border-radius: var(--radius);
+  padding: var(--ma-4) var(--ma-6);
+  max-width: 88%;
+}
+
+/* `align-self`, not `justify-self`: the transcript became a flex column when
+   it started scrolling, and in a flex column `justify-self` does nothing at
+   all — which is why the citizen's own message had quietly stopped sitting
+   on the right and was spanning the width like an answer. */
+.bubble--user {
+  align-self: flex-end;
+  background: var(--paper-sunken);
+  border: 1px solid var(--kasumi);
+}
+
+.bubble--assistant {
+  align-self: stretch;
+  max-width: 100%;
+  background: var(--paper-raised);
+  border: 1px solid var(--kasumi);
+  box-shadow: var(--shadow-rest);
+}
+
+/* Who is speaking. Said in words rather than left to alignment alone: on a
+   phone both bubbles nearly touch both edges, and a screen reader hears an
+   undifferentiated run of paragraphs either way. */
+.bubble__chi {
+  display: flex;
+  align-items: center;
+  gap: var(--ma-2);
+  margin: 0 0 var(--ma-2);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--sumi-faint);
+  max-width: none;
+}
+.bubble--user .bubble__chi {
+  justify-content: flex-end;
+}
+
+.chat__answer {
+  margin-top: var(--ma-4);
+  display: grid;
+  /* Colonna esplicita minmax(0,1fr) per non far tracimare i contenuti larghi
+     (URL, tabelle). NB: badge/notice restavano stretti non per il grid ma per
+     il global `p { max-width }` — fix la' con max-width:none, non qui. */
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--ma-4);
+}
+
+/* The "none found" state is deliberately not amber: amber (`.notice`'s
+   default) already means "the comune's data ran out" (`unknown_source`,
+   `not_published`) elsewhere in this app. Reusing it here would say the
+   comune failed to publish something, when actually nothing matched the
+   question at all — a different failure with a different remedy. */
+.notice--muted {
+  background: var(--paper-sunken);
+  color: var(--sumi-soft);
+  border-left: 4px solid var(--sumi-faint);
+  padding-left: var(--ma-3);
+}
+
+/* D-19 — the INFORMAZIONE rail. Deliberately plain: no card, no seal, no
+   verdict border — this bubble answers "what does the comune say and who do
+   I call", never "are you eligible". */
+.info-answer {
+  display: grid;
+  gap: var(--ma-2);
+  font-size: 0.92rem;
+  color: var(--sumi-soft);
+}
+
+.info-answer__document a {
+  font-weight: 600;
+}
+
+.info-answer__diagnosis {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--ma-1);
+  color: var(--sumi-faint);
+  font-size: 0.88rem;
+}
+
+.info-answer__office {
+  margin: 0;
+}
+
+/* D-26 rule 2 — this cost is TreasureIQ's, never the citizen's. It shares the
+   "interesting number" register with `.cost-strip`, deliberately distinct from
+   the plain `.info-answer__diagnosis` lines above it, so a reader never
+   mistakes what recovery cost us for a requirement placed on them. That
+   distinction now comes from the mono face and the rule, not from a private
+   hue: the retired magenta was the only thing separating them, and a colour
+   spent on emphasis alone is a colour that can no longer mean anything. */
+.info-answer__cost {
+  border-left: 2px solid var(--ai-line);
+  padding-left: var(--ma-3);
+}
+
+/* D-28 / R-15 — the highest-risk surface in the app: a web result must never
+   read as a verified municipal answer. `--yamabuki` (already "unverifiable"
+   elsewhere) plus an explicit label plus the FULL url as link text, not a
+   domain-hiding "vedi qui" — three redundant signals so the distinction
+   survives colour-blindness, a skim, and a copy change. */
+.info-answer__web {
+  background: var(--yamabuki-wash);
+  border-radius: var(--radius-sm);
+  padding: var(--ma-3) var(--ma-4);
+  display: grid;
+  gap: var(--ma-2);
+}
+
+.info-answer__web-label {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #6b4708;
+}
+
+.info-answer__web ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--ma-2);
+}
+
+.info-answer__web-title {
+  display: block;
+  font-weight: 600;
+  color: #6b4708;
+}
+
+.info-answer__web-url {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  word-break: break-all;
+  color: #6b4708;
+}
+
+.info-answer__web-note {
+  margin: 0;
+  font-size: 0.82rem;
+  color: #6b4708;
+}
+
+/* D-29 — kept off `.cost-strip` on purpose: this is what remains on the
+   citizen, `.cost-strip` is what recovering the data cost TreasureIQ. The
+   two numbers must never sit on the same line or imply one paid for the
+   other. */
+.effort-caption {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--sumi-faint);
+}
+
+.effort-caption strong {
+  color: var(--sumi-soft);
+  font-weight: 600;
+}
+
+.escalation h3 {
+  margin-bottom: var(--ma-2);
+}
+
+/* Pinned to the bottom of the window while the page scrolls behind it, so the
+   place you type is always where you left it. Sticky rather than fixed: it
+   still belongs to the column, so it inherits the width and cannot overlap
+   the panel. The opaque background and the negative-margin bleed stop the
+   last card showing through the gap beneath it. */
+.chat__form {
+  display: grid;
+  gap: var(--ma-2);
+  position: sticky;
+  bottom: 0;
+  z-index: 5;
+  background: var(--paper);
+  padding: var(--ma-4) var(--ma-2) var(--ma-4);
+  margin-inline: calc(-1 * var(--ma-2));
+}
+
+.chat__label {
+  /* Visually hidden but present for assistive tech: the placeholder carries
+     the visible hint, the label carries the accessible name. */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.chat__row {
+  display: flex;
+  gap: var(--ma-3);
+}
+
+.chat__input {
+  flex: 1;
+  font: inherit;
+  font-size: 1.05rem;
+  padding: var(--ma-3) var(--ma-4);
+  border: 1.5px solid var(--kasumi);
+  border-radius: var(--radius);
+  background: var(--paper-raised);
+  color: var(--sumi);
+}
+.chat__input:focus-visible {
+  border-color: var(--ai);
+}
+
+.chat-footer {
+  text-align: center;
+  color: var(--sumi-soft);
+  font-size: 0.9rem;
+  padding-top: var(--ma-6);
+  border-top: 1px solid var(--kasumi);
+}
+
+/* D-17 — data-recovery cost strip: a caption, not a panel. It reads as an
+   interesting number rather than an alarm, so it takes the cyan accent and the
+   mono face — never `--shu` (reserved for blocking states) and never
+   `--yamabuki` (reserved for "unverifiable"), since this is a property of the
+   comune's data-recovery cost, not a failure of the current answer. */
+.cost-strip {
+  display: flex;
+  align-items: center;
+  gap: var(--ma-3);
+  font-size: 0.82rem;
+  color: var(--sumi-faint);
+}
+
+.cost-strip__bars {
+  flex: none;
+  display: block;
+}
+
+.cost-strip__text {
+  margin: 0;
+  max-width: none;
+}
+
+.cost-strip__text strong {
+  color: var(--sumi-soft);
+  font-weight: 600;
+}
+
+.cost-strip__levels {
+  font-family: var(--font-mono);
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 640px) {
+  .bubble {
+    max-width: 100%;
+  }
+}
+
+/* -------------------------------------------------------------- sr-only */
+
+/* Visually hidden, present for assistive tech — the same clip technique as
+   `.chat__label`, generalised. Used for chart-equivalent data tables and
+   table captions that would otherwise repeat a visible heading. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ------------------------------------------------------ monitoraggio (B16) */
+
+.status-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--ma-4);
+}
+
+.status-row {
+  display: grid;
+  grid-template-columns: 12px 1fr;
+  gap: var(--ma-3);
+  align-items: start;
+  padding: var(--ma-3) 0;
+  border-bottom: 1px solid var(--kasumi);
+}
+
+.status-row:last-child {
+  border-bottom: none;
+}
+
+.status-row__dot {
+  width: 10px;
+  height: 10px;
+  margin-top: 6px;
+  border-radius: 999px;
+  background: var(--sumi-faint);
+}
+
+.status-row[data-reachable="reachable"] .status-row__dot {
+  background: var(--wakatake);
+}
+.status-row[data-reachable="unreachable"] .status-row__dot {
+  background: var(--shu);
+}
+/* Deliberately the same neutral as the resting dot: "non verificato" must
+   never read as a colour state at all, only as text. */
+.status-row[data-reachable="unverified"] .status-row__dot {
+  background: var(--sumi-faint);
+}
+
+.status-row__head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--ma-3);
+  flex-wrap: wrap;
+}
+
+.status-row__badge {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  letter-spacing: 0.04em;
+  color: var(--sumi-faint);
+}
+
+.status-row__meta {
+  margin: var(--ma-1) 0 0;
+  font-size: 0.88rem;
+  color: var(--sumi-soft);
+}
+
+/* -------------------------------------------------------- data-table (B16) */
+
+/* A plain honest table, not a bar race — spec D-17: with three of four
+   entities at zero, a chart would read as padding. */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+.data-table caption {
+  text-align: left;
+}
+
+.data-table th,
+.data-table td {
+  text-align: left;
+  padding: var(--ma-3) var(--ma-4) var(--ma-3) 0;
+  border-bottom: 1px solid var(--kasumi);
+  vertical-align: top;
+}
+
+.data-table thead th {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sumi-faint);
+  font-weight: 600;
+  border-bottom: 2px solid var(--kasumi);
+}
+
+.data-table tbody th[scope="row"] {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.data-table__num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* Zero-scored comuni and the regional reference row read as distinct from a
+   live-measured row — a lighter ink, never a colour that could be mistaken
+   for a blocking state. */
+.data-table tr[data-zero="true"] th,
+.data-table tr[data-zero="true"] td,
+.data-table tr[data-region="true"] th,
+.data-table tr[data-region="true"] td {
+  color: var(--sumi-soft);
+}
+
+/* ---------------------------------------------------- recovery split (B16) */
+
+.recovery-split {
+  display: grid;
+  gap: var(--ma-3);
+  margin-bottom: var(--ma-8);
+}
+
+.recovery-split__bar {
+  display: flex;
+  gap: 2px;
+  height: 14px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: var(--paper-sunken);
+}
+
+.recovery-split__segment {
+  display: block;
+  height: 100%;
+}
+
+.recovery-split__legend {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ma-2) var(--ma-6);
+  font-size: 0.88rem;
+  color: var(--sumi-soft);
+}
+
+.recovery-split__legend li {
+  display: flex;
+  align-items: center;
+  gap: var(--ma-2);
+}
+
+.recovery-split__swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  flex: none;
+}
+
+/* ------------------------------------------------------- cost chart (B16) */
+
+.cost-chart {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--ma-3);
+}
+
+.cost-chart__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 2fr auto auto;
+  gap: var(--ma-3);
+  align-items: center;
+}
+
+.cost-chart__label {
+  font-size: 0.88rem;
+  color: var(--sumi-soft);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cost-chart__track {
+  height: 10px;
+  border-radius: 999px;
+  background: var(--paper-sunken);
+  overflow: hidden;
+}
+
+.cost-chart__bar {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+}
+
+.cost-chart__value {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.82rem;
+  color: var(--sumi-faint);
+  white-space: nowrap;
+}
+
+.cost-chart__badge {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  color: var(--sumi-faint);
+  border: 1px solid var(--kasumi);
+  border-radius: var(--radius-sm);
+  padding: 1px var(--ma-2);
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .cost-chart__row {
+    grid-template-columns: 1fr;
+    gap: var(--ma-1);
+  }
+  .cost-chart__label {
+    white-space: normal;
+  }
+}
+
+/* ------------------------------------------------------------ record modal */
+
+/* Everything a citizen needs before leaving for the administration's own site:
+   who to ask, by when, what was checked and what nobody published. Opened from
+   a card, which stays short so the conversation stays readable. */
+.modale {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: var(--ma-8) var(--ma-4);
+  background: rgba(27, 33, 29, 0.42);
+  overflow-y: auto;
+}
+
+.modale__pannello {
+  background: var(--paper-raised);
+  border: 1px solid var(--kasumi);
+  border-radius: var(--radius);
+  box-shadow: 0 24px 60px rgba(27, 33, 29, 0.18);
+  width: 100%;
+  max-width: 660px;
+  padding: var(--ma-6);
+  display: grid;
+  gap: var(--ma-6);
+}
+
+.modale__testa {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: var(--ma-4);
+  align-items: start;
+}
+.modale__testa h2 {
+  font-size: 1.25rem;
+  line-height: 1.25;
+  margin: 0;
+}
+.modale__esito {
+  margin: var(--ma-2) 0 0;
+  color: var(--sumi-soft);
+  font-size: 0.94rem;
+  max-width: none;
+}
+.modale__chiudi {
+  border: 1px solid var(--kasumi);
+  background: var(--paper);
+  border-radius: 999px;
+  width: 34px;
+  height: 34px;
+  cursor: pointer;
+  color: var(--sumi-soft);
+  font-size: 0.9rem;
+  line-height: 1;
+}
+.modale__chiudi:hover {
+  color: var(--sumi);
+}
+
+.modale__tag {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ma-2);
+}
+
+.modale__dati {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--ma-4);
+  margin: 0;
+}
+.modale__dati dt {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--sumi-faint);
+  margin-bottom: 2px;
+}
+.modale__dati dd {
+  margin: 0;
+  font-size: 0.94rem;
+}
+
+.modale__sez h3 {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sumi-faint);
+  margin: 0 0 var(--ma-3);
+  font-weight: 600;
+}
+.modale__ufficio-nome {
+  margin: 0 0 var(--ma-3);
+  font-weight: 600;
+  max-width: none;
+}
+
+/* An absent office, deadline or criterion is a finding about the publishing
+   body, not a gap in this layout — so it reads as a sentence, in the same
+   amber the rest of the app uses for "we could not verify this". */
+.modale__assente {
+  color: var(--yamabuki-deep);
+  font-size: 0.92rem;
+}
+.modale__provenienza {
+  margin: var(--ma-3) 0 0;
+  font-size: 0.8rem;
+  color: var(--sumi-faint);
+  max-width: none;
+}
+
+.modale__criteri,
+.modale__note {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--ma-3);
+  font-size: 0.92rem;
+}
+.modale__criteri li {
+  padding-left: var(--ma-4);
+  border-left: 3px solid var(--kasumi);
+}
+.modale__criteri li[data-stato="met"] {
+  border-left-color: var(--wakatake);
+}
+.modale__criteri li[data-stato="not_met"] {
+  border-left-color: var(--shu);
+}
+.modale__criteri li[data-stato="unknown_source"],
+.modale__criteri li[data-stato="unknown_profile"] {
+  border-left-color: var(--yamabuki);
+}
+.modale__stato {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--sumi-faint);
+  margin-top: 2px;
+}
+
+.modale__piede {
+  border-top: 1px solid var(--kasumi);
+  padding-top: var(--ma-6);
+  display: grid;
+  gap: var(--ma-3);
+  justify-items: start;
+}
+.modale__avviso {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--sumi-faint);
+  max-width: none;
+}
+
+.card__azioni {
+  margin-top: var(--ma-4);
+  font-size: 0.9rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ma-4);
+  align-items: center;
+}
+.card__dettagli {
+  border: 1px solid var(--kasumi);
+  background: var(--paper);
+  border-radius: 999px;
+  padding: var(--ma-2) var(--ma-4);
+  font: inherit;
+  font-size: 0.88rem;
+  color: var(--ai-deep);
+  cursor: pointer;
+}
+.card__dettagli:hover {
+  border-color: var(--ai-line);
+  background: var(--ai-wash);
+}
+
+@media (max-width: 640px) {
+  .modale {
+    padding: var(--ma-4) var(--ma-2);
+  }
+  .modale__pannello {
+    padding: var(--ma-4);
+  }
+}
+
+/* --------------------------------------------------------- sign-in overlay */
+
+/* Its own screen, because identity is a handoff: in production the citizen
+   leaves for SPID or CIE and comes back. Deliberately *not* dressed as the
+   real sign-in page — no provider mark or colours. Teaching people to trust
+   that appearance in a mock is how credential phishing works, and no
+   credential is checked here at all. */
+.accesso {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--ma-6) var(--ma-4);
+  background: var(--paper);
+  overflow-y: auto;
+}
+
+.accesso__pannello {
+  width: 100%;
+  max-width: 620px;
+  display: grid;
+  gap: var(--ma-4);
+}
+
+.accesso__avviso {
+  justify-self: start;
+  margin: 0;
+  padding: var(--ma-1) var(--ma-3);
+  border-radius: 2px;
+  background: var(--yamabuki-wash);
+  color: var(--yamabuki-deep);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  max-width: none;
+}
+
+.accesso__pannello h2 {
+  margin: 0;
+  font-size: clamp(1.5rem, 3.5vw, 2rem);
+}
+.accesso__spiega {
+  margin: 0;
+  color: var(--sumi-soft);
+}
+.accesso__motivo {
+  margin: 0;
+  padding: var(--ma-3) var(--ma-4);
+  border-left: 3px solid var(--ai-line);
+  background: var(--ai-wash);
+  font-size: 0.94rem;
+}
+
+.accesso__lista {
+  list-style: none;
+  margin: var(--ma-2) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--ma-3);
+}
+.accesso__profilo {
+  width: 100%;
+  display: grid;
+  gap: 2px;
+  text-align: left;
+  padding: var(--ma-4);
+  border: 1px solid var(--kasumi);
+  border-radius: var(--radius);
+  background: var(--paper-raised);
+  font: inherit;
+  cursor: pointer;
+  transition: border-color 120ms ease, background 120ms ease;
+}
+.accesso__profilo:hover:not(:disabled) {
+  border-color: var(--ai-line);
+  background: var(--ai-wash);
+}
+.accesso__profilo:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+.accesso__nome {
+  font-weight: 600;
+}
+.accesso__detail {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--sumi-faint);
+}
+.accesso__attesa {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--ai-deep);
+}
+
+.accesso__annulla {
+  justify-self: start;
+  border: 0;
+  background: none;
+  padding: var(--ma-2) 0;
+  font: inherit;
+  font-size: 0.9rem;
+  color: var(--ai);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.accesso__annulla:hover:not(:disabled) {
+  color: var(--ai-deep);
+}
+
+/* The exact date beside the relative one: "12 giorni fa" is easy to feel and
+   impossible to check. */
+.modale__quando {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: var(--sumi-faint);
+}
+
+/* -------------------------------------------------- follow-up check */
+
+/* Offered when every result came from a higher tier. Quiet, and phrased as a
+   question rather than a promise of deeper searching: the ordinary answer has
+   already read the comune's own records, so what this adds is a stated
+   absence, not a second search. */
+.approfondisci {
+  margin: var(--ma-4) 0 0;
+  max-width: none;
+}
+.approfondisci__button {
+  border: 1px dashed var(--kasumi);
+  background: none;
+  border-radius: 999px;
+  padding: var(--ma-2) var(--ma-4);
+  font: inherit;
+  font-size: 0.88rem;
+  color: var(--ai-deep);
+  cursor: pointer;
+}
+.approfondisci__button:hover:not(:disabled) {
+  border-style: solid;
+  border-color: var(--ai-line);
+  background: var(--ai-wash);
+}
+.approfondisci__esito {
+  margin: var(--ma-4) 0 0;
+  padding-left: var(--ma-4);
+  border-left: 3px solid var(--yamabuki);
+  font-size: 0.92rem;
+  color: var(--sumi-soft);
+  max-width: none;
+}
+.approfondisci__esito[data-stato="errore"] {
+  border-left-color: var(--shu);
+}
+
+/* The certified channel, set apart from the counter details above it: it
+   answers a different question and comes from a different register, so it
+   should not read as one more line of the same list. */
+.modale__pec {
+  margin-top: var(--ma-4);
+  padding-top: var(--ma-4);
+  border-top: 1px dashed var(--kasumi);
+}
+
+/* The weakest evidence the app shows, and marked as such on every row. These
+   are pages a search engine returned from public-body domains: nothing was
+   parsed, quote-gated or checked against a requirement, so they are a place
+   to start looking and never an answer. */
+.approfondisci__pagine {
+  list-style: none;
+  margin: var(--ma-3) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--ma-2);
+  font-size: 0.9rem;
+}
+.approfondisci__pagine li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--ma-2);
+}
+.approfondisci__nonverif {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--yamabuki-deep);
+}
+
+/* Numeri utili: recapiti URP letti dal vivo, su richiesta. Vive fuori
+   copertura, dove non c'è verdetto da dare ma c'è ancora qualcuno a cui
+   chiedere. Ogni recapito è dichiarato non verificato — un numero letto storto
+   è peggio di un link, quindi nessuna cifra è mai presentata come un fatto. */
+.contatti-urp {
+  margin: var(--ma-4) 0 0;
+  max-width: none;
+}
+.contatti-urp__esito {
+  padding-left: var(--ma-4);
+  border-left: 3px solid var(--yamabuki);
+  font-size: 0.92rem;
+  color: var(--sumi-soft);
+}
+.contatti-urp__titolo {
+  margin: 0 0 var(--ma-3);
+  font-size: 0.9rem;
+}
+.contatti-urp__titolo strong {
+  color: var(--yamabuki-deep);
+}
+.contatti-urp__lista {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: var(--ma-2) var(--ma-4);
+  margin: 0;
+}
+.contatti-urp__lista dt {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--kasumi-deep, var(--sumi-soft));
+  align-self: baseline;
+}
+.contatti-urp__lista dd {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ma-1);
+}
+.contatti-urp__fonte {
+  margin: var(--ma-3) 0 0;
+  font-size: 0.8rem;
+  color: var(--sumi-soft);
+}
+
+/* --------------------------------------------------- badge connettore AgID */
+
+/* Fuori copertura, dopo la ricerca: dice che il comune SAREBBE raggiungibile
+   dal connettore. Verde, non giallo: non è un dato «non verificato», è un
+   fatto strutturale misurato sul portale. Discreto — una riga, non una carta. */
+.badge-connettore {
+  margin: var(--ma-4) 0 0;
+  padding: var(--ma-3) var(--ma-4);
+  border: 1px solid #cfe3d2;
+  border-left: 3px solid #2f7d4f;
+  background: #f2f8f3;
+  border-radius: 2px;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--sumi-soft);
+  /* stessa trappola di `.notice`: badge e' un <p>, il global `p { max-width }`
+     lo stringeva. E' un box a piena larghezza, non prosa da leggere a colonna. */
+  max-width: none;
+}
+
+.badge-connettore__pallino {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 0.5em;
+  border-radius: 50%;
+  background: #2f7d4f;
+  vertical-align: middle;
+}
+
+.badge-connettore strong {
+  color: #245c3a;
+  font-weight: 600;
+}
+
+/* Schede di disambiguazione comune: un tap sceglie, niente da ridigitare. */
+.scelta-comune {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ma-2);
+  margin: var(--ma-4) 0 0;
+}
+.scelta-comune__scheda {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5em;
+  padding: var(--ma-2) var(--ma-4);
+  border: 1px solid var(--kasumi, #d5dbe6);
+  border-radius: 4px;
+  background: var(--washi, #fff);
+  cursor: pointer;
+  font: inherit;
+  color: var(--sumi, #1f2733);
+  transition: border-color 0.12s, background 0.12s;
+}
+.scelta-comune__scheda:hover:not(:disabled) {
+  border-color: var(--matcha, #2f9e6f);
+  background: var(--matcha-wash, #eef8f2);
+}
+.scelta-comune__scheda:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.scelta-comune__nome {
+  font-weight: 600;
+}
+.scelta-comune__prov {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  color: var(--sumi-soft);
+}
+
+/* Mappa servizi (fase 1): categorie del portale come chip a cascata sotto il
+   badge connettore. Verde matcha come il badge — è la stessa «capacità del
+   connettore», non un «da verificare» (che è giallo). Riusa .scelta-comune__scheda
+   per la scheda, aggiunge solo il conteggio-pillola e la cornice del gruppo. */
+.mappa-servizi {
+  margin: var(--ma-3) 0 0;
+}
+.mappa-servizi__carico {
+  margin: var(--ma-3) 0 0;
+  font-size: 0.85rem;
+  color: var(--sumi-soft);
+  font-style: italic;
+}
+.mappa-servizi__intro {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--sumi);
+  max-width: none; /* box a piena larghezza reso come <p>: fuori dal max-width di prosa */
+}
+.mappa-servizi__chip-riga {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ma-2);
+  margin: var(--ma-2) 0 0;
+}
+.mappa-servizi__chip-conteggio {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.05em 0.45em;
+  border-radius: 999px;
+  background: var(--matcha-wash, #eef8f2);
+  color: var(--matcha-deep, #245c3a);
+}
+
+/* Briciole della cascata: dove sei, coi passi precedenti risalibili. */
+.mappa-servizi__briciole {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.4em;
+  margin: 0 0 var(--ma-2);
+  max-width: none;
+}
+.mappa-servizi__briciola {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  padding: 0.15em 0.55em;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background: none;
+}
+.mappa-servizi__briciola--qui {
+  background: var(--matcha-wash, #eef8f2);
+  color: var(--matcha-deep, #245c3a);
+  font-weight: 600;
+}
+.mappa-servizi__briciola--link {
+  color: var(--ai);
+  cursor: pointer;
+  text-decoration: underline;
+}
+.mappa-servizi__briciola--link:hover {
+  border-color: var(--ai-line);
+}
+.mappa-servizi__freccia {
+  color: var(--sumi-faint);
+  font-size: 0.85rem;
+}
+
+/* Foglia: i servizi della categoria come link alla scheda del portale. */
+.mappa-servizi__servizi {
+  list-style: none;
+  margin: var(--ma-2) 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ma-1, 0.35rem);
+}
+.mappa-servizi__servizio {
+  padding-left: 0.9em;
+  position: relative;
+}
+.mappa-servizi__servizio::before {
+  content: "›";
+  position: absolute;
+  left: 0;
+  color: var(--matcha-deep, #245c3a);
+}
+.mappa-servizi__link {
+  color: var(--ai);
+  text-decoration: underline;
+  font-size: 0.9rem;
+}
+.mappa-servizi__link:hover {
+  color: var(--ai-deep);
+}
+/* Il servizio ora non è un link ma un tap che apre l'anteprima: stessa resa
+   del vecchio link, ma da bottone (nessun default di sistema). */
+.mappa-servizi__servizio-tap {
+  appearance: none;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  cursor: pointer;
+  color: var(--ai);
+  text-decoration: underline;
+  font: inherit;
+  font-size: 0.9rem;
+}
+.mappa-servizi__servizio-tap:hover {
+  color: var(--ai-deep);
+}
+
+/* Terzo livello: l'anteprima della scheda. GIALLA di proposito — il giallo
+   segnala «dato letto dal vivo, non certissimo» (stessa semantica di
+   `.tag-verifica`). Il bottone in fondo apre la scheda sul portale; il footer
+   sotto dichiara come e' stata generata. */
+.mappa-servizi__scheda {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ma-1, 0.35rem);
+  margin-top: var(--ma-2);
+  padding: var(--ma-2);
+  border: 1px solid var(--yamabuki, #e0a80d);
+  border-left: 3px solid var(--yamabuki, #e0a80d);
+  border-radius: 6px;
+  background: var(--yamabuki-wash);
+  color: inherit;
+}
+.mappa-servizi__scheda-titolo {
+  font-weight: 600;
+  color: var(--sumi, #1a1a1a);
+}
+.mappa-servizi__scheda-campo {
+  display: block;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: var(--sumi-soft, #444);
+}
+.mappa-servizi__scheda-etichetta {
+  display: block;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--yamabuki-deep);
+  margin-bottom: 0.1em;
+}
+.mappa-servizi__scheda-btn {
+  align-self: flex-start;
+  margin-top: 0.4em;
+  padding: 0.4em 0.9em;
+  border: 1px solid var(--yamabuki-deep);
+  border-radius: 5px;
+  background: var(--yamabuki-deep);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+.mappa-servizi__scheda-btn:hover {
+  background: #fff;
+  color: var(--yamabuki-deep);
+}
+.mappa-servizi__scheda-footer {
+  margin-top: 0.3em;
+  font-size: 0.72rem;
+  font-style: italic;
+  color: var(--sumi-soft, #666);
+}
+
+/* Bandi e avvisi comunali (amministrazione trasparente): stesso registro
+   della mappa servizi, indipendente per gate. Header collassato tap-toggle,
+   caveat GIALLO — dato letto dal vivo, non verificato (D-B4/D-B7), nessun
+   verdetto di apertura. */
+.bandi-comune {
+  margin: var(--ma-3) 0 0;
+}
+.bandi-comune__header {
+  appearance: none;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--sumi);
+}
+.bandi-comune__header:hover {
+  color: var(--ai);
+}
+.bandi-comune__caveat {
+  margin: var(--ma-2) 0 0;
+  padding: 0.5em 0.7em;
+  border-left: 3px solid var(--yamabuki);
+  background: var(--yamabuki-wash);
+  color: var(--yamabuki-deep);
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+.bandi-comune__lista {
+  list-style: none;
+  margin: var(--ma-2) 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ma-2);
+}
+.bandi-comune__card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2em;
+  padding: var(--ma-2);
+  border: 1px solid var(--kasumi);
+  border-radius: var(--radius-sm);
+}
+.bandi-comune__titolo {
+  font-weight: 600;
+  color: var(--sumi);
+}
+.bandi-comune__data {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--sumi-faint);
+}
+.bandi-comune__anteprima {
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: var(--sumi-soft);
+}
+.bandi-comune__link {
+  align-self: flex-start;
+  margin-top: 0.2em;
+  color: var(--ai);
+  text-decoration: underline;
+  font-size: 0.85rem;
+}
+.bandi-comune__link:hover {
+  color: var(--ai-deep);
+}
+
+/* Tag «da verificare tu» dentro il testo TIQ: chip giallo (semantica «non
+   verificato»), non asterischi grezzi. Inline, non spezza la riga. */
+.tag-verifica {
+  display: inline;
+  padding: 0.05em 0.4em;
+  border-radius: 3px;
+  background: var(--yamabuki-wash);
+  color: var(--yamabuki-deep);
+  font-weight: 600;
+  font-size: 0.92em;
+  white-space: nowrap;
+}
+
+/* Nome del MODELLO connettore (mai il prodotto/vendor — dottrina anti-accusa).
+   Verde come il badge: e' un fatto strutturale, non un dato «da verificare»
+   (quello e' giallo, `.tag-verifica`). */
+.tag-connettore {
+  display: inline;
+  padding: 0.05em 0.4em;
+  border-radius: 3px;
+  background: #e4f0e6;
+  color: #245c3a;
+  font-weight: 600;
+  font-size: 0.92em;
+  white-space: nowrap;
+}
+
+/* Nome del comune fuori copertura nell'incipit «Attenzione». Chip blu civico
+   (`--ai`, la stessa autorità dei link): identifica il comune di cui parliamo
+   senza tingerlo di giallo «da verificare» — il dubbio sta sul dato, non sul
+   nome del comune. */
+.tag-comune {
+  display: inline;
+  padding: 0.05em 0.4em;
+  border-radius: 3px;
+  background: #e3edf9;
+  color: var(--ai);
+  font-weight: 600;
+  font-size: 0.92em;
+}
+
+/* -------------------------------------------- numeri utili (banner pannello) */
+
+/* Recapiti del comune fuori copertura, letti al volo. Vive nel pannello a
+   sinistra, sotto il profilo: biglietto da visita, non un verdetto. Barra
+   ambra come le altre note del pannello, tono discreto. */
+.numeri-utili {
+  margin: var(--ma-4) 0 0;
+  padding-left: var(--ma-4);
+  border-left: 3px solid var(--yamabuki);
+}
+.numeri-utili__titolo {
+  margin: 0 0 var(--ma-3);
+  font-size: 0.82rem;
+  line-height: 1.4;
+  color: var(--sumi-soft);
+}
+.numeri-utili__lista {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: var(--ma-2) var(--ma-3);
+  margin: 0;
+}
+.numeri-utili__riga {
+  display: contents;
+}
+.numeri-utili__lista dt {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--kasumi-deep, var(--sumi-soft));
+  align-self: baseline;
+}
+.numeri-utili__lista dd {
+  margin: 0;
+  font-size: 0.82rem;
+  word-break: break-word;
+}
+.numeri-utili__nota {
+  margin: var(--ma-3) 0 0;
+  font-size: 0.72rem;
+  color: var(--sumi-soft);
+}
+
+/* ------------------------------------------------- integration cost table */
+
+/* Cost per record, not cost in total: a comune needing a bespoke connector for
+   fifteen records is dearer to read than one needing a parser for forty, and a
+   total hides exactly that. Bars are plain divs and every one carries its
+   figure in writing beside it — a chart whose values cannot be read off it is
+   decoration. */
+.costo-lista {
+  list-style: none;
+  margin: var(--ma-6) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--ma-6);
+}
+.costo-riga {
+  border-top: 1px solid var(--kasumi);
+  padding-top: var(--ma-4);
+}
+.costo-riga__testa {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--ma-2);
+}
+.costo-riga__testa h3 {
+  margin: 0;
+  font-size: 1.02rem;
+}
+.costo-riga__modo {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: var(--sumi-faint);
+}
+.costo-barra {
+  height: 10px;
+  margin: var(--ma-3) 0 var(--ma-2);
+  background: var(--paper-sunken);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.costo-barra__fill {
+  height: 100%;
+  background: var(--ai-vivid);
+}
+.costo-riga__cifra {
+  margin: 0;
+  font-size: 0.92rem;
+  max-width: none;
+}
+.costo-riga__cifra strong {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+}
+.costo-conteggi {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--ma-3);
+  margin: var(--ma-4) 0 0;
+}
+.costo-conteggi dt {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sumi-faint);
+}
+.costo-conteggi dd {
+  margin: 2px 0 0;
+  font-family: var(--font-mono);
+  font-size: 1.05rem;
+}
+.costo-riga__nota {
+  margin: var(--ma-3) 0 0;
+  font-size: 0.82rem;
+  color: var(--sumi-faint);
+  max-width: none;
+}
+/* An expired discovery is a fact about our own upkeep, not about the comune,
+   so it takes the amber this app already uses for "not verified" rather than
+   the vermilion it reserves for a citizen being blocked. */
+.costo-riga__scaduta {
+  color: var(--yamabuki-deep);
+}
+.costo-riga__fuori {
+  font-style: italic;
+}
+.costo-metodo {
+  margin: var(--ma-6) 0 0;
+  font-size: 0.86rem;
+  color: var(--sumi-soft);
+}
+
+/* A plan, set apart from the measurements above it. Describing roadmap as if
+   it were running is the fastest way to lose the credibility the numbers on
+   this page are spending themselves to earn. */
+.costo-metodo--futuro {
+  margin-top: var(--ma-4);
+  padding-left: var(--ma-4);
+  border-left: 3px dashed var(--kasumi);
+  color: var(--sumi-faint);
+}
+
+/* --------------------------------------------------------- manifesto list */
+
+/* Sections headed by a single noun, in the manner of the Openpolis manifesto
+   this page is modelled on: the heading names the commitment, the paragraph
+   makes it. Two columns on a wide screen so the list reads as a set of
+   positions rather than a long scroll of prose. */
+/* Flex, not grid, because ten items never fill a four-column grid: the last
+   row was left with two orphans pinned to the left edge. Wrapping flex items
+   with a centred last line is the one layout that handles any count without
+   inventing filler principles to make the arithmetic come out. */
+.principi {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--ma-8) var(--ma-12);
+}
+/* Two columns at this width, so ten principles make five full rows and no
+   row is left with a single orphan against the left edge. */
+.principi > .principio {
+  flex: 1 1 380px;
+  max-width: none;
+}
+.principio h2 {
+  font-size: 1.06rem;
+  margin: 0 0 var(--ma-2);
+  padding-bottom: var(--ma-2);
+  border-bottom: 2px solid var(--ai-vivid);
+  display: inline-block;
+}
+.principio p {
+  margin: 0;
+  color: var(--sumi-soft);
+}
+.manifesto-cta__azioni {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ma-4);
+  max-width: none;
+}
+
+/* ------------------------------------------------------------ access ladder */
+
+/* D-21 drawn. Rungs run from the cheapest to read down to the dearest, and a
+   rung with nobody on it is still drawn: an empty M1 is the most informative
+   row on the page, because it says that not one measured comune publishes
+   eligibility criteria in the typed field the national model provides. */
+.scala {
+  list-style: none;
+  counter-reset: gradino;
+  margin: var(--ma-6) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--ma-4);
+}
+.scala__gradino {
+  border-left: 4px solid var(--ai-vivid);
+  padding: var(--ma-3) 0 var(--ma-3) var(--ma-4);
+}
+/* Emptiness is a finding, not an absence of one — so the row stays legible
+   and only loses its accent, rather than disappearing. */
+.scala__gradino[data-vuoto="true"] {
+  border-left-color: var(--kasumi);
+  opacity: 0.72;
+}
+.scala__testa {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--ma-2);
+}
+.scala__testa h3 {
+  margin: 0;
+  font-size: 0.98rem;
+}
+.scala__conta {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sumi-faint);
+}
+.scala__spiega {
+  margin: var(--ma-2) 0 0;
+  font-size: 0.88rem;
+  color: var(--sumi-soft);
+}
+.scala__comuni {
+  list-style: none;
+  margin: var(--ma-3) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--ma-2);
+}
+.scala__comuni li {
+  display: grid;
+  grid-template-columns: minmax(140px, 1fr) minmax(80px, 2fr) auto;
+  align-items: center;
+  gap: var(--ma-3);
+  font-size: 0.88rem;
+}
+.scala__barra {
+  height: 8px;
+  background: var(--paper-sunken);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.scala__barra-fill {
+  display: block;
+  height: 100%;
+  background: var(--ai-vivid);
+}
+.scala__cifra {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--sumi-faint);
+  white-space: nowrap;
+}
+.scala__nota {
+  margin: var(--ma-6) 0 0;
+  padding-left: var(--ma-4);
+  border-left: 3px solid var(--yamabuki);
+  font-size: 0.92rem;
+  color: var(--sumi-soft);
+}
+
+@media (max-width: 640px) {
+  .scala__comuni li {
+    grid-template-columns: 1fr;
+    gap: var(--ma-1);
+  }
+}
+
+/* ------------------------------------------------------------- dashboard */
+
+/* Leads with the finding, not with the inventory. "94 servizi letti" is an
+   inventory; "84 su 91 senza condizioni leggibili" is the reason the project
+   exists, and it is the number a reader should leave with. */
+.panoramica__titolo {
+  font-size: clamp(1.15rem, 2.4vw, 1.5rem);
+  line-height: 1.45;
+  color: var(--sumi);
+  margin: var(--ma-4) 0 var(--ma-6);
+}
+.panoramica__titolo strong {
+  font-family: var(--font-mono);
+  font-weight: 500;
+}
+.panoramica__sotto {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sumi-faint);
+  margin: var(--ma-12) 0 var(--ma-4);
+}
+
+/* One bar, three shares. Proportion is what the eye reads here, so the parts
+   are sized by value — but each carries its own count underneath, because a
+   share nobody can put a number to is an impression, not evidence. */
+.quote {
+  display: flex;
+  height: 18px;
+  border-radius: 999px;
+  overflow: hidden;
+  gap: 2px;
+  background: var(--paper-sunken);
+}
+.quote__parte[data-tipo="strutturati"] {
+  background: var(--wakatake);
+}
+.quote__parte[data-tipo="recuperati"] {
+  background: var(--ai-vivid);
+}
+.quote__parte[data-tipo="illeggibili"] {
+  background: var(--yamabuki);
+}
+.quote__legenda {
+  list-style: none;
+  margin: var(--ma-4) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--ma-4);
+}
+.quote__legenda li {
+  border-top: 3px solid var(--kasumi);
+  padding-top: var(--ma-2);
+}
+.quote__legenda li[data-tipo="strutturati"] {
+  border-top-color: var(--wakatake);
+}
+.quote__legenda li[data-tipo="recuperati"] {
+  border-top-color: var(--ai-vivid);
+}
+.quote__legenda li[data-tipo="illeggibili"] {
+  border-top-color: var(--yamabuki);
+}
+.quote__cifra {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  line-height: 1.1;
+}
+.quote__etichetta {
+  display: block;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-top: 2px;
+}
+.quote__spiega {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--sumi-faint);
+  margin-top: 2px;
+}
+
+.vitali {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: var(--ma-6);
+  margin: var(--ma-12) 0 0;
+  padding-top: var(--ma-6);
+  border-top: 1px solid var(--kasumi);
+}
+.vitale__cifra {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 1.7rem;
+  line-height: 1.1;
+}
+.vitale__etichetta {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--sumi-faint);
+  margin-top: var(--ma-1);
+}
+
+.fonti-agg {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--ma-3);
+}
+.fonti-agg li {
+  display: grid;
+  grid-template-columns: minmax(90px, 1fr) minmax(80px, 3fr) auto;
+  align-items: center;
+  gap: var(--ma-3);
+  font-size: 0.9rem;
+}
+.fonti-agg__tipo {
+  font-weight: 600;
+}
+.fonti-agg__barra {
+  height: 10px;
+  background: var(--paper-sunken);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.fonti-agg__fill {
+  display: block;
+  height: 100%;
+  background: var(--ai);
+}
+.fonti-agg__cifra {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: var(--sumi-faint);
+  white-space: nowrap;
+}
+.fonti-agg__nota {
+  margin: var(--ma-4) 0 0;
+  font-size: 0.84rem;
+  color: var(--sumi-faint);
+}
+
+@media (max-width: 640px) {
+  .fonti-agg li {
+    grid-template-columns: 1fr;
+    gap: var(--ma-1);
+  }
+}
+
+/* ---------------------------------------------------------- flow diagram */
+
+/* The cycle, drawn. The label on each step says who acts, because the ratio
+   is the argument: one step of eight touches the model, and in that one it
+   produces neither verdicts nor numbers. */
+.ciclo {
+  list-style: none;
+  counter-reset: passo;
+  margin: var(--ma-8) 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0;
+}
+.ciclo__passo {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--ma-4);
+  padding: var(--ma-4) 0;
+  position: relative;
+}
+/* The connector line, drawn behind the numbers rather than between them, so
+   the sequence reads as one movement instead of eight cards. */
+.ciclo__passo::before {
+  content: "";
+  position: absolute;
+  left: 17px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--kasumi);
+}
+.ciclo__passo:first-child::before {
+  top: 50%;
+}
+.ciclo__passo:last-child::before {
+  bottom: 50%;
+}
+.ciclo__n {
+  position: relative;
+  z-index: 1;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.86rem;
+  background: var(--paper-raised);
+  border: 2px solid var(--kasumi);
+}
+/* Colour by actor, not by order: what matters is who is acting. */
+.ciclo__passo[data-attore="modello"] .ciclo__n {
+  border-color: var(--ai-vivid);
+  background: var(--ai-wash);
+}
+.ciclo__passo[data-attore="regola"] .ciclo__n {
+  border-color: var(--wakatake);
+}
+.ciclo__passo[data-attore="dati"] .ciclo__n {
+  border-color: var(--sumi-faint);
+}
+.ciclo__corpo h3 {
+  margin: 0;
+  font-size: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--ma-3);
+}
+.ciclo__ramo {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--yamabuki-deep);
+  border: 1px dashed var(--yamabuki);
+  border-radius: 999px;
+  padding: 1px var(--ma-2);
+}
+.ciclo__corpo p {
+  margin: var(--ma-2) 0 0;
+  color: var(--sumi-soft);
+  font-size: 0.92rem;
+}
+.ciclo__attore {
+  display: inline-block;
+  margin-top: var(--ma-2);
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sumi-faint);
+}
+.ciclo__nota {
+  margin: var(--ma-8) 0 0;
+  padding-left: var(--ma-4);
+  border-left: 3px solid var(--ai-vivid);
+  color: var(--sumi-soft);
+  font-size: 0.92rem;
+}
+
+/* ------------------------------------------------------ open-data checklist */
+
+.specifiche {
+  list-style: none;
+  margin: var(--ma-6) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--ma-4);
+}
+.specifica {
+  border-left: 4px solid var(--kasumi);
+  padding: var(--ma-3) 0 var(--ma-3) var(--ma-4);
+}
+/* The colour says how often we found it, so a reader can see at a glance
+   which gaps are systematic rather than incidental. */
+.specifica[data-stato="assente"] {
+  border-left-color: var(--shu);
+}
+.specifica[data-stato="parziale"] {
+  border-left-color: var(--yamabuki);
+}
+.specifica[data-stato="presente"] {
+  border-left-color: var(--wakatake);
+}
+.specifica__testa {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--ma-2);
+}
+.specifica__testa code {
+  font-family: var(--font-mono);
+  font-size: 0.92rem;
+  background: var(--paper-sunken);
+  padding: 1px var(--ma-2);
+  border-radius: 3px;
+}
+.specifica__stato {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--sumi-faint);
+}
+.specifica__cosa {
+  margin: var(--ma-2) 0 0;
+  font-size: 0.94rem;
+}
+.specifica__senza {
+  margin: var(--ma-2) 0 0;
+  font-size: 0.88rem;
+  color: var(--sumi-faint);
+}
+
+/* ------------------------------------------------------ open-data request */
+
+.apertura {
+  list-style: none;
+  margin: var(--ma-6) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--ma-4);
+}
+.apertura__ente {
+  border-top: 1px solid var(--kasumi);
+  padding-top: var(--ma-4);
+}
+.apertura__testa {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ma-3);
+}
+.apertura__testa h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+.apertura__conteggio {
+  display: block;
+  margin-top: 2px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--sumi-faint);
+}
+.apertura__corpo {
+  margin-top: var(--ma-4);
+}
+.apertura__nota {
+  margin-top: var(--ma-6);
+}
+
+/* The pointer from a closed answer in the chat to the place something can be
+   done about it. Quiet: it is a suggestion beside an answer, not a call to
+   action competing with the answer itself. */
+.chiedi-inline {
+  margin: var(--ma-4) 0 0;
+  padding-left: var(--ma-4);
+  border-left: 3px solid var(--yamabuki);
+  font-size: 0.9rem;
+  color: var(--sumi-soft);
+}
+
+/* The opening claim above the headline. Small, blue, and set apart: it states
+   the premise the headline then answers, so it must not compete with it. */
+.hero-claim {
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  color: var(--ai);
+  margin: 0 0 var(--ma-2);
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------------- brand mark */
+
+/* Mark and name locked together. The usage rules forbid distorting the mark,
+   so nothing here scales its two parts independently. */
+.marchio {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ma-3);
+}
+.marchio__testo {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.05;
+}
+.marchio__nome {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.16rem;
+  letter-spacing: -0.02em;
+  color: var(--sumi);
+}
+.marchio__iq {
+  color: var(--ai-vivid);
+}
+/* The payoff is the part that can be lost without losing the brand, so it is
+   the first thing dropped when the masthead runs out of room. */
+.marchio__payoff {
+  font-family: var(--font-body);
+  font-size: 0.62rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--sumi-faint);
+  margin-top: 2px;
+}
+
+@media (max-width: 900px) {
+  .marchio__payoff {
+    display: none;
+  }
+}
+
+/* --- Scelta del comune ---------------------------------------------------
+ *
+ * Sta sopra la domanda perché il comune vale per tutta la conversazione,
+ * mentre la domanda cambia a ogni turno. Il peso visivo è deliberatamente
+ * basso: è un campo che si compila una volta, non l'azione principale della
+ * pagina.
+ */
+
+.scelta-comune {
+  position: relative;
+  margin-block-end: var(--ma-3);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--ma-2);
+}
+
+.scelta-comune__etichetta {
+  font-size: 0.82rem;
+  color: var(--sumi-faint);
+}
+
+.scelta-comune input {
+  flex: 1 1 14rem;
+  min-width: 0;
+  padding: var(--ma-2);
+  border: 1px solid var(--paper-sunken);
+  background: var(--paper-raised);
+  color: var(--sumi);
+  font: inherit;
+  font-size: 0.95rem;
+}
+
+.scelta-comune input:focus-visible {
+  outline: 2px solid var(--ai);
+  outline-offset: 1px;
+}
+
+.scelta-comune__esiti {
+  position: absolute;
+  inset-inline: 0;
+  top: 100%;
+  z-index: 20;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background: var(--paper-raised);
+  border: 1px solid var(--paper-sunken);
+  max-height: 17rem;
+  overflow-y: auto;
+}
+
+.scelta-comune__esiti button {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--ma-2);
+  width: 100%;
+  padding: var(--ma-2);
+  border: 0;
+  background: none;
+  text-align: start;
+  font: inherit;
+  color: var(--sumi);
+  cursor: pointer;
+}
+
+.scelta-comune__esiti button:hover,
+.scelta-comune__esiti button:focus-visible {
+  background: var(--paper-sunken);
+  outline: none;
+}
+
+.scelta-comune__nome {
+  font-weight: 600;
+}
+
+.scelta-comune__dove {
+  font-size: 0.82rem;
+  color: var(--sumi-faint);
+}
+
+/* Un comune che ISTAT conosce e di cui IPA non pubblica il portale. Non è un
+ * errore e non va nascosto: è un'assenza dichiarata, e chi sceglie deve
+ * saperla prima di cliccare, non dopo aver ricevuto una risposta vuota. */
+.scelta-comune__senza-portale {
+  font-size: 0.78rem;
+  color: var(--sumi-soft);
+  border: 1px solid var(--paper-sunken);
+  padding: 0 var(--ma-1, 4px);
+}
+
+.scelta-comune__stato {
+  flex-basis: 100%;
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--sumi-faint);
+}
+
+.scelta-comune__stato--vuoto {
+  color: var(--sumi-soft);
+}
+
+.scelta-comune__cambia {
+  border: 0;
+  background: none;
+  padding: 0;
+  font: inherit;
+  font-size: 0.85rem;
+  color: var(--ai);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* --- Dato letto dal vivo -------------------------------------------------
+ *
+ * Sta in cima alla risposta perché qualifica tutto ciò che segue: in fondo si
+ * leggerebbe dopo aver già creduto all'orario. Volutamente diversa
+ * dall'etichetta dei risultati web (`.info-answer__web`): quelli vengono da un
+ * motore di ricerca, questo dal portale del comune. È una differenza a favore,
+ * e appiattirla su un unico «non verificato» butterebbe via l'unica cosa che
+ * rende questa lettura migliore di una ricerca.
+ */
+
+.info-answer__vivo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--ma-2);
+  margin: 0 0 var(--ma-3);
+  padding: var(--ma-2);
+  border-inline-start: 3px solid var(--ai);
+  background: var(--paper-sunken);
+  font-size: 0.88rem;
+  color: var(--sumi-soft);
+}
+
+.info-answer__vivo-bollo {
+  flex: none;
+  padding: 0 var(--ma-2);
+  border: 1px solid var(--ai);
+  color: var(--ai);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Il comune si può dire, non si deve. Chi non lo dice riceve comunque una
+ * risposta: il sistema cerca un nome di comune nella frase, e se non lo trova
+ * lo chiede. L'etichetta lo dichiara perché un campo sopra la domanda, senza
+ * qualificazione, si legge come un passaggio obbligato. */
+.scelta-comune__facoltativo {
+  margin-inline-start: var(--ma-1, 4px);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--sumi-faint);
+}
+
+/* I due bottoni della conferma. Stanno accanto al comune perché è quello che
+ * qualificano: il GPS dice dove sei adesso, non dove risiedi, e finché
+ * nessuno lo conferma resta un'ipotesi. */
+.fatti__conferma {
+  display: inline-flex;
+  gap: var(--ma-2);
+  align-items: center;
+}
+
+.fatti__conferma button {
+  border: 1px solid var(--ai);
+  background: none;
+  color: var(--ai);
+  padding: 2px var(--ma-2);
+  font: inherit;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.fatti__conferma button:hover {
+  background: var(--ai);
+  color: var(--paper-raised);
+}
+
+.fatti__conferma--no {
+  border-color: var(--paper-sunken) !important;
+  color: var(--sumi-soft) !important;
+}
+
+.fatti__conferma--no:hover {
+  background: var(--paper-sunken) !important;
+  color: var(--sumi) !important;
+}
+
+/* --- Risposta civica -----------------------------------------------------
+ *
+ * La gerarchia è il contenuto: stato, sintesi, servizio, cosa confermo, cosa
+ * puoi fare, ufficio, fonte, tecnico. Prima era tutto un paragrafo solo, e in
+ * quel paragrafo il nome del connettore pesava quanto il numero di telefono.
+ */
+
+.civica {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ma-3);
+}
+
+.civica__stato {
+  align-self: flex-start;
+  margin: 0;
+  padding: 2px var(--ma-2);
+  border: 1px solid currentColor;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Il verde solo dove qualcosa è davvero confermato; l'ambra per ciò che manca
+ * — è già il codice che il resto dell'app usa per `unknown_source`. Nessun
+ * rosso: un dato non pubblicato non è un errore di nessuno. */
+.civica__stato[data-stato="ufficiale"] { color: var(--verde, #1b7f5a); }
+.civica__stato[data-stato="parziale"] { color: var(--ambra, #8a6100); }
+.civica__stato[data-stato="non_verificato"] { color: var(--sumi-soft); }
+.civica__stato[data-stato="non_pubblicato"] { color: var(--ambra, #8a6100); }
+
+.civica__sintesi {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+.civica__servizio {
+  border: 1px solid var(--paper-sunken);
+  background: var(--paper-raised);
+  padding: var(--ma-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ma-2);
+  align-items: flex-start;
+}
+
+.civica__servizio h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.35;
+}
+
+.civica__ente {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--sumi-faint);
+}
+
+.civica__cta {
+  display: inline-block;
+  padding: var(--ma-2) var(--ma-3);
+  background: var(--ai);
+  color: var(--paper-raised);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.civica__cta:hover { filter: brightness(1.1); }
+
+/* Il dominio sotto il bottone, non l'URL steso dentro la frase. */
+.civica__dominio {
+  font-size: 0.76rem;
+  color: var(--sumi-faint);
+}
+
+.civica__blocco h4 {
+  margin: 0 0 var(--ma-2);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--sumi-faint);
+}
+
+.civica__prove {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.civica__prove li {
+  display: flex;
+  gap: var(--ma-2);
+  align-items: baseline;
+  font-size: 0.92rem;
+}
+
+.civica__prove li[data-stato="confermato"] > span { color: var(--verde, #1b7f5a); }
+.civica__prove li[data-stato="parziale"] > span { color: var(--ambra, #8a6100); }
+.civica__prove li[data-stato="mancante"] > span { color: var(--sumi-faint); }
+.civica__prove li[data-stato="mancante"] { color: var(--sumi-soft); }
+
+.civica__azioni {
+  margin: 0;
+  padding-inline-start: 1.2em;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.92rem;
+}
+
+.civica__ufficio {
+  margin: 0 0 var(--ma-2);
+  font-weight: 600;
+}
+
+.civica__contatti {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ma-3);
+}
+
+.civica__contatto {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 12rem;
+  padding: var(--ma-2);
+  border: 1px solid var(--paper-sunken);
+  background: var(--paper-raised);
+  font-size: 0.9rem;
+}
+
+.civica__contatto-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--sumi-faint);
+}
+
+/* Gli orari come li scrive il comune, una riga per interruzione: comprimerli
+ * in una riga sola costringe a decifrarli, riscriverli sarebbe interpretarli. */
+.civica__contatto--orari span:not(.civica__contatto-label) {
+  font-variant-numeric: tabular-nums;
+}
+
+.civica__nota {
+  font-size: 0.78rem;
+  color: var(--sumi-faint);
+}
+
+.civica__blocco--web {
+  border-inline-start: 3px solid var(--ambra, #8a6100);
+  padding-inline-start: var(--ma-2);
+}
+
+.civica__web {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ma-2);
+  font-size: 0.9rem;
+}
+
+.civica__web li { display: flex; flex-direction: column; }
+
+/* Consultabile, non invadente: la misura del costo d'accesso è il prodotto,
+ * ma non è la risposta alla domanda di chi ha scritto. */
+.civica__tecnico {
+  border-top: 1px solid var(--paper-sunken);
+  padding-top: var(--ma-2);
+  font-size: 0.85rem;
+  color: var(--sumi-soft);
+}
+
+.civica__tecnico summary {
+  cursor: pointer;
+  color: var(--sumi-faint);
+  font-size: 0.8rem;
+}
+
+.civica__tecnico ul {
+  margin: var(--ma-2) 0 0;
+  padding-inline-start: 1.1em;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.civica__vivo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--ma-2);
+  margin: 0;
+  padding: var(--ma-2);
+  border-inline-start: 3px solid var(--ai);
+  background: var(--paper-sunken);
+  font-size: 0.88rem;
+  color: var(--sumi-soft);
+}
+
+.civica__vivo-bollo {
+  flex: none;
+  padding: 0 var(--ma-2);
+  border: 1px solid var(--ai);
+  color: var(--ai);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ── Scheda civica, seconda passata ──────────────────────────────────────────
+ * Tre cambi di sostanza, non di gusto.
+ *
+ * 1. Le intestazioni smettono di gridare. Tutto maiuscolo con la spaziatura
+ *    larga è il registro del modulo amministrativo: corretto per un'etichetta
+ *    di campo, sbagliato per una domanda rivolta a chi legge.
+ * 2. Le azioni diventano righe con un comando dentro. Erano link lunghi
+ *    sottolineati, indistinguibili dal testo redazionale.
+ * 3. I contatti stanno su due colonne fisse invece che a flusso: la PEC, che è
+ *    l'indirizzo più lungo, tirava la riga e sbilanciava tutto il blocco.
+ */
+
+.civica__bolli {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ma-2);
+  margin: 0;
+}
+
+.civica__stato[data-ruolo="completezza"] {
+  color: var(--ambra, #8a6100);
+}
+
+.civica__blocco h4 {
+  font-size: 0.95rem;
+  letter-spacing: 0;
+  text-transform: none;
+  font-weight: 600;
+  color: var(--sumi);
+}
+
+.civica__descrizione {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.45;
+  color: var(--sumi-soft);
+}
+
+.civica__servizio-piede {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--ma-2);
+  margin: 0;
+}
+
+.civica__verifica {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--sumi-faint);
+}
+
+.civica__azioni {
+  padding-inline-start: 0;
+  list-style: none;
+  gap: var(--ma-2);
+}
+
+.civica__azione {
+  display: grid;
+  grid-template-columns: 1.6rem 1fr auto;
+  align-items: center;
+  gap: var(--ma-2);
+  padding: var(--ma-2);
+  border: 1px solid var(--paper-sunken);
+  background: var(--paper-raised);
+}
+
+.civica__azione-num {
+  font-variant-numeric: tabular-nums;
+  font-size: 0.8rem;
+  color: var(--sumi-faint);
+  text-align: center;
+}
+
+.civica__azione-testo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.civica__azione-testo span {
+  font-size: 0.85rem;
+  color: var(--sumi-soft);
+}
+
+.civica__azione-cta,
+.civica__mini-cta {
+  padding: 4px var(--ma-2);
+  border: 1px solid currentColor;
+  font-size: 0.82rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.civica__contatti {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: var(--ma-2);
+}
+
+.civica__contatto {
+  min-width: 0;
+}
+
+/* Un indirizzo PEC non sta in quindici caratteri e non va troncato: chi lo
+ * legge deve poterlo trascrivere. Va a capo dove serve. */
+.civica__contatto a {
+  overflow-wrap: anywhere;
+}
+
+.civica__contatto-azioni {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ma-2);
+  margin-top: var(--ma-2);
+}
+
+.civica__copia {
+  padding: 4px var(--ma-2);
+  border: 1px solid var(--paper-sunken);
+  background: transparent;
+  font: inherit;
+  font-size: 0.82rem;
+  color: var(--sumi-soft);
+  cursor: pointer;
+}
+
+.civica__copia:hover {
+  border-color: currentColor;
+}
+
+@media (max-width: 30rem) {
+  .civica__azione {
+    grid-template-columns: 1.6rem 1fr;
+  }
+
+  .civica__azione-cta {
+    grid-column: 2;
+    justify-self: start;
+  }
+}
+
+/* La descrizione è quella del comune, e a volte è l'intero elenco delle
+ * notizie della sezione. Non la riscriviamo — sarebbe interpretarla — ma
+ * nella scheda ne mostriamo due righe: il resto sta nella pagina, che è a un
+ * clic di distanza e resta la fonte. */
+.civica__descrizione {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* «TIQ» da solo è una sigla; accanto al nome va detto chi risponde. */
+.bubble__ruolo {
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  color: var(--sumi-faint);
+}
+
+/* Il titolo del servizio e' quello del comune, e a volte il comune ci mette
+ * dentro nove uffici in fila ("Anagrafe, Stato civile, Elettorale,
+ * Statistica, Leva, Protocollo, Polizia mortuaria e Servizi cimiteriali, URP,
+ * Notifiche"). Non lo accorciamo — sarebbe riscrivere la fonte — ma nella
+ * scheda ne mostriamo tre righe: il resto e' sulla pagina, a un clic. */
+.civica__servizio h3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ── Profili di prova, formato tessera ──────────────────────────────────────
+ * L'idea e' la carta d'identita', e si ferma all'idea: banda emittente in
+ * testa, ritratto a sinistra, campi con la loro etichetta a destra, striscia
+ * in fondo. Nessun emblema della Repubblica, nessun logo CIE, nessun numero
+ * documento, nessun codice a barre: un finto documento che sembra vero non
+ * deve esistere, tantomeno dentro un video pubblico.
+ *
+ * Il formato serve a far capire in un colpo d'occhio cosa si sta scegliendo —
+ * una persona con una situazione, non quattro righe di parametri — e a
+ * ricordare, mentre lo si sceglie, che in un servizio vero quei dati
+ * arriverebbero da SPID o CIE e non da qui.
+ */
+
+.accesso__profilo {
+  padding: 0;
+  overflow: hidden;
+  gap: 0;
+  display: block;
+  text-align: start;
+}
+
+.tessera__banda {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--ma-2);
+  padding: 3px var(--ma-3);
+  background: var(--ai-deep);
+  color: #fff;
+}
+
+.tessera__emittente {
+  font-weight: 600;
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+}
+
+.tessera__tipo {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+.tessera__corpo {
+  display: grid;
+  grid-template-columns: 4rem 1fr;
+  gap: var(--ma-3);
+  padding: var(--ma-2) var(--ma-3);
+  align-items: start;
+}
+
+/* Il riquadro della foto: bordo netto e proporzione da fototessera. */
+.tessera__ritratto {
+  display: block;
+  border: 1px solid var(--kasumi);
+  background: #eef2f7;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.tessera__ritratto svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.tessera__dati {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+/* Ogni campo e' etichetta minuscola sopra, valore sotto: e' quello che rende
+ * una tessera leggibile come tessera invece che come elenco puntato. */
+.tessera__campo {
+  display: grid;
+  gap: 1px;
+  min-width: 0;
+}
+
+.tessera__campo em {
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sumi-faint);
+}
+
+.tessera__campo b {
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: var(--sumi);
+  overflow-wrap: anywhere;
+}
+
+.tessera__campo--nome b {
+  font-weight: 600;
+  font-size: 1.05rem;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+}
+
+/* La situazione sotto il nome, senza etichetta: si legge da sola. */
+.tessera__ruolo {
+  font-size: 0.9rem;
+  line-height: 1.25;
+  color: var(--sumi);
+  margin-bottom: 4px;
+}
+
+.tessera__mono {
+  font-family: var(--font-mono);
+  font-size: 0.78rem !important;
+  color: var(--sumi-soft) !important;
+}
+
+.tessera__nota {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.84rem;
+  line-height: 1.35;
+  color: var(--sumi-soft);
+}
+
+.tessera__piede {
+  display: block;
+  padding: 3px var(--ma-3);
+  border-top: 1px dashed var(--kasumi);
+  background: var(--paper-sunken);
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sumi-faint);
+}
+
+@media (max-width: 26rem) {
+  .tessera__corpo {
+    grid-template-columns: 3.5rem 1fr;
+  }
+}
+
+/* Due colonne: quattro tessere entrano in uno schermo qualunque sia l'altezza
+ * della finestra, e il problema dello spazio verticale non si ripresenta la
+ * prossima volta che una riga si allunga. Sotto i 44rem tornano in colonna:
+ * una tessera stretta a meta' non e' piu' leggibile come tessera. */
+.accesso__lista {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* Il pannello si allarga per reggere due colonne, ma il testo introduttivo
+ * no: una riga lunga il doppio si legge peggio, e quel paragrafo e' la parte
+ * che spiega perche' qui non serve nessuna credenziale vera. */
+.accesso__pannello {
+  max-width: 860px;
+}
+
+.accesso__spiega {
+  max-width: 62ch;
+}
+
+@media (max-width: 44rem) {
+  .accesso__lista {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ── Mappa del sistema (/info) ──────────────────────────────────────────────
+ * Il diagramma scala con la colonna e non scrolla mai in orizzontale: una
+ * figura che si legge solo trascinandola non spiega niente. */
+.mappa {
+  margin: var(--ma-4) 0;
+}
+
+.mappa svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.mappa__fascia {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  fill: var(--sumi-faint);
+}
+
+.mappa__titolo {
+  font-size: 14px;
+  font-weight: 600;
+  fill: var(--sumi);
+  text-anchor: middle;
+}
+
+.mappa__riga {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  fill: var(--sumi-soft);
+  text-anchor: middle;
+}
+
+/* Niente `text-anchor` qui: il CSS vincerebbe sull'attributo SVG, e le
+ * etichette delle frecce verticali devono poter stare allineate a sinistra. */
+.mappa__etichetta {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  fill: var(--sumi-faint);
+}
+
+.mappa__nota {
+  font-size: 12.5px;
+  fill: var(--sumi-soft);
+}
+
+.mappa__legenda {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ma-3);
+  margin-top: var(--ma-2);
+  font-size: 0.82rem;
+  color: var(--sumi-soft);
+}
+
+.mappa__bollo {
+  display: inline-block;
+  width: 0.8rem;
+  height: 0.8rem;
+  margin-inline-end: 6px;
+  border: 1.5px solid var(--kasumi);
+  vertical-align: -1px;
+}
+
+.mappa__bollo--offline { background: var(--paper-raised); }
+.mappa__bollo--vivo { background: var(--ai-wash); border-color: var(--ai); }
+.mappa__bollo--esterno { background: var(--paper-sunken); }
+
+/* ── Analytics e connettori ──────────────────────────────────────────────── */
+
+.pagina {
+  /* Nessuna larghezza propria: la decide `.stack`, come per il resto del
+     sito. Un secondo contenitore con una sua misura era esattamente il
+     disaccordo fra max-width che `.stack` era nato per chiudere. */
+  padding: var(--ma-8) var(--ma-4) var(--ma-24);
+}
+.pagina h1 {
+  font-family: var(--font-display);
+  margin: 0 0 var(--ma-2);
+}
+.pagina h2 {
+  font-family: var(--font-display);
+  margin: var(--ma-12) 0 var(--ma-2);
+  padding-left: var(--ma-3);
+  border-left: 3px solid var(--ai);
+}
+.occhiello {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ai);
+  margin: 0 0 var(--ma-2);
+}
+.sottotitolo {
+  color: var(--sumi-soft);
+  margin: 0 0 var(--ma-4);
+}
+.nota {
+  color: var(--sumi-soft);
+  font-size: 14px;
+  margin: 0 0 var(--ma-4);
+}
+.vuoto {
+  color: var(--sumi-soft);
+  border: 1px dashed var(--kasumi);
+  border-radius: var(--radius);
+  padding: var(--ma-6);
+}
+
+.tessere {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--ma-3);
+  margin: var(--ma-6) 0;
+}
+.tessera {
+  background: var(--paper-raised);
+  border: 1px solid var(--kasumi);
+  border-radius: var(--radius);
+  padding: var(--ma-4);
+}
+.tessera b {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 26px;
+  color: var(--ai);
+}
+.tessera span {
+  font-size: 13px;
+  color: var(--sumi-soft);
+}
+
+/* Le tabelle larghe scorrono dentro il proprio riquadro: la pagina non deve
+   mai scorrere in orizzontale, o su telefono si perde la prima colonna. */
+.tabella-scorrevole {
+  overflow-x: auto;
+  border: 1px solid var(--kasumi);
+  border-radius: var(--radius);
+  margin: var(--ma-4) 0;
+}
+.tabella-scorrevole table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.tabella-scorrevole caption {
+  text-align: left;
+  padding: var(--ma-3) var(--ma-4) 0;
+  color: var(--sumi-soft);
+  font-size: 13px;
+}
+.tabella-scorrevole th,
+.tabella-scorrevole td {
+  padding: var(--ma-2) var(--ma-4);
+  text-align: left;
+  border-bottom: 1px solid var(--kasumi);
+  white-space: nowrap;
+}
+.tabella-scorrevole thead th {
+  font-family: var(--font-display);
+  font-weight: 500;
+  background: var(--paper-sunken);
+}
+.tabella-scorrevole tbody tr:last-child th,
+.tabella-scorrevole tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.schede-connettori {
+  list-style: none;
+  padding: 0;
+  margin: var(--ma-4) 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--ma-3);
+}
+.schede-connettori li {
+  background: var(--paper-raised);
+  border: 1px solid var(--kasumi);
+  border-left: 4px solid var(--ai);
+  border-radius: var(--radius);
+  padding: var(--ma-4);
+}
+.schede-connettori h3 {
+  font-family: var(--font-display);
+  font-size: 15px;
+  margin: 0 0 var(--ma-1);
+}
+.diffusione {
+  font-size: 13px;
+  color: var(--sumi-soft);
+  margin: 0 0 var(--ma-2);
+}
+.schede-connettori code {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  background: var(--paper-sunken);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  word-break: break-all;
+}
+.nota-connettore {
+  font-size: 12.5px;
+  color: var(--sumi-soft);
+  margin: var(--ma-2) 0 0;
+}
+
+/* --------------------------------------------------------- scheda-comune */
+
+/* La pagina /comune/[istat] (B4). Stile civico-giapponese esistente: token
+   `--paper`/`--sumi`/`--ai`, niente Inter/gradient/emoji. B4 è l'unico
+   proprietario di globals.css in questo ciclo — le due classi in fondo a
+   questo blocco (`.pannello__scheda-link`, `.scan-refresh`) sono pinnate qui
+   per B5 (link sidebar) e B6 (indicatore refresh), non ancora consumate. */
+.scheda-comune__testata {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ma-6);
+  flex-wrap: wrap;
+  /* Testata come biglietto, non riga nuda: fondo carta rialzata, accento
+     civico a sinistra (stessa autorità dei link, `--ai`), così la pagina apre
+     con un segno invece che con testo sospeso nel bianco. */
+  padding: var(--ma-5) var(--ma-6);
+  background: var(--paper-raised);
+  border: 1px solid var(--kasumi);
+  border-left: 3px solid var(--ai);
+  border-radius: var(--radius-sm);
+}
+/* Le sezioni della scheda (Connettore, Servizi, Contatti…) sono `.panel`
+   generici: nudi, leggevano «scarni». Qui, scoped sotto `.scheda-comune`, li
+   allineo al linguaggio della testata — accento civico `--ai`, ritmo, un tick
+   sul titolo — senza toccare `.panel` altrove. */
+.scheda-comune.stack {
+  gap: var(--ma-6);
+  /* Stacco dalla nav sticky: la card hero non deve incollarsi all'header. */
+  margin-top: var(--ma-5);
+}
+.scheda-comune .panel {
+  position: relative;
+  border-left: 3px solid transparent;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+.scheda-comune .panel:hover {
+  border-left-color: var(--ai);
+  box-shadow: 0 1px 0 var(--kasumi), 0 6px 18px -14px var(--sumi);
+}
+/* Titolo di sezione con tick civico a sinistra: stesso segno del bordo testata,
+   trasforma un «Connettore» sospeso in un'etichetta con autorità. */
+.scheda-comune .panel > h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.55em;
+  margin-top: 0;
+  font-size: 1.1rem;
+}
+.scheda-comune .panel > h2::before {
+  content: "";
+  flex: none;
+  width: 3px;
+  height: 0.95em;
+  background: var(--ai);
+  border-radius: 2px;
+}
+.scheda-comune__logo {
+  /* Lo stemma prende tutta l'altezza della testata (nome → ultimo scan):
+     `align-self: stretch` lo allunga fin dove arriva la colonna di testo,
+     `min-height` gli dà corpo anche quando il testo è corto. Largo fisso,
+     alto elastico. */
+  width: 108px;
+  align-self: stretch;
+  min-height: 108px;
+  height: auto;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  border: 1px solid var(--kasumi);
+  padding: var(--ma-3);
+  flex: none;
+}
+/* Monogramma quando lo stemma non c'è: stesso ingombro del logo, iniziale in
+   mono su fondo civico. Un segno, non uno stemma finto. */
+.scheda-comune__logo--mono {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: var(--ai-wash, #e3edf9);
+  color: var(--ai-deep);
+  font-family: var(--font-mono);
+  font-size: 2.6rem;
+  font-weight: 700;
+  line-height: 1;
+}
+/* Bottone «Chiedi al comune»: staccato dal testo sopra — prima incollato.
+   `.button` è un <a> inline: `margin-top` non spinge finché resta inline,
+   quindi `inline-block` per far valere lo stacco verticale. */
+.scheda-comune__apri {
+  display: inline-block;
+  margin-top: var(--ma-5);
+}
+.scheda-comune__aderenza-cifra {
+  margin: 0 0 var(--ma-4);
+  font-size: 1.1rem;
+}
+.scheda-comune__aderenza-cifra strong {
+  font-family: var(--font-mono);
+  font-size: 1.4rem;
+  color: var(--ai-deep);
+}
+/* Le quattro superfici AgID come mini-card in griglia 2×2 (auto-fit sotto i
+   ~440px → una colonna), non più righe piatte separate da un filo. Ogni card
+   porta un'iconcina e un badge-stato colorato: blu autorità = via REST, giallo
+   «meno certo» = via scrape, grigio spento = non raggiunta. */
+.scheda-comune__superfici {
+  list-style: none;
+  margin: var(--ma-4) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--ma-3);
+}
+.scheda-comune__superficie {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: var(--ma-2) var(--ma-3);
+  padding: var(--ma-3);
+  border: 1px solid var(--kasumi);
+  border-left: 3px solid var(--sumi-faint);
+  border-radius: var(--radius-sm);
+  background: var(--paper-raised);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.scheda-comune__superficie:hover {
+  box-shadow: 0 2px 10px rgba(11, 29, 58, 0.08);
+}
+.scheda-comune__superficie-icona {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-sm);
+  background: var(--paper-sunken);
+  color: var(--sumi-faint);
+}
+.scheda-comune__superficie-nome {
+  font-weight: 600;
+  color: var(--sumi);
+  text-transform: capitalize;
+}
+.scheda-comune__superficie-via {
+  grid-column: 2;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  color: var(--sumi-faint);
+  white-space: nowrap;
+}
+/* Stato = accento sinistro + tinta dell'iconcina. */
+.scheda-comune__superficie--rest {
+  border-left-color: var(--ai);
+}
+.scheda-comune__superficie--rest .scheda-comune__superficie-icona {
+  background: var(--ai-wash);
+  color: var(--ai);
+}
+.scheda-comune__superficie--rest .scheda-comune__superficie-via {
+  color: var(--ai-deep);
+}
+.scheda-comune__superficie--scrape {
+  border-left-color: var(--yamabuki);
+}
+.scheda-comune__superficie--scrape .scheda-comune__superficie-icona {
+  background: var(--yamabuki-wash);
+  color: var(--yamabuki-deep);
+}
+.scheda-comune__superficie--scrape .scheda-comune__superficie-via {
+  color: var(--yamabuki-deep);
+}
+.scheda-comune__superficie--assente {
+  border-left-color: var(--kasumi);
+  opacity: 0.7;
+}
+.scheda-comune__chip-riga {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ma-2);
+  margin-top: var(--ma-3);
+}
+.scheda-comune__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ma-2);
+  padding: var(--ma-1) var(--ma-3);
+  border-radius: 999px;
+  border: 1px solid var(--kasumi);
+  background: var(--paper-raised);
+  font-size: 0.82rem;
+}
+.scheda-comune__chip-conteggio {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--sumi-faint);
+}
+.scheda-comune__contatti {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: var(--ma-2) var(--ma-3);
+  margin: 0;
+}
+.scheda-comune__contatti-riga {
+  display: contents;
+}
+.scheda-comune__contatti dt {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sumi-soft);
+  align-self: baseline;
+}
+.scheda-comune__contatti dd {
+  margin: 0;
+  font-size: 0.92rem;
+  word-break: break-word;
+}
+.scheda-comune__orari-citazione {
+  margin: var(--ma-2) 0 0;
+  padding-left: var(--ma-4);
+  border-left: 3px solid var(--kasumi);
+  font-style: italic;
+  color: var(--sumi-soft);
+}
+
+/* Pinnato per B5: link dal pannello sidebar alla scheda-comune. */
+.pannello__scheda-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ma-2);
+  margin-top: var(--ma-3);
+  font-size: 0.82rem;
+  color: var(--ai);
+}
+.pannello__scheda-link:hover {
+  color: var(--ai-deep);
+}
+
+/* Pinnato per B6: indicatore di refresh-on-search (D-S6) — scan >6gg in
+   aggiornamento. Barra ambra come le altre note «da verificare», mai
+   bloccante: il testo del consumatore decide se offrire attendi/attuali. */
+.scan-refresh {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ma-2);
+  padding: var(--ma-1) var(--ma-3);
+  border-radius: 999px;
+  background: var(--yamabuki-wash);
+  color: var(--yamabuki-deep);
+  font-size: 0.78rem;
+  font-weight: 600;
+  /* La banda intera pulsa piano: dice «in corso» a colpo d'occhio anche senza
+     leggere. A scan finito <ScanLive> passa dalla banda al bottone «Ricarica»,
+     quindi il lampeggio si ferma da solo — nessuna classe di stop da gestire. */
+  animation: scan-refresh-pulse 1.15s ease-in-out infinite;
+}
+/* La data dell'ultima lettura, dentro la banda: secondaria, non deve rubare
+   l'occhio al «sto leggendo». */
+.scan-refresh__data {
+  font-weight: 500;
+  opacity: 0.8;
+}
+/* Cornice comune ai due punti in cui vive la spia (chat e pannello): stacco
+   verticale dal contenuto vicino. La variante cambia solo il respiro, non la
+   logica — lo stato è unico (lib/scan). */
+.scan-live--chat {
+  display: block;
+  margin: var(--ma-3) 0;
+}
+.scan-live--pannello {
+  display: block;
+  margin: var(--ma-3) 0 0;
+}
+/* Bottone «Ricarica con dati aggiornati»: compare al posto della banda quando
+   il refresh ha riscritto il record. Rilancia l'ultima domanda coi dati freschi.
+   Stile coerente coi toni yamabuki della banda, ma cliccabile e a piena riga nel
+   pannello, compatto in chat. */
+.scan-ricarica {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ma-2);
+  padding: var(--ma-2) var(--ma-3);
+  border: 1px solid var(--yamabuki-deep);
+  border-radius: 999px;
+  background: var(--yamabuki-wash);
+  color: var(--yamabuki-deep);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 120ms ease, transform 120ms ease;
+}
+.scan-ricarica:hover {
+  background: var(--yamabuki-deep);
+  color: var(--paper, #fff);
+}
+.scan-ricarica:active {
+  transform: translateY(1px);
+}
+.scan-ricarica__icona {
+  font-size: 0.95rem;
+  line-height: 1;
+}
+.scan-live--pannello .scan-ricarica {
+  width: 100%;
+  justify-content: center;
+}
+/* Pallino guida davanti al testo: stesso battito, più marcato, così il moto si
+   vede anche se il contrasto della banda è tenue in cattura video. */
+.scan-refresh__pulse {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 999px;
+  background: var(--yamabuki-deep);
+  flex: none;
+  animation: scan-refresh-blink 1.15s ease-in-out infinite;
+}
+@keyframes scan-refresh-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+@keyframes scan-refresh-blink {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(0.6);
+    opacity: 0.35;
+  }
+}
+/* Rispetto di chi ha ridotto le animazioni di sistema: niente battito, la
+   banda resta visibile e leggibile, solo ferma. */
+@media (prefers-reduced-motion: reduce) {
+  .scan-refresh,
+  .scan-refresh__pulse {
+    animation: none;
   }
 }

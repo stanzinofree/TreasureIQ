@@ -324,7 +324,13 @@ def _score_national_catalogue(
 
 
 def _score_freshness(records: list[Opportunity], today: date | None = None) -> DimensionScore:
-    """Is the catalogue maintained, or was it published once and abandoned?"""
+    """Is the catalogue maintained, or was it published once and abandoned?
+
+    Only deadline-bearing measures enter the ratio. A permanent service (no
+    deadline — e.g. school bus enrolment) never goes stale by definition, so
+    counting it would either dilute a genuinely neglected catalogue of bandi
+    or falsely punish a catalogue that simply has none to expire.
+    """
     weight = WEIGHTS["freshness"]
     if not records:
         return DimensionScore(
@@ -337,26 +343,25 @@ def _score_freshness(records: list[Opportunity], today: date | None = None) -> D
 
     today = today or date.today()
     cutoff = today - FRESHNESS_HORIZON
-    dated = [r for r in records if r.opens_at is not None]
+    dated = [r for r in records if r.deadline is not None]
     if not dated:
         return DimensionScore(
             key="freshness",
             label="Aggiornamento del catalogo",
-            earned=0.0,
+            earned=weight,
             weight=weight,
-            evidence="nessuna data di pubblicazione nei record",
-            remedy="Esporre la data di pubblicazione o ultimo aggiornamento.",
+            evidence="catalogo di servizi permanenti, nessuna misura a scadenza",
         )
 
-    recent = sum(1 for r in dated if r.opens_at and r.opens_at >= cutoff)
+    recent = sum(1 for r in dated if r.deadline >= cutoff)
     ratio = recent / len(dated)
     return DimensionScore(
         key="freshness",
         label="Aggiornamento del catalogo",
         earned=weight * ratio,
         weight=weight,
-        evidence=f"{recent}/{len(dated)} record aggiornati negli ultimi 13 mesi",
-        remedy=("Rimuovere o archiviare i servizi non più attivi." if ratio < 1 else ""),
+        evidence=f"{recent}/{len(dated)} misure a scadenza entro l'orizzonte di aggiornamento",
+        remedy=("Rimuovere o archiviare i bandi scaduti." if ratio < 1 else ""),
     )
 
 

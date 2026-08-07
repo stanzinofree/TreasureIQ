@@ -1,0 +1,18 @@
+{
+ "isee_max": null,
+ "isee_min": null,
+ "isee_mentioned_without_threshold": false,
+ "eta_min": null,
+ "eta_max": null,
+ "nucleo_min": null,
+ "figli_minori_required": false,
+ "disabilita_required": false,
+ "residenza_required": null,
+ "employment_status": [],
+ "other": [],
+ "quotes": [],
+ "deadline_iso": null,
+ "notes": [
+  "Il testo non menziona alcun requisito di accesso per i soggetti che desiderano iscriversi all’Albo Fornitori e Professionisti. Non sono indicati criteri di eleggibilità come ISEE, età, numero di componenti del nucleo familiare, presenza di figli minori, disabilità, stato occupazionale, residenza, ecc."
+ ]
+}

@@ -1,0 +1,56 @@
+# Costruisce il sito vetrina (site/) e lo pubblica su GitHub Pages.
+# La sorgente Markdown vive in docs/ e site/vetrina.html; l'HTML lo genera
+# site/build.py. Nessun HTML costruito è committato: è tutto ricostruito qui.
+name: Sito vetrina
+
+on:
+  push:
+    branches: [main]
+    # Ricostruisci solo se cambia qualcosa che finisce nel sito.
+    paths:
+      - "docs/**"
+      - "site/**"
+      - ".github/workflows/pages.yml"
+  # Permette il rebuild manuale dalla tab Actions senza un push.
+  workflow_dispatch:
+
+# Una sola pubblicazione alla volta; se ne arrivano due, l'ultima vince.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+# Permessi minimi per pubblicare su Pages via OIDC.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # L'unica dipendenza del generatore.
+      - run: pip install markdown
+
+      # base=/TreasureIQ perché è una project page (utente.github.io/TreasureIQ).
+      - run: python site/build.py --out site/_site --base /TreasureIQ
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site/_site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

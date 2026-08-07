@@ -1,0 +1,56 @@
+{
+ "isee_max": null,
+ "isee_min": null,
+ "isee_mentioned_without_threshold": false,
+ "eta_min": null,
+ "eta_max": null,
+ "nucleo_min": null,
+ "figli_minori_required": false,
+ "disabilita_required": false,
+ "residenza_required": null,
+ "employment_status": [],
+ "other": [
+  "Per tutti i soggetti che hanno esigenze alimentari particolari, transitorie o permanenti, e necessitano quindi di un pasto scolastico speciale",
+  "Compilare con scrittura chiara e leggibile il modulo richiesta di pasto speciale, indicando scuola, classe e sezione",
+  "Solo se la richiesta di pasto speciale deriva da comprovati motivi di salute (allergie, intolleranze, patologie cliniche ecc) è necessario fornire il certificato medico debitamente timbrato e firmato dal proprio medico curante o analogo specialista",
+  "Per motivazioni di natura etico-religiosa sarà sufficiente compilare solo il modulo richiesta di pasto speciale",
+  "Inviare la documentazione per mail a scuolealbano@bioristoroitalia.it e ufficiodietetico@bioristoroitalia.it",
+  "Inviare la documentazione completa via FAX al numero 06/96.40.169",
+  "Inviare la documentazione attraverso il portale utente RistoCloud"
+ ],
+ "quotes": [
+  {
+   "field": "other",
+   "text": "Per tutti i soggetti che hanno esigenze alimentari particolari, transitorie o permanenti, e necessitano quindi di un pasto scolastico speciale"
+  },
+  {
+   "field": "other",
+   "text": "Compilare con scrittura chiara e leggibile il modulo richiesta di pasto speciale, indicando scuola, classe e sezione"
+  },
+  {
+   "field": "other",
+   "text": "Solo se la richiesta di pasto speciale deriva da comprovati motivi di salute (allergie, intolleranze, patologie cliniche ecc) è necessario fornire il certificato medico debitamente timbrato e firmato dal proprio medico curante o analogo specialista"
+  },
+  {
+   "field": "other",
+   "text": "Per motivazioni di natura etico-religiosa sarà sufficiente compilare solo il modulo richiesta di pasto speciale"
+  },
+  {
+   "field": "other",
+   "text": "Inviare la documentazione per mail a scuolealbano@bioristoroitalia.it e ufficiodietetico@bioristoroitalia.it"
+  },
+  {
+   "field": "other",
+   "text": "Inviare la documentazione completa via FAX al numero 06/96.40.169"
+  },
+  {
+   "field": "other",
+   "text": "Inviare la documentazione attraverso il portale utente RistoCloud"
+  }
+ ],
+ "deadline_iso": null,
+ "notes": [
+  "Non è indicata la scadenza per la presentazione della domanda",
+  "Non è indicata alcuna soglia ISEE, né altre condizioni di accesso come età, residenza, numero di componenti del nucleo familiare, presenza di figli minorenni o disabilità"
+ ]
+}

@@ -1,0 +1,19 @@
+{
+ "query": "contributo libri di testo bando Fonte Nuova",
+ "provider": "brave",
+ "fetched_at": "2026-08-03T17:10:49.822688Z",
+ "results": [
+  {
+   "title": "Comune di Bologna",
+   "url": "https://www.comune.bologna.it/servizi-informazioni/contributo-libri-testo"
+  },
+  {
+   "title": "Richiedere il contributo per i libri di testo",
+   "url": "https://www.comune.bologna.it/servizi/educazione-formazione/contributo-libri-testo"
+  },
+  {
+   "title": "Comune di Pesaro : Contributo testi scolastici",
+   "url": "https://www.comune.pesaro.pu.it/servizieducativi/altri-servizi-0-19-anni/serv-complementari/contributo-testi-scolastici/"
+  }
+ ]
+}

@@ -1,0 +1,30 @@
+{
+ "isee_max": null,
+ "isee_min": null,
+ "isee_mentioned_without_threshold": false,
+ "eta_min": null,
+ "eta_max": null,
+ "nucleo_min": null,
+ "figli_minori_required": null,
+ "disabilita_required": null,
+ "residenza_required": null,
+ "employment_status": [],
+ "other": [
+  "È necessario autenticarsi per visualizzare la sezione richiesta.",
+  "Per accedere ai servizi autenticati è possibile utilizzare SPID, CIE, eIDAS, CNS / TS-CNS."
+ ],
+ "quotes": [
+  {
+   "field": "other",
+   "text": "È necessario autenticarsi per visualizzare la sezione richiesta."
+  },
+  {
+   "field": "other",
+   "text": "Per accedere ai servizi autenticati è possibile utilizzare SPID, CIE, eIDAS, CNS / TS-CNS."
+  }
+ ],
+ "deadline_iso": null,
+ "notes": [
+  "Non sono indicati requisiti specifici per l'accesso all'area personale, ma solo i metodi di autenticazione disponibili."
+ ]
+}

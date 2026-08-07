@@ -1,0 +1,18 @@
+{
+ "isee_max": null,
+ "isee_min": null,
+ "isee_mentioned_without_threshold": false,
+ "eta_min": null,
+ "eta_max": null,
+ "nucleo_min": null,
+ "figli_minori_required": null,
+ "disabilita_required": null,
+ "residenza_required": null,
+ "employment_status": [],
+ "other": [],
+ "quotes": [],
+ "deadline_iso": null,
+ "notes": [
+  "Il testo non fornisce informazioni sui requisiti di accesso al contributo regionale per la fornitura gratuita dei libri di testo/sussidi didattici digitali. Non sono indicati criteri come ISEE, età, numero di componenti del nucleo familiare, presenza di figli minorenni, disabilità, stato occupazionale, residenza, o altre condizioni specifiche."
+ ]
+}

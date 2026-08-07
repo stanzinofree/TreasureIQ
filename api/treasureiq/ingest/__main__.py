@@ -17,12 +17,21 @@ import logging
 import sys
 from pathlib import Path
 
+from treasureiq.extract.llm import load_extractor
+from treasureiq.ingest.html_pages import HTMLPagesConnector
 from treasureiq.ingest.wp_comuni import WPComuniConnector
+from treasureiq.ingest.wp_pages import WPPagesConnector
 from treasureiq.readiness import score_comune
 from treasureiq.schema import Opportunity
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 SEED_DIR = REPO_ROOT / "data" / "seed"
+
+#: D-15 budget knob: how many candidate `pages` the six keyword searches may
+#: surface before the content filter and the LLM extractor ever run. Bounds
+#: total ingestion wall-clock (each extracted page costs ~10-60s depending on
+#: how many PDF attachments it links; see `.kapi/spike-d07.md`).
+PAGES_MAX_CANDIDATES = 15
 
 #: Sources with a committed snapshot. Adding a comune here is the only change
 #: needed to bring it into the demo, provided a connector can read it.
@@ -32,6 +41,96 @@ SOURCES = [
         "ente": "Comune di Albano Laziale",
         "base_url": "https://comune.albanolaziale.rm.it",
         "seed": "albano_058003.json",
+        "connector": "wp_rest",
+    },
+    {
+        # Comparator (D-18). Of the 119 comuni in the province of Rome, 20 expose
+        # a working /servizi API; Fonte Nuova ranks 1st with 34, Albano 2nd with
+        # 32, and the two are close in size (~35k vs ~41k residents). Two measured
+        # comuni make the recovery-cost metric comparative instead of absolute.
+        "codice_istat": "058122",
+        "ente": "Comune di Fonte Nuova",
+        "base_url": "https://comune.fontenuova.rm.it",
+        "seed": "fontenuova_058122.json",
+        "connector": "wp_rest",
+    },
+    {
+        # D-22/D-24 yardstick: no public API (`/wp-json` measured 410 Gone,
+        # `data/enti.json`), 0 dati.gov.it datasets, server-side HTML only —
+        # exactly the case `HTMLPagesConnector` exists for. `/it/menu/servizi`
+        # is the measured servizi index (`.kapi/spec.md` amendments round 2,
+        # F-3); `/it/` is the homepage.
+        "codice_istat": "058009",
+        "ente": "Comune di Ariccia",
+        "base_url": "https://comune.ariccia.rm.it",
+        "seed": "ariccia_058009.json",
+        "connector": "html",
+        "listing_paths": ("/it/", "/it/menu/servizi"),
+    },
+    {
+        # Second M4 measurement (D-21 comparative benchmark): `/wp-json`
+        # measured 404, Drupal + Halley — a different template than Ariccia's,
+        # so the connector's selectors are exercised against a second stack,
+        # not just re-run on the one they were written for. No measured
+        # servizi-index path here (scope cut, see B24 return notes) — homepage
+        # only.
+        "codice_istat": "058043",
+        "ente": "Comune di Genzano di Roma",
+        "base_url": "https://www.comune.genzanodiroma.roma.it",
+        "seed": "genzano_058043.json",
+        "connector": "html",
+        "listing_paths": ("/",),
+    },
+    # ── Comuni entrati dal censimento nazionale del 5 agosto 2026 ────────────
+    #
+    # Fino a questo punto la lista era scritta a mano perche' non sapevamo
+    # quali altri comuni fossero leggibili. Ora il censimento lo dice per tutti
+    # e 7.896: questi cinque sono su `wp_design_comuni`, cioe' esattamente il
+    # tema che `wp_rest` gia' legge, scelti per coprire nord, centro, sud e
+    # isole invece dei soli Castelli Romani.
+    #
+    # Benevento e Mesagne sono la ragione principale della scelta: sono fra i
+    # 38 comuni italiani che il campo dei requisiti lo compilano davvero.
+    # Senza almeno un comune cosi', TreasureIQ puo' solo rispondere «il tuo
+    # comune non lo dice» — vero, ma indistinguibile da un sistema che non sa
+    # cercare.
+    {
+        "codice_istat": "046017",
+        "ente": "Comune di Lucca",
+        "base_url": "https://www.comune.lucca.it",
+        "seed": "lucca_046017.json",
+        "connector": "wp_rest",
+    },
+    {
+        # Requisiti pubblicati: il caso positivo che mancava alla demo.
+        "codice_istat": "062008",
+        "ente": "Comune di Benevento",
+        "base_url": "https://comune.benevento.it",
+        "seed": "benevento_062008.json",
+        "connector": "wp_rest",
+    },
+    {
+        "codice_istat": "074012",
+        "ente": "Comune di Ostuni",
+        "base_url": "https://www.comune.ostuni.br.it",
+        "seed": "ostuni_074012.json",
+        "connector": "wp_rest",
+    },
+    {
+        # Comune piccolo e isolano: serve a mostrare che la copertura non
+        # dipende dalla dimensione dell'ente.
+        "codice_istat": "083044",
+        "ente": "Comune di Malvagna",
+        "base_url": "https://www.comune.malvagna.me.it",
+        "seed": "malvagna_083044.json",
+        "connector": "wp_rest",
+    },
+    {
+        # Requisiti pubblicati, come Benevento.
+        "codice_istat": "074010",
+        "ente": "Comune di Mesagne",
+        "base_url": "https://www.comune.mesagne.br.it",
+        "seed": "mesagne_074010.json",
         "connector": "wp_rest",
     },
 ]
@@ -78,25 +177,99 @@ def run(argv: list[str] | None = None) -> int:
     exit_code = 0
     for source in sources:
         print(f"\n{source['ente']} ({source['codice_istat']})")
-        try:
-            with WPComuniConnector(
-                base_url=source["base_url"],
-                ente=source["ente"],
-                codice_istat=source["codice_istat"],
-            ) as connector:
-                records = connector.fetch()
-        except Exception as exc:
-            # One unreachable source must not abort the others: a partial
-            # refresh with a clear failure beats an all-or-nothing run.
-            print(f"  fonte non raggiungibile: {exc}", file=sys.stderr)
-            exit_code = 1
-            continue
 
-        stats = connector.stats
-        print(f"  letti {stats.records_seen}, normalizzati {stats.records_emitted}")
-        if stats.errors:
-            print(f"  {len(stats.errors)} record scartati")
-            exit_code = 1
+        if source["connector"] == "html":
+            # D-22: no `/wp-json` on these sites (`data/enti.json` M4 probe) —
+            # the WP legs below would just log a 404/410 for nothing, so this
+            # source skips them entirely and runs the generic HTML connector
+            # instead. Fail-soft matches the WP legs: one unreachable comune
+            # must not abort the others.
+            try:
+                extractor = load_extractor()
+                with HTMLPagesConnector(
+                    base_url=source["base_url"],
+                    ente=source["ente"],
+                    codice_istat=source["codice_istat"],
+                    listing_paths=source["listing_paths"],
+                    extractor=extractor,
+                    max_pages=PAGES_MAX_CANDIDATES,
+                ) as html_connector:
+                    records = html_connector.fetch()
+                stats = html_connector.stats
+                print(
+                    f"  pagine html: lette {stats.records_seen}, "
+                    f"normalizzate {stats.records_emitted}, "
+                    f"scartate dal filtro {len(html_connector.dropped)}"
+                )
+                print(
+                    f"  pagine html: recupero {html_connector.pages_fetched} "
+                    f"richieste in {html_connector.fetch_seconds:.1f}s"
+                )
+                if stats.errors:
+                    print(f"  pagine html: {len(stats.errors)} record scartati")
+                    exit_code = 1
+                if args.verbose:
+                    print(f"  pagine html: {extractor.report()}")
+                    for line in html_connector.dropped:
+                        print(f"    scartata: {line}")
+            except Exception as exc:
+                print(f"  fonte non raggiungibile: {exc}", file=sys.stderr)
+                exit_code = 1
+                continue
+        else:
+            try:
+                with WPComuniConnector(
+                    base_url=source["base_url"],
+                    ente=source["ente"],
+                    codice_istat=source["codice_istat"],
+                ) as connector:
+                    records = connector.fetch()
+            except Exception as exc:
+                # One unreachable source must not abort the others: a partial
+                # refresh with a clear failure beats an all-or-nothing run.
+                print(f"  fonte non raggiungibile: {exc}", file=sys.stderr)
+                exit_code = 1
+                continue
+
+            stats = connector.stats
+            print(f"  servizi: letti {stats.records_seen}, normalizzati {stats.records_emitted}")
+            if stats.errors:
+                print(f"  servizi: {len(stats.errors)} record scartati")
+                exit_code = 1
+
+            # D-03/D-15: bandi/concorsi/volontariato live as prose `pages`, not
+            # typed `servizi`. Ingested by a second connector, quote-gated
+            # through the LLM extractor, then merged below — never abort the
+            # whole comune if this leg fails, the servizi records still stand.
+            try:
+                extractor = load_extractor()
+                with WPPagesConnector(
+                    base_url=source["base_url"],
+                    ente=source["ente"],
+                    codice_istat=source["codice_istat"],
+                    extractor=extractor,
+                    max_pages=PAGES_MAX_CANDIDATES,
+                ) as pages_connector:
+                    page_records = pages_connector.fetch()
+                pages_stats = pages_connector.stats
+                print(
+                    f"  pagine: lette {pages_stats.records_seen}, "
+                    f"normalizzate {pages_stats.records_emitted}, "
+                    f"scartate dal filtro {len(pages_connector.dropped)}"
+                )
+                if pages_stats.errors:
+                    print(f"  pagine: {len(pages_stats.errors)} record scartati")
+                    exit_code = 1
+                if args.verbose:
+                    print(f"  pagine: {extractor.report()}")
+                    for line in pages_connector.dropped:
+                        print(f"    scartata: {line}")
+            except Exception as exc:
+                print(f"  pagine non raggiungibili: {exc}", file=sys.stderr)
+                exit_code = 1
+                page_records = []
+
+            records = _merge_pages_into_servizi(records, page_records)
 
         report = score_comune(
             ente=source["ente"],
@@ -135,14 +308,52 @@ def run(argv: list[str] | None = None) -> int:
     return exit_code
 
 
+def _normalise_source_url(url: str) -> str:
+    """Comparable key for dedup: case and trailing slash must not create a false split."""
+    return str(url).strip().rstrip("/").lower()
+
+
+def _merge_pages_into_servizi(
+    servizi: list[Opportunity], pages: list[Opportunity]
+) -> list[Opportunity]:
+    """One seed per comune: `pages` records that duplicate a `servizio` are dropped.
+
+    Dedup key is the normalised `source.url` (DISCRETION, `.kapi/spec.md`):
+    the same municipal notice can appear as both a typed `servizio` and a
+    prose `page` when its content overlaps both post types. The `servizio`
+    wins because it carries richer typed fields (R-5) — the `page` record,
+    and everything the LLM extracted from it, is discarded in that case.
+    """
+    servizi_urls = {_normalise_source_url(o.source.url) for o in servizi}
+    merged = list(servizi)
+    dropped = 0
+    for page in pages:
+        if _normalise_source_url(page.source.url) in servizi_urls:
+            dropped += 1
+            continue
+        merged.append(page)
+    if dropped:
+        print(f"  pagine: {dropped} scartate come duplicati di un servizio già tipizzato")
+    return merged
+
+
 def _changed_hashes(old: list[dict], new: list[dict]) -> set[str]:
-    """IDs whose upstream payload hash moved — i.e. the comune edited them."""
-    old_hashes = {o["id"]: o.get("source", {}).get("raw_hash") for o in old}
+    """IDs whose full record changed relative to the committed snapshot.
+
+    Started as an upstream-hash-only comparison, but that missed a real case:
+    D-16 added recovery-cost instrumentation fields computed by *our* own
+    ingestion code, not the comune's. Those can change (or appear for the
+    first time) with `source.raw_hash` completely unchanged, since the
+    upstream WP payload never moved. Comparing the full record — not just the
+    hash — is what makes a same-source, different-instrumentation run
+    register as a real diff instead of silently being skipped as "già
+    aggiornato".
+    """
+    old_by_id = {o["id"]: o for o in old}
     return {
         o["id"]
         for o in new
-        if o["id"] in old_hashes
-        and o.get("source", {}).get("raw_hash") != old_hashes[o["id"]]
+        if o["id"] in old_by_id and old_by_id[o["id"]] != o
     }
 
 

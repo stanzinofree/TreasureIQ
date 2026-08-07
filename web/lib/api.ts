@@ -4,24 +4,30 @@
  * so the browser will not attach it cross-origin without this and every
  * authenticated request would silently 401 in development.
  */
-// Two different addresses reach the same API, and which one is correct depends
-// on who is asking.
+// Due indirizzi diversi raggiungono la stessa API, e quale sia quello giusto
+// dipende da chi lo chiede.
 //
-//   Browser        → the host-published port (http://localhost:8010).
-//   Server render  → inside compose, "localhost" is the web container itself,
-//                    so server components must use the service name on the
-//                    compose network (http://api:8000).
+//   Browser        → nessun indirizzo: percorsi relativi. Next inoltra `/api/*`
+//                    al container dell'API (vedi `rewrites` in
+//                    `next.config.mjs`), quindi la chiamata resta sulla stessa
+//                    origine della pagina, qualunque essa sia.
+//   Server render  → dentro compose "localhost" è il container web stesso, e i
+//                    server component devono usare il nome del servizio sulla
+//                    rete di compose (http://api:8000).
 //
-// Getting this wrong is invisible in `next dev` on a laptop, where both happen
-// to be the same machine, and only shows up once the app is containerised —
-// which is exactly where a reviewer will run it.
+// L'indirizzo assoluto lato browser è durato finché la pagina si è aperta solo
+// su http://localhost:3000. Servita da un dominio vero — i domini .orb.local di
+// OrbStack, che sono in HTTPS — la stessa riga chiedeva a una pagina https di
+// chiamare http://localhost:8010: altra origine e contenuto misto insieme, che
+// il browser blocca prima ancora di guardare l'header CORS. Un indirizzo
+// relativo non ha questo problema su nessun dominio, presente o futuro.
 const isServer = typeof window === "undefined";
 
 export const API = isServer
   ? process.env.TREASUREIQ_API_INTERNAL ??
     process.env.NEXT_PUBLIC_TREASUREIQ_API ??
     "http://localhost:8010"
-  : process.env.NEXT_PUBLIC_TREASUREIQ_API ?? "http://localhost:8010";
+  : "";
 
 export type Verdict = "eligible" | "likely" | "undetermined" | "not_eligible";
 export type CriterionState =
@@ -35,6 +41,24 @@ export interface Criterion {
   label: string;
   state: CriterionState;
   detail: string;
+}
+
+/** A public desk, with the provenance of its own contact details: `fonte` is
+ * the page they were read from, `verificato_il` when that was last checked. */
+export interface Ufficio {
+  nome: string;
+  telefono: string | null;
+  email: string | null;
+  orari: string | null;
+  fonte: string;
+  verificato_il: string;
+  /** From IPA, the register public bodies must keep current. Kept apart from
+   * the fields above because it answers a different question — this is the
+   * channel that legally obliges a reply — and comes from a different source,
+   * so it is cited separately. */
+  pec: string | null;
+  pec_fonte: string | null;
+  pec_verificata_il: string | null;
 }
 
 export interface Match {
@@ -51,8 +75,21 @@ export interface Match {
   needs_source_check: boolean;
   source_url: string;
   ente: string;
+  ente_codice_istat: string | null;
+  /** When this record was last read from the publishing body. Nothing here is
+   * live, and how old a snapshot is belongs next to what it says. */
+  letto_il: string;
+  /** The publishing body's public desk, when one has been recorded and
+   * verified. Null for national and regional records: pointing someone at a
+   * municipal URP for an ARERA measure sends them to a counter that cannot
+   * help them. */
+  ufficio: Ufficio | null;
   deadline: string | null;
   confidence: string;
+  /** D-20 — which administrative tier published this (`Livello` in
+   * `schema.py`). Always shown on the card: it is what tells the citizen
+   * whether this benefit is theirs to lose if the comune goes quiet. */
+  livello: "nazionale" | "regionale" | "comunale";
 }
 
 export interface Dimension {
@@ -102,8 +139,772 @@ export const login = (body: Record<string, unknown>) =>
   call<Profile>("/api/session", { method: "POST", body: JSON.stringify(body) });
 
 export const logout = () => call<unknown>("/api/session", { method: "DELETE" });
+
+/** Unset one fact in the live session, in place — never a full re-login.
+ * `login()` rebuilds the profile from scratch, so replaying it after a
+ * removal silently reinstates server-side defaults (nucleo_familiare back to
+ * 1, not back to "unknown") on fields the citizen never touched. `valore` is
+ * only meaningful for campo="interessi", to drop one tag instead of the
+ * whole list. */
+export const dimenticaCampo = (campo: string, valore?: string) =>
+  call<Profile>("/api/session/dimentica", {
+    method: "POST",
+    body: JSON.stringify(valore ? { campo, valore } : { campo }),
+  });
+
+/** Le capacità dirette del portale di un comune fuori copertura: catalogo
+ *  servizi + 15 categorie AgID, per i chip a cascata. A freddo il backend
+ *  legge il portale una volta (cache 30g), quindi la chiamata può tardare:
+ *  la UI la lancia solo quando il badge connettore è già a schermo. */
+export const fetchMappaConnettore = (codiceIstat: string) =>
+  call<MappaConnettore | null>(`/api/mappa-connettore/${codiceIstat}`);
+
+/** I servizi di una categoria: il livello sotto ai chip. Link diretti alla
+ *  scheda sul portale del comune (la fonte, non un verdetto). */
+export const fetchServiziCategoria = (codiceIstat: string, termId: number) =>
+  call<ServizioLink[] | null>(
+    `/api/mappa-connettore/${codiceIstat}/categoria/${termId}`,
+  );
+
+/** Un bando/avviso del comune, letto adesso da amministrazione trasparente
+ *  (`criteri-e-modalita`). Nessun campo scadenza strutturato: `data` è la
+ *  data di pubblicazione, non «apertura» (D-B4, nessun verdetto). */
+export interface Bando {
+  titolo: string;
+  url: string;
+  data: string;
+  anteprima: string | null;
+}
+
+/** I bandi e avvisi del comune, indipendenti dalla mappa servizi (D-B6): il
+ *  gate è solo `connettore` presente, non `indirizzabile`. Array vuoto se il
+ *  comune non espone `criteri-e-modalita` (degrado silenzioso, D-B5). */
+export const fetchBandi = (codiceIstat: string) =>
+  call<Bando[]>(`/api/mappa-connettore/${codiceIstat}/bandi`);
+
+/** L'anteprima di un servizio, letta adesso dalla sua pagina sul portale:
+ *  descrizione + a chi è rivolto, con l'url per aprirla intera. Come l'anteprima
+ *  di un bando — fonte citata, non verdetto. `url` deve stare sul portale del
+ *  comune (guardia host lato server). */
+export const fetchSchedaServizio = (codiceIstat: string, url: string) =>
+  call<SchedaServizio | null>(
+    `/api/mappa-connettore/${codiceIstat}/scheda?url=${encodeURIComponent(url)}`,
+  );
+
+/** What the citizen's own comune published on a topic — stated either way.
+ * The ordinary answer already searches municipal and national records
+ * together, so this reaches nothing the first pass missed; it exists to say
+ * out loud what the first pass leaves unsaid when every result was national. */
+export interface PaginaWeb {
+  title: string;
+  url: string;
+  /** Always true. Found by a search engine, not read from a dataset: nothing
+   * here was parsed, quote-gated or checked against requirements the way a
+   * record is, and the interface must never present one as if it had been. */
+  non_verificato: boolean;
+}
+
+export interface Approfondimento {
+  esito: string;
+  comune_nome: string;
+  matches: Match[];
+  /** Last rung of the ladder, present only when the structured records
+   * turned up nothing. */
+  pagine: PaginaWeb[];
+}
+
+export const approfondimento = (topic: string) =>
+  call<Approfondimento>("/api/approfondimento", {
+    method: "POST",
+    body: JSON.stringify({ topic }),
+  });
+
+/** URP contacts read live from the comune's own portal, on explicit request.
+ * For a comune we do not ingest, we cannot say what the citizen is entitled to,
+ * but we can say who to ask — and they asked for the numbers, not just links. */
+export interface ContattiUrp {
+  comune_nome: string;
+  telefoni: string[];
+  email: string[];
+  pec: string[];
+  /** The page the contacts were read from, so they can be checked at source. */
+  fonte: string | null;
+  /** Always true: read from the portal just now, never verified against a
+   * dataset. Same discipline as `PaginaWeb.non_verificato` — a phone number
+   * captured wrong is worse than a link, so it is never stated as a fact. */
+  non_verificato: boolean;
+}
+
+export const contattiUrp = (comuneIstat: string | null) =>
+  call<ContattiUrp>("/api/contatti-urp", {
+    method: "POST",
+    body: JSON.stringify({ comune_istat: comuneIstat }),
+  });
 export const me = () => call<Profile>("/api/me");
-export const opportunities = (includeIneligible = false) =>
-  call<Match[]>(`/api/opportunities?include_ineligible=${includeIneligible}`);
+// `opportunities` is gone from here with the page that used it. The endpoint
+// still exists server-side; a client wrapper nobody calls would just be a
+// hint that a removed page might come back.
 export const readiness = (istat: string) =>
   call<Readiness>(`/api/readiness/${istat}`);
+
+/** Every comune with a committed seed snapshot: Albano and Fonte Nuova through
+ * their service APIs, Ariccia through the bespoke HTML connector — it had no
+ * reachable API, which is precisely why it costs nearly double per record.
+ * Genzano and Marino remain measured at zero with no snapshot, so there is
+ * nothing here to score; their diagnosis is cited on `/dati` as measurement
+ * evidence rather than fetched from here. */
+export const readinessAll = () => call<Readiness[]>("/api/readiness");
+
+/** One opportunity's recovery cost (`RecordCostOut` in `api.py`). */
+export interface RecordCost {
+  id: string;
+  title: string;
+  recovery_level: string | null;
+  extraction_seconds: number | null;
+  pdfs_linked: number | null;
+  pdfs_opened: number | null;
+  pdfs_skipped: number | null;
+  chars_processed: number | null;
+  requirements_recovered: number | null;
+}
+
+/** D-16 recovery cost per comune (`RecoveryOut` in `api.py`).
+ *
+ * `typed_records` and `unmeasured_records` must be rendered as different
+ * things. A typed record cost nothing because the comune already published it
+ * structured — that is the outcome the whole project argues for. An unmeasured
+ * record is one we never looked at. Showing them as one bar would credit a
+ * comune for data nobody checked.
+ */
+export interface Recovery {
+  ente: string;
+  codice_istat: string;
+  records_total: number;
+  typed_records: number;
+  recovered_records: number;
+  unmeasured_records: number;
+  levels: Record<string, number>;
+  seconds_total: number | null;
+  seconds_avg: number | null;
+  pdfs_linked_total: number;
+  pdfs_opened_total: number;
+  pdfs_skipped_total: number;
+  requirements_recovered_total: number;
+  records: RecordCost[];
+}
+
+export const recovery = (istat: string) =>
+  call<Recovery>(`/api/recovery/${istat}`);
+export const recoveryAll = () => call<Recovery[]>("/api/recovery");
+
+/** Per-ente access mode + integration cost (`IntegrationOut` in `api.py`,
+ * D-21). `diagnosis` and `integration_cost` are the same deterministic
+ * sentences the chat's INFORMAZIONE rail composes for the same ente — this
+ * page renders them, never re-authors them, so the two surfaces agree.
+ * `datasets_on_dati_gov` is `null` where it was never probed (Marino) and
+ * must render as "non misurato", never as `0` (D-16). */
+export interface Integration {
+  ente: string;
+  codice_istat: string;
+  access_mode: string;
+  label: string;
+  probe_dated: string;
+  probe_method: string;
+  diagnosis: string[];
+  integration_cost: string[];
+  datasets_on_dati_gov: number | null;
+  benchmark_342: number | null;
+  segnalazioni_count: number;
+  /** Where a request to open this body's data goes. Certified address first:
+   * a PEC obliges a reply, an ordinary inbox does not. */
+  pec: string | null;
+  urp_email: string | null;
+  urp_nome: string | null;
+}
+
+export const integrationAll = () => call<Integration[]>("/api/integration");
+
+/** The chat contract (K3) — must stay field-for-field identical to the
+ * `ChatOut` pydantic model in `api/treasureiq/api.py`. `data_gap` carries the
+ * distinction the whole project exists to make: "the comune never published
+ * this" (`not_published`) is not the same failure as "nothing matched"
+ * (`none_found`), and the two must never collapse into one string.
+ */
+export type DataGap = "not_published" | "none_found" | "cambio_persona";
+
+/** Per-level counts of how a criterion's evidence was recovered — a manual
+ * field, one extracted from prose by the quote-gated LLM, or one that stayed
+ * illegible. Counts, so an absent level is `null`, never `0` (D-17: a missing
+ * measurement must never look like a measured zero). */
+export interface CostLevels {
+  L1_manuale: number | null;
+  L2_estratto: number | null;
+  L3_illeggibile: number | null;
+}
+
+/** D-17 — the data-recovery cost behind one answer, added alongside B5. Every
+ * field is independently nullable; render nothing for a null field rather
+ * than a zero or a placeholder. */
+export interface ChatCost {
+  recovery_seconds_total: number | null;
+  recovery_seconds_avg_comune: number | null;
+  levels: CostLevels | null;
+}
+
+/** D-19 — the router classifies the shape of the question, not just its
+ * topic, before anything else runs. AGEVOLAZIONE is the eligibility rail
+ * (verdict, criteria, SPID); INFORMAZIONE is the document/office rail below
+ * and never carries any of that furniture. */
+export type QuestionKind = "informazione" | "agevolazione";
+
+/** A source page found for an INFORMAZIONE answer, when one exists. */
+export interface InfoDocument {
+  title: string;
+  url: string;
+  /** La descrizione che il comune dà del servizio, verbatim. `null` quando il
+   * record non la porta: una riga in meno, mai una riga inventata. */
+  descrizione: string | null;
+  /** Il giorno in cui abbiamo letto la pagina (ISO). Va in fondo e in
+   * piccolo: la data conferma, non risponde. */
+  verificato_il: string | null;
+}
+
+/** The office a citizen can actually call, mirrors `UrpContact` in
+ * `integration.py`. Every field but `nome` is independently nullable — a
+ * comune that never published a phone number is a measured fact, and the
+ * UI must render that absence, never a guessed centralino. */
+export interface InfoOffice {
+  nome: string;
+  telefono: string | null;
+  email: string | null;
+  orari: string | null;
+  /** Certified address from IPA. Preferred as the recipient of a formal
+   * request: a PEC obliges a reply, an ordinary inbox does not. */
+  pec: string | null;
+}
+
+/** One cached web-search hit (D-28, `M6_web_aperto`) — verbatim title and
+ * URL, nothing else. `non_verificato` is always `true` on this rail; the
+ * field exists so the client renders the label from data, not from a
+ * hardcoded assumption about which array it is looking at. */
+export interface InfoWebResult {
+  title: string;
+  url: string;
+  non_verificato: boolean;
+}
+
+/** Una riga di «cosa posso confermare». Mai una percentuale: un numero del
+ * genere avrebbe l'aria di una misura senza esserlo. */
+export interface Prova {
+  stato: "confermato" | "parziale" | "mancante";
+  testo: string;
+}
+
+/** Un passo che il cittadino puo' fare adesso. `tipo` dice come renderlo. */
+export interface Azione {
+  /** Il titolo dell'azione: cosa ottieni, non come si fa. */
+  testo: string;
+  url: string | null;
+  tipo: "apri" | "chiama" | "email";
+  /** Perché farla, in una riga. Separato dal titolo perché una frase sola
+   * lunga, resa come link, torna a sembrare prosa invece che un pulsante. */
+  dettaglio: string | null;
+  /** L'etichetta del pulsante. */
+  etichetta: string;
+}
+
+/** Composition of an INFORMAZIONE answer (mirrors respond.py's `InfoAnswer`
+ * / B20b's API mapping). `diagnosis` and `integration_cost` are each a list
+ * of measured-fact lines — kept as two separate lists (not concatenated)
+ * because they answer different questions: what was checked, and what
+ * checking it cost. `coverage_count` is a raw count of matching records;
+ * the client composes the sentence around it. */
+export interface InfoOut {
+  document: InfoDocument | null;
+  office: InfoOffice | null;
+  coverage_count: number;
+  diagnosis: string[];
+  integration_cost: string[];
+  web_results: InfoWebResult[];
+  /** Vero quando ufficio e orario sono stati letti dal portale del comune
+   * durante questa domanda, non presi da uno snapshot curato (D-32). Un dato
+   * letto al volo e un dato verificato non devono avere lo stesso aspetto:
+   * l'etichetta esiste perché la differenza si veda senza doverla dedurre dal
+   * testo della risposta. */
+  letto_dal_vivo: boolean;
+  /** Provenienza del dato, mai un diritto: `ufficiale`, `parziale`,
+   * `non_verificato`, `non_pubblicato`. Sul rail INFORMAZIONE un verdetto non
+   * esiste (D-19) e questo campo non deve diventarne uno per abitudine. */
+  stato: "ufficiale" | "parziale" | "non_verificato" | "non_pubblicato";
+  /** Le righe di «cosa posso confermare», gia' composte dal backend: la UI le
+   * rende, non le deduce dal testo della risposta. */
+  prove: Prova[];
+  /** I passi successivi, scritti per esteso invece che contati. */
+  azioni: Azione[];
+  ente_nome: string | null;
+  /** B22 (D-25) — which comune this INFORMAZIONE answer is about, resolved
+   * server-side from the office it already carries (`_enti_by_urp_nome` in
+   * `api.py`). `null` when no ente could be resolved — nothing to count a
+   * segnalazione against. */
+  codice_istat: string | null;
+  ente: string | null;
+}
+
+/** Quello che TreasureIQ ha capito della domanda, restituito perche' il
+ *  cittadino lo veda e possa smentirlo. Ogni campo non capito resta assente,
+ *  mai riempito con un valore di comodo. */
+export interface ProfiloCapito {
+  comune_nome: string | null;
+  comune_istat: string | null;
+  comune_coperto: boolean | null;
+  eta: number | null;
+  isee: string | null;
+  nucleo_familiare: number | null;
+  figli_minori: number | null;
+  disabilita: boolean | null;
+  sesso: "f" | "m" | null;
+  /** True quando `sesso` viene da una deduzione sul nome proprio (D-52),
+   *  non da una dichiarazione esplicita: bassa confidenza, va mostrato
+   *  correggibile ("ho capito: donna — giusto?"), mai come un fatto. */
+  sesso_dedotto: boolean;
+  figli_disabili: number | null;
+  disabilita_nucleo: boolean | null;
+}
+
+export interface ChatOut {
+  profilo_capito: ProfiloCapito | null;
+  reply: string;
+  /** The topic this answer was retrieved for. The API has always sent it;
+   * declaring it lets the follow-up check reuse it instead of re-running
+   * intent extraction, which keeps that request deterministic. */
+  topic: string | null;
+  matches: Match[];
+  data_gap: DataGap | null;
+  cost: ChatCost | null;
+  /** D-19 rail marker. */
+  kind: QuestionKind;
+  /** D-29 — residual actions left on the citizen after this answer (a
+   * count, never an estimate). `null` off the INFORMAZIONE rail. Always
+   * rendered apart from `cost`: the two answer different questions and
+   * must never be summed or share a line. */
+  citizen_effort: number | null;
+  /** The access rung this answer was composed at (e.g. `M6_web_aperto`).
+   * `null` off the INFORMAZIONE rail. */
+  access_mode: string | null;
+  /** `null` on the AGEVOLAZIONE rail — an eligibility answer never carries
+   * INFORMAZIONE furniture, and vice versa (D-19). */
+  info: InfoOut | null;
+  /** Presente solo fuori copertura, dopo la sonda AgID: dice se il connettore
+   * raggiungerebbe questo comune. `null` sui comuni coperti o non sondati. */
+  connettore: ConnettoreSonda | null;
+  /** Recapiti letti al volo dal portale del comune fuori copertura. Non è una
+   * risposta di TreasureIQ: la UI lo mostra come banner nel pannello a
+   * sinistra. `null` sui comuni coperti o quando lo scrape non trova nulla. */
+  numeri_utili: NumeriUtili | null;
+  /** Candidati di disambiguazione quando il nome comune è ambiguo. La UI li
+   * rende come schede cliccabili: un tap sceglie e rimanda la domanda. */
+  comuni_ambigui: ComuneAmbiguo[] | null;
+  /** B6 — stato dello scan del comune, se presente. Consumato da <ScanLive>
+   * (via ScanProvider): banda «sto aggiornando» + bottone «Ricarica», mostrati
+   * uguali in chat e nel pannello. */
+  scan?: ScanStato | null;
+}
+
+/** Un candidato di disambiguazione comune. `codice_istat` serve a rimandare la
+ *  domanda con la scelta fatta, senza far ridigitare il nome. */
+export interface ComuneAmbiguo {
+  nome: string;
+  provincia: string;
+  codice_istat: string;
+}
+
+/** Esito della sonda AgID su un comune fuori copertura. Non un verdetto:
+ *  `indirizzabile` = il portale espone l'API uffici del modello AgID, `uffici`
+ *  è quanti ne elenca (conteggio strutturale, mai una spettanza). */
+export interface ConnettoreSonda {
+  /** Il comune sondato: si passa a `fetchMappaConnettore` per i chip categoria. */
+  codice_istat: string;
+  indirizzabile: boolean;
+  uffici: number;
+  rest_base: string | null;
+}
+
+/** Una categoria standard del modello AgID e quanti servizi vi ricadono in un
+ *  comune. `conteggio` è un conteggio strutturale del catalogo, mai una
+ *  spettanza. Le categorie a zero non arrivano qui (chip su vicolo vuoto). */
+export interface CategoriaServizio {
+  nome: string;
+  conteggio: number;
+  /** Term della tassonomia: serve a scendere di livello. `0` se il portale non lo espone. */
+  id: number;
+  slug: string;
+}
+
+/** Un servizio del catalogo comunale: titolo + link alla scheda sul portale.
+ *  È la foglia della cascata — la fonte citata, non un verdetto (D-01). */
+export interface ServizioLink {
+  titolo: string;
+  url: string;
+}
+
+/** L'anteprima di un servizio letta dalla sua pagina: cosa è e a chi è rivolto,
+ *  con l'url per aprirla intera. Fonte citata, non verdetto (D-01). */
+export interface SchedaServizio {
+  titolo: string;
+  url: string;
+  descrizione: string | null;
+  a_chi: string | null;
+  cosa_ottieni: string | null;
+}
+
+/** Le capacità dirette del portale di un comune: il catalogo servizi e le 15
+ *  categorie del modello AgID. Serve i chip a cascata, non un verdetto: dice
+ *  per quali strade dirette potremmo rispondere, mai cosa spetta (D-01). */
+export interface MappaConnettore {
+  codice_istat: string;
+  nome: string;
+  sito: string | null;
+  servizi: {
+    esposto: boolean;
+    totale: number;
+    categorie: CategoriaServizio[];
+  };
+  uffici: { esposto: boolean; totale: number };
+}
+
+/** Cosa il portale di un comune ha detto sui propri orari di sportello, e
+ *  quando gliel'abbiamo chiesto (`OrariLive` in `sonda_live.py`). Senza
+ *  `citazione` non c'è nessun orario da mostrare, solo la constatazione che
+ *  non l'abbiamo trovato. */
+export interface OrariLive {
+  codice_istat: string;
+  nome: string;
+  sito: string | null;
+  indirizzabilita: "api_uffici" | "solo_html" | "irraggiungibile";
+  recuperabilita: "campo_tipizzato" | "prosa" | "assente";
+  ufficio: string | null;
+  ufficio_url: string | null;
+  citazione: string | null;
+  letto_il: string;
+}
+
+/** L'aderenza AgID di un comune coperto: checklist fissa di 4 superfici
+ *  (servizi, uffici, trasparenza, contatti), mai una cifra digitata (D-S2).
+ *  `superfici` porta la provenienza — quale via ha contato per la % (D-S4). */
+export interface AderenzaAgid {
+  percento: number;
+  esposte: number;
+  definite: number;
+  superfici: { nome: string; via: "REST" | "scrape" | null }[];
+}
+
+/** La scheda completa di un comune scansionato (`SchedaComuneOut` in
+ *  `api.py`, contratto pinnato in `plan.md`). `aderenza` è sempre `null`
+ *  quando `connettore_tipo != "agid"` — mai una % su un connettore che non
+ *  la può misurare (D-S2). */
+export interface SchedaComune {
+  codice_istat: string;
+  nome: string;
+  sito: string | null;
+  /** Quando questo record è stato scansionato, dal record store — mai un
+   *  timestamp calcolato al volo. */
+  scansionato_il: string;
+  connettore_tipo: "agid" | "solo-html" | "non-sondato";
+  aderenza: AderenzaAgid | null;
+  servizi: { esposto: boolean; totale: number; categorie: CategoriaServizio[] };
+  uffici: { esposto: boolean; totale: number };
+  contatti: {
+    telefoni: string[];
+    pec: string[];
+    email: string[];
+    fonte: string;
+    letto_il: string;
+  } | null;
+  orari: OrariLive | null;
+  /** Solo host del comune (D-S8): mai un logo letto da un dominio estraneo. */
+  logo_url: string | null;
+}
+
+export const fetchSchedaComune = (codiceIstat: string) =>
+  call<SchedaComune | null>(`/api/comune/${codiceIstat}`);
+
+/** Stato dello scan di un comune, per il rail chat (B6). `stato` distingue
+ *  un record fresco da uno che si sta aggiornando in questo momento — la UI
+ *  non li rende uguali. */
+export interface ScanStato {
+  stato: "fresco" | "aggiornamento_in_corso";
+  ultimo_scan: string;
+}
+
+/** Recapiti del comune letti al volo dal portale. Nessun numero è verificato.
+ *  `fonte_tipo` è sempre «scansione web»; `letto_il` è l'ora del controllo
+ *  (ISO 8601), che il pannello rende come «ultimo controllo». */
+export interface NumeriUtili {
+  telefoni: string[];
+  email: string[];
+  pec: string[];
+  fonte: string | null;
+  fonte_tipo: string;
+  letto_il: string;
+}
+
+export interface ChatTurn {
+  role: "user" | "assistant";
+  content: string;
+}
+
+export const chat = (
+  message: string,
+  history: ChatTurn[] = [],
+  comuneIstat: string | null = null,
+) =>
+  call<ChatOut>("/api/chat", {
+    method: "POST",
+    body: JSON.stringify({ message, history, comune_istat: comuneIstat }),
+  });
+
+/** Una voce dell'elenco dei comuni italiani (ISTAT unito ai siti di IPA).
+ *
+ * `ha_portale` è falso per i 29 comuni che ISTAT conosce e di cui IPA non
+ * pubblica il sito — fra questi Roma, che il registro chiama «Roma Capitale».
+ * Vanno mostrati lo stesso: sono comuni veri, e nasconderli farebbe sembrare
+ * l'elenco incompleto. Ma chi sceglie deve sapere prima di cliccare che lì
+ * non andremo a leggere niente. */
+export interface ComuneScelta {
+  codice_istat: string;
+  nome: string;
+  provincia: string;
+  regione: string;
+  ha_portale: boolean;
+}
+
+/** Cerca fra i 7.896 comuni italiani.
+ *
+ * L'elenco è chiuso e completo, quindi zero risultati NON significa «comune
+ * non coperto»: significa che quel nome non è un comune italiano — un refuso,
+ * o il nome di una frazione. Chi chiama deve dire le due cose in modo
+ * diverso. */
+export const cercaComuni = (q: string) =>
+  call<ComuneScelta[]>(`/api/comuni?q=${encodeURIComponent(q)}`);
+
+/** Footer vital signs (B14 contract). Every field is independently nullable
+ * — another arm is building the endpoint concurrently, and a field that
+ * hasn't been measured yet must render as absent, never as zero. */
+export interface StatsOut {
+  app_version: string | null;
+  comuni_measured: number | null;
+  records_total: number | null;
+  requirements_verified: number | null;
+  avg_recovery_seconds: number | null;
+  sources_below_full_openness_pct: number | null;
+}
+
+export const stats = () => call<StatsOut>("/api/stats");
+
+/** Per-source health for the header status pill (B14 contract). `reachable`,
+ * `last_ingested` and `records` are all independently nullable: a source
+ * that has never been probed is "unknown", not "down". */
+export interface SourceStatus {
+  codice_istat: string;
+  nome: string;
+  reachable: boolean | null;
+  last_ingested: string | null;
+  records: number | null;
+}
+
+/** One row in the "Sistemi" group of `/api/status` — a TreasureIQ component.
+ * `stato` is "ok" | "degraded" | "down" | "unknown"; "unknown" is a real,
+ * honest state (unmonitored at runtime), never a masked "down". */
+export interface SystemComponent {
+  nome: string;
+  stato: "ok" | "degraded" | "down" | "unknown";
+  detail: string;
+}
+
+/** One row in the "Stato dati interni" group. `value` is pre-formatted on the
+ * server so the client never re-formats a number it did not measure. */
+export interface InternalDatum {
+  nome: string;
+  stato: "ok" | "degraded" | "down" | "unknown";
+  value: string;
+  detail: string;
+}
+
+export interface StatusOut {
+  overall: "ok" | "degraded" | "down" | null;
+  sources: SourceStatus[] | null;
+  /** "Stato sistemi" — TreasureIQ's own components. Additive with the rest. */
+  sistemi: SystemComponent[] | null;
+  /** "Stato dati interni" — headline numbers on what was recovered. */
+  dati_interni: InternalDatum[] | null;
+}
+
+export const status = () => call<StatusOut>("/api/status");
+
+/** Result of `GET /api/comune-nearby?lat=&lon=` — nullable: there may be no
+ * supported comune near the citizen's current position. This is a proximity
+ * lookup only; it never asserts residency (see D-09 and the geolocation
+ * copy in `Chat.tsx`). */
+export interface ComuneNearby {
+  codice_istat: string;
+  nome: string;
+}
+
+/** The endpoint wraps its answer — `{comune_nearby, note}` — and this type
+ * described the inner object as if it were the whole body. The mismatch was
+ * silent in TypeScript and loud on screen: every field read as `undefined`,
+ * so the confirmation prompt asked the citizen "Sei a undefined?". Unwrapped
+ * here, once, rather than at each call site. */
+interface ComuneNearbyBody {
+  comune_nearby: ComuneNearby | null;
+  note: string;
+}
+
+export const comuneNearby = async (lat: number, lon: number) => {
+  const body = await call<ComuneNearbyBody>(
+    `/api/comune-nearby?lat=${encodeURIComponent(lat)}&lon=${encodeURIComponent(lon)}`,
+  );
+  return body.comune_nearby;
+};
+
+/** Result of `GET /api/censimento/comune/{codice_istat}` — nullable: `null`
+ * finché quel comune non è mai stato spazzolato dal censimento nazionale
+ * (checkout fresco, o comune fuori censimento). Non è un errore, e il
+ * chiamante non deve inventare cifre quando lo vede: sta zitto (D-41/D-44). */
+export interface PortaleComune {
+  piattaforma: string;
+  aderenza: number | null;
+  rilevato_il: string;
+}
+
+export const portaleComune = async (istat: string) =>
+  call<PortaleComune | null>(`/api/censimento/comune/${encodeURIComponent(istat)}`);
+
+/** B22 (D-25) — the anonymous per-comune segnalazione counter, keyed by
+ * `codice_istat`. Never carries anything besides a count: no IP, no
+ * session, no citizen text (`SegnalazioneIn`/routes in `api.py`). */
+export const segnalazioni = () => call<Record<string, number>>("/api/segnalazioni");
+
+export const inviaSegnalazione = (codiceIstat: string) =>
+  call<Record<string, number>>("/api/segnalazioni", {
+    method: "POST",
+    body: JSON.stringify({ codice_istat: codiceIstat }),
+  });
+
+/** One component of a comune's integration cost, with the fact behind it. */
+export interface VoceCosto {
+  chiave: string;
+  etichetta: string;
+  valore: number;
+  evidenza: string;
+}
+
+/** What one comune costs TreasureIQ to keep readable (D-26 rule 2).
+ *
+ * Never a bill to the citizen and never a grade for the administration: it is
+ * our own integration cost. The components ship with the total so a reader can
+ * check the arithmetic instead of trusting the number. */
+export interface Costo {
+  ente: string;
+  codice_istat: string;
+  modo: string;
+  scoperta_il: string;
+  eta_scoperta_giorni: number;
+  scoperta_scaduta: boolean;
+  soglia_riscoperta_giorni: number;
+  record_totali: number;
+  record_strutturati: number;
+  record_recuperati_da_prosa: number;
+  record_non_recuperati: number;
+  /** Evidence only, deliberately outside the score: wall-clock time measures
+   * our machine and their file sizes as much as their openness. */
+  secondi_recupero: number | null;
+  costo_totale: number;
+  costo_per_record: number | null;
+  voci: VoceCosto[];
+}
+
+export const costi = () => call<Costo[]>("/api/costo");
+
+export interface FonteAggregata {
+  tipo: string;
+  enti: number;
+  servizi: number;
+}
+
+/** Aggregate figures for the monitoring dashboard. Aggregate on purpose: the
+ * per-comune breakdown lives on /dati, where comparing them is the point. */
+export interface Panoramica {
+  servizi_totali: number;
+  enti_totali: number;
+  comuni_misurati: number;
+  fonti: FonteAggregata[];
+  criteri_strutturati: number;
+  criteri_recuperati: number;
+  criteri_non_recuperati: number;
+  ultimo_accesso: string | null;
+  gradini: Record<string, number>;
+}
+
+export const panoramica = () => call<Panoramica>("/api/panoramica");
+
+/* ── Censimento dei portali comunali ─────────────────────────────────────── */
+
+export interface PiattaformaRiga {
+  piattaforma: string;
+  comuni: number;
+  /** `null` finché nessun dataset di popolazione è stato caricato. Mai zero:
+   *  uno zero disegnerebbe "nessun cittadino servito", che è falso. */
+  popolazione: number | null;
+  servizi: number;
+  con_catalogo: number;
+  /** In quante regioni compare. Uno = piattaforma regionale, venti = prodotto nazionale. */
+  regioni: number;
+  regione_prima: string | null;
+  comuni_prima: number;
+}
+
+export interface FornitoreRiga {
+  piattaforma: string;
+  /** Contro quale denominatore è calcolata l'aderenza. Due basi diverse non
+   *  vanno messe nella stessa classifica: vedi la nota nella pagina. */
+  base_misura: string | null;
+  comuni: number;
+  misurati: number;
+  aderenza_media: number | null;
+  aderenza_minima: number | null;
+  impronte: number;
+}
+
+export interface SezioneRiga {
+  sezione: string;
+  manca_su: number;
+  misurati: number;
+}
+
+export interface VincoliRiga {
+  /** `compilato` | `vuoto` | `assente`. */
+  stato: string;
+  comuni: number;
+}
+
+export interface Censimento {
+  rilevato_il: string | null;
+  date_disponibili: string[];
+  piattaforme: PiattaformaRiga[];
+  fornitori: FornitoreRiga[];
+  sezioni_mancanti: SezioneRiga[];
+  vincoli: VincoliRiga[];
+}
+
+export interface Connettore {
+  piattaforma: string;
+  livello: "modello" | "catalogo" | "firma";
+  firma: string;
+  rotta_servizi: string | null;
+  note: string | null;
+}
+
+export const getCensimento = () => call<Censimento>("/api/censimento");
+
+export const getConnettori = () => call<Connettore[]>("/api/connettori");

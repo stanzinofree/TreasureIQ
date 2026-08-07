@@ -1,0 +1,25 @@
+{
+ "isee_max": null,
+ "isee_min": null,
+ "isee_mentioned_without_threshold": false,
+ "eta_min": null,
+ "eta_max": null,
+ "nucleo_min": null,
+ "figli_minori_required": null,
+ "disabilita_required": null,
+ "residenza_required": null,
+ "employment_status": [],
+ "other": [
+  "Consegna delle tessere d’accesso all’ecoisola a partire dal 13 luglio a lunedì 20 luglio 2026 per i condomini di via delle cerquette, via ramo d’oro e via Innocenzo XII. Il ritiro delle tessere è obbligatorio."
+ ],
+ "quotes": [
+  {
+   "field": "other",
+   "text": "Consegna delle tessere d’accesso all’ecoisola a partire dal 13 luglio a lunedì 20 luglio 2026 per i condomini di via delle cerquette, via ramo d’oro e via Innocenzo XII. Il ritiro delle tessere è obbligatorio."
+  }
+ ],
+ "deadline_iso": "2026-07-20",
+ "notes": [
+  "Il testo non specifica requisiti di accesso come ISEE, età, disabilità, stato occupazionale, residenza, numero di componenti del nucleo familiare o presenza di figli minorenni. L’unico requisito menzionato è la consegna obbligatoria delle tessere per i condomini specificati. La data di scadenza per la consegna è indicata come 20 luglio 2026."
+ ]
+}

@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TreasureIQ — i due motori</title>
+<style>
+  :root{
+    --carta:#EDF2EE; --sumi:#1B211D; --ai:#23405E; --shu:#D4482F;
+    --wakatake:#3F7A5E; --yamabuki:#A8710C;
+    --linea:#1B211D26; --carta-alta:#F7FAF7;
+    --display:"Zen Maru Gothic","Hiragino Maru Gothic ProN","Trebuchet MS",sans-serif;
+    --testo:"Zen Kaku Gothic New","Hiragino Sans","Helvetica Neue",sans-serif;
+    --dati:"DM Mono","SFMono-Regular",Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--carta);color:var(--sumi);font-family:var(--testo);
+       line-height:1.55;-webkit-font-smoothing:antialiased}
+  .foglio{max-width:1080px;margin:0 auto;padding:48px 28px 96px}
+  h1{font-family:var(--display);font-size:clamp(28px,4.4vw,44px);line-height:1.15;margin:0 0 8px;letter-spacing:-.01em}
+  h2{font-family:var(--display);font-size:20px;margin:56px 0 6px;padding-left:14px;border-left:4px solid var(--ai)}
+  h3{font-family:var(--display);font-size:15px;margin:0 0 10px;letter-spacing:.02em}
+  .occhiello{font-family:var(--dati);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ai);margin:0 0 18px}
+  .sotto{color:#1B211DB3;max-width:62ch;margin:0 0 8px}
+  small{color:#1B211D99}
+
+  /* fascia numeri */
+  .numeri{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;
+          background:var(--linea);border:1px solid var(--linea);margin:28px 0 0}
+  .numeri div{background:var(--carta-alta);padding:16px 14px}
+  .numeri b{display:block;font-family:var(--dati);font-size:26px;line-height:1.1;color:var(--ai)}
+  .numeri span{font-size:12px;color:#1B211D99}
+
+  /* motori */
+  .motori{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:18px}
+  @media(max-width:820px){.motori{grid-template-columns:1fr}}
+  .motore{border:1px solid var(--linea);background:var(--carta-alta);padding:20px}
+  .motore.a{border-top:4px solid var(--wakatake)}
+  .motore.b{border-top:4px solid var(--ai)}
+  .tag{font-family:var(--dati);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+       color:#1B211D99;display:block;margin-bottom:4px}
+  .passo{border:1px solid var(--linea);background:var(--carta);padding:11px 13px;margin:8px 0}
+  .passo b{font-family:var(--display);font-size:14px;display:block}
+  .passo code,code{font-family:var(--dati);font-size:12px;background:#23405E12;padding:1px 5px}
+  .passo p{margin:4px 0 0;font-size:13px;color:#1B211DB3}
+  .giu{text-align:center;color:var(--ai);font-family:var(--dati);font-size:15px;line-height:1;margin:2px 0}
+  .det{border-left:3px solid var(--wakatake)}
+  .mod{border-left:3px solid var(--yamabuki)}
+  .rete{border-left:3px solid var(--shu)}
+
+  .legenda{display:flex;flex-wrap:wrap;gap:18px;margin:16px 0 0;font-size:12.5px;color:#1B211DB3}
+  .legenda i{display:inline-block;width:10px;height:10px;margin-right:6px;vertical-align:baseline}
+
+  table{width:100%;border-collapse:collapse;margin-top:14px;font-size:13.5px}
+  th,td{border:1px solid var(--linea);padding:9px 11px;text-align:left;vertical-align:top;background:var(--carta-alta)}
+  th{font-family:var(--display);font-size:12.5px;background:#23405E0F;font-weight:500}
+  td.costo{font-family:var(--dati);font-size:12px;white-space:nowrap}
+  .zero{color:var(--wakatake)}
+  .medio{color:var(--yamabuki)}
+  .alto{color:var(--shu)}
+
+  .confini{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:14px}
+  .confine{border:1px solid var(--linea);border-left:4px solid var(--shu);background:var(--carta-alta);padding:14px 16px}
+  .confine p{margin:6px 0 0;font-size:13px;color:#1B211DB3}
+
+  h3.quesito{font-family:var(--display);font-size:17px;margin:34px 0 8px;padding:0;
+             border:0;color:var(--ai)}
+  .numeri small{font-size:11px}
+  .gradini{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+           gap:12px;margin-top:14px;align-items:stretch}
+  .grad{border:1px solid var(--linea);background:var(--carta-alta);padding:13px 14px;
+        position:relative;border-bottom:5px solid var(--wakatake)}
+  .grad.g3{border-bottom-color:#6E8A4E}
+  .grad.g5{border-bottom-color:var(--yamabuki)}
+  .grad.g8{border-bottom-color:#B8542A}
+  .grad.g13{border-bottom-color:var(--shu)}
+  .grad b{font-family:var(--display);font-size:13.5px;display:block;margin-top:2px}
+  .grad p{margin:5px 0 0;font-size:12.5px;color:#1B211DB3}
+  .peso{font-family:var(--dati);font-size:22px;color:var(--ai);line-height:1}
+  td.costo{font-family:var(--dati)}
+  footer{margin-top:64px;padding-top:16px;border-top:1px solid var(--linea);font-size:12.5px;color:#1B211D99}
+</style>
+</head>
+<body>
+<div class="foglio">
+
+  <p class="occhiello">TreasureIQ · architettura del dato</p>
+  <h1>Due motori, non uno.<br>Uno acquisisce, l'altro risponde.</h1>
+  <p class="sotto">L'interrogazione dei dati aperti e la ricerca che serve la chat sono due
+  sistemi distinti, con confini diversi e costi di estensione diversi. Confonderli è il
+  malinteso più comune su questo progetto — questa pagina esiste per separarli.</p>
+
+  <div class="numeri">
+    <div><b>11.556</b><span>righe Python</span></div>
+    <div><b>31</b><span>moduli</span></div>
+    <div><b>41</b><span>test</span></div>
+    <div><b>21</b><span>topic civici</span></div>
+    <div><b>68</b><span>chiavi di ricerca</span></div>
+    <div><b>7</b><span>criteri di idoneità</span></div>
+    <div><b>4×4</b><span>stati × verdetti</span></div>
+  </div>
+
+  <h2>Lo schema</h2>
+  <div class="motori">
+
+    <div class="motore a">
+      <span class="tag">Motore A — acquisizione · offline</span>
+      <h3>Qui si interrogano i dati aperti</h3>
+      <div class="passo rete"><b>Portali dei comuni</b>
+        <p>WP REST <code>/wp-json/wp/v2/servizio</code> con campi CMB2 tipizzati ·
+        pagine WP · HTML puro. Un connettore per piattaforma, interfaccia unica
+        (<code>Connector.fetch()</code>).</p></div>
+      <div class="giu">│</div>
+      <div class="passo det"><b>Normalizzazione + misura</b>
+        <p>Ogni record diventa un <code>Opportunity</code>. Il connettore
+        <em>misura</em> quanta struttura ha recuperato: dichiarata o dedotta dal testo.
+        Su Albano: vincoli presenti 32/32, compilati 1/32.</p></div>
+      <div class="giu">│</div>
+      <div class="passo mod"><b>Estrazione dalla prosa</b>
+        <p>Solo dove il campo tipizzato è vuoto. Regex (ISEE, età) più modello.
+        Marchiato <code>INFERRED</code>: mai spacciato per dichiarato.</p></div>
+      <div class="giu">│</div>
+      <div class="passo det"><b>Snapshot curato</b>
+        <p><code>data/</code>, montato in sola lettura. Nessun cittadino aspetta
+        mai questo motore.</p></div>
+    </div>
+
+    <div class="motore b">
+      <span class="tag">Motore B — risposta · runtime</span>
+      <h3>Qui non si interroga niente: si cerca nello snapshot</h3>
+      <div class="passo mod"><b>1 · Intento</b>
+        <p>Il modello mappa il testo libero su uno schema <em>chiuso</em>:
+        forma della domanda + topic + slot anagrafici. Mai prosa, mai un verdetto.</p></div>
+      <div class="giu">│</div>
+      <div class="passo det"><b>2 · Tre guardie deterministiche</b>
+        <p>Il comune nominato deve comparire nelle parole del cittadino · il ruolo
+        deve essere dichiarato · i topic informativi per natura non possono diventare
+        agevolazione. Scartano ciò che il modello ha aggiunto da sé.</p></div>
+      <div class="giu">│</div>
+      <div class="passo det"><b>3 · Recupero a chiavi</b>
+        <p>Sottostringa su titolo, sommario, corpo. Confine di parola:
+        <code>tari</code> non prende <code>tariffa</code>, <code>tributi</code> non prende
+        <code>contributi</code>. Radici tronche esplicite (<code>disabilit-</code>).</p></div>
+      <div class="giu">│</div>
+      <div class="passo det"><b>4 · Prova di pertinenza</b>
+        <p>Due vie, basta una: le chiavi del topic stanno <em>sia</em> nella frase del
+        cittadino <em>sia</em> nel titolo; oppure titolo e domanda condividono una parola
+        piena. Fuori dal conteggio: parole generiche e il nome del comune.</p></div>
+      <div class="giu">│</div>
+      <div class="passo det"><b>5 · Verdetto</b>
+        <p>7 criteri confrontati con <code>Decimal</code>, tre valori logici,
+        4 verdetti. Nessun modello tocca questo passo.</p></div>
+      <div class="giu">│</div>
+      <div class="passo mod"><b>6 · Verbalizzazione</b>
+        <p>Il modello mette in italiano un verdetto già preso. Le cifre e le citazioni
+        arrivano dai composer strutturati, non dal testo generato.</p></div>
+    </div>
+  </div>
+
+  <div class="legenda">
+    <span><i style="background:var(--wakatake)"></i>deterministico — leggibile, testabile, correggibile</span>
+    <span><i style="background:var(--yamabuki)"></i>modello — schema chiuso, mai un fatto</span>
+    <span><i style="background:var(--shu)"></i>rete — confinata</span>
+  </div>
+
+  <h2>Il ponte: la sonda live</h2>
+  <p class="sotto">Un comune fuori copertura non ha snapshot. Invece di rifiutare, il
+  sistema legge il portale <em>del comune stesso</em> — ISTAT dice quali comuni esistono,
+  IPA dove stanno online (7.867 su 7.896). Non è un link trovato da un motore di ricerca:
+  è la fonte, citata. Con tre confini stretti.</p>
+  <div class="confini">
+    <div class="confine"><h3>Solo rail informazione</h3>
+      <p>Un dato letto adesso non entra mai in un verdetto di idoneità.</p></div>
+    <div class="confine"><h3>Solo fuori copertura</h3>
+      <p>Se il comune ha un ente censito si risponde da lì. Non è una scorciatoia
+      per saltare l'ingestione.</p></div>
+    <div class="confine"><h3>Mai promosso a dato</h3>
+      <p>Cache in <code>data-live/</code>, 14 giorni, separata dallo snapshot curato.
+      Timeout 6 secondi: il primo cittadino paga, gli altri no.</p></div>
+  </div>
+
+  <h2>Punti di innesto: cosa costa allargarlo</h2>
+  <table>
+    <tr><th>Estensione</th><th>Dove si tocca</th><th>Costo</th></tr>
+    <tr><td>Un altro comune sulla stessa piattaforma</td>
+        <td>una riga nel registro enti + una ingestione</td>
+        <td class="costo zero">zero codice</td></tr>
+    <tr><td>Un argomento civico nuovo</td>
+        <td>una voce nell'enum + la sua tupla di chiavi</td>
+        <td class="costo zero">zero codice</td></tr>
+    <tr><td>Un criterio di idoneità nuovo</td>
+        <td>una funzione aggiunta a <code>CRITERION_CHECKS</code></td>
+        <td class="costo zero">una funzione</td></tr>
+    <tr><td>Una piattaforma sorgente nuova (CKAN, portale proprietario)</td>
+        <td>una sottoclasse di <code>Connector</code>, un metodo</td>
+        <td class="costo medio">un connettore</td></tr>
+    <tr><td>Una lingua nuova per il cittadino</td>
+        <td>chiavi di ricerca + prompt; il motore non cambia</td>
+        <td class="costo medio">dati, non logica</td></tr>
+    <tr><td>Una forma di domanda nuova (terzo rail)</td>
+        <td>routing, composer, contratto API, UI</td>
+        <td class="costo alto">trasversale</td></tr>
+  </table>
+  <p class="sotto" style="margin-top:12px"><small>La forma è quella giusta: quattro estensioni
+  su sei si fanno aggiungendo dati o una funzione, senza toccare un percorso di codice.
+  L'unica costosa è la sesta — ed è deliberato: una forma di domanda nuova cambia cosa
+  il sistema promette al cittadino, e quella promessa merita di essere pagata.</small></p>
+
+  <h2>Il lavoro che resta — quattro domande con numeri, non con opinioni</h2>
+  <p class="sotto">Questo è un MVP: tre comuni ingeriti, una piattaforma coperta bene.
+  Quello che segue non è una promessa, è un preventivo — costruito sui numeri già
+  misurati dal sistema, con le assunzioni scritte accanto a ogni stima.</p>
+
+  <h3 class="quesito">1 · Piattaforme nuove: cosa costa aggiungerne una</h3>
+  <p class="sotto">Il costo di lettura è già modellato nel codice (<code>costo.py</code>),
+  in unità dove <em>uno</em> è una ingestione attraverso un'interfaccia documentata.
+  I salti non sono lineari perché il lavoro non lo è.</p>
+  <div class="gradini">
+    <div class="grad g1"><span class="peso">1</span><b>M1 · campo tipizzato</b>
+      <p>Il comune compila il campo previsto. Si legge e basta.</p></div>
+    <div class="grad g3"><span class="peso">3</span><b>M2 · prosa dentro API</b>
+      <p>Il dato c'è ma in testo libero: un'estrazione che può fallire in silenzio.</p></div>
+    <div class="grad g5"><span class="peso">5</span><b>M3 · allegato</b>
+      <p>Scaricare e parsare un PDF prima ancora di iniziare a estrarre.</p></div>
+    <div class="grad g8"><span class="peso">8</span><b>M4 · connettore su misura</b>
+      <p>Codice scritto per un portale solo, che si rompe quando quel portale cambia.</p></div>
+    <div class="grad g13"><span class="peso">13</span><b>M5/M6 · niente, o web aperto</b>
+      <p>Costa il massimo e quello che compri vale meno: prova debole.</p></div>
+  </div>
+  <p class="sotto" style="margin-top:12px">Un connettore reale, misurato su quelli
+  esistenti: <code>wp_comuni.py</code> 360 righe, <code>html_pages.py</code> 392,
+  <code>wp_pages.py</code> 545. L'interfaccia da implementare è una:
+  <code>Connector.fetch()</code>. <strong>Stima: 3–5 giornate</strong> per piattaforma
+  nuova, test inclusi — più il costo ricorrente di riparazione quando quella piattaforma
+  viene ridisegnata.</p>
+
+  <h3 class="quesito">2 · Scalare l'ingestione: dove sono davvero i comuni</h3>
+  <p class="sotto">Non è una supposizione: il censimento su <strong>401 comuni</strong>
+  (385 misurati, 16 irraggiungibili, 502 richieste, 1,47 s medi) dice esattamente quanta
+  strada è asfaltata.</p>
+  <div class="numeri">
+    <div><b>15,8%</b><span>espone un'API uffici <small>(±3,6)</small></span></div>
+    <div><b>4,2%</b><span>orari URP recuperabili <small>(±2,0)</small></span></div>
+    <div><b>26,2%</b><span>di chi ha l'API espone anche l'URP</span></div>
+    <div><b>0</b><span>orari in un campo tipizzato</span></div>
+    <div><b>16</b><span>comuni con l'orario, tutti in prosa</span></div>
+    <div><b>4,0%</b><span>portali irraggiungibili</span></div>
+  </div>
+  <p class="sotto" style="margin-top:14px">Lettura onesta: l'80% dei comuni oggi è
+  <strong>solo HTML</strong>. Quindi la scala non si compra scrivendo connettori a uno a
+  uno — si compra in tre mosse, in quest'ordine, perché il rapporto fra copertura e
+  costo crolla dopo la seconda:</p>
+  <table>
+    <tr><th>Mossa</th><th>Cosa copre</th><th>Costo</th></tr>
+    <tr><td><b>a.</b> Estendere il censimento a tutti i comuni</td>
+        <td>la mappa completa: chi è M1, chi è M4. Oggi ne conosciamo 401 su 7.896</td>
+        <td class="costo zero">macchina: ~3,2 h seriali, ~25 min con 8 richieste in parallelo</td></tr>
+    <tr><td><b>b.</b> Connettori per le 3–5 piattaforme più diffuse</td>
+        <td>la stima da confermare col censimento pieno: 60–75% dei comuni</td>
+        <td class="costo medio">15–25 giornate una tantum</td></tr>
+    <tr><td><b>c.</b> Coda lunga dei portali unici</td>
+        <td>l'ultimo 25–40%, un portale alla volta</td>
+        <td class="costo alto">non pagabile a mano — serve un estrattore generico, o si lascia scoperta</td></tr>
+  </table>
+  <p class="sotto" style="margin-top:12px"><small>La mossa (a) va fatta comunque e per
+  prima: senza la mappa completa, ogni stima sulle mosse (b) e (c) è un'opinione. È anche
+  l'unica delle tre che non costa lavoro umano.</small></p>
+
+  <h3 class="quesito">3 · Quando i PDF non bastano più</h3>
+  <p class="sotto">Oggi i PDF si leggono davvero (<code>pypdf</code>, caricato solo dalle
+  pagine che ne linkano uno), entro budget espliciti: <strong>5 allegati per pagina</strong>,
+  <strong>2 MB</strong> per file, <strong>12.000 caratteri</strong> di corpus, con i nomi
+  file che contengono <em>bando</em>, <em>avviso</em> o <em>regolamento</em> letti prima di
+  <em>modulo</em> e <em>domanda</em>. Ogni scarto lascia una nota nel record: il debito è
+  contato, non nascosto.</p>
+  <p class="sotto">Perciò il momento in cui i PDF non bastano più non è un'impressione —
+  è una soglia che si può sorvegliare. Tre segnali, in ordine di gravità:</p>
+  <table>
+    <tr><th>Segnale</th><th>Cosa significa davvero</th><th>Risposta</th></tr>
+    <tr><td>Allegati scartati per il limite di 5 o di 2 MB</td>
+        <td>i budget sono tarati sotto la realtà, non è un problema di tecnologia</td>
+        <td class="costo zero">alzare le costanti, ri-misurare i tempi di run</td></tr>
+    <tr><td>PDF scaricati ma senza testo estratto</td>
+        <td>è una scansione: nessuno strato testuale da leggere. Qui <code>pypdf</code>
+        non fallisce, restituisce il vuoto — ed è il caso peggiore perché somiglia a un
+        comune che non pubblica</td>
+        <td class="costo medio">OCR in ingestione (offline, mai a runtime)</td></tr>
+    <tr><td>Record fermi a <code>L3_ILLEGGIBILE</code> in crescita su comuni diversi</td>
+        <td>non è un portale sfortunato: è una classe di documenti che il sistema non sa
+        leggere (tabelle, moduli, delibere con allegati annidati)</td>
+        <td class="costo alto">estrazione strutturata dei documenti, non solo del testo</td></tr>
+  </table>
+  <p class="sotto" style="margin-top:12px"><small>La metrica da mettere sotto controllo è
+  una sola: <em>quota di record il cui requisito vive in un allegato che non siamo riusciti
+  a leggere</em>. Finché resta bassa, i PDF bastano. È già calcolabile con i dati che il
+  sistema registra oggi — manca solo il cruscotto che la mostri.</small></p>
+
+  <h3 class="quesito">4 · Storage e lavoro umano: il preventivo</h3>
+  <p class="sotto">Base misurata, non stimata: il seed attuale pesa
+  <strong>65,7 KB per comune</strong> con <strong>23,5 record</strong> di media
+  (94 record, 262,8 KB in tutto). Da lì si estrapola.</p>
+  <table>
+    <tr><th>Scenario</th><th>Seed JSON</th><th>Cache PDF <small>(se conservata)</small></th><th>Totale ordine di grandezza</th></tr>
+    <tr><td>Oggi — 3 comuni + nazionale</td><td class="costo">263 KB</td>
+        <td class="costo">nessuna</td><td class="costo zero">meno di 1 MB</td></tr>
+    <tr><td>100 comuni — area vasta</td><td class="costo">~6,5 MB</td>
+        <td class="costo">~150 MB</td><td class="costo zero">meno di 200 MB</td></tr>
+    <tr><td>1.000 comuni</td><td class="costo">~64 MB</td>
+        <td class="costo">~1,5 GB</td><td class="costo medio">~1,6 GB</td></tr>
+    <tr><td>Nazionale — 7.896 comuni</td><td class="costo">~507 MB</td>
+        <td class="costo">~12 GB <small>(fino a 47 GB al limite)</small></td>
+        <td class="costo medio">~13 GB</td></tr>
+  </table>
+  <p class="sotto" style="margin-top:12px"><small>Assunzioni dichiarate: circa il 10% dei
+  record cita un PDF (9 su 94 nel seed attuale), ~3 allegati per comune, 500 KB medi —
+  il tetto di 2 MB per file dà il caso peggiore. <strong>Il seed è irrilevante, i PDF
+  sono tutto il costo</strong>: mezzo giga di dati civici contro dodici di allegati. Se
+  si conserva solo il testo estratto invece dei binari, il nazionale sta sotto il
+  gigabyte — ed è la scelta giusta, perché il PDF originale è comunque citato per URL e
+  ricaricabile.</small></p>
+
+  <p class="sotto">Il lavoro umano è la voce vera, ed è quasi tutta manutenzione:
+  i portali si spostano senza avviso, e per questo una scoperta scade dopo
+  <strong>7 giorni</strong> (<code>SOGLIA_RISCOPERTA</code>). Riscoprire è automatico;
+  <em>riparare</em> ciò che la riscoperta trova rotto non lo è.</p>
+  <table>
+    <tr><th>Scenario</th><th>Una tantum</th><th>Ricorrente</th><th>Su cosa si spende</th></tr>
+    <tr><td>MVP di oggi</td><td class="costo">—</td>
+        <td class="costo zero">~0,5 gg/mese</td>
+        <td>controllare che le tre ingestioni girino ancora</td></tr>
+    <tr><td>100 comuni, 2–3 piattaforme</td><td class="costo medio">8–12 gg</td>
+        <td class="costo medio">~2–3 gg/mese</td>
+        <td>connettori, e arbitrare i casi in cui l'estrazione sbaglia</td></tr>
+    <tr><td>Nazionale, 5 piattaforme + coda</td><td class="costo alto">25–40 gg</td>
+        <td class="costo alto">~10 gg/mese <small>(≈0,5 FTE)</small></td>
+        <td>riparazioni continue, qualità del dato, richieste dei comuni</td></tr>
+  </table>
+  <p class="sotto" style="margin-top:12px"><small>Assunzione sotto la riga ricorrente:
+  una piattaforma viene ridisegnata circa una volta l'anno, e ogni ridisegno costa 1–3
+  giornate di riparazione del connettore. La scoperta e la misura non entrano in questo
+  conto perché sono già automatiche — 1,47 secondi per comune, nessuna mano umana.
+  <strong>Il costo non scala col numero di comuni: scala col numero di piattaforme.</strong>
+  Ed è questa la ragione per cui il censimento va fatto prima di qualunque altra cosa.</small></p>
+
+  <h2>Due rail bastano?</h2>
+  <p class="sotto">Per ora sì. <strong>Agevolazione</strong> e <strong>informazione</strong>
+  non sono due argomenti: sono le due forme che una domanda civica può avere — «ho diritto?»
+  e «com'è fatto?». Coprono il catalogo perché ogni servizio comunale o ha requisiti da
+  verificare o non ne ha.<br><br>
+  Il terzo rail naturale, quando servirà, è <strong>adempimento</strong>: non «ho diritto»
+  ma «come lo faccio, entro quando, a che punto è la mia pratica». È l'unico che chiede
+  qualcosa che il sistema oggi non ha — uno stato che cambia nel tempo e appartiene a una
+  persona. Finché i dati aperti dei comuni non lo espongono, aggiungerlo significherebbe
+  simularlo, e su questo progetto simulare è la sola cosa vietata davvero.</p>
+
+  <footer>Numeri misurati sul repository e sul censimento t0, agosto 2026 · 11.556 righe,
+  31 moduli, 41 test · 401 comuni sondati, 502 richieste, 1,47 s medi ·
+  seed 94 record, 262,8 KB. Le stime di costo e storage sono estrapolazioni da queste
+  misure, con le assunzioni scritte accanto a ciascuna.</footer>
+</div>
+</body>
+</html>

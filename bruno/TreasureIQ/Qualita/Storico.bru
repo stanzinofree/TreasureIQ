@@ -1,0 +1,16 @@
+meta {
+  name: Storico
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{base}}/api/storico
+  body: none
+  auth: none
+}
+
+docs {
+  La serie storica del costo di lettura. Vuota su un checkout fresco: nessuno ha
+  ancora misurato, e non e' un errore.
+}

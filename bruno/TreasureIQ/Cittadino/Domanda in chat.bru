@@ -1,0 +1,26 @@
+meta {
+  name: Domanda in chat
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{base}}/api/chat
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "messaggio": "ho un figlio piccolo, ci sono contributi per il nido?"
+  }
+}
+
+docs {
+  La domanda di una persona in parole sue.
+  
+  Il modello capisce la domanda e nulla piu': non stabilisce esiti, non calcola
+  soglie, non riscrive cifre. Il verdetto lo decide un confronto deterministico
+  fra i criteri pubblicati e il profilo, e le cifre arrivano dai campi, non dal
+  testo generato.
+}

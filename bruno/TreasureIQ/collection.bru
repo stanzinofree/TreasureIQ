@@ -1,0 +1,23 @@
+headers {
+  Accept: application/json
+}
+
+docs {
+  # TreasureIQ — API
+
+  Due garanzie valgono su tutte le rotte, e conviene conoscerle prima di leggere
+  una risposta.
+
+  **Un requisito compare solo se è scritto in un documento pubblicato**, citato
+  verbatim. Dove la fonte tace, la risposta dice che tace invece di stimare.
+
+  **Un campo non misurato resta vuoto, mai zero.** Su un grafico uno zero e uno
+  sconosciuto hanno lo stesso aspetto e significato opposto: `popolazione: null`
+  vuol dire che non l'abbiamo misurata, non che non ci abita nessuno.
+
+  ## Ambiente
+
+  L'API gira sulla porta **8010** e non sulla 8000, che su questa macchina è
+  occupata da altro. Cambia `base` in `environments/locale.bru` se il tuo compose
+  la pubblica altrove.
+}

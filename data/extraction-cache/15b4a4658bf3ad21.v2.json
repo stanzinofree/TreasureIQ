@@ -1,0 +1,35 @@
+{
+ "isee_max": null,
+ "isee_min": null,
+ "isee_mentioned_without_threshold": false,
+ "eta_min": null,
+ "eta_max": null,
+ "nucleo_min": null,
+ "figli_minori_required": null,
+ "disabilita_required": true,
+ "residenza_required": null,
+ "employment_status": [],
+ "other": [],
+ "quotes": [
+  {
+   "field": "disabilita_required",
+   "text": "AGEVOLAZIONE 10% PER FAMIGLIE CON PRESENZA DI PERSONE CON DISABILITA’ AL 100%"
+  },
+  {
+   "field": "disabilita_required",
+   "text": "RICHIESTA CONTRASSEGNO UNIFICATO DISABILI EUROPEO (CUDE)"
+  },
+  {
+   "field": "disabilita_required",
+   "text": "RICHIESTA DI ACCESSO AD AREA ZTL PERSONE CON DISABILITA'"
+  },
+  {
+   "field": "disabilita_required",
+   "text": "FREQUENZA GRATUITA DELLA PISCINA COMUNALE A PERSONE CON INVALIDITA’ DEL 100%"
+  }
+ ],
+ "deadline_iso": null,
+ "notes": [
+  "Non è chiaro se le agevolazioni sono accessibili solo a chi ha un certificato di disabilità o se la disabilità deve essere dichiarata in un certo modo."
+ ]
+}

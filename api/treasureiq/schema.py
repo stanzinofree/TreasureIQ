@@ -18,7 +18,7 @@ from __future__ import annotations
 from datetime import date, datetime
 from decimal import Decimal
 from enum import Enum
-from typing import Annotated
+from typing import Annotated, Literal
 
 from pydantic import BaseModel, Field, HttpUrl, field_validator, model_validator
 
@@ -99,6 +99,20 @@ class Confidence(str, Enum):
     INFERRED = "inferred"
 
 
+class Livello(str, Enum):
+    """Which administrative tier published this opportunity (D-20).
+
+    Municipal connectors only ever produce `COMUNALE`; the hand-curated
+    national/regional layer (`data/seed/nazionale_curated.json`) is the only
+    producer of the other two. Defaulted so every seed written before this
+    field existed keeps validating unchanged.
+    """
+
+    NAZIONALE = "nazionale"
+    REGIONALE = "regionale"
+    COMUNALE = "comunale"
+
+
 class Money(BaseModel):
     """An amount, possibly a range, possibly open-ended."""
 
@@ -154,6 +168,19 @@ class Requirements(BaseModel):
     )
     figli_minori_required: bool | None = None
     disabilita_required: bool | None = None
+    sesso: Literal["f", "m"] | None = Field(
+        default=None,
+        description="Required gender of the citizen, when the source states "
+        "one (e.g. 'contrassegno rosa', reserved to women). `None` means "
+        "unconstrained — analogous to every other field here (D-52).",
+    )
+    disabilita_nucleo_required: bool | None = Field(
+        default=None,
+        description="Whether the household must include a member (not "
+        "necessarily the applicant) with a certified disability — distinct "
+        "from `disabilita_required`, which is about the applicant "
+        "themselves (D-53).",
+    )
 
     employment_status: list[EmploymentStatus] = Field(
         default_factory=list,
@@ -204,10 +231,47 @@ class Requirements(BaseModel):
                 self.nucleo_min is not None,
                 self.figli_minori_required is not None,
                 self.disabilita_required is not None,
+                self.sesso is not None,
+                self.disabilita_nucleo_required is not None,
                 self.employment_status,
                 self.other,
             ]
         )
+
+
+class RecoveryLevel(str, Enum):
+    """D-16: which rung of the recovery ladder a record landed on.
+
+    This is instrumentation about how closed the comune's data was, never a
+    signal `match/engine.py` may read (D-16 constraint) — it must not move a
+    verdict or a criterion state.
+
+    L1_MANUALE     — nothing machine-readable recovered; the citizen must
+                     open the source document(s) themselves.
+    L2_ESTRATTO    — the body or a linked PDF had readable text and at least
+                     one quote-gated requirement was recovered from it.
+    L3_ILLEGGIBILE — a PDF exists but yielded no usable text (scanned,
+                     image-only, encrypted, or a parse failure). Worse than
+                     L1_MANUALE, not the same: the diagnosis is "nobody can
+                     read this," not "we have not read it yet." Must never be
+                     merged into L1_MANUALE.
+    """
+
+    L1_MANUALE = "L1_manuale"
+    L2_ESTRATTO = "L2_estratto"
+    L3_ILLEGGIBILE = "L3_illeggibile"
+
+
+class PdfSkip(BaseModel):
+    """One PDF attachment that was not opened, and why (D-16).
+
+    Every skip is logged explicitly (D-15) — a silent skip would understate
+    the recovery cost, which is precisely the number this instrumentation
+    exists to report honestly.
+    """
+
+    url: str
+    reason: str
 
 
 class Source(BaseModel):
@@ -263,10 +327,67 @@ class Opportunity(BaseModel):
     confidence: Confidence = Field(
         description="Trust level of the structured fields as a whole."
     )
+    livello: Livello = Field(
+        default=Livello.COMUNALE,
+        description="Administrative tier that published this record (D-20). "
+        "Defaulted to COMUNALE so existing municipal seeds validate unchanged.",
+    )
+    regione: str | None = Field(
+        default=None,
+        description=(
+            "Which region published this, for `REGIONALE` records only. Without "
+            "it a Sicilian resident was offered a Lazio concession: the same "
+            "class of error as answering about the wrong comune, with a bigger "
+            "label on it. `None` on national and municipal records, where the "
+            "question does not arise."
+        ),
+    )
     extraction_notes: list[str] = Field(
         default_factory=list,
         description="What the extractor was unsure about. Surfaced in the UI "
         "so the citizen knows where the machine guessed.",
+    )
+
+    # -- D-16/D-17 recovery-cost instrumentation -----------------------------
+    # Optional, `None` by default so seeds written before this existed keep
+    # validating unchanged. Populated only by connectors that actually
+    # measured a recovery attempt (currently `ingest/wp_pages.py`); every
+    # other connector leaves them unset. Instrumentation ONLY — nothing here
+    # may be read by `match/engine.py` or influence a verdict, a criterion
+    # state, or the D-05 quote-gate. A value that was not measured is `None`,
+    # never a guessed zero.
+    recovery_level: RecoveryLevel | None = Field(
+        default=None,
+        description="Which rung of the D-16 recovery ladder this record "
+        "landed on. None when unmeasured.",
+    )
+    pdfs_linked: int | None = Field(
+        default=None, description="PDF attachments found linked from the body."
+    )
+    pdfs_opened: int | None = Field(
+        default=None,
+        description="Of those linked, how many yielded usable text.",
+    )
+    pdfs_skipped: list[PdfSkip] | None = Field(
+        default=None,
+        description="PDFs not opened, each with its reason (cap, size, "
+        "download failure, unreadable...).",
+    )
+    chars_processed: int | None = Field(
+        default=None,
+        description="Characters of assembled corpus actually handed to the "
+        "extractor for this record.",
+    )
+    extraction_seconds: float | None = Field(
+        default=None,
+        description="Wall-clock time spent recovering this record's "
+        "criteria (PDF fetch/parse + extraction attempt).",
+    )
+    requirements_recovered: int | None = Field(
+        default=None,
+        description="Count of quote-gated requirement fields that survived "
+        "into `requirements` for this record. None when extraction never "
+        "ran; a real 0 when it ran and recovered nothing.",
     )
 
     @field_validator("summary")
@@ -311,16 +432,39 @@ class CitizenProfile(BaseModel):
         default=None,
         description="Optional even in production: matching never requires it.",
     )
-    comune_istat: str = Field(description="Residency, the primary hard filter.")
-    comune_nome: str
+    comune_istat: str | None = Field(
+        default=None,
+        description="Residency, the primary hard filter. None means 'not yet stated' "
+        "— see matching rules.",
+    )
+    comune_nome: str | None = Field(default=None)
 
-    eta: int = Field(ge=0, le=130)
+    eta: int | None = Field(default=None, ge=0, le=130)
     isee: ISEE | None = Field(
         default=None, description="None means 'not declared' — see matching rules."
     )
-    nucleo_familiare: int = Field(default=1, ge=1)
-    figli_minori: int = Field(default=0, ge=0)
-    disabilita: bool = False
+    nucleo_familiare: int | None = Field(default=None, ge=1)
+    figli_minori: int | None = Field(default=None, ge=0)
+    disabilita: bool | None = None
+    sesso: Literal["f", "m"] | None = Field(
+        default=None,
+        description="None means 'not declared or not deducible' — a "
+        "low-confidence deduction from the citizen's own first name "
+        "counts as declared here (D-52), but stays correctable in the UI.",
+    )
+    figli_disabili: int | None = Field(
+        default=None,
+        ge=0,
+        description="Count of children in the household with a certified "
+        "disability. Not the applicant's own disability — see `disabilita`.",
+    )
+    disabilita_nucleo: bool | None = Field(
+        default=None,
+        description="Whether the household includes a child with a "
+        "certified disability (D-53). Normalised from `figli_disabili` in "
+        "`treasureiq.chat.respond._profile_from_slots` when a count is "
+        "known (`figli_disabili > 0 -> True`).",
+    )
     employment_status: EmploymentStatus | None = None
 
     interests: list[TargetGroup] = Field(

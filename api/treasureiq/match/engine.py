@@ -27,7 +27,6 @@ from enum import Enum
 from treasureiq.schema import (
     CitizenProfile,
     Confidence,
-    EmploymentStatus,
     Opportunity,
     Requirements,
 )
@@ -189,6 +188,13 @@ def _check_residency(
             CriterionState.UNKNOWN_SOURCE,
             "Il bando richiede la residenza ma non specifica in quale comune.",
         )
+    if profile.comune_istat is None:
+        return CriterionResult(
+            "residenza",
+            label,
+            CriterionState.UNKNOWN_PROFILE,
+            "Indica il tuo comune di residenza per verificare questo requisito.",
+        )
     if profile.comune_istat in qualifying:
         return CriterionResult(
             "residenza",
@@ -250,6 +256,13 @@ def _check_age(req: Requirements, profile: CitizenProfile) -> CriterionResult:
     label = "Età"
     if req.eta_min is None and req.eta_max is None:
         return _absent(req, "eta", label, "età")
+    if profile.eta is None:
+        return CriterionResult(
+            "eta",
+            label,
+            CriterionState.UNKNOWN_PROFILE,
+            "Indica la tua età per verificare questo requisito.",
+        )
     if req.eta_min is not None and profile.eta < req.eta_min:
         return CriterionResult(
             "eta",
@@ -273,6 +286,14 @@ def _check_household(req: Requirements, profile: CitizenProfile) -> CriterionRes
     label = "Nucleo familiare"
     if req.nucleo_min is None:
         return _absent(req, "nucleo", label, "nucleo familiare")
+    if profile.nucleo_familiare is None:
+        return CriterionResult(
+            "nucleo",
+            label,
+            CriterionState.UNKNOWN_PROFILE,
+            "Indica quante persone ci sono nel tuo nucleo familiare per verificare "
+            "questo requisito.",
+        )
     if profile.nucleo_familiare < req.nucleo_min:
         return CriterionResult(
             "nucleo",
@@ -290,6 +311,13 @@ def _check_minors(req: Requirements, profile: CitizenProfile) -> CriterionResult
     label = "Figli minori"
     if req.figli_minori_required is None:
         return _absent(req, "figli_minori", label, "figli minori")
+    if profile.figli_minori is None:
+        return CriterionResult(
+            "figli_minori",
+            label,
+            CriterionState.UNKNOWN_PROFILE,
+            "Indica se hai figli minori per verificare questo requisito.",
+        )
     if req.figli_minori_required and profile.figli_minori == 0:
         return CriterionResult(
             "figli_minori",
@@ -306,6 +334,13 @@ def _check_disability(req: Requirements, profile: CitizenProfile) -> CriterionRe
     label = "Disabilità"
     if req.disabilita_required is None:
         return _absent(req, "disabilita", label, "disabilità")
+    if profile.disabilita is None:
+        return CriterionResult(
+            "disabilita",
+            label,
+            CriterionState.UNKNOWN_PROFILE,
+            "Indica se hai una condizione di disabilità per verificare questo requisito.",
+        )
     if req.disabilita_required and not profile.disabilita:
         return CriterionResult(
             "disabilita",
@@ -315,6 +350,64 @@ def _check_disability(req: Requirements, profile: CitizenProfile) -> CriterionRe
         )
     return CriterionResult(
         "disabilita", label, CriterionState.MET, "Requisito di disabilità soddisfatto."
+    )
+
+
+def _check_sesso(req: Requirements, profile: CitizenProfile) -> CriterionResult:
+    """NEUTRO per costruzione (D-52): senza un `Requirements.sesso` esplicito
+    questo criterio non produce mai un blocco, quale che sia il valore del
+    profilo (dichiarato o dedotto dal nome). Discrimina solo i record dove il
+    requisito e' davvero scritto dalla fonte — sul seed di oggi, il
+    "contrassegno rosa" di Lucca e Malvagna (R-DATA)."""
+    label = "Sesso"
+    if req.sesso is None:
+        return _absent(req, "sesso", label, "sesso")
+    if profile.sesso is None:
+        return CriterionResult(
+            "sesso",
+            label,
+            CriterionState.UNKNOWN_PROFILE,
+            "Indica il sesso nel profilo per verificare questo requisito.",
+        )
+    if profile.sesso != req.sesso:
+        return CriterionResult(
+            "sesso",
+            label,
+            CriterionState.NOT_MET,
+            "Riservato in base al sesso, e il tuo profilo non corrisponde.",
+        )
+    return CriterionResult("sesso", label, CriterionState.MET, "Requisito sul sesso soddisfatto.")
+
+
+def _check_disabilita_nucleo(req: Requirements, profile: CitizenProfile) -> CriterionResult:
+    """Speculare a `_check_disability`, ma sul nucleo (D-53): un figlio con
+    disabilita', non il cittadino stesso. `figli_disabili > 0 ->
+    disabilita_nucleo=True` e' normalizzato a monte, in
+    `treasureiq.chat.respond._profile_from_slots` — qui si legge solo
+    `profile.disabilita_nucleo`."""
+    label = "Disabilità nel nucleo"
+    if req.disabilita_nucleo_required is None:
+        return _absent(req, "disabilita_nucleo", label, "disabilità nel nucleo")
+    if profile.disabilita_nucleo is None:
+        return CriterionResult(
+            "disabilita_nucleo",
+            label,
+            CriterionState.UNKNOWN_PROFILE,
+            "Indica se nel tuo nucleo c'è un figlio con disabilità per "
+            "verificare questo requisito.",
+        )
+    if req.disabilita_nucleo_required and not profile.disabilita_nucleo:
+        return CriterionResult(
+            "disabilita_nucleo",
+            label,
+            CriterionState.NOT_MET,
+            "Riservato a nuclei con un figlio con disabilità certificata.",
+        )
+    return CriterionResult(
+        "disabilita_nucleo",
+        label,
+        CriterionState.MET,
+        "Requisito di disabilità nel nucleo soddisfatto.",
     )
 
 
@@ -351,6 +444,8 @@ CRITERION_CHECKS = (
     _check_household,
     _check_minors,
     _check_disability,
+    _check_sesso,
+    _check_disabilita_nucleo,
     _check_employment,
 )
 

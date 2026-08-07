@@ -1,0 +1,16 @@
+meta {
+  name: Readiness di un comune
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{base}}/api/readiness/{{comune}}
+  body: none
+  auth: none
+}
+
+docs {
+  Il punteggio di leggibilita' di un singolo comune. `{{comune}}` e' il codice
+  ISTAT: nell'ambiente locale vale Albano Laziale.
+}

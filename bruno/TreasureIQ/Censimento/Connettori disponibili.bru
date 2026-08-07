@@ -1,0 +1,19 @@
+meta {
+  name: Connettori disponibili
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{base}}/api/connettori
+  body: none
+  auth: none
+}
+
+docs {
+  Quali piattaforme sappiamo leggere e fin dove: `modello` legge le schede,
+  `catalogo` conta i servizi, `firma` riconosce soltanto.
+  
+  Costruito dal codice, non da una tabella scritta a mano: una piattaforma che
+  perde la sua declinazione sparisce da qui lo stesso giorno.
+}

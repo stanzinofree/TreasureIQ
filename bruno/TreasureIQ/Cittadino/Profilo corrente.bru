@@ -1,0 +1,16 @@
+meta {
+  name: Profilo corrente
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{base}}/api/me
+  body: none
+  auth: none
+}
+
+docs {
+  Il profilo della sessione aperta. Serve a verificare cosa il sistema crede di
+  sapere di te — e a smentirlo se sbaglia.
+}

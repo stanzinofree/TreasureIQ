@@ -42,6 +42,7 @@ export function Seal({ verdict, size = 56 }: { verdict: Verdict; size?: number }
       viewBox="0 0 64 64"
       role="img"
       aria-label={`Verdetto: ${label}`}
+      className="seal"
       style={{ flex: "none", display: "block" }}
     >
       {verdict === "eligible" && (

@@ -1,0 +1,42 @@
+{
+ "isee_max": null,
+ "isee_min": null,
+ "isee_mentioned_without_threshold": false,
+ "eta_min": null,
+ "eta_max": null,
+ "nucleo_min": null,
+ "figli_minori_required": null,
+ "disabilita_required": null,
+ "residenza_required": null,
+ "employment_status": [],
+ "other": [
+  "Assolvimento imposta di bollo per il rilascio dell’atto conclusivo del procedimento",
+  "Tutte le richieste inoltrate al Settore V servizio II dovranno essere corredate della marca da bollo di euro 16,00",
+  "Le richieste di autorizzazione occupazione suolo pubblico permanente per passo carrabile dovranno essere inoltrate al Settore V servizio III a partire dal 02.05.2018",
+  "Bonus idrico integrativo per utenti domestici residenti in condizioni di disagio economico sociale ai sensi dell’art. 8 della Delibera ARERA 897/2017/R/IDR"
+ ],
+ "quotes": [
+  {
+   "field": "other",
+   "text": "Assolvimento imposta di bollo per il rilascio dell’atto conclusivo del procedimento"
+  },
+  {
+   "field": "other",
+   "text": "Tutte le richieste inoltrate al Settore V servizio II dovranno essere corredate della marca da bollo di euro 16,00"
+  },
+  {
+   "field": "other",
+   "text": "Le richieste di autorizzazione occupazione suolo pubblico permanente per passo carrabile dovranno essere inoltrate al Settore V servizio III a partire dal 02.05.2018"
+  },
+  {
+   "field": "other",
+   "text": "Bonus idrico integrativo per utenti domestici residenti in condizioni di disagio economico sociale ai sensi dell’art. 8 della Delibera ARERA 897/2017/R/IDR"
+  }
+ ],
+ "deadline_iso": null,
+ "notes": [
+  "Non sono state indicate soglie ISEE, età, numero di componenti del nucleo familiare, presenza di figli minorenni, disabilità, né stati occupazionali specifici.",
+  "La residenza non è menzionata come requisito esplicito, anche se il bonus idrico integrativo è rivolto a utenti residenti in condizioni di disagio economico sociale. Questo non è sufficiente per indicare residenza_required come true.",
+  "Non sono state indicate scadenze per la presentazione delle domande."
+ ]
+}

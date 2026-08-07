@@ -1,0 +1,19 @@
+{
+ "query": "trasporto scolastico scuolabus iscrizione Albano Laziale",
+ "provider": "brave",
+ "fetched_at": "2026-08-03T17:10:39.951768Z",
+ "results": [
+  {
+   "title": "ScuolaBUS – Comune di Albano Laziale",
+   "url": "https://comune.albanolaziale.rm.it/aree-tematiche/scuola-e-istruzione/scuolabus/"
+  },
+  {
+   "title": "Trasporto scolastico – Comune di Albano Laziale",
+   "url": "https://comune.albanolaziale.rm.it/servizio/servizio-di-trasporto-scolastico/"
+  },
+  {
+   "title": "Chiusura Portale iscrizioni mensa e scuolabus – Comune di Albano Laziale",
+   "url": "https://comune.albanolaziale.rm.it/novita/chiusura-portale-iscrizioni-mensa-e-scuolabus/"
+  }
+ ]
+}

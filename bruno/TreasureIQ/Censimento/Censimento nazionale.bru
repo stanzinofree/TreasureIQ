@@ -1,0 +1,25 @@
+meta {
+  name: Censimento nazionale
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{base}}/api/censimento
+  body: none
+  auth: none
+}
+
+docs {
+  La fotografia di tutti i portali comunali italiani nell'ultimo rilevamento.
+  
+  Tre cose da leggere con attenzione:
+  
+  - `piattaforme[].popolazione` e' `null` finche' non carichiamo un dataset di
+    popolazione. Non e' zero abitanti.
+  - `fornitori[].base_misura` distingue `modello_intero` da `schema_esposto`, e le
+    due **non vanno messe nella stessa classifica**: a denominatore unico il
+    fornitore piu' conforme risulta ultimo.
+  - `vincoli` conta solo i comuni su piattaforme con campi tipizzati, dove la
+    domanda "pubblichi i requisiti?" si puo' porre. Altrove non si puo'.
+}

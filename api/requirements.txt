@@ -14,3 +14,9 @@ itsdangerous>=2.2,<3.0
 # application runs end to end without this package and without an API key.
 # Install it only to re-run extraction against sources that changed.
 anthropic>=0.120,<1.0
+
+# Imported lazily by ingest/wp_pages.py, only when a candidate page links a
+# PDF (D-15). Without it, PDF attachments are skipped and logged rather than
+# failing the run — install it to recover requirements locked in bandi PDFs.
+pypdf>=5.1,<6.0
+snowballstemmer>=3.0

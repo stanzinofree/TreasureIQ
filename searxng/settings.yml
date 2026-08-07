@@ -1,0 +1,50 @@
+# Minimal SearXNG config for the ingestion-time web-search fallback (D-28).
+#
+# This instance is never in the request path of a citizen-facing answer: it
+# runs only under `docker compose --profile ingest`, queried by hand from
+# `python -m treasureiq.ingest.websearch`. `formats: [json]` is required —
+# without it SearXNG answers `format=json` with 403, not JSON.
+
+use_default_settings: true
+
+general:
+  instance_name: "treasureiq-ingest-searxng"
+
+search:
+  formats:
+    - html
+    - json
+  # Italian pages, since every source we are allowed to keep is an Italian
+  # public body.
+  default_lang: "it"
+
+# Which engines are allowed to answer.
+#
+# The defaults include Google CSE and Brave, and both answered a paced run of
+# forty queries with `suspended_time=180` and "unusual traffic from your
+# network" — after which every search returned zero results. Zero results is
+# the single most dangerous state for this project: from the caller's side it
+# is indistinguishable from "this comune published nothing", which is a claim
+# we make in front of citizens.
+#
+# So the two engines that block automated use are off, and what remains are
+# the ones that tolerate it. Fewer results, but results we can actually get
+# again tomorrow — and the cache is filled once at ingestion anyway, never in
+# a citizen's request path.
+engines:
+  - name: google
+    disabled: true
+  - name: brave
+    disabled: true
+  - name: duckduckgo
+    disabled: false
+  - name: mojeek
+    disabled: false
+  - name: startpage
+    disabled: false
+  - name: wikipedia
+    disabled: true
+
+server:
+  secret_key: "treasureiq-ingest-only-not-a-secret"
+  limiter: false

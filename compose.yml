@@ -11,6 +11,11 @@ services:
   api:
     build:
       context: ./api
+      # Esplicito, e non per pedanteria: senza questo compose costruisce
+      # l'ULTIMO stage del Dockerfile, che è `dev` (quello dei test). L'API
+      # partiva eseguendo pytest e si riavviava all'infinito. Lo stage che
+      # serve i cittadini è `base`, e lo si dice qui.
+      target: base
     # 8010 rather than 8000: on machines running OrbStack or Docker Desktop the
     # 8000 port is frequently already bound, and requests to localhost:8000 then
     # reach the wrong process and 404 in a way that looks like an app bug.
@@ -22,12 +27,47 @@ services:
       # Signs the demo session cookie. Override in any real deployment — the
       # default is public in this repository and therefore not a secret.
       TREASUREIQ_SECRET: ${TREASUREIQ_SECRET:-treasureiq-demo-not-secret}
-      # Optional: only needed to re-run extraction against changed sources.
+      # Which LLM backend serves extraction/chat. Default is the local,
+      # offline-friendly Ollama daemon; set to "anthropic" to use the API
+      # fallback instead.
+      TREASUREIQ_LLM_PROVIDER: ${TREASUREIQ_LLM_PROVIDER:-ollama}
+      # host.docker.internal lets the container reach an Ollama daemon
+      # running on the host, since Ollama itself is not containerised here.
+      OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-http://host.docker.internal:11434}
+      # Optional: only needed when TREASUREIQ_LLM_PROVIDER=anthropic.
       ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+    # Gradino 3 (D-32): per un comune fuori copertura, il cui portale non
+    # espone gli uffici in una forma leggibile, la chat cerca sul web mentre
+    # il cittadino aspetta. Il risultato non e' mai un dato di TreasureIQ e
+    # viaggia marcato come tale. Brave e' l'unico motore (D-59): senza
+    # BRAVE_SEARCH_API_KEY la ricerca web e' assente, mai sostituita da un
+    # secondo motore o da un risultato inventato.
+    #
+    # La chiave NON sta in `environment` di proposito: la' andava presa dalla
+    # shell che lancia `up`, e con la chiave in `.secrets` (caricata da direnv,
+    # non dalla shell di compose) il container partiva a chiave vuota e la
+    # ricerca live non partiva mai. `env_file` la fa leggere a Docker
+    # direttamente dal file locale; `required: false` tiene valida la promessa
+    # "clone-and-run senza chiave" (file assente -> ricerca web semplicemente
+    # assente, come documentato sopra).
+    env_file:
+      - path: .secrets
+        required: false
+    extra_hosts:
+      # Required for host.docker.internal to resolve on Linux hosts; a no-op
+      # on Docker Desktop/OrbStack, where it already resolves.
+      - "host.docker.internal:host-gateway"
     volumes:
       # Read-only: the API serves these snapshots and must never rewrite them.
       # Refreshing them is the ingestion CLI's job, run deliberately.
       - ./data:/data:ro
+      # D-33 — due cicli di vita, due mount. Sopra: i seed curati, immutabili
+      # a runtime e versionati in git. Qui: quello che l'API legge dai portali
+      # mentre un cittadino aspetta (D-32), scrivibile e fuori da git. La
+      # separazione la impone il filesystem, non la disciplina di chi scrive:
+      # un risultato non verificato archiviato fra i dati curati ne
+      # erediterebbe l'autorità senza averla mai guadagnata.
+      - ./data-live:/live
     restart: unless-stopped
 
   web:

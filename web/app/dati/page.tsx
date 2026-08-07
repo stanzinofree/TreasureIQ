@@ -10,9 +10,32 @@
  * they already run, because "your open data is bad" changes nothing and "this
  * named field is empty on 31 of your 32 services" is a ticket someone can pick
  * up on Monday.
+ *
+ * Two statistics registers live below the score panel (B16, spec D-17/D-18),
+ * and they are never mixed:
+ *
+ *   - Across entities (N=4 + Regione Lazio) — a plain table, not a bar race.
+ *     With three of the four comuni at zero, a leaderboard would read as
+ *     padding, and padding is fatal for a project whose whole claim is
+ *     honesty about data. So this is a table with a diagnosis column.
+ *   - Within Albano (N≈50 records) — here a chart is honest, because the
+ *     sample actually supports a distribution: cost per opportunity, the
+ *     L1/L2/L3 recovery split, which bandi cost the most to open.
  */
 
-import { readiness, type Readiness } from "@/lib/api";
+import {
+  readinessAll,
+  recoveryAll,
+  integrationAll,
+  costi,
+  type Readiness,
+  type Recovery,
+  type Integration,
+  type Costo,
+} from "@/lib/api";
+import ChiediApertura from "@/components/ChiediApertura";
+import CostoTable from "@/components/CostoTable";
+import RecoveryCostChart from "@/components/RecoveryCostChart";
 
 export const dynamic = "force-dynamic";
 
@@ -44,15 +67,114 @@ function Dimension({ dimension }: { dimension: Readiness["dimensions"][number] }
   );
 }
 
+/** Comuni without a reachable service API at all, so there was nothing for
+ * ingestion to score them from. Measured 2026-08-02 by direct probe (see
+ * `.kapi/spec.md`, "Verified facts") — not exposed by any of the four
+ * endpoints this page calls, so it is cited here as evidence with its
+ * measurement date rather than presented as a live figure. The score is
+ * genuinely zero, not merely unmeasured: each was actually checked. */
+const ZERO_COMUNI: {
+  ente: string;
+  codice_istat: string;
+  diagnosis: string;
+}[] = [
+  // Ariccia is no longer here. Its API really is dead — 410 on /wp-json, by
+  // deliberate configuration — but a bespoke HTML connector was written for it
+  // and recovered fifteen records, so listing it as zero would now contradict
+  // the cost table further down this same page. What its case actually shows
+  // is the point of the whole exercise: the data was there, and reaching it
+  // without an API costs nearly double per record.
+  {
+    ente: "Comune di Genzano di Roma",
+    codice_istat: "058043",
+    diagnosis: "Drupal + Halley Informatica; nessun endpoint /wp-json (404). Stesso fornitore di Ciampino, che espone altrettanto nulla — è un limite di piattaforma, non solo di questo comune.",
+  },
+  {
+    ente: "Comune di Marino",
+    codice_istat: "058057",
+    diagnosis: "Il sito risponde 200 su ogni percorso, incluse le rotte API, ma è un redirect via JavaScript verso un altro dominio: dietro quel 200 non c'è nessun dato reale. Un monitoraggio ingenuo lo classificherebbe sano.",
+  },
+];
+
+const EVIDENCE_MEASURED_AT = "2 agosto 2026";
+
+function nationalCatalogueEvidence(r: Readiness): string | undefined {
+  return r.dimensions.find((d) => d.key === "national_catalogue")?.evidence;
+}
+
+/** D-21 access-mode + integration-cost cell — mode, label and the dated
+ * probe it came from, rendered exactly as `/api/integration` returns them
+ * (never re-authored client-side, D-24). `datasets_on_dati_gov` is `null`
+ * where it was never probed (Marino) and reads "non misurato": collapsing
+ * that into "0" would be the same conflation this project exists to fight. */
+function AccessCell({ integration }: { integration: Integration | undefined }) {
+  if (!integration) {
+    return <span className="field__hint">non misurato</span>;
+  }
+  const { label, access_mode, probe_dated, probe_method, datasets_on_dati_gov } = integration;
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "var(--ma-1)" }}>
+      <span>
+        <strong style={{ fontWeight: 600 }}>{label}</strong> ({access_mode})
+      </span>
+      <span className="field__hint">
+        misurato il {probe_dated} — {probe_method}
+      </span>
+      <span className="field__hint">
+        dataset su dati.gov.it:{" "}
+        {datasets_on_dati_gov === null ? "non misurato" : datasets_on_dati_gov}
+      </span>
+    </div>
+  );
+}
+
 export default async function DataQuality() {
-  let report: Readiness | null = null;
+  let reports: Readiness[] = [];
   try {
-    report = await readiness("058003");
+    reports = await readinessAll();
   } catch {
-    report = null;
+    reports = [];
   }
 
-  if (!report) {
+  // Same fail-soft shape as everything else on this page: the integration
+  // cost is worth showing when it is there, and never worth taking the
+  // readiness tables down for.
+  let costiReports: Costo[] = [];
+  try {
+    costiReports = await costi();
+  } catch {
+    costiReports = [];
+  }
+
+  // Recovery cost is a separate call so a failure here costs only the one
+  // chart: the readiness tables above it are the page's spine and must still
+  // render if the recovery roll-up is unavailable.
+  let recoveryReports: Recovery[] = [];
+  try {
+    recoveryReports = await recoveryAll();
+  } catch {
+    recoveryReports = [];
+  }
+
+  // Same fail-soft shape as recovery above: a failure here must not take
+  // down the readiness table, it just leaves the new column blank.
+  let integrationReports: Integration[] = [];
+  try {
+    integrationReports = await integrationAll();
+  } catch {
+    integrationReports = [];
+  }
+  const integrationFor = (istat: string) =>
+    integrationReports.find((i) => i.codice_istat === istat);
+  // D-21's comparative benchmark (F-1): how many comuni in Italia publish
+  // the waste calendar as open data, pulled from the measured field rather
+  // than hardcoded, so it stays reproducible if the probe is re-run.
+  const benchmark342 = integrationReports.find((i) => i.benchmark_342 != null)?.benchmark_342;
+
+  const albano = reports.find((r) => r.codice_istat === "058003") ?? null;
+  const fonteNuova = reports.find((r) => r.codice_istat === "058122") ?? null;
+
+  if (reports.length === 0) {
     return (
       <div className="panel">
         <h2>Dati non disponibili</h2>
@@ -68,7 +190,7 @@ export default async function DataQuality() {
     <div className="stack">
       <section>
         <p className="eyebrow">Pagella sulla qualità dei dati</p>
-        <h1>{report.ente}</h1>
+        <h1>{albano?.ente ?? "Comune di Albano Laziale"}</h1>
         <p className="lede">
           Quanto i dati pubblicati da questo comune sono utilizzabili da un
           motore come TreasureIQ. Il punteggio è calcolato solo da ciò che
@@ -77,38 +199,40 @@ export default async function DataQuality() {
         </p>
       </section>
 
-      <section className="panel">
-        <div
-          style={{
-            display: "flex",
-            alignItems: "baseline",
-            gap: "var(--ma-4)",
-            flexWrap: "wrap",
-          }}
-        >
-          <span
+      {albano && (
+        <section className="panel">
+          <div
             style={{
-              fontFamily: "var(--font-display)",
-              fontSize: "clamp(3rem, 9vw, 5rem)",
-              fontWeight: 700,
-              lineHeight: 1,
-              color: "var(--ai)",
-              fontVariantNumeric: "tabular-nums",
+              display: "flex",
+              alignItems: "baseline",
+              gap: "var(--ma-4)",
+              flexWrap: "wrap",
             }}
           >
-            {report.score.toFixed(1)}
-          </span>
-          <span style={{ fontFamily: "var(--font-mono)", color: "var(--sumi-faint)" }}>
-            / 100 · qualità {report.grade} · {report.total_records} servizi
-          </span>
-        </div>
+            <span
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(3rem, 9vw, 5rem)",
+                fontWeight: 700,
+                lineHeight: 1,
+                color: "var(--ai)",
+                fontVariantNumeric: "tabular-nums",
+              }}
+            >
+              {albano.score.toFixed(1)}
+            </span>
+            <span style={{ fontFamily: "var(--font-mono)", color: "var(--sumi-faint)" }}>
+              / 100 · qualità {albano.grade} · {albano.total_records} servizi
+            </span>
+          </div>
 
-        <div style={{ marginTop: "var(--ma-8)" }}>
-          {report.dimensions.map((d) => (
-            <Dimension key={d.key} dimension={d} />
-          ))}
-        </div>
-      </section>
+          <div style={{ marginTop: "var(--ma-8)" }}>
+            {albano.dimensions.map((d) => (
+              <Dimension key={d.key} dimension={d} />
+            ))}
+          </div>
+        </section>
+      )}
 
       <section className="panel">
         <h2>Non stiamo proponendo un nuovo standard</h2>
@@ -125,6 +249,139 @@ export default async function DataQuality() {
           di poterci fare un incrocio. Servono campi tipizzati — soglia ISEE,
           età, nucleo — accanto alla descrizione discorsiva.
         </p>
+      </section>
+
+      {/* ------------------------------------------------- across entities */}
+      <section className="panel">
+        <p className="eyebrow">Confronto fra enti</p>
+        <h2>Non è una classifica — è una tabella, ed è onesta a riguardo</h2>
+        <p className="lede">
+          Con tre comuni su quattro a punteggio zero, un grafico a barre
+          farebbe sembrare pieno quello che è vuoto. Qui sotto c&apos;è
+          esattamente quello che è stato misurato, e come — nessuna barra
+          disegnata dove non c&apos;è niente da misurare.
+        </p>
+
+        <div style={{ overflowX: "auto", marginTop: "var(--ma-6)" }}>
+          <table className="data-table">
+            <caption className="sr-only">
+              Punteggio di qualità dei dati per ente, e diagnosi quando il
+              punteggio è zero
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">Ente</th>
+                <th scope="col">Punteggio</th>
+                <th scope="col">Catalogo nazionale</th>
+                <th scope="col">Diagnosi</th>
+                <th scope="col">Accesso e costo di integrazione (D-21)</th>
+              </tr>
+            </thead>
+            <tbody>
+              {albano && (
+                <tr>
+                  <th scope="row">{albano.ente}</th>
+                  <td className="data-table__num">{albano.score.toFixed(1)} / 100</td>
+                  <td>{nationalCatalogueEvidence(albano) ?? "—"}</td>
+                  <td>Misurato in diretta — vedi la pagella sopra.</td>
+                  <td>
+                    <AccessCell integration={integrationFor(albano.codice_istat)} />
+                  </td>
+                </tr>
+              )}
+              {fonteNuova && (
+                <tr>
+                  <th scope="row">{fonteNuova.ente}</th>
+                  <td className="data-table__num">{fonteNuova.score.toFixed(1)} / 100</td>
+                  <td>{nationalCatalogueEvidence(fonteNuova) ?? "—"}</td>
+                  <td>
+                    Comparatore scelto (D-18): stessa provincia, stessa
+                    famiglia di piattaforma, più servizi esposti di Albano
+                    (34 contro 32) e presente sul catalogo nazionale — eppure
+                    non è detto che recuperi più requisiti utilizzabili.
+                  </td>
+                  <td>
+                    <AccessCell integration={integrationFor(fonteNuova.codice_istat)} />
+                  </td>
+                </tr>
+              )}
+              {ZERO_COMUNI.map((z) => (
+                <tr key={z.ente} data-zero="true">
+                  <th scope="row">{z.ente}</th>
+                  <td className="data-table__num">0.0 / 100</td>
+                  <td>nessun dataset su dati.gov.it</td>
+                  <td>{z.diagnosis}</td>
+                  <td>
+                    <AccessCell integration={integrationFor(z.codice_istat)} />
+                  </td>
+                </tr>
+              ))}
+              <tr data-region="true">
+                <th scope="row">Regione Lazio</th>
+                <td className="data-table__num">non applicabile</td>
+                <td>502 dataset su dati.gov.it</td>
+                <td>
+                  Non un comune: il livello dove la catena di apertura dei
+                  dati smette di rompersi. Sotto il livello regionale, ogni
+                  ente misurato in questa tabella è a zero dataset nazionali.
+                </td>
+                <td className="field__hint">
+                  non applicabile — non è un ente misurato in D-21.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p className="field__hint" style={{ marginTop: "var(--ma-4)" }}>
+          Ariccia, Genzano di Roma, Marino e Regione Lazio: misurati il{" "}
+          {EVIDENCE_MEASURED_AT} per probe diretto e ricerca su dati.gov.it
+          (dettagli in <code>.kapi/spec.md</code>), non da uno degli endpoint
+          live di questa pagina — quei tre comuni non hanno mai avuto un&apos;API
+          di servizio raggiungibile da cui ingerire nulla.
+        </p>
+        {benchmark342 != null && (
+          <p className="lede" style={{ marginTop: "var(--ma-4)" }}>
+            Il calendario della raccolta differenziata è già pubblicato come
+            open data da{" "}
+            <strong style={{ fontWeight: 600 }}>{benchmark342} comuni italiani</strong> (dati.gov.it,
+            misurato il {EVIDENCE_MEASURED_AT}). Non è una richiesta impossibile: è
+            ciò che altri comuni fanno già. Nessuno dei cinque enti misurati
+            qui lo pubblica in quella forma — e il costo di integrazione
+            riportato sopra è quello che paga TreasureIQ al loro posto, mai il
+            cittadino.
+          </p>
+        )}
+
+        <p className="lede" style={{ marginTop: "var(--ma-6)" }}>
+          Il quadro peggiora, non migliora, se si allarga lo sguardo: su 119
+          comuni della provincia di Roma (rilevazione IndicePA, 2 agosto
+          2026), solo <strong style={{ fontWeight: 600 }}>20 (16,8%)</strong>{" "}
+          espongono un&apos;API di servizio funzionante. Albano Laziale è{" "}
+          <strong style={{ fontWeight: 600 }}>secondo</strong> di questi 20,
+          con 32 servizi, dietro Fonte Nuova con 34. Non è un comune scelto
+          perché arretrato: è quasi il migliore della provincia, e ancora non
+          riesce a dire a un cittadino se ha diritto a una casa popolare.
+        </p>
+      </section>
+
+      {/* --------------------------------------------------- within Albano */}
+      <section className="panel">
+        <p className="eyebrow">Dentro i comuni misurati</p>
+        <h2>Cosa costa davvero aprire un bando</h2>
+        <p className="lede">
+          Qui il campione regge un grafico: i bandi, avvisi e contributi
+          recuperati da testo libero e allegati PDF, con il tempo di calcolo
+          speso a estrarne i requisiti e il livello della scala di recupero
+          (D-16) su cui ciascuno è atterrato. Il confronto fra i due comuni
+          misurati è la parte interessante: Fonte Nuova non compare con un
+          grafico vuoto, ma con un costo che non esiste, perché pubblica tutto
+          già strutturato.
+        </p>
+        <div style={{ marginTop: "var(--ma-6)" }}>
+          <RecoveryCostChart reports={recoveryReports} measuredAt={EVIDENCE_MEASURED_AT} />
+          <CostoTable costi={costiReports} />
+          <ChiediApertura enti={integrationReports} />
+        </div>
       </section>
     </div>
   );

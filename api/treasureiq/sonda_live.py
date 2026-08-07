@@ -44,6 +44,7 @@ from treasureiq.ingest.censimento import (
     EsitoCensimento,
     Indirizzabilita,
     RecuperabilitaOrari,
+    _Sonda,
     censisci_comune,
 )
 from treasureiq.integration import DATA_DIR
@@ -373,6 +374,173 @@ def main(argv: list[str] | None = None) -> int:
 
     print(f"\n{caldi} in cache, {freddi} non sondabili")
     return 0
+
+
+# --- Numeri utili: recapiti URP letti dal vivo (D-32, mai verificati) --------
+
+class ContattiUrp(BaseModel):
+    """Recapiti del comune letti ADESSO dal portale, mai verificati.
+
+    Non è un dato conservato né controllato contro una fonte ingerita: è ciò
+    che il sito del comune espone in questo momento. La guardia sui numeri vale
+    anche qui — un recapito letto storto è peggio di un link — quindi resta
+    marcato «non verificato» a schermo, esattamente come le pagine live.
+    """
+
+    telefoni: list[str]
+    email: list[str]
+    pec: list[str]
+    #: La pagina da cui vengono i recapiti, così il cittadino può controllarli
+    #: alla fonte invece di fidarsi della nostra lettura.
+    fonte: str | None = None
+
+    @property
+    def vuoto(self) -> bool:
+        return not (self.telefoni or self.email or self.pec)
+
+
+#: `href="tel:..."` e `href="mailto:..."` sono il segnale più preciso: un
+#: recapito che il portale stesso ha marcato come tale, non una sequenza di
+#: cifre pescata a caso dal testo.
+_TEL_HREF = re.compile(r'href=["\']tel:\s*([+0-9().\s/-]{6,})["\']', re.IGNORECASE)
+_MAIL_HREF = re.compile(r'href=["\']mailto:\s*([^"\'?>\s]+@[^"\'?>\s]+)', re.IGNORECASE)
+#: Fisso italiano (prefisso 0) o cellulare (3xx), separatori vari. Ancorato ai
+#: confini per non azzannare pezzi di partita IVA, CAP o codici catastali.
+_TEL_TESTO = re.compile(r"(?<![\d./])(?:\+39[\s.]?)?0\d{1,3}[\s./-]?\d{5,8}(?![\d])")
+_EMAIL_TESTO = re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}")
+#: Una email è PEC se il dominio lo dichiara. Vale la pena distinguerla: è il
+#: canale con valore legale, e per un cittadino è spesso quello che conta.
+_PEC_DOMINIO = re.compile(r"pec|postacert|legalmail|cert\.", re.IGNORECASE)
+
+
+def _tel_valido(grezzo: str) -> bool:
+    cifre = re.sub(r"\D", "", grezzo)
+    return 6 <= len(cifre) <= 12
+
+
+def _estrai_recapiti(html: str) -> tuple[list[str], list[str], list[str]]:
+    """Da HTML grezzo a (telefoni, email, pec). Prima gli href dichiarati,
+    testo grezzo solo come ripiego per non restare a mani vuote."""
+    tel = [g.strip() for g in _TEL_HREF.findall(html) if _tel_valido(g)]
+    email: list[str] = []
+    pec: list[str] = []
+    for m in _MAIL_HREF.findall(html):
+        (pec if _PEC_DOMINIO.search(m) else email).append(m.strip())
+
+    if not tel or (not email and not pec):
+        # Togli i tag prima di leggere il testo: dentro attributi e <script>
+        # ci sono numeri e stringhe che non sono recapiti.
+        testo = re.sub(r"<[^>]+>", " ", html)
+        if not tel:
+            tel = [g.strip() for g in _TEL_TESTO.findall(testo) if _tel_valido(g)]
+        if not email and not pec:
+            for m in _EMAIL_TESTO.findall(testo):
+                (pec if _PEC_DOMINIO.search(m) else email).append(m)
+    return tel, email, pec
+
+
+def _dedup(valori: list[str], tetto: int) -> list[str]:
+    visti: set[str] = set()
+    fuori: list[str] = []
+    for v in valori:
+        chiave = re.sub(r"\s+", "", v).lower()
+        if chiave and chiave not in visti:
+            visti.add(chiave)
+            fuori.append(v)
+        if len(fuori) >= tetto:
+            break
+    return fuori
+
+
+def recupera_contatti(codice_istat: str | None) -> ContattiUrp | None:
+    """Legge i recapiti URP dal portale del comune, ADESSO, senza verificarli.
+
+    `None` se il comune non è noto o non ha un sito da leggere. Prova la home e
+    poche pagine-contatti tipiche, e si ferma appena ha sia un telefono sia un
+    recapito scritto — o dopo pochi tentativi — per non trasformare una domanda
+    in una scansione del sito. Ogni errore di rete su una pagina è saltato: un
+    portale lento non deve far fallire l'intera richiesta.
+    """
+    comune = comune_per_codice(codice_istat)
+    if comune is None or not comune.sito:
+        return None
+    # Il registro tiene l'host nudo («www.comune.x.it»), senza schema: httpx
+    # rifiuta un URL senza `https://`, quindi lo si antepone qui.
+    base = comune.sito.strip().rstrip("/")
+    if not base.startswith(("http://", "https://")):
+        base = "https://" + base
+    # Home per prima (spesso il footer ha centralino + PEC), poi due sole
+    # pagine-contatti tipiche: il tetto tiene il tempo di risposta sotto ~18s.
+    candidati = [base, f"{base}/contatti", f"{base}/servizi/contatti"]
+
+    tel: list[str] = []
+    email: list[str] = []
+    pec: list[str] = []
+    fonte: str | None = None
+    with _Sonda(timeout=6.0) as sonda:
+        for url in candidati:
+            try:
+                resp = sonda.risposta(url)
+            except Exception:  # noqa: BLE001 — un portale muto non è un errore nostro
+                continue
+            if resp.status_code != 200 or not resp.text:
+                continue
+            t, m, p = _estrai_recapiti(resp.text)
+            if (t or m or p) and fonte is None:
+                fonte = url
+            tel += t
+            email += m
+            pec += p
+            if tel and (email or pec):
+                break
+
+    return ContattiUrp(
+        telefoni=_dedup(tel, 3),
+        email=_dedup(email, 3),
+        pec=_dedup(pec, 2),
+        fonte=fonte,
+    )
+
+
+class SondaConnettore(BaseModel):
+    """Indirizzabilita' AgID di un comune fuori copertura, misurata al volo.
+
+    `indirizzabile` = il portale espone l'API uffici del modello AgID, cioe'
+    il connettore potrebbe leggerlo. `uffici` e' quanti ne ha elencati l'API:
+    un conteggio strutturale, non una spettanza."""
+
+    codice_istat: str
+    indirizzabile: bool
+    uffici: int
+    rest_base: str | None = None
+
+
+def sonda_connettore(codice_istat: str | None) -> SondaConnettore | None:
+    """A ricerca fatta su un comune non ingerito, dice se il connettore lo
+    raggiungerebbe. Salta la sonda-orari (`leggi_pagina=False`): qui serve
+    solo l'indirizzabilita', non gli orari, e ogni GET in meno e' latenza in
+    meno sul turno. `censisci_comune` non solleva mai, ma il resto lo
+    incapsuliamo lo stesso: una sonda muta non deve mai rompere la risposta."""
+    comune = comune_per_codice(codice_istat)
+    if comune is None or not comune.sito:
+        return None
+    try:
+        esito = censisci_comune(
+            codice_istat=comune.codice_istat,
+            nome=comune.nome,
+            sito=comune.sito,
+            timeout=6.0,
+            leggi_pagina=False,
+        )
+    except Exception:  # noqa: BLE001 — sonda muta, mai fatale per la risposta
+        logger.warning("sonda connettore fallita per %s", codice_istat, exc_info=True)
+        return None
+    return SondaConnettore(
+        codice_istat=comune.codice_istat,
+        indirizzabile=esito.indirizzabilita == Indirizzabilita.API_UFFICI,
+        uffici=esito.uffici_trovati or 0,
+        rest_base=esito.rest_base,
+    )
 
 
 if __name__ == "__main__":

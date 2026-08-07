@@ -70,6 +70,7 @@
   ],
   "requirements": {
    "eta_max": 21,
+   "disabilita_nucleo_required": true,
    "source_typed": false,
    "residenza_required": false
   },

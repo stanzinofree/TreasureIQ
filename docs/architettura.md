@@ -23,6 +23,13 @@ L'unica eccezione è confinata e dichiarata: la **sonda live** (`sonda_live.py`)
 che per un comune fuori copertura legge il portale in quel momento — solo sul
 rail informativo, mai per decidere se qualcuno ha diritto a qualcosa.
 
+La sonda segue una scala fissa, dal certo al probabile: **record già ingerito →
+mappa diretta del portale del comune → ricerca Brave ancorata al dominio**
+(`site:comune.x.it …`, D-58). SearXNG è fuori (D-59): un proxy verso motori che
+non controlliamo è più fragile di un contratto vero, usato per giunta su pagine
+di cui conosciamo già l'indirizzo. Ogni pagina così raggiunta torna marcata
+`non verificato`: è la fonte citata, non un verdetto.
+
 ---
 
 ## Dimensioni reali

@@ -19,6 +19,101 @@ def nomi(query: str) -> list[str]:
     return [c.nome for c in cerca_comuni(query)]
 
 
+# --- D-54: disambiguazione nella chat (parola-nel-nome, non solo prima parola) ---
+#
+# `_comuni_candidati` (treasureiq.chat.respond) è la funzione che il turno di
+# chat usa per capire QUANTI comuni sono compatibili col messaggio, prima di
+# decidere se chiedere quale. Il bug misurato: confrontando solo la prima
+# parola del nome, «pergine» risolveva sempre e solo a Pergine Valsugana (mai
+# ambiguo) e «pergine valdarno» ci risolveva ANCORA, perché "valdarno" non è
+# la prima parola di "Laterina Pergine Valdarno" e quindi non contava mai.
+
+
+class _ProviderFinto:
+    """Un `LLMProvider` finto: non deve mai vedere le CIFRE del comune, solo
+    servire da riempitivo perché `build_chat_answer` chiede un `ChatIntent`
+    prima di poter emettere la domanda di disambiguazione."""
+
+    async def aparse(self, *, system, user, output_model):
+        from treasureiq.chat.intent import Topic
+
+        return output_model(topic=Topic.SCONOSCIUTO)
+
+
+def test_pergine_da_solo_e_ambiguo_due_candidati():
+    """Prima del fix non era mai ambiguo: risolveva sempre a Valsugana."""
+    from treasureiq.chat.respond import _comuni_candidati
+
+    candidati = _comuni_candidati("vivo a Pergine")
+    nomi_trovati = {c.nome for c in candidati}
+    assert len(candidati) == 2
+    assert "Pergine Valsugana" in nomi_trovati
+    assert "Laterina Pergine Valdarno" in nomi_trovati
+
+
+def test_pergine_valdarno_risolve_al_comune_giusto():
+    """Prima del fix «pergine valdarno» risolveva ANCORA a Pergine Valsugana:
+    solo la prima parola del nome contava, e "valdarno" non lo è mai."""
+    from treasureiq.chat.respond import _comuni_candidati
+
+    candidati = _comuni_candidati("sono di pergine valdarno")
+    assert len(candidati) == 1
+    assert candidati[0].nome == "Laterina Pergine Valdarno"
+    assert candidati[0].codice_istat == "051042"
+
+
+def test_san_vito_lo_capo_risolve_esatto_senza_domanda():
+    from treasureiq.chat.respond import _comuni_candidati
+
+    candidati = _comuni_candidati("sono di San Vito lo Capo")
+    assert len(candidati) == 1
+    assert candidati[0].codice_istat == "081020"
+
+
+def test_laterina_risolve_esatto_senza_domanda():
+    from treasureiq.chat.respond import _comuni_candidati
+
+    candidati = _comuni_candidati("sono di Laterina")
+    assert len(candidati) == 1
+    assert candidati[0].codice_istat == "051042"
+
+
+def test_nessun_comune_nominato_non_produce_candidati():
+    from treasureiq.chat.respond import _comuni_candidati
+
+    assert _comuni_candidati("che orari ha l'ufficio anagrafe?") == []
+
+
+def test_pergine_fa_partire_la_domanda_di_disambiguazione(monkeypatch):
+    """`_quale_comune` esisteva già ma era dead code: nessun chiamante la
+    invocava, quindi l'ambiguità spariva silenziosamente dentro
+    `_comune_nominato` (tornava `None`, come "nessun comune nominato").
+
+    `load_provider` è mockato per non dipendere da Ollama in CI: la domanda
+    di disambiguazione deve poter partire anche se il modello non è
+    raggiungibile, perché nasce dal confronto coi 7.896 comuni ISTAT, non
+    da una classificazione del modello.
+    """
+    import asyncio
+
+    from treasureiq.chat import respond as respond_mod
+
+    monkeypatch.setattr(respond_mod, "load_provider", lambda **_: _ProviderFinto())
+
+    risposta = asyncio.run(
+        respond_mod.build_chat_answer(
+            message="vivo a Pergine, che agevolazioni ci sono per la mensa?",
+            profile=None,
+            records=[],
+        )
+    )
+
+    assert risposta.data_gap == "comune_ambiguo"
+    assert risposta.needs_clarification is True
+    assert "Pergine Valsugana" in risposta.reply
+    assert "Laterina Pergine Valdarno" in risposta.reply
+
+
 def test_il_modo_normale_di_nominare_un_comune():
     """«comune di X» è come parla la gente, e nessun nome ISTAT contiene la
     parola «comune»: senza ripulire il prefisso la ricerca dava zero."""

@@ -39,11 +39,11 @@ from __future__ import annotations
 
 import asyncio
 import logging
-import os
 import re
+import threading
 from functools import lru_cache
 from dataclasses import dataclass, replace, field
-from datetime import date
+from datetime import date, datetime, timezone
 from enum import Enum
 from decimal import Decimal
 from urllib.parse import urlparse
@@ -61,6 +61,8 @@ from treasureiq.chat.intent import (
     Topic,
     extract_intent,
 )
+from treasureiq.chat.categorie import Categoria, topics_di
+from treasureiq.chat.nomi_genere import sesso_da_nome
 from treasureiq.extract.providers import LLMProvider, load_provider
 from treasureiq.integration import (
     AccessMode,
@@ -71,8 +73,15 @@ from treasureiq.integration import (
     load_websearch,
 )
 from treasureiq.ingest.censimento import Indirizzabilita
-from treasureiq.ingest.websearch import DEFAULT_SEARXNG_URL, search_web
-from treasureiq.sonda_live import comune_per_codice, leggi_orari_urp, risolvi_comune
+from treasureiq.ingest.websearch import WebSearchNonConfigurato, entro_ttl, search_web
+from treasureiq.sonda_live import (
+    comune_per_codice,
+    leggi_orari_urp,
+    recupera_contatti,
+    risolvi_comune,
+    sonda_connettore,
+)
+from treasureiq.scansioni import aggiorna_scansione, carica_scansione, scansione_stantia
 from treasureiq.match.engine import (
     CriterionState,
     MatchResult,
@@ -269,6 +278,71 @@ class InfoAnswer:
 
 
 @dataclass
+class Connettore:
+    """Esito della sonda AgID su un comune FUORI copertura: a ricerca fatta,
+    dice se il suo portale espone l'API uffici del modello AgID — cioe' se il
+    connettore *potrebbe* leggerlo, non che l'abbiamo letto.
+
+    Nasce da una domanda concreta: la mappatura (censimento) e' un campione
+    per le statistiche, `enti.json` sono i comuni ingeriti a mano; per un
+    comune qualunque, a ricerca, non sapevamo se fosse indirizzabile e si
+    ripiegava in silenzio sulla sola ricerca web. Questa sonda lo dice, senza
+    ingerire. `uffici` e' un conteggio strutturale dell'API, non una cifra di
+    spettanza: non lo tocca il modello (guardia sui numeri intatta)."""
+
+    indirizzabile: bool
+    uffici: int
+    rest_base: str | None
+
+
+@dataclass
+class NumeriUtili:
+    """Recapiti del comune letti al volo dal portale, non su richiesta.
+
+    Fuori copertura li recuperiamo comunque — un cittadino che chiede aiuto e
+    si sente dire «rivolgiti all'URP» senza un numero non e' stato aiutato. Il
+    record porta sempre la sua provenienza (`fonte_tipo` = come li abbiamo
+    presi) e quando (`letto_il`): il pannello li mostra come «ultimo controllo»,
+    mai come dato verificato. Le cifre non le tocca il modello, le legge una
+    regex sul sito (guardia sui numeri)."""
+
+    telefoni: list[str]
+    email: list[str]
+    pec: list[str]
+    fonte: str | None
+    #: Come li abbiamo presi: per ora sempre «scansione web» (scraping del
+    #: portale). Quando un comune sara' letto dal connettore, diventera' quello.
+    fonte_tipo: str
+    #: ISO 8601, ora del recupero — il pannello lo rende come «ultimo controllo».
+    letto_il: str
+
+
+@dataclass
+class ComuneAmbiguo:
+    """Un candidato di disambiguazione, per la scheda cliccabile nella UI.
+
+    Porta l'ISTAT cosi' che scegliere sia un tap: il frontend rimanda la stessa
+    domanda con questo `codice_istat`, non fa ridigitare il nome al cittadino."""
+
+    nome: str
+    provincia: str
+    codice_istat: str
+
+
+@dataclass
+class ScanStato:
+    """Stato dello scan del comune riconosciuto, per il rail chat (D-S6).
+
+    `stato` e' `"fresco"` (scan <6gg, servito dalla cache) o
+    `"aggiornamento_in_corso"` (scan assente o stantio, refresh partito in
+    background). `ultimo_scan` e' l'ISO-8601 del record in cache, `None` se
+    non ne esiste ancora uno."""
+
+    stato: str
+    ultimo_scan: str | None
+
+
+@dataclass
 class ChatAnswer:
     reply: str
     topic: Topic
@@ -281,6 +355,10 @@ class ChatAnswer:
     access_mode: str | None = None
     citizen_effort: int | None = None
     info: InfoAnswer | None = None
+    connettore: Connettore | None = None
+    numeri_utili: NumeriUtili | None = None
+    comuni_ambigui: list[ComuneAmbiguo] | None = None
+    scan: ScanStato | None = None
 
 
 def _resolve_comune(*, hint: str | None) -> tuple[str | None, str | None]:
@@ -316,6 +394,18 @@ def _profile_from_slots(*, intent: ChatIntent, messaggio: str = "") -> CitizenPr
     # alla persona che l'aveva appena scritta.
     letti = slot_dal_testo(messaggio)
     comune_istat, comune_nome = _resolve_comune(hint=intent.comune_hint)
+    # D-52: il sesso dichiarato esplicitamente ("sono una donna") vince
+    # sempre; solo se il cittadino non l'ha detto si prova la deduzione dal
+    # nome proprio, deterministica e fuori dal grammar del modello (vedi
+    # `chat.nomi_genere`). Una deduzione resta comunque una deduzione: chi
+    # mostra il profilo la marca correggibile, mai un filtro nascosto.
+    sesso = slots.sesso if slots.sesso is not None else sesso_da_nome(messaggio)
+    # figli_disabili > 0 implica disabilita_nucleo=True: e' qui, non nel
+    # motore (D-53), che questa normalizzazione va fatta — l'engine legge
+    # solo `disabilita_nucleo` gia' risolto.
+    disabilita_nucleo = slots.disabilita_nucleo
+    if slots.figli_disabili is not None and slots.figli_disabili > 0:
+        disabilita_nucleo = True
     return CitizenProfile(
         comune_istat=comune_istat,
         comune_nome=comune_nome,
@@ -328,9 +418,12 @@ def _profile_from_slots(*, intent: ChatIntent, messaggio: str = "") -> CitizenPr
             if "isee" in letti
             else (Decimal(str(slots.isee)) if slots.isee is not None else None)
         ),
-        nucleo_familiare=slots.nucleo_familiare,
+        nucleo_familiare=letti.get("nucleo_familiare", slots.nucleo_familiare),
         figli_minori=slots.figli_minori,
         disabilita=slots.disabilita,
+        sesso=sesso,
+        figli_disabili=slots.figli_disabili,
+        disabilita_nucleo=disabilita_nucleo,
         employment_status=slots.employment_status,
     )
 
@@ -525,6 +618,60 @@ def _search_opportunities(
         if _keyword_hit(haystack=haystack, keywords=keywords):
             hits.append(opportunity)
     return _senza_scadute(hits)
+
+
+#: Sinonimi di "tutte le categorie" — parole intere, non radici: qui non
+#: serve lo stemmer (D-55 propone tre nomi fissi più questo), e una radice
+#: tronca allargherebbe il match a frasi che non stanno rispondendo a questa
+#: domanda.
+_PAROLE_TUTTE_CATEGORIE: tuple[str, ...] = ("tutte", "tutto", "qualsiasi", "ogni")
+
+#: Numero massimo di parole perché un turno sia letto come risposta diretta
+#: alla domanda categoria, non come una nuova domanda che nomina di
+#: sfuggita "mezzi" o "assegni" dentro una frase vera.
+_MAX_PAROLE_RISPOSTA_CATEGORIA = 6
+
+
+def _slot_anagrafici_dichiarati(profile: CitizenProfile) -> int:
+    """Quanti campi anagrafici il cittadino ha dichiarato (D-55: «profilo
+    ricco» = almeno due). Non conta il comune, che è un dato di instradamento
+    (D-09), non anagrafico."""
+    campi = (
+        profile.eta,
+        profile.isee,
+        profile.nucleo_familiare,
+        profile.figli_minori,
+        profile.disabilita,
+        profile.sesso,
+        profile.figli_disabili,
+        profile.employment_status,
+    )
+    return sum(1 for campo in campi if campo is not None)
+
+
+def _categoria_richiesta(message: str) -> "Categoria | str | None":
+    """Se questo turno risponde alla domanda categoria di D-55 — «tutte» o
+    il nome di una categoria — e in tal caso quale. `None` se il turno non è
+    una risposta a quella domanda (o non c'è mai stata): una nuova domanda
+    vera prosegue nel flusso a singolo topic, invariato.
+
+    Letto sul testo del cittadino con lo stesso confine di parola di
+    `_keyword_hit`, mai dalla classificazione del modello — «tutte» e i nomi
+    delle categorie non sono nel vocabolario chiuso di `Topic`.
+    """
+    haystack = message.lower()
+    if len(haystack.split()) > _MAX_PAROLE_RISPOSTA_CATEGORIA:
+        return None
+    if _keyword_hit(haystack=haystack, keywords=_PAROLE_TUTTE_CATEGORIE):
+        return "tutte"
+    for categoria in Categoria:
+        if categoria is Categoria.ALTRO:
+            # "altro" non è mai proposto come scelta in chat (D-55 elenca
+            # solo utenze/mezzi/assegni), quindi non è mai una risposta.
+            continue
+        if _keyword_hit(haystack=haystack, keywords=(categoria.value,)):
+            return categoria
+    return None
 
 
 def _senza_scadute(trovate: list[Opportunity]) -> list[Opportunity]:
@@ -1449,16 +1596,49 @@ async def _build_informazione_answer(
         AccessMode.M4_CONNETTORE,
         AccessMode.M5_NESSUNO,
     )
+    letto_dal_vivo = False
     if institutional_exhausted:
+        # D-58/D-60: un ente già censito sale la STESSA scala di uno fuori
+        # copertura. Il bypass di prima — solo cache statica, mai sonda —
+        # lasciava un orario cambiato ieri appeso al prossimo rigen (D-60);
+        # ora il gradino 2 (la sonda sul portale) gira SEMPRE, anche qui.
+        comune = comune_per_codice(ente.codice_istat)
+        letto = None
+        if comune is not None:
+            try:
+                letto = await asyncio.to_thread(leggi_orari_urp, comune)
+            except Exception as exc:  # noqa: BLE001 — la rete che cade non è un 500
+                logger.warning("sonda live fallita per %s: %s", ente.ente, exc)
+                letto = None
+        letto_dal_vivo = letto is not None and letto.ha_orari
+
         query = _websearch_query(topic=intent.topic, ente=ente)
         if query is not None:
+            oggi = datetime.now(timezone.utc)
             entry = load_websearch(query)
-            if entry is not None and entry.results:
+            # D-60: la cache websearch è un HINT datato, non un sostituto
+            # della ricerca. Entro TTL si mostra accanto al dato vivo col
+            # proprio timbro; scaduta si ignora e si cerca di nuovo.
+            if entry is not None and entry.results and entro_ttl(entry, oggi):
                 web_results = [
                     WebResultAnswer(title=result.title, url=result.url)
                     for result in entry.results[:MAX_WEB_RESULTS_IN_REPLY]
                 ]
                 access_mode = AccessMode.M6_WEB_APERTO.value
+                diagnosis = [
+                    *diagnosis,
+                    f"Ricerca web del {entry.fetched_at:%d/%m/%Y} (entro i "
+                    "termini, non rifatta ora).",
+                ]
+            else:
+                web_results, motivo_assenza = await _ricerca_a_gradini(
+                    comune_sito=comune.sito if comune is not None else None,
+                    query=query,
+                )
+                if web_results:
+                    access_mode = AccessMode.M6_WEB_APERTO.value
+                elif motivo_assenza:
+                    diagnosis = [*diagnosis, motivo_assenza]
 
     coverage_count = len(candidates)
     reply = _compose_informazione_reply(
@@ -1470,7 +1650,7 @@ async def _build_informazione_answer(
         document=document,
         office=office,
         web_results=web_results,
-        letto_dal_vivo=False,
+        letto_dal_vivo=letto_dal_vivo,
         ufficio_chiesto=_ufficio_chiesto(parole),
     )
     azioni = _azioni_possibili(document=document, office=office, web_results=web_results)
@@ -1493,6 +1673,7 @@ async def _build_informazione_answer(
             diagnosis=diagnosis,
             integration_cost=integration_cost,
             web_results=web_results,
+            letto_dal_vivo=letto_dal_vivo,
             stato=stato,
             prove=prove,
             azioni=azioni,
@@ -1521,10 +1702,10 @@ def _query_ricerca_live(*, comune_nome: str, topic: Topic, ufficio: str | None) 
     return f"URP ufficio relazioni con il pubblico comune di {comune_nome}"
 
 
-def _cerca_sul_web(query: str) -> list[WebResultAnswer]:
+def _cerca_sul_web(query: str) -> tuple[list[WebResultAnswer], str | None]:
     """Una ricerca web, ora, per un comune che non abbiamo censito.
 
-    Il gradino 3 di D-32. I due precedenti — lo snapshot curato e la lettura
+    Il gradino 3 di D-32/D-58. I precedenti — lo snapshot curato e la lettura
     dal vivo del portale — restano davanti a questo e non vengono mai saltati:
     si arriva qui solo quando il portale ha risposto ma non espone i propri
     uffici in una forma leggibile da una macchina. Fino a ieri lì ci si
@@ -1538,24 +1719,56 @@ def _cerca_sul_web(query: str) -> list[WebResultAnswer]:
     fidarsene. Un dato di `enti.json` è stato letto, misurato e datato; questo
     è stato solo trovato, e la differenza deve restare visibile.
 
-    Non solleva mai: un motore giù, lento o che ci rifiuta è una risposta in
-    meno, non una domanda fallita. Una lista vuota, però, non va mai
-    presentata come «non esiste nulla» (R-15): significa solo che di qui non
-    abbiamo visto niente.
+    Non solleva mai (D-59): un motore giù, lento, o senza chiave configurata
+    è una risposta in meno, non una domanda fallita — mai un'eccezione al
+    cittadino. Ritorna `(risultati, motivo_assenza)`: `motivo_assenza` è
+    valorizzato solo quando la ricerca non è disponibile per costruzione
+    (nessuna chiave Brave), cosicché il chiamante possa scriverlo in
+    diagnosi invece di lasciarlo solo nei log. Una lista vuota senza motivo,
+    però, non va mai presentata come «non esiste nulla» (R-15): significa
+    solo che di qui non abbiamo visto niente.
     """
     try:
-        risultati, _ = search_web(
-            query,
-            base_url=os.environ.get("SEARXNG_URL", "").strip() or DEFAULT_SEARXNG_URL,
-            timeout=TIMEOUT_RICERCA_LIVE,
-        )
+        risultati, _ = search_web(query, timeout=TIMEOUT_RICERCA_LIVE)
+    except WebSearchNonConfigurato as exc:
+        logger.info("ricerca web non disponibile per %r: %s", query, exc)
+        return [], "La ricerca sul web non è disponibile in questo momento."
     except Exception:  # noqa: BLE001 — vedi docstring
         logger.warning("ricerca live fallita per %r", query, exc_info=True)
-        return []
+        return [], None
     return [
         WebResultAnswer(title=r.title, url=r.url)
         for r in risultati[:MAX_WEB_RESULTS_IN_REPLY]
-    ]
+    ], None
+
+
+def _host_da_sito(sito: str) -> str | None:
+    """Host nudo da un URL di sito comunale, per lo scoping `site:` (D-58)."""
+    senza_schema = re.sub(r"^https?://", "", sito.strip(), flags=re.IGNORECASE)
+    host = senza_schema.split("/", 1)[0].strip()
+    return host or None
+
+
+async def _ricerca_a_gradini(
+    *, comune_sito: str | None, query: str
+) -> tuple[list[WebResultAnswer], str | None]:
+    """Gradino 3 in due passi (D-58): prima scoped al sito del comune, poi
+    generico. L'ordine non si inverte mai: una pagina del comune stesso vale
+    più di una qualunque pagina che lo nomina di sfuggita.
+
+    Si ferma al primo passo che rende un motivo di assenza (es. Brave non
+    configurato, D-59): il secondo tentativo fallirebbe per la stessa
+    ragione, e riprovarlo sarebbe solo rumore.
+    """
+    if comune_sito:
+        host = _host_da_sito(comune_sito)
+        if host:
+            risultati, motivo = await asyncio.to_thread(
+                _cerca_sul_web, f"site:{host} {query}"
+            )
+            if risultati or motivo:
+                return risultati, motivo
+    return await asyncio.to_thread(_cerca_sul_web, query)
 
 
 async def _risposta_live(
@@ -1682,9 +1895,9 @@ async def _risposta_live(
     # Cerchiamo noi, e diciamo con chiarezza che quello che torna non è un
     # nostro dato.
     ufficio_chiesto = _ufficio_chiesto(parole)
-    web = await asyncio.to_thread(
-        _cerca_sul_web,
-        _query_ricerca_live(comune_nome=comune.nome, topic=topic, ufficio=ufficio_chiesto),
+    web, motivo_assenza = await _ricerca_a_gradini(
+        comune_sito=comune.sito,
+        query=_query_ricerca_live(comune_nome=comune.nome, topic=topic, ufficio=ufficio_chiesto),
     )
     if web:
         return _chat_live(
@@ -1703,6 +1916,10 @@ async def _risposta_live(
             citizen_effort=len(web) + 1,
         )
 
+    # D-59: se il motore non è disponibile per costruzione (niente chiave
+    # Brave), lo si dice — non è la stessa cosa di "cercato e trovato niente"
+    # (R-15), e il cittadino deve poterlo leggere, non solo trovarlo in log.
+    diagnosi_finale = diagnosi if motivo_assenza is None else [*diagnosi, motivo_assenza]
     return _chat_live(
         reply=(
             f"{comune.nome} ha un portale, ma non espone i propri uffici in una forma "
@@ -1711,7 +1928,7 @@ async def _risposta_live(
             "che copriamo."
         ),
         topic=topic,
-        diagnosi=diagnosi,
+        diagnosi=diagnosi_finale,
         comune_sito=comune.sito,
         access_mode=AccessMode.M4_CONNETTORE.value,
         data_gap="not_published",
@@ -1853,22 +2070,51 @@ def compute_recovery_stats(
 _MINIMO_TOPONIMO = 5
 
 
+@lru_cache(maxsize=1)
+def _tutti_comuni() -> tuple:
+    """Universo comuni, letto una volta e tenuto in cache (7896 righe)."""
+    from treasureiq.sonda_live import _tutti as comuni_noti
+
+    return tuple(comuni_noti())
+
+
+@lru_cache(maxsize=1)
+def _frequenza_parole_nome() -> dict:
+    """Quante volte ogni parola compare nei nomi dei comuni.
+
+    Serve a pesare i toponimi: «delle» sta in decine di nomi (connettivo, non
+    distingue), «figline» in due (toponimo forte). Calcolata una volta sola.
+    """
+    freq: dict[str, int] = {}
+    for comune in _tutti_comuni():
+        for parola in set(comune.nome.lower().split()):
+            freq[parola] = freq.get(parola, 0) + 1
+    return freq
+
+
 def _comuni_che_iniziano_per(message: str) -> list:
-    """I comuni il cui nome comincia con una parola del messaggio.
+    """I comuni una cui parola del nome compare nel messaggio.
 
     Serve al caso che ha prodotto questo codice: «sono di pergine» non
     risolveva, perche' il risolutore esatto vuole il nome intero e di Pergine
-    ce ne sono due — Valsugana in Trentino e Valdarno in Toscana.
+    ce ne sono due — Valsugana in Trentino e Laterina Pergine Valdarno in
+    Toscana.
 
     Senza questo, il messaggio non produceva nessun comune e la risposta
     ricadeva sul comune del profilo: i voucher di Albano Laziale a una persona
     che aveva scritto Pergine.
 
-    Torna la lista, non una scelta: con due candidati la cosa giusta e'
+    Guardava solo la PRIMA parola del nome: «pergine» risultava sempre e solo
+    Pergine Valsugana (mai ambiguo, sbagliato meta' delle volte) e «pergine
+    valdarno» risolveva ANCORA a Pergine Valsugana, perche' "valdarno" non e'
+    la prima parola di "Laterina Pergine Valdarno" e quindi non contava mai a
+    favore del comune giusto. Ora si confronta ogni parola del nome: se le
+    parole del messaggio coprono piu' parole di un solo candidato, quello
+    vince da solo (e' un match piu' preciso, non una scelta a caso).
+
+    Torna la lista, non una scelta: con due candidati pari la cosa giusta e'
     chiedere quale, non tirare a indovinare.
     """
-    from treasureiq.sonda_live import _tutti as comuni_noti
-
     parole = {
         p.strip(".,;:!?'\"")
         for p in (message or "").lower().split()
@@ -1876,12 +2122,26 @@ def _comuni_che_iniziano_per(message: str) -> list:
     }
     if not parole:
         return []
+    freq = _frequenza_parole_nome()
     trovati = []
-    for comune in comuni_noti():
-        prima = comune.nome.lower().split()[0]
-        if prima in parole:
-            trovati.append(comune)
-    return trovati
+    for comune in _tutti_comuni():
+        parole_nome = set(comune.nome.lower().split())
+        corrispondenze = parole & parole_nome
+        if not corrispondenze:
+            continue
+        # Peso IDF: una parola rara nei nomi («figline», in 2 comuni) e' un
+        # toponimo forte; una comune («delle», in decine) e' un connettivo che
+        # non distingue nulla. Contarle uguali faceva vincere il rumore: chi
+        # scriveva «figline» riceveva i comuni con «delle», perche' erano molti
+        # di piu' a pari conteggio. Col peso 1/freq il toponimo distintivo domina.
+        punteggio = sum(1.0 / freq.get(p, 1) for p in corrispondenze)
+        trovati.append((comune, punteggio))
+    if not trovati:
+        return []
+    massimo = max(p for _, p in trovati)
+    # Confronto float con tolleranza: due comuni che matchano la stessa parola
+    # («figline») hanno lo stesso peso e vanno entrambi in disambiguazione.
+    return [comune for comune, p in trovati if abs(p - massimo) < 1e-9]
 
 
 def _quale_comune(candidati, intent) -> ChatAnswer:
@@ -1890,12 +2150,14 @@ def _quale_comune(candidati, intent) -> ChatAnswer:
     Scegliere il primo in ordine alfabetico sarebbe un sorteggio travestito da
     risposta, e chi legge non avrebbe modo di sapere che c'e' stato.
     """
-    elenco = ", ".join(f"{c.nome} ({c.provincia})" for c in candidati[:5])
+    mostrati = candidati[:6]
+    elenco = ", ".join(f"{c.nome} ({c.provincia})" for c in mostrati)
     return ChatAnswer(
         reply=(
             f"In Italia ci sono piu' comuni con questo nome: {elenco}. "
-            "Quale ti interessa? Preferisco chiedertelo piuttosto che sceglierne "
-            "uno a caso e darti informazioni di un altro territorio."
+            "Quale ti interessa? Tocca quello giusto qui sotto — preferisco "
+            "chiedertelo piuttosto che sceglierne uno a caso e darti "
+            "informazioni di un altro territorio."
         ),
         topic=intent.topic,
         kind=intent.kind,
@@ -1904,6 +2166,12 @@ def _quale_comune(candidati, intent) -> ChatAnswer:
         matches=[],
         spid_required=False,
         spid_reason=None,
+        # Le schede cliccabili: la UI le rende come chip, un tap sceglie e
+        # rimanda la domanda con l'ISTAT. Niente da ridigitare.
+        comuni_ambigui=[
+            ComuneAmbiguo(nome=c.nome, provincia=c.provincia, codice_istat=c.codice_istat)
+            for c in mostrati
+        ],
     )
 
 
@@ -1931,7 +2199,8 @@ def _prova_live(*, risposta: ChatAnswer, comune, message: str) -> ChatAnswer:
     if not sito:
         return risposta
     dominio = sito.replace("https://", "").replace("http://", "").strip("/")
-    trovati = _cerca_sul_web(f"site:{dominio} {message}")[:MASSIMO_LIVE]
+    trovati, _motivo = _cerca_sul_web(f"site:{dominio} {message}")
+    trovati = trovati[:MASSIMO_LIVE]
     if not trovati:
         return risposta
     return replace(
@@ -1949,18 +2218,39 @@ def _prova_live(*, risposta: ChatAnswer, comune, message: str) -> ChatAnswer:
     )
 
 
-def _premessa_fuori_copertura(nominato, risposta: ChatAnswer | None = None) -> str:
+def _premessa_fuori_copertura(
+    nominato,
+    risposta: ChatAnswer | None = None,
+    connettore: "Connettore | None" = None,
+    *,
+    ha_scheda_laterale: bool = False,
+) -> str:
     """La frase che apre una risposta su un comune che non leggiamo.
 
     Sta davanti al resto, non al posto del resto: quello che segue vale
     comunque, perche' le agevolazioni nazionali e regionali non dipendono da
     quale comune sappiamo leggere.
+
+    Se la sonda dice che il comune espone l'API del Modello AgID, lo diciamo
+    esplicitamente: non e' una scansione verificata, ma la via per averla
+    esiste e ha un nome. Nominiamo il *modello*, mai il prodotto del fornitore
+    — attribuire una piattaforma per inferenza sarebbe un'accusa, non un dato.
     """
     provincia = f" ({nominato.provincia})" if getattr(nominato, "provincia", None) else ""
     base = (
-        f"Non ho ancora letto i dati del Comune di {nominato.nome}{provincia}, "
+        f"Non ho una scansione verificata dei dati del Comune di {nominato.nome}{provincia}, "
         "quindi non posso dirti con certezza cosa ti spetta."
     )
+    # Se il comune e' raggiungibile dal connettore, dichiariamo la via — senza
+    # promettere un bottone che non c'e': e' una capacita', non un'azione da
+    # cliccare. Il tono resta cautelativo: la scansione web l'ho gia' fatta e
+    # la vedi a sinistra, ma la fonte certa passerebbe dal Modello AgID.
+    if connettore is not None and connettore.indirizzabile:
+        base += (
+            " I recapiti che vedi a sinistra li ho letti adesso dal sito: una fonte "
+            "certa la recupererei tramite il connettore «Modello AgID», che questo "
+            "comune espone."
+        )
     # La frase si dice solo se sotto c'e' davvero qualcosa. Prometterla a
     # vuoto e' peggio di non prometterla: chi legge cerca risultati che non
     # esistono e conclude che l'interfaccia sia rotta, invece che la ricerca
@@ -1977,7 +2267,61 @@ def _premessa_fuori_copertura(nominato, risposta: ChatAnswer | None = None) -> s
             "quello che ho visto, **da verificare tu** — non l'ho controllato "
             "contro una fonte ingerita."
         )
+    # Vicolo cieco: la ricerca non ha collegato la domanda a nessun servizio.
+    # Una frase sola, non tre «non ho trovato niente» impilati. Rimanda a cio'
+    # che c'e' davvero attorno — la scheda di contatto a lato, la mappa dei
+    # servizi sotto — nominando ciascuna via solo se esiste sul serio. Il nome
+    # del comune diventa un tag colorato (`[[...]]`), «Attenzione» un grassetto
+    # vero (`__...__`), non il chip giallo del «da verificare».
+    vicolo_cieco = risposta is not None and getattr(risposta, "data_gap", None) == "none_found"
+    if vicolo_cieco:
+        frase = (
+            f"__Attenzione__: la ricerca sulla domanda fatta per il "
+            f"[[Comune di {nominato.nome}{provincia}]] non ha avuto un risultato chiaro"
+        )
+        indirizzabile = connettore is not None and connettore.indirizzabile
+        if ha_scheda_laterale and indirizzabile:
+            frase += (
+                ". Trovi di lato la scheda del comune per contattarli direttamente, "
+                "oppure puoi navigare tra i loro servizi qui sotto e cercare il "
+                "settore giusto per una ricerca rapida."
+            )
+        elif ha_scheda_laterale:
+            frase += ". Trovi di lato la scheda del comune per contattarli direttamente."
+        elif indirizzabile:
+            frase += (
+                ". Puoi navigare tra i loro servizi qui sotto e cercare il settore "
+                "giusto per una ricerca rapida."
+            )
+        else:
+            frase += ". Prova a riformularla, oppure rivolgiti direttamente all'URP del comune."
+        return frase
     return base + " Quello che segue vale comunque, perché non dipende dal comune."
+
+
+def _numeri_utili_al_volo(codice_istat: str | None) -> "NumeriUtili | None":
+    """Legge i recapiti del comune ADESSO e li impacchetta per il pannello.
+
+    Non e' una richiesta esplicita del cittadino: e' il biglietto da visita del
+    comune fuori copertura, che mettiamo a sinistra insieme allo stato. Fonte
+    sempre «scansione web» — l'API AgID espone la struttura uffici, non i
+    recapiti, quindi la sorgente reale resta lo scrape della home. `letto_il` e'
+    l'ora del recupero, che il pannello rende come «ultimo controllo». Muto: se
+    lo scrape non trova nulla di utile, torna None e il pannello non compare.
+    """
+    contatti = recupera_contatti(codice_istat)
+    if contatti is None:
+        return None
+    if not (contatti.telefoni or contatti.email or contatti.pec):
+        return None
+    return NumeriUtili(
+        telefoni=list(contatti.telefoni),
+        email=list(contatti.email),
+        pec=list(contatti.pec),
+        fonte=contatti.fonte,
+        fonte_tipo="scansione web",
+        letto_il=datetime.now(timezone.utc).isoformat(),
+    )
 
 
 def _fuori_copertura(nominato, intent) -> ChatAnswer:
@@ -2007,6 +2351,37 @@ def _fuori_copertura(nominato, intent) -> ChatAnswer:
         spid_required=False,
         spid_reason=None,
     )
+
+
+_CAMBIO_PERSONA_RE = re.compile(
+    r"\bmia\s+madre\b|\bmio\s+padre\b|\bmia\s+figlia\b|\bmio\s+figlio\b"
+    r"|\bper\s+lei\b|\bper\s+lui\b",
+    re.IGNORECASE,
+)
+
+# Gli stessi campi che `_profile_from_slots` legge dal turno corrente: se
+# almeno uno e' dichiarato insieme al pattern sopra, il turno non sta
+# aggiornando la persona in sessione — ne descrive un'altra (A3).
+_SLOT_ANAGRAFICI = (
+    "eta",
+    "isee",
+    "nucleo_familiare",
+    "sesso",
+    "disabilita_nucleo",
+    "figli_disabili",
+    "figli_minori",
+    "disabilita",
+    "employment_status",
+)
+
+
+def _e_cambio_persona(message: str, slots: object) -> bool:
+    """D-56/A3: euristica deterministica, niente LLM. Il pattern da solo non
+    basta (si puo' nominare la madre senza chiedere nulla su di lei); serve
+    anche almeno uno slot anagrafico dichiarato in QUESTO turno."""
+    if not _CAMBIO_PERSONA_RE.search(message):
+        return False
+    return any(getattr(slots, campo, None) is not None for campo in _SLOT_ANAGRAFICI)
 
 
 async def _componi_risposta(
@@ -2069,6 +2444,15 @@ async def _componi_risposta(
         intent=intent, messaggio=message, storia=storia or [], provider=provider
     )
 
+    # D-55: se questo turno stesso risponde alla domanda «tutte le categorie
+    # o una in particolare?» — letto sul testo grezzo, mai sulla
+    # classificazione del modello, per lo stesso motivo per cui `_quale_comune`
+    # non si fida del modello per il comune: «tutte»/«utenze»/«mezzi»/«assegni»
+    # non sono nel vocabolario di `Topic`, e un modello a cui viene chiesto di
+    # classificarli tenderebbe a inventare un topic vicino piuttosto che
+    # ammettere di non saperlo.
+    richiesta_categoria = _categoria_richiesta(message)
+
     # R-8/D-19: `_backfill_ambiguous_topic` can restore a topic (VOLONTARIATO,
     # RIFIUTI) that `extract_intent` classified as SCONOSCIUTO and therefore
     # never saw the informational override for. Re-assert it here so an
@@ -2077,7 +2461,31 @@ async def _componi_risposta(
     if intent.topic in INFORMATIONAL_BY_NATURE_TOPICS:
         intent = intent.model_copy(update={"kind": QuestionKind.INFORMAZIONE})
 
-    if intent.topic is Topic.SCONOSCIUTO:
+    if intent.topic is Topic.SCONOSCIUTO and richiesta_categoria is None:
+        # D-55: un topic sconosciuto/generico ("che bonus posso avere?") con
+        # un profilo già ricco non merita lo stesso "non ho capito" di una
+        # domanda davvero fuori catalogo — il cittadino ha già dato abbastanza
+        # di sé perché valga la pena chiedere SOLO su cosa cercare, non chi è.
+        # `richiesta_categoria is None` esclude il turno che sta già
+        # rispondendo a questa stessa domanda (vedi sopra): quello prosegue
+        # nel flusso normale invece di tornare qui in loop.
+        profilo_per_soglia = profile or _profile_from_slots(intent=intent, messaggio=message)
+        if intent.kind is QuestionKind.AGEVOLAZIONE and _slot_anagrafici_dichiarati(
+            profilo_per_soglia
+        ) >= 2:
+            return ChatAnswer(
+                reply=(
+                    "Cerco tra tutte le agevolazioni del Comune, o preferisci "
+                    "restringere a una categoria — utenze, mezzi o assegni?"
+                ),
+                topic=intent.topic,
+                kind=intent.kind,
+                data_gap=None,
+                needs_clarification=True,
+                matches=[],
+                spid_required=False,
+                spid_reason=None,
+            )
         return ChatAnswer(
             reply=(
                 "Non sono riuscito a collegare la tua richiesta a un servizio del "
@@ -2127,8 +2535,78 @@ async def _componi_risposta(
             spid_reason=None,
         )
 
+    if profile is not None and _e_cambio_persona(message, intent.slots):
+        # D-56/R-LOGOUT: il cookie di sessione vince sempre — ma non in
+        # silenzio quando il turno sembra parlare di un'altra persona.
+        # Nessun reset automatico: si spiega e si chiede conferma, il
+        # client azzera la sessione (`POST /api/session/dimentica` o
+        # logout) SOLO dopo che il cittadino conferma.
+        return ChatAnswer(
+            reply=(
+                "Sembra che tu stia chiedendo per un'altra persona, non per "
+                "te. Per non mescolare i dati della sessione con quelli "
+                "nuovi, prima devo mettere da parte quello che so già di te "
+                "(età, ISEE, nucleo familiare, disabilità...). Confermi? "
+                "Dopo la conferma puoi ripetere la domanda."
+            ),
+            topic=intent.topic,
+            kind=intent.kind,
+            data_gap="cambio_persona",
+            needs_clarification=True,
+            matches=[],
+            spid_required=False,
+            spid_reason=None,
+        )
+
     active_profile = profile or _profile_from_slots(intent=intent, messaggio=message)
-    candidates = _search_opportunities(records=records, topic=intent.topic)
+
+    if active_profile.disabilita_nucleo and active_profile.figli_minori is None:
+        # D-53: il turno ha dichiarato un figlio con disabilita', ma non se
+        # e' minorenne — e alcune agevolazioni (sull'eta') dipendono proprio
+        # da questo. Si chiede, analogo a `_quale_comune`: nessuno stato
+        # server nuovo, la risposta al turno dopo passa dal normale giro
+        # slot (`figli_minori`/`figli_disabili`).
+        return ChatAnswer(
+            reply=(
+                "Il figlio con disabilità che hai indicato è minorenne o "
+                "maggiorenne? Alcune agevolazioni cambiano in base a questo."
+            ),
+            topic=intent.topic,
+            kind=intent.kind,
+            data_gap=None,
+            needs_clarification=True,
+            matches=[],
+            spid_required=False,
+            spid_reason=None,
+        )
+
+    # D-55: «tutte le categorie» abbandona il filtro per singolo topic (ogni
+    # record del comune diventa candidato, esattamente come il ranker di
+    # `GET /api/opportunities`, api.py:1333); una categoria scelta filtra ai
+    # `Topic` di quella categoria PRIMA del ranking — mai dopo, o un record
+    # ineleggibile di un'altra categoria potrebbe scavalcare uno pertinente.
+    # Entrambe le vie sostituiscono, non affiancano, il candidates a singolo
+    # topic: la classificazione del turno corrente resta quella su cui si
+    # basa `intent.topic` per tutto il resto della risposta (spid/residenza).
+    if richiesta_categoria == "tutte":
+        # Le altre due vie passano da `_search_opportunities`, che toglie
+        # le opportunità scadute (`_senza_scadute`, R-15): "tutte" deve
+        # restare coerente con "utenze"/"mezzi"/"assegni" e col flusso a
+        # singolo topic, non mostrare un bando scaduto solo perché nessun
+        # filtro per topic è stato applicato.
+        candidates = _senza_scadute(records)
+    elif isinstance(richiesta_categoria, Categoria):
+        visti: set[int] = set()
+        candidates = []
+        for topic_della_categoria in topics_di(richiesta_categoria):
+            for opportunity in _search_opportunities(
+                records=records, topic=topic_della_categoria
+            ):
+                if id(opportunity) not in visti:
+                    visti.add(id(opportunity))
+                    candidates.append(opportunity)
+    else:
+        candidates = _search_opportunities(records=records, topic=intent.topic)
 
     if not candidates:
         return ChatAnswer(
@@ -2248,6 +2726,40 @@ async def _componi_risposta(
     )
 
 
+def _avvia_refresh_in_background(codice_istat: str) -> None:
+    """Lancia `aggiorna_scansione` senza bloccare la risposta (D-S6).
+
+    Fire-and-forget su un thread daemon: doppia-scansione occasionale, se due
+    domande sullo stesso comune arrivano ravvicinate mentre il precedente
+    refresh e' ancora in volo, e' accettata (DISCRETION, nessun lock). I dati
+    mostrati in QUESTO turno restano quelli gia' in cache.
+    """
+    threading.Thread(
+        target=aggiorna_scansione, args=(codice_istat,), daemon=True
+    ).start()
+
+
+def _scan_stato_per_comune(codice_istat: str | None) -> ScanStato | None:
+    """Stato dello scan del comune riconosciuto, per il rail chat (D-S6).
+
+    Scan assente o stantio (>6gg, `scansione_stantia`) -> il refresh parte in
+    background e lo stato segnala `"aggiornamento_in_corso"`. Scan fresco ->
+    nessun refresh, solo lo stato `"fresco"`. `None` se non c'e' un comune da
+    guardare — sola lettura dello store, nessun tocco a matching/pesi/scala
+    (D-S9).
+    """
+    if not codice_istat:
+        return None
+    record = carica_scansione(codice_istat)
+    if record is None or scansione_stantia(record):
+        _avvia_refresh_in_background(codice_istat)
+        return ScanStato(
+            stato="aggiornamento_in_corso",
+            ultimo_scan=record.scansionato_il if record is not None else None,
+        )
+    return ScanStato(stato="fresco", ultimo_scan=record.scansionato_il)
+
+
 async def build_chat_answer(
     *,
     message: str,
@@ -2273,7 +2785,42 @@ async def build_chat_answer(
     interna ha sei punti di uscita, ognuno dei quali avrebbe dovuto
     ricordarsi di anteporre la stessa frase.
     """
-    nominato = _comune_nominato(message)
+    candidati = _comuni_candidati(message)
+    if len(candidati) >= 2:
+        # D-54: prima l'ambiguita' spariva dentro `_comune_nominato` (tornava
+        # `None`, come se nessun comune fosse stato nominato) e «vivo a
+        # Pergine» finiva silenziosamente sul comune del profilo. `_quale_comune`
+        # esisteva gia' mai collegata (dead code): la si cablava qui, prima del
+        # ramo fuori-copertura, cosi' la domanda parte prima di decidere quali
+        # record guardare.
+        #
+        # Se pero' l'utente ha gia' scelto da una scheda, `comune_istat` porta
+        # l'istat di UNO di questi candidati: la scelta e' fatta, non si richiede.
+        # Vale solo se l'istat e' tra i candidati del testo — un `comune_istat`
+        # di profilo (Albano) su una domanda ambigua altrui («figline») non conta
+        # come scelta, e si continua a chiedere.
+        scelto = (
+            next((c for c in candidati if c.codice_istat == comune_istat), None)
+            if comune_istat
+            else None
+        )
+        if scelto is None:
+            provider: LLMProvider = load_provider(role="chat")
+            intent = await extract_intent(message=message, provider=provider, storia=storia)
+            return _quale_comune(candidati, intent)
+        nominato = scelto
+    else:
+        nominato = candidati[0] if candidati else None
+    # Il comune puo' arrivare senza essere ridigitato in QUESTO turno: una
+    # domanda di follow-up («bonus per aprire ditte?») porta il comune dal
+    # profilo via `comune_istat`, non dal testo. Se quel comune non lo
+    # leggiamo, vale lo stesso ramo del comune nominato — premessa
+    # fuori-copertura + ricerca live — altrimenti la lettura dal vivo scattava
+    # solo se il cittadino riscriveva il nome del comune a ogni domanda, e chi
+    # aveva gia' scelto Bisceglie si sentiva dire «non c'e' nulla» senza che
+    # nessuno avesse guardato.
+    if nominato is None and comune_istat and not comune_coperto:
+        nominato = comune_per_codice(comune_istat)
     regione = _regione_del_cittadino(nominato=nominato, comune_istat=comune_istat)
     # Una misura regionale di un'altra regione non riguarda chi fa la domanda,
     # e vale anche quando il suo comune lo leggiamo: prima questo filtro
@@ -2290,12 +2837,76 @@ async def build_chat_answer(
         # `ChatAnswer` e' una dataclass, non un modello pydantic: si copia con
         # `replace`, non con `model_copy`.
         risposta = _prova_live(risposta=risposta, comune=nominato, message=message)
+        # A ricerca fatta, chiediamo anche se questo comune sarebbe raggiungibile
+        # dal connettore AgID: cosi' la risposta non ripiega in silenzio sulla
+        # sola ricerca web quando il portale e' strutturato e indirizzabile.
+        # Sonda muta: se fallisce, `connettore` resta None e nulla cambia.
+        connettore = sonda_connettore(nominato.codice_istat)
+        # Recuperiamo i recapiti al volo, senza chiederlo: non e' una risposta
+        # di TreasureIQ, e' il biglietto da visita del comune. Va nel pannello a
+        # sinistra come «numeri utili», con fonte e data del controllo. Muto:
+        # se lo scrape non trova nulla, `numeri_utili` resta None.
+        numeri = _numeri_utili_al_volo(nominato.codice_istat)
+        # La coda di `_componi_risposta` e' un vicolo cieco («non sono riuscito a
+        # collegare... rivolgiti all'URP»): ha senso quando NON abbiamo cercato,
+        # ma contraddice la premessa quando la ricerca live ha trovato pagine —
+        # «qui sotto trovi quello che ho visto» e subito dopo «non ho trovato
+        # niente». Se le pagine ci sono, la premessa basta e la coda si toglie;
+        # una domanda-chiarimento (con «?») resta, non e' un vicolo cieco.
+        trovate_live = (
+            risposta.info is not None
+            and risposta.info.letto_dal_vivo
+            and bool(risposta.info.web_results)
+        )
+        vicolo_cieco = getattr(risposta, "data_gap", None) == "none_found"
+        # La coda si toglie anche nel vicolo cieco: la premessa «Attenzione» la
+        # riscrive per intero. Resta solo se e' una domanda-chiarimento («?»).
+        coda = "" if ((trovate_live or vicolo_cieco) and "?" not in risposta.reply) else risposta.reply
+        premessa = _premessa_fuori_copertura(
+            nominato, risposta, connettore, ha_scheda_laterale=numeri is not None
+        )
+        reply = premessa + ("\n\n" + coda if coda else "")
         return replace(
             risposta,
-            reply=_premessa_fuori_copertura(nominato, risposta) + "\n\n" + risposta.reply,
+            reply=reply,
+            connettore=connettore,
+            numeri_utili=numeri,
+            scan=_scan_stato_per_comune(nominato.codice_istat),
         )
-    return await _componi_risposta(
+    risposta = await _componi_risposta(
         message=message, profile=profile, storia=storia, today=today, records=records, comune_istat=comune_istat, comune_coperto=comune_coperto
+    )
+    # Un comune coperto ma con seed magro puo' rispondere «non ho trovato nulla»
+    # pur essendo indirizzabile dal connettore AgID (servizi + bandi live). Prima
+    # cadeva sul vicolo cieco nudo verso l'URP: ora offriamo la stessa lettura
+    # live del ramo fuori-copertura — mappa servizi, bandi, numeri utili, premessa
+    # onesta. Navigazione, nessun verdetto (D-01). Solo se il portale e'
+    # davvero indirizzabile, altrimenti la coda originale resta.
+    # Il comune puo' arrivare dal testo (`nominato`, gia' estratto sopra) anche
+    # quando la scheda non ha passato un `comune_istat` esplicito: la rotta passa
+    # `body.comune_istat` grezzo, che e' None quando il comune viene dal chip di
+    # profilo e non da una scelta. Il ripiego live vale in entrambi i casi, come
+    # nel ramo fuori-copertura che chiave su `nominato`, non su `comune_istat`.
+    comune = nominato or (comune_per_codice(comune_istat) if comune_istat else None)
+    if getattr(risposta, "data_gap", None) == "none_found" and comune is not None:
+        connettore = sonda_connettore(comune.codice_istat)
+        if connettore is not None and connettore.indirizzabile:
+            numeri = _numeri_utili_al_volo(comune.codice_istat)
+            coda = "" if "?" not in risposta.reply else risposta.reply
+            premessa = _premessa_fuori_copertura(
+                comune, risposta, connettore, ha_scheda_laterale=numeri is not None
+            )
+            reply = premessa + ("\n\n" + coda if coda else "")
+            return replace(
+                risposta,
+                reply=reply,
+                connettore=connettore,
+                numeri_utili=numeri,
+                scan=_scan_stato_per_comune(comune.codice_istat),
+            )
+    return replace(
+        risposta,
+        scan=_scan_stato_per_comune(comune.codice_istat if comune is not None else None),
     )
 
 
@@ -2383,6 +2994,22 @@ def _solo_sovracomunali(records, *, regione: str | None):
     return tenuti
 
 
+def _comuni_candidati(message: str) -> list:
+    """I comuni compatibili col messaggio, prima di decidere se sceglierne uno.
+
+    Stessa precedenza di `_comune_nominato`: il confronto esatto sui 7.896
+    comuni vince su tutto (se risolve, il candidato e' uno solo per
+    definizione); solo se non risolve entra il confronto per parola-nel-nome.
+    Serve a chi, a differenza di `_comune_nominato`, ha bisogno di sapere
+    QUANTI candidati ci sono per decidere se chiedere quale (D-54): prima
+    l'ambiguita' spariva qui dentro, ora la si porta fuori.
+    """
+    esatto = risolvi_comune(message)
+    if esatto is not None:
+        return [esatto]
+    return _comuni_che_iniziano_per(message)
+
+
 def _comune_nominato(message: str):
     """Il comune che il cittadino ha nominato, se se ne riconosce uno solo.
 
@@ -2390,9 +3017,11 @@ def _comune_nominato(message: str):
     «sono di pergine» non risolveva perche' il confronto esatto vuole il nome
     intero. Con piu' candidati non sceglie: torna `None`, e la risposta
     prosegue come se nessun comune fosse stato nominato.
+
+    Chi ha bisogno di sapere QUANTI candidati ci sono (per chiedere quale
+    invece di ignorare l'ambiguita', D-54) usa `_comuni_candidati` e non
+    questa funzione: qui il collasso a `None` resta intenzionale per i
+    chiamanti che vogliono solo "un comune o niente".
     """
-    nominato = risolvi_comune(message)
-    if nominato is not None:
-        return nominato
-    candidati = _comuni_che_iniziano_per(message)
+    candidati = _comuni_candidati(message)
     return candidati[0] if len(candidati) == 1 else None

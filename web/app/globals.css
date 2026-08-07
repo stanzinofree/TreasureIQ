@@ -457,6 +457,9 @@ a {
   background: var(--yamabuki-wash);
   color: #6b4708;
   font-size: 0.88rem;
+  /* `.notice` e' un <p>: il global `p { max-width: --measure }` (prosa ~62ch)
+     lo restringeva sotto la larghezza della card. Qui e' un box, non prosa. */
+  max-width: none;
 }
 
 /* ----------------------------------------------------------- readiness */
@@ -1466,6 +1469,10 @@ a {
 .chat__answer {
   margin-top: var(--ma-4);
   display: grid;
+  /* Colonna esplicita minmax(0,1fr) per non far tracimare i contenuti larghi
+     (URL, tabelle). NB: badge/notice restavano stretti non per il grid ma per
+     il global `p { max-width }` — fix la' con max-width:none, non qui. */
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--ma-4);
 }
 
@@ -2316,6 +2323,458 @@ a {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--yamabuki-deep);
+}
+
+/* Numeri utili: recapiti URP letti dal vivo, su richiesta. Vive fuori
+   copertura, dove non c'è verdetto da dare ma c'è ancora qualcuno a cui
+   chiedere. Ogni recapito è dichiarato non verificato — un numero letto storto
+   è peggio di un link, quindi nessuna cifra è mai presentata come un fatto. */
+.contatti-urp {
+  margin: var(--ma-4) 0 0;
+  max-width: none;
+}
+.contatti-urp__esito {
+  padding-left: var(--ma-4);
+  border-left: 3px solid var(--yamabuki);
+  font-size: 0.92rem;
+  color: var(--sumi-soft);
+}
+.contatti-urp__titolo {
+  margin: 0 0 var(--ma-3);
+  font-size: 0.9rem;
+}
+.contatti-urp__titolo strong {
+  color: var(--yamabuki-deep);
+}
+.contatti-urp__lista {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: var(--ma-2) var(--ma-4);
+  margin: 0;
+}
+.contatti-urp__lista dt {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--kasumi-deep, var(--sumi-soft));
+  align-self: baseline;
+}
+.contatti-urp__lista dd {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ma-1);
+}
+.contatti-urp__fonte {
+  margin: var(--ma-3) 0 0;
+  font-size: 0.8rem;
+  color: var(--sumi-soft);
+}
+
+/* --------------------------------------------------- badge connettore AgID */
+
+/* Fuori copertura, dopo la ricerca: dice che il comune SAREBBE raggiungibile
+   dal connettore. Verde, non giallo: non è un dato «non verificato», è un
+   fatto strutturale misurato sul portale. Discreto — una riga, non una carta. */
+.badge-connettore {
+  margin: var(--ma-4) 0 0;
+  padding: var(--ma-3) var(--ma-4);
+  border: 1px solid #cfe3d2;
+  border-left: 3px solid #2f7d4f;
+  background: #f2f8f3;
+  border-radius: 2px;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--sumi-soft);
+  /* stessa trappola di `.notice`: badge e' un <p>, il global `p { max-width }`
+     lo stringeva. E' un box a piena larghezza, non prosa da leggere a colonna. */
+  max-width: none;
+}
+
+.badge-connettore__pallino {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 0.5em;
+  border-radius: 50%;
+  background: #2f7d4f;
+  vertical-align: middle;
+}
+
+.badge-connettore strong {
+  color: #245c3a;
+  font-weight: 600;
+}
+
+/* Schede di disambiguazione comune: un tap sceglie, niente da ridigitare. */
+.scelta-comune {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ma-2);
+  margin: var(--ma-4) 0 0;
+}
+.scelta-comune__scheda {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5em;
+  padding: var(--ma-2) var(--ma-4);
+  border: 1px solid var(--kasumi, #d5dbe6);
+  border-radius: 4px;
+  background: var(--washi, #fff);
+  cursor: pointer;
+  font: inherit;
+  color: var(--sumi, #1f2733);
+  transition: border-color 0.12s, background 0.12s;
+}
+.scelta-comune__scheda:hover:not(:disabled) {
+  border-color: var(--matcha, #2f9e6f);
+  background: var(--matcha-wash, #eef8f2);
+}
+.scelta-comune__scheda:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.scelta-comune__nome {
+  font-weight: 600;
+}
+.scelta-comune__prov {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  color: var(--sumi-soft);
+}
+
+/* Mappa servizi (fase 1): categorie del portale come chip a cascata sotto il
+   badge connettore. Verde matcha come il badge — è la stessa «capacità del
+   connettore», non un «da verificare» (che è giallo). Riusa .scelta-comune__scheda
+   per la scheda, aggiunge solo il conteggio-pillola e la cornice del gruppo. */
+.mappa-servizi {
+  margin: var(--ma-3) 0 0;
+}
+.mappa-servizi__carico {
+  margin: var(--ma-3) 0 0;
+  font-size: 0.85rem;
+  color: var(--sumi-soft);
+  font-style: italic;
+}
+.mappa-servizi__intro {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--sumi);
+  max-width: none; /* box a piena larghezza reso come <p>: fuori dal max-width di prosa */
+}
+.mappa-servizi__chip-riga {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ma-2);
+  margin: var(--ma-2) 0 0;
+}
+.mappa-servizi__chip-conteggio {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.05em 0.45em;
+  border-radius: 999px;
+  background: var(--matcha-wash, #eef8f2);
+  color: var(--matcha-deep, #245c3a);
+}
+
+/* Briciole della cascata: dove sei, coi passi precedenti risalibili. */
+.mappa-servizi__briciole {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.4em;
+  margin: 0 0 var(--ma-2);
+  max-width: none;
+}
+.mappa-servizi__briciola {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  padding: 0.15em 0.55em;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background: none;
+}
+.mappa-servizi__briciola--qui {
+  background: var(--matcha-wash, #eef8f2);
+  color: var(--matcha-deep, #245c3a);
+  font-weight: 600;
+}
+.mappa-servizi__briciola--link {
+  color: var(--ai);
+  cursor: pointer;
+  text-decoration: underline;
+}
+.mappa-servizi__briciola--link:hover {
+  border-color: var(--ai-line);
+}
+.mappa-servizi__freccia {
+  color: var(--sumi-faint);
+  font-size: 0.85rem;
+}
+
+/* Foglia: i servizi della categoria come link alla scheda del portale. */
+.mappa-servizi__servizi {
+  list-style: none;
+  margin: var(--ma-2) 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ma-1, 0.35rem);
+}
+.mappa-servizi__servizio {
+  padding-left: 0.9em;
+  position: relative;
+}
+.mappa-servizi__servizio::before {
+  content: "›";
+  position: absolute;
+  left: 0;
+  color: var(--matcha-deep, #245c3a);
+}
+.mappa-servizi__link {
+  color: var(--ai);
+  text-decoration: underline;
+  font-size: 0.9rem;
+}
+.mappa-servizi__link:hover {
+  color: var(--ai-deep);
+}
+/* Il servizio ora non è un link ma un tap che apre l'anteprima: stessa resa
+   del vecchio link, ma da bottone (nessun default di sistema). */
+.mappa-servizi__servizio-tap {
+  appearance: none;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  cursor: pointer;
+  color: var(--ai);
+  text-decoration: underline;
+  font: inherit;
+  font-size: 0.9rem;
+}
+.mappa-servizi__servizio-tap:hover {
+  color: var(--ai-deep);
+}
+
+/* Terzo livello: l'anteprima della scheda. GIALLA di proposito — il giallo
+   segnala «dato letto dal vivo, non certissimo» (stessa semantica di
+   `.tag-verifica`). Il bottone in fondo apre la scheda sul portale; il footer
+   sotto dichiara come e' stata generata. */
+.mappa-servizi__scheda {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ma-1, 0.35rem);
+  margin-top: var(--ma-2);
+  padding: var(--ma-2);
+  border: 1px solid var(--yamabuki, #e0a80d);
+  border-left: 3px solid var(--yamabuki, #e0a80d);
+  border-radius: 6px;
+  background: var(--yamabuki-wash);
+  color: inherit;
+}
+.mappa-servizi__scheda-titolo {
+  font-weight: 600;
+  color: var(--sumi, #1a1a1a);
+}
+.mappa-servizi__scheda-campo {
+  display: block;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: var(--sumi-soft, #444);
+}
+.mappa-servizi__scheda-etichetta {
+  display: block;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--yamabuki-deep);
+  margin-bottom: 0.1em;
+}
+.mappa-servizi__scheda-btn {
+  align-self: flex-start;
+  margin-top: 0.4em;
+  padding: 0.4em 0.9em;
+  border: 1px solid var(--yamabuki-deep);
+  border-radius: 5px;
+  background: var(--yamabuki-deep);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+.mappa-servizi__scheda-btn:hover {
+  background: #fff;
+  color: var(--yamabuki-deep);
+}
+.mappa-servizi__scheda-footer {
+  margin-top: 0.3em;
+  font-size: 0.72rem;
+  font-style: italic;
+  color: var(--sumi-soft, #666);
+}
+
+/* Bandi e avvisi comunali (amministrazione trasparente): stesso registro
+   della mappa servizi, indipendente per gate. Header collassato tap-toggle,
+   caveat GIALLO — dato letto dal vivo, non verificato (D-B4/D-B7), nessun
+   verdetto di apertura. */
+.bandi-comune {
+  margin: var(--ma-3) 0 0;
+}
+.bandi-comune__header {
+  appearance: none;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--sumi);
+}
+.bandi-comune__header:hover {
+  color: var(--ai);
+}
+.bandi-comune__caveat {
+  margin: var(--ma-2) 0 0;
+  padding: 0.5em 0.7em;
+  border-left: 3px solid var(--yamabuki);
+  background: var(--yamabuki-wash);
+  color: var(--yamabuki-deep);
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+.bandi-comune__lista {
+  list-style: none;
+  margin: var(--ma-2) 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ma-2);
+}
+.bandi-comune__card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2em;
+  padding: var(--ma-2);
+  border: 1px solid var(--kasumi);
+  border-radius: var(--radius-sm);
+}
+.bandi-comune__titolo {
+  font-weight: 600;
+  color: var(--sumi);
+}
+.bandi-comune__data {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--sumi-faint);
+}
+.bandi-comune__anteprima {
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: var(--sumi-soft);
+}
+.bandi-comune__link {
+  align-self: flex-start;
+  margin-top: 0.2em;
+  color: var(--ai);
+  text-decoration: underline;
+  font-size: 0.85rem;
+}
+.bandi-comune__link:hover {
+  color: var(--ai-deep);
+}
+
+/* Tag «da verificare tu» dentro il testo TIQ: chip giallo (semantica «non
+   verificato»), non asterischi grezzi. Inline, non spezza la riga. */
+.tag-verifica {
+  display: inline;
+  padding: 0.05em 0.4em;
+  border-radius: 3px;
+  background: var(--yamabuki-wash);
+  color: var(--yamabuki-deep);
+  font-weight: 600;
+  font-size: 0.92em;
+  white-space: nowrap;
+}
+
+/* Nome del MODELLO connettore (mai il prodotto/vendor — dottrina anti-accusa).
+   Verde come il badge: e' un fatto strutturale, non un dato «da verificare»
+   (quello e' giallo, `.tag-verifica`). */
+.tag-connettore {
+  display: inline;
+  padding: 0.05em 0.4em;
+  border-radius: 3px;
+  background: #e4f0e6;
+  color: #245c3a;
+  font-weight: 600;
+  font-size: 0.92em;
+  white-space: nowrap;
+}
+
+/* Nome del comune fuori copertura nell'incipit «Attenzione». Chip blu civico
+   (`--ai`, la stessa autorità dei link): identifica il comune di cui parliamo
+   senza tingerlo di giallo «da verificare» — il dubbio sta sul dato, non sul
+   nome del comune. */
+.tag-comune {
+  display: inline;
+  padding: 0.05em 0.4em;
+  border-radius: 3px;
+  background: #e3edf9;
+  color: var(--ai);
+  font-weight: 600;
+  font-size: 0.92em;
+}
+
+/* -------------------------------------------- numeri utili (banner pannello) */
+
+/* Recapiti del comune fuori copertura, letti al volo. Vive nel pannello a
+   sinistra, sotto il profilo: biglietto da visita, non un verdetto. Barra
+   ambra come le altre note del pannello, tono discreto. */
+.numeri-utili {
+  margin: var(--ma-4) 0 0;
+  padding-left: var(--ma-4);
+  border-left: 3px solid var(--yamabuki);
+}
+.numeri-utili__titolo {
+  margin: 0 0 var(--ma-3);
+  font-size: 0.82rem;
+  line-height: 1.4;
+  color: var(--sumi-soft);
+}
+.numeri-utili__lista {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: var(--ma-2) var(--ma-3);
+  margin: 0;
+}
+.numeri-utili__riga {
+  display: contents;
+}
+.numeri-utili__lista dt {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--kasumi-deep, var(--sumi-soft));
+  align-self: baseline;
+}
+.numeri-utili__lista dd {
+  margin: 0;
+  font-size: 0.82rem;
+  word-break: break-word;
+}
+.numeri-utili__nota {
+  margin: var(--ma-3) 0 0;
+  font-size: 0.72rem;
+  color: var(--sumi-soft);
 }
 
 /* ------------------------------------------------- integration cost table */
@@ -3931,4 +4390,137 @@ a {
   font-size: 12.5px;
   color: var(--sumi-soft);
   margin: var(--ma-2) 0 0;
+}
+
+/* --------------------------------------------------------- scheda-comune */
+
+/* La pagina /comune/[istat] (B4). Stile civico-giapponese esistente: token
+   `--paper`/`--sumi`/`--ai`, niente Inter/gradient/emoji. B4 è l'unico
+   proprietario di globals.css in questo ciclo — le due classi in fondo a
+   questo blocco (`.pannello__scheda-link`, `.scan-refresh`) sono pinnate qui
+   per B5 (link sidebar) e B6 (indicatore refresh), non ancora consumate. */
+.scheda-comune__testata {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ma-6);
+  flex-wrap: wrap;
+}
+.scheda-comune__logo {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+  background: var(--paper-raised);
+  border: 1px solid var(--kasumi);
+  padding: var(--ma-2);
+  flex: none;
+}
+.scheda-comune__aderenza-cifra {
+  margin: 0 0 var(--ma-4);
+  font-size: 1.1rem;
+}
+.scheda-comune__aderenza-cifra strong {
+  font-family: var(--font-mono);
+  font-size: 1.4rem;
+  color: var(--ai-deep);
+}
+.scheda-comune__superfici {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--ma-2);
+}
+.scheda-comune__superficie {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--ma-3);
+  padding: var(--ma-2) 0;
+  border-top: 1px solid var(--kasumi);
+}
+.scheda-comune__superficie-via {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: var(--sumi-faint);
+  white-space: nowrap;
+}
+.scheda-comune__chip-riga {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ma-2);
+  margin-top: var(--ma-3);
+}
+.scheda-comune__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ma-2);
+  padding: var(--ma-1) var(--ma-3);
+  border-radius: 999px;
+  border: 1px solid var(--kasumi);
+  background: var(--paper-raised);
+  font-size: 0.82rem;
+}
+.scheda-comune__chip-conteggio {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--sumi-faint);
+}
+.scheda-comune__contatti {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: var(--ma-2) var(--ma-3);
+  margin: 0;
+}
+.scheda-comune__contatti-riga {
+  display: contents;
+}
+.scheda-comune__contatti dt {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sumi-soft);
+  align-self: baseline;
+}
+.scheda-comune__contatti dd {
+  margin: 0;
+  font-size: 0.92rem;
+  word-break: break-word;
+}
+.scheda-comune__orari-citazione {
+  margin: var(--ma-2) 0 0;
+  padding-left: var(--ma-4);
+  border-left: 3px solid var(--kasumi);
+  font-style: italic;
+  color: var(--sumi-soft);
+}
+
+/* Pinnato per B5: link dal pannello sidebar alla scheda-comune. */
+.pannello__scheda-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ma-2);
+  margin-top: var(--ma-3);
+  font-size: 0.82rem;
+  color: var(--ai);
+}
+.pannello__scheda-link:hover {
+  color: var(--ai-deep);
+}
+
+/* Pinnato per B6: indicatore di refresh-on-search (D-S6) — scan >6gg in
+   aggiornamento. Barra ambra come le altre note «da verificare», mai
+   bloccante: il testo del consumatore decide se offrire attendi/attuali. */
+.scan-refresh {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ma-2);
+  padding: var(--ma-1) var(--ma-3);
+  border-radius: 999px;
+  background: var(--yamabuki-wash);
+  color: var(--yamabuki-deep);
+  font-size: 0.78rem;
+  font-weight: 600;
 }

@@ -35,12 +35,47 @@ export type FattoComune = {
   origine: Origine;
   /** GPS says where someone is standing, never where they are resident. */
   confermato: boolean;
+  /** Whether we actually ingest this comune's data. A comune the citizen can
+   * name but we do not read is a real distinction — the "did my comune
+   * publish this?" control only makes sense where the answer can be honest,
+   * i.e. where we have snapshots to check against. */
+  coperto?: boolean;
+};
+
+/** Recapiti letti al volo dal portale di un comune fuori copertura. Nessun
+ * numero è verificato. `istat` lega i recapiti al comune, `letto_il` è l'ora del
+ * controllo (ISO 8601), `fonte_tipo` è sempre «scansione web». */
+export type NumeriUtiliProfilo = {
+  istat: string;
+  comune: string;
+  telefoni: string[];
+  email: string[];
+  pec: string[];
+  fonte: string | null;
+  fonteTipo: string;
+  lettoIl: string;
 };
 
 export type Profilo = {
   nome?: string;
   eta?: number;
+  /** Deduced from the first name (D-52), not asked. `sessoDedotto` says so, so
+   * the strip can show it is an inference the citizen can correct, not a fact
+   * they stated. */
+  sesso?: "f" | "m";
+  sessoDedotto?: boolean;
+  /** The citizen's own disability (or that of the person being asked about),
+   * distinct from `disabilitaNucleo` which is a child's. */
+  disabilita?: boolean;
+  nucleoFamiliare?: number;
+  /** A child in the household has a disability (D-53). */
+  disabilitaNucleo?: boolean;
   comune?: FattoComune;
+  /** Recapiti del comune fuori copertura, letti al volo dal portale e mostrati
+   * come banner nel pannello. Portano con sé l'ISTAT del comune di cui sono i
+   * recapiti: il banner si rende solo se combacia col comune corrente, così un
+   * cambio di comune non lascia in vista i numeri di quello precedente. */
+  numeriUtili?: NumeriUtiliProfilo;
   interessi?: string[];
   /**
    * Present only when a real authenticated session supplies it. The SPID/CIE
@@ -70,7 +105,16 @@ type ProfiloContextValue = {
    * everything else, same reasoning as `dimenticaComune`. If a session is
    * open, the server has to be told too: without it, the verdict keeps being
    * computed from a fact the strip no longer shows (R-F). */
-  dimenticaFatto: (campo: "eta" | "interessi" | "nome") => void;
+  dimenticaFatto: (
+    campo:
+      | "eta"
+      | "interessi"
+      | "nome"
+      | "sesso"
+      | "disabilita"
+      | "nucleoFamiliare"
+      | "disabilitaNucleo",
+  ) => void;
   /** Drop one interest tag without touching the rest of the list. */
   dimenticaInteresse: (tag: string) => void;
   /** How many facts are currently known — drives the empty state. */
@@ -105,10 +149,28 @@ const ProfiloContext = createContext<ProfiloContextValue | null>(null);
  * "arriving" and "moving around inside". */
 let giaAzzerato = false;
 
+// La chiave locale è camelCase; il campo che il server sa dimenticare è
+// snake_case (e "nome" non esiste affatto lato server). Questa mappa fa da
+// ponte: assente qui = niente chiamata server (cancellazione solo locale).
+const CAMPO_SERVER: Record<string, string> = {
+  eta: "eta",
+  interessi: "interessi",
+  sesso: "sesso",
+  disabilita: "disabilita",
+  nucleoFamiliare: "nucleo_familiare",
+  disabilitaNucleo: "disabilita_nucleo",
+};
+
 function contaFatti(p: Profilo): number {
   return [
     p.nome,
     p.eta,
+    p.sesso,
+    // I booleani contano solo quando sono veri: un `false` non è un fatto che
+    // il servizio "sa", è l'assenza del fatto.
+    p.disabilita === true ? true : undefined,
+    p.nucleoFamiliare,
+    p.disabilitaNucleo === true ? true : undefined,
     p.comune,
     p.interessi?.length ? p.interessi : undefined,
     p.codiceFiscale,
@@ -145,16 +207,30 @@ export function ProfiloProvider({ children }: { children: React.ReactNode }) {
     });
   }, []);
 
-  const dimenticaFatto = useCallback((campo: "eta" | "interessi" | "nome") => {
-    setProfilo((corrente) => {
-      // "nome" is client-only — CitizenProfile carries no such field, so
-      // there is nothing to correct server-side.
-      if (corrente.accesso && campo !== "nome") dimenticaCampoSessione(campo);
-      const next = { ...corrente };
-      delete next[campo];
-      return next;
-    });
-  }, []);
+  const dimenticaFatto = useCallback(
+    (
+      campo:
+        | "eta"
+        | "interessi"
+        | "nome"
+        | "sesso"
+        | "disabilita"
+        | "nucleoFamiliare"
+        | "disabilitaNucleo",
+    ) => {
+      setProfilo((corrente) => {
+        const server = CAMPO_SERVER[campo];
+        if (corrente.accesso && server) dimenticaCampoSessione(server);
+        const next = { ...corrente };
+        delete next[campo];
+        // Il sesso porta con sé la sua provenienza: tolto il sesso, la nota
+        // "dedotto dal nome" non ha più nulla a cui riferirsi.
+        if (campo === "sesso") delete next.sessoDedotto;
+        return next;
+      });
+    },
+    [],
+  );
 
   const dimenticaInteresse = useCallback((tag: string) => {
     setProfilo((corrente) => {

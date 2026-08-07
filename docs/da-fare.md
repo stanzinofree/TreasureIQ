@@ -10,42 +10,30 @@ compiti è solo una lista di desideri.
 
 ## Rotto adesso
 
-### 1 · La ricerca web restituisce zero, sempre
+### 1 · ~~La ricerca web restituisce zero, sempre~~ — RISOLTO
 
-SearXNG gira e non indicizza niente: `site:comune.roncaro.pv.it bandi` → 0,
-`roncaro bandi mezzi pubblici` → 0. Il terzo gradino della scala D-32 **non
-funziona**, e non da ieri.
+SearXNG girava e non indicizzava niente: il terzo gradino della scala D-32 era
+morto. **Sostituito, non riparato** (D-58/D-59): SearXNG è fuori dalla scala, il
+gradino 3 ora è **Brave con ricerca ancorata al dominio** (`_cerca_sul_web(f"site:{host} {query}")`,
+`respond.py`) — un contratto vero, non un proxy che fa scraping, e usato solo
+per un comune di cui conosciamo già l'indirizzo. La chiave vive in `.secrets`
+(via `env_file`), non nel codice.
 
-Conseguenza misurata sulla matrice: su 30 combinazioni «comune senza
-connettore» la ricerca live non è mai partita.
+Verificato dal vivo: Bisceglie (fuori copertura) → pagine reali da
+`comune.bisceglie.bt.it`, tutte marcate `non verificato`. Coerente con la
+dottrina in `sonda_live.py`: *«non è un link trovato da un motore di ricerca:
+è la fonte, citata»*.
 
-**Non ripararlo: sostituirlo.** Sappiamo l'indirizzo del sito di ogni comune
-italiano (7.888 su 7.896, da IPA) e sappiamo su quale piattaforma gira. Un
-motore di ricerca è un modo indiretto e fragile di arrivare a una pagina di cui
-**abbiamo già l'URL**.
+Resta aperto **il gradino del catalogo** (vedi #7): per le piattaforme che
+sappiamo leggere, prima di Brave dovremmo elencare i servizi letti adesso.
 
-Al suo posto, due gradini:
+### 2 · ~~La risposta si ripete e si contraddice~~ — RISOLTO
 
-- piattaforma con lettore di catalogo (WordPress, MyPortal, PeopleWeb) →
-  elencare i servizi che corrispondono al tema, letti adesso;
-- altrimenti → aprire la home e agganciare i collegamenti il cui testo
-  corrisponde alle parole della domanda.
-
-Coerente con la dottrina già scritta in `sonda_live.py`: *«non è un link
-trovato da un motore di ricerca: è la fonte, citata»*.
-
-*Su degoog:* stessa classe di fragilità di SearXNG — entrambi fanno da tramite
-verso motori che non controlliamo. Cambiare proxy sposta il problema di
-qualche mese. Se un giorno servisse una ricerca generica (bandi statali), un
-contratto vero (Brave, già previsto nelle variabili d'ambiente) è più onesto di
-un proxy che fa scraping.
-
-### 2 · La risposta si ripete e si contraddice
-
-La premessa nuova («non ho ancora letto i dati del Comune di X») e il testo
-preesistente («di questo comune non abbiamo ancora letto i dati…») dicono la
-stessa cosa due volte con parole diverse, nella stessa risposta. Vanno unite in
-una frase sola.
+La premessa nuova e la coda preesistente dicevano la stessa cosa due volte, e
+peggio: la coda dava un dead-end («non sono riuscito a collegare… rivolgiti
+all'URP») anche quando la ricerca live aveva trovato pagine. Fix in
+`build_chat_answer`: se `web_results` sono presenti e la coda non è una domanda,
+si tiene solo la premessa. Una risposta, non due che si contraddicono.
 
 ### 3 · Il rail informativo dà zero anche sui comuni ingeriti
 
@@ -84,9 +72,16 @@ pagina non può mostrarli perché il tipo non li prevede.
 
 ### 7 · Lettura live: manca il gradino del catalogo
 
-Oggi il ripiego per un comune non coperto è solo la ricerca (rotta). Per i
-comuni su piattaforme che sappiamo leggere il ripiego giusto è **leggerne il
-catalogo adesso** — WordPress, MyPortal e PeopleWeb hanno già il lettore.
+Oggi il ripiego per un comune non coperto è solo la ricerca (Brave `site:`).
+Per i comuni su piattaforme che sappiamo leggere il ripiego giusto è **leggerne
+il catalogo adesso** — WordPress, MyPortal e PeopleWeb hanno già il lettore.
+
+*Fondamenta pronte:* `api/treasureiq/mappa_connettore.py` misura al volo servizi
+e 15 categorie standard del modello AgID (cache 30g). Manca il cablaggio in
+chat: chip a cascata sul rail informativo (categoria → servizio) prima di Brave.
+Attenzione: il catalogo AgID espone i **servizi amministrativi**, non i bandi
+(quelli vivono in amministrazione-trasparente → restano ricerca web). Vince sul
+rail informazione, non su quello agevolazioni.
 
 ### 8 · 155 comuni MyPortal leggibili e non letti
 

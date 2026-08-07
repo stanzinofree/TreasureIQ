@@ -2869,6 +2869,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": "f",
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false
@@ -3319,6 +3321,8 @@
    "nucleo_min": null,
    "figli_minori_required": null,
    "disabilita_required": null,
+   "sesso": "f",
+   "disabilita_nucleo_required": null,
    "employment_status": [],
    "other": [],
    "source_typed": false

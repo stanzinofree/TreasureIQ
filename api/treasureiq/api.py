@@ -26,6 +26,7 @@ from datetime import date, datetime
 from decimal import Decimal
 from functools import lru_cache
 from pathlib import Path
+from typing import Literal
 
 from fastapi import Depends, FastAPI, HTTPException, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
@@ -66,7 +67,19 @@ from treasureiq.match.engine import (
     match,
     summarise,
 )
-from treasureiq.sonda_live import cerca_comuni, comune_per_codice
+from treasureiq.sonda_live import OrariLive, cerca_comuni, comune_per_codice, recupera_contatti
+from treasureiq.mappa_connettore import (
+    Bando,
+    CategoriaServizio,
+    MappaConnettore,
+    SchedaServizio,
+    ServizioLink,
+    bandi_criteri,
+    mappa_connettore,
+    scheda_servizio,
+    servizi_di_categoria,
+)
+from treasureiq.scansioni import AderenzaAgid, aggiorna_scansione, carica_scansione, connettore_tipo
 from treasureiq.readiness import ReadinessReport, score_comune
 from treasureiq.recovery import ComuneRecovery, compute_comune_recovery
 from treasureiq.schema import CitizenProfile, Confidence, Livello, Opportunity
@@ -906,6 +919,70 @@ class ProfiloCapitoOut(BaseModel):
     nucleo_familiare: int | None = None
     figli_minori: int | None = None
     disabilita: bool | None = None
+    sesso: Literal["f", "m"] | None = None
+    #: True quando `sesso` viene dalla deduzione sul nome proprio (D-52),
+    #: non da una dichiarazione esplicita — bassa confidenza, l'interfaccia
+    #: lo mostra correggibile ("ho capito: donna — giusto?"), mai come un
+    #: filtro nascosto.
+    sesso_dedotto: bool = False
+    figli_disabili: int | None = None
+    disabilita_nucleo: bool | None = None
+
+
+class ConnettoreSondaOut(BaseModel):
+    """Se il comune fuori copertura sarebbe raggiungibile dal connettore AgID.
+
+    Risponde alla domanda «a ricerca fatta, sappiamo cosa interrogare?»: non
+    ingerisce nulla, dice solo che il portale espone l'API uffici del modello
+    AgID e quanti uffici elenca — un conteggio strutturale, non una spettanza,
+    quindi nessuna guardia sui numeri da rispettare qui."""
+
+    #: Il comune sondato: la UI lo passa a `/api/mappa-connettore/{istat}` per i
+    #: chip a cascata delle categorie, senza doverlo ripescare dal profilo.
+    codice_istat: str
+    indirizzabile: bool
+    uffici: int
+    rest_base: str | None = None
+
+
+class ComuneAmbiguoOut(BaseModel):
+    """Un candidato di disambiguazione comune, per la scheda cliccabile.
+
+    Porta l'ISTAT: la UI rimanda la domanda con questo codice, il cittadino
+    non ridigita il nome."""
+
+    nome: str
+    provincia: str
+    codice_istat: str
+
+
+class NumeriUtiliOut(BaseModel):
+    """Recapiti del comune fuori copertura, letti al volo dal portale.
+
+    Non e' una risposta di TreasureIQ: e' il biglietto da visita del comune,
+    che la UI mette nel pannello a sinistra. `fonte_tipo` e' sempre «scansione
+    web» (l'API AgID da' la struttura uffici, non i recapiti) e `letto_il` e'
+    l'ora del controllo. Nessun numero e' verificato: la UI lo dichiara."""
+
+    telefoni: list[str]
+    email: list[str]
+    pec: list[str]
+    fonte: str | None = None
+    fonte_tipo: str
+    letto_il: str
+
+
+class ScanStatoOut(BaseModel):
+    """Stato dello scan del comune riconosciuto, per il rail chat (B6, D-S6).
+
+    `stato` e' `"fresco"` (scan <6gg, servito dalla cache) o
+    `"aggiornamento_in_corso"` (scan assente o stantio, refresh partito in
+    background). `ultimo_scan` e' l'ISO-8601 del record in cache, `None` se
+    non ne esiste ancora uno. Stessa forma di `ScanStato` in `web/lib/api.ts`.
+    """
+
+    stato: str
+    ultimo_scan: str | None = None
 
 
 class ChatOut(BaseModel):
@@ -924,9 +1001,17 @@ class ChatOut(BaseModel):
     info: InfoOut | None
     matches: list[MatchOut]
     cost: CostOut
+    #: Presente solo fuori copertura, quando abbiamo sondato il portale. Dice se
+    #: il connettore lo raggiungerebbe — la UI ne fa un badge, non un verdetto.
+    connettore: ConnettoreSondaOut | None = None
+    numeri_utili: NumeriUtiliOut | None = None
+    comuni_ambigui: list[ComuneAmbiguoOut] | None = None
+    #: Stato dello scan del comune riconosciuto (B6, D-S6). `None` quando non
+    #: c'e' un comune da guardare (nessun comune nominato/scelto in questo giro).
+    scan: ScanStatoOut | None = None
 
 
-def _profilo_capito(*, answer, profile, message: str) -> ProfiloCapitoOut:
+def _profilo_capito(*, answer, profile, message: str, comune_istat: str | None = None) -> ProfiloCapitoOut:
     """Cosa abbiamo capito, messo in chiaro perche' il cittadino possa smentirlo.
 
     Le cifre le rilegge l'estrazione deterministica invece di fidarsi di cosa
@@ -934,13 +1019,53 @@ def _profilo_capito(*, answer, profile, message: str) -> ProfiloCapitoOut:
     verdetti, e qui serve anche a non mostrare a schermo un'eta' che nessuno
     ha scritto.
     """
-    from treasureiq.chat.intent import slot_dal_testo
+    from treasureiq.chat.intent import (
+        _disabilita_dichiarata_nel_testo,
+        _figlio_disabile_dichiarato_nel_testo,
+        _sesso_dichiarato_nel_testo,
+        slot_dal_testo,
+    )
+    from treasureiq.chat.nomi_genere import sesso_da_nome
     from treasureiq.chat.respond import _comune_nominato
 
     letti = slot_dal_testo(message)
     nominato = _comune_nominato(message)
-    comune = nominato or (comune_per_codice(profile.comune_istat) if profile else None)
+    # Il comune puo' arrivare da tre posti, in ordine di forza: nominato nel
+    # testo di QUESTO turno; scelto esplicitamente (`comune_istat` della
+    # richiesta — es. una scheda di disambiguazione toccata, dove il testo
+    # resta ambiguo e `nominato` e' None); o dal profilo di sessione. Senza il
+    # secondo, chi sceglieva «Figline e Incisa Valdarno» da una scheda non
+    # vedeva il comune comparire a lato ne' i suoi numeri utili.
+    comune = (
+        nominato
+        or comune_per_codice(comune_istat)
+        or (comune_per_codice(profile.comune_istat) if profile else None)
+    )
     coperto = comune.codice_istat in load_enti() if comune is not None else None
+
+    # D-52: una dichiarazione esplicita nel messaggio ("sono una donna")
+    # batte sempre; se il profilo di sessione gia' lo sa, quello vince su
+    # tutto. Solo se nessuno dei due dice nulla si prova la deduzione dal
+    # nome proprio — bassa confidenza, marcata `sesso_dedotto` cosi'
+    # l'interfaccia la mostra correggibile invece che come un fatto.
+    sesso_profilo = profile.sesso if profile else None
+    sesso_dichiarato = _sesso_dichiarato_nel_testo(message)
+    sesso_dal_nome = sesso_da_nome(message)
+    sesso = sesso_profilo or sesso_dichiarato or sesso_dal_nome
+    sesso_dedotto = sesso_profilo is None and sesso_dichiarato is None and sesso_dal_nome is not None
+
+    disabilita_nucleo = profile.disabilita_nucleo if profile else None
+    if disabilita_nucleo is None and _figlio_disabile_dichiarato_nel_testo(message):
+        disabilita_nucleo = True
+
+    # Stessa simmetria del nucleo, un gradino piu' su: la disabilita' della
+    # persona di cui si parla («sono disabile», «mia madre disabile»). Era
+    # l'unico slot anagrafico letto solo dal cookie: un cittadino anonimo che
+    # la dichiarava a voce non la vedeva comparire nel profilo a lato, pur
+    # avendola `extract_intent` gia' colta per il motore.
+    disabilita = profile.disabilita if profile else None
+    if disabilita is None and _disabilita_dichiarata_nel_testo(message):
+        disabilita = True
 
     return ProfiloCapitoOut(
         comune_nome=(
@@ -956,9 +1081,17 @@ def _profilo_capito(*, answer, profile, message: str) -> ProfiloCapitoOut:
             if "isee" in letti
             else (str(profile.isee) if profile and profile.isee is not None else None)
         ),
-        nucleo_familiare=profile.nucleo_familiare if profile else None,
+        nucleo_familiare=(
+            profile.nucleo_familiare
+            if profile
+            else letti.get("nucleo_familiare")
+        ),
         figli_minori=profile.figli_minori if profile else None,
-        disabilita=profile.disabilita if profile else None,
+        disabilita=disabilita,
+        sesso=sesso,
+        sesso_dedotto=sesso_dedotto,
+        figli_disabili=profile.figli_disabili if profile else None,
+        disabilita_nucleo=disabilita_nucleo,
     )
 
 
@@ -1241,6 +1374,9 @@ _CAMPI_DIMENTICABILI = {
     "nucleo_familiare",
     "figli_minori",
     "disabilita",
+    "sesso",
+    "disabilita_nucleo",
+    "figli_disabili",
     "employment_status",
     "interessi",
 }
@@ -1710,6 +1846,224 @@ def approfondimento(body: ApprofondimentoIn, request: Request) -> Approfondiment
     )
 
 
+class ContattiUrpIn(BaseModel):
+    #: Il comune scelto in chat. Per un cittadino anonimo non c'è cookie, quindi
+    #: il comune arriva da qui come nella /api/chat, non solo dalla sessione.
+    comune_istat: str | None = None
+
+
+class ContattiUrpOut(BaseModel):
+    comune_nome: str
+    telefoni: list[str] = []
+    email: list[str] = []
+    pec: list[str] = []
+    #: La pagina da cui vengono i recapiti, per controllarli alla fonte.
+    fonte: str | None = None
+    #: Sempre vero: recapiti letti dal portale adesso, mai verificati. Come per
+    #: `PaginaWebOut`, il flag esiste perché l'interfaccia non possa mai
+    #: presentarli come un dato controllato.
+    non_verificato: bool = True
+
+
+@app.post("/api/contatti-urp", response_model=ContattiUrpOut, tags=["Cittadino"], dependencies=[Depends(limita_modello)])
+def contatti_urp(body: ContattiUrpIn, request: Request) -> ContattiUrpOut:
+    """Recapiti URP del comune, letti dal vivo su richiesta esplicita (D-32).
+
+    Serve il caso fuori copertura: di un comune che non leggiamo non possiamo
+    dire cosa spetta, ma possiamo dire a chi chiedere. È il gesto che il
+    cittadino ha chiesto — «dammi i numeri utili, non solo i link» — e la
+    risposta torna marcata «non verificato»: è ciò che il portale espone adesso,
+    non un dato che abbiamo controllato. La guardia sui numeri vale qui come
+    altrove: nessuna cifra viene asserita come fatto.
+    """
+    profile = profile_from_cookie(request.cookies.get(SESSION_COOKIE))
+    comune_istat = body.comune_istat or (profile.comune_istat if profile is not None else None)
+    if not comune_istat:
+        return ContattiUrpOut(comune_nome="")
+    meta = COMUNI.get(comune_istat)
+    comune = comune_per_codice(comune_istat)
+    nome = (meta["nome"] if meta else None) or (comune.nome if comune else "il comune")
+    contatti = recupera_contatti(comune_istat)
+    if contatti is None:
+        return ContattiUrpOut(comune_nome=nome)
+    return ContattiUrpOut(
+        comune_nome=nome,
+        telefoni=contatti.telefoni,
+        email=contatti.email,
+        pec=contatti.pec,
+        fonte=contatti.fonte,
+    )
+
+
+@app.get(
+    "/api/mappa-connettore/{codice_istat}",
+    response_model=MappaConnettore | None,
+    tags=["Cittadino"],
+    dependencies=[Depends(limita_modello)],
+)
+def mappa_connettore_route(codice_istat: str) -> MappaConnettore | None:
+    """Le capacità dirette del portale di un comune: il catalogo servizi e le 15
+    categorie standard del modello AgID, con quanti servizi ricadono in ciascuna.
+
+    Serve i chip a cascata sul rail informativo: invece di ridigitare, il
+    cittadino sceglie una categoria fra quelle che quel comune espone davvero.
+    Misura in cache (30 giorni); a freddo legge il portale una volta, su richiesta
+    esplicita come `contatti-urp`. `None` se il comune non è noto. Non un verdetto:
+    dice per quali strade dirette *potremmo* rispondere, mai cosa spetta (D-01).
+    """
+    return mappa_connettore(codice_istat)
+
+
+class ServiziAssetOut(BaseModel):
+    """Il catalogo servizi del portale: se esposto via REST, quanti totali e
+    la ripartizione per categoria per i chip a cascata."""
+
+    esposto: bool
+    totale: int
+    categorie: list[CategoriaServizio]
+
+
+class UfficiAssetOut(BaseModel):
+    """Gli uffici del portale: se esposti via REST, quanti totali."""
+
+    esposto: bool
+    totale: int
+
+
+class ContattiSchedaOut(BaseModel):
+    """Recapiti URP del comune, così come l'ultima scansione li ha letti —
+    con la loro fonte e il momento della lettura (`letto_il`, D-S4: mai un
+    `now()` al volo)."""
+
+    telefoni: list[str]
+    pec: list[str]
+    email: list[str]
+    fonte: str
+    letto_il: str
+
+
+class SchedaComuneOut(BaseModel):
+    """La scheda di un comune così come l'ultimo scan l'ha registrata: mai
+    ricalcolata al volo (D-S4). `aderenza` è `None` fuori dal tier AgID
+    (D-S2); ogni superficie dentro `aderenza` porta la sua via (REST/scrape)
+    come provenienza, mai una percentuale digitata a mano."""
+
+    codice_istat: str
+    nome: str
+    sito: str | None
+    scansionato_il: str
+    connettore_tipo: Literal["agid", "solo-html", "non-sondato"]
+    aderenza: AderenzaAgid | None
+    servizi: ServiziAssetOut
+    uffici: UfficiAssetOut
+    contatti: ContattiSchedaOut | None
+    orari: OrariLive | None
+    logo_url: str | None
+
+
+@app.get(
+    "/api/comune/{codice_istat}",
+    response_model=SchedaComuneOut,
+    tags=["Cittadino"],
+)
+def scheda_comune_route(codice_istat: str) -> SchedaComuneOut:
+    """La scheda di un comune: aderenza AgID, catalogo servizi/uffici,
+    recapiti e orari, così come l'ultima scansione li ha registrati.
+
+    `carica_scansione` legge il record esistente; se non c'è ancora, una
+    prima scansione parte adesso (`aggiorna_scansione`) — «ultimo scan» è
+    sempre il timestamp reale del record, mai un `now()` al volo (D-S4).
+    Comune ignoto → 404. Niente refresh-stale qui (D-S6 vive altrove): la
+    scheda mostra il record che c'è.
+    """
+    record = carica_scansione(codice_istat) or aggiorna_scansione(codice_istat)
+    if record is None:
+        raise HTTPException(404, f"Comune {codice_istat} non disponibile")
+    mappa = record.mappa
+    contatti = (
+        ContattiSchedaOut(
+            telefoni=record.contatti.telefoni,
+            pec=record.contatti.pec,
+            email=record.contatti.email,
+            fonte=record.contatti.fonte or "",
+            letto_il=record.scansionato_il,
+        )
+        if record.contatti is not None
+        else None
+    )
+    return SchedaComuneOut(
+        codice_istat=record.codice_istat,
+        nome=mappa.nome,
+        sito=mappa.sito,
+        scansionato_il=record.scansionato_il,
+        connettore_tipo=connettore_tipo(mappa),
+        aderenza=record.aderenza,
+        servizi=ServiziAssetOut(
+            esposto=mappa.servizi.esposto,
+            totale=mappa.servizi.totale,
+            categorie=mappa.servizi.categorie,
+        ),
+        uffici=UfficiAssetOut(esposto=mappa.uffici.esposto, totale=mappa.uffici.totale),
+        contatti=contatti,
+        orari=record.orari,
+        logo_url=record.logo_url,
+    )
+
+
+@app.get(
+    "/api/mappa-connettore/{codice_istat}/categoria/{term_id}",
+    response_model=list[ServizioLink] | None,
+    tags=["Cittadino"],
+    dependencies=[Depends(limita_modello)],
+)
+def servizi_categoria_route(codice_istat: str, term_id: int) -> list[ServizioLink] | None:
+    """I servizi di una categoria di un comune: il livello sotto ai chip.
+
+    Scende di un gradino nella cascata: il cittadino ha toccato una categoria,
+    qui riceve i servizi che vi ricadono come link diretti alla scheda sul
+    portale del comune. `None` se il comune non è noto o non espone il catalogo;
+    lista vuota se la categoria non ha servizi. Le schede sono la fonte citata,
+    non un verdetto (D-01): dicono dove leggere, non cosa spetta.
+    """
+    return servizi_di_categoria(codice_istat, term_id)
+
+
+@app.get(
+    "/api/mappa-connettore/{codice_istat}/scheda",
+    response_model=SchedaServizio | None,
+    tags=["Cittadino"],
+    dependencies=[Depends(limita_modello)],
+)
+def scheda_servizio_route(codice_istat: str, url: str) -> SchedaServizio | None:
+    """L'anteprima di un servizio, letta adesso dalla sua pagina sul portale.
+
+    L'ultima foglia della cascata: invece di sbalzare subito il cittadino sul
+    sito, gli si mostra in chat cosa è il servizio (descrizione, a chi è
+    rivolto) con il link per aprirlo intero — come l'anteprima di un bando.
+    `url` deve appartenere al portale di quel comune (guardia host, no proxy
+    arbitrario). `None` se il comune non è noto o la pagina non è leggibile.
+    Fonte citata, non verdetto (D-01): dice cosa è il servizio, non cosa spetta.
+    """
+    return scheda_servizio(codice_istat, url)
+
+
+@app.get(
+    "/api/mappa-connettore/{codice_istat}/bandi",
+    response_model=list[Bando],
+    tags=["Cittadino"],
+    dependencies=[Depends(limita_modello)],
+)
+def bandi_criteri_route(codice_istat: str) -> list[Bando]:
+    """I bandi/criteri pubblicati su Amministrazione Trasparente del comune.
+
+    Term risolto per slug sulla tassonomia legata al CPT `amm-trasparente`
+    (D-B2, id/slug variano per comune). Lista vuota se il comune non è noto,
+    il portale non espone la sezione, o non ci sono item. Fonte citata, nessun
+    verdetto di apertura (D-B4), nessuna cifra toccata dal modello (D-B7).
+    """
+    return bandi_criteri(codice_istat) or []
+
+
 @app.post("/api/chat", response_model=ChatOut, tags=["Cittadino"], dependencies=[Depends(limita_modello)])
 async def chat(body: ChatIn, request: Request) -> ChatOut:
     """Anonymous-by-default chat over Albano public data.
@@ -1766,10 +2120,14 @@ async def chat(body: ChatIn, request: Request) -> ChatOut:
     # di Camposampiero: un numero vero, riferito a qualcun altro, che passa
     # per una misura di ciò che si sta leggendo. Nessuna misura è meglio di
     # una misura che riguarda un'altra cosa (D-16).
+    # Stessa onestà quando il comune scelto è fuori copertura: di lui non
+    # ingeriamo nessun PDF, quindi la «media di recupero» sarebbe quella del
+    # comune coperto (Albano) mostrata sotto la risposta di un altro. Nessuna
+    # ingestione reale = nessuna misura, non una misura altrui (D-16).
     letta_dal_vivo = answer.info is not None and answer.info.letto_dal_vivo
     stats = (
         RecoveryStats(seconds_total=None, seconds_avg_comune=None, levels={})
-        if letta_dal_vivo
+        if letta_dal_vivo or not comune_coperto
         else compute_recovery_stats(
             comune_records=records,
             answer_records=[r.opportunity for r in answer.matches],
@@ -1778,7 +2136,9 @@ async def chat(body: ChatIn, request: Request) -> ChatOut:
 
     return ChatOut(
         reply=answer.reply,
-        profilo_capito=_profilo_capito(answer=answer, profile=profile, message=body.message),
+        profilo_capito=_profilo_capito(
+            answer=answer, profile=profile, message=body.message, comune_istat=body.comune_istat
+        ),
         topic=answer.topic.value,
         kind=answer.kind.value,
         data_gap=answer.data_gap,
@@ -1795,6 +2155,45 @@ async def chat(body: ChatIn, request: Request) -> ChatOut:
             recovery_seconds_total=stats.seconds_total,
             recovery_seconds_avg_comune=stats.seconds_avg_comune,
             levels=stats.levels,
+        ),
+        connettore=(
+            ConnettoreSondaOut(
+                codice_istat=answer.connettore.codice_istat,
+                indirizzabile=answer.connettore.indirizzabile,
+                uffici=answer.connettore.uffici,
+                rest_base=answer.connettore.rest_base,
+            )
+            if answer.connettore is not None
+            else None
+        ),
+        numeri_utili=(
+            NumeriUtiliOut(
+                telefoni=answer.numeri_utili.telefoni,
+                email=answer.numeri_utili.email,
+                pec=answer.numeri_utili.pec,
+                fonte=answer.numeri_utili.fonte,
+                fonte_tipo=answer.numeri_utili.fonte_tipo,
+                letto_il=answer.numeri_utili.letto_il,
+            )
+            if answer.numeri_utili is not None
+            else None
+        ),
+        comuni_ambigui=(
+            [
+                ComuneAmbiguoOut(
+                    nome=c.nome,
+                    provincia=c.provincia,
+                    codice_istat=c.codice_istat,
+                )
+                for c in answer.comuni_ambigui
+            ]
+            if answer.comuni_ambigui
+            else None
+        ),
+        scan=(
+            ScanStatoOut(stato=answer.scan.stato, ultimo_scan=answer.scan.ultimo_scan)
+            if answer.scan is not None
+            else None
         ),
     )
 

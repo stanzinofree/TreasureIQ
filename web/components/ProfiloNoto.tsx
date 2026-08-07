@@ -82,6 +82,39 @@ export default function ProfiloNoto() {
         />
       )}
 
+      {profilo.sesso && (
+        <Chip
+          label="Sesso"
+          value={profilo.sesso === "f" ? "Donna" : "Uomo"}
+          nota={profilo.sessoDedotto ? "dedotto dal nome" : undefined}
+          onRimuovi={() => dimenticaFatto("sesso")}
+        />
+      )}
+
+      {profilo.nucleoFamiliare !== undefined && (
+        <Chip
+          label="Nucleo"
+          value={`${profilo.nucleoFamiliare} persone`}
+          onRimuovi={() => dimenticaFatto("nucleoFamiliare")}
+        />
+      )}
+
+      {profilo.disabilita === true && (
+        <Chip
+          label="Disabilità"
+          value="sì"
+          onRimuovi={() => dimenticaFatto("disabilita")}
+        />
+      )}
+
+      {profilo.disabilitaNucleo === true && (
+        <Chip
+          label="Figlio con disabilità"
+          value="sì"
+          onRimuovi={() => dimenticaFatto("disabilitaNucleo")}
+        />
+      )}
+
       {profilo.comune && (
         <Chip
           label="Comune"

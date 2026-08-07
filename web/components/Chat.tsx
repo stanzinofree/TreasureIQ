@@ -29,6 +29,7 @@ import { useEffect, useId, useRef, useState } from "react";
 import { Seal } from "@/components/Seal";
 import { Marchio } from "@/components/Logo";
 import Approfondisci from "@/components/Approfondisci";
+import EcoProfilo from "@/components/EcoProfilo";
 import Segnalazione from "@/components/Segnalazione";
 import SchedaDettaglio from "@/components/SchedaDettaglio";
 import AccessoSimulato from "@/components/AccessoSimulato";
@@ -37,6 +38,7 @@ import RispostaCivica from "@/components/RispostaCivica";
 import PonteScala from "@/components/PonteScala";
 import { PRESETS } from "@/lib/profili-demo";
 import { useProfilo } from "@/lib/profilo";
+import { FORM_FEEDBACK_URL, LINK_ESTERNO } from "@/lib/moduli";
 import { useRisultati } from "@/lib/risultati";
 
 /** Stable DOM id for one card, so the side index can link straight to it. */
@@ -46,15 +48,28 @@ function ancoraDi(messageId: string, matchId: string): string {
 import {
   chat,
   comuneNearby,
+  fetchBandi,
+  fetchMappaConnettore,
+  fetchSchedaServizio,
+  fetchServiziCategoria,
   login,
   type Approfondimento,
+  type Bando,
+  type CategoriaServizio,
   type ChatCost,
   type ChatOut,
   type ChatTurn,
+  type ComuneAmbiguo,
   type CostLevels,
   type Escalation,
+  type ConnettoreSonda,
   type InfoOut,
+  type InfoWebResult,
+  type MappaConnettore,
   type Match,
+  type ScanStato,
+  type SchedaServizio,
+  type ServizioLink,
 } from "@/lib/api";
 
 /** B22 (D-25) — the segnalazione form only makes sense once every
@@ -290,6 +305,487 @@ function isWebUrl(url: string): boolean {
   return /^https?:\/\//i.test(url);
 }
 
+/** Evidenzia quattro token nel testo TIQ:
+ *  - `**...**` → giallo `.tag-verifica` (l'avvertenza «da verificare tu»);
+ *  - `«Modello AgID»` → verde `.tag-connettore` (il nome del MODELLO connettore,
+ *    stesso chip del badge). E' il nome del modello, mai il vendor;
+ *  - `[[...]]` → `.tag-comune` (il nome del comune fuori copertura, chip colorato);
+ *  - `__...__` → `<strong>` grassetto vero (per «Attenzione»), distinto dal
+ *    chip giallo del «da verificare».
+ * Tutto il resto resta testo. Un solo split su regex alternata così i token
+ * non si calpestano. */
+function conTagVerifica(testo: string) {
+  return testo
+    .split(/(\*\*.+?\*\*|«Modello AgID»|\[\[.+?\]\]|__.+?__)/g)
+    .map((frammento, i) => {
+      if (!frammento) return null;
+      if (frammento.startsWith("**") && frammento.endsWith("**")) {
+        return (
+          <span className="tag-verifica" key={i}>
+            {frammento.slice(2, -2)}
+          </span>
+        );
+      }
+      if (frammento.startsWith("[[") && frammento.endsWith("]]")) {
+        return (
+          <span className="tag-comune" key={i}>
+            {frammento.slice(2, -2)}
+          </span>
+        );
+      }
+      if (frammento.startsWith("__") && frammento.endsWith("__")) {
+        return <strong key={i}>{frammento.slice(2, -2)}</strong>;
+      }
+      if (frammento === "«Modello AgID»") {
+        return (
+          <span className="tag-connettore" key={i}>
+            {frammento}
+          </span>
+        );
+      }
+      return <span key={i}>{frammento}</span>;
+    });
+}
+
+/**
+ * Le pagine che un motore di ricerca ha trovato sul sito del comune, mai un
+ * verdetto. Vive fuori da InfoAnswer perché serve su DUE rail: sul rail
+ * INFORMAZIONE (dentro InfoAnswer) e sul rail AGEVOLAZIONE quando il comune è
+ * fuori copertura — lì la ricerca live trova le pagine (bandi, servizi) e la
+ * risposta le promette («qui sotto trovi quello che ho visto»), ma senza
+ * questo blocco la UI le buttava e la promessa restava vuota. Nessun giudizio
+ * di spettanza qui: solo link marcati «non verificato», coerente con D-01.
+ */
+/**
+ * Fuori copertura, dopo la ricerca, diciamo anche SE il connettore
+ * raggiungerebbe questo comune — la risposta alla domanda «a ricerca fatta,
+ * sappiamo cosa interrogare?». Prima si ripiegava in silenzio sulla sola
+ * ricerca web anche quando il portale era strutturato e indirizzabile. Non è
+ * un verdetto e non ingerisce nulla: è un badge onesto sull'indirizzabilità.
+ */
+function BadgeConnettore({ sonda }: { sonda: ConnettoreSonda }) {
+  if (!sonda.indirizzabile) return null;
+  return (
+    <p className="badge-connettore" role="note">
+      <span className="badge-connettore__pallino" aria-hidden />
+      <strong>Raggiungibile dal connettore </strong>
+      <span className="tag-connettore">Modello AgID</span>
+      {sonda.uffici > 0 ? ` — ${sonda.uffici} uffici esposti` : ""}. Non ancora
+      ingestionato: i bandi restano dalla ricerca web qui sopra.
+    </p>
+  );
+}
+
+function PagineWeb({ results }: { results: InfoWebResult[] }) {
+  if (results.length === 0) return null;
+  return (
+    <div className="info-answer__web" data-state="non_verificato" role="note">
+      <p className="info-answer__web-label">Ricerca web · non verificato</p>
+      <ul>
+        {results.slice(0, 3).map((result) => (
+          <li key={result.url}>
+            <span className="info-answer__web-title">{result.title}</span>
+            {isWebUrl(result.url) ? (
+              <a
+                className="info-answer__web-url"
+                href={result.url}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {result.url}
+              </a>
+            ) : (
+              <span className="info-answer__web-url">{result.url}</span>
+            )}
+          </li>
+        ))}
+      </ul>
+      <p className="info-answer__web-note">
+        Non è una risposta di TreasureIQ: sono pagine trovate sul web, da
+        verificare tu stesso prima di fidartene.
+      </p>
+    </div>
+  );
+}
+
+/**
+ * Fase 1 della mappa servizi. Sotto il badge connettore di un comune fuori
+ * copertura ma indirizzabile, offre le categorie di servizi che quel portale
+ * espone davvero (modello AgID, 15 categorie standard): il cittadino ne tocca
+ * una invece di ridigitare, e la ricerca live si restringe a quella categoria.
+ *
+ * NON è un verdetto e non promette il bonus: il catalogo AgID sono i servizi
+ * amministrativi («come faccio la IMU»), non le agevolazioni — quelle vivono in
+ * amministrazione-trasparente e restano ricerca web. Perciò il rame che questa
+ * cascata fa risparmiare è sul rail informativo, mai su quello agevolazioni.
+ *
+ * Fetch pigro e su richiesta: la chiamata legge il portale a freddo (cache 30g)
+ * e può tardare, quindi parte solo quando il badge è già a schermo. Un errore o
+ * un catalogo vuoto non disegna nulla — mai un guscio rotto sotto la risposta.
+ */
+function MappaServizi({ istat }: { istat: string }) {
+  const [mappa, setMappa] = useState<MappaConnettore | null>(null);
+  const [stato, setStato] = useState<"carico" | "pronto" | "vuoto">("carico");
+
+  // Livello aperto: la categoria scelta e i suoi servizi. La cascata vive tutta
+  // qui, senza mandare messaggi in chat — scendere di livello è navigazione nel
+  // catalogo, non una nuova domanda che rifà la ricerca web (bug fase 1).
+  const [aperta, setAperta] = useState<CategoriaServizio | null>(null);
+  const [servizi, setServizi] = useState<ServizioLink[] | null>(null);
+  const [statoServizi, setStatoServizi] = useState<"carico" | "pronto" | "vuoto">(
+    "carico",
+  );
+
+  // Terzo livello: il servizio aperto e la sua anteprima, letta adesso dalla
+  // pagina. Invece di sbalzare subito sul sito si mostra qui cosa è il servizio
+  // (come l'anteprima di un bando), col link per aprirlo intero. Fonte, non
+  // verdetto (D-01).
+  const [apertoServizio, setApertoServizio] = useState<ServizioLink | null>(null);
+  const [scheda, setScheda] = useState<SchedaServizio | null>(null);
+  const [statoScheda, setStatoScheda] = useState<"carico" | "pronto" | "vuoto">(
+    "carico",
+  );
+
+  function chiudiTutto() {
+    setAperta(null);
+    setServizi(null);
+    setApertoServizio(null);
+    setScheda(null);
+  }
+
+  useEffect(() => {
+    let vivo = true;
+    setStato("carico");
+    setMappa(null);
+    chiudiTutto();
+    fetchMappaConnettore(istat)
+      .then((m) => {
+        if (!vivo) return;
+        if (m && m.servizi.esposto && m.servizi.categorie.length > 0) {
+          setMappa(m);
+          setStato("pronto");
+        } else {
+          setStato("vuoto");
+        }
+      })
+      .catch(() => {
+        if (vivo) setStato("vuoto");
+      });
+    return () => {
+      vivo = false;
+    };
+  }, [istat]);
+
+  function apri(cat: CategoriaServizio) {
+    if (!cat.id) return; // senza term non si può filtrare: chip non-imbuto
+    setAperta(cat);
+    setServizi(null);
+    setStatoServizi("carico");
+    setApertoServizio(null);
+    setScheda(null);
+    fetchServiziCategoria(istat, cat.id)
+      .then((lista) => {
+        setServizi(lista ?? []);
+        setStatoServizi(lista && lista.length > 0 ? "pronto" : "vuoto");
+      })
+      .catch(() => setStatoServizi("vuoto"));
+  }
+
+  function apriScheda(s: ServizioLink) {
+    setApertoServizio(s);
+    setScheda(null);
+    setStatoScheda("carico");
+    fetchSchedaServizio(istat, s.url)
+      .then((sc) => {
+        setScheda(sc);
+        setStatoScheda(sc ? "pronto" : "vuoto");
+      })
+      .catch(() => setStatoScheda("vuoto"));
+  }
+
+  function tornaAiServizi() {
+    setApertoServizio(null);
+    setScheda(null);
+  }
+
+  if (stato === "vuoto") return null;
+  if (stato === "carico") {
+    return (
+      <p className="mappa-servizi__carico" role="status">
+        Leggo il catalogo servizi del comune…
+      </p>
+    );
+  }
+  if (!mappa) return null;
+
+  return (
+    <div className="mappa-servizi" role="group" aria-label="Servizi del comune">
+      {/* Filo di briciole: dove sei nella cascata. La scelta precedente resta
+          a schermo, evidenziata e cliccabile per risalire — «scegli tra queste
+          cose» con la memoria dei passi, non un menù che riparte ogni volta. */}
+      <p className="mappa-servizi__briciole">
+        <button
+          type="button"
+          className={
+            "mappa-servizi__briciola" +
+            (aperta ? " mappa-servizi__briciola--link" : " mappa-servizi__briciola--qui")
+          }
+          onClick={() => aperta && chiudiTutto()}
+          disabled={!aperta}
+        >
+          {mappa.servizi.totale} servizi
+        </button>
+        {aperta && (
+          <>
+            <span className="mappa-servizi__freccia" aria-hidden="true">
+              ›
+            </span>
+            {/* La categoria: «qui» quando è l'ultimo passo, link per tornare
+                alla lista quando si è aperta una scheda sotto. */}
+            <button
+              type="button"
+              className={
+                "mappa-servizi__briciola" +
+                (apertoServizio
+                  ? " mappa-servizi__briciola--link"
+                  : " mappa-servizi__briciola--qui")
+              }
+              onClick={() => apertoServizio && tornaAiServizi()}
+              disabled={!apertoServizio}
+            >
+              {aperta.nome}
+            </button>
+          </>
+        )}
+        {apertoServizio && (
+          <>
+            <span className="mappa-servizi__freccia" aria-hidden="true">
+              ›
+            </span>
+            <span className="mappa-servizi__briciola mappa-servizi__briciola--qui">
+              {apertoServizio.titolo}
+            </span>
+          </>
+        )}
+      </p>
+
+      {!aperta && (
+        <>
+          <p className="mappa-servizi__intro">
+            Scegli una categoria per vedere i servizi che il comune pubblica lì:
+          </p>
+          <div className="mappa-servizi__chip-riga">
+            {mappa.servizi.categorie.map((cat: CategoriaServizio) => (
+              <button
+                key={cat.nome}
+                type="button"
+                className="scelta-comune__scheda mappa-servizi__chip"
+                onClick={() => apri(cat)}
+                disabled={!cat.id}
+              >
+                <span className="scelta-comune__nome">{cat.nome}</span>
+                <span className="mappa-servizi__chip-conteggio">{cat.conteggio}</span>
+              </button>
+            ))}
+          </div>
+        </>
+      )}
+
+      {aperta && statoServizi === "carico" && (
+        <p className="mappa-servizi__carico" role="status">
+          Leggo i servizi di «{aperta.nome}»…
+        </p>
+      )}
+
+      {aperta && statoServizi === "vuoto" && (
+        <p className="mappa-servizi__intro">
+          Il portale conta {aperta.conteggio} servizi in «{aperta.nome}» ma non li
+          elenca via API. Aprili dal{" "}
+          {mappa.sito ? (
+            <a
+              href={`https://${mappa.sito}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mappa-servizi__link"
+            >
+              portale del comune
+            </a>
+          ) : (
+            "portale del comune"
+          )}
+          .
+        </p>
+      )}
+
+      {aperta && !apertoServizio && statoServizi === "pronto" && servizi && (
+        <ul className="mappa-servizi__servizi">
+          {servizi.map((s) => (
+            <li key={s.url} className="mappa-servizi__servizio">
+              {/* Non è più un link diretto: apre l'anteprima qui in chat, poi
+                  da lì si va sul sito. Un passo in più, ma il cittadino sa cosa
+                  sta per aprire. */}
+              <button
+                type="button"
+                className="mappa-servizi__servizio-tap"
+                onClick={() => apriScheda(s)}
+              >
+                {s.titolo}
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {apertoServizio && statoScheda === "carico" && (
+        <p className="mappa-servizi__carico" role="status">
+          Leggo la scheda di «{apertoServizio.titolo}»…
+        </p>
+      )}
+
+      {apertoServizio && statoScheda === "vuoto" && (
+        <p className="mappa-servizi__intro">
+          Non sono riuscito a leggere l'anteprima adesso. Aprila direttamente sul{" "}
+          <a
+            href={apertoServizio.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mappa-servizi__link"
+          >
+            portale del comune
+          </a>
+          .
+        </p>
+      )}
+
+      {apertoServizio && statoScheda === "pronto" && scheda && (
+        // Anteprima come per un bando: cosa è il servizio, a chi è rivolto e
+        // cosa si ottiene, letto adesso dalla pagina. Card GIALLA: il giallo
+        // segnala «dato non certissimo», letto dal vivo, non ingerito.
+        <div className="mappa-servizi__scheda">
+          <span className="mappa-servizi__scheda-titolo">{scheda.titolo}</span>
+          {scheda.a_chi && (
+            <span className="mappa-servizi__scheda-campo">
+              <span className="mappa-servizi__scheda-etichetta">A chi è rivolto</span>
+              {scheda.a_chi}
+            </span>
+          )}
+          {scheda.descrizione && (
+            <span className="mappa-servizi__scheda-campo">
+              <span className="mappa-servizi__scheda-etichetta">Descrizione</span>
+              {scheda.descrizione}
+            </span>
+          )}
+          {scheda.cosa_ottieni && (
+            <span className="mappa-servizi__scheda-campo">
+              <span className="mappa-servizi__scheda-etichetta">Cosa si ottiene</span>
+              {scheda.cosa_ottieni}
+            </span>
+          )}
+          <a
+            className="mappa-servizi__scheda-btn"
+            href={scheda.url}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Apri la scheda sul portale del comune ↗
+          </a>
+          <span className="mappa-servizi__scheda-footer">
+            scheda generata dalla lettura live
+          </span>
+        </div>
+      )}
+    </div>
+  );
+}
+
+/** Bandi e avvisi letti adesso da amministrazione trasparente del comune
+ *  (`criteri-e-modalita`). Indipendente dalla mappa servizi (D-B6): niente
+ *  intent-gating, si carica al mount come la sonda connettore. Nessun
+ *  verdetto di apertura (D-B4) — solo data e caveat di verifica. */
+function BandiComune({ istat }: { istat: string }) {
+  const [bandi, setBandi] = useState<Bando[] | null>(null);
+  const [stato, setStato] = useState<"idle" | "caricamento" | "pronto" | "errore">(
+    "idle",
+  );
+  const [aperta, setAperta] = useState(false);
+
+  useEffect(() => {
+    let vivo = true;
+    setStato("caricamento");
+    setBandi(null);
+    setAperta(false);
+    fetchBandi(istat)
+      .then((lista) => {
+        if (!vivo) return;
+        setBandi(lista);
+        setStato("pronto");
+      })
+      .catch(() => {
+        if (vivo) setStato("errore");
+      });
+    return () => {
+      vivo = false;
+    };
+  }, [istat]);
+
+  // Nessun blocco vuoto persistente (D-B5): comune senza `criteri-e-modalita`
+  // o errore di lettura → il blocco non c'è, non un contenitore vuoto.
+  if (stato === "errore" || (stato === "pronto" && bandi && bandi.length === 0)) {
+    return null;
+  }
+  if (stato === "idle" || stato === "caricamento" || !bandi) {
+    return null;
+  }
+
+  function formattaData(iso: string): string {
+    const d = new Date(iso);
+    if (Number.isNaN(d.getTime())) return iso.slice(0, 10);
+    const gg = String(d.getDate()).padStart(2, "0");
+    const mm = String(d.getMonth() + 1).padStart(2, "0");
+    return `${gg}/${mm}/${d.getFullYear()}`;
+  }
+
+  return (
+    <div className="bandi-comune" role="group" aria-label="Bandi e avvisi del comune">
+      <button
+        type="button"
+        className="bandi-comune__header"
+        onClick={() => setAperta((a) => !a)}
+        aria-expanded={aperta}
+      >
+        Bandi e avvisi del comune ({bandi.length})
+      </button>
+      {aperta && (
+        <>
+          <p className="bandi-comune__caveat">
+            Letti adesso dal portale del comune, non verificati: controlla sul sito
+            se il bando è ancora aperto.
+          </p>
+          <ul className="bandi-comune__lista">
+            {bandi.map((b) => (
+              <li key={b.url} className="bandi-comune__card">
+                <span className="bandi-comune__titolo">{b.titolo}</span>
+                <span className="bandi-comune__data">{formattaData(b.data)}</span>
+                {b.anteprima && (
+                  <span className="bandi-comune__anteprima">{b.anteprima}</span>
+                )}
+                <a
+                  className="bandi-comune__link"
+                  href={b.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Apri sul portale ↗
+                </a>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+    </div>
+  );
+}
+
 /**
  * D-19 — the INFORMAZIONE rail. Document, office, coverage and diagnosis are
  * facts about a public body's data; nothing here is a verdict, a criterion,
@@ -364,34 +860,7 @@ function InfoAnswer({ info }: { info: InfoOut }) {
         </p>
       )}
 
-      {info.web_results.length > 0 && (
-        <div className="info-answer__web" data-state="non_verificato" role="note">
-          <p className="info-answer__web-label">Ricerca web · non verificato</p>
-          <ul>
-            {info.web_results.slice(0, 3).map((result) => (
-              <li key={result.url}>
-                <span className="info-answer__web-title">{result.title}</span>
-                {isWebUrl(result.url) ? (
-                  <a
-                    className="info-answer__web-url"
-                    href={result.url}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {result.url}
-                  </a>
-                ) : (
-                  <span className="info-answer__web-url">{result.url}</span>
-                )}
-              </li>
-            ))}
-          </ul>
-          <p className="info-answer__web-note">
-            Non è una risposta di TreasureIQ: sono pagine trovate sul web, da
-            verificare tu stesso prima di fidartene.
-          </p>
-        </div>
-      )}
+      <PagineWeb results={info.web_results} />
     </div>
   );
 }
@@ -408,6 +877,21 @@ function EffortCaption({ effort }: { effort: number | null }) {
     <p className="effort-caption">
       Cosa resta da fare a te: <strong>{effort}</strong>{" "}
       {effort === 1 ? "azione" : "azioni"}.
+    </p>
+  );
+}
+
+// D-S6 (B6): scan assente/stantio (>6gg) → refresh partito in background,
+// dati di QUESTO turno restano quelli in cache — nessuna attesa sincrona.
+// `stato === "fresco"` → nessun indicatore, la risposta non lo segnala.
+function ScanRefreshNotice({ scan }: { scan: ScanStato | null | undefined }) {
+  if (!scan || scan.stato !== "aggiornamento_in_corso") {
+    return null;
+  }
+  return (
+    <p className="scan-refresh">
+      Sto aggiornando i dati del comune · intanto vedi gli attuali
+      {scan.ultimo_scan ? ` (ultimo scan: ${scan.ultimo_scan})` : ""}.
     </p>
   );
 }
@@ -522,6 +1006,38 @@ function EscalationGate({
   );
 }
 
+// D-56/R-LOGOUT: azzerare una sessione CIE/SPID perché il turno sembra
+// parlare di un'altra persona è quasi-irreversibile (bisogna rientrare).
+// Niente logout automatico: si spiega e si aspetta un click esplicito.
+function CambioPersonaGate({ onConferma }: { onConferma: () => void }) {
+  const [confermato, setConfermato] = useState(false);
+
+  return (
+    <div className="panel escalation" data-gap="cambio_persona">
+      <h3>Confermi il cambio persona?</h3>
+      <p className="lede" style={{ fontSize: "0.95rem" }}>
+        Sto per mettere da parte i dati della sessione attuale (età, ISEE,
+        nucleo familiare, disabilità…) per non mescolarli con quelli della
+        persona nuova. Non lo faccio senza il tuo consenso.
+      </p>
+      <div style={{ display: "flex", gap: "var(--ma-3)", marginTop: "var(--ma-4)" }}>
+        <button
+          type="button"
+          className="panel"
+          disabled={confermato}
+          onClick={() => {
+            setConfermato(true);
+            onConferma();
+          }}
+          style={{ cursor: "pointer", padding: "var(--ma-3) var(--ma-4)", font: "inherit" }}
+        >
+          {confermato ? "Fatto — rimando la domanda…" : "Sì, metti da parte i dati e continua"}
+        </button>
+      </div>
+    </div>
+  );
+}
+
 export default function Chat() {
   const inputId = useId();
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -530,7 +1046,7 @@ export default function Chat() {
   const [error, setError] = useState<string | null>(null);
   const [locating, setLocating] = useState(false);
   const [locateNote, setLocateNote] = useState<string | null>(null);
-  const { registra, profilo } = useProfilo();
+  const { registra, profilo, dimentica } = useProfilo();
   const { registra: registraTrovate, azzeraTrovate } = useRisultati();
   const accesso = profilo.accesso === true;
   const [manualLogin, setManualLogin] = useState(false);
@@ -620,7 +1136,7 @@ export default function Chat() {
     return `m${nextId.current}`;
   }
 
-  async function send(text: string) {
+  async function send(text: string, comuneIstatScelto?: string) {
     const trimmed = text.trim();
     if (!trimmed || busy) return;
 
@@ -637,7 +1153,14 @@ export default function Chat() {
       // scelto dall'elenco, rilevato dal GPS o portato dall'accesso. Il
       // profilo è l'unico posto dove sta, così non può esistere un comune
       // mostrato nella barra laterale e un altro usato per rispondere.
-      const out = await chat(trimmed, history, profilo.comune?.istat ?? null);
+      // Se l'utente ha scelto un comune da una scheda di disambiguazione, quel
+      // codice comanda su quello del profilo: e' la risposta a «quale dei
+      // comuni omonimi?», non un cambio di residenza.
+      const out = await chat(
+        trimmed,
+        history,
+        comuneIstatScelto ?? profilo.comune?.istat ?? null,
+      );
       const id = newId();
       setMessages((prev) => [
         ...prev,
@@ -656,6 +1179,21 @@ export default function Chat() {
       if (capito) {
         registra({
           ...(capito.eta != null ? { eta: capito.eta } : {}),
+          // Gli stessi fatti anagrafici che il motore usa devono comparire a
+          // lato: finora la barra mostrava solo età e comune, così chi scriveva
+          // «sono disabile» o «famiglia di 4» non vedeva che il servizio
+          // l'aveva capito. I booleani si mappano solo quando veri — un `false`
+          // non è un fatto da mostrare.
+          ...(capito.sesso
+            ? { sesso: capito.sesso, sessoDedotto: capito.sesso_dedotto }
+            : {}),
+          ...(capito.disabilita === true ? { disabilita: true } : {}),
+          ...(capito.nucleo_familiare != null
+            ? { nucleoFamiliare: capito.nucleo_familiare }
+            : {}),
+          ...(capito.disabilita_nucleo === true
+            ? { disabilitaNucleo: true }
+            : {}),
           // Il tema capito diventa un interesse mostrato: e' la risposta a
           // «cosa sto cercando», che finora la persona non vedeva scritta.
           ...(out.topic && out.topic !== "sconosciuto"
@@ -667,7 +1205,36 @@ export default function Chat() {
                   nome: capito.comune_nome,
                   istat: capito.comune_istat,
                   origine: "dichiarato" as const,
-                  confermato: capito.comune_coperto === true,
+                  // Confermato se: è coperto (lo diamo per buono), OPPURE la
+                  // persona l'ha appena scelto esplicitamente (chip/elenco),
+                  // OPPURE l'aveva già confermato e questo è un follow-up sullo
+                  // stesso comune. Senza gli ultimi due, ogni domanda successiva
+                  // su un comune non coperto risbianchettava la conferma e
+                  // ricompariva «Sì, è il mio comune?» — riconferma inutile di
+                  // una scelta già fatta.
+                  confermato:
+                    capito.comune_coperto === true ||
+                    comuneIstatScelto === capito.comune_istat ||
+                    (profilo.comune?.istat === capito.comune_istat &&
+                      profilo.comune?.confermato === true),
+                  coperto: capito.comune_coperto === true,
+                },
+              }
+            : {}),
+          // Recapiti letti al volo su comune fuori copertura → banner a
+          // sinistra. Li leghiamo all'ISTAT del comune così il pannello non
+          // li mostra per un comune diverso da quello a cui appartengono.
+          ...(out.numeri_utili && capito.comune_istat && capito.comune_nome
+            ? {
+                numeriUtili: {
+                  istat: capito.comune_istat,
+                  comune: capito.comune_nome,
+                  telefoni: out.numeri_utili.telefoni,
+                  email: out.numeri_utili.email,
+                  pec: out.numeri_utili.pec,
+                  fonte: out.numeri_utili.fonte,
+                  fonteTipo: out.numeri_utili.fonte_tipo,
+                  lettoIl: out.numeri_utili.letto_il,
                 },
               }
             : {}),
@@ -700,6 +1267,13 @@ export default function Chat() {
   function retryLastQuestion() {
     const lastUser = [...messages].reverse().find((m) => m.role === "user");
     if (lastUser) send(lastUser.content);
+  }
+
+  // Disambiguazione a un tap: l'utente sceglie il comune giusto da una scheda,
+  // rimandiamo la STESSA domanda con l'ISTAT scelto — niente da ridigitare.
+  function scegliComuneAmbiguo(cand: ComuneAmbiguo) {
+    const lastUser = [...messages].reverse().find((m) => m.role === "user");
+    if (lastUser) send(lastUser.content, cand.codice_istat);
   }
 
   const [avvioBusy, setAvvioBusy] = useState<string | null>(null);
@@ -960,12 +1534,67 @@ export default function Chat() {
                 a Roncaro (PV) la persona vedeva una card bianca mentre l'API
                 aveva riconosciuto il comune e cercato sul suo sito. */}
             {(!m.reply?.info || !(m.reply.info.document || m.reply.info.office)) && (
-              <p>{m.content}</p>
+              <p>{conTagVerifica(m.content)}</p>
             )}
+
+            {/* Nome comune ambiguo: schede cliccabili, non un elenco da
+                ricopiare. Un tap sceglie e rimanda la domanda con l'ISTAT. */}
+            {m.reply?.comuni_ambigui && m.reply.comuni_ambigui.length > 0 && (
+              <div className="scelta-comune" role="group" aria-label="Scegli il comune">
+                {m.reply.comuni_ambigui.map((cand) => (
+                  <button
+                    type="button"
+                    key={cand.codice_istat}
+                    className="scelta-comune__scheda"
+                    onClick={() => scegliComuneAmbiguo(cand)}
+                    disabled={busy}
+                  >
+                    <span className="scelta-comune__nome">{cand.nome}</span>
+                    <span className="scelta-comune__prov">{cand.provincia}</span>
+                  </button>
+                ))}
+              </div>
+            )}
+
+            {/* D-52/D-53 (acc1): quello che TIQ ha capito, TUTTO nella stessa
+                riga. Il sesso dedotto dal nome e l'età non sono più testo
+                fisso ma card correggibili in un tap (EcoProfilo): la
+                deduzione a bassa confidenza resta marcata "— giusto?" finché
+                non la si conferma o corregge, mai un filtro nascosto. */}
+            {m.reply?.profilo_capito &&
+              (m.reply.profilo_capito.sesso ||
+                m.reply.profilo_capito.disabilita_nucleo ||
+                m.reply.profilo_capito.eta != null ||
+                m.reply.profilo_capito.nucleo_familiare != null) && (
+                <EcoProfilo capito={m.reply.profilo_capito} />
+              )}
 
             {m.reply && (
               <div className="chat__answer">
                 {m.reply.cost && !m.reply.info && <CostStrip cost={m.reply.cost} />}
+
+                {/* Comune a rail sia informazione che agevolazione: il badge
+                    connettore sta qui, sopra i due rami, perché la sonda è
+                    indifferente al kind della risposta. */}
+                {m.reply.connettore && (
+                  <BadgeConnettore sonda={m.reply.connettore} />
+                )}
+
+                {/* Mappa servizi a cascata: categoria → servizi del portale,
+                    solo dove il connettore raggiungerebbe davvero il comune.
+                    Naviga il catalogo, non decide una spettanza (D-01). */}
+                {m.reply.connettore?.indirizzabile && (
+                  <MappaServizi istat={m.reply.connettore.codice_istat} />
+                )}
+
+                {/* Bandi e avvisi: gate PROPRIO su `connettore` presente, non
+                    `indirizzabile` (D-B6) — i bandi vengono da amministrazione
+                    trasparente (scrape), indipendente dalla mappa servizi
+                    (che serve solo se il portale è REST-indirizzabile). Si
+                    vedono anche quando il connettore non è indirizzabile. */}
+                {m.reply.connettore && (
+                  <BandiComune istat={m.reply.connettore.codice_istat} />
+                )}
 
                 {m.reply.kind === "informazione" ? (
                   // D-19 — the INFORMAZIONE rail never renders a verdict, a
@@ -1016,6 +1645,16 @@ export default function Chat() {
                         ))}
                       </div>
                     )}
+
+                    {/* Fuori copertura la ricerca live gira su QUESTO rail: la
+                        risposta promette «qui sotto trovi quello che ho visto»,
+                        e le pagine vivono in `info.web_results`. Senza questo
+                        blocco restavano invisibili (InfoAnswer non gira sul rail
+                        agevolazione) e la promessa era vuota. Non è un verdetto:
+                        link marcati «non verificato», coerente con D-01. */}
+                    {m.reply.info && (
+                      <PagineWeb results={m.reply.info.web_results} />
+                    )}
                     {(() => {
                       const comunale = m.reply!.matches.find(
                         (match) => match.livello === "comunale" && match.ente_codice_istat,
@@ -1031,8 +1670,17 @@ export default function Chat() {
 
                     {/* Offered only when nothing municipal came back: with a
                         comunale result already on screen the question is
-                        answered, and asking it again would be noise. */}
+                        answered, and asking it again would be noise.
+
+                        Hidden when the comune is one we do not read: "did my
+                        comune publish this?" has no honest answer there — we
+                        have no snapshot to check — and it would only produce
+                        "il comune non lo ha pubblicato", which reads as an
+                        absence we never actually verified. The live search on
+                        the main rail already covers those comuni. */}
                     {m.reply.topic &&
+                      profilo.comune?.coperto !== false &&
+                      !m.reply.comuni_ambigui?.length &&
                       !m.reply.matches.some((x) => x.livello === "comunale") && (
                         <Approfondisci
                           topic={m.reply.topic}
@@ -1058,9 +1706,31 @@ export default function Chat() {
                       </p>
                     )}
 
-                    {m.reply.matches.length === 0 && m.reply.data_gap && (
-                      <DataGapNotice kind={m.reply.data_gap} />
+                    {m.reply.data_gap === "cambio_persona" && (
+                      <CambioPersonaGate
+                        onConferma={() => {
+                          dimentica();
+                          retryLastQuestion();
+                        }}
+                      />
                     )}
+
+                    {/* «Non ho trovato nulla» contraddice le pagine appena
+                        mostrate: fuori copertura la ricerca live spesso torna
+                        proprio dei risultati web, e negarli sotto i link è la
+                        stessa bugia che il rail live esiste per evitare. */}
+                    {m.reply.matches.length === 0 &&
+                      m.reply.data_gap &&
+                      m.reply.data_gap !== "cambio_persona" &&
+                      !m.reply.comuni_ambigui?.length &&
+                      !(m.reply.info && m.reply.info.web_results.length > 0) &&
+                      /* Fuori copertura la premessa «Attenzione» dice già il
+                         «non ho trovato»: il box grigio lo ripeterebbe. Lo
+                         togliamo quando c'è la scheda di lato o la mappa sotto. */
+                      !m.reply.connettore &&
+                      !m.reply.numeri_utili && (
+                        <DataGapNotice kind={m.reply.data_gap} />
+                      )}
 
                     {m.reply.escalation?.needed && (
                       <EscalationGate
@@ -1070,6 +1740,8 @@ export default function Chat() {
                     )}
                   </>
                 )}
+
+                <ScanRefreshNotice scan={m.reply.scan} />
 
                 <EffortCaption effort={m.reply.citizen_effort} />
               </div>
@@ -1083,6 +1755,18 @@ export default function Chat() {
           </p>
         )}
       </div>
+
+      {/* Feedback esterno (D-S7): discreto, sotto l'intera conversazione, non
+          per-messaggio. Compare appena c'è almeno una risposta da giudicare —
+          prima di allora non c'è niente su cui dare un parere. */}
+      {messages.some((m) => m.role === "assistant") && (
+        <p className="chiedi-inline">
+          Com&apos;è andata?{" "}
+          <a href={FORM_FEEDBACK_URL} {...LINK_ESTERNO}>
+            Lascia un feedback →
+          </a>
+        </p>
+      )}
 
       {error && (
         <p className="notice" role="alert">

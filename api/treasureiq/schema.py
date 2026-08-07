@@ -18,7 +18,7 @@ from __future__ import annotations
 from datetime import date, datetime
 from decimal import Decimal
 from enum import Enum
-from typing import Annotated
+from typing import Annotated, Literal
 
 from pydantic import BaseModel, Field, HttpUrl, field_validator, model_validator
 
@@ -168,6 +168,19 @@ class Requirements(BaseModel):
     )
     figli_minori_required: bool | None = None
     disabilita_required: bool | None = None
+    sesso: Literal["f", "m"] | None = Field(
+        default=None,
+        description="Required gender of the citizen, when the source states "
+        "one (e.g. 'contrassegno rosa', reserved to women). `None` means "
+        "unconstrained — analogous to every other field here (D-52).",
+    )
+    disabilita_nucleo_required: bool | None = Field(
+        default=None,
+        description="Whether the household must include a member (not "
+        "necessarily the applicant) with a certified disability — distinct "
+        "from `disabilita_required`, which is about the applicant "
+        "themselves (D-53).",
+    )
 
     employment_status: list[EmploymentStatus] = Field(
         default_factory=list,
@@ -218,6 +231,8 @@ class Requirements(BaseModel):
                 self.nucleo_min is not None,
                 self.figli_minori_required is not None,
                 self.disabilita_required is not None,
+                self.sesso is not None,
+                self.disabilita_nucleo_required is not None,
                 self.employment_status,
                 self.other,
             ]
@@ -431,6 +446,25 @@ class CitizenProfile(BaseModel):
     nucleo_familiare: int | None = Field(default=None, ge=1)
     figli_minori: int | None = Field(default=None, ge=0)
     disabilita: bool | None = None
+    sesso: Literal["f", "m"] | None = Field(
+        default=None,
+        description="None means 'not declared or not deducible' — a "
+        "low-confidence deduction from the citizen's own first name "
+        "counts as declared here (D-52), but stays correctable in the UI.",
+    )
+    figli_disabili: int | None = Field(
+        default=None,
+        ge=0,
+        description="Count of children in the household with a certified "
+        "disability. Not the applicant's own disability — see `disabilita`.",
+    )
+    disabilita_nucleo: bool | None = Field(
+        default=None,
+        description="Whether the household includes a child with a "
+        "certified disability (D-53). Normalised from `figli_disabili` in "
+        "`treasureiq.chat.respond._profile_from_slots` when a count is "
+        "known (`figli_disabili > 0 -> True`).",
+    )
     employment_status: EmploymentStatus | None = None
 
     interests: list[TargetGroup] = Field(

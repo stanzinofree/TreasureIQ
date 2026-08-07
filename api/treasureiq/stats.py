@@ -303,9 +303,9 @@ def _build_sistemi(
             f"provider {provider}; usato solo durante l'ingestion, non monitorato a runtime",
         ),
         SystemComponent(
-            "Ricerca web (SearXNG)",
+            "Ricerca web (Brave)",
             "unknown",
-            "solo ingestion-time dietro profilo compose, non sondato a runtime",
+            "sonda diretta sempre (gradino 2) + Brave scoped/generico se serve (D-58/D-59); non monitorato qui",
         ),
     ]
 

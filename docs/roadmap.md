@@ -98,10 +98,14 @@ lavoro batch, non un flusso. Le condizioni misurabili che rimetterebbero in
 gioco ciascuna scelta sono scritte in [evoluzione.md](evoluzione.md) — così
 la decisione si rivede con un dato invece che con un'opinione.
 
-**Un motore di ricerca diverso.** SearXNG e le sue alternative fanno da
-tramite verso motori che non controlliamo: cambiarne uno sposta il problema
-di qualche mese. Per arrivare a una pagina di cui abbiamo già l'indirizzo non
-serve cercarla.
+**Un motore di ricerca nostro.** SearXNG e le sue alternative fanno da tramite
+verso motori che non controlliamo: cambiarne uno sposta il problema di qualche
+mese, e infatti SearXNG è fuori dalla scala (D-59). Il terzo gradino oggi è
+Brave con ricerca **ancorata al dominio** del comune (`site:comune.x.it …`,
+D-58): un contratto vero, non un proxy che fa scraping, e usato solo per un
+comune di cui conosciamo già l'indirizzo — non per cercare l'indirizzo. La
+scala reale è: record ingerito → mappa diretta del comune → Brave `site:`.
+Ollama resta confinato all'intento, mai al verdetto (D-01).
 
 **Coprire l'ultimo 10% dei portali non riconosciuti.** Sono 800 comuni in
 gruppi da 40–70: ogni firma nuova ora vale decine di comuni, non più

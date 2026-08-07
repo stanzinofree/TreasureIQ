@@ -21,6 +21,7 @@ import logging
 import re
 import unicodedata
 from enum import Enum
+from typing import Literal
 
 from pydantic import BaseModel, Field
 
@@ -248,6 +249,85 @@ BENEFICIARY_ROLE_MARKERS: dict[BeneficiaryRole, tuple[str, ...]] = {
 }
 
 
+#: Marcatori per la dichiarazione ESPLICITA del sesso ("sono una donna"), lo
+#: stesso idioma di `BENEFICIARY_ROLE_MARKERS`: un valore che il modello ha
+#: prodotto e' fidato solo se le parole del cittadino lo confermano per
+#: davvero (R-9), altrimenti puo' essere un'eco della storia (D-47/anti-leak).
+_SESSO_MARKERS: dict[Literal["f", "m"], tuple[str, ...]] = {
+    "f": ("sono una donna", "sono donna"),
+    "m": ("sono un uomo", "sono uomo"),
+}
+
+#: «figlio disabile», «mia figlia con disabilità»: la stessa idea, per la
+#: dichiarazione di un figlio con disabilita' nel nucleo (D-53).
+_FIGLIO_DISABILE_MARKERS: tuple[str, ...] = (
+    "figlio disabile",
+    "figlia disabile",
+    "figli disabili",
+    "figlie disabili",
+    "figlio con disabilit",
+    "figlia con disabilit",
+    "figlio è disabile",
+    "figlia è disabile",
+)
+
+
+def _sesso_dichiarato_nel_testo(messaggio: str) -> Literal["f", "m"] | None:
+    """Il sesso dichiarato esplicitamente in QUESTO messaggio, non nella
+    storia. Non e' la deduzione dal nome (`chat.nomi_genere.sesso_da_nome`,
+    deterministica e chiamata altrove): qui si controlla solo la frase
+    esplicita ("sono una donna"/"sono un uomo") che il modello puo' aver
+    letto, per confermarla o scartarla come `_confirm_beneficiary_role` fa
+    per il ruolo."""
+    if not messaggio:
+        return None
+    haystack = messaggio.casefold()
+    for valore, marcatori in _SESSO_MARKERS.items():
+        if any(marcatore in haystack for marcatore in marcatori):
+            return valore
+    return None
+
+
+def _figlio_disabile_dichiarato_nel_testo(messaggio: str) -> bool:
+    """Se QUESTO messaggio dichiara davvero un figlio con disabilita', non
+    se il modello l'ha solo riletto da un turno precedente."""
+    if not messaggio:
+        return False
+    haystack = messaggio.casefold()
+    return any(marcatore in haystack for marcatore in _FIGLIO_DISABILE_MARKERS)
+
+
+#: La disabilita' della persona di cui si parla — se stessi («sono disabile»)
+#: o il beneficiario di cui si chiede in terza persona («mia madre e'
+#: disabile»). E' `disabilita`, non `disabilita_nucleo`: quest'ultima e' del
+#: figlio e la si riconosce a parte. Era l'unico slot anagrafico lasciato al
+#: solo modello: qwen3:4b lo mancava e il profilo usciva senza, pur avendolo
+#: scritto il cittadino.
+#: Le parole con cui il cittadino nomina una disabilita': «disabile»,
+#: «disabili», «disabilità», «invalido/a/i», «invalidità», «handicap». Le
+#: chiusure sono esplicite (non `\w*`) di proposito, cosi' «disabilitato/a»
+#: — un servizio disattivato, non una persona — non ci cade dentro. Il
+#: confine di parola prende «disabile» anche nudo: «mia madre, 78, disabile»,
+#: non solo «sono/è disabile».
+_DISABILITA_RE = re.compile(
+    r"\b(?:disabil(?:e|i|ità|ita)|invalid(?:o|a|i|ità|ita)|handicap)\b",
+    re.IGNORECASE,
+)
+
+
+def _disabilita_dichiarata_nel_testo(messaggio: str) -> bool:
+    """Se QUESTO messaggio nomina la disabilita' della persona di cui si
+    parla. Recupero deterministico, come eta'/ISEE: la conferma il testo, non
+    il modello (R-8). Se pero' la disabilita' e' del figlio e' un'altra cosa
+    (`disabilita_nucleo`), gestita da `_figlio_disabile_dichiarato_nel_testo`:
+    qui si cede il passo per non confondere le due."""
+    if not messaggio:
+        return False
+    if _figlio_disabile_dichiarato_nel_testo(messaggio):
+        return False
+    return bool(_DISABILITA_RE.search(messaggio))
+
+
 def _confirm_beneficiary_role(
     *, message: str, role: BeneficiaryRole | None
 ) -> BeneficiaryRole | None:
@@ -317,6 +397,24 @@ class ProfileSlots(BaseModel):
     nucleo_familiare: int | None = Field(default=None, ge=1)
     figli_minori: int | None = Field(default=None, ge=0)
     disabilita: bool | None = None
+    #: Sesso dichiarato ESPLICITAMENTE dal cittadino ("sono una donna/un
+    #: uomo"), non la deduzione dal nome proprio (D-52) — quella e'
+    #: deterministica, gira fuori dal grammar del modello, e vive in
+    #: `chat.nomi_genere.sesso_da_nome`, chiamata da
+    #: `treasureiq.chat.respond._profile_from_slots`. `Literal["f", "m"]`,
+    #: non un enum piu' ampio: e' l'unico asse su cui i dati del seed
+    #: (contrassegno rosa) discriminano davvero (R-DATA).
+    sesso: Literal["f", "m"] | None = None
+    #: Almeno un figlio con disabilita' nel nucleo — non riferito al
+    #: cittadino stesso (quello resta `disabilita`). Un conteggio, non un
+    #: modello per-membro (D-53, DEFERRED vieta la seconda strada).
+    figli_disabili: int | None = Field(default=None, ge=0)
+    #: Normalmente ricavato da `figli_disabili` in
+    #: `treasureiq.chat.respond._profile_from_slots`
+    #: (`figli_disabili > 0 → True`); resta un campo separato perche' il
+    #: cittadino puo' dichiararlo senza dire un numero ("ho un figlio
+    #: disabile" senza "quanti").
+    disabilita_nucleo: bool | None = None
     employment_status: EmploymentStatus | None = None
 
 
@@ -388,6 +486,13 @@ plausibile solo per evitare "sconosciuto": è una risposta corretta quando è qu
 minori, disabilità, condizione lavorativa) SOLO se il cittadino li dichiara \
 esplicitamente nel messaggio. Non dedurre, non stimare, non arrotondare: in caso di \
 dubbio lascia il campo vuoto.
+- sesso: SOLO se il cittadino lo dichiara esplicitamente ("sono una donna", "sono un \
+uomo"). Non dedurlo mai da un nome proprio, da un pronome o da come si firma: quella \
+deduzione la fa un altro sistema, deterministico, fuori da questa classificazione.
+- figli_disabili / disabilita_nucleo: SOLO se il cittadino dichiara che un figlio (non \
+se stesso) ha una disabilità. "figlio disabile", "mio figlio è disabile", "ho una figlia \
+con disabilità" → disabilita_nucleo vero; se dice quanti, anche figli_disabili. Non \
+confondere con "disabilita" (quella è riferita al cittadino stesso).
 - beneficiary_role: SOLO per argomenti come "volontariato", dove chi riceve il servizio \
 e chi lo offre sono due persone diverse. Il verbo usato conta più delle parole "anziani" \
 o "volontariato", che da sole non dicono nulla sul ruolo:
@@ -447,6 +552,18 @@ async def extract_intent(
         confirmed_hint = _confirm_comune_hint(message=message, hint=parsed.comune_hint)
         if confirmed_hint != parsed.comune_hint:
             updates["comune_hint"] = confirmed_hint
+        slot_updates: dict[str, object] = {}
+        # Disabilita' propria: recupero deterministico, e vale anche a turno
+        # singolo (il caso rotto era «ho 23 anni e sono disabile...», senza
+        # storia, con la disabilita' persa). Se il testo la dichiara la
+        # imponiamo; se il modello l'ha messa ma il testo di QUESTO turno non la
+        # conferma, in un dialogo la togliamo — puo' essere l'eco di un'altra
+        # persona (D-56), stessa regola di sesso/nucleo.
+        if _disabilita_dichiarata_nel_testo(message):
+            if parsed.slots.disabilita is not True:
+                slot_updates["disabilita"] = True
+        elif storia and parsed.slots.disabilita is not None:
+            slot_updates["disabilita"] = None
         if storia:
             # The one thing labeling `storia` in the prompt cannot guarantee
             # is that the model keeps a slot's *value* out of an unrelated
@@ -454,13 +571,33 @@ async def extract_intent(
             # profile-builder trusts over the model (`slot_dal_testo`), can
             # confirm a number belongs to *this* turn.
             confermati = slot_dal_testo(message)
-            slot_updates: dict[str, object] = {}
             if parsed.slots.eta is not None and "eta" not in confermati:
                 slot_updates["eta"] = None
             if parsed.slots.isee is not None and "isee" not in confermati:
                 slot_updates["isee"] = None
-            if slot_updates:
-                updates["slots"] = parsed.slots.model_copy(update=slot_updates)
+            if (
+                parsed.slots.nucleo_familiare is not None
+                and "nucleo_familiare" not in confermati
+            ):
+                # D-56: senza questo, "e per mia madre?" dopo un turno con
+                # "famiglia di 4" trascinerebbe il nucleo della persona
+                # precedente sulla persona nuova.
+                slot_updates["nucleo_familiare"] = None
+            if (
+                parsed.slots.sesso is not None
+                and _sesso_dichiarato_nel_testo(message) != parsed.slots.sesso
+            ):
+                slot_updates["sesso"] = None
+            if parsed.slots.disabilita_nucleo is not None and not (
+                _figlio_disabile_dichiarato_nel_testo(message)
+            ):
+                slot_updates["disabilita_nucleo"] = None
+            if parsed.slots.figli_disabili is not None and not (
+                _figlio_disabile_dichiarato_nel_testo(message)
+            ):
+                slot_updates["figli_disabili"] = None
+        if slot_updates:
+            updates["slots"] = parsed.slots.model_copy(update=slot_updates)
         if (
             parsed.topic in INFORMATIONAL_BY_NATURE_TOPICS
             and parsed.kind is not QuestionKind.INFORMAZIONE
@@ -472,6 +609,19 @@ async def extract_intent(
             # deterministically rather than left to prompting (which did not
             # hold for `beneficiary_role` either).
             updates["kind"] = QuestionKind.INFORMAZIONE
+        if (
+            updates.get("kind", parsed.kind) is QuestionKind.AGEVOLAZIONE
+            and parsed.topic is not Topic.SCONOSCIUTO
+            and _BONUS_GENERICO_RE.search(message)
+            and not _topic_keyword_presente(message)
+        ):
+            # R-8: «ho bonus?» senza nominare una categoria e' una domanda
+            # generica, ma qwen3:4b la incolla comunque a un topic specifico
+            # (nel caso reale: sostegno_utenze). Cosi' la scheda mostrava un
+            # interesse mai dichiarato e la domanda-categoria (D-55) non partiva
+            # mai. Senza un aggancio nel testo il topic torna a SCONOSCIUTO —
+            # il segnale con cui `respond` chiede quale categoria.
+            updates["topic"] = Topic.SCONOSCIUTO
         if updates:
             parsed = parsed.model_copy(update=updates)
         return parsed
@@ -489,6 +639,19 @@ _ETA_NEL_TESTO = re.compile(
 #: «ISEE 12.000», «isee di 12000 euro», «isee 9.360,50».
 _ISEE_NEL_TESTO = re.compile(
     r"\bisee\b[^\d]{0,20}(?P<isee>\d{1,3}(?:[.\s]\d{3})*(?:,\d{1,2})?|\d{3,6}(?:,\d{1,2})?)",
+    re.I,
+)
+
+#: «famiglia di 4», «nucleo di 4», «siamo in 4»: il numero di persone nel
+#: nucleo, letto dal testo con lo stesso principio di eta'/ISEE — mai dal
+#: modello. Il gap che ha aggiunto questo pattern: la chat anonima (senza
+#: cookie CIE/SPID) non aveva NESSUN ripiego dal testo per questo campo, a
+#: differenza di eta'/isee/sesso/disabilita_nucleo, quindi l'eco combinata
+#: (D-52/D-53, acc1) restava senza il nucleo anche quando il cittadino lo
+#: aveva scritto per esteso.
+_NUCLEO_NEL_TESTO = re.compile(
+    r"\b(?:famiglia|nucleo)\s+di\s+(?P<nucleo>\d{1,2})\b"
+    r"|\bsiamo\s+in\s+(?P<nucleo2>\d{1,2})\b",
     re.I,
 )
 
@@ -523,5 +686,37 @@ def slot_dal_testo(messaggio: str) -> dict:
             trovati["isee"] = float(grezzo)
         except ValueError:
             pass
+
+    nucleo = _NUCLEO_NEL_TESTO.search(messaggio)
+    if nucleo:
+        grezzo_nucleo = nucleo.group("nucleo") or nucleo.group("nucleo2")
+        valore_nucleo = int(grezzo_nucleo)
+        if valore_nucleo >= 1:
+            trovati["nucleo_familiare"] = valore_nucleo
+
     return trovati
+
+
+#: Una domanda su un beneficio detta in astratto — «ho bonus?», «c'e' qualche
+#: agevolazione a cui posso accedere?». Non nomina una categoria: da sola non
+#: dice a quale topic appartiene. «aiuto» resta fuori di proposito (e' anche un
+#: verbo di richiesta generica, non solo un beneficio).
+_BONUS_GENERICO_RE = re.compile(
+    r"\b(?:bonus|agevolazion\w*|incentiv\w*|sussid\w*|contribut\w*)\b",
+    re.IGNORECASE,
+)
+
+
+def _topic_keyword_presente(messaggio: str) -> bool:
+    """Se il testo contiene un aggancio a un topic specifico (le stesse
+    parole-stem di `TOPIC_KEYWORDS`). Serve a distinguere «bonus bollette»
+    (ancorato) da «ho bonus?» (generico)."""
+    if not messaggio:
+        return False
+    haystack = messaggio.casefold()
+    for keywords in TOPIC_KEYWORDS.values():
+        for parola in keywords:
+            if parola.rstrip("-").casefold() in haystack:
+                return True
+    return False
 

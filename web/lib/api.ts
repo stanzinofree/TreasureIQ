@@ -152,6 +152,45 @@ export const dimenticaCampo = (campo: string, valore?: string) =>
     body: JSON.stringify(valore ? { campo, valore } : { campo }),
   });
 
+/** Le capacità dirette del portale di un comune fuori copertura: catalogo
+ *  servizi + 15 categorie AgID, per i chip a cascata. A freddo il backend
+ *  legge il portale una volta (cache 30g), quindi la chiamata può tardare:
+ *  la UI la lancia solo quando il badge connettore è già a schermo. */
+export const fetchMappaConnettore = (codiceIstat: string) =>
+  call<MappaConnettore | null>(`/api/mappa-connettore/${codiceIstat}`);
+
+/** I servizi di una categoria: il livello sotto ai chip. Link diretti alla
+ *  scheda sul portale del comune (la fonte, non un verdetto). */
+export const fetchServiziCategoria = (codiceIstat: string, termId: number) =>
+  call<ServizioLink[] | null>(
+    `/api/mappa-connettore/${codiceIstat}/categoria/${termId}`,
+  );
+
+/** Un bando/avviso del comune, letto adesso da amministrazione trasparente
+ *  (`criteri-e-modalita`). Nessun campo scadenza strutturato: `data` è la
+ *  data di pubblicazione, non «apertura» (D-B4, nessun verdetto). */
+export interface Bando {
+  titolo: string;
+  url: string;
+  data: string;
+  anteprima: string | null;
+}
+
+/** I bandi e avvisi del comune, indipendenti dalla mappa servizi (D-B6): il
+ *  gate è solo `connettore` presente, non `indirizzabile`. Array vuoto se il
+ *  comune non espone `criteri-e-modalita` (degrado silenzioso, D-B5). */
+export const fetchBandi = (codiceIstat: string) =>
+  call<Bando[]>(`/api/mappa-connettore/${codiceIstat}/bandi`);
+
+/** L'anteprima di un servizio, letta adesso dalla sua pagina sul portale:
+ *  descrizione + a chi è rivolto, con l'url per aprirla intera. Come l'anteprima
+ *  di un bando — fonte citata, non verdetto. `url` deve stare sul portale del
+ *  comune (guardia host lato server). */
+export const fetchSchedaServizio = (codiceIstat: string, url: string) =>
+  call<SchedaServizio | null>(
+    `/api/mappa-connettore/${codiceIstat}/scheda?url=${encodeURIComponent(url)}`,
+  );
+
 /** What the citizen's own comune published on a topic — stated either way.
  * The ordinary answer already searches municipal and national records
  * together, so this reaches nothing the first pass missed; it exists to say
@@ -178,6 +217,28 @@ export const approfondimento = (topic: string) =>
   call<Approfondimento>("/api/approfondimento", {
     method: "POST",
     body: JSON.stringify({ topic }),
+  });
+
+/** URP contacts read live from the comune's own portal, on explicit request.
+ * For a comune we do not ingest, we cannot say what the citizen is entitled to,
+ * but we can say who to ask — and they asked for the numbers, not just links. */
+export interface ContattiUrp {
+  comune_nome: string;
+  telefoni: string[];
+  email: string[];
+  pec: string[];
+  /** The page the contacts were read from, so they can be checked at source. */
+  fonte: string | null;
+  /** Always true: read from the portal just now, never verified against a
+   * dataset. Same discipline as `PaginaWeb.non_verificato` — a phone number
+   * captured wrong is worse than a link, so it is never stated as a fact. */
+  non_verificato: boolean;
+}
+
+export const contattiUrp = (comuneIstat: string | null) =>
+  call<ContattiUrp>("/api/contatti-urp", {
+    method: "POST",
+    body: JSON.stringify({ comune_istat: comuneIstat }),
   });
 export const me = () => call<Profile>("/api/me");
 // `opportunities` is gone from here with the page that used it. The endpoint
@@ -269,7 +330,7 @@ export const integrationAll = () => call<Integration[]>("/api/integration");
  * this" (`not_published`) is not the same failure as "nothing matched"
  * (`none_found`), and the two must never collapse into one string.
  */
-export type DataGap = "not_published" | "none_found";
+export type DataGap = "not_published" | "none_found" | "cambio_persona";
 
 export interface Escalation {
   needed: boolean;
@@ -407,6 +468,13 @@ export interface ProfiloCapito {
   nucleo_familiare: number | null;
   figli_minori: number | null;
   disabilita: boolean | null;
+  sesso: "f" | "m" | null;
+  /** True quando `sesso` viene da una deduzione sul nome proprio (D-52),
+   *  non da una dichiarazione esplicita: bassa confidenza, va mostrato
+   *  correggibile ("ho capito: donna — giusto?"), mai come un fatto. */
+  sesso_dedotto: boolean;
+  figli_disabili: number | null;
+  disabilita_nucleo: boolean | null;
 }
 
 export interface ChatOut {
@@ -433,6 +501,157 @@ export interface ChatOut {
   /** `null` on the AGEVOLAZIONE rail — an eligibility answer never carries
    * INFORMAZIONE furniture, and vice versa (D-19). */
   info: InfoOut | null;
+  /** Presente solo fuori copertura, dopo la sonda AgID: dice se il connettore
+   * raggiungerebbe questo comune. `null` sui comuni coperti o non sondati. */
+  connettore: ConnettoreSonda | null;
+  /** Recapiti letti al volo dal portale del comune fuori copertura. Non è una
+   * risposta di TreasureIQ: la UI lo mostra come banner nel pannello a
+   * sinistra. `null` sui comuni coperti o quando lo scrape non trova nulla. */
+  numeri_utili: NumeriUtili | null;
+  /** Candidati di disambiguazione quando il nome comune è ambiguo. La UI li
+   * rende come schede cliccabili: un tap sceglie e rimanda la domanda. */
+  comuni_ambigui: ComuneAmbiguo[] | null;
+  /** B6 — stato dello scan del comune coperto, se presente. Solo tipo qui:
+   * nessun consumatore lo rende ancora. */
+  scan?: ScanStato | null;
+}
+
+/** Un candidato di disambiguazione comune. `codice_istat` serve a rimandare la
+ *  domanda con la scelta fatta, senza far ridigitare il nome. */
+export interface ComuneAmbiguo {
+  nome: string;
+  provincia: string;
+  codice_istat: string;
+}
+
+/** Esito della sonda AgID su un comune fuori copertura. Non un verdetto:
+ *  `indirizzabile` = il portale espone l'API uffici del modello AgID, `uffici`
+ *  è quanti ne elenca (conteggio strutturale, mai una spettanza). */
+export interface ConnettoreSonda {
+  /** Il comune sondato: si passa a `fetchMappaConnettore` per i chip categoria. */
+  codice_istat: string;
+  indirizzabile: boolean;
+  uffici: number;
+  rest_base: string | null;
+}
+
+/** Una categoria standard del modello AgID e quanti servizi vi ricadono in un
+ *  comune. `conteggio` è un conteggio strutturale del catalogo, mai una
+ *  spettanza. Le categorie a zero non arrivano qui (chip su vicolo vuoto). */
+export interface CategoriaServizio {
+  nome: string;
+  conteggio: number;
+  /** Term della tassonomia: serve a scendere di livello. `0` se il portale non lo espone. */
+  id: number;
+  slug: string;
+}
+
+/** Un servizio del catalogo comunale: titolo + link alla scheda sul portale.
+ *  È la foglia della cascata — la fonte citata, non un verdetto (D-01). */
+export interface ServizioLink {
+  titolo: string;
+  url: string;
+}
+
+/** L'anteprima di un servizio letta dalla sua pagina: cosa è e a chi è rivolto,
+ *  con l'url per aprirla intera. Fonte citata, non verdetto (D-01). */
+export interface SchedaServizio {
+  titolo: string;
+  url: string;
+  descrizione: string | null;
+  a_chi: string | null;
+  cosa_ottieni: string | null;
+}
+
+/** Le capacità dirette del portale di un comune: il catalogo servizi e le 15
+ *  categorie del modello AgID. Serve i chip a cascata, non un verdetto: dice
+ *  per quali strade dirette potremmo rispondere, mai cosa spetta (D-01). */
+export interface MappaConnettore {
+  codice_istat: string;
+  nome: string;
+  sito: string | null;
+  servizi: {
+    esposto: boolean;
+    totale: number;
+    categorie: CategoriaServizio[];
+  };
+  uffici: { esposto: boolean; totale: number };
+}
+
+/** Cosa il portale di un comune ha detto sui propri orari di sportello, e
+ *  quando gliel'abbiamo chiesto (`OrariLive` in `sonda_live.py`). Senza
+ *  `citazione` non c'è nessun orario da mostrare, solo la constatazione che
+ *  non l'abbiamo trovato. */
+export interface OrariLive {
+  codice_istat: string;
+  nome: string;
+  sito: string | null;
+  indirizzabilita: "api_uffici" | "solo_html" | "irraggiungibile";
+  recuperabilita: "campo_tipizzato" | "prosa" | "assente";
+  ufficio: string | null;
+  ufficio_url: string | null;
+  citazione: string | null;
+  letto_il: string;
+}
+
+/** L'aderenza AgID di un comune coperto: checklist fissa di 4 superfici
+ *  (servizi, uffici, trasparenza, contatti), mai una cifra digitata (D-S2).
+ *  `superfici` porta la provenienza — quale via ha contato per la % (D-S4). */
+export interface AderenzaAgid {
+  percento: number;
+  esposte: number;
+  definite: number;
+  superfici: { nome: string; via: "REST" | "scrape" | null }[];
+}
+
+/** La scheda completa di un comune scansionato (`SchedaComuneOut` in
+ *  `api.py`, contratto pinnato in `plan.md`). `aderenza` è sempre `null`
+ *  quando `connettore_tipo != "agid"` — mai una % su un connettore che non
+ *  la può misurare (D-S2). */
+export interface SchedaComune {
+  codice_istat: string;
+  nome: string;
+  sito: string | null;
+  /** Quando questo record è stato scansionato, dal record store — mai un
+   *  timestamp calcolato al volo. */
+  scansionato_il: string;
+  connettore_tipo: "agid" | "solo-html" | "non-sondato";
+  aderenza: AderenzaAgid | null;
+  servizi: { esposto: boolean; totale: number; categorie: CategoriaServizio[] };
+  uffici: { esposto: boolean; totale: number };
+  contatti: {
+    telefoni: string[];
+    pec: string[];
+    email: string[];
+    fonte: string;
+    letto_il: string;
+  } | null;
+  orari: OrariLive | null;
+  /** Solo host del comune (D-S8): mai un logo letto da un dominio estraneo. */
+  logo_url: string | null;
+}
+
+export const fetchSchedaComune = (codiceIstat: string) =>
+  call<SchedaComune | null>(`/api/comune/${codiceIstat}`);
+
+/** Stato dello scan di un comune, per il rail chat (B6). `stato` distingue
+ *  un record fresco da uno che si sta aggiornando in questo momento — la UI
+ *  non li rende uguali. */
+export interface ScanStato {
+  stato: "fresco" | "aggiornamento_in_corso";
+  ultimo_scan: string;
+}
+
+/** Recapiti del comune letti al volo dal portale. Nessun numero è verificato.
+ *  `fonte_tipo` è sempre «scansione web»; `letto_il` è l'ora del controllo
+ *  (ISO 8601), che il pannello rende come «ultimo controllo». */
+export interface NumeriUtili {
+  telefoni: string[];
+  email: string[];
+  pec: string[];
+  fonte: string | null;
+  fonte_tipo: string;
+  letto_il: string;
 }
 
 export interface ChatTurn {

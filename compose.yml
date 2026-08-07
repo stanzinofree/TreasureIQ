@@ -36,11 +36,23 @@ services:
       OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-http://host.docker.internal:11434}
       # Optional: only needed when TREASUREIQ_LLM_PROVIDER=anthropic.
       ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
-      # Gradino 3 (D-32): per un comune fuori copertura, il cui portale non
-      # espone gli uffici in una forma leggibile, la chat cerca sul web mentre
-      # il cittadino aspetta. Il risultato non e' mai un dato di TreasureIQ e
-      # viaggia marcato come tale.
-      SEARXNG_URL: ${SEARXNG_URL:-http://searxng:8080}
+    # Gradino 3 (D-32): per un comune fuori copertura, il cui portale non
+    # espone gli uffici in una forma leggibile, la chat cerca sul web mentre
+    # il cittadino aspetta. Il risultato non e' mai un dato di TreasureIQ e
+    # viaggia marcato come tale. Brave e' l'unico motore (D-59): senza
+    # BRAVE_SEARCH_API_KEY la ricerca web e' assente, mai sostituita da un
+    # secondo motore o da un risultato inventato.
+    #
+    # La chiave NON sta in `environment` di proposito: la' andava presa dalla
+    # shell che lancia `up`, e con la chiave in `.secrets` (caricata da direnv,
+    # non dalla shell di compose) il container partiva a chiave vuota e la
+    # ricerca live non partiva mai. `env_file` la fa leggere a Docker
+    # direttamente dal file locale; `required: false` tiene valida la promessa
+    # "clone-and-run senza chiave" (file assente -> ricerca web semplicemente
+    # assente, come documentato sopra).
+    env_file:
+      - path: .secrets
+        required: false
     extra_hosts:
       # Required for host.docker.internal to resolve on Linux hosts; a no-op
       # on Docker Desktop/OrbStack, where it already resolves.
@@ -77,19 +89,3 @@ services:
       api:
         condition: service_healthy
     restart: unless-stopped
-
-  # Ingestion-time only (D-28/R-15): the web-search fallback that backs the
-  # `M6_web_aperto` readiness rung. Behind `profiles: ["ingest"]` so a plain
-  # `docker compose up` never starts it — no network call at runtime is a
-  # property of this file, not a convention someone can forget to follow.
-  # Run it deliberately with:
-  #   docker compose --profile ingest up -d searxng
-  #   python -m treasureiq.ingest.websearch "<query>" --write
-  searxng:
-    image: searxng/searxng:latest
-    profiles: ["ingest"]
-    ports:
-      - "8080:8080"
-    volumes:
-      - ./searxng:/etc/searxng:ro
-    restart: "no"

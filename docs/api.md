@@ -67,6 +67,9 @@ Risposta (campi principali):
 | `access_mode` | Il gradino a cui la risposta è stata composta: `M2_prosa_api`, `M4_connettore`, `M6_web_aperto`… |
 | `citizen_effort` | Quante azioni restano **al cittadino** dopo la risposta. Un conteggio, mai una stima, e non va mai sommato a `cost`. |
 | `cost` | Quanto è costato a *noi* recuperare quel dato. Risponde a una domanda diversa da `citizen_effort`. |
+| `connettore` | Presente su un comune **fuori copertura** che espone comunque un connettore leggibile: `{indirizzabile, uffici, rest_base}`. Dice per quale strada lo *raggiungeremmo*, non cosa spetta. `null` sui comuni coperti (già letti) o su chi non espone nulla. |
+| `numeri_utili` | I recapiti URP letti al volo su un comune fuori copertura: `{telefoni, email, pec, fonte, fonte_tipo, letto_il}`. Marcati `non verificato` per costruzione — è ciò che il portale espone adesso, a chi chiedere, non un dato controllato. `null` altrimenti. |
+| `comuni_ambigui[]` | Quando il nome nel messaggio combacia con più comuni omonimi: `[{nome, provincia, codice_istat}]` da rendere come schede cliccabili. La scelta è del cittadino, non nostra. Vuoto quando il comune è univoco o già scelto. |
 
 ### `criteria[].state`, sul binario agevolazioni
 
@@ -97,6 +100,14 @@ modello linguistico partecipa a questa decisione (D-01).
 `{ "topic": "rifiuti" }` — il costo di recupero dettagliato per un argomento già
 risposto. Riusa il topic invece di riclassificare, così resta deterministico.
 
+### `POST /api/contatti-urp`
+
+`{ "comune_istat": "110003" }` (o dal cookie di sessione) — i recapiti URP di un
+comune **fuori copertura**, letti dal vivo su richiesta esplicita. Di un comune
+che non leggiamo non possiamo dire cosa spetta, ma possiamo dire a chi chiedere.
+La risposta torna marcata `non_verificato`: è ciò che il portale espone adesso,
+non un dato che abbiamo controllato. La guardia sui numeri vale qui come altrove.
+
 ---
 
 ## Sessione e profilo
@@ -104,7 +115,8 @@ risposto. Riusa il topic invece di riclassificare, così resta deterministico.
 | Rotta | Cosa fa |
 |---|---|
 | `POST /api/session` | Apre una sessione con un profilo **simulato**. Nessuna credenziale viene verificata, nessun codice fiscale viene letto. Cookie `HttpOnly`, 8 ore. |
-| `DELETE /api/session` | Chiude e dimentica. |
+| `DELETE /api/session` | Chiude e dimentica tutta la sessione. |
+| `POST /api/session/dimentica` | Dimentica **un campo solo** del profilo (`{ "campo": "comune_istat" }`). Il cittadino può correggere ciò che abbiamo dedotto senza ripartire da capo — sesso, età, comune, disabilità nel nucleo sono tutti scordabili uno per uno. |
 | `GET /api/me` | Il profilo in sessione, o 401. |
 | `GET /api/opportunities` | Le opportunità del comune del profilo, già valutate. `?include_ineligible=true` tiene anche i «no» — un no con una ragione è una risposta. |
 
@@ -137,6 +149,32 @@ risposto. Riusa il topic invece di riclassificare, così resta deterministico.
 `GET`/`POST /api/segnalazioni` — un cittadino può segnalare che su un comune
 manca qualcosa. Non è un modulo di reclamo: è il modo in cui una lacuna
 misurata diventa un numero accanto al nome di quel comune.
+
+---
+
+## Censimento nazionale
+
+Lo sguardo d'insieme sui portali comunali: non «cosa spetta a te», ma «quanti
+comuni sappiamo leggere e con quale piattaforma». Vuoto finché nessuno sweep è
+stato registrato — un checkout fresco disegna un censimento vuoto, non un errore.
+
+| Rotta | Cosa fa |
+|---|---|
+| `GET /api/censimento` | L'ultimo rilevamento nazionale: piattaforme, fornitori, sezioni mancanti, vincoli. |
+| `GET /api/censimento/comune/{codice_istat}` | La piattaforma e l'aderenza AgID misurate per un comune, o `null` se mai spazzolato. |
+| `GET /api/connettori` | Il catalogo delle **sonde**: cosa sappiamo leggere, piattaforma per piattaforma (`livello`: `catalogo` \| `modello` \| `firma`). Costruito dal codice, non da una tabella a mano: una piattaforma che perde la sua declinazione sparisce da qui lo stesso giorno. |
+
+### Cascata servizi (comune fuori copertura, portale a modello AgID)
+
+Quando la chat mostra il badge connettore, sotto compare una cascata a tre
+livelli letta **adesso** dal portale: categorie → servizi → anteprima. Non è un
+verdetto (D-01): è il catalogo del comune «citato come fonte».
+
+| Rotta | Cosa fa |
+|---|---|
+| `GET /api/mappa-connettore/{codice_istat}` | La mappa di capacità del portale: catalogo servizi + le 15 categorie AgID (con `id`/`slug` per il drill) + uffici. `null` se il comune non è noto. Cache 30 giorni. |
+| `GET /api/mappa-connettore/{codice_istat}/categoria/{term_id}` | I servizi di una categoria, come titolo + link alla scheda. Lista vuota se la categoria non ha (più) servizi. |
+| `GET /api/mappa-connettore/{codice_istat}/scheda?url=<url>` | L'anteprima di un servizio, letta dalla sua pagina (descrizione, a chi è rivolto), con l'`url` per aprirla intera. L'`url` **deve** stare sul portale di quel comune (guardia host, niente proxy arbitrario), altrimenti `null`. Fonte citata, non verdetto. |
 
 ---
 

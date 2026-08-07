@@ -13,7 +13,7 @@
  */
 
 import ProfiloNoto from "@/components/ProfiloNoto";
-import { useProfilo } from "@/lib/profilo";
+import { useProfilo, type NumeriUtiliProfilo } from "@/lib/profilo";
 import { useRisultati } from "@/lib/risultati";
 
 const LIVELLO_LABEL: Record<string, string> = {
@@ -21,6 +21,61 @@ const LIVELLO_LABEL: Record<string, string> = {
   regionale: "Regionale",
   nazionale: "Nazionale",
 };
+
+/** Data del controllo, leggibile: «6 agosto 2026». Se l'ISO è illeggibile,
+ * ripiega sulla stringa grezza — mai un «Invalid Date» a schermo. */
+function dataLeggibile(iso: string): string {
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return iso;
+  return d.toLocaleDateString("it-IT", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+}
+
+/** I recapiti del comune fuori copertura, letti al volo dal portale. Non è una
+ * risposta di TreasureIQ: è il biglietto da visita del comune, con fonte e data
+ * del controllo dichiarate. Nessun numero è verificato. */
+function NumeriUtiliBanner({ numeri }: { numeri: NumeriUtiliProfilo }) {
+  return (
+    <section className="numeri-utili" aria-label={`Numeri utili di ${numeri.comune}`}>
+      <h3 className="numeri-utili__titolo">
+        Comune di {numeri.comune} · numeri utili
+      </h3>
+      <dl className="numeri-utili__lista">
+        {numeri.telefoni.map((t) => (
+          <div className="numeri-utili__riga" key={`tel-${t}`}>
+            <dt>Telefono</dt>
+            <dd>
+              <a href={`tel:${t.replace(/\s+/g, "")}`}>{t}</a>
+            </dd>
+          </div>
+        ))}
+        {numeri.pec.map((p) => (
+          <div className="numeri-utili__riga" key={`pec-${p}`}>
+            <dt>PEC</dt>
+            <dd>
+              <a href={`mailto:${p}`}>{p}</a>
+            </dd>
+          </div>
+        ))}
+        {numeri.email.map((e) => (
+          <div className="numeri-utili__riga" key={`mail-${e}`}>
+            <dt>Email</dt>
+            <dd>
+              <a href={`mailto:${e}`}>{e}</a>
+            </dd>
+          </div>
+        ))}
+      </dl>
+      <p className="numeri-utili__nota">
+        Ultimo controllo via {numeri.fonteTipo} il {dataLeggibile(numeri.lettoIl)}
+        {" "}· da verificare tu.
+      </p>
+    </section>
+  );
+}
 
 export default function Pannello() {
   const {
@@ -33,20 +88,38 @@ export default function Pannello() {
     livelliPresenti,
     esitiPresenti,
   } = useRisultati();
-  const { quantiFatti } = useProfilo();
+  const { quantiFatti, profilo } = useProfilo();
 
   const filtriAttivi = filtri.livelli.size + filtri.esiti.size > 0;
+
+  // I numeri utili si mostrano solo se sono di QUESTO comune: portano il loro
+  // ISTAT proprio per non restare in vista dopo un cambio di comune.
+  const numeri =
+    profilo.numeriUtili && profilo.numeriUtili.istat === profilo.comune?.istat
+      ? profilo.numeriUtili
+      : null;
 
   // Render nothing at all — not an empty column — until there is something to
   // put in it. The grid collapses to a single track when this element is
   // absent (see `.workspace:has(.pannello)`), so on arrival the conversation
   // gets the whole width and sits centred, instead of being pushed aside by a
   // panel holding nothing.
-  if (quantiFatti === 0 && trovate.length === 0) return null;
+  if (quantiFatti === 0 && trovate.length === 0 && numeri === null) return null;
 
   return (
     <aside className="pannello" aria-label="Riepilogo della conversazione">
       <ProfiloNoto />
+
+      {profilo.comune?.istat && (
+        <a
+          className="pannello__scheda-link"
+          href={`/comune/${profilo.comune.istat}`}
+        >
+          Scheda del comune →
+        </a>
+      )}
+
+      {numeri && <NumeriUtiliBanner numeri={numeri} />}
 
       {trovate.length > 0 && (
         <>

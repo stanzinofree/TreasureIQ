@@ -35,6 +35,7 @@ import AccessoSimulato from "@/components/AccessoSimulato";
 import SceltaComune from "@/components/SceltaComune";
 import RispostaCivica from "@/components/RispostaCivica";
 import PonteScala from "@/components/PonteScala";
+import SchedaLettoOra from "@/components/SchedaLettoOra";
 import { PRESETS } from "@/lib/profili-demo";
 import { useProfilo } from "@/lib/profilo";
 import { conTagVerifica } from "@/lib/testo";
@@ -1754,6 +1755,15 @@ export default function Chat() {
                     BANDI, già dentro `reply.bandi_live` (B3) — nessuna
                     seconda fetch, mai un secondo scan dello stesso portale. */}
                 {m.reply.bandi_live && <BandiLive esito={m.reply.bandi_live} />}
+
+                {/* B5 (ciclo 10): il connettore letto ORA (contratto D-09) —
+                    uffici coi recapiti verbatim e i bandi di Amministrazione
+                    Trasparente, con l'analisi PDF su richiesta. Indipendente
+                    dal ramo agevolazione/informazione: si mostra ovunque il
+                    backend l'abbia valorizzato su questa risposta. */}
+                {m.reply.esito_connettore && (
+                  <SchedaLettoOra esito={m.reply.esito_connettore} />
+                )}
 
                 {m.reply.kind === "informazione" ? (
                   // D-19 — the INFORMAZIONE rail never renders a verdict, a

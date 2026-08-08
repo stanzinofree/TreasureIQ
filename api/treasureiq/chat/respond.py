@@ -70,6 +70,10 @@ from treasureiq.extract.providers import LLMProvider, load_provider
 # qui un nome che il patch non raggiungerebbe piu'.
 from treasureiq import bandi_live
 from treasureiq.bandi_live import BandiLiveEsito, BandoArricchito
+# Stessa ragione del commento sopra (B4): i test mockano
+# `treasureiq.connettore.leggi_connettore` con `mock.patch`.
+from treasureiq import connettore
+from treasureiq.connettore import UfficioConnettore
 from treasureiq.integration import (
     AccessMode,
     Ente,
@@ -370,6 +374,11 @@ class ChatAnswer:
     #: viaggiano SOLO qui, mai interpolati in `reply`: il verbalizzatore non
     #: tocca mai questo campo (D-07, «il verbalizzatore corrompe le cifre»).
     bandi_live: BandiLiveEsito | None = None
+    #: Esito grezzo di `connettore.leggi_connettore` (B4), ramo M4_CONNETTORE
+    #: scattato. Recapiti/orari/AT strutturati e verbatim: la card del web
+    #: (B5) li legge da qui, mai da `reply` (D-07). `None` quando il
+    #: connettore non ha risposto o il ramo non e' scattato (A7).
+    esito_connettore: connettore.EsitoConnettore | None = None
 
 
 def _resolve_comune(*, hint: str | None) -> tuple[str | None, str | None]:
@@ -1605,6 +1614,31 @@ async def _build_informazione_answer(
 
     web_results: list[WebResultAnswer] = []
     access_mode = ente.access_mode.value
+
+    # M4-servito vs M4-gap (B4): un ente censito con access_mode M4_CONNETTORE
+    # NON è per forza esausto — proviamolo per davvero prima di trattarlo come
+    # il gap che l'access_mode misurato descrive. Se il connettore legge dati
+    # veri, questo intercetta la risposta qui e non attraversa mai il ramo
+    # institutional_exhausted sotto (niente sonda, niente ricerca web, niente
+    # falso «non ha pubblicato niente»). Se il connettore non ha nulla
+    # (`None` o degradato-vuoto), il flusso prosegue ESATTAMENTE come prima:
+    # institutional_exhausted resta vero e nulla cambia per i comuni
+    # non-Municipium (A7).
+    if not candidates and ente.access_mode == AccessMode.M4_CONNETTORE:
+        esito_connettore = await asyncio.to_thread(connettore.leggi_connettore, ente.codice_istat)
+        if esito_connettore is not None and (
+            esito_connettore.uffici or esito_connettore.amministrazione_trasparente is not None
+        ):
+            risposta_connettore = _risposta_da_connettore(
+                comune_nome=ente.ente,
+                topic=intent.topic,
+                diagnosi=diagnosis,
+                esito=esito_connettore,
+                ufficio_chiesto=_ufficio_chiesto(parole),
+            )
+            if risposta_connettore is not None:
+                return risposta_connettore
+
     institutional_exhausted = not candidates and ente.access_mode in (
         AccessMode.M4_CONNETTORE,
         AccessMode.M5_NESSUNO,
@@ -1784,6 +1818,164 @@ async def _ricerca_a_gradini(
     return await asyncio.to_thread(_cerca_sul_web, query)
 
 
+#: Sinonimi cittadino -> ufficio per il match sul connettore (B4). Il nome
+#: dell'ufficio e' testo libero letto dal portale (Municipium oggi, altri
+#: vendor domani): il match resta a sottostringa sul nome minuscolo, mai un
+#: LLM (D-04) — se non ne torna esattamente uno, si elenca, non si indovina.
+_SINONIMI_UFFICIO_CONNETTORE: dict[str, tuple[str, ...]] = {
+    "anagrafe": ("anagrafe", "demografic", "stato civile"),
+    "tributi": ("tribut", "imu", "tari"),
+    "urbanistica": ("urbanistic", "edilizia"),
+    "sociale": ("social",),
+    "sociali": ("social",),
+    "scuola": ("scuola", "istruzion", "pubblica istruzione"),
+    "commercio": ("commerci", "attivita produttive", "suap"),
+    "polizia": ("polizia", "vigil"),
+    "ambiente": ("ambiente", "ecologia"),
+    "lavori": ("lavori pubblici", "manutenzion"),
+    "protocollo": ("protocollo",),
+    "cultura": ("cultura",),
+    "sport": ("sport",),
+}
+
+
+def _ufficio_connettore_pertinente(
+    uffici: list[UfficioConnettore], *, ufficio_chiesto: str | None, topic: Topic
+) -> tuple[UfficioConnettore | None, bool]:
+    """L'ufficio del connettore che risponde alla domanda, se uno solo
+    corrisponde. Prova prima la parola nominata dal cittadino
+    (`_ufficio_chiesto`), poi i pezzi del `topic` gia' riconosciuto — mai il
+    testo libero del messaggio (D-24: solo campi tipizzati in ingresso al
+    match).
+
+    `(None, False)`: nessuna parola-chiave ha trovato un ufficio — il
+    cittadino non ha nominato nulla di specifico, si elenca. `(None, True)`:
+    piu' di un ufficio corrisponde alla stessa parola-chiave — ambiguo,
+    stesso trattamento (elenco), mai un indovinello (D-04)."""
+    candidati = []
+    if ufficio_chiesto:
+        candidati.append(ufficio_chiesto.lower())
+    candidati.extend(pezzo for pezzo in topic.value.split("_") if len(pezzo) > 3)
+
+    for chiave in candidati:
+        sottostringhe = _SINONIMI_UFFICIO_CONNETTORE.get(chiave, (chiave,))
+        trovati = [
+            ufficio
+            for ufficio in uffici
+            if any(s in ufficio.nome.lower() for s in sottostringhe)
+        ]
+        if len(trovati) == 1:
+            return trovati[0], False
+        if len(trovati) > 1:
+            return None, True
+    return None, False
+
+
+def _testo_ufficio_connettore(*, comune_nome: str, ufficio: UfficioConnettore) -> str:
+    """Frase-cornice fissa; tel/email/pec/orari sono interpolati VERBATIM
+    dall'`UfficioConnettore` — mai passati da un LLM/verbalizzatore (D-07:
+    il verbalizzatore corrompe le cifre, qui le cifre non lo incontrano
+    nemmeno). Onesto campo per campo (D-05): un recapito compare solo se il
+    comune lo ha pubblicato per questo ufficio, mai un centralino ente
+    spacciato per diretto."""
+    righe = [f"{comune_nome} pubblica sul proprio portale i recapiti di «{ufficio.nome}»."]
+    if ufficio.telefoni:
+        righe.append("Telefono: " + ", ".join(ufficio.telefoni) + ".")
+    else:
+        righe.append(f"Il comune non ha pubblicato un telefono diretto per {ufficio.nome}.")
+    if ufficio.email:
+        righe.append("Email: " + ", ".join(ufficio.email) + ".")
+    if ufficio.pec:
+        righe.append("PEC: " + ", ".join(ufficio.pec) + ".")
+    if ufficio.orari:
+        righe.append("Orari: " + ufficio.orari + ".")
+    return " ".join(righe)
+
+
+def _testo_elenco_uffici_connettore(*, comune_nome: str, uffici: list[UfficioConnettore]) -> str:
+    """Elenco onesto quando il cittadino non ha nominato un ufficio preciso
+    o ne ha nominato uno ambiguo (D-04): mai indovinare quale intendeva."""
+    nomi = "; ".join(ufficio.nome for ufficio in uffici)
+    return (
+        f"{comune_nome} pubblica sul proprio portale questi uffici: {nomi}. "
+        "Quale ti interessa?"
+    )
+
+
+def _risposta_da_connettore(
+    *,
+    comune_nome: str,
+    topic: Topic,
+    diagnosi: list[str],
+    esito: "connettore.EsitoConnettore",
+    ufficio_chiesto: str | None,
+) -> ChatAnswer | None:
+    """Risposta INFORMAZIONE costruita dal connettore (B4, D-09/D-11): stesso
+    schema di `_chat_live`, ma con recapiti VERBATIM e onestà campo-per-campo
+    (D-05/D-07) invece del solo blocco `orari` che il resto del gradino 2
+    conosce. `None` se il connettore non ha uffici da offrire su questo
+    ramo — il chiamante ripiega sul gradino web (A7, invariato)."""
+    if not esito.uffici:
+        return None
+
+    ufficio, ambiguo = _ufficio_connettore_pertinente(
+        esito.uffici, ufficio_chiesto=ufficio_chiesto, topic=topic
+    )
+    diagnosi_connettore = [
+        *diagnosi,
+        f"Letto dal connettore ({esito.piattaforma}) il {esito.letto_il}.",
+    ]
+
+    if ufficio is None:
+        reply = _testo_elenco_uffici_connettore(comune_nome=comune_nome, uffici=esito.uffici)
+        documento = None
+        ufficio_risposta = None
+        citizen_effort = 2
+    else:
+        reply = _testo_ufficio_connettore(comune_nome=comune_nome, ufficio=ufficio)
+        documento = DocumentAnswer(title=f"{ufficio.nome} — pagina del comune", url=ufficio.url)
+        ufficio_risposta = OfficeAnswer(
+            nome=ufficio.nome,
+            telefono=", ".join(ufficio.telefoni) or None,
+            email=", ".join(ufficio.email) or None,
+            orari=ufficio.orari,
+        )
+        citizen_effort = 1
+
+    stato, prove = _prove_e_stato(
+        document=documento,
+        office=ufficio_risposta,
+        web_results=[],
+        letto_dal_vivo=True,
+    )
+    azioni = _azioni_possibili(document=documento, office=ufficio_risposta, web_results=[])
+    return ChatAnswer(
+        reply=reply,
+        topic=topic,
+        kind=QuestionKind.INFORMAZIONE,
+        data_gap=None,
+        needs_clarification=ambiguo,
+        matches=[],
+        spid_required=False,
+        spid_reason=None,
+        access_mode=AccessMode.M4_CONNETTORE.value,
+        citizen_effort=citizen_effort,
+        info=InfoAnswer(
+            document=documento,
+            office=ufficio_risposta,
+            stato=stato,
+            prove=prove,
+            azioni=azioni,
+            coverage_count=0,
+            diagnosis=diagnosi_connettore,
+            letto_dal_vivo=True,
+            integration_cost=[],
+            web_results=[],
+        ),
+        esito_connettore=esito,
+    )
+
+
 async def _risposta_live(
     *,
     hint: str | None,
@@ -1901,6 +2093,25 @@ async def _risposta_live(
             data_gap="not_published",
             citizen_effort=2,
         )
+
+    # Innesto pre-web (B4, D-09/D-11): se il comune ha un connettore che sa
+    # leggerlo (oggi Municipium), lo proviamo PRIMA della ricerca web aperta —
+    # è dato letto dal portale stesso, non un risultato di un motore terzo
+    # senza provenienza (A7: se non c'è connettore, si prosegue esattamente
+    # come oggi, invariato).
+    esito_connettore = await asyncio.to_thread(connettore.leggi_connettore, comune.codice_istat)
+    if esito_connettore is not None and (
+        esito_connettore.uffici or esito_connettore.amministrazione_trasparente is not None
+    ):
+        risposta_connettore = _risposta_da_connettore(
+            comune_nome=comune.nome,
+            topic=topic,
+            diagnosi=diagnosi,
+            esito=esito_connettore,
+            ufficio_chiesto=_ufficio_chiesto(parole),
+        )
+        if risposta_connettore is not None:
+            return risposta_connettore
 
     # Gradino 3 (D-32). Il portale ha risposto e non espone i propri uffici in
     # una forma leggibile: fermarsi qui significava dire «cercalo a mano sul

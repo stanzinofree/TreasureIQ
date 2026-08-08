@@ -27,10 +27,12 @@ import io
 import logging
 import re
 from typing import Any
+from urllib.parse import urlparse
 
 import httpx
 
 from treasureiq.extract.llm import Segment
+from treasureiq.mappa_connettore import _host_senza_www
 from treasureiq.schema import PdfSkip
 
 logger = logging.getLogger(__name__)
@@ -81,6 +83,8 @@ def collect_pdf_segments(
     illegible_count = 0
     if not pdf_urls:
         return [], notes, skipped, illegible_count
+
+    host_atteso = _host_senza_www(urlparse(base_url).netloc.lower())
 
     def _skip(absolute_url: str, note: str, reason: str, *, illegible: bool) -> None:
         nonlocal illegible_count
@@ -136,6 +140,19 @@ def collect_pdf_segments(
                 absolute_url,
                 f"Allegato PDF non scaricabile: {absolute_url} ({exc})",
                 f"download fallito: {exc}",
+                illegible=False,
+            )
+            continue
+
+        if host_atteso and _host_senza_www(urlparse(str(response.url)).netloc.lower()) != host_atteso:
+            # Guardia SSRF post-redirect: il client segue i redirect, e solo
+            # QUI, dopo il fetch, si sa dove è finita davvero la richiesta.
+            # Un url pre-filtrato sullo stesso host può comunque essere
+            # rediretto altrove — si scarta, non si estrae.
+            _skip(
+                absolute_url,
+                f"Allegato PDF ignorato (rediretto fuori host): {absolute_url} -> {response.url}",
+                "rediretto fuori host",
                 illegible=False,
             )
             continue

@@ -576,6 +576,87 @@ export interface BandiLiveEsito {
   tema?: string | null;
 }
 
+/* ── Connettore (contratto D-09, mirror di `treasureiq/connettore.py`) ──── */
+
+/** Una voce dell'indice amministrativo del portale: nome e dove sta. */
+export interface AreaAmministrativa {
+  nome: string;
+  url: string;
+}
+
+/** Un bando trovato nell'indice di Amministrazione Trasparente. `pdf_url`
+ *  `null` quando il bando non porta un PDF collegato — flag di presenza,
+ *  non promessa di contenuto leggibile. */
+export interface BandoAT {
+  titolo: string;
+  url: string;
+  pdf_url: string | null;
+}
+
+/** L'indice AT del portale (D-11): bandi attivi verbatim, `pdf_presenti`
+ *  come flag — l'analisi del PDF resta su richiesta del cittadino
+ *  (`postAtAnalisi`), mai automatica di massa. */
+export interface AmministrazioneTrasparente {
+  indice_url: string | null;
+  bandi_attivi: BandoAT[];
+  pdf_presenti: boolean;
+}
+
+/** Un ufficio letto dal connettore, coi suoi recapiti verbatim (D-07:
+ *  nessuna cifra passa da un LLM). `source_typed` distingue un recapito
+ *  tipizzato dal portale (`tel:`/`mailto:`) da uno solo scritto in prosa —
+ *  provenienza, mai un giudizio di qualità. Ogni campo recapito assente va
+ *  reso come riga onesta «non pubblicato», mai omesso in silenzio (D-05). */
+export interface UfficioConnettore {
+  nome: string;
+  url: string;
+  telefoni: string[];
+  email: string[];
+  pec: string[];
+  orari: string | null;
+  source_typed: boolean;
+  letto_il: string;
+}
+
+/** Mirror esatto di `EsitoConnettore` (`api/treasureiq/connettore.py`): il
+ *  contratto D-09, quello che una scansione di piattaforma produce, letta
+ *  ADESSO (non ingerita) — «letto ora», mai uno snapshot curato. */
+export interface EsitoConnettore {
+  codice_istat: string;
+  piattaforma: string;
+  letto_il: string;
+  aree_amministrative: AreaAmministrativa[];
+  uffici: UfficioConnettore[];
+  amministrazione_trasparente: AmministrazioneTrasparente | null;
+}
+
+/** Un segmento di testo estratto dal PDF, verbatim da pypdf (D-07): mai
+ *  passato da un LLM, mai riformattato — le cifre restano quelle stampate
+ *  nel documento. */
+export interface AtAnalisiSegmento {
+  kind: string;
+  url: string;
+  pagina: number | null;
+  testo: string;
+}
+
+/** Esito dell'analisi di UN allegato PDF già elencato in un `BandoAT`
+ *  (D-11, `POST /api/at-analisi`), mirror di `ATAnalisiResponse`
+ *  (`api/treasureiq/api.py`). Mai una scansione di massa: un `pdf_url` alla
+ *  volta, host-guarded lato backend. */
+export interface AtAnalisiEsito {
+  pdf_url: string;
+  segmenti: AtAnalisiSegmento[];
+  note: string[];
+}
+
+/** Mirror di `ATAnalisiRequest` (`api/treasureiq/api.py`). */
+export const postAtAnalisi = (codiceIstat: string, pdfUrl: string) =>
+  call<AtAnalisiEsito>("/api/at-analisi", {
+    method: "POST",
+    body: JSON.stringify({ codice_istat: codiceIstat, pdf_url: pdfUrl }),
+  });
+
 export interface ChatOut {
   profilo_capito: ProfiloCapito | null;
   reply: string;
@@ -618,6 +699,13 @@ export interface ChatOut {
    * gradini per il comune del profilo, presente solo sul topic BANDI. `null`
    * fuori da quel topic o finché il backend non lo valorizza (§5.2). */
   bandi_live?: BandiLiveEsito | null;
+  /** B4/B5 (ciclo 10) — esito del connettore letto ORA (contratto D-09,
+   *  `EsitoConnettore`), quando la risposta è stata composta leggendo il
+   *  portale al volo invece che dallo store ingerito. `null`/assente sui
+   *  comuni serviti dallo store o finché il backend non lo valorizza.
+   *  Nome campo allineato al modello backend (`EsitoConnettore`) — da
+   *  riconfermare in integrazione con l'arm B4. */
+  esito_connettore?: EsitoConnettore | null;
 }
 
 /** Un candidato di disambiguazione comune. `codice_istat` serve a rimandare la

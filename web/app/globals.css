@@ -2894,6 +2894,183 @@ a {
   color: var(--sumi-soft);
 }
 
+/* Scheda «letto ora» (B5, ciclo 10): connettore letto dal vivo, stesso
+   registro delle altre card lette al volo — barra sinistra ambra
+   (`--yamabuki`), mai un verdetto. Recapiti onesti: un campo assente rende
+   la riga "non pubblicato", non un vuoto silenzioso (D-05). */
+.scheda-letto-ora {
+  margin: var(--ma-3) 0 0;
+  padding: var(--ma-4);
+  border: 1px solid var(--kasumi);
+  border-left: 3px solid var(--yamabuki, #e0a80d);
+  border-radius: 6px;
+  background: var(--yamabuki-wash);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ma-3);
+}
+.scheda-letto-ora__provenienza-testa {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--yamabuki-deep);
+}
+.scheda-letto-ora__uffici {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--ma-3);
+}
+.scheda-letto-ora__ufficio {
+  border-top: 1px solid var(--kasumi);
+  padding-top: var(--ma-2);
+  display: flex;
+  flex-direction: column;
+  gap: 0.2em;
+}
+.scheda-letto-ora__ufficio-nome {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--sumi, #1a1a1a);
+}
+.scheda-letto-ora__lista {
+  margin: var(--ma-2) 0 0;
+  display: grid;
+  gap: 0.3em;
+}
+.scheda-letto-ora__riga {
+  display: flex;
+  gap: var(--ma-2);
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+.scheda-letto-ora__riga dt {
+  min-width: 5.5em;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--sumi-soft);
+}
+.scheda-letto-ora__riga dd {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+}
+.scheda-letto-ora__link {
+  color: var(--ai);
+}
+.scheda-letto-ora__link:hover {
+  color: var(--ai-deep);
+}
+.scheda-letto-ora__assente {
+  color: var(--sumi-faint);
+  font-style: italic;
+}
+.scheda-letto-ora__provenienza {
+  margin-top: 0.3em;
+  font-size: 0.72rem;
+  font-style: italic;
+  color: var(--sumi-soft);
+}
+.scheda-letto-ora__at {
+  border-top: 1px solid var(--kasumi);
+  padding-top: var(--ma-3);
+}
+.scheda-letto-ora__at-titolo {
+  margin: 0 0 var(--ma-2);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--sumi-soft);
+}
+.scheda-letto-ora__at-vuoto {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--sumi-soft);
+}
+.scheda-letto-ora__bandi {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--ma-2);
+}
+.scheda-letto-ora__bando {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3em;
+  font-size: 0.85rem;
+}
+.scheda-letto-ora__pdf-flag {
+  display: inline-block;
+  padding: 0.05em 0.4em;
+  border-radius: 3px;
+  background: var(--wakatake-wash);
+  color: var(--wakatake-deep);
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+.scheda-letto-ora__analizza {
+  padding: 0.3em 0.7em;
+  border: 1px solid var(--yamabuki-deep);
+  border-radius: 5px;
+  background: #fff;
+  color: var(--yamabuki-deep);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.scheda-letto-ora__analizza:hover {
+  background: var(--yamabuki-deep);
+  color: #fff;
+}
+.scheda-letto-ora__carico {
+  margin: 0;
+  font-size: 0.78rem;
+  color: var(--sumi-soft);
+}
+.scheda-letto-ora__errore {
+  margin: 0;
+  font-size: 0.78rem;
+  color: var(--sumi-soft);
+}
+.scheda-letto-ora__requisiti {
+  margin: 0.3em 0 0;
+  padding-left: 1.2em;
+  font-size: 0.82rem;
+  color: var(--sumi-soft);
+  display: grid;
+  gap: 0.5em;
+}
+.scheda-letto-ora__segmento-kind {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--yamabuki-deep);
+}
+.scheda-letto-ora__segmento-pagina {
+  font-size: 0.72rem;
+  color: var(--sumi-faint);
+}
+.scheda-letto-ora__segmento-testo {
+  margin: 0.15em 0 0;
+  white-space: pre-line;
+}
+.scheda-letto-ora__note {
+  margin: 0.4em 0 0;
+  padding-left: 1.2em;
+  font-size: 0.76rem;
+  font-style: italic;
+  color: var(--sumi-faint);
+}
+
 /* ------------------------------------------------- integration cost table */
 
 /* Cost per record, not cost in total: a comune needing a bespoke connector for

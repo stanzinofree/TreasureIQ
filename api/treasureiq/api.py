@@ -75,13 +75,16 @@ from treasureiq.sonda_live import (
     comune_per_codice,
     recupera_contatti,
 )
-from treasureiq.bandi_live import BandiLiveEsito, bandi_arricchiti
+from treasureiq.bandi_live import BandiLiveEsito, _filtra_pdf_stesso_host, bandi_arricchiti
+from treasureiq.connettore import EsitoConnettore
+from treasureiq.extract.corpus import build_corpus, collect_pdf_segments
 from treasureiq.mappa_connettore import (
     Bando,
     CategoriaServizio,
     MappaConnettore,
     SchedaServizio,
     ServizioLink,
+    _base_con_schema,
     bandi_criteri,
     mappa_connettore,
     scheda_servizio,
@@ -1021,6 +1024,11 @@ class ChatOut(BaseModel):
     #: esito onesto a due gradini REST. `None` fuori dal topic bandi. Serializzato
     #: tal quale dal modello `bandi_live` (le cifre restano fuori dal testo, D-07).
     bandi_live: BandiLiveEsito | None = None
+    #: Esito grezzo del connettore (B4, ramo M4_CONNETTORE): uffici/recapiti/AT
+    #: strutturati e verbatim, letti da `treasureiq.connettore`. `None` quando
+    #: il connettore non ha risposto o il ramo non e' scattato (A7). La card
+    #: strutturata del web (B5) legge da qui, mai dal testo `reply` (D-07).
+    esito_connettore: EsitoConnettore | None = None
 
 
 def _profilo_capito(*, answer, profile, message: str, comune_istat: str | None = None) -> ProfiloCapitoOut:
@@ -2170,6 +2178,102 @@ async def bandi_criteri_live_route(codice_istat: str) -> BandiLiveEsito:
         ) from exc
 
 
+class ATAnalisiRequest(BaseModel):
+    """Un solo PDF di Amministrazione Trasparente, scelto dal cittadino o dal
+    pannello fra quelli che il connettore ha già elencato — mai una scansione
+    di massa (B4, D-11): il budget copre l'allegato richiesto, non l'intero
+    indice."""
+
+    codice_istat: str
+    pdf_url: str = Field(max_length=2048)
+
+
+class ATAnalisiSegmento(BaseModel):
+    """Un frammento di testo del PDF, VERBATIM da `pypdf` (D-07): nessuna
+    cifra qui è mai passata da un LLM."""
+
+    kind: str
+    url: str
+    pagina: int | None = None
+    testo: str
+
+
+class ATAnalisiResponse(BaseModel):
+    pdf_url: str
+    segmenti: list[ATAnalisiSegmento]
+    note: list[str]
+
+
+def _analizza_at_pdf(codice_istat: str, pdf_url: str) -> ATAnalisiResponse:
+    """Scarica e legge UN allegato PDF sul dominio del comune (D-08/D-11).
+
+    Guardia host: `_filtra_pdf_stesso_host` (già la guardia di `bandi_live`,
+    stesso stampo — D-08) scarta ogni URL che non stia sul dominio del
+    comune, altrimenti l'endpoint sarebbe un downloader arbitrario (SSRF).
+    Il testo estratto è quello di `collect_pdf_segments`/`build_corpus`
+    (stessa pipeline di `bandi_live.py:38`, D-07): verbatim da `pypdf`, mai
+    riscritto da un modello.
+    """
+    comune = comune_per_codice(codice_istat)
+    if comune is None:
+        raise HTTPException(status_code=404, detail="Comune non riconosciuto.")
+    base = _base_con_schema(comune.sito)
+    if base is None:
+        raise HTTPException(status_code=404, detail="Il comune non ha un sito noto.")
+
+    ammessi, _note_host = _filtra_pdf_stesso_host(base, [pdf_url])
+    if not ammessi:
+        raise HTTPException(
+            status_code=400,
+            detail="Il PDF non sta sul dominio del comune: rifiutato (guardia host).",
+        )
+
+    from treasureiq.ingest.censimento import _Sonda
+
+    with _Sonda() as sonda:
+        pdf_segments, notes, skipped, _illegible_count = collect_pdf_segments(
+            sonda._client, base, ammessi
+        )
+        _corpus, _boundary_segments, visible_segments = build_corpus(
+            body_text="", page_url=pdf_url, pdf_segments=pdf_segments
+        )
+
+    for skip in skipped:
+        notes.append(f"non analizzato: {skip.url} ({skip.reason})")
+
+    return ATAnalisiResponse(
+        pdf_url=pdf_url,
+        segmenti=[
+            ATAnalisiSegmento(
+                kind=segment.kind,
+                url=segment.url,
+                pagina=segment.page_number,
+                testo=segment.text,
+            )
+            for segment in visible_segments
+        ],
+        note=notes,
+    )
+
+
+@app.post(
+    "/api/at-analisi",
+    response_model=ATAnalisiResponse,
+    tags=["Cittadino"],
+    dependencies=[Depends(limita_modello)],
+)
+async def at_analisi_route(payload: ATAnalisiRequest) -> ATAnalisiResponse:
+    """Analisi on-demand di UN PDF di Amministrazione Trasparente (D-11, B4).
+
+    Mai automatica di massa: il cittadino (o il pannello) sceglie un PDF già
+    elencato dal connettore, questa rotta lo apre. Guardia host: 400 se il
+    PDF non sta sul dominio del comune (D-08, no SSRF verso un host
+    arbitrario). Importi/scadenze/criteri restano VERBATIM dal PDF (D-07):
+    nessun LLM li tocca in questa rotta.
+    """
+    return await asyncio.to_thread(_analizza_at_pdf, payload.codice_istat, payload.pdf_url)
+
+
 @app.post("/api/chat", response_model=ChatOut, tags=["Cittadino"], dependencies=[Depends(limita_modello)])
 async def chat(body: ChatIn, request: Request) -> ChatOut:
     """Anonymous-by-default chat over Albano public data.
@@ -2302,6 +2406,7 @@ async def chat(body: ChatIn, request: Request) -> ChatOut:
             else None
         ),
         bandi_live=answer.bandi_live,
+        esito_connettore=answer.esito_connettore,
     )
 
 

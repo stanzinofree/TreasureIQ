@@ -73,6 +73,13 @@ class Topic(str, Enum):
     #: topic superstite più vicino — l'anagrafe — rispondendo con la pagina
     #: sbagliata invece che con «non risulta pubblicato».
     TRIBUTI = "tributi"
+    #: Bandi e avvisi pubblici letti dal vivo da Amministrazione Trasparente
+    #: (KAPI 7, bandi-live-agid), non dallo snapshot ingerito: un cittadino
+    #: che chiede «che bandi ci sono?» aspetta un elenco aggiornato ad ora,
+    #: non l'ultima fotografia dell'ingestione. Attenzione alla guardia in
+    #: `extract_intent`: «bandi per i mezzi pubblici» nomina "bandi" ma parla
+    #: di TRASPORTO_PUBBLICO, non di un elenco di avvisi.
+    BANDI = "bandi"
     #: The model could not map the message onto any of the above. Never
     #: guessed into just to avoid this value — see the system prompt.
     SCONOSCIUTO = "sconosciuto"
@@ -187,6 +194,10 @@ TOPIC_KEYWORDS: dict[Topic, tuple[str, ...]] = {
         "tasse comunali",
         "imposta municipale",
     ),
+    #: §5.4 pinnate: NON aggiungere "trasporto" o "mezzi" qui — sono di
+    #: TRASPORTO_PUBBLICO, e la guardia in `extract_intent`
+    #: (`_e_bando_di_trasporto_pubblico`) si aspetta gli insiemi disgiunti.
+    Topic.BANDI: ("bando", "bandi", "avviso pubblico", "avvisi pubblici", "graduatoria"),
     Topic.SCONOSCIUTO: (),
 }
 
@@ -326,6 +337,24 @@ def _disabilita_dichiarata_nel_testo(messaggio: str) -> bool:
     if _figlio_disabile_dichiarato_nel_testo(messaggio):
         return False
     return bool(_DISABILITA_RE.search(messaggio))
+
+
+def _e_bando_di_trasporto_pubblico(messaggio: str) -> bool:
+    """«bandi per i mezzi pubblici», «bandi trasporto pubblico»: il messaggio
+    nomina "bandi" ma l'argomento vero e' l'abbonamento/agevolazione sul
+    trasporto pubblico locale, non un elenco generico di avvisi pubblici.
+
+    Stessa idea delle trappole gia' presidiate su comune («bolletta»,
+    «minori») e su topic generico (`_BONUS_GENERICO_RE`): una parola-chiave
+    da sola non basta quando un'altra, piu' specifica, compare nella stessa
+    frase. Senza questa guardia «bandi per i mezzi pubblici» risolveva
+    BANDI solo perche' "bandi" e' la prima parola-chiave incontrata, e
+    TRASPORTO_PUBBLICO (introdotta proprio per questa frase, vedi il
+    commento sul suo valore nell'enum) non veniva mai raggiunto."""
+    haystack = messaggio.casefold()
+    ha_bandi = any(k in haystack for k in TOPIC_KEYWORDS[Topic.BANDI])
+    ha_trasporto = any(k in haystack for k in TOPIC_KEYWORDS[Topic.TRASPORTO_PUBBLICO])
+    return ha_bandi and ha_trasporto
 
 
 def _confirm_beneficiary_role(
@@ -622,6 +651,14 @@ async def extract_intent(
             # mai. Senza un aggancio nel testo il topic torna a SCONOSCIUTO —
             # il segnale con cui `respond` chiede quale categoria.
             updates["topic"] = Topic.SCONOSCIUTO
+        if (
+            updates.get("topic", parsed.topic) is Topic.BANDI
+            and _e_bando_di_trasporto_pubblico(message)
+        ):
+            # Guardia bandi/trasporto: «bandi per i mezzi pubblici» non e'
+            # una richiesta di elenco avvisi, e' TRASPORTO_PUBBLICO che
+            # nomina anche "bandi" (vedi `_e_bando_di_trasporto_pubblico`).
+            updates["topic"] = Topic.TRASPORTO_PUBBLICO
         if updates:
             parsed = parsed.model_copy(update=updates)
         return parsed

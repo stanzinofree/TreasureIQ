@@ -64,6 +64,12 @@ from treasureiq.chat.intent import (
 from treasureiq.chat.categorie import Categoria, topics_di
 from treasureiq.chat.nomi_genere import sesso_da_nome
 from treasureiq.extract.providers import LLMProvider, load_provider
+# Import del MODULO, non della funzione: i test mockano
+# `treasureiq.bandi_live.bandi_arricchiti` con `mock.patch`, che sostituisce
+# l'attributo sul modulo — un `from ... import bandi_arricchiti` legherebbe
+# qui un nome che il patch non raggiungerebbe piu'.
+from treasureiq import bandi_live
+from treasureiq.bandi_live import BandiLiveEsito
 from treasureiq.integration import (
     AccessMode,
     Ente,
@@ -359,6 +365,11 @@ class ChatAnswer:
     numeri_utili: NumeriUtili | None = None
     comuni_ambigui: list[ComuneAmbiguo] | None = None
     scan: ScanStato | None = None
+    #: Esito grezzo di `bandi_live.bandi_arricchiti`, topic BANDI soltanto.
+    #: I criteri e le cifre di ogni bando (`Requirements`, importi, scadenze)
+    #: viaggiano SOLO qui, mai interpolati in `reply`: il verbalizzatore non
+    #: tocca mai questo campo (D-07, «il verbalizzatore corrompe le cifre»).
+    bandi_live: BandiLiveEsito | None = None
 
 
 def _resolve_comune(*, hint: str | None) -> tuple[str | None, str | None]:
@@ -2436,6 +2447,105 @@ def _e_cambio_persona(message: str, slots: object) -> bool:
     return any(getattr(slots, campo, None) is not None for campo in _SLOT_ANAGRAFICI)
 
 
+async def _risposta_bandi(
+    *, profile: CitizenProfile | None, comune_istat: str | None
+) -> ChatAnswer:
+    """Ramo Topic.BANDI (KAPI 7, bandi-live-agid): legge dal vivo la sezione
+    Amministrazione Trasparente del comune, invece di cercare nello snapshot
+    ingerito che alimenta `_search_opportunities` — un bando pubblicato oggi
+    non e' nell'ultima fotografia dell'ingestione.
+
+    Il comune e' quello del PROFILO se presente, mai quello nominato nel
+    testo del messaggio (memoria «ricerca live cieca al comune di profilo»):
+    un cittadino il cui profilo ha gia' un comune non deve vedersi scansionare
+    un comune diverso solo perche' lo ha nominato di sfuggita nella stessa
+    frase (R-9). In assenza di profilo si usa il comune scelto esplicitamente
+    (mai dedotto dal testo qui: quello lo fa gia' `_componi_risposta` a monte
+    per gli altri rami) e, in ultima istanza, quello di default.
+
+    Il testo di risposta e' FISSO, mai passato al verbalizzatore (D-07,
+    memoria «il verbalizzatore corrompe le cifre»): requisiti, importi e
+    scadenze di ogni bando viaggiano solo in `ChatAnswer.bandi_live`, il
+    `BandiLiveEsito` cosi' come l'ha prodotto `bandi_live.bandi_arricchiti`.
+
+    Degradazione onesta se la scansione solleva (portale irraggiungibile,
+    timeout, risposta non valida): mai un'eccezione al cittadino.
+    """
+    target_istat = (
+        (profile.comune_istat if profile is not None else None)
+        or comune_istat
+        or DEFAULT_COMUNE_ISTAT
+    )
+
+    try:
+        esito = await asyncio.to_thread(bandi_live.bandi_arricchiti, target_istat)
+    except Exception:
+        logger.warning("bandi_arricchiti fallita per %s", target_istat, exc_info=True)
+        return ChatAnswer(
+            reply=(
+                "Non sono riuscito a leggere ora la sezione Amministrazione "
+                "Trasparente del comune. Riprova tra qualche minuto, oppure "
+                "rivolgiti direttamente all'URP."
+            ),
+            topic=Topic.BANDI,
+            kind=QuestionKind.INFORMAZIONE,
+            data_gap="not_verified",
+            needs_clarification=False,
+            matches=[],
+            spid_required=False,
+            spid_reason=None,
+            access_mode=None,
+            citizen_effort=1,
+            info=None,
+            bandi_live=None,
+        )
+
+    if esito.esito == "comune_ignoto":
+        reply = (
+            "Non riconosco questo comune per la ricerca dei bandi. Verifica "
+            "il comune scelto e riprova."
+        )
+        data_gap = "comune_sconosciuto"
+    elif esito.esito == "non_coperto":
+        # Testo advocacy: il frontend lo aggancia a `ChiediApertura`, non e'
+        # un rifiuto ma un invito a chiedere l'apertura dei dati al comune.
+        reply = (
+            f"Il portale di {esito.comune_nome} non pubblica ancora i bandi in "
+            "un formato che riesco a leggere in automatico. Non e' un dato "
+            "negato, e' un'apertura che manca: puoi chiedere al comune di "
+            "pubblicarli in un formato leggibile."
+        )
+        data_gap = "comune_non_indirizzabile"
+    elif esito.esito == "coperto_senza_bandi":
+        reply = (
+            f"Ho letto ora la sezione Amministrazione Trasparente di "
+            f"{esito.comune_nome}. Verificato il {esito.verificato_il}. "
+            "Nessun bando pubblicato al momento."
+        )
+        data_gap = "none_found"
+    else:  # coperto_con_bandi
+        reply = (
+            f"Ho letto ora la sezione Amministrazione Trasparente di "
+            f"{esito.comune_nome}. Verificato il {esito.verificato_il}."
+        )
+        data_gap = None
+
+    return ChatAnswer(
+        reply=reply,
+        topic=Topic.BANDI,
+        kind=QuestionKind.INFORMAZIONE,
+        data_gap=data_gap,
+        needs_clarification=False,
+        matches=[],
+        spid_required=False,
+        spid_reason=None,
+        access_mode=None,
+        citizen_effort=0,
+        info=None,
+        bandi_live=esito,
+    )
+
+
 async def _componi_risposta(
     *,
     message: str,
@@ -2512,6 +2622,17 @@ async def _componi_risposta(
     # produce a verdict, whatever `kind` the model emitted on the bare reply.
     if intent.topic in INFORMATIONAL_BY_NATURE_TOPICS:
         intent = intent.model_copy(update={"kind": QuestionKind.INFORMAZIONE})
+
+    # KAPI 7 (bandi-live-agid): i bandi si leggono dal vivo, non dallo
+    # snapshot ingerito che alimenta `_search_opportunities` — questo ramo
+    # bypassa sia il rail INFORMAZIONE generico sia quello AGEVOLAZIONE, un
+    # bando e' un elenco, non un verdetto di `match/engine.py`.
+    # `_tema_sostenuto` e' lo stesso riscontro lessicale che gli altri topic
+    # ottengono dalla ricerca per parole chiave: senza le parole del
+    # cittadino a confermarlo, un BANDI del modello non ancorato non basta a
+    # far partire una scansione di rete.
+    if intent.topic is Topic.BANDI and _tema_sostenuto(topic=Topic.BANDI, testo=message):
+        return await _risposta_bandi(profile=profile, comune_istat=comune_istat)
 
     if intent.topic is Topic.SCONOSCIUTO and richiesta_categoria is None:
         # D-55: un topic sconosciuto/generico ("che bonus posso avere?") con

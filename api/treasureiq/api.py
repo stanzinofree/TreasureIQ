@@ -1017,6 +1017,10 @@ class ChatOut(BaseModel):
     #: Stato dello scan del comune riconosciuto (B6, D-S6). `None` quando non
     #: c'e' un comune da guardare (nessun comune nominato/scelto in questo giro).
     scan: ScanStatoOut | None = None
+    #: Esito live dei bandi (topic BANDI): criteri quote-gated, data di verifica,
+    #: esito onesto a due gradini REST. `None` fuori dal topic bandi. Serializzato
+    #: tal quale dal modello `bandi_live` (le cifre restano fuori dal testo, D-07).
+    bandi_live: BandiLiveEsito | None = None
 
 
 def _profilo_capito(*, answer, profile, message: str, comune_istat: str | None = None) -> ProfiloCapitoOut:
@@ -2286,6 +2290,7 @@ async def chat(body: ChatIn, request: Request) -> ChatOut:
             if answer.scan is not None
             else None
         ),
+        bandi_live=answer.bandi_live,
     )
 
 

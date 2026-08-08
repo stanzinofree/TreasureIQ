@@ -471,6 +471,93 @@ export interface ProfiloCapito {
   disabilita_nucleo: boolean | null;
 }
 
+/** Mirror esatto di `Requirements` (`api/treasureiq/schema.py`). Ogni campo
+ *  `null`/vuoto significa "non dichiarato dalla fonte", MAI "nessun vincolo"
+ *  — la UI deve distinguere le due cose, mai trattare un `null` come "chiunque
+ *  è ammesso". `isee_max`/`isee_min` arrivano come stringa (Decimal → JSON
+ *  string in pydantic v2): vanno renderizzati letteralmente, mai riletti come
+ *  number e ricalcolati. */
+export interface Requirements {
+  isee_max: string | null;
+  isee_min: string | null;
+  eta_min: number | null;
+  eta_max: number | null;
+  residenza_required: boolean;
+  residenza_comuni: string[];
+  nucleo_min: number | null;
+  figli_minori_required: boolean | null;
+  disabilita_required: boolean | null;
+  sesso: "f" | "m" | null;
+  disabilita_nucleo_required: boolean | null;
+  employment_status: string[];
+  other: string[];
+  /** True solo quando il valore viene da un campo tipizzato della fonte, non
+   *  da un'estrazione di prosa (D-05/D-05-bis). Non è un vincolo di
+   *  ammissibilità: è provenienza, va mostrata come tale se mostrata. */
+  source_typed: boolean;
+}
+
+/** Mirror esatto di `Money` (`schema.py`). Un importo, forse un range, forse
+ *  aperto: `note` copre i casi che resistono a una struttura (es. "50% della
+ *  spesa fino a capienza del fondo"). */
+export interface Amount {
+  min_eur: string | null;
+  max_eur: string | null;
+  note: string | null;
+}
+
+/** Mirror esatto di `Source` (`schema.py`), i campi usati dalla card
+ *  bandi-live per citare la fonte e collegarsi al portale. */
+export interface OpportunitySource {
+  ente: string;
+  ente_codice_istat: string | null;
+  connector: string;
+  url: string;
+  fetched_at: string;
+}
+
+/** Mirror esatto di `Opportunity` (`schema.py`) — i campi che la card
+ *  bandi-live legge davvero. Non un mirror totale del modello Python (i
+ *  campi di strumentazione D-16/D-17 non servono a questa card e non sono
+ *  qui), ma ogni campo presente è letterale, mai ricomposto. */
+export interface Opportunity {
+  id: string;
+  title: string;
+  summary: string | null;
+  kind: string;
+  requirements: Requirements;
+  amount: Amount | null;
+  deadline: string | null;
+  source: OpportunitySource;
+  confidence: string;
+  extraction_notes: string[];
+}
+
+/** Mirror esatto di `BandoArricchito` (`api/treasureiq/bandi_live.py` §5.2).
+ *  `scadenza` è presente SOLO se `scadenza_verificata` (D-07 quote-gate):
+ *  se `false`, `scadenza` va ignorata dalla UI anche se non è `null`. */
+export interface BandoArricchito {
+  opportunity: Opportunity;
+  scadenza: string | null;
+  scadenza_verificata: boolean;
+}
+
+/** Mirror esatto di `BandiLiveEsito` (`bandi_live.py` §5.2). Arriva dentro
+ *  `ChatOut.bandi_live` sulla risposta chat quando il topic è BANDI: nessuna
+ *  fetch separata, il payload è già calcolato server-side (B3). */
+export interface BandiLiveEsito {
+  codice_istat: string;
+  comune_nome: string;
+  esito:
+    | "coperto_con_bandi"
+    | "coperto_senza_bandi"
+    | "non_coperto"
+    | "comune_ignoto";
+  gradino: "cpt" | "pages" | null;
+  verificato_il: string;
+  bandi: BandoArricchito[];
+}
+
 export interface ChatOut {
   profilo_capito: ProfiloCapito | null;
   reply: string;
@@ -509,6 +596,10 @@ export interface ChatOut {
    * (via ScanProvider): banda «sto aggiornando» + bottone «Ricarica», mostrati
    * uguali in chat e nel pannello. */
   scan?: ScanStato | null;
+  /** B3/B4 (KAPI 7, bandi-live-agid) — esito della scansione bandi-live a due
+   * gradini per il comune del profilo, presente solo sul topic BANDI. `null`
+   * fuori da quel topic o finché il backend non lo valorizza (§5.2). */
+  bandi_live?: BandiLiveEsito | null;
 }
 
 /** Un candidato di disambiguazione comune. `codice_istat` serve a rimandare la

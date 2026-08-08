@@ -56,6 +56,8 @@ import {
   fetchServiziCategoria,
   login,
   type Bando,
+  type BandiLiveEsito,
+  type BandoArricchito,
   type CategoriaServizio,
   type ChatCost,
   type ChatOut,
@@ -67,6 +69,7 @@ import {
   type InfoWebResult,
   type MappaConnettore,
   type Match,
+  type Requirements,
   type SchedaServizio,
   type ServizioLink,
 } from "@/lib/api";
@@ -739,6 +742,226 @@ function BandiComune({ istat }: { istat: string }) {
           </ul>
         </>
       )}
+    </div>
+  );
+}
+
+/** Un criterio non nullo, per la resa generica del pannello: `etichetta`
+ *  statica dell'interfaccia, `valore` copiato letteralmente dal campo
+ *  tipizzato (mai ricomposto). */
+type CriterioReso = { chiave: string; etichetta: string; valore: string };
+
+/** Estrae dai `Requirements` SOLO i campi effettivamente dichiarati (§5.2):
+ *  ogni valore che arriva qui è il campo tipizzato, senza alcuna concatenazione
+ *  numerica — la stringa "€"/"anni"/"persone" è un'unità di misura statica
+ *  dell'interfaccia, non un ricalcolo del dato (D-05). */
+function criteriRequisiti(requirements: Requirements): CriterioReso[] {
+  const criteri: CriterioReso[] = [];
+  if (requirements.isee_max !== null) {
+    criteri.push({ chiave: "isee_max", etichetta: "ISEE massimo", valore: `${requirements.isee_max} €` });
+  }
+  if (requirements.isee_min !== null) {
+    criteri.push({ chiave: "isee_min", etichetta: "ISEE minimo", valore: `${requirements.isee_min} €` });
+  }
+  if (requirements.eta_min !== null) {
+    criteri.push({ chiave: "eta_min", etichetta: "Età minima", valore: `${requirements.eta_min} anni` });
+  }
+  if (requirements.eta_max !== null) {
+    criteri.push({ chiave: "eta_max", etichetta: "Età massima", valore: `${requirements.eta_max} anni` });
+  }
+  if (requirements.nucleo_min !== null) {
+    criteri.push({
+      chiave: "nucleo_min",
+      etichetta: "Nucleo familiare minimo",
+      valore: `${requirements.nucleo_min} persone`,
+    });
+  }
+  if (requirements.figli_minori_required !== null) {
+    criteri.push({
+      chiave: "figli_minori_required",
+      etichetta: "Figli minori",
+      valore: requirements.figli_minori_required ? "richiesti" : "non richiesti",
+    });
+  }
+  if (requirements.disabilita_required !== null) {
+    criteri.push({
+      chiave: "disabilita_required",
+      etichetta: "Disabilità del richiedente",
+      valore: requirements.disabilita_required ? "richiesta" : "non richiesta",
+    });
+  }
+  if (requirements.disabilita_nucleo_required !== null) {
+    criteri.push({
+      chiave: "disabilita_nucleo_required",
+      etichetta: "Disabilità nel nucleo",
+      valore: requirements.disabilita_nucleo_required ? "richiesta" : "non richiesta",
+    });
+  }
+  if (requirements.sesso !== null) {
+    criteri.push({
+      chiave: "sesso",
+      etichetta: "Sesso richiesto",
+      valore: requirements.sesso === "f" ? "femminile" : "maschile",
+    });
+  }
+  if (requirements.employment_status.length > 0) {
+    criteri.push({
+      chiave: "employment_status",
+      etichetta: "Situazione lavorativa",
+      valore: requirements.employment_status.join(", "),
+    });
+  }
+  if (requirements.residenza_comuni.length > 0) {
+    criteri.push({
+      chiave: "residenza_comuni",
+      etichetta: "Comuni di residenza ammessi",
+      valore: requirements.residenza_comuni.join(", "),
+    });
+  } else if (requirements.residenza_required) {
+    criteri.push({ chiave: "residenza_required", etichetta: "Residenza", valore: "richiesta nel comune" });
+  }
+  requirements.other.forEach((voce, indice) => {
+    criteri.push({ chiave: `other-${indice}`, etichetta: "Altro criterio", valore: voce });
+  });
+  return criteri;
+}
+
+/** Un singolo bando, con un pannello criteri richiudibile. Card gialla «letto
+ *  dal vivo» (stesse classi di `BandiComune`/`MappaServizi`, riga 617): il
+ *  giallo qui non è decorativo, segnala un dato estratto dal vivo, non
+ *  ingerito. La scadenza si mostra SOLO se `scadenza_verificata` (D-07): una
+ *  scadenza non citata testualmente dalla fonte non è mostrata, punto. */
+function BandoLive({
+  bando,
+  verificatoIl,
+  formattaData,
+}: {
+  bando: BandoArricchito;
+  verificatoIl: string;
+  formattaData: (iso: string) => string;
+}) {
+  const [aperto, setAperto] = useState(false);
+  const { opportunity } = bando;
+  const criteri = criteriRequisiti(opportunity.requirements);
+
+  return (
+    <li className="mappa-servizi__scheda">
+      <span className="mappa-servizi__scheda-titolo">{opportunity.title}</span>
+      {opportunity.summary && (
+        <span className="mappa-servizi__scheda-campo">
+          <span className="mappa-servizi__scheda-etichetta">Descrizione</span>
+          {opportunity.summary}
+        </span>
+      )}
+      {opportunity.amount && (
+        <span className="mappa-servizi__scheda-campo">
+          <span className="mappa-servizi__scheda-etichetta">Importo</span>
+          {[
+            opportunity.amount.min_eur !== null ? `da ${opportunity.amount.min_eur} €` : null,
+            opportunity.amount.max_eur !== null ? `a ${opportunity.amount.max_eur} €` : null,
+            opportunity.amount.note,
+          ]
+            .filter((parte): parte is string => parte !== null)
+            .join(" ")}
+        </span>
+      )}
+      {bando.scadenza_verificata && bando.scadenza && (
+        <span className="mappa-servizi__scheda-campo">
+          <span className="mappa-servizi__scheda-etichetta">Scadenza</span>
+          {formattaData(bando.scadenza)}
+        </span>
+      )}
+      <button
+        type="button"
+        className="mappa-servizi__scheda-btn"
+        onClick={() => setAperto((valore) => !valore)}
+      >
+        {aperto ? "Nascondi criteri" : "Vedi criteri"}
+      </button>
+      {aperto && (
+        <>
+          {criteri.length > 0 ? (
+            criteri.map((criterio) => (
+              <span className="mappa-servizi__scheda-campo" key={criterio.chiave}>
+                <span className="mappa-servizi__scheda-etichetta">{criterio.etichetta}</span>
+                {criterio.valore}
+              </span>
+            ))
+          ) : (
+            <span className="mappa-servizi__scheda-campo">
+              <span className="mappa-servizi__scheda-etichetta">Criteri</span>
+              Non dichiarati dalla fonte.
+            </span>
+          )}
+        </>
+      )}
+      <a
+        className="mappa-servizi__scheda-btn"
+        href={opportunity.source.url}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Apri sul portale ↗
+      </a>
+      <span className="mappa-servizi__scheda-footer">Verificato il {formattaData(verificatoIl)}</span>
+    </li>
+  );
+}
+
+/** Bandi letti dal vivo direttamente sulla risposta chat (KAPI 7,
+ *  bandi-live-agid, B3/B4): a differenza di `BandiComune` (sola
+ *  Amministrazione Trasparente, mai un verdetto), questo pannello arriva già
+ *  dentro `reply.bandi_live` — nessuna fetch qui, il payload è calcolato
+ *  server-side (due gradini REST, cache TTL, D-05/D-07). Si limita a
+ *  renderlo, mai a ricomporlo. */
+function BandiLive({ esito }: { esito: BandiLiveEsito }) {
+  function formattaData(iso: string): string {
+    const d = new Date(iso);
+    if (Number.isNaN(d.getTime())) return iso.slice(0, 10);
+    const gg = String(d.getDate()).padStart(2, "0");
+    const mm = String(d.getMonth() + 1).padStart(2, "0");
+    return `${gg}/${mm}/${d.getFullYear()}`;
+  }
+
+  // `comune_ignoto`: nessuna sonda tentata, nessun guscio da mostrare (D-B7).
+  if (esito.esito === "comune_ignoto") return null;
+
+  if (esito.esito === "non_coperto") {
+    return (
+      <div className="bandi-comune">
+        <p className="bandi-comune__caveat">
+          Non sono riuscito a leggere i bandi di {esito.comune_nome} dal vivo: il portale non espone
+          Amministrazione Trasparente né pagine bandi in una forma che riesco a leggere.
+        </p>
+        <Segnalazione codiceIstat={esito.codice_istat} ente={esito.comune_nome} office={null} />
+      </div>
+    );
+  }
+
+  if (esito.esito === "coperto_senza_bandi") {
+    return (
+      <div className="bandi-comune">
+        <p className="bandi-comune__caveat">
+          Nessun bando pubblicato al {formattaData(esito.verificato_il)}.
+        </p>
+      </div>
+    );
+  }
+
+  // coperto_con_bandi
+  if (esito.bandi.length === 0) return null;
+  return (
+    <div className="bandi-comune">
+      <ul className="bandi-comune__lista">
+        {esito.bandi.map((bando) => (
+          <BandoLive
+            key={bando.opportunity.id}
+            bando={bando}
+            verificatoIl={esito.verificato_il}
+            formattaData={formattaData}
+          />
+        ))}
+      </ul>
     </div>
   );
 }
@@ -1457,6 +1680,11 @@ export default function Chat() {
                 {m.reply.connettore && (
                   <BandiComune istat={m.reply.connettore.codice_istat} />
                 )}
+
+                {/* B4 (KAPI 7, bandi-live-agid): esito verificato del topic
+                    BANDI, già dentro `reply.bandi_live` (B3) — nessuna
+                    seconda fetch, mai un secondo scan dello stesso portale. */}
+                {m.reply.bandi_live && <BandiLive esito={m.reply.bandi_live} />}
 
                 {m.reply.kind === "informazione" ? (
                   // D-19 — the INFORMAZIONE rail never renders a verdict, a

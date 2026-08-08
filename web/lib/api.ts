@@ -540,6 +540,10 @@ export interface BandoArricchito {
   opportunity: Opportunity;
   scadenza: string | null;
   scadenza_verificata: boolean;
+  /** Ranking morbido profilo↔requisiti (KAPI 7): `true` se il bando risuona
+   *  coi segnali del cittadino. NON è un verdetto di idoneità — è un ordine
+   *  indicativo, «controlla i requisiti». `false` di default. */
+  consigliato: boolean;
 }
 
 /** Mirror esatto di `BandiLiveEsito` (`bandi_live.py` §5.2). Arriva dentro

@@ -69,7 +69,7 @@ from treasureiq.extract.providers import LLMProvider, load_provider
 # l'attributo sul modulo — un `from ... import bandi_arricchiti` legherebbe
 # qui un nome che il patch non raggiungerebbe piu'.
 from treasureiq import bandi_live
-from treasureiq.bandi_live import BandiLiveEsito
+from treasureiq.bandi_live import BandiLiveEsito, BandoArricchito
 from treasureiq.integration import (
     AccessMode,
     Ente,
@@ -96,7 +96,7 @@ from treasureiq.match.engine import (
     summarise,
 )
 from treasureiq.integration import load_enti
-from treasureiq.schema import CitizenProfile, Livello, Opportunity
+from treasureiq.schema import CitizenProfile, Livello, Opportunity, TargetGroup
 
 logger = logging.getLogger(__name__)
 
@@ -430,7 +430,9 @@ def _profile_from_slots(*, intent: ChatIntent, messaggio: str = "") -> CitizenPr
             else (Decimal(str(slots.isee)) if slots.isee is not None else None)
         ),
         nucleo_familiare=letti.get("nucleo_familiare", slots.nucleo_familiare),
-        figli_minori=slots.figli_minori,
+        # Come eta'/ISEE/nucleo: la regex sul testo vince sul modello, che su
+        # «2 figli minorenni» spesso non riempie lo slot (bug Andrea #2).
+        figli_minori=letti.get("figli_minori", slots.figli_minori),
         disabilita=slots.disabilita,
         sesso=sesso,
         figli_disabili=slots.figli_disabili,
@@ -2447,33 +2449,150 @@ def _e_cambio_persona(message: str, slots: object) -> bool:
     return any(getattr(slots, campo, None) is not None for campo in _SLOT_ANAGRAFICI)
 
 
+def _affinita_bando(opp: Opportunity, profile: CitizenProfile) -> int:
+    """Punteggio MORBIDO di aderenza profilo↔bando. Non è un verdotto: serve a
+    ORDINARE, mai a escludere. I requisiti tipizzati pesano più delle parole
+    nel titolo. Zero significa «nessun riscontro», non «non idoneo» — un bando
+    a punteggio 0 resta in lista, solo più in basso.
+
+    Deliberatamente prudente sui `None`: un requisito non dichiarato non è un
+    match (schema `Requirements`: `None` ≠ «nessun vincolo»). Non tocca ISEE né
+    scadenze — quelle restano dietro il quote-gate, mai dedotte qui."""
+    req = opp.requirements
+    testo = f"{opp.title} {opp.summary or ''}".lower()
+    punti = 0
+
+    # Figli minori: segnale strutturato forte, poi il richiamo nel titolo.
+    if profile.figli_minori and profile.figli_minori > 0:
+        if req.figli_minori_required is True:
+            punti += 2
+        if TargetGroup.MINORI in opp.targets or any(
+            k in testo
+            for k in (
+                "minor",
+                "figli",
+                "bambin",
+                "infanz",
+                "scuola",
+                "scolast",
+                "asilo",
+                "nido",
+                "student",
+                "mensa",
+                "doposcuola",
+            )
+        ):
+            punti += 1
+
+    # Famiglia / nucleo.
+    ha_famiglia = bool(profile.figli_minori) or bool(
+        profile.nucleo_familiare and profile.nucleo_familiare > 1
+    )
+    if ha_famiglia and (TargetGroup.FAMIGLIE in opp.targets or "famigl" in testo):
+        punti += 1
+    if (
+        req.nucleo_min is not None
+        and profile.nucleo_familiare
+        and profile.nucleo_familiare >= req.nucleo_min
+    ):
+        punti += 1
+
+    # Età: dentro la forbice dichiarata, o la fascia anziani.
+    if profile.eta is not None:
+        if (
+            req.eta_min is not None
+            and req.eta_max is not None
+            and req.eta_min <= profile.eta <= req.eta_max
+        ):
+            punti += 1
+        if profile.eta >= 65 and (
+            TargetGroup.ANZIANI in opp.targets or "anzian" in testo
+        ):
+            punti += 1
+
+    # Disabilità: del cittadino e del nucleo, distinte (D-53).
+    if profile.disabilita and req.disabilita_required is True:
+        punti += 2
+    if profile.disabilita_nucleo and req.disabilita_nucleo_required is True:
+        punti += 2
+
+    # Sesso (bandi riservati, es. contrassegno rosa) e stato occupazionale.
+    if req.sesso is not None and profile.sesso is not None and req.sesso == profile.sesso:
+        punti += 1
+    if req.employment_status and profile.employment_status in req.employment_status:
+        punti += 1
+
+    return punti
+
+
+def _ordina_bandi_per_profilo(
+    bandi: list[BandoArricchito], profile: CitizenProfile | None
+) -> tuple[list[BandoArricchito], bool]:
+    """Ordina i bandi per aderenza morbida al profilo e marca i risuonanti.
+    Ritorna `(lista, c_e_ranking)`. Ordinamento STABILE: a pari punteggio
+    l'ordine del portale è preservato. NESSUNA esclusione — la lista resta
+    intera. Senza profilo o senza alcun riscontro torna la lista intatta e
+    `False`, così il testo non promette un filtro che non c'è stato."""
+    if profile is None or not bandi:
+        return bandi, False
+    valutati = [
+        (_affinita_bando(b.opportunity, profile), indice, b)
+        for indice, b in enumerate(bandi)
+    ]
+    if not any(punti > 0 for punti, _, _ in valutati):
+        return bandi, False
+    valutati.sort(key=lambda t: (-t[0], t[1]))
+    ordinati = [
+        b.model_copy(update={"consigliato": punti > 0}) for punti, _, b in valutati
+    ]
+    return ordinati, True
+
+
 async def _risposta_bandi(
-    *, profile: CitizenProfile | None, comune_istat: str | None
+    *, message: str, profile: CitizenProfile | None, comune_istat: str | None
 ) -> ChatAnswer:
     """Ramo Topic.BANDI (KAPI 7, bandi-live-agid): legge dal vivo la sezione
     Amministrazione Trasparente del comune, invece di cercare nello snapshot
     ingerito che alimenta `_search_opportunities` — un bando pubblicato oggi
     non e' nell'ultima fotografia dell'ingestione.
 
-    Il comune e' quello del PROFILO se presente, mai quello nominato nel
-    testo del messaggio (memoria «ricerca live cieca al comune di profilo»):
-    un cittadino il cui profilo ha gia' un comune non deve vedersi scansionare
-    un comune diverso solo perche' lo ha nominato di sfuggita nella stessa
-    frase (R-9). In assenza di profilo si usa il comune scelto esplicitamente
-    (mai dedotto dal testo qui: quello lo fa gia' `_componi_risposta` a monte
-    per gli altri rami) e, in ultima istanza, quello di default.
+    Il comune segue la precedenza qui sotto: il PROFILO vince sempre (R-9,
+    memoria «ricerca live cieca al comune di profilo») — un cittadino il cui
+    profilo ha gia' un comune non deve vedersi scansionare un comune diverso
+    solo perche' lo ha nominato di sfuggita — poi la scelta esplicita, e SOLO
+    in assenza di entrambi il comune nominato nel testo (indispensabile al
+    primo turno, quando profilo e scelta sono ancora vuoti), infine il default.
 
     Il testo di risposta e' FISSO, mai passato al verbalizzatore (D-07,
     memoria «il verbalizzatore corrompe le cifre»): requisiti, importi e
     scadenze di ogni bando viaggiano solo in `ChatAnswer.bandi_live`, il
     `BandiLiveEsito` cosi' come l'ha prodotto `bandi_live.bandi_arricchiti`.
 
+    I bandi coperti vengono ORDINATI per aderenza morbida al profilo
+    (`_ordina_bandi_per_profilo`) — indicazione, non verdetto: nessuno viene
+    escluso, e il testo lo dice esplicitamente.
+
     Degradazione onesta se la scansione solleva (portale irraggiungibile,
     timeout, risposta non valida): mai un'eccezione al cittadino.
     """
+    # Precedenza del comune per la scansione bandi:
+    #  1. il comune del PROFILO (sessione/SPID) vince sempre: un cittadino con un
+    #     comune gia' stabilito non deve vedersi scansionare un comune diverso
+    #     solo perche' l'ha nominato di sfuggita (memoria «ricerca live cieca al
+    #     comune di profilo», R-9).
+    #  2. l'istat di una scelta scheda esplicita.
+    #  3. SOLO se non c'e' ne' profilo ne' scelta: il comune NOMINATO in QUESTO
+    #     messaggio («vivo a Benevento, ci sono bandi?»). Sul primo turno il
+    #     profilo client non e' ancora popolato e non arriva `comune_istat`:
+    #     senza questo si cadeva sul default Albano leggendo il comune sbagliato.
+    #     `_comune_nominato` usa `_comuni_candidati` (stoplist
+    #     «bolletta»/«minori»/connettivi), niente falsi toponimi.
+    #  4. default demo, solo come ultima risorsa.
+    nominato = _comune_nominato(message)
     target_istat = (
         (profile.comune_istat if profile is not None else None)
         or comune_istat
+        or (nominato.codice_istat if nominato is not None else None)
         or DEFAULT_COMUNE_ISTAT
     )
 
@@ -2529,6 +2648,19 @@ async def _risposta_bandi(
             f"{esito.comune_nome}. Verificato il {esito.verificato_il}."
         )
         data_gap = None
+        # Ordinamento morbido per aderenza al profilo. Non esclude nulla: se
+        # qualche bando risuona coi segnali del cittadino, lo porta in cima e
+        # aggiunge una riga onesta — è un'indicazione, non un verdetto, e i
+        # requisiti restano da controllare (schema `Confidence`: un falso «ti
+        # spetta» costa al cittadino una domanda persa e la fiducia).
+        bandi_ordinati, c_e_ranking = _ordina_bandi_per_profilo(esito.bandi, profile)
+        if c_e_ranking:
+            esito = esito.model_copy(update={"bandi": bandi_ordinati})
+            reply += (
+                " Li ho messi in ordine di aderenza al tuo profilo: è "
+                "un'indicazione, non un verdetto di idoneità — controlla i "
+                "requisiti di ciascuno."
+            )
 
     return ChatAnswer(
         reply=reply,
@@ -2632,7 +2764,14 @@ async def _componi_risposta(
     # cittadino a confermarlo, un BANDI del modello non ancorato non basta a
     # far partire una scansione di rete.
     if intent.topic is Topic.BANDI and _tema_sostenuto(topic=Topic.BANDI, testo=message):
-        return await _risposta_bandi(profile=profile, comune_istat=comune_istat)
+        # Come gli altri rail (righe ~2660/2749): se non c'è un profilo di
+        # sessione, si ricava dai segnali di QUESTO turno. Senza, il ramo bandi
+        # scattava prima e restava cieco al «vedovo, 2 figli minori» appena
+        # scritto — niente da cui ordinare i bandi per aderenza (bug Andrea #2).
+        profilo_bandi = profile or _profile_from_slots(intent=intent, messaggio=message)
+        return await _risposta_bandi(
+            message=message, profile=profilo_bandi, comune_istat=comune_istat
+        )
 
     if intent.topic is Topic.SCONOSCIUTO and richiesta_categoria is None:
         # D-55: un topic sconosciuto/generico ("che bonus posso avere?") con

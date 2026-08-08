@@ -93,11 +93,15 @@ def collect_pdf_segments(
     ranked = sorted(dict.fromkeys(pdf_urls), key=_filename_rank)
 
     segments: list[dict[str, Any]] = []
-    opened = 0
+    scaricati = 0
     for url in ranked:
         absolute_url = url if url.startswith("http") else f"{base_url}{url}"
 
-        if opened >= MAX_PDFS_PER_PAGE:
+        # Il budget vincola i DOWNLOAD effettivi, non i PDF aperti con
+        # successo: contare gli `opened` lasciava scaricare senza limite ogni
+        # allegato illeggibile (500 PDF-esca dallo stesso host → ~1 GB di
+        # traffico prima di fermarsi). Cap sui download compiuti → tetto duro.
+        if scaricati >= MAX_PDFS_PER_PAGE:
             reason = f"limite di {MAX_PDFS_PER_PAGE} allegati per pagina raggiunto"
             _skip(
                 absolute_url,
@@ -136,6 +140,8 @@ def collect_pdf_segments(
             )
             continue
 
+        scaricati += 1  # download compiuto: consuma budget anche se poi illeggibile
+
         if len(response.content) > MAX_PDF_BYTES:
             reason = f"{len(response.content)} byte, oltre il limite di {MAX_PDF_BYTES} byte"
             _skip(
@@ -170,7 +176,6 @@ def collect_pdf_segments(
             )
             continue
 
-        opened += 1
         segments.append({"kind": "allegato", "url": absolute_url, "pages": pages_text})
 
     return segments, notes, skipped, illegible_count

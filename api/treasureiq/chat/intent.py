@@ -692,6 +692,20 @@ _NUCLEO_NEL_TESTO = re.compile(
     re.I,
 )
 
+#: Numeri scritti a parole che un cittadino usa per i figli.
+_PAROLE_NUMERO = {"un": 1, "uno": 1, "una": 1, "due": 2, "tre": 3, "quattro": 4, "cinque": 5}
+
+#: «2 figli minorenni», «due figli minori», «un figlio minore», «figli
+#: piccoli»: quanti minori nel nucleo, letto dal testo come eta'/ISEE/nucleo —
+#: mai dal modello, che questo slot lo riempie in modo inaffidabile. Il
+#: qualificatore «minor…»/«minorenn…»/«piccol…» e' OBBLIGATORIO: «ho due figli»
+#: adulti non deve contare come figli minori. Conteggio assente → 1.
+_FIGLI_MINORI_NEL_TESTO = re.compile(
+    r"\b(?P<n>\d{1,2}|un|uno|una|due|tre|quattro|cinque)?\s*"
+    r"figl[io]\w*\s+(?:minorenn\w+|minor\w+|piccol\w+)",
+    re.I,
+)
+
 
 def slot_dal_testo(messaggio: str) -> dict:
     """Età e ISEE letti dal testo, senza passare dal modello.
@@ -730,6 +744,18 @@ def slot_dal_testo(messaggio: str) -> dict:
         valore_nucleo = int(grezzo_nucleo)
         if valore_nucleo >= 1:
             trovati["nucleo_familiare"] = valore_nucleo
+
+    figli = _FIGLI_MINORI_NEL_TESTO.search(messaggio)
+    if figli:
+        grezzo_figli = figli.group("n")
+        if grezzo_figli is None:
+            valore_figli = 1  # «ho figli minori», senza numero → almeno uno
+        elif grezzo_figli.isdigit():
+            valore_figli = int(grezzo_figli)
+        else:
+            valore_figli = _PAROLE_NUMERO.get(grezzo_figli.lower(), 1)
+        if valore_figli >= 1:
+            trovati["figli_minori"] = valore_figli
 
     return trovati
 

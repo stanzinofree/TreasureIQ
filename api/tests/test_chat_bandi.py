@@ -22,16 +22,24 @@ from __future__ import annotations
 import asyncio
 from unittest import mock
 
+import pytest
+
 from treasureiq.bandi_live import BandiLiveEsito, BandoArricchito
 from treasureiq.chat import respond as respond_mod
 from treasureiq.chat.intent import (
     ChatIntent,
+    ProfileSlots,
     QuestionKind,
     Topic,
     _e_bando_di_trasporto_pubblico,
     extract_intent,
 )
-from treasureiq.schema import CitizenProfile, Opportunity
+from treasureiq.schema import (
+    CitizenProfile,
+    Opportunity,
+    Requirements,
+    TargetGroup,
+)
 
 
 class _ModelloFinto:
@@ -171,6 +179,37 @@ def test_ramo_coperto_con_bandi_usa_il_comune_del_profilo_non_il_testo():
     assert answer.bandi_live.bandi[0].opportunity.title == "Avviso pubblico contributi 2026"
 
 
+def test_primo_turno_senza_profilo_usa_il_comune_nominato_nel_testo():
+    """Regressione bug Andrea: «vivo a Benevento, ci sono bandi?» al primo
+    turno — nessun profilo ancora, nessun `comune_istat` dal client. Senza il
+    ripiego su `_comune_nominato` la sonda cadeva sul default (Albano) e
+    leggeva il comune sbagliato. Il profilo resta la prima precedenza (test
+    sopra); il testo entra SOLO quando non c'e' ne' profilo ne' scelta."""
+    benevento_istat = "062008"
+    esito = BandiLiveEsito(
+        codice_istat=benevento_istat,
+        comune_nome="Benevento",
+        esito="coperto_con_bandi",
+        gradino="pages",
+        verificato_il="2026-08-08T09:30:00+00:00",
+        bandi=[_bando("Contributo affitto 2026")],
+    )
+    modello = ChatIntent(topic=Topic.BANDI, kind=QuestionKind.INFORMAZIONE)
+
+    with mock.patch(
+        "treasureiq.bandi_live.bandi_arricchiti", return_value=esito
+    ) as sonda:
+        answer = _componi(
+            "ciao sono Andrea, vivo a Benevento, ci sono bandi a cui posso accedere?",
+            modello,
+            profile=None,
+            comune_istat=None,
+        )
+
+    sonda.assert_called_once_with(benevento_istat)
+    assert answer.bandi_live is esito
+
+
 def test_ramo_coperto_senza_bandi_ha_variante_di_testo():
     esito = BandiLiveEsito(
         codice_istat=respond_mod.DEFAULT_COMUNE_ISTAT,
@@ -236,6 +275,127 @@ def test_bandi_senza_riscontro_testuale_non_chiama_la_sonda():
         _componi("buongiorno, avrei una domanda", modello, profile=_profilo_albano())
 
     sonda.assert_not_called()
+
+
+# --- 2-bis. Ranking morbido per profilo (bug Andrea #2) ----------------------
+
+
+def _bando_req(
+    titolo: str,
+    *,
+    targets=None,
+    figli_minori_required=None,
+    disabilita_required=None,
+    eta_min=None,
+    eta_max=None,
+) -> BandoArricchito:
+    opp = Opportunity.model_construct(
+        title=titolo,
+        targets=targets or [],
+        summary=None,
+        requirements=Requirements(
+            figli_minori_required=figli_minori_required,
+            disabilita_required=disabilita_required,
+            eta_min=eta_min,
+            eta_max=eta_max,
+        ),
+    )
+    return BandoArricchito(opportunity=opp, scadenza=None, scadenza_verificata=False)
+
+
+@pytest.mark.parametrize(
+    "testo, atteso",
+    [
+        ("sono vedovo con 2 figli minorenni, vivo a Benevento", 2),
+        ("ho due figli minori", 2),
+        ("un figlio minore", 1),
+        ("ho figli piccoli", 1),
+        ("ho due figli grandi", None),  # adulti: non contano
+        ("ho 3 figli maggiorenni", None),
+    ],
+)
+def test_slot_figli_minori_letto_dal_testo_non_dal_modello(testo, atteso):
+    """La regex sul testo riempie `figli_minori` senza dipendere dall'LLM
+    (che su Ollama spesso non popola lo slot) — e ignora i figli adulti."""
+    from treasureiq.chat.intent import slot_dal_testo
+
+    assert slot_dal_testo(testo).get("figli_minori") == atteso
+
+
+def test_ordina_bandi_porta_in_cima_quelli_che_risuonano_e_non_esclude():
+    """Un profilo con 2 figli minori porta il bando figli-minori in cima e lo
+    marca `consigliato`, ma NESSUN bando sparisce (ordina, non esclude)."""
+    generico = _bando_req("Avviso generico contributi")
+    minori = _bando_req(
+        "Contributo per famiglie con figli minori",
+        targets=[TargetGroup.MINORI],
+        figli_minori_required=True,
+    )
+    profilo = CitizenProfile(figli_minori=2)
+
+    ordinati, c_e_ranking = respond_mod._ordina_bandi_per_profilo(
+        [generico, minori], profilo
+    )
+
+    assert c_e_ranking is True
+    assert len(ordinati) == 2  # niente esclusione
+    assert ordinati[0].opportunity.title == "Contributo per famiglie con figli minori"
+    assert ordinati[0].consigliato is True
+    assert ordinati[1].consigliato is False
+
+
+def test_ordina_bandi_senza_profilo_o_senza_riscontro_lascia_intatto():
+    bandi = [_bando_req("Avviso A"), _bando_req("Avviso B")]
+
+    intatto_no_profilo, r1 = respond_mod._ordina_bandi_per_profilo(bandi, None)
+    assert intatto_no_profilo is bandi and r1 is False
+
+    # Profilo che non risuona con nessun requisito: nessun ranking, nessuna
+    # bugia di ordinamento — lista intatta.
+    intatto_no_match, r2 = respond_mod._ordina_bandi_per_profilo(
+        bandi, CitizenProfile(eta=54)
+    )
+    assert intatto_no_match is bandi and r2 is False
+
+
+def test_ramo_bandi_ordina_e_dichiara_ranking_indicativo_non_verdetto():
+    """Integrazione: Andrea (2 figli minori, primo turno senza profilo) — il
+    ramo bandi ricava il profilo dal testo, ordina, e il testo dichiara
+    l'ordinamento come indicativo, non un verdetto."""
+    esito = BandiLiveEsito(
+        codice_istat="062008",
+        comune_nome="Benevento",
+        esito="coperto_con_bandi",
+        gradino="pages",
+        verificato_il="2026-08-08T09:30:00+00:00",
+        bandi=[
+            _bando_req("Avviso pubblico generico 2026"),
+            _bando_req(
+                "Sostegno alle famiglie con figli minori",
+                targets=[TargetGroup.MINORI],
+                figli_minori_required=True,
+            ),
+        ],
+    )
+    # In produzione i figli minori li estrae il modello (Ollama) negli slot;
+    # qui il modello è finto, quindi popoliamo lo slot come farebbe l'LLM.
+    modello = ChatIntent(
+        topic=Topic.BANDI,
+        kind=QuestionKind.INFORMAZIONE,
+        slots=ProfileSlots(figli_minori=2),
+    )
+
+    with mock.patch("treasureiq.bandi_live.bandi_arricchiti", return_value=esito):
+        answer = _componi(
+            "sono vedovo con 2 figli minorenni, vivo a Benevento, ci sono bandi?",
+            modello,
+            profile=None,
+        )
+
+    titoli = [b.opportunity.title for b in answer.bandi_live.bandi]
+    assert titoli[0] == "Sostegno alle famiglie con figli minori"
+    assert answer.bandi_live.bandi[0].consigliato is True
+    assert "non un verdetto" in answer.reply.lower()
 
 
 # --- 3. Zero regressione sui topic esistenti ---------------------------------

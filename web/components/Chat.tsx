@@ -846,7 +846,17 @@ function BandoLive({
 
   return (
     <li className="mappa-servizi__scheda">
-      <span className="mappa-servizi__scheda-titolo">{opportunity.title}</span>
+      <span className="mappa-servizi__scheda-titolo">
+        {opportunity.title}
+        {bando.consigliato && (
+          <span
+            className="tag-verifica"
+            title="In linea col tuo profilo — indicazione, non un verdetto: controlla i requisiti."
+          >
+            ★ in linea col tuo profilo
+          </span>
+        )}
+      </span>
       {opportunity.summary && (
         <span className="mappa-servizi__scheda-campo">
           <span className="mappa-servizi__scheda-etichetta">Descrizione</span>
@@ -874,6 +884,7 @@ function BandoLive({
       <button
         type="button"
         className="mappa-servizi__scheda-btn"
+        aria-expanded={aperto}
         onClick={() => setAperto((valore) => !valore)}
       >
         {aperto ? "Nascondi criteri" : "Vedi criteri"}
@@ -953,9 +964,9 @@ function BandiLive({ esito }: { esito: BandiLiveEsito }) {
   return (
     <div className="bandi-comune">
       <ul className="bandi-comune__lista">
-        {esito.bandi.map((bando) => (
+        {esito.bandi.map((bando, indice) => (
           <BandoLive
-            key={bando.opportunity.id}
+            key={`${bando.opportunity.id}:${indice}`}
             bando={bando}
             verificatoIl={esito.verificato_il}
             formattaData={formattaData}

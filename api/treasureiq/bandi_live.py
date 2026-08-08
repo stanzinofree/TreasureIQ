@@ -24,16 +24,17 @@ from __future__ import annotations
 
 import hashlib
 import logging
+import re
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Literal
+from typing import Any, Literal, Sequence
 from urllib.parse import quote, urlparse
 
 import httpx
 from pydantic import BaseModel
 
 from treasureiq.extract.corpus import build_corpus, collect_pdf_segments
-from treasureiq.extract.llm import RequirementsExtractor, quote_appears_in
+from treasureiq.extract.llm import RequirementsExtractor, Segment
 from treasureiq.extract.providers import load_provider
 from treasureiq.ingest.censimento import _Sonda
 from treasureiq.ingest.wp_comuni import strip_html
@@ -88,6 +89,14 @@ class BandoArricchito(BaseModel):
     opportunity: Opportunity
     scadenza: str | None
     scadenza_verificata: bool
+    #: Ranking morbido profilo↔requisiti (KAPI 7): True se il bando risuona con
+    #: i segnali del cittadino (figli minori, età, disabilità...). NON è un
+    #: verdetto di eleggibilità — quello lo dà `match/engine.py` solo su dati
+    #: DECLARED — ma un ORDINE indicativo, «controlla i requisiti». Default
+    #: False: nessun profilo o nessun riscontro → nessun bando marcato, ordine
+    #: del portale intatto. La scansione di rete non lo popola mai (è
+    #: profilo-agnostica): lo imposta `respond._ordina_bandi_per_profilo`.
+    consigliato: bool = False
 
 
 class BandiLiveEsito(BaseModel):
@@ -132,10 +141,12 @@ def _da_cache(codice_istat: str) -> BandiLiveEsito | None:
         return None
     try:
         esito = BandiLiveEsito.model_validate_json(percorso.read_text("utf-8"))
+        # `verificato_il` sta nel try: una data malformata è cache corrotta,
+        # da trattare come cache assente — non un crash a ogni lettura.
+        eta = datetime.now(timezone.utc) - datetime.fromisoformat(esito.verificato_il)
     except Exception:  # noqa: BLE001 — una cache illeggibile è una cache assente
         logger.warning("listing bandi-live illeggibile: %s", percorso)
         return None
-    eta = datetime.now(timezone.utc) - datetime.fromisoformat(esito.verificato_il)
     return esito if eta.total_seconds() < TTL_ORE * 3600 else None
 
 
@@ -154,8 +165,13 @@ def _in_cache(esito: BandiLiveEsito) -> None:
 
 def _prune_cache(codice_istat: str) -> None:
     """Pota per mtime la cache-estrazioni di un comune sotto
-    `CAP_CACHE_BYTES_PER_COMUNE`, prima di scriverne di nuove."""
-    root = CACHE_DIR / codice_istat
+    `CAP_CACHE_BYTES_PER_COMUNE`, prima di scriverne di nuove.
+
+    Circoscritta alla sottocartella `estrazioni/`: il `listing.json`
+    (l'esito servito) vive un livello sopra e NON va mai contato né potato —
+    altrimenti la potatura potrebbe cancellare la voce di cache che si sta
+    per servire."""
+    root = CACHE_DIR / codice_istat / "estrazioni"
     if not root.exists():
         return
     file_e_dimensione = [(p, p.stat().st_size) for p in root.rglob("*") if p.is_file()]
@@ -203,13 +219,37 @@ def _rung1_cpt(sonda: _Sonda, base: str) -> list[dict[str, Any]] | None:
     return righe
 
 
+#: Termine-bando a CONFINE DI PAROLA. WordPress `search=` fa match per
+#: sottostringa: `search=bando` su Benevento tornava «La Storia» (una moneta
+#: bronzea del IV sec a.C.) perché il corpo diceva «abbandono». Il `\b`
+#: distingue «bando» da «abbandono»/«sbando» e taglia i falsi positivi che
+#: rendevano l'esito senza senso per il cittadino (principio dell'esito onesto:
+#: una pagina di museo spacciata per bando è peggio di «nessun bando»).
+_CONTESTO_BANDO_RE = re.compile(
+    r"\b(?:band[oi]|avvis[oi]\s+pubblic|concors|contribut|"
+    r"bors[ae]\s+di\s+studio|graduatori|domand[ae]\s+di\s+partecipazione|"
+    r"voucher|sovvenzion|agevolazion)\w*",
+    re.IGNORECASE,
+)
+
+
 def _ha_segnale(record: dict[str, Any]) -> bool:
-    """Stesso filtro di `wp_pages._select_pages`: un segnale di ammissibilità
-    nel corpo, o un PDF collegato — altrimenti la pagina non merita
-    l'estrazione (D-07/D-15)."""
+    """La pagina merita l'estrazione come bando?
+
+    WordPress `search=` è per sottostringa, quindi prima di tutto si pretende
+    un VERO termine-bando a confine di parola (`_CONTESTO_BANDO_RE`) in titolo
+    o corpo — senza, «La Storia» entrava come bando. Solo allora conta il
+    filtro di ammissibilità di `wp_pages._select_pages`: un segnale nel corpo o
+    un PDF collegato (dove lo spike ha trovato i criteri veri) (D-07/D-15)."""
     content_raw = record.get("content")
     body_html = content_raw.get("rendered", "") if isinstance(content_raw, dict) else ""
-    if _ELIGIBILITY_SIGNAL_RE.search(strip_html(body_html)):
+    title_raw = record.get("title")
+    title = title_raw.get("rendered", "") if isinstance(title_raw, dict) else ""
+    testo = strip_html(body_html)
+
+    if not _CONTESTO_BANDO_RE.search(f"{title} {testo}"):
+        return False
+    if _ELIGIBILITY_SIGNAL_RE.search(testo):
         return True
     return bool(_PDF_LINK_RE.findall(body_html))
 
@@ -298,6 +338,49 @@ def _raw_hash(url_bando: str, content_rendered: str, pdf_urls: list[str]) -> str
     return hashlib.sha256(materiale.encode("utf-8")).hexdigest()
 
 
+_MESI_IT = (
+    "gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno",
+    "luglio", "agosto", "settembre", "ottobre", "novembre", "dicembre",
+)
+
+
+def _scadenza_nel_corpus(deadline_iso: str, segments: Sequence[Segment]) -> bool:
+    """La data prodotta dal modello compare DAVVERO nel corpus letto?
+
+    Stessa promessa del quote-gate D-07 (mostrare la scadenza SOLO se
+    citabile nel testo che il modello ha visto), ma `quote_appears_in` qui
+    è inservibile: una data ISO è lunga ~10 caratteri, sotto la soglia
+    `_FUZZY_MIN_MATCH_CHARS` (20), quindi tornerebbe SEMPRE `False` — il
+    gate sarebbe morto e nessuna scadenza uscirebbe mai. Confronto quindi la
+    data in modo consapevole del formato: la sua forma ISO più le forme
+    italiane comuni (`15 marzo 2026`, `15/03/2026`, …). Non è fiducia cieca
+    nel modello — la data deve comparire, verbatim, in un segmento visibile;
+    è verifica contro la fonte, con la sola aggiunta necessaria a un tipo
+    "data" (non una seconda regola di normalizzazione per cifre arbitrarie,
+    WN-3/D-07)."""
+    try:
+        anno, mese, giorno = (int(pezzo) for pezzo in deadline_iso.split("-"))
+        nome_mese = _MESI_IT[mese - 1]
+    except (ValueError, IndexError):
+        return False
+    varianti = {
+        re.sub(r"\s+", " ", forma.lower())
+        for forma in (
+            f"{giorno} {nome_mese} {anno}",
+            f"{giorno:02d}/{mese:02d}/{anno}",
+            f"{giorno}/{mese}/{anno}",
+            f"{giorno:02d}-{mese:02d}-{anno}",
+            f"{giorno:02d}.{mese:02d}.{anno}",
+            deadline_iso,
+        )
+    }
+    for seg in segments:
+        testo = re.sub(r"\s+", " ", seg.text.lower())
+        if any(variante in testo for variante in varianti):
+            return True
+    return False
+
+
 def _arricchisci(
     client: httpx.Client,
     base: str,
@@ -342,11 +425,13 @@ def _arricchisci(
         # `RequirementsExtractor.extract` non espone `deadline_iso` (non è
         # quote-gated in `to_requirements` — vedi llm.py): lo si legge dalla
         # stessa cache appena popolata (hit o call live, indifferentemente) e
-        # si applica QUI il quote-gate (D-07), riusando `quote_appears_in`
-        # senza inventare una seconda regola di normalizzazione.
+        # si applica QUI il quote-gate D-07, ma consapevole del formato-data
+        # (`quote_appears_in` su una data ISO di 10 caratteri è sotto la
+        # soglia fuzzy: tornerebbe sempre False, gate morto — vedi
+        # `_scadenza_nel_corpus`).
         raw_result = extractor.cache.get(raw_hash)
         data_dichiarata = raw_result.deadline_iso if raw_result is not None else None
-        if data_dichiarata and quote_appears_in(data_dichiarata, visible_segments):
+        if data_dichiarata and _scadenza_nel_corpus(data_dichiarata, visible_segments):
             scadenza = data_dichiarata
             scadenza_verificata = True
     else:
@@ -426,9 +511,15 @@ def bandi_arricchiti(
     with _Sonda(timeout=timeout) as sonda:
         scoperta = _scopri_bandi(sonda, base)
         if scoperta is None:
-            esito = _esito_vuoto(comune, "non_coperto", None)
-            _in_cache(esito)
-            return esito
+            # `_scopri_bandi` torna None SOLO quando nessun gradino REST ha
+            # risposto: o il portale non ha davvero una sezione bandi, oppure
+            # è un WordPress irraggiungibile in questo istante. Non possiamo
+            # distinguere i due casi da qui — quindi NON cristallizziamo un
+            # "non coperto" in cache per TTL_ORE: sarebbe una bugia durevole
+            # su un blip di rete. Esito onesto ma volatile, riverificato alla
+            # prossima domanda (principio fondante: mai un verdetto che non
+            # possiamo sostenere).
+            return _esito_vuoto(comune, "non_coperto", None)
 
         righe, gradino = scoperta
         coppie = [

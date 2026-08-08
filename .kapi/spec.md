@@ -1,109 +1,85 @@
-# SPEC — Scheda-comune + aderenza connettore (MVP video)
+# spec — ciclo 7 · bandi-live-agid
 
-Ciclo 5 · task: `scenario-cards-freeze` · brainstorm 2026-08-07
+Motore bandi **live, on-demand**: dato un comune coperto da AgID REST e un intent "bandi",
+estrae i bandi con **criteri di eleggibilità strutturati**, riusando l'estrattore LLM e lo
+schema già esistenti, con **cache TTL** e **data di verifica visibile**. Fuori copertura →
+esito onesto + advocacy, nessuno scraping su misura. Coerente col north-star: se i dati non
+sono aperti, lo diciamo e invitiamo ad aprirli.
 
-## GOAL
-Standardizzare i flussi/card della chat per il video con una cornice onesta,
-uguale sui casi Figline/Benevento/Perugia: «quanto riesco a vedere · come farlo
-aprire di più · dimmi come vado». Cuore: **aderenza al connettore** (numero reale,
-calcolato dai probe) + **scheda-comune** ricca dentro TIQ + **2 form** (apertura
-dati, feedback). Motore di retrieval CONGELATO: si aggiunge uno strato di
-persistenza+presentazione attorno, non dentro il matching.
+## Contesto (fatti scout, ciclo 6)
+- Copertura AgID REST ≈ **16%** dei comuni (61/401, `data/censimento-t0.json`); l'84% è
+  solo-html. Il tier "api_uffici" misura gli uffici: il CPT bandi/trasparenza è un sottoinsieme.
+- Riusabile as-is: `RequirementsExtractor` (`extract/llm.py:64`, prompt già bando-specifico,
+  `isee_min`), schema `Opportunity`/`Requirements`/`Source` (`schema.py`), pipeline PDF
+  `pypdf` + audit skip (`wp_pages.py:430-548`), pattern sonda timeout-bounded (`sonda_live.py`).
+- Già esistente ma povero: `bandi_criteri()` REST (`mappa_connettore.py:754`) → solo elenco
+  (titolo/url/data/anteprima verbatim), niente criteri strutturati, niente PDF.
+- Store scrivibile = `data-live/` (`LIVE_DIR`); `data/` è `:ro`.
 
-## CONTESTO
-- Oggi gli scan sono LIVE per-richiesta; il censimento è snapshot una-tantum.
-  Nessuna persistenza dello scan, nessun timestamp «ultimo scan».
-- Dottrina esistente (respond.py:219/1263, api.py:779): VIETATE le percentuali
-  inventate in chat («affidabilità %» = numero con l'aria di precisione). Ogni
-  cifra mostrata deve avere denominatore reale e provenienza visibile.
-- Sonda già disponibile: `mappa_connettore` → servizi-REST (esposto+rest_base+
-  categorie), uffici (unità organizzative), `contatti_via`, `amministrazione_
-  trasparente_via`, bandi. Basta per calcolare l'aderenza AgID senza nuovi scan.
-- `readiness.score_comune` (0-100, 5 dim) esiste ma è sui RECORD INGERITI →
-  non uniforme sui 3 casi (Figline/Benevento non ingeriti). NON è l'aderenza.
-
-## DECISIONS
-- **D-01** (ereditata): nessun verdetto di eleggibilità da letture live. La
-  scheda-comune e le card sono NAVIGAZIONE, non responso.
-- **D-B7** (ereditata): il modello non tocca/genera cifre. Ogni numero della
-  scheda è estratto verbatim dai probe.
-- **D-S1 — Aderenza = superfici AgID machine-readable esposte via REST /
-  superfici definite.** Lo scrape NON conta verso l'aderenza (è ripiego nostro,
-  prova del buco del comune). Misura l'apertura vera, premia la conformità.
-- **D-S2 — Solo il connettore AgID emette una % calcolata.** WP-Custom (solo
-  HTML) → tier «solo HTML, dettaglio non ancora mappato», NIENTE %. Sconosciuto
-  → stato «non ancora sondato», nessun numero. Mai una cifra su connettori senza
-  reader.
-- **D-S3 — «% del pubblicato letto» / «copertura ricerca» = MORTA.** Denominatore
-  (totale pubblicato dal comune) inconoscibile → sarebbe numero inventato. Non si
-  mostra. L'apertura si dice SOLO come aderenza-connettore (D-S1).
-- **D-S4 — Provenienza visibile su ogni numero.** «servizi via API: 103», «ultimo
-  scan: 7 ago», «aderenza AgID 80% = 4/5 superfici». Nessuna cifra nuda.
-- **D-S5 — Store di scansione persistente** (prerequisito): record per-comune con
-  timestamp + cache (servizi/aderenza/contatti/orari/logo). Serve sia al refresh
-  sia alla scheda con «ultimo scan».
-- **D-S6 — Refresh-on-search:** comune riconosciuto, scan >6 giorni → parte il
-  refresh, indicatore «sto aggiornando · attendi o vedi gli attuali?». Se scan
-  fresco → serve la cache.
-- **D-S7 — Form esterni, non TIQ-hosted.** Apertura-dati e feedback = link esterni
-  (Google Form o simile), `target=_blank rel=noopener`. Nessuna PII su di noi per
-  l'MVP. URL placeholder finché non forniti.
-- **D-S8 — Logo/asset SOLO dal portale del comune** (stesso host della sonda,
-  guardia SSRF già copre). Mai CDN terzi. Degrado muto se assente (come
-  numeri_utili): niente logo, niente errore. Il logo esposto è esso stesso indice
-  di apertura.
-- **D-S9 — Freeze retrieval:** pesi/matching/scala NON si toccano in questo ciclo.
-  Calibrazione pesi = workstream separato, fuori spec.
-
-## DISCRETION (arm decide, entro le decisioni)
-- Composizione esatta della checklist AgID (4-6 superfici): almeno servizi-REST,
-  uffici-REST, trasparenza-REST, contatti-REST; bandi-REST se già cablato.
-- Forma dello store (file JSON per-comune vs sqlite): scegliere il più semplice
-  che regge timestamp + cache; niente nuova dipendenza pesante.
-- UI della scheda-comune (layout), purché stile «civico giapponese» esistente,
-  no Inter/gradient/emoji, numeri con provenienza.
-- Lock/concorrenza refresh: accettabile doppia-scansione occasionale per l'MVP
-  (no lock complesso) purché non rompa nulla.
-- Soglia demo: per mostrare il refresh dal vivo, forzare stale un comune (seed
-  timestamp indietro). Onesto se trasparente.
-
-## DEFERRED (progettato, non costruito per il video)
-- **Job batch schedulato ogni 5 min** (rotazione: primi X con scan >6gg, poi gli
-  altri). Invisibile in demo, infra pesante (scheduler+lock+politeness), contro il
-  freeze. Design registrato qui, build post-video.
-- Reader connettore WP-Custom (scrape indice servizi HTML — es. Pergine /Servizi).
-- Re-scan automatico dei comuni non toccati dal refresh-on-search.
-
-## RISKS
-- **8 giorni al video, scope ampio** (scheda-page + store + refresh + aderenza +
-  logo + 2 form). Mitigazione: linea di taglio — se il tempo stringe cade PRIMA il
-  refresh-on-search (la scheda regge con «ultimo scan: adesso», live). Minimo
-  irrinunciabile: aderenza% + scheda + form.
-- **Aderenza scambiata per giudizio.** Copy deve dire «apertura del portale», non
-  «qualità del servizio». Separata da readiness (dati ingeriti) — assi diversi.
-- **Logo 404/timeout** → deve degradare muto, mai bloccare la scheda.
-- **Cache fresca in demo** → refresh non scatta senza forzare stale (vedi
-  DISCRETION).
+## DECISIONI
+- **D-01** Trigger **live/on-demand** a query-time (cittadino chiede bandi in chat), non batch.
+  Riusa il pattern sonda; nessun pre-ingest nazionale.
+- **D-02** Copertura = comuni coperti da uno di **due gradini REST**, in ordine:
+  (1) **CPT bandi/trasparenza AgID** (`amm-trasparente`), oppure
+  (2) **`wp/v2/pages`** REST — la stessa scoperta con cui l'ingest già ingerisce i bandi di Albano
+  (`wp_pages.py`). Emendato dopo scout ciclo 7: il CPT AgID stretto copre **≈0%** (0/61
+  `api_uffici`, 0/385 raggiungibili); il gradino `pages` è dove i bandi vivono davvero nei
+  portali WordPress comunali (Albano + set demo). Nessuno dei due REST → esito onesto "non
+  coperto dai dati aperti" + invito apertura (advocacy, riusa ChiediApertura/segnalazioni).
+  **Lo scraper arbitrario resta Tier 3 deferred** — i due gradini sono entrambi REST, non scrape.
+- **D-03** Estrazione = riusa `RequirementsExtractor`. Input = dettaglio bando REST + eventuale
+  PDF allegato (via `pypdf`). LLM = **Ollama** di default (crediti); nessun nuovo provider.
+- **D-04** Schema = riusa `Opportunity`+`Requirements`+`Source`. Nessun nuovo modello dati per
+  il bando arricchito. Il tipo `Bando` REST resta per l'anteprima; l'arricchito è `Opportunity`.
+- **D-05** **Cache** su `data-live/` (LIVE_DIR, scrivibile, gitignorato), chiave deterministica
+  per comune+bando. Prima query paga (scan+PDF+LLM), riuso entro TTL. Cap di dimensione.
+- **D-06** **Freschezza onesta**: al cittadino si mostra "verificato il <data>"; scaduto il TTL
+  si ri-scansiona. Se il bando ha una **scadenza**, è mostrata. TTL corto (discrezione: 6–12h).
+- **D-07** **Number-guard**: gli importi/ISEE mostrati sono **verbatim dalla fonte**, mai
+  riformulati dal modello (il verbalizzatore corrompe le cifre). `source_typed`/guardia numeri.
+- **D-08** **PDF budget**: riusa i limiti esistenti (`MAX_PDFS_PER_PAGE`, `MAX_PDF_BYTES`) +
+  audit skip (illeggibile vs non tentato). Nessun download illimitato.
+- **D-09** Nessuna PII, nessun invio esterno. Coerente con feedback/segnalazioni.
 
 ## ACCEPTANCE
-1. Aderenza AgID calcolata dai probe (mai digitata) su checklist 4 superfici
-   (servizi/uffici/trasparenza/contatti REST). Dato reale sondato 2026-08-07:
-   Figline 3/4=75% (servizi+uffici+trasparenza REST, contatti scrape),
-   Benevento 2/4=50%, Perugia 2/4=50% (servizi+uffici REST, trasparenza+contatti
-   scrape). `punti_di_contatto` REST assente su tutti e 3 = gap reale mostrato,
-   non nascosto (aggancio card apertura-dati). Numero = esposte/definite, con
-   provenienza. `amm-trasparente` E' REST ed e' discriminante (Figline sì, altri no).
-2. Connettore non-AgID → tier/stato, MAI una %.
-3. «% del pubblicato letto» non appare da nessuna parte.
-4. Store di scansione persiste timestamp + cache per-comune; «ultimo scan: <data>»
-   reale nella scheda e nella sidebar.
-5. Refresh-on-search: scan >6gg → refresh + indicatore «attendi/attuali»; scan
-   fresco → cache servita senza refresh.
-6. Scheda-comune dentro TIQ: connettore, aderenza, ultimo scan, servizi esposti,
-   contatti ufficiali (da scansione), orari uffici, ISTAT, link pagina ufficiale,
-   logo (se disponibile, muto se no). Linkata dalla sidebar dati.
-7. 2 form esterni (apertura dati dentro la scheda-comune; feedback su ogni chat),
-   link `target=_blank rel=noopener`.
-8. Ogni numero mostrato ha provenienza visibile; nessuna cifra nuda o inventata.
-9. Retrieval invariato: nessuna modifica a pesi/matching/scala. Suite verde.
-10. Job batch NON costruito (solo progettato in DEFERRED).
+- A1 Comune coperto (CPT AgID bandi **oppure** `wp/v2/pages` con bandi) + intent bandi → ≥1
+  bando con `Requirements` strutturati; se coperto ma senza bandi pubblicati → "nessun bando
+  pubblicato" onesto (non un errore).
+- A2 Comune senza né CPT né `wp/v2/pages` utile → esito "non coperto dai dati aperti" + invito
+  apertura; **zero** tentativi di scrape arbitrario (Tier 3).
+- A3 Seconda query entro TTL non rilancia LLM/PDF (nessuna nuova chiamata provider,
+  verificabile); scaduto il TTL → ri-scan.
+- A4 Al cittadino compare la data di verifica; se presente, la scadenza del bando.
+- A5 Number-guard: un importo/ISEE noto nella fonte compare identico in output (il modello
+  non lo altera).
+- A6 PDF budget rispettato; skip audati.
+- A7 Cache in `data-live/`, gitignorata, mai committata; cap dimensione rispettato.
+- A8 Nessuna regressione: chat/servizi/segnalazioni/feedback intatti.
+- A9 LLM = Ollama di default; Anthropic solo fallback esplicito, mai forzato (crediti).
+
+## RISKS (5 lenti)
+- **R-1 (blind spot, CONFERMATO in scout)** Il CPT AgID stretto copre ≈0% (0/61, 0/385): la
+  card bandi del ciclo 6 era mock. Il valore reale sta nel gradino `wp/v2/pages`. Presidio:
+  D-02 a due gradini, **copertura misurata per comune in scan** (non promessa), e advocacy onesta
+  quando nessun gradino trova bandi (A1, A2). Misura del gradino `pages` sul set demo = prima
+  azione verificabile del plan, non scoperta post-execute.
+- **R-2 (devil's advocate)** Cache che serve un bando **scaduto** = danno (cittadino perde la
+  scadenza). Presidio: TTL corto + data visibile + scadenza mostrata (D-06, A4).
+- **R-3 (number corruption)** Il modello corrompe ISEE/importi. Presidio: source_typed/guardia
+  (D-07, A5).
+- **R-4 (inverted)** "E se NON facessimo il live?" Il solo Tier 1 (enrich batch) copre già il
+  16%; il valore del live+cache è la **freschezza**, non la copertura. Tenerlo magro: se i
+  bandi non cambiano spesso, il live è oro fuso. Il TTL e il gate misurano se serve.
+- **R-5 (team/ops)** Reproducibilità: l'ingest non è riproducibile; il motore live introduce
+  stato in `data-live` (invalidazione, dimensione). Presidio: TTL + chiave deterministica +
+  cap dimensione cache (D-05).
+
+## DISCRETION (arm decide)
+- Forma esatta della chiave cache e TTL numerico (default 6–12h).
+- Come si aggancia al chat retrieval: nuovo intent "bandi" o estensione dell'esistente.
+- Se arricchire `bandi_criteri()` in place o costruire un modulo `bandi_live` che lo avvolge.
+
+## DEFERRED (non in questo ciclo)
+- Tier 3: scraper portali arbitrari solo-html, adapters per famiglia di CMS.
+- Invio delle richieste di apertura dati da parte nostra (SMTP, D-07 ciclo 6).
+- Batch pre-ingest nazionale dei bandi.

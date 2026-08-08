@@ -2155,8 +2155,19 @@ async def bandi_criteri_live_route(codice_istat: str) -> BandiLiveEsito:
     modello è verificabile nel corpus letto (D-07). `esito="comune_ignoto"`
     se `codice_istat` non è un comune noto. Sonda e parse LLM sono
     bloccanti: girano in un thread separato, mai dentro il loop async.
+
+    Se la sonda live fallisce (timeout del portale, rete giù), la risposta è
+    un 503 onesto — "riprova", non un 500 con stacktrace e nemmeno un
+    `non_coperto` falso che affermerebbe una copertura mai verificata.
     """
-    return await asyncio.to_thread(bandi_arricchiti, codice_istat)
+    try:
+        return await asyncio.to_thread(bandi_arricchiti, codice_istat)
+    except Exception as exc:  # noqa: BLE001 — degradazione onesta al cittadino
+        logger.warning("bandi-criteri live fallita per %s: %s", codice_istat, exc)
+        raise HTTPException(
+            status_code=503,
+            detail="Scansione bandi live temporaneamente non disponibile.",
+        ) from exc
 
 
 @app.post("/api/chat", response_model=ChatOut, tags=["Cittadino"], dependencies=[Depends(limita_modello)])

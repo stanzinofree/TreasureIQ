@@ -15,7 +15,7 @@ from urllib.parse import quote
 import pytest
 
 from treasureiq import bandi_live
-from treasureiq.extract.llm import ExtractionResult
+from treasureiq.extract.llm import ExtractionResult, Segment
 from treasureiq.sonda_live import ComuneNoto
 
 BASE = "https://comune-test.example"
@@ -363,3 +363,92 @@ def test_codice_ignoto_comune_ignoto(monkeypatch):
     assert esito.esito == "comune_ignoto"
     assert esito.gradino is None
     assert esito.bandi == []
+
+
+# --- 10. gate scadenza (D-07, consapevole del formato-data) -------------------
+
+
+def _seg(testo: str) -> Segment:
+    return Segment(kind="pagina", url="u", page_number=None, start=0, text=testo)
+
+
+def test_scadenza_verificata_su_prosa_italiana():
+    """La regressione che il gate risolveva sempre False: una data ISO è sotto
+    la soglia fuzzy di `quote_appears_in`. Ora la verifica è consapevole del
+    formato: la prosa `15 marzo 2026` conferma `2026-03-15`."""
+    assert bandi_live._scadenza_nel_corpus(
+        "2026-03-15", [_seg("Le domande vanno presentate entro il 15 marzo 2026.")]
+    )
+
+
+@pytest.mark.parametrize(
+    "testo",
+    ["scadenza 15/03/2026", "entro il 15-03-2026", "termine: 2026-03-15"],
+)
+def test_scadenza_verificata_su_forme_numeriche(testo):
+    assert bandi_live._scadenza_nel_corpus("2026-03-15", [_seg(testo)])
+
+
+def test_scadenza_non_verificata_se_data_assente():
+    """Nessuna scadenza se la data non compare nel corpus letto (mai fiducia
+    cieca nel modello: la data deve stare nella fonte)."""
+    assert not bandi_live._scadenza_nel_corpus(
+        "2026-03-15", [_seg("Il bando riguarda i residenti, senza una data.")]
+    )
+
+
+def test_scadenza_iso_malformata_non_esplode():
+    assert not bandi_live._scadenza_nel_corpus("non-una-data", [_seg("15 marzo 2026")])
+
+
+# --- 11. gate precisione `_ha_segnale` (WP search= è per sottostringa) --------
+#
+# Regressione «La Storia»: `search=bando` sul rung-2 fa match sottostringa e
+# pesca «abbandono» in una pagina-museo su una moneta del IV secolo a.C. Il
+# gate ora pretende un VERO termine-bando a confine di parola PRIMA del segnale
+# di ammissibilità. Un falso qui è peggio di «nessun bando» (esito onesto).
+
+
+def test_ha_segnale_rifiuta_sottostringa_abbandono():
+    """«abbandono» contiene «bando» ma non è un termine-bando: va rifiutato
+    anche se il testo ha parvenza di prosa amministrativa."""
+    rec = _riga_bando(
+        1,
+        "La Storia",
+        "Il museo custodisce una moneta del IV secolo a.C., a lungo in stato "
+        "di abbandono, oggi restaurata. I residenti possono presentare "
+        "richiesta di visita guidata.",
+    )
+    assert bandi_live._ha_segnale(rec) is False
+
+
+def test_ha_segnale_rifiuta_segnale_senza_contesto_bando():
+    """Un segnale di ammissibilità (ISEE/residenza) da solo non basta: senza
+    un termine-bando resta una pagina di servizi, non un bando."""
+    rec = _riga_bando(
+        1,
+        "Servizio mensa scolastica",
+        "Le tariffe sono calcolate sull'ISEE del nucleo familiare residente "
+        "nel comune. Possono presentare domanda i genitori degli iscritti.",
+    )
+    assert bandi_live._ha_segnale(rec) is False
+
+
+def test_ha_segnale_accetta_bando_con_contesto_e_segnale():
+    """Il caso vero: termine-bando nel titolo + segnale di ammissibilità nel
+    corpo → estrazione dovuta."""
+    rec = _riga_bando(1, "Bando contributi affitto", TESTO_CON_SEGNALE)
+    assert bandi_live._ha_segnale(rec) is True
+
+
+def test_ha_segnale_accetta_contesto_nel_corpo_con_pdf():
+    """Termine-bando nel CORPO (non nel titolo) + PDF collegato (dove lo spike
+    ha trovato i criteri veri) → accettato anche senza segnale in prosa."""
+    rec = _riga_bando(
+        1,
+        "Novità dal comune",
+        "È aperto l'avviso pubblico per l'assegnazione dei voucher sport. "
+        "Il modulo è nell'allegato.",
+        con_pdf=True,
+    )
+    assert bandi_live._ha_segnale(rec) is True

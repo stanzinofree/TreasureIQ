@@ -544,6 +544,16 @@ export interface BandoArricchito {
    *  coi segnali del cittadino. NON è un verdetto di idoneità — è un ordine
    *  indicativo, «controlla i requisiti». `false` di default. */
   consigliato: boolean;
+  /** Classificazione del bando (ciclo 8, B2): `"agevolazione"` per contributi
+   *  economici, `"concorso"` per selezioni/offerte di lavoro. `null`/assente
+   *  se non classificato — la UI non mostra badge in quel caso. L'ordine dei
+   *  bandi resta deciso dal backend, il frontend non lo altera. */
+  tipo?: "agevolazione" | "concorso" | null;
+  /** Filtro tematico (ciclo 9, D-05): `true` se il titolo (fallback requisiti)
+   *  del bando risponde al `tema` estratto dal messaggio. `null`/assente
+   *  quando `BandiLiveEsito.tema` è assente — nessun filtro attivo, NON
+   *  trattarlo come `false`. */
+  corrisponde?: boolean | null;
 }
 
 /** Mirror esatto di `BandiLiveEsito` (`bandi_live.py` §5.2). Arriva dentro
@@ -557,9 +567,13 @@ export interface BandiLiveEsito {
     | "coperto_senza_bandi"
     | "non_coperto"
     | "comune_ignoto";
-  gradino: "cpt" | "pages" | null;
+  gradino: "cpt" | "pages" | "alberatura" | null;
   verificato_il: string;
   bandi: BandoArricchito[];
+  /** Tema estratto dal messaggio (ciclo 9, D-01/D-05): eco verbatim, testo
+   *  breve. `null`/assente = nessun filtro tematico (D-07 retrocompat) — la UI
+   *  mostra tutti i bandi espansi, senza collasso. Truthy = filtro attivo. */
+  tema?: string | null;
 }
 
 export interface ChatOut {

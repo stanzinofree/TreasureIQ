@@ -50,6 +50,21 @@ def test_il_nome_ufficiale_e_quello_parlato_cadono_insieme():
     assert nome_di("sono di Reggio Emilia") is not None
 
 
+def test_un_nome_una_parola_scritto_spezzato_si_riconosce():
+    """Difetto reale: «monte rotondo» (due parole) non combaciava con
+    «Monterotondo» (una parola nell'indice), e il comune attivo sbagliato
+    restava. La chiave compatta recupera il nome intero concatenato."""
+    assert nome_di("l'ufficio anagrafe del comune di monte rotondo") == "Monterotondo"
+    assert nome_di("vivo a San Remo") == "Sanremo"
+
+
+def test_la_chiave_compatta_non_scavalca_la_guardia_sui_prefissi():
+    """«San Marino» resta None anche con la chiave compatta: «sanmarino» non è
+    un comune italiano nell'indice, e la finestra «marino» è guardata dal
+    prefisso che la precede."""
+    assert nome_di("San Marino") is None
+
+
 def test_fra_omonimi_non_si_indovina():
     """Castro sta in Puglia e in Lombardia. Sceglierne uno significa dare a
     metà di quei cittadini le informazioni dell'altra metà: si chiede."""

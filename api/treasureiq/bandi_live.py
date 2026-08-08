@@ -33,6 +33,8 @@ from urllib.parse import quote, urlparse
 import httpx
 from pydantic import BaseModel
 
+from treasureiq import alberatura
+from treasureiq.alberatura import BandoScoperto
 from treasureiq.extract.corpus import build_corpus, collect_pdf_segments
 from treasureiq.extract.llm import RequirementsExtractor, Segment
 from treasureiq.extract.providers import load_provider
@@ -97,6 +99,19 @@ class BandoArricchito(BaseModel):
     #: del portale intatto. La scansione di rete non lo popola mai (è
     #: profilo-agnostica): lo imposta `respond._ordina_bandi_per_profilo`.
     consigliato: bool = False
+    #: KAPI 8 (bandi-alberatura): agevolazione (WP, contributo/sovvenzione) o
+    #: concorso pubblico (Halley `/zf/`). `None` sui bandi dei gradini cpt/pages
+    #: — quella fonte non distingue il tipo, e non lo si inventa qui. Popolato
+    #: SOLO dal gradino `alberatura`, da `BandoScoperto.tipo` (B1).
+    tipo: Literal["agevolazione", "concorso"] | None = None
+    #: Filtro conversazionale (KAPI 9, ciclo bandi-conversazionale): True/False
+    #: solo quando la chat ha estratto un tema dal messaggio del cittadino
+    #: («bandi per la mobilità?») e questo bando ne è risultato pertinente o no.
+    #: `None` di default e SEMPRE quando non c'è tema — il filtro evidenzia,
+    #: MAI esclude: ogni bando resta nell'esito. Impostato da
+    #: `respond._risposta_bandi` su una copia (`model_copy`), mai sull'oggetto
+    #: cache condiviso.
+    corrisponde: bool | None = None
 
 
 class BandiLiveEsito(BaseModel):
@@ -107,10 +122,16 @@ class BandiLiveEsito(BaseModel):
     comune_nome: str
     esito: Literal["coperto_con_bandi", "coperto_senza_bandi", "non_coperto", "comune_ignoto"]
     #: Quale gradino REST ha coperto il comune. `None` su `non_coperto` (nessuno
-    #: dei due) e su `comune_ignoto` (non si è nemmeno sondato).
-    gradino: Literal["cpt", "pages"] | None
+    #: dei tre) e su `comune_ignoto` (non si è nemmeno sondato). `alberatura`
+    #: (KAPI 8) è il terzo gradino, tentato solo quando cpt/pages non coprono.
+    gradino: Literal["cpt", "pages", "alberatura"] | None
     verificato_il: str
     bandi: list[BandoArricchito] = []
+    #: Tema conversazionale (KAPI 9) estratto dal messaggio, verbatim, se
+    #: presente — eco, mai riformulato dal modello. `None` quando il
+    #: cittadino non ha nominato un tema (retrocompat: comportamento odierno
+    #: invariato, D-07).
+    tema: str | None = None
 
 
 def _ora_iso() -> str:
@@ -471,15 +492,119 @@ def _arricchisci(
     )
 
 
+def _arricchisci_scoperto(
+    comune: ComuneNoto,
+    scoperto: BandoScoperto,
+    extractor: RequirementsExtractor,
+) -> BandoArricchito:
+    """Arricchisce un `BandoScoperto` del terzo gradino (`alberatura`, B1).
+
+    Le agevolazioni (vendor `wp`) riusano la stessa pipeline quote-gated di
+    `_arricchisci`, ma sul solo testo disponibile: l'anteprima REST (~280
+    caratteri), non l'HTML pieno — quel gradino non porta la pagina intera,
+    quindi niente PDF da aprire qui.
+
+    I concorsi (vendor `halley`) NON passano MAI dall'estrattore: `anteprima`
+    è sempre `None` per quel listing (nessuna colonna descrizione), e
+    inventare criteri da un solo titolo sarebbe una cifra generata dal
+    modello (D-06 — «il verbalizzatore corrompe le cifre», stessa guardia
+    qui a monte). Si copia solo ciò che il portale mostra: titolo tal quale
+    e, per la scadenza, la colonna strutturale «Data scadenza» del listing
+    (`bando.data`) — un campo dichiarato dalla tabella, non inferito, quindi
+    verificato per costruzione, non da quote-match nel corpus.
+    """
+    bando = scoperto.bando
+    body_text = bando.anteprima or ""
+    raw_hash = _raw_hash(bando.url, body_text, [])
+
+    if scoperto.tipo == "concorso":
+        requirements = Requirements()
+        confidence = Confidence.INFERRED
+        notes = [
+            "Concorso pubblico: titolo e data copiati dal listing del portale, "
+            "nessuna estrazione automatica dei criteri."
+        ]
+        scadenza = bando.data or None
+        scadenza_verificata = bool(bando.data)
+        corpus = body_text
+    else:
+        corpus, boundary_segments, visible_segments = build_corpus(
+            body_text=body_text, page_url=bando.url, pdf_segments=[]
+        )
+        requirements = Requirements()
+        confidence = Confidence.INFERRED
+        notes = []
+        scadenza = None
+        scadenza_verificata = False
+        outcome = extractor.extract(
+            text=corpus,
+            title=bando.titolo,
+            raw_hash=raw_hash,
+            visible_segments=visible_segments,
+            full_segments=boundary_segments,
+        )
+        if outcome is not None:
+            requirements, extraction_notes, confidence = outcome
+            notes.extend(extraction_notes)
+            raw_result = extractor.cache.get(raw_hash)
+            data_dichiarata = raw_result.deadline_iso if raw_result is not None else None
+            if data_dichiarata and _scadenza_nel_corpus(data_dichiarata, visible_segments):
+                scadenza = data_dichiarata
+                scadenza_verificata = True
+        else:
+            notes.append(
+                "Estrazione non eseguita (nessuna cache disponibile e provider "
+                "non disponibile in questo momento)."
+            )
+
+    opportunity = Opportunity(
+        id=f"bandi_live:{comune.codice_istat}:{raw_hash[:16]}",
+        kind=OpportunityKind.BANDO,
+        targets=[TargetGroup.TUTTI],
+        title=bando.titolo,
+        summary=body_text[:400] or None,
+        body=body_text or None,
+        requirements=requirements,
+        source=Source(
+            ente=comune.nome,
+            ente_codice_istat=comune.codice_istat,
+            connector="bandi_live",
+            url=bando.url,
+            fetched_at=datetime.now(timezone.utc),
+            raw_hash=raw_hash,
+        ),
+        confidence=confidence,
+        extraction_notes=notes,
+        pdfs_linked=0,
+        pdfs_opened=0,
+        pdfs_skipped=[],
+        chars_processed=len(corpus),
+    )
+
+    return BandoArricchito(
+        opportunity=opportunity,
+        scadenza=scadenza,
+        scadenza_verificata=scadenza_verificata,
+        tipo=scoperto.tipo,
+    )
+
+
+def _ordina_per_tipo(bandi: list[BandoArricchito]) -> list[BandoArricchito]:
+    """A5: agevolazioni prima dei concorsi. Ordinamento stabile — a parità di
+    `tipo` (inclusi i `None` dei gradini cpt/pages) l'ordine del portale
+    resta intatto."""
+    return sorted(bandi, key=lambda b: 1 if b.tipo == "concorso" else 0)
+
+
 # --- Entry point --------------------------------------------------------------
 
 
 def bandi_arricchiti(
     codice_istat: str | None, *, usa_cache: bool = True, timeout: float = 10.0
 ) -> BandiLiveEsito:
-    """Bandi di un comune, scoperti dal vivo su due gradini REST e arricchiti
-    con requisiti quote-gated. Funzione SYNC (sonda + parse LLM sono
-    bloccanti): chi la chiama da un contesto async lo fa con
+    """Bandi di un comune, scoperti dal vivo su tre gradini REST (cpt, pages,
+    alberatura) e arricchiti con requisiti quote-gated. Funzione SYNC (sonda
+    + parse LLM sono bloccanti): chi la chiama da un contesto async lo fa con
     `asyncio.to_thread` (mai `provider.parse` dentro un loop async).
 
     Con cache calda (entro `TTL_ORE`) torna l'esito già scritto, senza alcuna
@@ -508,50 +633,93 @@ def bandi_arricchiti(
         _in_cache(esito)
         return esito
 
+    rest_gradino: Literal["cpt", "pages"] | None = None
+    rest_ha_risposto = False  # il REST ha coperto, anche a zero bandi (D-B7)
+    rest_bandi: list[BandoArricchito] = []
+
     with _Sonda(timeout=timeout) as sonda:
         scoperta = _scopri_bandi(sonda, base)
-        if scoperta is None:
-            # `_scopri_bandi` torna None SOLO quando nessun gradino REST ha
-            # risposto: o il portale non ha davvero una sezione bandi, oppure
-            # è un WordPress irraggiungibile in questo istante. Non possiamo
-            # distinguere i due casi da qui — quindi NON cristallizziamo un
-            # "non coperto" in cache per TTL_ORE: sarebbe una bugia durevole
-            # su un blip di rete. Esito onesto ma volatile, riverificato alla
-            # prossima domanda (principio fondante: mai un verdetto che non
-            # possiamo sostenere).
-            return _esito_vuoto(comune, "non_coperto", None)
+        if scoperta is not None:
+            rest_ha_risposto = True
+            righe, rest_gradino = scoperta  # type: ignore[assignment]
+            coppie = [
+                (riga, bando)
+                for riga in righe
+                if (bando := _bando_da_riga(base, riga)) is not None
+            ]
 
-        righe, gradino = scoperta
-        coppie = [
-            (riga, bando)
-            for riga in righe
-            if (bando := _bando_da_riga(base, riga)) is not None
-        ]
+            if coppie:
+                _prune_cache(comune.codice_istat)
+                extractor = RequirementsExtractor(
+                    CACHE_DIR / comune.codice_istat / "estrazioni",
+                    provider=load_provider(role="extract"),
+                )
+                client = sonda._client
+                rest_bandi = [
+                    _arricchisci(client, base, comune, riga, bando, extractor)
+                    for riga, bando in coppie[:MAX_BANDI_ARRICCHITI]
+                ]
 
-        if not coppie:
-            esito = _esito_vuoto(comune, "coperto_senza_bandi", gradino)
-            _in_cache(esito)
-            return esito
+    if rest_bandi:
+        esito = BandiLiveEsito(
+            codice_istat=comune.codice_istat,
+            comune_nome=comune.nome,
+            esito="coperto_con_bandi",
+            gradino=rest_gradino,
+            verificato_il=_ora_iso(),
+            bandi=_ordina_per_tipo(rest_bandi),
+        )
+        _in_cache(esito)
+        return esito
 
+    # cpt/pages non hanno prodotto bandi — coperto a zero (D-B7) o muto del
+    # tutto. Terzo gradino (KAPI 8, B1) tentato SEMPRE a questo punto, con una
+    # sonda propria: non solo quando cpt/pages non coprono, ma anche come
+    # fonte aggiuntiva quando coprono a vuoto — Benevento è il caso reale: il
+    # WordPress in apice risponde (`pages`, coperto_senza_bandi) ma i
+    # concorsi veri vivono su un sottodominio Halley separato, invisibile a
+    # cpt/pages per costruzione.
+    scoperti = alberatura.estrai_bandi(comune.codice_istat, timeout=timeout)
+    if scoperti:
         _prune_cache(comune.codice_istat)
         extractor = RequirementsExtractor(
             CACHE_DIR / comune.codice_istat / "estrazioni",
             provider=load_provider(role="extract"),
         )
+        esito = BandiLiveEsito(
+            codice_istat=comune.codice_istat,
+            comune_nome=comune.nome,
+            esito="coperto_con_bandi",
+            gradino="alberatura",
+            verificato_il=_ora_iso(),
+            bandi=_ordina_per_tipo(
+                [
+                    _arricchisci_scoperto(comune, scoperto, extractor)
+                    for scoperto in scoperti[:MAX_BANDI_ARRICCHITI]
+                ]
+            ),
+        )
+        _in_cache(esito)
+        return esito
 
-        client = sonda._client
-        arricchiti = [
-            _arricchisci(client, base, comune, riga, bando, extractor)
-            for riga, bando in coppie[:MAX_BANDI_ARRICCHITI]
-        ]
+    if rest_ha_risposto:
+        # cpt/pages hanno coperto a zero e alberatura non aggiunge nulla
+        # (rami assenti o zero bandi): il verdetto onesto resta quello che
+        # ha davvero risposto, cacheabile (D-B7 — copertura confermata).
+        esito = _esito_vuoto(comune, "coperto_senza_bandi", rest_gradino)
+        _in_cache(esito)
+        return esito
 
-    esito = BandiLiveEsito(
-        codice_istat=comune.codice_istat,
-        comune_nome=comune.nome,
-        esito="coperto_con_bandi",
-        gradino=gradino,  # type: ignore[arg-type]
-        verificato_il=_ora_iso(),
-        bandi=arricchiti,
-    )
-    _in_cache(esito)
-    return esito
+    if scoperti is not None:
+        # alberatura ha coperto (rami letti) ma zero bandi, e cpt/pages non
+        # hanno coperto affatto: comunque una copertura confermata.
+        esito = _esito_vuoto(comune, "coperto_senza_bandi", "alberatura")
+        _in_cache(esito)
+        return esito
+
+    # Nessuno dei tre gradini ha risposto: portale non leggibile ORA (blip di
+    # rete o davvero assente) — non possiamo sostenerlo per TTL_ORE, quindi
+    # non lo cristallizziamo in cache. Esito onesto ma volatile, riverificato
+    # alla prossima domanda (principio fondante: mai un verdetto che non
+    # possiamo sostenere).
+    return _esito_vuoto(comune, "non_coperto", None)

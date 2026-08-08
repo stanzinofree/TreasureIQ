@@ -188,7 +188,15 @@ export default async function SchedaComunePage({
               <>
                 {" "}
                 ·{" "}
-                <a href={scheda.sito} target="_blank" rel="noopener">
+                <a
+                  href={
+                    scheda.sito.startsWith("http")
+                      ? scheda.sito
+                      : `https://${scheda.sito}`
+                  }
+                  target="_blank"
+                  rel="noopener"
+                >
                   sito ufficiale
                 </a>
               </>

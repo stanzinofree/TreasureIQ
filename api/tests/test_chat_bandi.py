@@ -118,11 +118,12 @@ def test_trappola_minori_intatta_nella_ricerca_comuni():
 # --- 2. Il ramo di risposta ---------------------------------------------------
 
 
-def _bando(titolo: str) -> BandoArricchito:
+def _bando(titolo: str, *, tipo=None) -> BandoArricchito:
     return BandoArricchito(
         opportunity=Opportunity.model_construct(title=titolo),
         scadenza=None,
         scadenza_verificata=False,
+        tipo=tipo,
     )
 
 
@@ -177,6 +178,38 @@ def test_ramo_coperto_con_bandi_usa_il_comune_del_profilo_non_il_testo():
     # Il payload strutturato porta i bandi, il testo no.
     assert answer.bandi_live is esito
     assert answer.bandi_live.bandi[0].opportunity.title == "Avviso pubblico contributi 2026"
+
+
+def test_gradino_alberatura_e_tipo_bando_arrivano_su_chat_answer():
+    """KAPI 8 (bandi-alberatura, B2): `gradino="alberatura"` e il campo
+    `tipo` di ogni `BandoArricchito` devono attraversare `respond.py` intatti
+    fino a `ChatAnswer.bandi_live` — stesso punto dove L-3 (ciclo 7) e' stato
+    rotto da un campo non proiettato. Qui il payload e' lo STESSO oggetto
+    (`is esito`), quindi provare l'identita' e i suoi campi basta a
+    dimostrare che nulla lo ricompone o lo tronca lungo la strada."""
+    esito = BandiLiveEsito(
+        codice_istat=respond_mod.DEFAULT_COMUNE_ISTAT,
+        comune_nome=respond_mod.DEFAULT_COMUNE_NOME,
+        esito="coperto_con_bandi",
+        gradino="alberatura",
+        verificato_il="2026-08-08T09:30:00+00:00",
+        bandi=[
+            _bando("Contributo affitto", tipo="agevolazione"),
+            _bando("Concorso pubblico istruttore", tipo="concorso"),
+        ],
+    )
+    modello = ChatIntent(topic=Topic.BANDI, kind=QuestionKind.INFORMAZIONE)
+
+    with mock.patch("treasureiq.bandi_live.bandi_arricchiti", return_value=esito):
+        answer = _componi(
+            "che bandi ci sono?",
+            modello,
+            profile=_profilo_albano(),
+        )
+
+    assert answer.bandi_live is esito
+    assert answer.bandi_live.gradino == "alberatura"
+    assert [b.tipo for b in answer.bandi_live.bandi] == ["agevolazione", "concorso"]
 
 
 def test_primo_turno_senza_profilo_usa_il_comune_nominato_nel_testo():
@@ -421,3 +454,178 @@ def test_categoria_per_topic_include_bandi():
     from treasureiq.chat.categorie import CATEGORIA_PER_TOPIC
 
     assert Topic.BANDI in CATEGORIA_PER_TOPIC
+
+
+# --- 4. Filtro conversazionale per tema (KAPI 9, bandi-conversazionale) -----
+
+
+@pytest.mark.parametrize(
+    "messaggio, atteso",
+    [
+        ("ci sono bandi per la mobilità?", "mobilità"),
+        ("ci sono bandi?", None),
+        ("bandi", None),
+        ("avviso pubblico per la mobilità", "mobilità"),
+        # Connettivo ("della") e stopword ("ci", "sono") tolti: resta solo il
+        # tema, non l'intera coda di frase.
+        ("ci sono bandi della mobilità?", "mobilità"),
+        # Tema multi-parola: entrambi i token restano (≤3 parole).
+        ("ci sono bandi per i servizi sociali?", "servizi sociali"),
+        # Frase libera di presentazione: la coda dopo «bandi» è tutta
+        # filler/verbi-domanda → nessun tema, nessun filtro fantasma.
+        (
+            "ciao sono Andrea, vivo a Benevento, ci sono bandi a cui posso accedere?",
+            None,
+        ),
+        # BLOCKER review: saluto + nome + comune PRECEDONO la keyword «bandi»,
+        # quindi la coda è vuota → None. Nome proprio mai scambiato per tema.
+        ("Ciao, sono Andrea, vivo a Benevento, avete bandi?", None),
+    ],
+)
+def test_estrai_tema(messaggio, atteso):
+    assert respond_mod._estrai_tema(messaggio) == atteso
+
+
+def test_estrai_tema_non_include_il_nome_del_comune():
+    """Il comune nominato («Benevento») non deve mai finire nel tema — lo
+    riconosce la stessa `_comune_nominato` usata per il routing (R-9)."""
+    assert (
+        respond_mod._estrai_tema("ci sono bandi a Benevento per la mobilità?")
+        == "mobilità"
+    )
+
+
+def test_risposta_bandi_partiziona_per_tema_senza_perdere_bandi():
+    """3 bandi, 1 solo titolo parla di mobilità: quello va marcato
+    `corrisponde=True` e in cima; gli altri due `corrisponde=False` ma
+    restano nell'esito — il filtro evidenzia, non esclude (A1/A6)."""
+    esito = BandiLiveEsito(
+        codice_istat=respond_mod.DEFAULT_COMUNE_ISTAT,
+        comune_nome=respond_mod.DEFAULT_COMUNE_NOME,
+        esito="coperto_con_bandi",
+        gradino="cpt",
+        verificato_il="2026-08-08T09:30:00+00:00",
+        bandi=[
+            _bando("Avviso pubblico contributi affitto"),
+            _bando("Bando per la mobilità sostenibile"),
+            _bando("Concorso pubblico istruttore"),
+        ],
+    )
+    modello = ChatIntent(topic=Topic.BANDI, kind=QuestionKind.INFORMAZIONE)
+
+    with mock.patch("treasureiq.bandi_live.bandi_arricchiti", return_value=esito):
+        answer = _componi(
+            "ci sono bandi per la mobilità?", modello, profile=_profilo_albano()
+        )
+
+    bandi = answer.bandi_live.bandi
+    assert len(bandi) == 3  # nessuno perso (A6)
+    assert bandi[0].opportunity.title == "Bando per la mobilità sostenibile"
+    assert bandi[0].corrisponde is True
+    assert [b.corrisponde for b in bandi[1:]] == [False, False]
+    assert answer.bandi_live.tema == "mobilità"
+    # L'esito e' una copia per-richiesta: l'oggetto cache condiviso non e'
+    # mai mutato (`bandi[0]` originale nell'esito passato al mock resta con
+    # `corrisponde=None`).
+    assert esito.bandi[1].corrisponde is None
+
+
+def test_risposta_bandi_template_con_un_solo_match():
+    esito = BandiLiveEsito(
+        codice_istat=respond_mod.DEFAULT_COMUNE_ISTAT,
+        comune_nome=respond_mod.DEFAULT_COMUNE_NOME,
+        esito="coperto_con_bandi",
+        gradino="cpt",
+        verificato_il="2026-08-08T09:30:00+00:00",
+        bandi=[
+            _bando("Avviso pubblico contributi affitto"),
+            _bando("Bando per la mobilità sostenibile"),
+        ],
+    )
+    modello = ChatIntent(topic=Topic.BANDI, kind=QuestionKind.INFORMAZIONE)
+
+    with mock.patch("treasureiq.bandi_live.bandi_arricchiti", return_value=esito):
+        answer = _componi(
+            "ci sono bandi per la mobilità?", modello, profile=_profilo_albano()
+        )
+
+    assert answer.reply.startswith(
+        f"Ho cercato «mobilità» tra i bandi di {respond_mod.DEFAULT_COMUNE_NOME}: "
+        "1 corrisponde."
+    )
+
+
+def test_risposta_bandi_template_con_piu_match():
+    esito = BandiLiveEsito(
+        codice_istat=respond_mod.DEFAULT_COMUNE_ISTAT,
+        comune_nome=respond_mod.DEFAULT_COMUNE_NOME,
+        esito="coperto_con_bandi",
+        gradino="cpt",
+        verificato_il="2026-08-08T09:30:00+00:00",
+        bandi=[
+            _bando("Bando per la mobilità sostenibile"),
+            _bando("Contributo mobilità elettrica"),
+        ],
+    )
+    modello = ChatIntent(topic=Topic.BANDI, kind=QuestionKind.INFORMAZIONE)
+
+    with mock.patch("treasureiq.bandi_live.bandi_arricchiti", return_value=esito):
+        answer = _componi(
+            "ci sono bandi per la mobilità?", modello, profile=_profilo_albano()
+        )
+
+    assert answer.reply.startswith(
+        f"Ho cercato «mobilità» tra i bandi di {respond_mod.DEFAULT_COMUNE_NOME}: "
+        "2 corrispondono."
+    )
+
+
+def test_risposta_bandi_template_zero_match():
+    esito = BandiLiveEsito(
+        codice_istat=respond_mod.DEFAULT_COMUNE_ISTAT,
+        comune_nome=respond_mod.DEFAULT_COMUNE_NOME,
+        esito="coperto_con_bandi",
+        gradino="cpt",
+        verificato_il="2026-08-08T09:30:00+00:00",
+        bandi=[
+            _bando("Avviso pubblico contributi affitto"),
+            _bando("Concorso pubblico istruttore"),
+        ],
+    )
+    modello = ChatIntent(topic=Topic.BANDI, kind=QuestionKind.INFORMAZIONE)
+
+    with mock.patch("treasureiq.bandi_live.bandi_arricchiti", return_value=esito):
+        answer = _componi(
+            "ci sono bandi per la mobilità?", modello, profile=_profilo_albano()
+        )
+
+    assert answer.reply == (
+        "Nessun bando corrisponde a «mobilità»; te li mostro tutti (2)."
+    )
+    assert answer.bandi_live.tema == "mobilità"
+    assert all(b.corrisponde is False for b in answer.bandi_live.bandi)
+
+
+def test_risposta_bandi_senza_tema_reply_identica_a_prima_del_ciclo():
+    """A3/D-07: senza tema estratto, la reply resta byte-identica al
+    comportamento precedente a questo ciclo, e `tema`/`corrisponde` restano
+    `None` su tutta la riga."""
+    esito = BandiLiveEsito(
+        codice_istat=respond_mod.DEFAULT_COMUNE_ISTAT,
+        comune_nome=respond_mod.DEFAULT_COMUNE_NOME,
+        esito="coperto_con_bandi",
+        gradino="cpt",
+        verificato_il="2026-08-08T09:30:00+00:00",
+        bandi=[_bando("Avviso pubblico contributi 2026")],
+    )
+    modello = ChatIntent(topic=Topic.BANDI, kind=QuestionKind.INFORMAZIONE)
+
+    with mock.patch("treasureiq.bandi_live.bandi_arricchiti", return_value=esito):
+        answer = _componi("che bandi ci sono?", modello, profile=_profilo_albano())
+
+    assert answer.reply == (
+        "Ho letto ora la sezione Amministrazione Trasparente di "
+        f"{respond_mod.DEFAULT_COMUNE_NOME}. Verificato il 2026-08-08T09:30:00+00:00."
+    )
+    assert answer.bandi_live.tema is None
+    assert all(b.corrisponde is None for b in answer.bandi_live.bandi)

@@ -118,6 +118,19 @@ def _isola_cache(tmp_path, monkeypatch):
     monkeypatch.setattr(bandi_live, "CACHE_DIR", tmp_path / "bandi-criteri")
 
 
+@pytest.fixture(autouse=True)
+def _alberatura_muta_di_default(monkeypatch):
+    """Terzo gradino (KAPI 8): quando cpt/pages non producono bandi,
+    `bandi_arricchiti` ORA prova sempre anche `alberatura` — con una sonda di
+    rete propria. Di default nei test la si tiene muta (`None`, come un
+    portale irraggiungibile) cosi' i test scritti per i primi due gradini
+    restano deterministici e senza rete; chi vuole esercitare il terzo
+    gradino lo rimonkeypatcha esplicitamente sull'oggetto `monkeypatch`."""
+    monkeypatch.setattr(
+        bandi_live.alberatura, "estrai_bandi", lambda codice, timeout=8.0: None
+    )
+
+
 def _monkeypatch_sonda(monkeypatch, json_per_url: dict[str, object]) -> _SondaFinta:
     sonda = _SondaFinta(json_per_url)
     monkeypatch.setattr(bandi_live, "_Sonda", lambda timeout=10.0: sonda)
@@ -197,22 +210,105 @@ def test_rung2_falsi_positivi_scartati_coperto_senza_bandi(monkeypatch):
     assert esito.bandi == []
 
 
-# --- 4. entrambi i gradini miss -> non_coperto, zero terzo tentativo --------
+# --- 4. cpt/pages miss -> terzo gradino (alberatura); tutti e tre miss -> non_coperto
 
 
-def test_entrambi_i_gradini_miss_non_coperto(monkeypatch):
+def test_cpt_pages_miss_alberatura_muta_non_coperto(monkeypatch):
+    """I due gradini REST (cpt/pages) non coprono, e il terzo (`alberatura`,
+    KAPI 8) e' anch'esso muto (`None`): esito onesto `non_coperto`, non
+    cristallizzato in cache (stesso principio del miss a due gradini)."""
     _monkeypatch_comune(monkeypatch, COMUNE_TEST)
     sonda = _monkeypatch_sonda(monkeypatch, {_URL_TASSONOMIE: {}})
     _monkeypatch_provider(monkeypatch, _ProviderFinto(esplode=True))
+    monkeypatch.setattr(
+        bandi_live.alberatura, "estrai_bandi", lambda codice, timeout=8.0: None
+    )
 
     esito = bandi_live.bandi_arricchiti("058003", usa_cache=False)
 
     assert esito.esito == "non_coperto"
     assert esito.gradino is None
     assert esito.bandi == []
-    # Solo tassonomie + le 6 SEARCH_KEYWORDS: nessun terzo tentativo (niente
-    # scraper Tier 3, niente rotta oltre le due previste dal contratto).
+    # Solo tassonomie + le 6 SEARCH_KEYWORDS sul gradino cpt/pages: nessun
+    # terzo tentativo su QUELLA sonda (niente scraper Tier 3). Il terzo
+    # gradino vero e proprio (`alberatura`) usa una sonda propria, mockata
+    # sopra a livello di funzione — non transita da `sonda`.
     assert sonda.richieste == [_URL_TASSONOMIE, *[_url_pages(k) for k in bandi_live.SEARCH_KEYWORDS]]
+
+
+def test_cpt_pages_miss_alberatura_copre_ordina_agevolazioni_prima(monkeypatch):
+    """Terzo gradino: quando cpt/pages non coprono, `alberatura.estrai_bandi`
+    diventa la fonte. A5: agevolazioni prima dei concorsi in un ordinamento
+    stabile, `tipo` valorizzato da `BandoScoperto.tipo` su ogni bando."""
+    from treasureiq.alberatura import BandoScoperto
+    from treasureiq.mappa_connettore import Bando
+
+    _monkeypatch_comune(monkeypatch, COMUNE_TEST)
+    _monkeypatch_sonda(monkeypatch, {_URL_TASSONOMIE: {}})
+    _monkeypatch_provider(monkeypatch, _ProviderFinto(esplode=True))
+
+    scoperti = [
+        BandoScoperto(
+            bando=Bando(
+                titolo="Concorso pubblico istruttore",
+                url=f"{BASE}/zf/index.php/bandi-di-concorso/dettaglio/1",
+                data="31/12/2026",
+                anteprima=None,
+            ),
+            tipo="concorso",
+            vendor="halley",
+        ),
+        BandoScoperto(
+            bando=Bando(
+                titolo="Contributo affitto",
+                url=f"{BASE}/amministrazione-trasparente/contributo-affitto",
+                data="",
+                anteprima="Contributo per famiglie in difficolta' economica.",
+            ),
+            tipo="agevolazione",
+            vendor="wp",
+        ),
+    ]
+    monkeypatch.setattr(
+        bandi_live.alberatura,
+        "estrai_bandi",
+        lambda codice, timeout=8.0: scoperti,
+    )
+
+    esito = bandi_live.bandi_arricchiti("058003", usa_cache=False)
+
+    assert esito.esito == "coperto_con_bandi"
+    assert esito.gradino == "alberatura"
+    assert [b.tipo for b in esito.bandi] == ["agevolazione", "concorso"]
+    concorso = esito.bandi[1]
+    assert concorso.opportunity.title == "Concorso pubblico istruttore"
+    # Concorso: scadenza copiata verbatim dalla colonna strutturale del
+    # listing, mai passata dall'estrattore (D-06).
+    assert concorso.scadenza == "31/12/2026"
+    assert concorso.scadenza_verificata is True
+    assert concorso.opportunity.requirements == bandi_live.Requirements()
+
+
+def test_alberatura_senza_bandi_coperto_senza_bandi_cache(monkeypatch):
+    """Rami trovati ma nessun bando estratto (`[]`, non `None`):
+    `coperto_senza_bandi` con `gradino="alberatura"`, e la cache scrive
+    l'esito (a differenza del `None`, che non e' mai cristallizzato)."""
+    _monkeypatch_comune(monkeypatch, COMUNE_TEST)
+    _monkeypatch_sonda(monkeypatch, {_URL_TASSONOMIE: {}})
+    _monkeypatch_provider(monkeypatch, _ProviderFinto(esplode=True))
+    monkeypatch.setattr(
+        bandi_live.alberatura, "estrai_bandi", lambda codice, timeout=8.0: []
+    )
+
+    esito = bandi_live.bandi_arricchiti("058003", usa_cache=False)
+
+    assert esito.esito == "coperto_senza_bandi"
+    assert esito.gradino == "alberatura"
+    assert esito.bandi == []
+
+    cached = bandi_live._da_cache("058003")
+    assert cached is not None
+    assert cached.gradino == "alberatura"
 
 
 # --- 5. TTL hit (secondo giro): provider che esplode -> zero-LLM ------------

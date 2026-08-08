@@ -856,7 +856,17 @@ function BandoLive({
             ★ in linea col tuo profilo
           </span>
         )}
+        {bando.tipo && (
+          <span className={`tag-tipo-bando tag-tipo-bando--${bando.tipo}`}>
+            {bando.tipo === "agevolazione" ? "agevolazione" : "concorso"}
+          </span>
+        )}
       </span>
+      {bando.tipo === "concorso" && (
+        <p className="bandi-comune__caveat">
+          Concorso o offerta di lavoro — verifica se è ancora aperto sul portale del comune.
+        </p>
+      )}
       {opportunity.summary && (
         <span className="mappa-servizi__scheda-campo">
           <span className="mappa-servizi__scheda-etichetta">Descrizione</span>
@@ -925,6 +935,15 @@ function BandoLive({
  *  dentro `reply.bandi_live` — nessuna fetch qui, il payload è calcolato
  *  server-side (due gradini REST, cache TTL, D-05/D-07). Si limita a
  *  renderlo, mai a ricomporlo. */
+/** Ordine dei gruppi (ciclo 9, D-04): Agevolazioni prima, poi Concorsi (stesso
+ *  ordine di `_ordina_per_tipo` lato backend), «Altri» in coda per `tipo`
+ *  assente — non una categoria dichiarata, solo una rete di sicurezza. */
+const GRUPPI_BANDI: { tipo: "agevolazione" | "concorso" | null; etichetta: string }[] = [
+  { tipo: "agevolazione", etichetta: "Agevolazioni" },
+  { tipo: "concorso", etichetta: "Concorsi" },
+  { tipo: null, etichetta: "Altri" },
+];
+
 function BandiLive({ esito }: { esito: BandiLiveEsito }) {
   function formattaData(iso: string): string {
     const d = new Date(iso);
@@ -963,16 +982,55 @@ function BandiLive({ esito }: { esito: BandiLiveEsito }) {
   if (esito.bandi.length === 0) return null;
   return (
     <div className="bandi-comune">
-      <ul className="bandi-comune__lista">
-        {esito.bandi.map((bando, indice) => (
-          <BandoLive
-            key={`${bando.opportunity.id}:${indice}`}
-            bando={bando}
-            verificatoIl={esito.verificato_il}
-            formattaData={formattaData}
-          />
-        ))}
-      </ul>
+      {GRUPPI_BANDI.map((gruppo) => {
+        const bandiGruppo = esito.bandi.filter((bando) => (bando.tipo ?? null) === gruppo.tipo);
+        // "Altri" (tipo assente) è una fogna di sicurezza, non una categoria
+        // reale: la si mostra solo se contiene qualcosa. Agevolazioni/Concorsi
+        // restano sempre visibili, «(0)» incluso — coerenza dei conteggi.
+        if (gruppo.tipo === null && bandiGruppo.length === 0) return null;
+        // Filtro tematico attivo (D-04): matched resta espanso, il resto
+        // collassa dietro «▸ espandi» senza sparire — nessun bando escluso.
+        const matched = esito.tema ? bandiGruppo.filter((bando) => bando.corrisponde === true) : bandiGruppo;
+        const resto = esito.tema ? bandiGruppo.filter((bando) => bando.corrisponde !== true) : [];
+        return (
+          <div className="bandi-comune__gruppo" key={gruppo.etichetta}>
+            <p className="bandi-comune__gruppo-titolo">
+              {esito.tema
+                ? `${gruppo.etichetta} · filtro «${esito.tema}» (${matched.length}/${bandiGruppo.length})`
+                : `${gruppo.etichetta} (${bandiGruppo.length})`}
+            </p>
+            {matched.length > 0 && (
+              <ul className="bandi-comune__lista">
+                {matched.map((bando, indice) => (
+                  <BandoLive
+                    key={`${bando.opportunity.id}:${indice}`}
+                    bando={bando}
+                    verificatoIl={esito.verificato_il}
+                    formattaData={formattaData}
+                  />
+                ))}
+              </ul>
+            )}
+            {resto.length > 0 && (
+              <details className="bandi-comune__espandi">
+                <summary className="bandi-comune__espandi-riga">
+                  ▸ espandi altri {resto.length} bandi che non corrispondono a «{esito.tema}»
+                </summary>
+                <ul className="bandi-comune__lista">
+                  {resto.map((bando, indice) => (
+                    <BandoLive
+                      key={`${bando.opportunity.id}:${indice}`}
+                      bando={bando}
+                      verificatoIl={esito.verificato_il}
+                      formattaData={formattaData}
+                    />
+                  ))}
+                </ul>
+              </details>
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 }

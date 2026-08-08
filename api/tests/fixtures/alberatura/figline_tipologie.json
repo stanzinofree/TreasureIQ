@@ -1,0 +1,20 @@
+[
+ {
+  "id": 430,
+  "count": 10,
+  "name": "Atti generali",
+  "slug": "atti-generali"
+ },
+ {
+  "id": 449,
+  "count": 74,
+  "name": "Bandi di Concorso",
+  "slug": "bandi-di-concorso"
+ },
+ {
+  "id": 466,
+  "count": 14,
+  "name": "Criteri e modalità",
+  "slug": "criteri-e-modalita"
+ }
+]

@@ -51,7 +51,7 @@ export default function Feedback() {
   }
 
   return (
-    <form className="chiedi-inline" onSubmit={handleSubmit}>
+    <form className="feedback-form" onSubmit={handleSubmit}>
       <label htmlFor="feedback-testo">Com&apos;è andata? Lascia un feedback</label>
       <textarea
         id="feedback-testo"
@@ -67,7 +67,7 @@ export default function Feedback() {
           <button
             key={n}
             type="button"
-            className="button"
+            className={`feedback-voto${voto === n ? " feedback-voto--attivo" : ""}`}
             aria-pressed={voto === n}
             onClick={() => setVoto(voto === n ? null : n)}
           >
@@ -76,7 +76,11 @@ export default function Feedback() {
         ))}
       </div>
 
-      <button type="submit" className="button" disabled={testo.trim().length === 0}>
+      <button
+        type="submit"
+        className="feedback-submit"
+        disabled={testo.trim().length === 0}
+      >
         Invia feedback
       </button>
 

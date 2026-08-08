@@ -2548,6 +2548,221 @@ def _ordina_bandi_per_profilo(
     return ordinati, True
 
 
+#: Parole-funzione italiane che non portano alcun tema: articoli,
+#: preposizioni, ausiliari e le forme più comuni in cui un cittadino
+#: introduce una domanda sui bandi («ci sono bandi per...», «avete bandi
+#: sulla...»). Tagliate qui, non nel keyword-hit: `_estrai_tema` deve
+#: restare deterministico e non dipendere dal matching morbido del match
+#: engine.
+_STOPWORD_TEMA = frozenset(
+    {
+        "ci",
+        "sono",
+        "per",
+        "di",
+        "la",
+        "lo",
+        "il",
+        "le",
+        "gli",
+        "un",
+        "una",
+        "uno",
+        "che",
+        "cosa",
+        "quali",
+        "quale",
+        "qualche",
+        "qualcuno",
+        "avete",
+        "esistono",
+        "esiste",
+        "trovo",
+        "posso",
+        "vorrei",
+        "sapere",
+        "se",
+        "e",
+        "ed",
+        "o",
+        "ma",
+        "anche",
+        "solo",
+        "ancora",
+        "gia",
+        "già",
+        "non",
+        "mi",
+        "ti",
+        "si",
+        "noi",
+        "voi",
+        "loro",
+        "dei",
+        "nel",
+        "nello",
+        "nella",
+        "nei",
+        "negli",
+        "nelle",
+        "al",
+        "allo",
+        "alla",
+        "ai",
+        "agli",
+        "alle",
+        "dal",
+        "dallo",
+        "dalla",
+        "dai",
+        "dagli",
+        "dalle",
+        "sul",
+        "sui",
+        "sulle",
+        "con",
+        "tra",
+        "fra",
+        "come",
+        "dove",
+        "quando",
+        "perché",
+        "perche",
+        "cui",
+        "questo",
+        "questa",
+        "questi",
+        "queste",
+        "suo",
+        "sua",
+        "suoi",
+        "sue",
+        "mio",
+        "mia",
+        "miei",
+        "mie",
+        "nostro",
+        "nostra",
+        # filler modali/verbi-domanda: compaiono nella coda dopo «bandi»
+        # («bandi a cui posso accedere») senza essere un tema.
+        "accedere",
+        "richiedere",
+        "ottenere",
+        "avere",
+        "fare",
+        "usufruire",
+        "partecipare",
+        "aperti",
+        "aperto",
+        "attivi",
+        "attivo",
+        "disponibili",
+        "disponibile",
+        "adesso",
+        "ora",
+        # saluti/presentazione: di norma precedono «bandi» (già esclusi dal
+        # taglio sulla coda), ma tenerli qui è una rete di sicurezza a costo zero.
+        "ciao",
+        "salve",
+        "buongiorno",
+        "buonasera",
+        "grazie",
+        "scusa",
+        "scusi",
+    }
+)
+
+#: Tetto alla lunghezza del tema estratto (D-06, red-team): il tema finisce
+#: eco-iato verbatim dentro la reply, quindi un messaggio patologicamente
+#: lungo non deve produrre una risposta patologicamente lunga. Non è HTML e
+#: non gira in una shell — è solo interpolazione di stringa — ma un limite
+#: onesto tiene la risposta leggibile.
+_TEMA_MAX_CHARS = 60
+
+
+def _estrai_tema(message: str) -> str | None:
+    """Estrae dal messaggio del cittadino il tema di un filtro sui bandi
+    («ci sono bandi per la mobilità?» → "mobilità"), deterministico (D-01):
+    nessun modello, solo sottrazione di ciò che non è tema.
+
+    Il tema è ciò che il cittadino aggiunge DOPO aver nominato i bandi:
+    «bandi per la mobilità», «avviso pubblico sulla casa». Quindi si guarda
+    solo la CODA che segue l'ultima keyword di `TOPIC_KEYWORDS[Topic.BANDI]`
+    ("bando", "bandi", "avviso pubblico", "avvisi pubblici", "graduatoria").
+    Saluti, nome e presentazione precedono sempre la keyword («ciao sono
+    Andrea, vivo a Benevento, avete bandi?») e così non possono mai essere
+    scambiati per un tema — la causa del falso-positivo emersa in review.
+    Se nel messaggio non compare nessuna keyword bandi, non c'è un segnale
+    esplicito di tema: `None`, e il ramo si comporta come prima (D-07).
+
+    Sulla coda, ordine di sottrazione (ognuno riduce il residuo successivo):
+
+    1. Le parole del nome del comune già riconosciuto da `_comune_nominato`
+       (stessa funzione usata per il routing, R-9) — chi nomina il comune
+       non sta nominando un tema.
+    2. `_STOPWORD_TEMA`: parole-funzione, saluti, verbi-domanda («a cui posso
+       accedere») comuni in una domanda.
+    3. `_CONNETTIVI_NOME` e `_PAROLE_NON_TOPONIMI`: riusate qui non per il
+       loro scopo originale (disambiguare comuni), ma perché sono comunque
+       parole-funzione o non-contenuto già validate altrove.
+    4. Token sotto le tre lettere — troppo corti per portare un tema.
+
+    Quel che resta, nell'ordine in cui compare, è il tema — ma solo se sono
+    1-3 parole (DISCRETION): residui più lunghi sono rumore di frase, non un
+    filtro. Unito con uno spazio e troncato a `_TEMA_MAX_CHARS` (D-06,
+    red-team «tema enorme»). Se non resta nulla o restano troppe parole:
+    `None` (D-07).
+
+    Il tema è un'eco: mai tradotto, riformulato o passato a un modello
+    (A5). Se sembra sbagliato al cittadino, resta comunque leggibile perché
+    sono le sue stesse parole.
+    """
+    testo = message.lower()
+    # Fine dell'ULTIMA keyword bandi nel messaggio: il tema vive nella coda.
+    fine_keyword = -1
+    for frase in TOPIC_KEYWORDS[Topic.BANDI]:
+        inizio = 0
+        while (pos := testo.find(frase, inizio)) >= 0:
+            fine_keyword = max(fine_keyword, pos + len(frase))
+            inizio = pos + len(frase)
+    if fine_keyword < 0:
+        return None
+    coda = testo[fine_keyword:]
+    comune = _comune_nominato(message)
+    parole_comune = set(comune.nome.lower().split()) if comune is not None else set()
+    parole = re.findall(r"[a-zà-ù']+", coda)
+    residuo = [
+        parola
+        for parola in parole
+        if len(parola) >= 3
+        and parola not in _STOPWORD_TEMA
+        and parola not in _CONNETTIVI_NOME
+        and parola not in _PAROLE_NON_TOPONIMI
+        and parola not in parole_comune
+    ]
+    if not residuo or len(residuo) > 3:
+        return None
+    tema = " ".join(residuo).strip()
+    return tema[:_TEMA_MAX_CHARS] if tema else None
+
+
+def _bando_tocca_il_tema(bando: BandoArricchito, tema: str) -> bool:
+    """Se `tema` (estratto da `_estrai_tema`) trova riscontro nel bando:
+    titolo e riassunto insieme, stesso haystack usato da `_pertinente` per lo
+    stesso motivo — il titolo porta l'argomento, il riassunto lo completa
+    quando il titolo da solo è troppo scarno. Riusa `_keyword_hit` (726):
+    stessa logica di match già validata (parola intera + radici tronche),
+    non una nuova euristica per lo stesso problema.
+
+    Tema multi-parola: match ANY-token (default spec DISCRETION «almeno uno»),
+    non frase-intera contigua — «servizi sociali» tocca un bando che nomina
+    solo «sociali». Ogni token del tema è una keyword separata per
+    `_keyword_hit`, che va già a OR sulle keyword.
+    """
+    haystack = f"{bando.opportunity.title} {bando.opportunity.summary or ''}".lower()
+    return _keyword_hit(haystack=haystack, keywords=tuple(tema.split()))
+
+
 async def _risposta_bandi(
     *, message: str, profile: CitizenProfile | None, comune_istat: str | None
 ) -> ChatAnswer:
@@ -2643,10 +2858,40 @@ async def _risposta_bandi(
         )
         data_gap = "none_found"
     else:  # coperto_con_bandi
-        reply = (
-            f"Ho letto ora la sezione Amministrazione Trasparente di "
-            f"{esito.comune_nome}. Verificato il {esito.verificato_il}."
-        )
+        # Filtro conversazionale (KAPI 9, ciclo bandi-conversazionale): se il
+        # cittadino ha nominato un tema («bandi per la mobilità?»), lo
+        # eco-iamo nella risposta e marchiamo quali bandi lo riguardano — MAI
+        # li togliamo dall'esito, solo li mettiamo in cima (D-07: nessun tema
+        # ⇒ risposta identica a prima di questo ciclo, byte per byte).
+        tema = _estrai_tema(message)
+        if tema is None:
+            reply = (
+                f"Ho letto ora la sezione Amministrazione Trasparente di "
+                f"{esito.comune_nome}. Verificato il {esito.verificato_il}."
+            )
+        else:
+            bandi_con_match = [
+                bando.model_copy(
+                    update={"corrisponde": _bando_tocca_il_tema(bando, tema)}
+                )
+                for bando in esito.bandi
+            ]
+            matched = [b for b in bandi_con_match if b.corrisponde]
+            non_matched = [b for b in bandi_con_match if not b.corrisponde]
+            esito = esito.model_copy(
+                update={"bandi": matched + non_matched, "tema": tema}
+            )
+            if matched:
+                verbo = "corrisponde" if len(matched) == 1 else "corrispondono"
+                reply = (
+                    f"Ho cercato «{tema}» tra i bandi di {esito.comune_nome}: "
+                    f"{len(matched)} {verbo}."
+                )
+            else:
+                reply = (
+                    f"Nessun bando corrisponde a «{tema}»; te li mostro "
+                    f"tutti ({len(esito.bandi)})."
+                )
         data_gap = None
         # Ordinamento morbido per aderenza al profilo. Non esclude nulla: se
         # qualche bando risuona coi segnali del cittadino, lo porta in cima e
@@ -3174,10 +3419,17 @@ async def build_chat_answer(
         # La coda si toglie anche nel vicolo cieco: la premessa «Attenzione» la
         # riscrive per intero. Resta solo se e' una domanda-chiarimento («?»).
         coda = "" if ((trovate_live or vicolo_cieco) and "?" not in risposta.reply) else risposta.reply
-        premessa = _premessa_fuori_copertura(
-            nominato, risposta, connettore, ha_scheda_laterale=numeri is not None
-        )
-        reply = premessa + ("\n\n" + coda if coda else "")
+        # BANDI con esito live gia' composto (`_risposta_bandi`) ha gia' un
+        # reply onesto (coperto/non coperto, advocacy inclusa): la premessa
+        # "fuori copertura" generica lo sovrascriverebbe e butterebbe via il
+        # testo corretto pur lasciando `bandi_live` intatto sull'oggetto.
+        if risposta.topic is Topic.BANDI and risposta.bandi_live is not None:
+            reply = risposta.reply
+        else:
+            premessa = _premessa_fuori_copertura(
+                nominato, risposta, connettore, ha_scheda_laterale=numeri is not None
+            )
+            reply = premessa + ("\n\n" + coda if coda else "")
         return replace(
             risposta,
             reply=reply,

@@ -16,6 +16,7 @@ the shape here.
 
 from __future__ import annotations
 
+import asyncio
 import json
 import logging
 import os
@@ -74,6 +75,7 @@ from treasureiq.sonda_live import (
     comune_per_codice,
     recupera_contatti,
 )
+from treasureiq.bandi_live import BandiLiveEsito, bandi_arricchiti
 from treasureiq.mappa_connettore import (
     Bando,
     CategoriaServizio,
@@ -2129,6 +2131,28 @@ def bandi_criteri_route(codice_istat: str) -> list[Bando]:
     verdetto di apertura (D-B4), nessuna cifra toccata dal modello (D-B7).
     """
     return bandi_criteri(codice_istat) or []
+
+
+@app.get(
+    "/api/mappa-connettore/{codice_istat}/bandi-criteri",
+    response_model=BandiLiveEsito,
+    tags=["Cittadino"],
+    dependencies=[Depends(limita_modello)],
+)
+async def bandi_criteri_live_route(codice_istat: str) -> BandiLiveEsito:
+    """I bandi del comune scoperti dal vivo su due gradini REST, arricchiti
+    con i requisiti (KAPI 7, bandi-live-agid).
+
+    A differenza di `/bandi` (Amministrazione Trasparente via CPT AgID
+    soltanto), questa rotta prova anche `wp/v2/pages` come secondo gradino —
+    così un comune "solo-HTML" con bandi veri non collassa su `non_coperto`.
+    Ogni bando trovato è arricchito con i requisiti estratti dal testo
+    (quote-gated, D-05) e con la scadenza SOLO se la data prodotta dal
+    modello è verificabile nel corpus letto (D-07). `esito="comune_ignoto"`
+    se `codice_istat` non è un comune noto. Sonda e parse LLM sono
+    bloccanti: girano in un thread separato, mai dentro il loop async.
+    """
+    return await asyncio.to_thread(bandi_arricchiti, codice_istat)
 
 
 @app.post("/api/chat", response_model=ChatOut, tags=["Cittadino"], dependencies=[Depends(limita_modello)])

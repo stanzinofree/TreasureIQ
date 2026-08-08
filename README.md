@@ -1,9 +1,11 @@
 # TreasureIQ
 
-Il tuo comune pubblica decine di servizi. Quanti ti riguardano davvero?
+Accedere alle informazioni dei comuni e delle PA non deve essere una caccia al
+tesoro. TreasureIQ ti aiuta a trovarle.
 
-TreasureIQ legge i servizi che un comune pubblica, li confronta con la situazione
-di un cittadino e dice a cosa può accedere — **e dove il comune non pubblica
+Oggi TreasureIQ risponde su agevolazioni comunali, recapiti degli uffici e
+scheda del comune — confrontando i servizi che un comune pubblica con la
+situazione del cittadino — **e dice quando il Comune non ha pubblicato
 abbastanza perché la domanda abbia risposta**.
 
 Progetto realizzato per il **SuperAgents Civic Hackathon** (Play New, 2026).

@@ -1,8 +1,8 @@
 /** Canali esterni (D-S7). Nessuna PII passa da TreasureIQ: questi helper
- *  costruiscono link verso canali già pubblici — GitHub, o la mail del Comune
- *  letta dal suo portale — non verso un form che raccoglie dati da noi. */
-
-const REPO = "https://github.com/stanzinofree/TreasureIQ";
+ *  costruiscono link verso un canale già pubblico — la mail del Comune letta
+ *  dal suo portale — non verso un form che raccoglie dati da noi. Il
+ *  feedback sul progetto va al nostro store (D-01, ciclo 6): vedi
+ *  `inviaFeedback` in `lib/api.ts` e il componente `Feedback.tsx`. */
 
 /** Attributi fissi per ogni link verso un canale esterno, così ogni
  *  consumatore li applica identici (D-S7: `target=_blank rel=noopener`). */
@@ -26,18 +26,6 @@ export function emailValida(indirizzo: string | null | undefined): boolean {
  *  altrimenti null: chi chiama rende un semplice testo, non un link avvelenabile. */
 export function mailtoSicuro(indirizzo: string | null | undefined): string | null {
   return emailValida(indirizzo) ? `mailto:${indirizzo!.trim()}` : null;
-}
-
-/** Feedback sul progetto → una issue su GitHub, il canale reale di chi lo
- *  mantiene. Niente Google Form e niente dati raccolti da noi: chi scrive lo
- *  fa su GitHub, con la propria identità, in pubblico. La label preseleziona
- *  la corsia giusta; il titolo è solo un segnaposto che l'utente riscrive. */
-export function linkFeedback(): string {
-  const params = new URLSearchParams({
-    labels: "feedback",
-    title: "Feedback dal cittadino",
-  });
-  return `${REPO}/issues/new?${params.toString()}`;
 }
 
 /** «Chiedi al tuo Comune di aprire i dati» → una mail precompilata al Comune,

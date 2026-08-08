@@ -793,6 +793,14 @@ export const inviaSegnalazione = (codiceIstat: string) =>
     body: JSON.stringify({ codice_istat: codiceIstat }),
   });
 
+/** D-01 ciclo 6 — il feedback va al nostro server e basta: nessuna mail
+ *  esposta, nessuna issue GitHub, nessun invio a terzi (SMTP deferred). */
+export const inviaFeedback = (testo: string, voto: number | null) =>
+  call<{ ok: boolean }>("/api/feedback", {
+    method: "POST",
+    body: JSON.stringify({ testo, voto }),
+  });
+
 /** One component of a comune's integration cost, with the fact behind it. */
 export interface VoceCosto {
   chiave: string;

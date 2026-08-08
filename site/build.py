@@ -165,7 +165,7 @@ def costruisci(out: Path, base: str) -> None:
     vetrina = (SITE / "vetrina.html").read_text("utf-8")
     vetrina = vetrina.replace("{{base}}", base).replace("{{home}}", home)
     (out / "index.html").write_text(
-        _guscio("TreasureIQ — le agevolazioni comunali che ti riguardano", vetrina, base, home, "vetrina"),
+        _guscio("TreasureIQ — le informazioni del tuo Comune, senza caccia al tesoro", vetrina, base, home, "vetrina"),
         "utf-8",
     )
 

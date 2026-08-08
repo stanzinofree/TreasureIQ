@@ -22,7 +22,7 @@ import os
 import time
 from collections import defaultdict
 import threading
-from datetime import date, datetime
+from datetime import date, datetime, timezone
 from decimal import Decimal
 from functools import lru_cache
 from pathlib import Path
@@ -67,7 +67,13 @@ from treasureiq.match.engine import (
     match,
     summarise,
 )
-from treasureiq.sonda_live import OrariLive, cerca_comuni, comune_per_codice, recupera_contatti
+from treasureiq.sonda_live import (
+    LIVE_DIR,
+    OrariLive,
+    cerca_comuni,
+    comune_per_codice,
+    recupera_contatti,
+)
 from treasureiq.mappa_connettore import (
     Bando,
     CategoriaServizio,
@@ -1306,6 +1312,55 @@ class SegnalazioneIn(BaseModel):
 
 
 # --------------------------------------------------------------------------
+# Feedback (D-01, D-02, D-06) — unlike segnalazioni, this store keeps the
+# citizen's free-text: a deliberate exception to the "no citizen text" rule,
+# which is why it lives in LIVE_DIR (gitignored, never versioned) and not in
+# DATA_DIR (tracked). No SMTP send, no GET, no echo of the text.
+# --------------------------------------------------------------------------
+
+FEEDBACK_PATH = LIVE_DIR / "feedback.jsonl"
+_feedback_lock = threading.Lock()
+_feedback_memory: list[dict] = []
+_feedback_memory_only = False
+
+
+def _append_feedback(testo: str, voto: int | None) -> None:
+    """Append one feedback record as a JSON line.
+
+    Append-only, unlike `_increment_segnalazione`'s read-modify-write: each
+    record is independent, so a simple `open(..., "a")` under the lock is
+    enough — no need for the tmp-file + `os.replace` dance segnalazioni uses
+    to keep a single shared counter consistent.
+
+    Falls back to an in-memory list, with a logged warning, if `LIVE_DIR`
+    turns out not to be writable — same fallback shape as segnalazioni.
+    """
+    global _feedback_memory_only
+    record = {
+        "ts": datetime.now(timezone.utc).isoformat(),
+        "testo": testo,
+        "voto": voto,
+    }
+    with _feedback_lock:
+        if _feedback_memory_only:
+            _feedback_memory.append(record)
+            return
+        try:
+            FEEDBACK_PATH.parent.mkdir(parents=True, exist_ok=True)
+            with FEEDBACK_PATH.open("a", encoding="utf-8") as handle:
+                handle.write(json.dumps(record, ensure_ascii=False) + "\n")
+        except OSError:
+            logger.warning("live dir not writable, falling back to in-memory feedback store")
+            _feedback_memory_only = True
+            _feedback_memory.append(record)
+
+
+class FeedbackIn(BaseModel):
+    testo: str = Field(min_length=1, max_length=2000)
+    voto: int | None = Field(default=None, ge=1, le=5)
+
+
+# --------------------------------------------------------------------------
 # Routes
 # --------------------------------------------------------------------------
 
@@ -1764,6 +1819,18 @@ def create_segnalazione(body: SegnalazioneIn) -> dict[str, int]:
 def get_segnalazioni() -> dict[str, int]:
     """Public per-comune counter — itself the published fact D-25 asks for."""
     return _read_segnalazioni()
+
+
+@app.post("/api/feedback", tags=["Cittadino"])
+def create_feedback(body: FeedbackIn) -> dict[str, bool]:
+    """Store one piece of citizen feedback (D-01, D-02, D-03).
+
+    Appends to `LIVE_DIR/feedback.jsonl` and stops there: no send, no echo
+    of the text back to the caller, no GET — this is not a published fact
+    the way the segnalazioni counter is.
+    """
+    _append_feedback(body.testo, body.voto)
+    return {"ok": True}
 
 
 class ApprofondimentoIn(BaseModel):

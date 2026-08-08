@@ -37,11 +37,11 @@ import RispostaCivica from "@/components/RispostaCivica";
 import PonteScala from "@/components/PonteScala";
 import { PRESETS } from "@/lib/profili-demo";
 import { useProfilo } from "@/lib/profilo";
-import { linkFeedback, LINK_ESTERNO } from "@/lib/moduli";
 import { conTagVerifica } from "@/lib/testo";
 import { useRisultati } from "@/lib/risultati";
 import { useScan } from "@/lib/scan";
 import ScanLive from "@/components/ScanLive";
+import Feedback from "@/components/Feedback";
 
 /** Stable DOM id for one card, so the side index can link straight to it. */
 function ancoraDi(messageId: string, matchId: string): string {
@@ -1594,17 +1594,11 @@ export default function Chat() {
           Stesso stato mostrato nel pannello a sinistra (un solo store). */}
       <ScanLive variante="chat" />
 
-      {/* Feedback esterno (D-S7): discreto, sotto l'intera conversazione, non
+      {/* Feedback (D-01, ciclo 6): un form verso il nostro store, non un
+          canale esterno. Discreto, sotto l'intera conversazione, non
           per-messaggio. Compare appena c'è almeno una risposta da giudicare —
           prima di allora non c'è niente su cui dare un parere. */}
-      {messages.some((m) => m.role === "assistant") && (
-        <p className="chiedi-inline">
-          Com&apos;è andata?{" "}
-          <a href={linkFeedback()} {...LINK_ESTERNO}>
-            Lascia un feedback →
-          </a>
-        </p>
-      )}
+      {messages.some((m) => m.role === "assistant") && <Feedback />}
 
       {error && (
         <p className="notice" role="alert">

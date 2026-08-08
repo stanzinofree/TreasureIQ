@@ -60,7 +60,10 @@ site/_preview/
 # requires and which is the point of the reproducibility argument.
 # D-33: dati acquisiti a runtime, mai versionati.
 # I dati curati stanno in data/, che è tracciata.
+# feedback.jsonl (D-06) e' il primo store col testo libero del cittadino:
+# non deve mai finire in git, per questo vive in data-live/ e non in data/.
 data-live/
+data/feedback.jsonl
 
 # Catture di rete (HAR): decine di megabyte di traffico registrato, utili per
 # capire l'API di una piattaforma e inutili da conservare. Quello che si e'

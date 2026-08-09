@@ -332,6 +332,50 @@ export const integrationAll = () => call<Integration[]>("/api/integration");
  */
 export type DataGap = "not_published" | "none_found" | "cambio_persona";
 
+/** Mirror esatto di `FiltroChiave` (`treasureiq/chat/filtri.py`). Enum chiuso:
+ *  nessun'altra stringa e' un filtro valido, ne' lato lettura ne' lato
+ *  override — un valore fuori catalogo qui non compilerebbe. */
+export type FiltroChiave =
+  | "comune"
+  | "disabilita"
+  | "disabilita_nucleo"
+  | "figli_minori"
+  | "eta"
+  | "anziano"
+  | "isee"
+  | "nucleo_familiare"
+  | "employment_status"
+  | "tema";
+
+/** Mirror esatto di `Span` (`treasureiq/chat/filtri.py`): dove nel testo del
+ *  cittadino il filtro e' stato letto, per mostrare la provenienza verbatim
+ *  invece che un'etichetta generica. */
+export interface FiltroSpan {
+  inizio: number;
+  fine: number;
+  testo: string;
+}
+
+/** Mirror esatto di `FiltroOut` (`api.py`, ciclo11 A6/L-3). Un filtro
+ *  RICONOSCIUTO in questo turno — `sorgente` distingue cosa venne dal testo
+ *  di questo messaggio da cosa venne dal profilo gia' noto o da un override
+ *  del client; `span` e' `null` quando la provenienza non e' testuale. */
+export interface FiltroOut {
+  chiave: FiltroChiave;
+  valore: string | number | boolean;
+  span: FiltroSpan | null;
+  sorgente: "testo" | "profilo" | "override_client";
+  negato: boolean;
+}
+
+/** Mirror esatto di `FiltroOverride` (`api.py`, ciclo11 A8/A12). `azione` e'
+ *  chiuso su `"rimuovi"` di proposito: il client puo' solo togliere
+ *  un'evidenza sbagliata, mai iniettarne una nuova per conto del cittadino. */
+export interface FiltroOverride {
+  chiave: FiltroChiave;
+  azione: "rimuovi";
+}
+
 /** Per-level counts of how a criterion's evidence was recovered — a manual
  * field, one extracted from prose by the quote-gated LLM, or one that stayed
  * illegible. Counts, so an absent level is `null`, never `0` (D-17: a missing
@@ -471,6 +515,192 @@ export interface ProfiloCapito {
   disabilita_nucleo: boolean | null;
 }
 
+/** Mirror esatto di `Requirements` (`api/treasureiq/schema.py`). Ogni campo
+ *  `null`/vuoto significa "non dichiarato dalla fonte", MAI "nessun vincolo"
+ *  — la UI deve distinguere le due cose, mai trattare un `null` come "chiunque
+ *  è ammesso". `isee_max`/`isee_min` arrivano come stringa (Decimal → JSON
+ *  string in pydantic v2): vanno renderizzati letteralmente, mai riletti come
+ *  number e ricalcolati. */
+export interface Requirements {
+  isee_max: string | null;
+  isee_min: string | null;
+  eta_min: number | null;
+  eta_max: number | null;
+  residenza_required: boolean;
+  residenza_comuni: string[];
+  nucleo_min: number | null;
+  figli_minori_required: boolean | null;
+  disabilita_required: boolean | null;
+  sesso: "f" | "m" | null;
+  disabilita_nucleo_required: boolean | null;
+  employment_status: string[];
+  other: string[];
+  /** True solo quando il valore viene da un campo tipizzato della fonte, non
+   *  da un'estrazione di prosa (D-05/D-05-bis). Non è un vincolo di
+   *  ammissibilità: è provenienza, va mostrata come tale se mostrata. */
+  source_typed: boolean;
+}
+
+/** Mirror esatto di `Money` (`schema.py`). Un importo, forse un range, forse
+ *  aperto: `note` copre i casi che resistono a una struttura (es. "50% della
+ *  spesa fino a capienza del fondo"). */
+export interface Amount {
+  min_eur: string | null;
+  max_eur: string | null;
+  note: string | null;
+}
+
+/** Mirror esatto di `Source` (`schema.py`), i campi usati dalla card
+ *  bandi-live per citare la fonte e collegarsi al portale. */
+export interface OpportunitySource {
+  ente: string;
+  ente_codice_istat: string | null;
+  connector: string;
+  url: string;
+  fetched_at: string;
+}
+
+/** Mirror esatto di `Opportunity` (`schema.py`) — i campi che la card
+ *  bandi-live legge davvero. Non un mirror totale del modello Python (i
+ *  campi di strumentazione D-16/D-17 non servono a questa card e non sono
+ *  qui), ma ogni campo presente è letterale, mai ricomposto. */
+export interface Opportunity {
+  id: string;
+  title: string;
+  summary: string | null;
+  kind: string;
+  requirements: Requirements;
+  amount: Amount | null;
+  deadline: string | null;
+  source: OpportunitySource;
+  confidence: string;
+  extraction_notes: string[];
+}
+
+/** Mirror esatto di `BandoArricchito` (`api/treasureiq/bandi_live.py` §5.2).
+ *  `scadenza` è presente SOLO se `scadenza_verificata` (D-07 quote-gate):
+ *  se `false`, `scadenza` va ignorata dalla UI anche se non è `null`. */
+export interface BandoArricchito {
+  opportunity: Opportunity;
+  scadenza: string | null;
+  scadenza_verificata: boolean;
+  /** Ranking morbido profilo↔requisiti (KAPI 7): `true` se il bando risuona
+   *  coi segnali del cittadino. NON è un verdetto di idoneità — è un ordine
+   *  indicativo, «controlla i requisiti». `false` di default. */
+  consigliato: boolean;
+  /** Classificazione del bando (ciclo 8, B2): `"agevolazione"` per contributi
+   *  economici, `"concorso"` per selezioni/offerte di lavoro. `null`/assente
+   *  se non classificato — la UI non mostra badge in quel caso. L'ordine dei
+   *  bandi resta deciso dal backend, il frontend non lo altera. */
+  tipo?: "agevolazione" | "concorso" | null;
+  /** Filtro tematico (ciclo 9, D-05): `true` se il titolo (fallback requisiti)
+   *  del bando risponde al `tema` estratto dal messaggio. `null`/assente
+   *  quando `BandiLiveEsito.tema` è assente — nessun filtro attivo, NON
+   *  trattarlo come `false`. */
+  corrisponde?: boolean | null;
+}
+
+/** Mirror esatto di `BandiLiveEsito` (`bandi_live.py` §5.2). Arriva dentro
+ *  `ChatOut.bandi_live` sulla risposta chat quando il topic è BANDI: nessuna
+ *  fetch separata, il payload è già calcolato server-side (B3). */
+export interface BandiLiveEsito {
+  codice_istat: string;
+  comune_nome: string;
+  esito:
+    | "coperto_con_bandi"
+    | "coperto_senza_bandi"
+    | "non_coperto"
+    | "comune_ignoto";
+  gradino: "cpt" | "pages" | "alberatura" | null;
+  verificato_il: string;
+  bandi: BandoArricchito[];
+  /** Tema estratto dal messaggio (ciclo 9, D-01/D-05): eco verbatim, testo
+   *  breve. `null`/assente = nessun filtro tematico (D-07 retrocompat) — la UI
+   *  mostra tutti i bandi espansi, senza collasso. Truthy = filtro attivo. */
+  tema?: string | null;
+}
+
+/* ── Connettore (contratto D-09, mirror di `treasureiq/connettore.py`) ──── */
+
+/** Una voce dell'indice amministrativo del portale: nome e dove sta. */
+export interface AreaAmministrativa {
+  nome: string;
+  url: string;
+}
+
+/** Un bando trovato nell'indice di Amministrazione Trasparente. `pdf_url`
+ *  `null` quando il bando non porta un PDF collegato — flag di presenza,
+ *  non promessa di contenuto leggibile. */
+export interface BandoAT {
+  titolo: string;
+  url: string;
+  pdf_url: string | null;
+}
+
+/** L'indice AT del portale (D-11): bandi attivi verbatim, `pdf_presenti`
+ *  come flag — l'analisi del PDF resta su richiesta del cittadino
+ *  (`postAtAnalisi`), mai automatica di massa. */
+export interface AmministrazioneTrasparente {
+  indice_url: string | null;
+  bandi_attivi: BandoAT[];
+  pdf_presenti: boolean;
+}
+
+/** Un ufficio letto dal connettore, coi suoi recapiti verbatim (D-07:
+ *  nessuna cifra passa da un LLM). `source_typed` distingue un recapito
+ *  tipizzato dal portale (`tel:`/`mailto:`) da uno solo scritto in prosa —
+ *  provenienza, mai un giudizio di qualità. Ogni campo recapito assente va
+ *  reso come riga onesta «non pubblicato», mai omesso in silenzio (D-05). */
+export interface UfficioConnettore {
+  nome: string;
+  url: string;
+  telefoni: string[];
+  email: string[];
+  pec: string[];
+  orari: string | null;
+  source_typed: boolean;
+  letto_il: string;
+}
+
+/** Mirror esatto di `EsitoConnettore` (`api/treasureiq/connettore.py`): il
+ *  contratto D-09, quello che una scansione di piattaforma produce, letta
+ *  ADESSO (non ingerita) — «letto ora», mai uno snapshot curato. */
+export interface EsitoConnettore {
+  codice_istat: string;
+  piattaforma: string;
+  letto_il: string;
+  aree_amministrative: AreaAmministrativa[];
+  uffici: UfficioConnettore[];
+  amministrazione_trasparente: AmministrazioneTrasparente | null;
+}
+
+/** Un segmento di testo estratto dal PDF, verbatim da pypdf (D-07): mai
+ *  passato da un LLM, mai riformattato — le cifre restano quelle stampate
+ *  nel documento. */
+export interface AtAnalisiSegmento {
+  kind: string;
+  url: string;
+  pagina: number | null;
+  testo: string;
+}
+
+/** Esito dell'analisi di UN allegato PDF già elencato in un `BandoAT`
+ *  (D-11, `POST /api/at-analisi`), mirror di `ATAnalisiResponse`
+ *  (`api/treasureiq/api.py`). Mai una scansione di massa: un `pdf_url` alla
+ *  volta, host-guarded lato backend. */
+export interface AtAnalisiEsito {
+  pdf_url: string;
+  segmenti: AtAnalisiSegmento[];
+  note: string[];
+}
+
+/** Mirror di `ATAnalisiRequest` (`api/treasureiq/api.py`). */
+export const postAtAnalisi = (codiceIstat: string, pdfUrl: string) =>
+  call<AtAnalisiEsito>("/api/at-analisi", {
+    method: "POST",
+    body: JSON.stringify({ codice_istat: codiceIstat, pdf_url: pdfUrl }),
+  });
+
 export interface ChatOut {
   profilo_capito: ProfiloCapito | null;
   reply: string;
@@ -497,9 +727,10 @@ export interface ChatOut {
   /** Presente solo fuori copertura, dopo la sonda AgID: dice se il connettore
    * raggiungerebbe questo comune. `null` sui comuni coperti o non sondati. */
   connettore: ConnettoreSonda | null;
-  /** Recapiti letti al volo dal portale del comune fuori copertura. Non è una
-   * risposta di TreasureIQ: la UI lo mostra come banner nel pannello a
-   * sinistra. `null` sui comuni coperti o quando lo scrape non trova nulla. */
+  /** Recapiti del comune. Su un comune coperto vengono dallo store (`_da_store`);
+   * fuori copertura sono letti al volo dal portale. Non è una risposta di
+   * TreasureIQ: la UI lo mostra come card nel pannello a sinistra. `null` solo
+   * quando non c'è nessun recapito né a store né dallo scrape. */
   numeri_utili: NumeriUtili | null;
   /** Candidati di disambiguazione quando il nome comune è ambiguo. La UI li
    * rende come schede cliccabili: un tap sceglie e rimanda la domanda. */
@@ -508,6 +739,21 @@ export interface ChatOut {
    * (via ScanProvider): banda «sto aggiornando» + bottone «Ricarica», mostrati
    * uguali in chat e nel pannello. */
   scan?: ScanStato | null;
+  /** B3/B4 (KAPI 7, bandi-live-agid) — esito della scansione bandi-live a due
+   * gradini per il comune del profilo, presente solo sul topic BANDI. `null`
+   * fuori da quel topic o finché il backend non lo valorizza (§5.2). */
+  bandi_live?: BandiLiveEsito | null;
+  /** B4/B5 (ciclo 10) — esito del connettore letto ORA (contratto D-09,
+   *  `EsitoConnettore`), quando la risposta è stata composta leggendo il
+   *  portale al volo invece che dallo store ingerito. `null`/assente sui
+   *  comuni serviti dallo store o finché il backend non lo valorizza.
+   *  Nome campo allineato al modello backend (`EsitoConnettore`) — da
+   *  riconfermare in integrazione con l'arm B4. */
+  esito_connettore?: EsitoConnettore | null;
+  /** Ciclo11/A6-L-3 — i filtri civici RICONOSCIUTI in questo turno
+   * (`riconosci_filtri`), gia' proiettati dal backend: la lista non include
+   * le chiavi appena tolte da `filtri_override` nella stessa richiesta. */
+  filtri: FiltroOut[];
 }
 
 /** Un candidato di disambiguazione comune. `codice_istat` serve a rimandare la
@@ -633,7 +879,8 @@ export const fetchSchedaComune = (codiceIstat: string) =>
  *  non li rende uguali. */
 export interface ScanStato {
   stato: "fresco" | "aggiornamento_in_corso";
-  ultimo_scan: string;
+  // null per un comune mai scansionato: il backend non inventa una data.
+  ultimo_scan: string | null;
 }
 
 /** Recapiti del comune letti al volo dal portale. Nessun numero è verificato.
@@ -657,10 +904,16 @@ export const chat = (
   message: string,
   history: ChatTurn[] = [],
   comuneIstat: string | null = null,
+  filtriOverride: FiltroOverride[] | null = null,
 ) =>
   call<ChatOut>("/api/chat", {
     method: "POST",
-    body: JSON.stringify({ message, history, comune_istat: comuneIstat }),
+    body: JSON.stringify({
+      message,
+      history,
+      comune_istat: comuneIstat,
+      filtri_override: filtriOverride,
+    }),
   });
 
 /** Una voce dell'elenco dei comuni italiani (ISTAT unito ai siti di IPA).
@@ -789,6 +1042,14 @@ export const inviaSegnalazione = (codiceIstat: string) =>
   call<Record<string, number>>("/api/segnalazioni", {
     method: "POST",
     body: JSON.stringify({ codice_istat: codiceIstat }),
+  });
+
+/** D-01 ciclo 6 — il feedback va al nostro server e basta: nessuna mail
+ *  esposta, nessuna issue GitHub, nessun invio a terzi (SMTP deferred). */
+export const inviaFeedback = (testo: string, voto: number | null) =>
+  call<{ ok: boolean }>("/api/feedback", {
+    method: "POST",
+    body: JSON.stringify({ testo, voto }),
   });
 
 /** One component of a comune's integration cost, with the fact behind it. */

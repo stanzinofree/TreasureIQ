@@ -45,6 +45,24 @@ connettore: nessuna rilettura del portale, nessun input digitato a mano. La
 via scrape esiste come ripiego ma non incrementa mai il numero di superfici
 "esposte": è una via di lettura, non una copertura.
 
+### I bandi: tre gradini in cascata, e il portale Halley
+
+`bandi_live.py` non si ferma al CPT: prova tre gradini REST in ordine e
+tiene il primo che copre — `cpt` (`amm-trasparente` via `wp-json/wp/v2/`),
+`pages` (le sei parole chiave su `wp/v2/pages`, quando manca il CPT), e
+**`alberatura`** (ciclo 8, sempre tentato — anche quando `cpt`/`pages` hanno
+già risposto ma a zero bandi, perché un WordPress "silenzioso" non è la
+stessa cosa di un comune non coperto).
+
+Il gradino `alberatura` riconosce due vendor con estrattore reale: WordPress
+e **Halley**, il portale dei concorsi pubblici *veri* — spesso su un
+sottodominio separato dal sito istituzionale (`/zf/index.php/…/concorsi/in-corso`,
+scoperto in `api/treasureiq/alberatura.py`). Le pagine Halley dichiarano
+charset ISO-8859-1/windows-1252, mai UTF-8: decodificate esplicitamente,
+altrimenti gli accenti si corrompono («mobilità» → «mobilitÃ »). Titolo e
+data di scadenza sono letti verbatim dalla tabella del listing, mai
+generati dal modello.
+
 ---
 
 ## Stato per piattaforma
@@ -52,7 +70,7 @@ via scrape esiste come ripiego ma non incrementa mai il numero di superfici
 | Piattaforma | Comuni | Quota | Livello | Servizi letti | Regioni |
 |---|---|---|---|---|---|
 | **PeopleWeb** (Siscom) | 1.124 | 14,2% | modello | 31.039 | 18 |
-| **Municipium** (Maggioli) | 1.009 | 12,8% | firma | — | 20 |
+| **Municipium** (Maggioli) | 1.009 | 12,8% | firma* | — | 20 |
 | **HGATE** | 957 | 12,1% | firma | — | 15 |
 | *non riconosciuta* | 800 | 10,1% | — | — | 19 |
 | WordPress generico | 724 | 9,2% | firma | — | 19 |
@@ -70,6 +88,11 @@ via scrape esiste come ripiego ma non incrementa mai il numero di superfici
 **Leggiamo le schede su 2.496 comuni** — il 31,6% d'Italia — per **57.603
 servizi contati**.
 
+*Municipium (firma\*): non ha un CPT `servizi` da contare — il livello
+"firma/catalogo/modello" di questa tabella è tarato sul modello AgID, che
+Municipium non usa. Ha però un connettore proprio, consegnato al ciclo 10
+(D-09): vedi il paragrafo Municipium più sotto per cosa legge davvero oggi.
+
 ---
 
 ## Dove conviene mettere l'effort
@@ -82,10 +105,29 @@ comuni del fornitore  ×  quanto sale il livello di lettura
 
 ### Prima fascia — mille comuni a colpo
 
-**Municipium (1.009 comuni, 20 regioni).** Il secondo fornitore d'Italia, oggi
-solo riconosciuto. È anche il più *nazionale* di tutti: presente in tutte e venti
-le regioni. Serve capire come espone i servizi.
-*Stima: 3–5 giornate*, se la struttura è simile agli altri.
+**Municipium (1.009 comuni, 20 regioni).** Il secondo fornitore d'Italia, il più
+*nazionale* di tutti (presente in tutte e venti le regioni). Non usa il modello
+a CPT AgID: ha un connettore proprio, consegnato al ciclo 10 (contratto D-09,
+`api/treasureiq/municipium.py` + `municipium_at.py`) — **parziale**, non
+"firma" pura, ma non ancora al livello **modello** di questa tabella.
+
+Cosa legge oggi, verificato sul codice: la discovery uffici parte da
+`{sito}/it/sitemap` (l'host applicativo `api.municipiumapp.it` risponde 503,
+va bypassato — `municipium.py:126`), da cui estrae i link
+`organizational_unit`/`unita_organizzative` e, in fallback, la pagina
+`aree-amministrative` (`municipium.py:113-168`). Ogni ufficio è letto
+verbatim (telefono/email/PEC/orari dalla sola sezione «Contatti», mai da un
+modello — `municipium.py:188-217`), ma **spesso la pagina non pubblica
+recapiti**: `source_typed` è vero solo quando ne trova almeno uno
+(`municipium.py:262`). L'indice di Amministrazione Trasparente/bandi è
+delegato a un modulo B3 (`municipium_at.py`) che legge SOLO i link già
+estratti dalla sitemap, mai un secondo fetch di discovery — onesto **2 comuni
+su 3** testati dal vivo: Fiumicino sì (30+ pagine-bando individuali, nessun
+indice unico), Pomezia no (la trasparenza vive su un dominio terzo,
+`pomezia.trasparenza-valutazione-merito.it`, scartato dalla guardia
+anti-SSRF perché non è il dominio del comune).
+*Stima residua: portarlo nel censimento e stimare l'estensione ai restanti
+comuni Municipium* — oggi verificato solo su Pomezia e Fiumicino.
 
 **HGATE (957 comuni, 15 regioni).** Rotte già mappate e verificate su comuni di
 province diverse — `EGSCHTST.HBL` per i servizi, `EGSCHTST24.HBL` per gli uffici,

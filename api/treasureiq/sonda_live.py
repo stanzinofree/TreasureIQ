@@ -217,15 +217,25 @@ def risolvi_comune(hint: str | None) -> ComuneNoto | None:
     # Sequenze più lunghe per prime: "Reggio nell'Emilia" prima di "Reggio".
     for lunghezza in range(min(len(tokens), 4), 0, -1):
         for inizio in range(len(tokens) - lunghezza + 1):
-            chiave = " ".join(tokens[inizio : inizio + lunghezza])
-            if chiave not in indice:
-                continue
             if inizio > 0 and tokens[inizio - 1] in _PREFISSI_TOPONIMO:
                 # "San Marino" non è Marino. Il token che precede fa parte del
                 # toponimo, quindi questa non è una corrispondenza: è il
                 # troncamento di un nome più lungo che non conosciamo.
                 continue
-            trovati = indice[chiave]
+            finestra = tokens[inizio : inizio + lunghezza]
+            chiave = " ".join(finestra)
+            # Chi scrive "monte rotondo" o "San Remo" spezza un nome che è una
+            # sola parola nell'indice ("Monterotondo", "Sanremo"). La chiave
+            # compatta (senza spazi) recupera solo questi casi: match esatto sul
+            # nome intero concatenato, mai una sottostringa — non introduce
+            # omonimi che il match a token non troverebbe già.
+            chiave_compatta = "".join(finestra) if lunghezza > 1 else None
+            if chiave in indice:
+                trovati = indice[chiave]
+            elif chiave_compatta and chiave_compatta in indice:
+                trovati = indice[chiave_compatta]
+            else:
+                continue
             break
         if trovati:
             break

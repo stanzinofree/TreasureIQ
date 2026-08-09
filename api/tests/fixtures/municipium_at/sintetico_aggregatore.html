@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<!--
+  Fixture SINTETICA (non da un URL reale): lo scout su Pomezia e Fiumicino
+  (2026-08-08) non ha trovato nessuna pagina aggregatore reale sul dominio
+  del comune. Questa fixture esiste solo per esercitare il ramo
+  "indice-con-voci-interne" di `_bandi_interni` in `municipium_at.py`,
+  modellata sulla stessa struttura ad accordion vista nella sitemap reale
+  di Fiumicino (ancore con attributo `title=` verbatim).
+-->
+<html lang="it">
+<head><title>Bandi e concorsi - Comune di Test</title></head>
+<body>
+  <div class="accordion-body">
+    <a title="Bando di concorso pubblico per esami" href="/it/public_documents/bando-concorso-pubblico-esami" class="list-item">Bando di concorso pubblico per esami</a>
+    <a title="Avviso pubblico contributi affitto 2026" href="https://www.comune-test.example.it/it/public_documents/avviso-pubblico-contributi-affitto-2026" class="list-item">Avviso pubblico contributi affitto 2026</a>
+    <!-- link .pdf: allegato della pagina indice stessa, non una voce-bando fratella -->
+    <a title="Gara appalto servizio mensa" href="/it/public_documents/gara-appalto-servizio-mensa.pdf" class="list-item">Gara appalto servizio mensa</a>
+    <a href="/it/news/qualcosa-non-attinente">Notizia non pertinente</a>
+    <a title="Bando fuori dominio" href="https://altro-dominio.example.com/bandi/estraneo">Bando fuori dominio</a>
+  </div>
+</body>
+</html>

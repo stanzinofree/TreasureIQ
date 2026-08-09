@@ -29,19 +29,21 @@ import { useEffect, useId, useRef, useState } from "react";
 import { Seal } from "@/components/Seal";
 import { Marchio } from "@/components/Logo";
 import EcoProfilo from "@/components/EcoProfilo";
+import ChipFiltri from "@/components/ChipFiltri";
 import Segnalazione from "@/components/Segnalazione";
 import SchedaDettaglio from "@/components/SchedaDettaglio";
 import AccessoSimulato from "@/components/AccessoSimulato";
 import SceltaComune from "@/components/SceltaComune";
 import RispostaCivica from "@/components/RispostaCivica";
 import PonteScala from "@/components/PonteScala";
+import SchedaLettoOra from "@/components/SchedaLettoOra";
 import { PRESETS } from "@/lib/profili-demo";
 import { useProfilo } from "@/lib/profilo";
-import { linkFeedback, LINK_ESTERNO } from "@/lib/moduli";
 import { conTagVerifica } from "@/lib/testo";
 import { useRisultati } from "@/lib/risultati";
 import { useScan } from "@/lib/scan";
 import ScanLive from "@/components/ScanLive";
+import Feedback from "@/components/Feedback";
 
 /** Stable DOM id for one card, so the side index can link straight to it. */
 function ancoraDi(messageId: string, matchId: string): string {
@@ -56,6 +58,8 @@ import {
   fetchServiziCategoria,
   login,
   type Bando,
+  type BandiLiveEsito,
+  type BandoArricchito,
   type CategoriaServizio,
   type ChatCost,
   type ChatOut,
@@ -63,10 +67,13 @@ import {
   type ComuneAmbiguo,
   type CostLevels,
   type ConnettoreSonda,
+  type FiltroChiave,
+  type FiltroOverride,
   type InfoOut,
   type InfoWebResult,
   type MappaConnettore,
   type Match,
+  type Requirements,
   type SchedaServizio,
   type ServizioLink,
 } from "@/lib/api";
@@ -743,6 +750,295 @@ function BandiComune({ istat }: { istat: string }) {
   );
 }
 
+/** Un criterio non nullo, per la resa generica del pannello: `etichetta`
+ *  statica dell'interfaccia, `valore` copiato letteralmente dal campo
+ *  tipizzato (mai ricomposto). */
+type CriterioReso = { chiave: string; etichetta: string; valore: string };
+
+/** Estrae dai `Requirements` SOLO i campi effettivamente dichiarati (§5.2):
+ *  ogni valore che arriva qui è il campo tipizzato, senza alcuna concatenazione
+ *  numerica — la stringa "€"/"anni"/"persone" è un'unità di misura statica
+ *  dell'interfaccia, non un ricalcolo del dato (D-05). */
+function criteriRequisiti(requirements: Requirements): CriterioReso[] {
+  const criteri: CriterioReso[] = [];
+  if (requirements.isee_max !== null) {
+    criteri.push({ chiave: "isee_max", etichetta: "ISEE massimo", valore: `${requirements.isee_max} €` });
+  }
+  if (requirements.isee_min !== null) {
+    criteri.push({ chiave: "isee_min", etichetta: "ISEE minimo", valore: `${requirements.isee_min} €` });
+  }
+  if (requirements.eta_min !== null) {
+    criteri.push({ chiave: "eta_min", etichetta: "Età minima", valore: `${requirements.eta_min} anni` });
+  }
+  if (requirements.eta_max !== null) {
+    criteri.push({ chiave: "eta_max", etichetta: "Età massima", valore: `${requirements.eta_max} anni` });
+  }
+  if (requirements.nucleo_min !== null) {
+    criteri.push({
+      chiave: "nucleo_min",
+      etichetta: "Nucleo familiare minimo",
+      valore: `${requirements.nucleo_min} persone`,
+    });
+  }
+  if (requirements.figli_minori_required !== null) {
+    criteri.push({
+      chiave: "figli_minori_required",
+      etichetta: "Figli minori",
+      valore: requirements.figli_minori_required ? "richiesti" : "non richiesti",
+    });
+  }
+  if (requirements.disabilita_required !== null) {
+    criteri.push({
+      chiave: "disabilita_required",
+      etichetta: "Disabilità del richiedente",
+      valore: requirements.disabilita_required ? "richiesta" : "non richiesta",
+    });
+  }
+  if (requirements.disabilita_nucleo_required !== null) {
+    criteri.push({
+      chiave: "disabilita_nucleo_required",
+      etichetta: "Disabilità nel nucleo",
+      valore: requirements.disabilita_nucleo_required ? "richiesta" : "non richiesta",
+    });
+  }
+  if (requirements.sesso !== null) {
+    criteri.push({
+      chiave: "sesso",
+      etichetta: "Sesso richiesto",
+      valore: requirements.sesso === "f" ? "femminile" : "maschile",
+    });
+  }
+  if (requirements.employment_status.length > 0) {
+    criteri.push({
+      chiave: "employment_status",
+      etichetta: "Situazione lavorativa",
+      valore: requirements.employment_status.join(", "),
+    });
+  }
+  if (requirements.residenza_comuni.length > 0) {
+    criteri.push({
+      chiave: "residenza_comuni",
+      etichetta: "Comuni di residenza ammessi",
+      valore: requirements.residenza_comuni.join(", "),
+    });
+  } else if (requirements.residenza_required) {
+    criteri.push({ chiave: "residenza_required", etichetta: "Residenza", valore: "richiesta nel comune" });
+  }
+  requirements.other.forEach((voce, indice) => {
+    criteri.push({ chiave: `other-${indice}`, etichetta: "Altro criterio", valore: voce });
+  });
+  return criteri;
+}
+
+/** Un singolo bando, con un pannello criteri richiudibile. Card gialla «letto
+ *  dal vivo» (stesse classi di `BandiComune`/`MappaServizi`, riga 617): il
+ *  giallo qui non è decorativo, segnala un dato estratto dal vivo, non
+ *  ingerito. La scadenza si mostra SOLO se `scadenza_verificata` (D-07): una
+ *  scadenza non citata testualmente dalla fonte non è mostrata, punto. */
+function BandoLive({
+  bando,
+  verificatoIl,
+  formattaData,
+}: {
+  bando: BandoArricchito;
+  verificatoIl: string;
+  formattaData: (iso: string) => string;
+}) {
+  const [aperto, setAperto] = useState(false);
+  const { opportunity } = bando;
+  const criteri = criteriRequisiti(opportunity.requirements);
+
+  return (
+    <li className="mappa-servizi__scheda">
+      <span className="mappa-servizi__scheda-titolo">
+        {opportunity.title}
+        {bando.consigliato && (
+          <span
+            className="tag-verifica"
+            title="In linea col tuo profilo — indicazione, non un verdetto: controlla i requisiti."
+          >
+            ★ in linea col tuo profilo
+          </span>
+        )}
+        {bando.tipo && (
+          <span className={`tag-tipo-bando tag-tipo-bando--${bando.tipo}`}>
+            {bando.tipo === "agevolazione" ? "agevolazione" : "concorso"}
+          </span>
+        )}
+      </span>
+      {bando.tipo === "concorso" && (
+        <p className="bandi-comune__caveat">
+          Concorso o offerta di lavoro — verifica se è ancora aperto sul portale del comune.
+        </p>
+      )}
+      {opportunity.summary && (
+        <span className="mappa-servizi__scheda-campo">
+          <span className="mappa-servizi__scheda-etichetta">Descrizione</span>
+          {opportunity.summary}
+        </span>
+      )}
+      {opportunity.amount && (
+        <span className="mappa-servizi__scheda-campo">
+          <span className="mappa-servizi__scheda-etichetta">Importo</span>
+          {[
+            opportunity.amount.min_eur !== null ? `da ${opportunity.amount.min_eur} €` : null,
+            opportunity.amount.max_eur !== null ? `a ${opportunity.amount.max_eur} €` : null,
+            opportunity.amount.note,
+          ]
+            .filter((parte): parte is string => parte !== null)
+            .join(" ")}
+        </span>
+      )}
+      {bando.scadenza_verificata && bando.scadenza && (
+        <span className="mappa-servizi__scheda-campo">
+          <span className="mappa-servizi__scheda-etichetta">Scadenza</span>
+          {formattaData(bando.scadenza)}
+        </span>
+      )}
+      <button
+        type="button"
+        className="mappa-servizi__scheda-btn"
+        aria-expanded={aperto}
+        onClick={() => setAperto((valore) => !valore)}
+      >
+        {aperto ? "Nascondi criteri" : "Vedi criteri"}
+      </button>
+      {aperto && (
+        <>
+          {criteri.length > 0 ? (
+            criteri.map((criterio) => (
+              <span className="mappa-servizi__scheda-campo" key={criterio.chiave}>
+                <span className="mappa-servizi__scheda-etichetta">{criterio.etichetta}</span>
+                {criterio.valore}
+              </span>
+            ))
+          ) : (
+            <span className="mappa-servizi__scheda-campo">
+              <span className="mappa-servizi__scheda-etichetta">Criteri</span>
+              Non dichiarati dalla fonte.
+            </span>
+          )}
+        </>
+      )}
+      <a
+        className="mappa-servizi__scheda-btn"
+        href={opportunity.source.url}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Apri sul portale ↗
+      </a>
+      <span className="mappa-servizi__scheda-footer">Verificato il {formattaData(verificatoIl)}</span>
+    </li>
+  );
+}
+
+/** Bandi letti dal vivo direttamente sulla risposta chat (KAPI 7,
+ *  bandi-live-agid, B3/B4): a differenza di `BandiComune` (sola
+ *  Amministrazione Trasparente, mai un verdetto), questo pannello arriva già
+ *  dentro `reply.bandi_live` — nessuna fetch qui, il payload è calcolato
+ *  server-side (due gradini REST, cache TTL, D-05/D-07). Si limita a
+ *  renderlo, mai a ricomporlo. */
+/** Ordine dei gruppi (ciclo 9, D-04): Agevolazioni prima, poi Concorsi (stesso
+ *  ordine di `_ordina_per_tipo` lato backend), «Altri» in coda per `tipo`
+ *  assente — non una categoria dichiarata, solo una rete di sicurezza. */
+const GRUPPI_BANDI: { tipo: "agevolazione" | "concorso" | null; etichetta: string }[] = [
+  { tipo: "agevolazione", etichetta: "Agevolazioni" },
+  { tipo: "concorso", etichetta: "Concorsi" },
+  { tipo: null, etichetta: "Altri" },
+];
+
+function BandiLive({ esito }: { esito: BandiLiveEsito }) {
+  function formattaData(iso: string): string {
+    const d = new Date(iso);
+    if (Number.isNaN(d.getTime())) return iso.slice(0, 10);
+    const gg = String(d.getDate()).padStart(2, "0");
+    const mm = String(d.getMonth() + 1).padStart(2, "0");
+    return `${gg}/${mm}/${d.getFullYear()}`;
+  }
+
+  // `comune_ignoto`: nessuna sonda tentata, nessun guscio da mostrare (D-B7).
+  if (esito.esito === "comune_ignoto") return null;
+
+  if (esito.esito === "non_coperto") {
+    return (
+      <div className="bandi-comune">
+        <p className="bandi-comune__caveat">
+          Non sono riuscito a leggere i bandi di {esito.comune_nome} dal vivo: il portale non espone
+          Amministrazione Trasparente né pagine bandi in una forma che riesco a leggere.
+        </p>
+        <Segnalazione codiceIstat={esito.codice_istat} ente={esito.comune_nome} office={null} />
+      </div>
+    );
+  }
+
+  if (esito.esito === "coperto_senza_bandi") {
+    return (
+      <div className="bandi-comune">
+        <p className="bandi-comune__caveat">
+          Nessun bando pubblicato al {formattaData(esito.verificato_il)}.
+        </p>
+      </div>
+    );
+  }
+
+  // coperto_con_bandi
+  if (esito.bandi.length === 0) return null;
+  return (
+    <div className="bandi-comune">
+      {GRUPPI_BANDI.map((gruppo) => {
+        const bandiGruppo = esito.bandi.filter((bando) => (bando.tipo ?? null) === gruppo.tipo);
+        // "Altri" (tipo assente) è una fogna di sicurezza, non una categoria
+        // reale: la si mostra solo se contiene qualcosa. Agevolazioni/Concorsi
+        // restano sempre visibili, «(0)» incluso — coerenza dei conteggi.
+        if (gruppo.tipo === null && bandiGruppo.length === 0) return null;
+        // Filtro tematico attivo (D-04): matched resta espanso, il resto
+        // collassa dietro «▸ espandi» senza sparire — nessun bando escluso.
+        const matched = esito.tema ? bandiGruppo.filter((bando) => bando.corrisponde === true) : bandiGruppo;
+        const resto = esito.tema ? bandiGruppo.filter((bando) => bando.corrisponde !== true) : [];
+        return (
+          <div className="bandi-comune__gruppo" key={gruppo.etichetta}>
+            <p className="bandi-comune__gruppo-titolo">
+              {esito.tema
+                ? `${gruppo.etichetta} · filtro «${esito.tema}» (${matched.length}/${bandiGruppo.length})`
+                : `${gruppo.etichetta} (${bandiGruppo.length})`}
+            </p>
+            {matched.length > 0 && (
+              <ul className="bandi-comune__lista">
+                {matched.map((bando, indice) => (
+                  <BandoLive
+                    key={`${bando.opportunity.id}:${indice}`}
+                    bando={bando}
+                    verificatoIl={esito.verificato_il}
+                    formattaData={formattaData}
+                  />
+                ))}
+              </ul>
+            )}
+            {resto.length > 0 && (
+              <details className="bandi-comune__espandi">
+                <summary className="bandi-comune__espandi-riga">
+                  ▸ espandi altri {resto.length} bandi che non corrispondono a «{esito.tema}»
+                </summary>
+                <ul className="bandi-comune__lista">
+                  {resto.map((bando, indice) => (
+                    <BandoLive
+                      key={`${bando.opportunity.id}:${indice}`}
+                      bando={bando}
+                      verificatoIl={esito.verificato_il}
+                      formattaData={formattaData}
+                    />
+                  ))}
+                </ul>
+              </details>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 /**
  * D-19 — the INFORMAZIONE rail. Document, office, coverage and diagnosis are
  * facts about a public body's data; nothing here is a verdict, a criterion,
@@ -916,6 +1212,19 @@ export default function Chat() {
   // cui una puo' fallire ("Non riesco a raggiungere il servizio"). Il ref
   // cambia all'istante, quindi il secondo invio si ferma qui.
   const invioInCorso = useRef(false);
+  // Stessa guardia sincrona di `invioInCorso`, ma per il re-query della
+  // rimozione chip (A8-client): un secondo click su un'altra × prima che
+  // `busy` sia tornato true lo leggerebbe ancora false e partirebbero due
+  // richieste concorrenti sullo stesso scambio.
+  const rimozioneInCorso = useRef(false);
+  // Ciclo11/A8-client — override accumulati per scambio (chiave = id del
+  // messaggio assistente). Ogni «×» aggiunge una chiave; il ricalcolo del
+  // server toglie di conseguenza quel filtro anche dalla `filtri` che torna,
+  // quindi non serve tenere qui una copia della lista visibile — solo cosa
+  // e' gia' stato tolto, per non rimandarlo due volte.
+  const [overrideScambio, setOverrideScambio] = useState<
+    Record<string, FiltroOverride[]>
+  >({});
   const logRef = useRef<HTMLDivElement>(null);
 
   // Keep the newest exchange in view as the transcript grows, the way a
@@ -946,7 +1255,7 @@ export default function Chat() {
 
   async function send(text: string, comuneIstatScelto?: string) {
     const trimmed = text.trim();
-    if (!trimmed || busy || invioInCorso.current) return;
+    if (!trimmed || busy || invioInCorso.current || rimozioneInCorso.current) return;
     invioInCorso.current = true;
 
     setError(null);
@@ -1013,6 +1322,9 @@ export default function Chat() {
             : {}),
           ...(capito.disabilita_nucleo === true
             ? { disabilitaNucleo: true }
+            : {}),
+          ...(capito.figli_minori != null
+            ? { figliMinori: capito.figli_minori }
             : {}),
           // Il tema capito diventa un interesse mostrato: e' la risposta a
           // «cosa sto cercando», che finora la persona non vedeva scritta.
@@ -1084,6 +1396,56 @@ export default function Chat() {
     } finally {
       setBusy(false);
       invioInCorso.current = false;
+    }
+  }
+
+  // Ciclo11/A8-client (D-04) — la «×» su un chip non ri-filtra client-side:
+  // ri-manda la STESSA domanda con la chiave in `filtri_override`, cosi' il
+  // ricalcolo e' vero (comune fuori copertura ricalcola davvero, non solo
+  // nasconde una riga). Aggiorna IN PLACE il messaggio esistente — non
+  // apre un nuovo scambio — perche' resta la stessa domanda, solo con
+  // un'evidenza in meno.
+  async function rimuoviFiltro(messageId: string, chiave: FiltroChiave) {
+    if (busy || rimozioneInCorso.current || invioInCorso.current) return;
+    const idx = messages.findIndex((m) => m.id === messageId);
+    const domanda = idx > 0 ? messages[idx - 1] : null;
+    if (!domanda || domanda.role !== "user") return;
+    rimozioneInCorso.current = true;
+    setBusy(true);
+    setError(null);
+
+    const attivi = [
+      ...(overrideScambio[messageId] ?? []).filter((o) => o.chiave !== chiave),
+      { chiave, azione: "rimuovi" as const },
+    ];
+    // Storia = lo scambio precedente a quella domanda, la stessa che `send`
+    // avrebbe costruito la prima volta — mai le risposte proprie rimandate
+    // indietro (vedi nota sopra in `send`).
+    const history: ChatTurn[] = messages.slice(0, idx - 1).map((m) => ({
+      role: m.role,
+      content: m.content,
+    }));
+
+    try {
+      const out = await chat(
+        domanda.content,
+        history,
+        profilo.comune?.istat ?? null,
+        attivi,
+      );
+      setOverrideScambio((prev) => ({ ...prev, [messageId]: attivi }));
+      setMessages((prev) =>
+        prev.map((m) =>
+          m.id === messageId ? { ...m, content: out.reply, reply: out } : m,
+        ),
+      );
+    } catch {
+      setError(
+        "Non riesco a raggiungere il servizio. Verifica che l'API sia in esecuzione su localhost:8010.",
+      );
+    } finally {
+      setBusy(false);
+      rimozioneInCorso.current = false;
     }
   }
 
@@ -1423,6 +1785,19 @@ export default function Chat() {
                 <EcoProfilo capito={m.reply.profilo_capito} />
               )}
 
+            {/* Ciclo11/A7 — i filtri riconosciuti nel messaggio, con la loro
+                provenienza verbatim. Vive nel flusso chat (non nel pannello
+                profilo): sono letture di QUESTO scambio, non fatti stabili
+                del cittadino — EcoProfilo resta la sede dei fatti confermati,
+                questi chip sono la lettura puntuale che li ha prodotti. */}
+            {m.role === "assistant" && m.reply && m.reply.filtri.length > 0 && (
+              <ChipFiltri
+                filtri={m.reply.filtri}
+                onRimuovi={(chiave) => rimuoviFiltro(m.id, chiave)}
+                disabled={busy}
+              />
+            )}
+
             {m.reply && (
               <div className="chat__answer">
                 {/* Il costo di recupero PDF si mostra SOLO quando abbiamo
@@ -1456,6 +1831,20 @@ export default function Chat() {
                     vedono anche quando il connettore non è indirizzabile. */}
                 {m.reply.connettore && (
                   <BandiComune istat={m.reply.connettore.codice_istat} />
+                )}
+
+                {/* B4 (KAPI 7, bandi-live-agid): esito verificato del topic
+                    BANDI, già dentro `reply.bandi_live` (B3) — nessuna
+                    seconda fetch, mai un secondo scan dello stesso portale. */}
+                {m.reply.bandi_live && <BandiLive esito={m.reply.bandi_live} />}
+
+                {/* B5 (ciclo 10): il connettore letto ORA (contratto D-09) —
+                    uffici coi recapiti verbatim e i bandi di Amministrazione
+                    Trasparente, con l'analisi PDF su richiesta. Indipendente
+                    dal ramo agevolazione/informazione: si mostra ovunque il
+                    backend l'abbia valorizzato su questa risposta. */}
+                {m.reply.esito_connettore && (
+                  <SchedaLettoOra esito={m.reply.esito_connettore} />
                 )}
 
                 {m.reply.kind === "informazione" ? (
@@ -1594,17 +1983,11 @@ export default function Chat() {
           Stesso stato mostrato nel pannello a sinistra (un solo store). */}
       <ScanLive variante="chat" />
 
-      {/* Feedback esterno (D-S7): discreto, sotto l'intera conversazione, non
+      {/* Feedback (D-01, ciclo 6): un form verso il nostro store, non un
+          canale esterno. Discreto, sotto l'intera conversazione, non
           per-messaggio. Compare appena c'è almeno una risposta da giudicare —
           prima di allora non c'è niente su cui dare un parere. */}
-      {messages.some((m) => m.role === "assistant") && (
-        <p className="chiedi-inline">
-          Com&apos;è andata?{" "}
-          <a href={linkFeedback()} {...LINK_ESTERNO}>
-            Lascia un feedback →
-          </a>
-        </p>
-      )}
+      {messages.some((m) => m.role === "assistant") && <Feedback />}
 
       {error && (
         <p className="notice" role="alert">

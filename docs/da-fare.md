@@ -1,6 +1,7 @@
 # Da fare
 
-*Stato al 6 agosto 2026. Scadenza hackathon: 14 agosto — otto giorni.*
+*Stato al 6 agosto 2026, aggiornato il 9 agosto 2026. Scadenza hackathon: 14
+agosto.*
 
 Ordinato per **quanto pesa sul cittadino**, non per quanto è comodo farlo. Ogni
 voce dice cosa è rotto, perché, e quanto costa: senza quello una lista di
@@ -35,6 +36,16 @@ all'URP») anche quando la ricerca live aveva trovato pagine. Fix in
 `build_chat_answer`: se `web_results` sono presenti e la coda non è una domanda,
 si tiene solo la premessa. Una risposta, non due che si contraddicono.
 
+### 2b · ~~Il ciclo nlp-filtri~~ — RISOLTO
+
+I filtri del profilo (nucleo familiare, figli minori, disabilità, ISEE,
+età/anziano, employment status, comune, tema) sono ora estratti da
+`filtri.py`, modulo **deterministico**: 10 `FiltroChiave`, ognuno con
+`span` obbligatorio nel testo (nessun filtro senza la prova testuale che
+l'ha prodotto), sorgente tracciata (`testo`/`profilo`/`override_client`).
+Ollama resta confinato all'intento — non riempie più nessuno slot di
+filtro. Chip sul rail in `ChipFiltri.tsx`. Chiudeva anche *§ 6* qui sopra.
+
 ### 3 · Il rail informativo dà zero anche sui comuni ingeriti
 
 Nella matrice, «dove sta l'ufficio anagrafe e quando è aperto» restituisce 0
@@ -64,11 +75,16 @@ sul rail informativo perde i criteri confrontati.
 
 ## Incompleto
 
-### 6 · Il pannello dei filtri mostra solo tre cose
+### 6 · ~~Il pannello dei filtri mostra solo tre cose~~ — RISOLTO
 
-`Profilo` (in `web/lib/profilo.tsx`) ha `eta`, `comune`, `interessi`. L'API
-restituisce anche **nucleo familiare, figli minori, ISEE, disabilità** e la
-pagina non può mostrarli perché il tipo non li prevede.
+`Profilo` (`web/lib/profilo.tsx:59-80`) ora ha anche `disabilita`,
+`nucleoFamiliare`, `disabilitaNucleo`, `figliMinori` — e `dimenticaFatto`
+(`profilo.tsx:110-119`) sa dimenticare ciascuno di questi campi, non solo i
+tre originali. `ChipFiltri.tsx` mostra tutti e 10 i `FiltroChiave` (incluso
+ISEE) come chip sul rail del turno di chat; `ProfiloNoto.tsx` mostra quelli
+persistiti nel profilo. L'ISEE resta un filtro di turno, non un campo salvato
+in `Profilo` — coerente con `filtri.py`, che lo estrae ma non lo marca come
+dato da ricordare fra un messaggio e l'altro.
 
 ### 7 · Lettura live: manca il gradino del catalogo
 
@@ -108,7 +124,7 @@ Criterio: `comuni del fornitore × quanto sale il livello di lettura`.
 
 | Fornitore | Comuni | Stato | Stima |
 |---|---|---|---|
-| **Municipium** (Maggioli) | 1.009 | solo firma | 3–5 gg |
+| **Municipium** (Maggioli) | 1.009 | parziale — consegnato ciclo 10 (uffici + AT onesta 2/3) | da stimare oltre i 2 comuni verificati |
 | **HGATE** | 957 | rotte già mappate, manca la scheda | 2–3 gg |
 | **AgendaSmart** | 401 | rotta `/agenda-smart` verificata | 2–3 gg |
 | **OpenPA** | 364 | nome noto, rotte da mappare | 2–3 gg |

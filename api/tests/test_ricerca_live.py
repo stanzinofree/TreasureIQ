@@ -69,6 +69,10 @@ def portale_muto(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(respond, "risolvi_comune", lambda _hint: CIAMPINO)
     monkeypatch.setattr(respond, "comune_per_codice", lambda _codice: CIAMPINO)
     monkeypatch.setattr(respond, "leggi_orari_urp", lambda _comune: SOLO_HTML)
+    # B4: `_risposta_live` ora interroga `connettore.leggi_connettore` prima
+    # del gradino web (D-06/A7: assente -> flusso invariato). Senza questo
+    # patch il test farebbe una vera chiamata di rete verso Ciampino.
+    monkeypatch.setattr(respond.connettore, "leggi_connettore", lambda *_a, **_k: None)
 
 
 def _chiedi(*, parole: str = "", topic: Topic = Topic.ANAGRAFE_CARTA_IDENTITA):
@@ -279,6 +283,10 @@ def ente_coperto_ma_esaurito(monkeypatch: pytest.MonkeyPatch) -> None:
     trattava con la sola cache, mai con la sonda."""
     monkeypatch.setattr(respond, "_resolve_informazione_ente", lambda *, hint: CIAMPINO_ENTE)
     monkeypatch.setattr(respond, "comune_per_codice", lambda _codice: CIAMPINO)
+    # B4: `_build_informazione_answer` ora interroga `connettore.leggi_connettore`
+    # prima del ramo institutional_exhausted quando access_mode e M4_CONNETTORE.
+    # Assente -> flusso invariato (D-06/A7); senza patch sarebbe rete vera.
+    monkeypatch.setattr(respond.connettore, "leggi_connettore", lambda *_a, **_k: None)
 
 
 def _chiedi_informazione(*, monkeypatch: pytest.MonkeyPatch):

@@ -54,6 +54,7 @@ Il cuore del sistema. Una domanda in italiano, una risposta strutturata.
 | `message` | La frase del cittadino, così com'è. |
 | `comune_istat` | Il comune **scelto da una lista**, non dedotto. Quando c'è, non si guarda nient'altro. |
 | `history` | Solo i messaggi precedenti del *cittadino*, mai le nostre risposte: una risposta che diventa input della successiva è un cortocircuito. |
+| `filtri_override` | Facoltativo. Lista di `{ "azione": "rimuovi", "chiave": "<FiltroChiave>" }`: il cittadino toglie un filtro che gli abbiamo letto ma non è suo. `chiave` deve stare nell'enum `FiltroChiave` (dieci valori, vedi sotto) — una chiave fuori enum è un `422` automatico di Pydantic, non un errore applicativo da gestire a mano. |
 
 Risposta (campi principali):
 
@@ -70,6 +71,7 @@ Risposta (campi principali):
 | `connettore` | Presente su un comune **fuori copertura** che espone comunque un connettore leggibile: `{indirizzabile, uffici, rest_base}`. Dice per quale strada lo *raggiungeremmo*, non cosa spetta. `null` sui comuni coperti (già letti) o su chi non espone nulla. |
 | `numeri_utili` | I recapiti URP: telefoni, email, PEC. **Due fonti distinte, mai da confondere.** Su un comune **coperto** vengono dallo store — la scansione già salvata, `letto_il` è `scansionato_il`, il momento vero della scansione, mai un `now()` al volo. Su un comune **fuori copertura** vengono letti dal vivo in quella richiesta — `letto_il` è davvero adesso, perché il portale è stato letto ora. Marcati `non verificato` per costruzione in entrambi i casi: nessun numero è "verificato", è quello che il portale espone. `null` se non c'è nulla da mostrare. |
 | `comuni_ambigui[]` | Quando il nome nel messaggio combacia con più comuni omonimi: `[{nome, provincia, codice_istat}]` da rendere come schede cliccabili. La scelta è del cittadino, non nostra. Vuoto quando il comune è univoco o già scelto. |
+| `filtri[]` | I filtri civici **riconosciuti in questo turno** (`chat/filtri.py::riconosci_filtri`), già proiettati dal backend — non include le chiavi appena tolte con `filtri_override` nella stessa richiesta. Ogni voce è un `FiltroOut`: `chiave` (`FiltroChiave`), `valore`, `span` (dove nel testo, `null` se il filtro non viene dal testo di questo turno), `sorgente`, `negato` (`true` se il cittadino ha negato quel filtro, es. «non sono disabile»). È la fonte dei chip di provenienza rimovibili nel pannello «cosa abbiamo capito» del web: ogni chip che il cittadino toglie va in `filtri_override` al giro successivo. |
 
 ### `criteria[].state`, sul binario agevolazioni
 

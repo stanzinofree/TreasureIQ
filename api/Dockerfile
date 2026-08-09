@@ -48,6 +48,20 @@ FROM base AS dev
 USER root
 COPY requirements-dev.txt .
 RUN pip install --no-cache-dir -r requirements-dev.txt
+
+# it_core_news_lg (ciclo 11, D-06): the ~500MB spaCy model chat/filtri.py
+# loads lazily for negation scoping ("non sono disabile"). Deliberately not
+# in requirements.txt (see its comment) so the base/runtime image never pays
+# for it — only this test stage does, and only to exercise the real path
+# instead of the cue-list fallback. spaCy models are versioned per spaCy
+# release, so the wheel is pinned to the exact release that matches the
+# `spacy>=3.8,<3.9` pin in requirements.txt. A failed download must not fail
+# the build: filtri.py IS wired into production (B3), but its production
+# path deliberately runs on the cue-list fallback, not this model — it
+# degrades on its own, honestly, when the model is missing (L-5).
+RUN pip install --no-cache-dir \
+    "https://github.com/explosion/spacy-models/releases/download/it_core_news_lg-3.8.0/it_core_news_lg-3.8.0-py3-none-any.whl" \
+    || echo "it_core_news_lg non scaricato: i test di filtri.py restano sul fallback a cue-list"
 USER treasureiq
 
 CMD ["python", "-m", "pytest", "-q"]

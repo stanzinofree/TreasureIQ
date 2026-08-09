@@ -70,6 +70,8 @@ export type Profilo = {
   nucleoFamiliare?: number;
   /** A child in the household has a disability (D-53). */
   disabilitaNucleo?: boolean;
+  /** How many minor children are in the household. */
+  figliMinori?: number;
   comune?: FattoComune;
   /** Recapiti del comune fuori copertura, letti al volo dal portale e mostrati
    * come banner nel pannello. Portano con sé l'ISTAT del comune di cui sono i
@@ -113,7 +115,8 @@ type ProfiloContextValue = {
       | "sesso"
       | "disabilita"
       | "nucleoFamiliare"
-      | "disabilitaNucleo",
+      | "disabilitaNucleo"
+      | "figliMinori",
   ) => void;
   /** Drop one interest tag without touching the rest of the list. */
   dimenticaInteresse: (tag: string) => void;
@@ -159,6 +162,7 @@ const CAMPO_SERVER: Record<string, string> = {
   disabilita: "disabilita",
   nucleoFamiliare: "nucleo_familiare",
   disabilitaNucleo: "disabilita_nucleo",
+  figliMinori: "figli_minori",
 };
 
 function contaFatti(p: Profilo): number {
@@ -171,6 +175,7 @@ function contaFatti(p: Profilo): number {
     p.disabilita === true ? true : undefined,
     p.nucleoFamiliare,
     p.disabilitaNucleo === true ? true : undefined,
+    p.figliMinori,
     p.comune,
     p.interessi?.length ? p.interessi : undefined,
     p.codiceFiscale,
@@ -216,7 +221,8 @@ export function ProfiloProvider({ children }: { children: React.ReactNode }) {
         | "sesso"
         | "disabilita"
         | "nucleoFamiliare"
-        | "disabilitaNucleo",
+        | "disabilitaNucleo"
+        | "figliMinori",
     ) => {
       setProfilo((corrente) => {
         const server = CAMPO_SERVER[campo];

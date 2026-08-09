@@ -1,0 +1,62 @@
+{
+ "categorie_servizio": {
+  "name": "Categorie di Servizio",
+  "slug": "categorie_servizio",
+  "description": "",
+  "types": [
+   "servizio"
+  ],
+  "hierarchical": true,
+  "rest_base": "categorie_servizio",
+  "rest_namespace": "wp/v2",
+  "_links": {
+   "collection": [
+    {
+     "href": "/wp-json/wp/v2/taxonomies"
+    }
+   ],
+   "wp:items": [
+    {
+     "href": "/wp-json/wp/v2/categorie_servizio"
+    }
+   ],
+   "curies": [
+    {
+     "name": "wp",
+     "href": "https://api.w.org/{rel}",
+     "templated": true
+    }
+   ]
+  }
+ },
+ "tipologie": {
+  "name": "Sezioni",
+  "slug": "tipologie",
+  "description": "",
+  "types": [
+   "amm-trasparente"
+  ],
+  "hierarchical": true,
+  "rest_base": "tipologie",
+  "rest_namespace": "wp/v2",
+  "_links": {
+   "collection": [
+    {
+     "href": "/wp-json/wp/v2/taxonomies"
+    }
+   ],
+   "wp:items": [
+    {
+     "href": "/wp-json/wp/v2/tipologie"
+    }
+   ],
+   "curies": [
+    {
+     "name": "wp",
+     "href": "https://api.w.org/{rel}",
+     "templated": true
+    }
+   ]
+  }
+ }
+}

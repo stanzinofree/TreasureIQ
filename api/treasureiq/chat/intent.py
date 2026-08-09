@@ -73,6 +73,13 @@ class Topic(str, Enum):
     #: topic superstite più vicino — l'anagrafe — rispondendo con la pagina
     #: sbagliata invece che con «non risulta pubblicato».
     TRIBUTI = "tributi"
+    #: Bandi e avvisi pubblici letti dal vivo da Amministrazione Trasparente
+    #: (KAPI 7, bandi-live-agid), non dallo snapshot ingerito: un cittadino
+    #: che chiede «che bandi ci sono?» aspetta un elenco aggiornato ad ora,
+    #: non l'ultima fotografia dell'ingestione. Attenzione alla guardia in
+    #: `extract_intent`: «bandi per i mezzi pubblici» nomina "bandi" ma parla
+    #: di TRASPORTO_PUBBLICO, non di un elenco di avvisi.
+    BANDI = "bandi"
     #: The model could not map the message onto any of the above. Never
     #: guessed into just to avoid this value — see the system prompt.
     SCONOSCIUTO = "sconosciuto"
@@ -187,6 +194,10 @@ TOPIC_KEYWORDS: dict[Topic, tuple[str, ...]] = {
         "tasse comunali",
         "imposta municipale",
     ),
+    #: §5.4 pinnate: NON aggiungere "trasporto" o "mezzi" qui — sono di
+    #: TRASPORTO_PUBBLICO, e la guardia in `extract_intent`
+    #: (`_e_bando_di_trasporto_pubblico`) si aspetta gli insiemi disgiunti.
+    Topic.BANDI: ("bando", "bandi", "avviso pubblico", "avvisi pubblici", "graduatoria"),
     Topic.SCONOSCIUTO: (),
 }
 
@@ -328,6 +339,24 @@ def _disabilita_dichiarata_nel_testo(messaggio: str) -> bool:
     return bool(_DISABILITA_RE.search(messaggio))
 
 
+def _e_bando_di_trasporto_pubblico(messaggio: str) -> bool:
+    """«bandi per i mezzi pubblici», «bandi trasporto pubblico»: il messaggio
+    nomina "bandi" ma l'argomento vero e' l'abbonamento/agevolazione sul
+    trasporto pubblico locale, non un elenco generico di avvisi pubblici.
+
+    Stessa idea delle trappole gia' presidiate su comune («bolletta»,
+    «minori») e su topic generico (`_BONUS_GENERICO_RE`): una parola-chiave
+    da sola non basta quando un'altra, piu' specifica, compare nella stessa
+    frase. Senza questa guardia «bandi per i mezzi pubblici» risolveva
+    BANDI solo perche' "bandi" e' la prima parola-chiave incontrata, e
+    TRASPORTO_PUBBLICO (introdotta proprio per questa frase, vedi il
+    commento sul suo valore nell'enum) non veniva mai raggiunto."""
+    haystack = messaggio.casefold()
+    ha_bandi = any(k in haystack for k in TOPIC_KEYWORDS[Topic.BANDI])
+    ha_trasporto = any(k in haystack for k in TOPIC_KEYWORDS[Topic.TRASPORTO_PUBBLICO])
+    return ha_bandi and ha_trasporto
+
+
 def _confirm_beneficiary_role(
     *, message: str, role: BeneficiaryRole | None
 ) -> BeneficiaryRole | None:
@@ -438,6 +467,31 @@ class ChatIntent(BaseModel):
     )
 
 
+class _ModelIntent(BaseModel):
+    """Minimal shape asked of the LLM (D-01, ciclo11): topic/kind/comune_hint/
+    beneficiary_role only — no `slots`. Asking the model for anagraphic slots
+    was redundant with `treasureiq.chat.filtri.riconosci_filtri` (B2) and, on
+    isee especially, less accurate: the model echoed the same truncated
+    figures the old regex had, `riconosci_filtri` doesn't. Slots now come
+    from that single deterministic source in `respond.py`/`api.py`, never
+    from Ollama (closes D-05's double-wiring)."""
+
+    topic: Topic
+    kind: QuestionKind = QuestionKind.AGEVOLAZIONE
+    comune_hint: str | None = Field(
+        default=None,
+        max_length=100,
+        description="Comune name as the citizen wrote it, if any. Used only "
+        "as a lookup key against known comuni — never rendered back verbatim.",
+    )
+    beneficiary_role: BeneficiaryRole | None = Field(
+        default=None,
+        description="Chi riceve il servizio, SOLO per i topic dove questo "
+        "cambia cosa cercare (vedi AMBIGUOUS_ROLE_TOPICS). Mai dedotto dal "
+        "solo argomento della domanda.",
+    )
+
+
 def _topic_hint_lines() -> str:
     """One line per topic, `value: esempio, esempio` — a cheat-sheet for the
 
@@ -524,13 +578,15 @@ async def extract_intent(
     scuolabus?» can be read against what was asked before it. The
     classification TARGET stays `message`, never the history: `comune_hint`
     and `beneficiary_role` are still confirmed against `message` alone below
-    (R-9), and any slot the model could only have picked up from `storia`
-    rather than from `message` itself is discarded — a citizen who said «ho
-    38 anni» two turns ago must not have that age silently attached to an
-    unrelated question today. Deterministic *carryover* of a whole topic or
-    comune across turns is not this function's job: see
-    `treasureiq.chat.respond._eredita_dal_contesto`, which never trusts the
-    model alone for that (D-47 hard rule).
+    (R-9). `ChatIntent.slots` always comes back empty here — D-01 (ciclo11):
+    the model is only asked for `topic`/`kind`/`comune_hint`/`beneficiary_role`
+    now (see `_ModelIntent`), never anagraphic slots, so there is nothing left
+    to leak from `storia` into an unrelated turn. Slots are read from
+    `message` alone, downstream, by `treasureiq.chat.filtri.riconosci_filtri`
+    (the single source of truth, closing D-05's double-wiring). Deterministic
+    *carryover* of a whole topic or comune across turns is not this
+    function's job: see `treasureiq.chat.respond._eredita_dal_contesto`,
+    which never trusts the model alone for that (D-47 hard rule).
     """
     try:
         user_message = message
@@ -543,7 +599,7 @@ async def extract_intent(
                 f"Messaggio da classificare: {message}"
             )
         parsed = await provider.aparse(
-            system=INTENT_SYSTEM_PROMPT, user=user_message, output_model=ChatIntent
+            system=INTENT_SYSTEM_PROMPT, user=user_message, output_model=_ModelIntent
         )
         confirmed_role = _confirm_beneficiary_role(message=message, role=parsed.beneficiary_role)
         updates: dict[str, object] = {}
@@ -552,52 +608,6 @@ async def extract_intent(
         confirmed_hint = _confirm_comune_hint(message=message, hint=parsed.comune_hint)
         if confirmed_hint != parsed.comune_hint:
             updates["comune_hint"] = confirmed_hint
-        slot_updates: dict[str, object] = {}
-        # Disabilita' propria: recupero deterministico, e vale anche a turno
-        # singolo (il caso rotto era «ho 23 anni e sono disabile...», senza
-        # storia, con la disabilita' persa). Se il testo la dichiara la
-        # imponiamo; se il modello l'ha messa ma il testo di QUESTO turno non la
-        # conferma, in un dialogo la togliamo — puo' essere l'eco di un'altra
-        # persona (D-56), stessa regola di sesso/nucleo.
-        if _disabilita_dichiarata_nel_testo(message):
-            if parsed.slots.disabilita is not True:
-                slot_updates["disabilita"] = True
-        elif storia and parsed.slots.disabilita is not None:
-            slot_updates["disabilita"] = None
-        if storia:
-            # The one thing labeling `storia` in the prompt cannot guarantee
-            # is that the model keeps a slot's *value* out of an unrelated
-            # turn — only `message` itself, read with the same regex the
-            # profile-builder trusts over the model (`slot_dal_testo`), can
-            # confirm a number belongs to *this* turn.
-            confermati = slot_dal_testo(message)
-            if parsed.slots.eta is not None and "eta" not in confermati:
-                slot_updates["eta"] = None
-            if parsed.slots.isee is not None and "isee" not in confermati:
-                slot_updates["isee"] = None
-            if (
-                parsed.slots.nucleo_familiare is not None
-                and "nucleo_familiare" not in confermati
-            ):
-                # D-56: senza questo, "e per mia madre?" dopo un turno con
-                # "famiglia di 4" trascinerebbe il nucleo della persona
-                # precedente sulla persona nuova.
-                slot_updates["nucleo_familiare"] = None
-            if (
-                parsed.slots.sesso is not None
-                and _sesso_dichiarato_nel_testo(message) != parsed.slots.sesso
-            ):
-                slot_updates["sesso"] = None
-            if parsed.slots.disabilita_nucleo is not None and not (
-                _figlio_disabile_dichiarato_nel_testo(message)
-            ):
-                slot_updates["disabilita_nucleo"] = None
-            if parsed.slots.figli_disabili is not None and not (
-                _figlio_disabile_dichiarato_nel_testo(message)
-            ):
-                slot_updates["figli_disabili"] = None
-        if slot_updates:
-            updates["slots"] = parsed.slots.model_copy(update=slot_updates)
         if (
             parsed.topic in INFORMATIONAL_BY_NATURE_TOPICS
             and parsed.kind is not QuestionKind.INFORMAZIONE
@@ -622,9 +632,23 @@ async def extract_intent(
             # mai. Senza un aggancio nel testo il topic torna a SCONOSCIUTO —
             # il segnale con cui `respond` chiede quale categoria.
             updates["topic"] = Topic.SCONOSCIUTO
+        if (
+            updates.get("topic", parsed.topic) is Topic.BANDI
+            and _e_bando_di_trasporto_pubblico(message)
+        ):
+            # Guardia bandi/trasporto: «bandi per i mezzi pubblici» non e'
+            # una richiesta di elenco avvisi, e' TRASPORTO_PUBBLICO che
+            # nomina anche "bandi" (vedi `_e_bando_di_trasporto_pubblico`).
+            updates["topic"] = Topic.TRASPORTO_PUBBLICO
         if updates:
             parsed = parsed.model_copy(update=updates)
-        return parsed
+        return ChatIntent(
+            topic=parsed.topic,
+            kind=parsed.kind,
+            comune_hint=parsed.comune_hint,
+            beneficiary_role=parsed.beneficiary_role,
+            slots=ProfileSlots(),
+        )
     except Exception:
         logger.warning("intent extraction failed, falling back to sconosciuto", exc_info=True)
         return ChatIntent(topic=Topic.SCONOSCIUTO)
@@ -652,6 +676,20 @@ _ISEE_NEL_TESTO = re.compile(
 _NUCLEO_NEL_TESTO = re.compile(
     r"\b(?:famiglia|nucleo)\s+di\s+(?P<nucleo>\d{1,2})\b"
     r"|\bsiamo\s+in\s+(?P<nucleo2>\d{1,2})\b",
+    re.I,
+)
+
+#: Numeri scritti a parole che un cittadino usa per i figli.
+_PAROLE_NUMERO = {"un": 1, "uno": 1, "una": 1, "due": 2, "tre": 3, "quattro": 4, "cinque": 5}
+
+#: «2 figli minorenni», «due figli minori», «un figlio minore», «figli
+#: piccoli»: quanti minori nel nucleo, letto dal testo come eta'/ISEE/nucleo —
+#: mai dal modello, che questo slot lo riempie in modo inaffidabile. Il
+#: qualificatore «minor…»/«minorenn…»/«piccol…» e' OBBLIGATORIO: «ho due figli»
+#: adulti non deve contare come figli minori. Conteggio assente → 1.
+_FIGLI_MINORI_NEL_TESTO = re.compile(
+    r"\b(?P<n>\d{1,2}|un|uno|una|due|tre|quattro|cinque)?\s*"
+    r"figl[io]\w*\s+(?:minorenn\w+|minor\w+|piccol\w+)",
     re.I,
 )
 
@@ -693,6 +731,18 @@ def slot_dal_testo(messaggio: str) -> dict:
         valore_nucleo = int(grezzo_nucleo)
         if valore_nucleo >= 1:
             trovati["nucleo_familiare"] = valore_nucleo
+
+    figli = _FIGLI_MINORI_NEL_TESTO.search(messaggio)
+    if figli:
+        grezzo_figli = figli.group("n")
+        if grezzo_figli is None:
+            valore_figli = 1  # «ho figli minori», senza numero → almeno uno
+        elif grezzo_figli.isdigit():
+            valore_figli = int(grezzo_figli)
+        else:
+            valore_figli = _PAROLE_NUMERO.get(grezzo_figli.lower(), 1)
+        if valore_figli >= 1:
+            trovati["figli_minori"] = valore_figli
 
     return trovati
 

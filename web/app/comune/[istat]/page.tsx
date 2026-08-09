@@ -12,7 +12,7 @@
  */
 
 import { fetchSchedaComune, type SchedaComune } from "@/lib/api";
-import { linkAperturaDati, LINK_ESTERNO } from "@/lib/moduli";
+import { linkAperturaDati, mailtoSicuro, LINK_ESTERNO } from "@/lib/moduli";
 
 export const dynamic = "force-dynamic";
 
@@ -188,7 +188,15 @@ export default async function SchedaComunePage({
               <>
                 {" "}
                 ·{" "}
-                <a href={scheda.sito} target="_blank" rel="noopener">
+                <a
+                  href={
+                    scheda.sito.startsWith("http")
+                      ? scheda.sito
+                      : `https://${scheda.sito}`
+                  }
+                  target="_blank"
+                  rel="noopener"
+                >
                   sito ufficiale
                 </a>
               </>
@@ -253,7 +261,7 @@ export default async function SchedaComunePage({
                 <div className="scheda-comune__contatti-riga" key={`pec-${p}`}>
                   <dt>PEC</dt>
                   <dd>
-                    <a href={`mailto:${p}`}>{p}</a>
+                    {mailtoSicuro(p) ? <a href={mailtoSicuro(p)!}>{p}</a> : p}
                   </dd>
                 </div>
               ))}
@@ -261,7 +269,7 @@ export default async function SchedaComunePage({
                 <div className="scheda-comune__contatti-riga" key={`mail-${e}`}>
                   <dt>Email</dt>
                   <dd>
-                    <a href={`mailto:${e}`}>{e}</a>
+                    {mailtoSicuro(e) ? <a href={mailtoSicuro(e)!}>{e}</a> : e}
                   </dd>
                 </div>
               ))}

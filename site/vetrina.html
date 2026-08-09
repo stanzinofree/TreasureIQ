@@ -4,9 +4,9 @@
 <section class="hero">
   <div>
     <span class="hero__kicker">Chat civica · dati veri</span>
-    <h1>Le agevolazioni del tuo Comune, dette senza <em>mentire</em>.</h1>
-    <p class="lead">Il cittadino chiede in parole sue. TreasureIQ legge quello
-      che il portale del suo Comune pubblica davvero e risponde: ti spetta, non
+    <h1>Accedere alle informazioni del tuo Comune non deve essere una <em>caccia al tesoro</em>.</h1>
+    <p class="lead">TreasureIQ ti aiuta a trovarle. Oggi risponde su agevolazioni
+      comunali, recapiti degli uffici e scheda del comune: ti spetta, non
       risulta, oppure il Comune non l'ha ancora pubblicato. Mai una risposta
       inventata.</p>
     <div class="hero__azioni">
@@ -53,8 +53,11 @@
     <div class="passo">
       <div>
         <h3>TreasureIQ capisce Comune e situazione</h3>
-        <p>Estrae il comune e i dati anagrafici solo se li leggi nel messaggio.
-          Se il nome è ambiguo chiede quale, non tira a indovinare.</p>
+        <p>Il modello capisce solo comune e argomento. ISEE, disabilità, figli
+          minori, età: li legge una regola deterministica locale, mai il
+          modello — ogni valore letto nel messaggio diventa un chip che puoi
+          togliere se non ti riguarda. Se il nome del comune è ambiguo chiede
+          quale, non tira a indovinare.</p>
       </div>
     </div>
     <div class="passo">
@@ -109,7 +112,10 @@
         <h3><span class="bollo" style="background:var(--shu)"></span>Il verdetto non lo decide il modello</h3>
         <p>Il linguaggio lo capisce l'LLM; se hai diritto lo stabilisce una
           regola deterministica sui dati letti. Il numero passato al verdetto è
-          sempre quello del portale, mai un valore verbalizzato dal modello.</p>
+          sempre quello del portale, mai un valore verbalizzato dal modello. Lo
+          stesso vale a monte: ISEE, disabilità, figli minori li legge una
+          regola locale, non il modello — e restano chip che puoi rimuovere
+          dall'interfaccia se un valore letto non ti riguarda.</p>
       </div>
       <div class="tessera">
         <h3><span class="bollo" style="background:var(--sumi)"></span>Nessun nuovo standard</h3>

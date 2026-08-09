@@ -409,6 +409,62 @@ a {
 /* D-20 — which tier published this opportunity. `--ai` (authority) rather
    than a verdict colour: this badge never says whether the citizen
    qualifies, only who is answerable for the data. */
+/* Ciclo11/A7 — filtri riconosciuti nel messaggio, con provenienza e (dove
+   onesto) rimozione con re-query. Bordo netto invece del `.tag` a pillola
+   piena: qui il chip e' un'affermazione correggibile, non un'etichetta
+   chiusa, e il bordo lo segnala senza bisogno di colore. */
+.chip-filtri {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ma-2);
+  margin: var(--ma-2) 0;
+}
+
+.chip-filtri__voce {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ma-1);
+  padding: 2px var(--ma-1) 2px var(--ma-3);
+  border: 1px solid var(--kasumi);
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--sumi-soft);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.03em;
+}
+
+.chip-filtri__nota {
+  color: var(--sumi-faint);
+  font-size: 0.66rem;
+}
+
+.chip-filtri__rimuovi {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.4em;
+  height: 1.4em;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--sumi-faint);
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.chip-filtri__rimuovi:hover:not(:disabled) {
+  background: var(--paper-sunken);
+  color: var(--sumi-soft);
+}
+
+.chip-filtri__rimuovi:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
 .tag--livello {
   background: var(--ai-wash);
   color: var(--ai);
@@ -567,6 +623,64 @@ a {
   background: transparent;
   color: var(--ai);
   border: 1.5px solid var(--ai);
+}
+
+/* Feedback form (Feedback.tsx) — dedicated layout, not the `.chiedi-inline`
+   pointer style it used to borrow (no flex/gap there, so label/textarea
+   overlapped). */
+.feedback-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ma-3);
+  margin: var(--ma-4) 0 0;
+  padding-left: var(--ma-4);
+  border-left: 3px solid var(--yamabuki);
+  font-size: 0.9rem;
+  color: var(--sumi-soft);
+}
+.feedback-form label {
+  display: block;
+}
+.feedback-form textarea {
+  width: 100%;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+/* Vote pips 1-5 — small fixed squares, not the full-size `.button` pill they
+   used to borrow. */
+.feedback-voto {
+  width: 2.2rem;
+  height: 2.2rem;
+  margin-right: var(--ma-2);
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  background: transparent;
+  color: var(--sumi-soft);
+  border: 1.5px solid var(--kasumi);
+  cursor: pointer;
+}
+.feedback-voto--attivo {
+  background: var(--ai-vivid);
+  color: var(--sumi);
+  border-color: var(--ai-vivid);
+}
+
+.feedback-submit {
+  align-self: flex-start;
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: var(--ma-2) var(--ma-4);
+  border: none;
+  border-radius: 999px;
+  background: var(--ai-vivid);
+  color: var(--sumi);
+  cursor: pointer;
+}
+.feedback-submit:disabled {
+  opacity: 0.5;
+  cursor: default;
 }
 
 .panel {
@@ -2733,6 +2847,65 @@ a {
   font-size: 0.92em;
 }
 
+/* Badge tipo bando (ciclo 8, B2 classifica): agevolazione = verde `--wakatake`
+   (un beneficio economico, come un criterio soddisfatto), concorso = giallo
+   `--yamabuki` (stesso registro del caveat sotto: da verificare tu). Margine
+   sinistro per staccarlo dal titolo, non nuovo colore. */
+.tag-tipo-bando {
+  display: inline;
+  margin-left: 0.4em;
+  padding: 0.05em 0.4em;
+  border-radius: 3px;
+  font-weight: 600;
+  font-size: 0.92em;
+  white-space: nowrap;
+}
+.tag-tipo-bando--agevolazione {
+  background: var(--wakatake-wash);
+  color: var(--wakatake-deep);
+}
+.tag-tipo-bando--concorso {
+  background: var(--yamabuki-wash);
+  color: var(--yamabuki-deep);
+}
+
+/* Raggruppo bandi per tipo (ciclo 9, D-04): Agevolazioni/Concorsi/Altri,
+   stesso registro degli altri titoletti mono (`.bandi-comune__header`).
+   Separatore hairline `--kasumi` tra un gruppo e il successivo, coerente col
+   resto della card. */
+.bandi-comune__gruppo + .bandi-comune__gruppo {
+  margin-top: var(--ma-3);
+  padding-top: var(--ma-3);
+  border-top: 1px solid var(--kasumi);
+}
+.bandi-comune__gruppo-titolo {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--sumi-soft);
+}
+
+/* Collasso «non corrisponde al tema» (D-04): niente marker triangolare di
+   sistema, il chevron è testo («▸» nel summary) — stesso trucco già usato per
+   `.bandi-comune__header`, nessun dialog/alert JS. */
+.bandi-comune__espandi {
+  margin-top: var(--ma-2);
+}
+.bandi-comune__espandi-riga {
+  list-style: none;
+  cursor: pointer;
+  font-size: 0.82rem;
+  color: var(--sumi-soft);
+}
+.bandi-comune__espandi-riga::-webkit-details-marker {
+  display: none;
+}
+.bandi-comune__espandi-riga:hover {
+  color: var(--ai);
+}
+
 /* -------------------------------------------- numeri utili (banner pannello) */
 
 /* Recapiti del comune fuori copertura, letti al volo. Vive nel pannello a
@@ -2775,6 +2948,183 @@ a {
   margin: var(--ma-3) 0 0;
   font-size: 0.72rem;
   color: var(--sumi-soft);
+}
+
+/* Scheda «letto ora» (B5, ciclo 10): connettore letto dal vivo, stesso
+   registro delle altre card lette al volo — barra sinistra ambra
+   (`--yamabuki`), mai un verdetto. Recapiti onesti: un campo assente rende
+   la riga "non pubblicato", non un vuoto silenzioso (D-05). */
+.scheda-letto-ora {
+  margin: var(--ma-3) 0 0;
+  padding: var(--ma-4);
+  border: 1px solid var(--kasumi);
+  border-left: 3px solid var(--yamabuki, #e0a80d);
+  border-radius: 6px;
+  background: var(--yamabuki-wash);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ma-3);
+}
+.scheda-letto-ora__provenienza-testa {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--yamabuki-deep);
+}
+.scheda-letto-ora__uffici {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--ma-3);
+}
+.scheda-letto-ora__ufficio {
+  border-top: 1px solid var(--kasumi);
+  padding-top: var(--ma-2);
+  display: flex;
+  flex-direction: column;
+  gap: 0.2em;
+}
+.scheda-letto-ora__ufficio-nome {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--sumi, #1a1a1a);
+}
+.scheda-letto-ora__lista {
+  margin: var(--ma-2) 0 0;
+  display: grid;
+  gap: 0.3em;
+}
+.scheda-letto-ora__riga {
+  display: flex;
+  gap: var(--ma-2);
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+.scheda-letto-ora__riga dt {
+  min-width: 5.5em;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--sumi-soft);
+}
+.scheda-letto-ora__riga dd {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+}
+.scheda-letto-ora__link {
+  color: var(--ai);
+}
+.scheda-letto-ora__link:hover {
+  color: var(--ai-deep);
+}
+.scheda-letto-ora__assente {
+  color: var(--sumi-faint);
+  font-style: italic;
+}
+.scheda-letto-ora__provenienza {
+  margin-top: 0.3em;
+  font-size: 0.72rem;
+  font-style: italic;
+  color: var(--sumi-soft);
+}
+.scheda-letto-ora__at {
+  border-top: 1px solid var(--kasumi);
+  padding-top: var(--ma-3);
+}
+.scheda-letto-ora__at-titolo {
+  margin: 0 0 var(--ma-2);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--sumi-soft);
+}
+.scheda-letto-ora__at-vuoto {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--sumi-soft);
+}
+.scheda-letto-ora__bandi {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--ma-2);
+}
+.scheda-letto-ora__bando {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3em;
+  font-size: 0.85rem;
+}
+.scheda-letto-ora__pdf-flag {
+  display: inline-block;
+  padding: 0.05em 0.4em;
+  border-radius: 3px;
+  background: var(--wakatake-wash);
+  color: var(--wakatake-deep);
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+.scheda-letto-ora__analizza {
+  padding: 0.3em 0.7em;
+  border: 1px solid var(--yamabuki-deep);
+  border-radius: 5px;
+  background: #fff;
+  color: var(--yamabuki-deep);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.scheda-letto-ora__analizza:hover {
+  background: var(--yamabuki-deep);
+  color: #fff;
+}
+.scheda-letto-ora__carico {
+  margin: 0;
+  font-size: 0.78rem;
+  color: var(--sumi-soft);
+}
+.scheda-letto-ora__errore {
+  margin: 0;
+  font-size: 0.78rem;
+  color: var(--sumi-soft);
+}
+.scheda-letto-ora__requisiti {
+  margin: 0.3em 0 0;
+  padding-left: 1.2em;
+  font-size: 0.82rem;
+  color: var(--sumi-soft);
+  display: grid;
+  gap: 0.5em;
+}
+.scheda-letto-ora__segmento-kind {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--yamabuki-deep);
+}
+.scheda-letto-ora__segmento-pagina {
+  font-size: 0.72rem;
+  color: var(--sumi-faint);
+}
+.scheda-letto-ora__segmento-testo {
+  margin: 0.15em 0 0;
+  white-space: pre-line;
+}
+.scheda-letto-ora__note {
+  margin: 0.4em 0 0;
+  padding-left: 1.2em;
+  font-size: 0.76rem;
+  font-style: italic;
+  color: var(--sumi-faint);
 }
 
 /* ------------------------------------------------- integration cost table */

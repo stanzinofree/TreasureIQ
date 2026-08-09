@@ -1,6 +1,6 @@
 # Sicurezza e limiti d'uso
 
-*Scritto sul codice del 5 agosto 2026. Ogni voce dice cosa c'è **oggi**: le
+*Scritto sul codice del 9 agosto 2026. Ogni voce dice cosa c'è **oggi**: le
 lacune sono elencate come lacune, non nascoste fra le mitigazioni.*
 
 TreasureIQ ha tre superfici di rischio, e sono molto diverse fra loro:
@@ -113,6 +113,20 @@ perché non l'abbiamo mai costruito.
 
 È una proprietà architetturale, non una policy — e va difesa come tale: la prima
 richiesta di «salviamo i profili per migliorare il servizio» la fa sparire.
+
+### Meno testo del cittadino arriva a un modello
+
+Fino al ciclo 11, ISEE, disabilità, figli minori li leggeva Ollama: il testo
+del cittadino, dato sensibile incluso, entrava nel prompt di un modello per
+essere interpretato. Da `chat/filtri.py` (`riconosci_filtri`), quella lettura
+è **locale e deterministica** — spaCy `it_core_news_lg` per lemmi e negazione
+quando il modello è presente (scaricato nel build Docker), una cue-list
+italiana come ripiego onesto quando non lo è — e non esce mai dal processo,
+tantomeno verso un servizio esterno. Ollama resta nel giro solo per capire
+topic e comune (`chat/intent.py`): mai per gli slot sensibili — `_profile_from_slots`
+lo dice esplicitamente, «Ollama is no longer asked for them» (ciclo11/D-05).
+Coerente con la scelta sopra: un dato relativo alla salute (art. 9 GDPR) che
+oggi tocca un modello in un punto in meno.
 
 ### Le regole che valgono sulle risposte
 

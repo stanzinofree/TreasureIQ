@@ -59,6 +59,9 @@ CATEGORIA_PER_TOPIC: dict[Topic, Categoria] = {
     Topic.SUAP_IMPRESE: Categoria.ALTRO,
     Topic.AREA_VERDE: Categoria.ALTRO,
     Topic.VOLONTARIATO: Categoria.ALTRO,
+    # Bandi: letti dal vivo (B3, bandi-live-agid), fuori dalle tre categorie
+    # di D-55 come gli altri servizi non ricorrenti.
+    Topic.BANDI: Categoria.ALTRO,
 }
 
 

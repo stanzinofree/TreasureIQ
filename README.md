@@ -1,10 +1,22 @@
 # TreasureIQ
 
-Il tuo comune pubblica decine di servizi. Quanti ti riguardano davvero?
+Accedere alle informazioni dei comuni e delle PA non deve essere una caccia al
+tesoro. TreasureIQ ti aiuta a trovarle.
 
-TreasureIQ legge i servizi che un comune pubblica, li confronta con la situazione
-di un cittadino e dice a cosa può accedere — **e dove il comune non pubblica
-abbastanza perché la domanda abbia risposta**.
+Oggi ci parli in italiano. TreasureIQ risponde su agevolazioni comunali,
+recapiti e orari degli uffici, bandi e scheda del comune — confrontando i
+servizi che un comune pubblica con la situazione del cittadino — **e dice
+quando il Comune non ha pubblicato abbastanza perché la domanda abbia
+risposta**.
+
+Risponde su due livelli, e non li confonde mai. Sui **tre comuni censiti** ha
+uno snapshot ricco in git e, su richiesta, estrae dai PDF i criteri di un
+bando. Su **qualunque altro comune riconosciuto** (7.896 per nome) legge il
+portale al momento — la sezione Amministrazione Trasparente per i bandi, gli
+uffici dove il portale li espone — e marca ogni riga con la sua provenienza:
+letto ora, verificato, o trovato sul web e da confermare. Quale delle due
+strade prende lo decide la forma della domanda, non un elenco di comuni
+privilegiati.
 
 Progetto realizzato per il **SuperAgents Civic Hackathon** (Play New, 2026).
 
@@ -121,6 +133,8 @@ domanda in italiano
 chat/intent.py   → che FORMA ha la domanda. È tutto ciò che fa il modello
     ↓
     ├─ agevolazione → match/engine.py: confronto sui campi, nessun modello
+    ├─ bandi        → comune censito: dallo snapshot, criteri estratti dai PDF
+    │                 altro comune: sonda_live legge Amministrazione Trasparente ORA
     └─ informazione → documento + ufficio dallo snapshot
             ↓ (se il comune non è censito)
          sonda_live → legge il portale ORA, verbatim, non conserva
@@ -129,6 +143,29 @@ chat/intent.py   → che FORMA ha la domanda. È tutto ciò che fa il modello
     ↓
 scheda civica    → ogni riga con la sua provenienza
 ```
+
+`chat/intent.py` capisce la FORMA della domanda — comune, argomento — ma non
+riempie più gli slot anagrafici. È `chat/filtri.py` (`riconosci_filtri`) a
+estrarli, in modo deterministico: enum `FiltroChiave` a 10 valori (comune,
+disabilità, disabilità nel nucleo, figli minori, età, anziano, ISEE, nucleo
+familiare, stato occupazionale, tema). Lemmi e negazione passano da spaCy
+(`it_core_news_lg`, scaricato nel build Docker) quando il modello è
+disponibile, da una cue-list italiana come ripiego onesto quando non lo è —
+mai da un'eccezione che spezza il modulo. Ogni filtro letto dal testo porta lo
+span verbatim che lo giustifica: senza span, nessun filtro. Zero LLM nelle
+cifre che decidono l'eleggibilità (D-07).
+
+I sinonimi civici di «bando» nel messaggio — agevolazione, contributo,
+sovvenzione, sussidio, bonus, incentivo — fanno scattare, accanto alla
+risposta di agevolazione, una scansione bandi live dello stesso comune:
+additiva, mai al posto della risposta (`_forse_aggiungi_bandi_live` in
+`chat/respond.py`).
+
+Il testo della risposta — le cifre, le scadenze, quanti bandi corrispondono a un
+tema — è sempre un modello di frase deterministico, mai generato dal modello. Il
+modello capisce la domanda; non scrive un numero. Un verbalizzatore libero,
+messo alla prova, corrompeva le cifre: la guardia non è un prompt, è che quel
+testo non passa mai da un LLM.
 
 I tre gradini si scendono **in ordine**, e un dato trovato non si presenta mai
 come un dato letto. Il diagramma completo è su `/info`; le rotte sono
@@ -275,6 +312,13 @@ disonesta.
   snapshot; 7.896 sono riconosciuti per nome e, se il loro portale si lascia
   leggere, ricevono una risposta letta al momento. Vanno detti come due numeri
   diversi, sempre.
+- **Riconoscere una piattaforma non è saperla leggere.** Il censimento identifica
+  20 piattaforme, ma la lettura live struttura solo quelle che espongono la
+  sezione Amministrazione Trasparente in modo raggiungibile. Municipium (Maggioli),
+  seconda per diffusione al 12,8%, serve i dati da una propria API su tenant
+  numerico e non da un percorso pubblico: è riconosciuta come piattaforma, non
+  ancora letta come connettore. Pomezia, che la usa, cade sul gradino web. È il
+  prossimo connettore, non un buco nascosto.
 - **La ricerca web non è una fonte.** È l'ultimo gradino, serve solo dove il
   portale non espone i propri uffici, e quello che restituisce arriva marcato
   `non_verificato` e da confermare con l'URP. Non entra in nessuno snapshot e

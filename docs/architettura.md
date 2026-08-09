@@ -1,6 +1,6 @@
 # Architettura di TreasureIQ
 
-*Stato al 5 agosto 2026. Ogni cifra in questo documento è misurata, non stimata:
+*Stato al 9 agosto 2026. Ogni cifra in questo documento è misurata, non stimata:
 dove non abbiamo misurato, il documento lo dice.*
 
 ---
@@ -36,14 +36,15 @@ di cui conosciamo già l'indirizzo. Ogni pagina così raggiunta torna marcata
 
 | | |
 |---|---|
-| Righe di codice Python | 14.183 su 35 moduli |
-| Righe di test | 1.097 |
-| Test | 93, tutti verdi |
+| Righe di codice Python (`api/treasureiq`) | 21.838 su 46 moduli |
+| Righe di codice TypeScript/TSX (`web`) | 10.577 |
+| Test | 481, tutti verdi, su 27 file |
 | Comuni censiti | 7.896 — tutti i comuni italiani |
 | Richieste per un censimento completo | 34.229, circa 4 per comune |
 | Durata di un censimento completo | ~90 minuti con 8 richieste in parallelo |
 | Servizi comunali contati | 57.603 |
 | Piattaforme riconosciute | 20 |
+| Modello linguistico (`chat/filtri.py`) | spaCy `it_core_news_lg` 3.8.0, ~500MB — scaricato nel Dockerfile, non fissato in `requirements.txt`; se assente il riconoscimento filtri degrada a una cue-list |
 
 ---
 
@@ -58,6 +59,31 @@ recuperato** invece di limitarsi a recuperarla.
 
 Quella misura non è telemetria interna: finisce nel punteggio pubblico di
 leggibilità, quindi deve restare onesta anche quando è poco lusinghiera.
+
+Due connettori leggono fuori dal modello AgID, sul dominio proprio del comune:
+
+- **Municipium** (`municipium.py`, `municipium_at.py`) — non c'è un'API host
+  comune (risponde 503): la scoperta parte da `{dominio}/it/sitemap`, che
+  elenca gli uffici e, quando c'è, l'Amministrazione Trasparente. Copertura
+  onesta a due terzi: sitemap e uffici sì, AT solo quando il comune la
+  pubblica nello stesso formato.
+- **Halley** (`alberatura.py`) — i concorsi pubblici veri spesso non vivono
+  nel WordPress del comune ma in un portale Halley separato, sotto `/zf/`.
+  Le pagine dichiarano ISO-8859-1/windows-1252: un decode UTF-8 a forza
+  corromperebbe i caratteri accentati, quindi il connettore decodifica col
+  charset dichiarato (ripiego a ISO-8859-1 se assente).
+
+`bandi_live.py` mette in fila tre gradini REST, dal certo al meno probabile,
+e si ferma al primo che risponde:
+
+1. **`cpt`** — un custom post type dedicato ai bandi, dove il portale lo espone.
+2. **`pages`** — le stesse sei parole chiave di ricerca cercate su
+   `wp/v2/pages`, per i comuni WordPress "semplici" senza CPT (es. Albano).
+3. **`alberatura`** — il portale Halley `/zf/`, tentato solo quando i primi due
+   non coprono il comune.
+
+Un comune che non risponde a nessuno dei tre resta `non_coperto`, dichiarato
+come tale — mai un elenco vuoto spacciato per «nessun bando».
 
 ### Il modello AgID come interfaccia
 
@@ -166,23 +192,35 @@ e le nostre revisioni no.
 
 ## Il motore di risposta
 
-Sei passi, di cui **quattro deterministici**.
+Sette passi, di cui **cinque deterministici**.
 
 1. **Intento** *(modello)* — il testo libero diventa uno schema chiuso: forma
-   della domanda, argomento, slot anagrafici. Mai prosa, mai un verdetto.
-2. **Guardie** *(deterministiche)* — il comune nominato deve comparire nelle
+   della domanda, argomento, indizio di comune. Da qui non escono più slot
+   anagrafici (ciclo 11, D-01): il modello classifica topic/kind/comune_hint
+   e nient'altro (`chat/intent.py:473-477`). Mai prosa, mai un verdetto.
+2. **Filtri** *(deterministico)* — gli slot anagrafici (comune, disabilità
+   propria o nel nucleo, figli minori, età, ISEE, tipo di nucleo, condizione
+   lavorativa, tema) non li deduce più il modello linguistico: li riconosce
+   `chat/filtri.py::riconosci_filtri` per pattern e lemmi spaCy
+   (`it_core_news_lg`), un filtro alla volta, ciascuno con lo **span verbatim**
+   che lo giustifica. Nessuno span, nessun filtro: è la regola che uccide
+   l'allucinazione. Riconosce anche la negazione («non sono disabile»)
+   segmentando le clausole del testo. Senza il modello spaCy (scaricato nel
+   Dockerfile, non fissato in `requirements.txt`) degrada a una cue-list di
+   frasi fisse — più debole, ma dichiarata, mai muta.
+3. **Guardie** *(deterministiche)* — il comune nominato deve comparire nelle
    parole del cittadino; il ruolo deve essere dichiarato; gli argomenti
    informativi per natura non possono diventare agevolazioni. Scartano ciò che
    il modello ha aggiunto di suo.
-3. **Recupero** *(deterministico)* — 21 argomenti, 68 chiavi, confronto a
+4. **Recupero** *(deterministico)* — 21 argomenti, 68 chiavi, confronto a
    confine di parola: `tari` non prende `tariffa`, `tributi` non prende
    `contributi`.
-4. **Pertinenza** *(deterministica)* — le chiavi devono comparire sia nella
+5. **Pertinenza** *(deterministica)* — le chiavi devono comparire sia nella
    domanda sia nel titolo, oppure i due devono condividere una parola piena.
    Fuori dal conteggio le parole generiche e il nome del comune.
-5. **Verdetto** *(deterministico)* — 7 criteri confrontati con `Decimal`, tre
+6. **Verdetto** *(deterministico)* — 7 criteri confrontati con `Decimal`, tre
    valori logici, quattro esiti. Nessun modello tocca questo passo.
-6. **Verbalizzazione** *(modello)* — mette in italiano un verdetto già preso. Le
+7. **Verbalizzazione** *(modello)* — mette in italiano un verdetto già preso. Le
    cifre e le citazioni arrivano dai campi strutturati, non dal testo generato.
 
 Il confine è quello: **il modello capisce la domanda, non stabilisce l'esito.**

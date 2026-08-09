@@ -54,16 +54,26 @@ from treasureiq.chat.intent import (
     AMBIGUOUS_ROLE_TOPICS,
     INFORMATIONAL_BY_NATURE_TOPICS,
     TOPIC_KEYWORDS,
-    slot_dal_testo,
     BeneficiaryRole,
     ChatIntent,
     QuestionKind,
     Topic,
+    _sesso_dichiarato_nel_testo,
     extract_intent,
 )
 from treasureiq.chat.categorie import Categoria, topics_di
 from treasureiq.chat.nomi_genere import sesso_da_nome
 from treasureiq.extract.providers import LLMProvider, load_provider
+# Import del MODULO, non della funzione: i test mockano
+# `treasureiq.bandi_live.bandi_arricchiti` con `mock.patch`, che sostituisce
+# l'attributo sul modulo — un `from ... import bandi_arricchiti` legherebbe
+# qui un nome che il patch non raggiungerebbe piu'.
+from treasureiq import bandi_live
+from treasureiq.bandi_live import BandiLiveEsito, BandoArricchito
+# Stessa ragione del commento sopra (B4): i test mockano
+# `treasureiq.connettore.leggi_connettore` con `mock.patch`.
+from treasureiq import connettore
+from treasureiq.connettore import UfficioConnettore
 from treasureiq.integration import (
     AccessMode,
     Ente,
@@ -90,7 +100,7 @@ from treasureiq.match.engine import (
     summarise,
 )
 from treasureiq.integration import load_enti
-from treasureiq.schema import CitizenProfile, Livello, Opportunity
+from treasureiq.schema import CitizenProfile, EmploymentStatus, Livello, Opportunity, TargetGroup
 
 logger = logging.getLogger(__name__)
 
@@ -359,6 +369,16 @@ class ChatAnswer:
     numeri_utili: NumeriUtili | None = None
     comuni_ambigui: list[ComuneAmbiguo] | None = None
     scan: ScanStato | None = None
+    #: Esito grezzo di `bandi_live.bandi_arricchiti`, topic BANDI soltanto.
+    #: I criteri e le cifre di ogni bando (`Requirements`, importi, scadenze)
+    #: viaggiano SOLO qui, mai interpolati in `reply`: il verbalizzatore non
+    #: tocca mai questo campo (D-07, «il verbalizzatore corrompe le cifre»).
+    bandi_live: BandiLiveEsito | None = None
+    #: Esito grezzo di `connettore.leggi_connettore` (B4), ramo M4_CONNETTORE
+    #: scattato. Recapiti/orari/AT strutturati e verbatim: la card del web
+    #: (B5) li legge da qui, mai da `reply` (D-07). `None` quando il
+    #: connettore non ha risposto o il ramo non e' scattato (A7).
+    esito_connettore: connettore.EsitoConnettore | None = None
 
 
 def _resolve_comune(*, hint: str | None) -> tuple[str | None, str | None]:
@@ -378,53 +398,68 @@ def _resolve_comune(*, hint: str | None) -> tuple[str | None, str | None]:
     return None, None
 
 
-def _profile_from_slots(*, intent: ChatIntent, messaggio: str = "") -> CitizenProfile:
+def _profile_from_slots(
+    *,
+    intent: ChatIntent,
+    messaggio: str = "",
+    filtri_esclusi: frozenset | None = None,
+) -> CitizenProfile:
     """Build an anonymous profile from whatever the citizen volunteered.
 
+    Ciclo11/D-05: `riconosci_filtri` (`treasureiq.chat.filtri`) is now the
+    SOLE source of anagraphic slots — `intent.slots` is always an empty
+    `ProfileSlots()` after D-01 (Ollama is no longer asked for them). Lazy
+    import: `filtri.py` imports this module at module level, so this module
+    can only import `filtri.py` back lazily, inside the function, to avoid a
+    cycle.
+
+    `filtri_esclusi` (A8, ciclo11): chiavi `FiltroChiave` che il cittadino ha
+    chiesto di togliere dal ricalcolo (`ChatIn.filtri_override`) — un filtro
+    letto correttamente dal testo ma che non lo riguarda ("non sono io il
+    disabile, e' mia madre"). Semplice esclusione, mai una sostituzione
+    indovinata (A12): la chiave torna a essere uno slot vuoto, non un valore
+    diverso.
+
     Every field the citizen did not state is handed to the engine as a real
-    `None` (R-9) — `CitizenProfile` and `match/engine.py` both accept that
-    now, so there is nothing here to reconcile afterwards.
+    `None` (R-9) — `CitizenProfile` and `match/engine.py` both accept that.
     """
-    slots = intent.slots
-    # Le cifre non le produce il modello, nemmeno in ingresso: qui legge il
-    # testo un'espressione regolare, e vince su quanto ha capito il modello.
-    #
-    # Il caso che ha prodotto questa riga: «ho 38 anni e sono di pergine» —
-    # il modello non vedeva il 38, e la scheda continuava a chiedere l'età
-    # alla persona che l'aveva appena scritta.
-    letti = slot_dal_testo(messaggio)
+    from treasureiq.chat.filtri import FiltroChiave, riconosci_filtri
+
+    esclusi = filtri_esclusi or frozenset()
+    filtri = {
+        f.chiave: f.valore for f in riconosci_filtri(messaggio) if f.chiave not in esclusi
+    }
     comune_istat, comune_nome = _resolve_comune(hint=intent.comune_hint)
-    # D-52: il sesso dichiarato esplicitamente ("sono una donna") vince
-    # sempre; solo se il cittadino non l'ha detto si prova la deduzione dal
-    # nome proprio, deterministica e fuori dal grammar del modello (vedi
+    # D-52: il sesso resta FUORI dal catalogo `FiltroChiave` di proposito
+    # (B2/brief): la dichiarazione esplicita ("sono una donna") vince sempre;
+    # solo se il cittadino non l'ha detto si prova la deduzione dal nome
+    # proprio, deterministica e fuori dal grammar del modello (vedi
     # `chat.nomi_genere`). Una deduzione resta comunque una deduzione: chi
     # mostra il profilo la marca correggibile, mai un filtro nascosto.
-    sesso = slots.sesso if slots.sesso is not None else sesso_da_nome(messaggio)
-    # figli_disabili > 0 implica disabilita_nucleo=True: e' qui, non nel
-    # motore (D-53), che questa normalizzazione va fatta — l'engine legge
-    # solo `disabilita_nucleo` gia' risolto.
-    disabilita_nucleo = slots.disabilita_nucleo
-    if slots.figli_disabili is not None and slots.figli_disabili > 0:
-        disabilita_nucleo = True
+    sesso = _sesso_dichiarato_nel_testo(messaggio) or sesso_da_nome(messaggio)
+    isee_valore = filtri.get(FiltroChiave.ISEE)
+    employment_valore = filtri.get(FiltroChiave.EMPLOYMENT_STATUS)
     return CitizenProfile(
         comune_istat=comune_istat,
         comune_nome=comune_nome,
-        eta=letti.get("eta", slots.eta),
+        eta=filtri.get(FiltroChiave.ETA),
         # `str(float)` round-trips exactly through `Decimal` for the plain
         # decimal ISEE figures a citizen would type; see `ProfileSlots.isee`
-        # for why the slot itself is a `float`, not a `Decimal`.
-        isee=(
-            Decimal(str(letti["isee"]))
-            if "isee" in letti
-            else (Decimal(str(slots.isee)) if slots.isee is not None else None)
-        ),
-        nucleo_familiare=letti.get("nucleo_familiare", slots.nucleo_familiare),
-        figli_minori=slots.figli_minori,
-        disabilita=slots.disabilita,
+        # for why filtri.py carries `float`, not `Decimal`.
+        isee=Decimal(str(isee_valore)) if isee_valore is not None else None,
+        nucleo_familiare=filtri.get(FiltroChiave.NUCLEO_FAMILIARE),
+        figli_minori=filtri.get(FiltroChiave.FIGLI_MINORI),
+        disabilita=filtri.get(FiltroChiave.DISABILITA),
         sesso=sesso,
-        figli_disabili=slots.figli_disabili,
-        disabilita_nucleo=disabilita_nucleo,
-        employment_status=slots.employment_status,
+        # `FiltroChiave` non ha una chiave di CONTEGGIO figli disabili (solo
+        # il booleano `disabilita_nucleo`) — riduzione onesta di scope
+        # rispetto al vecchio `ProfileSlots.figli_disabili`, mai un numero
+        # indovinato (A12/L-5).
+        figli_disabili=None,
+        disabilita_nucleo=filtri.get(FiltroChiave.DISABILITA_NUCLEO),
+        employment_status=(
+            EmploymentStatus(employment_valore) if employment_valore is not None else None
+        ),
     )
 
 
@@ -1265,6 +1300,21 @@ def _ufficio_chiesto(parole: str) -> str | None:
     return None
 
 
+def _disabilita_attiva_nel_testo(parole: str) -> bool:
+    """Il filtro disabilita (proprio o del nucleo) e' acceso in questo testo?
+
+    Stessa fonte unica di `_profile_from_slots` (`riconosci_filtri`, D-05):
+    mai un pattern-match parallelo sul messaggio. Lazy import per lo stesso
+    ciclo di `_profile_from_slots`: `filtri.py` importa questo modulo a
+    livello di modulo, quindi qui si puo' importare `filtri.py` solo dentro
+    la funzione (ciclo11 B5, A9).
+    """
+    from treasureiq.chat.filtri import FiltroChiave, riconosci_filtri
+
+    chiavi = {f.chiave for f in riconosci_filtri(parole)}
+    return FiltroChiave.DISABILITA in chiavi or FiltroChiave.DISABILITA_NUCLEO in chiavi
+
+
 def _prove_e_stato(
     *,
     document: DocumentAnswer | None,
@@ -1592,6 +1642,32 @@ async def _build_informazione_answer(
 
     web_results: list[WebResultAnswer] = []
     access_mode = ente.access_mode.value
+
+    # M4-servito vs M4-gap (B4): un ente censito con access_mode M4_CONNETTORE
+    # NON è per forza esausto — proviamolo per davvero prima di trattarlo come
+    # il gap che l'access_mode misurato descrive. Se il connettore legge dati
+    # veri, questo intercetta la risposta qui e non attraversa mai il ramo
+    # institutional_exhausted sotto (niente sonda, niente ricerca web, niente
+    # falso «non ha pubblicato niente»). Se il connettore non ha nulla
+    # (`None` o degradato-vuoto), il flusso prosegue ESATTAMENTE come prima:
+    # institutional_exhausted resta vero e nulla cambia per i comuni
+    # non-Municipium (A7).
+    if not candidates and ente.access_mode == AccessMode.M4_CONNETTORE:
+        esito_connettore = await asyncio.to_thread(connettore.leggi_connettore, ente.codice_istat)
+        if esito_connettore is not None and (
+            esito_connettore.uffici or esito_connettore.amministrazione_trasparente is not None
+        ):
+            risposta_connettore = _risposta_da_connettore(
+                comune_nome=ente.ente,
+                topic=intent.topic,
+                diagnosi=diagnosis,
+                esito=esito_connettore,
+                ufficio_chiesto=_ufficio_chiesto(parole),
+                disabilita_attiva=_disabilita_attiva_nel_testo(parole),
+            )
+            if risposta_connettore is not None:
+                return risposta_connettore
+
     institutional_exhausted = not candidates and ente.access_mode in (
         AccessMode.M4_CONNETTORE,
         AccessMode.M5_NESSUNO,
@@ -1771,6 +1847,188 @@ async def _ricerca_a_gradini(
     return await asyncio.to_thread(_cerca_sul_web, query)
 
 
+#: Sinonimi cittadino -> ufficio per il match sul connettore (B4). Il nome
+#: dell'ufficio e' testo libero letto dal portale (Municipium oggi, altri
+#: vendor domani): il match resta a sottostringa sul nome minuscolo, mai un
+#: LLM (D-04) — se non ne torna esattamente uno, si elenca, non si indovina.
+_SINONIMI_UFFICIO_CONNETTORE: dict[str, tuple[str, ...]] = {
+    "anagrafe": ("anagrafe", "demografic", "stato civile"),
+    "tributi": ("tribut", "imu", "tari"),
+    "urbanistica": ("urbanistic", "edilizia"),
+    "sociale": ("social",),
+    "sociali": ("social",),
+    # ciclo11 B5/A9: parola-chiave non derivata dal topic/testo nominato ma
+    # dal filtro `disabilita`/`disabilita_nucleo` (riconosci_filtri) — vedi
+    # `_ufficio_connettore_pertinente`.
+    "disabilita": ("disabil", "social"),
+    "scuola": ("scuola", "istruzion", "pubblica istruzione"),
+    "commercio": ("commerci", "attivita produttive", "suap"),
+    "polizia": ("polizia", "vigil"),
+    "ambiente": ("ambiente", "ecologia"),
+    "lavori": ("lavori pubblici", "manutenzion"),
+    "protocollo": ("protocollo",),
+    "cultura": ("cultura",),
+    "sport": ("sport",),
+}
+
+
+def _ufficio_connettore_pertinente(
+    uffici: list[UfficioConnettore],
+    *,
+    ufficio_chiesto: str | None,
+    topic: Topic,
+    disabilita_attiva: bool = False,
+) -> tuple[UfficioConnettore | None, bool]:
+    """L'ufficio del connettore che risponde alla domanda, se uno solo
+    corrisponde. Prova prima la parola nominata dal cittadino
+    (`_ufficio_chiesto`), poi — se il filtro disabilita/disabilita_nucleo e'
+    acceso (ciclo11 B5/A9) — l'ufficio disabilita/servizi sociali, poi i
+    pezzi del `topic` gia' riconosciuto — mai il testo libero del messaggio
+    (D-24: solo campi tipizzati in ingresso al match).
+
+    Il segnale del filtro RAFFINA quando puo', non forza (L-5): se nessun
+    ufficio del connettore nomina disabilita/sociale, la ricerca prosegue
+    esattamente come prima sui pezzi del topic — nessun ufficio inventato,
+    nessun degrado silenzioso verso l'ufficio sbagliato.
+
+    `(None, False)`: nessuna parola-chiave ha trovato un ufficio — il
+    cittadino non ha nominato nulla di specifico, si elenca. `(None, True)`:
+    piu' di un ufficio corrisponde alla stessa parola-chiave — ambiguo,
+    stesso trattamento (elenco), mai un indovinello (D-04)."""
+    candidati = []
+    if ufficio_chiesto:
+        candidati.append(ufficio_chiesto.lower())
+    if disabilita_attiva:
+        candidati.append("disabilita")
+    candidati.extend(pezzo for pezzo in topic.value.split("_") if len(pezzo) > 3)
+
+    for chiave in candidati:
+        sottostringhe = _SINONIMI_UFFICIO_CONNETTORE.get(chiave, (chiave,))
+        trovati = [
+            ufficio
+            for ufficio in uffici
+            if any(s in ufficio.nome.lower() for s in sottostringhe)
+        ]
+        if len(trovati) == 1:
+            return trovati[0], False
+        if len(trovati) > 1:
+            return None, True
+    return None, False
+
+
+def _testo_ufficio_connettore(*, comune_nome: str, ufficio: UfficioConnettore) -> str:
+    """Frase-cornice fissa; tel/email/pec/orari sono interpolati VERBATIM
+    dall'`UfficioConnettore` — mai passati da un LLM/verbalizzatore (D-07:
+    il verbalizzatore corrompe le cifre, qui le cifre non lo incontrano
+    nemmeno). Onesto campo per campo (D-05): un recapito compare solo se il
+    comune lo ha pubblicato per questo ufficio, mai un centralino ente
+    spacciato per diretto."""
+    righe = [f"{comune_nome} pubblica sul proprio portale i recapiti di «{ufficio.nome}»."]
+    if ufficio.telefoni:
+        righe.append("Telefono: " + ", ".join(ufficio.telefoni) + ".")
+    else:
+        righe.append(f"Il comune non ha pubblicato un telefono diretto per {ufficio.nome}.")
+    if ufficio.email:
+        righe.append("Email: " + ", ".join(ufficio.email) + ".")
+    if ufficio.pec:
+        righe.append("PEC: " + ", ".join(ufficio.pec) + ".")
+    if ufficio.orari:
+        righe.append("Orari: " + ufficio.orari + ".")
+    return " ".join(righe)
+
+
+def _testo_elenco_uffici_connettore(*, comune_nome: str, uffici: list[UfficioConnettore]) -> str:
+    """Elenco onesto quando il cittadino non ha nominato un ufficio preciso
+    o ne ha nominato uno ambiguo (D-04): mai indovinare quale intendeva."""
+    nomi = "; ".join(ufficio.nome for ufficio in uffici)
+    return (
+        f"{comune_nome} pubblica sul proprio portale questi uffici: {nomi}. "
+        "Quale ti interessa?"
+    )
+
+
+def _risposta_da_connettore(
+    *,
+    comune_nome: str,
+    topic: Topic,
+    diagnosi: list[str],
+    esito: "connettore.EsitoConnettore",
+    ufficio_chiesto: str | None,
+    disabilita_attiva: bool = False,
+) -> ChatAnswer | None:
+    """Risposta INFORMAZIONE costruita dal connettore (B4, D-09/D-11): stesso
+    schema di `_chat_live`, ma con recapiti VERBATIM e onestà campo-per-campo
+    (D-05/D-07) invece del solo blocco `orari` che il resto del gradino 2
+    conosce. `None` se il connettore non ha uffici da offrire su questo
+    ramo — il chiamante ripiega sul gradino web (A7, invariato).
+
+    `disabilita_attiva` (ciclo11 B5/A9): il filtro disabilita/disabilita_nucleo
+    e' acceso per questo cittadino — raffina la selezione dell'ufficio verso
+    disabilita/servizi sociali, vedi `_ufficio_connettore_pertinente`."""
+    if not esito.uffici:
+        return None
+
+    ufficio, ambiguo = _ufficio_connettore_pertinente(
+        esito.uffici,
+        ufficio_chiesto=ufficio_chiesto,
+        topic=topic,
+        disabilita_attiva=disabilita_attiva,
+    )
+    diagnosi_connettore = [
+        *diagnosi,
+        f"Letto dal connettore ({esito.piattaforma}) il {esito.letto_il}.",
+    ]
+
+    if ufficio is None:
+        reply = _testo_elenco_uffici_connettore(comune_nome=comune_nome, uffici=esito.uffici)
+        documento = None
+        ufficio_risposta = None
+        citizen_effort = 2
+    else:
+        reply = _testo_ufficio_connettore(comune_nome=comune_nome, ufficio=ufficio)
+        documento = DocumentAnswer(title=f"{ufficio.nome} — pagina del comune", url=ufficio.url)
+        ufficio_risposta = OfficeAnswer(
+            nome=ufficio.nome,
+            telefono=", ".join(ufficio.telefoni) or None,
+            email=", ".join(ufficio.email) or None,
+            orari=ufficio.orari,
+        )
+        citizen_effort = 1
+
+    stato, prove = _prove_e_stato(
+        document=documento,
+        office=ufficio_risposta,
+        web_results=[],
+        letto_dal_vivo=True,
+    )
+    azioni = _azioni_possibili(document=documento, office=ufficio_risposta, web_results=[])
+    return ChatAnswer(
+        reply=reply,
+        topic=topic,
+        kind=QuestionKind.INFORMAZIONE,
+        data_gap=None,
+        needs_clarification=ambiguo,
+        matches=[],
+        spid_required=False,
+        spid_reason=None,
+        access_mode=AccessMode.M4_CONNETTORE.value,
+        citizen_effort=citizen_effort,
+        info=InfoAnswer(
+            document=documento,
+            office=ufficio_risposta,
+            stato=stato,
+            prove=prove,
+            azioni=azioni,
+            coverage_count=0,
+            diagnosis=diagnosi_connettore,
+            letto_dal_vivo=True,
+            integration_cost=[],
+            web_results=[],
+        ),
+        esito_connettore=esito,
+    )
+
+
 async def _risposta_live(
     *,
     hint: str | None,
@@ -1888,6 +2146,26 @@ async def _risposta_live(
             data_gap="not_published",
             citizen_effort=2,
         )
+
+    # Innesto pre-web (B4, D-09/D-11): se il comune ha un connettore che sa
+    # leggerlo (oggi Municipium), lo proviamo PRIMA della ricerca web aperta —
+    # è dato letto dal portale stesso, non un risultato di un motore terzo
+    # senza provenienza (A7: se non c'è connettore, si prosegue esattamente
+    # come oggi, invariato).
+    esito_connettore = await asyncio.to_thread(connettore.leggi_connettore, comune.codice_istat)
+    if esito_connettore is not None and (
+        esito_connettore.uffici or esito_connettore.amministrazione_trasparente is not None
+    ):
+        risposta_connettore = _risposta_da_connettore(
+            comune_nome=comune.nome,
+            topic=topic,
+            diagnosi=diagnosi,
+            esito=esito_connettore,
+            ufficio_chiesto=_ufficio_chiesto(parole),
+            disabilita_attiva=_disabilita_attiva_nel_testo(parole),
+        )
+        if risposta_connettore is not None:
+            return risposta_connettore
 
     # Gradino 3 (D-32). Il portale ha risposto e non espone i propri uffici in
     # una forma leggibile: fermarsi qui significava dire «cercalo a mano sul
@@ -2411,29 +2689,523 @@ _CAMBIO_PERSONA_RE = re.compile(
     re.IGNORECASE,
 )
 
-# Gli stessi campi che `_profile_from_slots` legge dal turno corrente: se
-# almeno uno e' dichiarato insieme al pattern sopra, il turno non sta
-# aggiornando la persona in sessione — ne descrive un'altra (A3).
-_SLOT_ANAGRAFICI = (
+# KAPI 11 (gap-closure): sinonimi civici di "agevolazione" nel messaggio.
+# Insieme chiuso, deciso dal committente — «Aggiungi bandi», non un reroute
+# di topic (D-01): accende SOLO una scansione bandi live additiva accanto
+# alla risposta agevolazione, mai al suo posto. «aiuto/aiuti» ESCLUSO di
+# proposito: troppo generico, produrrebbe falsi positivi su ogni domanda
+# di supporto non civico.
+_BANDI_SINONIMI_RE = re.compile(
+    r"\b(?:agevolazion\w*|contribut\w*|sovvenzion\w*|sussid\w*|bonus|incentiv\w*)\b",
+    re.IGNORECASE,
+)
+
+# Le stesse chiavi che `_profile_from_slots` legge dal turno corrente via
+# `riconosci_filtri` (ciclo11): se almeno una e' dichiarata insieme al
+# pattern sopra, il turno non sta aggiornando la persona in sessione — ne
+# descrive un'altra (A3). Non c'e' una chiave FiltroChiave per il sesso (resta
+# fuori dal catalogo, D-52): controllato a parte sotto.
+_SLOT_ANAGRAFICI_FILTRO = (
     "eta",
     "isee",
     "nucleo_familiare",
-    "sesso",
     "disabilita_nucleo",
-    "figli_disabili",
     "figli_minori",
     "disabilita",
     "employment_status",
 )
 
 
-def _e_cambio_persona(message: str, slots: object) -> bool:
+def _e_cambio_persona(message: str) -> bool:
     """D-56/A3: euristica deterministica, niente LLM. Il pattern da solo non
     basta (si puo' nominare la madre senza chiedere nulla su di lei); serve
-    anche almeno uno slot anagrafico dichiarato in QUESTO turno."""
+    anche almeno uno slot anagrafico dichiarato in QUESTO turno.
+
+    Ciclo11: letto ora da `riconosci_filtri` (lazy import, stesso motivo di
+    `_profile_from_slots`), non piu' da `intent.slots` — sempre vuoto dopo
+    D-01, il modello non riempie piu' gli slot."""
     if not _CAMBIO_PERSONA_RE.search(message):
         return False
-    return any(getattr(slots, campo, None) is not None for campo in _SLOT_ANAGRAFICI)
+    from treasureiq.chat.filtri import riconosci_filtri
+
+    chiavi = {f.chiave.value for f in riconosci_filtri(message)}
+    if any(chiave in chiavi for chiave in _SLOT_ANAGRAFICI_FILTRO):
+        return True
+    return _sesso_dichiarato_nel_testo(message) is not None
+
+
+def _affinita_bando(opp: Opportunity, profile: CitizenProfile) -> int:
+    """Punteggio MORBIDO di aderenza profilo↔bando. Non è un verdotto: serve a
+    ORDINARE, mai a escludere. I requisiti tipizzati pesano più delle parole
+    nel titolo. Zero significa «nessun riscontro», non «non idoneo» — un bando
+    a punteggio 0 resta in lista, solo più in basso.
+
+    Deliberatamente prudente sui `None`: un requisito non dichiarato non è un
+    match (schema `Requirements`: `None` ≠ «nessun vincolo»). Non tocca ISEE né
+    scadenze — quelle restano dietro il quote-gate, mai dedotte qui."""
+    req = opp.requirements
+    testo = f"{opp.title} {opp.summary or ''}".lower()
+    punti = 0
+
+    # Figli minori: segnale strutturato forte, poi il richiamo nel titolo.
+    if profile.figli_minori and profile.figli_minori > 0:
+        if req.figli_minori_required is True:
+            punti += 2
+        if TargetGroup.MINORI in opp.targets or any(
+            k in testo
+            for k in (
+                "minor",
+                "figli",
+                "bambin",
+                "infanz",
+                "scuola",
+                "scolast",
+                "asilo",
+                "nido",
+                "student",
+                "mensa",
+                "doposcuola",
+            )
+        ):
+            punti += 1
+
+    # Famiglia / nucleo.
+    ha_famiglia = bool(profile.figli_minori) or bool(
+        profile.nucleo_familiare and profile.nucleo_familiare > 1
+    )
+    if ha_famiglia and (TargetGroup.FAMIGLIE in opp.targets or "famigl" in testo):
+        punti += 1
+    if (
+        req.nucleo_min is not None
+        and profile.nucleo_familiare
+        and profile.nucleo_familiare >= req.nucleo_min
+    ):
+        punti += 1
+
+    # Età: dentro la forbice dichiarata, o la fascia anziani.
+    if profile.eta is not None:
+        if (
+            req.eta_min is not None
+            and req.eta_max is not None
+            and req.eta_min <= profile.eta <= req.eta_max
+        ):
+            punti += 1
+        if profile.eta >= 65 and (
+            TargetGroup.ANZIANI in opp.targets or "anzian" in testo
+        ):
+            punti += 1
+
+    # Disabilità: del cittadino e del nucleo, distinte (D-53).
+    if profile.disabilita and req.disabilita_required is True:
+        punti += 2
+    if profile.disabilita_nucleo and req.disabilita_nucleo_required is True:
+        punti += 2
+
+    # Sesso (bandi riservati, es. contrassegno rosa) e stato occupazionale.
+    if req.sesso is not None and profile.sesso is not None and req.sesso == profile.sesso:
+        punti += 1
+    if req.employment_status and profile.employment_status in req.employment_status:
+        punti += 1
+
+    return punti
+
+
+def _ordina_bandi_per_profilo(
+    bandi: list[BandoArricchito], profile: CitizenProfile | None
+) -> tuple[list[BandoArricchito], bool]:
+    """Ordina i bandi per aderenza morbida al profilo e marca i risuonanti.
+    Ritorna `(lista, c_e_ranking)`. Ordinamento STABILE: a pari punteggio
+    l'ordine del portale è preservato. NESSUNA esclusione — la lista resta
+    intera. Senza profilo o senza alcun riscontro torna la lista intatta e
+    `False`, così il testo non promette un filtro che non c'è stato."""
+    if profile is None or not bandi:
+        return bandi, False
+    valutati = [
+        (_affinita_bando(b.opportunity, profile), indice, b)
+        for indice, b in enumerate(bandi)
+    ]
+    if not any(punti > 0 for punti, _, _ in valutati):
+        return bandi, False
+    valutati.sort(key=lambda t: (-t[0], t[1]))
+    ordinati = [
+        b.model_copy(update={"consigliato": punti > 0}) for punti, _, b in valutati
+    ]
+    return ordinati, True
+
+
+#: Parole-funzione italiane che non portano alcun tema: articoli,
+#: preposizioni, ausiliari e le forme più comuni in cui un cittadino
+#: introduce una domanda sui bandi («ci sono bandi per...», «avete bandi
+#: sulla...»). Tagliate qui, non nel keyword-hit: `_estrai_tema` deve
+#: restare deterministico e non dipendere dal matching morbido del match
+#: engine.
+_STOPWORD_TEMA = frozenset(
+    {
+        "ci",
+        "sono",
+        "per",
+        "di",
+        "la",
+        "lo",
+        "il",
+        "le",
+        "gli",
+        "un",
+        "una",
+        "uno",
+        "che",
+        "cosa",
+        "quali",
+        "quale",
+        "qualche",
+        "qualcuno",
+        "avete",
+        "esistono",
+        "esiste",
+        "trovo",
+        "posso",
+        "vorrei",
+        "sapere",
+        "se",
+        "e",
+        "ed",
+        "o",
+        "ma",
+        "anche",
+        "solo",
+        "ancora",
+        "gia",
+        "già",
+        "non",
+        "mi",
+        "ti",
+        "si",
+        "noi",
+        "voi",
+        "loro",
+        "dei",
+        "nel",
+        "nello",
+        "nella",
+        "nei",
+        "negli",
+        "nelle",
+        "al",
+        "allo",
+        "alla",
+        "ai",
+        "agli",
+        "alle",
+        "dal",
+        "dallo",
+        "dalla",
+        "dai",
+        "dagli",
+        "dalle",
+        "sul",
+        "sui",
+        "sulle",
+        "con",
+        "tra",
+        "fra",
+        "come",
+        "dove",
+        "quando",
+        "perché",
+        "perche",
+        "cui",
+        "questo",
+        "questa",
+        "questi",
+        "queste",
+        "suo",
+        "sua",
+        "suoi",
+        "sue",
+        "mio",
+        "mia",
+        "miei",
+        "mie",
+        "nostro",
+        "nostra",
+        # filler modali/verbi-domanda: compaiono nella coda dopo «bandi»
+        # («bandi a cui posso accedere») senza essere un tema.
+        "accedere",
+        "richiedere",
+        "ottenere",
+        "avere",
+        "fare",
+        "usufruire",
+        "partecipare",
+        "aperti",
+        "aperto",
+        "attivi",
+        "attivo",
+        "disponibili",
+        "disponibile",
+        "adesso",
+        "ora",
+        # saluti/presentazione: di norma precedono «bandi» (già esclusi dal
+        # taglio sulla coda), ma tenerli qui è una rete di sicurezza a costo zero.
+        "ciao",
+        "salve",
+        "buongiorno",
+        "buonasera",
+        "grazie",
+        "scusa",
+        "scusi",
+    }
+)
+
+#: Tetto alla lunghezza del tema estratto (D-06, red-team): il tema finisce
+#: eco-iato verbatim dentro la reply, quindi un messaggio patologicamente
+#: lungo non deve produrre una risposta patologicamente lunga. Non è HTML e
+#: non gira in una shell — è solo interpolazione di stringa — ma un limite
+#: onesto tiene la risposta leggibile.
+_TEMA_MAX_CHARS = 60
+
+
+def _estrai_tema(message: str) -> str | None:
+    """Estrae dal messaggio del cittadino il tema di un filtro sui bandi
+    («ci sono bandi per la mobilità?» → "mobilità"), deterministico (D-01):
+    nessun modello, solo sottrazione di ciò che non è tema.
+
+    Il tema è ciò che il cittadino aggiunge DOPO aver nominato i bandi:
+    «bandi per la mobilità», «avviso pubblico sulla casa». Quindi si guarda
+    solo la CODA che segue l'ultima keyword di `TOPIC_KEYWORDS[Topic.BANDI]`
+    ("bando", "bandi", "avviso pubblico", "avvisi pubblici", "graduatoria").
+    Saluti, nome e presentazione precedono sempre la keyword («ciao sono
+    Andrea, vivo a Benevento, avete bandi?») e così non possono mai essere
+    scambiati per un tema — la causa del falso-positivo emersa in review.
+    Se nel messaggio non compare nessuna keyword bandi, non c'è un segnale
+    esplicito di tema: `None`, e il ramo si comporta come prima (D-07).
+
+    Sulla coda, ordine di sottrazione (ognuno riduce il residuo successivo):
+
+    1. Le parole del nome del comune già riconosciuto da `_comune_nominato`
+       (stessa funzione usata per il routing, R-9) — chi nomina il comune
+       non sta nominando un tema.
+    2. `_STOPWORD_TEMA`: parole-funzione, saluti, verbi-domanda («a cui posso
+       accedere») comuni in una domanda.
+    3. `_CONNETTIVI_NOME` e `_PAROLE_NON_TOPONIMI`: riusate qui non per il
+       loro scopo originale (disambiguare comuni), ma perché sono comunque
+       parole-funzione o non-contenuto già validate altrove.
+    4. Token sotto le tre lettere — troppo corti per portare un tema.
+
+    Quel che resta, nell'ordine in cui compare, è il tema — ma solo se sono
+    1-3 parole (DISCRETION): residui più lunghi sono rumore di frase, non un
+    filtro. Unito con uno spazio e troncato a `_TEMA_MAX_CHARS` (D-06,
+    red-team «tema enorme»). Se non resta nulla o restano troppe parole:
+    `None` (D-07).
+
+    Il tema è un'eco: mai tradotto, riformulato o passato a un modello
+    (A5). Se sembra sbagliato al cittadino, resta comunque leggibile perché
+    sono le sue stesse parole.
+    """
+    testo = message.lower()
+    # Fine dell'ULTIMA keyword bandi nel messaggio: il tema vive nella coda.
+    fine_keyword = -1
+    for frase in TOPIC_KEYWORDS[Topic.BANDI]:
+        inizio = 0
+        while (pos := testo.find(frase, inizio)) >= 0:
+            fine_keyword = max(fine_keyword, pos + len(frase))
+            inizio = pos + len(frase)
+    if fine_keyword < 0:
+        return None
+    coda = testo[fine_keyword:]
+    comune = _comune_nominato(message)
+    parole_comune = set(comune.nome.lower().split()) if comune is not None else set()
+    parole = re.findall(r"[a-zà-ù']+", coda)
+    residuo = [
+        parola
+        for parola in parole
+        if len(parola) >= 3
+        and parola not in _STOPWORD_TEMA
+        and parola not in _CONNETTIVI_NOME
+        and parola not in _PAROLE_NON_TOPONIMI
+        and parola not in parole_comune
+    ]
+    if not residuo or len(residuo) > 3:
+        return None
+    tema = " ".join(residuo).strip()
+    return tema[:_TEMA_MAX_CHARS] if tema else None
+
+
+def _bando_tocca_il_tema(bando: BandoArricchito, tema: str) -> bool:
+    """Se `tema` (estratto da `_estrai_tema`) trova riscontro nel bando:
+    titolo e riassunto insieme, stesso haystack usato da `_pertinente` per lo
+    stesso motivo — il titolo porta l'argomento, il riassunto lo completa
+    quando il titolo da solo è troppo scarno. Riusa `_keyword_hit` (726):
+    stessa logica di match già validata (parola intera + radici tronche),
+    non una nuova euristica per lo stesso problema.
+
+    Tema multi-parola: match ANY-token (default spec DISCRETION «almeno uno»),
+    non frase-intera contigua — «servizi sociali» tocca un bando che nomina
+    solo «sociali». Ogni token del tema è una keyword separata per
+    `_keyword_hit`, che va già a OR sulle keyword.
+    """
+    haystack = f"{bando.opportunity.title} {bando.opportunity.summary or ''}".lower()
+    return _keyword_hit(haystack=haystack, keywords=tuple(tema.split()))
+
+
+async def _risposta_bandi(
+    *, message: str, profile: CitizenProfile | None, comune_istat: str | None
+) -> ChatAnswer:
+    """Ramo Topic.BANDI (KAPI 7, bandi-live-agid): legge dal vivo la sezione
+    Amministrazione Trasparente del comune, invece di cercare nello snapshot
+    ingerito che alimenta `_search_opportunities` — un bando pubblicato oggi
+    non e' nell'ultima fotografia dell'ingestione.
+
+    Il comune segue la precedenza qui sotto: il PROFILO vince sempre (R-9,
+    memoria «ricerca live cieca al comune di profilo») — un cittadino il cui
+    profilo ha gia' un comune non deve vedersi scansionare un comune diverso
+    solo perche' lo ha nominato di sfuggita — poi la scelta esplicita, e SOLO
+    in assenza di entrambi il comune nominato nel testo (indispensabile al
+    primo turno, quando profilo e scelta sono ancora vuoti), infine il default.
+
+    Il testo di risposta e' FISSO, mai passato al verbalizzatore (D-07,
+    memoria «il verbalizzatore corrompe le cifre»): requisiti, importi e
+    scadenze di ogni bando viaggiano solo in `ChatAnswer.bandi_live`, il
+    `BandiLiveEsito` cosi' come l'ha prodotto `bandi_live.bandi_arricchiti`.
+
+    I bandi coperti vengono ORDINATI per aderenza morbida al profilo
+    (`_ordina_bandi_per_profilo`) — indicazione, non verdetto: nessuno viene
+    escluso, e il testo lo dice esplicitamente.
+
+    Degradazione onesta se la scansione solleva (portale irraggiungibile,
+    timeout, risposta non valida): mai un'eccezione al cittadino.
+    """
+    # Precedenza del comune per la scansione bandi:
+    #  1. il comune del PROFILO (sessione/SPID) vince sempre: un cittadino con un
+    #     comune gia' stabilito non deve vedersi scansionare un comune diverso
+    #     solo perche' l'ha nominato di sfuggita (memoria «ricerca live cieca al
+    #     comune di profilo», R-9).
+    #  2. l'istat di una scelta scheda esplicita.
+    #  3. SOLO se non c'e' ne' profilo ne' scelta: il comune NOMINATO in QUESTO
+    #     messaggio («vivo a Benevento, ci sono bandi?»). Sul primo turno il
+    #     profilo client non e' ancora popolato e non arriva `comune_istat`:
+    #     senza questo si cadeva sul default Albano leggendo il comune sbagliato.
+    #     `_comune_nominato` usa `_comuni_candidati` (stoplist
+    #     «bolletta»/«minori»/connettivi), niente falsi toponimi.
+    #  4. default demo, solo come ultima risorsa.
+    nominato = _comune_nominato(message)
+    target_istat = (
+        (profile.comune_istat if profile is not None else None)
+        or comune_istat
+        or (nominato.codice_istat if nominato is not None else None)
+        or DEFAULT_COMUNE_ISTAT
+    )
+
+    try:
+        esito = await asyncio.to_thread(bandi_live.bandi_arricchiti, target_istat)
+    except Exception:
+        logger.warning("bandi_arricchiti fallita per %s", target_istat, exc_info=True)
+        return ChatAnswer(
+            reply=(
+                "Non sono riuscito a leggere ora la sezione Amministrazione "
+                "Trasparente del comune. Riprova tra qualche minuto, oppure "
+                "rivolgiti direttamente all'URP."
+            ),
+            topic=Topic.BANDI,
+            kind=QuestionKind.INFORMAZIONE,
+            data_gap="not_verified",
+            needs_clarification=False,
+            matches=[],
+            spid_required=False,
+            spid_reason=None,
+            access_mode=None,
+            citizen_effort=1,
+            info=None,
+            bandi_live=None,
+        )
+
+    if esito.esito == "comune_ignoto":
+        reply = (
+            "Non riconosco questo comune per la ricerca dei bandi. Verifica "
+            "il comune scelto e riprova."
+        )
+        data_gap = "comune_sconosciuto"
+    elif esito.esito == "non_coperto":
+        # Testo advocacy: il frontend lo aggancia a `ChiediApertura`, non e'
+        # un rifiuto ma un invito a chiedere l'apertura dei dati al comune.
+        reply = (
+            f"Il portale di {esito.comune_nome} non pubblica ancora i bandi in "
+            "un formato che riesco a leggere in automatico. Non e' un dato "
+            "negato, e' un'apertura che manca: puoi chiedere al comune di "
+            "pubblicarli in un formato leggibile."
+        )
+        data_gap = "comune_non_indirizzabile"
+    elif esito.esito == "coperto_senza_bandi":
+        reply = (
+            f"Ho letto ora la sezione Amministrazione Trasparente di "
+            f"{esito.comune_nome}. Verificato il {esito.verificato_il}. "
+            "Nessun bando pubblicato al momento."
+        )
+        data_gap = "none_found"
+    else:  # coperto_con_bandi
+        # Filtro conversazionale (KAPI 9, ciclo bandi-conversazionale): se il
+        # cittadino ha nominato un tema («bandi per la mobilità?»), lo
+        # eco-iamo nella risposta e marchiamo quali bandi lo riguardano — MAI
+        # li togliamo dall'esito, solo li mettiamo in cima (D-07: nessun tema
+        # ⇒ risposta identica a prima di questo ciclo, byte per byte).
+        tema = _estrai_tema(message)
+        if tema is None:
+            reply = (
+                f"Ho letto ora la sezione Amministrazione Trasparente di "
+                f"{esito.comune_nome}. Verificato il {esito.verificato_il}."
+            )
+        else:
+            bandi_con_match = [
+                bando.model_copy(
+                    update={"corrisponde": _bando_tocca_il_tema(bando, tema)}
+                )
+                for bando in esito.bandi
+            ]
+            matched = [b for b in bandi_con_match if b.corrisponde]
+            non_matched = [b for b in bandi_con_match if not b.corrisponde]
+            esito = esito.model_copy(
+                update={"bandi": matched + non_matched, "tema": tema}
+            )
+            if matched:
+                verbo = "corrisponde" if len(matched) == 1 else "corrispondono"
+                reply = (
+                    f"Ho cercato «{tema}» tra i bandi di {esito.comune_nome}: "
+                    f"{len(matched)} {verbo}."
+                )
+            else:
+                reply = (
+                    f"Nessun bando corrisponde a «{tema}»; te li mostro "
+                    f"tutti ({len(esito.bandi)})."
+                )
+        data_gap = None
+        # Ordinamento morbido per aderenza al profilo. Non esclude nulla: se
+        # qualche bando risuona coi segnali del cittadino, lo porta in cima e
+        # aggiunge una riga onesta — è un'indicazione, non un verdetto, e i
+        # requisiti restano da controllare (schema `Confidence`: un falso «ti
+        # spetta» costa al cittadino una domanda persa e la fiducia).
+        bandi_ordinati, c_e_ranking = _ordina_bandi_per_profilo(esito.bandi, profile)
+        if c_e_ranking:
+            esito = esito.model_copy(update={"bandi": bandi_ordinati})
+            reply += (
+                " Li ho messi in ordine di aderenza al tuo profilo: è "
+                "un'indicazione, non un verdetto di idoneità — controlla i "
+                "requisiti di ciascuno."
+            )
+
+    return ChatAnswer(
+        reply=reply,
+        topic=Topic.BANDI,
+        kind=QuestionKind.INFORMAZIONE,
+        data_gap=data_gap,
+        needs_clarification=False,
+        matches=[],
+        spid_required=False,
+        spid_reason=None,
+        access_mode=None,
+        citizen_effort=0,
+        info=None,
+        bandi_live=esito,
+    )
 
 
 async def _componi_risposta(
@@ -2445,6 +3217,8 @@ async def _componi_risposta(
     comune_istat: str | None = None,
     comune_coperto: bool = True,
     today: date | None = None,
+    filtri_esclusi: frozenset | None = None,
+    comune_bandi_istat: str | None = None,
 ) -> ChatAnswer:
     """Answer one citizen turn. Never raises for model unavailability.
 
@@ -2513,6 +3287,33 @@ async def _componi_risposta(
     if intent.topic in INFORMATIONAL_BY_NATURE_TOPICS:
         intent = intent.model_copy(update={"kind": QuestionKind.INFORMAZIONE})
 
+    # KAPI 7 (bandi-live-agid): i bandi si leggono dal vivo, non dallo
+    # snapshot ingerito che alimenta `_search_opportunities` — questo ramo
+    # bypassa sia il rail INFORMAZIONE generico sia quello AGEVOLAZIONE, un
+    # bando e' un elenco, non un verdetto di `match/engine.py`.
+    # `_tema_sostenuto` e' lo stesso riscontro lessicale che gli altri topic
+    # ottengono dalla ricerca per parole chiave: senza le parole del
+    # cittadino a confermarlo, un BANDI del modello non ancorato non basta a
+    # far partire una scansione di rete.
+    if intent.topic is Topic.BANDI and _tema_sostenuto(topic=Topic.BANDI, testo=message):
+        # Come gli altri rail (righe ~2660/2749): se non c'è un profilo di
+        # sessione, si ricava dai segnali di QUESTO turno. Senza, il ramo bandi
+        # scattava prima e restava cieco al «vedovo, 2 figli minori» appena
+        # scritto — niente da cui ordinare i bandi per aderenza (bug Andrea #2).
+        profilo_bandi = profile or _profile_from_slots(intent=intent, messaggio=message, filtri_esclusi=filtri_esclusi)
+        # `comune_bandi_istat`: il comune per la SCANSIONE bandi, quando il ramo
+        # fuori-copertura di `build_chat_answer` passa `comune_istat=None` (per
+        # non contaminare records/naming agevolazione) ma conosce comunque il
+        # comune del cittadino via `nominato`. Senza, la scansione ripiegava sul
+        # DEFAULT Albano — un residente a Bisceglie chiedeva i bandi e vedeva
+        # quelli di Albano. Vale solo per i bandi: agevolazione/info restano su
+        # `comune_istat` come prima. Fallback a `comune_istat` sul ramo coperto.
+        return await _risposta_bandi(
+            message=message,
+            profile=profilo_bandi,
+            comune_istat=comune_bandi_istat or comune_istat,
+        )
+
     if intent.topic is Topic.SCONOSCIUTO and richiesta_categoria is None:
         # D-55: un topic sconosciuto/generico ("che bonus posso avere?") con
         # un profilo già ricco non merita lo stesso "non ho capito" di una
@@ -2521,7 +3322,7 @@ async def _componi_risposta(
         # `richiesta_categoria is None` esclude il turno che sta già
         # rispondendo a questa stessa domanda (vedi sopra): quello prosegue
         # nel flusso normale invece di tornare qui in loop.
-        profilo_per_soglia = profile or _profile_from_slots(intent=intent, messaggio=message)
+        profilo_per_soglia = profile or _profile_from_slots(intent=intent, messaggio=message, filtri_esclusi=filtri_esclusi)
         if intent.kind is QuestionKind.AGEVOLAZIONE and _slot_anagrafici_dichiarati(
             profilo_per_soglia
         ) >= 2:
@@ -2587,7 +3388,7 @@ async def _componi_risposta(
             spid_reason=None,
         )
 
-    if profile is not None and _e_cambio_persona(message, intent.slots):
+    if profile is not None and _e_cambio_persona(message):
         # D-56/R-LOGOUT: il cookie di sessione vince sempre — ma non in
         # silenzio quando il turno sembra parlare di un'altra persona.
         # Nessun reset automatico: si spiega e si chiede conferma, il
@@ -2610,7 +3411,7 @@ async def _componi_risposta(
             spid_reason=None,
         )
 
-    active_profile = profile or _profile_from_slots(intent=intent, messaggio=message)
+    active_profile = profile or _profile_from_slots(intent=intent, messaggio=message, filtri_esclusi=filtri_esclusi)
 
     if active_profile.disabilita_nucleo and active_profile.figli_minori is None:
         # D-53: il turno ha dichiarato un figlio con disabilita', ma non se
@@ -2812,6 +3613,46 @@ def _scan_stato_per_comune(codice_istat: str | None) -> ScanStato | None:
     return ScanStato(stato="fresco", ultimo_scan=record.scansionato_il)
 
 
+async def _forse_aggiungi_bandi_live(
+    risposta: ChatAnswer, *, codice_istat: str | None, message: str
+) -> ChatAnswer:
+    """KAPI 11 (gap-closure): additivo, non un reroute (D-01). Se il messaggio
+    agevolazione usa un sinonimo civico di bando (`_BANDI_SINONIMI_RE`),
+    allega ANCHE le card bandi live del comune alla risposta agevolazione
+    gia' composta — senza toccarne il testo. Il ramo Topic.BANDI si popola
+    gia' da se' (`_risposta_bandi`): qui e' un no-op se `bandi_live` e' gia'
+    valorizzato, per non fare doppia scansione.
+
+    Muto (nessun `bandi_live` allegato) se: nessun sinonimo nel messaggio,
+    comune ignoto, o il comune non e' indirizzabile (`non_coperto` /
+    `comune_ignoto` dall'esito) — una card senza bandi verificabili sarebbe
+    solo rumore. `coperto_senza_bandi` invece SI' che si allega: e' l'esito
+    onesto di una ricerca appena fatta, non un buco (memoria «Fonte Nuova non
+    ha nulla da recuperare»).
+
+    Degradazione onesta: qualunque eccezione nella scansione lascia la
+    risposta agevolazione INTATTA, mai una 500 al cittadino.
+    """
+    if risposta.bandi_live is not None:
+        return risposta
+    if not _BANDI_SINONIMI_RE.search(message):
+        return risposta
+    if codice_istat is None or comune_per_codice(codice_istat) is None:
+        return risposta
+    try:
+        esito = await asyncio.to_thread(bandi_live.bandi_arricchiti, codice_istat)
+    except Exception:
+        logger.warning(
+            "bandi_arricchiti (scansione additiva) fallita per %s",
+            codice_istat,
+            exc_info=True,
+        )
+        return risposta
+    if esito.esito in ("coperto_con_bandi", "coperto_senza_bandi"):
+        return replace(risposta, bandi_live=esito)
+    return risposta
+
+
 async def build_chat_answer(
     *,
     message: str,
@@ -2821,6 +3662,7 @@ async def build_chat_answer(
     comune_istat: str | None = None,
     comune_coperto: bool = True,
     today: date | None = None,
+    filtri_esclusi: frozenset | None = None,
 ) -> ChatAnswer:
     """Compone la risposta, e se il comune non e' coperto lo dice **in testa**.
 
@@ -2885,6 +3727,11 @@ async def build_chat_answer(
             records=_solo_sovracomunali(records, regione=nominato.regione),
             comune_istat=None,
             comune_coperto=False,
+            filtri_esclusi=filtri_esclusi,
+            # I records/naming agevolazione restano fuori-copertura (comune_istat
+            # None), ma la scansione bandi deve puntare al comune del cittadino
+            # (`nominato`), non al DEFAULT Albano. Bug Bisceglie→Albano.
+            comune_bandi_istat=nominato.codice_istat,
         )
         # `ChatAnswer` e' una dataclass, non un modello pydantic: si copia con
         # `replace`, non con `model_copy`.
@@ -2914,19 +3761,38 @@ async def build_chat_answer(
         # La coda si toglie anche nel vicolo cieco: la premessa «Attenzione» la
         # riscrive per intero. Resta solo se e' una domanda-chiarimento («?»).
         coda = "" if ((trovate_live or vicolo_cieco) and "?" not in risposta.reply) else risposta.reply
-        premessa = _premessa_fuori_copertura(
-            nominato, risposta, connettore, ha_scheda_laterale=numeri is not None
-        )
-        reply = premessa + ("\n\n" + coda if coda else "")
-        return replace(
+        # BANDI con esito live gia' composto (`_risposta_bandi`) ha gia' un
+        # reply onesto (coperto/non coperto, advocacy inclusa): la premessa
+        # "fuori copertura" generica lo sovrascriverebbe e butterebbe via il
+        # testo corretto pur lasciando `bandi_live` intatto sull'oggetto.
+        if risposta.topic is Topic.BANDI and risposta.bandi_live is not None:
+            reply = risposta.reply
+        else:
+            premessa = _premessa_fuori_copertura(
+                nominato, risposta, connettore, ha_scheda_laterale=numeri is not None
+            )
+            reply = premessa + ("\n\n" + coda if coda else "")
+        risposta = replace(
             risposta,
             reply=reply,
             connettore=connettore,
             numeri_utili=numeri,
             scan=_scan_stato_per_comune(nominato.codice_istat),
         )
+        # KAPI 11 (gap-closure): scansione bandi additiva su sinonimo civico,
+        # additiva alla risposta agevolazione fuori-copertura (D-01, no reroute).
+        return await _forse_aggiungi_bandi_live(
+            risposta, codice_istat=nominato.codice_istat, message=message
+        )
     risposta = await _componi_risposta(
-        message=message, profile=profile, storia=storia, today=today, records=records, comune_istat=comune_istat, comune_coperto=comune_coperto
+        message=message,
+        profile=profile,
+        storia=storia,
+        today=today,
+        records=records,
+        comune_istat=comune_istat,
+        comune_coperto=comune_coperto,
+        filtri_esclusi=filtri_esclusi,
     )
     # Un comune coperto ma con seed magro puo' rispondere «non ho trovato nulla»
     # pur essendo indirizzabile dal connettore AgID (servizi + bandi live). Prima
@@ -2949,14 +3815,18 @@ async def build_chat_answer(
                 comune, risposta, connettore, ha_scheda_laterale=numeri is not None
             )
             reply = premessa + ("\n\n" + coda if coda else "")
-            return replace(
+            risposta = replace(
                 risposta,
                 reply=reply,
                 connettore=connettore,
                 numeri_utili=numeri,
                 scan=_scan_stato_per_comune(comune.codice_istat),
             )
-    return replace(
+            # KAPI 11 (gap-closure): stesso attacco additivo del ramo (B).
+            return await _forse_aggiungi_bandi_live(
+                risposta, codice_istat=comune.codice_istat, message=message
+            )
+    risposta = replace(
         risposta,
         # Comune coperto: mettiamo a sinistra il suo biglietto da visita —
         # recapiti dallo store, non uno scrape live (D-S4). Muto se assenti.
@@ -2964,6 +3834,12 @@ async def build_chat_answer(
             _numeri_utili_da_store(comune.codice_istat) if comune is not None else None
         ),
         scan=_scan_stato_per_comune(comune.codice_istat if comune is not None else None),
+    )
+    # KAPI 11 (gap-closure): comune coperto "normale" — stesso attacco additivo.
+    return await _forse_aggiungi_bandi_live(
+        risposta,
+        codice_istat=comune.codice_istat if comune is not None else None,
+        message=message,
     )
 
 

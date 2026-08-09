@@ -36,14 +36,20 @@ read by `match/engine.py`, and an unmeasured value is `None`, never a guess.
 
 from __future__ import annotations
 
-import io
 import logging
 import re
 import time
 from datetime import date, datetime
 from typing import Any
 
-from treasureiq.extract.llm import RequirementsExtractor, Segment
+from treasureiq.extract.corpus import (
+    MAX_CORPUS_CHARS,
+    MAX_PDF_BYTES,
+    MAX_PDFS_PER_PAGE,
+    build_corpus,
+    collect_pdf_segments,
+)
+from treasureiq.extract.llm import RequirementsExtractor
 from treasureiq.ingest.base import Connector
 from treasureiq.ingest.wp_comuni import guess_kind, strip_html
 from treasureiq.schema import (
@@ -55,6 +61,16 @@ from treasureiq.schema import (
     Source,
     TargetGroup,
 )
+
+#: Re-exported so existing importers (`html_pages.py`, tests) keep working
+#: unchanged — the budget knobs now live in `extract/corpus.py` (B1), this
+#: module just re-exposes them under their original names.
+__all__ = [
+    "MAX_CORPUS_CHARS",
+    "MAX_PDF_BYTES",
+    "MAX_PDFS_PER_PAGE",
+    "WPPagesConnector",
+]
 
 logger = logging.getLogger(__name__)
 
@@ -80,26 +96,6 @@ _ELIGIBILITY_SIGNAL_RE = re.compile(
 )
 
 _PDF_LINK_RE = re.compile(r'href="([^"]+?\.pdf)"', re.IGNORECASE)
-
-#: D-15 budget knobs — hard caps that keep a full run in minutes, not hours.
-MAX_PDFS_PER_PAGE = 5
-MAX_PDF_BYTES = 2 * 1024 * 1024  # 2 MB
-MAX_CORPUS_CHARS = 12_000
-
-#: Filenames far more likely to carry eligibility criteria than
-#: administrative boilerplate (D-15) — a preference order, not an exclusion:
-#: a deprioritised PDF is still opened if the per-page slot allows it.
-_PREFERRED_FILENAME_RE = re.compile(r"bando|avviso|regolament", re.IGNORECASE)
-_DEPRIORITISED_FILENAME_RE = re.compile(r"modulo|domanda|allegat", re.IGNORECASE)
-
-
-def _filename_rank(url: str) -> int:
-    """Lower sorts first: preferred filenames before neutral before deprioritised."""
-    if _PREFERRED_FILENAME_RE.search(url):
-        return 0
-    if _DEPRIORITISED_FILENAME_RE.search(url):
-        return 2
-    return 1
 
 
 def _count_recovered_fields(req: Requirements) -> int:
@@ -287,52 +283,9 @@ class WPPagesConnector(Connector):
         # segments (or which tail of a segment) the model actually saw.
         # Body first, so a body-only match is attributed to the page itself
         # before any PDF segment is even considered.
-        boundary_segments: list[Segment] = []
-        corpus_parts: list[str] = [body_text]
-        offset = len(body_text)
-        boundary_segments.append(
-            Segment(kind="pagina", url=page_url, page_number=None, start=0, text=body_text)
+        corpus, boundary_segments, visible_segments = build_corpus(
+            body_text=body_text, page_url=page_url, pdf_segments=pdf_segments
         )
-        for seg in pdf_segments:
-            header = f"\n\n# Allegato: {seg['url']}\n"
-            corpus_parts.append(header)
-            offset += len(header)
-            for page_index, page_text in enumerate(seg["pages"], start=1):
-                if page_index > 1:
-                    corpus_parts.append("\n")
-                    offset += 1
-                boundary_segments.append(
-                    Segment(
-                        kind="allegato",
-                        url=seg["url"],
-                        page_number=page_index,
-                        start=offset,
-                        text=page_text,
-                    )
-                )
-                corpus_parts.append(page_text)
-                offset += len(page_text)
-
-        corpus = "".join(corpus_parts)
-        visible_len = len(corpus)
-        if len(corpus) > MAX_CORPUS_CHARS:
-            corpus = corpus[:MAX_CORPUS_CHARS]
-            visible_len = MAX_CORPUS_CHARS
-
-        # Segments (or the tail of a segment) beyond `visible_len` were never
-        # sent to the model — a quote cannot legitimately be attributed to
-        # them, cap or not (D-15's MAX_CORPUS_CHARS).
-        visible_segments = [
-            Segment(
-                kind=seg.kind,
-                url=seg.url,
-                page_number=seg.page_number,
-                start=seg.start,
-                text=seg.text[: max(0, visible_len - seg.start)],
-            )
-            for seg in boundary_segments
-            if seg.start < visible_len
-        ]
 
         requirements = Requirements()
         notes: list[str] = list(pdf_notes)
@@ -432,114 +385,8 @@ class WPPagesConnector(Connector):
     ) -> tuple[list[dict[str, Any]], list[str], list[PdfSkip], int]:
         """Download and extract text from up to `MAX_PDFS_PER_PAGE` attachments.
 
-        `pypdf` is imported lazily (only pages that actually link a PDF pay
-        this cost, matching `extract/llm.py`'s lazy-import convention for
-        `anthropic`). Every skip — cap reached, too large, download failure,
-        unreadable — is logged and returned as a human-readable note, per
-        D-15: "log every skip explicitly."
-
-        Also returns the D-16 skip audit (`PdfSkip` per skip) and how many of
-        those skips were a genuine readability failure (parse failure or no
-        extractable text) rather than a budget choice (cap reached, too
-        large) or a transient network failure (download failed) — this
-        distinction is what separates `L3_illeggibile` from a plain
-        `L1_manuale` in `_normalise`.
+        Thin wrapper over `extract.corpus.collect_pdf_segments` (B1): this
+        connector owns the `httpx.Client` and `base_url`, the helper owns the
+        budget/audit logic shared with the future `bandi_live` engine.
         """
-        notes: list[str] = []
-        skipped: list[PdfSkip] = []
-        illegible_count = 0
-        if not pdf_urls:
-            return [], notes, skipped, illegible_count
-
-        def _skip(absolute_url: str, note: str, reason: str, *, illegible: bool) -> None:
-            nonlocal illegible_count
-            logger.info("skipping PDF %s: %s", absolute_url, reason)
-            notes.append(note)
-            skipped.append(PdfSkip(url=absolute_url, reason=reason))
-            if illegible:
-                illegible_count += 1
-
-        ranked = sorted(dict.fromkeys(pdf_urls), key=_filename_rank)
-
-        segments: list[dict[str, Any]] = []
-        opened = 0
-        for url in ranked:
-            absolute_url = url if url.startswith("http") else f"{self.base_url}{url}"
-
-            if opened >= MAX_PDFS_PER_PAGE:
-                reason = f"limite di {MAX_PDFS_PER_PAGE} allegati per pagina raggiunto"
-                _skip(
-                    absolute_url,
-                    f"Allegato PDF ignorato ({reason}): {absolute_url}",
-                    reason,
-                    illegible=False,
-                )
-                continue
-
-            content_length = 0
-            try:
-                head = self._client.head(absolute_url)
-                content_length = int(head.headers.get("content-length", 0) or 0)
-            except Exception:
-                content_length = 0  # HEAD unsupported/failed — fall through to GET
-
-            if content_length and content_length > MAX_PDF_BYTES:
-                reason = f"{content_length} byte, oltre il limite di {MAX_PDF_BYTES} byte"
-                _skip(
-                    absolute_url,
-                    f"Allegato PDF ignorato (troppo grande, {reason}): {absolute_url}",
-                    reason,
-                    illegible=False,
-                )
-                continue
-
-            try:
-                response = self._client.get(absolute_url)
-                response.raise_for_status()
-            except Exception as exc:
-                _skip(
-                    absolute_url,
-                    f"Allegato PDF non scaricabile: {absolute_url} ({exc})",
-                    f"download fallito: {exc}",
-                    illegible=False,
-                )
-                continue
-
-            if len(response.content) > MAX_PDF_BYTES:
-                reason = f"{len(response.content)} byte, oltre il limite di {MAX_PDF_BYTES} byte"
-                _skip(
-                    absolute_url,
-                    f"Allegato PDF ignorato (troppo grande, {reason}): {absolute_url}",
-                    reason,
-                    illegible=False,
-                )
-                continue
-
-            try:
-                import pypdf  # lazy: only pages with a linked PDF pay this cost
-
-                reader = pypdf.PdfReader(io.BytesIO(response.content))
-                pages_text = [(p.extract_text() or "") for p in reader.pages]
-            except Exception as exc:
-                _skip(
-                    absolute_url,
-                    f"Allegato PDF illeggibile (parsing fallito): {absolute_url} ({exc})",
-                    f"parsing fallito: {exc}",
-                    illegible=True,
-                )
-                continue
-
-            if not any(t.strip() for t in pages_text):
-                reason = "nessun testo estraibile (probabile scansione/immagine)"
-                _skip(
-                    absolute_url,
-                    f"Allegato PDF ignorato ({reason}): {absolute_url}",
-                    reason,
-                    illegible=True,
-                )
-                continue
-
-            opened += 1
-            segments.append({"kind": "allegato", "url": absolute_url, "pages": pages_text})
-
-        return segments, notes, skipped, illegible_count
+        return collect_pdf_segments(self._client, self.base_url, pdf_urls)

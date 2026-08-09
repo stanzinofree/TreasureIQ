@@ -16,13 +16,14 @@ the shape here.
 
 from __future__ import annotations
 
+import asyncio
 import json
 import logging
 import os
 import time
 from collections import defaultdict
 import threading
-from datetime import date, datetime
+from datetime import date, datetime, timezone
 from decimal import Decimal
 from functools import lru_cache
 from pathlib import Path
@@ -44,6 +45,7 @@ from treasureiq.chat.respond import (
     compute_recovery_stats,
 )
 from treasureiq.chat.intent import Topic
+from treasureiq.chat.filtri import Filtro, FiltroChiave, Span, riconosci_filtri
 from treasureiq.costo import SOGLIA_RISCOPERTA, costo_comune
 from treasureiq.storico import (
     aderenza_fornitori,
@@ -67,13 +69,23 @@ from treasureiq.match.engine import (
     match,
     summarise,
 )
-from treasureiq.sonda_live import OrariLive, cerca_comuni, comune_per_codice, recupera_contatti
+from treasureiq.sonda_live import (
+    LIVE_DIR,
+    OrariLive,
+    cerca_comuni,
+    comune_per_codice,
+    recupera_contatti,
+)
+from treasureiq.bandi_live import BandiLiveEsito, _filtra_pdf_stesso_host, bandi_arricchiti
+from treasureiq.connettore import EsitoConnettore
+from treasureiq.extract.corpus import build_corpus, collect_pdf_segments
 from treasureiq.mappa_connettore import (
     Bando,
     CategoriaServizio,
     MappaConnettore,
     SchedaServizio,
     ServizioLink,
+    _base_con_schema,
     bandi_criteri,
     mappa_connettore,
     scheda_servizio,
@@ -694,6 +706,18 @@ class ChatTurnIn(BaseModel):
     content: str
 
 
+class FiltroOverride(BaseModel):
+    """Una richiesta del cittadino di RIMUOVERE un filtro dal ricalcolo
+    (ciclo11, A8). `azione` e' chiusa a `"rimuovi"` di proposito: aggiungere
+    un filtro dal client sarebbe indovinare per conto del cittadino (A12) —
+    solo togliere un'evidenza sbagliata e' un'operazione onesta,
+    riconoscibile. `chiave` e' l'enum chiuso `FiltroChiave`: una chiave fuori
+    catalogo (es. "admin_bypass") e' un 422 automatico di Pydantic."""
+
+    chiave: FiltroChiave
+    azione: Literal["rimuovi"] = "rimuovi"
+
+
 class ChatIn(BaseModel):
     message: str
     #: The exchange so far. The client had been sending this all along and the
@@ -707,6 +731,13 @@ class ChatIn(BaseModel):
     #: non può essere inventato da un modello. È la via che chiude in un colpo
     #: sia l'ambiguità fra i due Castro sia l'allucinazione del comune.
     comune_istat: str | None = Field(default=None, max_length=6)
+    #: Ciclo11/A8: il cittadino puo' correggere un filtro che
+    #: `riconosci_filtri` ha letto ma non gli appartiene ("non sono io il
+    #: disabile, e' mia madre") senza dover riscrivere la frase per aggirare
+    #: il riconoscitore. `chiave` e' l'enum chiuso `FiltroChiave`: una chiave
+    #: fuori catalogo (es. "admin_bypass") e' un 422 automatico di Pydantic,
+    #: nessuna validazione a mano necessaria qui.
+    filtri_override: list[FiltroOverride] | None = None
 
 
 class ComuneScelta(BaseModel):
@@ -985,6 +1016,31 @@ class ScanStatoOut(BaseModel):
     ultimo_scan: str | None = None
 
 
+class FiltroOut(BaseModel):
+    """Mirror JSON-facing di `treasureiq.chat.filtri.Filtro` (ciclo11, A6/L-3).
+
+    Duplicato invece di riesportare `Filtro` direttamente: tiene lo schema
+    HTTP disaccoppiato dal modulo interno, stesso principio gia' seguito da
+    `ConnettoreSondaOut`/`EsitoConnettore` per il connettore.
+    """
+
+    chiave: FiltroChiave
+    valore: str | int | float | bool
+    span: Span | None = None
+    sorgente: str
+    negato: bool = False
+
+    @classmethod
+    def da_filtro(cls, filtro: Filtro) -> "FiltroOut":
+        return cls(
+            chiave=filtro.chiave,
+            valore=filtro.valore,
+            span=filtro.span,
+            sorgente=filtro.sorgente,
+            negato=filtro.negato,
+        )
+
+
 class ChatOut(BaseModel):
     reply: str
     #: Cosa abbiamo capito della domanda. Il pannello laterale lo mostra come
@@ -1009,9 +1065,32 @@ class ChatOut(BaseModel):
     #: Stato dello scan del comune riconosciuto (B6, D-S6). `None` quando non
     #: c'e' un comune da guardare (nessun comune nominato/scelto in questo giro).
     scan: ScanStatoOut | None = None
+    #: Esito live dei bandi (topic BANDI): criteri quote-gated, data di verifica,
+    #: esito onesto a due gradini REST. `None` fuori dal topic bandi. Serializzato
+    #: tal quale dal modello `bandi_live` (le cifre restano fuori dal testo, D-07).
+    bandi_live: BandiLiveEsito | None = None
+    #: Esito grezzo del connettore (B4, ramo M4_CONNETTORE): uffici/recapiti/AT
+    #: strutturati e verbatim, letti da `treasureiq.connettore`. `None` quando
+    #: il connettore non ha risposto o il ramo non e' scattato (A7). La card
+    #: strutturata del web (B5) legge da qui, mai dal testo `reply` (D-07).
+    esito_connettore: EsitoConnettore | None = None
+    #: Ciclo11/A6-L-3: i filtri civici RICONOSCIUTI in questo turno
+    #: (`treasureiq.chat.filtri.riconosci_filtri`), popolati per davvero
+    #: dall'endpoint — non solo dichiarati (L-3 e' un bug ricorrente: un
+    #: campo che esiste nello schema ma nessuno lo riempie mai). Ogni voce
+    #: porta lo span verbatim che la giustifica (A6), per un'UI che mostra al
+    #: cittadino cosa abbiamo letto e gli permette di correggerlo (A8).
+    filtri: list[FiltroOut] = []
 
 
-def _profilo_capito(*, answer, profile, message: str, comune_istat: str | None = None) -> ProfiloCapitoOut:
+def _profilo_capito(
+    *,
+    answer,
+    profile,
+    message: str,
+    comune_istat: str | None = None,
+    filtri_esclusi: frozenset | None = None,
+) -> ProfiloCapitoOut:
     """Cosa abbiamo capito, messo in chiaro perche' il cittadino possa smentirlo.
 
     Le cifre le rilegge l'estrazione deterministica invece di fidarsi di cosa
@@ -1019,16 +1098,20 @@ def _profilo_capito(*, answer, profile, message: str, comune_istat: str | None =
     verdetti, e qui serve anche a non mostrare a schermo un'eta' che nessuno
     ha scritto.
     """
-    from treasureiq.chat.intent import (
-        _disabilita_dichiarata_nel_testo,
-        _figlio_disabile_dichiarato_nel_testo,
-        _sesso_dichiarato_nel_testo,
-        slot_dal_testo,
-    )
+    from treasureiq.chat.intent import _sesso_dichiarato_nel_testo
     from treasureiq.chat.nomi_genere import sesso_da_nome
     from treasureiq.chat.respond import _comune_nominato
 
-    letti = slot_dal_testo(message)
+    # Ciclo11/D-05: unica fonte di slot per il pannello "cosa abbiamo capito"
+    # e' `riconosci_filtri` — le 4 guardie sparse (`slot_dal_testo`,
+    # `_disabilita_dichiarata_nel_testo`, `_figlio_disabile_dichiarato_nel_testo`,
+    # e ora anche il sesso resta l'unica eccezione, fuori dal catalogo) sono
+    # ridotte a questa e a `_sesso_dichiarato_nel_testo` (D-52, il sesso non
+    # e' un `Filtro`).
+    esclusi = filtri_esclusi or frozenset()
+    filtri = {
+        f.chiave: f.valore for f in riconosci_filtri(message) if f.chiave not in esclusi
+    }
     nominato = _comune_nominato(message)
     # Il comune puo' arrivare da tre posti, in ordine di forza: nominato nel
     # testo di QUESTO turno; scelto esplicitamente (`comune_istat` della
@@ -1055,7 +1138,7 @@ def _profilo_capito(*, answer, profile, message: str, comune_istat: str | None =
     sesso_dedotto = sesso_profilo is None and sesso_dichiarato is None and sesso_dal_nome is not None
 
     disabilita_nucleo = profile.disabilita_nucleo if profile else None
-    if disabilita_nucleo is None and _figlio_disabile_dichiarato_nel_testo(message):
+    if disabilita_nucleo is None and filtri.get(FiltroChiave.DISABILITA_NUCLEO):
         disabilita_nucleo = True
 
     # Stessa simmetria del nucleo, un gradino piu' su: la disabilita' della
@@ -1064,9 +1147,10 @@ def _profilo_capito(*, answer, profile, message: str, comune_istat: str | None =
     # la dichiarava a voce non la vedeva comparire nel profilo a lato, pur
     # avendola `extract_intent` gia' colta per il motore.
     disabilita = profile.disabilita if profile else None
-    if disabilita is None and _disabilita_dichiarata_nel_testo(message):
+    if disabilita is None and filtri.get(FiltroChiave.DISABILITA):
         disabilita = True
 
+    isee_valore = filtri.get(FiltroChiave.ISEE)
     return ProfiloCapitoOut(
         comune_nome=(
             f"{comune.nome} ({comune.provincia})"
@@ -1075,18 +1159,22 @@ def _profilo_capito(*, answer, profile, message: str, comune_istat: str | None =
         ),
         comune_istat=comune.codice_istat if comune is not None else None,
         comune_coperto=coperto,
-        eta=letti.get("eta") or (profile.eta if profile else None),
+        eta=filtri.get(FiltroChiave.ETA) or (profile.eta if profile else None),
         isee=(
-            str(letti["isee"])
-            if "isee" in letti
+            str(isee_valore)
+            if isee_valore is not None
             else (str(profile.isee) if profile and profile.isee is not None else None)
         ),
         nucleo_familiare=(
             profile.nucleo_familiare
             if profile
-            else letti.get("nucleo_familiare")
+            else filtri.get(FiltroChiave.NUCLEO_FAMILIARE)
         ),
-        figli_minori=profile.figli_minori if profile else None,
+        figli_minori=(
+            profile.figli_minori
+            if profile and profile.figli_minori is not None
+            else filtri.get(FiltroChiave.FIGLI_MINORI)
+        ),
         disabilita=disabilita,
         sesso=sesso,
         sesso_dedotto=sesso_dedotto,
@@ -1303,6 +1391,55 @@ def _increment_segnalazione(codice_istat: str) -> int:
 
 class SegnalazioneIn(BaseModel):
     codice_istat: str
+
+
+# --------------------------------------------------------------------------
+# Feedback (D-01, D-02, D-06) — unlike segnalazioni, this store keeps the
+# citizen's free-text: a deliberate exception to the "no citizen text" rule,
+# which is why it lives in LIVE_DIR (gitignored, never versioned) and not in
+# DATA_DIR (tracked). No SMTP send, no GET, no echo of the text.
+# --------------------------------------------------------------------------
+
+FEEDBACK_PATH = LIVE_DIR / "feedback.jsonl"
+_feedback_lock = threading.Lock()
+_feedback_memory: list[dict] = []
+_feedback_memory_only = False
+
+
+def _append_feedback(testo: str, voto: int | None) -> None:
+    """Append one feedback record as a JSON line.
+
+    Append-only, unlike `_increment_segnalazione`'s read-modify-write: each
+    record is independent, so a simple `open(..., "a")` under the lock is
+    enough — no need for the tmp-file + `os.replace` dance segnalazioni uses
+    to keep a single shared counter consistent.
+
+    Falls back to an in-memory list, with a logged warning, if `LIVE_DIR`
+    turns out not to be writable — same fallback shape as segnalazioni.
+    """
+    global _feedback_memory_only
+    record = {
+        "ts": datetime.now(timezone.utc).isoformat(),
+        "testo": testo,
+        "voto": voto,
+    }
+    with _feedback_lock:
+        if _feedback_memory_only:
+            _feedback_memory.append(record)
+            return
+        try:
+            FEEDBACK_PATH.parent.mkdir(parents=True, exist_ok=True)
+            with FEEDBACK_PATH.open("a", encoding="utf-8") as handle:
+                handle.write(json.dumps(record, ensure_ascii=False) + "\n")
+        except OSError:
+            logger.warning("live dir not writable, falling back to in-memory feedback store")
+            _feedback_memory_only = True
+            _feedback_memory.append(record)
+
+
+class FeedbackIn(BaseModel):
+    testo: str = Field(min_length=1, max_length=2000)
+    voto: int | None = Field(default=None, ge=1, le=5)
 
 
 # --------------------------------------------------------------------------
@@ -1766,6 +1903,18 @@ def get_segnalazioni() -> dict[str, int]:
     return _read_segnalazioni()
 
 
+@app.post("/api/feedback", tags=["Cittadino"])
+def create_feedback(body: FeedbackIn) -> dict[str, bool]:
+    """Store one piece of citizen feedback (D-01, D-02, D-03).
+
+    Appends to `LIVE_DIR/feedback.jsonl` and stops there: no send, no echo
+    of the text back to the caller, no GET — this is not a published fact
+    the way the segnalazioni counter is.
+    """
+    _append_feedback(body.testo, body.voto)
+    return {"ok": True}
+
+
 class ApprofondimentoIn(BaseModel):
     #: Carried over from the answer that prompted this, so no model runs here
     #: and the same request always yields the same result.
@@ -2064,6 +2213,135 @@ def bandi_criteri_route(codice_istat: str) -> list[Bando]:
     return bandi_criteri(codice_istat) or []
 
 
+@app.get(
+    "/api/mappa-connettore/{codice_istat}/bandi-criteri",
+    response_model=BandiLiveEsito,
+    tags=["Cittadino"],
+    dependencies=[Depends(limita_modello)],
+)
+async def bandi_criteri_live_route(codice_istat: str) -> BandiLiveEsito:
+    """I bandi del comune scoperti dal vivo su due gradini REST, arricchiti
+    con i requisiti (KAPI 7, bandi-live-agid).
+
+    A differenza di `/bandi` (Amministrazione Trasparente via CPT AgID
+    soltanto), questa rotta prova anche `wp/v2/pages` come secondo gradino —
+    così un comune "solo-HTML" con bandi veri non collassa su `non_coperto`.
+    Ogni bando trovato è arricchito con i requisiti estratti dal testo
+    (quote-gated, D-05) e con la scadenza SOLO se la data prodotta dal
+    modello è verificabile nel corpus letto (D-07). `esito="comune_ignoto"`
+    se `codice_istat` non è un comune noto. Sonda e parse LLM sono
+    bloccanti: girano in un thread separato, mai dentro il loop async.
+
+    Se la sonda live fallisce (timeout del portale, rete giù), la risposta è
+    un 503 onesto — "riprova", non un 500 con stacktrace e nemmeno un
+    `non_coperto` falso che affermerebbe una copertura mai verificata.
+    """
+    try:
+        return await asyncio.to_thread(bandi_arricchiti, codice_istat)
+    except Exception as exc:  # noqa: BLE001 — degradazione onesta al cittadino
+        logger.warning("bandi-criteri live fallita per %s: %s", codice_istat, exc)
+        raise HTTPException(
+            status_code=503,
+            detail="Scansione bandi live temporaneamente non disponibile.",
+        ) from exc
+
+
+class ATAnalisiRequest(BaseModel):
+    """Un solo PDF di Amministrazione Trasparente, scelto dal cittadino o dal
+    pannello fra quelli che il connettore ha già elencato — mai una scansione
+    di massa (B4, D-11): il budget copre l'allegato richiesto, non l'intero
+    indice."""
+
+    codice_istat: str
+    pdf_url: str = Field(max_length=2048)
+
+
+class ATAnalisiSegmento(BaseModel):
+    """Un frammento di testo del PDF, VERBATIM da `pypdf` (D-07): nessuna
+    cifra qui è mai passata da un LLM."""
+
+    kind: str
+    url: str
+    pagina: int | None = None
+    testo: str
+
+
+class ATAnalisiResponse(BaseModel):
+    pdf_url: str
+    segmenti: list[ATAnalisiSegmento]
+    note: list[str]
+
+
+def _analizza_at_pdf(codice_istat: str, pdf_url: str) -> ATAnalisiResponse:
+    """Scarica e legge UN allegato PDF sul dominio del comune (D-08/D-11).
+
+    Guardia host: `_filtra_pdf_stesso_host` (già la guardia di `bandi_live`,
+    stesso stampo — D-08) scarta ogni URL che non stia sul dominio del
+    comune, altrimenti l'endpoint sarebbe un downloader arbitrario (SSRF).
+    Il testo estratto è quello di `collect_pdf_segments`/`build_corpus`
+    (stessa pipeline di `bandi_live.py:38`, D-07): verbatim da `pypdf`, mai
+    riscritto da un modello.
+    """
+    comune = comune_per_codice(codice_istat)
+    if comune is None:
+        raise HTTPException(status_code=404, detail="Comune non riconosciuto.")
+    base = _base_con_schema(comune.sito)
+    if base is None:
+        raise HTTPException(status_code=404, detail="Il comune non ha un sito noto.")
+
+    ammessi, _note_host = _filtra_pdf_stesso_host(base, [pdf_url])
+    if not ammessi:
+        raise HTTPException(
+            status_code=400,
+            detail="Il PDF non sta sul dominio del comune: rifiutato (guardia host).",
+        )
+
+    from treasureiq.ingest.censimento import _Sonda
+
+    with _Sonda() as sonda:
+        pdf_segments, notes, skipped, _illegible_count = collect_pdf_segments(
+            sonda._client, base, ammessi
+        )
+        _corpus, _boundary_segments, visible_segments = build_corpus(
+            body_text="", page_url=pdf_url, pdf_segments=pdf_segments
+        )
+
+    for skip in skipped:
+        notes.append(f"non analizzato: {skip.url} ({skip.reason})")
+
+    return ATAnalisiResponse(
+        pdf_url=pdf_url,
+        segmenti=[
+            ATAnalisiSegmento(
+                kind=segment.kind,
+                url=segment.url,
+                pagina=segment.page_number,
+                testo=segment.text,
+            )
+            for segment in visible_segments
+        ],
+        note=notes,
+    )
+
+
+@app.post(
+    "/api/at-analisi",
+    response_model=ATAnalisiResponse,
+    tags=["Cittadino"],
+    dependencies=[Depends(limita_modello)],
+)
+async def at_analisi_route(payload: ATAnalisiRequest) -> ATAnalisiResponse:
+    """Analisi on-demand di UN PDF di Amministrazione Trasparente (D-11, B4).
+
+    Mai automatica di massa: il cittadino (o il pannello) sceglie un PDF già
+    elencato dal connettore, questa rotta lo apre. Guardia host: 400 se il
+    PDF non sta sul dominio del comune (D-08, no SSRF verso un host
+    arbitrario). Importi/scadenze/criteri restano VERBATIM dal PDF (D-07):
+    nessun LLM li tocca in questa rotta.
+    """
+    return await asyncio.to_thread(_analizza_at_pdf, payload.codice_istat, payload.pdf_url)
+
+
 @app.post("/api/chat", response_model=ChatOut, tags=["Cittadino"], dependencies=[Depends(limita_modello)])
 async def chat(body: ChatIn, request: Request) -> ChatOut:
     """Anonymous-by-default chat over Albano public data.
@@ -2101,6 +2379,16 @@ async def chat(body: ChatIn, request: Request) -> ChatOut:
     comune_coperto = body.comune_istat is None or body.comune_istat in COMUNI
     records = list(load_opportunities(comune_istat)) if comune_coperto else []
 
+    # Ciclo11/A8: il cittadino puo' chiedere di togliere un filtro letto dal
+    # testo ma che non lo riguarda ("non sono io, e' mia madre"). Solo
+    # rimozione (`FiltroOverride.azione` e' chiuso su "rimuovi", A12): mai
+    # un'iniezione di un valore che il testo non prova.
+    filtri_esclusi = (
+        frozenset(o.chiave for o in body.filtri_override if o.azione == "rimuovi")
+        if body.filtri_override
+        else frozenset()
+    )
+
     answer: ChatAnswer = await build_chat_answer(
         message=message,
         profile=profile,
@@ -2112,7 +2400,16 @@ async def chat(body: ChatIn, request: Request) -> ChatOut:
         # Una scelta esplicita batte qualunque inferenza: vedi ChatIn.
         comune_istat=body.comune_istat,
         comune_coperto=comune_coperto,
+        filtri_esclusi=filtri_esclusi,
     )
+
+    # Ciclo11/A6-L-3: proiezione reale sul ChatOut — stesso filtro escluso
+    # sparisce anche dalla lista esposta al client, non solo dal profilo.
+    filtri_out = [
+        FiltroOut.da_filtro(f)
+        for f in riconosci_filtri(message)
+        if f.chiave not in filtri_esclusi
+    ]
 
     # `records` sono quelli del comune coperto (oggi Albano). Su una risposta
     # letta dal vivo parlano di un altro comune, e la striscia dei costi
@@ -2137,7 +2434,11 @@ async def chat(body: ChatIn, request: Request) -> ChatOut:
     return ChatOut(
         reply=answer.reply,
         profilo_capito=_profilo_capito(
-            answer=answer, profile=profile, message=body.message, comune_istat=body.comune_istat
+            answer=answer,
+            profile=profile,
+            message=body.message,
+            comune_istat=body.comune_istat,
+            filtri_esclusi=filtri_esclusi,
         ),
         topic=answer.topic.value,
         kind=answer.kind.value,
@@ -2195,6 +2496,9 @@ async def chat(body: ChatIn, request: Request) -> ChatOut:
             if answer.scan is not None
             else None
         ),
+        bandi_live=answer.bandi_live,
+        esito_connettore=answer.esito_connettore,
+        filtri=filtri_out,
     )
 
 

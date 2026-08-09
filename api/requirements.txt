@@ -20,3 +20,19 @@ anthropic>=0.120,<1.0
 # failing the run — install it to recover requirements locked in bandi PDFs.
 pypdf>=5.1,<6.0
 snowballstemmer>=3.0
+
+# Optional. Loaded lazily by chat/filtri.py (ciclo 11, D-06) to scope
+# negations in free text ("non sono disabile") via lemma + dependency
+# structure. Without it, filtri.py falls back to a deterministic cue-list
+# and degrades without raising (L-5) — so the app and its tests run fine
+# with just this line, no model installed.
+#
+# The 500MB `it_core_news_lg` model is deliberately NOT pinned here: this
+# file is `pip install -r`'d by the base image too (see Dockerfile), which
+# stays minimal on purpose for the citizen-facing container. filtri.py IS
+# wired into production (B3): the base image runs on the cue-list fallback
+# above, an honest degradation (L-5), not the spaCy model. The model is
+# fetched by a dedicated Dockerfile step instead, pinned to the exact spaCy-compatible
+# release (spaCy models are versioned per spaCy release; an unpinned model
+# would silently pick whatever matches at install time).
+spacy>=3.8,<3.9

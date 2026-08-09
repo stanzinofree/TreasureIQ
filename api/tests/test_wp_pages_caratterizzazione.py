@@ -1,17 +1,19 @@
 """Characterization test for `WPPagesConnector`'s PDF + corpus pipeline.
 
-Freezes the CURRENT observable behavior of `wp_pages.py`'s PDF budget
+Freezes the observable behavior of `wp_pages.py`'s PDF budget
 (`MAX_PDFS_PER_PAGE`, `MAX_PDF_BYTES`), audit trail (`PdfSkip`), corpus
-assembly (`Segment` boundaries), and `MAX_CORPUS_CHARS` truncation, *before*
-that logic is extracted into `extract/corpus.py` (`.kapi/plan.md` brief B1,
-BK-1). The transport is a fake `httpx.MockTransport` — no network — and the
-extractor is a `_RecordingExtractor` stand-in that never calls an LLM: it
-only records what corpus/segments it was handed, so this test exercises
-exactly the PDF+corpus pipeline being extracted, nothing downstream of it.
+assembly (`Segment` boundaries), and `MAX_CORPUS_CHARS` truncation. The
+corpus-assembly logic now lives in `extract/corpus.py` (extracted in
+`eaa5184`), which `wp_pages.py` calls into; this test still exercises the
+connector end-to-end via `fetch()` — the seam the extraction did NOT move:
+budget/audit, recovery ladder, and how the connector hands corpus+segments
+to the extractor. The transport is a fake `httpx.MockTransport` — no network
+— and the extractor is a `_RecordingExtractor` stand-in that never calls an
+LLM: it only records what corpus/segments it was handed.
 
-Golden values here must not change across the refactor. If a value in this
-file needs to change to keep the suite green, the refactor broke behavior —
-fix the refactor, not the test.
+Golden values here must not change. If a value in this file needs to change
+to keep the suite green, a change to `wp_pages.py` / `extract/corpus.py`
+altered behavior — fix the code, not the test.
 """
 
 from __future__ import annotations

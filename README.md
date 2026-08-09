@@ -144,6 +144,23 @@ chat/intent.py   → che FORMA ha la domanda. È tutto ciò che fa il modello
 scheda civica    → ogni riga con la sua provenienza
 ```
 
+`chat/intent.py` capisce la FORMA della domanda — comune, argomento — ma non
+riempie più gli slot anagrafici. È `chat/filtri.py` (`riconosci_filtri`) a
+estrarli, in modo deterministico: enum `FiltroChiave` a 10 valori (comune,
+disabilità, disabilità nel nucleo, figli minori, età, anziano, ISEE, nucleo
+familiare, stato occupazionale, tema). Lemmi e negazione passano da spaCy
+(`it_core_news_lg`, scaricato nel build Docker) quando il modello è
+disponibile, da una cue-list italiana come ripiego onesto quando non lo è —
+mai da un'eccezione che spezza il modulo. Ogni filtro letto dal testo porta lo
+span verbatim che lo giustifica: senza span, nessun filtro. Zero LLM nelle
+cifre che decidono l'eleggibilità (D-07).
+
+I sinonimi civici di «bando» nel messaggio — agevolazione, contributo,
+sovvenzione, sussidio, bonus, incentivo — fanno scattare, accanto alla
+risposta di agevolazione, una scansione bandi live dello stesso comune:
+additiva, mai al posto della risposta (`_forse_aggiungi_bandi_live` in
+`chat/respond.py`).
+
 Il testo della risposta — le cifre, le scadenze, quanti bandi corrispondono a un
 tema — è sempre un modello di frase deterministico, mai generato dal modello. Il
 modello capisce la domanda; non scrive un numero. Un verbalizzatore libero,

@@ -1,7 +1,8 @@
 # Roadmap
 
-*Scritta il 6 agosto 2026. Da rivedere all'inizio della prossima sessione:
-è una proposta di sequenza, non un impegno.*
+*Scritta il 6 agosto 2026, aggiornata il 9 agosto 2026. Da rivedere
+all'inizio della prossima sessione: è una proposta di sequenza, non un
+impegno.*
 
 Il dettaglio di ogni voce — cosa è rotto, perché, quanto costa — sta in
 [da-fare.md](da-fare.md). Qui c'è solo **l'ordine**, e la ragione dell'ordine.
@@ -40,6 +41,11 @@ sembra che il motore non funzioni. → *§ 4*
 
 ## Fase 2 · Allargare quello che si può mostrare (1 giorno)
 
+**FATTO** — il ciclo nlp-filtri: `filtri.py` deterministico (10
+`FiltroChiave`, span-obbligatorio dal testo, Ollama non riempie più nessuno
+slot) e i chip in `ChipFiltri.tsx`/`ProfiloNoto.tsx` sul rail. Chiudeva anche
+*da-fare § 6* (il pannello mostrava solo tre campi di profilo).
+
 **I 155 comuni MyPortal**, già leggibili in JSON: mezza giornata, il miglior
 rapporto fra lavoro e risultato della lista. → *§ 8*
 
@@ -76,10 +82,12 @@ possiamo danneggiare terzi. **Cookie `Secure`** fuori da localhost.
 
 In ordine di quanto restituiscono:
 
-1. **I connettori** — Municipium (1.009 comuni), HGATE (957), AgendaSmart
-   (401), OpenPA (364). Sommati con MyPortal: **2.886 comuni**, il 36,5%
-   d'Italia, per una quindicina di giornate. Nessun'altra voce ha questo
-   rapporto. → [connettori.md](connettori.md)
+1. **I connettori** — Municipium (1.009 comuni) è passato da "solo firma" a
+   **parziale/consegnato** al ciclo 10 (uffici letti dal sito, bandi onesti
+   su 2 comuni su 3 testati): resta HGATE (957), AgendaSmart (401), OpenPA
+   (364). Sommati con MyPortal: **2.886 comuni**, il 36,5% d'Italia, per una
+   quindicina di giornate. Nessun'altra voce ha questo rapporto. →
+   [connettori.md](connettori.md)
 2. **Il registro delle esecuzioni** — è il problema che ci ha morso davvero:
    in una giornata la definizione di aderenza è cambiata quattro volte e le
    pagine hanno mostrato una stratigrafia invece di un dataset.

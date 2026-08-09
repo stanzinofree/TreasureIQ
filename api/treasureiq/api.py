@@ -45,6 +45,7 @@ from treasureiq.chat.respond import (
     compute_recovery_stats,
 )
 from treasureiq.chat.intent import Topic
+from treasureiq.chat.filtri import Filtro, FiltroChiave, Span, riconosci_filtri
 from treasureiq.costo import SOGLIA_RISCOPERTA, costo_comune
 from treasureiq.storico import (
     aderenza_fornitori,
@@ -705,6 +706,18 @@ class ChatTurnIn(BaseModel):
     content: str
 
 
+class FiltroOverride(BaseModel):
+    """Una richiesta del cittadino di RIMUOVERE un filtro dal ricalcolo
+    (ciclo11, A8). `azione` e' chiusa a `"rimuovi"` di proposito: aggiungere
+    un filtro dal client sarebbe indovinare per conto del cittadino (A12) —
+    solo togliere un'evidenza sbagliata e' un'operazione onesta,
+    riconoscibile. `chiave` e' l'enum chiuso `FiltroChiave`: una chiave fuori
+    catalogo (es. "admin_bypass") e' un 422 automatico di Pydantic."""
+
+    chiave: FiltroChiave
+    azione: Literal["rimuovi"] = "rimuovi"
+
+
 class ChatIn(BaseModel):
     message: str
     #: The exchange so far. The client had been sending this all along and the
@@ -718,6 +731,13 @@ class ChatIn(BaseModel):
     #: non può essere inventato da un modello. È la via che chiude in un colpo
     #: sia l'ambiguità fra i due Castro sia l'allucinazione del comune.
     comune_istat: str | None = Field(default=None, max_length=6)
+    #: Ciclo11/A8: il cittadino puo' correggere un filtro che
+    #: `riconosci_filtri` ha letto ma non gli appartiene ("non sono io il
+    #: disabile, e' mia madre") senza dover riscrivere la frase per aggirare
+    #: il riconoscitore. `chiave` e' l'enum chiuso `FiltroChiave`: una chiave
+    #: fuori catalogo (es. "admin_bypass") e' un 422 automatico di Pydantic,
+    #: nessuna validazione a mano necessaria qui.
+    filtri_override: list[FiltroOverride] | None = None
 
 
 class ComuneScelta(BaseModel):
@@ -996,6 +1016,31 @@ class ScanStatoOut(BaseModel):
     ultimo_scan: str | None = None
 
 
+class FiltroOut(BaseModel):
+    """Mirror JSON-facing di `treasureiq.chat.filtri.Filtro` (ciclo11, A6/L-3).
+
+    Duplicato invece di riesportare `Filtro` direttamente: tiene lo schema
+    HTTP disaccoppiato dal modulo interno, stesso principio gia' seguito da
+    `ConnettoreSondaOut`/`EsitoConnettore` per il connettore.
+    """
+
+    chiave: FiltroChiave
+    valore: str | int | float | bool
+    span: Span | None = None
+    sorgente: str
+    negato: bool = False
+
+    @classmethod
+    def da_filtro(cls, filtro: Filtro) -> "FiltroOut":
+        return cls(
+            chiave=filtro.chiave,
+            valore=filtro.valore,
+            span=filtro.span,
+            sorgente=filtro.sorgente,
+            negato=filtro.negato,
+        )
+
+
 class ChatOut(BaseModel):
     reply: str
     #: Cosa abbiamo capito della domanda. Il pannello laterale lo mostra come
@@ -1029,9 +1074,23 @@ class ChatOut(BaseModel):
     #: il connettore non ha risposto o il ramo non e' scattato (A7). La card
     #: strutturata del web (B5) legge da qui, mai dal testo `reply` (D-07).
     esito_connettore: EsitoConnettore | None = None
+    #: Ciclo11/A6-L-3: i filtri civici RICONOSCIUTI in questo turno
+    #: (`treasureiq.chat.filtri.riconosci_filtri`), popolati per davvero
+    #: dall'endpoint — non solo dichiarati (L-3 e' un bug ricorrente: un
+    #: campo che esiste nello schema ma nessuno lo riempie mai). Ogni voce
+    #: porta lo span verbatim che la giustifica (A6), per un'UI che mostra al
+    #: cittadino cosa abbiamo letto e gli permette di correggerlo (A8).
+    filtri: list[FiltroOut] = []
 
 
-def _profilo_capito(*, answer, profile, message: str, comune_istat: str | None = None) -> ProfiloCapitoOut:
+def _profilo_capito(
+    *,
+    answer,
+    profile,
+    message: str,
+    comune_istat: str | None = None,
+    filtri_esclusi: frozenset | None = None,
+) -> ProfiloCapitoOut:
     """Cosa abbiamo capito, messo in chiaro perche' il cittadino possa smentirlo.
 
     Le cifre le rilegge l'estrazione deterministica invece di fidarsi di cosa
@@ -1039,16 +1098,20 @@ def _profilo_capito(*, answer, profile, message: str, comune_istat: str | None =
     verdetti, e qui serve anche a non mostrare a schermo un'eta' che nessuno
     ha scritto.
     """
-    from treasureiq.chat.intent import (
-        _disabilita_dichiarata_nel_testo,
-        _figlio_disabile_dichiarato_nel_testo,
-        _sesso_dichiarato_nel_testo,
-        slot_dal_testo,
-    )
+    from treasureiq.chat.intent import _sesso_dichiarato_nel_testo
     from treasureiq.chat.nomi_genere import sesso_da_nome
     from treasureiq.chat.respond import _comune_nominato
 
-    letti = slot_dal_testo(message)
+    # Ciclo11/D-05: unica fonte di slot per il pannello "cosa abbiamo capito"
+    # e' `riconosci_filtri` — le 4 guardie sparse (`slot_dal_testo`,
+    # `_disabilita_dichiarata_nel_testo`, `_figlio_disabile_dichiarato_nel_testo`,
+    # e ora anche il sesso resta l'unica eccezione, fuori dal catalogo) sono
+    # ridotte a questa e a `_sesso_dichiarato_nel_testo` (D-52, il sesso non
+    # e' un `Filtro`).
+    esclusi = filtri_esclusi or frozenset()
+    filtri = {
+        f.chiave: f.valore for f in riconosci_filtri(message) if f.chiave not in esclusi
+    }
     nominato = _comune_nominato(message)
     # Il comune puo' arrivare da tre posti, in ordine di forza: nominato nel
     # testo di QUESTO turno; scelto esplicitamente (`comune_istat` della
@@ -1075,7 +1138,7 @@ def _profilo_capito(*, answer, profile, message: str, comune_istat: str | None =
     sesso_dedotto = sesso_profilo is None and sesso_dichiarato is None and sesso_dal_nome is not None
 
     disabilita_nucleo = profile.disabilita_nucleo if profile else None
-    if disabilita_nucleo is None and _figlio_disabile_dichiarato_nel_testo(message):
+    if disabilita_nucleo is None and filtri.get(FiltroChiave.DISABILITA_NUCLEO):
         disabilita_nucleo = True
 
     # Stessa simmetria del nucleo, un gradino piu' su: la disabilita' della
@@ -1084,9 +1147,10 @@ def _profilo_capito(*, answer, profile, message: str, comune_istat: str | None =
     # la dichiarava a voce non la vedeva comparire nel profilo a lato, pur
     # avendola `extract_intent` gia' colta per il motore.
     disabilita = profile.disabilita if profile else None
-    if disabilita is None and _disabilita_dichiarata_nel_testo(message):
+    if disabilita is None and filtri.get(FiltroChiave.DISABILITA):
         disabilita = True
 
+    isee_valore = filtri.get(FiltroChiave.ISEE)
     return ProfiloCapitoOut(
         comune_nome=(
             f"{comune.nome} ({comune.provincia})"
@@ -1095,18 +1159,22 @@ def _profilo_capito(*, answer, profile, message: str, comune_istat: str | None =
         ),
         comune_istat=comune.codice_istat if comune is not None else None,
         comune_coperto=coperto,
-        eta=letti.get("eta") or (profile.eta if profile else None),
+        eta=filtri.get(FiltroChiave.ETA) or (profile.eta if profile else None),
         isee=(
-            str(letti["isee"])
-            if "isee" in letti
+            str(isee_valore)
+            if isee_valore is not None
             else (str(profile.isee) if profile and profile.isee is not None else None)
         ),
         nucleo_familiare=(
             profile.nucleo_familiare
             if profile
-            else letti.get("nucleo_familiare")
+            else filtri.get(FiltroChiave.NUCLEO_FAMILIARE)
         ),
-        figli_minori=profile.figli_minori if profile else None,
+        figli_minori=(
+            profile.figli_minori
+            if profile and profile.figli_minori is not None
+            else filtri.get(FiltroChiave.FIGLI_MINORI)
+        ),
         disabilita=disabilita,
         sesso=sesso,
         sesso_dedotto=sesso_dedotto,
@@ -2311,6 +2379,16 @@ async def chat(body: ChatIn, request: Request) -> ChatOut:
     comune_coperto = body.comune_istat is None or body.comune_istat in COMUNI
     records = list(load_opportunities(comune_istat)) if comune_coperto else []
 
+    # Ciclo11/A8: il cittadino puo' chiedere di togliere un filtro letto dal
+    # testo ma che non lo riguarda ("non sono io, e' mia madre"). Solo
+    # rimozione (`FiltroOverride.azione` e' chiuso su "rimuovi", A12): mai
+    # un'iniezione di un valore che il testo non prova.
+    filtri_esclusi = (
+        frozenset(o.chiave for o in body.filtri_override if o.azione == "rimuovi")
+        if body.filtri_override
+        else frozenset()
+    )
+
     answer: ChatAnswer = await build_chat_answer(
         message=message,
         profile=profile,
@@ -2322,7 +2400,16 @@ async def chat(body: ChatIn, request: Request) -> ChatOut:
         # Una scelta esplicita batte qualunque inferenza: vedi ChatIn.
         comune_istat=body.comune_istat,
         comune_coperto=comune_coperto,
+        filtri_esclusi=filtri_esclusi,
     )
+
+    # Ciclo11/A6-L-3: proiezione reale sul ChatOut — stesso filtro escluso
+    # sparisce anche dalla lista esposta al client, non solo dal profilo.
+    filtri_out = [
+        FiltroOut.da_filtro(f)
+        for f in riconosci_filtri(message)
+        if f.chiave not in filtri_esclusi
+    ]
 
     # `records` sono quelli del comune coperto (oggi Albano). Su una risposta
     # letta dal vivo parlano di un altro comune, e la striscia dei costi
@@ -2347,7 +2434,11 @@ async def chat(body: ChatIn, request: Request) -> ChatOut:
     return ChatOut(
         reply=answer.reply,
         profilo_capito=_profilo_capito(
-            answer=answer, profile=profile, message=body.message, comune_istat=body.comune_istat
+            answer=answer,
+            profile=profile,
+            message=body.message,
+            comune_istat=body.comune_istat,
+            filtri_esclusi=filtri_esclusi,
         ),
         topic=answer.topic.value,
         kind=answer.kind.value,
@@ -2407,6 +2498,7 @@ async def chat(body: ChatIn, request: Request) -> ChatOut:
         ),
         bandi_live=answer.bandi_live,
         esito_connettore=answer.esito_connettore,
+        filtri=filtri_out,
     )
 
 

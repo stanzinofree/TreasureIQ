@@ -114,6 +114,14 @@ export default function ProfiloNoto() {
         />
       )}
 
+      {profilo.figliMinori !== undefined && (
+        <Chip
+          label="Figli minori"
+          value={`${profilo.figliMinori}`}
+          onRimuovi={() => dimenticaFatto("figliMinori")}
+        />
+      )}
+
       {profilo.comune && (
         <Chip
           label="Comune"

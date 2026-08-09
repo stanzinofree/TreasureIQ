@@ -348,8 +348,14 @@ def test_nessuna_deduzione_dal_suffisso_andrea_nicola():
 
 
 def test_figlio_disabile_normalizza_disabilita_nucleo():
-    """`figli_disabili > 0` implica `disabilita_nucleo=True`, normalizzato
-    in `_profile_from_slots` (D-53), non nel motore."""
+    """`figli disabile` nel testo implica `disabilita_nucleo=True`,
+    riconosciuto ora da `riconosci_filtri` (D-53 + ciclo11/D-05).
+
+    `figli_disabili` (il CONTEGGIO) e' una riduzione onesta di perimetro
+    del ciclo11: `FiltroChiave` non ha una chiave di conteggio, solo il
+    booleano `DISABILITA_NUCLEO` — restituito sempre `None` da
+    `_profile_from_slots`. Deviazione documentata, non un buco
+    dimenticato: il motore usa gia' solo il booleano (D-53 originale)."""
     from treasureiq.chat.intent import ChatIntent, ProfileSlots, Topic
     from treasureiq.chat.respond import _profile_from_slots
 
@@ -358,7 +364,9 @@ def test_figlio_disabile_normalizza_disabilita_nucleo():
     )
     profilo = _profile_from_slots(intent=intent, messaggio="ho un figlio disabile")
     assert profilo.disabilita_nucleo is True
-    assert profilo.figli_disabili == 1
+    # ciclo11: fixato/ridotto onestamente, era 1 (conteggio dal modello,
+    # ora fuori dal catalogo chiuso `FiltroChiave`)
+    assert profilo.figli_disabili is None
 
 
 def test_figlio_disabile_senza_eta_fa_partire_la_domanda_minore():
@@ -445,21 +453,27 @@ def test_categoria_richiesta_ignora_una_domanda_vera():
 
 def test_profilo_ricco_e_topic_sconosciuto_chiede_la_categoria():
     """D-55: turno AGEVOLAZIONE, profilo gia' ricco (>=2 slot anagrafici),
-    topic sconosciuto/generico ('che bonus posso avere?') → la chat chiede
-    tutte le categorie o una in particolare, invece del generico 'non ho
-    capito'."""
+    topic sconosciuto/generico ('ho 38 anni, famiglia di 4, che bonus posso
+    avere?') → la chat chiede tutte le categorie o una in particolare,
+    invece del generico 'non ho capito'.
+
+    Ciclo11/D-01: il "profilo ricco" non arriva piu' dallo slot che il
+    modello finto dichiara (`ProfileSlots(eta=..., nucleo_familiare=...)`
+    e' ora ignorato — Ollama classifica solo topic/kind). I due dati devono
+    stare nel TESTO, cosi' `riconosci_filtri` li legge davvero: e' la
+    stessa condizione che il D-55 vero verifica in produzione, prima
+    verificata solo per finzione del provider."""
     import asyncio
 
     from treasureiq.chat import respond as respond_mod
-    from treasureiq.chat.intent import ChatIntent, ProfileSlots, QuestionKind, Topic
+    from treasureiq.chat.intent import ChatIntent, QuestionKind, Topic
 
-    messaggio = "che bonus posso avere?"
+    messaggio = "ho 38 anni, famiglia di 4 persone, che bonus posso avere?"
     provider = _ProviderFinto(
         {
             messaggio: ChatIntent(
                 topic=Topic.SCONOSCIUTO,
                 kind=QuestionKind.AGEVOLAZIONE,
-                slots=ProfileSlots(eta=38, nucleo_familiare=4),
             )
         }
     )
@@ -815,17 +829,19 @@ def test_disabilita_propria_e_marcata_dal_testo():
 
 def test_disabilita_propria_recuperata_anche_a_turno_singolo():
     """Il difetto vero, dal test live: «ho 23 anni e sono disabile...» usciva
-    con disabilita' persa, senza storia da incolpare."""
-    modello_la_manca = ChatIntent(
-        topic=Topic.SCONOSCIUTO,
-        kind=QuestionKind.AGEVOLAZIONE,
-        slots=ProfileSlots(eta=23, disabilita=None),
-    )
-    intento = _estrai(
-        "ho 23 anni e sono disabile di san vito lo capo, ho bonus?",
-        modello_la_manca,
-    )
-    assert intento.slots.disabilita is True
+    con disabilita' persa, senza storia da incolpare.
+
+    Ciclo11/D-01: il "recupero" non e' piu' un caso speciale dentro
+    `extract_intent` — `intent.slots` e' sempre vuoto (il modello classifica
+    solo topic/kind), quindi non puo' ne' "perdere" ne' "recuperare" nulla.
+    Il bug originale non puo' piu' ripresentarsi perche' la lettura di
+    `disabilita` e' ora incondizionata, via `riconosci_filtri` sul testo —
+    verificato qui direttamente, non piu' su `intento.slots`."""
+    from treasureiq.chat.filtri import FiltroChiave, riconosci_filtri
+
+    messaggio = "ho 23 anni e sono disabile di san vito lo capo, ho bonus?"
+    filtri = {f.chiave: f.valore for f in riconosci_filtri(messaggio)}
+    assert filtri.get(FiltroChiave.DISABILITA) is True
 
 
 def test_disabilita_non_si_trascina_su_altra_persona():

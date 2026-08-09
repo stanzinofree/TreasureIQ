@@ -332,6 +332,50 @@ export const integrationAll = () => call<Integration[]>("/api/integration");
  */
 export type DataGap = "not_published" | "none_found" | "cambio_persona";
 
+/** Mirror esatto di `FiltroChiave` (`treasureiq/chat/filtri.py`). Enum chiuso:
+ *  nessun'altra stringa e' un filtro valido, ne' lato lettura ne' lato
+ *  override — un valore fuori catalogo qui non compilerebbe. */
+export type FiltroChiave =
+  | "comune"
+  | "disabilita"
+  | "disabilita_nucleo"
+  | "figli_minori"
+  | "eta"
+  | "anziano"
+  | "isee"
+  | "nucleo_familiare"
+  | "employment_status"
+  | "tema";
+
+/** Mirror esatto di `Span` (`treasureiq/chat/filtri.py`): dove nel testo del
+ *  cittadino il filtro e' stato letto, per mostrare la provenienza verbatim
+ *  invece che un'etichetta generica. */
+export interface FiltroSpan {
+  inizio: number;
+  fine: number;
+  testo: string;
+}
+
+/** Mirror esatto di `FiltroOut` (`api.py`, ciclo11 A6/L-3). Un filtro
+ *  RICONOSCIUTO in questo turno — `sorgente` distingue cosa venne dal testo
+ *  di questo messaggio da cosa venne dal profilo gia' noto o da un override
+ *  del client; `span` e' `null` quando la provenienza non e' testuale. */
+export interface FiltroOut {
+  chiave: FiltroChiave;
+  valore: string | number | boolean;
+  span: FiltroSpan | null;
+  sorgente: "testo" | "profilo" | "override_client";
+  negato: boolean;
+}
+
+/** Mirror esatto di `FiltroOverride` (`api.py`, ciclo11 A8/A12). `azione` e'
+ *  chiuso su `"rimuovi"` di proposito: il client puo' solo togliere
+ *  un'evidenza sbagliata, mai iniettarne una nuova per conto del cittadino. */
+export interface FiltroOverride {
+  chiave: FiltroChiave;
+  azione: "rimuovi";
+}
+
 /** Per-level counts of how a criterion's evidence was recovered — a manual
  * field, one extracted from prose by the quote-gated LLM, or one that stayed
  * illegible. Counts, so an absent level is `null`, never `0` (D-17: a missing
@@ -706,6 +750,10 @@ export interface ChatOut {
    *  Nome campo allineato al modello backend (`EsitoConnettore`) — da
    *  riconfermare in integrazione con l'arm B4. */
   esito_connettore?: EsitoConnettore | null;
+  /** Ciclo11/A6-L-3 — i filtri civici RICONOSCIUTI in questo turno
+   * (`riconosci_filtri`), gia' proiettati dal backend: la lista non include
+   * le chiavi appena tolte da `filtri_override` nella stessa richiesta. */
+  filtri: FiltroOut[];
 }
 
 /** Un candidato di disambiguazione comune. `codice_istat` serve a rimandare la
@@ -856,10 +904,16 @@ export const chat = (
   message: string,
   history: ChatTurn[] = [],
   comuneIstat: string | null = null,
+  filtriOverride: FiltroOverride[] | null = null,
 ) =>
   call<ChatOut>("/api/chat", {
     method: "POST",
-    body: JSON.stringify({ message, history, comune_istat: comuneIstat }),
+    body: JSON.stringify({
+      message,
+      history,
+      comune_istat: comuneIstat,
+      filtri_override: filtriOverride,
+    }),
   });
 
 /** Una voce dell'elenco dei comuni italiani (ISTAT unito ai siti di IPA).

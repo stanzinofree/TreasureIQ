@@ -629,3 +629,320 @@ def test_risposta_bandi_senza_tema_reply_identica_a_prima_del_ciclo():
     )
     assert answer.bandi_live.tema is None
     assert all(b.corrisponde is None for b in answer.bandi_live.bandi)
+
+
+# --- 3. Scansione bandi additiva su sinonimo civico (KAPI 11, gap-closure) --
+#
+# Decisione committente: «Aggiungi bandi», non un reroute. Un messaggio
+# agevolazione con un sinonimo civico (agevolazione/contributo/sovvenzione/
+# sussidio/bonus/incentivo) deve ALTRESI' popolare `ChatAnswer.bandi_live`
+# senza toccare il testo della risposta agevolazione. «aiuto/aiuti» resta
+# fuori dal set (troppo generico) e NON deve accendere la scansione.
+
+
+def _risposta_agevolazione_finta(*, bandi_live=None) -> "respond_mod.ChatAnswer":
+    return respond_mod.ChatAnswer(
+        reply="Ecco le agevolazioni che ho trovato per te.",
+        topic=Topic.SOSTEGNO_UTENZE,
+        kind=QuestionKind.AGEVOLAZIONE,
+        data_gap=None,
+        needs_clarification=False,
+        matches=[],
+        spid_required=False,
+        spid_reason=None,
+        bandi_live=bandi_live,
+    )
+
+
+def _esito_bandi_coperto(*, con_bandi: bool = True) -> BandiLiveEsito:
+    return BandiLiveEsito(
+        codice_istat=respond_mod.DEFAULT_COMUNE_ISTAT,
+        comune_nome=respond_mod.DEFAULT_COMUNE_NOME,
+        esito="coperto_con_bandi" if con_bandi else "coperto_senza_bandi",
+        gradino="cpt",
+        verificato_il="2026-08-08T09:30:00+00:00",
+        bandi=[_bando("Avviso pubblico contributi 2026")] if con_bandi else [],
+    )
+
+
+def test_helper_sinonimo_e_comune_noto_allega_bandi_live():
+    esito = _esito_bandi_coperto()
+    with mock.patch(
+        "treasureiq.bandi_live.bandi_arricchiti", return_value=esito
+    ) as sonda:
+        risposta = asyncio.run(
+            respond_mod._forse_aggiungi_bandi_live(
+                _risposta_agevolazione_finta(),
+                codice_istat=respond_mod.DEFAULT_COMUNE_ISTAT,
+                message="che contributo posso avere per l'affitto?",
+            )
+        )
+
+    sonda.assert_called_once_with(respond_mod.DEFAULT_COMUNE_ISTAT)
+    assert risposta.bandi_live is esito
+    # Ramo agevolazione INTATTO: stesso testo, stesso topic/kind.
+    assert risposta.reply == "Ecco le agevolazioni che ho trovato per te."
+    assert risposta.topic is Topic.SOSTEGNO_UTENZE
+
+
+@pytest.mark.parametrize(
+    "messaggio",
+    [
+        "posso avere un bonus per l'affitto?",
+        "c'e' una sovvenzione per la mia attivita'?",
+    ],
+)
+def test_helper_altri_sinonimi_civici_allegano_bandi_live(messaggio):
+    esito = _esito_bandi_coperto()
+    with mock.patch("treasureiq.bandi_live.bandi_arricchiti", return_value=esito):
+        risposta = asyncio.run(
+            respond_mod._forse_aggiungi_bandi_live(
+                _risposta_agevolazione_finta(),
+                codice_istat=respond_mod.DEFAULT_COMUNE_ISTAT,
+                message=messaggio,
+            )
+        )
+
+    assert risposta.bandi_live is esito
+
+
+def test_helper_coperto_senza_bandi_e_esito_onesto_non_rumore():
+    """Zero bandi trovati e' l'esito ONESTO di una ricerca appena fatta
+    (memoria «Fonte Nuova non ha nulla da recuperare»): si allega comunque."""
+    esito = _esito_bandi_coperto(con_bandi=False)
+    with mock.patch("treasureiq.bandi_live.bandi_arricchiti", return_value=esito):
+        risposta = asyncio.run(
+            respond_mod._forse_aggiungi_bandi_live(
+                _risposta_agevolazione_finta(),
+                codice_istat=respond_mod.DEFAULT_COMUNE_ISTAT,
+                message="c'e' qualche sussidio per la mensa?",
+            )
+        )
+
+    assert risposta.bandi_live is esito
+    assert risposta.bandi_live.esito == "coperto_senza_bandi"
+
+
+def test_helper_solo_aiuto_non_accende_la_scansione():
+    """«aiuto/aiuti» e' escluso di proposito dal set (troppo generico): la
+    sonda di rete non deve nemmeno partire."""
+    with mock.patch("treasureiq.bandi_live.bandi_arricchiti") as sonda:
+        risposta = asyncio.run(
+            respond_mod._forse_aggiungi_bandi_live(
+                _risposta_agevolazione_finta(),
+                codice_istat=respond_mod.DEFAULT_COMUNE_ISTAT,
+                message="ho bisogno di aiuto, puoi darmi una mano con gli aiuti disponibili?",
+            )
+        )
+
+    sonda.assert_not_called()
+    assert risposta.bandi_live is None
+
+
+def test_helper_senza_sinonimo_non_tocca_la_risposta():
+    with mock.patch("treasureiq.bandi_live.bandi_arricchiti") as sonda:
+        risposta = asyncio.run(
+            respond_mod._forse_aggiungi_bandi_live(
+                _risposta_agevolazione_finta(),
+                codice_istat=respond_mod.DEFAULT_COMUNE_ISTAT,
+                message="quanto costa l'asilo nido?",
+            )
+        )
+
+    sonda.assert_not_called()
+    assert risposta.bandi_live is None
+
+
+def test_helper_comune_ignoto_non_accende_la_scansione():
+    with mock.patch("treasureiq.bandi_live.bandi_arricchiti") as sonda:
+        risposta = asyncio.run(
+            respond_mod._forse_aggiungi_bandi_live(
+                _risposta_agevolazione_finta(),
+                codice_istat=None,
+                message="che bonus posso avere?",
+            )
+        )
+
+    sonda.assert_not_called()
+    assert risposta.bandi_live is None
+
+
+def test_helper_ramo_bandi_gia_popolato_e_no_op():
+    """Il ramo Topic.BANDI popola gia' da se' `bandi_live`: l'helper non deve
+    fare una seconda scansione."""
+    esito_gia_presente = _esito_bandi_coperto()
+    with mock.patch("treasureiq.bandi_live.bandi_arricchiti") as sonda:
+        risposta = asyncio.run(
+            respond_mod._forse_aggiungi_bandi_live(
+                _risposta_agevolazione_finta(bandi_live=esito_gia_presente),
+                codice_istat=respond_mod.DEFAULT_COMUNE_ISTAT,
+                message="che bonus posso avere?",
+            )
+        )
+
+    sonda.assert_not_called()
+    assert risposta.bandi_live is esito_gia_presente
+
+
+def test_helper_non_coperto_non_allega_rumore():
+    esito = BandiLiveEsito(
+        codice_istat=respond_mod.DEFAULT_COMUNE_ISTAT,
+        comune_nome=respond_mod.DEFAULT_COMUNE_NOME,
+        esito="non_coperto",
+        gradino=None,
+        verificato_il="2026-08-08T09:30:00+00:00",
+        bandi=[],
+    )
+    with mock.patch("treasureiq.bandi_live.bandi_arricchiti", return_value=esito):
+        risposta = asyncio.run(
+            respond_mod._forse_aggiungi_bandi_live(
+                _risposta_agevolazione_finta(),
+                codice_istat=respond_mod.DEFAULT_COMUNE_ISTAT,
+                message="che bonus posso avere?",
+            )
+        )
+
+    assert risposta.bandi_live is None
+
+
+def test_helper_degradazione_onesta_su_eccezione():
+    """La sonda solleva: la risposta agevolazione torna INTATTA, mai una
+    500 al cittadino (degradazione onesta, D-07)."""
+    originale = _risposta_agevolazione_finta()
+    with mock.patch(
+        "treasureiq.bandi_live.bandi_arricchiti",
+        side_effect=RuntimeError("portale giu'"),
+    ):
+        risposta = asyncio.run(
+            respond_mod._forse_aggiungi_bandi_live(
+                originale,
+                codice_istat=respond_mod.DEFAULT_COMUNE_ISTAT,
+                message="che bonus posso avere?",
+            )
+        )
+
+    assert risposta.bandi_live is None
+    assert risposta.reply == originale.reply
+    assert risposta is originale or risposta == originale
+
+
+def test_helper_non_inietta_cifre_nel_testo():
+    """D-07: il testo della risposta agevolazione non deve MAI ricevere
+    cifre/dettagli del bando — quelli viaggiano solo in `bandi_live`."""
+    esito = _esito_bandi_coperto()
+    with mock.patch("treasureiq.bandi_live.bandi_arricchiti", return_value=esito):
+        risposta = asyncio.run(
+            respond_mod._forse_aggiungi_bandi_live(
+                _risposta_agevolazione_finta(),
+                codice_istat=respond_mod.DEFAULT_COMUNE_ISTAT,
+                message="che contributo posso avere?",
+            )
+        )
+
+    assert risposta.reply == "Ecco le agevolazioni che ho trovato per te."
+    assert "Avviso pubblico contributi 2026" not in risposta.reply
+
+
+# --- 3-bis. Wiring nei return terminali di build_chat_answer -----------------
+
+
+def test_build_chat_answer_ramo_coperto_allega_bandi_live_su_sinonimo(monkeypatch):
+    """Integrazione: il return finale del ramo comune-coperto (C) deve
+    passare dal helper additivo — nessun edit a `_componi_risposta`, solo il
+    `replace` finale in `build_chat_answer`."""
+    monkeypatch.setattr(
+        respond_mod,
+        "_componi_risposta",
+        lambda **_k: asyncio.sleep(0, result=_risposta_agevolazione_finta()),
+    )
+    esito = _esito_bandi_coperto()
+
+    with mock.patch(
+        "treasureiq.bandi_live.bandi_arricchiti", return_value=esito
+    ) as sonda:
+        answer = asyncio.run(
+            respond_mod.build_chat_answer(
+                message="che contributo posso avere per l'affitto?",
+                profile=None,
+                records=[],
+                comune_istat=respond_mod.DEFAULT_COMUNE_ISTAT,
+                comune_coperto=True,
+            )
+        )
+
+    sonda.assert_called_once_with(respond_mod.DEFAULT_COMUNE_ISTAT)
+    assert answer.topic is Topic.SOSTEGNO_UTENZE  # ramo agevolazione INTATTO
+    assert answer.reply == "Ecco le agevolazioni che ho trovato per te."
+    assert answer.bandi_live is esito
+
+
+def test_build_chat_answer_senza_sinonimo_non_chiama_la_sonda(monkeypatch):
+    """Comportamento invariato: nessun sinonimo civico, nessuna scansione."""
+    monkeypatch.setattr(
+        respond_mod,
+        "_componi_risposta",
+        lambda **_k: asyncio.sleep(0, result=_risposta_agevolazione_finta()),
+    )
+
+    with mock.patch("treasureiq.bandi_live.bandi_arricchiti") as sonda:
+        answer = asyncio.run(
+            respond_mod.build_chat_answer(
+                message="quanto costa l'asilo nido?",
+                profile=None,
+                records=[],
+                comune_istat=respond_mod.DEFAULT_COMUNE_ISTAT,
+                comune_coperto=True,
+            )
+        )
+
+    sonda.assert_not_called()
+    assert answer.bandi_live is None
+
+
+# 3-ter. Regressione bug Bisceglie->Albano: la scansione bandi segue il comune
+#        del cittadino anche quando arriva SOLO via `comune_istat` (comune noto
+#        ma non ingerito) e non e' nominato nel testo del turno.
+
+
+def test_build_chat_answer_bandi_comune_noto_non_ingerito_non_ripiega_su_albano():
+    """Bug committente (Bisceglie): chattando su un comune noto ma non ingerito,
+    «vedi i bandi» mostrava i bandi di Albano. Il ramo fuori-copertura di
+    `build_chat_answer` passa `comune_istat=None` a `_componi_risposta` (per non
+    contaminare records/naming agevolazione) ma conosce il comune via
+    `nominato`: deve instradare la scansione bandi la', non sul DEFAULT Albano.
+    Il comune non e' nel testo (`che bandi ci sono?`) ne' nel profilo: la sola
+    via e' `comune_bandi_istat`."""
+    bisceglie_istat = "110003"
+    # Presupposto del ramo: comune noto ma NON ingerito (fuori da load_enti).
+    assert bisceglie_istat not in respond_mod.load_enti()
+    esito = BandiLiveEsito(
+        codice_istat=bisceglie_istat,
+        comune_nome="Bisceglie",
+        esito="coperto_con_bandi",
+        gradino="cpt",
+        verificato_il="2026-08-08T09:30:00+00:00",
+        bandi=[_bando("Avviso pubblico 2026")],
+    )
+    provider = _ModelloFinto(
+        ChatIntent(topic=Topic.BANDI, kind=QuestionKind.INFORMAZIONE)
+    )
+    with mock.patch.object(
+        respond_mod, "load_provider", lambda **_: provider
+    ), mock.patch(
+        "treasureiq.bandi_live.bandi_arricchiti", return_value=esito
+    ) as sonda:
+        answer = asyncio.run(
+            respond_mod.build_chat_answer(
+                message="che bandi ci sono?",
+                profile=None,
+                records=[],
+                comune_istat=bisceglie_istat,
+                comune_coperto=False,
+            )
+        )
+
+    # La sonda ha scansionato Bisceglie, mai il DEFAULT Albano.
+    sonda.assert_called_once_with(bisceglie_istat)
+    assert sonda.call_args.args[0] != respond_mod.DEFAULT_COMUNE_ISTAT
+    assert answer.bandi_live is not None
+    assert answer.bandi_live.codice_istat == bisceglie_istat

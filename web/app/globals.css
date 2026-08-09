@@ -409,6 +409,62 @@ a {
 /* D-20 — which tier published this opportunity. `--ai` (authority) rather
    than a verdict colour: this badge never says whether the citizen
    qualifies, only who is answerable for the data. */
+/* Ciclo11/A7 — filtri riconosciuti nel messaggio, con provenienza e (dove
+   onesto) rimozione con re-query. Bordo netto invece del `.tag` a pillola
+   piena: qui il chip e' un'affermazione correggibile, non un'etichetta
+   chiusa, e il bordo lo segnala senza bisogno di colore. */
+.chip-filtri {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ma-2);
+  margin: var(--ma-2) 0;
+}
+
+.chip-filtri__voce {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ma-1);
+  padding: 2px var(--ma-1) 2px var(--ma-3);
+  border: 1px solid var(--kasumi);
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--sumi-soft);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.03em;
+}
+
+.chip-filtri__nota {
+  color: var(--sumi-faint);
+  font-size: 0.66rem;
+}
+
+.chip-filtri__rimuovi {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.4em;
+  height: 1.4em;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--sumi-faint);
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.chip-filtri__rimuovi:hover:not(:disabled) {
+  background: var(--paper-sunken);
+  color: var(--sumi-soft);
+}
+
+.chip-filtri__rimuovi:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
 .tag--livello {
   background: var(--ai-wash);
   color: var(--ai);

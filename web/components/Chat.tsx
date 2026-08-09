@@ -29,6 +29,7 @@ import { useEffect, useId, useRef, useState } from "react";
 import { Seal } from "@/components/Seal";
 import { Marchio } from "@/components/Logo";
 import EcoProfilo from "@/components/EcoProfilo";
+import ChipFiltri from "@/components/ChipFiltri";
 import Segnalazione from "@/components/Segnalazione";
 import SchedaDettaglio from "@/components/SchedaDettaglio";
 import AccessoSimulato from "@/components/AccessoSimulato";
@@ -66,6 +67,8 @@ import {
   type ComuneAmbiguo,
   type CostLevels,
   type ConnettoreSonda,
+  type FiltroChiave,
+  type FiltroOverride,
   type InfoOut,
   type InfoWebResult,
   type MappaConnettore,
@@ -1209,6 +1212,19 @@ export default function Chat() {
   // cui una puo' fallire ("Non riesco a raggiungere il servizio"). Il ref
   // cambia all'istante, quindi il secondo invio si ferma qui.
   const invioInCorso = useRef(false);
+  // Stessa guardia sincrona di `invioInCorso`, ma per il re-query della
+  // rimozione chip (A8-client): un secondo click su un'altra × prima che
+  // `busy` sia tornato true lo leggerebbe ancora false e partirebbero due
+  // richieste concorrenti sullo stesso scambio.
+  const rimozioneInCorso = useRef(false);
+  // Ciclo11/A8-client — override accumulati per scambio (chiave = id del
+  // messaggio assistente). Ogni «×» aggiunge una chiave; il ricalcolo del
+  // server toglie di conseguenza quel filtro anche dalla `filtri` che torna,
+  // quindi non serve tenere qui una copia della lista visibile — solo cosa
+  // e' gia' stato tolto, per non rimandarlo due volte.
+  const [overrideScambio, setOverrideScambio] = useState<
+    Record<string, FiltroOverride[]>
+  >({});
   const logRef = useRef<HTMLDivElement>(null);
 
   // Keep the newest exchange in view as the transcript grows, the way a
@@ -1239,7 +1255,7 @@ export default function Chat() {
 
   async function send(text: string, comuneIstatScelto?: string) {
     const trimmed = text.trim();
-    if (!trimmed || busy || invioInCorso.current) return;
+    if (!trimmed || busy || invioInCorso.current || rimozioneInCorso.current) return;
     invioInCorso.current = true;
 
     setError(null);
@@ -1306,6 +1322,9 @@ export default function Chat() {
             : {}),
           ...(capito.disabilita_nucleo === true
             ? { disabilitaNucleo: true }
+            : {}),
+          ...(capito.figli_minori != null
+            ? { figliMinori: capito.figli_minori }
             : {}),
           // Il tema capito diventa un interesse mostrato: e' la risposta a
           // «cosa sto cercando», che finora la persona non vedeva scritta.
@@ -1377,6 +1396,56 @@ export default function Chat() {
     } finally {
       setBusy(false);
       invioInCorso.current = false;
+    }
+  }
+
+  // Ciclo11/A8-client (D-04) — la «×» su un chip non ri-filtra client-side:
+  // ri-manda la STESSA domanda con la chiave in `filtri_override`, cosi' il
+  // ricalcolo e' vero (comune fuori copertura ricalcola davvero, non solo
+  // nasconde una riga). Aggiorna IN PLACE il messaggio esistente — non
+  // apre un nuovo scambio — perche' resta la stessa domanda, solo con
+  // un'evidenza in meno.
+  async function rimuoviFiltro(messageId: string, chiave: FiltroChiave) {
+    if (busy || rimozioneInCorso.current || invioInCorso.current) return;
+    const idx = messages.findIndex((m) => m.id === messageId);
+    const domanda = idx > 0 ? messages[idx - 1] : null;
+    if (!domanda || domanda.role !== "user") return;
+    rimozioneInCorso.current = true;
+    setBusy(true);
+    setError(null);
+
+    const attivi = [
+      ...(overrideScambio[messageId] ?? []).filter((o) => o.chiave !== chiave),
+      { chiave, azione: "rimuovi" as const },
+    ];
+    // Storia = lo scambio precedente a quella domanda, la stessa che `send`
+    // avrebbe costruito la prima volta — mai le risposte proprie rimandate
+    // indietro (vedi nota sopra in `send`).
+    const history: ChatTurn[] = messages.slice(0, idx - 1).map((m) => ({
+      role: m.role,
+      content: m.content,
+    }));
+
+    try {
+      const out = await chat(
+        domanda.content,
+        history,
+        profilo.comune?.istat ?? null,
+        attivi,
+      );
+      setOverrideScambio((prev) => ({ ...prev, [messageId]: attivi }));
+      setMessages((prev) =>
+        prev.map((m) =>
+          m.id === messageId ? { ...m, content: out.reply, reply: out } : m,
+        ),
+      );
+    } catch {
+      setError(
+        "Non riesco a raggiungere il servizio. Verifica che l'API sia in esecuzione su localhost:8010.",
+      );
+    } finally {
+      setBusy(false);
+      rimozioneInCorso.current = false;
     }
   }
 
@@ -1715,6 +1784,19 @@ export default function Chat() {
                 m.reply.profilo_capito.nucleo_familiare != null) && (
                 <EcoProfilo capito={m.reply.profilo_capito} />
               )}
+
+            {/* Ciclo11/A7 — i filtri riconosciuti nel messaggio, con la loro
+                provenienza verbatim. Vive nel flusso chat (non nel pannello
+                profilo): sono letture di QUESTO scambio, non fatti stabili
+                del cittadino — EcoProfilo resta la sede dei fatti confermati,
+                questi chip sono la lettura puntuale che li ha prodotti. */}
+            {m.role === "assistant" && m.reply && m.reply.filtri.length > 0 && (
+              <ChipFiltri
+                filtri={m.reply.filtri}
+                onRimuovi={(chiave) => rimuoviFiltro(m.id, chiave)}
+                disabled={busy}
+              />
+            )}
 
             {m.reply && (
               <div className="chat__answer">

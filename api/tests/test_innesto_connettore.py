@@ -77,6 +77,62 @@ def _esito_solo_centralino() -> EsitoConnettore:
     )
 
 
+def _esito_sociale_e_demografici() -> EsitoConnettore:
+    """Ciclo11 B5/A9: due uffici distinti nello stesso connettore, cosi' la
+    selezione fra «Servizi Sociali» e «Servizi Demografici» dipende solo dal
+    segnale (filtro disabilita vs. topic), non dall'assenza di alternative."""
+    return EsitoConnettore(
+        codice_istat=CIAMPINO.codice_istat,
+        piattaforma="municipium",
+        letto_il="2026-08-08T10:00:00+00:00",
+        uffici=[
+            UfficioConnettore(
+                nome="Servizi Sociali",
+                url="https://www.comune.ciampino.roma.it/servizi-sociali",
+                telefoni=["06 7654321"],
+                email=["sociali@comune.ciampino.roma.it"],
+                pec=[],
+                orari="lun-ven 9-13",
+                source_typed=True,
+                letto_il="2026-08-08T10:00:00+00:00",
+            ),
+            UfficioConnettore(
+                nome="Servizi Demografici",
+                url="https://www.comune.ciampino.roma.it/servizi-demografici",
+                telefoni=["06 1234567"],
+                email=["demografici@comune.ciampino.roma.it"],
+                pec=[],
+                orari="lun-ven 9-13",
+                source_typed=True,
+                letto_il="2026-08-08T10:00:00+00:00",
+            ),
+        ],
+    )
+
+
+def _esito_solo_urp() -> EsitoConnettore:
+    """Nessun ufficio disabilita/sociale e nessuno che tocchi anagrafe/carta
+    d'identita' (il topic fisso di `_chiedi`): serve al caso di fallback
+    onesto A9, dove il filtro disabilita non trova nulla da raffinare."""
+    return EsitoConnettore(
+        codice_istat=CIAMPINO.codice_istat,
+        piattaforma="municipium",
+        letto_il="2026-08-08T10:00:00+00:00",
+        uffici=[
+            UfficioConnettore(
+                nome="URP",
+                url="https://www.comune.ciampino.roma.it/urp",
+                telefoni=["06 9999999"],
+                email=[],
+                pec=[],
+                orari="lun-ven 9-13",
+                source_typed=True,
+                letto_il="2026-08-08T10:00:00+00:00",
+            )
+        ],
+    )
+
+
 def _chiedi(*, parole: str, monkeypatch: pytest.MonkeyPatch, esito: EsitoConnettore | None):
     monkeypatch.setattr(respond, "risolvi_comune", lambda _hint: CIAMPINO)
     monkeypatch.setattr(respond, "comune_per_codice", lambda _codice: CIAMPINO)
@@ -204,3 +260,77 @@ def test_chatout_proietta_esito_connettore(monkeypatch: pytest.MonkeyPatch) -> N
 
     dump_assente = assente.model_dump(include={"esito_connettore"})
     assert dump_assente["esito_connettore"] is None
+
+
+def test_filtro_disabilita_preferisce_ufficio_sociale(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Ciclo11 B5/A9: col filtro disabilita acceso (`riconosci_filtri` sul
+    messaggio, D-05), la selezione dell'ufficio del connettore preferisce
+    «Servizi Sociali» anche se il topic fisso di `_chiedi` (anagrafe/carta
+    d'identita') matcherebbe altrettanto bene «Servizi Demografici»."""
+    monkeypatch.setattr(
+        respond,
+        "_cerca_sul_web",
+        lambda _query: (_ for _ in ()).throw(AssertionError("non doveva cercare sul web")),
+    )
+
+    risposta = _chiedi(
+        parole="Sono disabile, che documenti mi servono?",
+        monkeypatch=monkeypatch,
+        esito=_esito_sociale_e_demografici(),
+    )
+
+    assert risposta is not None
+    assert risposta.info is not None
+    assert risposta.info.office is not None
+    assert risposta.info.office.nome == "Servizi Sociali"
+    assert risposta.info.office.telefono == "06 7654321"
+    assert risposta.needs_clarification is False
+
+
+def test_senza_filtro_disabilita_selezione_invariata(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Stesso `EsitoConnettore` di sopra, ma nessun filtro disabilita nel
+    messaggio: la selezione resta quella di prima B5 (topic anagrafe ->
+    Servizi Demografici), il segnale nuovo non forza mai nulla senza di se'."""
+    monkeypatch.setattr(
+        respond,
+        "_cerca_sul_web",
+        lambda _query: (_ for _ in ()).throw(AssertionError("non doveva cercare sul web")),
+    )
+
+    risposta = _chiedi(
+        parole="ufficio anagrafe",
+        monkeypatch=monkeypatch,
+        esito=_esito_sociale_e_demografici(),
+    )
+
+    assert risposta is not None
+    assert risposta.info is not None
+    assert risposta.info.office is not None
+    assert risposta.info.office.nome == "Servizi Demografici"
+    assert risposta.info.office.telefono == "06 1234567"
+
+
+def test_filtro_disabilita_senza_ufficio_sociale_fallback_onesto(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """L-5: se il connettore non pubblica nessun ufficio disabilita/sociale
+    (ne' altro che tocchi il topic), il filtro disabilita non ha nulla da
+    raffinare — niente crash, niente ufficio inventato, si ripiega
+    sull'elenco onesto esattamente come senza il filtro."""
+    monkeypatch.setattr(
+        respond,
+        "_cerca_sul_web",
+        lambda _query: (_ for _ in ()).throw(AssertionError("non doveva cercare sul web")),
+    )
+
+    risposta = _chiedi(
+        parole="Sono disabile, che documenti mi servono per la carta d'identità?",
+        monkeypatch=monkeypatch,
+        esito=_esito_solo_urp(),
+    )
+
+    assert risposta is not None
+    assert risposta.info is not None
+    assert risposta.info.office is None
+    assert risposta.needs_clarification is False
+    assert "URP" in risposta.reply

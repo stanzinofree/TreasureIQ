@@ -312,7 +312,7 @@ export default function SchedaDettaglio({
 
         <footer className="modale__piede">
           <a
-            className="button tiq-cta"
+            className="button"
             href={match.source_url}
             target="_blank"
             rel="noreferrer"

@@ -2996,6 +2996,14 @@ a {
   flex-direction: column;
   gap: var(--ma-3);
 }
+/* `.tiq-card` (primitiva, dichiarata dopo) porta elevazione+transizione, ma di
+   suo riscrive border-left su --ai-vivid (teal) e background su --paper-raised
+   (bianco): cancellerebbe l'identità ambra "letto ora, mai un verdetto" (D-09).
+   Specificità combinata (0,2,0 > 0,1,0) → tiene l'ambra, cede solo l'ombra. */
+.scheda-letto-ora.tiq-card {
+  border-left: 3px solid var(--yamabuki, #e0a80d);
+  background: var(--yamabuki-wash);
+}
 .scheda-letto-ora__provenienza-testa {
   margin: 0;
   font-family: var(--font-mono);

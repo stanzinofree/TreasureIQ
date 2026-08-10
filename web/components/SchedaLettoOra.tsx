@@ -157,7 +157,7 @@ function BandoRow({
       {pdfUrl && stato === "idle" && (
         <button
           type="button"
-          className="scheda-letto-ora__analizza tiq-cta"
+          className="scheda-letto-ora__analizza"
           onClick={analizza}
         >
           Analizza i PDF

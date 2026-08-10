@@ -261,6 +261,39 @@ a {
   gap: var(--ma-4);
 }
 
+/* D-06: Feedback vive nell'header come bottone piccolo, non come prompt nel
+   flusso della chat — apre lo stesso componente in un popover ancorato qui. */
+.feedback-header {
+  position: relative;
+}
+.feedback-header__trigger {
+  border: 1.5px solid var(--kasumi);
+  border-radius: var(--radius);
+  background: var(--paper-raised);
+  color: var(--sumi);
+  font: inherit;
+  font-size: 0.82rem;
+  padding: var(--ma-1) var(--ma-3);
+  cursor: pointer;
+  transition: border-color 140ms ease;
+}
+.feedback-header__trigger:hover,
+.feedback-header__trigger:focus-visible {
+  border-color: var(--ai);
+}
+.feedback-header__popover {
+  position: absolute;
+  top: calc(100% + var(--ma-2));
+  right: 0;
+  z-index: 60;
+  width: min(340px, 90vw);
+  padding: var(--ma-4);
+  border: 1.5px solid var(--kasumi);
+  border-radius: var(--radius);
+  background: var(--paper-raised);
+  box-shadow: var(--elev-2);
+}
+
 .masthead__logo {
   display: grid;
   place-items: center;
@@ -837,7 +870,7 @@ a {
   display: flex;
   flex-direction: column;
   gap: var(--ma-6);
-  padding: var(--ma-6) 0 var(--ma-6) var(--ma-2);
+  padding: var(--ma-6) var(--ma-4) var(--ma-6) var(--ma-2);
   border-right: 1px solid var(--kasumi);
   /* Held against the masthead while the conversation scrolls past it. Its own
      overflow only engages once the index outgrows the screen. */
@@ -951,6 +984,22 @@ a {
   align-items: center;
   gap: var(--ma-2);
   margin: 0;
+}
+/* D-09: assorbe il token nella regola componente combinata (0,2,0) invece di
+   un bolt-on in coda al file — .tiq-card non porta padding proprio, quindi
+   senza questa riga i chip toccavano il border-left e il bordo destro della
+   card toccava il divisorio verso la chat (W3). */
+.fatti.tiq-card {
+  padding: var(--ma-3) var(--ma-4);
+}
+.fatto__rimuovi {
+  border: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  padding: 0 0 0 0.35em;
+  line-height: 1;
 }
 .fatti__intro {
   font-family: var(--font-mono);
@@ -2979,6 +3028,65 @@ a {
   margin: var(--ma-3) 0 0;
   font-size: 0.72rem;
   color: var(--sumi-soft);
+}
+
+/* -------------------------------------------- card comune (registro, ciclo 14) */
+
+/* Card comune curata dal registro locale (CONTRATTO-O2, B3): logo o
+   monogramma civico + nome + nota di scansione. Vive nel pannello a
+   sinistra, accanto ai numeri utili, e in testa alla scheda comune. D-09:
+   `.tiq-card` (primitiva) non porta padding proprio (v. `.fatti.tiq-card`
+   sopra) — la regola combinata qui sotto (0,2,0) assorbe il layout invece
+   di un bolt-on in coda al file. */
+.card-comune {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ma-3);
+  margin: var(--ma-4) 0 0;
+}
+.card-comune.tiq-card {
+  padding: var(--ma-4);
+}
+.card-comune__testata {
+  display: flex;
+  align-items: center;
+  gap: var(--ma-3);
+}
+.card-comune__logo {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+}
+/* Monogramma civico neutro: mai uno stemma finto (D-02) — solo l'iniziale
+   del nome del comune, su una superficie neutra. */
+.card-comune__glifo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--paper-sunken);
+  color: var(--sumi-soft);
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  font-weight: 600;
+}
+.card-comune__nome {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.card-comune__nota {
+  margin: 0;
+  font-size: var(--fs-micro);
+  color: var(--sumi-soft);
+}
+.card-comune__nota--cambiato {
+  color: var(--yamabuki-deep);
 }
 
 /* Scheda «letto ora» (B5, ciclo 10): connettore letto dal vivo, stesso

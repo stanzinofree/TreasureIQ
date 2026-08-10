@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import Link from "next/link";
 import { LogoEsteso } from "@/components/Logo";
 import StatusPill from "@/components/StatusPill";
+import FeedbackHeader from "@/components/FeedbackHeader";
 import "./globals.css";
 
 // Fonts are vendored under app/fonts/ rather than pulled with next/font/google.
@@ -78,6 +79,7 @@ export default function RootLayout({
               <Link href="/info">Come funziona</Link>
             </nav>
             <div className="masthead__right">
+              <FeedbackHeader />
               <StatusPill />
             </div>
           </div>

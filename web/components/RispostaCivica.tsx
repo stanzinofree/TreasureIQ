@@ -303,25 +303,6 @@ export default function RispostaCivica({
         </section>
       )}
 
-      {info.web_results.length > 0 && (
-        <section className="civica__blocco civica__blocco--web" role="note">
-          <h4>Pagine trovate sul web · non verificate</h4>
-          <ul className="civica__web">
-            {info.web_results.slice(0, 3).map((r) => (
-              <li key={r.url}>
-                <a href={r.url} target="_blank" rel="noreferrer">
-                  {r.title}
-                </a>
-                <span className="civica__dominio">{dominioDi(r.url)}</span>
-              </li>
-            ))}
-          </ul>
-          <p className="civica__nota">
-            Non è una risposta di TreasureIQ: verificale prima di fidartene.
-          </p>
-        </section>
-      )}
-
       {(info.diagnosis.length > 0 || info.integration_cost.length > 0) && (
         <details className="civica__tecnico">
           <summary>Dettagli tecnici</summary>
@@ -340,6 +321,28 @@ export default function RispostaCivica({
             </ul>
           )}
         </details>
+      )}
+
+      {/* D-05: dopo tutto il verificato (prove, azioni, ufficio, tecnico) —
+          sempre visibile, mai un collapse, perché non è un dettaglio da
+          nascondere ma contenuto di natura diversa (non verificato). */}
+      {info.web_results.length > 0 && (
+        <section className="civica__blocco civica__blocco--web" role="note">
+          <h4>Pagine trovate sul web · non verificate</h4>
+          <ul className="civica__web">
+            {info.web_results.slice(0, 3).map((r) => (
+              <li key={r.url}>
+                <a href={r.url} target="_blank" rel="noreferrer">
+                  {r.title}
+                </a>
+                <span className="civica__dominio">{dominioDi(r.url)}</span>
+              </li>
+            ))}
+          </ul>
+          <p className="civica__nota">
+            Non è una risposta di TreasureIQ: verificale prima di fidartene.
+          </p>
+        </section>
       )}
     </div>
   );

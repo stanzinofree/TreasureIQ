@@ -90,10 +90,17 @@ class EsitoConnettore(BaseModel):
 
 
 def _esito_vuoto(esito: EsitoConnettore) -> bool:
-    """Vero se l'esito non porta nulla di utile: né uffici né AT (L-5) —
-    questo NON si persiste mai, per non fissare un negativo che una
-    prossima scansione potrebbe smentire."""
-    return not esito.uffici and esito.amministrazione_trasparente is None
+    """Vero se l'esito non porta nulla di utile: né uffici, né aree
+    amministrative, né AT (L-5) — questo NON si persiste mai, per non
+    fissare un negativo che una prossima scansione potrebbe smentire.
+    Le aree contano: eGov produce `uffici=[]` per design e riempie solo
+    `aree_amministrative`; senza questo un comune eGov sarebbe ri-scrapato
+    live a ogni query invece che cachato/registrato."""
+    return (
+        not esito.uffici
+        and not esito.aree_amministrative
+        and esito.amministrazione_trasparente is None
+    )
 
 
 def _percorso_store(codice_istat: str) -> Path:
@@ -155,14 +162,22 @@ def leggi_connettore(
         with _Sonda(timeout=timeout) as sonda:
             risposta = sonda.risposta(base)
             firma = firma_da_risposta(headers=dict(risposta.headers), html=risposta.text)
-            if firma.piattaforma != Piattaforma.MUNICIPIUM:
+            if firma.piattaforma == Piattaforma.MUNICIPIUM:
+                try:
+                    from treasureiq.municipium import leggi_municipium
+                except ImportError:  # noqa: BLE001 — B2 non ancora costruito: deferred, non un crash
+                    logger.info("connettore Municipium non ancora disponibile")
+                    return None
+                esito = leggi_municipium(comune, sonda)
+            elif firma.piattaforma == Piattaforma.EGOV:
+                try:
+                    from treasureiq.egov import leggi_egov
+                except ImportError:  # noqa: BLE001 — B4b non ancora costruito: deferred, non un crash
+                    logger.info("connettore eGov non ancora disponibile")
+                    return None
+                esito = leggi_egov(comune, sonda)
+            else:
                 return None
-            try:
-                from treasureiq.municipium import leggi_municipium
-            except ImportError:  # noqa: BLE001 — B2 non ancora costruito: deferred, non un crash
-                logger.info("connettore Municipium non ancora disponibile")
-                return None
-            esito = leggi_municipium(comune, sonda)
     except Exception:  # noqa: BLE001 — portale muto: esito assente, mai un crash
         logger.warning("connettore illeggibile per %s", codice_istat)
         return None
@@ -171,4 +186,10 @@ def leggi_connettore(
         return None
     if not _esito_vuoto(esito):
         _in_store(esito)
+        try:
+            from treasureiq.registro import registra_scansione
+
+            registra_scansione(comune, esito)
+        except Exception:  # noqa: BLE001 — il registro non deve mai bloccare il connettore
+            logger.warning("registro non aggiornato per %s", codice_istat)
     return esito

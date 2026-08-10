@@ -77,6 +77,11 @@ class Piattaforma(str, Enum):
     #: questo novecentotrentuno comuni, il gruppo piu' grande d'Italia, sono
     #: rimasti "non riconosciuti" per mezza giornata.
     MUNICIPIUM = "municipium"
+    #: eGov (D-10): firmata dalla rotta `/EG0/EGS*.HBL` con querystring
+    #: `en=eg###` — vista su Marino (RM), `en=eg176`. Il nome è quello della
+    #: firma osservata (asset/rotta), non di un fornitore dichiarato: nessun
+    #: `generator` né header la nomina.
+    EGOV = "egov"
     #: Piattaforma Laravel col tema Bootstrap Italia, riconosciuta dalla rotta
     #: `/agenda-smart` che espone: verificata su otto comuni di cinque regioni
     #: diverse. Il nome e' quello della rotta, non del fornitore, che non si
@@ -172,6 +177,10 @@ _ASSET: tuple[tuple[re.Pattern[str], Piattaforma], ...] = (
     (re.compile(r"\+\+plone\+\+|/\+\+resource\+\+", re.I), Piattaforma.PLONE),
     (re.compile(r"Liferay\.(?:ThemeDisplay|Portlet)|/o/frontend-", re.I), Piattaforma.LIFERAY),
     (re.compile(r"/media/jui/|/media/system/js/", re.I), Piattaforma.JOOMLA),
+    (
+        re.compile(r"/EG0/EGS\w+\.HBL\?[^\"']*\ben=eg\d{1,4}\b", re.I),
+        Piattaforma.EGOV,
+    ),
 )
 
 #: Quanto guardiamo per gli asset. Più larga di `FINESTRA_HEAD` perché i

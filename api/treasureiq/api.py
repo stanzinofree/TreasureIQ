@@ -86,6 +86,7 @@ from treasureiq.sonda_live import (
 )
 from treasureiq.bandi_live import BandiLiveEsito, _filtra_pdf_stesso_host, bandi_arricchiti
 from treasureiq.connettore import EsitoConnettore
+from treasureiq.registro import RegistroComune, leggi_registro
 from treasureiq.extract.corpus import build_corpus, collect_pdf_segments
 from treasureiq.mappa_connettore import (
     Bando,
@@ -2757,6 +2758,17 @@ class ConnettoreOut(BaseModel):
     firma: str
     rotta_servizi: str | None = None
     note: str | None = None
+
+
+@app.get("/api/registro/{codice_istat}", response_model=RegistroComune, tags=["Censimento nazionale"])
+def registro_comune(codice_istat: str) -> RegistroComune:
+    """La scheda del registro locale (CONTRATTO-O2), letta SOLO da disco:
+    mai una fetch al render (D-01). 404 se il comune non è mai stato
+    scansionato — il frontend degrada a glifo+nome (D-02)."""
+    scheda = leggi_registro(codice_istat)
+    if scheda is None:
+        raise HTTPException(404, "comune non ancora scansionato")
+    return scheda
 
 
 @app.get("/api/connettori", response_model=list[ConnettoreOut], tags=["Censimento nazionale"])

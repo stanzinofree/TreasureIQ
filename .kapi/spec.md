@@ -1,62 +1,59 @@
-# SPEC — dialogo-naturale (ciclo 12)
+# SPEC — grafica-schede (ciclo 13)
 
 ```
-TASK: dialogo-naturale
-ONE-LINE: TIQ smette di sparare risposte-stampino; dialoga — riconosce il testo, chiede follow-up umani, accumula profilo/filtri turno-per-turno. Tutto deterministico, guardrail intatti.
+TASK: grafica-schede
+ONE-LINE: Restyle visivo completo delle schede in chat — un sistema card condiviso (token + primitive) che dà gerarchia e appeal senza toccare contenuto/dati né tradire le convenzioni oneste. Video-ready.
 ```
 
 ## PROBLEM (reale, non dichiarato)
-Oggi ogni messaggio → una risposta secca. Pertinente, ben fatta, ma **canned**: template statici (`respond.py:3343-3347`), zero senso di conversazione. L'utente scrive, partono azioni automatiche di base, ma TIQ non *interagisce*. Manca il dialogo: leggere il testo per arricchire contesto e raffinare filtri parlando, non rispondere-e-basta.
+Le schede sono il volto di TIQ nel video: è ciò che si vede di più nel demo. Il contenuto è ottimo (gerarchia informativa giusta, niente campi vuoti, provenienza esplicita), ma **visivamente piatte e indifferenziate**: tutto stesso peso (gap `--ma-3` uniforme, font ~0.92rem ovunque), bordi `1px solid` quasi invisibili, il segnale-verdetto è il chip più piccolo, la firma dello stile (accento sinistro, teal) è assente. Non è brutto: è senza punto d'ingresso per l'occhio. A 5 giorni dal video serve dare peso e appeal, restando nello stile «civico giapponese».
 
 ## SCOPE (in)
-- **Dialogo multi-turno**: TIQ accumula il profilo/filtri tra un turno e l'altro (non one-shot).
-- **Follow-up umani (slot-filling deterministico)**:
-  - «ho figli» senza numero → chiedi *quanti*
-  - figli → rileva presenza *minorenni* (rilevante agevolazioni)
-  - disabilità: chiedi «il disabile è minorenne?» **solo se** disabilità dichiarata
-  - comune ambiguo → l'intermezzo esiste (`_quale_comune` respond.py:2451), va reso *umano* (non lista secca)
-- **Aggiunta/rimozione filtri dialogando** — SOLO da dichiarazione esplicita del cittadino.
-- **Riscrittura messaggio fuori-copertura** (priorità dolore #1) — meno stampino, più umano, resta onesto.
-- **Variazione frasi/tono** sul layer di confezionamento testo (oggi tutto stringhe statiche).
-- **Script demo video** — costruito in questo ciclo come acceptance bar.
-
-## NON-GOALS (out)
-- **Grafica / UX-UI dei risultati** → ciclo separato dopo (deciso col committente).
-- **LLM che genera le risposte/intermezzi** → sviluppo futuro, va in doc (modello conversazionale piccolo per soli intermezzi + guardrail nostri). Ora NO.
-- Toccare l'intent LLM Ollama esistente (`intent.py:extract_intent`) — resta com'è salvo necessità emersa in plan.
-- Nuovi filtri inferiti / guessing al posto del cittadino.
-- Riconoscimento comune deterministico (`risolvi_comune`) — non è il problema, non si tocca.
+- **Sistema card condiviso**: nuovi token di *struttura* card (accento, elevazione, banda-stato, ritmo tipografico, peso CTA) sopra la palette esistente — 1 modifica token = tutte le card.
+- **Restyle di TUTTE le ~12 card** `web/components/*.tsx` + CSS in `globals.css`. Priorità demo-script: `RispostaCivica`, `SchedaDettaglio` (modale), `SchedaLettoOra`, `EcoProfilo`/`ProfiloNoto`, `ChipFiltri`, `Seal`.
+- **5 mosse base** (dalla review): (1) accento-sinistro su card+section-header, (2) banda-stato in cima (colore del Seal come segnale-dato), (3) elevazione reale della sotto-card servizio (staccarla dal fondo), (4) ritmo tipografico (sintesi più grande/pesante, micro-label mono davvero piccole → contrasto di scala), (5) CTA con più presenza.
+- **Micro-motion CSS** su apertura scheda/hover, dentro `prefers-reduced-motion: reduce`.
+- **A11y masthead**: chiudere le 2 violazioni WCAG aperte — contrasto `marchio__iq` (`globals.css:3760`) e mismatch aria-label wordmark (`layout.tsx:65`).
 
 ## CONSTRAINTS
-- Stack: FastAPI (`api/treasureiq/chat/`) + Next/React (`web/components/`). Deterministico, no nuove dipendenze LLM per l'output.
-- Crediti = vincolo progetto: subagent su Haiku/Sonnet, mai Opus.
-- `source_typed` / tracciabilità intatta. Verbalizzatore MAI sui numeri (memoria: corrompe le cifre).
-- Video-safe: prevedibile, riproducibile in demo.
-- Non committare su main; commit = decisione committente.
+- Stack: Next 15.5.4 / React 19.1.1. **Nessuna dipendenza nuova** (no framer-motion, no gsap) → motion solo CSS.
+- Stile bespoke «civico giapponese»: **nessun font nuovo, nessun registro nuovo**, nessuna palette nuova. Costruire sui token esistenti (`--paper*`, `--sumi*`, `--ai*`, `--ai-vivid`, `--verde/--ambra`, `--ma-*`, `--radius`).
+- **Contrasto WCAG AA tenuto** ovunque. `--ai-vivid` resta fill-only (navy-sopra, 8.89:1); ogni nuovo uso accento verificato.
+- Tema unico light (no dark mode): nessun blocco dark da gestire.
+- **Solo visivo**: contenuto, dati, testi e logica invariati. Restyle CSS/markup, non ridisegno di *cosa* mostra la card.
+- Frontend only. Mai commit su main diretto (branch + PR).
 
 ## DECISIONS
-- **D-01** — Approccio **A "vestito bene"**: deterministico più fluido ora; LLM conversazionale = sviluppo futuro documentato. NO LLM nell'output di questo ciclo.
-- **D-02** — Scope ciclo = **assi 1+2 fusi** (naturalezza = dialogo). Asse-1 "riconoscimento input separato" NON esiste: collassa nel dialogo. Grafica (asse-3) = ciclo separato.
-- **D-03** — **Aggiunta filtro SOLO da dichiarazione esplicita** del cittadino, mai per inferenza. Preserva l'asimmetria anti-guessing di `FiltroOverride` (rimozione libera, aggiunta vincolata all'esplicito).
-- **D-04** — **Max una domanda di follow-up per turno, mai bloccante**: TIQ dà comunque il meglio che ha e *offre* di raffinare. No interrogatori (rischio video-flop).
-- **D-05** — **Fuori-copertura onesto**: riscrittura del tono, mai inventare copertura/dati.
-- **D-06** — **Acceptance = script demo** costruito insieme in questo ciclo; il ciclo è "fatto" quando quelle interazioni suonano umane.
+- **D-01** Impianto = sistema condiviso (token + primitive card), non ritocco per-card. Coerenza forte, manutenibile; token-first per non far esplodere i tempi.
+- **D-02** Evoluzione dello stile esistente, non rifacimento audace. Le 5 mosse sono il linguaggio; niente illustrazione/segni civici nuovi in questo ciclo.
+- **D-03** Il **verdetto resta segnale-dato, mai giudizio TIQ**. La banda-stato colora «cosa risulta dalla fonte»; il copy «l'ultima parola è dell'ente» resta e il peso visivo non deve suggerire che TIQ decida. (Vincolo da scelte-fondanti.)
+- **D-04** Peso visivo **non smorza i segnali onesti**: «non pubblicato», provenienza, «letto ora», stati vuoti restano leggibili quanto o più di ora.
+- **D-05** Motion = CSS micro-transizioni (150–300ms), sempre gated `prefers-reduced-motion`. Nessuna animazione decorativa fine-a-sé.
+- **D-06** A11y masthead dentro questo ciclo. Contrasto `marchio__iq`: se serve scelta di brand → segnalare NEEDS HUMAN, non forzare un colore fuori palette.
 
-## DISCRETION (l'esecutore decide entro questi confini)
-- Forma esatta delle frasi variate / template ricchi (registro, sinonimi) — purché deterministico.
-- Come rendere "umano" l'intermezzo comune (chip + frase) senza rompere `needs_clarification`.
-- Struttura interna della macchina a stati slot-filling, purché rispetti D-03/D-04.
-- Set esatto di frasi del demo script (proposto, poi validato dal committente).
+## DISCRETION (l'esecutore decide)
+- Valori esatti di elevazione/ombra, spessore accento, scala tipografica precisa.
+- Se estrarre un componente `Card` primitivo React o solo classi CSS condivise.
+- Ordine di applicazione tra le card non-demo (best-effort).
 
-## DEFERRED
-- Modello conversazionale piccolo per gli intermezzi (sviluppo futuro, va in doc).
-- Grafica/UX-UI risultati (ciclo separato).
-- Eventuale rework dell'intent LLM Ollama.
+## DEFERRED (fuori da questo ciclo)
+- Ridisegno di *cosa* mostrano le card (contenuto/struttura informativa).
+- Illustrazione, iconografia civica custom, motion coreografato.
+- Dark mode.
+- I follow-up aperti ciclo 12 (R-05 field-overload, reset override frontend) — non-grafica.
 
-## RISKS (da premortem / red-team)
-- **R-01 stato multi-turno** — oggi `/api/chat` costruisce risposta per-messaggio; `profilo_capito` esiste lato stato ma va verificato che regga l'accumulo turno-per-turno. **Prima cosa che plan deve verificare** (potrebbe essere cablaggio non banale).
-- **R-02 troppo chiacchierone** — loop di follow-up → 4 domande prima di dare qualcosa → video flop. Mitigato da D-04.
-- **R-03 collisione guardrail filtri** — aggiunta-da-dialogo vs asimmetria anti-guessing. Mitigato da D-03 (solo esplicito).
-- **R-04 numeri/verdetto** — qualsiasi variazione testo che sfiori cifre/verdetti le corrompe. Guardrail: confezionamento tocca SOLO il testo di cornice, mai i numeri (memoria: verbalizzatore-corrompe-cifre).
-- **R-05 disabilità doppio punto** — memoria: gli slot disabilità si cablano in DUE punti (`_profilo_capito` + `extract_intent`). La logica «disabile minorenne solo se disabilità» va cablata in entrambi.
+## RISKS
+- **R-01** Verdetto colorato letto come «TIQ decide» → viola scelte-fondanti. Mitig: D-03, il colore è stato-dato + copy ente intatto. Reviewer verifica il framing.
+- **R-02** Slittamento tempi (12 card + a11y a 5gg dal video). Mitig: demo-script = must-have, resto best-effort; token-first.
+- **R-03** Regressione contrasto introdotta dal restyle. Mitig: acceptance include ri-scan a11y su localhost:3000.
+- **R-04** Peso visivo seppellisce segnali onesti (provenienza/non-pubblicato/vuoti). Mitig: D-04, reviewer lo asserisce.
+- **R-05** Motion jank / no reduced-motion. Mitig: D-05, gate `prefers-reduced-motion`.
+
+## ACCEPTANCE (D-06 ciclo 12 style = barra video)
+1. Le card del demo-script leggono con gerarchia chiara a video (punto d'ingresso visivo, verdetto evidente, CTA con peso).
+2. Un solo cambio di token di sistema si propaga a tutte le card (D-01 verificato).
+3. **Contrasto WCAG AA** su tutte le card + masthead: ri-scan accesslint su `http://localhost:3000/` senza nuove violazioni serious; le 2 aperte chiuse (o `marchio__iq` marcata NEEDS HUMAN con motivazione).
+4. `tsc --noEmit` verde. Nessuna regressione sulle convenzioni oneste (stati vuoti, «letto ora», provenienza, «l'ultima parola è dell'ente» presenti e leggibili).
+5. Motion rispetta `prefers-reduced-motion`.
+```
 ```

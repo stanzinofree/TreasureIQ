@@ -376,6 +376,15 @@ export interface FiltroOverride {
   azione: "rimuovi";
 }
 
+/** Mirror esatto di `ChatIn.chiarimento_atteso` / `ChatOut.chiarimento`
+ *  (contratto congelato ciclo12, AM-2). Enum chiuso come `FiltroChiave`:
+ *  una stringa fuori catalogo qui non compilerebbe, ne' lato invio ne'
+ *  lato lettura — il 422 Pydantic lato server resta come seconda difesa. */
+export type Chiarimento =
+  | "figli_quanti"
+  | "disabile_minorenne"
+  | "composizione_famiglia";
+
 /** Per-level counts of how a criterion's evidence was recovered — a manual
  * field, one extracted from prose by the quote-gated LLM, or one that stayed
  * illegible. Counts, so an absent level is `null`, never `0` (D-17: a missing
@@ -754,6 +763,12 @@ export interface ChatOut {
    * (`riconosci_filtri`), gia' proiettati dal backend: la lista non include
    * le chiavi appena tolte da `filtri_override` nella stessa richiesta. */
   filtri: FiltroOut[];
+  /** Ciclo12/B1 — slot di dialogo pendente: quale pezzo mancante TIQ ha
+   *  appena chiesto (dentro `reply`, nessun bubble nuovo). `null` = nessuna
+   *  domanda pendente. Il client la conserva e la rimanda come
+   *  `ChatIn.chiarimento_atteso` nel turno immediatamente successivo, poi
+   *  la azzera (uno slot vale un turno, non bloccante — D-04). */
+  chiarimento?: Chiarimento | null;
 }
 
 /** Un candidato di disambiguazione comune. `codice_istat` serve a rimandare la
@@ -905,6 +920,7 @@ export const chat = (
   history: ChatTurn[] = [],
   comuneIstat: string | null = null,
   filtriOverride: FiltroOverride[] | null = null,
+  chiarimentoAtteso: Chiarimento | null = null,
 ) =>
   call<ChatOut>("/api/chat", {
     method: "POST",
@@ -913,6 +929,7 @@ export const chat = (
       history,
       comune_istat: comuneIstat,
       filtri_override: filtriOverride,
+      chiarimento_atteso: chiarimentoAtteso,
     }),
   });
 

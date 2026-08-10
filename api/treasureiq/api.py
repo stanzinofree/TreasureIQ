@@ -20,6 +20,7 @@ import asyncio
 import json
 import logging
 import os
+import re
 import time
 from collections import defaultdict
 import threading
@@ -45,7 +46,14 @@ from treasureiq.chat.respond import (
     compute_recovery_stats,
 )
 from treasureiq.chat.intent import Topic
-from treasureiq.chat.filtri import Filtro, FiltroChiave, Span, riconosci_filtri
+from treasureiq.chat.filtri import (
+    _UNITA_NUMERO,
+    Filtro,
+    FiltroChiave,
+    Span,
+    accumula_filtri,
+    riconosci_filtri,
+)
 from treasureiq.costo import SOGLIA_RISCOPERTA, costo_comune
 from treasureiq.storico import (
     aderenza_fornitori,
@@ -738,6 +746,16 @@ class ChatIn(BaseModel):
     #: fuori catalogo (es. "admin_bypass") e' un 422 automatico di Pydantic,
     #: nessuna validazione a mano necessaria qui.
     filtri_override: list[FiltroOverride] | None = None
+    #: Ciclo12/A1: quale domanda di chiarimento il turno PRECEDENTE ha posto
+    #: al cittadino (contratto congelato, letto da B1 lato risposta). Il
+    #: client la rimanda tale e quale nel turno successivo, cosi' il motore
+    #: sa che "due, di 4 e 9 anni" e' la risposta a "quanti figli hai e che
+    #: eta'" e non un messaggio nuovo da interpretare da zero. `None` quando
+    #: nessun chiarimento era pendente — il caso normale, di gran lunga il
+    #: piu' frequente.
+    chiarimento_atteso: (
+        Literal["figli_quanti", "disabile_minorenne", "composizione_famiglia"] | None
+    ) = None
 
 
 class ComuneScelta(BaseModel):
@@ -1081,6 +1099,85 @@ class ChatOut(BaseModel):
     #: porta lo span verbatim che la giustifica (A6), per un'UI che mostra al
     #: cittadino cosa abbiamo letto e gli permette di correggerlo (A8).
     filtri: list[FiltroOut] = []
+    #: Ciclo12/B1: quale domanda di follow-up questo turno pone (`None` =
+    #: nessuna). Stesso enum chiuso di `ChatIn.chiarimento_atteso` — il
+    #: client la rimanda pari pari al turno dopo. Additivo: `reply` porta
+    #: comunque la risposta di merito, mai bloccante (D-04).
+    chiarimento: (
+        Literal["figli_quanti", "disabile_minorenne", "composizione_famiglia"] | None
+    ) = None
+
+
+#: Ciclo12/B1: prima parola della risposta secca a un follow-up pendente.
+#: Stesso vocabolario numerico di `filtri.py` (`_UNITA_NUMERO`) — nessun
+#: pattern nuovo, solo la lettura di un numero all'inizio del turno.
+_RISPOSTA_NUMERO_SECCA_RE = re.compile(
+    r"^\s*(?P<n>\d{1,2}|un|uno|una|due|tre|quattro|cinque|sei|sette|otto|nove|dieci)\b",
+    re.IGNORECASE,
+)
+_RISPOSTA_SI_RE = re.compile(r"^\s*(?:s[iì]|esatto|corretto)\b", re.IGNORECASE)
+
+
+def _risolvi_chiarimento_secco(chiarimento: str, message: str) -> Filtro | None:
+    """Interpreta la risposta secca a un follow-up pendente (ciclo 12, B1).
+
+    Stessa regola di `riconosci_filtri` (D-03): un valore vale solo perche'
+    il testo del turno lo dimostra. Testo non interpretabile (o "no") ->
+    `None`, mai un valore indovinato (A12, L-5) — un "no" alla domanda
+    "e' minorenne?" lascia lo slot com'era, non inventa un filtro negativo
+    strutturato che il catalogo non prevede.
+    """
+    testo = (message or "").strip()
+    if not testo:
+        return None
+    span_intero = Span(inizio=0, fine=len(message), testo=message)
+    if chiarimento == "figli_quanti":
+        match = _RISPOSTA_NUMERO_SECCA_RE.match(testo)
+        if match is None:
+            return None
+        grezzo = match.group("n").lower()
+        numero = int(grezzo) if grezzo.isdigit() else _UNITA_NUMERO.get(grezzo)
+        if not numero:
+            return None
+        return Filtro(chiave=FiltroChiave.FIGLI_MINORI, valore=numero, span=span_intero, sorgente="testo")
+    if chiarimento == "disabile_minorenne":
+        if _RISPOSTA_SI_RE.match(testo):
+            return Filtro(
+                chiave=FiltroChiave.DISABILITA_NUCLEO, valore=True, span=span_intero, sorgente="testo"
+            )
+        return None
+    return None
+
+
+#: Ciclo12/B-seam: chiarimenti la cui risposta secca parla dei FIGLI, non del
+#: cittadino ("Due, di 4 e 9 anni" senza la parola "figli" -> `_FIGLIO_ETA_RE`
+#: in `filtri.py` non matcha, e "9 anni" leaka come ETA anagrafica del
+#: cittadino). Stesso set dei due chiarimenti sui figli in `Chiarimento`.
+_CHIARIMENTI_FIGLI = frozenset({"figli_quanti", "composizione_famiglia"})
+
+
+def _sopprimi_eta_da_risposta_figli(
+    filtri: dict[FiltroChiave, Filtro], message: str
+) -> dict[FiltroChiave, Filtro]:
+    """Toglie un'ETA letta nel messaggio CORRENTE quando quel messaggio e'
+    la risposta secca a un chiarimento sui figli.
+
+    Nessuna inferenza nuova (D-03): non decidiamo l'eta' dei figli, sopprimiamo
+    un falso positivo del riconoscitore generico ("9 anni" letto come ETA
+    cittadino) solo nel contesto in cui il turno parla di loro, non di lui/lei.
+    Un'ETA venuta da un turno PRECEDENTE (accumulata da `accumula_filtri`,
+    quindi non presente in `riconosci_filtri(message)`) resta intatta.
+    """
+    if FiltroChiave.ETA not in filtri:
+        return filtri
+    eta_dal_messaggio_corrente = any(
+        f.chiave == FiltroChiave.ETA for f in riconosci_filtri(message)
+    )
+    if not eta_dal_messaggio_corrente:
+        return filtri
+    filtri = dict(filtri)
+    filtri.pop(FiltroChiave.ETA, None)
+    return filtri
 
 
 def _profilo_capito(
@@ -1090,6 +1187,7 @@ def _profilo_capito(
     message: str,
     comune_istat: str | None = None,
     filtri_esclusi: frozenset | None = None,
+    filtri_accumulati: dict[FiltroChiave, Filtro] | None = None,
 ) -> ProfiloCapitoOut:
     """Cosa abbiamo capito, messo in chiaro perche' il cittadino possa smentirlo.
 
@@ -1109,9 +1207,17 @@ def _profilo_capito(
     # ridotte a questa e a `_sesso_dichiarato_nel_testo` (D-52, il sesso non
     # e' un `Filtro`).
     esclusi = filtri_esclusi or frozenset()
-    filtri = {
-        f.chiave: f.valore for f in riconosci_filtri(message) if f.chiave not in esclusi
-    }
+    if filtri_accumulati is not None:
+        # Ciclo12/A1: i filtri sopravvivono ai turni (`accumula_filtri`), non
+        # solo quelli letti nel messaggio corrente — altrimenti un dettaglio
+        # dichiarato due turni fa spariva dal pannello alla prima domanda
+        # neutra successiva ("e per la mensa?"). `filtri_esclusi` e' gia'
+        # sottratto da `accumula_filtri`: qui non va riapplicato.
+        filtri = {chiave: f.valore for chiave, f in filtri_accumulati.items()}
+    else:
+        filtri = {
+            f.chiave: f.valore for f in riconosci_filtri(message) if f.chiave not in esclusi
+        }
     nominato = _comune_nominato(message)
     # Il comune puo' arrivare da tre posti, in ordine di forza: nominato nel
     # testo di QUESTO turno; scelto esplicitamente (`comune_istat` della
@@ -2389,27 +2495,54 @@ async def chat(body: ChatIn, request: Request) -> ChatOut:
         else frozenset()
     )
 
+    # Solo quello che il cittadino ha detto. Riversare le nostre risposte
+    # nella storia farebbe diventare una risposta l'input della successiva, e
+    # un errore fatto una volta si autogiustificherebbe per il resto della
+    # conversazione.
+    storia_utente = [t.content for t in body.history if t.role == "user"]
+
+    # Ciclo12/A1: i filtri riconosciuti nei turni precedenti sopravvivono al
+    # turno corrente — `riconosci_filtri` da solo leggeva solo il messaggio di
+    # ADESSO, e un dettaglio dichiarato due turni fa spariva dal profilo alla
+    # prima domanda neutra successiva. Deterministico (D-03): rilegge lo
+    # stesso `riconosci_filtri` su ogni turno, non inventa nulla di nuovo.
+    filtri_conversazione = accumula_filtri(storia_utente, message, filtri_esclusi)
+
+    # Ciclo12/B1: se il turno precedente aveva un follow-up pendente, questo
+    # messaggio e' la risposta secca a QUELLO slot ("due, di 4 e 9 anni",
+    # "si") — la interpretiamo e la aggiungiamo ai filtri accumulati PRIMA di
+    # comporre la risposta, cosi' il profilo del turno stesso la riflette e
+    # B1 non ri-chiede lo stesso slot.
+    if body.chiarimento_atteso:
+        risolto = _risolvi_chiarimento_secco(body.chiarimento_atteso, message)
+        if risolto is not None:
+            filtri_conversazione[risolto.chiave] = risolto
+
+    # Ciclo12/B-seam: la risposta secca a un chiarimento sui figli ("Due, di 4
+    # e 9 anni", senza la parola "figli") parla di loro — un'ETA che
+    # `riconosci_filtri` legge in QUESTO messaggio non e' quella del
+    # cittadino (v. `_sopprimi_eta_da_risposta_figli`).
+    if body.chiarimento_atteso in _CHIARIMENTI_FIGLI:
+        filtri_conversazione = _sopprimi_eta_da_risposta_figli(filtri_conversazione, message)
+
     answer: ChatAnswer = await build_chat_answer(
         message=message,
         profile=profile,
         records=records,
-        # Only what the citizen said. Feeding our own replies back in would let
-        # one answer become the input to the next, and a mistake made once
-        # would then justify itself for the rest of the conversation.
-        storia=[t.content for t in body.history if t.role == "user"],
+        storia=storia_utente,
         # Una scelta esplicita batte qualunque inferenza: vedi ChatIn.
         comune_istat=body.comune_istat,
         comune_coperto=comune_coperto,
         filtri_esclusi=filtri_esclusi,
+        filtri_accumulati=filtri_conversazione,
     )
 
     # Ciclo11/A6-L-3: proiezione reale sul ChatOut — stesso filtro escluso
     # sparisce anche dalla lista esposta al client, non solo dal profilo.
-    filtri_out = [
-        FiltroOut.da_filtro(f)
-        for f in riconosci_filtri(message)
-        if f.chiave not in filtri_esclusi
-    ]
+    # Ciclo12/A1: la lista ora e' quella ACCUMULATA sull'intera conversazione
+    # (`filtri_esclusi` e' gia' sottratto da `accumula_filtri`), non solo
+    # quella del messaggio corrente.
+    filtri_out = [FiltroOut.da_filtro(f) for f in filtri_conversazione.values()]
 
     # `records` sono quelli del comune coperto (oggi Albano). Su una risposta
     # letta dal vivo parlano di un altro comune, e la striscia dei costi
@@ -2439,6 +2572,7 @@ async def chat(body: ChatIn, request: Request) -> ChatOut:
             message=body.message,
             comune_istat=body.comune_istat,
             filtri_esclusi=filtri_esclusi,
+            filtri_accumulati=filtri_conversazione,
         ),
         topic=answer.topic.value,
         kind=answer.kind.value,
@@ -2499,6 +2633,7 @@ async def chat(body: ChatIn, request: Request) -> ChatOut:
         bandi_live=answer.bandi_live,
         esito_connettore=answer.esito_connettore,
         filtri=filtri_out,
+        chiarimento=getattr(answer, "chiarimento", None),
     )
 
 

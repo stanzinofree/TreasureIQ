@@ -54,6 +54,7 @@
      surfaces with dark ink laid on them. Deepened partners exist for the
      moments those meanings need to be written rather than filled. --- */
   --ai-vivid: #2ed3b7;   /* brand teal — fills only, navy on top: 8.89:1 */
+  --ai-vivid-deep: #156558; /* same hue, darkened so it can be TEXT: 6.28:1 on --paper (AA) */
   --ai-line: #0057b8;    /* brand blue — borders, icons, focus ring */
   --ai: #0057b8;         /* brand blue — links, navigation, authority (6.24:1) */
   --ai-deep: #00408a;    /* blue deepened for small text */
@@ -102,6 +103,14 @@
 
   --shadow-rest: 0 1px 2px rgba(27, 33, 29, 0.06);
   --shadow-lift: 0 4px 16px rgba(27, 33, 29, 0.09);
+
+  /* --- Card contract (ciclo 13, congelato) — struttura, non palette. --- */
+  --card-accent-w: 3px;   /* spessore accento sinistro .tiq-card */
+  --elev-1: 0 1px 3px rgba(11, 29, 58, 0.08), 0 1px 2px rgba(11, 29, 58, 0.05);
+  --elev-2: 0 4px 12px rgba(11, 29, 58, 0.12), 0 2px 4px rgba(11, 29, 58, 0.06);
+  --card-band-h: 4px;     /* altezza banda-stato .tiq-card__banda */
+  --fs-sintesi: 1.15rem;  /* scala sintesi, sopra il corpo */
+  --fs-micro: 0.72rem;    /* micro-label mono */
 
   /* Alzata da 68ch: era il cap che mandava a capo i paragrafi a meta'
      pagina. Chi sta dentro `.stack` non la usa affatto (vedi sotto): la
@@ -2073,13 +2082,22 @@ a {
 .modale__pannello {
   background: var(--paper-raised);
   border: 1px solid var(--kasumi);
+  border-left: var(--card-accent-w) solid var(--ai-vivid);
   border-radius: var(--radius);
-  box-shadow: 0 24px 60px rgba(27, 33, 29, 0.18);
+  box-shadow: var(--elev-2), 0 24px 60px rgba(27, 33, 29, 0.18);
   width: 100%;
   max-width: 660px;
   padding: var(--ma-6);
   display: grid;
   gap: var(--ma-6);
+}
+
+/* Contesto per una .tiq-card__banda eventualmente inserita come primo figlio:
+   bleed sopra padding e accento sinistro, angoli alti coerenti col pannello. */
+.modale__pannello > .tiq-card__banda {
+  margin: calc(-1 * var(--ma-6)) calc(-1 * var(--ma-6)) 0
+    calc(-1 * (var(--ma-6) + var(--card-accent-w)));
+  border-radius: var(--radius) var(--radius) 0 0;
 }
 
 .modale__testa {
@@ -2120,6 +2138,12 @@ a {
   gap: var(--ma-2);
 }
 
+.modale__tag .tag {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.04em;
+}
+
 .modale__dati {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -2141,11 +2165,13 @@ a {
 
 .modale__sez h3 {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: var(--fs-micro);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--sumi-faint);
   margin: 0 0 var(--ma-3);
+  padding-inline-start: var(--ma-2);
+  border-inline-start: 2px solid var(--ai-line);
   font-weight: 600;
 }
 .modale__ufficio-nome {
@@ -2164,7 +2190,7 @@ a {
 .modale__provenienza {
   margin: var(--ma-3) 0 0;
   font-size: 0.8rem;
-  color: var(--sumi-faint);
+  color: var(--sumi-soft);
   max-width: none;
 }
 
@@ -2194,8 +2220,8 @@ a {
 .modale__stato {
   display: block;
   font-family: var(--font-mono);
-  font-size: 0.68rem;
-  color: var(--sumi-faint);
+  font-size: 0.72rem;
+  color: var(--sumi-soft);
   margin-top: 2px;
 }
 
@@ -2209,8 +2235,13 @@ a {
 .modale__avviso {
   margin: 0;
   font-size: 0.82rem;
-  color: var(--sumi-faint);
+  color: var(--sumi-soft);
+  font-weight: 500;
   max-width: none;
+}
+
+.modale .button {
+  border: 2px solid var(--ai-vivid);
 }
 
 .card__azioni {
@@ -2964,6 +2995,14 @@ a {
   display: flex;
   flex-direction: column;
   gap: var(--ma-3);
+}
+/* `.tiq-card` (primitiva, dichiarata dopo) porta elevazione+transizione, ma di
+   suo riscrive border-left su --ai-vivid (teal) e background su --paper-raised
+   (bianco): cancellerebbe l'identità ambra "letto ora, mai un verdetto" (D-09).
+   Specificità combinata (0,2,0 > 0,1,0) → tiene l'ambra, cede solo l'ombra. */
+.scheda-letto-ora.tiq-card {
+  border-left: 3px solid var(--yamabuki, #e0a80d);
+  background: var(--yamabuki-wash);
 }
 .scheda-letto-ora__provenienza-testa {
   margin: 0;
@@ -3758,7 +3797,9 @@ a {
   color: var(--sumi);
 }
 .marchio__iq {
-  color: var(--ai-vivid);
+  /* --ai-vivid is fill-only (1.71:1 on --paper, fails AA as text). Same-hue
+     darkened variant: 6.28:1 on --paper, passes AA 4.5:1. */
+  color: var(--ai-vivid-deep);
 }
 /* The payoff is the part that can be lost without losing the brand, so it is
    the first thing dropped when the masthead runs out of room. */
@@ -3982,6 +4023,15 @@ a {
   display: flex;
   flex-direction: column;
   gap: var(--ma-3);
+  border-left: var(--card-accent-w) solid var(--ai-vivid);
+  padding-left: var(--ma-3);
+}
+
+/* Contesto per una .tiq-card__banda eventualmente inserita come primo figlio:
+   bleed sopra l'accento sinistro, così la banda-stato legge edge-to-edge. */
+.civica > .tiq-card__banda {
+  margin-inline-start: calc(-1 * var(--card-accent-w));
+  margin-top: 0;
 }
 
 .civica__stato {
@@ -3989,7 +4039,8 @@ a {
   margin: 0;
   padding: 2px var(--ma-2);
   border: 1px solid currentColor;
-  font-size: 0.72rem;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -4004,12 +4055,14 @@ a {
 
 .civica__sintesi {
   margin: 0;
-  font-size: 1.05rem;
+  font-size: var(--fs-sintesi);
+  font-weight: 600;
   line-height: 1.5;
 }
 
 .civica__servizio {
-  border: 1px solid var(--paper-sunken);
+  border: 1px solid var(--kasumi);
+  box-shadow: var(--elev-1);
   background: var(--paper-raised);
   padding: var(--ma-3);
   display: flex;
@@ -4032,9 +4085,11 @@ a {
 
 .civica__cta {
   display: inline-block;
-  padding: var(--ma-2) var(--ma-3);
-  background: var(--ai);
-  color: var(--paper-raised);
+  padding: var(--ma-3) var(--ma-6);
+  border: 2px solid var(--ai-vivid);
+  background: var(--ai-vivid);
+  color: var(--sumi);
+  font-weight: 600;
   text-decoration: none;
   font-size: 0.9rem;
 }
@@ -4043,8 +4098,8 @@ a {
 
 /* Il dominio sotto il bottone, non l'URL steso dentro la frase. */
 .civica__dominio {
-  font-size: 0.76rem;
-  color: var(--sumi-faint);
+  font-size: 0.8rem;
+  color: var(--sumi-soft);
 }
 
 .civica__blocco h4 {
@@ -4074,7 +4129,8 @@ a {
 .civica__prove li[data-stato="confermato"] > span { color: var(--verde, #1b7f5a); }
 .civica__prove li[data-stato="parziale"] > span { color: var(--ambra, #8a6100); }
 .civica__prove li[data-stato="mancante"] > span { color: var(--sumi-faint); }
-.civica__prove li[data-stato="mancante"] { color: var(--sumi-soft); }
+.civica__prove li[data-stato="parziale"] { color: var(--sumi); font-weight: 500; }
+.civica__prove li[data-stato="mancante"] { color: var(--sumi); font-weight: 500; }
 
 .civica__azioni {
   margin: 0;
@@ -4121,8 +4177,8 @@ a {
 }
 
 .civica__nota {
-  font-size: 0.78rem;
-  color: var(--sumi-faint);
+  font-size: 0.8rem;
+  color: var(--sumi-soft);
 }
 
 .civica__blocco--web {
@@ -4218,6 +4274,8 @@ a {
   text-transform: none;
   font-weight: 600;
   color: var(--sumi);
+  padding-inline-start: var(--ma-2);
+  border-inline-start: 2px solid var(--ai-line);
 }
 
 .civica__descrizione {
@@ -4237,8 +4295,8 @@ a {
 
 .civica__verifica {
   margin: 0;
-  font-size: 0.75rem;
-  color: var(--sumi-faint);
+  font-size: 0.8rem;
+  color: var(--sumi-soft);
 }
 
 .civica__azioni {
@@ -5086,6 +5144,113 @@ a {
 @media (prefers-reduced-motion: reduce) {
   .scan-refresh,
   .scan-refresh__pulse {
+    animation: none;
+  }
+}
+
+/* --- Card contract (ciclo 13, B1a) — congelato: nomi classe/token qui sono
+   consumati verbatim da altri arm. Nessuna palette nuova: solo struttura
+   (accento, elevazione, banda, scale type) sopra i token esistenti. --- */
+
+.tiq-card {
+  border-left: var(--card-accent-w) solid var(--ai-vivid);
+  box-shadow: var(--elev-1);
+  border-radius: var(--radius);
+  background: var(--paper-raised);
+  transition: box-shadow 200ms ease, transform 200ms ease;
+}
+
+.tiq-card:hover,
+.tiq-card:focus-within {
+  box-shadow: var(--elev-2);
+}
+
+/* Banda-stato: SEGNALE-DATO, non verdetto (D-03). Nessun testo dentro — è
+   una barra visiva in cima alla card, non un'affermazione. */
+.tiq-card__banda {
+  height: var(--card-band-h);
+  width: 100%;
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+
+.tiq-card__banda--verde {
+  background: var(--verde, #1b7f5a);
+}
+
+.tiq-card__banda--ambra {
+  background: var(--ambra, #8a6100);
+}
+
+.tiq-card__banda--neutra {
+  background: var(--sumi-soft);
+}
+
+.tiq-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ma-2);
+  padding: var(--ma-3) var(--ma-6);
+  font-weight: 600;
+  border: 2px solid var(--ai-vivid);
+  border-radius: var(--radius-sm);
+  background: var(--ai-vivid);
+  color: var(--sumi); /* navy on teal fill: 8.89:1, fill-only rule respected */
+  cursor: pointer;
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.tiq-cta:hover {
+  box-shadow: var(--elev-1);
+  transform: translateY(-1px);
+}
+
+.tiq-cta:active {
+  transform: translateY(0);
+}
+
+.tiq-micro {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--sumi-faint);
+}
+
+.tiq-sintesi {
+  font-size: var(--fs-sintesi);
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--sumi);
+}
+
+.tiq-sez {
+  border-left: var(--card-accent-w) solid var(--ai-line);
+  padding-left: var(--ma-3);
+  font-weight: 600;
+}
+
+/* Apertura leggera per contenuti che compaiono dentro una .tiq-card (es.
+   dettagli espansi): un filo di movimento, non un effetto. */
+@keyframes tiq-card-open {
+  from {
+    opacity: 0;
+    transform: translateY(-2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tiq-card__apertura {
+  animation: tiq-card-open 250ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tiq-card,
+  .tiq-cta,
+  .tiq-card__apertura {
+    transition: none;
     animation: none;
   }
 }

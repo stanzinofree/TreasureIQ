@@ -64,13 +64,13 @@ export default function ChipFiltri({
                   : "riconosciuto"
             }
           >
-            <span className="chip-filtri__etichetta">
+            <span className="chip-filtri__etichetta tiq-micro">
               {ETICHETTA[filtro.chiave]}
               {dettaglio ? `: ${dettaglio}` : ""}
               {filtro.negato ? " (negato)" : ""}
             </span>
             {!rimovibile && (
-              <span className="chip-filtri__nota">riconosciuto</span>
+              <span className="chip-filtri__nota tiq-micro">riconosciuto</span>
             )}
             {rimovibile && (
               <button

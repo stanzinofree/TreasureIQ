@@ -253,7 +253,8 @@ _SELF_DISABILITA_RE = re.compile(r"\b(?:sono|io)\b|ho\s+una\s+disabilit\w*", re.
 #: e' il titolare dell'eta'.
 _FIGLIO_ETA_RE = re.compile(
     r"\b(?P<n>\d{1,2}|un|uno|una|due|tre|quattro|cinque|sei|sette|otto|nove|dieci)?\s*"
-    r"(?:bambin[oaie]|bimb[oaie]|figli[oa]|figlie|figli)\s+di\s+(?P<eta_figlio>\d{1,2})\s*anni",
+    r"(?:bambin[oaie]|bimb[oaie]|figli[oa]|figlie|figli)\s+di\s+(?P<eta_figlio>\d{1,2})"
+    r"(?:\s*(?:e|,|ed)\s*(?P<eta_extra>\d{1,2}))*\s*anni",
     re.I,
 )
 
@@ -354,7 +355,11 @@ def _riconosci_figli_minori(testo: str) -> list[Filtro]:
         return [Filtro(chiave=FiltroChiave.FIGLI_MINORI, valore=valore, span=span, sorgente="testo")]
 
     match = _FIGLIO_ETA_RE.search(testo)
-    if match is not None and int(match.group("eta_figlio")) < 18:
+    if match is not None:
+        eta_valori = [int(x) for x in re.findall(r"\d{1,2}", match.group(0).split(" di ", 1)[-1])]
+        if not any(eta < 18 for eta in eta_valori):
+            match = None
+    if match is not None:
         valore = _valore_numerale(match.group("n"))
         if valore < 1:
             return []
@@ -563,3 +568,104 @@ def riconosci_filtri(testo: str) -> list[Filtro]:
         except Exception:
             logger.warning("riconoscitore %s fallito su input libero", riconosci.__name__, exc_info=True)
     return filtri
+
+
+# -- accumulo multi-turno (ciclo 12/A1) ----------------------------------------
+
+
+def negazioni_esplicite(testo: str) -> set[FiltroChiave]:
+    """Chiavi la cui evidenza testuale e' presente in `testo` ma negata.
+
+    Riusa i pattern e `_negato_prima_di` degli stessi riconoscitori (nessun
+    pattern nuovo, nessuna inferenza in piu'): un match che sarebbe un filtro
+    attivo se non fosse negato conta come negazione ESPLICITA di quella
+    chiave. Serve ad `accumula_filtri` per far cadere un filtro accumulato da
+    un turno precedente quando il cittadino lo ritratta ("sono disabile" e
+    poi, in un turno successivo, "non sono disabile") — mai per inventare una
+    negazione su una chiave che il testo non nomina affatto (D-03).
+    """
+    if not testo:
+        return set()
+    chiavi: set[FiltroChiave] = set()
+    for match in _ETA_RE.finditer(testo):
+        if _negato_prima_di(testo, match.start()):
+            chiavi.add(FiltroChiave.ETA)
+    for match in _NUCLEO_RE.finditer(testo):
+        if _negato_prima_di(testo, match.start()):
+            chiavi.add(FiltroChiave.NUCLEO_FAMILIARE)
+    for match in (*_FIGLI_MINORI_RE.finditer(testo), *_BAMBINO_BIMBO_RE.finditer(testo)):
+        if _negato_prima_di(testo, match.start()):
+            chiavi.add(FiltroChiave.FIGLI_MINORI)
+    for match in _DISABILITA_RE.finditer(testo):
+        if not _negato_prima_di(testo, match.start()):
+            continue
+        # Stessa distinzione self/figlio di `_riconosci_disabilita`: una
+        # negazione su "mio figlio disabile" non deve far cadere una
+        # DISABILITA (self) accumulata da un turno precedente, e viceversa.
+        inizio_clausola, fine_clausola = _confini_clausola(testo, match.start())
+        clausola = testo[inizio_clausola:fine_clausola]
+        rel_match_start = match.start() - inizio_clausola
+        figlio_match = _ultimo_match_prima_di(_SOSTANTIVO_FIGLIO_RE, clausola, rel_match_start)
+        self_match = _ultimo_match_prima_di(_SELF_DISABILITA_RE, clausola, rel_match_start)
+        if figlio_match is not None and (self_match is None or figlio_match.start() > self_match.start()):
+            chiavi.add(FiltroChiave.DISABILITA_NUCLEO)
+        else:
+            chiavi.add(FiltroChiave.DISABILITA)
+    return chiavi
+
+
+def accumula_filtri(
+    storia: list[str],
+    message: str,
+    filtri_esclusi: frozenset[FiltroChiave] | None = None,
+) -> dict[FiltroChiave, Filtro]:
+    """Filtri civici accumulati sull'intera conversazione (ciclo 12/A1).
+
+    Prima `riconosci_filtri` girava solo sul messaggio corrente: un filtro
+    dichiarato due turni fa ("ho 2 figli minorenni") spariva dal profilo alla
+    prima domanda neutra successiva ("e per la mensa?"), perche' nessuno lo
+    riportava — il client accumulava lato sidebar, il motore no.
+
+    Qui si rilegge `riconosci_filtri` — stessa funzione, deterministica,
+    nessuna inferenza nuova (D-03) — su ogni turno del cittadino in ordine
+    (`storia` poi `message`), e l'ultimo valore per chiave vince. Una
+    dichiarazione vale solo perche' un `riconosci_filtri` l'ha gia' letta in
+    quel turno: qui non si indovina nulla di nuovo.
+
+    Una negazione esplicita in un turno successivo (`negazioni_esplicite`) fa
+    cadere la chiave accumulata, cosi' una ritrattazione vince sul turno che
+    l'ha precede.
+
+    `filtri_esclusi` (dal client, ciclo11/A8) vince per ultimo e sempre: una
+    chiave che il cittadino ha rimosso con la "×" non deve risorgere solo
+    perche' un turno precedente la conteneva.
+    """
+    esclusi = filtri_esclusi or frozenset()
+    accumulati: dict[FiltroChiave, Filtro] = {}
+    for turno in (*storia, message):
+        for chiave in negazioni_esplicite(turno):
+            accumulati.pop(chiave, None)
+        for filtro in riconosci_filtri(turno):
+            accumulati[filtro.chiave] = filtro
+    for chiave in esclusi:
+        accumulati.pop(chiave, None)
+    return accumulati
+
+
+def dichiarazione_figli_senza_numero(testo: str) -> bool:
+    """Vero se `testo` dichiara figli ma nessun riconoscitore ha prodotto
+    FIGLI_MINORI (ne' numero, ne' eta', ne' "minorenni/bambini/bimbi").
+
+    Serve a chi deve decidere quando chiedere "quanti, che eta'?" invece di
+    procedere con un profilo a meta' (B1). Negazione ("non ho figli") ->
+    falso: non e' una dichiarazione da completare, e' la sua assenza.
+    """
+    if not testo:
+        return False
+    match = _SOSTANTIVO_FIGLIO_RE.search(testo)
+    if match is None:
+        return False
+    if _negato_prima_di(testo, match.start()):
+        return False
+    ha_figli_minori = any(f.chiave == FiltroChiave.FIGLI_MINORI for f in riconosci_filtri(testo))
+    return not ha_figli_minori

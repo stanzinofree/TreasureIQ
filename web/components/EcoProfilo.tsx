@@ -80,10 +80,10 @@ export default function EcoProfilo({ capito }: { capito: Capito }) {
 
   return (
     <div
-      className="bubble__eco-profilo"
+      className="bubble__eco-profilo tiq-card"
       style={{ opacity: 0.85, fontSize: "0.9em", marginTop: "0.4em" }}
     >
-      <span style={{ marginRight: "0.4em" }}>Ho capito:</span>
+      <span className="tiq-sintesi" style={{ marginRight: "0.4em" }}>Ho capito:</span>
 
       <span
         style={{ display: "inline-flex", gap: "0.4em", flexWrap: "wrap", alignItems: "center", verticalAlign: "middle" }}
@@ -140,7 +140,7 @@ export default function EcoProfilo({ capito }: { capito: Capito }) {
               autoFocus
               style={{ width: "4em", font: "inherit", fontSize: "1em", padding: "0.1em 0.3em" }}
             />
-            <button type="button" style={cardAttiva} onClick={salvaEta}>
+            <button type="button" className="tiq-cta" style={cardAttiva} onClick={salvaEta}>
               ok
             </button>
           </span>
@@ -151,7 +151,7 @@ export default function EcoProfilo({ capito }: { capito: Capito }) {
 
       {/* The prompt survives only until the citizen touches a card: the moment
           they confirm or correct, the guess is settled. */}
-      {dedotto && <span style={{ marginLeft: "0.35em" }}>— giusto?</span>}
+      {dedotto && <span className="tiq-micro" style={{ marginLeft: "0.35em" }}>— giusto?</span>}
     </div>
   );
 }

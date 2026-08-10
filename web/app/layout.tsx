@@ -62,7 +62,7 @@ export default function RootLayout({
         </a>
         <header className="masthead">
           <div className="masthead__inner">
-            <Link href="/" className="wordmark" aria-label="TreasureIQ — home">
+            <Link href="/" className="wordmark">
               <LogoEsteso conPayoff />
             </Link>
             {/* The wordmark sits outside the nav: it is the home link, not a

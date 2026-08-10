@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import sys
 import types
+from pathlib import Path
 
 import pytest
 
@@ -21,7 +22,7 @@ from treasureiq.connettore import AmministrazioneTrasparente, EsitoConnettore, l
 from treasureiq.ingest.piattaforma import Piattaforma, firma_da_risposta
 from treasureiq.sonda_live import ComuneNoto
 
-ISTAT = "058048"
+ISTAT = "058057"
 HOST = "comune.marino.rm.it"
 
 _HOME_MARINO = """
@@ -250,9 +251,11 @@ def test_dispatcher_egov_non_importabile_ritorna_none(
 
 
 def test_leggi_egov_scheletro_ritorna_esito_con_endpoint(monkeypatch: pytest.MonkeyPatch) -> None:
-    """Nessun parser (B4b non ancora scritto): gli endpoint riconosciuti
-    diventano già oggi link nella card, e l'indice AT si riconosce dal
-    testo dell'ancora — mai un guscio rotto."""
+    """B4b: nessun argomento reale in questo markup sintetico → fallback al
+    degrado D-10 grezzo per `aree_amministrative`; l'indice AT si riconosce
+    dal testo dell'ancora e viene REALMENTE seguito (un hop in più rispetto
+    a B4a: home + indice AT), ma questo markup non ha "Bandi di concorso"
+    → la catena AT si ferma lì con solo `indice_url` — mai un guscio rotto."""
     stream = _StreamFinto(
         200, "https://www.comune.marino.rm.it/", {}, [_HOME_MARINO.encode("utf-8")]
     )
@@ -266,7 +269,8 @@ def test_leggi_egov_scheletro_ritorna_esito_con_endpoint(monkeypatch: pytest.Mon
     assert len(esito.aree_amministrative) >= 2
     assert esito.amministrazione_trasparente is not None
     assert "EGSATTRASP" in (esito.amministrazione_trasparente.indice_url or "")
-    assert sonda.richieste == 1
+    assert esito.amministrazione_trasparente.bandi_attivi == []
+    assert sonda.richieste == 2
     assert sonda.raggiungibile is True
 
 
@@ -288,3 +292,163 @@ def test_leggi_egov_rete_muta_esito_vuoto_onesto_mai_eccezione(monkeypatch: pyte
     assert esito.piattaforma == Piattaforma.EGOV.value
     assert esito.aree_amministrative == []
     assert esito.amministrazione_trasparente is None
+
+
+# --- Fixture reali Marino (B4b, CK-3: markup non verificabile a tavolino) --
+
+_FIXTURES = Path(__file__).parent / "fixtures"
+_BASE_MARINO = "https://www.comune.marino.rm.it"
+
+
+def _leggi_fixture(nome: str) -> str:
+    return (_FIXTURES / nome).read_text("utf-8")
+
+
+def test_estrai_argomenti_home_marino_reale() -> None:
+    """La home reale linka ~12 pagine-argomento (`EGSCHTST45.HBL?ARG=N`),
+    non lo scheletro sintetico `EGSCHTST.HBL?en=eg###` — dati reali, non
+    inventati a tavolino (CK-3)."""
+    pagina = _leggi_fixture("egov_home_marino.html")
+    aree = egov_mod._estrai_argomenti(pagina, _BASE_MARINO, HOST)
+    assert len(aree) >= 10
+    nomi = {area.nome for area in aree}
+    assert "Istruzione" in nomi
+    assert all("ARG=" in area.url for area in aree)
+    assert all(area.url.startswith(_BASE_MARINO) for area in aree)
+
+
+def test_area_mappa_home_marino_reale_id_letto_non_hardcoded() -> None:
+    """L'id `en=eg176` si legge dalla pagina — la stessa pagina con un id
+    diverso deve produrre un URL diverso (mai un letterale fisso)."""
+    pagina = _leggi_fixture("egov_home_marino.html")
+    area = egov_mod._area_mappa(pagina, _BASE_MARINO, HOST)
+    assert area is not None
+    assert area.url == "https://www.comune.marino.rm.it/EG0/EGSMISTMSIT.HBL?en=eg176&FUNZ=1"
+
+    area_altro_id = egov_mod._area_mappa("...en=eg999...", _BASE_MARINO, HOST)
+    assert area_altro_id is not None
+    assert "en=eg999" in area_altro_id.url
+
+
+def test_cerca_link_at_home_marino_reale_non_e_famiglia_egs() -> None:
+    """Il link AT reale di Marino è una pagina statica fuori famiglia EGS
+    (`/amministrazione/trasparenza/...`): si trova per TESTO dell'anchor,
+    non per pattern URL — `_estrai_aree_egov` (pattern-URL) non lo vedrebbe
+    mai."""
+    pagina = _leggi_fixture("egov_home_marino.html")
+    ancore = egov_mod._ancore(pagina, _BASE_MARINO, HOST)
+    indice_url = egov_mod._cerca_link(ancore, egov_mod._RE_AT_TESTO)
+    assert indice_url == "https://www.comune.marino.rm.it/amministrazione/trasparenza/trasparenza.html"
+    assert not egov_mod._RE_ARG_URL.search(indice_url)
+
+
+def test_cerca_link_concorso_e_aperti_catena_reale() -> None:
+    """I due hop successivi della catena AT, sulle pagine reali: AT →
+    "Bandi di concorso" → "…aperti"."""
+    pagina_at = _leggi_fixture("egov_at_marino.html")
+    ancore_at = egov_mod._ancore(pagina_at, _BASE_MARINO, HOST)
+    concorso_url = egov_mod._cerca_link(ancore_at, egov_mod._RE_CONCORSO_TESTO)
+    assert concorso_url is not None
+    assert "EGSCHTST48" in concorso_url
+
+    pagina_concorso = _leggi_fixture("egov_bandi_marino.html")
+    ancore_concorso = egov_mod._ancore(pagina_concorso, concorso_url, HOST)
+    aperti_url = egov_mod._cerca_link(ancore_concorso, egov_mod._RE_APERTI_TESTO)
+    assert aperti_url is not None
+    assert "EGSCHTST49" in aperti_url
+
+
+def test_estrai_bandi_aperti_marino_reale_zero_onesto() -> None:
+    """Oggi Marino non ha bandi di concorso aperti ("Nessun elemento
+    estratto" nel blocco `#latest-posts`, osservato reale) — lista vuota
+    LEGITTIMA, non un degrado: la distinzione conta (D-07)."""
+    pagina = _leggi_fixture("egov_bandi_aperti_marino.html")
+    bandi, pdf_presenti = egov_mod._estrai_bandi_aperti(pagina, _BASE_MARINO, HOST)
+    assert bandi == []
+    assert pdf_presenti is False
+
+
+def test_estrai_bandi_aperti_ignora_feedback_widget_fuori_blocco() -> None:
+    """La card-teaser del widget di rating, sotto `#latest-posts`, condivide
+    la classe CSS con una card-bando ma è FUORI dal blocco delimitato — non
+    deve mai apparire come bando (falso "bando spacciato per feedback")."""
+    pagina = _leggi_fixture("egov_bandi_aperti_marino.html")
+    blocco = egov_mod._blocco_latest_posts(pagina)
+    assert blocco is not None
+    assert "shadow-rating" not in blocco
+
+
+def test_richiedi_con_guardia_mappa_reale_supera_cap_size(monkeypatch: pytest.MonkeyPatch) -> None:
+    """La mappa del sito reale di Marino pesa oltre `MAX_RISPOSTA_BYTES`
+    (troncata a 2.1MB in fixture, ancora oltre il cap di 2MB): la guardia
+    la aborta in streaming — degrado onesto per questa sola sezione, non un
+    crash altrove."""
+    contenuto = _leggi_fixture("egov_mappa_marino.html").encode("utf-8")
+    assert len(contenuto) > egov_mod.MAX_RISPOSTA_BYTES
+    mappa_url = _BASE_MARINO + "/EG0/EGSMISTMSIT.HBL?en=eg176&FUNZ=1"
+    stream = _StreamFinto(200, mappa_url, {}, [contenuto])
+    monkeypatch.setattr(egov_mod.httpx, "Client", lambda **kwargs: _ClientFinto(stream, **kwargs))
+
+    esito = egov_mod._richiedi_con_guardia(mappa_url, HOST, timeout=8.0)
+    assert esito is None
+
+
+class _ClientPerUrl:
+    """Doppio di `httpx.Client` che risponde secondo l'URL richiesto —
+    serve a esercitare `leggi_egov` end-to-end sulla catena reale (home →
+    AT → concorso → aperti), non su un singolo doppio fisso come
+    `_ClientFinto`."""
+
+    def __init__(self, mappa: dict[str, str], **_kwargs: object) -> None:
+        self._mappa = mappa
+
+    def __enter__(self) -> "_ClientPerUrl":
+        return self
+
+    def __exit__(self, *exc: object) -> None:
+        return None
+
+    def stream(self, _method: str, url: str) -> _StreamFinto:
+        for prefisso, pagina in self._mappa.items():
+            if url.startswith(prefisso):
+                return _StreamFinto(200, url, {}, [pagina.encode("utf-8")])
+        return _StreamFinto(404, url, {}, [])
+
+
+def test_leggi_egov_end_to_end_fixture_reali_marino(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Query reale end-to-end sulle fixture Marino: argomenti REALI (non
+    generici), mappa come link noto (endpoint costruito dall'id letto),
+    AT con indice reale e bandi-aperti a zero onesto, uffici degradato
+    (nessun indice uffici nel boundary EGS) — degrado PER-SEZIONE, non
+    tutto-o-niente."""
+    mappa_url = "https://www.comune.marino.rm.it/EG0/EGSMISTMSIT.HBL?en=eg176&FUNZ=1"
+    pagine = {
+        "https://www.comune.marino.rm.it/EG0/EGSCHTST48.HBL": _leggi_fixture("egov_bandi_marino.html"),
+        "https://www.comune.marino.rm.it/EG0/EGSCHTST49.HBL": _leggi_fixture("egov_bandi_aperti_marino.html"),
+        "https://www.comune.marino.rm.it/amministrazione/trasparenza/": _leggi_fixture("egov_at_marino.html"),
+        mappa_url: "x" * (egov_mod.MAX_RISPOSTA_BYTES + 1),
+        _BASE_MARINO: _leggi_fixture("egov_home_marino.html"),
+    }
+    monkeypatch.setattr(egov_mod.httpx, "Client", lambda **kwargs: _ClientPerUrl(pagine, **kwargs))
+
+    sonda = _SondaFinta()
+    esito = egov_mod.leggi_egov(_comune(), sonda)
+
+    assert esito.piattaforma == Piattaforma.EGOV.value
+    assert esito.uffici == []  # degrado onesto per-sezione: nessun indice uffici nel boundary EGS
+
+    nomi_aree = {area.nome for area in esito.aree_amministrative}
+    assert "Istruzione" in nomi_aree
+    assert any(area.nome == "Mappa del sito" and area.url == mappa_url for area in esito.aree_amministrative)
+
+    at = esito.amministrazione_trasparente
+    assert at is not None
+    assert at.indice_url == "https://www.comune.marino.rm.it/amministrazione/trasparenza/trasparenza.html"
+    assert at.bandi_attivi == []  # zero onesto: nessun bando aperto oggi (fixture reale)
+    assert at.pdf_presenti is False
+
+    # home + AT + concorso + aperti = 4 fetch guardati; mappa supera il
+    # size-cap e viene abortita in streaming, MAI contata come richiesta
+    # riuscita (stesso contatore-costo di `_Sonda`, D-08).
+    assert sonda.richieste == 4
+    assert sonda.raggiungibile is True

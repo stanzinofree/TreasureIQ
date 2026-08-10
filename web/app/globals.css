@@ -2082,13 +2082,22 @@ a {
 .modale__pannello {
   background: var(--paper-raised);
   border: 1px solid var(--kasumi);
+  border-left: var(--card-accent-w) solid var(--ai-vivid);
   border-radius: var(--radius);
-  box-shadow: 0 24px 60px rgba(27, 33, 29, 0.18);
+  box-shadow: var(--elev-2), 0 24px 60px rgba(27, 33, 29, 0.18);
   width: 100%;
   max-width: 660px;
   padding: var(--ma-6);
   display: grid;
   gap: var(--ma-6);
+}
+
+/* Contesto per una .tiq-card__banda eventualmente inserita come primo figlio:
+   bleed sopra padding e accento sinistro, angoli alti coerenti col pannello. */
+.modale__pannello > .tiq-card__banda {
+  margin: calc(-1 * var(--ma-6)) calc(-1 * var(--ma-6)) 0
+    calc(-1 * (var(--ma-6) + var(--card-accent-w)));
+  border-radius: var(--radius) var(--radius) 0 0;
 }
 
 .modale__testa {
@@ -2129,6 +2138,12 @@ a {
   gap: var(--ma-2);
 }
 
+.modale__tag .tag {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.04em;
+}
+
 .modale__dati {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -2150,11 +2165,13 @@ a {
 
 .modale__sez h3 {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: var(--fs-micro);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--sumi-faint);
   margin: 0 0 var(--ma-3);
+  padding-inline-start: var(--ma-2);
+  border-inline-start: 2px solid var(--ai-line);
   font-weight: 600;
 }
 .modale__ufficio-nome {
@@ -2220,6 +2237,10 @@ a {
   font-size: 0.82rem;
   color: var(--sumi-faint);
   max-width: none;
+}
+
+.modale .button {
+  border: 2px solid var(--ai-vivid);
 }
 
 .card__azioni {
@@ -3993,6 +4014,15 @@ a {
   display: flex;
   flex-direction: column;
   gap: var(--ma-3);
+  border-left: var(--card-accent-w) solid var(--ai-vivid);
+  padding-left: var(--ma-3);
+}
+
+/* Contesto per una .tiq-card__banda eventualmente inserita come primo figlio:
+   bleed sopra l'accento sinistro, così la banda-stato legge edge-to-edge. */
+.civica > .tiq-card__banda {
+  margin-inline-start: calc(-1 * var(--card-accent-w));
+  margin-top: 0;
 }
 
 .civica__stato {
@@ -4000,7 +4030,8 @@ a {
   margin: 0;
   padding: 2px var(--ma-2);
   border: 1px solid currentColor;
-  font-size: 0.72rem;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -4015,12 +4046,14 @@ a {
 
 .civica__sintesi {
   margin: 0;
-  font-size: 1.05rem;
+  font-size: var(--fs-sintesi);
+  font-weight: 600;
   line-height: 1.5;
 }
 
 .civica__servizio {
-  border: 1px solid var(--paper-sunken);
+  border: 1px solid var(--kasumi);
+  box-shadow: var(--elev-1);
   background: var(--paper-raised);
   padding: var(--ma-3);
   display: flex;
@@ -4043,9 +4076,11 @@ a {
 
 .civica__cta {
   display: inline-block;
-  padding: var(--ma-2) var(--ma-3);
-  background: var(--ai);
-  color: var(--paper-raised);
+  padding: var(--ma-3) var(--ma-6);
+  border: 2px solid var(--ai-vivid);
+  background: var(--ai-vivid);
+  color: var(--sumi);
+  font-weight: 600;
   text-decoration: none;
   font-size: 0.9rem;
 }
@@ -4229,6 +4264,8 @@ a {
   text-transform: none;
   font-weight: 600;
   color: var(--sumi);
+  padding-inline-start: var(--ma-2);
+  border-inline-start: 2px solid var(--ai-line);
 }
 
 .civica__descrizione {

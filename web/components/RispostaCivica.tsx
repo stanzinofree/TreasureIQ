@@ -88,6 +88,15 @@ const SEGNI: Record<string, string> = {
   mancante: "○",
 };
 
+/** Colore della banda-stato in cima alla card: dato visivo (D-03), non
+ *  verdetto. Segue la stessa provenienza dei bolli in `ETICHETTE_STATO`. */
+const BANDA_STATO: Record<InfoOut["stato"], string> = {
+  ufficiale: "verde",
+  parziale: "ambra",
+  non_pubblicato: "ambra",
+  non_verificato: "neutra",
+};
+
 function dominioDi(url: string): string {
   try {
     return new URL(url).hostname.replace(/^www\./, "");
@@ -122,7 +131,11 @@ export default function RispostaCivica({
     : [];
 
   return (
-    <div className="civica">
+    <div className="civica tiq-card">
+      <span
+        className={`tiq-card__banda tiq-card__banda--${BANDA_STATO[info.stato]}`}
+        aria-hidden="true"
+      />
       <p className="civica__bolli">
         {ETICHETTE_STATO[info.stato].map((etichetta, i) => (
           <span
@@ -136,7 +149,7 @@ export default function RispostaCivica({
         ))}
       </p>
 
-      <p className="civica__sintesi">{conTagVerifica(reply)}</p>
+      <p className="civica__sintesi tiq-sintesi">{conTagVerifica(reply)}</p>
 
       {info.letto_dal_vivo && (
         <p className="civica__vivo" role="note">
@@ -155,7 +168,7 @@ export default function RispostaCivica({
           )}
           <p className="civica__servizio-piede">
             <a
-              className="civica__cta"
+              className="civica__cta tiq-cta"
               href={documento.url}
               target="_blank"
               rel="noreferrer"

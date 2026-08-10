@@ -32,7 +32,7 @@ function Chip({
 }) {
   return (
     <span className="fatto">
-      <span className="fatto__label">{label}</span>
+      <span className="fatto__label tiq-micro">{label}</span>
       <span className="fatto__value">{value}</span>
       {nota && <span className="fatto__nota">{nota}</span>}
       {onRimuovi && (
@@ -68,8 +68,8 @@ export default function ProfiloNoto() {
   if (quantiFatti === 0) return null;
 
   return (
-    <div className="fatti" aria-label="Informazioni che il servizio ha su di te">
-      <span className="fatti__intro">Sto usando</span>
+    <div className="fatti tiq-card" aria-label="Informazioni che il servizio ha su di te">
+      <span className="fatti__intro tiq-sintesi">Sto usando</span>
 
       {/* Nessun chip «Nome»: `profilo.nome` non è mai popolato da alcun
           registra() (solo `comune.nome` esiste). Era JSX fantasma — rimosso. */}
@@ -192,7 +192,7 @@ export default function ProfiloNoto() {
           logs them out, and finding out afterwards is the wrong moment. */}
       <button
         type="button"
-        className="fatti__clear"
+        className="fatti__clear tiq-cta"
         onClick={() => {
           // Leaving invalidates the index for the same reason arriving does:
           // every verdict in it was computed from data the service is about to

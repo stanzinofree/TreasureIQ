@@ -155,7 +155,11 @@ function BandoRow({
         </span>
       )}
       {pdfUrl && stato === "idle" && (
-        <button type="button" className="scheda-letto-ora__analizza" onClick={analizza}>
+        <button
+          type="button"
+          className="scheda-letto-ora__analizza tiq-cta"
+          onClick={analizza}
+        >
           Analizza i PDF
         </button>
       )}
@@ -210,8 +214,13 @@ export default function SchedaLettoOra({ esito }: { esito: EsitoConnettore }) {
   if (!haUffici && !haBandi && !(at && at.pdf_presenti)) return null;
 
   return (
-    <div className="scheda-letto-ora" role="group" aria-label="Letto ora dal portale del comune">
-      <p className="scheda-letto-ora__provenienza-testa">
+    <div
+      className="scheda-letto-ora tiq-card"
+      role="group"
+      aria-label="Letto ora dal portale del comune"
+    >
+      <span className="tiq-card__banda tiq-card__banda--ambra" aria-hidden="true" />
+      <p className="scheda-letto-ora__provenienza-testa tiq-sintesi">
         Letto ora dal portale · {esito.piattaforma} · {dataLeggibile(esito.letto_il)}
       </p>
 

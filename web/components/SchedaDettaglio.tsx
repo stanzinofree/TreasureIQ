@@ -23,6 +23,16 @@ const LIVELLO_LABEL: Record<string, string> = {
   nazionale: "Nazionale",
 };
 
+/** Stessa mappa verdict→colore del Seal (D-03): la banda è un segnale-dato,
+ *  non un secondo verdetto — positivo→verde, chiaramente-negativo→ambra,
+ *  tutto il resto (probabile/indeterminato)→neutra. */
+const BANDA_VERDICT: Record<Match["verdict"], "verde" | "ambra" | "neutra"> = {
+  eligible: "verde",
+  likely: "neutra",
+  undetermined: "neutra",
+  not_eligible: "ambra",
+};
+
 const STATO_LABEL: Record<Criterion["state"], string> = {
   met: "Soddisfatto",
   not_met: "Non soddisfatto",
@@ -108,18 +118,22 @@ export default function SchedaDettaglio({
   return (
     <div className="modale" onClick={onClose}>
       <div
-        className="modale__pannello"
+        className="modale__pannello tiq-card"
         role="dialog"
         aria-modal="true"
         aria-labelledby="scheda-titolo"
         ref={panelRef}
         onClick={(e) => e.stopPropagation()}
       >
+        <span
+          className={`tiq-card__banda tiq-card__banda--${BANDA_VERDICT[match.verdict]}`}
+          aria-hidden="true"
+        />
         <header className="modale__testa">
           <Seal verdict={match.verdict} size={40} />
           <div>
             <h2 id="scheda-titolo">{match.title}</h2>
-            <p className="modale__esito">{match.headline}</p>
+            <p className="modale__esito tiq-sintesi">{match.headline}</p>
           </div>
           <button
             type="button"
@@ -298,7 +312,7 @@ export default function SchedaDettaglio({
 
         <footer className="modale__piede">
           <a
-            className="button"
+            className="button tiq-cta"
             href={match.source_url}
             target="_blank"
             rel="noreferrer"

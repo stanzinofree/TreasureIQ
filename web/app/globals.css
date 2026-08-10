@@ -2190,7 +2190,7 @@ a {
 .modale__provenienza {
   margin: var(--ma-3) 0 0;
   font-size: 0.8rem;
-  color: var(--sumi-faint);
+  color: var(--sumi-soft);
   max-width: none;
 }
 
@@ -2220,8 +2220,8 @@ a {
 .modale__stato {
   display: block;
   font-family: var(--font-mono);
-  font-size: 0.68rem;
-  color: var(--sumi-faint);
+  font-size: 0.72rem;
+  color: var(--sumi-soft);
   margin-top: 2px;
 }
 
@@ -2235,7 +2235,8 @@ a {
 .modale__avviso {
   margin: 0;
   font-size: 0.82rem;
-  color: var(--sumi-faint);
+  color: var(--sumi-soft);
+  font-weight: 500;
   max-width: none;
 }
 
@@ -4089,8 +4090,8 @@ a {
 
 /* Il dominio sotto il bottone, non l'URL steso dentro la frase. */
 .civica__dominio {
-  font-size: 0.76rem;
-  color: var(--sumi-faint);
+  font-size: 0.8rem;
+  color: var(--sumi-soft);
 }
 
 .civica__blocco h4 {
@@ -4120,7 +4121,8 @@ a {
 .civica__prove li[data-stato="confermato"] > span { color: var(--verde, #1b7f5a); }
 .civica__prove li[data-stato="parziale"] > span { color: var(--ambra, #8a6100); }
 .civica__prove li[data-stato="mancante"] > span { color: var(--sumi-faint); }
-.civica__prove li[data-stato="mancante"] { color: var(--sumi-soft); }
+.civica__prove li[data-stato="parziale"] { color: var(--sumi); font-weight: 500; }
+.civica__prove li[data-stato="mancante"] { color: var(--sumi); font-weight: 500; }
 
 .civica__azioni {
   margin: 0;
@@ -4167,8 +4169,8 @@ a {
 }
 
 .civica__nota {
-  font-size: 0.78rem;
-  color: var(--sumi-faint);
+  font-size: 0.8rem;
+  color: var(--sumi-soft);
 }
 
 .civica__blocco--web {
@@ -4285,8 +4287,8 @@ a {
 
 .civica__verifica {
   margin: 0;
-  font-size: 0.75rem;
-  color: var(--sumi-faint);
+  font-size: 0.8rem;
+  color: var(--sumi-soft);
 }
 
 .civica__azioni {

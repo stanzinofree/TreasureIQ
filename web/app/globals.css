@@ -54,6 +54,7 @@
      surfaces with dark ink laid on them. Deepened partners exist for the
      moments those meanings need to be written rather than filled. --- */
   --ai-vivid: #2ed3b7;   /* brand teal — fills only, navy on top: 8.89:1 */
+  --ai-vivid-deep: #156558; /* same hue, darkened so it can be TEXT: 6.28:1 on --paper (AA) */
   --ai-line: #0057b8;    /* brand blue — borders, icons, focus ring */
   --ai: #0057b8;         /* brand blue — links, navigation, authority (6.24:1) */
   --ai-deep: #00408a;    /* blue deepened for small text */
@@ -102,6 +103,14 @@
 
   --shadow-rest: 0 1px 2px rgba(27, 33, 29, 0.06);
   --shadow-lift: 0 4px 16px rgba(27, 33, 29, 0.09);
+
+  /* --- Card contract (ciclo 13, congelato) — struttura, non palette. --- */
+  --card-accent-w: 3px;   /* spessore accento sinistro .tiq-card */
+  --elev-1: 0 1px 3px rgba(11, 29, 58, 0.08), 0 1px 2px rgba(11, 29, 58, 0.05);
+  --elev-2: 0 4px 12px rgba(11, 29, 58, 0.12), 0 2px 4px rgba(11, 29, 58, 0.06);
+  --card-band-h: 4px;     /* altezza banda-stato .tiq-card__banda */
+  --fs-sintesi: 1.15rem;  /* scala sintesi, sopra il corpo */
+  --fs-micro: 0.72rem;    /* micro-label mono */
 
   /* Alzata da 68ch: era il cap che mandava a capo i paragrafi a meta'
      pagina. Chi sta dentro `.stack` non la usa affatto (vedi sotto): la
@@ -3758,7 +3767,9 @@ a {
   color: var(--sumi);
 }
 .marchio__iq {
-  color: var(--ai-vivid);
+  /* --ai-vivid is fill-only (1.71:1 on --paper, fails AA as text). Same-hue
+     darkened variant: 6.28:1 on --paper, passes AA 4.5:1. */
+  color: var(--ai-vivid-deep);
 }
 /* The payoff is the part that can be lost without losing the brand, so it is
    the first thing dropped when the masthead runs out of room. */
@@ -5086,6 +5097,113 @@ a {
 @media (prefers-reduced-motion: reduce) {
   .scan-refresh,
   .scan-refresh__pulse {
+    animation: none;
+  }
+}
+
+/* --- Card contract (ciclo 13, B1a) — congelato: nomi classe/token qui sono
+   consumati verbatim da altri arm. Nessuna palette nuova: solo struttura
+   (accento, elevazione, banda, scale type) sopra i token esistenti. --- */
+
+.tiq-card {
+  border-left: var(--card-accent-w) solid var(--ai-vivid);
+  box-shadow: var(--elev-1);
+  border-radius: var(--radius);
+  background: var(--paper-raised);
+  transition: box-shadow 200ms ease, transform 200ms ease;
+}
+
+.tiq-card:hover,
+.tiq-card:focus-within {
+  box-shadow: var(--elev-2);
+}
+
+/* Banda-stato: SEGNALE-DATO, non verdetto (D-03). Nessun testo dentro — è
+   una barra visiva in cima alla card, non un'affermazione. */
+.tiq-card__banda {
+  height: var(--card-band-h);
+  width: 100%;
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+
+.tiq-card__banda--verde {
+  background: var(--verde, #1b7f5a);
+}
+
+.tiq-card__banda--ambra {
+  background: var(--ambra, #8a6100);
+}
+
+.tiq-card__banda--neutra {
+  background: var(--sumi-soft);
+}
+
+.tiq-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ma-2);
+  padding: var(--ma-3) var(--ma-6);
+  font-weight: 600;
+  border: 2px solid var(--ai-vivid);
+  border-radius: var(--radius-sm);
+  background: var(--ai-vivid);
+  color: var(--sumi); /* navy on teal fill: 8.89:1, fill-only rule respected */
+  cursor: pointer;
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.tiq-cta:hover {
+  box-shadow: var(--elev-1);
+  transform: translateY(-1px);
+}
+
+.tiq-cta:active {
+  transform: translateY(0);
+}
+
+.tiq-micro {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--sumi-faint);
+}
+
+.tiq-sintesi {
+  font-size: var(--fs-sintesi);
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--sumi);
+}
+
+.tiq-sez {
+  border-left: var(--card-accent-w) solid var(--ai-line);
+  padding-left: var(--ma-3);
+  font-weight: 600;
+}
+
+/* Apertura leggera per contenuti che compaiono dentro una .tiq-card (es.
+   dettagli espansi): un filo di movimento, non un effetto. */
+@keyframes tiq-card-open {
+  from {
+    opacity: 0;
+    transform: translateY(-2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tiq-card__apertura {
+  animation: tiq-card-open 250ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tiq-card,
+  .tiq-cta,
+  .tiq-card__apertura {
+    transition: none;
     animation: none;
   }
 }

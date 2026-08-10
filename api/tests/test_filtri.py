@@ -13,7 +13,14 @@ in isolamento, senza dover passare da `intent.py`/`respond.py`/`api.py`.
 
 from __future__ import annotations
 
-from treasureiq.chat.filtri import Filtro, FiltroChiave, riconosci_filtri
+from treasureiq.chat.filtri import (
+    Filtro,
+    FiltroChiave,
+    accumula_filtri,
+    dichiarazione_figli_senza_numero,
+    negazioni_esplicite,
+    riconosci_filtri,
+)
 
 
 def _di(filtri: list[Filtro], chiave: FiltroChiave) -> list[Filtro]:
@@ -210,6 +217,29 @@ def test_figli_minori_due_bambini_ciclo11_bug_b():
     assert _valori(riconosci_filtri("ho due bambini"), FiltroChiave.FIGLI_MINORI) == [2]
 
 
+def test_figli_minori_eta_multipla_con_e():
+    filtri = riconosci_filtri("ho due figli di 4 e 9 anni")
+    assert _valori(filtri, FiltroChiave.FIGLI_MINORI) == [2]
+    assert _valori(filtri, FiltroChiave.ETA) == []
+
+
+def test_figli_minori_eta_multipla_senza_conteggio():
+    assert _valori(riconosci_filtri("figli di 4 e 9 anni"), FiltroChiave.FIGLI_MINORI) == [1]
+
+
+def test_figli_minori_eta_multipla_tutti_maggiorenni():
+    assert _valori(riconosci_filtri("due figli di 20 e 25 anni"), FiltroChiave.FIGLI_MINORI) == []
+
+
+def test_figli_minori_eta_multipla_tre_eta_con_virgola():
+    filtri = riconosci_filtri("un figlio di 10, 14 e 16 anni")
+    assert _valori(filtri, FiltroChiave.FIGLI_MINORI) == [1]
+
+
+def test_figli_minori_eta_singola_regressione():
+    assert _valori(riconosci_filtri("figlio di 4 anni"), FiltroChiave.FIGLI_MINORI) == [1]
+
+
 # -- disabilita' propria vs figlio (R-8/D-53), degrado onesto --------------
 
 
@@ -299,3 +329,72 @@ def test_import_pulito():
 def test_testo_vuoto_non_produce_filtri_ne_eccezioni():
     assert riconosci_filtri("") == []
     assert riconosci_filtri(None) == []  # type: ignore[arg-type]
+
+
+# -- accumula_filtri: sopravvivenza multi-turno (ciclo 12/A1) ----------------
+
+
+def test_accumula_filtri_sopravvive_a_un_turno_neutro():
+    storia = ["ho 2 figli minorenni"]
+    message = "e per la mensa scolastica?"
+    accumulati = accumula_filtri(storia, message, frozenset())
+    assert FiltroChiave.FIGLI_MINORI in accumulati
+    assert accumulati[FiltroChiave.FIGLI_MINORI].valore == riconosci_filtri(storia[0])[0].valore
+
+
+def test_accumula_filtri_negazione_successiva_fa_cadere_il_filtro():
+    storia = ["sono disabile"]
+    message = "non sono disabile"
+    accumulati = accumula_filtri(storia, message, frozenset())
+    assert FiltroChiave.DISABILITA not in accumulati
+
+
+def test_accumula_filtri_filtri_esclusi_vince_sulla_storia():
+    storia = ["ho 2 figli minorenni"]
+    message = "quali bonus ci sono?"
+    accumulati = accumula_filtri(storia, message, frozenset({FiltroChiave.FIGLI_MINORI}))
+    assert FiltroChiave.FIGLI_MINORI not in accumulati
+
+
+def test_accumula_filtri_e_idempotente_e_ordine_stabile():
+    storia = ["ho 2 figli minorenni", "sono disabile", "e per la mensa?"]
+    message = "quali bandi ci sono?"
+    prima = accumula_filtri(storia, message, frozenset())
+    seconda = accumula_filtri(storia, message, frozenset())
+    assert {k: v.valore for k, v in prima.items()} == {k: v.valore for k, v in seconda.items()}
+    assert FiltroChiave.FIGLI_MINORI in prima
+    assert FiltroChiave.DISABILITA in prima
+
+
+def test_accumula_filtri_turno_successivo_sovrascrive_lo_stesso_filtro():
+    storia = ["ho 2 figli minorenni"]
+    message = "in realta' ho 3 figli minorenni"
+    accumulati = accumula_filtri(storia, message, frozenset())
+    assert accumulati[FiltroChiave.FIGLI_MINORI].valore == riconosci_filtri(message)[0].valore
+
+
+# -- negazioni_esplicite -----------------------------------------------------
+
+
+def test_negazioni_esplicite_rileva_disabilita_negata():
+    assert FiltroChiave.DISABILITA in negazioni_esplicite("non sono disabile")
+
+
+def test_negazioni_esplicite_muta_senza_evidenza_testuale():
+    assert negazioni_esplicite("quali bandi ci sono?") == set()
+    assert negazioni_esplicite("") == set()
+
+
+# -- dichiarazione_figli_senza_numero ----------------------------------------
+
+
+def test_dichiarazione_figli_senza_numero_vera_su_dichiarazione_incompleta():
+    assert dichiarazione_figli_senza_numero("ho dei figli") is True
+
+
+def test_dichiarazione_figli_senza_numero_falsa_se_gia_riconosciuto():
+    assert dichiarazione_figli_senza_numero("ho 2 figli minorenni") is False
+
+
+def test_dichiarazione_figli_senza_numero_falsa_su_negazione():
+    assert dichiarazione_figli_senza_numero("non ho figli") is False

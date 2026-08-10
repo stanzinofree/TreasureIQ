@@ -379,6 +379,11 @@ class ChatAnswer:
     #: (B5) li legge da qui, mai da `reply` (D-07). `None` quando il
     #: connettore non ha risposto o il ramo non e' scattato (A7).
     esito_connettore: connettore.EsitoConnettore | None = None
+    #: Ciclo12/B1: quale slot di follow-up questo turno chiede (`None` =
+    #: nessuno). Additivo: `reply` porta comunque la risposta di merito,
+    #: la domanda si accoda (D-04, mai bloccante). Stesso enum chiuso di
+    #: `ChatIn.chiarimento_atteso`/`ChatOut.chiarimento`.
+    chiarimento: str | None = None
 
 
 def _resolve_comune(*, hint: str | None) -> tuple[str | None, str | None]:
@@ -2458,10 +2463,10 @@ def _quale_comune(candidati, intent) -> ChatAnswer:
     elenco = ", ".join(f"{c.nome} ({c.provincia})" for c in mostrati)
     return ChatAnswer(
         reply=(
-            f"In Italia ci sono piu' comuni con questo nome: {elenco}. "
-            "Quale ti interessa? Tocca quello giusto qui sotto — preferisco "
-            "chiedertelo piuttosto che sceglierne uno a caso e darti "
-            "informazioni di un altro territorio."
+            f"Fammi capire, di quale parliamo? In Italia ci sono piu' comuni "
+            f"con questo nome: {elenco}. Tocca quello giusto qui sotto — "
+            "preferisco chiedertelo piuttosto che sceglierne uno a caso e "
+            "darti informazioni di un altro territorio."
         ),
         topic=intent.topic,
         kind=intent.kind,
@@ -2522,6 +2527,35 @@ def _prova_live(*, risposta: ChatAnswer, comune, message: str) -> ChatAnswer:
     )
 
 
+def _indice_deterministico(chiave: str | None, modulo: int) -> int:
+    """Indice stabile in [0, modulo) da una chiave testuale.
+
+    Mai `hash()` nativo: e' randomizzato per processo (`PYTHONHASHSEED`), quindi
+    la stessa chiave sceglierebbe una variante diversa ad ogni riavvio — e il
+    video della demo deve restare riproducibile a ogni chiamata (KAPI 12, A2).
+    """
+    if not chiave:
+        return 0
+    return sum(ord(carattere) for carattere in chiave) % modulo
+
+
+#: Varianti deterministiche della premessa fuori-copertura (KAPI 12, A2): stesso
+#: contenuto onesto — ho controllato, non c'e' uno standard letto, non posso
+#: essere certo — con parole diverse perche' non suoni da stampino ripetuto.
+#: Il marker `[[Comune di ...]]` resta identico in tutte, il frontend lo parsa.
+_VARIANTI_PREMESSA_FUORI_COPERTURA = (
+    "Ho controllato: per il [[Comune di {luogo}]] non c'e' ancora uno standard "
+    "ne' un connettore che ne abbia letto i dati, quindi non ho una scansione "
+    "verificata e non posso dirti con certezza cosa ti spetta.",
+    "Per il [[Comune di {luogo}]] ho verificato, ma non c'e' ancora uno standard "
+    "ne' un connettore che ne abbia letto i dati: niente scansione verificata, "
+    "quindi non posso darti una risposta certa su cosa ti spetta.",
+    "Sul [[Comune di {luogo}]] ho fatto un controllo, ma qui non c'e' ancora uno "
+    "standard ne' un connettore che ne legga i dati — nessuna scansione "
+    "verificata, quindi non posso dirti con certezza cosa ti spetta.",
+)
+
+
 def _premessa_fuori_copertura(
     nominato,
     risposta: ChatAnswer | None = None,
@@ -2539,13 +2573,19 @@ def _premessa_fuori_copertura(
     esplicitamente: non e' una scansione verificata, ma la via per averla
     esiste e ha un nome. Nominiamo il *modello*, mai il prodotto del fornitore
     — attribuire una piattaforma per inferenza sarebbe un'accusa, non un dato.
+
+    Il testo di apertura varia in 3 modi deterministici (indice dal codice
+    ISTAT) — stesso contenuto onesto, meno stampino: dice sempre che ha
+    controllato, ammette di non poter essere certo per QUESTO comune, e non
+    inventa mai una copertura che non c'e' (D-05).
     """
     provincia = f" ({nominato.provincia})" if getattr(nominato, "provincia", None) else ""
-    base = (
-        f"Per il [[Comune di {nominato.nome}{provincia}]] non c'e' ancora uno standard "
-        "ne' un connettore che ne abbia letto i dati, quindi non ho una scansione "
-        "verificata e non posso dirti con certezza cosa ti spetta."
+    luogo = f"{nominato.nome}{provincia}"
+    indice = _indice_deterministico(
+        getattr(nominato, "codice_istat", None) or nominato.nome,
+        len(_VARIANTI_PREMESSA_FUORI_COPERTURA),
     )
+    base = _VARIANTI_PREMESSA_FUORI_COPERTURA[indice].format(luogo=luogo)
     # Se il comune e' raggiungibile dal connettore, dichiariamo la via — senza
     # promettere un bottone che non c'e': e' una capacita', non un'azione da
     # cliccare. Il tono resta cautelativo: la scansione web l'ho gia' fatta e
@@ -3208,6 +3248,30 @@ async def _risposta_bandi(
     )
 
 
+#: Varianti deterministiche della domanda «tutte o una categoria?» (KAPI 12,
+#: A2): nessuna informazione nuova, solo parole diverse cosi' non ripete la
+#: frase identica ad ogni turno di chiarimento categoria.
+_VARIANTI_RICHIESTA_CATEGORIA = (
+    "Cerco tra tutte le agevolazioni del Comune, o preferisci restringere a "
+    "una categoria — utenze, mezzi o assegni?",
+    "Posso guardare tutte le agevolazioni del Comune, oppure restringo a una "
+    "categoria — utenze, mezzi o assegni: tu che dici?",
+)
+
+#: Varianti deterministiche del vicolo cieco su topic non riconosciuto (KAPI
+#: 12, A2): stesso contenuto (nessun servizio collegato, riformula o passa
+#: dall'URP), parole diverse. `{comune}` e' il nome del comune di riferimento,
+#: mai un dato inventato — resta "riferimento" quando non c'e' un comune scelto.
+_VARIANTI_TOPIC_SCONOSCIUTO = (
+    "Non sono riuscito a collegare la tua richiesta a un servizio del Comune "
+    "di {comune}. Puoi provare a riformularla, oppure rivolgerti direttamente "
+    "all'URP del Comune per essere indirizzato all'ufficio competente.",
+    "Non sono riuscito a collegare questa richiesta a un servizio del Comune "
+    "di {comune}. Ti conviene riformularla, oppure puoi rivolgerti "
+    "direttamente all'URP del Comune: sapranno indirizzarti all'ufficio giusto.",
+)
+
+
 async def _componi_risposta(
     *,
     message: str,
@@ -3326,11 +3390,9 @@ async def _componi_risposta(
         if intent.kind is QuestionKind.AGEVOLAZIONE and _slot_anagrafici_dichiarati(
             profilo_per_soglia
         ) >= 2:
+            indice_categoria = _indice_deterministico(message, len(_VARIANTI_RICHIESTA_CATEGORIA))
             return ChatAnswer(
-                reply=(
-                    "Cerco tra tutte le agevolazioni del Comune, o preferisci "
-                    "restringere a una categoria — utenze, mezzi o assegni?"
-                ),
+                reply=_VARIANTI_RICHIESTA_CATEGORIA[indice_categoria],
                 topic=intent.topic,
                 kind=intent.kind,
                 data_gap=None,
@@ -3339,12 +3401,13 @@ async def _componi_risposta(
                 spid_required=False,
                 spid_reason=None,
             )
+        nome_riferimento = scelto.nome if scelto is not None else "riferimento"
+        indice_sconosciuto = _indice_deterministico(
+            nome_riferimento, len(_VARIANTI_TOPIC_SCONOSCIUTO)
+        )
         return ChatAnswer(
-            reply=(
-                "Non sono riuscito a collegare la tua richiesta a un servizio del "
-                f"Comune di {scelto.nome if scelto is not None else 'riferimento'}. "
-                "Puoi provare a riformularla, oppure rivolgerti direttamente "
-                "all'URP del Comune per essere indirizzato all'ufficio competente."
+            reply=_VARIANTI_TOPIC_SCONOSCIUTO[indice_sconosciuto].format(
+                comune=nome_riferimento
             ),
             topic=intent.topic,
             kind=intent.kind,
@@ -3653,6 +3716,137 @@ async def _forse_aggiungi_bandi_live(
     return risposta
 
 
+#: Varianti deterministiche del follow-up "quanti figli?" (ciclo 12, B1):
+#: stessa domanda, parole diverse — mai `random`, la demo resta riproducibile.
+_DOMANDA_FIGLI_QUANTI = (
+    "A proposito: quanti figli hai, e quanti anni hanno?",
+    "Per essere precisi sul resto: quanti figli hai e quanti anni hanno?",
+)
+
+#: Varianti deterministiche del follow-up "e' minorenne?" (ciclo 12, B1) —
+#: chiesto SOLO quando la disabilita' e' stata dichiarata (D-03).
+_DOMANDA_DISABILE_MINORENNE = (
+    "Una cosa in piu': la persona con disabilita' e' minorenne?",
+    "Per capire bene: la persona con disabilita' e' minorenne?",
+)
+
+#: Varianti deterministiche del follow-up "chi c'e' in famiglia?" (ciclo 12,
+#: gap-closure): fallback di ultima priorita', quando "famiglia"/"nucleo" e'
+#: nominata ma nessuno slot concreto e' arrivato. Vincolo duro del
+#: committente: la disabilita' non si nomina qui, mai — solo figli/eta'.
+_DOMANDA_COMPOSIZIONE_FAMIGLIA = (
+    "Raccontami chi c'e' nella tua famiglia: hai figli, e se si' di che eta'?",
+    "Dimmi qualcosa in piu' sulla tua famiglia: hai figli, e quanti anni hanno?",
+)
+
+#: "Famiglia"/"nucleo" nominati in modo generico (nessun numero agganciato).
+#: "Famiglia di 4"/"nucleo di 4"/"siamo in 4" sono gia' un NUCLEO_FAMILIARE
+#: concreto — quel ramo lo riconosce `riconosci_filtri` (`filtri.py`), qui si
+#: esclude esplicitamente per non doppio-leggere lo stesso dato (D-03).
+_FAMIGLIA_GENERICA_RE = re.compile(r"\bnucleo\s+familiare\b|\bfamiglia\b|\bnucleo\b", re.IGNORECASE)
+
+
+def menziona_famiglia_generica(message: str) -> bool:
+    """Vero se `message` nomina "famiglia"/"nucleo" senza un numero concreto.
+
+    Non e' un nuovo riconoscitore di filtri (D-03): non produce nessun
+    `Filtro`, nessun valore — serve solo a decidere se vale la pena chiedere.
+    Riusa `riconosci_filtri` (`treasureiq.chat.filtri`) per escludere il caso
+    in cui il testo e' gia' concreto ("famiglia di 4"), invece di reinventare
+    il pattern qui.
+
+    AM-1 (hard): legge solo l'argomento passato. Il chiamante (`_forse_chiedi_
+    chiarimento`) ci passa sempre `message`, mai `storia`.
+    """
+    if not message:
+        return False
+    if _FAMIGLIA_GENERICA_RE.search(message) is None:
+        return False
+    from treasureiq.chat.filtri import FiltroChiave, riconosci_filtri  # import locale: circolare
+
+    return not any(f.chiave == FiltroChiave.NUCLEO_FAMILIARE for f in riconosci_filtri(message))
+
+
+def _forse_chiedi_chiarimento(
+    risposta: ChatAnswer,
+    *,
+    storia: list[str] | None,
+    message: str,
+    filtri_accumulati: dict | None,
+) -> ChatAnswer:
+    """Accoda al massimo UNA domanda di follow-up al turno (ciclo 12, B1).
+
+    Additiva, mai bloccante (D-04): la risposta di merito in `risposta.reply`
+    resta intera, la domanda si accoda in coda. `needs_clarification` non
+    viene toccato — il chiarimento viaggia nel campo dedicato.
+
+    AM-1 (hard): il trigger legge SOLO `message`, mai `storia`. Chi ha detto
+    "ho figli" un turno fa e non ha mai risposto non viene rincorso ai turni
+    successivi — un solo tentativo, nel turno in cui la dichiarazione arriva.
+    `storia` resta nella firma solo per simmetria con gli altri hook di
+    `build_chat_answer` (non e' letta per decidere se chiedere).
+    """
+    del storia  # AM-1: deliberatamente non usato nel trigger.
+    from treasureiq.chat.filtri import (  # import locale: filtri.py importa respond.py
+        FiltroChiave,
+        dichiarazione_figli_senza_numero,
+        riconosci_filtri,
+    )
+
+    accumulati = filtri_accumulati or {}
+
+    if dichiarazione_figli_senza_numero(message) and FiltroChiave.FIGLI_MINORI not in accumulati:
+        domanda = _DOMANDA_FIGLI_QUANTI[_indice_deterministico(message, len(_DOMANDA_FIGLI_QUANTI))]
+        return replace(
+            risposta,
+            reply=f"{risposta.reply}\n\n{domanda}",
+            chiarimento="figli_quanti",
+        )
+
+    # D-03: mai proattivo. La disabilita' deve essere dichiarata nel turno
+    # corrente (stessa lettura deterministica di `riconosci_filtri`, nessuna
+    # inferenza nuova) — non basta che sia nota da un turno precedente.
+    disabilita_dichiarata_ora = any(
+        f.chiave in (FiltroChiave.DISABILITA, FiltroChiave.DISABILITA_NUCLEO)
+        for f in riconosci_filtri(message)
+    )
+    if disabilita_dichiarata_ora and FiltroChiave.DISABILITA_NUCLEO not in accumulati:
+        domanda = _DOMANDA_DISABILE_MINORENNE[
+            _indice_deterministico(message, len(_DOMANDA_DISABILE_MINORENNE))
+        ]
+        return replace(
+            risposta,
+            reply=f"{risposta.reply}\n\n{domanda}",
+            chiarimento="disabile_minorenne",
+        )
+
+    # Ultima priorita' (gap-closure): "famiglia"/"nucleo" nominata in modo
+    # generico, senza NESSUNO slot concreto sulla famiglia gia' noto. Chi ha
+    # gia' detto "ho figli" o "famiglia di 4" e' finito in uno dei due rami
+    # sopra e non arriva qui — questo e' il fallback per chi non ha detto
+    # nulla di concreto. Vincolo duro: mai nominare la disabilita'.
+    slot_famiglia_concreto = any(
+        chiave in accumulati
+        for chiave in (
+            FiltroChiave.FIGLI_MINORI,
+            FiltroChiave.NUCLEO_FAMILIARE,
+            FiltroChiave.DISABILITA,
+            FiltroChiave.DISABILITA_NUCLEO,
+        )
+    )
+    if not slot_famiglia_concreto and menziona_famiglia_generica(message):
+        domanda = _DOMANDA_COMPOSIZIONE_FAMIGLIA[
+            _indice_deterministico(message, len(_DOMANDA_COMPOSIZIONE_FAMIGLIA))
+        ]
+        return replace(
+            risposta,
+            reply=f"{risposta.reply}\n\n{domanda}",
+            chiarimento="composizione_famiglia",
+        )
+
+    return risposta
+
+
 async def build_chat_answer(
     *,
     message: str,
@@ -3663,6 +3857,7 @@ async def build_chat_answer(
     comune_coperto: bool = True,
     today: date | None = None,
     filtri_esclusi: frozenset | None = None,
+    filtri_accumulati: dict | None = None,
 ) -> ChatAnswer:
     """Compone la risposta, e se il comune non e' coperto lo dice **in testa**.
 
@@ -3781,8 +3976,12 @@ async def build_chat_answer(
         )
         # KAPI 11 (gap-closure): scansione bandi additiva su sinonimo civico,
         # additiva alla risposta agevolazione fuori-copertura (D-01, no reroute).
-        return await _forse_aggiungi_bandi_live(
+        risposta = await _forse_aggiungi_bandi_live(
             risposta, codice_istat=nominato.codice_istat, message=message
+        )
+        # KAPI 12 (B1): follow-up slot additivo, sempre l'ultimo aggancio.
+        return _forse_chiedi_chiarimento(
+            risposta, storia=storia, message=message, filtri_accumulati=filtri_accumulati
         )
     risposta = await _componi_risposta(
         message=message,
@@ -3823,8 +4022,12 @@ async def build_chat_answer(
                 scan=_scan_stato_per_comune(comune.codice_istat),
             )
             # KAPI 11 (gap-closure): stesso attacco additivo del ramo (B).
-            return await _forse_aggiungi_bandi_live(
+            risposta = await _forse_aggiungi_bandi_live(
                 risposta, codice_istat=comune.codice_istat, message=message
+            )
+            # KAPI 12 (B1): follow-up slot additivo, sempre l'ultimo aggancio.
+            return _forse_chiedi_chiarimento(
+                risposta, storia=storia, message=message, filtri_accumulati=filtri_accumulati
             )
     risposta = replace(
         risposta,
@@ -3836,10 +4039,14 @@ async def build_chat_answer(
         scan=_scan_stato_per_comune(comune.codice_istat if comune is not None else None),
     )
     # KAPI 11 (gap-closure): comune coperto "normale" — stesso attacco additivo.
-    return await _forse_aggiungi_bandi_live(
+    risposta = await _forse_aggiungi_bandi_live(
         risposta,
         codice_istat=comune.codice_istat if comune is not None else None,
         message=message,
+    )
+    # KAPI 12 (B1): follow-up slot additivo, sempre l'ultimo aggancio.
+    return _forse_chiedi_chiarimento(
+        risposta, storia=storia, message=message, filtri_accumulati=filtri_accumulati
     )
 
 

@@ -62,6 +62,7 @@ import {
   type BandoArricchito,
   type CategoriaServizio,
   type ChatCost,
+  type Chiarimento,
   type ChatOut,
   type ChatTurn,
   type ComuneAmbiguo,
@@ -1225,6 +1226,25 @@ export default function Chat() {
   const [overrideScambio, setOverrideScambio] = useState<
     Record<string, FiltroOverride[]>
   >({});
+  // Ciclo12/A3 — override di SESSIONE: unione (per chiave) di tutti gli
+  // override richiesti da inizio sessione, a differenza di `overrideScambio`
+  // che e' per-messaggio e serve solo al ricalcolo in place di quello
+  // scambio. Ora che il backend accumula i filtri dalla history (A1), un
+  // filtro tolto con la «×» risorgerebbe al turno dopo se `send()` non lo
+  // rimandasse sempre: questo stato e' quello che rende la rimozione
+  // definitiva per la sessione (fino a dichiarazione esplicita contraria,
+  // gestita lato server). Nessuna persistenza oltre il reload (localStorage
+  // e' DEFERRED).
+  const [overrideSessione, setOverrideSessione] = useState<FiltroOverride[]>(
+    [],
+  );
+  // Ciclo12/A3 — slot di chiarimento pendente (B1): l'ultimo `chiarimento`
+  // ricevuto dal server, da rimandare come `chiarimento_atteso` sul
+  // PROSSIMO turno soltanto. Si azzera subito dopo l'invio: uno slot vale
+  // un turno, non bloccante (D-04) — se il cittadino ignora la domanda e
+  // chiede altro, il turno procede normale e lo slot decade.
+  const [chiarimentoPendente, setChiarimentoPendente] =
+    useState<Chiarimento | null>(null);
   const logRef = useRef<HTMLDivElement>(null);
 
   // Keep the newest exchange in view as the transcript grows, the way a
@@ -1278,7 +1298,12 @@ export default function Chat() {
         trimmed,
         history,
         comuneIstatScelto ?? profilo.comune?.istat ?? null,
+        overrideSessione.length > 0 ? overrideSessione : null,
+        chiarimentoPendente,
       );
+      // Lo slot appena rimandato vale solo per questo turno (D-04): si
+      // azzera qui e si ripopola solo se la risposta ne apre uno nuovo.
+      setChiarimentoPendente(out.chiarimento ?? null);
       const id = newId();
       setMessages((prev) => [
         ...prev,
@@ -1418,6 +1443,13 @@ export default function Chat() {
       ...(overrideScambio[messageId] ?? []).filter((o) => o.chiave !== chiave),
       { chiave, azione: "rimuovi" as const },
     ];
+    // Ciclo12/A3 — la stessa rimozione vale anche per la sessione: unione
+    // per chiave con quanto gia' tolto in scambi precedenti, cosi' il
+    // ricalcolo di QUESTO scambio non fa risorgere un filtro tolto altrove.
+    const sessioneAttiva = [
+      ...overrideSessione.filter((o) => o.chiave !== chiave),
+      { chiave, azione: "rimuovi" as const },
+    ];
     // Storia = lo scambio precedente a quella domanda, la stessa che `send`
     // avrebbe costruito la prima volta — mai le risposte proprie rimandate
     // indietro (vedi nota sopra in `send`).
@@ -1431,9 +1463,10 @@ export default function Chat() {
         domanda.content,
         history,
         profilo.comune?.istat ?? null,
-        attivi,
+        sessioneAttiva,
       );
       setOverrideScambio((prev) => ({ ...prev, [messageId]: attivi }));
+      setOverrideSessione(sessioneAttiva);
       setMessages((prev) =>
         prev.map((m) =>
           m.id === messageId ? { ...m, content: out.reply, reply: out } : m,

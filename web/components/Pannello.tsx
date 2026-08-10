@@ -12,8 +12,10 @@
  * "0 risultati" panel would be furniture; an absent one is a fact.
  */
 
+import { useEffect, useState } from "react";
 import ProfiloNoto from "@/components/ProfiloNoto";
 import ScanLive from "@/components/ScanLive";
+import { fetchRegistroComune, type RegistroComune } from "@/lib/api";
 import { useProfilo, type NumeriUtiliProfilo } from "@/lib/profilo";
 import { useRisultati } from "@/lib/risultati";
 
@@ -78,6 +80,69 @@ function NumeriUtiliBanner({ numeri }: { numeri: NumeriUtiliProfilo }) {
   );
 }
 
+/** Card comune curata dal registro locale (CONTRATTO-O2): logo o, in sua
+ * assenza, un monogramma civico neutro (mai uno stemma finto, D-02) + nome
+ * + una nota minimale su cosa è cambiato dall'ultima scansione. Il logo
+ * arriva già come base64 dal registro — nessuna fetch verso il portale del
+ * comune parte da qui (D-01/D-11), solo la lettura dell'endpoint locale.
+ * 404/registro assente degrada onestamente a glifo+nome dal profilo, mai a
+ * un guscio rotto. */
+function CardComuneRegistro({ istat, nome }: { istat: string; nome: string }) {
+  const [registro, setRegistro] = useState<RegistroComune | null>(null);
+
+  // Stessa guardia anti-stale delle altre fetch client-side del pannello
+  // (v. `MappaServizi` in Chat.tsx): un cambio di comune azzera subito la
+  // card e scarta la risposta della fetch precedente se arriva in ritardo.
+  useEffect(() => {
+    let vivo = true;
+    setRegistro(null);
+    fetchRegistroComune(istat)
+      .then((r) => {
+        if (vivo) setRegistro(r);
+      })
+      .catch(() => {
+        if (vivo) setRegistro(null);
+      });
+    return () => {
+      vivo = false;
+    };
+  }, [istat]);
+
+  const nomeMostrato = registro?.nome ?? nome;
+
+  return (
+    <section className="card-comune tiq-card" aria-label={`Comune di ${nomeMostrato}`}>
+      <div className="card-comune__testata">
+        {registro?.logo_b64 ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={registro.logo_b64}
+            alt={`Logo del Comune di ${nomeMostrato}`}
+            className="card-comune__logo"
+          />
+        ) : (
+          <span className="card-comune__glifo" aria-hidden>
+            {nomeMostrato.trim().charAt(0).toUpperCase()}
+          </span>
+        )}
+        <p className="card-comune__nome">Comune di {nomeMostrato}</p>
+      </div>
+      {registro &&
+        (registro.prima_scansione ? (
+          <p className="card-comune__nota">
+            Prima scansione, niente da confrontare.
+          </p>
+        ) : (
+          registro.cambiato && (
+            <p className="card-comune__nota card-comune__nota--cambiato">
+              Cambiato dall&apos;ultima scansione: {registro.cambiato.campi.join(", ")}.
+            </p>
+          )
+        ))}
+    </section>
+  );
+}
+
 export default function Pannello() {
   const {
     trovate,
@@ -124,6 +189,13 @@ export default function Pannello() {
           stato mostrato in chat. Sta sotto la scheda perché lì si parla del
           comune. Non renderizza nulla se nessuno scan è in corso. */}
       <ScanLive variante="pannello" />
+
+      {profilo.comune?.istat && (
+        <CardComuneRegistro
+          istat={profilo.comune.istat}
+          nome={profilo.comune.nome}
+        />
+      )}
 
       {numeri && <NumeriUtiliBanner numeri={numeri} />}
 

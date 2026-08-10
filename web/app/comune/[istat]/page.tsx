@@ -11,7 +11,12 @@
  * comune (RISK aderenza-scambiata-per-giudizio in spec.md).
  */
 
-import { fetchSchedaComune, type SchedaComune } from "@/lib/api";
+import {
+  fetchRegistroComune,
+  fetchSchedaComune,
+  type RegistroComune,
+  type SchedaComune,
+} from "@/lib/api";
 import { linkAperturaDati, mailtoSicuro, LINK_ESTERNO } from "@/lib/moduli";
 
 export const dynamic = "force-dynamic";
@@ -146,6 +151,13 @@ export default async function SchedaComunePage({
     scheda = null;
   }
 
+  let registro: RegistroComune | null = null;
+  try {
+    registro = await fetchRegistroComune(istat);
+  } catch {
+    registro = null;
+  }
+
   if (!scheda) {
     return (
       <div className="panel">
@@ -162,19 +174,29 @@ export default async function SchedaComunePage({
   return (
     <div className="stack scheda-comune">
       <section className="scheda-comune__testata">
-        {scheda.logo_url ? (
+        {registro?.logo_b64 ? (
+          // Logo curato dal registro (CONTRATTO-O2, D-11): arriva già come
+          // base64 dalla scansione, nessuna fetch da qui verso il portale.
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={registro.logo_b64}
+            alt={`Logo del Comune di ${scheda.nome}`}
+            className="scheda-comune__logo"
+          />
+        ) : scheda.logo_url ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={scheda.logo_url}
-            alt=""
+            alt={`Logo del Comune di ${scheda.nome}`}
             className="scheda-comune__logo"
             loading="lazy"
             decoding="async"
           />
         ) : (
-          // Nessun logo letto dal portale (comune solo-HTML, o stemma non
-          // esposto). Invece del vuoto, un monogramma: la testata ha sempre un
-          // segno grafico, e non fingiamo uno stemma che non abbiamo.
+          // Nessun logo né dal registro né dal portale (comune solo-HTML, o
+          // stemma non esposto). Invece del vuoto, un monogramma civico
+          // neutro: la testata ha sempre un segno grafico, mai uno stemma
+          // finto (D-02).
           <span className="scheda-comune__logo scheda-comune__logo--mono" aria-hidden>
             {scheda.nome.trim().charAt(0).toUpperCase()}
           </span>
@@ -200,6 +222,18 @@ export default async function SchedaComunePage({
           <p className="field__hint">
             Ultimo scan: {dataLeggibile(scheda.scansionato_il)}
           </p>
+          {registro &&
+            (registro.prima_scansione ? (
+              <p className="card-comune__nota">
+                Prima scansione, niente da confrontare.
+              </p>
+            ) : (
+              registro.cambiato && (
+                <p className="card-comune__nota card-comune__nota--cambiato">
+                  Cambiato dall&apos;ultima scansione: {registro.cambiato.campi.join(", ")}.
+                </p>
+              )
+            ))}
         </div>
       </section>
 

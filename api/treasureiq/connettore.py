@@ -171,4 +171,10 @@ def leggi_connettore(
         return None
     if not _esito_vuoto(esito):
         _in_store(esito)
+        try:
+            from treasureiq.registro import registra_scansione
+
+            registra_scansione(comune, esito)
+        except Exception:  # noqa: BLE001 — il registro non deve mai bloccare il connettore
+            logger.warning("registro non aggiornato per %s", codice_istat)
     return esito

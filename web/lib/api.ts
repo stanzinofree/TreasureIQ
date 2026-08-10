@@ -889,6 +889,47 @@ export interface SchedaComune {
 export const fetchSchedaComune = (codiceIstat: string) =>
   call<SchedaComune | null>(`/api/comune/${codiceIstat}`);
 
+/** Mirror esatto di `RegistroComune` (CONTRATTO-O2, congelato in `plan.md`,
+ *  `api/treasureiq/registro.py`). `logo_b64` arriva già come data-uri: il
+ *  logo è stato catturato una volta, alla scansione (D-11) — la UI non fa
+ *  MAI una fetch verso il dominio del comune per ottenerlo (D-01). */
+export interface RegistroComune {
+  codice_istat: string;
+  nome: string;
+  logo_b64: string | null;
+  dominio: string;
+  piattaforma: string;
+  endpoints: {
+    amministrazione: string | null;
+    servizi: string | null;
+    mappa: string | null;
+    at: string | null;
+  };
+  /** ISO, mai un `now()` ricalcolato lato client (stile D-10 ciclo 10). */
+  ultima_scansione: string;
+  servizi_snapshot: { nome: string; url: string }[];
+  prima_scansione: boolean;
+  /** `null` = nessun cambiamento rilevato, oppure `prima_scansione: true`
+   *  (in quel caso non c'è una scansione precedente con cui confrontare). */
+  cambiato: { campi: string[] } | null;
+}
+
+/** Il registro di un comune, letto SOLO dal disco lato backend (D-01/D-11):
+ *  nessuna rete verso il portale del comune parte da qui. `404` = comune mai
+ *  scansionato — la card lato UI degrada onestamente a glifo+nome dal
+ *  profilo, non a un errore. */
+export const fetchRegistroComune = async (
+  codiceIstat: string,
+): Promise<RegistroComune | null> => {
+  const res = await fetch(`${API}/api/registro/${codiceIstat}`, {
+    credentials: "include",
+    cache: "no-store",
+  });
+  if (res.status === 404) return null;
+  if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+  return (await res.json()) as RegistroComune;
+};
+
 /** Stato dello scan di un comune, per il rail chat (B6). `stato` distingue
  *  un record fresco da uno che si sta aggiornando in questo momento — la UI
  *  non li rende uguali. */

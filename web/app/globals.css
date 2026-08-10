@@ -3030,6 +3030,65 @@ a {
   color: var(--sumi-soft);
 }
 
+/* -------------------------------------------- card comune (registro, ciclo 14) */
+
+/* Card comune curata dal registro locale (CONTRATTO-O2, B3): logo o
+   monogramma civico + nome + nota di scansione. Vive nel pannello a
+   sinistra, accanto ai numeri utili, e in testa alla scheda comune. D-09:
+   `.tiq-card` (primitiva) non porta padding proprio (v. `.fatti.tiq-card`
+   sopra) — la regola combinata qui sotto (0,2,0) assorbe il layout invece
+   di un bolt-on in coda al file. */
+.card-comune {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ma-3);
+  margin: var(--ma-4) 0 0;
+}
+.card-comune.tiq-card {
+  padding: var(--ma-4);
+}
+.card-comune__testata {
+  display: flex;
+  align-items: center;
+  gap: var(--ma-3);
+}
+.card-comune__logo {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+}
+/* Monogramma civico neutro: mai uno stemma finto (D-02) — solo l'iniziale
+   del nome del comune, su una superficie neutra. */
+.card-comune__glifo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--paper-sunken);
+  color: var(--sumi-soft);
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  font-weight: 600;
+}
+.card-comune__nome {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.card-comune__nota {
+  margin: 0;
+  font-size: var(--fs-micro);
+  color: var(--sumi-soft);
+}
+.card-comune__nota--cambiato {
+  color: var(--yamabuki-deep);
+}
+
 /* Scheda «letto ora» (B5, ciclo 10): connettore letto dal vivo, stesso
    registro delle altre card lette al volo — barra sinistra ambra
    (`--yamabuki`), mai un verdetto. Recapiti onesti: un campo assente rende

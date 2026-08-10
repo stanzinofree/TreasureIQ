@@ -14,9 +14,11 @@ import pytest
 import treasureiq.connettore as connettore_mod
 from treasureiq.connettore import (
     AmministrazioneTrasparente,
+    AreaAmministrativa,
     EsitoConnettore,
     UfficioConnettore,
     _da_store,
+    _esito_vuoto,
     _in_store,
     leggi_connettore,
 )
@@ -122,6 +124,21 @@ def test_esito_vuoto_non_persistito_dal_dispatcher(monkeypatch: pytest.MonkeyPat
     assert esito.amministrazione_trasparente is None
     assert _da_store(ISTAT) is None
     assert not (tmp_path / "connettore" / f"{ISTAT}.json").exists()
+
+
+def test_esito_con_sole_aree_non_e_vuoto() -> None:
+    """Regressione: eGov produce `uffici=[]` e riempie solo
+    `aree_amministrative`; un esito così NON è vuoto e va cachato, altrimenti
+    verrebbe ri-scrapato live a ogni query."""
+    esito = EsitoConnettore(
+        codice_istat=ISTAT,
+        piattaforma=Piattaforma.EGOV.value,
+        letto_il=datetime.now(timezone.utc).isoformat(),
+        aree_amministrative=[AreaAmministrativa(nome="Istruzione", url="https://x/EGSCHTST45.HBL?ARG=1")],
+    )
+    assert esito.uffici == []
+    assert esito.amministrazione_trasparente is None
+    assert not _esito_vuoto(esito)
 
 
 # --- Dispatcher (deferred piattaforme, degrado muto) -------------------

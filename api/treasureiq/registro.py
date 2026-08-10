@@ -40,6 +40,11 @@ logger = logging.getLogger(__name__)
 #: controllo di `len()` a valle di un download intero (il DoS resterebbe).
 MAX_LOGO_BYTES = 200_000
 
+#: Cap sulla home page letta per estrarre l'url del logo (D-11). Anche il
+#: primo hop va in streaming-con-abort come il secondo: una home enorme non
+#: deve entrare in RAM intera a ogni scansione riuscita.
+MAX_HOME_BYTES = 1_000_000
+
 #: Quante scansioni tenere in storia: basta l'ultima coppia per il diff
 #: (R-04), un margine oltre serve solo a non far crescere il file all'infinito.
 MAX_STORIA = 10
@@ -234,13 +239,26 @@ def _logo_one_shot(comune: ComuneNoto) -> tuple[str | None, str | None]:
     host_comune = _host_senza_www(urlparse(base).netloc.lower())
     try:
         with httpx.Client(timeout=6.0, headers={"User-Agent": USER_AGENT}, follow_redirects=True) as client:
-            risposta = client.get(base)
+            with client.stream("GET", base) as risposta:
+                # host-check DOPO i redirect (SSRF): un redirect fuori dal
+                # dominio del comune non deve essere seguito nel corpo.
+                if risposta.status_code != 200 or _host_senza_www(
+                    urlparse(str(risposta.url)).netloc.lower()
+                ) != host_comune:
+                    return None, None
+                buffer = bytearray()
+                for chunk in risposta.iter_bytes():
+                    buffer.extend(chunk)
+                    if len(buffer) > MAX_HOME_BYTES:
+                        # home spropositata: abort in streaming, mai in RAM intera
+                        logger.info("home page oltre cap per logo: %s", comune.nome)
+                        return None, None
+                finale = str(risposta.url)
     except Exception:  # noqa: BLE001 — home page muta: niente logo, non un crash
         logger.info("home page irraggiungibile per logo: %s", comune.nome)
         return None, None
-    if risposta.status_code != 200 or _host_senza_www(urlparse(str(risposta.url)).netloc.lower()) != host_comune:
-        return None, None
-    logo_url = _estrai_logo_url(risposta.text, str(risposta.url))
+    testo = buffer.decode("utf-8", errors="replace")
+    logo_url = _estrai_logo_url(testo, finale)
     if logo_url is None:
         return None, None
     return _scarica_logo(logo_url, host_comune)

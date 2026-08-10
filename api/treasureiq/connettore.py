@@ -90,10 +90,17 @@ class EsitoConnettore(BaseModel):
 
 
 def _esito_vuoto(esito: EsitoConnettore) -> bool:
-    """Vero se l'esito non porta nulla di utile: né uffici né AT (L-5) —
-    questo NON si persiste mai, per non fissare un negativo che una
-    prossima scansione potrebbe smentire."""
-    return not esito.uffici and esito.amministrazione_trasparente is None
+    """Vero se l'esito non porta nulla di utile: né uffici, né aree
+    amministrative, né AT (L-5) — questo NON si persiste mai, per non
+    fissare un negativo che una prossima scansione potrebbe smentire.
+    Le aree contano: eGov produce `uffici=[]` per design e riempie solo
+    `aree_amministrative`; senza questo un comune eGov sarebbe ri-scrapato
+    live a ogni query invece che cachato/registrato."""
+    return (
+        not esito.uffici
+        and not esito.aree_amministrative
+        and esito.amministrazione_trasparente is None
+    )
 
 
 def _percorso_store(codice_istat: str) -> Path:

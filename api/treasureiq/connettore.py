@@ -155,14 +155,22 @@ def leggi_connettore(
         with _Sonda(timeout=timeout) as sonda:
             risposta = sonda.risposta(base)
             firma = firma_da_risposta(headers=dict(risposta.headers), html=risposta.text)
-            if firma.piattaforma != Piattaforma.MUNICIPIUM:
+            if firma.piattaforma == Piattaforma.MUNICIPIUM:
+                try:
+                    from treasureiq.municipium import leggi_municipium
+                except ImportError:  # noqa: BLE001 — B2 non ancora costruito: deferred, non un crash
+                    logger.info("connettore Municipium non ancora disponibile")
+                    return None
+                esito = leggi_municipium(comune, sonda)
+            elif firma.piattaforma == Piattaforma.EGOV:
+                try:
+                    from treasureiq.egov import leggi_egov
+                except ImportError:  # noqa: BLE001 — B4b non ancora costruito: deferred, non un crash
+                    logger.info("connettore eGov non ancora disponibile")
+                    return None
+                esito = leggi_egov(comune, sonda)
+            else:
                 return None
-            try:
-                from treasureiq.municipium import leggi_municipium
-            except ImportError:  # noqa: BLE001 — B2 non ancora costruito: deferred, non un crash
-                logger.info("connettore Municipium non ancora disponibile")
-                return None
-            esito = leggi_municipium(comune, sonda)
     except Exception:  # noqa: BLE001 — portale muto: esito assente, mai un crash
         logger.warning("connettore illeggibile per %s", codice_istat)
         return None

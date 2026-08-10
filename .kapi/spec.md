@@ -1,59 +1,78 @@
-# SPEC — grafica-schede (ciclo 13)
+# SPEC — registro-comuni-schede (ciclo 14)
 
-```
-TASK: grafica-schede
-ONE-LINE: Restyle visivo completo delle schede in chat — un sistema card condiviso (token + primitive) che dà gerarchia e appeal senza toccare contenuto/dati né tradire le convenzioni oneste. Video-ready.
-```
+## TASK
+`registro-comuni-schede` — registro locale dei comuni (logo + metadata + snapshot servizi + change-detection, zero-leak) che alimenta una card comune curata, + un giro di polish sulle schede chat. Prima del video (~14 ago).
 
-## PROBLEM (reale, non dichiarato)
-Le schede sono il volto di TIQ nel video: è ciò che si vede di più nel demo. Il contenuto è ottimo (gerarchia informativa giusta, niente campi vuoti, provenienza esplicita), ma **visivamente piatte e indifferenziate**: tutto stesso peso (gap `--ma-3` uniforme, font ~0.92rem ovunque), bordi `1px solid` quasi invisibili, il segnale-verdetto è il chip più piccolo, la firma dello stile (accento sinistro, teal) è assente. Non è brutto: è senza punto d'ingresso per l'occhio. A 5 giorni dal video serve dare peso e appeal, restando nello stile «civico giapponese».
+## GOAL
+Dare alla card comune un'identità curata (logo/glifo + nome + numeri utili) senza fetch esterno a runtime, costruendo un registro comuni locale che salva logo, metadata e snapshot servizi e rileva quando un comune cambia tra due scansioni. In parallelo ripulire il rumore delle schede chat (spaziatura, debug, bandi, web results, feedback).
 
 ## SCOPE (in)
-- **Sistema card condiviso**: nuovi token di *struttura* card (accento, elevazione, banda-stato, ritmo tipografico, peso CTA) sopra la palette esistente — 1 modifica token = tutte le card.
-- **Restyle di TUTTE le ~12 card** `web/components/*.tsx` + CSS in `globals.css`. Priorità demo-script: `RispostaCivica`, `SchedaDettaglio` (modale), `SchedaLettoOra`, `EcoProfilo`/`ProfiloNoto`, `ChipFiltri`, `Seal`.
-- **5 mosse base** (dalla review): (1) accento-sinistro su card+section-header, (2) banda-stato in cima (colore del Seal come segnale-dato), (3) elevazione reale della sotto-card servizio (staccarla dal fondo), (4) ritmo tipografico (sintesi più grande/pesante, micro-label mono davvero piccole → contrasto di scala), (5) CTA con più presenza.
-- **Micro-motion CSS** su apertura scheda/hover, dentro `prefers-reduced-motion: reduce`.
-- **A11y masthead**: chiudere le 2 violazioni WCAG aperte — contrasto `marchio__iq` (`globals.css:3760`) e mismatch aria-label wordmark (`layout.tsx:65`).
+- **Connettore eGov/EGS** (nuovo, data layer): riconoscimento della famiglia piattaforma dal pattern URL `EG0/EGS*.HBL?en=eg###` (es. Marino `en=eg176`: servizi `EGSCHTST.HBL?...&MESSA=PUBBLICA`, mappa `EGSMISTMSIT.HBL?...&FUNZ=1`) + scraping di servizi/mappa/AT. Segue il contratto connettore esistente D-09 (`connettore.py`: `AmministrazioneTrasparente`, `SchedaServizio`, …), come Municipium/Halley. Sblocca Marino con dati reali.
+- **Registro comuni** (nuovo data layer): store locale per-comune — logo (asset/base64), nome, istat, dominio, **famiglia piattaforma + endpoint reali (amministrazione/servizi/mappa/AT)**, timestamp ultima scansione, snapshot servizi (mappa connettore), storia scansioni per diff. **Change-detection**: rileva quando dati/servizi stabili di un comune cambiano tra due query. Zero fetch live esterno al render.
+- **Card comune curata**: logo dal registro (fallback monogramma/glifo civico neutro + nome se assente) + nome + numeri utili.
+- **Fix spaziatura ProfiloNoto "sto usando"**: padding sinistra, testo non attaccato ai bordi, bordo destro staccato dal divisorio chat.
+- **Togli tag debug**: codice ISTAT via dall'UI (info di debug). Il segnale di riconoscimento comune può restare, ma senza il codice.
+- **Bandi collapsed**: primo bando + "+N altri" expander inline.
+- **Web results in fondo**: "Pagine trovate sul web / non verificato" in fondo alla card, dopo il verificato; restano visibili.
+- **Feedback in header**: da sempre-visibile nel flusso → bottone piccolo nell'header.
+
+## NON-GOALS (out)
+- Servizi → sidebar sinistra (= ciclo 15, deciso "polish prima").
+- Feedback prompt ogni-N-messaggi (deciso: solo header).
+- Web results come bottone-collapse (deciso: in fondo, sempre visibili).
+- Favicon/logo live-fetch a runtime (privacy) — logo solo dal registro locale.
+- Logo che finge lo stemma ufficiale — solo logo reale salvato o glifo neutro.
 
 ## CONSTRAINTS
-- Stack: Next 15.5.4 / React 19.1.1. **Nessuna dipendenza nuova** (no framer-motion, no gsap) → motion solo CSS.
-- Stile bespoke «civico giapponese»: **nessun font nuovo, nessun registro nuovo**, nessuna palette nuova. Costruire sui token esistenti (`--paper*`, `--sumi*`, `--ai*`, `--ai-vivid`, `--verde/--ambra`, `--ma-*`, `--radius`).
-- **Contrasto WCAG AA tenuto** ovunque. `--ai-vivid` resta fill-only (navy-sopra, 8.89:1); ogni nuovo uso accento verificato.
-- Tema unico light (no dark mode): nessun blocco dark da gestire.
-- **Solo visivo**: contenuto, dati, testi e logica invariati. Restyle CSS/markup, non ridisegno di *cosa* mostra la card.
-- Frontend only. Mai commit su main diretto (branch + PR).
+- Stack: Next 15 / React 19 (frontend); FastAPI/Python (backend); store registro locale (JSON vs SQLite → plan). Docker, web senza bind-mount → rebuild obbligatorio ([[container-non-monta-sorgente-api]]).
+- **Privacy-preserving**: zero fetch esterno al render; logo servito da asset locale/base64.
+- Determinismo TIQ mantenuto.
+- **Degrado onesto**: comune senza logo → glifo+nome; comune che non trova nulla (Marino) → card + numeri + vuoto onesto, mai guscio rotto ([[fonte-nuova-niente-da-recuperare]]).
+- WCAG AA, tema light unico, stile civico giapponese esistente, riuso token/primitive ciclo 13.
+- No dep/font/palette nuova per la parte UI.
+- 4-5 giorni al video: polish visibile = must-have (Onda 1). Registro + connettore eGov degradano onestamente; nessuno dei due può affondare il video.
+- **Connettore eGov**: scraping server-side (fetch backend, non al render), determinismo TIQ tenuto. Non fetch dal browser del cittadino. Segue contratto D-09 (`connettore.py`), come Municipium/Halley.
 
 ## DECISIONS
-- **D-01** Impianto = sistema condiviso (token + primitive card), non ritocco per-card. Coerenza forte, manutenibile; token-first per non far esplodere i tempi.
-- **D-02** Evoluzione dello stile esistente, non rifacimento audace. Le 5 mosse sono il linguaggio; niente illustrazione/segni civici nuovi in questo ciclo.
-- **D-03** Il **verdetto resta segnale-dato, mai giudizio TIQ**. La banda-stato colora «cosa risulta dalla fonte»; il copy «l'ultima parola è dell'ente» resta e il peso visivo non deve suggerire che TIQ decida. (Vincolo da scelte-fondanti.)
-- **D-04** Peso visivo **non smorza i segnali onesti**: «non pubblicato», provenienza, «letto ora», stati vuoti restano leggibili quanto o più di ora.
-- **D-05** Motion = CSS micro-transizioni (150–300ms), sempre gated `prefers-reduced-motion`. Nessuna animazione decorativa fine-a-sé.
-- **D-06** A11y masthead dentro questo ciclo. Contrasto `marchio__iq`: se serve scelta di brand → segnalare NEEDS HUMAN, non forzare un colore fuori palette.
+- D-01 Registro locale self-hosted, zero fetch live (privacy + determinismo).
+- D-02 Logo reale dal registro; fallback nome + glifo civico neutro (mai stemma finto).
+- D-03 Registro "pieno" (scelta utente, nonostante R-01): logo + metadata + snapshot servizi + change-detection tra scansioni.
+- D-04 Servizi restano in chat in questo ciclo (spostamento sidebar = ciclo 15).
+- D-05 Web results in fondo alla card, sempre visibili (non collapse).
+- D-06 Feedback = bottone header (non prompt periodico).
+- D-07 Bandi collapsed: primo + "+N altri".
+- D-08 Togliere il codice ISTAT dall'UI (debug); non necessariamente tutto il chip riconoscimento.
+- D-09 Riuso token/primitive ciclo 13; **assorbire i token nelle regole componente o alzare la specificità**, mai aggiungere bolt-on cieco ([[globals-css-bolt-on-cascade]]).
+- D-10 **Connettore eGov/EGS in-scope con scraping reale** (scelta utente, R-01 esplode): riconosci famiglia `EGS*.HBL?en=eg###`, salva endpoint nel registro, **e estrai davvero i dati** (servizi/mappa/AT). Implementa contro il contratto D-09 esistente. Marino = dati reali. Degrado se scraping non chiude: endpoint salvati + link mostrati, mai guscio rotto.
+- D-11 **Logo one-shot alla scansione** (scelta utente, scioglie ex-DEFERRED): il backend cattura `og:image`/favicon UNA volta durante la scansione (non al render → privacy tenuta), riusa la guardia SSRF post-redirect + size-cap dello stesso connettore. Salva `logo_b64` nel registro. Fallback glifo/monogramma civico se assente/fetch fallisce (D-02). Nessun fetch logo al render.
 
-## DISCRETION (l'esecutore decide)
-- Valori esatti di elevazione/ombra, spessore accento, scala tipografica precisa.
-- Se estrarre un componente `Card` primitivo React o solo classi CSS condivise.
-- Ordine di applicazione tra le card non-demo (best-effort).
+## DISCRETION (plan/execute decidono)
+- Formato store registro: JSON file vs SQLite (verificare se un DB esiste già lato backend).
+- UX del segnale "il comune è cambiato": minimale (badge/nota), non invasiva.
+- Meccanismo glifo/monogramma: iniziale vs icona civica.
 
-## DEFERRED (fuori da questo ciclo)
-- Ridisegno di *cosa* mostrano le card (contenuto/struttura informativa).
-- Illustrazione, iconografia civica custom, motion coreografato.
-- Dark mode.
-- I follow-up aperti ciclo 12 (R-05 field-overload, reset override frontend) — non-grafica.
+## DEFERRED
+- Servizi → sidebar sinistra (ciclo 15).
+- Connettore eGov: comuni EGS oltre Marino (una firma-famiglia + Marino verificato ora; roll-out ampio dopo il video).
+- Enrichment logo avanzato (crop/normalizzazione/CDN). Il logo-fetch one-shot base è ora in-scope (D-11).
+- F4/F5 cascade ProfiloNoto residui (se non chiusi dal fix spaziatura).
 
 ## RISKS
-- **R-01** Verdetto colorato letto come «TIQ decide» → viola scelte-fondanti. Mitig: D-03, il colore è stato-dato + copy ente intatto. Reviewer verifica il framing.
-- **R-02** Slittamento tempi (12 card + a11y a 5gg dal video). Mitig: demo-script = must-have, resto best-effort; token-first.
-- **R-03** Regressione contrasto introdotta dal restyle. Mitig: acceptance include ri-scan a11y su localhost:3000.
-- **R-04** Peso visivo seppellisce segnali onesti (provenienza/non-pubblicato/vuoti). Mitig: D-04, reviewer lo asserisce.
-- **R-05** Motion jank / no reduced-motion. Mitig: D-05, gate `prefers-reduced-motion`.
+- **R-01 (CRITICA) Slittamento video**: 3 thread grossi — connettore eGov nuovo (scraping) + registro pieno + polish — in 4-5gg. Mitigazione OBBLIGATORIA nel plan, sequenza a onde con degrado indipendente per onda:
+  - Onda 1 **POLISH** (must-have video, spedisce da solo): spaziatura ProfiloNoto, via ISTAT, bandi collapsed, web in fondo, feedback header. Se il resto salta, il video ha già le schede pulite.
+  - Onda 2 **REGISTRO + card comune**: logo/metadata/snapshot; degrada a snapshot-senza-UI-diff.
+  - Onda 3 **CONNETTORE eGov** (rischio massimo, ULTIMO): scraping EGS. Degrada a "endpoint riconosciuti+salvati+link" se lo scraping non chiude — Marino resta onesto, non rotto.
+  Nessuna onda a valle può bloccare un'onda a monte già pronta.
+- R-02 Cascade bolt-on CSS ricorrente (ciclo 13): il polish tocca le stesse card → assorbire token, non aggiungere bolt-on cieco.
+- R-03 Change-detection senza storia: registro parte vuoto, diff ha senso dalla 2ª scansione. Onestà: "prima scansione, niente da confrontare".
+- R-04 Ingestione non riproducibile ([[ingest-non-riproducibile]]): il set-pagine cambia a ogni run → il diff rischia falsi "cambiato" da rumore d'ingestione. Change-detection sui dati STABILI (servizi/logo/contatti), non sul set-pagine volatile.
+- R-05 Tensione di scope esplicita: "registro pieno" confligge col "polish prima" scelto poco prima. Tenuta a vista, non risolta a favore di uno solo.
 
-## ACCEPTANCE (D-06 ciclo 12 style = barra video)
-1. Le card del demo-script leggono con gerarchia chiara a video (punto d'ingresso visivo, verdetto evidente, CTA con peso).
-2. Un solo cambio di token di sistema si propaga a tutte le card (D-01 verificato).
-3. **Contrasto WCAG AA** su tutte le card + masthead: ri-scan accesslint su `http://localhost:3000/` senza nuove violazioni serious; le 2 aperte chiuse (o `marchio__iq` marcata NEEDS HUMAN con motivazione).
-4. `tsc --noEmit` verde. Nessuna regressione sulle convenzioni oneste (stati vuoti, «letto ora», provenienza, «l'ultima parola è dell'ente» presenti e leggibili).
-5. Motion rispetta `prefers-reduced-motion`.
-```
-```
+## ACCEPTANCE (demo-script, costruito nel ciclo)
+1. Card comune: logo (o glifo+nome) + numeri utili. **Marino → dati reali estratti dal connettore eGov** (servizi/mappa/AT dagli endpoint `EGS*.HBL?en=eg176`). Se lo scraping degrada: endpoint riconosciuti + link + vuoto onesto, mai guscio rotto.
+2. ProfiloNoto "sto usando": spaziatura sinistra corretta, testo staccato dai bordi, bordo destro non attaccato al divisorio.
+3. Nessun codice ISTAT visibile nell'UI.
+4. Molti bandi → primo + "+N altri", espande inline.
+5. Web results in fondo alla card, dopo il verificato.
+6. Feedback raggiungibile da bottone header, non più fisso nel flusso.
+7. Registro: 2ª query sullo stesso comune usa logo/metadata dal registro (no fetch) e registra la scansione; se un dato stabile cambia, il registro lo rileva; prima scansione → "niente da confrontare".

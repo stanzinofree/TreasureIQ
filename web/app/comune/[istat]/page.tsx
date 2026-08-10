@@ -151,8 +151,8 @@ export default async function SchedaComunePage({
       <div className="panel">
         <h2>Comune non trovato</h2>
         <p className="lede">
-          Non ho una scheda per il codice ISTAT {istat}. Verifica che l&apos;API
-          sia in esecuzione e che il codice sia corretto, poi ricarica la
+          Non ho una scheda per questo comune. Verifica che l&apos;API sia in
+          esecuzione e che l&apos;indirizzo sia corretto, poi ricarica la
           pagina.
         </p>
       </div>
@@ -182,26 +182,21 @@ export default async function SchedaComunePage({
         <div>
           <p className="eyebrow">Apertura del portale</p>
           <h1>{scheda.nome}</h1>
-          <p className="lede">
-            Codice ISTAT {scheda.codice_istat}
-            {scheda.sito && (
-              <>
-                {" "}
-                ·{" "}
-                <a
-                  href={
-                    scheda.sito.startsWith("http")
-                      ? scheda.sito
-                      : `https://${scheda.sito}`
-                  }
-                  target="_blank"
-                  rel="noopener"
-                >
-                  sito ufficiale
-                </a>
-              </>
-            )}
-          </p>
+          {scheda.sito && (
+            <p className="lede">
+              <a
+                href={
+                  scheda.sito.startsWith("http")
+                    ? scheda.sito
+                    : `https://${scheda.sito}`
+                }
+                target="_blank"
+                rel="noopener"
+              >
+                sito ufficiale
+              </a>
+            </p>
+          )}
           <p className="field__hint">
             Ultimo scan: {dataLeggibile(scheda.scansionato_il)}
           </p>

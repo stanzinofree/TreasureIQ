@@ -43,7 +43,6 @@ import { conTagVerifica } from "@/lib/testo";
 import { useRisultati } from "@/lib/risultati";
 import { useScan } from "@/lib/scan";
 import ScanLive from "@/components/ScanLive";
-import Feedback from "@/components/Feedback";
 
 /** Stable DOM id for one card, so the side index can link straight to it. */
 function ancoraDi(messageId: string, matchId: string): string {
@@ -710,6 +709,32 @@ function BandiComune({ istat }: { istat: string }) {
     return `${gg}/${mm}/${d.getFullYear()}`;
   }
 
+  function bandoCard(b: Bando) {
+    return (
+      <li key={b.url} className="bandi-comune__card">
+        <span className="bandi-comune__titolo">{b.titolo}</span>
+        <span className="bandi-comune__data">{formattaData(b.data)}</span>
+        {b.anteprima && (
+          <span className="bandi-comune__anteprima">{b.anteprima}</span>
+        )}
+        <a
+          className="bandi-comune__link"
+          href={b.url}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Apri sul portale ↗
+        </a>
+      </li>
+    );
+  }
+
+  // D-07: la lista non sparisce dietro il toggle di apertura, ma dentro resta
+  // collassata a sua volta — primo bando visibile, il resto dietro «+N altri»
+  // (stesso primitivo <details> di BandiLive, riusato non reinventato).
+  const primo = bandi[0];
+  const resto = bandi.slice(1);
+
   return (
     <div className="bandi-comune" role="group" aria-label="Bandi e avvisi del comune">
       <button
@@ -726,25 +751,17 @@ function BandiComune({ istat }: { istat: string }) {
             Letti adesso dal portale del comune, non verificati: controlla sul sito
             se il bando è ancora aperto.
           </p>
-          <ul className="bandi-comune__lista">
-            {bandi.map((b) => (
-              <li key={b.url} className="bandi-comune__card">
-                <span className="bandi-comune__titolo">{b.titolo}</span>
-                <span className="bandi-comune__data">{formattaData(b.data)}</span>
-                {b.anteprima && (
-                  <span className="bandi-comune__anteprima">{b.anteprima}</span>
-                )}
-                <a
-                  className="bandi-comune__link"
-                  href={b.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Apri sul portale ↗
-                </a>
-              </li>
-            ))}
-          </ul>
+          <ul className="bandi-comune__lista">{bandoCard(primo)}</ul>
+          {resto.length > 0 && (
+            <details className="bandi-comune__espandi">
+              <summary className="bandi-comune__espandi-riga">
+                +{resto.length} altri
+              </summary>
+              <ul className="bandi-comune__lista">
+                {resto.map((b) => bandoCard(b))}
+              </ul>
+            </details>
+          )}
         </>
       )}
     </div>
@@ -995,8 +1012,14 @@ function BandiLive({ esito }: { esito: BandiLiveEsito }) {
         if (gruppo.tipo === null && bandiGruppo.length === 0) return null;
         // Filtro tematico attivo (D-04): matched resta espanso, il resto
         // collassa dietro «▸ espandi» senza sparire — nessun bando escluso.
-        const matched = esito.tema ? bandiGruppo.filter((bando) => bando.corrisponde === true) : bandiGruppo;
-        const resto = esito.tema ? bandiGruppo.filter((bando) => bando.corrisponde !== true) : [];
+        // Senza filtro (D-07): stesso meccanismo, ma il collasso è solo di
+        // spazio — primo bando visibile, gli altri dietro «+N altri».
+        const matched = esito.tema
+          ? bandiGruppo.filter((bando) => bando.corrisponde === true)
+          : bandiGruppo.slice(0, 1);
+        const resto = esito.tema
+          ? bandiGruppo.filter((bando) => bando.corrisponde !== true)
+          : bandiGruppo.slice(1);
         return (
           <div className="bandi-comune__gruppo" key={gruppo.etichetta}>
             <p className="bandi-comune__gruppo-titolo">
@@ -1019,7 +1042,9 @@ function BandiLive({ esito }: { esito: BandiLiveEsito }) {
             {resto.length > 0 && (
               <details className="bandi-comune__espandi">
                 <summary className="bandi-comune__espandi-riga">
-                  ▸ espandi altri {resto.length} bandi che non corrispondono a «{esito.tema}»
+                  {esito.tema
+                    ? `▸ espandi altri ${resto.length} bandi che non corrispondono a «${esito.tema}»`
+                    : `+${resto.length} altri`}
                 </summary>
                 <ul className="bandi-comune__lista">
                   {resto.map((bando, indice) => (
@@ -2040,11 +2065,9 @@ export default function Chat() {
           Stesso stato mostrato nel pannello a sinistra (un solo store). */}
       <ScanLive variante="chat" />
 
-      {/* Feedback (D-01, ciclo 6): un form verso il nostro store, non un
-          canale esterno. Discreto, sotto l'intera conversazione, non
-          per-messaggio. Compare appena c'è almeno una risposta da giudicare —
-          prima di allora non c'è niente su cui dare un parere. */}
-      {messages.some((m) => m.role === "assistant") && <Feedback />}
+      {/* Feedback (D-01, ciclo 6; D-06, ciclo 14): il form vive ora dietro un
+          bottone nell'header dell'app (FeedbackHeader), non più agganciato
+          al flusso della chat — vedi web/app/layout.tsx. */}
 
       {error && (
         <p className="notice" role="alert">

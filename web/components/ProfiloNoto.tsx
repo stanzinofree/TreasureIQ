@@ -38,17 +38,9 @@ function Chip({
       {onRimuovi && (
         <button
           type="button"
+          className="fatto__rimuovi"
           onClick={onRimuovi}
           aria-label="togli questo dato"
-          style={{
-            border: 0,
-            background: "none",
-            font: "inherit",
-            color: "inherit",
-            cursor: "pointer",
-            padding: "0 0 0 0.35em",
-            lineHeight: 1,
-          }}
         >
           ×
         </button>

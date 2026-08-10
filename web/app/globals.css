@@ -261,6 +261,39 @@ a {
   gap: var(--ma-4);
 }
 
+/* D-06: Feedback vive nell'header come bottone piccolo, non come prompt nel
+   flusso della chat — apre lo stesso componente in un popover ancorato qui. */
+.feedback-header {
+  position: relative;
+}
+.feedback-header__trigger {
+  border: 1.5px solid var(--kasumi);
+  border-radius: var(--radius);
+  background: var(--paper-raised);
+  color: var(--sumi);
+  font: inherit;
+  font-size: 0.82rem;
+  padding: var(--ma-1) var(--ma-3);
+  cursor: pointer;
+  transition: border-color 140ms ease;
+}
+.feedback-header__trigger:hover,
+.feedback-header__trigger:focus-visible {
+  border-color: var(--ai);
+}
+.feedback-header__popover {
+  position: absolute;
+  top: calc(100% + var(--ma-2));
+  right: 0;
+  z-index: 60;
+  width: min(340px, 90vw);
+  padding: var(--ma-4);
+  border: 1.5px solid var(--kasumi);
+  border-radius: var(--radius);
+  background: var(--paper-raised);
+  box-shadow: var(--elev-2);
+}
+
 .masthead__logo {
   display: grid;
   place-items: center;
@@ -837,7 +870,7 @@ a {
   display: flex;
   flex-direction: column;
   gap: var(--ma-6);
-  padding: var(--ma-6) 0 var(--ma-6) var(--ma-2);
+  padding: var(--ma-6) var(--ma-4) var(--ma-6) var(--ma-2);
   border-right: 1px solid var(--kasumi);
   /* Held against the masthead while the conversation scrolls past it. Its own
      overflow only engages once the index outgrows the screen. */
@@ -951,6 +984,22 @@ a {
   align-items: center;
   gap: var(--ma-2);
   margin: 0;
+}
+/* D-09: assorbe il token nella regola componente combinata (0,2,0) invece di
+   un bolt-on in coda al file — .tiq-card non porta padding proprio, quindi
+   senza questa riga i chip toccavano il border-left e il bordo destro della
+   card toccava il divisorio verso la chat (W3). */
+.fatti.tiq-card {
+  padding: var(--ma-3) var(--ma-4);
+}
+.fatto__rimuovi {
+  border: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  padding: 0 0 0 0.35em;
+  line-height: 1;
 }
 .fatti__intro {
   font-family: var(--font-mono);

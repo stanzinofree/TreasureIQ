@@ -2390,7 +2390,15 @@ _CONNETTIVI_NOME = frozenset(
 #: il nome intero — escludere la parola comune non toglie il comune vero. I
 #: comuni cosi' nominati restano raggiungibili dal selettore, che usa l'ISTAT e
 #: non passa da qui.
-_PAROLE_NON_TOPONIMI = frozenset({"minori", "minore"})
+#:
+#: «ora» e' il caso peggiore: comune di Ora (BZ), 3 lettere, chiave esatta
+#: dell'indice. Sotto il minimo di 5 lettere il confronto per parola-nel-nome
+#: non la vedrebbe mai, ma il match ESATTO in `_comuni_candidati` scavalca il
+#: minimo — cosi' «a che ora apre l'ufficio?» finiva a leggere il sito di Ora
+#: invece del comune del cittadino. E' un avverbio di tempo prima che un
+#: toponimo: un cittadino di Ora (~3.600 ab.) resta comunque raggiungibile dal
+#: selettore per ISTAT, che non passa di qui.
+_PAROLE_NON_TOPONIMI = frozenset({"minori", "minore", "ora"})
 
 
 @lru_cache(maxsize=1)

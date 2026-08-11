@@ -120,21 +120,24 @@ function righeOrari(orari: string): string[] {
 export default function RispostaCivica({
   reply,
   info,
-  compatto = false,
 }: {
   reply: string;
   info: InfoOut;
-  /** Ciclo 15 R3: quando sopra la scheda c'è la banda verde del connettore
-   *  (fuori copertura, `sonda.indirizzabile`), quella già condensa provenienza,
-   *  stato tecnico e link. Qui allora togliamo i doppioni: la prosa di sintesi,
-   *  «Cosa puoi fare adesso» (ripete il link alla scheda), «Ufficio competente»
-   *  (ripete il nome già nel titolo del servizio) e «Dettagli tecnici» (già
-   *  nella banda). Restano badge, card del servizio col link, «Cosa sappiamo
-   *  dalla fonte». Coperti (niente banda) → `false`: scheda intera, contatti
-   *  reali inclusi. */
-  compatto?: boolean;
 }) {
   const { office, document: documento } = info;
+
+  // Ciclo 15 R4 — una regola per sezione, uguale in OGNI access_mode (niente
+  // più il booleano `compatto` che accendeva/spegneva 4 sezioni in blocco solo
+  // sul fuori-copertura, lasciando il coperto gonfio). La sintesi in prosa (lo
+  // «spiegone») è ridondante appena la scheda ha contenuto strutturato — titolo
+  // del servizio, prove, contatti o pagine web dicono già la stessa cosa. La
+  // mostriamo SOLO quando è l'unica risposta possibile (nessun blocco
+  // strutturato), altrimenti è un preambolo doppione (era il caso di Albano).
+  const soloProsa =
+    !documento &&
+    info.prove.length === 0 &&
+    !office &&
+    info.web_results.length === 0;
   const telefoni = office?.telefono
     ? office.telefono.split(/[/,]/).map((t) => t.trim()).filter(Boolean)
     : [];
@@ -174,7 +177,7 @@ export default function RispostaCivica({
         )}
       </p>
 
-      {!compatto && (
+      {soloProsa && (
         <p className="civica__sintesi tiq-sintesi">{conTagVerifica(reply)}</p>
       )}
 
@@ -220,39 +223,13 @@ export default function RispostaCivica({
         </section>
       )}
 
-      {!compatto && info.azioni.length > 0 && (
-        <section className="civica__blocco">
-          <h4>Cosa puoi fare adesso</h4>
-          {/* Un'azione è un pulsante con sopra scritto cosa ottieni: titolo,
-              spiegazione, comando. Come lista di link lunghi sottolineati
-              tornava a leggersi come testo redazionale. */}
-          <ol className="civica__azioni">
-            {info.azioni.map((a, i) => (
-              <li key={a.testo} className="civica__azione">
-                <span className="civica__azione-num" aria-hidden="true">
-                  {i + 1}
-                </span>
-                <span className="civica__azione-testo">
-                  <strong>{a.testo}</strong>
-                  {a.dettaglio && <span>{a.dettaglio}</span>}
-                </span>
-                {a.url && (
-                  <a
-                    className="civica__azione-cta"
-                    href={a.url}
-                    target={a.tipo === "apri" ? "_blank" : undefined}
-                    rel={a.tipo === "apri" ? "noreferrer" : undefined}
-                  >
-                    {a.etichetta}
-                  </a>
-                )}
-              </li>
-            ))}
-          </ol>
-        </section>
-      )}
+      {/* Ciclo 15 R4: «Cosa puoi fare adesso» rimosso. Su un comune coperto le
+          azioni erano passi generici («Consulta il servizio», «Verifica i
+          documenti») già coperti dalla card del servizio (Apri la fonte) e dai
+          contatti dell'ufficio (Chiama/Scrivi). Un blocco separato di CTA era
+          rumore ridondante. La card e i contatti restano gli unici CTA. */}
 
-      {!compatto && office && (
+      {office && (
         <section className="civica__blocco">
           <h4>Ufficio competente</h4>
           <p className="civica__ufficio">{office.nome}</p>
@@ -322,28 +299,11 @@ export default function RispostaCivica({
         </section>
       )}
 
-      {!compatto &&
-        (info.diagnosis.length > 0 || info.integration_cost.length > 0) && (
-        <details className="civica__tecnico">
-          <summary>Dettagli tecnici</summary>
-          {info.diagnosis.length > 0 && (
-            <ul>
-              {info.diagnosis.map((riga) => (
-                <li key={riga}>{riga}</li>
-              ))}
-            </ul>
-          )}
-          {info.integration_cost.length > 0 && (
-            <ul className="civica__tecnico-costo">
-              {info.integration_cost.map((riga) => (
-                <li key={riga}>{riga}</li>
-              ))}
-            </ul>
-          )}
-        </details>
-      )}
+      {/* Ciclo 15 R4: «Dettagli tecnici» (diagnosis + integration_cost, D-21)
+          rimosso dalla scheda del cittadino: è diagnostica di integrazione, non
+          una risposta. Resta accessibile su pannello/monitoraggio. */}
 
-      {/* D-05: dopo tutto il verificato (prove, azioni, ufficio, tecnico) —
+      {/* D-05: dopo tutto il verificato (prove, ufficio) —
           sempre visibile, mai un collapse, perché non è un dettaglio da
           nascondere ma contenuto di natura diversa (non verificato). */}
       {info.web_results.length > 0 && (

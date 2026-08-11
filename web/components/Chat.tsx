@@ -897,22 +897,6 @@ function InfoAnswer({ info }: { info: InfoOut }) {
   );
 }
 
-/** D-29 — what is left on the citizen's shoulders after this answer, shown
- * as its own line, never folded into `CostStrip`. The two numbers answer
- * different questions: what closed data cost TreasureIQ to recover, versus
- * what TreasureIQ could not take off the citizen. */
-function EffortCaption({ effort }: { effort: number | null }) {
-  if (effort == null || effort <= 0) {
-    return null;
-  }
-  return (
-    <p className="effort-caption">
-      Cosa resta da fare a te: <strong>{effort}</strong>{" "}
-      {effort === 1 ? "azione" : "azioni"}.
-    </p>
-  );
-}
-
 // D-S6 (B6): scan assente/stantio (>6gg) → refresh partito in background,
 // dati di QUESTO turno restano quelli in cache — nessuna attesa sincrona.
 // `stato === "fresco"` → nessun indicatore, la risposta non lo segnala.
@@ -1357,6 +1341,25 @@ export default function Chat() {
     }
   }
 
+  // Handoff da /demo: un arrivo su /?persona=<id> avvia in automatico quel
+  // caso, una sola volta, poi ripulisce l'URL. Così la home resta un campo
+  // solo e i bottoni-persona vivono su una pagina dedicata senza perdere
+  // l'avvio a un tap. Il param si consuma PRIMA di chiamare avviaPersona: un
+  // refresh o un back del browser non deve rilanciare la sessione.
+  const personaAvviata = useRef(false);
+  useEffect(() => {
+    if (personaAvviata.current) return;
+    const id = new URLSearchParams(window.location.search).get("persona");
+    if (!id) return;
+    const preset = PRESETS.find((p) => p.id === id);
+    if (!preset) return;
+    personaAvviata.current = true;
+    window.history.replaceState(null, "", window.location.pathname);
+    void avviaPersona(preset);
+    // Gira una sola volta al mount (guardia via ref): deps vuoto voluto.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   /**
    * Geolocation tells us where the citizen is *standing*, never where they
    * are *resident* — the two are routinely different (someone at the URP
@@ -1503,48 +1506,19 @@ export default function Chat() {
               Ad esempio: &laquo;ho la bolletta elettrica troppo alta&raquo;,
               &laquo;ci sono bandi per informatici in scadenza?&raquo;
             </p>
-            {/* Un tap sola: sceglie il profilo di prova e manda subito la
-                domanda pronta di quella persona, invece di lasciare che chi
-                guarda la demo componga da zero un esempio funzionante. */}
-            <div className="grid-2" style={{ marginTop: "var(--ma-3)" }}>
-              {PRESETS.map((p) => (
-                <button
-                  key={p.id}
-                  type="button"
-                  className="panel"
-                  onClick={() => avviaPersona(p)}
-                  disabled={avvioBusy !== null || busy}
-                  style={{
-                    textAlign: "left",
-                    cursor: "pointer",
-                    padding: "var(--ma-4)",
-                    background: "var(--paper)",
-                    font: "inherit",
-                    opacity: avvioBusy && avvioBusy !== p.id ? 0.5 : 1,
-                  }}
-                >
-                  <span
-                    style={{
-                      fontFamily: "var(--font-display)",
-                      fontWeight: 700,
-                      display: "block",
-                      marginBottom: "var(--ma-1)",
-                    }}
-                  >
-                    {p.persona}
-                  </span>
-                  <span
-                    style={{
-                      fontFamily: "var(--font-mono)",
-                      fontSize: "0.78rem",
-                      color: "var(--sumi-faint)",
-                    }}
-                  >
-                    {avvioBusy === p.id ? "Accesso in corso…" : p.situazione}
-                  </span>
-                </button>
-              ))}
-            </div>
+            {/* I casi di prova non stanno più sulla home: una griglia di
+                quattro bottoni-persona rubava l'attenzione al primo sguardo,
+                dove deve vincere il campo della domanda. Vivono su /demo,
+                raggiungibile da qui; al ritorno /?persona=<id> li avvia in
+                automatico (vedi l'effetto di handoff sopra). */}
+            <p className="chat__hint" style={{ marginTop: "var(--ma-3)" }}>
+              <a
+                href="/demo"
+                style={{ fontFamily: "var(--font-mono)", fontWeight: 700 }}
+              >
+                ▸ Vedi i casi demo
+              </a>
+            </p>
           </>
         )}
 
@@ -1686,14 +1660,7 @@ export default function Chat() {
                   // AGEVOLAZIONE furniture below.
                   m.reply.info && (
                     <>
-                      <RispostaCivica
-                        reply={m.content}
-                        info={m.reply.info}
-                        compatto={Boolean(
-                          m.reply.access_mode &&
-                            SEGNALAZIONE_ACCESS_MODES.has(m.reply.access_mode),
-                        )}
-                      />
+                      <RispostaCivica reply={m.content} info={m.reply.info} />
                       {m.reply.access_mode &&
                         SEGNALAZIONE_ACCESS_MODES.has(m.reply.access_mode) &&
                         m.reply.info.codice_istat &&
@@ -1804,14 +1771,9 @@ export default function Chat() {
                   </>
                 )}
 
-                {/* Fuori copertura (qualunque connettore: banda verde M4 o
-                    RICERCA WEB M5/M6) la scheda è compatta e non mostra «Cosa
-                    puoi fare adesso»: il contatore azioni qui sotto resterebbe
-                    orfano. Stesso segnale di `compatto`. */}
-                {!(
-                  m.reply.access_mode &&
-                  SEGNALAZIONE_ACCESS_MODES.has(m.reply.access_mode)
-                ) && <EffortCaption effort={m.reply.citizen_effort} />}
+                {/* Ciclo 15 R4: «Cosa resta da fare a te: N azioni» rimosso.
+                    Contava le azioni del blocco «Cosa puoi fare adesso», ora
+                    tolto in ogni caso: il contatore era orfano ovunque. */}
               </div>
             )}
           </div>

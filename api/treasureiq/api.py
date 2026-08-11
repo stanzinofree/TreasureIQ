@@ -2484,11 +2484,33 @@ async def chat(body: ChatIn, request: Request) -> ChatOut:
     # Camposampiero, uscivano tre agevolazioni di Albano come se riguardassero
     # chi aveva domandato. Non è una risposta imprecisa, è la risposta di un
     # altro comune — e il sistema sapeva già di non essere lì (R-9).
-    scelto = body.comune_istat if body.comune_istat in COMUNI else None
-    comune_istat = scelto or (
-        profile.comune_istat if profile is not None else DEFAULT_COMUNE_ISTAT
-    )
-    comune_coperto = body.comune_istat is None or body.comune_istat in COMUNI
+    # Il comune nominato nel testo di QUESTO turno è il segnale più forte, come
+    # già per la scheda a lato (`_profilo_capito`, stessa `_comune_nominato`).
+    # Se il cittadino scrive «vivo a Benevento», è quel comune a decidere quali
+    # record si guardano e se è coperto — anche quando il client sta ancora
+    # inviando il comune del turno precedente (o nessuno). Senza, la scheda a
+    # lato passava a Benevento ma la risposta restava ancorata ad Albano: due
+    # comuni nella stessa schermata, e i criteri di Albano («sei residente a
+    # Albano Laziale») sotto la domanda di chi vive altrove (R-9).
+    from treasureiq.chat.respond import _comune_nominato
+
+    nominato = _comune_nominato(message)
+    if nominato is not None:
+        comune_istat = nominato.codice_istat
+        comune_coperto = comune_istat in COMUNI
+    else:
+        # Un comune scelto esplicitamente (tap sulla tendina) decide quali
+        # record si guardano, e se non ne abbiamo non se ne guardano affatto.
+        # Prima i record erano sempre quelli del comune coperto: chiesto «c'è un
+        # aiuto per la mensa?» avendo scelto Camposampiero, uscivano tre
+        # agevolazioni di Albano come se riguardassero chi aveva domandato. Non
+        # è una risposta imprecisa, è la risposta di un altro comune — e il
+        # sistema sapeva già di non essere lì (R-9).
+        scelto = body.comune_istat if body.comune_istat in COMUNI else None
+        comune_istat = scelto or (
+            profile.comune_istat if profile is not None else DEFAULT_COMUNE_ISTAT
+        )
+        comune_coperto = body.comune_istat is None or body.comune_istat in COMUNI
     records = list(load_opportunities(comune_istat)) if comune_coperto else []
 
     # Ciclo11/A8: il cittadino puo' chiedere di togliere un filtro letto dal
@@ -2536,8 +2558,13 @@ async def chat(body: ChatIn, request: Request) -> ChatOut:
         profile=profile,
         records=records,
         storia=storia_utente,
-        # Una scelta esplicita batte qualunque inferenza: vedi ChatIn.
-        comune_istat=body.comune_istat,
+        # Il comune nominato nel testo batte il valore inviato dal client (che
+        # può essere quello del turno precedente): sopra abbiamo già scelto i
+        # record e la copertura su `nominato`, e ora glielo passiamo perché
+        # naming, criteri e ramo fuori-copertura combacino con la scheda a lato.
+        # Se nessun comune è nominato, resta la scelta esplicita del client (una
+        # scelta esplicita batte qualunque inferenza: vedi ChatIn).
+        comune_istat=(nominato.codice_istat if nominato is not None else body.comune_istat),
         comune_coperto=comune_coperto,
         filtri_esclusi=filtri_esclusi,
         filtri_accumulati=filtri_conversazione,

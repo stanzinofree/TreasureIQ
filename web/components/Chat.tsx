@@ -35,7 +35,6 @@ import SchedaDettaglio from "@/components/SchedaDettaglio";
 import AccessoSimulato from "@/components/AccessoSimulato";
 import SceltaComune from "@/components/SceltaComune";
 import RispostaCivica from "@/components/RispostaCivica";
-import PonteScala from "@/components/PonteScala";
 import SchedaLettoOra from "@/components/SchedaLettoOra";
 import { PRESETS } from "@/lib/profili-demo";
 import { useProfilo } from "@/lib/profilo";
@@ -53,6 +52,7 @@ import {
   comuneNearby,
   fetchBandi,
   login,
+  portaleComune,
   type Bando,
   type BandiLiveEsito,
   type BandoArricchito,
@@ -68,6 +68,7 @@ import {
   type InfoOut,
   type InfoWebResult,
   type Match,
+  type PortaleComune,
   type Requirements,
 } from "@/lib/api";
 
@@ -338,21 +339,73 @@ function dataBreve(iso: string | null): string | null {
  * proprio lo scopo di TIQ. Prima diceva «non ingerito», gergo che il
  * cittadino non capisce.
  */
-function BadgeConnettore({ sonda }: { sonda: ConnettoreSonda }) {
-  if (!sonda.indirizzabile) return null;
-  const scan = dataBreve(sonda.ultima_scansione);
+/**
+ * Ciclo 15 R5 — banner connettore UNICO, in cima a OGNI risposta comunale
+ * (coperto e fuori copertura), non più due trattamenti diversi: prima il
+ * coperto aveva una banda-link in fondo (PonteScala, ritirata) e il fuori
+ * copertura questo banner verde in cima. Un solo posto, guidato dalla
+ * copertura.
+ *
+ * Due fonti, una riga: la sonda AgID (`sonda`, opzionale) dà `indirizzabile`
+ * e l'ultima scansione dello sweep; il censimento nazionale (`portaleComune`,
+ * fetch qui) dà il NOME reale della piattaforma (wp_design_comuni, Municipium,
+ * eGov…) e la percentuale di aderenza al modello. Prima il nome era hardcoded
+ * «Modello AgID» — falso per i comuni WordPress.
+ *
+ * Muto (D-44) se non sappiamo NULLA del connettore per questo comune: né il
+ * censimento conosce la piattaforma, né la sonda lo dice indirizzabile. Non
+ * affermiamo copertura che non abbiamo misurato.
+ */
+function BadgeConnettore({
+  istat,
+  sonda,
+}: {
+  istat: string;
+  sonda: ConnettoreSonda | null;
+}) {
+  const [portale, setPortale] = useState<PortaleComune | null>(null);
+
+  useEffect(() => {
+    let vivo = true;
+    setPortale(null);
+    portaleComune(istat)
+      .then((esito) => {
+        if (vivo) setPortale(esito);
+      })
+      .catch(() => {
+        if (vivo) setPortale(null);
+      });
+    return () => {
+      vivo = false;
+    };
+  }, [istat]);
+
+  const indirizzabile = sonda?.indirizzabile ?? false;
+  if (!portale && !indirizzabile) return null;
+
+  // Nome piattaforma dal censimento; se il censimento non ha ancora spazzolato
+  // questo comune ma la sonda lo dice indirizzabile, è per definizione il
+  // modello AgID (è ciò che la sonda testa).
+  const connettoreNome = portale?.piattaforma ?? "Modello AgID";
+  const aderenzaPct =
+    portale?.aderenza != null ? Math.round(portale.aderenza * 100) : null;
+  const scan = dataBreve(sonda?.ultima_scansione ?? portale?.rilevato_il ?? null);
+
   return (
     <div className="badge-connettore-box" role="note">
       <p className="badge-connettore">
         <span className="badge-connettore__pallino" aria-hidden />
         <span className="badge-connettore__campo">
           <span className="badge-connettore__k">Codice comune</span>
-          <span className="badge-connettore__v">{sonda.codice_istat}</span>
+          <span className="badge-connettore__v">{istat}</span>
         </span>
         <span className="badge-connettore__sep" aria-hidden>·</span>
         <span className="badge-connettore__campo">
           <span className="badge-connettore__k">Connettore</span>
-          <span className="tag-connettore">Modello AgID</span>
+          <span className="tag-connettore">{connettoreNome}</span>
+          {aderenzaPct != null && (
+            <span className="badge-connettore__v">aderenza {aderenzaPct}%</span>
+          )}
         </span>
         <span className="badge-connettore__sep" aria-hidden>·</span>
         <span className="badge-connettore__stato badge-connettore__stato--online">
@@ -377,7 +430,10 @@ function BadgeConnettore({ sonda }: { sonda: ConnettoreSonda }) {
         non copia la pagina del comune. Orari e referenti che stanno solo nella
         pagina non li leggiamo ancora in automatico: se il comune li aprisse in
         un formato condiviso, TreasureIQ li mostrerebbe qui — è lo scopo del
-        progetto.
+        progetto.{" "}
+        {/* Il ponte al censimento nazionale (ex-PonteScala): stessa riga, non
+            più una banda a sé in fondo. */}
+        <a href="/analytics">vedi com&rsquo;è messa l&rsquo;Italia{" "}→</a>
       </p>
     </div>
   );
@@ -1621,10 +1677,32 @@ export default function Chat() {
 
                 {/* Comune a rail sia informazione che agevolazione: il badge
                     connettore sta qui, sopra i due rami, perché la sonda è
-                    indifferente al kind della risposta. */}
-                {m.reply.connettore && (
-                  <BadgeConnettore sonda={m.reply.connettore} />
-                )}
+                    indifferente al kind della risposta. Il codice comune si
+                    prende dalla prima fonte disponibile — sonda, info, o il
+                    primo match comunale — così il banner esce anche sul coperto
+                    (dove `connettore` può mancare) e su agevolazione. */}
+                {(() => {
+                  // Il comune di questo turno è quello che la scheda a lato
+                  // (`profilo_capito`) ha capito dal testo: è l'unico segnale
+                  // sempre presente e coerente col pannello, così banner e
+                  // scheda non mostrano mai due comuni diversi (bug «cambio
+                  // comune»). Le altre fonti restano come rete: su alcuni rami
+                  // il codice arriva solo dalla sonda o dal match comunale.
+                  const istatBanner =
+                    m.reply.profilo_capito?.comune_istat ??
+                    m.reply.connettore?.codice_istat ??
+                    m.reply.info?.codice_istat ??
+                    m.reply.matches.find(
+                      (x) => x.livello === "comunale" && x.ente_codice_istat,
+                    )?.ente_codice_istat ??
+                    null;
+                  return istatBanner ? (
+                    <BadgeConnettore
+                      istat={istatBanner}
+                      sonda={m.reply.connettore ?? null}
+                    />
+                  ) : null;
+                })()}
 
                 {/* La mappa servizi a cascata non sta più qui: vive nel
                     pannello di sinistra (MappaServizi), agganciata al comune di
@@ -1671,17 +1749,6 @@ export default function Chat() {
                             office={m.reply.info.office}
                           />
                         )}
-                      {m.reply.info.codice_istat && (
-                        <PonteScala
-                          istat={m.reply.info.codice_istat}
-                          nome={
-                            m.reply.info.ente_nome ??
-                            profilo.comune?.nome ??
-                            m.reply.info.ente ??
-                            "il comune"
-                          }
-                        />
-                      )}
                     </>
                   )
                 ) : (
@@ -1712,18 +1779,6 @@ export default function Chat() {
                     {m.reply.info && (
                       <PagineWeb results={m.reply.info.web_results} />
                     )}
-                    {(() => {
-                      const comunale = m.reply!.matches.find(
-                        (match) => match.livello === "comunale" && match.ente_codice_istat,
-                      );
-                      if (!comunale || !comunale.ente_codice_istat) return null;
-                      return (
-                        <PonteScala
-                          istat={comunale.ente_codice_istat}
-                          nome={comunale.ente ?? profilo.comune?.nome ?? "il comune"}
-                        />
-                      );
-                    })()}
 
                     {/* Una scheda i cui requisiti sono tutti «non pubblicato» è
                         il momento in cui il cittadino ha la prova davanti agli

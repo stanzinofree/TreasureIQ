@@ -19,9 +19,11 @@ markup non verificabile a tavolino — CK-3):
   `#latest-posts` (bandi verbatim, D-07: nessuna cifra passa da un LLM).
   Ogni hop può fallire senza abbattere quelli già letti: `indice_url`
   resta noto anche se i bandi non si raggiungono (degrado per-sezione).
-- **Uffici**: nessun indice uffici scoperto nel boundary EGS (i recapiti
-  vivono dentro ogni pagina-servizio individuale, crawl non limitato,
-  fuori scope di questo ciclo) — `uffici` resta `[]`, degrado onesto.
+- **Uffici**: indice statico uniforme sulla famiglia Halley
+  (`EGSCHTST24.HBL?en=eg{id}&MESSA=PUBBLICA`, codice funzione uniforme —
+  verificato Marino+Olevano). Un solo GET in più: index-only (nome+url),
+  i recapiti tipizzati stanno sulle schede individuali `ufficio_{N}.html`
+  e il drill di massa resta deferred, fuori scope di questo ciclo.
 
 `leggi_egov` non solleva MAI: una sezione impraticabile resta al degrado
 D-10 (link noto, contenuto non letto), le altre sezioni estraggono. La
@@ -35,8 +37,8 @@ IP privato incluso — non passa mai questo confronto; non c'è un elenco di
 range IP da mantenere separatamente), timeout esplicito per richiesta,
 size-cap che ABORTISCE lo streaming (mai un `len()` calcolato dopo un
 download intero, W-3). OGNI fetch di questo modulo passa da
-`_richiedi_con_guardia` — home page e i tre hop della catena AT (indice,
-categoria concorso, aperti). Gli "argomenti" sono già nella home (nessun
+`_richiedi_con_guardia` — home page, i tre hop della catena AT (indice,
+categoria concorso, aperti) e l'indice uffici. Gli "argomenti" sono già nella home (nessun
 fetch aggiuntivo); la "mappa" è un link costruito, mai fetchato (sopra).
 """
 
@@ -55,6 +57,7 @@ from treasureiq.connettore import (
     AreaAmministrativa,
     BandoAT,
     EsitoConnettore,
+    UfficioConnettore,
 )
 from treasureiq.ingest.base import USER_AGENT
 from treasureiq.ingest.censimento import _Sonda
@@ -95,6 +98,16 @@ _RE_ARG_URL = re.compile(r"/EG0/EGS\w+\.HBL\?(?:[^\"'&]*&)*ARG=\d+", re.IGNORECA
 #: L'id `en=eg###` del comune (176 per Marino) — letto dalla pagina, mai
 #: hardcoded, per costruire l'URL noto della mappa del sito.
 _RE_EN_EG = re.compile(r"\ben=eg(\d{1,4})\b")
+
+#: L'indice statico degli uffici (`EGSCHTST24.HBL?en=eg###`, codice
+#: funzione uniforme sulla famiglia — verificato Marino+Olevano): ogni
+#: anchor verso una scheda-ufficio ha questa forma di path, same-host.
+_RE_UFFICIO_URL = re.compile(r"amministrazione/uffici/ufficio_\d+\.html", re.IGNORECASE)
+
+#: Cap difensivo sul numero di uffici estratti dall'indice — non c'è
+#: ragione di aspettarsi più di poche centinaia di schede per comune,
+#: e questo evita di costruire una lista senza limite su un indice anomalo.
+MAX_UFFICI_INDICE = 200
 
 _RE_CONCORSO_TESTO = re.compile(r"bandi\s+di\s+concorso\b", re.IGNORECASE)
 _RE_APERTI_TESTO = re.compile(r"\baperti\b", re.IGNORECASE)
@@ -222,6 +235,42 @@ def _area_mappa(pagina: str, base: str, host_comune: str) -> AreaAmministrativa 
     return AreaAmministrativa(nome="Mappa del sito", url=url)
 
 
+def _leggi_uffici_egov(
+    pagina_home: str, base: str, host_comune: str, sonda: _Sonda, timeout: float
+) -> list[UfficioConnettore]:
+    """Indice uffici statico, uniforme sulla famiglia Halley (verificato
+    Marino+Olevano): un solo GET in più (`EGSCHTST24.HBL?en=eg{id}`), MAI
+    il drill delle schede individuali — i recapiti tipizzati restano
+    on-demand, deferred, fuori scope di questo ciclo (sweep nazionale
+    gentile: +1 GET/comune, non +N)."""
+    trovato = _RE_EN_EG.search(pagina_home)
+    if trovato is None:
+        return []
+    indice_url = urljoin(base, f"/EG0/EGSCHTST24.HBL?en=eg{trovato.group(1)}&MESSA=PUBBLICA")
+    letto = _fetch(indice_url, host_comune, timeout, sonda)
+    if letto is None:
+        return []
+    pagina_indice, url_indice = letto
+    ora = _ora()
+    uffici: list[UfficioConnettore] = []
+    visti: set[str] = set()
+    for url, testo in _ancore(pagina_indice, url_indice, host_comune):
+        if not _RE_UFFICIO_URL.search(url) or url in visti or not testo:
+            continue
+        visti.add(url)
+        uffici.append(
+            UfficioConnettore(
+                nome=testo,
+                url=url,
+                source_typed=False,
+                letto_il=ora,
+            )
+        )
+        if len(uffici) >= MAX_UFFICI_INDICE:
+            break
+    return uffici
+
+
 def _blocco_latest_posts(pagina: str) -> str | None:
     """Il blocco `#latest-posts` della pagina "…aperti": stessa forma di
     `municipium._blocco_contatti` (finestra delimitata, non l'intera
@@ -326,10 +375,12 @@ def leggi_egov(comune: ComuneNoto, sonda: _Sonda) -> EsitoConnettore:
     resta al degrado D-10 (link noto, contenuto non letto), le altre
     sezioni estraggono (`_leggi_aree`, `_leggi_at_egov`).
 
-    `uffici` resta sempre `[]`: nessun indice uffici scoperto nel boundary
-    EGS di Marino (i recapiti vivono dentro ogni pagina-servizio
-    individuale — crawl non limitato, fuori scope) — degrado onesto,
-    documentato, non un buco silenzioso.
+    `uffici` è ora un indice statico (nome+url, `_leggi_uffici_egov`):
+    +1 GET rispetto alla home, uniforme sulla famiglia Halley. I recapiti
+    tipizzati (tel:/mailto:/pec/orari) vivono sulle schede individuali di
+    ogni ufficio — il drill di massa resta deferred, on-demand, fuori
+    scope di questo ciclo; qui `telefoni`/`email`/`pec` restano vuoti e
+    `source_typed=False` per ogni voce.
     """
     letto_il = _ora()
     base = _base_con_schema(comune.sito)
@@ -365,11 +416,18 @@ def leggi_egov(comune: ComuneNoto, sonda: _Sonda) -> EsitoConnettore:
         logger.warning("eGov: lettura amministrazione trasparente fallita per %s", comune.nome)
         amministrazione_trasparente = None
 
+    try:
+        uffici = _leggi_uffici_egov(pagina, url_finale, host_comune, sonda, 8.0)
+    except Exception:  # noqa: BLE001 — indice uffici muto: esito senza uffici, mai un crash
+        logger.warning("eGov: lettura indice uffici fallita per %s", comune.nome)
+        uffici = []
+
     return EsitoConnettore(
         codice_istat=comune.codice_istat,
         piattaforma=Piattaforma.EGOV.value,
         letto_il=letto_il,
         aree_amministrative=aree,
+        uffici=uffici,
         amministrazione_trasparente=amministrazione_trasparente,
     )
 

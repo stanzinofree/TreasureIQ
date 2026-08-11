@@ -31,10 +31,36 @@ from pydantic import BaseModel
 
 from treasureiq.connettore import EsitoConnettore
 from treasureiq.ingest.base import USER_AGENT
+from treasureiq.integration import DATA_DIR
 from treasureiq.mappa_connettore import _base_con_schema, _host_senza_www
 from treasureiq.sonda_live import LIVE_DIR, ComuneNoto
 
 logger = logging.getLogger(__name__)
+
+#: Recapiti ufficiali IPA (`data/ipa-recapiti.json`, keyed per codice_istat):
+#: PEC + indirizzo dell'ente dall'Indice PA. Statico, indipendente dalla
+#: scansione — NON entra nel record persistito né nei fingerprint di
+#: change-detection (sarebbe rumore), si innesta a read-time in
+#: `leggi_registro`. Lettura disco locale, non una fetch (D-01 salvo).
+_IPA_RECAPITI_PATH = DATA_DIR / "ipa-recapiti.json"
+_ipa_recapiti_cache: dict[str, dict[str, str]] | None = None
+
+
+def _carica_ipa_recapiti() -> dict[str, dict[str, str]]:
+    """L'indice IPA in memoria (cache di processo). Assente/illeggibile =
+    dizionario vuoto: i recapiti degradano a `None`, la card resta valida."""
+    global _ipa_recapiti_cache
+    if _ipa_recapiti_cache is None:
+        try:
+            import json
+
+            _ipa_recapiti_cache = json.loads(
+                _IPA_RECAPITI_PATH.read_text("utf-8")
+            )
+        except Exception:  # noqa: BLE001 — indice assente = nessun recapito
+            logger.warning("ipa-recapiti.json assente/illeggibile: %s", _IPA_RECAPITI_PATH)
+            _ipa_recapiti_cache = {}
+    return _ipa_recapiti_cache
 
 #: Size-cap del logo one-shot (D-11): l'abort è in streaming, non un
 #: controllo di `len()` a valle di un download intero (il DoS resterebbe).
@@ -45,6 +71,10 @@ MAX_LOGO_BYTES = 200_000
 #: deve entrare in RAM intera a ogni scansione riuscita.
 MAX_HOME_BYTES = 1_000_000
 
+#: Cap sul frammento statico `header.html` (eGov): è un frammento, non una
+#: pagina intera — un cap piccolo basta e tiene onesto lo streaming-con-abort.
+MAX_HEADER_BYTES = 200_000
+
 #: Quante scansioni tenere in storia: basta l'ultima coppia per il diff
 #: (R-04), un margine oltre serve solo a non far crescere il file all'infinito.
 MAX_STORIA = 10
@@ -54,6 +84,16 @@ _RE_LINK_TAG = re.compile(r"<link\b[^>]*>", re.IGNORECASE)
 _RE_CONTENT_ATTR = re.compile(r'content=["\']([^"\']+)["\']', re.IGNORECASE)
 _RE_HREF_ATTR = re.compile(r'href=["\']([^"\']+)["\']', re.IGNORECASE)
 _RE_REL_ICON = re.compile(r'rel=["\'](?:shortcut icon|icon)["\']', re.IGNORECASE)
+
+#: Il logo eGov non è nella home ma nel frammento statico `header.html`
+#: (`<img alt="Stemma Comune" ...>` — verificato 12/12 su comuni Halley
+#: sparsi). Tollerante all'ordine degli attributi: si estraggono i tag
+#: `<img>` per intero e si cerca `alt`/`class`/`src` dentro ognuno,
+#: nessuna posizione relativa presunta.
+_RE_IMG_TAG = re.compile(r"<img\b[^>]*>", re.IGNORECASE)
+_RE_SRC_ATTR = re.compile(r'src=["\']([^"\']+)["\']', re.IGNORECASE)
+_RE_ALT_ATTR = re.compile(r'alt=["\']([^"\']+)["\']', re.IGNORECASE)
+_RE_CLASS_ATTR = re.compile(r'class=["\']([^"\']+)["\']', re.IGNORECASE)
 
 
 class ServizioSnapshot(BaseModel):
@@ -82,9 +122,22 @@ class Cambiato(BaseModel):
     campi: list[str]
 
 
+class Recapiti(BaseModel):
+    """Recapiti ufficiali dall'Indice PA (`fonte`), innestati a read-time:
+    statici, indipendenti dalla scansione del portale. PEC e/o indirizzo
+    possono mancare singolarmente."""
+
+    pec: str | None = None
+    indirizzo: str | None = None
+    fonte: str = "IndicePA"
+
+
 class RegistroComune(BaseModel):
     """CONTRATTO-O2 (congelato): la forma esatta di `GET /api/registro/
-    {istat}` che B3 consuma. Non toccare senza aggiornare il plan."""
+    {istat}` che B3 consuma. Non toccare senza aggiornare il plan.
+
+    `recapiti` è additivo (default `None`): non è persistito nel record ma
+    innestato a read-time da `leggi_registro` — i client vecchi lo ignorano."""
 
     codice_istat: str
     nome: str
@@ -96,6 +149,7 @@ class RegistroComune(BaseModel):
     servizi_snapshot: list[ServizioSnapshot] = []
     prima_scansione: bool
     cambiato: Cambiato | None = None
+    recapiti: Recapiti | None = None
 
 
 class ScansioneStorico(BaseModel):
@@ -153,7 +207,31 @@ def leggi_registro(codice_istat: str) -> RegistroComune | None:
     record = _da_store(codice_istat)
     if record is None:
         return None
-    return RegistroComune(**record.model_dump(exclude={"scansioni"}))
+    scheda = RegistroComune(**record.model_dump(exclude={"scansioni"}))
+    scheda.recapiti = _recapiti_ipa(codice_istat)
+    return scheda
+
+
+def _recapiti_ipa(codice_istat: str) -> Recapiti | None:
+    """I recapiti IPA per questo comune, o `None` se l'ente non è nell'indice
+    o non ha né PEC né indirizzo (nessun campo vuoto spacciato per dato)."""
+    voce = _carica_ipa_recapiti().get(codice_istat)
+    if not voce:
+        return None
+    pec = (voce.get("pec") or "").strip() or None
+    indirizzo = (voce.get("indirizzo") or "").strip() or None
+    if not pec and not indirizzo:
+        return None
+    return Recapiti(pec=pec, indirizzo=indirizzo)
+
+
+def recapiti_comune(codice_istat: str) -> Recapiti | None:
+    """Recapiti ufficiali IPA per QUALSIASI comune, censito o meno: join
+    statico per ISTAT (D-01, letto da disco), indipendente dalla scansione
+    del portale. È l'unica scheda disponibile per un comune fuori copertura,
+    che nel registro non ha ancora un record: la card mostra comunque
+    PEC+indirizzo istituzionali invece del solo telefono letto dal vivo."""
+    return _recapiti_ipa(codice_istat)
 
 
 def _fingerprint_servizi(esito: EsitoConnettore) -> str:
@@ -193,6 +271,67 @@ def _estrai_logo_url(pagina: str, base: str) -> str | None:
     return None
 
 
+def _estrai_logo_header(pagina: str, base: str, host_comune: str) -> str | None:
+    """`<img alt="Stemma Comune" src="...">` dentro `header.html` (eGov,
+    verificato 12/12 su comuni Halley sparsi) — fallback: `class` che
+    contiene sia `me-3` sia `icon`. Same-host qui: un `src` fuori dominio
+    non diventa mai il logo (D-04: l'asset deve essere del comune stesso,
+    non un URL arbitrario nel frammento).
+
+    `header.html` reale è costruito da un blocco JS (`head += "<img ...>"`)
+    con le virgolette dell'attributo escapate (`\\"`) — non HTML piano.
+    Si normalizza `\\"` → `"` prima di cercare il tag, altrimenti nessun
+    `_RE_IMG_TAG` matcherebbe mai (osservato reale su Marino)."""
+    pagina = pagina.replace('\\"', '"')
+    for tag in _RE_IMG_TAG.findall(pagina):
+        alt_match = _RE_ALT_ATTR.search(tag)
+        e_stemma = alt_match is not None and alt_match.group(1).strip().lower() == "stemma comune"
+        class_match = _RE_CLASS_ATTR.search(tag)
+        e_icona = (
+            class_match is not None
+            and "me-3" in class_match.group(1).lower()
+            and "icon" in class_match.group(1).lower()
+        )
+        if not e_stemma and not e_icona:
+            continue
+        src_match = _RE_SRC_ATTR.search(tag)
+        if src_match is None:
+            continue
+        url = urljoin(base, html.unescape(src_match.group(1)).strip())
+        if _host_senza_www(urlparse(url).netloc.lower()) != host_comune:
+            continue
+        return url
+    return None
+
+
+def _leggi_header_html(base: str, host_comune: str, *, timeout: float = 6.0) -> tuple[str, str] | None:
+    """GET guardato di `header.html` (D-04): stessa guardia host-check
+    DOPO il follow-301 e size-cap-streaming-con-abort di `_scarica_logo`.
+    `None` per qualunque esito non valido — innocuo quando manca (es.
+    Municipium, dove `header.html` spesso risponde 404): il chiamante
+    ripiega sul comportamento attuale (`og:image`→favicon)."""
+    url = urljoin(base, "/header.html")
+    try:
+        with httpx.Client(timeout=timeout, headers={"User-Agent": USER_AGENT}, follow_redirects=True) as client:
+            with client.stream("GET", url) as risposta:
+                if risposta.status_code != 200:
+                    return None
+                if _host_senza_www(urlparse(str(risposta.url)).netloc.lower()) != host_comune:
+                    logger.warning("header.html redirect fuori host scartato: %s -> %s", url, risposta.url)
+                    return None
+                buffer = bytearray()
+                for pezzo in risposta.iter_bytes():
+                    buffer.extend(pezzo)
+                    if len(buffer) > MAX_HEADER_BYTES:
+                        logger.info("header.html oltre size-cap, connessione interrotta: %s", url)
+                        return None
+                finale = str(risposta.url)
+    except Exception:  # noqa: BLE001 — header.html muto: fallback al comportamento attuale
+        logger.info("header.html irraggiungibile: %s", url)
+        return None
+    return bytes(buffer).decode("utf-8", errors="replace"), finale
+
+
 def _scarica_logo(url: str, host_comune: str, *, timeout: float = 6.0) -> tuple[str | None, str | None]:
     """Il logo (D-11), scaricato in streaming con la guardia SSRF
     post-redirect di `municipium.py:246` (host allow-list DOPO il
@@ -230,9 +369,53 @@ def _scarica_logo(url: str, host_comune: str, *, timeout: float = 6.0) -> tuple[
     return data_uri, hash_sha256
 
 
+def _estrattori_logo_portale():
+    """Estrattori logo brand-portale, import deferred per evitare cicli
+    (openweb/peopleweb non importati a modulo). Ognuno prende
+    `(html_home, base, host_comune)` e ritorna un url o `None`. Se un
+    connettore manca, si salta — mai un crash."""
+    estrattori = []
+    try:
+        from treasureiq.openweb import estrai_logo_openweb
+
+        estrattori.append(estrai_logo_openweb)
+    except ImportError:
+        pass
+    try:
+        from treasureiq.peopleweb import estrai_logo_peopleweb
+
+        estrattori.append(estrai_logo_peopleweb)
+    except ImportError:
+        pass
+    try:
+        from treasureiq.wordpress_agid import estrai_logo_wordpress_agid
+
+        estrattori.append(estrai_logo_wordpress_agid)
+    except ImportError:
+        pass
+    try:
+        from treasureiq.comweb import estrai_logo_comweb
+
+        estrattori.append(estrai_logo_comweb)
+    except ImportError:
+        pass
+    try:
+        from treasureiq.openpa import estrai_logo_openpa
+
+        estrattori.append(estrai_logo_openpa)
+    except ImportError:
+        pass
+    return estrattori
+
+
 def _logo_one_shot(comune: ComuneNoto) -> tuple[str | None, str | None]:
     """Home page del comune → url logo → download guardato. Chiamata una
-    volta per scansione (D-11), mai al render."""
+    volta per scansione (D-11), mai al render.
+
+    L'url logo si sceglie in ordine: `header.html` (brand statico eGov,
+    D-04 — l'asset reale del comune, non fabbricato) prima, poi il
+    comportamento attuale `og:image`→favicon sulla home come fallback se
+    `header.html` manca/404 o non presenta il markup atteso."""
     base = _base_con_schema(comune.sito)
     if base is None:
         return None, None
@@ -258,10 +441,33 @@ def _logo_one_shot(comune: ComuneNoto) -> tuple[str | None, str | None]:
         logger.info("home page irraggiungibile per logo: %s", comune.nome)
         return None, None
     testo = buffer.decode("utf-8", errors="replace")
-    logo_url = _estrai_logo_url(testo, finale)
-    if logo_url is None:
-        return None, None
-    return _scarica_logo(logo_url, host_comune)
+
+    # Candidati logo in ordine di preferenza. Ognuno scaricato con la
+    # guardia SSRF stretta di `_scarica_logo` (host-check post-redirect):
+    # se un candidato fallisce il download si ripiega sul successivo,
+    # invece di arrendersi al primo url che non scarica.
+    candidati: list[str] = []
+    letto_header = _leggi_header_html(base, host_comune)
+    if letto_header is not None:
+        pagina_header, url_header = letto_header
+        u = _estrai_logo_header(pagina_header, url_header, host_comune)
+        if u:
+            candidati.append(u)
+    # Brand dei portali Bootstrap-Italia (openweb SVG inline, peopleweb
+    # <img>): letto dall'HTML home GIÀ scaricato, nessun fetch extra.
+    for estrai in _estrattori_logo_portale():
+        u = estrai(testo, base, host_comune)
+        if u and u not in candidati:
+            candidati.append(u)
+    u = _estrai_logo_url(testo, finale)
+    if u and u not in candidati:
+        candidati.append(u)
+
+    for logo_url in candidati:
+        data_uri, logo_hash = _scarica_logo(logo_url, host_comune)
+        if data_uri is not None:
+            return data_uri, logo_hash
+    return None, None
 
 
 def _campi_cambiati(precedente: ScansioneStorico, attuale: ScansioneStorico) -> list[str]:

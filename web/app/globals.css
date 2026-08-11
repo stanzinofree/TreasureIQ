@@ -2570,14 +2570,25 @@ a {
 
 /* Fuori copertura, dopo la ricerca: dice che il comune SAREBBE raggiungibile
    dal connettore. Verde, non giallo: non è un dato «non verificato», è un
-   fatto strutturale misurato sul portale. Discreto — una riga, non una carta. */
-.badge-connettore {
+   fatto strutturale misurato sul portale. Il box tiene due parti: la riga di
+   stato tecnica e, sotto, la nota che spiega in parole non tecniche perché
+   «non letto in automatico» (ciclo 15 round 2). */
+.badge-connettore-box {
   margin: var(--ma-4) 0 0;
   padding: var(--ma-3) var(--ma-4);
   border: 1px solid #cfe3d2;
   border-left: 3px solid #2f7d4f;
   background: #f2f8f3;
   border-radius: 2px;
+  color: var(--sumi-soft);
+  max-width: none;
+}
+.badge-connettore {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.35em 0.5em;
+  margin: 0;
   font-size: 0.82rem;
   line-height: 1.5;
   color: var(--sumi-soft);
@@ -2586,19 +2597,75 @@ a {
   max-width: none;
 }
 
+/* La nota-scopo: perché non leggiamo orari/referenti in automatico + missione
+   TIQ (aprire i dati). Più piccola e tenue della riga di stato — è contesto,
+   non un secondo verdetto. Separata da un filo sottile. */
+.badge-connettore__nota {
+  margin: var(--ma-2) 0 0;
+  padding: var(--ma-2) 0 0;
+  border-top: 1px solid #d8e8db;
+  font-size: 0.76rem;
+  line-height: 1.55;
+  color: #5f7a64;
+  max-width: none;
+}
+
 .badge-connettore__pallino {
   display: inline-block;
   width: 8px;
   height: 8px;
-  margin-right: 0.5em;
   border-radius: 50%;
   background: #2f7d4f;
-  vertical-align: middle;
 }
 
-.badge-connettore strong {
-  color: #245c3a;
+/* Riga di stato tecnica: coppia etichetta·valore. Mono per la resa da «pannello
+   di controllo» (codice, data), coerente coi micro-label del resto della UI. */
+.badge-connettore__campo {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35em;
+}
+
+.badge-connettore__k {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #6a7d6e;
+}
+
+.badge-connettore__v {
+  font-family: var(--font-mono, ui-monospace, monospace);
   font-weight: 600;
+  color: #245c3a;
+  font-variant-numeric: tabular-nums;
+}
+
+.badge-connettore__sep {
+  color: #a6c0ac;
+}
+
+/* Token di stato: «online» (il portale risponde) e «non ingerito» (non abbiamo
+   i dati — D-05, resta esplicito). Colori distinti: verde vs ambra-cautela. */
+.badge-connettore__stato {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.05em 0.45em;
+  border-radius: 2px;
+}
+
+.badge-connettore__stato--online {
+  color: #245c3a;
+  background: #dceede;
+  border: 1px solid #bcd9c1;
+}
+
+.badge-connettore__stato--grezzo {
+  color: #8a6d1f;
+  background: #f6efd8;
+  border: 1px solid #e4d3a0;
 }
 
 /* Schede di disambiguazione comune: un tap sceglie, niente da ridigitare. */
@@ -3079,6 +3146,76 @@ a {
   margin: 0;
   font-size: 0.9rem;
   font-weight: 600;
+}
+/* Riferimenti principali (telefono, PEC, indirizzo): stessa griglia
+   etichetta/valore dei numeri utili, dentro la card unica (ciclo 15). */
+.card-comune__recapiti {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: var(--ma-2) var(--ma-3);
+  margin: 0;
+  padding-top: var(--ma-3);
+  border-top: 1px solid var(--kasumi, var(--paper-sunken));
+}
+.card-comune__riga {
+  display: contents;
+}
+.card-comune__recapiti dt {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--kasumi-deep, var(--sumi-soft));
+  align-self: baseline;
+}
+.card-comune__recapiti dd {
+  margin: 0;
+  font-size: 0.82rem;
+  word-break: break-word;
+}
+.card-comune__fonte {
+  margin: 0;
+  font-size: var(--fs-micro);
+  color: var(--sumi-soft);
+}
+
+/* Accordion «Servizi del comune» nel pannello: collassato di default, testa
+   in stile sezione, apre la cascata mappa-servizi senza allungare la colonna. */
+.pannello__servizi {
+  border-top: 1px solid var(--kasumi);
+  padding-top: var(--ma-3);
+}
+.pannello__servizi-testa {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--ma-2);
+  cursor: pointer;
+  list-style: none;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sumi-faint);
+  font-weight: 600;
+}
+.pannello__servizi-testa::-webkit-details-marker {
+  display: none;
+}
+.pannello__servizi-testa::after {
+  content: "＋";
+  margin-left: auto;
+  font-size: 0.8rem;
+}
+.pannello__servizi[open] .pannello__servizi-testa::after {
+  content: "－";
+}
+.pannello__servizi-conta {
+  font-size: 0.72rem;
+  color: var(--sumi-faint);
+}
+.pannello__servizi[open] .mappa-servizi {
+  margin-top: var(--ma-3);
 }
 .card-comune__nota {
   margin: 0;
@@ -4329,28 +4466,44 @@ a {
   gap: 2px;
 }
 
-.civica__vivo {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: var(--ma-2);
-  margin: 0;
-  padding: var(--ma-2);
-  border-inline-start: 3px solid var(--ai);
-  background: var(--paper-sunken);
-  font-size: 0.88rem;
-  color: var(--sumi-soft);
+/* «letto ora»: bollo ambra cliccabile accanto allo stato. Ambra = dato letto
+   dal vivo, non conservato. Il click apre la nota a comparsa (civica__vivo-nota)
+   invece della vecchia banda grigia sempre a schermo. */
+.civica__vivo-wrap {
+  position: relative;
+  display: inline-flex;
 }
-
 .civica__vivo-bollo {
   flex: none;
-  padding: 0 var(--ma-2);
-  border: 1px solid var(--ai);
-  color: var(--ai);
+  padding: 1px var(--ma-2);
+  border: 1px solid var(--ambra, #8a6100);
+  background: none;
+  color: var(--ambra, #8a6100);
+  font: inherit;
   font-size: 0.72rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   white-space: nowrap;
+  cursor: pointer;
+}
+.civica__vivo-bollo::before {
+  content: "● ";
+}
+.civica__vivo-nota {
+  position: absolute;
+  top: calc(100% + var(--ma-1, 4px));
+  inset-inline-start: 0;
+  z-index: 5;
+  width: max-content;
+  max-width: 22rem;
+  padding: var(--ma-2);
+  border: 1px solid var(--kasumi);
+  border-inline-start: 3px solid var(--ambra, #8a6100);
+  background: var(--paper-sunken);
+  font-size: 0.82rem;
+  line-height: 1.4;
+  color: var(--sumi-soft);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 /* ── Scheda civica, seconda passata ──────────────────────────────────────────
@@ -4368,12 +4521,9 @@ a {
 .civica__bolli {
   display: flex;
   flex-wrap: wrap;
+  align-items: baseline;
   gap: var(--ma-2);
   margin: 0;
-}
-
-.civica__stato[data-ruolo="completezza"] {
-  color: var(--ambra, #8a6100);
 }
 
 .civica__blocco h4 {

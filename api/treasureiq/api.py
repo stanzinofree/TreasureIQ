@@ -86,7 +86,7 @@ from treasureiq.sonda_live import (
 )
 from treasureiq.bandi_live import BandiLiveEsito, _filtra_pdf_stesso_host, bandi_arricchiti
 from treasureiq.connettore import EsitoConnettore
-from treasureiq.registro import RegistroComune, leggi_registro
+from treasureiq.registro import Recapiti, RegistroComune, leggi_registro, recapiti_comune
 from treasureiq.extract.corpus import build_corpus, collect_pdf_segments
 from treasureiq.mappa_connettore import (
     Bando,
@@ -993,6 +993,11 @@ class ConnettoreSondaOut(BaseModel):
     indirizzabile: bool
     uffici: int
     rest_base: str | None = None
+    #: Data ISO dell'ultima scansione dello sweep per questo comune (dal registro
+    #: locale, letta da disco — D-01). None se mai scansionato. La UI la mostra
+    #: nel badge come «ultima scansione», rendendolo una riga di stato tecnica
+    #: (codice + connettore + online + data) invece che una frase.
+    ultima_scansione: str | None = None
 
 
 class ComuneAmbiguoOut(BaseModel):
@@ -2598,6 +2603,15 @@ async def chat(body: ChatIn, request: Request) -> ChatOut:
                 indirizzabile=answer.connettore.indirizzabile,
                 uffici=answer.connettore.uffici,
                 rest_base=answer.connettore.rest_base,
+                # Data ultima scansione dal registro locale (disk-read, D-01): fa
+                # del badge una riga di stato invece di una frase. None → mai
+                # scansionato, la UI omette il segmento.
+                ultima_scansione=(
+                    _reg.ultima_scansione
+                    if (_reg := leggi_registro(answer.connettore.codice_istat))
+                    is not None
+                    else None
+                ),
             )
             if answer.connettore is not None
             else None
@@ -2769,6 +2783,18 @@ def registro_comune(codice_istat: str) -> RegistroComune:
     if scheda is None:
         raise HTTPException(404, "comune non ancora scansionato")
     return scheda
+
+
+@app.get("/api/recapiti/{codice_istat}", response_model=Recapiti, tags=["Censimento nazionale"])
+def recapiti_comune_route(codice_istat: str) -> Recapiti:
+    """PEC+indirizzo ufficiali (IndicePA) per QUALSIASI comune, anche uno mai
+    scansionato: la card di un comune fuori copertura ha comunque i recapiti
+    istituzionali, non solo il telefono letto dal vivo. Join statico letto da
+    disco, nessuna fetch (D-01). 404 se l'ente non è nell'indice IPA."""
+    recapiti = recapiti_comune(codice_istat)
+    if recapiti is None:
+        raise HTTPException(404, "recapiti non disponibili")
+    return recapiti
 
 
 @app.get("/api/connettori", response_model=list[ConnettoreOut], tags=["Censimento nazionale"])

@@ -1,0 +1,364 @@
+        
+    head =        "<div class=\"it-header-slim-wrapper\">";
+    head +=            "<div class=\"container\">";
+    head +=                "<div class=\"row\">";
+    head +=                    "<div class=\"col-12\">"; 
+    head +=                        "<div class=\"it-header-slim-wrapper-content\">";
+    head +=                            "<a class=\"d-lg-block navbar-brand\" target=\"_blank\" href=\"https://www.regione.lazio.it/rl_main/\" aria-label=\"Vai al portale Regione Lazio\" title=\"Vai al portale Regione Lazio\">";
+    head +=                                "Regione Lazio";
+    head +=                            "</a>";
+    head +=                            "<div class=\"it-header-slim-right-zone\" role=\"navigation\">";
+    head +=                                "<div class=\"nav-item dropdown\">";
+    head +=                                    "<button type=\"button\" class=\"nav-link dropdown-toggle\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\" aria-controls=\"languages\" aria-haspopup=\"true\">";
+    head +=                                    "<span class=\"visually-hidden\">Lingua attiva:</span>";
+    head +=                                    "<span>ITA</span>";
+    head +=                                    "<svg class=\"icon\" aria-label=\"Seleziona la lingua\">";
+    head +=                                        "<use href=\"https://www.comune.marino.rm.it/assets/bootstrap-italia/svg/sprites.svg&num;it-expand\"></use>";
+    head +=                                    "</svg>";
+    head +=                                "</button>";
+    head +=                                    "<div class=\"dropdown-menu\">";
+    head +=                                        "<div class=\"row\">";
+    head +=                                            "<div class=\"col-12\">";
+    head +=                                                "<div class=\"link-list-wrapper\">";
+    head +=                                                        "<ul class=\"link-list\">";
+    head +=                                                        "<li>";
+    head +=                                                            "<a class=\"dropdown-item list-item dropdown-area-p\" href=\"&num;\">";
+    head +=                                                                "<span>";
+    head +=                                                                   "ITA";
+    head +=                                                                "</span>";
+    head +=                                                            "</a>";
+    head +=                                                        "</li>";
+    head +=                                                     "</ul>";
+    head +=                                                 "</div>";
+    head +=                                             "</div>";
+    head +=                                         "</div>";
+    head +=                                     "</div>";
+    head +=                                 "</div>";
+    head +=                             "<div id=\"conLogin\" class=\"it-user-wrapper nav-item dropdown\" style=\"display:none;\">";
+    head +=                                 "<a  id=\"linkLogin\" aria-expanded=\"false\" class=\"btn text-white btn-icon btn-full\" data-bs-toggle=\"dropdown\" href=\"#\" data-focus-mouse=\"false\" data-element=\"personal-area-login\">";
+    head +=                                     "<span class=\"rounded-icon\">";
+    head +=                                         "<img src=\"https://www.comune.marino.rm.it/assets/img/userLogged.png\" width=\"20\" height=\"20\" alt=\"Area riservata\" class=\"border rounded-circle icon-white\">";
+    head +=                                      "</span>";
+    head +=                                       "<span class=\"d-none d-lg-block first-uppercase\" id=\"nomeUtente\"></span>";
+    head +=                                        "<svg class=\"icon icon-white d-none d-lg-block icon-expand-area-p\" aria-label=\"Accedi alla scrivania\">";
+    head +=                                         "<use xlink:href=\"https://www.comune.marino.rm.it/assets/bootstrap-italia/svg/sprites.svg#it-expand\"></use>";
+    head +=                                        "</svg>";
+    head +=                                    "</a>";
+    head +=                                   "<div class=\"dropdown-area-p dropdown-menu\">";
+    head +=                                      "<div class=\"row\">";
+    head +=                                         "<div class=\"col-12\">";
+    head +=                                             "<div class=\"link-list-wrapper\">"; 
+    head +=                                                 "<ul class=\"link-list\">";
+    head +=                                                     "<li>";
+    head +=                                                         "<a class=\"dropdown-item list-item text-decoration-none\" onclick=\"V01('https://www.comune.marino.rm.it','eg176','','RIS21'); return false;\" href=\"#\">";
+    head +=                                                             "<span>La mia scrivania</span>";
+    head +=                                                         "</a>";
+    head +=                                                      "</li>";
+    head +=                                                     "<li id=\"accesso_professionisti\"  style=\"display: none;\" >";
+    head +=                                                         "<a class=\"dropdown-item list-item text-decoration-none\" href=\"\" target=\"_blank\" onclick=\"this.href='/wb/scrivania_professionisti.php?SESS_ID='+leggiCookie('sessEgov');\" aria-label=\"Accesso area personale professionisti\">";
+    head +=                                                             "<span>Professionista</span>";
+    head +=                                                         "</a>";
+    head +=                                                      "</li>";
+    head +=                                                     "<li>";
+    head +=                                                         "<span class=\"divider\"></span>";
+    head +=                                                     "</li>";
+    head +=                                                     "<li>";
+    head +=                                                         "<a class=\"list-item left-icon text-decoration-none\" onclick=\"logoutSessione(); V01('https://www.comune.marino.rm.it','eg176','','H03'); return false;\" href=\"#\">";
+    head +=                                                             "<svg class=\"icon icon-primary icon-sm left\" aria-label=\"Esci\">";
+    head +=                                                                 "<use xlink:href=\"https://www.comune.marino.rm.it/assets/bootstrap-italia/svg/sprites.svg#it-external-link\"></use>";
+    head +=                                                             "</svg>";
+    head +=                                                             "<span class=\"fw-bold\">";
+    head +=                                                                 "&nbsp;Esci";
+    head +=                                                            "</span>";
+    head +=                                                         "</a>";
+    head +=                                                     "</li>";
+    head +=                                                 "</ul>";
+    head +=                                             "</div>";
+    head +=                                         "</div>";
+    head +=                                     "</div>";
+    head +=                                 "</div>";
+    head +=                             "</div>";
+
+    head +=                             "<div id=\"senzaLogin\" style=\"display:none;\">"
+    head +=                                "<a onclick=\"V01('https://www.comune.marino.rm.it','eg176','','H04'); return false;\" href=\"https://www.comune.marino.rm.it/EG0/EGHOMEPAGE.HBL?ss=1&F=H04&en=eg176&freeze=1\" class=\"btn btn-primary btn-icon btn-full\" aria-label=\"accedi area personale\" data-element=\"personal-area-login\">";
+    head +=                                    "<span class=\"icon-area-p rounded-icon\" aria-hidden=\"true\">";
+    head +=                                        "<svg class=\"icon icon-primary\" aria-label=\"Accedi all area personale\">";
+    head +=                                            "<use xlink:href=\"https://www.comune.marino.rm.it/assets/bootstrap-italia/svg/sprites.svg&num;it-user\"></use>";
+    head +=                                        "</svg>";
+    head +=                                    "</span>";
+    head +=                                    "<span class=\"d-none d-lg-block\">";
+    head +=                                        "Accedi all&rsquo;area personale";
+    head +=                                    "</span>";
+    head +=                                "</a>";
+    head +=                             "</div>";
+
+    head +=                            "</div>";
+    head +=                        "</div>";
+    head +=                    "</div>";
+    head +=                "</div>";
+    head +=            "</div>";
+    head +=        "</div>";
+    head +=        "<div class=\"it-nav-wrapper\">";
+    head +=            "<div class=\"it-header-center-wrapper\">";
+    head +=                "<div class=\"container\">";
+    head +=                    "<div class=\"row\">";
+    head +=                       "<div class=\"col-12\">";
+    head +=                            "<div class=\"it-header-center-content-wrapper\">";
+
+    head +=                                    "<div class=\"it-brand-wrapper\">";
+    head +=                                        "<a href=\"https://www.comune.marino.rm.it/homepage.html\">"  
+    head +=                                                "<img class=\"me-3 icon\" alt=\"Stemma Comune\" src=\"https://www.comune.marino.rm.it/immagini/logo-comune.jpg\">";
+    head +=                                                 "<div class=\"it-brand-text\">";
+    head +=                                                 "<h1 class=\"it-brand-title\">Comune di Marino</h1>";
+	head +=                                            		"<small class=\"d-none d-lg-inline\">Città Metropolitana di Roma Capitale</small>";
+    head +=                                            "</div>";
+    head +=                                        "</a>";
+    head +=                                    "</div>";
+    head +=                                "<div class=\"it-right-zone\">";
+
+    head +=                                    "<div class=\"it-socials d-none d-lg-flex\">";
+    head +=                                        "<span>Seguici su</span>";
+    head +=                                        "<ul>";
+
+    head +=                                            "<li>";
+    head +=                                                "<a href=\"https://twitter.com/comunemarino\" target=\"_blank\">";
+    head +=                                                    "<svg class=\"icon icon-sm icon-white align-top\" aria-label=\"social media\">";
+    head +=                                                        "<use xlink:href=\"https://www.comune.marino.rm.it/assets/bootstrap-italia/svg/sprites.svg#it-twitter\"></use>";
+    head +=                                                    "</svg>";
+    head +=                                                    "<span class=\"visually-hidden\">Twitter</span>";
+    head +=                                                "</a>";
+    head +=                                            "</li>";
+
+    head +=                                            "<li>";
+    head +=                                                "<a href=\"https://it-it.facebook.com/ComuneMarino/\" target=\"_blank\">";
+    head +=                                                    "<svg class=\"icon icon-sm icon-white align-top\" aria-label=\"social media\">";
+    head +=                                                        "<use xlink:href=\"https://www.comune.marino.rm.it/assets/bootstrap-italia/svg/sprites.svg#it-facebook\"></use>";
+    head +=                                                    "</svg>";
+    head +=                                                    "<span class=\"visually-hidden\">Facebook</span>";
+    head +=                                                "</a>";
+    head +=                                            "</li>";
+
+    head +=                                            "<li>";
+    head +=                                                "<a href=\"https://www.youtube.com/channel/UC747-6LjYgvrt7FBojRf99A/\" target=\"_blank\">";
+    head +=                                                    "<svg class=\"icon icon-sm icon-white align-top\" aria-label=\"social media\">";
+    head +=                                                        "<use xlink:href=\"https://www.comune.marino.rm.it/assets/bootstrap-italia/svg/sprites.svg#it-youtube\"></use>";
+    head +=                                                    "</svg>";
+    head +=                                                    "<span class=\"visually-hidden\">Youtube</span>";
+    head +=                                                "</a>";
+    head +=                                            "</li>";
+
+    head +=                                            "<li>";
+    head +=                                                "<a href=\"https://t.me/ComunediMarino\" target=\"_blank\">";
+    head +=                                                    "<svg class=\"icon icon-sm icon-white align-top\" aria-label=\"social media\">";
+    head +=                                                        "<use xlink:href=\"https://www.comune.marino.rm.it/assets/bootstrap-italia/svg/sprites.svg#it-telegram\"></use>";
+    head +=                                                    "</svg>";
+    head +=                                                    "<span class=\"visually-hidden\">Telegram</span>";
+    head +=                                                "</a>";
+    head +=                                            "</li>";
+
+    head +=                                            "<li>";
+    head +=                                                "<a href=\"https://whatsapp.com/channel/0029VaSIcibAInPmLgMBmQ2K\" target=\"_blank\">";
+    head +=                                                    "<svg class=\"icon icon-sm icon-white align-top\" aria-label=\"social media\">";
+    head +=                                                        "<use xlink:href=\"https://www.comune.marino.rm.it/assets/bootstrap-italia/svg/sprites.svg#it-whatsapp\"></use>";
+    head +=                                                    "</svg>";
+    head +=                                                    "<span class=\"visually-hidden\">Whatsapp</span>";
+    head +=                                                "</a>";
+    head +=                                            "</li>";
+
+    head +=                                            "<li>";
+    head +=                                                "<a href=\"https://www.instagram.com/comunemarino/\" target=\"_blank\">";
+    head +=                                                    "<svg class=\"icon icon-sm icon-white align-top\" aria-label=\"social media\">";
+    head +=                                                        "<use xlink:href=\"https://www.comune.marino.rm.it/assets/bootstrap-italia/svg/sprites.svg#it-instagram\"></use>";
+    head +=                                                    "</svg>";
+    head +=                                                    "<span class=\"visually-hidden\">Instagram</span>";
+    head +=                                                "</a>";
+    head +=                                            "</li>";
+
+    head +=                                        "</ul>";
+    head +=                                    "</div>";
+
+    head += "<div class=\"it-search-wrapper\">";
+    head +=     "<div class=\"search-box\">";
+    head +=        "<span class=\"d-none d-md-block cerca u-main-white\">Cerca</span>";
+    head +=        "<button class=\"search-link rounded-icon\" type=\"button\" aria-label=\"Cerca nel sito\" onclick=\"esegueUrlRicerca(\'eg176\',\'https://www.comune.marino.rm.it\')\">";
+    head +=            "<svg class=\"icon\" aria-label=\"Ricerca globale\">";
+    head +=                "<use href=\"https://www.comune.marino.rm.it/assets/bootstrap-italia/svg/sprites.svg&num;it-search\"></use>";
+    head +=            "</svg>";
+    head +=        "</button>";
+    head +=    "</div>";
+    head += "</div>";
+
+    head +=                                 "</div>";
+    head +=                             "</div>";
+    head +=                         "</div>";
+    head +=                     "</div>";
+    head +=                 "</div>";
+    head +=             "</div>";
+    head +=            "<div class=\"it-header-navbar-wrapper\" id=\"header-nav-wrapper\">";
+    head +=                 "<div class=\"container\">";
+    head +=                     "<div class=\"row\">";
+    head +=                         "<div class=\"col-12\">";
+    head +=                             "";
+    head +=                             "<nav class=\"navbar navbar-expand-lg has-megamenu\" aria-label=\"Navigazione principale\">";
+    head +=                                 "<button class=\"custom-navbar-toggler burger-navigation\" type=\"button\" aria-controls=\"nav4\" aria-expanded=\"false\" aria-label=\"Mostra/Nascondi la navigazione\" data-bs-target=\"&num;nav4\" data-bs-toggle=\"navbarcollapsible\">";
+    head +=                                     "<svg class=\"icon\" aria-label=\"menu mobile\">";
+    head +=                                         "<use href=\"https://www.comune.marino.rm.it/assets/bootstrap-italia/svg/sprites.svg&num;it-burger\"></use>";
+    head +=                                     "</svg>";
+    head +=                                 "</button>";
+    head +=                                 "<div class=\"navbar-collapsable\" id=\"nav4\">";
+    head +=                                     "<div class=\"overlay\" style=\"display: none\"></div>";
+    head +=                                     "<div class=\"close-div\">";
+    head +=                                         "<button class=\"btn close-menu\" type=\"button\" title=\"Chiudi il menu\">";
+    head +=                                             "<svg class=\"icon\" aria-label=\"Nascondi la navigazione\">";
+    head +=                                                 "<use href=\"https://www.comune.marino.rm.it/assets/bootstrap-italia/svg/sprites.svg&num;it-close-big\"></use>";
+    head +=                                             "</svg>";
+    head +=                                         "</button>";
+    head +=                                     "</div>";
+    head +=                                     "<div class=\"menu-wrapper\">";
+    head +=                                         "<a href=\"https://www.comune.marino.rm.it/homepage.html\" aria-label=\"home Comune di Marino\" class=\"logo-hamburger\">";
+    head +=                                             "<svg class=\"icon\" aria-hidden=\"true\" aria-label=\"home Comune di Marino\">";
+    head +=                                                 "<use href=\"https://www.comune.marino.rm.it/assets/bootstrap-italia/svg/sprites.svg&num;it-pa\"></use>";
+    head +=                                             "</svg>";
+    head +=                                             "<div class=\"it-brand-text\">";
+    head +=                                                 "<div class=\"it-brand-title\">";
+    head +=                                                     "Comune di Marino";
+    head +=                                                 "</div>";
+    head +=                                             "</div>";
+    head +=                                         "</a>";
+    head +=                                         "<ul class=\"navbar-nav\" data-element=\"main-navigation\">";
+
+    head +=                                             "<li class=\"nav-item\">";
+    head +=                                                 "<a class=\"nav-link\" href=\"https://www.comune.marino.rm.it/amministrazione/amministrazione.html\" data-element=\"management\">";
+    head +=                                                     "<span>Amministrazione</span>";
+    head +=                                                 "</a>";
+    head +=                                            "</li>";
+
+    head +=                                             "<li class=\"nav-item\">";
+    head +=                                                 "<a class=\"nav-link\" href=\"https://www.comune.marino.rm.it/EG0/EGSCHTST18.HBL?en=eg176&MESSA=PUBBLICA\" data-element=\"news\" onclick=\"this.style.pointerEvents='none'\">";
+    head +=                                                     "<span>Novità</span>";
+    head +=                                                 "</a>";
+    head +=                                            "</li>";
+    
+    head +=                                             "<li class=\"nav-item\">";
+    head +=                                                 "<a class=\"nav-link\" href=\"https://www.comune.marino.rm.it/EG0/EGSCHTST.HBL?en=eg176&MESSA=PUBBLICA\" data-element=\"all-services\" onclick=\"this.style.pointerEvents='none'\">";
+    head +=                                                     "<span>Servizi</span>";
+    head +=                                                 "</a>";
+    head +=                                            "</li>";
+	
+    head +=                                             "<li class=\"nav-item\">";
+    head +=                                                 "<a class=\"nav-link\" href=\"https://www.comune.marino.rm.it/EG0/EGSCHTST39.HBL?en=eg176&MESSA=PUBBLICA\" data-element=\"live\" onclick=\"this.style.pointerEvents='none'\">";
+    head +=                                                     "<span>Vivere il comune</span>";
+    head +=                                                 "</a>";
+    head +=                                            "</li>";
+    
+    head +=                                         "</ul>";
+    head +=                                         "<ul class=\"navbar-nav navbar-secondary\">";
+    
+    head +=                                             "<li class=\"nav-item\">";
+    head +=                                                 "<a class=\"nav-link pe-0 ps-3\" style=\"font-size: 16px;\" data-element=\"custom-submenu\" href=\"https://www.comune.marino.rm.it/EG0/EGSCHTST45.HBL?ARG=25\">Circolazione stradale</a>";
+    head +=                                             "</li>";
+    
+    head +=                                             "<li class=\"nav-item\">";
+    head +=                                                 "<a class=\"nav-link pe-0 ps-3\" style=\"font-size: 16px;\" data-element=\"custom-submenu\" href=\"https://www.comune.marino.rm.it/EG0/EGSCHTST45.HBL?ARG=52\">PNRR</a>";
+    head +=                                             "</li>";
+    
+    head +=                                             "<li class=\"nav-item\">";
+    head +=                                                 "<a class=\"nav-link pe-0 ps-3\" style=\"font-size: 16px;\" data-element=\"custom-submenu\" href=\"https://www.comune.marino.rm.it/EG0/EGSCHTST45.HBL?ARG=49\">Sagra dell'Uva</a>";
+    head +=                                             "</li>";
+    
+    head +=                                             "<li class=\"nav-item\">";
+    head +=                                                 "<a class=\"nav-link\" data-element=\"all-topics\" href=\"https://www.comune.marino.rm.it/EG0/EGSCHTST44.HBL?MESSA=PUBBLICA\" data-element=\"all-topics\">";
+    head +=                                                     "<span class=\"fw-bold\" style=\"font-size: 16px;\">";
+    head +=                                                         "Tutti gli argomenti";
+    head +=                                                     "</span>";
+    head +=                                                 "</a>";
+    head +=                                             "</li>";
+    head +=                                         "</ul>";
+    
+    head +=                                         "<div class=\"it-socials\">";
+    head +=                                             "<span>Seguici su</span>";
+    head +=                                             "<ul>";
+    
+    head +=                                                 "<li>";
+    head +=                                                     "<a href=\"https://twitter.com/comunemarino\" target=\"_blank\" arial-label=\"Apre profilo social media\">";
+    head +=                                                         "<svg class=\"icon icon-sm icon-white align-top\" aria-label=\"Social media\">";
+    head +=                                                             "<use xlink:href=\"https://www.comune.marino.rm.it/assets/bootstrap-italia/svg/sprites.svg#it-twitter\"></use>";
+    head +=                                                         "</svg>";
+    head +=                                                         "<span class=\"visually-hidden\">";
+    head +=                                                             "Twitter";
+    head +=                                                         "</span>";
+    head +=                                                    "</a>";
+    head +=                                                "</li>";
+    
+    head +=                                                 "<li>";
+    head +=                                                     "<a href=\"https://it-it.facebook.com/ComuneMarino/\" target=\"_blank\" arial-label=\"Apre profilo social media\">";
+    head +=                                                         "<svg class=\"icon icon-sm icon-white align-top\" aria-label=\"Social media\">";
+    head +=                                                             "<use xlink:href=\"https://www.comune.marino.rm.it/assets/bootstrap-italia/svg/sprites.svg#it-facebook\"></use>";
+    head +=                                                         "</svg>";
+    head +=                                                         "<span class=\"visually-hidden\">";
+    head +=                                                             "Facebook";
+    head +=                                                         "</span>";
+    head +=                                                    "</a>";
+    head +=                                                "</li>";
+    
+    head +=                                                 "<li>";
+    head +=                                                     "<a href=\"https://www.youtube.com/channel/UC747-6LjYgvrt7FBojRf99A/\" target=\"_blank\" arial-label=\"Apre profilo social media\">";
+    head +=                                                         "<svg class=\"icon icon-sm icon-white align-top\" aria-label=\"Social media\">";
+    head +=                                                             "<use xlink:href=\"https://www.comune.marino.rm.it/assets/bootstrap-italia/svg/sprites.svg#it-youtube\"></use>";
+    head +=                                                         "</svg>";
+    head +=                                                         "<span class=\"visually-hidden\">";
+    head +=                                                             "Youtube";
+    head +=                                                         "</span>";
+    head +=                                                    "</a>";
+    head +=                                                "</li>";
+    
+    head +=                                                 "<li>";
+    head +=                                                     "<a href=\"https://t.me/ComunediMarino\" target=\"_blank\" arial-label=\"Apre profilo social media\">";
+    head +=                                                         "<svg class=\"icon icon-sm icon-white align-top\" aria-label=\"Social media\">";
+    head +=                                                             "<use xlink:href=\"https://www.comune.marino.rm.it/assets/bootstrap-italia/svg/sprites.svg#it-telegram\"></use>";
+    head +=                                                         "</svg>";
+    head +=                                                         "<span class=\"visually-hidden\">";
+    head +=                                                             "Telegram";
+    head +=                                                         "</span>";
+    head +=                                                    "</a>";
+    head +=                                                "</li>";
+    
+    head +=                                                 "<li>";
+    head +=                                                     "<a href=\"https://whatsapp.com/channel/0029VaSIcibAInPmLgMBmQ2K\" target=\"_blank\" arial-label=\"Apre profilo social media\">";
+    head +=                                                         "<svg class=\"icon icon-sm icon-white align-top\" aria-label=\"Social media\">";
+    head +=                                                             "<use xlink:href=\"https://www.comune.marino.rm.it/assets/bootstrap-italia/svg/sprites.svg#it-whatsapp\"></use>";
+    head +=                                                         "</svg>";
+    head +=                                                         "<span class=\"visually-hidden\">";
+    head +=                                                             "Whatsapp";
+    head +=                                                         "</span>";
+    head +=                                                    "</a>";
+    head +=                                                "</li>";
+    
+    head +=                                                 "<li>";
+    head +=                                                     "<a href=\"https://www.instagram.com/comunemarino/\" target=\"_blank\" arial-label=\"Apre profilo social media\">";
+    head +=                                                         "<svg class=\"icon icon-sm icon-white align-top\" aria-label=\"Social media\">";
+    head +=                                                             "<use xlink:href=\"https://www.comune.marino.rm.it/assets/bootstrap-italia/svg/sprites.svg#it-instagram\"></use>";
+    head +=                                                         "</svg>";
+    head +=                                                         "<span class=\"visually-hidden\">";
+    head +=                                                             "Instagram";
+    head +=                                                         "</span>";
+    head +=                                                    "</a>";
+    head +=                                                "</li>";
+    
+    head +=                                             "</ul>";
+    head +=                                         "</div>";
+    
+    head +=                                     "</div>";
+    head +=                                 "</div>";
+    head +=                             "</nav>";
+    head +=                         "</div>";
+    head +=                     "</div>";
+    head +=                 "</div>";
+    head +=             "</div>";
+    head +=         "</div>";
+    head +=     "";
+
+    data2 = document.getElementById('headd');
+    data2.insertAdjacentHTML('beforeend', head);
+    
+    

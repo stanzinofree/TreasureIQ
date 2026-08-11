@@ -12,7 +12,9 @@ COMPOSE   := docker compose
 COMPOSE_PROFILE_INGEST := docker compose --profile ingest
 
 .PHONY: help up down restart rebuild build logs ps status \
-        up-ingest down-ingest ollama-check
+        up-ingest down-ingest ollama-check \
+        scan-nazionale scan-misurabili sweep registro-nazionale registro-scan registro-list \
+        backup restore
 
 .DEFAULT_GOAL := help
 
@@ -27,6 +29,14 @@ help:
 	@echo "  make ps             container status"
 	@echo "  make up-ingest      start the ingestion-only searxng service"
 	@echo "  make down-ingest    stop searxng"
+	@echo "  make scan-nazionale     censimento asse-A su tutti i comuni -> storico.db (pesante, resumable)"
+	@echo "  make scan-misurabili    pass profondo + aderenza sui comuni leggibili gia' nel db"
+	@echo "  make sweep              censimento+registro per un set in un run: ISTAT='058057'"
+	@echo "  make registro-nazionale popola data-live/registro per i comuni leggibili"
+	@echo "  make registro-scan      scan di uno o piu' comuni: ISTAT='058057'"
+	@echo "  make registro-list      elenca i record nel registro"
+	@echo "  make backup             tar di storico.db + data-live/ in backups/"
+	@echo "  make restore            ripristina un backup: FILE=backups/....tgz"
 
 ollama-check:
 	@if curl -s --max-time 2 http://127.0.0.1:11434/api/tags >/dev/null 2>&1; then \
@@ -44,7 +54,7 @@ up: ollama-check
 
 restart: down up
 
-rebuild: build up
+rebuild: backup build up
 
 build:
 	$(COMPOSE) build api web
@@ -106,3 +116,59 @@ censimento: ## Rifa' la misura T0 sul campione: make censimento N=400
 	docker compose run --rm -T -v "$(PWD)/data:/scrivibile" api \
 		python -m treasureiq.ingest.censimento --campione $(or $(N),400) --seme 2026 \
 		--out /scrivibile/censimento-esiti.json
+
+.PHONY: scan-nazionale
+scan-nazionale: ## Censimento asse-A su TUTTI i comuni -> storico.db (gentile: solo fingerprint, resumable, ripopola /analytics)
+	docker compose run --rm -T -v "$(PWD)/data:/scrivibile" api \
+		python -m treasureiq.ingest.censimento --tutti --db /scrivibile/storico.db \
+		--lavoratori $(or $(LAVORATORI),6)
+
+.PHONY: scan-misurabili
+scan-misurabili: ## Pass profondo + aderenza AgID sui comuni leggibili gia' nel db
+	docker compose run --rm -T -v "$(PWD)/data:/scrivibile" api \
+		python -m treasureiq.ingest.censimento --solo-misurabili --aderenza \
+		--db /scrivibile/storico.db --lavoratori $(or $(LAVORATORI),6)
+
+.PHONY: sweep
+sweep: ## Censimento+registro per un set in un run: make sweep ISTAT='058057' | vuoto=coperti
+	docker compose run --rm -T -v "$(PWD)/data:/scrivibile" api \
+		python -m treasureiq.registro_cli sweep $(if $(ISTAT),$(ISTAT),--coperti) \
+		--db /scrivibile/storico.db $(if $(ADERENZA),--aderenza,) \
+		--lavoratori $(or $(LAVORATORI),6) --delay $(or $(DELAY),1.5)
+
+.PHONY: registro-nazionale
+registro-nazionale: ## Popola data-live/registro per i comuni leggibili trovati nel censimento
+	docker compose exec -T api python -m treasureiq.registro_cli scan --da-censimento --only-missing
+
+.PHONY: registro-scan
+registro-scan: ## Scansiona uno o piu' comuni: make registro-scan ISTAT='058057'
+	docker compose exec -T api python -m treasureiq.registro_cli scan $(if $(ISTAT),$(ISTAT),--coperti)
+
+.PHONY: registro-list
+registro-list: ## Elenca i record presenti in data-live/registro (read-only)
+	docker compose exec -T api python -m treasureiq.registro_cli list
+
+# --- Backup ---------------------------------------------------------------
+# data-live/ e data/storico.db sono bind mount: già persistenti ai rebuild
+# (compose.yml). Questo backup e' la cintura extra, non la sola garanzia.
+
+.PHONY: backup
+backup: ## Copia storico.db + data-live/ in backups/treasureiq-<timestamp>.tgz
+	@mkdir -p backups
+	@stamp=$$(date -u +%Y%m%dT%H%M%SZ); \
+	tar_path="backups/treasureiq-$$stamp.tgz"; \
+	if [ -f data/storico.db ]; then \
+		tar -czf "$$tar_path" data/storico.db data-live; \
+	else \
+		echo "data/storico.db assente, backup solo di data-live/"; \
+		tar -czf "$$tar_path" data-live; \
+	fi; \
+	echo "backup: $$tar_path"
+
+.PHONY: restore
+restore: ## Ripristina un backup: make restore FILE=backups/treasureiq-....tgz
+	@test -n "$(FILE)" || { echo "manca FILE, es. make restore FILE=backups/treasureiq-20260810T120000Z.tgz"; exit 1; }
+	@test -f "$(FILE)" || { echo "file non trovato: $(FILE)"; exit 1; }
+	@echo "questo sovrascrive data/storico.db e data-live/ con il contenuto di $(FILE):"
+	@tar -tzf "$(FILE)"
+	tar -xzf "$(FILE)" -C .

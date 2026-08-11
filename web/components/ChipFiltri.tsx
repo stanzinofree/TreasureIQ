@@ -28,12 +28,12 @@ function formattaValore(chiave: FiltroChiave, valore: FiltroOut["valore"]): stri
  *  (`span.testo`, verbatim) quando c'e', e un bottone «×» quando il filtro e'
  *  davvero rimovibile con re-query (D-04).
  *
- *  Il chip `comune` non porta mai il bottone: `ChatOut.filtri` lo riporta come
- *  eco INFORMATIVA di cosa il testo nomina, non del comune usato per il
- *  routing (oggi `_resolve_comune` resta ristretto al profilo/ISTAT scelto).
- *  Renderlo rimovibile-con-re-query lascerebbe credere che togliendolo cambi
- *  il comune cercato — falso. Un chip senza «×», marcato "riconosciuto", dice
- *  la cosa vera senza doverla spiegare ogni volta. */
+ *  Il chip `comune` NON si mostra qui (ciclo 15): collideva col badge verde del
+ *  connettore — due marcatori per lo stesso fatto («questo comune») — e per
+ *  giunta portava l'ISTAT grezzo (`110003`), illeggibile. L'identità del comune
+ *  vive già nella card a sinistra (nome + logo) e la sua raggiungibilità nel
+ *  BadgeConnettore: un solo posto per dirlo, come chiesto. Qui restano i soli
+ *  filtri del cittadino (età, ISEE, tema…). */
 export default function ChipFiltri({
   filtri,
   onRimuovi,
@@ -43,11 +43,14 @@ export default function ChipFiltri({
   onRimuovi: (chiave: FiltroChiave) => void;
   disabled?: boolean;
 }) {
-  if (filtri.length === 0) return null;
+  // Fuori il chip comune prima del conteggio: se era l'unico filtro, la lista
+  // non si disegna affatto (niente riga vuota sotto il messaggio).
+  const daMostrare = filtri.filter((f) => f.chiave !== "comune");
+  if (daMostrare.length === 0) return null;
 
   return (
     <div className="chip-filtri" role="list" aria-label="Filtri riconosciuti">
-      {filtri.map((filtro, i) => {
+      {daMostrare.map((filtro, i) => {
         const rimovibile = filtro.chiave !== "comune";
         const dettaglio = formattaValore(filtro.chiave, filtro.valore);
         const provenienza = filtro.span?.testo ?? null;

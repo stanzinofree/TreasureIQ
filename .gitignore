@@ -69,3 +69,6 @@ data/feedback.jsonl
 # capire l'API di una piattaforma e inutili da conservare. Quello che si e'
 # imparato da una cattura sta nel codice — vedi `ingest/myportal.py`.
 *.har
+
+# Backup locali (make backup): storico.db + data-live/, mai versionati.
+backups/

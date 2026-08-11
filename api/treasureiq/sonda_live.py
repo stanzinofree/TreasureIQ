@@ -424,8 +424,26 @@ _PEC_DOMINIO = re.compile(r"pec|postacert|legalmail|cert\.", re.IGNORECASE)
 
 
 def _tel_valido(grezzo: str) -> bool:
+    """Sintassi di un numero italiano componibile. Lo scraping a volte pesca
+    sequenze storpiate — es. «055055», un prefisso ripetuto — che sotto il
+    vecchio minimo di 6 cifre finivano in card come se fossero un centralino.
+    Schema: numero nazionale di 8-11 cifre (dopo l'eventuale +39/0039), fisso
+    (prefisso `0`) o cellulare (`3`). Chi non lo rispetta è scartato: meglio
+    telefono «assente» che un numero finto."""
     cifre = re.sub(r"\D", "", grezzo)
-    return 6 <= len(cifre) <= 12
+    # Prefisso internazionale italiano opzionale, poi il numero nazionale.
+    if cifre.startswith("0039"):
+        cifre = cifre[4:]
+    elif cifre.startswith("39") and 11 <= len(cifre) <= 13:
+        cifre = cifre[2:]
+    if not (8 <= len(cifre) <= 11):
+        return False
+    # Fisso: `0` + prefisso area, la cui prima cifra è sempre 1-9 (mai `00…`,
+    # che è spazzatura da scraping o un prefisso internazionale monco).
+    # Cellulare: `3`. Tutto il resto non è un numero italiano componibile.
+    if cifre[0] == "3":
+        return True
+    return cifre[0] == "0" and cifre[1] in "123456789"
 
 
 def _estrai_recapiti(html: str) -> tuple[list[str], list[str], list[str]]:

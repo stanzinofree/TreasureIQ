@@ -18,6 +18,7 @@ from treasureiq.registro import (
     MAX_LOGO_BYTES,
     RecordRegistro,
     _da_store,
+    _estrai_logo_header,
     _in_store,
     _scarica_logo,
     registra_scansione,
@@ -28,6 +29,12 @@ ISTAT = "048052"
 HOST = "comunefiv.it"
 
 client = TestClient(app)
+
+_FIXTURES = Path(__file__).parent / "fixtures"
+
+
+def _leggi_fixture(nome: str) -> str:
+    return (_FIXTURES / nome).read_text("utf-8")
 
 
 def _comune() -> ComuneNoto:
@@ -177,6 +184,33 @@ def test_logo_ok_sotto_cap_stesso_host(monkeypatch: pytest.MonkeyPatch) -> None:
     assert logo_hash is not None
 
 
+def test_estrai_logo_header_marino_reale() -> None:
+    """`header.html` reale di Marino: il logo NON è nella home, sta nel
+    frammento statico (`<img alt="Stemma Comune">`, D-04 — asset reale del
+    comune, non fabbricato)."""
+    pagina = _leggi_fixture("egov_header_marino.html")
+    logo_url = _estrai_logo_header(
+        pagina, "https://www.comune.marino.rm.it/header.html", "comune.marino.rm.it"
+    )
+    assert logo_url == "https://www.comune.marino.rm.it/immagini/logo-comune.jpg"
+
+
+def test_estrai_logo_header_scarta_src_fuori_host() -> None:
+    """Un `src` fuori dal dominio del comune non diventa mai il logo —
+    stessa guardia same-host del resto del file (SSRF)."""
+    pagina = '<img class="me-3 icon" alt="Stemma Comune" src="https://evil.example.com/x.jpg">'
+    logo_url = _estrai_logo_header(
+        pagina, "https://www.comune.marino.rm.it/header.html", "comune.marino.rm.it"
+    )
+    assert logo_url is None
+
+
+def test_estrai_logo_header_assente_ritorna_none() -> None:
+    """`header.html` senza il markup atteso (es. Municipium, dove spesso
+    404): `None` onesto, il chiamante ripiega su og:image/favicon."""
+    assert _estrai_logo_header("<html><body>niente qui</body></html>", "https://x/", "x") is None
+
+
 def test_logo_fallito_non_blocca_in_store(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
     """Logo assente/fallito → `logo_b64: null`, ma il record si scrive
     comunque (D-11: il fallimento logo non blocca la persistenza)."""
@@ -251,8 +285,31 @@ def test_route_serve_dal_disco_forma_contratto_o2(monkeypatch: pytest.MonkeyPatc
         "servizi_snapshot",
         "prima_scansione",
         "cambiato",
+        "recapiti",
     }
     assert corpo["prima_scansione"] is True
     assert corpo["cambiato"] is None
+    # `recapiti` innestato a read-time dall'indice IPA: presente (fonte
+    # IndicePA) o None se l'ente non è nell'indice — mai un guscio a metà.
+    recapiti = corpo["recapiti"]
+    if recapiti is not None:
+        assert set(recapiti.keys()) == {"pec", "indirizzo", "fonte"}
+        assert recapiti["fonte"] == "IndicePA"
+        assert recapiti["pec"] or recapiti["indirizzo"]
     assert corpo["endpoints"]["at"] == "https://www.comunefiv.it/at"
     assert corpo["servizi_snapshot"] == [{"nome": "URP", "url": "https://www.comunefiv.it/urp"}]
+
+
+def test_recapiti_ipa_join_e_degrado():
+    """Il join IPA (`_recapiti_ipa`) risolve un comune presente nell'indice a
+    PEC+indirizzo con fonte IndicePA, e degrada a `None` per un ISTAT assente —
+    mai un recapito vuoto spacciato per dato."""
+    from treasureiq.registro import _recapiti_ipa
+
+    marino = _recapiti_ipa("058057")  # Marino (RM), presente in data/ipa-recapiti.json
+    assert marino is not None
+    assert marino.fonte == "IndicePA"
+    assert marino.pec and "@" in marino.pec
+    assert marino.indirizzo
+
+    assert _recapiti_ipa("000000") is None  # ISTAT inesistente

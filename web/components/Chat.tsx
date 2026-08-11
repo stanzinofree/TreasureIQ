@@ -52,14 +52,10 @@ import {
   chat,
   comuneNearby,
   fetchBandi,
-  fetchMappaConnettore,
-  fetchSchedaServizio,
-  fetchServiziCategoria,
   login,
   type Bando,
   type BandiLiveEsito,
   type BandoArricchito,
-  type CategoriaServizio,
   type ChatCost,
   type Chiarimento,
   type ChatOut,
@@ -71,11 +67,8 @@ import {
   type FiltroOverride,
   type InfoOut,
   type InfoWebResult,
-  type MappaConnettore,
   type Match,
   type Requirements,
-  type SchedaServizio,
-  type ServizioLink,
 } from "@/lib/api";
 
 /** B22 (D-25) — the segnalazione form only makes sense once every
@@ -320,23 +313,73 @@ function isWebUrl(url: string): boolean {
  * questo blocco la UI le buttava e la promessa restava vuota. Nessun giudizio
  * di spettanza qui: solo link marcati «non verificato», coerente con D-01.
  */
+/** Data ISO → «11 ago 2026», compatta. Illeggibile → null (il segmento sparisce
+ *  invece di stampare «Invalid Date»). */
+function dataBreve(iso: string | null): string | null {
+  if (!iso) return null;
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return null;
+  return d.toLocaleDateString("it-IT", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
+}
+
 /**
- * Fuori copertura, dopo la ricerca, diciamo anche SE il connettore
- * raggiungerebbe questo comune — la risposta alla domanda «a ricerca fatta,
- * sappiamo cosa interrogare?». Prima si ripiegava in silenzio sulla sola
- * ricerca web anche quando il portale era strutturato e indirizzabile. Non è
- * un verdetto e non ingerisce nulla: è un badge onesto sull'indirizzabilità.
+ * Fuori copertura, dopo la ricerca, diciamo SE il connettore raggiungerebbe
+ * questo comune. È una riga di stato tecnica (ciclo 15): codice comune ·
+ * connettore · online · non letto in automatico · ultima scansione. Il «non
+ * letto in automatico» resta esplicito perché raggiungibile ≠ letto è una
+ * scelta fondante (D-05): «online» dice che il portale risponde, non che
+ * abbiamo i dati. La nota sotto (ciclo 15 round 2) spiega in parole non
+ * tecniche *perché* — il connettore legge solo i dati pubblicati in formato
+ * aperto e standard, non fa scraping della pagina — e che aprire i dati è
+ * proprio lo scopo di TIQ. Prima diceva «non ingerito», gergo che il
+ * cittadino non capisce.
  */
 function BadgeConnettore({ sonda }: { sonda: ConnettoreSonda }) {
   if (!sonda.indirizzabile) return null;
+  const scan = dataBreve(sonda.ultima_scansione);
   return (
-    <p className="badge-connettore" role="note">
-      <span className="badge-connettore__pallino" aria-hidden />
-      <strong>Raggiungibile dal connettore </strong>
-      <span className="tag-connettore">Modello AgID</span>
-      {sonda.uffici > 0 ? ` — ${sonda.uffici} uffici esposti` : ""}. Non ancora
-      ingestionato: i bandi restano dalla ricerca web qui sopra.
-    </p>
+    <div className="badge-connettore-box" role="note">
+      <p className="badge-connettore">
+        <span className="badge-connettore__pallino" aria-hidden />
+        <span className="badge-connettore__campo">
+          <span className="badge-connettore__k">Codice comune</span>
+          <span className="badge-connettore__v">{sonda.codice_istat}</span>
+        </span>
+        <span className="badge-connettore__sep" aria-hidden>·</span>
+        <span className="badge-connettore__campo">
+          <span className="badge-connettore__k">Connettore</span>
+          <span className="tag-connettore">Modello AgID</span>
+        </span>
+        <span className="badge-connettore__sep" aria-hidden>·</span>
+        <span className="badge-connettore__stato badge-connettore__stato--online">
+          online
+        </span>
+        <span className="badge-connettore__sep" aria-hidden>·</span>
+        <span className="badge-connettore__stato badge-connettore__stato--grezzo">
+          non letto in automatico
+        </span>
+        {scan && (
+          <>
+            <span className="badge-connettore__sep" aria-hidden>·</span>
+            <span className="badge-connettore__campo">
+              <span className="badge-connettore__k">ultima scansione</span>
+              <span className="badge-connettore__v">{scan}</span>
+            </span>
+          </>
+        )}
+      </p>
+      <p className="badge-connettore__nota">
+        Il connettore legge solo i dati pubblicati in formato aperto e standard,
+        non copia la pagina del comune. Orari e referenti che stanno solo nella
+        pagina non li leggiamo ancora in automatico: se il comune li aprisse in
+        un formato condiviso, TreasureIQ li mostrerebbe qui — è lo scopo del
+        progetto.
+      </p>
+    </div>
   );
 }
 
@@ -368,296 +411,6 @@ function PagineWeb({ results }: { results: InfoWebResult[] }) {
         Non è una risposta di TreasureIQ: sono pagine trovate sul web, da
         verificare tu stesso prima di fidartene.
       </p>
-    </div>
-  );
-}
-
-/**
- * Fase 1 della mappa servizi. Sotto il badge connettore di un comune fuori
- * copertura ma indirizzabile, offre le categorie di servizi che quel portale
- * espone davvero (modello AgID, 15 categorie standard): il cittadino ne tocca
- * una invece di ridigitare, e la ricerca live si restringe a quella categoria.
- *
- * NON è un verdetto e non promette il bonus: il catalogo AgID sono i servizi
- * amministrativi («come faccio la IMU»), non le agevolazioni — quelle vivono in
- * amministrazione-trasparente e restano ricerca web. Perciò il rame che questa
- * cascata fa risparmiare è sul rail informativo, mai su quello agevolazioni.
- *
- * Fetch pigro e su richiesta: la chiamata legge il portale a freddo (cache 30g)
- * e può tardare, quindi parte solo quando il badge è già a schermo. Un errore o
- * un catalogo vuoto non disegna nulla — mai un guscio rotto sotto la risposta.
- */
-function MappaServizi({ istat }: { istat: string }) {
-  const [mappa, setMappa] = useState<MappaConnettore | null>(null);
-  const [stato, setStato] = useState<"carico" | "pronto" | "vuoto">("carico");
-
-  // Livello aperto: la categoria scelta e i suoi servizi. La cascata vive tutta
-  // qui, senza mandare messaggi in chat — scendere di livello è navigazione nel
-  // catalogo, non una nuova domanda che rifà la ricerca web (bug fase 1).
-  const [aperta, setAperta] = useState<CategoriaServizio | null>(null);
-  const [servizi, setServizi] = useState<ServizioLink[] | null>(null);
-  const [statoServizi, setStatoServizi] = useState<"carico" | "pronto" | "vuoto">(
-    "carico",
-  );
-
-  // Terzo livello: il servizio aperto e la sua anteprima, letta adesso dalla
-  // pagina. Invece di sbalzare subito sul sito si mostra qui cosa è il servizio
-  // (come l'anteprima di un bando), col link per aprirlo intero. Fonte, non
-  // verdetto (D-01).
-  const [apertoServizio, setApertoServizio] = useState<ServizioLink | null>(null);
-  const [scheda, setScheda] = useState<SchedaServizio | null>(null);
-  const [statoScheda, setStatoScheda] = useState<"carico" | "pronto" | "vuoto">(
-    "carico",
-  );
-
-  function chiudiTutto() {
-    setAperta(null);
-    setServizi(null);
-    setApertoServizio(null);
-    setScheda(null);
-  }
-
-  useEffect(() => {
-    let vivo = true;
-    setStato("carico");
-    setMappa(null);
-    chiudiTutto();
-    fetchMappaConnettore(istat)
-      .then((m) => {
-        if (!vivo) return;
-        if (m && m.servizi.esposto && m.servizi.categorie.length > 0) {
-          setMappa(m);
-          setStato("pronto");
-        } else {
-          setStato("vuoto");
-        }
-      })
-      .catch(() => {
-        if (vivo) setStato("vuoto");
-      });
-    return () => {
-      vivo = false;
-    };
-  }, [istat]);
-
-  function apri(cat: CategoriaServizio) {
-    if (!cat.id) return; // senza term non si può filtrare: chip non-imbuto
-    setAperta(cat);
-    setServizi(null);
-    setStatoServizi("carico");
-    setApertoServizio(null);
-    setScheda(null);
-    fetchServiziCategoria(istat, cat.id)
-      .then((lista) => {
-        setServizi(lista ?? []);
-        setStatoServizi(lista && lista.length > 0 ? "pronto" : "vuoto");
-      })
-      .catch(() => setStatoServizi("vuoto"));
-  }
-
-  function apriScheda(s: ServizioLink) {
-    setApertoServizio(s);
-    setScheda(null);
-    setStatoScheda("carico");
-    fetchSchedaServizio(istat, s.url)
-      .then((sc) => {
-        setScheda(sc);
-        setStatoScheda(sc ? "pronto" : "vuoto");
-      })
-      .catch(() => setStatoScheda("vuoto"));
-  }
-
-  function tornaAiServizi() {
-    setApertoServizio(null);
-    setScheda(null);
-  }
-
-  if (stato === "vuoto") return null;
-  if (stato === "carico") {
-    return (
-      <p className="mappa-servizi__carico" role="status">
-        Leggo il catalogo servizi del comune…
-      </p>
-    );
-  }
-  if (!mappa) return null;
-
-  return (
-    <div className="mappa-servizi" role="group" aria-label="Servizi del comune">
-      {/* Filo di briciole: dove sei nella cascata. La scelta precedente resta
-          a schermo, evidenziata e cliccabile per risalire — «scegli tra queste
-          cose» con la memoria dei passi, non un menù che riparte ogni volta. */}
-      <p className="mappa-servizi__briciole">
-        <button
-          type="button"
-          className={
-            "mappa-servizi__briciola" +
-            (aperta ? " mappa-servizi__briciola--link" : " mappa-servizi__briciola--qui")
-          }
-          onClick={() => aperta && chiudiTutto()}
-          disabled={!aperta}
-        >
-          {mappa.servizi.totale} servizi
-        </button>
-        {aperta && (
-          <>
-            <span className="mappa-servizi__freccia" aria-hidden="true">
-              ›
-            </span>
-            {/* La categoria: «qui» quando è l'ultimo passo, link per tornare
-                alla lista quando si è aperta una scheda sotto. */}
-            <button
-              type="button"
-              className={
-                "mappa-servizi__briciola" +
-                (apertoServizio
-                  ? " mappa-servizi__briciola--link"
-                  : " mappa-servizi__briciola--qui")
-              }
-              onClick={() => apertoServizio && tornaAiServizi()}
-              disabled={!apertoServizio}
-            >
-              {aperta.nome}
-            </button>
-          </>
-        )}
-        {apertoServizio && (
-          <>
-            <span className="mappa-servizi__freccia" aria-hidden="true">
-              ›
-            </span>
-            <span className="mappa-servizi__briciola mappa-servizi__briciola--qui">
-              {apertoServizio.titolo}
-            </span>
-          </>
-        )}
-      </p>
-
-      {!aperta && (
-        <>
-          <p className="mappa-servizi__intro">
-            Scegli una categoria per vedere i servizi che il comune pubblica lì:
-          </p>
-          <div className="mappa-servizi__chip-riga">
-            {mappa.servizi.categorie.map((cat: CategoriaServizio) => (
-              <button
-                key={cat.nome}
-                type="button"
-                className="scelta-comune__scheda mappa-servizi__chip"
-                onClick={() => apri(cat)}
-                disabled={!cat.id}
-              >
-                <span className="scelta-comune__nome">{cat.nome}</span>
-                <span className="mappa-servizi__chip-conteggio">{cat.conteggio}</span>
-              </button>
-            ))}
-          </div>
-        </>
-      )}
-
-      {aperta && statoServizi === "carico" && (
-        <p className="mappa-servizi__carico" role="status">
-          Leggo i servizi di «{aperta.nome}»…
-        </p>
-      )}
-
-      {aperta && statoServizi === "vuoto" && (
-        <p className="mappa-servizi__intro">
-          Il portale conta {aperta.conteggio} servizi in «{aperta.nome}» ma non li
-          elenca via API. Aprili dal{" "}
-          {mappa.sito ? (
-            <a
-              href={`https://${mappa.sito}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mappa-servizi__link"
-            >
-              portale del comune
-            </a>
-          ) : (
-            "portale del comune"
-          )}
-          .
-        </p>
-      )}
-
-      {aperta && !apertoServizio && statoServizi === "pronto" && servizi && (
-        <ul className="mappa-servizi__servizi">
-          {servizi.map((s) => (
-            <li key={s.url} className="mappa-servizi__servizio">
-              {/* Non è più un link diretto: apre l'anteprima qui in chat, poi
-                  da lì si va sul sito. Un passo in più, ma il cittadino sa cosa
-                  sta per aprire. */}
-              <button
-                type="button"
-                className="mappa-servizi__servizio-tap"
-                onClick={() => apriScheda(s)}
-              >
-                {s.titolo}
-              </button>
-            </li>
-          ))}
-        </ul>
-      )}
-
-      {apertoServizio && statoScheda === "carico" && (
-        <p className="mappa-servizi__carico" role="status">
-          Leggo la scheda di «{apertoServizio.titolo}»…
-        </p>
-      )}
-
-      {apertoServizio && statoScheda === "vuoto" && (
-        <p className="mappa-servizi__intro">
-          Non sono riuscito a leggere l'anteprima adesso. Aprila direttamente sul{" "}
-          <a
-            href={apertoServizio.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mappa-servizi__link"
-          >
-            portale del comune
-          </a>
-          .
-        </p>
-      )}
-
-      {apertoServizio && statoScheda === "pronto" && scheda && (
-        // Anteprima come per un bando: cosa è il servizio, a chi è rivolto e
-        // cosa si ottiene, letto adesso dalla pagina. Card GIALLA: il giallo
-        // segnala «dato non certissimo», letto dal vivo, non ingerito.
-        <div className="mappa-servizi__scheda">
-          <span className="mappa-servizi__scheda-titolo">{scheda.titolo}</span>
-          {scheda.a_chi && (
-            <span className="mappa-servizi__scheda-campo">
-              <span className="mappa-servizi__scheda-etichetta">A chi è rivolto</span>
-              {scheda.a_chi}
-            </span>
-          )}
-          {scheda.descrizione && (
-            <span className="mappa-servizi__scheda-campo">
-              <span className="mappa-servizi__scheda-etichetta">Descrizione</span>
-              {scheda.descrizione}
-            </span>
-          )}
-          {scheda.cosa_ottieni && (
-            <span className="mappa-servizi__scheda-campo">
-              <span className="mappa-servizi__scheda-etichetta">Cosa si ottiene</span>
-              {scheda.cosa_ottieni}
-            </span>
-          )}
-          <a
-            className="mappa-servizi__scheda-btn"
-            href={scheda.url}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Apri la scheda sul portale del comune ↗
-          </a>
-          <span className="mappa-servizi__scheda-footer">
-            scheda generata dalla lettura live
-          </span>
-        </div>
-      )}
     </div>
   );
 }
@@ -1899,12 +1652,9 @@ export default function Chat() {
                   <BadgeConnettore sonda={m.reply.connettore} />
                 )}
 
-                {/* Mappa servizi a cascata: categoria → servizi del portale,
-                    solo dove il connettore raggiungerebbe davvero il comune.
-                    Naviga il catalogo, non decide una spettanza (D-01). */}
-                {m.reply.connettore?.indirizzabile && (
-                  <MappaServizi istat={m.reply.connettore.codice_istat} />
-                )}
+                {/* La mappa servizi a cascata non sta più qui: vive nel
+                    pannello di sinistra (MappaServizi), agganciata al comune di
+                    profilo, per tenere la chat pulita. */}
 
                 {/* Bandi e avvisi: gate PROPRIO su `connettore` presente, non
                     `indirizzabile` (D-B6) — i bandi vengono da amministrazione
@@ -1936,7 +1686,14 @@ export default function Chat() {
                   // AGEVOLAZIONE furniture below.
                   m.reply.info && (
                     <>
-                      <RispostaCivica reply={m.content} info={m.reply.info} />
+                      <RispostaCivica
+                        reply={m.content}
+                        info={m.reply.info}
+                        compatto={Boolean(
+                          m.reply.access_mode &&
+                            SEGNALAZIONE_ACCESS_MODES.has(m.reply.access_mode),
+                        )}
+                      />
                       {m.reply.access_mode &&
                         SEGNALAZIONE_ACCESS_MODES.has(m.reply.access_mode) &&
                         m.reply.info.codice_istat &&
@@ -2047,7 +1804,14 @@ export default function Chat() {
                   </>
                 )}
 
-                <EffortCaption effort={m.reply.citizen_effort} />
+                {/* Fuori copertura (qualunque connettore: banda verde M4 o
+                    RICERCA WEB M5/M6) la scheda è compatta e non mostra «Cosa
+                    puoi fare adesso»: il contatore azioni qui sotto resterebbe
+                    orfano. Stesso segnale di `compatto`. */}
+                {!(
+                  m.reply.access_mode &&
+                  SEGNALAZIONE_ACCESS_MODES.has(m.reply.access_mode)
+                ) && <EffortCaption effort={m.reply.citizen_effort} />}
               </div>
             )}
           </div>

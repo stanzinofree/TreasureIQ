@@ -166,9 +166,11 @@ def test_dispatcher_piattaforma_non_municipium_ritorna_none(
     monkeypatch.setattr(connettore_mod, "LIVE_DIR", tmp_path)
     monkeypatch.setattr(connettore_mod, "comune_per_codice", lambda codice: _comune())
     monkeypatch.setattr(connettore_mod, "_Sonda", _SondaFinta)
+    # DRUPAL: nessun connettore la legge (a differenza di WORDPRESS_GENERICO,
+    # ora instradata su `wordpress_agid.leggi_wordpress_agid`, D-09).
     monkeypatch.setattr(
         connettore_mod, "firma_da_risposta",
-        lambda *, headers, html: Firma(piattaforma=Piattaforma.WORDPRESS_GENERICO, prova="wp"),
+        lambda *, headers, html: Firma(piattaforma=Piattaforma.DRUPAL, prova="drupal"),
     )
 
     assert leggi_connettore(ISTAT, usa_cache=False) is None

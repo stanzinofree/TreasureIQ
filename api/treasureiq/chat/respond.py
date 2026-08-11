@@ -1377,11 +1377,14 @@ def _prove_e_stato(
             )
         else:
             prove.append(
-                Prova(StatoProva.MANCANTE, "L'ufficio non pubblica un recapito diretto")
+                # Ciclo 15 R2: non «l'ufficio non pubblica» (falso — spesso il
+                # recapito e' nella pagina HTML). Il connettore legge solo i dati
+                # in formato aperto: cio' che sta solo nella pagina non lo legge.
+                Prova(StatoProva.MANCANTE, "Un recapito diretto non è tra i dati aperti letti dal connettore")
             )
         if not office.orari:
             prove.append(
-                Prova(StatoProva.MANCANTE, "Gli orari di apertura non risultano pubblicati")
+                Prova(StatoProva.MANCANTE, "Gli orari non sono tra i dati aperti letti dal connettore")
             )
         elif ufficio_chiesto and ufficio_chiesto not in office.nome.lower():
             prove.append(
@@ -1648,16 +1651,25 @@ async def _build_informazione_answer(
     web_results: list[WebResultAnswer] = []
     access_mode = ente.access_mode.value
 
-    # M4-servito vs M4-gap (B4): un ente censito con access_mode M4_CONNETTORE
-    # NON è per forza esausto — proviamolo per davvero prima di trattarlo come
-    # il gap che l'access_mode misurato descrive. Se il connettore legge dati
-    # veri, questo intercetta la risposta qui e non attraversa mai il ramo
-    # institutional_exhausted sotto (niente sonda, niente ricerca web, niente
-    # falso «non ha pubblicato niente»). Se il connettore non ha nulla
-    # (`None` o degradato-vuoto), il flusso prosegue ESATTAMENTE come prima:
-    # institutional_exhausted resta vero e nulla cambia per i comuni
-    # non-Municipium (A7).
-    if not candidates and ente.access_mode == AccessMode.M4_CONNETTORE:
+    # M4-servito vs M4/M5-gap (B4): un ente censito NON è per forza esausto —
+    # proviamo il connettore per davvero prima di trattarlo come il gap che
+    # l'`access_mode` MISURATO descrive. Vale anche per M5_NESSUNO: quel campo
+    # è statico e fu classificato PRIMA che la famiglia di piattaforma avesse
+    # un connettore (es. eGov Marino, 58 uffici leggibili, marcato M5 in
+    # `enti.json`). L'`access_mode` congelato non deve decidere il routing
+    # quando il connettore, chiesto, legge dati veri: predicato vecchio cieco
+    # al connettore nuovo. Se il connettore legge, questo intercetta la
+    # risposta qui e non attraversa mai il ramo institutional_exhausted sotto
+    # (niente sonda, niente ricerca web, niente falso «non ha pubblicato
+    # niente»). Se il connettore non ha nulla (`None` o degradato-vuoto), il
+    # flusso prosegue ESATTAMENTE come prima — institutional_exhausted (che
+    # già include M4+M5) resta vero e nulla cambia per gli altri comuni (A7).
+    # `leggi_connettore` è cache-first: un comune già scansionato risponde
+    # dallo store senza rete; solo un M5 freddo paga un GET alla home in più.
+    if not candidates and ente.access_mode in (
+        AccessMode.M4_CONNETTORE,
+        AccessMode.M5_NESSUNO,
+    ):
         esito_connettore = await asyncio.to_thread(connettore.leggi_connettore, ente.codice_istat)
         if esito_connettore is not None and (
             esito_connettore.uffici or esito_connettore.amministrazione_trasparente is not None
@@ -2131,17 +2143,21 @@ async def _risposta_live(
         )
 
     if letto.indirizzabilita is Indirizzabilita.API_UFFICI:
-        coda = (
-            f"L'ufficio «{letto.ufficio}» c'è, ma la sua pagina non pubblica un orario."
+        # Ciclo 15: una frase sola. Il «l'ho letto adesso» lo dice gia' il bollo
+        # LETTO ORA, l'ufficio e il link stanno gia' nella card sotto.
+        # R2: NON «non pubblica l'orario» — falso. L'orario spesso e' nella
+        # pagina del comune; il connettore legge solo i dati in formato aperto,
+        # quindi non lo prende in automatico. Rimando il cittadino alla pagina.
+        reply = (
+            f"L'ufficio «{letto.ufficio}» c'è. L'orario però non è tra i dati "
+            "aperti che il connettore legge: aprilo dalla pagina qui sotto, "
+            "oppure chiama il comune."
             if letto.ufficio
-            else "Fra gli uffici pubblicati non ce n'è uno riconoscibile come URP."
+            else "Fra gli uffici pubblicati non ne trovo uno riconoscibile come "
+            "anagrafe o URP: per l'orario apri la pagina del comune o chiama."
         )
         return _chat_live(
-            reply=(
-                f"{comune.nome} pubblica l'elenco dei propri uffici in una forma "
-                f"leggibile, e l'ho letto adesso. {coda} Per l'orario conviene "
-                "chiamare o scrivere al comune."
-            ),
+            reply=reply,
             topic=topic,
             diagnosi=diagnosi,
             comune_sito=comune.sito,
@@ -2540,19 +2556,18 @@ def _indice_deterministico(chiave: str | None, modulo: int) -> int:
 
 
 #: Varianti deterministiche della premessa fuori-copertura (KAPI 12, A2): stesso
-#: contenuto onesto — ho controllato, non c'e' uno standard letto, non posso
-#: essere certo — con parole diverse perche' non suoni da stampino ripetuto.
-#: Il marker `[[Comune di ...]]` resta identico in tutte, il frontend lo parsa.
+#: contenuto onesto — ho controllato, il comune non e' ancora ingerito, non
+#: posso essere certo — con parole diverse perche' non suoni da stampino.
+#: Ciclo 15: una frase sola. La raggiungibilita' dal connettore la dice gia' il
+#: BadgeConnettore (verde), i recapiti la card a sinistra: la prosa non li
+#: ripete piu' (era il «pippone»). Il marker `[[Comune di ...]]` il frontend lo parsa.
 _VARIANTI_PREMESSA_FUORI_COPERTURA = (
-    "Ho controllato: per il [[Comune di {luogo}]] non c'e' ancora uno standard "
-    "ne' un connettore che ne abbia letto i dati, quindi non ho una scansione "
-    "verificata e non posso dirti con certezza cosa ti spetta.",
-    "Per il [[Comune di {luogo}]] ho verificato, ma non c'e' ancora uno standard "
-    "ne' un connettore che ne abbia letto i dati: niente scansione verificata, "
-    "quindi non posso darti una risposta certa su cosa ti spetta.",
-    "Sul [[Comune di {luogo}]] ho fatto un controllo, ma qui non c'e' ancora uno "
-    "standard ne' un connettore che ne legga i dati — nessuna scansione "
-    "verificata, quindi non posso dirti con certezza cosa ti spetta.",
+    "Controllato: il [[Comune di {luogo}]] non e' ancora tra quelli che "
+    "leggiamo, quindi su cosa ti spetta non posso darti certezze.",
+    "Il [[Comune di {luogo}]] non e' ancora tra quelli che leggiamo: su cosa "
+    "ti spetta non posso essere certo.",
+    "Sul [[Comune di {luogo}]] ho controllato, ma non e' ancora tra quelli che "
+    "leggiamo — cosa ti spetta resta da confermare.",
 )
 
 
@@ -2569,10 +2584,10 @@ def _premessa_fuori_copertura(
     comunque, perche' le agevolazioni nazionali e regionali non dipendono da
     quale comune sappiamo leggere.
 
-    Se la sonda dice che il comune espone l'API del Modello AgID, lo diciamo
-    esplicitamente: non e' una scansione verificata, ma la via per averla
-    esiste e ha un nome. Nominiamo il *modello*, mai il prodotto del fornitore
-    — attribuire una piattaforma per inferenza sarebbe un'accusa, non un dato.
+    Ciclo 15: la prosa non ripete piu' la raggiungibilita' dal Modello AgID ne'
+    i recapiti «letti ora» — li dicono gia' il BadgeConnettore (verde) e la card
+    a lato. La premessa resta una frase sola: ha controllato, non e' certo. Solo
+    il ramo vicolo_cieco rimanda ancora alla scheda/mappa laterale se esistono.
 
     Il testo di apertura varia in 3 modi deterministici (indice dal codice
     ISTAT) — stesso contenuto onesto, meno stampino: dice sempre che ha
@@ -2586,16 +2601,10 @@ def _premessa_fuori_copertura(
         len(_VARIANTI_PREMESSA_FUORI_COPERTURA),
     )
     base = _VARIANTI_PREMESSA_FUORI_COPERTURA[indice].format(luogo=luogo)
-    # Se il comune e' raggiungibile dal connettore, dichiariamo la via — senza
-    # promettere un bottone che non c'e': e' una capacita', non un'azione da
-    # cliccare. Il tono resta cautelativo: la scansione web l'ho gia' fatta e
-    # la vedi a sinistra, ma la fonte certa passerebbe dal Modello AgID.
-    if connettore is not None and connettore.indirizzabile:
-        base += (
-            " I recapiti che vedi a sinistra li ho letti adesso dal sito: una fonte "
-            "certa la recupererei tramite il connettore «Modello AgID», che questo "
-            "comune espone."
-        )
+    # Ciclo 15: la raggiungibilita' dal Modello AgID e i recapiti «letti ora» non
+    # si ripetono piu' in prosa — li dicono il BadgeConnettore (verde) e la card
+    # a sinistra. La `connettore.indirizzabile` resta nella firma perche' serve
+    # al ramo vicolo_cieco sotto (rimando alla mappa servizi di lato).
     # La frase si dice solo se sotto c'e' davvero qualcosa. Prometterla a
     # vuoto e' peggio di non prometterla: chi legge cerca risultati che non
     # esistono e conclude che l'interfaccia sia rotta, invece che la ricerca
@@ -2607,11 +2616,7 @@ def _premessa_fuori_copertura(
         and bool(risposta.info.web_results)
     )
     if trovati:
-        return (
-            base + " Sono quindi andato con una scansione live del sito del comune: "
-            "qui sotto trovi quello che ho visto, **da verificare tu** — non l'ho "
-            "controllato contro una fonte ingerita."
-        )
+        return base + " Qui sotto la scansione live del loro sito: **da verificare tu**."
     # Vicolo cieco: la ricerca non ha collegato la domanda a nessun servizio.
     # Una frase sola, non tre «non ho trovato niente» impilati. Rimanda a cio'
     # che c'e' davvero attorno — la scheda di contatto a lato, la mappa dei
@@ -2628,20 +2633,21 @@ def _premessa_fuori_copertura(
         if ha_scheda_laterale and indirizzabile:
             frase += (
                 ". Trovi di lato la scheda del comune per contattarli direttamente, "
-                "oppure puoi navigare tra i loro servizi qui sotto e cercare il "
-                "settore giusto per una ricerca rapida."
+                "oppure la mappa dei loro servizi, sempre di lato, per cercare il "
+                "settore giusto."
             )
         elif ha_scheda_laterale:
             frase += ". Trovi di lato la scheda del comune per contattarli direttamente."
         elif indirizzabile:
             frase += (
-                ". Puoi navigare tra i loro servizi qui sotto e cercare il settore "
-                "giusto per una ricerca rapida."
+                ". Puoi navigare tra i loro servizi, di lato, e cercare il settore giusto."
             )
         else:
             frase += ". Prova a riformularla, oppure rivolgiti direttamente all'URP del comune."
         return frase
-    return base + " Quello che segue vale comunque, perché non dipende dal comune."
+    # Ciclo 15: `base` e' gia' una frase onesta e completa. La bridge appesa
+    # («quello che segue vale comunque...») era filler — via.
+    return base
 
 
 def _numeri_utili_al_volo(codice_istat: str | None) -> "NumeriUtili | None":

@@ -10,6 +10,7 @@ link "Amministrazione Trasparente" sintetico per verificare il degrado AT.
 
 from __future__ import annotations
 
+import re
 import sys
 import types
 from pathlib import Path
@@ -255,7 +256,10 @@ def test_leggi_egov_scheletro_ritorna_esito_con_endpoint(monkeypatch: pytest.Mon
     degrado D-10 grezzo per `aree_amministrative`; l'indice AT si riconosce
     dal testo dell'ancora e viene REALMENTE seguito (un hop in più rispetto
     a B4a: home + indice AT), ma questo markup non ha "Bandi di concorso"
-    → la catena AT si ferma lì con solo `indice_url` — mai un guscio rotto."""
+    → la catena AT si ferma lì con solo `indice_url` — mai un guscio rotto.
+    Il doppio `_ClientFinto` risponde con la STESSA pagina home a QUALUNQUE
+    url (anche l'indice uffici): nessun `ufficio_\\d+.html` in quel markup
+    → `uffici` resta `[]`, ma il fetch avviene ed è contato (3 richieste)."""
     stream = _StreamFinto(
         200, "https://www.comune.marino.rm.it/", {}, [_HOME_MARINO.encode("utf-8")]
     )
@@ -270,7 +274,7 @@ def test_leggi_egov_scheletro_ritorna_esito_con_endpoint(monkeypatch: pytest.Mon
     assert esito.amministrazione_trasparente is not None
     assert "EGSATTRASP" in (esito.amministrazione_trasparente.indice_url or "")
     assert esito.amministrazione_trasparente.bandi_attivi == []
-    assert sonda.richieste == 2
+    assert sonda.richieste == 3
     assert sonda.raggiungibile is True
 
 
@@ -378,6 +382,37 @@ def test_estrai_bandi_aperti_ignora_feedback_widget_fuori_blocco() -> None:
     assert "shadow-rating" not in blocco
 
 
+def test_leggi_uffici_egov_indice_reale_marino(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Indice statico reale di Marino (`egov_uffici_marino.html`, 58 uffici
+    osservati): estrazione index-only, nome+url, MAI recapiti (deferred,
+    on-demand) — `source_typed=False` per ogni voce."""
+    pagina_uffici = _leggi_fixture("egov_uffici_marino.html")
+    uffici_url = _BASE_MARINO + "/EG0/EGSCHTST24.HBL?en=eg176&MESSA=PUBBLICA"
+    stream = _StreamFinto(200, uffici_url, {}, [pagina_uffici.encode("utf-8")])
+    monkeypatch.setattr(egov_mod.httpx, "Client", lambda **kwargs: _ClientFinto(stream, **kwargs))
+
+    sonda = _SondaFinta()
+    uffici = egov_mod._leggi_uffici_egov(_HOME_MARINO, _BASE_MARINO, HOST, sonda, 8.0)
+
+    assert len(uffici) >= 1
+    primo = uffici[0]
+    assert primo.nome != ""
+    assert re.search(r"ufficio_\d+\.html$", primo.url)
+    assert primo.source_typed is False
+    assert primo.telefoni == []
+    assert primo.email == []
+    assert primo.pec == []
+    assert sonda.richieste == 1
+
+
+def test_leggi_uffici_egov_senza_en_eg_ritorna_vuoto() -> None:
+    """Markup senza `en=eg###`: nessun indice costruibile — `[]` onesto,
+    zero fetch (nessuna sonda passata: se venisse chiamata il test
+    fallirebbe per attributo mancante)."""
+    uffici = egov_mod._leggi_uffici_egov("<html>niente qui</html>", _BASE_MARINO, HOST, None, 8.0)  # type: ignore[arg-type]
+    assert uffici == []
+
+
 def test_richiedi_con_guardia_mappa_reale_supera_cap_size(monkeypatch: pytest.MonkeyPatch) -> None:
     """La mappa del sito reale di Marino pesa oltre `MAX_RISPOSTA_BYTES`
     (troncata a 2.1MB in fixture, ancora oltre il cap di 2MB): la guardia
@@ -418,15 +453,17 @@ class _ClientPerUrl:
 def test_leggi_egov_end_to_end_fixture_reali_marino(monkeypatch: pytest.MonkeyPatch) -> None:
     """Query reale end-to-end sulle fixture Marino: argomenti REALI (non
     generici), mappa come link noto (endpoint costruito dall'id letto),
-    AT con indice reale e bandi-aperti a zero onesto, uffici degradato
-    (nessun indice uffici nel boundary EGS) — degrado PER-SEZIONE, non
+    AT con indice reale e bandi-aperti a zero onesto, uffici come indice
+    reale (`egov_uffici_marino.html`) — degrado PER-SEZIONE, non
     tutto-o-niente."""
     mappa_url = "https://www.comune.marino.rm.it/EG0/EGSMISTMSIT.HBL?en=eg176&FUNZ=1"
+    uffici_url = "https://www.comune.marino.rm.it/EG0/EGSCHTST24.HBL?en=eg176&MESSA=PUBBLICA"
     pagine = {
         "https://www.comune.marino.rm.it/EG0/EGSCHTST48.HBL": _leggi_fixture("egov_bandi_marino.html"),
         "https://www.comune.marino.rm.it/EG0/EGSCHTST49.HBL": _leggi_fixture("egov_bandi_aperti_marino.html"),
         "https://www.comune.marino.rm.it/amministrazione/trasparenza/": _leggi_fixture("egov_at_marino.html"),
         mappa_url: "x" * (egov_mod.MAX_RISPOSTA_BYTES + 1),
+        uffici_url: _leggi_fixture("egov_uffici_marino.html"),
         _BASE_MARINO: _leggi_fixture("egov_home_marino.html"),
     }
     monkeypatch.setattr(egov_mod.httpx, "Client", lambda **kwargs: _ClientPerUrl(pagine, **kwargs))
@@ -435,7 +472,9 @@ def test_leggi_egov_end_to_end_fixture_reali_marino(monkeypatch: pytest.MonkeyPa
     esito = egov_mod.leggi_egov(_comune(), sonda)
 
     assert esito.piattaforma == Piattaforma.EGOV.value
-    assert esito.uffici == []  # degrado onesto per-sezione: nessun indice uffici nel boundary EGS
+    assert len(esito.uffici) > 0
+    assert all(ufficio.url.endswith(".html") for ufficio in esito.uffici)
+    assert all(ufficio.source_typed is False for ufficio in esito.uffici)
 
     nomi_aree = {area.nome for area in esito.aree_amministrative}
     assert "Istruzione" in nomi_aree
@@ -447,8 +486,8 @@ def test_leggi_egov_end_to_end_fixture_reali_marino(monkeypatch: pytest.MonkeyPa
     assert at.bandi_attivi == []  # zero onesto: nessun bando aperto oggi (fixture reale)
     assert at.pdf_presenti is False
 
-    # home + AT + concorso + aperti = 4 fetch guardati; mappa supera il
-    # size-cap e viene abortita in streaming, MAI contata come richiesta
-    # riuscita (stesso contatore-costo di `_Sonda`, D-08).
-    assert sonda.richieste == 4
+    # home + AT + concorso + aperti + uffici = 5 fetch guardati; mappa
+    # supera il size-cap e viene abortita in streaming, MAI contata come
+    # richiesta riuscita (stesso contatore-costo di `_Sonda`, D-08).
+    assert sonda.richieste == 5
     assert sonda.raggiungibile is True

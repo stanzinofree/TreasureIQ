@@ -1,0 +1,2531 @@
+
+
+
+<!DOCTYPE html>
+
+<html xml:lang="it-IT" xmlns="http://www.w3.org/1999/xhtml" lang="it-IT">
+<head id="ctl00_Head"><meta http-equiv="X-UA-Compatible" content="IE=edge" /><title>
+	Comune di Angrogna - Home Page
+</title><meta content="text/html; charset=UTF-8" http-equiv="Content-Type" /><meta charset="UTF-8" /><meta content="text/javascript" http-equiv="Content-Script-Type" /><meta content="text/css" http-equiv="Content-Style-Type" /><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=6.0" /><meta name="theme-color" content="#317EFB" /><link rel="stylesheet" href="assets\bootstrap-italia\dist\css/bootstrap-italia-comuni.min.css" /><link rel="stylesheet" href="CSS/style.css" /><link rel="stylesheet" href="Css\fontawesome-free-5.15.4-web\css\all.min.css" />
+
+    <script type="text/javascript" src="JS/jquery.min.js"></script>
+
+    <!-- window.__PUBLIC_PATH__ definisce il punto in cui c'è la cartella font di bootstrap italia -->
+    <script>window.__PUBLIC_PATH__ = 'assets/bootstrap-italia/dist/fonts'</script>
+
+    <!-- Bootstrap core JS -->
+    <script type="text/javascript" async src="assets/bootstrap-italia/dist/js/bootstrap-italia.bundle.min.js"></script>
+    <script>
+        function loadBootstrapOrRetry() {
+            if (typeof bootstrap !== "undefined") {
+                // Bootstrap è disponibile, esegui il tuo codice qui
+                bootstrap.loadFonts("assets/bootstrap-italia/dist/fonts");
+            } else {
+                // Bootstrap non è ancora disponibile, ritenta dopo 50 millisecondi
+                setTimeout(loadBootstrapOrRetry, 50);              
+            }
+        }
+
+        // Inizia il ciclo di controllo
+        loadBootstrapOrRetry();
+    </script>
+
+    <script type="text/javascript" src="script/siscomJS.js?version=2.0"></script>
+
+    <style id="StylePlaceholder" type="text/css"></style>
+
+    <link rel="stylesheet" href="App_Themes\css\stili-custom.css?v=1.0" /><link id="ctl00_CSSSkin" href="CSS/SKIN/ngrgn1115/skin.css?v=1" type="text/css" rel="stylesheet" /><link id="ctl00_icoFavicon" rel="icon" type="image/x-icon" class="icoFavicon" /><meta id="MetaDescription" name="DESCRIPTION" content="Sito ufficiale Comune di Angrogna in provincia di Torino in Piemonte. Informazioni sul comune, i servizi, l&#39;amministrazione, la storia." /><meta id="MetaKeywords" name="KEYWORDS" content="Città di Comune di Angrogna, Comune di Comune di Angrogna, Comune di Angrogna, municipio di Comune di Angrogna, uffici del comune di Comune di Angrogna, provincia di Torino, Regione Piemonte." /><meta id="MetaCopyright" name="COPYRIGHT" content="Copyright Comune di Comune di Angrogna" /><meta id="MetaAuthor" name="AUTHOR" content="Comune di Comune di Angrogna" /></head>
+
+<body id="body" class="MenuPushResponsive-push">
+    <form name="aspnetForm" method="post" action="./" id="aspnetForm" autocomplete="off">
+<div>
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKMTY5NTczNDE4NQ9kFgJmD2QWBAIBD2QWAgINDxYCHgRocmVmBR9DU1MvU0tJTi9uZ3JnbjExMTUvc2tpbi5jc3M/dj0xZAIDD2QWCAIBD2QWAgIBD2QWBAICDw8WAh4LTmF2aWdhdGVVcmwFEy4uLy4uL2FyZWFSaXNlcnZhdGFkZAIKDxYCHgVWYWx1ZQUEMjEwOWQCBQ9kFgICAQ9kFgQCAw8WAh8CBQQyMTA5ZAIFD2QWAmYPZBYKAggPZBYGAgMPZBYEAgEPZBYCAgEPZBYCAgMPDxYCHgRUZXh0BQtBZ29zdG8gMjAyNmRkAgMPZBYCAgEPDxYCHwEFDC4uLy4uL0V2ZW50aWRkAgkPFgIfAgUEMjEwOWQCDQ8WAh8CBQkwMS84LzIwMjZkAg4PZBYCAgYPFgIfAgUEMjEwOWQCEg9kFgoCAQ8PFgIeB1Zpc2libGVnZBYCAgcPDxYCHwMFK1VsdGltbyBBZ2dpb3JuYW1lbnRvIEFSUEE6IDEwLzA4LzIwMjYgMTQ6MDBkZAIDDw8WAh8EZ2QWCgIFDxYCHwMFkQI8c3BhbiBjbGFzcz0ibGVhZCB0ZXh0LWJsYWNrIj5ab25hIGRpIGFwcGFydGVuZW56YTogPGI+RDwvYj48L3NwYW4+PGEgaHJlZj0naHR0cHM6Ly93d3cuYXJwYS5waWVtb250ZS5pdC9yaXNjaGlfbmF0dXJhbGkvc25pcHBldHNfYXJwYS9hbGxlcnRhL2luZGV4Lmh0bWwnIHN0eWxlPSdjb2xvcjp3aGl0ZTttYXJnaW4tbGVmdDoxMHB4OycgdGFyZ2V0PSdfYmxhbmsnIHRpdGxlPSdWZWRpIGxhIGxlZ2VuZGEgZGVsbGUgem9uZSc+W0luZm9ybWF6aW9uaSBzdWxsZSB6b25lXTwvYT5kAgkPDxYEHghJbWFnZVVybAUbaW1hZ2UvYWxsZXJ0YV9saXZlbGxvMS53ZWJwHg1BbHRlcm5hdGVUZXh0BQhBbGxlcnRhMWRkAgsPFgIfAwWXAjx1bD48bGkgY29sb3I9IkdSSUdJTyI+PGkgY2xhc3M9J2ZhIGZhLWNpcmNsZSc+PC9pPiBBTExFUlRBIFJPU1NBPC9saT48bGkgY29sb3I9IkdSSUdJTyI+PGkgY2xhc3M9J2ZhIGZhLWNpcmNsZSc+PC9pPiBBTExFUlRBIEFSQU5DSU9ORTwvbGk+PGxpIGNvbG9yPSJHUklHSU8iPjxpIGNsYXNzPSdmYSBmYS1jaXJjbGUnPjwvaT4gQUxMRVJUQSBHSUFMTEE8L2xpPjxsaSBjb2xvcj0iVkVSREUiPjxpIGNsYXNzPSdmYSBmYS1jaXJjbGUnPjwvaT4gTkVTU1VOQSBBTExFUlRBPC9saT48L3VsPmQCDw8WAh8DBbEEPHRhYmxlIGNsYXNzPSJ0YWJsZSB0YWJsZS1ib3JkZXJlZCI+PHRyPjx0aCBjbGFzcz0idGV4dC1ibGFjayI+UmlzY2hpbzwvdGg+PHRoIGNsYXNzPSJ0ZXh0LWJsYWNrIj4xMC8wODwvdGg+PHRoIGNsYXNzPSJ0ZXh0LWJsYWNrIj4xMS8wODwvdGg+PC90cj48dHI+PHRoIGNsYXNzPSJ0ZXh0LWJsYWNrIj5JZHJhdWxpY288L3RoPjx0ZCBjb2xvcj0iVkVSREUiPlZFUkRFPC90ZD48dGQgY29sb3I9IlZFUkRFIj5WRVJERTwvdGQ+PC90cj48dHI+PHRoIGNsYXNzPSJ0ZXh0LWJsYWNrIj5JZHJvZ2VvbG9naWNvPC90aD48dGQgY29sb3I9IlZFUkRFIj5WRVJERTwvdGQ+PHRkIGNvbG9yPSJWRVJERSI+VkVSREU8L3RkPjwvdHI+PHRyPjx0aCBjbGFzcz0idGV4dC1ibGFjayI+VGVtcG9yYWxpPC90aD48dGQgY29sb3I9IlZFUkRFIj5WRVJERTwvdGQ+PHRkIGNvbG9yPSJWRVJERSI+VkVSREU8L3RkPjwvdHI+PHRyPjx0aCBjbGFzcz0idGV4dC1ibGFjayI+TmV2ZTwvdGg+PHRkIGNvbG9yPSJWRVJERSI+VkVSREU8L3RkPjx0ZCBjb2xvcj0iVkVSREUiPlZFUkRFPC90ZD48L3RyPjwvdGFibGU+ZAIVDw8WAh8BBUNodHRwczovL3d3dy5hcnBhLnBpZW1vbnRlLml0L3Jpc2NoaV9uYXR1cmFsaS9zbmlwcGV0c19hcnBhL2FsbGVydGEvZGQCCw8WAh8CBQQyMTA5ZAIPDxYCHwIFBUZhbHNlZAIRDxYCHwIFBUZhbHNlZAIUD2QWAgIJDxYCHwIFBDIxMDlkAhYPFgIfAgUEMjEwOWQCBw9kFgJmD2QWAgICD2QWCAIBD2QWAgIBDw8WAh8DBTRRdWFudG8gc29ubyBjaGlhcmUgbGUgaW5mb3JtYXppb25pIHN1IHF1ZXN0YSBwYWdpbmE/ZGQCCQ8PFgIfBQW6HmRhdGE6aW1hZ2UvcG5nO2Jhc2U2NCxpVkJPUncwS0dnb0FBQUFOU1VoRVVnQUFBTWdBQUFCUUNBWUFBQUJjYlRxd0FBQUFBWE5TUjBJQXJzNGM2UUFBQUFSblFVMUJBQUN4and2OFlRVUFBQUFKY0VoWmN3QUFEc01BQUE3REFjZHZxR1FBQUFydlNVUkJWSGhlN1ozTmF4UmJHb2Z6NTl5L1l1REN6QkNZMVYzT2JqYXpjVEhEWExLWjFjMGlNQzZFNnlLREdjaENRWndzTWlnaUtJelNDeGNaa0lzTFJkR01KbW9rUnZFemlvcml1WGtxZFRxblRwMVRYMTExcXZyMCs4QUxxZTVLZFhYWCszcy96amxkUGFjR3lxMWJ0OUsvQktFL0Jpc1FRYkRwSTJpMkpoQ0orUFVvK3J6a3N4d09Ub0UwdlVDeFgxaHgzTmxEU2l4aDBEeDkrbFI5Ky9ZdDNYTGpDbHh0QlRNUlNFZEl0bW5uTTNqNDhLRjYvLzU5dWhXZXFBVFNwbE9LZ3crRFo4K2VxZWZQbjZkYjRaa3FnWWpUemg1djM3NVZqeDQ5U3JmQ0l5V1dNR2krZlBtaTd0NjltMjZGcDFRZzB4SzFKYnZFeTcxNzk5VG56NS9UcmJCSUJoRUdEeVVXcFJhRURvUWlFR0h3dkhqeFF1M3U3cVpiWVJta1FIU1VrTEpKQUlaNUdlN3RBOGtnd3VCaG92RDI3ZHZwVmxnR0l4REpGa0lSbTV1YjZ1UEhqK25XRVYzN2pXU1FqcWg2NFJqRzNOcmFTbXcwR28xdGZYMWRuVDU5dXREWVIrL1A2NW4vdjdHeE1UNXVYL1Y3bS9BZTZFVkNJd0t4NkRJaWNZRTUvdFdyVnhNSFgxcGFTa3c3dk9uZzdLY2QzR2UyS0V5N2N1WEsrTGdyS3l0cWNYRXhzZVBIajQ4Zk53VkdoT2FZcmlnOUJGNjllcVYyZG5iU3JYQ0lRRG9HVWVDQXk4dkxpZUdVMTY5ZlQ1eVI3QkVhQk9BUzJObXpaeFBSSUNDRXhMbXlmZUhDaGVUNUd6ZHVKUC9UVnpiNjlPbVR1bi8vZnJvVmpxZ0Uwa1gwYjNyTW16ZHZxcE1uVHlhT2hvUDFVUjdZMUhrdm5DK0M0SDF3L3BjdVhjcGtJOTRiMnp6TzgyU2dKMCtlcFAvZERYZnUzRkZmdjM1TnQ4SWdHYVJsdERDSXZLOWZ2MDRmalEvZUd3SWlzK2dNdExxNm1vam54SWtUaVhnbzgzZ09ZYkx2cEd4dmI2dDM3OTZsVzJFUWdiUUVFUmNIaVYwWVZkamYzMDhFd1VDQkZnK0NRVHk2NTFwYlcwdWVNd2NUZkNXbnpueDdlM3VKaFNRakVKb2dKbVJzWThteFBqbHRPQVFUT0xiMVVWZjNEVDBGcFVmWEpVWU02RkU3RmlBaUVITXdBZkVnSW94dG16NVc5bVlFd29Jd2w5T3pIdDhXQ00yYVMweThjUlJ2bTJ0ZkJHa2ZGeU9OMnVjd3hORVYzaGZDWUZScUZnTkRhT2cvNkVOQ0VxekVzaDBlWStqT0pSQnFUVnRNTklHMjZEQkdOdXg5TWRkeGVUM1hlWlI5cGRNRmdRQnh4RERINElQUGQyaUVYdGs3OVQwSXczOHVwM2NKeEZkQ3NvekJGaDZSeXJVdjM1RytlUEdpT25QbWpIcjgrUEg0Mks1ejZHdUpkc3h3RFFsMG9aQW0zUVBwM0hiNE4yL2VxSFBuenFuTGx5OW5oSWU1eEVTMHM0V0hQWGp3SUxjdnRiVjlUSXpYdE04RG0xWG9mZXRtYlQ3enF0ajdpa0FxUWcvRXlFdWREOXZIaHc4ZmNnNVBBK29TQ0ZuS0ZoT214V1lhajhjTzE0RnlPeFF6STVEUndweWFtek50WHExdXAwOTYyVmFyOC9iL0dUYS9lckNIRUJMNlJjcmZKbjFqRXhvSmhEcVFrYTJwR0xuWlhsWHpMdWZXNW5QeXN2OHpiTDVjYVZtc1l5K00wc2VMR0Mxa1hqTmpsUTRRRDVTb1pPRVFOQklJelNkekk0emtVQUw0WmpkSis3MVMxY2x6RGpaU0M2NzlDcXlPU094c1Z1emYxYytsbGxCem4wMlZqRG9NUXE3c25iakVvb2xrV0phRzlPWExsK08xTXIyTDQ0QmNXV1Y0WXZZNXl6bHkwWHJod0UyemJLL09XL3RVZERCSEp2QUxwRHVoNXMvL3dDcG1JdSsxdGQ1YjdjeGFFWHlPd0J5QzFub1FzZ3BEb0dRVlNyQlFLZENQNVZ5NVVzcDYzbkNPclBQNEhUL25aS1VPNW5aNG55UGwreVo3WC9meHl2M2MxMXRObUVVQ0NRUmZJeUNIb1BVbW5lYUpjV3JxUkNieCtEdFVRNVhCS2lIcVhLd0xTejlVdTlCMm1WTFN0THNjSG5NZXYwWUpoRkNKNnVOOXl3WVBDa3JQaVp3NmtFQWcxTXJlMWdWaXdrVWptNUJWeUM1TTZnV2o0Y1ZpYmRERytiL25IV2pTRWFzQ3AzUmxIanM3Rlo5L1BpTVVaaEZIbVhkaytYS3lNdlo3TEVsbGs1VGg1cTJBdXFRVGdkaHZIS1hUbjVCUnlDeEJaa0l0SitCYTVTTjROaXF6ZUE1TC92WkUrME9yNjBSWkI1NWZIV1VkMnVGSWhUMlNpNE0rc0txQXM4YytlQzl0UmY2YUFwa0VSbEVaS09xYVRqT0lDM29UblZWNGc1MHR4eWlNa2xuRElmZ2VCMHZWanlpWkE5RldJYk5rc3dIaXNvNmRjeVQ3dFNmc0RUSzRlaS83OVpwbWtiSytyejJZWEEweE1ScGNJQnJtVUlnQ05GdU1nakV5MFNvMUJJTDk3c2NWNTd4T3JoSDNtUzlhV2xGVjc1YUo0amxIYXN0aEhYaXloZjArbXdYL2NBSUp0YkszTjRHWU1JL0NzQjFpUVRUMk1vd3lvNlN6SDlzN2Z5eHp3YkZqNTgxbEhMK29uNzgzbi8rVE9tOHM4Y2d0NTcvK0QvVWI0MWkySlUzeW44OWwvbWRuNTMvZVRGRlBJTzFsRUgvcDFvWnpoeE1JK0c0RjFDYXRDd1RId0ZrbU5Vb3dQZ0RUNGVyWTNpOC9xKy9OaXpWM0xDT0F4Q3dSbVFMeWZTSHMwTzZvZi83V1BQYVIvZlh5MFg2Zi8vczM0em1yMzdIN2dQVHhRN29TU0xFRFo4K3BTUmJwTVBNNUNMR3lkeEFaeElWdkFySTZsak00THRibTVsbjFCMk9mSnMycDdWUkhXU0w3K3ZheDgzMUpsc21kMVVGWk0yNDMyYlV6UUZpQjRCZU1qbmJKWUFXaWFUNEJXWHl4OXZmMzFjcktqK292NCtjUExQWENldlc0SnlyWDdJRzBqWjNXL3Y5U2hXd3prRldJdjd6U1RKNjV5bCtqUFVLczdCMjhRRFJOSmlDTEhKM3ZQRzl0L1R2cjNIcUhXcEhVazZtTVkxQXlIajFmYkVkUnZUd0RaakgzZHptbWZieUtWaXJNTENFRkFsM1BxRStOUUV5WWNLdzJBZWwyTW02eXdQZkliU0dZSlVldWRQS0lSSXR3TEFLOW55MnlpbFowRHJtU3lNQU9Ccm56clpuUmprUmR6OGxEQzZScnBsSWdtaW9Ua0RuSE9iRHYvdmlUK3YrL2ZtODlibDNNRmh5OEVKL0RaaUsySStxN0lycmpYTzN6eUFtK2pvMWYweXJCSEVHalhuazZmQm9KaE9neU5Jb21JQ3M1aCt0SzF1NGphalNsbGxON0hhbFJMMk9meHlUbFduYi83R2VaUDQ3OVdjK2tRUHFtU0tDK0NVaFhKaGxiNFZXc1dMc1g5aWtPcWdvRWFtYXozTEZxTi96NXowdG5KTi9qaDB6ZTVBK05xUzZ4eXJBbklFK2RPcVYyZC84emR2ajYwUzB2bHZySFNMR2N2cncwczUzUFpXNkh0S042cFRJd0owcWRMU29HREt4dTBCZ2dVUXRFUTdsMTdkcTE1QmFZUmQrQW5CcHM1eTEwUk51aHEwZDFyN0RTakZRMk90YzRlRmowV2RMUGhFQW91N2loOVA3K2Znc1RrRE5Fa1JCTGVxTzJ4TkUzdFFVeXhBYTlqT1E3SGhzYjZkWWh6U2NnaFJ4YUxCR1VWRGJSWnhDeUJ0bkRkd2VXd1h3RHNpZW1NZUNGSkhxQnVMS0hqK29Ua0FJMEZkYzBpVEpxZ1pBMStFa3hYL2J3MGNzM0lBVW5mWXVwc2tES1RuUW9VY0U4RHpJSEdjUkhsWE1POWczSUdhR3BuL1RsWDFGbkVIcVB0bjd0eVRjQkdRdERDWEJEb3hXQkRQSEQ1ZGVlK0VtMEx0QVRrSHd4UzRpYmFETUl2NzdLRDB3S3dpUkVLeEIrYVpVaFhtRVlUR3NKRjZWQXVPRUNQNDgyQ1ZLVEN4Q2xRTXBHcndRL0VoaXlUSlZBaWk2ZStSdzNnT05HY0lJd0tZMEVNdlFvRS91dnp3cmhpTExFa2daZGFJdldCREtrckxLNHVKaitKUWlURVdVR0VZRUliUkdsUU5wY1lpS1VFL1BJVjVRQzRhdTFJWDlMVzRpWEtBV1MvNjBQb1l5WXM4QWtSQ2tRVnQ0eWt0WDFyZkdGK0trc2tHbUxNTXlEY1A5ZEVZbFFGWmVQUjVsQk5JaGtlWGxaVnZVS2pZbGFJTUNFSVV2Zm1WMm5ONUdNRWpkdFZ6clJDMFJETnFGeHB6ZFpYMTlQdmtJclloSEttQm1CYUdqZ2lUSnJhMnZKRFIzSUxLejhSVEF5ZHlMWVRJMUF1aG9rSUxPd1BCN0JNTUc0dExTVU5QZjhmZ2k5eTliV2xnaG5ocG01REZJR0dRWlI4Q003OUM2SUJlR3dmSVdHbjIzRU5CcU5FcU92WVg5TUZrakdod2lrQnZ6eUxVS2dITk1Db2E5Qk5CajlEVUxDdUdHRWZ0d1VsRFl5b2hZV3hrMG1oT0VoQXVrSUhGNDd2eWtvYlF3VWFBRmhDRXFMeXpTZHRWekdraHI3dU5yTXpDYmlhODVNQzZTcnZxWk5kTlp5R2V2TlhPTEF6TXhtaW85dG9UcURFa2dJaDUwR1VjQzBuR2ZjS1BVcjNmOStZeFRaNCtjQUFBQUFTVVZPUks1Q1lJST1kZAIVDxYCHwIFBDIxMDlkAh8PFgIfAgUGNlM0Q0FKZAIJDxYCHwIFBDIxMDlkZG0piXJ0o/CNW/QvZ+PgvtJS6CBbKEgWXcdG8UNeE9f6" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['aspnetForm'];
+if (!theForm) {
+    theForm = document.aspnetForm;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="8D0E13E6" />
+</div>
+
+        <div id="ctl00_PanelMasterTop">
+	
+        
+
+
+<script type="text/javascript"> function espandiVociMenu(ID) { var nomeSottovoce = 'SottovoceCategoria' + ID; var nomeLabel = 'LabelCategoria' + ID; $("[title='" + nomeSottovoce + "']").toggleClass("show"); if ($("[title='" + nomeLabel + "'").text() == '+') { $("[title='" + nomeLabel + "'").text('-'); $("[title='" + nomeLabel + "'").addClass("expanded"); } else { $("[title='" + nomeLabel + "'").text('+'); $("[title='" + nomeLabel + "'").removeClass("expanded"); }; }</script>
+<script type="text/javascript">
+    //<![CDATA[
+    var __cultureInfo = { "name": "it-IT", "numberFormat": { "CurrencyDecimalDigits": 2, "CurrencyDecimalSeparator": ",", "IsReadOnly": false, "CurrencyGroupSizes": [3], "NumberGroupSizes": [3], "PercentGroupSizes": [3], "CurrencyGroupSeparator": ".", "CurrencySymbol": "€", "NaNSymbol": "Non un numero", "CurrencyNegativePattern": 9, "NumberNegativePattern": 1, "PercentPositivePattern": 1, "PercentNegativePattern": 1, "NegativeInfinitySymbol": "-Infinito", "NegativeSign": "-", "NumberDecimalDigits": 2, "NumberDecimalSeparator": ",", "NumberGroupSeparator": ".", "CurrencyPositivePattern": 2, "PositiveInfinitySymbol": "+Infinito", "PositiveSign": "+", "PercentDecimalDigits": 2, "PercentDecimalSeparator": ",", "PercentGroupSeparator": ".", "PercentSymbol": "%", "PerMilleSymbol": "‰", "NativeDigits": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"], "DigitSubstitution": 1 }, "dateTimeFormat": { "AMDesignator": "", "Calendar": { "MinSupportedDateTime": "\/Date(-62135596800000)\/", "MaxSupportedDateTime": "\/Date(253402297199999)\/", "AlgorithmType": 1, "CalendarType": 1, "Eras": [1], "TwoDigitYearMax": 2029, "IsReadOnly": false }, "DateSeparator": "/", "FirstDayOfWeek": 1, "CalendarWeekRule": 2, "FullDateTimePattern": "dddd d MMMM yyyy HH:mm:ss", "LongDatePattern": "dddd d MMMM yyyy", "LongTimePattern": "HH:mm:ss", "MonthDayPattern": "d MMMM", "PMDesignator": "", "RFC1123Pattern": "ddd, dd MMM yyyy HH\u0027:\u0027mm\u0027:\u0027ss \u0027GMT\u0027", "ShortDatePattern": "dd/MM/yyyy", "ShortTimePattern": "HH:mm", "SortableDateTimePattern": "yyyy\u0027-\u0027MM\u0027-\u0027dd\u0027T\u0027HH\u0027:\u0027mm\u0027:\u0027ss", "TimeSeparator": ":", "UniversalSortableDateTimePattern": "yyyy\u0027-\u0027MM\u0027-\u0027dd HH\u0027:\u0027mm\u0027:\u0027ss\u0027Z\u0027", "YearMonthPattern": "MMMM yyyy", "AbbreviatedDayNames": ["dom", "lun", "mar", "mer", "gio", "ven", "sab"], "ShortestDayNames": ["do", "lu", "ma", "me", "gi", "ve", "sa"], "DayNames": ["domenica", "lunedì", "martedì", "mercoledì", "giovedì", "venerdì", "sabato"], "AbbreviatedMonthNames": ["gen", "feb", "mar", "apr", "mag", "giu", "lug", "ago", "set", "ott", "nov", "dic", ""], "MonthNames": ["gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno", "luglio", "agosto", "settembre", "ottobre", "novembre", "dicembre", ""], "IsReadOnly": false, "NativeCalendarName": "calendario gregoriano", "AbbreviatedMonthGenitiveNames": ["gen", "feb", "mar", "apr", "mag", "giu", "lug", "ago", "set", "ott", "nov", "dic", ""], "MonthGenitiveNames": ["gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno", "luglio", "agosto", "settembre", "ottobre", "novembre", "dicembre", ""] }, "eras": [1, "d.C.", null, 0] };//]]>
+</script>
+
+<div id="alto" style="display: none"><a href="#contenuto" tabindex="0" title="Link diretto al contenuto della pagina.">Vai al contenuto della pagina.</a></div>
+<!--  Fine link per saltare il menu e andare subito al contenuto%-->
+<header class="it-header-wrapper" data-bs-target="#header-nav-wrapper">
+    <div class="it-header-slim-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="it-header-slim-wrapper-content">
+                        <div class="d-lg-block navbar-brand">
+                            <a href="https://www.regione.Piemonte.it" title="Link al sito della Regione Piemonte" class="" target="_blank">Regione Piemonte</a>
+                        </div>
+                        <!-- link superiori di servizio ad esempio ad accessibilita', mappa, etc-->
+
+                        <div class="it-header-slim-right-zone" role="navigation">
+                           
+                            <a id="ctl00_ctl12_btnAccedi" class="btn btn-primary btn-icon btn-full" data-element="personal-area-login" aria-label="Accedere alla propria area personale" href="areaRiservata">
+                                <span class="rounded-icon" aria-hidden="true">
+                                    <svg class="icon icon-primary">
+                                        <use xlink:href="assets/bootstrap-italia/dist/svg/sprites.svg#it-user"></use>
+                                    </svg>
+                                </span>
+                                <span class="d-none d-lg-block">Accedi all'area personale</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="it-nav-wrapper">
+        <div class="it-header-center-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="it-header-center-content-wrapper">
+
+                            <div class="it-brand-wrapper">
+
+                                <a href="Home" title="Home Page del sito del Comune di Angrogna" class="it-brand-title">
+                                    <img src="portals/2109/Skins/skinXhtml/Images/stemma.webp" class="icon widthAuto" alt="Stemma dell'Ente" />
+                                    <div class="it-brand-text">
+                                        <div class="it-brand-title">Comune di Angrogna</div>
+                                    </div>
+                                </a>
+
+                            </div>
+
+                            <div id="ctl00_ctl12_pnlSiscomRicercaHomeAGID">
+		<div id="ctl00_ctl12_pnlSiscomRicercaHomeAGID">
+	<div id="ctl00_ctl12_ctl02_PanelContenitore" class="it-right-zone">
+		
+    <div id="ctl00_ctl12_ctl02_PanelSocial" class="it-socials d-none d-lg-flex">
+			
+        <div id="ctl00_ctl12_ctl02_PanelTestoSocial" class="Seguici">
+				
+            <span id="ctl00_ctl12_ctl02_TestoSocial" style="margin-right:10px">Seguici su</span>
+        
+			</div>
+        
+        
+        
+        
+        
+        
+        
+        
+        <div id="ctl00_ctl12_ctl02_panelRss" style="display: inline-block;">
+				
+            <a id="ctl00_ctl12_ctl02_LinkRss" title="Link alla pagina RSS - il link si apre in una nuova finestra" href="Rss" target="_blank"><svg class='icon icon-sm icon-white align-top'><use xlink:href='assets/bootstrap-italia/dist/svg/sprites.svg#it-rss'></use></svg></a>
+        
+			</div>
+        
+    
+		</div>
+    <div class="it-search-wrapper">
+        <span class="d-none d-md-block">Cerca</span>
+        <a id="ctl00_ctl12_ctl02_linkRicerca" aria-label="Cerca nel sito" href="Ricerca">
+            <i class="search-link rounded-icon" type="button" data-bs-toggle="modal" data-bs-target="#search-modal" aria-label="Cerca nel sito">
+                <svg class="icon">
+                    <use href="assets/bootstrap-italia/dist/svg/sprites.svg#it-search"></use>
+                </svg>
+            </i>           
+        </a>
+    </div>
+
+	</div>
+
+
+
+<script type="text/javascript">
+    // Scorro in basso fino al ContenitoreFooter
+    function bottomFunction() {
+        $('html,body').animate({ scrollTop: $(".ContenitoreFooter").offset().top }, 'slow');
+    }
+</script>
+
+</div>
+	</div>
+
+                        </div>
+                    </div>
+
+                    <div id="RigaMenuPush" class="MenuPushResponsive MenuPushResponsive-vertical MenuPushResponsive-left">
+                        <div>
+                            <div id="_RigaElencoMenuPush">
+
+                                <div class="contenitoreNoBorderNoTitolo">
+
+                                    <div class="contenutocontainer">
+                                        <div>
+                            <div id="ctl00_ctl12_pnlSiscomMenuResponsiveAGID">
+		<div id="ctl00_ctl12_pnlSiscomMenuResponsiveAGID">
+	
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        //When btn is clicked
+        $(".btn-menu-responsive-chiudi").click(function () {
+            $("#menudiservizio").toggleClass("show");
+            $(".MenuPushElencoVoci").toggleClass("MenuPushElencoVociAttivo");
+            $(".MenuPushOverlay").toggleClass("MenuPushOverlayAttivo");
+            $(this).toggleClass("active");
+            $(document.body).toggleClass("MenuPushResponsive-push-toright");
+            $("#RigaMenuPush").toggleClass("MenuPushResponsive-open");
+        });
+    });
+</script>
+
+<div class="navbar-collapsable" style="padding-bottom: 24px;">
+    <div class="btn-menu-responsive-chiudi" title="Chiudi">
+        <span class="d-none text-black">Nascondi la navigazione</span>
+        <svg class="icon">
+            <use href="assets/bootstrap-italia/dist/svg/sprites.svg#it-close-big"></use>
+        </svg>
+    </div>
+    <div class="menu-wrapper" title="Home">
+        <a id="ctl00_ctl12_ctl00_LinkHome" class="logo-hamburger"><img id="ctl00_ctl12_ctl00_imgLogoEnte" class="icon" alt="Stemma dell&#39;Ente" src="portals/2109/Skins/skinXhtml/Images/stemma.webp" style="border-width:0px;" />
+            <div class="it-brand-text">
+                <span id="ctl00_ctl12_ctl00_lblNomeEnte" class="it-brand-title">Comune di Angrogna</span>
+            </div>
+        </a>
+    </div>
+    <div id="ctl00_ctl12_ctl00_PanelContenitore" class="MenuPushElencoVoci" style="width: 100%!important; position: relative;">
+		
+    <ul class="navbar-nav"><li class="nav-item"><a title="Link alla pagina Amministrazione" class="nav-link" href="Amministrazionedettagli">Amministrazione</a></li><li class="nav-item"><a title="Link alla pagina Aree Tematiche" class="nav-link" href="Notizie">Novit&#224;</a></li><li class="nav-item"><a title="Link alla pagina Servizi" class="nav-link" href="Servizi">Servizi</a></li><li class="nav-item"><a title="Link alla pagina Vivere Angrogna" class="nav-link" href="Guidadettagli">Vivere Angrogna</a></li></ul><div class="clear">
+
+		</div><ul class='navbar-nav navbar-secondary mt-20'><li class='nav-item'><a class="nav-link" href="Dettaglioargomenti?IDCategoria=28061">Elezioni</a></li><li class='nav-item'><a class="nav-link" href="Dettaglioargomenti?IDCategoria=28100">Trasparenza amministrativa</a></li><li class='nav-item'><a class="nav-link" href="Dettaglioargomenti?IDCategoria=28103">Urbanizzazione</a></li><li class='nav-item'><a class="nav-link" data-element="all-topics" href="Argomenti"><span class='fw-bold'>Tutti gli argomenti...</span></a></li></ul>
+	</div>
+    
+</div>
+
+
+
+<div id="ctl00_ctl12_ctl00_pnlOverlay" class="MenuPushOverlay">
+
+	</div>
+
+
+
+
+
+
+
+</div>
+	</div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="it-header-navbar-wrapper" class="it-header-navbar-wrapper">
+            
+            <div class="container">
+                <div id="row">
+                    <div class="col-12">
+
+                        <nav class="navbar navbar-expand-lg has-megamenu" aria-label="Navigazione principale">
+                            <div class="custom-navbar-toggler btn-responsive-menu">
+
+                                <svg class="icon">
+                                    <use href="images/svg/sprites.svg#it-burger"></use>
+                                </svg>
+
+                                <div class="btn-responsive-home" title="Home"></div>
+                                <div class="btn-responsive-search" title="Ricerca"></div>
+                            </div>
+
+                            <div id="ctl00_ctl12_pnlSiscomMenuTematicoAGID">
+		<div id="ctl00_ctl12_pnlSiscomMenuTematicoAGID">
+	
+
+
+
+<div class="navbar-collapsable" id="nav4" style="display: none;" aria-hidden="true">
+    <div class="overlay fade" style="display: none;"></div>
+    <div class="close-div">
+        <button class="btn close-menu" type="button" data-focus-mouse="false">
+            <span class="d-none text-black">Nascondi la navigazione</span>
+            <svg class="icon">
+                <use href="images/svg/sprites.svg#it-close-big"></use>
+            </svg>
+        </button>
+    </div>
+
+    <div id="ctl00_ctl12_ctl01_PanelContenitore" class="menu-wrapper">
+		
+        <a href="#" aria-label="home Nome del Comune" class="logo-hamburger">
+            <svg class="icon" aria-hidden="true">
+                <use href="images/svg/sprites.svg#it-pa"></use>
+            </svg>
+            <div class="it-brand-text">
+                <div class="it-brand-title">Nome del Comune</div>
+            </div>
+        </a>
+
+    <nav aria-label="Principale"><ul class="navbar-nav" data-element="main-navigation"><li class="nav-item"><a title="Link alla pagina Amministrazione" class="nav-link" data-element="management" href="Amministrazionedettagli">Amministrazione</a></li><li class="nav-item"><a title="Link alla pagina Novit&#224;" class="nav-link" data-element="news" href="Notizie">Novit&#224;</a></li><li class="nav-item"><a title="Link alla pagina Servizi" class="nav-link" data-element="all-services" href="Servizi">Servizi</a></li><li class="nav-item"><a title="Link alla pagina Vivere Angrogna" class="nav-link" data-element="live" href="Guidadettagli">Vivere Angrogna</a></li></nav></ul><div class="clear">
+
+		</div><nav aria-label="Secondaria"><ul class='navbar-nav navbar-secondary'><li class='nav-item'><a class="nav-link" href="Dettaglioargomenti?IDCategoria=28061">Elezioni</a></li><li class='nav-item'><a class="nav-link" href="Dettaglioargomenti?IDCategoria=28100">Trasparenza amministrativa</a></li><li class='nav-item'><a class="nav-link" href="Dettaglioargomenti?IDCategoria=28103">Urbanizzazione</a></li><li class='nav-item'><a class="nav-link" data-element="all-topics" href="Argomenti"><span class='fw-bold'>Tutti gli argomenti...</span></a></li></nav></ul>
+	</div>
+</div>
+
+
+
+
+</div>
+	</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</header>
+
+
+
+<input type="hidden" name="ctl00$ctl12$CreaStaticPage" id="ctl00_ctl12_CreaStaticPage" value="False" />
+</div>
+
+        
+
+        
+    
+    <div id="ctl00_ContentPlaceHolder1_PanelGenerale">
+	
+    
+    
+    <div id="ctl00_ContentPlaceHolder1_PanelContent" class="2">
+		
+
+<div id="RigaImmagineHome">
+    <div>
+        <div class="contenitoreNoBorderNoTitolo">
+            <div class="contenutocontainer">
+                <div id="ctl00_ContentPlaceHolder1_ctl00_pnlSiscomIntestazioneRotante">
+			<div id="ctl00_ContentPlaceHolder1_ctl00_pnlSiscomIntestazioneRotante">
+	
+
+<link href="./DesktopModules/SiscomIntestazioneRotante/Classe.css" rel="stylesheet" type="text/css" />
+
+<script>
+
+    let slideIndex = 1;
+    //si mette da codice altrimenti con le statiche NN va
+    setInterval(function (){
+        plusSlides(1);
+    },5000);
+
+    // Next/previous controls
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    // Thumbnail image controls
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        let i;
+        let slides = document.getElementsByClassName("carousel-item");
+        let dots = document.getElementsByClassName("splide__pagination__page");
+        if (n > slides.length) { slideIndex = 1 }
+        if (n < 1) { slideIndex = slides.length }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].classList.remove("active");
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" is-active", "");
+        }
+        slides[slideIndex - 1].classList.add("active");
+        dots[slideIndex - 1].className += " is-active";
+    }
+</script>
+
+
+
+<div id='carouselExample' class='carousel slide carousel-fade' data-ride='carousel' ><div class='carousel-inner'><div class='carousel-item active'><img src='portals/2109/SiscomImmaginiIntestazione/Panoramica1.webp' class='d-block w-100' alt='Panoramica' ></div></div></div>
+
+
+
+</div>
+		</div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div id="RigaNewsPrincipale">
+    <h2 class="SiscomHiddenH1">In evidenza</h2>
+    <div class="larghezza">
+    </div>
+</div>
+
+<section id="head-section">
+    <div id="ctl00_ContentPlaceHolder1_ctl00_pnlSiscomNewsPrimoPianoAGID">
+			<div id="ctl00_ContentPlaceHolder1_ctl00_pnlSiscomNewsPrimoPianoAGID">
+	<div id="ctl00_ContentPlaceHolder1_ctl00_ctl02_PanelContenitore">
+		
+
+    <h2 class="visually-hidden">Ultime notizie</h2>
+
+    <div class="container">
+        <div class="row">
+
+            <div id="ctl00_ContentPlaceHolder1_ctl00_ctl02_PanelImmagineNewsPrincipale" class="col-lg-6 offset-lg-1 order-lg-2 px-0 px-lg-2">
+			
+            <div class="card">
+				<div class="card-body">
+					<a href="Dettaglionews?IDNews=402758"><img class="img-fluid" src="portals/2109/SiscomImmaginiNews/z0m0le3o_001.webp" alt="Dichiarato lo stato di massima pericolosit&#224; per incendi boschivi, a partire dal giorno 08 luglio 2026 su tutto il territorio del Piemonte." style="border-width:0px;max-height: 350px;" /></a>
+				</div>
+			</div>
+		</div>
+
+            <div id="ctl00_ContentPlaceHolder1_ctl00_ctl02_pnlDescrizioneNewsPrincipale" class="col-lg-5 order-lg-1">
+			
+                <div class="card mb-5">
+                    <div class="card-body pb-5">
+                        <svg class='icon icon-sm' aria-hidden='True'><use xlink:href='images/svg/sprites.svg#it-calendar'></use></svg><a class="title-xsmall-semi-bold fw-semibold" href="Notizie?idCat=1">NOTIZIE</a><div class="category-top d-inline">
+				<span><span class='data fw-normal'>    Luned&#236;, 06 Luglio 2026<br /></span></span>
+			</div><div class="clear">
+
+			</div><div class="clearright">
+
+			</div><div class="text-decoration-none">
+				<h3><a class="h4 card-title title-xlarge" href="Dettaglionews?IDNews=402758">Dichiarato lo stato di massima pericolosit&#224; per incendi boschivi, a partire dal giorno 08 luglio 2026 su tutto il territorio del Piemonte.</a></h3>
+			</div><div class="mb-4 subtitle-small pt-3 lora">
+				<span>Dichiarato lo stato di massima pericolosit&agrave; per incendi boschivi, a partire dal giorno 08 luglio 2026 su tutto il territorio&nbsp;del Piemonte.<br /><br /></span>
+			</div><div>
+				<a class="text-decoration-none" href="Dettaglioargomenti?IDCategoria=28045"><div class="chip chip-simple chip-primary">
+					<span class="chip-label">Accesso all'informazione</span>
+				</div></a><a class="text-decoration-none" href="Dettaglioargomenti?IDCategoria=28047"><div class="chip chip-simple chip-primary">
+					<span class="chip-label">Agricoltura</span>
+				</div></a><a class="text-decoration-none" href="Dettaglioargomenti?IDCategoria=28049"><div class="chip chip-simple chip-primary">
+					<span class="chip-label">Aria</span>
+				</div></a><a class="text-decoration-none" href="Dettaglioargomenti?IDCategoria=28064"><div class="chip chip-simple chip-primary">
+					<span class="chip-label">Foreste</span>
+				</div></a><a class="text-decoration-none" href="Dettaglioargomenti?IDCategoria=28069"><div class="chip chip-simple chip-primary">
+					<span class="chip-label">Igiene pubblica</span>
+				</div></a><a class="text-decoration-none" href="Dettaglioargomenti?IDCategoria=28073"><div class="chip chip-simple chip-primary">
+					<span class="chip-label">Inquinamento</span>
+				</div></a><a class="text-decoration-none" href="Dettaglioargomenti?IDCategoria=28089"><div class="chip chip-simple chip-primary">
+					<span class="chip-label">Polizia</span>
+				</div></a><a class="text-decoration-none" href="Dettaglioargomenti?IDCategoria=28091"><div class="chip chip-simple chip-primary">
+					<span class="chip-label">Protezione civile</span>
+				</div></a><a class="text-decoration-none" href="Dettaglioargomenti?IDCategoria=28095"><div class="chip chip-simple chip-primary">
+					<span class="chip-label">Spazio Verde</span>
+				</div></a><a class="text-decoration-none" href="Dettaglioargomenti?IDCategoria=28099"><div class="chip chip-simple chip-primary">
+					<span class="chip-label">Tempo libero</span>
+				</div></a><a class="text-decoration-none" href="Dettaglioargomenti?IDCategoria=28102"><div class="chip chip-simple chip-primary">
+					<span class="chip-label">Turismo</span>
+				</div></a>
+			</div>
+
+                        <a id="ctl00_ContentPlaceHolder1_ctl00_ctl02_lnkVediTutto" class="read-more pb-3" href="Notizie">
+                                    <span class="text">Tutte le novit&#224;</span>
+                                    <svg class="icon"><use xlink:href="images/svg/sprites.svg#it-arrow-right"></use></svg>
+                            </a>
+                    </div>
+                </div>
+            
+		</div>
+        </div>
+    </div>
+
+
+	</div>
+
+
+
+</div>
+		</div>
+
+</section>
+
+<section id="calendario">
+    <div class="section section-muted pb-90 pb-lg-50 px-lg-5 pt-0">
+        <div id="ctl00_ContentPlaceHolder1_ctl00_pnlSiscomNewsHomeAGID">
+			<div id="ctl00_ContentPlaceHolder1_ctl00_pnlSiscomNewsHomeAGID">
+	
+
+
+
+<style type="text/css">
+    .e-mail:before {
+        content: attr(data-website) "\0040" attr(data-user);
+        unicode-bidi: bidi-override;
+        direction: rtl;
+    }
+    .cryptedmail:after {
+	  content: attr(data-name) "@" attr(data-domain) "." attr(data-tld); 
+	}
+</style>
+
+
+        <div class="container">
+            <div class="row mb-2">
+
+
+    <div id="ctl00_ContentPlaceHolder1_ctl00_ctl00_PanelDati" class="card-wrapper px-0 card-overlapping card-teaser-wrapper card-teaser-wrapper-equal card-teaser-block-3">
+		<div class="card card-teaser no-after rounded shadow-sm mb-0 border border-light">
+			<div class="card-image-wrapper with-read-more">
+				<div class="card-body pb-5">
+					<svg class='icon icon-sm' aria-hidden='True'><use xlink:href='images/svg/sprites.svg#it-calendar'></use></svg><a class="title-xsmall-semi-bold fw-semibold" href="Notizie?idCat=1">NOTIZIE</a><div class="category-top d-inline">
+						<span class="data fw-normal">    Luned&#236;, 11 Settembre 2023<br /></span>
+					</div><a class="card-title text-paragraph-medium u-grey-light" href="Dettaglionews?IDNews=307946">Provvedimenti amministrativi</a><div class="text-paragraph-card u-grey-light m-0 AltezzaNewsFissa">
+						Il cittadino interessato ad ottenere un provvedimento amministrativo, pu&ograve; avvalersi di strumenti di tutela sia amministrativa che giurisdizionale.<br />Al link indicato sono resi noti gli strumenti riconosciuti dalla legge, in favore dei soggetti interessati, in un procedimento amministrativo e nei confronti del provvedimento finale ovvero nei casi di adozione del provvedimento oltre il termine predeterminato per la sua conclusione e i modi per attivarli.<br /><br />
+					</div><a class="read-more" href="Dettaglionews?IDNews=307946"><span Class='text'>Vai alla pagina</span><svg Class='icon ms-0'><use xlink : href='images/svg/sprites.svg#it-arrow-right'></use></svg></a>
+				</div>
+			</div>
+		</div><div class="card card-teaser no-after rounded shadow-sm mb-0 border border-light">
+			<div class="card-image-wrapper with-read-more">
+				<div class="card-body pb-5">
+					<svg class='icon icon-sm' aria-hidden='True'><use xlink:href='images/svg/sprites.svg#it-calendar'></use></svg><a class="title-xsmall-semi-bold fw-semibold" href="Notizie?idCat=1">NOTIZIE</a><a class="card-title text-paragraph-medium u-grey-light" href="Dettaglionews?IDNews=307828">consultazione del Regolamento edilizio di Angrogna vigente</a><div class="text-paragraph-card u-grey-light m-0 AltezzaNewsFissa">
+						consultazione del Regolamento edilizio di Angrogna vigente<br /><br />
+					</div><a class="read-more" href="Dettaglionews?IDNews=307828"><span Class='text'>Vai alla pagina</span><svg Class='icon ms-0'><use xlink : href='images/svg/sprites.svg#it-arrow-right'></use></svg></a>
+				</div>
+			</div>
+		</div><div class="card card-teaser card-teaser-image card-flex no-after rounded shadow-sm border border-light mb-0">
+			<div class="card-image-wrapper with-read-more">
+				<div class="card-body p-3 pb-5">
+					<svg class='icon icon-sm' aria-hidden='True'><use xlink:href='images/svg/sprites.svg#it-calendar'></use></svg><a class="title-xsmall-semi-bold fw-semibold" href="Notizie?idCat=1">NOTIZIE</a><div class="category-top d-inline">
+						<span class="data fw-normal">    Marted&#236;, 12 Gennaio 2021<br /></span>
+					</div><a class="card-title text-paragraph-medium u-grey-light" href="Dettaglionews?IDNews=307798">Modello tassa rifiuti</a><div class="text-paragraph-card u-grey-light m-0 AltezzaNewsFissa">
+						Modello denuncia tassa rifiuti solidi urbani<br /><br />
+					</div><a class="read-more" href="Dettaglionews?IDNews=307798"><span Class='text'>Vai alla pagina</span><svg Class='icon ms-0'><use xlink : href='images/svg/sprites.svg#it-arrow-right'></use></svg></a>
+				</div><div class="card-image card-image-rounded pb-5">
+					<a href="Dettaglionews?IDNews=307798"><div class="SiscomCenter">
+						<img class="ImmagineHomeNotizie" src="portals/2109/SiscomImmaginiNews/download_001.jpg" alt="Modello tassa rifiuti" style="border-width:0px;" />
+					</div></a>
+				</div>
+			</div>
+		</div><div class="card card-teaser card-teaser-image card-flex no-after rounded shadow-sm border border-light mb-0">
+			<div class="card-image-wrapper with-read-more">
+				<div class="card-body p-3 pb-5">
+					<svg class='icon icon-sm' aria-hidden='True'><use xlink:href='images/svg/sprites.svg#it-calendar'></use></svg><a class="title-xsmall-semi-bold fw-semibold" href="Notizie?idCat=1">NOTIZIE</a><div class="category-top d-inline">
+						<span class="data fw-normal">    Gioved&#236;, 25 Giugno 2020<br /></span>
+					</div><a class="card-title text-paragraph-medium u-grey-light" href="Dettaglionews?IDNews=307764">Val d'Angrogna - Bella da vedere e da scoprire</a><div class="text-paragraph-card u-grey-light m-0 AltezzaNewsFissa">
+						Scarica la brochure...<br /><br />
+					</div><a class="read-more" href="Dettaglionews?IDNews=307764"><span Class='text'>Vai alla pagina</span><svg Class='icon ms-0'><use xlink : href='images/svg/sprites.svg#it-arrow-right'></use></svg></a>
+				</div><div class="card-image card-image-rounded pb-5">
+					<a href="Dettaglionews?IDNews=307764"><div class="SiscomCenter">
+						<img class="ImmagineHomeNotizie" src="portals/2109/SiscomImmaginiNews/angrogna-da-sopra1.webp" alt="Val d&#39;Angrogna - Bella da vedere e da scoprire" style="border-width:0px;" />
+					</div></a>
+				</div>
+			</div>
+		</div><div class="card card-teaser card-teaser-image card-flex no-after rounded shadow-sm border border-light mb-0">
+			<div class="card-image-wrapper with-read-more">
+				<div class="card-body p-3 pb-5">
+					<svg class='icon icon-sm' aria-hidden='True'><use xlink:href='images/svg/sprites.svg#it-calendar'></use></svg><a class="title-xsmall-semi-bold fw-semibold" href="Notizie?idCat=1">NOTIZIE</a><a class="card-title text-paragraph-medium u-grey-light" href="Dettaglionews?IDNews=307763">Consultazione sull'iter per i professionisti e richiedenti previa registrazione</a><div class="text-paragraph-card u-grey-light m-0 AltezzaNewsFissa">
+						<p><a href="https://www.pa-online.it/GisMasterWebS/SU/SU.aspx?IdCliente=001011&amp;IdPage=SSU">Consultazione sull'iter per i professionisti e richiedenti previa registrazione (le modalit&agrave; sono disponibilit&agrave; premendo accedi sulla nuova pagina).</a></p><br />
+					</div><a class="read-more" href="Dettaglionews?IDNews=307763"><span Class='text'>Vai alla pagina</span><svg Class='icon ms-0'><use xlink : href='images/svg/sprites.svg#it-arrow-right'></use></svg></a>
+				</div><div class="card-image card-image-rounded pb-5">
+					<a href="Dettaglionews?IDNews=307763"><div class="SiscomCenter">
+						<img class="ImmagineHomeNotizie" src="portals/2109/SiscomImmaginiNews/fatturaelettronicaconsultazione.jpg" alt="Consultazione sull&#39;iter per i professionisti e richiedenti previa registrazione" style="border-width:0px;" />
+					</div></a>
+				</div>
+			</div>
+		</div><div class="card card-teaser card-teaser-image card-flex no-after rounded shadow-sm border border-light mb-0">
+			<div class="card-image-wrapper with-read-more">
+				<div class="card-body p-3 pb-5">
+					<svg class='icon icon-sm' aria-hidden='True'><use xlink:href='images/svg/sprites.svg#it-calendar'></use></svg><a class="title-xsmall-semi-bold fw-semibold" href="Notizie?idCat=1">NOTIZIE</a><a class="card-title text-paragraph-medium u-grey-light" href="Dettaglionews?IDNews=307762">Consultazione delle pratiche edilizie per tutti i cittadini</a><div class="text-paragraph-card u-grey-light m-0 AltezzaNewsFissa">
+						<p><a href="https://www.pa-online.it/GisMasterWebS/SU/SU.aspx?IdCliente=001011&amp;IdPage=SSU">Consultazione delle pratiche edilizie per tutti i cittadini.</a></p><br />
+					</div><a class="read-more" href="Dettaglionews?IDNews=307762"><span Class='text'>Vai alla pagina</span><svg Class='icon ms-0'><use xlink : href='images/svg/sprites.svg#it-arrow-right'></use></svg></a>
+				</div><div class="card-image card-image-rounded pb-5">
+					<a href="Dettaglionews?IDNews=307762"><div class="SiscomCenter">
+						<img class="ImmagineHomeNotizie" src="portals/2109/SiscomImmaginiNews/1413541470831_edilizia-20130911-1031341.jpg" alt="Consultazione delle pratiche edilizie per tutti i cittadini" style="border-width:0px;" />
+					</div></a>
+				</div>
+			</div>
+		</div><div class="card card-teaser card-teaser-image card-flex no-after rounded shadow-sm border border-light mb-0">
+			<div class="card-image-wrapper with-read-more">
+				<div class="card-body p-3 pb-5">
+					<svg class='icon icon-sm' aria-hidden='True'><use xlink:href='images/svg/sprites.svg#it-calendar'></use></svg><a class="title-xsmall-semi-bold fw-semibold" href="Notizie?idCat=1">NOTIZIE</a><a class="card-title text-paragraph-medium u-grey-light" href="Dettaglionews?IDNews=307761">Tutte le informazioni sulle pratiche ambientali</a><div class="text-paragraph-card u-grey-light m-0 AltezzaNewsFissa">
+						<p>Tutte le informazioni sulle&nbsp;<a style="color: #666666; display: inline !important;" href="http://www.regione.piemonte.it/territorio/paesaggio/beni_paesaggistici.htm">pratiche ambientali</a><br /><a href="http://www.regione.piemonte.it/territorio/paesaggio/beni_paesaggistici.htm">-&nbsp;semplificazione con&nbsp;Decreto del Presidente della Repubblica 13 febbraio 2017, n. 31&nbsp;(G.U. 22 marzo 2017, n. 68)</a></p><br />
+					</div><a class="read-more" href="Dettaglionews?IDNews=307761"><span Class='text'>Vai alla pagina</span><svg Class='icon ms-0'><use xlink : href='images/svg/sprites.svg#it-arrow-right'></use></svg></a>
+				</div><div class="card-image card-image-rounded pb-5">
+					<a href="Dettaglionews?IDNews=307761"><div class="SiscomCenter">
+						<img class="ImmagineHomeNotizie" src="portals/2109/SiscomImmaginiNews/mfront_ambiente_18112010.jpg" alt="Tutte le informazioni sulle pratiche ambientali" style="border-width:0px;" />
+					</div></a>
+				</div>
+			</div>
+		</div><div class="card card-teaser no-after rounded shadow-sm mb-0 border border-light">
+			<div class="card-image-wrapper with-read-more">
+				<div class="card-body pb-5">
+					<svg class='icon icon-sm' aria-hidden='True'><use xlink:href='images/svg/sprites.svg#it-calendar'></use></svg><a class="title-xsmall-semi-bold fw-semibold" href="Notizie?idCat=1">NOTIZIE</a><a class="card-title text-paragraph-medium u-grey-light" href="Dettaglionews?IDNews=307760">Per le pratiche edilizie la presentazione &#232; accettata esclusivamente tramite GISMASTERWEB SUE</a><div class="text-paragraph-card u-grey-light m-0 AltezzaNewsFissa">
+						Per le pratiche edilizie la presentazione &egrave; accettata esclusivamente tramite GISMASTERWEB SUE<br /><br />
+					</div><a class="read-more" href="Dettaglionews?IDNews=307760"><span Class='text'>Vai alla pagina</span><svg Class='icon ms-0'><use xlink : href='images/svg/sprites.svg#it-arrow-right'></use></svg></a>
+				</div>
+			</div>
+		</div><div class="card card-teaser card-teaser-image card-flex no-after rounded shadow-sm border border-light mb-0">
+			<div class="card-image-wrapper with-read-more">
+				<div class="card-body p-3 pb-5">
+					<svg class='icon icon-sm' aria-hidden='True'><use xlink:href='images/svg/sprites.svg#it-calendar'></use></svg><a class="title-xsmall-semi-bold fw-semibold" href="Notizie?idCat=1">NOTIZIE</a><a class="card-title text-paragraph-medium u-grey-light" href="Dettaglionews?IDNews=307759">Iscriviti all'albo fornitori unificato con la CUC dell'Unione Montana del Pinerolese.</a><div class="text-paragraph-card u-grey-light m-0 AltezzaNewsFissa">
+						<p><a href="https://umpinerolese.traspare.com/employees/sign_up">Iscriviti all'albo fornitori unificato con la CUC dell'Unione Montana del Pinerolese.</a></p><br />
+					</div><a class="read-more" href="Dettaglionews?IDNews=307759"><span Class='text'>Vai alla pagina</span><svg Class='icon ms-0'><use xlink : href='images/svg/sprites.svg#it-arrow-right'></use></svg></a>
+				</div><div class="card-image card-image-rounded pb-5">
+					<a href="Dettaglionews?IDNews=307759"><div class="SiscomCenter">
+						<img class="ImmagineHomeNotizie" src="portals/2109/SiscomImmaginiNews/download_002.jpg" alt="Iscriviti all&#39;albo fornitori unificato con la CUC dell&#39;Unione Montana del Pinerolese." style="border-width:0px;" />
+					</div></a>
+				</div>
+			</div>
+		</div>
+	</div>
+    
+                </div>
+            </div>
+       
+
+
+
+
+
+</div>
+		</div>
+
+
+        
+
+        
+
+
+<div class="container p-0">
+    <div class="row row-title pt-5 pt-lg-60 pb-3">
+        <div class="col-12 d-lg-flex justify-content-between">
+            <h2 class="mb-lg-0">
+                <span id="ctl00_ContentPlaceHolder1_ctl00_SiscomEventiHomeAGID1_lblIntestazione">Eventi</span>
+            </h2>
+        </div>
+    </div>
+
+    <div id="ctl00_ContentPlaceHolder1_ctl00_SiscomEventiHomeAGID1_PanelContenitore" class="row row-calendar">
+			
+
+        <div id="ctl00_ContentPlaceHolder1_ctl00_SiscomEventiHomeAGID1_splide01" class="it-carousel-wrapper it-carousel-landscape-abstract-four-cols it-calendar-wrapper splide is-initialized splide--slide splide--ltr splide--draggable is-active" data-bs-carousel-splide="">
+				
+            <div id="ctl00_ContentPlaceHolder1_ctl00_SiscomEventiHomeAGID1_pnlHeaderTastiPrecSuc" class="it-header-block">
+					
+                <div class="it-header-block-title">
+                    <a id="ctl00_ContentPlaceHolder1_ctl00_SiscomEventiHomeAGID1_BtnMesePrec" class="carousel-control-prev" aria-label="Mese Precedente" href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$ctl00$SiscomEventiHomeAGID1$BtnMesePrec&#39;,&#39;&#39;)" style="height: 38px;"><span class="carousel-control-prev-icon" aria-hidden="true" style="height: 25px;"></span></a>
+                    <h3 class="mb-0 text-center home-carousel-title"><span id="ctl00_ContentPlaceHolder1_ctl00_SiscomEventiHomeAGID1_lblMese">Agosto 2026</span></h3>
+                    <a id="ctl00_ContentPlaceHolder1_ctl00_SiscomEventiHomeAGID1_BtnMeseSucc" class="carousel-control-next" aria-label="Mese Successivo" href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$ctl00$SiscomEventiHomeAGID1$BtnMeseSucc&#39;,&#39;&#39;)" style="height: 38px;"><span class="carousel-control-next-icon" aria-hidden="true" style="height: 25px;"></span></a>
+                </div>
+            
+				</div>
+
+            <div class="splide__track" style="padding-left: 0px; padding-right: 0px;">
+                <div id="ctl00_ContentPlaceHolder1_ctl00_SiscomEventiHomeAGID1_PanelDati" class="splide__list it-carousel-all" style="transform: translateX(0px);">
+					<div id="ctl00_ContentPlaceHolder1_ctl00_SiscomEventiHomeAGID1_splide01-slide00" class="splide__slide is-visible" tabindex="0" data-focus-mouse="false">
+						<div class="it-single-slide-wrapper h-100">
+							<div class="card-wrapper h-100">
+								<div class="card card-bg">
+									<div class="card-body">
+										<h4 class='card-title pb-4 mb-10'>1<span>sab</span></h4><div class="card-text px-2 pb-10 mb-10" style="background-color: #000000ad; border-radius: 5px;">
+											<a href="Dettaglionews?IDNews=382125">Mercatino Tacoulot 2026</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div><div id="ctl00_ContentPlaceHolder1_ctl00_SiscomEventiHomeAGID1_splide01-slide01" class="splide__slide is-visible" tabindex="1" data-focus-mouse="false">
+						<div class="it-single-slide-wrapper h-100">
+							<div class="card-wrapper h-100">
+								<div class="card card-bg">
+									<div class="card-body">
+										<h4 class='card-title pb-4 mb-10'>2<span>dom</span></h4><div class="card-text px-2 pb-10 mb-10" style="background-color: #000000ad; border-radius: 5px;">
+											<a href="Dettaglionews?IDNews=382125">Mercatino Tacoulot 2026</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div><div id="ctl00_ContentPlaceHolder1_ctl00_SiscomEventiHomeAGID1_splide01-slide02" class="splide__slide is-visible" tabindex="2" data-focus-mouse="false">
+						<div class="it-single-slide-wrapper h-100">
+							<div class="card-wrapper h-100">
+								<div class="card card-bg">
+									<div class="card-body">
+										<h4 class='card-title pb-4 mb-10'>3<span>lun</span></h4><div class="card-text px-2 pb-10 mb-10" style="background-color: #000000ad; border-radius: 5px;">
+											<a href="Dettaglionews?IDNews=382125">Mercatino Tacoulot 2026</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div><div id="ctl00_ContentPlaceHolder1_ctl00_SiscomEventiHomeAGID1_splide01-slide03" class="splide__slide is-visible" tabindex="3" data-focus-mouse="false">
+						<div class="it-single-slide-wrapper h-100">
+							<div class="card-wrapper h-100">
+								<div class="card card-bg">
+									<div class="card-body">
+										<h4 class='card-title pb-4 mb-10'>4<span>mar</span></h4><div class="card-text px-2 pb-10 mb-10" style="background-color: #000000ad; border-radius: 5px;">
+											<a href="Dettaglionews?IDNews=382125">Mercatino Tacoulot 2026</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div><div id="ctl00_ContentPlaceHolder1_ctl00_SiscomEventiHomeAGID1_splide01-slide04" class="splide__slide is-visible" tabindex="4" data-focus-mouse="false">
+						<div class="it-single-slide-wrapper h-100">
+							<div class="card-wrapper h-100">
+								<div class="card card-bg">
+									<div class="card-body">
+										<h4 class='card-title pb-4 mb-10'>5<span>mer</span></h4><div class="card-text px-2 pb-10 mb-10" style="background-color: #000000ad; border-radius: 5px;">
+											<a href="Dettaglionews?IDNews=382125">Mercatino Tacoulot 2026</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div><div id="ctl00_ContentPlaceHolder1_ctl00_SiscomEventiHomeAGID1_splide01-slide05" class="splide__slide is-visible" tabindex="5" data-focus-mouse="false">
+						<div class="it-single-slide-wrapper h-100">
+							<div class="card-wrapper h-100">
+								<div class="card card-bg">
+									<div class="card-body">
+										<h4 class='card-title pb-4 mb-10'>6<span>gio</span></h4><div class="card-text px-2 pb-10 mb-10" style="background-color: #000000ad; border-radius: 5px;">
+											<a href="Dettaglionews?IDNews=382125">Mercatino Tacoulot 2026</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div><div id="ctl00_ContentPlaceHolder1_ctl00_SiscomEventiHomeAGID1_splide01-slide06" class="splide__slide is-visible" tabindex="6" data-focus-mouse="false">
+						<div class="it-single-slide-wrapper h-100">
+							<div class="card-wrapper h-100">
+								<div class="card card-bg">
+									<div class="card-body">
+										<h4 class='card-title pb-4 mb-10'>7<span>ven</span></h4><div class="card-text px-2 pb-10 mb-10" style="background-color: #000000ad; border-radius: 5px;">
+											<a href="Dettaglionews?IDNews=382125">Mercatino Tacoulot 2026</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div><div id="ctl00_ContentPlaceHolder1_ctl00_SiscomEventiHomeAGID1_splide01-slide07" class="splide__slide is-visible" tabindex="7" data-focus-mouse="false">
+						<div class="it-single-slide-wrapper h-100">
+							<div class="card-wrapper h-100">
+								<div class="card card-bg">
+									<div class="card-body">
+										<h4 class='card-title pb-4 mb-10'>8<span>sab</span></h4><div class="card-text px-2 pb-10 mb-10" style="background-color: #000000ad; border-radius: 5px;">
+											<a href="Dettaglionews?IDNews=382125">Mercatino Tacoulot 2026</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div><div id="ctl00_ContentPlaceHolder1_ctl00_SiscomEventiHomeAGID1_splide01-slide08" class="splide__slide is-visible" tabindex="8" data-focus-mouse="false">
+						<div class="it-single-slide-wrapper h-100">
+							<div class="card-wrapper h-100">
+								<div class="card card-bg">
+									<div class="card-body">
+										<h4 class='card-title pb-4 mb-10'>9<span>dom</span></h4><div class="card-text px-2 pb-10 mb-10">
+											<a href="Dettaglionews?IDNews=404349">Alla scoperta dei pascoli alpini</a>
+										</div><div class="card-text px-2 pb-10 mb-10" style="background-color: #000000ad; border-radius: 5px;">
+											<a href="Dettaglionews?IDNews=382125">Mercatino Tacoulot 2026</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div><div id="ctl00_ContentPlaceHolder1_ctl00_SiscomEventiHomeAGID1_splide01-slide09" class="splide__slide is-visible" tabindex="9" data-focus-mouse="false">
+						<div class="it-single-slide-wrapper h-100">
+							<div class="card-wrapper h-100">
+								<div class="card card-bg">
+									<div class="card-body">
+										<h4 class='card-title pb-4 mb-10'>10<span>lun</span></h4><div class="card-text px-2 pb-10 mb-10" style="background-color: #000000ad; border-radius: 5px;">
+											<a href="Dettaglionews?IDNews=382125">Mercatino Tacoulot 2026</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div><div id="ctl00_ContentPlaceHolder1_ctl00_SiscomEventiHomeAGID1_splide01-slide010" class="splide__slide is-visible" tabindex="10" data-focus-mouse="false">
+						<div class="it-single-slide-wrapper h-100">
+							<div class="card-wrapper h-100">
+								<div class="card card-bg">
+									<div class="card-body">
+										<h4 class='card-title pb-4 mb-10'>11<span>mar</span></h4><div class="card-text px-2 pb-10 mb-10" style="background-color: #000000ad; border-radius: 5px;">
+											<a href="Dettaglionews?IDNews=382125">Mercatino Tacoulot 2026</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div><div id="ctl00_ContentPlaceHolder1_ctl00_SiscomEventiHomeAGID1_splide01-slide011" class="splide__slide is-visible" tabindex="11" data-focus-mouse="false">
+						<div class="it-single-slide-wrapper h-100">
+							<div class="card-wrapper h-100">
+								<div class="card card-bg">
+									<div class="card-body">
+										<h4 class='card-title pb-4 mb-10'>12<span>mer</span></h4><div class="card-text px-2 pb-10 mb-10" style="background-color: #000000ad; border-radius: 5px;">
+											<a href="Dettaglionews?IDNews=382125">Mercatino Tacoulot 2026</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div><div id="ctl00_ContentPlaceHolder1_ctl00_SiscomEventiHomeAGID1_splide01-slide012" class="splide__slide is-visible" tabindex="12" data-focus-mouse="false">
+						<div class="it-single-slide-wrapper h-100">
+							<div class="card-wrapper h-100">
+								<div class="card card-bg">
+									<div class="card-body">
+										<h4 class='card-title pb-4 mb-10'>13<span>gio</span></h4><div class="card-text px-2 pb-10 mb-10" style="background-color: #000000ad; border-radius: 5px;">
+											<a href="Dettaglionews?IDNews=382125">Mercatino Tacoulot 2026</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div><div id="ctl00_ContentPlaceHolder1_ctl00_SiscomEventiHomeAGID1_splide01-slide013" class="splide__slide is-visible" tabindex="13" data-focus-mouse="false">
+						<div class="it-single-slide-wrapper h-100">
+							<div class="card-wrapper h-100">
+								<div class="card card-bg">
+									<div class="card-body">
+										<h4 class='card-title pb-4 mb-10'>14<span>ven</span></h4><div class="card-text px-2 pb-10 mb-10" style="background-color: #000000ad; border-radius: 5px;">
+											<a href="Dettaglionews?IDNews=382125">Mercatino Tacoulot 2026</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div><div id="ctl00_ContentPlaceHolder1_ctl00_SiscomEventiHomeAGID1_splide01-slide014" class="splide__slide is-visible" tabindex="14" data-focus-mouse="false">
+						<div class="it-single-slide-wrapper h-100">
+							<div class="card-wrapper h-100">
+								<div class="card card-bg">
+									<div class="card-body">
+										<h4 class='card-title pb-4 mb-10'>15<span>sab</span></h4><div class="card-text px-2 pb-10 mb-10" style="background-color: #000000ad; border-radius: 5px;">
+											<a href="Dettaglionews?IDNews=382125">Mercatino Tacoulot 2026</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div><div id="ctl00_ContentPlaceHolder1_ctl00_SiscomEventiHomeAGID1_splide01-slide015" class="splide__slide is-visible" tabindex="15" data-focus-mouse="false">
+						<div class="it-single-slide-wrapper h-100">
+							<div class="card-wrapper h-100">
+								<div class="card card-bg">
+									<div class="card-body">
+										<h4 class='card-title pb-4 mb-10'>16<span>dom</span></h4><div class="card-text px-2 pb-10 mb-10" style="background-color: #000000ad; border-radius: 5px;">
+											<a href="Dettaglionews?IDNews=382125">Mercatino Tacoulot 2026</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div><div id="ctl00_ContentPlaceHolder1_ctl00_SiscomEventiHomeAGID1_splide01-slide016" class="splide__slide is-visible" tabindex="16" data-focus-mouse="false">
+						<div class="it-single-slide-wrapper h-100">
+							<div class="card-wrapper h-100">
+								<div class="card card-bg">
+									<div class="card-body">
+										<h4 class='card-title pb-4 mb-10'>17<span>lun</span></h4><div class="card-text px-2 pb-10 mb-10" style="background-color: #000000ad; border-radius: 5px;">
+											<a href="Dettaglionews?IDNews=382125">Mercatino Tacoulot 2026</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div><div id="ctl00_ContentPlaceHolder1_ctl00_SiscomEventiHomeAGID1_splide01-slide017" class="splide__slide is-visible" tabindex="17" data-focus-mouse="false">
+						<div class="it-single-slide-wrapper h-100">
+							<div class="card-wrapper h-100">
+								<div class="card card-bg">
+									<div class="card-body">
+										<h4 class='card-title pb-4 mb-10'>18<span>mar</span></h4><div class="card-text px-2 pb-10 mb-10" style="background-color: #000000ad; border-radius: 5px;">
+											<a href="Dettaglionews?IDNews=382125">Mercatino Tacoulot 2026</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div><div id="ctl00_ContentPlaceHolder1_ctl00_SiscomEventiHomeAGID1_splide01-slide018" class="splide__slide is-visible" tabindex="18" data-focus-mouse="false">
+						<div class="it-single-slide-wrapper h-100">
+							<div class="card-wrapper h-100">
+								<div class="card card-bg">
+									<div class="card-body">
+										<h4 class='card-title pb-4 mb-10'>19<span>mer</span></h4><div class="card-text px-2 pb-10 mb-10" style="background-color: #000000ad; border-radius: 5px;">
+											<a href="Dettaglionews?IDNews=382125">Mercatino Tacoulot 2026</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div><div id="ctl00_ContentPlaceHolder1_ctl00_SiscomEventiHomeAGID1_splide01-slide019" class="splide__slide is-visible" tabindex="19" data-focus-mouse="false">
+						<div class="it-single-slide-wrapper h-100">
+							<div class="card-wrapper h-100">
+								<div class="card card-bg">
+									<div class="card-body">
+										<h4 class='card-title pb-4 mb-10'>20<span>gio</span></h4><div class="card-text px-2 pb-10 mb-10" style="background-color: #000000ad; border-radius: 5px;">
+											<a href="Dettaglionews?IDNews=382125">Mercatino Tacoulot 2026</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div><div id="ctl00_ContentPlaceHolder1_ctl00_SiscomEventiHomeAGID1_splide01-slide020" class="splide__slide is-visible" tabindex="20" data-focus-mouse="false">
+						<div class="it-single-slide-wrapper h-100">
+							<div class="card-wrapper h-100">
+								<div class="card card-bg">
+									<div class="card-body">
+										<h4 class='card-title pb-4 mb-10'>21<span>ven</span></h4><div class="card-text px-2 pb-10 mb-10" style="background-color: #000000ad; border-radius: 5px;">
+											<a href="Dettaglionews?IDNews=382125">Mercatino Tacoulot 2026</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div><div id="ctl00_ContentPlaceHolder1_ctl00_SiscomEventiHomeAGID1_splide01-slide021" class="splide__slide is-visible" tabindex="21" data-focus-mouse="false">
+						<div class="it-single-slide-wrapper h-100">
+							<div class="card-wrapper h-100">
+								<div class="card card-bg">
+									<div class="card-body">
+										<h4 class='card-title pb-4 mb-10'>22<span>sab</span></h4><div class="card-text px-2 pb-10 mb-10" style="background-color: #000000ad; border-radius: 5px;">
+											<a href="Dettaglionews?IDNews=382125">Mercatino Tacoulot 2026</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div><div id="ctl00_ContentPlaceHolder1_ctl00_SiscomEventiHomeAGID1_splide01-slide022" class="splide__slide is-visible" tabindex="22" data-focus-mouse="false">
+						<div class="it-single-slide-wrapper h-100">
+							<div class="card-wrapper h-100">
+								<div class="card card-bg">
+									<div class="card-body">
+										<h4 class='card-title pb-4 mb-10'>23<span>dom</span></h4><div class="card-text px-2 pb-10 mb-10" style="background-color: #000000ad; border-radius: 5px;">
+											<a href="Dettaglionews?IDNews=382125">Mercatino Tacoulot 2026</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div><div id="ctl00_ContentPlaceHolder1_ctl00_SiscomEventiHomeAGID1_splide01-slide023" class="splide__slide is-visible" tabindex="23" data-focus-mouse="false">
+						<div class="it-single-slide-wrapper h-100">
+							<div class="card-wrapper h-100">
+								<div class="card card-bg">
+									<div class="card-body">
+										<h4 class='card-title pb-4 mb-10'>24<span>lun</span></h4><div class="card-text px-2 pb-10 mb-10" style="background-color: #000000ad; border-radius: 5px;">
+											<a href="Dettaglionews?IDNews=382125">Mercatino Tacoulot 2026</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div><div id="ctl00_ContentPlaceHolder1_ctl00_SiscomEventiHomeAGID1_splide01-slide024" class="splide__slide is-visible" tabindex="24" data-focus-mouse="false">
+						<div class="it-single-slide-wrapper h-100">
+							<div class="card-wrapper h-100">
+								<div class="card card-bg">
+									<div class="card-body">
+										<h4 class='card-title pb-4 mb-10'>25<span>mar</span></h4><div class="card-text px-2 pb-10 mb-10" style="background-color: #000000ad; border-radius: 5px;">
+											<a href="Dettaglionews?IDNews=382125">Mercatino Tacoulot 2026</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div><div id="ctl00_ContentPlaceHolder1_ctl00_SiscomEventiHomeAGID1_splide01-slide025" class="splide__slide is-visible" tabindex="25" data-focus-mouse="false">
+						<div class="it-single-slide-wrapper h-100">
+							<div class="card-wrapper h-100">
+								<div class="card card-bg">
+									<div class="card-body">
+										<h4 class='card-title pb-4 mb-10'>26<span>mer</span></h4><div class="card-text px-2 pb-10 mb-10" style="background-color: #000000ad; border-radius: 5px;">
+											<a href="Dettaglionews?IDNews=382125">Mercatino Tacoulot 2026</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div><div id="ctl00_ContentPlaceHolder1_ctl00_SiscomEventiHomeAGID1_splide01-slide026" class="splide__slide is-visible" tabindex="26" data-focus-mouse="false">
+						<div class="it-single-slide-wrapper h-100">
+							<div class="card-wrapper h-100">
+								<div class="card card-bg">
+									<div class="card-body">
+										<h4 class='card-title pb-4 mb-10'>27<span>gio</span></h4><div class="card-text px-2 pb-10 mb-10" style="background-color: #000000ad; border-radius: 5px;">
+											<a href="Dettaglionews?IDNews=382125">Mercatino Tacoulot 2026</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div><div id="ctl00_ContentPlaceHolder1_ctl00_SiscomEventiHomeAGID1_splide01-slide027" class="splide__slide is-visible" tabindex="27" data-focus-mouse="false">
+						<div class="it-single-slide-wrapper h-100">
+							<div class="card-wrapper h-100">
+								<div class="card card-bg">
+									<div class="card-body">
+										<h4 class='card-title pb-4 mb-10'>28<span>ven</span></h4><div class="card-text px-2 pb-10 mb-10" style="background-color: #000000ad; border-radius: 5px;">
+											<a href="Dettaglionews?IDNews=382125">Mercatino Tacoulot 2026</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div><div id="ctl00_ContentPlaceHolder1_ctl00_SiscomEventiHomeAGID1_splide01-slide028" class="splide__slide is-visible" tabindex="28" data-focus-mouse="false">
+						<div class="it-single-slide-wrapper h-100">
+							<div class="card-wrapper h-100">
+								<div class="card card-bg">
+									<div class="card-body">
+										<h4 class='card-title pb-4 mb-10'>29<span>sab</span></h4><div class="card-text px-2 pb-10 mb-10" style="background-color: #000000ad; border-radius: 5px;">
+											<a href="Dettaglionews?IDNews=382125">Mercatino Tacoulot 2026</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div><div id="ctl00_ContentPlaceHolder1_ctl00_SiscomEventiHomeAGID1_splide01-slide029" class="splide__slide is-visible" tabindex="29" data-focus-mouse="false">
+						<div class="it-single-slide-wrapper h-100">
+							<div class="card-wrapper h-100">
+								<div class="card card-bg">
+									<div class="card-body">
+										<h4 class='card-title pb-4 mb-10'>30<span>dom</span></h4><div class="card-text px-2 pb-10 mb-10" style="background-color: #000000ad; border-radius: 5px;">
+											<a href="Dettaglionews?IDNews=382125">Mercatino Tacoulot 2026</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div><div id="ctl00_ContentPlaceHolder1_ctl00_SiscomEventiHomeAGID1_splide01-slide030" class="splide__slide is-visible" tabindex="30" data-focus-mouse="false">
+						<div class="it-single-slide-wrapper h-100">
+							<div class="card-wrapper h-100">
+								<div class="card card-bg">
+									<div class="card-body">
+										<h4 class='card-title pb-4 mb-10'>31<span>lun</span></h4><div class="card-text px-2 pb-10 mb-10" style="background-color: #000000ad; border-radius: 5px;">
+											<a href="Dettaglionews?IDNews=382125">Mercatino Tacoulot 2026</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+            </div>
+        
+			</div>
+
+        <div id="ctl00_ContentPlaceHolder1_ctl00_SiscomEventiHomeAGID1_PanelVediTutto" class="col-12 text-center">
+				
+            <a id="ctl00_ContentPlaceHolder1_ctl00_SiscomEventiHomeAGID1_lnkVediTutto" class="btn btn-primary mt-20 mb-20" href="Eventi">Vedi Tutto</a>
+        
+			</div>
+
+    
+		</div>
+
+    
+    
+    
+    
+    
+    
+</div>
+
+    </div>
+</section>
+
+<section class="evidence-section">
+    
+    <div class="section py-5 pb-lg-20 px-lg-5 position-relative pannelloSfumato">
+        <div id="ctl00_ContentPlaceHolder1_ctl00_pnlSiscomArgomentiEvidenzaHomeAgid">
+			<div id="ctl00_ContentPlaceHolder1_ctl00_pnlSiscomArgomentiEvidenzaHomeAgid">
+	
+
+<div class="container">
+    <div class="row">
+        <h2 class="text-white title-xlarge mb-3">Argomenti in evidenza</h2>
+    </div>
+    <div>
+        <div id="ctl00_ContentPlaceHolder1_ctl00_ctl05_PanelDati" class="card-wrapper card-teaser-wrapper card-teaser-wrapper-equal card-teaser-block-3">
+		
+        <div class="card card-teaser no-after rounded shadow-sm border border-light">
+			<div class="card-body pb-5">
+				<a href="Dettaglioargomenti?IDCategoria=28061"><h3 class='card-title title-xlarge-card d-block'>Elezioni</h3></a><div class="link-list-wrapper mt-4">
+
+				</div><a class="read-more pt-0" href="Dettaglioargomenti?IDCategoria=28061"><span Class='list-item-title-icon-wrapper'><span Class='text'>Esplora argomento</span><svg class='icon fillColor'><use xlink:href='assets/bootstrap-italia/dist/svg/sprites.svg#it-arrow-right'></use></svg></span></a>
+			</div>
+		</div><div class="card card-teaser no-after rounded shadow-sm border border-light">
+			<div class="card-body pb-5">
+				<a href="Dettaglioargomenti?IDCategoria=28100"><h3 class='card-title title-xlarge-card d-block'>Trasparenza amministrativa</h3></a><div class="link-list-wrapper mt-4">
+
+				</div><a class="read-more pt-0" href="Dettaglioargomenti?IDCategoria=28100"><span Class='list-item-title-icon-wrapper'><span Class='text'>Esplora argomento</span><svg class='icon fillColor'><use xlink:href='assets/bootstrap-italia/dist/svg/sprites.svg#it-arrow-right'></use></svg></span></a>
+			</div>
+		</div><div class="card card-teaser no-after rounded shadow-sm border border-light">
+			<div class="card-body pb-5">
+				<a href="Dettaglioargomenti?IDCategoria=28103"><h3 class='card-title title-xlarge-card d-block'>Urbanizzazione</h3></a><div class="link-list-wrapper mt-4">
+					<ul class='link-list' role='list'><li role='listitem'><a class="list-item active icon-left mb-2 d-inline-block pl-10 d-inline-flex" href="Servizi?ID=134258"><i class='fa fa-chevron-right mt-1' style='margin-right: 10px;'></i><span class="list-item-title-icon-wrapper d-inline"><span class="text-success">Sportello Unico per l'Edilizia (SUE)</span></span></a></li></ul>
+				</div><a class="read-more pt-0" href="Dettaglioargomenti?IDCategoria=28103"><span Class='list-item-title-icon-wrapper'><span Class='text'>Esplora argomento</span><svg class='icon fillColor'><use xlink:href='assets/bootstrap-italia/dist/svg/sprites.svg#it-arrow-right'></use></svg></span></a>
+			</div>
+		</div>
+	</div>
+    </div>
+
+    <div class="row pt-30">
+        <div class="col-lg-12 col-xl-8  offset-xl-2">
+            <div class="row text-center">
+                <div class="col-lg-12">
+                    <h3 class="text-uppercase mb-3 title-xsmall-bold text u-grey-light">Altri argomenti</h3>
+                </div>
+                <div id="ctl00_ContentPlaceHolder1_ctl00_ctl05_pnlAltriArgomenti" class="col-lg-12 argomenti">
+		<div class="chip chip-simple pb-0 mb-2">
+			<a class="chip-label" href="Dettaglioargomenti?IDCategoria=28045">Accesso all'informazione</a>
+		</div><div class="chip chip-simple pb-0 mb-2">
+			<a class="chip-label" href="Dettaglioargomenti?IDCategoria=28046">Acqua</a>
+		</div><div class="chip chip-simple pb-0 mb-2">
+			<a class="chip-label" href="Dettaglioargomenti?IDCategoria=28047">Agricoltura</a>
+		</div><div class="chip chip-simple pb-0 mb-2">
+			<a class="chip-label" href="Dettaglioargomenti?IDCategoria=28048">Animale domestico</a>
+		</div><div class="chip chip-simple pb-0 mb-2">
+			<a class="chip-label" href="Dettaglioargomenti?IDCategoria=28049">Aria</a>
+		</div><div class="chip chip-simple pb-0 mb-2">
+			<a class="chip-label" href="Dettaglioargomenti?IDCategoria=28050">Assistenza agli invalidi</a>
+		</div><div class="chip chip-simple pb-0 mb-2">
+			<a class="chip-label" href="Dettaglioargomenti?IDCategoria=28051">Assistenza sociale</a>
+		</div><div class="chip chip-simple pb-0 mb-2">
+			<a class="chip-label" href="Dettaglioargomenti?IDCategoria=28052">Associazioni</a>
+		</div><div class="chip chip-simple pb-0 mb-2">
+			<a class="chip-label" href="Dettaglioargomenti?IDCategoria=28053">Bilancio</a>
+		</div><div class="chip chip-simple pb-0 mb-2">
+			<a class="chip-label" href="Dettaglioargomenti?IDCategoria=28054">Commercio all'ingrosso</a>
+		</div><div class="chip chip-simple pb-0 mb-2">
+			<a class="chip-label" href="Dettaglioargomenti?IDCategoria=28055">Commercio al minuto</a>
+		</div><div class="chip chip-simple pb-0 mb-2">
+			<a class="chip-label" href="Dettaglioargomenti?IDCategoria=28056">Commercio ambulante</a>
+		</div><div class="chip chip-simple pb-0 mb-2">
+			<a class="chip-label" href="Dettaglioargomenti?IDCategoria=28057">Comunicazione istituzionale</a>
+		</div><div class="chip chip-simple pb-0 mb-2">
+			<a class="chip-label" href="Dettaglioargomenti?IDCategoria=28058">Comunicazione politica</a>
+		</div><div class="chip chip-simple pb-0 mb-2">
+			<a class="chip-label" href="Dettaglioargomenti?IDCategoria=28059">Concorsi</a>
+		</div><div class="chip chip-simple pb-0 mb-2">
+			<a class="chip-label" href="Dettaglioargomenti?IDCategoria=28064">Foreste</a>
+		</div><div class="chip chip-simple pb-0 mb-2">
+			<a class="chip-label" href="Dettaglioargomenti?IDCategoria=28067">Gestione rifiuti</a>
+		</div><div class="chip chip-simple pb-0 mb-2">
+			<a class="chip-label" href="Dettaglioargomenti?IDCategoria=28069">Igiene pubblica</a>
+		</div><div class="chip chip-simple pb-0 mb-2">
+			<a class="chip-label" href="Dettaglioargomenti?IDCategoria=28070">Immigrazione</a>
+		</div><div class="chip chip-simple pb-0 mb-2">
+			<a class="chip-label" href="Dettaglioargomenti?IDCategoria=28071">Imposte</a>
+		</div><div class="chip chip-simple pb-0 mb-2">
+			<a class="chip-label" href="Dettaglioargomenti?IDCategoria=28073">Inquinamento</a>
+		</div><div class="chip chip-simple pb-0 mb-2">
+			<a class="chip-label" href="Dettaglioargomenti?IDCategoria=28074">Integrazione sociale</a>
+		</div><div class="chip chip-simple pb-0 mb-2">
+			<a class="chip-label" href="Dettaglioargomenti?IDCategoria=28076">Istruzione</a>
+		</div><div class="chip chip-simple pb-0 mb-2">
+			<a class="chip-label" href="Dettaglioargomenti?IDCategoria=28077">Lavoro</a>
+		</div><div class="chip chip-simple pb-0 mb-2">
+			<a class="chip-label" href="Dettaglioargomenti?IDCategoria=28078">Matrimonio</a>
+		</div><div class="chip chip-simple pb-0 mb-2">
+			<a class="chip-label" href="Dettaglioargomenti?IDCategoria=28079">Mercato</a>
+		</div><div class="chip chip-simple pb-0 mb-2">
+			<a class="chip-label" href="Dettaglioargomenti?IDCategoria=28081">Morte</a>
+		</div><div class="chip chip-simple pb-0 mb-2">
+			<a class="chip-label" href="Dettaglioargomenti?IDCategoria=28082">Nascita</a>
+		</div><div class="chip chip-simple pb-0 mb-2">
+			<a class="chip-label" href="Dettaglioargomenti?IDCategoria=28083">Parcheggi</a>
+		</div><div class="chip chip-simple pb-0 mb-2">
+			<a class="chip-label" href="Dettaglioargomenti?IDCategoria=28086">Piano di sviluppo</a>
+		</div><div class="chip chip-simple pb-0 mb-2">
+			<a class="chip-label" href="Dettaglioargomenti?IDCategoria=28088">Politica commerciale</a>
+		</div><div class="chip chip-simple pb-0 mb-2">
+			<a class="chip-label" href="Dettaglioargomenti?IDCategoria=28089">Polizia</a>
+		</div><div class="chip chip-simple pb-0 mb-2">
+			<a class="chip-label" href="Dettaglioargomenti?IDCategoria=28091">Protezione civile</a>
+		</div><div class="chip chip-simple pb-0 mb-2">
+			<a class="chip-label" href="Dettaglioargomenti?IDCategoria=28092">Residenza</a>
+		</div><div class="chip chip-simple pb-0 mb-2">
+			<a class="chip-label" href="Dettaglioargomenti?IDCategoria=28093">Risposta alle emergenze</a>
+		</div><div class="chip chip-simple pb-0 mb-2">
+			<a class="chip-label" href="Dettaglioargomenti?IDCategoria=28095">Spazio Verde</a>
+		</div><div class="chip chip-simple pb-0 mb-2">
+			<a class="chip-label" href="Dettaglioargomenti?IDCategoria=28096">Sport</a>
+		</div><div class="chip chip-simple pb-0 mb-2">
+			<a class="chip-label" href="Dettaglioargomenti?IDCategoria=28097">Sviluppo sostenibile</a>
+		</div><div class="chip chip-simple pb-0 mb-2">
+			<a class="chip-label" href="Dettaglioargomenti?IDCategoria=28098">Tassa sui servizi</a>
+		</div><div class="chip chip-simple pb-0 mb-2">
+			<a class="chip-label" href="Dettaglioargomenti?IDCategoria=28099">Tempo libero</a>
+		</div><div class="chip chip-simple pb-0 mb-2">
+			<a class="chip-label" href="Dettaglioargomenti?IDCategoria=28101">Trasporto pubblico</a>
+		</div><div class="chip chip-simple pb-0 mb-2">
+			<a class="chip-label" href="Dettaglioargomenti?IDCategoria=28102">Turismo</a>
+		</div><div class="chip chip-simple pb-0 mb-2">
+			<a class="chip-label" href="Dettaglioargomenti?IDCategoria=29691">TRIBUTI</a>
+		</div>
+	</div>
+            </div>
+        </div>
+      <div class="col-12 text-center">
+        <a id="ctl00_ContentPlaceHolder1_ctl00_ctl05_lnkVediTutto" class="btn btn-primary mt-20 mb-20" href="Argomenti">Vedi Tutti</a>
+    </div>
+    </div>
+</div>
+
+
+
+
+</div>
+		</div>
+
+    </div>
+    <div id="ctl00_ContentPlaceHolder1_ctl00_pnlSiscomServiziOnLineHomeAGID">
+			<div id="ctl00_ContentPlaceHolder1_ctl00_pnlSiscomServiziOnLineHomeAGID">
+	
+
+<div id="ctl00_ContentPlaceHolder1_ctl00_ctl01_PanelContenitorem" class="container">
+		
+    <div id="ctl00_ContentPlaceHolder1_ctl00_ctl01_PanelIntestazione" class="row">
+			
+        <h2>
+            <span id="ctl00_ContentPlaceHolder1_ctl00_ctl01_lblservizititolo" class="mb-0 u-grey-light">Siti tematici - Servizi online per cittadini e imprese</span></h2>
+    
+		</div>
+
+    <div class="pt-4 pt-lg-30">
+        <div id="ctl00_ContentPlaceHolder1_ctl00_ctl01_PanelDati" class="card-wrapper card-teaser-wrapper card-teaser-wrapper-equal card-teaser-block-3 pb-0">
+			
+        <a title="Il link verr&#224; aperto in una nuova scheda" class="card card-teaser card-bg-blue rounded mt-0 p-3" href="https://www.servizipubblicaamministrazione.it/servizi/saturnweb/Home.aspx?ce=ngrgn1115" target="_blank" style="    border-radius: 10px;"><div class="card-body">
+				<span><span class='card-title text-white sito-tematico'>Albo pretorio</span></span>
+			</div><svg class='icon icon-white'><use href='assets/bootstrap-italia/dist/svg/sprites.svg#it-external-link'></use></svg></a><a title="Il link verr&#224; aperto in una nuova scheda" class="card card-teaser card-bg-blue rounded mt-0 p-3" href="https://www.arpa.piemonte.it/rischi_naturali/boll/bollettino_allerta.pdf" target="_blank" style="    border-radius: 10px;"><div class="card-body">
+				<span><span class='card-title text-white sito-tematico'>Bollettino allerta meteoidrologica 
+</span></span>
+			</div><svg class='icon icon-white'><use href='assets/bootstrap-italia/dist/svg/sprites.svg#it-external-link'></use></svg></a><a title="Il link verr&#224; aperto in una nuova scheda" class="card card-teaser card-bg-blue rounded mt-0 p-3" href="https://www.arpa.piemonte.it/bollettino/pericolo-valanghe" target="_blank" style="    border-radius: 10px;"><div class="card-body">
+				<span><span class='card-title text-white sito-tematico'>Bollettino allerta valanghe</span></span>
+			</div><svg class='icon icon-white'><use href='assets/bootstrap-italia/dist/svg/sprites.svg#it-external-link'></use></svg></a><a title="Il link verr&#224; aperto in una nuova scheda" class="card card-teaser card-bg-blue rounded mt-0 p-3" href="http://registrazione.alertsystem.it/Angrogna" target="_blank" style="    border-radius: 10px;"><div class="card-body">
+				<span><span class='card-title text-white sito-tematico'>Sistema di allerta e avvisi alla popolazione - Iscrizione</span></span>
+			</div><svg class='icon icon-white'><use href='assets/bootstrap-italia/dist/svg/sprites.svg#it-external-link'></use></svg></a><a title="Il link verr&#224; aperto in una nuova scheda" class="card card-teaser card-bg-blue rounded mt-0 p-3" href="https://www.servizipubblicaamministrazione.it/servizi/filodiretto/ProcedimentiClient.Aspx?CE=ngrgn1115" target="_blank" style="    border-radius: 10px;"><div class="card-body">
+				<span><span class='card-title text-white sito-tematico'>Sportello online del cittadino</span></span>
+			</div><svg class='icon icon-white'><use href='assets/bootstrap-italia/dist/svg/sprites.svg#it-external-link'></use></svg></a><a title="Il link verr&#224; aperto in una nuova scheda" class="card card-teaser card-bg-blue rounded mt-0 p-3" href="https://www.servizipubblicaamministrazione.it/servizi/portalecontribuente/AreaPagamenti.aspx?iddominio=01451180010" target="_blank" style="    border-radius: 10px;"><div class="card-body">
+				<span><span class='card-title text-white sito-tematico'>Portale del cittadino - PagoPa</span></span><span class="card-text text-sans-serif text-white d-block">Per i pagamenti a favore del comune di Angrogna:
+Se in possesso del codice IUV procedere nel pagamento, 
+Nel caso in cui non ne foste in possesso, occorre procedere con i pagamenti spontanei, selezionando il tipo di pagamento e completando con la causale.
+Si precisa che qualora il pagamento fosse la somma di pi&#249; importi, si pu&#242; utilizzare la voce "vari" completando la causale con i singoli valori e descrizione.</span>
+			</div><svg class='icon icon-white'><use href='assets/bootstrap-italia/dist/svg/sprites.svg#it-external-link'></use></svg></a><a title="Il link verr&#224; aperto in una nuova scheda" class="card card-teaser card-bg-blue rounded mt-0 p-3" href="https://www.comune.angrogna.to.it/Dettagliogestionilibere?ID=72300-4" target="_blank" style="    border-radius: 10px;"><div class="card-body">
+				<span><span class='card-title text-white sito-tematico'>Video di Angrogna: percorsi, curiosit&#224; e tanto altro...</span></span>
+			</div><svg class='icon icon-white'><use href='assets/bootstrap-italia/dist/svg/sprites.svg#it-external-link'></use></svg></a><a title="Il link verr&#224; aperto in una nuova scheda" class="card card-teaser card-bg-blue rounded mt-0 p-3" href="Menu?IDVoceMenu=282976" target="_blank" style="    border-radius: 10px;"><div class="card-body">
+				<span><span class='card-title text-white sito-tematico'>Amministrazione trasparente</span></span>
+			</div><svg class='icon icon-white'><use href='assets/bootstrap-italia/dist/svg/sprites.svg#it-external-link'></use></svg></a><a title="Il link verr&#224; aperto in una nuova scheda" class="card card-teaser card-bg-blue rounded mt-0 p-3" href="DesktopModules/SiscomServiziOnLineHomeAGID/?Tipo=5" target="_blank" style="    border-radius: 10px;"><div class="card-body">
+				<span><span class='card-title text-white sito-tematico'>SALA DELLE ATTIVITA' CULTURALI (BIBLIOTECA)</span></span>
+			</div><svg class='icon icon-white'><use href='assets/bootstrap-italia/dist/svg/sprites.svg#it-external-link'></use></svg></a><a class="card card-teaser card-bg-blue rounded mt-0 p-3" href="Newsletter"><div class="avatar size-lg me-3" style="background-color: transparent;border-radius:  0px; padding-top:  8px;">
+				<span class="card-title text-white sito-tematico"><i class="fa fa-newspaper fa-2x"></i></span>
+			</div><div class="card-body">
+				<span><span class='card-title text-white sito-tematico'>Newsletter</span></span>
+			</div></a>
+		</div>
+    </div>
+
+    
+    <div class="row">
+        <div id="ctl00_ContentPlaceHolder1_ctl00_ctl01_PanelVediTutto" class="col-lg-10 col-xl-8 offset-lg-1 offset-xl-2 text-center">
+			
+            
+        
+		</div>
+    </div>
+
+	</div>
+
+
+
+
+
+
+</div>
+		</div>
+
+</section>
+
+
+<section id="bannerSection">
+    <div class="container">
+        <div class="row row-title pb-3">
+            <div class="col-12 d-lg-flex justify-content-between">
+                <h2 class="mb-lg-0">Collegamenti utili</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-12 text-center">
+                <div id="ctl00_ContentPlaceHolder1_ctl00_SiscomBanner1_Panel1" class="BannerPanel">
+			
+    <!-- Tag aggiunti dinamicamente da codice -->
+<div>
+				<div class="card-wrapper" style="display:inline-block;margin:3px;">
+					<a title="http://registrazione.alertsystem.it/Angrogna" class="card card-img no-after rounded shadow" href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$ctl00$SiscomBanner1$ctl02&#39;,&#39;&#39;)"><img height="auto" src="Portals/2109/SiscomBanner/alert.webp" alt="Alert system" style="border-width:0px;margin-bottom:6px;" /></a>
+				</div><div class="card-wrapper" style="display:inline-block;margin:3px;">
+					<a title="http://www.arpa.piemonte.it/bollettini/bollettino_allerta.pdf/at_download/file" class="card card-img no-after rounded shadow" href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$ctl00$SiscomBanner1$ctl05&#39;,&#39;&#39;)"><img height="auto" src="Portals/2109/SiscomBanner/BannerBollettinoAllerta1.webp" alt="Bollettino allerta meteoidrologica" style="border-width:0px;margin-bottom:6px;" /></a>
+				</div><div class="card-wrapper" style="display:inline-block;margin:3px;">
+					<a title="http://www.arpa.piemonte.it/bollettini/elenco-bollettini-1/sintesi_valanghe.pdf/at_download/file" class="card card-img no-after rounded shadow" href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$ctl00$SiscomBanner1$ctl08&#39;,&#39;&#39;)"><img height="auto" src="Portals/2109/SiscomBanner/BannerBollettinoValanghe1.webp" alt="Bollettino allerta valanghe" style="border-width:0px;margin-bottom:6px;" /></a>
+				</div><div class="card-wrapper" style="display:inline-block;margin:3px;">
+					<a title="https://www.servizipubblicaamministrazione.it/servizi/portalecontribuente/AreaPagamenti.aspx?iddominio=01451180010" class="card card-img no-after rounded shadow" href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$ctl00$SiscomBanner1$ctl11&#39;,&#39;&#39;)"><img height="auto" src="Portals/2109/SiscomBanner/pagoPA.webp" alt="pagopa" style="border-width:0px;margin-bottom:6px;" /></a>
+				</div>
+			</div><div>
+				<div class="card-wrapper" style="display:inline-block;margin:3px;">
+					<a title="http://www.comune.angrogna.to.it/portals/2109/SiscomArchivio/8/34764-3-BOZZA_TARGA_30x21_fo.jpg" class="card card-img no-after rounded shadow" href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$ctl00$SiscomBanner1$ctl15&#39;,&#39;&#39;)"><img height="auto" src="Portals/2109/SiscomBanner/4_banner_web_GAL.webp" alt="FEASR FONDO EUROPEO AGRICOLO PER LO SVILUPPO RURALE: L&#39;EUROPA INVESTE NELLO ZONE RURALI" style="border-width:0px;margin-bottom:6px;" /></a>
+				</div><div class="card-wrapper" style="display:inline-block;margin:3px;">
+					<a class="card card-img no-after rounded shadow" href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$ctl00$SiscomBanner1$ctl18&#39;,&#39;&#39;)"><img height="auto" src="Portals/2109/SiscomBanner/BannerPSR2014_2020.webp" alt="Interventi effettuati con P.S.R. 2014-2022 nel comune" style="border-width:0px;margin-bottom:6px;" /></a>
+				</div>
+			</div>
+		</div>
+<a id="ctl00_ContentPlaceHolder1_ctl00_SiscomBanner1_hlBannerNuovaScheda" class="hlBannerNuovaScheda" target="_blank" style="display:none;"></a>
+<br />
+
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<div id="Riga2Moduli">
+    <div class="larghezza">
+        <div id="RigaElenco2ModuliSinistra">
+        </div>
+        <div id="RigaElenco2ModuliDestra">
+        </div>
+    </div>
+</div>
+
+
+<section id="section-galleria">
+
+    <div id="ctl00_ContentPlaceHolder1_ctl00_pnlSiscomGalleriaFotoHomeAGID">
+			<div id="ctl00_ContentPlaceHolder1_ctl00_pnlSiscomGalleriaFotoHomeAGID">
+	
+
+<div class="container">
+    <div class="row row-title pt-5 pt-lg-60 pb-3">
+
+        <div id="ctl00_ContentPlaceHolder1_ctl00_ctl04_PanelIntestazione" class="col-12 d-lg-flex justify-content-between">
+		
+            <h2 class="TitoloHomeGallerie"><span id="ctl00_ContentPlaceHolder1_ctl00_ctl04_lblTitolo">Gallerie</span></h2>
+        
+	</div>
+    </div>
+
+    <div id="ctl00_ContentPlaceHolder1_ctl00_ctl04_PanelDati" class="card-wrapper px-0 card-teaser-wrapper card-teaser-wrapper-equal card-teaser-block-3" style="transform: translateX(0px);">
+		
+    <div class="card card-teaser no-after rounded shadow-sm mb-0 border border-light">
+			<div class="card-body pb-5">
+				<a href="Galleriafotografica?IDAlbum=1"><h3 class='card-title'>Foto dal comune</h3></a><a class="d-block" href="Galleriafotografica?IDAlbum=1"><div class="text-center">
+					<img class="ImmagineHomeNotizie" src="portals/2109/SiscomGalleria/angrogna-da-sopra_002.webp" alt="Foto dal comune" style="border-width:0px;" />
+				</div></a><a class="read-more" href="Galleriafotografica?IDAlbum=1"><span Class='text'>Vai alla galleria</span><svg Class='icon ms-0'><use xlink : href='assets/bootstrap-italia/dist/svg/sprites.svg#it-arrow-right'></use></svg></a>
+			</div>
+		</div><div class="card card-teaser no-after rounded shadow-sm mb-0 border border-light">
+			<div class="card-body pb-5">
+				<a href="Galleriafotografica?IDAlbum=7941"><h3 class='card-title'>Paesaggi</h3></a><a class="d-block" href="Galleriafotografica?IDAlbum=7941"><div class="text-center">
+					<img class="ImmagineHomeNotizie" src="portals/2109/SiscomGalleria/unnamed_002.webp" alt="Paesaggi" style="border-width:0px;" />
+				</div></a><a class="read-more" href="Galleriafotografica?IDAlbum=7941"><span Class='text'>Vai alla galleria</span><svg Class='icon ms-0'><use xlink : href='assets/bootstrap-italia/dist/svg/sprites.svg#it-arrow-right'></use></svg></a>
+			</div>
+		</div><div class="card card-teaser no-after rounded shadow-sm mb-0 border border-light">
+			<div class="card-body pb-5">
+				<a href="Galleriafotografica?IDAlbum=7940"><h3 class='card-title'>Peculiarit&#224;</h3></a><a class="d-block" href="Galleriafotografica?IDAlbum=7940"><div class="text-center">
+					<img class="ImmagineHomeNotizie" src="portals/2109/SiscomGalleria/40223_chanforan_002.webp" alt="Peculiarit&#224;" style="border-width:0px;" />
+				</div></a><a class="read-more" href="Galleriafotografica?IDAlbum=7940"><span Class='text'>Vai alla galleria</span><svg Class='icon ms-0'><use xlink : href='assets/bootstrap-italia/dist/svg/sprites.svg#it-arrow-right'></use></svg></a>
+			</div>
+		</div>
+	</div>
+
+    <div class="col-12 text-center">
+        <a id="ctl00_ContentPlaceHolder1_ctl00_ctl04_lnkVediTutto" class="btn btn-primary mt-20 mb-20" href="Galleriafotografica">Vedi Tutto</a>
+    </div>
+</div>
+
+
+
+
+</div>
+		</div>
+
+
+</section>
+
+<div id="AllertaMeteo">
+    <div class="larghezza">
+        <div id="RigaIntestazioneAllertaMeteo">
+            <div class="clear"></div>
+            
+
+
+
+<style type="text/css">
+    [color=GRIGIO] {
+        color: #646464;
+    }
+
+    [color="BIANCO"] {
+        color: #FFFFFF;
+    }
+
+    [color="VERDE"] {
+        color: #38733e;
+    }
+
+    [color="GIALLO"] {
+        color: #FEDC06;
+    }
+
+    [color="ARANCIONE"] {
+        color: #F59304;
+    }
+
+    [color="ROSSO"] {
+        color: #E5080C;
+    }
+
+    .riga-bollettino {
+    }
+
+    .container-lista-allerte {
+        text-align: left;
+        width: fit-content;
+        margin: auto;
+    }
+
+    table {
+        font-weight: 700;
+    }
+
+    .container-lista-allerte li {
+        position: relative;
+        margin: -5px;
+        font-weight: 600;
+    }
+</style>
+
+
+
+<div>
+    <div id="ctl00_ContentPlaceHolder1_ctl00_SiscomBollettinoAllertaMeteoidrologica1_pnlMeteoContainer" class="section section-muted p-0 pb-10 pt-10">
+			
+        <div class="container">
+            <div class="row">
+                <h2 class="TitoloHome text-black">Previsioni Meteo</h2>
+            </div>
+            <div class="pt-4 pt-lg-30">
+                <div id="ctl00_ContentPlaceHolder1_ctl00_SiscomBollettinoAllertaMeteoidrologica1_pnlMeteo" class="row">
+				
+                <div class="col-md-12 col-lg-3 mb-2 d-flex align-items-stretch">
+					<div class="card card-teaser no-after rounded shadow-sm mb-0 border border-light">
+						<div class="card-body">
+							<h4 class='mb-1 title-small text-center'>Oggi - 10/08/2026</h4><hr><div class="row">
+								<div class="col-12 col-lg-12 text-center">
+									<img class="size-xl mt-4 mb-4" src="App_Themes/Images/Meteo/16.webp" alt="Pomeriggio - Parzialmente nuvoloso" style="border-width:0px;" />
+								</div><div class="col-12 col-lg-12 text-center">
+									<span class="mb-1 title-small d-inline-block w-100">Pomeriggio - Parzialmente nuvoloso</span><span class="u-main-black">T massima 35,00°C<br>T minima 19,00°C<br>T media 27,00°C<br></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div><div class="col-md-12 col-lg-3 mb-2 d-flex align-items-stretch">
+					<div class="card card-teaser no-after rounded shadow-sm mb-0 border border-light">
+						<div class="card-body">
+							<h4 class='mb-1 title-small text-center'>Martedì - 11/08/2026</h4><hr><div class="row">
+								<div class="col-6 col-lg-8">
+									<span class="mb-1 title-small d-inline-block w-100">Mattino - Soleggiato</span><span class="u-main-black">T minima 22,00°C<br>T media 28,50°C<br></span>
+								</div><div class="col-6 col-lg-4 text-center">
+									<img class="size-xl mt-4" src="App_Themes/Images/Meteo/22.webp" alt="Mattino - Soleggiato" style="border-width:0px;" />
+								</div>
+							</div><div class="row">
+								<div class="col-6 col-lg-4 text-center">
+									<img class="size-xl mt-4" src="App_Themes/Images/Meteo/24.webp" alt="Pomeriggio - Instabile" style="border-width:0px;" />
+								</div><div class="col-6 col-lg-8">
+									<span class="mb-1 title-small d-inline-block w-100">Pomeriggio - Instabile</span><span class="u-main-black">T massima 35,00°C<br></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div><div class="col-md-12 col-lg-3 mb-2 d-flex align-items-stretch">
+					<div class="card card-teaser no-after rounded shadow-sm mb-0 border border-light">
+						<div class="card-body">
+							<h4 class='mb-1 title-small text-center'>Mercoledì - 12/08/2026</h4><hr><div class="row">
+								<div class="col-6 col-lg-8">
+									<span class="mb-1 title-small d-inline-block w-100">Mattino - Soleggiato</span><span class="u-main-black">T minima 22,00°C<br>T media 28,50°C<br></span>
+								</div><div class="col-6 col-lg-4 text-center">
+									<img class="size-xl mt-4" src="App_Themes/Images/Meteo/22.webp" alt="Mattino - Soleggiato" style="border-width:0px;" />
+								</div>
+							</div><div class="row">
+								<div class="col-6 col-lg-4 text-center">
+									<img class="size-xl mt-4" src="App_Themes/Images/Meteo/22.webp" alt="Pomeriggio - Soleggiato" style="border-width:0px;" />
+								</div><div class="col-6 col-lg-8">
+									<span class="mb-1 title-small d-inline-block w-100">Pomeriggio - Soleggiato</span><span class="u-main-black">T massima 35,00°C<br></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div><div class="col-md-12 col-lg-3 mb-2 d-flex align-items-stretch">
+					<div class="card card-teaser no-after rounded shadow-sm mb-0 border border-light">
+						<div class="card-body">
+							<h4 class='mb-1 title-small text-center'>Giovedì - 13/08/2026</h4><hr><div class="row">
+								<div class="col-6 col-lg-8">
+									<span class="mb-1 title-small d-inline-block w-100">Mattino - Soleggiato</span><span class="u-main-black">T minima 23,00°C<br>T media 30,00°C<br></span>
+								</div><div class="col-6 col-lg-4 text-center">
+									<img class="size-xl mt-4" src="App_Themes/Images/Meteo/22.webp" alt="Mattino - Soleggiato" style="border-width:0px;" />
+								</div>
+							</div><div class="row">
+								<div class="col-6 col-lg-4 text-center">
+									<img class="size-xl mt-4" src="App_Themes/Images/Meteo/22.webp" alt="Pomeriggio - Soleggiato" style="border-width:0px;" />
+								</div><div class="col-6 col-lg-8">
+									<span class="mb-1 title-small d-inline-block w-100">Pomeriggio - Soleggiato</span><span class="u-main-black">T massima 37,00°C<br></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+                <div class="row p-3">
+                    <div class="col-sm-12">
+                        <ul class="list-unstyled mb-0">
+                            <li class="d-inline">
+                                
+                                <a href="https://www.arpa.piemonte.it/rischi_naturali/boll/bollettino_meteotestuale.pdf" class="text-decoration-none text-black" target="_blank">
+                                    <img id="ctl00_ContentPlaceHolder1_ctl00_SiscomBollettinoAllertaMeteoidrologica1_Image1" src="DesktopModules/SiscomBollettinoAllertaMeteoidrologica/image/link-solid.svg" alt="Scarica" style="height:20px;border-width:0px;" />
+                                    Scarica le Previsioni ARPA
+                                </a>
+                            </li>
+                            &nbsp;&nbsp;&nbsp;
+                            <li class="d-inline">
+                                <a id="ctl00_ContentPlaceHolder1_ctl00_SiscomBollettinoAllertaMeteoidrologica1_HyperLink1" class="text-decoration-none text-black" href="https://www.arpa.piemonte.it/rischi_naturali/snippets_arpa/meteo/" target="_blank"><img id="ctl00_ContentPlaceHolder1_ctl00_SiscomBollettinoAllertaMeteoidrologica1_Image2" src="DesktopModules/SiscomBollettinoAllertaMeteoidrologica/image/link-solid.svg" alt="Quadro sintesi" style="height:20px;border-width:0px;" />
+                                    Previsioni meteorologiche ARPA
+                                </a>
+                            </li>
+                            <li class="d-inline" style="float: right;">
+                                <i>
+                                    <span id="ctl00_ContentPlaceHolder1_ctl00_SiscomBollettinoAllertaMeteoidrologica1_lblAggiornamentoMeteo">Ultimo Aggiornamento ARPA: 10/08/2026 14:00</span></i>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+		</div>
+
+    <div id="ctl00_ContentPlaceHolder1_ctl00_SiscomBollettinoAllertaMeteoidrologica1_pnlBollettinoAllertaMeteoidrologica" class="section p-0 pb-10 pt-10">
+			
+
+        <div class="container">
+            <div class="row">
+                <div class="col col-6">
+                    <h2 class="TitoloHome text-black">
+                        <span id="ctl00_ContentPlaceHolder1_ctl00_SiscomBollettinoAllertaMeteoidrologica1_lblTitoloBollettino">Bollettino Allerta Meteo</span></h2>
+                </div>
+                <div class="col col-6">
+                    
+                </div>
+            </div>
+            <span class="lead text-black">Zona di appartenenza: <b>D</b></span><a href='https://www.arpa.piemonte.it/rischi_naturali/snippets_arpa/allerta/index.html' style='color:white;margin-left:10px;' target='_blank' title='Vedi la legenda delle zone'>[Informazioni sulle zone]</a>
+            <div class="row riga-bollettino p-3">
+                
+                <div class="col-sm-12 col-md-6 text-center">
+                    <div class="">
+                        
+                        <br />
+                        <img id="ctl00_ContentPlaceHolder1_ctl00_SiscomBollettinoAllertaMeteoidrologica1_imgLivelloAllerta" src="DesktopModules/SiscomBollettinoAllertaMeteoidrologica/image/allerta_livello1.webp" alt="Allerta1" style="border-width:0px;margin-bottom: 20px; max-height: 200px;" />
+                    </div>
+                    <div class="container-lista-allerte">
+                        <ul><li color="GRIGIO"><i class='fa fa-circle'></i> ALLERTA ROSSA</li><li color="GRIGIO"><i class='fa fa-circle'></i> ALLERTA ARANCIONE</li><li color="GRIGIO"><i class='fa fa-circle'></i> ALLERTA GIALLA</li><li color="VERDE"><i class='fa fa-circle'></i> NESSUNA ALLERTA</li></ul>
+                        
+                    </div>
+                </div>
+                
+                <div class="col-sm-12 col-md-6">
+                    <table class="table table-bordered"><tr><th class="text-black">Rischio</th><th class="text-black">10/08</th><th class="text-black">11/08</th></tr><tr><th class="text-black">Idraulico</th><td color="VERDE">VERDE</td><td color="VERDE">VERDE</td></tr><tr><th class="text-black">Idrogeologico</th><td color="VERDE">VERDE</td><td color="VERDE">VERDE</td></tr><tr><th class="text-black">Temporali</th><td color="VERDE">VERDE</td><td color="VERDE">VERDE</td></tr><tr><th class="text-black">Neve</th><td color="VERDE">VERDE</td><td color="VERDE">VERDE</td></tr></table>
+                        
+                </div>
+                
+            </div>
+            
+            <div class="row p-3">
+            <ul class="list-unstyled mb-0">
+                <li class="d-inline">
+                    <a id="ctl00_ContentPlaceHolder1_ctl00_SiscomBollettinoAllertaMeteoidrologica1_btnScaricaBollettino" class="text-decoration-none text-black" href="https://www.arpa.piemonte.it/rischi_naturali/boll/bollettino_allerta.pdf" target="_blank"><img id="ctl00_ContentPlaceHolder1_ctl00_SiscomBollettinoAllertaMeteoidrologica1_imgLink01" src="DesktopModules/SiscomBollettinoAllertaMeteoidrologica/image/link-solid.svg" alt="Scarica" style="height:20px;border-width:0px;" />
+                        Scarica il bollettino ARPA
+                    </a>
+                </li>
+                &nbsp;&nbsp;&nbsp;
+                <li class="d-inline">
+                    <a id="ctl00_ContentPlaceHolder1_ctl00_SiscomBollettinoAllertaMeteoidrologica1_hlCosaFare" class="text-decoration-none text-black" href="https://www.arpa.piemonte.it/rischi_naturali/snippets_arpa/allerta/" target="_blank"><img id="ctl00_ContentPlaceHolder1_ctl00_SiscomBollettinoAllertaMeteoidrologica1_imgLink02" src="DesktopModules/SiscomBollettinoAllertaMeteoidrologica/image/link-solid.svg" alt="Quadro sintesi" style="height:20px;border-width:0px;" />
+                        Quadro di sintesi ARPA
+                    </a>
+                </li>
+                <li class="d-inline" style="float: right;">
+                    <i>
+                        </i>
+                </li>
+            </ul>
+
+            </div>
+        </div>
+        
+    
+		</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+    </div>
+</div>
+
+<div id="LivelloAntiSmog">
+    <div class="larghezza">
+        <div id="RigaIntestazioneLivelloAntiSmog">
+            <div class="clear"></div>
+            
+
+<style>
+    .semaforoVerde {
+        color: #28a745;
+    }
+
+    .semaforoGiallo {
+        color: #ffc107;
+    }
+
+    .semaforoRosso {
+        color: #dc3545;
+    }
+
+    .semaforoUpdate {
+        color: #fff;
+    }
+
+    .fontSize48{
+        font-size: 48px;
+    }
+    .width90{
+            width: 90px;
+    }
+</style>
+
+
+
+
+
+
+
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+<input type="hidden" name="ctl00$ContentPlaceHolder1$ctl00$CreaStaticPage" id="ctl00_ContentPlaceHolder1_ctl00_CreaStaticPage" value="False" />
+
+	</div>
+    
+</div>
+
+
+
+        <div id="ctl00_PanelMasterBottom">
+	
+
+
+
+<div class="bg-primary">
+    <div class="container">
+        <div class="row d-flex justify-content-center bg-primary">
+            <div class="col-12 col-lg-6">
+                <div class="cmp-rating pt-lg-80 pb-lg-80" id="">
+                    <div class="card shadow card-wrapper" data-element="feedback" id="feedback">
+                        <div id="ctl00_ctl13_SiscomFeedback1_pnlVoti" class="cmp-rating__card-first">
+		
+                            <div class="card-header border-0">
+                                <h2 class="title-medium-2-semi-bold mb-0" data-element="feedback-title">
+                                    <span id="ctl00_ctl13_SiscomFeedback1_lblTitolo">Quanto sono chiare le informazioni su questa pagina?</span></h2>
+                            </div>
+                            <div class="card-body">
+                                <fieldset class="rating">
+                                    <legend class="visually-hidden">Valuta da 1 a 5 stelle la pagina</legend>
+                                    <input type="radio" id="star5a" name="ratingA" value="5">
+                                    <label class="full rating-star active" for="star5a" data-element="feedback-rate-5">
+
+                                        <svg class="icon icon-sm" role="img" aria-labelledby="first-star">
+                                            <use href="assets/bootstrap-italia/dist/svg/sprites.svg#it-star-full"></use>
+                                        </svg>
+                                        <span class="visually-hidden" id="first-star">Valuta 5 stelle su 5</span>
+
+                                    </label>
+                                    <input type="radio" id="star4a" name="ratingA" value="4">
+                                    <label class="full rating-star active" for="star4a" data-element="feedback-rate-4">
+
+                                        <svg class="icon icon-sm" role="img" aria-labelledby="second-star">
+                                            <use href="assets/bootstrap-italia/dist/svg/sprites.svg#it-star-full"></use>
+                                        </svg>
+                                        <span class="visually-hidden" id="second-star">Valuta 4 stelle su 5</span>
+
+                                    </label>
+                                    <input type="radio" id="star3a" name="ratingA" value="3">
+                                    <label class="full rating-star active" for="star3a" data-element="feedback-rate-3">
+
+                                        <svg class="icon icon-sm" role="img" aria-labelledby="third-star">
+                                            <use href="assets/bootstrap-italia/dist/svg/sprites.svg#it-star-full"></use>
+                                        </svg>
+                                        <span class="visually-hidden" id="third-star">Valuta 3 stelle su 5</span>
+
+
+                                    </label>
+                                    <input type="radio" id="star2a" name="ratingA" value="2">
+                                    <label class="full rating-star active" for="star2a" data-element="feedback-rate-2">
+
+                                        <svg class="icon icon-sm" role="img" aria-labelledby="fourth-star">
+                                            <use href="assets/bootstrap-italia/dist/svg/sprites.svg#it-star-full"></use>
+                                        </svg>
+                                        <span class="visually-hidden" id="fourth-star">Valuta 2 stelle su 5</span>
+
+                                    </label>
+                                    <input type="radio" id="star1a" name="ratingA" value="1">
+                                    <label class="full rating-star active" for="star1a" data-element="feedback-rate-1">
+
+                                        <svg class="icon icon-sm" role="img" aria-labelledby="fifth-star">
+                                            <use href="assets/bootstrap-italia/dist/svg/sprites.svg#it-star-full"></use>
+                                        </svg>
+                                        <span class="visually-hidden" id="fifth-star">Valuta 1 stelle su 5</span>
+
+                                    </label>
+                                </fieldset>
+                            </div>
+                        
+	</div>
+                        <div id="ctl00_ctl13_SiscomFeedback1_pnlFine" class="cmp-rating__card-second d-none" data-step="3">
+		
+                            <div class="card-header border-0 mb-0">
+                                <h2 class="title-medium-2-bold mb-0" id="rating-feedback">Grazie, il tuo parere ci aiuterà a migliorare il servizio!</h2>
+                            </div>
+                        
+	</div>
+
+                        <div class="form-rating d-none">
+                            <div class="d-none" data-step="1">
+                                <div class="cmp-steps-rating">
+                                    <fieldset id="fieldset-rating-one" class="fieldset-rating-one" data-element="feedback-rating-positive">
+                                        <div class="iscrizioni-header w-100">
+                                            <h3 class="step-title d-flex align-items-center justify-content-between drop-shadow">
+                                                <legend class="d-block d-lg-inline" data-element="feedback-rating-question">Quali sono stati gli aspetti che hai preferito?
+                                                </legend>
+                                                <span class="step">1/2</span>
+                                            </h3>
+                                        </div>
+                                        <div class="cmp-steps-rating__body">
+                                            <div class="cmp-radio-list">
+                                                <div class="card card-teaser shadow-rating">
+                                                    <div class="card-body">
+                                                        <div class="form-check m-0">
+                                                            <div class="radio-body border-bottom border-light cmp-radio-list__item radioFeedback">
+                                                                <input name="rating1" type="radio" id="radio-1">
+                                                                <label for="radio-1" class="active" data-element="feedback-rating-answer">Le indicazioni erano chiare</label>
+                                                            </div>
+                                                            <div class="radio-body border-bottom border-light cmp-radio-list__item radioFeedback">
+                                                                <input name="rating1" type="radio" id="radio-2">
+                                                                <label for="radio-2" class="active" data-element="feedback-rating-answer">Le indicazioni erano complete</label>
+                                                            </div>
+                                                            <div class="radio-body border-bottom border-light cmp-radio-list__item radioFeedback">
+                                                                <input name="rating1" type="radio" id="radio-3">
+                                                                <label for="radio-3" class="active" data-element="feedback-rating-answer">Capivo sempre che stavo procedendo correttamente</label>
+                                                            </div>
+                                                            <div class="radio-body border-bottom border-light cmp-radio-list__item radioFeedback">
+                                                                <input name="rating1" type="radio" id="radio-4">
+                                                                <label for="radio-4" class="active" data-element="feedback-rating-answer">Non ho avuto problemi tecnici</label>
+                                                            </div>
+                                                            <div class="radio-body border-bottom border-light cmp-radio-list__item radioFeedback">
+                                                                <input name="rating1" type="radio" id="radio-5">
+                                                                <label for="radio-5" class="active" data-element="feedback-rating-answer">Altro</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset id="fieldset-rating-two" class="fieldset-rating-two" data-element="feedback-rating-negative">
+                                        <div class="iscrizioni-header w-100">
+                                            <h3 class="step-title d-flex align-items-center justify-content-between drop-shadow">
+                                                <legend class="d-block d-lg-inline" data-element="feedback-rating-question">Dove hai incontrato le maggiori difficoltà?
+                                                </legend>
+                                                <span class="step">1/2</span>
+                                            </h3>
+                                        </div>
+                                        <div class="cmp-steps-rating__body">
+                                            <div class="cmp-radio-list">
+                                                <div class="card card-teaser shadow-rating">
+                                                    <div class="card-body">
+                                                        <div class="form-check m-0">
+                                                            <div class="radio-body border-bottom border-light cmp-radio-list__item radioFeedback">
+                                                                <input name="rating2" type="radio" id="radio-6">
+                                                                <label for="radio-6" class="active" data-element="feedback-rating-answer">A volte le indicazioni non erano chiare</label>
+                                                            </div>
+                                                            <div class="radio-body border-bottom border-light cmp-radio-list__item radioFeedback">
+                                                                <input name="rating2" type="radio" id="radio-7">
+                                                                <label for="radio-7" class="active" data-element="feedback-rating-answer">A volte le indicazioni non erano complete</label>
+                                                            </div>
+                                                            <div class="radio-body border-bottom border-light cmp-radio-list__item radioFeedback">
+                                                                <input name="rating2" type="radio" id="radio-8">
+                                                                <label for="radio-8" class="active" data-element="feedback-rating-answer">A volte non capivo se stavo procedendo correttamente</label>
+                                                            </div>
+                                                            <div class="radio-body border-bottom border-light cmp-radio-list__item radioFeedback">
+                                                                <input name="rating2" type="radio" id="radio-9">
+                                                                <label for="radio-9" class="active" data-element="feedback-rating-answer">Ho avuto problemi tecnici</label>
+                                                            </div>
+                                                            <div class="radio-body border-bottom border-light cmp-radio-list__item radioFeedback">
+                                                                <input name="rating2" type="radio" id="radio-10">
+                                                                <label for="radio-10" class="active" data-element="feedback-rating-answer">Altro</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                                <div class="d-flex flex-nowrap pt-4 w-100 justify-content-center button-shadow">
+                                    <button class="btn btn-outline-primary fw-bold me-4 btn-back2" type="button">Indietro</button>
+                                    <button class="btn btn-primary fw-bold btn-next" type="button">Avanti</button>
+                                </div>
+                            </div>
+
+                            <div class="d-none" data-step="2">
+                                <div class="cmp-steps-rating">
+                                    <fieldset>
+                                        <div class="iscrizioni-header w-100">
+                                            <h3 class="step-title d-flex align-items-center justify-content-between drop-shadow mb-5">
+                                                <legend class="d-block d-lg-inline">Vuoi aggiungere altri dettagli?                      </legend>
+                                                <span class="step">2/2</span>
+                                            </h3>
+                                        </div>
+                                        <div class="cmp-steps-rating__body">
+                                            <div class="form-group">
+                                                <label for="TxtNoteFeedback">Dettaglio</label>
+                                                <input name="ctl00$ctl13$SiscomFeedback1$TxtNoteFeedback" type="text" maxlength="200" id="TxtNoteFeedback" class="form-control" data-element="feedback-input-text" aria-describedby="TxtNoteFeedbackDescription" />
+                                                <small id="TxtNoteFeedbackDescription" class="form-text">Inserire massimo 200 caratteri</small>
+                                            </div>
+                                            <br />
+                                            
+                                            <img id="ctl00_ctl13_SiscomFeedback1_imgCaptcha" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAABQCAYAAABcbTqwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAArvSURBVHhe7Z3NaxRbGofz59y/YuDCzBCY1V3ObjazcTHDXLKZ1c0iMC6E6yKDGchCQZwsMigiKIzSCxcZkIsLRdGMJmokRvEzioriuXkqdTqnTp1TX111qvr0+8ALqe5KdXXX+3s/zjldPacGyq1bt9K/BKE/BisQQbDpI2i2JhCJ+PUo+rzksxwOToE0vUCxX1hx3NlDSixh0Dx9+lR9+/Yt3XLjClxtBTMRSEdItmnnM3j48KF6//59uhWeqATSplOKgw+DZ8+eqefPn6db4ZkqgYjTzh5v375Vjx49SrfCIyWWMGi+fPmi7t69m26Fp1Qg0xK1JbvEy71799Tnz5/TrbBIBhEGDyUWpRaEDoQiEGHwvHjxQu3u7qZbYRmkQHSUkLJJAIZ5Ge7tA8kgwuBhovD27dvpVlgGIxDJFkIRm5ub6uPHj+nWEV37jWSQjqh64RjG3NraSmw0Go1tfX1dnT59utDYR+/P65n/v7GxMT5uX/V7m/Ae6EVCIwKx6DIicYE5/tWrVxMHX1paSkw7vOng7Kcd3Ge2KEy7cuXK+LgrKytqcXExsePHj48fNwVGhOaYrig9BF69eqV2dnbSrXCIQDoGUeCAy8vLieGU169fT5yR7BEaBOAS2NmzZxPRICCExLmyfeHCheT5GzduJP/TVzb69OmTun//froVjqgE0kX0b3rMmzdvqpMnTyaOhoP1UR7Y1HkvnC+C4H1w/pcuXcpkI94b2zzO82SgJ0+epP/dDXfu3FFfv35Nt8IgGaRltDCIvK9fv04fjQ/eGwIis+gMtLq6mojnxIkTiXgo83gOYbLvpGxvb6t3796lW2EQgbQEERcHiV0YVdjf308EwUCBFg+CQTy651pbW0ueMwcTfCWnznx7e3uJhSQjEJogJmRsY8mxPjltOAQTOLb1UVf3DT0FpUfXJUYM6FE7FiAiEHMwAfEgIoxtmz5W9mYEwoIwl9OzHt8WCM2aS0y8cRRvm2tfBGkfFyON2ucwxNEV3hfCYFRqFgNDaOg/6ENCEqzEsh0eY+jOJRBqTVtMNIG26DBGNux9MddxeT3XeZR9pdMFgQBxxDDH4IPPd2iEXtk79T0Iw38up3cJxFdCsozBFh6RyrUv35G+ePGiOnPmjHr8+PH42K5z6GuJdsxwDQl0oZAm3QPp3Hb4N2/eqHPnzqnLly9nhIe5xES0s4WHPXjwILcvtbV9TIzXtM8Dm1XofetmbT7zqtj7ikAqQg/EyEudD9vHhw8fcg5PA+oSCFnKFhOmxWYaj8cO14FyOxQzI5DRwpyamzNtXq1up0962Var8/b/GTa/erCHEBL6RcrfJn1jExoJhDqQka2pGLnZXlXzLufW5nPysv8zbL5caVmsYy+M0seLGC1kXjNjlQ4QD5SoZOEQNBIIzSdzI4zkUAL4ZjdJ+71S1clzDjZSC679CqyOSOxsVuzf1c+lllBzn02VjDoMQq7snbjEoolkWJaG9OXLl+O1Mr2L44BcWWV4YvY5yzly0XrhwE2zbK/OW/tUdDBHJvALpDuh5s//wCpmIu+1td5b7cxaEXyOwByC1noQsgpDoGQVSrBQKdCP5Vy5Usp63nCOrPP4HT/nZKUO5nZ4nyPl+yZ7X/fxyv3c11tNmEUCCQRfIyCHoPUmneaJcWrqRCbx+DtUQ5XBKiHqXKwLSz9Uu9B2mVLStLscHnMev0YJhFCJ6uN9ywYPCkrPiZw6kEAg1Mre1gViwkUjm5BVyC5M6gWj4cVibdDG+b/nHWjSEasCp3RlHjs7FZ9/PiMUZhFHmXdk+XKyMvZ7LEllk5Th5q2AuqQTgdhvHKXTn5BRyCxBZkItJ+Ba5SN4NiqzeA5L/vZE+0Or60RZB55fHWUd2uFIhT2Si4M+sKqAs8c+eC9tRf6aApkERlEZKOqaTjOIC3oTnVV4g50txyiMklnDIfgeB0vVjyiZA9FWIbNkswHiso6dcyT7tSfsDTK4ei/79ZpmkbK+rz2YXA0xMRpcIBrmUIgCNFuMgjEy0So1BIL97scV57xOrhH3mS9aWlFV75aJ4jlHasthHXiyhf0+mwX/cAIJtbK3N4GYMI/CsB1iQTT2Mowyo6SzH9s7fyxzwbFj581lHL+on783n/+TOm8s8cgt57/+D/Ub41i2JU3yn89l/mdn53/eTFFPIO1lEH/p1oZzhxMI+G4F1CatCwTHwFkmNUowPgDT4erY3i8/q+/NizV3LCOAxCwRmQLyfSHs0O6of/7WPPaR/fXy0X6f//s34zmr37H7gPTxQ7oSSLEDZ8+pSRbpMPM5CLGydxAZxIVvArI6ljM4Ltbm5ln1B2OfJs2p7VRHWSL7+vax831Jlsmd1UFZM2432bUzQFiB4BeMjnbJYAWiaT4BWXyx9vf31crKj+ov4+cPLPXCevW4JyrX7IG0jZ3W/v9ShWwzkFWIv7zSTJ65yl+jPUKs7B28QDRNJiCLHJ3vPG9t/Tvr3HqHWpHUk6mMY1AyHj1fbEdRvTwDZjH3dzmmfbyKVirMLCEFAl3PqE+NQEyYcKw2Ael2Mm6ywPfIbSGYJUeudPKIRItwLAK9ny2yilZ0DrmSyMAOBrnzrZnRjkRdz8lDC6RrplIgmioTkDnHObDv/viT+v+/fm89bl3MFhy8EJ/DZiK2I+q7IrrjXO3zyAm+jo1f0yrBHEGjXnk6fBoJhOgyNIomICs5h+tK1u4jajSlllN7HalRL2OfxyTlWnb/7GeZP479Wc+kQPqmSKC+CUhXJhlb4VWsWLsX9ikOqgoEamaz3LFqN/z5z0tnJN/jh0ze5A+NqS6xyrAnIE+dOqV2d/8zdvj60S0vlvrHSLGcvrw0s53PZW6HtKN6pTIwJ0qdLSoGDKxu0BggUQtEQ7l17dq15BaYRd+AnBps5y10RNuhq0d1r7DSjFQ2Otc4eFj0WdLPhEAou7ih9P7+fgsTkDNEkRBLeqO2xNE3tQUyxAa9jOQ7Hhsb6dYhzScghRxaLBGUVDbRZxCyBtnDdweWwXwDsiemMeCFJHqBuLKHj+oTkAI0Fdc0iTJqgZA1+EkxX/bw0cs3IAUnfYupskDKTnQoUcE8DzIHGcRHlXMO9g3IGaGpn/TlX1FnEHqPtn7tyTcBGQtDCXBDoxWBDPHD5dee+Em0LtATkHwxS4ibaDMIv77KD0wKwiREKxB+aZUhXmEYTGsJF6VAuOECP482CVKTCxClQMpGrwQ/EhiyTJVAii6e+Rw3gONGcIIwKY0EMvQoE/uvzwrhiLLEkgZdaIvWBDKkrLK4uJj+JQiTEWUGEYEIbRGlQNpcYiKUE/PIV5QC4au1IX9LW4iXKAWS/60PoYyYs8AkRCkQVt4yktX1rfGF+KkskGmLMMyDcP9dEYlQFZePR5lBNIhkeXlZVvUKjYlaIMCEIUvfmV2nN5GMEjdtVzrRC0RDNqFxpzdZX19PvkIrYhHKmBmBaGjgiTJra2vJDR3ILKz8RTAydyLYTI1AuhokILOwPB7BMMG4tLSUNPf8fgi9y9bWlghnhpm5DFIGGQZR8CM79C6IBeGwfIWGn23ENBqNEqOvYX9MFkjGhwikBvzyLUKgHNMCoa9BNBj9DULCuGGEftwUlDYyohYWxk0mhOEhAukIHF47vykobQwUaAFhCEqLyzSdtVzGkhr7uNrMzCbia85MC6SrvqZNdNZyGevNXOLAzMxmio9toTqDEkgIh50GUcC0nGfcKPUr3f9+YxTZ4+cAAAAASUVORK5CYII=" style="border-width:0px;" />
+                                            <a id="ctl00_ctl13_SiscomFeedback1_ButtonCambiaCodice" class="btn btn-primary btn-xs" href="javascript:__doPostBack(&#39;ctl00$ctl13$SiscomFeedback1$ButtonCambiaCodice&#39;,&#39;&#39;)" style="color:Black;">Ricrea Immagine</a>
+                                            
+
+                                            <br />
+                                            <span id="ctl00_ctl13_SiscomFeedback1_Label43" class="labelpassword" style="display:inline-block;width:260px;">Digita il codice visualizzato:</span>
+
+                                            <input name="ctl00$ctl13$SiscomFeedback1$txtPassword" type="text" maxlength="6" id="ctl00_ctl13_SiscomFeedback1_txtPassword" class="input-sm form-control FMAc" style="width:160px;" />
+
+                                        </div>
+                                    </fieldset>
+                                </div>
+
+                                <div class="d-flex flex-nowrap pt-4 w-100 justify-content-center button-shadow">
+                                    <button class="btn btn-outline-primary fw-bold me-4 btn-back" type="button">Indietro</button>
+                                    <input type="submit" name="ctl00$ctl13$SiscomFeedback1$btnSalva" value="Avanti" id="ctl00_ctl13_SiscomFeedback1_btnSalva" class="btn btn-primary fw-bold" />
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<input type="hidden" name="ctl00$ctl13$SiscomFeedback1$valueRating" id="valueRating" value="0" />
+<input type="hidden" name="ctl00$ctl13$SiscomFeedback1$valueDescrizione" id="valueDescrizione" />
+
+<input type="hidden" name="ctl00$ctl13$SiscomFeedback1$telefono" id="ctl00_ctl13_SiscomFeedback1_telefono" />
+<input type="hidden" name="ctl00$ctl13$SiscomFeedback1$Email" id="ctl00_ctl13_SiscomFeedback1_Email" />
+
+
+
+
+    <div id="ctl00_ctl13_pnlSiscomContattaIlComuneHomeAgid">
+		<div id="ctl00_ctl13_pnlSiscomContattaIlComuneHomeAgid">
+	
+
+<div class="bg-grey-card shadow-contacts">
+    <div class="container">
+        <div class="row d-flex justify-content-center p-contacts">
+            <div class="col-12 col-lg-6">
+                <div class="cmp-contacts">
+                    <div class="card w-100">
+                        <div class="card-body">
+                            <h2 class="title-medium-2-semi-bold">
+                                <span id="ctl00_ctl13_ctl01_lblContattaIlComune">Contatta il comune</span></h2>
+                            <ul class="contact-list p-0">
+                                <li>
+                                    <a id="ctl00_ctl13_ctl01_btnDomandeFrequenti" class="list-item" href="Domandefrequenti">
+                                <svg class="icon icon-primary icon-sm" aria-hidden="true">
+                                    <use href="assets/bootstrap-italia/dist/svg/sprites.svg#it-help-circle"></use>
+                                </svg><span>Leggi le domande frequenti</span></a></li>
+
+                                <li>
+                                    <a id="ctl00_ctl13_ctl01_btnRichAssistenza" class="list-item" data-element="contacts" href="Richiestaassistenza">
+                                <svg class="icon icon-primary icon-sm" aria-hidden="true">
+                                    <use href="assets/bootstrap-italia/dist/svg/sprites.svg#it-mail"></use>
+                                </svg><span>Richiedi assistenza</span></a></li>
+
+                                <li>
+                                    <a id="ctl00_ctl13_ctl01_btnTelefono" class="list-item" href="tel:0121%20944153">
+                                        <svg class="icon icon-primary icon-sm" aria-hidden="true">
+                                            <use href="assets/bootstrap-italia/dist/svg/sprites.svg#it-hearing"></use>
+                                        </svg>
+                                        <span id="ctl00_ctl13_ctl01_lblTelefono">Chiama il numero 0121 944153</span></a></li>
+
+                                <li>
+                                    <a id="ctl00_ctl13_ctl01_btnPrenotaAppuntamento" class="list-item" data-element="appointment-booking" href="https://servizi.comune.angrogna.to.it/servizi/prenotaappuntamenti/Login.Aspx?CE=ngrgn1115&amp;ACCESSO=C">
+                                <svg class="icon icon-primary icon-sm" aria-hidden="true">
+                                    <use href="assets/bootstrap-italia/dist/svg/sprites.svg#it-calendar"></use>
+                                </svg><span>Prenota appuntamento</span></a></li>
+                            </ul>
+
+                            <div id="ctl00_ctl13_ctl01_pnlProblemiInCitta">
+		
+                                <h2 class="title-medium-2-semi-bold mt-4">Problemi in citt&#224;</h2>
+                                <ul class="contact-list p-0">
+                                    <li>
+                                        
+                                <svg class="icon icon-primary icon-sm" aria-hidden="true">
+                                    <use href="assets/bootstrap-italia/dist/svg/sprites.svg#it-map-marker-circle"></use>
+                                </svg><span>Segnala disservizio </span></li>
+                                </ul>
+                            
+	</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+	</div>
+
+<footer class="it-footer" id="footer">
+    
+    <div id="ctl00_ctl13_pnlSiscomPiePaginaAGID">
+		<div id="ctl00_ctl13_pnlSiscomPiePaginaAGID">
+	
+
+
+<style type="text/css">
+    .e-mail:before {
+        content: attr(data-website) "\0040" attr(data-user);
+        unicode-bidi: bidi-override;
+        direction: rtl;
+    }
+
+    .cryptedmail:after {
+        content: attr(data-name) "@" attr(data-domain) "." attr(data-tld);
+    }
+</style>
+
+
+
+<div class="it-footer-main">
+    <div id="ctl00_ctl13_ctl00_PanelContenitore" class="container">
+		
+        <div id="ctl00_ctl13_ctl00_PanelIntestazioneFooter" class="row">
+			
+
+            <div class="col-12 footer-items-wrapper logo-wrapper">
+
+                <img id="ctl00_ctl13_ctl00_imgLogoEU" class="ue-logo" src="assets/images/logo-eu-inverted.svg" alt="logo Unione Europea" src="" style="height:56px;width:178px;border-width:0px;" />
+
+
+                <div class="it-brand-wrapper it-brand-wrapper-siscom">
+                    
+                    <a id="ctl00_ctl13_ctl00_LinkHomeStemma" href="Home"><img id="ctl00_ctl13_ctl00_ImageStemma" class="icon widthAuto" src="portals/2109/Skins/SkinXhtml/Images/StemmaFooter.webp" alt="Stemma dell&#39;Ente" style="border-width:0px;" /><div id="ctl00_ctl13_ctl00_PanelEnte" class="it-brand-text">
+				
+                            
+                            <span id="ctl00_ctl13_ctl00_LabelRagSoc" class="no_toc">Comune di Angrogna</span>
+                            
+                        
+			</div></a>
+                    
+                </div>
+            </div>
+
+        
+		</div>
+        <div id="ctl00_ctl13_ctl00_PanelContenitoreFooter" class="row">
+			
+            <div id="ctl00_ctl13_ctl00_panelAmministrazioneContainer" class="col-md-3 footer-items-wrapper">
+				
+                <h3 class="footer-heading-title">Amministrazione</h3>
+                <div id="ctl00_ctl13_ctl00_panelAmministrazione">
+					
+                    
+                <ul class='footer-list'><li><a href="Areeamministrative">Aree amministrative</a></li><li><a href="Documenti">Documenti e dati</a></li><li><a href="Entifondazioni">Enti e fondazioni</a></li><li><a href="Organidigoverno">Organi di governo</a></li><li><a href="Personaleamministrativo">Personale amministrativo</a></li><li><a href="Politici">Politici</a></li><li><a href="Uffici">Uffici</a></li></ul>
+				</div>
+            
+			</div>
+            <div id="ctl00_ctl13_ctl00_pnlCategorieServizio" class="col-md-6 footer-items-wrapper">
+				
+                <h3 class="footer-heading-title">Categorie di servizio</h3>
+                <div class="row">
+                    <div id="ctl00_ctl13_ctl00_pnlCategorieServizio1" class="col-md-6">
+					
+                    <ul class='footer-list'><li><a href="Servizi?IDCategoria=20649">Anagrafe e stato civile</a></li><li><a href="Servizi?IDCategoria=20651">Autorizzazioni</a></li><li><a href="Servizi?IDCategoria=20652">Catasto e urbanistica</a></li><li><a href="Servizi?IDCategoria=20656">Imprese e commercio</a></li></ul>
+				</div>
+                    <div id="ctl00_ctl13_ctl00_pnlCategorieServizio2" class="col-md-6">
+					
+                    <ul class='footer-list'><li><a href="Servizi?IDCategoria=20658">Salute, benessere e assistenza</a></li><li><a href="Servizi?IDCategoria=20659">Tributi, finanze e contravvenzioni</a></li><li><a href="Servizi?IDCategoria=20996">Biblioteca</a></li></ul>
+				</div>
+                </div>
+            
+			</div>
+            <div id="ctl00_ctl13_ctl00_panelNovitaVivereIlComuneContainer" class="col-md-3 footer-items-wrapper">
+				
+                
+                    <h3 class="footer-heading-title">Novit&#224;</h3>
+                    
+                <ul class='footer-list'><li><a href="Notizie?idCat=1">Notizie</a></li><li><a href="Notizie?idCat=2">Comunicati</a></li><li><a href="Notizie?idCat=3">Avvisi</a></li></ul>
+                
+                    <h3 class="footer-heading-title">
+                        <span id="ctl00_ctl13_ctl00_lblViviereIlComune">Vivere il comune</span></h3>
+                    
+                <ul class='footer-list'><li><a href="Luoghi">Luoghi</a></li><li><a href="Eventi">Eventi</a></li></ul>
+            
+			</div>
+
+            <div class="col-md-3 mt-md-4 footer-items-wrapper">
+                <h3 class="footer-heading-title">
+                    <span id="ctl00_ctl13_ctl00_LabelContatti">Contatti</span></h3>
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <div id="ctl00_ctl13_ctl00_PanelColonnaFooter1">
+				
+
+
+                            <div id="ctl00_ctl13_ctl00_InternoColonna1" class="footer-list">
+					
+                                <span id="ctl00_ctl13_ctl00_LabelIndirizzo" class="FooterTestoContatti">Piazza Roma, 1</span>
+                                <br />
+                                <span id="ctl00_ctl13_ctl00_LabelCapIndirizzo" class="FooterTestoContatti">10060 Angrogna (TO)</span>
+                                <br />
+                                <div id="ctl00_ctl13_ctl00_PanelDescrRegImprese">
+						
+                                    <span id="ctl00_ctl13_ctl00_LabelDescrRegImprese" class="FooterTestoContatti">C.F. 01451180010 - P.Iva: 01451180010</span>
+                                
+					</div>
+                                <div id="ctl00_ctl13_ctl00_PanelTelefono">
+						
+                                    <span id="ctl00_ctl13_ctl00_LabelTelefono" class="FooterTestoContatti">Telefono: <a href='tel:0121 944153' class='FooterLinkContatti'>0121 944153</a> </span>
+                                
+					</div>
+                                <div id="ctl00_ctl13_ctl00_PanelFax">
+						
+                                    
+                                
+					</div>
+
+                                
+                                <div id="ctl00_ctl13_ctl00_PanelAltriDati">
+						
+                                    <div id="ctl00_ctl13_ctl00_PanelEmail">
+							
+                                        <span id="ctl00_ctl13_ctl00_Label12" class="FooterTestoContatti">E-mail:</span>
+
+                                        
+                                        <a href='#' class='cryptedmail FooterLinkContatti' data-name='segreteria' data-domain='comune.angrogna.to' data-tld='it' onclick ='window.location.href = "mailto:" + this.dataset.name + "@" + this.dataset.domain + "." + this.dataset.tld; return false;' title = "Invia mail alla casella di posta elettronica istituzionale dell'Ente" ></a>
+                                        
+                                    
+						</div>
+                                    <div id="ctl00_ctl13_ctl00_Panel1">
+							
+                                        <span id="ctl00_ctl13_ctl00_Label11" class="FooterTestoContatti">PEC:  </span>
+                                        <a href='#' class='cryptedmail FooterLinkContatti' data-name='angrogna' data-domain='cert.ruparpiemonte' data-tld='it' onclick ='window.location.href = "mailto:" + this.dataset.name + "@" + this.dataset.domain + "." + this.dataset.tld; return false;' title = "Invia una mail alla casella di posta elettronica certificata dell'Ente utilizzando preferibilmente solo caselle di posta certificata" ></a>
+                                        
+                                    
+						</div>
+                                    <div id="ctl00_ctl13_ctl00_PanelVarie">
+							
+                                        
+                                    
+						</div>
+
+                                
+					</div>
+                                <div id="ctl00_ctl13_ctl00_PanelURP">
+						
+                                    <a id="ctl00_ctl13_ctl00_HyperLinkURP" title="Vai alla pagina Ufficio relazioni con il pubblico" class="FooterLinkContatti" href="Uffici?IDUfficio=27944">Ufficio relazioni con il pubblico</a>
+                                
+					</div>
+                                <div id="ctl00_ctl13_ctl00_PanelUffici">
+						
+                                    <a id="ctl00_ctl13_ctl00_LinkUffici" title="Link alla pagina degli uffici e degli orari" class="FooterLinkContatti" href="Ufficidettagli">Uffici e orari</a>
+                                
+					</div>
+                                <div id="ctl00_ctl13_ctl00_PanelNumeriUtili">
+						
+                                    <a id="ctl00_ctl13_ctl00_LinkNumeriUtili" title="Link alla pagina dei numeri utili dell&#39;Ente" class="FooterLinkContatti" href="Numeriutili">Numeri utili</a>
+                                
+					</div>
+                            
+				</div>
+
+                        
+			</div>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mt-md-4 footer-items-wrapper">
+                <h3 class="footer-heading-title">
+                    <span id="ctl00_ctl13_ctl00_Label1">Link Utili</span></h3>
+                <div class="row">
+
+                    <div id="ctl00_ctl13_ctl00_PanelColonnaFooter3" class="col-md-6">
+				
+                        <div id="ctl00_ctl13_ctl00_InternoColonna3" class="footer-list">
+					
+                        <ul class="footer-list"><li><a title="Vai alla pagina Regione Piemonte" class="FooterLinkContatti" href="https://www.regione.piemonte.it/web/">Regione Piemonte</a></li><li><a title="Vai alla pagina Torino metropoli _ citt&#224; metropolitana di Torino" class="FooterLinkContatti" href="http://www.cittametropolitana.torino.it/cms/index.php">Torino metropoli _ citt&#224; metropolitana di Torino</a></li><li><a title="Vai alla pagina La piattaforma di job matching di Agenzia Piemonte Lavoro IOLAVORO" class="FooterLinkContatti" href="https://www.iolavoro.org/">La piattaforma di job matching di Agenzia Piemonte Lavoro IOLAVORO</a></li><li><a title="Vai alla pagina SUAP 
+" class="FooterLinkContatti" href="https://hosting.pa-online.it/td0459/su_ambito/suap/">SUAP 
+</a></li></ul>
+				</div>
+                    
+			</div>
+                    <div id="ctl00_ctl13_ctl00_InternoColonna2" class="col-md-6">
+				
+
+                        <ul class="footer-list">
+                            <li>
+                                <a id="ctl00_ctl13_ctl00_HyperLink2" accesskey="2" title="Link alla pagina Privacy" class="FooterLinkContatti" data-element="privacy-policy-link" href="Privacy">Informativa privacy</a></li>
+                            <li>
+                                <a id="ctl00_ctl13_ctl00_HyperLink3" title="Link alla pagina Note legali" class="FooterLinkContatti" data-element="legal-notes" href="Paginedelcomune?ID=12055">Note legali</a></li>
+                            <li>
+                                <a id="ctl00_ctl13_ctl00_HyperLink9" title="Link alla pagina della Dichiarazione di accessibilit&#224;" class="FooterLinkContatti" data-element="accessibility-link" href="https://form.agid.gov.it/view/6eb991e0-3dcd-11ef-b21c-63f6dbea28ac">Dichiarazione di accessibilit&#224;</a></li>
+                            <li>
+                                </li>
+                        </ul>
+
+
+                    <a title="Vai alla pagina Amministrazione trasparente" class="FooterLinkContatti" href="Menu?IDVoceMenu=282976">Amministrazione trasparente</a><div>
+					<a title="Vai alle domande frequenti" class="FooterLinkContatti" data-element="faq" href="Domandefrequenti">Leggi le FAQ</a>
+				</div>Segnalazione disservizio<a class="FooterLinkContatti d-block" href="https://servizi.comune.angrogna.to.it/servizi/prenotaappuntamenti/Login.Aspx?CE=ngrgn1115&amp;ACCESSO=C">Prenotazione appuntamento</a><a class="FooterLinkContatti d-block" href="Richiestaassistenza">Richiesta d'assistenza</a>
+			</div>
+
+                </div>
+            </div>
+            
+
+            
+
+            <div id="ctl00_ctl13_ctl00_PanelSeguici" class="col-md-3 mt-md-4 footer-items-wrapper">
+				
+                <h3 class="footer-heading-title">Seguici su</h3>
+                <div id="ctl00_ctl13_ctl00_PanelSocial" class="list-inline text-start social">
+					
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div id="ctl00_ctl13_ctl00_PanelRss" class="list-inline-item">
+						
+                        <a id="ctl00_ctl13_ctl00_LinkRss" title="Link alla pagina Rss dell&#39;Ente" href="Rss" target="_blank"><svg class='icon icon-sm icon-white align-top'><use xlink:href='assets/bootstrap-italia/dist/svg/sprites.svg#it-rss'></use></svg></a>
+                    
+					</div>
+
+                
+				</div>
+                <div id="ctl00_ctl13_ctl00_PanelNewsletter" class="footer-list">
+					
+                    <a id="ctl00_ctl13_ctl00_LinkNewsletter" title="Link alla pagina newsletter dell&#39;Ente" class="FooterLinkContatti" href="Newsletter">Newsletter</a>
+                
+				</div>
+                
+            
+			</div>
+        
+		</div>
+        <div id="ctl00_ctl13_ctl00_PanelFooterBottom" class="row">
+			
+            <div id="ctl00_ctl13_ctl00_PanelLinkPiePagina" class="col-12 footer-items-wrapper">
+				
+                <div class="footer-bottom">
+
+                    
+
+                    
+
+                    
+
+                    <a id="ctl00_ctl13_ctl00_HyperLink4" accesskey="4" title="Link alla pagina Dati Monitoraggio" class="FooterLinkContatti" href="Datimonitoraggio">Dati monitoraggio</a>
+
+                    
+
+                    <a id="ctl00_ctl13_ctl00_HyperLink5" accesskey="5" title="Link alla pagina dei Servizi" class="FooterLinkContatti" href="Servizi">Servizi</a>
+
+                    
+
+                    
+
+                    
+
+                    <a id="ctl00_ctl13_ctl00_HyperLink8" title="Credits" class="FooterLinkContatti" href="Login">Credits</a>
+
+                    <a id="ctl00_ctl13_ctl00_HlMappaSito" title="MappaSito" class="FooterLinkContatti" href="Mappasito">Mappa del Sito</a>
+
+                </div>
+            
+			</div>
+        
+		</div>
+        <div class="clear"></div>
+
+        
+
+        <div id="ctl00_ctl13_ctl00_PanelWebAnalitiics">
+			
+            
+        
+		</div>
+
+        
+
+        
+        
+
+        <div id="ctl00_ctl13_ctl00_PanelFooterCopyright" class="Footer_copyright">
+			
+            <span id="ctl00_ctl13_ctl00_LabelFooterCopyright" class="FooterTestoContatti">&copy; Comune di Angrogna - Tutti i diritti riservati</span>
+        
+		</div>
+        <div class="clear"></div>
+        
+        <div id="backToTop" data-bs-toggle="backtotop" class="back-to-top overflow-hidden cursorPointer">
+            <svg class="icon icon-white" style="transform: scale(1.75); left: 1px;">
+                <use href="assets/bootstrap-italia/dist/svg/sprites.svg#it-collapse"></use></svg>
+        </div>
+    
+	</div>
+
+</div>
+
+
+
+
+
+
+
+
+</div>
+	</div>
+</footer>
+
+
+
+<input name="ScrollTop" type="hidden" id="ScrollTop" />
+
+<input type="hidden" name="ctl00$ctl13$CreaStaticPage" id="ctl00_ctl13_CreaStaticPage" value="False" />
+
+<script>
+    function loadBootstrapOrRetry() {
+        if (typeof bootstrap !== "undefined") {
+            // Bootstrap è disponibile, esegui il tuo codice qui
+            bootstrap.loadFonts("assets/bootstrap-italia/dist/fonts");
+        } else {
+            // Bootstrap non è ancora disponibile, ritenta dopo 50 millisecondi
+            setTimeout(loadBootstrapOrRetry, 50);
+        }
+    }
+
+    // Inizia il ciclo di controllo
+    loadBootstrapOrRetry();
+
+    //accessibilità
+    let defaultFontSize = 0;
+    let highContrast = false;
+    let linksHighlighted = false;
+    const touchedElements = new Map();
+
+    function increaseFontSize() {
+            defaultFontSize += 1;
+        //    document.body.style.fontSize = defaultFontSize + '%';
+        changeFontSize(1.1);
+    }
+
+    function decreaseFontSize() {
+            defaultFontSize -= 1;
+        //    document.body.style.fontSize = defaultFontSize + '%';
+        changeFontSize(0.9);
+    }
+
+    function changeFontSize(factor) {
+        const all = document.querySelectorAll('a,span, p');// document.querySelectorAll('*');
+   
+        all.forEach(el => {
+
+            const computed = window.getComputedStyle(el);
+            const current = parseFloat(computed.fontSize);
+
+            if (!touchedElements.has(el)) {
+                const original = el.getAttribute('style') || '';
+                touchedElements.set(el, original);
+            }
+
+            if (!isNaN(current)) {
+                el.style.fontSize = (current * factor) + 'px';
+            }
+        });
+        savePreferences();
+    }
+
+    function resetAccessibility() {
+        touchedElements.forEach((originalStyle, el) => {
+            el.setAttribute('style', originalStyle);
+        });
+        touchedElements.clear();
+
+        // Extra: reset body background, text color, speech synthesis
+        document.body.style.backgroundColor = '';
+        document.body.style.color = '';
+        window.speechSynthesis.cancel();
+
+        cursorMode = 3;
+        cycleCursorMode();
+
+        linksHighlighted = false;
+        document.body.classList.remove('bg-dark', 'text-white', 'cursor-large', 'highlight-links', 'dyslexia-font');
+        dyslexiaOn = false;
+
+        savePreferences();
+
+        localStorage.removeItem('accessPrefs');
+    }
+
+    function toggleContrast() {
+        if (!highContrast) {
+            document.body.style.backgroundColor = '#000';
+            document.body.style.color = '#fff';
+        } else {
+            document.body.style.backgroundColor = '';
+            document.body.style.color = '';
+        }
+        highContrast = !highContrast;
+        savePreferences();
+    }
+
+    //function resetAccessibility() {
+    //    defaultFontSize = 100;
+    //    document.body.style.fontSize = '';
+    //    document.body.style.backgroundColor = '';
+    //    document.body.style.color = '';
+    //    highContrast = false;
+    //    window.speechSynthesis.cancel();
+    //}
+
+    function leggiPagina() {
+        let testo = document.body.innerText;
+        let sintesi = window.speechSynthesis;
+        let messaggio = new SpeechSynthesisUtterance(testo);
+
+        messaggio.lang = 'it-IT'; // Imposta la lingua italiana
+        messaggio.rate = 1; // Velocità della voce
+        messaggio.pitch = 1; // Tonalità della voce
+
+        sintesi.speak(messaggio);
+        savePreferences();
+    }
+
+    function toggleToolbar() {
+        let toolbar = document.getElementById("accessibility-toolbar");
+        let options = document.getElementById("accessibility-options");
+
+        if (toolbar.classList.contains("collapsed")) {
+            toolbar.classList.remove("collapsed");
+            options.style.display = "flex";
+        } else {
+            toolbar.classList.add("collapsed");
+            options.style.display = "none";
+        }
+        savePreferences();
+    }
+
+    function toggleHighlightLinks() {
+        document.body.classList.toggle('highlight-links');
+        linksHighlighted = !linksHighlighted;
+        savePreferences();
+    }
+
+    let cursorMode = 0; // 0 = nessuna, 1 = grande, 2 = guida, 3 = spotlight
+    function cycleCursorMode() {
+        // Reset
+        document.body.classList.remove('cursor-large');
+        document.getElementById('spotlight').style.display = 'none';
+        document.getElementById('readingGuide').style.display = 'none';
+        document.removeEventListener('mousemove', updateSpotlight);
+        document.removeEventListener('mousemove', updateGuide);
+
+        // Next mode
+        cursorMode = (cursorMode + 1) % 4;
+        if (cursorMode === 1) {
+            document.body.classList.add('cursor-large');
+        } else if (cursorMode === 2) {
+            document.getElementById('spotlight').style.display = 'block';
+            document.addEventListener('mousemove', updateSpotlight);
+        } else if (cursorMode === 3) {
+            document.getElementById('readingGuide').style.display = 'block';
+            document.addEventListener('mousemove', updateGuide);
+        }
+        savePreferences();
+    }
+    function updateSpotlight(e) {
+        const spot = document.getElementById('spotlight');
+        spot.style.setProperty('--spotX', e.clientX + 'px');
+        spot.style.setProperty('--spotY', e.clientY + 'px');
+        savePreferences();
+    }
+    function updateGuide(e) {
+        document.getElementById('readingGuide')
+            .style.setProperty('--guideY', (e.clientY - 15) + 'px');
+        savePreferences();
+    }
+
+    let dyslexiaOn = false;
+    function toggleDyslexiaFont() {
+        document.body.classList.toggle('dyslexia-font');
+        dyslexiaOn = !dyslexiaOn;
+        savePreferences();
+    }
+
+    // Salva preferenze
+    function savePreferences() {
+        const prefs = {
+            highContrast,
+            linksHighlighted,
+            dyslexiaOn,
+            cursorMode,
+            fontSize: defaultFontSize
+        };
+        localStorage.setItem('accessPrefs', JSON.stringify(prefs));
+    }
+
+    // Applica preferenze al caricamento
+    function loadPreferences() {
+        
+        const prefs = JSON.parse(localStorage.getItem('accessPrefs'));
+        if (!prefs) return;
+
+        if (prefs.highContrast) toggleContrast();
+        if (prefs.linksHighlighted) toggleHighlightLinks();
+        if (prefs.dyslexiaOn) toggleDyslexiaFont();
+
+        defaultFontSize = prefs.fontSize;
+
+        for (let i = 0; i < prefs.cursorMode; i++) {
+            cycleCursorMode();
+        }
+
+        // Modifica la dimensione base
+        if (defaultFontSize > 0) {
+            for (let i = 0; i < defaultFontSize; i++) {
+                changeFontSize(1.1);
+            }
+        } else if (defaultFontSize < 0) {
+            for (let i = 0; i < Math.abs(defaultFontSize); i++) {
+                changeFontSize(0.9);
+            }
+        }
+    }
+
+    setTimeout(function () {  loadPreferences(); }, 0);
+
+</script>
+
+    
+    <nav id="accessibility-toolbar" class="accessibility-toolbar d-flex justify-content-center align-items-center collapsed">
+
+        <a onclick="toggleToolbar()" title="Accessibilità">
+            <svg class="icon fillColor" style="width: 40px; height: 40px;">
+                <use href="App_Themes/Images/Icon/accessibility-icon.svg"></use>
+            </svg></a>
+          <div id="accessibility-options" style="display: none; margin-left: 10px; margin-right: 10px">
+       <a class="btn btn-sm btn-light btnAccessibility" onclick="increaseFontSize()" data-focus-mouse="false">A+</a>
+       <a class="btn btn-sm btn-light btnAccessibility" onclick="decreaseFontSize()" data-focus-mouse="false">A-</a>
+       <a class="btn btn-sm btn-light btnAccessibility" onclick="leggiPagina();" data-focus-mouse="false"><i class="fa fas fa-volume-up"></i>Leggi </a>
+       <a class="btn btn-sm btn-light btnAccessibility" onclick="cycleCursorMode()" data-focus-mouse="false"><i class="fa fas fa-mouse-pointer"></i>Cursore</a>
+       <a class="btn btn-sm btn-light btnAccessibility" onclick="toggleHighlightLinks()" data-focus-mouse="false"><i class="fa fas fa-link"></i>Evidenzia Link</a>
+       <a class="btn btn-sm btn-light btnAccessibility" onclick="toggleDyslexiaFont()" style="font-family: 'OpenDyslexic', sans-serif !important;"  data-focus-mouse="false"><i class="fa fas fa-font"></i>Dislessia</a>
+       <a class="btn btn-sm btn-primary btnAccessibility" onclick="resetAccessibility()"><i class="fa fas fa-undo"></i>Reset</a>
+   </div>
+    </nav>
+
+    <div id="readingGuide"></div>
+    <div id="spotlight"></div>
+</div>
+
+        
+
+    
+
+<script type="text/javascript">
+//<![CDATA[
+localStorage.setItem('pathFavicon', 'portals/2109/Skins/skinXhtml/Images/stemma_Favicon.png');//]]>
+</script>
+</form>
+</body>
+</html>

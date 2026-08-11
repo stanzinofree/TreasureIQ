@@ -1,7 +1,47 @@
 # Architettura di TreasureIQ
 
-*Stato al 9 agosto 2026. Ogni cifra in questo documento è misurata, non stimata:
+*Stato all'11 agosto 2026. Ogni cifra in questo documento è misurata, non stimata:
 dove non abbiamo misurato, il documento lo dice.*
+
+---
+
+## Cos'è TIQ
+
+TreasureIQ è un **assistente civico in chat**: il **punto d'ingresso** dove un
+cittadino chiede in italiano — «che agevolazioni ho con due figli?», «dove sta
+l'anagrafe?», «ci sono bandi aperti?» — e riceve una risposta ancorata a **quello
+che il suo Comune pubblica davvero**, con la fonte in chiaro. Oggi legge i
+portali comunali; l'interfaccia è la stessa con cui domani si leggeranno le altre
+Pubbliche Amministrazioni.
+
+Non è un motore di ricerca né un chatbot generico: il modello linguistico
+**capisce la domanda**, ma **non decide la risposta** — quella la stabilisce
+codice deterministico su dati verificati (§ *Il motore di risposta*). È la
+regola che tiene la chat onesta.
+
+## Come opera, dall'inizio alla fine
+
+```mermaid
+flowchart TD
+    U["Cittadino — domanda in italiano"] --> NLP["Motore NLP · estrae la richiesta<br/>e i filtri anagrafici (comune, ISEE,<br/>disabilità, figli, età, lavoro, tema)"]
+    NLP --> C{"Comune<br/>riconosciuto?"}
+    C -->|"no"| FUORI["Fuori copertura ·<br/>dice cosa non sa, senza inventare"]
+    C -->|"sì"| Q{"Come si legge<br/>questo Comune?"}
+    Q -->|"già ingerito"| CACHE["Snapshot già acquisito ·<br/>nessuna rete mentre il cittadino aspetta"]
+    Q -->|"non ingerito"| LIVE["Sonda live o scansione programmata ·<br/>intanto mostra l'ultima cache"]
+    CACHE --> EV["Risposta con evidenza grafica ·<br/>dato + sorgente + accuratezza"]
+    LIVE --> EV
+    EV --> S1["Fonte: scansione PDF"]
+    EV --> S2["Fonte: endpoint pubblico"]
+    EV --> S3["Fonte: ricerca web sul dominio"]
+    S1 --> ACC["ogni fonte porta il proprio<br/>grado di accuratezza, dichiarato"]
+    S2 --> ACC
+    S3 --> ACC
+```
+
+Il resto del documento spiega ciascun blocco: l'**acquisizione** che riempie lo
+snapshot, il **registro** che tiene la scheda del Comune, il **motore di
+risposta** che decide il verdetto, e i **confini** che il codice fa rispettare.
 
 ---
 
@@ -43,7 +83,7 @@ di cui conosciamo già l'indirizzo. Ogni pagina così raggiunta torna marcata
 | Richieste per un censimento completo | 34.229, circa 4 per comune |
 | Durata di un censimento completo | ~90 minuti con 8 richieste in parallelo |
 | Servizi comunali contati | 57.603 |
-| Piattaforme riconosciute | 20 |
+| Piattaforme riconosciute | 25 |
 | Modello linguistico (`chat/filtri.py`) | spaCy `it_core_news_lg` 3.8.0, ~500MB — scaricato nel Dockerfile, non fissato in `requirements.txt`; se assente il riconoscimento filtri degrada a una cue-list |
 
 ---
@@ -187,6 +227,54 @@ regole nuove fa sembrare che un comune sia *migrato* da `ignota` a `hgate`
 quando sul suo portale non è cambiato niente — è cambiata la nostra ignoranza.
 `evoluzione(da, a)` scarta quei cambi, così le migrazioni vere restano visibili
 e le nostre revisioni no.
+
+---
+
+## Il registro dei comuni: cosa tiene lo sweep
+
+Lo **sweep** è l'acquisizione di primo livello che gira in continuo: per ogni
+comune scansionato scrive una **scheda** in `data-live/registro/{istat}.json`
+(`RecordRegistro`, CONTRATTO-O2). È la scheda che la chat mostra a lato — logo,
+recapiti, cos'è cambiato dall'ultima volta — separata dal censimento nazionale
+(`storico.db`), che invece misura *tutti* i comuni, ingeriti o no.
+
+Cosa lo sweep tira fuori, e **dove vive davvero ogni campo** — perché non tutto
+è "salvato dallo sweep" nello stesso senso:
+
+| Campo | Da dove | Come è tenuto |
+|---|---|---|
+| **Logo** | portale del comune, alla scansione | **persistito** (`logo_b64`, data-uri, estratto una volta) |
+| **Lista uffici / servizi** | connettore | **persistito** (`servizi_snapshot`: nome + URL di ciascuno) |
+| **Link Amministrazione Trasparente** | connettore | **persistito** (`endpoints.at`, dove il connettore lo emette — oggi Municipium) |
+| **Piattaforma + dominio** | censimento | **persistito** (guida quale declinazione leggere) |
+| **Codice Univoco IPA** | elenco nazionale (`comuni-istat.json`) | **innestato a read-time**, non scansionato |
+| **PEC** | Indice PA (`ipa-recapiti.json`) | **innestato a read-time**, non scansionato |
+| **Indirizzo** | Indice PA | **innestato a read-time**, non scansionato |
+| **Telefono** | connettore, sezione «Contatti» dell'ufficio | **per ufficio**, verbatim — nessun centralino inventato |
+
+Tre distinzioni che il codice fa apposta, e che vanno dette in chiaro:
+
+- **I recapiti IPA (Codice Univoco, PEC, indirizzo) non sono nel record.** Sono
+  identità statica dell'ente, indipendente dallo stato del portale: innestarli
+  a read-time (`leggi_registro` → `_recapiti_ipa`) evita che una riscansione li
+  faccia ballare, e fa sì che **anche un comune mai scansionato** mostri comunque
+  PEC e Codice Univoco. Se non c'è nulla da dire, la sezione non compare —
+  nessun campo vuoto spacciato per dato.
+- **Il telefono resta per ufficio.** L'Indice PA non espone un centralino
+  affidabile a livello di comune, e inventarne uno tradirebbe il patto: il
+  telefono compare solo quando un ufficio lo pubblica, letto verbatim
+  (`source_typed` è vero solo se ne trova almeno uno).
+- **La «mappa servizi» oggi è la lista, non un indice dedicato.** Ciò che si
+  persiste è `servizi_snapshot` (nome + URL). I campi `endpoints.servizi` e
+  `endpoints.mappa` esistono nel contratto ma **restano vuoti**: sono riservati
+  ai connettori eGov futuri, dichiarati nella forma senza gonfiare il dato.
+
+Oltre agli otto campi, lo sweep tiene ciò che serve al **rilevamento delle
+modifiche** (R-04): `ultima_scansione`, il flag `prima_scansione`, e una storia
+di **fingerprint stabili** (nomi+conteggio degli uffici, recapiti verbatim
+ordinati, hash del logo). Il diff si fa su questi, **mai sul set di pagine
+dell'ingestione**, che cambia a ogni run e non è riproducibile: così `cambiato`
+segnala una vera modifica del portale, non il rumore della scansione.
 
 ---
 

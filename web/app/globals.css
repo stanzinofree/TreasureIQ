@@ -3173,6 +3173,13 @@ a {
   font-size: 0.82rem;
   word-break: break-word;
 }
+/* Codice Univoco IPA: identificatore, non prosa — mono, un filo di rilievo. */
+.card-comune__codice {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  color: var(--sumi);
+}
 .card-comune__fonte {
   margin: 0;
   font-size: var(--fs-micro);

@@ -293,7 +293,7 @@ def test_route_serve_dal_disco_forma_contratto_o2(monkeypatch: pytest.MonkeyPatc
     # IndicePA) o None se l'ente non è nell'indice — mai un guscio a metà.
     recapiti = corpo["recapiti"]
     if recapiti is not None:
-        assert set(recapiti.keys()) == {"pec", "indirizzo", "fonte"}
+        assert set(recapiti.keys()) == {"pec", "indirizzo", "codice_ipa", "fonte"}
         assert recapiti["fonte"] == "IndicePA"
         assert recapiti["pec"] or recapiti["indirizzo"]
     assert corpo["endpoints"]["at"] == "https://www.comunefiv.it/at"
@@ -311,5 +311,26 @@ def test_recapiti_ipa_join_e_degrado():
     assert marino.fonte == "IndicePA"
     assert marino.pec and "@" in marino.pec
     assert marino.indirizzo
+    # Codice Univoco IPA innestato dallo stesso join, dall'elenco nazionale.
+    assert marino.codice_ipa == "C_E958"
 
     assert _recapiti_ipa("000000") is None  # ISTAT inesistente
+
+
+def test_codice_ipa_regge_da_solo(monkeypatch: pytest.MonkeyPatch):
+    """Il Codice Univoco viene dall'elenco nazionale, non da `ipa-recapiti.json`:
+    un comune assente dai recapiti ma presente nell'elenco espone comunque il
+    codice — non deve degradare a `None` solo perché manca PEC/indirizzo."""
+    from treasureiq import registro as registro_mod
+    from treasureiq.registro import _recapiti_ipa
+
+    monkeypatch.setattr(registro_mod, "_carica_ipa_recapiti", lambda: {})
+    monkeypatch.setattr(registro_mod, "_carica_comuni_ipa", lambda: {"099999": "C_TEST"})
+
+    solo_codice = _recapiti_ipa("099999")
+    assert solo_codice is not None
+    assert solo_codice.pec is None and solo_codice.indirizzo is None
+    assert solo_codice.codice_ipa == "C_TEST"
+
+    # Nulla su nessuno dei due indici: nessun record inventato.
+    assert _recapiti_ipa("088888") is None

@@ -62,6 +62,40 @@ def _carica_ipa_recapiti() -> dict[str, dict[str, str]]:
             _ipa_recapiti_cache = {}
     return _ipa_recapiti_cache
 
+
+#: Codice Univoco IPA per codice_istat, dall'elenco nazionale
+#: (`data/comuni-istat.json`, arricchito da `ingest.ipa`). Statico come i
+#: recapiti — identità dell'ente, non dato di scansione: read-time, mai
+#: persistito nel record né nei fingerprint. Lettura disco locale (D-01 salvo).
+_COMUNI_ISTAT_PATH = DATA_DIR / "comuni-istat.json"
+_comuni_ipa_cache: dict[str, str] | None = None
+
+
+def _carica_comuni_ipa() -> dict[str, str]:
+    """Mappa codice_istat → codice_ipa in memoria (cache di processo).
+    Assente/illeggibile = dizionario vuoto: il codice degrada a `None`, la
+    card resta valida (stesso patto dei recapiti)."""
+    global _comuni_ipa_cache
+    if _comuni_ipa_cache is None:
+        try:
+            import json
+
+            righe = json.loads(_COMUNI_ISTAT_PATH.read_text("utf-8"))
+            _comuni_ipa_cache = {
+                r["codice_istat"]: r["codice_ipa"]
+                for r in righe
+                if r.get("codice_istat") and r.get("codice_ipa")
+            }
+        except Exception:  # noqa: BLE001 — elenco assente = nessun codice
+            logger.warning("comuni-istat.json assente/illeggibile: %s", _COMUNI_ISTAT_PATH)
+            _comuni_ipa_cache = {}
+    return _comuni_ipa_cache
+
+
+def _codice_ipa(codice_istat: str) -> str | None:
+    """Il Codice Univoco IPA dell'ente, o `None` se non agganciato."""
+    return _carica_comuni_ipa().get(codice_istat)
+
 #: Size-cap del logo one-shot (D-11): l'abort è in streaming, non un
 #: controllo di `len()` a valle di un download intero (il DoS resterebbe).
 MAX_LOGO_BYTES = 200_000
@@ -123,12 +157,15 @@ class Cambiato(BaseModel):
 
 
 class Recapiti(BaseModel):
-    """Recapiti ufficiali dall'Indice PA (`fonte`), innestati a read-time:
-    statici, indipendenti dalla scansione del portale. PEC e/o indirizzo
-    possono mancare singolarmente."""
+    """Recapiti e identità ufficiali dall'Indice PA (`fonte`), innestati a
+    read-time: statici, indipendenti dalla scansione del portale. PEC,
+    indirizzo e `codice_ipa` (il Codice Univoco dell'ente) possono mancare
+    singolarmente. `codice_ipa` viene dall'elenco nazionale
+    (`comuni-istat.json`), gli altri due da `ipa-recapiti.json`."""
 
     pec: str | None = None
     indirizzo: str | None = None
+    codice_ipa: str | None = None
     fonte: str = "IndicePA"
 
 
@@ -213,16 +250,17 @@ def leggi_registro(codice_istat: str) -> RegistroComune | None:
 
 
 def _recapiti_ipa(codice_istat: str) -> Recapiti | None:
-    """I recapiti IPA per questo comune, o `None` se l'ente non è nell'indice
-    o non ha né PEC né indirizzo (nessun campo vuoto spacciato per dato)."""
-    voce = _carica_ipa_recapiti().get(codice_istat)
-    if not voce:
-        return None
+    """Recapiti + identità IPA per questo comune, o `None` se non c'è nulla
+    da dire: né PEC, né indirizzo, né Codice Univoco (nessun campo vuoto
+    spacciato per dato). `codice_ipa` viene dall'elenco nazionale, quindi
+    un comune assente da `ipa-recapiti.json` può comunque avere il codice."""
+    voce = _carica_ipa_recapiti().get(codice_istat) or {}
     pec = (voce.get("pec") or "").strip() or None
     indirizzo = (voce.get("indirizzo") or "").strip() or None
-    if not pec and not indirizzo:
+    codice_ipa = _codice_ipa(codice_istat)
+    if not pec and not indirizzo and not codice_ipa:
         return None
-    return Recapiti(pec=pec, indirizzo=indirizzo)
+    return Recapiti(pec=pec, indirizzo=indirizzo, codice_ipa=codice_ipa)
 
 
 def recapiti_comune(codice_istat: str) -> Recapiti | None:

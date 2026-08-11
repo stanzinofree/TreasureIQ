@@ -915,10 +915,16 @@ export interface RegistroComune {
   /** `null` = nessun cambiamento rilevato, oppure `prima_scansione: true`
    *  (in quel caso non c'è una scansione precedente con cui confrontare). */
   cambiato: { campi: string[] } | null;
-  /** Recapiti ufficiali IPA (PEC + indirizzo), innestati a read-time dal
-   *  backend. `null` = ente non nell'indice IPA; ogni campo può mancare da
-   *  solo. Statico, non da scansione portale. */
-  recapiti: { pec: string | null; indirizzo: string | null; fonte: string } | null;
+  /** Recapiti + identità ufficiali IPA (PEC, indirizzo, Codice Univoco IPA),
+   *  innestati a read-time dal backend. `null` = ente senza nulla nell'indice
+   *  IPA; ogni campo può mancare da solo. Statico, non da scansione portale.
+   *  `codice_ipa` viene dall'elenco nazionale, non da `ipa-recapiti.json`. */
+  recapiti: {
+    pec: string | null;
+    indirizzo: string | null;
+    codice_ipa: string | null;
+    fonte: string;
+  } | null;
 }
 
 /** Il registro di un comune, letto SOLO dal disco lato backend (D-01/D-11):
@@ -944,6 +950,7 @@ export const fetchRegistroComune = async (
 export interface RecapitiComune {
   pec: string | null;
   indirizzo: string | null;
+  codice_ipa: string | null;
   fonte: string;
 }
 

@@ -133,8 +133,13 @@ function CardComune({
     registro?.recapiti?.pec ?? recapitiIpa?.pec ?? numeri?.pec?.[0] ?? null;
   const indirizzo =
     registro?.recapiti?.indirizzo ?? recapitiIpa?.indirizzo ?? null;
+  // Codice Univoco IPA: identità dell'ente, non un recapito. Statico, dallo
+  // stesso indice (elenco nazionale), quindi mostrato accanto agli altri
+  // riferimenti IPA — anche per un comune che di PEC/indirizzo non ne ha.
+  const codiceIpa =
+    registro?.recapiti?.codice_ipa ?? recapitiIpa?.codice_ipa ?? null;
   const fonteRecapiti = registro?.recapiti?.fonte ?? recapitiIpa?.fonte ?? null;
-  const haRecapiti = Boolean(telefono || pec || indirizzo);
+  const haRecapiti = Boolean(telefono || pec || indirizzo || codiceIpa);
 
   return (
     <section className="card-comune tiq-card" aria-label={`Comune di ${nomeMostrato}`}>
@@ -175,11 +180,19 @@ function CardComune({
               )}`}
             />
           )}
+          {codiceIpa && (
+            <div className="card-comune__riga">
+              <dt>Codice IPA</dt>
+              <dd>
+                <code className="card-comune__codice">{codiceIpa}</code>
+              </dd>
+            </div>
+          )}
         </dl>
       )}
 
-      {fonteRecapiti && (pec || indirizzo) && (
-        <p className="card-comune__fonte">Recapiti da {fonteRecapiti}.</p>
+      {fonteRecapiti && (pec || indirizzo || codiceIpa) && (
+        <p className="card-comune__fonte">Riferimenti da {fonteRecapiti}.</p>
       )}
 
       {registro &&

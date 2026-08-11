@@ -18,6 +18,7 @@ ferma senza tracce a metà.
 from __future__ import annotations
 
 import argparse
+import html as _html
 import re
 import shutil
 import sys
@@ -30,6 +31,7 @@ SITE = RADICE / "site"
 #: L'ordine della navigazione. (file in docs/, titolo in nav, slug della pagina).
 #: L'ordine è quello in cui si legge il progetto, non alfabetico.
 NAV: list[tuple[str, str, str]] = [
+    ("come-legge.md", "Come legge un Comune", "come-legge"),
     ("architettura.md", "Architettura", "architettura"),
     ("connettori.md", "Connettori", "connettori"),
     ("api.md", "API", "api"),
@@ -82,7 +84,11 @@ def _footer(base: str, home: str) -> str:
 
 
 def _guscio(titolo: str, corpo: str, base: str, home: str, classe: str = "") -> str:
-    """L'HTML completo di una pagina: testa, masthead, corpo, footer."""
+    """L'HTML completo di una pagina: testa, masthead, corpo, footer.
+
+    Lo script Mermaid entra solo se la pagina ha davvero un diagramma: nessun
+    fetch al CDN sulle pagine che non lo usano."""
+    mermaid = _MERMAID_SCRIPT if 'class="mermaid"' in corpo else ""
     return f"""<!doctype html>
 <html lang="it">
 <head>
@@ -96,6 +102,7 @@ def _guscio(titolo: str, corpo: str, base: str, home: str, classe: str = "") -> 
 {_masthead(base, home)}
 {corpo}
 {_footer(base, home)}
+{mermaid}
 </body>
 </html>
 """
@@ -132,6 +139,48 @@ def _rendi_markdown(testo: str):
     return md.convert(testo)
 
 
+#: I blocchi ```mermaid` che l'estensione `fenced_code` rende come
+#: `<pre><code class="language-mermaid">…</code></pre>`, con `<>&` già entità
+#: HTML. Mermaid.js si aggancia a `<pre class="mermaid">` e vuole il testo
+#: grezzo: qui si riscrive il guscio e si de-entizza il diagramma.
+_RE_MERMAID = re.compile(
+    r'<pre><code class="language-mermaid">(.*?)</code></pre>',
+    re.DOTALL,
+)
+
+
+def _rendi_mermaid(html: str) -> str:
+    def sostituisci(m: re.Match) -> str:
+        sorgente = _html.unescape(m.group(1))
+        return f'<pre class="mermaid">{sorgente}</pre>'
+
+    return _RE_MERMAID.sub(sostituisci, html)
+
+
+#: Init di Mermaid, iniettato solo nelle pagine che contengono un diagramma.
+#: ESM dal CDN (GitHub Pages, non l'artifact: la rete esterna è concessa).
+#: Tema `base` ricalibrato sui token civici del sito — mai i blu di default.
+_MERMAID_SCRIPT = """<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+mermaid.initialize({
+  startOnLoad: true,
+  theme: 'base',
+  fontFamily: '"Zen Kaku Gothic New", system-ui, sans-serif',
+  themeVariables: {
+    background: '#f2f4f7',
+    primaryColor: '#ffffff',
+    primaryTextColor: '#0b1d3a',
+    primaryBorderColor: '#0057b8',
+    secondaryColor: '#e6eaf0',
+    tertiaryColor: '#e6eaf0',
+    lineColor: '#3b4a63',
+    textColor: '#0b1d3a',
+    fontSize: '15px',
+  },
+});
+</script>"""
+
+
 def _nav_laterale(base: str, slug_attivo: str) -> str:
     voci = "".join(
         f'<li><a href="{base}/{slug}.html"'
@@ -155,6 +204,10 @@ def costruisci(out: Path, base: str) -> None:
 
     # assets
     shutil.copytree(SITE / "assets", out / "assets")
+    # media dei docs (GIF, immagini) → stesso /assets
+    docs_assets = DOCS / "assets"
+    if docs_assets.exists():
+        shutil.copytree(docs_assets, out / "assets", dirs_exist_ok=True)
     # la gif della demo, se c'è
     gif = RADICE / "treasureiq-caso1-ciampino.gif"
     if gif.exists():
@@ -177,6 +230,7 @@ def costruisci(out: Path, base: str) -> None:
             print(f"  · salto {file} (non trovato)")
             continue
         html = _rendi_markdown(sorgente.read_text("utf-8"))
+        html = _rendi_mermaid(html)
         html = _riscrivi_link(html, base)
         corpo = (
             '<main class="doc">'

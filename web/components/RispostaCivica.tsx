@@ -33,16 +33,15 @@ import { conTagVerifica } from "@/lib/testo";
  * non replicando etichette senza valore.
  */
 
-/** Da dove viene il dato e quanto è completo sono due domande diverse, e una
- * fonte può essere ufficiale e incompleta insieme: un'etichetta sola le
- * appiattiva su un giudizio unico, e «Fonte ufficiale» finiva per suggerire
- * che ci fosse tutto. Il primo bollo dice la provenienza, il secondo — quando
- * serve — dice quanto manca. */
-const ETICHETTE_STATO: Record<InfoOut["stato"], string[]> = {
-  ufficiale: ["Fonte ufficiale"],
-  parziale: ["Fonte ufficiale", "Informazioni parziali"],
-  non_verificato: ["Ricerca web", "Non verificato"],
-  non_pubblicato: ["Niente di pubblicato"],
+/** Un solo bollo di stato: provenienza e completezza in un'etichetta sola, per
+ * non moltiplicare i marcatori sulla stessa risposta. «Fonte parziale» tiene
+ * insieme «viene dall'ufficiale» e «non c'è tutto»; il dettaglio di cosa manca
+ * resta nelle righe ◐ di «Cosa sappiamo dalla fonte», non in un secondo bollo. */
+const ETICHETTA_STATO: Record<InfoOut["stato"], string> = {
+  ufficiale: "Fonte ufficiale",
+  parziale: "Fonte parziale",
+  non_verificato: "Ricerca web",
+  non_pubblicato: "Niente di pubblicato",
 };
 
 /** La data di lettura, scritta come la scriverebbe una persona. */
@@ -89,7 +88,7 @@ const SEGNI: Record<string, string> = {
 };
 
 /** Colore della banda-stato in cima alla card: dato visivo (D-03), non
- *  verdetto. Segue la stessa provenienza dei bolli in `ETICHETTE_STATO`. */
+ *  verdetto. Segue la stessa provenienza del bollo in `ETICHETTA_STATO`. */
 const BANDA_STATO: Record<InfoOut["stato"], string> = {
   ufficiale: "verde",
   parziale: "ambra",
@@ -126,9 +125,27 @@ export default function RispostaCivica({
   info: InfoOut;
 }) {
   const { office, document: documento } = info;
+
+  // Ciclo 15 R4 — una regola per sezione, uguale in OGNI access_mode (niente
+  // più il booleano `compatto` che accendeva/spegneva 4 sezioni in blocco solo
+  // sul fuori-copertura, lasciando il coperto gonfio). La sintesi in prosa (lo
+  // «spiegone») è ridondante appena la scheda ha contenuto strutturato — titolo
+  // del servizio, prove, contatti o pagine web dicono già la stessa cosa. La
+  // mostriamo SOLO quando è l'unica risposta possibile (nessun blocco
+  // strutturato), altrimenti è un preambolo doppione (era il caso di Albano).
+  const soloProsa =
+    !documento &&
+    info.prove.length === 0 &&
+    !office &&
+    info.web_results.length === 0;
   const telefoni = office?.telefono
     ? office.telefono.split(/[/,]/).map((t) => t.trim()).filter(Boolean)
     : [];
+
+  // Il «pippone» sul dato live non sta più sempre a schermo: il bollo ambra
+  // «letto ora» apre a richiesta una nota che spiega cos'è (fonte, non
+  // verdetto). Meno rumore sotto ogni risposta, spiegazione a un tap.
+  const [spiegaVivo, setSpiegaVivo] = useState(false);
 
   return (
     <div className="civica tiq-card">
@@ -137,26 +154,31 @@ export default function RispostaCivica({
         aria-hidden="true"
       />
       <p className="civica__bolli">
-        {ETICHETTE_STATO[info.stato].map((etichetta, i) => (
-          <span
-            key={etichetta}
-            className="civica__stato"
-            data-stato={info.stato}
-            data-ruolo={i === 0 ? "provenienza" : "completezza"}
-          >
-            {etichetta}
+        <span className="civica__stato" data-stato={info.stato}>
+          {ETICHETTA_STATO[info.stato]}
+        </span>
+        {info.letto_dal_vivo && (
+          <span className="civica__vivo-wrap">
+            <button
+              type="button"
+              className="civica__vivo-bollo"
+              aria-expanded={spiegaVivo}
+              onClick={() => setSpiegaVivo((v) => !v)}
+            >
+              letto ora
+            </button>
+            {spiegaVivo && (
+              <span className="civica__vivo-nota" role="note">
+                Dal portale del comune, in questo momento e alla lettera. Non è
+                un dato che abbiamo verificato né conservato.
+              </span>
+            )}
           </span>
-        ))}
+        )}
       </p>
 
-      <p className="civica__sintesi tiq-sintesi">{conTagVerifica(reply)}</p>
-
-      {info.letto_dal_vivo && (
-        <p className="civica__vivo" role="note">
-          <span className="civica__vivo-bollo">letto ora</span>
-          Dal portale del comune, in questo momento e alla lettera. Non è un
-          dato che abbiamo verificato né conservato.
-        </p>
+      {soloProsa && (
+        <p className="civica__sintesi tiq-sintesi">{conTagVerifica(reply)}</p>
       )}
 
       {documento && (
@@ -201,37 +223,11 @@ export default function RispostaCivica({
         </section>
       )}
 
-      {info.azioni.length > 0 && (
-        <section className="civica__blocco">
-          <h4>Cosa puoi fare adesso</h4>
-          {/* Un'azione è un pulsante con sopra scritto cosa ottieni: titolo,
-              spiegazione, comando. Come lista di link lunghi sottolineati
-              tornava a leggersi come testo redazionale. */}
-          <ol className="civica__azioni">
-            {info.azioni.map((a, i) => (
-              <li key={a.testo} className="civica__azione">
-                <span className="civica__azione-num" aria-hidden="true">
-                  {i + 1}
-                </span>
-                <span className="civica__azione-testo">
-                  <strong>{a.testo}</strong>
-                  {a.dettaglio && <span>{a.dettaglio}</span>}
-                </span>
-                {a.url && (
-                  <a
-                    className="civica__azione-cta"
-                    href={a.url}
-                    target={a.tipo === "apri" ? "_blank" : undefined}
-                    rel={a.tipo === "apri" ? "noreferrer" : undefined}
-                  >
-                    {a.etichetta}
-                  </a>
-                )}
-              </li>
-            ))}
-          </ol>
-        </section>
-      )}
+      {/* Ciclo 15 R4: «Cosa puoi fare adesso» rimosso. Su un comune coperto le
+          azioni erano passi generici («Consulta il servizio», «Verifica i
+          documenti») già coperti dalla card del servizio (Apri la fonte) e dai
+          contatti dell'ufficio (Chiama/Scrivi). Un blocco separato di CTA era
+          rumore ridondante. La card e i contatti restano gli unici CTA. */}
 
       {office && (
         <section className="civica__blocco">
@@ -303,27 +299,11 @@ export default function RispostaCivica({
         </section>
       )}
 
-      {(info.diagnosis.length > 0 || info.integration_cost.length > 0) && (
-        <details className="civica__tecnico">
-          <summary>Dettagli tecnici</summary>
-          {info.diagnosis.length > 0 && (
-            <ul>
-              {info.diagnosis.map((riga) => (
-                <li key={riga}>{riga}</li>
-              ))}
-            </ul>
-          )}
-          {info.integration_cost.length > 0 && (
-            <ul className="civica__tecnico-costo">
-              {info.integration_cost.map((riga) => (
-                <li key={riga}>{riga}</li>
-              ))}
-            </ul>
-          )}
-        </details>
-      )}
+      {/* Ciclo 15 R4: «Dettagli tecnici» (diagnosis + integration_cost, D-21)
+          rimosso dalla scheda del cittadino: è diagnostica di integrazione, non
+          una risposta. Resta accessibile su pannello/monitoraggio. */}
 
-      {/* D-05: dopo tutto il verificato (prove, azioni, ufficio, tecnico) —
+      {/* D-05: dopo tutto il verificato (prove, ufficio) —
           sempre visibile, mai un collapse, perché non è un dettaglio da
           nascondere ma contenuto di natura diversa (non verificato). */}
       {info.web_results.length > 0 && (

@@ -95,6 +95,52 @@ In ordine di quanto restituiscono:
    concordare a mano.
 4. **Lo scheduler** e il resto dell'architettura post-MVP, dimensionati sui
    numeri misurati. → [evoluzione.md](evoluzione.md)
+5. **Un motore di ingestione** vero. Oggi `ingest/` è uno scheletro
+   (`Connector`, `FetchStats`, readiness) che gira a comando su un set-pagine
+   non riproducibile. Il passo è renderlo **guidato dallo sweep** — la
+   piattaforma rilevata sceglie il connettore — con un corpus riproducibile e
+   la stessa change-detection che il registro già ha. Resta un atto **distinto**
+   dallo sweep, non fuso in esso (perché, in [architettura.md](architettura.md)).
+
+---
+
+## La direzione del prodotto
+
+Quattro fronti, in ordine di quanto avvicinano TIQ a essere il punto d'ingresso
+unico del cittadino. Nessuno è un impegno di data: sono le direzioni che
+seguirebbe, se il progetto continua.
+
+**1 · Più comuni, anche chiedendo apertura.** Il grosso della copertura resta
+lavoro di connettori (→ [connettori.md](connettori.md)). Ma una fetta di comuni
+— i portali in Angular/JS renderizzati lato client, come i 168 di Regione FVG —
+non espone nessuna API leggibile staticamente: costa più reverse-engineering di
+quanto renda. Per questi la mossa giusta non è tecnica ma **civica**: chiedere
+all'ente di **aprire un endpoint pubblico** dei propri contenuti. Un Comune che
+pubblica già i dati per legge non ha ragione di nasconderli dietro un rendering
+che nemmeno un motore di ricerca legge.
+
+**2 · Una chat che risponde come una persona informata.** Oggi «è aperto oggi
+l'ufficio anagrafe?» ottiene gli orari. Il passo successivo è la risposta che
+darebbe un impiegato onesto: **«Sì, questi sono gli orari — ma chiama per
+sicurezza»**. Significa incrociare l'orario con il giorno, dichiarare
+l'incertezza invece di fingere certezza, e portare sempre il recapito per
+verificare. Il verdetto resta deterministico (§ *Il motore di risposta* in
+[architettura.md](architettura.md)); è la **verbalizzazione** a diventare più
+naturale, non il dato a diventare più disinvolto.
+
+**3 · Ricerca bandi più forte.** I tre gradini in cascada (`cpt` → `pages` →
+`alberatura`, incluso il portale Halley dei concorsi) coprono i casi principali,
+ma la scoperta va estesa: più vendor con estrattore reale, filtri per tema e
+scadenza più precisi, e la distinzione netta fra «nessun bando» e «non so
+leggere questo portale». → [connettori.md](connettori.md)
+
+**4 · Le news del Comune, con uno standard da chiedere.** Dopo servizi e bandi,
+il terzo contenuto che un cittadino cerca sono gli **avvisi**: chiusure,
+scadenze, allerte. Oggi ogni Comune li pubblica a modo suo. La strada
+sostenibile non è scrapare mille layout diversi ma **chiedere agli enti di
+esporre un feed RSS/Atom** — uno standard che esiste da vent'anni, gratis da
+produrre, e che renderebbe le news leggibili senza un connettore per template.
+Come per il fronte 1, la leva è chiedere apertura, non inseguire la chiusura.
 
 ---
 

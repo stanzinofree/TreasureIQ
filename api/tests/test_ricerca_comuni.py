@@ -127,6 +127,17 @@ def test_minori_e_una_parola_comune_non_il_comune_di_minori():
     assert _comuni_candidati("sono di minori") == []
 
 
+def test_ora_e_un_avverbio_non_il_comune_di_ora():
+    """«a che ora apre l'ufficio anagrafe?» finiva a leggere il sito del comune
+    di Ora (BZ): «ora» è chiave esatta dell'indice, 3 lettere, e il match esatto
+    scavalca il minimo di 5 lettere. È un avverbio di tempo prima che un
+    toponimo — in una demo dal vivo qualsiasi «a che ora…» rompeva."""
+    from treasureiq.chat.respond import _comuni_candidati
+
+    assert _comuni_candidati("a che ora apre l'ufficio anagrafe?") == []
+    assert _comuni_candidati("ditemi ora quali bandi sono aperti") == []
+
+
 def test_gorla_minore_risolve_ancora_via_parola_distintiva():
     """Togliere «minore» non deve togliere il comune vero: «gorla» resta e
     risolve il nome intero — qui l'omonimia Maggiore/Minore fa chiedere quale,

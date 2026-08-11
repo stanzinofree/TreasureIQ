@@ -54,6 +54,25 @@ export default async function AnalyticsPage() {
       (r) => r.piattaforma !== "ignota" && r.piattaforma !== "non_misurata",
     )
     .reduce((s, r) => s + r.comuni, 0);
+  // Le piattaforme che un connettore sa davvero leggere oggi. NB: il censimento
+  // etichetta la famiglia eGov col fingerprint "hgate" (CMS Halley), che il
+  // connettore riclassifica a "egov" solo alla lettura profonda — vanno contati
+  // entrambi. Tenere in sincrono con _LEGGIBILI in api/treasureiq/registro_cli.py.
+  const LEGGIBILI = new Set([
+    "municipium",
+    "egov",
+    "hgate",
+    "peopleweb",
+    "wp_design_comuni",
+    "wordpress_generico",
+    "comunibootstrapitalia",
+    "comweb",
+    "openpa",
+  ]);
+  const connessi = censimento.piattaforme
+    .filter((r) => LEGGIBILI.has(r.piattaforma))
+    .reduce((s, r) => s + r.comuni, 0);
+  const scoperti = totale - connessi;
 
   if (!censimento.rilevato_il) {
     return (
@@ -140,6 +159,40 @@ export default async function AnalyticsPage() {
           </tbody>
         </table>
       </div>
+
+      <h2>Quanti comuni un connettore sa già leggere</h2>
+      <p className="nota">
+        Non basta sapere su che piattaforma gira un comune: serve un connettore
+        scritto per quella piattaforma. Oggi ne abbiamo per{" "}
+        <strong>Municipium</strong>, per la famiglia <strong>eGov</strong> (il
+        CMS Halley, che il censimento etichetta &laquo;hgate&raquo;), per i due
+        vendor <strong>PeopleWeb</strong> (SoluzioniPA OpenWeb e Siscom) e per la
+        famiglia <strong>WordPress-AgID</strong> (il tema ufficiale dei comuni e
+        le sue varianti), e per <strong>ComWeb</strong> (ePublic) e{" "}
+        <strong>OpenPA</strong> (Maggioli). Da quei comuni sappiamo tirare fuori
+        uffici, servizi e amministrazione trasparente; dagli altri, per ora, no.
+      </p>
+      <div className="tessere">
+        <div className="tessera">
+          <b>{connessi.toLocaleString("it-IT")}</b>
+          <span>
+            comuni con connettore ({percentuale(connessi, totale)} del
+            censimento)
+          </span>
+        </div>
+        <div className="tessera">
+          <b>{scoperti.toLocaleString("it-IT")}</b>
+          <span>
+            comuni ancora senza connettore ({percentuale(scoperti, totale)})
+          </span>
+        </div>
+      </div>
+      <p className="nota">
+        &laquo;Senza connettore&raquo; non vuol dire invisibili: il censimento li
+        ha misurati lo stesso. Vuol dire che il prossimo fornitore da coprire si
+        sceglie da qui — la barra più alta fra i grigi è il connettore che
+        sblocca più comuni per lo stesso lavoro.
+      </p>
 
       <h2>Prodotti nazionali o piattaforme regionali?</h2>
       <p className="nota">

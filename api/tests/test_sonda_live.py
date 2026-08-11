@@ -13,7 +13,7 @@ from __future__ import annotations
 
 import pytest
 
-from treasureiq.sonda_live import risolvi_comune
+from treasureiq.sonda_live import _tel_valido, risolvi_comune
 
 
 def nome_di(hint: str) -> str | None:
@@ -83,3 +83,46 @@ def test_il_comune_riconosciuto_porta_con_se_il_proprio_sito():
     assert comune is not None
     assert comune.codice_istat == "058003"
     assert comune.sito
+
+
+# --- _tel_valido: sintassi telefono italiano ---------------------------------
+# Lo scraping pesca sequenze storpiate (prefisso ripetuto, cifre monche) che
+# sotto il vecchio minimo di 6 cifre finivano in card come un centralino finto.
+# Meglio telefono «assente» che un numero che non si può comporre.
+
+
+@pytest.mark.parametrize(
+    "grezzo",
+    [
+        "06 6710 1234",  # centralino Roma con spazi -> 0667101234, 10 cifre
+        "081 5601111",  # fisso Napoli, 10 cifre
+        "0110010101",  # fisso Torino, 10 cifre
+        "3331234567",  # cellulare
+        "055 27681",  # fisso Firenze corto ma valido, 8 cifre
+        "+39 06 69820000",  # prefisso internazionale +39
+        "0039 011 1234567",  # prefisso 0039
+        "39 3331234567",  # 39 + cellulare (12 cifre)
+    ],
+)
+def test_accetta_numeri_italiani_componibili(grezzo):
+    """Fisso (0 + area 1-9) o cellulare (3), 8-11 cifre nazionali, con o senza
+    prefisso internazionale italiano."""
+    assert _tel_valido(grezzo) is True
+
+
+@pytest.mark.parametrize(
+    "grezzo",
+    [
+        "055055",  # prefisso Firenze ripetuto: 6 cifre, garbage da scraping
+        "00975370487",  # 11 cifre ma inizia con 00: non è area italiana valida
+        "123456",  # troppo corto e non inizia per 0/3
+        "1234567890",  # 10 cifre ma inizia per 1: né fisso né cellulare
+        "000000000",  # zeri: 0 seguito da 0 -> area 00 non esiste
+        "",  # vuoto
+        "abc",  # nessuna cifra
+        "20123456789",  # 11 cifre ma inizia per 2
+    ],
+)
+def test_scarta_numeri_non_componibili(grezzo):
+    """Chi non rispetta lo schema è scartato: la riga telefono resta assente."""
+    assert _tel_valido(grezzo) is False

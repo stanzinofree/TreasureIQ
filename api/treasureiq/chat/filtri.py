@@ -97,9 +97,12 @@ def _modello_spacy():
         return None
 
 
-def _lemmi_prima_di(testo: str, inizio: int, nlp) -> list[str]:
-    """Ultimi lemmi (spaCy) prima di `inizio`, minuscoli."""
-    doc = nlp(testo[:inizio])
+def _lemmi_finali(frammento: str, nlp) -> list[str]:
+    """Ultimi lemmi (spaCy) di `frammento`, minuscoli. Il chiamante passa
+    GIA' la sola ultima clausola: la finestra non deve scavalcare la
+    virgola (altrimenti "non sono disoccupato, sono pensionato" negherebbe
+    "pensionato" — vedi `_negato_prima_di`)."""
+    doc = nlp(frammento)
     return [t.lemma_.lower() for t in doc][-_FINESTRA_NEGAZIONE:]
 
 
@@ -121,7 +124,7 @@ def _negato_prima_di(testo: str, inizio: int) -> bool:
     ultima_clausola = re.split(r"[,;.:!?]", prima)[-1]
     nlp = _modello_spacy()
     if nlp is not None:
-        parole = _lemmi_prima_di(testo, inizio, nlp)
+        parole = _lemmi_finali(ultima_clausola, nlp)
     else:
         parole = re.findall(r"\w+", ultima_clausola)[-_FINESTRA_NEGAZIONE:]
     return any(parola in _CUE_NEGAZIONE for parola in parole)

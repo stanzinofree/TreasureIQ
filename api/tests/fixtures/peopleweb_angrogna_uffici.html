@@ -1,0 +1,1384 @@
+
+
+
+<!DOCTYPE html>
+
+<html xml:lang="it-IT" xmlns="http://www.w3.org/1999/xhtml" lang="it-IT">
+<head id="ctl00_Head"><meta http-equiv="X-UA-Compatible" content="IE=edge" /><title>
+	Comune di Angrogna - Uffici
+</title><meta content="text/html; charset=UTF-8" http-equiv="Content-Type" /><meta charset="UTF-8" /><meta content="text/javascript" http-equiv="Content-Script-Type" /><meta content="text/css" http-equiv="Content-Style-Type" /><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=6.0" /><meta name="theme-color" content="#317EFB" /><link rel="stylesheet" href="assets\bootstrap-italia\dist\css/bootstrap-italia-comuni.min.css" /><link rel="stylesheet" href="CSS/style.css" /><link rel="stylesheet" href="Css\fontawesome-free-5.15.4-web\css\all.min.css" />
+
+    <script type="text/javascript" src="JS/jquery.min.js"></script>
+
+    <!-- window.__PUBLIC_PATH__ definisce il punto in cui c'è la cartella font di bootstrap italia -->
+    <script>window.__PUBLIC_PATH__ = 'assets/bootstrap-italia/dist/fonts'</script>
+
+    <!-- Bootstrap core JS -->
+    <script type="text/javascript" async src="assets/bootstrap-italia/dist/js/bootstrap-italia.bundle.min.js"></script>
+    <script>
+        function loadBootstrapOrRetry() {
+            if (typeof bootstrap !== "undefined") {
+                // Bootstrap è disponibile, esegui il tuo codice qui
+                bootstrap.loadFonts("assets/bootstrap-italia/dist/fonts");
+            } else {
+                // Bootstrap non è ancora disponibile, ritenta dopo 50 millisecondi
+                setTimeout(loadBootstrapOrRetry, 50);              
+            }
+        }
+
+        // Inizia il ciclo di controllo
+        loadBootstrapOrRetry();
+    </script>
+
+    <script type="text/javascript" src="script/siscomJS.js?version=2.0"></script>
+
+    <style id="StylePlaceholder" type="text/css"></style>
+
+    <link rel="stylesheet" href="App_Themes\css\stili-custom.css?v=1.0" /><link id="ctl00_CSSSkin" href="CSS/SKIN/ngrgn1115/skin.css?v=1" type="text/css" rel="stylesheet" /><link id="ctl00_icoFavicon" rel="icon" type="image/x-icon" class="icoFavicon" /><meta id="MetaDescription" name="DESCRIPTION" content="Sito ufficiale Comune di Angrogna in provincia di Torino in Piemonte. Informazioni sul comune, i servizi, l&#39;amministrazione, la storia." /><meta id="MetaKeywords" name="KEYWORDS" content="Città di Comune di Angrogna, Comune di Comune di Angrogna, Comune di Angrogna, municipio di Comune di Angrogna, uffici del comune di Comune di Angrogna, provincia di Torino, Regione Piemonte." /><meta id="MetaCopyright" name="COPYRIGHT" content="Copyright Comune di Comune di Angrogna" /><meta id="MetaAuthor" name="AUTHOR" content="Comune di Comune di Angrogna" /></head>
+
+<body id="body" class="MenuPushResponsive-push">
+    <form name="aspnetForm" method="post" action="./Uffici" id="aspnetForm" autocomplete="off">
+<div>
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwULLTE0NTk1NzM0MjkPZBYCZg9kFgQCAQ9kFgICDQ8WAh4EaHJlZgUfQ1NTL1NLSU4vbmdyZ24xMTE1L3NraW4uY3NzP3Y9MWQCAw9kFggCAQ9kFgICAQ9kFgQCAg8PFgIeC05hdmlnYXRlVXJsBRMuLi8uLi9hcmVhUmlzZXJ2YXRhZGQCCg8WAh4FVmFsdWUFBDIxMDlkAgUPZBYEAgMPFgIfAgUEMjEwOWQCBQ9kFgJmD2QWBgICD2QWAgICDxYCHwIFBDIxMDlkAgQPZBYEAgIPZBYEZg9kFgYCAQ8PFgIeBFRleHQF4AFUdXR0ZSBsZSBpbmZvcm1hemlvbmkgc3VsbGEgc3RydXR0dXJhIGFtbWluaXN0cmF0aXZhIGRlbCBDb211bmUuIFNjb3ByaSBnbGkgb3JnYW5pIHBvbGl0aWNpLCBnbGkgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgdWZmaWNpIGUgaWwgcGVyc29uYWxlIGUgY29uc3VsdGEgaSBkb2N1bWVudGkgcHViYmxpY2ksIGxlIHN0YXRpc3RpY2hlIGUgaSBiYW5kaSBkaSBnYXJhLmRkAgUPDxYCHwMFEFR1dHRpIGdsaSBVZmZpY2lkZAIHDw8WBB4IQ3NzQ2xhc3MFB3JvdyBnLTQeBF8hU0ICAmRkAgEPZBYCAgcPZBYQAgEPFgIeB29uY2xpY2sFN2phdmFzY3JpcHQ6Y29uZGl2aWRpU29jaWFsKCdmYWNlYm9vaycsJycpO3JldHVybiBmYWxzZTtkAgMPFgIfBgU5amF2YXNjcmlwdDpjb25kaXZpZGlTb2NpYWwoJ3R3aXR0ZXInLCcnLCcnKTtyZXR1cm4gZmFsc2U7ZAIFDxYCHwYFN2phdmFzY3JpcHQ6Y29uZGl2aWRpU29jaWFsKCdsaW5rZWRpbicsJycpO3JldHVybiBmYWxzZTtkAgcPFgIfBgU3amF2YXNjcmlwdDpjb25kaXZpZGlTb2NpYWwoJ3doYXRzYXBwJywnJyk7cmV0dXJuIGZhbHNlO2QCCQ8WAh8GBTpqYXZhc2NyaXB0OmNvbmRpdmlkaVNvY2lhbCgndGVsZWdyYW0nLCcnLCcnKTtyZXR1cm4gZmFsc2U7ZAILDxYCHwYFqgEkKCdoZWFkJykucHJlcGVuZCgnPGJhc2UgaHJlZj0iaHR0cDovL3d3dy5jb211bmUuYW5ncm9nbmEudG8uaXQvIiA+ICcpOyBzYXZlQXMobmV3IEJsb2IoWyQoJ2h0bWwnKS5odG1sKCldLCB7dHlwZTogJ3RleHQvcGxhaW47Y2hhcnNldD11dGYtOCd9KSwgJycrJy5odG1sJyk7cmV0dXJuIGZhbHNlO2QCDQ8WAh8GBW13aW5kb3cubG9jYXRpb24uaHJlZj0nbWFpbHRvOj9zdWJqZWN0PXd3dy5jb211bmUuYW5ncm9nbmEudG8uaXQmYm9keT1odHRwOi8vd3d3LmNvbXVuZS5hbmdyb2duYS50by5pdC9VZmZpY2knZAIPDxYCHwJlZAIIDxYCHwIFBDIxMDlkAgYPFgIfAgUEMjEwOWQCBw9kFgJmD2QWAgICD2QWCAIBD2QWAgIBDw8WAh8DBTRRdWFudG8gc29ubyBjaGlhcmUgbGUgaW5mb3JtYXppb25pIHN1IHF1ZXN0YSBwYWdpbmE/ZGQCCQ8PFgIeCEltYWdlVXJsBbYeZGF0YTppbWFnZS9wbmc7YmFzZTY0LGlWQk9SdzBLR2dvQUFBQU5TVWhFVWdBQUFNZ0FBQUJRQ0FZQUFBQmNiVHF3QUFBQUFYTlNSMElBcnM0YzZRQUFBQVJuUVUxQkFBQ3hqd3Y4WVFVQUFBQUpjRWhaY3dBQURzTUFBQTdEQWNkdnFHUUFBQXJyU1VSQlZIaGU3WjFyYXhWSkdzZnp2WVJoWkdISng1aGgyUmNyQzh0Q1BvQU93dWlpT3pJWUVEbUlpQ3lDc2lvSXExblp2QkIwUldaOVlZaW9xRkVUdkFUdkVSWEYydjVWK2ttNnE2djZjdEo5MHBmbkR3K2NQbDFkZmFycS8zOHUxU2M1VTBhaFVBU2hBbEVvY2pCNGdheXNySmh2Mzc3RlIybmN1blVyZnFVQVE1eVB3UXZrenAwNzV2UG56L0dSUXBIRzRBWHk0TUVEczdhMkZoOHBGR2tNWGlDUEh6ODJiOTY4aVk4VWlqUUdMNUNuVDUrYTFkWFYrRWloU0dNUUFza3JMbCs4ZUdHZVBYc1dIelVMTGZxN2g5NExCRkxtRWZQVnExZG1lWGs1UGxJTUFWVWNWVW9nNDNpNHJudEZDblFLZGNYMm9PMzhxVFdDVEdxd2RkN24wNmRQNXU3ZHUvR1JRcEhHNEl2MHIxKy9tc1hGeGZoSW9VaGo4QUlCQ3dzTHdhZnBkYVByS1dsYjBkUzhxa0FpMVBFMFhZbmZUNmhBSXVqVGRFVUlLcEFJK2pSZEVZSUtKQUxwa1Q1TmJ4ZmFrcktxUUNKTThtbTZvamswSWFwU0F1bDdBYXBQMC91Rk92azZ1QWppbXp4OW1xNElRVk9zQ1BvMFhSR0NDaVNDUGsxWGhLQUNpY0hEd3Fwb29qYnJlNzNYSkpxWU94V0lvakgwUWV5OUZZaDY0bUxvSEJWREk0aENrUU1WU0kraEVXSVQ0ODVGdndTeU5ETFRVMU5tU214bVBqN2h3N3laU2JhTkxmY1N4ZURRR1lHVThnQ2xCYkprUnRPSmRyRk5qNWJpODhBdm9LQVZLR3QrSnRsKzJxUnV0VVUwMmZmUTBiTVV5eUgxOUNpU1FoWnBRcTFiV2h5Z29rQml5L2F6anFYUmRLcGRuWkVxSkJEM25rVWl0bkNkek5STU5CUDJoT05VQ29RNFAxTys3VFlqei9rT1RpQVowbUJlNHZpalRCbnpkZGVrUU1KOXV5SXZRZFFVc1NQYjZNd3pId0VIWk9IMFUrZDRKNG1lQ2NSZFJQRitNZHpGeDRJclY5RFhCcGFzQjByMnlYR21yWFB2VUtRWkJ5R0I4UDJ5WXo5c3ZvL3QySFBKZnI2UXVlMS9PQlkraHdYN3U3VEg3RWkwUy9aVGwwM2krM1BERVVnbWRZZ3N6d05HcUpMYnUybGJSbmNOQ2lTMzcyREs1SU03ZitreCsxSlR6T3RqblB2V090NEpvbWNDQ1pIYVYwL2tFV1VkVlFUaWtqUkRtdEliQ0dPZ1FIeUY0aFc0bjlGeElONzAxSnB2THROenJnSnBDYktrOXVUT0pjUUJ5dFFOaEhxUWJ1c1JVNU1DS2VyYkVWQXdjaFlJTFN5UXlETGpjWnhTbmVPZElIb25rTnhGVEZxSkJTc2pFSkJKUGJ3RUxONUFHQnVGNHN0UG5RU0ZrY1lWbW1QcDlzNDlTOHgzR3pGY2dVUldHUFlMQ09HM1VIUnFVQ0FsK3M3TVM2R0lQT053NW1ObU5ESy9UeHhQVGUweXAxZFdiUEc4dlB6ZmRIKzFqcmRaU0ZZQWVpZVFQRkt6b0NsUFc3R3VLR2NoZ1pRZzROallGQWlMV3lxQ3VmZlBpVUlmUDM2MGYzVzUrcjlmek01RUczYW01bjdhc1hrTjl1Znp0aTMvWnl3VmtUb2trQ1E2TFpDazBqY1FJTFdzZDhhVDVpMmNTNW9LbG8xTzFRVGlIVnNRNWZwMnh5NmZrVDhZVy92WFgxTG52dnY1aXJsOSs3YjlIUGZ1M2JOUjRlbU5neW1CckYvdjNudHpydE1wVzUwT29WN2t6WFgvSW9pSDFHbXlaaGMwbUI4WDV2WUplTzdyTnM5dUlNUW50b3hpZ1h6NDhNR3NMYzZtQ0Q3MTNjL21Va1FPL3ByeUgzOU12RC8xT3pPN3VHYStmUGtTWHkxSVI2R05lYzJNZmYzK2FVRzJWeUI1NkwxQXZONmhCSm5YVWJGdWNLT1gwMmx6QWpIbTMzOU45cjNUL08zcVkrdjFJVDl6Y1AvK2ZYdDhkbGV5bll6YkVWaHduTTU4Sk1ibnEzSFM3OVU3M2ttaGZ3SXBTV3AzeDhidjRTb0t4RzN2OU9tU3lDOUtINXgrZDUyMVB4MEg0ZmxuRXdqZ3hCOFM1eU9CL0hycmphMEZTSjlTOEVWRjMzdGVPRUp5MnJsek9qMmRMNUM4MUtZdEdLeEFzbVQydGMwbmZBYUJWRU9JVUNRUS9ydUtMWVpYVjgzejU4L05vMGVQckFnV0Z1Yk1uaDNKZm5lWnMxRWIybklOS0IrZDNIUXNhanR5ZHFlQ2d5eUtOSjQ1alkwNUNQZmJYdlJRSU1YNStBWThCWDErdlpJbkVMZHRaQTZCdnYwbmZiL3ZEMXkzQXVBZlJrQWdvZ0hIUkFjRTh2YnRXeXNDZnByQkZWZjZjMVlVc2pOdTdsMzIycFFRZmM0blorZFBCZElLVkNHMXMrRFdrdDdYUS9vS3R2T1gzeXpoSVNDMmNPeEhiN3Q4bTdIWFpxTlRqZ1dqcGlEczZZdXVUYytYZjI2emM3cHVhVkYzQXowVWlMdEFSY1doanl5YkN4OWE3RUw3L3UvbXR5Z0tRRzUya0N5cWtIekRFcDgveHp0dld0RjQxNUVwcW1NckluSDZ1cER6OFF0UUJkSVQyQzNSS0xVaHpmbm5uN0lMWFdpaFhHS3JBZ0c1ZlpRVHh6cDhKQzYrUGkyUW5QWStNWGN3eHhxa1FIaktpd0Jldm55WktvYmRMVkhPOFovZmFjdlQ1TDRoR3gzejAxR0xGUEh6QlpYcHYyR0IyRlMwWnZSU0lCUzFrUHJkdTNlVzVPNldLRVV4eHlzcks2bGlPTE1scWhnOE9pc1FkMHQwYVdscG95RG1Semw1elh1Y293MXRaVXRVMFY4a28wZ2RFYVcxQXJIZkQ0cEl6VStqUVhKK3Z3UFNoN1pFaVJhMFY2UlJCMG1HakcwVmlIeExsRHdma2tONDhuOFdsWHFBWTM0L2tIUDh5QTF0cVI5MDBadkhWdWU0TDJ2VXFFRDRzaHVraHR5UUhMSkRlaW1HNVZ1aS9Qd1o1Mm03c1NXcTZEUUdLUkRmb0NHMUZNTVFIY0pEZk5yeWRXbU9TWTg0VDdwRWV5Mkdod3ZaUXBmYVVaeG1XMzhDcjFBZ29TMVJDbUZFd0dzcGh2dThKUXI2NGhXYmdtUU03QW9tSFNiRzNHR1NRa3Z0S0U0VG5yVVJRWUhJb0VKYm9teWxLaVlMU1BYdzRVTXpQejl2N2RTcFUrYjQ4ZVBtMEtGRFp2ZnUzWlhzOE9IRDlscXhDeGN1MkQ1djNyeHA3L0g2OWV2NHJwc0llWC9aT0pHTUFTZWFkSmhZVjdHdFJib2lpL2Z2MzF1Q1hybHl4WklXOGg0NGNNQ1Mrc2lSSS9aWUJDSi84ZWNqY3hFZ09mY1J1Mzc5dXBtYm16T25UNTgyUjQ4ZU5RY1BIclQzM0w5L3Y1bWRuVFVuVHB3dzU4K2ZOMWV2WHJWUm9BdmV2dzZvUUxZSnBDTVE4OXExYStiY3VYT1crSHYzN3JWaTRQWGx5NWZOalJzM2JCdEVzMVZVOGY0Y2kvZW5MWitCejhKbkVzSHUyN2ZQdnI1NDhhSTlSM1RySTFRZ0V3QWVIZ0xpOVUrZVBHbFRJc1FnQkpPMEp2c25ydVZRTnZmbnVLN2NuenBUQkU2a0k3ckptQkFTNDVYSXh2MjdpdElDNmZJZ0p3bThQYnQ0SWdZOExZS2dYdUE5em8yVEV2a2dBbWhMN2k5UmtmU1E4VEp1N015Wk0xWklYWXd5R2tFcXdIVVM0a1VoUG9RZzljQVFob2locnp0NlpZRXpZTjZJbE1rb0kvTXpidFNjRkxZa2tGQlVhVU8wYWVJenVONVI4bkFXR3k5ZVI2M1FKWWlEa0hsaEhuQU96QWwxbFE4U1phUXRna0U0cEdsRUdjNjFTVFFhUVFKSWVyN1JhR1IzZEh6NWRWOGhSQll5WSs2MnNqZ0ltUmZhRUJXNHBzcjhrSHBSNkRQWDlDVlJwZzFRZ2NSZ1VTVTZrQ1lsYytjblQ1N0VyZm9EZWFZQ01TRzI3S1R4ZkFUeUMwa3hFUWlPb1NyNXU0NUJDb1RVZ01VT1JZZXVwMG9RR0NJVEFTRzJiTTlpRUoveHlqTVY5d0VoMjhDZ0RXbHlHOUE1Z1l5emNCQ2U2eUFESHBMVWdFalJ4ZWpBV0NDeTdKUmhrdmN6THNoUDlPT1lDTWg1SWlQWFlHMHZpdHVHWGtZUVBDZ2VrYlFCc3BBeVFSYlNDZkdRYlVTeTZCWHl1M2svWStGWWRzb3d5ZnVIdm1QV0JIb2hFSWtRSWdpTTE0aWtUZm15a0Y5MmZCQXRaSmU4UDFuMEN2bmR2RjlUbjhtaWt3S1JHa0pTSm9rUTJ5a0lJVDlwRzhTV29wZGNIL0pqSEVOdzJmSGhOZGUwT2FyNU1DU1JOaUtRSmlhUVdnRlNVVlJMRFRHSmxDbTUzVmxFZm96Q256WlM5UGIxTzBwRFFXc2pDTVJFYUpBUlFTQU1pRmRuVVkyNElIR3k0SldjMzdmZDJRWHlEOG03VHdLdEV3Z0xUTHFFS0NSdHFscDh5aDQvYVpnUVgvSjkyZGJGRUFIdkpRdGV5ZmtSajVKTjBScUJrTDZJS0NDbXV4MHBwTWNrMVVudTc0dkh4MlNQbjJnZ3hLZFBydTNqUTc4eVVMR1BoMVlJQk5JbWlZMVJlQXZoM1hPUzZpVDM5N3RXNkNxNmdkWkVFSG42S3phMEwvNGxvZDYrUFdodGthN1lmcWhRVlNDS0JGUVFXYWhBRklvY2RGb2dYZko0NnAyN0NZMGdDaTlVME1DWS93T1piY21RcjFWRkpRQUFBQUJKUlU1RXJrSmdnZz09ZGQCFQ8WAh8CBQQyMTA5ZAIfDxYCHwIFBktCTEpWTmQCCQ8WAh8CBQQyMTA5ZBgBBThjdGwwMCRDb250ZW50UGxhY2VIb2xkZXIxJGN0bDAwJFNpc2NvbVVmZmljaTEkTXVsdGlWaWV3MQ8PZGZkfarXpDx/f/jdv9gmlNq55soeWzSUZO3QW4Yfa72jsxE=" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['aspnetForm'];
+if (!theForm) {
+    theForm = document.aspnetForm;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script type="text/javascript"> $(document).ready(function(){ $(".btn-responsive-home").click(function() { window.location.href = "../../Home"; }); $(".btn-responsive-search").click(function() { window.location.href = "../../Ricerca"; }); }); </script><script type="text/javascript"> function espandiVociUffici(ID) { var nomeSottovoce = 'SottovoceUfficio' + ID; var nomeLabel = 'LabelUfficio' + ID; $("[title='" + nomeSottovoce + "']").toggleClass("show"); if ($("[title='" + nomeLabel + "'").text() == '+') { $("[title='" + nomeLabel + "'").text('-'); } else { $("[title='" + nomeLabel + "'").text('+'); }; }</script>
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="4197958F" />
+</div>
+
+        <div id="ctl00_PanelMasterTop">
+	
+        
+
+
+<script type="text/javascript"> function espandiVociMenu(ID) { var nomeSottovoce = 'SottovoceCategoria' + ID; var nomeLabel = 'LabelCategoria' + ID; $("[title='" + nomeSottovoce + "']").toggleClass("show"); if ($("[title='" + nomeLabel + "'").text() == '+') { $("[title='" + nomeLabel + "'").text('-'); $("[title='" + nomeLabel + "'").addClass("expanded"); } else { $("[title='" + nomeLabel + "'").text('+'); $("[title='" + nomeLabel + "'").removeClass("expanded"); }; }</script>
+<script type="text/javascript">
+    //<![CDATA[
+    var __cultureInfo = { "name": "it-IT", "numberFormat": { "CurrencyDecimalDigits": 2, "CurrencyDecimalSeparator": ",", "IsReadOnly": false, "CurrencyGroupSizes": [3], "NumberGroupSizes": [3], "PercentGroupSizes": [3], "CurrencyGroupSeparator": ".", "CurrencySymbol": "€", "NaNSymbol": "Non un numero", "CurrencyNegativePattern": 9, "NumberNegativePattern": 1, "PercentPositivePattern": 1, "PercentNegativePattern": 1, "NegativeInfinitySymbol": "-Infinito", "NegativeSign": "-", "NumberDecimalDigits": 2, "NumberDecimalSeparator": ",", "NumberGroupSeparator": ".", "CurrencyPositivePattern": 2, "PositiveInfinitySymbol": "+Infinito", "PositiveSign": "+", "PercentDecimalDigits": 2, "PercentDecimalSeparator": ",", "PercentGroupSeparator": ".", "PercentSymbol": "%", "PerMilleSymbol": "‰", "NativeDigits": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"], "DigitSubstitution": 1 }, "dateTimeFormat": { "AMDesignator": "", "Calendar": { "MinSupportedDateTime": "\/Date(-62135596800000)\/", "MaxSupportedDateTime": "\/Date(253402297199999)\/", "AlgorithmType": 1, "CalendarType": 1, "Eras": [1], "TwoDigitYearMax": 2029, "IsReadOnly": false }, "DateSeparator": "/", "FirstDayOfWeek": 1, "CalendarWeekRule": 2, "FullDateTimePattern": "dddd d MMMM yyyy HH:mm:ss", "LongDatePattern": "dddd d MMMM yyyy", "LongTimePattern": "HH:mm:ss", "MonthDayPattern": "d MMMM", "PMDesignator": "", "RFC1123Pattern": "ddd, dd MMM yyyy HH\u0027:\u0027mm\u0027:\u0027ss \u0027GMT\u0027", "ShortDatePattern": "dd/MM/yyyy", "ShortTimePattern": "HH:mm", "SortableDateTimePattern": "yyyy\u0027-\u0027MM\u0027-\u0027dd\u0027T\u0027HH\u0027:\u0027mm\u0027:\u0027ss", "TimeSeparator": ":", "UniversalSortableDateTimePattern": "yyyy\u0027-\u0027MM\u0027-\u0027dd HH\u0027:\u0027mm\u0027:\u0027ss\u0027Z\u0027", "YearMonthPattern": "MMMM yyyy", "AbbreviatedDayNames": ["dom", "lun", "mar", "mer", "gio", "ven", "sab"], "ShortestDayNames": ["do", "lu", "ma", "me", "gi", "ve", "sa"], "DayNames": ["domenica", "lunedì", "martedì", "mercoledì", "giovedì", "venerdì", "sabato"], "AbbreviatedMonthNames": ["gen", "feb", "mar", "apr", "mag", "giu", "lug", "ago", "set", "ott", "nov", "dic", ""], "MonthNames": ["gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno", "luglio", "agosto", "settembre", "ottobre", "novembre", "dicembre", ""], "IsReadOnly": false, "NativeCalendarName": "calendario gregoriano", "AbbreviatedMonthGenitiveNames": ["gen", "feb", "mar", "apr", "mag", "giu", "lug", "ago", "set", "ott", "nov", "dic", ""], "MonthGenitiveNames": ["gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno", "luglio", "agosto", "settembre", "ottobre", "novembre", "dicembre", ""] }, "eras": [1, "d.C.", null, 0] };//]]>
+</script>
+
+<div id="alto" style="display: none"><a href="#contenuto" tabindex="0" title="Link diretto al contenuto della pagina.">Vai al contenuto della pagina.</a></div>
+<!--  Fine link per saltare il menu e andare subito al contenuto%-->
+<header class="it-header-wrapper" data-bs-target="#header-nav-wrapper">
+    <div class="it-header-slim-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="it-header-slim-wrapper-content">
+                        <div class="d-lg-block navbar-brand">
+                            <a href="https://www.regione.Piemonte.it" title="Link al sito della Regione Piemonte" class="" target="_blank">Regione Piemonte</a>
+                        </div>
+                        <!-- link superiori di servizio ad esempio ad accessibilita', mappa, etc-->
+
+                        <div class="it-header-slim-right-zone" role="navigation">
+                           
+                            <a id="ctl00_ctl12_btnAccedi" class="btn btn-primary btn-icon btn-full" data-element="personal-area-login" aria-label="Accedere alla propria area personale" href="areaRiservata">
+                                <span class="rounded-icon" aria-hidden="true">
+                                    <svg class="icon icon-primary">
+                                        <use xlink:href="assets/bootstrap-italia/dist/svg/sprites.svg#it-user"></use>
+                                    </svg>
+                                </span>
+                                <span class="d-none d-lg-block">Accedi all'area personale</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="it-nav-wrapper">
+        <div class="it-header-center-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="it-header-center-content-wrapper">
+
+                            <div class="it-brand-wrapper">
+
+                                <a href="Home" title="Home Page del sito del Comune di Angrogna" class="it-brand-title">
+                                    <img src="portals/2109/Skins/skinXhtml/Images/stemma.webp" class="icon widthAuto" alt="Stemma dell'Ente" />
+                                    <div class="it-brand-text">
+                                        <div class="it-brand-title">Comune di Angrogna</div>
+                                    </div>
+                                </a>
+
+                            </div>
+
+                            <div id="ctl00_ctl12_pnlSiscomRicercaHomeAGID">
+		<div id="ctl00_ctl12_pnlSiscomRicercaHomeAGID">
+	<div id="ctl00_ctl12_ctl02_PanelContenitore" class="it-right-zone">
+		
+    <div id="ctl00_ctl12_ctl02_PanelSocial" class="it-socials d-none d-lg-flex">
+			
+        <div id="ctl00_ctl12_ctl02_PanelTestoSocial" class="Seguici">
+				
+            <span id="ctl00_ctl12_ctl02_TestoSocial" style="margin-right:10px">Seguici su</span>
+        
+			</div>
+        
+        
+        
+        
+        
+        
+        
+        
+        <div id="ctl00_ctl12_ctl02_panelRss" style="display: inline-block;">
+				
+            <a id="ctl00_ctl12_ctl02_LinkRss" title="Link alla pagina RSS - il link si apre in una nuova finestra" href="Rss" target="_blank"><svg class='icon icon-sm icon-white align-top'><use xlink:href='assets/bootstrap-italia/dist/svg/sprites.svg#it-rss'></use></svg></a>
+        
+			</div>
+        
+    
+		</div>
+    <div class="it-search-wrapper">
+        <span class="d-none d-md-block">Cerca</span>
+        <a id="ctl00_ctl12_ctl02_linkRicerca" aria-label="Cerca nel sito" href="Ricerca">
+            <i class="search-link rounded-icon" type="button" data-bs-toggle="modal" data-bs-target="#search-modal" aria-label="Cerca nel sito">
+                <svg class="icon">
+                    <use href="assets/bootstrap-italia/dist/svg/sprites.svg#it-search"></use>
+                </svg>
+            </i>           
+        </a>
+    </div>
+
+	</div>
+
+
+
+<script type="text/javascript">
+    // Scorro in basso fino al ContenitoreFooter
+    function bottomFunction() {
+        $('html,body').animate({ scrollTop: $(".ContenitoreFooter").offset().top }, 'slow');
+    }
+</script>
+
+</div>
+	</div>
+
+                        </div>
+                    </div>
+
+                    <div id="RigaMenuPush" class="MenuPushResponsive MenuPushResponsive-vertical MenuPushResponsive-left">
+                        <div>
+                            <div id="_RigaElencoMenuPush">
+
+                                <div class="contenitoreNoBorderNoTitolo">
+
+                                    <div class="contenutocontainer">
+                                        <div>
+                            <div id="ctl00_ctl12_pnlSiscomMenuResponsiveAGID">
+		<div id="ctl00_ctl12_pnlSiscomMenuResponsiveAGID">
+	
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        //When btn is clicked
+        $(".btn-menu-responsive-chiudi").click(function () {
+            $("#menudiservizio").toggleClass("show");
+            $(".MenuPushElencoVoci").toggleClass("MenuPushElencoVociAttivo");
+            $(".MenuPushOverlay").toggleClass("MenuPushOverlayAttivo");
+            $(this).toggleClass("active");
+            $(document.body).toggleClass("MenuPushResponsive-push-toright");
+            $("#RigaMenuPush").toggleClass("MenuPushResponsive-open");
+        });
+    });
+</script>
+
+<div class="navbar-collapsable" style="padding-bottom: 24px;">
+    <div class="btn-menu-responsive-chiudi" title="Chiudi">
+        <span class="d-none text-black">Nascondi la navigazione</span>
+        <svg class="icon">
+            <use href="assets/bootstrap-italia/dist/svg/sprites.svg#it-close-big"></use>
+        </svg>
+    </div>
+    <div class="menu-wrapper" title="Home">
+        <a id="ctl00_ctl12_ctl00_LinkHome" class="logo-hamburger"><img id="ctl00_ctl12_ctl00_imgLogoEnte" class="icon" alt="Stemma dell&#39;Ente" src="portals/2109/Skins/skinXhtml/Images/stemma.webp" style="border-width:0px;" />
+            <div class="it-brand-text">
+                <span id="ctl00_ctl12_ctl00_lblNomeEnte" class="it-brand-title">Comune di Angrogna</span>
+            </div>
+        </a>
+    </div>
+    <div id="ctl00_ctl12_ctl00_PanelContenitore" class="MenuPushElencoVoci" style="width: 100%!important; position: relative;">
+		
+    <ul class="navbar-nav"><li class="nav-item"><a title="Link alla pagina Amministrazione" class="nav-link" href="Amministrazionedettagli">Amministrazione</a></li><li class="nav-item"><a title="Link alla pagina Aree Tematiche" class="nav-link" href="Notizie">Novit&#224;</a></li><li class="nav-item"><a title="Link alla pagina Servizi" class="nav-link" href="Servizi">Servizi</a></li><li class="nav-item"><a title="Link alla pagina Vivere Angrogna" class="nav-link" href="Guidadettagli">Vivere Angrogna</a></li></ul><div class="clear">
+
+		</div><ul class='navbar-nav navbar-secondary mt-20'><li class='nav-item'><a class="nav-link" href="Dettaglioargomenti?IDCategoria=28061">Elezioni</a></li><li class='nav-item'><a class="nav-link" href="Dettaglioargomenti?IDCategoria=28100">Trasparenza amministrativa</a></li><li class='nav-item'><a class="nav-link" href="Dettaglioargomenti?IDCategoria=28103">Urbanizzazione</a></li><li class='nav-item'><a class="nav-link" data-element="all-topics" href="Argomenti"><span class='fw-bold'>Tutti gli argomenti...</span></a></li></ul>
+	</div>
+    
+</div>
+
+
+
+<div id="ctl00_ctl12_ctl00_pnlOverlay" class="MenuPushOverlay">
+
+	</div>
+
+
+
+
+
+
+
+</div>
+	</div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="it-header-navbar-wrapper" class="it-header-navbar-wrapper">
+            
+            <div class="container">
+                <div id="row">
+                    <div class="col-12">
+
+                        <nav class="navbar navbar-expand-lg has-megamenu" aria-label="Navigazione principale">
+                            <div class="custom-navbar-toggler btn-responsive-menu">
+
+                                <svg class="icon">
+                                    <use href="images/svg/sprites.svg#it-burger"></use>
+                                </svg>
+
+                                <div class="btn-responsive-home" title="Home"></div>
+                                <div class="btn-responsive-search" title="Ricerca"></div>
+                            </div>
+
+                            <div id="ctl00_ctl12_pnlSiscomMenuTematicoAGID">
+		<div id="ctl00_ctl12_pnlSiscomMenuTematicoAGID">
+	
+
+
+
+<div class="navbar-collapsable" id="nav4" style="display: none;" aria-hidden="true">
+    <div class="overlay fade" style="display: none;"></div>
+    <div class="close-div">
+        <button class="btn close-menu" type="button" data-focus-mouse="false">
+            <span class="d-none text-black">Nascondi la navigazione</span>
+            <svg class="icon">
+                <use href="images/svg/sprites.svg#it-close-big"></use>
+            </svg>
+        </button>
+    </div>
+
+    <div id="ctl00_ctl12_ctl01_PanelContenitore" class="menu-wrapper">
+		
+        <a href="#" aria-label="home Nome del Comune" class="logo-hamburger">
+            <svg class="icon" aria-hidden="true">
+                <use href="images/svg/sprites.svg#it-pa"></use>
+            </svg>
+            <div class="it-brand-text">
+                <div class="it-brand-title">Nome del Comune</div>
+            </div>
+        </a>
+
+    <nav aria-label="Principale"><ul class="navbar-nav" data-element="main-navigation"><li class="nav-item"><a title="Link alla pagina Amministrazione" class="nav-link" data-element="management" href="Amministrazionedettagli">Amministrazione</a></li><li class="nav-item"><a title="Link alla pagina Novit&#224;" class="nav-link" data-element="news" href="Notizie">Novit&#224;</a></li><li class="nav-item"><a title="Link alla pagina Servizi" class="nav-link" data-element="all-services" href="Servizi">Servizi</a></li><li class="nav-item"><a title="Link alla pagina Vivere Angrogna" class="nav-link" data-element="live" href="Guidadettagli">Vivere Angrogna</a></li></nav></ul><div class="clear">
+
+		</div><nav aria-label="Secondaria"><ul class='navbar-nav navbar-secondary'><li class='nav-item'><a class="nav-link" href="Dettaglioargomenti?IDCategoria=28061">Elezioni</a></li><li class='nav-item'><a class="nav-link" href="Dettaglioargomenti?IDCategoria=28100">Trasparenza amministrativa</a></li><li class='nav-item'><a class="nav-link" href="Dettaglioargomenti?IDCategoria=28103">Urbanizzazione</a></li><li class='nav-item'><a class="nav-link" data-element="all-topics" href="Argomenti"><span class='fw-bold'>Tutti gli argomenti...</span></a></li></nav></ul>
+	</div>
+</div>
+
+
+
+
+</div>
+	</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</header>
+
+
+
+<input type="hidden" name="ctl00$ctl12$CreaStaticPage" id="ctl00_ctl12_CreaStaticPage" value="False" />
+</div>
+
+        
+
+        
+    
+    
+    <div id="ctl00_ContentPlaceHolder1_PanelContent">
+	
+
+<div class="container" id="main-container">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-10">
+            <div class="cmp-breadcrumbs" role="navigation">
+                <nav class="breadcrumb-container">
+                    <div id="ctl00_ContentPlaceHolder1_ctl00_TiTroviIn1_ContenitoreTiTroviIn" class="breadcrumb-container">
+		<div class="breadcrumb-container">
+			<ol class='breadcrumb p-0' data-element='breadcrumb'><li class='breadcrumb-item'><a href="Home">Home</a><span class='separator'>/</span></li><li class='breadcrumb-item'><a href="Amministrazionedettagli">Amministrazione</a><span class='separator'>/</span></li><li class='breadcrumb-item'><span>Uffici</span></li></ol>
+		</div>
+	</div>
+
+
+
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+        <div class="container">
+            <div class="row justify-content-center row-shadow">
+                <div class="col-12 col-lg-10">
+                    <div class="cmp-hero">
+                        <section class="it-hero-wrapper bg-white align-items-start">
+                            <div class="it-hero-text-wrapper pt-0 ps-0 pb-4 pb-lg-60">
+                                <h1 class="text-black hero-title" data-element="page-name">Uffici</h1>
+                                <div class="hero-text">
+                                    <span id="ctl00_ContentPlaceHolder1_ctl00_SiscomUffici1_lblInfo" class="text-black">Tutte le informazioni sulla struttura amministrativa del Comune. Scopri gli organi politici, gli                                        uffici e il personale e consulta i documenti pubblici, le statistiche e i bandi di gara.</span>
+                                </div>
+                                <div id="ctl00_ContentPlaceHolder1_ctl00_SiscomUffici1_pnlOrari" class="row">
+		<div class="col">
+			<div>
+				<a class="btn btn-outline-primary" href="Orario" style="display:inline-block;width:300px;">Orario di apertura degli Uffici</a>
+			</div>
+		</div><div class="col">
+			<div class="SiscomFloatLeftLeft">
+
+			</div><div>
+				<a class="btn btn-outline-primary" href="Portals/2109/SiscomArchivio/Organigramma/PRGC-2021-00061-A3.pdf" target="_blank" style="display:inline-block;width:300px;">Organigramma</a>
+			</div>
+		</div>
+	</div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container py-5">
+            <h2 class="title-xxlarge mb-4">
+                <span id="ctl00_ContentPlaceHolder1_ctl00_SiscomUffici1_LabelUff">Tutti gli Uffici</span></h2>
+            <div class="row g-4">
+                <div id="ctl00_ContentPlaceHolder1_ctl00_SiscomUffici1_Panel1" class="row g-4" style="width:100%;">
+		<div class="col-12 col-md-6 col-lg-4  mb-10 DINAMICOROUTINDELMODULO">
+			<div class="card-wrapper border border-light rounded shadow-sm cmp-list-card-img cmp-list-card-img-hr">
+				<div class="card no-after rounded">
+					<div class="row g-2 g-md-0 flex-md-column">
+						<div class="col-12 order-1 order-md-2">
+							<div class="card-body">
+								<a class="text-decoration-none d-block" href="Uffici?IDUfficio=27949"><h3 class='card-title t-primary title-large'>Polizia Locale</h3></a><span class="text-paragraph-card u-grey-light m-0">polizia locale , polizia amministrativa, commercio<br /><br /></span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><div class="col-12 col-md-6 col-lg-4  mb-10 DINAMICOROUTINDELMODULO">
+			<div class="card-wrapper border border-light rounded shadow-sm cmp-list-card-img cmp-list-card-img-hr">
+				<div class="card no-after rounded">
+					<div class="row g-2 g-md-0 flex-md-column">
+						<div class="col-12 order-1 order-md-2">
+							<div class="card-body">
+								<a class="text-decoration-none d-block" href="Uffici?IDUfficio=27950"><h3 class='card-title t-primary title-large'>Sportello Unico per le Attività Produttive</h3></a><span class="text-paragraph-card u-grey-light m-0">Informazioni, contatti e orari di apertura al pubblico. Presso Unione Montana del Pinerolese</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><div class="col-12 col-md-6 col-lg-4  mb-10 DINAMICOROUTINDELMODULO">
+			<div class="card-wrapper border border-light rounded shadow-sm cmp-list-card-img cmp-list-card-img-hr">
+				<div class="card no-after rounded">
+					<div class="row g-2 g-md-0 flex-md-column">
+						<div class="col-12 order-1 order-md-2">
+							<div class="card-body">
+								<a class="text-decoration-none d-block" href="Uffici?IDUfficio=27945"><h3 class='card-title t-primary title-large'>Ufficio Anagrafe, Elettorale e Stato Civile</h3></a><span class="text-paragraph-card u-grey-light m-0">Informazioni, contatti e orari di apertura al pubblico</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><div class="col-12 col-md-6 col-lg-4  mb-10 DINAMICOROUTINDELMODULO">
+			<div class="card-wrapper border border-light rounded shadow-sm cmp-list-card-img cmp-list-card-img-hr">
+				<div class="card no-after rounded">
+					<div class="row g-2 g-md-0 flex-md-column">
+						<div class="col-12 order-1 order-md-2">
+							<div class="card-body">
+								<a class="text-decoration-none d-block" href="Uffici?IDUfficio=27946"><h3 class='card-title t-primary title-large'>Ufficio Ragioneria</h3></a><span class="text-paragraph-card u-grey-light m-0">Informazioni, contatti e orari di apertura al pubblico</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><div class="col-12 col-md-6 col-lg-4  mb-10 DINAMICOROUTINDELMODULO">
+			<div class="card-wrapper border border-light rounded shadow-sm cmp-list-card-img cmp-list-card-img-hr">
+				<div class="card no-after rounded">
+					<div class="row g-2 g-md-0 flex-md-column">
+						<div class="col-12 order-1 order-md-2">
+							<div class="card-body">
+								<a class="text-decoration-none d-block" href="Uffici?IDUfficio=27944"><h3 class='card-title t-primary title-large'>Ufficio relazioni con il pubblico</h3></a><span class="text-paragraph-card u-grey-light m-0">Informazioni, contatti e orari di apertura al pubblico</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><div class="col-12 col-md-6 col-lg-4  mb-10 DINAMICOROUTINDELMODULO">
+			<div class="card-wrapper border border-light rounded shadow-sm cmp-list-card-img cmp-list-card-img-hr">
+				<div class="card no-after rounded">
+					<div class="row g-2 g-md-0 flex-md-column">
+						<div class="col-12 order-1 order-md-2">
+							<div class="card-body">
+								<a class="text-decoration-none d-block" href="Uffici?IDUfficio=27943"><h3 class='card-title t-primary title-large'>Ufficio Segreteria e Protocollo</h3></a><span class="text-paragraph-card u-grey-light m-0">Informazioni, contatti e orari di apertura al pubblico</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><div class="col-12 col-md-6 col-lg-4  mb-10 DINAMICOROUTINDELMODULO">
+			<div class="card-wrapper border border-light rounded shadow-sm cmp-list-card-img cmp-list-card-img-hr">
+				<div class="card no-after rounded">
+					<div class="row g-2 g-md-0 flex-md-column">
+						<div class="col-12 order-1 order-md-2">
+							<div class="card-body">
+								<a class="text-decoration-none d-block" href="Uffici?IDUfficio=27948"><h3 class='card-title t-primary title-large'>Ufficio Tecnico</h3></a><span class="text-paragraph-card u-grey-light m-0">Informazioni, contatti e orari di apertura al pubblico</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><div class="col-12 col-md-6 col-lg-4  mb-10 DINAMICOROUTINDELMODULO">
+			<div class="card-wrapper border border-light rounded shadow-sm cmp-list-card-img cmp-list-card-img-hr">
+				<div class="card no-after rounded">
+					<div class="row g-2 g-md-0 flex-md-column">
+						<div class="col-12 order-1 order-md-2">
+							<div class="card-body">
+								<a class="text-decoration-none d-block" href="Uffici?IDUfficio=27947"><h3 class='card-title t-primary title-large'>Ufficio Tributi</h3></a><span class="text-paragraph-card u-grey-light m-0">Informazioni, contatti e orari di apertura al pubblico</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+            </div>
+
+            <div id="ctl00_ContentPlaceHolder1_ctl00_SiscomUffici1_Panel5" class="ParIndietro" style="width:100%;">
+		
+                <a href="javascript:history.back()" class="btn btn-sm steppers-btn-prev p-0" title="Indietro">
+                    <svg class="icon icon-primary icon-sm" aria-hidden="true">
+                        <use href="assets/bootstrap-italia/dist/svg/sprites.svg#it-chevron-left"></use></svg>
+                    <span id="ctl00_ContentPlaceHolder1_ctl00_SiscomUffici1_LblIndietro" class="SiscomLinkGrande">Indietro</span>
+                </a>
+            
+	</div>
+
+        </div>
+
+    
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+        <div id="ctl00_PanelMasterBottom">
+	
+
+
+
+<div class="bg-primary">
+    <div class="container">
+        <div class="row d-flex justify-content-center bg-primary">
+            <div class="col-12 col-lg-6">
+                <div class="cmp-rating pt-lg-80 pb-lg-80" id="">
+                    <div class="card shadow card-wrapper" data-element="feedback" id="feedback">
+                        <div id="ctl00_ctl13_SiscomFeedback1_pnlVoti" class="cmp-rating__card-first">
+		
+                            <div class="card-header border-0">
+                                <h2 class="title-medium-2-semi-bold mb-0" data-element="feedback-title">
+                                    <span id="ctl00_ctl13_SiscomFeedback1_lblTitolo">Quanto sono chiare le informazioni su questa pagina?</span></h2>
+                            </div>
+                            <div class="card-body">
+                                <fieldset class="rating">
+                                    <legend class="visually-hidden">Valuta da 1 a 5 stelle la pagina</legend>
+                                    <input type="radio" id="star5a" name="ratingA" value="5">
+                                    <label class="full rating-star active" for="star5a" data-element="feedback-rate-5">
+
+                                        <svg class="icon icon-sm" role="img" aria-labelledby="first-star">
+                                            <use href="assets/bootstrap-italia/dist/svg/sprites.svg#it-star-full"></use>
+                                        </svg>
+                                        <span class="visually-hidden" id="first-star">Valuta 5 stelle su 5</span>
+
+                                    </label>
+                                    <input type="radio" id="star4a" name="ratingA" value="4">
+                                    <label class="full rating-star active" for="star4a" data-element="feedback-rate-4">
+
+                                        <svg class="icon icon-sm" role="img" aria-labelledby="second-star">
+                                            <use href="assets/bootstrap-italia/dist/svg/sprites.svg#it-star-full"></use>
+                                        </svg>
+                                        <span class="visually-hidden" id="second-star">Valuta 4 stelle su 5</span>
+
+                                    </label>
+                                    <input type="radio" id="star3a" name="ratingA" value="3">
+                                    <label class="full rating-star active" for="star3a" data-element="feedback-rate-3">
+
+                                        <svg class="icon icon-sm" role="img" aria-labelledby="third-star">
+                                            <use href="assets/bootstrap-italia/dist/svg/sprites.svg#it-star-full"></use>
+                                        </svg>
+                                        <span class="visually-hidden" id="third-star">Valuta 3 stelle su 5</span>
+
+
+                                    </label>
+                                    <input type="radio" id="star2a" name="ratingA" value="2">
+                                    <label class="full rating-star active" for="star2a" data-element="feedback-rate-2">
+
+                                        <svg class="icon icon-sm" role="img" aria-labelledby="fourth-star">
+                                            <use href="assets/bootstrap-italia/dist/svg/sprites.svg#it-star-full"></use>
+                                        </svg>
+                                        <span class="visually-hidden" id="fourth-star">Valuta 2 stelle su 5</span>
+
+                                    </label>
+                                    <input type="radio" id="star1a" name="ratingA" value="1">
+                                    <label class="full rating-star active" for="star1a" data-element="feedback-rate-1">
+
+                                        <svg class="icon icon-sm" role="img" aria-labelledby="fifth-star">
+                                            <use href="assets/bootstrap-italia/dist/svg/sprites.svg#it-star-full"></use>
+                                        </svg>
+                                        <span class="visually-hidden" id="fifth-star">Valuta 1 stelle su 5</span>
+
+                                    </label>
+                                </fieldset>
+                            </div>
+                        
+	</div>
+                        <div id="ctl00_ctl13_SiscomFeedback1_pnlFine" class="cmp-rating__card-second d-none" data-step="3">
+		
+                            <div class="card-header border-0 mb-0">
+                                <h2 class="title-medium-2-bold mb-0" id="rating-feedback">Grazie, il tuo parere ci aiuterà a migliorare il servizio!</h2>
+                            </div>
+                        
+	</div>
+
+                        <div class="form-rating d-none">
+                            <div class="d-none" data-step="1">
+                                <div class="cmp-steps-rating">
+                                    <fieldset id="fieldset-rating-one" class="fieldset-rating-one" data-element="feedback-rating-positive">
+                                        <div class="iscrizioni-header w-100">
+                                            <h3 class="step-title d-flex align-items-center justify-content-between drop-shadow">
+                                                <legend class="d-block d-lg-inline" data-element="feedback-rating-question">Quali sono stati gli aspetti che hai preferito?
+                                                </legend>
+                                                <span class="step">1/2</span>
+                                            </h3>
+                                        </div>
+                                        <div class="cmp-steps-rating__body">
+                                            <div class="cmp-radio-list">
+                                                <div class="card card-teaser shadow-rating">
+                                                    <div class="card-body">
+                                                        <div class="form-check m-0">
+                                                            <div class="radio-body border-bottom border-light cmp-radio-list__item radioFeedback">
+                                                                <input name="rating1" type="radio" id="radio-1">
+                                                                <label for="radio-1" class="active" data-element="feedback-rating-answer">Le indicazioni erano chiare</label>
+                                                            </div>
+                                                            <div class="radio-body border-bottom border-light cmp-radio-list__item radioFeedback">
+                                                                <input name="rating1" type="radio" id="radio-2">
+                                                                <label for="radio-2" class="active" data-element="feedback-rating-answer">Le indicazioni erano complete</label>
+                                                            </div>
+                                                            <div class="radio-body border-bottom border-light cmp-radio-list__item radioFeedback">
+                                                                <input name="rating1" type="radio" id="radio-3">
+                                                                <label for="radio-3" class="active" data-element="feedback-rating-answer">Capivo sempre che stavo procedendo correttamente</label>
+                                                            </div>
+                                                            <div class="radio-body border-bottom border-light cmp-radio-list__item radioFeedback">
+                                                                <input name="rating1" type="radio" id="radio-4">
+                                                                <label for="radio-4" class="active" data-element="feedback-rating-answer">Non ho avuto problemi tecnici</label>
+                                                            </div>
+                                                            <div class="radio-body border-bottom border-light cmp-radio-list__item radioFeedback">
+                                                                <input name="rating1" type="radio" id="radio-5">
+                                                                <label for="radio-5" class="active" data-element="feedback-rating-answer">Altro</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset id="fieldset-rating-two" class="fieldset-rating-two" data-element="feedback-rating-negative">
+                                        <div class="iscrizioni-header w-100">
+                                            <h3 class="step-title d-flex align-items-center justify-content-between drop-shadow">
+                                                <legend class="d-block d-lg-inline" data-element="feedback-rating-question">Dove hai incontrato le maggiori difficoltà?
+                                                </legend>
+                                                <span class="step">1/2</span>
+                                            </h3>
+                                        </div>
+                                        <div class="cmp-steps-rating__body">
+                                            <div class="cmp-radio-list">
+                                                <div class="card card-teaser shadow-rating">
+                                                    <div class="card-body">
+                                                        <div class="form-check m-0">
+                                                            <div class="radio-body border-bottom border-light cmp-radio-list__item radioFeedback">
+                                                                <input name="rating2" type="radio" id="radio-6">
+                                                                <label for="radio-6" class="active" data-element="feedback-rating-answer">A volte le indicazioni non erano chiare</label>
+                                                            </div>
+                                                            <div class="radio-body border-bottom border-light cmp-radio-list__item radioFeedback">
+                                                                <input name="rating2" type="radio" id="radio-7">
+                                                                <label for="radio-7" class="active" data-element="feedback-rating-answer">A volte le indicazioni non erano complete</label>
+                                                            </div>
+                                                            <div class="radio-body border-bottom border-light cmp-radio-list__item radioFeedback">
+                                                                <input name="rating2" type="radio" id="radio-8">
+                                                                <label for="radio-8" class="active" data-element="feedback-rating-answer">A volte non capivo se stavo procedendo correttamente</label>
+                                                            </div>
+                                                            <div class="radio-body border-bottom border-light cmp-radio-list__item radioFeedback">
+                                                                <input name="rating2" type="radio" id="radio-9">
+                                                                <label for="radio-9" class="active" data-element="feedback-rating-answer">Ho avuto problemi tecnici</label>
+                                                            </div>
+                                                            <div class="radio-body border-bottom border-light cmp-radio-list__item radioFeedback">
+                                                                <input name="rating2" type="radio" id="radio-10">
+                                                                <label for="radio-10" class="active" data-element="feedback-rating-answer">Altro</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                                <div class="d-flex flex-nowrap pt-4 w-100 justify-content-center button-shadow">
+                                    <button class="btn btn-outline-primary fw-bold me-4 btn-back2" type="button">Indietro</button>
+                                    <button class="btn btn-primary fw-bold btn-next" type="button">Avanti</button>
+                                </div>
+                            </div>
+
+                            <div class="d-none" data-step="2">
+                                <div class="cmp-steps-rating">
+                                    <fieldset>
+                                        <div class="iscrizioni-header w-100">
+                                            <h3 class="step-title d-flex align-items-center justify-content-between drop-shadow mb-5">
+                                                <legend class="d-block d-lg-inline">Vuoi aggiungere altri dettagli?                      </legend>
+                                                <span class="step">2/2</span>
+                                            </h3>
+                                        </div>
+                                        <div class="cmp-steps-rating__body">
+                                            <div class="form-group">
+                                                <label for="TxtNoteFeedback">Dettaglio</label>
+                                                <input name="ctl00$ctl13$SiscomFeedback1$TxtNoteFeedback" type="text" maxlength="200" id="TxtNoteFeedback" class="form-control" data-element="feedback-input-text" aria-describedby="TxtNoteFeedbackDescription" />
+                                                <small id="TxtNoteFeedbackDescription" class="form-text">Inserire massimo 200 caratteri</small>
+                                            </div>
+                                            <br />
+                                            
+                                            <img id="ctl00_ctl13_SiscomFeedback1_imgCaptcha" src="data:image/png;base64,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" style="border-width:0px;" />
+                                            <a id="ctl00_ctl13_SiscomFeedback1_ButtonCambiaCodice" class="btn btn-primary btn-xs" href="javascript:__doPostBack(&#39;ctl00$ctl13$SiscomFeedback1$ButtonCambiaCodice&#39;,&#39;&#39;)" style="color:Black;">Ricrea Immagine</a>
+                                            
+
+                                            <br />
+                                            <span id="ctl00_ctl13_SiscomFeedback1_Label43" class="labelpassword" style="display:inline-block;width:260px;">Digita il codice visualizzato:</span>
+
+                                            <input name="ctl00$ctl13$SiscomFeedback1$txtPassword" type="text" maxlength="6" id="ctl00_ctl13_SiscomFeedback1_txtPassword" class="input-sm form-control FMAc" style="width:160px;" />
+
+                                        </div>
+                                    </fieldset>
+                                </div>
+
+                                <div class="d-flex flex-nowrap pt-4 w-100 justify-content-center button-shadow">
+                                    <button class="btn btn-outline-primary fw-bold me-4 btn-back" type="button">Indietro</button>
+                                    <input type="submit" name="ctl00$ctl13$SiscomFeedback1$btnSalva" value="Avanti" id="ctl00_ctl13_SiscomFeedback1_btnSalva" class="btn btn-primary fw-bold" />
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<input type="hidden" name="ctl00$ctl13$SiscomFeedback1$valueRating" id="valueRating" value="0" />
+<input type="hidden" name="ctl00$ctl13$SiscomFeedback1$valueDescrizione" id="valueDescrizione" />
+
+<input type="hidden" name="ctl00$ctl13$SiscomFeedback1$telefono" id="ctl00_ctl13_SiscomFeedback1_telefono" />
+<input type="hidden" name="ctl00$ctl13$SiscomFeedback1$Email" id="ctl00_ctl13_SiscomFeedback1_Email" />
+
+
+
+
+    <div id="ctl00_ctl13_pnlSiscomContattaIlComuneHomeAgid">
+		<div id="ctl00_ctl13_pnlSiscomContattaIlComuneHomeAgid">
+	
+
+<div class="bg-grey-card shadow-contacts">
+    <div class="container">
+        <div class="row d-flex justify-content-center p-contacts">
+            <div class="col-12 col-lg-6">
+                <div class="cmp-contacts">
+                    <div class="card w-100">
+                        <div class="card-body">
+                            <h2 class="title-medium-2-semi-bold">
+                                <span id="ctl00_ctl13_ctl01_lblContattaIlComune">Contatta il comune</span></h2>
+                            <ul class="contact-list p-0">
+                                <li>
+                                    <a id="ctl00_ctl13_ctl01_btnDomandeFrequenti" class="list-item" href="Domandefrequenti">
+                                <svg class="icon icon-primary icon-sm" aria-hidden="true">
+                                    <use href="assets/bootstrap-italia/dist/svg/sprites.svg#it-help-circle"></use>
+                                </svg><span>Leggi le domande frequenti</span></a></li>
+
+                                <li>
+                                    <a id="ctl00_ctl13_ctl01_btnRichAssistenza" class="list-item" data-element="contacts" href="Richiestaassistenza">
+                                <svg class="icon icon-primary icon-sm" aria-hidden="true">
+                                    <use href="assets/bootstrap-italia/dist/svg/sprites.svg#it-mail"></use>
+                                </svg><span>Richiedi assistenza</span></a></li>
+
+                                <li>
+                                    <a id="ctl00_ctl13_ctl01_btnTelefono" class="list-item" href="tel:0121%20944153">
+                                        <svg class="icon icon-primary icon-sm" aria-hidden="true">
+                                            <use href="assets/bootstrap-italia/dist/svg/sprites.svg#it-hearing"></use>
+                                        </svg>
+                                        <span id="ctl00_ctl13_ctl01_lblTelefono">Chiama il numero 0121 944153</span></a></li>
+
+                                <li>
+                                    <a id="ctl00_ctl13_ctl01_btnPrenotaAppuntamento" class="list-item" data-element="appointment-booking" href="https://servizi.comune.angrogna.to.it/servizi/prenotaappuntamenti/Login.Aspx?CE=ngrgn1115&amp;ACCESSO=C">
+                                <svg class="icon icon-primary icon-sm" aria-hidden="true">
+                                    <use href="assets/bootstrap-italia/dist/svg/sprites.svg#it-calendar"></use>
+                                </svg><span>Prenota appuntamento</span></a></li>
+                            </ul>
+
+                            <div id="ctl00_ctl13_ctl01_pnlProblemiInCitta">
+		
+                                <h2 class="title-medium-2-semi-bold mt-4">Problemi in citt&#224;</h2>
+                                <ul class="contact-list p-0">
+                                    <li>
+                                        
+                                <svg class="icon icon-primary icon-sm" aria-hidden="true">
+                                    <use href="assets/bootstrap-italia/dist/svg/sprites.svg#it-map-marker-circle"></use>
+                                </svg><span>Segnala disservizio </span></li>
+                                </ul>
+                            
+	</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+	</div>
+
+<footer class="it-footer" id="footer">
+    
+    <div id="ctl00_ctl13_pnlSiscomPiePaginaAGID">
+		<div id="ctl00_ctl13_pnlSiscomPiePaginaAGID">
+	
+
+
+<style type="text/css">
+    .e-mail:before {
+        content: attr(data-website) "\0040" attr(data-user);
+        unicode-bidi: bidi-override;
+        direction: rtl;
+    }
+
+    .cryptedmail:after {
+        content: attr(data-name) "@" attr(data-domain) "." attr(data-tld);
+    }
+</style>
+
+
+
+<div class="it-footer-main">
+    <div id="ctl00_ctl13_ctl00_PanelContenitore" class="container">
+		
+        <div id="ctl00_ctl13_ctl00_PanelIntestazioneFooter" class="row">
+			
+
+            <div class="col-12 footer-items-wrapper logo-wrapper">
+
+                <img id="ctl00_ctl13_ctl00_imgLogoEU" class="ue-logo" src="assets/images/logo-eu-inverted.svg" alt="logo Unione Europea" src="" style="height:56px;width:178px;border-width:0px;" />
+
+
+                <div class="it-brand-wrapper it-brand-wrapper-siscom">
+                    
+                    <a id="ctl00_ctl13_ctl00_LinkHomeStemma" href="Home"><img id="ctl00_ctl13_ctl00_ImageStemma" class="icon widthAuto" src="portals/2109/Skins/SkinXhtml/Images/StemmaFooter.webp" alt="Stemma dell&#39;Ente" style="border-width:0px;" /><div id="ctl00_ctl13_ctl00_PanelEnte" class="it-brand-text">
+				
+                            
+                            <span id="ctl00_ctl13_ctl00_LabelRagSoc" class="no_toc">Comune di Angrogna</span>
+                            
+                        
+			</div></a>
+                    
+                </div>
+            </div>
+
+        
+		</div>
+        <div id="ctl00_ctl13_ctl00_PanelContenitoreFooter" class="row">
+			
+            <div id="ctl00_ctl13_ctl00_panelAmministrazioneContainer" class="col-md-3 footer-items-wrapper">
+				
+                <h3 class="footer-heading-title">Amministrazione</h3>
+                <div id="ctl00_ctl13_ctl00_panelAmministrazione">
+					
+                    
+                <ul class='footer-list'><li><a href="Areeamministrative">Aree amministrative</a></li><li><a href="Documenti">Documenti e dati</a></li><li><a href="Entifondazioni">Enti e fondazioni</a></li><li><a href="Organidigoverno">Organi di governo</a></li><li><a href="Personaleamministrativo">Personale amministrativo</a></li><li><a href="Politici">Politici</a></li><li><a href="Uffici">Uffici</a></li></ul>
+				</div>
+            
+			</div>
+            <div id="ctl00_ctl13_ctl00_pnlCategorieServizio" class="col-md-6 footer-items-wrapper">
+				
+                <h3 class="footer-heading-title">Categorie di servizio</h3>
+                <div class="row">
+                    <div id="ctl00_ctl13_ctl00_pnlCategorieServizio1" class="col-md-6">
+					
+                    <ul class='footer-list'><li><a href="Servizi?IDCategoria=20649">Anagrafe e stato civile</a></li><li><a href="Servizi?IDCategoria=20651">Autorizzazioni</a></li><li><a href="Servizi?IDCategoria=20652">Catasto e urbanistica</a></li><li><a href="Servizi?IDCategoria=20656">Imprese e commercio</a></li></ul>
+				</div>
+                    <div id="ctl00_ctl13_ctl00_pnlCategorieServizio2" class="col-md-6">
+					
+                    <ul class='footer-list'><li><a href="Servizi?IDCategoria=20658">Salute, benessere e assistenza</a></li><li><a href="Servizi?IDCategoria=20659">Tributi, finanze e contravvenzioni</a></li><li><a href="Servizi?IDCategoria=20996">Biblioteca</a></li></ul>
+				</div>
+                </div>
+            
+			</div>
+            <div id="ctl00_ctl13_ctl00_panelNovitaVivereIlComuneContainer" class="col-md-3 footer-items-wrapper">
+				
+                
+                    <h3 class="footer-heading-title">Novit&#224;</h3>
+                    
+                <ul class='footer-list'><li><a href="Notizie?idCat=1">Notizie</a></li><li><a href="Notizie?idCat=2">Comunicati</a></li><li><a href="Notizie?idCat=3">Avvisi</a></li></ul>
+                
+                    <h3 class="footer-heading-title">
+                        <span id="ctl00_ctl13_ctl00_lblViviereIlComune">Vivere il comune</span></h3>
+                    
+                <ul class='footer-list'><li><a href="Luoghi">Luoghi</a></li><li><a href="Eventi">Eventi</a></li></ul>
+            
+			</div>
+
+            <div class="col-md-3 mt-md-4 footer-items-wrapper">
+                <h3 class="footer-heading-title">
+                    <span id="ctl00_ctl13_ctl00_LabelContatti">Contatti</span></h3>
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <div id="ctl00_ctl13_ctl00_PanelColonnaFooter1">
+				
+
+
+                            <div id="ctl00_ctl13_ctl00_InternoColonna1" class="footer-list">
+					
+                                <span id="ctl00_ctl13_ctl00_LabelIndirizzo" class="FooterTestoContatti">Piazza Roma, 1</span>
+                                <br />
+                                <span id="ctl00_ctl13_ctl00_LabelCapIndirizzo" class="FooterTestoContatti">10060 Angrogna (TO)</span>
+                                <br />
+                                <div id="ctl00_ctl13_ctl00_PanelDescrRegImprese">
+						
+                                    <span id="ctl00_ctl13_ctl00_LabelDescrRegImprese" class="FooterTestoContatti">C.F. 01451180010 - P.Iva: 01451180010</span>
+                                
+					</div>
+                                <div id="ctl00_ctl13_ctl00_PanelTelefono">
+						
+                                    <span id="ctl00_ctl13_ctl00_LabelTelefono" class="FooterTestoContatti">Telefono: <a href='tel:0121 944153' class='FooterLinkContatti'>0121 944153</a> </span>
+                                
+					</div>
+                                <div id="ctl00_ctl13_ctl00_PanelFax">
+						
+                                    
+                                
+					</div>
+
+                                
+                                <div id="ctl00_ctl13_ctl00_PanelAltriDati">
+						
+                                    <div id="ctl00_ctl13_ctl00_PanelEmail">
+							
+                                        <span id="ctl00_ctl13_ctl00_Label12" class="FooterTestoContatti">E-mail:</span>
+
+                                        
+                                        <a href='#' class='cryptedmail FooterLinkContatti' data-name='segreteria' data-domain='comune.angrogna.to' data-tld='it' onclick ='window.location.href = "mailto:" + this.dataset.name + "@" + this.dataset.domain + "." + this.dataset.tld; return false;' title = "Invia mail alla casella di posta elettronica istituzionale dell'Ente" ></a>
+                                        
+                                    
+						</div>
+                                    <div id="ctl00_ctl13_ctl00_Panel1">
+							
+                                        <span id="ctl00_ctl13_ctl00_Label11" class="FooterTestoContatti">PEC:  </span>
+                                        <a href='#' class='cryptedmail FooterLinkContatti' data-name='angrogna' data-domain='cert.ruparpiemonte' data-tld='it' onclick ='window.location.href = "mailto:" + this.dataset.name + "@" + this.dataset.domain + "." + this.dataset.tld; return false;' title = "Invia una mail alla casella di posta elettronica certificata dell'Ente utilizzando preferibilmente solo caselle di posta certificata" ></a>
+                                        
+                                    
+						</div>
+                                    <div id="ctl00_ctl13_ctl00_PanelVarie">
+							
+                                        
+                                    
+						</div>
+
+                                
+					</div>
+                                <div id="ctl00_ctl13_ctl00_PanelURP">
+						
+                                    <a id="ctl00_ctl13_ctl00_HyperLinkURP" title="Vai alla pagina Ufficio relazioni con il pubblico" class="FooterLinkContatti" href="Uffici?IDUfficio=27944">Ufficio relazioni con il pubblico</a>
+                                
+					</div>
+                                <div id="ctl00_ctl13_ctl00_PanelUffici">
+						
+                                    <a id="ctl00_ctl13_ctl00_LinkUffici" title="Link alla pagina degli uffici e degli orari" class="FooterLinkContatti" href="Ufficidettagli">Uffici e orari</a>
+                                
+					</div>
+                                <div id="ctl00_ctl13_ctl00_PanelNumeriUtili">
+						
+                                    <a id="ctl00_ctl13_ctl00_LinkNumeriUtili" title="Link alla pagina dei numeri utili dell&#39;Ente" class="FooterLinkContatti" href="Numeriutili">Numeri utili</a>
+                                
+					</div>
+                            
+				</div>
+
+                        
+			</div>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mt-md-4 footer-items-wrapper">
+                <h3 class="footer-heading-title">
+                    <span id="ctl00_ctl13_ctl00_Label1">Link Utili</span></h3>
+                <div class="row">
+
+                    <div id="ctl00_ctl13_ctl00_PanelColonnaFooter3" class="col-md-6">
+				
+                        <div id="ctl00_ctl13_ctl00_InternoColonna3" class="footer-list">
+					
+                        <ul class="footer-list"><li><a title="Vai alla pagina Regione Piemonte" class="FooterLinkContatti" href="https://www.regione.piemonte.it/web/">Regione Piemonte</a></li><li><a title="Vai alla pagina Torino metropoli _ citt&#224; metropolitana di Torino" class="FooterLinkContatti" href="http://www.cittametropolitana.torino.it/cms/index.php">Torino metropoli _ citt&#224; metropolitana di Torino</a></li><li><a title="Vai alla pagina La piattaforma di job matching di Agenzia Piemonte Lavoro IOLAVORO" class="FooterLinkContatti" href="https://www.iolavoro.org/">La piattaforma di job matching di Agenzia Piemonte Lavoro IOLAVORO</a></li><li><a title="Vai alla pagina SUAP 
+" class="FooterLinkContatti" href="https://hosting.pa-online.it/td0459/su_ambito/suap/">SUAP 
+</a></li></ul>
+				</div>
+                    
+			</div>
+                    <div id="ctl00_ctl13_ctl00_InternoColonna2" class="col-md-6">
+				
+
+                        <ul class="footer-list">
+                            <li>
+                                <a id="ctl00_ctl13_ctl00_HyperLink2" accesskey="2" title="Link alla pagina Privacy" class="FooterLinkContatti" data-element="privacy-policy-link" href="Privacy">Informativa privacy</a></li>
+                            <li>
+                                <a id="ctl00_ctl13_ctl00_HyperLink3" title="Link alla pagina Note legali" class="FooterLinkContatti" data-element="legal-notes" href="Paginedelcomune?ID=12055">Note legali</a></li>
+                            <li>
+                                <a id="ctl00_ctl13_ctl00_HyperLink9" title="Link alla pagina della Dichiarazione di accessibilit&#224;" class="FooterLinkContatti" data-element="accessibility-link" href="https://form.agid.gov.it/view/6eb991e0-3dcd-11ef-b21c-63f6dbea28ac">Dichiarazione di accessibilit&#224;</a></li>
+                            <li>
+                                </li>
+                        </ul>
+
+
+                    <a title="Vai alla pagina Amministrazione trasparente" class="FooterLinkContatti" href="Menu?IDVoceMenu=282976">Amministrazione trasparente</a><div>
+					<a title="Vai alle domande frequenti" class="FooterLinkContatti" data-element="faq" href="Domandefrequenti">Leggi le FAQ</a>
+				</div>Segnalazione disservizio<a class="FooterLinkContatti d-block" href="https://servizi.comune.angrogna.to.it/servizi/prenotaappuntamenti/Login.Aspx?CE=ngrgn1115&amp;ACCESSO=C">Prenotazione appuntamento</a><a class="FooterLinkContatti d-block" href="Richiestaassistenza">Richiesta d'assistenza</a>
+			</div>
+
+                </div>
+            </div>
+            
+
+            
+
+            <div id="ctl00_ctl13_ctl00_PanelSeguici" class="col-md-3 mt-md-4 footer-items-wrapper">
+				
+                <h3 class="footer-heading-title">Seguici su</h3>
+                <div id="ctl00_ctl13_ctl00_PanelSocial" class="list-inline text-start social">
+					
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div id="ctl00_ctl13_ctl00_PanelRss" class="list-inline-item">
+						
+                        <a id="ctl00_ctl13_ctl00_LinkRss" title="Link alla pagina Rss dell&#39;Ente" href="Rss" target="_blank"><svg class='icon icon-sm icon-white align-top'><use xlink:href='assets/bootstrap-italia/dist/svg/sprites.svg#it-rss'></use></svg></a>
+                    
+					</div>
+
+                
+				</div>
+                <div id="ctl00_ctl13_ctl00_PanelNewsletter" class="footer-list">
+					
+                    <a id="ctl00_ctl13_ctl00_LinkNewsletter" title="Link alla pagina newsletter dell&#39;Ente" class="FooterLinkContatti" href="Newsletter">Newsletter</a>
+                
+				</div>
+                
+            
+			</div>
+        
+		</div>
+        <div id="ctl00_ctl13_ctl00_PanelFooterBottom" class="row">
+			
+            <div id="ctl00_ctl13_ctl00_PanelLinkPiePagina" class="col-12 footer-items-wrapper">
+				
+                <div class="footer-bottom">
+
+                    
+
+                    
+
+                    
+
+                    <a id="ctl00_ctl13_ctl00_HyperLink4" accesskey="4" title="Link alla pagina Dati Monitoraggio" class="FooterLinkContatti" href="Datimonitoraggio">Dati monitoraggio</a>
+
+                    
+
+                    <a id="ctl00_ctl13_ctl00_HyperLink5" accesskey="5" title="Link alla pagina dei Servizi" class="FooterLinkContatti" href="Servizi">Servizi</a>
+
+                    
+
+                    
+
+                    
+
+                    <a id="ctl00_ctl13_ctl00_HyperLink8" title="Credits" class="FooterLinkContatti" href="Login">Credits</a>
+
+                    <a id="ctl00_ctl13_ctl00_HlMappaSito" title="MappaSito" class="FooterLinkContatti" href="Mappasito">Mappa del Sito</a>
+
+                </div>
+            
+			</div>
+        
+		</div>
+        <div class="clear"></div>
+
+        
+
+        <div id="ctl00_ctl13_ctl00_PanelWebAnalitiics">
+			
+            
+        
+		</div>
+
+        
+
+        
+        
+
+        <div id="ctl00_ctl13_ctl00_PanelFooterCopyright" class="Footer_copyright">
+			
+            <span id="ctl00_ctl13_ctl00_LabelFooterCopyright" class="FooterTestoContatti">&copy; Comune di Angrogna - Tutti i diritti riservati</span>
+        
+		</div>
+        <div class="clear"></div>
+        
+        <div id="backToTop" data-bs-toggle="backtotop" class="back-to-top overflow-hidden cursorPointer">
+            <svg class="icon icon-white" style="transform: scale(1.75); left: 1px;">
+                <use href="assets/bootstrap-italia/dist/svg/sprites.svg#it-collapse"></use></svg>
+        </div>
+    
+	</div>
+
+</div>
+
+
+
+
+
+
+
+
+</div>
+	</div>
+</footer>
+
+
+
+<input name="ScrollTop" type="hidden" id="ScrollTop" />
+
+<input type="hidden" name="ctl00$ctl13$CreaStaticPage" id="ctl00_ctl13_CreaStaticPage" value="False" />
+
+<script>
+    function loadBootstrapOrRetry() {
+        if (typeof bootstrap !== "undefined") {
+            // Bootstrap è disponibile, esegui il tuo codice qui
+            bootstrap.loadFonts("assets/bootstrap-italia/dist/fonts");
+        } else {
+            // Bootstrap non è ancora disponibile, ritenta dopo 50 millisecondi
+            setTimeout(loadBootstrapOrRetry, 50);
+        }
+    }
+
+    // Inizia il ciclo di controllo
+    loadBootstrapOrRetry();
+
+    //accessibilità
+    let defaultFontSize = 0;
+    let highContrast = false;
+    let linksHighlighted = false;
+    const touchedElements = new Map();
+
+    function increaseFontSize() {
+            defaultFontSize += 1;
+        //    document.body.style.fontSize = defaultFontSize + '%';
+        changeFontSize(1.1);
+    }
+
+    function decreaseFontSize() {
+            defaultFontSize -= 1;
+        //    document.body.style.fontSize = defaultFontSize + '%';
+        changeFontSize(0.9);
+    }
+
+    function changeFontSize(factor) {
+        const all = document.querySelectorAll('a,span, p');// document.querySelectorAll('*');
+   
+        all.forEach(el => {
+
+            const computed = window.getComputedStyle(el);
+            const current = parseFloat(computed.fontSize);
+
+            if (!touchedElements.has(el)) {
+                const original = el.getAttribute('style') || '';
+                touchedElements.set(el, original);
+            }
+
+            if (!isNaN(current)) {
+                el.style.fontSize = (current * factor) + 'px';
+            }
+        });
+        savePreferences();
+    }
+
+    function resetAccessibility() {
+        touchedElements.forEach((originalStyle, el) => {
+            el.setAttribute('style', originalStyle);
+        });
+        touchedElements.clear();
+
+        // Extra: reset body background, text color, speech synthesis
+        document.body.style.backgroundColor = '';
+        document.body.style.color = '';
+        window.speechSynthesis.cancel();
+
+        cursorMode = 3;
+        cycleCursorMode();
+
+        linksHighlighted = false;
+        document.body.classList.remove('bg-dark', 'text-white', 'cursor-large', 'highlight-links', 'dyslexia-font');
+        dyslexiaOn = false;
+
+        savePreferences();
+
+        localStorage.removeItem('accessPrefs');
+    }
+
+    function toggleContrast() {
+        if (!highContrast) {
+            document.body.style.backgroundColor = '#000';
+            document.body.style.color = '#fff';
+        } else {
+            document.body.style.backgroundColor = '';
+            document.body.style.color = '';
+        }
+        highContrast = !highContrast;
+        savePreferences();
+    }
+
+    //function resetAccessibility() {
+    //    defaultFontSize = 100;
+    //    document.body.style.fontSize = '';
+    //    document.body.style.backgroundColor = '';
+    //    document.body.style.color = '';
+    //    highContrast = false;
+    //    window.speechSynthesis.cancel();
+    //}
+
+    function leggiPagina() {
+        let testo = document.body.innerText;
+        let sintesi = window.speechSynthesis;
+        let messaggio = new SpeechSynthesisUtterance(testo);
+
+        messaggio.lang = 'it-IT'; // Imposta la lingua italiana
+        messaggio.rate = 1; // Velocità della voce
+        messaggio.pitch = 1; // Tonalità della voce
+
+        sintesi.speak(messaggio);
+        savePreferences();
+    }
+
+    function toggleToolbar() {
+        let toolbar = document.getElementById("accessibility-toolbar");
+        let options = document.getElementById("accessibility-options");
+
+        if (toolbar.classList.contains("collapsed")) {
+            toolbar.classList.remove("collapsed");
+            options.style.display = "flex";
+        } else {
+            toolbar.classList.add("collapsed");
+            options.style.display = "none";
+        }
+        savePreferences();
+    }
+
+    function toggleHighlightLinks() {
+        document.body.classList.toggle('highlight-links');
+        linksHighlighted = !linksHighlighted;
+        savePreferences();
+    }
+
+    let cursorMode = 0; // 0 = nessuna, 1 = grande, 2 = guida, 3 = spotlight
+    function cycleCursorMode() {
+        // Reset
+        document.body.classList.remove('cursor-large');
+        document.getElementById('spotlight').style.display = 'none';
+        document.getElementById('readingGuide').style.display = 'none';
+        document.removeEventListener('mousemove', updateSpotlight);
+        document.removeEventListener('mousemove', updateGuide);
+
+        // Next mode
+        cursorMode = (cursorMode + 1) % 4;
+        if (cursorMode === 1) {
+            document.body.classList.add('cursor-large');
+        } else if (cursorMode === 2) {
+            document.getElementById('spotlight').style.display = 'block';
+            document.addEventListener('mousemove', updateSpotlight);
+        } else if (cursorMode === 3) {
+            document.getElementById('readingGuide').style.display = 'block';
+            document.addEventListener('mousemove', updateGuide);
+        }
+        savePreferences();
+    }
+    function updateSpotlight(e) {
+        const spot = document.getElementById('spotlight');
+        spot.style.setProperty('--spotX', e.clientX + 'px');
+        spot.style.setProperty('--spotY', e.clientY + 'px');
+        savePreferences();
+    }
+    function updateGuide(e) {
+        document.getElementById('readingGuide')
+            .style.setProperty('--guideY', (e.clientY - 15) + 'px');
+        savePreferences();
+    }
+
+    let dyslexiaOn = false;
+    function toggleDyslexiaFont() {
+        document.body.classList.toggle('dyslexia-font');
+        dyslexiaOn = !dyslexiaOn;
+        savePreferences();
+    }
+
+    // Salva preferenze
+    function savePreferences() {
+        const prefs = {
+            highContrast,
+            linksHighlighted,
+            dyslexiaOn,
+            cursorMode,
+            fontSize: defaultFontSize
+        };
+        localStorage.setItem('accessPrefs', JSON.stringify(prefs));
+    }
+
+    // Applica preferenze al caricamento
+    function loadPreferences() {
+        
+        const prefs = JSON.parse(localStorage.getItem('accessPrefs'));
+        if (!prefs) return;
+
+        if (prefs.highContrast) toggleContrast();
+        if (prefs.linksHighlighted) toggleHighlightLinks();
+        if (prefs.dyslexiaOn) toggleDyslexiaFont();
+
+        defaultFontSize = prefs.fontSize;
+
+        for (let i = 0; i < prefs.cursorMode; i++) {
+            cycleCursorMode();
+        }
+
+        // Modifica la dimensione base
+        if (defaultFontSize > 0) {
+            for (let i = 0; i < defaultFontSize; i++) {
+                changeFontSize(1.1);
+            }
+        } else if (defaultFontSize < 0) {
+            for (let i = 0; i < Math.abs(defaultFontSize); i++) {
+                changeFontSize(0.9);
+            }
+        }
+    }
+
+    setTimeout(function () {  loadPreferences(); }, 0);
+
+</script>
+
+    
+    <nav id="accessibility-toolbar" class="accessibility-toolbar d-flex justify-content-center align-items-center collapsed">
+
+        <a onclick="toggleToolbar()" title="Accessibilità">
+            <svg class="icon fillColor" style="width: 40px; height: 40px;">
+                <use href="App_Themes/Images/Icon/accessibility-icon.svg"></use>
+            </svg></a>
+          <div id="accessibility-options" style="display: none; margin-left: 10px; margin-right: 10px">
+       <a class="btn btn-sm btn-light btnAccessibility" onclick="increaseFontSize()" data-focus-mouse="false">A+</a>
+       <a class="btn btn-sm btn-light btnAccessibility" onclick="decreaseFontSize()" data-focus-mouse="false">A-</a>
+       <a class="btn btn-sm btn-light btnAccessibility" onclick="leggiPagina();" data-focus-mouse="false"><i class="fa fas fa-volume-up"></i>Leggi </a>
+       <a class="btn btn-sm btn-light btnAccessibility" onclick="cycleCursorMode()" data-focus-mouse="false"><i class="fa fas fa-mouse-pointer"></i>Cursore</a>
+       <a class="btn btn-sm btn-light btnAccessibility" onclick="toggleHighlightLinks()" data-focus-mouse="false"><i class="fa fas fa-link"></i>Evidenzia Link</a>
+       <a class="btn btn-sm btn-light btnAccessibility" onclick="toggleDyslexiaFont()" style="font-family: 'OpenDyslexic', sans-serif !important;"  data-focus-mouse="false"><i class="fa fas fa-font"></i>Dislessia</a>
+       <a class="btn btn-sm btn-primary btnAccessibility" onclick="resetAccessibility()"><i class="fa fas fa-undo"></i>Reset</a>
+   </div>
+    </nav>
+
+    <div id="readingGuide"></div>
+    <div id="spotlight"></div>
+</div>
+
+        
+
+    
+
+<script type="text/javascript">
+//<![CDATA[
+localStorage.setItem('pathFavicon', 'portals/2109/Skins/skinXhtml/Images/stemma_Favicon.png');//]]>
+</script>
+</form>
+</body>
+</html>

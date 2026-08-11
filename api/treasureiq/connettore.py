@@ -89,6 +89,18 @@ class EsitoConnettore(BaseModel):
     amministrazione_trasparente: AmministrazioneTrasparente | None = None
 
 
+def _e_openweb(html: str) -> bool:
+    """Discrimina SoluzioniPA OpenWeb (WordPress) da Siscom PeopleWeb
+    dentro il ramo `PEOPLEWEB`. OpenWeb = WordPress: espone `wp-content`
+    e i permalink AgID `/amministrazione/unita_organizzativa/`. Siscom =
+    ASP.NET WebForms, nessuno di questi marcatori. Deciso sull'HTML home
+    già scaricato al dispatch — nessun fetch extra."""
+    return (
+        "/amministrazione/unita_organizzativa/" in html
+        or "wp-content" in html
+    )
+
+
 def _esito_vuoto(esito: EsitoConnettore) -> bool:
     """Vero se l'esito non porta nulla di utile: né uffici, né aree
     amministrative, né AT (L-5) — questo NON si persiste mai, per non
@@ -176,6 +188,51 @@ def leggi_connettore(
                     logger.info("connettore eGov non ancora disponibile")
                     return None
                 esito = leggi_egov(comune, sonda)
+            elif firma.piattaforma == Piattaforma.PEOPLEWEB:
+                # Il fingerprint `peopleweb` conflaziona DUE vendor (tema
+                # Bootstrap-Italia generico): SoluzioniPA OpenWeb (WordPress,
+                # path AgID puliti) e Siscom PeopleWeb (ASP.NET WebForms).
+                # Si discriminano dall'HTML home già scaricato — nessun fetch
+                # extra — e si instrada al connettore giusto.
+                if _e_openweb(risposta.text):
+                    try:
+                        from treasureiq.openweb import leggi_openweb
+                    except ImportError:  # noqa: BLE001 — deferred, non un crash
+                        logger.info("connettore OpenWeb non ancora disponibile")
+                        return None
+                    esito = leggi_openweb(comune, sonda)
+                else:
+                    try:
+                        from treasureiq.peopleweb import leggi_peopleweb
+                    except ImportError:  # noqa: BLE001 — deferred, non un crash
+                        logger.info("connettore PeopleWeb non ancora disponibile")
+                        return None
+                    esito = leggi_peopleweb(comune, sonda)
+            elif firma.piattaforma in (
+                Piattaforma.WP_DESIGN_COMUNI,
+                Piattaforma.WORDPRESS_GENERICO,
+                Piattaforma.COMUNIBOOTSTRAPITALIA,
+            ):
+                try:
+                    from treasureiq.wordpress_agid import leggi_wordpress_agid
+                except ImportError:  # noqa: BLE001 — connettore non ancora costruito: deferred, non un crash
+                    logger.info("connettore WordPress-AgID non ancora disponibile")
+                    return None
+                esito = leggi_wordpress_agid(comune, sonda)
+            elif firma.piattaforma == Piattaforma.COMWEB:
+                try:
+                    from treasureiq.comweb import leggi_comweb
+                except ImportError:  # noqa: BLE001 — deferred, non un crash
+                    logger.info("connettore ComWeb non ancora disponibile")
+                    return None
+                esito = leggi_comweb(comune, sonda)
+            elif firma.piattaforma == Piattaforma.OPENPA:
+                try:
+                    from treasureiq.openpa import leggi_openpa
+                except ImportError:  # noqa: BLE001 — deferred, non un crash
+                    logger.info("connettore OpenPA non ancora disponibile")
+                    return None
+                esito = leggi_openpa(comune, sonda)
             else:
                 return None
     except Exception:  # noqa: BLE001 — portale muto: esito assente, mai un crash

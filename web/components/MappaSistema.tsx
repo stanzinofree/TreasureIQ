@@ -179,7 +179,7 @@ export default function MappaSistema() {
         <line x1="20" y1="446" x2="920" y2="446" stroke="var(--kasumi)" strokeWidth="1" />
 
         <Nodo x={20} y={470} w={175} titolo="2 · Portale, ora" riga="verbatim · non conservato" />
-        <Nodo x={250} y={470} w={175} titolo="3 · Ricerca web" riga="SearXNG · non verificato" />
+        <Nodo x={250} y={470} w={175} titolo="3 · Ricerca web" riga="Brave site: · non verificato" />
         <Nodo x={480} y={470} w={190} h={46} tipo="vivo" titolo="Scheda civica" riga="ogni riga con la sua fonte" />
         <Freccia x1={198} y1={493} x2={248} y2={493} />
         <Freccia x1={428} y1={493} x2={478} y2={493} />

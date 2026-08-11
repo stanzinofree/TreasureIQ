@@ -788,6 +788,9 @@ export interface ConnettoreSonda {
   indirizzabile: boolean;
   uffici: number;
   rest_base: string | null;
+  /** ISO dell'ultima scansione sweep del comune (registro locale). null = mai
+   *  scansionato: il badge omette il segmento «ultima scansione». */
+  ultima_scansione: string | null;
 }
 
 /** Una categoria standard del modello AgID e quanti servizi vi ricadono in un
@@ -912,6 +915,16 @@ export interface RegistroComune {
   /** `null` = nessun cambiamento rilevato, oppure `prima_scansione: true`
    *  (in quel caso non c'è una scansione precedente con cui confrontare). */
   cambiato: { campi: string[] } | null;
+  /** Recapiti + identità ufficiali IPA (PEC, indirizzo, Codice Univoco IPA),
+   *  innestati a read-time dal backend. `null` = ente senza nulla nell'indice
+   *  IPA; ogni campo può mancare da solo. Statico, non da scansione portale.
+   *  `codice_ipa` viene dall'elenco nazionale, non da `ipa-recapiti.json`. */
+  recapiti: {
+    pec: string | null;
+    indirizzo: string | null;
+    codice_ipa: string | null;
+    fonte: string;
+  } | null;
 }
 
 /** Il registro di un comune, letto SOLO dal disco lato backend (D-01/D-11):
@@ -928,6 +941,29 @@ export const fetchRegistroComune = async (
   if (res.status === 404) return null;
   if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
   return (await res.json()) as RegistroComune;
+};
+
+/** Recapiti ufficiali IPA (PEC + indirizzo) per QUALSIASI comune, censito o
+ *  meno. Serve la card di un comune fuori copertura, che nel registro non ha
+ *  ancora un record (404): così mostra i recapiti istituzionali, non solo il
+ *  telefono letto dal vivo. Statico, letto da disco lato backend. */
+export interface RecapitiComune {
+  pec: string | null;
+  indirizzo: string | null;
+  codice_ipa: string | null;
+  fonte: string;
+}
+
+export const fetchRecapitiComune = async (
+  codiceIstat: string,
+): Promise<RecapitiComune | null> => {
+  const res = await fetch(`${API}/api/recapiti/${codiceIstat}`, {
+    credentials: "include",
+    cache: "no-store",
+  });
+  if (res.status === 404) return null;
+  if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+  return (await res.json()) as RecapitiComune;
 };
 
 /** Stato dello scan di un comune, per il rail chat (B6). `stato` distingue

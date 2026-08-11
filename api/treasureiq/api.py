@@ -86,7 +86,7 @@ from treasureiq.sonda_live import (
 )
 from treasureiq.bandi_live import BandiLiveEsito, _filtra_pdf_stesso_host, bandi_arricchiti
 from treasureiq.connettore import EsitoConnettore
-from treasureiq.registro import RegistroComune, leggi_registro
+from treasureiq.registro import Recapiti, RegistroComune, leggi_registro, recapiti_comune
 from treasureiq.extract.corpus import build_corpus, collect_pdf_segments
 from treasureiq.mappa_connettore import (
     Bando,
@@ -993,6 +993,11 @@ class ConnettoreSondaOut(BaseModel):
     indirizzabile: bool
     uffici: int
     rest_base: str | None = None
+    #: Data ISO dell'ultima scansione dello sweep per questo comune (dal registro
+    #: locale, letta da disco — D-01). None se mai scansionato. La UI la mostra
+    #: nel badge come «ultima scansione», rendendolo una riga di stato tecnica
+    #: (codice + connettore + online + data) invece che una frase.
+    ultima_scansione: str | None = None
 
 
 class ComuneAmbiguoOut(BaseModel):
@@ -2479,11 +2484,33 @@ async def chat(body: ChatIn, request: Request) -> ChatOut:
     # Camposampiero, uscivano tre agevolazioni di Albano come se riguardassero
     # chi aveva domandato. Non è una risposta imprecisa, è la risposta di un
     # altro comune — e il sistema sapeva già di non essere lì (R-9).
-    scelto = body.comune_istat if body.comune_istat in COMUNI else None
-    comune_istat = scelto or (
-        profile.comune_istat if profile is not None else DEFAULT_COMUNE_ISTAT
-    )
-    comune_coperto = body.comune_istat is None or body.comune_istat in COMUNI
+    # Il comune nominato nel testo di QUESTO turno è il segnale più forte, come
+    # già per la scheda a lato (`_profilo_capito`, stessa `_comune_nominato`).
+    # Se il cittadino scrive «vivo a Benevento», è quel comune a decidere quali
+    # record si guardano e se è coperto — anche quando il client sta ancora
+    # inviando il comune del turno precedente (o nessuno). Senza, la scheda a
+    # lato passava a Benevento ma la risposta restava ancorata ad Albano: due
+    # comuni nella stessa schermata, e i criteri di Albano («sei residente a
+    # Albano Laziale») sotto la domanda di chi vive altrove (R-9).
+    from treasureiq.chat.respond import _comune_nominato
+
+    nominato = _comune_nominato(message)
+    if nominato is not None:
+        comune_istat = nominato.codice_istat
+        comune_coperto = comune_istat in COMUNI
+    else:
+        # Un comune scelto esplicitamente (tap sulla tendina) decide quali
+        # record si guardano, e se non ne abbiamo non se ne guardano affatto.
+        # Prima i record erano sempre quelli del comune coperto: chiesto «c'è un
+        # aiuto per la mensa?» avendo scelto Camposampiero, uscivano tre
+        # agevolazioni di Albano come se riguardassero chi aveva domandato. Non
+        # è una risposta imprecisa, è la risposta di un altro comune — e il
+        # sistema sapeva già di non essere lì (R-9).
+        scelto = body.comune_istat if body.comune_istat in COMUNI else None
+        comune_istat = scelto or (
+            profile.comune_istat if profile is not None else DEFAULT_COMUNE_ISTAT
+        )
+        comune_coperto = body.comune_istat is None or body.comune_istat in COMUNI
     records = list(load_opportunities(comune_istat)) if comune_coperto else []
 
     # Ciclo11/A8: il cittadino puo' chiedere di togliere un filtro letto dal
@@ -2531,8 +2558,13 @@ async def chat(body: ChatIn, request: Request) -> ChatOut:
         profile=profile,
         records=records,
         storia=storia_utente,
-        # Una scelta esplicita batte qualunque inferenza: vedi ChatIn.
-        comune_istat=body.comune_istat,
+        # Il comune nominato nel testo batte il valore inviato dal client (che
+        # può essere quello del turno precedente): sopra abbiamo già scelto i
+        # record e la copertura su `nominato`, e ora glielo passiamo perché
+        # naming, criteri e ramo fuori-copertura combacino con la scheda a lato.
+        # Se nessun comune è nominato, resta la scelta esplicita del client (una
+        # scelta esplicita batte qualunque inferenza: vedi ChatIn).
+        comune_istat=(nominato.codice_istat if nominato is not None else body.comune_istat),
         comune_coperto=comune_coperto,
         filtri_esclusi=filtri_esclusi,
         filtri_accumulati=filtri_conversazione,
@@ -2598,6 +2630,15 @@ async def chat(body: ChatIn, request: Request) -> ChatOut:
                 indirizzabile=answer.connettore.indirizzabile,
                 uffici=answer.connettore.uffici,
                 rest_base=answer.connettore.rest_base,
+                # Data ultima scansione dal registro locale (disk-read, D-01): fa
+                # del badge una riga di stato invece di una frase. None → mai
+                # scansionato, la UI omette il segmento.
+                ultima_scansione=(
+                    _reg.ultima_scansione
+                    if (_reg := leggi_registro(answer.connettore.codice_istat))
+                    is not None
+                    else None
+                ),
             )
             if answer.connettore is not None
             else None
@@ -2769,6 +2810,18 @@ def registro_comune(codice_istat: str) -> RegistroComune:
     if scheda is None:
         raise HTTPException(404, "comune non ancora scansionato")
     return scheda
+
+
+@app.get("/api/recapiti/{codice_istat}", response_model=Recapiti, tags=["Censimento nazionale"])
+def recapiti_comune_route(codice_istat: str) -> Recapiti:
+    """PEC+indirizzo ufficiali (IndicePA) per QUALSIASI comune, anche uno mai
+    scansionato: la card di un comune fuori copertura ha comunque i recapiti
+    istituzionali, non solo il telefono letto dal vivo. Join statico letto da
+    disco, nessuna fetch (D-01). 404 se l'ente non è nell'indice IPA."""
+    recapiti = recapiti_comune(codice_istat)
+    if recapiti is None:
+        raise HTTPException(404, "recapiti non disponibili")
+    return recapiti
 
 
 @app.get("/api/connettori", response_model=list[ConnettoreOut], tags=["Censimento nazionale"])

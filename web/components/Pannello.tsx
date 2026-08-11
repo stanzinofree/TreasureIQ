@@ -13,9 +13,15 @@
  */
 
 import { useEffect, useState } from "react";
+import MappaServizi from "@/components/MappaServizi";
 import ProfiloNoto from "@/components/ProfiloNoto";
 import ScanLive from "@/components/ScanLive";
-import { fetchRegistroComune, type RegistroComune } from "@/lib/api";
+import {
+  fetchRecapitiComune,
+  fetchRegistroComune,
+  type RecapitiComune,
+  type RegistroComune,
+} from "@/lib/api";
 import { useProfilo, type NumeriUtiliProfilo } from "@/lib/profilo";
 import { useRisultati } from "@/lib/risultati";
 
@@ -37,58 +43,54 @@ function dataLeggibile(iso: string): string {
   });
 }
 
-/** I recapiti del comune fuori copertura, letti al volo dal portale. Non è una
- * risposta di TreasureIQ: è il biglietto da visita del comune, con fonte e data
- * del controllo dichiarate. Nessun numero è verificato. */
-function NumeriUtiliBanner({ numeri }: { numeri: NumeriUtiliProfilo }) {
+/** Una riga di recapito nella card comune: etichetta + valore linkato. Non
+ * si rende se il valore manca (nessun campo vuoto spacciato per dato). */
+function RigaRecapito({
+  etichetta,
+  valore,
+  href,
+}: {
+  etichetta: string;
+  valore: string;
+  href: string;
+}) {
   return (
-    <section className="numeri-utili" aria-label={`Numeri utili di ${numeri.comune}`}>
-      <h3 className="numeri-utili__titolo">
-        Comune di {numeri.comune} · numeri utili
-      </h3>
-      <dl className="numeri-utili__lista">
-        {numeri.telefoni.map((t) => (
-          <div className="numeri-utili__riga" key={`tel-${t}`}>
-            <dt>Telefono</dt>
-            <dd>
-              <a href={`tel:${t.replace(/\s+/g, "")}`}>{t}</a>
-            </dd>
-          </div>
-        ))}
-        {numeri.pec.map((p) => (
-          <div className="numeri-utili__riga" key={`pec-${p}`}>
-            <dt>PEC</dt>
-            <dd>
-              <a href={`mailto:${p}`}>{p}</a>
-            </dd>
-          </div>
-        ))}
-        {numeri.email.map((e) => (
-          <div className="numeri-utili__riga" key={`mail-${e}`}>
-            <dt>Email</dt>
-            <dd>
-              <a href={`mailto:${e}`}>{e}</a>
-            </dd>
-          </div>
-        ))}
-      </dl>
-      <p className="numeri-utili__nota">
-        Ultimo controllo via {numeri.fonteTipo} il {dataLeggibile(numeri.lettoIl)}
-        {" "}· da verificare tu.
-      </p>
-    </section>
+    <div className="card-comune__riga">
+      <dt>{etichetta}</dt>
+      <dd>
+        <a href={href}>{valore}</a>
+      </dd>
+    </div>
   );
 }
 
-/** Card comune curata dal registro locale (CONTRATTO-O2): logo o, in sua
- * assenza, un monogramma civico neutro (mai uno stemma finto, D-02) + nome
- * + una nota minimale su cosa è cambiato dall'ultima scansione. Il logo
- * arriva già come base64 dal registro — nessuna fetch verso il portale del
- * comune parte da qui (D-01/D-11), solo la lettura dell'endpoint locale.
- * 404/registro assente degrada onestamente a glifo+nome dal profilo, mai a
- * un guscio rotto. */
-function CardComuneRegistro({ istat, nome }: { istat: string; nome: string }) {
+/** Card unica del comune: logo (o monogramma civico neutro, mai uno stemma
+ * finto — D-02) + nome, i riferimenti principali (telefono, PEC, indirizzo),
+ * e sotto la nota su cosa è cambiato dall'ultima scansione.
+ *
+ * Due fonti, una card. Il registro locale (CONTRATTO-O2) dà logo, nome,
+ * `cambiato` e i `recapiti` ufficiali IPA (PEC + indirizzo, statici, letti a
+ * read-time — nessuna fetch al portale parte da qui, D-01/D-11). Il telefono
+ * — che l'IPA non espone in modo affidabile — arriva dai `numeri` letti al
+ * volo quando presenti. PEC preferisce la fonte IPA (autoritativa), ripiega
+ * sul live. Registro assente (comune mai scansionato) degrada a glifo+nome
+ * dal profilo più, se ci sono, i soli numeri live: mai un guscio rotto. */
+function CardComune({
+  istat,
+  nome,
+  numeri,
+}: {
+  istat: string;
+  nome: string;
+  numeri: NumeriUtiliProfilo | null;
+}) {
   const [registro, setRegistro] = useState<RegistroComune | null>(null);
+  // Recapiti IPA per un comune NON censito: il registro fa 404, ma PEC e
+  // indirizzo istituzionali esistono comunque (indice IPA, per ISTAT). Senza
+  // questo, la card di un comune fuori copertura mostrava solo il telefono
+  // letto dal vivo — spesso sballato. Uniforma la card qualunque sia il
+  // connettore (coperto o fuori copertura).
+  const [recapitiIpa, setRecapitiIpa] = useState<RecapitiComune | null>(null);
 
   // Stessa guardia anti-stale delle altre fetch client-side del pannello
   // (v. `MappaServizi` in Chat.tsx): un cambio di comune azzera subito la
@@ -96,9 +98,22 @@ function CardComuneRegistro({ istat, nome }: { istat: string; nome: string }) {
   useEffect(() => {
     let vivo = true;
     setRegistro(null);
+    setRecapitiIpa(null);
+    if (!istat) return; // comune senza ISTAT (fuori copertura): solo numeri live
     fetchRegistroComune(istat)
       .then((r) => {
-        if (vivo) setRegistro(r);
+        if (!vivo) return;
+        setRegistro(r);
+        // Comune non censito: il registro è vuoto ma i recapiti IPA no.
+        if (r === null) {
+          fetchRecapitiComune(istat)
+            .then((rec) => {
+              if (vivo) setRecapitiIpa(rec);
+            })
+            .catch(() => {
+              if (vivo) setRecapitiIpa(null);
+            });
+        }
       })
       .catch(() => {
         if (vivo) setRegistro(null);
@@ -109,6 +124,22 @@ function CardComuneRegistro({ istat, nome }: { istat: string; nome: string }) {
   }, [istat]);
 
   const nomeMostrato = registro?.nome ?? nome;
+
+  // Riferimenti: telefono dal live (IPA non ce l'ha), PEC e indirizzo
+  // IPA-first (dal record se censito, dall'indice IPA se fuori copertura),
+  // con fallback live per la PEC. Un solo valore per riga.
+  const telefono = numeri?.telefoni?.[0] ?? null;
+  const pec =
+    registro?.recapiti?.pec ?? recapitiIpa?.pec ?? numeri?.pec?.[0] ?? null;
+  const indirizzo =
+    registro?.recapiti?.indirizzo ?? recapitiIpa?.indirizzo ?? null;
+  // Codice Univoco IPA: identità dell'ente, non un recapito. Statico, dallo
+  // stesso indice (elenco nazionale), quindi mostrato accanto agli altri
+  // riferimenti IPA — anche per un comune che di PEC/indirizzo non ne ha.
+  const codiceIpa =
+    registro?.recapiti?.codice_ipa ?? recapitiIpa?.codice_ipa ?? null;
+  const fonteRecapiti = registro?.recapiti?.fonte ?? recapitiIpa?.fonte ?? null;
+  const haRecapiti = Boolean(telefono || pec || indirizzo || codiceIpa);
 
   return (
     <section className="card-comune tiq-card" aria-label={`Comune di ${nomeMostrato}`}>
@@ -127,15 +158,55 @@ function CardComuneRegistro({ istat, nome }: { istat: string; nome: string }) {
         )}
         <p className="card-comune__nome">Comune di {nomeMostrato}</p>
       </div>
+
+      {haRecapiti && (
+        <dl className="card-comune__recapiti">
+          {telefono && (
+            <RigaRecapito
+              etichetta="Telefono"
+              valore={telefono}
+              href={`tel:${telefono.replace(/\s+/g, "")}`}
+            />
+          )}
+          {pec && (
+            <RigaRecapito etichetta="PEC" valore={pec} href={`mailto:${pec}`} />
+          )}
+          {indirizzo && (
+            <RigaRecapito
+              etichetta="Indirizzo"
+              valore={indirizzo}
+              href={`https://www.openstreetmap.org/search?query=${encodeURIComponent(
+                indirizzo,
+              )}`}
+            />
+          )}
+          {codiceIpa && (
+            <div className="card-comune__riga">
+              <dt>Codice IPA</dt>
+              <dd>
+                <code className="card-comune__codice">{codiceIpa}</code>
+              </dd>
+            </div>
+          )}
+        </dl>
+      )}
+
+      {fonteRecapiti && (pec || indirizzo || codiceIpa) && (
+        <p className="card-comune__fonte">Riferimenti da {fonteRecapiti}.</p>
+      )}
+
       {registro &&
         (registro.prima_scansione ? (
           <p className="card-comune__nota">
-            Prima scansione, niente da confrontare.
+            Prima scansione il {dataLeggibile(registro.ultima_scansione)}, niente da
+            confrontare.
           </p>
         ) : (
           registro.cambiato && (
             <p className="card-comune__nota card-comune__nota--cambiato">
-              Cambiato dall&apos;ultima scansione: {registro.cambiato.campi.join(", ")}.
+              Cambiato dall&apos;ultima scansione ({dataLeggibile(
+                registro.ultima_scansione,
+              )}): {registro.cambiato.campi.join(", ")}.
             </p>
           )
         ))}
@@ -190,14 +261,20 @@ export default function Pannello() {
           comune. Non renderizza nulla se nessuno scan è in corso. */}
       <ScanLive variante="pannello" />
 
-      {profilo.comune?.istat && (
-        <CardComuneRegistro
-          istat={profilo.comune.istat}
-          nome={profilo.comune.nome}
+      {(profilo.comune?.istat || numeri) && (
+        <CardComune
+          istat={profilo.comune?.istat ?? ""}
+          nome={profilo.comune?.nome ?? numeri?.comune ?? ""}
+          numeri={numeri}
         />
       )}
 
-      {numeri && <NumeriUtiliBanner numeri={numeri} />}
+      {/* Servizi del comune (mappa AgID a cascata), spostati qui dalla chat per
+          tenerla pulita. Si mostra solo se il portale è REST-indirizzabile:
+          altrimenti MappaServizi non disegna nulla. */}
+      {profilo.comune?.istat && (
+        <MappaServizi istat={profilo.comune.istat} variante="pannello" />
+      )}
 
       {trovate.length > 0 && (
         <>

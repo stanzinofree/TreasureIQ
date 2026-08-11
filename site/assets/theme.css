@@ -209,6 +209,11 @@ body {
 .prosa code { font-family: var(--font-mono); font-size: 0.88em; background: var(--paper-sunken); color: var(--sumi); padding: 1px 6px; border-radius: 5px; }
 .prosa pre { background: var(--sumi); color: #e8edf6; border-radius: var(--radius); padding: var(--ma-4) var(--ma-6); overflow-x: auto; font-size: 14.5px; box-shadow: var(--ombra); }
 .prosa pre code { background: none; color: inherit; padding: 0; font-size: inherit; }
+/* Il diagramma Mermaid non è codice: niente box scuro, niente ombra. Prima del
+   render mostra il sorgente in chiaro (fallback se lo script non parte). */
+.prosa pre.mermaid { background: var(--paper-raised); color: var(--sumi-faint); border: 1px solid var(--line); box-shadow: none; text-align: center; font-size: 13px; line-height: 1.5; padding: var(--ma-6); }
+.prosa pre.mermaid svg { max-width: 100%; height: auto; }
+.prosa pre.mermaid[data-processed="true"] { color: var(--sumi); font-size: inherit; }
 .prosa table { width: 100%; border-collapse: collapse; margin: var(--ma-6) 0; font-size: 15px; display: block; overflow-x: auto; }
 .prosa th, .prosa td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); }
 .prosa th { font-family: var(--font-display); color: var(--sumi); font-weight: 700; background: var(--paper-raised); }

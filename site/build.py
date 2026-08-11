@@ -40,6 +40,9 @@ NAV: list[tuple[str, str, str]] = [
     ("sicurezza.md", "Sicurezza", "sicurezza"),
 ]
 
+#: Gli slug che il sito costruisce davvero (una pagina per voce di NAV).
+SLUG_COSTRUITI = {slug for _, _, slug in NAV}
+
 MARCHIO = (
     '<a class="marchio" href="{home}">'
     '<img src="{base}/assets/marchio.svg" width="36" height="36" alt=""/>'
@@ -116,8 +119,12 @@ def _riscrivi_link(html: str, base: str) -> str:
     """
     def sostituisci(m: re.Match) -> str:
         pre, percorso, frammento = m.group(1), m.group(2), m.group(3) or ""
-        nome = percorso.split("/")[-1]  # scarta ./ o docs/
-        slug = nome[:-3]  # toglie .md
+        # `percorso` è già senza `.md`: la regex la cattura fuori dal gruppo.
+        slug = percorso.split("/")[-1]  # scarta ./ o docs/
+        # Doc non pubblicata sul sito (es. da-fare, interna): punta al
+        # sorgente su GitHub, non a una pagina .html che non esiste (404).
+        if slug not in SLUG_COSTRUITI:
+            return f'{pre}"https://github.com/stanzinofree/TreasureIQ/blob/main/docs/{slug}.md{frammento}"'
         return f'{pre}"{base}/{slug}.html{frammento}"'
 
     # href="...qualcosa.md" oppure href="...qualcosa.md#ancora"

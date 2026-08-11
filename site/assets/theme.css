@@ -214,6 +214,7 @@ body {
 .prosa pre.mermaid { background: var(--paper-raised); color: var(--sumi-faint); border: 1px solid var(--line); box-shadow: none; text-align: center; font-size: 13px; line-height: 1.5; padding: var(--ma-6); }
 .prosa pre.mermaid svg { max-width: 100%; height: auto; }
 .prosa pre.mermaid[data-processed="true"] { color: var(--sumi); font-size: inherit; }
+.prosa img { max-width: 100%; height: auto; display: block; margin: var(--ma-6) 0; border: 1px solid var(--line); border-radius: 8px; }
 .prosa table { width: 100%; border-collapse: collapse; margin: var(--ma-6) 0; font-size: 15px; display: block; overflow-x: auto; }
 .prosa th, .prosa td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); }
 .prosa th { font-family: var(--font-display); color: var(--sumi); font-weight: 700; background: var(--paper-raised); }

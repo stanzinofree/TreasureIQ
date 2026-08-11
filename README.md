@@ -67,7 +67,7 @@ Il 5 agosto 2026 TreasureIQ ha censito **tutti i 7.896 comuni italiani** —
 |---|---|
 | Comuni censiti | **7.896** — tutti |
 | Servizi comunali contati | **57.603** |
-| Piattaforme riconosciute | 20, il 89,9% dei comuni |
+| Piattaforme riconosciute | 25, il 89,9% dei comuni |
 | Comuni con aderenza al modello AgID misurata | 1.854 |
 
 E il numero che il progetto esisteva per trovare. Sugli **811 comuni** dove la
@@ -107,8 +107,37 @@ Emilia-Romagna. È il modello che altrove ogni comune affronta da solo.
 
 ## Come funziona
 
-Due processi e un'ingestione che gira a parte. Non è un'architettura a
-microservizi, e chiamarla così farebbe scena senza essere vero.
+Tre atti distinti, non un monolite: **due acquisizioni** che girano prima e
+lontano dalla domanda, e **una risposta** che si compone mentre il cittadino
+aspetta. Non è un'architettura a microservizi, e chiamarla così farebbe scena
+senza essere vero.
+
+### Sweep e ingestione: due acquisizioni diverse
+
+È la distinzione che più spesso si confonde, perché entrambe «leggono un
+comune». Ma leggono cose diverse, con proprietà opposte, e alimentano parti
+diverse della risposta.
+
+| | **Sweep** (`registro.py`) | **Ingestione** (`ingest/`) |
+|---|---|---|
+| Cosa legge | l'**identità** del portale: piattaforma, logo, uffici, recapiti | i **contenuti**: agevolazioni e bandi che il cittadino confronta |
+| Cosa salva | la scheda del comune + i fingerprint di cambiamento | il corpus `Opportunity`, con la pagella di readiness |
+| Ampiezza | quasi nazionale — molti comuni scansionati | un comune reale a fondo (Albano); gli altri a zero, per ora |
+| Riproducibile | **sì**: fingerprint stabili, esclude apposta il set-pagine | **no**: il set-pagine cambia a ogni run |
+| Cosa alimenta | la scheda civica a lato e la sonda live | il verdetto di eleggibilità |
+
+Lo sweep **scopre** (che piattaforma è, dove sta l'ufficio); l'ingestione
+**capisce** (che dice quel bando, chi ne ha diritto). Il primo dà al secondo le
+coordinate — piattaforma ed endpoint — ma i due artefatti restano separati:
+fondere il corpus dentro il record dello sweep ne avvelenerebbe la
+change-detection, che vive proprio dell'escludere ciò che cambia a ogni lettura.
+
+<table>
+<tr>
+<td width="50%"><b>Sweep — la scheda di un comune</b><br/><br/><img src="docs/assets/sweep.gif" alt="Sweep: la scheda civica di un comune con logo, uffici e recapiti"/></td>
+<td width="50%"><b>Ingestione — il verdetto</b><br/><br/><img src="docs/assets/ingestione.gif" alt="Ingestione: una domanda in chat e il verdetto di eleggibilità con la provenienza di ogni riga"/></td>
+</tr>
+</table>
 
 **Prima della domanda** — gira quando vogliamo noi, e finisce in file versionati:
 
@@ -139,7 +168,7 @@ chat/intent.py   → che FORMA ha la domanda. È tutto ciò che fa il modello
             ↓ (se il comune non è censito)
          sonda_live → legge il portale ORA, verbatim, non conserva
             ↓ (se il portale non espone gli uffici)
-         ricerca web → SearXNG, marcato «non verificato», da confermare
+         ricerca web → Brave, ancorata al dominio del comune (site:), «non verificato»
     ↓
 scheda civica    → ogni riga con la sua provenienza
 ```

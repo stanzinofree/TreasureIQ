@@ -95,6 +95,12 @@ In ordine di quanto restituiscono:
    concordare a mano.
 4. **Lo scheduler** e il resto dell'architettura post-MVP, dimensionati sui
    numeri misurati. → [evoluzione.md](evoluzione.md)
+5. **Un motore di ingestione** vero. Oggi `ingest/` è uno scheletro
+   (`Connector`, `FetchStats`, readiness) che gira a comando su un set-pagine
+   non riproducibile. Il passo è renderlo **guidato dallo sweep** — la
+   piattaforma rilevata sceglie il connettore — con un corpus riproducibile e
+   la stessa change-detection che il registro già ha. Resta un atto **distinto**
+   dallo sweep, non fuso in esso (perché, in [architettura.md](architettura.md)).
 
 ---
 

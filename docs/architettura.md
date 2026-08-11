@@ -26,9 +26,9 @@ flowchart TD
     U["Cittadino — domanda in italiano"] --> NLP["Motore NLP · estrae la richiesta<br/>e i filtri anagrafici (comune, ISEE,<br/>disabilità, figli, età, lavoro, tema)"]
     NLP --> C{"Comune<br/>riconosciuto?"}
     C -->|"no"| FUORI["Fuori copertura ·<br/>dice cosa non sa, senza inventare"]
-    C -->|"sì"| Q{"Come si legge<br/>questo Comune?"}
-    Q -->|"già ingerito"| CACHE["Snapshot già acquisito ·<br/>nessuna rete mentre il cittadino aspetta"]
-    Q -->|"non ingerito"| LIVE["Sonda live o scansione programmata ·<br/>intanto mostra l'ultima cache"]
+    C -->|"sì"| Q{"Contenuti del Comune<br/>già ingeriti?"}
+    Q -->|"sì"| CACHE["Snapshot già acquisito ·<br/>nessuna rete mentre il cittadino aspetta"]
+    Q -->|"no"| LIVE["Sonda live o scansione programmata ·<br/>intanto mostra l'ultima cache"]
     CACHE --> EV["Risposta con evidenza grafica ·<br/>dato + sorgente + accuratezza"]
     LIVE --> EV
     EV --> S1["Fonte: scansione PDF"]
@@ -37,11 +37,46 @@ flowchart TD
     S1 --> ACC["ogni fonte porta il proprio<br/>grado di accuratezza, dichiarato"]
     S2 --> ACC
     S3 --> ACC
+
+    subgraph ACQ["Acquisizioni · girano offline, prima e lontano dalla domanda"]
+      direction LR
+      ING["Ingestione contenuti ·<br/>corpus Opportunity: agevolazioni, bandi"]
+      SW["Sweep del portale ·<br/>scheda: piattaforma, logo, uffici, recapiti"]
+    end
+    ING -. "riempie lo snapshot" .-> CACHE
+    SW -. "dà le coordinate alla sonda" .-> LIVE
+    SW -. "compone la scheda civica a lato" .-> SCHEDA["Scheda del Comune, a lato"]
 ```
 
-Il resto del documento spiega ciascun blocco: l'**acquisizione** che riempie lo
-snapshot, il **registro** che tiene la scheda del Comune, il **motore di
-risposta** che decide il verdetto, e i **confini** che il codice fa rispettare.
+Il resto del documento spiega ciascun blocco. Attenzione a **una distinzione che
+si confonde spesso**: nel riquadro *Acquisizioni* ci sono **due** atti, non uno.
+L'**ingestione** (`ingest/`) legge i *contenuti* — le agevolazioni e i bandi su
+cui il motore decide il verdetto — e riempie lo snapshot. Lo **sweep**
+(`registro.py`) legge l'*identità* del portale — piattaforma, logo, uffici,
+recapiti — e compone la scheda del Comune. Il **motore di risposta** decide il
+verdetto sui contenuti ingeriti; i **confini** sono ciò che il codice fa
+rispettare.
+
+### Sweep e ingestione: due acquisizioni, non una
+
+Entrambe «leggono un Comune», ma leggono cose diverse, con proprietà opposte.
+
+| | **Sweep** (`registro.py`) | **Ingestione** (`ingest/`) |
+|---|---|---|
+| Cosa legge | l'**identità**: piattaforma, logo, uffici, recapiti | i **contenuti**: agevolazioni e bandi |
+| Cosa salva | la scheda del Comune + i fingerprint di cambiamento | il corpus `Opportunity`, con la pagella di readiness |
+| Ampiezza | quasi nazionale — molti Comuni scansionati | un Comune reale a fondo (Albano); gli altri a zero, per ora |
+| Riproducibile | **sì**: fingerprint stabili, esclude apposta il set-pagine | **no**: il set-pagine cambia a ogni run |
+| Alimenta | la scheda civica a lato e la sonda live | il verdetto di eleggibilità |
+
+Lo sweep **scopre**, l'ingestione **capisce**. Il primo dà al secondo le
+coordinate — piattaforma ed endpoint — ma i due artefatti restano separati:
+fondere il corpus dentro il record dello sweep ne avvelenerebbe la
+change-detection, che vive proprio dell'escludere ciò che cambia a ogni lettura.
+Un *motore di ingestione* vero — dispatch guidato dallo sweep, corpus
+riproducibile, scheduling — è la direzione naturale, ma è lavoro post-consegna
+(→ [roadmap.md](roadmap.md)): oggi lo scheletro esiste (`ingest/base.py`:
+`Connector`, `FetchStats`, readiness), non ancora l'orchestrazione.
 
 ---
 

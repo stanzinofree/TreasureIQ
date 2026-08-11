@@ -31,6 +31,7 @@ SITE = RADICE / "site"
 #: L'ordine della navigazione. (file in docs/, titolo in nav, slug della pagina).
 #: L'ordine è quello in cui si legge il progetto, non alfabetico.
 NAV: list[tuple[str, str, str]] = [
+    ("come-legge.md", "Come legge un Comune", "come-legge"),
     ("architettura.md", "Architettura", "architettura"),
     ("connettori.md", "Connettori", "connettori"),
     ("api.md", "API", "api"),
@@ -203,6 +204,10 @@ def costruisci(out: Path, base: str) -> None:
 
     # assets
     shutil.copytree(SITE / "assets", out / "assets")
+    # media dei docs (GIF, immagini) → stesso /assets
+    docs_assets = DOCS / "assets"
+    if docs_assets.exists():
+        shutil.copytree(docs_assets, out / "assets", dirs_exist_ok=True)
     # la gif della demo, se c'è
     gif = RADICE / "treasureiq-caso1-ciampino.gif"
     if gif.exists():

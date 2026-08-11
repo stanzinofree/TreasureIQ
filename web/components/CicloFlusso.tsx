@@ -32,7 +32,7 @@ const PASSI: Passo[] = [
     n: 2,
     titolo: "Comprensione",
     corpo:
-      "Un modello locale ricava il tema e i dati che il cittadino ha volontariamente detto. È l'unico punto in cui interviene, e non decide nulla.",
+      "Un modello locale ricava solo il tema della domanda e l'eventuale comune citato. I dati anagrafici li estrae una regola deterministica dal testo, non il modello. È l'unico punto in cui il modello interviene, e non decide nulla.",
     attore: "modello",
   },
   {

@@ -187,6 +187,13 @@ body {
 .passo h3 { font-family: var(--font-display); font-size: 18px; margin: 6px 0 4px; }
 .passo p { margin: 0; color: var(--sumi-soft); font-size: 15.5px; }
 
+/* catture live (sweep vs ingestione, home) */
+.catture { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: var(--ma-6); }
+.cattura { margin: 0; background: var(--paper-raised); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; box-shadow: var(--ombra); }
+.cattura img { display: block; width: 100%; height: auto; border-bottom: 1px solid var(--line); }
+.cattura figcaption { padding: var(--ma-4) var(--ma-6); color: var(--sumi-soft); font-size: 15px; line-height: 1.5; }
+.cattura figcaption strong { color: var(--sumi); font-weight: 700; }
+
 /* ---------- layout documento ---------- */
 .doc { max-width: 1160px; margin: 0 auto; padding: var(--ma-8) var(--ma-6) var(--ma-16); display: grid; grid-template-columns: 240px 1fr; gap: var(--ma-12); }
 .doc__nav { position: sticky; top: 84px; align-self: start; font-size: 15px; }

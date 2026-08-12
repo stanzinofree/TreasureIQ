@@ -10,6 +10,11 @@ in quattro famiglie (Cittadino, Censimento nazionale, Qualità dei dati, Sistema
 perché hanno garanzie diverse e conviene sapere quale si sta guardando.
 Schema grezzo: `GET /openapi.json`.
 
+`/docs` (Swagger), `/redoc` e `/openapi.json` sono generati dalle rotte stesse:
+sono il riferimento **completo e sempre aggiornato**, rotta per rotta, campo per
+campo. Questa pagina ne documenta le principali, spiegando quel che uno schema
+da solo non dice.
+
 **Collection Bruno:** `bruno/TreasureIQ/`. Apri la cartella in
 [Bruno](https://usebruno.com), scegli l'ambiente `locale` e parti da
 *Cittadino → Sessione*: le altre richieste del gruppo hanno bisogno della
@@ -72,6 +77,15 @@ Risposta (campi principali):
 | `numeri_utili` | I recapiti URP: telefoni, email, PEC. **Due fonti distinte, mai da confondere.** Su un comune **coperto** vengono dallo store — la scansione già salvata, `letto_il` è `scansionato_il`, il momento vero della scansione, mai un `now()` al volo. Su un comune **fuori copertura** vengono letti dal vivo in quella richiesta — `letto_il` è davvero adesso, perché il portale è stato letto ora. Marcati `non verificato` per costruzione in entrambi i casi: nessun numero è "verificato", è quello che il portale espone. `null` se non c'è nulla da mostrare. |
 | `comuni_ambigui[]` | Quando il nome nel messaggio combacia con più comuni omonimi: `[{nome, provincia, codice_istat}]` da rendere come schede cliccabili. La scelta è del cittadino, non nostra. Vuoto quando il comune è univoco o già scelto. |
 | `filtri[]` | I filtri civici **riconosciuti in questo turno** (`chat/filtri.py::riconosci_filtri`), già proiettati dal backend — non include le chiavi appena tolte con `filtri_override` nella stessa richiesta. Ogni voce è un `FiltroOut`: `chiave` (`FiltroChiave`), `valore`, `span` (dove nel testo, `null` se il filtro non viene dal testo di questo turno), `sorgente`, `negato` (`true` se il cittadino ha negato quel filtro, es. «non sono disabile»). È la fonte dei chip di provenienza rimovibili nel pannello «cosa abbiamo capito» del web: ogni chip che il cittadino toglie va in `filtri_override` al giro successivo. |
+| `topic` | Il topic riconosciuto in questo turno, dallo schema chiuso di intent — mai un testo libero del modello. |
+| `profilo_capito` | Cosa abbiamo capito della domanda in questo turno (comune, se coperto, …). Il pannello laterale lo rende come filtri attivi, così il cittadino può smentirci. `null` quando non c'è nulla da mostrare. |
+| `needs_clarification` | `true` quando manca ancora un dato per chiudere la risposta e il turno successivo dovrebbe rispondere a quel chiarimento, non ripartire da zero. |
+| `spid_required` | `true` se rispondere per davvero richiederebbe un'identificazione reale (SPID/CIE), che questo prototipo non fa. |
+| `spid_reason` | Perché servirebbe SPID, quando `spid_required` è `true`. `null` altrove. |
+| `scan` | Stato della scansione del comune riconosciuto in questo turno (in corso, riuscita, mai eseguita…). `null` quando nessun comune è stato nominato o scelto. |
+| `bandi_live` | Solo sul topic bandi: esito della scoperta live a due gradini REST, con i criteri arricchiti dal testo (quote-gated) e la data di verifica. `null` fuori da quel topic. |
+| `esito_connettore` | Esito grezzo del connettore (ramo M4, comune fuori copertura con portale leggibile): uffici, recapiti, Amministrazione Trasparente, verbatim. `null` quando il connettore non ha risposto o il ramo non è scattato. |
+| `chiarimento` | Quale domanda di follow-up pone questo turno: `figli_quanti` \| `disabile_minorenne` \| `composizione_famiglia` \| `null` (nessuna). Il client la rimanda pari pari al turno successivo. |
 
 ### `criteria[].state`, sul binario agevolazioni
 
@@ -109,6 +123,25 @@ comune **fuori copertura**, letti dal vivo su richiesta esplicita. Di un comune
 che non leggiamo non possiamo dire cosa spetta, ma possiamo dire a chi chiedere.
 La risposta torna marcata `non_verificato`: è ciò che il portale espone adesso,
 non un dato che abbiamo controllato. La guardia sui numeri vale qui come altrove.
+
+### `POST /api/at-analisi`
+
+`{ "codice_istat": "058003", "pdf_url": "https://..." }` — apre e legge UN
+allegato PDF di Amministrazione Trasparente già elencato dal connettore. Mai
+una scansione di massa: il cittadino (o il pannello) sceglie il PDF, questa
+rotta lo apre. Guardia host: 400 se `pdf_url` non sta sul dominio di quel
+comune (niente SSRF verso un host arbitrario). Importi, scadenze e criteri
+restano VERBATIM da `pypdf`: nessun modello li tocca.
+
+Risposta: `pdf_url`, `segmenti[]` (ogni voce `kind`, `url`, `pagina`, `testo`
+verbatim dal PDF), `note[]`.
+
+### `POST /api/feedback`
+
+`{ "testo": "...", "voto": 4 }` — una segnalazione libera del cittadino (`voto`
+1–5, facoltativo). Viene solo scritta: nessun echo del testo, nessuna lettura
+successiva via API — non è un fatto pubblicato come `/api/segnalazioni`, resta
+interno.
 
 ---
 
@@ -166,6 +199,8 @@ stato registrato — un checkout fresco disegna un censimento vuoto, non un erro
 | `GET /api/censimento` | L'ultimo rilevamento nazionale: piattaforme, fornitori, sezioni mancanti, vincoli. |
 | `GET /api/censimento/comune/{codice_istat}` | La piattaforma e l'aderenza AgID misurate per un comune, o `null` se mai spazzolato. |
 | `GET /api/connettori` | Il catalogo delle **sonde**: cosa sappiamo leggere, piattaforma per piattaforma (`livello`: `catalogo` \| `modello` \| `firma`). Costruito dal codice, non da una tabella a mano: una piattaforma che perde la sua declinazione sparisce da qui lo stesso giorno. |
+| `GET /api/registro/{codice_istat}` | La scheda del registro locale: piattaforma, dominio, endpoints, catalogo uffici e recapiti, così come l'ultima scansione li ha lasciati — letta SOLO da disco, mai una fetch al render. 404 se il comune non è mai stato scansionato. |
+| `GET /api/recapiti/{codice_istat}` | PEC, indirizzo e codice IPA ufficiali (Indice PA), per **qualsiasi** comune — anche uno mai scansionato. Join statico letto da disco, nessuna fetch. 404 se l'ente non è nell'indice IPA. |
 
 ### Cascata servizi (comune fuori copertura, portale a modello AgID)
 
@@ -178,6 +213,8 @@ verdetto (D-01): è il catalogo del comune «citato come fonte».
 | `GET /api/mappa-connettore/{codice_istat}` | La mappa di capacità del portale: catalogo servizi + le 15 categorie AgID (con `id`/`slug` per il drill) + uffici. `null` se il comune non è noto. Cache 30 giorni. |
 | `GET /api/mappa-connettore/{codice_istat}/categoria/{term_id}` | I servizi di una categoria, come titolo + link alla scheda. Lista vuota se la categoria non ha (più) servizi. |
 | `GET /api/mappa-connettore/{codice_istat}/scheda?url=<url>` | L'anteprima di un servizio, letta dalla sua pagina (descrizione, a chi è rivolto), con l'`url` per aprirla intera. L'`url` **deve** stare sul portale di quel comune (guardia host, niente proxy arbitrario), altrimenti `null`. Fonte citata, non verdetto. |
+| `GET /api/mappa-connettore/{codice_istat}/bandi` | I bandi/criteri pubblicati su Amministrazione Trasparente del comune, letti dal CPT AgID. Lista vuota se il comune non è noto, il portale non espone la sezione, o non ci sono item. Fonte citata, nessuna cifra toccata dal modello. |
+| `GET /api/mappa-connettore/{codice_istat}/bandi-criteri` | Come `/bandi`, ma dal vivo su due gradini REST (prova anche `wp/v2/pages`) e con i bandi arricchiti dai requisiti estratti dal testo. Risposta: `esito` (`coperto_con_bandi` \| `coperto_senza_bandi` \| `non_coperto` \| `comune_ignoto`), `gradino` che ha coperto il comune, `bandi[]`, `verificato_il`. 503 se la sonda live fallisce — mai un `non_coperto` falso. |
 
 ---
 

@@ -1,6 +1,6 @@
 # Cosa costruire dopo l'MVP
 
-*Dimensionato sui numeri misurati il 5 agosto 2026, non su un'architettura di
+*Dimensionato sui numeri misurati il 12 agosto 2026, non su un'architettura di
 riferimento. Ogni scelta scartata porta la condizione che la rimetterebbe in
 gioco: così la decisione si può rivedere con un dato invece che con un'opinione.*
 
@@ -153,7 +153,7 @@ Tre buchi noti, in ordine di quanto pesano sul cittadino:
 «il X% dei cittadini». Il campo esiste già in tabella, si riempie con un `UPDATE`
 sul codice ISTAT, e non tocca la rete.
 
-**800 comuni non riconosciuti** (10,1%). Restano in gruppi da 40–70, non più
+**844 comuni non riconosciuti** (10,7%). Restano in gruppi da 40–70, non più
 famiglie da mille. Ogni firma nuova vale ora decine di comuni, non centinaia.
 
 **155 comuni MyPortal leggibili in JSON e non ancora letti.** Sono il caso

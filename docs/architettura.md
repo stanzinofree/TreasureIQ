@@ -1,6 +1,6 @@
 # Architettura di TreasureIQ
 
-*Stato all'11 agosto 2026. Ogni cifra in questo documento è misurata, non stimata:
+*Stato al 12 agosto 2026. Ogni cifra in questo documento è misurata, non stimata:
 dove non abbiamo misurato, il documento lo dice.*
 
 ---
@@ -119,8 +119,8 @@ di cui conosciamo già l'indirizzo. Ogni pagina così raggiunta torna marcata
 
 | | |
 |---|---|
-| Righe di codice Python (`api/treasureiq`) | 21.838 su 46 moduli |
-| Righe di codice TypeScript/TSX (`web`) | 10.577 |
+| Righe di codice Python (`api/treasureiq`) | 27.908 su 58 moduli |
+| Righe di codice TypeScript/TSX (`web`) | 12.421 |
 | Test | 481, tutti verdi, su 27 file |
 | Comuni censiti | 7.896 — tutti i comuni italiani |
 | Richieste per un censimento completo | 34.229, circa 4 per comune |
@@ -241,7 +241,7 @@ Due regole imparate a caro prezzo:
   che è emerso ComWeb, che si dichiara in chiaro e finiva fra gli anonimi.
 - **Raggruppare per impronta esatta spacca le famiglie.** La versione di nginx e
   i nomi dei cookie cambiano fra deployment: raggruppando su quelli, Municipium —
-  1.009 comuni, il 12,8% d'Italia — appariva come decine di gruppi da cinque.
+  1.010 comuni, il 12,8% d'Italia — appariva come decine di gruppi da cinque.
 
 ---
 

@@ -5167,6 +5167,56 @@ a {
   font-size: 1.4rem;
   color: var(--ai-deep);
 }
+/* Famiglia piattaforma riconosciuta dal censimento: chiave-valore compatta
+   sopra al tier del connettore. Il vendor è il «cosa», il tier il «come». */
+.scheda-comune__piattaforma {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--ma-2) var(--ma-4);
+  margin: 0 0 var(--ma-4);
+  padding: var(--ma-3) var(--ma-4);
+  border: 1px solid var(--kasumi);
+  border-left: 3px solid var(--ai-deep);
+  border-radius: var(--radius-sm);
+  background: var(--paper-raised);
+}
+.scheda-comune__piattaforma > div {
+  display: contents;
+}
+.scheda-comune__piattaforma dt {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--sumi-faint);
+  align-self: center;
+}
+.scheda-comune__piattaforma dd {
+  margin: 0;
+  font-weight: 600;
+  color: var(--sumi);
+  text-transform: capitalize;
+}
+.scheda-comune__piattaforma dd a {
+  font-weight: 500;
+  text-transform: none;
+}
+/* Servizi rilevati via HTML (non API AgID): chip a scorrimento. */
+.scheda-comune__chip-riga {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ma-2);
+  margin: var(--ma-3) 0 0;
+}
+.scheda-comune__chip {
+  padding: 0.25rem 0.6rem;
+  border: 1px solid var(--kasumi);
+  border-radius: var(--radius-sm);
+  background: var(--paper-sunken);
+  font-size: 0.8rem;
+  color: var(--sumi);
+  text-transform: capitalize;
+}
 /* Le quattro superfici AgID come mini-card in griglia 2×2 (auto-fit sotto i
    ~440px → una colonna), non più righe piatte separate da un filo. Ogni card
    porta un'iconcina e un badge-stato colorato: blu autorità = via REST, giallo

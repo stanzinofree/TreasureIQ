@@ -892,6 +892,15 @@ export interface SchedaComune {
   orari: OrariLive | null;
   /** Solo host del comune (D-S8): mai un logo letto da un dominio estraneo. */
   logo_url: string | null;
+  /** Famiglia piattaforma dal censimento nazionale (storico.db), non dallo
+   *  scan-mappa: il vendor riconosciuto anche quando `connettore_tipo` cade su
+   *  "solo-html" perché il portale non espone REST AgID. `classificato_da` è la
+   *  provenienza (sonda vs riclassificazione). `null` = comune non censito.
+   *  `piattaforma_at` può valere "non_trovata"/"ignota": non sono vendor. */
+  piattaforma: string | null;
+  piattaforma_at: string | null;
+  at_url: string | null;
+  classificato_da: string | null;
 }
 
 export const fetchSchedaComune = (codiceIstat: string) =>
@@ -1257,6 +1266,8 @@ export interface PiattaformaAtRiga {
   comuni: number;
   popolazione: number | null;
   regioni: number;
+  regione_prima: string | null;
+  comuni_prima: number;
 }
 
 export interface Censimento {

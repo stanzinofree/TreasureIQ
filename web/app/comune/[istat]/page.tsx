@@ -18,8 +18,14 @@ import {
   type SchedaComune,
 } from "@/lib/api";
 import { linkAperturaDati, mailtoSicuro, LINK_ESTERNO } from "@/lib/moduli";
+import { nome } from "@/lib/palette";
 
 export const dynamic = "force-dynamic";
+
+/** Valori di `piattaforma_at` che NON sono un vendor: la sonda ha guardato ma
+ *  non ha trovato/riconosciuto un portale trasparenza. Copertura onesta, non
+ *  un nome da mostrare come se fosse un prodotto. */
+const AT_NON_VENDOR = new Set(["non_trovata", "ignota", "non_misurata", ""]);
 
 /** Data leggibile in it-IT, mai «Invalid Date» a schermo. Stesso formato di
  * `dataLeggibile` in Pannello.tsx — duplicato qui perché quella è privata al
@@ -92,14 +98,62 @@ function IconaSuperficie({ nome }: { nome: string }) {
   }
 }
 
+/** La famiglia piattaforma riconosciuta dal censimento nazionale. Vive sopra al
+ *  tier del connettore perché è indipendente da esso: un comune peopleweb resta
+ *  peopleweb anche se il portale non espone REST AgID e il tier cade su
+ *  "solo-html". `null` quando il comune non è ancora nel censimento. */
+function BloccoPiattaforma({ scheda }: { scheda: SchedaComune }) {
+  if (!scheda.piattaforma) return null;
+  const atVendor =
+    scheda.piattaforma_at && !AT_NON_VENDOR.has(scheda.piattaforma_at)
+      ? scheda.piattaforma_at
+      : null;
+  return (
+    <dl className="scheda-comune__piattaforma">
+      <div>
+        <dt>Piattaforma portale</dt>
+        <dd>{nome(scheda.piattaforma)}</dd>
+      </div>
+      <div>
+        <dt>Amministrazione trasparente</dt>
+        <dd>
+          {atVendor ? nome(atVendor) : "portale non individuato"}
+          {scheda.at_url ? (
+            <>
+              {" — "}
+              <a href={scheda.at_url} target="_blank" rel="noreferrer">
+                apri
+              </a>
+            </>
+          ) : null}
+        </dd>
+      </div>
+      {scheda.classificato_da ? (
+        <div>
+          <dt>Riconosciuta da</dt>
+          <dd>
+            {scheda.classificato_da === "sonda"
+              ? "sonda automatica"
+              : scheda.classificato_da}
+          </dd>
+        </div>
+      ) : null}
+    </dl>
+  );
+}
+
 /** Il blocco connettore: l'unico punto della scheda dove una % può comparire,
  * e solo per `connettore_tipo === "agid"` (D-S2). Ogni altro tier ha un
- * copy onesto, mai una cifra nuda. */
+ * copy onesto, mai una cifra nuda. La famiglia piattaforma (BloccoPiattaforma)
+ * la precede in ogni tier: è il "cosa" del portale, il tier è il "come" lo
+ * leggiamo. */
 function BloccoConnettore({ scheda }: { scheda: SchedaComune }) {
+  const piattaforma = <BloccoPiattaforma scheda={scheda} />;
   if (scheda.connettore_tipo === "agid" && scheda.aderenza) {
     const { percento, esposte, definite, superfici } = scheda.aderenza;
     return (
       <>
+        {piattaforma}
         <p className="scheda-comune__aderenza-cifra">
           Aderenza AgID <strong>{percento}%</strong>
           <span className="field__hint"> = {esposte}/{definite} superfici</span>
@@ -132,9 +186,23 @@ function BloccoConnettore({ scheda }: { scheda: SchedaComune }) {
     );
   }
   if (scheda.connettore_tipo === "solo-html") {
-    return <p className="lede">Solo HTML, dettaglio non ancora mappato.</p>;
+    return (
+      <>
+        {piattaforma}
+        <p className="lede">
+          {scheda.piattaforma
+            ? "Il portale non espone i cataloghi REST AgID: le superfici si leggono via scraping HTML."
+            : "Solo HTML, dettaglio non ancora mappato."}
+        </p>
+      </>
+    );
   }
-  return <p className="lede">Non ancora sondato.</p>;
+  return (
+    <>
+      {piattaforma}
+      <p className="lede">Non ancora sondato.</p>
+    </>
+  );
 }
 
 export default async function SchedaComunePage({
@@ -261,6 +329,20 @@ export default async function SchedaComunePage({
                 ))}
               </div>
             )}
+          </>
+        ) : registro?.uffici_snapshot?.length ? (
+          <>
+            <p className="lede">
+              {registro.uffici_snapshot.length} servizi rilevati dal portale
+              (lettura HTML, non via API AgID).
+            </p>
+            <div className="scheda-comune__chip-riga">
+              {registro.uffici_snapshot.map((u) => (
+                <span key={u.nome} className="scheda-comune__chip">
+                  <span>{u.nome}</span>
+                </span>
+              ))}
+            </div>
           </>
         ) : (
           <p className="lede">Nessuna API servizi esposta.</p>

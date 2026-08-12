@@ -535,6 +535,20 @@ def panoramica_piattaforme_at(db_path: Path, *, rilevato_il: date | None = None)
             SELECT piattaforma_at,
                    COUNT(*)                AS comuni,
                    COUNT(DISTINCT regione)  AS regioni,
+                   -- Stessa lettura del panorama BASE: la regione dove la
+                   -- piattaforma di trasparenza pesa di più separa un
+                   -- fornitore nazionale da una diffusione regionale.
+                   (SELECT p2.regione FROM portale_snapshot p2
+                     WHERE p2.rilevato_il = portale_snapshot.rilevato_il
+                       AND p2.piattaforma_at = portale_snapshot.piattaforma_at
+                     GROUP BY p2.regione ORDER BY COUNT(*) DESC LIMIT 1) AS regione_prima,
+                   (SELECT COUNT(*) FROM portale_snapshot p3
+                     WHERE p3.rilevato_il = portale_snapshot.rilevato_il
+                       AND p3.piattaforma_at = portale_snapshot.piattaforma_at
+                       AND p3.regione = (SELECT p4.regione FROM portale_snapshot p4
+                         WHERE p4.rilevato_il = portale_snapshot.rilevato_il
+                           AND p4.piattaforma_at = portale_snapshot.piattaforma_at
+                         GROUP BY p4.regione ORDER BY COUNT(*) DESC LIMIT 1)) AS comuni_prima,
                    SUM(popolazione)         AS popolazione
             FROM portale_snapshot
             WHERE rilevato_il = ? AND piattaforma_at IS NOT NULL
@@ -559,7 +573,8 @@ def portale_del_comune(db_path: Path, codice_istat: str) -> dict | None:
     with apri(db_path) as conn:
         riga = conn.execute(
             """
-            SELECT piattaforma, aderenza, rilevato_il
+            SELECT nome, piattaforma, aderenza, rilevato_il,
+                   piattaforma_at, at_url, classificato_da
             FROM portale_snapshot
             WHERE codice_istat = ?
             ORDER BY rilevato_il DESC

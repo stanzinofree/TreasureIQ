@@ -26,7 +26,7 @@ import re
 from pathlib import Path
 from urllib.parse import urljoin, urlparse
 
-from pydantic import BaseModel
+from pydantic import AliasChoices, BaseModel, Field
 
 from treasureiq.connettore import EsitoConnettore
 from treasureiq.ingest.host_guard import fetch_guardato
@@ -188,7 +188,13 @@ class RegistroComune(BaseModel):
     piattaforma_at: str | None = None
     endpoints: EndpointsRegistro
     ultima_scansione: str
-    uffici_snapshot: list[UfficioSnapshot] = []
+    # Back-compat (rename servizi_snapshot→uffici_snapshot): i record scritti
+    # prima del rinomino portano la chiave vecchia. L'alias li rilegge senza
+    # re-sweep; la serializzazione resta sempre `uffici_snapshot`.
+    uffici_snapshot: list[UfficioSnapshot] = Field(
+        default=[],
+        validation_alias=AliasChoices("uffici_snapshot", "servizi_snapshot"),
+    )
     prima_scansione: bool
     cambiato: Cambiato | None = None
     recapiti: Recapiti | None = None

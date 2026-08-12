@@ -1,0 +1,193 @@
+{
+ "codice_istat": "083044",
+ "piattaforma": "wordpress_agid",
+ "letto_il": "2026-08-11T05:01:33.111416+00:00",
+ "aree_amministrative": [],
+ "uffici": [
+  {
+   "nome": "OSL",
+   "url": "https://www.comune.malvagna.me.it/t/amministrazione/unita_organizzativa/osl/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T05:01:35.634820+00:00"
+  },
+  {
+   "nome": "Vigili Urbani",
+   "url": "https://www.comune.malvagna.me.it/t/amministrazione/unita_organizzativa/vigili-urbani/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T05:01:35.634820+00:00"
+  },
+  {
+   "nome": "Area Tecnica",
+   "url": "https://www.comune.malvagna.me.it/t/amministrazione/unita_organizzativa/area-tecnica-2/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T05:01:35.634820+00:00"
+  },
+  {
+   "nome": "Area Finanziaria",
+   "url": "https://www.comune.malvagna.me.it/t/amministrazione/unita_organizzativa/area-finanziaria/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T05:01:35.634820+00:00"
+  },
+  {
+   "nome": "Area Amministrativa",
+   "url": "https://www.comune.malvagna.me.it/t/amministrazione/unita_organizzativa/area-amministrativa/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T05:01:35.634820+00:00"
+  },
+  {
+   "nome": "Ufficio Tecnico",
+   "url": "https://www.comune.malvagna.me.it/t/amministrazione/unita_organizzativa/ufficio-tecnico/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T05:01:35.634820+00:00"
+  },
+  {
+   "nome": "Consiglio Comunale",
+   "url": "https://www.comune.malvagna.me.it/t/amministrazione/unita_organizzativa/consiglio-comunale/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T05:01:35.634820+00:00"
+  },
+  {
+   "nome": "Giunta Comunale",
+   "url": "https://www.comune.malvagna.me.it/t/amministrazione/unita_organizzativa/giunta-comunale/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T05:01:35.634820+00:00"
+  },
+  {
+   "nome": "Commissioni Consiliari",
+   "url": "https://www.comune.malvagna.me.it/t/amministrazione/unita_organizzativa/commissioni-consiliari/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T05:01:35.634820+00:00"
+  },
+  {
+   "nome": "Organi di Governo",
+   "url": "https://www.comune.malvagna.me.it/t/amministrazione/unita_organizzativa/organi-di-governo/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T05:01:35.634820+00:00"
+  },
+  {
+   "nome": "Area Pianificazione e Sviluppo del Territorio",
+   "url": "https://www.comune.malvagna.me.it/t/amministrazione/unita_organizzativa/area-pianificazione-e-sviluppo-del-territorio/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T05:01:35.634820+00:00"
+  },
+  {
+   "nome": "Aree Amministrative",
+   "url": "https://www.comune.malvagna.me.it/t/amministrazione/unita_organizzativa/aree-amministrative/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T05:01:35.634820+00:00"
+  },
+  {
+   "nome": "Ufficio Ragioneria",
+   "url": "https://www.comune.malvagna.me.it/t/amministrazione/unita_organizzativa/area-economia-e-territorio/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T05:01:35.634820+00:00"
+  },
+  {
+   "nome": "Affari Generali",
+   "url": "https://www.comune.malvagna.me.it/t/amministrazione/unita_organizzativa/area-affari-generali-e-personale/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T05:01:35.634820+00:00"
+  },
+  {
+   "nome": "Suap",
+   "url": "https://www.comune.malvagna.me.it/t/amministrazione/unita_organizzativa/suap/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T05:01:35.634820+00:00"
+  },
+  {
+   "nome": "Servizi demografici, Elettorale, Leva",
+   "url": "https://www.comune.malvagna.me.it/t/amministrazione/unita_organizzativa/ufficio-anagrafe/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T05:01:35.634820+00:00"
+  },
+  {
+   "nome": "Ufficio Tributi",
+   "url": "https://www.comune.malvagna.me.it/t/amministrazione/unita_organizzativa/tributi/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T05:01:35.634820+00:00"
+  },
+  {
+   "nome": "Ufficio Protocollo",
+   "url": "https://www.comune.malvagna.me.it/t/amministrazione/unita_organizzativa/segreteria/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T05:01:35.634820+00:00"
+  }
+ ],
+ "amministrazione_trasparente": {
+  "indice_url": "https://www.comune.malvagna.me.it/amministrazione-trasparente/",
+  "bandi_attivi": [],
+  "pdf_presenti": false
+ }
+}

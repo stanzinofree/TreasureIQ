@@ -1,0 +1,853 @@
+{
+ "codice_istat": "074010",
+ "piattaforma": "wordpress_agid",
+ "letto_il": "2026-08-11T03:35:52.855738+00:00",
+ "aree_amministrative": [],
+ "uffici": [
+  {
+   "nome": "Commissione Comunale per le pari opportunità, per le politiche di genere e i diritti civili",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/commissione-comunale-per-le-pari-opportunita-per-le-politiche-di-genere-e-i-diritti-civili/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Commissione Consiliare Speciale “Piano Nazionale di Ripresa e Resilienza”",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/commissione-consiliare-speciale-piano-nazionale-di-ripresa-e-resilienza/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "IV Commissione",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/iv-commissione/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "III Commissione",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/iii-commissione/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "II Commissione",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/ii-commissione/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "I Commissione",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/i-commissione/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Commissione Garanzia e Controllo",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/commissione-garanzia-e-controllo/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Commissione Affari Istituzionali",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/commissione-affari-istituzionali/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Consiglio Comunale",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/consiglio-comunale/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Giunta comunale",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/giunta-comunale/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Presidente Consiglio",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/presidente-consiglio/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Sindaco",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/sindaco/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Commissario Straordinario",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/commissario-straordinario/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Sportello del terzo settore",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/sportello-del-terzo-settore/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Direzione scientifica museo e biblioteca",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/direzione-scientifica-museo-e-biblioteca/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "AUSER",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/auser/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Direzione scientifica Museo e Biblioteca",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/direzione-scientifica-museo-e-biblioteca-2/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Avvocatura civica",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/avvocatura-civica/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Area X",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/servizi-sociali-pubblica-istruzione/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Area IX",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/polizia-locale/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Area VIII",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/innovazione-tecnologica-sistemi-informativi-e-telematici/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Area VII",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/servizi-finanziari-e-tributi/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Area VI",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/servizi-al-territorio/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Area V",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/sviluppo-economico/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Area IV",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/urbanistica-pianificazione-territoriale-edilizia-privata-ambiente/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Area III",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/lavori-pubblici-gestione-e-coordinamento-pnrr-progettazione-strategica/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Area II",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/cultura-e-turismo/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Area I",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/affari-generali-segreteria-risorse-umane/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Segretario Generale",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/segretario-generale-2/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Avvocatura civica",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/avvocatura-civica-2/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Segretario Generale",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/segretario-generale/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Ufficio tributi",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/ufficio-tributi/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Ufficio Agricoltura",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/ufficio-agricoltura/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Ufficio privacy",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/ufficio-privacy/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Ufficio sport",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/ufficio-sport/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Ufficio Demografici, stato civile, statistica ed elettorale",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/ufficio-demografici-stato-civile-statistica-ed-elettorale/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Ufficio affari generali ed istituzionali",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/ufficio-affari-generali-ed-istituzionali/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Ufficio gestione area parchi archeologici",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/ufficio-gestione-area-parchi-archeologici/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Ufficio Turismo",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/ufficio-turismo/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Ufficio percorsi di legalità",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/ufficio-percorsi-di-legalita/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Ufficio verbali, servizi amministrativi, infortunistica e contenzioso",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/ufficio-verbali-servizi-amministrativi-infortunistica-e-contenzioso/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Ufficio Viabilità",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/ufficio-viabilita/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Ufficio gestione comitati di quartiere – Partecipazione attiva",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/ufficio-gestione-comitati-di-quartiere-partecipazione-attiva/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Ufficio di Piano",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/ufficio-di-piano/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Ufficio controlli interni – anticorruzione",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/ufficio-controlli-interni-anticorruzione/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Ufficio economato-provveditorato",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/ufficio-economato-provveditorato/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Ufficio Europa",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/ufficio-europa/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Ufficio centro storico",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/ufficio-centro-storico/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Ufficio gestione utenze",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/ufficio-gestione-utenze/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Ufficio progetti edilizi",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/ufficio-progetti-edilizi/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Ufficio spettacolo – eventi",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/ufficio-spettacolo-eventi/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Ufficio Risorse Umane",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/ufficio-risorse-umane/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Ufficio Protezione Civile",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/ufficio-protezione-civile/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Ufficio patrimonio",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/ufficio-patrimonio/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Ufficio servizi a rete",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/ufficio-servizi-a-rete/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Ufficio manutenzioni",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/ufficio-manutenzioni/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Ufficio messi",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/ufficio-messi/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Ufficio Autorizzazione Unica Ambientale",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/uffico-autorizzazione-unica-ambientale/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Ufficio attuazione politiche sanitarie",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/ufficio-attuazione-politiche-sanitarie/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Ufficio per la transizione al digitale",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/ufficio-per-la-transizione-al-digitale/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Ufficio Notifiche",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/ufficio-ufficio-notifiche/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Ufficio bilancio e programmazione",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/ufficio-bilancio-e-programmazione/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Ufficio Servizi Cimiteriali",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/ufficio-servizi-cimiteriali/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Ufficio Segreteria",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/ufficio-segreteria/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Ufficio Stato Civile",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/ufficio-stato-civile/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Ufficio Sportello del contribuente ufficio pubbliche affissioni",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/ufficio-sportello-del-contribuente-ufficio-pubbliche-affissioni/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Ufficio relazioni con il pubblico",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/ufficio-relazioni-con-il-pubblico/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Ufficio Servizi Sociali",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/ufficio-servizi-sociali/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Ufficio gare e contratti",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/ufficio-gare-e-contratti/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Ufficio Lavori Pubblici",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/ufficio-lavori-pubblici/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Ufficio edilizia privata",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/ufficio-edilizia-privata/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Ufficio contenzioso",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/ufficio-contenzioso/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Ufficio Elettorale",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/ufficio-elettorale/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Ufficio servizi scolastici",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/ufficio-servizi-scolastici/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Ufficio Cultura – Beni monumentali",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/ufficio-cultura-beni-monumentali/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Ufficio Attività Produttive SUAP",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/ufficio-attivita-produttive-suap/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Ufficio ecologia, ambiente e verde pubblico",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/ufficio-ecologia-ambiente-e-verde-pubblico/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Ufficio di staff",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/ufficio-di-staff/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Ufficio Politiche Infanzia – Asilo Nido – Politiche Giovanili",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/ufficio-politiche-infanzia-asilo-nido-politiche-giovanili/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Ufficio paesaggio",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/ufficio-paesaggio/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Ufficio Archivio Storico",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/ufficio-archivio-storico/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Ufficio pianificazione territoriale",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/ufficio-pianificazione-territoriale/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Ufficio Randagismo",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/ufficio-randagismo/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  },
+  {
+   "nome": "Ufficio Protocollo",
+   "url": "https://www.comune.mesagne.br.it/amministrazione/unita_organizzativa/ufficio-protocollo/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:35:58.359578+00:00"
+  }
+ ],
+ "amministrazione_trasparente": {
+  "indice_url": "https://www.comune.mesagne.br.it/amministrazione-trasparente/",
+  "bandi_attivi": [],
+  "pdf_presenti": false
+ }
+}

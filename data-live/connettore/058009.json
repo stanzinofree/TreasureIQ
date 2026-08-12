@@ -1,0 +1,722 @@
+{
+ "codice_istat": "058009",
+ "piattaforma": "municipium",
+ "letto_il": "2026-08-11T21:23:54.101410+00:00",
+ "aree_amministrative": [],
+ "uffici": [
+  {
+   "nome": "Consiglio comunale",
+   "url": "https://www.comune.ariccia.rm.it/it/unita_organizzative/consiglio-comunale",
+   "telefoni": [
+    "06934851"
+   ],
+   "email": [
+    "segreteriagenerale@comunediariccia.it"
+   ],
+   "pec": [
+    "protocollo@pec.comunediariccia.it"
+   ],
+   "orari": null,
+   "source_typed": true,
+   "letto_il": "2026-08-11T21:24:00.671472+00:00"
+  },
+  {
+   "nome": "Giunta comunale",
+   "url": "https://www.comune.ariccia.rm.it/it/unita_organizzative/giunta-comunale",
+   "telefoni": [
+    "06934851"
+   ],
+   "email": [
+    "segreteriagenerale@comunediariccia.it"
+   ],
+   "pec": [
+    "protocollo@pec.comunediariccia.it"
+   ],
+   "orari": null,
+   "source_typed": true,
+   "letto_il": "2026-08-11T21:24:01.173734+00:00"
+  },
+  {
+   "nome": "Area I – Programmazione e Controllo attività economiche e finanziarie",
+   "url": "https://www.comune.ariccia.rm.it/it/unita_organizzative/area-i-programmazione-e-controllo-attivita-economiche-e-finanziarie",
+   "telefoni": [
+    "0693485405"
+   ],
+   "email": [
+    "dirigentearea1@comunediariccia.it"
+   ],
+   "pec": [
+    "protocollo@pec.comunediariccia.it"
+   ],
+   "orari": null,
+   "source_typed": true,
+   "letto_il": "2026-08-11T21:24:01.677778+00:00"
+  },
+  {
+   "nome": "Area II – Lavori Pubblici e politiche territoriali",
+   "url": "https://www.comune.ariccia.rm.it/it/unita_organizzative/area-ii-lavori-pubblici-e-politiche-territoriali",
+   "telefoni": [],
+   "email": [
+    "dirigentearea2@comunediariccia.it"
+   ],
+   "pec": [
+    "protocollo@pec.comunediariccia.it"
+   ],
+   "orari": null,
+   "source_typed": true,
+   "letto_il": "2026-08-11T21:24:02.623414+00:00"
+  },
+  {
+   "nome": "Area III - Polizia Locale",
+   "url": "https://www.comune.ariccia.rm.it/it/unita_organizzative/area-iii-polizia-locale",
+   "telefoni": [],
+   "email": [
+    "dirigentearea3@comunediariccia.it"
+   ],
+   "pec": [
+    "protocollo@pec.comunediariccia.it"
+   ],
+   "orari": null,
+   "source_typed": true,
+   "letto_il": "2026-08-11T21:24:03.563645+00:00"
+  },
+  {
+   "nome": "Area IV – Protezione civile e servizi al territorio",
+   "url": "https://www.comune.ariccia.rm.it/it/unita_organizzative/area-iv-protezione-civile-e-servizi-al-territorio",
+   "telefoni": [
+    "3206884231"
+   ],
+   "email": [
+    "dirigentearea2@comunediariccia.it"
+   ],
+   "pec": [
+    "protocollo@pec.comunediariccia.it"
+   ],
+   "orari": null,
+   "source_typed": true,
+   "letto_il": "2026-08-11T21:24:03.952967+00:00"
+  },
+  {
+   "nome": "Area V – Amministrativa",
+   "url": "https://www.comune.ariccia.rm.it/it/unita_organizzative/area-v-amministrativa",
+   "telefoni": [
+    "0693485405"
+   ],
+   "email": [
+    "dirigentearea1@comunediariccia.it"
+   ],
+   "pec": [
+    "protocollo@pec.comunediariccia.it"
+   ],
+   "orari": null,
+   "source_typed": true,
+   "letto_il": "2026-08-11T21:24:04.415522+00:00"
+  },
+  {
+   "nome": "Segretario comunale",
+   "url": "https://www.comune.ariccia.rm.it/it/unita_organizzative/segretario-comunale",
+   "telefoni": [
+    "06934851"
+   ],
+   "email": [
+    "segreteriagenerale@comunediariccia.it"
+   ],
+   "pec": [
+    "protocollo@pec.comunediariccia.it"
+   ],
+   "orari": null,
+   "source_typed": true,
+   "letto_il": "2026-08-11T21:24:04.946033+00:00"
+  },
+  {
+   "nome": "Affari Legali",
+   "url": "https://www.comune.ariccia.rm.it/it/unita_organizzative/affari-legali",
+   "telefoni": [
+    "3807925919",
+    "3890519587"
+   ],
+   "email": [
+    "ufficiocontenzioso@comunediariccia.it"
+   ],
+   "pec": [
+    "protocollo@pec.comunediariccia.it"
+   ],
+   "orari": null,
+   "source_typed": true,
+   "letto_il": "2026-08-11T21:24:05.529927+00:00"
+  },
+  {
+   "nome": "Farmacia Comunale Spolverini",
+   "url": "https://www.comune.ariccia.rm.it/it/unita_organizzative/farmacie",
+   "telefoni": [
+    "069330950"
+   ],
+   "email": [
+    "farmaciaspolverini@comunediariccia.it"
+   ],
+   "pec": [
+    "protocollo@pec.comunediariccia.it"
+   ],
+   "orari": null,
+   "source_typed": true,
+   "letto_il": "2026-08-11T21:24:06.069289+00:00"
+  },
+  {
+   "nome": "Farmacia Crocifisso",
+   "url": "https://www.comune.ariccia.rm.it/it/unita_organizzative/farmacia-crocifisso",
+   "telefoni": [
+    "069305302"
+   ],
+   "email": [
+    "farmaciacrocefisso@comunediariccia.it"
+   ],
+   "pec": [
+    "protocollo@pec.comunediariccia.it"
+   ],
+   "orari": null,
+   "source_typed": true,
+   "letto_il": "2026-08-11T21:24:06.480185+00:00"
+  },
+  {
+   "nome": "Polizia Locale - Centrale Operativa",
+   "url": "https://www.comune.ariccia.rm.it/it/unita_organizzative/centrale-operativa",
+   "telefoni": [
+    "069334141"
+   ],
+   "email": [
+    "polizialocale.centraleoperativa@comunediariccia.it"
+   ],
+   "pec": [
+    "protocollo@pec.comunediariccia.it"
+   ],
+   "orari": null,
+   "source_typed": true,
+   "letto_il": "2026-08-11T21:24:06.866421+00:00"
+  },
+  {
+   "nome": "Polizia Locale - Supporto Esterno",
+   "url": "https://www.comune.ariccia.rm.it/it/unita_organizzative/polizia-locale-supporto-esterno",
+   "telefoni": [],
+   "email": [
+    "polizialocale.supportoesterno@comunediariccia.it"
+   ],
+   "pec": [
+    "protocollo@pec.comunediariccia.it"
+   ],
+   "orari": null,
+   "source_typed": true,
+   "letto_il": "2026-08-11T21:24:07.379173+00:00"
+  },
+  {
+   "nome": "Polizia Locale - Ufficio Attività economiche",
+   "url": "https://www.comune.ariccia.rm.it/it/unita_organizzative/ufficio-attivita-economiche",
+   "telefoni": [],
+   "email": [
+    "polizialocale.controlloattivitaeconomiche@comunediariccia.it"
+   ],
+   "pec": [
+    "protocollo@pec.comunediariccia.it"
+   ],
+   "orari": null,
+   "source_typed": true,
+   "letto_il": "2026-08-11T21:24:07.783737+00:00"
+  },
+  {
+   "nome": "Polizia Locale - Ufficio Procedimenti sanzionatori",
+   "url": "https://www.comune.ariccia.rm.it/it/unita_organizzative/ufficio-procedimenti-sanzionatori",
+   "telefoni": [],
+   "email": [
+    "polizialocale.procedimentisanzionatori@comunediariccia.it"
+   ],
+   "pec": [
+    "protocollo@pec.comunediariccia.it"
+   ],
+   "orari": null,
+   "source_typed": true,
+   "letto_il": "2026-08-11T21:24:08.349860+00:00"
+  },
+  {
+   "nome": "Polizia Locale - Ufficio Tutela del Territorio",
+   "url": "https://www.comune.ariccia.rm.it/it/unita_organizzative/ufficio-tutela-del-territorio",
+   "telefoni": [],
+   "email": [
+    "polizialocale.tutelaterritorio@comuneariccia.it"
+   ],
+   "pec": [
+    "protocollo@pec.comunediariccia.it"
+   ],
+   "orari": null,
+   "source_typed": true,
+   "letto_il": "2026-08-11T21:24:08.833727+00:00"
+  },
+  {
+   "nome": "Polizia Locale - Ufficio affari Generali",
+   "url": "https://www.comune.ariccia.rm.it/it/unita_organizzative/ufficio-affari-generali",
+   "telefoni": [],
+   "email": [
+    "polizialocale.affarigenerali@comunediariccia.it"
+   ],
+   "pec": [
+    "protocollo@pec.comunediariccia.it"
+   ],
+   "orari": null,
+   "source_typed": true,
+   "letto_il": "2026-08-11T21:24:09.495180+00:00"
+  },
+  {
+   "nome": "Polizia Locale - Ufficio forniture beni e servizi",
+   "url": "https://www.comune.ariccia.rm.it/it/unita_organizzative/ufficio-forniture-beni-e-servizi",
+   "telefoni": [],
+   "email": [
+    "polizialocale.forniturebeniservizi@comunediariccia.it"
+   ],
+   "pec": [
+    "protocollo@pec.comunediariccia.it"
+   ],
+   "orari": null,
+   "source_typed": true,
+   "letto_il": "2026-08-11T21:24:09.914562+00:00"
+  },
+  {
+   "nome": "Polizia Locale - Ufficio permessi notifiche ed accertamenti e accesso agli atti",
+   "url": "https://www.comune.ariccia.rm.it/it/unita_organizzative/ufficio-permessi-notifiche-ed-accertamenti",
+   "telefoni": [],
+   "email": [
+    "polizialocale.accessoattipermessi@comunediariccia.it"
+   ],
+   "pec": [
+    "protocollo@pec.comunediariccia.it"
+   ],
+   "orari": null,
+   "source_typed": true,
+   "letto_il": "2026-08-11T21:24:10.381339+00:00"
+  },
+  {
+   "nome": "Polizia Locale - Ufficio polizia giudiziaria",
+   "url": "https://www.comune.ariccia.rm.it/it/unita_organizzative/ufficio-polizia-giudiziaria",
+   "telefoni": [],
+   "email": [
+    "polizialocale.poliziagiudiziaria@comunediariccia.it"
+   ],
+   "pec": [
+    "protocollo@pec.comunediariccia.it"
+   ],
+   "orari": null,
+   "source_typed": true,
+   "letto_il": "2026-08-11T21:24:10.810303+00:00"
+  },
+  {
+   "nome": "RASA/Contratti",
+   "url": "https://www.comune.ariccia.rm.it/it/unita_organizzative/rasa-contratti",
+   "telefoni": [
+    "0693485405"
+   ],
+   "email": [
+    "dirigentearea1@comunediariccia.it"
+   ],
+   "pec": [
+    "protocollo@pec.comunediariccia.it"
+   ],
+   "orari": null,
+   "source_typed": true,
+   "letto_il": "2026-08-11T21:24:11.202742+00:00"
+  },
+  {
+   "nome": "SUAP",
+   "url": "https://www.comune.ariccia.rm.it/it/unita_organizzative/suap",
+   "telefoni": [
+    "3890507962",
+    "3881836334"
+   ],
+   "email": [
+    "ufficiosuap@comunediariccia.it"
+   ],
+   "pec": [
+    "suap@pec.comunediariccia.it"
+   ],
+   "orari": null,
+   "source_typed": true,
+   "letto_il": "2026-08-11T21:24:11.911031+00:00"
+  },
+  {
+   "nome": "SUE",
+   "url": "https://www.comune.ariccia.rm.it/it/unita_organizzative/sue",
+   "telefoni": [
+    "3294520142",
+    "3291946901",
+    "3804771268",
+    "3891570017"
+   ],
+   "email": [
+    "sue@comunediariccia.it"
+   ],
+   "pec": [
+    "protocollo@pec.comunediariccia.it"
+   ],
+   "orari": null,
+   "source_typed": true,
+   "letto_il": "2026-08-11T21:24:12.737873+00:00"
+  },
+  {
+   "nome": "Segreteria Generale affari generali assistenza organi istituzionali",
+   "url": "https://www.comune.ariccia.rm.it/it/unita_organizzative/segreteria-generale-affari-generali-assistenza-organi-istituzionali",
+   "telefoni": [
+    "3881153752",
+    "3896871382"
+   ],
+   "email": [
+    "segreteriagenerale@comunediariccia.it"
+   ],
+   "pec": [
+    "protocollo@pec.comunediariccia.it"
+   ],
+   "orari": null,
+   "source_typed": true,
+   "letto_il": "2026-08-11T21:24:13.244203+00:00"
+  },
+  {
+   "nome": "Segreteria e Ufficio Staff del Sindaco",
+   "url": "https://www.comune.ariccia.rm.it/it/unita_organizzative/segreteria-e-ufficio-staff-del-sindaco",
+   "telefoni": [
+    "06934851"
+   ],
+   "email": [
+    "ufficiosegreteriadelsindaco@comunediariccia.it"
+   ],
+   "pec": [],
+   "orari": null,
+   "source_typed": true,
+   "letto_il": "2026-08-11T21:24:13.883673+00:00"
+  },
+  {
+   "nome": "Servizi informatici",
+   "url": "https://www.comune.ariccia.rm.it/it/unita_organizzative/servizi-informatici",
+   "telefoni": [
+    "3881657188",
+    "3206890587",
+    "3804731547"
+   ],
+   "email": [
+    "ufficioced@comunediariccia.it"
+   ],
+   "pec": [
+    "protocollo@pec.comunediariccia.it"
+   ],
+   "orari": null,
+   "source_typed": true,
+   "letto_il": "2026-08-11T21:24:14.676636+00:00"
+  },
+  {
+   "nome": "Trasparenza – Prevenzione della corruzione, controlli successivi",
+   "url": "https://www.comune.ariccia.rm.it/it/unita_organizzative/trasparenza-prevenzione-della-corruzione-controlli-successivi",
+   "telefoni": [
+    "06934851"
+   ],
+   "email": [
+    "segreteriagenerale@comunediariccia.it"
+   ],
+   "pec": [
+    "protocollo@pec.comunediariccia.it"
+   ],
+   "orari": null,
+   "source_typed": true,
+   "letto_il": "2026-08-11T21:24:15.129854+00:00"
+  },
+  {
+   "nome": "Trasporto Pubblico Locale",
+   "url": "https://www.comune.ariccia.rm.it/it/unita_organizzative/trasporto-pubblico-locale",
+   "telefoni": [],
+   "email": [
+    "cciccarella@comunediariccia.it",
+    "lgraziano@comunediariccia.it"
+   ],
+   "pec": [
+    "protocollo@pec.comunediariccia.it"
+   ],
+   "orari": null,
+   "source_typed": true,
+   "letto_il": "2026-08-11T21:24:15.566504+00:00"
+  },
+  {
+   "nome": "Tutela paesaggistica",
+   "url": "https://www.comune.ariccia.rm.it/it/unita_organizzative/tutela-paesaggistica",
+   "telefoni": [
+    "3804788749",
+    "3294520142",
+    "3291946901",
+    "3804771268"
+   ],
+   "email": [
+    "ufficiosue@comunediariccia.it"
+   ],
+   "pec": [
+    "protocollo@pec.comunediariccia.it"
+   ],
+   "orari": null,
+   "source_typed": true,
+   "letto_il": "2026-08-11T21:24:16.079945+00:00"
+  },
+  {
+   "nome": "Ufficio Canone Unico Patrimoniale",
+   "url": "https://www.comune.ariccia.rm.it/it/unita_organizzative/ufficio-canone-unico-patrimoniale",
+   "telefoni": [
+    "3888960069",
+    "393890519587"
+   ],
+   "email": [
+    "ufficiopatrimonio@comunediariccia.it"
+   ],
+   "pec": [
+    "protocollo@pec.comunediariccia.it"
+   ],
+   "orari": null,
+   "source_typed": true,
+   "letto_il": "2026-08-11T21:24:17.025041+00:00"
+  },
+  {
+   "nome": "Ufficio Cimitero",
+   "url": "https://www.comune.ariccia.rm.it/it/unita_organizzative/ufficio-cimitero",
+   "telefoni": [
+    "06934851"
+   ],
+   "email": [
+    "ufficiopatrimonio@comunediariccia.it"
+   ],
+   "pec": [
+    "protocollo@pec.comunediariccia.it"
+   ],
+   "orari": null,
+   "source_typed": true,
+   "letto_il": "2026-08-11T21:24:17.650537+00:00"
+  },
+  {
+   "nome": "Ufficio Desk Evoluto e Servizi al Cittadino",
+   "url": "https://www.comune.ariccia.rm.it/it/unita_organizzative/ufficio-desk-evoluto-e-servizi-al-cittadino",
+   "telefoni": [],
+   "email": [],
+   "pec": [
+    "protocollo@pec.comunediariccia.it"
+   ],
+   "orari": null,
+   "source_typed": true,
+   "letto_il": "2026-08-11T21:24:18.095527+00:00"
+  },
+  {
+   "nome": "Ufficio Edilizia e Vigilanza sull’Attività Edilizia",
+   "url": "https://www.comune.ariccia.rm.it/it/unita_organizzative/ufficio-edilizia-e-vigilanza-sull-attivita-edilizia",
+   "telefoni": [
+    "3804788749",
+    "3294520142",
+    "3291946901",
+    "3804771268"
+   ],
+   "email": [
+    "ufficiosue@comunediariccia.it"
+   ],
+   "pec": [
+    "protocollo@pec.comunediariccia.it"
+   ],
+   "orari": null,
+   "source_typed": true,
+   "letto_il": "2026-08-11T21:24:18.569157+00:00"
+  },
+  {
+   "nome": "Ufficio LL.PP",
+   "url": "https://www.comune.ariccia.rm.it/it/unita_organizzative/ufficio-ll-pp",
+   "telefoni": [
+    "3896408723",
+    "3804780921",
+    "3894733274",
+    "3891570017"
+   ],
+   "email": [
+    "ufficiolavoripubblici@comunediariccia.it"
+   ],
+   "pec": [
+    "protocollo@pec.comunediariccia.it"
+   ],
+   "orari": null,
+   "source_typed": true,
+   "letto_il": "2026-08-11T21:24:19.091782+00:00"
+  },
+  {
+   "nome": "Ufficio Manutenzioni",
+   "url": "https://www.comune.ariccia.rm.it/it/unita_organizzative/ufficio-manutenzioni",
+   "telefoni": [
+    "3881628311"
+   ],
+   "email": [
+    "ufficiolavoripubblici@comunediariccia.it"
+   ],
+   "pec": [
+    "protocollo@pec.comunediariccia.it"
+   ],
+   "orari": null,
+   "source_typed": true,
+   "letto_il": "2026-08-11T21:24:19.587877+00:00"
+  },
+  {
+   "nome": "Ufficio Palazzo Chigi",
+   "url": "https://www.comune.ariccia.rm.it/it/unita_organizzative/ufficio-palazzo-chigi",
+   "telefoni": [
+    "069330053"
+   ],
+   "email": [
+    "info@palazzochigiariccia.it"
+   ],
+   "pec": [
+    "protocollo@pec.comunediariccia.it"
+   ],
+   "orari": null,
+   "source_typed": true,
+   "letto_il": "2026-08-11T21:24:20.182125+00:00"
+  },
+  {
+   "nome": "Ufficio Polizia Stradale",
+   "url": "https://www.comune.ariccia.rm.it/it/unita_organizzative/ufficio-polizia-stradale",
+   "telefoni": [],
+   "email": [
+    "polizialocale.poliziastradale@comuneariccia.it"
+   ],
+   "pec": [
+    "protocollo@pec.comunediariccia.it"
+   ],
+   "orari": null,
+   "source_typed": true,
+   "letto_il": "2026-08-11T21:24:20.639502+00:00"
+  },
+  {
+   "nome": "Ufficio Polizia Venatoria e Randagismo",
+   "url": "https://www.comune.ariccia.rm.it/it/unita_organizzative/ufficio-polizia-venatoria-e-randagismo",
+   "telefoni": [],
+   "email": [
+    "polizialocale.randagismovenatoria@comuneariccia.it"
+   ],
+   "pec": [
+    "protocollo@pec.comunediariccia.it"
+   ],
+   "orari": null,
+   "source_typed": true,
+   "letto_il": "2026-08-11T21:24:21.166861+00:00"
+  },
+  {
+   "nome": "Ufficio Protezione Civile –Centrale Operativa",
+   "url": "https://www.comune.ariccia.rm.it/it/unita_organizzative/ufficio-protezione-civile-centrale-operativa",
+   "telefoni": [],
+   "email": [
+    "cciccarella@comunediariccia.it"
+   ],
+   "pec": [
+    "protocollo@pec.comunediariccia.it"
+   ],
+   "orari": null,
+   "source_typed": true,
+   "letto_il": "2026-08-11T21:24:21.674328+00:00"
+  },
+  {
+   "nome": "Ufficio Ragioneria",
+   "url": "https://www.comune.ariccia.rm.it/it/unita_organizzative/ufficio-ragioneria",
+   "telefoni": [
+    "3807974432",
+    "3804735765",
+    "3883607339"
+   ],
+   "email": [
+    "ufficioragioneria@comunediariccia.it"
+   ],
+   "pec": [
+    "protocollo@pec.comunediariccia.it"
+   ],
+   "orari": null,
+   "source_typed": true,
+   "letto_il": "2026-08-11T21:24:22.155573+00:00"
+  }
+ ],
+ "amministrazione_trasparente": {
+  "indice_url": "https://www.comune.ariccia.rm.it/it/news/affidamento-del-servizio-di-supporto-esterno-nellambito-dei-servizi-di-punto-comune-presso-la-sede-comunale-presso-lufficio-speciale-strategico-e-presso-la-segreteria-degli-organi-istituzionali-cig-bcaefcbb72-pubblicazione-bando-gara-telematico",
+  "piattaforma_at": "jcitygov",
+  "bandi_attivi": [
+   {
+    "titolo": "Ufficio Scuola - Avvisi e Bandi",
+    "url": "https://www.comune.ariccia.rm.it/it/services/ufficio-scuola-avvisi-e-bandi",
+    "pdf_url": "https://municipium-images-production.s3-eu-west-1.amazonaws.com/s3/326/allegati/ee60fbac-91a0-4723-81cc-1ac78a34748b-signed.pdf"
+   },
+   {
+    "titolo": "AVVISO PUBBLICO DI SELEZIONE, PER ESAMI, PER LA COPERTURA DI N.1 POSTO DI DIRIGENTE TECNICO - a TEMPO PIENO E INDETERMINATO – AREA II – “LAVORI PUBBLICI E POLITICHE TERRITORIALI”",
+    "url": "https://www.comune.ariccia.rm.it/it/news/avviso-pubblico-di-selezione-per-esami-per-la-copertura-di-n-1-posto-di-dirigente-tecnico-a-tempo-pieno-e-indeterminato-area-ii-lavori-pubblici-e-politiche-territoriali-2006211",
+    "pdf_url": null
+   },
+   {
+    "titolo": "AVVISO PUBBLICO DI SELEZIONE, PER SOLI ESAMI, PER LA COPERTURA DI N.2 POSTI DI ISTRUTTORE AMMINISTRATIVO (AREA DEGLI ISTRUTTORI – EX CAT. c) A TEMPO PIENO E INDETERMINATO RISERVATO ALLE CATEGORIE PROTETTE - differimento prova orale",
+    "url": "https://www.comune.ariccia.rm.it/it/news/avviso-pubblico-di-selezione-per-soli-esami-per-la-copertura-di-n-2-posti-di-istruttore-amministrativo-area-degli-istruttori-ex-cat-c-a-tempo-pieno-e-indeterminato-riservato-alle-categorie-protette-differimento-prova-orale",
+    "pdf_url": null
+   },
+   {
+    "titolo": "AVVISO PUBBLICO DI SELEZIONE, PER SOLI ESAMI, PER LA COPERTURA DI N.2 POSTI DI ISTRUTTORE AMMINISTRATIVO (AREA DEGLI ISTRUTTORI – EX CAT. c) A TEMPO PIENO E INDETERMINATO RISERVATO ALLE CATEGORIE PROTETTE DI CUI ALL’ART. 1 DELLA LEGGE N. 68/1999",
+    "url": "https://www.comune.ariccia.rm.it/it/news/avviso-pubblico-di-selezione-per-soli-esami-per-la-copertura-di-n-2-posti-di-istruttore-amministrativo-area-degli-istruttori-ex-cat-c-a-tempo-pieno-e-indeterminato-riservato-alle-categorie-protette-di-cui-allart-1-della-legge-n-68-1999",
+    "pdf_url": null
+   },
+   {
+    "titolo": "AVVISO PUBBLICO DI SELEZIONE, PER ESAMI, PER LA COPERTURA DI N.2 POSTI DI ISTRUTTORE AMMINISTRATIVO (AREA ISTRUTTORI - EX CAT. c) A TEMPO PIENO E INDETERMINATO DI CUI N.1 POSTO RISERVATO A VOLONTARI DELLE FF.AA.",
+    "url": "https://www.comune.ariccia.rm.it/it/news/avviso-pubblico-di-selezione-per-esami-per-la-copertura-di-n-2-posti-di-istruttore-amministrativo-area-istruttori-ex-cat-c-a-tempo-pieno-e-indeterminato-di-cui-n-1-posto-riservato-a-volontari-delle-ff-aa-1994473",
+    "pdf_url": null
+   },
+   {
+    "titolo": "AVVISO PUBBLICO DI SELEZIONE, PER ESAMI, PER LA COPERTURA DI n.1 POSTO DI DIRIGENTE TECNICO - A TEMPO PIENO E INDETERMINATO – AREA II – “LAVORI PUBBLICI E POLITICHE TERRITORIALI”",
+    "url": "https://www.comune.ariccia.rm.it/it/news/avviso-pubblico-di-selezione-per-esami-per-la-copertura-di-n-1-posto-di-dirigente-tecnico-a-tempo-pieno-e-indeterminato-area-ii-lavori-pubblici-e-politiche-territoriali-1994415",
+    "pdf_url": null
+   },
+   {
+    "titolo": "AVVISO PUBBLICO DI SELEZIONE, PER SOLI ESAMI, PER LA COPERTURA DI N.2 POSTI DI ISTRUTTORE AMMINISTRATIVO (AREA DEGLI ISTRUTTORI – EX CAT. c) A TEMPO PIENO E INDETERMINATO RISERVATO ALLE CATEGORIE PROTETTE",
+    "url": "https://www.comune.ariccia.rm.it/it/news/avviso-pubblico-di-selezione-per-soli-esami-per-la-copertura-di-n-2-posti-di-istruttore-amministrativo-area-degli-istruttori-ex-cat-c-a-tempo-pieno-e-indeterminato-riservato-alle-categorie-protette",
+    "pdf_url": null
+   },
+   {
+    "titolo": "AVVISO PUBBLICO DI SELEZIONE, PER ESAMI, PER LA COPERTURA DI N.2 POSTI DI COLLABORATORE AMMINISTRATIVO (AREA OPERATORI ESPERTI - EX CAT. b) A TEMPO PIENO E INDETERMINATO",
+    "url": "https://www.comune.ariccia.rm.it/it/news/avviso-pubblico-di-selezione-per-esami-per-la-copertura-di-n-2-posti-di-collaboratore-amministrativo-area-operatori-esperti-ex-cat-b-a-tempo-pieno-e-indeterminato",
+    "pdf_url": null
+   },
+   {
+    "titolo": "Avviso pubblico relativo al rilascio di n.1 autorizzazione per l'esercizio del servizio di noleggio con conducente effettuato tramite autovettura fino a 9 posti - Approvazione della graduatoria finale provvisoria",
+    "url": "https://www.comune.ariccia.rm.it/it/news/avviso-pubblico-relativo-al-rilascio-di-n-1-autorizzazione-per-l-esercizio-del-servizio-di-noleggio-con-conducente-effettuato-tramite-autovettura-fino-a-9-posti-approvazione-della-graduatoria-finale-provvisoria",
+    "pdf_url": null
+   },
+   {
+    "titolo": "AVVISO PUBBLICO DI SELEZIONE, PER ESAMI, PER LA COPERTURA DI N.1 POSTO DI DIRIGENTE TECNICO - A TEMPO PIENO E INDETERMINATO – AREA II – “LAVORI PUBBLICI e POLITICHE TERRITORIALI”",
+    "url": "https://www.comune.ariccia.rm.it/it/news/avviso-pubblico-di-selezione-per-esami-per-la-copertura-di-n-1-posto-di-dirigente-tecnico-a-tempo-pieno-e-indeterminato-area-ii-lavori-pubblici-e-politiche-territoriali-1970114",
+    "pdf_url": null
+   },
+   {
+    "titolo": "Affidamento dei servizi e prestazioni di supporto vari per le esigenze delle farmacie comunali I E II – CIG BCA7558F14 – pubblicazione bando di gara telematica",
+    "url": "https://www.comune.ariccia.rm.it/it/news/affidamento-dei-servizi-e-prestazioni-di-supporto-vari-per-le-esigenze-delle-farmacie-comunali-i-e-ii-cig-bca7558f14-pubblicazione-bando-di-gara-telematica",
+    "pdf_url": null
+   },
+   {
+    "titolo": "Affidamento del servizio di trasporto scolastico con accompagnamento per gli alunni delle scuole dell'infanzia, della primaria e della secondaria di primo grado per gli AA.SS. 2026/2027 – 2029/2030 - pubblicazione bando di gara telematica",
+    "url": "https://www.comune.ariccia.rm.it/it/news/affidamento-del-servizio-di-trasporto-scolastico-con-accompagnamento-per-gli-alunni-delle-scuole-dell-infanzia-della-primaria-e-della-secondaria-di-primo-grado-per-gli-aa-ss-2026-2027-2029-2030-pubblicazione-bando-di-gara-telematica",
+    "pdf_url": null
+   },
+   {
+    "titolo": "Approvazione della nuova graduatoria finale provvisoria relativa all'avviso pubblico relativo al rilascio di n.1 autorizzazione per l'esercizio del servizio di noleggio con conducente effettuato tramite autovettura fino a 9 posti",
+    "url": "https://www.comune.ariccia.rm.it/it/news/approvazione-della-nuova-graduatoria-finale-provvisoria-relativa-all-avviso-pubblico-relativo-al-rilascio-di-n-1-autorizzazione-per-l-esercizio-del-servizio-di-noleggio-con-conducente-effettuato-tramite-autovettura-fino-a-9-posti",
+    "pdf_url": null
+   },
+   {
+    "titolo": "Convocazione prova scritta degli ammessi all'avviso pubblico relativo al rilascio di n.1 autorizzazione per l'esercizio del servizio di noleggio con conducente effettuato tramite autovettura fino a 9 posti.",
+    "url": "https://www.comune.ariccia.rm.it/it/news/convocazione-prova-scritta-degli-ammessi-all-avviso-pubblico-relativo-al-rilascio-di-n-1-autorizzazione-per-l-esercizio-del-servizio-di-noleggio-con-conducente-effettuato-tramite-autovettura-fino-a-9-posti",
+    "pdf_url": null
+   },
+   {
+    "titolo": "Avviso pubblico ex articolo 193 comma 4 d.lgs. n. 36/2023 e ss.mm.ii.",
+    "url": "https://www.comune.ariccia.rm.it/it/news/avviso-pubblico-ex-articolo-193-comma-4-d-lgs-n-36-2023-e-ss-mm-ii",
+    "pdf_url": null
+   }
+  ],
+  "pdf_presenti": true
+ },
+ "endpoints": {
+  "amministrazione": "https://www.comune.ariccia.rm.it/it/menu/amministrazione",
+  "servizi": "https://www.comune.ariccia.rm.it/it/menu/servizi",
+  "mappa": "https://www.comune.ariccia.rm.it/it/sitemap"
+ }
+}

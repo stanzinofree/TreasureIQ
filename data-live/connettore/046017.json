@@ -1,0 +1,1009 @@
+{
+ "codice_istat": "046017",
+ "piattaforma": "wordpress_agid",
+ "letto_il": "2026-08-11T00:10:21.263552+00:00",
+ "aree_amministrative": [],
+ "uffici": [
+  {
+   "nome": "Espropri",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/espropri-e-occupazione-aree/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Patrimonio",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/patrimonio/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Centro Affidi",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/centro-affidi/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Politiche giovanili",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/politiche-giovanili/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Ufficio Garante dell’infanzia e dell’adolescenza",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/ufficio-garante-dellinfanzia-e-delladolescenza/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Informagiovani",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/informagiovani/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Nucleo Unificato Comunale di Valutazione (NUCV) in materia di VAS",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/nucleo-unificato-comunale-di-valutazione-nucv-in-materia-di-vas/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Ufficio Conferenza Zonale – CRED (Centro Risorse Educative e Didattiche)",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/ufficio-conferenza-zonale-cred-centro-risorse-educative-e-didattiche/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Consiglio Comunale",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/consiglio-comunale/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Commissione Consiliare di Indirizzo e Controllo sugli Enti, Aziende e Istituzioni Partecipate",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/commissione-consiliare-di-indirizzo-e-controllo-sugli-enti-aziende-e-istituzioni-partecipate/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Commissione Consiliare Politiche di Bilancio e Sviluppo Economico del Territorio",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/commissione-consiliare-politiche-di-bilancio-e-sviluppo-economico-del-territorio/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Ufficio Garante per la tutela dei diritti delle persone con disabilità",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/ufficio-garante-per-la-tutela-dei-diritti-delle-persone-con-disabilita/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "U.O. 8.3 – Sportello Unico Edilizia Privata – Contenzioso e supporto giuridico",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/u-o-8-3-sportello-unico-edilizia-privata-contenzioso-e-supporto-giuridico/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "IMU",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/imu/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Commissione Consiliare Controllo e Garanzia",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/commissione-consiliare-controllo-e-garanzia/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Giunta Comunale",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/giunta-comunale/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Decoro urbano",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/decoro-urbano/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Commissione per le Pari Opportunità",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/commissione-per-le-pari-opportunita/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Nucleo APR",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/nucleo-apr/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Nucleo operativo Viabilità e Pronto intervento",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/nucleo-operativo-viabilita-e-pronto-intervento-2/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Ufficio servizi",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/ufficio-servizi-2/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Provveditorato",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/provveditorato/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Economato",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/economato/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Ufficio contratti, Controlli e pubblicità legale",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/ufficio-contratti-controlli-e-pubblicita-legale/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Affidamenti diretti",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/affidamenti-diretti/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Gare",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/gare/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Mobilità e Strategie per la città",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/mobilita-e-strategie-per-la-citta/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Acquisizione risorse finanziarie (P.N.R.R)",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/acquisizione-risorse-finanziarie-p-n-r-r/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Programmazione, Controllo e Performance",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/programmazione-controllo-e-performance/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Ufficio bilancio consolidato e contabilità economica",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/ufficio-bilancio-consolidato-e-contabilita-economica/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Ufficio relazioni istituzionali, europee ed internazionali",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/ufficio-relazioni-istituzionali-europee-ed-internazionali/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "U.O. 5.3 – Edilizia Sportiva",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/u-o-5-3-edilizia-sportiva/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Stato Civile",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/stato-civile/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "U.O. 8.1 – Strumenti Urbanistici e Paesaggio",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/u-o-8-1-strumenti-urbanistici/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Osservatorio Affari Animali",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/osservatorio-affari-animali/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Sindaco",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/sindaco/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Variazioni Anagrafiche e AIRE",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/variazioni-anagrafiche-e-aire/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Ufficio Elettorale/Leva/Toponomastica",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/ufficio-elettorale-leva-toponomastica/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Front office Anagrafe e Certificazioni",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/anagrafe/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Edilizia Residenziale Pubblica",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/edilizia-residenziale-pubblica/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Sportello Home Care Premium",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/sportello-home-care-premium-2/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Ufficio condono",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/ufficio-condono/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Ufficio accesso agli atti",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/ufficio-cartografico/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Commissione comunale per il Paesaggio",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/commissione-comunale-per-il-paesaggio/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Statistica – Censimento",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/informazioni-statistiche/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Ufficio oneri",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/ufficio-oneri/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Orto Botanico",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/orto-botanico/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Ufficio Cultura",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/ufficio-cultura/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Archivi",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/archivi/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Agorà – biblioteche",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/agora-biblioteche/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Mense scolastiche",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/mense-scolastiche/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Diritto allo studio",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/diritto-allo-studio/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Cittadinanza e Assegno di Inclusione (ADI)",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/area-reddito-di-cittadinanza/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Ufficio Terzo Settore – Registro Unico Nazionale del Terzo Settore (RUNTS)",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/ufficio-terzo-settore-registro-unico-nazionale-del-terzo-settore-runts/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Istituti comprensivi",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/istituti-comprensivi/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Consigliere Stefano Pierini",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/consigliere-stefano-pierini/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Mobility Management",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/mobility-management/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Tavolo Permanente delle Professioni Tecniche",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/tavolo-permanente-delle-professioni-tecniche/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Consulta comunale dello Sport",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/consulta-comunale-dello-sport/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Tavolo per l’inclusione",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/tavolo-per-linclusione/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Ufficio Garante dei diritti dei detenuti del Comune di Lucca",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/garante-dei-diritti-dei-detenuti-del-comune-di-lucca/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Commissione Consiliare Presidenti Gruppi Consiliari",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/commissione-consiliare-presidenti-gruppi-consiliari/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Commissione Consiliare Statuto e Regolamenti di funzionamento del Consiglio, Ordinamento, Trasparenza e Partecipazione",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/commissione-consiliare-statuto-e-regolamenti-di-funzionamento-del-consiglio-ordinamento-trasparenza-e-partecipazione/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Commissione Consiliare Politiche Formative, Giovanili e di Genere, Cultura e Sport",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/commissione-consiliare-politiche-formative-giovanili-e-di-genere-cultura-e-sport/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Commissione Consiliare Politiche Sociali, Abitative e della Salute",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/commissione-consiliare-politiche-sociali-abitative-e-della-salute/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Commissione Consiliare Lavori Pubblici",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/commissione-consiliare-lavori-pubblici/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Commissione Consiliare Urbanistica Assetto del Territorio",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/commissione-consiliare-urbanistica-assetto-del-territorio/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Commissioni Consiliari",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/commissioni-consiliari/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Segretariato Sociale – Punto Insieme",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/segretariato-sociale-campo-di-marte/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Programmazione, Progettazione dei Servizi e Punto Unico di Accesso",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/programmazione-progettazione-dei-servizi-e-punto-unico-di-accesso/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Ufficio scelta del contraente",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/ufficio-scelta-del-contraente-e-contratti/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Ufficio Servizi di Economato e Provveditorato",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/ufficio-economato-e-provveditorato/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Partecipate",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/partecipate/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Performance",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/performance/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "U.O. B.1 – Segreteria Generale e Supporto Organi Collegiali",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/u-o-b-1-segreteria-generale-e-supporto-organi-collegiali/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "U.O. B.2. – Avvocatura Comunale",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/u-o-b-2-avvocatura-comunale/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Ufficio Informazioni e Accoglienza Turistica Piana di Lucca – Infopoint Mura di Lucca",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/ufficio-informazioni-e-accoglienza-turistica-piana-di-lucca-infopoint-mura-di-lucca/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Sport",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/ufficio-sport/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Turismo",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/turismo/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Ufficio Consiglio Comunale",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/ufficio-consiglio-comunale/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Ufficio Supporto Organi Collegiali",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/ufficio-supporto-organi-collegiali/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "U.O. A.1 – Programmazione, Performance, Partecipate e Uffici del Sindaco",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/u-o-a-1-programmazione-controlli-e-performance-societa-e-organismi-partecipati/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Nucleo Polizia Commerciale",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/commerciale-annona/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Nucleo Polizia Giudiziaria",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/giudiziaria/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Nucleo Polizia Ambientale",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/ambientale/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Nucleo Sicurezza Urbana",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/nucleo-sicurezza-urbana/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Ufficio Infortunistica Stradale",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/nucleo-infortunistica-stradale/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Nucleo informativo – Ufficio Messi",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/messi-notificatori/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Ufficio Segreteria e Logistica",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/ufficio-segreteria/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Nucleo Centrale Operativa, Videosorveglianza, Varchi Z.T.L.",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/nucleo-centrale-operativa-videosorveglianza-e-varchi-z-t-l/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Nucleo Polizia di Prossimità",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/nucleo-polizia-di-prossimita/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Protocollo",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/protocollo/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Ufficio Relazioni con il Pubblico",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/ufficio-relazioni-con-il-pubblico/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Servizi Scolastici",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/servizi-scolastici/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Trasporto Scolastico",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/servizio-trasporto-scolastico/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "U.O. 7.2 – Sportello Unico per le Imprese, Arredo e Decoro Urbano",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/u-o-7-2-sportello-unico-per-le-imprese-suap-arredo-e-decoro-urbano/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "U.O. 3.1 – Tributi Comunali",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/u-o-3-1-tributi-comunali/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Ufficio Verbali",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/ufficio-verbali/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "Ufficio Contenzioso",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/ufficio-contenzioso/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  },
+  {
+   "nome": "U.O. B.3 – Corpo Polizia Locale",
+   "url": "https://www.comune.lucca.it/amministrazione/unita_organizzativa/u-o-b-3-corpo-polizia-municipale/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T00:10:34.084091+00:00"
+  }
+ ],
+ "amministrazione_trasparente": null
+}

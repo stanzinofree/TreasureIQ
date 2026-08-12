@@ -1,0 +1,1013 @@
+{
+ "codice_istat": "062008",
+ "piattaforma": "wordpress_agid",
+ "letto_il": "2026-08-11T01:46:10.594007+00:00",
+ "aree_amministrative": [],
+ "uffici": [
+  {
+   "nome": "Gestione economico finanziaria ed e-procurement",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/gestione-economico-finanziaria-ed-e-procurement/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Ruolo e contenzioso",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/ruolo-e-contenzioso/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Personale, formazione e servizi generali",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/personale-formazione-e-servizi-generali/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Comando",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/comando/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Espropri",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/viii-servizio-espropri/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Opere di urbanizzazione secondaria (scuole, impianti sportivi, teatri)",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/v-servizio-opere-di-urbanizzazione-secondaria-scuole-impianti-sportivi-teatri/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Resto al Sud",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/resto-al-sud/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Organo straordinario di Liquidazione",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/organo-straordinario-di-liquidazione/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Commissione Affari Istituzionali",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/commissione-affari-istituzionali/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Commissione Sport-Politiche Giovanili",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/commissione-sport-politiche-giovanili/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Commissione Bilancio",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/commissione-bilancio/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Commissione Attività Produttive",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/commissione-attivit-produttive/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Commissione Ambiente",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/commissione-ambiente/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Commissione Pics-Fondi Europei",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/commissione-pics-fondi-europei/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Commissione Urbanistica",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/commissione-urbanistica/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Commissione Turismo-Traffico-Parcheggi",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/commissione-turismo-traffico-parcheggi/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Commissione Lavori Pubblici",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/commissione-lavori-pubblici/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Commissione Politiche Sociali",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/commissione-politiche-sociali/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Commissione Cultura",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/cultura-valorizzazione-patrimonio-culturale-unesco-manifestazioni-grandi-eventi-biblioteche-rapporti-con-le-comunit-religiose/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Servizio di Staff Supporto OSL",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/servizio-di-staff-supporto-osl/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Protezione Civile",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/protezione-civile/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Ufficio Amministrativo Avvocatura",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/ufficio-amministrativo-avvocatura/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Ufficio Stampa",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/ufficio-stampa/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Politiche Giovanili",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/politiche-giovanili/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Biblioteca",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/biblioteca/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "URP – Centralino",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/urp-centralino/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Elettorale",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/elettorale/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Stato Civile",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/stato-civile/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Anagrafe",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/anagrafe/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Polizia Municipale",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/polizia-municipale/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Polizia edilizia, sicurezza urbana ed antidegrado",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/iv-servizio-polizia-giudiziaria/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Vigilanza commerciale, ambientale ed amministrativa",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/iii-servizio-polizia-ambientale/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Polizia Stradale",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/ii-servizio-polizia-stradale/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Sindaco",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/sindaco/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Protocollo",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/protocollo/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Risorse Umane e Organizzazione",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/iv-servizio-risorse-umane-e-organizzazione/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Servizi Sociali Comunali",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/iii-servizi-sociali-comunali/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Ambito B1 Ufficio di Piano",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/ii-servizio-ambito-b1-ufficio-di-piano/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Staff della Direzione II settore",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/i-servizio-staff-della-direzione-ii-settore/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "II Settore: Servizi al Cittadino",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/ii-settore-servizi-al-cittadino/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Cultura",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/cultura/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Sport",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/v-servizio-sport/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Istruzione e rapporti con Università",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/iv-servizi-istruzione-e-rapporti-con-universit/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Servizi Turistici",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/iii-servizi-turistici/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Staff della Direzione VII settore",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/i-servizio-staff-della-direzione-vii-settore/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "VII Settore: Cultura – Turismo – Istruzione e Sport",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/vii-settore-cultura-turismo-istruzione-e-sport/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "ASIA Benevento S.p.A.",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/asia-benevento-spa/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Consiglio Comunale",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/consiglio-comunale/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Giunta",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/giunta/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Ufficio Sistemi Informativi",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/ufficio-sistemi-informativi/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Agenda Digitale",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/agenda-digitale/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Ufficio Sistemi Web",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/ufficio-sistemi-web/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Ufficio Acquisti beni e servizi Informatici",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/ufficio-acquisti-beni-e-servizi-informatici/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Contenzioso Tributario",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/contenzioso-tributario/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Sinistri ed assicurazioni",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/sinistri-ed-assicurazioni/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Consulenza legale",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/ii-servizio-consulenza-legale/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Contenzioso civile penale e amministrativo",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/contenzioso-civile-penale-e-amministrativo/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Ufficio Contratti",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/ufficio-contratti/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "U.O. Supporto Segreteria Generale",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/uo-supporto-segreteria-generale/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Ufficio Controlli Interni",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/ufficio-controlli-interni/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Ufficio Responsabile Prevenzione Corruzione e Trasparenza",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/ufficio-responsabile-prevenzione-corruzione-e-trasparenza/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Entrate tributarie",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/ix-servizio-entrate-tributarie/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Rendicontazione",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/viii-servizio-rendicontazione/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Supporto finanziario OSL",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/vii-servizio-supporto-finanziario-osl/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Economato",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/vi-servizio-economato/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Entrate",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/v-servizio-entrate/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Spese correnti e gestione IVA",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/iv-servizio-spese-correnti-e-gestione-iva/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Spese in conto capitale e gestione indebitamento",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/iii-servizio-spese-in-conto-capitale-e-gestione-indebitamento/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Programmazione Economico-Finanziaria",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/ii-servizio-programmazione-economico-finanziaria/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Staff della Direzione IV settore",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/i-servizio-staff-della-direzione-iv-settore/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Gabinetto Sindaco",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/gabinetto-sindaco/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Transizione al Digitale",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/transizione-al-digitale/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Avvocatura",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/avvocatura/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "IV Settore Finanze e Tributi",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/iv-settore-finanze-e-tributi/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Segreteria Generale",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/segreteria-generale/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Toponomastica e S.I.T.",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/vi-servizio-toponomastica-e-sit/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Politiche abitative",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/v-servizio-politiche-abitative/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Progettazione Urbana",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/iv-servizio-progettazione-urbana/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Pianificazione",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/iii-servizio-pianificazione/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "S.U.E–Sportello Unico Edilizio",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/ii-servizio-sue-sportello-unico-edilizio/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Staff della Direzione VI Settore",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/i-servizio-staff-della-direzione-v/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Traffico e Segnaletica",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/ix-servizio-traffico-e-segnaletica/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Datore di lavoro e sicurezza urbana",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/datore-di-lavoro/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Programmazione e Gestione Finanziamenti regionali, POR",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/programmazione-e-gestione-finanziamenti/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "S.A.S. – Sportello Autorizzazioni Sismiche",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/resilienza-e-sicurezza-urbana-sicurezza-sismica-dissesto-idrogeologico/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Opere di urbanizzazione primaria (strade e sottoservizi)",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/manutenzione-ordinaria-beni-imm-viabilit-rete-dei-sottoservizi/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Impianti immobili comunali",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/manutenzione-ordinaria-beni-imm-servizi-tecnico-manutentivi-immobili-com/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Tutela dei beni culturali e del paesaggio",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/tutela-e-valorizzazione-beni-storici-archeologici-e-del-paesaggio/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Programmazione e Gestione Finanziamenti comunitari, PNRR e statali",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/programmazione-e-gestione-opere-pubbliche/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Staff della Direzione V settore",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/staff-della-direzione-v-settore/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Patrimonio",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/patrimonio/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Servizi Cimiteriali",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/servizi-cimiteriali/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Verde Pubblico e Decoro Urbano",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/verde-pubblico-e-decoro-urbano/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Energia",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/iv-servizio-energia/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Mobilità",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/iii-servizio-mobilit/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Ambiente",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/ii-servizio-ambiente/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Staff della Direzione III Settore",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/staff-della-direzione-iii-settore/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Servizio Notifiche",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/notifiche/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Servizi Sanitari",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/servizi-sanitari/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  },
+  {
+   "nome": "Statistica – Toponomastica – Leva",
+   "url": "https://comune.benevento.it/amministrazione/unita_organizzativa/statistica-toponomastica-leva/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T01:46:11.805282+00:00"
+  }
+ ],
+ "amministrazione_trasparente": {
+  "indice_url": "https://www.comune.benevento.it/amministrazione-trasparente/",
+  "bandi_attivi": [],
+  "pdf_presenti": false
+ }
+}

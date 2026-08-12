@@ -45,7 +45,7 @@ connettore: nessuna rilettura del portale, nessun input digitato a mano. La
 via scrape esiste come ripiego ma non incrementa mai il numero di superfici
 "esposte": è una via di lettura, non una copertura.
 
-### I bandi: tre gradini in cascata, e il portale Halley
+### I bandi: leggi-prima, poi tre gradini in cascata, e il portale Halley
 
 `bandi_live.py` non si ferma al CPT: prova tre gradini REST in ordine e
 tiene il primo che copre — `cpt` (`amm-trasparente` via `wp-json/wp/v2/`),
@@ -53,6 +53,45 @@ tiene il primo che copre — `cpt` (`amm-trasparente` via `wp-json/wp/v2/`),
 **`alberatura`** (ciclo 8, sempre tentato — anche quando `cpt`/`pages` hanno
 già risposto ma a zero bandi, perché un WordPress "silenzioso" non è la
 stessa cosa di un comune non coperto).
+
+Prima di sondare, però, ogni gradino **legge cosa è già catalogato** da uno
+sweep precedente — zero rete se il catalogo è caldo, sonda solo se manca,
+è incompleto o è scaduto (ciclo 18a, «discovery leggi-prima»). La regola è
+sempre la stessa: *catalogo per instradare, cascata come ripiego, mai
+verifica anticipata* — ricontrollare dal vivo un dato già catalogato
+rifarebbe esattamente la sonda che si voleva evitare.
+
+- **`alberatura`** parte da `registro.endpoints.at` (la pagina Amministrazione
+  Trasparente già trovata da uno sweep) invece di ripartire dalla home del
+  Comune: un solo fetch sull'URL catalogato, contro la catena originale
+  (`_rami_wp` poi `_rami_html`) che può costarne fino a 4-5. I rami scoperti
+  finiscono in una cache dedicata, `LIVE_DIR/alberatura/{istat}/rami.json`
+  (14 giorni), così un miss bandi successivo (che scade ogni 8 ore) non
+  ri-scopre i rami ogni volta. Se `endpoints.at` manca o il registro è muto,
+  la catena originale resta il ripiego — invariata.
+- **`cpt`** legge prima `mappa-connettore/{istat}.json`: se è calda e dice
+  `amministrazione_trasparente_via == "REST"`, il `rest_base` della
+  tassonomia bandi è già stato misurato da uno sweep precedente e non serve
+  ripetere il probe `/wp-json/wp/v2/taxonomies`. Se la cache è assente,
+  fredda, o il comune ha `via == "scrape"` (niente REST AT), si sonda come
+  prima.
+- Il **dispatch** legge `registro.piattaforma_at`: se è catalogata e non più
+  vecchia di 14 giorni, seleziona quali dei tre gradini tentare invece di
+  provarli alla cieca; se il dato manca, non è mai stato scritto, o è
+  scaduto, si torna alla cascata cieca (tutti e tre). Onesto: **oggi le due
+  voci catalogate (`wp_amm_trasp`, `halley_trasparenza`) autorizzano
+  comunque tutti e tre i gradini** — nessun caso reale prova ancora che uno
+  dei due possa saltarne uno senza perdere una fonte (Benevento, per
+  esempio, ha i bandi WP su `pages` e i concorsi veri su `alberatura`:
+  tagliare un gradino da quella voce perderebbe l'uno o l'altro). Il
+  dispatch è quindi infrastruttura pronta, non ancora un taglio di fetch in
+  produzione — lo diventa quando un resweep futuro giustificherà una voce
+  ridotta.
+
+Nessuna di queste letture salta la guardia SSRF (`fetch_guardato`, un host
+atteso per hop): un URL letto dal catalogo si valida come uno letto dal vivo.
+E se il catalogo è illeggibile o corrotto, si tratta come assente — mai
+come un dato di cui fidarsi ciecamente.
 
 Il gradino `alberatura` riconosce due vendor con estrattore reale: WordPress
 e **Halley**, il portale dei concorsi pubblici *veri* — spesso su un

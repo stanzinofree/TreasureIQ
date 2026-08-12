@@ -217,7 +217,24 @@ export default function Manifesto() {
             </p>
           </div>
           <p className="manifesto-fondatore__firma">
-            — Alessandro Middei, fondatore di TreasureIQ
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              className="manifesto-fondatore__ritratto"
+              src="/fondatore.jpg"
+              alt="Alessandro Middei"
+              width={48}
+              height={48}
+            />
+            <span>
+              — Alessandro Middei, fondatore di TreasureIQ ·{" "}
+              <a
+                href="https://www.linkedin.com/in/stanzinofree/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                LinkedIn
+              </a>
+            </span>
           </p>
         </div>
       </section>

@@ -136,11 +136,14 @@ export default async function AnalyticsPage() {
           </div>
         </section>
 
-        <h2>Su quali piattaforme girano</h2>
+        <h2>Su quale piattaforma gira il portale base</h2>
         <p className="nota">
-          Il tema WordPress ufficiale non è il più diffuso. Chi resta grigio non
-          è un fornitore: è un portale che non si è dichiarato, e quella barra
-          misura quanta strada resta.
+          Questa è la piattaforma del <strong>portale principale</strong> del
+          comune — l&apos;infrastruttura del sito. Più sotto, separata, la
+          piattaforma della <strong>amministrazione trasparente</strong>, che è
+          spesso un prodotto diverso. Il tema WordPress ufficiale non è il più
+          diffuso. Chi resta grigio non è un fornitore: è un portale che non si
+          è dichiarato, e quella barra misura quanta strada resta.
         </p>
         <GraficoPiattaforme righe={censimento.piattaforme} />
       <div className="tabella-scorrevole">

@@ -176,9 +176,10 @@ export default async function Monitoraggio() {
           davvero.
         </p>
         {/* Il sito misura due popolazioni diverse e senza questo riquadro
-            sembrerebbe contraddirsi: 91 servizi qui, 57.603 in Analytics.
-            Sono due domande diverse, e il fatto che convergano e' il
-            risultato piu' forte che abbiamo — ma solo se lo diciamo. */}
+            sembrerebbe contraddirsi: i comuni ingeriti qui, 57.770 servizi
+            censiti in Analytics. Sono due domande diverse, e il fatto che
+            convergano e' il risultato piu' forte che abbiamo — ma solo se lo
+            diciamo. */}
         <p className="lede">
           <strong>Questa pagina misura i comuni che TreasureIQ legge oggi</strong>,
           servizio per servizio. Per la misura su <em>tutti</em> i comuni italiani
@@ -203,10 +204,10 @@ export default async function Monitoraggio() {
         <section className="systems__group">
           <div className="systems__group-head">
             <h2>Fonti</h2>
-            {/* The (MVP) is load-bearing. Three comuni out of roughly eight
-                thousand is a proof that the method works, not a service that
-                covers the country, and a reader who mistakes one for the other
-                will conclude we are tiny rather than that we are early. */}
+            {/* The (MVP) is load-bearing. A handful of comuni out of roughly
+                eight thousand is a proof that the method works, not a service
+                that covers the country, and a reader who mistakes one for the
+                other will conclude we are tiny rather than that we are early. */}
             <span className="systems__group-note">
               i comuni da cui TreasureIQ risponde oggi <strong>(MVP)</strong>
             </span>

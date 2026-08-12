@@ -74,6 +74,7 @@ from treasureiq.bandi_live import BandiLiveEsito, BandoArricchito
 # `treasureiq.connettore.leggi_connettore` con `mock.patch`.
 from treasureiq import connettore
 from treasureiq.connettore import UfficioConnettore
+from treasureiq.orari_ufficio import leggi_orari_ufficio
 from treasureiq.integration import (
     AccessMode,
     Ente,
@@ -1645,6 +1646,24 @@ async def _build_informazione_answer(
         if ente.urp is not None
         else None
     )
+    # Fix on-demand orari-ufficio (ciclo18c): l'`office` qui sopra è l'URP di
+    # ripiego. Se il cittadino ha nominato un ufficio preciso («anagrafe»), il
+    # connettore ne conosce già la URL (catalogata dallo sweep): la si legge
+    # adesso e si cita il SUO orario, invece di quello dell'URP. Vale anche con
+    # un servizio già in match (`candidates` non vuoto): lì il ramo connettore
+    # più sotto non gira, e l'URP resterebbe l'unica scheda. Solo rail
+    # INFORMAZIONE, nessun verdetto; degrado onesto se la pagina non pubblica
+    # orari (D-32) — l'ufficio giusto con `orari=None`, mai l'URP travestito.
+    ufficio_nominato = _ufficio_chiesto(parole)
+    if ufficio_nominato is not None:
+        office_ufficio = await _office_da_ufficio_nominato(
+            codice_istat=ente.codice_istat,
+            topic=intent.topic,
+            ufficio_chiesto=ufficio_nominato,
+            disabilita_attiva=_disabilita_attiva_nel_testo(parole),
+        )
+        if office_ufficio is not None:
+            office = office_ufficio
     diagnosis = diagnosis_lines(ente)
     integration_cost = cost_lines(ente)
 
@@ -1931,6 +1950,67 @@ def _ufficio_connettore_pertinente(
         if len(trovati) > 1:
             return None, True
     return None, False
+
+
+async def _office_da_ufficio_nominato(
+    *,
+    codice_istat: str,
+    topic: Topic,
+    ufficio_chiesto: str,
+    disabilita_attiva: bool,
+) -> OfficeAnswer | None:
+    """L'ufficio NOMINATO dal cittadino, con il SUO orario letto adesso.
+
+    Il rail informazione, di default, attacca l'URP di ripiego: chiesto
+    «l'ufficio anagrafe», mostrava l'orario dell'URP. Il connettore conosce già
+    la URL della pagina di quell'ufficio (catalogata dallo sweep): la si legge
+    on-demand (`leggi_orari_ufficio`, cache-first + guardia SSRF) e se ne cita
+    l'orario vero. Il match sull'ufficio riusa `_ufficio_connettore_pertinente`
+    — stessa disciplina D-04 del ramo connettore, mai un ufficio indovinato.
+
+    `None` (l'URP resta) quando il connettore non è leggibile, non espone
+    uffici, o nessuno corrisponde in modo univoco alla parola nominata. Un
+    orario non trovato NON è un `None`: si torna l'ufficio giusto con
+    `orari=None`, così la scheda dice «non pubblicato per questo ufficio»
+    invece di spacciare quello dell'URP (D-32).
+    """
+    esito = await asyncio.to_thread(connettore.leggi_connettore, codice_istat)
+    if esito is None or not esito.uffici:
+        return None
+
+    # La parola LETTERALE del cittadino, se compare in un solo nome d'ufficio,
+    # è la scelta più onesta: «anagrafe» sta esattamente in «Ufficio Anagrafe
+    # e Leva» e in nessun altro. Il matcher generale invece espande in sinonimi
+    # (demografic/stato civile) e su un comune con più uffici demografici
+    # tornerebbe «ambiguo» — corretto per elencare, ma qui, dove il cittadino
+    # ha nominato esatto, spingerebbe di nuovo verso l'URP. Un match letterale
+    # unico non è un indovinello (D-04): lo si preferisce.
+    chiave = ufficio_chiesto.lower()
+    letterali = [u for u in esito.uffici if u.url and chiave in u.nome.lower()]
+    if len(letterali) == 1:
+        ufficio = letterali[0]
+    else:
+        ufficio, _ambiguo = _ufficio_connettore_pertinente(
+            esito.uffici,
+            ufficio_chiesto=ufficio_chiesto,
+            topic=topic,
+            disabilita_attiva=disabilita_attiva,
+        )
+        if ufficio is None or not ufficio.url:
+            return None
+
+    letto = await asyncio.to_thread(
+        leggi_orari_ufficio, codice_istat=codice_istat, url=ufficio.url
+    )
+    # Priorità all'orario letto adesso da QUELLA pagina; poi quello eventuale
+    # già in catalogo; `None` onesto se nessuno dei due c'è.
+    orari = (letto.orari if letto is not None else None) or ufficio.orari
+    return OfficeAnswer(
+        nome=ufficio.nome,
+        telefono=", ".join(ufficio.telefoni) or None,
+        email=", ".join(ufficio.email) or None,
+        orari=orari,
+    )
 
 
 def _testo_ufficio_connettore(*, comune_nome: str, ufficio: UfficioConnettore) -> str:

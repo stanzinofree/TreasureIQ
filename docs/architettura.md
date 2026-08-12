@@ -98,6 +98,14 @@ L'unica eccezione è confinata e dichiarata: la **sonda live** (`sonda_live.py`)
 che per un comune fuori copertura legge il portale in quel momento — solo sul
 rail informativo, mai per decidere se qualcuno ha diritto a qualcosa.
 
+Nella stessa eccezione rientra una lettura mirata anche su un comune **coperto**:
+quando il cittadino nomina un ufficio preciso («l'ufficio anagrafe»), il rail
+informativo attaccherebbe di ripiego l'URP e il suo orario. Ma lo sweep ha già
+catalogato la URL della pagina di *quell'* ufficio: `orari_ufficio.py` la legge
+in quel momento (guardia SSRF `fetch_guardato`, cache per ufficio) e ne cita
+l'orario vero. Se quella pagina non pubblica un orario, la scheda lo dice per
+l'ufficio giusto — mai l'orario dell'URP spacciato per suo.
+
 La sonda segue una scala fissa, dal certo al probabile: **record già ingerito →
 mappa diretta del portale del comune → ricerca Brave ancorata al dominio**
 (`site:comune.x.it …`, D-58). SearXNG è fuori (D-59): un proxy verso motori che

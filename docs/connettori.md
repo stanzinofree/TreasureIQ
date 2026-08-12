@@ -1,6 +1,6 @@
 # Connettori: copertura, effort, priorità
 
-*Numeri del censimento del 5 agosto 2026, su 7.896 comuni italiani.*
+*Numeri del censimento del 12 agosto 2026, su 7.896 comuni italiani.*
 
 ---
 
@@ -108,15 +108,15 @@ generati dal modello.
 
 | Piattaforma | Comuni | Quota | Livello | Servizi letti | Regioni |
 |---|---|---|---|---|---|
-| **PeopleWeb** (Siscom) | 1.124 | 14,2% | modello | 31.039 | 18 |
-| **Municipium** (Maggioli) | 1.009 | 12,8% | firma* | — | 20 |
-| **HGATE** | 957 | 12,1% | firma | — | 15 |
-| *non riconosciuta* | 800 | 10,1% | — | — | 19 |
-| WordPress generico | 724 | 9,2% | firma | — | 19 |
-| **WordPress Design Comuni** | 715 | 9,1% | modello | 19.302 | 18 |
-| **ComWeb** (ePublic) | 502 | 6,4% | modello | — | 9 |
-| **AgendaSmart** | 401 | 5,1% | firma | — | 17 |
-| **OpenPA** | 364 | 4,6% | firma | — | 16 |
+| **PeopleWeb** (Siscom) | 1.120 | 14,2% | modello | 31.039 | 18 |
+| **Municipium** (Maggioli) | 1.010 | 12,8% | firma* | — | 20 |
+| **HGATE** | 956 | 12,1% | firma | — | 15 |
+| *non riconosciuta* | 844 | 10,7% | — | — | 19 |
+| WordPress generico | 727 | 9,2% | firma | — | 19 |
+| **WordPress Design Comuni** | 713 | 9,0% | modello | 19.302 | 18 |
+| **ComWeb** (ePublic) | 503 | 6,4% | modello | — | 9 |
+| **AgendaSmart** | 377 | 4,8% | firma | — | 17 |
+| **OpenPA** | 363 | 4,6% | firma | — | 16 |
 | *non misurata* | 291 | 3,7% | — | — | 20 |
 | Magnolia CMS | 171 | 2,2% | firma | — | 12 |
 | **Regione FVG** | 168 | 2,1% | firma | — | 1 |
@@ -148,7 +148,7 @@ comuni del fornitore  ×  quanto sale il livello di lettura
 
 ### Prima fascia — mille comuni a colpo
 
-**Municipium (1.009 comuni, 20 regioni).** Il secondo fornitore d'Italia, il più
+**Municipium (1.010 comuni, 20 regioni).** Il secondo fornitore d'Italia, il più
 *nazionale* di tutti (presente in tutte e venti le regioni). Non usa il modello
 a CPT AgID: ha un connettore proprio, consegnato al ciclo 10 (contratto D-09,
 `api/treasureiq/municipium.py` + `municipium_at.py`) — **parziale**, non
@@ -172,7 +172,7 @@ anti-SSRF perché non è il dominio del comune).
 *Stima residua: portarlo nel censimento e stimare l'estensione ai restanti
 comuni Municipium* — oggi verificato solo su Pomezia e Fiumicino.
 
-**HGATE (957 comuni, 15 regioni).** Rotte già mappate e verificate su comuni di
+**HGATE (956 comuni, 15 regioni).** Rotte già mappate e verificate su comuni di
 province diverse — `EGSCHTST.HBL` per i servizi, `EGSCHTST24.HBL` per gli uffici,
 `EGSMISTMSIT.HBL` per la mappa del sito. Il codice ente `en=` si ricava dalla
 home, che scarichiamo già: **scoperta a costo zero**.
@@ -197,7 +197,7 @@ otto comuni di cinque regioni. Fornitore ignoto, piattaforma Laravel.
 
 ### Terza fascia — costa più di quanto rende
 
-**WordPress generico (724 comuni).** Hanno l'API REST ma non il vocabolario dei
+**WordPress generico (727 comuni).** Hanno l'API REST ma non il vocabolario dei
 servizi: ogni installazione organizza i contenuti a modo suo. Non è un
 connettore, sono settecento connettori.
 
@@ -205,7 +205,7 @@ connettore, sono settecento connettori.
 senza API trovabile staticamente. Servirebbe la cattura di rete di un portale, la
 stessa cosa che ha sbloccato MyPortal.
 
-**Gli 800 non riconosciuti.** Ora in gruppi da 40–70, non più famiglie da mille.
+**Gli 844 non riconosciuti.** Ora in gruppi da 40–70, non più famiglie da mille.
 Ogni firma nuova vale decine di comuni.
 
 ---
@@ -218,10 +218,10 @@ per un pezzo d'Italia:
 
 | Se saliamo su… | Comuni che passano da «non copro» a una risposta vera |
 |---|---|
-| Municipium | 1.009 |
-| HGATE | 957 |
-| AgendaSmart | 401 |
-| OpenPA | 364 |
+| Municipium | 1.010 |
+| HGATE | 956 |
+| AgendaSmart | 377 |
+| OpenPA | 363 |
 | MyPortal completo | 155 |
 
 Sommati: **2.886 comuni**, il 36,5% d'Italia, per una quindicina di giornate di
@@ -266,4 +266,4 @@ Quanto è stabile ciascuno, misurato:
 
 **Il costo di manutenzione non scala col numero di comuni: scala col numero di
 piattaforme, e con quanto ciascuna è disomogenea.** ComWeb con 12 impronte su 502
-comuni costerà più di PeopleWeb con 8 su 1.124.
+comuni costerà più di PeopleWeb con 8 su 1.120.

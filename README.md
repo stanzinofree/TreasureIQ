@@ -60,15 +60,15 @@ che quel campo non è tipizzato.
 
 ### E non è un caso isolato: misurato su tutta Italia
 
-Il 5 agosto 2026 TreasureIQ ha censito **tutti i 7.896 comuni italiani** —
+Il 12 agosto 2026 TreasureIQ ha censito **tutti i 7.896 comuni italiani** —
 34.229 richieste, circa quattro per comune, novanta minuti.
 
 | | |
 |---|---|
 | Comuni censiti | **7.896** — tutti |
 | Servizi comunali contati | **57.603** |
-| Piattaforme riconosciute | 25, il 89,9% dei comuni |
-| Comuni con aderenza al modello AgID misurata | 1.854 |
+| Piattaforme riconosciute | 23, l'85,6% dei comuni |
+| Comuni con aderenza al modello AgID misurata | 1.856 |
 
 E il numero che il progetto esisteva per trovare. Sugli **811 comuni** dove la
 domanda si può porre — quelli su piattaforme con campi tipizzati, dove il campo
@@ -93,12 +93,12 @@ Il tema WordPress finanziato da AgID è **sesto**.
 
 | Piattaforma | Comuni | Quota |
 |---|---|---|
-| PeopleWeb (Siscom) | 1.124 | 14,2% |
-| Municipium (Maggioli) | 1.009 | 12,8% |
-| HGATE | 957 | 12,1% |
-| *non riconosciuta* | 800 | 10,1% |
-| WordPress generico | 724 | 9,2% |
-| **WordPress Design Comuni** | 715 | 9,1% |
+| PeopleWeb (Siscom) | 1.120 | 14,2% |
+| Municipium (Maggioli) | 1.010 | 12,8% |
+| HGATE | 956 | 12,1% |
+| *non riconosciuta* | 844 | 10,7% |
+| WordPress generico | 727 | 9,2% |
+| **WordPress Design Comuni** | 713 | 9,0% |
 
 E **323 comuni** stanno su piattaforme condivise messe a disposizione dalla
 propria Regione — Friuli-Venezia Giulia, Veneto, Rete Civica Lepida in
@@ -234,8 +234,12 @@ gira interamente senza rete e senza API key.
 ```bash
 git clone https://github.com/stanzinofree/TreasureIQ.git
 cd TreasureIQ
-docker compose up --build
+make up          # build delle immagini al primo avvio, poi le avvia
 ```
+
+`make up` è la via ergonomica: verifica Ollama, costruisce e avvia i container in
+background e stampa gli indirizzi. Senza `make` l'equivalente è `docker compose up
+--build`.
 
 Poi apri <http://localhost:3000>, oppure il dominio OrbStack se lo usi:
 <https://web.treasureiq.orb.local>. Funzionano entrambi senza configurare
@@ -253,6 +257,28 @@ L'API è pubblicata su <http://localhost:8010> — non 8000, che su molte macchi
 con OrbStack o Docker Desktop è già occupata, con l'effetto che le richieste
 raggiungono il processo sbagliato e restituiscono 404 in un modo che sembra un
 bug dell'applicazione.
+
+### Il Makefile
+
+`make` da solo (o `make help`) elenca i comandi. I più utili nel ciclo di vita
+del progetto:
+
+| Comando | Cosa fa |
+|---|---|
+| `make up` | build al primo avvio, poi avvia api (`:8010`) e web (`:3000`) |
+| `make restart` | ferma e riavvia lo stack |
+| `make rebuild` | ricostruisce le immagini dal sorgente, poi riavvia (fa prima un backup) |
+| `make down` | ferma lo stack; i dati restano nei bind mount |
+| `make logs` | segue i log di api + web |
+| `make status` | stato dei container, `GET /api/health` e check di Ollama |
+| `make scalda-cache COMUNI='…'` | sonda ora i comuni fuori copertura, per la demo |
+| `make test` | esegue la suite pytest nello stage `dev` del Dockerfile |
+| `make backup` · `make restore FILE=…` | tar di `storico.db` + `data-live/`, e ripristino |
+
+Rigenerare i dati sono operazioni pesanti e **non** servono per far girare la copia
+già committata: `make scan-nazionale` rifà il censimento nazionale in `storico.db`,
+`make sweep ISTAT='058057'` fa censimento e registro per un set di comuni,
+`make registro-list` elenca cosa è stato letto.
 
 ### Eseguire senza Docker
 
@@ -342,12 +368,13 @@ disonesta.
   leggere, ricevono una risposta letta al momento. Vanno detti come due numeri
   diversi, sempre.
 - **Riconoscere una piattaforma non è saperla leggere.** Il censimento identifica
-  20 piattaforme, ma la lettura live struttura solo quelle che espongono la
+  23 piattaforme, ma la lettura live struttura solo quelle che espongono la
   sezione Amministrazione Trasparente in modo raggiungibile. Municipium (Maggioli),
   seconda per diffusione al 12,8%, serve i dati da una propria API su tenant
-  numerico e non da un percorso pubblico: è riconosciuta come piattaforma, non
-  ancora letta come connettore. Pomezia, che la usa, cade sul gradino web. È il
-  prossimo connettore, non un buco nascosto.
+  numerico e non da un percorso pubblico: il connettore la legge in forma parziale
+  — gli uffici dalla sitemap e l'indice di Amministrazione Trasparente — mentre la
+  lettura completa dei servizi resta da fare. Pomezia, che la usa, è coperta a
+  metà, non del tutto.
 - **La ricerca web non è una fonte.** È l'ultimo gradino, serve solo dove il
   portale non espone i propri uffici, e quello che restituisce arriva marcato
   `non_verificato` e da confermare con l'URP. Non entra in nessuno snapshot e

@@ -124,16 +124,16 @@ Criterio: `comuni del fornitore × quanto sale il livello di lettura`.
 
 | Fornitore | Comuni | Stato | Stima |
 |---|---|---|---|
-| **Municipium** (Maggioli) | 1.009 | parziale — consegnato ciclo 10 (uffici + AT onesta 2/3) | da stimare oltre i 2 comuni verificati |
-| **HGATE** | 957 | rotte già mappate, manca la scheda | 2–3 gg |
-| **AgendaSmart** | 401 | rotta `/agenda-smart` verificata | 2–3 gg |
-| **OpenPA** | 364 | nome noto, rotte da mappare | 2–3 gg |
+| **Municipium** (Maggioli) | 1.010 | parziale — consegnato ciclo 10 (uffici + AT onesta 2/3) | da stimare oltre i 2 comuni verificati |
+| **HGATE** | 956 | rotte già mappate, manca la scheda | 2–3 gg |
+| **AgendaSmart** | 377 | rotta `/agenda-smart` verificata | 2–3 gg |
+| **OpenPA** | 363 | nome noto, rotte da mappare | 2–3 gg |
 | MyPortal (completare) | 155 | già a livello modello | 0,5 gg |
 
 Sommati: **2.886 comuni** — il 36,5% d'Italia — passerebbero da «non copro» a
 una risposta vera, per una quindicina di giornate.
 
-Restano **800 comuni non riconosciuti** (10,1%), ora in gruppi da 40–70: ogni
+Restano **844 comuni non riconosciuti** (10,7%), ora in gruppi da 40–70: ogni
 firma nuova vale decine di comuni, non più centinaia.
 
 ---

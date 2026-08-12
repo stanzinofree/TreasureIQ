@@ -184,7 +184,13 @@ class OfficeAnswer:
     nome: str
     telefono: str | None
     email: str | None
+    #: Orario da mostrare: la forma normalizzata (`OrarioSettimanale.reso`)
+    #: quando la pagina la consente, altrimenti la citazione verbatim.
     orari: str | None
+    #: La citazione verbatim dell'orario dal portale, tenuta come fonte
+    #: ricontrollabile accanto alla forma normalizzata (D-07). `None` quando
+    #: `orari` è già il verbatim (niente da affiancare) o manca del tutto.
+    orari_fonte: str | None = None
 
 
 @dataclass
@@ -1999,20 +2005,22 @@ async def _office_da_ufficio_nominato(
     if ufficio is None or not ufficio.url:
         return None
 
-    orari = await _orari_ufficio_live(codice_istat=codice_istat, ufficio=ufficio)
+    display, fonte = await _orari_ufficio_live(codice_istat=codice_istat, ufficio=ufficio)
     return OfficeAnswer(
         nome=ufficio.nome,
         telefono=", ".join(ufficio.telefoni) or None,
         email=", ".join(ufficio.email) or None,
-        orari=orari,
+        orari=display,
+        orari_fonte=fonte,
     )
 
 
 async def _orari_ufficio_live(
     *, codice_istat: str, ufficio: UfficioConnettore
-) -> str | None:
-    """L'orario di QUESTO ufficio letto adesso dalla sua pagina, con ripiego
-    onesto sul catalogo.
+) -> tuple[str | None, str | None]:
+    """L'orario di QUESTO ufficio letto adesso dalla sua pagina: forma
+    normalizzata da mostrare più fonte verbatim, con ripiego onesto sul
+    catalogo. Ritorna `(display, fonte)`.
 
     Punto unico di lettura orari-per-ufficio, condiviso dai due percorsi
     INFORMAZIONE (rail URP/ingerito e ramo connettore): entrambi i comuni —
@@ -2020,16 +2028,25 @@ async def _orari_ufficio_live(
     nessuna famiglia di piattaforma ricade nel vecchio comportamento (orario
     sempre `None` perché lo sweep non lo cattura per-ufficio).
 
-    Priorità all'orario letto ora da quella pagina (`leggi_orari_ufficio`,
-    cache-first + guardia SSRF); poi quello eventuale già in catalogo; `None`
-    onesto se nessuno dei due c'è. Mai solleva.
+    `display` è la forma normalizzata (`OrarioSettimanale.reso`) quando la
+    pagina la consente; altrimenti la citazione verbatim. `fonte` è la
+    citazione verbatim SOLO quando abbiamo normalizzato (c'è qualcosa da
+    affiancare come prova, D-07); `None` quando `display` è già il verbatim o
+    non c'è nessun orario. Mai solleva.
     """
     if not ufficio.url:
-        return ufficio.orari
+        return ufficio.orari, None
     letto = await asyncio.to_thread(
         leggi_orari_ufficio, codice_istat=codice_istat, url=ufficio.url
     )
-    return (letto.orari if letto is not None else None) or ufficio.orari
+    if letto is not None and letto.orario_schema is not None:
+        # Pagina letta e orario riconosciuto in forma normalizzabile: mostra la
+        # forma pulita, tieni il verbatim come fonte.
+        return letto.orario_schema.reso, letto.orari
+    # Niente schema: l'orario migliore che abbiamo (verbatim dalla pagina o dal
+    # catalogo) va mostrato così com'è, senza una fonte separata da affiancare.
+    verbatim = (letto.orari if letto is not None else None) or ufficio.orari
+    return verbatim, None
 
 
 def _testo_ufficio_connettore(*, comune_nome: str, ufficio: UfficioConnettore) -> str:
@@ -2104,12 +2121,15 @@ async def _risposta_da_connettore(
         # Orario di QUESTO ufficio letto ora dalla sua pagina (stesso punto
         # unico del rail URP): lo sweep non cattura gli orari per-ufficio, così
         # lo store li ha `None` e senza questa lettura la scheda direbbe «non
-        # pubblicato» anche dove la pagina li espone. Il valore migliore va
-        # sostituito nell'ufficio così che ANCHE il testo (`_testo_ufficio_
-        # connettore`) lo citi, non solo l'`OfficeAnswer`.
-        migliore = await _orari_ufficio_live(codice_istat=esito.codice_istat, ufficio=ufficio)
-        if migliore != ufficio.orari:
-            ufficio = ufficio.model_copy(update={"orari": migliore})
+        # pubblicato» anche dove la pagina li espone. Il valore da mostrare
+        # (forma normalizzata, `display`) va sostituito nell'ufficio così che
+        # ANCHE il testo (`_testo_ufficio_connettore`) lo citi, non solo
+        # l'`OfficeAnswer`; la fonte verbatim resta accanto sulla scheda.
+        display, fonte = await _orari_ufficio_live(
+            codice_istat=esito.codice_istat, ufficio=ufficio
+        )
+        if display != ufficio.orari:
+            ufficio = ufficio.model_copy(update={"orari": display})
         reply = _testo_ufficio_connettore(comune_nome=comune_nome, ufficio=ufficio)
         documento = DocumentAnswer(title=f"{ufficio.nome} — pagina del comune", url=ufficio.url)
         ufficio_risposta = OfficeAnswer(
@@ -2117,6 +2137,7 @@ async def _risposta_da_connettore(
             telefono=", ".join(ufficio.telefoni) or None,
             email=", ".join(ufficio.email) or None,
             orari=ufficio.orari,
+            orari_fonte=fonte,
         )
         citizen_effort = 1
 

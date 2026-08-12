@@ -78,6 +78,7 @@ export default function ChiediApertura({ enti }: { enti: Integration[] }) {
                             telefono: null,
                             email: e.urp_email,
                             orari: null,
+                            orari_fonte: null,
                             pec: e.pec,
                           }
                         : null

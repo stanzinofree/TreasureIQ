@@ -138,6 +138,13 @@ def test_office_da_ufficio_nominato_sostituisce_urp(monkeypatch: pytest.MonkeyPa
         endpoints={},
     )
     monkeypatch.setattr(respond.connettore, "leggi_connettore", lambda istat: esito)
+    from treasureiq.orari_schema import Fascia, OrarioSettimanale, RigaOrario
+
+    schema = OrarioSettimanale(
+        righe=[RigaOrario(giorni=[0], etichetta="Lunedì", fasce=[Fascia(apertura="9:00", chiusura="12:00")])],
+        testo_grezzo="lunedì 9:00-12:00",
+        reso="Lunedì: 9:00–12:00",
+    )
     monkeypatch.setattr(
         respond,
         "leggi_orari_ufficio",
@@ -145,7 +152,8 @@ def test_office_da_ufficio_nominato_sostituisce_urp(monkeypatch: pytest.MonkeyPa
             codice_istat=codice_istat,
             slug="ufficio-anagrafe-e-leva",
             url=url,
-            orari="Orari: lunedì 9-12",
+            orari="lunedì 9:00-12:00",
+            orario_schema=schema,
             letto_il="2026-08-12T00:00:00+00:00",
         ),
     )
@@ -160,7 +168,9 @@ def test_office_da_ufficio_nominato_sostituisce_urp(monkeypatch: pytest.MonkeyPa
     )
     assert office is not None
     assert office.nome == "Ufficio Anagrafe e Leva"
-    assert office.orari == "Orari: lunedì 9-12"
+    # Card: forma normalizzata; fonte: citazione verbatim affiancata (D-07).
+    assert office.orari == "Lunedì: 9:00–12:00"
+    assert office.orari_fonte == "lunedì 9:00-12:00"
     assert office.telefono == "06 12345"
 
 

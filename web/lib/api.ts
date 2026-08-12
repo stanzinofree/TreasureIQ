@@ -430,7 +430,13 @@ export interface InfoOffice {
   nome: string;
   telefono: string | null;
   email: string | null;
+  /** Office hours to show: the normalized form (`OrarioSettimanale.reso`)
+   *  when the page allowed structuring it, otherwise the verbatim citation. */
   orari: string | null;
+  /** The verbatim hours citation from the portal, kept beside the normalized
+   *  `orari` as a re-checkable source (D-07). `null` when `orari` is already
+   *  the verbatim text (nothing to pair) or when there are no hours. */
+  orari_fonte: string | null;
   /** Certified address from IPA. Preferred as the recipient of a formal
    * request: a PEC obliges a reply, an ordinary inbox does not. */
   pec: string | null;

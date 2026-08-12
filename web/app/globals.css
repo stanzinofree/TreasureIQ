@@ -4505,6 +4505,16 @@ a {
   font-variant-numeric: tabular-nums;
 }
 
+/* La citazione verbatim sotto la forma normalizzata: un rimando alla fonte,
+ * non un secondo orario — più piccola e smorzata, così la forma pulita resta
+ * quella che si legge e il verbatim è lì per chi vuole ricontrollare. */
+.civica__contatto-fonte {
+  margin-top: 0.15rem;
+  font-size: 0.72rem;
+  font-style: italic;
+  color: var(--sumi-faint);
+}
+
 .civica__nota {
   font-size: 0.8rem;
   color: var(--sumi-soft);

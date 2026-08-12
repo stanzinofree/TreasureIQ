@@ -39,6 +39,7 @@ from pydantic import BaseModel
 from treasureiq.alberatura import _decodifica_bytes
 from treasureiq.ingest.censimento import estrai_orari_da_testo
 from treasureiq.ingest.host_guard import fetch_guardato, host_senza_www
+from treasureiq.orari_schema import OrarioSettimanale, estrai_orario_strutturato
 
 logger = logging.getLogger(__name__)
 
@@ -65,6 +66,12 @@ class OrariUfficio(BaseModel):
     slug: str
     url: str
     orari: str | None
+    #: Lo schema normalizzato dell'orario (giorni + fasce), quando la pagina lo
+    #: espone in una forma riconoscibile. Additivo e opzionale: le voci in
+    #: cache scritte prima di questo campo restano valide (default `None`).
+    #: `orari` resta la fonte verbatim; `orario_schema.reso` è la forma pulita.
+    #: Nominato `orario_schema` e non `schema` per non oscurare `BaseModel.schema`.
+    orario_schema: OrarioSettimanale | None = None
     letto_il: str
 
 
@@ -144,6 +151,7 @@ def leggi_orari_ufficio(
     host_atteso = host_senza_www(host.lower())
 
     orari: str | None = None
+    schema: OrarioSettimanale | None = None
     try:
         esito = fetch_guardato(
             url, timeout=timeout, max_bytes=MAX_BYTES_PAGINA, host_atteso=host_atteso
@@ -152,6 +160,14 @@ def leggi_orari_ufficio(
             intestazioni, contenuto, _url_finale = esito
             pagina = _decodifica_bytes(intestazioni.get("content-type", "") or "", contenuto)
             orari = estrai_orari_da_testo(pagina)
+            schema = estrai_orario_strutturato(pagina)
+            # Fonte verbatim: la citazione ricca del censimento se c'è (porta il
+            # contesto di frase); altrimenti lo span verbatim dello schema, così
+            # una pagina a giorni abbreviati (comweb), muta al riconoscitore del
+            # censimento ma leggibile dallo schema, ha comunque una fonte da
+            # mostrare e non solo la forma normalizzata.
+            if orari is None and schema is not None:
+                orari = schema.testo_grezzo
     except Exception:  # noqa: BLE001 — risorsa muta: esito negativo, mai un crash
         logger.info("lettura orari-ufficio fallita: %s", url)
 
@@ -160,6 +176,7 @@ def leggi_orari_ufficio(
         slug=slug,
         url=url,
         orari=orari,
+        orario_schema=schema,
         letto_il=datetime.now(timezone.utc).isoformat(),
     )
     _in_cache(voce)

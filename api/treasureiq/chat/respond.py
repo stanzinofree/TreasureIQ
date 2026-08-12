@@ -1693,7 +1693,7 @@ async def _build_informazione_answer(
         if esito_connettore is not None and (
             esito_connettore.uffici or esito_connettore.amministrazione_trasparente is not None
         ):
-            risposta_connettore = _risposta_da_connettore(
+            risposta_connettore = await _risposta_da_connettore(
                 comune_nome=ente.ente,
                 topic=intent.topic,
                 diagnosi=diagnosis,
@@ -1939,6 +1939,16 @@ def _ufficio_connettore_pertinente(
     candidati.extend(pezzo for pezzo in topic.value.split("_") if len(pezzo) > 3)
 
     for chiave in candidati:
+        # La parola LETTERALE prima dei suoi sinonimi: se «anagrafe» compare in
+        # un solo nome d'ufficio, è quello — anche quando i sinonimi
+        # (demografic/stato civile) ne toccherebbero altri e renderebbero il
+        # match «ambiguo». Un match letterale unico non è un indovinello
+        # (D-04): un comune con più uffici demografici non deve ricadere
+        # sull'URP per una parola che, presa alla lettera, è univoca.
+        letterali = [u for u in uffici if chiave in u.nome.lower()]
+        if len(letterali) == 1:
+            return letterali[0], False
+
         sottostringhe = _SINONIMI_UFFICIO_CONNETTORE.get(chiave, (chiave,))
         trovati = [
             ufficio
@@ -1977,40 +1987,49 @@ async def _office_da_ufficio_nominato(
     esito = await asyncio.to_thread(connettore.leggi_connettore, codice_istat)
     if esito is None or not esito.uffici:
         return None
-
-    # La parola LETTERALE del cittadino, se compare in un solo nome d'ufficio,
-    # è la scelta più onesta: «anagrafe» sta esattamente in «Ufficio Anagrafe
-    # e Leva» e in nessun altro. Il matcher generale invece espande in sinonimi
-    # (demografic/stato civile) e su un comune con più uffici demografici
-    # tornerebbe «ambiguo» — corretto per elencare, ma qui, dove il cittadino
-    # ha nominato esatto, spingerebbe di nuovo verso l'URP. Un match letterale
-    # unico non è un indovinello (D-04): lo si preferisce.
-    chiave = ufficio_chiesto.lower()
-    letterali = [u for u in esito.uffici if u.url and chiave in u.nome.lower()]
-    if len(letterali) == 1:
-        ufficio = letterali[0]
-    else:
-        ufficio, _ambiguo = _ufficio_connettore_pertinente(
-            esito.uffici,
-            ufficio_chiesto=ufficio_chiesto,
-            topic=topic,
-            disabilita_attiva=disabilita_attiva,
-        )
-        if ufficio is None or not ufficio.url:
-            return None
-
-    letto = await asyncio.to_thread(
-        leggi_orari_ufficio, codice_istat=codice_istat, url=ufficio.url
+    # Stessa disciplina di match del ramo connettore (`_risposta_da_connettore`):
+    # unica definizione di «quale ufficio intendeva», letterale-prima-dei-sinonimi
+    # inclusa. Nessuna logica di match duplicata qui.
+    ufficio, _ambiguo = _ufficio_connettore_pertinente(
+        esito.uffici,
+        ufficio_chiesto=ufficio_chiesto,
+        topic=topic,
+        disabilita_attiva=disabilita_attiva,
     )
-    # Priorità all'orario letto adesso da QUELLA pagina; poi quello eventuale
-    # già in catalogo; `None` onesto se nessuno dei due c'è.
-    orari = (letto.orari if letto is not None else None) or ufficio.orari
+    if ufficio is None or not ufficio.url:
+        return None
+
+    orari = await _orari_ufficio_live(codice_istat=codice_istat, ufficio=ufficio)
     return OfficeAnswer(
         nome=ufficio.nome,
         telefono=", ".join(ufficio.telefoni) or None,
         email=", ".join(ufficio.email) or None,
         orari=orari,
     )
+
+
+async def _orari_ufficio_live(
+    *, codice_istat: str, ufficio: UfficioConnettore
+) -> str | None:
+    """L'orario di QUESTO ufficio letto adesso dalla sua pagina, con ripiego
+    onesto sul catalogo.
+
+    Punto unico di lettura orari-per-ufficio, condiviso dai due percorsi
+    INFORMAZIONE (rail URP/ingerito e ramo connettore): entrambi i comuni —
+    dentro o fuori `enti.json` — leggono l'orario nello stesso modo, così
+    nessuna famiglia di piattaforma ricade nel vecchio comportamento (orario
+    sempre `None` perché lo sweep non lo cattura per-ufficio).
+
+    Priorità all'orario letto ora da quella pagina (`leggi_orari_ufficio`,
+    cache-first + guardia SSRF); poi quello eventuale già in catalogo; `None`
+    onesto se nessuno dei due c'è. Mai solleva.
+    """
+    if not ufficio.url:
+        return ufficio.orari
+    letto = await asyncio.to_thread(
+        leggi_orari_ufficio, codice_istat=codice_istat, url=ufficio.url
+    )
+    return (letto.orari if letto is not None else None) or ufficio.orari
 
 
 def _testo_ufficio_connettore(*, comune_nome: str, ufficio: UfficioConnettore) -> str:
@@ -2044,7 +2063,7 @@ def _testo_elenco_uffici_connettore(*, comune_nome: str, uffici: list[UfficioCon
     )
 
 
-def _risposta_da_connettore(
+async def _risposta_da_connettore(
     *,
     comune_nome: str,
     topic: Topic,
@@ -2082,6 +2101,15 @@ def _risposta_da_connettore(
         ufficio_risposta = None
         citizen_effort = 2
     else:
+        # Orario di QUESTO ufficio letto ora dalla sua pagina (stesso punto
+        # unico del rail URP): lo sweep non cattura gli orari per-ufficio, così
+        # lo store li ha `None` e senza questa lettura la scheda direbbe «non
+        # pubblicato» anche dove la pagina li espone. Il valore migliore va
+        # sostituito nell'ufficio così che ANCHE il testo (`_testo_ufficio_
+        # connettore`) lo citi, non solo l'`OfficeAnswer`.
+        migliore = await _orari_ufficio_live(codice_istat=esito.codice_istat, ufficio=ufficio)
+        if migliore != ufficio.orari:
+            ufficio = ufficio.model_copy(update={"orari": migliore})
         reply = _testo_ufficio_connettore(comune_nome=comune_nome, ufficio=ufficio)
         documento = DocumentAnswer(title=f"{ufficio.nome} — pagina del comune", url=ufficio.url)
         ufficio_risposta = OfficeAnswer(
@@ -2257,7 +2285,7 @@ async def _risposta_live(
     if esito_connettore is not None and (
         esito_connettore.uffici or esito_connettore.amministrazione_trasparente is not None
     ):
-        risposta_connettore = _risposta_da_connettore(
+        risposta_connettore = await _risposta_da_connettore(
             comune_nome=comune.nome,
             topic=topic,
             diagnosi=diagnosi,

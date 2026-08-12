@@ -26,11 +26,10 @@ import re
 from pathlib import Path
 from urllib.parse import urljoin, urlparse
 
-import httpx
-from pydantic import BaseModel
+from pydantic import AliasChoices, BaseModel, Field
 
 from treasureiq.connettore import EsitoConnettore
-from treasureiq.ingest.base import USER_AGENT
+from treasureiq.ingest.host_guard import fetch_guardato
 from treasureiq.integration import DATA_DIR
 from treasureiq.mappa_connettore import _base_con_schema, _host_senza_www
 from treasureiq.sonda_live import LIVE_DIR, ComuneNoto
@@ -130,18 +129,23 @@ _RE_ALT_ATTR = re.compile(r'alt=["\']([^"\']+)["\']', re.IGNORECASE)
 _RE_CLASS_ATTR = re.compile(r'class=["\']([^"\']+)["\']', re.IGNORECASE)
 
 
-class ServizioSnapshot(BaseModel):
-    """Una voce del `servizi_snapshot` (D-03): nome+url, mai altro — è
-    input al fingerprint di change-detection, non un profilo servizio."""
+class UfficioSnapshot(BaseModel):
+    """Una voce del `uffici_snapshot` (D-03): nome+url di un ufficio letto
+    dal connettore (`esito.uffici`), mai altro — è input al fingerprint di
+    change-detection, non un profilo servizio."""
 
     nome: str
     url: str
 
 
 class EndpointsRegistro(BaseModel):
-    """Gli endpoint noti del portale. Oggi solo `at` è popolato dal
-    connettore Municipium; `servizi`/`mappa` restano per i connettori eGov
-    futuri (Truth 3 del plan) — nessuna inflazione qui, solo la forma."""
+    """Gli endpoint noti del portale. `at` è generale (B5, ciclo16): letto
+    da `EsitoConnettore.amministrazione_trasparente.indice_url` per QUALSIASI
+    connettore che lo popoli, non solo Municipium — ogni connettore già
+    costruito (Municipium/eGov/OpenWeb/PeopleWeb/WordPress-AgID/ComWeb/
+    OpenPA) lo riempie con la propria logica di scoperta. `servizi`/`mappa`
+    restano per i connettori eGov futuri (Truth 3 del plan) — nessuna
+    inflazione qui, solo la forma."""
 
     amministrazione: str | None = None
     servizi: str | None = None
@@ -181,9 +185,16 @@ class RegistroComune(BaseModel):
     logo_b64: str | None = None
     dominio: str
     piattaforma: str
+    piattaforma_at: str | None = None
     endpoints: EndpointsRegistro
     ultima_scansione: str
-    servizi_snapshot: list[ServizioSnapshot] = []
+    # Back-compat (rename servizi_snapshot→uffici_snapshot): i record scritti
+    # prima del rinomino portano la chiave vecchia. L'alias li rilegge senza
+    # re-sweep; la serializzazione resta sempre `uffici_snapshot`.
+    uffici_snapshot: list[UfficioSnapshot] = Field(
+        default=[],
+        validation_alias=AliasChoices("uffici_snapshot", "servizi_snapshot"),
+    )
     prima_scansione: bool
     cambiato: Cambiato | None = None
     recapiti: Recapiti | None = None
@@ -191,12 +202,16 @@ class RegistroComune(BaseModel):
 
 class ScansioneStorico(BaseModel):
     """Una riga di storia (D-03): solo i fingerprint stabili usati dal
-    diff, mai il set-pagine (R-04)."""
+    diff, mai il set-pagine (R-04). `at_url`/`piattaforma_at` (B5, ciclo16)
+    NON entrano nei fingerprint servizi/contatti — sono confrontati a parte
+    in `_campi_cambiati`, stesso trattamento del `logo_hash`."""
 
     quando: str
     servizi_fingerprint: str
     contatti_fingerprint: str
     logo_hash: str | None = None
+    at_url: str | None = None
+    piattaforma_at: str | None = None
 
 
 class RecordRegistro(RegistroComune):
@@ -343,62 +358,35 @@ def _estrai_logo_header(pagina: str, base: str, host_comune: str) -> str | None:
 
 
 def _leggi_header_html(base: str, host_comune: str, *, timeout: float = 6.0) -> tuple[str, str] | None:
-    """GET guardato di `header.html` (D-04): stessa guardia host-check
-    DOPO il follow-301 e size-cap-streaming-con-abort di `_scarica_logo`.
-    `None` per qualunque esito non valido — innocuo quando manca (es.
-    Municipium, dove `header.html` spesso risponde 404): il chiamante
-    ripiega sul comportamento attuale (`og:image`→favicon)."""
+    """GET guardato di `header.html` (D-04) via `host_guard.fetch_guardato`
+    (B5, ciclo16): host atteso `host_comune` su OGNI hop, non solo dopo
+    l'ultimo redirect — rinforzo rispetto alla guardia precedente, stessa
+    guardia SSRF ora condivisa con `censimento.py`. `None` per qualunque
+    esito non valido — innocuo quando manca (es. Municipium, dove
+    `header.html` spesso risponde 404): il chiamante ripiega sul
+    comportamento attuale (`og:image`→favicon)."""
     url = urljoin(base, "/header.html")
-    try:
-        with httpx.Client(timeout=timeout, headers={"User-Agent": USER_AGENT}, follow_redirects=True) as client:
-            with client.stream("GET", url) as risposta:
-                if risposta.status_code != 200:
-                    return None
-                if _host_senza_www(urlparse(str(risposta.url)).netloc.lower()) != host_comune:
-                    logger.warning("header.html redirect fuori host scartato: %s -> %s", url, risposta.url)
-                    return None
-                buffer = bytearray()
-                for pezzo in risposta.iter_bytes():
-                    buffer.extend(pezzo)
-                    if len(buffer) > MAX_HEADER_BYTES:
-                        logger.info("header.html oltre size-cap, connessione interrotta: %s", url)
-                        return None
-                finale = str(risposta.url)
-    except Exception:  # noqa: BLE001 — header.html muto: fallback al comportamento attuale
-        logger.info("header.html irraggiungibile: %s", url)
+    scaricato = fetch_guardato(url, timeout=timeout, max_bytes=MAX_HEADER_BYTES, host_atteso=host_comune)
+    if scaricato is None:
         return None
-    return bytes(buffer).decode("utf-8", errors="replace"), finale
+    _, dati, finale = scaricato
+    return dati.decode("utf-8", errors="replace"), finale
 
 
 def _scarica_logo(url: str, host_comune: str, *, timeout: float = 6.0) -> tuple[str | None, str | None]:
-    """Il logo (D-11), scaricato in streaming con la guardia SSRF
-    post-redirect di `municipium.py:246` (host allow-list DOPO il
-    follow-301) e un size-cap che ABORTISCE la connessione al superamento
-    — mai un `len()` dopo un download intero, il DoS resterebbe altrimenti.
+    """Il logo (D-11), scaricato via `host_guard.fetch_guardato` (B5,
+    ciclo16): host atteso `host_comune` su OGNI hop — rinforzo rispetto alla
+    guardia precedente (solo post-redirect) — e size-cap che ABORTISCE la
+    connessione al superamento, mai un `len()` dopo un download intero.
     Ritorna `(data_uri, hash_sha256)`; qualunque fallimento → `(None, None)`,
     mai un'eccezione che risale al chiamante."""
-    try:
-        with httpx.Client(timeout=timeout, headers={"User-Agent": USER_AGENT}, follow_redirects=True) as client:
-            with client.stream("GET", url) as risposta:
-                if risposta.status_code != 200:
-                    return None, None
-                if _host_senza_www(urlparse(str(risposta.url)).netloc.lower()) != host_comune:
-                    logger.warning("logo redirect fuori host scartato: %s -> %s", url, risposta.url)
-                    return None, None
-                content_type = risposta.headers.get("content-type", "")
-                if content_type and not content_type.lower().startswith("image/"):
-                    return None, None
-                buffer = bytearray()
-                for pezzo in risposta.iter_bytes():
-                    buffer.extend(pezzo)
-                    if len(buffer) > MAX_LOGO_BYTES:
-                        logger.info("logo oltre size-cap, connessione interrotta: %s", url)
-                        return None, None
-    except Exception:  # noqa: BLE001 — logo muto: fallback glifo, mai un crash
-        logger.info("logo irraggiungibile: %s", url)
+    scaricato = fetch_guardato(url, timeout=timeout, max_bytes=MAX_LOGO_BYTES, host_atteso=host_comune)
+    if scaricato is None:
         return None, None
-
-    dati = bytes(buffer)
+    intestazioni, dati, _ = scaricato
+    content_type = intestazioni.get("content-type", "")
+    if content_type and not content_type.lower().startswith("image/"):
+        return None, None
     if not dati:
         return None, None
     hash_sha256 = hashlib.sha256(dati).hexdigest()
@@ -458,27 +446,15 @@ def _logo_one_shot(comune: ComuneNoto) -> tuple[str | None, str | None]:
     if base is None:
         return None, None
     host_comune = _host_senza_www(urlparse(base).netloc.lower())
-    try:
-        with httpx.Client(timeout=6.0, headers={"User-Agent": USER_AGENT}, follow_redirects=True) as client:
-            with client.stream("GET", base) as risposta:
-                # host-check DOPO i redirect (SSRF): un redirect fuori dal
-                # dominio del comune non deve essere seguito nel corpo.
-                if risposta.status_code != 200 or _host_senza_www(
-                    urlparse(str(risposta.url)).netloc.lower()
-                ) != host_comune:
-                    return None, None
-                buffer = bytearray()
-                for chunk in risposta.iter_bytes():
-                    buffer.extend(chunk)
-                    if len(buffer) > MAX_HOME_BYTES:
-                        # home spropositata: abort in streaming, mai in RAM intera
-                        logger.info("home page oltre cap per logo: %s", comune.nome)
-                        return None, None
-                finale = str(risposta.url)
-    except Exception:  # noqa: BLE001 — home page muta: niente logo, non un crash
+    # Guardia SSRF condivisa (B5, ciclo16): host atteso `host_comune` su
+    # OGNI hop — rinforzo rispetto al check precedente (solo dopo l'ultimo
+    # redirect) — e size-cap in streaming, mai in RAM intera.
+    scaricato = fetch_guardato(base, timeout=6.0, max_bytes=MAX_HOME_BYTES, host_atteso=host_comune)
+    if scaricato is None:
         logger.info("home page irraggiungibile per logo: %s", comune.nome)
         return None, None
-    testo = buffer.decode("utf-8", errors="replace")
+    _, dati, finale = scaricato
+    testo = dati.decode("utf-8", errors="replace")
 
     # Candidati logo in ordine di preferenza. Ognuno scaricato con la
     # guardia SSRF stretta di `_scarica_logo` (host-check post-redirect):
@@ -516,6 +492,16 @@ def _campi_cambiati(precedente: ScansioneStorico, attuale: ScansioneStorico) -> 
         campi.append("contatti")
     if precedente.logo_hash != attuale.logo_hash:
         campi.append("logo")
+    # B5 (ciclo16): la piattaforma AT è confrontata come il logo — valore
+    # scalare, non fingerprint — perché una sola coppia (url, piattaforma)
+    # non giustifica l'ordinamento di un fingerprint. `at_url` cambiato
+    # senza `piattaforma_at` cambiato (o viceversa) conta comunque come "at":
+    # sono la stessa scoperta, un solo campo di novità verso il cittadino.
+    if (
+        precedente.at_url != attuale.at_url
+        or precedente.piattaforma_at != attuale.piattaforma_at
+    ):
+        campi.append("at")
     return campi
 
 
@@ -535,11 +521,47 @@ def registra_scansione(comune: ComuneNoto, esito: EsitoConnettore) -> RecordRegi
 
     logo_b64, logo_hash = _logo_one_shot(comune)
 
+    # B5 (ciclo16): `at_url`/`piattaforma_at` vengono dalla scansione
+    # connettore corrente se presenti; se il connettore di questo giro non
+    # ha trovato/classificato l'AT (es. pagina temporaneamente muta), si
+    # ripiega sull'ultimo valore noto in storico invece di azzerarlo — un
+    # "non trovato oggi" non deve far dimenticare un "trovato ieri" (D-16,
+    # onesto sull'assenza).
+    at_precedente = storia_precedente[-1] if storia_precedente else None
+    at_url = (
+        esito.amministrazione_trasparente.indice_url
+        if esito.amministrazione_trasparente
+        else None
+    ) or (at_precedente.at_url if at_precedente else None)
+    piattaforma_at = (
+        esito.amministrazione_trasparente.piattaforma_at
+        if esito.amministrazione_trasparente
+        else None
+    ) or (at_precedente.piattaforma_at if at_precedente else None)
+
+    # B9 (ciclo16): stesso mirror del fallback-da-precedente sopra (`at_url`)
+    # ma la fonte è `precedente.endpoints` (il record registro persistito,
+    # non `storia_precedente` — `ScansioneStorico` non porta mappa/servizi/
+    # amministrazione, solo `at_url`). Un fetch corrente muto non deve far
+    # perdere un URL buono letto in uno sweep precedente (ingest-non-
+    # riproducibile). NON entrano in `_campi_cambiati` (sotto, fuori
+    # fingerprint): sono URL stabili di sezione, non devono generare falsi
+    # diff sullo sweep — stesso trattamento già dato a `at`/`piattaforma_at`.
+    ep = esito.endpoints
+    ep_precedente = precedente.endpoints if precedente else None
+    ep_mappa = (ep.mappa if ep else None) or (ep_precedente.mappa if ep_precedente else None)
+    ep_servizi = (ep.servizi if ep else None) or (ep_precedente.servizi if ep_precedente else None)
+    ep_amministrazione = (ep.amministrazione if ep else None) or (
+        ep_precedente.amministrazione if ep_precedente else None
+    )
+
     attuale = ScansioneStorico(
         quando=esito.letto_il,
         servizi_fingerprint=_fingerprint_servizi(esito),
         contatti_fingerprint=_fingerprint_contatti(esito),
         logo_hash=logo_hash,
+        at_url=at_url,
+        piattaforma_at=piattaforma_at,
     )
 
     cambiato: Cambiato | None = None
@@ -556,11 +578,15 @@ def registra_scansione(comune: ComuneNoto, esito: EsitoConnettore) -> RecordRegi
         logo_b64=logo_b64,
         dominio=dominio,
         piattaforma=esito.piattaforma,
+        piattaforma_at=piattaforma_at,
         endpoints=EndpointsRegistro(
-            at=esito.amministrazione_trasparente.indice_url if esito.amministrazione_trasparente else None
+            at=at_url,
+            mappa=ep_mappa,
+            servizi=ep_servizi,
+            amministrazione=ep_amministrazione,
         ),
         ultima_scansione=esito.letto_il,
-        servizi_snapshot=[ServizioSnapshot(nome=u.nome, url=u.url) for u in esito.uffici],
+        uffici_snapshot=[UfficioSnapshot(nome=u.nome, url=u.url) for u in esito.uffici],
         prima_scansione=prima_scansione,
         cambiato=cambiato,
         scansioni=storia,

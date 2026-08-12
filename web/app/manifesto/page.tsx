@@ -185,6 +185,60 @@ export default function Manifesto() {
         </ul>
       </section>
 
+      <section className="manifesto-fondatore">
+        <div className="manifesto-fondatore__inner">
+          <p className="eyebrow">Voce del fondatore</p>
+          <h2>Perché ho iniziato</h2>
+          <div className="manifesto-fondatore__corpo">
+            <p>
+              Ogni tanto capita di dover cercare gli orari di un ufficio del
+              comune, di capire a chi rivolgersi per un certificato, o di sapere
+              se c&apos;è un bando a cui si ha diritto. Oggi è più facile di
+              qualche anno fa, ma ancora insoddisfacente per l&apos;era in cui
+              siamo. Si viene rediretti da un portale all&apos;altro, quando va
+              bene; altrimenti si finisce su un 404 o su un sito che non risponde
+              più. È lì che ho iniziato: fare in modo che quello che sul comune A
+              sta sotto «Servizi» e sul comune B sotto «Uffici», sotto TIQ sia in
+              una chat.
+            </p>
+            <p>
+              TIQ non è la soluzione: è un apriscatole. Il problema non sono i
+              fornitori che costruiscono le loro piattaforme — è che non c&apos;è
+              una spinta comune a farli lavorare su uno schema condiviso di
+              esposizione dei dati. Ogni connettore che scrivo è, allo stesso
+              tempo, la misura di quanto manca a quello standard.
+            </p>
+            <p>
+              L&apos;obiettivo vero è che quello che oggi provo a fare io, da
+              privato e da solo, venga perseguito dallo Stato: che diventi una
+              piattaforma centralizzata, o quantomeno la strada di riferimento
+              per la trasparenza dei comuni. TIQ serve finché la scatola è
+              chiusa.
+            </p>
+          </div>
+          <p className="manifesto-fondatore__firma">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              className="manifesto-fondatore__ritratto"
+              src="/fondatore.jpg"
+              alt="Alessandro Middei"
+              width={48}
+              height={48}
+            />
+            <span>
+              — Alessandro Middei, fondatore di TreasureIQ ·{" "}
+              <a
+                href="https://www.linkedin.com/in/stanzinofree/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                LinkedIn
+              </a>
+            </span>
+          </p>
+        </div>
+      </section>
+
       <section className="manifesto-cta">
         <h2>Come funziona, nel dettaglio</h2>
         <p className="lede">

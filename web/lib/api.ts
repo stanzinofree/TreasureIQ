@@ -653,6 +653,11 @@ export interface AmministrazioneTrasparente {
   indice_url: string | null;
   bandi_attivi: BandoAT[];
   pdf_presenti: boolean;
+  /** Piattaforma di amministrazione trasparente riconosciuta a parte dal
+   *  portale principale (due-connettori, B5 ciclo 16). `"NON_TROVATA"` è
+   *  copertura onesta — non un placeholder da nascondere — e va mostrata
+   *  come tale. Opzionale: assente nelle risposte non ancora classificate. */
+  piattaforma_at?: string;
 }
 
 /** Un ufficio letto dal connettore, coi suoi recapiti verbatim (D-07:
@@ -887,6 +892,15 @@ export interface SchedaComune {
   orari: OrariLive | null;
   /** Solo host del comune (D-S8): mai un logo letto da un dominio estraneo. */
   logo_url: string | null;
+  /** Famiglia piattaforma dal censimento nazionale (storico.db), non dallo
+   *  scan-mappa: il vendor riconosciuto anche quando `connettore_tipo` cade su
+   *  "solo-html" perché il portale non espone REST AgID. `classificato_da` è la
+   *  provenienza (sonda vs riclassificazione). `null` = comune non censito.
+   *  `piattaforma_at` può valere "non_trovata"/"ignota": non sono vendor. */
+  piattaforma: string | null;
+  piattaforma_at: string | null;
+  at_url: string | null;
+  classificato_da: string | null;
 }
 
 export const fetchSchedaComune = (codiceIstat: string) =>
@@ -910,7 +924,7 @@ export interface RegistroComune {
   };
   /** ISO, mai un `now()` ricalcolato lato client (stile D-10 ciclo 10). */
   ultima_scansione: string;
-  servizi_snapshot: { nome: string; url: string }[];
+  uffici_snapshot: { nome: string; url: string }[];
   prima_scansione: boolean;
   /** `null` = nessun cambiamento rilevato, oppure `prima_scansione: true`
    *  (in quel caso non c'è una scansione precedente con cui confrontare). */
@@ -1243,6 +1257,19 @@ export interface VincoliRiga {
   comuni: number;
 }
 
+/** Mirror di `PiattaformaAtOut` (`api/treasureiq/api.py`): distinta dalla
+ *  `PiattaformaOut` del portale principale (D-09, due-connettori) — questa
+ *  è la piattaforma di amministrazione-trasparente, GROUP BY a parte.
+ *  `"NON_TROVATA"` è copertura onesta, non un placeholder da nascondere. */
+export interface PiattaformaAtRiga {
+  piattaforma_at: string;
+  comuni: number;
+  popolazione: number | null;
+  regioni: number;
+  regione_prima: string | null;
+  comuni_prima: number;
+}
+
 export interface Censimento {
   rilevato_il: string | null;
   date_disponibili: string[];
@@ -1250,6 +1277,8 @@ export interface Censimento {
   fornitori: FornitoreRiga[];
   sezioni_mancanti: SezioneRiga[];
   vincoli: VincoliRiga[];
+  /** Opzionale: assente nelle risposte precedenti al ciclo 16. */
+  piattaforme_at?: PiattaformaAtRiga[];
 }
 
 export interface Connettore {

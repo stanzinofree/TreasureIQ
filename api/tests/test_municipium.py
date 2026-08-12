@@ -251,6 +251,65 @@ def test_leggi_municipium_comune_senza_sito_esito_vuoto_non_crasha():
 
 
 # ---------------------------------------------------------------------------
+# Endpoints (B9, ciclo16) — onestà: solo URL davvero letti nella sitemap.
+# ---------------------------------------------------------------------------
+
+
+def test_endpoints_da_sitemap_link_reali_popola_servizi_amministrazione_mappa():
+    sitemap = _leggi_fixture("sitemap_pomezia.html")
+    sonda = _sonda_instradata({f"{BASE}/it/sitemap": _RispostaFinta(sitemap)})
+    _, link_sitemap = municipium._scopri_uffici(_comune_pomezia(), sonda)
+
+    endpoints = municipium._endpoints_da_sitemap(BASE, "comune.pomezia.rm.it", link_sitemap)
+
+    assert endpoints.mappa == f"{BASE}/it/sitemap"
+    assert endpoints.servizi == f"{BASE}/it/menu/servizi-380465"
+    assert endpoints.amministrazione == f"{BASE}/it/menu/amministrazione-380448"
+
+
+def test_endpoints_da_sitemap_senza_link_menu_servizi_amministrazione_null_mappa_presente():
+    sitemap = _leggi_fixture("sitemap_senza_org_unit.html")
+    sonda = _sonda_instradata({f"{BASE}/it/sitemap": _RispostaFinta(sitemap)})
+    _, link_sitemap = municipium._scopri_uffici(_comune_pomezia(), sonda)
+
+    endpoints = municipium._endpoints_da_sitemap(BASE, "comune.pomezia.rm.it", link_sitemap)
+
+    # niente nodo menu /it/menu/servizi in questa sitemap: null, mai inventato.
+    assert endpoints.servizi is None
+    # niente nodo menu amministrazione, ma fallback su aree-amministrative c'è.
+    assert endpoints.amministrazione == f"{BASE}/it/page/aree-amministrative"
+    assert endpoints.mappa == f"{BASE}/it/sitemap"
+
+
+def test_endpoints_da_sitemap_sitemap_muta_tutti_null():
+    # `_scopri_uffici` torna link_sitemap=[] quando la sitemap non fruttato
+    # nulla (irraggiungibile/invalida) — mappa non è mai stata letta davvero.
+    endpoints = municipium._endpoints_da_sitemap(BASE, "comune.pomezia.rm.it", [])
+
+    assert endpoints.mappa is None
+    assert endpoints.servizi is None
+    assert endpoints.amministrazione is None
+
+
+def test_leggi_municipium_end_to_end_endpoints_popolati():
+    sitemap = _leggi_fixture("sitemap_pomezia.html")
+    tributi_url = f"{BASE}/it/organizational_unit/servizio-tributi-31081"
+    sonda = _sonda_instradata(
+        {
+            f"{BASE}/it/sitemap": _RispostaFinta(sitemap),
+            tributi_url: _RispostaFinta(_leggi_fixture("ufficio_tributi.html"), url=tributi_url),
+        }
+    )
+
+    esito = municipium.leggi_municipium(_comune_pomezia(), sonda)
+
+    assert esito.endpoints is not None
+    assert esito.endpoints.mappa == f"{BASE}/it/sitemap"
+    assert esito.endpoints.servizi == f"{BASE}/it/menu/servizi-380465"
+    assert esito.endpoints.amministrazione == f"{BASE}/it/menu/amministrazione-380448"
+
+
+# ---------------------------------------------------------------------------
 # CLI
 # ---------------------------------------------------------------------------
 

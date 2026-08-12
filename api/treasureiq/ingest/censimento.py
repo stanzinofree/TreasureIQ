@@ -56,12 +56,14 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import date, datetime, timezone
 from enum import Enum
 from pathlib import Path
-from urllib.parse import urlsplit
+from typing import NamedTuple
+from urllib.parse import urljoin, urlsplit
 
 import httpx
 from pydantic import BaseModel, Field
 
 from treasureiq.ingest.base import USER_AGENT
+from treasureiq.ingest.host_guard import fetch_guardato, host_senza_www
 from treasureiq.ingest.modello_agid import (
     PREFISSO_MYPORTAL,
     stato_vincoli,
@@ -83,7 +85,10 @@ from treasureiq.ingest.myportal import (
     usa_modello_pnrr,
 )
 from treasureiq.ingest.piattaforma import (
+    ClassificaFirme,
+    FirmaScattata,
     Piattaforma,
+    classifica_risposta,
     da_impronta,
     firma_da_risposta,
     impronta_grezza,
@@ -318,6 +323,16 @@ class EsitoCensimento(BaseModel):
     secondi: float | None = None
     errore: str | None = None
     misurato_il: date = Field(default_factory=lambda: datetime.now(timezone.utc).date())
+    #: Ciclo 16 — amministrazione-trasparente, non il portale principale.
+    #: Popolati SOLO dal valore reale che `scopri_pagina_at` ritorna dai byte
+    #: scaricati: `non_trovata`/`ignota` sono copertura onesta e restano tali,
+    #: mai indovinati per convenienza.
+    piattaforma_at: str | None = None
+    piattaforma_at_prova: str | None = None
+    at_url: str | None = None
+    #: Diagnostica dei runner-up della batteria di firme AT, come lista di
+    #: dict pronta per `json.dumps` (stessa forma di `RigaPortale`).
+    firme_scattate: list[dict] | None = None
 
 
 def _cita(testo: str, trovato: re.Match[str]) -> str:
@@ -477,6 +492,124 @@ class _Sonda:
 
     def testo(self, url: str) -> str:
         return self._get(url).text
+
+
+#: Cap streaming sul download della pagina AT: mai in RAM oltre questa
+#: soglia, connessione interrotta al superamento (stesso spirito di
+#: `registro.MAX_HOME_BYTES`). Il download stesso passa da
+#: `host_guard.fetch_guardato` (B5, ciclo16): questo modulo fissa solo il
+#: cap, non la guardia SSRF.
+MAX_AT_PAGINA_BYTES = 1_000_000
+
+#: L'etichetta che il comune mostra al cittadino vince sul semplice indizio
+#: nell'URL: su Peveragno distingue il link corrente (jcitygov, "dal
+#: 24/11/2025") da quello scaduto (WP nativo, "fino al 23/11/2025"), ed è la
+#: ragione per cui l'ordine di priorità comincia da qui e non dall'href.
+_ETICHETTA_AT = re.compile(r"amministrazione\s+trasparente", re.I)
+_HREF_JCITYGOV = re.compile(r"trasparenza-valutazione-merito\.it", re.I)
+_HREF_AMM_TRASP = re.compile(r"amm_trasp", re.I)
+_HREF_TRASPARENZA = re.compile(r"trasparenza", re.I)
+
+#: Un blocco `<a href="...">...</a>`, contenuto incluso: l'etichetta AT vive
+#: spesso in un `alt`/`title` di un `<img>` annidato o in un `<p>` figlio,
+#: non nel testo diretto dell'ancora, quindi si guarda tutto il blocco.
+_ANCORA_HREF = re.compile(r'<a\b[^>]*?href=["\']([^"\']+)["\'][^>]*>(.*?)</a>', re.I | re.S)
+
+
+def scopri_url_at(html_home: str, base: str) -> str | None:
+    """Trova l'URL della pagina Amministrazione Trasparente nella home già
+    scaricata (D-16: mai un fetch aggiuntivo solo per cercare il link).
+
+    Scansiona le ancore in ordine di documento e le raggruppa per priorità
+    (etichetta esplicita, poi host jcitygov, poi `amm_trasp`, poi
+    `trasparenza` generico); il primo candidato della priorità più alta
+    vince. Nessuna ancora in nessuna priorità → `None`, mai un URL
+    indovinato.
+    """
+    per_priorita: list[list[str]] = [[], [], [], []]
+    for m in _ANCORA_HREF.finditer(html_home):
+        href, interno = m.group(1), m.group(2)
+        if _ETICHETTA_AT.search(interno):
+            per_priorita[0].append(href)
+        elif _HREF_JCITYGOV.search(href):
+            per_priorita[1].append(href)
+        elif _HREF_AMM_TRASP.search(href):
+            per_priorita[2].append(href)
+        elif _HREF_TRASPARENZA.search(href):
+            per_priorita[3].append(href)
+    for candidati in per_priorita:
+        if candidati:
+            return urljoin(base, candidati[0])
+    return None
+
+
+def _host_senza_www(host: str) -> str:
+    """Alias locale del canonico `host_guard.host_senza_www` (B5, ciclo16):
+    mantenuto per non toccare gli altri call-site di questo modulo."""
+    return host_senza_www(host)
+
+
+def _fetch_at_guardato(url: str, *, timeout: float = 8.0) -> tuple[httpx.Headers, str] | None:
+    """Scarica la pagina AT via `host_guard.fetch_guardato` (B5, ciclo16):
+    host atteso `None` — si fissa al primo hop dell'URL RICHIESTO, non a
+    quello del comune, perché l'AT vive spesso su un dominio SaaS
+    indipendente (`halleyweb.com`, `trasparenza-valutazione-merito.it`) e
+    imporre lo stesso host del portale scarterebbe sempre il candidato.
+
+    Guardia SSRF (per-hop, redirect seguiti a mano, DNS validato su ogni
+    hop, size-cap in streaming) invariata — vive ora in `host_guard.py`,
+    condivisa con `registro.py`. Qualunque anomalia → `None`, mai
+    un'eccezione che risale al chiamante e mai un URL indovinato al suo
+    posto."""
+    scaricato = fetch_guardato(url, timeout=timeout, max_bytes=MAX_AT_PAGINA_BYTES)
+    if scaricato is None:
+        return None
+    intestazioni, dati, _ = scaricato
+    return intestazioni, dati.decode("utf-8", errors="replace")
+
+
+class EsitoDiscoveryAT(NamedTuple):
+    """Discovery + classificazione della pagina Amministrazione Trasparente,
+    con i nomi di campo del contratto — B4 li userà così com'è per popolare
+    `RigaPortale`, senza rimappare nulla."""
+
+    piattaforma_at: Piattaforma
+    at_url: str | None
+    piattaforma_at_prova: str | None
+    #: Tutte le firme scattate, non solo la vincitrice: un runner-up forte
+    #: (es. IGNOTA che ha comunque acceso un euristico) è diagnostica persa
+    #: se si butta via subito, come per la battuta BASE.
+    firme_scattate: list[FirmaScattata]
+
+
+def scopri_pagina_at(*, html_home: str, base: str) -> EsitoDiscoveryAT:
+    """Scopre e classifica la pagina Amministrazione Trasparente del comune,
+    a partire dalla home già scaricata dallo sweep.
+
+    Nessun link nella home, o la guardia SSRF scarta il candidato →
+    `piattaforma_at=Piattaforma.NON_TROVATA`, `at_url=None`: un dato
+    onesto, mai un URL indovinato persistito (D-16). Una pagina AT trovata
+    e raggiunta ma senza firma riconosciuta resta `Piattaforma.IGNOTA` —
+    l'URL però è verificato, non indovinato, e viene ritornato comunque.
+
+    SIAMO/Publisys (shell Angular, nessun href server-rendered nella home)
+    ricade qui in `NON_TROVATA` per costruzione: non c'è alcuna ancora in
+    nessuna priorità. Tentare l'endpoint HAL `/kapi/api/trasparenza*` è
+    deferred a un ciclo successivo — qui resta best-effort onesto.
+    """
+    url = scopri_url_at(html_home, base)
+    if url is None:
+        return EsitoDiscoveryAT(Piattaforma.NON_TROVATA, None, None, [])
+    scaricato = _fetch_at_guardato(url)
+    if scaricato is None:
+        return EsitoDiscoveryAT(Piattaforma.NON_TROVATA, None, None, [])
+    intestazioni, html_at = scaricato
+    esito: ClassificaFirme = classifica_risposta(
+        headers=dict(intestazioni), html=html_at, includi_at=True
+    )
+    return EsitoDiscoveryAT(
+        esito.vincitore.piattaforma, url, esito.vincitore.prova, esito.scattate
+    )
 
 
 def _rest_base_uffici(*, sonda: _Sonda, base: str) -> str | None:
@@ -896,7 +1029,9 @@ def _impronta(*, sonda: _Sonda, base: str, regione: str | None = None) -> dict:
             pass
 
     intestazioni = dict(resp.headers)
-    firma = firma_da_risposta(headers=intestazioni, html=resp.text)
+    # BASE (home comune): una piattaforma AT-only non può vincere qui anche
+    # se un link outbound alla pagina AT fa scattare la sua firma.
+    firma = firma_da_risposta(headers=intestazioni, html=resp.text, includi_at=False)
     grezza = impronta_grezza(headers=intestazioni, html=resp.text)
     if firma.piattaforma is Piattaforma.IGNOTA:
         # Secondo passaggio: chi non si è dichiarato può ancora essere
@@ -905,6 +1040,16 @@ def _impronta(*, sonda: _Sonda, base: str, regione: str | None = None) -> dict:
         seconda = da_impronta(impronta=grezza, regione=regione)
         if seconda is not None:
             firma = seconda
+    # Discovery Amministrazione Trasparente (ciclo 16): best-effort, riusa la
+    # home già scaricata (resp.text/base), non fa un secondo fetch della home.
+    # Mai fatale: un guasto qui non deve far perdere la misura BASE del
+    # comune. `scopri_pagina_at` stessa non solleva su percorso ordinario;
+    # questa guardia è per l'imprevisto (bug, memoria, encoding).
+    try:
+        scoperta_at = scopri_pagina_at(html_home=resp.text, base=base)
+    except Exception as exc:  # noqa: BLE001
+        logger.info("scoperta AT fallita per %s: %r", base, exc)
+        scoperta_at = None
     return {
         "piattaforma": firma.piattaforma,
         "piattaforma_prova": firma.prova,
@@ -914,6 +1059,19 @@ def _impronta(*, sonda: _Sonda, base: str, regione: str | None = None) -> dict:
         "url_finale": str(resp.url),
         "https_ok": str(resp.url).startswith("https://"),
         "stato_http": resp.status_code,
+        # `non_trovata`/`ignota` sono copertura onesta e vanno registrati come
+        # qualunque altro esito (D-16): nessun None-quando-inconveniente.
+        "piattaforma_at": None if scoperta_at is None else scoperta_at.piattaforma_at.value,
+        "at_url": None if scoperta_at is None else scoperta_at.at_url,
+        "piattaforma_at_prova": None if scoperta_at is None else scoperta_at.piattaforma_at_prova,
+        "firme_scattate": (
+            None
+            if scoperta_at is None
+            else [
+                {"piattaforma": f.piattaforma.value, "score": f.score, "prova": f.prova}
+                for f in scoperta_at.firme_scattate
+            ]
+        ),
     }
 
 
@@ -1300,6 +1458,10 @@ def _registra(esiti: list[EsitoCensimento], *, db: Path, anagrafe: dict[str, dic
             richieste=e.richieste,
             secondi=e.secondi,
             errore=e.errore,
+            piattaforma_at=e.piattaforma_at,
+            piattaforma_at_prova=e.piattaforma_at_prova,
+            at_url=e.at_url,
+            firme_scattate=e.firme_scattate,
         )
         for e in esiti
     ]

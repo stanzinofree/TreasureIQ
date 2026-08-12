@@ -8,6 +8,7 @@ import sys
 import types
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 
@@ -111,7 +112,9 @@ def test_esito_vuoto_non_persistito_dal_dispatcher(monkeypatch: pytest.MonkeyPat
     monkeypatch.setattr(connettore_mod, "_Sonda", _SondaFinta)
     monkeypatch.setattr(
         connettore_mod, "firma_da_risposta",
-        lambda *, headers, html: Firma(piattaforma=Piattaforma.MUNICIPIUM, prova="municipium"),
+        lambda *, headers, html, includi_at=False: Firma(
+            piattaforma=Piattaforma.MUNICIPIUM, prova="municipium"
+        ),
     )
 
     fake_mod = types.ModuleType("treasureiq.municipium")
@@ -153,7 +156,9 @@ def test_dispatcher_municipium_non_importabile_ritorna_none(
     monkeypatch.setattr(connettore_mod, "_Sonda", _SondaFinta)
     monkeypatch.setattr(
         connettore_mod, "firma_da_risposta",
-        lambda *, headers, html: Firma(piattaforma=Piattaforma.MUNICIPIUM, prova="municipium"),
+        lambda *, headers, html, includi_at=False: Firma(
+            piattaforma=Piattaforma.MUNICIPIUM, prova="municipium"
+        ),
     )
     monkeypatch.setitem(sys.modules, "treasureiq.municipium", None)  # forza ImportError
 
@@ -170,7 +175,9 @@ def test_dispatcher_piattaforma_non_municipium_ritorna_none(
     # ora instradata su `wordpress_agid.leggi_wordpress_agid`, D-09).
     monkeypatch.setattr(
         connettore_mod, "firma_da_risposta",
-        lambda *, headers, html: Firma(piattaforma=Piattaforma.DRUPAL, prova="drupal"),
+        lambda *, headers, html, includi_at=False: Firma(
+            piattaforma=Piattaforma.DRUPAL, prova="drupal"
+        ),
     )
 
     assert leggi_connettore(ISTAT, usa_cache=False) is None
@@ -179,3 +186,114 @@ def test_dispatcher_piattaforma_non_municipium_ritorna_none(
 def test_dispatcher_comune_ignoto_ritorna_none(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(connettore_mod, "comune_per_codice", lambda codice: None)
     assert leggi_connettore("000000", usa_cache=False) is None
+
+
+# --- Classificazione piattaforma AT (B5, ciclo16) -----------------------
+
+
+def test_leggi_connettore_classifica_piattaforma_at_se_presente(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    """L'AT trovata dal connettore vendor viene classificata a parte
+    (`scopri_pagina_at`, riusa l'HTML home già scaricato, un solo fetch
+    extra per la pagina AT) — nessun connettore AT viene INVOCATO qui
+    (NON-GOAL di questo brief), solo sapere quale piattaforma la serve."""
+    monkeypatch.setattr(connettore_mod, "LIVE_DIR", tmp_path)
+    monkeypatch.setattr(connettore_mod, "comune_per_codice", lambda codice: _comune())
+    monkeypatch.setattr(connettore_mod, "_Sonda", _SondaFinta)
+    monkeypatch.setattr(
+        connettore_mod, "firma_da_risposta",
+        lambda *, headers, html, includi_at=False: Firma(
+            piattaforma=Piattaforma.MUNICIPIUM, prova="municipium"
+        ),
+    )
+
+    at_scoperta = AmministrazioneTrasparente(indice_url="https://x/at")
+    fake_mod = types.ModuleType("treasureiq.municipium")
+    fake_mod.leggi_municipium = lambda comune, sonda: _esito(
+        uffici=[UfficioConnettore(
+            nome="URP", url="https://www.comunefiv.it/urp",
+            source_typed=True, letto_il=datetime.now(timezone.utc).isoformat(),
+        )],
+        at=at_scoperta,
+    )
+    monkeypatch.setitem(sys.modules, "treasureiq.municipium", fake_mod)
+
+    finta_scoperta = SimpleNamespace(piattaforma_at=Piattaforma.JCITYGOV, at_url="https://x/at")
+    monkeypatch.setattr(connettore_mod, "scopri_pagina_at", lambda *, html_home, base: finta_scoperta)
+
+    esito = leggi_connettore(ISTAT, usa_cache=False)
+    assert esito is not None
+    assert esito.amministrazione_trasparente is not None
+    assert esito.amministrazione_trasparente.piattaforma_at == Piattaforma.JCITYGOV.value
+
+
+def test_leggi_connettore_at_non_trovata_non_classifica(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    """`scopri_pagina_at` che ritorna `NON_TROVATA` (nessuna ancora AT
+    nella home riletta, o guardia SSRF che scarta la pagina) lascia
+    `piattaforma_at` a `None` — nessuna piattaforma indovinata."""
+    monkeypatch.setattr(connettore_mod, "LIVE_DIR", tmp_path)
+    monkeypatch.setattr(connettore_mod, "comune_per_codice", lambda codice: _comune())
+    monkeypatch.setattr(connettore_mod, "_Sonda", _SondaFinta)
+    monkeypatch.setattr(
+        connettore_mod, "firma_da_risposta",
+        lambda *, headers, html, includi_at=False: Firma(
+            piattaforma=Piattaforma.MUNICIPIUM, prova="municipium"
+        ),
+    )
+
+    at_scoperta = AmministrazioneTrasparente(indice_url="https://x/at")
+    fake_mod = types.ModuleType("treasureiq.municipium")
+    fake_mod.leggi_municipium = lambda comune, sonda: _esito(
+        uffici=[UfficioConnettore(
+            nome="URP", url="https://www.comunefiv.it/urp",
+            source_typed=True, letto_il=datetime.now(timezone.utc).isoformat(),
+        )],
+        at=at_scoperta,
+    )
+    monkeypatch.setitem(sys.modules, "treasureiq.municipium", fake_mod)
+
+    finta_scoperta = SimpleNamespace(piattaforma_at=Piattaforma.NON_TROVATA, at_url=None)
+    monkeypatch.setattr(connettore_mod, "scopri_pagina_at", lambda *, html_home, base: finta_scoperta)
+
+    esito = leggi_connettore(ISTAT, usa_cache=False)
+    assert esito is not None
+    assert esito.amministrazione_trasparente is not None
+    assert esito.amministrazione_trasparente.piattaforma_at is None
+
+
+def test_leggi_connettore_senza_at_non_classifica(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+    """Esito senza AT (`amministrazione_trasparente is None`): nessun
+    tentativo di classificazione — `scopri_pagina_at` non viene nemmeno
+    chiamata (guardia esplicita in `leggi_connettore`)."""
+    monkeypatch.setattr(connettore_mod, "LIVE_DIR", tmp_path)
+    monkeypatch.setattr(connettore_mod, "comune_per_codice", lambda codice: _comune())
+    monkeypatch.setattr(connettore_mod, "_Sonda", _SondaFinta)
+    monkeypatch.setattr(
+        connettore_mod, "firma_da_risposta",
+        lambda *, headers, html, includi_at=False: Firma(
+            piattaforma=Piattaforma.MUNICIPIUM, prova="municipium"
+        ),
+    )
+
+    fake_mod = types.ModuleType("treasureiq.municipium")
+    fake_mod.leggi_municipium = lambda comune, sonda: _esito(
+        uffici=[UfficioConnettore(
+            nome="URP", url="https://www.comunefiv.it/urp",
+            source_typed=True, letto_il=datetime.now(timezone.utc).isoformat(),
+        )],
+    )
+    monkeypatch.setitem(sys.modules, "treasureiq.municipium", fake_mod)
+
+    chiamata = []
+    monkeypatch.setattr(
+        connettore_mod, "scopri_pagina_at",
+        lambda *, html_home, base: chiamata.append(1),
+    )
+
+    esito = leggi_connettore(ISTAT, usa_cache=False)
+    assert esito is not None
+    assert esito.amministrazione_trasparente is None
+    assert chiamata == []

@@ -59,6 +59,7 @@ from treasureiq.storico import (
     aderenza_fornitori,
     date_censimento,
     panoramica_piattaforme,
+    panoramica_piattaforme_at,
     portale_del_comune,
     serie,
     sezioni_mancanti,
@@ -2220,6 +2221,16 @@ class SchedaComuneOut(BaseModel):
     contatti: ContattiSchedaOut | None
     orari: OrariLive | None
     logo_url: str | None
+    # Famiglia piattaforma dal censimento nazionale (storico.db), non dallo
+    # scan-mappa: `connettore_tipo` guarda solo l'esposizione REST AgID e
+    # ignora il vendor, così un comune peopleweb senza CPT REST cadeva su
+    # "solo-html". Questi campi portano la classificazione autorevole + la
+    # provenienza (`classificato_da`: sonda vs riclassificazione). `None`
+    # quando il comune non è nel censimento.
+    piattaforma: str | None = None
+    piattaforma_at: str | None = None
+    at_url: str | None = None
+    classificato_da: str | None = None
 
 
 @app.get(
@@ -2241,6 +2252,10 @@ def scheda_comune_route(codice_istat: str) -> SchedaComuneOut:
     if record is None:
         raise HTTPException(404, f"Comune {codice_istat} non disponibile")
     mappa = record.mappa
+    # Classificazione autorevole dal censimento nazionale: la scheda mostra il
+    # vendor riconosciuto (BASE + trasparenza) anche quando lo scan-mappa non
+    # espone REST AgID. `None` se il comune non è ancora nel censimento.
+    censito = portale_del_comune(STORICO_DB, codice_istat)
     contatti = (
         ContattiSchedaOut(
             telefoni=record.contatti.telefoni,
@@ -2268,6 +2283,10 @@ def scheda_comune_route(codice_istat: str) -> SchedaComuneOut:
         contatti=contatti,
         orari=record.orari,
         logo_url=record.logo_url,
+        piattaforma=(censito or {}).get("piattaforma"),
+        piattaforma_at=(censito or {}).get("piattaforma_at"),
+        at_url=(censito or {}).get("at_url"),
+        classificato_da=(censito or {}).get("classificato_da"),
     )
 
 
@@ -2695,6 +2714,23 @@ class PiattaformaOut(BaseModel):
     comuni_prima: int = 0
 
 
+class PiattaformaAtOut(BaseModel):
+    """Quanti comuni girano su una piattaforma di amministrazione-trasparente.
+
+    Distinta da `PiattaformaOut`: la piattaforma AT non è quella del portale
+    principale (ciclo 16 — Barletta ne ha due diverse). `piattaforma_at` è
+    opzionale nello storico solo per compatibilità con gli sweep pre-ciclo-16,
+    ma qui non compare mai: le righe con NULL sono già escluse a monte.
+    """
+
+    piattaforma_at: str
+    comuni: int
+    popolazione: int | None = None
+    regioni: int = 0
+    regione_prima: str | None = None
+    comuni_prima: int = 0
+
+
 class FornitoreOut(BaseModel):
     """L'aderenza al modello AgID di un fornitore, con la sua base di misura.
 
@@ -2733,6 +2769,10 @@ class CensimentoOut(BaseModel):
     rilevato_il: date | None = None
     date_disponibili: list[date] = []
     piattaforme: list[PiattaformaOut] = []
+    #: Ciclo 16. Campo separato da `piattaforme`, non un merge: la piattaforma
+    #: AT è misurata a parte e un consumer che ignora questo campo continua a
+    #: vedere esattamente il censimento di prima.
+    piattaforme_at: list[PiattaformaAtOut] = []
     fornitori: list[FornitoreOut] = []
     sezioni_mancanti: list[SezioneOut] = []
     vincoli: list[VincoliOut] = []
@@ -2754,6 +2794,9 @@ def censimento() -> CensimentoOut:
         rilevato_il=ultimo,
         date_disponibili=giorni,
         piattaforme=[PiattaformaOut(**r) for r in _senza(panoramica_piattaforme(STORICO_DB))],
+        piattaforme_at=[
+            PiattaformaAtOut(**r) for r in _senza(panoramica_piattaforme_at(STORICO_DB))
+        ],
         fornitori=[FornitoreOut(**r) for r in _senza(aderenza_fornitori(STORICO_DB))],
         sezioni_mancanti=[SezioneOut(**r) for r in sezioni_mancanti(STORICO_DB)],
         vincoli=[VincoliOut(**r) for r in vincoli_nazionali(STORICO_DB)],

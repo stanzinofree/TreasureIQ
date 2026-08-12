@@ -19,18 +19,12 @@
  */
 
 import {
-  costi,
-  panoramica,
   status,
-  type Costo,
-  type Panoramica as PanoramicaDati,
   type InternalDatum,
   type SourceStatus,
   type StatusOut,
   type SystemComponent,
 } from "@/lib/api";
-import Panoramica from "@/components/Panoramica";
-import ScalaAccesso from "@/components/ScalaAccesso";
 
 export const dynamic = "force-dynamic";
 
@@ -132,23 +126,6 @@ export default async function Monitoraggio() {
     report = null;
   }
 
-  // Fail-soft, like every other panel here: the ladder is worth showing
-  // when the cost endpoint answers and never worth taking the status
-  // report down for.
-  let quadro: PanoramicaDati | null = null;
-  try {
-    quadro = await panoramica();
-  } catch {
-    quadro = null;
-  }
-
-  let costiReport: Costo[] = [];
-  try {
-    costiReport = await costi();
-  } catch {
-    costiReport = [];
-  }
-
   if (!report) {
     return (
       <div className="panel">
@@ -175,38 +152,21 @@ export default async function Monitoraggio() {
           Non un cruscotto di uptime: un&apos;istantanea onesta di cosa c&apos;è
           davvero.
         </p>
-        {/* Il sito misura due popolazioni diverse e senza questo riquadro
-            sembrerebbe contraddirsi: 91 servizi qui, 57.603 in Analytics.
-            Sono due domande diverse, e il fatto che convergano e' il
-            risultato piu' forte che abbiamo — ma solo se lo diciamo. */}
         <p className="lede">
-          <strong>Questa pagina misura i comuni che TreasureIQ legge oggi</strong>,
-          servizio per servizio. Per la misura su <em>tutti</em> i comuni italiani
-          — 7.896 portali censiti — c&apos;è <a href="/analytics">Analytics</a>.
-        </p>
-        <p className="lede">
-          Le due strade non si parlano e arrivano alla stessa conclusione: qui
-          quasi tutti i servizi letti non pubblicano condizioni verificabili, là
-          il <strong>94%</strong> dei comuni ha il campo dei requisiti e lo lascia
-          vuoto. Metodi diversi, popolazioni diverse, stesso risultato.
+          Qui i comuni che TreasureIQ legge oggi, servizio per servizio. La
+          misura su tutti i comuni italiani è in{" "}
+          <a href="/analytics">Analytics</a>.
         </p>
       </section>
-
-      {/* The ladder goes above the three status groups on purpose. Those
-          answer "is it working"; this answers "what did it take", which is the
-          question the project exists to make askable. */}
-      <Panoramica dati={quadro} />
-
-      <ScalaAccesso costi={costiReport} />
 
       <div className="systems">
         <section className="systems__group">
           <div className="systems__group-head">
             <h2>Fonti</h2>
-            {/* The (MVP) is load-bearing. Three comuni out of roughly eight
-                thousand is a proof that the method works, not a service that
-                covers the country, and a reader who mistakes one for the other
-                will conclude we are tiny rather than that we are early. */}
+            {/* The (MVP) is load-bearing. A handful of comuni out of roughly
+                eight thousand is a proof that the method works, not a service
+                that covers the country, and a reader who mistakes one for the
+                other will conclude we are tiny rather than that we are early. */}
             <span className="systems__group-note">
               i comuni da cui TreasureIQ risponde oggi <strong>(MVP)</strong>
             </span>

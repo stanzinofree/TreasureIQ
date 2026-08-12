@@ -74,6 +74,23 @@ export default async function AnalyticsPage() {
     .reduce((s, r) => s + r.comuni, 0);
   const scoperti = totale - connessi;
 
+  // Copertura trasparenza: la stessa lettura onesta del panorama BASE applicata
+  // alla sonda AT. Riconosciuta = vendor con nome; ignota = fingerprint senza
+  // match; non_trovata = il connettore ha guardato e non c'era. Il resto (campo
+  // vuoto) è "non misurata": la sonda non l'ha ancora classificata.
+  const piattaformeAt = censimento.piattaforme_at ?? [];
+  const totaleAt = piattaformeAt.reduce((s, r) => s + r.comuni, 0);
+  const AT_NON_VENDOR = new Set(["ignota", "non_trovata", "non_misurata", ""]);
+  const riconosciuteAt = piattaformeAt
+    .filter((r) => !AT_NON_VENDOR.has(r.piattaforma_at))
+    .reduce((s, r) => s + r.comuni, 0);
+  const ignotaAt = piattaformeAt
+    .filter((r) => r.piattaforma_at === "ignota")
+    .reduce((s, r) => s + r.comuni, 0);
+  const nonTrovataAt = piattaformeAt
+    .filter((r) => r.piattaforma_at === "non_trovata")
+    .reduce((s, r) => s + r.comuni, 0);
+
   if (!censimento.rilevato_il) {
     return (
       <main className="shell pagina">
@@ -119,11 +136,14 @@ export default async function AnalyticsPage() {
           </div>
         </section>
 
-        <h2>Su quali piattaforme girano</h2>
+        <h2>Su quale piattaforma gira il portale base</h2>
         <p className="nota">
-          Il tema WordPress ufficiale non è il più diffuso. Chi resta grigio non
-          è un fornitore: è un portale che non si è dichiarato, e quella barra
-          misura quanta strada resta.
+          Questa è la piattaforma del <strong>portale principale</strong> del
+          comune — l&apos;infrastruttura del sito. Più sotto, separata, la
+          piattaforma della <strong>amministrazione trasparente</strong>, che è
+          spesso un prodotto diverso. Il tema WordPress ufficiale non è il più
+          diffuso. Chi resta grigio non è un fornitore: è un portale che non si
+          è dichiarato, e quella barra misura quanta strada resta.
         </p>
         <GraficoPiattaforme righe={censimento.piattaforme} />
       <div className="tabella-scorrevole">
@@ -159,6 +179,77 @@ export default async function AnalyticsPage() {
           </tbody>
         </table>
       </div>
+
+      {piattaformeAt.length ? (
+        <>
+          <h2>Piattaforme trasparenza</h2>
+          <p className="nota">
+            La piattaforma di &laquo;amministrazione trasparente&raquo; è spesso un
+            prodotto diverso da quello del portale principale (due-connettori,
+            B5). <strong>NON_TROVATA</strong> è copertura onesta, non un buco nel
+            censimento: è il comune dove il connettore ha guardato e non l&apos;ha
+            trovata.
+          </p>
+
+          <div className="tessere">
+            <div className="tessera">
+              <b>{percentuale(riconosciuteAt, totaleAt)}</b>
+              <span>
+                comuni con piattaforma di trasparenza riconosciuta (
+                {riconosciuteAt.toLocaleString("it-IT")})
+              </span>
+            </div>
+            <div className="tessera">
+              <b>{percentuale(ignotaAt, totaleAt)}</b>
+              <span>
+                impronta presente ma vendor non riconosciuto (
+                {ignotaAt.toLocaleString("it-IT")})
+              </span>
+            </div>
+            <div className="tessera">
+              <b>{percentuale(nonTrovataAt, totaleAt)}</b>
+              <span>
+                nessun portale trasparenza trovato &mdash; copertura onesta (
+                {nonTrovataAt.toLocaleString("it-IT")})
+              </span>
+            </div>
+          </div>
+
+          <div className="tabella-scorrevole">
+            <table>
+              <caption>
+                Piattaforma di amministrazione trasparente riconosciuta, per
+                numero di comuni. La quota è sui {totaleAt.toLocaleString("it-IT")}{" "}
+                comuni sondati.
+              </caption>
+              <thead>
+                <tr>
+                  <th>Piattaforma</th>
+                  <th>Comuni</th>
+                  <th>Quota</th>
+                  <th>Regione principale</th>
+                </tr>
+              </thead>
+              <tbody>
+                {piattaformeAt.map((p) => (
+                  <tr key={p.piattaforma_at}>
+                    <th scope="row">{nome(p.piattaforma_at)}</th>
+                    <td>{p.comuni.toLocaleString("it-IT")}</td>
+                    <td>{percentuale(p.comuni, totaleAt)}</td>
+                    <td>
+                      {p.regione_prima
+                        ? `${p.regione_prima} (${Math.round(
+                            (p.comuni_prima * 100) / p.comuni,
+                          )}%)`
+                        : "—"}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </>
+      ) : null}
 
       <h2>Quanti comuni un connettore sa già leggere</h2>
       <p className="nota">

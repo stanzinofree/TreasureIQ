@@ -167,6 +167,17 @@ CREATE TABLE IF NOT EXISTS portale_snapshot (
     richieste            INTEGER NOT NULL DEFAULT 0,
     secondi              REAL,
     errore               TEXT,
+    -- Ciclo 16: la stessa domanda ma per amministrazione-trasparente, non per
+    -- il portale principale. Un comune spesso serve i due con vendor diversi
+    -- (Barletta: Publisys sul portale, ISWEB sulla trasparenza), quindi la
+    -- piattaforma AT vive in colonne proprie, non sovrascrive `piattaforma`.
+    piattaforma_at       TEXT,
+    piattaforma_at_prova TEXT,
+    at_url               TEXT,
+    -- JSON: la diagnostica dei runner-up della batteria di firme provate, per
+    -- capire perché la sonda ha scartato le alternative — non solo cosa ha
+    -- scelto.
+    firme_scattate       TEXT,
     PRIMARY KEY (rilevato_il, codice_istat)
 );
 
@@ -211,10 +222,43 @@ def apri(db_path: Path, *, scrittura: bool = False) -> sqlite3.Connection:
         # quel codice solo al primo accesso per nome — cioè in produzione,
         # non nel test che apre in lettura.
         conn.row_factory = sqlite3.Row
+        _migra_colonne_at(conn)
         return conn
     conn = sqlite3.connect(f"file:{db_path}?mode=ro", uri=True)
     conn.row_factory = sqlite3.Row
     return conn
+
+
+#: The four ciclo-16 columns, additive on top of whatever `portale_snapshot`
+#: looked like before. Kept as its own tuple (not folded into
+#: `_COLONNE_PORTALE`) because the migration below needs exactly this list,
+#: independent of column order in the INSERT statement.
+_COLONNE_AT_MIGRAZIONE = (
+    "piattaforma_at",
+    "piattaforma_at_prova",
+    "at_url",
+    "firme_scattate",
+)
+
+
+def _migra_colonne_at(conn: sqlite3.Connection) -> None:
+    """Add the ciclo-16 AT columns to a `portale_snapshot` created before them.
+
+    `CREATE TABLE IF NOT EXISTS` in `SCHEMA` never touches a table that
+    already exists, so a database committed under ciclo 15 or earlier reaches
+    here without the four columns. This reads the table's real columns via
+    `PRAGMA table_info` — not a try/except around `ALTER TABLE` — so it stays
+    idempotent without depending on parsing sqlite's "duplicate column name"
+    error text: it only issues `ALTER TABLE ADD COLUMN` for names still
+    missing, and does nothing on a second call. Old rows are unaffected and
+    read back with the new columns as NULL, which is the honest state for a
+    sweep that ran before AT discovery existed.
+    """
+    esistenti = {riga["name"] for riga in conn.execute("PRAGMA table_info(portale_snapshot)")}
+    for colonna in _COLONNE_AT_MIGRAZIONE:
+        if colonna not in esistenti:
+            conn.execute(f"ALTER TABLE portale_snapshot ADD COLUMN {colonna} TEXT")
+    conn.commit()
 
 
 def registra(conn: sqlite3.Connection, costo: CostoComune, *, oggi: date) -> None:
@@ -333,6 +377,16 @@ class RigaPortale:
     richieste: int
     secondi: float | None
     errore: str | None
+    #: Ciclo 16 — amministrazione-trasparente, non il portale principale.
+    #: Opzionali con default `None` così un `RigaPortale` costruito da codice
+    #: pre-ciclo-16 resta valido senza toccare ogni chiamante esistente.
+    piattaforma_at: str | None = None
+    piattaforma_at_prova: str | None = None
+    at_url: str | None = None
+    #: Diagnostica dei runner-up della batteria di firme, come lista di dict
+    #: pronta per `json.dumps` — `registra_portali` la serializza, questa
+    #: classe non lo fa, per restare leggibile a chi la costruisce.
+    firme_scattate: list[dict] | None = None
 
 
 _COLONNE_PORTALE = (
@@ -344,6 +398,7 @@ _COLONNE_PORTALE = (
     "impronta_declinazione", "scheda_campione", "server",
     "impronta_grezza", "n_servizi",
     "ultimo_contenuto", "richieste", "secondi", "errore",
+    "piattaforma_at", "piattaforma_at_prova", "at_url", "firme_scattate",
 )
 
 
@@ -366,6 +421,8 @@ def registra_portali(db_path: Path, righe: Iterable[RigaPortale]) -> int:
             r.n_servizi,
             r.ultimo_contenuto.isoformat() if r.ultimo_contenuto else None,
             r.richieste, r.secondi, r.errore,
+            r.piattaforma_at, r.piattaforma_at_prova, r.at_url,
+            None if r.firme_scattate is None else json.dumps(r.firme_scattate),
         )
         for r in righe
     ]
@@ -443,6 +500,66 @@ def panoramica_piattaforme(db_path: Path, *, rilevato_il: date | None = None) ->
     return [dict(r) | {"rilevato_il": giorno} for r in righe]
 
 
+def panoramica_piattaforme_at(db_path: Path, *, rilevato_il: date | None = None) -> list[dict]:
+    """Per-platform totals for one sweep's amministrazione-trasparente discovery.
+
+    Grouped by `piattaforma_at`, deliberately not `piattaforma`: the connector
+    a comune's transparency page needs is often a different vendor than the
+    one serving its main portal (Barletta runs Publisys on the front door and
+    ISWEB on trasparenza — same comune, two rows in two different panoramas).
+
+    Rows where `piattaforma_at IS NULL` are dropped, not grouped as a bucket:
+    NULL means the AT probe never ran on that comune (sweep predates AT
+    discovery, or the probe run itself is what set the column and it's still
+    missing), which is a fact about our coverage, not a measurement. A comune
+    where the probe ran and found nothing keeps its `NON_TROVATA` value and
+    is counted as its own row — that is an honest negative result, not a gap.
+
+    Returns `[]` both when the store has no sweep yet and when the store
+    predates ciclo 16 and has not been through a write-open (`registra_portali`
+    or any `apri(..., scrittura=True)`) since — the migration in `apri()` is
+    what adds the column, and until it runs the empty result is the honest
+    state, same as a fresh checkout with no history at all.
+    """
+    if not db_path.exists():
+        return []
+    with apri(db_path) as conn:
+        colonne = {riga["name"] for riga in conn.execute("PRAGMA table_info(portale_snapshot)")}
+        if "piattaforma_at" not in colonne:
+            return []
+        giorno = rilevato_il or (date_censimento(db_path) or [None])[-1]
+        if giorno is None:
+            return []
+        righe = conn.execute(
+            """
+            SELECT piattaforma_at,
+                   COUNT(*)                AS comuni,
+                   COUNT(DISTINCT regione)  AS regioni,
+                   -- Stessa lettura del panorama BASE: la regione dove la
+                   -- piattaforma di trasparenza pesa di più separa un
+                   -- fornitore nazionale da una diffusione regionale.
+                   (SELECT p2.regione FROM portale_snapshot p2
+                     WHERE p2.rilevato_il = portale_snapshot.rilevato_il
+                       AND p2.piattaforma_at = portale_snapshot.piattaforma_at
+                     GROUP BY p2.regione ORDER BY COUNT(*) DESC LIMIT 1) AS regione_prima,
+                   (SELECT COUNT(*) FROM portale_snapshot p3
+                     WHERE p3.rilevato_il = portale_snapshot.rilevato_il
+                       AND p3.piattaforma_at = portale_snapshot.piattaforma_at
+                       AND p3.regione = (SELECT p4.regione FROM portale_snapshot p4
+                         WHERE p4.rilevato_il = portale_snapshot.rilevato_il
+                           AND p4.piattaforma_at = portale_snapshot.piattaforma_at
+                         GROUP BY p4.regione ORDER BY COUNT(*) DESC LIMIT 1)) AS comuni_prima,
+                   SUM(popolazione)         AS popolazione
+            FROM portale_snapshot
+            WHERE rilevato_il = ? AND piattaforma_at IS NOT NULL
+            GROUP BY piattaforma_at
+            ORDER BY comuni DESC
+            """,
+            (giorno.isoformat(),),
+        ).fetchall()
+    return [dict(r) | {"rilevato_il": giorno} for r in righe]
+
+
 def portale_del_comune(db_path: Path, codice_istat: str) -> dict | None:
     """The latest measured platform and AgID adherence for one comune.
 
@@ -456,7 +573,8 @@ def portale_del_comune(db_path: Path, codice_istat: str) -> dict | None:
     with apri(db_path) as conn:
         riga = conn.execute(
             """
-            SELECT piattaforma, aderenza, rilevato_il
+            SELECT nome, piattaforma, aderenza, rilevato_il,
+                   piattaforma_at, at_url, classificato_da
             FROM portale_snapshot
             WHERE codice_istat = ?
             ORDER BY rilevato_il DESC

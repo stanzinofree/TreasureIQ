@@ -31,6 +31,7 @@ SITE = RADICE / "site"
 #: L'ordine della navigazione. (file in docs/, titolo in nav, slug della pagina).
 #: L'ordine è quello in cui si legge il progetto, non alfabetico.
 NAV: list[tuple[str, str, str]] = [
+    ("genesi.md", "Genesi", "genesi"),
     ("come-legge.md", "Come legge un Comune", "come-legge"),
     ("architettura.md", "Architettura", "architettura"),
     ("connettori.md", "Connettori", "connettori"),

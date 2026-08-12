@@ -121,8 +121,8 @@ def _scansiona_uno(istat: str) -> tuple[str, str]:
     if record is None:
         return "vuoto", f"{istat} {nome} — vuoto"
     logo = "si" if record.logo_b64 else "no"
-    n_aree = len(record.servizi_snapshot)
-    return "ok", f"{istat} {nome} — ok aree={n_aree} logo={logo}"
+    n_uffici = len(record.uffici_snapshot)
+    return "ok", f"{istat} {nome} — ok uffici={n_uffici} logo={logo}"
 
 
 def _selezione_valida(args: argparse.Namespace) -> bool:

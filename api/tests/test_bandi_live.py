@@ -548,3 +548,44 @@ def test_ha_segnale_accetta_contesto_nel_corpo_con_pdf():
         con_pdf=True,
     )
     assert bandi_live._ha_segnale(rec) is True
+
+
+# --- Documenti concorsi Halley /zf (estensione multi-piattaforma) -----------
+
+_HALLEY_SCHEDA_HTML = """
+<html><body>
+  <a href="/zf/index.php/bandi-di-concorso/index/download-originali-bando/bando/94/originale/92"><i class="icon"></i></a>
+  <a href="/zf/index.php/bandi-di-concorso/index/download-esito/bando/94/esito/57"></a>
+  <a href="/zf/index.php/bandi-di-concorso/index/download-moduli-iscrizione/bando/94/modulo/3"></a>
+  <a href="/altro/pagina">non un documento</a>
+</body></html>
+"""
+
+
+def test_documenti_halley_estrae_link_download_con_etichetta_dal_verbo():
+    """Link `/download-<verbo>/bando/N` → Documento con URL assoluto e
+    etichetta derivata dal verbo dell'endpoint (fonte del portale, non un
+    titolo inventato)."""
+    base = "https://web.comune.esempio.it/zf/index.php/bandi-di-concorso/index/dettaglio/concorsi/in-corso/bando/94"
+    docs = bandi_live._documenti_halley(base, _HALLEY_SCHEDA_HTML)
+    etichette = {d.etichetta for d in docs}
+    assert etichette == {"Documento del bando", "Esito della procedura", "Modulo di iscrizione"}
+    assert all(d.url.startswith("https://web.comune.esempio.it/zf/") for d in docs)
+    # La pagina generica non è un documento.
+    assert all("/altro/pagina" not in d.url for d in docs)
+
+
+def test_documenti_halley_dedup_e_cap():
+    """Stesso URL due volte → una voce; oltre il cap non si aggiunge."""
+    ripetuto = (
+        '<a href="/zf/download-originali-bando/bando/1/originale/1"></a>'
+        '<a href="/zf/download-originali-bando/bando/1/originale/1"></a>'
+    )
+    docs = bandi_live._documenti_halley("https://x.it/zf/dettaglio", ripetuto)
+    assert len(docs) == 1
+
+
+def test_etichetta_halley_prefisso_e_default():
+    assert bandi_live._etichetta_halley("graduatoria-finale") == "Graduatoria"
+    assert bandi_live._etichetta_halley("traccia-prova-orale") == "Traccia della prova"
+    assert bandi_live._etichetta_halley("qualcosa-di-ignoto") == "Documento"

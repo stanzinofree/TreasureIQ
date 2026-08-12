@@ -28,7 +28,7 @@ import re
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Literal, Sequence
-from urllib.parse import quote, urlparse
+from urllib.parse import quote, unquote, urljoin, urlparse
 
 import httpx
 from pydantic import BaseModel
@@ -39,6 +39,7 @@ from treasureiq.extract.corpus import build_corpus, collect_pdf_segments
 from treasureiq.extract.llm import RequirementsExtractor, Segment
 from treasureiq.extract.providers import load_provider
 from treasureiq.ingest.censimento import _Sonda
+from treasureiq.ingest.host_guard import fetch_guardato
 from treasureiq.ingest.wp_comuni import strip_html
 from treasureiq.ingest.wp_pages import (
     _ELIGIBILITY_SIGNAL_RE,
@@ -85,6 +86,17 @@ MAX_BANDI_ARRICCHITI = 5
 CAP_CACHE_BYTES_PER_COMUNE = 20 * 1024 * 1024
 
 
+class Documento(BaseModel):
+    """Un allegato PDF linkato dalla pagina del bando. `url` è quello scritto
+    nella pagina (già filtrato stesso-host da `_filtra_pdf_stesso_host`, D-05),
+    reso assoluto; `etichetta` è il nome-file ripulito. Nessun contenuto letto
+    e nessun titolo inventato: è un puntatore alla fonte, non una lettura di
+    essa — chi vuole il documento se lo scarica dal comune (D-07)."""
+
+    url: str
+    etichetta: str
+
+
 class BandoArricchito(BaseModel):
     """Un bando, con i requisiti estratti e una scadenza SOLO se verificabile."""
 
@@ -112,6 +124,13 @@ class BandoArricchito(BaseModel):
     #: `respond._risposta_bandi` su una copia (`model_copy`), mai sull'oggetto
     #: cache condiviso.
     corrisponde: bool | None = None
+    #: Allegati PDF linkati dalla pagina del bando (ciclo17, «link ai
+    #: documenti»): stessi URL che `_arricchisci` già raccoglie stesso-host per
+    #: contarli (`pdfs_linked`), qui esposti — ripuliti dal rumore (cookie,
+    #: privacy), i doc-like in cima, capati. Vuoto quando la pagina non linka
+    #: PDF o il bando arriva da un gradino senza HTML pieno (alberatura). La
+    #: card li mostra come link diretti: TIQ porta al documento, non lo legge.
+    documenti: list[Documento] = []
 
 
 class BandiLiveEsito(BaseModel):
@@ -401,6 +420,130 @@ def _filtra_pdf_stesso_host(base: str, pdf_urls: list[str]) -> tuple[list[str], 
     return tenuti, note
 
 
+# --- Documenti PDF mostrabili (ciclo17, «link ai documenti») -----------------
+
+#: Rumore ricorrente fra i PDF di una pagina comunale: policy e note che non
+#: sono il bando. Tolti dalla lista mostrata (restano contati in
+#: `pdfs_linked`), mai un documento del bando spacciato per rumore.
+_PDF_RUMORE = re.compile(r"cookie|privacy|informativa|accessibilit|sitemap|manuale", re.I)
+#: Parole che qualificano un PDF come documento del bando: salgono in cima.
+#: Non escludono nulla — ordinano soltanto, il resto resta sotto.
+_PDF_DOCLIKE = re.compile(
+    r"band|domanda|allegat|avvis|graduatori|disciplinar|capitolat|modul"
+    r"|istanz|regolament|determin|decret|delibera|manifestazione",
+    re.I,
+)
+#: Cap sui documenti mostrati per bando (D-15-style): la card resta leggibile,
+#: e ciò che non entra è comunque contato in `pdfs_linked`.
+_MAX_DOCUMENTI = 6
+_PDF_ETICHETTA_MAX = 80
+
+
+def _etichetta_pdf(url: str) -> str:
+    """Nome-file leggibile dall'URL: basename decodificato, separatori →
+    spazi, estensione `.pdf` via. Verbatim dalla pagina, mai riscritto nel
+    merito — se non resta nulla di sensato, un'etichetta neutra."""
+    nome = unquote(urlparse(url).path.rsplit("/", 1)[-1])
+    nome = re.sub(r"\.pdf$", "", nome, flags=re.I)
+    nome = re.sub(r"[_\-]+", " ", nome)
+    nome = re.sub(r"\s+", " ", nome).strip()
+    if not nome:
+        return "Documento PDF"
+    return nome[:_PDF_ETICHETTA_MAX] + "…" if len(nome) > _PDF_ETICHETTA_MAX else nome
+
+
+def _documenti_da_pdf(base: str, pdf_urls: list[str]) -> list[Documento]:
+    """Da URL PDF già filtrati stesso-host a lista mostrabile: rumore via,
+    doc-like in cima, URL reso assoluto, cap. Preserva l'ordine della pagina
+    dentro ciascun gruppo — non riordina i documenti per rilevanza inventata."""
+    puliti = [u for u in pdf_urls if not _PDF_RUMORE.search(u)]
+    doclike = [u for u in puliti if _PDF_DOCLIKE.search(u)]
+    resto = [u for u in puliti if not _PDF_DOCLIKE.search(u)]
+    ordinati = [*doclike, *resto][:_MAX_DOCUMENTI]
+    return [Documento(url=urljoin(base, u), etichetta=_etichetta_pdf(u)) for u in ordinati]
+
+
+# --- Documenti dei concorsi Halley /zf (estensione multi-piattaforma) --------
+#
+# Stessa promessa di `_documenti_da_pdf` su una piattaforma diversa da
+# WordPress: la scheda concorso Halley `/zf/` non linka `.pdf` diretti ma
+# endpoint `/download-.../bando/N/...` (il nome-file vero sta nel
+# Content-Disposition, l'ancora in pagina è muta, un'icona). L'etichetta si
+# deriva quindi dal VERBO dell'endpoint — «originali-bando», «esito» — che è
+# ciò che il portale stesso dice sia quel file, non un titolo inventato
+# (D-07). L'URL resta verbatim dalla pagina, reso assoluto e capato.
+
+_HALLEY_DOC_RE = re.compile(
+    r'href=["\']([^"\']*/download-([a-z-]+)/bando/[^"\']+)["\']', re.I
+)
+_HALLEY_ETICHETTE = {
+    "originali-bando": "Documento del bando",
+    "esito": "Esito della procedura",
+    "moduli-iscrizione": "Modulo di iscrizione",
+    "traccia-prova-scritta": "Traccia della prova scritta",
+    "graduatoria": "Graduatoria",
+}
+#: Verbi meno frequenti: mappa per prefisso, così un `traccia-prova-orale` o
+#: `moduli-domanda` cade su un'etichetta sensata senza doverli enumerare tutti.
+_HALLEY_ETICHETTE_PREFISSO = (
+    ("allegat", "Allegato"),
+    ("modul", "Modulo"),
+    ("traccia", "Traccia della prova"),
+    ("graduatori", "Graduatoria"),
+    ("verbal", "Verbale"),
+)
+#: Fetch della sola scheda concorso per leggerne i link-documento: guardia SSRF
+#: ancorata all'host della scheda, dimensione e timeout modesti. Degrada a
+#: nessun documento (mai un crash) se la scheda non è raggiungibile — coerente
+#: con l'onestà del gradino: assente ≠ inventato.
+_HALLEY_SCHEDA_MAX_BYTES = 2_000_000
+_HALLEY_SCHEDA_TIMEOUT = 12.0
+
+
+def _etichetta_halley(verbo: str) -> str:
+    verbo = verbo.lower()
+    if verbo in _HALLEY_ETICHETTE:
+        return _HALLEY_ETICHETTE[verbo]
+    for prefisso, etichetta in _HALLEY_ETICHETTE_PREFISSO:
+        if verbo.startswith(prefisso):
+            return etichetta
+    return "Documento"
+
+
+def _documenti_halley(url_scheda: str, html: str) -> list[Documento]:
+    """Dagli allegati linkati in una scheda concorso Halley `/zf/` a lista
+    mostrabile: URL verbatim reso assoluto, dedup, cap. Nessun contenuto
+    letto — porta al documento, non lo legge."""
+    documenti: list[Documento] = []
+    visti: set[str] = set()
+    for href, verbo in _HALLEY_DOC_RE.findall(html):
+        assoluto = urljoin(url_scheda, href)
+        if assoluto in visti:
+            continue
+        visti.add(assoluto)
+        documenti.append(Documento(url=assoluto, etichetta=_etichetta_halley(verbo)))
+        if len(documenti) >= _MAX_DOCUMENTI:
+            break
+    return documenti
+
+
+def _documenti_scheda_halley(url_scheda: str) -> list[Documento]:
+    """Scarica la scheda concorso (guardia SSRF sul suo stesso host) e ne
+    estrae i link-documento. Lista vuota — mai eccezione — se irraggiungibile."""
+    host = urlparse(url_scheda).hostname
+    host_atteso = _host_senza_www(host.lower()) if host else None
+    esito = fetch_guardato(
+        url_scheda,
+        timeout=_HALLEY_SCHEDA_TIMEOUT,
+        max_bytes=_HALLEY_SCHEDA_MAX_BYTES,
+        host_atteso=host_atteso,
+    )
+    if esito is None:
+        return []
+    _headers, raw, _finale = esito
+    return _documenti_halley(url_scheda, raw.decode("utf-8", "replace"))
+
+
 # --- §5.2/§5.3 Arricchimento di un singolo bando -----------------------------
 
 
@@ -541,6 +684,9 @@ def _arricchisci(
         opportunity=opportunity,
         scadenza=scadenza,
         scadenza_verificata=scadenza_verificata,
+        # Stessi PDF già contati in `pdfs_linked`, ora esposti come link diretti
+        # (stesso-host, ripuliti, capati): TIQ porta al documento, non lo legge.
+        documenti=_documenti_da_pdf(base, pdf_urls_unique),
     )
 
 
@@ -579,6 +725,10 @@ def _arricchisci_scoperto(
         scadenza = bando.data or None
         scadenza_verificata = bool(bando.data)
         corpus = body_text
+        # Estensione multi-piattaforma: la scheda concorso Halley `/zf/` porta
+        # allegati veri (bando, esito) dietro endpoint `/download-.../bando/N`.
+        # Un solo fetch guardato per scheda, degrada a vuoto se irraggiungibile.
+        documenti = _documenti_scheda_halley(bando.url)
     else:
         corpus, boundary_segments, visible_segments = build_corpus(
             body_text=body_text, page_url=bando.url, pdf_segments=[]
@@ -588,6 +738,7 @@ def _arricchisci_scoperto(
         notes = []
         scadenza = None
         scadenza_verificata = False
+        documenti = []  # agevolazione wp: solo anteprima REST, nessun HTML da cui linkare
         outcome = extractor.extract(
             text=corpus,
             title=bando.titolo,
@@ -638,6 +789,7 @@ def _arricchisci_scoperto(
         scadenza=scadenza,
         scadenza_verificata=scadenza_verificata,
         tipo=scoperto.tipo,
+        documenti=documenti,
     )
 
 

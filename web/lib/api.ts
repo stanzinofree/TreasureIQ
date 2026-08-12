@@ -586,6 +586,15 @@ export interface Opportunity {
   extraction_notes: string[];
 }
 
+/** Mirror esatto di `Documento` (`bandi_live.py`): un allegato PDF linkato
+ *  dalla pagina del bando. `url` è verbatim dalla pagina (stesso host, reso
+ *  assoluto), `etichetta` è il nome-file ripulito. Puntatore alla fonte, non
+ *  una lettura di essa: la card lo mostra come link di download. */
+export interface Documento {
+  url: string;
+  etichetta: string;
+}
+
 /** Mirror esatto di `BandoArricchito` (`api/treasureiq/bandi_live.py` §5.2).
  *  `scadenza` è presente SOLO se `scadenza_verificata` (D-07 quote-gate):
  *  se `false`, `scadenza` va ignorata dalla UI anche se non è `null`. */
@@ -593,6 +602,11 @@ export interface BandoArricchito {
   opportunity: Opportunity;
   scadenza: string | null;
   scadenza_verificata: boolean;
+  /** Allegati PDF linkati dalla pagina del bando (ciclo17): stessi PDF che il
+   *  backend già conta in `pdfs_linked`, qui esposti come link diretti,
+   *  ripuliti dal rumore e capati. Assente/vuoto = la pagina non ne linka o il
+   *  bando arriva da un gradino senza HTML pieno — la card omette il blocco. */
+  documenti?: Documento[];
   /** Ranking morbido profilo↔requisiti (KAPI 7): `true` se il bando risuona
    *  coi segnali del cittadino. NON è un verdetto di idoneità — è un ordine
    *  indicativo, «controlla i requisiti». `false` di default. */

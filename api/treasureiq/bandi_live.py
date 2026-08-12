@@ -41,6 +41,7 @@ from treasureiq.extract.llm import RequirementsExtractor, Segment
 from treasureiq.extract.providers import load_provider
 from treasureiq.ingest.censimento import _Sonda
 from treasureiq.ingest.host_guard import fetch_guardato
+from treasureiq.ingest.piattaforma import Piattaforma
 from treasureiq.ingest.wp_comuni import strip_html
 from treasureiq.ingest.wp_pages import (
     _ELIGIBILITY_SIGNAL_RE,
@@ -169,32 +170,114 @@ class BandiLiveEsito(BaseModel):
 #: le piattaforme dove B8+ ha (o avrà) un connettore dedicato. Vuota oggi
 #: per costruzione (B5, ciclo16 = solo classificazione, NON-GOAL costruire
 #: un connettore AT qui): popolata quando un connettore AT arriva davvero
-#: (ISWEB, B8), mai a priori.
+#: (ISWEB, B8), mai a priori. Distinta da `_GRADINI_PER_PIATTAFORMA_AT` sotto:
+#: questa e' solo il nome informativo esposto in `BandiLiveEsito.connettore_at`,
+#: quella decide quali gradini di SCOPERTA girano davvero.
 _CONNETTORE_AT_PER_PIATTAFORMA: dict[str, str] = {}
 
+#: Vocabolario stabile dei gradini di scoperta bandi/concorsi che il dispatch
+#: AT-aware può selezionare. "cpt"/"pages" sono la cascata WP interna a
+#: `_scopri_bandi` (rung1→rung2, D-05/D-06: si tenta l'uno e poi l'altro,
+#: mai i due come sonde indipendenti — la scelta cpt-vs-pages resta di
+#: `_scopri_bandi`, non del dispatch); "alberatura" è il terzo gradino
+#: (KAPI 8) che legge il ramo ANAC bersaglio, anche su host esterno.
+_TUTTI_I_GRADINI: tuple[str, ...] = ("cpt", "pages", "alberatura")
 
-def _piattaforma_e_connettore_at(codice_istat: str) -> tuple[str | None, str | None]:
-    """`(piattaforma_at, connettore_at)` per un comune, letti dal registro
-    (D-01: zero fetch qui, solo lo store già scritto da una scansione
-    connettore precedente). Import lazy per evitare un giro di import a
-    modulo (`registro` non è mai stato una dipendenza forte di
-    `bandi_live`); qualunque anomalia (registro non ancora scritto,
-    modulo assente) degrada a `(None, None)`, mai un crash del motore bandi."""
+#: `piattaforma_at` (catalogata, letta da `_piattaforma_e_connettore_at`) →
+#: gradini da tentare in UNIONE (D-01/D-03). Entrambe le voci di oggi
+#: coincidono col ventaglio pieno, di proposito: nessun record prova ancora
+#: che una delle due possa fare a meno di un gradino.
+#:
+#: - `WP_AMM_TRASP`: è comunque un WordPress (cpt/pages restano pertinenti
+#:   per costruzione) e non è mai stato verificato assente di rami
+#:   Amministrazione Trasparente su host esterno — tagliare `alberatura` qui
+#:   sarebbe un'assunzione, non una classificazione (vedi il monito in
+#:   `ingest/piattaforma.py` su `HGATE`).
+#: - `HALLEY_TRASPARENZA`: il caso Benevento (D-03, BLOCKER) prova che
+#:   l'apice WP e il sottodominio Halley rispondono ENTRAMBI — Benevento ha
+#:   `piattaforma_at == halley_trasparenza` ma `amministrazione_trasparente_via
+#:   == "scrape"`, quindi i bandi WP arrivano da `pages` (mai da `cpt`, che
+#:   lì non risolve) e i concorsi da `alberatura`: tagliare `pages` da questa
+#:   voce perderebbe i bandi dell'apice WP. `_scopri_bandi` decide da solo se
+#:   è `cpt` o `pages` a rispondere davvero; qui si autorizza il tentativo di
+#:   ENTRAMBI, non si sceglie fra loro.
+#:
+#: Una voce con un solo gradino (es. `("alberatura",)`) è ammessa SOLO
+#: quando un record prova che l'altro gradino è impossibile per quella
+#: piattaforma — mai per assunzione. Qualunque `piattaforma_at` assente da
+#: questa tabella (non catalogata, o catalogata con un valore che B5+ non
+#: ha ancora coperto qui) ricade sulla cascata cieca invariata
+#: (`_TUTTI_I_GRADINI`): il silenzio del catalogo non è mai un motivo per
+#: saltare una sonda che potrebbe ancora rispondere (D-05/D-06).
+_GRADINI_PER_PIATTAFORMA_AT: dict[str, tuple[str, ...]] = {
+    Piattaforma.WP_AMM_TRASP.value: _TUTTI_I_GRADINI,
+    Piattaforma.HALLEY_TRASPARENZA.value: _TUTTI_I_GRADINI,
+}
+
+#: Quanto resta valido il dato di catalogo (`piattaforma_at`, letto dal
+#: registro insieme a `ultima_scansione`) prima che il dispatch AT-aware
+#: smetta di fidarsene e ripieghi sulla cascata cieca: una classificazione
+#: vecchia può essere sbagliata quanto un comune mai scansionato — il
+#: catalogo è un'accelerazione, mai l'unica fonte di verità (D-05/D-06).
+TTL_CATALOGO_AT_GIORNI = 14
+
+
+def _piattaforma_e_connettore_at(
+    codice_istat: str,
+) -> tuple[str | None, str | None, str | None]:
+    """`(piattaforma_at, connettore_at, ultima_scansione)` per un comune,
+    letti dal registro (D-01: zero fetch qui, solo lo store già scritto da
+    una scansione connettore precedente — UNA sola lettura, riusata anche
+    dal dispatch AT-aware per decidere se il dato è ancora fresco). Import
+    lazy per evitare un giro di import a modulo (`registro` non è mai stato
+    una dipendenza forte di `bandi_live`); qualunque anomalia (registro non
+    ancora scritto, modulo assente) degrada a `(None, None, None)`, mai un
+    crash del motore bandi."""
     try:
         from treasureiq.registro import leggi_registro
 
         record = leggi_registro(codice_istat)
     except Exception:  # noqa: BLE001 — registro muto: nessuna classificazione, mai un crash
-        return None, None
+        return None, None, None
     if record is None or record.piattaforma_at is None:
-        return None, None
+        return None, None, None
     connettore = _CONNETTORE_AT_PER_PIATTAFORMA.get(record.piattaforma_at)
     if connettore is not None:
         logger.info(
             "AT %s: piattaforma nota (%s), connettore %s non ancora invocato (deferred, B8)",
             codice_istat, record.piattaforma_at, connettore,
         )
-    return record.piattaforma_at, connettore
+    return record.piattaforma_at, connettore, record.ultima_scansione
+
+
+def _catalogo_at_scaduto(ultima_scansione: str | None) -> bool:
+    """Il dato di catalogo (`piattaforma_at`) è troppo vecchio per fidarsene
+    da solo? `None` (mai scansionato, data malformata) conta come scaduto:
+    stessa regola di `_da_cache` — un dubbio si risolve sondando, mai
+    fidandosi di un dato che non si può leggere."""
+    if ultima_scansione is None:
+        return True
+    try:
+        eta = datetime.now(timezone.utc) - datetime.fromisoformat(ultima_scansione)
+    except ValueError:
+        return True
+    return eta.days >= TTL_CATALOGO_AT_GIORNI
+
+
+def _gradini_da_tentare(piattaforma_at: str | None, ultima_scansione: str | None) -> tuple[str, ...]:
+    """Quali gradini di scoperta girare per questo comune (D-01/D-03/D-05/D-06).
+
+    Una `piattaforma_at` catalogata E fresca seleziona il sottoinsieme di
+    `_GRADINI_PER_PIATTAFORMA_AT` — salta le sonde che il catalogo prova
+    impossibili. Assente dalla tabella, mai classificata, o oltre
+    `TTL_CATALOGO_AT_GIORNI`: cascata cieca invariata (si tenta tutto) — il
+    catalogo può mancare o essere vecchio, mai un motivo per saltare una
+    sonda che potrebbe ancora rispondere.
+    """
+    if piattaforma_at is not None and piattaforma_at in _GRADINI_PER_PIATTAFORMA_AT:
+        if not _catalogo_at_scaduto(ultima_scansione):
+            return _GRADINI_PER_PIATTAFORMA_AT[piattaforma_at]
+    return _TUTTI_I_GRADINI
 
 
 def _ora_iso() -> str:
@@ -861,11 +944,18 @@ def bandi_arricchiti(
         if cached is not None:
             return cached
 
-    # AT-aware routing (B5, ciclo16): sapere QUALE connettore AT si
-    # userebbe per questo comune, senza invocarlo — la catena diretto→Brave
-    # sotto resta invariata, questo è solo un campo informativo esposto sul
-    # verdetto (log già emesso da `_piattaforma_e_connettore_at` se noto).
-    piattaforma_at, connettore_at = _piattaforma_e_connettore_at(comune.codice_istat)
+    # AT-aware routing (B5/ciclo16, dispatch ciclo18a B3): sapere QUALE
+    # connettore AT si userebbe per questo comune (informativo, invariato) E
+    # quali gradini di SCOPERTA una `piattaforma_at` catalogata e fresca
+    # autorizza a saltare. `gradini` è `_TUTTI_I_GRADINI` (cascata cieca,
+    # comportamento identico a prima di questo brief) ogni volta che il
+    # catalogo tace, non è mai stato scritto, o è oltre
+    # `TTL_CATALOGO_AT_GIORNI` — un dato vecchio non deve mai poter spegnere
+    # una sonda che potrebbe ancora rispondere (D-05/D-06).
+    piattaforma_at, connettore_at, ultima_scansione_at = _piattaforma_e_connettore_at(
+        comune.codice_istat
+    )
+    gradini = _gradini_da_tentare(piattaforma_at, ultima_scansione_at)
 
     base = _base_con_schema(comune.sito)
     if base is None:
@@ -879,10 +969,20 @@ def bandi_arricchiti(
     rest_gradino: Literal["cpt", "pages"] | None = None
     rest_ha_risposto = False  # il REST ha coperto, anche a zero bandi (D-B7)
     rest_bandi: list[BandoArricchito] = []
+    rest_tentato = False
+    scoperti: list[BandoScoperto] | None = None
+    alberatura_tentata = False
 
-    with _Sonda(timeout=timeout) as sonda:
-        scoperta = _scopri_bandi(sonda, base, codice_istat=comune.codice_istat)
-        if scoperta is not None:
+    def _prova_rest() -> None:
+        """Cascata interna cpt→pages (`_scopri_bandi` sceglie da sola quale
+        dei due risponde, D-03: il dispatch autorizza il TENTATIVO, mai la
+        scelta fra i due). Chiamata al più una volta per invocazione."""
+        nonlocal rest_gradino, rest_ha_risposto, rest_bandi, rest_tentato
+        rest_tentato = True
+        with _Sonda(timeout=timeout) as sonda:
+            scoperta = _scopri_bandi(sonda, base, codice_istat=comune.codice_istat)
+            if scoperta is None:
+                return
             rest_ha_risposto = True
             righe, rest_gradino = scoperta  # type: ignore[assignment]
             coppie = [
@@ -903,6 +1003,37 @@ def bandi_arricchiti(
                     for riga, bando in coppie[:MAX_BANDI_ARRICCHITI]
                 ]
 
+    def _prova_alberatura() -> None:
+        nonlocal scoperti, alberatura_tentata
+        alberatura_tentata = True
+        scoperti = alberatura.estrai_bandi(comune.codice_istat, timeout=timeout)
+
+    if "cpt" in gradini or "pages" in gradini:
+        _prova_rest()
+
+    # `alberatura` gira solo quando cpt/pages non hanno GIA' prodotto bandi
+    # — stesso short-circuit di prima di questo brief: se il REST ha già
+    # trovato qualcosa non si spende una sonda in più. Quando invece cpt/pages
+    # coprono a vuoto (Benevento, D-03), `alberatura.estrai_bandi` è la fonte
+    # che combina agevolazioni WP e concorsi Halley — vedi il modulo.
+    if not rest_bandi and "alberatura" in gradini:
+        _prova_alberatura()
+
+    # Rete di sicurezza (D-05/D-06): i gradini catalogati sono usciti a
+    # vuoto E il dispatch aveva effettivamente ristretto il ventaglio
+    # (`gradini` è un sottoinsieme proprio) — tenta i gradini mancanti prima
+    # di arrendersi. Una classificazione di catalogo sbagliata o
+    # incompleta non deve mai produrre un `non_coperto` che una sonda in
+    # più avrebbe smentito. Con le voci odierne di `_GRADINI_PER_PIATTAFORMA_AT`
+    # (sempre il ventaglio pieno) questo ramo non ha nulla da aggiungere:
+    # resta pronto per quando una voce futura taglierà davvero un gradino.
+    if not rest_bandi and not scoperti and gradini != _TUTTI_I_GRADINI:
+        mancanti = tuple(g for g in _TUTTI_I_GRADINI if g not in gradini)
+        if ("cpt" in mancanti or "pages" in mancanti) and not rest_tentato:
+            _prova_rest()
+        if not rest_bandi and "alberatura" in mancanti and not alberatura_tentata:
+            _prova_alberatura()
+
     if rest_bandi:
         esito = BandiLiveEsito(
             codice_istat=comune.codice_istat,
@@ -918,13 +1049,12 @@ def bandi_arricchiti(
         return esito
 
     # cpt/pages non hanno prodotto bandi — coperto a zero (D-B7) o muto del
-    # tutto. Terzo gradino (KAPI 8, B1) tentato SEMPRE a questo punto, con una
-    # sonda propria: non solo quando cpt/pages non coprono, ma anche come
-    # fonte aggiuntiva quando coprono a vuoto — Benevento è il caso reale: il
-    # WordPress in apice risponde (`pages`, coperto_senza_bandi) ma i
-    # concorsi veri vivono su un sottodominio Halley separato, invisibile a
-    # cpt/pages per costruzione.
-    scoperti = alberatura.estrai_bandi(comune.codice_istat, timeout=timeout)
+    # tutto. `scoperti` è già stato tentato sopra (`_prova_alberatura`,
+    # gated dal dispatch + dalla rete di sicurezza): non solo quando
+    # cpt/pages non coprono, ma anche come fonte aggiuntiva quando coprono a
+    # vuoto — Benevento è il caso reale: il WordPress in apice risponde
+    # (`pages`, coperto_senza_bandi) ma i concorsi veri vivono su un
+    # sottodominio Halley separato, invisibile a cpt/pages per costruzione.
     if scoperti:
         _prune_cache(comune.codice_istat)
         extractor = RequirementsExtractor(

@@ -695,3 +695,236 @@ def test_etichetta_halley_prefisso_e_default():
     assert bandi_live._etichetta_halley("graduatoria-finale") == "Graduatoria"
     assert bandi_live._etichetta_halley("traccia-prova-orale") == "Traccia della prova"
     assert bandi_live._etichetta_halley("qualcosa-di-ignoto") == "Documento"
+
+
+# --- Dispatch AT-aware (ciclo18a B3, D-01/D-03/D-05/D-06) --------------------
+#
+# `_CONNETTORE_AT_PER_PIATTAFORMA` restava vuoto per costruzione (B5,
+# ciclo16): queste regressioni coprono `_GRADINI_PER_PIATTAFORMA_AT`, la
+# tabella che ora sceglie quali gradini tentare in base a `piattaforma_at`
+# letta dal registro.
+
+from datetime import datetime, timedelta, timezone  # noqa: E402
+
+from treasureiq.ingest.piattaforma import Piattaforma  # noqa: E402
+from treasureiq.registro import EndpointsRegistro, RegistroComune  # noqa: E402
+
+
+def _registro_finto(
+    *, piattaforma_at: str | None, ultima_scansione: str | None
+) -> RegistroComune:
+    """Un record di registro minimo, solo coi campi che il dispatch legge.
+    `ultima_scansione`, se `None`, replica un record scritto prima del campo
+    (mai un TypeError sui test: il modello lo richiede str, quindi il test
+    che vuole "assente" passa comunque una stringa lontana nel tempo — vedi
+    `test_dispatch_piattaforma_at_assente_cascata_cieca`)."""
+    return RegistroComune(
+        codice_istat="058003",
+        nome="Comune di Prova",
+        dominio="comune-test.example",
+        piattaforma="wordpress_generico",
+        piattaforma_at=piattaforma_at,
+        endpoints=EndpointsRegistro(),
+        ultima_scansione=ultima_scansione or _ora_fresca(),
+        prima_scansione=False,
+    )
+
+
+def _ora_fresca() -> str:
+    return datetime.now(timezone.utc).isoformat()
+
+
+def _ora_scaduta() -> str:
+    return (
+        datetime.now(timezone.utc)
+        - timedelta(days=bandi_live.TTL_CATALOGO_AT_GIORNI + 1)
+    ).isoformat()
+
+
+def _monkeypatch_registro(monkeypatch, record: RegistroComune | None) -> None:
+    monkeypatch.setattr("treasureiq.registro.leggi_registro", lambda codice: record)
+
+
+def test_dispatch_wp_amm_trasp_prova_cpt_pages_e_alberatura(monkeypatch):
+    """(1) `wp_amm_trasp` catalogato e fresco: la voce di
+    `_GRADINI_PER_PIATTAFORMA_AT` autorizza tutti e tre i gradini — cpt
+    trova bandi, quindi alberatura non va MAI toccata (short-circuit
+    invariato: il REST ha già risposto)."""
+    _monkeypatch_comune(monkeypatch, COMUNE_TEST)
+    _monkeypatch_registro(
+        monkeypatch,
+        _registro_finto(
+            piattaforma_at=Piattaforma.WP_AMM_TRASP.value, ultima_scansione=_ora_fresca()
+        ),
+    )
+    _monkeypatch_sonda(
+        monkeypatch,
+        {
+            _URL_TASSONOMIE: _JSON_TASSONOMIE_OK,
+            _URL_CATEGORIE: _JSON_CATEGORIE_OK,
+            _URL_CPT_BANDI: [_riga_bando(1, "Bando contributi affitto", TESTO_CON_SEGNALE)],
+        },
+    )
+    _monkeypatch_provider(monkeypatch, _ProviderFinto())
+
+    chiamate_alberatura: list[str] = []
+    monkeypatch.setattr(
+        bandi_live.alberatura,
+        "estrai_bandi",
+        lambda codice, timeout=8.0: chiamate_alberatura.append(codice) or None,
+    )
+
+    esito = bandi_live.bandi_arricchiti("058003", usa_cache=False)
+
+    assert esito.esito == "coperto_con_bandi"
+    assert esito.gradino == "cpt"
+    assert len(esito.bandi) == 1
+    assert esito.piattaforma_at == Piattaforma.WP_AMM_TRASP.value
+    # cpt ha già risposto con bandi: alberatura resta non toccata, come
+    # prima di questo brief (D-01: mai riverificare quello che è già coperto).
+    assert chiamate_alberatura == []
+
+
+def test_dispatch_halley_trasparenza_unione_pages_piu_alberatura(monkeypatch):
+    """(2) BLOCKER: `halley_trasparenza` (Benevento-like, `via="scrape"`)
+    DEVE tentare `pages` (mai solo `alberatura`): l'apice WP non risolve
+    `cpt` ma risponde su `pages` a zero bandi, i concorsi veri arrivano da
+    `alberatura` sul sottodominio Halley. Entrambe le fonti restano vive
+    nella stessa chiamata."""
+    from treasureiq.alberatura import BandoScoperto
+    from treasureiq.mappa_connettore import Bando
+
+    _monkeypatch_comune(monkeypatch, COMUNE_TEST)
+    _monkeypatch_registro(
+        monkeypatch,
+        _registro_finto(
+            piattaforma_at=Piattaforma.HALLEY_TRASPARENZA.value, ultima_scansione=_ora_fresca()
+        ),
+    )
+    # cpt non risolve (tassonomia AT assente, `via="scrape"`); pages
+    # risponde vivo ma senza candidati col segnale — coperto_senza_bandi.
+    sonda = _monkeypatch_sonda(
+        monkeypatch,
+        {
+            _URL_TASSONOMIE: {},
+            **{_url_pages(k): [] for k in bandi_live.SEARCH_KEYWORDS},
+        },
+    )
+    _monkeypatch_provider(monkeypatch, _ProviderFinto(esplode=True))
+
+    scoperti = [
+        BandoScoperto(
+            bando=Bando(
+                titolo="Concorso pubblico istruttore",
+                url=f"{BASE}/zf/index.php/bandi-di-concorso/dettaglio/1",
+                data="31/12/2026",
+                anteprima=None,
+            ),
+            tipo="concorso",
+            vendor="halley",
+        ),
+    ]
+    monkeypatch.setattr(
+        bandi_live.alberatura, "estrai_bandi", lambda codice, timeout=8.0: scoperti
+    )
+
+    esito = bandi_live.bandi_arricchiti("058003", usa_cache=False)
+
+    # Prova che `pages` è stato davvero tentato (non saltato dal dispatch):
+    # `_scopri_bandi` interroga tutte le `SEARCH_KEYWORDS` su `wp/v2/pages`.
+    assert any("wp/v2/pages" in r for r in sonda.richieste)
+    assert esito.esito == "coperto_con_bandi"
+    assert esito.gradino == "alberatura"
+    assert [b.opportunity.title for b in esito.bandi] == ["Concorso pubblico istruttore"]
+    assert esito.piattaforma_at == Piattaforma.HALLEY_TRASPARENZA.value
+
+
+def test_dispatch_piattaforma_at_assente_cascata_cieca(monkeypatch):
+    """(3) Nessun record di registro (comune mai scansionato per l'AT):
+    `piattaforma_at` è `None` -> cascata cieca invariata, stesso esito di
+    prima di questo brief."""
+    _monkeypatch_comune(monkeypatch, COMUNE_TEST)
+    _monkeypatch_registro(monkeypatch, None)
+    _monkeypatch_sonda(
+        monkeypatch,
+        {
+            _URL_TASSONOMIE: _JSON_TASSONOMIE_OK,
+            _URL_CATEGORIE: _JSON_CATEGORIE_OK,
+            _URL_CPT_BANDI: [_riga_bando(1, "Bando contributi affitto", TESTO_CON_SEGNALE)],
+        },
+    )
+    _monkeypatch_provider(monkeypatch, _ProviderFinto())
+
+    esito = bandi_live.bandi_arricchiti("058003", usa_cache=False)
+
+    assert esito.esito == "coperto_con_bandi"
+    assert esito.gradino == "cpt"
+    assert esito.piattaforma_at is None
+    assert esito.connettore_at is None
+
+
+def test_dispatch_gradini_catalogati_vuoti_ripiega_su_mancanti(monkeypatch):
+    """(4) I gradini catalogati (sottoinsieme SINTETICO, iniettato via
+    monkeypatch — nessuna voce reale di `_GRADINI_PER_PIATTAFORMA_AT` è oggi
+    ridotta, D-03 BLOCKER) tornano a vuoto: la rete di sicurezza tenta il
+    gradino mancante e lo trova. Prova che il fallback-su-vuoto è vivo, non
+    solo dichiarato."""
+    _monkeypatch_comune(monkeypatch, COMUNE_TEST)
+    _monkeypatch_registro(
+        monkeypatch,
+        _registro_finto(piattaforma_at="piattaforma_finta", ultima_scansione=_ora_fresca()),
+    )
+    # Solo "cpt" catalogato per questa piattaforma finta: `_scopri_bandi`
+    # prova comunque anche "pages" al suo interno (D-03: la cascata interna
+    # resta atomica), ma qui NESSUNO dei due copre affatto (tassonomia
+    # assente, nessuna rotta pages finta -> `_SondaFinta` la tratta come
+    # muta) -> il dispatch deve ripiegare su "alberatura", assente dalla
+    # voce catalogata.
+    monkeypatch.setattr(
+        bandi_live, "_GRADINI_PER_PIATTAFORMA_AT", {"piattaforma_finta": ("cpt",)}
+    )
+    _monkeypatch_sonda(monkeypatch, {_URL_TASSONOMIE: {}})
+    _monkeypatch_provider(monkeypatch, _ProviderFinto(esplode=True))
+    monkeypatch.setattr(bandi_live.alberatura, "estrai_bandi", lambda codice, timeout=8.0: [])
+
+    esito = bandi_live.bandi_arricchiti("058003", usa_cache=False)
+
+    # cpt/pages non coprono affatto -> la rete di sicurezza tenta
+    # "alberatura" (assente dalla voce catalogata): rami letti, zero bandi
+    # -> copertura confermata, non un `non_coperto` prematuro.
+    assert esito.esito == "coperto_senza_bandi"
+    assert esito.gradino == "alberatura"
+
+
+def test_dispatch_catalogo_scaduto_cascata_cieca(monkeypatch):
+    """(5) `piattaforma_at` catalogata ma `ultima_scansione` oltre
+    `TTL_CATALOGO_AT_GIORNI`: il dispatch non si fida più del catalogo e
+    ripiega sulla cascata cieca fin dall'inizio (stesso esito della
+    cascata cieca, non solo lo stesso gradino)."""
+    _monkeypatch_comune(monkeypatch, COMUNE_TEST)
+    _monkeypatch_registro(
+        monkeypatch,
+        _registro_finto(
+            piattaforma_at=Piattaforma.WP_AMM_TRASP.value, ultima_scansione=_ora_scaduta()
+        ),
+    )
+    _monkeypatch_sonda(
+        monkeypatch,
+        {
+            _URL_TASSONOMIE: _JSON_TASSONOMIE_OK,
+            _URL_CATEGORIE: _JSON_CATEGORIE_OK,
+            _URL_CPT_BANDI: [_riga_bando(1, "Bando contributi affitto", TESTO_CON_SEGNALE)],
+        },
+    )
+    _monkeypatch_provider(monkeypatch, _ProviderFinto())
+
+    assert bandi_live._catalogo_at_scaduto(_ora_scaduta())
+    assert bandi_live._gradini_da_tentare(
+        Piattaforma.WP_AMM_TRASP.value, _ora_scaduta()
+    ) == bandi_live._TUTTI_I_GRADINI
+
+    esito = bandi_live.bandi_arricchiti("058003", usa_cache=False)
+
+    assert esito.esito == "coperto_con_bandi"
+    assert esito.gradino == "cpt"
+    assert esito.piattaforma_at == Piattaforma.WP_AMM_TRASP.value

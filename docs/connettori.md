@@ -124,8 +124,12 @@ generati dal modello.
 | **Regione Veneto** | 85 | 1,1% | modello | 3.151 | 1 |
 | **Rete Civica Lepida** | 70 | 0,9% | modello | 4.111 | 1 |
 
-**Leggiamo le schede su 2.496 comuni** — il 31,6% d'Italia — per **57.603
-servizi contati**.
+**Leggiamo le schede su 2.496 comuni** — il 31,6% d'Italia — e ne **seminiamo
+il catalogo su disco**: uffici, servizi e rami di amministrazione trasparente
+vengono scoperti una volta durante lo sweep, così la chat li legge dal catalogo
+invece di scaricarli live a ogni domanda. L'alberatura dell'amministrazione
+trasparente viene riverificata a ogni passaggio dello sweep, non a ogni chiamata
+del cittadino.
 
 *Municipium (firma\*): non ha un CPT `servizi` da contare — il livello
 "firma/catalogo/modello" di questa tabella è tarato sul modello AgID, che

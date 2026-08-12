@@ -68,7 +68,11 @@ casella resta vuota. Il dettaglio, aggiornato a ogni censimento, sta nella
 pagina **Analytics** dell'applicazione.
 
 - **7.896 comuni censiti** — l'intera lista ufficiale, non un campione.
-- **57.770 servizi** contati nei cataloghi esposti.
+- **Un catalogo seminato in anticipo, non pescato a ogni chiamata** — lo sweep
+  semina uffici, servizi e rami di amministrazione trasparente sul disco, così
+  la chat li legge dal catalogo invece di scaricarli live a ogni domanda;
+  l'alberatura dell'amministrazione trasparente viene riverificata a ogni
+  passaggio dello sweep.
 - **Due piattaforme per comune** riconosciute separatamente: portale base e
   amministrazione trasparente.
 - **94% dei comuni** con campo dei requisiti previsto lo lascia **vuoto**: la

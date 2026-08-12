@@ -254,6 +254,14 @@ export default function Manifesto() {
           <Link className="button button--ghost" href="/dati">
             Le misure
           </Link>
+          <a
+            className="button button--ghost"
+            href="https://github.com/stanzinofree/TreasureIQ/blob/main/site/assets/presentazione.mp4"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Il video
+          </a>
         </p>
       </section>
     </div>

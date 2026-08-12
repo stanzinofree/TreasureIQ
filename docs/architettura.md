@@ -117,7 +117,7 @@ di cui conosciamo già l'indirizzo. Ogni pagina così raggiunta torna marcata
 | Comuni censiti | 7.896 — tutti i comuni italiani |
 | Richieste per un censimento completo | 34.229, circa 4 per comune |
 | Durata di un censimento completo | ~90 minuti con 8 richieste in parallelo |
-| Servizi comunali contati | 57.603 |
+| Oggetti seminati nel catalogo (uffici, servizi, rami AT), letti da disco invece che live | 57.603 |
 | Piattaforme riconosciute | 25 |
 | Modello linguistico (`chat/filtri.py`) | spaCy `it_core_news_lg` 3.8.0, ~500MB — scaricato nel Dockerfile, non fissato in `requirements.txt`; se assente il riconoscimento filtri degrada a una cue-list |
 

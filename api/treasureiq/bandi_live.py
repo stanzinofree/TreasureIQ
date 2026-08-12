@@ -34,6 +34,7 @@ import httpx
 from pydantic import BaseModel
 
 from treasureiq import alberatura
+from treasureiq import mappa_connettore as mappa_connettore_module
 from treasureiq.alberatura import BandoScoperto
 from treasureiq.extract.corpus import build_corpus, collect_pdf_segments
 from treasureiq.extract.llm import RequirementsExtractor, Segment
@@ -284,15 +285,38 @@ def _prune_cache(codice_istat: str) -> None:
 # --- §5.2 Scoperta due gradini pluggable (D-02 emendata) --------------------
 
 
-def _rung1_cpt(sonda: _Sonda, base: str) -> list[dict[str, Any]] | None:
+def _rung1_cpt(
+    sonda: _Sonda, base: str, *, codice_istat: str | None = None
+) -> list[dict[str, Any]] | None:
     """Amministrazione Trasparente via CPT AgID.
 
     Stessa catena di `mappa_connettore.bandi_criteri` (riga 754): riusa la
     LOGICA importandone gli helper, senza toccare il modulo. `None` se il
     portale non espone la tassonomia, o il term dei bandi non si risolve —
     esattamente quando `bandi_criteri` stesso tornerebbe `None`.
+
+    `codice_istat`, se dato, legge PRIMA la mappa-connettore già in cache
+    (D-01/D-05/D-06, ciclo18a): se è calda, dice `via == "REST"` e ha già il
+    `rest_base` della tassonomia amm-trasparente, si evita del tutto il probe
+    `/wp-json/wp/v2/taxonomies` — quel valore l'ha già misurato `_sonda_mappa`.
+    Lettura pura da disco (`mappa_connettore._da_cache`), MAI
+    `mappa_connettore.mappa_connettore()`: quella sonda a freddo, qui si
+    vuole solo leggere, mai un fetch in più. Una cache calda ma col campo
+    ancora `None` (scritta prima di questo campo) è valida-ma-incompleta, non
+    un buco: si degrada al probe live come oggi, che poi ripopola il campo al
+    prossimo giro di `_sonda_mappa`.
     """
-    rest_base_tax = _rest_base_tassonomia_per_tipo(sonda, base, CPT_AMM_TRASPARENTE)
+    rest_base_tax: str | None = None
+    if codice_istat is not None:
+        voce_cache = mappa_connettore_module._da_cache(codice_istat)
+        if (
+            voce_cache is not None
+            and voce_cache.amministrazione_trasparente_via == "REST"
+            and voce_cache.amministrazione_trasparente_rest_base is not None
+        ):
+            rest_base_tax = voce_cache.amministrazione_trasparente_rest_base
+    if rest_base_tax is None:
+        rest_base_tax = _rest_base_tassonomia_per_tipo(sonda, base, CPT_AMM_TRASPARENTE)
     if rest_base_tax is None:
         return None
     term = _term_bandi(_categorie(sonda, base, rest_base_tax))
@@ -379,13 +403,19 @@ def _rung2_pages(sonda: _Sonda, base: str) -> list[dict[str, Any]] | None:
     return [record for record in seen.values() if _ha_segnale(record)]
 
 
-def _scopri_bandi(sonda: _Sonda, base: str) -> tuple[list[dict[str, Any]], str] | None:
+def _scopri_bandi(
+    sonda: _Sonda, base: str, *, codice_istat: str | None = None
+) -> tuple[list[dict[str, Any]], str] | None:
     """Prova rung1, poi rung2. `None` se nessuno dei due copre il portale.
 
     NIENTE terzo gradino: lo scraper (Tier 3) è deferred, per esplicito
     scope-cut di questo brief.
+
+    `codice_istat` passa attraverso a `_rung1_cpt` (read-first di cache,
+    ciclo18a): nessun cambiamento di comportamento su rung2 o sul risultato,
+    solo su quanti fetch rung1 fa per arrivarci.
     """
-    righe_cpt = _rung1_cpt(sonda, base)
+    righe_cpt = _rung1_cpt(sonda, base, codice_istat=codice_istat)
     if righe_cpt is not None:
         return righe_cpt, "cpt"
 
@@ -851,7 +881,7 @@ def bandi_arricchiti(
     rest_bandi: list[BandoArricchito] = []
 
     with _Sonda(timeout=timeout) as sonda:
-        scoperta = _scopri_bandi(sonda, base)
+        scoperta = _scopri_bandi(sonda, base, codice_istat=comune.codice_istat)
         if scoperta is not None:
             rest_ha_risposto = True
             righe, rest_gradino = scoperta  # type: ignore[assignment]

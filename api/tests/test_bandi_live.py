@@ -16,6 +16,7 @@ import pytest
 
 from treasureiq import bandi_live
 from treasureiq.extract.llm import ExtractionResult, Segment
+from treasureiq.mappa_connettore import MappaConnettore
 from treasureiq.sonda_live import ComuneNoto
 
 BASE = "https://comune-test.example"
@@ -166,6 +167,111 @@ def test_rung1_cpt_vivo_copre_con_bandi(monkeypatch):
     assert esito.gradino == "cpt"
     assert len(esito.bandi) == 1
     assert esito.bandi[0].opportunity.title == "Bando contributi affitto"
+
+
+# --- 1b. read-first: mappa-connettore calda (ciclo18a, D-01/D-05/D-06) ------
+#
+# Quando `mappa-connettore` per il comune e' gia' in cache, dice
+# `amministrazione_trasparente_via == "REST"` e ha gia' il `rest_base` della
+# tassonomia amm-trasparente, `_rung1_cpt` non deve rifare il probe
+# `/wp-json/wp/v2/taxonomies` (`_rest_base_tassonomia_per_tipo`): il valore
+# e' gia' stato misurato da `_sonda_mappa`.
+
+
+def _mappa_cache(*, via: str, rest_base: str | None) -> MappaConnettore:
+    return MappaConnettore(
+        codice_istat="058003",
+        nome="Comune Test",
+        sito="comune-test.example",
+        sondato_il="2026-08-01T00:00:00+00:00",
+        amministrazione_trasparente_via=via,
+        amministrazione_trasparente_rest_base=rest_base,
+    )
+
+
+def test_rung1_cpt_cache_calda_con_rest_base_salta_probe_tassonomie(monkeypatch):
+    """(1) Cache calda + campo popolato: `_rest_base_tassonomia_per_tipo` non
+    e' MAI chiamato (assert sul mock), e il gradino cpt risolve comunque."""
+    _monkeypatch_comune(monkeypatch, COMUNE_TEST)
+    sonda = _monkeypatch_sonda(
+        monkeypatch,
+        {
+            # NIENT'ALTRO che _URL_CATEGORIE/_URL_CPT_BANDI: se il codice
+            # chiedesse comunque _URL_TASSONOMIE, _SondaFinta solleverebbe
+            # "rotta assente" prima ancora dell'assert esplicito sotto.
+            _URL_CATEGORIE: _JSON_CATEGORIE_OK,
+            _URL_CPT_BANDI: [_riga_bando(1, "Bando contributi affitto", TESTO_CON_SEGNALE)],
+        },
+    )
+
+    def _esplode(*args, **kwargs):
+        raise AssertionError("_rest_base_tassonomia_per_tipo chiamato: probe non evitato")
+
+    monkeypatch.setattr(bandi_live, "_rest_base_tassonomia_per_tipo", _esplode)
+    monkeypatch.setattr(
+        bandi_live.mappa_connettore_module,
+        "_da_cache",
+        lambda codice: _mappa_cache(via="REST", rest_base="tipologie"),
+    )
+    _monkeypatch_provider(monkeypatch, _ProviderFinto())
+
+    esito = bandi_live.bandi_arricchiti("058003", usa_cache=False)
+
+    assert esito.esito == "coperto_con_bandi"
+    assert esito.gradino == "cpt"
+    assert len(esito.bandi) == 1
+    assert _URL_TASSONOMIE not in sonda.richieste
+
+
+def test_rung1_cpt_cache_calda_senza_rest_base_ripiega_su_probe(monkeypatch):
+    """(2) Cache calda ma il campo e' ancora `None` (voce scritta prima di
+    questo campo): valida-ma-incompleta, non un buco -> si degrada al probe
+    live come prima di ciclo18a, comportamento identico a cache assente."""
+    _monkeypatch_comune(monkeypatch, COMUNE_TEST)
+    _monkeypatch_sonda(
+        monkeypatch,
+        {
+            _URL_TASSONOMIE: _JSON_TASSONOMIE_OK,
+            _URL_CATEGORIE: _JSON_CATEGORIE_OK,
+            _URL_CPT_BANDI: [_riga_bando(1, "Bando contributi affitto", TESTO_CON_SEGNALE)],
+        },
+    )
+    monkeypatch.setattr(
+        bandi_live.mappa_connettore_module,
+        "_da_cache",
+        lambda codice: _mappa_cache(via="REST", rest_base=None),
+    )
+    _monkeypatch_provider(monkeypatch, _ProviderFinto())
+
+    esito = bandi_live.bandi_arricchiti("058003", usa_cache=False)
+
+    assert esito.esito == "coperto_con_bandi"
+    assert esito.gradino == "cpt"
+    assert len(esito.bandi) == 1
+
+
+def test_rung1_cpt_cache_assente_usa_probe_live(monkeypatch):
+    """(3) Nessuna cache mappa-connettore (comune mai sondato): probe live
+    come sempre, `codice_istat` passato non cambia l'esito."""
+    _monkeypatch_comune(monkeypatch, COMUNE_TEST)
+    _monkeypatch_sonda(
+        monkeypatch,
+        {
+            _URL_TASSONOMIE: _JSON_TASSONOMIE_OK,
+            _URL_CATEGORIE: _JSON_CATEGORIE_OK,
+            _URL_CPT_BANDI: [_riga_bando(1, "Bando contributi affitto", TESTO_CON_SEGNALE)],
+        },
+    )
+    monkeypatch.setattr(
+        bandi_live.mappa_connettore_module, "_da_cache", lambda codice: None
+    )
+    _monkeypatch_provider(monkeypatch, _ProviderFinto())
+
+    esito = bandi_live.bandi_arricchiti("058003", usa_cache=False)
+
+    assert esito.esito == "coperto_con_bandi"
+    assert esito.gradino == "cpt"
+    assert len(esito.bandi) == 1
 
 
 # --- 2. rung1 miss -> rung2 hit ----------------------------------------------

@@ -2,12 +2,16 @@
 
 from __future__ import annotations
 
+import json
+
 import pytest
 
 from treasureiq.mappa_connettore import (
     _ANCORE_COSA_OTTIENI,
+    CPT_AMM_TRASPARENTE,
     Bando,
     CategoriaServizio,
+    MappaConnettore,
     _bando_da_riga,
     _base_con_schema,
     _categorie,
@@ -19,10 +23,13 @@ from treasureiq.mappa_connettore import (
     _rest_base_tassonomia_per_tipo,
     _servizi_link,
     _sezione,
+    _sonda_mappa,
     _term_bandi,
     _titolo_pagina,
     _totale_rest,
 )
+from treasureiq import mappa_connettore as mappa_connettore_module
+from treasureiq.sonda_live import ComuneNoto
 
 
 class _RispostaFinta:
@@ -33,18 +40,33 @@ class _RispostaFinta:
 
 class _SondaFinta:
     """Rende ciò che le si dice di rendere; solleva dove non ha una voce, come
-    farebbe la sonda vera su una rotta assente."""
+    farebbe la sonda vera su una rotta assente. Conta le chiamate per URL
+    (`.conteggio`) e supporta il protocollo context manager di `_Sonda`, così
+    la si può iniettare direttamente in `_sonda_mappa` (`with _Sonda(...) as
+    sonda:`)."""
 
     def __init__(self, *, json_per_url=None, risposta_per_url=None):
         self._json = json_per_url or {}
         self._risposta = risposta_per_url or {}
+        self._chiamate: dict[str, int] = {}
+
+    def __enter__(self) -> "_SondaFinta":
+        return self
+
+    def __exit__(self, *exc: object) -> None:
+        return None
+
+    def conteggio(self, url: str) -> int:
+        return self._chiamate.get(url, 0)
 
     def json(self, url: str):
+        self._chiamate[url] = self._chiamate.get(url, 0) + 1
         if url not in self._json:
             raise RuntimeError(f"rotta assente: {url}")
         return self._json[url]
 
     def risposta(self, url: str):
+        self._chiamate[url] = self._chiamate.get(url, 0) + 1
         if url not in self._risposta:
             raise RuntimeError(f"rotta assente: {url}")
         return self._risposta[url]
@@ -333,3 +355,59 @@ def test_host_senza_www_non_apre_altri_host():
     assert _host_senza_www("servizi.comune.benevento.it") != _host_senza_www(
         "comune.benevento.it"
     )
+
+
+# --- amministrazione_trasparente_rest_base (ciclo18a, D-01/D-05/D-06) -------
+
+
+def test_mappa_connettore_json_legacy_senza_campo_valida():
+    """(4) Una voce di cache scritta prima di questo campo valida ancora:
+    il default `None` è retrocompatibile, mai un errore di validazione su un
+    file già su disco."""
+    payload = {
+        "codice_istat": "058003",
+        "nome": "Albano Laziale",
+        "sito": "https://www.comune.albanolaziale.rm.it",
+        "sondato_il": "2026-01-01T00:00:00+00:00",
+        "amministrazione_trasparente_via": "REST",
+        # NIENT'ALTRO: nessuna chiave `amministrazione_trasparente_rest_base`,
+        # come una voce scritta da `_sonda_mappa` prima di questo cambio.
+    }
+    voce = MappaConnettore.model_validate_json(json.dumps(payload))
+    assert voce.amministrazione_trasparente_rest_base is None
+    # E il round-trip di scrittura resta valido (il campo compare ora, ma
+    # una rilettura successiva del file aggiornato valida allo stesso modo).
+    ripreso = MappaConnettore.model_validate_json(voce.model_dump_json())
+    assert ripreso.amministrazione_trasparente_rest_base is None
+
+
+def test_sonda_mappa_popola_rest_base_at_senza_fetch_extra(monkeypatch):
+    """(5) `_sonda_mappa` popola `amministrazione_trasparente_rest_base`
+    riusando l'unica chiamata a `/wp-json/wp/v2/taxonomies` necessaria: non
+    un fetch aggiuntivo, solo il valore che `_rest_base_tassonomia_per_tipo`
+    già misura, letto e persistito."""
+    base = "https://comune-test.example"
+    comune = ComuneNoto(
+        codice_istat="058003",
+        nome="Comune Test",
+        provincia="RM",
+        regione="Lazio",
+        sito="comune-test.example",
+    )
+    sonda = _SondaFinta(
+        json_per_url={
+            f"{base}/wp-json/wp/v2/types": {
+                CPT_AMM_TRASPARENTE: {"rest_base": CPT_AMM_TRASPARENTE}
+            },
+            f"{base}/wp-json/wp/v2/taxonomies": {
+                "tipologie": {"rest_base": "tipologie", "types": [CPT_AMM_TRASPARENTE]}
+            },
+        }
+    )
+    monkeypatch.setattr(mappa_connettore_module, "_Sonda", lambda timeout=8.0: sonda)
+
+    mappa = _sonda_mappa(comune)
+
+    assert mappa.amministrazione_trasparente_via == "REST"
+    assert mappa.amministrazione_trasparente_rest_base == "tipologie"
+    assert sonda.conteggio(f"{base}/wp-json/wp/v2/taxonomies") == 1

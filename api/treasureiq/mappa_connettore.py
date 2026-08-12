@@ -173,6 +173,14 @@ class MappaConnettore(BaseModel):
     #: REST. Chi legge sa così se questi due hanno una rotta diretta o no.
     contatti_via: str = "scrape"
     amministrazione_trasparente_via: str = "scrape"
+    #: Il `rest_base` della tassonomia legata al CPT `amm-trasparente` (quello
+    #: che `bandi_live._rung1_cpt` altrimenti risonderebbe da
+    #: `_rest_base_tassonomia_per_tipo` a ogni scoperta bandi). Popolato SOLO
+    #: quando `amministrazione_trasparente_via == "REST"`; `None` altrimenti,
+    #: e `None` anche su una voce di cache scritta prima di questo campo
+    #: (default retrocompatibile, D-01/D-05/D-06) — un `None` degrada al probe
+    #: live, non un dato mancante da trattare come errore.
+    amministrazione_trasparente_rest_base: str | None = None
     #: Logo letto dalla homepage del comune, MAI da un CDN terzo (D-S8):
     #: `None` se il portale non lo espone o è su un altro host — degrado muto.
     logo_url: str | None = None
@@ -357,6 +365,17 @@ def _sonda_mappa(comune: ComuneNoto, *, timeout: float = 8.0) -> MappaConnettore
         amministrazione_trasparente_via = (
             "REST" if CPT_AMM_TRASPARENTE in tipi else "scrape"
         )
+        amministrazione_trasparente_rest_base: str | None = None
+        if amministrazione_trasparente_via == "REST":
+            # Stessa misura che `bandi_live._rung1_cpt` farebbe da sé a ogni
+            # scoperta bandi: la si fa qui, una volta, e si persiste — non un
+            # fetch aggiuntivo rispetto a quanto la sonda già avrebbe pagato
+            # nel ciclo di vita del comune, solo spostato dal path caldo
+            # (bandi, ogni TTL bandi-live) al path freddo (mappa, ogni
+            # GIORNI_VALIDITA).
+            amministrazione_trasparente_rest_base = _rest_base_tassonomia_per_tipo(
+                sonda, base, CPT_AMM_TRASPARENTE
+            )
 
         logo_url = None
         try:
@@ -379,6 +398,7 @@ def _sonda_mappa(comune: ComuneNoto, *, timeout: float = 8.0) -> MappaConnettore
         uffici=uffici,
         contatti_via=contatti_via,
         amministrazione_trasparente_via=amministrazione_trasparente_via,
+        amministrazione_trasparente_rest_base=amministrazione_trasparente_rest_base,
         logo_url=logo_url,
     )
 

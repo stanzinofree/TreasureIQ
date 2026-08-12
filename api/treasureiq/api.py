@@ -59,6 +59,7 @@ from treasureiq.storico import (
     aderenza_fornitori,
     date_censimento,
     panoramica_piattaforme,
+    panoramica_piattaforme_at,
     portale_del_comune,
     serie,
     sezioni_mancanti,
@@ -2695,6 +2696,21 @@ class PiattaformaOut(BaseModel):
     comuni_prima: int = 0
 
 
+class PiattaformaAtOut(BaseModel):
+    """Quanti comuni girano su una piattaforma di amministrazione-trasparente.
+
+    Distinta da `PiattaformaOut`: la piattaforma AT non è quella del portale
+    principale (ciclo 16 — Barletta ne ha due diverse). `piattaforma_at` è
+    opzionale nello storico solo per compatibilità con gli sweep pre-ciclo-16,
+    ma qui non compare mai: le righe con NULL sono già escluse a monte.
+    """
+
+    piattaforma_at: str
+    comuni: int
+    popolazione: int | None = None
+    regioni: int = 0
+
+
 class FornitoreOut(BaseModel):
     """L'aderenza al modello AgID di un fornitore, con la sua base di misura.
 
@@ -2733,6 +2749,10 @@ class CensimentoOut(BaseModel):
     rilevato_il: date | None = None
     date_disponibili: list[date] = []
     piattaforme: list[PiattaformaOut] = []
+    #: Ciclo 16. Campo separato da `piattaforme`, non un merge: la piattaforma
+    #: AT è misurata a parte e un consumer che ignora questo campo continua a
+    #: vedere esattamente il censimento di prima.
+    piattaforme_at: list[PiattaformaAtOut] = []
     fornitori: list[FornitoreOut] = []
     sezioni_mancanti: list[SezioneOut] = []
     vincoli: list[VincoliOut] = []
@@ -2754,6 +2774,9 @@ def censimento() -> CensimentoOut:
         rilevato_il=ultimo,
         date_disponibili=giorni,
         piattaforme=[PiattaformaOut(**r) for r in _senza(panoramica_piattaforme(STORICO_DB))],
+        piattaforme_at=[
+            PiattaformaAtOut(**r) for r in _senza(panoramica_piattaforme_at(STORICO_DB))
+        ],
         fornitori=[FornitoreOut(**r) for r in _senza(aderenza_fornitori(STORICO_DB))],
         sezioni_mancanti=[SezioneOut(**r) for r in sezioni_mancanti(STORICO_DB)],
         vincoli=[VincoliOut(**r) for r in vincoli_nazionali(STORICO_DB)],

@@ -108,12 +108,47 @@ class Piattaforma(str, Enum):
     LIFERAY = "liferay"
     TYPO3 = "typo3"
     PLONE = "plone"
+    #: WP nativo per l'Amministrazione Trasparente (design-comuni-wordpress-
+    #: theme): l'archivio si dichiara col body class
+    #: `post-type-archive-amm_trasp`. Mono-campione (Neive), ma la classe è
+    #: specifica del template — non un indizio generico di WordPress.
+    WP_AMM_TRASP = "wp_amm_trasp"
+    #: Halley "zf" (trasparenza-in-cloud): la pagina applicativa dichiara
+    #: l'ente con `var ente = "c<CODICE_ISTAT>"` e carica gli asset da
+    #: `/km/design-web-toolkit/`. Mono-campione (Delebio), ma richiediamo
+    #: entrambi i segnali insieme: presi da soli potrebbero comparire altrove.
+    HALLEY_TRASPARENZA = "halley_trasparenza"
+    #: SaaS indipendente per l'Amministrazione Trasparente, visto sotto CMS
+    #: diversi (WordPress a Peveragno, Municipium a Chieri e Grugliasco):
+    #: dominio `<slug>.trasparenza-valutazione-merito.it`. Confermata
+    #: cross-famiglia su 3 campioni.
+    JCITYGOV = "jcitygov"
+    #: Hypersic: gli asset di servizi-online/AT arrivano da un host col
+    #: prodotto nel nome, `hspromilaprod.hypersicapp.net`. Nessun generator,
+    #: nessun header — solo l'host esterno. Mono-campione (Rignano Flaminio).
+    HYPERSIC = "hypersic"
+    #: e-pal.it, riconosciuto dal `<meta name="layout" content="portale33"/>`
+    #: nel `<head>`: l'host del fornitore (`e-pal.it`) non compare nel body,
+    #: solo il nome-prodotto nel meta layout. Mono-campione (Marano sul
+    #: Panaro, pagina di Amministrazione Trasparente).
+    PORTALE33 = "portale33"
+    #: OpenWeb servito come superficie di Amministrazione Trasparente sotto
+    #: host `<slug>.soluzionipa.it`, path `/openweb/`. Distinta da un
+    #: eventuale OpenWeb "base" perché qui è la pagina AT stessa a vivere sul
+    #: dominio del fornitore. Mono-campione (Melito).
+    SOLUZIONIPA = "soluzionipa"
     #: Risponde, ma nessuna firma nota. È la voce che dice quanta strada
     #: resta: se cresce, servono firme nuove, non connettori nuovi.
     IGNOTA = "ignota"
     #: Non si è potuto guardare: DNS che non risolve, TLS rotto, timeout.
     #: Diverso da `IGNOTA`, e i due non vanno mai sommati.
     NON_MISURATA = "non_misurata"
+    #: Specifico della discovery Amministrazione Trasparente: nessun link AT
+    #: nella home (o guardia host/SSRF scattata sul candidato). Diverso da
+    #: `IGNOTA` — lì la pagina risponde ma non si riconosce; qui non si è
+    #: nemmeno trovato un URL onesto da seguire. Mai un URL indovinato al suo
+    #: posto.
+    NON_TROVATA = "non_trovata"
 
 
 class Firma(NamedTuple):
@@ -150,6 +185,10 @@ _HEADER_SPIA: tuple[tuple[str, re.Pattern[str], Piattaforma], ...] = (
     ("x-generator", re.compile(r"\bTYPO3\b", re.I), Piattaforma.TYPO3),
     ("x-lift-version", re.compile(r".*"), Piattaforma.LIFERAY),
     ("liferay-portal", re.compile(r".*"), Piattaforma.LIFERAY),
+    #: Le landing di Amministrazione Trasparente di Halley "hgate" (Adelfia,
+    #: Scansano) non portano nessun marker nel body — né `var ente`, né
+    #: kamaleonte, né `/zf/` — solo l'header di prodotto del server.
+    ("server", re.compile(r"\bHGATE\b", re.I), Piattaforma.HGATE),
 )
 
 #: Host esterni che tradiscono il prodotto. Un portale puo' non nominarsi in
@@ -157,7 +196,33 @@ _HEADER_SPIA: tuple[tuple[str, re.Pattern[str], Piattaforma], ...] = (
 #: e' una firma involontaria, quindi affidabile.
 _HOST_PRODOTTO: tuple[tuple[re.Pattern[str], Piattaforma], ...] = (
     (re.compile(r"municipiumapp\.it|\bmunicipium\b", re.I), Piattaforma.MUNICIPIUM),
+    #: SaaS AT indipendente dal CMS di base (WP a Peveragno, Municipium a
+    #: Chieri/Grugliasco): confermata cross-famiglia su 3 campioni.
+    (re.compile(r"trasparenza-valutazione-merito\.it", re.I), Piattaforma.JCITYGOV),
+    #: Hypersic si tradisce solo dall'host degli asset servizi-online/AT.
+    #: Mono-campione (Rignano Flaminio).
+    (re.compile(r"hypersicapp\.net", re.I), Piattaforma.HYPERSIC),
+    #: Superficie AT di OpenWeb ospitata su dominio del fornitore.
+    #: Mono-campione (Melito).
+    (re.compile(r"soluzionipa\.it", re.I), Piattaforma.SOLUZIONIPA),
 )
+
+#: Body class del tema `design-comuni-wordpress-theme` sull'archivio
+#: dell'Amministrazione Trasparente. Mono-campione (Neive) ma la stringa è
+#: specifica del template — DEFINITIVO, non un indizio generico WordPress.
+_WP_AMM_TRASP = re.compile(r"post-type-archive-amm_trasp", re.I)
+
+#: Halley "zf": richiediamo entrambi i segnali (dichiarazione ente + asset
+#: kamaleonte) perché presi da soli potrebbero comparire altrove; insieme
+#: sono un fingerprint interno alla piattaforma. Mono-campione (Delebio).
+_HALLEY_ENTE = re.compile(r'var\s+ente\s*=\s*"c\d+"', re.I)
+_HALLEY_KAMALEONTE = re.compile(r"/km/design-web-toolkit/", re.I)
+
+#: e-pal.it non nomina il proprio host nel body: l'unico segnale è il nome
+#: prodotto nel meta layout, `<meta name="layout" content="portale33"/>`.
+#: Mono-campione (Marano sul Panaro). DEFINITIVO: nome-prodotto, non un
+#: percorso generico.
+_PORTALE33 = re.compile(r"\bportale33\b", re.I)
 
 #: Percorsi degli asset: la firma che resta quando il CMS non si dichiara.
 #:
@@ -257,18 +322,121 @@ def _tronca(testo: str, massimo: int = 120) -> str:
     return pulito if len(pulito) <= massimo else pulito[: massimo - 1] + "…"
 
 
-def firma_da_risposta(*, headers: dict[str, str], html: str) -> Firma:
-    """Riconosce la piattaforma da una sola risposta HTTP già in mano.
+class FirmaScattata(NamedTuple):
+    """Una firma che ha fatto match, con lo score che le ha valso il posto in
+    classifica. Diagnostica: dice cosa ha risposto anche quando non ha vinto."""
+
+    piattaforma: Piattaforma
+    score: float
+    prova: str | None
+
+
+class ClassificaFirme(NamedTuple):
+    """L'esito della batteria: chi vince e chi era in corsa.
+
+    `scattate` porta tutti i match, ordinati per score decrescente — non solo
+    il vincitore — perché un runner-up forte (un generator dichiarato che ha
+    perso solo contro un header) è un segnale diverso da nessun runner-up
+    affatto, e prima si buttava via.
+    """
+
+    vincitore: Firma
+    scattate: list[FirmaScattata]
+
+
+#: Score per CLASSE di forza-prova, non per posizione nella scansione: una
+#: prova DEFINITIVA batte sempre un'euristica, anche se la tavola euristica
+#: viene scansionata prima. Sono solo due classi perché la domanda che
+#: contano è binaria — "questo indizio può appartenere a un altro CMS senza
+#: che nessuno se ne accorga?" — non un ranking fine per tavola:
+#:   DEFINITIVO: il server lo dichiara (header) o lo prova funzionalmente
+#:   (endpoint REST reale, host di un vendor specifico) o un generator
+#:   nomina un prodotto specifico e non ambiguo.
+#:   EURISTICO: un percorso-asset che sopravvive a una migrazione e può
+#:   appartenere al CMS precedente, o un nome CMS generico (`WordPress` da
+#:   solo, senza altro) che milioni di siti dichiarano senza essere il
+#:   fornitore che stiamo cercando di isolare.
+#: A parità di classe, il tie-break è l'ordine di scansione delle tavole
+#: (vedi `_RANGO_TAVOLA`) — la stessa gerarchia implicita del vecchio
+#: first-match, ma solo fra prove di forza comparabile.
+_SCORE_DEFINITIVO = 100.0
+_SCORE_EURISTICO = 50.0
+
+#: Rango di scansione per il tie-break interno alla classe. Deve restare piu'
+#: piccolo del salto fra classi (_SCORE_DEFINITIVO - _SCORE_EURISTICO = 50)
+#: perche' e' un aggiustamento, non una seconda gerarchia di forza.
+_RANGO_TAVOLA = {
+    "header_spia": 1,
+    "generator": 2,
+    "link_wp_api": 3,
+    "json_api_drupal": 4,
+    "host_prodotto": 5,
+    "peopleweb": 6,
+    "asset": 7,
+    "wp_amm_trasp": 8,
+    "halley_trasparenza": 9,
+    "portale33": 10,
+}
+_EPSILON_RANGO_TAVOLA = 0.1
+
+#: Piattaforme che esistono solo nel contesto Amministrazione Trasparente.
+#: Non possono vincere una classificazione BASE (home del comune) anche se
+#: la loro firma scatta lì per un link outbound — restano solo diagnostica
+#: in `scattate`. Vedi `classifica_risposta(includi_at=...)`.
+_FAMIGLIA_AT = frozenset(
+    {
+        Piattaforma.WP_AMM_TRASP,
+        Piattaforma.HALLEY_TRASPARENZA,
+        Piattaforma.JCITYGOV,
+        Piattaforma.HYPERSIC,
+        Piattaforma.PORTALE33,
+        Piattaforma.SOLUZIONIPA,
+    }
+)
+
+
+def _score(classe: float, tavola: str) -> float:
+    return classe - _RANGO_TAVOLA[tavola] * _EPSILON_RANGO_TAVOLA
+
+
+def classifica_risposta(
+    *, headers: dict[str, str], html: str, includi_at: bool = True
+) -> ClassificaFirme:
+    """Prova TUTTE le firme note e sceglie il vincitore per punteggio.
+
+    Ogni tavola contribuisce al massimo un candidato — il suo primo match,
+    nell'ordine di specificità con cui è scritta — perché quell'ordine
+    interno resta significativo (Drupal prima di WordPress generico, per
+    esempio). La CLASSE di forza-prova (definitivo vs euristico), non
+    l'ordine delle tavole, decide chi vince quando più famiglie scattano
+    insieme: una prova euristica scansionata prima non può battere una prova
+    definitiva scansionata dopo (vedi `_SCORE_DEFINITIVO`/`_SCORE_EURISTICO`).
+
+    `includi_at` controlla se una piattaforma AT-only (`_FAMIGLIA_AT`: jcitygov,
+    wp_amm_trasp, halley_trasparenza, hypersic, portale33, soluzionipa) può
+    vincere. Con `includi_at=False` (i
+    chiamanti BASE — sweep home comune, connettore) resta esclusa dalla
+    candidatura a vincitore anche se la sua firma scatta (es. link outbound
+    verso una pagina AT), ma resta comunque in `scattate` come diagnostica.
+    Con `includi_at=True` (discovery sulla pagina AT stessa) può vincere.
 
     Gli header vengono prima dell'HTML perché costano zero parsing e mentono
     di meno: un `x-drupal-cache` lo mette il server, un meta generator lo può
     aver lasciato un tema copiato da un altro comune.
     """
+    scattate: list[FirmaScattata] = []
+
     minuscoli = {k.lower(): v for k, v in headers.items()}
     for nome, atteso, piattaforma in _HEADER_SPIA:
         valore = minuscoli.get(nome)
         if valore is not None and atteso.search(valore):
-            return Firma(piattaforma, _tronca(f"{nome}: {valore}"))
+            # Header messo dal server: DEFINITIVO, non e' un tema copiato.
+            scattate.append(
+                FirmaScattata(
+                    piattaforma, _score(_SCORE_DEFINITIVO, "header_spia"), _tronca(f"{nome}: {valore}")
+                )
+            )
+            break
 
     testa = html[:FINESTRA_HEAD]
     trovato = _META_GENERATOR.search(testa)
@@ -277,39 +445,156 @@ def firma_da_risposta(*, headers: dict[str, str], html: str) -> Firma:
         dichiarato = trovato.group("v")
         for atteso, piattaforma in _GENERATOR:
             if atteso.search(dichiarato):
-                return Firma(piattaforma, _tronca(f"generator: {dichiarato}"))
-        # Un generator che non riconosciamo è la cosa più preziosa che ci
-        # possa capitare: è un fornitore che si presenta con nome e cognome e
-        # che noi non conosciamo ancora. Buttarlo via — come faceva la prima
-        # versione — trasformava ComWeb di ePublic, che si dichiara in chiaro
-        # sulla home, in un anonimo `IGNOTA` indistinguibile da un portale
-        # muto. Conservato qui, i fornitori nuovi si raggruppano da soli
-        # interrogando lo storico, senza rifare un giro sull'Italia.
-        dichiarato_ignoto = dichiarato
+                # Tutte le voci di _GENERATOR sono DEFINITIVE (nominano un
+                # prodotto specifico) tranne WordPress da solo: milioni di
+                # siti dichiarano quel nome generico senza essere il
+                # fornitore civico che stiamo cercando di isolare — e non a
+                # caso e' l'ultima voce della tavola, la meno specifica.
+                classe = (
+                    _SCORE_EURISTICO
+                    if piattaforma is Piattaforma.WORDPRESS_GENERICO
+                    else _SCORE_DEFINITIVO
+                )
+                scattate.append(
+                    FirmaScattata(
+                        piattaforma, _score(classe, "generator"), _tronca(f"generator: {dichiarato}")
+                    )
+                )
+                break
+        else:
+            # Un generator che non riconosciamo è la cosa più preziosa che ci
+            # possa capitare: è un fornitore che si presenta con nome e
+            # cognome e che noi non conosciamo ancora. Buttarlo via — come
+            # faceva la prima versione — trasformava ComWeb di ePublic, che
+            # si dichiara in chiaro sulla home, in un anonimo `IGNOTA`
+            # indistinguibile da un portale muto. Conservato qui, i
+            # fornitori nuovi si raggruppano da soli interrogando lo
+            # storico, senza rifare un giro sull'Italia.
+            dichiarato_ignoto = dichiarato
 
     if _LINK_WP_API.search(testa):
-        return Firma(Piattaforma.WORDPRESS_GENERICO, "link rel=https://api.w.org/")
+        # Prova funzionale (l'endpoint REST e' davvero linkato), non solo
+        # una dichiarazione testuale: DEFINITIVO.
+        scattate.append(
+            FirmaScattata(
+                Piattaforma.WORDPRESS_GENERICO,
+                _score(_SCORE_DEFINITIVO, "link_wp_api"),
+                "link rel=https://api.w.org/",
+            )
+        )
     if _JSON_API_DRUPAL.search(testa):
-        return Firma(Piattaforma.DRUPAL, "link rel=jsonapi")
+        scattate.append(
+            FirmaScattata(
+                Piattaforma.DRUPAL, _score(_SCORE_DEFINITIVO, "json_api_drupal"), "link rel=jsonapi"
+            )
+        )
 
     corpo = html[:FINESTRA_ASSET]
     for atteso, piattaforma in _HOST_PRODOTTO:
         trovato_host = atteso.search(corpo)
         if trovato_host:
-            return Firma(piattaforma, f"asset host: {_tronca(trovato_host.group(0), 40)}")
+            # Host esatto di un vendor (es. municipiumapp.it): non e' un
+            # nome comune, non lo condivide un altro CMS. DEFINITIVO.
+            scattate.append(
+                FirmaScattata(
+                    piattaforma,
+                    _score(_SCORE_DEFINITIVO, "host_prodotto"),
+                    f"asset host: {_tronca(trovato_host.group(0), 40)}",
+                )
+            )
+            break
+
+    trovato_wp_amm_trasp = _WP_AMM_TRASP.search(corpo)
+    if trovato_wp_amm_trasp:
+        # Body class specifica del template AT: non e' un indizio generico
+        # di WordPress, e' l'archivio dell'Amministrazione Trasparente.
+        # DEFINITIVO.
+        scattate.append(
+            FirmaScattata(
+                Piattaforma.WP_AMM_TRASP,
+                _score(_SCORE_DEFINITIVO, "wp_amm_trasp"),
+                f"body class: {_tronca(trovato_wp_amm_trasp.group(0), 60)}",
+            )
+        )
+
+    trovato_halley_ente = _HALLEY_ENTE.search(corpo)
+    if trovato_halley_ente and _HALLEY_KAMALEONTE.search(corpo):
+        # Entrambi i segnali insieme: la dichiarazione ente e l'asset
+        # kamaleonte da soli potrebbero comparire altrove, insieme sono un
+        # fingerprint interno alla piattaforma. DEFINITIVO.
+        scattate.append(
+            FirmaScattata(
+                Piattaforma.HALLEY_TRASPARENZA,
+                _score(_SCORE_DEFINITIVO, "halley_trasparenza"),
+                f"halley zf: {_tronca(trovato_halley_ente.group(0), 40)} + /km/design-web-toolkit/",
+            )
+        )
+
+    trovato_portale33 = _PORTALE33.search(corpo)
+    if trovato_portale33:
+        # Nome-prodotto nel meta layout: l'host del fornitore non compare
+        # nel body, quindi la firma vive sul nome, non sull'host. DEFINITIVO.
+        scattate.append(
+            FirmaScattata(
+                Piattaforma.PORTALE33,
+                _score(_SCORE_DEFINITIVO, "portale33"),
+                f"layout: {_tronca(trovato_portale33.group(0), 40)}",
+            )
+        )
 
     trovato_peopleweb = _PEOPLEWEB.search(corpo)
     if trovato_peopleweb:
-        return Firma(Piattaforma.PEOPLEWEB, f"asset: {_tronca(trovato_peopleweb.group(0), 60)}")
+        # Percorso-asset con backslash: sopravvive a una migrazione, nessuna
+        # dichiarazione esplicita del vendor. EURISTICO.
+        scattate.append(
+            FirmaScattata(
+                Piattaforma.PEOPLEWEB,
+                _score(_SCORE_EURISTICO, "peopleweb"),
+                f"asset: {_tronca(trovato_peopleweb.group(0), 60)}",
+            )
+        )
 
     for atteso, piattaforma in _ASSET:
         trovato_asset = atteso.search(corpo)
         if trovato_asset:
-            return Firma(piattaforma, f"asset: {_tronca(trovato_asset.group(0), 60)}")
+            # Eco di un percorso: puo' appartenere al CMS precedente dopo
+            # una migrazione. EURISTICO per costruzione della tavola.
+            scattate.append(
+                FirmaScattata(
+                    piattaforma,
+                    _score(_SCORE_EURISTICO, "asset"),
+                    f"asset: {_tronca(trovato_asset.group(0), 60)}",
+                )
+            )
+            break
 
-    if dichiarato_ignoto:
-        return Firma(Piattaforma.IGNOTA, _tronca(f"generator ignoto: {dichiarato_ignoto}"))
-    return Firma(Piattaforma.IGNOTA, None)
+    scattate.sort(key=lambda s: s.score, reverse=True)
+
+    candidate = scattate if includi_at else [
+        s for s in scattate if s.piattaforma not in _FAMIGLIA_AT
+    ]
+
+    if candidate:
+        vinc = candidate[0]
+        vincitore = Firma(vinc.piattaforma, vinc.prova)
+    elif dichiarato_ignoto:
+        vincitore = Firma(Piattaforma.IGNOTA, _tronca(f"generator ignoto: {dichiarato_ignoto}"))
+    else:
+        vincitore = Firma(Piattaforma.IGNOTA, None)
+
+    return ClassificaFirme(vincitore=vincitore, scattate=scattate)
+
+
+def firma_da_risposta(*, headers: dict[str, str], html: str, includi_at: bool = True) -> Firma:
+    """Riconosce la piattaforma da una sola risposta HTTP già in mano.
+
+    Wrapper compatibile su `classifica_risposta`: ritorna solo il vincitore,
+    per i chiamanti che non hanno bisogno della diagnostica dei runner-up.
+    `includi_at` si comporta come nella funzione sottostante — i chiamanti
+    BASE (il sweep sulla home del comune, il connettore) devono passare
+    `includi_at=False`.
+    """
+    return classifica_risposta(headers=headers, html=html, includi_at=includi_at).vincitore
 
 
 def raffina_wordpress(*, firma: Firma, tipi_noti: list[str], rest_base: str | None) -> Firma:

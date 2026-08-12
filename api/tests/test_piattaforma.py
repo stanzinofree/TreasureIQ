@@ -9,15 +9,32 @@ connettore", e quelle colonne sono la base di ogni stima di costo.
 
 from __future__ import annotations
 
+from pathlib import Path
+
 from treasureiq.ingest.piattaforma import (
     Piattaforma,
+    classifica_risposta,
     firma_da_risposta,
     raffina_wordpress,
 )
 
+_FIXTURE_AT = Path(__file__).parent / "fixtures" / "at"
+
 
 def firma(html: str = "", **headers: str):
     return firma_da_risposta(headers=headers, html=html)
+
+
+def test_link_at_outbound_su_home_non_vince_su_wordpress_base():
+    """Peveragno: home WordPress con link outbound alla pagina AT jcitygov.
+    In contesto BASE (`includi_at=False`, come fa lo sweep sul comune e il
+    connettore) il link outbound non deve eleggere JCITYGOV — deve vincere
+    il vendor reale della home, WordPress. La firma jcitygov scattata resta
+    visibile in `scattate` come diagnostica, solo non può vincere."""
+    html = (_FIXTURE_AT / "peveragno_home_at_links.html").read_text(encoding="utf-8")
+    esito = classifica_risposta(headers={}, html=html, includi_at=False)
+    assert esito.vincitore.piattaforma is Piattaforma.WORDPRESS_GENERICO
+    assert any(s.piattaforma is Piattaforma.JCITYGOV for s in esito.scattate)
 
 
 def test_header_drupal_vince_senza_leggere_html():
@@ -235,6 +252,55 @@ def test_municipium_riconosciuto_dall_host_degli_asset():
     assert "municipium" in (esito.prova or "").lower()
 
 
+def test_classifica_risposta_ritorna_scattate_ordinate_per_score():
+    """La batteria non butta via i runner-up: un generator dichiarato che
+    perde solo contro l'header è un segnale diverso da nessun runner-up."""
+    esito = classifica_risposta(
+        headers={"x-drupal-cache": "HIT"},
+        html='<meta name="generator" content="WordPress 6.4">',
+    )
+    assert esito.vincitore.piattaforma is Piattaforma.DRUPAL
+    assert len(esito.scattate) == 2
+    scores = [s.score for s in esito.scattate]
+    assert scores == sorted(scores, reverse=True)
+    assert esito.scattate[0].piattaforma is Piattaforma.DRUPAL
+    assert esito.scattate[1].piattaforma is Piattaforma.WORDPRESS_GENERICO
+
+
+def test_classifica_risposta_vincitore_uguale_a_firma_da_risposta():
+    """`firma_da_risposta` resta un wrapper: stesso vincitore, sempre."""
+    html = '<meta name="generator" content="ComWeb - www.epublic.it">'
+    assert classifica_risposta(headers={}, html=html).vincitore == firma_da_risposta(
+        headers={}, html=html
+    )
+
+
+def test_collisione_vince_la_classe_forte_anche_se_scansionata_dopo():
+    """Collisione vera, non un travestimento del vecchio first-match.
+
+    La tavola `_GENERATOR` viene scansionata PRIMA di `_HOST_PRODOTTO`
+    (rango 2 contro 5): un generator `WordPress` da solo scatta subito, ed
+    e' esattamente il caso che il vecchio first-match avrebbe restituito
+    senza guardare oltre. Ma quel generator e' un nome generico che milioni
+    di siti dichiarano (EURISTICO), mentre l'host `municipiumapp.it` che
+    arriva DOPO, nella scansione, e' una prova funzionale di un vendor
+    specifico (DEFINITIVO). Se la formula fosse ancora un alias dell'ordine
+    di scansione, vincerebbe WordPress (tavola 2, prima) — invece vince
+    Municipium (tavola 5, dopo) perche' la classe di forza-prova prevale
+    sulla posizione. Questo e' impossibile da far passare con la vecchia
+    monotonia punteggio=ordine-tavola."""
+    html = (
+        '<meta name="generator" content="WordPress 6.4">'
+        '<link href="https://cdn.municipiumapp.it/assets/css/app.css">'
+    )
+    esito = classifica_risposta(headers={}, html=html)
+    assert esito.vincitore.piattaforma is Piattaforma.MUNICIPIUM
+    assert len(esito.scattate) == 2
+    assert esito.scattate[0].piattaforma is Piattaforma.MUNICIPIUM
+    assert esito.scattate[0].score > esito.scattate[1].score
+    assert esito.scattate[1].piattaforma is Piattaforma.WORDPRESS_GENERICO
+
+
 def test_agenda_smart_non_ruba_i_comuni_di_openpa():
     """Le due famiglie hanno entrambe `argomenti` fra le directory: a
     distinguerle e' cio' che segue. L'ordine delle regole non e' un dettaglio
@@ -249,3 +315,79 @@ def test_agenda_smart_non_ruba_i_comuni_di_openpa():
         da_impronta(impronta="asset=argomenti|bootstrap-italia|css|js").piattaforma
         is Piattaforma.AGENDA_SMART
     )
+
+
+def test_hypersic_riconosciuto_dall_host_degli_asset():
+    """Hypersic non si dichiara in nessun tag: gli asset di servizi-online/AT
+    arrivano da `hspromilaprod.hypersicapp.net`. Mono-campione (Rignano
+    Flaminio), prova reale letta dal sito."""
+    html = (_FIXTURE_AT / "rignano_flaminio_hypersic_head.html").read_text(encoding="utf-8")
+    esito = firma(html)
+    assert esito.piattaforma is Piattaforma.HYPERSIC
+    assert "hypersicapp.net" in (esito.prova or "").lower()
+
+
+def test_portale33_riconosciuto_dal_meta_layout():
+    """e-pal.it non nomina il proprio host nel body: l'unico segnale è
+    `<meta name="layout" content="portale33"/>`. Mono-campione (Marano sul
+    Panaro, pagina di Amministrazione Trasparente)."""
+    html = (_FIXTURE_AT / "marano_panaro_portale33_head.html").read_text(encoding="utf-8")
+    esito = firma(html)
+    assert esito.piattaforma is Piattaforma.PORTALE33
+    assert "portale33" in (esito.prova or "").lower()
+
+
+def test_portale33_senza_marker_non_scatta():
+    """Nessun marker `portale33` nel body: niente da riconoscere. Non si
+    inventa una prova che non c'e'."""
+    html = '<meta name="layout" content="qualcosa-altro"/>'
+    esito = firma(html)
+    assert esito.piattaforma is not Piattaforma.PORTALE33
+
+
+def test_soluzionipa_riconosciuto_dall_host_openweb():
+    """OpenWeb servito come superficie AT sotto `melito.soluzionipa.it`,
+    path `/openweb/`. Mono-campione (Melito), prova reale letta dal sito."""
+    html = (_FIXTURE_AT / "melito_soluzionipa_head.html").read_text(encoding="utf-8")
+    esito = firma(html)
+    assert esito.piattaforma is Piattaforma.SOLUZIONIPA
+    assert "soluzionipa.it" in (esito.prova or "").lower()
+
+
+def test_hgate_landing_at_riconosciuta_solo_dall_header_server():
+    """Le landing AT di Halley "hgate" (Adelfia, Scansano) non portano
+    nessun marker nel body — né `var ente`, né kamaleonte, né `/zf/` — solo
+    l'header di prodotto del server. Senza guardare l'header, questa pagina
+    reale finirebbe IGNOTA nonostante sia perfettamente riconoscibile."""
+    html = (_FIXTURE_AT / "adelfia_hgate_landing_head.html").read_text(encoding="utf-8")
+    esito = firma(html, server="HGATE")
+    assert esito.piattaforma is Piattaforma.HGATE
+    assert "hgate" in (esito.prova or "").lower()
+
+
+def test_famiglia_at_nuove_non_vincono_su_base_senza_includi_at():
+    """HYPERSIC, PORTALE33 e SOLUZIONIPA sono AT-only (`_FAMIGLIA_AT`): un
+    link outbound verso la loro superficie non deve poter eleggere una di
+    queste piattaforme quando il chiamante è BASE (`includi_at=False`) — deve
+    vincere il CMS di base, come per JCITYGOV a Peveragno."""
+    casi = (
+        (
+            '<link href="https://cdn.hypersicapp.net/x.css">'
+            '<link href="/wp-content/themes/x/s.css">',
+            Piattaforma.HYPERSIC,
+        ),
+        (
+            '<meta name="layout" content="portale33"/>'
+            '<link href="/wp-content/themes/x/s.css">',
+            Piattaforma.PORTALE33,
+        ),
+        (
+            '<script src="https://melito.soluzionipa.it/openweb/js/x.js"></script>'
+            '<link href="/wp-content/themes/x/s.css">',
+            Piattaforma.SOLUZIONIPA,
+        ),
+    )
+    for html, piattaforma_at in casi:
+        esito = classifica_risposta(headers={}, html=html, includi_at=False)
+        assert esito.vincitore.piattaforma is Piattaforma.WORDPRESS_GENERICO
+        assert any(s.piattaforma is piattaforma_at for s in esito.scattate)

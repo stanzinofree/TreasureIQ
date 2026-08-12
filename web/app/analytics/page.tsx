@@ -160,6 +160,43 @@ export default async function AnalyticsPage() {
         </table>
       </div>
 
+      {censimento.piattaforme_at?.length ? (
+        <>
+          <h2>Piattaforme trasparenza</h2>
+          <p className="nota">
+            La piattaforma di &laquo;amministrazione trasparente&raquo; è spesso un
+            prodotto diverso da quello del portale principale (due-connettori,
+            B5). <strong>NON_TROVATA</strong> è copertura onesta, non un buco nel
+            censimento: è il comune dove il connettore ha guardato e non l&apos;ha
+            trovata.
+          </p>
+          <div className="tabella-scorrevole">
+            <table>
+              <caption>
+                Piattaforma di amministrazione trasparente riconosciuta, per
+                numero di comuni.
+              </caption>
+              <thead>
+                <tr>
+                  <th>Piattaforma</th>
+                  <th>Comuni</th>
+                  <th>Regioni</th>
+                </tr>
+              </thead>
+              <tbody>
+                {censimento.piattaforme_at.map((p) => (
+                  <tr key={p.piattaforma_at}>
+                    <th scope="row">{p.piattaforma_at}</th>
+                    <td>{p.comuni}</td>
+                    <td>{p.regioni || "—"}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </>
+      ) : null}
+
       <h2>Quanti comuni un connettore sa già leggere</h2>
       <p className="nota">
         Non basta sapere su che piattaforma gira un comune: serve un connettore

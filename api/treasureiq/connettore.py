@@ -23,7 +23,7 @@ from pathlib import Path
 
 from pydantic import BaseModel
 
-from treasureiq.ingest.censimento import _Sonda
+from treasureiq.ingest.censimento import _Sonda, scopri_pagina_at
 from treasureiq.ingest.piattaforma import Piattaforma, firma_da_risposta
 from treasureiq.mappa_connettore import _base_con_schema
 from treasureiq.sonda_live import LIVE_DIR, comune_per_codice
@@ -69,11 +69,29 @@ class BandoAT(BaseModel):
 class AmministrazioneTrasparente(BaseModel):
     """L'indice AT del portale (D-11): bandi attivi verbatim, presenza PDF
     come flag — l'analisi del PDF resta su richiesta del cittadino, mai
-    automatica di massa."""
+    automatica di massa.
+
+    `piattaforma_at` (B5, ciclo16): quale piattaforma serve la pagina AT
+    stessa — spesso DIVERSA da `EsitoConnettore.piattaforma` (l'AT vive
+    spesso su un SaaS indipendente dal portale, es. jcitygov/Halley su un
+    comune WordPress). Solo classificazione: sapere QUALE connettore AT si
+    userebbe, non usarlo — nessun connettore AT è costruito qui (B8)."""
 
     indice_url: str | None = None
+    piattaforma_at: str | None = None
     bandi_attivi: list[BandoAT] = []
     pdf_presenti: bool = False
+
+
+class EndpointiConnettore(BaseModel):
+    """Gli URL-indice di sezione che un connettore ha DAVVERO fetchato/letto
+    durante la scansione (B9, ciclo16). Onestà (D-07-like): solo URL reali,
+    mai costruiti per convenzione — `null` dove il connettore non ha in
+    mano un link genuino per quella sezione."""
+
+    amministrazione: str | None = None
+    servizi: str | None = None
+    mappa: str | None = None
 
 
 class EsitoConnettore(BaseModel):
@@ -87,6 +105,11 @@ class EsitoConnettore(BaseModel):
     aree_amministrative: list[AreaAmministrativa] = []
     uffici: list[UfficioConnettore] = []
     amministrazione_trasparente: AmministrazioneTrasparente | None = None
+    # `endpoints` è additivo (B9): un comune Municipium con servizi/aree ha
+    # già `uffici`/`aree_amministrative` non vuoti, quindi `_esito_vuoto`
+    # (sotto) resta corretto senza doverlo controllare — un esito "solo
+    # endpoints, niente uffici" non esiste nel connettore Municipium attuale.
+    endpoints: EndpointiConnettore | None = None
 
 
 def _e_openweb(html: str) -> bool:
@@ -173,7 +196,11 @@ def leggi_connettore(
     try:
         with _Sonda(timeout=timeout) as sonda:
             risposta = sonda.risposta(base)
-            firma = firma_da_risposta(headers=dict(risposta.headers), html=risposta.text)
+            # BASE (home comune): una piattaforma AT-only non deve mai vincere
+            # la selezione del connettore.
+            firma = firma_da_risposta(
+                headers=dict(risposta.headers), html=risposta.text, includi_at=False
+            )
             if firma.piattaforma == Piattaforma.MUNICIPIUM:
                 try:
                     from treasureiq.municipium import leggi_municipium
@@ -241,6 +268,18 @@ def leggi_connettore(
 
     if esito is None:
         return None
+    if esito.amministrazione_trasparente is not None:
+        # Classificazione best-effort di QUALE piattaforma serve la pagina
+        # AT (B5, ciclo16): nessun fetch extra per il link — riusa l'HTML
+        # home già scaricato sopra — un solo fetch extra per la pagina AT
+        # stessa, dentro `scopri_pagina_at`. Non usa nessun connettore AT
+        # (B8, deferred): solo sapere quale si userebbe.
+        try:
+            scoperta = scopri_pagina_at(html_home=risposta.text, base=base)
+            if scoperta.piattaforma_at != Piattaforma.NON_TROVATA:
+                esito.amministrazione_trasparente.piattaforma_at = scoperta.piattaforma_at.value
+        except Exception:  # noqa: BLE001 — classificazione AT muta: campo assente, mai un crash
+            logger.info("classificazione piattaforma AT non riuscita per %s", codice_istat)
     if not _esito_vuoto(esito):
         _in_store(esito)
         try:

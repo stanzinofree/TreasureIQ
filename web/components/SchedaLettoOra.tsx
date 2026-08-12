@@ -208,6 +208,7 @@ export default function SchedaLettoOra({ esito }: { esito: EsitoConnettore }) {
   const haUffici = esito.uffici.length > 0;
   const at = esito.amministrazione_trasparente;
   const haBandi = !!at && at.bandi_attivi.length > 0;
+  const piattaformaAt = at?.piattaforma_at;
 
   // Degrado onesto (D-05): nessun ufficio e nessuna AT con qualcosa da
   // mostrare → nessun guscio vuoto sotto la risposta.
@@ -221,7 +222,16 @@ export default function SchedaLettoOra({ esito }: { esito: EsitoConnettore }) {
     >
       <span className="tiq-card__banda tiq-card__banda--ambra" aria-hidden="true" />
       <p className="scheda-letto-ora__provenienza-testa tiq-sintesi">
-        Letto ora dal portale · {esito.piattaforma} · {dataLeggibile(esito.letto_il)}
+        {piattaformaAt && piattaformaAt !== "NON_TROVATA" ? (
+          <>
+            Letto ora dal portale {esito.piattaforma} · trasparenza{" "}
+            {piattaformaAt} · {dataLeggibile(esito.letto_il)}
+          </>
+        ) : (
+          <>
+            Letto ora dal portale · {esito.piattaforma} · {dataLeggibile(esito.letto_il)}
+          </>
+        )}
       </p>
 
       {haUffici && (

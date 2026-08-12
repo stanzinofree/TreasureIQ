@@ -132,13 +132,63 @@ class BandiLiveEsito(BaseModel):
     #: cittadino non ha nominato un tema (retrocompat: comportamento odierno
     #: invariato, D-07).
     tema: str | None = None
+    #: Piattaforma AT del comune (B5, ciclo16), letta dal registro
+    #: (`registro.RegistroComune.piattaforma_at`, classificata da
+    #: `connettore.leggi_connettore`) — SOLO informativo: `None` se il
+    #: comune non è mai stato scansionato o l'AT non è stata classificata.
+    piattaforma_at: str | None = None
+    #: Quale connettore AT si USEREBBE per `piattaforma_at`, se ne esiste
+    #: già uno costruito (`_CONNETTORE_AT_PER_PIATTAFORMA`) — non-goal di
+    #: questo brief costruire il connettore stesso: qui si espone solo la
+    #: scelta, l'uso reale arriva con B8 (ISWEB). `None` se la piattaforma
+    #: non è nota o non ha ancora un connettore.
+    connettore_at: str | None = None
+
+
+#: Piattaforma AT classificata → nome del connettore che la leggerebbe, per
+#: le piattaforme dove B8+ ha (o avrà) un connettore dedicato. Vuota oggi
+#: per costruzione (B5, ciclo16 = solo classificazione, NON-GOAL costruire
+#: un connettore AT qui): popolata quando un connettore AT arriva davvero
+#: (ISWEB, B8), mai a priori.
+_CONNETTORE_AT_PER_PIATTAFORMA: dict[str, str] = {}
+
+
+def _piattaforma_e_connettore_at(codice_istat: str) -> tuple[str | None, str | None]:
+    """`(piattaforma_at, connettore_at)` per un comune, letti dal registro
+    (D-01: zero fetch qui, solo lo store già scritto da una scansione
+    connettore precedente). Import lazy per evitare un giro di import a
+    modulo (`registro` non è mai stato una dipendenza forte di
+    `bandi_live`); qualunque anomalia (registro non ancora scritto,
+    modulo assente) degrada a `(None, None)`, mai un crash del motore bandi."""
+    try:
+        from treasureiq.registro import leggi_registro
+
+        record = leggi_registro(codice_istat)
+    except Exception:  # noqa: BLE001 — registro muto: nessuna classificazione, mai un crash
+        return None, None
+    if record is None or record.piattaforma_at is None:
+        return None, None
+    connettore = _CONNETTORE_AT_PER_PIATTAFORMA.get(record.piattaforma_at)
+    if connettore is not None:
+        logger.info(
+            "AT %s: piattaforma nota (%s), connettore %s non ancora invocato (deferred, B8)",
+            codice_istat, record.piattaforma_at, connettore,
+        )
+    return record.piattaforma_at, connettore
 
 
 def _ora_iso() -> str:
     return datetime.now(timezone.utc).isoformat()
 
 
-def _esito_vuoto(comune: ComuneNoto, esito: str, gradino: str | None) -> BandiLiveEsito:
+def _esito_vuoto(
+    comune: ComuneNoto,
+    esito: str,
+    gradino: str | None,
+    *,
+    piattaforma_at: str | None = None,
+    connettore_at: str | None = None,
+) -> BandiLiveEsito:
     return BandiLiveEsito(
         codice_istat=comune.codice_istat,
         comune_nome=comune.nome,
@@ -146,6 +196,8 @@ def _esito_vuoto(comune: ComuneNoto, esito: str, gradino: str | None) -> BandiLi
         gradino=gradino,  # type: ignore[arg-type]
         verificato_il=_ora_iso(),
         bandi=[],
+        piattaforma_at=piattaforma_at,
+        connettore_at=connettore_at,
     )
 
 
@@ -627,9 +679,18 @@ def bandi_arricchiti(
         if cached is not None:
             return cached
 
+    # AT-aware routing (B5, ciclo16): sapere QUALE connettore AT si
+    # userebbe per questo comune, senza invocarlo — la catena diretto→Brave
+    # sotto resta invariata, questo è solo un campo informativo esposto sul
+    # verdetto (log già emesso da `_piattaforma_e_connettore_at` se noto).
+    piattaforma_at, connettore_at = _piattaforma_e_connettore_at(comune.codice_istat)
+
     base = _base_con_schema(comune.sito)
     if base is None:
-        esito = _esito_vuoto(comune, "non_coperto", None)
+        esito = _esito_vuoto(
+            comune, "non_coperto", None,
+            piattaforma_at=piattaforma_at, connettore_at=connettore_at,
+        )
         _in_cache(esito)
         return esito
 
@@ -668,6 +729,8 @@ def bandi_arricchiti(
             gradino=rest_gradino,
             verificato_il=_ora_iso(),
             bandi=_ordina_per_tipo(rest_bandi),
+            piattaforma_at=piattaforma_at,
+            connettore_at=connettore_at,
         )
         _in_cache(esito)
         return esito
@@ -698,6 +761,8 @@ def bandi_arricchiti(
                     for scoperto in scoperti[:MAX_BANDI_ARRICCHITI]
                 ]
             ),
+            piattaforma_at=piattaforma_at,
+            connettore_at=connettore_at,
         )
         _in_cache(esito)
         return esito
@@ -706,14 +771,20 @@ def bandi_arricchiti(
         # cpt/pages hanno coperto a zero e alberatura non aggiunge nulla
         # (rami assenti o zero bandi): il verdetto onesto resta quello che
         # ha davvero risposto, cacheabile (D-B7 — copertura confermata).
-        esito = _esito_vuoto(comune, "coperto_senza_bandi", rest_gradino)
+        esito = _esito_vuoto(
+            comune, "coperto_senza_bandi", rest_gradino,
+            piattaforma_at=piattaforma_at, connettore_at=connettore_at,
+        )
         _in_cache(esito)
         return esito
 
     if scoperti is not None:
         # alberatura ha coperto (rami letti) ma zero bandi, e cpt/pages non
         # hanno coperto affatto: comunque una copertura confermata.
-        esito = _esito_vuoto(comune, "coperto_senza_bandi", "alberatura")
+        esito = _esito_vuoto(
+            comune, "coperto_senza_bandi", "alberatura",
+            piattaforma_at=piattaforma_at, connettore_at=connettore_at,
+        )
         _in_cache(esito)
         return esito
 
@@ -722,4 +793,7 @@ def bandi_arricchiti(
     # non lo cristallizziamo in cache. Esito onesto ma volatile, riverificato
     # alla prossima domanda (principio fondante: mai un verdetto che non
     # possiamo sostenere).
-    return _esito_vuoto(comune, "non_coperto", None)
+    return _esito_vuoto(
+        comune, "non_coperto", None,
+        piattaforma_at=piattaforma_at, connettore_at=connettore_at,
+    )

@@ -653,6 +653,11 @@ export interface AmministrazioneTrasparente {
   indice_url: string | null;
   bandi_attivi: BandoAT[];
   pdf_presenti: boolean;
+  /** Piattaforma di amministrazione trasparente riconosciuta a parte dal
+   *  portale principale (due-connettori, B5 ciclo 16). `"NON_TROVATA"` è
+   *  copertura onesta — non un placeholder da nascondere — e va mostrata
+   *  come tale. Opzionale: assente nelle risposte non ancora classificate. */
+  piattaforma_at?: string;
 }
 
 /** Un ufficio letto dal connettore, coi suoi recapiti verbatim (D-07:
@@ -910,7 +915,7 @@ export interface RegistroComune {
   };
   /** ISO, mai un `now()` ricalcolato lato client (stile D-10 ciclo 10). */
   ultima_scansione: string;
-  servizi_snapshot: { nome: string; url: string }[];
+  uffici_snapshot: { nome: string; url: string }[];
   prima_scansione: boolean;
   /** `null` = nessun cambiamento rilevato, oppure `prima_scansione: true`
    *  (in quel caso non c'è una scansione precedente con cui confrontare). */
@@ -1243,6 +1248,17 @@ export interface VincoliRiga {
   comuni: number;
 }
 
+/** Mirror di `PiattaformaAtOut` (`api/treasureiq/api.py`): distinta dalla
+ *  `PiattaformaOut` del portale principale (D-09, due-connettori) — questa
+ *  è la piattaforma di amministrazione-trasparente, GROUP BY a parte.
+ *  `"NON_TROVATA"` è copertura onesta, non un placeholder da nascondere. */
+export interface PiattaformaAtRiga {
+  piattaforma_at: string;
+  comuni: number;
+  popolazione: number | null;
+  regioni: number;
+}
+
 export interface Censimento {
   rilevato_il: string | null;
   date_disponibili: string[];
@@ -1250,6 +1266,8 @@ export interface Censimento {
   fornitori: FornitoreRiga[];
   sezioni_mancanti: SezioneRiga[];
   vincoli: VincoliRiga[];
+  /** Opzionale: assente nelle risposte precedenti al ciclo 16. */
+  piattaforme_at?: PiattaformaAtRiga[];
 }
 
 export interface Connettore {

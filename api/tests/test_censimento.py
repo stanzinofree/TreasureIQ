@@ -10,6 +10,8 @@ essere precisa.
 
 from __future__ import annotations
 
+from pathlib import Path
+
 import pytest
 
 from treasureiq.ingest.censimento import ORARIO_RE, _cita
@@ -332,3 +334,416 @@ def test_limite_modello_separa_i_chiamanti(monkeypatch):
     api.limita_modello(Richiesta("alice"))
     # Un'altra sessione dallo stesso indirizzo non deve essere bloccata.
     api.limita_modello(Richiesta("bruno"))
+
+
+# --- Amministrazione Trasparente: firme + discovery (ciclo 16, brief B3) ---
+#
+# Le fixture qui sotto vengono dallo spike B1 (`.kapi/spike-at.md`): ogni
+# firma testata corrisponde a un campione reale, non a un'ipotesi.
+
+_FIXTURE_AT = Path(__file__).parent / "fixtures" / "at"
+
+
+def _leggi_fixture_at(nome: str) -> str:
+    return (_FIXTURE_AT / nome).read_text(encoding="utf-8")
+
+
+def test_classifica_risposta_isweb_su_pagina_at():
+    """Barletta e Prato: stesso CMS (`IsWeb, il cms`) su due comuni diversi.
+    La firma è già nella batteria BASE (`_GENERATOR`): qui si verifica solo
+    che riconosca anche l'HTML della pagina AT, non della home."""
+    from treasureiq.ingest.piattaforma import Piattaforma, classifica_risposta
+
+    for nome_fixture in ("barletta_isweb_head.html", "prato_isweb_head.html"):
+        html = _leggi_fixture_at(nome_fixture)
+        esito = classifica_risposta(headers={}, html=html)
+        assert esito.vincitore.piattaforma == Piattaforma.ISWEB
+
+
+def test_classifica_risposta_halley_trasparenza():
+    """Delebio: `var ente = "c<ISTAT>"` + asset `/km/design-web-toolkit/`
+    insieme sono il fingerprint Halley "zf", non uno dei due da solo."""
+    from treasureiq.ingest.piattaforma import Piattaforma, classifica_risposta
+
+    html = _leggi_fixture_at("delebio_halley_zf_head.html")
+    esito = classifica_risposta(headers={}, html=html)
+    assert esito.vincitore.piattaforma == Piattaforma.HALLEY_TRASPARENZA
+
+
+def test_classifica_risposta_halley_ente_da_solo_non_basta():
+    """`var ente = "c<ISTAT>"` da solo (senza /km/design-web-toolkit/) non è
+    prova sufficiente — mitiga il rischio mono-campione: 1 solo segnale può
+    comparire per coincidenza in un CMS diverso da Halley."""
+    from treasureiq.ingest.piattaforma import Piattaforma, classifica_risposta
+
+    html = '<html><head></head><body><script>var ente = "c012345";</script></body></html>'
+    esito = classifica_risposta(headers={}, html=html)
+    assert esito.vincitore.piattaforma != Piattaforma.HALLEY_TRASPARENZA
+
+
+def test_classifica_risposta_halley_kamaleonte_da_solo_non_basta():
+    """`/km/design-web-toolkit/` da solo (senza `var ente = "c<ISTAT>"`) non è
+    prova sufficiente — stesso motivo del test gemello sopra: serve la
+    congiunzione dei due segnali, non un asset path isolato."""
+    from treasureiq.ingest.piattaforma import Piattaforma, classifica_risposta
+
+    html = '<html><head><link href="/km/design-web-toolkit/style.css"></head><body></body></html>'
+    esito = classifica_risposta(headers={}, html=html)
+    assert esito.vincitore.piattaforma != Piattaforma.HALLEY_TRASPARENZA
+
+
+def test_classifica_risposta_wp_amm_trasp():
+    """Neive: il tema design-comuni-wordpress-theme marca l'archivio AT con
+    la classe `post-type-archive-amm_trasp` sul `<body>`."""
+    from treasureiq.ingest.piattaforma import Piattaforma, classifica_risposta
+
+    html = _leggi_fixture_at("neive_wp_amm_trasp_head.html")
+    esito = classifica_risposta(headers={}, html=html)
+    assert esito.vincitore.piattaforma == Piattaforma.WP_AMM_TRASP
+
+
+def test_classifica_risposta_jcitygov():
+    """Peveragno: il SaaS AT indipendente si riconosce dal dominio
+    `trasparenza-valutazione-merito.it`, cross-famiglia rispetto al CMS
+    di base (qui WordPress; a Chieri/Grugliasco è Municipium)."""
+    from treasureiq.ingest.piattaforma import Piattaforma, classifica_risposta
+
+    html = _leggi_fixture_at("peveragno_jcitygov_head.html")
+    esito = classifica_risposta(headers={}, html=html)
+    assert esito.vincitore.piattaforma == Piattaforma.JCITYGOV
+
+
+def test_scopri_url_at_delebio_segue_la_landing_locale():
+    """Delebio: l'unico candidato nella home è l'ancora con etichetta
+    "Amministrazione trasparente" (in `alt`/`title` dell'icona, non nel
+    testo diretto dell'ancora) verso la landing locale Halley."""
+    from treasureiq.ingest import censimento
+
+    html_home = _leggi_fixture_at("delebio_home_head.html")
+    url = censimento.scopri_url_at(html_home, "https://www.comune.delebio.so.it")
+    assert url == "https://www.comune.delebio.so.it/amministrazione/trasparenza/trasparenza.html"
+
+
+def test_scopri_url_at_peveragno_preferisce_il_link_corrente():
+    """Peveragno ha DUE ancore etichettate "Amministrazione Trasparente":
+    quella corrente (jcitygov, "dal 24/11/2025") e quella scaduta (WP
+    nativo `/amm_trasp/`, "fino al 23/11/2025"). La prima in ordine di
+    documento è quella corrente — e vince, non un terzo distrattore
+    (`amministrazionetrasparente.aspx` di Maggioli, etichettato "ANAC -
+    Contratti pubblici", che non deve intercettare nulla)."""
+    from treasureiq.ingest import censimento
+
+    html_home = _leggi_fixture_at("peveragno_home_at_links.html")
+    url = censimento.scopri_url_at(html_home, "https://comune.peveragno.cn.it")
+    assert url == "https://peveragno.trasparenza-valutazione-merito.it/web/trasparenza/trasparenza"
+
+
+def test_scopri_url_at_shell_angular_nessun_link_e_non_trovata():
+    """SIAMO/Publisys: la home è uno shell Angular senza href
+    server-rendered. Nessuna ancora in nessuna priorità → `None`, non un
+    URL indovinato sul pattern di un'altra piattaforma."""
+    from treasureiq.ingest import censimento
+
+    html_shell = (
+        '<html><body><app-root ng-version="16.2.0"></app-root>'
+        '<script src="/main.js"></script></body></html>'
+    )
+    url = censimento.scopri_url_at(html_shell, "https://comune.esempio.it")
+    assert url is None
+
+
+def test_scopri_pagina_at_shell_angular_ritorna_non_trovata():
+    """L'esito pubblico per SIAMO/Publisys: `NON_TROVATA` onesto, nessun
+    fetch tentato (nessun URL da cui farlo)."""
+    from treasureiq.ingest import censimento
+    from treasureiq.ingest.piattaforma import Piattaforma
+
+    html_shell = "<html><body><app-root></app-root></body></html>"
+    esito = censimento.scopri_pagina_at(html_home=html_shell, base="https://comune.esempio.it")
+    assert esito.piattaforma_at == Piattaforma.NON_TROVATA
+    assert esito.at_url is None
+    assert esito.piattaforma_at_prova is None
+    assert esito.firme_scattate == []
+
+
+class _RispostaAtFinta:
+    """Doppio finto di `httpx.Response` in streaming, quanto basta per
+    `_fetch_at_guardato`: `.url`, `.status_code`, `.headers`, `.iter_bytes()`
+    e il protocollo di context manager di `client.stream(...)`."""
+
+    def __init__(self, *, url: str, status_code: int = 200, corpo: bytes = b""):
+        self.url = url
+        self.status_code = status_code
+        self.headers: dict = {}
+        self._corpo = corpo
+
+    def iter_bytes(self):
+        yield self._corpo
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *exc):
+        return False
+
+
+class _ClientAtFinto:
+    """Sostituisce `httpx.Client` nei test di `_fetch_at_guardato`: niente
+    rete reale. Una nuova istanza viene creata a OGNI hop (stessa cosa che fa
+    il codice vero), quindi qui si consuma una risposta finta da una coda —
+    non un singolo oggetto riusato per tutti gli hop."""
+
+    def __init__(self, risposta: "_RispostaAtFinta"):
+        self._risposta = risposta
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *exc):
+        return False
+
+    def stream(self, metodo, url):
+        return self._risposta
+
+
+def _client_at_finto_in_coda(risposte: list["_RispostaAtFinta"]):
+    """Fabbrica per `censimento.httpx.Client`: ogni chiamata (un hop) estrae
+    la prossima risposta finta dalla coda, nell'ordine in cui il codice le
+    richiederebbe davvero."""
+
+    def _fabbrica(**kw):
+        return _ClientAtFinto(risposte.pop(0))
+
+    return _fabbrica
+
+
+def _dns_finto(ip_per_host: dict[str, str] | None = None, *, ip_fisso: str | None = None):
+    """Fabbrica per `host_guard.socket.getaddrinfo`: mai una query DNS
+    reale nei test. `ip_fisso` risponde lo stesso IP per qualunque host;
+    `ip_per_host` fa risolvere host diversi a IP diversi (per simulare un
+    DNS che cambia risposta tra un hop e il successivo)."""
+
+    def _getaddrinfo(host, port):
+        ip = ip_per_host[host] if ip_per_host else ip_fisso
+        return [(2, 1, 6, "", (ip, 0))]
+
+    return _getaddrinfo
+
+
+def _dns_sequenza_finta(ip_per_chiamata: list[str]):
+    """Come `_dns_finto`, ma risponde IP diversi a chiamate successive sullo
+    STESSO host — serve a provare che il check IP viene rieseguito a ogni
+    hop, non solo una tantum sulla prima risoluzione."""
+    sequenza = iter(ip_per_chiamata)
+
+    def _getaddrinfo(host, port):
+        return [(2, 1, 6, "", (next(sequenza), 0))]
+
+    return _getaddrinfo
+
+
+def test_fetch_at_guardato_hostname_risolve_a_ip_metadata_e_bloccato(monkeypatch):
+    """BLOCKER SSRF: l'host nell'URL è testualmente pubblico
+    (`trasparenza.comune-deface.it`), ma il suo DNS (sotto controllo di chi
+    ha compromesso il comune) risolve a `169.254.169.254`, l'IP metadata dei
+    provider cloud. Il vecchio guard controllava solo se l'URL contenesse
+    già un IP letterale: qui il DNS deve essere risolto e ogni IP validato
+    PRIMA del connect. Nessuna richiesta HTTP deve nemmeno partire."""
+    from treasureiq.ingest import censimento
+    from treasureiq.ingest import host_guard
+
+    monkeypatch.setattr(
+        host_guard.socket, "getaddrinfo", _dns_finto(ip_fisso="169.254.169.254")
+    )
+
+    def _client_non_deve_essere_chiamato(**kw):
+        raise AssertionError("non deve tentare la rete se l'host risolve a IP non sicuro")
+
+    monkeypatch.setattr(censimento.httpx, "Client", _client_non_deve_essere_chiamato)
+
+    esito = censimento._fetch_at_guardato("https://trasparenza.comune-deface.it/pagina")
+    assert esito is None
+
+
+def test_fetch_at_guardato_redirect_verso_ip_interno_e_bloccato(monkeypatch):
+    """Il redirect resta sullo STESSO host (quindi il check di identità host
+    non basterebbe a bloccarlo): fra il primo hop e il secondo il DNS
+    dell'host risolve a un IP diverso, interno. Il check IP deve essere
+    rieseguito a ogni hop e bloccare il secondo, non fidarsi della
+    risoluzione fatta per il primo."""
+    from treasureiq.ingest import censimento
+    from treasureiq.ingest import host_guard
+
+    host = "trasparenza.comune-deface.it"
+    redirect = _RispostaAtFinta(url=f"https://{host}/step1", status_code=302, corpo=b"")
+    redirect.headers = {"location": f"https://{host}/step2"}
+    monkeypatch.setattr(censimento.httpx, "Client", _client_at_finto_in_coda([redirect]))
+    monkeypatch.setattr(
+        host_guard.socket,
+        "getaddrinfo",
+        _dns_sequenza_finta(["93.184.216.34", "169.254.169.254"]),
+    )
+
+    esito = censimento._fetch_at_guardato(f"https://{host}/step1")
+    assert esito is None
+
+
+def test_fetch_at_guardato_redirect_fuori_host_e_scartato(monkeypatch):
+    """Guardia sull'identità dell'host (complementare al check IP, non un
+    suo sostituto): l'URL richiesto sta su
+    `trasparenza-valutazione-merito.it`, il redirect (302 + `Location`) porta
+    a un host completamente diverso — mai seguito, anche se quel secondo
+    host risolvesse a un IP pubblico innocuo."""
+    from treasureiq.ingest import censimento
+    from treasureiq.ingest import host_guard
+
+    redirect = _RispostaAtFinta(
+        url="https://peveragno.trasparenza-valutazione-merito.it/web/trasparenza/trasparenza",
+        status_code=302,
+        corpo=b"",
+    )
+    redirect.headers = {"location": "https://host-esterno-inatteso.example.com/phishing"}
+    monkeypatch.setattr(censimento.httpx, "Client", _client_at_finto_in_coda([redirect]))
+    monkeypatch.setattr(
+        host_guard.socket, "getaddrinfo", _dns_finto(ip_fisso="93.184.216.34")
+    )
+
+    esito = censimento._fetch_at_guardato(
+        "https://peveragno.trasparenza-valutazione-merito.it/web/trasparenza/trasparenza"
+    )
+    assert esito is None
+
+
+def test_fetch_at_guardato_scarta_schema_non_http():
+    """Uno schema diverso da http/https (qui `javascript:`) va scartato
+    prima di qualunque tentativo di rete o risoluzione DNS."""
+    from treasureiq.ingest import censimento
+
+    assert censimento._fetch_at_guardato("javascript:alert(1)") is None
+
+
+def test_fetch_at_guardato_scarta_ip_privato():
+    """Un URL che punta letteralmente a un IP privato è scartato dalla
+    stessa validazione IP della risoluzione DNS (qui non c'è nemmeno un
+    hostname da risolvere: `socket.getaddrinfo` su un IP letterale lo
+    ritorna tale e quale, senza query di rete)."""
+    from treasureiq.ingest import censimento
+
+    assert censimento._fetch_at_guardato("http://127.0.0.1/trasparenza") is None
+    assert censimento._fetch_at_guardato("http://10.0.0.5/trasparenza") is None
+
+
+def test_fetch_at_guardato_accetta_stesso_host_e_classifica(monkeypatch):
+    """Percorso felice: DNS a IP pubblico, nessun redirect fuori host, la
+    pagina scaricata è quella Halley di Delebio — `scopri_pagina_at` la
+    classifica con la stessa batteria BASE, e l'URL torna verificato, non
+    indovinato."""
+    from treasureiq.ingest import censimento
+    from treasureiq.ingest import host_guard
+    from treasureiq.ingest.piattaforma import Piattaforma
+
+    html_at = _leggi_fixture_at("delebio_halley_zf_head.html")
+    url_at = "https://www.comune.delebio.so.it/amministrazione/trasparenza/trasparenza.html"
+    risposta = _RispostaAtFinta(url=url_at, status_code=200, corpo=html_at.encode("utf-8"))
+    monkeypatch.setattr(censimento.httpx, "Client", _client_at_finto_in_coda([risposta]))
+    monkeypatch.setattr(
+        host_guard.socket, "getaddrinfo", _dns_finto(ip_fisso="93.184.216.34")
+    )
+    html_home = _leggi_fixture_at("delebio_home_head.html")
+
+    esito = censimento.scopri_pagina_at(html_home=html_home, base="https://www.comune.delebio.so.it")
+
+    assert esito.piattaforma_at == Piattaforma.HALLEY_TRASPARENZA
+    assert esito.at_url == url_at
+    assert esito.piattaforma_at_prova is not None
+    assert esito.firme_scattate
+
+
+def test_impronta_infila_la_discovery_at_nella_riga(monkeypatch):
+    """Ciclo 16: `_impronta` deve vedere l'AT su OGNI comune misurato, non
+    solo dentro `leggi_connettore`. Qui mockiamo solo `_fetch_at_guardato`
+    (il fetch guardato SSRF della pagina AT) — la home arriva da una `sonda`
+    finta minimale, senza toccare rete o `httpx.Client` reale: dimostra che
+    `scopri_pagina_at` viene chiamato con la stessa home già scaricata
+    (`resp.text`/`base`), non un secondo fetch."""
+    from treasureiq.ingest import censimento
+    from treasureiq.ingest.piattaforma import Piattaforma
+
+    html_at = _leggi_fixture_at("neive_wp_amm_trasp_head.html")
+    url_at = "https://comune.esempio.it/amministrazione-trasparente/"
+    html_home = (
+        "<html><body>"
+        '<a href="/amministrazione-trasparente/">Amministrazione Trasparente</a>'
+        "</body></html>"
+    )
+
+    chiamate_at = []
+
+    def _fetch_finto(url: str, *, timeout: float = 8.0):
+        chiamate_at.append(url)
+        return {}, html_at
+
+    monkeypatch.setattr(censimento, "_fetch_at_guardato", _fetch_finto)
+
+    class _RispostaFinta:
+        text = html_home
+        headers: dict = {}
+        status_code = 200
+        url = "https://comune.esempio.it"
+
+    class _SondaFinta:
+        richieste = 1
+
+        def risposta(self, url: str):
+            return _RispostaFinta()
+
+    esito = censimento._impronta(sonda=_SondaFinta(), base="https://comune.esempio.it")
+
+    # Un solo fetch AT (nessun doppio-fetch della home): la sonda finta non
+    # viene interrogata una seconda volta per l'AT, solo _fetch_at_guardato.
+    assert chiamate_at == [url_at]
+    assert esito["piattaforma_at"] == Piattaforma.WP_AMM_TRASP.value
+    assert esito["at_url"] == url_at
+    assert esito["piattaforma_at_prova"] is not None
+    assert esito["firme_scattate"]
+
+    campione = censimento.EsitoCensimento(
+        codice_istat="000000",
+        nome="Comune di Esempio",
+        sito="https://comune.esempio.it",
+        indirizzabilita=censimento.Indirizzabilita.SOLO_HTML,
+        recuperabilita=censimento.RecuperabilitaOrari.NON_TENTATO,
+        **esito,
+    )
+    assert campione.piattaforma_at == Piattaforma.WP_AMM_TRASP.value
+    assert campione.at_url == url_at
+
+
+def test_impronta_registra_non_trovata_onestamente(monkeypatch):
+    """Nessun link AT nella home → `NON_TROVATA` senza alcun fetch, e il
+    valore vincitore va comunque registrato (onestà D-16): mai `None` per
+    convenienza quando la sonda non ha semplicemente misurato nulla."""
+    from treasureiq.ingest import censimento
+    from treasureiq.ingest.piattaforma import Piattaforma
+
+    def _fetch_mai_chiamato(url: str, *, timeout: float = 8.0):
+        raise AssertionError("nessun link AT nella home: _fetch_at_guardato non va invocato")
+
+    monkeypatch.setattr(censimento, "_fetch_at_guardato", _fetch_mai_chiamato)
+
+    class _RispostaFinta:
+        text = "<html><body>nessun link qui</body></html>"
+        headers: dict = {}
+        status_code = 200
+        url = "https://comune.esempio.it"
+
+    class _SondaFinta:
+        richieste = 1
+
+        def risposta(self, url: str):
+            return _RispostaFinta()
+
+    esito = censimento._impronta(sonda=_SondaFinta(), base="https://comune.esempio.it")
+
+    assert esito["piattaforma_at"] == Piattaforma.NON_TROVATA.value
+    assert esito["at_url"] is None

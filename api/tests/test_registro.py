@@ -12,7 +12,13 @@ from fastapi.testclient import TestClient
 
 import treasureiq.registro as registro_mod
 from treasureiq.api import app
-from treasureiq.connettore import AmministrazioneTrasparente, EsitoConnettore, UfficioConnettore
+from treasureiq.connettore import (
+    AmministrazioneTrasparente,
+    EndpointiConnettore,
+    EsitoConnettore,
+    UfficioConnettore,
+)
+from treasureiq.ingest import host_guard as host_guard_mod
 from treasureiq.ingest.piattaforma import Piattaforma
 from treasureiq.registro import (
     MAX_LOGO_BYTES,
@@ -53,13 +59,24 @@ def _ufficio(nome: str, *, telefoni: list[str] | None = None) -> UfficioConnetto
     )
 
 
-def _esito(*, uffici: list[UfficioConnettore] | None = None, at_url: str | None = None) -> EsitoConnettore:
+def _esito(
+    *,
+    uffici: list[UfficioConnettore] | None = None,
+    at_url: str | None = None,
+    piattaforma_at: str | None = None,
+    endpoints: EndpointiConnettore | None = None,
+) -> EsitoConnettore:
     return EsitoConnettore(
         codice_istat=ISTAT,
         piattaforma=Piattaforma.MUNICIPIUM.value,
         letto_il=datetime.now(timezone.utc).isoformat(),
         uffici=uffici or [],
-        amministrazione_trasparente=AmministrazioneTrasparente(indice_url=at_url) if at_url else None,
+        amministrazione_trasparente=(
+            AmministrazioneTrasparente(indice_url=at_url, piattaforma_at=piattaforma_at)
+            if at_url or piattaforma_at
+            else None
+        ),
+        endpoints=endpoints,
     )
 
 
@@ -107,6 +124,131 @@ def test_seconda_scansione_dato_identico_nessun_cambiamento(
     assert record.cambiato is None
 
 
+def test_scansione_at_scoperta_registra_cambiato_at(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    """B5 (ciclo16): comparsa di una pagina AT prima assente è un cambio
+    tracciato ("at" in `cambiato.campi`), stesso trattamento del logo — non
+    un fingerprint, un valore scalare confrontato in `_campi_cambiati`."""
+    monkeypatch.setattr(registro_mod, "LIVE_DIR", tmp_path)
+    monkeypatch.setattr(registro_mod, "_logo_one_shot", lambda comune: (None, None))
+
+    registra_scansione(_comune(), _esito(uffici=[_ufficio("URP")]))
+    record = registra_scansione(
+        _comune(),
+        _esito(
+            uffici=[_ufficio("URP")],
+            at_url="https://www.comunefiv.it/at",
+            piattaforma_at=Piattaforma.JCITYGOV.value,
+        ),
+    )
+
+    assert record is not None
+    assert record.cambiato is not None
+    assert "at" in record.cambiato.campi
+    assert record.piattaforma_at == Piattaforma.JCITYGOV.value
+    assert record.endpoints.at == "https://www.comunefiv.it/at"
+
+
+def test_scansione_senza_at_eredita_at_precedente(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    """Una scansione che oggi non trova/classifica l'AT (pagina
+    temporaneamente muta) NON deve far dimenticare un AT trovato ieri —
+    onesto sull'assenza (D-16): il registro ripiega sull'ultimo valore
+    noto in storico invece di azzerarlo."""
+    monkeypatch.setattr(registro_mod, "LIVE_DIR", tmp_path)
+    monkeypatch.setattr(registro_mod, "_logo_one_shot", lambda comune: (None, None))
+
+    registra_scansione(
+        _comune(),
+        _esito(
+            uffici=[_ufficio("URP")],
+            at_url="https://www.comunefiv.it/at",
+            piattaforma_at=Piattaforma.JCITYGOV.value,
+        ),
+    )
+    record = registra_scansione(_comune(), _esito(uffici=[_ufficio("URP")]))
+
+    assert record is not None
+    assert record.piattaforma_at == Piattaforma.JCITYGOV.value
+    assert record.endpoints.at == "https://www.comunefiv.it/at"
+    # nessuna nuova "scoperta AT": la coppia (url, piattaforma) è la stessa
+    # di ieri, `_campi_cambiati` non deve segnalare "at" come cambiato.
+    assert record.cambiato is None
+
+
+# --- Endpoints sezione (B9, ciclo16): mappa/servizi/amministrazione -------
+
+
+def test_registra_scansione_popola_endpoints_da_esito(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    monkeypatch.setattr(registro_mod, "LIVE_DIR", tmp_path)
+    monkeypatch.setattr(registro_mod, "_logo_one_shot", lambda comune: (None, None))
+
+    record = registra_scansione(
+        _comune(),
+        _esito(
+            uffici=[_ufficio("URP")],
+            endpoints=EndpointiConnettore(
+                mappa="https://www.comunefiv.it/it/sitemap",
+                servizi="https://www.comunefiv.it/it/menu/servizi",
+                amministrazione="https://www.comunefiv.it/it/menu/amministrazione",
+            ),
+        ),
+    )
+
+    assert record is not None
+    assert record.endpoints.mappa == "https://www.comunefiv.it/it/sitemap"
+    assert record.endpoints.servizi == "https://www.comunefiv.it/it/menu/servizi"
+    assert record.endpoints.amministrazione == "https://www.comunefiv.it/it/menu/amministrazione"
+
+
+def test_registra_scansione_esito_senza_endpoints_null_no_crash(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    monkeypatch.setattr(registro_mod, "LIVE_DIR", tmp_path)
+    monkeypatch.setattr(registro_mod, "_logo_one_shot", lambda comune: (None, None))
+
+    record = registra_scansione(_comune(), _esito(uffici=[_ufficio("URP")]))
+
+    assert record is not None
+    assert record.endpoints.mappa is None
+    assert record.endpoints.servizi is None
+    assert record.endpoints.amministrazione is None
+
+
+def test_scansione_senza_endpoints_eredita_endpoints_precedenti(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    """Stesso trattamento onesto dell'AT (`test_scansione_senza_at_eredita_
+    at_precedente`): uno sweep flaky che oggi non legge la sitemap non deve
+    far dimenticare mappa/servizi/amministrazione letti ieri."""
+    monkeypatch.setattr(registro_mod, "LIVE_DIR", tmp_path)
+    monkeypatch.setattr(registro_mod, "_logo_one_shot", lambda comune: (None, None))
+
+    registra_scansione(
+        _comune(),
+        _esito(
+            uffici=[_ufficio("URP")],
+            endpoints=EndpointiConnettore(
+                mappa="https://www.comunefiv.it/it/sitemap",
+                servizi="https://www.comunefiv.it/it/menu/servizi",
+                amministrazione="https://www.comunefiv.it/it/menu/amministrazione",
+            ),
+        ),
+    )
+    record = registra_scansione(_comune(), _esito(uffici=[_ufficio("URP")]))
+
+    assert record is not None
+    assert record.endpoints.mappa == "https://www.comunefiv.it/it/sitemap"
+    assert record.endpoints.servizi == "https://www.comunefiv.it/it/menu/servizi"
+    assert record.endpoints.amministrazione == "https://www.comunefiv.it/it/menu/amministrazione"
+    # URL stabili di sezione: mai in `_campi_cambiati`, niente falso diff.
+    assert record.cambiato is None
+
+
 # --- Logo one-shot: size-cap streaming-con-abort + SSRF post-redirect --
 
 
@@ -143,11 +285,14 @@ class _ClientFinto:
 
 def test_logo_oltre_size_cap_ritorna_null_non_blocca(monkeypatch: pytest.MonkeyPatch) -> None:
     """Due chunk che sommati superano MAX_LOGO_BYTES: l'abort è
-    streaming, il chiamante riceve (None, None), mai un'eccezione."""
+    streaming, il chiamante riceve (None, None), mai un'eccezione. La
+    guardia SSRF vive ora in `host_guard.py` (B5, ciclo16): si patcha lì,
+    e si aggira il DNS-check (host di test sintetico, non risolvibile)."""
     chunk = b"x" * (MAX_LOGO_BYTES // 2 + 1000)
     stream = _StreamFinto(200, "https://www.comunefiv.it/logo.png", {"content-type": "image/png"}, [chunk, chunk])
+    monkeypatch.setattr(host_guard_mod, "host_risolve_a_ip_sicuro", lambda hostname: True)
     monkeypatch.setattr(
-        registro_mod.httpx, "Client", lambda **kwargs: _ClientFinto(stream, **kwargs)
+        host_guard_mod.httpx, "Client", lambda **kwargs: _ClientFinto(stream, **kwargs)
     )
 
     data_uri, logo_hash = _scarica_logo("https://www.comunefiv.it/logo.png", HOST)
@@ -156,13 +301,16 @@ def test_logo_oltre_size_cap_ritorna_null_non_blocca(monkeypatch: pytest.MonkeyP
 
 
 def test_logo_ssrf_redirect_fuori_host_rifiutato(monkeypatch: pytest.MonkeyPatch) -> None:
-    """Il redirect finale sta su un host diverso da quello del comune
-    (guardia post-redirect, `municipium.py:246`): esito scartato."""
+    """Un redirect (302) fuori dal dominio del comune: scartato PER-HOP
+    dalla guardia condivisa (`host_guard.fetch_guardato`, B5, ciclo16) —
+    non solo dopo l'ultimo redirect come nella guardia precedente."""
     stream = _StreamFinto(
-        200, "https://evil.example.com/logo.png", {"content-type": "image/png"}, [b"dati"]
+        302, "https://www.comunefiv.it/logo.png",
+        {"location": "https://evil.example.com/logo.png"}, [],
     )
+    monkeypatch.setattr(host_guard_mod, "host_risolve_a_ip_sicuro", lambda hostname: True)
     monkeypatch.setattr(
-        registro_mod.httpx, "Client", lambda **kwargs: _ClientFinto(stream, **kwargs)
+        host_guard_mod.httpx, "Client", lambda **kwargs: _ClientFinto(stream, **kwargs)
     )
 
     data_uri, logo_hash = _scarica_logo("https://www.comunefiv.it/logo.png", HOST)
@@ -174,8 +322,9 @@ def test_logo_ok_sotto_cap_stesso_host(monkeypatch: pytest.MonkeyPatch) -> None:
     stream = _StreamFinto(
         200, "https://www.comunefiv.it/logo.png", {"content-type": "image/png"}, [b"dati-logo"]
     )
+    monkeypatch.setattr(host_guard_mod, "host_risolve_a_ip_sicuro", lambda hostname: True)
     monkeypatch.setattr(
-        registro_mod.httpx, "Client", lambda **kwargs: _ClientFinto(stream, **kwargs)
+        host_guard_mod.httpx, "Client", lambda **kwargs: _ClientFinto(stream, **kwargs)
     )
 
     data_uri, logo_hash = _scarica_logo("https://www.comunefiv.it/logo.png", HOST)
@@ -269,7 +418,14 @@ def test_route_serve_dal_disco_forma_contratto_o2(monkeypatch: pytest.MonkeyPatc
     monkeypatch.setattr(registro_mod, "LIVE_DIR", tmp_path)
     monkeypatch.setattr(registro_mod, "_logo_one_shot", lambda comune: (None, None))
 
-    registra_scansione(_comune(), _esito(uffici=[_ufficio("URP")], at_url="https://www.comunefiv.it/at"))
+    registra_scansione(
+        _comune(),
+        _esito(
+            uffici=[_ufficio("URP")],
+            at_url="https://www.comunefiv.it/at",
+            piattaforma_at=Piattaforma.WP_AMM_TRASP.value,
+        ),
+    )
 
     risposta = client.get(f"/api/registro/{ISTAT}")
     assert risposta.status_code == 200
@@ -280,9 +436,10 @@ def test_route_serve_dal_disco_forma_contratto_o2(monkeypatch: pytest.MonkeyPatc
         "logo_b64",
         "dominio",
         "piattaforma",
+        "piattaforma_at",
         "endpoints",
         "ultima_scansione",
-        "servizi_snapshot",
+        "uffici_snapshot",
         "prima_scansione",
         "cambiato",
         "recapiti",
@@ -297,7 +454,10 @@ def test_route_serve_dal_disco_forma_contratto_o2(monkeypatch: pytest.MonkeyPatc
         assert recapiti["fonte"] == "IndicePA"
         assert recapiti["pec"] or recapiti["indirizzo"]
     assert corpo["endpoints"]["at"] == "https://www.comunefiv.it/at"
-    assert corpo["servizi_snapshot"] == [{"nome": "URP", "url": "https://www.comunefiv.it/urp"}]
+    # B5 (ciclo16): `piattaforma_at` generale, da QUALSIASI connettore che la
+    # classifichi — non solo Municipium.
+    assert corpo["piattaforma_at"] == Piattaforma.WP_AMM_TRASP.value
+    assert corpo["uffici_snapshot"] == [{"nome": "URP", "url": "https://www.comunefiv.it/urp"}]
 
 
 def test_recapiti_ipa_join_e_degrado():

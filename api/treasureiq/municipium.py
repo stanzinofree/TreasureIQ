@@ -38,6 +38,7 @@ from urllib.parse import urljoin, urlparse
 from treasureiq.connettore import (
     AmministrazioneTrasparente,
     AreaAmministrativa,
+    EndpointiConnettore,
     EsitoConnettore,
     UfficioConnettore,
 )
@@ -61,6 +62,13 @@ _RE_ORG_UNIT_PATH = re.compile(
     r"/it/(?:organizational_unit|unita_organizzative)/[^/?#\"']+/?$", re.IGNORECASE
 )
 _RE_AREE_AMM_PATH = re.compile(r"/it/page/aree-amministrative(?:-\d+)?/?$", re.IGNORECASE)
+# B9 (ciclo16): la top-nav Municipium è `/it/menu/{amministrazione,servizi,...}`
+# — verificato via fetch live su Pomezia/Andria/Fiumicino, NON `/it/servizi`/
+# `/it/amministrazione` come si potrebbe assumere per convenzione. Pomezia
+# porta un suffisso numerico sul nodo menu (es. `/it/menu/servizi-380465`),
+# stesso schema di `_RE_AREE_AMM_PATH` sopra: suffisso opzionale, non fisso.
+_RE_SERVIZI_PATH = re.compile(r"/it/menu/servizi(?:-\d+)?/?$", re.IGNORECASE)
+_RE_AMM_PATH = re.compile(r"/it/menu/amministrazione(?:-\d+)?/?$", re.IGNORECASE)
 _RE_ANCHOR = re.compile(r'<a[^>]+href=["\']([^"\']+)["\'][^>]*>([^<]*)</a>', re.IGNORECASE)
 _RE_CONTATTO = re.compile(r'<strong>([^<]+)</strong>\s*:\s*<a\s+href=["\']([^"\']+)["\']', re.IGNORECASE)
 _RE_ORARI = re.compile(r'<strong>\s*Orari[^<]*</strong>\s*:\s*([^<]+)', re.IGNORECASE)
@@ -303,6 +311,41 @@ def _leggi_at(comune: ComuneNoto, sonda: _Sonda, link_sitemap: list[str]) -> Amm
         return None
 
 
+def _endpoints_da_sitemap(base: str, host_comune: str, link_sitemap: list[str]) -> EndpointiConnettore:
+    """Gli URL-indice DAVVERO fetchati/letti dal connettore (B9): mai un
+    pattern costruito per convenzione. `mappa` è la sitemap stessa,
+    attestata solo se ha fruttato almeno un link (sitemap muta/invalida →
+    `_scopri_uffici` torna `[]` → mappa `None`, onesto). `servizi`/
+    `amministrazione` sono il primo link same-host che matcha la top-nav
+    reale `/it/menu/{servizi,amministrazione}` — verificato via fetch live
+    su Pomezia/Andria/Fiumicino, NON `/it/servizi`/`/it/amministrazione`
+    come si potrebbe assumere per convenzione. `amministrazione` ha
+    fallback sulla pagina aree-amministrative già riconosciuta
+    (`_RE_AREE_AMM_PATH`) quando il nodo menu dedicato non è in sitemap."""
+    if not link_sitemap:
+        return EndpointiConnettore()
+
+    servizi = next(
+        (link for link in link_sitemap if _stesso_host(link, host_comune) and _RE_SERVIZI_PATH.search(link)),
+        None,
+    )
+    amministrazione = next(
+        (link for link in link_sitemap if _stesso_host(link, host_comune) and _RE_AMM_PATH.search(link)),
+        None,
+    )
+    if amministrazione is None:
+        amministrazione = next(
+            (link for link in link_sitemap if _stesso_host(link, host_comune) and _RE_AREE_AMM_PATH.search(link)),
+            None,
+        )
+
+    return EndpointiConnettore(
+        amministrazione=amministrazione,
+        servizi=servizi,
+        mappa=f"{base}/it/sitemap",
+    )
+
+
 def leggi_municipium(comune: ComuneNoto, sonda: _Sonda) -> EsitoConnettore:
     """Il contratto D-09 per un comune Municipium: uffici scoperti dalla
     sitemap e letti verbatim, più (se B3 c'è) l'indice Amministrazione
@@ -343,6 +386,7 @@ def leggi_municipium(comune: ComuneNoto, sonda: _Sonda) -> EsitoConnettore:
             aree_amministrative = []
 
     amministrazione_trasparente = _leggi_at(comune, sonda, link_sitemap)
+    endpoints = _endpoints_da_sitemap(base, host_comune, link_sitemap)
 
     return EsitoConnettore(
         codice_istat=comune.codice_istat,
@@ -351,6 +395,7 @@ def leggi_municipium(comune: ComuneNoto, sonda: _Sonda) -> EsitoConnettore:
         aree_amministrative=aree_amministrative,
         uffici=uffici,
         amministrazione_trasparente=amministrazione_trasparente,
+        endpoints=endpoints,
     )
 
 

@@ -9,10 +9,9 @@
 # After edits: make restart   (or make rebuild if the image itself changed)
 
 COMPOSE   := docker compose
-COMPOSE_PROFILE_INGEST := docker compose --profile ingest
 
 .PHONY: help up down restart rebuild build logs ps status \
-        up-ingest down-ingest ollama-check \
+        ollama-check \
         scan-nazionale scan-misurabili sweep registro-nazionale registro-scan registro-list \
         backup restore
 
@@ -27,8 +26,6 @@ help:
 	@echo "  make build          rebuild images only (no start)"
 	@echo "  make logs           tail api + web logs (ctrl-c to stop)"
 	@echo "  make ps             container status"
-	@echo "  make up-ingest      start the ingestion-only searxng service"
-	@echo "  make down-ingest    stop searxng"
 	@echo "  make scan-nazionale     censimento asse-A su tutti i comuni -> storico.db (pesante, resumable)"
 	@echo "  make scan-misurabili    pass profondo + aderenza sui comuni leggibili gia' nel db"
 	@echo "  make sweep              censimento+registro per un set in un run: ISTAT='058057'"
@@ -71,12 +68,6 @@ ps:
 status: ollama-check
 	$(COMPOSE) ps
 	@curl -s --max-time 3 http://localhost:8010/api/health && echo "  ← api /api/health" || echo "api /api/health: unreachable"
-
-up-ingest:
-	$(COMPOSE_PROFILE_INGEST) up -d searxng
-
-down-ingest:
-	$(COMPOSE_PROFILE_INGEST) down
 
 # --- Test ---------------------------------------------------------------
 # Girano nello stage `dev` del Dockerfile, non nell'immagine di runtime: quella

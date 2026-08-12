@@ -138,6 +138,26 @@ body {
   font-family: var(--font-mono);
 }
 
+/* video di presentazione: stesso guscio della mostra, colonna centrata */
+.video {
+  max-width: 880px;
+  margin: var(--ma-6) auto 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--ombra);
+  background: #000;
+}
+.video video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; }
+.video figcaption {
+  padding: var(--ma-3) var(--ma-4);
+  font-size: 13px;
+  color: var(--sumi-faint);
+  border-top: 1px solid var(--line);
+  font-family: var(--font-mono);
+  background: var(--paper-raised);
+}
+
 /* ---------- fasce ---------- */
 .fascia { max-width: 1080px; margin: 0 auto; padding: var(--ma-12) var(--ma-6); }
 .fascia--sunken { background: var(--paper-sunken); max-width: none; }

@@ -430,7 +430,13 @@ export interface InfoOffice {
   nome: string;
   telefono: string | null;
   email: string | null;
+  /** Office hours to show: the normalized form (`OrarioSettimanale.reso`)
+   *  when the page allowed structuring it, otherwise the verbatim citation. */
   orari: string | null;
+  /** The verbatim hours citation from the portal, kept beside the normalized
+   *  `orari` as a re-checkable source (D-07). `null` when `orari` is already
+   *  the verbatim text (nothing to pair) or when there are no hours. */
+  orari_fonte: string | null;
   /** Certified address from IPA. Preferred as the recipient of a formal
    * request: a PEC obliges a reply, an ordinary inbox does not. */
   pec: string | null;
@@ -586,6 +592,15 @@ export interface Opportunity {
   extraction_notes: string[];
 }
 
+/** Mirror esatto di `Documento` (`bandi_live.py`): un allegato PDF linkato
+ *  dalla pagina del bando. `url` è verbatim dalla pagina (stesso host, reso
+ *  assoluto), `etichetta` è il nome-file ripulito. Puntatore alla fonte, non
+ *  una lettura di essa: la card lo mostra come link di download. */
+export interface Documento {
+  url: string;
+  etichetta: string;
+}
+
 /** Mirror esatto di `BandoArricchito` (`api/treasureiq/bandi_live.py` §5.2).
  *  `scadenza` è presente SOLO se `scadenza_verificata` (D-07 quote-gate):
  *  se `false`, `scadenza` va ignorata dalla UI anche se non è `null`. */
@@ -593,6 +608,11 @@ export interface BandoArricchito {
   opportunity: Opportunity;
   scadenza: string | null;
   scadenza_verificata: boolean;
+  /** Allegati PDF linkati dalla pagina del bando (ciclo17): stessi PDF che il
+   *  backend già conta in `pdfs_linked`, qui esposti come link diretti,
+   *  ripuliti dal rumore e capati. Assente/vuoto = la pagina non ne linka o il
+   *  bando arriva da un gradino senza HTML pieno — la card omette il blocco. */
+  documenti?: Documento[];
   /** Ranking morbido profilo↔requisiti (KAPI 7): `true` se il bando risuona
    *  coi segnali del cittadino. NON è un verdetto di idoneità — è un ordine
    *  indicativo, «controlla i requisiti». `false` di default. */

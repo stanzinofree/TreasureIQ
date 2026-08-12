@@ -14,7 +14,7 @@ gioco: così la decisione si può rivedere con un dato invece che con un'opinion
 | Durata | ~90 minuti, 8 richieste in parallelo |
 | Righe prodotte per rilevazione | 7.896 |
 | Righe dopo un anno di rilevazioni quotidiane | ~2,9 milioni |
-| Servizi comunali contati | 57.603 |
+| Oggetti seminati nel catalogo (uffici, servizi, rami AT), letti da disco invece che live | 57.603 |
 | PDF stimati, alla quota misurata del 10% | ~5.700, ~3 GB |
 
 Sono numeri piccoli. Il rischio del sistema **non è il volume**: è la cortesia

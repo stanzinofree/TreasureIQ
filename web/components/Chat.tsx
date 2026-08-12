@@ -755,6 +755,27 @@ function BandoLive({
       >
         Apri sul portale ↗
       </a>
+      {/* Documenti PDF linkati dalla pagina del bando (ciclo17). Sono
+          puntatori alla fonte, non una lettura: l'etichetta è il nome-file
+          verbatim, il download avviene sul sito del comune. Mostrati solo se
+          la pagina ne linka — mai un blocco vuoto. */}
+      {bando.documenti && bando.documenti.length > 0 && (
+        <span className="mappa-servizi__scheda-campo bando-live__documenti">
+          <span className="mappa-servizi__scheda-etichetta">Documenti sulla pagina</span>
+          <ul className="bando-live__documenti-lista">
+            {bando.documenti.map((doc) => (
+              <li key={doc.url}>
+                <a href={doc.url} target="_blank" rel="noopener noreferrer">
+                  <span className="bando-live__documenti-tipo" aria-hidden="true">
+                    PDF
+                  </span>{" "}
+                  {doc.etichetta} ↓
+                </a>
+              </li>
+            ))}
+          </ul>
+        </span>
+      )}
       <span className="mappa-servizi__scheda-footer">Verificato il {formattaData(verificatoIl)}</span>
     </li>
   );

@@ -1,0 +1,425 @@
+{
+ "codice_istat": "058003",
+ "piattaforma": "wordpress_agid",
+ "letto_il": "2026-08-11T21:23:08.568846+00:00",
+ "aree_amministrative": [],
+ "uffici": [
+  {
+   "nome": "Giunta Comunale",
+   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/giunta-comunale/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+  },
+  {
+   "nome": "Ufficio del Sindaco",
+   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/ufficio-del-sindaco/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+  },
+  {
+   "nome": "Consiglio Comunale",
+   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/consiglio-comunale/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+  },
+  {
+   "nome": "Protocollo",
+   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/protocollo/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+  },
+  {
+   "nome": "Segreteria Generale",
+   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/segreteria-generale/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+  },
+  {
+   "nome": "U.R.P. – Ufficio Relazioni con il Pubblico",
+   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/urp-ufficio-relazioni-col-pubblico/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+  },
+  {
+   "nome": "Segreteria Generale Servizio II – Protocollo – U.R.P. – Messi – Comunicazione istituzionale",
+   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/servizio-ii-protocollo-u-r-p-messi/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+  },
+  {
+   "nome": "Ufficio di staff del Sindaco",
+   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/ufficio-di-staff-del-sindaco/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+  },
+  {
+   "nome": "Ufficio Anagrafe e Leva",
+   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/ufficio-anagrafe-e-leva/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+  },
+  {
+   "nome": "SETTORE II – Corpo di Polizia Locale",
+   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/corpo-di-polizia-locale/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+  },
+  {
+   "nome": "Ufficio Politiche Energetiche",
+   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/ufficio-politiche-energetiche/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+  },
+  {
+   "nome": "Pubblica Incolumità",
+   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/ufficio-pubblica-incolumita/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+  },
+  {
+   "nome": "Servizio III – Patrimonio – Condono edilizio",
+   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/servizio-iii-patrimonio-condono-edilizio/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+  },
+  {
+   "nome": "Servizio II – Manutenzioni",
+   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/servizio-ii-manutenzioni/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+  },
+  {
+   "nome": "Servizio I – Lavori Pubblici",
+   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/servizio-i-lavori-pubblici/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+  },
+  {
+   "nome": "SETTORE V – Lavori Pubblici, Manutenzione, Patrimonio",
+   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/settore-v-lavori-pubblici-manutenzione-patrimonio/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+  },
+  {
+   "nome": "Servizio II –  S.U.E. – Cimitero",
+   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/servizio-ii-s-u-e-cimitero/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+  },
+  {
+   "nome": "Servizio III – Attività produttive",
+   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/servizio-iii-attivita-produttive/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+  },
+  {
+   "nome": "Servizio IV – Ambiente",
+   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/servizio-iv-ambiente/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+  },
+  {
+   "nome": "Servizio Condono e Vigilanza edilizia",
+   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/servizio-condono-e-vigilanza-edilizia/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+  },
+  {
+   "nome": "Servizio Edilizia",
+   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/servizio-edilizia/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+  },
+  {
+   "nome": "Servizio I – Urbanistica",
+   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/servizio-i-urbanistica/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+  },
+  {
+   "nome": "SETTORE IV – Urbanistica – Edilizia – Attività Produttive – Ambiente",
+   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/settore-iv-urbanistica-edilizia-attivita-produttive-ambiente/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+  },
+  {
+   "nome": "Biblioteche",
+   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/biblioteche/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+  },
+  {
+   "nome": "Ufficio TPL (Trasporto Pubblico Locale)",
+   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/ufficio-tpl-trasporto-pubblico-locale/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+  },
+  {
+   "nome": "Servizio III – Politiche Culturali",
+   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/servizio-iii-politiche-culturali/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+  },
+  {
+   "nome": "Servizio II – Politiche Sociali",
+   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/servizio-ii-politiche-sociali/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+  },
+  {
+   "nome": "Servizio I – Politiche Educative – Tutela – Trasporti",
+   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/servizio-i-politiche-educative-tutela-trasporti/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+  },
+  {
+   "nome": "SETTORE III – Politiche educative, Sociali e Culturali – Demografici",
+   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/settore-iii-politiche-educative-sociali-e-culturali-demografici/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+  },
+  {
+   "nome": "Ufficio Politiche Europee",
+   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/ufficio-politiche-europee/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+  },
+  {
+   "nome": "Ufficio Contratti",
+   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/ufficio-contratti/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+  },
+  {
+   "nome": "Servizio I – Organi Istituzionali e Segreteria Generale",
+   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/servizio-i-organi-istituzionali-e-segreteria-generale/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+  },
+  {
+   "nome": "Servizio Tributi",
+   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/servizio-tributi/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+  },
+  {
+   "nome": "Servizio I – Finanziario",
+   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/servizio-i-finanziario/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+  },
+  {
+   "nome": "Ufficio Stato Civile, Elettorale, Statistica",
+   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/ufficio-stato-civile-elettorale-statistica/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+  },
+  {
+   "nome": "Uffici Messi Notificatori",
+   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/uffici-messi-notificatori/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+  },
+  {
+   "nome": "Risorse Umane",
+   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/risorse-umane/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+  },
+  {
+   "nome": "SETTORE I – Economico, Finanziario, Risorse Umane",
+   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/settore-i-economico-finanziario-risorse-umane/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+  },
+  {
+   "nome": "Avvocatura",
+   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/avvocatura/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+  },
+  {
+   "nome": "Servizio IV – Demografici",
+   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/servizio-iv-demografici/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+  },
+  {
+   "nome": "Informatizzazione – I.C.T.",
+   "url": "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/informatizzazione-i-c-t/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:23:08.914620+00:00"
+  }
+ ],
+ "amministrazione_trasparente": {
+  "indice_url": "https://www.comune.albanolaziale.rm.it/amministrazione-trasparente/",
+  "piattaforma_at": "ignota",
+  "bandi_attivi": [],
+  "pdf_presenti": false
+ },
+ "endpoints": null
+}

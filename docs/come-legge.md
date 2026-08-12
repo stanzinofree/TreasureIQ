@@ -81,6 +81,14 @@ flowchart TD
     SW -. "compone la scheda a lato" .-> SCHEDA["Scheda del Comune, a lato"]
 ```
 
+Quella freccia tratteggiata — *"dà le coordinate alla sonda"* — è la regola
+onesta della sonda live: **legge prima quello che lo sweep ha già trovato**
+(l'URL di Amministrazione Trasparente, quale piattaforma, quale via REST) e
+sonda dal vivo solo quello che manca ancora o non è più fresco. Non
+ricontrolla mai per scrupolo un dato già catalogato — sarebbe la stessa
+sonda che le coordinate dovevano evitare. Il dettaglio, gradino per gradino,
+è in [Connettori](connettori#i-bandi-leggi-prima-poi-tre-gradini-in-cascata-e-il-portale-halley).
+
 ---
 
 ## E un motore di ingestione?

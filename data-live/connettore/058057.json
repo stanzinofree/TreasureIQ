@@ -1,0 +1,646 @@
+{
+ "codice_istat": "058057",
+ "piattaforma": "egov",
+ "letto_il": "2026-08-11T06:24:38.831884+00:00",
+ "aree_amministrative": [
+  {
+   "nome": "Istruzione",
+   "url": "https://www.comune.marino.rm.it/EG0/EGSCHTST45.HBL?ARG=17"
+  },
+  {
+   "nome": "Assistenza sociale",
+   "url": "https://www.comune.marino.rm.it/EG0/EGSCHTST45.HBL?ARG=10"
+  },
+  {
+   "nome": "PNRR",
+   "url": "https://www.comune.marino.rm.it/EG0/EGSCHTST45.HBL?ARG=52"
+  },
+  {
+   "nome": "Circolazione stradale",
+   "url": "https://www.comune.marino.rm.it/EG0/EGSCHTST45.HBL?ARG=25"
+  },
+  {
+   "nome": "Accesso agli atti",
+   "url": "https://www.comune.marino.rm.it/EG0/EGSCHTST45.HBL?ARG=39"
+  },
+  {
+   "nome": "Accesso all'informazione",
+   "url": "https://www.comune.marino.rm.it/EG0/EGSCHTST45.HBL?ARG=1"
+  },
+  {
+   "nome": "Ambiente",
+   "url": "https://www.comune.marino.rm.it/EG0/EGSCHTST45.HBL?ARG=48"
+  },
+  {
+   "nome": "Associazioni",
+   "url": "https://www.comune.marino.rm.it/EG0/EGSCHTST45.HBL?ARG=37"
+  },
+  {
+   "nome": "Attività dell'impresa",
+   "url": "https://www.comune.marino.rm.it/EG0/EGSCHTST45.HBL?ARG=22"
+  },
+  {
+   "nome": "Biblioteca",
+   "url": "https://www.comune.marino.rm.it/EG0/EGSCHTST45.HBL?ARG=54"
+  },
+  {
+   "nome": "Cimitero",
+   "url": "https://www.comune.marino.rm.it/EG0/EGSCHTST45.HBL?ARG=33"
+  },
+  {
+   "nome": "Comune",
+   "url": "https://www.comune.marino.rm.it/EG0/EGSCHTST45.HBL?ARG=41"
+  },
+  {
+   "nome": "Mappa del sito",
+   "url": "https://www.comune.marino.rm.it/EG0/EGSMISTMSIT.HBL?en=eg176&FUNZ=1"
+  }
+ ],
+ "uffici": [
+  {
+   "nome": "Ambiente e Gestione rifiuti",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_34.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "Assicurazioni e Sinistri",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_19.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "Avvocatura ufficio",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_65.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "Cerimoniale",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_16.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "Comando di Polizia Locale",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_79.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "Controllo successivo sugli atti",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_127.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "Coordinamento PEC (Piano emergenza comunale)",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_135.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "Datore di lavoro D. Lgs. n.81/2008",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_144.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "Economato",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_21.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "Efficientamento energetico impianti pubblici",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_142.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "Entrate tributarie e extra-tributarie",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_28.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "Gare ed appalti",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_149.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "Gestione e manutenzione della pubblica Illuminazione e degli impianti semaforici",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_141.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "Gestione giuridica ed economica del personale",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_161.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "Governance delle Società in house",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_30.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "Ispettori ambientali",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_137.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "Lavori pubblici",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_36.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "Manutenzione ordinaria e straordinaria Immobili comunali",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_143.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "Manutenzione Strade",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_162.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "Messi",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_70.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "Organi Istituzionali",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_73.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "Parco auto",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_136.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "PIAO",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_128.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "PNRR - Risorse Sovracomunali",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_87.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "Politiche degli animali",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_134.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "Privacy",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_18.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "Programmazione e gestione bilancio",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_29.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "Protocollo",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_13.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "Pubblica istruzione",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_22.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "Ragioneria e Contabilità",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_24.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "Rapporti con OIV",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_129.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "Segretario Generale",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_12.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "Segreteria del Sindaco",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_165.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "Servizi Cimiteriali",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_35.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "Servizi di Accoglienza",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_71.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "Servizi Sociali e Distretto sociosanitario RM 6.3",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_32.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "Servizio Demografico (Anagrafe, Stato civile, Elettorale, Statistica)",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_26.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "Servizio Idrico Integrato",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_37.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "Sosta a pagamento (Gestione e contratto)",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_155.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "Sport e affidamento impianti sportivi",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_133.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "Staff del Sindaco",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_72.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "SUAP",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_39.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "SUE - Sportello Unico Edilizia",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_145.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "Tecnologie I.T.",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_20.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "TPL e TPS",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_89.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "Tutela delle acque",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_163.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "Ufficio Affari generali",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_124.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "Ufficio Biblioteche",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_156.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "Ufficio Comunicazione",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_130.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "Ufficio Contenzioso",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_125.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "Ufficio Contratti",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_126.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "Ufficio Cultura",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_85.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "Ufficio Mitreo",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_158.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "Ufficio Musei",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_157.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "Ufficio Relazioni con il Pubblico - URP",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_15.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "Urbanistica",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_41.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "Valorizzazione e gestione del patrimonio dell'Ente",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_77.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  },
+  {
+   "nome": "Verde pubblico",
+   "url": "https://www.comune.marino.rm.it/amministrazione/uffici/ufficio_139.html",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T06:24:42.774974+00:00"
+  }
+ ],
+ "amministrazione_trasparente": {
+  "indice_url": "https://www.comune.marino.rm.it/amministrazione/trasparenza/trasparenza.html",
+  "bandi_attivi": [],
+  "pdf_presenti": false
+ }
+}

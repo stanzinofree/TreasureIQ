@@ -2923,6 +2923,40 @@ a {
   color: var(--sumi-soft, #666);
 }
 
+/* Documenti PDF linkati dalla pagina del bando (ciclo17). Puntatori alla
+   fonte, non una lettura: un elenco discreto di download, il chip «PDF» marca
+   il tipo, l'etichetta è il nome-file verbatim. */
+.bando-live__documenti {
+  margin-top: 0.4em;
+}
+.bando-live__documenti-lista {
+  list-style: none;
+  margin: 0.25em 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2em;
+}
+.bando-live__documenti-lista a {
+  color: var(--yamabuki-deep);
+  text-decoration: none;
+  font-size: 0.85rem;
+  overflow-wrap: anywhere;
+}
+.bando-live__documenti-lista a:hover {
+  text-decoration: underline;
+}
+.bando-live__documenti-tipo {
+  display: inline-block;
+  padding: 0 0.35em;
+  border: 1px solid var(--yamabuki-deep);
+  border-radius: 3px;
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  vertical-align: 0.08em;
+}
+
 /* Bandi e avvisi comunali (amministrazione trasparente): stesso registro
    della mappa servizi, indipendente per gate. Header collassato tap-toggle,
    caveat GIALLO — dato letto dal vivo, non verificato (D-B4/D-B7), nessun
@@ -4469,6 +4503,16 @@ a {
  * in una riga sola costringe a decifrarli, riscriverli sarebbe interpretarli. */
 .civica__contatto--orari span:not(.civica__contatto-label) {
   font-variant-numeric: tabular-nums;
+}
+
+/* La citazione verbatim sotto la forma normalizzata: un rimando alla fonte,
+ * non un secondo orario — più piccola e smorzata, così la forma pulita resta
+ * quella che si legge e il verbatim è lì per chi vuole ricontrollare. */
+.civica__contatto-fonte {
+  margin-top: 0.15rem;
+  font-size: 0.72rem;
+  font-style: italic;
+  color: var(--sumi-faint);
 }
 
 .civica__nota {

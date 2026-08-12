@@ -814,6 +814,10 @@ class OfficeOut(BaseModel):
     telefono: str | None
     email: str | None
     orari: str | None
+    #: La citazione verbatim dell'orario dal portale, quando `orari` è la forma
+    #: normalizzata: la card mostra la forma pulita e affianca la fonte
+    #: ricontrollabile (D-07). `None` quando `orari` è già il verbatim.
+    orari_fonte: str | None = None
     #: The certified address from IPA. Preferred over `email` as the recipient
     #: of a formal request, because a PEC obliges the body to reply while an
     #: ordinary inbox does not — and a citizen asking their comune to publish
@@ -929,6 +933,7 @@ def to_info_out(info: InfoAnswer) -> InfoOut:
                 telefono=info.office.telefono,
                 email=info.office.email,
                 orari=info.office.orari,
+                orari_fonte=info.office.orari_fonte,
                 # Resolved from the same `target` the rest of this function
                 # uses — a `(codice_istat, ente)` pair keyed by URP name — so
                 # the certified address cannot end up belonging to a different

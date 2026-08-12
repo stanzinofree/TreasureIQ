@@ -74,6 +74,7 @@ from treasureiq.bandi_live import BandiLiveEsito, BandoArricchito
 # `treasureiq.connettore.leggi_connettore` con `mock.patch`.
 from treasureiq import connettore
 from treasureiq.connettore import UfficioConnettore
+from treasureiq.orari_ufficio import leggi_orari_ufficio
 from treasureiq.integration import (
     AccessMode,
     Ente,
@@ -183,7 +184,13 @@ class OfficeAnswer:
     nome: str
     telefono: str | None
     email: str | None
+    #: Orario da mostrare: la forma normalizzata (`OrarioSettimanale.reso`)
+    #: quando la pagina la consente, altrimenti la citazione verbatim.
     orari: str | None
+    #: La citazione verbatim dell'orario dal portale, tenuta come fonte
+    #: ricontrollabile accanto alla forma normalizzata (D-07). `None` quando
+    #: `orari` è già il verbatim (niente da affiancare) o manca del tutto.
+    orari_fonte: str | None = None
 
 
 @dataclass
@@ -1645,6 +1652,24 @@ async def _build_informazione_answer(
         if ente.urp is not None
         else None
     )
+    # Fix on-demand orari-ufficio (ciclo18c): l'`office` qui sopra è l'URP di
+    # ripiego. Se il cittadino ha nominato un ufficio preciso («anagrafe»), il
+    # connettore ne conosce già la URL (catalogata dallo sweep): la si legge
+    # adesso e si cita il SUO orario, invece di quello dell'URP. Vale anche con
+    # un servizio già in match (`candidates` non vuoto): lì il ramo connettore
+    # più sotto non gira, e l'URP resterebbe l'unica scheda. Solo rail
+    # INFORMAZIONE, nessun verdetto; degrado onesto se la pagina non pubblica
+    # orari (D-32) — l'ufficio giusto con `orari=None`, mai l'URP travestito.
+    ufficio_nominato = _ufficio_chiesto(parole)
+    if ufficio_nominato is not None:
+        office_ufficio = await _office_da_ufficio_nominato(
+            codice_istat=ente.codice_istat,
+            topic=intent.topic,
+            ufficio_chiesto=ufficio_nominato,
+            disabilita_attiva=_disabilita_attiva_nel_testo(parole),
+        )
+        if office_ufficio is not None:
+            office = office_ufficio
     diagnosis = diagnosis_lines(ente)
     integration_cost = cost_lines(ente)
 
@@ -1674,7 +1699,7 @@ async def _build_informazione_answer(
         if esito_connettore is not None and (
             esito_connettore.uffici or esito_connettore.amministrazione_trasparente is not None
         ):
-            risposta_connettore = _risposta_da_connettore(
+            risposta_connettore = await _risposta_da_connettore(
                 comune_nome=ente.ente,
                 topic=intent.topic,
                 diagnosi=diagnosis,
@@ -1920,6 +1945,16 @@ def _ufficio_connettore_pertinente(
     candidati.extend(pezzo for pezzo in topic.value.split("_") if len(pezzo) > 3)
 
     for chiave in candidati:
+        # La parola LETTERALE prima dei suoi sinonimi: se «anagrafe» compare in
+        # un solo nome d'ufficio, è quello — anche quando i sinonimi
+        # (demografic/stato civile) ne toccherebbero altri e renderebbero il
+        # match «ambiguo». Un match letterale unico non è un indovinello
+        # (D-04): un comune con più uffici demografici non deve ricadere
+        # sull'URP per una parola che, presa alla lettera, è univoca.
+        letterali = [u for u in uffici if chiave in u.nome.lower()]
+        if len(letterali) == 1:
+            return letterali[0], False
+
         sottostringhe = _SINONIMI_UFFICIO_CONNETTORE.get(chiave, (chiave,))
         trovati = [
             ufficio
@@ -1931,6 +1966,87 @@ def _ufficio_connettore_pertinente(
         if len(trovati) > 1:
             return None, True
     return None, False
+
+
+async def _office_da_ufficio_nominato(
+    *,
+    codice_istat: str,
+    topic: Topic,
+    ufficio_chiesto: str,
+    disabilita_attiva: bool,
+) -> OfficeAnswer | None:
+    """L'ufficio NOMINATO dal cittadino, con il SUO orario letto adesso.
+
+    Il rail informazione, di default, attacca l'URP di ripiego: chiesto
+    «l'ufficio anagrafe», mostrava l'orario dell'URP. Il connettore conosce già
+    la URL della pagina di quell'ufficio (catalogata dallo sweep): la si legge
+    on-demand (`leggi_orari_ufficio`, cache-first + guardia SSRF) e se ne cita
+    l'orario vero. Il match sull'ufficio riusa `_ufficio_connettore_pertinente`
+    — stessa disciplina D-04 del ramo connettore, mai un ufficio indovinato.
+
+    `None` (l'URP resta) quando il connettore non è leggibile, non espone
+    uffici, o nessuno corrisponde in modo univoco alla parola nominata. Un
+    orario non trovato NON è un `None`: si torna l'ufficio giusto con
+    `orari=None`, così la scheda dice «non pubblicato per questo ufficio»
+    invece di spacciare quello dell'URP (D-32).
+    """
+    esito = await asyncio.to_thread(connettore.leggi_connettore, codice_istat)
+    if esito is None or not esito.uffici:
+        return None
+    # Stessa disciplina di match del ramo connettore (`_risposta_da_connettore`):
+    # unica definizione di «quale ufficio intendeva», letterale-prima-dei-sinonimi
+    # inclusa. Nessuna logica di match duplicata qui.
+    ufficio, _ambiguo = _ufficio_connettore_pertinente(
+        esito.uffici,
+        ufficio_chiesto=ufficio_chiesto,
+        topic=topic,
+        disabilita_attiva=disabilita_attiva,
+    )
+    if ufficio is None or not ufficio.url:
+        return None
+
+    display, fonte = await _orari_ufficio_live(codice_istat=codice_istat, ufficio=ufficio)
+    return OfficeAnswer(
+        nome=ufficio.nome,
+        telefono=", ".join(ufficio.telefoni) or None,
+        email=", ".join(ufficio.email) or None,
+        orari=display,
+        orari_fonte=fonte,
+    )
+
+
+async def _orari_ufficio_live(
+    *, codice_istat: str, ufficio: UfficioConnettore
+) -> tuple[str | None, str | None]:
+    """L'orario di QUESTO ufficio letto adesso dalla sua pagina: forma
+    normalizzata da mostrare più fonte verbatim, con ripiego onesto sul
+    catalogo. Ritorna `(display, fonte)`.
+
+    Punto unico di lettura orari-per-ufficio, condiviso dai due percorsi
+    INFORMAZIONE (rail URP/ingerito e ramo connettore): entrambi i comuni —
+    dentro o fuori `enti.json` — leggono l'orario nello stesso modo, così
+    nessuna famiglia di piattaforma ricade nel vecchio comportamento (orario
+    sempre `None` perché lo sweep non lo cattura per-ufficio).
+
+    `display` è la forma normalizzata (`OrarioSettimanale.reso`) quando la
+    pagina la consente; altrimenti la citazione verbatim. `fonte` è la
+    citazione verbatim SOLO quando abbiamo normalizzato (c'è qualcosa da
+    affiancare come prova, D-07); `None` quando `display` è già il verbatim o
+    non c'è nessun orario. Mai solleva.
+    """
+    if not ufficio.url:
+        return ufficio.orari, None
+    letto = await asyncio.to_thread(
+        leggi_orari_ufficio, codice_istat=codice_istat, url=ufficio.url
+    )
+    if letto is not None and letto.orario_schema is not None:
+        # Pagina letta e orario riconosciuto in forma normalizzabile: mostra la
+        # forma pulita, tieni il verbatim come fonte.
+        return letto.orario_schema.reso, letto.orari
+    # Niente schema: l'orario migliore che abbiamo (verbatim dalla pagina o dal
+    # catalogo) va mostrato così com'è, senza una fonte separata da affiancare.
+    verbatim = (letto.orari if letto is not None else None) or ufficio.orari
+    return verbatim, None
 
 
 def _testo_ufficio_connettore(*, comune_nome: str, ufficio: UfficioConnettore) -> str:
@@ -1964,7 +2080,7 @@ def _testo_elenco_uffici_connettore(*, comune_nome: str, uffici: list[UfficioCon
     )
 
 
-def _risposta_da_connettore(
+async def _risposta_da_connettore(
     *,
     comune_nome: str,
     topic: Topic,
@@ -2002,6 +2118,18 @@ def _risposta_da_connettore(
         ufficio_risposta = None
         citizen_effort = 2
     else:
+        # Orario di QUESTO ufficio letto ora dalla sua pagina (stesso punto
+        # unico del rail URP): lo sweep non cattura gli orari per-ufficio, così
+        # lo store li ha `None` e senza questa lettura la scheda direbbe «non
+        # pubblicato» anche dove la pagina li espone. Il valore da mostrare
+        # (forma normalizzata, `display`) va sostituito nell'ufficio così che
+        # ANCHE il testo (`_testo_ufficio_connettore`) lo citi, non solo
+        # l'`OfficeAnswer`; la fonte verbatim resta accanto sulla scheda.
+        display, fonte = await _orari_ufficio_live(
+            codice_istat=esito.codice_istat, ufficio=ufficio
+        )
+        if display != ufficio.orari:
+            ufficio = ufficio.model_copy(update={"orari": display})
         reply = _testo_ufficio_connettore(comune_nome=comune_nome, ufficio=ufficio)
         documento = DocumentAnswer(title=f"{ufficio.nome} — pagina del comune", url=ufficio.url)
         ufficio_risposta = OfficeAnswer(
@@ -2009,6 +2137,7 @@ def _risposta_da_connettore(
             telefono=", ".join(ufficio.telefoni) or None,
             email=", ".join(ufficio.email) or None,
             orari=ufficio.orari,
+            orari_fonte=fonte,
         )
         citizen_effort = 1
 
@@ -2177,7 +2306,7 @@ async def _risposta_live(
     if esito_connettore is not None and (
         esito_connettore.uffici or esito_connettore.amministrazione_trasparente is not None
     ):
-        risposta_connettore = _risposta_da_connettore(
+        risposta_connettore = await _risposta_da_connettore(
             comune_nome=comune.nome,
             topic=topic,
             diagnosi=diagnosi,

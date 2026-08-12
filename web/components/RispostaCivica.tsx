@@ -112,7 +112,7 @@ function dominioDi(url: string): string {
  * interpretato male manda qualcuno davanti a una porta chiusa. */
 function righeOrari(orari: string): string[] {
   return orari
-    .split(/[;|]/)
+    .split(/[;|]| · /)
     .map((r) => r.trim())
     .filter(Boolean);
 }
@@ -293,6 +293,16 @@ export default function RispostaCivica({
                 {righeOrari(office.orari).map((riga) => (
                   <span key={riga}>{riga}</span>
                 ))}
+                {/* La fonte verbatim accanto alla forma normalizzata: il
+                    cittadino può ricontrollare parola per parola contro la
+                    pagina del comune (D-07). Solo quando `orari` è la forma
+                    pulita — se `orari` è già il verbatim, `orari_fonte` è null
+                    e non si ripete la stessa riga due volte. */}
+                {office.orari_fonte && (
+                  <span className="civica__contatto-fonte">
+                    dal portale: «{office.orari_fonte}»
+                  </span>
+                )}
               </div>
             )}
           </div>

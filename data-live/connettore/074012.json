@@ -1,0 +1,553 @@
+{
+ "codice_istat": "074012",
+ "piattaforma": "wordpress_agid",
+ "letto_il": "2026-08-11T03:36:10.901158+00:00",
+ "aree_amministrative": [],
+ "uffici": [
+  {
+   "nome": "Amministrazione Commissariale",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/amministrazione-commissariale/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+  },
+  {
+   "nome": "Garante per i diritti delle persone con disabilità.",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/garante-per-i-diritti-delle-persone-con-disabilita/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+  },
+  {
+   "nome": "Anagrafe Sportello cambi di residenza",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/anagrafe-sportello-cambi-di-residenza/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+  },
+  {
+   "nome": "Anagrafe Sportello CIE",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/anagrafe-sportello-cie/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+  },
+  {
+   "nome": "Tributi-Canone unico patrimoniale",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/tributi-2/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+  },
+  {
+   "nome": "Tributi-Imposta di soggiorno",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/tributi-imposta-di-soggiorno/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+  },
+  {
+   "nome": "CUG (Comitato unico di garanzia)",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/cug-comitato-unico-di-garanzia/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+  },
+  {
+   "nome": "GAL Alto Salento 2020",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/gal-alto-salento-2020/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+  },
+  {
+   "nome": "Apulia Film Commission",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/apulia-film-commission/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+  },
+  {
+   "nome": "Consorzio “CIISAF”",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/consorzio-ciisaf/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+  },
+  {
+   "nome": "Consorzio Teatro Pubblico Pugliese",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/consorzio-teatro-pubblico-pugliese/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+  },
+  {
+   "nome": "Consorzio ASI – Brindisi",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/consorzio-asi-brindisi/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+  },
+  {
+   "nome": "Economato",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/economato-2/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+  },
+  {
+   "nome": "Urp",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/urp/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+  },
+  {
+   "nome": "Urbanistica",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/urbanistica/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+  },
+  {
+   "nome": "Cultura, Turismo e Sport",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/turismo-sport/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+  },
+  {
+   "nome": "Tributi",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/tributi/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+  },
+  {
+   "nome": "Suap",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/suap/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+  },
+  {
+   "nome": "Stato civile",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/stato-civile/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+  },
+  {
+   "nome": "Servizi Sociali",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/servizi-sociali/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+  },
+  {
+   "nome": "Segreteria Sindaco",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/segreteria-sindaco/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+  },
+  {
+   "nome": "Segreteria generale",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/segreteria-generale/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+  },
+  {
+   "nome": "Ragioneria",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/ragioneria/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+  },
+  {
+   "nome": "Pubblica Istruzione",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/pubblica-istruzione/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+  },
+  {
+   "nome": "Protocollo",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/protocollo/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+  },
+  {
+   "nome": "Programmi di finanziamento",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/programmi-di-finanziamento/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+  },
+  {
+   "nome": "Personale",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/personale/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+  },
+  {
+   "nome": "Patrimonio",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/patrimonio/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+  },
+  {
+   "nome": "Paesaggio",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/paesaggio/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+  },
+  {
+   "nome": "Messi",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/messi/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+  },
+  {
+   "nome": "Legale e contenzioso",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/legale-e-contenzioso/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+  },
+  {
+   "nome": "Igiene Urbana",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/igiene-urbana/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+  },
+  {
+   "nome": "Elettorale",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/economato/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+  },
+  {
+   "nome": "Demanio marittimo",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/demanio/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+  },
+  {
+   "nome": "CED – Sistemi informativi",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/sistemi-informativi/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+  },
+  {
+   "nome": "Biblioteca Comunale",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/biblioteca/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+  },
+  {
+   "nome": "Appalti e contratti",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/appalti-e-contratti/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+  },
+  {
+   "nome": "Anagrafe",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/anagrafe/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+  },
+  {
+   "nome": "Ambiente",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/ambiente/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+  },
+  {
+   "nome": "Polizia locale e Sicurezza urbana",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/polizia-locale-e-sicurezza-urbana/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+  },
+  {
+   "nome": "Lavori pubblici ed Opere pubbliche",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/lavori-pubblici-ed-opere-pubbliche/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+  },
+  {
+   "nome": "Pianificazione e gestione del territorio – Suap",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/pianificazione-e-gestione-del-territorio-suap/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+  },
+  {
+   "nome": "Servizi finanziari – Tributi – Risorse umane",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/servizi-finanziari-tributi-risorse-umane/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+  },
+  {
+   "nome": "Ambiente, Igiene urbana, Patrimonio disponibile e Programmi di finanziamento",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/ambiente-igiene-urbana-patrimonio-disponibile-e-programmi-di-finanziamento/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+  },
+  {
+   "nome": "Affari legali e Contratti",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/affari-legali-e-contratti/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+  },
+  {
+   "nome": "Affari generali e Istituzionali",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/affari-generali-e-istituzionali/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+  },
+  {
+   "nome": "VI COMMISSIONE Servizi Finanziari – Tributi – Demanio e Patrimonio",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/vi-commissione-servizi-finanziari-tributi-demanio-e-patrimonio/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+  },
+  {
+   "nome": "V COMMISSIONE Igiene, Ambiente ed Ecologia – Sanità – Servizi Sociali – Lavoro",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/v-commissione-igiene-ambiente-ed-ecologia-sanita-servizi-sociali-lavoro/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+  },
+  {
+   "nome": "IV COMMISSIONE Pubblica Istruzione – Cultura – Sport e Tempo Libero – Turismo",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/iv-commissione-pubblica-istruzione-cultura-sport-e-tempo-libero-turismo/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+  },
+  {
+   "nome": "III COMMISSIONE Lavori Pubblici – Urbanistica e Assetto del territorio",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/iii-commissione-lavori-pubblici-urbanistica-e-assetto-del-territorio/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+  },
+  {
+   "nome": "II COMMISSIONE Contenzioso – Appalti e Contratti – Polizia Locale – Trasporto Pubblico – Agricoltura – Annona – Attività Produttive",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/ii-commissione-contenzioso-appalti-e-contratti-polizia-locale-trasporto-pubblico-agricoltura-annona-attivita-produttive/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+  },
+  {
+   "nome": "I COMMISSIONE Affari Generali – Personale",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/i-commissione-affari-generali-personale/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+  },
+  {
+   "nome": "Parco Regionale Dune Costiere",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/parco-regionale-dune-costiere/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+  },
+  {
+   "nome": "Istituzione Museo",
+   "url": "https://www.comune.ostuni.br.it/amministrazione/unita_organizzativa/istituzione-museo/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T03:36:13.436846+00:00"
+  }
+ ],
+ "amministrazione_trasparente": {
+  "indice_url": "https://www.comune.ostuni.br.it/amministrazione-trasparente/",
+  "bandi_attivi": [],
+  "pdf_presenti": false
+ }
+}

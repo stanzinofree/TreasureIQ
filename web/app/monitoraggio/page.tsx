@@ -8,7 +8,7 @@
  *   - Fonti — which comuni TreasureIQ can currently answer from, and how many
  *     records each holds.
  *   - Sistemi — TreasureIQ's own components. Components that are only used at
- *     ingestion time (the local LLM, the SearXNG web search) are NOT probed on
+ *     ingestion time (the local LLM, the Brave web search) are NOT probed on
  *     every page load, so they report "non verificato" — a real state, never a
  *     masked "down".
  *   - Stato dati interni — headline numbers on what was actually recovered.

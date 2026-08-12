@@ -684,16 +684,28 @@ def _orari_da_campo(ufficio: dict) -> str | None:
     return None
 
 
+def estrai_orari_da_testo(html: str) -> str | None:
+    """Un orario nell'HTML di una pagina, citato alla lettera — o `None`.
+
+    Nucleo puro (nessuna rete, nessun `_Sonda`): dato l'HTML grezzo di una
+    pagina, ne estrae la citazione dell'orario. Riusato dal lettore on-demand
+    dell'ufficio nominato (`orari_ufficio.py`), che scarica i byte con la
+    guardia SSRF e li passa qui — l'unica definizione di "come si legge un
+    orario da una pagina" vive in questa funzione, non duplicata altrove.
+    """
+    testo = strip_html(html)[:MAX_CARATTERI_PAGINA]
+    testo = re.sub(r"\s+", " ", testo)
+    trovato = ORARIO_RE.search(testo)
+    return _cita(testo, trovato) if trovato else None
+
+
 def _orari_da_pagina(*, sonda: _Sonda, url: str) -> str | None:
     """Un orario nel testo della pagina dell'ufficio, citato alla lettera."""
     try:
         html = sonda.testo(url)
     except Exception:  # noqa: BLE001
         return None
-    testo = strip_html(html)[:MAX_CARATTERI_PAGINA]
-    testo = re.sub(r"\s+", " ", testo)
-    trovato = ORARIO_RE.search(testo)
-    return _cita(testo, trovato) if trovato else None
+    return estrai_orari_da_testo(html)
 
 
 def censisci_comune(

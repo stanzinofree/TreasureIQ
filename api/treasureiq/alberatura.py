@@ -32,12 +32,13 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Literal
-from urllib.parse import urlparse
+from urllib.parse import urlparse, urlsplit
 
 import httpx
 from pydantic import BaseModel
 
 from treasureiq.ingest.censimento import _Sonda
+from treasureiq.ingest.host_guard import fetch_guardato
 from treasureiq.mappa_connettore import (
     CPT_AMM_TRASPARENTE,
     Bando,
@@ -59,6 +60,15 @@ CACHE_DIR = LIVE_DIR / "alberatura"
 #: `bandi_live.MAX_BANDI_ARRICCHITI` (:81, =5) a monte — evita una cache
 #: gonfiata da un listing enorme, lasciando margine alla discovery.
 MAX_RIGHE_HALLEY = 20
+#: Cache DEDICATA dei rami (D-05, ciclo18a): TTL lungo, stesso ordine di
+#: grandezza di `sonda_live.GIORNI_VALIDITA` (:64, =14) — i rami di un
+#: comune non si spostano da un giorno all'altro come i bandi (`TTL_ORE`).
+#: Percorso separato da `_percorso_cache` (`bandi.json`): NON è la stessa
+#: cache riletta con uno schema diverso, è un file affiancato.
+TTL_ORE_RAMI = 14 * 24
+#: Cap byte sulla pagina AT già catalogata (`registro.endpoints.at`), stesso
+#: ordine di grandezza di `bandi_hgate.MAX_BYTES` (=4_000_000).
+MAX_BYTES_AT = 4_000_000
 
 
 @dataclass
@@ -87,6 +97,20 @@ class _CacheAlberatura(BaseModel):
 
     verificato_il: str
     bandi: list[BandoScoperto]
+
+
+class _CacheRami(BaseModel):
+    """Formato su disco della cache DEDICATA dei rami (D-05, ciclo18a):
+    stesso stampo atomico di `_CacheAlberatura` (`.tmp` + replace, cache
+    corrotta è cache assente, mai un negativo cachato) ma percorso, schema
+    e TTL propri (`_percorso_rami`/`TTL_ORE_RAMI`) — non tocca né rilegge
+    `bandi.json`. `rami` accetta `RamoAT` (dataclass, non pydantic)
+    verbatim: pydantic v2 valida/serializza dataclass semplici come campo
+    senza conversioni a mano, il contratto verso `_estrai_ramo` resta
+    identico dopo un giro disco."""
+
+    verificato_il: str
+    rami: list[RamoAT]
 
 
 # --- §1 Matching tollerante delle ancore -------------------------------
@@ -198,6 +222,18 @@ def _rami_da_pagina(base: str, pagina: str) -> list[RamoAT]:
 # --- §3 Decodifica esplicita del charset (A6) ---------------------------
 
 
+def _decodifica_bytes(content_type: str, contenuto: bytes) -> str:
+    """Nucleo di `_decodifica`, sui soli byte + header (senza un
+    `httpx.Response`): riusato da `_rami_da_registro`, che legge il corpo
+    via `fetch_guardato` (headers + bytes grezzi, non una `Response`)."""
+    trovato = re.search(r"charset=([\w-]+)", content_type, re.I)
+    charset = trovato.group(1) if trovato else "iso-8859-1"
+    try:
+        return contenuto.decode(charset, errors="replace")
+    except LookupError:
+        return contenuto.decode("iso-8859-1", errors="replace")
+
+
 def _decodifica(risposta: httpx.Response) -> str:
     """Decodifica il corpo secondo il charset dichiarato in Content-Type,
     ripiego ISO-8859-1 se assente o sconosciuto. I portali Halley dichiarano
@@ -205,12 +241,7 @@ def _decodifica(risposta: httpx.Response) -> str:
     accenti («mobilità» -> «mobilitÃ »), esattamente ciò che questa funzione
     esiste per evitare."""
     content_type = risposta.headers.get("content-type", "") or ""
-    trovato = re.search(r"charset=([\w-]+)", content_type, re.I)
-    charset = trovato.group(1) if trovato else "iso-8859-1"
-    try:
-        return risposta.content.decode(charset, errors="replace")
-    except LookupError:
-        return risposta.content.decode("iso-8859-1", errors="replace")
+    return _decodifica_bytes(content_type, risposta.content)
 
 
 # --- §4 Scoperta dei rami (due gradini) ---------------------------------
@@ -282,21 +313,124 @@ def _rami_html(sonda: _Sonda, base: str) -> list[RamoAT] | None:
     return rami or None
 
 
+# --- §4bis Cache dedicata dei rami (D-05) e semina dal registro (D-01/D-02) ---
+
+
+def _percorso_rami(codice_istat: str) -> Path:
+    return CACHE_DIR / codice_istat / "rami.json"
+
+
+def _rami_da_cache(codice_istat: str) -> list[RamoAT] | None:
+    """I rami già scoperti, letti dalla cache DEDICATA (`rami.json`, TTL
+    lungo `TTL_ORE_RAMI`) — percorso e schema separati da `_da_cache`
+    (`bandi.json`, TTL `TTL_ORE`): questa funzione non tocca né rilegge la
+    cache bandi. Cache assente, scaduta o illeggibile -> `None`, mai un
+    crash (stesso trattamento di `_da_cache`)."""
+    percorso = _percorso_rami(codice_istat)
+    if not percorso.exists():
+        return None
+    try:
+        esito = _CacheRami.model_validate_json(percorso.read_text("utf-8"))
+        eta = datetime.now(timezone.utc) - datetime.fromisoformat(esito.verificato_il)
+    except Exception:  # noqa: BLE001 — cache illeggibile è cache assente
+        logger.warning("cache rami illeggibile: %s", percorso)
+        return None
+    return esito.rami if eta.total_seconds() < TTL_ORE_RAMI * 3600 else None
+
+
+def _rami_in_cache(codice_istat: str, rami: list[RamoAT]) -> None:
+    """Scrittura atomica (`.tmp` + replace), stesso stampo di `_in_cache`.
+    Chiamata SOLO con `rami` non vuota — un esito negativo non deve mai
+    fissarsi su disco (stessa regola di `_in_cache`, [[predicato-gating-
+    cieco-a-nuovo-campo]])."""
+    percorso = _percorso_rami(codice_istat)
+    esito = _CacheRami(verificato_il=datetime.now(timezone.utc).isoformat(), rami=rami)
+    try:
+        percorso.parent.mkdir(parents=True, exist_ok=True)
+        provvisorio = percorso.with_suffix(".tmp")
+        provvisorio.write_text(esito.model_dump_json(indent=1), "utf-8")
+        provvisorio.replace(percorso)
+    except OSError as exc:
+        logger.warning("cache rami non scrivibile (%s): %s", percorso, exc)
+
+
+def _rami_da_registro(codice_istat: str, *, timeout: float) -> list[RamoAT] | None:
+    """Semina i rami dalla pagina AT già catalogata in
+    `registro.endpoints.at` (D-01: parte da un fatto già scritto da una
+    scansione connettore precedente, non ripete la ricerca sulla home).
+    Import lazy di `leggi_registro`, stesso stampo di
+    `bandi_live._piattaforma_e_connettore_at`: evita un giro di import a
+    modulo (`registro` non è mai stata una dipendenza forte di
+    `alberatura`) e qualunque anomalia (registro non ancora scritto, modulo
+    assente) degrada a `None`, mai un crash.
+
+    D-02: la URL catalogata NON salta la guardia host — è passata a
+    `fetch_guardato` con `host_atteso` derivato dal SUO stesso host
+    (`urlsplit(at_url).hostname`, minuscolo, senza `www.`), stesso stampo di
+    `bandi_hgate.bandi_hgate`. `base` per risolvere gli href relativi è lo
+    schema+host della pagina EFFETTIVAMENTE raggiunta (`url_finale` da
+    `fetch_guardato`, dopo eventuali redirect), non `comune.sito`: la pagina
+    AT può vivere su un SaaS fuori dal dominio del comune."""
+    try:
+        from treasureiq.registro import leggi_registro
+
+        record = leggi_registro(codice_istat)
+    except Exception:  # noqa: BLE001 — registro muto: nessun seme, mai un crash
+        return None
+    if record is None or not record.endpoints.at:
+        return None
+
+    at_url = record.endpoints.at
+    host = urlsplit(at_url).hostname
+    host_atteso = host.lower().removeprefix("www.") if host else None
+
+    esito = fetch_guardato(
+        at_url, timeout=timeout, max_bytes=MAX_BYTES_AT, host_atteso=host_atteso,
+    )
+    if esito is None:
+        return None
+    intestazioni, contenuto, url_finale = esito
+
+    pagina = _decodifica_bytes(intestazioni.get("content-type", "") or "", contenuto)
+    finale = urlsplit(url_finale)
+    base = f"{finale.scheme}://{finale.netloc}"
+    rami = _rami_da_pagina(base, pagina)
+    return rami or None
+
+
 def scopri_rami(codice_istat: str, *, timeout: float = 8.0) -> list[RamoAT] | None:
     """I rami ANAC bersaglio (bandi/agevolazioni) di un comune. `None` se il
     comune non è noto, non ha sito, o il portale non è leggibile / non ha
-    nessun ramo riconosciuto — esito onesto a monte, mai cache del negativo
-    (questa funzione non cachea nulla: la cache vive in `estrai_bandi`)."""
+    nessun ramo riconosciuto — esito onesto a monte.
+
+    Ordine di scoperta (D-01/D-05/D-06): (1) cache DEDICATA dei rami
+    (`_rami_da_cache`, TTL lungo) — zero rete se calda; (2) la pagina AT già
+    catalogata in `registro.endpoints.at` (`_rami_da_registro`) — nessuna
+    ripartenza dalla home, ma la guardia host resta intera; (3) la catena
+    originale (`_rami_wp` poi `_rami_html`, a partire dalla home del
+    comune). Qualunque gradino produca rami non vuoti finisce in cache —
+    anche il gradino (3), così una prossima chiamata non ripete la
+    scansione. Mai un negativo cachato (stessa regola di `_in_cache`)."""
+    cache = _rami_da_cache(codice_istat)
+    if cache is not None:
+        return cache
+
     comune = comune_per_codice(codice_istat)
     if comune is None or not comune.sito:
         return None
-    base = _base_con_schema(comune.sito)
-    if base is None:
-        return None
-    with _Sonda(timeout=timeout) as sonda:
-        rami = _rami_wp(sonda, base)
-        if rami is None:
-            rami = _rami_html(sonda, base)
+
+    rami = _rami_da_registro(codice_istat, timeout=timeout)
+    if not rami:
+        base = _base_con_schema(comune.sito)
+        if base is None:
+            return None
+        with _Sonda(timeout=timeout) as sonda:
+            rami = _rami_wp(sonda, base)
+            if rami is None:
+                rami = _rami_html(sonda, base)
+
+    if rami:
+        _rami_in_cache(codice_istat, rami)
     return rami
 
 

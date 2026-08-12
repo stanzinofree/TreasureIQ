@@ -1,0 +1,335 @@
+{
+ "codice_istat": "058122",
+ "piattaforma": "wordpress_agid",
+ "letto_il": "2026-08-11T21:33:06.335288+00:00",
+ "aree_amministrative": [],
+ "uffici": [
+  {
+   "nome": "Segreteria del Sindaco",
+   "url": "https://comune.fontenuova.rm.it/amministrazione/unita_organizzativa/segreteria-del-sindaco/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:33:06.598646+00:00"
+  },
+  {
+   "nome": "Ufficio Elettorale",
+   "url": "https://comune.fontenuova.rm.it/amministrazione/unita_organizzativa/ufficio-elettorale/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:33:06.598646+00:00"
+  },
+  {
+   "nome": "Settore Amministrativo",
+   "url": "https://comune.fontenuova.rm.it/amministrazione/unita_organizzativa/settore-amministrativo/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:33:06.598646+00:00"
+  },
+  {
+   "nome": "Revisori dei conti",
+   "url": "https://comune.fontenuova.rm.it/amministrazione/unita_organizzativa/revisori-dei-conti/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:33:06.598646+00:00"
+  },
+  {
+   "nome": "Ufficio Urbanistica",
+   "url": "https://comune.fontenuova.rm.it/amministrazione/unita_organizzativa/ufficio-urbanistica/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:33:06.598646+00:00"
+  },
+  {
+   "nome": "Ufficio Patrimonio",
+   "url": "https://comune.fontenuova.rm.it/amministrazione/unita_organizzativa/ufficio-patrimonio/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:33:06.598646+00:00"
+  },
+  {
+   "nome": "Ufficio Lavori Pubblici",
+   "url": "https://comune.fontenuova.rm.it/amministrazione/unita_organizzativa/ufficio-lavori-pubblici/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:33:06.598646+00:00"
+  },
+  {
+   "nome": "Ufficio Edilizia Privata",
+   "url": "https://comune.fontenuova.rm.it/amministrazione/unita_organizzativa/ufficio-edilizia-privata/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:33:06.598646+00:00"
+  },
+  {
+   "nome": "Ufficio Attività Produttive",
+   "url": "https://comune.fontenuova.rm.it/amministrazione/unita_organizzativa/ufficio-attivita-produttive/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:33:06.598646+00:00"
+  },
+  {
+   "nome": "Ufficio Ambiente",
+   "url": "https://comune.fontenuova.rm.it/amministrazione/unita_organizzativa/ufficio-ambiente/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:33:06.598646+00:00"
+  },
+  {
+   "nome": "Settore Tecnico-Urbanistico-Ambientale",
+   "url": "https://comune.fontenuova.rm.it/amministrazione/unita_organizzativa/settore-tecnico-ambientale/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:33:06.598646+00:00"
+  },
+  {
+   "nome": "U.T.D. – Ufficio per la Transizione al Digitale",
+   "url": "https://comune.fontenuova.rm.it/amministrazione/unita_organizzativa/u-t-d-ufficio-per-la-transizione-al-digitale/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:33:06.598646+00:00"
+  },
+  {
+   "nome": "Ufficio Risorse Umane",
+   "url": "https://comune.fontenuova.rm.it/amministrazione/unita_organizzativa/ufficio-risorse-umane/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:33:06.598646+00:00"
+  },
+  {
+   "nome": "Ufficio Gestione Entrate",
+   "url": "https://comune.fontenuova.rm.it/amministrazione/unita_organizzativa/ufficio-gestione-entrate/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:33:06.598646+00:00"
+  },
+  {
+   "nome": "Ufficio Pubblica Istruzione",
+   "url": "https://comune.fontenuova.rm.it/amministrazione/unita_organizzativa/ufficio-servizio-pubblica-istruzione/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:33:06.598646+00:00"
+  },
+  {
+   "nome": "Ufficio Stato Civile",
+   "url": "https://comune.fontenuova.rm.it/amministrazione/unita_organizzativa/ufficio-stato-civile/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:33:06.598646+00:00"
+  },
+  {
+   "nome": "Ufficio Servizi Demografici",
+   "url": "https://comune.fontenuova.rm.it/amministrazione/unita_organizzativa/ufficio-servizio-demografico/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:33:06.598646+00:00"
+  },
+  {
+   "nome": "Ufficio Sportello Home Care Premium",
+   "url": "https://comune.fontenuova.rm.it/amministrazione/unita_organizzativa/ufficio-sportello-home-care-premium/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:33:06.598646+00:00"
+  },
+  {
+   "nome": "Area ADI (Assegno Di Inclusione)",
+   "url": "https://comune.fontenuova.rm.it/amministrazione/unita_organizzativa/area-adi-assegno-di-inclusione/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:33:06.598646+00:00"
+  },
+  {
+   "nome": "Area Inclusione",
+   "url": "https://comune.fontenuova.rm.it/amministrazione/unita_organizzativa/area-inclusione/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:33:06.598646+00:00"
+  },
+  {
+   "nome": "Area Minori",
+   "url": "https://comune.fontenuova.rm.it/amministrazione/unita_organizzativa/area-minori/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:33:06.598646+00:00"
+  },
+  {
+   "nome": "Ufficio Segretariato Sociale",
+   "url": "https://comune.fontenuova.rm.it/amministrazione/unita_organizzativa/ufficio-segretariato-sociale/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:33:06.598646+00:00"
+  },
+  {
+   "nome": "Ufficio Servizi Sociali",
+   "url": "https://comune.fontenuova.rm.it/amministrazione/unita_organizzativa/ufficio-servizi-sociali/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:33:06.598646+00:00"
+  },
+  {
+   "nome": "Ufficio Protocollo e Messi",
+   "url": "https://comune.fontenuova.rm.it/amministrazione/unita_organizzativa/ufficio-protocollo-e-messi/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:33:06.598646+00:00"
+  },
+  {
+   "nome": "Ufficio Programmazione, bilancio ed economato",
+   "url": "https://comune.fontenuova.rm.it/amministrazione/unita_organizzativa/ufficio-programmazione-bilancio-ed-economato/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:33:06.598646+00:00"
+  },
+  {
+   "nome": "Ufficio Affari Generali",
+   "url": "https://comune.fontenuova.rm.it/amministrazione/unita_organizzativa/affari-generali-2/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:33:06.598646+00:00"
+  },
+  {
+   "nome": "Settore Economico-Finanziario",
+   "url": "https://comune.fontenuova.rm.it/amministrazione/unita_organizzativa/settore-amministrativo-economico-finanziario/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:33:06.598646+00:00"
+  },
+  {
+   "nome": "Polizia Locale di Fonte Nuova",
+   "url": "https://comune.fontenuova.rm.it/amministrazione/unita_organizzativa/polizia-locale-di-fonte-nuova/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:33:06.598646+00:00"
+  },
+  {
+   "nome": "URP – Ufficio Relazioni con il pubblico",
+   "url": "https://comune.fontenuova.rm.it/amministrazione/unita_organizzativa/urp-ufficio-relazioni-con-il-pubblico/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:33:06.598646+00:00"
+  },
+  {
+   "nome": "Consiglio Comunale",
+   "url": "https://comune.fontenuova.rm.it/amministrazione/unita_organizzativa/consiglio-comunale/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:33:06.598646+00:00"
+  },
+  {
+   "nome": "Giunta Comunale",
+   "url": "https://comune.fontenuova.rm.it/amministrazione/unita_organizzativa/giunta-comunale/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:33:06.598646+00:00"
+  },
+  {
+   "nome": "Sindaco",
+   "url": "https://comune.fontenuova.rm.it/amministrazione/unita_organizzativa/sindaco/",
+   "telefoni": [],
+   "email": [],
+   "pec": [],
+   "orari": null,
+   "source_typed": false,
+   "letto_il": "2026-08-11T21:33:06.598646+00:00"
+  }
+ ],
+ "amministrazione_trasparente": {
+  "indice_url": "https://comune.fontenuova.rm.it/amministrazione-trasparente/",
+  "piattaforma_at": "wordpress_generico",
+  "bandi_attivi": [],
+  "pdf_presenti": false
+ },
+ "endpoints": null
+}

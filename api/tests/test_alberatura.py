@@ -7,7 +7,9 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from types import SimpleNamespace
 
+import httpx
 import pytest
 
 from treasureiq.alberatura import (
@@ -289,3 +291,168 @@ def test_estrai_bandi_none_se_rami_di_vendor_non_gestito(monkeypatch: pytest.Mon
     monkeypatch.setattr(alberatura_mod, "_da_cache", lambda codice: None)
     monkeypatch.setattr(alberatura_mod, "scopri_rami", lambda codice_istat, *, timeout=8.0: [ramo])
     assert estrai_bandi("048052") is None
+
+
+# --- ciclo18a B1: semina da `registro.endpoints.at` + cache dedicata rami ---
+
+_COMUNE_BENEVENTO = ComuneNoto(
+    codice_istat="062009", nome="Benevento", provincia="BN", regione="Campania", sito=BASE_BENEVENTO
+)
+
+#: Pagina AT catalogata su un host DIVERSO da `comune.sito` (SaaS fuori dal
+#: dominio del comune) — dimostra che `base` per gli href relativi è
+#: derivato da `url_finale`, mai da `comune.sito` (NOTA 3 del brief).
+_AT_URL_FUORI_HOST = "https://trasparenza-esempio.saas.it/amministrazione-trasparente/"
+
+
+def _rifiuta_chiamata(*args: object, **kwargs: object) -> None:
+    raise AssertionError("non doveva essere chiamata")
+
+
+def test_scopri_rami_semina_da_endpoints_at(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    """D-01/D-06: con `endpoints.at` catalogato, `scopri_rami` fetcha SOLO
+    quella pagina (via `fetch_guardato`, guardia host intera) e non tocca
+    `_rami_wp`/`_rami_html` — niente ripartenza dalla home. `base` per gli
+    href relativi è l'host della pagina AT realmente raggiunta (fixture
+    `benevento_menu_at.html`, off-host rispetto a `comune.sito`)."""
+    import treasureiq.alberatura as alberatura_mod
+
+    monkeypatch.setattr(alberatura_mod, "CACHE_DIR", tmp_path)
+    monkeypatch.setattr(alberatura_mod, "comune_per_codice", lambda codice: _COMUNE_BENEVENTO)
+    monkeypatch.setattr(
+        "treasureiq.registro.leggi_registro",
+        lambda codice: SimpleNamespace(endpoints=SimpleNamespace(at=_AT_URL_FUORI_HOST)),
+    )
+    monkeypatch.setattr(alberatura_mod, "_rami_wp", _rifiuta_chiamata)
+    monkeypatch.setattr(alberatura_mod, "_rami_html", _rifiuta_chiamata)
+
+    pagina = _leggi_bytes("benevento_menu_at.html")
+
+    def _fetch_guardato_finto(url: str, *, timeout: float, max_bytes: int, host_atteso: str | None):
+        assert url == _AT_URL_FUORI_HOST
+        assert host_atteso == "trasparenza-esempio.saas.it"
+        return httpx.Headers({"content-type": "text/html; charset=windows-1252"}), pagina, url
+
+    monkeypatch.setattr(alberatura_mod, "fetch_guardato", _fetch_guardato_finto)
+
+    rami = scopri_rami("062009")
+
+    assert rami is not None
+    assert len(rami) == 2
+    per_tipo = {ramo.tipo: ramo for ramo in rami}
+    # concorso: ancora già assoluta nella fixture, host suo (Benevento)
+    assert per_tipo["concorso"].url == (
+        "https://web.comune.benevento.it/zf/index.php/bandi-di-concorso"
+    )
+    # agevolazione: ancora relativa, risolta contro l'host della pagina AT
+    # effettivamente raggiunta (fuori dal dominio del comune) — NOTA 3
+    assert per_tipo["agevolazione"].url.startswith("https://trasparenza-esempio.saas.it")
+    assert per_tipo["agevolazione"].url.endswith("/categoria/118")
+
+    # persistenza (D-05): il seme finisce in cache dedicata rami.json
+    assert (tmp_path / "062009" / "rami.json").exists()
+
+
+def test_scopri_rami_endpoints_at_assente_usa_catena_originale(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    """D-02: registro muto/senza `at` -> la catena originale (home del
+    comune) resta invariata, e `fetch_guardato` non viene mai chiamato."""
+    import treasureiq.alberatura as alberatura_mod
+
+    comune_figline = ComuneNoto(
+        codice_istat="048052", nome="Figline", provincia="FI", regione="Toscana", sito=BASE_FIGLINE
+    )
+    ramo_wp = RamoAT(etichetta="Bandi", url=f"{BASE_FIGLINE}/wp-json/wp/v2/amm-trasparente?x=1", tipo="concorso")
+
+    monkeypatch.setattr(alberatura_mod, "CACHE_DIR", tmp_path)
+    monkeypatch.setattr(alberatura_mod, "comune_per_codice", lambda codice: comune_figline)
+    monkeypatch.setattr(
+        "treasureiq.registro.leggi_registro",
+        lambda codice: SimpleNamespace(endpoints=SimpleNamespace(at=None)),
+    )
+    monkeypatch.setattr(alberatura_mod, "fetch_guardato", _rifiuta_chiamata)
+    monkeypatch.setattr(alberatura_mod, "_rami_wp", lambda sonda, base: [ramo_wp])
+    monkeypatch.setattr(alberatura_mod, "_rami_html", _rifiuta_chiamata)
+
+    rami = scopri_rami("048052")
+
+    assert rami == [ramo_wp]
+
+
+def test_scopri_rami_json_caldo_zero_fetch(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+    """Cache `rami.json` calda: zero rete, zero lettura registro, zero
+    lookup comune — la cache dedicata risponde da sola."""
+    import treasureiq.alberatura as alberatura_mod
+
+    ramo = RamoAT(etichetta="x", url=f"{BASE_FIGLINE}/wp-json/wp/v2/amm-trasparente?x=1", tipo="concorso")
+    monkeypatch.setattr(alberatura_mod, "CACHE_DIR", tmp_path)
+    alberatura_mod._rami_in_cache("048052", [ramo])
+
+    monkeypatch.setattr(alberatura_mod, "comune_per_codice", _rifiuta_chiamata)
+    monkeypatch.setattr(alberatura_mod, "fetch_guardato", _rifiuta_chiamata)
+    monkeypatch.setattr("treasureiq.registro.leggi_registro", _rifiuta_chiamata)
+    monkeypatch.setattr(alberatura_mod, "_rami_wp", _rifiuta_chiamata)
+    monkeypatch.setattr(alberatura_mod, "_rami_html", _rifiuta_chiamata)
+
+    rami = scopri_rami("048052")
+
+    assert rami == [ramo]
+
+
+def test_scopri_rami_json_corrotto_riscopre(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+    """Predicato di gating (D-05, [[predicato-gating-cieco-a-nuovo-campo]]):
+    `rami.json` illeggibile/campo mancante è cache assente, mai un crash —
+    `scopri_rami` riscopre come se non ci fosse nulla su disco."""
+    import treasureiq.alberatura as alberatura_mod
+
+    comune_figline = ComuneNoto(
+        codice_istat="048052", nome="Figline", provincia="FI", regione="Toscana", sito=BASE_FIGLINE
+    )
+    ramo_wp = RamoAT(etichetta="Bandi", url=f"{BASE_FIGLINE}/wp-json/wp/v2/amm-trasparente?x=1", tipo="concorso")
+
+    monkeypatch.setattr(alberatura_mod, "CACHE_DIR", tmp_path)
+    percorso = tmp_path / "048052" / "rami.json"
+    percorso.parent.mkdir(parents=True, exist_ok=True)
+    percorso.write_text('{"verificato_il": "not-a-date"}', "utf-8")  # campo `rami` mancante
+
+    monkeypatch.setattr(alberatura_mod, "comune_per_codice", lambda codice: comune_figline)
+    monkeypatch.setattr(
+        "treasureiq.registro.leggi_registro",
+        lambda codice: SimpleNamespace(endpoints=SimpleNamespace(at=None)),
+    )
+    monkeypatch.setattr(alberatura_mod, "_rami_wp", lambda sonda, base: [ramo_wp])
+    monkeypatch.setattr(alberatura_mod, "_rami_html", _rifiuta_chiamata)
+
+    rami = scopri_rami("048052")
+
+    assert rami == [ramo_wp]
+
+
+def test_scopri_rami_esito_vuoto_non_si_cachea(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    """Nessun ramo scoperto da nessun gradino -> `None`, e `rami.json` non
+    viene mai scritto (stessa regola di `_in_cache`: mai un negativo su
+    disco)."""
+    import treasureiq.alberatura as alberatura_mod
+
+    comune_figline = ComuneNoto(
+        codice_istat="048052", nome="Figline", provincia="FI", regione="Toscana", sito=BASE_FIGLINE
+    )
+
+    monkeypatch.setattr(alberatura_mod, "CACHE_DIR", tmp_path)
+    monkeypatch.setattr(alberatura_mod, "comune_per_codice", lambda codice: comune_figline)
+    monkeypatch.setattr(
+        "treasureiq.registro.leggi_registro",
+        lambda codice: SimpleNamespace(endpoints=SimpleNamespace(at=None)),
+    )
+    monkeypatch.setattr(alberatura_mod, "_rami_wp", lambda sonda, base: None)
+    monkeypatch.setattr(alberatura_mod, "_rami_html", lambda sonda, base: None)
+
+    rami = scopri_rami("048052")
+
+    assert rami is None
+    assert not (tmp_path / "048052" / "rami.json").exists()

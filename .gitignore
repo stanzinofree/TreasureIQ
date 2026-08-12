@@ -72,3 +72,6 @@ data/feedback.jsonl
 
 # Backup locali (make backup): storico.db + data-live/, mai versionati.
 backups/
+
+# video sorgente di presentazione (pesante): sul sito va la versione compressa in site/assets/
+TreasureIQ_low.mp4

@@ -32,7 +32,7 @@ web fatte in quel momento al sito del comune, la pagina dell'ufficio, la home,
 lo stemma. Un dato servito da cache non comparirebbe: ogni riga è la prova che
 quella risposta è fresca.
 
-![App TreasureIQ e monitor dei fetch live: le domande su tre comuni, i risultati reali, le chiamate web che scorrono nel log](site/assets/tiq-demo-live.gif)
+![App TreasureIQ e monitor dei fetch live: le domande su tre comuni, i risultati reali, le chiamate web che scorrono nel log](docs/assets/tiq-demo-live.gif)
 
 *Caso reale: l'app in uso, alternata al monitor `/demo/logs` esposto dall'API.*
 

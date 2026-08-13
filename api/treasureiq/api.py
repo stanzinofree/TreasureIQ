@@ -1833,11 +1833,15 @@ _DEMO_LOGS_HTML = """<!doctype html>
       for (const ev of d.eventi) { ultimoId = ev.id; riga(ev); }
     } catch (e) {}
   }
-  // Partiamo da «ora»: allineiamo al max in buffer, poi mostriamo solo i
-  // fetch nuovi — quelli scatenati dalla navigazione in corso.
+  // Al load mostriamo gli ultimi fetch già in buffer (le chiamate reali
+  // appena fatte al sito del comune restano visibili), poi passiamo al
+  // polling incrementale per le nuove — così il monitor non parte mai vuoto.
   fetch("/api/freschezza/recent")
     .then((r) => r.json())
-    .then((d) => { for (const ev of d.eventi) ultimoId = Math.max(ultimoId, ev.id); })
+    .then((d) => {
+      for (const ev of d.eventi.slice(-12)) { ultimoId = ev.id; riga(ev); }
+      for (const ev of d.eventi) ultimoId = Math.max(ultimoId, ev.id);
+    })
     .catch(() => {})
     .finally(() => setInterval(polla, 500));
 </script>

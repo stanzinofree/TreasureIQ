@@ -602,6 +602,19 @@ async def _eredita_dal_contesto(
         topic=intent.topic, testo=messaggio
     )
 
+    # Un topic che le parole di QUESTO turno non reggono è una congettura del
+    # modello (D-47). Prima di ereditare dal passato, guarda se il cittadino ha
+    # nominato lui stesso un topic: «quali sono gli orari dell'anagrafe?» porta
+    # «anagrafe» nel testo, ma il modello classificava `accesso_atti` — un'etichetta
+    # senza riscontro, che su un turno singolo (storia vuota) passava intatta. La
+    # parola scritta batte la congettura, con lo stesso vocabolario chiuso del
+    # recupero (`_topic_da_storia`, qui su un solo messaggio).
+    if serve_tema:
+        dal_messaggio = _topic_da_storia(storia=[messaggio])
+        if dal_messaggio is not None:
+            intent = intent.model_copy(update={"topic": dal_messaggio})
+            serve_tema = False
+
     if not (serve_comune or serve_tema) or not storia:
         return intent
 
@@ -2743,6 +2756,20 @@ def _premessa_fuori_copertura(
     # vuoto e' peggio di non prometterla: chi legge cerca risultati che non
     # esistono e conclude che l'interfaccia sia rotta, invece che la ricerca
     # non abbia trovato niente.
+    # Ciclo18c: se lo sportello nominato è stato letto ORA dal portale (card a
+    # lato con orari veri), la prosa lo dice — invece del solo «verifica tu».
+    # La copertura piena (agevolazioni) resta incerta: `base` lo ammette già.
+    # Ma l'orario mostrato non è un risultato web da controllare, è letto dalla
+    # loro pagina; dirlo «da verificare tu» lo sminuirebbe e contraddirebbe la
+    # card. Precede `trovati` così la scansione web non riprende la parola.
+    ufficio_letto = (
+        risposta is not None
+        and risposta.info is not None
+        and risposta.info.office is not None
+        and getattr(risposta.info.office, "orari", None)
+    )
+    if ufficio_letto:
+        return base + " L'orario dello sportello, qui a lato, l'ho letto ora dal loro portale."
     trovati = (
         risposta is not None
         and risposta.info is not None
@@ -4094,6 +4121,43 @@ async def build_chat_answer(
         # sinistra come «numeri utili», con fonte e data del controllo. Muto:
         # se lo scrape non trova nulla, `numeri_utili` resta None.
         numeri = _numeri_utili_al_volo(nominato.codice_istat)
+        # L'ufficio nominato (o implicito nel topic: «orari dell'anagrafe»)
+        # letto ORA dal connettore, come nel ramo coperto (ciclo18c). Senza
+        # questo, il fuori-copertura ripiegava sulla SOLA ricerca web e l'orario
+        # vero dello sportello — che il portale espone — non compariva mai (era
+        # il buco di scenario C, Camposampiero). NON si filtra qui su
+        # `connettore.indirizzabile`: quel flag misura la SOLA rotta REST AgID
+        # (`API_UFFICI`) e taglia fuori i connettori a pagina statica come
+        # OpenPA (OpenCity), che leggono l'ufficio da `{base}/Amministrazione/
+        # Uffici` senza API. L'autorità su «si può leggere» è
+        # `_office_da_ufficio_nominato` stessa (via `leggi_connettore`), che
+        # torna `None` se la piattaforma non ha un connettore: qui basta che la
+        # sonda sia passata (comune raggiungibile) e che la domanda riguardi uno
+        # sportello. Il match è per nome o per topic, mai un ufficio indovinato
+        # (D-04/D-32). Costo: una lettura connettore in più solo su una domanda
+        # sportello/orari fuori copertura — self-guarding, mai su altri topic.
+        # `_ufficio_chiesto` cerca con una regex tutta minuscola e senza
+        # IGNORECASE: passargli `message` grezzo faceva mancare il match su un
+        # «Ufficio Anagrafe» scritto con l'iniziale maiuscola. Ogni altro caller
+        # gli passa parole già in minuscolo — qui pareggiamo, una volta sola.
+        parole = message.lower()
+        if (
+            connettore is not None
+            and risposta.info is not None
+            and risposta.topic is not None
+            and (_ufficio_chiesto(parole) is not None or "orari" in parole)
+        ):
+            office_letto = await _office_da_ufficio_nominato(
+                codice_istat=nominato.codice_istat,
+                topic=risposta.topic,
+                ufficio_chiesto=_ufficio_chiesto(parole) or "",
+                disabilita_attiva=_disabilita_attiva_nel_testo(message),
+            )
+            if office_letto is not None:
+                risposta = replace(
+                    risposta,
+                    info=replace(risposta.info, office=office_letto, letto_dal_vivo=True),
+                )
         # La coda di `_componi_risposta` e' un vicolo cieco («non sono riuscito a
         # collegare... rivolgiti all'URP»): ha senso quando NON abbiamo cercato,
         # ma contraddice la premessa quando la ricerca live ha trovato pagine —

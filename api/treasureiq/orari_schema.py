@@ -51,8 +51,11 @@ _GIORNO = (
 
 #: Un'ora scritta come HH.MM o HH:MM. Nessuna forma «9-12» senza minuti: è
 #: indistinguibile da un intervallo di prezzi o di numeri, e prenderla per un
-#: orario è esattamente il modo di sbagliare che il censimento evita.
-_ORA = r"\d{1,2}[:.]\d{2}"
+#: orario è esattamente il modo di sbagliare che il censimento evita. Le
+#: guardie ai bordi (gemelle di `censimento._ORA`) tengono fuori i frammenti di
+#: telefono: in «06/93295.271» la sottostringa «95.27» è preceduta da cifra e
+#: seguita da cifra, quindi non passa — altrimenti finiva negli orari resi.
+_ORA = r"(?<![\d.])\d{1,2}[:.]\d{2}(?!\d)(?!\.\d)"
 
 #: Tokenizza il testo in giorni e ore, in ordine di comparsa. Il `\b` su
 #: entrambi i lati del giorno tiene fuori le sottostringhe dentro altre parole.
@@ -115,6 +118,14 @@ def _indice_giorno(token: str) -> int:
 
 
 _PREFISSO_INDICE = {"lun": 0, "mar": 1, "mer": 2, "gio": 3, "ven": 4, "sab": 5, "dom": 6}
+
+
+#: «chiuso»/«chiusa»/«chiuse» fra due giorni: il giorno PRIMA è chiuso, non un
+#: anello di un intervallo. Senza questa guardia «Giovedì: chiuso | Venerdì
+#: 09-12» incollava Giovedì a Venerdì e rendeva «Gio–Ven aperto» — in aperta
+#: contraddizione con la fonte verbatim mostrata accanto (D-07: la forma non
+#: deve dire più della pagina).
+_CHIUSO_RE = re.compile(r"chius[oae]", re.IGNORECASE)
 
 
 def _sep_e_solo_trattino(testo: str) -> bool:
@@ -194,6 +205,10 @@ def estrai_orario_strutturato(html: str) -> OrarioSettimanale | None:
         return None
 
     righe: list[RigaOrario] = []
+    #: I giorni canonici già emessi. Un giorno che ricompare apre una SECONDA
+    #: settimana — un'altra tabella orari sotto la prima (apertura al pubblico
+    #: e, staccato, un altro servizio) — non la continuazione della stessa.
+    visti: set[int] = set()
     inizio_span: int | None = None
     fine_span = 0
     i = 0
@@ -206,6 +221,11 @@ def estrai_orario_strutturato(html: str) -> OrarioSettimanale | None:
         giorni_riga = [token[i]]
         i += 1
         while i < n and token[i].lastgroup == "g":
+            # Un «chiuso» fra il giorno raccolto e il prossimo marca il primo
+            # come chiuso: si scarta dal gruppo, così i suoi (inesistenti)
+            # orari non vengono presi da quelli del giorno dopo.
+            if _CHIUSO_RE.search(testo[giorni_riga[-1].end() : token[i].start()]):
+                giorni_riga.pop()
             giorni_riga.append(token[i])
             i += 1
         # Le ore devono seguire i giorni, vicine: altrimenti non è una riga.
@@ -225,12 +245,15 @@ def estrai_orario_strutturato(html: str) -> OrarioSettimanale | None:
             break  # sezione nuova, non lo stesso orario
 
         indici = _giorni_di_riga(giorni_riga, testo)
+        if righe and any(g in visti for g in indici):
+            break  # un giorno già emesso ricompare: seconda settimana, si ferma
         riga = RigaOrario(
             giorni=indici,
             etichetta=_rendi_giorni(indici),
             fasce=_fasce_da_ore(ore_riga),
         )
         righe.append(riga)
+        visti.update(indici)
         if inizio_span is None:
             inizio_span = giorni_riga[0].start()
         fine_span = ultima_fine

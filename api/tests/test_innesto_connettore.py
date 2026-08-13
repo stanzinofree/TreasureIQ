@@ -166,9 +166,55 @@ def test_connettore_ricco_precede_il_web_e_mostra_recapiti_verbatim(
     assert risposta.info.office.email == "demografici@comune.ciampino.roma.it"
     assert "NIENTE DI PUBBLICATO" not in risposta.reply
     assert "06 1234567" in risposta.reply
-    # L-3: la card strutturata (B5) legge `esito_connettore`, non `reply`.
+    # Ufficio PUNTATO: la scheda `info.office` (sopra) È la risposta e porta i
+    # recapiti verbatim. Il dump completo del portale (`esito_connettore`, reso
+    # dal blocco «letto ora» con tutti gli uffici + amministrazione trasparente)
+    # si stacca: allegarlo qui sotterrerebbe la scheda chiesta sotto 37 sportelli
+    # e i bandi AT che nessuno ha chiesto. Resta solo quando NESSUN ufficio
+    # combacia (l'elenco È l'aiuto) — vedi `test_connettore_senza_match_*`.
+    assert risposta.esito_connettore is None
+
+
+def _esito_solo_ufficio_estraneo() -> EsitoConnettore:
+    """Un solo ufficio, del tutto estraneo al topic anagrafe: il match fallisce
+    e la risposta ripiega sull'elenco degli uffici del portale."""
+    return EsitoConnettore(
+        codice_istat=CIAMPINO.codice_istat,
+        piattaforma="municipium",
+        letto_il="2026-08-08T10:00:00+00:00",
+        uffici=[
+            UfficioConnettore(
+                nome="Ufficio Tecnico - Lavori Pubblici",
+                url="https://www.comune.ciampino.roma.it/ufficio-tecnico",
+                telefoni=["06 5555555"],
+                email=[],
+                pec=[],
+                orari="lun-ven 9-13",
+                source_typed=True,
+                letto_il="2026-08-08T10:00:00+00:00",
+            )
+        ],
+    )
+
+
+def test_connettore_senza_match_tiene_il_dump_come_elenco(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    # Nessun ufficio del portale combacia col topic anagrafe: qui l'elenco degli
+    # uffici È l'aiuto, quindi il dump del connettore resta attaccato (al
+    # contrario del caso «ufficio puntato», dove si stacca per non sotterrare la
+    # scheda). `info.office` assente perché non abbiamo puntato nulla.
+    risposta = _chiedi(
+        parole="ufficio anagrafe",
+        monkeypatch=monkeypatch,
+        esito=_esito_solo_ufficio_estraneo(),
+    )
+    assert risposta is not None
+    assert risposta.access_mode == AccessMode.M4_CONNETTORE.value
+    assert risposta.info is not None
+    assert risposta.info.office is None
     assert risposta.esito_connettore is not None
-    assert risposta.esito_connettore.uffici[0].telefoni == ["06 1234567"]
+    assert risposta.esito_connettore.uffici[0].nome == "Ufficio Tecnico - Lavori Pubblici"
 
 
 def test_connettore_assente_lascia_invariato_il_gradino_web(

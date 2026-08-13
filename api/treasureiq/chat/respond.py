@@ -984,45 +984,6 @@ def _apertura(*, results: list[MatchResult]) -> str:
     return f"Ho trovato {totale}: {dettaglio}. Il dettaglio di ciascuna qui sotto."
 
 
-def _is_spid_decisive(result: MatchResult) -> tuple[bool, str | None]:
-    """Whether identity is the *only* thing standing between this citizen and
-    a clean answer for this one opportunity (D-09). Computed from
-    `result.criteria` alone: an `UNKNOWN_PROFILE` criterion is decisive only
-    when nothing else about the record is unresolved — no `UNKNOWN_SOURCE`
-    criterion, no free-text `other` requirement, and the opportunity is not
-    already a hard `NOT_ELIGIBLE`. If the comune's own data is also
-    incomplete, resolving identity would not actually produce a certain
-    verdict, so escalating to SPID would be a false promise.
-    """
-    if result.verdict is Verdict.NOT_ELIGIBLE:
-        return False, None
-    unknown_profile = [c for c in result.criteria if c.state is CriterionState.UNKNOWN_PROFILE]
-    if not unknown_profile:
-        return False, None
-    unknown_source = [c for c in result.criteria if c.state is CriterionState.UNKNOWN_SOURCE]
-    if unknown_source or result.opportunity.requirements.other:
-        return False, None
-    labels = ", ".join(c.label for c in unknown_profile)
-    reason = (
-        f"Per questa opportunità manca solo la verifica di: {labels}. "
-        "Accedi con SPID/CIE per avere una risposta certa."
-    )
-    return True, reason
-
-
-# The verbalisation model is gone from this rail.
-#
-# Its job was to rephrase the engine's own sentences so the reply would not
-# read like machine output. But the card under every reply already stated the
-# same title and the same sentence, so the model was being asked to disguise a
-# duplicate rather than remove it — and it kept corrupting the figures inside
-# it while trying, which the figure guard then had to throw away. `_apertura`
-# above says what the cards cannot say and repeats nothing they do, so there
-# is nothing left here for a model to rewrite and no figure left for it to
-# damage. The removed code, guard included, is in the history if a rail ever
-# needs prose again.
-
-
 def approfondisci_nel_comune(
     *,
     records: list[Opportunity],
@@ -4191,37 +4152,6 @@ async def build_chat_answer(
     return _forse_chiedi_chiarimento(
         risposta, storia=storia, message=message, filtri_accumulati=filtri_accumulati
     )
-
-
-def _regione_del_cittadino(*, nominato, comune_istat: str | None) -> str | None:
-    """La regione di chi fa la domanda, dal comune nominato o dal profilo."""
-    if nominato is not None and getattr(nominato, "regione", None):
-        return nominato.regione
-    if comune_istat:
-        suo = comune_per_codice(comune_istat)
-        if suo is not None:
-            return suo.regione
-    return None
-
-
-def _senza_regioni_altrui(records, *, regione: str | None):
-    """Toglie le misure regionali di regioni diverse dalla propria.
-
-    Se non sappiamo dove abita la persona non togliamo niente: nascondere una
-    misura che potrebbe spettarle e' peggio che mostrargliene una che non la
-    riguarda, purche' l'ente che la pubblica sia scritto sulla scheda.
-    """
-    if not regione:
-        return records
-    mia = regione.strip().casefold()
-    tenuti = []
-    for r in records:
-        if r.livello is Livello.REGIONALE:
-            sua = (getattr(r, "regione", None) or "").strip().casefold()
-            if sua and sua != mia:
-                continue
-        tenuti.append(r)
-    return tenuti
 
 
 def _regione_del_cittadino(*, nominato, comune_istat: str | None) -> str | None:

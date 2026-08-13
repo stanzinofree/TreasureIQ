@@ -4113,15 +4113,21 @@ async def build_chat_answer(
         numeri = _numeri_utili_al_volo(nominato.codice_istat)
         # L'ufficio nominato (o implicito nel topic: «orari dell'anagrafe»)
         # letto ORA dal connettore, come nel ramo coperto (ciclo18c). Senza
-        # questo, il fuori-copertura indirizzabile ripiegava sulla SOLA ricerca
-        # web e l'orario vero dello sportello — che il portale AgID espone —
-        # non compariva mai (era il buco di scenario C, Camposampiero). Solo se
-        # il portale è indirizzabile e la domanda riguarda uno sportello; il
-        # match è quello del ramo connettore (`_office_da_ufficio_nominato`),
-        # per nome o per topic, mai un ufficio indovinato (D-04/D-32).
+        # questo, il fuori-copertura ripiegava sulla SOLA ricerca web e l'orario
+        # vero dello sportello — che il portale espone — non compariva mai (era
+        # il buco di scenario C, Camposampiero). NON si filtra qui su
+        # `connettore.indirizzabile`: quel flag misura la SOLA rotta REST AgID
+        # (`API_UFFICI`) e taglia fuori i connettori a pagina statica come
+        # OpenPA (OpenCity), che leggono l'ufficio da `{base}/Amministrazione/
+        # Uffici` senza API. L'autorità su «si può leggere» è
+        # `_office_da_ufficio_nominato` stessa (via `leggi_connettore`), che
+        # torna `None` se la piattaforma non ha un connettore: qui basta che la
+        # sonda sia passata (comune raggiungibile) e che la domanda riguardi uno
+        # sportello. Il match è per nome o per topic, mai un ufficio indovinato
+        # (D-04/D-32). Costo: una lettura connettore in più solo su una domanda
+        # sportello/orari fuori copertura — self-guarding, mai su altri topic.
         if (
             connettore is not None
-            and connettore.indirizzabile
             and risposta.info is not None
             and risposta.topic is not None
             and (_ufficio_chiesto(message) is not None or "orari" in message.lower())

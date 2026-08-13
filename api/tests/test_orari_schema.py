@@ -69,6 +69,22 @@ def test_righe_distinte_giorni_diversi() -> None:
     assert r.reso == "Lunedì: 10:00–13:00 · Giovedì: 15:00–17:00"
 
 
+def test_seconda_settimana_e_un_altro_ufficio_si_ferma() -> None:
+    # Pagina-ufficio reale (OpenPA/Bordighera): sotto l'orario dell'anagrafe
+    # c'è, staccato, quello di un ALTRO sportello (polizia locale). Un giorno
+    # già emesso che ricompare apre una seconda settimana: si prende solo il
+    # primo blocco coerente, non si fondono due uffici in un orario solo.
+    r = E(
+        "<div>Anagrafe Lunedì 8.30-12.30 Martedì 8.30-12.30 Mercoledì 8.30-12.30 "
+        "Giovedì 8.30-12.30 Venerdì 8.30-12.30 Polizia Locale Lunedì 9:00-12:00 "
+        "Martedì 15:00-18:00 Sabato 9:00-12:00</div>"
+    )
+    assert r is not None
+    assert len(r.righe) == 5
+    assert [riga.giorni for riga in r.righe] == [[0], [1], [2], [3], [4]]
+    assert all(f.apertura == "8.30" for riga in r.righe for f in riga.fasce)
+
+
 def test_giorno_singolo_nome_intero() -> None:
     r = E("<p>Ricevimento il martedì 09:00-12:00</p>")
     assert r is not None

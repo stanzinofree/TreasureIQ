@@ -205,6 +205,10 @@ def estrai_orario_strutturato(html: str) -> OrarioSettimanale | None:
         return None
 
     righe: list[RigaOrario] = []
+    #: I giorni canonici già emessi. Un giorno che ricompare apre una SECONDA
+    #: settimana — un'altra tabella orari sotto la prima (apertura al pubblico
+    #: e, staccato, un altro servizio) — non la continuazione della stessa.
+    visti: set[int] = set()
     inizio_span: int | None = None
     fine_span = 0
     i = 0
@@ -241,12 +245,15 @@ def estrai_orario_strutturato(html: str) -> OrarioSettimanale | None:
             break  # sezione nuova, non lo stesso orario
 
         indici = _giorni_di_riga(giorni_riga, testo)
+        if righe and any(g in visti for g in indici):
+            break  # un giorno già emesso ricompare: seconda settimana, si ferma
         riga = RigaOrario(
             giorni=indici,
             etichetta=_rendi_giorni(indici),
             fasce=_fasce_da_ore(ore_riga),
         )
         righe.append(riga)
+        visti.update(indici)
         if inizio_span is None:
             inizio_span = giorni_riga[0].start()
         fine_span = ultima_fine

@@ -108,6 +108,54 @@ MAX_HOME_BYTES = 1_000_000
 #: pagina intera — un cap piccolo basta e tiene onesto lo streaming-con-abort.
 MAX_HEADER_BYTES = 200_000
 
+#: Eccezione STRETTA a D-S8 (logo same-host) per i CDN dei vendor di piattaforma
+#: municipale NOTI. Alcuni portali (Municipium) non ospitano lo stemma sul
+#: dominio del comune ma su un CDN del vendor: il connettore stesso non tocca
+#: mai quel CDN (l'API `municipiumapp.it` risponde 503/WAF, si legge tutto dal
+#: dominio comune), ma la HOME del comune referenzia lo stemma con un `<img>`/
+#: `og:image` verso il CDN. Senza questa eccezione lo stemma non è scaricabile.
+#:
+#: Perché resta sicuro:
+#: - allowlist HARD-CODED di soli vendor noti, non un "qualsiasi terzo host";
+#: - solo asset immagine (il content-type `image/*` è già verificato a valle);
+#: - la guardia SSRF completa resta intera: `host_atteso` viene pinnato all'host
+#:   del CDN, quindi ogni hop (redirect compresi) deve restare su quell'host e
+#:   risolvere a IP pubblico, con size-cap in streaming;
+#: - match a CONFINE-PUNTO (`host == s` o `host.endswith("." + s)`), così un
+#:   `evilmunicipiumapp.it` non passa.
+CDN_VENDOR_LOGO = ("municipiumapp.it",)
+
+#: Taglia del render logo richiesto al CDN Municipium. La home referenzia la
+#: taglia PIENA (`/s3/720x960/s3/...`) che il CDN serve a ~300 KB con
+#: `content-type: application/octet-stream` — sfonda `MAX_LOGO_BYTES` E non
+#: passa il filtro `image/*`. Il servizio di resize del vendor a una taglia
+#: piccola restituisce invece un'immagine reale (~30 KB, `image/jpeg`), che sta
+#: nel cap e ha un content-type onesto.
+LOGO_CDN_BOX = "256x256"
+
+#: Render Municipium: `https://{host}/s3/{L}x{A}/s3/{chiave}`. La chiave dopo la
+#: taglia è l'asset; la si ripropone al servizio di resize cloud a taglia piccola.
+_RE_MUNICIPIUM_RENDER = re.compile(r"^https?://[^/]+/s3/\d+x\d+/s3/(?P<chiave>.+)$", re.IGNORECASE)
+
+
+def _host_su_cdn_vendor(host: str) -> bool:
+    """True se `host` è un CDN vendor noto in allowlist (match a confine-punto,
+    mai una `endswith` nuda che accetterebbe un dominio omografo)."""
+    host = host.lower()
+    return any(host == s or host.endswith("." + s) for s in CDN_VENDOR_LOGO)
+
+
+def _url_logo_cdn(url: str) -> str:
+    """Se `url` è un render Municipium a taglia piena, lo riscrive verso il
+    servizio di resize cloud del vendor a `LOGO_CDN_BOX` — un solo host
+    (`cloud.municipiumapp.it`, in allowlist), nessun redirect da seguire,
+    immagine piccola con content-type onesto. Un url che non è un render
+    Municipium noto torna invariato (lo scaricherà com'è)."""
+    match = _RE_MUNICIPIUM_RENDER.match(url)
+    if match is None:
+        return url
+    return f"https://cloud.municipiumapp.it/resize?key=s3/{LOGO_CDN_BOX}/s3/{match.group('chiave')}"
+
 #: Quante scansioni tenere in storia: basta l'ultima coppia per il diff
 #: (R-04), un margine oltre serve solo a non far crescere il file all'infinito.
 MAX_STORIA = 10
@@ -379,8 +427,21 @@ def _scarica_logo(url: str, host_comune: str, *, timeout: float = 6.0) -> tuple[
     guardia precedente (solo post-redirect) — e size-cap che ABORTISCE la
     connessione al superamento, mai un `len()` dopo un download intero.
     Ritorna `(data_uri, hash_sha256)`; qualunque fallimento → `(None, None)`,
-    mai un'eccezione che risale al chiamante."""
-    scaricato = fetch_guardato(url, timeout=timeout, max_bytes=MAX_LOGO_BYTES, host_atteso=host_comune)
+    mai un'eccezione che risale al chiamante.
+
+    Eccezione stretta a D-S8: se l'url del logo punta a un CDN vendor NOTO
+    (`CDN_VENDOR_LOGO`, es. Municipium), lo stemma non è sul dominio del comune.
+    Si riscrive l'url verso il resize del vendor a taglia piccola (`_url_logo_cdn`)
+    e l'host atteso viene pinnato all'host del CDN invece del dominio comune —
+    così lo stemma è scaricabile senza aprire il fetch a un host arbitrario (la
+    guardia SSRF resta identica, cambia solo l'host di ancoraggio)."""
+    host_url = _host_senza_www(urlparse(url).netloc.lower())
+    if _host_su_cdn_vendor(host_url):
+        url = _url_logo_cdn(url)
+        host_atteso = _host_senza_www(urlparse(url).netloc.lower())
+    else:
+        host_atteso = host_comune
+    scaricato = fetch_guardato(url, timeout=timeout, max_bytes=MAX_LOGO_BYTES, host_atteso=host_atteso)
     if scaricato is None:
         return None, None
     intestazioni, dati, _ = scaricato

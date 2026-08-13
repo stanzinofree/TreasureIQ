@@ -40,18 +40,19 @@
 <section class="fascia" id="freschezza">
   <div class="dentro">
     <p class="occhiello">I dati sono freschi, e si vede</p>
-    <h2>Ogni riga a destra è una chiamata web fatta ORA al sito del comune.</h2>
+    <h2>Ogni riga nel monitor è una chiamata web fatta ORA al sito del comune.</h2>
     <p>
-      Non un database che invecchia. Mentre il cittadino chiede gli orari
-      dell'anagrafe di Albano Laziale, il <b>motore TIQ</b> legge il portale
-      in quel momento — la pagina dell'ufficio, la home, lo stemma. Un dato
-      servito da cache non comparirebbe: ogni riga è la prova della freschezza.
+      Non un database che invecchia. Il cittadino chiede gli orari a TreasureIQ —
+      anagrafe di Albano, polizia locale di Ariccia, rifiuti di Marino — e a fianco
+      scorre il log del <b>motore TIQ</b>: la pagina dell'ufficio, la home, lo stemma,
+      letti dal portale in quel momento. Un dato servito da cache non comparirebbe:
+      ogni riga è la prova della freschezza.
     </p>
     <figure class="video">
       <img src="{{base}}/assets/tiq-demo-live.gif" loading="lazy"
-           width="1456" height="830"
-           alt="Console motore TIQ: chat a sinistra, fetch live al sito del comune che scorrono a destra"/>
-      <figcaption>Caso reale, dalla console <code>/demo/live</code> esposta dall'API.</figcaption>
+           width="900" height="513"
+           alt="App TreasureIQ e monitor dei fetch live: le domande su tre comuni, i risultati reali, le chiamate web che scorrono nel log"/>
+      <figcaption>Caso reale: l'app in uso, alternata al monitor <code>/demo/logs</code> esposto dall'API.</figcaption>
     </figure>
   </div>
 </section>

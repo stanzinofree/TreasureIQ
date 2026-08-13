@@ -1760,6 +1760,99 @@ def demo_live() -> HTMLResponse:
     return HTMLResponse(_DEMO_LIVE_HTML)
 
 
+_DEMO_LOGS_HTML = """<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>motore TIQ — fetch live al comune</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: #0c0a08; color: #d8d2c6; height: 100vh;
+    display: flex; flex-direction: column;
+    font-family: "SF Mono", "Menlo", "Consolas", monospace;
+  }
+  header {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 20px; border-bottom: 1px solid #2a251f; background: #14110e;
+  }
+  header .sigillo {
+    font-weight: 700; letter-spacing: .5px; color: #fff;
+    background: #b5322e; padding: 3px 9px; border-radius: 2px; font-size: 14px;
+  }
+  header .t { font-size: 13px; color: #8f887c; }
+  header .dot { width: 9px; height: 9px; border-radius: 50%; background: #3a332b; margin-left: auto; }
+  header.attivo .dot { background: #4ade80; box-shadow: 0 0 9px #4ade80; }
+  #term { flex: 1; overflow-y: auto; padding: 16px 22px; font-size: 13.5px; line-height: 1.9; }
+  .ln { white-space: pre-wrap; word-break: break-all; animation: e .25s ease; }
+  @keyframes e { from { opacity: 0; } to { opacity: 1; } }
+  .lv { color: #4ade80; }
+  .mod { color: #6ea8fe; }
+  .msg { color: #d8d2c6; }
+  .b { color: #8f887c; }
+  .attesa { color: #6b6660; font-style: italic; }
+  .cursore { display: inline-block; width: 8px; height: 15px; background: #4ade80; animation: bl 1s step-end infinite; vertical-align: text-bottom; }
+  @keyframes bl { 50% { opacity: 0; } }
+</style>
+</head>
+<body>
+  <header id="h">
+    <span class="sigillo">motore TIQ</span>
+    <span class="t">docker logs · fetch live al sito del comune (ogni riga = una chiamata web fatta ORA, non cache)</span>
+    <span class="dot"></span>
+  </header>
+  <div id="term"><div class="attesa">In ascolto dei fetch live<span class="cursore"></span></div></div>
+<script>
+  const term = document.getElementById("term");
+  const h = document.getElementById("h");
+  let ultimoId = 0;
+  let attesaTolta = false;
+
+  function riga(ev) {
+    if (!attesaTolta) { term.innerHTML = ""; attesaTolta = true; }
+    const el = document.createElement("div");
+    el.className = "ln";
+    el.innerHTML = '<span class="lv">INFO</span> '
+      + '<span class="mod">treasureiq.ingest.host_guard</span>: '
+      + '<span class="msg">fetch live: </span>'
+      + '<span class="msg u"></span> '
+      + '<span class="b">(' + ev.byte + ' byte)</span>';
+    el.querySelector(".u").textContent = ev.url;
+    term.appendChild(el);
+    term.scrollTop = term.scrollHeight;
+    h.classList.add("attivo");
+    clearTimeout(riga._t);
+    riga._t = setTimeout(() => h.classList.remove("attivo"), 2000);
+  }
+
+  async function polla() {
+    try {
+      const r = await fetch("/api/freschezza/recent?dopo=" + ultimoId);
+      const d = await r.json();
+      for (const ev of d.eventi) { ultimoId = ev.id; riga(ev); }
+    } catch (e) {}
+  }
+  // Partiamo da «ora»: allineiamo al max in buffer, poi mostriamo solo i
+  // fetch nuovi — quelli scatenati dalla navigazione in corso.
+  fetch("/api/freschezza/recent")
+    .then((r) => r.json())
+    .then((d) => { for (const ev of d.eventi) ultimoId = Math.max(ultimoId, ev.id); })
+    .catch(() => {})
+    .finally(() => setInterval(polla, 500));
+</script>
+</body>
+</html>"""
+
+
+@app.get("/demo/logs", response_class=HTMLResponse, tags=["Sistema"])
+def demo_logs() -> HTMLResponse:
+    """Monitor-log a tutto schermo: i `fetch live` che l'API fa al sito del
+    comune, formattati come le righe di `docker logs`. Nessuna chat — pensato
+    per alternarlo alla navigazione reale dell'app nella GIF di evidenza."""
+    return HTMLResponse(_DEMO_LOGS_HTML)
+
+
 @app.post("/api/session", response_model=CitizenProfile, tags=["Cittadino"])
 def create_session(body: LoginRequest, response: Response) -> CitizenProfile:
     """Mock SPID login. Issues a signed cookie carrying the profile.

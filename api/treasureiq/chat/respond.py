@@ -4126,16 +4126,21 @@ async def build_chat_answer(
         # sportello. Il match è per nome o per topic, mai un ufficio indovinato
         # (D-04/D-32). Costo: una lettura connettore in più solo su una domanda
         # sportello/orari fuori copertura — self-guarding, mai su altri topic.
+        # `_ufficio_chiesto` cerca con una regex tutta minuscola e senza
+        # IGNORECASE: passargli `message` grezzo faceva mancare il match su un
+        # «Ufficio Anagrafe» scritto con l'iniziale maiuscola. Ogni altro caller
+        # gli passa parole già in minuscolo — qui pareggiamo, una volta sola.
+        parole = message.lower()
         if (
             connettore is not None
             and risposta.info is not None
             and risposta.topic is not None
-            and (_ufficio_chiesto(message) is not None or "orari" in message.lower())
+            and (_ufficio_chiesto(parole) is not None or "orari" in parole)
         ):
             office_letto = await _office_da_ufficio_nominato(
                 codice_istat=nominato.codice_istat,
                 topic=risposta.topic,
-                ufficio_chiesto=_ufficio_chiesto(message) or "",
+                ufficio_chiesto=_ufficio_chiesto(parole) or "",
                 disabilita_attiva=_disabilita_attiva_nel_testo(message),
             )
             if office_letto is not None:

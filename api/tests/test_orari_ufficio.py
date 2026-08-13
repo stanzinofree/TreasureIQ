@@ -235,3 +235,78 @@ def test_office_da_ufficio_nominato_none_se_connettore_muto(
         )
     )
     assert office is None
+
+
+# --- matcher puro _ufficio_connettore_pertinente (ciclo18k: B organo, A scelta) ---
+
+
+def _uff_conn(nome: str):
+    from treasureiq.connettore import UfficioConnettore
+
+    return UfficioConnettore(
+        nome=nome, url="https://comune.it/u/", telefoni=[], email=[], pec=[],
+        orari=None, source_typed=True, letto_il="2026-08-12T00:00:00+00:00",
+    )
+
+
+def test_e_organo_politico_riconosce_la_testa_del_nome() -> None:
+    import treasureiq.chat.respond as respond
+
+    assert respond._e_organo_politico("Commissione territorio, ambiente e edilizia")
+    assert respond._e_organo_politico("Giunta comunale")
+    assert respond._e_organo_politico("Consiglio comunale")
+    # Uno sportello vero non è un organo, anche se ne cita il tema.
+    assert not respond._e_organo_politico("Edilizia privata - SUE")
+    assert not respond._e_organo_politico("Settore 6: Urbanistica, Edilizia privata/SUE")
+
+
+def test_ufficio_pertinente_scarta_organo_e_fa_scegliere_i_due_veri() -> None:
+    # B: la Commissione (organo) esce dal match per «edilizia». A: restano due
+    # sportelli veri → nessun indovinello (D-04), si tornano i candidati.
+    import treasureiq.chat.respond as respond
+    from treasureiq.chat.intent import Topic
+
+    uffici = [
+        _uff_conn("Commissione territorio, ambiente e edilizia privata"),
+        _uff_conn("Settore 6: Urbanistica, Edilizia privata/SUE"),
+        _uff_conn("Edilizia privata - SUE"),
+    ]
+    ufficio, ambigui = respond._ufficio_connettore_pertinente(
+        uffici, ufficio_chiesto="edilizia", topic=Topic.SCONOSCIUTO,
+    )
+    assert ufficio is None
+    assert [u.nome for u in ambigui] == [
+        "Settore 6: Urbanistica, Edilizia privata/SUE",
+        "Edilizia privata - SUE",
+    ]
+
+
+def test_ufficio_pertinente_letterale_unico_risolve() -> None:
+    # «urbanistica» sta in un solo nome (la Commissione non la cita) → ufficio
+    # secco, lista ambigui vuota.
+    import treasureiq.chat.respond as respond
+    from treasureiq.chat.intent import Topic
+
+    uffici = [
+        _uff_conn("Commissione territorio, ambiente e edilizia privata"),
+        _uff_conn("Settore 6: Urbanistica, Edilizia privata/SUE"),
+    ]
+    ufficio, ambigui = respond._ufficio_connettore_pertinente(
+        uffici, ufficio_chiesto="urbanistica", topic=Topic.SCONOSCIUTO,
+    )
+    assert ufficio is not None
+    assert ufficio.nome == "Settore 6: Urbanistica, Edilizia privata/SUE"
+    assert ambigui == []
+
+
+def test_ufficio_pertinente_nessun_match_elenca() -> None:
+    # Nessuna parola-chiave pesca nulla → (None, []): il chiamante elenca tutto.
+    import treasureiq.chat.respond as respond
+    from treasureiq.chat.intent import Topic
+
+    uffici = [_uff_conn("Anagrafe"), _uff_conn("Tributi")]
+    ufficio, ambigui = respond._ufficio_connettore_pertinente(
+        uffici, ufficio_chiesto="astronautica", topic=Topic.SCONOSCIUTO,
+    )
+    assert ufficio is None
+    assert ambigui == []

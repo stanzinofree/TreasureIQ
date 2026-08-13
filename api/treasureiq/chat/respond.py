@@ -1914,13 +1914,25 @@ _SINONIMI_UFFICIO_CONNETTORE: dict[str, tuple[str, ...]] = {
 }
 
 
+#: Organi politici/deliberativi del comune (B, ciclo18k): nell'organigramma
+#: AgID compaiono accanto agli uffici, ma non sono sportelli a cui il cittadino
+#: si rivolge per un servizio. Restano fuori dal match per nome d'ufficio, così
+#: che «edilizia» non peschi la «Commissione … edilizia privata».
+_ORGANI_POLITICI = ("commissione", "giunta", "consiglio", "conferenza", "collegio")
+
+
+def _e_organo_politico(nome: str) -> bool:
+    testa = nome.strip().lower().split()
+    return bool(testa) and testa[0] in _ORGANI_POLITICI
+
+
 def _ufficio_connettore_pertinente(
     uffici: list[UfficioConnettore],
     *,
     ufficio_chiesto: str | None,
     topic: Topic,
     disabilita_attiva: bool = False,
-) -> tuple[UfficioConnettore | None, bool]:
+) -> tuple[UfficioConnettore | None, list[UfficioConnettore]]:
     """L'ufficio del connettore che risponde alla domanda, se uno solo
     corrisponde. Prova prima la parola nominata dal cittadino
     (`_ufficio_chiesto`), poi — se il filtro disabilita/disabilita_nucleo e'
@@ -1933,16 +1945,25 @@ def _ufficio_connettore_pertinente(
     esattamente come prima sui pezzi del topic — nessun ufficio inventato,
     nessun degrado silenzioso verso l'ufficio sbagliato.
 
-    `(None, False)`: nessuna parola-chiave ha trovato un ufficio — il
-    cittadino non ha nominato nulla di specifico, si elenca. `(None, True)`:
-    piu' di un ufficio corrisponde alla stessa parola-chiave — ambiguo,
-    stesso trattamento (elenco), mai un indovinello (D-04)."""
+    Il secondo valore è la lista dei candidati ambigui: `(ufficio, [])` quando
+    uno solo corrisponde; `(None, [u1, u2, …])` quando più uffici citano la
+    stessa parola-chiave — ambiguo, mai un indovinello (D-04): il chiamante li
+    presenta e il cittadino sceglie (A, ciclo18k). `(None, [])`: nessuna
+    parola-chiave ha trovato un ufficio, il cittadino non ha nominato nulla di
+    specifico — si elenca l'organigramma."""
     candidati = []
     if ufficio_chiesto:
         candidati.append(ufficio_chiesto.lower())
     if disabilita_attiva:
         candidati.append("disabilita")
     candidati.extend(pezzo for pezzo in topic.value.split("_") if len(pezzo) > 3)
+
+    # B (ciclo18k): gli organi politici/deliberativi restano fuori dal match per
+    # nome d'ufficio — chi cerca «edilizia» non vuole la «Commissione … edilizia
+    # privata», che è un organo, non uno sportello. L'elenco completo (nessun
+    # ufficio nominato) li mostra comunque: nulla è nascosto, si evita solo che
+    # sporchino la disambiguazione.
+    pool = [u for u in uffici if not _e_organo_politico(u.nome)]
 
     for chiave in candidati:
         # La parola LETTERALE prima dei suoi sinonimi: se «anagrafe» compare in
@@ -1951,21 +1972,27 @@ def _ufficio_connettore_pertinente(
         # match «ambiguo». Un match letterale unico non è un indovinello
         # (D-04): un comune con più uffici demografici non deve ricadere
         # sull'URP per una parola che, presa alla lettera, è univoca.
-        letterali = [u for u in uffici if chiave in u.nome.lower()]
+        letterali = [u for u in pool if chiave in u.nome.lower()]
         if len(letterali) == 1:
-            return letterali[0], False
+            return letterali[0], []
+        if len(letterali) > 1:
+            # A (ciclo18k): più uffici (già senza organi) citano la parola alla
+            # lettera. Non si indovina (D-04), ma l'informazione non si butta:
+            # si tornano i candidati così che il chiamante li presenti e il
+            # cittadino scelga — coi loro recapiti, non una ricerca web.
+            return None, letterali
 
         sottostringhe = _SINONIMI_UFFICIO_CONNETTORE.get(chiave, (chiave,))
         trovati = [
             ufficio
-            for ufficio in uffici
+            for ufficio in pool
             if any(s in ufficio.nome.lower() for s in sottostringhe)
         ]
         if len(trovati) == 1:
-            return trovati[0], False
+            return trovati[0], []
         if len(trovati) > 1:
-            return None, True
-    return None, False
+            return None, trovati
+    return None, []
 
 
 async def _office_da_ufficio_nominato(
@@ -2101,19 +2128,28 @@ async def _risposta_da_connettore(
     if not esito.uffici:
         return None
 
-    ufficio, ambiguo = _ufficio_connettore_pertinente(
+    ufficio, ambigui = _ufficio_connettore_pertinente(
         esito.uffici,
         ufficio_chiesto=ufficio_chiesto,
         topic=topic,
         disabilita_attiva=disabilita_attiva,
     )
+    ambiguo = bool(ambigui)
     diagnosi_connettore = [
         *diagnosi,
         f"Letto dal connettore ({esito.piattaforma}) il {esito.letto_il}.",
     ]
 
+    # A (ciclo18k): quando più uffici citano la parola nominata, la scheda mostra
+    # SOLO quei candidati (coi loro recapiti), non l'organigramma intero — il
+    # cittadino sceglie fra i due «edilizia», non scorre quaranta voci. Senza
+    # parola nominata (`ambigui` vuoto) resta l'elenco completo, invariato.
+    esito_mostrato = esito.model_copy(update={"uffici": ambigui}) if ambigui else esito
+
     if ufficio is None:
-        reply = _testo_elenco_uffici_connettore(comune_nome=comune_nome, uffici=esito.uffici)
+        reply = _testo_elenco_uffici_connettore(
+            comune_nome=comune_nome, uffici=esito_mostrato.uffici
+        )
         documento = None
         ufficio_risposta = None
         citizen_effort = 2
@@ -2171,7 +2207,7 @@ async def _risposta_da_connettore(
             integration_cost=[],
             web_results=[],
         ),
-        esito_connettore=esito,
+        esito_connettore=esito_mostrato,
     )
 
 
@@ -3521,7 +3557,20 @@ async def _componi_risposta(
             comune_istat=comune_bandi_istat or comune_istat,
         )
 
-    if intent.topic is Topic.SCONOSCIUTO and richiesta_categoria is None:
+    # C (ciclo18k): «orari ufficio edilizia» arriva con topic SCONOSCIUTO (non è
+    # una categoria di spettanza), e senza questa eccezione cadeva qui nel
+    # «non ho capito, quale categoria?» → ricerca web, pur avendo il connettore
+    # l'ufficio in casa. Una domanda che NOMINA un ufficio ed è informativa non
+    # è una categoria mancante: la si lascia proseguire al rail informazione,
+    # che legge il connettore e — se più uffici combaciano — li fa scegliere (A).
+    _ufficio_informativo = (
+        intent.kind is QuestionKind.INFORMAZIONE and _ufficio_chiesto(message) is not None
+    )
+    if (
+        intent.topic is Topic.SCONOSCIUTO
+        and richiesta_categoria is None
+        and not _ufficio_informativo
+    ):
         # D-55: un topic sconosciuto/generico ("che bonus posso avere?") con
         # un profilo già ricco non merita lo stesso "non ho capito" di una
         # domanda davvero fuori catalogo — il cittadino ha già dato abbastanza

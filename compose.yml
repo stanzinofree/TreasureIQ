@@ -16,6 +16,24 @@ services:
       # partiva eseguendo pytest e si riavviava all'infinito. Lo stage che
       # serve i cittadini è `base`, e lo si dice qui.
       target: base
+    # Il proxy Next (undici) tiene i socket verso l'API in un pool e li
+    # riusa. Con il keep-alive di default di uvicorn (5s) il server chiude un
+    # socket inattivo prima che undici se ne accorga: la POST successiva parte
+    # su una connessione già morta e torna ECONNRESET ("socket hang up"), senza
+    # mai raggiungere l'app — la chat sembra muta. Tenendo il keep-alive del
+    # server ben sopra quello del client, a chiudere è sempre undici: niente più
+    # race. Vale anche per le query live lunghe (lettura connettore dal vivo).
+    command:
+      - python
+      - -m
+      - uvicorn
+      - treasureiq.api:app
+      - --host
+      - "0.0.0.0"
+      - --port
+      - "8000"
+      - --timeout-keep-alive
+      - "65"
     # 8010 rather than 8000: on machines running OrbStack or Docker Desktop the
     # 8000 port is frequently already bound, and requests to localhost:8000 then
     # reach the wrong process and 404 in a way that looks like an app bug.

@@ -25,7 +25,9 @@ from treasureiq.registro import (
     RecordRegistro,
     _da_store,
     _estrai_logo_header,
+    _host_su_cdn_vendor,
     _in_store,
+    _url_logo_cdn,
     _scarica_logo,
     registra_scansione,
 )
@@ -331,6 +333,70 @@ def test_logo_ok_sotto_cap_stesso_host(monkeypatch: pytest.MonkeyPatch) -> None:
     assert data_uri is not None
     assert data_uri.startswith("data:image/png;base64,")
     assert logo_hash is not None
+
+
+def test_logo_cdn_vendor_municipium_scaricato(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Eccezione stretta a D-S8: lo stemma Municipium sta su un CDN vendor noto
+    (`municipiumapp.it`), host DIVERSO dal dominio del comune. Prima veniva
+    scartato dal host-check; ora l'host atteso si pinna al CDN e lo stemma è
+    scaricabile — la guardia SSRF resta intera, solo l'ancoraggio cambia."""
+    cdn = "https://busto-arsizio-api.municipiumapp.it/media/stemma.jpg"
+    stream = _StreamFinto(200, cdn, {"content-type": "image/jpeg"}, [b"dati-stemma"])
+    monkeypatch.setattr(host_guard_mod, "host_risolve_a_ip_sicuro", lambda hostname: True)
+    monkeypatch.setattr(
+        host_guard_mod.httpx, "Client", lambda **kwargs: _ClientFinto(stream, **kwargs)
+    )
+
+    # HOST (comune) resta diverso dall'host del CDN: senza l'eccezione sarebbe None.
+    data_uri, logo_hash = _scarica_logo(cdn, HOST)
+    assert data_uri is not None
+    assert data_uri.startswith("data:image/jpeg;base64,")
+    assert logo_hash is not None
+
+
+def test_logo_cdn_vendor_redirect_fuori_cdn_rifiutato(monkeypatch: pytest.MonkeyPatch) -> None:
+    """L'eccezione CDN non indebolisce la guardia: un redirect DALL'host CDN
+    verso un host non in allowlist resta scartato per-hop (host_atteso pinnato
+    al CDN, non aperto a qualunque destinazione)."""
+    cdn = "https://busto-arsizio-api.municipiumapp.it/media/stemma.jpg"
+    stream = _StreamFinto(
+        302, cdn, {"location": "https://evil.example.com/stemma.jpg"}, [],
+    )
+    monkeypatch.setattr(host_guard_mod, "host_risolve_a_ip_sicuro", lambda hostname: True)
+    monkeypatch.setattr(
+        host_guard_mod.httpx, "Client", lambda **kwargs: _ClientFinto(stream, **kwargs)
+    )
+
+    data_uri, logo_hash = _scarica_logo(cdn, HOST)
+    assert data_uri is None
+    assert logo_hash is None
+
+
+def test_url_logo_cdn_riscrive_render_municipium_a_taglia_piccola() -> None:
+    """Il render a taglia piena (~300KB octet-stream, sfonda il cap) viene
+    riscritto verso il resize cloud del vendor a taglia piccola: un solo host in
+    allowlist, nessun redirect, immagine reale sotto cap."""
+    piena = "https://busto-arsizio-api.municipiumapp.it/s3/720x960/s3/1013/sito/stemma.jpg"
+    assert _url_logo_cdn(piena) == (
+        "https://cloud.municipiumapp.it/resize?key=s3/256x256/s3/1013/sito/stemma.jpg"
+    )
+
+
+def test_url_logo_cdn_lascia_invariato_un_url_non_render() -> None:
+    """Un url che non è un render Municipium noto torna invariato (verrà
+    scaricato com'è, sotto la stessa guardia)."""
+    normale = "https://www.comunefiv.it/logo.png"
+    assert _url_logo_cdn(normale) == normale
+
+
+def test_host_su_cdn_vendor_confine_punto() -> None:
+    """Match a confine-punto: l'host esatto e i suoi sottodomini passano, un
+    dominio omografo (`evilmunicipiumapp.it`) NO."""
+    assert _host_su_cdn_vendor("municipiumapp.it")
+    assert _host_su_cdn_vendor("busto-arsizio-api.municipiumapp.it")
+    assert not _host_su_cdn_vendor("evilmunicipiumapp.it")
+    assert not _host_su_cdn_vendor("municipiumapp.it.evil.com")
+    assert not _host_su_cdn_vendor("www.comunefiv.it")
 
 
 def test_estrai_logo_header_marino_reale() -> None:

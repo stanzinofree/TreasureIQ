@@ -28,6 +28,7 @@ from urllib.parse import urljoin, urlsplit
 
 import httpx
 
+from treasureiq import freschezza
 from treasureiq.ingest.base import USER_AGENT
 
 logger = logging.getLogger(__name__)
@@ -147,6 +148,11 @@ def fetch_guardato(
                         if len(buffer) > max_bytes:
                             logger.info("fetch guardato oltre cap, connessione interrotta: %s", corrente)
                             return None
+                    # Traccia di freschezza: ogni fetch live andato a buon fine —
+                    # è la prova auditabile che il dato viene ORA dal sito del
+                    # comune, non da un DB stantio (un cache-hit non arriva qui).
+                    logger.info("fetch live: %s (%d byte)", corrente, len(buffer))
+                    freschezza.registra(corrente, len(buffer))
                     return intestazioni, bytes(buffer), corrente
         except Exception:  # noqa: BLE001 — risorsa muta: None, mai un crash
             logger.info("fetch guardato irraggiungibile: %s", corrente)

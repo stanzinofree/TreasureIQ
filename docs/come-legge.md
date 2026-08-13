@@ -52,6 +52,22 @@ l'eleggibilità: rilegge soltanto, la regola decide.
 
 ---
 
+## La freschezza: i dati arrivano ORA
+
+Su un Comune non ancora acquisito, la risposta non viene da un database che
+invecchia: il **motore TIQ** legge il portale nel momento in cui il cittadino
+chiede. Qui due domande su due Comuni — anagrafe di Albano, polizia locale di
+Ariccia — con a fianco il log dei fetch live. La risposta su Ariccia porta la
+data di oggi («letto ora dal portale Municipium»). Ogni riga del monitor è una
+chiamata web fatta ORA (la pagina dell'ufficio, la home, lo stemma): un dato
+servito da cache non comparirebbe. I fetch sono **server-side**, invisibili al
+Network del browser — per questo l'evidenza viene dal log del motore, non da
+DevTools.
+
+![App TreasureIQ e monitor dei fetch live: le domande su due Comuni, i risultati reali, le chiamate web che scorrono nel log](assets/tiq-demo-live.gif)
+
+---
+
 ## Il flusso completo
 
 ```mermaid

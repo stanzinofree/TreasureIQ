@@ -236,6 +236,17 @@ _PORTALE33 = re.compile(r"\bportale33\b", re.I)
 #: guardano dopo: un percorso può sopravvivere a una migrazione fra CMS. La
 #: prova lo dice a chiare lettere, così chi rilegge sa cosa ha in mano.
 _ASSET: tuple[tuple[re.Pattern[str], Piattaforma], ...] = (
+    # OpenCity/OpenContent (il fornitore dietro il nome «OpenPA»): serve gli
+    # asset — logo e immagini — da un proxy di brand (`flyimg.opencityitalia.it`)
+    # che incapsula uno storage S3 (`static.opencity.opencontent.it`). È una
+    # firma di host involontaria e affidabile: nessun altro fornitore la scrive.
+    # Prima di `wp-content` di proposito — un OpenCity migrato da WordPress può
+    # conservare echi `/wp-content/` nel corpo, ma l'host di brand è il vendor
+    # ATTUALE e deve vincere l'eco del CMS precedente (il `break` sotto).
+    # Senza questa riga i 363 comuni OpenCity restavano IGNOTA a runtime — il
+    # censimento li riconosce dall'impronta-rotte, che qui sull'HTML manca — e
+    # il connettore non veniva mai instradato: uffici e logo persi.
+    (re.compile(r"opencityitalia\.it|opencity\.opencontent\.it", re.I), Piattaforma.OPENPA),
     (re.compile(r"/wp-(?:content|includes)/", re.I), Piattaforma.WORDPRESS_GENERICO),
     (re.compile(r"drupal-settings-json|/sites/default/files/", re.I), Piattaforma.DRUPAL),
     (re.compile(r"/typo3(?:temp|conf)/", re.I), Piattaforma.TYPO3),

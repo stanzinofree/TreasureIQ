@@ -97,6 +97,23 @@ def _stesso_host(url: str, host_comune: str) -> bool:
     return _host_senza_www(urlparse(url).netloc.lower()) == host_comune
 
 
+#: Il CDN di brand OpenCity/OpenContent: il logo dei comuni OpenPA non vive
+#: mai sull'host del comune ma su un proxy-immagini del fornitore
+#: (`flyimg.opencityitalia.it` che incapsula `static.opencity.opencontent.it`).
+#: Con la sola guardia same-host il logo degradava a `None` su TUTTI i campioni
+#: reali. Allowlist per-suffisso (scelta: confinata al fornitore, tollerante ai
+#: sottodomini) — non un any-host: un `src` fuori da questi domini resta scartato.
+_CDN_LOGO_OPENCITY = (".opencityitalia.it", ".opencontent.it")
+
+
+def _host_logo_ammesso(url: str, host_comune: str) -> bool:
+    """Il `src` del logo è sull'host del comune o sul CDN OpenCity del vendor."""
+    if _stesso_host(url, host_comune):
+        return True
+    host = urlparse(url).hostname or ""
+    return host.lower().endswith(_CDN_LOGO_OPENCITY)
+
+
 def _richiedi_con_guardia(url: str, host_comune: str, *, timeout: float) -> tuple[str, str] | None:
     """GET guardato (W1) — stesso stampo di `openweb._richiedi_con_guardia`:
     schema http/https, host-check DOPO il follow-301 (TOCTOU/SSRF), size-cap
@@ -254,17 +271,16 @@ def estrai_logo_openpa(pagina_home: str, base: str, host_comune: str) -> str | N
     """Il logo del comune. Prova, in ordine: (1) `<img>` Bootstrap-Italia
     dentro `.it-brand-wrapper` (tema OpenPA osservato reale su Storo e
     Lodrino); (2) un `<img>` generico nell'header con `alt`/`class` che
-    richiama "logo"/"stemma"; (3) un `<image>` SVG inline. Guardia
-    same-host STRETTA (`_stesso_host`, non tollerante a sottodomini): pura,
-    nessun fetch.
+    richiama "logo"/"stemma"; (3) un `<image>` SVG inline. Guardia host
+    `_host_logo_ammesso`: host del comune OPPURE CDN OpenCity del vendor
+    (`_CDN_LOGO_OPENCITY`), pura, nessun fetch.
 
-    Gap onesto osservato: su ENTRAMBI i comuni scoutati il `src` reale non
-    è mai same-host — vive su un proxy-immagini del vendor
-    (`flyimg.opencityitalia.it`, che incapsula un URL S3
-    `static.opencity.opencontent.it`), un CDN del fornitore OpenCity/
-    Maggioli, non un sottodominio del comune. Con la guardia stretta questo
-    helper degrada a `None` sui campioni reali — non un bug di questo
-    modulo, un fatto della piattaforma."""
+    Il `src` reale, su tutti i campioni, non è mai same-host — vive sul
+    proxy-immagini del vendor (`flyimg.opencityitalia.it`, che incapsula un
+    URL S3 `static.opencity.opencontent.it`), il CDN OpenCity/OpenContent.
+    Prima la guardia stretta lo scartava e il logo degradava sempre a `None`;
+    ora l'allowlist per-suffisso del fornitore lo ammette (un `src` fuori da
+    quei domini resta comunque scartato)."""
     pagina_lower = pagina_home.lower()
 
     inizio_brand = pagina_lower.find("it-brand-wrapper")
@@ -275,7 +291,7 @@ def estrai_logo_openpa(pagina_home: str, base: str, host_comune: str) -> str | N
             src = html.unescape(trovato.group(1)).strip()
             if src:
                 url = urljoin(base, src)
-                if _stesso_host(url, host_comune):
+                if _host_logo_ammesso(url, host_comune):
                     return url
 
     inizio_header = pagina_lower.find("<header")
@@ -295,7 +311,7 @@ def estrai_logo_openpa(pagina_home: str, base: str, host_comune: str) -> str | N
             if not src:
                 continue
             url = urljoin(base, src)
-            if _stesso_host(url, host_comune):
+            if _host_logo_ammesso(url, host_comune):
                 return url
 
         match_svg = re.search(
@@ -305,7 +321,7 @@ def estrai_logo_openpa(pagina_home: str, base: str, host_comune: str) -> str | N
             href = html.unescape(match_svg.group(1)).strip()
             if href:
                 url = urljoin(base, href)
-                if _stesso_host(url, host_comune):
+                if _host_logo_ammesso(url, host_comune):
                     return url
 
     return None

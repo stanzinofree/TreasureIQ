@@ -99,6 +99,12 @@ def _codice_ipa(codice_istat: str) -> str | None:
 #: controllo di `len()` a valle di un download intero (il DoS resterebbe).
 MAX_LOGO_BYTES = 200_000
 
+#: Domini CDN di brand ammessi come host del logo oltre a quello del comune
+#: (scelta: allowlist per-suffisso confinata al fornitore OpenCity/OpenContent).
+#: Serve perché i comuni OpenPA servono il logo da `flyimg.opencityitalia.it`
+#: e mai dal proprio host; senza, `_scarica_logo` scartava sempre il logo.
+_CDN_LOGO_ESTERNO = (".opencityitalia.it", ".opencontent.it")
+
 #: Cap sulla home page letta per estrarre l'url del logo (D-11). Anche il
 #: primo hop va in streaming-con-abort come il secondo: una home enorme non
 #: deve entrare in RAM intera a ogni scansione riuscita.
@@ -429,16 +435,22 @@ def _scarica_logo(url: str, host_comune: str, *, timeout: float = 6.0) -> tuple[
     Ritorna `(data_uri, hash_sha256)`; qualunque fallimento → `(None, None)`,
     mai un'eccezione che risale al chiamante.
 
-    Eccezione stretta a D-S8: se l'url del logo punta a un CDN vendor NOTO
-    (`CDN_VENDOR_LOGO`, es. Municipium), lo stemma non è sul dominio del comune.
-    Si riscrive l'url verso il resize del vendor a taglia piccola (`_url_logo_cdn`)
-    e l'host atteso viene pinnato all'host del CDN invece del dominio comune —
-    così lo stemma è scaricabile senza aprire il fetch a un host arbitrario (la
-    guardia SSRF resta identica, cambia solo l'host di ancoraggio)."""
+    Due eccezioni strette a D-S8, quando lo stemma non vive sul dominio del
+    comune ma su un CDN di brand del fornitore — la guardia SSRF per-hop resta
+    identica (schema http(s), IP pubblico, identità host a ogni redirect), si
+    allarga solo QUALE host è atteso, confinato a un allowlist per fornitore:
+    - CDN vendor NOTO (`CDN_VENDOR_LOGO`, es. Municipium): si riscrive l'url
+      verso il resize a taglia piccola (`_url_logo_cdn`) e l'host atteso si
+      pinna all'host del CDN;
+    - OpenCity/OpenPA (`_CDN_LOGO_ESTERNO`, `flyimg.opencityitalia.it` /
+      `static.opencity.opencontent.it`): l'estrattore restituisce quel `src`
+      e l'host atteso diventa il CDN stesso."""
     host_url = _host_senza_www(urlparse(url).netloc.lower())
     if _host_su_cdn_vendor(host_url):
         url = _url_logo_cdn(url)
         host_atteso = _host_senza_www(urlparse(url).netloc.lower())
+    elif host_url.endswith(_CDN_LOGO_ESTERNO):
+        host_atteso = host_url
     else:
         host_atteso = host_comune
     scaricato = fetch_guardato(url, timeout=timeout, max_bytes=MAX_LOGO_BYTES, host_atteso=host_atteso)

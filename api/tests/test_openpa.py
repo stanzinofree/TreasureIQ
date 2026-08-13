@@ -152,16 +152,30 @@ def test_leggi_at_openpa_probe_fallito_usa_comunque_url_convenzionale(
 
 
 # ---------------------------------------------------------------------------
-# estrai_logo_openpa — gap onesto: il src reale non è mai same-host
+# estrai_logo_openpa — host del comune OPPURE CDN di brand OpenCity
 # ---------------------------------------------------------------------------
 
 
-def test_estrai_logo_openpa_home_reale_storo_degrada_a_none() -> None:
-    """Gap onesto documentato: il `src` reale osservato vive su un
-    proxy-immagini del vendor (`flyimg.opencityitalia.it`), non same-host —
-    la guardia stretta lo rifiuta, come deve."""
+def test_estrai_logo_openpa_home_reale_storo_cdn_ammesso() -> None:
+    """Il `src` reale vive sul CDN di brand OpenCity (`flyimg.opencityitalia.it`,
+    storage `static.opencity.opencontent.it`), mai same-host: l'allowlist
+    per-suffisso del fornitore lo ammette. Prima degradava sempre a None e i
+    363 comuni OpenPA restavano senza logo."""
     pagina = _leggi_fixture("openpa_storo_home.html")
-    assert op_mod.estrai_logo_openpa(pagina, _BASE_STORO, _HOST_STORO) is None
+    logo = op_mod.estrai_logo_openpa(pagina, _BASE_STORO, _HOST_STORO)
+    assert logo is not None
+    assert "flyimg.opencityitalia.it" in logo
+
+
+def test_estrai_logo_openpa_cdn_opencontent_ammesso() -> None:
+    """Anche il dominio storage `*.opencontent.it` è nell'allowlist per-suffisso."""
+    pagina = (
+        '<header><div class="it-brand-wrapper">'
+        '<img class="icon" alt="Logo" '
+        'src="https://static.opencity.opencontent.it/var/x/logo.png"></div></header>'
+    )
+    logo = op_mod.estrai_logo_openpa(pagina, _BASE_STORO, _HOST_STORO)
+    assert logo == "https://static.opencity.opencontent.it/var/x/logo.png"
 
 
 def test_estrai_logo_openpa_same_host_accettato() -> None:

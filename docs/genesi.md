@@ -20,20 +20,21 @@ in questo scenario che ho cominciato a coltivare l'idea di fare scraping con un
 linguaggio comune per facilitare le richieste: quello che sul comune A sta
 sotto «Servizi» e sul comune B sotto «Uffici», sotto TIQ è in una chat.
 
-TIQ non è la soluzione: è un apriscatole, un motore di apertura verso le realtà
-locali affinché si adotti tutti lo stesso schema di esposizione dei dati, a
-favore della standardizzazione e della consultazione da parte del cittadino.
+TIQ non è la soluzione: è un apriscatole. Non chiede alle realtà locali di
+adottare un nuovo schema — lo standard di esposizione dei dati esiste già (il
+tema Design Comuni Italia definito da AgID). TIQ legge quello che c'è, comune
+per comune, e centralizza la consultazione a favore del cittadino.
 
 Il problema che TIQ vuole risolvere è visto con un occhio da reverse
 engineering. Ogni realtà adotta una piattaforma con un proprio metodo di
-esposizione. A T0, TIQ scrive quanti più connettori possibile per leggere e
-uniformare queste informazioni; col tempo, e con un utilizzo sempre più
-diffuso, potrebbe aiutare a caldeggiare uno standard di esposizione — come sta
-cercando di fare AgID — ma orientato a **centralizzare la consultazione**. Il
-problema non sono i fornitori che costruiscono le loro piattaforme per offrire i
-contenuti: il problema è che non c'è una spinta comune a far lavorare quei
-produttori su uno schema condiviso di esposizione dei dati, per creare un vero
-standard.
+esposizione, ma lo standard a cui riferirsi c'è già: AgID lo ha definito. TIQ
+non propone un nuovo standard — misura quanto riusciamo davvero a usare quello
+che abbiamo e rende visibile ciò che manca. A T0 scrive quanti più connettori
+possibile per leggere e uniformare le informazioni esistenti, con l'obiettivo
+di **centralizzare la consultazione**. Il problema non sono i fornitori che
+costruiscono le loro piattaforme: è che il campo previsto dallo standard — per
+esempio i requisiti di un servizio — troppo spesso resta vuoto. Non manca lo
+schema condiviso: manca la spinta a compilarlo.
 
 ## MVP
 

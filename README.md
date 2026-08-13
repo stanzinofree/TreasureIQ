@@ -26,13 +26,14 @@ Progetto realizzato per il **SuperAgents Civic Hackathon** (Play New, 2026).
 
 Non da un database che invecchia. Ogni risposta su un comune non censito è
 costruita leggendo il portale al momento. Nella GIF il cittadino interroga
-TreasureIQ su tre comuni — anagrafe di Albano, polizia locale di Ariccia,
-rifiuti di Marino — e a fianco scorre il log del **motore TIQ**: le chiamate
-web fatte in quel momento al sito del comune, la pagina dell'ufficio, la home,
-lo stemma. Un dato servito da cache non comparirebbe: ogni riga è la prova che
-quella risposta è fresca.
+TreasureIQ su due comuni — anagrafe di Albano, polizia locale di Ariccia — e a
+fianco scorre il log del **motore TIQ**: le chiamate web fatte in quel momento
+al sito del comune, la pagina dell'ufficio, la home, lo stemma. La risposta su
+Ariccia porta la data di oggi («letto ora dal portale Municipium»). Un dato
+servito da cache non comparirebbe: ogni riga è la prova che quella risposta è
+fresca.
 
-![App TreasureIQ e monitor dei fetch live: le domande su tre comuni, i risultati reali, le chiamate web che scorrono nel log](docs/assets/tiq-demo-live.gif)
+![App TreasureIQ e monitor dei fetch live: le domande su due comuni, i risultati reali, le chiamate web che scorrono nel log](docs/assets/tiq-demo-live.gif)
 
 *Caso reale: l'app in uso, alternata al monitor `/demo/logs` esposto dall'API.*
 

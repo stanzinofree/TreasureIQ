@@ -1,0 +1,22 @@
+[package]
+name = "tiq_intent"
+version = "0.1.0"
+edition = "2021"
+
+# Mirrors api/treasureiq/chat/intent_scorer.py byte-for-byte on the shared
+# taxonomy.toml. See src/lib.rs for the parity notes and cases.json for the
+# golden test set that gates this crate.
+
+[lib]
+name = "tiq_intent"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3 = { version = "0.20.3", features = ["extension-module"] }
+regex = "1.10"
+toml = "0.8"
+serde = { version = "1.0", features = ["derive"] }
+
+[profile.release]
+lto = true
+codegen-units = 1

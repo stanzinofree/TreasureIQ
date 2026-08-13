@@ -1,110 +1,93 @@
-# SPEC — ciclo 16: due piattaforme per comune (BASE + Amministrazione Trasparente)
+# SPEC — ciclo 18a: discovery «leggi-prima» (chat rapida)
 
-slug: due-piattaforme-sweep
+slug: discovery-leggi-prima
 
 ## PROBLEM
-Oggi lo sweep riconosce UNA piattaforma per comune (la BASE del portale, first-match
-in `firma_da_risposta`). Ma l'Amministrazione Trasparente (AT) è quasi sempre un
-vendor DIVERSO (Barletta: BASE=Publisys SIAMO, AT=ISWEB), ed è lì che vivono i
-bandi — il cuore di TIQ. Senza riconoscere l'AT come piattaforma a sé, ogni comune
-è un caso a mano per l'ingestion bandi, e non c'è evidenza di quale connettore serve.
-Inoltre il first-match cieco nasconde le collisioni fra firme e non ri-classifica i
-già-etichettati quando aggiungi una firma nuova.
+Ogni percorso runtime della chat bandi **ri-scopre da capo** (fetch live da
+`comune.sito`) a ogni cache-miss, invece di leggere ciò che uno sweep/scan
+fratello ha GIÀ persistito. Non è che lo sweep sia stretto: è **frammentazione**
+su tre cassetti che non si parlano.
+
+- `alberatura.scopri_rami` ri-crawla la home per ritrovare il link AT: **fino a 5
+  fetch** per un URL già in `registro.endpoints.at`.
+- `bandi_live._scopri_bandi` ri-sonda `/wp-json/wp/v2/types` per dedurre il CPT/
+  rest_base già noto nella cache `mappa-connettore/{istat}.json`.
+- `bandi_arricchiti` legge `piattaforma_at` solo per un badge, mai per instradare;
+  `_CONNETTORE_AT_PER_PIATTAFORMA` è `{}` (dispatch morto). Sonda tutti alla cieca.
+
+Risultato: la chat aspetta fetch inutili quando la risposta era già su disco.
 
 ## GOAL
-Al primo sweep un comune esce con DUE piattaforme riconosciute — BASE (chat rapida:
-orari/uffici/servizi) e AT (ingestion + ricerca BANDI) — via una BATTERIA di firme
-(prova-tutte + punteggio, non first-match). Struttura chiusa/pulita ora, estensibile
-e veritiera dopo. Popola: scheda comune, logiche di interrogazione chat, storico
-sweep, analytics.
+La chat bandi risponde **veloce** perché instrada dai dati catalogati (0 rete) e
+sonda solo quando il catalogato manca o è scaduto. Il taglio è misurabile: meno
+fetch per risposta su Benevento (062008, Halley) e Albano (058003, WordPress),
+stesso output. Nessuna migrazione `storico.db`, nessun resweep nazionale (è
+ciclo18b, deferred). Il codice esce **più modulare e riusabile**: la lettura-prima
+del catalogo è un seam pulito su cui agganciare i connettori AT futuri.
 
 ## IN SCOPE
-- Riconoscimento BASE riscritto come **batteria a punteggio**: prova tutte le firme,
-  sceglie il vincitore per score, conserva i runner-up come diagnostica.
-- Riconoscimento **AT** con la stessa batteria, applicata alla pagina AT scoperta.
-- **Discovery URL AT** best-effort: link "Amministrazione trasparente" nel footer AgID
-  + probe percorsi/subdomini noti (`trasparenza.<dominio>`, `<dominio>/zf` Halley,
-  `/amministrazione-trasparente`). Se non trovata → `piattaforma_at = NON_TROVATA`.
-- Firme AT per le famiglie note: ISWEB, Halley trasparenza (/zf), WP AT-plugin,
-  Publisys/ISWEB. + le 6 BASE già mappate preservate.
-- **Schema** `portale_snapshot`: colonne nuove additive (piattaforma_at,
-  piattaforma_at_prova, at_url, firme_scattate diagnostiche).
-- **Re-sweep nazionale ORA** con la batteria (scelta committente D-04): i numeri
-  analytics si aggiornano; le cifre hardcoded in `site/vetrina.html` vanno
-  ri-verificate/aggiornate prima del video.
-- **Superfici**: scheda comune mostra due connettori ("portale X · trasparenza Y");
-  logica chat sa quale connettore userebbe (BASE per orari/uffici/servizi, AT per
-  bandi); analytics sottosezione "Piattaforme trasparenza" (GROUP BY piattaforma_at).
-- **Demo bandi ISWEB (Barletta)** end-to-end via open-data (`/pagina48` atti di
-  concessione) — brief SEPARABILE, cuttable se la deadline stringe.
+- **M1 — Semina alberatura da `endpoints.at`** (taglio grosso): `scopri_rami` legge
+  `registro.endpoints.at` e parte da quell'URL; fallback al crawl attuale se
+  assente/`None`. Persiste i 2 rami scoperti in cache DEDICATA
+  `LIVE_DIR/alberatura/{istat}/rami.json` (TTL ~14gg) così il miss bandi (8h) non
+  ri-crawla i rami. Self-contained in `alberatura.py`, testabile con fixture.
+- **M2 — bandi_live legge la mappa-cache prima di sondare**: se
+  `mappa-connettore/{istat}.json` è calda e `amministrazione_trasparente_via ==
+  "REST"`, salta il probe `/wp-json/types` e semina il rest_base noto; fallback al
+  probe se fredda/stale. Campo additivo `bandi` rest_base su `MappaConnettore`
+  (default, back-compat, popolato al prossimo `_sonda_mappa`).
+- **M3 — Routing AT-aware + fallback freschezza**: wire `_CONNETTORE_AT_PER_
+  PIATTAFORMA` come dispatch `piattaforma_at → connettori in UNION`; salta i probe
+  impossibili (Halley-only senza apice WP → niente cpt/pages); cascata solo se
+  TUTTI i catalogati tornano vuoti o `rilevato_il`/`ultima_scansione` oltre TTL.
+- **Docs**: dopo l'esecuzione, riscrivere le pagine che descrivono la catena di
+  discovery/retrieval (`/info` «come funziona», eventuali .md in `site/`) per
+  riflettere il leggi-prima e la regola catalogo→cascata. Onesto: cosa si legge da
+  disco, cosa resta live.
+- **Misura**: contatore fetch prima/dopo per mossa, su 062008 + 058003, nel report.
 
 ## CONSTRAINTS
-- Stack: Python (api/treasureiq), SQLite storico.db (versionato), Next/React (web).
-- Video hackathon 14 ago = priorità dura (oggi 11 ago).
-- Riuso: `firma_da_risposta` come motore firma; host-guard post-redirect (SSRF) come
-  in `_logo_one_shot`/`_scarica_logo`; `classificato_da='riclassificazione'` già
-  distinto da `evoluzione()`.
-- Non rompere connettori/test esistenti (test_piattaforma, test_egov, test_registro,
-  test_connettore_contratto).
+- Stack: Python (api/treasureiq), SQLite storico.db (versionato, NON toccato qui),
+  cache JSON in LIVE_DIR, Next/React (web) — la chat consuma gli stessi endpoint.
+- **VELOCITÀ CHAT = obiettivo primario**: ogni mossa deve ridurre (mai aumentare) i
+  fetch per risposta; nessuna regressione di latenza sul cache-hit.
+- **MODULARITÀ / RIUSO**: la lettura-prima è un helper condiviso, non copincollato
+  per connettore; il dispatch `piattaforma_at→connettore` è la porta d'ingresso per
+  le AT nuove (una riga in tabella, non un `if` nel motore). Niente duplicazione fra
+  `bandi_live`, `alberatura`, `mappa_connettore`.
+- **SICUREZZA**: ogni fetch resta dietro la guardia SSRF `fetch_guardato` (per-hop,
+  host atteso). Un URL letto dal catalogo NON salta la guardia: si valida come
+  quello live. Cache illeggibile = cache assente (mai crash, mai fiducia cieca).
+- Non rompere i test esistenti (`test_bandi_live`, `test_registro`, alberatura,
+  mappa_connettore). API in container su :8010, source non montato → `docker compose
+  up -d --build api` per test live; container ha rete, host bash no; pytest in
+  `api/.venv/bin/pytest` (PYTHONPATH=. da `api/`).
 - Delega subagent su Sonnet/Fable, mai Opus (crediti).
-- Mai commit su main: branch + PR.
+- Mai commit su main. Branch `ciclo18a/discovery-leggi-prima` da
+  `ciclo17/documenti-halley` (entrambi toccano `bandi_live.py`). Ogni mossa = 1
+  commit.
 
 ## DECISIONS
-- **D-01** Riconoscimento = BATTERIA a punteggio (prova-tutte, vincitore per score,
-  runner-up conservati), sostituisce il first-match. [committente: "Sostituisce"]
-- **D-02** DUE piattaforme per comune: `piattaforma` (BASE) + `piattaforma_at` (AT),
-  entrambe dalla batteria; AT girata sulla pagina AT scoperta.
-- **D-03** Discovery AT best-effort (footer AgID + subdomini/percorsi noti); niente
-  trovato → `NON_TROVATA` (dato onesto, non buco). Host-guard riusato.
-- **D-04** Re-sweep nazionale ORA, pre-video; numeri analytics aggiornati; cifre
-  `vetrina.html` ri-verificate. [committente: "No, ri-classifica subito"]
-- **D-05** Schema additivo su `portale_snapshot` (ALTER/migrazione): piattaforma_at,
-  piattaforma_at_prova, at_url, firme_scattate. `_COLONNE_PORTALE` esteso.
-- **D-06** Superfici: card due-connettori + chat connector-aware + analytics
-  sottosezione AT (GROUP BY piattaforma_at).
-- **D-07** Demo bandi ISWEB Barletta (open-data) come brief separabile/cuttable.
-- **D-08** Batteria non deve regredire i vendor BASE già noti: firme specialiste per
-  6 famiglie BASE + famiglie AT; i test esistenti aggiornati alle nuove aspettative.
+- **D-01** Catalogo per instradare (0 rete) → cascata SOLO se il connettore scelto
+  torna vuoto o il dato è oltre TTL. **MAI verify-first**: ricontrollare l'AT
+  rifarebbe la sonda che volevi evitare.
+- **D-02** Persistenza rami AT: cache DEDICATA `alberatura/{istat}/rami.json`, NON
+  allargare `registro.endpoints` (nessun accoppiamento allo scrittore-scan; i rami
+  si scoprono a chat-time, non a scan-time).
+- **D-03** Union esplicita per la doppia-piattaforma (BASE + AT + sottodominio
+  legacy): il dispatch può girare più connettori e deduplicare; non si perde una
+  fonte per «botta sicura» su una sola.
+- **D-04** `storico.db` NON toccato. Il widening census + change-detection nazionale
+  è ciclo18b, deferred (prima o dopo il 14 ago, da decidere). Vedi
+  memoria `discovery-tre-cassetti-leggi-prima`.
+- **D-05** Fallback su miss/stale è la rete di correttezza contro classificazioni
+  sbagliate/vecchie dello sweep: la cascata cieca resta come rimedio, non sparisce.
+- **D-06** Degrado onesto: un catalogo assente/illeggibile → si sonda (come oggi),
+  non si inventa. `NON_TROVATA`/vuoto restano dati, non errori.
 
-## DISCRETION (l'implementatore decide)
-- Nomi esatti colonne, formula di score, struttura interna della batteria.
-- Come la chat sceglie il connettore (routing base-vs-AT per intento).
-- Formato della diagnostica `firme_scattate` (stringa / JSON).
-- Ordine/soglia delle sonde di discovery AT.
-
-## DEFERRED (non ora)
-- Connettori-bandi completi per TUTTE le famiglie AT (ora solo demo ISWEB).
-- Scheduler auto-resweep.
-- Coda lunga vendor rari.
-
-## NON-GOALS
-- Non estraiamo bandi per ogni famiglia AT in questo ciclo.
-- Non cambiamo la lettura del modello AgID BASE.
-- Nessun nuovo standard imposto ai comuni.
-
-## RISKS
-- **R-01** Re-sweep nazionale sposta i numeri della vetrina (94,2%, tabella
-  piattaforme, 7896…). MITIG: dopo il re-sweep, aggiornare le cifre hardcoded in
-  `site/vetrina.html` e ri-verificarle contro ogni claim del video. [accettato D-04]
-- **R-02** Discovery AT falsi-URL / SSRF. MITIG: riuso host-guard post-redirect;
-  `NON_TROVATA` invece di indovinare.
-- **R-03** Batteria che sostituisce first-match cambia aspettative dei test
-  (test_piattaforma/test_egov). MITIG: aggiornare fixture; assert su vincitore+score.
-- **R-04** Migrazione schema su storico.db versionato: righe vecchie senza colonne
-  nuove. MITIG: ALTER additivo con default NULL; INSERT OR REPLACE già presente.
-- **R-05** Riproducibilità sweep (memoria ingest-non-riproducibile): il conteggio
-  SIAMO è variato 37 vs 22 fra run per flakiness. MITIG: retry nelle sonde; lo score
-  è deterministico dato l'HTML, la variabilità è di rete non di logica.
-- **R-06** Demo bandi ISWEB slitta sotto deadline. MITIG: D-07 brief separabile,
-  cuttable senza rompere il resto.
-
-## CONTEXT (scoperte a monte, non ipotesi)
-- Publisys SIAMO = 6º vendor BASE (Barletta): API facade `/kapi/api/sito/*`, envelope
-  `{"error":false,"results":[...]}`. AT su ISWEB (`trasparenza.<dominio>`), bandi con
-  export Open Data su `/pagina48_atti-di-concessione`.
-- Firma SIAMO pulita: `env.js` con `siamo.publisys.it` (definitiva) o `configurazione`
-  che torna l'envelope JSON (path fisso, no assunzione base). Il bare-200 su
-  `configurazione` = falso positivo (soft-404 HTML, es. Halley Ancarano).
-- Conteggio SIAMO nazionale = **25 comuni** confermati (firma `env.js` con `siamo.publisys.it`,
-  retry x3 su 7867 siti). Concentrati al Sud (hits 6000→3, 7000→25: coda ISTAT PZ/BA/…).
-  Lista in scratchpad `siamo_confirmed.tsv`. È il 6º vendor BASE reale, non un one-off Barletta.
+## OUT OF SCOPE
+- Migrazione schema `storico.db`, resweep nazionale, nuove misure analytics
+  (tutto ciclo18b).
+- Nuovi connettori AT/vendor: qui si prepara solo il seam del dispatch, non si
+  aggiungono famiglie.
+- Lettura del contenuto dei PDF (confine D-07 invariato: si porta al documento).

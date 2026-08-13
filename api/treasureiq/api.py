@@ -32,9 +32,11 @@ from typing import Literal
 
 from fastapi import Depends, FastAPI, HTTPException, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import HTMLResponse
 from itsdangerous import BadSignature, URLSafeSerializer
 from pydantic import BaseModel, Field
 
+from treasureiq import freschezza
 from treasureiq.chat.respond import (
     DEFAULT_COMUNE_ISTAT,
     MAX_MESSAGE_CHARS,
@@ -115,6 +117,19 @@ from treasureiq.stats import (
 )
 
 logger = logging.getLogger(__name__)
+
+# uvicorn configura i propri logger ma lascia i moduli applicativi a WARNING
+# (default del root): senza questo, la traccia INFO di freschezza ("fetch live:
+# …" da host_guard) resterebbe invisibile in `docker logs`. Diamo al package un
+# handler dedicato a INFO, senza propagare al root — niente doppioni con gli
+# access-log di uvicorn.
+_pkg_logger = logging.getLogger("treasureiq")
+if not any(isinstance(h, logging.StreamHandler) for h in _pkg_logger.handlers):
+    _handler = logging.StreamHandler()
+    _handler.setFormatter(logging.Formatter("%(levelname)s %(name)s: %(message)s"))
+    _pkg_logger.addHandler(_handler)
+_pkg_logger.setLevel(logging.INFO)
+_pkg_logger.propagate = False
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 
@@ -1565,9 +1580,184 @@ class FeedbackIn(BaseModel):
 # --------------------------------------------------------------------------
 
 
-@app.get("/api/health", tags=["Sistema"])
-def health() -> dict[str, object]:
-    return {"status": "ok", "comuni": list(COMUNI)}
+_DEMO_LIVE_HTML = """<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>motore TIQ — dati freschi dal comune</title>
+<style>
+  :root {
+    --ink: #1a1a1a; --carta: #faf8f4; --linea: #e0dccf;
+    --sigillo: #b5322e; --verde: #2f7d5b; --grigio: #6b6660;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--carta); color: var(--ink);
+    font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+    height: 100vh; display: flex; flex-direction: column;
+  }
+  header {
+    display: flex; align-items: baseline; gap: 14px;
+    padding: 14px 22px; border-bottom: 2px solid var(--ink); background: #fff;
+  }
+  header .sigillo {
+    font-weight: 700; letter-spacing: .5px; color: #fff;
+    background: var(--sigillo); padding: 3px 9px; border-radius: 2px;
+    font-size: 15px;
+  }
+  header .titolo { font-size: 15px; color: var(--grigio); }
+  header .titolo b { color: var(--ink); }
+  main { flex: 1; display: grid; grid-template-columns: 1fr 1fr; min-height: 0; }
+  #chat { display: flex; flex-direction: column; border-right: 1px solid var(--linea); min-height: 0; }
+  #log { flex: 1; overflow-y: auto; padding: 18px 20px; }
+  .bolla { max-width: 82%; margin-bottom: 14px; padding: 10px 13px; border-radius: 10px; line-height: 1.5; white-space: pre-wrap; font-size: 14px; }
+  .cittadino { margin-left: auto; background: var(--ink); color: #fff; border-bottom-right-radius: 2px; }
+  .tiq { background: #fff; border: 1px solid var(--linea); border-bottom-left-radius: 2px; }
+  .badge { display: inline-block; margin-top: 8px; font-size: 11px; letter-spacing: .3px; padding: 2px 7px; border-radius: 3px; background: #eef4f0; color: var(--verde); border: 1px solid #cfe3d8; }
+  form { display: flex; gap: 8px; padding: 14px 20px; border-top: 1px solid var(--linea); background: #fff; }
+  input { flex: 1; padding: 11px 13px; border: 1px solid var(--linea); border-radius: 8px; font-size: 14px; }
+  button { padding: 11px 18px; border: 0; border-radius: 8px; background: var(--sigillo); color: #fff; font-weight: 600; cursor: pointer; }
+  button:disabled { opacity: .5; cursor: default; }
+  #live { display: flex; flex-direction: column; min-height: 0; background: #14110e; color: #d8d2c6; }
+  #live h2 { margin: 0; padding: 13px 18px; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: #8f887c; border-bottom: 1px solid #2a251f; display: flex; align-items: center; gap: 9px; }
+  #live h2 .dot { width: 8px; height: 8px; border-radius: 50%; background: #3a332b; }
+  #live h2.attivo .dot { background: #4ade80; box-shadow: 0 0 8px #4ade80; }
+  #trail { flex: 1; overflow-y: auto; padding: 12px 16px; font-family: "SF Mono", "Menlo", monospace; font-size: 12px; line-height: 1.7; }
+  .ev { display: flex; gap: 10px; padding: 3px 0; animation: entra .3s ease; }
+  @keyframes entra { from { opacity: 0; transform: translateX(-6px); } to { opacity: 1; } }
+  .ev .fr { color: #4ade80; }
+  .ev .url { color: #d8d2c6; word-break: break-all; flex: 1; }
+  .ev .kb { color: #8f887c; white-space: nowrap; }
+  .vuoto { color: #6b6660; padding: 8px 0; font-style: italic; }
+</style>
+</head>
+<body>
+  <header>
+    <span class="sigillo">motore TIQ</span>
+    <span class="titolo"><b>dati freschi dal sito del comune</b> · ogni riga a destra è una chiamata web fatta ORA, non da un database</span>
+  </header>
+  <main>
+    <section id="chat">
+      <div id="log"></div>
+      <form id="f">
+        <input id="m" autocomplete="off" placeholder="Es. orari ufficio anagrafe di Albano Laziale" />
+        <button id="b" type="submit">Chiedi</button>
+      </form>
+    </section>
+    <aside id="live">
+      <h2 id="h"><span class="dot"></span> fetch live al comune</h2>
+      <div id="trail"><div class="vuoto">In attesa della prima domanda…</div></div>
+    </aside>
+  </main>
+<script>
+  const log = document.getElementById("log");
+  const trail = document.getElementById("trail");
+  const h = document.getElementById("h");
+  const form = document.getElementById("f");
+  const input = document.getElementById("m");
+  const btn = document.getElementById("b");
+  let history = [];
+  let ultimoId = 0;
+  let vuotoTolto = false;
+
+
+  function bolla(testo, chi, accessMode) {
+    const el = document.createElement("div");
+    el.className = "bolla " + chi;
+    el.textContent = testo;
+    if (accessMode) {
+      const b = document.createElement("div");
+      b.className = "badge";
+      b.textContent = "accesso: " + accessMode;
+      el.appendChild(b);
+    }
+    log.appendChild(el);
+    log.scrollTop = log.scrollHeight;
+    return el;
+  }
+
+  function host(u) {
+    try { const x = new URL(u); return x.hostname + x.pathname; } catch { return u; }
+  }
+
+  async function polla() {
+    try {
+      const r = await fetch("/api/freschezza/recent?dopo=" + ultimoId);
+      const d = await r.json();
+      for (const ev of d.eventi) {
+        if (!vuotoTolto) { trail.innerHTML = ""; vuotoTolto = true; }
+        ultimoId = ev.id;
+        const row = document.createElement("div");
+        row.className = "ev";
+        row.innerHTML = '<span class="fr">↓ live</span>'
+          + '<span class="url"></span>'
+          + '<span class="kb">' + Math.round(ev.byte / 1024) + ' KB</span>';
+        row.querySelector(".url").textContent = host(ev.url);
+        trail.appendChild(row);
+        trail.scrollTop = trail.scrollHeight;
+      }
+    } catch (e) { /* muto: la demo continua */ }
+  }
+  // Partiamo da «ora»: allineiamo ultimoId al massimo già in buffer PRIMA di
+  // avviare il polling, così il pannello mostra solo i fetch scatenati DA
+  // QUESTA sessione, non lo storico del server. Ogni riga che appare è causata
+  // dalla domanda appena fatta — è quello che rende onesta la demo.
+  fetch("/api/freschezza/recent")
+    .then((r) => r.json())
+    .then((d) => { for (const ev of d.eventi) ultimoId = Math.max(ultimoId, ev.id); })
+    .catch(() => {})
+    .finally(() => setInterval(polla, 700));
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const msg = input.value.trim();
+    if (!msg) return;
+    input.value = "";
+    btn.disabled = true;
+    bolla(msg, "cittadino");
+    history.push({ role: "user", content: msg });
+    h.classList.add("attivo");
+    try {
+      const r = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: msg, history }),
+      });
+      const d = await r.json();
+      bolla(d.reply || "(nessuna risposta)", "tiq", d.access_mode);
+      history.push({ role: "assistant", content: d.reply || "" });
+    } catch (err) {
+      bolla("Errore: API non raggiungibile.", "tiq");
+    } finally {
+      btn.disabled = false;
+      input.focus();
+      setTimeout(() => h.classList.remove("attivo"), 2500);
+    }
+  });
+  input.focus();
+</script>
+</body>
+</html>"""
+
+
+@app.get("/api/freschezza/recent", tags=["Sistema"])
+def freschezza_recent(dopo: int = 0) -> dict[str, object]:
+    """Gli ultimi fetch live andati a buon fine dopo l'evento `dopo`.
+
+    Alimenta il pannello «fetch live» della console-demo: un cache-hit non
+    compare qui, quindi ogni riga è la prova che quel dato arriva ORA dal
+    sito del comune. Diagnostica pubblica (host già visibili nelle `fonte`),
+    nessun segreto."""
+    return {"eventi": freschezza.recenti(dopo)}
+
+
+@app.get("/demo/live", response_class=HTMLResponse, tags=["Sistema"])
+def demo_live() -> HTMLResponse:
+    """Console-demo «motore TIQ»: chat a sinistra, traccia dei fetch live al
+    comune a destra. Servita same-origin dall'API (niente CORS) — pensata per
+    registrare la GIF che mostra i dati arrivare freschi dal sito comunale."""
+    return HTMLResponse(_DEMO_LIVE_HTML)
 
 
 @app.post("/api/session", response_model=CitizenProfile, tags=["Cittadino"])

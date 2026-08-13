@@ -22,6 +22,21 @@ Progetto realizzato per il **SuperAgents Civic Hackathon** (Play New, 2026).
 
 ---
 
+## I dati arrivano ORA dal sito del comune
+
+Non da un database che invecchia. Ogni risposta su un comune non censito è
+costruita leggendo il portale al momento. Qui a destra, mentre il cittadino
+chiede gli orari dell'anagrafe di Albano Laziale, scorrono le chiamate web
+che il **motore TIQ** fa in quel momento al sito del comune — la pagina
+dell'ufficio, la home, lo stemma. Un dato servito da cache non comparirebbe:
+ogni riga è la prova che quella risposta è fresca.
+
+![Console motore TIQ: la chat a sinistra, i fetch live al sito del comune che scorrono a destra](site/assets/tiq-demo-live.gif)
+
+*Caso reale, registrato dalla console `/demo/live` esposta dall'API.*
+
+---
+
 ## Il problema, misurato
 
 Il Comune di Albano Laziale pubblica 32 servizi tramite un'API aperta. Il tema

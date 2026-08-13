@@ -2181,7 +2181,15 @@ async def _risposta_da_connettore(
             integration_cost=[],
             web_results=[],
         ),
-        esito_connettore=esito_mostrato,
+        # Quando abbiamo puntato UN ufficio preciso (`ufficio is not None`) la
+        # scheda verde (`info.office`) è già la risposta: allegare anche il dump
+        # completo del portale — tutti gli uffici + amministrazione trasparente,
+        # reso dal frontend come blocco giallo `SchedaLettoOra` — sovrasta la
+        # scheda e chiede al cittadino di rileggere ciò che non ha chiesto. Il
+        # dump resta solo quando NON c'è match d'ufficio: là è `esito_mostrato`
+        # — l'elenco completo se nessuno combacia, o i soli candidati scoped se
+        # più uffici citano la parola nominata (ciclo18k, la scelta al cittadino).
+        esito_connettore=esito_mostrato if ufficio is None else None,
     )
 
 

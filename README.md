@@ -20,6 +20,17 @@ privilegiati.
 
 Progetto realizzato per il **SuperAgents Civic Hackathon** (Play New, 2026).
 
+> **Provalo in un comando.** Lo snapshot dei dati reali e la cache sono
+> committati, i font sono locali: gira **senza rete e senza API key**.
+> ```bash
+> git clone https://github.com/stanzinofree/TreasureIQ.git && cd TreasureIQ && make up
+> ```
+> Poi apri <http://localhost:3000>. Dettagli, alternative senza Docker e comandi
+> del Makefile nella sezione [**Eseguire il progetto**](#eseguire-il-progetto).
+>
+> Il **video demo** e il racconto del progetto sono sul **[sito
+> vetrina](https://stanzinofree.github.io/TreasureIQ/)**.
+
 ---
 
 ## I dati arrivano ORA dal sito del comune
@@ -402,6 +413,49 @@ disonesta.
   visibile.
 - **Lo snapshot è una copia puntuale.** La fonte autorevole resta la pagina del
   comune, a cui ogni risultato rimanda.
+
+---
+
+## Dove va, dopo l'MVP
+
+L'MVP è servito a una cosa, e l'ha fatta: **dimostrare che l'idea regge**. Che i
+dati civici esistono ma non sono leggibili da una macchina, che si può leggerli
+al momento marcandone la provenienza, e che un verdetto di eleggibilità può
+essere deterministico e onesto invece che indovinato da un modello. Questo è
+provato.
+
+La strada dopo la vittoria non aggiunge feature: **irrobustisce le fondamenta** —
+stabilità, riproducibilità, standardizzazione — per il salto da prototipo che
+convince a sistema di cui un ente si fida. Il principio unico è che **ogni
+cucitura è un contratto tipizzato, attraversato da funzioni pure, con la
+provenienza sempre in chiaro** — vale per la chat come per i connettori.
+
+- **Il motore chat come pipeline standardizzata.** Oggi profilo, intento e
+  filtri vivono intrecciati nel codice di risposta. La direzione è un flusso
+  lineare e ispezionabile — normalizzazione → estrattori → validator → filtri
+  canonici → retrieval → verdetto → UI — dove ogni slot estratto porta la sua
+  prova (`{field, value, confidence, source, matched}`, con la confidenza
+  *derivata dalla provenienza*, mai emessa dal modello). Un profilo modellato
+  come reducer event-sourced spegne alla radice la classe di bug di stato.
+- **I connettori come capability, non monoliti.** Verbi discreti
+  (`elenca_uffici`, `retrieve_ufficio`, `scan_logo`, `scan_mappa_sito`) al posto
+  di una funzione che scarica tutto in un colpo, così la chat chiede *una* cosa
+  senza ri-scansionare.
+- **Schemi e contratti congelati in un solo posto.** È ciò che rende un
+  connettore o l'analizzatore riscrivibili — anche in un altro linguaggio, dove
+  scraping o performance lo ripagano — senza rompere il resto: il confine dati
+  **è** il confine di linguaggio, difeso da un conformance test come già fa
+  l'oracolo di parità dello scorer intent.
+- **L'accesso mobile-first, fino a un'app dedicata.** Un cittadino apre il sito
+  del Comune dal telefono, non dalla scrivania: la UX va rifatta col pollice
+  come unità di misura, e dove il web mobile non basta — notifiche di scadenza,
+  profilo persistente, SPID nativo — la strada è uno spin-off in app, con lo
+  stesso `api` dietro.
+
+Il metodo è quello già rodato: contratto congelato, test di parità sul
+comportamento attuale, un pezzo alla volta. Nessun big-bang. Il dettaglio e
+l'ordine sono in [docs/roadmap.md](docs/roadmap.md) e
+[docs/da-fare.md](docs/da-fare.md).
 
 ---
 

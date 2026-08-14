@@ -116,6 +116,68 @@ ISTAT, nessuna richiesta di rete.
 L'indice non aggancia sempre. È un limite nostro, contato come tale
 (`nota_misura`), non come inadempienza del fornitore.
 
+### 11 · L'ufficio nominato non aggancia lo store che ce l'ha
+
+Sintomo (Bisceglie, 110003, WordPress AgID): il cittadino chiede la
+**viabilità**, la chat non la trova e ripiega sui contatti dell'anagrafe —
+mentre lo snapshot connettore contiene eccome `Sicurezza e Viabilità` (e la
+sua ripartizione). Non è un buco dati: è **estrazione + match** dell'ufficio.
+
+Due difetti a monte, verificati:
+
+- **`_ufficio_chiesto` (`respond.py`) riconosce solo `ufficio <parola>`.**
+  Il regex `uffici[oi]\s+…([parola])` fallisce su `viabilità`, `servizio
+  viabilità`, `sportello viabilità`, e su `ufficio sicurezza e viabilità`
+  cattura solo `sicurezza`. Senza un ufficio estratto, il ramo connettore non
+  parte → ripiego URP. *Allargamento:* accettare `servizio|settore|sportello|
+  ripartizione|assessorato` oltre `ufficio`, e catturare nomi multi-parola,
+  non il primo token.
+- **La card "URP" non è l'URP.** `orari-urp/{istat}.json` cachea l'ufficio
+  *rappresentativo* scelto dal censimento (`ufficio_scelto`), che qui è
+  l'Anagrafe. Copy da correggere: se non è l'URP, dire «recapiti dell'ufficio
+  Anagrafe», non spacciarlo per URP.
+
+Il match a valle (`_ufficio_connettore_pertinente`) è già corretto: quando due
+uffici combaciano (ripartizione + servizio) li propone come **scelta**.
+
+#### PIANIFICATO — modulo NLP-uffici, mini-piano Livello A
+
+Riframe: scegliere l'ufficio **non** è vocabolario aperto. Il set uffici del
+comune è **noto** (lo store connettore di Bisceglie ne elenca 53). È
+**retrieval del messaggio contro una lista nota** — stessa forma di comune
+(lista ISTAT) e topic (tassonomia): entrambi già deterministici.
+
+Livello A (deterministico, riusa il crate scorer):
+
+1. **Sorgente ufficio = store, non regex.** Carica i nomi ufficio da
+   `UfficioConnettore.nome` dello store del comune; normalizza (casefold,
+   accenti, `servizio/settore/sportello/ripartizione/assessorato` come rumore
+   di testa, non come trigger obbligatorio).
+2. **Scorer riusabile.** Stessa macchina del crate intent (keyword→peso per
+   token, confine di parola, argmax con margine), ma i "topic" sono i nomi
+   ufficio caricati a runtime dallo store — non la tassonomia fissa. Un
+   `score_ufficio(msg, uffici) -> (slug|None, secondi)` foglia, testabile,
+   portabile 1:1 in Rust come `tiq_intent`.
+3. **Trigger largo.** Sul rail informazione tenta *sempre* il match ufficio,
+   non solo dietro la parola letterale «ufficio». `_ufficio_chiesto` resta
+   come scorciatoia, ma non è più l'unica porta.
+4. **Pareggio = scelta, non indovinello.** Margine sotto soglia o due nomi a
+   pari peso (ripartizione + servizio) → `_ufficio_connettore_pertinente` già
+   propone la scelta al cittadino (comportamento corretto, invariato).
+5. **Golden condivisi.** `cases-uffici.json` per-comune (frase→slug atteso,
+   `null`=ambiguo/assente), oracolo per Python e per l'eventuale port Rust —
+   stesso schema di `cases.json`.
+6. **Fix copy URP** (indipendente, 1 riga): se `ufficio_scelto` ≠ URP, la card
+   dice «recapiti dell'ufficio X», non «URP».
+
+Fuori scope L1, misurato dopo: **embeddings** solo sul residuo dove le parole
+non si sovrappongono (`buche in strada`→`Viabilità`, `dove pago il bollo`→
+`Tributi`) — ranking della lista nota, non generazione. **Mai** LLM sul «tono»
+per scegliere l'ufficio: l'ufficio lo decidono i sostantivi, non il sentiment,
+e affidarlo al modello reintroduce l'allucinazione che la cintura esiste per
+evitare. Il contesto-chat (ereditare ufficio/comune dai turni) è già in
+`_eredita_dal_contesto`, da estendere all'ufficio.
+
 ---
 
 ## Connettori: dove l'effort rende di più
@@ -161,6 +223,111 @@ Dettagli e soglie in [evoluzione.md](evoluzione.md). In sintesi: costruire
 limite per host, registro delle esecuzioni, scheduler piccolo. Non costruire
 coda di messaggi, object storage, database server — con le condizioni
 misurabili che li rimetterebbero in gioco.
+
+### VALUTAZIONE — standardizzare i connettori (contratto verbi + capability)
+
+Oggi un connettore è **una funzione monolitica** (`leggi_<vendor>(comune,
+sonda) -> EsitoConnettore`): produce tutto in un colpo — piattaforma, uffici,
+AT, logo. Va bene per lo sweep batch, male per la chat, che spesso vuole *una*
+cosa (l'orario di *quel* ufficio, il logo) e oggi non può chiederla senza
+ri-scansionare tutto. Il caso Bisceglie (uffici §11) e il post-MVP «connettore
+target singolo» sono due sintomi dello stesso limite.
+
+Direzione (da valutare, non ancora pianificata):
+
+1. **Contratto a capability, non monolite.** Scomporre il connettore in verbi
+   discreti con firma stabile, ognuno indipendente e cachabile:
+   `scopri_piattaforma`, `elenca_uffici`, `retrieve_ufficio(target)`,
+   `scan_logo`, `scan_mappa_sito`, `scopri_at`. La chat chiama il verbo che le
+   serve; lo sweep li chiama tutti. `EsitoConnettore` resta il tipo di ritorno
+   aggregato, ma composto da pezzi che esistono anche da soli.
+2. **Sequenza pulita chat↔connettore.** Un'unica tabella verbo→metodo, gli
+   stessi nomi da entrambi i lati, così non si rincorrono più helper sparsi in
+   `respond.py` (`_office_da_ufficio_nominato`, `_ufficio_connettore_pertinente`,
+   sonde live) che oggi reimplementano pezzi di retrieve fuori dal connettore.
+3. **Retrieve customizzato *dentro* il connettore.** Ogni capability vive nel
+   connettore del vendor (logo dove sta il logo — cfr. eGov `/header.html`,
+   Municipium CDN; uffici dall'indice `unita_organizzativa`; mappa dalla
+   sitemap). La chat non conosce le stranezze del portale: chiede `scan_logo`,
+   il connettore sa dove guardare.
+4. **Confine dati = confine di linguaggio.** Se il contratto è un confine JSON
+   pulito (già lo è: `EsitoConnettore` è un modello serializzabile), un
+   connettore può essere un **binario/servizio Rust o Go** che emette lo stesso
+   JSON — utile dove lo scraping rende meglio fuori da Python (portali lenti,
+   parsing pesante, concorrenza). Confine per sottoprocesso/IPC, non PyO3:
+   lo scraping è I/O-bound e va isolato, non embeddato in-process. Precedente:
+   lo scorer intent è già uscito da Python via crate ([[intent]] sprint).
+
+Costo/rischio: tocca `connettore.py` (D-09/D-10) e tutti i vendor
+(comweb/egov/openweb/municipium/wordpress_agid/openpa) + i punti chat che oggi
+scavano da soli. Blast radius alto → dietro test di parità sullo store attuale
+(stesso `EsitoConnettore` prima/dopo), un vendor alla volta. Prerequisito
+naturale del modulo NLP-uffici §11 (che vuole `elenca_uffici`/`retrieve_ufficio`
+come capability pulite).
+
+### VALUTAZIONE — il motore chat come pipeline a contratti tipizzati
+
+Il filo: **ogni cucitura = contratto tipizzato + provenienza + funzione pura**.
+Il flusso obiettivo è lineare e ispezionabile:
+
+```
+CHAT → NORMALIZZAZIONE ─┬─ PROFILE extractor ─┐
+                        ├─ INTENT detector   ─┼─ VALIDATOR → FILTRI CANONICI → RETRIEVAL → VERDETTO → UI
+                        └─ QUERY-FILTER extr. ─┘
+```
+
+Ogni slot estratto porta la sua prova, non solo il valore:
+
+```json
+{ "field": "children", "value": false, "confidence": 1.0,
+  "source": "explicit_user_statement", "matched": "non ho figli" }
+```
+
+**Guardia dura:** `confidence` è **derivata dalla source, non emessa dal
+modello** — `explicit_user_statement`=1.0, `marker`=0.9, `inferred`≤0.7,
+`model_topic`=0.6 (soglia scorer). Se il numero lo spara il modello si
+riapre l'allucinazione che scorer + cintura esistono per chiudere. La
+provenienza dà anche l'audit civico: «perché pensi non abbia figli?» →
+«hai scritto 'non ho figli'» = fiducia, ed è storia da demo.
+
+Sei rework, ordinati per rapporto valore/rischio:
+
+1. **Registro schemi = confine di linguaggio (prerequisito economico).** Un
+   solo posto per gli schemi (JSON Schema → genera tipi Python *e* Rust/Go).
+   L'analizzatore in Rust/Go regge **solo** se il contratto è congelato e ogni
+   impl passa lo stesso **conformance test** — identico all'oracolo parità
+   dello scorer (`cases.json`, 35/35). Senza, «riscrivo in Rust» = due verità
+   che divergono. Sblocca 2–6.
+2. **Profilo cittadino = reducer event-sourced, non mutazione sparsa.** Oggi il
+   profilo si accumula tra i turni con cinture (R-8/R-9), override, reset — ed è
+   la classe di bug ricorrente (leak Albano al cambio comune, reset override su
+   nuova conversazione, `comune_hint`). Ogni turno emette **eventi tipizzati**
+   (`slot_asserito`, `slot_ritrattato`, `comune_cambiato`); un reducer puro li
+   ripiega. «cambio comune» diventa un evento, non un caso speciale sparso in
+   `respond.py`. Deterministico, replayabile — uccide la famiglia bug di stato.
+3. **Validator = riconciliatore di conflitti (il crux).** Non valida solo la
+   forma: **riconcilia**. Turno 1 «non ho figli» (1.0), turno 5 «mia figlia» →
+   conflitto. Regola deterministica: provenienza più forte + più recente vince,
+   il conflitto resta *tracciato*, non silenziato. Qui la provenienza paga.
+4. **Retrieval = router di capability tipizzate (gemello dei connettori).** Il
+   motore di ricerca riceve i filtri canonici e sceglie la query; ogni
+   capability **dichiara i filtri che consuma e l'evidenza che produce**.
+   «quale query per questo intent» = lookup, non `if/elif`. Stessa dottrina
+   capability dei connettori (sezione sopra).
+5. **Verdetto vs verbalizzazione, muro netto.** Retrieval torna evidenza
+   tipizzata con slot; il verbalizzatore rende **solo** template su slot, non
+   vede mai la cifra grezza da riformattare. La corruzione cifre non può
+   accadere per costruzione, non per guardia. Roadmap §3 ci si appoggia.
+6. **Replay harness first-class (la rete che rende sicura la riscrittura).**
+   Unificare `matrice.py` (90 combo), `cases.json`, suite e2e in un harness che
+   registra sessioni reali anonimizzate come fixture e **rigioca l'intera
+   pipeline deterministicamente**. Ogni bug → una fixture. È ciò che rende
+   non-suicida cambiare motore: l'harness dice se la pipeline è ancora verde.
+
+Priorità: **1** (prerequisito), poi **2** e **6** comprano più stabilità subito
+(la classe bug di stato, e la rete per riscrivere in sicurezza). 3–5 seguono il
+disegno del flusso. Blast radius alto e trasversale → stesso metodo dei
+connettori: contratto congelato, conformance test, un pezzo alla volta.
 
 ---
 

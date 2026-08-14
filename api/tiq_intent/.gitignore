@@ -1,0 +1,5 @@
+# Rust build artifacts — the wheel is built inside the Docker rust-builder
+# stage, never committed. Nothing here belongs in git except the source.
+/target/
+Cargo.lock
+*.so

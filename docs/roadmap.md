@@ -57,6 +57,16 @@ Riconoscere una piattaforma non basta: bisogna **leggerla bene**.
   all'ente di esporre un endpoint pubblico dei propri contenuti. Un Comune che
   pubblica già i dati per legge non ha ragione di nasconderli dietro un
   rendering che nemmeno un motore di ricerca legge.
+- **Standardizzare il connettore in capability, non in un monolite.** Oggi ogni
+  vendor è una funzione sola che produce tutto in un colpo; la chat, che spesso
+  vuole *una* cosa (l'orario di quell'ufficio, il logo), non può chiederla senza
+  ri-scansionare. La direzione è un contratto a **verbi discreti** — `elenca_uffici`,
+  `retrieve_ufficio`, `scan_logo`, `scan_mappa_sito`, `scopri_at` — con la stessa
+  sequenza da entrambi i lati chat↔connettore, e il retrieve customizzato *dentro*
+  il connettore (dove sta il logo lo sa il vendor, non la chat). Confine dati
+  pulito = confine di linguaggio: un connettore potrà essere un binario Rust/Go
+  che emette lo stesso `EsitoConnettore` dove lo scraping rende meglio fuori da
+  Python. → dettaglio in [da-fare.md](da-fare.md)
 
 ## 3 · Una chat che risponde come una persona informata
 
@@ -102,6 +112,81 @@ uffici, sono **bandi e diritti**.
   del cittadino con i vincoli pubblicati, senza interpretazione. Più requisiti
   esposti in campi tipizzati significa meno margine per l'ambiguità — ed è la
   ragione per cui, a valle, TIQ caldeggia lo standard di esposizione.
+
+---
+
+## Oltre l'MVP · Da prototipo validato a sistema
+
+*I quattro fronti sopra fanno crescere TIQ in larghezza — più comuni, risposte
+più utili. Questo capitolo è un'altra cosa: **la maturazione**. L'MVP è servito
+a una cosa sola, e l'ha fatta: dimostrare che l'idea regge e ha potenziale. La
+strada dopo la vittoria non aggiunge feature, **irrobustisce le fondamenta** —
+stabilità, applicabilità, riproducibilità, con un occhio a performance,
+standardizzazione e a un'evoluzione che non rompa gli schemi e i contratti a
+ogni passo. È il salto da prototipo che convince a sistema di cui ci si fida.*
+
+Il principio unico: **ogni cucitura del sistema è un contratto tipizzato,
+attraversato da funzioni pure, con la provenienza sempre in chiaro.** Vale per
+la chat come per i connettori. Due cantieri, stessa dottrina.
+
+### Il motore chat come pipeline standardizzata
+
+Oggi l'estrazione di profilo, intento e filtri vive intrecciata nel codice di
+risposta, con cinture e casi speciali che si sono accumulati. La direzione è un
+flusso lineare e ispezionabile — l'utente scrive, un analizzatore (funzione,
+microservizio o binario Rust/Go) normalizza e torna filtri canonici, un motore
+di ricerca li consuma e compone la risposta:
+
+```
+CHAT → NORMALIZZAZIONE → [profilo · intento · filtri] → VALIDATOR
+     → FILTRI CANONICI → RETRIEVAL → VERDETTO → UI
+```
+
+Ogni slot estratto porta la sua prova — non solo «niente figli», ma *perché* lo
+sappiamo: `{ field, value, confidence, source, matched }`, con la confidenza
+**derivata dalla provenienza, mai emessa dal modello**. Questo dà due cose
+insieme: filtri più precisi (segmentare l'intento sul settore giusto) e un
+audit civico — TIQ sa sempre spiegare *da dove* viene una sua convinzione.
+
+Sei rework compongono il cantiere — registro schemi condiviso, profilo come
+reducer event-sourced, validator che riconcilia i conflitti, retrieval come
+router di capability, muro netto fra verdetto e verbalizzazione, e un replay
+harness che rigioca l'intera pipeline sui casi reali. Il dettaglio operativo e
+l'ordine (il registro schemi apre la strada; reducer e replay comprano più
+stabilità subito) sono in [da-fare.md](da-fare.md).
+
+### L'accesso: mobile-first, fino a un'app dedicata
+
+Un cittadino apre il sito del Comune dal telefono, in coda a uno sportello o
+sul bus — non dalla scrivania. L'MVP è nato responsive ma pensato desktop; il
+passo di maturità è **rifare la UX mobile-first**, il pollice come unità di
+misura: la chat che riempie lo schermo, la scheda civica che scorre, i recapiti
+a un tocco per chiamare. E dove il mobile web non basta — notifiche di scadenza
+di un bando, il profilo che persiste, l'accesso SPID nativo — la strada è uno
+**spin-off in app dedicata**, con lo stesso `api` dietro: il confine chat↔API
+già pulito rende l'app un altro client, non una riscrittura.
+
+### Perché è questa la strada, e non altre feature
+
+- **Determinismo.** Un flusso a stadi puri si testa stadio per stadio e si
+  rigioca uguale a sé stesso; la famiglia di bug di stato — un follow-up che si
+  porta dietro il comune sbagliato — sparisce alla radice invece di essere
+  rincorsa caso per caso.
+- **Riproducibilità.** Ogni bug diventa una fixture nel replay harness; una
+  regressione si vede prima di arrivare in chat, non dopo.
+- **Standardizzazione e sostenibilità.** Schemi e contratti congelati in un solo
+  posto significano che un connettore o un analizzatore possono essere riscritti
+  — anche in un altro linguaggio, dove lo scraping o le performance lo ripagano —
+  senza rompere il resto: il confine dati **è** il confine di linguaggio, e un
+  conformance test difende quel confine come già fa l'oracolo di parità dello
+  scorer intent (35/35).
+- **Professionalità.** È la differenza fra un prototipo che dimostra e un sistema
+  di cui un ente si fida: contratti espliciti, provenienza tracciata, verdetto
+  separato dalla verbalizzazione.
+
+Blast radius alto e trasversale: si procede col metodo già rodato sui
+connettori — contratto congelato, test di parità sul comportamento attuale, un
+pezzo alla volta. Nessun big-bang.
 
 ---
 

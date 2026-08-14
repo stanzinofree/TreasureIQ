@@ -18,6 +18,7 @@ and outside the model keeps the retrieval step auditable.
 from __future__ import annotations
 
 import logging
+import os
 import re
 import unicodedata
 from enum import Enum
@@ -25,6 +26,7 @@ from typing import Literal
 
 from pydantic import BaseModel, Field
 
+from treasureiq.chat.intent_scorer import score_intent
 from treasureiq.extract.providers import LLMProvider
 from treasureiq.schema import EmploymentStatus
 
@@ -564,6 +566,73 @@ lascia sempre vuoto: non indovinare mai.
 Non decidi se il cittadino ha diritto a qualcosa: quello lo fa un altro sistema."""
 
 
+#: Quale motore classifica topic/kind.
+#:   "model" (default): il modello LLM via `provider.aparse`, comportamento
+#:     storico invariato.
+#:   "scorer": lo scorer deterministico livello A in Python
+#:     (`intent_scorer.score_intent`) — niente modello, esito riproducibile.
+#:   "rust": lo stesso scorer, ma il crate nativo PyO3 `tiq_intent` (parità
+#:     35/35 sull'oracolo, ~6-7x piu' veloce dello scorer Python). Se il modulo
+#:     nativo non e' installato (immagine senza wheel) ripiega su "scorer".
+#: I rami deterministici ("scorer"/"rust") condividono la stessa cintura a
+#: valle (_confirm_*, R-8): cambia solo CHI propone topic/kind, non le guardie.
+_INTENT_BACKEND = os.environ.get("TREASUREIQ_INTENT_BACKEND", "model").strip().lower()
+
+#: Backend che NON chiamano il modello: lo scorer deterministico livello A.
+_BACKEND_DETERMINISTICI = frozenset({"scorer", "rust"})
+
+
+def _beneficiary_role_da_testo(message: str) -> BeneficiaryRole | None:
+    """Deriva il ruolo dai SOLI marcatori nel testo — esattamente l'esito che
+    `_confirm_beneficiary_role` (R-9) terrebbe comunque.
+
+    Il ruolo finale non e' mai stato una scelta del modello: qualunque cosa
+    proponesse, sopravviveva solo se un marcatore era presente nel testo del
+    cittadino. Col backend scorer il modello non c'e' piu' a proporlo, quindi
+    lo si ricava direttamente dai marcatori. Nessun ruolo se il testo non lo
+    dichiara; nessun ruolo nemmeno se ne dichiara due insieme (ambiguo ->
+    None, non si indovina)."""
+    haystack = message.casefold()
+    trovati = [
+        role
+        for role, markers in BENEFICIARY_ROLE_MARKERS.items()
+        if any(marker in haystack for marker in markers)
+    ]
+    return trovati[0] if len(trovati) == 1 else None
+
+
+def _score_livello_a(message: str) -> tuple[str, str]:
+    """(topic, kind) dallo scorer deterministico. Backend "rust" usa il crate
+    nativo `tiq_intent` (parità 35/35, ~6-7x); se il modulo non c'e' ripiega
+    sullo scorer Python — stesso output, solo piu' lento (fail-safe, mai
+    crash su un'immagine senza wheel)."""
+    if _INTENT_BACKEND == "rust":
+        try:
+            import tiq_intent
+
+            topic, kind, _conf = tiq_intent.score(message)
+            return topic, kind
+        except ImportError:
+            pass  # nessun wheel nativo: giu' allo scorer Python
+    esito = score_intent(message)
+    return esito.topic, esito.kind
+
+
+def _intent_dallo_scorer(message: str) -> "_ModelIntent":
+    """Costruisce un `_ModelIntent` dallo scorer deterministico, nella stessa
+    forma che il modello avrebbe restituito, cosi' la cintura a valle non
+    distingue i due backend. `comune_hint` resta None (lo scorer non tocca il
+    comune: lo risolve `_comuni_candidati`/`risolvi_comune` dal testo, e
+    `_confirm_comune_hint` lo azzererebbe comunque)."""
+    topic, kind = _score_livello_a(message)
+    return _ModelIntent(
+        topic=Topic(topic),
+        kind=QuestionKind(kind),
+        comune_hint=None,
+        beneficiary_role=_beneficiary_role_da_testo(message),
+    )
+
+
 async def extract_intent(
     *, message: str, provider: LLMProvider, storia: list[str] | None = None
 ) -> ChatIntent:
@@ -589,18 +658,24 @@ async def extract_intent(
     which never trusts the model alone for that (D-47 hard rule).
     """
     try:
-        user_message = message
-        if storia:
-            turni_precedenti = "\n".join(f"- {turno}" for turno in storia[-3:])
-            user_message = (
-                "Turni precedenti del cittadino (solo per capire il contesto, "
-                "NON classificare questi):\n"
-                f"{turni_precedenti}\n\n"
-                f"Messaggio da classificare: {message}"
+        if _INTENT_BACKEND in _BACKEND_DETERMINISTICI:
+            # Livello A deterministico: nessuna chiamata al modello, nessun
+            # bisogno di `storia` (il carryover di topic/comune fra turni non
+            # e' compito di questa funzione — lo fa `respond._eredita_dal_contesto`).
+            parsed = _intent_dallo_scorer(message)
+        else:
+            user_message = message
+            if storia:
+                turni_precedenti = "\n".join(f"- {turno}" for turno in storia[-3:])
+                user_message = (
+                    "Turni precedenti del cittadino (solo per capire il contesto, "
+                    "NON classificare questi):\n"
+                    f"{turni_precedenti}\n\n"
+                    f"Messaggio da classificare: {message}"
+                )
+            parsed = await provider.aparse(
+                system=INTENT_SYSTEM_PROMPT, user=user_message, output_model=_ModelIntent
             )
-        parsed = await provider.aparse(
-            system=INTENT_SYSTEM_PROMPT, user=user_message, output_model=_ModelIntent
-        )
         confirmed_role = _confirm_beneficiary_role(message=message, role=parsed.beneficiary_role)
         updates: dict[str, object] = {}
         if confirmed_role != parsed.beneficiary_role:
@@ -620,7 +695,8 @@ async def extract_intent(
             # hold for `beneficiary_role` either).
             updates["kind"] = QuestionKind.INFORMAZIONE
         if (
-            updates.get("kind", parsed.kind) is QuestionKind.AGEVOLAZIONE
+            _INTENT_BACKEND not in _BACKEND_DETERMINISTICI
+            and updates.get("kind", parsed.kind) is QuestionKind.AGEVOLAZIONE
             and parsed.topic is not Topic.SCONOSCIUTO
             and _BONUS_GENERICO_RE.search(message)
             and not _topic_keyword_presente(message)
@@ -631,6 +707,10 @@ async def extract_intent(
             # interesse mai dichiarato e la domanda-categoria (D-55) non partiva
             # mai. Senza un aggancio nel testo il topic torna a SCONOSCIUTO —
             # il segnale con cui `respond` chiede quale categoria.
+            # Esente il backend scorer: li' un topic != SCONOSCIUTO E' gia'
+            # la prova che una keyword ha matchato (lo scorer non incolla mai
+            # un topic senza hit), quindi questa toppa e' redundante e
+            # declasserebbe a torto casi legittimi tipo «bonus per il gas».
             updates["topic"] = Topic.SCONOSCIUTO
         if (
             updates.get("topic", parsed.topic) is Topic.BANDI

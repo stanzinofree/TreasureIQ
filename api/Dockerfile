@@ -43,7 +43,7 @@ USER treasureiq
 EXPOSE 8000
 
 HEALTHCHECK --interval=15s --timeout=3s --start-period=10s --retries=3 \
-    CMD python -c "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/api/health',timeout=2).status==200 else 1)"
+    CMD python -c "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/api/status',timeout=2).status==200 else 1)"
 
 CMD ["python", "-m", "uvicorn", "treasureiq.api:app", "--host", "0.0.0.0", "--port", "8000"]
 

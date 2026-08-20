@@ -27,7 +27,7 @@ from treasureiq.catalog.connector_defaults import default_connector_registry
 from treasureiq.catalog.connector_registry import ConnectorRegistry
 from treasureiq.catalog.wordpress_connector import WordPressAgidConnector
 from treasureiq.catalog.web_connector import WebScrapeConnector
-from treasureiq.catalog.scraping import ScrapeEngine, ScrapeResult
+from treasureiq.catalog.scraping import HtmlScrapeEngine, ScrapeEngine, ScrapeResult
 from treasureiq.catalog.data_contracts import (
     ConnectorRef,
     DataBatch,
@@ -70,6 +70,7 @@ __all__ = [
     "WebScrapeConnector",
     "ScrapeEngine",
     "ScrapeResult",
+    "HtmlScrapeEngine",
     "WebScrapeAdapter",
     "DataBatch",
     "DataRequest",

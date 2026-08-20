@@ -2222,31 +2222,26 @@ def _data_batches_da_connettore(esito: connettore.EsitoConnettore) -> list[DataB
     if mappa is None:
         return []
     registry = default_adapter_registry()
-    richieste = (
-        (Surface.ORDINARY_DATA, "services"),
-        (Surface.ORDINARY_DATA, "offices"),
-        (Surface.ORDINARY_DATA, "contacts"),
-        (Surface.TRANSPARENCY, "transparency"),
+    richieste = registry.requests_for(
+        source_id=esito.codice_istat,
+        platform_id=esito.piattaforma,
+        request_prefix="chat",
+        freshness=FreshnessPolicy(max_age_seconds=86400),
+        limits=RequestLimits(),
+        manifest_revision=1,
     )
     batches: list[DataBatch] = []
-    for surface, capability in richieste:
+    for request in richieste:
         adapter = registry.resolve(
             platform_id=esito.piattaforma,
-            surface=surface.value,
+            surface=request.surface.value,
+            capability=request.capability,
         )
         if adapter is None:
             continue
         batches.append(
             adapter.read(
-                DataRequest(
-                    request_id=f"chat:{esito.codice_istat}:{surface.value}:{capability}",
-                    source_id=esito.codice_istat,
-                    surface=surface,
-                    capability=capability,
-                    freshness=FreshnessPolicy(max_age_seconds=86400),
-                    limits=RequestLimits(),
-                    manifest_revision=1,
-                ),
+                request,
                 mappa=mappa,
                 esito=esito,
             )

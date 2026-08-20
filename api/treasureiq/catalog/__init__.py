@@ -34,6 +34,7 @@ from treasureiq.catalog.data_contracts import (
 )
 from treasureiq.catalog.drift import DriftEvent, DriftKind, compare_snapshots
 from treasureiq.catalog.planner import QueryPlan, QueryStep, build_query_plan, select_batch
+from treasureiq.catalog.plugins import CapabilityManifest, PluginManifest
 from treasureiq.catalog.registry import PlatformRegistry
 from treasureiq.catalog.shadow import municipality_snapshots, platform_snapshot
 from treasureiq.catalog.shadow_run import persist_shadow_snapshots
@@ -52,6 +53,7 @@ __all__ = [
     "ConnectorContract",
     "ConnectorRef",
     "CatalogAdapter",
+    "CapabilityManifest",
     "WordPressAgidAdapter",
     "DataBatch",
     "DataRequest",
@@ -66,6 +68,7 @@ __all__ = [
     "MunicipalityPlatformSnapshot",
     "PlatformSnapshot",
     "PlatformRegistry",
+    "PluginManifest",
     "QueryPlan",
     "QueryStep",
     "SnapshotStore",

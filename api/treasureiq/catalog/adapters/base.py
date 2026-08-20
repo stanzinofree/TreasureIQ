@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Protocol
 
 from treasureiq.catalog.data_contracts import DataBatch, DataRequest
+from treasureiq.catalog.plugins import PluginManifest
 from treasureiq.connettore import EsitoConnettore
 from treasureiq.mappa_connettore import MappaConnettore
 
@@ -12,6 +13,7 @@ from treasureiq.mappa_connettore import MappaConnettore
 class CatalogAdapter(Protocol):
     name: str
     version: str
+    manifest: PluginManifest
 
     def supports(self, platform_id: str, surface: str) -> bool:
         """Return whether this adapter can read the measured platform."""

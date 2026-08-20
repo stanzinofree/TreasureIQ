@@ -20,10 +20,22 @@ from treasureiq.catalog.data_contracts import (
     Freshness,
     TransportMeta,
 )
+from treasureiq.catalog.plugins import CapabilityManifest, PluginManifest
 from treasureiq.connettore import EsitoConnettore
 from treasureiq.mappa_connettore import MappaConnettore
 
 WORDPRESS_AGID_VERSION = "1"
+WORDPRESS_AGID_MANIFEST = PluginManifest(
+    plugin_id="wordpress_agid",
+    version=WORDPRESS_AGID_VERSION,
+    contract_version="catalog.v1",
+    capabilities=(
+        CapabilityManifest(surface=Surface.ORDINARY_DATA, capability="services", priority=10),
+        CapabilityManifest(surface=Surface.ORDINARY_DATA, capability="offices", priority=20),
+        CapabilityManifest(surface=Surface.ORDINARY_DATA, capability="contacts", priority=30),
+        CapabilityManifest(surface=Surface.TRANSPARENCY, capability="transparency", priority=40),
+    ),
+)
 
 
 class WordPressAgidAdapter:
@@ -31,12 +43,10 @@ class WordPressAgidAdapter:
 
     name = "wordpress_agid"
     version = WORDPRESS_AGID_VERSION
+    manifest = WORDPRESS_AGID_MANIFEST
 
     def supports(self, platform_id: str, surface: str) -> bool:
-        return platform_id == self.name and surface in {
-            Surface.ORDINARY_DATA.value,
-            Surface.TRANSPARENCY.value,
-        }
+        return platform_id == self.name and self.manifest.supports(surface=surface)
 
     def read(
         self,

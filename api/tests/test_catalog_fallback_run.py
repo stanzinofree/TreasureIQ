@@ -56,3 +56,21 @@ def test_backoffice_can_extract_mappa_from_scan_json(tmp_path) -> None:
     mappa = load_mappa(scansione_json=path)
 
     assert mappa.sito == "https://comune.example"
+
+
+def test_backoffice_uses_platform_from_mappa_when_cli_omits_it(tmp_path) -> None:
+    path = tmp_path / "mappa.json"
+    path.write_text(
+        MappaConnettore(
+            codice_istat="058003",
+            nome="Albano",
+            sito=None,
+            sondato_il=datetime.now(timezone.utc).isoformat(),
+            piattaforma_id="halley",
+        ).model_dump_json(),
+        encoding="utf-8",
+    )
+
+    mappa = load_mappa(mappa_json=path)
+
+    assert mappa.piattaforma_id == "halley"

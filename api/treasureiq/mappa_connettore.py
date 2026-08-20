@@ -167,6 +167,11 @@ class MappaConnettore(BaseModel):
     nome: str
     sito: str | None
     sondato_il: str
+    #: Identificativo della piattaforma principale, quando la sonda lo ha
+    #: riconosciuto. Optional per retrocompatibilità con le mappe v0.
+    piattaforma_id: str | None = None
+    #: Identificativo separato della piattaforma Amministrazione Trasparente.
+    piattaforma_at_id: str | None = None
     servizi: AssetServizi = Field(default_factory=AssetServizi)
     uffici: AssetRest = Field(default_factory=AssetRest)
     #: Non un dato, una strada: «scrape» finché il probe non trova il CPT in

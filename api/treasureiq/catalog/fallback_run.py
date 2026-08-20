@@ -78,7 +78,7 @@ def main() -> int:
     source.add_argument("--scansione-json", type=Path)
     source.add_argument("--istat")
     parser.add_argument("--no-cache", action="store_true")
-    parser.add_argument("--platform-id", required=True)
+    parser.add_argument("--platform-id")
     parser.add_argument("--run-id", required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--store", type=Path)
@@ -90,7 +90,8 @@ def main() -> int:
         codice_istat=args.istat,
         usa_cache=not args.no_cache,
     )
-    result = run_fallback(mappa, platform_id=args.platform_id, run_id=args.run_id)
+    platform_id = args.platform_id or mappa.piattaforma_id or "unknown"
+    result = run_fallback(mappa, platform_id=platform_id, run_id=args.run_id)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     temporary = args.output.with_suffix(args.output.suffix + ".tmp")
     temporary.write_text(result.model_dump_json(indent=2), encoding="utf-8")

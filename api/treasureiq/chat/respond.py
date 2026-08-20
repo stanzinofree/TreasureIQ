@@ -64,6 +64,7 @@ from treasureiq.catalog import (
     RequestLimits,
     Surface,
     build_query_plan,
+    default_connector_registry,
     default_adapter_registry,
     select_batch,
 )
@@ -2222,6 +2223,7 @@ def _data_batches_da_connettore(esito: connettore.EsitoConnettore) -> list[DataB
     if mappa is None:
         return []
     registry = default_adapter_registry()
+    connector_registry = default_connector_registry()
     richieste = registry.requests_for(
         source_id=esito.codice_istat,
         platform_id=esito.piattaforma,
@@ -2232,6 +2234,16 @@ def _data_batches_da_connettore(esito: connettore.EsitoConnettore) -> list[DataB
     )
     batches: list[DataBatch] = []
     for request in richieste:
+        # Il legacy `EsitoConnettore` è già il risultato della lettura in questo
+        # ramo. Il registry dei connettori decide comunque chi possiede la
+        # capability; il passaggio HTTP verrà spostato qui nel rework del
+        # connettore, senza cambiare il contratto dell'adapter.
+        connector = connector_registry.resolve(
+            request=request,
+            platform_id=esito.piattaforma,
+        )
+        if connector is None:
+            continue
         adapter = registry.resolve(
             platform_id=esito.piattaforma,
             surface=request.surface.value,

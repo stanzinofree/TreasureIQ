@@ -21,7 +21,9 @@ from treasureiq.catalog.data_contracts import (
 )
 from treasureiq.catalog.adapters.wordpress_agid import WordPressAgidAdapter
 from treasureiq.connettore import EsitoConnettore
-from treasureiq.mappa_connettore import MappaConnettore
+from treasureiq.mappa_connettore import MappaConnettore, mappa_connettore
+from treasureiq.sonda_live import ComuneNoto
+from treasureiq.ingest.censimento import _Sonda
 
 
 class WordPressAgidConnector:
@@ -29,6 +31,28 @@ class WordPressAgidConnector:
 
     name = "wordpress_agid"
     version = "1"
+
+    def retrieve_live(
+        self,
+        request: DataRequest,
+        *,
+        comune: ComuneNoto,
+        sonda: _Sonda,
+    ) -> ConnectorResult:
+        """Run the existing HTTP scanner and expose its result as v1.
+
+        The import is deferred deliberately: the legacy scanner imports the
+        v0 connector models, while this module is also imported by the catalog
+        package. Keeping the boundary lazy avoids an import cycle during app
+        startup.
+        """
+        from treasureiq.wordpress_agid import leggi_wordpress_agid
+
+        esito = leggi_wordpress_agid(comune, sonda)
+        mappa = mappa_connettore(comune.codice_istat)
+        if mappa is None:
+            raise ValueError("live WordPress scan did not produce a connector map")
+        return self.retrieve(request, mappa=mappa, esito=esito)
 
     def supports(self, request: DataRequest, *, platform_id: str) -> bool:
         return platform_id == self.name and WordPressAgidAdapter().manifest.supports(

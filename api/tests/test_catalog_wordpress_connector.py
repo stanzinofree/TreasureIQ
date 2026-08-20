@@ -1,4 +1,5 @@
 from datetime import datetime, timezone
+from types import SimpleNamespace
 
 from treasureiq.catalog import (
     AccessMode,
@@ -66,3 +67,26 @@ def test_wordpress_connector_does_not_invent_unavailable_data() -> None:
     assert result.status is DataStatus.NOT_SUPPORTED
     assert result.access_mode is AccessMode.UNAVAILABLE
     assert result.records == ()
+
+
+def test_wordpress_connector_live_bridge_wraps_legacy_http_scan(monkeypatch) -> None:
+    esito = EsitoConnettore(
+        codice_istat="058003",
+        piattaforma="wordpress_agid",
+        letto_il=datetime.now(timezone.utc).isoformat(),
+    )
+    monkeypatch.setattr(
+        "treasureiq.wordpress_agid.leggi_wordpress_agid",
+        lambda comune, sonda: esito,
+    )
+    monkeypatch.setattr(
+        "treasureiq.catalog.wordpress_connector.mappa_connettore",
+        lambda codice: _mappa(),
+    )
+
+    result = WordPressAgidConnector().retrieve_live(
+        _request("offices"), comune=SimpleNamespace(codice_istat="058003"), sonda=object()
+    )
+
+    assert result.request_id == "req-offices"
+    assert result.connector.name == "wordpress_agid"

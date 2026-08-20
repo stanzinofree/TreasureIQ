@@ -65,6 +65,7 @@ from treasureiq.catalog import (
     RequestLimits,
     Surface,
     build_query_plan,
+    request_from_recognition,
     CatalogRuntime,
     select_batch,
 )
@@ -1534,6 +1535,7 @@ async def _build_informazione_answer(
     records: list[Opportunity],
     comune_istat: str | None = None,
     parole: str = "",
+    recognition=None,
 ) -> ChatAnswer:
     """The INFORMAZIONE rail (D-19): document + office + coverage + cost,
     never a verdict, never criteria, never SPID. No call into
@@ -1723,6 +1725,7 @@ async def _build_informazione_answer(
                 esito=esito_connettore,
                 ufficio_chiesto=_ufficio_chiesto(parole),
                 disabilita_attiva=_disabilita_attiva_nel_testo(parole),
+                recognition=recognition,
             )
             if risposta_connettore is not None:
                 return risposta_connettore
@@ -2132,6 +2135,7 @@ async def _risposta_da_connettore(
     esito: "connettore.EsitoConnettore",
     ufficio_chiesto: str | None,
     disabilita_attiva: bool = False,
+    recognition=None,
 ) -> ChatAnswer | None:
     """Risposta INFORMAZIONE costruita dal connettore (B4, D-09/D-11): stesso
     schema di `_chat_live`, ma con recapiti VERBATIM e onestà campo-per-campo
@@ -2202,7 +2206,9 @@ async def _risposta_da_connettore(
     )
     azioni = _azioni_possibili(document=documento, office=ufficio_risposta, web_results=[])
     data_batches = _data_batches_da_connettore(esito)
-    query_plan, selected_data_batch = _plan_connettore(esito, data_batches)
+    query_plan, selected_data_batch = _plan_connettore(
+        esito, data_batches, recognition=recognition
+    )
     return ChatAnswer(
         reply=reply,
         topic=topic,
@@ -2278,18 +2284,25 @@ def _data_batches_da_connettore(esito: connettore.EsitoConnettore) -> list[DataB
 def _plan_connettore(
     esito: connettore.EsitoConnettore,
     batches: list[DataBatch],
+    recognition=None,
 ) -> tuple[QueryPlan | None, DataBatch | None]:
     """Build and execute the closed plan for the connector office rail."""
     if not batches:
         return None, None
-    request = DataRequest(
-        request_id=f"chat:{esito.codice_istat}:ordinary_data:offices",
-        source_id=esito.codice_istat,
-        surface=Surface.ORDINARY_DATA,
-        capability="offices",
-        freshness=FreshnessPolicy(max_age_seconds=86400),
-        limits=RequestLimits(),
-        manifest_revision=1,
+    request = (
+        request_from_recognition(
+            recognition, source_id=esito.codice_istat, capability_override="offices"
+        )
+        if recognition is not None
+        else DataRequest(
+            request_id=f"chat:{esito.codice_istat}:ordinary_data:offices",
+            source_id=esito.codice_istat,
+            surface=Surface.ORDINARY_DATA,
+            capability="offices",
+            freshness=FreshnessPolicy(max_age_seconds=86400),
+            limits=RequestLimits(),
+            manifest_revision=1,
+        )
     )
     plan = build_query_plan(request)
     return plan, select_batch(plan, tuple(batches))
@@ -3722,6 +3735,7 @@ async def _componi_risposta(
             records=records,
             comune_istat=comune_istat,
             parole=_parole_del_cittadino(message=message, storia=storia or []),
+            recognition=recognition,
         )
 
     if not comune_coperto:

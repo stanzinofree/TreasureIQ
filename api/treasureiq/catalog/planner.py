@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 from pydantic import Field
 
 from treasureiq.catalog.contracts import AccessMode, FreshnessStatus, Surface
@@ -10,8 +12,12 @@ from treasureiq.catalog.data_contracts import (
     DataRequest,
     DataStatus,
     Freshness,
+    FreshnessPolicy,
     _StrictModel,
 )
+
+if TYPE_CHECKING:
+    from treasureiq.chat.intent import ChatRecognitionContract
 
 
 class QueryStep(_StrictModel):
@@ -44,6 +50,44 @@ def build_query_plan(request: DataRequest) -> QueryPlan:
             )
             for mode in request.allowed_modes
         ),
+    )
+
+
+_CAPABILITY_BY_TOPIC = {
+    "anagrafe_carta_identita": "offices",
+    "accesso_atti": "offices",
+    "tributi": "services",
+    "bandi": "notices",
+}
+
+
+def request_from_recognition(
+    recognition: "ChatRecognitionContract",
+    *,
+    source_id: str,
+    capability_override: str | None = None,
+) -> DataRequest:
+    """Translate the closed chat contract into a deterministic data request.
+
+    No model call or source selection happens here. Connector availability is
+    evaluated later by ``build_query_plan`` and ``select_batch``.
+    """
+
+    topic = recognition.intent.topic.value
+    kind = recognition.intent.kind.value
+    surface = Surface.TRANSPARENCY if topic == "bandi" else Surface.ORDINARY_DATA
+    capability = capability_override or _CAPABILITY_BY_TOPIC.get(
+        topic, "opportunities" if kind == "agevolazione" else "services"
+    )
+    return DataRequest(
+        request_id=f"chat:{source_id}:{surface.value}:{capability}",
+        source_id=source_id,
+        surface=surface,
+        capability=capability,
+        selection={"topic": topic, "kind": kind},
+        filters={"keys": list(recognition.filter_keys)},
+        freshness=FreshnessPolicy(max_age_seconds=86400),
+        manifest_revision=1,
     )
 
 

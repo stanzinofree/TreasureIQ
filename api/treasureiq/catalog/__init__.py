@@ -43,7 +43,13 @@ from treasureiq.catalog.data_contracts import (
     TransportMeta,
 )
 from treasureiq.catalog.drift import DriftEvent, DriftKind, compare_snapshots
-from treasureiq.catalog.planner import QueryPlan, QueryStep, build_query_plan, select_batch
+from treasureiq.catalog.planner import (
+    QueryPlan,
+    QueryStep,
+    build_query_plan,
+    request_from_recognition,
+    select_batch,
+)
 from treasureiq.catalog.plugins import CapabilityManifest, PluginManifest
 from treasureiq.catalog.registry import PlatformRegistry
 from treasureiq.catalog.shadow import municipality_snapshots, platform_snapshot
@@ -102,6 +108,7 @@ __all__ = [
     "TransportMeta",
     "compare_snapshots",
     "build_query_plan",
+    "request_from_recognition",
     "default_adapter_registry",
     "municipality_snapshots",
     "platform_snapshot",

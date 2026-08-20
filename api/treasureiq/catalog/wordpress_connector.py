@@ -31,6 +31,12 @@ class WordPressAgidConnector:
 
     name = "wordpress_agid"
     version = "1"
+    platforms = {
+        "wordpress_agid",
+        "wp_design_comuni",
+        "wordpress_generico",
+        "comunibootstrapitalia",
+    }
 
     def retrieve_live(
         self,
@@ -55,7 +61,7 @@ class WordPressAgidConnector:
         return self.retrieve(request, mappa=mappa, esito=esito)
 
     def supports(self, request: DataRequest, *, platform_id: str) -> bool:
-        return platform_id == self.name and WordPressAgidAdapter().manifest.supports(
+        return platform_id in self.platforms and WordPressAgidAdapter().manifest.supports(
             surface=request.surface.value,
             capability=request.capability,
         )

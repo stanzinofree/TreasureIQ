@@ -12,6 +12,7 @@ from pydantic import BaseModel, ConfigDict, Field
 from treasureiq.catalog.data_contracts import DataBatch, FreshnessPolicy, RequestLimits
 from treasureiq.catalog.runtime import CatalogRuntime
 from treasureiq.mappa_connettore import MappaConnettore, mappa_connettore
+from treasureiq.storico import portale_del_comune
 
 
 class FallbackRun(BaseModel):
@@ -71,6 +72,12 @@ def load_mappa(
     return mappa
 
 
+def platform_from_sweep(db_path: Path, codice_istat: str) -> str | None:
+    measured = portale_del_comune(db_path, codice_istat)
+    platform = measured.get("piattaforma") if measured else None
+    return str(platform) if platform else None
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Esegui il fallback indiretto TIQ")
     source = parser.add_mutually_exclusive_group(required=True)
@@ -82,6 +89,7 @@ def main() -> int:
     parser.add_argument("--run-id", required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--store", type=Path)
+    parser.add_argument("--db", type=Path, default=Path("data/storico.db"))
     args = parser.parse_args()
 
     mappa = load_mappa(
@@ -90,7 +98,12 @@ def main() -> int:
         codice_istat=args.istat,
         usa_cache=not args.no_cache,
     )
-    platform_id = args.platform_id or mappa.piattaforma_id or "unknown"
+    platform_id = (
+        args.platform_id
+        or platform_from_sweep(args.db, mappa.codice_istat)
+        or mappa.piattaforma_id
+        or "unknown"
+    )
     result = run_fallback(mappa, platform_id=platform_id, run_id=args.run_id)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     temporary = args.output.with_suffix(args.output.suffix + ".tmp")

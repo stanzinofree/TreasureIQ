@@ -80,7 +80,11 @@ class AdapterRegistry:
         is the only way to ask for an indirect fallback, keeping ordinary chat
         projection from triggering scraping as a side effect.
         """
-        if self.manifest(platform_id) is not None:
+        if any(
+            adapter.manifest.supports_platform(platform_id)
+            and "*" not in adapter.manifest.platforms
+            for adapter in self._adapters.values()
+        ):
             return ()
         for adapter in self._adapters.values():
             manifest = adapter.manifest

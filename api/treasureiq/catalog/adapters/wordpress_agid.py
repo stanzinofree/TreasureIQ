@@ -29,7 +29,12 @@ WORDPRESS_AGID_MANIFEST = PluginManifest(
     plugin_id="wordpress_agid",
     version=WORDPRESS_AGID_VERSION,
     contract_version="catalog.v1",
-    platforms=("wordpress_agid",),
+    platforms=(
+        "wordpress_agid",
+        "wp_design_comuni",
+        "wordpress_generico",
+        "comunibootstrapitalia",
+    ),
     capabilities=(
         CapabilityManifest(surface=Surface.ORDINARY_DATA, capability="services", priority=10),
         CapabilityManifest(surface=Surface.ORDINARY_DATA, capability="offices", priority=20),
@@ -47,7 +52,9 @@ class WordPressAgidAdapter:
     manifest = WORDPRESS_AGID_MANIFEST
 
     def supports(self, platform_id: str, surface: str) -> bool:
-        return platform_id == self.name and self.manifest.supports(surface=surface)
+        return self.manifest.supports_platform(platform_id) and self.manifest.supports(
+            surface=surface
+        )
 
     def read(
         self,

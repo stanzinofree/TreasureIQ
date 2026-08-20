@@ -111,6 +111,19 @@ def test_fallback_requests_are_empty_when_native_manifest_exists() -> None:
     ) == ()
 
 
+def test_wordpress_manifest_resolves_sweep_platform_alias() -> None:
+    registry = default_adapter_registry()
+
+    adapter = registry.resolve(
+        platform_id="wp_design_comuni",
+        surface=Surface.ORDINARY_DATA.value,
+        capability="offices",
+    )
+
+    assert adapter is not None
+    assert adapter.name == "wordpress_agid"
+
+
 def test_registry_rejects_duplicate_adapter_names() -> None:
     registry = AdapterRegistry()
     registry.register(WordPressAgidAdapter())

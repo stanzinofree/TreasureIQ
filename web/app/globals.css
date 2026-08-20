@@ -1853,6 +1853,34 @@ a {
   gap: var(--ma-3);
 }
 
+.chat__privacy-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 var(--ma-2) var(--ma-4);
+}
+
+.chat__forget {
+  border: 0;
+  background: transparent;
+  color: var(--sumi-soft);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.8rem;
+  padding: var(--ma-1) var(--ma-2);
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.chat__forget:hover,
+.chat__forget:focus-visible {
+  color: var(--sumi);
+}
+
+.chat__forget:disabled {
+  cursor: wait;
+  opacity: 0.55;
+}
+
 .chat__input {
   flex: 1;
   font: inherit;

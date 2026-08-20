@@ -1760,15 +1760,6 @@ export default function Chat() {
         </div>
       )}
 
-      <button
-        type="button"
-        className="button button--secondary"
-        onClick={dimenticaConversazione}
-        disabled={busy}
-      >
-        Dimentica conversazione
-      </button>
-
       <form className="chat__form" onSubmit={handleSubmit}>
         <label className="chat__label" htmlFor={inputId}>
           Scrivi la tua domanda
@@ -1789,6 +1780,17 @@ export default function Chat() {
           </button>
         </div>
       </form>
+
+      <div className="chat__privacy-actions">
+        <button
+          type="button"
+          className="chat__forget"
+          onClick={dimenticaConversazione}
+          disabled={busy}
+        >
+          Dimentica conversazione
+        </button>
+      </div>
 
       {scheda && <SchedaDettaglio match={scheda} onClose={() => setScheda(null)} />}
     </section>

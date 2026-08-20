@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * B5 (ciclo 10) — quello che il connettore ha letto ORA dal portale del
+ * B5 (ciclo 10) — dati letti ORA dal portale del
  * comune (contratto D-09, `EsitoConnettore`): uffici coi recapiti verbatim,
  * e i bandi di Amministrazione Trasparente con l'analisi PDF su richiesta
  * (D-11). Non è uno snapshot ingerito — l'etichetta «letto ora» + `letto_il`
@@ -103,8 +103,7 @@ function UfficioCard({ ufficio }: { ufficio: UfficioConnettore }) {
         </div>
       </dl>
       <span className="scheda-letto-ora__provenienza">
-        {ufficio.source_typed ? "recapito tipizzato dal portale" : "recapito letto in prosa"}
-        {" · "}letto il {dataLeggibile(ufficio.letto_il)}
+        Letto dal portale il {dataLeggibile(ufficio.letto_il)}
       </span>
     </li>
   );
@@ -208,7 +207,6 @@ export default function SchedaLettoOra({ esito }: { esito: EsitoConnettore }) {
   const haUffici = esito.uffici.length > 0;
   const at = esito.amministrazione_trasparente;
   const haBandi = !!at && at.bandi_attivi.length > 0;
-  const piattaformaAt = at?.piattaforma_at;
 
   // Degrado onesto (D-05): nessun ufficio e nessuna AT con qualcosa da
   // mostrare → nessun guscio vuoto sotto la risposta.
@@ -218,20 +216,11 @@ export default function SchedaLettoOra({ esito }: { esito: EsitoConnettore }) {
     <div
       className="scheda-letto-ora tiq-card"
       role="group"
-      aria-label="Letto ora dal portale del comune"
+      aria-label="Dati letti ora dal portale del comune"
     >
       <span className="tiq-card__banda tiq-card__banda--ambra" aria-hidden="true" />
       <p className="scheda-letto-ora__provenienza-testa tiq-sintesi">
-        {piattaformaAt && piattaformaAt !== "NON_TROVATA" ? (
-          <>
-            Letto ora dal portale {esito.piattaforma} · trasparenza{" "}
-            {piattaformaAt} · {dataLeggibile(esito.letto_il)}
-          </>
-        ) : (
-          <>
-            Letto ora dal portale · {esito.piattaforma} · {dataLeggibile(esito.letto_il)}
-          </>
-        )}
+        Dati letti ora dal portale ufficiale · {dataLeggibile(esito.letto_il)}
       </p>
 
       {haUffici && (

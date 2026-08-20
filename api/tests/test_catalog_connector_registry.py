@@ -28,13 +28,16 @@ def test_registry_resolves_connector_by_platform_and_request() -> None:
 
     assert connector is not None
     assert connector.name == "wordpress_agid"
-    assert registry.names() == ("wordpress_agid",)
+    assert registry.names() == ("wordpress_agid", "web_scrape")
 
 
-def test_registry_does_not_use_wordpress_for_another_platform() -> None:
+def test_registry_uses_web_fallback_for_another_platform() -> None:
     registry = default_connector_registry()
 
-    assert registry.resolve(request=_request(), platform_id="halley") is None
+    connector = registry.resolve(request=_request(), platform_id="halley")
+
+    assert connector is not None
+    assert connector.name == "web_scrape"
 
 
 def test_registry_rejects_duplicate_connector_names() -> None:

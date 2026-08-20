@@ -102,7 +102,7 @@ services:
   # `docker compose up`; the deterministic chat works without this service.
   llama-cpp:
     profiles: ["llm"]
-    image: ghcr.io/ggerganov/llama.cpp:server
+    image: ghcr.io/ggml-org/llama.cpp:server
     volumes:
       - ./models:/models:ro
     command: ["-m", "/models/tiq-model.gguf", "--host", "0.0.0.0"]

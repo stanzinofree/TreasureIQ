@@ -11,7 +11,7 @@ from pydantic import BaseModel, ConfigDict, Field
 
 from treasureiq.catalog.data_contracts import DataBatch, FreshnessPolicy, RequestLimits
 from treasureiq.catalog.runtime import CatalogRuntime
-from treasureiq.mappa_connettore import MappaConnettore
+from treasureiq.mappa_connettore import MappaConnettore, mappa_connettore
 
 
 class FallbackRun(BaseModel):
@@ -50,15 +50,38 @@ def run_fallback(
     )
 
 
+def load_mappa(
+    *,
+    mappa_json: Path | None = None,
+    codice_istat: str | None = None,
+    usa_cache: bool = True,
+) -> MappaConnettore:
+    if (mappa_json is None) == (codice_istat is None):
+        raise ValueError("specificare esattamente mappa_json oppure codice_istat")
+    if mappa_json is not None:
+        return MappaConnettore.model_validate_json(mappa_json.read_text(encoding="utf-8"))
+    mappa = mappa_connettore(codice_istat, usa_cache=usa_cache)
+    if mappa is None:
+        raise ValueError(f"mappa non disponibile per {codice_istat}")
+    return mappa
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Esegui il fallback indiretto TIQ")
-    parser.add_argument("--mappa-json", type=Path, required=True)
+    source = parser.add_mutually_exclusive_group(required=True)
+    source.add_argument("--mappa-json", type=Path)
+    source.add_argument("--istat")
+    parser.add_argument("--no-cache", action="store_true")
     parser.add_argument("--platform-id", required=True)
     parser.add_argument("--run-id", required=True)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
 
-    mappa = MappaConnettore.model_validate_json(args.mappa_json.read_text(encoding="utf-8"))
+    mappa = load_mappa(
+        mappa_json=args.mappa_json,
+        codice_istat=args.istat,
+        usa_cache=not args.no_cache,
+    )
     result = run_fallback(mappa, platform_id=args.platform_id, run_id=args.run_id)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     temporary = args.output.with_suffix(args.output.suffix + ".tmp")

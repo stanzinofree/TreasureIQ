@@ -904,6 +904,20 @@ def catalog_access() -> list[CatalogAccessOut]:
     return result
 
 
+@app.get(
+    "/api/catalog/access/{codice_istat}",
+    response_model=list[CatalogAccessOut],
+    tags=["Catalogo interno"],
+)
+def catalog_access_for(codice_istat: str) -> list[CatalogAccessOut]:
+    """Return the measured catalog surfaces for one municipality."""
+    return [
+        entry
+        for entry in catalog_access()
+        if entry.municipality_istat == codice_istat
+    ]
+
+
 @lru_cache(maxsize=1)
 def _enti_by_urp_nome() -> dict[str, tuple[str, str]]:
     """Reverse index: URP display name -> (codice_istat, ente name).

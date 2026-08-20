@@ -1141,6 +1141,8 @@ export interface CatalogAccess {
 }
 
 export const catalogAccess = () => call<CatalogAccess[]>("/api/catalog/access");
+export const catalogAccessFor = (codiceIstat: string) =>
+  call<CatalogAccess[]>(`/api/catalog/access/${encodeURIComponent(codiceIstat)}`);
 
 /** Result of `GET /api/comune-nearby?lat=&lon=` — nullable: there may be no
  * supported comune near the citizen's current position. This is a proximity

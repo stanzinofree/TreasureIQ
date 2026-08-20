@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from treasureiq.catalog.adapters.base import CatalogAdapter
+from treasureiq.catalog.contracts import AccessMode
 from treasureiq.catalog.data_contracts import DataRequest, FreshnessPolicy, RequestLimits
 from treasureiq.catalog.plugins import PluginManifest
 
@@ -17,12 +18,24 @@ class AdapterRegistry:
         self._adapters[adapter.name] = adapter
 
     def resolve(
-        self, *, platform_id: str, surface: str, capability: str | None = None
+        self,
+        *,
+        platform_id: str,
+        surface: str,
+        capability: str | None = None,
+        access_mode: AccessMode | None = None,
     ) -> CatalogAdapter | None:
         for adapter in self._adapters.values():
-            if adapter.manifest.plugin_id != platform_id:
+            if not adapter.manifest.supports_platform(platform_id):
                 continue
             if adapter.manifest.supports(surface=surface, capability=capability):
+                if access_mode is not None and not any(
+                    item.surface.value == surface
+                    and (capability is None or item.capability == capability)
+                    and access_mode in item.allowed_modes
+                    for item in adapter.manifest.capabilities
+                ):
+                    continue
                 return adapter
         return None
 

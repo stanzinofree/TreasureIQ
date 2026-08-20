@@ -2,9 +2,11 @@ import pytest
 
 from treasureiq.catalog import (
     AdapterRegistry,
+    AccessMode,
     FreshnessPolicy,
     RequestLimits,
     Surface,
+    WebScrapeAdapter,
     WordPressAgidAdapter,
     default_adapter_registry,
 )
@@ -60,6 +62,21 @@ def test_registry_returns_none_for_unknown_platform() -> None:
     assert registry.resolve(platform_id="halley", surface=Surface.ORDINARY_DATA.value) is None
 
 
+def test_registry_resolves_indirect_fallback_for_unknown_platform() -> None:
+    registry = AdapterRegistry()
+    registry.register(WebScrapeAdapter())
+
+    adapter = registry.resolve(
+        platform_id="halley",
+        surface=Surface.ORDINARY_DATA.value,
+        capability="offices",
+        access_mode=AccessMode.INDIRECT,
+    )
+
+    assert adapter is not None
+    assert adapter.name == "web_scrape"
+
+
 def test_registry_rejects_duplicate_adapter_names() -> None:
     registry = AdapterRegistry()
     registry.register(WordPressAgidAdapter())
@@ -68,7 +85,7 @@ def test_registry_rejects_duplicate_adapter_names() -> None:
         registry.register(WordPressAgidAdapter())
 
 
-def test_default_registry_contains_only_the_currently_implemented_adapter() -> None:
+def test_default_registry_contains_the_direct_and_indirect_adapters() -> None:
     registry = default_adapter_registry()
 
-    assert registry.names() == ("wordpress_agid",)
+    assert registry.names() == ("wordpress_agid", "web_scrape")

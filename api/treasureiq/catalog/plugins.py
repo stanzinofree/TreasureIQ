@@ -28,7 +28,11 @@ class PluginManifest(_StrictModel):
     plugin_id: str = Field(min_length=1)
     version: str = Field(min_length=1)
     contract_version: str = Field(min_length=1)
+    platforms: tuple[str, ...] = ("*",)
     capabilities: tuple[CapabilityManifest, ...] = Field(min_length=1)
+
+    def supports_platform(self, platform_id: str) -> bool:
+        return platform_id in self.platforms or "*" in self.platforms
 
     def supports(self, *, surface: str, capability: str | None = None) -> bool:
         return any(

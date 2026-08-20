@@ -29,6 +29,7 @@ WORDPRESS_AGID_MANIFEST = PluginManifest(
     plugin_id="wordpress_agid",
     version=WORDPRESS_AGID_VERSION,
     contract_version="catalog.v1",
+    platforms=("wordpress_agid",),
     capabilities=(
         CapabilityManifest(surface=Surface.ORDINARY_DATA, capability="services", priority=10),
         CapabilityManifest(surface=Surface.ORDINARY_DATA, capability="offices", priority=20),
@@ -54,6 +55,7 @@ class WordPressAgidAdapter:
         *,
         mappa: MappaConnettore,
         esito: EsitoConnettore | None,
+        records: tuple[dict[str, Any], ...] = (),
     ) -> DataBatch:
         if request.source_id != mappa.codice_istat:
             raise ValueError("request.source_id does not match the measured source")

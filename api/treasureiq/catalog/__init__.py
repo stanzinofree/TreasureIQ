@@ -8,6 +8,7 @@ requests.
 from treasureiq.catalog.adapters import (
     AdapterRegistry,
     CatalogAdapter,
+    WebScrapeAdapter,
     WordPressAgidAdapter,
     default_adapter_registry,
 )
@@ -55,6 +56,7 @@ __all__ = [
     "CatalogAdapter",
     "CapabilityManifest",
     "WordPressAgidAdapter",
+    "WebScrapeAdapter",
     "DataBatch",
     "DataRequest",
     "DataStatus",

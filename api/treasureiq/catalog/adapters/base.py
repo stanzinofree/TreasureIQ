@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Protocol
+from typing import Any, Protocol
 
 from treasureiq.catalog.data_contracts import DataBatch, DataRequest
 from treasureiq.catalog.plugins import PluginManifest
@@ -24,5 +24,6 @@ class CatalogAdapter(Protocol):
         *,
         mappa: MappaConnettore,
         esito: EsitoConnettore | None,
+        records: tuple[dict[str, Any], ...] = (),
     ) -> DataBatch:
         """Read one capability and return the closed v1 batch contract."""

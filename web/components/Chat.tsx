@@ -49,7 +49,6 @@ import {
   fetchBandi,
   forgetConversation,
   openConversation,
-  portaleComune,
   type Bando,
   type BandiLiveEsito,
   type BandoArricchito,
@@ -65,7 +64,6 @@ import {
   type InfoOut,
   type InfoWebResult,
   type Match,
-  type PortaleComune,
   type Requirements,
 } from "@/lib/api";
 
@@ -311,126 +309,29 @@ function isWebUrl(url: string): boolean {
  * questo blocco la UI le buttava e la promessa restava vuota. Nessun giudizio
  * di spettanza qui: solo link marcati «non verificato», coerente con D-01.
  */
-/** Data ISO → «11 ago 2026», compatta. Illeggibile → null (il segmento sparisce
- *  invece di stampare «Invalid Date»). */
-function dataBreve(iso: string | null): string | null {
-  if (!iso) return null;
-  const d = new Date(iso);
-  if (Number.isNaN(d.getTime())) return null;
-  return d.toLocaleDateString("it-IT", {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-  });
-}
-
-/**
- * Fuori copertura, dopo la ricerca, diciamo SE il connettore raggiungerebbe
- * questo comune. È una riga di stato tecnica (ciclo 15): codice comune ·
- * connettore · online · non letto in automatico · ultima scansione. Il «non
- * letto in automatico» resta esplicito perché raggiungibile ≠ letto è una
- * scelta fondante (D-05): «online» dice che il portale risponde, non che
- * abbiamo i dati. La nota sotto (ciclo 15 round 2) spiega in parole non
- * tecniche *perché* — il connettore legge solo i dati pubblicati in formato
- * aperto e standard, non fa scraping della pagina — e che aprire i dati è
- * proprio lo scopo di TIQ. Prima diceva «non ingerito», gergo che il
- * cittadino non capisce.
- */
-/**
- * Ciclo 15 R5 — banner connettore UNICO, in cima a OGNI risposta comunale
- * (coperto e fuori copertura), non più due trattamenti diversi: prima il
- * coperto aveva una banda-link in fondo (PonteScala, ritirata) e il fuori
- * copertura questo banner verde in cima. Un solo posto, guidato dalla
- * copertura.
- *
- * Due fonti, una riga: la sonda AgID (`sonda`, opzionale) dà `indirizzabile`
- * e l'ultima scansione dello sweep; il censimento nazionale (`portaleComune`,
- * fetch qui) dà il NOME reale della piattaforma (wp_design_comuni, Municipium,
- * eGov…) e la percentuale di aderenza al modello. Prima il nome era hardcoded
- * «Modello AgID» — falso per i comuni WordPress.
- *
- * Muto (D-44) se non sappiamo NULLA del connettore per questo comune: né il
- * censimento conosce la piattaforma, né la sonda lo dice indirizzabile. Non
- * affermiamo copertura che non abbiamo misurato.
- */
 function BadgeConnettore({
-  istat,
-  sonda,
+  accessMode,
 }: {
-  istat: string;
-  sonda: ConnettoreSonda | null;
+  accessMode: string | null;
 }) {
-  const [portale, setPortale] = useState<PortaleComune | null>(null);
-
-  useEffect(() => {
-    let vivo = true;
-    setPortale(null);
-    portaleComune(istat)
-      .then((esito) => {
-        if (vivo) setPortale(esito);
-      })
-      .catch(() => {
-        if (vivo) setPortale(null);
-      });
-    return () => {
-      vivo = false;
-    };
-  }, [istat]);
-
-  const indirizzabile = sonda?.indirizzabile ?? false;
-  if (!portale && !indirizzabile) return null;
-
-  // Nome piattaforma dal censimento; se il censimento non ha ancora spazzolato
-  // questo comune ma la sonda lo dice indirizzabile, è per definizione il
-  // modello AgID (è ciò che la sonda testa).
-  const connettoreNome = portale?.piattaforma ?? "Modello AgID";
-  const aderenzaPct =
-    portale?.aderenza != null ? Math.round(portale.aderenza * 100) : null;
-  const scan = dataBreve(sonda?.ultima_scansione ?? portale?.rilevato_il ?? null);
+  if (!accessMode) return null;
+  const etichette: Record<string, string> = {
+    direct: "Dato diretto",
+    mediated: "Dato mediato",
+    indirect: "Dato da verificare",
+    unavailable: "Fonte non disponibile",
+    M2_prosa_api: "Dato mediato",
+    M4_connettore: "Dato mediato",
+    M5_nessuno: "Dato da verificare",
+    M6_web_aperto: "Dato da verificare",
+  };
+  const etichetta = etichette[accessMode] ?? "Fonte verificata";
 
   return (
-    <div className="badge-connettore-box" role="note">
+    <div className="badge-connettore-box" role="status">
       <p className="badge-connettore">
         <span className="badge-connettore__pallino" aria-hidden />
-        <span className="badge-connettore__campo">
-          <span className="badge-connettore__k">Codice comune</span>
-          <span className="badge-connettore__v">{istat}</span>
-        </span>
-        <span className="badge-connettore__sep" aria-hidden>·</span>
-        <span className="badge-connettore__campo">
-          <span className="badge-connettore__k">Connettore</span>
-          <span className="tag-connettore">{connettoreNome}</span>
-          {aderenzaPct != null && (
-            <span className="badge-connettore__v">aderenza {aderenzaPct}%</span>
-          )}
-        </span>
-        <span className="badge-connettore__sep" aria-hidden>·</span>
-        <span className="badge-connettore__stato badge-connettore__stato--online">
-          online
-        </span>
-        <span className="badge-connettore__sep" aria-hidden>·</span>
-        <span className="badge-connettore__stato badge-connettore__stato--grezzo">
-          non letto in automatico
-        </span>
-        {scan && (
-          <>
-            <span className="badge-connettore__sep" aria-hidden>·</span>
-            <span className="badge-connettore__campo">
-              <span className="badge-connettore__k">ultima scansione</span>
-              <span className="badge-connettore__v">{scan}</span>
-            </span>
-          </>
-        )}
-      </p>
-      <p className="badge-connettore__nota">
-        Il connettore legge solo i dati pubblicati in formato aperto e standard,
-        non copia la pagina del comune. Orari e referenti che stanno solo nella
-        pagina non li leggiamo ancora in automatico: se il comune li aprisse in
-        un formato condiviso, TreasureIQ li mostrerebbe qui — è lo scopo del
-        progetto.{" "}
-        {/* Il ponte al censimento nazionale (ex-PonteScala): stessa riga, non
-            più una banda a sé in fondo. */}
-        <a href="/analytics">vedi com&rsquo;è messa l&rsquo;Italia{" "}→</a>
+        <span className="badge-connettore__v">{etichetta}</span>
       </p>
     </div>
   );
@@ -440,7 +341,7 @@ function PagineWeb({ results }: { results: InfoWebResult[] }) {
   if (results.length === 0) return null;
   return (
     <div className="info-answer__web" data-state="non_verificato" role="note">
-      <p className="info-answer__web-label">Ricerca web · non verificato</p>
+      <p className="info-answer__web-label">Pagine del comune da verificare</p>
       <ul>
         {results.slice(0, 3).map((result) => (
           <li key={result.url}>
@@ -1688,10 +1589,7 @@ export default function Chat() {
                     )?.ente_codice_istat ??
                     null;
                   return istatBanner ? (
-                    <BadgeConnettore
-                      istat={istatBanner}
-                      sonda={m.reply.connettore ?? null}
-                    />
+                    <BadgeConnettore accessMode={m.reply.access_mode} />
                   ) : null;
                 })()}
 

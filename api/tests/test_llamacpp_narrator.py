@@ -37,3 +37,7 @@ def test_clean_output_rimuove_solo_etichetta_di_risposta():
         _context().deterministic_text,
     )
     assert cleaned == _context().deterministic_text
+
+
+def test_clean_output_rileva_risposta_ripetitiva():
+    assert LlamaCppNarrator._clean_output("A:\nA:\nA:\nA:", "testo") == ""

@@ -104,6 +104,9 @@ class LlamaCppNarrator:
         """Remove harmless response labels without altering civic facts."""
 
         text = raw.strip()
+        lines = [line.strip() for line in text.splitlines() if line.strip()]
+        if len(lines) >= 4 and len(set(lines)) == 1:
+            return ""
         if text.startswith("Risposta:"):
             text = text[len("Risposta:") :].lstrip()
         # A model may include a markdown code fence around plain prose. Strip

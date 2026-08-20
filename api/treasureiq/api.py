@@ -1057,6 +1057,16 @@ class ChatOut(BaseModel):
     ) = None
 
 
+class ConversationMessageOut(BaseModel):
+    role: Literal["user", "assistant"]
+    content: str
+
+
+class ConversationOut(BaseModel):
+    conversation_id: str | None = None
+    messages: list[ConversationMessageOut] = []
+
+
 #: Ciclo12/B1: prima parola della risposta secca a un follow-up pendente.
 #: Stesso vocabolario numerico di `filtri.py` (`_UNITA_NUMERO`) — nessun
 #: pattern nuovo, solo la lettura di un numero all'inizio del turno.
@@ -2781,6 +2791,30 @@ async def chat(body: ChatIn, request: Request, response: Response) -> ChatOut:
     )
     conversation_store.append_message(conversation.conversation_id, "assistant", output.reply)
     return output
+
+
+@app.get("/api/conversation", response_model=ConversationOut, tags=["Cittadino"])
+def get_conversation(request: Request, response: Response) -> ConversationOut:
+    """Reopen the anonymous transcript associated with the browser cookie."""
+    conversation_id = request.cookies.get(CONVERSATION_COOKIE)
+    if not conversation_id:
+        return ConversationOut()
+    try:
+        conversation = conversation_store.open(conversation_id)
+        messages = conversation_store.messages(conversation.conversation_id)
+    except KeyError:
+        return ConversationOut()
+    response.set_cookie(
+        CONVERSATION_COOKIE,
+        conversation.conversation_id,
+        httponly=True,
+        samesite="lax",
+        max_age=CONVERSATION_MAX_AGE,
+    )
+    return ConversationOut(
+        conversation_id=conversation.conversation_id,
+        messages=[ConversationMessageOut(role=m.role, content=m.content) for m in messages],
+    )
 
 
 @app.delete("/api/conversation", tags=["Cittadino"])

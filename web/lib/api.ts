@@ -998,6 +998,11 @@ export interface ChatTurn {
   content: string;
 }
 
+export interface ConversationTranscript {
+  conversation_id: string | null;
+  messages: ChatTurn[];
+}
+
 export const chat = (
   message: string,
   history: ChatTurn[] = [],
@@ -1015,6 +1020,10 @@ export const chat = (
       chiarimento_atteso: chiarimentoAtteso,
     }),
   });
+
+/** Reopen the server-side anonymous transcript carried by the browser cookie. */
+export const openConversation = () =>
+  call<ConversationTranscript>("/api/conversation");
 
 /** Immediately deletes the anonymous conversation state and its browser token. */
 export const forgetConversation = () =>

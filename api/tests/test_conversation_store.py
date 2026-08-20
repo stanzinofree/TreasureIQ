@@ -15,6 +15,9 @@ def test_conversation_reopens_and_keeps_messages(tmp_path) -> None:
 
     assert reopened.conversation_id == opened.conversation_id
     assert reopened.last_seen_at >= opened.last_seen_at
+    assert [(m.role, m.content) for m in store.messages(opened.conversation_id)] == [
+        ("user", "Dove trovo l'anagrafe?")
+    ]
 
 
 def test_forget_deletes_conversation_immediately(tmp_path) -> None:
@@ -37,6 +40,8 @@ def test_expired_conversation_is_not_reopened(tmp_path) -> None:
     replacement = store.open(opened.conversation_id)
 
     assert replacement.conversation_id != opened.conversation_id
+    with pytest.raises(KeyError):
+        store.messages(opened.conversation_id)
 
 
 def test_message_role_is_closed(tmp_path) -> None:

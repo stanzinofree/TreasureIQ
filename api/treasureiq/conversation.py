@@ -24,6 +24,13 @@ class Conversation:
     last_seen_at: datetime
 
 
+@dataclass(frozen=True)
+class ConversationMessage:
+    role: str
+    content: str
+    created_at: datetime
+
+
 class ConversationStore:
     def __init__(self, path: str | Path) -> None:
         self.path = str(path)
@@ -67,6 +74,9 @@ class ConversationStore:
                         (_iso(now), conversation_id),
                     )
                 return Conversation(conversation_id, current.created_at, now)
+            if current is not None:
+                with self._connect() as db:
+                    self._delete(db, conversation_id)
         token = secrets.token_urlsafe(TOKEN_BYTES)
         with self._connect() as db:
             db.execute(
@@ -111,21 +121,35 @@ class ConversationStore:
                 (conversation_id, sequence, event_type, payload, _iso(now)),
             )
 
+    def messages(self, conversation_id: str) -> list[ConversationMessage]:
+        """Return the live transcript in sequence order."""
+        now = _now()
+        with self._connect() as db:
+            self._require_live(db, conversation_id, now)
+            rows = db.execute(
+                "SELECT role, content, created_at FROM conversation_messages "
+                "WHERE conversation_id = ? ORDER BY sequence",
+                (conversation_id,),
+            ).fetchall()
+        return [ConversationMessage(row[0], row[1], _parse(row[2])) for row in rows]
+
     def forget(self, conversation_id: str) -> None:
         with self._connect() as db:
-            db.execute("DELETE FROM conversation_messages WHERE conversation_id = ?", (conversation_id,))
-            db.execute("DELETE FROM conversation_events WHERE conversation_id = ?", (conversation_id,))
-            db.execute("DELETE FROM conversations WHERE conversation_id = ?", (conversation_id,))
+            self._delete(db, conversation_id)
 
     def purge_expired(self) -> int:
         threshold = _iso(_now() - CONVERSATION_TTL)
         with self._connect() as db:
             ids = [row[0] for row in db.execute("SELECT conversation_id FROM conversations WHERE last_seen_at < ?", (threshold,))]
             for conversation_id in ids:
-                db.execute("DELETE FROM conversation_messages WHERE conversation_id = ?", (conversation_id,))
-                db.execute("DELETE FROM conversation_events WHERE conversation_id = ?", (conversation_id,))
-                db.execute("DELETE FROM conversations WHERE conversation_id = ?", (conversation_id,))
+                self._delete(db, conversation_id)
         return len(ids)
+
+    @staticmethod
+    def _delete(db: sqlite3.Connection, conversation_id: str) -> None:
+        db.execute("DELETE FROM conversation_messages WHERE conversation_id = ?", (conversation_id,))
+        db.execute("DELETE FROM conversation_events WHERE conversation_id = ?", (conversation_id,))
+        db.execute("DELETE FROM conversations WHERE conversation_id = ?", (conversation_id,))
 
     def _get(self, conversation_id: str) -> Conversation | None:
         with self._connect() as db:

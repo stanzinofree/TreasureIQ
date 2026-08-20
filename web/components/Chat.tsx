@@ -48,6 +48,7 @@ import {
   comuneNearby,
   fetchBandi,
   forgetConversation,
+  openConversation,
   portaleComune,
   type Bando,
   type BandiLiveEsito,
@@ -1025,6 +1026,35 @@ export default function Chat() {
   const [scheda, setScheda] = useState<Match | null>(null);
   const [passoAttesa, setPassoAttesa] = useState(0);
   const [mostraAvvisoCookie, setMostraAvvisoCookie] = useState(true);
+
+  // A conversation is reopenable, not merely addressable: on a fresh page
+  // load restore the server-side transcript before the citizen asks the next
+  // question. Result cards are intentionally not reconstructed from prose;
+  // the transcript remains truthful and the next answer is recomputed from
+  // the deterministic data path.
+  useEffect(() => {
+    let attivo = true;
+    openConversation()
+      .then((transcript) => {
+        if (!attivo || transcript.messages.length === 0) return;
+        setMessages((precedenti) => {
+          if (precedenti.length > 0) return precedenti;
+          const ripristinati = transcript.messages.map((message, indice) => ({
+            id: `restored-${indice + 1}`,
+            role: message.role,
+            content: message.content,
+          }));
+          nextId.current = ripristinati.length;
+          return ripristinati;
+        });
+      })
+      .catch(() => {
+        // An unavailable transcript must not block a new anonymous chat.
+      });
+    return () => {
+      attivo = false;
+    };
+  }, []);
 
   // The wait message moves on every few seconds so a slow answer looks like
   // work in progress rather than a stall. It restarts from the first line each

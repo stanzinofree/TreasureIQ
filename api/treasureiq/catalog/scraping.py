@@ -26,6 +26,7 @@ class ScrapeResult(_StrictModel):
     requests: int = 0
     bytes: int = 0
     limitations: tuple[str, ...] = ()
+    from_cache: bool = False
 
 
 class ScrapeEngine(Protocol):
@@ -82,18 +83,15 @@ class HtmlScrapeEngine:
         self.timeout = timeout
         self.max_bytes = max_bytes
         self.pdf_engine = pdf_engine
+        self._fetch_cache: dict[str, tuple[tuple[Any, bytes, str] | None, bool]] = {}
 
     def retrieve(self, *, source_url: str, request: DataRequest) -> ScrapeResult:
-        risposta = fetch_guardato(
-            source_url,
-            timeout=self.timeout,
-            max_bytes=self.max_bytes,
-            host_atteso=urlparse(source_url).hostname,
-        )
+        risposta, from_cache = self._fetch(source_url)
         if risposta is None:
             return ScrapeResult(
                 status=ScrapeResult.Status.FAILED,
-                requests=1,
+                requests=0 if from_cache else 1,
+                from_cache=from_cache,
                 limitations=("La fonte web non ha risposto a una lettura guardata.",),
             )
         headers, payload, final_url = risposta
@@ -101,8 +99,9 @@ class HtmlScrapeEngine:
         if "html" not in content_type and not payload.lstrip().startswith((b"<!", b"<html", b"<HTML")):
             return ScrapeResult(
                 status=ScrapeResult.Status.UNSUPPORTED,
-                requests=1,
+                requests=0 if from_cache else 1,
                 bytes=len(payload),
+                from_cache=from_cache,
                 limitations=("La fonte non ha restituito HTML; il ramo PDF sarà gestito dal PDF engine.",),
             )
         parser = _LinkParser()
@@ -129,20 +128,30 @@ class HtmlScrapeEngine:
         return ScrapeResult(
             records=tuple(records[: request.limits.max_records]),
             evidence=tuple(evidence[: request.limits.max_records]),
-            requests=1,
+            requests=0 if from_cache else 1,
             bytes=len(payload),
+            from_cache=from_cache,
             limitations=("I record sono link pubblicati nella pagina HTML della fonte.",),
         )
 
-    def _inspect_pdf(self, url: str, request: DataRequest, base_host: str) -> dict[str, Any]:
-        if self.pdf_engine is None:
-            return {"pdf_route": "unavailable", "pdf_error": "PDF engine non configurato"}
+    def _fetch(self, url: str) -> tuple[tuple[Any, bytes, str] | None, bool]:
+        cached = self._fetch_cache.get(url)
+        if cached is not None:
+            risposta, _ = cached
+            return risposta, True
         risposta = fetch_guardato(
             url,
             timeout=self.timeout,
             max_bytes=self.max_bytes,
-            host_atteso=base_host,
+            host_atteso=urlparse(url).hostname,
         )
+        self._fetch_cache[url] = (risposta, False)
+        return risposta, False
+
+    def _inspect_pdf(self, url: str, request: DataRequest, base_host: str) -> dict[str, Any]:
+        if self.pdf_engine is None:
+            return {"pdf_route": "unavailable", "pdf_error": "PDF engine non configurato"}
+        risposta, _from_cache = self._fetch(url)
         if risposta is None:
             return {"pdf_route": "unavailable", "pdf_error": "PDF non leggibile"}
         _headers, payload, final_url = risposta

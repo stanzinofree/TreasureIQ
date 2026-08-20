@@ -40,6 +40,7 @@ class WebScrapeConnector:
             from treasureiq.catalog.scraping import HtmlScrapeEngine
 
             engine = HtmlScrapeEngine()
+            self.engine = engine
         return self.retrieve_live(request, mappa=mappa, engine=engine)
 
     def retrieve_live(
@@ -89,7 +90,7 @@ class WebScrapeConnector:
             transport=TransportMeta(
                 requests=scraped.requests,
                 bytes=scraped.bytes,
-                from_cache=False,
+                from_cache=scraped.from_cache,
             ),
             connector=ConnectorRef(name=self.name, version=self.version),
             retrieved_at=retrieved_at,

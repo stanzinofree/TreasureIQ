@@ -79,3 +79,22 @@ def test_html_engine_inspects_transparency_pdf_before_returning_record(monkeypat
 
     assert result.records[0]["pdf_route"] == "native_text"
     assert result.records[0]["markdown"] == "# Trasparenza"
+
+
+def test_html_engine_reuses_homepage_within_one_run(monkeypatch) -> None:
+    calls = 0
+
+    def fetch(url: str, **kwargs):
+        nonlocal calls
+        calls += 1
+        return {"content-type": "text/html"}, b'<a href="/uffici/anagrafe">Anagrafe</a>', url
+
+    monkeypatch.setattr("treasureiq.catalog.scraping.fetch_guardato", fetch)
+    engine = HtmlScrapeEngine()
+
+    first = engine.retrieve(source_url="https://comune.example", request=_request())
+    second = engine.retrieve(source_url="https://comune.example", request=_request())
+
+    assert calls == 1
+    assert first.from_cache is False
+    assert second.from_cache is True

@@ -77,6 +77,27 @@ def test_registry_resolves_indirect_fallback_for_unknown_platform() -> None:
     assert adapter.name == "web_scrape"
 
 
+def test_fallback_requests_are_explicit_for_unknown_platform() -> None:
+    registry = default_adapter_registry()
+
+    requests = registry.fallback_requests_for(
+        source_id="058003",
+        platform_id="halley",
+        request_prefix="fallback",
+        freshness=FreshnessPolicy(max_age_seconds=86400),
+        limits=RequestLimits(max_records=5),
+        manifest_revision=1,
+    )
+
+    assert [request.capability for request in requests] == [
+        "services",
+        "offices",
+        "contacts",
+        "transparency",
+    ]
+    assert all(request.allowed_modes == ("indirect",) for request in requests)
+
+
 def test_registry_rejects_duplicate_adapter_names() -> None:
     registry = AdapterRegistry()
     registry.register(WordPressAgidAdapter())

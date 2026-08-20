@@ -81,6 +81,7 @@ def main() -> int:
     parser.add_argument("--platform-id", required=True)
     parser.add_argument("--run-id", required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--store", type=Path)
     args = parser.parse_args()
 
     mappa = load_mappa(
@@ -94,6 +95,10 @@ def main() -> int:
     temporary = args.output.with_suffix(args.output.suffix + ".tmp")
     temporary.write_text(result.model_dump_json(indent=2), encoding="utf-8")
     temporary.replace(args.output)
+    if args.store is not None:
+        from treasureiq.catalog.fallback_store import FallbackRunStore
+
+        FallbackRunStore(args.store).save(result)
     print(json.dumps({"run_id": result.run_id, "batches": len(result.batches)}))
     return 0
 

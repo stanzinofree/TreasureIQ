@@ -29,6 +29,7 @@ from treasureiq.catalog.wordpress_connector import WordPressAgidConnector
 from treasureiq.catalog.web_connector import WebScrapeConnector
 from treasureiq.catalog.scraping import HtmlScrapeEngine, ScrapeEngine, ScrapeResult
 from treasureiq.catalog.runtime import CatalogRuntime, batch_from_connector_result
+from treasureiq.catalog.fallback_store import FallbackRunStore
 from treasureiq.catalog.data_contracts import (
     ConnectorRef,
     DataBatch,
@@ -74,6 +75,7 @@ __all__ = [
     "HtmlScrapeEngine",
     "CatalogRuntime",
     "batch_from_connector_result",
+    "FallbackRunStore",
     "WebScrapeAdapter",
     "DataBatch",
     "DataRequest",

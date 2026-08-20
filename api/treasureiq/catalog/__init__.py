@@ -23,6 +23,7 @@ from treasureiq.catalog.contracts import (
     Surface,
 )
 from treasureiq.catalog.connectors import ConnectorResult, SourceConnector
+from treasureiq.catalog.wordpress_connector import WordPressAgidConnector
 from treasureiq.catalog.data_contracts import (
     ConnectorRef,
     DataBatch,
@@ -59,6 +60,7 @@ __all__ = [
     "SourceConnector",
     "CapabilityManifest",
     "WordPressAgidAdapter",
+    "WordPressAgidConnector",
     "WebScrapeAdapter",
     "DataBatch",
     "DataRequest",

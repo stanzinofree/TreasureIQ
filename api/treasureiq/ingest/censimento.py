@@ -1415,9 +1415,15 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.catalog_output and not args.db:
         parser.error("--catalog-output richiede --db")
-    args.measurement_id = args.measurement_id or datetime.now(timezone.utc).strftime(
+    args.measurement_at = datetime.now(timezone.utc)
+    args.measurement_id = args.measurement_id or args.measurement_at.strftime(
         "sweep-%Y%m%dT%H%M%SZ"
     )
+    # Il catalogo è parte del contratto dello sweep, non un'importazione
+    # successiva. Il flag resta disponibile per scegliere un mount diverso,
+    # ma con --db la destinazione standard è accanto allo storico.
+    if args.db and args.catalog_output is None:
+        args.catalog_output = args.db.parent / "catalog"
 
     esiti = _raccogli(args)
     if args.db:
@@ -1427,6 +1433,7 @@ def main(argv: list[str] | None = None) -> int:
             anagrafe=_anagrafe(),
             catalog_output=args.catalog_output,
             measurement_id=args.measurement_id,
+            measured_at=args.measurement_at,
         )
         print(f"registrate {scritte} righe in {args.db}", file=sys.stderr)
     if args.json or args.out:
@@ -1456,6 +1463,7 @@ def _registra(
     anagrafe: dict[str, dict],
     catalog_output: Path | None = None,
     measurement_id: str | None = None,
+    measured_at: datetime | None = None,
 ) -> int:
     """Traduce gli esiti in righe di storico e le scrive.
 
@@ -1519,7 +1527,8 @@ def _registra(
             store=SnapshotStore(catalog_output),
             codici_istat=tuple(r.codice_istat for r in righe),
             measurement_id=measurement_id or f"sweep-{righe[0].rilevato_il.isoformat()}",
-            measured_at=datetime.combine(
+            measured_at=measured_at
+            or datetime.combine(
                 max(r.misurato_il for r in esiti),
                 datetime.min.time(),
                 tzinfo=timezone.utc,
@@ -1595,6 +1604,7 @@ def _raccogli(args: argparse.Namespace) -> list[EsitoCensimento]:
                     anagrafe=anagrafe,
                     catalog_output=args.catalog_output,
                     measurement_id=args.measurement_id,
+                    measured_at=args.measurement_at,
                 )
             )
             if args.db
@@ -1629,6 +1639,7 @@ def _raccogli(args: argparse.Namespace) -> list[EsitoCensimento]:
                     anagrafe=anagrafe,
                     catalog_output=args.catalog_output,
                     measurement_id=args.measurement_id,
+                    measured_at=args.measurement_at,
                 )
             )
             if args.db
@@ -1665,6 +1676,7 @@ def _raccogli(args: argparse.Namespace) -> list[EsitoCensimento]:
                     anagrafe=anagrafe,
                     catalog_output=args.catalog_output,
                     measurement_id=args.measurement_id,
+                    measured_at=args.measurement_at,
                 )
             )
             if args.db

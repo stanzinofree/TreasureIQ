@@ -198,6 +198,26 @@ def test_censisci_molti_salva_a_blocchi(monkeypatch):
     assert blocchi == [3, 3, 1], "il resto in coda va salvato anche se sotto soglia"
 
 
+def test_sweep_con_db_attiva_catalogo_accanto_allo_storico(monkeypatch, tmp_path):
+    """Lo sweep standard non deve più richiedere un import manuale del catalogo."""
+    from treasureiq.ingest import censimento
+
+    catturato = {}
+    monkeypatch.setattr(censimento, "_raccogli", lambda args: [])
+    monkeypatch.setattr(censimento, "_anagrafe", lambda: {})
+
+    def registra(esiti, **kwargs):
+        catturato.update(kwargs)
+        return 0
+
+    monkeypatch.setattr(censimento, "_registra", registra)
+
+    assert censimento.main(["--db", str(tmp_path / "storico.db"), "--json"]) == 0
+    assert catturato["catalog_output"] == tmp_path / "catalog"
+    assert catturato["measurement_id"].startswith("sweep-")
+    assert catturato["measured_at"].tzinfo is not None
+
+
 def test_meta_refresh_riconosciuto_come_cartello():
     """Sessantacinque comuni campani risultavano senza alcuna firma: la loro
     home e' un documento di 179 byte con dentro

@@ -260,6 +260,9 @@ def _fase_censimento(comuni_istat: list[str], args: argparse.Namespace) -> tuple
         return 0, saltati
 
     args.db.parent.mkdir(parents=True, exist_ok=True)
+    measurement_at = datetime.now(timezone.utc)
+    measurement_id = measurement_at.strftime("sweep-%Y%m%dT%H%M%SZ")
+    catalog_output = args.catalog_output or args.db.parent / "catalog"
     try:
         censisci_molti(
             da_misurare,
@@ -267,7 +270,14 @@ def _fase_censimento(comuni_istat: list[str], args: argparse.Namespace) -> tuple
             lavoratori=args.lavoratori,
             misura_piattaforma=True,
             misura_aderenza=args.aderenza and not args.tutti,
-            salva=lambda blocco: _registra(blocco, db=args.db, anagrafe=anagrafe),
+            salva=lambda blocco: _registra(
+                blocco,
+                db=args.db,
+                anagrafe=anagrafe,
+                catalog_output=catalog_output,
+                measurement_id=measurement_id,
+                measured_at=measurement_at,
+            ),
         )
     except sqlite3.OperationalError as exc:
         raise SystemExit(
@@ -406,7 +416,13 @@ def _build_parser() -> argparse.ArgumentParser:
     _add_shadow_args(sweep)
     sweep.add_argument("--db", type=Path, default=DATA_DIR / "storico.db",
                         help="Path a storico.db (default data/storico.db; con 'make sweep' "
-                             "è /scrivibile/storico.db).")
+                        "è /scrivibile/storico.db).")
+    sweep.add_argument(
+        "--catalog-output",
+        type=Path,
+        default=None,
+        help="Directory snapshot catalogo (default: accanto a storico.db).",
+    )
     sweep.add_argument("--aderenza", action="store_true",
                         help="Misura anche l'aderenza AgID (ignorata con --tutti).")
     sweep.add_argument("--only-missing", action="store_true",

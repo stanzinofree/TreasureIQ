@@ -304,8 +304,9 @@ del progetto:
 | `make backup` · `make restore FILE=…` | tar di `storico.db` + `data-live/`, e ripristino |
 
 Rigenerare i dati sono operazioni pesanti e **non** servono per far girare la copia
-già committata: `make scan-nazionale` rifà il censimento nazionale in `storico.db`,
-`make sweep ISTAT='058057'` fa censimento e registro per un set di comuni,
+già committata: `make scan-nazionale` rifà il censimento nazionale in `storico.db`
+e aggiorna automaticamente le snapshot contrattuali in `data/catalog/`,
+`make sweep ISTAT='058057'` fa censimento, catalogo e registro per un set di comuni,
 `make registro-list` elenca cosa è stato letto.
 
 ### Eseguire senza Docker

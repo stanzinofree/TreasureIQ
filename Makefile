@@ -109,7 +109,7 @@ censimento: ## Rifa' la misura T0 sul campione: make censimento N=400
 		--out /scrivibile/censimento-esiti.json
 
 .PHONY: scan-nazionale
-scan-nazionale: ## Censimento asse-A su TUTTI i comuni -> storico.db (gentile: solo fingerprint, resumable, ripopola /analytics)
+scan-nazionale: ## Censimento asse-A su TUTTI i comuni -> storico.db + catalog/ (gentile e resumable)
 	docker compose run --rm -T -v "$(PWD)/data:/scrivibile" api \
 		python -m treasureiq.ingest.censimento --tutti --db /scrivibile/storico.db \
 		--lavoratori $(or $(LAVORATORI),6)
@@ -121,7 +121,7 @@ scan-misurabili: ## Pass profondo + aderenza AgID sui comuni leggibili gia' nel 
 		--db /scrivibile/storico.db --lavoratori $(or $(LAVORATORI),6)
 
 .PHONY: sweep
-sweep: ## Censimento+registro per un set in un run: make sweep ISTAT='058057' | vuoto=coperti
+sweep: ## Censimento+registro+catalogo per un set: make sweep ISTAT='058057' | vuoto=coperti
 	docker compose run --rm -T -v "$(PWD)/data:/scrivibile" api \
 		python -m treasureiq.registro_cli sweep $(if $(ISTAT),$(ISTAT),--coperti) \
 		--db /scrivibile/storico.db $(if $(ADERENZA),--aderenza,) \

@@ -64,8 +64,7 @@ from treasureiq.catalog import (
     RequestLimits,
     Surface,
     build_query_plan,
-    default_connector_registry,
-    default_adapter_registry,
+    CatalogRuntime,
     select_batch,
 )
 from treasureiq.chat.categorie import Categoria, topics_di
@@ -2222,9 +2221,8 @@ def _data_batches_da_connettore(esito: connettore.EsitoConnettore) -> list[DataB
     mappa = _da_cache(esito.codice_istat)
     if mappa is None:
         return []
-    registry = default_adapter_registry()
-    connector_registry = default_connector_registry()
-    richieste = registry.requests_for(
+    runtime = CatalogRuntime()
+    richieste = runtime.adapters.requests_for(
         source_id=esito.codice_istat,
         platform_id=esito.piattaforma,
         request_prefix="chat",
@@ -2234,30 +2232,14 @@ def _data_batches_da_connettore(esito: connettore.EsitoConnettore) -> list[DataB
     )
     batches: list[DataBatch] = []
     for request in richieste:
-        # Il legacy `EsitoConnettore` è già il risultato della lettura in questo
-        # ramo. Il registry dei connettori decide comunque chi possiede la
-        # capability; il passaggio HTTP verrà spostato qui nel rework del
-        # connettore, senza cambiare il contratto dell'adapter.
-        connector = connector_registry.resolve(
-            request=request,
+        batch = runtime.execute(
+            request,
             platform_id=esito.piattaforma,
+            mappa=mappa,
+            esito=esito,
         )
-        if connector is None:
-            continue
-        adapter = registry.resolve(
-            platform_id=esito.piattaforma,
-            surface=request.surface.value,
-            capability=request.capability,
-        )
-        if adapter is None:
-            continue
-        batches.append(
-            adapter.read(
-                request,
-                mappa=mappa,
-                esito=esito,
-            )
-        )
+        if batch is not None:
+            batches.append(batch)
     return batches
 
 

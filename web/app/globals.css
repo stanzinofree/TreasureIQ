@@ -2695,6 +2695,31 @@ a {
   background: #2f7d4f;
 }
 
+/* Il colore segue il contratto di accesso, non la vecchia presenza di un
+   connettore: indiretto e non disponibile non sono stati di successo. */
+.badge-connettore-box[data-access-mode="indirect"] {
+  border-color: #e4d3a0;
+  border-left-color: #a47700;
+  background: #fff9e8;
+}
+.badge-connettore-box[data-access-mode="indirect"] .badge-connettore__pallino {
+  background: #a47700;
+}
+.badge-connettore-box[data-access-mode="indirect"] .badge-connettore__v {
+  color: #7a5900;
+}
+.badge-connettore-box[data-access-mode="unavailable"] {
+  border-color: #d7dce3;
+  border-left-color: #778191;
+  background: #f5f6f8;
+}
+.badge-connettore-box[data-access-mode="unavailable"] .badge-connettore__pallino {
+  background: #778191;
+}
+.badge-connettore-box[data-access-mode="unavailable"] .badge-connettore__v {
+  color: #4f5968;
+}
+
 /* Riga di stato tecnica: coppia etichetta·valore. Mono per la resa da «pannello
    di controllo» (codice, data), coerente coi micro-label del resto della UI. */
 .badge-connettore__campo {

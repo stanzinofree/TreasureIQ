@@ -37,7 +37,6 @@ import { useProfilo } from "@/lib/profilo";
 import { conTagVerifica } from "@/lib/testo";
 import { useRisultati } from "@/lib/risultati";
 import { useScan } from "@/lib/scan";
-import ScanLive from "@/components/ScanLive";
 
 /** Stable DOM id for one card, so the side index can link straight to it. */
 function ancoraDi(messageId: string, matchId: string): string {
@@ -327,7 +326,11 @@ function SourceAccessBadge({
   const etichetta = etichette[accessMode] ?? "Fonte verificata";
 
   return (
-    <div className="badge-connettore-box" role="status">
+    <div
+      className="badge-connettore-box"
+      data-access-mode={accessMode}
+      role="status"
+    >
       <p className="badge-connettore">
         <span className="badge-connettore__pallino" aria-hidden />
         <span className="badge-connettore__v">{etichetta}</span>
@@ -874,9 +877,9 @@ function InfoAnswer({ info }: { info: InfoOut }) {
 // D-S6 (B6): scan assente/stantio (>6gg) → refresh partito in background,
 // dati di QUESTO turno restano quelli in cache — nessuna attesa sincrona.
 // `stato === "fresco"` → nessun indicatore, la risposta non lo segnala.
-// La spia (banda che lampeggia + bottone «Ricarica») vive ora in <ScanLive>,
-// alimentata da un unico store condiviso (lib/scan): stesso stato in chat e
-// nel pannello a sinistra, un solo poller. Vedi ScanProvider.
+// La spia (banda che lampeggia + bottone «Ricarica») vive nel pannello del
+// comune, alimentata da un unico store condiviso (lib/scan), un solo poller.
+// Vedi ScanProvider.
 
 // A cambio esplicito di persona il profilo locale va svuotato per non
 // mescolare i dati forniti nei due scambi.
@@ -1098,7 +1101,7 @@ export default function Chat() {
       ]);
       // Alimenta l'unica spia scan condivisa (chat + pannello). L'istat viene
       // dal profilo capito o dal comune scelto/profilo:
-      // se lo stato è "fresco", <ScanLive> non mostra nulla; se è
+      // se lo stato è "fresco", il pannello non mostra nulla; se è
       // "aggiornamento_in_corso", parte il poller e compare la banda.
       aggiornaScan(
         out.scan,
@@ -1298,7 +1301,7 @@ export default function Chat() {
     if (lastUser) send(lastUser.content, comuneIstat);
   }
 
-  // «Ricarica con dati aggiornati» (da <ScanLive>, in chat o nel pannello):
+  // «Ricarica con dati aggiornati» (dal pannello del comune):
   // rilancia l'ultima domanda ora che il refresh ha riscritto il record. Il
   // bottone non chiama send direttamente — bumpa `nonceRicarica` nello store, e
   // qui reagiamo, così il rilancio usa sempre la closure fresca di send. nonce
@@ -1736,11 +1739,6 @@ export default function Chat() {
           </p>
         )}
       </div>
-
-      {/* Spia scan del comune, sotto l'intera conversazione: banda che lampeggia
-          mentre il refresh gira, poi bottone «Ricarica con dati aggiornati».
-          Stesso stato mostrato nel pannello a sinistra (un solo store). */}
-      <ScanLive variante="chat" />
 
       {/* Feedback (D-01, ciclo 6; D-06, ciclo 14): il form vive ora dietro un
           bottone nell'header dell'app (FeedbackHeader), non più agganciato

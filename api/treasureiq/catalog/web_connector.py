@@ -22,6 +22,9 @@ class WebScrapeConnector:
     name = "web_scrape"
     version = "1"
 
+    def __init__(self, engine: ScrapeEngine | None = None) -> None:
+        self.engine = engine
+
     def supports(self, request: DataRequest, *, platform_id: str) -> bool:
         return request.capability in {"services", "offices", "contacts", "transparency"}
 
@@ -32,7 +35,12 @@ class WebScrapeConnector:
         mappa: MappaConnettore,
         esito: EsitoConnettore | None,
     ) -> ConnectorResult:
-        raise RuntimeError("WebScrapeConnector requires retrieve_live with a ScrapeEngine")
+        engine = self.engine
+        if engine is None:
+            from treasureiq.catalog.scraping import HtmlScrapeEngine
+
+            engine = HtmlScrapeEngine()
+        return self.retrieve_live(request, mappa=mappa, engine=engine)
 
     def retrieve_live(
         self,

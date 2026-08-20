@@ -7,6 +7,7 @@ from treasureiq.catalog import (
     AdapterRegistry,
     DataRequest,
     FreshnessPolicy,
+    RequestLimits,
     Surface,
 )
 from treasureiq.connettore import EsitoConnettore, UfficioConnettore
@@ -62,3 +63,18 @@ def test_runtime_rejects_source_without_native_or_fallback_adapter() -> None:
     assert CatalogRuntime(connectors=ConnectorRegistry(), adapters=AdapterRegistry()).execute(
         _request(), platform_id="unknown", mappa=_mappa(), esito=None
     ) is None
+
+
+def test_runtime_fallback_is_explicit_and_returns_indirect_batches() -> None:
+    batches = CatalogRuntime().execute_fallbacks(
+        source_id="058003",
+        platform_id="halley",
+        mappa=_mappa().model_copy(update={"sito": None}),
+        freshness=FreshnessPolicy(max_age_seconds=86400),
+        limits=RequestLimits(max_records=5),
+        manifest_revision=1,
+    )
+
+    assert len(batches) == 4
+    assert {batch.access_mode for batch in batches} == {AccessMode.INDIRECT}
+    assert {batch.status.value for batch in batches} == {"not_found"}

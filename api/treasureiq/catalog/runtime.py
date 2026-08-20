@@ -7,6 +7,7 @@ from treasureiq.catalog.connector_defaults import default_connector_registry
 from treasureiq.catalog.connector_registry import ConnectorRegistry
 from treasureiq.catalog.connectors import ConnectorResult
 from treasureiq.catalog.data_contracts import DataBatch, DataRequest
+from treasureiq.catalog.data_contracts import FreshnessPolicy, RequestLimits
 from treasureiq.connettore import EsitoConnettore
 from treasureiq.mappa_connettore import MappaConnettore
 
@@ -59,3 +60,35 @@ class CatalogRuntime:
             return None
         result = connector.retrieve(request, mappa=mappa, esito=esito)
         return batch_from_connector_result(request, result)
+
+    def execute_fallbacks(
+        self,
+        *,
+        source_id: str,
+        platform_id: str,
+        mappa: MappaConnettore,
+        freshness: FreshnessPolicy,
+        limits: RequestLimits,
+        manifest_revision: int,
+        request_prefix: str = "fallback",
+    ) -> tuple[DataBatch, ...]:
+        """Explicitly execute wildcard indirect requests for one source."""
+        requests = self.adapters.fallback_requests_for(
+            source_id=source_id,
+            platform_id=platform_id,
+            request_prefix=request_prefix,
+            freshness=freshness,
+            limits=limits,
+            manifest_revision=manifest_revision,
+        )
+        batches: list[DataBatch] = []
+        for request in requests:
+            batch = self.execute(
+                request,
+                platform_id=platform_id,
+                mappa=mappa,
+                esito=None,
+            )
+            if batch is not None:
+                batches.append(batch)
+        return tuple(batches)

@@ -27,6 +27,7 @@ from pydantic import BaseModel, Field
 
 from treasureiq import freschezza
 from treasureiq.catalog import SnapshotStore, Surface
+from treasureiq.catalog.snapshots import MunicipalityPlatformSnapshot
 from treasureiq.bandi_live import BandiLiveEsito, _filtra_pdf_stesso_host, bandi_arricchiti
 from treasureiq.chat.filtri import (
     _UNITA_NUMERO,
@@ -828,6 +829,18 @@ class SourceAccessOut(BaseModel):
     measured_at: datetime
 
 
+class CatalogAccessOut(BaseModel):
+    """Backoffice projection of one latest catalog measurement."""
+
+    municipality_istat: str
+    surface: Literal["ordinary_data", "transparency"]
+    access_mode: Literal["direct", "mediated", "indirect", "unavailable"]
+    platform_id: str | None = None
+    platform_compatibility: str
+    measured_at: datetime
+    measurement_id: str
+
+
 def source_access_for(codice_istat: str | None) -> list[SourceAccessOut]:
     """Expose catalog provenance without exposing connector diagnostics."""
     if not codice_istat:
@@ -848,6 +861,44 @@ def source_access_for(codice_istat: str | None) -> list[SourceAccessOut]:
                 platform_id=snapshot.platform_id,
                 platform_compatibility=snapshot.platform_compatibility.value,
                 measured_at=snapshot.measured_at,
+            )
+        )
+    return result
+
+
+@app.get(
+    "/api/catalog/access",
+    response_model=list[CatalogAccessOut],
+    tags=["Catalogo interno"],
+)
+def catalog_access() -> list[CatalogAccessOut]:
+    """Return latest catalog measurements for the backoffice.
+
+    This is deliberately a projection of immutable snapshots: it exposes the
+    access contract and measurement identity, never connector diagnostics or
+    raw source payloads. Missing surfaces remain absent rather than being
+    synthesized as a zero or a negative assertion.
+    """
+    root = DATA_DIR / "catalog" / "municipality"
+    if not root.exists():
+        return []
+    result: list[CatalogAccessOut] = []
+    for path in sorted(root.glob("*/*/latest.json")):
+        try:
+            snapshot = MunicipalityPlatformSnapshot.model_validate_json(
+                path.read_text(encoding="utf-8")
+            )
+        except (OSError, ValueError, json.JSONDecodeError):
+            continue
+        result.append(
+            CatalogAccessOut(
+                municipality_istat=snapshot.municipality_istat,
+                surface=snapshot.surface.value,
+                access_mode=snapshot.access_mode.value,
+                platform_id=snapshot.platform_id,
+                platform_compatibility=snapshot.platform_compatibility.value,
+                measured_at=snapshot.measured_at,
+                measurement_id=snapshot.measurement_id,
             )
         )
     return result

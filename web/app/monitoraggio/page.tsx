@@ -19,7 +19,9 @@
  */
 
 import {
+  catalogAccess,
   status,
+  type CatalogAccess,
   type InternalDatum,
   type SourceStatus,
   type StatusOut,
@@ -118,12 +120,96 @@ function DatumRow({ datum }: { datum: InternalDatum }) {
   );
 }
 
+const SURFACE_LABEL: Record<CatalogAccess["surface"], string> = {
+  ordinary_data: "Dati ordinari",
+  transparency: "Amministrazione Trasparente",
+};
+
+const ACCESS_LABEL: Record<CatalogAccess["access_mode"], string> = {
+  direct: "Diretto",
+  mediated: "Mediato",
+  indirect: "Indiretto",
+  unavailable: "Non disponibile",
+};
+
+function CatalogAccessPanel({ entries }: { entries: CatalogAccess[] }) {
+  const surfaces = ["ordinary_data", "transparency"] as const;
+  const modes = ["direct", "mediated", "indirect", "unavailable"] as const;
+  return (
+    <section className="systems__group">
+      <div className="systems__group-head">
+        <h2>Catalogo delle fonti</h2>
+        <span className="systems__group-note">ultima misura per superficie</span>
+      </div>
+      <div className="panel">
+        {entries.length === 0 ? (
+          <p className="lede">Nessuna misura del catalogo disponibile.</p>
+        ) : (
+          <>
+            <div className="tessere">
+              {surfaces.map((surface) => (
+                <div className="tessera" key={surface}>
+                  <b>{entries.filter((e) => e.surface === surface).length}</b>
+                  <span>{SURFACE_LABEL[surface]} misurati</span>
+                </div>
+              ))}
+            </div>
+            <div className="tabella-scorrevole">
+              <table>
+                <caption>
+                  Distribuzione delle modalità di accesso sulle ultime misure.
+                </caption>
+                <thead>
+                  <tr>
+                    <th>Superficie</th>
+                    {modes.map((mode) => <th key={mode}>{ACCESS_LABEL[mode]}</th>)}
+                    <th>Misurazione</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {surfaces.map((surface) => {
+                    const righe = entries.filter((e) => e.surface === surface);
+                    const ultima = righe.reduce<CatalogAccess | null>(
+                      (current, entry) =>
+                        !current || entry.measured_at > current.measured_at
+                          ? entry
+                          : current,
+                      null,
+                    );
+                    return (
+                      <tr key={surface}>
+                        <th scope="row">{SURFACE_LABEL[surface]}</th>
+                        {modes.map((mode) => (
+                          <td key={mode} className="data-table__num">
+                            {righe.filter((e) => e.access_mode === mode).length}
+                          </td>
+                        ))}
+                        <td>{ultima?.measurement_id ?? "—"}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </>
+        )}
+      </div>
+    </section>
+  );
+}
+
 export default async function Monitoraggio() {
   let report: StatusOut | null = null;
   try {
     report = await status();
   } catch {
     report = null;
+  }
+  let catalogReport: CatalogAccess[] = [];
+  try {
+    catalogReport = await catalogAccess();
+  } catch {
+    catalogReport = [];
   }
 
   if (!report) {
@@ -212,6 +298,8 @@ export default async function Monitoraggio() {
             ))}
           </div>
         </section>
+
+        <CatalogAccessPanel entries={catalogReport} />
       </div>
 
       <section className="panel">

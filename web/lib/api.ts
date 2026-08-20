@@ -1129,6 +1129,19 @@ export interface StatusOut {
 
 export const status = () => call<StatusOut>("/api/status");
 
+/** Latest catalog measurements for the internal monitoring view. */
+export interface CatalogAccess {
+  municipality_istat: string;
+  surface: "ordinary_data" | "transparency";
+  access_mode: "direct" | "mediated" | "indirect" | "unavailable";
+  platform_id: string | null;
+  platform_compatibility: string;
+  measured_at: string;
+  measurement_id: string;
+}
+
+export const catalogAccess = () => call<CatalogAccess[]>("/api/catalog/access");
+
 /** Result of `GET /api/comune-nearby?lat=&lon=` — nullable: there may be no
  * supported comune near the citizen's current position. This is a proximity
  * lookup only; it never asserts residency (see D-09 and the geolocation

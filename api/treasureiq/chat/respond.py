@@ -57,6 +57,7 @@ from urllib.parse import urlparse
 from treasureiq import bandi_live, connettore
 from treasureiq.bandi_live import BandiLiveEsito, BandoArricchito
 from treasureiq.catalog import (
+    AccessMode as CatalogAccessMode,
     DataBatch,
     DataRequest,
     FreshnessPolicy,
@@ -86,12 +87,14 @@ from treasureiq.ingest.censimento import Indirizzabilita
 from treasureiq.ingest.websearch import WebSearchNonConfigurato, entro_ttl, search_web
 from treasureiq.integration import (
     AccessMode,
+    DATA_DIR,
     Ente,
     cost_lines,
     diagnosis_lines,
     load_enti,
     load_websearch,
 )
+from treasureiq.catalog.store import SnapshotStore
 from treasureiq.match.engine import (
     CriterionState,
     MatchResult,
@@ -121,6 +124,22 @@ MAX_MESSAGE_CHARS = 1000
 #: import between the route module and this one.
 DEFAULT_COMUNE_ISTAT = "058003"
 DEFAULT_COMUNE_NOME = "Albano Laziale"
+
+
+def _catalog_access_mode(codice_istat: str) -> CatalogAccessMode | None:
+    """Read the backoffice route decision, without fetching or inferring.
+
+    The sweep is optional during migration. A missing, malformed or stale
+    catalog file therefore means "no catalog decision", so the established
+    chat route remains the fallback for municipalities not imported yet.
+    """
+    try:
+        snapshot = SnapshotStore(DATA_DIR / "catalog").latest_municipality(
+            codice_istat, Surface.ORDINARY_DATA
+        )
+    except (OSError, ValueError):
+        return None
+    return snapshot.access_mode if snapshot is not None else None
 
 #: How many ranked matches ride along in one chat answer. Kept small: this is
 #: a chat bubble, not the `/opportunita` table.
@@ -1660,6 +1679,14 @@ async def _build_informazione_answer(
 
     web_results: list[WebResultAnswer] = []
     access_mode = ente.access_mode.value
+    catalog_mode = _catalog_access_mode(ente.codice_istat)
+    # A catalog decision is authoritative only when present. Until the sweep
+    # has imported this municipality, retain the legacy classification.
+    catalog_connector_route = catalog_mode is CatalogAccessMode.MEDIATED
+    catalog_exhausted_route = catalog_mode in (
+        CatalogAccessMode.MEDIATED,
+        CatalogAccessMode.UNAVAILABLE,
+    )
 
     # M4-servito vs M4/M5-gap (B4): un ente censito NON è per forza esausto —
     # proviamo il connettore per davvero prima di trattarlo come il gap che
@@ -1676,9 +1703,9 @@ async def _build_informazione_answer(
     # già include M4+M5) resta vero e nulla cambia per gli altri comuni (A7).
     # `leggi_connettore` è cache-first: un comune già scansionato risponde
     # dallo store senza rete; solo un M5 freddo paga un GET alla home in più.
-    if not candidates and ente.access_mode in (
-        AccessMode.M4_CONNETTORE,
-        AccessMode.M5_NESSUNO,
+    if not candidates and (
+        catalog_connector_route
+        or ente.access_mode in (AccessMode.M4_CONNETTORE, AccessMode.M5_NESSUNO)
     ):
         esito_connettore = await asyncio.to_thread(connettore.leggi_connettore, ente.codice_istat)
         if esito_connettore is not None and (
@@ -1695,9 +1722,9 @@ async def _build_informazione_answer(
             if risposta_connettore is not None:
                 return risposta_connettore
 
-    institutional_exhausted = not candidates and ente.access_mode in (
-        AccessMode.M4_CONNETTORE,
-        AccessMode.M5_NESSUNO,
+    institutional_exhausted = not candidates and (
+        catalog_exhausted_route
+        or ente.access_mode in (AccessMode.M4_CONNETTORE, AccessMode.M5_NESSUNO)
     )
     letto_dal_vivo = False
     if institutional_exhausted:

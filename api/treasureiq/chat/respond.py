@@ -75,6 +75,7 @@ from treasureiq.chat.intent import (
     TOPIC_KEYWORDS,
     BeneficiaryRole,
     ChatIntent,
+    build_recognition_contract,
     QuestionKind,
     Topic,
     _sesso_dichiarato_nel_testo,
@@ -3609,6 +3610,14 @@ async def _componi_risposta(
     intent = await _eredita_dal_contesto(
         intent=intent, messaggio=message, storia=storia or [], provider=provider
     )
+    # Contratto v1: da questo punto il planner può consumare una descrizione
+    # unica e verificabile del turno, invece di rileggere modello, filtri e
+    # storia da percorsi separati. La risposta v0 resta compatibile: il piano
+    # delle fonti verrà collegato nel passaggio successivo.
+    recognition = build_recognition_contract(
+        message=message, intent=intent, storia=storia
+    )
+    intent = recognition.intent
 
     # D-55: se questo turno stesso risponde alla domanda «tutte le categorie
     # o una in particolare?» — letto sul testo grezzo, mai sulla

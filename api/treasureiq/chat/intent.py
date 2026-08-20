@@ -469,6 +469,46 @@ class ChatIntent(BaseModel):
     )
 
 
+class ChatRecognitionContract(BaseModel):
+    """Contratto v1 dell'interpretazione di un turno cittadino.
+
+    `ChatIntent` resta la forma compatibile della classificazione; questo
+    involucro aggiunge le evidenze deterministiche che servono al planner.
+    Nessun campo decide la fonte o scrive la risposta: il contratto descrive
+    soltanto ciò che il cittadino ha detto e il contesto che può essere
+    riutilizzato.
+    """
+
+    version: Literal["v1"] = "v1"
+    message: str = Field(min_length=1)
+    intent: ChatIntent
+    filter_keys: tuple[str, ...] = ()
+    context_turns: int = Field(default=0, ge=0)
+    municipality_explicit: bool = False
+
+
+def build_recognition_contract(
+    *, message: str, intent: ChatIntent, storia: list[str] | None = None
+) -> ChatRecognitionContract:
+    """Envelope deterministico attorno all'intent già guard-railato.
+
+    I filtri sono letti dalla sola funzione canonica `riconosci_filtri`; il
+    modello non può aggiungerne. La funzione è intenzionalmente piccola: il
+    routing delle fonti appartiene al QueryPlan, non a questo contratto.
+    """
+
+    from treasureiq.chat.filtri import riconosci_filtri
+
+    filtri = riconosci_filtri(message)
+    return ChatRecognitionContract(
+        message=message,
+        intent=intent,
+        filter_keys=tuple(dict.fromkeys(f.chiave.value for f in filtri)),
+        context_turns=len(storia or []),
+        municipality_explicit=bool(intent.comune_hint),
+    )
+
+
 class _ModelIntent(BaseModel):
     """Minimal shape asked of the LLM (D-01, ciclo11): topic/kind/comune_hint/
     beneficiary_role only — no `slots`. Asking the model for anagraphic slots
@@ -849,4 +889,3 @@ def _topic_keyword_presente(messaggio: str) -> bool:
             if parola.rstrip("-").casefold() in haystack:
                 return True
     return False
-

@@ -19,6 +19,9 @@ anthropic>=0.120,<1.0
 # PDF (D-15). Without it, PDF attachments are skipped and logged rather than
 # failing the run — install it to recover requirements locked in bandi PDFs.
 pypdf>=5.1,<6.0
+# Optional PDF classification/extraction gate. OCR is still a separate
+# operational capability and is never invoked by this package automatically.
+pdf-inspector>=0.2,<0.3
 snowballstemmer>=3.0
 
 # Optional. Loaded lazily by chat/filtri.py (ciclo 11, D-06) to scope

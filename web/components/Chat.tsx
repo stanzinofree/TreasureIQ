@@ -19,10 +19,8 @@
  *     it is "I found nothing", and dressing it the same as the middle case
  *     would erase the distinction.
  *
- * The mock-SPID picker below is the same three personas that used to live on
- * the home page — relocated here because identity is now something the chat
- * asks for mid-conversation (D-09), not a gate the citizen passes through
- * first.
+ * The chat is anonymous: context comes from the conversation and from facts
+ * the citizen explicitly provides during the exchange.
  */
 
 import { useEffect, useId, useRef, useState } from "react";
@@ -32,11 +30,9 @@ import EcoProfilo from "@/components/EcoProfilo";
 import ChipFiltri from "@/components/ChipFiltri";
 import Segnalazione from "@/components/Segnalazione";
 import SchedaDettaglio from "@/components/SchedaDettaglio";
-import AccessoSimulato from "@/components/AccessoSimulato";
 import SceltaComune from "@/components/SceltaComune";
 import RispostaCivica from "@/components/RispostaCivica";
 import SchedaLettoOra from "@/components/SchedaLettoOra";
-import { PRESETS } from "@/lib/profili-demo";
 import { useProfilo } from "@/lib/profilo";
 import { conTagVerifica } from "@/lib/testo";
 import { useRisultati } from "@/lib/risultati";
@@ -51,7 +47,7 @@ import {
   chat,
   comuneNearby,
   fetchBandi,
-  login,
+  forgetConversation,
   portaleComune,
   type Bando,
   type BandiLiveEsito,
@@ -897,8 +893,8 @@ function BandiLive({ esito }: { esito: BandiLiveEsito }) {
 
 /**
  * D-19 — the INFORMAZIONE rail. Document, office, coverage and diagnosis are
- * facts about a public body's data; nothing here is a verdict, a criterion,
- * or a SPID prompt. If this component ever grows an eligibility badge, the
+ * facts about a public body's data; nothing here is a verdict or a criterion.
+ * If this component ever grows an eligibility badge, the
  * two-rails boundary the whole feature exists to draw has broken.
  */
 function InfoAnswer({ info }: { info: InfoOut }) {
@@ -981,9 +977,8 @@ function InfoAnswer({ info }: { info: InfoOut }) {
 // alimentata da un unico store condiviso (lib/scan): stesso stato in chat e
 // nel pannello a sinistra, un solo poller. Vedi ScanProvider.
 
-// D-56/R-LOGOUT: azzerare una sessione CIE/SPID perché il turno sembra
-// parlare di un'altra persona è quasi-irreversibile (bisogna rientrare).
-// Niente logout automatico: si spiega e si aspetta un click esplicito.
+// A cambio esplicito di persona il profilo locale va svuotato per non
+// mescolare i dati forniti nei due scambi.
 function CambioPersonaGate({ onConferma }: { onConferma: () => void }) {
   const [confermato, setConfermato] = useState(false);
 
@@ -1024,13 +1019,12 @@ export default function Chat() {
   const { registra, profilo, dimentica } = useProfilo();
   const { registra: registraTrovate, azzeraTrovate } = useRisultati();
   const { aggiornaScan, nonceRicarica } = useScan();
-  const accesso = profilo.accesso === true;
-  const [manualLogin, setManualLogin] = useState(false);
   //: Aperto solo su richiesta. Un campo sempre esposto sopra la domanda si
   //: legge come un passaggio obbligato, e questo dato è facoltativo.
   const [sceltaAperta, setSceltaAperta] = useState(false);
   const [scheda, setScheda] = useState<Match | null>(null);
   const [passoAttesa, setPassoAttesa] = useState(0);
+  const [mostraAvvisoCookie, setMostraAvvisoCookie] = useState(true);
 
   // The wait message moves on every few seconds so a slow answer looks like
   // work in progress rather than a stall. It restarts from the first line each
@@ -1151,7 +1145,7 @@ export default function Chat() {
     setBusy(true);
     try {
       // Il codice del comune attivo, da qualunque strada sia arrivato —
-      // scelto dall'elenco, rilevato dal GPS o portato dall'accesso. Il
+      // scelto dall'elenco o rilevato dal GPS. Il
       // profilo è l'unico posto dove sta, così non può esistere un comune
       // mostrato nella barra laterale e un altro usato per rispondere.
       // Se l'utente ha scelto un comune da una scheda di disambiguazione, quel
@@ -1287,6 +1281,25 @@ export default function Chat() {
     }
   }
 
+  async function dimenticaConversazione() {
+    if (busy || rimozioneInCorso.current) return;
+    rimozioneInCorso.current = true;
+    setError(null);
+    try {
+      await forgetConversation();
+      setMessages([]);
+      setOverrideScambio({});
+      setOverrideSessione([]);
+      setChiarimentoPendente(null);
+      azzeraTrovate();
+      nextId.current = 0;
+    } catch {
+      setError("Non riesco a cancellare la conversazione in questo momento.");
+    } finally {
+      rimozioneInCorso.current = false;
+    }
+  }
+
   // Ciclo11/A8-client (D-04) — la «×» su un chip non ri-filtra client-side:
   // ri-manda la STESSA domanda con la chiave in `filtri_override`, cosi' il
   // ricalcolo e' vero (comune fuori copertura ricalcola davvero, non solo
@@ -1376,66 +1389,6 @@ export default function Chat() {
     const lastUser = [...messages].reverse().find((m) => m.role === "user");
     if (lastUser) send(lastUser.content, cand.codice_istat);
   }
-
-  const [avvioBusy, setAvvioBusy] = useState<string | null>(null);
-
-  // Un tap, non tre: sceglie il profilo, apre la sessione server e manda
-  // subito la domanda pronta di quella persona. Segue enter() sopra — stessa
-  // login(), stesso registra() — non il flusso di AccessoSimulato.onFatto,
-  // che non apre mai una sessione server.
-  async function avviaPersona(preset: (typeof PRESETS)[number]) {
-    if (avvioBusy || busy) return;
-    setAvvioBusy(preset.id);
-    try {
-      await login({
-        comune_istat: "058003",
-        comune_nome: "Albano Laziale",
-        ...preset.profile,
-      });
-      registra({
-        eta: preset.profile.eta,
-        interessi: [...preset.profile.interests],
-        comune: {
-          nome: "Albano Laziale",
-          istat: "058003",
-          origine: "accesso",
-          confermato: true,
-        },
-        accesso: true,
-      });
-      azzeraTrovate();
-      // Passiamo l'ISTAT esplicito: la registra() qui sopra non e' ancora
-      // applicata alla closure di send, quindi `profilo.comune?.istat` sarebbe
-      // ancora vuoto e la chiamata partirebbe con comune_istat=null — niente
-      // comune, niente numeri utili, niente scheda a sinistra sul primo turno.
-      await send(preset.domanda, "058003");
-    } catch {
-      setError(
-        "Non riesco a raggiungere il servizio. Verifica che l'API sia in esecuzione su localhost:8010.",
-      );
-    } finally {
-      setAvvioBusy(null);
-    }
-  }
-
-  // Handoff da /demo: un arrivo su /?persona=<id> avvia in automatico quel
-  // caso, una sola volta, poi ripulisce l'URL. Così la home resta un campo
-  // solo e i bottoni-persona vivono su una pagina dedicata senza perdere
-  // l'avvio a un tap. Il param si consuma PRIMA di chiamare avviaPersona: un
-  // refresh o un back del browser non deve rilanciare la sessione.
-  const personaAvviata = useRef(false);
-  useEffect(() => {
-    if (personaAvviata.current) return;
-    const id = new URLSearchParams(window.location.search).get("persona");
-    if (!id) return;
-    const preset = PRESETS.find((p) => p.id === id);
-    if (!preset) return;
-    personaAvviata.current = true;
-    window.history.replaceState(null, "", window.location.pathname);
-    void avviaPersona(preset);
-    // Gira una sola volta al mount (guardia via ref): deps vuoto voluto.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   /**
    * Geolocation tells us where the citizen is *standing*, never where they
@@ -1582,19 +1535,6 @@ export default function Chat() {
             <p className="chat__hint">
               Ad esempio: &laquo;ho la bolletta elettrica troppo alta&raquo;,
               &laquo;ci sono bandi per informatici in scadenza?&raquo;
-            </p>
-            {/* I casi di prova non stanno più sulla home: una griglia di
-                quattro bottoni-persona rubava l'attenzione al primo sguardo,
-                dove deve vincere il campo della domanda. Vivono su /demo,
-                raggiungibile da qui; al ritorno /?persona=<id> li avvia in
-                automatico (vedi l'effetto di handoff sopra). */}
-            <p className="chat__hint" style={{ marginTop: "var(--ma-3)" }}>
-              <a
-                href="/demo"
-                style={{ fontFamily: "var(--font-mono)", fontWeight: 700 }}
-              >
-                ▸ Vedi i casi demo
-              </a>
             </p>
           </>
         )}
@@ -1754,7 +1694,7 @@ export default function Chat() {
 
                 {m.reply.kind === "informazione" ? (
                   // D-19 — the INFORMAZIONE rail never renders a verdict, a
-                  // criterion or a SPID gate. If `info` itself is missing,
+                  // criterion. If `info` itself is missing,
                   // this bubble stays empty rather than falling through to
                   // AGEVOLAZIONE furniture below.
                   m.reply.info && (
@@ -1877,6 +1817,30 @@ export default function Chat() {
         </p>
       )}
 
+      {mostraAvvisoCookie && (
+        <div className="conversation-cookie-banner" role="status">
+          Questa chat usa un cookie tecnico per riaprire la conversazione sullo
+          stesso browser per 90 giorni. I contenuti restano sul server e puoi
+          cancellarli in qualsiasi momento.
+          <button
+            type="button"
+            className="button button--small"
+            onClick={() => setMostraAvvisoCookie(false)}
+          >
+            Ho capito
+          </button>
+        </div>
+      )}
+
+      <button
+        type="button"
+        className="button button--secondary"
+        onClick={dimenticaConversazione}
+        disabled={busy}
+      >
+        Dimentica conversazione
+      </button>
+
       <form className="chat__form" onSubmit={handleSubmit}>
         <label className="chat__label" htmlFor={inputId}>
           Scrivi la tua domanda
@@ -1897,61 +1861,6 @@ export default function Chat() {
           </button>
         </div>
       </form>
-
-      {/* A visible but non-pushy way to reach the mock identity flow without
-          waiting for the chat to ask for it (D-09 covers *why* the chat asks
-          mid-conversation; this is the other, citizen-initiated door).
-
-          Hidden once a session exists, not merely while the panel is open:
-          tied only to the panel, it reappeared the moment a login succeeded,
-          inviting someone who had just signed in to sign in again. The panel
-          in "Sto usando" is where an active session is managed. */}
-      {!manualLogin && !accesso && (
-        <div className="spid-entry">
-          <button
-            type="button"
-            className="spid-entry__button"
-            onClick={() => setManualLogin(true)}
-          >
-            Accedi con SPID/CIE (simulazione) per risposte sul tuo profilo
-          </button>
-        </div>
-      )}
-      {/* Identity is a handoff, so it gets its own screen rather than a panel
-          wedged into the transcript. The mid-conversation gate above stays
-          inline: there it is attached to the one answer that needs it, and
-          losing that context would cost more than the consistency gains. */}
-      {manualLogin && (
-        <AccessoSimulato
-          onAnnulla={() => setManualLogin(false)}
-          onFatto={(preset) => {
-            setManualLogin(false);
-            registra({
-              eta: preset.profile.eta,
-              interessi: [...preset.profile.interests],
-              comune: {
-                nome: "Albano Laziale",
-                istat: "058003",
-                origine: "accesso",
-                confermato: true,
-              },
-              accesso: true,
-            });
-            // Signing in changes the basis of every verdict already on
-            // screen. The question is asked again below, but the index has to
-            // be emptied first: it only ever appends, so without this the
-            // freshly computed result would sit next to the one calculated
-            // before the citizen's data was known — the same benefit listed
-            // twice, with two different answers and nothing saying which is
-            // current.
-            azzeraTrovate();
-            // ISTAT esplicito: la registra() qui sopra non e' ancora nella
-            // closure di send, quindi senza passarlo il re-invio partirebbe con
-            // comune_istat=null e la scheda numeri utili non comparirebbe.
-            retryLastQuestion("058003");
-          }}
-        />
-      )}
 
       {scheda && <SchedaDettaglio match={scheda} onClose={() => setScheda(null)} />}
     </section>

@@ -1,5 +1,12 @@
 # Roadmap
 
+> **Nota v1:** il framing aggiornato e il piano operativo corrente sono in
+> [piano-v1.md](piano-v1.md). TIQ non è pensato per confrontare o classificare
+> i comuni: deve rendere ricercabili le informazioni pubbliche ovunque, usando
+> connettori come ponte temporaneo verso uno standard aperto della PA. Questo
+> documento conserva la roadmap precedente e va letto come storico/contesto
+> finché non verrà riallineato punto per punto.
+
 *Se l'hackathon va bene e TIQ vince, questa è la strada. Nessuna data: le date
 mentono quando il progetto è di uno solo. Qui c'è **l'ordine**, e la ragione
 dell'ordine — quanto ogni fronte avvicina TIQ a essere il punto d'ingresso unico

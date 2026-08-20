@@ -1,17 +1,9 @@
 """HTTP API for the TreasureIQ web client.
 
-Serves three things: the citizen's matched opportunities, the readiness report
-for a comune, and a mock authentication flow. Everything is computed from the
-committed seed snapshot by default, so the whole application runs with no
-network access and no API key — which is what makes the demo reproducible for
-anyone who clones the repository.
-
-The session model is deliberately thin. There is no user database: a "login"
-produces a signed cookie carrying the citizen profile itself. That is adequate
-for a mock and, more importantly, it keeps the substitution path honest — when
-this is replaced by real SPID/CIE, the profile arrives from the identity
-provider's attribute release rather than from our own storage, which is exactly
-the shape here.
+Serves the citizen chat, public data views and internal catalog/connector
+operations. Citizen context is carried by the conversation and explicit chat
+signals; there is no simulated identity provider or server-side citizen
+session.
 """
 
 from __future__ import annotations
@@ -21,33 +13,20 @@ import json
 import logging
 import os
 import re
+import threading
 import time
 from collections import defaultdict
-import threading
 from datetime import date, datetime, timezone
-from decimal import Decimal
 from functools import lru_cache
 from pathlib import Path
 from typing import Literal
 
 from fastapi import Depends, FastAPI, HTTPException, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import HTMLResponse
-from itsdangerous import BadSignature, URLSafeSerializer
 from pydantic import BaseModel, Field
 
 from treasureiq import freschezza
-from treasureiq.chat.respond import (
-    DEFAULT_COMUNE_ISTAT,
-    MAX_MESSAGE_CHARS,
-    ChatAnswer,
-    InfoAnswer,
-    approfondisci_nel_comune,
-    build_chat_answer,
-    RecoveryStats,
-    compute_recovery_stats,
-)
-from treasureiq.chat.intent import Topic
+from treasureiq.bandi_live import BandiLiveEsito, _filtra_pdf_stesso_host, bandi_arricchiti
 from treasureiq.chat.filtri import (
     _UNITA_NUMERO,
     Filtro,
@@ -56,17 +35,21 @@ from treasureiq.chat.filtri import (
     accumula_filtri,
     riconosci_filtri,
 )
-from treasureiq.costo import SOGLIA_RISCOPERTA, costo_comune
-from treasureiq.storico import (
-    aderenza_fornitori,
-    date_censimento,
-    panoramica_piattaforme,
-    panoramica_piattaforme_at,
-    portale_del_comune,
-    serie,
-    sezioni_mancanti,
-    vincoli_nazionali,
+from treasureiq.chat.intent import Topic
+from treasureiq.chat.respond import (
+    DEFAULT_COMUNE_ISTAT,
+    MAX_MESSAGE_CHARS,
+    ChatAnswer,
+    InfoAnswer,
+    RecoveryStats,
+    approfondisci_nel_comune,
+    build_chat_answer,
+    compute_recovery_stats,
 )
+from treasureiq.connettore import EsitoConnettore
+from treasureiq.conversation import ConversationStore
+from treasureiq.costo import SOGLIA_RISCOPERTA, costo_comune
+from treasureiq.extract.corpus import build_corpus, collect_pdf_segments
 from treasureiq.integration import (
     MODE_LABELS,
     Ente,
@@ -74,23 +57,6 @@ from treasureiq.integration import (
     diagnosis_lines,
     load_enti,
 )
-from treasureiq.match.engine import (
-    MatchResult,
-    Verdict,
-    match,
-    summarise,
-)
-from treasureiq.sonda_live import (
-    LIVE_DIR,
-    OrariLive,
-    cerca_comuni,
-    comune_per_codice,
-    recupera_contatti,
-)
-from treasureiq.bandi_live import BandiLiveEsito, _filtra_pdf_stesso_host, bandi_arricchiti
-from treasureiq.connettore import EsitoConnettore
-from treasureiq.registro import Recapiti, RegistroComune, leggi_registro, recapiti_comune
-from treasureiq.extract.corpus import build_corpus, collect_pdf_segments
 from treasureiq.mappa_connettore import (
     Bando,
     CategoriaServizio,
@@ -103,10 +69,23 @@ from treasureiq.mappa_connettore import (
     scheda_servizio,
     servizi_di_categoria,
 )
-from treasureiq.scansioni import AderenzaAgid, aggiorna_scansione, carica_scansione, connettore_tipo
+from treasureiq.match.engine import (
+    MatchResult,
+    Verdict,
+    summarise,
+)
 from treasureiq.readiness import ReadinessReport, score_comune
 from treasureiq.recovery import ComuneRecovery, compute_comune_recovery
-from treasureiq.schema import CitizenProfile, Confidence, Livello, Opportunity
+from treasureiq.registro import Recapiti, RegistroComune, leggi_registro, recapiti_comune
+from treasureiq.scansioni import AderenzaAgid, aggiorna_scansione, carica_scansione, connettore_tipo
+from treasureiq.schema import Confidence, Livello, Opportunity
+from treasureiq.sonda_live import (
+    LIVE_DIR,
+    OrariLive,
+    cerca_comuni,
+    comune_per_codice,
+    recupera_contatti,
+)
 from treasureiq.stats import (
     APP_VERSION,
     AppStats,
@@ -114,6 +93,16 @@ from treasureiq.stats import (
     build_system_status,
     compute_app_stats,
     nearest_comune,
+)
+from treasureiq.storico import (
+    aderenza_fornitori,
+    date_censimento,
+    panoramica_piattaforme,
+    panoramica_piattaforme_at,
+    portale_del_comune,
+    serie,
+    sezioni_mancanti,
+    vincoli_nazionali,
 )
 
 logger = logging.getLogger(__name__)
@@ -138,25 +127,12 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 # path is the fallback that makes `uvicorn` work straight from a clone.
 DATA_DIR = Path(os.environ.get("TREASUREIQ_DATA_DIR", REPO_ROOT / "data"))
 SEED_DIR = DATA_DIR / "seed"
-SESSION_COOKIE = "treasureiq_session"
-
-#: Segreto di firma della sessione. Il default esiste perche' `docker compose
-#: up` deve funzionare senza configurare niente, ma un segreto noto significa
-#: sessioni falsificabili — cioe' un profilo scelto da chi attacca, con l'ISEE
-#: e la disabilita' che vuole lui.
-#:
-#: Percio' fuori da sviluppo l'avvio fallisce invece di proseguire: un default
-#: comodo che non si lamenta e' un default che finisce in produzione.
-SECRET_DI_PROVA = "treasureiq-demo-not-secret"
-SECRET = os.environ.get("TREASUREIQ_SECRET", SECRET_DI_PROVA)
-AMBIENTE = os.environ.get("TREASUREIQ_ENV", "sviluppo").strip().lower()
-
-if SECRET == SECRET_DI_PROVA and AMBIENTE not in {"sviluppo", "dev", "test"}:
-    raise RuntimeError(
-        "TREASUREIQ_SECRET e' rimasto al valore di prova mentre TREASUREIQ_ENV="
-        f"{AMBIENTE!r}. Con un segreto noto le sessioni si falsificano: "
-        "imposta un segreto vero, oppure dichiara l'ambiente come 'sviluppo'."
-    )
+CONVERSATION_COOKIE = "tiq_conversation"
+CONVERSATION_MAX_AGE = 90 * 24 * 60 * 60
+CONVERSATION_DB = Path(
+    os.environ.get("TREASUREIQ_CONVERSATION_DB", str(DATA_DIR / "conversations.sqlite3"))
+)
+conversation_store = ConversationStore(CONVERSATION_DB)
 
 #: Comuni whose seed snapshots ship with the repository.
 COMUNI = {
@@ -305,9 +281,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-serializer = URLSafeSerializer(SECRET, salt="treasureiq-session")
-
-
 #: Quante domande al modello accettiamo da uno stesso chiamante, e in quanto
 #: tempo.
 #:
@@ -326,15 +299,7 @@ _chiamate_modello: dict[str, list[float]] = defaultdict(list)
 
 
 def _chiamante(request: Request) -> str:
-    """Chi sta chiamando: la sessione se c'e', altrimenti l'indirizzo.
-
-    La sessione viene prima perche' e' piu' precisa di un IP condiviso da un
-    ufficio o da una rete mobile: limitare per IP soltanto punirebbe piu'
-    persone per colpa di una.
-    """
-    cookie = request.cookies.get(SESSION_COOKIE)
-    if cookie:
-        return f"sessione:{cookie[:32]}"
+    """Identifica il chiamante per il limite del motore."""
     client = request.client
     return f"ip:{client.host if client else 'ignoto'}"
 
@@ -402,52 +367,6 @@ def load_opportunities(codice_istat: str) -> tuple[Opportunity, ...]:
 # --------------------------------------------------------------------------
 # Session
 # --------------------------------------------------------------------------
-
-
-class LoginRequest(BaseModel):
-    """What the mock identity provider hands back.
-
-    Mirrors the attribute set SPID actually releases (name, fiscal code,
-    residence) plus the means-testing attributes that would come from INPS.
-    Keeping the shapes aligned is what makes this a stub rather than a
-    throwaway.
-    """
-
-    nome: str = "Cittadino"
-    codice_fiscale: str | None = None
-    comune_istat: str = "058003"
-    comune_nome: str = "Albano Laziale"
-    eta: int = 38
-    isee: Decimal | None = None
-    nucleo_familiare: int = 1
-    figli_minori: int = 0
-    disabilita: bool = False
-    employment_status: str | None = None
-    interests: list[str] = []
-
-
-def profile_from_cookie(request_cookie: str | None) -> CitizenProfile | None:
-    if not request_cookie:
-        return None
-    try:
-        payload = serializer.loads(request_cookie)
-    except BadSignature:
-        # Tampered or stale cookie: treat as logged out rather than erroring,
-        # so a stale browser session can't wedge someone out of the app.
-        logger.info("rejected session cookie with bad signature")
-        return None
-    try:
-        return CitizenProfile.model_validate(payload)
-    except Exception:
-        logger.info("session cookie did not validate against current schema")
-        return None
-
-
-def current_profile(request: Request) -> CitizenProfile:
-    profile = profile_from_cookie(request.cookies.get(SESSION_COOKIE))
-    if profile is None:
-        raise HTTPException(401, "Nessuna sessione attiva")
-    return profile
 
 
 # --------------------------------------------------------------------------
@@ -1087,6 +1006,9 @@ class FiltroOut(BaseModel):
 
 
 class ChatOut(BaseModel):
+    #: Token opaco della conversazione anonima, riapribile per 90 giorni.
+    #: Lo stato resta server-side: il cookie non contiene il profilo o la chat.
+    conversation_id: str
     reply: str
     #: Cosa abbiamo capito della domanda. Il pannello laterale lo mostra come
     #: filtri attivi, cosi' il cittadino puo' smentirci.
@@ -1752,14 +1674,6 @@ def freschezza_recent(dopo: int = 0) -> dict[str, object]:
     return {"eventi": freschezza.recenti(dopo)}
 
 
-@app.get("/demo/live", response_class=HTMLResponse, tags=["Sistema"])
-def demo_live() -> HTMLResponse:
-    """Console-demo «motore TIQ»: chat a sinistra, traccia dei fetch live al
-    comune a destra. Servita same-origin dall'API (niente CORS) — pensata per
-    registrare la GIF che mostra i dati arrivare freschi dal sito comunale."""
-    return HTMLResponse(_DEMO_LIVE_HTML)
-
-
 _DEMO_LOGS_HTML = """<!doctype html>
 <html lang="it">
 <head>
@@ -1847,139 +1761,6 @@ _DEMO_LOGS_HTML = """<!doctype html>
 </script>
 </body>
 </html>"""
-
-
-@app.get("/demo/logs", response_class=HTMLResponse, tags=["Sistema"])
-def demo_logs() -> HTMLResponse:
-    """Monitor-log a tutto schermo: i `fetch live` che l'API fa al sito del
-    comune, formattati come le righe di `docker logs`. Nessuna chat — pensato
-    per alternarlo alla navigazione reale dell'app nella GIF di evidenza."""
-    return HTMLResponse(_DEMO_LOGS_HTML)
-
-
-@app.post("/api/session", response_model=CitizenProfile, tags=["Cittadino"])
-def create_session(body: LoginRequest, response: Response) -> CitizenProfile:
-    """Mock SPID login. Issues a signed cookie carrying the profile.
-
-    No credentials are checked, by design — this stands in for an identity
-    provider we cannot integrate with in a hackathon timeframe. The README says
-    so plainly; a demo that implied real SPID would be the dishonest choice.
-    """
-    from treasureiq.schema import EmploymentStatus, TargetGroup
-
-    profile = CitizenProfile(
-        codice_fiscale=body.codice_fiscale,
-        comune_istat=body.comune_istat,
-        comune_nome=body.comune_nome,
-        eta=body.eta,
-        isee=body.isee,
-        nucleo_familiare=body.nucleo_familiare,
-        figli_minori=body.figli_minori,
-        disabilita=body.disabilita,
-        employment_status=(
-            EmploymentStatus(body.employment_status) if body.employment_status else None
-        ),
-        interests=[TargetGroup(i) for i in body.interests],
-    )
-    response.set_cookie(
-        SESSION_COOKIE,
-        serializer.dumps(json.loads(profile.model_dump_json())),
-        httponly=True,
-        samesite="lax",
-        max_age=60 * 60 * 8,
-    )
-    return profile
-
-
-@app.delete("/api/session", tags=["Cittadino"])
-def end_session(response: Response) -> dict[str, str]:
-    response.delete_cookie(SESSION_COOKIE)
-    return {"status": "logged_out"}
-
-
-class DimenticaCampoRequest(BaseModel):
-    campo: str
-    #: Only meaningful for campo="interessi": drop this one tag rather than
-    #: the whole list. Omitted (or falsy) clears the entire field.
-    valore: str | None = None
-
-
-#: Fields `create_session` fills from `LoginRequest`'s defaults rather than
-#: from None — `nucleo_familiare=1`, `figli_minori=0`, `disabilita=False`.
-#: Unsetting them here has to write None explicitly, or the profile stays
-#: "concrete" and an engine None-guard that should fire on the criterion
-#: never does.
-_CAMPI_DIMENTICABILI = {
-    "comune",
-    "eta",
-    "isee",
-    "nucleo_familiare",
-    "figli_minori",
-    "disabilita",
-    "sesso",
-    "disabilita_nucleo",
-    "figli_disabili",
-    "employment_status",
-    "interessi",
-}
-
-
-@app.post("/api/session/dimentica", response_model=CitizenProfile, tags=["Cittadino"])
-def dimentica_campo(
-    body: DimenticaCampoRequest,
-    response: Response,
-    profile: CitizenProfile = Depends(current_profile),
-) -> CitizenProfile:
-    """Unset one fact in the live session without rebuilding it.
-
-    Replaying `create_session` after a removal would rebuild the profile from
-    `LoginRequest` defaults and silently reinstate fields the citizen never
-    touched — `nucleo_familiare` back to the concrete `1`, not back to
-    "unknown". This mutates the existing signed profile in place instead:
-    every field but the one named in `campo` keeps its current value, and the
-    cookie is re-signed rather than replaced.
-    """
-    if body.campo not in _CAMPI_DIMENTICABILI:
-        raise HTTPException(400, f"Campo sconosciuto: {body.campo}")
-
-    if body.campo == "comune":
-        updates: dict[str, object] = {"comune_istat": None, "comune_nome": None}
-    elif body.campo == "interessi":
-        updates = {
-            "interests": (
-                [i for i in profile.interests if i != body.valore]
-                if body.valore
-                else []
-            )
-        }
-    else:
-        updates = {body.campo: None}
-
-    updated = profile.model_copy(update=updates)
-    response.set_cookie(
-        SESSION_COOKIE,
-        serializer.dumps(json.loads(updated.model_dump_json())),
-        httponly=True,
-        samesite="lax",
-        max_age=60 * 60 * 8,
-    )
-    return updated
-
-
-@app.get("/api/me", response_model=CitizenProfile, tags=["Cittadino"])
-def me(profile: CitizenProfile = Depends(current_profile)) -> CitizenProfile:
-    return profile
-
-
-@app.get("/api/opportunities", response_model=list[MatchOut], tags=["Cittadino"])
-def opportunities(
-    profile: CitizenProfile = Depends(current_profile),
-    include_ineligible: bool = False,
-) -> list[MatchOut]:
-    """Rank the citizen's own comune's opportunities for them."""
-    records = list(load_opportunities(profile.comune_istat))
-    results = match(records, profile, include_ineligible=include_ineligible)
-    return [to_match_out(r) for r in results]
 
 
 class VoceCostoOut(BaseModel):
@@ -2361,7 +2142,7 @@ def approfondimento(body: ApprofondimentoIn, request: Request) -> Approfondiment
     except ValueError:
         raise HTTPException(422, f"Tema non riconosciuto: {body.topic}") from None
 
-    profile = profile_from_cookie(request.cookies.get(SESSION_COOKIE))
+    profile = None
     # No session, no comune. Defaulting to Albano here meant the button "e il
     # mio comune?" answered about somebody else's comune, in a sentence naming
     # it — the same unfounded residency claim the hero used to make, and worse
@@ -2430,8 +2211,7 @@ def contatti_urp(body: ContattiUrpIn, request: Request) -> ContattiUrpOut:
     non un dato che abbiamo controllato. La guardia sui numeri vale qui come
     altrove: nessuna cifra viene asserita come fatto.
     """
-    profile = profile_from_cookie(request.cookies.get(SESSION_COOKIE))
-    comune_istat = body.comune_istat or (profile.comune_istat if profile is not None else None)
+    comune_istat = body.comune_istat
     if not comune_istat:
         return ContattiUrpOut(comune_nome="")
     meta = COMUNI.get(comune_istat)
@@ -2766,7 +2546,7 @@ async def at_analisi_route(payload: ATAnalisiRequest) -> ATAnalisiResponse:
 
 
 @app.post("/api/chat", response_model=ChatOut, tags=["Cittadino"], dependencies=[Depends(limita_modello)])
-async def chat(body: ChatIn, request: Request) -> ChatOut:
+async def chat(body: ChatIn, request: Request, response: Response) -> ChatOut:
     """Anonymous-by-default chat over Albano public data.
 
     The model never decides eligibility here (D-01 in `.kapi/spec.md`): it
@@ -2787,7 +2567,17 @@ async def chat(body: ChatIn, request: Request) -> ChatOut:
             f"Il messaggio è troppo lungo (massimo {MAX_MESSAGE_CHARS} caratteri).",
         )
 
-    profile = profile_from_cookie(request.cookies.get(SESSION_COOKIE))
+    conversation = conversation_store.open(request.cookies.get(CONVERSATION_COOKIE))
+    conversation_store.append_message(conversation.conversation_id, "user", message)
+    response.set_cookie(
+        CONVERSATION_COOKIE,
+        conversation.conversation_id,
+        httponly=True,
+        samesite="lax",
+        max_age=CONVERSATION_MAX_AGE,
+    )
+
+    profile = None
 
     # Un comune scelto esplicitamente decide quali record si guardano, e se non
     # ne abbiamo non se ne guardano affatto. Prima i record erano sempre quelli
@@ -2819,7 +2609,7 @@ async def chat(body: ChatIn, request: Request) -> ChatOut:
         # sistema sapeva già di non essere lì (R-9).
         scelto = body.comune_istat if body.comune_istat in COMUNI else None
         comune_istat = scelto or (
-            profile.comune_istat if profile is not None else DEFAULT_COMUNE_ISTAT
+            DEFAULT_COMUNE_ISTAT
         )
         comune_coperto = body.comune_istat is None or body.comune_istat in COMUNI
     records = list(load_opportunities(comune_istat)) if comune_coperto else []
@@ -2908,7 +2698,8 @@ async def chat(body: ChatIn, request: Request) -> ChatOut:
         )
     )
 
-    return ChatOut(
+    output = ChatOut(
+        conversation_id=conversation.conversation_id,
         reply=answer.reply,
         profilo_capito=_profilo_capito(
             answer=answer,
@@ -2988,6 +2779,18 @@ async def chat(body: ChatIn, request: Request) -> ChatOut:
         filtri=filtri_out,
         chiarimento=getattr(answer, "chiarimento", None),
     )
+    conversation_store.append_message(conversation.conversation_id, "assistant", output.reply)
+    return output
+
+
+@app.delete("/api/conversation", tags=["Cittadino"])
+def forget_conversation(request: Request, response: Response) -> dict[str, str]:
+    """Forget the anonymous conversation and invalidate its browser token."""
+    conversation_id = request.cookies.get(CONVERSATION_COOKIE)
+    if conversation_id:
+        conversation_store.forget(conversation_id)
+    response.delete_cookie(CONVERSATION_COOKIE)
+    return {"status": "forgotten"}
 
 
 class PiattaformaOut(BaseModel):

@@ -59,7 +59,9 @@ def test_extract_intent_rust_ha_parita_con_lo_scorer(caso, backend_rust):
     # Il crate nativo esiste solo nell'immagine con la wheel: fuori (host,
     # immagine senza Rust) si salta. Dentro, deve dare lo stesso esito del
     # backend scorer Python (parità 35/35 = l'oracolo è lo stesso).
-    pytest.importorskip("tiq_intent")
+    tiq_intent = pytest.importorskip("tiq_intent")
+    if not hasattr(tiq_intent, "score"):
+        pytest.skip("modulo tiq_intent presente senza estensione nativa score")
     atteso = score_intent(caso["msg"])
     intent = asyncio.run(
         extract_intent(message=caso["msg"], provider=_ProviderCheEsplode())

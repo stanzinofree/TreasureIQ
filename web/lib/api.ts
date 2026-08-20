@@ -110,18 +110,6 @@ export interface Readiness {
   dimensions: Dimension[];
 }
 
-export interface Profile {
-  comune_istat: string;
-  comune_nome: string;
-  eta: number;
-  isee: string | null;
-  nucleo_familiare: number;
-  figli_minori: number;
-  disabilita: boolean;
-  employment_status: string | null;
-  interests: string[];
-}
-
 async function call<T>(path: string, init?: RequestInit): Promise<T> {
   const res = await fetch(`${API}${path}`, {
     credentials: "include",
@@ -134,23 +122,6 @@ async function call<T>(path: string, init?: RequestInit): Promise<T> {
   }
   return (await res.json()) as T;
 }
-
-export const login = (body: Record<string, unknown>) =>
-  call<Profile>("/api/session", { method: "POST", body: JSON.stringify(body) });
-
-export const logout = () => call<unknown>("/api/session", { method: "DELETE" });
-
-/** Unset one fact in the live session, in place — never a full re-login.
- * `login()` rebuilds the profile from scratch, so replaying it after a
- * removal silently reinstates server-side defaults (nucleo_familiare back to
- * 1, not back to "unknown") on fields the citizen never touched. `valore` is
- * only meaningful for campo="interessi", to drop one tag instead of the
- * whole list. */
-export const dimenticaCampo = (campo: string, valore?: string) =>
-  call<Profile>("/api/session/dimentica", {
-    method: "POST",
-    body: JSON.stringify(valore ? { campo, valore } : { campo }),
-  });
 
 /** Le capacità dirette del portale di un comune fuori copertura: catalogo
  *  servizi + 15 categorie AgID, per i chip a cascata. A freddo il backend
@@ -240,7 +211,6 @@ export const contattiUrp = (comuneIstat: string | null) =>
     method: "POST",
     body: JSON.stringify({ comune_istat: comuneIstat }),
   });
-export const me = () => call<Profile>("/api/me");
 // `opportunities` is gone from here with the page that used it. The endpoint
 // still exists server-side; a client wrapper nobody calls would just be a
 // hint that a removed page might come back.
@@ -736,6 +706,8 @@ export const postAtAnalisi = (codiceIstat: string, pdfUrl: string) =>
   });
 
 export interface ChatOut {
+  /** Opaque anonymous conversation token, retained by the browser cookie for 90 days. */
+  conversation_id: string;
   profilo_capito: ProfiloCapito | null;
   reply: string;
   /** The topic this answer was retrieved for. The API has always sent it;
@@ -1043,6 +1015,10 @@ export const chat = (
       chiarimento_atteso: chiarimentoAtteso,
     }),
   });
+
+/** Immediately deletes the anonymous conversation state and its browser token. */
+export const forgetConversation = () =>
+  call<{ status: "forgotten" }>("/api/conversation", { method: "DELETE" });
 
 /** Una voce dell'elenco dei comuni italiani (ISTAT unito ai siti di IPA).
  *

@@ -25,9 +25,7 @@ function Chip({
   label: string;
   value: string;
   nota?: string;
-  /** Omitted for facts that cannot honestly be un-known once they exist —
-   * "Accesso" chief among them, since it is the login itself, not a fact
-   * learned during it. */
+  /** Omitted for facts that cannot honestly be un-known once they exist. */
   onRimuovi?: () => void;
 }) {
   return (
@@ -139,7 +137,7 @@ export default function ProfiloNoto() {
           Il GPS dice dove sei adesso, non dove risiedi — chi è in trasferta è
           altrove — quindi la conferma serve davvero e non è una formalità
           (R-9). Solo per `geolocalizzazione`: un comune `dichiarato` (digitato
-          in chat) o da `accesso` è già affermato dal cittadino, richiederne la
+          in chat) è già affermato dal cittadino, richiederne la
           conferma sarebbe una riconferma inutile — stessa condizione del
           chip-nota «da confermare» qui sopra. */}
       {profilo.comune &&
@@ -173,41 +171,18 @@ export default function ProfiloNoto() {
         />
       ))}
 
-      {profilo.codiceFiscale ? (
-        <Chip label="Codice fiscale" value={mascheraCF(profilo.codiceFiscale)} />
-      ) : profilo.accesso ? (
-        <Chip label="Accesso" value="simulato" nota="nessun codice fiscale letto" />
-      ) : null}
-
-      {/* The label has to say that this ends the session, not just that it
-          tidies the strip: someone signed in would not guess that "dimentica"
-          logs them out, and finding out afterwards is the wrong moment. */}
+      {/* The button clears the local context immediately. */}
       <button
         type="button"
         className="fatti__clear tiq-cta"
         onClick={() => {
-          // Leaving invalidates the index for the same reason arriving does:
-          // every verdict in it was computed from data the service is about to
-          // stop holding. The transcript keeps its history — a conversation
-          // records what was said — but the summary of "what we found" cannot
-          // outlive the profile it was found for.
           dimentica();
           azzeraTrovate();
         }}
-        title={
-          profilo.accesso
-            ? "Cancella questi dati e chiude la sessione"
-            : "Cancella questi dati"
-        }
+        title="Cancella questi dati"
       >
-        {profilo.accesso ? "Esci e dimentica" : "Dimentica"}
+        Dimentica
       </button>
     </div>
   );
-}
-
-/** Show enough to recognise it, not enough to reuse it. */
-function mascheraCF(cf: string): string {
-  if (cf.length <= 4) return cf;
-  return `${"·".repeat(cf.length - 4)}${cf.slice(-4)}`;
 }

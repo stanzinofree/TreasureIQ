@@ -560,6 +560,37 @@ a {
   max-width: none;
 }
 
+.conversation-cookie-banner {
+  position: fixed;
+  left: 50%;
+  bottom: var(--ma-3);
+  z-index: 70;
+  display: flex;
+  align-items: center;
+  gap: var(--ma-3);
+  width: min(720px, calc(100vw - 2 * var(--ma-3)));
+  transform: translateX(-50%);
+  padding: var(--ma-3) var(--ma-4);
+  border: 1.5px solid var(--kasumi);
+  border-radius: var(--radius);
+  background: var(--paper-raised);
+  color: var(--sumi);
+  box-shadow: var(--elev-2);
+  font-size: 0.86rem;
+}
+
+.conversation-cookie-banner .button {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .conversation-cookie-banner {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
 /* ----------------------------------------------------------- readiness */
 
 .dimension {
@@ -1247,31 +1278,6 @@ a {
   color: var(--sumi-faint);
   font-size: 0.86rem;
   margin: 0 0 var(--ma-4);
-}
-
-/* ------------------------------------------------------------ SPID entry */
-
-/* A visible but non-pushy way to reach the mock identity picker outside of
-   the mid-conversation escalation. Text-button styling: it must never look
-   as authoritative as a real SPID/CIE button on a real PA site. */
-.spid-entry {
-  text-align: center;
-  margin-top: var(--ma-2);
-}
-
-.spid-entry__button {
-  font-family: var(--font-body);
-  font-size: 0.86rem;
-  color: var(--sumi-faint);
-  background: none;
-  border: none;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  cursor: pointer;
-  padding: var(--ma-2);
-}
-.spid-entry__button:hover {
-  color: var(--ai);
 }
 
 /* --------------------------------------------------------------- status pill */

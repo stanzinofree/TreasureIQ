@@ -41,6 +41,9 @@ services:
       - "8010:8000"
     environment:
       TREASUREIQ_DATA_DIR: /data
+      # The curated data mount is read-only; anonymous conversation state is
+      # runtime data and must live on the writable persistent /live mount.
+      TREASUREIQ_CONVERSATION_DB: /live/conversations.sqlite3
       TREASUREIQ_CORS_ORIGINS: "http://localhost:3000,http://127.0.0.1:3000"
       # Signs the demo session cookie. Override in any real deployment — the
       # default is public in this repository and therefore not a secret.

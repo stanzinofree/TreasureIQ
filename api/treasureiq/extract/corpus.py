@@ -32,6 +32,8 @@ from urllib.parse import urlparse
 import httpx
 
 from treasureiq.extract.llm import Segment
+from treasureiq.extract.ocr import build_ocr_plan
+from treasureiq.extract.pdf_inspection import InspectionRoute, inspect_pdf_bytes
 from treasureiq.mappa_connettore import _host_senza_www
 from treasureiq.schema import PdfSkip
 
@@ -62,6 +64,8 @@ def collect_pdf_segments(
     client: httpx.Client,
     base_url: str,
     pdf_urls: list[str],
+    *,
+    inspector: Any | None = None,
 ) -> tuple[list[dict[str, Any]], list[str], list[PdfSkip], int]:
     """Download and extract text from up to `MAX_PDFS_PER_PAGE` attachments.
 
@@ -169,6 +173,31 @@ def collect_pdf_segments(
             )
             continue
 
+        inspection = inspect_pdf_bytes(response.content, inspector=inspector)
+        if inspection.route is InspectionRoute.INVALID:
+            reason = inspection.error or "ispezione PDF non valida"
+            _skip(
+                absolute_url,
+                f"Allegato PDF illeggibile (ispezione fallita): {absolute_url} ({reason})",
+                reason,
+                illegible=True,
+            )
+            continue
+        if inspection.route is InspectionRoute.FULL_OCR:
+            plan = build_ocr_plan(absolute_url, inspection)
+            reason = (
+                "ispezione PDF: OCR richiesto prima dell'estrazione"
+                if plan is not None
+                else "ispezione PDF: impossibile costruire il piano OCR"
+            )
+            _skip(
+                absolute_url,
+                f"Allegato PDF rinviato a OCR: {absolute_url}",
+                reason,
+                illegible=True,
+            )
+            continue
+
         try:
             import pypdf  # lazy: only pages with a linked PDF pay this cost
 
@@ -193,7 +222,14 @@ def collect_pdf_segments(
             )
             continue
 
-        segments.append({"kind": "allegato", "url": absolute_url, "pages": pages_text})
+        segments.append(
+            {
+                "kind": "allegato",
+                "url": absolute_url,
+                "pages": pages_text,
+                "inspection": inspection.model_dump(mode="json"),
+            }
+        )
 
     return segments, notes, skipped, illegible_count
 

@@ -30,8 +30,10 @@ import json
 import sqlite3
 import sys
 import time
+from datetime import datetime, timezone
 from pathlib import Path
 
+from treasureiq.catalog import SnapshotStore, persist_shadow_snapshots
 from treasureiq.connettore import leggi_connettore
 from treasureiq.integration import DATA_DIR, load_enti
 from treasureiq.registro import LIVE_DIR, _da_store
@@ -134,13 +136,46 @@ def _filtra_only_missing(comuni: list[str]) -> list[str]:
     return [c for c in comuni if _da_store(c) is None]
 
 
-def _esegui_registro(comuni: list[str], *, delay: float) -> dict[str, int]:
+def _esegui_shadow(
+    istat: str, *, store: SnapshotStore, measurement_id: str
+) -> tuple[str, str]:
+    """Translate an already cached v0 map; never starts a new map probe."""
+    from treasureiq import mappa_connettore as mappa_module
+
+    mappa = mappa_module._da_cache(istat)
+    if mappa is None:
+        return "shadow_skipped", f"{istat} — shadow saltato: mappa v0 assente"
+    events = persist_shadow_snapshots(
+        mappa,
+        store=store,
+        measurement_id=measurement_id,
+        measured_at=datetime.now(timezone.utc),
+    )
+    drift = len(events)
+    return "shadow_ok", f"{istat} — shadow snapshot ok drift={drift}"
+
+
+def _esegui_registro(
+    comuni: list[str],
+    *,
+    delay: float,
+    shadow_store: SnapshotStore | None = None,
+    shadow_measurement_id: str | None = None,
+) -> dict[str, int]:
     """Fase registro: un `leggi_connettore` per comune, continue-on-error.
 
     Riusata da `cmd_scan` (registro da solo) e `cmd_sweep` (dopo il
     censimento), sullo stesso set di comuni.
     """
-    contatori = {"ok": 0, "vuoto": 0, "errore": 0, "con_logo": 0}
+    contatori = {
+        "ok": 0,
+        "vuoto": 0,
+        "errore": 0,
+        "con_logo": 0,
+        "shadow_ok": 0,
+        "shadow_skipped": 0,
+        "shadow_error": 0,
+    }
     for indice, istat in enumerate(comuni):
         stato, riga = _scansiona_uno(istat)
         contatori[stato] += 1
@@ -149,6 +184,16 @@ def _esegui_registro(comuni: list[str], *, delay: float) -> dict[str, int]:
             if record is not None and record.logo_b64:
                 contatori["con_logo"] += 1
         print(riga, file=sys.stderr)
+        if shadow_store is not None and shadow_measurement_id is not None:
+            try:
+                shadow_stato, shadow_riga = _esegui_shadow(
+                    istat, store=shadow_store, measurement_id=shadow_measurement_id
+                )
+            except Exception as exc:  # noqa: BLE001 — shadow non deve fermare v0
+                shadow_stato = "shadow_error"
+                shadow_riga = f"{istat} — shadow errore: {exc}"
+            contatori[shadow_stato] += 1
+            print(shadow_riga, file=sys.stderr)
         if delay and indice < len(comuni) - 1:
             time.sleep(delay)
     return contatori
@@ -166,7 +211,13 @@ def cmd_scan(args: argparse.Namespace) -> int:
     if args.limit is not None:
         comuni = comuni[: args.limit]
 
-    contatori = _esegui_registro(comuni, delay=args.delay)
+    shadow_store, shadow_id = _shadow_config(args)
+    contatori = _esegui_registro(
+        comuni,
+        delay=args.delay,
+        shadow_store=shadow_store,
+        shadow_measurement_id=shadow_id,
+    )
     print(
         f"scansionati {len(comuni)} · con-record {contatori['ok']} · "
         f"con-logo {contatori['con_logo']} · vuoti {contatori['vuoto']} · "
@@ -240,7 +291,13 @@ def cmd_sweep(args: argparse.Namespace) -> int:
     misurati, saltati = _fase_censimento(comuni, args)
 
     comuni_registro = _filtra_only_missing(comuni) if args.only_missing else comuni
-    contatori = _esegui_registro(comuni_registro, delay=args.delay)
+    shadow_store, shadow_id = _shadow_config(args)
+    contatori = _esegui_registro(
+        comuni_registro,
+        delay=args.delay,
+        shadow_store=shadow_store,
+        shadow_measurement_id=shadow_id,
+    )
 
     print(
         f"CENSIMENTO: misurati {misurati} (saltati-resume {saltati}) · "
@@ -287,6 +344,34 @@ def _add_selezione_args(sub: argparse.ArgumentParser) -> None:
                       help="Codici ISTAT espliciti (mutuamente esclusivo coi flag sopra).")
 
 
+def _add_shadow_args(sub: argparse.ArgumentParser) -> None:
+    sub.add_argument(
+        "--shadow",
+        action="store_true",
+        help="In aggiunta a v0, persiste snapshot v1 dalla mappa già in cache (nessuna nuova sonda).",
+    )
+    sub.add_argument(
+        "--shadow-output",
+        type=Path,
+        default=LIVE_DIR / "catalog-shadow",
+        help="Directory degli snapshot shadow (default: data-live/catalog-shadow).",
+    )
+    sub.add_argument(
+        "--shadow-measurement-id",
+        default=None,
+        help="ID rilevazione shadow; se assente viene generato per il comando.",
+    )
+
+
+def _shadow_config(args: argparse.Namespace) -> tuple[SnapshotStore | None, str | None]:
+    if not args.shadow:
+        return None, None
+    measurement_id = args.shadow_measurement_id or datetime.now(timezone.utc).strftime(
+        "shadow-%Y%m%dT%H%M%SZ"
+    )
+    return SnapshotStore(args.shadow_output), measurement_id
+
+
 def _build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="python -m treasureiq.registro_cli",
@@ -296,6 +381,7 @@ def _build_parser() -> argparse.ArgumentParser:
 
     scan = sub.add_parser("scan", help="Scansiona comuni e scrive il registro (default).")
     _add_selezione_args(scan)
+    _add_shadow_args(scan)
     scan.add_argument("--only-missing", action="store_true",
                        help="Salta i comuni già presenti in data-live/registro.")
     scan.add_argument("--delay", type=float, default=1.5,
@@ -317,6 +403,7 @@ def _build_parser() -> argparse.ArgumentParser:
         ),
     )
     _add_selezione_args(sweep)
+    _add_shadow_args(sweep)
     sweep.add_argument("--db", type=Path, default=DATA_DIR / "storico.db",
                         help="Path a storico.db (default data/storico.db; con 'make sweep' "
                              "è /scrivibile/storico.db).")

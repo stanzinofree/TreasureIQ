@@ -41,15 +41,33 @@ import asyncio
 import logging
 import re
 import threading
-from functools import lru_cache
-from dataclasses import dataclass, replace, field
+from dataclasses import dataclass, field, replace
 from datetime import date, datetime, timezone
-from enum import Enum
 from decimal import Decimal
+from enum import Enum
+from functools import lru_cache
 from urllib.parse import urlparse
 
-from pydantic import BaseModel, Field
-
+# Import del MODULO, non della funzione: i test mockano
+# `treasureiq.bandi_live.bandi_arricchiti` con `mock.patch`, che sostituisce
+# l'attributo sul modulo — un `from ... import bandi_arricchiti` legherebbe
+# qui un nome che il patch non raggiungerebbe piu'.
+# Stessa ragione del commento sopra (B4): i test mockano
+# `treasureiq.connettore.leggi_connettore` con `mock.patch`.
+from treasureiq import bandi_live, connettore
+from treasureiq.bandi_live import BandiLiveEsito, BandoArricchito
+from treasureiq.catalog import (
+    DataBatch,
+    DataRequest,
+    FreshnessPolicy,
+    QueryPlan,
+    RequestLimits,
+    Surface,
+    build_query_plan,
+    default_adapter_registry,
+    select_batch,
+)
+from treasureiq.chat.categorie import Categoria, topics_di
 from treasureiq.chat.intent import (
     AMBIGUOUS_ROLE_TOPICS,
     INFORMATIONAL_BY_NATURE_TOPICS,
@@ -61,20 +79,11 @@ from treasureiq.chat.intent import (
     _sesso_dichiarato_nel_testo,
     extract_intent,
 )
-from treasureiq.chat.categorie import Categoria, topics_di
 from treasureiq.chat.nomi_genere import sesso_da_nome
-from treasureiq.extract.providers import LLMProvider, load_provider
-# Import del MODULO, non della funzione: i test mockano
-# `treasureiq.bandi_live.bandi_arricchiti` con `mock.patch`, che sostituisce
-# l'attributo sul modulo — un `from ... import bandi_arricchiti` legherebbe
-# qui un nome che il patch non raggiungerebbe piu'.
-from treasureiq import bandi_live
-from treasureiq.bandi_live import BandiLiveEsito, BandoArricchito
-# Stessa ragione del commento sopra (B4): i test mockano
-# `treasureiq.connettore.leggi_connettore` con `mock.patch`.
-from treasureiq import connettore
 from treasureiq.connettore import UfficioConnettore
-from treasureiq.orari_ufficio import leggi_orari_ufficio
+from treasureiq.extract.providers import LLMProvider, load_provider
+from treasureiq.ingest.censimento import Indirizzabilita
+from treasureiq.ingest.websearch import WebSearchNonConfigurato, entro_ttl, search_web
 from treasureiq.integration import (
     AccessMode,
     Ente,
@@ -83,8 +92,15 @@ from treasureiq.integration import (
     load_enti,
     load_websearch,
 )
-from treasureiq.ingest.censimento import Indirizzabilita
-from treasureiq.ingest.websearch import WebSearchNonConfigurato, entro_ttl, search_web
+from treasureiq.match.engine import (
+    CriterionState,
+    MatchResult,
+    Verdict,
+    match,
+)
+from treasureiq.orari_ufficio import leggi_orari_ufficio
+from treasureiq.scansioni import aggiorna_scansione, carica_scansione, scansione_stantia
+from treasureiq.schema import CitizenProfile, EmploymentStatus, Livello, Opportunity, TargetGroup
 from treasureiq.sonda_live import (
     comune_per_codice,
     leggi_orari_urp,
@@ -92,16 +108,6 @@ from treasureiq.sonda_live import (
     risolvi_comune,
     sonda_connettore,
 )
-from treasureiq.scansioni import aggiorna_scansione, carica_scansione, scansione_stantia
-from treasureiq.match.engine import (
-    CriterionState,
-    MatchResult,
-    Verdict,
-    match,
-    summarise,
-)
-from treasureiq.integration import load_enti
-from treasureiq.schema import CitizenProfile, EmploymentStatus, Livello, Opportunity, TargetGroup
 
 logger = logging.getLogger(__name__)
 
@@ -386,6 +392,11 @@ class ChatAnswer:
     #: (B5) li legge da qui, mai da `reply` (D-07). `None` quando il
     #: connettore non ha risposto o il ramo non e' scattato (A7).
     esito_connettore: connettore.EsitoConnettore | None = None
+    #: Contratto interno v1: il testo non lo interpreta e ChatOut non lo espone.
+    #: Serve al planner e ai backoffice per conservare la provenienza strutturata.
+    data_batches: list[DataBatch] = field(default_factory=list)
+    query_plan: QueryPlan | None = None
+    selected_data_batch: DataBatch | None = None
     #: Ciclo12/B1: quale slot di follow-up questo turno chiede (`None` =
     #: nessuno). Additivo: `reply` porta comunque la risposta di merito,
     #: la domanda si accoda (D-04, mai bloccante). Stesso enum chiuso di
@@ -2158,6 +2169,8 @@ async def _risposta_da_connettore(
         letto_dal_vivo=True,
     )
     azioni = _azioni_possibili(document=documento, office=ufficio_risposta, web_results=[])
+    data_batches = _data_batches_da_connettore(esito)
+    query_plan, selected_data_batch = _plan_connettore(esito, data_batches)
     return ChatAnswer(
         reply=reply,
         topic=topic,
@@ -2190,7 +2203,75 @@ async def _risposta_da_connettore(
         # — l'elenco completo se nessuno combacia, o i soli candidati scoped se
         # più uffici citano la parola nominata (ciclo18k, la scelta al cittadino).
         esito_connettore=esito_mostrato if ufficio is None else None,
+        data_batches=data_batches,
+        query_plan=query_plan,
+        selected_data_batch=selected_data_batch,
     )
+
+
+def _data_batches_da_connettore(esito: connettore.EsitoConnettore) -> list[DataBatch]:
+    """Proietta il connettore v0 nel contratto v1 senza fare nuove richieste.
+
+    Questa è una proiezione interna: il cittadino continua a ricevere la
+    risposta deterministica già esistente, mentre planner e backoffice vedono
+    la stessa lettura con modalità, freschezza ed evidenze esplicite.
+    """
+    from treasureiq.mappa_connettore import _da_cache
+
+    mappa = _da_cache(esito.codice_istat)
+    if mappa is None:
+        return []
+    registry = default_adapter_registry()
+    richieste = (
+        (Surface.ORDINARY_DATA, "services"),
+        (Surface.ORDINARY_DATA, "offices"),
+        (Surface.ORDINARY_DATA, "contacts"),
+        (Surface.TRANSPARENCY, "transparency"),
+    )
+    batches: list[DataBatch] = []
+    for surface, capability in richieste:
+        adapter = registry.resolve(
+            platform_id=esito.piattaforma,
+            surface=surface.value,
+        )
+        if adapter is None:
+            continue
+        batches.append(
+            adapter.read(
+                DataRequest(
+                    request_id=f"chat:{esito.codice_istat}:{surface.value}:{capability}",
+                    source_id=esito.codice_istat,
+                    surface=surface,
+                    capability=capability,
+                    freshness=FreshnessPolicy(max_age_seconds=86400),
+                    limits=RequestLimits(),
+                    manifest_revision=1,
+                ),
+                mappa=mappa,
+                esito=esito,
+            )
+        )
+    return batches
+
+
+def _plan_connettore(
+    esito: connettore.EsitoConnettore,
+    batches: list[DataBatch],
+) -> tuple[QueryPlan | None, DataBatch | None]:
+    """Build and execute the closed plan for the connector office rail."""
+    if not batches:
+        return None, None
+    request = DataRequest(
+        request_id=f"chat:{esito.codice_istat}:ordinary_data:offices",
+        source_id=esito.codice_istat,
+        surface=Surface.ORDINARY_DATA,
+        capability="offices",
+        freshness=FreshnessPolicy(max_age_seconds=86400),
+        limits=RequestLimits(),
+        manifest_revision=1,
+    )
+    plan = build_query_plan(request)
+    return plan, select_batch(plan, tuple(batches))
 
 
 async def _risposta_live(
@@ -3640,11 +3721,9 @@ async def _componi_risposta(
         )
 
     if profile is not None and _e_cambio_persona(message):
-        # D-56/R-LOGOUT: il cookie di sessione vince sempre — ma non in
-        # silenzio quando il turno sembra parlare di un'altra persona.
-        # Nessun reset automatico: si spiega e si chiede conferma, il
-        # client azzera la sessione (`POST /api/session/dimentica` o
-        # logout) SOLO dopo che il cittadino conferma.
+        # Un contesto esplicito vince sempre — ma non in silenzio quando il
+        # turno sembra parlare di un'altra persona. Nessun reset automatico:
+        # si spiega e si chiede conferma prima di dimenticare i dati locali.
         return ChatAnswer(
             reply=(
                 "Sembra che tu stia chiedendo per un'altra persona, non per "

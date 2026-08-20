@@ -25,8 +25,9 @@ from treasureiq.api import app
 from treasureiq.chat import respond
 from treasureiq.chat.intent import ChatIntent, QuestionKind, Topic
 from treasureiq.connettore import EsitoConnettore, UfficioConnettore
+from treasureiq.ingest.censimento import Indirizzabilita, RecuperabilitaOrari
 from treasureiq.integration import AccessMode
-from treasureiq.sonda_live import ComuneNoto
+from treasureiq.sonda_live import ComuneNoto, OrariLive
 
 CIAMPINO = ComuneNoto(
     codice_istat="058118",
@@ -136,6 +137,18 @@ def _esito_solo_urp() -> EsitoConnettore:
 def _chiedi(*, parole: str, monkeypatch: pytest.MonkeyPatch, esito: EsitoConnettore | None):
     monkeypatch.setattr(respond, "risolvi_comune", lambda _hint: CIAMPINO)
     monkeypatch.setattr(respond, "comune_per_codice", lambda _codice: CIAMPINO)
+    monkeypatch.setattr(
+        respond,
+        "leggi_orari_urp",
+        lambda _comune: OrariLive(
+            codice_istat=CIAMPINO.codice_istat,
+            nome=CIAMPINO.nome,
+            sito="https://www.comune.ciampino.roma.it",
+            indirizzabilita=Indirizzabilita.SOLO_HTML,
+            recuperabilita=RecuperabilitaOrari.NON_TENTATO,
+            letto_il="2026-08-04T00:00:00+00:00",
+        ),
+    )
     monkeypatch.setattr(respond.connettore, "leggi_connettore", lambda *_a, **_k: esito)
     return asyncio.run(
         respond._risposta_live(

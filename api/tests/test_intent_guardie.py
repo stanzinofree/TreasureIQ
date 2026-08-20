@@ -737,61 +737,6 @@ def test_cambio_persona_anonimo_riparte_da_profilo_pulito():
     assert profilo2.nucleo_familiare is None  # niente 4 del turno precedente
 
 
-def test_cambio_persona_con_sessione_cie_spid_chiede_conferma_senza_azzerare():
-    """D-56/R-LOGOUT: con un profilo di sessione (CIE/SPID, cookie) attivo,
-    «per mia madre» + dati anagrafici nuovi non deve sostituire in silenzio
-    il profilo della sessione. La chat chiede conferma (data_gap=
-    "cambio_persona", needs_clarification=True) e NON chiama la dimenticanza
-    da sola — lo spy sotto lo verifica esplicitamente."""
-    import asyncio
-    from unittest.mock import patch
-
-    from treasureiq.chat import respond as respond_mod
-    from treasureiq.chat.intent import ChatIntent, ProfileSlots, QuestionKind, Topic
-    from treasureiq.schema import CitizenProfile
-
-    messaggio = "e per mia madre, 78 anni, disabile, di San Vito lo Capo?"
-    provider = _ProviderFinto(
-        {
-            messaggio: ChatIntent(
-                topic=Topic.SOSTEGNO_UTENZE,
-                kind=QuestionKind.AGEVOLAZIONE,
-                comune_hint="San Vito lo Capo",
-                slots=ProfileSlots(sesso="f", eta=78, disabilita_nucleo=True),
-            )
-        }
-    )
-    profilo_sessione = CitizenProfile(
-        comune_istat="058091",
-        comune_nome="Pergine Valsugana",
-        eta=38,
-        sesso="f",
-    )
-
-    import pytest as _pytest
-
-    monkeypatch = _pytest.MonkeyPatch()
-    monkeypatch.setattr(respond_mod, "load_provider", lambda **_: provider)
-    try:
-        with patch(
-            "treasureiq.api.dimentica_campo"
-        ) as dimentica_spy:
-            answer = asyncio.run(
-                respond_mod._componi_risposta(
-                    message=messaggio,
-                    profile=profilo_sessione,
-                    records=[],
-                )
-            )
-            dimentica_spy.assert_not_called()
-    finally:
-        monkeypatch.undo()
-
-    assert answer.needs_clarification is True
-    assert answer.data_gap == "cambio_persona"
-    assert answer.matches == []
-
-
 # ---------------------------------------------------------------------------
 # Guardie di determinismo NLP scoperte nel test live (San Vito Lo Capo):
 # la disabilita' propria non estratta, e «ho bonus?» incollato a un topic.

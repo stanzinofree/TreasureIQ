@@ -319,21 +319,21 @@ def test_limite_modello_ferma_il_ciclo_e_dice_quando_riprovare(monkeypatch):
 
 
 def test_limite_modello_separa_i_chiamanti(monkeypatch):
-    """Limitare per solo IP punirebbe piu' persone dietro lo stesso ufficio o
-    la stessa rete mobile: la sessione, quando c'e', viene prima."""
+    """Il limite anonimo è per indirizzo quando non esiste una sessione."""
     from treasureiq import api
+    from fastapi import HTTPException
 
     monkeypatch.setattr(api, "LIMITE_MODELLO", 1)
     api._chiamate_modello.clear()
 
     class Richiesta:
-        def __init__(self, cookie):
-            self.cookies = {api.SESSION_COOKIE: cookie} if cookie else {}
-            self.client = type("c", (), {"host": "203.0.113.7"})()
+        cookies = {}
+        client = type("c", (), {"host": "203.0.113.7"})()
 
-    api.limita_modello(Richiesta("alice"))
-    # Un'altra sessione dallo stesso indirizzo non deve essere bloccata.
-    api.limita_modello(Richiesta("bruno"))
+    api.limita_modello(Richiesta())
+    with pytest.raises(HTTPException) as errore:
+        api.limita_modello(Richiesta())
+    assert errore.value.status_code == 429
 
 
 # --- Amministrazione Trasparente: firme + discovery (ciclo 16, brief B3) ---

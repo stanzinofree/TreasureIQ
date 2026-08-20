@@ -1206,7 +1206,7 @@ export default function Chat() {
       );
     } catch {
       setError(
-        "Non riesco a raggiungere il servizio. Verifica che l'API sia in esecuzione su localhost:8010.",
+        "Il servizio non ha risposto. Riprova tra poco.",
       );
     } finally {
       setBusy(false);
@@ -1283,7 +1283,7 @@ export default function Chat() {
       );
     } catch {
       setError(
-        "Non riesco a raggiungere il servizio. Verifica che l'API sia in esecuzione su localhost:8010.",
+        "Il servizio non ha risposto. Riprova tra poco.",
       );
     } finally {
       setBusy(false);

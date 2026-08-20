@@ -26,6 +26,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
 from treasureiq import freschezza
+from treasureiq.catalog import SnapshotStore, Surface
 from treasureiq.bandi_live import BandiLiveEsito, _filtra_pdf_stesso_host, bandi_arricchiti
 from treasureiq.chat.filtri import (
     _UNITA_NUMERO,
@@ -817,6 +818,41 @@ class InfoOut(BaseModel):
     ente: str | None
 
 
+class SourceAccessOut(BaseModel):
+    """Citizen-safe projection of one catalog measurement."""
+
+    surface: Literal["ordinary_data", "transparency"]
+    access_mode: Literal["direct", "mediated", "indirect", "unavailable"]
+    platform_id: str | None = None
+    platform_compatibility: str
+    measured_at: datetime
+
+
+def source_access_for(codice_istat: str | None) -> list[SourceAccessOut]:
+    """Expose catalog provenance without exposing connector diagnostics."""
+    if not codice_istat:
+        return []
+    store = SnapshotStore(DATA_DIR / "catalog")
+    result: list[SourceAccessOut] = []
+    for surface in (Surface.ORDINARY_DATA, Surface.TRANSPARENCY):
+        try:
+            snapshot = store.latest_municipality(codice_istat, surface)
+        except (OSError, ValueError):
+            snapshot = None
+        if snapshot is None:
+            continue
+        result.append(
+            SourceAccessOut(
+                surface=surface.value,
+                access_mode=snapshot.access_mode.value,
+                platform_id=snapshot.platform_id,
+                platform_compatibility=snapshot.platform_compatibility.value,
+                measured_at=snapshot.measured_at,
+            )
+        )
+    return result
+
+
 @lru_cache(maxsize=1)
 def _enti_by_urp_nome() -> dict[str, tuple[str, str]]:
     """Reverse index: URP display name -> (codice_istat, ente name).
@@ -1020,6 +1056,8 @@ class ChatOut(BaseModel):
     spid_required: bool
     spid_reason: str | None
     access_mode: str | None
+    #: Nuovo contratto catalogo, una voce per superficie misurata.
+    source_access: list[SourceAccessOut] = []
     citizen_effort: int
     info: InfoOut | None
     matches: list[MatchOut]
@@ -2708,17 +2746,18 @@ async def chat(body: ChatIn, request: Request, response: Response) -> ChatOut:
         )
     )
 
+    profilo_capito = _profilo_capito(
+        answer=answer,
+        profile=profile,
+        message=body.message,
+        comune_istat=body.comune_istat,
+        filtri_esclusi=filtri_esclusi,
+        filtri_accumulati=filtri_conversazione,
+    )
     output = ChatOut(
         conversation_id=conversation.conversation_id,
         reply=answer.reply,
-        profilo_capito=_profilo_capito(
-            answer=answer,
-            profile=profile,
-            message=body.message,
-            comune_istat=body.comune_istat,
-            filtri_esclusi=filtri_esclusi,
-            filtri_accumulati=filtri_conversazione,
-        ),
+        profilo_capito=profilo_capito,
         topic=answer.topic.value,
         kind=answer.kind.value,
         data_gap=answer.data_gap,
@@ -2726,6 +2765,7 @@ async def chat(body: ChatIn, request: Request, response: Response) -> ChatOut:
         spid_required=answer.spid_required,
         spid_reason=answer.spid_reason,
         access_mode=answer.access_mode,
+        source_access=source_access_for(profilo_capito.comune_istat),
         # AGEVOLAZIONE answers never set this (D-29 is an INFORMAZIONE-rail
         # concept there); 0 residual actions, not a fabricated estimate.
         citizen_effort=answer.citizen_effort or 0,

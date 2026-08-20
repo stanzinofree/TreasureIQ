@@ -739,6 +739,8 @@ export interface ChatOut {
     | "M6_web_aperto"
     | string
     | null;
+  /** One entry per measured catalog surface. */
+  source_access: SourceAccess[];
   /** `null` on the AGEVOLAZIONE rail — an eligibility answer never carries
    * INFORMAZIONE furniture, and vice versa (D-19). */
   info: InfoOut | null;
@@ -778,6 +780,14 @@ export interface ChatOut {
    *  `ChatIn.chiarimento_atteso` nel turno immediatamente successivo, poi
    *  la azzera (uno slot vale un turno, non bloccante — D-04). */
   chiarimento?: Chiarimento | null;
+}
+
+export interface SourceAccess {
+  surface: "ordinary_data" | "transparency";
+  access_mode: "direct" | "mediated" | "indirect" | "unavailable";
+  platform_id: string | null;
+  platform_compatibility: string;
+  measured_at: string;
 }
 
 /** Un candidato di disambiguazione comune. `codice_istat` serve a rimandare la

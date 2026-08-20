@@ -1589,7 +1589,13 @@ export default function Chat() {
                     )?.ente_codice_istat ??
                     null;
                   return istatBanner ? (
-                    <BadgeConnettore accessMode={m.reply.access_mode} />
+                    <BadgeConnettore
+                      accessMode={
+                        m.reply.source_access.find(
+                          (source) => source.surface === "ordinary_data",
+                        )?.access_mode ?? m.reply.access_mode
+                      }
+                    />
                   ) : null;
                 })()}
 

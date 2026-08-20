@@ -16,7 +16,7 @@ from treasureiq.catalog.contracts import (
 from treasureiq.catalog.snapshots import MunicipalityPlatformSnapshot
 from treasureiq.storico import apri
 
-_UNKNOWN_PLATFORMS = {"", "ignota", "non_misurata", "non_trovata", "non_trovata"}
+_UNKNOWN_PLATFORMS = {"", "ignota", "non_misurata", "non_trovata"}
 
 
 def _platform(value: object) -> str | None:
@@ -38,10 +38,20 @@ def _compatibility(value: object) -> AgidCompatibility:
     return AgidCompatibility.INCOMPATIBLE
 
 
-def _ordinary_mode(indirizzabilita: object) -> AccessMode:
+def _ordinary_mode(
+    indirizzabilita: object,
+    *,
+    platform_id: str | None,
+    compatibility: AgidCompatibility,
+) -> AccessMode:
     value = str(indirizzabilita or "")
-    if value == "api_uffici":
+    # Direct means the source itself is on the complete standard contract.
+    # An API alone is not enough: a partial platform still needs a connector
+    # to normalize what it exposes.
+    if value == "api_uffici" and compatibility is AgidCompatibility.COMPATIBLE:
         return AccessMode.DIRECT
+    if platform_id:
+        return AccessMode.MEDIATED
     if value == "solo_html":
         return AccessMode.INDIRECT
     return AccessMode.UNAVAILABLE
@@ -80,15 +90,20 @@ def snapshots_from_sweep_row(
     istat = str(row["codice_istat"])
     platform_id = _platform(row.get("piattaforma"))
     platform_at_id = _platform(row.get("piattaforma_at"))
+    compatibility = _compatibility(row.get("aderenza"))
     sections, capabilities = _section_statuses(row)
-    ordinary_mode = _ordinary_mode(row.get("indirizzabilita"))
+    ordinary_mode = _ordinary_mode(
+        row.get("indirizzabilita"),
+        platform_id=platform_id,
+        compatibility=compatibility,
+    )
     base_url = row.get("url_finale") or row.get("url_dichiarato")
     ordinary = MunicipalityPlatformSnapshot(
         municipality_istat=istat,
         surface=Surface.ORDINARY_DATA,
         platform_id=platform_id,
         base_url=str(base_url) if base_url else None,
-        platform_compatibility=_compatibility(row.get("aderenza")),
+        platform_compatibility=compatibility,
         municipality_adoption={
             "services": sections["services"],
             "offices": sections["offices"],
@@ -117,7 +132,9 @@ def snapshots_from_sweep_row(
         surface=Surface.TRANSPARENCY,
         platform_id=platform_at_id,
         base_url=str(row.get("at_url")) if row.get("at_url") else None,
-        platform_compatibility=_compatibility(row.get("aderenza")),
+        # The current sweep measures AgID adherence for the ordinary portal;
+        # it does not yet measure the AT platform against its own model.
+        platform_compatibility=AgidCompatibility.UNKNOWN,
         municipality_adoption={
             "public_notices": SectionStatus.PRESENT if platform_at_id else SectionStatus.UNKNOWN,
             "documents": SectionStatus.UNKNOWN,

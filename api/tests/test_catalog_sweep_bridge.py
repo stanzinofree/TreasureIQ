@@ -22,11 +22,26 @@ def test_sweep_row_becomes_two_contract_snapshots() -> None:
     )
 
     assert ordinary.platform_id == "wp_design_comuni"
-    assert ordinary.access_mode is AccessMode.DIRECT
+    assert ordinary.access_mode is AccessMode.MEDIATED
     assert ordinary.platform_compatibility.value == "partial"
     assert transparency.surface is Surface.TRANSPARENCY
     assert transparency.platform_id == "jcitygov"
     assert transparency.access_mode is AccessMode.MEDIATED
+
+
+def test_only_complete_agid_api_is_direct() -> None:
+    ordinary, _ = snapshots_from_sweep_row(
+        {
+            "codice_istat": "058003",
+            "piattaforma": "standard-agid",
+            "indirizzabilita": "api_uffici",
+            "aderenza": 100,
+        },
+        measurement_id="sweep-1",
+        measured_at=datetime.now(timezone.utc),
+    )
+
+    assert ordinary.access_mode is AccessMode.DIRECT
 
 
 def test_sweep_unknowns_do_not_become_negative_assertions() -> None:

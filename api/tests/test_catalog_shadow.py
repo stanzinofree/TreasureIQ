@@ -48,6 +48,19 @@ def test_at_without_rest_degrades_to_mediated() -> None:
     assert transparency.access_mode is AccessMode.MEDIATED
 
 
+def test_shadow_uses_separate_platform_ids_when_measured() -> None:
+    ordinary, transparency = municipality_snapshots(
+        _mappa(),
+        measurement_id="run-1",
+        measured_at=NOW,
+        platform_id="wp_design_comuni",
+        platform_at_id="jcitygov",
+    )
+
+    assert ordinary.platform_id == "wp_design_comuni"
+    assert transparency.platform_id == "jcitygov"
+
+
 def test_registry_replaces_same_platform_surface_only() -> None:
     registry = PlatformRegistry()
     ordinary = platform_snapshot(

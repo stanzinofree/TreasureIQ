@@ -30,10 +30,10 @@ def _capability_for_asset(exposed: bool) -> CapabilityStatus:
     return CapabilityStatus.VERIFIED if exposed else CapabilityStatus.UNSUPPORTED
 
 
-def _fingerprint(mappa: MappaConnettore, surface: Surface) -> str:
+def _fingerprint(mappa: MappaConnettore, surface: Surface, platform_id: str | None) -> str:
     """Stable shadow fingerprint, based only on measured v0 structure."""
     values = [
-        "wordpress_agid",
+        platform_id or "unknown",
         surface.value,
         mappa.sito or "",
         str(mappa.servizi.rest_base),
@@ -102,14 +102,21 @@ def platform_snapshot(
 
 
 def municipality_snapshots(
-    mappa: MappaConnettore, *, measurement_id: str, measured_at: datetime
+    mappa: MappaConnettore,
+    *,
+    measurement_id: str,
+    measured_at: datetime,
+    platform_id: str | None = None,
+    platform_at_id: str | None = None,
 ) -> tuple[MunicipalityPlatformSnapshot, MunicipalityPlatformSnapshot]:
     """Translate one existing v0 map into ordinary-data and AT snapshots."""
     ordinary_direct = mappa.servizi.esposto and mappa.uffici.esposto
+    main_platform = platform_id or mappa.piattaforma_id or ("wordpress_agid" if mappa.sito else None)
+    at_platform = platform_at_id or mappa.piattaforma_at_id
     ordinary = MunicipalityPlatformSnapshot(
         municipality_istat=mappa.codice_istat,
         surface=Surface.ORDINARY_DATA,
-        platform_id="wordpress_agid" if mappa.sito else None,
+        platform_id=main_platform,
         base_url=mappa.sito,
         platform_compatibility=AgidCompatibility.PARTIAL,
         municipality_adoption={
@@ -146,7 +153,7 @@ def municipality_snapshots(
             ),
         },
         access_mode=(AccessMode.DIRECT if ordinary_direct else AccessMode.MEDIATED),
-        fingerprint=_fingerprint(mappa, Surface.ORDINARY_DATA),
+        fingerprint=_fingerprint(mappa, Surface.ORDINARY_DATA, main_platform),
         measured_at=measured_at,
         measurement_id=measurement_id,
     )
@@ -154,7 +161,7 @@ def municipality_snapshots(
     transparency = MunicipalityPlatformSnapshot(
         municipality_istat=mappa.codice_istat,
         surface=Surface.TRANSPARENCY,
-        platform_id="wordpress_agid" if mappa.sito else None,
+        platform_id=at_platform,
         base_url=mappa.sito,
         platform_compatibility=AgidCompatibility.PARTIAL,
         municipality_adoption={
@@ -181,7 +188,7 @@ def municipality_snapshots(
         access_mode=(
             AccessMode.DIRECT if at_via_rest else AccessMode.MEDIATED
         ),
-        fingerprint=_fingerprint(mappa, Surface.TRANSPARENCY),
+        fingerprint=_fingerprint(mappa, Surface.TRANSPARENCY, at_platform),
         measured_at=measured_at,
         measurement_id=measurement_id,
     )

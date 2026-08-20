@@ -43,6 +43,11 @@ class DataRequest(_StrictModel):
     capability: str = Field(min_length=1)
     selection: dict[str, Any] = {}
     filters: dict[str, Any] = {}
+    allowed_modes: tuple[AccessMode, ...] = (
+        AccessMode.DIRECT,
+        AccessMode.MEDIATED,
+        AccessMode.INDIRECT,
+    )
     freshness: FreshnessPolicy
     limits: RequestLimits = RequestLimits()
     manifest_revision: int = Field(ge=0)

@@ -49,7 +49,23 @@ def _batch(mode: AccessMode, status: FreshnessStatus) -> DataBatch:
 def test_plan_is_closed_to_one_surface_and_capability() -> None:
     plan = build_query_plan(_request())
 
-    assert plan.steps == (QueryStep(surface=Surface.ORDINARY_DATA, capability="offices"),)
+    assert plan.steps == (
+        QueryStep(
+            surface=Surface.ORDINARY_DATA,
+            capability="offices",
+            allowed_modes=(AccessMode.DIRECT,),
+        ),
+        QueryStep(
+            surface=Surface.ORDINARY_DATA,
+            capability="offices",
+            allowed_modes=(AccessMode.MEDIATED,),
+        ),
+        QueryStep(
+            surface=Surface.ORDINARY_DATA,
+            capability="offices",
+            allowed_modes=(AccessMode.INDIRECT,),
+        ),
+    )
     assert plan.fallback is AccessMode.UNAVAILABLE
 
 
@@ -79,3 +95,17 @@ def test_stale_batch_is_last_resort() -> None:
 
     assert selected is not None
     assert selected.access_mode is AccessMode.MEDIATED
+
+
+def test_freshness_precedes_mode_fallback() -> None:
+    plan = build_query_plan(_request())
+    selected = select_batch(
+        plan,
+        (
+            _batch(AccessMode.DIRECT, FreshnessStatus.STALE),
+            _batch(AccessMode.INDIRECT, FreshnessStatus.FRESH),
+        ),
+    )
+
+    assert selected is not None
+    assert selected.access_mode is AccessMode.INDIRECT

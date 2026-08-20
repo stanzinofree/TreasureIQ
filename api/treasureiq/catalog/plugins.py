@@ -56,6 +56,7 @@ class PluginManifest(_StrictModel):
                 source_id=source_id,
                 surface=item.surface,
                 capability=item.capability,
+                allowed_modes=item.allowed_modes,
                 freshness=freshness,
                 limits=limits,
                 manifest_revision=manifest_revision,

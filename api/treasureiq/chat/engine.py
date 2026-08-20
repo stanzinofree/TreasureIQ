@@ -22,6 +22,7 @@ from treasureiq.chat.intent import (
     build_recognition_contract,
     extract_intent,
 )
+from treasureiq.chat.llamacpp import NarrationContext, NarrationResult, load_narrator
 from treasureiq.extract.providers import LLMProvider, load_provider
 
 
@@ -84,6 +85,18 @@ class CivicChatEngine:
             backend=self.backend,
             deterministic=self.deterministic,
         )
+
+    async def narrate(self, context: NarrationContext) -> NarrationResult:
+        """Optionally polish an already deterministic response.
+
+        Disabled by default. The fallback is the exact deterministic text, so
+        enabling the optional service can never become a source dependency.
+        """
+
+        narrator = load_narrator()
+        if narrator is None:
+            return NarrationResult(text=context.deterministic_text, used_fallback=True)
+        return await narrator.narrate(context)
 
 
 chat_engine = CivicChatEngine()

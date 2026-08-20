@@ -205,7 +205,9 @@ scheda civica    → ogni riga con la sua provenienza
 `chat/engine.py` capisce la FORMA della domanda e produce il contratto di
 riconoscimento che alimenta il QueryPlan. In Docker il backend predefinito è
 Rust, con fallback Python equivalente: la chat non richiede Ollama per
-funzionare. `chat/intent.py` capisce la FORMA della domanda — comune, argomento — ma non
+funzionare. Il verbalizzatore opzionale `llama.cpp` si attiva solo con
+`TREASUREIQ_NARRATOR_BACKEND=llamacpp` e il profilo Compose `llm`; se non
+risponde, resta il testo deterministico. `chat/intent.py` capisce la FORMA della domanda — comune, argomento — ma non
 riempie più gli slot anagrafici. È `chat/filtri.py` (`riconosci_filtri`) a
 estrarli, in modo deterministico: enum `FiltroChiave` a 10 valori (comune,
 disabilità, disabilità nel nucleo, figli minori, età, anziano, ISEE, nucleo

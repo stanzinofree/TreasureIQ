@@ -43,6 +43,8 @@ services:
       # GameBook-style engine: deterministic recognition in production.
       # Set to `model` only when an explicit provider is available.
       TREASUREIQ_ENGINE_INTENT_BACKEND: ${TREASUREIQ_ENGINE_INTENT_BACKEND:-rust}
+      TREASUREIQ_NARRATOR_BACKEND: ${TREASUREIQ_NARRATOR_BACKEND:-deterministic}
+      TREASUREIQ_LLAMACPP_URL: ${TREASUREIQ_LLAMACPP_URL:-http://llama-cpp:8080}
       TREASUREIQ_DATA_DIR: /data
       # The curated data mount is read-only; anonymous conversation state is
       # runtime data and must live on the writable persistent /live mount.
@@ -61,6 +63,7 @@ services:
       OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-http://host.docker.internal:11434}
       # Optional: only needed when TREASUREIQ_LLM_PROVIDER=anthropic.
       ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+
     # Gradino 3 (D-32): per un comune fuori copertura, il cui portale non
     # espone gli uffici in una forma leggibile, la chat cerca sul web mentre
     # il cittadino aspetta. Il risultato non e' mai un dato di TreasureIQ e
@@ -94,6 +97,17 @@ services:
       # erediterebbe l'autorità senza averla mai guadagnata.
       - ./data-live:/live
     restart: unless-stopped
+
+  # Optional GameBook-style prose layer. It is never started by the default
+  # `docker compose up`; the deterministic chat works without this service.
+  llama-cpp:
+    profiles: ["llm"]
+    image: ghcr.io/ggerganov/llama.cpp:server
+    volumes:
+      - ./models:/models:ro
+    command: ["-m", "/models/tiq-model.gguf", "--host", "0.0.0.0"]
+    expose:
+      - "8080"
 
   # Non parte con `make up`: lo sweep interroga portali pubblici e deve essere
   # attivato esplicitamente in deployment o durante una prova controllata.

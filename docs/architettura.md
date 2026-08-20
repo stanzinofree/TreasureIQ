@@ -356,9 +356,11 @@ Otto passi, di cui **tutti deterministici nel percorso cittadino**.
    Fuori dal conteggio le parole generiche e il nome del comune.
 7. **Verdetto** *(deterministico)* — 7 criteri confrontati con `Decimal`, tre
    valori logici, quattro esiti. Nessun modello tocca questo passo.
-8. **Verbalizzazione** *(deterministica)* — mette in italiano un esito già
-   deciso dalle fonti e dai contratti. Le
-   cifre e le citazioni arrivano dai campi strutturati, non dal testo generato.
+8. **Verbalizzazione** *(deterministica, oppure llama.cpp opzionale)* — il
+   testo base viene composto dai contratti. `LlamaCppNarrator` può renderlo
+   più naturale solo quando esplicitamente abilitato, ma in caso di errore
+   restituisce il testo originale. Le cifre e le citazioni arrivano dai campi
+   strutturati, non dal testo generato.
 
 Il confine è quello: **il modello capisce la domanda, non stabilisce l'esito.**
 

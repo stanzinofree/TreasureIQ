@@ -38,6 +38,8 @@ from treasureiq.chat.filtri import (
     riconosci_filtri,
 )
 from treasureiq.chat.intent import Topic
+from treasureiq.chat.engine import chat_engine
+from treasureiq.chat.llamacpp import NarrationContext
 from treasureiq.chat.respond import (
     DEFAULT_COMUNE_ISTAT,
     MAX_MESSAGE_CHARS,
@@ -2819,9 +2821,39 @@ async def chat(body: ChatIn, request: Request, response: Response) -> ChatOut:
         filtri_esclusi=filtri_esclusi,
         filtri_accumulati=filtri_conversazione,
     )
+    # Optional GameBook-style prose rail. It receives only the deterministic
+    # answer and structured facts; all routing, source selection and decisions
+    # are already complete. With the default backend this is a zero-cost
+    # identity operation and no llama.cpp connection is attempted.
+    narrated = await chat_engine.narrate(
+        NarrationContext(
+            deterministic_text=answer.reply,
+            topic=answer.topic.value,
+            kind=answer.kind.value,
+            facts={
+                "access_mode": answer.access_mode,
+                "data_gap": answer.data_gap,
+                "document": (
+                    answer.info.document.title
+                    if answer.info is not None and answer.info.document is not None
+                    else None
+                ),
+                "office": (
+                    answer.info.office.nome
+                    if answer.info is not None and answer.info.office is not None
+                    else None
+                ),
+                "orari": (
+                    answer.info.office.orari
+                    if answer.info is not None and answer.info.office is not None
+                    else None
+                ),
+            },
+        )
+    )
     output = ChatOut(
         conversation_id=conversation.conversation_id,
-        reply=answer.reply,
+        reply=narrated.text,
         profilo_capito=profilo_capito,
         topic=answer.topic.value,
         kind=answer.kind.value,

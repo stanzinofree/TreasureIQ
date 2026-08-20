@@ -12,7 +12,7 @@ COMPOSE   := docker compose
 
 .PHONY: help up down restart rebuild build logs ps status \
         ollama-check \
-        scan-nazionale scan-misurabili sweep registro-nazionale registro-scan registro-list \
+        scan-nazionale scan-misurabili sweep sweep-worker sweep-worker-once sweep-worker-stop registro-nazionale registro-scan registro-list \
         backup restore
 
 .DEFAULT_GOAL := help
@@ -29,6 +29,9 @@ help:
 	@echo "  make scan-nazionale     censimento asse-A su tutti i comuni -> storico.db (pesante, resumable)"
 	@echo "  make scan-misurabili    pass profondo + aderenza sui comuni leggibili gia' nel db"
 	@echo "  make sweep              censimento+registro per un set in un run: ISTAT='058057'"
+	@echo "  make sweep-worker       worker Docker continuo: BATCH=20 INTERVAL=120"
+	@echo "  make sweep-worker-once  esegue un solo batch del worker"
+	@echo "  make sweep-worker-stop  ferma il worker dello sweep"
 	@echo "  make registro-nazionale popola data-live/registro per i comuni leggibili"
 	@echo "  make registro-scan      scan di uno o piu' comuni: ISTAT='058057'"
 	@echo "  make registro-list      elenca i record nel registro"
@@ -126,6 +129,18 @@ sweep: ## Censimento+registro+catalogo per un set: make sweep ISTAT='058057' | v
 		python -m treasureiq.registro_cli sweep $(if $(ISTAT),$(ISTAT),--coperti) \
 		--db /scrivibile/storico.db $(if $(ADERENZA),--aderenza,) \
 		--lavoratori $(or $(LAVORATORI),6) --delay $(or $(DELAY),1.5)
+
+.PHONY: sweep-worker
+sweep-worker: ## Avvia il worker incrementale (batch da 20, pausa 2 minuti; configurabile)
+	$(COMPOSE) --profile sweep up -d --build sweep-worker
+
+.PHONY: sweep-worker-once
+sweep-worker-once: ## Esegue un solo batch del worker e termina
+	$(COMPOSE) --profile sweep run --rm -T sweep-worker python -m treasureiq.sweep_worker --once
+
+.PHONY: sweep-worker-stop
+sweep-worker-stop: ## Ferma solo il worker dello sweep
+	$(COMPOSE) --profile sweep stop sweep-worker
 
 .PHONY: registro-nazionale
 registro-nazionale: ## Popola data-live/registro per i comuni leggibili trovati nel censimento

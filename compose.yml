@@ -91,6 +91,28 @@ services:
       - ./data-live:/live
     restart: unless-stopped
 
+  # Non parte con `make up`: lo sweep interroga portali pubblici e deve essere
+  # attivato esplicitamente in deployment o durante una prova controllata.
+  sweep-worker:
+    profiles: ["sweep"]
+    build:
+      context: ./api
+      target: base
+    command: ["python", "-m", "treasureiq.sweep_worker"]
+    environment:
+      TREASUREIQ_DATA_DIR: /scrivibile
+      TREASUREIQ_LIVE_DIR: /live
+      TREASUREIQ_SWEEP_DB: /scrivibile/storico.db
+      TREASUREIQ_SWEEP_BATCH_SIZE: ${TREASUREIQ_SWEEP_BATCH_SIZE:-20}
+      TREASUREIQ_SWEEP_INTERVAL_SECONDS: ${TREASUREIQ_SWEEP_INTERVAL_SECONDS:-120}
+      TREASUREIQ_SWEEP_WORKERS: ${TREASUREIQ_SWEEP_WORKERS:-6}
+      TREASUREIQ_SWEEP_DELAY: ${TREASUREIQ_SWEEP_DELAY:-0}
+      TREASUREIQ_SWEEP_ADERENZA: ${TREASUREIQ_SWEEP_ADERENZA:-0}
+    volumes:
+      - ./data:/scrivibile
+      - ./data-live:/live
+    restart: unless-stopped
+
   web:
     build:
       context: ./web

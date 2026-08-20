@@ -5,6 +5,7 @@ from treasureiq.extract.pdf_inspection import (
     PdfType,
     inspect_pdf_bytes,
 )
+from treasureiq.extract.pdf_engine import FirecrawlPdfEngine
 
 
 class _Inspector:
@@ -54,3 +55,30 @@ def test_empty_pdf_is_invalid() -> None:
 
     assert inspection.route is InspectionRoute.INVALID
     assert inspection.error == "empty PDF payload"
+
+
+def test_pdf_engine_extracts_native_markdown_only_after_inspection() -> None:
+    inspector = _Inspector(
+        SimpleNamespace(pdf_type="text_based", confidence=0.99, page_count=1, pages_needing_ocr=[])
+    )
+    result = FirecrawlPdfEngine(
+        inspector=inspector,
+        processor=lambda _data: SimpleNamespace(markdown="# Titolo"),
+    ).process("doc-1", b"pdf")
+
+    assert result.markdown == "# Titolo"
+    assert result.ocr_plan is None
+
+
+def test_pdf_engine_creates_ocr_plan_without_running_processor() -> None:
+    inspector = _Inspector(
+        SimpleNamespace(pdf_type="scanned", confidence=0.99, page_count=2, pages_needing_ocr=[])
+    )
+    result = FirecrawlPdfEngine(
+        inspector=inspector,
+        processor=lambda _data: (_ for _ in ()).throw(AssertionError("must not run")),
+    ).process("doc-2", b"pdf")
+
+    assert result.markdown is None
+    assert result.ocr_plan is not None
+    assert result.ocr_plan.document_id == "doc-2"

@@ -47,6 +47,7 @@ Thumbs.db
 *.log
 .coverage
 htmlcov/
+models/
 
 # --- Sito vetrina generato ---
 # La sorgente del sito (site/build.py, site/vetrina.html, site/assets/) è

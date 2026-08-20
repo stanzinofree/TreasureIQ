@@ -30,3 +30,10 @@ def test_prompt_include_solo_il_contratto_gia_risolto():
     assert "lunedì 09:00-12:00" in prompt
     assert "Risposta:" in prompt
 
+
+def test_clean_output_rimuove_solo_etichetta_di_risposta():
+    cleaned = LlamaCppNarrator._clean_output(
+        "Risposta: L'ufficio è aperto lunedì dalle 9 alle 12.",
+        _context().deterministic_text,
+    )
+    assert cleaned == _context().deterministic_text

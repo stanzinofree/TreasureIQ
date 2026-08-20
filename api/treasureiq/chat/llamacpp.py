@@ -74,9 +74,23 @@ class LlamaCppNarrator:
                 )
                 response.raise_for_status()
                 raw = response.json().get("content", "")
-            text = raw.strip()
+            text = self._clean_output(raw, context.deterministic_text)
             if not text:
                 raise ValueError("llama.cpp ha restituito testo vuoto")
+            # Small/quantized instruct models occasionally copy the prompt or
+            # its delimiters. That is not narration and must never leak into
+            # the public answer: preserve the deterministic contract instead.
+            if (
+                "---INIZIO---" in text
+                or "---FINE---" in text
+                or "Testo deterministico da preservare:" in text
+                or not any(character.isalnum() for character in text)
+            ):
+                return NarrationResult(
+                    text=context.deterministic_text,
+                    used_fallback=True,
+                    error="llama.cpp ha riecheggiato il prompt",
+                )
             return NarrationResult(text=text, used_fallback=False)
         except (httpx.HTTPError, ValueError, KeyError, TypeError) as exc:
             return NarrationResult(
@@ -84,6 +98,23 @@ class LlamaCppNarrator:
                 used_fallback=True,
                 error=str(exc),
             )
+
+    @staticmethod
+    def _clean_output(raw: str, deterministic_text: str) -> str:
+        """Remove harmless response labels without altering civic facts."""
+
+        text = raw.strip()
+        if text.startswith("Risposta:"):
+            text = text[len("Risposta:") :].lstrip()
+        # A model may include a markdown code fence around plain prose. Strip
+        # only the fence, never the content inside it.
+        if text.startswith("```") and text.endswith("```"):
+            text = text[3:-3].strip()
+        # If the model simply repeats the deterministic answer, retain one
+        # copy and treat it as a valid but unnecessary narration.
+        if text == deterministic_text:
+            return deterministic_text
+        return text
 
     @staticmethod
     def _build_prompt(context: NarrationContext) -> str:
@@ -109,4 +140,3 @@ def load_narrator() -> LlamaCppNarrator | None:
         != "llamacpp":
         return None
     return LlamaCppNarrator()
-

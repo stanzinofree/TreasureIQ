@@ -82,6 +82,7 @@ from treasureiq.chat.intent import (
     _sesso_dichiarato_nel_testo,
     extract_intent,
 )
+from treasureiq.chat.engine import chat_engine
 from treasureiq.chat.nomi_genere import sesso_da_nome
 from treasureiq.connettore import UfficioConnettore
 from treasureiq.extract.providers import LLMProvider, load_provider
@@ -595,7 +596,12 @@ def _topic_da_storia(*, storia: list[str]) -> Topic | None:
 
 
 async def _eredita_dal_contesto(
-    *, intent: ChatIntent, messaggio: str, storia: list[str], provider: LLMProvider
+    *,
+    intent: ChatIntent,
+    messaggio: str,
+    storia: list[str],
+    provider: LLMProvider | None,
+    backend: str | None = None,
 ) -> ChatIntent:
     """Carry forward the comune and the subject the citizen already gave.
 
@@ -662,7 +668,11 @@ async def _eredita_dal_contesto(
         # Most recent first: the last thing said wins, as it would in speech.
         for passato in reversed(storia[-6:]):
             try:
-                vecchio = await extract_intent(message=passato, provider=provider)
+                vecchio = await extract_intent(
+                    message=passato,
+                    provider=provider,  # type: ignore[arg-type]
+                    backend=backend,
+                )
             except Exception:  # noqa: BLE001 — a failed re-read is not fatal
                 continue
             if vecchio.comune_hint:
@@ -3587,8 +3597,13 @@ async def _componi_risposta(
     Only the citizen's own words are carried — never our replies, which would
     let one answer become the input to the next.
     """
-    provider: LLMProvider = load_provider(role="chat")
-    intent = await extract_intent(message=message, provider=provider, storia=storia)
+    provider: LLMProvider | None = None
+    if not chat_engine.deterministic:
+        provider = load_provider(role="chat")
+    analysis = await chat_engine.analyse(
+        message=message, storia=storia, provider=provider
+    )
+    intent = analysis.intent
 
     # Il comune non è un campo che convenga chiedere a un modello: l'elenco è
     # chiuso, pubblico e lo abbiamo su disco. Tre vie, in ordine di certezza.
@@ -3621,7 +3636,11 @@ async def _componi_risposta(
 
     intent = _backfill_ambiguous_topic(intent=intent)
     intent = await _eredita_dal_contesto(
-        intent=intent, messaggio=message, storia=storia or [], provider=provider
+        intent=intent,
+        messaggio=message,
+        storia=storia or [],
+        provider=provider,
+        backend=analysis.backend,
     )
     # Contratto v1: da questo punto il planner può consumare una descrizione
     # unica e verificabile del turno, invece di rileggere modello, filtri e
@@ -4204,9 +4223,13 @@ async def build_chat_answer(
             else None
         )
         if scelto is None:
-            provider: LLMProvider = load_provider(role="chat")
-            intent = await extract_intent(message=message, provider=provider, storia=storia)
-            return _quale_comune(candidati, intent)
+            provider: LLMProvider | None = None
+            if not chat_engine.deterministic:
+                provider = load_provider(role="chat")
+            analysis = await chat_engine.analyse(
+                message=message, storia=storia, provider=provider
+            )
+            return _quale_comune(candidati, analysis.intent)
         nominato = scelto
     else:
         nominato = candidati[0] if candidati else None

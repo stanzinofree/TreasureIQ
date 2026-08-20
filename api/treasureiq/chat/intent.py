@@ -674,7 +674,11 @@ def _intent_dallo_scorer(message: str) -> "_ModelIntent":
 
 
 async def extract_intent(
-    *, message: str, provider: LLMProvider, storia: list[str] | None = None
+    *,
+    message: str,
+    provider: LLMProvider,
+    storia: list[str] | None = None,
+    backend: str | None = None,
 ) -> ChatIntent:
     """Classify one citizen message. Never raises — falls back to `SCONOSCIUTO`.
 
@@ -697,8 +701,11 @@ async def extract_intent(
     function's job: see `treasureiq.chat.respond._eredita_dal_contesto`,
     which never trusts the model alone for that (D-47 hard rule).
     """
+    # The engine can select its rail per request without mutating the module
+    # setting (and without a race between concurrent requests).
+    effective_backend = (backend or _INTENT_BACKEND).strip().lower()
     try:
-        if _INTENT_BACKEND in _BACKEND_DETERMINISTICI:
+        if effective_backend in _BACKEND_DETERMINISTICI:
             # Livello A deterministico: nessuna chiamata al modello, nessun
             # bisogno di `storia` (il carryover di topic/comune fra turni non
             # e' compito di questa funzione — lo fa `respond._eredita_dal_contesto`).
@@ -735,7 +742,7 @@ async def extract_intent(
             # hold for `beneficiary_role` either).
             updates["kind"] = QuestionKind.INFORMAZIONE
         if (
-            _INTENT_BACKEND not in _BACKEND_DETERMINISTICI
+            effective_backend not in _BACKEND_DETERMINISTICI
             and updates.get("kind", parsed.kind) is QuestionKind.AGEVOLAZIONE
             and parsed.topic is not Topic.SCONOSCIUTO
             and _BONUS_GENERICO_RE.search(message)

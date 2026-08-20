@@ -40,6 +40,9 @@ services:
     ports:
       - "8010:8000"
     environment:
+      # GameBook-style engine: deterministic recognition in production.
+      # Set to `model` only when an explicit provider is available.
+      TREASUREIQ_ENGINE_INTENT_BACKEND: ${TREASUREIQ_ENGINE_INTENT_BACKEND:-rust}
       TREASUREIQ_DATA_DIR: /data
       # The curated data mount is read-only; anonymous conversation state is
       # runtime data and must live on the writable persistent /live mount.
@@ -48,12 +51,13 @@ services:
       # Signs the demo session cookie. Override in any real deployment — the
       # default is public in this repository and therefore not a secret.
       TREASUREIQ_SECRET: ${TREASUREIQ_SECRET:-treasureiq-demo-not-secret}
-      # Which LLM backend serves extraction/chat. Default is the local,
-      # offline-friendly Ollama daemon; set to "anthropic" to use the API
-      # fallback instead.
+      # Compatibility provider for legacy extraction routes. The citizen chat
+      # recognition rail is deterministic (TREASUREIQ_ENGINE_INTENT_BACKEND)
+      # and does not require Ollama. Set this only for routes that still use
+      # provider-backed extraction.
       TREASUREIQ_LLM_PROVIDER: ${TREASUREIQ_LLM_PROVIDER:-ollama}
-      # host.docker.internal lets the container reach an Ollama daemon
-      # running on the host, since Ollama itself is not containerised here.
+      # Optional endpoint for the compatibility provider; it is not needed by
+      # the normal deterministic chat path.
       OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-http://host.docker.internal:11434}
       # Optional: only needed when TREASUREIQ_LLM_PROVIDER=anthropic.
       ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}

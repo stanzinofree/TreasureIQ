@@ -187,7 +187,8 @@ sulla stessa origine:
 ```
 domanda in italiano
     ↓
-chat/intent.py   → che FORMA ha la domanda. È tutto ciò che fa il modello
+chat/engine.py    → facciata GameBook-style: analisi, validazione e contratto
+chat/intent.py   → che FORMA ha la domanda; il modello è un backend opzionale
     ↓
     ├─ agevolazione → match/engine.py: confronto sui campi, nessun modello
     ├─ bandi        → comune censito: dallo snapshot, criteri estratti dai PDF
@@ -201,7 +202,10 @@ chat/intent.py   → che FORMA ha la domanda. È tutto ciò che fa il modello
 scheda civica    → ogni riga con la sua provenienza
 ```
 
-`chat/intent.py` capisce la FORMA della domanda — comune, argomento — ma non
+`chat/engine.py` capisce la FORMA della domanda e produce il contratto di
+riconoscimento che alimenta il QueryPlan. In Docker il backend predefinito è
+Rust, con fallback Python equivalente: la chat non richiede Ollama per
+funzionare. `chat/intent.py` capisce la FORMA della domanda — comune, argomento — ma non
 riempie più gli slot anagrafici. È `chat/filtri.py` (`riconosci_filtri`) a
 estrarli, in modo deterministico: enum `FiltroChiave` a 10 valori (comune,
 disabilità, disabilità nel nucleo, figli minori, età, anziano, ISEE, nucleo

@@ -323,13 +323,18 @@ segnala una vera modifica del portale, non il rumore della scansione.
 
 ## Il motore di risposta
 
-Sette passi, di cui **cinque deterministici**.
+Otto passi, di cui **tutti deterministici nel percorso cittadino**.
 
-1. **Intento** *(modello)* — il testo libero diventa uno schema chiuso: forma
+1. **Engine chat** *(deterministico, GameBook-style)* — il testo libero passa
+   da scorer Rust/Python, guardie e riconoscimento filtri; l'output è il
+   `ChatRecognitionContract`, poi consumato dal QueryPlan. Un modello è solo
+   un backend esplicito di compatibilità, non una dipendenza del percorso
+   cittadino.
+2. **Intento** *(contratto)* — il testo libero diventa uno schema chiuso: forma
    della domanda, argomento, indizio di comune. Da qui non escono più slot
    anagrafici (ciclo 11, D-01): il modello classifica topic/kind/comune_hint
    e nient'altro (`chat/intent.py:473-477`). Mai prosa, mai un verdetto.
-2. **Filtri** *(deterministico)* — gli slot anagrafici (comune, disabilità
+3. **Filtri** *(deterministico)* — gli slot anagrafici (comune, disabilità
    propria o nel nucleo, figli minori, età, ISEE, tipo di nucleo, condizione
    lavorativa, tema) non li deduce più il modello linguistico: li riconosce
    `chat/filtri.py::riconosci_filtri` per pattern e lemmi spaCy
@@ -339,19 +344,20 @@ Sette passi, di cui **cinque deterministici**.
    segmentando le clausole del testo. Senza il modello spaCy (scaricato nel
    Dockerfile, non fissato in `requirements.txt`) degrada a una cue-list di
    frasi fisse — più debole, ma dichiarata, mai muta.
-3. **Guardie** *(deterministiche)* — il comune nominato deve comparire nelle
+4. **Guardie** *(deterministiche)* — il comune nominato deve comparire nelle
    parole del cittadino; il ruolo deve essere dichiarato; gli argomenti
    informativi per natura non possono diventare agevolazioni. Scartano ciò che
    il modello ha aggiunto di suo.
-4. **Recupero** *(deterministico)* — 21 argomenti, 68 chiavi, confronto a
+5. **Recupero** *(deterministico)* — 21 argomenti, 68 chiavi, confronto a
    confine di parola: `tari` non prende `tariffa`, `tributi` non prende
    `contributi`.
-5. **Pertinenza** *(deterministica)* — le chiavi devono comparire sia nella
+6. **Pertinenza** *(deterministica)* — le chiavi devono comparire sia nella
    domanda sia nel titolo, oppure i due devono condividere una parola piena.
    Fuori dal conteggio le parole generiche e il nome del comune.
-6. **Verdetto** *(deterministico)* — 7 criteri confrontati con `Decimal`, tre
+7. **Verdetto** *(deterministico)* — 7 criteri confrontati con `Decimal`, tre
    valori logici, quattro esiti. Nessun modello tocca questo passo.
-7. **Verbalizzazione** *(modello)* — mette in italiano un verdetto già preso. Le
+8. **Verbalizzazione** *(deterministica)* — mette in italiano un esito già
+   deciso dalle fonti e dai contratti. Le
    cifre e le citazioni arrivano dai campi strutturati, non dal testo generato.
 
 Il confine è quello: **il modello capisce la domanda, non stabilisce l'esito.**

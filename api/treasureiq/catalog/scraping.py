@@ -8,6 +8,7 @@ from typing import Any, Protocol
 from urllib.parse import urljoin, urlparse
 
 from treasureiq.catalog.data_contracts import DataRequest, EvidenceRef, _StrictModel
+from treasureiq.extract.pdf_engine import FirecrawlPdfEngine, PdfExtractionResult
 from treasureiq.ingest.host_guard import fetch_guardato
 
 
@@ -64,9 +65,16 @@ class HtmlScrapeEngine:
         "transparency": ("trasparenza", "amministrazione-trasparente", "albo"),
     }
 
-    def __init__(self, *, timeout: float = 8.0, max_bytes: int = 2 * 1024 * 1024) -> None:
+    def __init__(
+        self,
+        *,
+        timeout: float = 8.0,
+        max_bytes: int = 2 * 1024 * 1024,
+        pdf_engine: FirecrawlPdfEngine | None = None,
+    ) -> None:
         self.timeout = timeout
         self.max_bytes = max_bytes
+        self.pdf_engine = pdf_engine
 
     def retrieve(self, *, source_url: str, request: DataRequest) -> ScrapeResult:
         risposta = fetch_guardato(
@@ -101,8 +109,11 @@ class HtmlScrapeEngine:
                 continue
             if any(record["url"] == url for record in records):
                 continue
-            records.append({"nome": label, "url": url})
+            record: dict[str, Any] = {"nome": label, "url": url}
+            if request.capability == "transparency" and parsed.path.lower().endswith(".pdf"):
+                record.update(self._inspect_pdf(url, request, base_host))
             evidence.append(EvidenceRef(evidence_id=url, field="url"))
+            records.append(record)
         return ScrapeResult(
             records=tuple(records[: request.limits.max_records]),
             evidence=tuple(evidence[: request.limits.max_records]),
@@ -110,3 +121,29 @@ class HtmlScrapeEngine:
             bytes=len(payload),
             limitations=("I record sono link pubblicati nella pagina HTML della fonte.",),
         )
+
+    def _inspect_pdf(self, url: str, request: DataRequest, base_host: str) -> dict[str, Any]:
+        if self.pdf_engine is None:
+            return {"pdf_route": "unavailable", "pdf_error": "PDF engine non configurato"}
+        risposta = fetch_guardato(
+            url,
+            timeout=self.timeout,
+            max_bytes=self.max_bytes,
+            host_atteso=base_host,
+        )
+        if risposta is None:
+            return {"pdf_route": "unavailable", "pdf_error": "PDF non leggibile"}
+        _headers, payload, final_url = risposta
+        result: PdfExtractionResult = self.pdf_engine.process(url, payload)
+        record: dict[str, Any] = {
+            "pdf_url": final_url,
+            "pdf_route": result.inspection.route.value,
+        }
+        if result.markdown is not None:
+            record["markdown"] = result.markdown
+        if result.ocr_plan is not None:
+            record["ocr_scope"] = result.ocr_plan.scope.value
+            record["ocr_pages"] = list(result.ocr_plan.pages)
+        if result.error is not None:
+            record["pdf_error"] = result.error
+        return record

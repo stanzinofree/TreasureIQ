@@ -1,6 +1,8 @@
 from datetime import datetime, timezone
 
 from treasureiq.catalog import DataRequest, FreshnessPolicy, HtmlScrapeEngine, Surface
+from treasureiq.extract.pdf_inspection import InspectionRoute, PdfInspection, PdfType
+from treasureiq.extract.pdf_engine import PdfExtractionResult
 
 
 def _request() -> DataRequest:
@@ -43,3 +45,37 @@ def test_html_engine_returns_empty_for_unmatched_capability(monkeypatch) -> None
     result = HtmlScrapeEngine().retrieve(source_url="https://comune.example", request=_request())
 
     assert result.records == ()
+
+
+def test_html_engine_inspects_transparency_pdf_before_returning_record(monkeypatch) -> None:
+    request = _request().model_copy(
+        update={"surface": Surface.TRANSPARENCY, "capability": "transparency"}
+    )
+    pdf_result = PdfExtractionResult(
+        inspection=PdfInspection(
+            pdf_type=PdfType.TEXT_BASED,
+            confidence=0.99,
+            page_count=1,
+            route=InspectionRoute.NATIVE_TEXT,
+        ),
+        markdown="# Trasparenza",
+    )
+
+    class _PdfEngine:
+        def process(self, document_id: str, data: bytes) -> PdfExtractionResult:
+            assert document_id.endswith(".pdf")
+            assert data == b"pdf"
+            return pdf_result
+
+    def fetch(url: str, **kwargs):
+        if url.endswith(".pdf"):
+            return {"content-type": "application/pdf"}, b"pdf", url
+        return {"content-type": "text/html"}, b'<a href="/trasparenza.pdf">Trasparenza PDF</a>', url
+
+    monkeypatch.setattr("treasureiq.catalog.scraping.fetch_guardato", fetch)
+    result = HtmlScrapeEngine(pdf_engine=_PdfEngine()).retrieve(
+        source_url="https://comune.example", request=request
+    )
+
+    assert result.records[0]["pdf_route"] == "native_text"
+    assert result.records[0]["markdown"] == "# Trasparenza"

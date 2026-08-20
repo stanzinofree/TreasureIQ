@@ -13,7 +13,7 @@ from treasureiq.catalog.data_contracts import (
     Freshness,
     TransportMeta,
 )
-from treasureiq.catalog.scraping import ScrapeEngine
+from treasureiq.catalog.scraping import ScrapeEngine, ScrapeResult
 from treasureiq.connettore import EsitoConnettore
 from treasureiq.mappa_connettore import MappaConnettore
 
@@ -64,7 +64,15 @@ class WebScrapeConnector:
 
         scraped = engine.retrieve(source_url=mappa.sito, request=request)
         records = scraped.records[: request.limits.max_records]
-        status = DataStatus.FULFILLED if records else DataStatus.EMPTY
+        status = (
+            DataStatus.FAILED
+            if scraped.status is ScrapeResult.Status.FAILED
+            else DataStatus.UNREADABLE
+            if scraped.status is ScrapeResult.Status.UNSUPPORTED
+            else DataStatus.FULFILLED
+            if records
+            else DataStatus.EMPTY
+        )
         retrieved_at = scraped.retrieved_at or datetime.now(timezone.utc)
         return ConnectorResult(
             request_id=request.request_id,

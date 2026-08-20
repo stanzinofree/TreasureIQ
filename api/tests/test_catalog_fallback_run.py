@@ -1,4 +1,5 @@
 from datetime import datetime, timezone
+import json
 
 from treasureiq.catalog.fallback_run import load_mappa, run_fallback
 from treasureiq.mappa_connettore import MappaConnettore
@@ -34,3 +35,24 @@ def test_backoffice_can_load_a_cached_mappa_by_istat(monkeypatch) -> None:
     mappa = load_mappa(codice_istat="058003")
 
     assert mappa.codice_istat == "058003"
+
+
+def test_backoffice_can_extract_mappa_from_scan_json(tmp_path) -> None:
+    path = tmp_path / "scansione.json"
+    path.write_text(
+        json.dumps(
+            {
+                "mappa": {
+                    "codice_istat": "058003",
+                    "nome": "Albano",
+                    "sito": "https://comune.example",
+                    "sondato_il": datetime.now(timezone.utc).isoformat(),
+                }
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    mappa = load_mappa(scansione_json=path)
+
+    assert mappa.sito == "https://comune.example"

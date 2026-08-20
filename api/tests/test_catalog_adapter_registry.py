@@ -98,6 +98,19 @@ def test_fallback_requests_are_explicit_for_unknown_platform() -> None:
     assert all(request.allowed_modes == ("indirect",) for request in requests)
 
 
+def test_fallback_requests_are_empty_when_native_manifest_exists() -> None:
+    registry = default_adapter_registry()
+
+    assert registry.fallback_requests_for(
+        source_id="058003",
+        platform_id="wordpress_agid",
+        request_prefix="fallback",
+        freshness=FreshnessPolicy(max_age_seconds=86400),
+        limits=RequestLimits(),
+        manifest_revision=1,
+    ) == ()
+
+
 def test_registry_rejects_duplicate_adapter_names() -> None:
     registry = AdapterRegistry()
     registry.register(WordPressAgidAdapter())

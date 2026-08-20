@@ -8,6 +8,7 @@ from treasureiq.catalog import (
     Surface,
     WebScrapeConnector,
 )
+from treasureiq.catalog.scraping import ScrapeResult
 from treasureiq.catalog.data_contracts import EvidenceRef
 from treasureiq.mappa_connettore import MappaConnettore
 
@@ -58,3 +59,20 @@ def test_web_connector_reports_missing_source_without_fetching() -> None:
 
     assert result.status.value == "not_found"
     assert result.records == ()
+
+
+def test_web_connector_preserves_fetch_failure_as_failed() -> None:
+    class _FailedEngine:
+        def retrieve(self, *, source_url: str, request: DataRequest) -> ScrapeResult:
+            return ScrapeResult(
+                status=ScrapeResult.Status.FAILED,
+                requests=1,
+                limitations=("timeout",),
+            )
+
+    result = WebScrapeConnector().retrieve_live(
+        _request(), mappa=_mappa(), engine=_FailedEngine()
+    )
+
+    assert result.status.value == "failed"
+    assert result.transport.requests == 1

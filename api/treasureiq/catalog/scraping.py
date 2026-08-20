@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from datetime import datetime
+from enum import Enum
 from html.parser import HTMLParser
 from typing import Any, Protocol
 from urllib.parse import urljoin, urlparse
@@ -13,6 +14,12 @@ from treasureiq.ingest.host_guard import fetch_guardato
 
 
 class ScrapeResult(_StrictModel):
+    class Status(str, Enum):
+        OK = "ok"
+        FAILED = "failed"
+        UNSUPPORTED = "unsupported"
+
+    status: Status = Status.OK
     records: tuple[dict[str, Any], ...] = ()
     evidence: tuple[EvidenceRef, ...] = ()
     retrieved_at: datetime | None = None
@@ -84,11 +91,16 @@ class HtmlScrapeEngine:
             host_atteso=urlparse(source_url).hostname,
         )
         if risposta is None:
-            return ScrapeResult(limitations=("La fonte web non ha risposto a una lettura guardata.",))
+            return ScrapeResult(
+                status=ScrapeResult.Status.FAILED,
+                requests=1,
+                limitations=("La fonte web non ha risposto a una lettura guardata.",),
+            )
         headers, payload, final_url = risposta
         content_type = headers.get("content-type", "").lower()
         if "html" not in content_type and not payload.lstrip().startswith((b"<!", b"<html", b"<HTML")):
             return ScrapeResult(
+                status=ScrapeResult.Status.UNSUPPORTED,
                 requests=1,
                 bytes=len(payload),
                 limitations=("La fonte non ha restituito HTML; il ramo PDF sarà gestito dal PDF engine.",),

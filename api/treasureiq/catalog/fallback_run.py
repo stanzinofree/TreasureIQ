@@ -53,13 +53,18 @@ def run_fallback(
 def load_mappa(
     *,
     mappa_json: Path | None = None,
+    scansione_json: Path | None = None,
     codice_istat: str | None = None,
     usa_cache: bool = True,
 ) -> MappaConnettore:
-    if (mappa_json is None) == (codice_istat is None):
-        raise ValueError("specificare esattamente mappa_json oppure codice_istat")
+    sources = (mappa_json, scansione_json, codice_istat)
+    if sum(source is not None for source in sources) != 1:
+        raise ValueError("specificare esattamente una fonte per la mappa")
     if mappa_json is not None:
         return MappaConnettore.model_validate_json(mappa_json.read_text(encoding="utf-8"))
+    if scansione_json is not None:
+        payload = json.loads(scansione_json.read_text(encoding="utf-8"))
+        return MappaConnettore.model_validate(payload.get("mappa", payload))
     mappa = mappa_connettore(codice_istat, usa_cache=usa_cache)
     if mappa is None:
         raise ValueError(f"mappa non disponibile per {codice_istat}")
@@ -70,6 +75,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Esegui il fallback indiretto TIQ")
     source = parser.add_mutually_exclusive_group(required=True)
     source.add_argument("--mappa-json", type=Path)
+    source.add_argument("--scansione-json", type=Path)
     source.add_argument("--istat")
     parser.add_argument("--no-cache", action="store_true")
     parser.add_argument("--platform-id", required=True)
@@ -79,6 +85,7 @@ def main() -> int:
 
     mappa = load_mappa(
         mappa_json=args.mappa_json,
+        scansione_json=args.scansione_json,
         codice_istat=args.istat,
         usa_cache=not args.no_cache,
     )

@@ -1363,6 +1363,19 @@ def main(argv: list[str] | None = None) -> int:
         help="Registra gli esiti in questo SQLite, una riga per comune per giorno.",
     )
     parser.add_argument(
+        "--catalog-output",
+        type=Path,
+        metavar="DIR",
+        help=(
+            "Aggiorna anche il catalogo contrattuale a ogni blocco salvato. "
+            "Richiede --db; lo sweep resta invariato se l'opzione è assente."
+        ),
+    )
+    parser.add_argument(
+        "--measurement-id",
+        help="Identificativo immutabile della misura catalogo (default: timestamp UTC).",
+    )
+    parser.add_argument(
         "--solo-misurabili",
         action="store_true",
         help=(
@@ -1400,9 +1413,21 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--out", type=Path, help="Scrivi il JSON degli esiti in questo file.")
     args = parser.parse_args(argv)
 
+    if args.catalog_output and not args.db:
+        parser.error("--catalog-output richiede --db")
+    args.measurement_id = args.measurement_id or datetime.now(timezone.utc).strftime(
+        "sweep-%Y%m%dT%H%M%SZ"
+    )
+
     esiti = _raccogli(args)
     if args.db:
-        scritte = _registra(esiti, db=args.db, anagrafe=_anagrafe())
+        scritte = _registra(
+            esiti,
+            db=args.db,
+            anagrafe=_anagrafe(),
+            catalog_output=args.catalog_output,
+            measurement_id=args.measurement_id,
+        )
         print(f"registrate {scritte} righe in {args.db}", file=sys.stderr)
     if args.json or args.out:
         blob = json.dumps([e.model_dump(mode="json") for e in esiti], ensure_ascii=False, indent=2)
@@ -1424,7 +1449,14 @@ def _anagrafe() -> dict[str, dict]:
     return {c["codice_istat"]: c for c in elenco}
 
 
-def _registra(esiti: list[EsitoCensimento], *, db: Path, anagrafe: dict[str, dict]) -> int:
+def _registra(
+    esiti: list[EsitoCensimento],
+    *,
+    db: Path,
+    anagrafe: dict[str, dict],
+    catalog_output: Path | None = None,
+    measurement_id: str | None = None,
+) -> int:
     """Traduce gli esiti in righe di storico e le scrive.
 
     La traduzione sta qui e non nello store perché è il censimento a sapere
@@ -1477,7 +1509,23 @@ def _registra(esiti: list[EsitoCensimento], *, db: Path, anagrafe: dict[str, dic
         )
         for e in esiti
     ]
-    return registra_portali(db, righe)
+    scritte = registra_portali(db, righe)
+    if catalog_output:
+        from treasureiq.catalog.store import SnapshotStore
+        from treasureiq.catalog.sweep_import import persist_sweep_snapshot_batch
+
+        persist_sweep_snapshot_batch(
+            db,
+            store=SnapshotStore(catalog_output),
+            codici_istat=tuple(r.codice_istat for r in righe),
+            measurement_id=measurement_id or f"sweep-{righe[0].rilevato_il.isoformat()}",
+            measured_at=datetime.combine(
+                max(r.misurato_il for r in esiti),
+                datetime.min.time(),
+                tzinfo=timezone.utc,
+            ),
+        )
+    return scritte
 
 
 def _gia_registrati(db: Path | None, giorno: date) -> set[str]:
@@ -1540,7 +1588,15 @@ def _raccogli(args: argparse.Namespace) -> list[EsitoCensimento]:
         print(f"rimisura: {len(scelti)} comuni su piattaforme leggibili", file=sys.stderr)
         anagrafe = {c["codice_istat"]: c for c in elenco}
         salva = (
-            (lambda blocco: _registra(blocco, db=args.db, anagrafe=anagrafe))
+            (
+                lambda blocco: _registra(
+                    blocco,
+                    db=args.db,
+                    anagrafe=anagrafe,
+                    catalog_output=args.catalog_output,
+                    measurement_id=args.measurement_id,
+                )
+            )
             if args.db
             else None
         )
@@ -1566,7 +1622,15 @@ def _raccogli(args: argparse.Namespace) -> list[EsitoCensimento]:
         )
         anagrafe = {c["codice_istat"]: c for c in elenco}
         salva = (
-            (lambda blocco: _registra(blocco, db=args.db, anagrafe=anagrafe))
+            (
+                lambda blocco: _registra(
+                    blocco,
+                    db=args.db,
+                    anagrafe=anagrafe,
+                    catalog_output=args.catalog_output,
+                    measurement_id=args.measurement_id,
+                )
+            )
             if args.db
             else None
         )
@@ -1594,7 +1658,15 @@ def _raccogli(args: argparse.Namespace) -> list[EsitoCensimento]:
         # solo che non si può porre a tutta l'Italia (vedi `censisci_comune`).
         anagrafe = {c["codice_istat"]: c for c in elenco}
         salva = (
-            (lambda blocco: _registra(blocco, db=args.db, anagrafe=anagrafe))
+            (
+                lambda blocco: _registra(
+                    blocco,
+                    db=args.db,
+                    anagrafe=anagrafe,
+                    catalog_output=args.catalog_output,
+                    measurement_id=args.measurement_id,
+                )
+            )
             if args.db
             else None
         )

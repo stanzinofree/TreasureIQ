@@ -29,6 +29,34 @@ def persist_sweep_snapshots(
     return tuple(store.save_municipality(snapshot) for snapshot in snapshots)
 
 
+def persist_sweep_snapshot_batch(
+    db_path: Path,
+    *,
+    store: SnapshotStore,
+    codici_istat: tuple[str, ...],
+    measurement_id: str,
+    measured_at: datetime,
+) -> tuple[Path, ...]:
+    """Importa un blocco già scritto dal censimento nazionale.
+
+    Il censimento salva a blocchi per poter riprendere un run interrotto. Il
+    catalogo segue la stessa granularità: un blocco completato diventa subito
+    disponibile, senza aspettare la fine dello sweep.
+    """
+    paths: list[Path] = []
+    for codice_istat in codici_istat:
+        paths.extend(
+            persist_sweep_snapshots(
+                db_path,
+                store=store,
+                codice_istat=codice_istat,
+                measurement_id=measurement_id,
+                measured_at=measured_at,
+            )
+        )
+    return tuple(paths)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Importa una misura sweep nel catalogo v1")
     parser.add_argument("--db", type=Path, default=Path("data/storico.db"))

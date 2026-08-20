@@ -1674,14 +1674,16 @@ async def _build_informazione_answer(
         )
         if office_ufficio is not None:
             office = office_ufficio
-    diagnosis = diagnosis_lines(ente)
-    integration_cost = cost_lines(ente)
-
     web_results: list[WebResultAnswer] = []
     catalog_mode = _catalog_access_mode(ente.codice_istat)
     access_mode = (
         catalog_mode.value if catalog_mode is not None else ente.access_mode.value
     )
+    # Once the backoffice catalog is authoritative, technical diagnosis and
+    # integration cost stay there. The citizen gets the route and the source
+    # card, not an internal explanation of how the connector was measured.
+    diagnosis = [] if catalog_mode is not None else diagnosis_lines(ente)
+    integration_cost = [] if catalog_mode is not None else cost_lines(ente)
     # A catalog decision is authoritative only when present. Until the sweep
     # has imported this municipality, retain the legacy classification.
     catalog_connector_route = catalog_mode is CatalogAccessMode.MEDIATED

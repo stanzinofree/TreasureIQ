@@ -1678,8 +1678,10 @@ async def _build_informazione_answer(
     integration_cost = cost_lines(ente)
 
     web_results: list[WebResultAnswer] = []
-    access_mode = ente.access_mode.value
     catalog_mode = _catalog_access_mode(ente.codice_istat)
+    access_mode = (
+        catalog_mode.value if catalog_mode is not None else ente.access_mode.value
+    )
     # A catalog decision is authoritative only when present. Until the sweep
     # has imported this municipality, retain the legacy classification.
     catalog_connector_route = catalog_mode is CatalogAccessMode.MEDIATED

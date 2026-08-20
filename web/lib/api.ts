@@ -724,9 +724,21 @@ export interface ChatOut {
    * rendered apart from `cost`: the two answer different questions and
    * must never be summed or share a line. */
   citizen_effort: number | null;
-  /** The access rung this answer was composed at (e.g. `M6_web_aperto`).
-   * `null` off the INFORMAZIONE rail. */
-  access_mode: string | null;
+  /** The deterministic access route this answer was composed at. During the
+   * catalog migration this can be the new `direct`/`mediated`/`indirect`/
+   * `unavailable` vocabulary or the legacy `M*_...` value for municipalities
+   * not imported yet. `null` off the INFORMAZIONE rail. */
+  access_mode:
+    | "direct"
+    | "mediated"
+    | "indirect"
+    | "unavailable"
+    | "M2_prosa_api"
+    | "M4_connettore"
+    | "M5_nessuno"
+    | "M6_web_aperto"
+    | string
+    | null;
   /** `null` on the AGEVOLAZIONE rail — an eligibility answer never carries
    * INFORMAZIONE furniture, and vice versa (D-19). */
   info: InfoOut | null;

@@ -58,7 +58,6 @@ import {
   type ChatTurn,
   type ComuneAmbiguo,
   type CostLevels,
-  type ConnettoreSonda,
   type FiltroChiave,
   type FiltroOverride,
   type InfoOut,
@@ -70,7 +69,7 @@ import {
 /** B22 (D-25) — the segnalazione form only makes sense once every
  * institutional channel is exhausted (D-21's access-mode ladder): a comune
  * publishing structured data (M1/M2/M3) has nothing to ask it to open. */
-const SEGNALAZIONE_ACCESS_MODES = new Set(["M4_connettore", "M5_nessuno", "M6_web_aperto"]);
+const SEGNALAZIONE_ACCESS_MODES = new Set(["indirect", "unavailable"]);
 
 /**
  * What the wait says while it lasts.
@@ -309,7 +308,7 @@ function isWebUrl(url: string): boolean {
  * questo blocco la UI le buttava e la promessa restava vuota. Nessun giudizio
  * di spettanza qui: solo link marcati «non verificato», coerente con D-01.
  */
-function BadgeConnettore({
+function SourceAccessBadge({
   accessMode,
 }: {
   accessMode: string | null;
@@ -1098,12 +1097,12 @@ export default function Chat() {
         { id, role: "assistant", content: out.reply, reply: out },
       ]);
       // Alimenta l'unica spia scan condivisa (chat + pannello). L'istat viene
-      // dal connettore della risposta, con ripiego sul comune scelto/profilo:
+      // dal profilo capito o dal comune scelto/profilo:
       // se lo stato è "fresco", <ScanLive> non mostra nulla; se è
       // "aggiornamento_in_corso", parte il poller e compare la banda.
       aggiornaScan(
         out.scan,
-        out.connettore?.codice_istat ??
+        out.profilo_capito?.comune_istat ??
           comuneIstatScelto ??
           profilo.comune?.istat ??
           null,
@@ -1582,14 +1581,13 @@ export default function Chat() {
                   // il codice arriva solo dalla sonda o dal match comunale.
                   const istatBanner =
                     m.reply.profilo_capito?.comune_istat ??
-                    m.reply.connettore?.codice_istat ??
                     m.reply.info?.codice_istat ??
                     m.reply.matches.find(
                       (x) => x.livello === "comunale" && x.ente_codice_istat,
                     )?.ente_codice_istat ??
                     null;
                   return istatBanner ? (
-                    <BadgeConnettore
+                    <SourceAccessBadge
                       accessMode={
                         m.reply.source_access.find(
                           (source) => source.surface === "ordinary_data",
@@ -1603,14 +1601,18 @@ export default function Chat() {
                     pannello di sinistra (MappaServizi), agganciata al comune di
                     profilo, per tenere la chat pulita. */}
 
-                {/* Bandi e avvisi: gate PROPRIO su `connettore` presente, non
-                    `indirizzabile` (D-B6) — i bandi vengono da amministrazione
-                    trasparente (scrape), indipendente dalla mappa servizi
-                    (che serve solo se il portale è REST-indirizzabile). Si
-                    vedono anche quando il connettore non è indirizzabile. */}
-                {m.reply.connettore && (
-                  <BandiComune istat={m.reply.connettore.codice_istat} />
-                )}
+                {/* Amministrazione Trasparente è una superficie distinta dai
+                    dati ordinari. Il catalogo decide se ha senso interrogare
+                    il relativo connettore: la chat non deduce più questo gate
+                    dalla presenza del vecchio oggetto `connettore`. */}
+                {m.reply.source_access.some(
+                  (source) =>
+                    source.surface === "transparency" &&
+                    source.access_mode !== "unavailable",
+                ) &&
+                  m.reply.profilo_capito?.comune_istat && (
+                    <BandiComune istat={m.reply.profilo_capito.comune_istat} />
+                  )}
 
                 {/* B4 (KAPI 7, bandi-live-agid): esito verificato del topic
                     BANDI, già dentro `reply.bandi_live` (B3) — nessuna
@@ -1713,7 +1715,6 @@ export default function Chat() {
                       /* Fuori copertura la premessa «Attenzione» dice già il
                          «non ho trovato»: il box grigio lo ripeterebbe. Lo
                          togliamo quando c'è la scheda di lato o la mappa sotto. */
-                      !m.reply.connettore &&
                       !m.reply.numeri_utili && (
                         <DataGapNotice kind={m.reply.data_gap} />
                       )}

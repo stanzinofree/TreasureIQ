@@ -19,9 +19,10 @@ from treasureiq.catalog.recognition import (
     FingerprintEvidence,
     RecognitionAction,
 )
+from treasureiq.catalog.recognition_adapter import firma_da_registro
 from treasureiq.catalog.service_contracts import SourceInventory
 from treasureiq.ingest.host_guard import fetch_guardato
-from treasureiq.ingest.piattaforma import Piattaforma, classifica_risposta, impronta_grezza
+from treasureiq.ingest.piattaforma import Piattaforma, impronta_grezza
 
 
 def _fingerprint(*, platform: str | None, headers: dict[str, str], html: str) -> str:
@@ -61,7 +62,10 @@ def _confirm_one(
     headers, data, final_url = fetched
     html = data.decode("utf-8", errors="replace")
     if surface is Surface.TRANSPARENCY:
-        found = classifica_risposta(headers=dict(headers), html=html, includi_at=True).vincitore
+        found = firma_da_registro(
+            headers=dict(headers), html=html, surface=Surface.TRANSPARENCY,
+            source_id=source_id, entrypoint_url=url,
+        )
         platform = found.piattaforma.value
         known = platform not in {Piattaforma.IGNOTA.value, Piattaforma.NON_TROVATA.value}
     else:

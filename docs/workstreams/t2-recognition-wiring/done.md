@@ -15,6 +15,14 @@ L'adapter mappa `RecognitionMatch | None` → `Firma` legacy: enum via
 con `matched=True`, miss (`None`) → `Firma(IGNOTA, None)`. Registry costruito una
 volta a modulo. `classifica_risposta` intatto (il registry lo avvolge via bridge).
 
+**Review Codex `fa80e09..HEAD`: APPROVATO**, nessuna correzione richiesta. Unica
+nota non-bloccante chiusa: manca(va) un test dell'envelope AT intero prodotto da
+`_confirm_one` dopo il cambio adapter. Aggiunto `tests/test_catalog_confirmation.py`
+(5 test, registry reale, solo il fetch stubbato): envelope riconosciuto+atteso-OK,
+drift piattaforma (`platform_changed` → REDISCOVER), miss (`provider_not_recognized`
+→ MANUAL_REVIEW), entrypoint irraggiungibile, e un `confirm_inventory` end-to-end
+che scrive e rilegge il check da disco.
+
 Suite Docker: **1152 passed**, 6 skipped, 3 failed (i 3 PDF pre-esistenti in
 `test_wp_pages_caratterizzazione`, non correlati, limite OCR/size dell'ambiente).
 

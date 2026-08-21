@@ -8,11 +8,14 @@ BASE dispatch (``connettore``) and the AT confirmation keep working — now driv
 by the 7 native plugins + Passo C suppression rather than by ``classifica_risposta``
 directly.
 
-Scope is deliberately **BASE and AT only** (Gate 0 in the T2 planning doc). The
-native SP plugins emit ``municipium_portalegen`` / ``filodiretto``, which are not
-members of :class:`Piattaforma`; wiring ``SERVICE_PORTAL`` through the legacy
-vocabulary would silently collapse those identities to ``IGNOTA``. Until the SP
-vocabulary is settled, this adapter refuses ``Surface.SERVICE_PORTAL`` outright.
+``firma_da_registro`` is deliberately **BASE and AT only** (Gate 0 in the T2
+planning doc). The native SP plugins emit ``municipium_portalegen`` /
+``filodiretto``, which are not members of :class:`Piattaforma`; wiring
+``SERVICE_PORTAL`` through the legacy vocabulary would silently collapse those
+identities to ``IGNOTA``. So that function refuses ``Surface.SERVICE_PORTAL``
+outright, and the SP surface is served by a separate seam,
+``riconosci_service_portal``, which returns the native ``platform_id`` string
+directly (:class:`RiconoscimentoSP`) and never goes through ``Firma``.
 
 ``classifica_risposta`` is untouched: the registry wraps it via the legacy
 bridge, it does not replace it.
@@ -21,9 +24,14 @@ bridge, it does not replace it.
 from __future__ import annotations
 
 import logging
+from dataclasses import dataclass
 
 from treasureiq.catalog.contracts import Surface
-from treasureiq.catalog.recognition_bridge import build_recognition_registry
+from treasureiq.catalog.recognition import FingerprintEvidence
+from treasureiq.catalog.recognition_bridge import (
+    build_recognition_registry,
+    build_service_portal_registry,
+)
 from treasureiq.catalog.recognition_plugins import RecognitionObservation
 from treasureiq.catalog.recognition_registry import RecognitionMatch
 from treasureiq.ingest.piattaforma import Firma, Piattaforma
@@ -39,24 +47,32 @@ _SUPPORTED_SURFACES = frozenset({Surface.ORDINARY_DATA, Surface.TRANSPARENCY})
 #: bridges; rebuilding per call would repeat that work on every recognition.
 _REGISTRY = build_recognition_registry()
 
+#: SERVICE_PORTAL registry: the native SP plugins only, no bridge. Built once,
+#: same reasoning as ``_REGISTRY``.
+_SP_REGISTRY = build_service_portal_registry()
 
-def _prova_da_evidence(match: RecognitionMatch) -> str | None:
-    """Synthesise the legacy ``prova`` string from the winning evidence.
+
+def _prima_prova(evidence: tuple[FingerprintEvidence, ...]) -> str | None:
+    """First matched signal as a human ``prova`` string, or ``None``.
 
     Native plugins carry :class:`FingerprintEvidence`, not the classifier's
     prose ``prova``. The first matched signal is the honest stand-in: prefer its
-    human ``description``, fall back to ``key: observed``. ``None`` only when no
-    signal matched (a miss never reaches here).
+    human ``description``, fall back to ``key: observed``.
     """
-    for evidence in match.result.evidence:
-        if not evidence.matched:
+    for item in evidence:
+        if not item.matched:
             continue
-        if evidence.description:
-            return evidence.description
-        if evidence.observed is not None:
-            return f"{evidence.key}: {evidence.observed}"
-        return evidence.key
+        if item.description:
+            return item.description
+        if item.observed is not None:
+            return f"{item.key}: {item.observed}"
+        return item.key
     return None
+
+
+def _prova_da_evidence(match: RecognitionMatch) -> str | None:
+    """Legacy ``prova`` from the winning match (a miss never reaches here)."""
+    return _prima_prova(match.result.evidence)
 
 
 def firma_da_registro(
@@ -113,3 +129,64 @@ def firma_da_registro(
         return Firma(Piattaforma.IGNOTA, None)
 
     return Firma(piattaforma, _prova_da_evidence(match))
+
+
+@dataclass(frozen=True)
+class RiconoscimentoSP:
+    """SERVICE_PORTAL recognition outcome, outside the ``Firma``/``Piattaforma``
+    vocabulary.
+
+    ``platform_id`` is the native id string (``"municipium_portalegen"`` /
+    ``"filodiretto"``) or ``None`` on a miss. Carries the native ``fingerprint``
+    and ``evidence`` so a caller can persist the involuntary signature, and
+    ``prova`` — the first matched signal — as a human stand-in.
+    """
+
+    platform_id: str | None
+    fingerprint: str | None
+    recognition_score: float
+    evidence: tuple[FingerprintEvidence, ...]
+    prova: str | None
+
+
+def riconosci_service_portal(
+    *,
+    headers: dict[str, str],
+    html: str,
+    source_id: str,
+    entrypoint_url: str,
+) -> RiconoscimentoSP:
+    """Recognise a SERVICE_PORTAL through the native-only SP registry.
+
+    Separate from ``firma_da_registro`` on purpose: the SP native ids are not
+    ``Piattaforma`` members, and the SP registry carries no legacy bridge, so no
+    BASE id (e.g. ``municipium``) can leak onto this surface. A miss is an honest
+    ``RiconoscimentoSP(None, ...)`` — a greenfield no-match is not a denial, so
+    the caller keeps trusting the persisted provider hint on ``None``.
+
+    Recognition is deliberately independent of any expected/persisted platform:
+    passing it as a registry ``hint`` would filter out every plugin that does not
+    already claim it, so a page that drifted to a *different* vendor could never
+    be recognised. The caller compares the returned ``platform_id`` against the
+    persisted hint to detect drift.
+    """
+    observation = RecognitionObservation(
+        source_id=source_id,
+        surface=Surface.SERVICE_PORTAL,
+        entrypoint_url=entrypoint_url,
+        http_status=200,
+        headers=headers,
+        body=html,
+    )
+    match = _SP_REGISTRY.recognize(observation)
+    if match is None or match.result.platform_id is None:
+        return RiconoscimentoSP(None, None, 0.0, (), None)
+
+    result = match.result
+    return RiconoscimentoSP(
+        platform_id=result.platform_id,
+        fingerprint=result.fingerprint,
+        recognition_score=result.recognition_score,
+        evidence=result.evidence,
+        prova=_prima_prova(result.evidence),
+    )

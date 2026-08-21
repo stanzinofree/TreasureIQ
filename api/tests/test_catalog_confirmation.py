@@ -26,6 +26,13 @@ from treasureiq.ingest.piattaforma import Piattaforma
 _URBI_AT = '<a href="/portale/ur1UR033.sto?ente=x">Amministrazione Trasparente</a>'
 _AT_URL = "https://trasparenza.comune.example.it/portale/"
 
+# filodiretto SP signature — versioned route + Siscom vendor asset.
+_FILODIRETTO = (
+    '<form action="/servizi/filodiretto2/ProcedimentiClient.Aspx">'
+    '<script src="/js/siscomJS.js"></script></form>'
+)
+_SP_URL = "https://servizidigitali.comune.example.it/servizi/filodiretto2/"
+
 
 def _stub_fetch(monkeypatch, *, html: str | None, headers: dict[str, str] | None = None):
     """Replace only the network hop; the recognition stays real."""
@@ -129,3 +136,82 @@ def test_confirm_inventory_writes_at_check_from_registry(monkeypatch, tmp_path):
     written = tmp_path / "check" / "transparency" / "058003.json"
     assert written.exists()
     assert Piattaforma.URBI.value in written.read_text(encoding="utf-8")
+
+
+# --- SERVICE_PORTAL branch: native-only recognition, additive to liveness ---
+
+
+def test_sp_envelope_recognised_matches_hint(monkeypatch):
+    # Persisted provider hint is "filodiretto"; the live page really is it.
+    _stub_fetch(monkeypatch, html=_FILODIRETTO)
+    result = _confirm_one(
+        source_id="058003", surface=Surface.SERVICE_PORTAL, url=_SP_URL,
+        expected_platform="filodiretto", timeout=1.0,
+    )
+    assert result.status is CheckStatus.OK
+    assert result.action is RecognitionAction.KEEP
+    assert result.identity["platform"] == "filodiretto"
+
+
+def test_sp_envelope_drift_flagged(monkeypatch):
+    # Inventory expected a different vendor, the live page is filodiretto:
+    # recognition now surfaces the drift instead of blindly trusting the hint.
+    _stub_fetch(monkeypatch, html=_FILODIRETTO)
+    result = _confirm_one(
+        source_id="058003", surface=Surface.SERVICE_PORTAL, url=_SP_URL,
+        expected_platform="municipium_portalegen", timeout=1.0,
+    )
+    assert result.status is CheckStatus.MANUAL_REVIEW
+    assert result.action is RecognitionAction.REDISCOVER
+    assert result.failure_reason == "platform_changed"
+    assert result.identity["platform"] == "filodiretto"
+
+
+def test_sp_envelope_miss_keeps_trusting_hint(monkeypatch):
+    # Generic authenticated-portal HTML: the native registry does not recognise
+    # it, so the check falls back to today's behaviour — trust the persisted
+    # hint and confirm liveness, never downgrade to manual review.
+    _stub_fetch(monkeypatch, html="<html><body>accedi con SPID</body></html>")
+    result = _confirm_one(
+        source_id="058003", surface=Surface.SERVICE_PORTAL, url=_SP_URL,
+        expected_platform="filodiretto", timeout=1.0,
+    )
+    assert result.status is CheckStatus.OK
+    assert result.action is RecognitionAction.KEEP
+    assert result.identity["platform"] == "filodiretto"
+
+
+def test_confirm_inventory_writes_sp_check_from_registry(monkeypatch, tmp_path):
+    from datetime import datetime, timezone
+
+    from treasureiq.catalog.service_contracts import ServicePortalCandidate
+
+    _stub_fetch(monkeypatch, html=_FILODIRETTO)
+    now = datetime.now(timezone.utc)
+    inventory = SourceInventory(
+        source_id="058003",
+        base_url="https://comune.example.it/",
+        service_portals=(
+            ServicePortalCandidate(
+                url=_SP_URL,
+                label="Servizi online",
+                source_url="https://comune.example.it/",
+                provider_hint="filodiretto",
+                discovered_at=now,
+            ),
+        ),
+        updated_at=now,
+    )
+    inventory_dir = tmp_path / "inventario"
+    inventory_dir.mkdir(parents=True)
+    (inventory_dir / "058003.json").write_text(
+        inventory.model_dump_json(), encoding="utf-8"
+    )
+
+    results = confirm_inventory(live_dir=tmp_path, source_id="058003", timeout=1.0)
+
+    assert len(results) == 1
+    assert results[0].surface is Surface.SERVICE_PORTAL
+    assert results[0].identity["platform"] == "filodiretto"
+    written = tmp_path / "check" / "service_portal" / "058003-0.json"
+    assert written.exists()

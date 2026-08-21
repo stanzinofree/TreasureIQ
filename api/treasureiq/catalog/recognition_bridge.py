@@ -199,3 +199,27 @@ def build_recognition_registry():
     registry.register(MUNICIPIUM_PORTALEGEN_RECOGNITION_PLUGIN)
     registry.register(FILODIRETTO_RECOGNITION_PLUGIN)
     return registry
+
+
+def build_service_portal_registry():
+    """SERVICE_PORTAL registry seeded with the native SP plugins only — no bridge.
+
+    On the SP surface the legacy bridge is not a safety net, it is noise or a
+    hazard. It is blind to ``filodiretto`` (``classifica_risposta`` returns
+    ``ignota`` there), and on a Municipium portal page carrying
+    ``container-municipium-agid`` but *not* the ``/portalegen/plugins/`` asset it
+    mis-claims the BASE id ``municipium`` at 0.995 — which is not in
+    ``_RETIRED_TO_NATIVE`` and would surface a BASE identity for a SERVICE_PORTAL.
+    So the SP seam runs the native plugins alone: recognition is greenfield, a
+    miss is an honest ``None``, and no BASE id can leak onto this surface.
+    """
+    from treasureiq.catalog.recognition_registry import RecognitionRegistry
+    from treasureiq.plugins.recognition.service_portal import (
+        FILODIRETTO_RECOGNITION_PLUGIN,
+        MUNICIPIUM_PORTALEGEN_RECOGNITION_PLUGIN,
+    )
+
+    registry = RecognitionRegistry()
+    registry.register(MUNICIPIUM_PORTALEGEN_RECOGNITION_PLUGIN)
+    registry.register(FILODIRETTO_RECOGNITION_PLUGIN)
+    return registry

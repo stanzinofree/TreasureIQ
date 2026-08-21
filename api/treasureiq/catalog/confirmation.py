@@ -19,7 +19,10 @@ from treasureiq.catalog.recognition import (
     FingerprintEvidence,
     RecognitionAction,
 )
-from treasureiq.catalog.recognition_adapter import firma_da_registro
+from treasureiq.catalog.recognition_adapter import (
+    firma_da_registro,
+    riconosci_service_portal,
+)
 from treasureiq.catalog.service_contracts import SourceInventory
 from treasureiq.ingest.host_guard import fetch_guardato
 from treasureiq.ingest.piattaforma import Piattaforma, impronta_grezza
@@ -69,10 +72,17 @@ def _confirm_one(
         platform = found.piattaforma.value
         known = platform not in {Piattaforma.IGNOTA.value, Piattaforma.NON_TROVATA.value}
     else:
-        # SP provider_hint is the persisted platform contract.  The check
-        # must not infer a new vendor from generic HTML on an authenticated
-        # portal; it only confirms that the known entrypoint is alive.
-        platform = expected_platform
+        # SP provider_hint is the persisted platform contract. Recognise the live
+        # page through the native-only SP registry — an involuntary two-signal
+        # fingerprint, never generic-HTML guessing: a match upgrades to the
+        # deterministic native identity (municipium_portalegen / filodiretto) and
+        # feeds the drift check below; a miss keeps trusting the persisted hint
+        # and only confirms that the known entrypoint is alive.
+        sp = riconosci_service_portal(
+            headers=dict(headers), html=html, source_id=source_id,
+            entrypoint_url=url,
+        )
+        platform = sp.platform_id if sp.platform_id is not None else expected_platform
         known = bool(platform)
     healthy = known and 200 <= 200 < 400
     changed = bool(expected_platform and platform and expected_platform != platform)

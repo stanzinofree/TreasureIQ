@@ -15,6 +15,7 @@ from datetime import UTC, datetime
 from treasureiq.catalog.contracts import Surface
 from treasureiq.catalog.recognition import RecognitionAction, action_for_recognition
 from treasureiq.catalog.recognition_bridge import (
+    _RETIRED_TO_NATIVE,
     BASE_RECOGNITION_POLICY,
     LegacyRecognitionBridge,
     build_recognition_registry,
@@ -155,6 +156,55 @@ def test_bridge_still_wins_non_wordpress_surface():
     assert match is not None
     assert match.manifest.plugin_id == "legacy_bridge_ordinary_data"
     assert match.result.platform_id == "drupal"
+
+
+# Passo C — one bridge-matching fixture per migrated family: (surface, body, platform).
+_MIGRATED_FIXTURES = [
+    (Surface.ORDINARY_DATA, '<meta name="generator" content="WordPress 6.5">', "wordpress_generico"),
+    (Surface.ORDINARY_DATA, '<meta name="generator" content="ComWeb ePublic 4.2">', "comweb"),
+    (Surface.TRANSPARENCY, '<a href="/portale/ur1UR033.sto?ente=x">AT</a>', "urbi"),
+    (
+        Surface.TRANSPARENCY,
+        '<link href="https://trasparenza-valutazione-merito.it/x/s.css">',
+        "jcitygov",
+    ),
+    (Surface.TRANSPARENCY, '<body class="post-type-archive-amm_trasp">', "wp_amm_trasp"),
+]
+
+
+def test_passo_c_retired_bridge_drops_migrated_but_default_still_classifies():
+    """The production bridge stops claiming migrated families; the bare bridge
+    (the shared classifier path used by censimento/discovery/confirmation) is
+    untouched and still detects them."""
+    for surface, body, platform in _MIGRATED_FIXTURES:
+        obs = _observe(body, surface=surface)
+        assert platform in _RETIRED_TO_NATIVE
+        default = LegacyRecognitionBridge(surface).recognize(obs)
+        retired = LegacyRecognitionBridge(surface, retired=_RETIRED_TO_NATIVE).recognize(obs)
+        # Shared classifier still detects the platform — the 4 non-recognition
+        # consumers keep working.
+        assert default.platform_id == platform
+        # Production bridge suppresses it: the native plugin is sole authority.
+        assert retired.platform_id is None
+        assert retired.recognition_score == 0.0
+
+
+def test_passo_c_retired_bridge_still_serves_unmigrated_family():
+    """Retirement is scoped to migrated platforms only; everything else still
+    falls through to the bridge."""
+    observation = RecognitionObservation(
+        source_id="058003",
+        surface=Surface.ORDINARY_DATA,
+        entrypoint_url=_ENTRYPOINT,
+        http_status=200,
+        headers={"x-drupal-cache": "HIT"},
+        body="<html></html>",
+    )
+    retired = LegacyRecognitionBridge(
+        Surface.ORDINARY_DATA, retired=_RETIRED_TO_NATIVE
+    ).recognize(observation)
+    assert retired.platform_id == "drupal"
+    assert "drupal" not in _RETIRED_TO_NATIVE
 
 
 def test_base_policy_matrix_matches_agreed_thresholds():

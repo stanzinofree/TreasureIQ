@@ -54,12 +54,32 @@ def _confidence(raw_score: float) -> RecognitionConfidence:
     return RecognitionConfidence.UNKNOWN
 
 
+# Passo C — platforms whose recognition is now owned by a native plugin. The
+# bridge still *detects* them (``classifica_risposta`` stays the shared
+# classifier for censimento / discovery / confirmation / connector selection),
+# but the production recognition registry retires the bridge's *claim* on them:
+# it suppresses these winners so the native plugin is the sole recognition
+# authority. If a native signature is narrower than the bridge's and misses a
+# real variant, recognition returns empty (→ manual review) rather than a stale
+# bridge verdict — the miss is surfaced, not silently served. Greenfield SP
+# families (portalegen, filodiretto) never had a bridge signature, so they are
+# not listed here.
+_RETIRED_TO_NATIVE = frozenset(
+    {"wordpress_generico", "comweb", "urbi", "jcitygov", "wp_amm_trasp"}
+)
+
+
 class LegacyRecognitionBridge:
     """Wrap ``classifica_risposta`` for one surface as a wildcard plugin."""
 
-    def __init__(self, surface: Surface) -> None:
+    def __init__(self, surface: Surface, retired: frozenset[str] = frozenset()) -> None:
         self._surface = surface
         self._includi_at = surface in _AT_SURFACES
+        # Winners in this set are suppressed (treated as unrecognised) so a
+        # migrated family is answered only by its native plugin. Empty by
+        # default: a bare bridge still mirrors the classifier, which the
+        # native-vs-bridge parity tests rely on.
+        self._retired = retired
         self.manifest = RecognitionPluginManifest(
             plugin_id=f"legacy_bridge_{surface.value}",
             version=_BRIDGE_VERSION,
@@ -93,7 +113,7 @@ class LegacyRecognitionBridge:
             for firma in esito.scattate
         )
 
-        if platform in _NON_PLATFORMS:
+        if platform in _NON_PLATFORMS or platform in self._retired:
             return RecognitionPluginResult(
                 platform_id=None,
                 recognition_score=0.0,
@@ -114,11 +134,14 @@ class LegacyRecognitionBridge:
         )
 
 
-def build_bridge_registry():
+def build_bridge_registry(retired: frozenset[str] = frozenset()):
     """Return a registry seeded with the v1 bridge for BASE, AT and SP.
 
     BASE maps to ``ORDINARY_DATA`` to match the existing plugin tests; the AT
     and service-portal surfaces are the ones that run with ``includi_at=True``.
+
+    ``retired`` names platform values the bridge must stop claiming (Passo C);
+    it defaults to empty so a bare bridge registry still mirrors the classifier.
     """
     from treasureiq.catalog.recognition_registry import RecognitionRegistry
 
@@ -128,7 +151,7 @@ def build_bridge_registry():
         Surface.TRANSPARENCY,
         Surface.SERVICE_PORTAL,
     ):
-        registry.register(LegacyRecognitionBridge(surface))
+        registry.register(LegacyRecognitionBridge(surface, retired=retired))
     return registry
 
 
@@ -146,9 +169,12 @@ def build_recognition_registry():
     """Production registry: the v1 bridge plus every activated native plugin.
 
     A native plugin beats the wildcard bridge on a score tie, so an activated
-    family stops being served by the bridge the moment it registers — without
-    removing the bridge, which stays the safety net until a later release
-    retires the migrated signature.
+    family stops being served by the bridge the moment it registers. Passo C
+    goes one step further: the bridge is built with ``_RETIRED_TO_NATIVE`` so it
+    no longer even claims the migrated families — the native plugin is their
+    sole recognition authority, and a native miss surfaces as manual review
+    instead of a stale bridge verdict. The bridge remains the safety net for
+    every not-yet-migrated family.
     """
     from treasureiq.plugins.recognition.at import (
         JCITYGOV_AT_RECOGNITION_PLUGIN,
@@ -164,7 +190,7 @@ def build_recognition_registry():
         MUNICIPIUM_PORTALEGEN_RECOGNITION_PLUGIN,
     )
 
-    registry = build_bridge_registry()
+    registry = build_bridge_registry(retired=_RETIRED_TO_NATIVE)
     registry.register(WORDPRESS_AGID_RECOGNITION_PLUGIN)
     registry.register(COMWEB_RECOGNITION_PLUGIN)
     registry.register(URBI_AT_RECOGNITION_PLUGIN)

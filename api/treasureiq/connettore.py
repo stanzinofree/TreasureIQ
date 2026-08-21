@@ -25,7 +25,7 @@ from pathlib import Path
 from pydantic import BaseModel
 
 from treasureiq.ingest.censimento import _Sonda, scopri_pagina_at
-from treasureiq.ingest.piattaforma import Piattaforma, firma_da_risposta
+from treasureiq.ingest.piattaforma import Piattaforma
 from treasureiq.mappa_connettore import _base_con_schema
 from treasureiq.sonda_live import LIVE_DIR, comune_per_codice
 
@@ -395,9 +395,21 @@ def leggi_connettore(
                 checked_at=datetime.now(timezone.utc),
             ))
             # BASE (home comune): una piattaforma AT-only non deve mai vincere
-            # la selezione del connettore.
-            firma = firma_da_risposta(
-                headers=dict(risposta.headers), html=risposta.text, includi_at=False
+            # la selezione del connettore. La surface ORDINARY_DATA codifica
+            # l'esclusione AT (ex `includi_at=False`); il registry porta i
+            # plugin nativi + la soppressione Passo C nel dispatch reale.
+            # Import locale: `catalog/__init__` importa connettore (adapters),
+            # quindi un import catalog in cima creerebbe un ciclo. I test
+            # patchano `recognition_adapter.firma_da_registro`.
+            from treasureiq.catalog.contracts import Surface
+            from treasureiq.catalog import recognition_adapter
+
+            firma = recognition_adapter.firma_da_registro(
+                headers=dict(risposta.headers),
+                html=risposta.text,
+                surface=Surface.ORDINARY_DATA,
+                source_id=codice_istat,
+                entrypoint_url=base,
             )
             if firma.piattaforma == Piattaforma.MUNICIPIUM:
                 try:

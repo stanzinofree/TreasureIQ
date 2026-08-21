@@ -13,6 +13,7 @@ from types import SimpleNamespace
 import pytest
 
 import treasureiq.connettore as connettore_mod
+from treasureiq.catalog import recognition_adapter as recognition_adapter_mod
 from treasureiq.connettore import (
     AmministrazioneTrasparente,
     AreaAmministrativa,
@@ -22,6 +23,7 @@ from treasureiq.connettore import (
     _esito_vuoto,
     _in_store,
     leggi_connettore,
+    refresh_dati_connettore,
 )
 from treasureiq.ingest.piattaforma import Firma, Piattaforma
 from treasureiq.sonda_live import ComuneNoto
@@ -111,8 +113,8 @@ def test_esito_vuoto_non_persistito_dal_dispatcher(monkeypatch: pytest.MonkeyPat
     monkeypatch.setattr(connettore_mod, "comune_per_codice", lambda codice: _comune())
     monkeypatch.setattr(connettore_mod, "_Sonda", _SondaFinta)
     monkeypatch.setattr(
-        connettore_mod, "firma_da_risposta",
-        lambda *, headers, html, includi_at=False: Firma(
+        recognition_adapter_mod, "firma_da_registro",
+        lambda **_kw: Firma(
             piattaforma=Piattaforma.MUNICIPIUM, prova="municipium"
         ),
     )
@@ -144,6 +146,49 @@ def test_esito_con_sole_aree_non_e_vuoto() -> None:
     assert not _esito_vuoto(esito)
 
 
+def test_refresh_dati_usa_la_piattaforma_in_cache_senza_firma_home(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    monkeypatch.setattr(connettore_mod, "LIVE_DIR", tmp_path)
+    precedente = _esito(
+        uffici=[
+            UfficioConnettore(
+                nome="Vecchio", url="https://x/vecchio", source_typed=True,
+                letto_il="2026-01-01T00:00:00+00:00",
+            )
+        ],
+        letto_il="2026-01-01T00:00:00+00:00",
+    ).model_copy(update={"fonte_hash": "home-hash", "controllato_il": "2026-01-01T00:00:00+00:00"})
+    _in_store(precedente)
+    monkeypatch.setattr(connettore_mod, "comune_per_codice", lambda codice: _comune())
+    monkeypatch.setattr(connettore_mod, "_Sonda", _SondaFinta)
+    monkeypatch.setattr(recognition_adapter_mod, "firma_da_registro", lambda **kwargs: pytest.fail("non deve riconoscere la home"))
+    monkeypatch.setattr(connettore_mod, "_esito_vuoto", lambda esito: False)
+    monkeypatch.setattr("treasureiq.registro.registra_scansione", lambda comune, esito: None)
+
+    aggiornato = precedente.model_copy(
+        update={
+            "letto_il": "2026-08-21T00:00:00+00:00",
+            "uffici": [
+                UfficioConnettore(
+                    nome="Nuovo", url="https://x/nuovo", source_typed=True,
+                    letto_il="2026-08-21T00:00:00+00:00",
+                )
+            ],
+        }
+    )
+    fake_mod = types.ModuleType("treasureiq.municipium")
+    fake_mod.leggi_municipium = lambda comune, sonda: aggiornato
+    monkeypatch.setitem(sys.modules, "treasureiq.municipium", fake_mod)
+
+    esito = refresh_dati_connettore(ISTAT)
+
+    assert esito is not None
+    assert esito.uffici[0].nome == "Nuovo"
+    assert esito.fonte_hash == "home-hash"
+    assert esito.controllato_il == precedente.controllato_il
+
+
 # --- Dispatcher (deferred piattaforme, degrado muto) -------------------
 
 
@@ -155,8 +200,8 @@ def test_dispatcher_municipium_non_importabile_ritorna_none(
     monkeypatch.setattr(connettore_mod, "comune_per_codice", lambda codice: _comune())
     monkeypatch.setattr(connettore_mod, "_Sonda", _SondaFinta)
     monkeypatch.setattr(
-        connettore_mod, "firma_da_risposta",
-        lambda *, headers, html, includi_at=False: Firma(
+        recognition_adapter_mod, "firma_da_registro",
+        lambda **_kw: Firma(
             piattaforma=Piattaforma.MUNICIPIUM, prova="municipium"
         ),
     )
@@ -174,8 +219,8 @@ def test_dispatcher_piattaforma_non_municipium_ritorna_none(
     # DRUPAL: nessun connettore la legge (a differenza di WORDPRESS_GENERICO,
     # ora instradata su `wordpress_agid.leggi_wordpress_agid`, D-09).
     monkeypatch.setattr(
-        connettore_mod, "firma_da_risposta",
-        lambda *, headers, html, includi_at=False: Firma(
+        recognition_adapter_mod, "firma_da_registro",
+        lambda **_kw: Firma(
             piattaforma=Piattaforma.DRUPAL, prova="drupal"
         ),
     )
@@ -202,8 +247,8 @@ def test_leggi_connettore_classifica_piattaforma_at_se_presente(
     monkeypatch.setattr(connettore_mod, "comune_per_codice", lambda codice: _comune())
     monkeypatch.setattr(connettore_mod, "_Sonda", _SondaFinta)
     monkeypatch.setattr(
-        connettore_mod, "firma_da_risposta",
-        lambda *, headers, html, includi_at=False: Firma(
+        recognition_adapter_mod, "firma_da_registro",
+        lambda **_kw: Firma(
             piattaforma=Piattaforma.MUNICIPIUM, prova="municipium"
         ),
     )
@@ -238,8 +283,8 @@ def test_leggi_connettore_at_non_trovata_non_classifica(
     monkeypatch.setattr(connettore_mod, "comune_per_codice", lambda codice: _comune())
     monkeypatch.setattr(connettore_mod, "_Sonda", _SondaFinta)
     monkeypatch.setattr(
-        connettore_mod, "firma_da_risposta",
-        lambda *, headers, html, includi_at=False: Firma(
+        recognition_adapter_mod, "firma_da_registro",
+        lambda **_kw: Firma(
             piattaforma=Piattaforma.MUNICIPIUM, prova="municipium"
         ),
     )
@@ -272,8 +317,8 @@ def test_leggi_connettore_senza_at_non_classifica(monkeypatch: pytest.MonkeyPatc
     monkeypatch.setattr(connettore_mod, "comune_per_codice", lambda codice: _comune())
     monkeypatch.setattr(connettore_mod, "_Sonda", _SondaFinta)
     monkeypatch.setattr(
-        connettore_mod, "firma_da_risposta",
-        lambda *, headers, html, includi_at=False: Firma(
+        recognition_adapter_mod, "firma_da_registro",
+        lambda **_kw: Firma(
             piattaforma=Piattaforma.MUNICIPIUM, prova="municipium"
         ),
     )

@@ -67,6 +67,24 @@ def test_base_migrated_family_platform_comes_from_native_plugin():
     assert firma.piattaforma is Piattaforma.COMWEB
 
 
+# The three BASE platforms connettore dispatches on. None is retired, so the
+# bridge still serves them and the adapter must reconstruct the exact enum the
+# dispatch compares against (== the platform_id the bridge emits).
+_DISPATCH_FIXTURES = [
+    ('<script src="https://x.municipiumapp.it/app.js"></script>', Piattaforma.MUNICIPIUM),
+    ('<a href="/EG0/EGSweb.HBL?en=eg123&amp;x=1">servizi</a>', Piattaforma.EGOV),
+    ('<link href="/assets/bootstrap-italia-comuni.css" rel="stylesheet">', Piattaforma.PEOPLEWEB),
+]
+
+
+@pytest.mark.parametrize("body,expected", _DISPATCH_FIXTURES)
+def test_base_dispatch_platforms_reconstruct_exact_enum(body, expected):
+    firma = _firma(body, surface=Surface.ORDINARY_DATA)
+    legacy = firma_da_risposta(headers={}, html=body, includi_at=False)
+    assert firma.piattaforma is expected
+    assert firma.piattaforma == legacy.piattaforma
+
+
 def test_service_portal_is_refused_not_degraded_to_ignota():
     # Gate 0: SP native ids (municipium_portalegen/filodiretto) are not in the
     # enum. The adapter must raise, never hand back a silent IGNOTA.

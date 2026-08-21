@@ -439,6 +439,30 @@ def registra_portali(db_path: Path, righe: Iterable[RigaPortale]) -> int:
     return len(valori)
 
 
+def rimuovi_portali(
+    db_path: Path, *, rilevato_il: date, codici_istat: Iterable[str]
+) -> int:
+    """Remove rows of an incomplete sweep batch.
+
+    The catalog is persisted after ``portale_snapshot`` because its importer
+    reads the normalized rows from SQLite. If that second write fails, leaving
+    the rows behind would make the daily resume treat the communes as done and
+    permanently skip their catalog. The caller uses this compensating action
+    before retrying the batch.
+    """
+
+    codici = tuple(dict.fromkeys(codici_istat))
+    if not codici:
+        return 0
+    with apri(db_path, scrittura=True) as conn:
+        conn.executemany(
+            "DELETE FROM portale_snapshot WHERE rilevato_il = ? AND codice_istat = ?",
+            ((rilevato_il.isoformat(), codice) for codice in codici),
+        )
+        conn.commit()
+    return len(codici)
+
+
 def date_censimento(db_path: Path) -> list[date]:
     """Sweep dates present in the store, oldest first."""
     if not db_path.exists():

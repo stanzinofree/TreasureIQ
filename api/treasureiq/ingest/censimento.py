@@ -1471,7 +1471,7 @@ def _registra(
     cosa significano i propri enum; `storico` deve poter leggere una serie
     storica anche fra dieci anni, quando questi enum saranno cambiati.
     """
-    from treasureiq.storico import RigaPortale, registra_portali
+    from treasureiq.storico import RigaPortale, registra_portali, rimuovi_portali
 
     righe = [
         RigaPortale(
@@ -1522,18 +1522,30 @@ def _registra(
         from treasureiq.catalog.store import SnapshotStore
         from treasureiq.catalog.sweep_import import persist_sweep_snapshot_batch
 
-        persist_sweep_snapshot_batch(
-            db,
-            store=SnapshotStore(catalog_output),
-            codici_istat=tuple(r.codice_istat for r in righe),
-            measurement_id=measurement_id or f"sweep-{righe[0].rilevato_il.isoformat()}",
-            measured_at=measured_at
-            or datetime.combine(
-                max(r.misurato_il for r in esiti),
-                datetime.min.time(),
-                tzinfo=timezone.utc,
-            ),
-        )
+        try:
+            persist_sweep_snapshot_batch(
+                db,
+                store=SnapshotStore(catalog_output),
+                codici_istat=tuple(r.codice_istat for r in righe),
+                measurement_id=measurement_id or f"sweep-{righe[0].rilevato_il.isoformat()}",
+                measured_at=measured_at
+                or datetime.combine(
+                    max(r.misurato_il for r in esiti),
+                    datetime.min.time(),
+                    tzinfo=timezone.utc,
+                ),
+            )
+        except Exception:
+            # SQLite is the source the importer reads, but it is not allowed
+            # to become a false resume marker when the catalog write fails.
+            # Remove this batch so the next worker cycle retries it.
+            for giorno in {r.rilevato_il for r in righe}:
+                rimuovi_portali(
+                    db,
+                    rilevato_il=giorno,
+                    codici_istat=(r.codice_istat for r in righe if r.rilevato_il == giorno),
+                )
+            raise
     return scritte
 
 

@@ -157,9 +157,13 @@ def build_recognition_registry():
     from treasureiq.plugins.recognition.base import (
         WORDPRESS_AGID_RECOGNITION_PLUGIN,
     )
+    from treasureiq.plugins.recognition.service_portal import (
+        MUNICIPIUM_PORTALEGEN_RECOGNITION_PLUGIN,
+    )
 
     registry = build_bridge_registry()
     registry.register(WORDPRESS_AGID_RECOGNITION_PLUGIN)
     registry.register(URBI_AT_RECOGNITION_PLUGIN)
     registry.register(JCITYGOV_AT_RECOGNITION_PLUGIN)
+    registry.register(MUNICIPIUM_PORTALEGEN_RECOGNITION_PLUGIN)
     return registry

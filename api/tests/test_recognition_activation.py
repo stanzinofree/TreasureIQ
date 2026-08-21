@@ -75,6 +75,25 @@ def test_native_jcitygov_owns_transparency_in_production_registry():
     assert match.result.recognition_score == bridge.recognition_score
 
 
+def test_native_portalegen_owns_service_portal_in_production_registry():
+    registry = build_recognition_registry()
+    body = (
+        '<link href="/portalegen/plugins2/css/bootstrap-italia-bluwhite.css" rel="stylesheet">'
+        '<div class="container-fluid container-municipium-agid"></div>'
+    )
+    match = registry.recognize(_observe(body, surface=Surface.SERVICE_PORTAL))
+    assert match is not None
+    assert match.manifest.plugin_id == "municipium_portalegen_sp"
+    assert match.result.platform_id == "municipium_portalegen"
+    # The bridge mis-claims the generic "municipium" at the same score; the
+    # native plugin wins the tie-break and corrects the surface identity.
+    bridge = LegacyRecognitionBridge(Surface.SERVICE_PORTAL).recognize(
+        _observe(body, surface=Surface.SERVICE_PORTAL)
+    )
+    assert bridge.platform_id == "municipium"
+    assert match.result.recognition_score == bridge.recognition_score
+
+
 def test_bridge_still_wins_non_wordpress_surface():
     registry = build_recognition_registry()
     # A Drupal header the native WordPress plugin cannot claim: the bridge must

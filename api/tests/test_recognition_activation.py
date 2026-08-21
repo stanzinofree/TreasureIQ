@@ -94,6 +94,25 @@ def test_native_portalegen_owns_service_portal_in_production_registry():
     assert match.result.recognition_score == bridge.recognition_score
 
 
+def test_native_filodiretto_owns_service_portal_in_production_registry():
+    registry = build_recognition_registry()
+    body = (
+        '<script src="App_Themes/js/siscomJS.js"></script>'
+        '<script src="/servizi/filodiretto2/ScriptResource.axd"></script>'
+    )
+    match = registry.recognize(_observe(body, surface=Surface.SERVICE_PORTAL))
+    assert match is not None
+    assert match.manifest.plugin_id == "filodiretto_sp"
+    assert match.result.platform_id == "filodiretto"
+    # True greenfield: the bridge is blind to this page and returns the empty
+    # "ignota" verdict, so the native plugin fills the gap outright.
+    bridge = LegacyRecognitionBridge(Surface.SERVICE_PORTAL).recognize(
+        _observe(body, surface=Surface.SERVICE_PORTAL)
+    )
+    assert bridge.platform_id is None
+    assert bridge.recognition_score == 0.0
+
+
 def test_native_comweb_owns_base_in_production_registry():
     registry = build_recognition_registry()
     body = '<meta name="generator" content="ComWeb ePublic 4.2">'

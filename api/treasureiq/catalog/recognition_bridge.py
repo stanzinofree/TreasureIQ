@@ -160,6 +160,7 @@ def build_recognition_registry():
         WORDPRESS_AGID_RECOGNITION_PLUGIN,
     )
     from treasureiq.plugins.recognition.service_portal import (
+        FILODIRETTO_RECOGNITION_PLUGIN,
         MUNICIPIUM_PORTALEGEN_RECOGNITION_PLUGIN,
     )
 
@@ -170,4 +171,5 @@ def build_recognition_registry():
     registry.register(JCITYGOV_AT_RECOGNITION_PLUGIN)
     registry.register(WORDPRESS_AMM_TRASP_RECOGNITION_PLUGIN)
     registry.register(MUNICIPIUM_PORTALEGEN_RECOGNITION_PLUGIN)
+    registry.register(FILODIRETTO_RECOGNITION_PLUGIN)
     return registry

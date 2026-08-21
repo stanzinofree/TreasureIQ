@@ -11,6 +11,27 @@ condiviso (24 caller); il registry lo avvolge via il bridge, non lo sostituisce.
 Gli altri consumatori di `classifica_risposta` (raffinazione WordPress,
 `impronta_grezza`, i runner interni a `piattaforma.py`) restano invariati.
 
+## Gate 0 — vocabolario SP prima dell'adapter
+
+La forma legacy `Firma` può rappresentare solo valori dell'enum
+`ingest.piattaforma.Piattaforma`. I plugin nativi SP già attivi restituiscono
+invece `municipium_portalegen` e `filodiretto`, che non sono membri dell'enum.
+Un adapter generico BASE/AT/SP che facesse soltanto
+`Piattaforma(match.result.platform_id)` trasformerebbe quei riconoscimenti in
+`IGNOTA`, perdendo l'identità del portale senza errore.
+
+Decisione T2: il primo adapter e il primo wiring coprono **solo BASE e AT**.
+Il wiring del surface `SERVICE_PORTAL` resta bloccato fino a una decisione
+esplicita su uno dei due contratti compatibili:
+
+1. aggiungere gli ID SP al vocabolario condiviso e ai relativi consumer; oppure
+2. introdurre un adapter SP che restituisca il contratto catalogo
+   `platform_id` senza convertirlo in `Firma`/`Piattaforma`.
+
+Non è accettabile usare `try/except ValueError → IGNOTA` come comportamento
+normale per SP: quello è un fallback di difesa per dati corrotti o plugin
+malformati, non una politica di compatibilità.
+
 ---
 
 ## Vincolo di forma (il cuore del lavoro)
@@ -27,8 +48,10 @@ Legacy e registry hanno contratti diversi. L'adapter deve fare da ponte:
 
 Tre perdite di fedeltà da gestire ESPLICITAMENTE:
 1. **enum ↔ str**: `Piattaforma(platform_id)` ricostruisce l'enum; `None` →
-   `Piattaforma.IGNOTA`. Verificare che ogni `platform_id` emesso (bridge +
-   nativi) sia un valore valido di `Piattaforma` — altrimenti `ValueError`.
+   `Piattaforma.IGNOTA`. Su BASE/AT ogni `platform_id` emesso (bridge + nativi)
+   è un valore valido di `Piattaforma`; il `try/except ValueError → IGNOTA` è
+   rete difensiva su dati corrotti, non politica di compat (per SP vedi Gate 0,
+   dove il surface è rifiutato a monte, non convertito).
 2. **prova**: il nativo non produce `prova`. Sintetizzarla dall'evidence vincente
    (es. `descrizione` della prima `FingerprintEvidence` con `matched=True`, o
    `key: observed`). Degrada per le 5 famiglie migrate; accettabile perché
@@ -53,8 +76,11 @@ BASE lascerebbe vincere una piattaforma AT-only (il bug che il commento a
 
 `api/treasureiq/catalog/recognition_adapter.py`. Vive in `catalog`: può importare
 il registry e (per la mappatura enum) `Piattaforma` da `ingest.piattaforma`.
-NON è un plugin → il confine plugin non lo tocca. Costruisce l'osservazione una
-volta e la riusa.
+NON è un plugin → il confine plugin non lo tocca. In T2 v1 accetta soltanto
+`Surface.ORDINARY_DATA` e `Surface.TRANSPARENCY`; per
+`Surface.SERVICE_PORTAL` deve fallire esplicitamente con un errore di contratto
+finché il Gate 0 non viene chiuso. Costruisce l'osservazione una volta e la
+riusa.
 
 API proposta (forma legacy in uscita, così i caller cambiano al minimo):
 
@@ -64,8 +90,12 @@ def firma_da_registro(
     source_id: str, entrypoint_url: str,
     expected_platform: str | None = None,
 ) -> Firma:
-    """Rimpiazzo drop-in di firma_da_risposta via registry di produzione.
-    Miss (None) → Firma(Piattaforma.IGNOTA, None)."""
+    """Rimpiazzo drop-in BASE/AT di firma_da_risposta via registry di produzione.
+    Miss (None) → Firma(Piattaforma.IGNOTA, None).
+
+    SERVICE_PORTAL non è supportato da questa API finché gli ID SP nativi non
+    sono rappresentabili nel vocabolario legacy.
+    """
 ```
 
 Corpo:
@@ -80,11 +110,13 @@ Aggiungere `_prova_da_evidence(result) -> str | None`: prima evidence
 `matched=True` → `f"{e.key}: {e.observed}"` o `e.description`; nessuna → `None`.
 
 **Test adapter** (colma la lacuna «`RecognitionMatch` senza copertura»):
-`api/tests/test_recognition_adapter.py` — per ognuna delle 3 surface: match noto
+`api/tests/test_recognition_adapter.py` — per BASE e AT: match noto
 → enum giusto + prova non vuota; miss → `Firma(IGNOTA, None)`; parità enum col
 vecchio `firma_da_risposta` sulle famiglie NON migrate; e sulle migrate il
 `platform_id` viene dal nativo (già coperto lato registry, qui asserire il ponte
-enum). Usare il DB di test read-only, nessuna rete (i plugin sono offline).
+enum). Aggiungere un test esplicito che SERVICE_PORTAL venga rifiutato dal
+contratto legacy, senza degradare a `IGNOTA`. Usare il DB di test read-only,
+nessuna rete (i plugin sono offline).
 
 ---
 
@@ -151,15 +183,20 @@ di produzione A+B; C è fuori scope per progetto.
   `perf/accumula-filtri-cache-intent-rust`, MAI su main (freeze).
 
 ## Ordine di esecuzione (C1 — C fuori scope)
-1. Adapter + test adapter (Passo 1) → verde.
+1. Chiudere Gate 0 nel documento/contratto; fino ad allora adapter + test
+   adapter coprono solo BASE/AT → verde.
 2. Call site A (confirmation) → suite → commit.
 3. Test dispatch BASE su fixture reali → call site B (connettore) → suite → commit.
 4. `scopri_pagina_at` (C) — **NON toccare**. Solo nota in memoria.
-5. Review Codex del nuovo range (`fa80e09..HEAD`).
+5. Decidere e cablare SP in un workstream successivo, dopo il vocabolario.
+6. Review Codex del nuovo range (`fa80e09..HEAD`).
 
 ## Rischi
 - **`Piattaforma(platform_id)` con valore ignoto** → `ValueError` in produzione.
-  Difendere l'adapter con `try/except ValueError → IGNOTA` + log.
+  Difendere l'adapter con `try/except ValueError → IGNOTA` + log **solo su
+  BASE/AT, come rete su dati corrotti**; MAI come compat SP (vedi Gate 0: SP è
+  rifiutato a monte, non degradato). Su BASE/AT ogni ID nativo/bridge è un
+  membro valido dell'enum, quindi il ramo scatta solo su output davvero corrotto.
 - **Surface→includi_at nel bridge non allineata** → BASE lascia vincere AT-only.
   Verifica obbligatoria in Passo 1.
 - **Un nativo più stretto del bridge su una variante reale** (già annotato in

@@ -71,7 +71,14 @@ class RecognitionRegistry:
         return chosen
 
     def recognize(self, observation: RecognitionObservation) -> RecognitionMatch | None:
-        """Return the highest-scoring recognition for this surface, or ``None``."""
+        """Return the highest-scoring recognition for this surface, or ``None``.
+
+        A score of ``0.0`` is a miss for every plugin (native plugins and the
+        suppressed bridge both return it), so an all-zero surface recognises
+        nothing: return ``None`` rather than attributing an empty result to the
+        first native plugin the tie-break happened to reach. Callers treat
+        ``None`` as manual review — the same verdict an empty platform yields.
+        """
         best: RecognitionMatch | None = None
         best_native = False
         for plugin in self._candidates(observation):
@@ -84,6 +91,8 @@ class RecognitionRegistry:
             tie = result.recognition_score == best.result.recognition_score
             if higher or (tie and native and not best_native):
                 best, best_native = RecognitionMatch(plugin.manifest, result), native
+        if best is None or best.result.recognition_score <= 0.0:
+            return None
         return best
 
     def names(self) -> tuple[tuple[str, str], ...]:

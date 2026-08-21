@@ -189,6 +189,15 @@ def test_passo_c_retired_bridge_drops_migrated_but_default_still_classifies():
         assert retired.recognition_score == 0.0
 
 
+def test_unknown_surface_recognises_nothing_not_a_native_plugin():
+    """Regression: an all-miss surface must return None, never an empty result
+    falsely attributed to the first native plugin the tie-break reaches."""
+    registry = build_recognition_registry()
+    for surface in (Surface.ORDINARY_DATA, Surface.TRANSPARENCY, Surface.SERVICE_PORTAL):
+        match = registry.recognize(_observe("<html><body>ignoto</body></html>", surface=surface))
+        assert match is None
+
+
 def test_passo_c_retired_bridge_still_serves_unmigrated_family():
     """Retirement is scoped to migrated platforms only; everything else still
     falls through to the bridge."""
@@ -215,7 +224,10 @@ def test_base_policy_matrix_matches_agreed_thresholds():
     rest = registry.recognize(_observe('<link rel="https://api.w.org/" href="/wp-json/">'))
     heuristic = registry.recognize(_observe('<link rel="stylesheet" href="/wp-content/x.css">'))
     empty = registry.recognize(_observe("<html><body>Comune</body></html>"))
-    assert rest is not None and heuristic is not None and empty is not None
+    assert rest is not None and heuristic is not None
+    # Nothing recognises an empty page: the registry returns None rather than an
+    # empty native attribution. None is the caller's manual-review signal.
+    assert empty is None
 
     def action(match):
         return build_recognition_result(
@@ -224,8 +236,6 @@ def test_base_policy_matrix_matches_agreed_thresholds():
 
     assert action(rest) is RecognitionAction.KEEP
     assert action(heuristic) is RecognitionAction.REDISCOVER
-    # Empty recognition carries platform None → forced manual review regardless.
-    assert action(empty) is RecognitionAction.MANUAL_REVIEW
     # Guard the boundary directly: 0.49 must not fall into manual review.
     assert (
         action_for_recognition(score=0.49, policy=BASE_RECOGNITION_POLICY)

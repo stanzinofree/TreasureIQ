@@ -122,22 +122,19 @@ def test_registry_routes_by_surface_and_wraps_result():
     assert record.checked_at == checked_at
 
 
-def test_registry_none_platform_forces_manual_review():
+def test_registry_recognises_nothing_on_empty_page():
+    # An all-miss surface scores 0.0 for every plugin, so the registry returns
+    # None rather than an empty match. None is the caller's manual-review signal.
     registry = build_bridge_registry()
     observation = _observe(Surface.ORDINARY_DATA, body="<html></html>")
-    match = registry.recognize(observation)
-    assert match is not None and match.result.platform_id is None
-    record = build_recognition_result(
-        observation, match, checked_at=datetime(2026, 8, 21, tzinfo=UTC)
-    )
-    assert record.action is RecognitionAction.MANUAL_REVIEW
+    assert registry.recognize(observation) is None
 
 
 def test_registry_preserves_plugin_fingerprint():
     registry = build_bridge_registry()
     observation = _observe(Surface.ORDINARY_DATA, body="<html></html>")
-    match = registry.recognize(observation)
-    assert match is not None
+    # Nothing is registered that recognises this page yet.
+    assert registry.recognize(observation) is None
 
     class _FingerprintPlugin:
         manifest = LegacyRecognitionBridge(Surface.ORDINARY_DATA).manifest.model_copy(

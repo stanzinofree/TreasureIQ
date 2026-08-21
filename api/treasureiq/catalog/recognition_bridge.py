@@ -150,7 +150,10 @@ def build_recognition_registry():
     removing the bridge, which stays the safety net until a later release
     retires the migrated signature.
     """
-    from treasureiq.plugins.recognition.at import URBI_AT_RECOGNITION_PLUGIN
+    from treasureiq.plugins.recognition.at import (
+        JCITYGOV_AT_RECOGNITION_PLUGIN,
+        URBI_AT_RECOGNITION_PLUGIN,
+    )
     from treasureiq.plugins.recognition.base import (
         WORDPRESS_AGID_RECOGNITION_PLUGIN,
     )
@@ -158,4 +161,5 @@ def build_recognition_registry():
     registry = build_bridge_registry()
     registry.register(WORDPRESS_AGID_RECOGNITION_PLUGIN)
     registry.register(URBI_AT_RECOGNITION_PLUGIN)
+    registry.register(JCITYGOV_AT_RECOGNITION_PLUGIN)
     return registry

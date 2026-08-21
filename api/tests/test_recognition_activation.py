@@ -59,6 +59,22 @@ def test_native_urbi_owns_transparency_in_production_registry():
     assert match.result.recognition_score == bridge.recognition_score
 
 
+def test_native_jcitygov_owns_transparency_in_production_registry():
+    registry = build_recognition_registry()
+    body = (
+        '<link rel="stylesheet" '
+        'href="https://trasparenza-valutazione-merito.it/x/style.css">'
+    )
+    match = registry.recognize(_observe(body, surface=Surface.TRANSPARENCY))
+    assert match is not None
+    assert match.manifest.plugin_id == "jcitygov_at"
+    assert match.result.platform_id == "jcitygov"
+    bridge = LegacyRecognitionBridge(Surface.TRANSPARENCY).recognize(
+        _observe(body, surface=Surface.TRANSPARENCY)
+    )
+    assert match.result.recognition_score == bridge.recognition_score
+
+
 def test_bridge_still_wins_non_wordpress_surface():
     registry = build_recognition_registry()
     # A Drupal header the native WordPress plugin cannot claim: the bridge must

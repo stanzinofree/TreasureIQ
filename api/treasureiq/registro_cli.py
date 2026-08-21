@@ -36,8 +36,15 @@ from pathlib import Path
 from treasureiq.catalog import SnapshotStore, persist_shadow_snapshots
 from treasureiq.connettore import leggi_connettore
 from treasureiq.integration import DATA_DIR, load_enti
+from treasureiq.municipality_registry import (
+    FrameInvalidError,
+    FrameIOError,
+    MunicipalityRecord,
+    get_registry,
+)
 from treasureiq.registro import LIVE_DIR, _da_store
-from treasureiq.sonda_live import COMUNI_ISTAT_PATH, comune_per_codice
+import treasureiq.sonda_live as sonda_live
+from treasureiq.sonda_live import comune_per_codice
 
 #: Piattaforme che `leggi_connettore` sa davvero leggere oggi. Tenere in
 #: sincrono con i dispatch in connettore.py — aggiungerne una lì senza
@@ -71,13 +78,22 @@ def _comuni_coperti() -> list[str]:
     return sorted(load_enti().keys())
 
 
-def _comuni_tutti() -> list[str]:
-    if not COMUNI_ISTAT_PATH.exists():
+def _registry_or_exit():
+    path = sonda_live.COMUNI_ISTAT_PATH
+    try:
+        return get_registry(path)
+    except FrameIOError as exc:
         raise SystemExit(
-            f"comuni-istat.json assente ({COMUNI_ISTAT_PATH}): esegui 'make frame-nazionale'."
-        )
-    grezzo = json.loads(COMUNI_ISTAT_PATH.read_text("utf-8"))
-    return sorted(r["codice_istat"] for r in grezzo)
+            f"comuni-istat.json assente ({path}): esegui 'make frame-nazionale'."
+        ) from exc
+    except FrameInvalidError as exc:
+        codici = ", ".join(sorted({issue.code for issue in exc.report.blocking}))
+        raise SystemExit(f"comuni-istat.json invalido ({path}): {codici}") from exc
+
+
+def _comuni_tutti() -> list[str]:
+    registry = _registry_or_exit()
+    return sorted(record.codice_istat for record in registry.frame.tutti())
 
 
 def _comuni_da_censimento(db: Path) -> list[str]:
@@ -227,16 +243,12 @@ def cmd_scan(args: argparse.Namespace) -> int:
     return 0
 
 
-def _anagrafe_comuni() -> dict[str, dict]:
+def _anagrafe_comuni() -> dict[str, MunicipalityRecord]:
     """Anagrafe ISTAT indicizzata per codice — serve sia a costruire i dict
     comune per `censisci_molti`, sia come lookup provincia/regione/sito per
     `_registra`."""
-    if not COMUNI_ISTAT_PATH.exists():
-        raise SystemExit(
-            f"comuni-istat.json assente ({COMUNI_ISTAT_PATH}): esegui 'make frame-nazionale'."
-        )
-    elenco = json.loads(COMUNI_ISTAT_PATH.read_text("utf-8"))
-    return {r["codice_istat"]: r for r in elenco}
+    registry = _registry_or_exit()
+    return {record.codice_istat: record for record in registry.frame.tutti()}
 
 
 def _fase_censimento(comuni_istat: list[str], args: argparse.Namespace) -> tuple[int, int]:
@@ -249,7 +261,8 @@ def _fase_censimento(comuni_istat: list[str], args: argparse.Namespace) -> tuple
 
     from treasureiq.ingest.censimento import _gia_registrati, _registra, censisci_molti
 
-    anagrafe = _anagrafe_comuni()
+    anagrafe_records = _anagrafe_comuni()
+    anagrafe = {codice: record.model_dump() for codice, record in anagrafe_records.items()}
     oggi = datetime.now(timezone.utc).date()
     gia_fatti = _gia_registrati(args.db, oggi)
     da_misurare = [

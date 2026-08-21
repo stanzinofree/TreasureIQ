@@ -21,6 +21,7 @@ import json
 import sys
 
 from treasureiq.integration import DATA_DIR, load_enti
+from treasureiq.municipality_registry import FrameIOError, FrameInvalidError, get_registry
 from treasureiq.sonda_live import LIVE_DIR, OrariLive, risolvi_comune
 
 
@@ -44,9 +45,23 @@ def _stato(_args: argparse.Namespace) -> int:
         print(f"    {ente.codice_istat}  {ente.ente:32} {ente.access_mode.value}")
 
     frame = DATA_DIR / "comuni-istat.json"
-    if frame.exists():
-        comuni = json.loads(frame.read_text("utf-8"))
-        con_sito = sum(1 for c in comuni if c.get("sito"))
+    try:
+        registry = get_registry(frame)
+    except FrameIOError:
+        # The report is intentionally best-effort: absence of the national
+        # frame was historically represented by omitting this section.
+        registry = None
+    except FrameInvalidError as exc:
+        print(
+            "  (frame nazionale invalido: "
+            + ", ".join(sorted({issue.code for issue in exc.report.blocking}))
+            + ")",
+            file=sys.stderr,
+        )
+        registry = None
+    if registry is not None:
+        comuni = registry.frame.tutti()
+        con_sito = sum(1 for comune in comuni if comune.sito)
         print(f"\nFRAME NAZIONALE               : {len(comuni)} comuni, {con_sito} con sito")
 
     t0 = DATA_DIR / "censimento-t0.json"

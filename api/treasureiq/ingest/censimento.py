@@ -93,6 +93,12 @@ from treasureiq.ingest.piattaforma import (
     firma_da_risposta,
     impronta_grezza,
 )
+from treasureiq.municipality_registry import (
+    FrameInvalidError,
+    FrameIOError,
+    MunicipalityRecord,
+    get_registry,
+)
 from treasureiq.ingest.wp_comuni import strip_html
 
 logger = logging.getLogger(__name__)
@@ -1448,12 +1454,25 @@ def main(argv: list[str] | None = None) -> int:
     return 0
 
 
-def _anagrafe() -> dict[str, dict]:
-    """I comuni ISTAT per codice: provincia e regione senza chiedere niente a nessuno."""
+def _frame_records() -> list[MunicipalityRecord]:
+    """Carica una sola volta il frame nazionale, con un fail-mode da batch."""
     from treasureiq.integration import DATA_DIR
 
-    elenco = json.loads((DATA_DIR / "comuni-istat.json").read_text("utf-8"))
-    return {c["codice_istat"]: c for c in elenco}
+    path = DATA_DIR / "comuni-istat.json"
+    try:
+        return get_registry(path).frame.tutti()
+    except FrameIOError as exc:
+        raise SystemExit(
+            f"comuni-istat.json assente ({path}): esegui 'make frame-nazionale'."
+        ) from exc
+    except FrameInvalidError as exc:
+        codici = ", ".join(sorted({issue.code for issue in exc.report.blocking}))
+        raise SystemExit(f"comuni-istat.json invalido ({path}): {codici}") from exc
+
+
+def _anagrafe() -> dict[str, dict]:
+    """I comuni ISTAT per codice: provincia e regione senza chiedere niente a nessuno."""
+    return {record.codice_istat: record.model_dump() for record in _frame_records()}
 
 
 def _registra(
@@ -1587,10 +1606,9 @@ def _raccogli(args: argparse.Namespace) -> list[EsitoCensimento]:
     leggi_pagina = not args.solo_asse_a
 
     if getattr(args, "solo_misurabili", False):
-        from treasureiq.integration import DATA_DIR
         from treasureiq.storico import apri
 
-        elenco = json.loads((DATA_DIR / "comuni-istat.json").read_text("utf-8"))
+        elenco = [record.model_dump() for record in _frame_records()]
         oggi = datetime.now(timezone.utc).date()
         misurabili = {
             Piattaforma.WP_DESIGN_COMUNI.value,
@@ -1632,9 +1650,7 @@ def _raccogli(args: argparse.Namespace) -> list[EsitoCensimento]:
         )
 
     if getattr(args, "solo_ignoti", False):
-        from treasureiq.integration import DATA_DIR
-
-        elenco = json.loads((DATA_DIR / "comuni-istat.json").read_text("utf-8"))
+        elenco = [record.model_dump() for record in _frame_records()]
         oggi = datetime.now(timezone.utc).date()
         da_rileggere = _ignoti(args.db, oggi)
         scelti = [c for c in elenco if c["codice_istat"] in da_rileggere]
@@ -1667,9 +1683,7 @@ def _raccogli(args: argparse.Namespace) -> list[EsitoCensimento]:
         )
 
     if args.tutti:
-        from treasureiq.integration import DATA_DIR
-
-        elenco = json.loads((DATA_DIR / "comuni-istat.json").read_text("utf-8"))
+        elenco = [record.model_dump() for record in _frame_records()]
         fatti = _gia_registrati(args.db, datetime.now(timezone.utc).date()) if args.riprendi else set()
         scelti = [c for c in elenco if c["codice_istat"] not in fatti]
         print(
@@ -1704,9 +1718,7 @@ def _raccogli(args: argparse.Namespace) -> list[EsitoCensimento]:
         )
 
     if args.campione:
-        from treasureiq.integration import DATA_DIR
-
-        elenco = json.loads((DATA_DIR / "comuni-istat.json").read_text("utf-8"))
+        elenco = [record.model_dump() for record in _frame_records()]
         scelti = campiona(elenco, quanti=args.campione, seme=args.seme)
         print(
             f"campione: {len(scelti)} comuni su {len(elenco)}, seme {args.seme}",

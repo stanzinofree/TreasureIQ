@@ -81,7 +81,9 @@ test: ## Esegue la suite nello stage dev
 	docker build -q -t treasureiq-api-dev --target dev api
 	docker run --rm \
 		-v "$(PWD)/api:/src" -v "$(PWD)/data:/data:ro" \
-		-e TREASUREIQ_DATA_DIR=/data -w /src \
+		--tmpfs /test-state:rw,exec,nosuid,nodev \
+		-e TREASUREIQ_DATA_DIR=/data \
+		-e TREASUREIQ_CONVERSATION_DB=/test-state/conversations.sqlite3 -w /src \
 		treasureiq-api-dev python -m pytest -q
 
 # --- Dati ---------------------------------------------------------------

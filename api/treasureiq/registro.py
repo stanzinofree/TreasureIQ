@@ -32,6 +32,7 @@ from treasureiq.connettore import EsitoConnettore
 from treasureiq.ingest.host_guard import fetch_guardato
 from treasureiq.integration import DATA_DIR
 from treasureiq.mappa_connettore import _base_con_schema, _host_senza_www
+from treasureiq.municipality_registry import FrameInvalidError, FrameIOError, get_registry
 from treasureiq.sonda_live import LIVE_DIR, ComuneNoto
 
 logger = logging.getLogger(__name__)
@@ -77,16 +78,20 @@ def _carica_comuni_ipa() -> dict[str, str]:
     global _comuni_ipa_cache
     if _comuni_ipa_cache is None:
         try:
-            import json
-
-            righe = json.loads(_COMUNI_ISTAT_PATH.read_text("utf-8"))
-            _comuni_ipa_cache = {
-                r["codice_istat"]: r["codice_ipa"]
-                for r in righe
-                if r.get("codice_istat") and r.get("codice_ipa")
-            }
-        except Exception:  # noqa: BLE001 — elenco assente = nessun codice
-            logger.warning("comuni-istat.json assente/illeggibile: %s", _COMUNI_ISTAT_PATH)
+            _comuni_ipa_cache = get_registry(_COMUNI_ISTAT_PATH).ipa_map()
+        except FrameIOError:
+            logger.warning(
+                "comuni-istat.json assente/illeggibile (I/O): %s",
+                _COMUNI_ISTAT_PATH,
+            )
+            _comuni_ipa_cache = {}
+        except FrameInvalidError as exc:
+            codici = ", ".join(sorted({issue.code for issue in exc.report.blocking}))
+            logger.warning(
+                "comuni-istat.json invalido: %s (%s)",
+                _COMUNI_ISTAT_PATH,
+                codici,
+            )
             _comuni_ipa_cache = {}
     return _comuni_ipa_cache
 

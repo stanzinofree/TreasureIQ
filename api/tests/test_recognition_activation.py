@@ -44,6 +44,21 @@ def test_native_plugin_owns_wordpress_base_in_production_registry():
     assert match.result.platform_id == "wordpress_generico"
 
 
+def test_native_urbi_owns_transparency_in_production_registry():
+    registry = build_recognition_registry()
+    body = '<a href="/portale/ur1UR033.sto?ente=x">Amministrazione Trasparente</a>'
+    match = registry.recognize(_observe(body, surface=Surface.TRANSPARENCY))
+    assert match is not None
+    assert match.manifest.plugin_id == "urbi_at"
+    assert match.result.platform_id == "urbi"
+    # Same page still classifies through the bridge — the native plugin must
+    # win the tie, not lose to the wildcard fallback.
+    bridge = LegacyRecognitionBridge(Surface.TRANSPARENCY).recognize(
+        _observe(body, surface=Surface.TRANSPARENCY)
+    )
+    assert match.result.recognition_score == bridge.recognition_score
+
+
 def test_bridge_still_wins_non_wordpress_surface():
     registry = build_recognition_registry()
     # A Drupal header the native WordPress plugin cannot claim: the bridge must

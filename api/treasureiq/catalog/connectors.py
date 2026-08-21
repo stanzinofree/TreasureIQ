@@ -20,6 +20,7 @@ from treasureiq.catalog.data_contracts import (
     TransportMeta,
     _StrictModel,
 )
+from treasureiq.catalog.service_contracts import ServiceReference
 from treasureiq.connettore import EsitoConnettore
 from treasureiq.mappa_connettore import MappaConnettore
 
@@ -32,6 +33,7 @@ class ConnectorResult(_StrictModel):
     status: DataStatus
     access_mode: AccessMode
     records: tuple[dict[str, Any], ...] = ()
+    service_references: tuple[ServiceReference, ...] = ()
     evidence: tuple[EvidenceRef, ...] = ()
     freshness: Freshness
     limitations: tuple[str, ...] = ()

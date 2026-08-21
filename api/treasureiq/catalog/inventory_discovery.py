@@ -1,0 +1,77 @@
+"""Independent source-inventory discovery.
+
+This is intentionally upstream of data connectors: an unsupported BASE
+platform must still produce a useful AT/SP inventory.
+"""
+
+from __future__ import annotations
+
+from datetime import datetime, timezone
+from pathlib import Path
+from urllib.parse import urlsplit
+
+from treasureiq.catalog.service_discovery import (
+    discover_service_portal_candidates,
+    update_source_inventory,
+)
+from treasureiq.ingest.censimento import scopri_pagina_at
+from treasureiq.ingest.host_guard import fetch_guardato, host_senza_www
+from treasureiq.ingest.piattaforma import classifica_risposta
+
+
+def discover_source_inventory(
+    *, live_dir: Path, source_id: str, base_url: str, timeout: float = 8.0
+):
+    """Discover BASE/AT/SP facts without invoking a data connector."""
+    base_url = base_url.strip()
+    if not base_url.startswith(("http://", "https://")):
+        base_url = "https://" + base_url
+    parsed = urlsplit(base_url)
+    host = parsed.hostname
+    if parsed.scheme not in {"http", "https"} or not host:
+        return None
+    fetched = fetch_guardato(
+        base_url, timeout=timeout, max_bytes=1_000_000,
+        host_atteso=host_senza_www(host.lower()),
+        return_non_200=True,
+    )
+    if fetched is None:
+        return update_source_inventory(
+            live_dir=live_dir, source_id=source_id, base_url=base_url,
+            base_platform=None, base_fingerprint=None,
+            transparency_url=None, transparency_platform=None, candidates=(),
+            confirmed_at=datetime.now(timezone.utc), base_source_health=False,
+            base_failure_reason="entrypoint_unreachable",
+        )
+    headers, data, final_url, *status_tail = fetched
+    status_code = status_tail[0] if status_tail else 200
+    if status_code != 200:
+        return update_source_inventory(
+            live_dir=live_dir, source_id=source_id, base_url=final_url,
+            base_platform=None, base_fingerprint=None,
+            transparency_url=None, transparency_platform=None, candidates=(),
+            confirmed_at=datetime.now(timezone.utc), base_source_health=True,
+            base_failure_reason=f"http_{status_code}",
+        )
+    html_home = data.decode("utf-8", errors="replace")
+    base = classifica_risposta(
+        headers=dict(headers), html=html_home, includi_at=False
+    ).vincitore
+    at = scopri_pagina_at(html_home=html_home, base=final_url)
+    now = datetime.now(timezone.utc)
+    return update_source_inventory(
+        live_dir=live_dir,
+        source_id=source_id,
+        base_url=final_url,
+        base_platform=base.piattaforma.value,
+        base_fingerprint=None,
+        transparency_url=at.at_url,
+        transparency_platform=at.piattaforma_at.value if at.at_url else None,
+        candidates=discover_service_portal_candidates(
+            base_url=final_url,
+            html_home=html_home,
+            base_platform=base.piattaforma.value,
+            discovered_at=now,
+        ),
+        confirmed_at=now,
+    )

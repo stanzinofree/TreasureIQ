@@ -22,6 +22,7 @@ def batch_from_connector_result(request: DataRequest, result: ConnectorResult) -
         surface=request.surface,
         capability=request.capability,
         records=result.records,
+        service_references=result.service_references,
         evidence=result.evidence,
         freshness=result.freshness,
         limitations=result.limitations,

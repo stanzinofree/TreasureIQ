@@ -9,6 +9,7 @@ from typing import Any
 from pydantic import BaseModel, ConfigDict, Field
 
 from treasureiq.catalog.contracts import AccessMode, FreshnessStatus, Surface
+from treasureiq.catalog.service_contracts import ServiceReference
 
 
 class _StrictModel(BaseModel):
@@ -83,6 +84,7 @@ class DataBatch(_StrictModel):
     surface: Surface
     capability: str = Field(min_length=1)
     records: tuple[dict[str, Any], ...] = ()
+    service_references: tuple[ServiceReference, ...] = ()
     evidence: tuple[EvidenceRef, ...] = ()
     freshness: Freshness
     limitations: tuple[str, ...] = ()

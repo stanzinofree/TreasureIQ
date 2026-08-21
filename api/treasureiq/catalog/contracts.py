@@ -12,8 +12,10 @@ class _StrictModel(BaseModel):
 
 
 class Surface(str, Enum):
+    SOURCE_IDENTITY = "source_identity"
     ORDINARY_DATA = "ordinary_data"
     TRANSPARENCY = "transparency"
+    SERVICE_PORTAL = "service_portal"
 
 
 class AccessMode(str, Enum):

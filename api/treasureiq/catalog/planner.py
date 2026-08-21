@@ -66,6 +66,7 @@ def request_from_recognition(
     *,
     source_id: str,
     capability_override: str | None = None,
+    surface_override: Surface | None = None,
 ) -> DataRequest:
     """Translate the closed chat contract into a deterministic data request.
 
@@ -75,7 +76,9 @@ def request_from_recognition(
 
     topic = recognition.intent.topic.value
     kind = recognition.intent.kind.value
-    surface = Surface.TRANSPARENCY if topic == "bandi" else Surface.ORDINARY_DATA
+    surface = surface_override or (
+        Surface.TRANSPARENCY if topic == "bandi" else Surface.ORDINARY_DATA
+    )
     capability = capability_override or _CAPABILITY_BY_TOPIC.get(
         topic, "opportunities" if kind == "agevolazione" else "services"
     )
@@ -91,6 +94,29 @@ def request_from_recognition(
     )
 
 
+def service_portal_request(
+    *,
+    source_id: str,
+    service_id: str,
+    capability: str = "authenticated_service",
+    freshness: FreshnessPolicy | None = None,
+) -> DataRequest:
+    """Build the deterministic request for a previously discovered service.
+
+    ``service_id`` must come from a ``ServiceReference`` selected by the
+    recognition layer.  Free text and authentication details never enter this
+    constructor.
+    """
+
+    return DataRequest(
+        request_id=f"chat:{source_id}:{Surface.SERVICE_PORTAL.value}:{service_id}",
+        source_id=source_id,
+        surface=Surface.SERVICE_PORTAL,
+        capability=capability,
+        selection={"service_id": service_id},
+        freshness=freshness or FreshnessPolicy(max_age_seconds=86400),
+        manifest_revision=1,
+    )
 def select_batch(plan: QueryPlan, batches: tuple[DataBatch, ...]) -> DataBatch | None:
     """Select the best result using only the plan and batch metadata.
 

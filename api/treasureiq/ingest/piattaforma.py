@@ -137,6 +137,10 @@ class Piattaforma(str, Enum):
     #: eventuale OpenWeb "base" perché qui è la pagina AT stessa a vivere sul
     #: dominio del fornitore. Mono-campione (Melito).
     SOLUZIONIPA = "soluzionipa"
+    #: URBI: superficie AT/servizi online riconoscibile dalla rotta applicativa
+    #: `ur1UR033.sto` e dagli asset `/urbi/`. La rotta è più significativa del
+    #: solo host perché lo stesso comune può avere più superfici URBI.
+    URBI = "urbi"
     #: Risponde, ma nessuna firma nota. È la voce che dice quanta strada
     #: resta: se cresce, servono firme nuove, non connettori nuovi.
     IGNOTA = "ignota"
@@ -206,6 +210,11 @@ _HOST_PRODOTTO: tuple[tuple[re.Pattern[str], Piattaforma], ...] = (
     #: Mono-campione (Melito).
     (re.compile(r"soluzionipa\.it", re.I), Piattaforma.SOLUZIONIPA),
 )
+
+#: Endpoint AT URBI. Richiediamo la rotta applicativa, non la sola parola
+#: "urbi" negli asset Bootstrap, per non classificare per errore una pagina
+#: BASE che incorpora soltanto lo stile del portale servizi.
+_URBI_AT = re.compile(r"ur1UR033\.sto", re.I)
 
 #: Body class del tema `design-comuni-wordpress-theme` sull'archivio
 #: dell'Amministrazione Trasparente. Mono-campione (Neive) ma la stringa è
@@ -387,6 +396,7 @@ _RANGO_TAVOLA = {
     "wp_amm_trasp": 8,
     "halley_trasparenza": 9,
     "portale33": 10,
+    "urbi_at": 11,
 }
 _EPSILON_RANGO_TAVOLA = 0.1
 
@@ -402,6 +412,7 @@ _FAMIGLIA_AT = frozenset(
         Piattaforma.HYPERSIC,
         Piattaforma.PORTALE33,
         Piattaforma.SOLUZIONIPA,
+        Piattaforma.URBI,
     }
 )
 
@@ -550,6 +561,18 @@ def classifica_risposta(
                 Piattaforma.PORTALE33,
                 _score(_SCORE_DEFINITIVO, "portale33"),
                 f"layout: {_tronca(trovato_portale33.group(0), 40)}",
+            )
+        )
+
+    trovato_urbi = _URBI_AT.search(corpo)
+    if trovato_urbi:
+        # La rotta URBI è una firma funzionale della superficie AT: non è
+        # sufficiente un asset generico `/urbi/`, serve la rotta applicativa.
+        scattate.append(
+            FirmaScattata(
+                Piattaforma.URBI,
+                _score(_SCORE_DEFINITIVO, "urbi_at"),
+                f"rotta URBI AT: {_tronca(trovato_urbi.group(0), 60)}",
             )
         )
 

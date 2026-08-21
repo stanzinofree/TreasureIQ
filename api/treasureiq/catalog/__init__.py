@@ -22,6 +22,15 @@ from treasureiq.catalog.contracts import (
     SectionStatus,
     Surface,
 )
+from treasureiq.catalog.service_contracts import (
+    AuthenticationMethod,
+    ServiceAccessMode,
+    ServiceAccessOption,
+    ServicePortalCandidate,
+    ServicePortalRole,
+    ServiceReference,
+    SourceInventory,
+)
 from treasureiq.catalog.connectors import ConnectorResult, SourceConnector
 from treasureiq.catalog.connector_defaults import default_connector_registry
 from treasureiq.catalog.connector_registry import ConnectorRegistry
@@ -48,9 +57,40 @@ from treasureiq.catalog.planner import (
     QueryStep,
     build_query_plan,
     request_from_recognition,
+    service_portal_request,
     select_batch,
 )
 from treasureiq.catalog.plugins import CapabilityManifest, PluginManifest
+from treasureiq.catalog.recognition import (
+    ConnectorVersionManifest,
+    FingerprintEvidence,
+    RecognitionAction,
+    RecognitionConfidence,
+    RecognitionResult,
+    ResweepPolicy,
+    action_for_recognition,
+    score_evidence,
+)
+from treasureiq.catalog.recognition_plugins import (
+    RecognitionObservation,
+    RecognitionPlugin,
+    RecognitionPluginManifest,
+    RecognitionPluginResult,
+)
+from treasureiq.catalog.recognition_registry import (
+    RecognitionMatch,
+    RecognitionRegistry,
+    build_recognition_result,
+)
+from treasureiq.catalog.recognition_bridge import (
+    LegacyRecognitionBridge,
+    build_bridge_registry,
+)
+from treasureiq.catalog.checks import CheckResult, CheckStatus, source_identity_check
+from treasureiq.catalog.confirmation import confirm_inventory
+from treasureiq.catalog.discovery_profiles import DiscoveryProfile, profile_for_base
+from treasureiq.catalog.inventory_discovery import discover_source_inventory
+from treasureiq.catalog.service_portals import group_service_portal_candidates
 from treasureiq.catalog.registry import PlatformRegistry
 from treasureiq.catalog.shadow import municipality_snapshots, platform_snapshot
 from treasureiq.catalog.shadow_run import persist_shadow_snapshots
@@ -63,6 +103,7 @@ from treasureiq.catalog.store import SnapshotStore
 __all__ = [
     "AccessContract",
     "AccessMode",
+    "AuthenticationMethod",
     "AdapterRegistry",
     "AgidCompatibility",
     "CapabilityStatus",
@@ -74,6 +115,10 @@ __all__ = [
     "SourceConnector",
     "default_connector_registry",
     "CapabilityManifest",
+    "CheckResult",
+    "CheckStatus",
+    "ConnectorVersionManifest",
+    "FingerprintEvidence",
     "WordPressAgidAdapter",
     "WordPressAgidConnector",
     "WebScrapeConnector",
@@ -100,18 +145,46 @@ __all__ = [
     "PlatformSnapshot",
     "PlatformRegistry",
     "PluginManifest",
+    "RecognitionAction",
+    "RecognitionConfidence",
+    "RecognitionResult",
+    "RecognitionObservation",
+    "RecognitionPlugin",
+    "RecognitionPluginManifest",
+    "RecognitionPluginResult",
+    "RecognitionMatch",
+    "RecognitionRegistry",
+    "build_recognition_result",
+    "LegacyRecognitionBridge",
+    "build_bridge_registry",
     "QueryPlan",
     "QueryStep",
     "SnapshotStore",
     "SectionStatus",
+    "ServiceAccessMode",
+    "ServiceAccessOption",
+    "ServicePortalCandidate",
+    "ServicePortalRole",
+    "ServiceReference",
+    "SourceInventory",
+    "ResweepPolicy",
     "Surface",
     "TransportMeta",
     "compare_snapshots",
     "build_query_plan",
     "request_from_recognition",
+    "service_portal_request",
     "default_adapter_registry",
     "municipality_snapshots",
     "platform_snapshot",
     "persist_shadow_snapshots",
     "select_batch",
+    "action_for_recognition",
+    "score_evidence",
+    "source_identity_check",
+    "confirm_inventory",
+    "DiscoveryProfile",
+    "profile_for_base",
+    "discover_source_inventory",
+    "group_service_portal_candidates",
 ]

@@ -1,0 +1,126 @@
+"""Contracts for municipal online services and authenticated portals.
+
+The institutional site remains the discovery surface for a service, but the
+service itself has a separate contract.  This keeps a downloadable form,
+instructions and an authenticated procedure as distinct access options
+without pretending that TIQ can perform a citizen's authentication.
+"""
+
+from __future__ import annotations
+
+from datetime import datetime
+from enum import Enum
+
+from pydantic import AnyHttpUrl, Field
+
+from treasureiq.catalog.contracts import Surface, _StrictModel
+
+
+class ServiceAccessMode(str, Enum):
+    INFORMATION = "information"
+    DOWNLOAD = "download"
+    AUTHENTICATED_ONLINE = "authenticated_online"
+
+
+class AuthenticationMethod(str, Enum):
+    SPID = "spid"
+    CIE = "cie"
+    CNS = "cns"
+    PASSWORD = "password"
+    UNKNOWN = "unknown"
+
+
+class ServicePortalRole(str, Enum):
+    PERSONAL_AREA = "personal_area"
+    APPOINTMENT = "appointment"
+    TELEMATICS_DESK = "telematics_desk"
+    ONLINE_SERVICE = "online_service"
+    UNKNOWN = "unknown"
+
+
+class ServiceAccessOption(_StrictModel):
+    """One official way to reach a service discovered by a connector."""
+
+    mode: ServiceAccessMode
+    url: AnyHttpUrl
+    provider: str | None = None
+    authentication: tuple[AuthenticationMethod, ...] = ()
+    requires_authentication: bool = False
+    official: bool = True
+    source_url: AnyHttpUrl | None = None
+    automatable: bool = False
+
+
+class ServiceReference(_StrictModel):
+    """A normalized service reference emitted by BASE discovery.
+
+    ``options`` can contain both a public/download path and an authenticated
+    online path for the same service.  The query planner later chooses the
+    requested path; it never infers credentials or logs in.
+    """
+
+    service_id: str = Field(min_length=1)
+    title: str = Field(min_length=1)
+    source_url: AnyHttpUrl
+    options: tuple[ServiceAccessOption, ...] = Field(min_length=1)
+    discovered_from: Surface = Surface.ORDINARY_DATA
+    provider_platform: str | None = None
+    discovered_at: datetime
+
+
+class ServicePortalCandidate(_StrictModel):
+    """A persisted SP entrypoint found on the official BASE site.
+
+    ``url`` is deliberately the URL used by confirmation checks.  Discovery
+    metadata remains alongside it so a broken entrypoint can trigger a new
+    discovery without confusing the last known portal with a guessed URL.
+    """
+
+    url: AnyHttpUrl
+    label: str = Field(min_length=1)
+    source_url: AnyHttpUrl
+    role: ServicePortalRole = ServicePortalRole.UNKNOWN
+    access_mode: ServiceAccessMode = ServiceAccessMode.AUTHENTICATED_ONLINE
+    provider_hint: str | None = None
+    platform_id: str | None = None
+    fingerprint: str | None = None
+    recognition_status: str = "unknown"
+    capabilities: tuple[str, ...] = ()
+    authentication: tuple[AuthenticationMethod, ...] = ()
+    discovered_at: datetime
+
+
+class ServicePortalGroup(_StrictModel):
+    """Logical SP portal grouping one platform and its capabilities."""
+
+    portal_id: str = Field(min_length=1)
+    platform_id: str | None = None
+    entrypoints: tuple[AnyHttpUrl, ...] = Field(min_length=1)
+    roles: tuple[ServicePortalRole, ...] = ()
+    capabilities: tuple[str, ...] = ()
+    recognition_status: str = "unknown"
+
+
+class SourceInventory(_StrictModel):
+    """Persistent inventory of source entrypoints for a municipality.
+
+    ``transparency_url`` is the persisted AT entrypoint (not merely the page
+    where discovery started); each ``service_portals[].url`` is an SP
+    entrypoint.  Confirmation checks must start from these URLs and never
+    rediscover the institutional home unless confirmation fails.
+    """
+
+    source_id: str = Field(min_length=1)
+    base_url: AnyHttpUrl
+    base_platform: str | None = None
+    base_fingerprint: str | None = None
+    base_confirmed_at: datetime | None = None
+    base_source_health: bool | None = None
+    base_failure_reason: str | None = None
+    transparency_url: AnyHttpUrl | None = None
+    transparency_platform: str | None = None
+    transparency_fingerprint: str | None = None
+    transparency_confirmed_at: datetime | None = None
+    service_portals: tuple[ServicePortalCandidate, ...] = ()
+    service_portal_groups: tuple[ServicePortalGroup, ...] = ()
+    updated_at: datetime

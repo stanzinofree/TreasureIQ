@@ -63,6 +63,15 @@ from treasureiq.mappa_connettore import (
     mappa_connettore,
 )
 from treasureiq.sonda_live import ComuneNoto
+from treasureiq.catalog.recognition import (
+    ConnectorVersionManifest,
+    FingerprintEvidence,
+    RecognitionConfidence,
+    RecognitionResult,
+    Surface,
+    action_for_recognition,
+    score_evidence,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -70,6 +79,14 @@ logger = logging.getLogger(__name__)
 #: `openweb.PIATTAFORMA_OPENWEB` — copre più membri dell'enum `Piattaforma`
 #: a monte, quindi non ha senso legarla a uno solo).
 PIATTAFORMA_WORDPRESS_AGID = "wordpress_agid"
+CONNECTOR_MANIFEST = ConnectorVersionManifest(
+    connector_id="wordpress_agid_base",
+    version="1.0.0",
+    contract_version="catalog.v1",
+    fingerprint_version="1.0",
+    surfaces=(Surface.ORDINARY_DATA,),
+    platforms=("wp_design_comuni", "wordpress_generico", "comunibootstrapitalia"),
+)
 
 #: Cap difensivo sul numero di uffici estratti — stesso taglio di
 #: `openweb.MAX_UFFICI_INDICE`/`peopleweb.MAX_UFFICI_INDICE`.
@@ -148,6 +165,72 @@ def _leggi_at_wordpress_agid(
     return None
 
 
+def _riconoscimento(
+    *, mappa: MappaConnettore | None, base: str | None,
+    uffici: list[UfficioConnettore],
+    at: AmministrazioneTrasparente | None,
+    sonda: _Sonda,
+    source_id: str,
+) -> RecognitionResult:
+    evidence = (
+        FingerprintEvidence(
+            key="connector_map", description="mappa WordPress disponibile",
+            matched=mappa is not None, weight=0.35,
+        ),
+        FingerprintEvidence(
+            key="base_schema", description="URL BASE con schema HTTP",
+            matched=base is not None, weight=0.15, observed=base,
+        ),
+        FingerprintEvidence(
+            key="rest_offices_declared", description="REST uffici dichiarato",
+            matched=bool(mappa and mappa.uffici.esposto and mappa.uffici.rest_base),
+            weight=0.25,
+            observed=mappa.uffici.rest_base if mappa else None,
+        ),
+        FingerprintEvidence(
+            key="at_surface", description="superficie AT confermata",
+            matched=at is not None or bool(mappa and mappa.amministrazione_trasparente_via == "REST"),
+            weight=0.25,
+        ),
+    )
+    score = score_evidence(evidence)
+    expected = int(mappa is not None)
+    # Add the office collection only when the map declares it. The base
+    # connector/AT surface is otherwise the single expected capability slot.
+    expected += int(bool(mappa and mappa.uffici.esposto and mappa.uffici.rest_base))
+    recovered = int(bool(uffici)) + int(at is not None)
+    coverage = min(1.0, recovered / expected) if expected else None
+    reason = None
+    if mappa is None:
+        reason = "connector_map_missing"
+    elif base is None:
+        reason = "base_url_missing"
+    elif expected and recovered < expected:
+        reason = "declared_capability_not_recovered"
+    action = action_for_recognition(score=score, policy=CONNECTOR_MANIFEST.policy)
+    confidence = (
+        RecognitionConfidence.HIGH if score >= 0.80
+        else RecognitionConfidence.MEDIUM if score >= 0.60
+        else RecognitionConfidence.LOW
+    )
+    return RecognitionResult(
+        source_id=source_id,
+        surface=Surface.ORDINARY_DATA,
+        platform_id=mappa.piattaforma_id if mappa and mappa.piattaforma_id else PIATTAFORMA_WORDPRESS_AGID,
+        connector_id=CONNECTOR_MANIFEST.connector_id,
+        connector_version=CONNECTOR_MANIFEST.version,
+        fingerprint_version=CONNECTOR_MANIFEST.fingerprint_version,
+        recognition_score=score,
+        coverage_score=coverage,
+        confidence=confidence,
+        source_health=sonda.raggiungibile,
+        failure_reason=reason,
+        evidence=evidence,
+        checked_at=datetime.now(timezone.utc),
+        action=action,
+    )
+
+
 def estrai_logo_wordpress_agid(pagina_home: str, base: str, host_comune: str) -> str | None:
     """Il logo del comune dal brand Bootstrap-Italia della home. Le famiglie
     WP-AgID condividono il tema con openweb/peopleweb ma non uniformemente:
@@ -205,6 +288,10 @@ def leggi_wordpress_agid(comune: ComuneNoto, sonda: _Sonda) -> EsitoConnettore:
             codice_istat=comune.codice_istat,
             piattaforma=PIATTAFORMA_WORDPRESS_AGID,
             letto_il=letto_il,
+            riconoscimento=_riconoscimento(
+                mappa=None, base=None, uffici=[], at=None, sonda=sonda,
+                source_id=comune.codice_istat,
+            ).model_dump(),
         )
     base = _base_con_schema(mappa.sito)
     if base is None:
@@ -212,6 +299,10 @@ def leggi_wordpress_agid(comune: ComuneNoto, sonda: _Sonda) -> EsitoConnettore:
             codice_istat=comune.codice_istat,
             piattaforma=PIATTAFORMA_WORDPRESS_AGID,
             letto_il=letto_il,
+            riconoscimento=_riconoscimento(
+                mappa=mappa, base=None, uffici=[], at=None, sonda=sonda,
+                source_id=comune.codice_istat,
+            ).model_dump(),
         )
 
     uffici: list[UfficioConnettore] = []
@@ -240,6 +331,14 @@ def leggi_wordpress_agid(comune: ComuneNoto, sonda: _Sonda) -> EsitoConnettore:
         aree_amministrative=aree_amministrative,
         uffici=uffici,
         amministrazione_trasparente=amministrazione_trasparente,
+        riconoscimento=_riconoscimento(
+            mappa=mappa,
+            base=base,
+            uffici=uffici,
+            at=amministrazione_trasparente,
+            sonda=sonda,
+            source_id=comune.codice_istat,
+        ).model_dump(),
     )
 
 

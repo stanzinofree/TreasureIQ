@@ -153,8 +153,10 @@ def build_recognition_registry():
     from treasureiq.plugins.recognition.at import (
         JCITYGOV_AT_RECOGNITION_PLUGIN,
         URBI_AT_RECOGNITION_PLUGIN,
+        WORDPRESS_AMM_TRASP_RECOGNITION_PLUGIN,
     )
     from treasureiq.plugins.recognition.base import (
+        COMWEB_RECOGNITION_PLUGIN,
         WORDPRESS_AGID_RECOGNITION_PLUGIN,
     )
     from treasureiq.plugins.recognition.service_portal import (
@@ -163,7 +165,9 @@ def build_recognition_registry():
 
     registry = build_bridge_registry()
     registry.register(WORDPRESS_AGID_RECOGNITION_PLUGIN)
+    registry.register(COMWEB_RECOGNITION_PLUGIN)
     registry.register(URBI_AT_RECOGNITION_PLUGIN)
     registry.register(JCITYGOV_AT_RECOGNITION_PLUGIN)
+    registry.register(WORDPRESS_AMM_TRASP_RECOGNITION_PLUGIN)
     registry.register(MUNICIPIUM_PORTALEGEN_RECOGNITION_PLUGIN)
     return registry

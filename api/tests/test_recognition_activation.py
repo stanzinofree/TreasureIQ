@@ -94,6 +94,32 @@ def test_native_portalegen_owns_service_portal_in_production_registry():
     assert match.result.recognition_score == bridge.recognition_score
 
 
+def test_native_comweb_owns_base_in_production_registry():
+    registry = build_recognition_registry()
+    body = '<meta name="generator" content="ComWeb ePublic 4.2">'
+    match = registry.recognize(_observe(body, surface=Surface.ORDINARY_DATA))
+    assert match is not None
+    assert match.manifest.plugin_id == "comweb_base"
+    assert match.result.platform_id == "comweb"
+    bridge = LegacyRecognitionBridge(Surface.ORDINARY_DATA).recognize(
+        _observe(body, surface=Surface.ORDINARY_DATA)
+    )
+    assert match.result.recognition_score == bridge.recognition_score
+
+
+def test_native_wp_amm_trasp_owns_transparency_in_production_registry():
+    registry = build_recognition_registry()
+    body = '<body class="post-type-archive-amm_trasp"></body>'
+    match = registry.recognize(_observe(body, surface=Surface.TRANSPARENCY))
+    assert match is not None
+    assert match.manifest.plugin_id == "wordpress_amm_trasp_at"
+    assert match.result.platform_id == "wp_amm_trasp"
+    bridge = LegacyRecognitionBridge(Surface.TRANSPARENCY).recognize(
+        _observe(body, surface=Surface.TRANSPARENCY)
+    )
+    assert match.result.recognition_score == bridge.recognition_score
+
+
 def test_bridge_still_wins_non_wordpress_surface():
     registry = build_recognition_registry()
     # A Drupal header the native WordPress plugin cannot claim: the bridge must

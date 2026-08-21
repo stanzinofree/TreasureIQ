@@ -129,6 +129,10 @@ services:
     volumes:
       - ./data:/scrivibile
       - ./data-live:/live
+    # Il worker non espone l'API HTTP: non deve ereditare l'healthcheck
+    # dell'immagine API, altrimenti Docker lo marca unhealthy e lo riavvia.
+    healthcheck:
+      disable: true
     restart: unless-stopped
 
   web:

@@ -85,7 +85,12 @@ def run(config: WorkerConfig) -> int:
         comuni = next_batch(config)
         if not comuni:
             logger.info("nessun comune residuo nel ciclo giornaliero")
-            return 0
+            if config.once:
+                return 0
+            # Keep the long-running container alive until the next UTC day;
+            # exiting would make restart: unless-stopped spin the container.
+            time.sleep(max(config.interval_seconds, 60.0))
+            continue
         started = time.monotonic()
         logger.info("avvio batch: %d comuni (%s)", len(comuni), ", ".join(comuni))
         result = run_batch(config, comuni)

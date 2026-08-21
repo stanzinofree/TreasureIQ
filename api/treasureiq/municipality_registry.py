@@ -75,6 +75,27 @@ class FrameInvalidError(ValueError):
         super().__init__(f"frame INVALID: {blocking}")
 
 
+def _avvisa_se_manifest_divergente(path: Path, text: str) -> None:
+    """Warning morbido se il frame non combacia col suo manifest (mai un errore)."""
+    try:
+        from treasureiq import frame_manifest
+
+        manifest = frame_manifest.read_manifest(path)
+        if manifest is None:
+            return
+        impronta = frame_manifest.sha256_of(text)
+        if impronta != manifest.sha256:
+            logger.warning(
+                "frame %s diverge dal manifest: sha256 %s… ≠ %s… — servo comunque "
+                "il frame; rigenera o riallinea il manifest.",
+                path,
+                impronta[:12],
+                manifest.sha256[:12],
+            )
+    except Exception:  # la provenienza non deve mai impedire il caricamento
+        logger.debug("verifica manifest saltata per %s", path, exc_info=True)
+
+
 def _norm(testo: str) -> str:
     """Chiave di confronto: senza accenti, senza punteggiatura, minuscola."""
     piatto = unicodedata.normalize("NFKD", testo)
@@ -166,6 +187,13 @@ class SourceFrame:
         report = FrameValidator().validate_text(text, baseline=baseline)
         if report.outcome is FrameOutcome.INVALID:
             raise FrameInvalidError(report)
+
+        # Provenienza (Step 5), registro morbido: se esiste un manifest sidecar
+        # e l'impronta non combacia, si logga un warning ma si serve comunque il
+        # frame — un manifest stale non deve mai lasciare un cittadino senza
+        # risposta. La verifica dura vive in build/CI (`make verify-frame`).
+        _avvisa_se_manifest_divergente(p, text)
+
         # Re-parse the validated text into records via from_validated's model
         # step; validate_text already confirmed it decodes to a list.
         import json

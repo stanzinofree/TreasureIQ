@@ -39,10 +39,13 @@ import re
 import sys
 import unicodedata
 from collections import defaultdict
+from datetime import datetime, timezone
 from pathlib import Path
 
 import httpx
 
+from treasureiq import frame_manifest
+from treasureiq.frame_validation import FrameOutcome, FrameValidator
 from treasureiq.ingest.base import USER_AGENT
 
 logger = logging.getLogger(__name__)
@@ -175,8 +178,155 @@ def unisci(comuni: list[dict], siti: dict[tuple[str, str], set[str]]) -> dict[st
     return conteggi
 
 
+def _now_iso() -> str:
+    """Istante di generazione, UTC, in ISO-8601 (per il manifest)."""
+    return datetime.now(timezone.utc).isoformat()
+
+
+def diff_upstream(frame_path: Path, istat_csv: Path) -> dict:
+    """Confronta il frame corrente con l'elenco ISTAT fresco. Solo lettura.
+
+    Torna gli scarti sull'insieme dei ``codice_istat``: comuni nuovi a monte,
+    comuni spariti dal frame (candidate soppressioni/fusioni) e comuni con lo
+    stesso codice ma nome diverso (rinomine). NON riscrive nulla: la decisione,
+    e a maggior ragione la migrazione fisica degli artefatti keyed sul codice,
+    è una fase coordinata separata (lock storage-lifecycle).
+    """
+    from treasureiq.municipality_registry import get_registry
+
+    upstream = {c["codice_istat"]: c["nome"] for c in leggi_istat(istat_csv)}
+    reg = get_registry(frame_path)
+    current = {r.codice_istat: r.nome for r in reg.frame.tutti()}
+
+    aggiunti = sorted(set(upstream) - set(current))
+    rimossi = sorted(set(current) - set(upstream))
+    rinominati = sorted(
+        cod
+        for cod in set(current) & set(upstream)
+        if norm(current[cod]) != norm(upstream[cod])
+    )
+    return {
+        "aggiunti": [{"codice": c, "nome": upstream[c]} for c in aggiunti],
+        "rimossi": [{"codice": c, "nome": current[c]} for c in rimossi],
+        "rinominati": [
+            {"codice": c, "prima": current[c], "dopo": upstream[c]} for c in rinominati
+        ],
+    }
+
+
+def pianifica_transizioni(diff: dict) -> list[dict]:
+    """Traduce il diff in transizioni amministrative da rivedere (non applicate).
+
+    Ogni voce è un cambiamento che tocca gli artefatti keyed sul codice ISTAT
+    (seed ``data/seed/{ente}_{codice}``, righe in ``storico.db``, snapshot del
+    catalogo). Applicarle — spostare o riscrivere quegli artefatti — è bloccato
+    finché storage-lifecycle non chiude il contratto dei root e il rollback:
+    qui si producono solo il piano e la sua motivazione.
+    """
+    piano: list[dict] = []
+    for voce in diff["rimossi"]:
+        piano.append(
+            {
+                "tipo": "SOPPRESSIONE_O_FUSIONE",
+                "codice": voce["codice"],
+                "nome": voce["nome"],
+                "azione": "rivedere: codice sparito a monte; verificare fusione "
+                "verso un nuovo codice prima di orfanare gli artefatti.",
+            }
+        )
+    for voce in diff["rinominati"]:
+        piano.append(
+            {
+                "tipo": "RINOMINA",
+                "codice": voce["codice"],
+                "azione": f"solo etichetta: «{voce['prima']}» → «{voce['dopo']}», "
+                "il codice resta; nessun artefatto da spostare.",
+            }
+        )
+    for voce in diff["aggiunti"]:
+        piano.append(
+            {
+                "tipo": "NUOVO",
+                "codice": voce["codice"],
+                "azione": f"nuovo comune «{voce['nome']}»: censibile, nessuna migrazione.",
+            }
+        )
+    return piano
+
+
+def _costruisci_frame(args: argparse.Namespace) -> tuple[list[dict], dict]:
+    """Scarica (o riusa) le sorgenti e ricostruisce le righe del frame."""
+    args.cartella_sorgenti.mkdir(parents=True, exist_ok=True)
+    istat = args.cartella_sorgenti / "istat_comuni.csv"
+    ipa = args.cartella_sorgenti / "ipa_amministrazioni.txt"
+
+    for percorso, url in ((istat, URL_ISTAT), (ipa, URL_IPA)):
+        if args.riusa_sorgenti and percorso.exists():
+            print(f"riuso {percorso}", file=sys.stderr)
+            continue
+        _scarica(url, percorso)
+
+    comuni = leggi_istat(istat)
+    conteggi = unisci(comuni, leggi_ipa(ipa))
+    return comuni, conteggi
+
+
+def _pubblica(comuni: list[dict], conteggi: dict, out: Path) -> int:
+    """Valida, poi scrive frame+manifest atomicamente. Rifiuta un frame INVALID.
+
+    Il validatore gira *prima* della scrittura: un frame corrotto come sorgente
+    di chiavi di join non deve mai sostituire quello buono. Se passa, si scrive
+    in modo atomico (temp + rename) e si fissa il manifest di provenienza.
+    """
+    report = FrameValidator().validate(comuni)
+    if report.outcome is FrameOutcome.INVALID:
+        codici = ", ".join(sorted({i.code for i in report.blocking})) or "?"
+        print(
+            f"RIFIUTO la scrittura: il frame costruito è INVALID ({codici}). "
+            f"Il frame esistente in {out} resta intatto.",
+            file=sys.stderr,
+        )
+        for issue in report.blocking[:10]:
+            print(f"  - {issue.detail}", file=sys.stderr)
+        return 2
+
+    totale = len(comuni)
+    copertura = conteggi["abbinati"] / totale
+    testo = json.dumps(comuni, ensure_ascii=False, indent=1) + "\n"
+    frame_manifest.write_atomic(out, testo)
+
+    manifest = frame_manifest.FrameManifest(
+        sha256=frame_manifest.sha256_of(testo),
+        row_count=totale,
+        valid_codes=report.valid_codes,
+        generated_at=_now_iso(),
+        sources=(URL_ISTAT, URL_IPA),
+        coverage=round(copertura, 6),
+    )
+    manifest_path = frame_manifest.write_manifest(out, manifest)
+
+    print(f"comuni ISTAT            : {totale}")
+    print(f"con sito da IPA         : {conteggi['abbinati']} ({copertura:.1%})")
+    print(f"  di cui su solo nome   : {conteggi['recuperati_su_nome']}")
+    print(f"scartati per ambiguità  : {conteggi['ambigui']}")
+    print(f"senza sito              : {totale - conteggi['abbinati'] - conteggi['ambigui']}")
+    print(f"scritto in {out}")
+    print(f"manifest in {manifest_path} (sha256 {manifest.sha256[:12]}…)")
+
+    if copertura < COPERTURA_ATTESA:
+        # Un calo di copertura non è un arrotondamento: è una colonna
+        # rinominata o uno schema cambiato a monte, e va guardato ora.
+        print(
+            f"\nATTENZIONE: copertura {copertura:.1%}, sotto l'attesa "
+            f"{COPERTURA_ATTESA:.0%}. Controlla se ISTAT o IPA hanno cambiato schema.",
+            file=sys.stderr,
+        )
+        return 1
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
-    """CLI: costruisce data/comuni-istat.json da ISTAT e IPA."""
+    """CLI: costruisce/verifica/confronta data/comuni-istat.json."""
     parser = argparse.ArgumentParser(
         prog="python -m treasureiq.ingest.comuni_istat",
         description=(
@@ -184,7 +334,19 @@ def main(argv: list[str] | None = None) -> int:
             "e scrive il frame nazionale usato da censimento e sonda live."
         ),
     )
-    parser.add_argument("--out", type=Path, required=True, help="File JSON da scrivere.")
+    parser.add_argument("--out", type=Path, help="File JSON da scrivere (modo build).")
+    parser.add_argument(
+        "--verifica",
+        type=Path,
+        metavar="FRAME",
+        help="Verifica l'integrità di un frame contro il suo manifest ed esce.",
+    )
+    parser.add_argument(
+        "--diff",
+        type=Path,
+        metavar="FRAME",
+        help="Confronta un frame con l'elenco ISTAT fresco ed esce (solo report).",
+    )
     parser.add_argument(
         "--cartella-sorgenti",
         type=Path,
@@ -198,40 +360,31 @@ def main(argv: list[str] | None = None) -> int:
     )
     args = parser.parse_args(argv)
 
-    args.cartella_sorgenti.mkdir(parents=True, exist_ok=True)
-    istat = args.cartella_sorgenti / "istat_comuni.csv"
-    ipa = args.cartella_sorgenti / "ipa_amministrazioni.txt"
+    # Modo verifica: duro, per build/CI. Frame ≠ manifest → uscita non-zero.
+    if args.verifica is not None:
+        ok, motivo = frame_manifest.verify(args.verifica)
+        print(motivo, file=sys.stderr if not ok else sys.stdout)
+        return 0 if ok else 1
 
-    for percorso, url in ((istat, URL_ISTAT), (ipa, URL_IPA)):
-        if args.riusa_sorgenti and percorso.exists():
-            print(f"riuso {percorso}", file=sys.stderr)
-            continue
-        _scarica(url, percorso)
+    # Modo diff: report delle transizioni a monte, senza mai riscrivere.
+    if args.diff is not None:
+        istat = args.cartella_sorgenti / "istat_comuni.csv"
+        if not (args.riusa_sorgenti and istat.exists()):
+            args.cartella_sorgenti.mkdir(parents=True, exist_ok=True)
+            _scarica(URL_ISTAT, istat)
+        diff = diff_upstream(args.diff, istat)
+        print(f"aggiunti a monte  : {len(diff['aggiunti'])}")
+        print(f"rimossi dal frame : {len(diff['rimossi'])}")
+        print(f"rinominati        : {len(diff['rinominati'])}")
+        for t in pianifica_transizioni(diff):
+            print(f"  [{t['tipo']}] {t['codice']}: {t['azione']}")
+        return 0
 
-    comuni = leggi_istat(istat)
-    conteggi = unisci(comuni, leggi_ipa(ipa))
+    if args.out is None:
+        parser.error("serve --out (build), --verifica FRAME o --diff FRAME")
 
-    args.out.write_text(json.dumps(comuni, ensure_ascii=False, indent=1) + "\n", "utf-8")
-
-    totale = len(comuni)
-    copertura = conteggi["abbinati"] / totale
-    print(f"comuni ISTAT            : {totale}")
-    print(f"con sito da IPA         : {conteggi['abbinati']} ({copertura:.1%})")
-    print(f"  di cui su solo nome   : {conteggi['recuperati_su_nome']}")
-    print(f"scartati per ambiguità  : {conteggi['ambigui']}")
-    print(f"senza sito              : {totale - conteggi['abbinati'] - conteggi['ambigui']}")
-    print(f"scritto in {args.out}")
-
-    if copertura < COPERTURA_ATTESA:
-        # Un calo di copertura non è un arrotondamento: è una colonna
-        # rinominata o uno schema cambiato a monte, e va guardato ora.
-        print(
-            f"\nATTENZIONE: copertura {copertura:.1%}, sotto l'attesa "
-            f"{COPERTURA_ATTESA:.0%}. Controlla se ISTAT o IPA hanno cambiato schema.",
-            file=sys.stderr,
-        )
-        return 1
-    return 0
+    comuni, conteggi = _costruisci_frame(args)
+    return _pubblica(comuni, conteggi, args.out)
 
 
 if __name__ == "__main__":

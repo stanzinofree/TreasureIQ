@@ -276,3 +276,34 @@ con fixture su tmp o mount dedicato scrivibile.
 - Gruppo 3: **confermato in Docker**. Sbloccato il Gruppo 4
   (`registro._carica_comuni_ipa`, 4ª firma).
 - Runtime app intatto; nessuna scrittura sul frame. Freeze rispettato.
+
+### 2026-08-21 — Claude — Step 4/5/6 (generatore atomico, manifest, diff)
+
+- **Step 4 — generatore atomico** (`ingest/comuni_istat.py`): la pubblicazione
+  ora *valida prima di scrivere* (`FrameValidator().validate`); un frame
+  costruito `INVALID` è rifiutato (uscita 2) e il frame esistente resta intatto.
+  La scrittura passa da `write_text` diretto a `frame_manifest.write_atomic`
+  (temp + `os.replace`): un generatore interrotto non lascia mai un frame
+  parziale. Calo copertura resta warning (uscita 1), non rifiuto.
+- **Step 5 — manifest/hash + provenienza** (`frame_manifest.py` nuovo): accanto
+  al frame nasce `comuni-istat.manifest.json` (sha256, row_count, valid_codes,
+  generated_at, sources, coverage). Verifica a due registri: **dura** in
+  build/CI (`make verify-frame`, uscita non-zero su mismatch), **morbida** a
+  runtime (`SourceFrame.from_path` logga un warning ma serve comunque il frame;
+  manifest assente = silenzio, i frame storici restano legittimi). `FrameBaseline`
+  acquisisce provenienza opzionale (source_path/sha256/generated_at), additiva e
+  fuori dalla chiave di cache del registry.
+- **Step 6 — diff upstream + transizioni** (`--diff`, `make frame-diff`): solo
+  lettura. Confronta il frame con l'elenco ISTAT fresco → aggiunti / rimossi /
+  rinominati; `pianifica_transizioni` etichetta SOPPRESSIONE_O_FUSIONE / RINOMINA
+  / NUOVO. **Nessuna scrittura, nessuna migrazione fisica**: spostare/riscrivere
+  gli artefatti keyed sul codice (seed, `storico.db`, snapshot catalogo) resta
+  bloccato dal lock storage-lifecycle (planning.md §Lock). Qui si produce solo il
+  piano.
+- Test (container, `data/` `:ro`): suite completa **1095 passed, 6 skipped,
+  3 failed** — i 3 failure sono i preesistenti PDF/OCR di
+  `test_wp_pages_caratterizzazione.py`, indipendenti da T0 e non toccati. I due
+  nuovi file (`test_frame_manifest.py`, `test_comuni_istat_generator.py`) →
+  13 passed. Nessuna regressione (1082 → 1095 = +13 nuovi).
+- T0 chiuso end-to-end (Step 0–6). Migrazione fisica delle transizioni: fase
+  coordinata separata, dopo storage-lifecycle.

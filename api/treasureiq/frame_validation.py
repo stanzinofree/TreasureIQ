@@ -115,6 +115,13 @@ class FrameBaseline:
     #: Fraction of rows allowed to disappear before it becomes an anomaly.
     #: 0.02 means: lose more than 2% of the comuni and a human looks.
     max_drop_ratio: float = 0.02
+    #: Provenienza (Step 5), opzionale: da dove viene questa baseline, con quale
+    #: impronta e quando. Additiva e non entra nella chiave di cache del
+    #: registry (keyed su valid_codes + max_drop_ratio): serve a raccontare la
+    #: soglia, non a moltiplicarne le varianti.
+    source_path: str | None = None
+    sha256: str | None = None
+    generated_at: str | None = None
 
     def drop_is_massive(self, current_valid_codes: int) -> bool:
         floor = self.valid_codes * (1.0 - self.max_drop_ratio)

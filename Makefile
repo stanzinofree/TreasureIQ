@@ -107,6 +107,16 @@ frame-nazionale: ## Ricostruisce data/comuni-istat.json da ISTAT e IPA (scarica 
 	docker compose run --rm -T -v "$(PWD)/data:/scrivibile" api \
 		python -m treasureiq.ingest.comuni_istat --out /scrivibile/comuni-istat.json
 
+.PHONY: verify-frame
+verify-frame: ## Verifica (dura) data/comuni-istat.json contro il suo manifest
+	docker compose run --rm -T -v "$(PWD)/data:/data:ro" api \
+		python -m treasureiq.ingest.comuni_istat --verifica /data/comuni-istat.json
+
+.PHONY: frame-diff
+frame-diff: ## Report transizioni: confronta il frame con l'elenco ISTAT fresco (solo lettura)
+	docker compose run --rm -T -v "$(PWD)/data:/scrivibile" api \
+		python -m treasureiq.ingest.comuni_istat --diff /scrivibile/comuni-istat.json
+
 .PHONY: censimento
 censimento: ## Rifa' la misura T0 sul campione: make censimento N=400
 	docker compose run --rm -T -v "$(PWD)/data:/scrivibile" api \

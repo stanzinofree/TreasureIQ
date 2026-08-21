@@ -10,6 +10,7 @@ stubbed, asserting status/action/scores/evidence/failure_reason end to end.
 
 from __future__ import annotations
 
+import json
 from datetime import datetime, timezone
 
 import httpx
@@ -151,6 +152,30 @@ def test_sp_envelope_recognised_matches_hint(monkeypatch):
     assert result.status is CheckStatus.OK
     assert result.action is RecognitionAction.KEEP
     assert result.identity["platform"] == "filodiretto"
+    # A native plugin matched: the envelope carries the plugin's versioned
+    # recognition contract, not the generic entrypoint_confirmation stamp.
+    assert result.connector_id == "filodiretto_sp"
+    assert result.connector_version == "1.0.0"
+    assert result.fingerprint_version == "filodiretto-sp-v1"
+    assert result.fingerprint.startswith("sha256:")
+    assert result.recognition_score == 0.995
+    keys = {e.key for e in result.evidence}
+    assert "filodiretto_route" in keys and "siscom_asset" in keys
+    assert all(e.matched for e in result.evidence)
+
+
+def test_sp_envelope_miss_keeps_generic_stamp(monkeypatch):
+    # No native match → the envelope keeps the generic confirmation contract,
+    # never a native plugin id it did not actually recognise.
+    _stub_fetch(monkeypatch, html="<html><body>accedi con SPID</body></html>")
+    result = _confirm_one(
+        source_id="058003", surface=Surface.SERVICE_PORTAL, url=_SP_URL,
+        expected_platform="filodiretto", timeout=1.0,
+    )
+    assert result.connector_id == "entrypoint_confirmation"
+    assert result.connector_version == "1.0.0"
+    assert result.fingerprint_version == "1.0"
+    assert result.recognition_score == 1.0
 
 
 def test_sp_envelope_drift_flagged(monkeypatch):
@@ -215,3 +240,11 @@ def test_confirm_inventory_writes_sp_check_from_registry(monkeypatch, tmp_path):
     assert results[0].identity["platform"] == "filodiretto"
     written = tmp_path / "check" / "service_portal" / "058003-0.json"
     assert written.exists()
+    # The persisted envelope reproduces the native recognition contract, not the
+    # generic entrypoint_confirmation stamp.
+    persisted = json.loads(written.read_text(encoding="utf-8"))
+    assert persisted["connector_id"] == "filodiretto_sp"
+    assert persisted["fingerprint_version"] == "filodiretto-sp-v1"
+    assert persisted["fingerprint"].startswith("sha256:")
+    assert persisted["recognition_score"] == 0.995
+    assert {e["key"] for e in persisted["evidence"]} == {"filodiretto_route", "siscom_asset"}

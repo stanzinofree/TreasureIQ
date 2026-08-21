@@ -64,6 +64,7 @@ def _confirm_one(
         )
     headers, data, final_url = fetched
     html = data.decode("utf-8", errors="replace")
+    recognition = None  # native SP recognition, when a plugin matched
     if surface is Surface.TRANSPARENCY:
         found = firma_da_registro(
             headers=dict(headers), html=html, surface=Surface.TRANSPARENCY,
@@ -82,6 +83,8 @@ def _confirm_one(
             headers=dict(headers), html=html, source_id=source_id,
             entrypoint_url=url,
         )
+        if sp.platform_id is not None:
+            recognition = sp
         platform = sp.platform_id if sp.platform_id is not None else expected_platform
         known = bool(platform)
     healthy = known and 200 <= 200 < 400
@@ -92,19 +95,37 @@ def _confirm_one(
         else RecognitionAction.KEEP
     )
     status = CheckStatus.OK if healthy and not changed else CheckStatus.MANUAL_REVIEW
+    if recognition is not None:
+        # A native SP plugin matched: persist its versioned recognition contract
+        # (plugin id/version, fingerprint version, fingerprint, score, evidence)
+        # instead of the generic entrypoint_confirmation stamp, so the stored
+        # check reproduces the involuntary signature the plugin actually saw.
+        connector_id = recognition.plugin_id
+        connector_version = recognition.plugin_version
+        fingerprint_version = recognition.fingerprint_version
+        fingerprint = recognition.fingerprint
+        recognition_score = recognition.recognition_score
+        evidence = recognition.evidence
+    else:
+        connector_id = "entrypoint_confirmation"
+        connector_version = "1.0.0"
+        fingerprint_version = "1.0"
+        fingerprint = _fingerprint(platform=platform, headers=dict(headers), html=html)
+        recognition_score = 1.0 if known and not changed else 0.0
+        evidence = (FingerprintEvidence(
+            key="platform", description="piattaforma invariata", matched=known and not changed,
+            weight=1.0, observed=platform, expected=expected_platform,
+        ),)
     return CheckResult(
         source_id=source_id, surface=surface, status=status,
         source_health=True, completeness_score=1.0,
-        recognition_score=1.0 if known and not changed else 0.0,
-        coverage_score=1.0, connector_id="entrypoint_confirmation",
-        connector_version="1.0.0", fingerprint_version="1.0",
-        fingerprint=_fingerprint(platform=platform, headers=dict(headers), html=html),
+        recognition_score=recognition_score,
+        coverage_score=1.0, connector_id=connector_id,
+        connector_version=connector_version, fingerprint_version=fingerprint_version,
+        fingerprint=fingerprint,
         identity={"entrypoint_url": url, "final_url": final_url,
                   "platform": platform, "expected_platform": expected_platform},
-        evidence=(FingerprintEvidence(
-            key="platform", description="piattaforma invariata", matched=known and not changed,
-            weight=1.0, observed=platform, expected=expected_platform,
-        ),),
+        evidence=evidence,
         failure_reason=(
             "platform_changed" if changed
             else "provider_not_recognized" if not known

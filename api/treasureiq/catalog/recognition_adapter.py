@@ -140,6 +140,11 @@ class RiconoscimentoSP:
     ``"filodiretto"``) or ``None`` on a miss. Carries the native ``fingerprint``
     and ``evidence`` so a caller can persist the involuntary signature, and
     ``prova`` — the first matched signal — as a human stand-in.
+
+    The winning plugin's manifest travels too (``plugin_id`` / ``plugin_version``
+    / ``fingerprint_version``): a caller persisting the check envelope records the
+    versioned recognition contract, not a generic confirmation stamp. All manifest
+    fields are ``None`` on a miss.
     """
 
     platform_id: str | None
@@ -147,6 +152,9 @@ class RiconoscimentoSP:
     recognition_score: float
     evidence: tuple[FingerprintEvidence, ...]
     prova: str | None
+    plugin_id: str | None = None
+    plugin_version: str | None = None
+    fingerprint_version: str | None = None
 
 
 def riconosci_service_portal(
@@ -183,10 +191,14 @@ def riconosci_service_portal(
         return RiconoscimentoSP(None, None, 0.0, (), None)
 
     result = match.result
+    manifest = match.manifest
     return RiconoscimentoSP(
         platform_id=result.platform_id,
         fingerprint=result.fingerprint,
         recognition_score=result.recognition_score,
         evidence=result.evidence,
         prova=_prima_prova(result.evidence),
+        plugin_id=manifest.plugin_id,
+        plugin_version=manifest.version,
+        fingerprint_version=manifest.fingerprint_version,
     )

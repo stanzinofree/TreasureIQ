@@ -21,8 +21,6 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from typing import Callable
 
-import httpx
-
 from treasureiq.catalog.fetch_policy import PoliticaFetch
 from treasureiq.ingest.host_guard import fetch_guardato
 
@@ -38,7 +36,9 @@ class EsitoFetch:
     """
 
     consentito: bool
-    fetched: tuple[httpx.Headers, bytes, str] | None
+    # La forma della tupla dipende dai kwargs del fetch: 3-tupla normale, oppure
+    # 4-tupla (headers, data, url, status) con `return_non_200=True` (discovery).
+    fetched: tuple | None
     motivo: str
 
 

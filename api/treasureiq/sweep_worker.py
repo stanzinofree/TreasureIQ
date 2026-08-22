@@ -34,6 +34,21 @@ logger = logging.getLogger("treasureiq.sweep_worker")
 EXIT_REFRESH_SKIPPED = 2
 
 
+def _nuovo_esecutore(config: "WorkerConfig") -> EsecutoreFetch:
+    """Un esecutore per lotto: budget e rate-limit sono per dominio, quindi
+    devono ricordare gli host già toccati dagli altri comuni dello stesso lotto
+    (tipico: un host SaaS di trasparenza condiviso da molti comuni). Lo stesso
+    argine vale per discovery e confirmation."""
+    return EsecutoreFetch(
+        PoliticaFetch(
+            intervallo_minimo_s=config.intervallo_dominio_s,
+            massimo_per_dominio=config.budget_per_dominio,
+            backoff_base_s=config.backoff_base_s,
+            backoff_cap_s=config.backoff_cap_s,
+        )
+    )
+
+
 @dataclass(frozen=True)
 class WorkerConfig:
     db: Path
@@ -181,6 +196,9 @@ def run_batch(config: WorkerConfig, comuni: list[str]) -> int:
         return 0
     if config.mode == "discovery":
         errors = 0
+        # Stesso runtime di fetch della confirmation: anche la discovery
+        # periodica passa da rate-limit e budget per dominio (anti-flooding).
+        esecutore = _nuovo_esecutore(config)
         for codice in comuni:
             try:
                 comune = comune_per_codice(codice)
@@ -188,7 +206,7 @@ def run_batch(config: WorkerConfig, comuni: list[str]) -> int:
                     raise ValueError("base_url_missing")
                 inventory = discover_source_inventory(
                     live_dir=LIVE_DIR, source_id=codice, base_url=comune.sito,
-                    dry_run=config.dry_run,
+                    dry_run=config.dry_run, esecutore=esecutore,
                 )
                 logger.info(
                     "discovery %s: base=%s at=%s sp=%d",
@@ -221,17 +239,7 @@ def run_batch(config: WorkerConfig, comuni: list[str]) -> int:
         ]
     elif config.mode == "confirmation":
         errors = 0
-        # Un solo esecutore per lotto: budget e rate-limit sono per dominio,
-        # quindi devono ricordare gli host già toccati dagli altri comuni del
-        # lotto (tipico: un host SaaS di trasparenza condiviso da molti comuni).
-        esecutore = EsecutoreFetch(
-            PoliticaFetch(
-                intervallo_minimo_s=config.intervallo_dominio_s,
-                massimo_per_dominio=config.budget_per_dominio,
-                backoff_base_s=config.backoff_base_s,
-                backoff_cap_s=config.backoff_cap_s,
-            )
-        )
+        esecutore = _nuovo_esecutore(config)
         for codice in comuni:
             try:
                 results = confirm_inventory(

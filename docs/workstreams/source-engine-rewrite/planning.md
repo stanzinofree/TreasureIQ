@@ -211,10 +211,16 @@ Manca:
     `fallimenti_consecutivi` persistiti. `confirm_inventory` accetta un `esecutore`
     opzionale; `sweep_worker` ne condivide **uno per lotto** (budget/rate-limit per
     dominio). Knob via env `TREASUREIQ_FETCH_*`. Test in
-    `test_catalog_fetch_runtime.py` + budget-skip + backoff-da-stato. **Fase 2 chiusa.**
+    `test_catalog_fetch_runtime.py` + budget-skip + backoff-da-stato.
+  - **[x] 2D-vi discovery dalla stessa politica** (re-review Codex).
+    `discover_source_inventory` accetta un `esecutore` e vi instrada il suo unico
+    fetch di rete (home BASE); `scopri_pagina_at`/candidati SP non fanno rete.
+    `sweep_worker._nuovo_esecutore` condiviso fra discovery e confirmation (uno
+    per lotto). Budget esaurito → discovery ritorna `None`. Test routing +
+    budget-skip in `test_catalog_inventory_discovery.py`. **Fase 2 chiusa.**
 - **Exit-gate:** sweep su comune fixture → transizioni asserite + zero write non
   protette + aderenza calcolata per famiglia non-WP + fetch mediati dalla politica
-  (backoff da stato, budget per dominio).
+  (backoff da stato, budget per dominio) su discovery E confirmation.
 
 ### Fase 3 — Contratto chat→connettore universale (→ I2, I3)
 - Estrai da `respond.py` il layer connettore (resp. 5+6) dietro `SourceConnector`

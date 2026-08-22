@@ -80,3 +80,71 @@ def test_m1_base_platform_matches_legacy_classifier_on_comweb(tmp_path, monkeypa
     result = _run_discovery_through_seam(tmp_path, monkeypatch, headers={}, html=_COMWEB_HOME)
     legacy = classifica_risposta(headers={}, html=_COMWEB_HOME, includi_at=False).vincitore
     assert result.base_platform == legacy.piattaforma.value
+
+
+# --- Fase 2D-vi: anche la discovery passa dal runtime di fetch mediato ---
+
+_T0 = datetime(2026, 8, 22, 10, 0, tzinfo=timezone.utc)
+_AT_STUB = type(
+    "At", (), {"at_url": None, "piattaforma_at": type("P", (), {"value": "non_trovata"})()}
+)
+
+
+def _stub_scopri_at(monkeypatch):
+    monkeypatch.setattr(inventory_discovery, "scopri_pagina_at", lambda **_k: _AT_STUB())
+
+
+def _esecutore(politica_kwargs=None):
+    from treasureiq.catalog.fetch_policy import PoliticaFetch
+    from treasureiq.catalog.fetch_runtime import EsecutoreFetch
+
+    return EsecutoreFetch(
+        PoliticaFetch(**(politica_kwargs or {})),
+        orologio=lambda: _T0, dormi=lambda _s: None,
+    )
+
+
+def test_discovery_passa_dalla_politica_di_fetch(tmp_path, monkeypatch):
+    from treasureiq.catalog import fetch_runtime
+
+    chiamate: list[str] = []
+
+    def fake(url, **_kw):
+        chiamate.append(url)
+        # 4-tupla: la discovery usa return_non_200=True.
+        return {}, b'<a href="/servizi-online">Servizi online</a>', "https://comune.test/", 200
+
+    monkeypatch.setattr(fetch_runtime, "fetch_guardato", fake)
+    _stub_scopri_at(monkeypatch)
+
+    result = inventory_discovery.discover_source_inventory(
+        live_dir=tmp_path, source_id="000001", base_url="https://comune.test/",
+        esecutore=_esecutore(),
+    )
+
+    assert result is not None
+    assert chiamate == ["https://comune.test/"]  # fetch passato dall'esecutore
+
+
+def test_discovery_budget_esaurito_ritorna_none_senza_fetch(tmp_path, monkeypatch):
+    from treasureiq.catalog import fetch_runtime
+
+    chiamate: list[str] = []
+
+    def fake(url, **_kw):
+        chiamate.append(url)
+        return {}, b"<html></html>", "https://comune.test/", 200
+
+    monkeypatch.setattr(fetch_runtime, "fetch_guardato", fake)
+    _stub_scopri_at(monkeypatch)
+
+    ese = _esecutore({"massimo_per_dominio": 1})
+    ese.esegui("https://comune.test/altro", max_bytes=1000)  # esaurisce il dominio
+
+    result = inventory_discovery.discover_source_inventory(
+        live_dir=tmp_path, source_id="000001", base_url="https://comune.test/",
+        esecutore=ese,
+    )
+
+    assert result is None
+    assert chiamate == ["https://comune.test/altro"]  # discovery fetch rifiutato

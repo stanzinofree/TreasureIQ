@@ -285,11 +285,28 @@ del lotto per non martellare un host SaaS comune a molti). Un rifiuto per budget
 `test_budget_esaurito_salta_endpoint_niente_scritture` +
 `test_backoff_alimentato_da_stato_persistito`.
 
+**(vi) Discovery fuori dalla politica** (re-review). L'`EsecutoreFetch` era
+costruito solo nel ramo confirmation: la discovery periodica
+(`discover_source_inventory → fetch_guardato`) faceva fetch senza rate-limit né
+budget → l'argine anti-flooding copriva solo metà del motore. **Fix:**
+`discover_source_inventory` accetta un `esecutore` opzionale e vi instrada il suo
+UNICO fetch di rete (la home BASE); `scopri_pagina_at` e i candidati SP lavorano
+sull'HTML già scaricato, non fanno rete (verificato: nessun `fetch_guardato` in
+`service_discovery.py` né dentro `scopri_pagina_at`). `sweep_worker` costruisce
+l'esecutore con un helper condiviso `_nuovo_esecutore(config)` e lo passa sia a
+discovery sia a confirmation (un esecutore per lotto). Budget esaurito → discovery
+ritorna `None` senza scrivere inventario. Limite noto: la home BASE non ha uno
+stato persistito (quello vive per AT/SP), quindi il backoff sul fetch di
+discovery parte da 0 — rate-limit e budget restano gli argini attivi. Il refresh
+legacy resta fuori (path da strangolare, già dichiarato). Test in
+`test_catalog_inventory_discovery.py`: routing + budget-skip.
+
 **Non bloccanti dalla review, ancora aperti (annotati):** check/stato/aderenza
 scritti atomici singolarmente ma non transazionali insieme (un errore intermedio
 può lasciare i tre alberi disallineati); RMW dello stato non protetto da lock
-(vedi §13.b: non si materializza con lo sweep sequenziale attuale). Entrambi
-diventano rilevanti solo con sweep concorrente in Fase 3.
+(vedi §13.b: non si materializza con lo sweep sequenziale attuale); possibile
+starvation degli endpoint oltre il budget se l'ordine di visita è sempre fisso.
+Tutti rilevanti solo con sweep concorrente / lotti saturi in Fase 3.
 
 **Copertura None nel record aderenza.** Il verdetto persistito dalla confirmation
 ha `coverage_score=None`/`verdetto=None` per costruzione: la confirmation misura

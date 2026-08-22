@@ -22,7 +22,7 @@ import hashlib
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from treasureiq.ingest.censimento import _Sonda, scopri_pagina_at
 from treasureiq.ingest.piattaforma import Piattaforma
@@ -44,10 +44,26 @@ class AreaAmministrativa(BaseModel):
     url: str
 
 
+class Responsabile(BaseModel):
+    """Chi risponde di un ufficio (accountability). Best-effort: solo dove la
+    scheda lo pubblica strutturato, mai inferito da un LLM (D-07). `nome`
+    obbligatorio — un `Responsabile` senza nome non esiste; `ruolo`/`email`
+    opzionali (`None` = non pubblicato, D-05), mai omessi in silenzio a valle."""
+
+    nome: str = Field(min_length=1)
+    ruolo: str | None = None
+    email: str | None = None
+
+
 class UfficioConnettore(BaseModel):
     """Un ufficio letto dal connettore, coi suoi recapiti verbatim (D-07:
     nessuna cifra passa da un LLM). `source_typed` distingue un recapito
-    tipizzato dal portale (`tel:`/`mailto:`) da uno solo scritto in prosa."""
+    tipizzato dal portale (`tel:`/`mailto:`) da uno solo scritto in prosa.
+
+    `indirizzo`/`responsabile` sono additivi (Ramo 1, ciclo estensione):
+    best-effort, `None` dove la scheda non li pubblica — degrado onesto (D-05),
+    mai un valore inventato. Opzionali con default: i dati esistenti su disco
+    (senza questi campi) restano deserializzabili senza migrazione."""
 
     nome: str
     url: str
@@ -57,6 +73,8 @@ class UfficioConnettore(BaseModel):
     orari: str | None = None
     source_typed: bool
     letto_il: str
+    indirizzo: str | None = None
+    responsabile: Responsabile | None = None
 
 
 class BandoAT(BaseModel):

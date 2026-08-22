@@ -317,6 +317,43 @@ def test_ente_coperto_la_sonda_gira_comunque(
     assert chiamate == ["Ciampino"]
 
 
+def test_drill_ufficio_propaga_batch_al_chatanswer(
+    ente_coperto_ma_esaurito: None, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Il drill di un ufficio nominato produce anche gli artefatti v1
+    (DataBatch/QueryPlan). Devono arrivare al `ChatAnswer` finale ANCHE quando
+    il ramo connettore non intercetta la risposta (qui `leggi_connettore`
+    torna None; stesso sink del ramo `candidates` non vuoto): prima il
+    chiamante teneva solo `.office` e il batch già proiettato andava perso."""
+    batch = object()
+    plan = object()
+    selected = object()
+
+    monkeypatch.setattr(respond, "_ufficio_chiesto", lambda _parole: "anagrafe")
+
+    async def _drill(**_kwargs):
+        return respond.UfficioDrillResult(
+            office=respond.OfficeAnswer(
+                nome="Anagrafe", telefono=None, email=None,
+                orari="Lun 9-12", orari_fonte=None,
+            ),
+            data_batches=[batch],
+            query_plan=plan,
+            selected_data_batch=selected,
+        )
+
+    monkeypatch.setattr(respond, "_office_da_ufficio_nominato", _drill)
+    monkeypatch.setattr(respond, "leggi_orari_urp", lambda comune: SOLO_HTML)
+    monkeypatch.setattr(respond, "_cerca_sul_web", lambda _query: ([], None))
+    monkeypatch.setattr(respond, "_websearch_query", lambda *, topic, ente: None)
+
+    risposta = _chiedi_informazione(monkeypatch=monkeypatch)
+
+    assert risposta.data_batches == [batch]
+    assert risposta.query_plan is plan
+    assert risposta.selected_data_batch is selected
+
+
 def test_cache_entro_ttl_diventa_hint_datato(
     ente_coperto_ma_esaurito: None, monkeypatch: pytest.MonkeyPatch
 ) -> None:

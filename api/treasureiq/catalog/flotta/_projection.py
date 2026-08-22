@@ -33,8 +33,14 @@ def records(
     """Project the acquired result into the record dicts for one capability."""
     uffici = esito.uffici if esito else []
     if surface is Surface.ORDINARY_DATA and capability == "offices":
+        # Dump completo: porta anche i campi additivi (indirizzo, responsabile)
+        # senza doverli enumerare — la scheda-ufficio intera è il record.
         return [office.model_dump(mode="json") for office in uffici]
     if surface is Surface.ORDINARY_DATA and capability == "contacts":
+        # Recapiti + `indirizzo` (canale fisico, "dove vado di persona").
+        # Gate invariato sui recapiti telematici: l'indirizzo è supplementare,
+        # non basta da solo a far comparire un ufficio fra i "contatti".
+        # `responsabile` resta fuori: vive nella capability `responsible`.
         return [
             {
                 "nome": office.nome,
@@ -42,6 +48,7 @@ def records(
                 "telefoni": office.telefoni,
                 "email": office.email,
                 "pec": office.pec,
+                "indirizzo": office.indirizzo,
             }
             for office in uffici
             if office.telefoni or office.email or office.pec

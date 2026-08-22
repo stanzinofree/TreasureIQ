@@ -18,6 +18,7 @@ from treasureiq.connettore import (
     AmministrazioneTrasparente,
     AreaAmministrativa,
     EsitoConnettore,
+    Responsabile,
     UfficioConnettore,
     _da_store,
     _esito_vuoto,
@@ -69,6 +70,99 @@ class _SondaFinta:
 
     def risposta(self, url: str) -> _RispostaFinta:
         return _RispostaFinta(headers={"server": "municipium"}, text="<html></html>")
+
+
+# --- Estensione Ramo 1: indirizzo + responsabile (additivi) -----------
+
+
+def test_ufficio_senza_nuovi_campi_ha_default_none() -> None:
+    """Un ufficio costruito senza i campi additivi (come tutti gli estrattori
+    oggi) ha `indirizzo`/`responsabile` a `None` — degrado onesto (D-05)."""
+    ufficio = UfficioConnettore(
+        nome="URP", url="https://x/urp", source_typed=True,
+        letto_il="2026-08-22T00:00:00+00:00",
+    )
+    assert ufficio.indirizzo is None
+    assert ufficio.responsabile is None
+
+
+def test_dati_esistenti_su_disco_restano_deserializzabili() -> None:
+    """Compatibilità: un JSON scritto PRIMA dell'estensione (senza i due
+    campi) si deserializza senza errori — nessuna migrazione richiesta."""
+    legacy = {
+        "nome": "Anagrafe", "url": "https://x/anagrafe",
+        "telefoni": ["06123"], "email": [], "pec": [],
+        "orari": "Lun-Ven 9-13", "source_typed": True,
+        "letto_il": "2026-01-01T00:00:00+00:00",
+    }
+    ufficio = UfficioConnettore.model_validate(legacy)
+    assert ufficio.indirizzo is None
+    assert ufficio.responsabile is None
+    assert ufficio.telefoni == ["06123"]
+
+
+def test_round_trip_con_indirizzo_e_responsabile() -> None:
+    """Serializza→deserializza preservando i campi additivi popolati."""
+    ufficio = UfficioConnettore(
+        nome="Edilizia", url="https://x/edilizia", source_typed=True,
+        letto_il="2026-08-22T00:00:00+00:00",
+        indirizzo="Piazza Roma 1, 00100",
+        responsabile=Responsabile(nome="Mario Rossi", ruolo="Dirigente", email="rossi@x.it"),
+    )
+    riletto = UfficioConnettore.model_validate_json(ufficio.model_dump_json())
+    assert riletto.indirizzo == "Piazza Roma 1, 00100"
+    assert riletto.responsabile is not None
+    assert riletto.responsabile.nome == "Mario Rossi"
+    assert riletto.responsabile.ruolo == "Dirigente"
+    assert riletto.responsabile.email == "rossi@x.it"
+
+
+def test_responsabile_campi_opzionali_none() -> None:
+    """`ruolo`/`email` a `None` = non pubblicato (D-05), `nome` obbligatorio."""
+    resp = Responsabile(nome="Solo Nome")
+    assert resp.ruolo is None
+    assert resp.email is None
+    riletto = Responsabile.model_validate_json(resp.model_dump_json())
+    assert riletto.nome == "Solo Nome"
+
+
+def test_responsabile_nome_vuoto_rifiutato() -> None:
+    """`nome` vuoto rifiutato (min_length=1): un responsabile senza nome non
+    esiste — meglio `responsabile=None` che una stringa vuota fantasma."""
+    with pytest.raises(ValueError):
+        Responsabile(nome="")
+
+
+def test_record_parity_model_dump_include_i_nuovi_campi() -> None:
+    """Il dict proiettato (`offices` usa `model_dump(mode="json")`) espone i
+    due campi additivi — la proiezione non deve perderli."""
+    ufficio = UfficioConnettore(
+        nome="Tributi", url="https://x/tributi", source_typed=False,
+        letto_il="2026-08-22T00:00:00+00:00",
+        indirizzo="Via Verdi 2",
+        responsabile=Responsabile(nome="Anna Bianchi"),
+    )
+    record = ufficio.model_dump(mode="json")
+    assert record["indirizzo"] == "Via Verdi 2"
+    assert record["responsabile"] == {"nome": "Anna Bianchi", "ruolo": None, "email": None}
+
+
+def test_esito_round_trip_via_store(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+    """Round-trip completo attraverso lo store on-disk: i campi additivi
+    sopravvivono a `_in_store`/`_da_store`."""
+    monkeypatch.setattr(connettore_mod, "LIVE_DIR", tmp_path)
+    ufficio = UfficioConnettore(
+        nome="Servizi Sociali", url="https://x/sociali", source_typed=True,
+        letto_il=datetime.now(timezone.utc).isoformat(),
+        indirizzo="Corso Italia 5",
+        responsabile=Responsabile(nome="Luca Verdi", ruolo="Responsabile"),
+    )
+    _in_store(_esito(uffici=[ufficio]))
+    riletto = _da_store(ISTAT)
+    assert riletto is not None
+    assert riletto.uffici[0].indirizzo == "Corso Italia 5"
+    assert riletto.uffici[0].responsabile is not None
+    assert riletto.uffici[0].responsabile.ruolo == "Responsabile"
 
 
 # --- Store (D-10) -----------------------------------------------------

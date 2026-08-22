@@ -28,6 +28,7 @@ from treasureiq.connettore import (
     AmministrazioneTrasparente,
     BandoAT,
     EsitoConnettore,
+    Responsabile,
     UfficioConnettore,
 )
 from treasureiq.mappa_connettore import MappaConnettore
@@ -195,6 +196,80 @@ def test_contacts_batch_only_offices_with_recapiti(platform):
     assert batch.access_mode is AccessMode.MEDIATED
     assert [record["nome"] for record in batch.records] == ["Anagrafe"]
     assert batch.records[0]["telefoni"] == ["+39 06 000000"]
+
+
+def _ufficio_arricchito() -> UfficioConnettore:
+    """Ufficio con recapiti + i campi additivi Ramo 1 (indirizzo, responsabile)."""
+    return UfficioConnettore(
+        nome="Anagrafe",
+        url="https://www.comune.prova.it/uffici/anagrafe",
+        telefoni=["+39 06 000000"],
+        email=["anagrafe@comune.prova.it"],
+        pec=[],
+        orari=None,
+        source_typed=True,
+        letto_il=LETTO_IL,
+        indirizzo="Piazza del Comune 1",
+        responsabile=Responsabile(nome="Mario Rossi", ruolo="Dirigente", email="rossi@comune.prova.it"),
+    )
+
+
+def test_offices_batch_carries_indirizzo_e_responsabile():
+    """`offices` (dump completo) deve portare i campi additivi fino al batch —
+    guardia contro un futuro passaggio da model_dump a un dict enumerato che
+    li dimenticherebbe."""
+    esito = EsitoConnettore(
+        codice_istat=ISTAT, piattaforma="municipium", letto_il=LETTO_IL,
+        uffici=[_ufficio_arricchito()],
+    )
+    batch = CatalogRuntime().execute(
+        _request("offices", Surface.ORDINARY_DATA),
+        platform_id="municipium", mappa=_mappa(), esito=esito,
+    )
+    assert batch is not None
+    record = batch.records[0]
+    assert record["indirizzo"] == "Piazza del Comune 1"
+    assert record["responsabile"] == {
+        "nome": "Mario Rossi", "ruolo": "Dirigente", "email": "rossi@comune.prova.it",
+    }
+
+
+def test_contacts_batch_include_indirizzo_non_responsabile():
+    """`contacts` porta `indirizzo` (canale fisico) ma NON `responsabile`:
+    l'accountability vive nella capability dedicata `responsible` (prossimo
+    step), non nei recapiti."""
+    esito = EsitoConnettore(
+        codice_istat=ISTAT, piattaforma="municipium", letto_il=LETTO_IL,
+        uffici=[_ufficio_arricchito()],
+    )
+    batch = CatalogRuntime().execute(
+        _request("contacts", Surface.ORDINARY_DATA),
+        platform_id="municipium", mappa=_mappa(), esito=esito,
+    )
+    assert batch is not None
+    record = batch.records[0]
+    assert record["indirizzo"] == "Piazza del Comune 1"
+    assert "responsabile" not in record
+
+
+def test_contacts_gate_invariato_indirizzo_supplementare():
+    """L'indirizzo è supplementare: un ufficio col SOLO indirizzo (nessun
+    recapito telematico) NON compare fra i contatti — gate invariato."""
+    solo_indirizzo = UfficioConnettore(
+        nome="Magazzino", url="https://www.comune.prova.it/uffici/magazzino",
+        source_typed=False, letto_il=LETTO_IL, indirizzo="Via Depositi 9",
+    )
+    esito = EsitoConnettore(
+        codice_istat=ISTAT, piattaforma="municipium", letto_il=LETTO_IL,
+        uffici=[solo_indirizzo],
+    )
+    batch = CatalogRuntime().execute(
+        _request("contacts", Surface.ORDINARY_DATA),
+        platform_id="municipium", mappa=_mappa(), esito=esito,
+    )
+    assert batch is not None
+    assert batch.records == ()
+    assert batch.access_mode is AccessMode.UNAVAILABLE
 
 
 @pytest.mark.parametrize("platform", FLEET_PLATFORMS)

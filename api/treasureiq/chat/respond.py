@@ -104,7 +104,7 @@ from treasureiq.match.engine import (
     Verdict,
     match,
 )
-from treasureiq.orari_ufficio import leggi_orari_ufficio
+from treasureiq.ufficio_dettaglio import arricchisci_ufficio
 from treasureiq.scansioni import aggiorna_scansione, carica_scansione, scansione_stantia
 from treasureiq.schema import CitizenProfile, EmploymentStatus, Livello, Opportunity, TargetGroup
 from treasureiq.sonda_live import (
@@ -424,6 +424,21 @@ class ChatAnswer:
     #: la domanda si accoda (D-04, mai bloccante). Stesso enum chiuso di
     #: `ChatIn.chiarimento_atteso`/`ChatOut.chiarimento`.
     chiarimento: str | None = None
+
+
+@dataclass(frozen=True)
+class UfficioDrillResult:
+    """Risultato completo del drill di un ufficio nominato.
+
+    Il drill produce sia la scheda pronta per la UI sia gli artefatti del
+    contratto v1. Tenerli insieme evita che il chiamante conservi soltanto
+    ``OfficeAnswer`` e perda il ``DataBatch`` già proiettato.
+    """
+
+    office: OfficeAnswer
+    data_batches: list[DataBatch]
+    query_plan: QueryPlan | None
+    selected_data_batch: DataBatch | None
 
 
 def _resolve_comune(*, hint: str | None) -> tuple[str | None, str | None]:
@@ -1696,6 +1711,14 @@ async def _build_informazione_answer(
     # INFORMAZIONE, nessun verdetto; degrado onesto se la pagina non pubblica
     # orari (D-32) — l'ufficio giusto con `orari=None`, mai l'URP travestito.
     ufficio_nominato = _ufficio_chiesto(parole)
+    # Artefatti v1 prodotti dal drill: vanno trasportati nel `ChatAnswer` finale
+    # anche su questo ramo. Quando il ramo connettore più sotto gira, ritorna in
+    # anticipo (`risposta_connettore`, già con i suoi batch) e questi restano i
+    # default; ma con `candidates` non vuoto quel ramo NON gira e senza questo il
+    # `DataBatch` già proiettato dal drill andrebbe perso.
+    drill_batches: list[DataBatch] = []
+    drill_plan: QueryPlan | None = None
+    drill_selected: DataBatch | None = None
     if ufficio_nominato is not None:
         office_ufficio = await _office_da_ufficio_nominato(
             codice_istat=ente.codice_istat,
@@ -1704,7 +1727,10 @@ async def _build_informazione_answer(
             disabilita_attiva=_disabilita_attiva_nel_testo(parole),
         )
         if office_ufficio is not None:
-            office = office_ufficio
+            office = office_ufficio.office
+            drill_batches = office_ufficio.data_batches
+            drill_plan = office_ufficio.query_plan
+            drill_selected = office_ufficio.selected_data_batch
     web_results: list[WebResultAnswer] = []
     catalog_mode = _catalog_access_mode(ente.codice_istat)
     access_mode = (
@@ -1845,6 +1871,9 @@ async def _build_informazione_answer(
             azioni=azioni,
             ente_nome=ente.ente,
         ),
+        data_batches=drill_batches,
+        query_plan=drill_plan,
+        selected_data_batch=drill_selected,
     )
 
 
@@ -2049,21 +2078,27 @@ async def _office_da_ufficio_nominato(
     topic: Topic,
     ufficio_chiesto: str,
     disabilita_attiva: bool,
-) -> OfficeAnswer | None:
-    """L'ufficio NOMINATO dal cittadino, con il SUO orario letto adesso.
+) -> UfficioDrillResult | None:
+    """L'ufficio NOMINATO dal cittadino, con il SUO orario letto adesso, servito
+    ATTRAVERSO il contratto v1 (DataRequest/DataBatch) come il rail decisione.
 
     Il rail informazione, di default, attacca l'URP di ripiego: chiesto
     «l'ufficio anagrafe», mostrava l'orario dell'URP. Il connettore conosce già
     la URL della pagina di quell'ufficio (catalogata dallo sweep): la si legge
-    on-demand (`leggi_orari_ufficio`, cache-first + guardia SSRF) e se ne cita
-    l'orario vero. Il match sull'ufficio riusa `_ufficio_connettore_pertinente`
-    — stessa disciplina D-04 del ramo connettore, mai un ufficio indovinato.
+    on-demand — una sola volta, in `arricchisci_ufficio` (cache-first + guardia
+    SSRF) — e se ne cita l'orario vero. Il match sull'ufficio riusa
+    `_ufficio_connettore_pertinente` (stessa disciplina D-04 del ramo
+    connettore, mai un ufficio indovinato); la proiezione riusa
+    `_batch_offices_decisione` (stesso seam v1 del rail decisione), su un esito
+    derivato col SOLO ufficio arricchito — così la chat consuma un `DataBatch`,
+    non costruisce la risposta a mano dall'`UfficioConnettore`.
 
     `None` (l'URP resta) quando il connettore non è leggibile, non espone
-    uffici, o nessuno corrisponde in modo univoco alla parola nominata. Un
-    orario non trovato NON è un `None`: si torna l'ufficio giusto con
-    `orari=None`, così la scheda dice «non pubblicato per questo ufficio»
-    invece di spacciare quello dell'URP (D-32).
+    uffici, nessuno corrisponde in modo univoco alla parola nominata, o nessun
+    connettore MEDIATO copre la piattaforma (stesso ripiego onesto di
+    `_batch_offices_decisione`). Un orario non trovato NON è un `None`: si torna
+    l'ufficio giusto con `orari=None`, così la scheda dice «non pubblicato per
+    questo ufficio» invece di spacciare quello dell'URP (D-32).
     """
     esito = await asyncio.to_thread(connettore.leggi_connettore, codice_istat)
     if esito is None or not esito.uffici:
@@ -2080,22 +2115,52 @@ async def _office_da_ufficio_nominato(
     if ufficio is None or not ufficio.url:
         return None
 
-    display, fonte = await _orari_ufficio_live(codice_istat=codice_istat, ufficio=ufficio)
-    return OfficeAnswer(
-        nome=ufficio.nome,
-        telefono=", ".join(ufficio.telefoni) or None,
-        email=", ".join(ufficio.email) or None,
-        orari=display,
-        orari_fonte=fonte,
+    # Acquisizione: unica lettura della scheda-dettaglio (nessun doppio drill).
+    arricchito = await asyncio.to_thread(
+        arricchisci_ufficio,
+        codice_istat=codice_istat,
+        ufficio=ufficio,
+        piattaforma=esito.piattaforma,
+    )
+    # Esito derivato col SOLO ufficio arricchito → proiezione v1 attraverso lo
+    # stesso seam del rail decisione. `comune_nome` alimenta solo la mappa
+    # sintetica di ripiego, che il connettore flotta non legge (usa il solo
+    # `codice_istat`): qui non c'è un nome comune da passare, e non serve.
+    esito_singolo = esito.model_copy(update={"uffici": [arricchito.ufficio]})
+    batch = _batch_offices_decisione(esito_singolo, comune_nome="")
+    if batch is None or not batch.records:
+        return None
+    query_plan, selected_data_batch = _plan_connettore(esito_singolo, [batch])
+    # La risposta si costruisce dal record del `DataBatch`, non dall'oggetto
+    # `UfficioConnettore`: la chat consuma il contratto comune. `orari_fonte`
+    # resta il canale della fonte verbatim (D-07), portato dal wrapper.
+    record = batch.records[0]
+    return UfficioDrillResult(
+        office=OfficeAnswer(
+            nome=record["nome"],
+            telefono=", ".join(record["telefoni"]) or None,
+            email=", ".join(record["email"]) or None,
+            orari=record["orari"],
+            orari_fonte=arricchito.orari_fonte,
+        ),
+        data_batches=[batch],
+        query_plan=query_plan,
+        selected_data_batch=selected_data_batch,
     )
 
 
 async def _orari_ufficio_live(
-    *, codice_istat: str, ufficio: UfficioConnettore
-) -> tuple[str | None, str | None]:
-    """L'orario di QUESTO ufficio letto adesso dalla sua pagina: forma
-    normalizzata da mostrare più fonte verbatim, con ripiego onesto sul
-    catalogo. Ritorna `(display, fonte)`.
+    *, codice_istat: str, ufficio: UfficioConnettore, piattaforma: str | None = None
+) -> tuple[UfficioConnettore, str | None]:
+    """QUESTO ufficio letto adesso dalla sua pagina: una COPIA arricchita
+    dell'`UfficioConnettore` (orari in forma normalizzata da mostrare, più
+    `indirizzo`/`responsabile` dove la famiglia li pubblica) con ripiego onesto
+    sul catalogo. Ritorna `(ufficio_arricchito, fonte)`.
+
+    Ritorna l'oggetto INTERO — non solo l'orario — così il chiamante può
+    sostituirlo nell'`EsitoConnettore` e far fluire i campi letti fino al
+    `DataBatch` trasportato (Codex P1): un `(display, fonte)` scalare perdeva
+    indirizzo/responsabile per strada.
 
     Punto unico di lettura orari-per-ufficio, condiviso dai due percorsi
     INFORMAZIONE (rail URP/ingerito e ramo connettore): entrambi i comuni —
@@ -2108,20 +2173,18 @@ async def _orari_ufficio_live(
     citazione verbatim SOLO quando abbiamo normalizzato (c'è qualcosa da
     affiancare come prova, D-07); `None` quando `display` è già il verbatim o
     non c'è nessun orario. Mai solleva.
+
+    Delega a `arricchisci_ufficio` (livello acquisizione): unica definizione
+    della lettura scheda-dettaglio, condivisa con il drill — mai un secondo
+    fetch della stessa pagina.
     """
-    if not ufficio.url:
-        return ufficio.orari, None
-    letto = await asyncio.to_thread(
-        leggi_orari_ufficio, codice_istat=codice_istat, url=ufficio.url
+    arricchito = await asyncio.to_thread(
+        arricchisci_ufficio,
+        codice_istat=codice_istat,
+        ufficio=ufficio,
+        piattaforma=piattaforma,
     )
-    if letto is not None and letto.orario_schema is not None:
-        # Pagina letta e orario riconosciuto in forma normalizzabile: mostra la
-        # forma pulita, tieni il verbatim come fonte.
-        return letto.orario_schema.reso, letto.orari
-    # Niente schema: l'orario migliore che abbiamo (verbatim dalla pagina o dal
-    # catalogo) va mostrato così com'è, senza una fonte separata da affiancare.
-    verbatim = (letto.orari if letto is not None else None) or ufficio.orari
-    return verbatim, None
+    return arricchito.ufficio, arricchito.orari_fonte
 
 
 def _testo_ufficio_connettore(*, comune_nome: str, ufficio: UfficioConnettore) -> str:
@@ -2219,18 +2282,18 @@ async def _risposta_da_connettore(
         ufficio_risposta = None
         citizen_effort = 2
     else:
-        # Orario di QUESTO ufficio letto ora dalla sua pagina (stesso punto
-        # unico del rail URP): lo sweep non cattura gli orari per-ufficio, così
-        # lo store li ha `None` e senza questa lettura la scheda direbbe «non
-        # pubblicato» anche dove la pagina li espone. Il valore da mostrare
-        # (forma normalizzata, `display`) va sostituito nell'ufficio così che
-        # ANCHE il testo (`_testo_ufficio_connettore`) lo citi, non solo
-        # l'`OfficeAnswer`; la fonte verbatim resta accanto sulla scheda.
-        display, fonte = await _orari_ufficio_live(
-            codice_istat=esito.codice_istat, ufficio=ufficio
+        # QUESTO ufficio letto ora dalla sua pagina (stesso punto unico del rail
+        # URP): lo sweep non cattura gli orari per-ufficio, così lo store li ha
+        # `None` e senza questa lettura la scheda direbbe «non pubblicato» anche
+        # dove la pagina li espone. La lettura ritorna l'ufficio ARRICCHITO
+        # INTERO (orari in forma normalizzata + indirizzo/responsabile dove
+        # pubblicati): lo si adotta al posto di quello catalogato così che ANCHE
+        # il testo (`_testo_ufficio_connettore`) citi l'orario vero, e — più
+        # sotto — la sostituzione nell'esito porti i campi letti fino al
+        # `DataBatch` trasportato. La fonte verbatim resta accanto sulla scheda.
+        ufficio, fonte = await _orari_ufficio_live(
+            codice_istat=esito.codice_istat, ufficio=ufficio, piattaforma=esito.piattaforma
         )
-        if display != ufficio.orari:
-            ufficio = ufficio.model_copy(update={"orari": display})
         reply = _testo_ufficio_connettore(comune_nome=comune_nome, ufficio=ufficio)
         documento = DocumentAnswer(title=f"{ufficio.nome} — pagina del comune", url=ufficio.url)
         ufficio_risposta = OfficeAnswer(
@@ -2249,9 +2312,24 @@ async def _risposta_da_connettore(
         letto_dal_vivo=True,
     )
     azioni = _azioni_possibili(document=documento, office=ufficio_risposta, web_results=[])
-    data_batches = _data_batches_da_connettore(esito)
+    # Il `DataBatch` trasportato deve portare l'ufficio ARRICCHITO (orari letti,
+    # indirizzo, responsabile), non quello catalogato: sostituisco l'ufficio
+    # scelto nell'esito PRIMA di proiettare data_batches/query_plan/selected —
+    # tutti derivano da qui, così i campi letti dal vivo raggiungono il contratto
+    # e non muoiono nell'`OfficeAnswer` (Codex P1). Match per URL (univoca per
+    # scheda). Quando nessun ufficio è stato scelto, l'esito resta invariato.
+    esito_batch = esito
+    if ufficio is not None:
+        esito_batch = esito.model_copy(
+            update={
+                "uffici": [
+                    ufficio if u.url == ufficio.url else u for u in esito.uffici
+                ]
+            }
+        )
+    data_batches = _data_batches_da_connettore(esito_batch)
     query_plan, selected_data_batch = _plan_connettore(
-        esito, data_batches, recognition=recognition
+        esito_batch, data_batches, recognition=recognition
     )
     return ChatAnswer(
         reply=reply,
@@ -4390,7 +4468,14 @@ async def build_chat_answer(
             if office_letto is not None:
                 risposta = replace(
                     risposta,
-                    info=replace(risposta.info, office=office_letto, letto_dal_vivo=True),
+                    info=replace(
+                        risposta.info,
+                        office=office_letto.office,
+                        letto_dal_vivo=True,
+                    ),
+                    data_batches=office_letto.data_batches,
+                    query_plan=office_letto.query_plan,
+                    selected_data_batch=office_letto.selected_data_batch,
                 )
         # La coda di `_componi_risposta` e' un vicolo cieco («non sono riuscito a
         # collegare... rivolgiti all'URP»): ha senso quando NON abbiamo cercato,

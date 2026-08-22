@@ -650,11 +650,23 @@ export interface AmministrazioneTrasparente {
   piattaforma_at?: string;
 }
 
+/** Chi risponde di un ufficio (accountability). Best-effort: solo dove la
+ *  scheda lo pubblica strutturato, mai inferito da un LLM (D-07). `nome`
+ *  sempre presente; `ruolo`/`email` `null` = non pubblicato (D-05). */
+export interface Responsabile {
+  nome: string;
+  ruolo: string | null;
+  email: string | null;
+}
+
 /** Un ufficio letto dal connettore, coi suoi recapiti verbatim (D-07:
  *  nessuna cifra passa da un LLM). `source_typed` distingue un recapito
  *  tipizzato dal portale (`tel:`/`mailto:`) da uno solo scritto in prosa —
  *  provenienza, mai un giudizio di qualità. Ogni campo recapito assente va
- *  reso come riga onesta «non pubblicato», mai omesso in silenzio (D-05). */
+ *  reso come riga onesta «non pubblicato», mai omesso in silenzio (D-05).
+ *  `indirizzo`/`responsabile` additivi (Ramo 1): `null`/assenti dove la scheda
+ *  non li pubblica — degrado onesto, mai un valore inventato. Opzionali per
+ *  compatibilità coi dati esistenti privi di questi campi. */
 export interface UfficioConnettore {
   nome: string;
   url: string;
@@ -664,6 +676,8 @@ export interface UfficioConnettore {
   orari: string | null;
   source_typed: boolean;
   letto_il: string;
+  indirizzo?: string | null;
+  responsabile?: Responsabile | null;
 }
 
 /** Mirror esatto di `EsitoConnettore` (`api/treasureiq/connettore.py`): il

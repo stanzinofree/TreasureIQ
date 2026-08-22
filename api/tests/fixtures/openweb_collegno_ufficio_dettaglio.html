@@ -1,0 +1,1413 @@
+<!doctype html>
+<html lang="it">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<script data-cfasync="false" data-no-defer="1" data-no-minify="1" data-no-optimize="1">var ewww_webp_supported=!1;function check_webp_feature(A,e){var w;e=void 0!==e?e:function(){},ewww_webp_supported?e(ewww_webp_supported):((w=new Image).onload=function(){ewww_webp_supported=0<w.width&&0<w.height,e&&e(ewww_webp_supported)},w.onerror=function(){e&&e(!1)},w.src="data:image/webp;base64,"+{alpha:"UklGRkoAAABXRUJQVlA4WAoAAAAQAAAAAAAAAAAAQUxQSAwAAAARBxAR/Q9ERP8DAABWUDggGAAAABQBAJ0BKgEAAQAAAP4AAA3AAP7mtQAAAA=="}[A])}check_webp_feature("alpha");</script><script data-cfasync="false" data-no-defer="1" data-no-minify="1" data-no-optimize="1">var Arrive=function(c,w){"use strict";if(c.MutationObserver&&"undefined"!=typeof HTMLElement){var r,a=0,u=(r=HTMLElement.prototype.matches||HTMLElement.prototype.webkitMatchesSelector||HTMLElement.prototype.mozMatchesSelector||HTMLElement.prototype.msMatchesSelector,{matchesSelector:function(e,t){return e instanceof HTMLElement&&r.call(e,t)},addMethod:function(e,t,r){var a=e[t];e[t]=function(){return r.length==arguments.length?r.apply(this,arguments):"function"==typeof a?a.apply(this,arguments):void 0}},callCallbacks:function(e,t){t&&t.options.onceOnly&&1==t.firedElems.length&&(e=[e[0]]);for(var r,a=0;r=e[a];a++)r&&r.callback&&r.callback.call(r.elem,r.elem);t&&t.options.onceOnly&&1==t.firedElems.length&&t.me.unbindEventWithSelectorAndCallback.call(t.target,t.selector,t.callback)},checkChildNodesRecursively:function(e,t,r,a){for(var i,n=0;i=e[n];n++)r(i,t,a)&&a.push({callback:t.callback,elem:i}),0<i.childNodes.length&&u.checkChildNodesRecursively(i.childNodes,t,r,a)},mergeArrays:function(e,t){var r,a={};for(r in e)e.hasOwnProperty(r)&&(a[r]=e[r]);for(r in t)t.hasOwnProperty(r)&&(a[r]=t[r]);return a},toElementsArray:function(e){return e=void 0!==e&&("number"!=typeof e.length||e===c)?[e]:e}}),e=(l.prototype.addEvent=function(e,t,r,a){a={target:e,selector:t,options:r,callback:a,firedElems:[]};return this._beforeAdding&&this._beforeAdding(a),this._eventsBucket.push(a),a},l.prototype.removeEvent=function(e){for(var t,r=this._eventsBucket.length-1;t=this._eventsBucket[r];r--)e(t)&&(this._beforeRemoving&&this._beforeRemoving(t),(t=this._eventsBucket.splice(r,1))&&t.length&&(t[0].callback=null))},l.prototype.beforeAdding=function(e){this._beforeAdding=e},l.prototype.beforeRemoving=function(e){this._beforeRemoving=e},l),t=function(i,n){var o=new e,l=this,s={fireOnAttributesModification:!1};return o.beforeAdding(function(t){var e=t.target;e!==c.document&&e!==c||(e=document.getElementsByTagName("html")[0]);var r=new MutationObserver(function(e){n.call(this,e,t)}),a=i(t.options);r.observe(e,a),t.observer=r,t.me=l}),o.beforeRemoving(function(e){e.observer.disconnect()}),this.bindEvent=function(e,t,r){t=u.mergeArrays(s,t);for(var a=u.toElementsArray(this),i=0;i<a.length;i++)o.addEvent(a[i],e,t,r)},this.unbindEvent=function(){var r=u.toElementsArray(this);o.removeEvent(function(e){for(var t=0;t<r.length;t++)if(this===w||e.target===r[t])return!0;return!1})},this.unbindEventWithSelectorOrCallback=function(r){var a=u.toElementsArray(this),i=r,e="function"==typeof r?function(e){for(var t=0;t<a.length;t++)if((this===w||e.target===a[t])&&e.callback===i)return!0;return!1}:function(e){for(var t=0;t<a.length;t++)if((this===w||e.target===a[t])&&e.selector===r)return!0;return!1};o.removeEvent(e)},this.unbindEventWithSelectorAndCallback=function(r,a){var i=u.toElementsArray(this);o.removeEvent(function(e){for(var t=0;t<i.length;t++)if((this===w||e.target===i[t])&&e.selector===r&&e.callback===a)return!0;return!1})},this},i=new function(){var s={fireOnAttributesModification:!1,onceOnly:!1,existing:!1};function n(e,t,r){return!(!u.matchesSelector(e,t.selector)||(e._id===w&&(e._id=a++),-1!=t.firedElems.indexOf(e._id)))&&(t.firedElems.push(e._id),!0)}var c=(i=new t(function(e){var t={attributes:!1,childList:!0,subtree:!0};return e.fireOnAttributesModification&&(t.attributes=!0),t},function(e,i){e.forEach(function(e){var t=e.addedNodes,r=e.target,a=[];null!==t&&0<t.length?u.checkChildNodesRecursively(t,i,n,a):"attributes"===e.type&&n(r,i)&&a.push({callback:i.callback,elem:r}),u.callCallbacks(a,i)})})).bindEvent;return i.bindEvent=function(e,t,r){t=void 0===r?(r=t,s):u.mergeArrays(s,t);var a=u.toElementsArray(this);if(t.existing){for(var i=[],n=0;n<a.length;n++)for(var o=a[n].querySelectorAll(e),l=0;l<o.length;l++)i.push({callback:r,elem:o[l]});if(t.onceOnly&&i.length)return r.call(i[0].elem,i[0].elem);setTimeout(u.callCallbacks,1,i)}c.call(this,e,t,r)},i},o=new function(){var a={};function i(e,t){return u.matchesSelector(e,t.selector)}var n=(o=new t(function(){return{childList:!0,subtree:!0}},function(e,r){e.forEach(function(e){var t=e.removedNodes,e=[];null!==t&&0<t.length&&u.checkChildNodesRecursively(t,r,i,e),u.callCallbacks(e,r)})})).bindEvent;return o.bindEvent=function(e,t,r){t=void 0===r?(r=t,a):u.mergeArrays(a,t),n.call(this,e,t,r)},o};d(HTMLElement.prototype),d(NodeList.prototype),d(HTMLCollection.prototype),d(HTMLDocument.prototype),d(Window.prototype);var n={};return s(i,n,"unbindAllArrive"),s(o,n,"unbindAllLeave"),n}function l(){this._eventsBucket=[],this._beforeAdding=null,this._beforeRemoving=null}function s(e,t,r){u.addMethod(t,r,e.unbindEvent),u.addMethod(t,r,e.unbindEventWithSelectorOrCallback),u.addMethod(t,r,e.unbindEventWithSelectorAndCallback)}function d(e){e.arrive=i.bindEvent,s(i,e,"unbindArrive"),e.leave=o.bindEvent,s(o,e,"unbindLeave")}}(window,void 0),ewww_webp_supported=!1;function check_webp_feature(e,t){var r;ewww_webp_supported?t(ewww_webp_supported):((r=new Image).onload=function(){ewww_webp_supported=0<r.width&&0<r.height,t(ewww_webp_supported)},r.onerror=function(){t(!1)},r.src="data:image/webp;base64,"+{alpha:"UklGRkoAAABXRUJQVlA4WAoAAAAQAAAAAAAAAAAAQUxQSAwAAAARBxAR/Q9ERP8DAABWUDggGAAAABQBAJ0BKgEAAQAAAP4AAA3AAP7mtQAAAA==",animation:"UklGRlIAAABXRUJQVlA4WAoAAAASAAAAAAAAAAAAQU5JTQYAAAD/////AABBTk1GJgAAAAAAAAAAAAAAAAAAAGQAAABWUDhMDQAAAC8AAAAQBxAREYiI/gcA"}[e])}function ewwwLoadImages(e){if(e){for(var t=document.querySelectorAll(".batch-image img, .image-wrapper a, .ngg-pro-masonry-item a, .ngg-galleria-offscreen-seo-wrapper a"),r=0,a=t.length;r<a;r++)ewwwAttr(t[r],"data-src",t[r].getAttribute("data-webp")),ewwwAttr(t[r],"data-thumbnail",t[r].getAttribute("data-webp-thumbnail"));for(var i=document.querySelectorAll("div.woocommerce-product-gallery__image"),r=0,a=i.length;r<a;r++)ewwwAttr(i[r],"data-thumb",i[r].getAttribute("data-webp-thumb"))}for(var n=document.querySelectorAll("video"),r=0,a=n.length;r<a;r++)ewwwAttr(n[r],"poster",e?n[r].getAttribute("data-poster-webp"):n[r].getAttribute("data-poster-image"));for(var o,l=document.querySelectorAll("img.ewww_webp_lazy_load"),r=0,a=l.length;r<a;r++)e&&(ewwwAttr(l[r],"data-lazy-srcset",l[r].getAttribute("data-lazy-srcset-webp")),ewwwAttr(l[r],"data-srcset",l[r].getAttribute("data-srcset-webp")),ewwwAttr(l[r],"data-lazy-src",l[r].getAttribute("data-lazy-src-webp")),ewwwAttr(l[r],"data-src",l[r].getAttribute("data-src-webp")),ewwwAttr(l[r],"data-orig-file",l[r].getAttribute("data-webp-orig-file")),ewwwAttr(l[r],"data-medium-file",l[r].getAttribute("data-webp-medium-file")),ewwwAttr(l[r],"data-large-file",l[r].getAttribute("data-webp-large-file")),null!=(o=l[r].getAttribute("srcset"))&&!1!==o&&o.includes("R0lGOD")&&ewwwAttr(l[r],"src",l[r].getAttribute("data-lazy-src-webp"))),l[r].className=l[r].className.replace(/\bewww_webp_lazy_load\b/,"");for(var s=document.querySelectorAll(".ewww_webp"),r=0,a=s.length;r<a;r++)e?(ewwwAttr(s[r],"srcset",s[r].getAttribute("data-srcset-webp")),ewwwAttr(s[r],"src",s[r].getAttribute("data-src-webp")),ewwwAttr(s[r],"data-orig-file",s[r].getAttribute("data-webp-orig-file")),ewwwAttr(s[r],"data-medium-file",s[r].getAttribute("data-webp-medium-file")),ewwwAttr(s[r],"data-large-file",s[r].getAttribute("data-webp-large-file")),ewwwAttr(s[r],"data-large_image",s[r].getAttribute("data-webp-large_image")),ewwwAttr(s[r],"data-src",s[r].getAttribute("data-webp-src"))):(ewwwAttr(s[r],"srcset",s[r].getAttribute("data-srcset-img")),ewwwAttr(s[r],"src",s[r].getAttribute("data-src-img"))),s[r].className=s[r].className.replace(/\bewww_webp\b/,"ewww_webp_loaded");window.jQuery&&jQuery.fn.isotope&&jQuery.fn.imagesLoaded&&(jQuery(".fusion-posts-container-infinite").imagesLoaded(function(){jQuery(".fusion-posts-container-infinite").hasClass("isotope")&&jQuery(".fusion-posts-container-infinite").isotope()}),jQuery(".fusion-portfolio:not(.fusion-recent-works) .fusion-portfolio-wrapper").imagesLoaded(function(){jQuery(".fusion-portfolio:not(.fusion-recent-works) .fusion-portfolio-wrapper").isotope()}))}function ewwwWebPInit(e){ewwwLoadImages(e),ewwwNggLoadGalleries(e),document.arrive(".ewww_webp",function(){ewwwLoadImages(e)}),document.arrive(".ewww_webp_lazy_load",function(){ewwwLoadImages(e)}),document.arrive("videos",function(){ewwwLoadImages(e)}),"loading"==document.readyState?document.addEventListener("DOMContentLoaded",ewwwJSONParserInit):("undefined"!=typeof galleries&&ewwwNggParseGalleries(e),ewwwWooParseVariations(e))}function ewwwAttr(e,t,r){null!=r&&!1!==r&&e.setAttribute(t,r)}function ewwwJSONParserInit(){"undefined"!=typeof galleries&&check_webp_feature("alpha",ewwwNggParseGalleries),check_webp_feature("alpha",ewwwWooParseVariations)}function ewwwWooParseVariations(e){if(e)for(var t=document.querySelectorAll("form.variations_form"),r=0,a=t.length;r<a;r++){var i=t[r].getAttribute("data-product_variations"),n=!1;try{for(var o in i=JSON.parse(i))void 0!==i[o]&&void 0!==i[o].image&&(void 0!==i[o].image.src_webp&&(i[o].image.src=i[o].image.src_webp,n=!0),void 0!==i[o].image.srcset_webp&&(i[o].image.srcset=i[o].image.srcset_webp,n=!0),void 0!==i[o].image.full_src_webp&&(i[o].image.full_src=i[o].image.full_src_webp,n=!0),void 0!==i[o].image.gallery_thumbnail_src_webp&&(i[o].image.gallery_thumbnail_src=i[o].image.gallery_thumbnail_src_webp,n=!0),void 0!==i[o].image.thumb_src_webp&&(i[o].image.thumb_src=i[o].image.thumb_src_webp,n=!0));n&&ewwwAttr(t[r],"data-product_variations",JSON.stringify(i))}catch(e){}}}function ewwwNggParseGalleries(e){if(e)for(var t in galleries){var r=galleries[t];galleries[t].images_list=ewwwNggParseImageList(r.images_list)}}function ewwwNggLoadGalleries(e){e&&document.addEventListener("ngg.galleria.themeadded",function(e,t){window.ngg_galleria._create_backup=window.ngg_galleria.create,window.ngg_galleria.create=function(e,t){var r=$(e).data("id");return galleries["gallery_"+r].images_list=ewwwNggParseImageList(galleries["gallery_"+r].images_list),window.ngg_galleria._create_backup(e,t)}})}function ewwwNggParseImageList(e){for(var t in e){var r=e[t];if(void 0!==r["image-webp"]&&(e[t].image=r["image-webp"],delete e[t]["image-webp"]),void 0!==r["thumb-webp"]&&(e[t].thumb=r["thumb-webp"],delete e[t]["thumb-webp"]),void 0!==r.full_image_webp&&(e[t].full_image=r.full_image_webp,delete e[t].full_image_webp),void 0!==r.srcsets)for(var a in r.srcsets)nggSrcset=r.srcsets[a],void 0!==r.srcsets[a+"-webp"]&&(e[t].srcsets[a]=r.srcsets[a+"-webp"],delete e[t].srcsets[a+"-webp"]);if(void 0!==r.full_srcsets)for(var i in r.full_srcsets)nggFSrcset=r.full_srcsets[i],void 0!==r.full_srcsets[i+"-webp"]&&(e[t].full_srcsets[i]=r.full_srcsets[i+"-webp"],delete e[t].full_srcsets[i+"-webp"])}return e}check_webp_feature("alpha",ewwwWebPInit);</script><title>Anagrafe - Comune di Collegno</title>
+
+        <script type="text/javascript" id="deda-check-user-js-extra">
+        /* <![CDATA[ */
+        var ajaxObject = {"ajaxurl": "https://www.comune.collegno.to.it/wp-admin/admin-ajax.php", "loginType": "dedanext_civilianext", "urlPortale": "", "urlToOverride": ""};
+        // console.log("ajaxObject", ajaxObject);
+        /* ]]> */
+        </script>
+        <script type="text/javascript" src="https://static-www.comune.collegno.to.it/wp-content/themes/design-comuni-wordpress-theme-main-child/inc/integrazioni/assets/js/check_user.js" id="deda-check-user-js"></script>
+    
+<!-- The SEO Framework by Sybre Waaijer -->
+<meta name="robots" content="max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
+<link rel="canonical" href="https://www.comune.collegno.to.it/amministrazione/unita_organizzativa/ufficio-anagrafe/" />
+<meta property="og:type" content="article" />
+<meta property="og:locale" content="it_IT" />
+<meta property="og:site_name" content="Comune di Collegno" />
+<meta property="og:title" content="Anagrafe" />
+<meta property="og:url" content="https://www.comune.collegno.to.it/amministrazione/unita_organizzativa/ufficio-anagrafe/" />
+<meta property="og:image" content="https://static-www.comune.collegno.to.it/wp-content/uploads/2023/12/cropped-favicon-preview.png" />
+<meta property="og:image:width" content="512" />
+<meta property="og:image:height" content="512" />
+<meta property="og:image:alt" content="favicon" />
+<meta property="article:published_time" content="2023-10-30T15:57:23+00:00" />
+<meta property="article:modified_time" content="2026-05-28T10:56:35+00:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Anagrafe" />
+<meta name="twitter:image" content="https://static-www.comune.collegno.to.it/wp-content/uploads/2023/12/cropped-favicon-preview.png" />
+<meta name="twitter:image:alt" content="favicon" />
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://www.comune.collegno.to.it/#/schema/WebSite","url":"https://www.comune.collegno.to.it/","name":"Comune di Collegno","inLanguage":"it-IT","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://www.comune.collegno.to.it/search/{search_term_string}/"},"query-input":"required name=search_term_string"},"publisher":{"@type":"Organization","@id":"https://www.comune.collegno.to.it/#/schema/Organization","name":"Comune di Collegno","url":"https://www.comune.collegno.to.it/","logo":{"@type":"ImageObject","url":"https://static-www.comune.collegno.to.it/wp-content/uploads/2023/12/cropped-favicon-preview.png","contentUrl":"https://static-www.comune.collegno.to.it/wp-content/uploads/2023/12/cropped-favicon-preview.png","width":512,"height":512,"inLanguage":"it-IT","caption":"stemma"}}},{"@type":"WebPage","@id":"https://www.comune.collegno.to.it/amministrazione/unita_organizzativa/ufficio-anagrafe/","url":"https://www.comune.collegno.to.it/amministrazione/unita_organizzativa/ufficio-anagrafe/","name":"Anagrafe - Comune di Collegno","inLanguage":"it-IT","isPartOf":{"@id":"https://www.comune.collegno.to.it/#/schema/WebSite"},"breadcrumb":{"@type":"BreadcrumbList","@id":"https://www.comune.collegno.to.it/#/schema/BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":"https://www.comune.collegno.to.it/","name":"Comune di Collegno"},{"@type":"ListItem","position":2,"name":"Anagrafe"}]},"potentialAction":{"@type":"ReadAction","target":"https://www.comune.collegno.to.it/amministrazione/unita_organizzativa/ufficio-anagrafe/"},"datePublished":"2023-10-30T15:57:23+00:00","dateModified":"2026-05-28T10:56:35+00:00"}]}</script>
+<!-- / The SEO Framework by Sybre Waaijer | 13.69ms meta | 0.28ms boot -->
+
+<link rel='dns-prefetch' href='//code.jquery.com' />
+<link rel='dns-prefetch' href='//static-www.comune.collegno.to.it' />
+<link rel="alternate" type="application/rss+xml" title="Comune di Collegno &raquo; Feed" href="https://www.comune.collegno.to.it/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Comune di Collegno &raquo; Feed dei commenti" href="https://www.comune.collegno.to.it/comments/feed/" />
+<!-- preconnect vari -->
+<link rel="preconnect" href="https://static-www.comune.collegno.to.it">
+<link rel="preconnect" href="https://ingestion.webanalytics.italia.it/">
+
+<meta name="google-site-verification" content="EL3ZOisIXNKmGjZPefX-953gUDJQ6dNC5sM5ua037kQ" />
+
+<script>
+  var _paq = window._paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="https://ingestion.webanalytics.italia.it/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '39868']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code --><link rel="alternate" type="application/rss+xml" title="Comune di Collegno &raquo; Anagrafe Feed dei commenti" href="https://www.comune.collegno.to.it/amministrazione/unita_organizzativa/ufficio-anagrafe/feed/" />
+<link rel="alternate" title="oEmbed (JSON)" type="application/json+oembed" href="https://www.comune.collegno.to.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.comune.collegno.to.it%2Famministrazione%2Funita_organizzativa%2Fufficio-anagrafe%2F" />
+<link rel="alternate" title="oEmbed (XML)" type="text/xml+oembed" href="https://www.comune.collegno.to.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.comune.collegno.to.it%2Famministrazione%2Funita_organizzativa%2Fufficio-anagrafe%2F&#038;format=xml" />
+<style id="wp-img-auto-sizes-contain-inline-css">
+img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
+/*# sourceURL=wp-img-auto-sizes-contain-inline-css */
+</style>
+<link rel='stylesheet' id='envira-tags-tags-frontend-css' href='https://static-www.comune.collegno.to.it/wp-content/plugins/envira-tags/assets/css/frontend.css?ver=1.13.4' media='all' />
+<style id="wp-emoji-styles-inline-css">
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+/*# sourceURL=wp-emoji-styles-inline-css */
+</style>
+
+
+<link rel='stylesheet' id='dci-comuni-css' href='https://static-www.comune.collegno.to.it/wp-content/themes/design-comuni-wordpress-theme-main/assets/css/bootstrap-italia-comuni.min.css?ver=7.0.2' media='all' />
+<link rel='stylesheet' id='dci-wp-style-css' href='https://static-www.comune.collegno.to.it/wp-content/themes/design-comuni-wordpress-theme-main/style.css?ver=7.0.2' media='all' />
+<link rel='stylesheet' id='chld_thm_cfg_separate-css' href='https://static-www.comune.collegno.to.it/wp-content/themes/design-comuni-wordpress-theme-main-child/ctc-style.css?ver=1.12.7.1782479971' media='all' />
+<link rel='stylesheet' id='parent-style-css' href='https://static-www.comune.collegno.to.it/wp-content/themes/design-comuni-wordpress-theme-main/style.css?ver=1.12.7' media='all' />
+<link rel='stylesheet' id='child-style1-css' href='https://static-www.comune.collegno.to.it/wp-content/themes/design-comuni-wordpress-theme-main-child/layout-tema.css?ver=1.12.7.1782479971' media='all' />
+<link rel='stylesheet' id='dci-print-style-css' href='https://static-www.comune.collegno.to.it/wp-content/themes/design-comuni-wordpress-theme-main/print.css?ver=20190912' media='print' />
+<link rel='stylesheet' id='tablepress-default-css' href='https://static-www.comune.collegno.to.it/wp-content/plugins/tablepress/css/build/default.css?ver=3.3.2' media='all' />
+<link rel='stylesheet' id='dci-child-font-css' href='https://static-www.comune.collegno.to.it/wp-content/themes/design-comuni-wordpress-theme-main-child/assets/css/fonts.css?ver=1.12.7.1782479971' media='all' />
+<script id="jquery-js" src="https://code.jquery.com/jquery-3.7.1.min.js?ver=3.7.1"></script>
+<script id="jquery-migrate-js" src="https://code.jquery.com/jquery-migrate-3.5.2.min.js?ver=3.5.2"></script>
+<script id="deda-main-js-js" src="https://static-www.comune.collegno.to.it/wp-content/themes/design-comuni-wordpress-theme-main-child/assets/js/main.js?ver=7.0.2"></script>
+<script id="dci-modernizr-js" src="https://static-www.comune.collegno.to.it/wp-content/themes/design-comuni-wordpress-theme-main/assets/js/modernizr.custom.js?ver=7.0.2"></script>
+<link rel="https://api.w.org/" href="https://www.comune.collegno.to.it/wp-json/" /><link rel="alternate" title="JSON" type="application/json" href="https://www.comune.collegno.to.it/wp-json/wp/v2/unita_organizzative/617" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.comune.collegno.to.it/xmlrpc.php?rsd" />
+<meta name="description" content="L'ufficio si occupa principalmente dell'iscrizione, registrazione, modifica e cancellazione dei movimenti della popolazione e della certificazione dei" />
+<link rel="icon" href="https://static-www.comune.collegno.to.it/wp-content/uploads/2023/12/cropped-favicon-preview-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://static-www.comune.collegno.to.it/wp-content/uploads/2023/12/cropped-favicon-preview-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://static-www.comune.collegno.to.it/wp-content/uploads/2023/12/cropped-favicon-preview-180x180.png" />
+<meta name="msapplication-TileImage" content="https://static-www.comune.collegno.to.it/wp-content/uploads/2023/12/cropped-favicon-preview-270x270.png" />
+</head>
+<body class="wp-singular unita_organizzativa-template-default single single-unita_organizzativa postid-617 wp-theme-design-comuni-wordpress-theme-main wp-child-theme-design-comuni-wordpress-theme-main-child">
+
+<!-- svg vault -->
+<div class="svg-vault d-none">
+    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <defs>
+           <symbol id="it-social-facebook" viewBox="0 0 32 32">
+                <rect id="Rectangle-path-facebook" x="0" y="0.035" width="32" height="32" style="fill:none;"/>
+                <path d="M18.48,32l0,-14.576l4.912,0l0.736,-5.696l-5.648,0l0,-3.648c0,-1.6 0.464,-2.768 2.832,-2.768l2.992,0l0,-5.088c-1.456,-0.154 -2.92,-0.229 -4.384,-0.224c-4.352,0 -7.328,2.656 -7.328,7.52l0,4.192l-4.896,0l0,5.712l4.896,0l0,14.576l5.888,0Z" style="fill-rule:nonzero;"/>
+            </symbol>
+            <symbol id="it-social-youtube" viewBox="0 0 32 32">
+                <rect id="Rectangle-path-youtube" x="0" y="0.035" width="32" height="32" style="fill:none;"/>
+                <path d="m31.77573,8.22108c0,-2.60747 -2.11214,-4.72101 -4.71821,-4.72101l-22.13523,0c-2.60606,0 -4.71821,2.11355 -4.71821,4.72101l0,12.65813c0,2.60747 2.11214,4.72101 4.71821,4.72101l22.13523,0c2.60606,0 4.71821,-2.11355 4.71821,-4.72101l0,-12.65813zm-18.94299,11.66993l0,-11.89023l9.01616,5.94494l-9.01616,5.94529z" style="fill-rule:nonzero;"/>
+            </symbol>
+            <symbol id="it-social-instagram" viewBox="0 0 32 32">
+                <rect id="Rectangle-path-instagram" x="0" y="0.035" width="32" height="32" style="fill:none;"/>
+                <path d="m30.68965,1.37694c-0.80291,-0.80313 -1.7651,-1.20452 -2.88606,-1.20452l-23.71288,0c-1.12132,0 -2.08321,0.40153 -2.88635,1.20452c-0.80299,0.80277 -1.20437,1.76481 -1.20437,2.88591l0,23.71266c0,1.12095 0.40131,2.08321 1.20437,2.88606c0.80313,0.80291 1.76525,1.20459 2.88635,1.20459l23.71259,0c1.12073,0 2.08321,-0.40168 2.88613,-1.20459c0.80313,-0.80284 1.20415,-1.7651 1.20415,-2.88606l0,-23.71266c-0.00007,-1.12132 -0.40102,-2.08285 -1.20394,-2.88591zm-19.23787,10.28828c1.25266,-1.21106 2.75813,-1.81688 4.51617,-1.81688c1.77165,0 3.28388,0.60582 4.53683,1.81688c1.25295,1.21128 1.87907,2.67529 1.87907,4.39174c0,1.71623 -0.62611,3.18031 -1.87907,4.39123c-1.25295,1.21157 -2.76467,1.81732 -4.53683,1.81732c-1.75798,0 -3.26329,-0.60626 -4.51617,-1.81732c-1.25295,-1.21106 -1.87936,-2.675 -1.87936,-4.39123c0,-1.71645 0.6264,-3.18038 1.87936,-4.39174zm16.82942,15.4593c0,0.35964 -0.12495,0.66059 -0.37389,0.90299c-0.24967,0.24218 -0.54684,0.36335 -0.89324,0.36335l-22.19651,0c-0.35986,0 -0.66117,-0.12116 -0.90321,-0.36335c-0.2424,-0.24189 -0.36349,-0.54335 -0.36349,-0.90299l0,-13.45565l2.92766,0c-0.27673,0.87222 -0.41513,1.77907 -0.41513,2.72016c0,2.65842 0.96888,4.92476 2.90686,6.80084c1.93819,1.87536 4.27065,2.81347 6.99765,2.81347c1.79958,0 3.4606,-0.42931 4.98381,-1.2875c1.5227,-0.8587 2.72627,-2.02467 3.61282,-3.49908c0.88604,-1.47434 1.32903,-3.08366 1.32903,-4.82767c0,-0.9411 -0.13891,-1.84772 -0.41564,-2.72016l2.80344,0l0,13.45565l-0.00015,0l0,-0.00007zm0,-18.54288c0,0.40146 -0.1384,0.74066 -0.41571,1.01746c-0.27673,0.27702 -0.61571,0.41535 -1.01739,0.41535l-3.61282,0c-0.40124,0 -0.74073,-0.1384 -1.01746,-0.41535c-0.2768,-0.2768 -0.41513,-0.616 -0.41513,-1.01746l0,-3.42577c0,-0.38764 0.13833,-0.72328 0.41513,-1.00713c0.2768,-0.28371 0.61629,-0.42575 1.01746,-0.42575l3.61282,0c0.40168,0 0.74073,0.14196 1.01739,0.42575c0.27724,0.28386 0.41571,0.61949 0.41571,1.00713l0,3.42577z" style="fill-rule:nonzero;"/>
+            </symbol>
+            <symbol id="it-social-twitter" viewBox="0 0 32 32">
+                <rect id="Rectangle-path-twitter" x="0" y="0.035" width="32" height="32" style="fill:none;"/>
+                <path d="M10.055,29.037c0.04,0 0.08,0 0.119,0c10.185,0 18.565,-8.38 18.565,-18.565c0,-0.04 0,-0.079 0,-0.119l0,-0.849c1.276,-0.934 2.38,-2.084 3.261,-3.397c-1.199,0.528 -2.47,0.878 -3.771,1.036c1.361,-0.81 2.386,-2.082 2.888,-3.584c-1.309,0.745 -2.733,1.267 -4.213,1.546c-1.241,-1.322 -2.976,-2.072 -4.789,-2.072c-3.6,0 -6.564,2.956 -6.574,6.556c-0.004,0.503 0.053,1.005 0.17,1.494c-5.284,-0.237 -10.227,-2.709 -13.588,-6.794c-1.751,2.977 -0.857,6.855 2.021,8.765c-1.042,-0.025 -2.063,-0.305 -2.972,-0.816c0.002,3.145 2.26,5.87 5.35,6.455c-0.552,0.156 -1.124,0.236 -1.698,0.237c-0.415,0.007 -0.83,-0.021 -1.24,-0.084c0.86,2.664 3.332,4.499 6.131,4.552c-2.322,1.83 -5.195,2.824 -8.152,2.819c-0.523,0 -1.045,-0.034 -1.563,-0.102c3,1.921 6.493,2.936 10.055,2.922" style="fill-rule:nonzero;"/>
+            </symbol>
+            <symbol id="it-social-linkedin" viewBox="0 0 32 32">
+                <rect id="Rectangle-path-linkedin" x="0" y="0.035" width="32" height="32" style="fill:none;"/>
+                <path d="M24.062,10.087c-2.559,-0.087 -4.97,1.237 -6.268,3.445l0,-2.877l-6.447,0l0,21.31l6.624,0l0,-10.566c0,-2.789 0.515,-5.488 3.978,-5.488c3.463,0 3.427,3.197 3.427,5.665l0,10.389l6.624,0l0,-11.721c0,-5.736 -1.225,-10.157 -7.938,-10.157Zm-20.191,-10.087c-0.006,0 -0.012,0 -0.017,0c-2.114,0 -3.854,1.74 -3.854,3.854c0,2.113 1.74,3.853 3.854,3.853c2.107,0 3.843,-1.728 3.853,-3.836c0,-0.012 0,-0.023 0,-0.035c0,-2.104 -1.731,-3.836 -3.836,-3.836c0,0 0,0 0,0Zm-3.321,10.655l0,21.31l6.589,0l0,-21.31l-6.589,0Zm23.512,-0.533c-2.552,-0.094 -4.961,1.216 -6.268,3.41l0,-2.877l-6.447,0l0,21.31l6.624,0l0,-10.566c0,-2.789 0.515,-5.488 3.978,-5.488c3.463,0 3.427,3.197 3.427,5.665l0,10.389l6.624,0l0,-11.721c0,-5.736 -1.225,-10.157 -7.938,-10.157l0,0.035Zm-23.512,21.843l6.589,0l0,-21.31l-6.589,0l0,21.31Zm3.321,-31.965c-0.006,0 -0.012,0 -0.017,0c-2.114,0 -3.854,1.74 -3.854,3.854c0,2.113 1.74,3.853 3.854,3.853c2.107,0 3.843,-1.728 3.853,-3.836c0,-0.012 0,-0.023 0,-0.035c0,-2.104 -1.731,-3.836 -3.836,-3.836c0,0 0,0 0,0Z" style="fill-rule:nonzero;"/>
+            </symbol>
+            <symbol id="it-arrow-down" viewBox="0 0 32 32">
+                <rect id="Rectangle-path-arrow-down" x="0" y="0.035" width="32" height="32" style="fill:none;"/>
+                <path d="M17.895,31.25l11.639,-11.638c0.271,-0.253 0.425,-0.607 0.425,-0.977c0,-0.732 -0.603,-1.335 -1.335,-1.335c-0.37,0 -0.724,0.154 -0.976,0.425l-10.322,10.304l0,-26.694c0,-0.732 -0.603,-1.335 -1.335,-1.335c-0.732,0 -1.335,0.603 -1.335,1.335l0,26.694l-10.304,-10.268c-0.252,-0.271 -0.606,-0.425 -0.976,-0.425c-0.732,0 -1.335,0.602 -1.335,1.335c0,0.37 0.154,0.724 0.425,0.976l11.71,11.603c1.029,1 2.69,1 3.719,0Z" style="fill-rule:nonzero;"/>
+            </symbol>
+            <symbol id="it-arrow-left" viewBox="0 0 32 32">
+                <rect id="Rectangle-path-arrow-left" x="0" y="0.035" width="32" height="32" style="fill:none;"/>
+                <path d="M0.787,17.887l11.589,11.625c0.248,0.254 0.588,0.397 0.943,0.397c0.354,0 0.694,-0.143 0.942,-0.397c0.516,-0.517 0.516,-1.367 0,-1.884l-10.257,-10.292l26.663,0c0.731,0 1.333,-0.602 1.333,-1.333c0,-0.732 -0.602,-1.333 -1.333,-1.333l-26.663,0l10.292,-10.292c0.247,-0.251 0.385,-0.59 0.385,-0.942c0,-0.738 -0.607,-1.345 -1.345,-1.345c-0.361,0 -0.707,0.145 -0.96,0.403l-11.589,11.625c-0.503,0.497 -0.787,1.176 -0.787,1.884c0,0.707 0.284,1.386 0.787,1.884Z" style="fill-rule:nonzero;"/>
+            </symbol>
+            <symbol id="it-arrow-right" viewBox="0 0 32 32">
+                <rect id="Rectangle-path-arrow-right" x="0" y="0.035" width="32" height="32" style="fill:none;"/>
+                <path d="M31.213,17.887l-11.589,11.625c-0.248,0.254 -0.588,0.397 -0.943,0.397c-0.354,0 -0.694,-0.143 -0.942,-0.397c-0.516,-0.517 -0.516,-1.367 0,-1.884l10.257,-10.292l-26.663,0c-0.731,0 -1.333,-0.602 -1.333,-1.333c0,-0.732 0.602,-1.333 1.333,-1.333l26.663,0l-10.292,-10.292c-0.247,-0.251 -0.385,-0.59 -0.385,-0.942c0,-0.738 0.607,-1.345 1.345,-1.345c0.361,0 0.707,0.145 0.96,0.403l11.589,11.625c0.503,0.497 0.787,1.176 0.787,1.884c0,0.707 -0.284,1.386 -0.787,1.884Z" style="fill-rule:nonzero;"/>
+            </symbol>
+            <symbol id="it-arrow-up" viewBox="0 0 32 32">
+                <rect id="Rectangle-path-arrow-up" x="0" y="0.035" width="32" height="32" style="fill:none;"/>
+                <path d="M17.895,0.75l11.639,11.638c0.271,0.253 0.425,0.607 0.425,0.977c0,0.732 -0.603,1.335 -1.335,1.335c-0.37,0 -0.724,-0.154 -0.976,-0.425l-10.322,-10.304l0,26.694c0,0.732 -0.603,1.335 -1.335,1.335c-0.732,0 -1.335,-0.603 -1.335,-1.335l0,-26.694l-10.304,10.268c-0.252,0.271 -0.606,0.425 -0.976,0.425c-0.732,0 -1.335,-0.602 -1.335,-1.335c0,-0.37 0.154,-0.724 0.425,-0.976l11.71,-11.603c1.029,-1 2.69,-1 3.719,0Z" style="fill-rule:nonzero;"/>
+            <symbol id="svg-building" viewBox="0 0 32 32">
+                <rect id="Rectangle-path-search" x="0" y="0.035" width="32" height="32" style="fill:none;"/>
+                <path id="Rectangle-path-search-Oval-2" d="M20.743,23.178c-2.172,1.659 -4.887,2.645 -7.831,2.645c-7.131,0 -12.912,-5.78 -12.912,-12.911c0,-7.131 5.781,-12.912 12.912,-12.912c7.131,0 12.911,5.781 12.911,12.912c0,2.944 -0.986,5.659 -2.645,7.831l8.318,8.318c0.672,0.672 0.672,1.762 0,2.435c-0.673,0.672 -1.763,0.672 -2.435,0l-8.318,-8.318Zm-7.831,-19.735c-5.23,0 -9.469,4.239 -9.469,9.469c0,5.229 4.239,9.468 9.469,9.468l0.061,0c5.201,-0.033 9.407,-4.259 9.407,-9.468c0,-5.209 -4.206,-9.436 -9.407,-9.469l-0.061,0Z" style="fill-rule:nonzero;"/>
+            </symbol>
+            <symbol id="svg-cancel-large" viewBox="0 0 32 32">
+                <rect id="Rectangle-path-circle-large" x="0" y="0.035" width="32" height="32" style="fill:none;"/>
+                <path d="M16,15.653l15.081,-15.082c0.307,0.307 0.613,0.613 0.919,0.919l-15.081,15.081l13.938,13.939l-0.918,0.919l-13.939,-13.939l-13.939,13.939l-0.918,-0.919l13.938,-13.939l-15.081,-15.081l0.919,-0.919l15.081,15.082Z" style="fill-rule:nonzero;"/>
+            </symbol>
+        </defs>
+    </svg>
+</div>
+<!-- /end svg vault -->
+<div class="svg-vault d-none"><svg xmlns="http://www.w3.org/2000/svg"><symbol id="it-arrow-down-circle" viewBox="0 0 24 24"><path d="M15.6 13.2l.7.7-4.3 4.3-4.3-4.3.7-.7 3.1 3.1V7h1v9.2l3.1-3zM22 12c0 5.5-4.5 10-10 10S2 17.5 2 12 6.5 2 12 2s10 4.5 10 10zm-1 0c0-5-4-9-9-9s-9 4-9 9 4 9 9 9 9-4 9-9z"/></symbol><symbol id="it-arrow-down-triangle" viewBox="0 0 24 24"><path d="M9.2 12h5.6c.6 0 1 .5 1 1 0 .3-.1.5-.3.7L12 17.3l-3.5-3.6c-.4-.4-.4-1 0-1.4.2-.2.4-.3.7-.3z"/></symbol><symbol id="it-arrow-down" viewBox="0 0 24 24"><path d="M17.9 13.2l-5.4 5.3V3h-1v15.5l-5.4-5.3-.7.7 6.6 6.5 6.6-6.5-.7-.7z"/></symbol><symbol id="it-arrow-left-circle" viewBox="0 0 24 24"><path d="M7.7 11.5H17v1H7.8l3 3.1-.7.7L5.8 12l4.3-4.3.7.7-3.1 3.1zM22 12c0 5.5-4.5 10-10 10S2 17.5 2 12 6.5 2 12 2s10 4.5 10 10zm-1 0c0-5-4-9-9-9s-9 4-9 9 4 9 9 9 9-4 9-9z"/></symbol><symbol id="it-arrow-left-triangle" viewBox="0 0 24 24"><path d="M12 9.2v5.6c0 .6-.5 1-1 1-.3 0-.5-.1-.7-.3L6.8 12l3.5-3.5c.4-.4 1-.4 1.4 0 .2.2.3.4.3.7z"/></symbol><symbol id="it-arrow-right-circle" viewBox="0 0 24 24"><path d="M13.9 7.7l4.3 4.3-4.3 4.3-.7-.7 3.1-3.1H7v-1h9.2l-3-3.1.7-.7zM22 12c0 5.5-4.5 10-10 10S2 17.5 2 12 6.5 2 12 2s10 4.5 10 10zm-1 0c0-5-4-9-9-9s-9 4-9 9 4 9 9 9 9-4 9-9z"/></symbol><symbol id="it-arrow-left" viewBox="0 0 24 24"><path d="M21 11.5H5.5l5.3-5.4-.7-.7L3.6 12l6.5 6.6.7-.7-5.3-5.4H21v-1z"/></symbol><symbol id="it-arrow-right-triangle" viewBox="0 0 24 24"><path d="M12 14.8V9.2c0-.6.5-1 1-1 .3 0 .5.1.7.3l3.5 3.5-3.5 3.5c-.4.4-1 .4-1.4 0-.2-.2-.3-.4-.3-.7z"/></symbol><symbol id="it-arrow-right" viewBox="0 0 24 24"><path d="M13.9 5.4l-.7.7 5.3 5.4H3v1h15.5l-5.3 5.4.7.7 6.6-6.6-6.6-6.6z"/></symbol><symbol id="it-arrow-up-circle" viewBox="0 0 24 24"><path d="M12 5.8l4.3 4.3-.7.7-3.1-3.1V17h-1V7.8l-3.1 3-.7-.7L12 5.8zM22 12c0 5.5-4.5 10-10 10S2 17.5 2 12 6.5 2 12 2s10 4.5 10 10zm-1 0c0-5-4-9-9-9s-9 4-9 9 4 9 9 9 9-4 9-9z"/></symbol><symbol id="it-arrow-up-triangle" viewBox="0 0 24 24"><path d="M14.8 12H9.2c-.6 0-1-.5-1-1 0-.3.1-.5.3-.7L12 6.8l3.5 3.5c.4.4.4 1 0 1.4-.2.2-.4.3-.7.3z"/></symbol><symbol id="it-arrow-up" viewBox="0 0 24 24"><path d="M18.6 10.1L12 3.5l-6.6 6.6.7.7 5.4-5.3V21h1V5.5l5.4 5.3.7-.7z"/></symbol><symbol id="it-ban" viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zM5.2 17.6C3.8 16 3.1 14 3.1 11.9s.7-4.1 2.1-5.7l12.7 12.7C14 22 8.3 21.4 5.2 17.6zm13.4.5L5.9 5.4c3.7-3.3 9.4-3 12.7.7 3.1 3.4 3.1 8.6 0 12z"/></symbol><symbol id="it-behance" viewBox="0 0 24 24"><path d="M7.8 5.8c.5 0 1.1 0 1.6.2.4.1.9.3 1.2.5.4.1.7.5.9.8.2.5.3 1 .3 1.4 0 .5-.1 1.1-.4 1.5-.3.4-.8.8-1.3 1 .7.2 1.3.6 1.7 1.1.4.6.6 1.3.6 2 0 .5-.1 1.1-.3 1.6-.2.4-.6.8-1 1.1-.4.3-.9.5-1.4.6-.6.4-1.2.4-1.7.4H2V5.8h5.8zm-.3 5c.4 0 .8-.1 1.2-.4.3-.3.5-.7.4-1.1 0-.3 0-.5-.1-.8-.1-.1-.2-.3-.4-.4-.2-.1-.4-.2-.6-.2-.2 0-.5-.1-.7-.1H4.7v2.9l2.8.1zm.1 5.2c.3 0 .5 0 .8-.1l.6-.3c.2-.1.3-.3.4-.5.1-.3.2-.5.2-.8 0-.5-.2-1-.5-1.3-.4-.3-.9-.4-1.4-.4h-3V16h2.9zm8.6-.1c.4.4 1 .6 1.6.5.4 0 .9-.1 1.3-.4.3-.2.5-.5.6-.8h2.1c-.2.9-.8 1.7-1.6 2.3-.8.5-1.7.7-2.6.7-.6 0-1.3-.1-1.9-.3-1.1-.4-2-1.3-2.3-2.4-.2-.6-.3-1.2-.3-1.9 0-.6.1-1.3.3-1.9.2-.6.5-1.1.9-1.5.4-.4.9-.8 1.4-1 .7-.2 1.3-.3 1.9-.3.7 0 1.4.1 2 .4.5.3 1 .7 1.4 1.2.4.5.6 1.1.8 1.7.2.7.2 1.3.2 2h-6.4c0 .6.2 1.2.6 1.7zm2.8-4.7c-.4-.3-.9-.5-1.4-.5-.3 0-.7 0-1 .2-.2.1-.5.3-.6.5-.2.2-.3.4-.3.6-.1.2-.1.4-.1.6h4c-.1-.5-.3-1-.6-1.4zm-3.9-4.6h5v1.2h-5V6.6z"/></symbol><symbol id="it-bookmark" viewBox="0 0 24 24"><path d="M18 22.7l-6-6-6 6V2h12v20.7zm-6-7.4l5 5V3H7v17.3l5-5z"/></symbol><symbol id="it-box" viewBox="0 0 24 24"><path d="M21 2H3v4h1v16h16V6h1V2zm-2 19H5V6h14v15zm1-16H4V3h16v2z"/><path d="M8 8h8v1H8z"/></symbol><symbol id="it-burger" viewBox="0 0 24 24"><path d="M22 5v1H2V5h20zM2 12.5h20v-1H2v1zM2 19h20v-1H2v1z"/></symbol><symbol id="it-calendar" viewBox="0 0 24 24"><path d="M20.5 4H17V3h-1v1H8V3H7v1H3.5C2.7 4 2 4.7 2 5.5v13c0 .8.7 1.5 1.5 1.5h17c.8 0 1.5-.7 1.5-1.5v-13c0-.8-.7-1.5-1.5-1.5zm.5 14.5c0 .3-.2.5-.5.5h-17c-.3 0-.5-.2-.5-.5v-13c0-.3.2-.5.5-.5H7v1h1V5h8v1h1V5h3.5c.3 0 .5.2.5.5v13zM4 8h16v1H4V8z"/></symbol><symbol id="it-camera" viewBox="0 0 24 24"><path d="M20.5 20h-17c-.8 0-1.5-.7-1.5-1.5v-10C2 7.7 2.7 7 3.5 7h4.3l1.5-2.3c.3-.4.7-.7 1.2-.7h3c.5 0 .9.3 1.2.7L16.2 7h4.3c.8 0 1.5.7 1.5 1.5v10c0 .8-.7 1.5-1.5 1.5zM3.5 8c-.3 0-.5.2-.5.5v10c0 .3.2.5.5.5h17c.3 0 .5-.2.5-.5v-10c0-.3-.2-.5-.5-.5h-4.8l-1.8-2.8-.4-.2h-3l-.4.2L8.3 8H3.5zM12 18c-2.8 0-5-2.2-5-5s2.2-5 5-5 5 2.2 5 5-2.2 5-5 5zm0-9c-2.2 0-4 1.8-4 4s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4zM7 5H4v1h3V5z"/></symbol><symbol id="it-card" viewBox="0 0 24 24"><path d="M20.5 5h-17C2.7 5 2 5.7 2 6.5v11c0 .8.7 1.5 1.5 1.5h17c.8 0 1.5-.7 1.5-1.5v-11c0-.8-.7-1.5-1.5-1.5zM3 9h18v3H3V9zm18 8.5c0 .3-.2.5-.5.5h-17c-.3 0-.5-.2-.5-.5V13h18v4.5zM3 8V6.5c0-.3.2-.5.5-.5h17c.3 0 .5.2.5.5V8H3zm5 7H4v-1h4v1z"/></symbol><symbol id="it-chart-line" viewBox="0 0 24 24"><path d="M21 20v1H3V3h1v17z"/><path d="M10.5 9.2l2.5 2.5 6-6v3.8h1V4h-5.5v1h3.8L13 10.3l-2.5-2.5-4.3 4.3.6.8z"/></symbol><symbol id="it-check-circle" viewBox="0 0 24 24"><path d="M17.1 7.9l.7.7-7.8 7.6-4.7-4.6.7-.7 4 3.9 7.1-6.9zM22 12c0 5.5-4.5 10-10 10S2 17.5 2 12 6.5 2 12 2s10 4.5 10 10zm-1 0c0-5-4-9-9-9s-9 4-9 9 4 9 9 9 9-4 9-9z"/></symbol><symbol id="it-check" viewBox="0 0 24 24"><path d="M9.6 16.9L4 11.4l.8-.7 4.8 4.8 8.5-8.4.7.7-9.2 9.1z"/></symbol><symbol id="it-chevron-left" viewBox="0 0 24 24"><path d="M14.6 17.2L9 11.6 14.6 6l.8.7-4.9 4.9 4.9 4.9z"/></symbol><symbol id="it-chevron-right" viewBox="0 0 24 24"><path d="M9.8 17.2l-.8-.7 4.9-4.9L9 6.7l.8-.7 5.6 5.6z"/></symbol><symbol id="it-clip" viewBox="0 0 24 24"><path d="M11 22c-1.6.1-2.9-1.2-3-2.8V6c0-2.2 1.8-4 4-4s4 1.8 4 4v10h-1V6c0-1.7-1.3-3-3-3S9 4.3 9 6v13c0 1.1.9 2 2 2s2-.9 2-2V8c0-.6-.4-1-1-1s-1 .4-1 1v8h-1V8c0-1.1.9-2 2-2s2 .9 2 2v11c.1 1.6-1.2 2.9-2.8 3H11z"/></symbol><symbol id="it-clock" viewBox="0 0 24 24"><path d="M11.5 5h1v7.5H7v-1h4.5V5zM22 12c0 5.5-4.5 10-10 10S2 17.5 2 12 6.5 2 12 2s10 4.5 10 10zm-1 0c0-5-4-9-9-9s-9 4-9 9 4 9 9 9 9-4 9-9z"/></symbol><symbol id="it-close-big" viewBox="0 0 24 24"><path d="M12.7 12l6.7 6.6-.8.8-6.6-6.7-6.6 6.7-.8-.8 6.7-6.6-6.7-6.6.8-.8 6.6 6.7 6.6-6.7.8.8-6.7 6.6z"/></symbol><symbol id="it-close-circle" viewBox="0 0 24 24"><path d="M16.3 8.3L12.6 12l3.7 3.6-.7.7-3.7-3.6-3.6 3.6-.7-.7 3.6-3.6-3.6-3.7.7-.7 3.6 3.7 3.7-3.7.7.7zM22 12c0 5.5-4.5 10-10 10S2 17.5 2 12 6.5 2 12 2s10 4.5 10 10zm-1 0c0-5-4-9-9-9s-9 4-9 9 4 9 9 9 9-4 9-9z"/></symbol><symbol id="it-close" viewBox="0 0 24 24"><path d="M12.7 12l3.7 3.6-.8.8-3.6-3.7-3.6 3.7-.8-.8 3.7-3.6-3.7-3.6.8-.8 3.6 3.7 3.6-3.7.8.8-3.7 3.6z"/></symbol><symbol id="it-code-circle" viewBox="0 0 24 24"><path d="M19 12l-2.9 2.9-.7-.8 2.1-2.1-2.1-2.1.7-.8L19 12zM7.9 9.1L5 12l2.9 2.9.7-.8L6.5 12l2.1-2.1-.7-.8zM22 12c0 5.5-4.5 10-10 10S2 17.5 2 12 6.5 2 12 2s10 4.5 10 10zm-1 0c0-5-4-9-9-9s-9 4-9 9 4 9 9 9 9-4 9-9zM9.6 16.5l1 .3 3.7-9.3-.9-.3-3.8 9.3z"/></symbol><symbol id="it-collapse" viewBox="0 0 24 24"><path d="M16.5 15.4l-4.9-4.9-4.9 4.9-.7-.8L11.6 9l5.6 5.6z"/></symbol><symbol id="it-comment" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h2v5.4l1.7-1.7 3.7-3.7H19c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm1 12c.1.5-.3.9-.8 1H12l-4 4v-4H5c-.5.1-.9-.3-1-.8V5c-.1-.5.3-.9.8-1H19c.5-.1.9.3 1 .8V15zM9 10c.1.5-.3.9-.8 1H8c-.5.1-.9-.3-1-.8V10c-.1-.5.3-.9.8-1H8c.5-.1.9.3 1 .8v.2zm4 0c0 .6-.4 1-1 1s-1-.4-1-1 .4-1 1-1 1 .4 1 1zm4 0c0 .6-.4 1-1 1s-1-.4-1-1 .4-1 1-1 1 .4 1 1z"/></symbol><symbol id="it-copy" viewBox="0 0 24 24"><path d="M19.5 4H18v-.6c-.1-.8-.7-1.4-1.5-1.4h-11c-.8 0-1.4.6-1.5 1.4v15.2c.1.8.7 1.4 1.5 1.4H7v.6c.1.8.7 1.4 1.5 1.4h11c.8 0 1.4-.6 1.5-1.4V5.4c-.1-.8-.7-1.4-1.5-1.4zM5 18.6V3.4c0-.2.3-.4.5-.4h11c.2 0 .5.2.5.4v15.2c0 .2-.3.4-.5.4h-11c-.2 0-.5-.2-.5-.4zm15 2c0 .2-.3.4-.5.4h-11c-.2 0-.5-.2-.5-.4V20h8.5c.8 0 1.4-.6 1.5-1.4V5h1.5c.2 0 .5.2.5.4v15.2z"/></symbol><symbol id="it-delete" viewBox="0 0 24 24"><path d="M15.5 4v-.5c0-.8-.7-1.5-1.5-1.5h-4c-.8 0-1.5.7-1.5 1.5V4H3v1h2v15.5c0 .8.7 1.5 1.5 1.5h11c.8 0 1.5-.7 1.5-1.5V5h2V4h-5.5zm-6-.5c0-.3.2-.5.5-.5h4c.3 0 .5.2.5.5V4h-5v-.5zm8.5 17c0 .3-.2.5-.5.5h-11c-.3 0-.5-.2-.5-.5V5h12v15.5z"/><path d="M11.5 8h1v10h-1zM8 8h1v10H8zM15 8h1v10h-1z"/></symbol><symbol id="it-designers-italia" viewBox="0 0 24 24"><path d="M8.7 20.2v-13h3.6v13.1l-3.6-.1zM23 10.1h-3.3v6.5c0 .2.1.4.3.6s.4.2.8.2h2.1l.2 2.8c-1.2.3-2.1.4-2.8.4-1.6 0-2.7-.3-3.3-1.1-.6-.7-.9-2-.9-3.9v-12h3.6v3.6H23v2.9zm-19.8 1c-.6 0-1.2-.2-1.6-.6-.4-.4-.6-.9-.6-1.5s.2-1.1.6-1.5c.4-.5.9-.7 1.6-.7s1.1.2 1.5.6c.4.5.6 1 .6 1.6s-.2 1.1-.6 1.5-.9.6-1.5.6z"/></symbol><symbol id="it-download" viewBox="0 0 24 24"><path d="M12 14.2L7.7 9.9l.7-.7 3.1 3.1V3h1v9.2l3.1-3 .7.7-4.3 4.3zm7-2.2v7.5c0 .3-.2.5-.5.5h-13c-.3 0-.5-.2-.5-.5V12H4v7.5c0 .8.7 1.5 1.5 1.5h13c.8 0 1.5-.7 1.5-1.5V12h-1z"/></symbol><symbol id="it-error" viewBox="0 0 24 24"><path d="M11.5 14.2V5.7h1.2v8.5h-1.2zm-.1 4.1h1.2v-1.8h-1.2v1.8zM22 7.9v8.3L16.1 22H7.9L2 16.2V7.9L7.9 2h8.2L22 7.9zm-1 .4L15.7 3H8.3L3 8.3v7.5L8.3 21h7.4l5.3-5.2V8.3z"/></symbol><symbol id="it-exchange-circle" viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 19c-5 0-9-4-9-9s4-9 9-9 9 4 9 9-4 9-9 9zm5.1-8.9l.8.8-4.3 4.3c-.3.3-.7.4-1.1.4-.4 0-.8-.1-1.1-.4L9 14.7V17H8v-4h4v1H9.7l2.4 2.5h.8l4.2-4.4zm-6-4.6l-4.2 4.4-.8-.8 4.3-4.3c.3-.3.7-.4 1.1-.4.4 0 .8.1 1.1.4L15 9.3V7h1v4h-4v-1h2.3l-2.4-2.5h-.8z"/></symbol><symbol id="it-expand" viewBox="0 0 24 24"><path d="M11.6 15.4L6 9.8l.7-.8 4.9 4.9L16.5 9l.7.8z"/></symbol><symbol id="it-external-link" viewBox="0 0 24 24"><path d="M21 3v6h-1V4.7l-7.6 7.7-.8-.8L19.3 4H15V3h6zm-4 16.5c0 .3-.2.5-.5.5h-12c-.3 0-.5-.2-.5-.5v-12c0-.3.2-.5.5-.5H12V6H4.5C3.7 6 3 6.7 3 7.5v12c0 .8.7 1.5 1.5 1.5h12c.8 0 1.5-.7 1.5-1.5V12h-1v7.5z"/></symbol><symbol id="it-facebook-square" viewBox="0 0 24 24"><path d="M17 0H1C.4 0 0 .4 0 1v16c0 .6.4 1 1 1h8.6v-6.9H7.3V8.3h2.3v-2c-.1-1 .2-1.9.9-2.6s1.6-1.1 2.6-1c.7 0 1.4 0 2.1.1v2.4h-1.4c-1.1 0-1.3.5-1.3 1.3v1.7h2.7l-.4 2.7h-2.3v7H17c.6 0 1-.4 1-1V1c0-.6-.4-1-1-1z" transform="translate(3 3)"/></symbol><symbol id="it-facebook" viewBox="0 0 24 24"><path d="M13.6 22v-9.1h3.1l.5-3.6h-3.5V7.1c0-1 .3-1.7 1.8-1.7h1.9V2.1c-1.1-.1-2-.1-3-.1-2.7 0-4.6 1.7-4.6 4.7v2.6h-3v3.6h3.1V22h3.7z"/></symbol><symbol id="it-file" viewBox="0 0 24 24"><path d="M14.7 2H6.5C5.7 2 5 2.7 5 3.5v17c0 .8.7 1.5 1.5 1.5h11c.8 0 1.5-.7 1.5-1.5V6.3L14.7 2zm.3 1.7L17.3 6h-1.8c-.3 0-.5-.2-.5-.5V3.7zM17.5 21h-11c-.3 0-.5-.2-.5-.5v-17c0-.3.2-.5.5-.5H14v2.5c0 .8.7 1.5 1.5 1.5H18v13.5c0 .3-.2.5-.5.5zM8 9h8v1H8V9zm0 2h8v1H8v-1zm0 2h4v1H8v-1z"/></symbol><symbol id="it-files" viewBox="0 0 24 24"><path d="M15.7 2H7.5C6.7 2 6 2.7 6 3.5V4h-.5C4.7 4 4 4.7 4 5.5v15c0 .8.7 1.5 1.5 1.5h11c.8 0 1.5-.7 1.5-1.5V20h.5c.8 0 1.5-.7 1.5-1.5V6.3L15.7 2zm.3 1.7L18.3 6h-1.8c-.3 0-.5-.2-.5-.5V3.7zm1 16.8c0 .3-.2.5-.5.5h-11c-.3 0-.5-.2-.5-.5v-15c0-.3.2-.5.5-.5H6v13.5c0 .8.7 1.5 1.5 1.5H17v.5zm1.5-1.5h-11c-.3 0-.5-.2-.5-.5v-15c0-.3.2-.5.5-.5H15v2.5c0 .8.7 1.5 1.5 1.5H19v11.5c0 .3-.2.5-.5.5zM9 9h8v1H9V9zm0 2h8v1H9v-1zm0 2h4v1H9v-1z"/></symbol><symbol id="it-flag" viewBox="0 0 24 24"><path d="M17.1 8l3.3-5H5V2H4v20h1v-9h15.4l-3.3-5zM5 4h13.6l-2.7 4 2.7 4H5V4z"/></symbol><symbol id="it-flickr-square" viewBox="0 0 24 24"><path d="M20 4c-.6-.6-1.5-1-2.4-1H6.4c-.9 0-1.8.4-2.4 1-.6.6-1 1.5-1 2.4v11.3c0 .9.4 1.8 1 2.4.6.6 1.5 1 2.4 1h11.2c1.9 0 3.4-1.5 3.4-3.4V6.4c0-.9-.4-1.8-1-2.4zm-9.6 9.8c-1 1-2.5 1-3.5 0s-1-2.5 0-3.5 2.5-1 3.5 0c1 .9 1 2.5 0 3.5zm6.6 0c-.7.7-1.8.9-2.7.5-.9-.4-1.5-1.3-1.5-2.3 0-1 .6-1.9 1.5-2.3.9-.4 2-.2 2.7.5 1 1 1 2.6 0 3.6z"/></symbol><symbol id="it-flickr" viewBox="0 0 24 24"><circle cx="6.7" cy="12" r="4.7"/><circle cx="17.3" cy="12" r="4.7"/></symbol><symbol id="it-folder" viewBox="0 0 24 24"><path d="M20 6h-8l-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm1 12c.1.5-.3.9-.8 1H4c-.5.1-.9-.3-1-.8V6c-.1-.5.3-.9.8-1h5.8l1.7 1.7.3.3H20c.5-.1.9.3 1 .8V18zM4 8h16v1H4V8z"/></symbol><symbol id="it-fullscreen" viewBox="0 0 24 24"><path d="M4 20h4.5v1H3v-5.5h1zM3 8.5h1V4h4.5V3H3zM20 20h-4.5v1H21v-5.5h-1zM15.5 3v1H20v4.5h1V3z"/></symbol><symbol id="it-funnel" viewBox="0 0 24 24"><path d="M14 22h-1v-8.6L20 3H4l7 10.4V22h-1v-8.4L2 2h20l-8 11.6V22z"/></symbol><symbol id="it-github" viewBox="0 0 24 24"><path d="M12 2c-4.9 0-9.1 3.6-9.9 8.4s2.1 9.5 6.7 11.1c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.1-.6-.6-1.2-1.1-1.5-.9-.6.1-.6.1-.6.6.1 1.2.5 1.5 1 .6 1 1.9 1.4 2.9.8 0-.5.3-1 .6-1.3-2.1-.2-4.5-1.1-4.5-4.9 0-1 .3-2 1-2.7-.3-.9-.2-1.8.1-2.6 0 0 .8-.3 2.8 1 1.6-.4 3.4-.4 5 0 1.9-1.3 2.7-1 2.7-1 .4.8.4 1.8.1 2.6.7.7 1 1.7 1 2.7 0 3.8-2.3 4.7-4.6 4.9.5.5.7 1.2.7 1.9v2.8c0 .4.2.6.7.5 4.7-1.5 7.5-6.2 6.7-11.1S16.9 2 12 2z"/></symbol><symbol id="it-threads" viewBox="0 0 24 24"><path d="M12.1 21.1c-2.7 0-4.8-.9-6.2-2.7C4.7 16.9 4 14.7 4 12s.7-4.9 1.9-6.4C7.3 3.8 9.4 3 12.1 2.9c2.1 0 3.8.6 5.2 1.6 1.3 1 2.2 2.4 2.7 4.2l-1.5.4c-.8-3-3-4.5-6.3-4.6-2.2 0-3.9.7-5 2.1-1 1.3-1.5 3.1-1.6 5.4 0 2.3.5 4.2 1.6 5.4 1.1 1.4 2.8 2 5 2.1 2 0 3.3-.5 4.4-1.6 1.3-1.2 1.2-2.7.8-3.6-.2-.5-.7-1-1.2-1.3-.1 1-.5 1.9-1 2.5-.7.8-1.6 1.3-2.8 1.4-.9 0-1.8-.2-2.5-.6-.9-.6-1.3-1.4-1.4-2.3 0-.9.3-1.7 1-2.3.7-.6 1.6-.9 2.7-1 .8 0 1.6 0 2.3.1-.1-.6-.3-1-.6-1.3-.4-.4-1-.7-1.8-.7-.6 0-1.5.2-2.1 1l-1.2-1c.7-1.1 2-1.7 3.4-1.7 2.4 0 3.9 1.5 4 4.1.1 0 .2.1.2.1 1.1.5 2 1.3 2.4 2.3.6 1.4.7 3.6-1.2 5.4-1.3 1.5-3 2.1-5.5 2.1Zm.8-8.9h-.6c-1.4.1-2.3.7-2.2 1.6.1 1 1.1 1.4 2.1 1.3.9 0 2.1-.4 2.3-2.8-.4 0-1-.1-1.6-.1Z"/></symbol><symbol id="it-google" viewBox="0 0 24 24"><path d="M12.545 10.239v3.821h5.445c-.712 2.315-2.647 3.972-5.445 3.972a6.033 6.033 0 110-12.064c1.498 0 2.866.549 3.921 1.453l2.814-2.814A9.969 9.969 0 0012.545 2C7.021 2 2.543 6.477 2.543 12s4.478 10 10.002 10c8.396 0 10.249-7.85 9.426-11.748l-9.426-.013z"/></symbol><symbol id="it-hearing" viewBox="0 0 24 24"><path d="M20 9c0 2.5-1.3 4.8-3.5 6l-2 1.1c-.9.6-1.5 1.6-1.5 2.7 0 1.8-1.4 3.2-3.2 3.2h-.6c-1.3-.1-2.5-.9-3-2.1l.9-.5c.3.9 1.1 1.6 2.1 1.6h.6c.6 0 1.2-.2 1.6-.7.4-.4.6-.9.6-1.5 0-1.4.8-2.8 2-3.5l2-1.2c1.8-1 3-3 3-5.1 0-3.3-2.7-6-6-6-1.9 0-3.7.9-4.8 2.4l-.8-.6C8.7 3 10.8 2 13 2c3.9 0 7 3.1 7 7zM7.5 12C7.5 9 5 6.5 2 6.5v1c2.5 0 4.5 2 4.5 4.5s-2 4.5-4.5 4.5v1c3 0 5.5-2.5 5.5-5.5zM5 12c.1-1.6-1.2-2.9-2.8-3H2v1c1.1 0 2 .9 2 2s-.9 2-2 2v1c1.6.1 2.9-1.2 3-2.8V12zm5 0c0-4.4-3.6-8-8-8v1c3.9 0 7 3.1 7 7s-3.1 7-7 7v1c4.4 0 8-3.6 8-8zm5.9.3c.8-.9 1.2-2 1.2-3.2 0-1.2-.4-2.3-1.2-3.2-.8-.9-2-1.4-3.2-1.4-1.2.1-2.4.6-3.2 1.5l-.3.3.2.3c.6.9 1.1 1.9 1.3 3v.4h.4c.8 0 1.5.7 1.5 1.5s-.7 1.5-1.5 1.5v1c1.4 0 2.5-1.1 2.5-2.5 0-1.2-.8-2.2-2-2.5-.2-.9-.6-1.8-1.1-2.6.6-.5 1.4-.8 2.2-.9.9 0 1.8.4 2.4 1 .7.7 1 1.6 1 2.6s-.3 1.9-1 2.6l.8.6z"/></symbol><symbol id="it-help-circle" viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 19c-5 0-9-4-9-9s4-9 9-9 9 4 9 9-4 9-9 9zm-1.2-4.5H12v1.8h-1.2v-1.8zm4.5-8c0 .6-.1 1.2-.3 1.8-.3.5-.8 1-1.3 1.4L12.3 13c-.2.4-.4.8-.4 1.2v.6H11c-.1-.3-.2-.7-.2-1 0-.4.2-.9.5-1.2.4-.5.9-1 1.4-1.4.5-.4.9-.8 1.2-1.3.2-.4.3-.9.3-1.4 0-.5-.2-1.1-.6-1.4-.6-.3-1.3-.5-2-.4L9.3 7h-.5v-.8c1-.3 2-.5 3-.5.9-.1 1.9.1 2.7.6.6.6.9 1.4.8 2.2z"/></symbol><symbol id="it-help" viewBox="0 0 24 24"><path d="M12.8 22h-1.4v-2.1h1.4V22zm-.1-4.9h-1.2c-.1-.6-.1-1.1-.1-1.7 0-.4.1-.8.3-1.2.2-.5.4-.9.7-1.3l2.3-2.1c.7-.6 1.3-1.3 1.8-2.1.4-.7.5-1.5.5-2.3.1-1-.3-2-1.1-2.6-1-.6-2.2-.8-3.4-.7-1.2.1-2.4.2-3.6.5l-1 .3-.2-1.2h.1c1.5-.5 3.1-.7 4.7-.8 1.5-.1 3 .2 4.3 1 1 .9 1.5 2.2 1.4 3.5.1.9-.1 1.9-.5 2.7-.5.8-1.1 1.6-1.9 2.2-.6.5-1.2 1-1.8 1.6l-.9 1.2c-.3.4-.4.9-.4 1.4v1.6z"/></symbol><symbol id="it-horn" viewBox="0 0 24 24"><path d="M5 9c-1.7 0-3 1.3-3 3s1.3 3 3 3h.5L7 19.3c.3 1 1.3 1.7 2.3 1.7h.2c.5 0 .9-.2 1.2-.6.3-.4.4-.9.2-1.4l-1.3-4h1.8l8.6 3.8V4.7L11.4 9H5zm5 10.3c0 .2 0 .4-.1.5l-.4.2h-.2c-.6 0-1.2-.4-1.4-1l-1.3-4h1.9l1.5 4.3zM5 14c-1.1 0-2-.9-2-2s.9-2 2-2h6v4H5zm14 3.2l-7-3V9.8l7-3.5v10.9zM22 9v6h-1V9h1z"/></symbol><symbol id="it-inbox" viewBox="0 0 24 24"><path d="M4 2v14h3.7l1 2h6.6l1-2H20V2H4zm15 13h-3.3l-1 2H9.3l-1-2H5V3h14v12z"/><path d="M19 17h1v5H4v-5h1v4h14zM7 5h10v1H7zM7 8h10v1H7zM7 11h10v1H7z"/></symbol><symbol id="it-info-circle" viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 19c-5 0-9-4-9-9s4-9 9-9 9 4 9 9-4 9-9 9zm-.7-15h1.5v2h-1.5V6zm0 3h1.5v9h-1.5V9z"/></symbol><symbol id="it-instagram" viewBox="0 0 24 24"><path d="M12 4.6c-2.4.1-2.6.1-3.6.1-.6 0-1.2.1-1.7.3-.4.2-.7.4-1 .7-.3.3-.5.6-.7 1-.2.5-.3 1.1-.3 1.7v7.2c0 .6.1 1.1.3 1.7.2.4.4.7.7 1 .3.3.6.5 1 .7.5.2 1.1.3 1.7.3 1 .1 1.2.1 3.6.1s2.6-.1 3.6-.1c.6 0 1.1-.1 1.7-.3.8-.3 1.4-.9 1.7-1.7.2-.5.3-1.1.3-1.7.1-.9.1-1.2.1-3.6s-.1-2.6-.1-3.6c0-.6-.1-1.1-.3-1.7-.2-.4-.4-.7-.7-1-.3-.3-.6-.5-1-.7-.5-.2-1.1-.3-1.7-.4H12zM12 3h3.7c.7 0 1.5.2 2.2.4 1.2.5 2.2 1.4 2.7 2.6.2.8.4 1.5.4 2.3v7.4c0 .8-.2 1.5-.5 2.2-.5 1.2-1.4 2.2-2.6 2.6-.7.3-1.4.4-2.2.4H8.3c-.8 0-1.5-.2-2.2-.5-1.2-.5-2.2-1.4-2.6-2.6-.3-.7-.4-1.4-.4-2.2v-3.7-3.7c0-.7.2-1.5.4-2.2.5-1.2 1.4-2.2 2.6-2.7.7-.1 1.4-.3 2.2-.3H12zm0 4.4c1.2 0 2.4.5 3.3 1.4s1.4 2 1.4 3.3c0 2.6-2.1 4.6-4.6 4.6S7.4 14.6 7.4 12s2-4.6 4.6-4.6zm0 7.6c.8 0 1.6-.3 2.1-.9.6-.6.9-1.3.9-2.1 0-1.7-1.3-3-3-3s-3 1.3-3 3 1.3 3 3 3zm4.8-6.7c-.6 0-1.1-.5-1.1-1.1s.5-1.1 1.1-1.1c.6 0 1.1.5 1.1 1.1s-.5 1.1-1.1 1.1z"/></symbol><symbol id="it-key" viewBox="0 0 24 24"><path d="M18 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 3c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1c.1.5-.3.9-.8 1H18zm-1-6c-2 0-3.8 1.2-4.6 3H3.3l-2 2 3 3H7v-1h.3l1 1H11v-1h1.4c.8 1.8 2.6 3 4.6 3 2.8 0 5-2.2 5-5s-2.2-5-5-5zm0 9c-1.7 0-3.2-1.1-3.8-2.7V13H10v1H8.7l-1-1H6v1H4.7l-2-2 1-1h9.4v-.3C13.7 9.1 15.3 8 17 8c2.2 0 4 1.8 4 4s-1.8 4-4 4z"/></symbol><symbol id="it-less-circle" viewBox="0 0 24 24"><path d="M12 3c5 0 9 4 9 9 0 2.4-.9 4.7-2.6 6.4-3.5 3.5-9.2 3.5-12.7 0s-3.5-9.2 0-12.7C7.3 3.9 9.6 3 12 3m0-1C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10c0-2.7-1.1-5.2-2.9-7.1C17.2 3 14.7 2 12 2z"/><path d="M7.8 11.3h8.5c.4 0 .8.3.8.8 0 .4-.3.8-.8.8H7.8c-.5-.1-.8-.5-.8-.9s.3-.7.8-.7z"/></symbol><symbol id="it-link" viewBox="0 0 24 24"><path d="M13.4 13.4l-.7-.7c.6-.5.9-1.3.9-2.1s-.3-1.6-.9-2.1L9.2 4.9C8 3.8 6.1 3.8 4.9 4.9 3.8 6.1 3.8 8 4.9 9.2L7.8 12l-.7.7-2.9-2.8c-1.5-1.6-1.5-4.1 0-5.7 1.6-1.5 4.1-1.5 5.7 0l3.5 3.6c.8.7 1.2 1.7 1.2 2.8 0 1.1-.4 2.1-1.2 2.8zm6.4 6.4c1.5-1.6 1.5-4.1 0-5.7l-2.9-2.8-.7.7 2.9 2.8c1.1 1.2 1.1 3.1 0 4.3-1.2 1.1-3.1 1.1-4.3 0l-3.5-3.6c-.6-.5-.9-1.3-.9-2.1s.3-1.6.9-2.1l-.7-.7c-.8.7-1.2 1.7-1.2 2.8 0 1.1.4 2.1 1.2 2.8l3.5 3.6c.7.7 1.8 1.1 2.8 1.1 1.1.1 2.1-.3 2.9-1.1z"/></symbol><symbol id="it-linkedin-square" viewBox="0 0 24 24"><path d="M19.7 3H4.3C3.6 3 3 3.6 3 4.3v15.4c0 .7.6 1.3 1.3 1.3h15.3c.7 0 1.3-.6 1.3-1.3V4.3c.1-.7-.5-1.3-1.2-1.3zM8.3 18.3H5.7V9.8h2.7v8.5zM7 8.6c-.9 0-1.5-.7-1.5-1.6 0-.9.7-1.5 1.5-1.6s1.5.7 1.6 1.6c0 .4-.2.8-.4 1.1-.4.3-.8.5-1.2.5zm11.3 9.7h-2.7v-4.2c0-1 0-2.3-1.4-2.3s-1.6 1.1-1.6 2.2v4.3H10V9.8h2.6V11c.5-.9 1.5-1.4 2.5-1.4 2.7 0 3.2 1.8 3.2 4.1v4.6z"/></symbol><symbol id="it-linkedin" viewBox="0 0 24 24"><path d="M16.5 8.7c-1.4 0-2.8.7-3.5 1.9V9H9.4v12h3.7v-5.9c0-1.6.3-3.1 2.2-3.1s1.9 1.8 1.9 3.2V21H21v-6.6c0-3.2-.7-5.7-4.5-5.7zM5.2 3C4 3 3 4 3 5.2c0 1.2 1 2.2 2.2 2.2s2.2-1 2.2-2.2c0-.6-.2-1.1-.6-1.5-.5-.5-1.1-.7-1.6-.7zM3.3 9v12H7V9H3.3zm13.2-.3c-1.4-.1-2.8.7-3.5 1.9V9H9.4v12h3.7v-5.9c0-1.6.3-3.1 2.2-3.1s1.9 1.8 1.9 3.2V21H21v-6.6c0-3.2-.7-5.7-4.5-5.7zM3.3 21H7V9H3.3v12zM5.2 3C4 3 3 4 3 5.2c0 1.2 1 2.2 2.2 2.2s2.2-1 2.2-2.2c0-.6-.2-1.1-.6-1.5-.5-.5-1.1-.7-1.6-.7z"/></symbol><symbol id="it-list" viewBox="0 0 24 24"><path d="M4 12c.1.5-.3.9-.8 1H3c-.6 0-1-.4-1-1s.4-1 1-1c.5-.1.9.3 1 .8v.2zM3 4.5c-.5-.1-.9.3-1 .8v.2c-.1.5.3.9.8 1H3c.5.1.9-.3 1-.8v-.2c.1-.5-.3-.9-.8-1H3zm0 13c-.6 0-1 .4-1 1s.4 1 1 1 1-.4 1-1-.4-1-1-1zM6 5v1h16V5H6zm0 7.5h16v-1H6v1zM6 19h16v-1H6v1z"/></symbol><symbol id="it-lock" viewBox="0 0 24 24"><path d="M18.5 8.5H17V8c0-2.8-2.2-5-5-5S7 5.2 7 8v.5H5.5C4.7 8.5 4 9.2 4 10v8.5c0 .8.7 1.5 1.5 1.5h13c.8 0 1.5-.7 1.5-1.5V10c0-.8-.7-1.5-1.5-1.5zM8 8c0-2.2 1.8-4 4-4s4 1.8 4 4v.5H8V8zm11 10.5c0 .3-.2.5-.5.5h-13c-.3 0-.5-.2-.5-.5V10c0-.3.2-.5.5-.5h13c.3 0 .5.2.5.5v8.5z"/><path d="M12 13.3c.6 0 1 .4 1 1s-.4 1-1 1-1-.4-1-1 .4-1 1-1m0-1c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></symbol><symbol id="it-locked" viewBox="0 0 24 24"><path d="M16.5 12H16V7c0-2.2-1.8-4-4-4S8 4.8 8 7v5h-.5c-.6 0-1.1.5-1.1 1.1v6.8c0 .6.5 1.1 1.1 1.1h9c.6 0 1.1-.5 1.1-1.1v-6.8c0-.6-.5-1.1-1.1-1.1zM9 7c0-1.7 1.3-3 3-3s3 1.3 3 3v5H9V7zm7.6 12.9c0 .1 0 .1-.1.1h-9c-.1 0-.1 0-.1-.1v-6.8h9.2v6.8zM13 15.5c0 .3-.2.7-.5.8v1.5h-1v-1.5c-.3-.1-.5-.5-.5-.8 0-.6.4-1 1-1s1 .4 1 1z"/></symbol><symbol id="it-mail" viewBox="0 0 24 24"><path d="M20.5 5h-17C2.7 5 2 5.7 2 6.5v11c0 .8.7 1.5 1.5 1.5h17c.8 0 1.5-.7 1.5-1.5v-11c0-.8-.7-1.5-1.5-1.5zm-.3 1l-7.1 7.2c-.6.6-1.6.6-2.2 0L3.8 6h16.4zM3 17.3V6.6L8.3 12 3 17.3zm.7.7L9 12.7l1.2 1.2c1 .9 2.6.9 3.6 0l1.2-1.2 5.3 5.3H3.7zm12-6L21 6.6v10.7L15.7 12z"/></symbol><symbol id="it-map-marker-circle" viewBox="0 0 24 24"><path d="M17.7 5.3C16 2.2 12 1.1 8.9 2.8s-4.3 5.7-2.5 8.8L12 22l5.7-10.4c.5-1 .8-2 .8-3.1s-.3-2.2-.8-3.2zm-.9 5.8L12 19.9l-4.8-8.8c-.5-.8-.7-1.7-.7-2.7C6.5 5.4 9 3 12 3s5.5 2.5 5.5 5.5c0 .9-.2 1.8-.7 2.6z"/><path d="M12 5c-1.9 0-3.5 1.6-3.5 3.5S10.1 12 12 12s3.5-1.6 3.5-3.5S13.9 5 12 5zm0 6c-1.4 0-2.5-1.1-2.5-2.5S10.6 6 12 6s2.5 1.1 2.5 2.5S13.4 11 12 11z"/></symbol><symbol id="it-map-marker-minus" viewBox="0 0 24 24"><path d="M17.7 5.3C16 2.2 12 1.1 8.9 2.8s-4.3 5.7-2.5 8.8L12 22l5.7-10.4c.5-1 .8-2 .8-3.1s-.3-2.2-.8-3.2zm-.9 5.8L12 19.9l-4.8-8.8c-.5-.8-.7-1.7-.7-2.7C6.5 5.4 9 3 12 3s5.5 2.5 5.5 5.5c0 .9-.2 1.8-.7 2.6z"/></symbol><symbol id="it-map-marker-plus" viewBox="0 0 24 24"><path d="M15.1 2.8c-1-.5-2-.8-3.1-.8-3.6 0-6.5 2.9-6.5 6.5 0 1.1.3 2.2.8 3.1L12 22l5.7-10.4c1.7-3.2.5-7.1-2.6-8.8zm1.7 8.3L12 19.9l-4.8-8.8c-1.5-2.7-.5-6 2.1-7.5 2.7-1.5 6-.5 7.5 2.1.5.8.7 1.7.7 2.7s-.2 1.9-.7 2.7z"/><path d="M12.5 8h3v1h-3v3h-1V9h-3V8h3V5h1z"/></symbol><symbol id="it-map-marker" viewBox="0 0 24 24"><path d="M12 22L6.3 11.6c-1.7-3.1-.6-7 2.6-8.8s7.1-.6 8.8 2.5c.5 1 .8 2 .8 3.1s-.3 2.2-.8 3.1L12 22zm0-19C9 3 6.5 5.5 6.5 8.5c0 .9.2 1.9.7 2.7L12 20l4.8-8.8c1.5-2.6.5-6-2.1-7.5-.8-.5-1.8-.7-2.7-.7z"/></symbol><symbol id="it-maximize-alt" viewBox="0 0 24 24"><path d="M15.1 18.1l.7.7-3.8 3.9-3.9-3.9.7-.7 2.7 2.7v-7.3h1v7.3zM18.9 8.1l-.8.7 2.7 2.7h-7.3v1h7.3l-2.6 2.6.7.7 3.8-3.8zM11.5 3.2v7.3h1V3.2l2.6 2.6.7-.7L12 1.3 8.1 5.1l.7.7zM10.5 12.5v-1H3.2l2.6-2.7-.6-.7L1.3 12l3.8 3.8.7-.7-2.6-2.6z"/></symbol><symbol id="it-maximize" viewBox="0 0 24 24"><path d="M4.7 4l6.7 6.6-.7.7L4 4.7v3.8H3V3h5.5v1zM20 19.3l-6.6-6.7-.7.7 6.6 6.7h-3.8v1H21v-5.5h-1zM15.5 3v1h3.8l-6.6 6.6.7.7L20 4.7v3.8h1V3zM10.6 12.6L4 19.3v-3.8H3V21h5.5v-1H4.7l6.7-6.7z"/></symbol><symbol id="it-medium-square" viewBox="0 0 24 24"><path d="M3 3h18v18H3V3zm4.3 11.4c0 .2 0 .4-.2.5l-1.3 1.5v.2h3.6v-.2l-1.3-1.5c-.1-.1-.1-.3-.1-.5V9.7l3.2 6.9h.4l2.7-6.9v5.5c0 .2 0 .2-.1.3l-1 1v.2h4.7v-.2l-.9-1c-.1-.1-.1-.2-.1-.3V8.5c0-.1 0-.2.1-.3l1-.9v-.2h-3.4L12.2 13 9.5 7.1H6v.2l1.1 1.4c.1 0 .2.2.2.3v5.4z"/></symbol><symbol id="it-medium" viewBox="0 0 24 24"><path d="M5 7.6c0-.2 0-.4-.2-.6L3.1 5v-.3h5.2l4 8.8 3.5-8.8h5V5l-1.4 1.4c-.1.1-.2.2-.2.4v10.1c0 .2 0 .3.2.4l1.4 1.4v.3h-7v-.3l1.4-1.4c.1-.1.1-.2.1-.4V8.7L11.4 19h-.6L6.1 8.7v6.9c0 .3.1.6.3.8l1.9 2.3v.3H2.9v-.3l1.9-2.3c.2-.2.3-.5.2-.8v-8z"/></symbol><symbol id="it-minimize" viewBox="0 0 24 24"><path d="M3 15.5h5.5V21h-1v-4.5H3zM7.5 7.5H3v1h5.5V3h-1zM15.5 21h1v-4.5H21v-1h-5.5zM16.5 7.5V3h-1v5.5H21v-1z"/></symbol><symbol id="it-minus" viewBox="0 0 24 24"><path d="M20 12.5H4v-1h16v1z"/></symbol><symbol id="it-minus-circle" viewBox="0 0 24 24"><path d="M6.9 11.5h10v1h-10v-1zM22 12c0 5.5-4.5 10-10 10S2 17.5 2 12 6.5 2 12 2s10 4.5 10 10zm-1 0c0-5-4-9-9-9s-9 4-9 9 4 9 9 9 9-4 9-9z"/></symbol><symbol id="it-more-items" viewBox="0 0 24 24"><path d="M12 18c.6 0 1 .4 1 1s-.4 1-1 1-1-.4-1-1c-.1-.5.3-.9.8-1h.2m0-1c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-6c.6 0 1 .4 1 1s-.4 1-1 1-1-.4-1-1c-.1-.5.3-.9.8-1h.2m0-1c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-6c.5-.1.9.3 1 .8V5c0 .6-.4 1-1 1s-1-.4-1-1c-.1-.5.3-.9.8-1h.2m0-1c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></symbol><symbol id="it-more-actions" viewBox="0 0 24 24"><path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 3c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1-.4 1-1 1zm6-3c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 3c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1c.1.5-.3.9-.8 1H12zm6-3c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 3c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1c.1.5-.3.9-.8 1H18z"/></symbol><symbol id="it-note" viewBox="0 0 24 24"><path d="M18.5 4h-13C4.7 4 4 4.7 4 5.5v13c0 .8.7 1.5 1.5 1.5h10.2l4.3-4.3V5.5c0-.8-.7-1.5-1.5-1.5zM5 18.5v-13c0-.3.2-.5.5-.5h13c.3 0 .5.2.5.5V15h-2.5c-.8 0-1.5.7-1.5 1.5V19H5.5c-.3 0-.5-.2-.5-.5zM18.3 16L16 18.3v-1.8c0-.3.2-.5.5-.5h1.8zM16 9H8V8h8v1zm0 2H8v-1h8v1zm-2 1v1H8v-1h6z"/></symbol><symbol id="it-open-source" viewBox="0 0 24 24"><path d="M10 0C4.5 0 0 4.5 0 10c0 4.3 2.7 8.1 6.8 9.5l1.7-5.8.3-1C7.7 12.3 7 11.2 7 10c0-1.7 1.3-3 3-3s3 1.3 3 3c0 1.2-.7 2.3-1.9 2.8l.3 1 1.8 5.8c5.3-1.7 8.1-7.3 6.4-12.6-1.3-4.2-5.2-7-9.6-7zm3.8 18.1l-1.5-4.9c.1-.1.2-.1.2-.2.1-.1.2-.1.2-.2l.2-.2c.3-.3.6-.7.7-1.1l.1-.3c0-.1.1-.2.1-.3 0-.2.1-.3.1-.5V10c0-2.2-1.8-4-4-4s-4 1.8-4 4v.5c0 .2.1.3.1.4 0 .2.1.3.1.4.1.3.3.6.4.8.1.1.2.3.3.4l.3.3c.1.1.2.2.4.3L6 18C1.5 15.9-.4 10.5 1.7 6s7.5-6.4 12-4.3 6.4 7.5 4.3 12c-.7 2-2.3 3.6-4.2 4.4z" transform="translate(2 2)"/></symbol><symbol id="it-pa" viewBox="0 0 24 24"><path d="M3 21h18v1H3v-1zm0-1h18v-1H3v1zM22 9H2l10-7 10 7zM5.2 8h13.6L12 3.2 5.2 8zM6 18v-8H5v8h1zm4 0v-8H9v8h1zm5 0v-8h-1v8h1zm4 0v-8h-1v8h1z"/></symbol><symbol id="it-password-invisible" viewBox="0 0 24 24"><path d="M15 12c0-.7-.3-1.4-.7-1.9l.4-1.1c.8.8 1.3 1.9 1.3 3 0 2.2-1.7 3.9-3.9 4l.4-1.1c1.4-.2 2.5-1.4 2.5-2.9zM3.1 12C4.8 8.6 8.2 6.5 12 6.5h.4l.4-.9H12c-4.1 0-7.9 2.3-9.8 6L2 12l.2.5c1.3 2.5 3.5 4.4 6.1 5.3l.3-.9C6.2 16 4.2 14.3 3.1 12zm18.7-.5c-1.3-2.5-3.5-4.4-6.1-5.3l-.3.9c2.4.9 4.4 2.6 5.5 4.9a9.88 9.88 0 01-8.9 5.5h-.4l-.4.9h.8c4.1 0 7.9-2.3 9.8-6l.2-.4-.2-.5zM11.5 9.1l.4-1.1C9.7 8.1 8 9.8 8 12c0 1.1.5 2.2 1.3 3l.4-1.1c-.4-.5-.7-1.2-.7-1.9 0-1.5 1.1-2.7 2.5-2.9zm3.1-5.7L8.5 20.3l.9.3 6.1-16.9-.9-.3z"/></symbol><symbol id="it-password-visible" viewBox="0 0 24 24"><path d="M21.8 11.5C19 6.1 12.4 3.9 7 6.7c-2.1 1.1-3.7 2.7-4.8 4.8L2 12l.2.5c2.8 5.4 9.4 7.6 14.8 4.8 2.1-1.1 3.7-2.7 4.8-4.8l.2-.5-.2-.5zm-9.8 6c-3.8 0-7.2-2.1-8.9-5.5C4.8 8.6 8.2 6.5 12 6.5c3.8 0 7.2 2.1 8.9 5.5a9.88 9.88 0 01-8.9 5.5zM12 8c-2.2 0-4 1.8-4 4s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4zm0 7c-1.7 0-3-1.3-3-3s1.3-3 3-3 3 1.3 3 3c.1 1.6-1.2 2.9-2.8 3H12z"/></symbol><symbol id="it-pencil" viewBox="0 0 24 24"><path d="M20.5 3.5c-.5-.6-1.3-.9-2.1-.9s-1.6.3-2.2.9L4.6 15.2l-1 5.2 5.2-1L20.5 7.8c1.2-1.2 1.2-3.1 0-4.3zm-5.7 2.8l.7-.7 2.9 2.9-.7.7-2.9-2.9zm-.7.8l1.1 1-8.4 8.4-1.1-1.1 8.4-8.3zM5.7 18.3c-.1-.2-.4-.3-.6-.3l.3-1.5 2.1 2.1-1.5.3c0-.2-.1-.5-.3-.6zm2.9 0l-1.1-1.1 8.4-8.4 1 1.1-8.3 8.4zM19.8 7.1l-.7.7-2.9-2.9.7-.7c.4-.4.9-.6 1.5-.6.5 0 1 .2 1.4.6.8.8.8 2.1 0 2.9z"/></symbol><symbol id="it-piattaforme" viewBox="0 0 24 24"><path d="M9 1.1L15.9 5 9 8.9 2.1 5 9 1.1M9 0L0 5l9 5 9-5-9-5zM18 11.7l-9 5-9-5 1-.5 8 4.4 8-4.5z" transform="translate(3 3)"/><path d="M18 8.5l-9 5-9-5L1 8l8 4.4 8-4.5z" transform="translate(3 3)"/></symbol><symbol id="it-pin" viewBox="0 0 24 24"><path d="M18.1 14L15 10.3V4.6L16.3 2H7.7L9 4.6v5.7L5.9 14h5.6v8h1v-8h5.6zM10 5h4v5h-4V5zm4.7-2l-.5 1H9.8l-.5-1h5.4zm-5 8h4.6l1.6 2H8.1l1.6-2z"/></symbol><symbol id="it-plug" viewBox="0 0 24 24"><path d="M8.5 9.9l-2.8 2.8-1.1 1.1c-.6.6-.6 1.5 0 2.1L6 17.3l-3.8 3.9.7.7L6.7 18l1.4 1.4c.3.3.7.4 1.1.4.4 0 .8-.2 1.1-.4l1.1-1.1 2.8-2.8-5.7-5.6zm1 8.8c-.2.2-.5.2-.7 0l-3.5-3.5c-.2-.2-.2-.5 0-.7l.4-.4 4.2 4.2-.4.4zm-3.2-5.3l2.1-2.1 4.2 4.2-2.1 2.1-4.2-4.2zm9.6-8.8c-.6-.6-1.5-.6-2.1 0L11.3 7l1.4 1.4-2.1 2.1.7.7 2.1-2.1 1.4 1.4-2.1 2.1.7.7 2.1-2.1 1.5 1.4 2.5-2.5c.6-.6.6-1.5 0-2.1l-3.6-3.4zm2.8 4.9L17 11.3 12.7 7l1.8-1.8c.2-.2.5-.2.7 0l3.5 3.5c.2.3.2.6 0 .8zM8.5 12.7l.7.7-.7.7-.7-.7.7-.7zm2.8 2.8l-.7.7-.7-.7.7-.7.7.7zM18 6.7l-.7-.7 3.9-3.8.7.7L18 6.7z"/></symbol><symbol id="it-plus-circle" viewBox="0 0 24 24"><path d="M12.4 11.5h4.5v1h-4.5V17h-1v-4.5H6.9v-1h4.5V7h1v4.5zm9.6.5c0 5.5-4.5 10-10 10S2 17.5 2 12 6.5 2 12 2s10 4.5 10 10zm-1 0c0-5-4-9-9-9s-9 4-9 9 4 9 9 9 9-4 9-9z"/></symbol><symbol id="it-plus" viewBox="0 0 24 24"><path d="M20 12.5h-7.5V20h-1v-7.5H4v-1h7.5V4h1v7.5H20v1z"/></symbol><symbol id="it-presentation" viewBox="0 0 24 24"><path d="M4 5v10.6C4 16.9 5.1 18 6.4 18h3.1l-1.1 4h1l1.1-4h2.7l1.2 4h1l-1.2-4h3.5c1.3 0 2.3-1 2.3-2.3V5H4zm15 10.7c0 .7-.6 1.3-1.3 1.3H6.4c-.8 0-1.4-.6-1.4-1.4V6h14v9.7zM21 3v1H3V3h18zm-9 13c2.5 0 4.5-2 4.5-4.5S14.5 7 12 7s-4.5 2-4.5 4.5S9.5 16 12 16zm-.5-7.9V11H8.6c.2-1.5 1.4-2.7 2.9-2.9zm1 3.9V8c1.9.1 3.4 1.8 3.3 3.8S13.9 15.1 12 15c-1.7 0-3.2-1.3-3.4-3h3.9z"/></symbol><symbol id="it-print" viewBox="0 0 24 24"><path d="M21 9.5c0-.8-.7-1.5-1.5-1.5H17V3H7v5H4.5C3.7 8 3 8.7 3 9.5V16h2v3h2v2h10v-2h2v-3h2V9.5zM8 4h8v4H8V4zM6 18v-4h1v4H6zm10 2H8v-6h8v6zm2-2h-1v-4h1v4zm2-3h-1v-2H5v2H4V9.5c0-.3.2-.5.5-.5h15c.3 0 .5.2.5.5V15zM6 11h4v1H6v-1z"/></symbol><symbol id="it-refresh" viewBox="0 0 24 24"><path d="M21 12c0 5-4 9-9 9s-9-4-9-9 4-9 9-9c2.4 0 4.7.9 6.4 2.6.4.4.8.9 1.1 1.4h-4v1H21V2.5h-1V6c-.3-.4-.6-.7-.9-1.1C15.2 1 8.8 1 4.9 4.9S1 15.2 4.9 19.1s10.2 3.9 14.1 0c1.9-1.9 2.9-4.4 2.9-7.1H21z"/></symbol><symbol id="it-restore" viewBox="0 0 24 24"><path d="M12 2C9.3 2 6.8 3 4.9 4.9c-.3.4-.6.7-.9 1.1V2.5H3V8h5.5V7h-4c.3-.5.7-.9 1.1-1.4 3.5-3.5 9.2-3.6 12.7-.1s3.6 9.2.1 12.7-9.2 3.6-12.7.1C4 16.7 3 14.4 3 12H2c0 5.5 4.5 10 10 10s10-4.5 10-10S17.5 2 12 2z"/></symbol><symbol id="it-rss-square" viewBox="0 0 24 24"><path d="M14.6 0H3.4C1.5 0 0 1.5 0 3.4v11.2C0 16.5 1.5 18 3.4 18h11.3c1.9 0 3.4-1.5 3.4-3.4V3.4C18 1.5 16.5 0 14.6 0zM4.5 15.8c-1.2 0-2.3-1-2.3-2.3s1-2.3 2.3-2.3 2.3 1 2.3 2.3-1.1 2.3-2.3 2.3zm4.5 0C9 12 6 9 2.3 9V6.8c5 0 9 4 9 9H9zm4.5 0c0-6.2-5-11.3-11.3-11.3V2.3c7.5 0 13.5 6 13.5 13.5h-2.2z" transform="translate(3 3)"/></symbol><symbol id="it-rss" viewBox="0 0 24 24"><path d="M2.7 12.7c-1.5 0-2.7 1.2-2.7 2.7S1.2 18 2.7 18s2.7-1.2 2.7-2.7c-.1-1.4-1.3-2.6-2.7-2.6z" transform="translate(3 3)"/><path d="M.3 5.9c-.2 0-.3.1-.3.3v3.4c0 .2.1.3.3.3 4.4 0 7.9 3.5 7.9 7.9 0 .2.1.3.3.3h3.4c.2 0 .3-.1.3-.3C12.1 11.2 6.8 5.9.3 5.9z" transform="translate(3 3)"/><path d="M18 17.7C17.9 8 10 .1.3 0 .1 0 0 .1 0 .3v3.5c0 .1.1.2.3.2C7.8 4 14 10.1 14 17.7v.1c0 .2.1.3.3.3h3.5c.1-.1.3-.2.2-.4z" transform="translate(3 3)"/></symbol><symbol id="it-search" viewBox="0 0 24 24"><path d="M21.9 21.1L16 15.3c1.3-1.5 2-3.4 2-5.3 0-4.4-3.6-8-8-8s-8 3.6-8 8 3.6 8 8 8c1.9 0 3.8-.7 5.3-2l5.8 5.9.8-.8zM10 17c-3.9 0-7-3.1-7-7s3.1-7 7-7 7 3.1 7 7-3.1 7-7 7z"/></symbol><symbol id="it-settings" viewBox="0 0 24 24"><path d="M12 7.5c-2.5 0-4.5 2-4.5 4.5s2 4.5 4.5 4.5 4.5-2 4.5-4.5-2-4.5-4.5-4.5zm0 8c-1.9 0-3.5-1.6-3.5-3.5s1.6-3.5 3.5-3.5 3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5zm9.8-1.6c.1-.6.2-1.3.2-1.9 0-.6-.1-1.3-.2-1.9l-2.1-.3c-.2-.6-.4-1.2-.7-1.7l1.3-1.7c-.7-1.1-1.6-2-2.7-2.7L15.9 5l-1.7-.7-.3-2.1L12 2l-1.9.2-.3 2.1-1.7.7-1.7-1.3c-1.1.7-2 1.6-2.7 2.7L5 8.1c-.3.5-.5 1.1-.7 1.7l-2.1.3c-.1.6-.2 1.3-.2 1.9 0 .6.1 1.3.2 1.9l2.1.3c.2.6.4 1.2.7 1.7l-1.3 1.7c.7 1.1 1.6 2 2.7 2.7L8.1 19l1.7.7.3 2.1 1.9.2 1.9-.2.3-2.1 1.7-.7 1.7 1.3c1.1-.7 2-1.6 2.7-2.7L19 15.9c.3-.5.5-1.1.7-1.7l2.1-.3zm-2.9-.7l-.2.7c-.1.5-.3 1-.6 1.5l-.3.6.4.5.8 1.1c-.4.5-.9 1-1.4 1.4l-1.1-.8-.5-.4-.6.3c-.5.3-1 .5-1.5.6l-.7.2v.7l-.2 1.3h-2l-.2-1.3v-.7l-.7-.2c-.5-.1-1-.3-1.5-.6l-.6-.3-.5.4-1.1.8c-.5-.4-1-.9-1.4-1.4l.8-1.1.4-.5-.3-.6c-.3-.5-.5-1-.6-1.5l-.2-.7h-.7L3.1 13c-.1-.3-.1-.7-.1-1 0-.3 0-.7.1-1l1.3-.2h.7l.2-.7c.1-.5.3-1 .6-1.5l.3-.6-.4-.5L5 6.4 6.4 5l1.1.8.5.4.6-.3c.5-.3 1-.5 1.5-.6l.7-.2v-.7l.2-1.3h2l.2 1.3v.7l.7.2c.5.1 1 .3 1.5.6l.6.3.5-.4 1.1-.8c.5.4 1 .9 1.4 1.4l-.8 1.1-.4.5.3.6c.3.5.5 1 .6 1.5l.2.7h.7l1.3.2c.1.3.1.7.1 1 0 .3 0 .7-.1 1l-1.3.2h-.7z"/></symbol><symbol id="it-share" viewBox="0 0 24 24"><path d="M17.5 15c-.8 0-1.5.4-2 1l-7.6-3.4c.1-.2.1-.4.1-.6 0-.2 0-.4-.1-.6L15.5 8c.8 1.1 2.4 1.3 3.5.5s1.3-2.4.5-3.5-2.4-1.3-3.5-.5c-.6.5-1 1.2-1 2 0 .2 0 .4.1.6l-7.6 3.4C6.7 9.4 5.1 9.2 4 10s-1.3 2.4-.5 3.5 2.4 1.3 3.5.5c.2-.1.4-.3.5-.5l7.6 3.4c-.1.2-.1.4-.1.6 0 1.4 1.1 2.5 2.5 2.5s2.5-1.1 2.5-2.5-1.1-2.5-2.5-2.5zm0-10c.8 0 1.5.7 1.5 1.5S18.3 8 17.5 8 16 7.3 16 6.5 16.7 5 17.5 5zm-12 8.5c-.8 0-1.5-.7-1.5-1.5s.7-1.5 1.5-1.5S7 11.2 7 12s-.7 1.5-1.5 1.5zm12 5.5c-.8 0-1.5-.7-1.5-1.5s.7-1.5 1.5-1.5 1.5.7 1.5 1.5-.7 1.5-1.5 1.5z"/></symbol><symbol id="it-software" viewBox="0 0 24 24"><style>.st0{fill:none}</style><path d="M18.5 0h-17C.7 0 0 .7 0 1.5v15c0 .8.7 1.5 1.5 1.5h17c.8 0 1.5-.7 1.5-1.5v-15c0-.8-.7-1.5-1.5-1.5zm.5 16.5c0 .3-.2.5-.5.5h-17c-.3 0-.5-.2-.5-.5V5h18v11.5zM19 4H1V1.5c0-.3.2-.5.5-.5h17c.3 0 .5.2.5.5V4z" transform="translate(2 3)"/><path d="M10 13h5v1h-5zM10 11.1l-5.1 3.7v-1.3l3.4-2.4-3.4-2.5V7.4z" transform="translate(2 3)"/><path class="st0" d="M8.3 11.1l-3.4 2.4M8.3 11.1L4.9 8.6" transform="translate(2 3)"/></symbol><symbol id="it-star-full" viewBox="0 0 24 24"><path d="M12 1.7L9.5 9.2H1.6L8 13.9l-2.4 7.6 6.4-4.7 6.4 4.7-2.4-7.6 6.4-4.7h-7.9L12 1.7z"/></symbol><symbol id="it-star-outline" viewBox="0 0 24 24"><path d="M12 4.9l1.5 4.6.2.7h5.7l-4 2.9-.6.4.2.7 1.5 4.7-3.9-2.9-.6-.4-.6.4-3.9 2.9L9 14.2l.2-.7-.6-.4-4-2.9h5.7l.2-.7L12 4.9m0-3.2L9.5 9.2H1.6L8 13.9l-2.4 7.6 6.4-4.7 6.4 4.7-2.4-7.6 6.4-4.7h-7.9L12 1.7z"/></symbol><symbol id="it-team-digitale" viewBox="0 0 24 24"><path d="M23.6 24H.4c-.2 0-.4-.2-.4-.4V.4C0 .2.2 0 .4 0h23.3c.1 0 .3.2.3.4v23.3c0 .1-.2.3-.4.3zM5.8 11.8c.9 0 1.6-.7 1.6-1.6s-.7-1.6-1.6-1.6-1.6.7-1.6 1.6.7 1.6 1.6 1.6zM10 19h4.4c4.7 0 5.6-2.3 5.6-6.7S19 6 14.4 6H10v13zm4.4-10.7c2.6 0 2.8 1.1 2.8 4s-.3 4.5-2.8 4.5h-1.8V8.3h1.8z"/></symbol><symbol id="it-telegram" viewBox="0 0 24 24"><path d="M10 0A10 10 0 110 10 10 10 0 0110 0zM4.53 9.89c2.91-1.27 4.86-2.1 5.83-2.51C13.14 6.23 13.71 6 14.09 6a.67.67 0 01.39.12.4.4 0 01.14.27 2.12 2.12 0 010 .39c-.16 1.58-.81 5.42-1.14 7.19-.14.75-.41 1-.68 1-.58.05-1-.39-1.59-.76-.88-.57-1.37-.93-2.23-1.5s-.34-1 .22-1.59c.17-.12 2.72-2.43 2.8-2.64a.19.19 0 000-.18.26.26 0 00-.21 0c-.09 0-1.49 1-4.22 2.79a1.83 1.83 0 01-1.08.4 7 7 0 01-1.56-.37c-.62-.2-1.12-.31-1.08-.65-.04-.2.2-.39.68-.58z" fill-rule="evenodd" transform="translate(2 2)"/></symbol><symbol id="it-telephone" viewBox="0 0 24 24"><path d="M5 3h.2M20 11.6C20 7.4 16.6 4 12.5 4h-.1c-.3 0-.5.2-.5.5s.2.5.5.5C16 5 19 8 19 11.6c0 .3.3.5.5.5.3 0 .5-.2.5-.5z"/><path d="M16.9 11.7c0-2.5-2-4.5-4.5-4.5-.3.1-.5.3-.4.6 0 .2.2.4.4.4 1.9 0 3.5 1.6 3.5 3.5 0 .3.2.5.5.5s.5-.2.5-.5zM15.7 21.2C8.6 20.9 3 15.2 2.9 8.1c0-.4.2-.8.6-.9 1.7-.6 4-1 4.7.1.5.9.8 1.9.9 2.9v.2c.2.7-.1 1.3-.7 1.7-.3.1-.5.4-.5.7.9 1.4 2 2.6 3.4 3.5.2-.1.4-.3.5-.6.1-.5.6-1 1.7-.9h.2c1 .1 2 .4 2.8.9 1 .7.6 3 .1 4.7-.1.5-.5.8-.9.8zM6.6 7.5c-.9 0-1.9.2-2.8.5.1 6.6 5.3 12 11.9 12.2.7-2.3.7-3.5.3-3.8-.8-.4-1.6-.6-2.5-.7h-.2c-.3 0-.6 0-.7.1-.2.6-.6 1.1-1.3 1.3l-.2.1H11c-1.6-1-2.9-2.4-3.9-4L7 13c-.1-.7.3-1.4 1-1.7.1-.1.3-.2.3-.8v-.2c-.1-.9-.4-1.7-.7-2.5-.3-.2-.6-.3-1-.3z"/></symbol><symbol id="it-tool" viewBox="0 0 24 24"><path d="M7.7 5c.6 0 1.2.2 1.7.5 1.1.6 1.7 1.8 1.6 3-.1.9.2 1.8.8 2.4l6.3 6.3c.4.3.5.9.2 1.3-.2.3-.5.5-.8.5-.3 0-.5-.1-.7-.3l-6.4-6.4c-.6-.5-1.3-.8-2.1-.8h-.6c-.8 0-1.7-.4-2.2-1h2.7V6.4H5.1c.3-.4.6-.8 1.1-1 .5-.3 1-.4 1.5-.4m0-1c-.7 0-1.4.2-2 .5-1.1.6-1.9 1.7-2.1 2.9h3.6v2.1H3.7c.2.7.6 1.3 1 1.8.8.8 1.9 1.2 3 1.2h.6c.5 0 1 .2 1.4.5l6.4 6.4c.4.4.9.6 1.4.6.7 0 1.3-.3 1.6-.9.6-.8.4-1.9-.3-2.6l-6.3-6.3c-.4-.4-.6-1-.5-1.6.1-1.6-.7-3.1-2-4-.7-.4-1.5-.6-2.3-.6z"/></symbol><symbol id="it-twitter-square" viewBox="0 0 24 24"><path d="M3.42857 1.5C1.5375 1.5 0 2.84531 0 4.5V19.5C0 21.1547 1.5375 22.5 3.42857 22.5H20.5714C22.4625 22.5 24 21.1547 24 19.5V4.5C24 2.84531 22.4625 1.5 20.5714 1.5H3.42857ZM19.3446 5.4375L13.7839 10.9969L20.325 18.5625H15.2036L11.1964 13.9734L6.60536 18.5625H4.06071L10.0071 12.6141L3.73393 5.4375H8.98393L12.6107 9.63281L16.8 5.4375H19.3446ZM17.3196 17.2313L8.21786 6.69844H6.70179L15.9054 17.2313H17.3143H17.3196Z"/></symbol><symbol id="it-twitter" viewBox="0 0 24 24"><path d="M13.927 10.491 19.511 4h-1.323l-4.849 5.636L9.467 4H5l5.856 8.523L5 19.33h1.323l5.12-5.952 4.09 5.952H20l-6.073-8.839Zm-1.812 2.107-.594-.849-4.72-6.753h2.032l3.81 5.45.593.849 4.953 7.084h-2.033l-4.041-5.78v-.001Z"/></symbol><symbol id="it-unlocked" viewBox="0 0 24 24"><path d="M16.5 12H16V6c0-2.2-1.8-4-4-4S8 3.8 8 6v3h1V6c0-1.7 1.3-3 3-3s3 1.3 3 3v6H7.5c-.6 0-1.1.5-1.1 1.1v6.8c0 .6.5 1.1 1.1 1.1h9c.6 0 1.1-.5 1.1-1.1v-6.8c0-.6-.5-1.1-1.1-1.1zm.1 7.9c0 .1 0 .1-.1.1h-9c-.1 0-.1 0-.1-.1v-6.8h9.2v6.8zM13 15.5c0 .3-.2.7-.5.8v1.5h-1v-1.5c-.3-.1-.5-.5-.5-.8 0-.6.4-1 1-1s1 .4 1 1z"/></symbol><symbol id="it-upload" viewBox="0 0 24 24"><path d="M8.4 7.3l-.7-.7L12 2.3l4.3 4.3-.7.7-3.1-3.1v9.3h-1V4.2L8.4 7.3zM19 12v7.5c0 .3-.2.5-.5.5h-13c-.3 0-.5-.2-.5-.5V12H4v7.5c0 .8.7 1.5 1.5 1.5h13c.8 0 1.5-.7 1.5-1.5V12h-1z"/></symbol><symbol id="it-user" viewBox="0 0 24 24"><path d="M12 13c2.2 0 4-1.8 4-4V6c0-2.2-1.8-4-4-4S8 3.8 8 6v3c0 2.2 1.8 4 4 4zM9 6c0-1.7 1.3-3 3-3s3 1.3 3 3v3c0 1.7-1.3 3-3 3s-3-1.3-3-3V6zm11 16h-1c0-3.9-3.1-7-7-7s-7 3.1-7 7H4c0-4.4 3.6-8 8-8s8 3.6 8 8z"/></symbol><symbol id="it-video" viewBox="0 0 24 24"><path d="M17.5 7.3V6c0-.8-.7-1.5-1.5-1.5H5.5C4.7 4.5 4 5.2 4 6v8c0 .8.7 1.5 1.5 1.5h3.4L7.4 21h1l1.6-5.5h1.8l1.6 5.5h1l-1.6-5.5H16c.8 0 1.5-.7 1.5-1.5v-1.3l4 1.5V5.8l-4 1.5zm3 5.5l-4-1.5V14c0 .3-.2.5-.5.5H5.5c-.3 0-.5-.2-.5-.5V6c0-.3.2-.5.5-.5H16c.3 0 .5.2.5.5v2.7l4-1.5v5.6zM2 8h1v4H2V8z"/></symbol><symbol id="it-warning-circle" viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 19c-5 0-9-4-9-9s4-9 9-9 9 4 9 9-4 9-9 9zm-.5-6.8V5.7h1.2v8.5h-1.2zm-.1 2.3h1.2v1.8h-1.2v-1.8z"/></symbol><symbol id="it-warning" viewBox="0 0 24 24"><path d="M12.5 17h-1V2h1v15zm0 3h-1v2h1v-2z"/></symbol><symbol id="it-whatsapp-square" viewBox="0 0 24 24"><path d="M16 8.1c-1.5-1.5-3.8-2-5.8-1.2s-3.3 2.8-3.3 4.9c0 1 .3 2 .8 2.8l.1.2-.5 2 2-.5.2.1c.8.5 1.8.7 2.7.8 2.2 0 4.1-1.3 5-3.3.8-2 .3-4.3-1.2-5.8zm-.8 5.8c-.2.4-.6.7-1.1.8-.3.1-.7 0-1-.1-.2-.1-.5-.2-.9-.3-1.1-.6-2.1-1.4-2.8-2.4-.4-.5-.6-1.1-.7-1.7 0-.5.2-1 .6-1.3.1-.1.3-.2.4-.2h.3c.1 0 .2 0 .4.3.1.3.5 1.1.5 1.2v.3c0 .1-.1.2-.2.3-.1.1-.2.2-.2.3-.1.1-.2.2-.1.3.2.4.5.8.9 1.1.4.3.8.6 1.3.8.2.1.3.1.3 0 .1-.1.4-.5.5-.6.1-.2.2-.1.4-.1.1.1.9.4 1.1.5.2.1.3.1.3.2v.6z"/><path d="M21 7.1c0-.4 0-.8-.1-1.2-.2-1.1-.9-2-1.9-2.5-.3-.2-.7-.3-1-.3-.3-.1-.7-.1-1.1-.1H7.1c-.4 0-.8 0-1.2.1-1.1.2-2 .9-2.5 1.9-.1.3-.2.7-.3 1-.1.4-.1.7-.1 1.1V17c0 .4 0 .8.1 1.1.2 1.1.9 2 1.9 2.5.3.2.7.3 1 .3.4.1.8.1 1.2.1H17c.4 0 .8 0 1.1-.1 1.1-.2 2-.9 2.5-1.9.2-.3.3-.7.3-1 .1-.4.1-.8.1-1.2V7.6v-.5zm-8.8 11.2c-1.1 0-2.1-.3-3.1-.8l-3.4.9.9-3.3c-.6-1-.9-2.1-.9-3.2 0-2.6 1.5-5 4-6s5.2-.4 7 1.5c1.2 1.2 1.9 2.8 1.9 4.5 0 1.7-.7 3.3-1.9 4.6-1.1 1.1-2.8 1.8-4.5 1.8z"/></symbol><symbol id="it-whatsapp" viewBox="0 0 24 24"><path d="M19.1 4.6C15.5 1.3 10 1 6.1 4S1 12.4 3.4 16.7L2 21.8l5.3-1.4c1.4.8 3.1 1.2 4.7 1.2 4 0 7.6-2.5 9.1-6.2 1.6-3.6.8-7.9-2-10.8zM12 20c-1.5 0-2.9-.4-4.2-1.2l-.3-.2-3.1.8.8-3.1-.2-.2C3 12.9 3.5 8.7 6.1 6s6.7-3.3 10-1.5 4.9 5.7 4 9.3c-1 3.7-4.3 6.2-8.1 6.2zm4.5-6.2c-.3-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.3-.5.7-.8 1-.1.2-.3.2-.5.1-.7-.3-1.4-.7-2-1.2-.5-.5-1-1.1-1.4-1.7-.1-.3 0-.4.1-.5l.4-.4c.1-.1.2-.3.3-.4.1-.1.1-.3 0-.4 0-.2-.5-1.4-.8-1.9s-.4-.6-.5-.6h-.5c-.2 0-.5.1-.7.3-.5.5-.8 1.3-.8 2 .1.9.4 1.8 1 2.6 1.1 1.6 2.5 2.9 4.3 3.8.5.2.9.4 1.4.5.5.2 1 .2 1.6.1.7-.1 1.3-.6 1.7-1.2.2-.4.2-.8.2-1.2-.2-.1-.4-.1-.7-.2z"/></symbol><symbol id="it-wifi" viewBox="0 0 24 24"><path d="M22 19h-1c0-8.8-7.2-16-16-16V2c9.4 0 17 7.6 17 17z"/><path d="M5 7v1c6.1 0 11 4.9 11 11h1c0-6.6-5.4-12-12-12zM5 12v1c3.3 0 6 2.7 6 6h1c0-3.9-3.1-7-7-7zM5 17c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 3c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1-.4 1-1 1z"/></symbol><symbol id="it-youtube" viewBox="0 0 24 24"><path d="M21.6 7.2c-.2-.9-.9-1.5-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4c-.9.3-1.5.9-1.8 1.8C2.1 8.8 2 10.4 2 12c0 1.6.1 3.2.4 4.8.2.9.9 1.5 1.8 1.8 1.6.4 7.8.4 7.8.4s6.2 0 7.8-.4c.9-.2 1.5-.9 1.8-1.8.3-1.6.4-3.2.4-4.8 0-1.6-.1-3.2-.4-4.8zM10 15V9l5.2 3-5.2 3z"/></symbol><symbol id="it-zoom-in" viewBox="0 0 24 24"><path d="M10.4 9.5h3.3v1h-3.3v3.2h-1v-3.2H6.2v-1h3.2V6.2h1v3.3zm10.7 12.4L15.3 16c-1.5 1.3-3.4 2-5.3 2-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8c0 1.9-.7 3.8-2 5.3l5.9 5.8-.8.8zM17 10c0-3.9-3.1-7-7-7s-7 3.1-7 7 3.1 7 7 7 7-3.1 7-7z"/></symbol><symbol id="it-zoom-out" viewBox="0 0 24 24"><path d="M6.2 9.5h7.5v1H6.2v-1zm14.9 12.4L15.3 16c-1.5 1.3-3.4 2-5.3 2-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8c0 1.9-.7 3.8-2 5.3l5.9 5.8-.8.8zM17 10c0-3.9-3.1-7-7-7s-7 3.1-7 7 3.1 7 7 7 7-3.1 7-7z"/></symbol></svg></div><div class="skiplink">
+    <a class="visually-hidden-focusable" aria-label="vai ai contenuti presenti in pagina" href="#main-container">Vai ai contenuti</a>
+    <a class="visually-hidden-focusable" aria-label="vai al footer" href="#footer">Vai al
+    footer</a>
+</div><!-- /skiplink -->
+<header class="it-header-wrapper" data-bs-target="#header-nav-wrapper">
+    <div class="it-header-slim-wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="it-header-slim-wrapper-content">
+          <a class="d-lg-block fw-bold navbar-brand" href="https://www.regione.piemonte.it" target="_blank" aria-label="Vai al portale Regione Piemonte - link esterno - apertura nuova scheda">Regione Piemonte</a>
+          <div class="it-header-slim-right-zone" role="navigation">
+            
+            
+            <div id="userContainer">
+              <a class="btn btn-primary btn-icon btn-full" href="#" data-element="personal-area-login" aria-label="Accedi all'area personale">
+                <span class="rounded-icon">
+                  <svg class="icon icon-primary" aria-hidden="true">
+                    <use xlink:href="#it-user"></use>
+                  </svg>
+                </span>
+                <span class="d-none d-lg-block">Accedi all'area personale</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+
+    <div class="it-nav-wrapper">
+      <div class="it-header-center-wrapper px-1">
+        <div class="container g-1">
+          <div class="row g-0">
+            <div class="col-12">
+              <div class="it-header-center-content-wrapper d-flex align-items-center justify-content-start justify-content-lg-between">
+                
+                <!-- Hamburger -->
+                <button
+                  class="custom-navbar-toggler me-1"
+                  type="button"
+                  aria-controls="nav4"
+                  aria-expanded="false"
+                  aria-label="Mostra/Nascondi la navigazione"
+                  data-bs-target="#nav4"
+                  data-bs-toggle="navbarcollapsible"
+                >
+                  <svg class="icon" aria-hidden="true">
+                    <use href="#it-burger"></use>
+                  </svg>
+                </button>
+
+                <!-- Logo -->
+                <div class="it-brand-wrapper px-1">
+                  <a href="https://www.comune.collegno.to.it" aria-label="Vai alla Homepage del Comune di Collegno">
+                    <div class="it-brand-text d-flex align-items-center px-0">
+                      <svg width="82" height="82" class="icon" aria-hidden="true">       
+     <image xlink:href="https://static-www.comune.collegno.to.it/wp-content/uploads/2023/12/Stemma_Collegno-1.png" width="82" height="82"/>    
+</svg>
+                      <div>
+                        <div class="it-brand-title mb-0">Comune di Collegno</div>
+                        <div class="it-brand-tagline d-none d-md-block">
+                                                  </div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+
+                <!-- Social + Ricerca (spostati a destra con ms-auto) -->
+                <div class="it-right-zone d-flex align-items-center ms-auto ms-lg-0">
+                                      <div class="it-socials d-none d-lg-flex me-3">
+                        <span>Seguici su:</span>
+                        <ul>
+                                                          <li>
+                                <a href="https://www.facebook.com/Citt%C3%A0-di-Collegno-581831495250893" target="_blank">
+                                  <svg class="icon" aria-hidden="true"><use href="#it-facebook"></use></svg>
+                                  <span class="visually-hidden">Facebook</span>
+                                </a>
+                              </li>
+                                                          <li>
+                                <a href="https://www.youtube.com/channel/UC-vUPfGNNdgujkAYzs76zrg" target="_blank">
+                                  <svg class="icon" aria-hidden="true"><use href="#it-youtube"></use></svg>
+                                  <span class="visually-hidden">Youtube</span>
+                                </a>
+                              </li>
+                                                          <li>
+                                <a href="https://t.me/cittadicollegno" target="_blank">
+                                  <svg class="icon" aria-hidden="true"><use href="#it-telegram"></use></svg>
+                                  <span class="visually-hidden">Telegram</span>
+                                </a>
+                              </li>
+                                                        
+                        </ul>
+                    </div>
+                  
+                  <div class="it-search-wrapper ms-0 ms-lg-4 ms-xl-5">
+                    <span class="d-none d-md-block me-2">Cerca</span>
+                    <button class="search-link rounded-icon mx-0" type="button" data-bs-toggle="modal" data-bs-target="#search-modal" aria-label="Cerca nel sito">
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#it-search"></use>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navbar -->
+      <div class="it-header-navbar-wrapper" id="header-nav-wrapper">
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <div class="navbar navbar-expand-lg has-megamenu">
+                <div class="navbar-collapsable" id="nav4">
+                  <div class="overlay" style="display: none"></div>
+                  <div class="close-div">
+                    <button class="btn close-menu" type="button" aria-label="Chiudi la navigazione">
+                      <span class="visually-hidden">Nascondi la navigazione</span>
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#it-close-big"></use>
+                      </svg>
+                    </button>
+                  </div>
+                  <div class="menu-wrapper">
+                    <a href="https://www.comune.collegno.to.it" aria-label="Vai alla homepage del Comune di Collegno" class="logo-hamburger text-decoration-none">
+                      <svg width="48" height="48" aria-hidden="true">       
+     <image xlink:href="https://static-www.comune.collegno.to.it/wp-content/uploads/2023/12/Stemma_Collegno-1.png" width="48" height="48"/>
+</svg>
+                      <div class="ms-3 it-brand-text">
+                        <div class="it-brand-title">Comune di Collegno</div>
+                      </div>
+                    </a>
+                    <nav aria-label="Principale">
+                      <ul class="navbar-nav" id="menu-main-menu" data-element="main-navigation"><li class='nav-item'><a class="nav-link active" href="https://www.comune.collegno.to.it/amministrazione/" data-element="management">Amministrazione</a></li>
+<li class='nav-item'><a class="nav-link " href="https://www.comune.collegno.to.it/novita/" data-element="news">Novità</a></li>
+<li class='nav-item'><a class="nav-link " href="https://www.comune.collegno.to.it/servizi/" data-element="all-services">Servizi</a></li>
+<li class='nav-item'><a class="nav-link " href="https://www.comune.collegno.to.it/vivere-il-comune/" data-element="live">Vivere il Comune</a></li>
+</ul>                    </nav>
+                    <nav aria-label="Secondaria">
+                      <ul id="menu-argomenti" class="navbar-nav navbar-secondary"><li class='nav-item'><a class="nav-link" href="https://www.comune.collegno.to.it/argomento/pnrr/" >PNRR</a></li>
+<li class='nav-item'><a class="nav-link" href="https://www.comune.collegno.to.it/argomento/tempo-libero/" >Tempo libero</a></li>
+<li class='nav-item'><a class="nav-link" href="https://www.comune.collegno.to.it/argomento/istruzione/" >Istruzione</a></li>
+<li class='nav-item'><a class="nav-link" href="https://www.comune.collegno.to.it/argomenti/" data-element='all-topics'><span class="fw-bold">Tutti gli argomenti</span></a></li>
+</ul>                    </nav>
+                                          <div class="it-socials pb-5 mb-5">
+                        <span>Seguici su:</span>
+                        <ul>
+                                                      <li>
+                              <a href="https://www.facebook.com/Citt%C3%A0-di-Collegno-581831495250893" target="_blank">
+                                <svg class="icon" aria-hidden="true"><use href="#it-facebook"></use></svg>
+                                <span class="visually-hidden">Facebook</span>
+                              </a>
+                            </li>
+                                                      <li>
+                              <a href="https://www.youtube.com/channel/UC-vUPfGNNdgujkAYzs76zrg" target="_blank">
+                                <svg class="icon" aria-hidden="true"><use href="#it-youtube"></use></svg>
+                                <span class="visually-hidden">Youtube</span>
+                              </a>
+                            </li>
+                                                      <li>
+                              <a href="https://t.me/cittadicollegno" target="_blank">
+                                <svg class="icon" aria-hidden="true"><use href="#it-telegram"></use></svg>
+                                <span class="visually-hidden">Telegram</span>
+                              </a>
+                            </li>
+                                                      
+                        </ul>
+                      </div>
+                                      </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</header>
+
+<!-- Search Modal -->
+<div
+    class="modal fade search-modal"
+    id="search-modal"
+    tabindex="-1"
+    role="dialog"
+    aria-hidden="true"
+  >
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content perfect-scrollbar">
+      <div class="modal-body">
+        <form role="search" id="search-form-main" method="get" class="search-form" action="https://www.comune.collegno.to.it/">
+          <div class="container">
+            <div class="row variable-gutters">
+              <div class="col">
+                <div class="modal-title">
+                  <button
+                    class="search-link d-md-none"
+                    type="button"
+                    data-bs-toggle="modal"
+                    data-bs-target="#search-modal"
+                    aria-label="Cerca nel sito"
+                  >
+                    <svg class="icon icon-md icon-white" aria-hidden="true">
+                      <use
+                        href="#it-arrow-left"
+                      ></use>
+                    </svg>
+                  </button>
+                  <p class="fs-2">Cerca</p>
+                  <button
+                    class="search-link d-none d-md-block"
+                    type="button"
+                    data-bs-toggle="modal"
+                    data-bs-target="#search-modal"
+                    data-dismiss="modal" 
+                    aria-label="Chiudi e torna alla pagina precedente"
+                  >
+                    <svg class="icon icon-md" aria-hidden="true">
+                      <use
+                        href="#it-close-big"
+                      ></use>
+                    </svg>
+                  </button>
+                </div>
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">
+                          <svg class="icon icon-md" aria-hidden="true">
+                            <use href="#it-search" ></use>
+                          </svg>
+                        </div>
+                      </div>
+                      <label for="search" class="visually-hidden">Cerca nel sito</label>
+                      <input
+                        type="search"
+                        class="form-control"
+                        id="search"
+                        name="s"
+                        placeholder="Cerca nel sito"
+                        value=""
+                      />
+                    </div>
+                    <button
+                      type="submit"
+                      class="btn btn-primary"
+                    >
+                      <span class="">Cerca</span>
+                    </button>
+                  </div>
+              </div>
+            </div>
+                        <div class="row variable-gutters">
+              <div class="col-lg-5">
+                <div class="searches-list-wrapper">
+                  <div class="other-link-title">IN EVIDENZA</div>
+                  <ul class="searches-list">
+                                          <li>
+                          <a class="list-item active ps-0" href="https://www.comune.collegno.to.it/documento_pubblico/regolamento-di-polizia-mortuaria/" aria-label="Vai alla pagina Regolamento di polizia mortuaria"
+                          ><span class="text-button-normal"
+                              >Regolamento di polizia mortuaria</span
+                          ></a
+                          >
+                      </li>
+                                        <li>
+                          <a class="list-item active ps-0" href="https://www.comune.collegno.to.it/documento_pubblico/tariffe-servizi-cimiteriali/" aria-label="Vai alla pagina Tariffe servizi cimiteriali"
+                          ><span class="text-button-normal"
+                              >Tariffe servizi cimiteriali</span
+                          ></a
+                          >
+                      </li>
+                                        <li>
+                          <a class="list-item active ps-0" href="https://www.comune.collegno.to.it/documento_pubblico/tariffe-manufatti-cimiteriali/" aria-label="Vai alla pagina Tariffe manufatti cimiteriali"
+                          ><span class="text-button-normal"
+                              >Tariffe manufatti cimiteriali</span
+                          ></a
+                          >
+                      </li>
+                                    </ul>
+                </div>
+              </div>
+            </div>
+                      </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Search Modal -->
+
+<main>
+            <div class="container" id="main-container">
+            <div class="row">
+                <div class="col px-lg-4">
+                    
+<div class="cmp-breadcrumbs " role="navigation">
+    <nav class="breadcrumb-container" aria-label="breadcrumb"><ol class="breadcrumb p-0" data-element="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList"><meta name="numberOfItems" content="4" /><meta name="itemListOrder" content="Ascending" /><li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem" class="breadcrumb-item trail-begin"><a href="https://www.comune.collegno.to.it/" rel="home" itemprop="item"><span itemprop="name">Home</span></a><meta itemprop="position" content="1" /></li><li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem" class="breadcrumb-item"><span class="separator">/</span><a href='https://www.comune.collegno.to.it/amministrazione' itemprop='item'><span itemprop="name">Amministrazione</span></a><meta itemprop="position" content="2" /></li><li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem" class="breadcrumb-item"><span class="separator">/</span><a href="https://www.comune.collegno.to.it/amministrazione/uffici/" itemprop="item"><span itemprop="name">Uffici</span></a><meta itemprop="position" content="3" /></li><li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem" class="breadcrumb-item active"><span class="separator">/</span><span class="text-capitalize" itemprop="item"><span itemprop="name">Anagrafe</span></span><meta itemprop="position" content="4" /></li></ol></nav></div>                </div>
+            </div>
+            <div class="row" data-audio>
+                <div class="col-lg-8 col-xl-9 px-lg-4 py-lg-2">
+                    <h1>Anagrafe</h1>
+                    L'ufficio si occupa principalmente dell'iscrizione, registrazione, modifica e cancellazione dei movimenti della popolazione e della certificazione dei fatti giuridicamente rilevanti ad essi collegati all'interno del territorio comunale.                </div>
+                <div class="col-lg-4 col-xl-3 mt-4 text-lg-end">
+                    <aside>
+    <div class="dropdown d-inline">
+        <button
+            class="btn btn-dropdown dropdown-toggle d-inline-flex align-items-center fs-0"
+            type="button"
+            id="shareActions"
+            data-bs-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+            aria-label="condividi sui social"
+        >
+            <svg class="icon" aria-hidden="true">
+                <use xlink:href="#it-share"></use>
+            </svg>
+            <small>Condividi</small>
+        </button>
+        <div class="dropdown-menu shadow-lg" aria-labelledby="shareActions">
+            <div class="link-list-wrapper">
+                <ul class="link-list" role="menu">
+                    <li role="none">
+                    <a class="list-item" href="https://www.facebook.com/sharer/sharer.php?u=https://www.comune.collegno.to.it/amministrazione/unita_organizzativa/ufficio-anagrafe/" target="_blank" role="menuitem">
+                    <svg class="icon" aria-hidden="true">
+                        <use
+                            xlink:href="#it-facebook"
+                        ></use>
+                        </svg>
+                        <span>Facebook</span></a
+                    >
+                    </li>
+                    <li role="none">
+                    <a class="list-item" href="https://twitter.com/intent/tweet?text=https://www.comune.collegno.to.it/amministrazione/unita_organizzativa/ufficio-anagrafe/" target="_blank" role="menuitem">
+                    <svg class="icon" aria-hidden="true">
+                        <use
+                            xlink:href="#it-twitter"
+                        ></use>
+                        </svg>
+                        <span>Twitter</span></a
+                    >
+                    </li>
+                    <li role="none">
+                    <a class="list-item" href="https://www.linkedin.com/shareArticle?url=https://www.comune.collegno.to.it/amministrazione/unita_organizzativa/ufficio-anagrafe/" target="_blank" role="menuitem">
+                    <svg class="icon" aria-hidden="true">
+                        <use
+                            xlink:href="#it-linkedin"
+                        ></use>
+                        </svg>
+                        <span>Linkedin</span></a
+                    >
+                    </li>
+                    <li role="none">
+                    <a class="list-item" href="https://api.whatsapp.com/send?text=https://www.comune.collegno.to.it/amministrazione/unita_organizzativa/ufficio-anagrafe/" target="_blank" role="menuitem">
+                    <svg class="icon" aria-hidden="true">
+                        <use
+                            xlink:href="#it-whatsapp"
+                        ></use>
+                        </svg>
+                        <span>Whatsapp</span></a
+                    >
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="dropdown d-inline">
+        <button
+            class="btn btn-dropdown dropdown-toggle d-inline-flex align-items-center fs-0"
+            type="button"
+            id="viewActions"
+            data-bs-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+        >
+            <svg class="icon" aria-hidden="true">
+            <use
+                xlink:href="#it-more-items"
+            ></use>
+            </svg>
+            <small>Vedi azioni</small>
+        </button>
+        <div class="dropdown-menu shadow-lg" aria-labelledby="viewActions">
+            <div class="link-list-wrapper">
+                <ul class="link-list" role="menu">
+                    <li role="none">
+                    <a class="list-item" href="#" onclick="window.print()" role="menuitem">
+                        <svg class="icon" aria-hidden="true">
+                        <use
+                            xlink:href="#it-print"
+                        ></use>
+                        </svg>
+                        <span>Stampa</span></a
+                    >
+                    </li>
+                    <li role="none">
+                    <a class="list-item" href="#" role="menuitem" onclick="window.listenElements(this, '[data-audio]')"><svg class="icon" aria-hidden="true">
+                        <use
+                            xlink:href="#it-hearing"
+                        ></use>
+                        </svg>
+                        <span>Ascolta</span></a
+                    >
+                    </li>
+                    <li role="none">
+                    <a class="list-item" href="mailto:?subject=Anagrafe&body=https://www.comune.collegno.to.it/amministrazione/unita_organizzativa/ufficio-anagrafe/" role="menuitem"
+                        ><svg class="icon" aria-hidden="true">
+                        <use
+                            xlink:href="#it-mail"
+                        ></use>
+                        </svg>
+                        <span>Invia</span></a
+                    >
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </aside>                </div>
+            </div>
+        </div>
+        <div class="container" data-audio>
+            <div class="row row-column-menu-left mt-4 mt-lg-40 border-top border-light">
+                <div class="col-12 col-lg-3 mb-0 border-col">
+                    <div class="cmp-navscroll sticky-top" aria-labelledby="accordion-title-one">
+                        <nav class="navbar it-navscroll-wrapper navbar-expand-lg" aria-label="Indice della pagina" data-bs-navscroll>
+                            <div class="navbar-custom" id="navbarNavProgress">
+                                <div class="menu-wrapper pb-1">
+                                    <div class="link-list-wrapper">
+                                        <div class="accordion">
+                                            <div class="accordion-item">
+                                                <span class="accordion-header" id="accordion-title-one">
+                                                    <button class="accordion-button pb-10 px-3 text-uppercase" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-one" aria-expanded="true" aria-controls="collapse-one">
+                                                        Indice della pagina
+                                                        <svg class="icon icon-xs right" aria-hidden="true">
+                                                            <use href="#it-expand"></use>
+                                                        </svg>
+                                                    </button>
+                                                </span>
+                                                <div class="progress">
+                                                    <div class="progress-bar it-navscroll-progressbar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                                <div id="collapse-one" class="accordion-collapse collapse show" role="region" aria-labelledby="accordion-title-one">
+                                                    <div class="accordion-body">
+                                                        <ul class="link-list" data-element="page-index">
+                                                            <li class="nav-item">
+                                                                <a class="nav-link" href="#competenze">
+                                                                    <span class="title-medium">Competenze</span>
+                                                                </a>
+                                                            </li>
+                                                            <li class="nav-item">
+                                                                <a class="nav-link" href="#tipologia_organizzazione">
+                                                                    <span class="title-medium">Tipologia di organizzazione</span>
+                                                                </a>
+                                                            </li>
+                                                                                                                        <li class="nav-item">
+                                                                <a class="nav-link" href="#area_riferimento">
+                                                                    <span class="title-medium">Area di riferimento</span>
+                                                                </a>
+                                                            </li>
+                                                                                                                        <!--  -->
+                                                                                                                                                                                    <li class="nav-item">
+                                                                <a class="nav-link" href="#persone">
+                                                                    <span class="title-medium">Persone</span>
+                                                                </a>
+                                                            </li>
+                                                                                                                                                                                    <li class="nav-item">
+                                                                <a class="nav-link" href="#assessore_riferimento">
+                                                                    <span class="title-medium">Assessore di riferimento</span>
+                                                                </a>
+                                                            </li>
+                                                                                                                                                                                    <li class="nav-item">
+                                                                <a class="nav-link" href="#servizi_collegati">
+                                                                    <span class="title-medium">Servizi collegati</span>
+                                                                </a>
+                                                            </li>
+                                                                                                                        <li class="nav-item">
+                                                                <a class="nav-link" href="#sede_principale">
+                                                                    <span class="title-medium">Sede principale</span>
+                                                                </a>
+                                                            </li>
+                                                                                                                                                                                                                                                <li class="nav-item">
+                                                                <a class="nav-link" href="#contatti">
+                                                                    <span class="title-medium">Contatti</span>
+                                                                </a>
+                                                            </li>
+                                                                                                                        <li class="nav-item">
+                                                                <a class="nav-link" href="#more_info">
+                                                                    <span class="title-medium">Ulteriori informazioni</span>
+                                                                </a>
+                                                            </li>
+                                                             
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-9 px-lg-5">
+                    <div class="it-page-sections-container mt-0 mt-lg-30">
+                                                <section class="it-page-section mb-30" id="competenze">
+                            <h2 class="title-xlarge mb-2">Competenze</h2>
+                            <div class="richtext-wrapper lora">
+                                <ul>
+<li>Tiene lo schedario della popolazione residente, temporanea e degli italiani residenti all'estero (AIRE);</li>
+<li>Segue le mutazioni anagrafiche; iscrizioni e cancellazioni per nascita e morte, per immigrazione ed emigrazione o irreperibilità, per esistenza giudizialmente dichiarata, per rettifiche, per matrimonio, per costituzione di nuova famiglia o convivenza, per cambiamento dell'intestatario della scheda o del capo convivenza o della denominazione e specie della convivenza, per cambiamento della qualifica professionale e del titolo di studio, per scissione o fusione di schede di famiglia, per aggiornamento dei toponimi e dei numeri civici;</li>
+<li>Cura l'istruttoria per la costituzione delle convivenze di fatto;</li>
+<li>Effettua ricerche anagrafiche e predispone elenchi su richiesta di altri uffici interni e di altre Pubbliche Amministrazioni;</li>
+<li>Rilascia certificazioni varie, dichiarazioni sostitutive di atto di notorietà, legalizzazioni di fotografie, autenticazioni di firme e copie, carte d'identità;</li>
+<li>Cura la gestione del bollo virtuale provvedendo ai versamenti relativi ed alla contabilizzazione finale;</li>
+<li>Provvede alla comunicazione mensile ed annuale dei dati statistici all'ISTAT relativi alla popolazione, nonché coordina le rilevazioni statistiche periodiche per conto dell'ISTAT;</li>
+<li>Provvede all'evasione delle richieste di verifiche e di certificati richiesti da altre PP.AA. o da privati;</li>
+<li>Gestisce inoltre, lo scadenziario relativo ai residenti stranieri, comunicando le eventuali variazioni anagrafiche alla Questura;</li>
+<li>Verifica il possesso dei requisiti ai sensi del D.lgs. 30/2007 dei cittadini appartenenti all'Unione Europea per il rilascio degli attestati di soggiorno</li>
+</ul>
+                            </div>
+                        </section>
+                        <section class="it-page-section mb-30" id="tipologia_organizzazione">
+                            <h2 class="title-xlarge mb-2">Tipologia di organizzazione</h2>
+                                                            <p class="tipologia-org m-0 lora">Ufficio</p>
+                                                    </section>
+                                                    <section class="it-page-section mb-30" id="area_riferimento">
+                                <h2 class="title-xlarge mb-2">Area di riferimento</h2>
+                                <div class="row g-3">
+                                                                            <div class="col-12 col-xl-6">
+                                            <div class="card card-teaser card-teaser-info rounded shadow p-3" style="height: 100%;">
+    <div class="card-body card-body-detail">
+        <p class="card-title text-paragraph-regular-medium-semi p-1">
+            <a class="card-title" href="https://www.comune.collegno.to.it/amministrazione/unita_organizzativa/settore-2-servizi-amministrativi-culturali-e-alle-imprese/" data-element="service-generic-access" aria-label="Vai alla pagina Settore 4 - Sviluppo economico, cultura e servizi demografici">
+                Settore 4 - Sviluppo economico, cultura e servizi demografici            </a>
+        </p>
+        <div class="card-text">
+            Piazza del Municipio 1, 10093        </div>
+    </div>
+    <div class="avatar size-xl">
+            </div>
+</div>                                        </div>
+                                                                    </div>
+                            </section>
+                                                                                                <section class="it-page-section mb-30" id="persone">
+                            <h2 class="title-xlarge mb-2">Persone</h2>
+                            <p class="mb-2 lora">Tutte le persone che fanno parte di questo ufficio:</p>
+                            <div class="row g-3">
+                                                                    <div class="col-12 col-xl-6">
+                                        <div class="card card-teaser rounded shadow p-0 h-100">
+                                            <div class="card-body p-3">
+                                                <a class="card-title text-paragraph-regular-medium-semi h6 mb-2 text-decoration-none" href="https://www.comune.collegno.to.it/persona_pubblica/enza-augelli/" aria-label="Vai alla pagina di: Enza Augelli">
+                                                    Enza Augelli                                                </a>
+                                                                                                        <small class="descrizione_breve m-0">
+                                                            Responsabile Servizi Demografici e Generali                                                        </small>
+                                                                                            </div>
+                                            <div class="avatar-square size-xl">
+                                                                                                                                            </div>
+                                        </div>
+                                    </div>
+                                                            </div>
+                        </section>
+                                                                            <section class="it-page-section mb-30" id="assessore_riferimento">
+                                <h2 class="title-xlarge mb-2">Assessore di riferimento</h2>
+                                <div class="row">
+                                    <div class="col-12 col-xl-6">
+                                        <div class="card card-teaser rounded shadow my-2 p-0">
+                                            <div class="card-body p-3">
+                                                <a class="card-title text-paragraph-regular-medium-semi h6 mb-2 text-decoration-none" href="https://www.comune.collegno.to.it/persona_pubblica/ignazio-restuccia/" aria-label="Vai alla pagina: Ignazio Restuccia">
+                                                    Ignazio Restuccia                                                </a>
+                                                                                                    <small class="m-0">
+                                                        Assessore                                                    </small>
+                                                                                            </div>
+                                            <div class="avatar-square size-xl">
+                                                                                                                                                    <img class="m-0" src="https://static-www.comune.collegno.to.it/wp-content/uploads/2024/06/Restuccia1.jpeg" alt="foto Ignazio Restuccia">
+                                                                                            </div>
+                                        </div>
+                                    </div>
+                                                                    </div>  
+                            </section>
+                                                                            <section class="it-page-section mb-30" id="servizi_collegati">
+                                <h2 class="title-xlarge mb-3">Servizi collegati</h2>
+                                <div class="row g-3">
+                                                                            <div class="col-12 col-xl-6">
+                                            <div class="card card-teaser rounded shadow flex-column h-100 ">
+                                                <a class="text-decoration-none title-xsmall-bold mb-2 category text-uppercase" href="https://www.comune.collegno.to.it/servizi-categoria/anagrafe-e-stato-civile/">Anagrafe e stato civile</a>                                                <a class="text-decoration-none card-title h5" href="https://www.comune.collegno.to.it/servizio/carta-di-identita-elettronica-cie/" aria-label="Vai alla pagina: Carta di identità elettronica (CIE)">
+                                                    Carta di identità elettronica (CIE)                                                </a>
+                                                <p class="text-paragraph-card"> E' un documento per l'identificazione personale e, se valido per l'espatrio, sufficiente per viaggiare all'interno dei paesi dell'Unione europea (Area Schengen) e dei paesi convenzionati.</p>
+                                            </div>
+                                        </div>
+                                                                    </div>
+                            </section>
+                                                <section class="it-page-section mb-30" id="sede_principale">
+                            <h2 class="title-xlarge mb-2">Sede principale</h2>
+                                                                                        <div class="card card-teaser card-teaser-info rounded shadow p-3 my-2 me-2">
+                                    <div class="card-body pe-3">
+                                        <a class="text-decoration-none card-title text-paragraph-regular-medium-semi" href="https://www.comune.collegno.to.it/vivere-il-comune/luoghi/palazzo-civico/" aria-label="vai alla pagina Palazzo Civico">
+                                            Palazzo Civico                                        </a>
+                                        <div class="card-text text-card-luogo">
+                                            <p class="text-paragraph-card">Piazza del Municipio 1, 10093</p>
+                                        </div>
+                                    </div>
+                                                                            <div class="avatar size-xl">
+                                            <img src="https://static-www.comune.collegno.to.it/wp-content/uploads/2023/10/MunicipioCollegno.jpg" alt="Municipio Collegno" title="Municipio_Collegno" />                                        </div>
+                                                                    </div>
+                                                    </section>
+                                                                                                <section class="it-page-section mb-50" id="contatti">
+                            <h2 class="title-xlarge mb-2">Contatti</h2>
+                                                            <div class="row g-3">
+                                                                            <div class="col-12">
+                                            
+<div class="card card-teaser card-teaser-info rounded shadow p-4 ps-3 pe-2 my-2 mb-0 me-2 h-100">
+    <div class="card-body">
+        <h3 class="card-title h5 p-1">
+            <a class="text-decoration-none" href="https://www.comune.collegno.to.it/punto_contatto/ufficio-anagrafe/" data-element="service-area" aria-label="Vai alla pagina del contatto: Ufficio Anagrafe">
+                Ufficio Anagrafe            </a>
+        </h3>
+        <div>
+																				<p class="mb-0"><span class="fw-bold">Telefono: </span>
+								<a target="_blank" aria-label="chiama 0114015477" href="tel:0114015477">
+									0114015477								</a>
+							</p>
+																										<p class="mb-0"><span class="fw-bold">Telefono: </span>
+								<a target="_blank" aria-label="chiama 0114015487" href="tel:0114015487">
+									0114015487								</a>
+							</p>
+																														<p class="mb-0"><span class="fw-bold">E-mail: </span>
+								<a target="_blank"  aria-label="invia un'email a ufficioanagrafe@comune.collegno.to.it" href="mailto:ufficioanagrafe@comune.collegno.to.it">
+									ufficioanagrafe@comune.collegno.to.it								</a>
+							</p>
+																	
+			        </div>
+    </div>
+</div>                                        </div>
+                                                                    </div>
+                                                    </section>
+                                                    <section class="it-page-section mb-30" id="more_info">
+                                <h2 class="title-xlarge mb-2">Ulteriori informazioni</h2>
+                                <div class="richtext-wrapper lora">
+                                    <p><a href="https://www.comune.collegno.to.it/area_tematica/orario-anagrafe"><b>orario ufficio</b></a></p>
+<p><strong>NB - La distribuzione dei numeri per l'accesso agli sportelli dell'anagrafe terminerà 45 minuti prima della chiusura. Gli utenti che arriveranno successivamente saranno serviti compatibilmente con l'orario di chiusura.</strong></p>
+<p>Chiusure straordinarie 02/01/2026 -01/06/2026 - 07/12/2026</p>
+                                </div>
+                            </section>
+                        
+                    </div>
+                </div>
+            </div>
+            
+<article id="ultimo-aggiornamento" class="it-page-section mt-5">
+    <p class="h6">Ultimo aggiornamento:
+    <span class="h6 fw-normal">
+        28/05/2026, 12:56    </span>
+    </p>
+</article>        </div>
+
+                <div class="bg-primary">
+    <div class="container">
+        <div class="row d-flex justify-content-center bg-primary">
+        <div class="col-12 col-lg-6 p-lg-0 px-3">
+            <div class="cmp-rating pt-lg-80 pb-lg-80" id="rating">
+            <div class="card shadow card-wrapper" data-element="feedback">
+                <div class="cmp-rating__card-first">
+                <div class="card-header border-0">
+                    <h2 class="title-medium-2-semi-bold mb-0" data-element="feedback-title">
+                        Quanto sono chiare le informazioni su questa pagina?
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <fieldset class="rating">
+                                                    <input
+                                type="radio"
+                                id="star5a"
+                                name="ratingA"
+                                value="5"
+                            />
+                            <label class="full rating-star" for="star5a" data-element="feedback-rate-5">
+                                <svg class="icon icon-sm" role="img" aria-labelledby="5-star">
+                                    <use href="#it-star-full"></use>
+                                </svg>
+                                <span class="visually-hidden" id="5-star"
+                                >Valuta 5 stelle su 5</span>
+                            </label>
+                                                    <input
+                                type="radio"
+                                id="star4a"
+                                name="ratingA"
+                                value="4"
+                            />
+                            <label class="full rating-star" for="star4a" data-element="feedback-rate-4">
+                                <svg class="icon icon-sm" role="img" aria-labelledby="4-star">
+                                    <use href="#it-star-full"></use>
+                                </svg>
+                                <span class="visually-hidden" id="4-star"
+                                >Valuta 4 stelle su 5</span>
+                            </label>
+                                                    <input
+                                type="radio"
+                                id="star3a"
+                                name="ratingA"
+                                value="3"
+                            />
+                            <label class="full rating-star" for="star3a" data-element="feedback-rate-3">
+                                <svg class="icon icon-sm" role="img" aria-labelledby="3-star">
+                                    <use href="#it-star-full"></use>
+                                </svg>
+                                <span class="visually-hidden" id="3-star"
+                                >Valuta 3 stelle su 5</span>
+                            </label>
+                                                    <input
+                                type="radio"
+                                id="star2a"
+                                name="ratingA"
+                                value="2"
+                            />
+                            <label class="full rating-star" for="star2a" data-element="feedback-rate-2">
+                                <svg class="icon icon-sm" role="img" aria-labelledby="2-star">
+                                    <use href="#it-star-full"></use>
+                                </svg>
+                                <span class="visually-hidden" id="2-star"
+                                >Valuta 2 stelle su 5</span>
+                            </label>
+                                                    <input
+                                type="radio"
+                                id="star1a"
+                                name="ratingA"
+                                value="1"
+                            />
+                            <label class="full rating-star" for="star1a" data-element="feedback-rate-1">
+                                <svg class="icon icon-sm" role="img" aria-labelledby="1-star">
+                                    <use href="#it-star-full"></use>
+                                </svg>
+                                <span class="visually-hidden" id="1-star"
+                                >Valuta 1 stelle su 5</span>
+                            </label>
+                                            </fieldset>
+                </div>
+                </div>
+                <div class="cmp-rating__card-second d-none" data-step="3">
+                <div class="card-header border-0">
+                    <h2 class="title-medium-2-bold mb-0" id="rating-feedback">
+                    Grazie, il tuo parere ci aiuterà a migliorare il
+                    servizio!
+                    </h2>
+                </div>
+                </div>
+                <div class="form-rating d-none">
+                <div class="d-none rating-shadow" data-step="1">
+                    <div class="cmp-steps-rating">
+                        <fieldset class="fieldset-rating-one d-none" data-element="feedback-rating-positive">
+                            <legend class="iscrizioni-header w-100">
+                                <h3
+                                class="step-title d-flex align-items-center justify-content-between drop-shadow"
+                                >
+                                <span class="d-block d-lg-inline" data-element="feedback-rating-question"
+                                    >Quali sono stati gli aspetti che hai preferito? </span
+                                ><span class="step">1/2</span>
+                                </h3>
+                            </legend>
+                            <div class="cmp-steps-rating__body">
+                                <div class="cmp-radio-list">
+                                <div class="card-teaser shadow-rating">
+                                    <div class="card-body">
+                                    <div class="form-check m-0">
+                                        <div
+                                        class="radio-body border-bottom border-light cmp-radio-list__item"
+                                        >
+                                        <input
+                                            name="rating1"
+                                            type="radio"
+                                            id="radio-1"
+                                        />
+                                        <label for="radio-1" data-element="feedback-rating-answer"
+                                            >Le indicazioni erano chiare</label
+                                        >
+                                        </div>
+                                        <div
+                                        class="radio-body border-bottom border-light cmp-radio-list__item"
+                                        >
+                                        <input
+                                            name="rating1"
+                                            type="radio"
+                                            id="radio-2"
+                                        />
+                                        <label for="radio-2" data-element="feedback-rating-answer"
+                                            >Le indicazioni erano complete</label
+                                        >
+                                        </div>
+                                        <div
+                                        class="radio-body border-bottom border-light cmp-radio-list__item"
+                                        >
+                                        <input
+                                            name="rating1"
+                                            type="radio"
+                                            id="radio-3"
+                                        />
+                                        <label for="radio-3" data-element="feedback-rating-answer"
+                                            >Capivo sempre che stavo procedendo correttamente</label
+                                        >
+                                        </div>
+                                        <div
+                                        class="radio-body border-bottom border-light cmp-radio-list__item"
+                                        >
+                                        <input
+                                            name="rating1"
+                                            type="radio"
+                                            id="radio-4"
+                                        />
+                                        <label for="radio-4" data-element="feedback-rating-answer"
+                                            >Non ho avuto problemi tecnici</label
+                                        >
+                                        </div>
+                                        <div class="radio-body border-bottom border-light cmp-radio-list__item">
+                                            <input name="rating1" type="radio" id="radio-5">
+                                            <label for="radio-5" data-element="feedback-rating-answer">
+                                                Altro
+                                            </label>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset class="fieldset-rating-two d-none"  data-element="feedback-rating-negative">
+                            <legend class="iscrizioni-header w-100">
+                                <h3
+                                class="step-title d-flex align-items-center justify-content-between drop-shadow"
+                                >
+                                <span class="d-block d-lg-inline" data-element="feedback-rating-question"
+                                    >Dove hai incontrato le maggiori difficoltà?</span
+                                ><span class="step">1/2</span>
+                                </h3>
+                            </legend>
+                            <div class="cmp-steps-rating__body">
+                                <div class="cmp-radio-list">
+                                <div class="card-teaser shadow-rating">
+                                    <div class="card-body">
+                                    <div class="form-check m-0">
+                                        <div
+                                        class="radio-body border-bottom border-light cmp-radio-list__item"
+                                        >
+                                        <input
+                                            name="rating2"
+                                            type="radio"
+                                            id="radio-6"
+                                        />
+                                        <label for="radio-6" data-element="feedback-rating-answer"
+                                            >A volte le indicazioni non erano chiare</label
+                                        >
+                                        </div>
+                                        <div
+                                        class="radio-body border-bottom border-light cmp-radio-list__item"
+                                        >
+                                        <input
+                                            name="rating2"
+                                            type="radio"
+                                            id="radio-7"
+                                        />
+                                        <label for="radio-7" data-element="feedback-rating-answer"
+                                            >A volte le indicazioni non erano complete</label
+                                        >
+                                        </div>
+                                        <div
+                                        class="radio-body border-bottom border-light cmp-radio-list__item"
+                                        >
+                                        <input
+                                            name="rating2"
+                                            type="radio"
+                                            id="radio-8"
+                                        />
+                                        <label for="radio-8" data-element="feedback-rating-answer"
+                                            >A volte non capivo se stavo procedendo correttamente</label
+                                        >
+                                        </div>
+                                        <div
+                                        class="radio-body border-bottom border-light cmp-radio-list__item"
+                                        >
+                                        <input
+                                            name="rating2"
+                                            type="radio"
+                                            id="radio-9"
+                                        />
+                                        <label for="radio-9" data-element="feedback-rating-answer"
+                                            >Ho avuto problemi tecnici</label
+                                        >
+                                        </div>
+                                        <div class="radio-body border-bottom border-light cmp-radio-list__item">
+                                            <input name="rating2" type="radio" id="radio-10">
+                                            <label for="radio-10" data-element="feedback-rating-answer">Altro</label>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="d-none" data-step="2">
+                    <div class="cmp-steps-rating">
+                        <fieldset>
+                            <legend class="iscrizioni-header w-100">
+                                <h3
+                                class="step-title d-flex align-items-center justify-content-between drop-shadow mb-4"
+                                >
+                                <span class="d-block d-lg-inline"
+                                    >Vuoi aggiungere altri dettagli? </span
+                                ><span class="step">2/2</span>
+                                </h3>
+                            </legend>
+                            <div class="cmp-steps-rating__body">
+                                <div class="form-group shadow-rating">
+                                <label for="formGroupExampleInputWithHelp"
+                                    >Dettaglio</label
+                                >
+                                <input
+                                    class="form-control"
+                                    id="formGroupExampleInputWithHelp"
+                                    aria-describedby="formGroupExampleInputWithHelpDescription"
+                                    maxlength="200"
+                                    type="text" 
+                                    data-element="feedback-input-text"
+                                />
+                                <small
+                                    id="formGroupExampleInputWithHelpDescription"
+                                    class="form-text"
+                                    >Inserire massimo 200 caratteri</small
+                                >
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+                <div
+                    class="d-flex flex-nowrap pt-4 w-100 justify-content-center"
+                >
+                    <button
+                    class="btn btn-outline-primary fw-bold me-4 btn-back"
+                    type="button"
+                    >
+                    Indietro
+                    </button>
+                    <button
+                    class="btn btn-primary fw-bold btn-next"
+                    type="submit"
+                    form="rating"
+                    >
+                    Avanti
+                    </button>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+        <div class="bg-grey-card assistenza-contatti">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-lg-6 offset-lg-3 py-5">
+        <div class="cmp-contacts">
+          <div class="card w-100">
+            <div class="card-body">
+              <h2 class="title-medium-2-semi-bold">Contatta il comune</h2>
+              <ul class="contact-list p-0">
+                <li>
+                  <a class="list-item link-custom" href="https://www.comune.collegno.to.it/domande-frequenti/">
+                    <svg class="icon icon-custom icon-sm" aria-hidden="true"><use href="#it-help-circle"></use>
+                    </svg><span>Leggi le domande frequenti</span>
+                  </a>
+                </li>
+                <li>
+                                    <a class="list-item link-custom" href="https://www.comune.collegno.to.it/servizi/assistenza/" data-element="contacts">
+                    <svg class="icon icon-custom icon-sm" aria-hidden="true"><use href="#it-mail"></use>
+                    </svg><span>Richiedi assistenza</span>
+                  </a>
+                </li>
+                                <li>
+                                    <a class="list-item link-custom" href="https://prenotazioni.comune.collegno.to.it/servizi/prenotazioni/" data-element="appointment-booking">
+                    <svg class="icon icon-custom icon-sm" aria-hidden="true">
+                      <use href="#it-calendar"></use>
+                    </svg><span>Prenota appuntamento</span>
+                  </a>
+                </li>
+              </ul>
+              <h2 class="title-medium-2-semi-bold mt-4">
+                Problemi in città
+              </h2>
+              <ul class="contact-list p-0">
+                <li>
+                                    <a class="list-item link-custom"  href="https://www.comune.collegno.to.it/servizi/segnalazione-disservizio/" data-element="disservice-report">
+                    <svg class="icon icon-custom icon-sm" aria-hidden="true"><use href="#it-map-marker-circle"></use>
+                    </svg><span>Segnala disservizio</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    </main>
+<footer class="it-footer" id="footer">
+    <div class="it-footer-main">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 footer-items-wrapper logo-wrapper">
+                    <img class="ue-logo" src="https://static-www.comune.collegno.to.it/wp-content/themes/design-comuni-wordpress-theme-main/assets/img/logo-eu-inverted.svg" alt="logo Unione Europea" width="176px" height="56px" loading="lazy">
+                    <div class="it-brand-wrapper">
+                        <a href="https://www.comune.collegno.to.it">
+                            <svg width="82" height="82" class="icon" aria-hidden="true">       
+     <image xlink:href="https://static-www.comune.collegno.to.it/wp-content/uploads/2023/12/Stemma_Collegno-1.png" width="82" height="82"/>    
+</svg>
+                            <div class="it-brand-text">
+                                <h2 class="no_toc">Comune di Collegno</h2>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 footer-items-wrapper">
+                                            <h3 class="footer-heading-title">
+                            Amministrazione                        </h3>
+                        <div class="menu-amministrazione-container"><ul id="menu-amministrazione" class="footer-list"><li><a href="https://www.comune.collegno.to.it/amministrazione/organi-di-governo/" >Organi di governo</a></li>
+<li><a href="https://www.comune.collegno.to.it/amministrazione/aree-amministrative/" >Aree amministrative</a></li>
+<li><a href="https://www.comune.collegno.to.it/amministrazione/uffici/" >Uffici</a></li>
+<li><a href="https://www.comune.collegno.to.it/amministrazione/enti-e-fondazioni/" >Enti e fondazioni</a></li>
+<li><a href="https://www.comune.collegno.to.it/amministrazione/politici/" >Politici</a></li>
+<li><a href="https://www.comune.collegno.to.it/amministrazione/personale-amministrativo/" >Personale amministrativo</a></li>
+</ul></div>                </div>
+                <div class="col-md-6 footer-items-wrapper">
+                                            <h3 class="footer-heading-title">
+                            Categorie di Servizio                        </h3>
+                                                <div id="menu-categorie-di-servizio">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <ul class="menu-categorie-di-servizio footer-list">
+                                                                                <li>
+                                            <a href="https://www.comune.collegno.to.it/servizi-categoria/ambiente/">
+                                                Ambiente                                            </a>
+                                        </li>
+                                                                                <li>
+                                            <a href="https://www.comune.collegno.to.it/servizi-categoria/anagrafe-e-stato-civile/">
+                                                Anagrafe e stato civile                                            </a>
+                                        </li>
+                                                                                <li>
+                                            <a href="https://www.comune.collegno.to.it/servizi-categoria/autorizzazioni/">
+                                                Autorizzazioni                                            </a>
+                                        </li>
+                                                                                <li>
+                                            <a href="https://www.comune.collegno.to.it/servizi-categoria/catasto-e-urbanistica/">
+                                                Catasto e urbanistica                                            </a>
+                                        </li>
+                                                                                <li>
+                                            <a href="https://www.comune.collegno.to.it/servizi-categoria/cultura-e-tempo-libero/">
+                                                Cultura e tempo libero                                            </a>
+                                        </li>
+                                                                                <li>
+                                            <a href="https://www.comune.collegno.to.it/servizi-categoria/educazione-e-formazione/">
+                                                Educazione e formazione                                            </a>
+                                        </li>
+                                                                                <li>
+                                            <a href="https://www.comune.collegno.to.it/servizi-categoria/giustizia-e-sicurezza-pubblica/">
+                                                Giustizia e sicurezza pubblica                                            </a>
+                                        </li>
+                                                                            </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <ul class="menu-categorie-di-servizio footer-list">
+                                                                                <li>
+                                            <a href="https://www.comune.collegno.to.it/servizi-categoria/imprese-e-commercio/">
+                                                Imprese e commercio                                            </a>
+                                        </li>
+                                                                                <li>
+                                            <a href="https://www.comune.collegno.to.it/servizi-categoria/mobilita-e-trasporti/">
+                                                Mobilità e trasporti                                            </a>
+                                        </li>
+                                                                                <li>
+                                            <a href="https://www.comune.collegno.to.it/servizi-categoria/salute-benessere-e-assistenza/">
+                                                Salute, benessere e assistenza                                            </a>
+                                        </li>
+                                                                                <li>
+                                            <a href="https://www.comune.collegno.to.it/servizi-categoria/trasparenza-amministrativa/">
+                                                Trasparenza amministrativa                                            </a>
+                                        </li>
+                                                                                <li>
+                                            <a href="https://www.comune.collegno.to.it/servizi-categoria/tributi-finanze-e-contravvenzioni/">
+                                                Tributi, finanze e contravvenzioni                                            </a>
+                                        </li>
+                                                                                <li>
+                                            <a href="https://www.comune.collegno.to.it/servizi-categoria/vita-lavorativa/">
+                                                Vita lavorativa                                            </a>
+                                        </li>
+                                                                            </ul>
+                                </div>
+                            </div>
+                        </div>
+                                    </div>
+                <div class="col-md-3 footer-items-wrapper">
+                                            <h3 class="footer-heading-title">
+                            Novità                        </h3>
+                        <div class="footer-list"><ul id="menu-novita" class="footer-list"><li><a href="/tipi_notizia/notizia" >Notizie</a></li>
+<li><a href="https://www.comune.collegno.to.it/tipi_notizia/comunicato-stampa" >Comunicati</a></li>
+<li><a href="https://www.comune.collegno.to.it/tipi_notizia/avviso" >Avvisi</a></li>
+</ul></div>                                            <h3 class="footer-heading-title">
+                            Vivere il Comune                        </h3>
+                        <div class="menu-vivere-il-comune-container"><ul id="menu-vivere-il-comune" class="footer-list"><li><a href="https://www.comune.collegno.to.it/vivere-il-comune/eventi/" >Eventi</a></li>
+<li><a href="https://www.comune.collegno.to.it/vivere-il-comune/luoghi/" >Luoghi</a></li>
+</ul></div>                </div>
+                <div class="col-md-9 mt-md-4 footer-items-wrapper">
+                    <h3 class="footer-heading-title">Contatti</h3>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <p class="footer-info">
+                                Comune di Collegno                                <br />Piazza del Municipio 1, 10093, Collegno (TO)                                <br />Codice fiscale / P. IVA: 00524380011                                <br /><br />
+                                                                        <a href="https://www.comune.collegno.to.it/amministrazione/unita_organizzativa/ufficio-relazioni-con-il-pubblico-urp/" class="list-item link-footer" aria-label="Vai alla pagina: Ufficio Relazioni con il Pubblico (Urp)">
+                                            Ufficio Relazioni con il Pubblico (Urp)                                        </a>
+                                                                                                                                <br />PEC:                                     <a href="mailto:posta@cert.comune.collegno.to.it" class="list-item link-footer" aria-label="PEC Comune di Collegno posta@cert.comune.collegno.to.it">
+                                        posta@cert.comune.collegno.to.it                                    </a>
+                                								<br />Centralino unico:                                     <a href="tel:+39 011 40151" >
+                                        +39 011 40151                                    </a>
+                                                                <br/><br/><a href="https://www.comune.collegno.to.it/segnalazioni-whistleblowing/">Segnalazioni Whistleblowing</a>                            </p>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="menu-info-1-container"><ul id="menu-info-1" class="footer-list"><li><a href="https://www.comune.collegno.to.it/domande-frequenti/" data-element='faq'>Leggi le FAQ</a></li>
+<li><a href="https://prenotazioni.comune.collegno.to.it/servizi/prenotazioni/" >Prenotazione appuntamento</a></li>
+<li><a href="https://www.comune.collegno.to.it/servizi/segnalazione-disservizio/" data-element='report-inefficiency'>Segnalazione disservizio</a></li>
+<li><a href="https://www.comune.collegno.to.it/servizi/assistenza/" >Richiesta assistenza</a></li>
+</ul></div>                        </div>
+                        <div class="col-md-4">
+                            <div class="menu-info-2-container"><ul id="menu-info-2" class="footer-list"><li><a href="https://collegno.soluzionipa.it/openweb/trasparenza/" >Amministrazione trasparente</a></li>
+<li><a href="https://form.agid.gov.it/view/9a049e70-9494-11f0-adee-018b5413fed7" data-element='accessibility-link'>Dichiarazione di accessibilità</a></li>
+<li><a href="https://www.comune.collegno.to.it/informativa-privacy/" >Protezione Dati Personali</a></li>
+<li><a href="https://www.comune.collegno.to.it/cookie-policy/" >Cookie policy</a></li>
+<li><a href="https://archivio.comune.collegno.to.it/intranet/home" >Intranet</a></li>
+<li><a href="https://www.comune.collegno.to.it/note-legali/" data-element='legal-notes'>Note legali</a></li>
+</ul></div>                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mt-md-4 footer-items-wrapper">
+                                            <h3 class="footer-heading-title">Seguici su</h3>
+                        <ul class="list-inline text-start social">
+                                                                <li class="list-inline-item">
+                                        <a href="https://www.facebook.com/Citt%C3%A0-di-Collegno-581831495250893" target="_blank" class="p-2 text-white">
+                                            <svg class="icon icon-social icon-sm align-top" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" href="#it-facebook"></use>
+                                            </svg>
+                                            <span class="visually-hidden">Facebook</span>
+                                        </a>
+                                    </li>
+                                                                    <li class="list-inline-item">
+                                        <a href="https://www.youtube.com/channel/UC-vUPfGNNdgujkAYzs76zrg" target="_blank" class="p-2 text-white">
+                                            <svg class="icon icon-social icon-sm align-top" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" href="#it-youtube"></use>
+                                            </svg>
+                                            <span class="visually-hidden">Youtube</span>
+                                        </a>
+                                    </li>
+                                                                    <li class="list-inline-item">
+                                        <a href="https://t.me/cittadicollegno" target="_blank" class="p-2 text-white">
+                                            <svg class="icon icon-social icon-sm align-top" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" href="#it-telegram"></use>
+                                            </svg>
+                                            <span class="visually-hidden">Telegram</span>
+                                        </a>
+                                    </li>
+                                                            </ul><!-- /header-social-wrapper -->
+                                    </div>
+            </div>
+        </div>
+        <div class="footer-bottom mt-0 pb-5">
+            <div class="container">
+                <div class="row px-3 px-md-0">
+                    <div class="col-12 footer-items-wrapper">
+                        <div class="menu-menu-footer-bottom-container"><ul id="menu-menu-footer-bottom" class="footer-list"><li class="list-inline-item"><a href="https://www.comune.collegno.to.it/mappa-sito/" >Mappa sito</a></li>
+<li class="list-inline-item"><a href="https://www.comune.collegno.to.it/piano-di-miglioramento-del-sito/" >Piano di miglioramento del sito</a></li>
+<li class='list-inline-item'><a href='https://www.comune.collegno.to.it/mappa-sito/'>Mappa del sito</a></li></ul></div>                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/wp-*.php","/wp-admin/*","/wp-content/uploads/*","/wp-content/*","/wp-content/plugins/*","/wp-content/themes/design-comuni-wordpress-theme-main-child/*","/wp-content/themes/design-comuni-wordpress-theme-main/*","/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+<script id="dci-utils-js" src="https://static-www.comune.collegno.to.it/wp-content/themes/design-comuni-wordpress-theme-main/assets/js/utils.js?ver=7.0.2"></script>
+<script id="dci-rating-js-extra">
+var data = {"ajaxurl":"https://www.comune.collegno.to.it/wp-admin/admin-ajax.php","nonce":"cabf4e927e"};
+//# sourceURL=dci-rating-js-extra
+</script>
+<script id="dci-rating-js" src="https://static-www.comune.collegno.to.it/wp-content/themes/design-comuni-wordpress-theme-main/assets/js/rating.js"></script>
+<script id="dci-boostrap-italia-min-js-js" src="https://static-www.comune.collegno.to.it/wp-content/themes/design-comuni-wordpress-theme-main/assets/js/bootstrap-italia.bundle.min.js?ver=7.0.2"></script>
+<script id="dci-comuni-js-before">
+window.wpRestApi = "https://www.comune.collegno.to.it/wp-json/"
+//# sourceURL=dci-comuni-js-before
+</script>
+<script id="dci-comuni-js" src="https://static-www.comune.collegno.to.it/wp-content/themes/design-comuni-wordpress-theme-main/assets/js/comuni.js?ver=7.0.2"></script>
+<script id="dci-jquery-easing-js" src="https://static-www.comune.collegno.to.it/wp-content/themes/design-comuni-wordpress-theme-main/assets/js/components/jquery-easing/jquery.easing.js?ver=7.0.2"></script>
+<script id="dci-jquery-scrollto-js" src="https://static-www.comune.collegno.to.it/wp-content/themes/design-comuni-wordpress-theme-main/assets/js/components/jquery.scrollto/jquery.scrollTo.js?ver=7.0.2"></script>
+<script id="dci-jquery-responsive-dom-js" src="https://static-www.comune.collegno.to.it/wp-content/themes/design-comuni-wordpress-theme-main/assets/js/components/ResponsiveDom/js/jquery.responsive-dom.js?ver=7.0.2"></script>
+<script id="dci-jpushmenu-js" src="https://static-www.comune.collegno.to.it/wp-content/themes/design-comuni-wordpress-theme-main/assets/js/components/jPushMenu/jpushmenu.js?ver=7.0.2"></script>
+<script id="dci-perfect-scrollbar-js" src="https://static-www.comune.collegno.to.it/wp-content/themes/design-comuni-wordpress-theme-main/assets/js/components/perfect-scrollbar-master/perfect-scrollbar/js/perfect-scrollbar.jquery.js?ver=7.0.2"></script>
+<script id="dci-vallento-js" src="https://static-www.comune.collegno.to.it/wp-content/themes/design-comuni-wordpress-theme-main/assets/js/components/vallenato.js-master/vallenato.js?ver=7.0.2"></script>
+<script id="dci-jquery-responsive-tabs-js" src="https://static-www.comune.collegno.to.it/wp-content/themes/design-comuni-wordpress-theme-main/assets/js/components/responsive-tabs/js/jquery.responsiveTabs.js?ver=7.0.2"></script>
+<script id="dci-fitvids-js" src="https://static-www.comune.collegno.to.it/wp-content/themes/design-comuni-wordpress-theme-main/assets/js/components/fitvids/jquery.fitvids.js?ver=7.0.2"></script>
+<script id="dci-sticky-kit-js" src="https://static-www.comune.collegno.to.it/wp-content/themes/design-comuni-wordpress-theme-main/assets/js/components/sticky-kit-master/dist/sticky-kit.js?ver=7.0.2"></script>
+<script id="dci-jquery-match-height-js" src="https://static-www.comune.collegno.to.it/wp-content/themes/design-comuni-wordpress-theme-main/assets/js/components/jquery-match-height/dist/jquery.matchHeight.js?ver=7.0.2"></script>
+<script id="dci-load_more-js-extra">
+var data = {"ajaxurl":"https://www.comune.collegno.to.it/wp-admin/admin-ajax.php","wp_query":"{\"query\":{\"page\":\"\",\"unita_organizzativa\":\"ufficio-anagrafe\",\"post_type\":\"unita_organizzativa\",\"name\":\"ufficio-anagrafe\"},\"query_vars\":{\"page\":0,\"unita_organizzativa\":\"ufficio-anagrafe\",\"post_type\":\"unita_organizzativa\",\"name\":\"ufficio-anagrafe\",\"error\":\"\",\"m\":\"\",\"p\":0,\"post_parent\":\"\",\"subpost\":\"\",\"subpost_id\":\"\",\"attachment\":\"\",\"attachment_id\":0,\"pagename\":\"\",\"page_id\":0,\"second\":\"\",\"minute\":\"\",\"hour\":\"\",\"day\":0,\"monthnum\":0,\"year\":0,\"w\":0,\"category_name\":\"\",\"tag\":\"\",\"cat\":\"\",\"tag_id\":\"\",\"author\":\"\",\"author_name\":\"\",\"feed\":\"\",\"tb\":\"\",\"paged\":0,\"meta_key\":\"\",\"meta_value\":\"\",\"preview\":\"\",\"s\":\"\",\"sentence\":\"\",\"title\":\"\",\"fields\":\"all\",\"menu_order\":\"\",\"embed\":\"\",\"category__in\":[],\"category__not_in\":[],\"category__and\":[],\"post__in\":[],\"post__not_in\":[],\"post_name__in\":[],\"tag__in\":[],\"tag__not_in\":[],\"tag__and\":[],\"tag_slug__in\":[],\"tag_slug__and\":[],\"post_parent__in\":[],\"post_parent__not_in\":[],\"author__in\":[],\"author__not_in\":[],\"search_columns\":[],\"ignore_sticky_posts\":false,\"suppress_filters\":false,\"cache_results\":true,\"update_post_term_cache\":true,\"update_menu_item_cache\":false,\"lazy_load_term_meta\":true,\"update_post_meta_cache\":true,\"posts_per_page\":9,\"nopaging\":false,\"comments_per_page\":\"50\",\"no_found_rows\":false,\"order\":\"DESC\"},\"tax_query\":null,\"meta_query\":{\"queries\":[],\"relation\":null,\"meta_table\":null,\"meta_id_column\":null,\"primary_table\":null,\"primary_id_column\":null},\"date_query\":false,\"queried_object\":{\"ID\":617,\"post_author\":\"1\",\"post_date\":\"2023-10-30 16:57:23\",\"post_date_gmt\":\"2023-10-30 15:57:23\",\"post_content\":\"L'ufficio si occupa principalmente dell'iscrizione, registrazione, modifica e cancellazione dei movimenti della popolazione e della certificazione dei fatti giuridicamente rilevanti ad essi collegati all'interno del territorio comunale.\u003Cbr\u003E\u003Cul\u003E\\r\\n \\t\u003Cli\u003ETiene lo schedario della popolazione residente, temporanea e degli italiani residenti all'estero (AIRE);\u003C\\/li\u003E\\r\\n \\t\u003Cli\u003ESegue le mutazioni anagrafiche; iscrizioni e cancellazioni per nascita e morte, per immigrazione ed emigrazione o irreperibilit\\u00e0, per esistenza giudizialmente dichiarata, per rettifiche, per matrimonio, per costituzione di nuova famiglia o convivenza, per cambiamento dell'intestatario della scheda o del capo convivenza o della denominazione e specie della convivenza, per cambiamento della qualifica professionale e del titolo di studio, per scissione o fusione di schede di famiglia, per aggiornamento dei toponimi e dei numeri civici;\u003C\\/li\u003E\\r\\n \\t\u003Cli\u003ECura l'istruttoria per la costituzione delle convivenze di fatto;\u003C\\/li\u003E\\r\\n \\t\u003Cli\u003EEffettua ricerche anagrafiche e predispone elenchi su richiesta di altri uffici interni e di altre Pubbliche Amministrazioni;\u003C\\/li\u003E\\r\\n \\t\u003Cli\u003ERilascia certificazioni varie, dichiarazioni sostitutive di atto di notoriet\\u00e0, legalizzazioni di fotografie, autenticazioni di firme e copie, carte d'identit\\u00e0;\u003C\\/li\u003E\\r\\n \\t\u003Cli\u003ECura la gestione del bollo virtuale provvedendo ai versamenti relativi ed alla contabilizzazione finale;\u003C\\/li\u003E\\r\\n \\t\u003Cli\u003EProvvede alla comunicazione mensile ed annuale dei dati statistici all'ISTAT relativi alla popolazione, nonch\\u00e9 coordina le rilevazioni statistiche periodiche per conto dell'ISTAT;\u003C\\/li\u003E\\r\\n \\t\u003Cli\u003EProvvede all'evasione delle richieste di verifiche e di certificati richiesti da altre PP.AA. o da privati;\u003C\\/li\u003E\\r\\n \\t\u003Cli\u003EGestisce inoltre, lo scadenziario relativo ai residenti stranieri, comunicando le eventuali variazioni anagrafiche alla Questura;\u003C\\/li\u003E\\r\\n \\t\u003Cli\u003EVerifica il possesso dei requisiti ai sensi del D.lgs. 30\\/2007 dei cittadini appartenenti all'Unione Europea per il rilascio degli attestati di soggiorno\u003C\\/li\u003E\\r\\n\u003C\\/ul\u003E\u003Cbr\u003E\u003Ca href=\\\"https:\\/\\/www.comune.collegno.to.it\\/area_tematica\\/orario-anagrafe\\\"\u003E\u003Cb\u003Eorario ufficio\u003C\\/b\u003E\u003C\\/a\u003E\\r\\n\\r\\n\u003Cstrong\u003ENB - La distribuzione dei numeri per l'accesso agli sportelli dell'anagrafe terminer\\u00e0 45 minuti prima della chiusura. Gli utenti che arriveranno successivamente saranno serviti compatibilmente con l'orario di chiusura.\u003C\\/strong\u003E\\r\\n\\r\\nChiusure straordinarie 02\\/01\\/2026 -01\\/06\\/2026 - 07\\/12\\/2026\",\"post_title\":\"Anagrafe\",\"post_excerpt\":\"\",\"post_status\":\"publish\",\"comment_status\":\"open\",\"ping_status\":\"open\",\"post_password\":\"\",\"post_name\":\"ufficio-anagrafe\",\"to_ping\":\"\",\"pinged\":\"\",\"post_modified\":\"2026-05-28 12:56:35\",\"post_modified_gmt\":\"2026-05-28 10:56:35\",\"post_content_filtered\":\"\",\"post_parent\":0,\"guid\":\"https:\\/\\/collegno.dedadigital.dev\\/amministrazione\\/unita_organizzativa\\/ufficio-anagrafe\\/\",\"menu_order\":0,\"post_type\":\"unita_organizzativa\",\"post_mime_type\":\"\",\"comment_count\":\"0\",\"filter\":\"raw\"},\"queried_object_id\":617,\"request\":\"SELECT   wp_posts.*\\n\\t\\t\\t\\t\\t FROM wp_posts \\n\\t\\t\\t\\t\\t WHERE 1=1  AND wp_posts.post_name = 'ufficio-anagrafe' AND wp_posts.post_type = 'unita_organizzativa'\\n\\t\\t\\t\\t\\t \\n\\t\\t\\t\\t\\t ORDER BY wp_posts.menu_order, wp_posts.post_date DESC\\n\\t\\t\\t\\t\\t \",\"posts\":[{\"ID\":617,\"post_author\":\"1\",\"post_date\":\"2023-10-30 16:57:23\",\"post_date_gmt\":\"2023-10-30 15:57:23\",\"post_content\":\"L'ufficio si occupa principalmente dell'iscrizione, registrazione, modifica e cancellazione dei movimenti della popolazione e della certificazione dei fatti giuridicamente rilevanti ad essi collegati all'interno del territorio comunale.\u003Cbr\u003E\u003Cul\u003E\\r\\n \\t\u003Cli\u003ETiene lo schedario della popolazione residente, temporanea e degli italiani residenti all'estero (AIRE);\u003C\\/li\u003E\\r\\n \\t\u003Cli\u003ESegue le mutazioni anagrafiche; iscrizioni e cancellazioni per nascita e morte, per immigrazione ed emigrazione o irreperibilit\\u00e0, per esistenza giudizialmente dichiarata, per rettifiche, per matrimonio, per costituzione di nuova famiglia o convivenza, per cambiamento dell'intestatario della scheda o del capo convivenza o della denominazione e specie della convivenza, per cambiamento della qualifica professionale e del titolo di studio, per scissione o fusione di schede di famiglia, per aggiornamento dei toponimi e dei numeri civici;\u003C\\/li\u003E\\r\\n \\t\u003Cli\u003ECura l'istruttoria per la costituzione delle convivenze di fatto;\u003C\\/li\u003E\\r\\n \\t\u003Cli\u003EEffettua ricerche anagrafiche e predispone elenchi su richiesta di altri uffici interni e di altre Pubbliche Amministrazioni;\u003C\\/li\u003E\\r\\n \\t\u003Cli\u003ERilascia certificazioni varie, dichiarazioni sostitutive di atto di notoriet\\u00e0, legalizzazioni di fotografie, autenticazioni di firme e copie, carte d'identit\\u00e0;\u003C\\/li\u003E\\r\\n \\t\u003Cli\u003ECura la gestione del bollo virtuale provvedendo ai versamenti relativi ed alla contabilizzazione finale;\u003C\\/li\u003E\\r\\n \\t\u003Cli\u003EProvvede alla comunicazione mensile ed annuale dei dati statistici all'ISTAT relativi alla popolazione, nonch\\u00e9 coordina le rilevazioni statistiche periodiche per conto dell'ISTAT;\u003C\\/li\u003E\\r\\n \\t\u003Cli\u003EProvvede all'evasione delle richieste di verifiche e di certificati richiesti da altre PP.AA. o da privati;\u003C\\/li\u003E\\r\\n \\t\u003Cli\u003EGestisce inoltre, lo scadenziario relativo ai residenti stranieri, comunicando le eventuali variazioni anagrafiche alla Questura;\u003C\\/li\u003E\\r\\n \\t\u003Cli\u003EVerifica il possesso dei requisiti ai sensi del D.lgs. 30\\/2007 dei cittadini appartenenti all'Unione Europea per il rilascio degli attestati di soggiorno\u003C\\/li\u003E\\r\\n\u003C\\/ul\u003E\u003Cbr\u003E\u003Ca href=\\\"https:\\/\\/www.comune.collegno.to.it\\/area_tematica\\/orario-anagrafe\\\"\u003E\u003Cb\u003Eorario ufficio\u003C\\/b\u003E\u003C\\/a\u003E\\r\\n\\r\\n\u003Cstrong\u003ENB - La distribuzione dei numeri per l'accesso agli sportelli dell'anagrafe terminer\\u00e0 45 minuti prima della chiusura. Gli utenti che arriveranno successivamente saranno serviti compatibilmente con l'orario di chiusura.\u003C\\/strong\u003E\\r\\n\\r\\nChiusure straordinarie 02\\/01\\/2026 -01\\/06\\/2026 - 07\\/12\\/2026\",\"post_title\":\"Anagrafe\",\"post_excerpt\":\"\",\"post_status\":\"publish\",\"comment_status\":\"open\",\"ping_status\":\"open\",\"post_password\":\"\",\"post_name\":\"ufficio-anagrafe\",\"to_ping\":\"\",\"pinged\":\"\",\"post_modified\":\"2026-05-28 12:56:35\",\"post_modified_gmt\":\"2026-05-28 10:56:35\",\"post_content_filtered\":\"\",\"post_parent\":0,\"guid\":\"https:\\/\\/collegno.dedadigital.dev\\/amministrazione\\/unita_organizzativa\\/ufficio-anagrafe\\/\",\"menu_order\":0,\"post_type\":\"unita_organizzativa\",\"post_mime_type\":\"\",\"comment_count\":\"0\",\"filter\":\"raw\"}],\"post_count\":1,\"current_post\":-1,\"before_loop\":true,\"in_the_loop\":false,\"post\":{\"ID\":617,\"post_author\":\"1\",\"post_date\":\"2023-10-30 16:57:23\",\"post_date_gmt\":\"2023-10-30 15:57:23\",\"post_content\":\"L'ufficio si occupa principalmente dell'iscrizione, registrazione, modifica e cancellazione dei movimenti della popolazione e della certificazione dei fatti giuridicamente rilevanti ad essi collegati all'interno del territorio comunale.\u003Cbr\u003E\u003Cul\u003E\\r\\n \\t\u003Cli\u003ETiene lo schedario della popolazione residente, temporanea e degli italiani residenti all'estero (AIRE);\u003C\\/li\u003E\\r\\n \\t\u003Cli\u003ESegue le mutazioni anagrafiche; iscrizioni e cancellazioni per nascita e morte, per immigrazione ed emigrazione o irreperibilit\\u00e0, per esistenza giudizialmente dichiarata, per rettifiche, per matrimonio, per costituzione di nuova famiglia o convivenza, per cambiamento dell'intestatario della scheda o del capo convivenza o della denominazione e specie della convivenza, per cambiamento della qualifica professionale e del titolo di studio, per scissione o fusione di schede di famiglia, per aggiornamento dei toponimi e dei numeri civici;\u003C\\/li\u003E\\r\\n \\t\u003Cli\u003ECura l'istruttoria per la costituzione delle convivenze di fatto;\u003C\\/li\u003E\\r\\n \\t\u003Cli\u003EEffettua ricerche anagrafiche e predispone elenchi su richiesta di altri uffici interni e di altre Pubbliche Amministrazioni;\u003C\\/li\u003E\\r\\n \\t\u003Cli\u003ERilascia certificazioni varie, dichiarazioni sostitutive di atto di notoriet\\u00e0, legalizzazioni di fotografie, autenticazioni di firme e copie, carte d'identit\\u00e0;\u003C\\/li\u003E\\r\\n \\t\u003Cli\u003ECura la gestione del bollo virtuale provvedendo ai versamenti relativi ed alla contabilizzazione finale;\u003C\\/li\u003E\\r\\n \\t\u003Cli\u003EProvvede alla comunicazione mensile ed annuale dei dati statistici all'ISTAT relativi alla popolazione, nonch\\u00e9 coordina le rilevazioni statistiche periodiche per conto dell'ISTAT;\u003C\\/li\u003E\\r\\n \\t\u003Cli\u003EProvvede all'evasione delle richieste di verifiche e di certificati richiesti da altre PP.AA. o da privati;\u003C\\/li\u003E\\r\\n \\t\u003Cli\u003EGestisce inoltre, lo scadenziario relativo ai residenti stranieri, comunicando le eventuali variazioni anagrafiche alla Questura;\u003C\\/li\u003E\\r\\n \\t\u003Cli\u003EVerifica il possesso dei requisiti ai sensi del D.lgs. 30\\/2007 dei cittadini appartenenti all'Unione Europea per il rilascio degli attestati di soggiorno\u003C\\/li\u003E\\r\\n\u003C\\/ul\u003E\u003Cbr\u003E\u003Ca href=\\\"https:\\/\\/www.comune.collegno.to.it\\/area_tematica\\/orario-anagrafe\\\"\u003E\u003Cb\u003Eorario ufficio\u003C\\/b\u003E\u003C\\/a\u003E\\r\\n\\r\\n\u003Cstrong\u003ENB - La distribuzione dei numeri per l'accesso agli sportelli dell'anagrafe terminer\\u00e0 45 minuti prima della chiusura. Gli utenti che arriveranno successivamente saranno serviti compatibilmente con l'orario di chiusura.\u003C\\/strong\u003E\\r\\n\\r\\nChiusure straordinarie 02\\/01\\/2026 -01\\/06\\/2026 - 07\\/12\\/2026\",\"post_title\":\"Anagrafe\",\"post_excerpt\":\"\",\"post_status\":\"publish\",\"comment_status\":\"open\",\"ping_status\":\"open\",\"post_password\":\"\",\"post_name\":\"ufficio-anagrafe\",\"to_ping\":\"\",\"pinged\":\"\",\"post_modified\":\"2026-05-28 12:56:35\",\"post_modified_gmt\":\"2026-05-28 10:56:35\",\"post_content_filtered\":\"\",\"post_parent\":0,\"guid\":\"https:\\/\\/collegno.dedadigital.dev\\/amministrazione\\/unita_organizzativa\\/ufficio-anagrafe\\/\",\"menu_order\":0,\"post_type\":\"unita_organizzativa\",\"post_mime_type\":\"\",\"comment_count\":\"0\",\"filter\":\"raw\"},\"comment_count\":0,\"current_comment\":-1,\"found_posts\":1,\"max_num_pages\":0,\"max_num_comment_pages\":0,\"is_single\":true,\"is_preview\":false,\"is_page\":false,\"is_archive\":false,\"is_date\":false,\"is_year\":false,\"is_month\":false,\"is_day\":false,\"is_time\":false,\"is_author\":false,\"is_category\":false,\"is_tag\":false,\"is_tax\":false,\"is_search\":false,\"is_feed\":false,\"is_comment_feed\":false,\"is_trackback\":false,\"is_home\":false,\"is_privacy_policy\":false,\"is_404\":false,\"is_embed\":false,\"is_paged\":false,\"is_admin\":false,\"is_attachment\":false,\"is_singular\":true,\"is_robots\":false,\"is_favicon\":false,\"is_posts_page\":false,\"is_post_type_archive\":false,\"thumbnails_cached\":false}","the_query":"null","wp_the_query":"{\"query\":{\"page\":\"\",\"unita_organizzativa\":\"ufficio-anagrafe\",\"post_type\":\"unita_organizzativa\",\"name\":\"ufficio-anagrafe\"},\"query_vars\":{\"page\":0,\"unita_organizzativa\":\"ufficio-anagrafe\",\"post_type\":\"unita_organizzativa\",\"name\":\"ufficio-anagrafe\",\"error\":\"\",\"m\":\"\",\"p\":0,\"post_parent\":\"\",\"subpost\":\"\",\"subpost_id\":\"\",\"attachment\":\"\",\"attachment_id\":0,\"pagename\":\"\",\"page_id\":0,\"second\":\"\",\"minute\":\"\",\"hour\":\"\",\"day\":0,\"monthnum\":0,\"year\":0,\"w\":0,\"category_name\":\"\",\"tag\":\"\",\"cat\":\"\",\"tag_id\":\"\",\"author\":\"\",\"author_name\":\"\",\"feed\":\"\",\"tb\":\"\",\"paged\":0,\"meta_key\":\"\",\"meta_value\":\"\",\"preview\":\"\",\"s\":\"\",\"sentence\":\"\",\"title\":\"\",\"fields\":\"all\",\"menu_order\":\"\",\"embed\":\"\",\"category__in\":[],\"category__not_in\":[],\"category__and\":[],\"post__in\":[],\"post__not_in\":[],\"post_name__in\":[],\"tag__in\":[],\"tag__not_in\":[],\"tag__and\":[],\"tag_slug__in\":[],\"tag_slug__and\":[],\"post_parent__in\":[],\"post_parent__not_in\":[],\"author__in\":[],\"author__not_in\":[],\"search_columns\":[],\"ignore_sticky_posts\":false,\"suppress_filters\":false,\"cache_results\":true,\"update_post_term_cache\":true,\"update_menu_item_cache\":false,\"lazy_load_term_meta\":true,\"update_post_meta_cache\":true,\"posts_per_page\":9,\"nopaging\":false,\"comments_per_page\":\"50\",\"no_found_rows\":false,\"order\":\"DESC\"},\"tax_query\":null,\"meta_query\":{\"queries\":[],\"relation\":null,\"meta_table\":null,\"meta_id_column\":null,\"primary_table\":null,\"primary_id_column\":null},\"date_query\":false,\"queried_object\":{\"ID\":617,\"post_author\":\"1\",\"post_date\":\"2023-10-30 16:57:23\",\"post_date_gmt\":\"2023-10-30 15:57:23\",\"post_content\":\"L'ufficio si occupa principalmente dell'iscrizione, registrazione, modifica e cancellazione dei movimenti della popolazione e della certificazione dei fatti giuridicamente rilevanti ad essi collegati all'interno del territorio comunale.\u003Cbr\u003E\u003Cul\u003E\\r\\n \\t\u003Cli\u003ETiene lo schedario della popolazione residente, temporanea e degli italiani residenti all'estero (AIRE);\u003C\\/li\u003E\\r\\n \\t\u003Cli\u003ESegue le mutazioni anagrafiche; iscrizioni e cancellazioni per nascita e morte, per immigrazione ed emigrazione o irreperibilit\\u00e0, per esistenza giudizialmente dichiarata, per rettifiche, per matrimonio, per costituzione di nuova famiglia o convivenza, per cambiamento dell'intestatario della scheda o del capo convivenza o della denominazione e specie della convivenza, per cambiamento della qualifica professionale e del titolo di studio, per scissione o fusione di schede di famiglia, per aggiornamento dei toponimi e dei numeri civici;\u003C\\/li\u003E\\r\\n \\t\u003Cli\u003ECura l'istruttoria per la costituzione delle convivenze di fatto;\u003C\\/li\u003E\\r\\n \\t\u003Cli\u003EEffettua ricerche anagrafiche e predispone elenchi su richiesta di altri uffici interni e di altre Pubbliche Amministrazioni;\u003C\\/li\u003E\\r\\n \\t\u003Cli\u003ERilascia certificazioni varie, dichiarazioni sostitutive di atto di notoriet\\u00e0, legalizzazioni di fotografie, autenticazioni di firme e copie, carte d'identit\\u00e0;\u003C\\/li\u003E\\r\\n \\t\u003Cli\u003ECura la gestione del bollo virtuale provvedendo ai versamenti relativi ed alla contabilizzazione finale;\u003C\\/li\u003E\\r\\n \\t\u003Cli\u003EProvvede alla comunicazione mensile ed annuale dei dati statistici all'ISTAT relativi alla popolazione, nonch\\u00e9 coordina le rilevazioni statistiche periodiche per conto dell'ISTAT;\u003C\\/li\u003E\\r\\n \\t\u003Cli\u003EProvvede all'evasione delle richieste di verifiche e di certificati richiesti da altre PP.AA. o da privati;\u003C\\/li\u003E\\r\\n \\t\u003Cli\u003EGestisce inoltre, lo scadenziario relativo ai residenti stranieri, comunicando le eventuali variazioni anagrafiche alla Questura;\u003C\\/li\u003E\\r\\n \\t\u003Cli\u003EVerifica il possesso dei requisiti ai sensi del D.lgs. 30\\/2007 dei cittadini appartenenti all'Unione Europea per il rilascio degli attestati di soggiorno\u003C\\/li\u003E\\r\\n\u003C\\/ul\u003E\u003Cbr\u003E\u003Ca href=\\\"https:\\/\\/www.comune.collegno.to.it\\/area_tematica\\/orario-anagrafe\\\"\u003E\u003Cb\u003Eorario ufficio\u003C\\/b\u003E\u003C\\/a\u003E\\r\\n\\r\\n\u003Cstrong\u003ENB - La distribuzione dei numeri per l'accesso agli sportelli dell'anagrafe terminer\\u00e0 45 minuti prima della chiusura. Gli utenti che arriveranno successivamente saranno serviti compatibilmente con l'orario di chiusura.\u003C\\/strong\u003E\\r\\n\\r\\nChiusure straordinarie 02\\/01\\/2026 -01\\/06\\/2026 - 07\\/12\\/2026\",\"post_title\":\"Anagrafe\",\"post_excerpt\":\"\",\"post_status\":\"publish\",\"comment_status\":\"open\",\"ping_status\":\"open\",\"post_password\":\"\",\"post_name\":\"ufficio-anagrafe\",\"to_ping\":\"\",\"pinged\":\"\",\"post_modified\":\"2026-05-28 12:56:35\",\"post_modified_gmt\":\"2026-05-28 10:56:35\",\"post_content_filtered\":\"\",\"post_parent\":0,\"guid\":\"https:\\/\\/collegno.dedadigital.dev\\/amministrazione\\/unita_organizzativa\\/ufficio-anagrafe\\/\",\"menu_order\":0,\"post_type\":\"unita_organizzativa\",\"post_mime_type\":\"\",\"comment_count\":\"0\",\"filter\":\"raw\"},\"queried_object_id\":617,\"request\":\"SELECT   wp_posts.*\\n\\t\\t\\t\\t\\t FROM wp_posts \\n\\t\\t\\t\\t\\t WHERE 1=1  AND wp_posts.post_name = 'ufficio-anagrafe' AND wp_posts.post_type = 'unita_organizzativa'\\n\\t\\t\\t\\t\\t \\n\\t\\t\\t\\t\\t ORDER BY wp_posts.menu_order, wp_posts.post_date DESC\\n\\t\\t\\t\\t\\t \",\"posts\":[{\"ID\":617,\"post_author\":\"1\",\"post_date\":\"2023-10-30 16:57:23\",\"post_date_gmt\":\"2023-10-30 15:57:23\",\"post_content\":\"L'ufficio si occupa principalmente dell'iscrizione, registrazione, modifica e cancellazione dei movimenti della popolazione e della certificazione dei fatti giuridicamente rilevanti ad essi collegati all'interno del territorio comunale.\u003Cbr\u003E\u003Cul\u003E\\r\\n \\t\u003Cli\u003ETiene lo schedario della popolazione residente, temporanea e degli italiani residenti all'estero (AIRE);\u003C\\/li\u003E\\r\\n \\t\u003Cli\u003ESegue le mutazioni anagrafiche; iscrizioni e cancellazioni per nascita e morte, per immigrazione ed emigrazione o irreperibilit\\u00e0, per esistenza giudizialmente dichiarata, per rettifiche, per matrimonio, per costituzione di nuova famiglia o convivenza, per cambiamento dell'intestatario della scheda o del capo convivenza o della denominazione e specie della convivenza, per cambiamento della qualifica professionale e del titolo di studio, per scissione o fusione di schede di famiglia, per aggiornamento dei toponimi e dei numeri civici;\u003C\\/li\u003E\\r\\n \\t\u003Cli\u003ECura l'istruttoria per la costituzione delle convivenze di fatto;\u003C\\/li\u003E\\r\\n \\t\u003Cli\u003EEffettua ricerche anagrafiche e predispone elenchi su richiesta di altri uffici interni e di altre Pubbliche Amministrazioni;\u003C\\/li\u003E\\r\\n \\t\u003Cli\u003ERilascia certificazioni varie, dichiarazioni sostitutive di atto di notoriet\\u00e0, legalizzazioni di fotografie, autenticazioni di firme e copie, carte d'identit\\u00e0;\u003C\\/li\u003E\\r\\n \\t\u003Cli\u003ECura la gestione del bollo virtuale provvedendo ai versamenti relativi ed alla contabilizzazione finale;\u003C\\/li\u003E\\r\\n \\t\u003Cli\u003EProvvede alla comunicazione mensile ed annuale dei dati statistici all'ISTAT relativi alla popolazione, nonch\\u00e9 coordina le rilevazioni statistiche periodiche per conto dell'ISTAT;\u003C\\/li\u003E\\r\\n \\t\u003Cli\u003EProvvede all'evasione delle richieste di verifiche e di certificati richiesti da altre PP.AA. o da privati;\u003C\\/li\u003E\\r\\n \\t\u003Cli\u003EGestisce inoltre, lo scadenziario relativo ai residenti stranieri, comunicando le eventuali variazioni anagrafiche alla Questura;\u003C\\/li\u003E\\r\\n \\t\u003Cli\u003EVerifica il possesso dei requisiti ai sensi del D.lgs. 30\\/2007 dei cittadini appartenenti all'Unione Europea per il rilascio degli attestati di soggiorno\u003C\\/li\u003E\\r\\n\u003C\\/ul\u003E\u003Cbr\u003E\u003Ca href=\\\"https:\\/\\/www.comune.collegno.to.it\\/area_tematica\\/orario-anagrafe\\\"\u003E\u003Cb\u003Eorario ufficio\u003C\\/b\u003E\u003C\\/a\u003E\\r\\n\\r\\n\u003Cstrong\u003ENB - La distribuzione dei numeri per l'accesso agli sportelli dell'anagrafe terminer\\u00e0 45 minuti prima della chiusura. Gli utenti che arriveranno successivamente saranno serviti compatibilmente con l'orario di chiusura.\u003C\\/strong\u003E\\r\\n\\r\\nChiusure straordinarie 02\\/01\\/2026 -01\\/06\\/2026 - 07\\/12\\/2026\",\"post_title\":\"Anagrafe\",\"post_excerpt\":\"\",\"post_status\":\"publish\",\"comment_status\":\"open\",\"ping_status\":\"open\",\"post_password\":\"\",\"post_name\":\"ufficio-anagrafe\",\"to_ping\":\"\",\"pinged\":\"\",\"post_modified\":\"2026-05-28 12:56:35\",\"post_modified_gmt\":\"2026-05-28 10:56:35\",\"post_content_filtered\":\"\",\"post_parent\":0,\"guid\":\"https:\\/\\/collegno.dedadigital.dev\\/amministrazione\\/unita_organizzativa\\/ufficio-anagrafe\\/\",\"menu_order\":0,\"post_type\":\"unita_organizzativa\",\"post_mime_type\":\"\",\"comment_count\":\"0\",\"filter\":\"raw\"}],\"post_count\":1,\"current_post\":-1,\"before_loop\":true,\"in_the_loop\":false,\"post\":{\"ID\":617,\"post_author\":\"1\",\"post_date\":\"2023-10-30 16:57:23\",\"post_date_gmt\":\"2023-10-30 15:57:23\",\"post_content\":\"L'ufficio si occupa principalmente dell'iscrizione, registrazione, modifica e cancellazione dei movimenti della popolazione e della certificazione dei fatti giuridicamente rilevanti ad essi collegati all'interno del territorio comunale.\u003Cbr\u003E\u003Cul\u003E\\r\\n \\t\u003Cli\u003ETiene lo schedario della popolazione residente, temporanea e degli italiani residenti all'estero (AIRE);\u003C\\/li\u003E\\r\\n \\t\u003Cli\u003ESegue le mutazioni anagrafiche; iscrizioni e cancellazioni per nascita e morte, per immigrazione ed emigrazione o irreperibilit\\u00e0, per esistenza giudizialmente dichiarata, per rettifiche, per matrimonio, per costituzione di nuova famiglia o convivenza, per cambiamento dell'intestatario della scheda o del capo convivenza o della denominazione e specie della convivenza, per cambiamento della qualifica professionale e del titolo di studio, per scissione o fusione di schede di famiglia, per aggiornamento dei toponimi e dei numeri civici;\u003C\\/li\u003E\\r\\n \\t\u003Cli\u003ECura l'istruttoria per la costituzione delle convivenze di fatto;\u003C\\/li\u003E\\r\\n \\t\u003Cli\u003EEffettua ricerche anagrafiche e predispone elenchi su richiesta di altri uffici interni e di altre Pubbliche Amministrazioni;\u003C\\/li\u003E\\r\\n \\t\u003Cli\u003ERilascia certificazioni varie, dichiarazioni sostitutive di atto di notoriet\\u00e0, legalizzazioni di fotografie, autenticazioni di firme e copie, carte d'identit\\u00e0;\u003C\\/li\u003E\\r\\n \\t\u003Cli\u003ECura la gestione del bollo virtuale provvedendo ai versamenti relativi ed alla contabilizzazione finale;\u003C\\/li\u003E\\r\\n \\t\u003Cli\u003EProvvede alla comunicazione mensile ed annuale dei dati statistici all'ISTAT relativi alla popolazione, nonch\\u00e9 coordina le rilevazioni statistiche periodiche per conto dell'ISTAT;\u003C\\/li\u003E\\r\\n \\t\u003Cli\u003EProvvede all'evasione delle richieste di verifiche e di certificati richiesti da altre PP.AA. o da privati;\u003C\\/li\u003E\\r\\n \\t\u003Cli\u003EGestisce inoltre, lo scadenziario relativo ai residenti stranieri, comunicando le eventuali variazioni anagrafiche alla Questura;\u003C\\/li\u003E\\r\\n \\t\u003Cli\u003EVerifica il possesso dei requisiti ai sensi del D.lgs. 30\\/2007 dei cittadini appartenenti all'Unione Europea per il rilascio degli attestati di soggiorno\u003C\\/li\u003E\\r\\n\u003C\\/ul\u003E\u003Cbr\u003E\u003Ca href=\\\"https:\\/\\/www.comune.collegno.to.it\\/area_tematica\\/orario-anagrafe\\\"\u003E\u003Cb\u003Eorario ufficio\u003C\\/b\u003E\u003C\\/a\u003E\\r\\n\\r\\n\u003Cstrong\u003ENB - La distribuzione dei numeri per l'accesso agli sportelli dell'anagrafe terminer\\u00e0 45 minuti prima della chiusura. Gli utenti che arriveranno successivamente saranno serviti compatibilmente con l'orario di chiusura.\u003C\\/strong\u003E\\r\\n\\r\\nChiusure straordinarie 02\\/01\\/2026 -01\\/06\\/2026 - 07\\/12\\/2026\",\"post_title\":\"Anagrafe\",\"post_excerpt\":\"\",\"post_status\":\"publish\",\"comment_status\":\"open\",\"ping_status\":\"open\",\"post_password\":\"\",\"post_name\":\"ufficio-anagrafe\",\"to_ping\":\"\",\"pinged\":\"\",\"post_modified\":\"2026-05-28 12:56:35\",\"post_modified_gmt\":\"2026-05-28 10:56:35\",\"post_content_filtered\":\"\",\"post_parent\":0,\"guid\":\"https:\\/\\/collegno.dedadigital.dev\\/amministrazione\\/unita_organizzativa\\/ufficio-anagrafe\\/\",\"menu_order\":0,\"post_type\":\"unita_organizzativa\",\"post_mime_type\":\"\",\"comment_count\":\"0\",\"filter\":\"raw\"},\"comment_count\":0,\"current_comment\":-1,\"found_posts\":1,\"max_num_pages\":0,\"max_num_comment_pages\":0,\"is_single\":true,\"is_preview\":false,\"is_page\":false,\"is_archive\":false,\"is_date\":false,\"is_year\":false,\"is_month\":false,\"is_day\":false,\"is_time\":false,\"is_author\":false,\"is_category\":false,\"is_tag\":false,\"is_tax\":false,\"is_search\":false,\"is_feed\":false,\"is_comment_feed\":false,\"is_trackback\":false,\"is_home\":false,\"is_privacy_policy\":false,\"is_404\":false,\"is_embed\":false,\"is_paged\":false,\"is_admin\":false,\"is_attachment\":false,\"is_singular\":true,\"is_robots\":false,\"is_favicon\":false,\"is_posts_page\":false,\"is_post_type_archive\":false,\"thumbnails_cached\":false}","posts":"{\"page\":0,\"unita_organizzativa\":\"ufficio-anagrafe\",\"post_type\":\"unita_organizzativa\",\"name\":\"ufficio-anagrafe\",\"error\":\"\",\"m\":\"\",\"p\":0,\"post_parent\":\"\",\"subpost\":\"\",\"subpost_id\":\"\",\"attachment\":\"\",\"attachment_id\":0,\"pagename\":\"\",\"page_id\":0,\"second\":\"\",\"minute\":\"\",\"hour\":\"\",\"day\":0,\"monthnum\":0,\"year\":0,\"w\":0,\"category_name\":\"\",\"tag\":\"\",\"cat\":\"\",\"tag_id\":\"\",\"author\":\"\",\"author_name\":\"\",\"feed\":\"\",\"tb\":\"\",\"paged\":0,\"meta_key\":\"\",\"meta_value\":\"\",\"preview\":\"\",\"s\":\"\",\"sentence\":\"\",\"title\":\"\",\"fields\":\"all\",\"menu_order\":\"\",\"embed\":\"\",\"category__in\":[],\"category__not_in\":[],\"category__and\":[],\"post__in\":[],\"post__not_in\":[],\"post_name__in\":[],\"tag__in\":[],\"tag__not_in\":[],\"tag__and\":[],\"tag_slug__in\":[],\"tag_slug__and\":[],\"post_parent__in\":[],\"post_parent__not_in\":[],\"author__in\":[],\"author__not_in\":[],\"search_columns\":[],\"ignore_sticky_posts\":false,\"suppress_filters\":false,\"cache_results\":true,\"update_post_term_cache\":true,\"update_menu_item_cache\":false,\"lazy_load_term_meta\":true,\"update_post_meta_cache\":true,\"posts_per_page\":9,\"nopaging\":false,\"comments_per_page\":\"50\",\"no_found_rows\":false,\"order\":\"DESC\"}","current_page":"1","max_page":"0"};
+//# sourceURL=dci-load_more-js-extra
+</script>
+<script id="dci-load_more-js" src="https://static-www.comune.collegno.to.it/wp-content/themes/design-comuni-wordpress-theme-main-child/assets/js/load_more.js"></script>
+<script id="wp-emoji-settings" type="application/json">
+{"baseUrl":"https://s.w.org/images/core/emoji/17.0.2/72x72/","ext":".png","svgUrl":"https://s.w.org/images/core/emoji/17.0.2/svg/","svgExt":".svg","source":{"concatemoji":"https://www.comune.collegno.to.it/wp-includes/js/wp-emoji-release.min.js?ver=7.0.2"}}
+</script>
+<script type="module">
+/*! This file is auto-generated */
+const a=JSON.parse(document.getElementById("wp-emoji-settings").textContent),o=(window._wpemojiSettings=a,"wpEmojiSettingsSupports"),s=["flag","emoji"];function i(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(o,JSON.stringify(t))}catch(e){}}function c(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0);const a=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);return t.every((e,t)=>e===a[t])}function p(e,t){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var n=e.getImageData(16,16,1,1);for(let e=0;e<n.data.length;e++)if(0!==n.data[e])return!1;return!0}function u(e,t,n,a){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\udde8\ud83c\uddf6","\ud83c\udde8\u200b\ud83c\uddf6")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!a(e,"\ud83e\u1fac8")}return!1}function f(e,t,n,a){let r;const o=(r="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):document.createElement("canvas")).getContext("2d",{willReadFrequently:!0}),s=(o.textBaseline="top",o.font="600 32px Arial",{});return e.forEach(e=>{s[e]=t(o,e,n,a)}),s}function r(e){var t=document.createElement("script");t.src=e,t.defer=!0,document.head.appendChild(t)}a.supports={everything:!0,everythingExceptFlag:!0},new Promise(t=>{let n=function(){try{var e=JSON.parse(sessionStorage.getItem(o));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(s),u.toString(),c.toString(),p.toString()].join(",")+"));",a=new Blob([e],{type:"text/javascript"});const r=new Worker(URL.createObjectURL(a),{name:"wpTestEmojiSupports"});return void(r.onmessage=e=>{i(n=e.data),r.terminate(),t(n)})}catch(e){}i(n=f(s,u,c,p))}t(n)}).then(e=>{for(const n in e)a.supports[n]=e[n],a.supports.everything=a.supports.everything&&a.supports[n],"flag"!==n&&(a.supports.everythingExceptFlag=a.supports.everythingExceptFlag&&a.supports[n]);var t;a.supports.everythingExceptFlag=a.supports.everythingExceptFlag&&!a.supports.flag,a.supports.everything||((t=a.source||{}).concatemoji?r(t.concatemoji):t.wpemoji&&t.twemoji&&(r(t.twemoji),r(t.wpemoji)))});
+//# sourceURL=https://www.comune.collegno.to.it/wp-includes/js/wp-emoji-loader.min.js
+</script>
+<!-- Non rimuovere. Commento per la verifica del corretto funzionamento del sito. phai0ooch1Aseim -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  // Funzione che rimuove i tabindex da tutti gli elementi Splide
+  function removeTabindex() {
+    document.querySelectorAll('.splide [tabindex]').forEach(el => {
+      el.removeAttribute('tabindex');
+    });
+  }
+
+  // Esegui subito dopo il caricamento
+  removeTabindex();
+
+  // Esegui di nuovo dopo un po' (Splide può reiniettare i tabindex)
+  setTimeout(removeTabindex, 500);
+  setTimeout(removeTabindex, 1500);
+
+  // Esegui ogni volta che cambia slide
+  document.querySelectorAll('.splide').forEach(slide => {
+    slide.addEventListener('moved', removeTabindex);
+  });
+});
+</script>
+
+
+</body>
+</html>

@@ -233,6 +233,31 @@ azzerare, non l'assenza di riconoscimento.
 
 ---
 
+## 13. Wiring 2D-iii: nuovi artefatti in `data-live` + RMW stato — RISOLTO (Fase 2D)
+
+**Dubbio.** Agganciare `EndpointState` e `fondi_aderenza` al path confirmation
+aggiunge due nuovi alberi scritti in `data-live` (`stato/<surface>/` e
+`aderenza/<surface>/`) e introduce un read-modify-write dello stato (leggi il
+precedente → transisci → riscrivi). Rischi: (a) violare l'invariante I4
+(dry-run non deve scrivere); (b) corsa se due sweep toccano lo stesso endpoint.
+
+**Come superato.** (a) Tutto il blocco `_registra_stato_e_aderenza` sta dentro
+lo stesso `if not dry_run` del `_write_check`: e2e `test_dry_run_non_scrive_
+stato_ne_aderenza` prova che nessuno dei tre alberi nasce sotto dry-run. La
+scrittura è atomica (tmp + `replace`), come già `_write_check`. (b) La corsa non
+si materializza oggi: `run()` non sovrappone due sweep (ciclo batch→pausa,
+memoria `keep sweep worker alive`) e la confirmation è per-comune sequenziale.
+Se in Fase 3 lo sweep diventasse concorrente per-endpoint servirà un lock per
+`(source_id, surface, entrypoint)` — annotato, non anticipato.
+
+**Copertura None nel record aderenza.** Il verdetto persistito dalla confirmation
+ha `coverage_score=None`/`verdetto=None` per costruzione: la confirmation misura
+liveness, non copertura (vedi §11). Il record resta utile (status, drift,
+recognition, fingerprint, stato endpoint); la copertura la riempirà il path
+refresh/connettore quando sarà strangolato.
+
+---
+
 ## Corner case verificati (non bloccanti)
 
 - **`source_id`/`final_url` in scope** in `discover_source_inventory` prima

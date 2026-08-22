@@ -13,8 +13,14 @@ from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import urlparse
 
+from treasureiq.catalog.aderenza import fondi_aderenza
 from treasureiq.catalog.checks import CheckResult, CheckStatus
 from treasureiq.catalog.contracts import Surface
+from treasureiq.catalog.endpoint_state import (
+    EndpointState,
+    stato_iniziale,
+    transiziona,
+)
 from treasureiq.catalog.recognition import (
     FingerprintEvidence,
     RecognitionAction,
@@ -36,13 +42,56 @@ def _fingerprint(*, platform: str | None, headers: dict[str, str], html: str) ->
     return hashlib.sha256(raw.encode("utf-8")).hexdigest()
 
 
-def _write_check(live_dir: Path, result: CheckResult, *, suffix: str = "") -> None:
-    directory = live_dir / "check" / result.surface.value
-    directory.mkdir(parents=True, exist_ok=True)
-    path = directory / f"{result.source_id}{suffix}.json"
+def _percorso(
+    live_dir: Path, sub: str, surface: Surface, source_id: str, suffix: str
+) -> Path:
+    return live_dir / sub / surface.value / f"{source_id}{suffix}.json"
+
+
+def _scrivi_modello(path: Path, model: object) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_suffix(".tmp")
-    temporary.write_text(result.model_dump_json(indent=1), encoding="utf-8")
+    temporary.write_text(model.model_dump_json(indent=1), encoding="utf-8")  # type: ignore[attr-defined]
     temporary.replace(path)
+
+
+def _write_check(live_dir: Path, result: CheckResult, *, suffix: str = "") -> None:
+    _scrivi_modello(
+        _percorso(live_dir, "check", result.surface, result.source_id, suffix),
+        result,
+    )
+
+
+def _registra_stato_e_aderenza(
+    live_dir: Path, result: CheckResult, *, entrypoint_url: str, suffix: str
+) -> None:
+    """Persiste lo stato dell'endpoint (transizione dal precedente) e il verdetto
+    di aderenza fuso. Read-modify-write dello stato: se esiste già una memoria
+    per questo endpoint la si fa transire, altrimenti si parte dal primo esito.
+
+    La confirmation non misura la copertura (interroga solo la liveness), quindi
+    `fondi_aderenza` riceve `coverage=None`: il record porta comunque status,
+    drift, recognition e fingerprint — la copertura la calcolerà il path
+    refresh/connettore quando sarà strangolato.
+    """
+    stato_path = _percorso(
+        live_dir, "stato", result.surface, result.source_id, suffix
+    )
+    precedente = (
+        EndpointState.model_validate_json(stato_path.read_text(encoding="utf-8"))
+        if stato_path.exists()
+        else None
+    )
+    stato = (
+        transiziona(precedente, result)
+        if precedente is not None
+        else stato_iniziale(result, entrypoint_url=entrypoint_url)
+    )
+    _scrivi_modello(stato_path, stato)
+    _scrivi_modello(
+        _percorso(live_dir, "aderenza", result.surface, result.source_id, suffix),
+        fondi_aderenza(result),
+    )
 
 
 def _confirm_one(
@@ -166,6 +215,10 @@ def confirm_inventory(
         )
         if not dry_run:
             _write_check(live_dir, result)
+            _registra_stato_e_aderenza(
+                live_dir, result,
+                entrypoint_url=str(inventory.transparency_url), suffix="",
+            )
         results.append(result)
     for index, portal in enumerate(inventory.service_portals):
         result = _confirm_one(
@@ -175,5 +228,9 @@ def confirm_inventory(
         )
         if not dry_run:
             _write_check(live_dir, result, suffix=f"-{index}")
+            _registra_stato_e_aderenza(
+                live_dir, result, entrypoint_url=str(portal.url),
+                suffix=f"-{index}",
+            )
         results.append(result)
     return tuple(results)

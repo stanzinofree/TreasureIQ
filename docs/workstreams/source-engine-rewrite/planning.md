@@ -193,8 +193,14 @@ Manca:
     `BudgetDominio` (tetto richieste per dominio), fusi in `PoliticaFetch.decidi`
     (budget → rate-limit → backoff). Puro con `now` iniettato, `dominio_di`
     normalizza www/porta/case. 12 test.
-  - [ ] 2D-iii wiring: aggancio `EndpointState` + `fondi_aderenza` al path
-    confirmation (dry-run-safe, read-modify-write dello stato) + e2e sweep fixture.
+  - **[x] 2D-iii wiring.** `confirm_inventory` ora, oltre al check, persiste in
+    `data-live` lo stato dell'endpoint (`stato/<surface>/<id>.json`, read-modify-
+    write: transisce dal precedente o parte dal primo esito) e il verdetto di
+    aderenza fuso (`aderenza/<surface>/<id>.json`, `fondi_aderenza(result)` con
+    coverage None — la confirmation misura solo liveness). Tutto dietro la
+    guardia `dry_run` (I4). e2e in `test_catalog_confirmation_wiring.py`:
+    persistenza, transizione fra due giri (`ok_consecutivi` 1→2), zero scrittura
+    sotto dry-run. **Fase 2 chiusa.**
 - **Exit-gate:** sweep su comune fixture → transizioni asserite + zero write non
   protette + aderenza calcolata per famiglia non-WP.
 

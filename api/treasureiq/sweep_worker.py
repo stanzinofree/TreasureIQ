@@ -17,6 +17,8 @@ from pathlib import Path
 
 from treasureiq.ingest.censimento import _gia_registrati
 from treasureiq.catalog.confirmation import confirm_inventory
+from treasureiq.catalog.fetch_policy import PoliticaFetch
+from treasureiq.catalog.fetch_runtime import EsecutoreFetch
 from treasureiq.catalog.inventory_discovery import discover_source_inventory
 from treasureiq.connettore import _da_store_raw as _connettore_cache
 from treasureiq.registro_cli import _comuni_da_censimento, main as sweep_main
@@ -46,6 +48,13 @@ class WorkerConfig:
     refresh_interval_seconds: float = 86400.0
     once: bool = False
     dry_run: bool = False
+    # Cortesia verso i portali (usata dalla confirmation via PoliticaFetch):
+    # intervallo minimo fra due fetch sullo stesso dominio e tetto di fetch per
+    # dominio per lotto. Il backoff sui fallimenti di rete parte da questa base.
+    intervallo_dominio_s: float = 1.0
+    budget_per_dominio: int = 50
+    backoff_base_s: float = 60.0
+    backoff_cap_s: float = 3600.0
 
 
 def config_from_env(
@@ -81,6 +90,18 @@ def config_from_env(
         ),
         refresh_interval_seconds=max(
             60.0, float(os.environ.get("TREASUREIQ_REFRESH_INTERVAL_SECONDS", "86400"))
+        ),
+        intervallo_dominio_s=max(
+            0.0, float(os.environ.get("TREASUREIQ_FETCH_INTERVALLO_DOMINIO_S", "1"))
+        ),
+        budget_per_dominio=max(
+            1, int(os.environ.get("TREASUREIQ_FETCH_BUDGET_DOMINIO", "50"))
+        ),
+        backoff_base_s=max(
+            0.0, float(os.environ.get("TREASUREIQ_FETCH_BACKOFF_BASE_S", "60"))
+        ),
+        backoff_cap_s=max(
+            0.0, float(os.environ.get("TREASUREIQ_FETCH_BACKOFF_CAP_S", "3600"))
         ),
         once=once,
         dry_run=dry_run or os.environ.get("TREASUREIQ_SWEEP_DRY_RUN", "0") == "1",
@@ -200,10 +221,22 @@ def run_batch(config: WorkerConfig, comuni: list[str]) -> int:
         ]
     elif config.mode == "confirmation":
         errors = 0
+        # Un solo esecutore per lotto: budget e rate-limit sono per dominio,
+        # quindi devono ricordare gli host già toccati dagli altri comuni del
+        # lotto (tipico: un host SaaS di trasparenza condiviso da molti comuni).
+        esecutore = EsecutoreFetch(
+            PoliticaFetch(
+                intervallo_minimo_s=config.intervallo_dominio_s,
+                massimo_per_dominio=config.budget_per_dominio,
+                backoff_base_s=config.backoff_base_s,
+                backoff_cap_s=config.backoff_cap_s,
+            )
+        )
         for codice in comuni:
             try:
                 results = confirm_inventory(
                     live_dir=LIVE_DIR, source_id=codice, dry_run=config.dry_run,
+                    esecutore=esecutore,
                 )
                 logger.info(
                     "confirmation %s: %s",

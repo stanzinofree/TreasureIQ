@@ -85,7 +85,7 @@ def test_confirmation_usa_solo_entrypoint_persistiti(monkeypatch, tmp_path):
     )
     chiamata = {}
 
-    def fake_confirmation(*, live_dir, source_id, dry_run=False):
+    def fake_confirmation(*, live_dir, source_id, dry_run=False, esecutore=None):
         chiamata["live_dir"] = live_dir
         chiamata["source_id"] = source_id
         return ()

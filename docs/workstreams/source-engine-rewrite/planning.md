@@ -200,9 +200,21 @@ Manca:
     coverage None — la confirmation misura solo liveness). Tutto dietro la
     guardia `dry_run` (I4). e2e in `test_catalog_confirmation_wiring.py`:
     persistenza, transizione fra due giri (`ok_consecutivi` 1→2), zero scrittura
-    sotto dry-run. **Fase 2 chiusa.**
+    sotto dry-run.
+  - **[x] 2D-iv identità endpoint** (review Codex). `_stato_precedente` confronta
+    l'`entrypoint_url` persistito: se cambia (AT spostato / SP riordinati) ritorna
+    `None` → lo stato riparte, `transiziona` non mescola i contatori del vecchio
+    endpoint. Test `test_confirm_url_cambiato_reinizializza_stato`.
+  - **[x] 2D-v aggancio PoliticaFetch** (review Codex). `catalog/fetch_runtime.py::`
+    `EsecutoreFetch` media ogni fetch: `decidi → (rifiuta se budget esaurito) →`
+    `dormi attesa → fetch_guardato → registra`; backoff alimentato dai
+    `fallimenti_consecutivi` persistiti. `confirm_inventory` accetta un `esecutore`
+    opzionale; `sweep_worker` ne condivide **uno per lotto** (budget/rate-limit per
+    dominio). Knob via env `TREASUREIQ_FETCH_*`. Test in
+    `test_catalog_fetch_runtime.py` + budget-skip + backoff-da-stato. **Fase 2 chiusa.**
 - **Exit-gate:** sweep su comune fixture → transizioni asserite + zero write non
-  protette + aderenza calcolata per famiglia non-WP.
+  protette + aderenza calcolata per famiglia non-WP + fetch mediati dalla politica
+  (backoff da stato, budget per dominio).
 
 ### Fase 3 — Contratto chat→connettore universale (→ I2, I3)
 - Estrai da `respond.py` il layer connettore (resp. 5+6) dietro `SourceConnector`

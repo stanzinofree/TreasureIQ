@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import logging
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import urlparse
@@ -21,6 +22,7 @@ from treasureiq.catalog.endpoint_state import (
     stato_iniziale,
     transiziona,
 )
+from treasureiq.catalog.fetch_runtime import EsecutoreFetch
 from treasureiq.catalog.recognition import (
     FingerprintEvidence,
     RecognitionAction,
@@ -32,6 +34,8 @@ from treasureiq.catalog.recognition_adapter import (
 from treasureiq.catalog.service_contracts import SourceInventory
 from treasureiq.ingest.host_guard import fetch_guardato
 from treasureiq.ingest.piattaforma import Piattaforma, impronta_grezza
+
+logger = logging.getLogger("treasureiq.catalog.confirmation")
 
 
 def _fingerprint(*, platform: str | None, headers: dict[str, str], html: str) -> str:
@@ -117,13 +121,31 @@ def _registra_stato_e_aderenza(
 
 def _confirm_one(
     *, source_id: str, surface: Surface, url: str, expected_platform: str | None,
-    timeout: float,
-) -> CheckResult:
+    timeout: float, esecutore: EsecutoreFetch | None = None,
+    fallimenti_consecutivi: int = 0,
+) -> CheckResult | None:
+    """Un controllo di liveness+identità su un entrypoint.
+
+    Ritorna `None` quando `esecutore` è presente e la politica rifiuta il fetch
+    (budget del dominio esaurito): l'endpoint non è stato interrogato, quindi
+    non va scritto alcun check. Senza `esecutore` il fetch è diretto (nessuna
+    politica), come nel path storico.
+    """
     checked_at = datetime.now(timezone.utc)
-    fetched = fetch_guardato(
-        url, timeout=timeout, max_bytes=1_000_000,
-        allow_one_cross_host_redirect=True,
-    )
+    if esecutore is not None:
+        esito = esecutore.esegui(
+            url, fallimenti_consecutivi=fallimenti_consecutivi,
+            timeout=timeout, max_bytes=1_000_000,
+            allow_one_cross_host_redirect=True,
+        )
+        if not esito.consentito:
+            return None
+        fetched = esito.fetched
+    else:
+        fetched = fetch_guardato(
+            url, timeout=timeout, max_bytes=1_000_000,
+            allow_one_cross_host_redirect=True,
+        )
     if fetched is None:
         return CheckResult(
             source_id=source_id, surface=surface,
@@ -219,11 +241,17 @@ def _confirm_one(
 
 def confirm_inventory(
     *, live_dir: Path, source_id: str, timeout: float = 8.0, dry_run: bool = False,
+    esecutore: EsecutoreFetch | None = None,
 ) -> tuple[CheckResult, ...]:
     """Confirm persisted AT/SP entrypoints for one municipality, no discovery.
 
     ``dry_run`` fetches and evaluates every entrypoint but writes no check
     envelope to ``data-live`` (invariante I4: sweep sicuro).
+
+    ``esecutore`` media ogni fetch attraverso la `PoliticaFetch` (backoff,
+    rate-limit e budget per dominio). Va condiviso fra i comuni di un lotto
+    perché budget e rate-limit sono per dominio. Se `None` il fetch è diretto,
+    senza politica (path storico, usato dai test unitari).
     """
     path = live_dir / "inventario" / f"{source_id}.json"
     inventory = SourceInventory.model_validate_json(path.read_text(encoding="utf-8"))
@@ -248,10 +276,20 @@ def confirm_inventory(
             live_dir, surface=surface, source_id=source_id, suffix=suffix,
             entrypoint_url=url,
         )
+        fallimenti = precedente.fallimenti_consecutivi if precedente else 0
         result = _confirm_one(
             source_id=source_id, surface=surface, url=url,
-            expected_platform=expected, timeout=timeout,
+            expected_platform=expected, timeout=timeout, esecutore=esecutore,
+            fallimenti_consecutivi=fallimenti,
         )
+        if result is None:
+            # La politica ha rifiutato il fetch (budget del dominio esaurito):
+            # endpoint non interrogato, nessun check da scrivere.
+            logger.info(
+                "fetch saltato per politica: %s %s %s",
+                source_id, surface.value, url,
+            )
+            continue
         if not dry_run:
             _write_check(live_dir, result, suffix=suffix)
             _registra_stato_e_aderenza(

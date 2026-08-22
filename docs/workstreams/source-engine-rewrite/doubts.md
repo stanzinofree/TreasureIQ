@@ -250,6 +250,47 @@ memoria `keep sweep worker alive`) e la confirmation è per-comune sequenziale.
 Se in Fase 3 lo sweep diventasse concorrente per-endpoint servirà un lock per
 `(source_id, surface, entrypoint)` — annotato, non anticipato.
 
+---
+
+## 14. Review 2D: identità stato + politica non agganciata — RISOLTO (Fase 2D-iv/v)
+
+Due blocking dalla review Codex `b6738a0..80c051c`.
+
+**(iv) Identità dell'endpoint.** Il path `stato/<surface>/<id><suffix>.json`
+indicizza solo `(surface, source_id, suffix)`, ma l'identità dichiarata include
+`entrypoint_url`. Se l'URL AT cambiava, o cambiava l'ordine dei portali SP, il
+vecchio file veniva riusato e `transiziona()` sommava i contatori del vecchio
+endpoint al check del nuovo. **Fix:** `_stato_precedente` confronta
+l'`entrypoint_url` persistito e ritorna `None` se non combacia → lo stato
+riparte da zero. Scelta URL-compare (non hash-nel-path): risolve il mescolamento
+sia per l'AT sia per il riordino SP; il costo è che due SP che si scambiano
+posizione perdono entrambi la storia (raro, e comunque meglio di contatori
+sporchi). Lettura dello stato spostata a monte del check. Test:
+`test_confirm_url_cambiato_reinizializza_stato`.
+
+**(v) PoliticaFetch non agganciata.** `PoliticaFetch`/`LimitatoreDominio`/
+`BudgetDominio` erano core isolati: backoff/rate-limit/budget senza effetto
+reale. **Fix:** `catalog/fetch_runtime.py::EsecutoreFetch` media ogni fetch —
+`decidi() → (rifiuta se budget esaurito) → dormi l'attesa → fetch_guardato() →
+registra()`. Il backoff è alimentato dai `fallimenti_consecutivi` dello stato
+persistito, letto prima del fetch. Orologio e sleep iniettabili (test
+deterministici). `confirm_inventory` accetta un `esecutore` opzionale (None =
+path storico diretto, per i test unitari); `sweep_worker` ne costruisce **uno
+per lotto** (budget/rate-limit sono per dominio: vanno condivisi fra i comuni
+del lotto per non martellare un host SaaS comune a molti). Un rifiuto per budget
+→ `_confirm_one` ritorna `None` → endpoint saltato, nessun check scritto
+(diverso da irraggiungibile = UNAVAILABLE). Knob via env
+(`TREASUREIQ_FETCH_INTERVALLO_DOMINIO_S`, `_BUDGET_DOMINIO`, `_BACKOFF_BASE_S`,
+`_BACKOFF_CAP_S`). Test: `test_catalog_fetch_runtime.py` +
+`test_budget_esaurito_salta_endpoint_niente_scritture` +
+`test_backoff_alimentato_da_stato_persistito`.
+
+**Non bloccanti dalla review, ancora aperti (annotati):** check/stato/aderenza
+scritti atomici singolarmente ma non transazionali insieme (un errore intermedio
+può lasciare i tre alberi disallineati); RMW dello stato non protetto da lock
+(vedi §13.b: non si materializza con lo sweep sequenziale attuale). Entrambi
+diventano rilevanti solo con sweep concorrente in Fase 3.
+
 **Copertura None nel record aderenza.** Il verdetto persistito dalla confirmation
 ha `coverage_score=None`/`verdetto=None` per costruzione: la confirmation misura
 liveness, non copertura (vedi §11). Il record resta utile (status, drift,

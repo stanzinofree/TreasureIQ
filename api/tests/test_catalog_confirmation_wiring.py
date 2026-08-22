@@ -12,14 +12,32 @@ from datetime import datetime, timezone
 import httpx
 
 from treasureiq.catalog import confirmation as confirmation_mod
+from treasureiq.catalog import fetch_runtime
 from treasureiq.catalog.checks import CheckStatus
 from treasureiq.catalog.confirmation import confirm_inventory
 from treasureiq.catalog.endpoint_state import EndpointState
+from treasureiq.catalog.fetch_policy import PoliticaFetch
+from treasureiq.catalog.fetch_runtime import EsecutoreFetch
 from treasureiq.catalog.service_contracts import SourceInventory
 from treasureiq.ingest.piattaforma import Piattaforma
 
 _URBI_AT = '<a href="/portale/ur1UR033.sto?ente=x">Amministrazione Trasparente</a>'
 _AT_URL = "https://trasparenza.comune.example.it/portale/"
+_T0 = datetime(2026, 8, 22, 10, 0, tzinfo=timezone.utc)
+
+
+class _FetchStub:
+    """Stub di `fetch_guardato` per il path esecutore, con esito commutabile."""
+
+    def __init__(self, html):
+        self.html = html
+        self.calls: list[str] = []
+
+    def __call__(self, url, **_kw):
+        self.calls.append(url)
+        if self.html is None:
+            return None
+        return httpx.Headers({}), self.html.encode("utf-8"), url
 
 
 def _stub_fetch(monkeypatch, *, html):
@@ -117,3 +135,52 @@ def test_dry_run_non_scrive_stato_ne_aderenza(monkeypatch, tmp_path):
     assert not (tmp_path / "stato").exists()
     assert not (tmp_path / "aderenza").exists()
     assert not (tmp_path / "check").exists()
+
+
+def test_budget_esaurito_salta_endpoint_niente_scritture(monkeypatch, tmp_path):
+    # Budget del dominio AT già consumato: il fetch dell'AT viene rifiutato,
+    # nessun check/stato/aderenza va scritto (endpoint non interrogato).
+    monkeypatch.setattr(fetch_runtime, "fetch_guardato", _FetchStub(_URBI_AT))
+    _inventario(tmp_path)
+    ese = EsecutoreFetch(
+        PoliticaFetch(massimo_per_dominio=1),
+        orologio=lambda: _T0, dormi=lambda _s: None,
+    )
+    ese.esegui(_AT_URL, max_bytes=1000)  # esaurisce l'unico slot del dominio
+
+    results = confirm_inventory(
+        live_dir=tmp_path, source_id="058003", timeout=1.0, esecutore=ese
+    )
+
+    assert results == ()
+    assert not (tmp_path / "check").exists()
+    assert not (tmp_path / "stato").exists()
+    assert not (tmp_path / "aderenza").exists()
+
+
+def test_backoff_alimentato_da_stato_persistito(monkeypatch, tmp_path):
+    # Due giri irraggiungibili accumulano fallimenti_consecutivi nello stato; il
+    # terzo giro deve leggerli e imporre il backoff corrispondente PRIMA del fetch.
+    stub = _FetchStub(None)  # irraggiungibile
+    monkeypatch.setattr(fetch_runtime, "fetch_guardato", stub)
+    _inventario(tmp_path)
+    dormite: list[float] = []
+    ese = EsecutoreFetch(
+        PoliticaFetch(intervallo_minimo_s=0.0, backoff_base_s=60.0, backoff_cap_s=3600.0),
+        orologio=lambda: _T0, dormi=dormite.append,
+    )
+
+    confirm_inventory(live_dir=tmp_path, source_id="058003", timeout=1.0, esecutore=ese)
+    confirm_inventory(live_dir=tmp_path, source_id="058003", timeout=1.0, esecutore=ese)
+
+    stato_path = tmp_path / "stato" / "transparency" / "058003.json"
+    stato = EndpointState.model_validate_json(stato_path.read_text(encoding="utf-8"))
+    assert stato.status is CheckStatus.UNAVAILABLE
+    assert stato.fallimenti_consecutivi == 2
+
+    stub.html = _URBI_AT  # ora raggiungibile
+    dormite.clear()
+    confirm_inventory(live_dir=tmp_path, source_id="058003", timeout=1.0, esecutore=ese)
+
+    # 2 fallimenti persistiti → backoff base * 2^(2-1) = 120s, imposto prima del fetch.
+    assert dormite == [120.0]

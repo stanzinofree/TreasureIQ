@@ -140,9 +140,9 @@ Manca:
 ### Fase 0 — Pulizia base + freeze contratti (rischio ~nullo) ✅ in corso
 - [x] Push `perf/...` → origin; branch `refactor/source-engine`; baseline lock 1167.
 - [x] Doc "stato reale" (questo file) + matrice call-site + inventario.
-- REMOVE tool morti: `extract/spike.py`, archivia `popola_cache.py`.
-- REMOVE/MERGE doc obsoleti (3C).
-- De-versionare i 9 JSON congelati + cache in `data/` (3A).
+- [x] REMOVE tool morto `extract/spike.py` (zero import reali; 2 docstring ripuntate a `.kapi/spike-d07.md`). `popola_cache.py` da archiviare ancora.
+- REMOVE/MERGE doc obsoleti (3C) → DEFERRED review (accoppiati alla vetrina, vedi `doubts.md` §6).
+- De-versionare i 9 JSON congelati + cache in `data/` (3A) → DEFERRED review (`doubts.md` §5).
 - **Exit-gate:** suite verde a 1167; niente più cache runtime tracciata; docs snelli.
 
 ### Fase 1 — Seam unico recognition (uccide ripple, → I1)

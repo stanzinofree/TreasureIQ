@@ -767,3 +767,66 @@ def test_impronta_registra_non_trovata_onestamente(monkeypatch):
 
     assert esito["piattaforma_at"] == Piattaforma.NON_TROVATA.value
     assert esito["at_url"] is None
+
+
+def test_impronta_ricade_su_da_impronta_quando_il_seam_non_riconosce(monkeypatch):
+    """M2 (Fase 1 strangler): `_impronta` ora riconosce BASE tramite il seam
+    del registry (`firma_da_registro`), ma il fallback statistico
+    `da_impronta` — invariato — deve continuare a scattare quando il seam
+    risponde IGNOTA.
+
+    La home qui sotto non dichiara niente di primario (nessun header spia,
+    nessun generator, nessun host di prodotto noto): sia il classificatore
+    legacy sia il seam del registry la mancano onestamente. Le cartelle degli
+    asset ("argomenti", "content", "extension") sono però la firma silenziosa
+    di OpenPA in `piattaforma._DA_IMPRONTA` — un segnale che SOLO il fallback
+    statistico legge, non il seam (vedi il commento in `_impronta`). Se questo
+    test fallisce con `piattaforma is Piattaforma.IGNOTA`, il fallback si è
+    rotto durante la migrazione a M2.
+    """
+    from treasureiq.catalog.contracts import Surface
+    from treasureiq.catalog.recognition_adapter import firma_da_registro
+    from treasureiq.ingest import censimento
+    from treasureiq.ingest.piattaforma import Piattaforma, classifica_risposta
+
+    html_home = (
+        '<html><head>'
+        '<link href="/content/style.css" rel="stylesheet">'
+        '<script src="/extension/main.js"></script>'
+        "</head><body>"
+        '<a href="/argomenti/pagina">x</a>'
+        "</body></html>"
+    )
+
+    # Presupposto del test, non il suo obiettivo: sia la via legacy sia il
+    # seam mancano questa home (nessuna firma primaria, solo la traccia
+    # statistica nelle cartelle).
+    assert (
+        classifica_risposta(headers={}, html=html_home, includi_at=False).vincitore.piattaforma
+        is Piattaforma.IGNOTA
+    )
+    assert (
+        firma_da_registro(
+            headers={}, html=html_home, surface=Surface.ORDINARY_DATA,
+            source_id="https://comune.esempio.it", entrypoint_url="https://comune.esempio.it",
+        ).piattaforma
+        is Piattaforma.IGNOTA
+    )
+
+    class _RispostaFinta:
+        text = html_home
+        headers: dict = {}
+        status_code = 200
+        url = "https://comune.esempio.it"
+
+    class _SondaFinta:
+        richieste = 1
+
+        def risposta(self, url: str):
+            return _RispostaFinta()
+
+    esito = censimento._impronta(sonda=_SondaFinta(), base="https://comune.esempio.it")
+
+    assert esito["piattaforma"] is Piattaforma.OPENPA
+    assert esito["piattaforma_prova"] is not None
+    assert "impronta:" in esito["piattaforma_prova"]

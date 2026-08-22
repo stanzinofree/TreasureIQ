@@ -290,7 +290,7 @@ class ExtractionResult(BaseModel):
     def quoted_fields(self) -> set[str]:
         """Fields for which the model *declared* a quote — not yet verified.
 
-        Kept for `extract/spike.py`'s D-07 measurement (declared-quote rate
+        Kept for the D-07 measurement (`.kapi/spike-d07.md`; declared-quote rate
         before verification is even attempted). `to_requirements` below does
         not trust this set on its own any more — see `_verify_quotes`.
         """

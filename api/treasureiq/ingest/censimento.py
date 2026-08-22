@@ -45,6 +45,7 @@ i non misurati.
 from __future__ import annotations
 
 import argparse
+import html as html_lib
 import json
 import logging
 import random
@@ -90,7 +91,6 @@ from treasureiq.ingest.piattaforma import (
     Piattaforma,
     classifica_risposta,
     da_impronta,
-    firma_da_risposta,
     impronta_grezza,
 )
 from treasureiq.municipality_registry import (
@@ -515,6 +515,10 @@ _ETICHETTA_AT = re.compile(r"amministrazione\s+trasparente", re.I)
 _HREF_JCITYGOV = re.compile(r"trasparenza-valutazione-merito\.it", re.I)
 _HREF_AMM_TRASP = re.compile(r"amm_trasp", re.I)
 _HREF_TRASPARENZA = re.compile(r"trasparenza", re.I)
+_HREF_URBI_AT = re.compile(
+    r"(?:href|action)=[\"']([^\"']*ur1UR033\.sto[^\"']*)",
+    re.I,
+)
 
 #: Un blocco `<a href="...">...</a>`, contenuto incluso: l'etichetta AT vive
 #: spesso in un `alt`/`title` di un `<img>` annidato o in un `<p>` figlio,
@@ -567,7 +571,10 @@ def _fetch_at_guardato(url: str, *, timeout: float = 8.0) -> tuple[httpx.Headers
     condivisa con `registro.py`. Qualunque anomalia → `None`, mai
     un'eccezione che risale al chiamante e mai un URL indovinato al suo
     posto."""
-    scaricato = fetch_guardato(url, timeout=timeout, max_bytes=MAX_AT_PAGINA_BYTES)
+    scaricato = fetch_guardato(
+        url, timeout=timeout, max_bytes=MAX_AT_PAGINA_BYTES,
+        allow_one_cross_host_redirect=True,
+    )
     if scaricato is None:
         return None
     intestazioni, dati, _ = scaricato
@@ -610,6 +617,17 @@ def scopri_pagina_at(*, html_home: str, base: str) -> EsitoDiscoveryAT:
     if scaricato is None:
         return EsitoDiscoveryAT(Piattaforma.NON_TROVATA, None, None, [])
     intestazioni, html_at = scaricato
+    # Some institutional links are only a redirecting shell.  If the
+    # reached AT page exposes the real URBI application endpoint, promote
+    # that URL to the persisted entrypoint so confirmation can start there
+    # without relying on a cross-host redirect.
+    urbi_match = _HREF_URBI_AT.search(html_at)
+    if urbi_match:
+        urbi_url = urljoin(url, html_lib.unescape(urbi_match.group(1)))
+        urbi_download = _fetch_at_guardato(urbi_url)
+        if urbi_download is not None:
+            url = urbi_url
+            intestazioni, html_at = urbi_download
     esito: ClassificaFirme = classifica_risposta(
         headers=dict(intestazioni), html=html_at, includi_at=True
     )
@@ -1049,7 +1067,15 @@ def _impronta(*, sonda: _Sonda, base: str, regione: str | None = None) -> dict:
     intestazioni = dict(resp.headers)
     # BASE (home comune): una piattaforma AT-only non può vincere qui anche
     # se un link outbound alla pagina AT fa scattare la sua firma.
-    firma = firma_da_risposta(headers=intestazioni, html=resp.text, includi_at=False)
+    # Riconoscimento via seam del registry (import locale: evita il ciclo
+    # censimento→adapter→bridge→plugin all'import del modulo). Il fallback
+    # statistico `da_impronta` sotto resta invariato: il seam non lo replica.
+    from treasureiq.catalog.contracts import Surface
+    from treasureiq.catalog.recognition_adapter import firma_da_registro
+    firma = firma_da_registro(
+        headers=intestazioni, html=resp.text, surface=Surface.ORDINARY_DATA,
+        source_id=str(resp.url), entrypoint_url=str(resp.url),
+    )
     grezza = impronta_grezza(headers=intestazioni, html=resp.text)
     if firma.piattaforma is Piattaforma.IGNOTA:
         # Secondo passaggio: chi non si è dichiarato può ancora essere

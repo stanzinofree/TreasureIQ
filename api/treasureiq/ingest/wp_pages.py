@@ -198,8 +198,8 @@ class WPPagesConnector(Connector):
     def _search_candidate_pages(self) -> list[dict[str, Any]]:
         """The six keyword searches over `pages`, deduped by WP page id.
 
-        Mirrors `extract/spike.py`'s `fetch_candidate_pages` so this
-        connector's corpus matches what `.kapi/spike-d07.md` measured.
+        Mirrors the D-07 spike's `fetch_candidate_pages` so this connector's
+        corpus matches what `.kapi/spike-d07.md` measured.
         """
         seen: dict[int, dict[str, Any]] = {}
         for keyword in SEARCH_KEYWORDS:

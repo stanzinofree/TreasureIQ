@@ -10,13 +10,14 @@ from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import urlsplit
 
+from treasureiq.catalog.contracts import Surface
+from treasureiq.catalog.recognition_adapter import firma_da_registro
 from treasureiq.catalog.service_discovery import (
     discover_service_portal_candidates,
     update_source_inventory,
 )
 from treasureiq.ingest.censimento import scopri_pagina_at
 from treasureiq.ingest.host_guard import fetch_guardato, host_senza_www
-from treasureiq.ingest.piattaforma import classifica_risposta
 
 
 def discover_source_inventory(
@@ -54,9 +55,13 @@ def discover_source_inventory(
             base_failure_reason=f"http_{status_code}",
         )
     html_home = data.decode("utf-8", errors="replace")
-    base = classifica_risposta(
-        headers=dict(headers), html=html_home, includi_at=False
-    ).vincitore
+    # BASE recognition through the registry seam (not the legacy classifier
+    # directly): a new BASE plugin now governs this discovery path too, no
+    # second recognition truth to keep in sync.
+    base = firma_da_registro(
+        headers=dict(headers), html=html_home, surface=Surface.ORDINARY_DATA,
+        source_id=source_id, entrypoint_url=final_url,
+    )
     at = scopri_pagina_at(html_home=html_home, base=final_url)
     now = datetime.now(timezone.utc)
     return update_source_inventory(

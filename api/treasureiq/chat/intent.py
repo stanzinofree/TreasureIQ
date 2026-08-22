@@ -553,9 +553,13 @@ def _topic_hint_lines() -> str:
     return "\n".join(lines)
 
 
-INTENT_SYSTEM_PROMPT = f"""Sei un classificatore per la chat civica del Comune di \
-Albano Laziale. Ricevi il messaggio libero di un cittadino e produci ESCLUSIVAMENTE \
+INTENT_SYSTEM_PROMPT = f"""Sei un classificatore per una chat civica comunale \
+italiana. Ricevi il messaggio libero di un cittadino e produci ESCLUSIVAMENTE \
 un oggetto strutturato, mai testo libero, mai una risposta al cittadino.
+
+Non conosci in anticipo di quale Comune parli il cittadino: NON assumerne mai uno. \
+Compila `comune_hint` solo se il cittadino scrive esplicitamente il nome del comune \
+nel proprio messaggio; altrimenti lascialo vuoto.
 
 Compila questi campi:
 - kind: la FORMA della domanda, da decidere PRIMA del topic.

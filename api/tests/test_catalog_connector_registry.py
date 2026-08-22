@@ -36,6 +36,14 @@ def test_registry_resolves_connector_by_platform_and_request() -> None:
         "comweb.trasparenza",
         "peopleweb.base",
         "peopleweb.trasparenza",
+        "openweb.base",
+        "openweb.trasparenza",
+        "openpa.base",
+        "openpa.trasparenza",
+        "egov.base",
+        "egov.trasparenza",
+        "hgate.base",
+        "hgate.trasparenza",
         "web_scrape",
     )
 

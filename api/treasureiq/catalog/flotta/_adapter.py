@@ -28,10 +28,21 @@ from treasureiq.connettore import EsitoConnettore
 from treasureiq.mappa_connettore import MappaConnettore
 
 #: Platforms whose ``EsitoConnettore`` carries a flat ``uffici`` list the fleet
-#: can project.  eGov/HGATE (``aree_amministrative``) and URBI (no ordinary-data
-#: connector) are excluded on purpose — the v0 office rail does not serve them
-#: either, so covering them is an enhancement beyond parity, its own slice later.
-FLOTTA_PLATFORMS = ("municipium", "comweb", "peopleweb")
+#: can project.  municipium/comweb/peopleweb/openweb/openpa/egov/hgate all fill
+#: ``uffici`` + ``amministrazione_trasparente`` through their v0 readers, so the v0
+#: office rail serves them — every platform that reaches ``_risposta_da_connettore``
+#: with offices belongs here.  eGov/HGATE also carry ``aree_amministrative`` (a
+#: display concern on the acquisition esito, not the office rail), so no extra
+#: surface is needed.  URBI is excluded — it has no ordinary-data office reader.
+FLOTTA_PLATFORMS = (
+    "municipium",
+    "comweb",
+    "peopleweb",
+    "openweb",
+    "openpa",
+    "egov",
+    "hgate",
+)
 
 FLOTTA_ADAPTER_VERSION = "1.0.0"
 

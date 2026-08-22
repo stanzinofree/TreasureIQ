@@ -22,10 +22,22 @@ from treasureiq.catalog.flotta._adapter import (
 )
 from treasureiq.catalog.flotta.comweb.base import ComWebBaseConnettore
 from treasureiq.catalog.flotta.comweb.trasparenza import ComWebTrasparenzaConnettore
+from treasureiq.catalog.flotta.egov.base import (
+    EGovBaseConnettore,
+    HGateBaseConnettore,
+)
+from treasureiq.catalog.flotta.egov.trasparenza import (
+    EGovTrasparenzaConnettore,
+    HGateTrasparenzaConnettore,
+)
 from treasureiq.catalog.flotta.municipium.base import MunicipiumBaseConnettore
 from treasureiq.catalog.flotta.municipium.trasparenza import (
     MunicipiumTrasparenzaConnettore,
 )
+from treasureiq.catalog.flotta.openpa.base import OpenPABaseConnettore
+from treasureiq.catalog.flotta.openpa.trasparenza import OpenPATrasparenzaConnettore
+from treasureiq.catalog.flotta.openweb.base import OpenWebBaseConnettore
+from treasureiq.catalog.flotta.openweb.trasparenza import OpenWebTrasparenzaConnettore
 from treasureiq.catalog.flotta.peopleweb.base import PeopleWebBaseConnettore
 from treasureiq.catalog.flotta.peopleweb.trasparenza import (
     PeopleWebTrasparenzaConnettore,
@@ -41,6 +53,14 @@ def flotta_connectors() -> tuple[SourceConnector, ...]:
         ComWebTrasparenzaConnettore(),
         PeopleWebBaseConnettore(),
         PeopleWebTrasparenzaConnettore(),
+        OpenWebBaseConnettore(),
+        OpenWebTrasparenzaConnettore(),
+        OpenPABaseConnettore(),
+        OpenPATrasparenzaConnettore(),
+        EGovBaseConnettore(),
+        EGovTrasparenzaConnettore(),
+        HGateBaseConnettore(),
+        HGateTrasparenzaConnettore(),
     )
 
 
@@ -56,8 +76,16 @@ __all__ = [
     "FlottaAdapter",
     "ComWebBaseConnettore",
     "ComWebTrasparenzaConnettore",
+    "EGovBaseConnettore",
+    "EGovTrasparenzaConnettore",
+    "HGateBaseConnettore",
+    "HGateTrasparenzaConnettore",
     "MunicipiumBaseConnettore",
     "MunicipiumTrasparenzaConnettore",
+    "OpenWebBaseConnettore",
+    "OpenWebTrasparenzaConnettore",
+    "OpenPABaseConnettore",
+    "OpenPATrasparenzaConnettore",
     "PeopleWebBaseConnettore",
     "PeopleWebTrasparenzaConnettore",
     "flotta_connectors",

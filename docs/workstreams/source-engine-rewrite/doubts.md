@@ -338,3 +338,62 @@ Rinviato alla review tutto ciò che è **cambio di firma del seam** (C1/scattate
 **accoppiato alla demo/vetrina** (dati, docs) o **nel path chat** (Albano,
 intent) — perché sono decisioni architetturali o hanno blast radius fuori dal
 motore, e la consegna è *"senza rompere nulla"*.
+
+---
+
+## §15 — 3C-bis+ter: la flotta copre TUTTO il rail office (commit db7f056)
+
+**Scoperta che blocca 3D letterale.** Implementando 3D pieno ho verificato che il
+rail office `_risposta_da_connettore` è condiviso da OGNI piattaforma il cui
+reader riempie `esito.uffici`, non solo dalle 3 famiglie flotta. Dal dispatch
+`connettore.py:261-288` i reader che producono `uffici`: municipium, comweb,
+peopleweb (flotta ✅), wp_design/wordpress_generico/comunibootstrapitalia
+(wordpress_agid ✅), **openweb** (`openweb.py:400`), **openpa** (`openpa.py:384`),
+**egov/hgate** (`egov.py:420-430`, entrambi via `leggi_egov`). Le ultime tre
+famiglie NON avevano connettore v1 → rimuovere il read v0 e gating su batch
+MEDIATED le avrebbe fatte cadere su web scrape: **il cittadino perde la card
+uffici** su piattaforme già consegnate. Non è churn isomorfo, è regressione.
+
+**Decisione committente (AskUserQuestion):** «Prima i connettori v1 mancanti, poi
+taglio v0». Fatto in questa fetta.
+
+**Cosa contiene la fetta.** 8 unità leaf nuove (openweb/openpa/egov/hgate ×
+base/trasparenza), stessa `_projection` pura, stesso gate MEDIATED-se-record,
+versionate 1.0.0 indipendenti. Registrate prima del WebScrape wildcard;
+`FLOTTA_PLATFORMS` esteso a 7 piattaforme. egov+hgate in UN package (stessa
+vendor family, stesso reader `leggi_egov`) ma con 4 classi leaf distinte per
+onorare l'invariante «una unità per (piattaforma × superficie)».
+
+**Semplificazione rispetto al piano.** Il piano ipotizzava per eGov «nuova
+proiezione su `aree_amministrative`». Verificato che è SBAGLIATO per il rail
+office: eGov riempie `esito.uffici` come gli altri (`_leggi_uffici_egov`), quindi
+è la stessa `FlottaBaseConnettore`. `aree_amministrative` è un concetto di
+display sull'esito di acquisizione, NON parte del rail office → nessuna superficie
+nuova serve. hgate coperto perché il batch usa `esito.piattaforma` come
+platform_id ("hgate") e un comune hgate risolverebbe altrimenti WebScrape.
+
+**Dubbi aperti / da guardare in review:**
+- **D-15a Trasparenza openweb/openpa/egov/hgate.** Ho aggiunto anche le unità
+  `.trasparenza` (non solo `.base`) perché l'adapter flotta gate è a livello
+  piattaforma: con la piattaforma in `FLOTTA_PLATFORMS` l'adapter rivendica anche
+  TRANSPARENCY, e senza unità trasparenza la risoluzione connettore cadrebbe su
+  WebScrape (adapter=flotta/MEDIATED ma connector=web_scrape = incoerenza). Le
+  4 famiglie popolano davvero `amministrazione_trasparente`, quindi la proiezione
+  è reale, non un guscio. Se si preferisse gating per-superficie nell'adapter,
+  è un refactor a parte.
+- **D-15b URBI/halley/jcitygov.** Restano fuori: NON hanno reader office nel
+  dispatch → `esito.uffici` sempre vuoto per loro → v0 già ritorna None → nessuna
+  regressione quando 3D taglierà v0. Verificato via dispatch (else → `precedente`).
+- **D-15c Sprawl.** 8 file quasi-identici (leaf di 3 righe). È il prezzo
+  dell'invariante «unità versionata indipendente». Se si accetta un solo modulo
+  per famiglia con più classi (come ho fatto per egov/hgate) si può compattare
+  openweb/openpa, ma ho preferito coerenza col pattern esistente municipium/
+  comweb/peopleweb (un package per piattaforma).
+
+**Gate.** Suite piena: 1269 passed, 6 skipped, 3 fail PDF pre-esistenti
+(`test_wp_pages_caratterizzazione.py`, non toccati). Test parità+risoluzione
+estesi a tutte e 7 le piattaforme (58 nei 3 file catalog).
+
+**Prossima fetta 3D** ora sbloccata senza regressione: ogni piattaforma del rail
+office risolve un batch MEDIATED, quindi si può riscrivere `_risposta_da_connettore`
+per decidere sulla DataBatch e rimuovere il read v0 `esito.uffici`.

@@ -37,7 +37,15 @@ LETTO_IL = "2026-08-22T09:00:00+00:00"
 # Far-future age so freshness never depends on the wall clock in tests.
 NEVER_STALE = 10**9
 
-FLEET_PLATFORMS = ("municipium", "comweb", "peopleweb")
+FLEET_PLATFORMS = (
+    "municipium",
+    "comweb",
+    "peopleweb",
+    "openweb",
+    "openpa",
+    "egov",
+    "hgate",
+)
 
 
 def _mappa() -> MappaConnettore:
@@ -105,6 +113,14 @@ def _request(capability: str, surface: Surface) -> DataRequest:
         ("comweb", "transparency", Surface.TRANSPARENCY, "comweb.trasparenza"),
         ("peopleweb", "offices", Surface.ORDINARY_DATA, "peopleweb.base"),
         ("peopleweb", "transparency", Surface.TRANSPARENCY, "peopleweb.trasparenza"),
+        ("openweb", "offices", Surface.ORDINARY_DATA, "openweb.base"),
+        ("openweb", "transparency", Surface.TRANSPARENCY, "openweb.trasparenza"),
+        ("openpa", "offices", Surface.ORDINARY_DATA, "openpa.base"),
+        ("openpa", "transparency", Surface.TRANSPARENCY, "openpa.trasparenza"),
+        ("egov", "offices", Surface.ORDINARY_DATA, "egov.base"),
+        ("egov", "transparency", Surface.TRANSPARENCY, "egov.trasparenza"),
+        ("hgate", "offices", Surface.ORDINARY_DATA, "hgate.base"),
+        ("hgate", "transparency", Surface.TRANSPARENCY, "hgate.trasparenza"),
     ],
 )
 def test_fleet_unit_wins_for_its_platform_and_surface(platform, capability, surface, expected):

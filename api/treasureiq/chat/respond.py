@@ -3065,35 +3065,6 @@ def _numeri_utili_da_store(codice_istat: str | None) -> "NumeriUtili | None":
     )
 
 
-def _fuori_copertura(nominato, intent) -> ChatAnswer:
-    """Il cittadino ha nominato un comune che non leggiamo.
-
-    Dirlo e' l'unica risposta onesta. L'alternativa — rispondere con i dati di
-    un comune diverso — non e' una risposta imprecisa: e' la risposta di un
-    altro territorio, e chi legge non ha modo di accorgersene.
-
-    Il nome del comune compare per esteso proprio per questo: se sbagliamo a
-    riconoscerlo, la persona lo vede subito e puo' correggerci.
-    """
-    return ChatAnswer(
-        reply=(
-            f"Non copro ancora il Comune di {nominato.nome}"
-            f"{f' ({nominato.provincia})' if getattr(nominato, 'provincia', None) else ''}. "
-            "Preferisco dirtelo piuttosto che risponderti con i dati di un altro "
-            "comune: sarebbero informazioni sbagliate per te, e non avresti modo "
-            "di accorgertene. Se ti interessa un comune che leggo, scrivimene il "
-            "nome."
-        ),
-        topic=intent.topic,
-        kind=intent.kind,
-        data_gap="comune_non_coperto",
-        needs_clarification=True,
-        matches=[],
-        spid_required=False,
-        spid_reason=None,
-    )
-
-
 _CAMBIO_PERSONA_RE = re.compile(
     r"\bmia\s+madre\b|\bmio\s+padre\b|\bmia\s+figlia\b|\bmio\s+figlio\b"
     r"|\bper\s+lei\b|\bper\s+lui\b",

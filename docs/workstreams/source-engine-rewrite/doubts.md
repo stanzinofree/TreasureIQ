@@ -515,3 +515,36 @@ il passo successivo, deliberatamente 0 chiamanti in 3E.
   wiring chat le distinguerà.
 
 **Gate.** Suite offline 1277 passed, 6 skipped, 3 fail PDF pre-esist.
+
+## 18. Fase 4 — freeze pulito: cosa c'era da rimuovere (quasi nulla)
+
+Fase 4 parte 2 chiedeva la «rimozione definitiva del path legacy strangolato».
+Audit read-only (call-graph via codegraph, agente Sonnet) su respond.py e
+connettore.py per trovare il codice legacy ormai morto. Esito onesto: **lo
+strangler si è già ripulito da solo**.
+
+- Il path decisionale v0 che leggeva `esito.uffici` diretto per DECIDERE
+  l'ufficio non è morto-e-residuo: era già stato **rimosso** in 3D (`6c3bd6e`,
+  «The v0 decision read is removed»). Gli usi di `esito.uffici` che restano sono
+  legittimi e vivi: il dump di display (`esito_mostrato`, respond.py:2194), la
+  rail URP `_office_da_ufficio_nominato` (feature diversa, chiamata a
+  1682/4357/4374), e il fingerprint in registro.py.
+- La telemetria v1 (`_data_batches_da_connettore`/`_plan_connettore`,
+  `data_batches`/`query_plan`/`selected_data_batch`) NON è dead code: è
+  assegnata sulla `ChatAnswer` a ogni turno da connettore (respond.py:2234-2272)
+  ma non riletta da api.py/ChatOut — seam di migrazione **prodotto-ma-non-letto**,
+  intenzionale e già documentato nel docstring del campo (~417). Non si tocca.
+- Le due AccessMode restano parallele di proposito: M-ladder (integration,
+  costo/UX) e catalog.contracts (routing v1). Nessuna è vestigiale.
+
+Unico dead reale trovato: **`_fuori_copertura`** (respond.py, ex-3068), zero
+chiamanti ovunque (nemmeno nei test), **PRE-strangler** (nasce in `cad70d6`),
+superato presto da `_premessa_fuori_copertura` (respond.py:2925, chiamata a
+4407/4454). Rimosso in questa fetta. Non è un residuo dello strangler ma un
+orfano preesistente: la sua morte non cambia comportamento (green gate
+invariato: 1277 passed).
+
+Residuo cosmetico non-codice: `.pyc` stantii di `extract/spike.py` (sorgente
+già assente) sotto `__pycache__` — build artifact non tracciati, ignorati.
+
+**Gate.** Suite offline 1277 passed, 6 skipped, 3 fail PDF pre-esist (invariato).

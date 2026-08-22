@@ -978,6 +978,20 @@ def _pertinente(
     return bool((_parole_piene(parole) - escluse) & (_parole_piene(titolo) - escluse))
 
 
+def _appartiene_all_ente(*, candidato: Opportunity, ente: Ente) -> bool:
+    """Se il record e' davvero dell'ente chiesto (I6, nessun dato altrui).
+
+    NAZIONALE e REGIONALE valgono per chiunque nel territorio (la regione e'
+    gia' filtrata a monte), quindi passano sempre. Un record COMUNALE appartiene
+    a un solo comune: servirlo a un altro sarebbe una bugia sul dato. Combacia
+    solo quando `source.ente_codice_istat` e' l'ISTAT dell'ente; un record senza
+    proprietario registrato non si attribuisce a nessuno.
+    """
+    if candidato.livello is not Livello.COMUNALE:
+        return True
+    return candidato.source.ente_codice_istat == ente.codice_istat
+
+
 def _document_answer(candidato: Opportunity) -> DocumentAnswer:
     """La scheda del servizio come la pubblica il comune, mai riscritta."""
     sommario = (candidato.summary or "").strip()
@@ -1640,17 +1654,21 @@ async def _build_informazione_answer(
     # (`_riscontro_lessicale`). Senza questa condizione una domanda fuori
     # catalogo — l'ufficio tributi — riceveva la pagina del topic più vicino
     # che il catalogo copre, l'anagrafe, presentata come la risposta.
-    trovati = (
-        _search_opportunities(
-            records=records, topic=intent.topic, role=intent.beneficiary_role
-        )
-        if ente.codice_istat == DEFAULT_COMUNE_ISTAT
-        else []
+    # I6 (nessun dato fisso in produzione): niente gate hardcoded su Albano.
+    # Cerchiamo per QUALSIASI comune riconosciuto, poi teniamo solo i record
+    # che appartengono davvero all'ente chiesto (`_appartiene_all_ente`): un
+    # bando COMUNALE di un territorio non deve mai comparire nella risposta di
+    # un altro. Oggi solo Albano ha dati COMUNALE ingeriti, quindi l'effetto e'
+    # identico al vecchio gate — ma la ragione ora e' il dato, non un ISTAT
+    # scritto a mano, e resta onesto quando altri comuni verranno ingeriti.
+    trovati = _search_opportunities(
+        records=records, topic=intent.topic, role=intent.beneficiary_role
     )
     candidates = [
         c
         for c in trovati
-        if _pertinente(
+        if _appartiene_all_ente(candidato=c, ente=ente)
+        and _pertinente(
             topic=intent.topic,
             role=intent.beneficiary_role,
             parole=parole,
@@ -3469,14 +3487,35 @@ async def _risposta_bandi(
     #     senza questo si cadeva sul default Albano leggendo il comune sbagliato.
     #     `_comune_nominato` usa `_comuni_candidati` (stoplist
     #     «bolletta»/«minori»/connettivi), niente falsi toponimi.
-    #  4. default demo, solo come ultima risorsa.
+    #  4. se NON c'e' nessuno dei tre: non c'e' un default. Chiediamo il comune.
     nominato = _comune_nominato(message)
     target_istat = (
         (profile.comune_istat if profile is not None else None)
         or comune_istat
         or (nominato.codice_istat if nominato is not None else None)
-        or DEFAULT_COMUNE_ISTAT
     )
+    # I6 (nessun dato fisso in produzione): niente ripiego hardcoded su Albano.
+    # Quando non sappiamo il comune, l'unica risposta onesta e' chiederlo — mai
+    # rispondere sui bandi di un altro territorio dietro le quinte. Stessa
+    # scelta gia' applicata in api.py `/approfondimento` senza sessione.
+    if target_istat is None:
+        return ChatAnswer(
+            reply=(
+                "Per cercare i bandi devo sapere di quale comune parli. "
+                "Scrivimelo nella chat, oppure usa «Usa la mia posizione»."
+            ),
+            topic=Topic.BANDI,
+            kind=QuestionKind.INFORMAZIONE,
+            data_gap="comune_non_noto",
+            needs_clarification=True,
+            matches=[],
+            spid_required=False,
+            spid_reason=None,
+            access_mode=None,
+            citizen_effort=1,
+            info=None,
+            bandi_live=None,
+        )
 
     try:
         esito = await asyncio.to_thread(bandi_live.bandi_arricchiti, target_istat)

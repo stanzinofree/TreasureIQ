@@ -41,7 +41,6 @@ from treasureiq.chat.intent import Topic
 from treasureiq.chat.engine import chat_engine
 from treasureiq.chat.llamacpp import NarrationContext
 from treasureiq.chat.respond import (
-    DEFAULT_COMUNE_ISTAT,
     MAX_MESSAGE_CHARS,
     ChatAnswer,
     InfoAnswer,
@@ -2722,12 +2721,19 @@ async def chat(body: ChatIn, request: Request, response: Response) -> ChatOut:
         # agevolazioni di Albano come se riguardassero chi aveva domandato. Non
         # è una risposta imprecisa, è la risposta di un altro comune — e il
         # sistema sapeva già di non essere lì (R-9).
-        scelto = body.comune_istat if body.comune_istat in COMUNI else None
-        comune_istat = scelto or (
-            DEFAULT_COMUNE_ISTAT
-        )
+        # I6 (nessun dato fisso in produzione): senza un comune nominato e senza
+        # una scelta coperta, il comune e' IGNOTO — non lo sostituiamo con Albano
+        # (era un dato fisso in produzione). Comune ignoto => nessun record: la
+        # risposta a valle gestisce l'assenza di comune come gli altri rail,
+        # invece di far passare le agevolazioni di un territorio per quelle di
+        # chi non ne ha indicato nessuno (R-9).
+        comune_istat = body.comune_istat if body.comune_istat in COMUNI else None
         comune_coperto = body.comune_istat is None or body.comune_istat in COMUNI
-    records = list(load_opportunities(comune_istat)) if comune_coperto else []
+    records = (
+        list(load_opportunities(comune_istat))
+        if comune_istat and comune_coperto
+        else []
+    )
 
     # Ciclo11/A8: il cittadino puo' chiedere di togliere un filtro letto dal
     # testo ma che non lo riguarda ("non sono io, e' mia madre"). Solo

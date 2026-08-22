@@ -548,3 +548,81 @@ Residuo cosmetico non-codice: `.pyc` stantii di `extract/spike.py` (sorgente
 già assente) sotto `__pycache__` — build artifact non tracciati, ignorati.
 
 **Gate.** Suite offline 1277 passed, 6 skipped, 3 fail PDF pre-esist (invariato).
+
+## 19. Fase 4 — exit-gate: chiudere I6 e ferrare I1-I2-I4
+
+Mappa invarianti→test (audit Sonnet). PIENE: I3, I5. PARZIALI a inizio fetta:
+I1 (guard di contenimento c'è, non della «diff 1-file+1-riga»), I2 (isolamento
+mostrato a livello dispatch, nessun guard architetturale), I4 (dry-run+backoff
+pieni; wiring visto solo sul path confirmation). **GAP: I6.**
+
+### 19.1 I6 — il vero buco: tre ripieghi hardcoded su Albano
+
+`DEFAULT_COMUNE_ISTAT="058003"`/`DEFAULT_COMUNE_NOME` (respond.py:128-129) NON
+sono il problema: la costante può esistere (è l'identità del comune demo) ed è
+lecito restituirla in `_resolve_comune` quando il cittadino NOMINA Albano
+(risoluzione identità, non sostituzione). Il problema erano **tre ripieghi** che
+mettevano Albano dove andava il comune del cittadino:
+
+1. **`_risposta_bandi`** (respond.py, ex-3478): `... or DEFAULT_COMUNE_ISTAT`.
+   Rimosso → se non c'è comune (profilo/param/nominato), si CHIEDE («di quale
+   comune parli?»), come già fa `/approfondimento` senza sessione.
+2. **Gate `_build_informazione_answer`** (respond.py, ex-1647):
+   `if ente.codice_istat == DEFAULT_COMUNE_ISTAT`. **Attenzione**: non era una
+   feature-gate benigna. `_pertinente` è guardia di PERTINENZA (il record parla
+   del tema?), non di PROPRIETÀ. I connettori comunali producono solo `COMUNALE`
+   e oggi solo Albano ha `COMUNALE` ingerito: quel gate era ciò che IMPEDIVA di
+   servire i bandi comunali di Albano ad altri comuni. Cancellarlo a secco =
+   bugia sui dati. Sostituito da filtro **data-driven di proprietà**
+   (`_appartiene_all_ente`): NAZIONALE/REGIONALE passano a tutti (regione già
+   filtrata a monte), un `COMUNALE` combacia solo se
+   `source.ente_codice_istat == ente.codice_istat`. Oggi effetto identico (solo
+   Albano ha dati COMUNALE), ma la ragione ora è il DATO, non un ISTAT scritto a
+   mano; e resta onesto quando altri comuni verranno ingeriti.
+3. **Handler `/chat` agevolazione** (api.py, ex-2726): `scelto or
+   DEFAULT_COMUNE_ISTAT`. Terzo ripiego, emerso DOPO la scelta utente su 1+2 (non
+   era nella domanda iniziale, l'ho risollevato). Effetto reale: solo su input a
+   vuoto (nessun comune nominato NÉ scelto) caricava i `records` di Albano — a
+   valle il `comune_istat` passato era già il `None` grezzo, quindi cambiano solo
+   i record, non i verdetti. Scelta committente: **rimuovere anche questo**.
+   Input a vuoto ⇒ comune ignoto ⇒ `records=[]` (nessun dato sostitutivo); un
+   comune scelto-ma-non-coperto resta «fuori copertura» come prima. `comune_coperto`
+   invariato in tutti i casi; rimosso l'import ora inutile in api.py.
+
+Tripwire I6: `test_i6_no_hardcoded_comune.py`. Non vieta la costante — vieta le
+due FORME di ripiego, via AST su tutto `treasureiq/`: `<expr> or DEFAULT_COMUNE_*`
+(BoolOp/Or) e `<expr> == DEFAULT_COMUNE_*` (Compare). Il `return
+DEFAULT_COMUNE_ISTAT, DEFAULT_COMUNE_NOME` di `_resolve_comune` (Name load in un
+return) e la definizione passano; ogni reintroduzione dei tre pattern fallisce.
+Autoverifica inclusa (bite-check nel design, e un test che la definizione esista
+perché un rename non trasformi la guardia in no-op).
+
+### 19.2 I2 — guard architetturale di isolamento connettori
+
+`test_i2_connector_isolation.py`, due archi via AST: (a) nessun modulo sotto
+`catalog/flotta/<piattaforma>/` importa un connettore fratello — unica eccezione
+l'aggregatore `flotta/__init__.py`, il cui mestiere È conoscerli tutti; (b)
+nessun modulo engine-common importa un pacchetto connettore concreto (il core
+risolve via registry, mai `import flotta.municipium`). Entrambi gli archi già
+veri oggi: la guardia impedisce di attraversarli. Sanity-check che la flotta sia
+vista (≥5 pacchetti, aggregatore presente) così una dir spostata non rende la
+guardia vacua.
+
+### 19.3 I4 — wiring discovery/refresh: già coperto, niente test nuovo
+
+L'audit dava I4-wiring PARZIALE («solo confirmation»). Falso positivo: il
+dry-run-non-scrive con controprova è già asserito su TUTTI e tre i path in
+`test_sweep_dry_run.py` — discovery (`discover_source_inventory`), refresh
+(`update_source_inventory` + `run_batch` in refresh rifiutato senza chiamare
+`sweep_main`) e confirmation. Estendere = duplicare. Nessun test aggiunto,
+documentato qui.
+
+### 19.4 I1 — resta com'è
+
+Il guard di contenimento (`test_recognition_seam_guard.py`) copre l'invariante
+sostanziale (nessun import legacy fuori dal bridge). La parte «diff 1-file+
+1-riga» è una proprietà di processo (review Codex), non un test: non si ferra con
+un unit test senza inventare una metrica fragile. Lasciata al gate di review.
+
+**Gate.** Suite offline 1282 passed (5 funzioni guard nuove: I6 ×2, I2 ×3),
+6 skipped, 3 fail PDF pre-esist (invariato).

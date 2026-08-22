@@ -50,7 +50,8 @@ class Aderenza(_StrictModel):
     """
 
     source_id: str = Field(min_length=1)  # comune (ISTAT)
-    connettore: str | None = None          # piattaforma riconosciuta
+    connettore: str | None = None          # motore/plugin (connector_id)
+    piattaforma: str | None = None         # piattaforma riconosciuta (identity)
     surface: Surface
     status: CheckStatus
     recognition_score: float | None = Field(default=None, ge=0.0, le=1.0)
@@ -79,27 +80,31 @@ def fondi_aderenza(
 
     - drift (DIFFORME) → ``None``: la copertura, se c'è, è stata misurata contro
       un contratto che non vale più — sommarla ingannerebbe.
-    - non riconosciuto (MANUAL_REVIEW / recognition 0) → ``None``: non sappiamo
-      di quale contratto parlare.
+    - non riconosciuto → ``None``: senza un `recognition_score` positivo non
+      sappiamo di quale contratto parlare. Uno stato OK non basta (SOURCE_IDENTITY
+      può essere OK con recognition non misurato): serve il riconoscimento vero.
     - riconosciuto + copertura misurata → la copertura stessa.
     - riconosciuto + copertura non misurata → ``None`` (onesto, non uno zero).
     """
     difforme = check.status is CheckStatus.DIFFORME
-    riconosciuto = check.status not in {
-        CheckStatus.DIFFORME,
-        CheckStatus.MANUAL_REVIEW,
-        CheckStatus.UNAVAILABLE,
-        CheckStatus.UNKNOWN,
-    }
+    # La recognition sblocca la coverage solo se è davvero avvenuta: uno score
+    # positivo, non il semplice "stato non pessimo". Così un OK senza
+    # riconoscimento (recognition_score None) non produce mai un verdetto.
+    riconosciuto = (
+        check.recognition_score is not None and check.recognition_score > 0
+    )
     # La copertura fornita ha la precedenza; in mancanza si usa quella che il
     # check porta già con sé (oggi None sul path confirmation).
     coverage_score = coverage if coverage is not None else check.coverage_score
     verdetto = coverage_score if (riconosciuto and not difforme) else None
+    # connettore = motore/plugin (connector_id), stabile per il versionamento e
+    # per l'admin; piattaforma = ciò che il riconoscimento ha visto. Sono due
+    # cose diverse e vanno tenute separate, non collassate su una chiave sola.
     piattaforma = check.identity.get("platform")
-    connettore = piattaforma if isinstance(piattaforma, str) else check.connector_id
     return Aderenza(
         source_id=check.source_id,
-        connettore=connettore,
+        connettore=check.connector_id,
+        piattaforma=piattaforma if isinstance(piattaforma, str) else None,
         surface=check.surface,
         status=check.status,
         recognition_score=check.recognition_score,

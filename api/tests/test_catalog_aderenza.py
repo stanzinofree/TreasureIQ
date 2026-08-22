@@ -61,14 +61,19 @@ def test_riconosciuto_con_copertura_verdetto_e_la_copertura():
     assert result.difforme is False
     assert result.coverage_score == 0.68
     assert result.verdetto == 0.68
-    assert result.connettore == "wordpress_agid"
+    # connettore = motore/plugin, piattaforma = ciò che il riconoscimento ha
+    # visto: due chiavi distinte, non collassate.
+    assert result.connettore == "entrypoint_confirmation"
+    assert result.piattaforma == "wordpress_agid"
     assert result.source_id == "058003"
     assert result.fingerprint == "sha256:abc"
 
 
 def test_drift_azzera_il_verdetto_ma_tiene_la_copertura():
     # DIFFORME: la copertura è misurata contro un contratto che non vale più.
-    check = _check(status=CheckStatus.DIFFORME, recognition=0.0)
+    # recognition positivo di proposito: è il *drift* a dover azzerare il
+    # verdetto, non l'assenza di riconoscimento.
+    check = _check(status=CheckStatus.DIFFORME, recognition=1.0)
     result = fondi_aderenza(check, coverage=0.68)
     assert result.difforme is True
     assert result.coverage_score == 0.68
@@ -91,6 +96,17 @@ def test_riconosciuto_senza_copertura_verdetto_none():
     assert result.verdetto is None
 
 
+def test_ok_senza_recognition_score_non_sblocca_il_verdetto():
+    # Uno stato OK NON basta a sbloccare la coverage: serve un recognition_score
+    # positivo. Un OK con recognition None (es. SOURCE_IDENTITY) più una coverage
+    # non deve produrre un verdetto — la recognition sblocca la coverage.
+    check = _check(status=CheckStatus.OK, recognition=None)
+    result = fondi_aderenza(check, coverage=0.7)
+    assert result.recognition_score is None
+    assert result.coverage_score == 0.7
+    assert result.verdetto is None
+
+
 def test_copertura_fornita_ha_precedenza_su_quella_del_check():
     check = _check(status=CheckStatus.OK, recognition=1.0, coverage=0.2)
     result = fondi_aderenza(check, coverage=0.9)
@@ -107,13 +123,15 @@ def test_famiglia_non_wp_stessa_regola(monkeypatch):
     check = _check(status=CheckStatus.OK, recognition=1.0, platform="comweb",
                    connector_id="entrypoint_confirmation")
     result = fondi_aderenza(check, coverage=coverage)
-    assert result.connettore == "comweb"
+    assert result.piattaforma == "comweb"
+    assert result.connettore == "entrypoint_confirmation"
     assert result.coverage_score == 0.68
     assert result.verdetto == 0.68
 
 
-def test_connettore_ripiega_su_connector_id_senza_piattaforma():
+def test_connettore_e_connector_id_piattaforma_none_se_assente():
     check = _check(status=CheckStatus.OK, recognition=1.0, platform=None,
                    connector_id="filodiretto_sp")
     result = fondi_aderenza(check, coverage=0.5)
     assert result.connettore == "filodiretto_sp"
+    assert result.piattaforma is None

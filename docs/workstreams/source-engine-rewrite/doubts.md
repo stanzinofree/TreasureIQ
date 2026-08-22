@@ -217,6 +217,20 @@ difforme, o copertura non misurata.
 vecchio (strangler): testato in isolamento, si aggancerà quando il refresh sarà
 strangolato (2D/Fase 3). Scelta deliberata per tenere il gate verde e reversibile.
 
+**Correzione review (Codex, 2 rilievi contrattuali).** (a) `connettore` non deve
+prendere il valore dalla piattaforma: `connector_id` è il motore/plugin
+(`entrypoint_confirmation`, `filodiretto_sp`) e serve stabile per admin e
+versionamento, `identity["platform"]` è la piattaforma riconosciuta
+(`wordpress_agid`, `comweb`). Collassarli rendeva ambigua la chiave e aggregava
+connettori diversi. Fix: `connettore = check.connector_id` **sempre**, nuovo
+campo separato `piattaforma`. (b) La regola "recognition sblocca la coverage"
+non era davvero applicata: bastava uno stato non-pessimo, ma un `OK` con
+`recognition_score=None` (possibile per `SOURCE_IDENTITY`) sbloccava il verdetto.
+Fix: `riconosciuto = recognition_score is not None and recognition_score > 0`.
++2 test (`test_ok_senza_recognition_score_non_sblocca_il_verdetto`, campo
+`piattaforma`); drift-test ora con recognition positivo così è il drift a
+azzerare, non l'assenza di riconoscimento.
+
 ---
 
 ## Corner case verificati (non bloccanti)

@@ -191,6 +191,34 @@ DIFFORME = riconosciuto ma difforme dal contratto persistito (l'utente voleva
 
 ---
 
+## 12. `_aderenza` "WP-only" era stale + dove fondere — RISOLTO (Fase 2C)
+
+**Dubbio.** Il planning §3E chiamava la misura di aderenza "WP-only" e chiedeva
+"`_aderenza` oltre WP + campo unico (comune, connettore)". Ma leggendo il codice:
+`censimento._aderenza` **dispatcha già** WP → `_aderenza_wp`, MyPortal (Lepida,
+Veneto) → `_myportal`, PeopleWeb/ComWeb → scheda HTML via `_ROTTE_SERVIZI`.
+Cinque famiglie, non una. Il "WP-only" era una descrizione invecchiata.
+
+**Il buco reale.** Non è "misurare oltre WP" (già fatto per 5 famiglie), è che
+il path **catalog** (`CheckResult`) non ha *nessuna* copertura e non esiste un
+verdetto unico per (comune, connettore) che fonda recognition + coverage + drift.
+
+**Come superato (scelta utente: "fusione in catalog").** Nuovo
+`catalog/aderenza.py`: `fondi_aderenza` è una funzione **pura** che opera sul
+`CheckResult` uniforme — quindi vale per tutte le famiglie senza sapere nulla di
+WordPress/MyPortal — e ci innesta una copertura misurata opzionale. La misura la
+continua a produrre chi la sa fare (il censimento); qui si fonde, non si misura,
+per non violare "confirmation = solo liveness" e non accoppiare catalog→censimento
+con fetch nuovi. `coverage_da_misura` è il ponte esplicito dalla forma dict del
+censimento. Il verdetto è onesto: `None` (non uno zero) quando non riconosciuto,
+difforme, o copertura non misurata.
+
+**Non ancora agganciato a un path vivo.** Il modulo è core nuovo *accanto* al
+vecchio (strangler): testato in isolamento, si aggancerà quando il refresh sarà
+strangolato (2D/Fase 3). Scelta deliberata per tenere il gate verde e reversibile.
+
+---
+
 ## Corner case verificati (non bloccanti)
 
 - **`source_id`/`final_url` in scope** in `discover_source_inventory` prima

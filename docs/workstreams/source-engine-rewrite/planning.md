@@ -167,7 +167,20 @@ Manca:
   interroga il connettore → `None` (non misurata), onesto. `healthy` ripulito
   dalla tautologia `200<=200<400`. admin_app già gestisce DIFFORME (bucket) e
   coverage None (`_bucket`→"unknown"). Test in `test_catalog_confirmation.py`.
-- [ ] Slice 2C — `_aderenza` oltre WP + campo unico (comune, connettore).
+- **[x] Slice 2C — campo unico (comune, connettore).** Nuovo modulo
+  `catalog/aderenza.py`: modello `Aderenza` (chiave logica `(source_id,
+  connettore, surface)`) + funzione pura `fondi_aderenza` che fonde
+  `CheckResult` (riconoscimento + drift + fingerprint) con una copertura
+  misurata opzionale, **famiglia-agnostica** (lavora sul CheckResult uniforme,
+  non sul codice per-piattaforma). Regola `verdetto`: la copertura è la misura,
+  il riconoscimento la sblocca, il drift la azzera a `None` (mai uno zero
+  inventato). Ponte dal censimento: `coverage_da_misura` legge la forma
+  uniforme del dict `_aderenza` (chiave `aderenza`, `None` se solo
+  `nota_misura`). Nota: "`_aderenza` oltre WP" era già vero in censimento
+  (WP + MyPortal + PeopleWeb + ComWeb via `_ROTTE_SERVIZI`); il buco reale era
+  l'assenza di un verdetto unico nel path catalog. 11 test in
+  `test_catalog_aderenza.py` (incl. famiglia non-WP). Nessun I/O, nessun tocco
+  al refresh legacy: la fusione si aggancerà al path in 2D/refresh-strangle.
 - [ ] Slice 2D — stato per superficie+entrypoint (`EndpointState`) + transizione
   dal core; retry/backoff/rate-limit per dominio + budget.
 - **Exit-gate:** sweep su comune fixture → transizioni asserite + zero write non

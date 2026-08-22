@@ -62,32 +62,53 @@ def _write_check(live_dir: Path, result: CheckResult, *, suffix: str = "") -> No
     )
 
 
+def _stato_precedente(
+    live_dir: Path, *, surface: Surface, source_id: str, suffix: str,
+    entrypoint_url: str,
+) -> EndpointState | None:
+    """Stato persistito di QUESTO endpoint, o `None` se mai visto oppure se il
+    file al percorso appartiene a un altro entrypoint.
+
+    L'identità di uno stato è ``(source_id, surface, entrypoint_url)``, ma il
+    percorso su disco indicizza solo ``(surface, source_id, suffix)``: se l'URL
+    AT cambia, o cambia l'ordine dei portali SP, il file al vecchio percorso è di
+    un ALTRO endpoint. Confrontiamo l'URL persistito: se non combacia ritorniamo
+    `None`, così lo stato riparte da zero e `transiziona` non mescola i contatori
+    del vecchio endpoint con il check del nuovo.
+    """
+    path = _percorso(live_dir, "stato", surface, source_id, suffix)
+    if not path.exists():
+        return None
+    stato = EndpointState.model_validate_json(path.read_text(encoding="utf-8"))
+    if stato.entrypoint_url != entrypoint_url:
+        return None
+    return stato
+
+
 def _registra_stato_e_aderenza(
-    live_dir: Path, result: CheckResult, *, entrypoint_url: str, suffix: str
+    live_dir: Path, result: CheckResult, *, entrypoint_url: str, suffix: str,
+    precedente: EndpointState | None,
 ) -> None:
     """Persiste lo stato dell'endpoint (transizione dal precedente) e il verdetto
-    di aderenza fuso. Read-modify-write dello stato: se esiste già una memoria
-    per questo endpoint la si fa transire, altrimenti si parte dal primo esito.
+    di aderenza fuso. `precedente` è già stato letto e verificato per identità da
+    `_stato_precedente`: se non è `None` è lo stato dello STESSO endpoint e lo si
+    fa transire, altrimenti si parte dal primo esito (endpoint nuovo o URL
+    cambiato).
 
     La confirmation non misura la copertura (interroga solo la liveness), quindi
     `fondi_aderenza` riceve `coverage=None`: il record porta comunque status,
     drift, recognition e fingerprint — la copertura la calcolerà il path
     refresh/connettore quando sarà strangolato.
     """
-    stato_path = _percorso(
-        live_dir, "stato", result.surface, result.source_id, suffix
-    )
-    precedente = (
-        EndpointState.model_validate_json(stato_path.read_text(encoding="utf-8"))
-        if stato_path.exists()
-        else None
-    )
     stato = (
         transiziona(precedente, result)
         if precedente is not None
         else stato_iniziale(result, entrypoint_url=entrypoint_url)
     )
-    _scrivi_modello(stato_path, stato)
+    _scrivi_modello(
+        _percorso(live_dir, "stato", result.surface, result.source_id, suffix),
+        stato,
+    )
     _scrivi_modello(
         _percorso(live_dir, "aderenza", result.surface, result.source_id, suffix),
         fondi_aderenza(result),
@@ -206,31 +227,36 @@ def confirm_inventory(
     """
     path = live_dir / "inventario" / f"{source_id}.json"
     inventory = SourceInventory.model_validate_json(path.read_text(encoding="utf-8"))
-    results: list[CheckResult] = []
+    # (surface, url, piattaforma attesa, suffisso di percorso) per ogni endpoint.
+    endpoints: list[tuple[Surface, str, str | None, str]] = []
     if inventory.transparency_url:
-        result = _confirm_one(
-            source_id=source_id, surface=Surface.TRANSPARENCY,
-            url=str(inventory.transparency_url),
-            expected_platform=inventory.transparency_platform, timeout=timeout,
-        )
-        if not dry_run:
-            _write_check(live_dir, result)
-            _registra_stato_e_aderenza(
-                live_dir, result,
-                entrypoint_url=str(inventory.transparency_url), suffix="",
-            )
-        results.append(result)
+        endpoints.append((
+            Surface.TRANSPARENCY, str(inventory.transparency_url),
+            inventory.transparency_platform, "",
+        ))
     for index, portal in enumerate(inventory.service_portals):
+        endpoints.append((
+            Surface.SERVICE_PORTAL, str(portal.url), portal.provider_hint,
+            f"-{index}",
+        ))
+    results: list[CheckResult] = []
+    for surface, url, expected, suffix in endpoints:
+        # Stato precedente letto PRIMA del check: serve sia per la transizione
+        # (RMW) sia — con l'esecutore — per alimentare il backoff con i
+        # fallimenti di rete consecutivi. `None` se l'URL è cambiato.
+        precedente = _stato_precedente(
+            live_dir, surface=surface, source_id=source_id, suffix=suffix,
+            entrypoint_url=url,
+        )
         result = _confirm_one(
-            source_id=source_id, surface=Surface.SERVICE_PORTAL,
-            url=str(portal.url), expected_platform=portal.provider_hint,
-            timeout=timeout,
+            source_id=source_id, surface=surface, url=url,
+            expected_platform=expected, timeout=timeout,
         )
         if not dry_run:
-            _write_check(live_dir, result, suffix=f"-{index}")
+            _write_check(live_dir, result, suffix=suffix)
             _registra_stato_e_aderenza(
-                live_dir, result, entrypoint_url=str(portal.url),
-                suffix=f"-{index}",
+                live_dir, result, entrypoint_url=url, suffix=suffix,
+                precedente=precedente,
             )
         results.append(result)
     return tuple(results)

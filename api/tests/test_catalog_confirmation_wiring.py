@@ -30,16 +30,16 @@ def _stub_fetch(monkeypatch, *, html):
     monkeypatch.setattr(confirmation_mod, "fetch_guardato", fake)
 
 
-def _inventario(tmp_path):
+def _inventario(tmp_path, *, transparency_url=_AT_URL):
     inventory = SourceInventory(
         source_id="058003",
         base_url="https://comune.example.it/",
-        transparency_url=_AT_URL,
+        transparency_url=transparency_url,
         transparency_platform=Piattaforma.URBI.value,
         updated_at=datetime.now(timezone.utc),
     )
     inventory_dir = tmp_path / "inventario"
-    inventory_dir.mkdir(parents=True)
+    inventory_dir.mkdir(parents=True, exist_ok=True)
     (inventory_dir / "058003.json").write_text(
         inventory.model_dump_json(), encoding="utf-8"
     )
@@ -83,6 +83,29 @@ def test_confirm_transisce_lo_stato_fra_due_giri(monkeypatch, tmp_path):
     assert stato.ok_consecutivi == 2
     # `da` resta il primo istante (stato invariato fra i due giri).
     assert stato.da <= stato.ultimo_controllo_il
+
+
+def test_confirm_url_cambiato_reinizializza_stato(monkeypatch, tmp_path):
+    # Primo giro su un URL AT, poi l'inventario cambia URL sullo stesso comune:
+    # il file di stato al percorso `stato/transparency/058003.json` resta, ma è
+    # di un ALTRO endpoint. Deve ripartire da zero, non transire i vecchi contatori.
+    _stub_fetch(monkeypatch, html=_URBI_AT)
+    _inventario(tmp_path, transparency_url=_AT_URL)
+    confirm_inventory(live_dir=tmp_path, source_id="058003", timeout=1.0)
+    confirm_inventory(live_dir=tmp_path, source_id="058003", timeout=1.0)
+
+    stato_path = tmp_path / "stato" / "transparency" / "058003.json"
+    stato = EndpointState.model_validate_json(stato_path.read_text(encoding="utf-8"))
+    assert stato.ok_consecutivi == 2  # due giri sullo stesso URL
+
+    nuovo_url = "https://trasparenza-nuovo.comune.example.it/portale/"
+    _inventario(tmp_path, transparency_url=nuovo_url)
+    confirm_inventory(live_dir=tmp_path, source_id="058003", timeout=1.0)
+
+    stato = EndpointState.model_validate_json(stato_path.read_text(encoding="utf-8"))
+    # Endpoint nuovo: stato ripartito, non un ok_consecutivi==3 dal vecchio.
+    assert stato.entrypoint_url == nuovo_url
+    assert stato.ok_consecutivi == 1
 
 
 def test_dry_run_non_scrive_stato_ne_aderenza(monkeypatch, tmp_path):

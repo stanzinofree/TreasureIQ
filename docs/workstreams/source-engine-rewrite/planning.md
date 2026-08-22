@@ -160,8 +160,13 @@ Manca:
   env `TREASUREIQ_SWEEP_DRY_RUN` + CLI `--dry-run`; refresh sotto dry-run
   **rifiutato** (scrive lo storico via path legacy, non simulato). 6 test in
   `test_sweep_dry_run.py` provano zero-write + controprova + refresh rifiutato.
-- [ ] Slice 2B — aderenza: stato DIFFORME in `CheckStatus`, `coverage_score`
-  misurato (non hardcoded 1.0 `confirmation.py:123`), `DriftEvent`→`CheckResult`.
+- **[x] Slice 2B — aderenza in confirmation.** `CheckStatus.DIFFORME` (drift
+  piattaforma) distinto da MANUAL_REVIEW (non riconosciuto); il drift confluisce
+  già nel `CheckResult` (status DIFFORME + `failure_reason=platform_changed` +
+  action REDISCOVER). `coverage_score` non più hardcoded 1.0: la confirmation non
+  interroga il connettore → `None` (non misurata), onesto. `healthy` ripulito
+  dalla tautologia `200<=200<400`. admin_app già gestisce DIFFORME (bucket) e
+  coverage None (`_bucket`→"unknown"). Test in `test_catalog_confirmation.py`.
 - [ ] Slice 2C — `_aderenza` oltre WP + campo unico (comune, connettore).
 - [ ] Slice 2D — stato per superficie+entrypoint (`EndpointState`) + transizione
   dal core; retry/backoff/rate-limit per dominio + budget.

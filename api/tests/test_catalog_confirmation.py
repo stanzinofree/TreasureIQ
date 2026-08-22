@@ -56,6 +56,9 @@ def test_at_envelope_recognised_and_expected_matches(monkeypatch):
     assert result.source_health is True
     assert result.recognition_score == 1.0
     assert result.completeness_score == 1.0
+    # Aderenza (I5): la confirmation non interroga il connettore → non misura la
+    # copertura del contratto dati. None (non misurata), non un 1.0 finto.
+    assert result.coverage_score is None
     assert result.failure_reason is None
     assert result.connector_id == "entrypoint_confirmation"
     assert result.identity["platform"] == Piattaforma.URBI.value
@@ -72,7 +75,7 @@ def test_at_envelope_recognised_but_platform_changed(monkeypatch):
         source_id="058003", surface=Surface.TRANSPARENCY, url=_AT_URL,
         expected_platform=Piattaforma.COMWEB.value, timeout=1.0,
     )
-    assert result.status is CheckStatus.MANUAL_REVIEW
+    assert result.status is CheckStatus.DIFFORME
     assert result.action is RecognitionAction.REDISCOVER
     assert result.failure_reason == "platform_changed"
     assert result.recognition_score == 0.0
@@ -186,7 +189,7 @@ def test_sp_envelope_drift_flagged(monkeypatch):
         source_id="058003", surface=Surface.SERVICE_PORTAL, url=_SP_URL,
         expected_platform="municipium_portalegen", timeout=1.0,
     )
-    assert result.status is CheckStatus.MANUAL_REVIEW
+    assert result.status is CheckStatus.DIFFORME
     assert result.action is RecognitionAction.REDISCOVER
     assert result.failure_reason == "platform_changed"
     assert result.identity["platform"] == "filodiretto"

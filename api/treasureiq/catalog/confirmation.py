@@ -87,14 +87,22 @@ def _confirm_one(
             recognition = sp
         platform = sp.platform_id if sp.platform_id is not None else expected_platform
         known = bool(platform)
-    healthy = known and 200 <= 200 < 400
+    # fetch_guardato ritorna solo su 200 (None altrimenti, gestito sopra): qui
+    # la salute della fonte dipende dal fatto che la piattaforma sia nota.
+    healthy = known
     changed = bool(expected_platform and platform and expected_platform != platform)
     action = (
         RecognitionAction.REDISCOVER if changed
         else RecognitionAction.MANUAL_REVIEW if not known
         else RecognitionAction.KEEP
     )
-    status = CheckStatus.OK if healthy and not changed else CheckStatus.MANUAL_REVIEW
+    # Aderenza (I5): drift della piattaforma = DIFFORME (riconosciuto ma diverso
+    # dal contratto persistito), distinto da MANUAL_REVIEW (non riconosciuto).
+    status = (
+        CheckStatus.DIFFORME if changed
+        else CheckStatus.MANUAL_REVIEW if not known
+        else CheckStatus.OK
+    )
     if recognition is not None:
         # A native SP plugin matched: persist its versioned recognition contract
         # (plugin id/version, fingerprint version, fingerprint, score, evidence)
@@ -120,7 +128,11 @@ def _confirm_one(
         source_id=source_id, surface=surface, status=status,
         source_health=True, completeness_score=1.0,
         recognition_score=recognition_score,
-        coverage_score=1.0, connector_id=connector_id,
+        # coverage_score = quanto del contratto dati/capability è presente: la
+        # confirmation non interroga il connettore, quindi NON la misura. None
+        # (non misurata) invece di un 1.0 finto — la copertura reale la calcola
+        # il path refresh/connettore (slice futura).
+        coverage_score=None, connector_id=connector_id,
         connector_version=connector_version, fingerprint_version=fingerprint_version,
         fingerprint=fingerprint,
         identity={"entrypoint_url": url, "final_url": final_url,

@@ -160,6 +160,28 @@ quando sarà strangolato in Fase 2D/3. Test
 
 ---
 
+## 11. `coverage_score` finto 1.0 vs onesto None — RISOLTO (Fase 2B)
+
+**Dubbio.** Il piano vuole `coverage_score` *misurato*, non hardcoded 1.0
+(`confirmation.py`). Ma la confirmation non interroga il connettore: verifica
+solo che l'entrypoint noto sia vivo e riconosciuto. Non ha modo di misurare
+"quanta parte del contratto dati/capability è presente". Mettere una misura
+inventata sarebbe peggio del problema.
+
+**Come superato.** `coverage_score = None` (non misurata) invece di 1.0. È il
+valore onesto per questa superficie; la copertura reale la calcolerà il path
+refresh/connettore (slice futura, dove i dati si scaricano davvero). Verificato
+che i consumer reggono None: `admin_app._bucket(None)` → "unknown". Il segnale di
+aderenza che la confirmation *sì* produce è `recognition_score` + il nuovo stato
+**DIFFORME** (drift della piattaforma), non una copertura fittizia.
+
+**DIFFORME vs MANUAL_REVIEW.** Prima il drift (piattaforma cambiata) e il
+non-riconosciuto collassavano entrambi su MANUAL_REVIEW. Ora sono stati distinti:
+DIFFORME = riconosciuto ma difforme dal contratto persistito (l'utente voleva
+"so quando un comune è difforme"); MANUAL_REVIEW = provider non riconosciuto.
+
+---
+
 ## Corner case verificati (non bloccanti)
 
 - **`source_id`/`final_url` in scope** in `discover_source_inventory` prima

@@ -17,6 +17,7 @@ from treasureiq.catalog.recognition import (
 class CheckStatus(str, Enum):
     OK = "ok"
     DEGRADED = "degraded"
+    DIFFORME = "difforme"  # riconosciuto ma la piattaforma è cambiata (drift)
     UNAVAILABLE = "unavailable"
     UNKNOWN = "unknown"
     MANUAL_REVIEW = "manual_review"

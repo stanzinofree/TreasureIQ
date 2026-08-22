@@ -181,8 +181,20 @@ Manca:
   l'assenza di un verdetto unico nel path catalog. 11 test in
   `test_catalog_aderenza.py` (incl. famiglia non-WP). Nessun I/O, nessun tocco
   al refresh legacy: la fusione si aggancerà al path in 2D/refresh-strangle.
-- [ ] Slice 2D — stato per superficie+entrypoint (`EndpointState`) + transizione
-  dal core; retry/backoff/rate-limit per dominio + budget.
+- Slice 2D — stato per superficie+entrypoint + retry/backoff/rate-limit. A fette:
+  - **[x] 2D-i `EndpointState`.** `catalog/endpoint_state.py`: stato persistente
+    per `(source_id, surface, entrypoint_url)` + `transiziona(stato, check)` pura
+    (nessun I/O, tempo dal `CheckResult.checked_at`). Traccia `da` (scatta solo al
+    cambio di stato), `fallimenti_consecutivi` (solo UNAVAILABLE → alimenta il
+    backoff; DIFFORME/MANUAL_REVIEW NON sono guasti di rete), `ok_consecutivi`,
+    `ultimo_ok_il`. 8 test.
+  - **[x] 2D-ii politica di fetch.** `catalog/fetch_policy.py`: `backoff_secondi`
+    (esponenziale con cap), `LimitatoreDominio` (intervallo minimo per dominio),
+    `BudgetDominio` (tetto richieste per dominio), fusi in `PoliticaFetch.decidi`
+    (budget → rate-limit → backoff). Puro con `now` iniettato, `dominio_di`
+    normalizza www/porta/case. 12 test.
+  - [ ] 2D-iii wiring: aggancio `EndpointState` + `fondi_aderenza` al path
+    confirmation (dry-run-safe, read-modify-write dello stato) + e2e sweep fixture.
 - **Exit-gate:** sweep su comune fixture → transizioni asserite + zero write non
   protette + aderenza calcolata per famiglia non-WP.
 

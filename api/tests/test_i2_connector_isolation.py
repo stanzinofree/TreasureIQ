@@ -48,13 +48,20 @@ def _imported_connector(module: str | None) -> str | None:
     return tail if tail in CONNECTOR_PACKAGES else None
 
 
-def _from_imports(tree: ast.AST) -> list[tuple[int, str]]:
-    """``(lineno, module)`` for every ``from X import ...`` in the tree."""
-    return [
-        (node.lineno, node.module)
-        for node in ast.walk(tree)
-        if isinstance(node, ast.ImportFrom) and node.module
-    ]
+def _imports(tree: ast.AST) -> list[tuple[int, str]]:
+    """``(lineno, module)`` for every import in the tree — both syntactic forms.
+
+    ``from ...flotta.x import y`` (``ast.ImportFrom``) and
+    ``import ...flotta.x[ as z]`` (``ast.Import``, one entry per alias): the
+    banned edge can be written either way, so both are scanned.
+    """
+    out: list[tuple[int, str]] = []
+    for node in ast.walk(tree):
+        if isinstance(node, ast.ImportFrom) and node.module:
+            out.append((node.lineno, node.module))
+        elif isinstance(node, ast.Import):
+            out.extend((node.lineno, alias.name) for alias in node.names)
+    return out
 
 
 def _owning_connector(path: Path) -> str | None:
@@ -70,7 +77,7 @@ def test_connectors_do_not_import_each_other() -> None:
             continue  # the aggregator's job is to know them all
         owner = _owning_connector(module)
         tree = ast.parse(module.read_text(encoding="utf-8"), filename=str(module))
-        for lineno, imported in _from_imports(tree):
+        for lineno, imported in _imports(tree):
             target = _imported_connector(imported)
             if target is not None and target != owner:
                 rel = module.relative_to(PACKAGE_ROOT).as_posix()
@@ -89,7 +96,7 @@ def test_engine_common_does_not_import_a_concrete_connector() -> None:
         if FLOTTA_ROOT in module.parents or module.parent == FLOTTA_ROOT:
             continue  # inside the fleet — covered by the sibling test above
         tree = ast.parse(module.read_text(encoding="utf-8"), filename=str(module))
-        for lineno, imported in _from_imports(tree):
+        for lineno, imported in _imports(tree):
             target = _imported_connector(imported)
             if target is not None:
                 rel = module.relative_to(PACKAGE_ROOT).as_posix()

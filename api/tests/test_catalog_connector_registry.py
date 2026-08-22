@@ -28,7 +28,16 @@ def test_registry_resolves_connector_by_platform_and_request() -> None:
 
     assert connector is not None
     assert connector.name == "wordpress_agid"
-    assert registry.names() == ("wordpress_agid", "web_scrape")
+    assert registry.names() == (
+        "wordpress_agid",
+        "municipium.base",
+        "municipium.trasparenza",
+        "comweb.base",
+        "comweb.trasparenza",
+        "peopleweb.base",
+        "peopleweb.trasparenza",
+        "web_scrape",
+    )
 
 
 def test_registry_uses_web_fallback_for_another_platform() -> None:

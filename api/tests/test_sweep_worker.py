@@ -95,3 +95,11 @@ def test_confirmation_usa_solo_entrypoint_persistiti(monkeypatch, tmp_path):
     assert sweep_worker.run_batch(config, ["001"]) == 0
     assert chiamata["source_id"] == "001"
     assert chiamata["live_dir"] == sweep_worker.LIVE_DIR
+
+
+def test_config_from_env_modalita_invalida_ricade_su_refresh(monkeypatch):
+    # Una modalità sconosciuta non deve impostare silenziosamente confirmation:
+    # il fallback coincide col log ("uso refresh") ed è il default dichiarato.
+    monkeypatch.setenv("TREASUREIQ_SWEEP_MODE", "banana")
+    config = sweep_worker.config_from_env()
+    assert config.mode == "refresh"

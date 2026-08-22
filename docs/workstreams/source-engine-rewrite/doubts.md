@@ -151,12 +151,21 @@ lì significherebbe threadare il flag dentro tutto il path legacy — blast radi
 alto, contro "senza rompere nulla".
 
 **Come superato.** Sotto `dry_run`, il ramo refresh **si rifiuta**: logga un
-warning e ritorna 0 senza chiamare `sweep_main`. Meglio rifiutare esplicitamente
-che simulare a metà o mutare in silenzio. `--dry-run` copre oggi discovery e
-confirmation (i due path del motore nuovo); il refresh legacy resterà coperto
-quando sarà strangolato in Fase 2D/3. Test
+warning e ritorna un exit code dedicato senza chiamare `sweep_main`. Meglio
+rifiutare esplicitamente che simulare a metà o mutare in silenzio. `--dry-run`
+copre oggi discovery e confirmation (i due path del motore nuovo); il refresh
+legacy resterà coperto quando sarà strangolato in Fase 2D/3. Test
 `test_run_batch_refresh_dry_run_rifiuta_e_non_chiama_sweep_main` fissa che
 `sweep_main` non viene mai invocato.
+
+**Correzione review (Codex `6f0acee..dd0a56b`).** Prima il rifiuto ritornava
+`0`, indistinguibile da "eseguito con successo". Introdotta la costante
+`EXIT_REFRESH_SKIPPED = 2` (0=ok, 1=errori, 2=rifiutato); `run()` la propaga e
+ferma il ciclo. Stesso giro: (a) fallback di `TREASUREIQ_SWEEP_MODE` invalida
+messo su `refresh` — coincide col log "uso refresh", prima impostava
+`confirmation` per sbaglio; (b) `--aderenza` ora si aggancia con
+`if config.aderenza:` sul path refresh (l'unico che raggiunge quel punto) — la
+guardia `config.mode == "discovery"` era morta, discovery ritorna prima.
 
 ---
 

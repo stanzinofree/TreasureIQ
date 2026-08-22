@@ -25,6 +25,12 @@ from treasureiq.sonda_live import LIVE_DIR, comune_per_codice
 
 logger = logging.getLogger("treasureiq.sweep_worker")
 
+# Exit code emesso da run_batch quando un batch non è stato eseguito ma
+# deliberatamente rifiutato (oggi: refresh sotto --dry-run). Distinto da 0
+# (eseguito ok) e da 1 (eseguito con errori) così il chiamante non confonde
+# "rifiutato" con "riuscito".
+EXIT_REFRESH_SKIPPED = 2
+
 
 @dataclass(frozen=True)
 class WorkerConfig:
@@ -51,7 +57,7 @@ def config_from_env(
     mode = os.environ.get("TREASUREIQ_SWEEP_MODE", "refresh").strip().lower()
     if mode not in {"refresh", "confirmation", "discovery"}:
         logger.warning("modalità sweep sconosciuta %r: uso refresh", mode)
-        mode = "confirmation"
+        mode = "refresh"
     return WorkerConfig(
         db=resolved_db,
         batch_size=max(1, int(os.environ.get("TREASUREIQ_SWEEP_BATCH_SIZE", "20"))),
@@ -185,7 +191,9 @@ def run_batch(config: WorkerConfig, comuni: list[str]) -> int:
                 "dry-run: modalità refresh non supportata (scrive lo storico "
                 "via path legacy); nessuna azione su %d comuni", len(comuni),
             )
-            return 0
+            # Exit code dedicato: il chiamante distingue "rifiutato" (SKIPPED) da
+            # "eseguito con successo" (0). run() lo propaga e ferma il ciclo.
+            return EXIT_REFRESH_SKIPPED
         argv = [
             "scan", *comuni, "--db", str(config.db), "--refresh-dati",
             "--delay", str(config.delay),
@@ -210,7 +218,10 @@ def run_batch(config: WorkerConfig, comuni: list[str]) -> int:
         return 1 if errors else 0
     else:
         raise ValueError(f"modalità worker non gestita: {config.mode}")
-    if config.aderenza and config.mode == "discovery":
+    # A questo punto mode è garantito "refresh": discovery e confirmation sono
+    # già ritornati sopra, ogni altro valore ha sollevato. L'aderenza è calcolata
+    # dal path legacy (sweep_main), quindi il flag va propagato qui.
+    if config.aderenza:
         argv.append("--aderenza")
     return sweep_main(argv)
 

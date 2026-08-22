@@ -111,5 +111,7 @@ def test_run_batch_refresh_dry_run_rifiuta_e_non_chiama_sweep_main(monkeypatch):
     )
     rc = sweep_worker.run_batch(config, ["058003"])
     # Refresh sotto dry-run: rifiutato, zero mutazioni, sweep_main mai invocato.
-    assert rc == 0
+    # Exit code dedicato: SKIPPED, non 0 — il chiamante distingue rifiuto da
+    # esecuzione riuscita.
+    assert rc == sweep_worker.EXIT_REFRESH_SKIPPED
     assert chiamato["sweep_main"] is False

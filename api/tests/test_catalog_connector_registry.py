@@ -44,6 +44,7 @@ def test_registry_resolves_connector_by_platform_and_request() -> None:
         "egov.trasparenza",
         "hgate.base",
         "hgate.trasparenza",
+        "service_portal",
         "web_scrape",
     )
 

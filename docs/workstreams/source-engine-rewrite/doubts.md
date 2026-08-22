@@ -457,3 +457,61 @@ sempre vuoto → il ramo non li serviva prima e non li serve ora.
   classificazione del ramo connettore nell'e2e dipende da office/esito_connettore
   (preservati), NON da access_mode → 3D non ne cambia i verdetti. Va rieseguito
   a demo-time. Suite offline piena: 1269 passed, 3 fail PDF pre-esist.
+
+---
+
+## §17 — 3E esecutore SERVICE_PORTAL (additivo, 0 chiamanti chat)
+
+**Cosa.** Cablato il seam mancante per la surface SERVICE_PORTAL: un
+`service_portal_request` ora risolve davvero via `CatalogRuntime`. Due pezzi:
+- `catalog/service_portal_connector.py` → `ServicePortalConnettore`
+  (name "service_portal"): `supports` = `surface is SERVICE_PORTAL`; `retrieve`
+  carica la `SourceInventory` persistita (`LIVE_DIR/inventario/{id}.json`),
+  matcha il `service_id` (= URL del candidato, unica chiave stabile: i candidati
+  non hanno id proprio) e proietta UN record-puntatore senza credenziali
+  (url, label, role, auth accettate, capabilities, provider, source_url).
+- `catalog/adapters/service_portal.py` → `ServicePortalAdapter`: manifest
+  `("*",)` × (SERVICE_PORTAL, "authenticated_service", INDIRECT), fa da GATE per
+  `CatalogRuntime.execute` (che costruisce il batch dal `ConnectorResult`, non
+  chiama `adapter.read`; `read` c'è per parità e non inventa record).
+
+**access_mode = INDIRECT (scelta).** TIQ indica il portale ufficiale ma NON
+autentica e NON media i dati dietro login: né MEDIATED (implicherebbe recupero
+mediato) né DIRECT. INDIRECT = puntatore onesto. `requires_authentication=True`
+e limitation esplicita "l'autenticazione resta al cittadino".
+
+**Miss onesto.** Inventario assente o `service_id` non tra i portali confermati
+→ `NOT_FOUND`, `records=()`, nessuna URL indovinata.
+
+**Trappola risolta (fallback wildcard).** Sia `web_scrape` sia SP hanno
+`platforms=("*",)`. `AdapterRegistry.fallback_requests_for` ritorna il PRIMO
+adapter wildcard: registrando SP PRIMA di web_scrape, l'ignoto ripiegava su
+`authenticated_service` (rotto `test_fallback_requests_are_explicit_for_unknown_platform`).
+Fix: SP registrato DOPO web_scrape → web_scrape resta l'unica rotta di scrape
+fallback; `resolve` per SERVICE_PORTAL è comunque indipendente dall'ordine
+(web_scrape non rivendica quella surface). Pinnato da
+`test_service_portal_is_never_a_scrape_fallback`. Vincolo d'ordine annotato nel
+commento di `adapters/defaults.py`.
+
+**Nessuna collisione.** web_scrape connector `supports` solo
+{services,offices,contacts,transparency} → non intercetta SERVICE_PORTAL; il
+connettore SP è quindi order-free nel registry connettori.
+
+**Fuori scope (invariato, §5).** Nessun retrieval live multi-vendor, nessun
+login, nessun fetch di rete: SP legge solo l'inventario già scoperto. Il
+wiring chat (recognition sceglie il `service_id`, la chat chiama l'esecutore) è
+il passo successivo, deliberatamente 0 chiamanti in 3E.
+
+**Dubbi aperti.**
+- **D-17a service_id = URL.** Chiave stabile ma fragile se il portale cambia
+  URL; alla riscansione l'inventario si aggiorna, il vecchio id non matcha più
+  (→ NOT_FOUND corretto, non un puntatore stantìo). Un id sintetico stabile
+  (hash host+role) è possibile ma richiede persistere l'id nel candidato: rimandato.
+- **D-17b freshness da updated_at.** Il batch porta `retrieved_at=inventory.updated_at`
+  con status FRESH; la valutazione vs policy età non è fatta qui (come per gli
+  altri connettori). Onesto perché il batch espone updated_at a valle.
+- **D-17c capability singola.** Solo "authenticated_service". appointment/
+  online_service come capability distinte si aggiungono al manifest quando il
+  wiring chat le distinguerà.
+
+**Gate.** Suite offline 1277 passed, 6 skipped, 3 fail PDF pre-esist.

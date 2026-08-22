@@ -135,4 +135,4 @@ def test_registry_rejects_duplicate_adapter_names() -> None:
 def test_default_registry_contains_the_direct_and_indirect_adapters() -> None:
     registry = default_adapter_registry()
 
-    assert registry.names() == ("wordpress_agid", "flotta", "web_scrape")
+    assert registry.names() == ("wordpress_agid", "flotta", "web_scrape", "service_portal")

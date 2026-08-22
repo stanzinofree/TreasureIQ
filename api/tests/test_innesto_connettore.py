@@ -3,7 +3,8 @@
 Quattro casi, nessuna rete:
 
 1. `leggi_connettore` risponde con un `EsitoConnettore` ricco -> la risposta
-   porta i recapiti VERBATIM, `access_mode` M4_CONNETTORE, niente più il
+   porta i recapiti VERBATIM, `access_mode` MEDIATED (vocabolario catalog:
+   la scheda si decide sulla DataBatch del connettore), niente più il
    vecchio «NIENTE DI PUBBLICATO».
 2. `leggi_connettore` risponde `None` -> il gradino web resta invariato
    (A7/D-06): nessuna regressione per i comuni senza connettore.
@@ -26,6 +27,7 @@ from treasureiq.chat import respond
 from treasureiq.chat.intent import ChatIntent, QuestionKind, Topic
 from treasureiq.connettore import EsitoConnettore, UfficioConnettore
 from treasureiq.ingest.censimento import Indirizzabilita, RecuperabilitaOrari
+from treasureiq.catalog.contracts import AccessMode as CatalogAccessMode
 from treasureiq.integration import AccessMode
 from treasureiq.sonda_live import ComuneNoto, OrariLive
 
@@ -172,7 +174,7 @@ def test_connettore_ricco_precede_il_web_e_mostra_recapiti_verbatim(
     risposta = _chiedi(parole="ufficio anagrafe", monkeypatch=monkeypatch, esito=_esito_ricco())
 
     assert risposta is not None
-    assert risposta.access_mode == AccessMode.M4_CONNETTORE.value
+    assert risposta.access_mode == CatalogAccessMode.MEDIATED.value
     assert risposta.info is not None
     assert risposta.info.office is not None
     assert risposta.info.office.telefono == "06 1234567"
@@ -223,7 +225,7 @@ def test_connettore_senza_match_tiene_il_dump_come_elenco(
         esito=_esito_solo_ufficio_estraneo(),
     )
     assert risposta is not None
-    assert risposta.access_mode == AccessMode.M4_CONNETTORE.value
+    assert risposta.access_mode == CatalogAccessMode.MEDIATED.value
     assert risposta.info is not None
     assert risposta.info.office is None
     assert risposta.esito_connettore is not None
@@ -260,7 +262,7 @@ def test_sinonimo_anagrafe_servizi_demografici_niente_telefono_inventato(
     )
 
     assert risposta is not None
-    assert risposta.access_mode == AccessMode.M4_CONNETTORE.value
+    assert risposta.access_mode == CatalogAccessMode.MEDIATED.value
     assert risposta.info.office is not None
     assert risposta.info.office.telefono is None
     # Onestà campo-per-campo (D-05): nessun numero — né diretto né di un

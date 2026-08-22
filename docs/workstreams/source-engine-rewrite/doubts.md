@@ -397,3 +397,63 @@ estesi a tutte e 7 le piattaforme (58 nei 3 file catalog).
 **Prossima fetta 3D** ora sbloccata senza regressione: ogni piattaforma del rail
 office risolve un batch MEDIATED, quindi si può riscrivere `_risposta_da_connettore`
 per decidere sulla DataBatch e rimuovere il read v0 `esito.uffici`.
+
+---
+
+## §16 — 3D pieno: la scheda ufficio si decide sulla DataBatch (commit segue)
+
+**Cosa cambia.** `_risposta_da_connettore` non legge più `esito.uffici` diretto:
+la lettura uffici su cui DECIDE arriva ora attraverso il contratto v1
+(`_batch_offices_decisione` → `CatalogRuntime().execute`). Gate: batch assente o
+`access_mode != MEDIATED` → `None` (ripiego web, invariato). Gli uffici si
+ricostruiscono con `UfficioConnettore.model_validate(record)` dai record del
+batch e la selezione/render esistente gira invariata. `access_mode` emesso =
+`offices_batch.access_mode.value` = `"mediated"` (vocabolario catalog), non più
+la stringa M-ladder `M4_connettore`.
+
+**Perché è sicuro (parità).** Per flotta/wordpress la proiezione legge
+`esito.uffici`, quindi `access_mode MEDIATED ⇔ record presenti ⇔ esito.uffici
+non vuoto`: il gate batch coincide col vecchio `if not esito.uffici`. Con
+3C-bis+ter ogni piattaforma del rail office (municipium/comweb/peopleweb/openweb/
+openpa/egov/hgate + wordpress) risolve un connettore MEDIATO → nessuna
+regressione. URBI/halley/jcitygov non hanno reader office → `esito.uffici`
+sempre vuoto → il ramo non li serviva prima e non li serve ora.
+
+**Tre trappole gestite.**
+1. **Troncamento.** La batch decisione usa `RequestLimits(max_records=10_000)`
+   (model_copy dopo la costruzione, qualunque sia la fonte della richiesta),
+   NON il cap 100 della telemetria: l'organigramma completo, come nel rail v0.
+2. **Mappa cache-miss.** `_da_cache` che manca non fa più sparire la scheda:
+   sintetizzo una `MappaConnettore` minima (`codice_istat`+`nome`+`sondato_il`,
+   `sito=None`) — il connettore flotta legge solo `mappa.codice_istat`.
+3. **Display vs decisione.** Il dump di display (`esito_connettore=esito_mostrato`)
+   resta esito-based: conserva `amministrazione_trasparente`/`aree_amministrative`
+   (non proiettati nel batch office). La DECISIONE è batch, il DISPLAY è
+   l'artefatto di acquisizione. Onesto e senza perdita di campi.
+
+**Vocabolario access_mode — chi flippa e chi NO.**
+- FLIP (6 assert → `CatalogAccessMode.MEDIATED.value`): SOLO la scheda ufficio
+  decisa dal connettore, in `test_innesto_connettore.py` (3 assert + docstring).
+- NON flippato (correzione al piano): `test_ricerca_live.py` 185/200/217 NON sono
+  la scheda ufficio — sono answer di **ripiego web** con `leggi_connettore=None`,
+  che ereditano il label M-ladder `M4_connettore` dall'**ente** (Ciampino ente
+  M4). 3D non tocca quel path → restano `AccessMode.M4_CONNETTORE.value`. Il piano
+  li elencava per errore come «answer asserts» del connettore.
+- NON flippato: `respond.py` ~2520 (answer `not_published`, no office/dump) resta
+  `M4_CONNETTORE` — non è deciso sul batch; e `test_e2e_chat_live.py:131`
+  classifica proprio quell'answer, quindi resta invariato. L'answer ufficio
+  (mediated) passa per i rami `UFFICIO`/`ELENCO` (office/esito_connettore
+  presenti), mai per la scala access_mode.
+
+**Dubbi aperti.**
+- **D-16a Doppia esecuzione offices.** La batch decisione (limite alto) e la
+  telemetria `_data_batches_da_connettore` (cap 100) eseguono entrambe offices.
+  La telemetria è inerte (non serializzata al client) → l'ho lasciata intatta
+  per blast radius minimo. Si potrebbe far coincidere `selected_data_batch` con
+  la batch decisione, ma è ottimizzazione su codice inerte: rinviata.
+- **D-16b Gate e2e non eseguibile qui.** `test_e2e_chat_live.py` (TREASUREIQ_E2E=1)
+  è uno strumento live: scrive in LIVE_DIR (`/live`, read-only nel container di
+  test) e fa rete verso comuni+LLM. Non è un gate CI in questo harness. La
+  classificazione del ramo connettore nell'e2e dipende da office/esito_connettore
+  (preservati), NON da access_mode → 3D non ne cambia i verdetti. Va rieseguito
+  a demo-time. Suite offline piena: 1269 passed, 3 fail PDF pre-esist.

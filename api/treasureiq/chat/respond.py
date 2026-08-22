@@ -2150,17 +2150,33 @@ async def _risposta_da_connettore(
     """Risposta INFORMAZIONE costruita dal connettore (B4, D-09/D-11): stesso
     schema di `_chat_live`, ma con recapiti VERBATIM e onestà campo-per-campo
     (D-05/D-07) invece del solo blocco `orari` che il resto del gradino 2
-    conosce. `None` se il connettore non ha uffici da offrire su questo
-    ramo — il chiamante ripiega sul gradino web (A7, invariato).
+    conosce. `None` se nessun connettore MEDIATO copre questa piattaforma su
+    questo ramo — il chiamante ripiega sul gradino web (A7, invariato).
+
+    La lettura uffici su cui si DECIDE arriva ora ATTRAVERSO il contratto v1
+    (`_batch_offices_decisione`), non più da `esito.uffici` diretto (strangler
+    I3): il connettore risolto per la piattaforma proietta l'esito già acquisito
+    in una `DataBatch`, e la scheda si costruisce da quei record. L'esito v0
+    resta l'artefatto di acquisizione — provenienza per la diagnosi e dump di
+    display (che conserva `amministrazione_trasparente`/`aree_amministrative`,
+    non proiettati nel batch office).
 
     `disabilita_attiva` (ciclo11 B5/A9): il filtro disabilita/disabilita_nucleo
     e' acceso per questo cittadino — raffina la selezione dell'ufficio verso
     disabilita/servizi sociali, vedi `_ufficio_connettore_pertinente`."""
-    if not esito.uffici:
+    offices_batch = _batch_offices_decisione(
+        esito, comune_nome=comune_nome, recognition=recognition
+    )
+    if offices_batch is None or offices_batch.access_mode is not CatalogAccessMode.MEDIATED:
+        return None
+    uffici_decisione = [
+        UfficioConnettore.model_validate(record) for record in offices_batch.records
+    ]
+    if not uffici_decisione:
         return None
 
     ufficio, ambigui = _ufficio_connettore_pertinente(
-        esito.uffici,
+        uffici_decisione,
         ufficio_chiesto=ufficio_chiesto,
         topic=topic,
         disabilita_attiva=disabilita_attiva,
@@ -2228,7 +2244,7 @@ async def _risposta_da_connettore(
         matches=[],
         spid_required=False,
         spid_reason=None,
-        access_mode=AccessMode.M4_CONNETTORE.value,
+        access_mode=offices_batch.access_mode.value,
         citizen_effort=citizen_effort,
         info=InfoAnswer(
             document=documento,
@@ -2254,6 +2270,61 @@ async def _risposta_da_connettore(
         data_batches=data_batches,
         query_plan=query_plan,
         selected_data_batch=selected_data_batch,
+    )
+
+
+def _batch_offices_decisione(
+    esito: connettore.EsitoConnettore,
+    *,
+    comune_nome: str,
+    recognition=None,
+) -> DataBatch | None:
+    """La lettura uffici su cui la risposta DECIDE, presa ATTRAVERSO il contratto
+    v1 — non più `esito.uffici` diretto (strangler I3). Il connettore risolto per
+    la piattaforma proietta l'esito già acquisito in una `DataBatch`; se nessun
+    connettore MEDIATO la copre, il chiamante ripiega onestamente sul web invece
+    di servire uffici che nessun connettore rivendica.
+
+    Due differenze dalla telemetria (`_data_batches_da_connettore`, cap 100):
+    - limite alto: l'organigramma COMPLETO deve arrivare come nel rail v0, mai
+      troncato a 100 (un comune può pubblicare più uffici);
+    - mappa cache-miss → mappa minima sintetica. Il connettore flotta legge solo
+      `mappa.codice_istat`, quindi un artefatto di cache assente non deve far
+      sparire una lettura che c'è (niente falso ripiego sul web).
+    """
+    from treasureiq.mappa_connettore import MappaConnettore, _da_cache
+
+    mappa = _da_cache(esito.codice_istat) or MappaConnettore(
+        codice_istat=esito.codice_istat,
+        nome=comune_nome,
+        sito=None,
+        sondato_il=esito.letto_il,
+    )
+    request = (
+        request_from_recognition(
+            recognition,
+            source_id=esito.codice_istat,
+            capability_override="offices",
+            # La decisione ufficio è sempre BASE/offices, anche se il topic
+            # (es. bandi) porterebbe altrove la richiesta di default.
+            surface_override=Surface.ORDINARY_DATA,
+        )
+        if recognition is not None
+        else DataRequest(
+            request_id=f"chat:{esito.codice_istat}:ordinary_data:offices",
+            source_id=esito.codice_istat,
+            surface=Surface.ORDINARY_DATA,
+            capability="offices",
+            freshness=FreshnessPolicy(max_age_seconds=86400),
+            limits=RequestLimits(max_records=10_000),
+            manifest_revision=1,
+        )
+    )
+    # Decisione ≠ telemetria: l'organigramma completo, mai troncato al cap di
+    # default, qualunque sia la fonte della richiesta.
+    request = request.model_copy(update={"limits": RequestLimits(max_records=10_000)})
+    return CatalogRuntime().execute(
+        request, platform_id=esito.piattaforma, mappa=mappa, esito=esito
     )
 
 

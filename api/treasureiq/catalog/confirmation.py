@@ -135,8 +135,14 @@ def _confirm_one(
     )
 
 
-def confirm_inventory(*, live_dir: Path, source_id: str, timeout: float = 8.0) -> tuple[CheckResult, ...]:
-    """Confirm persisted AT/SP entrypoints for one municipality, no discovery."""
+def confirm_inventory(
+    *, live_dir: Path, source_id: str, timeout: float = 8.0, dry_run: bool = False,
+) -> tuple[CheckResult, ...]:
+    """Confirm persisted AT/SP entrypoints for one municipality, no discovery.
+
+    ``dry_run`` fetches and evaluates every entrypoint but writes no check
+    envelope to ``data-live`` (invariante I4: sweep sicuro).
+    """
     path = live_dir / "inventario" / f"{source_id}.json"
     inventory = SourceInventory.model_validate_json(path.read_text(encoding="utf-8"))
     results: list[CheckResult] = []
@@ -146,7 +152,8 @@ def confirm_inventory(*, live_dir: Path, source_id: str, timeout: float = 8.0) -
             url=str(inventory.transparency_url),
             expected_platform=inventory.transparency_platform, timeout=timeout,
         )
-        _write_check(live_dir, result)
+        if not dry_run:
+            _write_check(live_dir, result)
         results.append(result)
     for index, portal in enumerate(inventory.service_portals):
         result = _confirm_one(
@@ -154,6 +161,7 @@ def confirm_inventory(*, live_dir: Path, source_id: str, timeout: float = 8.0) -
             url=str(portal.url), expected_platform=portal.provider_hint,
             timeout=timeout,
         )
-        _write_check(live_dir, result, suffix=f"-{index}")
+        if not dry_run:
+            _write_check(live_dir, result, suffix=f"-{index}")
         results.append(result)
     return tuple(results)

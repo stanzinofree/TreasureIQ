@@ -141,6 +141,25 @@ seam. Coerente ora con discovery/confirmation che già usano l'ISTAT.
 
 ---
 
+## 10. `--dry-run` e il refresh legacy — RISOLTO (scelta di design, Fase 2A)
+
+**Dubbio.** `--dry-run` deve garantire "zero scrittura su `data-live`". I path
+catalog (discovery/confirmation) sono guardabili con un flag `dry_run` che salta
+la write finale. Ma il **refresh** non passa dal catalog: costruisce un argv e
+delega a `sweep_main` (CLI legaco) che scrive lo storico. Aggiungere un dry-run
+lì significherebbe threadare il flag dentro tutto il path legacy — blast radius
+alto, contro "senza rompere nulla".
+
+**Come superato.** Sotto `dry_run`, il ramo refresh **si rifiuta**: logga un
+warning e ritorna 0 senza chiamare `sweep_main`. Meglio rifiutare esplicitamente
+che simulare a metà o mutare in silenzio. `--dry-run` copre oggi discovery e
+confirmation (i due path del motore nuovo); il refresh legacy resterà coperto
+quando sarà strangolato in Fase 2D/3. Test
+`test_run_batch_refresh_dry_run_rifiuta_e_non_chiama_sweep_main` fissa che
+`sweep_main` non viene mai invocato.
+
+---
+
 ## Corner case verificati (non bloccanti)
 
 - **`source_id`/`final_url` in scope** in `discover_source_inventory` prima

@@ -21,9 +21,14 @@ from treasureiq.ingest.host_guard import fetch_guardato, host_senza_www
 
 
 def discover_source_inventory(
-    *, live_dir: Path, source_id: str, base_url: str, timeout: float = 8.0
+    *, live_dir: Path, source_id: str, base_url: str, timeout: float = 8.0,
+    dry_run: bool = False,
 ):
-    """Discover BASE/AT/SP facts without invoking a data connector."""
+    """Discover BASE/AT/SP facts without invoking a data connector.
+
+    ``dry_run`` runs the full discovery (fetch + recognition) but persists
+    nothing to ``data-live`` (invariante I4: sweep sicuro).
+    """
     base_url = base_url.strip()
     if not base_url.startswith(("http://", "https://")):
         base_url = "https://" + base_url
@@ -42,7 +47,7 @@ def discover_source_inventory(
             base_platform=None, base_fingerprint=None,
             transparency_url=None, transparency_platform=None, candidates=(),
             confirmed_at=datetime.now(timezone.utc), base_source_health=False,
-            base_failure_reason="entrypoint_unreachable",
+            base_failure_reason="entrypoint_unreachable", dry_run=dry_run,
         )
     headers, data, final_url, *status_tail = fetched
     status_code = status_tail[0] if status_tail else 200
@@ -52,7 +57,7 @@ def discover_source_inventory(
             base_platform=None, base_fingerprint=None,
             transparency_url=None, transparency_platform=None, candidates=(),
             confirmed_at=datetime.now(timezone.utc), base_source_health=True,
-            base_failure_reason=f"http_{status_code}",
+            base_failure_reason=f"http_{status_code}", dry_run=dry_run,
         )
     html_home = data.decode("utf-8", errors="replace")
     # BASE recognition through the registry seam (not the legacy classifier
@@ -79,4 +84,5 @@ def discover_source_inventory(
             discovered_at=now,
         ),
         confirmed_at=now,
+        dry_run=dry_run,
     )

@@ -152,14 +152,19 @@ Manca:
 - **Exit-gate:** suite verde; nuovo plugin = file + 1 riga dimostrato con un plugin
   di prova aggiunto e rimosso senza toccare altro.
 
-### Fase 2 — Sweep sicuro + aderenza (→ I4, I5)
+### Fase 2 — Sweep sicuro + aderenza (→ I4, I5) — IN CORSO, a fette
 - Worker consuma `CheckResult`/`RecognitionAction` end-to-end.
-- `--dry-run` (mai scrive `data-live`) + guardia mutazione dati.
-- Stato per superficie+entrypoint (`EndpointState`), transizione calcolata dal core.
-- retry/backoff/rate-limit per dominio + budget.
-- Aderenza unificata: `_aderenza` oltre WP, `coverage_score` misurato (non 1.0),
-  stato DIFFORME in `CheckStatus`, `DriftEvent`→`CheckResult`, campo unico
-  (comune, connettore).
+- **[x] Slice 2A — `--dry-run` (mai scrive `data-live`) + guardia mutazione.**
+  `dry_run` in `update_source_inventory`/`discover_source_inventory`/
+  `confirm_inventory` (calcolano tutto, zero write); `WorkerConfig.dry_run` +
+  env `TREASUREIQ_SWEEP_DRY_RUN` + CLI `--dry-run`; refresh sotto dry-run
+  **rifiutato** (scrive lo storico via path legacy, non simulato). 6 test in
+  `test_sweep_dry_run.py` provano zero-write + controprova + refresh rifiutato.
+- [ ] Slice 2B — aderenza: stato DIFFORME in `CheckStatus`, `coverage_score`
+  misurato (non hardcoded 1.0 `confirmation.py:123`), `DriftEvent`→`CheckResult`.
+- [ ] Slice 2C — `_aderenza` oltre WP + campo unico (comune, connettore).
+- [ ] Slice 2D — stato per superficie+entrypoint (`EndpointState`) + transizione
+  dal core; retry/backoff/rate-limit per dominio + budget.
 - **Exit-gate:** sweep su comune fixture → transizioni asserite + zero write non
   protette + aderenza calcolata per famiglia non-WP.
 

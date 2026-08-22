@@ -11,12 +11,17 @@ import argparse
 import logging
 import os
 import time
-from dataclasses import dataclass
-from datetime import datetime, timezone
+from dataclasses import dataclass, replace
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 from treasureiq.ingest.censimento import _gia_registrati
+from treasureiq.catalog.confirmation import confirm_inventory
+from treasureiq.catalog.inventory_discovery import discover_source_inventory
+from treasureiq.connettore import _da_store_raw as _connettore_cache
 from treasureiq.registro_cli import _comuni_da_censimento, main as sweep_main
+from treasureiq.storico import apri
+from treasureiq.sonda_live import LIVE_DIR, comune_per_codice
 
 logger = logging.getLogger("treasureiq.sweep_worker")
 
@@ -29,13 +34,24 @@ class WorkerConfig:
     lavoratori: int = 6
     delay: float = 0.0
     aderenza: bool = False
+    mode: str = "confirmation"
+    discovery_interval_days: int = 14
+    confirmation_interval_seconds: float = 15 * 86400.0
+    refresh_interval_seconds: float = 86400.0
     once: bool = False
+    dry_run: bool = False
 
 
-def config_from_env(*, db: Path | None = None, once: bool = False) -> WorkerConfig:
+def config_from_env(
+    *, db: Path | None = None, once: bool = False, dry_run: bool = False,
+) -> WorkerConfig:
     """Legge la configurazione solo da env, con default conservativi."""
 
     resolved_db = db or Path(os.environ.get("TREASUREIQ_SWEEP_DB", "/scrivibile/storico.db"))
+    mode = os.environ.get("TREASUREIQ_SWEEP_MODE", "refresh").strip().lower()
+    if mode not in {"refresh", "confirmation", "discovery"}:
+        logger.warning("modalità sweep sconosciuta %r: uso refresh", mode)
+        mode = "confirmation"
     return WorkerConfig(
         db=resolved_db,
         batch_size=max(1, int(os.environ.get("TREASUREIQ_SWEEP_BATCH_SIZE", "20"))),
@@ -45,35 +61,156 @@ def config_from_env(*, db: Path | None = None, once: bool = False) -> WorkerConf
         lavoratori=max(1, int(os.environ.get("TREASUREIQ_SWEEP_WORKERS", "6"))),
         delay=max(0.0, float(os.environ.get("TREASUREIQ_SWEEP_DELAY", "0"))),
         aderenza=os.environ.get("TREASUREIQ_SWEEP_ADERENZA", "0") == "1",
+        mode=mode,
+        discovery_interval_days=max(
+            1, int(os.environ.get("TREASUREIQ_DISCOVERY_INTERVAL_DAYS", "14"))
+        ),
+        confirmation_interval_seconds=max(
+            60.0,
+            float(
+                os.environ.get(
+                    "TREASUREIQ_CONFIRMATION_INTERVAL_SECONDS", str(15 * 86400)
+                )
+            ),
+        ),
+        refresh_interval_seconds=max(
+            60.0, float(os.environ.get("TREASUREIQ_REFRESH_INTERVAL_SECONDS", "86400"))
+        ),
         once=once,
+        dry_run=dry_run or os.environ.get("TREASUREIQ_SWEEP_DRY_RUN", "0") == "1",
     )
 
 
 def next_batch(config: WorkerConfig) -> list[str]:
-    """Seleziona il prossimo lotto senza riesaminare i comuni di oggi."""
+    """Seleziona un lotto secondo la modalità, senza discovery ripetuta."""
+
+    comuni = _comuni_da_censimento(config.db)
+    if config.mode in {"refresh", "confirmation"}:
+        intervallo = (
+            config.confirmation_interval_seconds
+            if config.mode == "confirmation"
+            else config.refresh_interval_seconds
+        )
+        limite = datetime.now(timezone.utc) - timedelta(seconds=intervallo)
+        candidati: list[str] = []
+        for codice in comuni:
+            # Un refresh non deve diventare discovery per un comune senza
+            # contratto connettore: quello è lavoro della modalità discovery.
+            record = _connettore_cache(codice)
+            if record is None:
+                continue
+            try:
+                letto = datetime.fromisoformat(record.controllato_il or record.letto_il)
+            except ValueError:
+                candidati.append(codice)
+                continue
+            if letto.tzinfo is None:
+                letto = letto.replace(tzinfo=timezone.utc)
+            if letto <= limite:
+                candidati.append(codice)
+        candidati.sort(
+            key=lambda codice: (
+                (_connettore_cache(codice).letto_il if _connettore_cache(codice) else ""),
+                codice,
+            )
+        )
+        return candidati[: config.batch_size]
 
     oggi = datetime.now(timezone.utc).date()
     gia_fatti = _gia_registrati(config.db, oggi)
-    candidati = [codice for codice in _comuni_da_censimento(config.db) if codice not in gia_fatti]
+    scadenza = oggi - timedelta(days=config.discovery_interval_days)
+    ultime = {}
+    if config.db.exists():
+        with apri(config.db) as conn:
+            ultime = {
+                row["codice_istat"]: row["rilevato_il"]
+                for row in conn.execute(
+                    "SELECT codice_istat, MAX(rilevato_il) AS rilevato_il "
+                    "FROM portale_snapshot GROUP BY codice_istat"
+                ).fetchall()
+            }
+    candidati = [
+        codice
+        for codice in comuni
+        if codice not in gia_fatti
+        and (
+            codice not in ultime
+            or not ultime[codice]
+            or datetime.fromisoformat(ultime[codice]).date() <= scadenza
+        )
+    ]
     return candidati[: config.batch_size]
 
 
 def run_batch(config: WorkerConfig, comuni: list[str]) -> int:
-    """Esegue un lotto riusando il CLI esistente."""
+    """Esegue un lotto riusando il CLI esistente.
+
+    Il refresh non passa dal censimento: usa il registro/connettore con cache
+    e quindi non ripete la discovery della piattaforma. La discovery esplicita
+    mantiene invece il percorso nazionale completo e aggiorna il catalogo.
+    """
 
     if not comuni:
         return 0
-    argv = [
-        "sweep",
-        *comuni,
-        "--db",
-        str(config.db),
-        "--lavoratori",
-        str(config.lavoratori),
-        "--delay",
-        str(config.delay),
-    ]
-    if config.aderenza:
+    if config.mode == "discovery":
+        errors = 0
+        for codice in comuni:
+            try:
+                comune = comune_per_codice(codice)
+                if comune is None or not comune.sito:
+                    raise ValueError("base_url_missing")
+                inventory = discover_source_inventory(
+                    live_dir=LIVE_DIR, source_id=codice, base_url=comune.sito,
+                    dry_run=config.dry_run,
+                )
+                logger.info(
+                    "discovery %s: base=%s at=%s sp=%d",
+                    codice,
+                    inventory.base_platform if inventory else "unknown",
+                    inventory.transparency_platform if inventory else "unknown",
+                    len(inventory.service_portals) if inventory else 0,
+                )
+            except Exception:  # noqa: BLE001 — un comune non ferma il lotto
+                logger.exception("discovery inventario fallita per %s", codice)
+                errors += 1
+            if config.delay:
+                time.sleep(config.delay)
+        return 1 if errors else 0
+    if config.mode == "refresh":
+        if config.dry_run:
+            # Il refresh scrive lo storico via il CLI legacy (sweep_main), fuori
+            # dalla guardia dry_run del path catalog: non lo simuliamo, lo
+            # rifiutiamo, così --dry-run non muta mai dati (invariante I4).
+            logger.warning(
+                "dry-run: modalità refresh non supportata (scrive lo storico "
+                "via path legacy); nessuna azione su %d comuni", len(comuni),
+            )
+            return 0
+        argv = [
+            "scan", *comuni, "--db", str(config.db), "--refresh-dati",
+            "--delay", str(config.delay),
+        ]
+    elif config.mode == "confirmation":
+        errors = 0
+        for codice in comuni:
+            try:
+                results = confirm_inventory(
+                    live_dir=LIVE_DIR, source_id=codice, dry_run=config.dry_run,
+                )
+                logger.info(
+                    "confirmation %s: %s",
+                    codice,
+                    ", ".join(f"{r.surface.value}={r.status.value}" for r in results),
+                )
+            except Exception:  # noqa: BLE001 — un comune non ferma il lotto
+                logger.exception("confirmation fallita per %s", codice)
+                errors += 1
+            if config.delay:
+                time.sleep(config.delay)
+        return 1 if errors else 0
+    else:
+        raise ValueError(f"modalità worker non gestita: {config.mode}")
+    if config.aderenza and config.mode == "discovery":
         argv.append("--aderenza")
     return sweep_main(argv)
 
@@ -108,9 +245,21 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Worker Docker per sweep incrementale.")
     parser.add_argument("--once", action="store_true", help="Esegue un solo batch e termina.")
     parser.add_argument("--db", type=Path, default=None, help="Override del database storico.")
+    parser.add_argument(
+        "--mode", choices=("refresh", "confirmation", "discovery"), default=None
+    )
+    parser.add_argument(
+        "--dry-run", action="store_true",
+        help="Esegue lo sweep senza scrivere data-live (refresh rifiutato).",
+    )
     args = parser.parse_args(argv)
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
-    return run(config_from_env(db=args.db, once=args.once))
+    config = config_from_env(db=args.db, once=args.once, dry_run=args.dry_run)
+    if config.dry_run:
+        logger.info("dry-run attivo: nessuna scrittura su data-live")
+    if args.mode:
+        config = replace(config, mode=args.mode)
+    return run(config)
 
 
 if __name__ == "__main__":

@@ -152,8 +152,13 @@ def update_source_inventory(
     confirmed_at: datetime | None = None,
     base_source_health: bool | None = None,
     base_failure_reason: str | None = None,
+    dry_run: bool = False,
 ) -> SourceInventory:
-    """Merge BASE/AT facts into an atomic municipality inventory."""
+    """Merge BASE/AT facts into an atomic municipality inventory.
+
+    ``dry_run`` computes the merged inventory but never touches disk: the sweep
+    can be exercised end-to-end without mutating ``data-live`` (invariante I4).
+    """
     when = confirmed_at or datetime.now(timezone.utc)
     path = live_dir / "inventario" / f"{source_id}.json"
     previous: SourceInventory | None = None
@@ -176,6 +181,9 @@ def update_source_inventory(
         service_portal_groups=group_service_portal_candidates(effective_candidates),
         updated_at=when,
     )
+    if dry_run:
+        logger.info("dry-run: inventario %s calcolato, nessuna scrittura", path.name)
+        return inventory
     try:
         path.parent.mkdir(parents=True, exist_ok=True)
         temporary = path.with_suffix(".tmp")

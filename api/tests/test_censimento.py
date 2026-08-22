@@ -830,3 +830,45 @@ def test_impronta_ricade_su_da_impronta_quando_il_seam_non_riconosce(monkeypatch
     assert esito["piattaforma"] is Piattaforma.OPENPA
     assert esito["piattaforma_prova"] is not None
     assert "impronta:" in esito["piattaforma_prova"]
+
+
+def test_impronta_passa_codice_istat_come_source_id(monkeypatch):
+    """Fix P2 (review Codex 11954a9): il contratto `RecognitionObservation`
+    vuole in `source_id` l'identità stabile della fonte — il codice ISTAT del
+    comune — non l'URL osservato (che resta solo `entrypoint_url`). Coerente con
+    discovery e confirmation, così il risultato è correlabile al comune.
+    """
+    from treasureiq.catalog import recognition_adapter
+    from treasureiq.ingest import censimento
+    from treasureiq.ingest.piattaforma import Firma, Piattaforma
+
+    catturati: dict = {}
+
+    def _spia(**kwargs):
+        catturati.update(kwargs)
+        return Firma(piattaforma=Piattaforma.IGNOTA, prova=None)
+
+    # `_impronta` importa `firma_da_registro` localmente dal modulo adapter
+    # (import locale = evita il ciclo catalog→censimento), quindi la spia va
+    # messa sulla sorgente, non sull'attributo di modulo di censimento.
+    monkeypatch.setattr(recognition_adapter, "firma_da_registro", _spia)
+
+    class _RispostaFinta:
+        text = "<html></html>"
+        headers: dict = {}
+        status_code = 200
+        url = "https://comune.esempio.it/home"
+
+    class _SondaFinta:
+        richieste = 1
+
+        def risposta(self, url: str):
+            return _RispostaFinta()
+
+    censimento._impronta(
+        sonda=_SondaFinta(), base="https://comune.esempio.it",
+        codice_istat="058003",
+    )
+
+    assert catturati["source_id"] == "058003"
+    assert catturati["entrypoint_url"] == "https://comune.esempio.it/home"

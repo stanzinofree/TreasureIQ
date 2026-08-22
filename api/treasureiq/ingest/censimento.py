@@ -772,7 +772,10 @@ def censisci_comune(
                 if secondo["indirizzabilita"] is not Indirizzabilita.IRRAGGIUNGIBILE:
                     base, esito = alternativa, secondo
         if misura_piattaforma:
-            esito.update(_impronta(sonda=sonda, base=base, regione=regione))
+            esito.update(_impronta(
+                sonda=sonda, base=base, regione=regione,
+                codice_istat=codice_istat,
+            ))
             # Quello che il portale dichiara batte l'anagrafe: e' verita' sul
             # campo, e i registri si disallineano quando un ente cambia nome
             # o si fonde. Ma se non dichiara niente, l'anagrafe evita che il
@@ -1045,7 +1048,10 @@ def _segui_meta_refresh(*, sonda: _Sonda, base: str, corpo: str) -> str | None:
     return f"{base.rstrip('/')}/{destinazione.lstrip('/')}"
 
 
-def _impronta(*, sonda: _Sonda, base: str, regione: str | None = None) -> dict:
+def _impronta(
+    *, sonda: _Sonda, base: str, regione: str | None = None,
+    codice_istat: str | None = None,
+) -> dict:
     """Asse C: una sola richiesta alla home, e cosa se ne ricava.
 
     Non solleva: un portale che non risponde è un esito `NON_MISURATA` con
@@ -1072,9 +1078,14 @@ def _impronta(*, sonda: _Sonda, base: str, regione: str | None = None) -> dict:
     # statistico `da_impronta` sotto resta invariato: il seam non lo replica.
     from treasureiq.catalog.contracts import Surface
     from treasureiq.catalog.recognition_adapter import firma_da_registro
+    # source_id = identità stabile della fonte (codice ISTAT del comune), non
+    # l'URL osservato: il contratto RecognitionObservation vuole un id
+    # correlabile al comune, coerente con discovery e confirmation. L'URL resta
+    # solo come entrypoint_url. Fallback all'URL se l'ISTAT non è propagato.
+    source_id = codice_istat or str(resp.url)
     firma = firma_da_registro(
         headers=intestazioni, html=resp.text, surface=Surface.ORDINARY_DATA,
-        source_id=str(resp.url), entrypoint_url=str(resp.url),
+        source_id=source_id, entrypoint_url=str(resp.url),
     )
     grezza = impronta_grezza(headers=intestazioni, html=resp.text)
     if firma.piattaforma is Piattaforma.IGNOTA:

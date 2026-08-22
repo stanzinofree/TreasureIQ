@@ -123,6 +123,24 @@ test e2e (PR #22) come rete. Registrato in `planning.md` §3A.
 
 ---
 
+## 9. `source_id` = URL invece di ISTAT in `_impronta` — RISOLTO (review P2)
+
+**Dubbio (Codex, review `11954a9`).** M2 passava `source_id=str(resp.url)` a
+`firma_da_registro`. Il contratto `RecognitionObservation.source_id` è
+l'identità *stabile* della fonte (codice ISTAT), non l'URL osservato. Oggi non
+rompe nulla (nessun plugin legge `source_id`) ma è violazione di contratto:
+provenance incoerente, risultato non correlabile al comune, divergenza tra
+discovery/censimento/confirmation.
+
+**Come superato.** Aggiunto param `codice_istat: str | None` a `_impronta`,
+propagato dal chiamante `censisci_comune` (dove l'ISTAT è già in scope);
+`source_id = codice_istat or str(resp.url)` — l'URL resta solo `entrypoint_url`,
+fallback all'URL solo se l'ISTAT non è propagato. Test focalizzato
+`test_impronta_passa_codice_istat_come_source_id` cattura i kwarg passati al
+seam. Coerente ora con discovery/confirmation che già usano l'ISTAT.
+
+---
+
 ## Corner case verificati (non bloccanti)
 
 - **`source_id`/`final_url` in scope** in `discover_source_inventory` prima

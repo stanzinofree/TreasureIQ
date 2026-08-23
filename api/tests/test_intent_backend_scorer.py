@@ -10,6 +10,7 @@ della costante di modulo, letta una sola volta all'import.
 """
 import asyncio
 import json
+import sys
 from pathlib import Path
 
 import pytest
@@ -66,6 +67,78 @@ def test_extract_intent_rust_ha_parita_con_lo_scorer(caso, backend_rust):
     intent = asyncio.run(
         extract_intent(message=caso["msg"], provider=_ProviderCheEsplode())
     )
+    assert intent.topic == Topic(atteso.topic)
+    assert intent.kind == QuestionKind(atteso.kind)
+
+
+def test_rust_param_interroga_il_crate(monkeypatch):
+    """Path runtime reale: l'engine passa `backend="rust"` come PARAMETRO (non
+    via costante di modulo). Prova con una spia che il wheel nativo
+    `tiq_intent.score` sia davvero interrogato — non basta la parità dell'output,
+    che passerebbe anche col fallback Python (Slice 7, difetto attivazione)."""
+    tiq_intent = pytest.importorskip("tiq_intent")
+    if not hasattr(tiq_intent, "score"):
+        pytest.skip("modulo tiq_intent presente senza estensione nativa score")
+
+    # Costante di modulo ferma a "model" (com'e' in prod): la scelta del crate
+    # deve venire dal parametro, altrimenti il difetto non e' catturato.
+    monkeypatch.setattr(intent_mod, "_INTENT_BACKEND", "model")
+
+    chiamate = {"n": 0}
+    originale = tiq_intent.score
+
+    def spia(message):
+        chiamate["n"] += 1
+        return originale(message)
+
+    monkeypatch.setattr(tiq_intent, "score", spia)
+
+    msg = "orari ufficio anagrafe"
+    intent = asyncio.run(
+        extract_intent(message=msg, provider=_ProviderCheEsplode(), backend="rust")
+    )
+    assert chiamate["n"] >= 1, "il crate nativo non e' stato interrogato"
+    atteso = score_intent(msg)
+    assert intent.topic == Topic(atteso.topic)
+    assert intent.kind == QuestionKind(atteso.kind)
+
+
+def test_backend_python_non_chiama_il_crate(monkeypatch):
+    """Col backend deterministico Python ("scorer") il crate non deve mai essere
+    interrogato, anche quando il wheel e' installato."""
+    monkeypatch.setattr(intent_mod, "_INTENT_BACKEND", "model")
+
+    tiq_intent = pytest.importorskip("tiq_intent")
+    if hasattr(tiq_intent, "score"):
+
+        def esplode(message):
+            raise AssertionError("backend scorer non deve interrogare il crate Rust")
+
+        monkeypatch.setattr(tiq_intent, "score", esplode)
+
+    msg = "orari ufficio anagrafe"
+    intent = asyncio.run(
+        extract_intent(message=msg, provider=_ProviderCheEsplode(), backend="scorer")
+    )
+    atteso = score_intent(msg)
+    assert intent.topic == Topic(atteso.topic)
+    assert intent.kind == QuestionKind(atteso.kind)
+
+
+def test_rust_assente_ripiega_su_python(monkeypatch):
+    """Immagine senza wheel (stage base/runtime di prod): `import tiq_intent`
+    alza ImportError, il backend "rust" ripiega sullo scorer Python senza
+    crash, con esito identico (I-2 fail-safe)."""
+    monkeypatch.setattr(intent_mod, "_INTENT_BACKEND", "model")
+    # sys.modules[...] = None fa alzare ImportError all'`import tiq_intent`
+    # dentro _score_livello_a, simulando l'assenza del wheel nativo.
+    monkeypatch.setitem(sys.modules, "tiq_intent", None)
+
+    msg = "voglio pagare la tari"
+    intent = asyncio.run(
+        extract_intent(message=msg, provider=_ProviderCheEsplode(), backend="rust")
+    )
+    atteso = score_intent(msg)
     assert intent.topic == Topic(atteso.topic)
     assert intent.kind == QuestionKind(atteso.kind)
 

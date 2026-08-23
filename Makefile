@@ -84,7 +84,14 @@ test: ## Esegue la suite nello stage dev
 		--tmpfs /test-state:rw,exec,nosuid,nodev \
 		-e TREASUREIQ_DATA_DIR=/data \
 		-e TREASUREIQ_CONVERSATION_DB=/test-state/conversations.sqlite3 -w /src \
-		treasureiq-api-dev python -m pytest -q
+		treasureiq-api-dev sh -c \
+		"python -m pytest -q && python tiq_intent/parity_check.py --no-benchmark"
+
+.PHONY: parity
+parity: ## Gate parità crate Rust vs oracolo Python (35/35), senza benchmark
+	docker build -q -t treasureiq-api-dev --target dev api
+	docker run --rm -v "$(PWD)/api:/src" -w /src \
+		treasureiq-api-dev python tiq_intent/parity_check.py --no-benchmark
 
 # --- Dati ---------------------------------------------------------------
 

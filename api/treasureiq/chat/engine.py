@@ -13,6 +13,7 @@ an explicit compatibility/upgrade path, not a requirement for TIQ to run.
 
 from __future__ import annotations
 
+import logging
 import os
 from dataclasses import dataclass
 
@@ -43,10 +44,27 @@ class CivicChatEngine:
     """Own the understanding rail, while mechanics stay in the planner."""
 
     def __init__(self, *, backend: str | None = None) -> None:
+        engine_env = os.environ.get("TREASUREIQ_ENGINE_INTENT_BACKEND")
+        intent_env = os.environ.get("TREASUREIQ_INTENT_BACKEND")
+        # Se entrambe le env sono settate e disaccordano, il backend effettivo
+        # e' quello dell'engine (precedenza), ma il disaccordo silenzioso e' un
+        # rischio: lo si segnala una volta, non e' un errore.
+        if (
+            backend is None
+            and engine_env is not None
+            and intent_env is not None
+            and engine_env.strip().lower() != intent_env.strip().lower()
+        ):
+            logging.getLogger(__name__).warning(
+                "intent backend env in disaccordo: TREASUREIQ_ENGINE_INTENT_BACKEND=%r "
+                "(vince) vs TREASUREIQ_INTENT_BACKEND=%r",
+                engine_env,
+                intent_env,
+            )
         self.backend = (
             backend
-            or os.environ.get("TREASUREIQ_ENGINE_INTENT_BACKEND")
-            or os.environ.get("TREASUREIQ_INTENT_BACKEND")
+            or engine_env
+            or intent_env
             or "model"
         ).strip().lower()
 

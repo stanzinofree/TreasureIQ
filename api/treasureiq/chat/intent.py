@@ -651,6 +651,15 @@ Non decidi se il cittadino ha diritto a qualcosa: quello lo fa un altro sistema.
 #:     nativo non e' installato (immagine senza wheel) ripiega su "scorer".
 #: I rami deterministici ("scorer"/"rust") condividono la stessa cintura a
 #: valle (_confirm_*, R-8): cambia solo CHI propone topic/kind, non le guardie.
+#:
+#: CONTRATTO VARIABILI (due env, un solo backend effettivo):
+#:   - TREASUREIQ_ENGINE_INTENT_BACKEND: autorita' runtime, letta da
+#:     `CivicChatEngine` (engine.py); e' cio' che compose setta ("rust") e
+#:     diventa il PARAMETRO `backend` di ogni chiamata a `extract_intent`.
+#:   - TREASUREIQ_INTENT_BACKEND (questa costante): DEFAULT di fallback, usato
+#:     solo quando `extract_intent` e' chiamata senza il parametro `backend`
+#:     (chiamate dirette, alcuni test). Il path engine non la usa mai.
+#: Precedenza effettiva: parametro `backend` > `_INTENT_BACKEND` > "model".
 _INTENT_BACKEND = os.environ.get("TREASUREIQ_INTENT_BACKEND", "model").strip().lower()
 
 #: Backend che NON chiamano il modello: lo scorer deterministico livello A.
@@ -676,12 +685,16 @@ def _beneficiary_role_da_testo(message: str) -> BeneficiaryRole | None:
     return trovati[0] if len(trovati) == 1 else None
 
 
-def _score_livello_a(message: str) -> tuple[str, str]:
-    """(topic, kind) dallo scorer deterministico. Backend "rust" usa il crate
-    nativo `tiq_intent` (parità 35/35, ~6-7x); se il modulo non c'e' ripiega
-    sullo scorer Python — stesso output, solo piu' lento (fail-safe, mai
-    crash su un'immagine senza wheel)."""
-    if _INTENT_BACKEND == "rust":
+def _score_livello_a(message: str, backend: str) -> tuple[str, str]:
+    """(topic, kind) dallo scorer deterministico. `backend` e' il backend
+    EFFETTIVO della richiesta (`effective_backend` di `extract_intent`), non la
+    costante di modulo: e' l'unico punto che decide se interrogare il crate, e
+    deve rispettare la scelta per-richiesta dell'engine (che passa il backend
+    come parametro, mentre `_INTENT_BACKEND` resta solo il default quando nessun
+    parametro e' dato). Backend "rust" usa il crate nativo `tiq_intent` (parità
+    35/35, ~6-7x); se il modulo non c'e' ripiega sullo scorer Python — stesso
+    output, solo piu' lento (fail-safe, mai crash su un'immagine senza wheel)."""
+    if backend == "rust":
         try:
             import tiq_intent
 
@@ -693,13 +706,13 @@ def _score_livello_a(message: str) -> tuple[str, str]:
     return esito.topic, esito.kind
 
 
-def _intent_dallo_scorer(message: str) -> "_ModelIntent":
+def _intent_dallo_scorer(message: str, backend: str) -> "_ModelIntent":
     """Costruisce un `_ModelIntent` dallo scorer deterministico, nella stessa
     forma che il modello avrebbe restituito, cosi' la cintura a valle non
     distingue i due backend. `comune_hint` resta None (lo scorer non tocca il
     comune: lo risolve `_comuni_candidati`/`risolvi_comune` dal testo, e
     `_confirm_comune_hint` lo azzererebbe comunque)."""
-    topic, kind = _score_livello_a(message)
+    topic, kind = _score_livello_a(message, backend)
     return _ModelIntent(
         topic=Topic(topic),
         kind=QuestionKind(kind),
@@ -744,7 +757,7 @@ async def extract_intent(
             # Livello A deterministico: nessuna chiamata al modello, nessun
             # bisogno di `storia` (il carryover di topic/comune fra turni non
             # e' compito di questa funzione — lo fa `respond._eredita_dal_contesto`).
-            parsed = _intent_dallo_scorer(message)
+            parsed = _intent_dallo_scorer(message, effective_backend)
         else:
             user_message = message
             if storia:

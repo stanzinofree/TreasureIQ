@@ -1,16 +1,14 @@
-"""Ramo 3 — Modulistica, primo incremento SP (contratto §5).
+"""Ramo 3 — Modulistica chat wiring through the resolver (Slice 5, §5).
 
-Pin the chat wiring of the service-portal pointer:
+Pin the NEW behaviour: Topic.MODULISTICA reaches the real WP/AgID resolver
+(no network here — ``resolve_service_with_meta`` is stubbed at the module seam)
+and produces a MEDIATED DataBatch + ``InfoAnswer.service`` that keeps the
+information page, the downloadable form and the online procedure distinct.
 
-* deterministic candidate selection — 0 → unavailable, 1 → handoff, ≥2 → ask
-  which (never the first portal picked arbitrarily);
-* honesty of presentation (D-R3-6): the authenticated portal is announced as an
-  online procedure whose authentication stays with the citizen, never as a
-  "downloadable form";
-* provenance (D-R3-7): the executed request carries exactly the confirmed
-  candidate URL as ``service_id``; no URL is invented;
-* I6: no hardcoded municipality fallback — an unknown comune is asked, not
-  guessed.
+The central invariant (D-S5-2): a resolver miss — unknown platform, no connector,
+0/≥2 confirmed, unreachable — answers honestly (ask comune / URP redirect) and
+NEVER falls back to the old SP pointer. Plus: 0/≥2 service keys → ask which
+pratica (no fetch); unknown comune → ask (I6).
 """
 
 from __future__ import annotations
@@ -20,68 +18,93 @@ from datetime import datetime, timezone
 
 import pytest
 
-from treasureiq.catalog.contracts import AccessMode
+from treasureiq.catalog.contracts import AccessMode, ConnectorRef
 from treasureiq.catalog.service_contracts import (
     AuthenticationMethod,
+    ResolvedService,
     ServiceAccessMode,
-    ServicePortalCandidate,
-    ServicePortalRole,
-    SourceInventory,
+    ServiceAccessOption,
+    ServiceReference,
 )
 from treasureiq.chat import respond
 from treasureiq.chat.intent import Topic, TOPIC_KEYWORDS
 from treasureiq.chat.respond import _risposta_modulistica, _spid_reason_da_metodi
+from treasureiq.mappa_connettore import MappaConnettore
 
 ISTAT = "058091"
 WHEN = datetime(2026, 8, 22, 9, 0, tzinfo=timezone.utc)
 BASE_URL = "https://www.comune.prova.it"
-PORTAL_A = "https://sportello.comune.prova.it/servizi"
-PORTAL_B = "https://sportello.comune.prova.it/prenotazioni"
+CONN = ConnectorRef(name="wordpress_agid_service", version="1")
 
 
-def _candidate(url: str, label: str, methods=(AuthenticationMethod.SPID,)) -> ServicePortalCandidate:
-    return ServicePortalCandidate(
-        url=url,
-        label=label,
-        source_url=BASE_URL,
-        role=ServicePortalRole.TELEMATICS_DESK,
-        access_mode=ServiceAccessMode.AUTHENTICATED_ONLINE,
-        platform_id="municipium",
-        capabilities=("appointment",),
-        authentication=tuple(methods),
-        discovered_at=WHEN,
+def _mappa(*, piattaforma_id: str | None = "wordpress_agid") -> MappaConnettore:
+    return MappaConnettore(
+        codice_istat=ISTAT,
+        nome="Prova",
+        sito=BASE_URL,
+        sondato_il="2026-08-22T09:00:00+00:00",
+        piattaforma_id=piattaforma_id,
     )
 
 
-def _inventory(*candidates: ServicePortalCandidate) -> SourceInventory:
-    return SourceInventory(
-        source_id=ISTAT,
-        base_url=BASE_URL,
-        service_portals=tuple(candidates),
-        updated_at=WHEN,
+def _reference(*, con_auth: bool = False) -> ServiceReference:
+    options = [
+        ServiceAccessOption(
+            mode=ServiceAccessMode.INFORMATION,
+            url=f"{BASE_URL}/servizi/cie",
+        ),
+        ServiceAccessOption(
+            mode=ServiceAccessMode.DOWNLOAD,
+            url=f"{BASE_URL}/servizi/cie/modulo.pdf",
+        ),
+    ]
+    if con_auth:
+        options.append(
+            ServiceAccessOption(
+                mode=ServiceAccessMode.AUTHENTICATED_ONLINE,
+                url="https://portale.prova.it/cie",
+                authentication=(AuthenticationMethod.SPID,),
+                requires_authentication=True,
+            )
+        )
+    return ServiceReference(
+        service_id=f"{ISTAT}:wp:42",
+        title="Carta d'identità elettronica",
+        source_url=f"{BASE_URL}/servizi/cie",
+        options=tuple(options),
+        discovered_at=datetime(2026, 1, 1, tzinfo=timezone.utc),
+    )
+
+
+def _resolved(reference: ServiceReference, *, from_cache: bool = False) -> ResolvedService:
+    return ResolvedService(
+        reference=reference,
+        retrieved_at=WHEN,
+        from_cache=from_cache,
+        connector=CONN,
     )
 
 
 @pytest.fixture
-def stub_inventory(monkeypatch):
-    """Inject an inventory both the handler and the default connector read.
+def wiring(monkeypatch):
+    """Patch the two seams the handler crosses: the cached mappa and the resolver.
 
-    The handler imports ``_inventory_from_live`` at call time and the default
-    ``ServicePortalConnettore`` binds it as its loader when the registry is
-    built inside the handler — patching the module attribute reaches both.
+    ``_da_cache`` is imported inside the handler → patch the module attribute.
+    ``resolve_service_with_meta`` is a module-level import in ``respond``. A spy
+    records whether the resolver was called at all (0/≥2 keys must not fetch).
     """
+    stato = {"chiamate": 0, "resolved": None, "mappa": _mappa()}
 
-    def _install(inventory):
-        monkeypatch.setattr(
-            "treasureiq.catalog.service_portal_connector._inventory_from_live",
-            lambda source_id: inventory,
-        )
-        # No cached MappaConnettore on disk in the test: force the fallback build.
-        monkeypatch.setattr(
-            "treasureiq.mappa_connettore._da_cache", lambda codice_istat: None
-        )
+    def _da_cache(codice_istat):
+        return stato["mappa"]
 
-    return _install
+    def _resolver(request, **kw):
+        stato["chiamate"] += 1
+        return stato["resolved"]
+
+    monkeypatch.setattr("treasureiq.mappa_connettore._da_cache", _da_cache)
+    monkeypatch.setattr(respond, "resolve_service_with_meta", _resolver)
+    return stato
 
 
 def _run(**kwargs):
@@ -106,83 +129,88 @@ def test_auth_reason_generic_when_only_unknown():
     assert "autenticazione" in reason.lower()
 
 
-# --- deterministic selection ------------------------------------------------
+# --- happy path: resolver returns a reference ------------------------------
 
 
-def test_zero_candidates_is_unavailable(stub_inventory):
-    stub_inventory(None)
-    answer = _run(message="serve la modulistica", profile=None, comune_istat=ISTAT)
+def test_servizio_risolto_mediated_con_download(wiring):
+    wiring["mappa"] = _mappa()
+    wiring["resolved"] = _resolved(_reference())
+    answer = _run(message="modulo della carta d'identità", profile=None, comune_istat=ISTAT)
     assert answer.topic is Topic.MODULISTICA
-    assert answer.data_gap == "not_published"
-    assert answer.access_mode is None
+    assert answer.data_gap is None
+    assert answer.needs_clarification is False
+    assert answer.access_mode == AccessMode.MEDIATED.value
+    assert len(answer.data_batches) == 1
+    assert answer.query_plan is not None
+    assert answer.selected_data_batch is answer.data_batches[0]
+    # InfoAnswer.service keeps the options distinct: a download is present.
+    assert answer.info is not None and answer.info.service is not None
+    assert len(answer.info.service.downloads) == 1
+    assert answer.info.service.information is not None
+    # pure-download/information service does not require authentication
     assert answer.spid_required is False
+
+
+def test_procedura_online_richiede_auth_non_download(wiring):
+    # D-R3-6: an AUTHENTICATED_ONLINE option is a procedure the citizen runs, not
+    # a form TIQ downloads/fills.
+    wiring["mappa"] = _mappa()
+    wiring["resolved"] = _resolved(_reference(con_auth=True))
+    answer = _run(message="modulo della carta d'identità", profile=None, comune_istat=ISTAT)
+    assert answer.spid_required is True
+    assert answer.spid_reason is not None and "SPID" in answer.spid_reason
+    assert len(answer.info.service.authenticated_online) == 1
+    assert "non accedo né compilo" in answer.reply.lower()
+
+
+# --- honest misses: NEVER the SP pointer (D-S5-2) --------------------------
+
+
+def test_service_key_ambigua_chiede_senza_fetch(wiring):
+    # 0 keys → ask which pratica, and the resolver is NOT called.
+    wiring["mappa"] = _mappa()
+    answer = _run(message="serve la modulistica", profile=None, comune_istat=ISTAT)
+    assert answer.needs_clarification is True
+    assert answer.info is None
+    assert answer.access_mode is None
+    assert wiring["chiamate"] == 0
+
+
+def test_piattaforma_assente_miss_urp_senza_sp(wiring):
+    wiring["mappa"] = _mappa(piattaforma_id=None)
+    answer = _run(message="modulo della carta d'identità", profile=None, comune_istat=ISTAT)
+    assert answer.data_gap == "not_verified"
+    assert answer.access_mode is None
+    assert answer.info is None
+    assert answer.needs_clarification is False
+    assert wiring["chiamate"] == 0  # no platform → no resolver call
+
+
+def test_mappa_assente_miss_urp(wiring):
+    wiring["mappa"] = None
+    answer = _run(message="modulo della carta d'identità", profile=None, comune_istat=ISTAT)
+    assert answer.data_gap == "not_verified"
     assert answer.info is None
 
 
-def test_single_candidate_hands_off_to_portal(stub_inventory):
-    stub_inventory(_inventory(_candidate(PORTAL_A, "Sportello telematico")))
-    answer = _run(message="voglio lo sportello online", profile=None, comune_istat=ISTAT)
-    assert answer.access_mode == AccessMode.INDIRECT.value
-    assert answer.spid_required is True
-    assert answer.info is not None and answer.info.document is not None
-    assert answer.info.document.url == PORTAL_A
-    assert len(answer.data_batches) == 1
-    # Canonical chain: a QueryPlan sits behind the pointer, and the selected
-    # batch is the one we executed.
-    assert answer.query_plan is not None
-    assert answer.selected_data_batch is answer.data_batches[0]
-
-
-def test_single_candidate_reply_is_online_procedure_not_download(stub_inventory):
-    # D-R3-6: never present the authenticated portal as a downloadable form.
-    stub_inventory(_inventory(_candidate(PORTAL_A, "Sportello telematico")))
-    answer = _run(message="voglio lo sportello online", profile=None, comune_istat=ISTAT)
-    testo = answer.reply.lower()
-    assert "procedura online" in testo
-    assert "scaric" not in testo  # no "scaricabile"/"scarica"
-    assert "autenticazione resta a te" in testo or "resta a te" in testo
-
-
-def test_multiple_candidates_ask_which(stub_inventory):
-    stub_inventory(
-        _inventory(
-            _candidate(PORTAL_A, "Sportello telematico"),
-            _candidate(PORTAL_B, "Prenotazioni"),
-        )
-    )
-    answer = _run(message="servizi online", profile=None, comune_istat=ISTAT)
-    assert answer.needs_clarification is True
-    assert answer.access_mode == AccessMode.INDIRECT.value
-    assert answer.info is not None
-    urls = {azione.url for azione in answer.info.azioni}
-    assert urls == {PORTAL_A, PORTAL_B}  # never picked one arbitrarily
-
-
-def test_executed_request_carries_confirmed_url(stub_inventory, monkeypatch):
-    # D-R3-7: service_id is exactly the confirmed candidate URL.
-    stub_inventory(_inventory(_candidate(PORTAL_A, "Sportello telematico")))
-    seen = {}
-    real = respond.service_portal_request
-
-    def _spy(*, source_id, service_id, **kw):
-        seen["service_id"] = service_id
-        seen["source_id"] = source_id
-        return real(source_id=source_id, service_id=service_id, **kw)
-
-    monkeypatch.setattr(respond, "service_portal_request", _spy)
-    _run(message="sportello online", profile=None, comune_istat=ISTAT)
-    assert seen["service_id"] == PORTAL_A
-    assert seen["source_id"] == ISTAT
+def test_resolver_miss_urp_niente_sp(wiring):
+    wiring["mappa"] = _mappa()
+    wiring["resolved"] = None  # connector 0/≥2 confirmed / unreachable
+    answer = _run(message="modulo della carta d'identità", profile=None, comune_istat=ISTAT)
+    assert wiring["chiamate"] == 1
+    assert answer.data_gap == "not_verified"
+    assert answer.access_mode is None
+    assert answer.info is None
 
 
 # --- I6: no hardcoded fallback ---------------------------------------------
 
 
-def test_unknown_comune_is_asked_not_guessed(stub_inventory):
-    stub_inventory(None)
-    answer = _run(message="serve la modulistica", profile=None, comune_istat=None)
+def test_unknown_comune_is_asked_not_guessed(wiring):
+    answer = _run(message="modulo della carta d'identità", profile=None, comune_istat=None)
     assert answer.data_gap == "comune_non_noto"
     assert answer.needs_clarification is True
+    assert wiring["chiamate"] == 0
 
 
 # --- topic keyword support (gate) ------------------------------------------

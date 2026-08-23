@@ -82,6 +82,51 @@ def test_budget_esaurisce_e_rimanente():
     assert b.rimanente("https://comune.it/c") == 0
 
 
+# --- budget a finestra scorrevole (Slice 5, D-S5-9) ---
+
+
+def test_budget_finestra_reset_dopo_scadenza():
+    # Un budget di processo senza reset resterebbe bloccato per sempre; con la
+    # finestra il conteggio del dominio si azzera trascorsi finestra_s secondi.
+    b = BudgetDominio(massimo=2, finestra_s=100.0)
+    url = "https://comune.it/a"
+    b.consuma(url, _T0)
+    b.consuma(url, _T0)
+    assert b.disponibile(url, _T0) is False
+    # Dentro la finestra: ancora esaurito.
+    assert b.disponibile(url, _T0 + timedelta(seconds=50)) is False
+    # Scaduta la finestra: budget di NUOVO disponibile per quel dominio.
+    assert b.disponibile(url, _T0 + timedelta(seconds=100)) is True
+    assert b.rimanente(url, _T0 + timedelta(seconds=100)) == 2
+
+
+def test_budget_finestra_per_dominio_isolata():
+    b = BudgetDominio(massimo=1, finestra_s=100.0)
+    b.consuma("https://a.it/x", _T0)
+    # Il reset del dominio A non tocca il dominio B (finestra per-dominio).
+    assert b.disponibile("https://b.it/y", _T0) is True
+    # A torna disponibile solo alla sua scadenza.
+    assert b.disponibile("https://a.it/z", _T0 + timedelta(seconds=100)) is True
+
+
+def test_budget_senza_finestra_non_resetta_mai():
+    # finestra_s=None mantiene la semantica per-passata dello sweep: nessun reset,
+    # anche passando un now molto avanti.
+    b = BudgetDominio(massimo=1)
+    b.consuma("https://comune.it/a", _T0)
+    assert b.disponibile("https://comune.it/b", _T0 + timedelta(days=365)) is False
+
+
+def test_budget_finestra_deve_essere_positiva():
+    for cattiva in (0.0, -1.0):
+        try:
+            BudgetDominio(massimo=1, finestra_s=cattiva)
+        except ValueError:
+            pass
+        else:  # pragma: no cover
+            raise AssertionError("finestra <= 0 deve sollevare")
+
+
 def test_budget_minimo_uno():
     try:
         BudgetDominio(massimo=0)

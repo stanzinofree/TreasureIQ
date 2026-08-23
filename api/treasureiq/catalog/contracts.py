@@ -91,6 +91,19 @@ def capability_for_section(section: str) -> str | None:
     return CATALOG_SECTION_TO_CAPABILITY.get(section)
 
 
+class ConnectorRef(_StrictModel):
+    """Stable identity (name + version) of the connector that produced a result.
+
+    Lives here, not in ``data_contracts``, so the service contracts/cache — which
+    ``data_contracts`` itself imports (``ServiceReference``) — can reference the
+    connector provenance without an import cycle.  ``data_contracts`` re-exports
+    it so its historical callers keep importing ``ConnectorRef`` from there.
+    """
+
+    name: str = Field(min_length=1)
+    version: str = Field(min_length=1)
+
+
 class AccessContract(_StrictModel):
     transport: str = Field(min_length=1)
     endpoints: tuple[str, ...] = ()

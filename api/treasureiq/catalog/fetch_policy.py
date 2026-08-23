@@ -79,22 +79,58 @@ class LimitatoreDominio:
 
 
 class BudgetDominio:
-    """Tetto di richieste per dominio in una passata di sweep."""
+    """Tetto di richieste per dominio.
 
-    def __init__(self, *, massimo: int) -> None:
+    Due semantiche, scelte da ``finestra_s``:
+
+    - ``finestra_s=None`` (default): tetto **per-passata**, nessun reset — la
+      semantica storica dello sweep, che vive una sola passata. Immutata.
+    - ``finestra_s`` impostata: **finestra scorrevole per-dominio** — trascorsi
+      ``finestra_s`` secondi dal primo consumo di un dominio, il **solo**
+      conteggio di quel dominio si azzera. Serve al coordinatore di processo
+      (Slice 5): un budget senza reset lo bloccherebbe per sempre una volta
+      esaurito. Il reset tocca **solo** il budget: rate-limit e backoff sono
+      discipline separate, gestite altrove.
+
+    Le decisioni con finestra dipendono dall'orologio, quindi ``now`` va passato
+    (iniettabile per il test). Senza finestra ``now`` è ignorato.
+    """
+
+    def __init__(self, *, massimo: int, finestra_s: float | None = None) -> None:
         if massimo < 1:
             raise ValueError("il budget per dominio deve essere >= 1")
+        if finestra_s is not None and finestra_s <= 0:
+            raise ValueError("la finestra del budget deve essere > 0 o None")
         self._massimo = massimo
+        self._finestra_s = finestra_s
         self._conteggio: dict[str, int] = {}
+        self._inizio_finestra: dict[str, datetime] = {}
 
-    def rimanente(self, url: str) -> int:
-        return max(0, self._massimo - self._conteggio.get(dominio_di(url), 0))
+    def _forse_reset(self, dominio: str, now: datetime | None) -> None:
+        if self._finestra_s is None or now is None:
+            return
+        inizio = self._inizio_finestra.get(dominio)
+        if inizio is None:
+            self._inizio_finestra[dominio] = now
+            return
+        if (now - inizio).total_seconds() >= self._finestra_s:
+            self._conteggio[dominio] = 0
+            self._inizio_finestra[dominio] = now
 
-    def disponibile(self, url: str) -> bool:
-        return self.rimanente(url) > 0
-
-    def consuma(self, url: str) -> None:
+    def rimanente(self, url: str, now: datetime | None = None) -> int:
         dominio = dominio_di(url)
+        self._forse_reset(dominio, now)
+        return max(0, self._massimo - self._conteggio.get(dominio, 0))
+
+    def disponibile(self, url: str, now: datetime | None = None) -> bool:
+        return self.rimanente(url, now) > 0
+
+    def consuma(self, url: str, now: datetime | None = None) -> None:
+        dominio = dominio_di(url)
+        # Avvia la finestra al primo consumo così che possa poi scadere anche se
+        # `disponibile` non è stata chiamata prima.
+        if self._finestra_s is not None and now is not None:
+            self._inizio_finestra.setdefault(dominio, now)
         self._conteggio[dominio] = self._conteggio.get(dominio, 0) + 1
 
 
@@ -121,9 +157,12 @@ class PoliticaFetch:
         massimo_per_dominio: int = 50,
         backoff_base_s: float = 60.0,
         backoff_cap_s: float = 3600.0,
+        finestra_budget_s: float | None = None,
     ) -> None:
         self._limitatore = LimitatoreDominio(intervallo_minimo_s=intervallo_minimo_s)
-        self._budget = BudgetDominio(massimo=massimo_per_dominio)
+        self._budget = BudgetDominio(
+            massimo=massimo_per_dominio, finestra_s=finestra_budget_s
+        )
         self._backoff_base = backoff_base_s
         self._backoff_cap = backoff_cap_s
 
@@ -131,7 +170,7 @@ class PoliticaFetch:
         self, url: str, now: datetime, *, fallimenti_consecutivi: int = 0
     ) -> DecisioneFetch:
         """Se e quando interrogare `url`. Non muta nulla: solo decide."""
-        if not self._budget.disponibile(url):
+        if not self._budget.disponibile(url, now):
             return DecisioneFetch(False, 0.0, "budget_esaurito")
         attesa = max(
             self._limitatore.attesa(url, now),
@@ -146,4 +185,4 @@ class PoliticaFetch:
     def registra(self, url: str, now: datetime) -> None:
         """Da chiamare **dopo** un fetch effettivo: consuma budget e rate-limit."""
         self._limitatore.registra(url, now)
-        self._budget.consuma(url)
+        self._budget.consuma(url, now)

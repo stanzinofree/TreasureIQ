@@ -74,6 +74,15 @@ from treasureiq.catalog import (
 from treasureiq.catalog.contracts import CAPABILITY_NOTICES
 from treasureiq.catalog.data_contracts import DataStatus
 from treasureiq.catalog.notices import notices_batch, snapshot_da_bandi_live
+from treasureiq.catalog.planner import service_request
+from treasureiq.catalog.service_batch import service_reference_batch
+from treasureiq.catalog.service_contracts import AuthenticationMethod, ServiceAccessMode
+from treasureiq.catalog.service_registry import (
+    default_service_registry,
+    service_query_fetch_coordinator,
+)
+from treasureiq.catalog.service_resolver import resolve_service_with_meta
+from treasureiq.chat.service_key import riconosci_service_key
 from treasureiq.chat.categorie import Categoria, topics_di
 from treasureiq.chat.intent import (
     AMBIGUOUS_ROLE_TOPICS,
@@ -213,6 +222,35 @@ class DocumentAnswer:
 
 
 @dataclass
+class ServiceLink:
+    """Un modo ufficiale di raggiungere il servizio (Ramo 3, Slice 5).
+
+    ``label`` è un'etichetta FISSA/derivata dal tipo di opzione (D-07), mai
+    testo libero; ``authentication`` è popolato solo sull'opzione autenticata.
+    """
+
+    url: str
+    label: str
+    authentication: tuple[AuthenticationMethod, ...] = ()
+
+
+@dataclass
+class ServiceAnswer:
+    """Le opzioni tipizzate di un servizio, senza appiattirle (§1.5).
+
+    La pagina informativa, i moduli scaricabili e le procedure online restano
+    distinti: la UI li presenta separatamente e l'autenticazione compare solo
+    sulla procedura online.
+    """
+
+    service_id: str
+    title: str
+    information: ServiceLink | None
+    downloads: list[ServiceLink]
+    authenticated_online: list[ServiceLink]
+
+
+@dataclass
 class OfficeAnswer:
     nome: str
     telefono: str | None
@@ -333,6 +371,10 @@ class InfoAnswer:
     #: Il nome dell'ente, per la scheda: l'interfaccia non deve ricavarlo
     #: dal testo della risposta.
     ente_nome: str | None = None
+    #: Le opzioni tipizzate di un servizio (Ramo 3, Slice 5). La modulistica è
+    #: un caso del rail informativo (D-S5-4): si aggancia qui, non a un campo di
+    #: primo livello in `ChatAnswer`. `None` fuori dal ramo MODULISTICA.
+    service: ServiceAnswer | None = None
 
 
 @dataclass
@@ -3611,39 +3653,120 @@ def _spid_reason_da_metodi(metodi: Sequence[object]) -> tuple[bool, str]:
     return True, "L'accesso richiede autenticazione; resta a carico del cittadino."
 
 
+#: Etichette FISSE per opzione di accesso (D-07): mai testo libero né titolo
+#: del comune. La UI le rende come pulsanti distinti.
+_SERVICE_LINK_LABELS = {
+    ServiceAccessMode.INFORMATION: "Pagina del servizio",
+    ServiceAccessMode.DOWNLOAD: "Scarica il modulo",
+    ServiceAccessMode.AUTHENTICATED_ONLINE: "Procedura online",
+}
+
+
+def _service_answer(reference) -> ServiceAnswer:
+    """Le opzioni della reference in `ServiceAnswer`, senza appiattirle (§1.5).
+
+    Pagina informativa, moduli scaricabili e procedure online restano distinti.
+    La prima INFORMATION è la pagina citata; le altre opzioni si accumulano per
+    tipo. Nessun URL inventato: ogni link viene dalla reference (host già
+    validato in Slice 4).
+    """
+    information: ServiceLink | None = None
+    downloads: list[ServiceLink] = []
+    authenticated: list[ServiceLink] = []
+    for opzione in reference.options:
+        link = ServiceLink(
+            url=str(opzione.url),
+            label=_SERVICE_LINK_LABELS[opzione.mode],
+            authentication=tuple(opzione.authentication),
+        )
+        if opzione.mode is ServiceAccessMode.INFORMATION:
+            if information is None:
+                information = link
+        elif opzione.mode is ServiceAccessMode.DOWNLOAD:
+            downloads.append(link)
+        elif opzione.mode is ServiceAccessMode.AUTHENTICATED_ONLINE:
+            authenticated.append(link)
+    return ServiceAnswer(
+        service_id=reference.service_id,
+        title=reference.title,
+        information=information,
+        downloads=downloads,
+        authenticated_online=authenticated,
+    )
+
+
+def _spid_modulistica(reference) -> tuple[bool, str | None]:
+    """`spid_required`/motivazione dai metodi REALMENTE linkati (D-R3-6).
+
+    SPID è richiesto solo se esiste un'opzione AUTHENTICATED_ONLINE; la
+    motivazione elenca i metodi dichiarati, mai inventati. Un servizio di sola
+    pagina/download non richiede autenticazione.
+    """
+    metodi: list[object] = []
+    ha_auth = False
+    for opzione in reference.options:
+        if opzione.mode is ServiceAccessMode.AUTHENTICATED_ONLINE:
+            ha_auth = True
+            metodi.extend(opzione.authentication)
+    if not ha_auth:
+        return False, None
+    return _spid_reason_da_metodi(metodi)
+
+
+def _modulistica_miss_urp(comune_nome: str) -> ChatAnswer:
+    """Miss onesto del ramo modulistica: rimando URP, MAI il puntatore SP.
+
+    Vincolo centrale della slice (D-S5-2): quando il resolver non trova il
+    servizio — piattaforma sconosciuta, connettore assente, 0/≥2 confermati —
+    la risposta è onesta e rimanda all'URP, non ripiega sul vecchio ramo SP.
+    """
+    return ChatAnswer(
+        reply=(
+            f"Per {comune_nome} non riesco a recuperare ora il servizio dal "
+            "sito ufficiale del comune. Per la pratica rivolgiti all'URP, che "
+            "ti indica il canale corretto."
+        ),
+        topic=Topic.MODULISTICA,
+        kind=QuestionKind.INFORMAZIONE,
+        data_gap="not_verified",
+        needs_clarification=False,
+        matches=[],
+        spid_required=False,
+        spid_reason=None,
+        access_mode=None,
+        citizen_effort=1,
+        info=None,
+    )
+
+
 async def _risposta_modulistica(
     *, message: str, profile: CitizenProfile | None, comune_istat: str | None
 ) -> ChatAnswer:
-    """Ramo Topic.MODULISTICA — primo incremento SP (Ramo 3, contratto §5).
+    """Ramo Topic.MODULISTICA — wiring del connettore servizi (Ramo 3, Slice 5).
 
-    Cabla alla chat il PUNTATORE al portale servizi già scoperto dallo sweep e
-    persistito come `SourceInventory`. TIQ indica la porta ufficiale (URL,
-    ruolo, metodi di autenticazione accettati) e non entra mai: nessun login,
-    nessuna compilazione, nessun dato dietro autenticazione (D-R3-5). L'esito
-    resta `INDIRECT`, come lo produce `ServicePortalConnettore`.
+    Cabla la chat al connettore reale via `resolve_service_with_meta`: la
+    `ServiceKey` riconosciuta dal messaggio è risolta cache-first in una
+    `ServiceReference` (pagina informativa, modulo scaricabile, procedura
+    online autenticata, tenuti DISTINTI). TIQ indica la porta ufficiale e non
+    entra mai: nessun login, nessuna compilazione, nessun dato dietro
+    autenticazione (D-R3-5). L'esito è MEDIATED con `DataBatch` strutturato.
 
-    Selezione DETERMINISTICA dei candidati (D-R3, vincolo 1) — mai il primo
-    portale scelto arbitrariamente:
-      * 0 candidati  → non disponibile (mai un URL inventato, D-R3-7);
-      * 1 candidato  → handoff al portale ufficiale;
-      * ≥2 candidati → si chiede quale, elencando le porte ufficiali confermate.
+    Miss ONESTO, mai il vecchio puntatore SP (D-S5-2): ogni buco risponde con
+    verità, non con un ripiego.
+      * comune non noto            → lo si chiede (I6, `comune_non_noto`);
+      * 0/≥2 service key           → si chiede quale pratica (nessun fetch);
+      * piattaforma/mappa assente  → redirect URP (`not_verified`);
+      * resolver miss (0/≥2 conferme, irraggiungibile) → redirect URP.
 
-    Il `service_id` è ESATTAMENTE l'URL del `ServicePortalCandidate` confermato,
-    perché `ServicePortalConnettore._match` confronta quell'URL con l'inventario
-    (D-R3, vincolo 2 / D-R3-7): il riconoscimento sceglie tra candidati
-    confermati, non genera URL da testo libero. Per il primo incremento il
-    candidato è usato direttamente come sorgente del `service_id`: adattamento
-    provvisorio verso il contratto canonico `ServiceReference`.
-
-    Comune con la stessa precedenza dei bandi (profilo > scelta > nominato),
-    I6: niente default hardcoded, se il comune non è noto lo si chiede.
+    Comune con la stessa precedenza dei bandi (profilo > scelta > nominato).
+    La freschezza (FRESH da cache / LIVE dal vivo) viene dall'envelope
+    `ResolvedService`, mai da `discovered_at`.
 
     Il testo di risposta è FISSO, mai passato al verbalizzatore (D-07): URL,
     ruolo e metodi viaggiano nei campi strutturati (`info`/`data_batches`), mai
     interpolati in `reply`.
     """
-    from treasureiq.catalog.service_portal_connector import _inventory_from_live
-    from treasureiq.mappa_connettore import MappaConnettore, _da_cache
+    from treasureiq.mappa_connettore import _da_cache
 
     # Precedenza del comune: identica ai bandi (memoria «ricerca live cieca al
     # comune di profilo», R-9). I6: nessun ripiego hardcoded — se non sappiamo
@@ -3673,115 +3796,21 @@ async def _risposta_modulistica(
             info=None,
         )
 
-    mappa = _da_cache(target_istat)
-    inventory = _inventory_from_live(target_istat)
-    comune_nome = (
-        (mappa.nome if mappa is not None else None)
-        or (nominato.nome if nominato is not None else None)
-        or "questo comune"
-    )
-    candidates = list(inventory.service_portals) if inventory is not None else []
-
-    # 0 candidati: non disponibile. Non abbiamo (ancora) un portale confermato
-    # per questa fonte — mai un URL inventato (D-R3-7).
-    if not candidates:
+    # service_key: 0 o ≥2 chiavi riconosciute → si chiede QUALE pratica, con
+    # l'elenco chiuso del vocabolario; mai il vicino, mai indovinare (Slice 1).
+    service_key = riconosci_service_key(message)
+    if service_key is None:
         return ChatAnswer(
             reply=(
-                f"Per {comune_nome} non risulta ancora un portale servizi "
-                "online confermato tra i dati che ho letto. Per la pratica "
-                "conviene rivolgerti all'URP del comune, che ti indica il "
-                "canale corretto."
-            ),
-            topic=Topic.MODULISTICA,
-            kind=QuestionKind.INFORMAZIONE,
-            data_gap="not_published",
-            needs_clarification=False,
-            matches=[],
-            spid_required=False,
-            spid_reason=None,
-            access_mode=None,
-            citizen_effort=1,
-            info=None,
-        )
-
-    # ≥2 candidati: si chiede quale, elencando le porte ufficiali confermate —
-    # mai scelto il primo arbitrariamente (D-R3, vincolo 1).
-    if len(candidates) > 1:
-        metodi_uniti: list[object] = []
-        for candidato in candidates:
-            metodi_uniti.extend(candidato.authentication)
-        spid_required, spid_reason = _spid_reason_da_metodi(metodi_uniti)
-        azioni = [
-            Azione(
-                testo=candidato.label or "Sportello online",
-                url=str(candidato.url),
-                etichetta="Apri",
-                dettaglio="Procedura online: l'accesso richiede autenticazione.",
-            )
-            for candidato in candidates
-        ]
-        info = InfoAnswer(
-            document=None,
-            office=None,
-            coverage_count=len(candidates),
-            diagnosis=[],
-            integration_cost=[],
-            web_results=[],
-            letto_dal_vivo=False,
-            stato=StatoFonte.UFFICIALE,
-            azioni=azioni,
-            ente_nome=comune_nome,
-        )
-        return ChatAnswer(
-            reply=(
-                f"Per {comune_nome} ci sono più sportelli online ufficiali. "
-                "Quale ti serve? Sono tutte procedure online: l'autenticazione "
-                "resta a te, io non posso accedere al posto tuo."
+                "Per recuperare il modulo giusto dimmi quale pratica ti serve: "
+                "carta d'identità, cambio di residenza, accesso agli atti, "
+                "stato civile o tributi."
             ),
             topic=Topic.MODULISTICA,
             kind=QuestionKind.INFORMAZIONE,
             data_gap=None,
             needs_clarification=True,
             matches=[],
-            spid_required=spid_required,
-            spid_reason=spid_reason,
-            access_mode=CatalogAccessMode.INDIRECT.value,
-            citizen_effort=2,
-            info=info,
-        )
-
-    # 1 candidato: handoff. Il service_id è ESATTAMENTE l'URL confermato
-    # (D-R3, vincolo 2); l'executor lo riconferma contro l'inventario.
-    candidate = candidates[0]
-    request = service_portal_request(source_id=target_istat, service_id=str(candidate.url))
-    if mappa is None:
-        mappa = MappaConnettore(
-            codice_istat=target_istat,
-            nome=comune_nome,
-            sito=str(inventory.base_url) if inventory is not None else "",
-            sondato_il=datetime.now(timezone.utc).isoformat(),
-        )
-    batch = await asyncio.to_thread(
-        CatalogRuntime().execute,
-        request,
-        platform_id=candidate.platform_id or "sconosciuta",
-        mappa=mappa,
-        esito=None,
-    )
-
-    # Miss onesto: l'inventario è cambiato tra selezione ed esecuzione, o
-    # l'adapter non risolve. Mai un puntatore inventato.
-    if batch is None or batch.status is not DataStatus.FULFILLED or not batch.records:
-        return ChatAnswer(
-            reply=(
-                f"Per {comune_nome} non riesco a confermare ora lo sportello "
-                "online ufficiale. Per la pratica rivolgiti all'URP del comune."
-            ),
-            topic=Topic.MODULISTICA,
-            kind=QuestionKind.INFORMAZIONE,
-            data_gap="not_verified",
-            needs_clarification=False,
-            matches=[],
             spid_required=False,
             spid_reason=None,
             access_mode=None,
@@ -3789,21 +3818,54 @@ async def _risposta_modulistica(
             info=None,
         )
 
+    mappa = _da_cache(target_istat)
+    comune_nome = (
+        (mappa.nome if mappa is not None else None)
+        or (nominato.nome if nominato is not None else None)
+        or "questo comune"
+    )
+
+    # Piattaforma nota e di una famiglia con connettore: senza, il resolver non
+    # ha chi interrogare → miss onesto (URP), MAI il puntatore SP a coprire il
+    # buco (D-S5-2, vincolo centrale della slice).
+    if mappa is None or not mappa.piattaforma_id:
+        return _modulistica_miss_urp(comune_nome)
+
+    # Catena nuova: resolver cache-first → connettore WP/AgID reale (Slice 4),
+    # via `EsecutoreServiceFetcher` guardato (nessun httpx grezzo nel path
+    # chat). Il resolver gira in un thread perché il fetch live è sincrono.
+    request = service_request(source_id=target_istat, service_key=service_key)
+    resolved = await asyncio.to_thread(
+        resolve_service_with_meta,
+        request,
+        mappa=mappa,
+        registry=default_service_registry(service_query_fetch_coordinator()),
+        platform_id=mappa.piattaforma_id,
+    )
+    # Miss del resolver (piattaforma non coperta, 0/≥2 confermati, irraggiungibile)
+    # → miss onesto, niente fallback SP.
+    if resolved is None:
+        return _modulistica_miss_urp(comune_nome)
+
     # Catena canonica: DataBatch → QueryPlan → selected_data_batch, come uffici
-    # e bandi. Il piano rende tracciabile la richiesta dietro il puntatore.
+    # e bandi. La `Freshness` viene dall'envelope (FRESH per cache-hit, LIVE per
+    # una chiamata dal vivo), mai da `discovered_at`.
+    batch = service_reference_batch(resolved, request)
     plan = build_query_plan(request)
     selected = select_batch(plan, (batch,))
 
-    record = batch.records[0]
-    spid_required, spid_reason = _spid_reason_da_metodi(record.get("authentication") or [])
-    verificato_il = None
-    if batch.freshness is not None and batch.freshness.retrieved_at is not None:
-        verificato_il = batch.freshness.retrieved_at.date()
-    document = DocumentAnswer(
-        title=record.get("label") or "Sportello online",
-        url=record["url"],
-        descrizione="Procedura online: l'accesso richiede autenticazione e resta a te.",
-        verificato_il=verificato_il,
+    service = _service_answer(resolved.reference)
+    spid_required, spid_reason = _spid_modulistica(resolved.reference)
+    verificato_il = resolved.retrieved_at.date() if resolved.retrieved_at else None
+    document = (
+        DocumentAnswer(
+            title=resolved.reference.title,
+            url=service.information.url,
+            descrizione="Pagina ufficiale del servizio sul sito del comune.",
+            verificato_il=verificato_il,
+        )
+        if service.information is not None
+        else None
     )
     info = InfoAnswer(
         document=document,
@@ -3812,16 +3874,19 @@ async def _risposta_modulistica(
         diagnosis=[],
         integration_cost=[],
         web_results=[],
-        letto_dal_vivo=False,
+        letto_dal_vivo=not resolved.from_cache,
         stato=StatoFonte.UFFICIALE,
         ente_nome=comune_nome,
+        service=service,
     )
+    # Testo FISSO (D-07): titoli, URL e metodi vivono solo nei campi strutturati
+    # (`info.service`/`data_batches`), mai interpolati nella prosa.
     return ChatAnswer(
         reply=(
-            f"Per {comune_nome} la pratica si svolge online sul portale servizi "
-            "ufficiale del comune. È una procedura online: l'autenticazione "
-            "resta a te, io non posso accedere né compilarla al posto tuo. "
-            "Trovi la porta ufficiale qui accanto."
+            f"Per {comune_nome} ho trovato il servizio sul sito ufficiale del "
+            "comune. Qui accanto trovi la pagina informativa e, quando il comune "
+            "lo pubblica, il modulo da scaricare. Se la pratica si svolge online "
+            "l'autenticazione resta a te: non accedo né compilo al posto tuo."
         ),
         topic=Topic.MODULISTICA,
         kind=QuestionKind.INFORMAZIONE,

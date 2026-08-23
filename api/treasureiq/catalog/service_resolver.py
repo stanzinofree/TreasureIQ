@@ -17,11 +17,17 @@ No network here: the connector registry is empty until Slice 4 wires a pilot.
 
 from __future__ import annotations
 
+from datetime import datetime, timezone
+
 from treasureiq.catalog import service_cache
 from treasureiq.catalog.connector_registry import ConnectorRegistry
 from treasureiq.catalog.contracts import CAPABILITY_SERVICES, Surface
 from treasureiq.catalog.data_contracts import DataRequest, DataStatus
-from treasureiq.catalog.service_contracts import ServiceKey, ServiceReference
+from treasureiq.catalog.service_contracts import (
+    ResolvedService,
+    ServiceKey,
+    ServiceReference,
+)
 from treasureiq.connettore import EsitoConnettore
 from treasureiq.mappa_connettore import MappaConnettore
 
@@ -41,21 +47,27 @@ def _service_key_da_selezione(request: DataRequest) -> ServiceKey | None:
         return None
 
 
-def resolve_service(
+def resolve_service_with_meta(
     request: DataRequest,
     *,
     mappa: MappaConnettore,
-    esito: EsitoConnettore | None,
+    esito: EsitoConnettore | None = None,
     registry: ConnectorRegistry | None = None,
     platform_id: str = "",
-) -> ServiceReference | None:
-    """Cache-first resolution of a service request into a ``ServiceReference``.
+) -> ResolvedService | None:
+    """Cache-first resolution into a ``ResolvedService`` envelope (reference + provenance).
 
-    Fresh cache-hit → the cached reference (no network, connector never called);
+    Fresh cache-hit → ``ResolvedService(from_cache=True)`` with the cached
+    ``retrieved_at``/``connector`` (no network, connector never called);
     miss/stale → the registered connector, written back through the cache on a
-    coherent single-reference success; anything else → ``None`` (never caching a
-    non-result).  An incoherent request (wrong surface/capability) is rejected
-    before the cache is even consulted.
+    coherent single-reference success and returned as ``from_cache=False`` with
+    the live call timestamp and the ``ConnectorResult``'s connector; anything
+    else → ``None`` (never caching a non-result).  An incoherent request (wrong
+    surface/capability) is rejected before the cache is even consulted.
+
+    The envelope carries the RESOLUTION timestamp, never ``discovered_at``: the
+    batch builder needs when the service was measured, not when its page was
+    first found.
     """
     # Guard 1 (before the cache): reject an incoherent request outright so it can
     # never find a cached entry and bypass the connector's own supports() gate.
@@ -75,7 +87,12 @@ def resolve_service(
 
     hit = service_cache.carica(request.source_id, service_key, policy=request.freshness)
     if hit is not None:
-        return hit
+        return ResolvedService(
+            reference=hit.reference,
+            retrieved_at=hit.retrieved_at,
+            from_cache=True,
+            connector=hit.connector,
+        )
 
     registry = registry or ConnectorRegistry()
     connector = registry.resolve(request=request, platform_id=platform_id)
@@ -97,5 +114,36 @@ def resolve_service(
         return None
 
     reference = result.service_references[0]
-    service_cache.salva(request.source_id, service_key, reference)
-    return reference
+    # The live-resolution timestamp for freshness: the connector stamps it; fall
+    # back to the freshness block, then to now — never to ``discovered_at``.
+    retrieved_at = (
+        result.retrieved_at
+        or result.freshness.retrieved_at
+        or datetime.now(timezone.utc)
+    )
+    service_cache.salva(request.source_id, service_key, reference, result.connector)
+    return ResolvedService(
+        reference=reference,
+        retrieved_at=retrieved_at,
+        from_cache=False,
+        connector=result.connector,
+    )
+
+
+def resolve_service(
+    request: DataRequest,
+    *,
+    mappa: MappaConnettore,
+    esito: EsitoConnettore | None,
+    registry: ConnectorRegistry | None = None,
+    platform_id: str = "",
+) -> ServiceReference | None:
+    """Cache-first resolution into a ``ServiceReference`` (envelope discarded).
+
+    Thin wrapper over ``resolve_service_with_meta`` for callers that only need
+    the reference; the meta variant is the one the Slice 5 chat path uses.
+    """
+    resolved = resolve_service_with_meta(
+        request, mappa=mappa, esito=esito, registry=registry, platform_id=platform_id
+    )
+    return resolved.reference if resolved is not None else None

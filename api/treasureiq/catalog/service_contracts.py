@@ -13,7 +13,7 @@ from enum import Enum
 
 from pydantic import AnyHttpUrl, Field
 
-from treasureiq.catalog.contracts import Surface, _StrictModel
+from treasureiq.catalog.contracts import ConnectorRef, Surface, _StrictModel
 
 
 class ServiceKey(str, Enum):
@@ -108,7 +108,9 @@ class ServiceReference(_StrictModel):
 #: Bump when WHAT we normalise into a cached ``ServiceReference`` changes, so an
 #: entry written by an older (or newer) extractor is never served as-is.  The
 #: cache treats any ``schema_version`` other than this as a miss (re-resolve).
-SERVICE_CACHE_SCHEMA_VERSION = 1
+#: v2 (Slice 5) added the ``connector`` field: a v1 entry has no connector and
+#: is not safely readable → miss/regenerate, no risky migration.
+SERVICE_CACHE_SCHEMA_VERSION = 2
 
 
 class CachedService(_StrictModel):
@@ -116,14 +118,36 @@ class CachedService(_StrictModel):
 
     ``reference`` is the normalised service; ``retrieved_at`` is when the
     connector RESOLVED it, distinct from ``reference.discovered_at`` (when the
-    entrypoint/service was first DISCOVERED).  ``schema_version`` gates the
-    entry: a value other than ``SERVICE_CACHE_SCHEMA_VERSION`` is a miss.
+    entrypoint/service was first DISCOVERED).  ``connector`` is the provenance
+    (name+version) that produced it, preserved so a cache hit reports the same
+    connector a live resolution would — never derived from
+    ``reference.provider_platform`` (that loses the connector's name/version).
+    ``schema_version`` gates the entry: a value other than
+    ``SERVICE_CACHE_SCHEMA_VERSION`` is a miss.
     """
 
     service_key: ServiceKey
     reference: ServiceReference
     retrieved_at: datetime
+    connector: ConnectorRef
     schema_version: int = Field(default=SERVICE_CACHE_SCHEMA_VERSION, ge=0)
+
+
+class ResolvedService(_StrictModel):
+    """A resolved service plus its provenance — the envelope the resolver returns.
+
+    ``retrieved_at`` is when the connector RESOLVED the service (a cache hit
+    carries the cached timestamp, a live call the moment of the call), never
+    ``reference.discovered_at`` (when the page was first discovered): using
+    discovery time for freshness would misstate when the service was measured.
+    ``from_cache`` and ``connector`` let the batch builder set a correct
+    ``Freshness`` and report the connector even after a cache hit.
+    """
+
+    reference: ServiceReference
+    retrieved_at: datetime
+    from_cache: bool
+    connector: ConnectorRef
 
 
 class ServiceCacheFile(_StrictModel):

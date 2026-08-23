@@ -8,8 +8,12 @@ from typing import Any
 
 from pydantic import BaseModel, ConfigDict, Field
 
-from treasureiq.catalog.contracts import AccessMode, FreshnessStatus, Surface
+from treasureiq.catalog.contracts import AccessMode, ConnectorRef, FreshnessStatus, Surface
 from treasureiq.catalog.service_contracts import ServiceReference
+
+# ``ConnectorRef`` moved to ``contracts`` to break an import cycle (service
+# contracts now reference it); re-exported here for its historical callers.
+__all__ = ["ConnectorRef"]  # not exhaustive: only the moved symbol, for clarity
 
 
 class _StrictModel(BaseModel):
@@ -69,11 +73,6 @@ class TransportMeta(_StrictModel):
     requests: int = Field(default=0, ge=0)
     bytes: int = Field(default=0, ge=0)
     from_cache: bool = False
-
-
-class ConnectorRef(_StrictModel):
-    name: str = Field(min_length=1)
-    version: str = Field(min_length=1)
 
 
 class DataBatch(_StrictModel):

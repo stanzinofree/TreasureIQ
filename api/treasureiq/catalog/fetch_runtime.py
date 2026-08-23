@@ -16,12 +16,13 @@ Sequenza per ogni fetch (l'ordine chiesto dalla review):
 
 from __future__ import annotations
 
+import threading
 import time
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from typing import Callable
 
-from treasureiq.catalog.fetch_policy import PoliticaFetch
+from treasureiq.catalog.fetch_policy import PoliticaFetch, dominio_di
 from treasureiq.ingest.host_guard import fetch_guardato
 
 
@@ -79,3 +80,57 @@ class EsecutoreFetch:
         fetched = fetch_guardato(url, **fetch_kwargs)  # type: ignore[arg-type]
         self._politica.registra(url, self._orologio())
         return EsitoFetch(consentito=True, fetched=fetched, motivo=decisione.motivo)
+
+
+class EsecutoreFetchSerializzato(EsecutoreFetch):
+    """`EsecutoreFetch` thread-safe per il coordinatore di processo (D-S5-10).
+
+    La chat chiama il resolver via `asyncio.to_thread`: più richieste possono
+    usare lo **stesso** esecutore in parallelo. `PoliticaFetch` non ha lock, così
+    due thread potrebbero entrambi vedere lo slot «disponibile» prima che l'altro
+    registri, e il rate-limit resterebbe dichiarato ma non rispettato.
+
+    Contratto:
+    - un **lock globale** protegge SOLO la lookup/creazione del lock di dominio,
+      poi viene rilasciato subito — non è mai tenuto durante sleep o I/O, quindi
+      non serializza domini diversi;
+    - il **lock del singolo dominio** avvolge l'INTERA sequenza
+      *decidi → sleep → fetch → registra*: nessun altro thread può decidere lo
+      stesso slot mentre questo lo sta consumando (niente doppia decisione);
+    - domini **diversi** hanno lock diversi e procedono in parallelo.
+
+    Vive solo qui, nel coordinatore: il percorso sweep resta single-thread e
+    non paga alcun lock.
+    """
+
+    def __init__(
+        self,
+        politica: PoliticaFetch,
+        *,
+        orologio: Callable[[], datetime] = _ora_utc,
+        dormi: Callable[[float], None] = time.sleep,
+    ) -> None:
+        super().__init__(politica, orologio=orologio, dormi=dormi)
+        self._lock_globale = threading.Lock()
+        self._lock_dominio: dict[str, threading.Lock] = {}
+
+    def _lock_per(self, url: str) -> threading.Lock:
+        dominio = dominio_di(url)
+        # Lock globale tenuto solo per la lookup: creato una volta, poi rilasciato.
+        with self._lock_globale:
+            lock = self._lock_dominio.get(dominio)
+            if lock is None:
+                lock = threading.Lock()
+                self._lock_dominio[dominio] = lock
+            return lock
+
+    def esegui(
+        self, url: str, *, fallimenti_consecutivi: int = 0, **fetch_kwargs: object
+    ) -> EsitoFetch:
+        lock = self._lock_per(url)
+        # Il lock di dominio copre decidi→sleep→fetch→registra: lo slot deciso da
+        # questo thread non è consumato da un altro prima della registrazione.
+        with lock:
+            return super().esegui(
+                url, fallimenti_consecutivi=fallimenti_consecutivi, **fetch_kwargs
+            )

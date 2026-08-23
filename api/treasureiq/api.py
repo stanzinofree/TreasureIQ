@@ -806,6 +806,31 @@ class AzioneOut(BaseModel):
     etichetta: str = "Apri"
 
 
+class ServiceLinkOut(BaseModel):
+    """Un'opzione di accesso al servizio (Ramo 3, Slice 5).
+
+    `label` è fissa/derivata dal tipo; `authentication` è popolato solo
+    sull'opzione autenticata."""
+
+    url: str
+    label: str
+    authentication: list[str] = []
+
+
+class ServiceOut(BaseModel):
+    """Le opzioni tipizzate di un servizio comunale, senza appiattirle (§1.5).
+
+    La UI presenta distintamente pagina informativa, moduli scaricabili e
+    procedura online; l'indicazione di autenticazione compare solo su
+    quest'ultima."""
+
+    service_id: str
+    title: str
+    information: ServiceLinkOut | None
+    downloads: list[ServiceLinkOut] = []
+    authenticated_online: list[ServiceLinkOut] = []
+
+
 class InfoOut(BaseModel):
     """The INFORMAZIONE rail's payload (D-19): document/office/coverage plus
     the deterministic diagnosis/cost/web blocks `chat.respond` composed from
@@ -836,6 +861,9 @@ class InfoOut(BaseModel):
     # (nothing to count the segnalazione against).
     codice_istat: str | None
     ente: str | None
+    #: Le opzioni di un servizio comunale (Ramo 3, Slice 5). `None` fuori dal
+    #: ramo MODULISTICA.
+    service: ServiceOut | None = None
 
 
 class SourceAccessOut(BaseModel):
@@ -1012,6 +1040,41 @@ def to_info_out(info: InfoAnswer) -> InfoOut:
         ],
         codice_istat=target[0] if target is not None else None,
         ente=target[1] if target is not None else None,
+        service=(
+            ServiceOut(
+                service_id=info.service.service_id,
+                title=info.service.title,
+                information=(
+                    ServiceLinkOut(
+                        url=info.service.information.url,
+                        label=info.service.information.label,
+                        authentication=[
+                            m.value for m in info.service.information.authentication
+                        ],
+                    )
+                    if info.service.information is not None
+                    else None
+                ),
+                downloads=[
+                    ServiceLinkOut(
+                        url=link.url,
+                        label=link.label,
+                        authentication=[m.value for m in link.authentication],
+                    )
+                    for link in info.service.downloads
+                ],
+                authenticated_online=[
+                    ServiceLinkOut(
+                        url=link.url,
+                        label=link.label,
+                        authentication=[m.value for m in link.authentication],
+                    )
+                    for link in info.service.authenticated_online
+                ],
+            )
+            if info.service is not None
+            else None
+        ),
     )
 
 

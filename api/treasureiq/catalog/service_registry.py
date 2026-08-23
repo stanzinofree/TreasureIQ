@@ -25,7 +25,14 @@ import threading
 from treasureiq.catalog.connector_registry import ConnectorRegistry
 from treasureiq.catalog.fetch_policy import PoliticaFetch
 from treasureiq.catalog.fetch_runtime import EsecutoreFetch, EsecutoreFetchSerializzato
-from treasureiq.catalog.service_connectors.esecutore_fetcher import EsecutoreServiceFetcher
+from treasureiq.catalog.service_connectors.comweb_service import (
+    ComWebServiceConnector,
+    _ComWebDiscovery,
+)
+from treasureiq.catalog.service_connectors.esecutore_fetcher import (
+    EsecutoreServiceFetcher,
+    _WpDiscovery,
+)
 from treasureiq.catalog.service_connectors.wordpress_agid import (
     WordPressAgidServiceConnector,
 )
@@ -47,7 +54,11 @@ def default_service_registry(esecutore: EsecutoreFetch) -> ConnectorRegistry:
     un esecutore/fetcher stub → nessuna rete.
     """
     reg = ConnectorRegistry()
-    reg.register(WordPressAgidServiceConnector(EsecutoreServiceFetcher(esecutore)))
+    # Un transport comune (rete + host guard + rate-limit), una strategia di
+    # discovery per famiglia (§3.2): il connettore riceve il fetcher composto.
+    transport = EsecutoreServiceFetcher(esecutore)
+    reg.register(WordPressAgidServiceConnector(transport.con(_WpDiscovery())))
+    reg.register(ComWebServiceConnector(transport.con(_ComWebDiscovery())))
     return reg
 
 

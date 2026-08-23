@@ -25,7 +25,7 @@ def _record(service_id: str, opzione: ServiceAccessOption) -> dict:
     """Una riga tipizzata per opzione (D-S5-3), col ``service_id`` esplicito.
 
     Nessun campo dedotto dal titolo: il ``service_id`` è quello della reference
-    (``{source_id}:wp:{wordpress_id}``), l'URL è già validato in Slice 4.
+    (``{source_id}:{platform}:{native_id}``), l'URL è già validato a monte.
     """
     return {
         "service_id": service_id,

@@ -263,11 +263,23 @@ service_reference_batch(ResolvedService(reference=reference2, ...), request)
    combaciante** (G7), e **idempotenza** (doppio merge = singolo).
 9. **Read-time, no write.** Il merge non tocca il file di cache (G5): mtime/
    contenuto invariati.
-10. **Smoke reale Albano.** `modulo carta d'identità`: oggi la pagina CIE ha
-    solo `INFORMATION` (nessun `AUTHENTICATED_ONLINE`) → il merge è identità
-    (nessun portale associato). Serve un comune la cui pagina servizio linki
-    davvero il portale telematico per esercitare il ramo di arricchimento —
-    **da individuare nella flotta** (candidato onesto, non forzato).
+10. **Smoke reale.** ESEGUITO. Albano (`058003`): 2 servizi risolti su disco,
+    3 opzioni, `0` `AUTHENTICATED_ONLINE` → merge identità; file cache
+    byte/mtime invariati; G7 (source_id diverso) identità — su dati reali.
+    Sweep live su 4 comuni WP/AgID (Capannori, Perugia, Senigallia, Gallarate):
+    SP discovery reale OK (sportelli telematici, SSO area riservata trovati),
+    wiring `resolve→merge` live senza errori, ma i servizi risolti espongono
+    **solo `INFORMATION`+`DOWNLOAD`** → merge identità, `0` casi di arricchimento.
+
+    **Finding strutturale.** Il tema **WP/AgID Design Comuni** disaccoppia la
+    pagina servizio (informativa: descrizione + PDF) dall'**hub autenticato**
+    (lo sportello telematico, scoperto come SP) che **non** è linkato
+    per-servizio. Quindi l'evidenza per-link (§2) è strutturalmente rara nella
+    flotta WP/AgID — stesso motivo per cui Albano è identità. Il ramo di
+    arricchimento resta corretto (golden test) ma senza trigger naturale finché
+    non emerge un comune WP che linka il portale per-servizio, o finché il
+    connettore BASE non copre una famiglia (Municipium/URBI) le cui schede
+    embeddano il link autenticato per-servizio (slice futura).
 
 ---
 

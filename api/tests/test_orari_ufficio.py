@@ -110,6 +110,36 @@ def test_cache_stantia_rilegge(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) 
     assert len(chiamate) == 2  # cache scaduta → seconda lettura
 
 
+def test_cache_versione_vecchia_rilegge(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    # Una voce fresca ma di versione più bassa (prodotta prima degli estrattori
+    # indirizzo/responsabile) non va servita: manca i campi nuovi (Codex P1).
+    monkeypatch.setattr(ou, "LIVE_DIR", tmp_path)
+    chiamate: list[str] = []
+    monkeypatch.setattr(
+        ou, "fetch_guardato", _stub_fetch("<div>Orari: martedì 9-12</div>", chiamate=chiamate)
+    )
+    # Scrivo a mano una voce fresca ma con versione 0 (pre-Ramo 1).
+    stantia = ou.OrariUfficio(
+        codice_istat="058003",
+        slug=ou._slug_da_url(URL_UFFICIO),
+        url=URL_UFFICIO,
+        orari="Orari: martedì 9-12",
+        orario_schema=None,
+        versione=0,
+        letto_il=__import__("datetime").datetime.now(
+            __import__("datetime").timezone.utc
+        ).isoformat(),
+    )
+    ou._in_cache(stantia)
+    # Deve rileggere (versione < VERSIONE_ESTRATTORI), non servire la voce stantia.
+    voce = ou.leggi_orari_ufficio(codice_istat="058003", url=URL_UFFICIO)
+    assert voce is not None
+    assert voce.versione == ou.VERSIONE_ESTRATTORI
+    assert len(chiamate) == 1
+
+
 # --- wiring del rail informazione ---------------------------------------
 
 
@@ -145,10 +175,15 @@ def test_office_da_ufficio_nominato_sostituisce_urp(monkeypatch: pytest.MonkeyPa
         testo_grezzo="lunedì 9:00-12:00",
         reso="Lunedì: 9:00–12:00",
     )
+    # La lettura scheda-dettaglio vive ora in `ufficio_dettaglio` (drill→v1):
+    # è lì che `arricchisci_ufficio` chiama `leggi_orari_ufficio`, quindi è lì
+    # il seam da sostituire.
+    import treasureiq.ufficio_dettaglio as ud
+
     monkeypatch.setattr(
-        respond,
+        ud,
         "leggi_orari_ufficio",
-        lambda *, codice_istat, url: ou.OrariUfficio(
+        lambda *, codice_istat, url, piattaforma=None: ou.OrariUfficio(
             codice_istat=codice_istat,
             slug="ufficio-anagrafe-e-leva",
             url=url,
@@ -167,11 +202,13 @@ def test_office_da_ufficio_nominato_sostituisce_urp(monkeypatch: pytest.MonkeyPa
         )
     )
     assert office is not None
-    assert office.nome == "Ufficio Anagrafe e Leva"
+    assert office.office.nome == "Ufficio Anagrafe e Leva"
     # Card: forma normalizzata; fonte: citazione verbatim affiancata (D-07).
-    assert office.orari == "Lunedì: 9:00–12:00"
-    assert office.orari_fonte == "lunedì 9:00-12:00"
-    assert office.telefono == "06 12345"
+    assert office.office.orari == "Lunedì: 9:00–12:00"
+    assert office.office.orari_fonte == "lunedì 9:00-12:00"
+    assert office.office.telefono == "06 12345"
+    assert office.data_batches
+    assert office.query_plan is not None
 
 
 def test_office_da_ufficio_nominato_letterale_vince_su_sinonimi_ambigui(
@@ -203,9 +240,11 @@ def test_office_da_ufficio_nominato_letterale_vince_su_sinonimi_ambigui(
         endpoints={},
     )
     monkeypatch.setattr(respond.connettore, "leggi_connettore", lambda istat: esito)
+    import treasureiq.ufficio_dettaglio as ud
+
     monkeypatch.setattr(
-        respond, "leggi_orari_ufficio",
-        lambda *, codice_istat, url: ou.OrariUfficio(
+        ud, "leggi_orari_ufficio",
+        lambda *, codice_istat, url, piattaforma=None: ou.OrariUfficio(
             codice_istat=codice_istat, slug="s", url=url,
             orari="Orari: lunedì 9-12", letto_il="2026-08-12T00:00:00+00:00",
         ),
@@ -216,7 +255,7 @@ def test_office_da_ufficio_nominato_letterale_vince_su_sinonimi_ambigui(
             ufficio_chiesto="anagrafe", disabilita_attiva=False,
         )
     )
-    assert office is not None and office.nome == "Ufficio Anagrafe e Leva"
+    assert office is not None and office.office.nome == "Ufficio Anagrafe e Leva"
 
 
 def test_office_da_ufficio_nominato_none_se_connettore_muto(

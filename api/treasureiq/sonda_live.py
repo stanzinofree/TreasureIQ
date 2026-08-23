@@ -29,13 +29,11 @@ promosso a dato del progetto (D-34).
 
 from __future__ import annotations
 
-import json
 import logging
 import os
 import re
 import unicodedata
 from datetime import datetime, timezone
-from functools import lru_cache
 from pathlib import Path
 
 from pydantic import BaseModel
@@ -48,6 +46,12 @@ from treasureiq.ingest.censimento import (
     censisci_comune,
 )
 from treasureiq.integration import DATA_DIR
+from treasureiq.municipality_registry import (
+    FrameInvalidError,
+    FrameIOError,
+    MunicipalityRecord,
+    get_registry,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -107,28 +111,6 @@ def _norm(testo: str) -> str:
     return re.sub(r"\s+", " ", piatto).strip()
 
 
-@lru_cache(maxsize=1)
-def _indice() -> dict[str, list[ComuneNoto]]:
-    """I comuni italiani indicizzati per nome normalizzato.
-
-    Lista e non singolo record perché gli omonimi esistono davvero — Castro
-    sta in Puglia e in Lombardia, San Teodoro in Sardegna e in Sicilia. Un
-    dizionario nome→comune ne farebbe sparire uno in silenzio, e chi ci vive
-    riceverebbe le informazioni dell'altro.
-    """
-    if not COMUNI_ISTAT_PATH.exists():
-        logger.warning("comuni-istat.json assente: la sonda live è disattivata")
-        return {}
-    grezzo = json.loads(COMUNI_ISTAT_PATH.read_text("utf-8"))
-    indice: dict[str, list[ComuneNoto]] = {}
-    for riga in grezzo:
-        comune = ComuneNoto.model_validate(riga)
-        for chiave in {_norm(comune.nome), _senza_parole_vuote(comune.nome)}:
-            if chiave:
-                indice.setdefault(chiave, []).append(comune)
-    return indice
-
-
 def _senza_parole_vuote(testo: str) -> str:
     """La forma in cui un cittadino scrive un nome ufficiale."""
     return " ".join(t for t in _norm(testo).split() if t not in _PAROLE_VUOTE)
@@ -155,8 +137,11 @@ def cerca_comuni(query: str, *, limite: int = 8) -> list[ComuneNoto]:
         return []
     compatta = _senza_parole_vuote(ripulita)
 
-    trovati: dict[str, tuple[int, str, ComuneNoto]] = {}
-    for comune in _tutti():
+    registry = _registry()
+    if registry is None:
+        return []
+    trovati: dict[str, tuple[int, str, MunicipalityRecord]] = {}
+    for comune in registry.frame.tutti():
         nome = _norm(comune.nome)
         senza = _senza_parole_vuote(comune.nome)
         if chiave in (nome, senza) or compatta in (nome, senza):
@@ -172,17 +157,49 @@ def cerca_comuni(query: str, *, limite: int = 8) -> list[ComuneNoto]:
             trovati[comune.codice_istat] = (rango, nome, comune)
 
     ordinati = sorted(trovati.values(), key=lambda t: (t[0], t[1]))
-    return [comune for _, _, comune in ordinati[:limite]]
+    return [_a_comune_noto(comune) for _, _, comune in ordinati[:limite]]
 
 
-@lru_cache(maxsize=1)
 def _tutti() -> list[ComuneNoto]:
-    """Tutti i comuni, in ordine di codice: la base della ricerca testuale."""
-    visti: dict[str, ComuneNoto] = {}
-    for gruppo in _indice().values():
-        for comune in gruppo:
-            visti.setdefault(comune.codice_istat, comune)
-    return sorted(visti.values(), key=lambda c: c.codice_istat)
+    """Tutti i comuni, wrapper non cachato per i consumatori legacy."""
+    registry = _registry()
+    if registry is None:
+        return []
+    return [_a_comune_noto(record) for record in registry.frame.tutti()]
+
+
+_warned_frame_io = False
+_warned_frame_invalid = False
+
+
+def _registry():
+    """Registry condiviso; i fallimenti degradano senza cache locali duplicate."""
+    global _warned_frame_io, _warned_frame_invalid
+    try:
+        return get_registry(COMUNI_ISTAT_PATH)
+    except FrameIOError:
+        if not _warned_frame_io:
+            logger.warning("comuni-istat.json assente/illeggibile: la sonda live è disattivata")
+            _warned_frame_io = True
+        return None
+    except FrameInvalidError as exc:
+        if not _warned_frame_invalid:
+            codici = ", ".join(sorted({issue.code for issue in exc.report.blocking}))
+            logger.error("comuni-istat.json invalido: %s", codici)
+            _warned_frame_invalid = True
+        return None
+
+
+def _a_comune_noto(record: MunicipalityRecord | None) -> ComuneNoto | None:
+    if record is None:
+        return None
+    return ComuneNoto(
+        codice_istat=record.codice_istat,
+        nome=record.nome,
+        provincia=record.provincia,
+        regione=record.regione,
+        sito=record.sito,
+    )
 
 
 def comune_per_codice(codice_istat: str | None) -> ComuneNoto | None:
@@ -194,7 +211,10 @@ def comune_per_codice(codice_istat: str | None) -> ComuneNoto | None:
     """
     if not codice_istat:
         return None
-    return next((c for c in _tutti() if c.codice_istat == codice_istat), None)
+    registry = _registry()
+    if registry is None:
+        return None
+    return _a_comune_noto(registry.comune_per_codice(codice_istat))
 
 
 def risolvi_comune(hint: str | None) -> ComuneNoto | None:
@@ -212,38 +232,10 @@ def risolvi_comune(hint: str | None) -> ComuneNoto | None:
     if not tokens:
         return None
 
-    indice = _indice()
-    trovati: list[ComuneNoto] = []
-    # Sequenze più lunghe per prime: "Reggio nell'Emilia" prima di "Reggio".
-    for lunghezza in range(min(len(tokens), 4), 0, -1):
-        for inizio in range(len(tokens) - lunghezza + 1):
-            if inizio > 0 and tokens[inizio - 1] in _PREFISSI_TOPONIMO:
-                # "San Marino" non è Marino. Il token che precede fa parte del
-                # toponimo, quindi questa non è una corrispondenza: è il
-                # troncamento di un nome più lungo che non conosciamo.
-                continue
-            finestra = tokens[inizio : inizio + lunghezza]
-            chiave = " ".join(finestra)
-            # Chi scrive "monte rotondo" o "San Remo" spezza un nome che è una
-            # sola parola nell'indice ("Monterotondo", "Sanremo"). La chiave
-            # compatta (senza spazi) recupera solo questi casi: match esatto sul
-            # nome intero concatenato, mai una sottostringa — non introduce
-            # omonimi che il match a token non troverebbe già.
-            chiave_compatta = "".join(finestra) if lunghezza > 1 else None
-            if chiave in indice:
-                trovati = indice[chiave]
-            elif chiave_compatta and chiave_compatta in indice:
-                trovati = indice[chiave_compatta]
-            else:
-                continue
-            break
-        if trovati:
-            break
-
-    # Un solo comune, oppure niente. Fra due omonimi — Castro in Puglia e in
-    # Lombardia — la risposta giusta è chiedere quale, non sceglierne uno.
-    unici = {c.codice_istat: c for c in trovati}
-    return next(iter(unici.values())) if len(unici) == 1 else None
+    registry = _registry()
+    if registry is None:
+        return None
+    return _a_comune_noto(registry.risolvi_comune(hint))
 
 
 class OrariLive(BaseModel):

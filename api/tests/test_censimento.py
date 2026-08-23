@@ -198,6 +198,26 @@ def test_censisci_molti_salva_a_blocchi(monkeypatch):
     assert blocchi == [3, 3, 1], "il resto in coda va salvato anche se sotto soglia"
 
 
+def test_sweep_con_db_attiva_catalogo_accanto_allo_storico(monkeypatch, tmp_path):
+    """Lo sweep standard non deve più richiedere un import manuale del catalogo."""
+    from treasureiq.ingest import censimento
+
+    catturato = {}
+    monkeypatch.setattr(censimento, "_raccogli", lambda args: [])
+    monkeypatch.setattr(censimento, "_anagrafe", lambda: {})
+
+    def registra(esiti, **kwargs):
+        catturato.update(kwargs)
+        return 0
+
+    monkeypatch.setattr(censimento, "_registra", registra)
+
+    assert censimento.main(["--db", str(tmp_path / "storico.db"), "--json"]) == 0
+    assert catturato["catalog_output"] == tmp_path / "catalog"
+    assert catturato["measurement_id"].startswith("sweep-")
+    assert catturato["measured_at"].tzinfo is not None
+
+
 def test_meta_refresh_riconosciuto_come_cartello():
     """Sessantacinque comuni campani risultavano senza alcuna firma: la loro
     home e' un documento di 179 byte con dentro
@@ -319,21 +339,21 @@ def test_limite_modello_ferma_il_ciclo_e_dice_quando_riprovare(monkeypatch):
 
 
 def test_limite_modello_separa_i_chiamanti(monkeypatch):
-    """Limitare per solo IP punirebbe piu' persone dietro lo stesso ufficio o
-    la stessa rete mobile: la sessione, quando c'e', viene prima."""
+    """Il limite anonimo è per indirizzo quando non esiste una sessione."""
     from treasureiq import api
+    from fastapi import HTTPException
 
     monkeypatch.setattr(api, "LIMITE_MODELLO", 1)
     api._chiamate_modello.clear()
 
     class Richiesta:
-        def __init__(self, cookie):
-            self.cookies = {api.SESSION_COOKIE: cookie} if cookie else {}
-            self.client = type("c", (), {"host": "203.0.113.7"})()
+        cookies = {}
+        client = type("c", (), {"host": "203.0.113.7"})()
 
-    api.limita_modello(Richiesta("alice"))
-    # Un'altra sessione dallo stesso indirizzo non deve essere bloccata.
-    api.limita_modello(Richiesta("bruno"))
+    api.limita_modello(Richiesta())
+    with pytest.raises(HTTPException) as errore:
+        api.limita_modello(Richiesta())
+    assert errore.value.status_code == 429
 
 
 # --- Amministrazione Trasparente: firme + discovery (ciclo 16, brief B3) ---
@@ -747,3 +767,108 @@ def test_impronta_registra_non_trovata_onestamente(monkeypatch):
 
     assert esito["piattaforma_at"] == Piattaforma.NON_TROVATA.value
     assert esito["at_url"] is None
+
+
+def test_impronta_ricade_su_da_impronta_quando_il_seam_non_riconosce(monkeypatch):
+    """M2 (Fase 1 strangler): `_impronta` ora riconosce BASE tramite il seam
+    del registry (`firma_da_registro`), ma il fallback statistico
+    `da_impronta` — invariato — deve continuare a scattare quando il seam
+    risponde IGNOTA.
+
+    La home qui sotto non dichiara niente di primario (nessun header spia,
+    nessun generator, nessun host di prodotto noto): sia il classificatore
+    legacy sia il seam del registry la mancano onestamente. Le cartelle degli
+    asset ("argomenti", "content", "extension") sono però la firma silenziosa
+    di OpenPA in `piattaforma._DA_IMPRONTA` — un segnale che SOLO il fallback
+    statistico legge, non il seam (vedi il commento in `_impronta`). Se questo
+    test fallisce con `piattaforma is Piattaforma.IGNOTA`, il fallback si è
+    rotto durante la migrazione a M2.
+    """
+    from treasureiq.catalog.contracts import Surface
+    from treasureiq.catalog.recognition_adapter import firma_da_registro
+    from treasureiq.ingest import censimento
+    from treasureiq.ingest.piattaforma import Piattaforma, classifica_risposta
+
+    html_home = (
+        '<html><head>'
+        '<link href="/content/style.css" rel="stylesheet">'
+        '<script src="/extension/main.js"></script>'
+        "</head><body>"
+        '<a href="/argomenti/pagina">x</a>'
+        "</body></html>"
+    )
+
+    # Presupposto del test, non il suo obiettivo: sia la via legacy sia il
+    # seam mancano questa home (nessuna firma primaria, solo la traccia
+    # statistica nelle cartelle).
+    assert (
+        classifica_risposta(headers={}, html=html_home, includi_at=False).vincitore.piattaforma
+        is Piattaforma.IGNOTA
+    )
+    assert (
+        firma_da_registro(
+            headers={}, html=html_home, surface=Surface.ORDINARY_DATA,
+            source_id="https://comune.esempio.it", entrypoint_url="https://comune.esempio.it",
+        ).piattaforma
+        is Piattaforma.IGNOTA
+    )
+
+    class _RispostaFinta:
+        text = html_home
+        headers: dict = {}
+        status_code = 200
+        url = "https://comune.esempio.it"
+
+    class _SondaFinta:
+        richieste = 1
+
+        def risposta(self, url: str):
+            return _RispostaFinta()
+
+    esito = censimento._impronta(sonda=_SondaFinta(), base="https://comune.esempio.it")
+
+    assert esito["piattaforma"] is Piattaforma.OPENPA
+    assert esito["piattaforma_prova"] is not None
+    assert "impronta:" in esito["piattaforma_prova"]
+
+
+def test_impronta_passa_codice_istat_come_source_id(monkeypatch):
+    """Fix P2 (review Codex 11954a9): il contratto `RecognitionObservation`
+    vuole in `source_id` l'identità stabile della fonte — il codice ISTAT del
+    comune — non l'URL osservato (che resta solo `entrypoint_url`). Coerente con
+    discovery e confirmation, così il risultato è correlabile al comune.
+    """
+    from treasureiq.catalog import recognition_adapter
+    from treasureiq.ingest import censimento
+    from treasureiq.ingest.piattaforma import Firma, Piattaforma
+
+    catturati: dict = {}
+
+    def _spia(**kwargs):
+        catturati.update(kwargs)
+        return Firma(piattaforma=Piattaforma.IGNOTA, prova=None)
+
+    # `_impronta` importa `firma_da_registro` localmente dal modulo adapter
+    # (import locale = evita il ciclo catalog→censimento), quindi la spia va
+    # messa sulla sorgente, non sull'attributo di modulo di censimento.
+    monkeypatch.setattr(recognition_adapter, "firma_da_registro", _spia)
+
+    class _RispostaFinta:
+        text = "<html></html>"
+        headers: dict = {}
+        status_code = 200
+        url = "https://comune.esempio.it/home"
+
+    class _SondaFinta:
+        richieste = 1
+
+        def risposta(self, url: str):
+            return _RispostaFinta()
+
+    censimento._impronta(
+        sonda=_SondaFinta(), base="https://comune.esempio.it",
+        codice_istat="058003",
+    )
+
+    assert catturati["source_id"] == "058003"
+    assert catturati["entrypoint_url"] == "https://comune.esempio.it/home"

@@ -560,6 +560,37 @@ a {
   max-width: none;
 }
 
+.conversation-cookie-banner {
+  position: fixed;
+  left: 50%;
+  bottom: var(--ma-3);
+  z-index: 70;
+  display: flex;
+  align-items: center;
+  gap: var(--ma-3);
+  width: min(720px, calc(100vw - 2 * var(--ma-3)));
+  transform: translateX(-50%);
+  padding: var(--ma-3) var(--ma-4);
+  border: 1.5px solid var(--kasumi);
+  border-radius: var(--radius);
+  background: var(--paper-raised);
+  color: var(--sumi);
+  box-shadow: var(--elev-2);
+  font-size: 0.86rem;
+}
+
+.conversation-cookie-banner .button {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .conversation-cookie-banner {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
 /* ----------------------------------------------------------- readiness */
 
 .dimension {
@@ -1249,31 +1280,6 @@ a {
   margin: 0 0 var(--ma-4);
 }
 
-/* ------------------------------------------------------------ SPID entry */
-
-/* A visible but non-pushy way to reach the mock identity picker outside of
-   the mid-conversation escalation. Text-button styling: it must never look
-   as authoritative as a real SPID/CIE button on a real PA site. */
-.spid-entry {
-  text-align: center;
-  margin-top: var(--ma-2);
-}
-
-.spid-entry__button {
-  font-family: var(--font-body);
-  font-size: 0.86rem;
-  color: var(--sumi-faint);
-  background: none;
-  border: none;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  cursor: pointer;
-  padding: var(--ma-2);
-}
-.spid-entry__button:hover {
-  color: var(--ai);
-}
-
 /* --------------------------------------------------------------- status pill */
 
 .status-pill {
@@ -1717,6 +1723,41 @@ a {
   font-weight: 600;
 }
 
+/* Ramo 3, Slice 5 — la scheda del servizio risolto dal connettore. Tre porte
+   DISTINTE (pagina informativa, modulo, procedura online); l'autenticazione è
+   un'informazione mostrata solo sulla procedura, mai un'azione di TIQ. Registro
+   sobrio come il rail INFORMAZIONE: nessun sigillo, nessun bordo-verdetto. */
+.service-card {
+  display: grid;
+  gap: var(--ma-2);
+  padding: var(--ma-3);
+  background: var(--paper-raised);
+  border-left: var(--card-accent-w) solid var(--ai);
+  border-radius: var(--radius-sm);
+}
+
+.service-card__title {
+  font-weight: 600;
+  color: var(--sumi);
+}
+
+.service-card__links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--ma-1);
+}
+
+.service-card__link a {
+  font-weight: 600;
+}
+
+.service-card__auth {
+  color: var(--sumi-faint);
+  font-size: 0.82rem;
+}
+
 .info-answer__diagnosis {
   list-style: none;
   margin: 0;
@@ -1845,6 +1886,34 @@ a {
 .chat__row {
   display: flex;
   gap: var(--ma-3);
+}
+
+.chat__privacy-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 var(--ma-2) var(--ma-4);
+}
+
+.chat__forget {
+  border: 0;
+  background: transparent;
+  color: var(--sumi-soft);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.8rem;
+  padding: var(--ma-1) var(--ma-2);
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.chat__forget:hover,
+.chat__forget:focus-visible {
+  color: var(--sumi);
+}
+
+.chat__forget:disabled {
+  cursor: wait;
+  opacity: 0.55;
 }
 
 .chat__input {
@@ -2659,6 +2728,31 @@ a {
   height: 8px;
   border-radius: 50%;
   background: #2f7d4f;
+}
+
+/* Il colore segue il contratto di accesso, non la vecchia presenza di un
+   connettore: indiretto e non disponibile non sono stati di successo. */
+.badge-connettore-box[data-access-mode="indirect"] {
+  border-color: #e4d3a0;
+  border-left-color: #a47700;
+  background: #fff9e8;
+}
+.badge-connettore-box[data-access-mode="indirect"] .badge-connettore__pallino {
+  background: #a47700;
+}
+.badge-connettore-box[data-access-mode="indirect"] .badge-connettore__v {
+  color: #7a5900;
+}
+.badge-connettore-box[data-access-mode="unavailable"] {
+  border-color: #d7dce3;
+  border-left-color: #778191;
+  background: #f5f6f8;
+}
+.badge-connettore-box[data-access-mode="unavailable"] .badge-connettore__pallino {
+  background: #778191;
+}
+.badge-connettore-box[data-access-mode="unavailable"] .badge-connettore__v {
+  color: #4f5968;
 }
 
 /* Riga di stato tecnica: coppia etichetta·valore. Mono per la resa da «pannello
@@ -4473,6 +4567,38 @@ a {
 .civica__ufficio {
   margin: 0 0 var(--ma-2);
   font-weight: 600;
+}
+
+/* Chi risponde dell'ufficio: una riga di accountability sopra i recapiti, non
+ * un contatto fra gli altri — l'email personale non è quasi mai pubblicata,
+ * quindi di norma è nome + ruolo. */
+.civica__responsabile {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--ma-2);
+  margin: 0 0 var(--ma-2);
+  font-size: 0.9rem;
+}
+
+.civica__responsabile-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--sumi-faint);
+}
+
+.civica__responsabile-nome {
+  font-weight: 600;
+}
+
+.civica__responsabile-ruolo {
+  color: var(--sumi-soft);
+}
+
+/* L'indirizzo è la sede fisica, in cifre come le scrive il comune. */
+.civica__indirizzo {
+  font-variant-numeric: tabular-nums;
 }
 
 .civica__contatti {

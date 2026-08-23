@@ -37,9 +37,11 @@ from urllib.parse import urlsplit
 from pydantic import BaseModel
 
 from treasureiq.alberatura import _decodifica_bytes
+from treasureiq.connettore import Responsabile
 from treasureiq.ingest.censimento import estrai_orari_da_testo
 from treasureiq.ingest.host_guard import fetch_guardato, host_senza_www
 from treasureiq.orari_schema import OrarioSettimanale, estrai_orario_strutturato
+from treasureiq.ufficio_estrattori import estrai_indirizzo, estrai_responsabile
 
 logger = logging.getLogger(__name__)
 
@@ -49,6 +51,14 @@ LIVE_DIR = Path(os.environ.get("TREASUREIQ_LIVE_DIR", "/live"))
 #: Un orario d'ufficio cambia di rado: una lettura vale a lungo. Oltre questa
 #: soglia la voce in cache è considerata stantia e si rilegge.
 GIORNI_VALIDITA = 6
+
+#: Versione degli estrattori applicati alla pagina. Va alzata ogni volta che
+#: cambia *cosa* estraiamo dallo stesso HTML (nuovo campo, nuova famiglia): una
+#: voce in cache scritta con una versione più bassa non ha i campi nuovi anche
+#: se la pagina li pubblica, quindi va riletta invece di servita stantia
+#: (default 0 sulle voci pre-versione → considerate da rileggere una volta).
+#: 1 = indirizzo + responsabile per famiglia (Ramo 1).
+VERSIONE_ESTRATTORI = 1
 
 #: Tetto sui byte scaricati dalla pagina dell'ufficio (guardia, non un dato).
 MAX_BYTES_PAGINA = 2_000_000
@@ -72,6 +82,19 @@ class OrariUfficio(BaseModel):
     #: `orari` resta la fonte verbatim; `orario_schema.reso` è la forma pulita.
     #: Nominato `orario_schema` e non `schema` per non oscurare `BaseModel.schema`.
     orario_schema: OrarioSettimanale | None = None
+    #: L'indirizzo della sede e il responsabile letti dalla scheda-dettaglio,
+    #: dove la famiglia li pubblica strutturati (estrattori per famiglia).
+    #: Additivi e opzionali come `orario_schema`: le voci in cache scritte prima
+    #: di questi campi restano valide (default `None`). `indirizzo` = sede
+    #: dell'ente ospitante (non esclusiva dell'ufficio); `responsabile.email`
+    #: resta sempre `None` (mai pubblicata dai portali).
+    indirizzo: str | None = None
+    responsabile: Responsabile | None = None
+    #: La versione degli estrattori con cui è stata prodotta questa voce. Una
+    #: voce scritta con `versione < VERSIONE_ESTRATTORI` non ha i campi introdotti
+    #: dopo, quindi `_da_cache` la scarta e rilegge (default 0: le voci scritte
+    #: prima di questo campo sono considerate da rileggere una volta).
+    versione: int = 0
     letto_il: str
 
 
@@ -103,6 +126,11 @@ def _da_cache(codice_istat: str, slug: str) -> OrariUfficio | None:
         return None
     if datetime.now(timezone.utc) - letto > timedelta(days=GIORNI_VALIDITA):
         return None
+    if voce.versione < VERSIONE_ESTRATTORI:
+        # Voce fresca ma prodotta da estrattori più vecchi: non ha i campi
+        # introdotti dopo (indirizzo/responsabile). Rileggerla una volta è più
+        # onesto che servire un buco fino alla scadenza (Codex P1).
+        return None
     return voce
 
 
@@ -121,7 +149,12 @@ def _in_cache(voce: OrariUfficio) -> None:
 
 
 def leggi_orari_ufficio(
-    *, codice_istat: str, url: str, usa_cache: bool = True, timeout: float = 6.0
+    *,
+    codice_istat: str,
+    url: str,
+    piattaforma: str | None = None,
+    usa_cache: bool = True,
+    timeout: float = 6.0,
 ) -> OrariUfficio | None:
     """L'orario pubblicato nella pagina di un ufficio nominato, citato verbatim.
 
@@ -152,6 +185,8 @@ def leggi_orari_ufficio(
 
     orari: str | None = None
     schema: OrarioSettimanale | None = None
+    indirizzo: str | None = None
+    responsabile: Responsabile | None = None
     try:
         esito = fetch_guardato(
             url, timeout=timeout, max_bytes=MAX_BYTES_PAGINA, host_atteso=host_atteso
@@ -168,6 +203,10 @@ def leggi_orari_ufficio(
             # mostrare e non solo la forma normalizzata.
             if orari is None and schema is not None:
                 orari = schema.testo_grezzo
+            # Stessa pagina, nessuna seconda fetch: gli estrattori per famiglia
+            # leggono indirizzo e responsabile dallo stesso HTML già scaricato.
+            indirizzo = estrai_indirizzo(pagina, piattaforma=piattaforma)
+            responsabile = estrai_responsabile(pagina, piattaforma=piattaforma)
     except Exception:  # noqa: BLE001 — risorsa muta: esito negativo, mai un crash
         logger.info("lettura orari-ufficio fallita: %s", url)
 
@@ -177,6 +216,9 @@ def leggi_orari_ufficio(
         url=url,
         orari=orari,
         orario_schema=schema,
+        indirizzo=indirizzo,
+        responsabile=responsabile,
+        versione=VERSIONE_ESTRATTORI,
         letto_il=datetime.now(timezone.utc).isoformat(),
     )
     _in_cache(voce)

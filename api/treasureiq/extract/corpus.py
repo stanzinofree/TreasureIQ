@@ -32,6 +32,8 @@ from urllib.parse import urlparse
 import httpx
 
 from treasureiq.extract.llm import Segment
+from treasureiq.extract.ocr import build_ocr_plan
+from treasureiq.extract.pdf_inspection import InspectionRoute, inspect_pdf_bytes
 from treasureiq.mappa_connettore import _host_senza_www
 from treasureiq.schema import PdfSkip
 
@@ -62,7 +64,9 @@ def collect_pdf_segments(
     client: httpx.Client,
     base_url: str,
     pdf_urls: list[str],
-) -> tuple[list[dict[str, Any]], list[str], list[PdfSkip], int]:
+    *,
+    inspector: Any | None = None,
+) -> tuple[list[dict[str, Any]], list[str], list[PdfSkip], int, int]:
     """Download and extract text from up to `MAX_PDFS_PER_PAGE` attachments.
 
     `pypdf` is imported lazily (only pages that actually link a PDF pay this
@@ -71,28 +75,45 @@ def collect_pdf_segments(
     unreadable — is logged and returned as a human-readable note, per D-15:
     "log every skip explicitly."
 
-    Also returns the D-16 skip audit (`PdfSkip` per skip) and how many of
-    those skips were a genuine readability failure (parse failure or no
-    extractable text) rather than a budget choice (cap reached, too large) or
-    a transient network failure (download failed) — this distinction is what
-    separates `L3_illeggibile` from a plain `L1_manuale` for callers building
-    a `RecoveryLevel`.
+    Also returns the D-16 skip audit (`PdfSkip` per skip) and two separate
+    counts:
+
+    * `illegible_count` — skips that are a genuine readability failure (invalid
+      PDF, parse failure, or no extractable text at all). This is what a caller
+      gates `L3_illeggibile` on: "nobody can read this."
+    * `ocr_deferred_count` — skips where the PDF is a *valid* document that
+      simply needs an OCR pass not yet run (`InspectionRoute.FULL_OCR`). This
+      is NOT illegibility: the text exists, it just has not been measured. It
+      must never push a record to `L3` — a deferred-OCR-only page is `L1_manuale`
+      ("not read yet"), never L3 ("unreadable"). Kept as its own count so the
+      OCR-pending state stays distinct from both illegibility and budget/network
+      skips (cap reached, too large, download failed), which count as neither.
     """
     notes: list[str] = []
     skipped: list[PdfSkip] = []
     illegible_count = 0
+    ocr_deferred_count = 0
     if not pdf_urls:
-        return [], notes, skipped, illegible_count
+        return [], notes, skipped, illegible_count, ocr_deferred_count
 
     host_atteso = _host_senza_www(urlparse(base_url).netloc.lower())
 
-    def _skip(absolute_url: str, note: str, reason: str, *, illegible: bool) -> None:
-        nonlocal illegible_count
+    def _skip(
+        absolute_url: str,
+        note: str,
+        reason: str,
+        *,
+        illegible: bool = False,
+        ocr_deferred: bool = False,
+    ) -> None:
+        nonlocal illegible_count, ocr_deferred_count
         logger.info("skipping PDF %s: %s", absolute_url, reason)
         notes.append(note)
         skipped.append(PdfSkip(url=absolute_url, reason=reason))
         if illegible:
             illegible_count += 1
+        if ocr_deferred:
+            ocr_deferred_count += 1
 
     ranked = sorted(dict.fromkeys(pdf_urls), key=_filename_rank)
 
@@ -169,6 +190,34 @@ def collect_pdf_segments(
             )
             continue
 
+        inspection = inspect_pdf_bytes(response.content, inspector=inspector)
+        if inspection.route is InspectionRoute.INVALID:
+            reason = inspection.error or "ispezione PDF non valida"
+            _skip(
+                absolute_url,
+                f"Allegato PDF illeggibile (ispezione fallita): {absolute_url} ({reason})",
+                reason,
+                illegible=True,
+            )
+            continue
+        if inspection.route is InspectionRoute.FULL_OCR:
+            plan = build_ocr_plan(absolute_url, inspection)
+            reason = (
+                "ispezione PDF: OCR richiesto prima dell'estrazione"
+                if plan is not None
+                else "ispezione PDF: impossibile costruire il piano OCR"
+            )
+            # OCR rinviato/non misurato: il PDF è valido ma serve un passaggio
+            # OCR non ancora eseguito. NON è illeggibilità (il testo esiste, non
+            # è stato letto): non deve mai spingere a L3. Conteggio dedicato.
+            _skip(
+                absolute_url,
+                f"Allegato PDF rinviato a OCR: {absolute_url}",
+                reason,
+                ocr_deferred=True,
+            )
+            continue
+
         try:
             import pypdf  # lazy: only pages with a linked PDF pay this cost
 
@@ -193,9 +242,16 @@ def collect_pdf_segments(
             )
             continue
 
-        segments.append({"kind": "allegato", "url": absolute_url, "pages": pages_text})
+        segments.append(
+            {
+                "kind": "allegato",
+                "url": absolute_url,
+                "pages": pages_text,
+                "inspection": inspection.model_dump(mode="json"),
+            }
+        )
 
-    return segments, notes, skipped, illegible_count
+    return segments, notes, skipped, illegible_count, ocr_deferred_count
 
 
 def build_corpus(

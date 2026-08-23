@@ -30,12 +30,21 @@ import json
 import sqlite3
 import sys
 import time
+from datetime import datetime, timezone
 from pathlib import Path
 
+from treasureiq.catalog import SnapshotStore, persist_shadow_snapshots
 from treasureiq.connettore import leggi_connettore
 from treasureiq.integration import DATA_DIR, load_enti
+from treasureiq.municipality_registry import (
+    FrameInvalidError,
+    FrameIOError,
+    MunicipalityRecord,
+    get_registry,
+)
 from treasureiq.registro import LIVE_DIR, _da_store
-from treasureiq.sonda_live import COMUNI_ISTAT_PATH, comune_per_codice
+import treasureiq.sonda_live as sonda_live
+from treasureiq.sonda_live import comune_per_codice
 
 #: Piattaforme che `leggi_connettore` sa davvero leggere oggi. Tenere in
 #: sincrono con i dispatch in connettore.py — aggiungerne una lì senza
@@ -69,13 +78,22 @@ def _comuni_coperti() -> list[str]:
     return sorted(load_enti().keys())
 
 
-def _comuni_tutti() -> list[str]:
-    if not COMUNI_ISTAT_PATH.exists():
+def _registry_or_exit():
+    path = sonda_live.COMUNI_ISTAT_PATH
+    try:
+        return get_registry(path)
+    except FrameIOError as exc:
         raise SystemExit(
-            f"comuni-istat.json assente ({COMUNI_ISTAT_PATH}): esegui 'make frame-nazionale'."
-        )
-    grezzo = json.loads(COMUNI_ISTAT_PATH.read_text("utf-8"))
-    return sorted(r["codice_istat"] for r in grezzo)
+            f"comuni-istat.json assente ({path}): esegui 'make frame-nazionale'."
+        ) from exc
+    except FrameInvalidError as exc:
+        codici = ", ".join(sorted({issue.code for issue in exc.report.blocking}))
+        raise SystemExit(f"comuni-istat.json invalido ({path}): {codici}") from exc
+
+
+def _comuni_tutti() -> list[str]:
+    registry = _registry_or_exit()
+    return sorted(record.codice_istat for record in registry.frame.tutti())
 
 
 def _comuni_da_censimento(db: Path) -> list[str]:
@@ -134,13 +152,46 @@ def _filtra_only_missing(comuni: list[str]) -> list[str]:
     return [c for c in comuni if _da_store(c) is None]
 
 
-def _esegui_registro(comuni: list[str], *, delay: float) -> dict[str, int]:
+def _esegui_shadow(
+    istat: str, *, store: SnapshotStore, measurement_id: str
+) -> tuple[str, str]:
+    """Translate an already cached v0 map; never starts a new map probe."""
+    from treasureiq import mappa_connettore as mappa_module
+
+    mappa = mappa_module._da_cache(istat)
+    if mappa is None:
+        return "shadow_skipped", f"{istat} — shadow saltato: mappa v0 assente"
+    events = persist_shadow_snapshots(
+        mappa,
+        store=store,
+        measurement_id=measurement_id,
+        measured_at=datetime.now(timezone.utc),
+    )
+    drift = len(events)
+    return "shadow_ok", f"{istat} — shadow snapshot ok drift={drift}"
+
+
+def _esegui_registro(
+    comuni: list[str],
+    *,
+    delay: float,
+    shadow_store: SnapshotStore | None = None,
+    shadow_measurement_id: str | None = None,
+) -> dict[str, int]:
     """Fase registro: un `leggi_connettore` per comune, continue-on-error.
 
     Riusata da `cmd_scan` (registro da solo) e `cmd_sweep` (dopo il
     censimento), sullo stesso set di comuni.
     """
-    contatori = {"ok": 0, "vuoto": 0, "errore": 0, "con_logo": 0}
+    contatori = {
+        "ok": 0,
+        "vuoto": 0,
+        "errore": 0,
+        "con_logo": 0,
+        "shadow_ok": 0,
+        "shadow_skipped": 0,
+        "shadow_error": 0,
+    }
     for indice, istat in enumerate(comuni):
         stato, riga = _scansiona_uno(istat)
         contatori[stato] += 1
@@ -149,6 +200,16 @@ def _esegui_registro(comuni: list[str], *, delay: float) -> dict[str, int]:
             if record is not None and record.logo_b64:
                 contatori["con_logo"] += 1
         print(riga, file=sys.stderr)
+        if shadow_store is not None and shadow_measurement_id is not None:
+            try:
+                shadow_stato, shadow_riga = _esegui_shadow(
+                    istat, store=shadow_store, measurement_id=shadow_measurement_id
+                )
+            except Exception as exc:  # noqa: BLE001 — shadow non deve fermare v0
+                shadow_stato = "shadow_error"
+                shadow_riga = f"{istat} — shadow errore: {exc}"
+            contatori[shadow_stato] += 1
+            print(shadow_riga, file=sys.stderr)
         if delay and indice < len(comuni) - 1:
             time.sleep(delay)
     return contatori
@@ -166,7 +227,13 @@ def cmd_scan(args: argparse.Namespace) -> int:
     if args.limit is not None:
         comuni = comuni[: args.limit]
 
-    contatori = _esegui_registro(comuni, delay=args.delay)
+    shadow_store, shadow_id = _shadow_config(args)
+    contatori = _esegui_registro(
+        comuni,
+        delay=args.delay,
+        shadow_store=shadow_store,
+        shadow_measurement_id=shadow_id,
+    )
     print(
         f"scansionati {len(comuni)} · con-record {contatori['ok']} · "
         f"con-logo {contatori['con_logo']} · vuoti {contatori['vuoto']} · "
@@ -176,16 +243,12 @@ def cmd_scan(args: argparse.Namespace) -> int:
     return 0
 
 
-def _anagrafe_comuni() -> dict[str, dict]:
+def _anagrafe_comuni() -> dict[str, MunicipalityRecord]:
     """Anagrafe ISTAT indicizzata per codice — serve sia a costruire i dict
     comune per `censisci_molti`, sia come lookup provincia/regione/sito per
     `_registra`."""
-    if not COMUNI_ISTAT_PATH.exists():
-        raise SystemExit(
-            f"comuni-istat.json assente ({COMUNI_ISTAT_PATH}): esegui 'make frame-nazionale'."
-        )
-    elenco = json.loads(COMUNI_ISTAT_PATH.read_text("utf-8"))
-    return {r["codice_istat"]: r for r in elenco}
+    registry = _registry_or_exit()
+    return {record.codice_istat: record for record in registry.frame.tutti()}
 
 
 def _fase_censimento(comuni_istat: list[str], args: argparse.Namespace) -> tuple[int, int]:
@@ -198,7 +261,8 @@ def _fase_censimento(comuni_istat: list[str], args: argparse.Namespace) -> tuple
 
     from treasureiq.ingest.censimento import _gia_registrati, _registra, censisci_molti
 
-    anagrafe = _anagrafe_comuni()
+    anagrafe_records = _anagrafe_comuni()
+    anagrafe = {codice: record.model_dump() for codice, record in anagrafe_records.items()}
     oggi = datetime.now(timezone.utc).date()
     gia_fatti = _gia_registrati(args.db, oggi)
     da_misurare = [
@@ -209,6 +273,9 @@ def _fase_censimento(comuni_istat: list[str], args: argparse.Namespace) -> tuple
         return 0, saltati
 
     args.db.parent.mkdir(parents=True, exist_ok=True)
+    measurement_at = datetime.now(timezone.utc)
+    measurement_id = measurement_at.strftime("sweep-%Y%m%dT%H%M%SZ")
+    catalog_output = args.catalog_output or args.db.parent / "catalog"
     try:
         censisci_molti(
             da_misurare,
@@ -216,7 +283,14 @@ def _fase_censimento(comuni_istat: list[str], args: argparse.Namespace) -> tuple
             lavoratori=args.lavoratori,
             misura_piattaforma=True,
             misura_aderenza=args.aderenza and not args.tutti,
-            salva=lambda blocco: _registra(blocco, db=args.db, anagrafe=anagrafe),
+            salva=lambda blocco: _registra(
+                blocco,
+                db=args.db,
+                anagrafe=anagrafe,
+                catalog_output=catalog_output,
+                measurement_id=measurement_id,
+                measured_at=measurement_at,
+            ),
         )
     except sqlite3.OperationalError as exc:
         raise SystemExit(
@@ -240,7 +314,13 @@ def cmd_sweep(args: argparse.Namespace) -> int:
     misurati, saltati = _fase_censimento(comuni, args)
 
     comuni_registro = _filtra_only_missing(comuni) if args.only_missing else comuni
-    contatori = _esegui_registro(comuni_registro, delay=args.delay)
+    shadow_store, shadow_id = _shadow_config(args)
+    contatori = _esegui_registro(
+        comuni_registro,
+        delay=args.delay,
+        shadow_store=shadow_store,
+        shadow_measurement_id=shadow_id,
+    )
 
     print(
         f"CENSIMENTO: misurati {misurati} (saltati-resume {saltati}) · "
@@ -287,6 +367,34 @@ def _add_selezione_args(sub: argparse.ArgumentParser) -> None:
                       help="Codici ISTAT espliciti (mutuamente esclusivo coi flag sopra).")
 
 
+def _add_shadow_args(sub: argparse.ArgumentParser) -> None:
+    sub.add_argument(
+        "--shadow",
+        action="store_true",
+        help="In aggiunta a v0, persiste snapshot v1 dalla mappa già in cache (nessuna nuova sonda).",
+    )
+    sub.add_argument(
+        "--shadow-output",
+        type=Path,
+        default=LIVE_DIR / "catalog-shadow",
+        help="Directory degli snapshot shadow (default: data-live/catalog-shadow).",
+    )
+    sub.add_argument(
+        "--shadow-measurement-id",
+        default=None,
+        help="ID rilevazione shadow; se assente viene generato per il comando.",
+    )
+
+
+def _shadow_config(args: argparse.Namespace) -> tuple[SnapshotStore | None, str | None]:
+    if not args.shadow:
+        return None, None
+    measurement_id = args.shadow_measurement_id or datetime.now(timezone.utc).strftime(
+        "shadow-%Y%m%dT%H%M%SZ"
+    )
+    return SnapshotStore(args.shadow_output), measurement_id
+
+
 def _build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="python -m treasureiq.registro_cli",
@@ -296,6 +404,7 @@ def _build_parser() -> argparse.ArgumentParser:
 
     scan = sub.add_parser("scan", help="Scansiona comuni e scrive il registro (default).")
     _add_selezione_args(scan)
+    _add_shadow_args(scan)
     scan.add_argument("--only-missing", action="store_true",
                        help="Salta i comuni già presenti in data-live/registro.")
     scan.add_argument("--delay", type=float, default=1.5,
@@ -317,9 +426,16 @@ def _build_parser() -> argparse.ArgumentParser:
         ),
     )
     _add_selezione_args(sweep)
+    _add_shadow_args(sweep)
     sweep.add_argument("--db", type=Path, default=DATA_DIR / "storico.db",
                         help="Path a storico.db (default data/storico.db; con 'make sweep' "
-                             "è /scrivibile/storico.db).")
+                        "è /scrivibile/storico.db).")
+    sweep.add_argument(
+        "--catalog-output",
+        type=Path,
+        default=None,
+        help="Directory snapshot catalogo (default: accanto a storico.db).",
+    )
     sweep.add_argument("--aderenza", action="store_true",
                         help="Misura anche l'aderenza AgID (ignorata con --tutti).")
     sweep.add_argument("--only-missing", action="store_true",

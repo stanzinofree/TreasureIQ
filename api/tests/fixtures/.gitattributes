@@ -1,0 +1,5 @@
+# Captured portal HTML preserved verbatim: the real ComWeb server sends CRLF and
+# byte-fidelity to that output matters for the fixtures.  `-text` disables EOL
+# conversion; `-whitespace` stops git from flagging the CR as trailing whitespace
+# (git diff --check / git apply).  Intentional CRLF, not a hygiene miss (P2).
+comweb_*.html -text -whitespace

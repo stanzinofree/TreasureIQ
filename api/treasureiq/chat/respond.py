@@ -41,50 +41,88 @@ import asyncio
 import logging
 import re
 import threading
-from functools import lru_cache
-from dataclasses import dataclass, replace, field
+from collections.abc import Sequence
+from dataclasses import dataclass, field, replace
 from datetime import date, datetime, timezone
-from enum import Enum
 from decimal import Decimal
+from enum import Enum
+from functools import lru_cache
 from urllib.parse import urlparse
 
-from pydantic import BaseModel, Field
-
+# Import del MODULO, non della funzione: i test mockano
+# `treasureiq.bandi_live.bandi_arricchiti` con `mock.patch`, che sostituisce
+# l'attributo sul modulo — un `from ... import bandi_arricchiti` legherebbe
+# qui un nome che il patch non raggiungerebbe piu'.
+# Stessa ragione del commento sopra (B4): i test mockano
+# `treasureiq.connettore.leggi_connettore` con `mock.patch`.
+from treasureiq import bandi_live, connettore
+from treasureiq.bandi_live import BandiLiveEsito, BandoArricchito
+from treasureiq.catalog import (
+    AccessMode as CatalogAccessMode,
+    DataBatch,
+    DataRequest,
+    FreshnessPolicy,
+    QueryPlan,
+    RequestLimits,
+    Surface,
+    build_query_plan,
+    request_from_recognition,
+    CatalogRuntime,
+    select_batch,
+    service_portal_request,
+)
+from treasureiq.catalog.contracts import CAPABILITY_NOTICES
+from treasureiq.catalog.data_contracts import DataStatus
+from treasureiq.catalog.notices import notices_batch, snapshot_da_bandi_live
+from treasureiq.catalog.planner import service_request
+from treasureiq.catalog.service_batch import service_reference_batch
+from treasureiq.catalog.service_contracts import AuthenticationMethod, ServiceAccessMode
+from treasureiq.catalog.service_merge import merge_service_portals
+from treasureiq.catalog.service_portal_connector import _inventory_from_live
+from treasureiq.catalog.service_registry import (
+    default_service_registry,
+    service_query_fetch_coordinator,
+)
+from treasureiq.catalog.service_resolver import resolve_service_with_meta
+from treasureiq.chat.service_key import riconosci_service_key
+from treasureiq.chat.categorie import Categoria, topics_di
 from treasureiq.chat.intent import (
     AMBIGUOUS_ROLE_TOPICS,
     INFORMATIONAL_BY_NATURE_TOPICS,
     TOPIC_KEYWORDS,
     BeneficiaryRole,
     ChatIntent,
+    build_recognition_contract,
     QuestionKind,
     Topic,
     _sesso_dichiarato_nel_testo,
     extract_intent,
 )
-from treasureiq.chat.categorie import Categoria, topics_di
+from treasureiq.chat.engine import chat_engine
 from treasureiq.chat.nomi_genere import sesso_da_nome
+from treasureiq.connettore import Responsabile, UfficioConnettore
 from treasureiq.extract.providers import LLMProvider, load_provider
-# Import del MODULO, non della funzione: i test mockano
-# `treasureiq.bandi_live.bandi_arricchiti` con `mock.patch`, che sostituisce
-# l'attributo sul modulo — un `from ... import bandi_arricchiti` legherebbe
-# qui un nome che il patch non raggiungerebbe piu'.
-from treasureiq import bandi_live
-from treasureiq.bandi_live import BandiLiveEsito, BandoArricchito
-# Stessa ragione del commento sopra (B4): i test mockano
-# `treasureiq.connettore.leggi_connettore` con `mock.patch`.
-from treasureiq import connettore
-from treasureiq.connettore import UfficioConnettore
-from treasureiq.orari_ufficio import leggi_orari_ufficio
+from treasureiq.ingest.censimento import Indirizzabilita
+from treasureiq.ingest.websearch import WebSearchNonConfigurato, entro_ttl, search_web
 from treasureiq.integration import (
     AccessMode,
+    DATA_DIR,
     Ente,
     cost_lines,
     diagnosis_lines,
     load_enti,
     load_websearch,
 )
-from treasureiq.ingest.censimento import Indirizzabilita
-from treasureiq.ingest.websearch import WebSearchNonConfigurato, entro_ttl, search_web
+from treasureiq.catalog.store import SnapshotStore
+from treasureiq.match.engine import (
+    CriterionState,
+    MatchResult,
+    Verdict,
+    match,
+)
+from treasureiq.ufficio_dettaglio import arricchisci_ufficio
+from treasureiq.scansioni import aggiorna_scansione, carica_scansione, scansione_stantia
+from treasureiq.schema import CitizenProfile, EmploymentStatus, Livello, Opportunity, TargetGroup
 from treasureiq.sonda_live import (
     comune_per_codice,
     leggi_orari_urp,
@@ -92,16 +130,6 @@ from treasureiq.sonda_live import (
     risolvi_comune,
     sonda_connettore,
 )
-from treasureiq.scansioni import aggiorna_scansione, carica_scansione, scansione_stantia
-from treasureiq.match.engine import (
-    CriterionState,
-    MatchResult,
-    Verdict,
-    match,
-    summarise,
-)
-from treasureiq.integration import load_enti
-from treasureiq.schema import CitizenProfile, EmploymentStatus, Livello, Opportunity, TargetGroup
 
 logger = logging.getLogger(__name__)
 
@@ -115,6 +143,22 @@ MAX_MESSAGE_CHARS = 1000
 #: import between the route module and this one.
 DEFAULT_COMUNE_ISTAT = "058003"
 DEFAULT_COMUNE_NOME = "Albano Laziale"
+
+
+def _catalog_access_mode(codice_istat: str) -> CatalogAccessMode | None:
+    """Read the backoffice route decision, without fetching or inferring.
+
+    The sweep is optional during migration. A missing, malformed or stale
+    catalog file therefore means "no catalog decision", so the established
+    chat route remains the fallback for municipalities not imported yet.
+    """
+    try:
+        snapshot = SnapshotStore(DATA_DIR / "catalog").latest_municipality(
+            codice_istat, Surface.ORDINARY_DATA
+        )
+    except (OSError, ValueError):
+        return None
+    return snapshot.access_mode if snapshot is not None else None
 
 #: How many ranked matches ride along in one chat answer. Kept small: this is
 #: a chat bubble, not the `/opportunita` table.
@@ -180,6 +224,35 @@ class DocumentAnswer:
 
 
 @dataclass
+class ServiceLink:
+    """Un modo ufficiale di raggiungere il servizio (Ramo 3, Slice 5).
+
+    ``label`` è un'etichetta FISSA/derivata dal tipo di opzione (D-07), mai
+    testo libero; ``authentication`` è popolato solo sull'opzione autenticata.
+    """
+
+    url: str
+    label: str
+    authentication: tuple[AuthenticationMethod, ...] = ()
+
+
+@dataclass
+class ServiceAnswer:
+    """Le opzioni tipizzate di un servizio, senza appiattirle (§1.5).
+
+    La pagina informativa, i moduli scaricabili e le procedure online restano
+    distinti: la UI li presenta separatamente e l'autenticazione compare solo
+    sulla procedura online.
+    """
+
+    service_id: str
+    title: str
+    information: ServiceLink | None
+    downloads: list[ServiceLink]
+    authenticated_online: list[ServiceLink]
+
+
+@dataclass
 class OfficeAnswer:
     nome: str
     telefono: str | None
@@ -191,6 +264,14 @@ class OfficeAnswer:
     #: ricontrollabile accanto alla forma normalizzata (D-07). `None` quando
     #: `orari` è già il verbatim (niente da affiancare) o manca del tutto.
     orari_fonte: str | None = None
+    #: Sede fisica dell'ufficio (o dell'edificio ospitante), letta dalla scheda
+    #: durante il drill (Ramo 1). `None` dove la pagina non la pubblica: degrado
+    #: onesto, mai un indirizzo inventato (D-05).
+    indirizzo: str | None = None
+    #: Chi risponde dell'ufficio (accountability). Best-effort, solo dove la
+    #: scheda lo pubblica strutturato — mai inferito da un LLM (D-07). `None`
+    #: dove non pubblicato.
+    responsabile: Responsabile | None = None
 
 
 @dataclass
@@ -292,6 +373,10 @@ class InfoAnswer:
     #: Il nome dell'ente, per la scheda: l'interfaccia non deve ricavarlo
     #: dal testo della risposta.
     ente_nome: str | None = None
+    #: Le opzioni tipizzate di un servizio (Ramo 3, Slice 5). La modulistica è
+    #: un caso del rail informativo (D-S5-4): si aggancia qui, non a un campo di
+    #: primo livello in `ChatAnswer`. `None` fuori dal ramo MODULISTICA.
+    service: ServiceAnswer | None = None
 
 
 @dataclass
@@ -386,11 +471,31 @@ class ChatAnswer:
     #: (B5) li legge da qui, mai da `reply` (D-07). `None` quando il
     #: connettore non ha risposto o il ramo non e' scattato (A7).
     esito_connettore: connettore.EsitoConnettore | None = None
+    #: Contratto interno v1: il testo non lo interpreta e ChatOut non lo espone.
+    #: Serve al planner e ai backoffice per conservare la provenienza strutturata.
+    data_batches: list[DataBatch] = field(default_factory=list)
+    query_plan: QueryPlan | None = None
+    selected_data_batch: DataBatch | None = None
     #: Ciclo12/B1: quale slot di follow-up questo turno chiede (`None` =
     #: nessuno). Additivo: `reply` porta comunque la risposta di merito,
     #: la domanda si accoda (D-04, mai bloccante). Stesso enum chiuso di
     #: `ChatIn.chiarimento_atteso`/`ChatOut.chiarimento`.
     chiarimento: str | None = None
+
+
+@dataclass(frozen=True)
+class UfficioDrillResult:
+    """Risultato completo del drill di un ufficio nominato.
+
+    Il drill produce sia la scheda pronta per la UI sia gli artefatti del
+    contratto v1. Tenerli insieme evita che il chiamante conservi soltanto
+    ``OfficeAnswer`` e perda il ``DataBatch`` già proiettato.
+    """
+
+    office: OfficeAnswer
+    data_batches: list[DataBatch]
+    query_plan: QueryPlan | None
+    selected_data_batch: DataBatch | None
 
 
 def _resolve_comune(*, hint: str | None) -> tuple[str | None, str | None]:
@@ -542,6 +647,36 @@ def _tema_sostenuto(*, topic: Topic, testo: str) -> bool:
     return any(k in minuscolo for k in parole)
 
 
+#: Marcatori che segnalano l'intento esplicito di procurarsi il MODULO (non
+#: l'informazione di contenuto). Hanno precedenza deterministica sul topic di
+#: contenuto che il classificatore assegnerebbe: «modulo carta d'identità»
+#: porta la parola forte «carta d'identità» e il modello sceglie
+#: ANAGRAFE_CARTA_IDENTITA, così il turno non raggiungeva mai il connettore
+#: servizi. Sottoinsieme stretto di `TOPIC_KEYWORDS[MODULISTICA]`: le forme più
+#: deboli ("servizi online", "area personale") NON scavalcano un topic di
+#: contenuto, solo questi quattro. Letti sul testo grezzo come
+#: `_categoria_richiesta`, mai dal modello — «modulo» non è nel vocabolario di
+#: `Topic` e un classificatore lo assorbirebbe nel topic vicino.
+_MARCATORI_PRECEDENZA_MODULISTICA: tuple[str, ...] = (
+    "modulo",
+    "modulistica",
+    "formulario",
+    "scaricabile",
+)
+
+
+def _richiesta_modulo(messaggio: str) -> bool:
+    """Se il turno chiede esplicitamente un modulo/formulario.
+
+    Precedenza deterministica su qualunque topic di contenuto (Fix A, Slice
+    5.2): la scelta della ServiceKey e l'eventuale ambiguità le decide il
+    resolver a valle, mai questo gate — qui si stabilisce solo che la porta è
+    quella del connettore servizi, non l'informazione di contenuto.
+    """
+    haystack = messaggio.casefold()
+    return any(m in haystack for m in _MARCATORI_PRECEDENZA_MODULISTICA)
+
+
 def _topic_da_storia(*, storia: list[str]) -> Topic | None:
     """Il topic implicato dalle parole che il cittadino ha scritto prima.
 
@@ -563,7 +698,12 @@ def _topic_da_storia(*, storia: list[str]) -> Topic | None:
 
 
 async def _eredita_dal_contesto(
-    *, intent: ChatIntent, messaggio: str, storia: list[str], provider: LLMProvider
+    *,
+    intent: ChatIntent,
+    messaggio: str,
+    storia: list[str],
+    provider: LLMProvider | None,
+    backend: str | None = None,
 ) -> ChatIntent:
     """Carry forward the comune and the subject the citizen already gave.
 
@@ -630,7 +770,11 @@ async def _eredita_dal_contesto(
         # Most recent first: the last thing said wins, as it would in speech.
         for passato in reversed(storia[-6:]):
             try:
-                vecchio = await extract_intent(message=passato, provider=provider)
+                vecchio = await extract_intent(
+                    message=passato,
+                    provider=provider,  # type: ignore[arg-type]
+                    backend=backend,
+                )
             except Exception:  # noqa: BLE001 — a failed re-read is not fatal
                 continue
             if vecchio.comune_hint:
@@ -934,6 +1078,20 @@ def _pertinente(
     ):
         return True
     return bool((_parole_piene(parole) - escluse) & (_parole_piene(titolo) - escluse))
+
+
+def _appartiene_all_ente(*, candidato: Opportunity, ente: Ente) -> bool:
+    """Se il record e' davvero dell'ente chiesto (I6, nessun dato altrui).
+
+    NAZIONALE e REGIONALE valgono per chiunque nel territorio (la regione e'
+    gia' filtrata a monte), quindi passano sempre. Un record COMUNALE appartiene
+    a un solo comune: servirlo a un altro sarebbe una bugia sul dato. Combacia
+    solo quando `source.ente_codice_istat` e' l'ISTAT dell'ente; un record senza
+    proprietario registrato non si attribuisce a nessuno.
+    """
+    if candidato.livello is not Livello.COMUNALE:
+        return True
+    return candidato.source.ente_codice_istat == ente.codice_istat
 
 
 def _document_answer(candidato: Opportunity) -> DocumentAnswer:
@@ -1503,6 +1661,7 @@ async def _build_informazione_answer(
     records: list[Opportunity],
     comune_istat: str | None = None,
     parole: str = "",
+    recognition=None,
 ) -> ChatAnswer:
     """The INFORMAZIONE rail (D-19): document + office + coverage + cost,
     never a verdict, never criteria, never SPID. No call into
@@ -1597,17 +1756,21 @@ async def _build_informazione_answer(
     # (`_riscontro_lessicale`). Senza questa condizione una domanda fuori
     # catalogo — l'ufficio tributi — riceveva la pagina del topic più vicino
     # che il catalogo copre, l'anagrafe, presentata come la risposta.
-    trovati = (
-        _search_opportunities(
-            records=records, topic=intent.topic, role=intent.beneficiary_role
-        )
-        if ente.codice_istat == DEFAULT_COMUNE_ISTAT
-        else []
+    # I6 (nessun dato fisso in produzione): niente gate hardcoded su Albano.
+    # Cerchiamo per QUALSIASI comune riconosciuto, poi teniamo solo i record
+    # che appartengono davvero all'ente chiesto (`_appartiene_all_ente`): un
+    # bando COMUNALE di un territorio non deve mai comparire nella risposta di
+    # un altro. Oggi solo Albano ha dati COMUNALE ingeriti, quindi l'effetto e'
+    # identico al vecchio gate — ma la ragione ora e' il dato, non un ISTAT
+    # scritto a mano, e resta onesto quando altri comuni verranno ingeriti.
+    trovati = _search_opportunities(
+        records=records, topic=intent.topic, role=intent.beneficiary_role
     )
     candidates = [
         c
         for c in trovati
-        if _pertinente(
+        if _appartiene_all_ente(candidato=c, ente=ente)
+        and _pertinente(
             topic=intent.topic,
             role=intent.beneficiary_role,
             parole=parole,
@@ -1635,6 +1798,14 @@ async def _build_informazione_answer(
     # INFORMAZIONE, nessun verdetto; degrado onesto se la pagina non pubblica
     # orari (D-32) — l'ufficio giusto con `orari=None`, mai l'URP travestito.
     ufficio_nominato = _ufficio_chiesto(parole)
+    # Artefatti v1 prodotti dal drill: vanno trasportati nel `ChatAnswer` finale
+    # anche su questo ramo. Quando il ramo connettore più sotto gira, ritorna in
+    # anticipo (`risposta_connettore`, già con i suoi batch) e questi restano i
+    # default; ma con `candidates` non vuoto quel ramo NON gira e senza questo il
+    # `DataBatch` già proiettato dal drill andrebbe perso.
+    drill_batches: list[DataBatch] = []
+    drill_plan: QueryPlan | None = None
+    drill_selected: DataBatch | None = None
     if ufficio_nominato is not None:
         office_ufficio = await _office_da_ufficio_nominato(
             codice_istat=ente.codice_istat,
@@ -1643,12 +1814,27 @@ async def _build_informazione_answer(
             disabilita_attiva=_disabilita_attiva_nel_testo(parole),
         )
         if office_ufficio is not None:
-            office = office_ufficio
-    diagnosis = diagnosis_lines(ente)
-    integration_cost = cost_lines(ente)
-
+            office = office_ufficio.office
+            drill_batches = office_ufficio.data_batches
+            drill_plan = office_ufficio.query_plan
+            drill_selected = office_ufficio.selected_data_batch
     web_results: list[WebResultAnswer] = []
-    access_mode = ente.access_mode.value
+    catalog_mode = _catalog_access_mode(ente.codice_istat)
+    access_mode = (
+        catalog_mode.value if catalog_mode is not None else ente.access_mode.value
+    )
+    # Once the backoffice catalog is authoritative, technical diagnosis and
+    # integration cost stay there. The citizen gets the route and the source
+    # card, not an internal explanation of how the connector was measured.
+    diagnosis = [] if catalog_mode is not None else diagnosis_lines(ente)
+    integration_cost = [] if catalog_mode is not None else cost_lines(ente)
+    # A catalog decision is authoritative only when present. Until the sweep
+    # has imported this municipality, retain the legacy classification.
+    catalog_connector_route = catalog_mode is CatalogAccessMode.MEDIATED
+    catalog_exhausted_route = catalog_mode in (
+        CatalogAccessMode.MEDIATED,
+        CatalogAccessMode.UNAVAILABLE,
+    )
 
     # M4-servito vs M4/M5-gap (B4): un ente censito NON è per forza esausto —
     # proviamo il connettore per davvero prima di trattarlo come il gap che
@@ -1665,9 +1851,9 @@ async def _build_informazione_answer(
     # già include M4+M5) resta vero e nulla cambia per gli altri comuni (A7).
     # `leggi_connettore` è cache-first: un comune già scansionato risponde
     # dallo store senza rete; solo un M5 freddo paga un GET alla home in più.
-    if not candidates and ente.access_mode in (
-        AccessMode.M4_CONNETTORE,
-        AccessMode.M5_NESSUNO,
+    if not candidates and (
+        catalog_connector_route
+        or ente.access_mode in (AccessMode.M4_CONNETTORE, AccessMode.M5_NESSUNO)
     ):
         esito_connettore = await asyncio.to_thread(connettore.leggi_connettore, ente.codice_istat)
         if esito_connettore is not None and (
@@ -1680,13 +1866,14 @@ async def _build_informazione_answer(
                 esito=esito_connettore,
                 ufficio_chiesto=_ufficio_chiesto(parole),
                 disabilita_attiva=_disabilita_attiva_nel_testo(parole),
+                recognition=recognition,
             )
             if risposta_connettore is not None:
                 return risposta_connettore
 
-    institutional_exhausted = not candidates and ente.access_mode in (
-        AccessMode.M4_CONNETTORE,
-        AccessMode.M5_NESSUNO,
+    institutional_exhausted = not candidates and (
+        catalog_exhausted_route
+        or ente.access_mode in (AccessMode.M4_CONNETTORE, AccessMode.M5_NESSUNO)
     )
     letto_dal_vivo = False
     if institutional_exhausted:
@@ -1771,6 +1958,9 @@ async def _build_informazione_answer(
             azioni=azioni,
             ente_nome=ente.ente,
         ),
+        data_batches=drill_batches,
+        query_plan=drill_plan,
+        selected_data_batch=drill_selected,
     )
 
 
@@ -1975,21 +2165,27 @@ async def _office_da_ufficio_nominato(
     topic: Topic,
     ufficio_chiesto: str,
     disabilita_attiva: bool,
-) -> OfficeAnswer | None:
-    """L'ufficio NOMINATO dal cittadino, con il SUO orario letto adesso.
+) -> UfficioDrillResult | None:
+    """L'ufficio NOMINATO dal cittadino, con il SUO orario letto adesso, servito
+    ATTRAVERSO il contratto v1 (DataRequest/DataBatch) come il rail decisione.
 
     Il rail informazione, di default, attacca l'URP di ripiego: chiesto
     «l'ufficio anagrafe», mostrava l'orario dell'URP. Il connettore conosce già
     la URL della pagina di quell'ufficio (catalogata dallo sweep): la si legge
-    on-demand (`leggi_orari_ufficio`, cache-first + guardia SSRF) e se ne cita
-    l'orario vero. Il match sull'ufficio riusa `_ufficio_connettore_pertinente`
-    — stessa disciplina D-04 del ramo connettore, mai un ufficio indovinato.
+    on-demand — una sola volta, in `arricchisci_ufficio` (cache-first + guardia
+    SSRF) — e se ne cita l'orario vero. Il match sull'ufficio riusa
+    `_ufficio_connettore_pertinente` (stessa disciplina D-04 del ramo
+    connettore, mai un ufficio indovinato); la proiezione riusa
+    `_batch_offices_decisione` (stesso seam v1 del rail decisione), su un esito
+    derivato col SOLO ufficio arricchito — così la chat consuma un `DataBatch`,
+    non costruisce la risposta a mano dall'`UfficioConnettore`.
 
     `None` (l'URP resta) quando il connettore non è leggibile, non espone
-    uffici, o nessuno corrisponde in modo univoco alla parola nominata. Un
-    orario non trovato NON è un `None`: si torna l'ufficio giusto con
-    `orari=None`, così la scheda dice «non pubblicato per questo ufficio»
-    invece di spacciare quello dell'URP (D-32).
+    uffici, nessuno corrisponde in modo univoco alla parola nominata, o nessun
+    connettore MEDIATO copre la piattaforma (stesso ripiego onesto di
+    `_batch_offices_decisione`). Un orario non trovato NON è un `None`: si torna
+    l'ufficio giusto con `orari=None`, così la scheda dice «non pubblicato per
+    questo ufficio» invece di spacciare quello dell'URP (D-32).
     """
     esito = await asyncio.to_thread(connettore.leggi_connettore, codice_istat)
     if esito is None or not esito.uffici:
@@ -2006,22 +2202,61 @@ async def _office_da_ufficio_nominato(
     if ufficio is None or not ufficio.url:
         return None
 
-    display, fonte = await _orari_ufficio_live(codice_istat=codice_istat, ufficio=ufficio)
-    return OfficeAnswer(
-        nome=ufficio.nome,
-        telefono=", ".join(ufficio.telefoni) or None,
-        email=", ".join(ufficio.email) or None,
-        orari=display,
-        orari_fonte=fonte,
+    # Acquisizione: unica lettura della scheda-dettaglio (nessun doppio drill).
+    arricchito = await asyncio.to_thread(
+        arricchisci_ufficio,
+        codice_istat=codice_istat,
+        ufficio=ufficio,
+        piattaforma=esito.piattaforma,
+    )
+    # Esito derivato col SOLO ufficio arricchito → proiezione v1 attraverso lo
+    # stesso seam del rail decisione. `comune_nome` alimenta solo la mappa
+    # sintetica di ripiego, che il connettore flotta non legge (usa il solo
+    # `codice_istat`): qui non c'è un nome comune da passare, e non serve.
+    esito_singolo = esito.model_copy(update={"uffici": [arricchito.ufficio]})
+    batch = _batch_offices_decisione(esito_singolo, comune_nome="")
+    if batch is None or not batch.records:
+        return None
+    query_plan, selected_data_batch = _plan_connettore(esito_singolo, [batch])
+    # La risposta si costruisce dal record del `DataBatch`, non dall'oggetto
+    # `UfficioConnettore`: la chat consuma il contratto comune. `orari_fonte`
+    # resta il canale della fonte verbatim (D-07), portato dal wrapper.
+    record = batch.records[0]
+    return UfficioDrillResult(
+        office=OfficeAnswer(
+            nome=record["nome"],
+            telefono=", ".join(record["telefoni"]) or None,
+            email=", ".join(record["email"]) or None,
+            orari=record["orari"],
+            orari_fonte=arricchito.orari_fonte,
+            # Campi additivi Ramo 1: il record è il dump completo dell'ufficio,
+            # quindi indirizzo/responsabile viaggiano già qui. `None`/assente
+            # dove la scheda non li pubblica (D-05), mai un valore inventato.
+            indirizzo=record.get("indirizzo"),
+            responsabile=(
+                Responsabile(**record["responsabile"])
+                if record.get("responsabile")
+                else None
+            ),
+        ),
+        data_batches=[batch],
+        query_plan=query_plan,
+        selected_data_batch=selected_data_batch,
     )
 
 
 async def _orari_ufficio_live(
-    *, codice_istat: str, ufficio: UfficioConnettore
-) -> tuple[str | None, str | None]:
-    """L'orario di QUESTO ufficio letto adesso dalla sua pagina: forma
-    normalizzata da mostrare più fonte verbatim, con ripiego onesto sul
-    catalogo. Ritorna `(display, fonte)`.
+    *, codice_istat: str, ufficio: UfficioConnettore, piattaforma: str | None = None
+) -> tuple[UfficioConnettore, str | None]:
+    """QUESTO ufficio letto adesso dalla sua pagina: una COPIA arricchita
+    dell'`UfficioConnettore` (orari in forma normalizzata da mostrare, più
+    `indirizzo`/`responsabile` dove la famiglia li pubblica) con ripiego onesto
+    sul catalogo. Ritorna `(ufficio_arricchito, fonte)`.
+
+    Ritorna l'oggetto INTERO — non solo l'orario — così il chiamante può
+    sostituirlo nell'`EsitoConnettore` e far fluire i campi letti fino al
+    `DataBatch` trasportato (Codex P1): un `(display, fonte)` scalare perdeva
+    indirizzo/responsabile per strada.
 
     Punto unico di lettura orari-per-ufficio, condiviso dai due percorsi
     INFORMAZIONE (rail URP/ingerito e ramo connettore): entrambi i comuni —
@@ -2034,20 +2269,18 @@ async def _orari_ufficio_live(
     citazione verbatim SOLO quando abbiamo normalizzato (c'è qualcosa da
     affiancare come prova, D-07); `None` quando `display` è già il verbatim o
     non c'è nessun orario. Mai solleva.
+
+    Delega a `arricchisci_ufficio` (livello acquisizione): unica definizione
+    della lettura scheda-dettaglio, condivisa con il drill — mai un secondo
+    fetch della stessa pagina.
     """
-    if not ufficio.url:
-        return ufficio.orari, None
-    letto = await asyncio.to_thread(
-        leggi_orari_ufficio, codice_istat=codice_istat, url=ufficio.url
+    arricchito = await asyncio.to_thread(
+        arricchisci_ufficio,
+        codice_istat=codice_istat,
+        ufficio=ufficio,
+        piattaforma=piattaforma,
     )
-    if letto is not None and letto.orario_schema is not None:
-        # Pagina letta e orario riconosciuto in forma normalizzabile: mostra la
-        # forma pulita, tieni il verbatim come fonte.
-        return letto.orario_schema.reso, letto.orari
-    # Niente schema: l'orario migliore che abbiamo (verbatim dalla pagina o dal
-    # catalogo) va mostrato così com'è, senza una fonte separata da affiancare.
-    verbatim = (letto.orari if letto is not None else None) or ufficio.orari
-    return verbatim, None
+    return arricchito.ufficio, arricchito.orari_fonte
 
 
 def _testo_ufficio_connettore(*, comune_nome: str, ufficio: UfficioConnettore) -> str:
@@ -2089,21 +2322,38 @@ async def _risposta_da_connettore(
     esito: "connettore.EsitoConnettore",
     ufficio_chiesto: str | None,
     disabilita_attiva: bool = False,
+    recognition=None,
 ) -> ChatAnswer | None:
     """Risposta INFORMAZIONE costruita dal connettore (B4, D-09/D-11): stesso
     schema di `_chat_live`, ma con recapiti VERBATIM e onestà campo-per-campo
     (D-05/D-07) invece del solo blocco `orari` che il resto del gradino 2
-    conosce. `None` se il connettore non ha uffici da offrire su questo
-    ramo — il chiamante ripiega sul gradino web (A7, invariato).
+    conosce. `None` se nessun connettore MEDIATO copre questa piattaforma su
+    questo ramo — il chiamante ripiega sul gradino web (A7, invariato).
+
+    La lettura uffici su cui si DECIDE arriva ora ATTRAVERSO il contratto v1
+    (`_batch_offices_decisione`), non più da `esito.uffici` diretto (strangler
+    I3): il connettore risolto per la piattaforma proietta l'esito già acquisito
+    in una `DataBatch`, e la scheda si costruisce da quei record. L'esito v0
+    resta l'artefatto di acquisizione — provenienza per la diagnosi e dump di
+    display (che conserva `amministrazione_trasparente`/`aree_amministrative`,
+    non proiettati nel batch office).
 
     `disabilita_attiva` (ciclo11 B5/A9): il filtro disabilita/disabilita_nucleo
     e' acceso per questo cittadino — raffina la selezione dell'ufficio verso
     disabilita/servizi sociali, vedi `_ufficio_connettore_pertinente`."""
-    if not esito.uffici:
+    offices_batch = _batch_offices_decisione(
+        esito, comune_nome=comune_nome, recognition=recognition
+    )
+    if offices_batch is None or offices_batch.access_mode is not CatalogAccessMode.MEDIATED:
+        return None
+    uffici_decisione = [
+        UfficioConnettore.model_validate(record) for record in offices_batch.records
+    ]
+    if not uffici_decisione:
         return None
 
     ufficio, ambigui = _ufficio_connettore_pertinente(
-        esito.uffici,
+        uffici_decisione,
         ufficio_chiesto=ufficio_chiesto,
         topic=topic,
         disabilita_attiva=disabilita_attiva,
@@ -2128,18 +2378,18 @@ async def _risposta_da_connettore(
         ufficio_risposta = None
         citizen_effort = 2
     else:
-        # Orario di QUESTO ufficio letto ora dalla sua pagina (stesso punto
-        # unico del rail URP): lo sweep non cattura gli orari per-ufficio, così
-        # lo store li ha `None` e senza questa lettura la scheda direbbe «non
-        # pubblicato» anche dove la pagina li espone. Il valore da mostrare
-        # (forma normalizzata, `display`) va sostituito nell'ufficio così che
-        # ANCHE il testo (`_testo_ufficio_connettore`) lo citi, non solo
-        # l'`OfficeAnswer`; la fonte verbatim resta accanto sulla scheda.
-        display, fonte = await _orari_ufficio_live(
-            codice_istat=esito.codice_istat, ufficio=ufficio
+        # QUESTO ufficio letto ora dalla sua pagina (stesso punto unico del rail
+        # URP): lo sweep non cattura gli orari per-ufficio, così lo store li ha
+        # `None` e senza questa lettura la scheda direbbe «non pubblicato» anche
+        # dove la pagina li espone. La lettura ritorna l'ufficio ARRICCHITO
+        # INTERO (orari in forma normalizzata + indirizzo/responsabile dove
+        # pubblicati): lo si adotta al posto di quello catalogato così che ANCHE
+        # il testo (`_testo_ufficio_connettore`) citi l'orario vero, e — più
+        # sotto — la sostituzione nell'esito porti i campi letti fino al
+        # `DataBatch` trasportato. La fonte verbatim resta accanto sulla scheda.
+        ufficio, fonte = await _orari_ufficio_live(
+            codice_istat=esito.codice_istat, ufficio=ufficio, piattaforma=esito.piattaforma
         )
-        if display != ufficio.orari:
-            ufficio = ufficio.model_copy(update={"orari": display})
         reply = _testo_ufficio_connettore(comune_nome=comune_nome, ufficio=ufficio)
         documento = DocumentAnswer(title=f"{ufficio.nome} — pagina del comune", url=ufficio.url)
         ufficio_risposta = OfficeAnswer(
@@ -2158,6 +2408,25 @@ async def _risposta_da_connettore(
         letto_dal_vivo=True,
     )
     azioni = _azioni_possibili(document=documento, office=ufficio_risposta, web_results=[])
+    # Il `DataBatch` trasportato deve portare l'ufficio ARRICCHITO (orari letti,
+    # indirizzo, responsabile), non quello catalogato: sostituisco l'ufficio
+    # scelto nell'esito PRIMA di proiettare data_batches/query_plan/selected —
+    # tutti derivano da qui, così i campi letti dal vivo raggiungono il contratto
+    # e non muoiono nell'`OfficeAnswer` (Codex P1). Match per URL (univoca per
+    # scheda). Quando nessun ufficio è stato scelto, l'esito resta invariato.
+    esito_batch = esito
+    if ufficio is not None:
+        esito_batch = esito.model_copy(
+            update={
+                "uffici": [
+                    ufficio if u.url == ufficio.url else u for u in esito.uffici
+                ]
+            }
+        )
+    data_batches = _data_batches_da_connettore(esito_batch)
+    query_plan, selected_data_batch = _plan_connettore(
+        esito_batch, data_batches, recognition=recognition
+    )
     return ChatAnswer(
         reply=reply,
         topic=topic,
@@ -2167,7 +2436,7 @@ async def _risposta_da_connettore(
         matches=[],
         spid_required=False,
         spid_reason=None,
-        access_mode=AccessMode.M4_CONNETTORE.value,
+        access_mode=offices_batch.access_mode.value,
         citizen_effort=citizen_effort,
         info=InfoAnswer(
             document=documento,
@@ -2190,7 +2459,153 @@ async def _risposta_da_connettore(
         # — l'elenco completo se nessuno combacia, o i soli candidati scoped se
         # più uffici citano la parola nominata (ciclo18k, la scelta al cittadino).
         esito_connettore=esito_mostrato if ufficio is None else None,
+        data_batches=data_batches,
+        query_plan=query_plan,
+        selected_data_batch=selected_data_batch,
     )
+
+
+def _batch_offices_decisione(
+    esito: connettore.EsitoConnettore,
+    *,
+    comune_nome: str,
+    recognition=None,
+) -> DataBatch | None:
+    """La lettura uffici su cui la risposta DECIDE, presa ATTRAVERSO il contratto
+    v1 — non più `esito.uffici` diretto (strangler I3). Il connettore risolto per
+    la piattaforma proietta l'esito già acquisito in una `DataBatch`; se nessun
+    connettore MEDIATO la copre, il chiamante ripiega onestamente sul web invece
+    di servire uffici che nessun connettore rivendica.
+
+    Due differenze dalla telemetria (`_data_batches_da_connettore`, cap 100):
+    - limite alto: l'organigramma COMPLETO deve arrivare come nel rail v0, mai
+      troncato a 100 (un comune può pubblicare più uffici);
+    - mappa cache-miss → mappa minima sintetica. Il connettore flotta legge solo
+      `mappa.codice_istat`, quindi un artefatto di cache assente non deve far
+      sparire una lettura che c'è (niente falso ripiego sul web).
+    """
+    from treasureiq.mappa_connettore import MappaConnettore, _da_cache
+
+    mappa = _da_cache(esito.codice_istat) or MappaConnettore(
+        codice_istat=esito.codice_istat,
+        nome=comune_nome,
+        sito=None,
+        sondato_il=esito.letto_il,
+    )
+    request = (
+        request_from_recognition(
+            recognition,
+            source_id=esito.codice_istat,
+            capability_override="offices",
+            # La decisione ufficio è sempre BASE/offices, anche se il topic
+            # (es. bandi) porterebbe altrove la richiesta di default.
+            surface_override=Surface.ORDINARY_DATA,
+        )
+        if recognition is not None
+        else DataRequest(
+            request_id=f"chat:{esito.codice_istat}:ordinary_data:offices",
+            source_id=esito.codice_istat,
+            surface=Surface.ORDINARY_DATA,
+            capability="offices",
+            freshness=FreshnessPolicy(max_age_seconds=86400),
+            limits=RequestLimits(max_records=10_000),
+            manifest_revision=1,
+        )
+    )
+    # Decisione ≠ telemetria: l'organigramma completo, mai troncato al cap di
+    # default, qualunque sia la fonte della richiesta.
+    request = request.model_copy(update={"limits": RequestLimits(max_records=10_000)})
+    return CatalogRuntime().execute(
+        request, platform_id=esito.piattaforma, mappa=mappa, esito=esito
+    )
+
+
+def _data_batches_da_connettore(esito: connettore.EsitoConnettore) -> list[DataBatch]:
+    """Proietta il connettore v0 nel contratto v1 senza fare nuove richieste.
+
+    Questa è una proiezione interna: il cittadino continua a ricevere la
+    risposta deterministica già esistente, mentre planner e backoffice vedono
+    la stessa lettura con modalità, freschezza ed evidenze esplicite.
+    """
+    from treasureiq.mappa_connettore import _da_cache
+
+    mappa = _da_cache(esito.codice_istat)
+    if mappa is None:
+        return []
+    runtime = CatalogRuntime()
+    richieste = runtime.adapters.requests_for(
+        source_id=esito.codice_istat,
+        platform_id=esito.piattaforma,
+        request_prefix="chat",
+        freshness=FreshnessPolicy(max_age_seconds=86400),
+        limits=RequestLimits(),
+        manifest_revision=1,
+    )
+    batches: list[DataBatch] = []
+    for request in richieste:
+        batch = runtime.execute(
+            request,
+            platform_id=esito.piattaforma,
+            mappa=mappa,
+            esito=esito,
+        )
+        if batch is not None:
+            batches.append(batch)
+    return batches
+
+
+def _plan_connettore(
+    esito: connettore.EsitoConnettore,
+    batches: list[DataBatch],
+    recognition=None,
+) -> tuple[QueryPlan | None, DataBatch | None]:
+    """Build and execute the closed plan for the connector office rail."""
+    if not batches:
+        return None, None
+    request = (
+        request_from_recognition(
+            recognition, source_id=esito.codice_istat, capability_override="offices"
+        )
+        if recognition is not None
+        else DataRequest(
+            request_id=f"chat:{esito.codice_istat}:ordinary_data:offices",
+            source_id=esito.codice_istat,
+            surface=Surface.ORDINARY_DATA,
+            capability="offices",
+            freshness=FreshnessPolicy(max_age_seconds=86400),
+            limits=RequestLimits(),
+            manifest_revision=1,
+        )
+    )
+    plan = build_query_plan(request)
+    return plan, select_batch(plan, tuple(batches))
+
+
+def _notices_plan_e_batch(
+    esito_neutro: BandiLiveEsito, target_istat: str
+) -> tuple[list[DataBatch], QueryPlan, DataBatch | None]:
+    """Project the NEUTRAL acquisition result into a v1 `notices` DataBatch and
+    the closed plan that selects it (Ramo 2, slice 2).
+
+    Fed the acquisition result BEFORE the chat ranks/filters it: the canonical
+    record carries no presentation field (tema/consigliato/corrisponde stay in
+    `bandi_live`, projected downstream). Same shape as the office drill — the
+    batch travels in `ChatAnswer.data_batches` for censimento/API, the chat
+    reply and ordering are untouched.
+    """
+    request = DataRequest(
+        request_id=f"chat:{target_istat}:transparency:notices",
+        source_id=target_istat,
+        surface=Surface.TRANSPARENCY,
+        capability=CAPABILITY_NOTICES,
+        freshness=FreshnessPolicy(max_age_seconds=86400),
+        limits=RequestLimits(),
+        manifest_revision=1,
+    )
+    snapshot = snapshot_da_bandi_live(esito_neutro)
+    batch = notices_batch(snapshot, request)
+    plan = build_query_plan(request)
+    return [batch], plan, select_batch(plan, (batch,))
 
 
 async def _risposta_live(
@@ -2869,35 +3284,6 @@ def _numeri_utili_da_store(codice_istat: str | None) -> "NumeriUtili | None":
     )
 
 
-def _fuori_copertura(nominato, intent) -> ChatAnswer:
-    """Il cittadino ha nominato un comune che non leggiamo.
-
-    Dirlo e' l'unica risposta onesta. L'alternativa — rispondere con i dati di
-    un comune diverso — non e' una risposta imprecisa: e' la risposta di un
-    altro territorio, e chi legge non ha modo di accorgersene.
-
-    Il nome del comune compare per esteso proprio per questo: se sbagliamo a
-    riconoscerlo, la persona lo vede subito e puo' correggerci.
-    """
-    return ChatAnswer(
-        reply=(
-            f"Non copro ancora il Comune di {nominato.nome}"
-            f"{f' ({nominato.provincia})' if getattr(nominato, 'provincia', None) else ''}. "
-            "Preferisco dirtelo piuttosto che risponderti con i dati di un altro "
-            "comune: sarebbero informazioni sbagliate per te, e non avresti modo "
-            "di accorgertene. Se ti interessa un comune che leggo, scrivimene il "
-            "nome."
-        ),
-        topic=intent.topic,
-        kind=intent.kind,
-        data_gap="comune_non_coperto",
-        needs_clarification=True,
-        matches=[],
-        spid_required=False,
-        spid_reason=None,
-    )
-
-
 _CAMBIO_PERSONA_RE = re.compile(
     r"\bmia\s+madre\b|\bmio\s+padre\b|\bmia\s+figlia\b|\bmio\s+figlio\b"
     r"|\bper\s+lei\b|\bper\s+lui\b",
@@ -3263,6 +3649,303 @@ def _bando_tocca_il_tema(bando: BandoArricchito, tema: str) -> bool:
     return _keyword_hit(haystack=haystack, keywords=tuple(tema.split()))
 
 
+#: Etichette leggibili dei metodi di autenticazione per la motivazione mostrata
+#: al cittadino. `unknown` è volutamente assente: un metodo non riconosciuto non
+#: deve produrre un'etichetta inventata, ricade sulla motivazione generica
+#: (D-R3, vincolo 3).
+_AUTH_LABELS: dict[str, str] = {
+    "spid": "SPID",
+    "cie": "CIE",
+    "cns": "CNS",
+    "password": "credenziali del portale",
+}
+
+
+def _spid_reason_da_metodi(metodi: Sequence[object]) -> tuple[bool, str]:
+    """Deriva (autenticazione_richiesta, motivo) dai metodi del portale.
+
+    `spid_required` è storicamente il nome del campo, ma qui significa
+    «autenticazione richiesta», non «SPID obbligatorio» (D-R3, vincolo 3): un
+    portale servizi resta sempre dietro accesso, quindi il primo elemento è
+    sempre True. Il motivo elenca i SOLI metodi effettivamente presenti; se la
+    lista è vuota (o porta solo `unknown`) si usa una motivazione generica,
+    senza inventare un metodo che il portale non dichiara.
+    """
+    etichette = [
+        _AUTH_LABELS[str(getattr(m, "value", m))]
+        for m in metodi
+        if str(getattr(m, "value", m)) in _AUTH_LABELS
+    ]
+    etichette = list(dict.fromkeys(etichette))  # de-dup, ordine preservato
+    if etichette:
+        return True, (
+            f"L'accesso richiede autenticazione ({', '.join(etichette)}); "
+            "resta a carico del cittadino."
+        )
+    return True, "L'accesso richiede autenticazione; resta a carico del cittadino."
+
+
+#: Etichette FISSE per opzione di accesso (D-07): mai testo libero né titolo
+#: del comune. La UI le rende come pulsanti distinti.
+_SERVICE_LINK_LABELS = {
+    ServiceAccessMode.INFORMATION: "Pagina del servizio",
+    ServiceAccessMode.DOWNLOAD: "Scarica il modulo",
+    ServiceAccessMode.AUTHENTICATED_ONLINE: "Procedura online",
+}
+
+
+def _service_answer(reference) -> ServiceAnswer:
+    """Le opzioni della reference in `ServiceAnswer`, senza appiattirle (§1.5).
+
+    Pagina informativa, moduli scaricabili e procedure online restano distinti.
+    La prima INFORMATION è la pagina citata; le altre opzioni si accumulano per
+    tipo. Nessun URL inventato: ogni link viene dalla reference (host già
+    validato in Slice 4).
+    """
+    information: ServiceLink | None = None
+    downloads: list[ServiceLink] = []
+    authenticated: list[ServiceLink] = []
+    for opzione in reference.options:
+        link = ServiceLink(
+            url=str(opzione.url),
+            label=_SERVICE_LINK_LABELS[opzione.mode],
+            authentication=tuple(opzione.authentication),
+        )
+        if opzione.mode is ServiceAccessMode.INFORMATION:
+            if information is None:
+                information = link
+        elif opzione.mode is ServiceAccessMode.DOWNLOAD:
+            downloads.append(link)
+        elif opzione.mode is ServiceAccessMode.AUTHENTICATED_ONLINE:
+            authenticated.append(link)
+    return ServiceAnswer(
+        service_id=reference.service_id,
+        title=reference.title,
+        information=information,
+        downloads=downloads,
+        authenticated_online=authenticated,
+    )
+
+
+def _spid_modulistica(reference) -> tuple[bool, str | None]:
+    """`spid_required`/motivazione dai metodi REALMENTE linkati (D-R3-6).
+
+    SPID è richiesto solo se esiste un'opzione AUTHENTICATED_ONLINE; la
+    motivazione elenca i metodi dichiarati, mai inventati. Un servizio di sola
+    pagina/download non richiede autenticazione.
+    """
+    metodi: list[object] = []
+    ha_auth = False
+    for opzione in reference.options:
+        if opzione.mode is ServiceAccessMode.AUTHENTICATED_ONLINE:
+            ha_auth = True
+            metodi.extend(opzione.authentication)
+    if not ha_auth:
+        return False, None
+    return _spid_reason_da_metodi(metodi)
+
+
+def _modulistica_miss_urp(comune_nome: str) -> ChatAnswer:
+    """Miss onesto del ramo modulistica: rimando URP, MAI il puntatore SP.
+
+    Vincolo centrale della slice (D-S5-2): quando il resolver non trova il
+    servizio — piattaforma sconosciuta, connettore assente, 0/≥2 confermati —
+    la risposta è onesta e rimanda all'URP, non ripiega sul vecchio ramo SP.
+    """
+    return ChatAnswer(
+        reply=(
+            f"Per {comune_nome} non riesco a recuperare ora il servizio dal "
+            "sito ufficiale del comune. Per la pratica rivolgiti all'URP, che "
+            "ti indica il canale corretto."
+        ),
+        topic=Topic.MODULISTICA,
+        kind=QuestionKind.INFORMAZIONE,
+        data_gap="not_verified",
+        needs_clarification=False,
+        matches=[],
+        spid_required=False,
+        spid_reason=None,
+        access_mode=None,
+        citizen_effort=1,
+        info=None,
+    )
+
+
+async def _risposta_modulistica(
+    *, message: str, profile: CitizenProfile | None, comune_istat: str | None
+) -> ChatAnswer:
+    """Ramo Topic.MODULISTICA — wiring del connettore servizi (Ramo 3, Slice 5).
+
+    Cabla la chat al connettore reale via `resolve_service_with_meta`: la
+    `ServiceKey` riconosciuta dal messaggio è risolta cache-first in una
+    `ServiceReference` (pagina informativa, modulo scaricabile, procedura
+    online autenticata, tenuti DISTINTI). TIQ indica la porta ufficiale e non
+    entra mai: nessun login, nessuna compilazione, nessun dato dietro
+    autenticazione (D-R3-5). L'esito è MEDIATED con `DataBatch` strutturato.
+
+    Miss ONESTO, mai il vecchio puntatore SP (D-S5-2): ogni buco risponde con
+    verità, non con un ripiego.
+      * comune non noto            → lo si chiede (I6, `comune_non_noto`);
+      * 0/≥2 service key           → si chiede quale pratica (nessun fetch);
+      * piattaforma/mappa assente  → redirect URP (`not_verified`);
+      * resolver miss (0/≥2 conferme, irraggiungibile) → redirect URP.
+
+    Comune con la stessa precedenza dei bandi (profilo > scelta > nominato).
+    La freschezza (FRESH da cache / LIVE dal vivo) viene dall'envelope
+    `ResolvedService`, mai da `discovered_at`.
+
+    Il testo di risposta è FISSO, mai passato al verbalizzatore (D-07): URL,
+    ruolo e metodi viaggiano nei campi strutturati (`info`/`data_batches`), mai
+    interpolati in `reply`.
+    """
+    from treasureiq.mappa_connettore import _da_cache
+
+    # Precedenza del comune: identica ai bandi (memoria «ricerca live cieca al
+    # comune di profilo», R-9). I6: nessun ripiego hardcoded — se non sappiamo
+    # il comune, l'unica risposta onesta è chiederlo.
+    nominato = _comune_nominato(message)
+    target_istat = (
+        (profile.comune_istat if profile is not None else None)
+        or comune_istat
+        or (nominato.codice_istat if nominato is not None else None)
+    )
+    if target_istat is None:
+        return ChatAnswer(
+            reply=(
+                "Per indicarti lo sportello online giusto devo sapere di quale "
+                "comune parli. Scrivimelo nella chat, oppure usa «Usa la mia "
+                "posizione»."
+            ),
+            topic=Topic.MODULISTICA,
+            kind=QuestionKind.INFORMAZIONE,
+            data_gap="comune_non_noto",
+            needs_clarification=True,
+            matches=[],
+            spid_required=False,
+            spid_reason=None,
+            access_mode=None,
+            citizen_effort=1,
+            info=None,
+        )
+
+    # service_key: 0 o ≥2 chiavi riconosciute → si chiede QUALE pratica, con
+    # l'elenco chiuso del vocabolario; mai il vicino, mai indovinare (Slice 1).
+    service_key = riconosci_service_key(message)
+    if service_key is None:
+        return ChatAnswer(
+            reply=(
+                "Per recuperare il modulo giusto dimmi quale pratica ti serve: "
+                "carta d'identità, cambio di residenza, accesso agli atti, "
+                "stato civile o tributi."
+            ),
+            topic=Topic.MODULISTICA,
+            kind=QuestionKind.INFORMAZIONE,
+            data_gap=None,
+            needs_clarification=True,
+            matches=[],
+            spid_required=False,
+            spid_reason=None,
+            access_mode=None,
+            citizen_effort=1,
+            info=None,
+        )
+
+    mappa = _da_cache(target_istat)
+    comune_nome = (
+        (mappa.nome if mappa is not None else None)
+        or (nominato.nome if nominato is not None else None)
+        or "questo comune"
+    )
+
+    # Piattaforma nota e di una famiglia con connettore: senza, il resolver non
+    # ha chi interrogare → miss onesto (URP), MAI il puntatore SP a coprire il
+    # buco (D-S5-2, vincolo centrale della slice).
+    if mappa is None or not mappa.piattaforma_id:
+        return _modulistica_miss_urp(comune_nome)
+
+    # Catena nuova: resolver cache-first → connettore WP/AgID reale (Slice 4),
+    # via `EsecutoreServiceFetcher` guardato (nessun httpx grezzo nel path
+    # chat). Il resolver gira in un thread perché il fetch live è sincrono.
+    request = service_request(source_id=target_istat, service_key=service_key)
+    resolved = await asyncio.to_thread(
+        resolve_service_with_meta,
+        request,
+        mappa=mappa,
+        registry=default_service_registry(service_query_fetch_coordinator()),
+        platform_id=mappa.piattaforma_id,
+    )
+    # Miss del resolver (piattaforma non coperta, 0/≥2 confermati, irraggiungibile)
+    # → miss onesto, niente fallback SP.
+    if resolved is None:
+        return _modulistica_miss_urp(comune_nome)
+
+    # Slice 6: arricchimento read-time della provenienza SP sulle opzioni
+    # AUTHENTICATED_ONLINE, SOLO per evidenza per-link (URL Base == entrypoint SP
+    # censito dello stesso comune). Pura, senza rete, senza scrittura in cache:
+    # legge l'inventory già persistito; assente/senza match → identità (§4).
+    inventory = _inventory_from_live(target_istat)
+    reference2 = merge_service_portals(
+        source_id=target_istat, reference=resolved.reference, inventory=inventory
+    )
+    resolved = resolved.model_copy(update={"reference": reference2})
+
+    # Catena canonica: DataBatch → QueryPlan → selected_data_batch, come uffici
+    # e bandi. La `Freshness` viene dall'envelope (FRESH per cache-hit, LIVE per
+    # una chiamata dal vivo), mai da `discovered_at`.
+    batch = service_reference_batch(resolved, request)
+    plan = build_query_plan(request)
+    selected = select_batch(plan, (batch,))
+
+    service = _service_answer(resolved.reference)
+    spid_required, spid_reason = _spid_modulistica(resolved.reference)
+    verificato_il = resolved.retrieved_at.date() if resolved.retrieved_at else None
+    document = (
+        DocumentAnswer(
+            title=resolved.reference.title,
+            url=service.information.url,
+            descrizione="Pagina ufficiale del servizio sul sito del comune.",
+            verificato_il=verificato_il,
+        )
+        if service.information is not None
+        else None
+    )
+    info = InfoAnswer(
+        document=document,
+        office=None,
+        coverage_count=1,
+        diagnosis=[],
+        integration_cost=[],
+        web_results=[],
+        letto_dal_vivo=not resolved.from_cache,
+        stato=StatoFonte.UFFICIALE,
+        ente_nome=comune_nome,
+        service=service,
+    )
+    # Testo FISSO (D-07): titoli, URL e metodi vivono solo nei campi strutturati
+    # (`info.service`/`data_batches`), mai interpolati nella prosa.
+    return ChatAnswer(
+        reply=(
+            f"Per {comune_nome} ho trovato il servizio sul sito ufficiale del "
+            "comune. Qui accanto trovi la pagina informativa e, quando il comune "
+            "lo pubblica, il modulo da scaricare. Se la pratica si svolge online "
+            "l'autenticazione resta a te: non accedo né compilo al posto tuo."
+        ),
+        topic=Topic.MODULISTICA,
+        kind=QuestionKind.INFORMAZIONE,
+        data_gap=None,
+        needs_clarification=False,
+        matches=[],
+        spid_required=spid_required,
+        spid_reason=spid_reason,
+        access_mode=batch.access_mode.value,
+        citizen_effort=2,
+        info=info,
+        data_batches=[batch],
+        query_plan=plan,
+        selected_data_batch=selected,
+    )
+
+
 async def _risposta_bandi(
     *, message: str, profile: CitizenProfile | None, comune_istat: str | None
 ) -> ChatAnswer:
@@ -3302,14 +3985,35 @@ async def _risposta_bandi(
     #     senza questo si cadeva sul default Albano leggendo il comune sbagliato.
     #     `_comune_nominato` usa `_comuni_candidati` (stoplist
     #     «bolletta»/«minori»/connettivi), niente falsi toponimi.
-    #  4. default demo, solo come ultima risorsa.
+    #  4. se NON c'e' nessuno dei tre: non c'e' un default. Chiediamo il comune.
     nominato = _comune_nominato(message)
     target_istat = (
         (profile.comune_istat if profile is not None else None)
         or comune_istat
         or (nominato.codice_istat if nominato is not None else None)
-        or DEFAULT_COMUNE_ISTAT
     )
+    # I6 (nessun dato fisso in produzione): niente ripiego hardcoded su Albano.
+    # Quando non sappiamo il comune, l'unica risposta onesta e' chiederlo — mai
+    # rispondere sui bandi di un altro territorio dietro le quinte. Stessa
+    # scelta gia' applicata in api.py `/approfondimento` senza sessione.
+    if target_istat is None:
+        return ChatAnswer(
+            reply=(
+                "Per cercare i bandi devo sapere di quale comune parli. "
+                "Scrivimelo nella chat, oppure usa «Usa la mia posizione»."
+            ),
+            topic=Topic.BANDI,
+            kind=QuestionKind.INFORMAZIONE,
+            data_gap="comune_non_noto",
+            needs_clarification=True,
+            matches=[],
+            spid_required=False,
+            spid_reason=None,
+            access_mode=None,
+            citizen_effort=1,
+            info=None,
+            bandi_live=None,
+        )
 
     try:
         esito = await asyncio.to_thread(bandi_live.bandi_arricchiti, target_istat)
@@ -3333,6 +4037,12 @@ async def _risposta_bandi(
             info=None,
             bandi_live=None,
         )
+
+    # Neutral acquisition result, captured BEFORE the chat ranks/filters it: the
+    # canonical `notices` batch must not carry presentation order/fields. The
+    # coperto_con_bandi branch below rebinds `esito` via model_copy (new object),
+    # so this reference stays neutral.
+    esito_neutro = esito
 
     if esito.esito == "comune_ignoto":
         reply = (
@@ -3407,6 +4117,25 @@ async def _risposta_bandi(
                 "requisiti di ciascuno."
             )
 
+    # v1 contract (Ramo 2): the canonical `notices` DataBatch, projected from the
+    # NEUTRAL esito, rides alongside the rich `bandi_live` payload. The reply and
+    # the profile ordering above are untouched — presentation stays here, the
+    # canonical record stays clean.
+    data_batches, query_plan, selected = _notices_plan_e_batch(
+        esito_neutro, target_istat
+    )
+
+    # Propagate the batch access level to the answer (same as the office rail,
+    # line ~2362): the UI/consumer reads ChatAnswer.access_mode without opening
+    # the batch. coperto_senza_bandi stays MEDIATED (source read, just empty).
+    access_mode = (
+        selected.access_mode.value
+        if selected is not None
+        else data_batches[0].access_mode.value
+        if data_batches
+        else None
+    )
+
     return ChatAnswer(
         reply=reply,
         topic=Topic.BANDI,
@@ -3416,10 +4145,13 @@ async def _risposta_bandi(
         matches=[],
         spid_required=False,
         spid_reason=None,
-        access_mode=None,
+        access_mode=access_mode,
         citizen_effort=0,
         info=None,
         bandi_live=esito,
+        data_batches=data_batches,
+        query_plan=query_plan,
+        selected_data_batch=selected,
     )
 
 
@@ -3472,8 +4204,13 @@ async def _componi_risposta(
     Only the citizen's own words are carried — never our replies, which would
     let one answer become the input to the next.
     """
-    provider: LLMProvider = load_provider(role="chat")
-    intent = await extract_intent(message=message, provider=provider, storia=storia)
+    provider: LLMProvider | None = None
+    if not chat_engine.deterministic:
+        provider = load_provider(role="chat")
+    analysis = await chat_engine.analyse(
+        message=message, storia=storia, provider=provider
+    )
+    intent = analysis.intent
 
     # Il comune non è un campo che convenga chiedere a un modello: l'elenco è
     # chiuso, pubblico e lo abbiamo su disco. Tre vie, in ordine di certezza.
@@ -3506,8 +4243,32 @@ async def _componi_risposta(
 
     intent = _backfill_ambiguous_topic(intent=intent)
     intent = await _eredita_dal_contesto(
-        intent=intent, messaggio=message, storia=storia or [], provider=provider
+        intent=intent,
+        messaggio=message,
+        storia=storia or [],
+        provider=provider,
+        backend=analysis.backend,
     )
+    # Contratto v1: da questo punto il planner può consumare una descrizione
+    # unica e verificabile del turno, invece di rileggere modello, filtri e
+    # storia da percorsi separati. La risposta v0 resta compatibile: il piano
+    # delle fonti verrà collegato nel passaggio successivo.
+    recognition = build_recognition_contract(
+        message=message, intent=intent, storia=storia
+    )
+    intent = recognition.intent
+
+    # Fix A (Slice 5.2): la richiesta esplicita di un MODULO ha precedenza
+    # deterministica sul topic di contenuto. «modulo carta d'identità» porta la
+    # parola forte «carta d'identità» e il classificatore sceglie
+    # ANAGRAFE_CARTA_IDENTITA, così il turno non raggiungeva mai il connettore
+    # servizi. Letto sul testo grezzo come `_categoria_richiesta`, mai sul
+    # modello: «modulo» non è nel vocabolario di `Topic`. «orari ufficio
+    # anagrafe» e «come rinnovo la carta d'identità» non contengono un marcatore
+    # modulo e restano sul topic di contenuto; l'ambiguità tra più ServiceKey la
+    # scioglie il resolver a valle, mai questo gate.
+    if _richiesta_modulo(message):
+        intent = intent.model_copy(update={"topic": Topic.MODULISTICA})
 
     # D-55: se questo turno stesso risponde alla domanda «tutte le categorie
     # o una in particolare?» — letto sul testo grezzo, mai sulla
@@ -3550,6 +4311,22 @@ async def _componi_risposta(
         return await _risposta_bandi(
             message=message,
             profile=profilo_bandi,
+            comune_istat=comune_bandi_istat or comune_istat,
+        )
+
+    # Ramo 3 — Modulistica, primo incremento SP (contratto §5). Gated sul
+    # supporto lessicale come i bandi: un MODULISTICA emesso dal modello ma non
+    # sostenuto dalle parole non deve dirottare il turno. Il comune segue la
+    # stessa precedenza dei bandi (profilo > scelta > nominato), I6 incluso.
+    if intent.topic is Topic.MODULISTICA and _tema_sostenuto(
+        topic=Topic.MODULISTICA, testo=message
+    ):
+        profilo_modulistica = profile or _profile_from_slots(
+            intent=intent, messaggio=message, filtri_esclusi=filtri_esclusi
+        )
+        return await _risposta_modulistica(
+            message=message,
+            profile=profilo_modulistica,
             comune_istat=comune_bandi_istat or comune_istat,
         )
 
@@ -3612,6 +4389,7 @@ async def _componi_risposta(
             records=records,
             comune_istat=comune_istat,
             parole=_parole_del_cittadino(message=message, storia=storia or []),
+            recognition=recognition,
         )
 
     if not comune_coperto:
@@ -3640,11 +4418,9 @@ async def _componi_risposta(
         )
 
     if profile is not None and _e_cambio_persona(message):
-        # D-56/R-LOGOUT: il cookie di sessione vince sempre — ma non in
-        # silenzio quando il turno sembra parlare di un'altra persona.
-        # Nessun reset automatico: si spiega e si chiede conferma, il
-        # client azzera la sessione (`POST /api/session/dimentica` o
-        # logout) SOLO dopo che il cittadino conferma.
+        # Un contesto esplicito vince sempre — ma non in silenzio quando il
+        # turno sembra parlare di un'altra persona. Nessun reset automatico:
+        # si spiega e si chiede conferma prima di dimenticare i dati locali.
         return ChatAnswer(
             reply=(
                 "Sembra che tu stia chiedendo per un'altra persona, non per "
@@ -4082,9 +4858,13 @@ async def build_chat_answer(
             else None
         )
         if scelto is None:
-            provider: LLMProvider = load_provider(role="chat")
-            intent = await extract_intent(message=message, provider=provider, storia=storia)
-            return _quale_comune(candidati, intent)
+            provider: LLMProvider | None = None
+            if not chat_engine.deterministic:
+                provider = load_provider(role="chat")
+            analysis = await chat_engine.analyse(
+                message=message, storia=storia, provider=provider
+            )
+            return _quale_comune(candidati, analysis.intent)
         nominato = scelto
     else:
         nominato = candidati[0] if candidati else None
@@ -4164,7 +4944,14 @@ async def build_chat_answer(
             if office_letto is not None:
                 risposta = replace(
                     risposta,
-                    info=replace(risposta.info, office=office_letto, letto_dal_vivo=True),
+                    info=replace(
+                        risposta.info,
+                        office=office_letto.office,
+                        letto_dal_vivo=True,
+                    ),
+                    data_batches=office_letto.data_batches,
+                    query_plan=office_letto.query_plan,
+                    selected_data_batch=office_letto.selected_data_batch,
                 )
         # La coda di `_componi_risposta` e' un vicolo cieco («non sono riuscito a
         # collegare... rivolgiti all'URP»): ha senso quando NON abbiamo cercato,

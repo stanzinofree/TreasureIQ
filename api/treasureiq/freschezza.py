@@ -3,8 +3,8 @@
 Ogni volta che `host_guard.fetch_guardato` scarica DAVVERO da un sito comunale
 (non da cache) registra qui l'URL e la taglia. È una prova auditabile della
 tesi di TreasureIQ — i dati vengono ORA dal sito del comune, non da un DB
-stantio — ed è ciò che alimenta la console-demo `/demo/live` (pannello «fetch
-live»). Un cache-hit non passa mai di qui, quindi la traccia distingue da sola
+stantio — ed è ciò che alimenta il monitoraggio interno dei fetch live. Un
+cache-hit non passa mai di qui, quindi la traccia distingue da sola
 il dato fresco da quello servito da disco.
 
 Buffer in memoria, limitato: è diagnostica volatile, non uno storico. Gli URL

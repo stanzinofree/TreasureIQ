@@ -45,6 +45,7 @@ i non misurati.
 from __future__ import annotations
 
 import argparse
+import html as html_lib
 import json
 import logging
 import random
@@ -90,8 +91,13 @@ from treasureiq.ingest.piattaforma import (
     Piattaforma,
     classifica_risposta,
     da_impronta,
-    firma_da_risposta,
     impronta_grezza,
+)
+from treasureiq.municipality_registry import (
+    FrameInvalidError,
+    FrameIOError,
+    MunicipalityRecord,
+    get_registry,
 )
 from treasureiq.ingest.wp_comuni import strip_html
 
@@ -509,6 +515,10 @@ _ETICHETTA_AT = re.compile(r"amministrazione\s+trasparente", re.I)
 _HREF_JCITYGOV = re.compile(r"trasparenza-valutazione-merito\.it", re.I)
 _HREF_AMM_TRASP = re.compile(r"amm_trasp", re.I)
 _HREF_TRASPARENZA = re.compile(r"trasparenza", re.I)
+_HREF_URBI_AT = re.compile(
+    r"(?:href|action)=[\"']([^\"']*ur1UR033\.sto[^\"']*)",
+    re.I,
+)
 
 #: Un blocco `<a href="...">...</a>`, contenuto incluso: l'etichetta AT vive
 #: spesso in un `alt`/`title` di un `<img>` annidato o in un `<p>` figlio,
@@ -561,7 +571,10 @@ def _fetch_at_guardato(url: str, *, timeout: float = 8.0) -> tuple[httpx.Headers
     condivisa con `registro.py`. Qualunque anomalia → `None`, mai
     un'eccezione che risale al chiamante e mai un URL indovinato al suo
     posto."""
-    scaricato = fetch_guardato(url, timeout=timeout, max_bytes=MAX_AT_PAGINA_BYTES)
+    scaricato = fetch_guardato(
+        url, timeout=timeout, max_bytes=MAX_AT_PAGINA_BYTES,
+        allow_one_cross_host_redirect=True,
+    )
     if scaricato is None:
         return None
     intestazioni, dati, _ = scaricato
@@ -604,6 +617,17 @@ def scopri_pagina_at(*, html_home: str, base: str) -> EsitoDiscoveryAT:
     if scaricato is None:
         return EsitoDiscoveryAT(Piattaforma.NON_TROVATA, None, None, [])
     intestazioni, html_at = scaricato
+    # Some institutional links are only a redirecting shell.  If the
+    # reached AT page exposes the real URBI application endpoint, promote
+    # that URL to the persisted entrypoint so confirmation can start there
+    # without relying on a cross-host redirect.
+    urbi_match = _HREF_URBI_AT.search(html_at)
+    if urbi_match:
+        urbi_url = urljoin(url, html_lib.unescape(urbi_match.group(1)))
+        urbi_download = _fetch_at_guardato(urbi_url)
+        if urbi_download is not None:
+            url = urbi_url
+            intestazioni, html_at = urbi_download
     esito: ClassificaFirme = classifica_risposta(
         headers=dict(intestazioni), html=html_at, includi_at=True
     )
@@ -748,7 +772,10 @@ def censisci_comune(
                 if secondo["indirizzabilita"] is not Indirizzabilita.IRRAGGIUNGIBILE:
                     base, esito = alternativa, secondo
         if misura_piattaforma:
-            esito.update(_impronta(sonda=sonda, base=base, regione=regione))
+            esito.update(_impronta(
+                sonda=sonda, base=base, regione=regione,
+                codice_istat=codice_istat,
+            ))
             # Quello che il portale dichiara batte l'anagrafe: e' verita' sul
             # campo, e i registri si disallineano quando un ente cambia nome
             # o si fonde. Ma se non dichiara niente, l'anagrafe evita che il
@@ -1021,7 +1048,10 @@ def _segui_meta_refresh(*, sonda: _Sonda, base: str, corpo: str) -> str | None:
     return f"{base.rstrip('/')}/{destinazione.lstrip('/')}"
 
 
-def _impronta(*, sonda: _Sonda, base: str, regione: str | None = None) -> dict:
+def _impronta(
+    *, sonda: _Sonda, base: str, regione: str | None = None,
+    codice_istat: str | None = None,
+) -> dict:
     """Asse C: una sola richiesta alla home, e cosa se ne ricava.
 
     Non solleva: un portale che non risponde è un esito `NON_MISURATA` con
@@ -1043,7 +1073,20 @@ def _impronta(*, sonda: _Sonda, base: str, regione: str | None = None) -> dict:
     intestazioni = dict(resp.headers)
     # BASE (home comune): una piattaforma AT-only non può vincere qui anche
     # se un link outbound alla pagina AT fa scattare la sua firma.
-    firma = firma_da_risposta(headers=intestazioni, html=resp.text, includi_at=False)
+    # Riconoscimento via seam del registry (import locale: evita il ciclo
+    # censimento→adapter→bridge→plugin all'import del modulo). Il fallback
+    # statistico `da_impronta` sotto resta invariato: il seam non lo replica.
+    from treasureiq.catalog.contracts import Surface
+    from treasureiq.catalog.recognition_adapter import firma_da_registro
+    # source_id = identità stabile della fonte (codice ISTAT del comune), non
+    # l'URL osservato: il contratto RecognitionObservation vuole un id
+    # correlabile al comune, coerente con discovery e confirmation. L'URL resta
+    # solo come entrypoint_url. Fallback all'URL se l'ISTAT non è propagato.
+    source_id = codice_istat or str(resp.url)
+    firma = firma_da_registro(
+        headers=intestazioni, html=resp.text, surface=Surface.ORDINARY_DATA,
+        source_id=source_id, entrypoint_url=str(resp.url),
+    )
     grezza = impronta_grezza(headers=intestazioni, html=resp.text)
     if firma.piattaforma is Piattaforma.IGNOTA:
         # Secondo passaggio: chi non si è dichiarato può ancora essere
@@ -1363,6 +1406,19 @@ def main(argv: list[str] | None = None) -> int:
         help="Registra gli esiti in questo SQLite, una riga per comune per giorno.",
     )
     parser.add_argument(
+        "--catalog-output",
+        type=Path,
+        metavar="DIR",
+        help=(
+            "Aggiorna anche il catalogo contrattuale a ogni blocco salvato. "
+            "Richiede --db; lo sweep resta invariato se l'opzione è assente."
+        ),
+    )
+    parser.add_argument(
+        "--measurement-id",
+        help="Identificativo immutabile della misura catalogo (default: timestamp UTC).",
+    )
+    parser.add_argument(
         "--solo-misurabili",
         action="store_true",
         help=(
@@ -1400,9 +1456,28 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--out", type=Path, help="Scrivi il JSON degli esiti in questo file.")
     args = parser.parse_args(argv)
 
+    if args.catalog_output and not args.db:
+        parser.error("--catalog-output richiede --db")
+    args.measurement_at = datetime.now(timezone.utc)
+    args.measurement_id = args.measurement_id or args.measurement_at.strftime(
+        "sweep-%Y%m%dT%H%M%SZ"
+    )
+    # Il catalogo è parte del contratto dello sweep, non un'importazione
+    # successiva. Il flag resta disponibile per scegliere un mount diverso,
+    # ma con --db la destinazione standard è accanto allo storico.
+    if args.db and args.catalog_output is None:
+        args.catalog_output = args.db.parent / "catalog"
+
     esiti = _raccogli(args)
     if args.db:
-        scritte = _registra(esiti, db=args.db, anagrafe=_anagrafe())
+        scritte = _registra(
+            esiti,
+            db=args.db,
+            anagrafe=_anagrafe(),
+            catalog_output=args.catalog_output,
+            measurement_id=args.measurement_id,
+            measured_at=args.measurement_at,
+        )
         print(f"registrate {scritte} righe in {args.db}", file=sys.stderr)
     if args.json or args.out:
         blob = json.dumps([e.model_dump(mode="json") for e in esiti], ensure_ascii=False, indent=2)
@@ -1416,22 +1491,43 @@ def main(argv: list[str] | None = None) -> int:
     return 0
 
 
-def _anagrafe() -> dict[str, dict]:
-    """I comuni ISTAT per codice: provincia e regione senza chiedere niente a nessuno."""
+def _frame_records() -> list[MunicipalityRecord]:
+    """Carica una sola volta il frame nazionale, con un fail-mode da batch."""
     from treasureiq.integration import DATA_DIR
 
-    elenco = json.loads((DATA_DIR / "comuni-istat.json").read_text("utf-8"))
-    return {c["codice_istat"]: c for c in elenco}
+    path = DATA_DIR / "comuni-istat.json"
+    try:
+        return get_registry(path).frame.tutti()
+    except FrameIOError as exc:
+        raise SystemExit(
+            f"comuni-istat.json assente ({path}): esegui 'make frame-nazionale'."
+        ) from exc
+    except FrameInvalidError as exc:
+        codici = ", ".join(sorted({issue.code for issue in exc.report.blocking}))
+        raise SystemExit(f"comuni-istat.json invalido ({path}): {codici}") from exc
 
 
-def _registra(esiti: list[EsitoCensimento], *, db: Path, anagrafe: dict[str, dict]) -> int:
+def _anagrafe() -> dict[str, dict]:
+    """I comuni ISTAT per codice: provincia e regione senza chiedere niente a nessuno."""
+    return {record.codice_istat: record.model_dump() for record in _frame_records()}
+
+
+def _registra(
+    esiti: list[EsitoCensimento],
+    *,
+    db: Path,
+    anagrafe: dict[str, dict],
+    catalog_output: Path | None = None,
+    measurement_id: str | None = None,
+    measured_at: datetime | None = None,
+) -> int:
     """Traduce gli esiti in righe di storico e le scrive.
 
     La traduzione sta qui e non nello store perché è il censimento a sapere
     cosa significano i propri enum; `storico` deve poter leggere una serie
     storica anche fra dieci anni, quando questi enum saranno cambiati.
     """
-    from treasureiq.storico import RigaPortale, registra_portali
+    from treasureiq.storico import RigaPortale, registra_portali, rimuovi_portali
 
     righe = [
         RigaPortale(
@@ -1477,7 +1573,36 @@ def _registra(esiti: list[EsitoCensimento], *, db: Path, anagrafe: dict[str, dic
         )
         for e in esiti
     ]
-    return registra_portali(db, righe)
+    scritte = registra_portali(db, righe)
+    if catalog_output:
+        from treasureiq.catalog.store import SnapshotStore
+        from treasureiq.catalog.sweep_import import persist_sweep_snapshot_batch
+
+        try:
+            persist_sweep_snapshot_batch(
+                db,
+                store=SnapshotStore(catalog_output),
+                codici_istat=tuple(r.codice_istat for r in righe),
+                measurement_id=measurement_id or f"sweep-{righe[0].rilevato_il.isoformat()}",
+                measured_at=measured_at
+                or datetime.combine(
+                    max(r.misurato_il for r in esiti),
+                    datetime.min.time(),
+                    tzinfo=timezone.utc,
+                ),
+            )
+        except Exception:
+            # SQLite is the source the importer reads, but it is not allowed
+            # to become a false resume marker when the catalog write fails.
+            # Remove this batch so the next worker cycle retries it.
+            for giorno in {r.rilevato_il for r in righe}:
+                rimuovi_portali(
+                    db,
+                    rilevato_il=giorno,
+                    codici_istat=(r.codice_istat for r in righe if r.rilevato_il == giorno),
+                )
+            raise
+    return scritte
 
 
 def _gia_registrati(db: Path | None, giorno: date) -> set[str]:
@@ -1518,10 +1643,9 @@ def _raccogli(args: argparse.Namespace) -> list[EsitoCensimento]:
     leggi_pagina = not args.solo_asse_a
 
     if getattr(args, "solo_misurabili", False):
-        from treasureiq.integration import DATA_DIR
         from treasureiq.storico import apri
 
-        elenco = json.loads((DATA_DIR / "comuni-istat.json").read_text("utf-8"))
+        elenco = [record.model_dump() for record in _frame_records()]
         oggi = datetime.now(timezone.utc).date()
         misurabili = {
             Piattaforma.WP_DESIGN_COMUNI.value,
@@ -1540,7 +1664,16 @@ def _raccogli(args: argparse.Namespace) -> list[EsitoCensimento]:
         print(f"rimisura: {len(scelti)} comuni su piattaforme leggibili", file=sys.stderr)
         anagrafe = {c["codice_istat"]: c for c in elenco}
         salva = (
-            (lambda blocco: _registra(blocco, db=args.db, anagrafe=anagrafe))
+            (
+                lambda blocco: _registra(
+                    blocco,
+                    db=args.db,
+                    anagrafe=anagrafe,
+                    catalog_output=args.catalog_output,
+                    measurement_id=args.measurement_id,
+                    measured_at=args.measurement_at,
+                )
+            )
             if args.db
             else None
         )
@@ -1554,9 +1687,7 @@ def _raccogli(args: argparse.Namespace) -> list[EsitoCensimento]:
         )
 
     if getattr(args, "solo_ignoti", False):
-        from treasureiq.integration import DATA_DIR
-
-        elenco = json.loads((DATA_DIR / "comuni-istat.json").read_text("utf-8"))
+        elenco = [record.model_dump() for record in _frame_records()]
         oggi = datetime.now(timezone.utc).date()
         da_rileggere = _ignoti(args.db, oggi)
         scelti = [c for c in elenco if c["codice_istat"] in da_rileggere]
@@ -1566,7 +1697,16 @@ def _raccogli(args: argparse.Namespace) -> list[EsitoCensimento]:
         )
         anagrafe = {c["codice_istat"]: c for c in elenco}
         salva = (
-            (lambda blocco: _registra(blocco, db=args.db, anagrafe=anagrafe))
+            (
+                lambda blocco: _registra(
+                    blocco,
+                    db=args.db,
+                    anagrafe=anagrafe,
+                    catalog_output=args.catalog_output,
+                    measurement_id=args.measurement_id,
+                    measured_at=args.measurement_at,
+                )
+            )
             if args.db
             else None
         )
@@ -1580,9 +1720,7 @@ def _raccogli(args: argparse.Namespace) -> list[EsitoCensimento]:
         )
 
     if args.tutti:
-        from treasureiq.integration import DATA_DIR
-
-        elenco = json.loads((DATA_DIR / "comuni-istat.json").read_text("utf-8"))
+        elenco = [record.model_dump() for record in _frame_records()]
         fatti = _gia_registrati(args.db, datetime.now(timezone.utc).date()) if args.riprendi else set()
         scelti = [c for c in elenco if c["codice_istat"] not in fatti]
         print(
@@ -1594,7 +1732,16 @@ def _raccogli(args: argparse.Namespace) -> list[EsitoCensimento]:
         # solo che non si può porre a tutta l'Italia (vedi `censisci_comune`).
         anagrafe = {c["codice_istat"]: c for c in elenco}
         salva = (
-            (lambda blocco: _registra(blocco, db=args.db, anagrafe=anagrafe))
+            (
+                lambda blocco: _registra(
+                    blocco,
+                    db=args.db,
+                    anagrafe=anagrafe,
+                    catalog_output=args.catalog_output,
+                    measurement_id=args.measurement_id,
+                    measured_at=args.measurement_at,
+                )
+            )
             if args.db
             else None
         )
@@ -1608,9 +1755,7 @@ def _raccogli(args: argparse.Namespace) -> list[EsitoCensimento]:
         )
 
     if args.campione:
-        from treasureiq.integration import DATA_DIR
-
-        elenco = json.loads((DATA_DIR / "comuni-istat.json").read_text("utf-8"))
+        elenco = [record.model_dump() for record in _frame_records()]
         scelti = campiona(elenco, quanti=args.campione, seme=args.seme)
         print(
             f"campione: {len(scelti)} comuni su {len(elenco)}, seme {args.seme}",

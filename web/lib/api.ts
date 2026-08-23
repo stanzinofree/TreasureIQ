@@ -110,18 +110,6 @@ export interface Readiness {
   dimensions: Dimension[];
 }
 
-export interface Profile {
-  comune_istat: string;
-  comune_nome: string;
-  eta: number;
-  isee: string | null;
-  nucleo_familiare: number;
-  figli_minori: number;
-  disabilita: boolean;
-  employment_status: string | null;
-  interests: string[];
-}
-
 async function call<T>(path: string, init?: RequestInit): Promise<T> {
   const res = await fetch(`${API}${path}`, {
     credentials: "include",
@@ -134,23 +122,6 @@ async function call<T>(path: string, init?: RequestInit): Promise<T> {
   }
   return (await res.json()) as T;
 }
-
-export const login = (body: Record<string, unknown>) =>
-  call<Profile>("/api/session", { method: "POST", body: JSON.stringify(body) });
-
-export const logout = () => call<unknown>("/api/session", { method: "DELETE" });
-
-/** Unset one fact in the live session, in place — never a full re-login.
- * `login()` rebuilds the profile from scratch, so replaying it after a
- * removal silently reinstates server-side defaults (nucleo_familiare back to
- * 1, not back to "unknown") on fields the citizen never touched. `valore` is
- * only meaningful for campo="interessi", to drop one tag instead of the
- * whole list. */
-export const dimenticaCampo = (campo: string, valore?: string) =>
-  call<Profile>("/api/session/dimentica", {
-    method: "POST",
-    body: JSON.stringify(valore ? { campo, valore } : { campo }),
-  });
 
 /** Le capacità dirette del portale di un comune fuori copertura: catalogo
  *  servizi + 15 categorie AgID, per i chip a cascata. A freddo il backend
@@ -240,7 +211,6 @@ export const contattiUrp = (comuneIstat: string | null) =>
     method: "POST",
     body: JSON.stringify({ comune_istat: comuneIstat }),
   });
-export const me = () => call<Profile>("/api/me");
 // `opportunities` is gone from here with the page that used it. The endpoint
 // still exists server-side; a client wrapper nobody calls would just be a
 // hint that a removed page might come back.
@@ -440,6 +410,14 @@ export interface InfoOffice {
   /** Certified address from IPA. Preferred as the recipient of a formal
    * request: a PEC obliges a reply, an ordinary inbox does not. */
   pec: string | null;
+  /** Physical seat of the office (or the building hosting it), read from the
+   *  office card during the drill (Ramo 1). `null`/absent where the page does
+   *  not publish it — honest degradation, never an invented address (D-05).
+   *  Optional for back-compat with answers produced before Ramo 1. */
+  indirizzo?: string | null;
+  /** Who is accountable for the office, when the card publishes it structured;
+   *  `null`/absent otherwise (D-05), never inferred by an LLM (D-07). */
+  responsabile?: Responsabile | null;
 }
 
 /** One cached web-search hit (D-28, `M6_web_aperto`) — verbatim title and
@@ -478,9 +456,34 @@ export interface Azione {
  * because they answer different questions: what was checked, and what
  * checking it cost. `coverage_count` is a raw count of matching records;
  * the client composes the sentence around it. */
+/** Un'opzione d'accesso a un servizio comunale risolto dal connettore (Ramo 3,
+ * Slice 5): una porta ufficiale con la sua etichetta e — solo per la procedura
+ * online — i metodi di autenticazione accettati. `authentication` è vuoto per
+ * la pagina informativa e per il download del modulo. */
+export interface ServiceLinkOut {
+  url: string;
+  label: string;
+  authentication: string[];
+}
+
+/** Il servizio risolto, con le tre porte tenute DISTINTE (D-R3): la pagina
+ * informativa, i moduli scaricabili e le procedure online autenticate. TIQ
+ * indica la porta, non entra: nessun login, nessuna compilazione. */
+export interface ServiceOut {
+  service_id: string;
+  title: string;
+  information: ServiceLinkOut | null;
+  downloads: ServiceLinkOut[];
+  authenticated_online: ServiceLinkOut[];
+}
+
 export interface InfoOut {
   document: InfoDocument | null;
   office: InfoOffice | null;
+  /** Il servizio risolto dal connettore (Ramo 3, Slice 5). `null` quando la
+   * risposta non passa dal resolver dei servizi (la maggioranza delle
+   * INFORMAZIONI): allora vale eventualmente `document`. */
+  service: ServiceOut | null;
   coverage_count: number;
   diagnosis: string[];
   integration_cost: string[];
@@ -680,11 +683,23 @@ export interface AmministrazioneTrasparente {
   piattaforma_at?: string;
 }
 
+/** Chi risponde di un ufficio (accountability). Best-effort: solo dove la
+ *  scheda lo pubblica strutturato, mai inferito da un LLM (D-07). `nome`
+ *  sempre presente; `ruolo`/`email` `null` = non pubblicato (D-05). */
+export interface Responsabile {
+  nome: string;
+  ruolo: string | null;
+  email: string | null;
+}
+
 /** Un ufficio letto dal connettore, coi suoi recapiti verbatim (D-07:
  *  nessuna cifra passa da un LLM). `source_typed` distingue un recapito
  *  tipizzato dal portale (`tel:`/`mailto:`) da uno solo scritto in prosa —
  *  provenienza, mai un giudizio di qualità. Ogni campo recapito assente va
- *  reso come riga onesta «non pubblicato», mai omesso in silenzio (D-05). */
+ *  reso come riga onesta «non pubblicato», mai omesso in silenzio (D-05).
+ *  `indirizzo`/`responsabile` additivi (Ramo 1): `null`/assenti dove la scheda
+ *  non li pubblica — degrado onesto, mai un valore inventato. Opzionali per
+ *  compatibilità coi dati esistenti privi di questi campi. */
 export interface UfficioConnettore {
   nome: string;
   url: string;
@@ -694,6 +709,8 @@ export interface UfficioConnettore {
   orari: string | null;
   source_typed: boolean;
   letto_il: string;
+  indirizzo?: string | null;
+  responsabile?: Responsabile | null;
 }
 
 /** Mirror esatto di `EsitoConnettore` (`api/treasureiq/connettore.py`): il
@@ -736,6 +753,8 @@ export const postAtAnalisi = (codiceIstat: string, pdfUrl: string) =>
   });
 
 export interface ChatOut {
+  /** Opaque anonymous conversation token, retained by the browser cookie for 90 days. */
+  conversation_id: string;
   profilo_capito: ProfiloCapito | null;
   reply: string;
   /** The topic this answer was retrieved for. The API has always sent it;
@@ -752,9 +771,23 @@ export interface ChatOut {
    * rendered apart from `cost`: the two answer different questions and
    * must never be summed or share a line. */
   citizen_effort: number | null;
-  /** The access rung this answer was composed at (e.g. `M6_web_aperto`).
-   * `null` off the INFORMAZIONE rail. */
-  access_mode: string | null;
+  /** The deterministic access route this answer was composed at. During the
+   * catalog migration this can be the new `direct`/`mediated`/`indirect`/
+   * `unavailable` vocabulary or the legacy `M*_...` value for municipalities
+   * not imported yet. `null` off the INFORMAZIONE rail. */
+  access_mode:
+    | "direct"
+    | "mediated"
+    | "indirect"
+    | "unavailable"
+    | "M2_prosa_api"
+    | "M4_connettore"
+    | "M5_nessuno"
+    | "M6_web_aperto"
+    | string
+    | null;
+  /** One entry per measured catalog surface. */
+  source_access: SourceAccess[];
   /** `null` on the AGEVOLAZIONE rail — an eligibility answer never carries
    * INFORMAZIONE furniture, and vice versa (D-19). */
   info: InfoOut | null;
@@ -794,6 +827,14 @@ export interface ChatOut {
    *  `ChatIn.chiarimento_atteso` nel turno immediatamente successivo, poi
    *  la azzera (uno slot vale un turno, non bloccante — D-04). */
   chiarimento?: Chiarimento | null;
+}
+
+export interface SourceAccess {
+  surface: "ordinary_data" | "transparency";
+  access_mode: "direct" | "mediated" | "indirect" | "unavailable";
+  platform_id: string | null;
+  platform_compatibility: string;
+  measured_at: string;
 }
 
 /** Un candidato di disambiguazione comune. `codice_istat` serve a rimandare la
@@ -1026,6 +1067,11 @@ export interface ChatTurn {
   content: string;
 }
 
+export interface ConversationTranscript {
+  conversation_id: string | null;
+  messages: ChatTurn[];
+}
+
 export const chat = (
   message: string,
   history: ChatTurn[] = [],
@@ -1043,6 +1089,14 @@ export const chat = (
       chiarimento_atteso: chiarimentoAtteso,
     }),
   });
+
+/** Reopen the server-side anonymous transcript carried by the browser cookie. */
+export const openConversation = () =>
+  call<ConversationTranscript>("/api/conversation");
+
+/** Immediately deletes the anonymous conversation state and its browser token. */
+export const forgetConversation = () =>
+  call<{ status: "forgotten" }>("/api/conversation", { method: "DELETE" });
 
 /** Una voce dell'elenco dei comuni italiani (ISTAT unito ai siti di IPA).
  *
@@ -1121,6 +1175,21 @@ export interface StatusOut {
 }
 
 export const status = () => call<StatusOut>("/api/status");
+
+/** Latest catalog measurements for the internal monitoring view. */
+export interface CatalogAccess {
+  municipality_istat: string;
+  surface: "ordinary_data" | "transparency";
+  access_mode: "direct" | "mediated" | "indirect" | "unavailable";
+  platform_id: string | null;
+  platform_compatibility: string;
+  measured_at: string;
+  measurement_id: string;
+}
+
+export const catalogAccess = () => call<CatalogAccess[]>("/api/catalog/access");
+export const catalogAccessFor = (codiceIstat: string) =>
+  call<CatalogAccess[]>(`/api/catalog/access/${encodeURIComponent(codiceIstat)}`);
 
 /** Result of `GET /api/comune-nearby?lat=&lon=` — nullable: there may be no
  * supported comune near the citizen's current position. This is a proximity

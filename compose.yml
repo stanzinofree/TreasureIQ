@@ -40,20 +40,30 @@ services:
     ports:
       - "8010:8000"
     environment:
+      # GameBook-style engine: deterministic recognition in production.
+      # Set to `model` only when an explicit provider is available.
+      TREASUREIQ_ENGINE_INTENT_BACKEND: ${TREASUREIQ_ENGINE_INTENT_BACKEND:-rust}
+      TREASUREIQ_NARRATOR_BACKEND: ${TREASUREIQ_NARRATOR_BACKEND:-deterministic}
+      TREASUREIQ_LLAMACPP_URL: ${TREASUREIQ_LLAMACPP_URL:-http://llama-cpp:8080}
       TREASUREIQ_DATA_DIR: /data
+      # The curated data mount is read-only; anonymous conversation state is
+      # runtime data and must live on the writable persistent /live mount.
+      TREASUREIQ_CONVERSATION_DB: /live/conversations.sqlite3
       TREASUREIQ_CORS_ORIGINS: "http://localhost:3000,http://127.0.0.1:3000"
       # Signs the demo session cookie. Override in any real deployment — the
       # default is public in this repository and therefore not a secret.
       TREASUREIQ_SECRET: ${TREASUREIQ_SECRET:-treasureiq-demo-not-secret}
-      # Which LLM backend serves extraction/chat. Default is the local,
-      # offline-friendly Ollama daemon; set to "anthropic" to use the API
-      # fallback instead.
+      # Compatibility provider for legacy extraction routes. The citizen chat
+      # recognition rail is deterministic (TREASUREIQ_ENGINE_INTENT_BACKEND)
+      # and does not require Ollama. Set this only for routes that still use
+      # provider-backed extraction.
       TREASUREIQ_LLM_PROVIDER: ${TREASUREIQ_LLM_PROVIDER:-ollama}
-      # host.docker.internal lets the container reach an Ollama daemon
-      # running on the host, since Ollama itself is not containerised here.
+      # Optional endpoint for the compatibility provider; it is not needed by
+      # the normal deterministic chat path.
       OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-http://host.docker.internal:11434}
       # Optional: only needed when TREASUREIQ_LLM_PROVIDER=anthropic.
       ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+
     # Gradino 3 (D-32): per un comune fuori copertura, il cui portale non
     # espone gli uffici in una forma leggibile, la chat cerca sul web mentre
     # il cittadino aspetta. Il risultato non e' mai un dato di TreasureIQ e
@@ -86,6 +96,43 @@ services:
       # un risultato non verificato archiviato fra i dati curati ne
       # erediterebbe l'autorità senza averla mai guadagnata.
       - ./data-live:/live
+    restart: unless-stopped
+
+  # Optional GameBook-style prose layer. It is never started by the default
+  # `docker compose up`; the deterministic chat works without this service.
+  llama-cpp:
+    profiles: ["llm"]
+    image: ghcr.io/ggml-org/llama.cpp:server
+    volumes:
+      - ./models:/models:ro
+    command: ["-m", "/models/tiq-model.gguf", "--host", "0.0.0.0"]
+    expose:
+      - "8080"
+
+  # Non parte con `make up`: lo sweep interroga portali pubblici e deve essere
+  # attivato esplicitamente in deployment o durante una prova controllata.
+  sweep-worker:
+    profiles: ["sweep"]
+    build:
+      context: ./api
+      target: base
+    command: ["python", "-m", "treasureiq.sweep_worker"]
+    environment:
+      TREASUREIQ_DATA_DIR: /scrivibile
+      TREASUREIQ_LIVE_DIR: /live
+      TREASUREIQ_SWEEP_DB: /scrivibile/storico.db
+      TREASUREIQ_SWEEP_BATCH_SIZE: ${TREASUREIQ_SWEEP_BATCH_SIZE:-20}
+      TREASUREIQ_SWEEP_INTERVAL_SECONDS: ${TREASUREIQ_SWEEP_INTERVAL_SECONDS:-120}
+      TREASUREIQ_SWEEP_WORKERS: ${TREASUREIQ_SWEEP_WORKERS:-6}
+      TREASUREIQ_SWEEP_DELAY: ${TREASUREIQ_SWEEP_DELAY:-0}
+      TREASUREIQ_SWEEP_ADERENZA: ${TREASUREIQ_SWEEP_ADERENZA:-0}
+    volumes:
+      - ./data:/scrivibile
+      - ./data-live:/live
+    # Il worker non espone l'API HTTP: non deve ereditare l'healthcheck
+    # dell'immagine API, altrimenti Docker lo marca unhealthy e lo riavvia.
+    healthcheck:
+      disable: true
     restart: unless-stopped
 
   web:

@@ -1,0 +1,229 @@
+"""Contracts for municipal online services and authenticated portals.
+
+The institutional site remains the discovery surface for a service, but the
+service itself has a separate contract.  This keeps a downloadable form,
+instructions and an authenticated procedure as distinct access options
+without pretending that TIQ can perform a citizen's authentication.
+"""
+
+from __future__ import annotations
+
+from datetime import datetime
+from enum import Enum
+
+from pydantic import AnyHttpUrl, Field
+
+from treasureiq.catalog.contracts import ConnectorRef, Surface, _StrictModel
+
+
+class ServiceKey(str, Enum):
+    """Closed vocabulary of civic services the chat can request (Ramo 3).
+
+    A normalized identity for the service the citizen asks about — distinct
+    from any portal entrypoint (``ServicePortalCandidate``) or access mode.
+    It is a domain contract shared by chat recognition, the query planner and
+    the (future) service cache/connectors, so it lives here and not in
+    ``chat/`` (chat recognises the key, it does not own the vocabulary).
+
+    Extended only by adding a value, never by falling back on the nearest
+    one: a service outside this vocabulary stays unrecognised (``None`` at the
+    recogniser), it is not mapped to a neighbour.
+    """
+
+    CARTA_IDENTITA = "carta_identita"
+    CAMBIO_RESIDENZA = "cambio_residenza"
+    ACCESSO_ATTI = "accesso_atti"
+    STATO_CIVILE = "stato_civile"
+    TRIBUTI = "tributi"
+
+
+#: One canonical REST search term per key, used to NARROW a single ``search=``
+#: query against the WordPress service CPT (Ramo 3, Slice 4).  This is the
+#: acquisition side of the vocabulary and is deliberately distinct from the
+#: recogniser's markers (``chat/service_key.py``): the recogniser interprets
+#: citizen text, this drives one deterministic fetch.  The candidate title is
+#: still confirmed by the recogniser afterwards, so a single term is enough —
+#: no multi-query fan-out (that would add traffic and ambiguity).
+SERVICE_SEARCH_TERM: dict["ServiceKey", str] = {
+    ServiceKey.CARTA_IDENTITA: "carta d'identità",
+    ServiceKey.CAMBIO_RESIDENZA: "cambio di residenza",
+    ServiceKey.ACCESSO_ATTI: "accesso agli atti",
+    ServiceKey.STATO_CIVILE: "stato civile",
+    ServiceKey.TRIBUTI: "tributi",
+}
+
+
+class ServiceAccessMode(str, Enum):
+    INFORMATION = "information"
+    DOWNLOAD = "download"
+    AUTHENTICATED_ONLINE = "authenticated_online"
+
+
+class AuthenticationMethod(str, Enum):
+    SPID = "spid"
+    CIE = "cie"
+    CNS = "cns"
+    PASSWORD = "password"
+    UNKNOWN = "unknown"
+
+
+class ServicePortalRole(str, Enum):
+    PERSONAL_AREA = "personal_area"
+    APPOINTMENT = "appointment"
+    TELEMATICS_DESK = "telematics_desk"
+    ONLINE_SERVICE = "online_service"
+    UNKNOWN = "unknown"
+
+
+class ServiceAccessOption(_StrictModel):
+    """One official way to reach a service discovered by a connector.
+
+    ``sp_*`` carry verified SP provenance merged in read-time (Ramo 3, Slice 6)
+    onto an ``AUTHENTICATED_ONLINE`` option whose URL matches a discovered
+    ``ServicePortalCandidate`` of the same source (per-link evidence, §2/§3.1).
+    Optional, default ``None`` — a pure BASE option (no SP link) leaves them
+    unset; a v2 entry read by a v3 reader stays valid because they are optional.
+    """
+
+    mode: ServiceAccessMode
+    url: AnyHttpUrl
+    provider: str | None = None
+    authentication: tuple[AuthenticationMethod, ...] = ()
+    requires_authentication: bool = False
+    official: bool = True
+    source_url: AnyHttpUrl | None = None
+    automatable: bool = False
+    sp_platform_id: str | None = None
+    sp_role: ServicePortalRole | None = None
+    sp_fingerprint: str | None = None
+
+
+class ServiceReference(_StrictModel):
+    """A normalized service reference emitted by BASE discovery.
+
+    ``options`` can contain both a public/download path and an authenticated
+    online path for the same service.  The query planner later chooses the
+    requested path; it never infers credentials or logs in.
+    """
+
+    service_id: str = Field(min_length=1)
+    title: str = Field(min_length=1)
+    source_url: AnyHttpUrl
+    options: tuple[ServiceAccessOption, ...] = Field(min_length=1)
+    discovered_from: Surface = Surface.ORDINARY_DATA
+    provider_platform: str | None = None
+    discovered_at: datetime
+
+
+#: Bump when WHAT we normalise into a cached ``ServiceReference`` changes, so an
+#: entry written by an older (or newer) extractor is never served as-is.  The
+#: cache treats any ``schema_version`` other than this as a miss (re-resolve).
+#: v2 (Slice 5) added the ``connector`` field: a v1 entry has no connector and
+#: is not safely readable → miss/regenerate, no risky migration.
+#: v3 (Slice 6) added the optional ``sp_*`` provenance fields on
+#: ``ServiceAccessOption``: read-time merge never writes them, so a v2 cache is
+#: still readable (fields optional), but the policy bumps on every shape change.
+SERVICE_CACHE_SCHEMA_VERSION = 3
+
+
+class CachedService(_StrictModel):
+    """One entry of the resolved-service cache, keyed by ``service_key``.
+
+    ``reference`` is the normalised service; ``retrieved_at`` is when the
+    connector RESOLVED it, distinct from ``reference.discovered_at`` (when the
+    entrypoint/service was first DISCOVERED).  ``connector`` is the provenance
+    (name+version) that produced it, preserved so a cache hit reports the same
+    connector a live resolution would — never derived from
+    ``reference.provider_platform`` (that loses the connector's name/version).
+    ``schema_version`` gates the entry: a value other than
+    ``SERVICE_CACHE_SCHEMA_VERSION`` is a miss.
+    """
+
+    service_key: ServiceKey
+    reference: ServiceReference
+    retrieved_at: datetime
+    connector: ConnectorRef
+    schema_version: int = Field(default=SERVICE_CACHE_SCHEMA_VERSION, ge=0)
+
+
+class ResolvedService(_StrictModel):
+    """A resolved service plus its provenance — the envelope the resolver returns.
+
+    ``retrieved_at`` is when the connector RESOLVED the service (a cache hit
+    carries the cached timestamp, a live call the moment of the call), never
+    ``reference.discovered_at`` (when the page was first discovered): using
+    discovery time for freshness would misstate when the service was measured.
+    ``from_cache`` and ``connector`` let the batch builder set a correct
+    ``Freshness`` and report the connector even after a cache hit.
+    """
+
+    reference: ServiceReference
+    retrieved_at: datetime
+    from_cache: bool
+    connector: ConnectorRef
+
+
+class ServiceCacheFile(_StrictModel):
+    """The per-municipality cache file: several ``service_key`` entries coexist."""
+
+    source_id: str = Field(min_length=1)
+    entries: tuple[CachedService, ...] = ()
+    updated_at: datetime
+
+
+class ServicePortalCandidate(_StrictModel):
+    """A persisted SP entrypoint found on the official BASE site.
+
+    ``url`` is deliberately the URL used by confirmation checks.  Discovery
+    metadata remains alongside it so a broken entrypoint can trigger a new
+    discovery without confusing the last known portal with a guessed URL.
+    """
+
+    url: AnyHttpUrl
+    label: str = Field(min_length=1)
+    source_url: AnyHttpUrl
+    role: ServicePortalRole = ServicePortalRole.UNKNOWN
+    access_mode: ServiceAccessMode = ServiceAccessMode.AUTHENTICATED_ONLINE
+    provider_hint: str | None = None
+    platform_id: str | None = None
+    fingerprint: str | None = None
+    recognition_status: str = "unknown"
+    capabilities: tuple[str, ...] = ()
+    authentication: tuple[AuthenticationMethod, ...] = ()
+    discovered_at: datetime
+
+
+class ServicePortalGroup(_StrictModel):
+    """Logical SP portal grouping one platform and its capabilities."""
+
+    portal_id: str = Field(min_length=1)
+    platform_id: str | None = None
+    entrypoints: tuple[AnyHttpUrl, ...] = Field(min_length=1)
+    roles: tuple[ServicePortalRole, ...] = ()
+    capabilities: tuple[str, ...] = ()
+    recognition_status: str = "unknown"
+
+
+class SourceInventory(_StrictModel):
+    """Persistent inventory of source entrypoints for a municipality.
+
+    ``transparency_url`` is the persisted AT entrypoint (not merely the page
+    where discovery started); each ``service_portals[].url`` is an SP
+    entrypoint.  Confirmation checks must start from these URLs and never
+    rediscover the institutional home unless confirmation fails.
+    """
+
+    source_id: str = Field(min_length=1)
+    base_url: AnyHttpUrl
+    base_platform: str | None = None
+    base_fingerprint: str | None = None
+    base_confirmed_at: datetime | None = None
+    base_source_health: bool | None = None
+    base_failure_reason: str | None = None
+    transparency_url: AnyHttpUrl | None = None
+    transparency_platform: str | None = None
+    transparency_fingerprint: str | None = None
+    transparency_confirmed_at: datetime | None = None
+    service_portals: tuple[ServicePortalCandidate, ...] = ()
+    service_portal_groups: tuple[ServicePortalGroup, ...] = ()
+    updated_at: datetime

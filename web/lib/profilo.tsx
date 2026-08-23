@@ -24,10 +24,9 @@
  * with each question.
  */
 
-import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
-import { dimenticaCampo as dimenticaCampoServer, logout } from "@/lib/api";
+import { createContext, useCallback, useContext, useMemo, useState } from "react";
 
-export type Origine = "dichiarato" | "geolocalizzazione" | "accesso";
+export type Origine = "dichiarato" | "geolocalizzazione";
 
 export type FattoComune = {
   nome: string;
@@ -79,16 +78,6 @@ export type Profilo = {
    * cambio di comune non lascia in vista i numeri di quello precedente. */
   numeriUtili?: NumeriUtiliProfilo;
   interessi?: string[];
-  /**
-   * Present only when a real authenticated session supplies it. The SPID/CIE
-   * flow in this build is a simulation and produces no codice fiscale, so this
-   * stays undefined rather than being filled with a plausible-looking string:
-   * a fabricated identifier shown back to a citizen as their own is worse than
-   * no identifier at all.
-   */
-  codiceFiscale?: string;
-  /** True once the citizen has authenticated, with or without a CF. */
-  accesso?: boolean;
 };
 
 type ProfiloContextValue = {
@@ -103,10 +92,7 @@ type ProfiloContextValue = {
    * update never erases a fact by omission. Saying "no, it's another comune"
    * IS an erasure, and it must not take a name or an age down with it. */
   dimenticaComune: () => void;
-  /** Drop a single fact — età, interessi (the whole list) or nome — keeping
-   * everything else, same reasoning as `dimenticaComune`. If a session is
-   * open, the server has to be told too: without it, the verdict keeps being
-   * computed from a fact the strip no longer shows (R-F). */
+  /** Drop a single fact while keeping everything else. */
   dimenticaFatto: (
     campo:
       | "eta"
@@ -124,46 +110,7 @@ type ProfiloContextValue = {
   quantiFatti: number;
 };
 
-/** Unset one fact on the live server session, in place.
- *
- * A full re-`login()` was the first attempt here and it was wrong: the
- * server rebuilds the profile from `LoginRequest` defaults, so replaying it
- * after a removal silently reinstates fields the citizen never touched
- * (`nucleo_familiare` back to the concrete `1`, not back to "unknown") and
- * an engine None-guard that should fire on the untouched field never does.
- * `dimenticaCampo` mutates the existing signed profile instead — every field
- * but the one named here keeps its current value.
- *
- * `valore` is only meaningful for campo "interessi", to drop one tag rather
- * than the whole list. */
-function dimenticaCampoSessione(campo: string, valore?: string): void {
-  dimenticaCampoServer(campo, valore).catch(() => {
-    /* best-effort correction — a failed call cannot re-add the fact the
-       citizen just asked to remove, so there is nothing to roll back */
-  });
-}
-
 const ProfiloContext = createContext<ProfiloContextValue | null>(null);
-
-/** Whether this load of the application has already cleared its session.
- *
- * Module scope on purpose: it outlives every client-side navigation and is
- * reset only by a real page load, which is precisely the line between
- * "arriving" and "moving around inside". */
-let giaAzzerato = false;
-
-// La chiave locale è camelCase; il campo che il server sa dimenticare è
-// snake_case (e "nome" non esiste affatto lato server). Questa mappa fa da
-// ponte: assente qui = niente chiamata server (cancellazione solo locale).
-const CAMPO_SERVER: Record<string, string> = {
-  eta: "eta",
-  interessi: "interessi",
-  sesso: "sesso",
-  disabilita: "disabilita",
-  nucleoFamiliare: "nucleo_familiare",
-  disabilitaNucleo: "disabilita_nucleo",
-  figliMinori: "figli_minori",
-};
 
 function contaFatti(p: Profilo): number {
   return [
@@ -178,7 +125,6 @@ function contaFatti(p: Profilo): number {
     p.figliMinori,
     p.comune,
     p.interessi?.length ? p.interessi : undefined,
-    p.codiceFiscale,
   ].filter((v) => v !== undefined).length;
 }
 
@@ -197,15 +143,10 @@ export function ProfiloProvider({ children }: { children: React.ReactNode }) {
     });
   }, []);
 
-  // Dropping only the local copy left the signed cookie in place, so the
-  // interface claimed to know nothing while every answer was still being
-  // computed from the comune — the same contradiction as the missing
-  // rehydration, in the other direction. The local state is cleared first
-  // and regardless: a failed network call must not leave the citizen looking
-  // at data they just asked to be rid of.
+  // The profile is local to the tab. Clearing it immediately must not depend
+  // on a network call succeeding.
   const dimenticaComune = useCallback(() => {
     setProfilo((corrente) => {
-      if (corrente.accesso) dimenticaCampoSessione("comune");
       const next = { ...corrente };
       delete next.comune;
       return next;
@@ -222,11 +163,9 @@ export function ProfiloProvider({ children }: { children: React.ReactNode }) {
         | "disabilita"
         | "nucleoFamiliare"
         | "disabilitaNucleo"
-        | "figliMinori",
+      | "figliMinori",
     ) => {
       setProfilo((corrente) => {
-        const server = CAMPO_SERVER[campo];
-        if (corrente.accesso && server) dimenticaCampoSessione(server);
         const next = { ...corrente };
         delete next[campo];
         // Il sesso porta con sé la sua provenienza: tolto il sesso, la nota
@@ -240,7 +179,6 @@ export function ProfiloProvider({ children }: { children: React.ReactNode }) {
 
   const dimenticaInteresse = useCallback((tag: string) => {
     setProfilo((corrente) => {
-      if (corrente.accesso) dimenticaCampoSessione("interessi", tag);
       const interessi = corrente.interessi?.filter((i) => i !== tag);
       return { ...corrente, interessi: interessi?.length ? interessi : undefined };
     });
@@ -248,42 +186,6 @@ export function ProfiloProvider({ children }: { children: React.ReactNode }) {
 
   const dimentica = useCallback(() => {
     setProfilo({});
-    logout().catch(() => {
-      /* already logged out, or offline — the local state is gone either way */
-    });
-  }, []);
-
-  // Arriving means arriving as nobody.
-  //
-  // This used to rehydrate from /api/me, which fixed one contradiction and
-  // created a worse one: the signed cookie lasts eight hours, so opening the
-  // chat greeted a visitor with an age and a comune they had not given in
-  // this visit — the service recognising someone who never introduced
-  // themselves, which is exactly what the product promises not to do.
-  //
-  // Ending the session instead of reading it keeps the two sides honest in
-  // the other direction: nothing is known here, and nothing is known on the
-  // server either, so no answer can quietly be shaped by a profile the strip
-  // is not showing. Identity is re-established by signing in, which takes one
-  // click and is the moment the citizen actually chooses it.
-  useEffect(() => {
-    // Once per load of the application, not once per visit to this page.
-    //
-    // This provider lives on the chat page, so it also mounts every time the
-    // reader navigates *back* to the chat from anywhere else in the site — and
-    // logging out there meant that signing in, going to /opportunita and
-    // returning to ask another question silently ended the session. The next
-    // page then rendered empty and looked broken, which is exactly how this
-    // was found.
-    //
-    // A module-level flag survives client-side navigation and dies with a real
-    // page load, which is the distinction wanted: arriving at the application
-    // means arriving as nobody; moving around inside it does not.
-    if (giaAzzerato) return;
-    giaAzzerato = true;
-    logout().catch(() => {
-      /* nothing to end — already the clean slate we wanted */
-    });
   }, []);
 
   const value = useMemo(

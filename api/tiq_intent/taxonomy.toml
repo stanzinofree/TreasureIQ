@@ -1,0 +1,241 @@
+# Taxonomy intent — livello A (keyword deterministiche).
+#
+# Fonte unica condivisa da DUE consumatori:
+#   - il crate Rust `tiq_intent` (scorer in-process via PyO3)
+#   - l'oracolo Python di riferimento (test + fallback)
+#
+# REGOLE DI SCOPE (non violarle senza cablare respond.py):
+#   - I 23 `topic` qui sono ESATTAMENTE treasureiq.chat.intent.Topic (meno
+#     "sconosciuto", che e' l'esito di default, non una categoria con keyword).
+#     Nessun topic nuovo: aggiungerne uno significa aggiungere rami a valle.
+#     Qui si allarga solo la RECALL (piu' frasi -> stesso topic).
+#   - Le keyword STORICHE di TOPIC_KEYWORDS sono conservate verbatim; le righe
+#     in piu' sono le estensioni (parafrasi, plurali, forme colloquiali) che
+#     chiudono i buchi trovati nell'analisi copertura.
+#   - Un trattino finale ("maternit-", "disabilit-") e' uno STEM: match del
+#     prefisso, come rstrip("-") in _topic_keyword_presente.
+#
+# COLLISIONI VOLUTE (le risolve il peso per specificita', non un topic sbagliato):
+#   "tassa rifiuti" -> tributi (2 token) batte "rifiuti" -> rifiuti (1 token).
+#   "assistenza domiciliare" e' condivisa disabilita/caregiver come nell'originale.
+#
+# SCORING (contratto per il crate e per l'oracolo):
+#   msg -> casefold. Per ogni keyword presente come sottostringa (o stem se
+#   termina con "-"), peso = numero di token della keyword (la frase piu'
+#   lunga e specifica vince). score(topic) = max peso fra le sue keyword
+#   presenti. topic scelto = argmax score. Pareggio fra topic diversi allo
+#   stesso peso massimo, o score 0 -> "sconosciuto".
+#   confidence = score_top / (score_top + score_secondo)  (1.0 se unico hit).
+#   Sotto soglia di confidence il chiamante ripiega a "sconosciuto"
+#   (fallimento sicuro: la chat chiede la categoria, non indovina).
+
+schema_version = 1
+
+# Topic informativi per natura: `kind` sempre "informazione" (nessun verdetto
+# di idoneita' da dare). Allineato a INFORMATIONAL_BY_NATURE_TOPICS.
+informational_by_nature = ["rifiuti", "volontariato"]
+
+# --- kind: agevolazione vs informazione -------------------------------------
+# DIRITTO/beneficio -> agevolazione; FATTO civico (quando/dove/come/orario/
+# ufficio) -> informazione. In pareggio o assenza vince "informazione".
+[kind]
+agevolazione_markers = [
+  "ho diritto", "ne ho diritto", "posso avere", "posso ottenere", "mi spetta",
+  "spetta", "spettano", "ho bisogno di aiuto", "non riesco a pagare",
+  "non ce la faccio a pagare", "difficolta a pagare", "sono in difficolta",
+  "contributo", "contributi", "agevolazione", "agevolazioni", "bonus",
+  "sussidio", "sussidi", "incentivo", "incentivi", "sostegno economico",
+  "aiuto economico", "esenzione", "sconto", "riduzione", "rimborso",
+  "agevolat-",
+]
+informazione_markers = [
+  "quando", "a che ora", "che ora", "orario", "orari", "apre", "apertura",
+  "chiude", "chiuso", "chiusura", "aperto", "dove si trova", "dov'e",
+  "come faccio", "come posso", "come si fa", "come devo", "a chi mi rivolgo",
+  "a chi devo", "chi e il responsabile", "responsabile", "email", "pec",
+  "telefono", "numero di telefono", "recapito", "recapiti", "indirizzo",
+  "calendario", "scadenza", "modulo", "modulistica", "documenti servono",
+  "cosa serve", "prenotare", "prenotazione", "appuntamento",
+]
+
+# --- 23 topic ---------------------------------------------------------------
+
+[topic.trasporto_scolastico]
+keywords = [
+  "trasporto scolastico", "scuolabus",                       # storiche
+  "pulmino della scuola", "pulmino scolastico", "bus della scuola",
+  "trasporto per la scuola", "servizio scuolabus",
+]
+
+[topic.trasporto_pubblico]
+keywords = [
+  "trasporto pubblico", "mezzi pubblici", "autobus", "abbonamento",
+  "metropolitana", "tpl",                                    # storiche
+  "mezzo pubblico", "pullman", "corriera", "metro", "trasporti pubblici",
+  "aiuti per i trasporti", "agevolazioni trasporti", "abbonamento autobus",
+  "abbonamento ai mezzi", "biglietto autobus", "bus urbano", "linea urbana",
+]
+
+[topic.mensa_scolastica]
+keywords = [
+  "mensa",                                                   # storica
+  "mensa scolastica", "refezione", "refezione scolastica", "pasto a scuola",
+  "buoni pasto scuola", "retta mensa", "tariffa mensa", "servizio mensa",
+]
+
+[topic.contributo_libri]
+keywords = [
+  "libri di testo", "libri scolastici", "sussidi didattici",  # storiche
+  "libri di scuola", "contributo libri", "buono libri", "cedole librarie",
+]
+
+[topic.borsa_studio]
+keywords = [
+  "borsa di studio", "iostudio",                             # storiche
+  "borse di studio", "io studio", "diritto allo studio",
+  "aiuto per lo studio", "sostegno allo studio", "tasse universitarie",
+]
+
+[topic.voucher_conciliazione]
+keywords = [
+  "voucher", "asilo nido", "centro estivo", "conciliazione vita-lavoro",  # storiche
+  "nido", "asilo", "centri estivi", "conciliazione vita lavoro",
+  "voucher baby sitting", "voucher nido", "conciliazione famiglia lavoro",
+]
+
+[topic.assegno_maternita]
+keywords = [
+  "maternit-", "gravidanza", "permesso rosa",                # storiche
+  "assegno di maternita", "assegno maternita", "sono incinta",
+  "aspetto un figlio", "in dolce attesa", "congedo di maternita",
+]
+
+[topic.contributo_affitto]
+keywords = [
+  "affitto", "canone di locazione", "locazione", "sfratt-",  # storiche
+  "canone d'affitto", "pagare l'affitto", "morosita", "moroso",
+  "contributo affitto", "aiuto per l'affitto", "sostegno affitto",
+  "fondo affitti", "non riesco a pagare l'affitto",
+]
+
+[topic.sostegno_utenze]
+keywords = [
+  "bolletta", "bollette", "bonus sociale", "energia elettrica",
+  "fornitura elettrica", "luce e gas", "utenza elettrica",   # storiche
+  "utenze", "utenza domestica", "gas", "bolletta della luce", "bolletta del gas",
+  "bonus energia", "bonus luce", "bonus gas", "bonus bollette",
+  "pagare le bollette", "non riesco a pagare le bollette",
+  "non riesco a pagare le utenze", "caro bollette", "bonus idrico",
+  "bolletta dell'acqua", "riscaldamento",
+]
+
+[topic.assistenza_disabilita]
+keywords = [
+  "disabil-", "alzheimer", "assistenza domiciliare",         # storiche
+  "invalidita", "invalido", "invalida", "handicap", "legge 104",
+  "non autosufficiente", "sono disabile", "figlio disabile",
+  "figlia disabile", "sostegno disabili", "aiuto per disabili",
+]
+
+[topic.contrassegno_disabili]
+keywords = [
+  "contrassegno disabili", "permesso disabili",              # storiche
+  "pass disabili", "contrassegno invalidi", "parcheggio disabili",
+  "tagliando disabili", "cude", "posto auto disabili",
+]
+
+[topic.anagrafe_carta_identita]
+keywords = [
+  "anagrafe", "carta d'identit-", "carta identit-",          # storiche
+  "carta di identit-", "cie", "residenza", "cambio di residenza",
+  "cambio residenza", "certificato", "certificati", "stato civile",
+  "autocertificazione", "codice fiscale", "atto di nascita",
+  "certificato di residenza", "certificato di nascita", "ufficio anagrafe",
+]
+
+[topic.accesso_atti]
+keywords = [
+  "accesso agli atti", "atti amministrativi",                # storiche
+  "accesso atti", "accedere agli atti", "diritto di accesso",
+  "documento amministrativo", "copia di un atto", "delibera", "delibere",
+  "determina", "determine", "consultare gli atti", "foia",
+]
+
+[topic.occupazione_suolo]
+keywords = [
+  "occupazione suolo", "suolo pubblico",                     # storiche
+  "occupazione di suolo pubblico", "cosap", "tosap",
+  "dehors", "tavolini all'aperto", "passo carrabile", "ponteggio su strada",
+]
+
+[topic.caregiver_domiciliare]
+keywords = [
+  "caregiver", "assistenza domiciliare",                     # storiche
+  "assistente familiare", "badante", "cura di un familiare",
+  "assistere un familiare", "assistenza a domicilio", "cura a domicilio",
+]
+
+[topic.matrimonio_separazione]
+keywords = [
+  "matrimonio", "separazione", "divorzio",                   # storiche
+  "sposarmi", "pubblicazioni di matrimonio", "unione civile",
+  "separazione consensuale", "mi sto separando", "nozze",
+]
+
+[topic.inclusione_sociale]
+keywords = [
+  "inclusione sociale", "hermes",                            # storiche
+  "esclusione sociale", "poverta", "indigenza", "servizi sociali",
+  "assistente sociale", "reddito di inclusione", "sostegno alle famiglie",
+  "persone fragili", "vulnerabilita sociale", "emarginazione",
+]
+
+[topic.suap_imprese]
+keywords = [
+  "suap", "impresa", "attività produttive",                  # storiche
+  "aprire un'attivita", "aprire un negozio", "aprire una ditta",
+  "partita iva comune", "attivita produttiva", "scia", "commercio",
+  "avviare un'impresa", "esercizio commerciale",
+]
+
+[topic.area_verde]
+keywords = [
+  "area verde", "adotta un'area",                            # storiche
+  "aree verdi", "adozione area verde", "adottare un'aiuola", "aiuola",
+  "giardino pubblico", "parco pubblico", "cura del verde",
+  "manutenzione verde", "sponsorizzare un'area verde",
+]
+
+[topic.rifiuti]
+keywords = [
+  "rifiuti", "raccolta differenziata", "isola ecologica",
+  "porta a porta", "calendario raccolta", "vetro",           # storiche
+  "differenziata", "immondizia", "spazzatura", "pattume",
+  "ritiro dell'umido", "ritiro del vetro", "ritiro della plastica",
+  "ritiro dei rifiuti", "ecocentro", "ingombranti", "ritiro ingombranti",
+  "calendario rifiuti", "quando passa la differenziata", "bidone",
+]
+
+[topic.volontariato]
+keywords = [
+  "volontariato", "volontario", "servizio civile", "associazioni",
+  "anziani",                                                 # storiche
+  "fare volontariato", "diventare volontario", "offrirmi come volontario",
+  "associazione di volontariato", "dare una mano", "gruppo di volontari",
+]
+
+[topic.tributi]
+keywords = [
+  "tributi", "imu", "tari", "tassa rifiuti", "tassa sui rifiuti",
+  "tasse comunali", "imposta municipale",                    # storiche
+  "tassa", "tasse", "tributo", "canone unico",
+  "pagamento tributi", "avviso di pagamento", "cartella tributi",
+]
+
+[topic.bandi]
+keywords = [
+  "bando", "bandi", "avviso pubblico", "avvisi pubblici", "graduatoria",  # storiche
+  "graduatorie", "concorso", "concorsi", "concorso pubblico",
+  "selezione pubblica", "manifestazione di interesse", "avviso di selezione",
+  "bando di concorso", "domanda di partecipazione",
+]

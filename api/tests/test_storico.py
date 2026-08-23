@@ -15,6 +15,7 @@ from treasureiq.storico import (
     evoluzione,
     panoramica_piattaforme_at,
     registra_portali,
+    rimuovi_portali,
 )
 
 # The `portale_snapshot` CREATE TABLE exactly as it stood before ciclo 16,
@@ -224,6 +225,26 @@ def test_registra_portali_firme_scattate_none_scrive_null(tmp_path: Path) -> Non
         ).fetchone()
 
     assert salvata["firme_scattate"] is None
+
+
+def test_rimuovi_portali_consente_il_retry_del_batch(tmp_path: Path) -> None:
+    db_path = tmp_path / "storico.db"
+    oggi = date(2026, 8, 11)
+    registra_portali(
+        db_path,
+        [
+            _riga("058009", "Anzio", "Lazio", "ignota", rilevato_il=oggi),
+            _riga("058091", "Roma", "Lazio", "hgate", rilevato_il=oggi),
+        ],
+    )
+
+    assert rimuovi_portali(db_path, rilevato_il=oggi, codici_istat=["058009"]) == 1
+
+    with apri(db_path) as conn:
+        righe = conn.execute(
+            "SELECT codice_istat FROM portale_snapshot ORDER BY codice_istat"
+        ).fetchall()
+    assert [r["codice_istat"] for r in righe] == ["058091"]
 
 
 def test_panoramica_piattaforme_at_raggruppa_ed_esclude_i_null(tmp_path: Path) -> None:

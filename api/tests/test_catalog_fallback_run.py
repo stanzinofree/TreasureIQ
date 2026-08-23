@@ -1,0 +1,76 @@
+from datetime import datetime, timezone
+import json
+
+from treasureiq.catalog.fallback_run import load_mappa, run_fallback
+from treasureiq.mappa_connettore import MappaConnettore
+
+
+def test_backoffice_fallback_run_is_auditable_without_chat(monkeypatch) -> None:
+    mappa = MappaConnettore(
+        codice_istat="058003",
+        nome="Albano",
+        sito=None,
+        sondato_il=datetime.now(timezone.utc).isoformat(),
+    )
+
+    result = run_fallback(mappa, platform_id="halley", run_id="run-test")
+
+    assert result.run_id == "run-test"
+    assert result.source_id == "058003"
+    assert len(result.batches) == 4
+    assert all(batch.access_mode.value == "indirect" for batch in result.batches)
+
+
+def test_backoffice_can_load_a_cached_mappa_by_istat(monkeypatch) -> None:
+    monkeypatch.setattr(
+        "treasureiq.catalog.fallback_run.mappa_connettore",
+        lambda codice, usa_cache: MappaConnettore(
+            codice_istat=codice,
+            nome="Albano",
+            sito="https://comune.example",
+            sondato_il=datetime.now(timezone.utc).isoformat(),
+        ),
+    )
+
+    mappa = load_mappa(codice_istat="058003")
+
+    assert mappa.codice_istat == "058003"
+
+
+def test_backoffice_can_extract_mappa_from_scan_json(tmp_path) -> None:
+    path = tmp_path / "scansione.json"
+    path.write_text(
+        json.dumps(
+            {
+                "mappa": {
+                    "codice_istat": "058003",
+                    "nome": "Albano",
+                    "sito": "https://comune.example",
+                    "sondato_il": datetime.now(timezone.utc).isoformat(),
+                }
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    mappa = load_mappa(scansione_json=path)
+
+    assert mappa.sito == "https://comune.example"
+
+
+def test_backoffice_uses_platform_from_mappa_when_cli_omits_it(tmp_path) -> None:
+    path = tmp_path / "mappa.json"
+    path.write_text(
+        MappaConnettore(
+            codice_istat="058003",
+            nome="Albano",
+            sito=None,
+            sondato_il=datetime.now(timezone.utc).isoformat(),
+            piattaforma_id="halley",
+        ).model_dump_json(),
+        encoding="utf-8",
+    )
+
+    mappa = load_mappa(mappa_json=path)
+
+    assert mappa.piattaforma_id == "halley"

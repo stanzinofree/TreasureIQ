@@ -3,7 +3,8 @@
 Quattro casi, nessuna rete:
 
 1. `leggi_connettore` risponde con un `EsitoConnettore` ricco -> la risposta
-   porta i recapiti VERBATIM, `access_mode` M4_CONNETTORE, niente più il
+   porta i recapiti VERBATIM, `access_mode` MEDIATED (vocabolario catalog:
+   la scheda si decide sulla DataBatch del connettore), niente più il
    vecchio «NIENTE DI PUBBLICATO».
 2. `leggi_connettore` risponde `None` -> il gradino web resta invariato
    (A7/D-06): nessuna regressione per i comuni senza connettore.
@@ -25,8 +26,10 @@ from treasureiq.api import app
 from treasureiq.chat import respond
 from treasureiq.chat.intent import ChatIntent, QuestionKind, Topic
 from treasureiq.connettore import EsitoConnettore, UfficioConnettore
+from treasureiq.ingest.censimento import Indirizzabilita, RecuperabilitaOrari
+from treasureiq.catalog.contracts import AccessMode as CatalogAccessMode
 from treasureiq.integration import AccessMode
-from treasureiq.sonda_live import ComuneNoto
+from treasureiq.sonda_live import ComuneNoto, OrariLive
 
 CIAMPINO = ComuneNoto(
     codice_istat="058118",
@@ -136,6 +139,18 @@ def _esito_solo_urp() -> EsitoConnettore:
 def _chiedi(*, parole: str, monkeypatch: pytest.MonkeyPatch, esito: EsitoConnettore | None):
     monkeypatch.setattr(respond, "risolvi_comune", lambda _hint: CIAMPINO)
     monkeypatch.setattr(respond, "comune_per_codice", lambda _codice: CIAMPINO)
+    monkeypatch.setattr(
+        respond,
+        "leggi_orari_urp",
+        lambda _comune: OrariLive(
+            codice_istat=CIAMPINO.codice_istat,
+            nome=CIAMPINO.nome,
+            sito="https://www.comune.ciampino.roma.it",
+            indirizzabilita=Indirizzabilita.SOLO_HTML,
+            recuperabilita=RecuperabilitaOrari.NON_TENTATO,
+            letto_il="2026-08-04T00:00:00+00:00",
+        ),
+    )
     monkeypatch.setattr(respond.connettore, "leggi_connettore", lambda *_a, **_k: esito)
     return asyncio.run(
         respond._risposta_live(
@@ -159,7 +174,7 @@ def test_connettore_ricco_precede_il_web_e_mostra_recapiti_verbatim(
     risposta = _chiedi(parole="ufficio anagrafe", monkeypatch=monkeypatch, esito=_esito_ricco())
 
     assert risposta is not None
-    assert risposta.access_mode == AccessMode.M4_CONNETTORE.value
+    assert risposta.access_mode == CatalogAccessMode.MEDIATED.value
     assert risposta.info is not None
     assert risposta.info.office is not None
     assert risposta.info.office.telefono == "06 1234567"
@@ -210,7 +225,7 @@ def test_connettore_senza_match_tiene_il_dump_come_elenco(
         esito=_esito_solo_ufficio_estraneo(),
     )
     assert risposta is not None
-    assert risposta.access_mode == AccessMode.M4_CONNETTORE.value
+    assert risposta.access_mode == CatalogAccessMode.MEDIATED.value
     assert risposta.info is not None
     assert risposta.info.office is None
     assert risposta.esito_connettore is not None
@@ -247,7 +262,7 @@ def test_sinonimo_anagrafe_servizi_demografici_niente_telefono_inventato(
     )
 
     assert risposta is not None
-    assert risposta.access_mode == AccessMode.M4_CONNETTORE.value
+    assert risposta.access_mode == CatalogAccessMode.MEDIATED.value
     assert risposta.info.office is not None
     assert risposta.info.office.telefono is None
     # Onestà campo-per-campo (D-05): nessun numero — né diretto né di un

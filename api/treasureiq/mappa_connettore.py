@@ -43,6 +43,7 @@ from pathlib import Path
 from pydantic import BaseModel, Field
 
 from treasureiq.ingest.censimento import REST_BASE_UFFICI, _Sonda
+from treasureiq.ingest.piattaforma import Piattaforma
 from treasureiq.sonda_live import LIVE_DIR, ComuneNoto, comune_per_codice
 
 logger = logging.getLogger(__name__)
@@ -167,6 +168,11 @@ class MappaConnettore(BaseModel):
     nome: str
     sito: str | None
     sondato_il: str
+    #: Identificativo della piattaforma principale, quando la sonda lo ha
+    #: riconosciuto. Optional per retrocompatibilità con le mappe v0.
+    piattaforma_id: str | None = None
+    #: Identificativo separato della piattaforma Amministrazione Trasparente.
+    piattaforma_at_id: str | None = None
     servizi: AssetServizi = Field(default_factory=AssetServizi)
     uffici: AssetRest = Field(default_factory=AssetRest)
     #: Non un dato, una strada: «scrape» finché il probe non trova il CPT in
@@ -378,6 +384,7 @@ def _sonda_mappa(comune: ComuneNoto, *, timeout: float = 8.0) -> MappaConnettore
             )
 
         logo_url = None
+        piattaforma_id = None
         try:
             risposta_home = sonda.risposta(base)
         except Exception:  # noqa: BLE001 — homepage muta: nessun logo, non un errore
@@ -388,12 +395,16 @@ def _sonda_mappa(comune: ComuneNoto, *, timeout: float = 8.0) -> MappaConnettore
             and risposta_home.text
         ):
             logo_url = _estrai_logo(risposta_home.text, base)
+            piattaforma_id = _piattaforma_da_home(
+                risposta_home, source_id=comune.codice_istat, entrypoint_url=base
+            )
 
     return MappaConnettore(
         codice_istat=comune.codice_istat,
         nome=comune.nome,
         sito=comune.sito,
         sondato_il=sondato_il,
+        piattaforma_id=piattaforma_id,
         servizi=servizi,
         uffici=uffici,
         contatti_via=contatti_via,
@@ -401,6 +412,47 @@ def _sonda_mappa(comune: ComuneNoto, *, timeout: float = 8.0) -> MappaConnettore
         amministrazione_trasparente_rest_base=amministrazione_trasparente_rest_base,
         logo_url=logo_url,
     )
+
+
+#: Esiti della classifica che NON sono una piattaforma: un connettore non deve
+#: agganciarli. `piattaforma_id` resta `None`, e il resolver cade nel miss
+#: onesto invece di scegliere una famiglia a caso.
+_PIATTAFORME_NON_AGGANCIABILI = frozenset(
+    {Piattaforma.IGNOTA, Piattaforma.NON_MISURATA, Piattaforma.NON_TROVATA}
+)
+
+
+def _piattaforma_da_home(risposta, *, source_id: str, entrypoint_url: str) -> str | None:
+    """La famiglia di piattaforma dedotta dalla home, o `None` se non riconosciuta.
+
+    Riusa la risposta già scaricata per il logo: nessun fetch in più. Riconosce
+    via il **seam del registry** (`firma_da_registro`, `recognition_adapter.py`)
+    come i siti BASE già migrati (M1 `inventory_discovery`, M2 `censimento`), così
+    non resta una seconda verità di riconoscimento fuori dal registry e il
+    `piattaforma_id` scritto in mappa combacia con l'id su cui il registry dei
+    connettori seleziona (D-R3). `Surface.ORDINARY_DATA` = il portale servizi
+    BASE (l'ex `includi_at=False`), non l'Amministrazione Trasparente.
+    """
+    # Import lazy: la catena `catalog` (contracts/recognition_adapter) tira
+    # `catalog.adapters → connettore → mappa_connettore`, quindi importarla a
+    # livello modulo qui chiuderebbe un ciclo. Il seam è un dettaglio di questa
+    # sola funzione, quindi l'import locale è anche il posto giusto.
+    from treasureiq.catalog.contracts import Surface
+    from treasureiq.catalog.recognition_adapter import firma_da_registro
+
+    try:
+        firma = firma_da_registro(
+            headers=dict(risposta.headers),
+            html=risposta.text,
+            surface=Surface.ORDINARY_DATA,
+            source_id=source_id,
+            entrypoint_url=entrypoint_url,
+        )
+    except Exception:  # noqa: BLE001 — firma muta: piattaforma ignota, non un errore
+        return None
+    if firma.piattaforma in _PIATTAFORME_NON_AGGANCIABILI:
+        return None
+    return firma.piattaforma.value
 
 
 def _percorso_cache(codice_istat: str) -> Path:

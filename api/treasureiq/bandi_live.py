@@ -726,7 +726,7 @@ def _arricchisci(
     pdf_urls_sicuri, note_host = _filtra_pdf_stesso_host(base, pdf_urls_grezzi)
     pdf_urls_unique = list(dict.fromkeys(pdf_urls_sicuri))
 
-    pdf_segments, pdf_notes, pdf_skipped, _illegible = collect_pdf_segments(
+    pdf_segments, pdf_notes, pdf_skipped, _illegible, _ocr_deferred = collect_pdf_segments(
         client, base, pdf_urls_unique
     )
     corpus, boundary_segments, visible_segments = build_corpus(

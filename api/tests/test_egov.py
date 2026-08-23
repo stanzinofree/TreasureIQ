@@ -232,7 +232,15 @@ def test_dispatcher_instrada_egov_a_leggi_egov(
     monkeypatch.setitem(sys.modules, "treasureiq.egov", fake_mod)
 
     esito = leggi_connettore(ISTAT, usa_cache=False)
-    assert esito is atteso
+    assert esito is not None
+    assert esito.model_copy(
+        update={
+            "fonte_hash": None,
+            "controllato_il": None,
+            "fonte_etag": None,
+            "fonte_last_modified": None,
+        }
+    ) == atteso
 
 
 def test_dispatcher_egov_non_importabile_ritorna_none(

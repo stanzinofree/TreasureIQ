@@ -66,6 +66,20 @@ def test_wordpress_senza_generator_riconosciuto_dagli_asset():
     assert "wp-content" in (esito.prova or "")
 
 
+def test_urbi_at_riconosciuto_dalla_rotta_applicativa():
+    """La pagina AT URBI va distinta dalla base WordPress del comune."""
+    html = """
+        <title>Amministrazione Trasparente</title>
+        <link rel="stylesheet" href="/urbi/bootstrap-italia/2.3.8/css/x.css">
+        <a href="/urbi/progs/urp/ur1UR033.sto?DB_NAME=wt00034460">
+            Amministrazione Trasparente
+        </a>
+    """
+    esito = classifica_risposta(headers={}, html=html, includi_at=True)
+    assert esito.vincitore.piattaforma is Piattaforma.URBI
+    assert "ur1UR033" in (esito.vincitore.prova or "")
+
+
 def test_asset_non_sovrascrive_una_dichiarazione_esplicita():
     """Un Drupal che serve un file da un percorso somigliante resta Drupal:
     l'indizio debole non deve poter smentire quello forte."""

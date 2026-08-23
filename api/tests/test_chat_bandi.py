@@ -20,11 +20,14 @@ Copre due cose distinte:
 from __future__ import annotations
 
 import asyncio
+from datetime import datetime, timezone
 from unittest import mock
 
 import pytest
 
 from treasureiq.bandi_live import BandiLiveEsito, BandoArricchito
+from treasureiq.catalog import AccessMode as CatalogAccessMode, DataStatus, Surface
+from treasureiq.catalog.contracts import CAPABILITY_NOTICES
 from treasureiq.chat import respond as respond_mod
 from treasureiq.chat.intent import (
     ChatIntent,
@@ -38,6 +41,7 @@ from treasureiq.schema import (
     CitizenProfile,
     Opportunity,
     Requirements,
+    Source,
     TargetGroup,
 )
 
@@ -118,9 +122,26 @@ def test_trappola_minori_intatta_nella_ricerca_comuni():
 # --- 2. Il ramo di risposta ---------------------------------------------------
 
 
+_ORA_ISO = datetime.now(timezone.utc).isoformat()  # live-read timestamp (fresh)
+
+
+def _fake_source(titolo: str) -> Source:
+    """Minimal but complete Source — real `bandi_arricchiti` always sets id +
+    source, so the notices projection (Ramo 2) relies on them being present."""
+    return Source(
+        ente="Comune di Test",
+        connector="bandi_live_test",
+        url=f"https://example.test/bando/{abs(hash(titolo)) % 10_000}",
+        fetched_at=datetime(2026, 8, 23, 6, 0, tzinfo=timezone.utc),
+        raw_hash="testhash",
+    )
+
+
 def _bando(titolo: str, *, tipo=None) -> BandoArricchito:
     return BandoArricchito(
-        opportunity=Opportunity.model_construct(title=titolo),
+        opportunity=Opportunity.model_construct(
+            id=titolo, title=titolo, source=_fake_source(titolo)
+        ),
         scadenza=None,
         scadenza_verificata=False,
         tipo=tipo,
@@ -323,7 +344,9 @@ def _bando_req(
     eta_max=None,
 ) -> BandoArricchito:
     opp = Opportunity.model_construct(
+        id=titolo,
         title=titolo,
+        source=_fake_source(titolo),
         targets=targets or [],
         summary=None,
         requirements=Requirements(
@@ -528,6 +551,86 @@ def test_risposta_bandi_partiziona_per_tema_senza_perdere_bandi():
     # mai mutato (`bandi[0]` originale nell'esito passato al mock resta con
     # `corrisponde=None`).
     assert esito.bandi[1].corrisponde is None
+
+
+def test_notices_databatch_arriva_su_chatanswer_neutro():
+    """Ramo 2 slice 2: il DataBatch `notices` viaggia in `ChatAnswer.data_batches`
+    con record CANONICI — nessun campo di presentazione, e nell'ordine NEUTRO
+    dell'acquisizione, non quello riordinato per tema dalla chat.
+
+    La presentazione (tema, corrisponde, riordino) resta in `bandi_live`.
+    """
+    esito = BandiLiveEsito(
+        codice_istat=respond_mod.DEFAULT_COMUNE_ISTAT,
+        comune_nome=respond_mod.DEFAULT_COMUNE_NOME,
+        esito="coperto_con_bandi",
+        gradino="cpt",
+        verificato_il=_ORA_ISO,
+        bandi=[
+            _bando("Avviso pubblico contributi affitto"),
+            _bando("Bando per la mobilità sostenibile"),
+            _bando("Concorso pubblico istruttore"),
+        ],
+    )
+    modello = ChatIntent(topic=Topic.BANDI, kind=QuestionKind.INFORMAZIONE)
+
+    with mock.patch("treasureiq.bandi_live.bandi_arricchiti", return_value=esito):
+        answer = _componi(
+            "ci sono bandi per la mobilità?", modello, profile=_profilo_albano()
+        )
+
+    # presentazione: bandi_live e' riordinato (mobilità in cima) + tema settato
+    assert answer.bandi_live.bandi[0].opportunity.title.startswith("Bando per la mob")
+    assert answer.bandi_live.tema == "mobilità"
+
+    # contratto v1: un DataBatch notices canonico
+    assert len(answer.data_batches) == 1
+    batch = answer.data_batches[0]
+    assert batch.capability == CAPABILITY_NOTICES
+    assert batch.surface is Surface.TRANSPARENCY
+    assert batch.access_mode is CatalogAccessMode.MEDIATED
+    assert batch.status is DataStatus.FULFILLED
+    assert answer.selected_data_batch is batch
+    assert answer.query_plan is not None
+    # access level propagated to the answer, not hidden in the batch
+    assert answer.access_mode == "mediated"
+
+    # ordine NEUTRO: il batch conserva l'ordine d'acquisizione, non il riordino
+    assert [r["title"] for r in batch.records] == [
+        "Avviso pubblico contributi affitto",
+        "Bando per la mobilità sostenibile",
+        "Concorso pubblico istruttore",
+    ]
+    # record canonici: nessun campo di presentazione
+    for r in batch.records:
+        assert "consigliato" not in r
+        assert "corrisponde" not in r
+        assert "tema" not in r
+
+
+def test_notices_databatch_coperto_senza_bandi_e_mediated_empty():
+    """coperto_senza_bandi raggiunge ChatAnswer come MEDIATED+EMPTY: fonte letta
+    e vuota, non un buco di copertura."""
+    esito = BandiLiveEsito(
+        codice_istat=respond_mod.DEFAULT_COMUNE_ISTAT,
+        comune_nome=respond_mod.DEFAULT_COMUNE_NOME,
+        esito="coperto_senza_bandi",
+        gradino="cpt",
+        verificato_il=_ORA_ISO,
+        bandi=[],
+    )
+    modello = ChatIntent(topic=Topic.BANDI, kind=QuestionKind.INFORMAZIONE)
+
+    with mock.patch("treasureiq.bandi_live.bandi_arricchiti", return_value=esito):
+        answer = _componi("ci sono bandi?", modello, profile=_profilo_albano())
+
+    assert len(answer.data_batches) == 1
+    batch = answer.data_batches[0]
+    assert batch.access_mode is CatalogAccessMode.MEDIATED
+    assert batch.status is DataStatus.EMPTY
+    assert batch.records == ()
+    # source read, just empty -> still mediated on the answer, never unavailable
+    assert answer.access_mode == "mediated"
 
 
 def test_risposta_bandi_template_con_un_solo_match():

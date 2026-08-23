@@ -1,0 +1,1840 @@
+
+
+
+<!DOCTYPE html>
+
+<html xml:lang="it-IT" xmlns="http://www.w3.org/1999/xhtml" lang="it-IT">
+<head id="ctl00_Head"><meta http-equiv="X-UA-Compatible" content="IE=edge" /><title>
+	Comune di Andrate - Servizi demografici, anagrafe, stato civile, ed elettorale
+</title><meta content="text/html; charset=UTF-8" http-equiv="Content-Type" /><meta charset="UTF-8" /><meta content="text/javascript" http-equiv="Content-Script-Type" /><meta content="text/css" http-equiv="Content-Style-Type" /><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=6.0" /><meta name="theme-color" content="#317EFB" /><link rel="stylesheet" href="assets\bootstrap-italia\dist\css/bootstrap-italia-comuni.min.css" /><link rel="stylesheet" href="CSS/style.css" /><link rel="stylesheet" href="Css\fontawesome-free-5.15.4-web\css\all.min.css" />
+
+    <script type="text/javascript" src="JS/jquery.min.js"></script>
+
+    <!-- window.__PUBLIC_PATH__ definisce il punto in cui c'è la cartella font di bootstrap italia -->
+    <script>window.__PUBLIC_PATH__ = 'assets/bootstrap-italia/dist/fonts'</script>
+
+    <!-- Bootstrap core JS -->
+    <script type="text/javascript" async src="assets/bootstrap-italia/dist/js/bootstrap-italia.bundle.min.js"></script>
+    <script>
+        function loadBootstrapOrRetry() {
+            if (typeof bootstrap !== "undefined") {
+                // Bootstrap è disponibile, esegui il tuo codice qui
+                bootstrap.loadFonts("assets/bootstrap-italia/dist/fonts");
+            } else {
+                // Bootstrap non è ancora disponibile, ritenta dopo 50 millisecondi
+                setTimeout(loadBootstrapOrRetry, 50);              
+            }
+        }
+
+        // Inizia il ciclo di controllo
+        loadBootstrapOrRetry();
+    </script>
+
+    <script type="text/javascript" src="script/siscomJS.js?version=2.0"></script>
+
+    <style id="StylePlaceholder" type="text/css"></style>
+
+    <link rel="stylesheet" href="App_Themes\css\stili-custom.css?v=1.0" /><link id="ctl00_CSSSkin" href="CSS/SKIN/ndrt136/skin.css?v=1" type="text/css" rel="stylesheet" /><link id="ctl00_icoFavicon" rel="icon" type="image/x-icon" class="icoFavicon" /><meta id="MetaDescription" name="DESCRIPTION" content="Sito ufficiale Comune di Andrate in provincia di Torino in Piemonte. Informazioni sul comune, i servizi, l&#39;amministrazione, la storia." /><meta id="MetaKeywords" name="KEYWORDS" content="Città di Comune di Andrate, Comune di Comune di Andrate, Comune di Andrate, municipio di Comune di Andrate, uffici del comune di Comune di Andrate, provincia di Torino, Regione Piemonte." /><meta id="MetaCopyright" name="COPYRIGHT" content="Copyright Comune di Comune di Andrate" /><meta id="MetaAuthor" name="AUTHOR" content="Comune di Comune di Andrate" /></head>
+
+<body id="body" class="MenuPushResponsive-push">
+    <form name="aspnetForm" method="post" action="./Uffici?IDUfficio=21041" id="aspnetForm" autocomplete="off">
+<div>
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwULLTE0NTk1NzM0MjkPZBYCZg9kFgQCAQ9kFgICDQ8WAh4EaHJlZgUdQ1NTL1NLSU4vbmRydDEzNi9za2luLmNzcz92PTFkAgMPZBYIAgEPZBYCAgEPZBYEAgIPDxYCHgtOYXZpZ2F0ZVVybAUTLi4vLi4vYXJlYVJpc2VydmF0YWRkAgoPFgIeBVZhbHVlBQQxODI2ZAIFD2QWBAIDDxYCHwIFBDE4MjZkAgUPZBYCZg9kFgYCAg9kFgICAg8WAh8CBQQxODI2ZAIED2QWBgICD2QWAgIBD2QWBgIBDw8WAh4EVGV4dAU6U2Vydml6aSBkZW1vZ3JhZmljaSwgYW5hZ3JhZmUsIHN0YXRvIGNpdmlsZSwgZWQgZWxldHRvcmFsZWRkAgUPDxYCHwMFS1NlcnZpemkgZGVtb2dyYWZpY2ksJm5ic3A7YW5hZ3JhZmUsIHN0YXRvIGNpdmlsZSwgZWQgZWxldHRvcmFsZTxiciAvPjxiciAvPmRkAgcPZBYOAgEPFgIeB29uY2xpY2sFN2phdmFzY3JpcHQ6Y29uZGl2aWRpU29jaWFsKCdmYWNlYm9vaycsJycpO3JldHVybiBmYWxzZTtkAgMPFgIfBAVzamF2YXNjcmlwdDpjb25kaXZpZGlTb2NpYWwoJ3R3aXR0ZXInLCcnLCdTZXJ2aXppIGRlbW9ncmFmaWNpLCBhbmFncmFmZSwgc3RhdG8gY2l2aWxlLCBlZCBlbGV0dG9yYWxlJyk7cmV0dXJuIGZhbHNlO2QCBQ8WAh8EBTdqYXZhc2NyaXB0OmNvbmRpdmlkaVNvY2lhbCgnbGlua2VkaW4nLCcnKTtyZXR1cm4gZmFsc2U7ZAIHDxYCHwQFN2phdmFzY3JpcHQ6Y29uZGl2aWRpU29jaWFsKCd3aGF0c2FwcCcsJycpO3JldHVybiBmYWxzZTtkAgkPFgIfBAV0amF2YXNjcmlwdDpjb25kaXZpZGlTb2NpYWwoJ3RlbGVncmFtJywnJywnU2Vydml6aSBkZW1vZ3JhZmljaSwgYW5hZ3JhZmUsIHN0YXRvIGNpdmlsZSwgZWQgZWxldHRvcmFsZScpO3JldHVybiBmYWxzZTtkAgsPFgIfBAXjASQoJ2hlYWQnKS5wcmVwZW5kKCc8YmFzZSBocmVmPSJodHRwOi8vd3d3LmNvbXVuZS5hbmRyYXRlLnRvLml0LyIgPiAnKTsgc2F2ZUFzKG5ldyBCbG9iKFskKCdodG1sJykuaHRtbCgpXSwge3R5cGU6ICd0ZXh0L3BsYWluO2NoYXJzZXQ9dXRmLTgnfSksICdTZXJ2aXppIGRlbW9ncmFmaWNpLCBhbmFncmFmZSwgc3RhdG8gY2l2aWxlLCBlZCBlbGV0dG9yYWxlJysnLmh0bWwnKTtyZXR1cm4gZmFsc2U7ZAINDxYCHwQFe3dpbmRvdy5sb2NhdGlvbi5ocmVmPSdtYWlsdG86P3N1YmplY3Q9d3d3LmNvbXVuZS5hbmRyYXRlLnRvLml0JmJvZHk9aHR0cDovL3d3dy5jb211bmUuYW5kcmF0ZS50by5pdC9VZmZpY2k/SURVZmZpY2lvPTIxMDQxJ2QCBg8WAh8CBQUyMTA0MWQCCA8WAh8CBQQxODI2ZAIGDxYCHwIFBDE4MjZkAgcPZBYCZg9kFgICAg9kFggCAQ9kFgICAQ8PFgIfAwU0UXVhbnRvIHNvbm8gY2hpYXJlIGxlIGluZm9ybWF6aW9uaSBzdSBxdWVzdGEgcGFnaW5hP2RkAgkPDxYCHghJbWFnZVVybAWSHWRhdGE6aW1hZ2UvcG5nO2Jhc2U2NCxpVkJPUncwS0dnb0FBQUFOU1VoRVVnQUFBTWdBQUFCUUNBWUFBQUJjYlRxd0FBQUFBWE5TUjBJQXJzNGM2UUFBQUFSblFVMUJBQUN4and2OFlRVUFBQUFKY0VoWmN3QUFEc01BQUE3REFjZHZxR1FBQUFweVNVUkJWSGhlN1ozUGl4UkhGTWZuTDBzSTVMRFhISE1MNUJaQ0lERDNlRmlNQnlVZU51SmhDQjRrZUJEalFZaWdNQWNQSGlSNFVCUmRmNnkvZit2cUtpcUtsZjcyZFBWVXY2NmYzYjA5WFYzdkF3K21wMy91enZ2V2U2K3F1bnNpT3VUU3BVdkZwMmEwM1o4WkJtUDZIVHNWQ01NaUh4c3NrTVJnQVlmQkFpSGN1M2V2K01Rd0xKQ1NSNDhlaWYzNzk0dlpiQ1lPSHo0czNyOS9YNnhoZkVCa21rMW5ZcXRZSGdzc2tJek56YzFjR0RzN08vbnkrZlBueGVuVHAvUFBqSm10MlpxWVRDYWxUZWZGaWhHUnZFQ2VQWHVXUjR4UG56NFYzNGo4ODc1OSt5cmZ4VTczdGNlV21LMHR4VEZaRzEvMEFFa0xCQUtBT0NBU0NyNUgya1VaY3BIYjY3WE5wNk9QSGlCcGdadzZkVXBjdUhDaFdLbzZHRjJYQm5NeFZaeCtiV2FLQ2JzYlBZYlVDQ1VyRVBSV29lNHdNWi9QY3hzNzgybm00SG56WHhXSE5HMWsySnFKTmNzMlE0NnlvU1FwRUtSV0VJY3VoWklnZWlDS2pBN2kzSlBKTkpOR1FXM2RZajExK0Z4VWNuMkV0VWVJZ0pNVWlFOHYxZFdyVjhXeFk4ZUtwYkZBVXFQTWFoR0MxQmE1cVNJb1JBUW53enB6R2hZLytkOVlmRTRHakc5c2JHeVVYYm9tYnQrK0xZNGNPVklzUlVUbXdGT0QwOUp1MlVWcVZhZTJYV1pTQ05WMVN2UVpLVmFCM0w5L1g5eTZkU3MzZkg3eTVFbHUyOXZiNHUzYnQ3bkYxaFdLeUlFSTRxS0pRQjQ4ZUNBK2ZQaFFMUFVJYWZXMXJUcE5uNnlwVVQzU3dLWlpUZVpYeEk4SHEwQStmdnhZQ3VIbHk1ZWxRTzdldlZzS0I2a0lRaEVNQTI3eWUrVDNjdnMzYjk2VXgvbnk1VXR4OVA1QjFEaDQ4S0NYcUhIOTZPb05BZUs0ZWZPbWVQMzZkZkhOTGxDSW9lS2NUb0ZRaDE4VGJ0L1dGKzFMRzMvMEFKMm1XRWhmcEJBd3RpQUZzclcxVlFybjh1WExwYURrZHpDNTdkT25UOHRqdkh2M3JqaHlOL2hHRC9EcTFhdGNUS0Y4L3Z4WjNMbHpKLzliT2tGYk9HZW1wa2QwRzVJNjBaVEp1K1UzblRzejMyUGdkeDRLVGE1bHBUV0lGQUpNQ3VUeDQ4ZWxhTkFhU3pGZHVYS2wvRjQ2SU96Rml4ZmxNV3pwVFVqMEFFMEZJc0cxNFRvaG1EQmNMWGRodmdJSlNxMDA2SXIyUktJSGlLWkloNk5KSVNDRmtRSkIzaStGYy8zNjlWSlExNjVkSzc5SC9YVGl4QWx4NXN3WjcvcXByVUFBcmhNaWNXSnBxYlZHbmR3b0VKcGFOWE5zMytKK2pFUWprRkRVK2drQ09YRGdnSGo0OEtGMy9YVGp4bzE4bjE3cUo2ZEFYSTVOb2s0aG9PNGNXMy84Rkdnc0VEaFZMUGpVSHJSK2tnSXgxVTh3K2IyTVp2aE9IaU9zZnFKcGxVOFJyYUp4WUlQb21tbUVCVEpha0ViaFBvL1ErenRjS1pZVUFrd0twRlkvL2ZWRHhUa1g5clg0NHo5YVAvMHJmbFczQ1haQU9qZHFLcWFhYnRxRmhZb1AwT05YcnkrbXhqS1UwUXVrNmIwZGlDSVlVQXpDczVhQVEvMzBqMW8vL1MxK1ZMZjU2dmQyQW5GYWFDM1NUUzJ6S3RvSWVOUUNRZlJBRk5oeGpKcnI4QjRvMVBieWVGaWxGYmEzMEV1SzdXcnJ6UUxKdTJOMTF4Z1VwZUlXU0J1TUFobEQyTVRmY1B6NDhXSXBESk5BVUpOVWFDcVFpcE9aSFZBMzdVUG4zSlVKaEpydHRPc0RDcExxL2l5UVVXQzY2Y21IVWlCSzJnVEIxWnlxbGxhWm5NZFdpTmNqUUg0dVpibGlYZ0toMTBIUHZ6RGZBYi9xOFp2VU1mM1NWUVBmV2lDaEY5TFZoYnRvTzlsd3VUOXhMSmRBTEsyeXpjbTBMYnpHOFAvVG5ZTHVyNzJNRmoxYnkrTVBYeHhkTXRvSWdxbnFHT2R3TXhjenpTOXVGQWh0dmIwRllzL2piUUx4YWVXcnFaalppYlVwVzJKT0g4SW9CZUxzZ2ZKdzZvc1hMNHFUSjA5bW4xeGpBSTRJSTZIbkpNZXhSUmNmcU9QYm9vSmVqT25VRlNHTVVpQ21nY0V5dlFzU0NHbjVYUUxSMUFlWlJ5N1hGMFpQR2VMZ09zTDJKOWRzRVVkZktmRlE2VlFncS85bnpzVXZrMi9GOTcrNUppVzZXMzJqUUZ6RmJ5a1E2b1NLYWM3WFZpQlVoTUg3TTFvaWp5QVdKOHpObEtxWW5IcUp2MERxUFZCV00zaHUxd0x4bnRMT1dJbFVJR0ZPV1hlMkVJSEE5NVJ0YTZMenZaYUZzSXhSdHEyRHMwQ0M4Y2w0dEFJWmRONXA2S3EwbThPcERRSlovMDdacHJRUWdRUVV2dXpnZ3lTeUNLSkxxWlpPS0x0MmRiMDBWWWVqVHIwNEJrMXo5RlpQMjZybkN4Q0ZDZ3Rra0ZnRk1xeElVbStwVlNlaXMyL3J6cTQ2cm05YXBEZWFzclh0b3MzeEhrOWgraVNlQ0VKYVdPcEE5YTVkR20ycWpxc2ZDNmdiUk9ncW9Ga2c0eVVTZ2VoVElvbHAxaTRWZ2VwelJvRVVHNm1QSG5VSnBMcStvVUNZUVJLSFFCeXRxOXJqcEdKemJGZXJYM2sycjZNK2NBbUlpWmM0QkVJY2xEcWdhZGF1elhGZHJiNFVTRjZIUlM2UVFmZEtEaHlqUUliMFQ3VTVvTzBwN2Y0Q3FUdDFTQVJ4Q1ppSmx5Z2lpQzBkc3MzYTdVd2dyZ0xhSmFDQnd4SEdUSVFDV1RvemluSThrTUZFZFQ4eVB1Rm85WU1FMGpQczBQMFJoVUJvYXk5YmFQdmpmQnpUU1J5dGZrVWc5RmdyRmdqVEgxRUtCQTZLcmwzMVJadVZiVEl4ekIwcFZLaEF5bzhFYnMzSFRSUUNVWjBaRG9sMDZjL0s0M3gwVTFBVTA4eTFvbW1UWFNCTXFzUWhFSjBBdnZrNW4xNmlZaHo4eTZ3V1FSeDFCUXVFQVpFSXhPejhwVitUbE1sa05hRVlZSUVzOEUwaGtlcXFUNXZVbWZwS0RKMnBUNlkwR1o2ejNDZlJDQ1J6V1hzYTVXWCtNMjFqZVlrbm5nR3NjMFpwNnBQd1RhWSswTnRrRUlyTjBOV3UyMDgxOWFWS09sUGZEV015UEpTOFR5SVNTSWFTRnVGSHFRdWdNTFhtVUZNcDMvQ1JZWnErMGlkd0t1cUkxUEFNWU9xSXFxbnZVakVaanFOelJ0VlNKUzZCRk5SNnRSb0l3TVVRQk1Lc25pZ0YwZ2NzRUFZTVhpQUkvNnVBQmNJQWppQUdVSFJpbmhlVE5wTlZ0ZEJEcCsyemZSbC9odXlEeVVVUTM1ZjkyNmJSVTdpUkdTL0pDVVMrN04vVmRkbkZXMjZIQkl1NEdVbldJSGlsTkY2RWczY0VtaGliUUdKbWxlSk90a2pISzUyUmJ0bGVzTE5uejU3aUU5TUhRNHh5TllHcytpTDdQai9tQjJHMEdWR0ZnZ2hDSjBReVMxSkkyNUtOSUVEK3dKaXZoR2taZEo0UGVySFFtK1VpQlVkSmxhUUZvb0wzcUtONHgrUS9DUVlLTVdESXBNdXVDaVMybGhWVHRoRkp0cmUzODJXZThzNTBLcEF4cEJvbzNqSDlXODV5YmZvYWFXWWNjSXBsQUFKQmVvV0gwakhkRWxORHlnS3g4UHo1YzdGMzc5NjhQbUVXdEhIdUdETU1GZ2lCL29pSERoM0s3eTVra2FRSkM4UUJicnZGczdkUXZLTTdtRWtMRm9nRGVXODZCaEl4b0lpQnhWVXk5RFFGUFlHYm01dDU3eDl1RjRqOW5ob1dpQVA2ZUZOTVRjRVVGZlIyTVFzd21IcjI3Tmw4OXZQNitybzRldlJvTGhEY1U5TjJKc0txR3dRV2lBZDBSQjJUSERIWlVUYzlaUWpzdGxPaGtUaDM3bHd1Qk14WHcvOEh5N2hGWUd4NENTVEczb2N1d1krUEZsSUYwK1dSY3FVQU9pamdBMGlYRUUzUjlZMy9CMUtwc1VGOW5TT0lCekZQZlcvYXVNa29nYlFKejBER2dDbkdoWkJ5cGdRTHhCTTR5S29qNlc2ZTN4UWx4cGcyaGNBQzhRUXRKNktJZkpyOEdJRHpvNWplelNpeDZrYWxMVWtJcEtzZnlmNCtrdUdEdEFuWGorSWF2VTBRQmdTU2VwU3d3UkVrQUtRaDZMR3gzWVU0SktRZ01CNkJDSUcwQ1NKSGNiMktTRGprYUdLNk5oWklJQ2pZSVpJKzdqUU1kU2dJQWdPYlNKVmtIUUZCWUR4Q25Tb1RlOXJUSnl5UUJrQWNHeHNiSzcyWkNpUDZPRDhFQU1GaVBBS0N3S2cvQkxBYnZVMHBDb3NGMGdBNENrU0NIaDg0NVc0N0RzU0FjNkJYQ1dKQS9RQ0I0dnhJb1h4dUMyYWF3UUpwQ2RJYXBEUm93Vkg4U29jTm5mMkxGaC83UVFoeUhwT01EQkFEem9GeENXd3pwcDYwWVNQRS93ZlpDWk9ZLzdNRUFBQUFBRWxGVGtTdVFtQ0NkZAIVDxYCHwIFBDE4MjZkAh8PFgIfAgUGUUhQRktZZAIJDxYCHwIFBDE4MjZkGAEFOGN0bDAwJENvbnRlbnRQbGFjZUhvbGRlcjEkY3RsMDAkU2lzY29tVWZmaWNpMSRNdWx0aVZpZXcxDw9kAgFk+gBW5tY/IXpK/DLXulSJbzJZQxZcXG+g2jk9wXMiKQU=" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['aspnetForm'];
+if (!theForm) {
+    theForm = document.aspnetForm;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script type="text/javascript"> $(document).ready(function(){ $(".btn-responsive-home").click(function() { window.location.href = "../../Home"; }); $(".btn-responsive-search").click(function() { window.location.href = "../../Ricerca"; }); }); </script><script type="text/javascript"> function espandiVociComeFare(ID) { var nomeSottovoce = 'SottovoceComeFare' + ID; var nomeLabel = 'LabelComeFare' + ID; $("[title='" + nomeSottovoce + "']").toggleClass("show"); if ($("[title='" + nomeLabel + "'").text() == '+') { $("[title='" + nomeLabel + "'").text('-'); } else { $("[title='" + nomeLabel + "'").text('+'); }; }</script>
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="4197958F" />
+</div>
+
+        <div id="ctl00_PanelMasterTop">
+	
+        
+
+
+<script type="text/javascript"> function espandiVociMenu(ID) { var nomeSottovoce = 'SottovoceCategoria' + ID; var nomeLabel = 'LabelCategoria' + ID; $("[title='" + nomeSottovoce + "']").toggleClass("show"); if ($("[title='" + nomeLabel + "'").text() == '+') { $("[title='" + nomeLabel + "'").text('-'); $("[title='" + nomeLabel + "'").addClass("expanded"); } else { $("[title='" + nomeLabel + "'").text('+'); $("[title='" + nomeLabel + "'").removeClass("expanded"); }; }</script>
+<script type="text/javascript">
+    //<![CDATA[
+    var __cultureInfo = { "name": "it-IT", "numberFormat": { "CurrencyDecimalDigits": 2, "CurrencyDecimalSeparator": ",", "IsReadOnly": false, "CurrencyGroupSizes": [3], "NumberGroupSizes": [3], "PercentGroupSizes": [3], "CurrencyGroupSeparator": ".", "CurrencySymbol": "€", "NaNSymbol": "Non un numero", "CurrencyNegativePattern": 9, "NumberNegativePattern": 1, "PercentPositivePattern": 1, "PercentNegativePattern": 1, "NegativeInfinitySymbol": "-Infinito", "NegativeSign": "-", "NumberDecimalDigits": 2, "NumberDecimalSeparator": ",", "NumberGroupSeparator": ".", "CurrencyPositivePattern": 2, "PositiveInfinitySymbol": "+Infinito", "PositiveSign": "+", "PercentDecimalDigits": 2, "PercentDecimalSeparator": ",", "PercentGroupSeparator": ".", "PercentSymbol": "%", "PerMilleSymbol": "‰", "NativeDigits": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"], "DigitSubstitution": 1 }, "dateTimeFormat": { "AMDesignator": "", "Calendar": { "MinSupportedDateTime": "\/Date(-62135596800000)\/", "MaxSupportedDateTime": "\/Date(253402297199999)\/", "AlgorithmType": 1, "CalendarType": 1, "Eras": [1], "TwoDigitYearMax": 2029, "IsReadOnly": false }, "DateSeparator": "/", "FirstDayOfWeek": 1, "CalendarWeekRule": 2, "FullDateTimePattern": "dddd d MMMM yyyy HH:mm:ss", "LongDatePattern": "dddd d MMMM yyyy", "LongTimePattern": "HH:mm:ss", "MonthDayPattern": "d MMMM", "PMDesignator": "", "RFC1123Pattern": "ddd, dd MMM yyyy HH\u0027:\u0027mm\u0027:\u0027ss \u0027GMT\u0027", "ShortDatePattern": "dd/MM/yyyy", "ShortTimePattern": "HH:mm", "SortableDateTimePattern": "yyyy\u0027-\u0027MM\u0027-\u0027dd\u0027T\u0027HH\u0027:\u0027mm\u0027:\u0027ss", "TimeSeparator": ":", "UniversalSortableDateTimePattern": "yyyy\u0027-\u0027MM\u0027-\u0027dd HH\u0027:\u0027mm\u0027:\u0027ss\u0027Z\u0027", "YearMonthPattern": "MMMM yyyy", "AbbreviatedDayNames": ["dom", "lun", "mar", "mer", "gio", "ven", "sab"], "ShortestDayNames": ["do", "lu", "ma", "me", "gi", "ve", "sa"], "DayNames": ["domenica", "lunedì", "martedì", "mercoledì", "giovedì", "venerdì", "sabato"], "AbbreviatedMonthNames": ["gen", "feb", "mar", "apr", "mag", "giu", "lug", "ago", "set", "ott", "nov", "dic", ""], "MonthNames": ["gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno", "luglio", "agosto", "settembre", "ottobre", "novembre", "dicembre", ""], "IsReadOnly": false, "NativeCalendarName": "calendario gregoriano", "AbbreviatedMonthGenitiveNames": ["gen", "feb", "mar", "apr", "mag", "giu", "lug", "ago", "set", "ott", "nov", "dic", ""], "MonthGenitiveNames": ["gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno", "luglio", "agosto", "settembre", "ottobre", "novembre", "dicembre", ""] }, "eras": [1, "d.C.", null, 0] };//]]>
+</script>
+
+<div id="alto" style="display: none"><a href="#contenuto" tabindex="0" title="Link diretto al contenuto della pagina.">Vai al contenuto della pagina.</a></div>
+<!--  Fine link per saltare il menu e andare subito al contenuto%-->
+<header class="it-header-wrapper" data-bs-target="#header-nav-wrapper">
+    <div class="it-header-slim-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="it-header-slim-wrapper-content">
+                        <div class="d-lg-block navbar-brand">
+                            <a href="https://www.regione.Piemonte.it" title="Link al sito della Regione Piemonte" class="" target="_blank">Regione Piemonte</a>
+                        </div>
+                        <!-- link superiori di servizio ad esempio ad accessibilita', mappa, etc-->
+
+                        <div class="it-header-slim-right-zone" role="navigation">
+                           
+                            <a id="ctl00_ctl12_btnAccedi" class="btn btn-primary btn-icon btn-full" data-element="personal-area-login" aria-label="Accedere alla propria area personale" href="areaRiservata">
+                                <span class="rounded-icon" aria-hidden="true">
+                                    <svg class="icon icon-primary">
+                                        <use xlink:href="assets/bootstrap-italia/dist/svg/sprites.svg#it-user"></use>
+                                    </svg>
+                                </span>
+                                <span class="d-none d-lg-block">Accedi all'area personale</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="it-nav-wrapper">
+        <div class="it-header-center-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="it-header-center-content-wrapper">
+
+                            <div class="it-brand-wrapper">
+
+                                <a href="Home.aspx" title="Home Page del sito del Comune di Andrate" class="it-brand-title">
+                                    <img src="portals/1826/Skins/skinXhtml/Images/stemma.webp" class="icon widthAuto" alt="Stemma dell'Ente" />
+                                    <div class="it-brand-text">
+                                        <div class="it-brand-title">Comune di Andrate</div>
+                                    </div>
+                                </a>
+
+                            </div>
+
+                            <div id="ctl00_ctl12_pnlSiscomRicercaHomeAGID">
+		<div id="ctl00_ctl12_pnlSiscomRicercaHomeAGID">
+	<div id="ctl00_ctl12_ctl02_PanelContenitore" class="it-right-zone">
+		
+    <div id="ctl00_ctl12_ctl02_PanelSocial" class="it-socials d-none d-lg-flex">
+			
+        <div id="ctl00_ctl12_ctl02_PanelTestoSocial" class="Seguici">
+				
+            <span id="ctl00_ctl12_ctl02_TestoSocial" style="margin-right:10px">Seguici su</span>
+        
+			</div>
+        
+        
+        
+        
+        
+        
+        
+        
+        <div id="ctl00_ctl12_ctl02_panelRss" style="display: inline-block;">
+				
+            <a id="ctl00_ctl12_ctl02_LinkRss" title="Link alla pagina RSS - il link si apre in una nuova finestra" href="Rss" target="_blank"><svg class='icon icon-sm icon-white align-top'><use xlink:href='assets/bootstrap-italia/dist/svg/sprites.svg#it-rss'></use></svg></a>
+        
+			</div>
+        
+    
+		</div>
+    <div class="it-search-wrapper">
+        <span class="d-none d-md-block">Cerca</span>
+        <a id="ctl00_ctl12_ctl02_linkRicerca" aria-label="Cerca nel sito" href="Ricerca">
+            <i class="search-link rounded-icon" type="button" data-bs-toggle="modal" data-bs-target="#search-modal" aria-label="Cerca nel sito">
+                <svg class="icon">
+                    <use href="assets/bootstrap-italia/dist/svg/sprites.svg#it-search"></use>
+                </svg>
+            </i>           
+        </a>
+    </div>
+
+	</div>
+
+
+
+<script type="text/javascript">
+    // Scorro in basso fino al ContenitoreFooter
+    function bottomFunction() {
+        $('html,body').animate({ scrollTop: $(".ContenitoreFooter").offset().top }, 'slow');
+    }
+</script>
+
+</div>
+	</div>
+
+                        </div>
+                    </div>
+
+                    <div id="RigaMenuPush" class="MenuPushResponsive MenuPushResponsive-vertical MenuPushResponsive-left">
+                        <div>
+                            <div id="_RigaElencoMenuPush">
+
+                                <div class="contenitoreNoBorderNoTitolo">
+
+                                    <div class="contenutocontainer">
+                                        <div>
+                            <div id="ctl00_ctl12_pnlSiscomMenuResponsiveAGID">
+		<div id="ctl00_ctl12_pnlSiscomMenuResponsiveAGID">
+	
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        //When btn is clicked
+        $(".btn-menu-responsive-chiudi").click(function () {
+            $("#menudiservizio").toggleClass("show");
+            $(".MenuPushElencoVoci").toggleClass("MenuPushElencoVociAttivo");
+            $(".MenuPushOverlay").toggleClass("MenuPushOverlayAttivo");
+            $(this).toggleClass("active");
+            $(document.body).toggleClass("MenuPushResponsive-push-toright");
+            $("#RigaMenuPush").toggleClass("MenuPushResponsive-open");
+        });
+    });
+</script>
+
+<div class="navbar-collapsable" style="padding-bottom: 24px;">
+    <div class="btn-menu-responsive-chiudi" title="Chiudi">
+        <span class="d-none text-black">Nascondi la navigazione</span>
+        <svg class="icon">
+            <use href="assets/bootstrap-italia/dist/svg/sprites.svg#it-close-big"></use>
+        </svg>
+    </div>
+    <div class="menu-wrapper" title="Home">
+        <a id="ctl00_ctl12_ctl00_LinkHome" class="logo-hamburger"><img id="ctl00_ctl12_ctl00_imgLogoEnte" class="icon" alt="Stemma dell&#39;Ente" src="portals/1826/Skins/skinXhtml/Images/stemma.webp" style="border-width:0px;" />
+            <div class="it-brand-text">
+                <span id="ctl00_ctl12_ctl00_lblNomeEnte" class="it-brand-title">Comune di Andrate</span>
+            </div>
+        </a>
+    </div>
+    <div id="ctl00_ctl12_ctl00_PanelContenitore" class="MenuPushElencoVoci" style="width: 100%!important; position: relative;">
+		
+    <ul class="navbar-nav"><li class="nav-item"><a title="Link alla pagina Amministrazione" class="nav-link" href="Amministrazionedettagli">Amministrazione</a></li><li class="nav-item"><a title="Link alla pagina Aree Tematiche" class="nav-link" href="Notizie">Novit&#224;</a></li><li class="nav-item"><a title="Link alla pagina Servizi" class="nav-link" href="Servizi">Servizi</a></li><li class="nav-item"><a title="Link alla pagina Vivere Andrate" class="nav-link" href="Guidadettagli">Vivere Andrate</a></li></ul><div class="clear">
+
+		</div><ul class='navbar-nav navbar-secondary mt-20'><li class='nav-item'><a class="nav-link" href="Dettaglioargomenti?IDCategoria=8197">Gestione rifiuti</a></li><li class='nav-item'><a class="nav-link" href="Dettaglioargomenti?IDCategoria=8230">Trasparenza amministrativa</a></li><li class='nav-item'><a class="nav-link" href="Dettaglioargomenti?IDCategoria=8233">Urbanizzazione</a></li><li class='nav-item'><a class="nav-link" data-element="all-topics" href="Argomenti"><span class='fw-bold'>Tutti gli argomenti...</span></a></li></ul>
+	</div>
+    
+</div>
+
+
+
+<div id="ctl00_ctl12_ctl00_pnlOverlay" class="MenuPushOverlay">
+
+	</div>
+
+
+
+
+
+
+
+</div>
+	</div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="it-header-navbar-wrapper" class="it-header-navbar-wrapper">
+            
+            <div class="container">
+                <div id="row">
+                    <div class="col-12">
+
+                        <nav class="navbar navbar-expand-lg has-megamenu" aria-label="Navigazione principale">
+                            <div class="custom-navbar-toggler btn-responsive-menu">
+
+                                <svg class="icon">
+                                    <use href="images/svg/sprites.svg#it-burger"></use>
+                                </svg>
+
+                                <div class="btn-responsive-home" title="Home"></div>
+                                <div class="btn-responsive-search" title="Ricerca"></div>
+                            </div>
+
+                            <div id="ctl00_ctl12_pnlSiscomMenuTematicoAGID">
+		<div id="ctl00_ctl12_pnlSiscomMenuTematicoAGID">
+	
+
+
+
+<div class="navbar-collapsable" id="nav4" style="display: none;" aria-hidden="true">
+    <div class="overlay fade" style="display: none;"></div>
+    <div class="close-div">
+        <button class="btn close-menu" type="button" data-focus-mouse="false">
+            <span class="d-none text-black">Nascondi la navigazione</span>
+            <svg class="icon">
+                <use href="images/svg/sprites.svg#it-close-big"></use>
+            </svg>
+        </button>
+    </div>
+
+    <div id="ctl00_ctl12_ctl01_PanelContenitore" class="menu-wrapper">
+		
+        <a href="#" aria-label="home Nome del Comune" class="logo-hamburger">
+            <svg class="icon" aria-hidden="true">
+                <use href="images/svg/sprites.svg#it-pa"></use>
+            </svg>
+            <div class="it-brand-text">
+                <div class="it-brand-title">Nome del Comune</div>
+            </div>
+        </a>
+
+    <nav aria-label="Principale"><ul class="navbar-nav" data-element="main-navigation"><li class="nav-item"><a title="Link alla pagina Amministrazione" class="nav-link" data-element="management" href="Amministrazionedettagli">Amministrazione</a></li><li class="nav-item"><a title="Link alla pagina Novit&#224;" class="nav-link" data-element="news" href="Notizie">Novit&#224;</a></li><li class="nav-item"><a title="Link alla pagina Servizi" class="nav-link" data-element="all-services" href="Servizi">Servizi</a></li><li class="nav-item"><a title="Link alla pagina Vivere Andrate" class="nav-link" data-element="live" href="Guidadettagli">Vivere Andrate</a></li></nav></ul><div class="clear">
+
+		</div><nav aria-label="Secondaria"><ul class='navbar-nav navbar-secondary'><li class='nav-item'><a class="nav-link" href="Dettaglioargomenti?IDCategoria=8197">Gestione rifiuti</a></li><li class='nav-item'><a class="nav-link" href="Dettaglioargomenti?IDCategoria=8230">Trasparenza amministrativa</a></li><li class='nav-item'><a class="nav-link" href="Dettaglioargomenti?IDCategoria=8233">Urbanizzazione</a></li><li class='nav-item'><a class="nav-link" data-element="all-topics" href="Argomenti"><span class='fw-bold'>Tutti gli argomenti...</span></a></li></nav></ul>
+	</div>
+</div>
+
+
+
+
+</div>
+	</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</header>
+
+
+
+<input type="hidden" name="ctl00$ctl12$CreaStaticPage" id="ctl00_ctl12_CreaStaticPage" value="False" />
+</div>
+
+        
+
+        
+    
+    
+    <div id="ctl00_ContentPlaceHolder1_PanelContent">
+	
+
+<div class="container" id="main-container">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-10">
+            <div class="cmp-breadcrumbs" role="navigation">
+                <nav class="breadcrumb-container">
+                    <div id="ctl00_ContentPlaceHolder1_ctl00_TiTroviIn1_ContenitoreTiTroviIn" class="breadcrumb-container">
+		<div class="breadcrumb-container">
+			<ol class='breadcrumb p-0' data-element='breadcrumb'><li class='breadcrumb-item'><a href="Home">Home</a><span class='separator'>/</span></li><li class='breadcrumb-item'><a href="Amministrazionedettagli">Amministrazione</a><span class='separator'>/</span></li><li class='breadcrumb-item'><a href="Uffici">Uffici</a><span class='separator'>/</span></li><li class='breadcrumb-item'><span>Servizi demografici, anagrafe, stato civile, ed elettorale</span></li></ol>
+		</div>
+	</div>
+
+
+
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10">
+                    <div class="cmp-heading pb-3 pb-lg-4">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <h1>
+                                    <span id="ctl00_ContentPlaceHolder1_ctl00_SiscomUffici1_lblTitolo" class="SiscomTitolo3" style="display:inline-block;width:100%;">Servizi demografici, anagrafe, stato civile, ed elettorale</span>
+                                </h1>
+                                
+                                <span id="ctl00_ContentPlaceHolder1_ctl00_SiscomUffici1_lblDescrizione" class="subtitle-small mb-3">Servizi demografici,&nbsp;anagrafe, stato civile, ed elettorale<br /><br /></span>
+                            </div>
+                            <div class="col-lg-3 offset-lg-1 mt-5 mt-lg-0">
+                                
+
+<script type="text/javascript" src="JS/file-saver.min.js"></script>
+<div class="row">
+    <div class="col col-6">
+        <div class="dropdown">
+            <button aria-label="condividi sui social" class="btn btn-dropdown dropdown-toggle text-decoration-underline d-inline-flex align-items-center fs-0" type="button" id="shareActions" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="assets/bootstrap-italia/dist/svg/sprites.svg#it-share"></use>
+                </svg>
+                <small>Condividi</small>
+            </button>
+            <div class="dropdown-menu shadow-lg" aria-labelledby="shareActions">
+                <div class="link-list-wrapper">
+                    <ul class="link-list" role="menu">
+                        <li role="none">
+                            <a id="ctl00_ContentPlaceHolder1_ctl00_SiscomUffici1_SiscomCondividi1_linkFacebook" cssclass="list-item" role="menuitem" onclick="javascript:condividiSocial(&#39;facebook&#39;,&#39;&#39;);return false;">
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="assets/bootstrap-italia/dist/svg/sprites.svg#it-facebook"></use>
+                                </svg>
+                                <span>Facebook</span>
+                            </a>
+                        </li>
+                        <li role="none">
+                            <a id="ctl00_ContentPlaceHolder1_ctl00_SiscomUffici1_SiscomCondividi1_linkTwitter" cssclass="list-item" role="menuitem" onclick="javascript:condividiSocial(&#39;twitter&#39;,&#39;&#39;,&#39;Servizi demografici, anagrafe, stato civile, ed elettorale&#39;);return false;">
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="assets/bootstrap-italia/dist/svg/sprites.svg#it-twitter"></use>
+                                </svg>
+                                <span>X</span>
+                            </a>
+                        </li>
+                        <li role="none">
+                            <a id="ctl00_ContentPlaceHolder1_ctl00_SiscomUffici1_SiscomCondividi1_linkLinkedin" cssclass="list-item" role="menuitem" onclick="javascript:condividiSocial(&#39;linkedin&#39;,&#39;&#39;);return false;">
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="assets/bootstrap-italia/dist/svg/sprites.svg#it-linkedin"></use>
+                                </svg>
+                                <span>Linkedin</span>
+                            </a>
+                        </li>
+                        <li role="none">
+                            <a id="ctl00_ContentPlaceHolder1_ctl00_SiscomUffici1_SiscomCondividi1_linkWhatsapp" cssclass="list-item" role="menuitem" onclick="javascript:condividiSocial(&#39;whatsapp&#39;,&#39;&#39;);return false;">
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="assets/bootstrap-italia/dist/svg/sprites.svg#it-whatsapp"></use>
+                                </svg>
+                                <span>Whatsapp</span>
+                            </a>
+                        </li>
+                        <li role="none">
+                            <a id="ctl00_ContentPlaceHolder1_ctl00_SiscomUffici1_SiscomCondividi1_linktelegram" cssclass="list-item" role="menuitem" onclick="javascript:condividiSocial(&#39;telegram&#39;,&#39;&#39;,&#39;Servizi demografici, anagrafe, stato civile, ed elettorale&#39;);return false;">
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="assets/bootstrap-italia/dist/svg/sprites.svg#it-telegram"></use>
+                                </svg>
+                                <span>Telegram</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col col-6">
+        <div class="dropdown">
+            <button aria-label="vedi azioni da compiere sulla pagina" class="btn btn-dropdown dropdown-toggle text-decoration-underline d-inline-flex align-items-center fs-0" type="button" id="viewActions" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="assets/bootstrap-italia/dist/svg/sprites.svg#it-more-items"></use>
+                </svg>
+                <small>Vedi azioni</small>
+            </button>
+            <div class="dropdown-menu shadow-lg" aria-labelledby="viewActions">
+                <div class="link-list-wrapper">
+                    <ul class="link-list" role="menu">
+                        <li role="none">
+                            <a id="ctl00_ContentPlaceHolder1_ctl00_SiscomUffici1_SiscomCondividi1_btnDownloadPage" CssClass="list-item" role="menuitem" onclick="$(&#39;head&#39;).prepend(&#39;&lt;base href=&quot;http://www.comune.andrate.to.it/&quot; > &#39;); saveAs(new Blob([$(&#39;html&#39;).html()], {type: &#39;text/plain;charset=utf-8&#39;}), &#39;Servizi demografici, anagrafe, stato civile, ed elettorale&#39;+&#39;.html&#39;);return false;">
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="assets/bootstrap-italia/dist/svg/sprites.svg#it-download"></use>
+                        </svg>
+                        <span>Scarica</span>
+                            </a>
+                        </li>
+                        <li role="none">
+                            <a class="list-item" href="#" onclick="window.print();return false;" role="menuitem">
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="assets/bootstrap-italia/dist/svg/sprites.svg#it-print"></use>
+                                </svg>
+                                <span>Stampa</span>
+                            </a>
+                        </li>
+                        
+                        <li role="none">
+                            <a id="ctl00_ContentPlaceHolder1_ctl00_SiscomUffici1_SiscomCondividi1_linkMail" CssClass="list-item" role="menuitem" onclick="window.location.href=&#39;mailto:?subject=www.comune.andrate.to.it&amp;body=http://www.comune.andrate.to.it/Uffici?IDUfficio=21041&#39;">
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="assets/bootstrap-italia/dist/svg/sprites.svg#it-mail"></use>
+                        </svg>
+                        <span>Invia</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<input type="hidden" name="ctl00$ContentPlaceHolder1$ctl00$SiscomUffici1$SiscomCondividi1$descrizione" id="ctl00_ContentPlaceHolder1_ctl00_SiscomUffici1_SiscomCondividi1_descrizione" value="Servizi demografici, anagrafe, stato civile, ed elettorale" />
+
+                                <div class="mt-4 mb-4">
+                                    <span id="ctl00_ContentPlaceHolder1_ctl00_SiscomUffici1_lblArgomenti" class="subtitle-small">Argomenti</span>
+                                    <div id="ctl00_ContentPlaceHolder1_ctl00_SiscomUffici1_pnlArgomenti" class="chip-wrapper mt-2">
+		
+                                    <a class="text-decoration-none" href="Dettaglioargomenti?IDCategoria=8191"><div class="chip chip-simple chip-primary">
+			<span class="chip-label">Elezioni</span>
+		</div></a><a class="text-decoration-none" href="Dettaglioargomenti?IDCategoria=8200"><div class="chip chip-simple chip-primary">
+			<span class="chip-label">Immigrazione</span>
+		</div></a><a class="text-decoration-none" href="Dettaglioargomenti?IDCategoria=8208"><div class="chip chip-simple chip-primary">
+			<span class="chip-label">Matrimonio</span>
+		</div></a><a class="text-decoration-none" href="Dettaglioargomenti?IDCategoria=8211"><div class="chip chip-simple chip-primary">
+			<span class="chip-label">Morte</span>
+		</div></a><a class="text-decoration-none" href="Dettaglioargomenti?IDCategoria=8212"><div class="chip chip-simple chip-primary">
+			<span class="chip-label">Nascita</span>
+		</div></a><a class="text-decoration-none" href="Dettaglioargomenti?IDCategoria=8222"><div class="chip chip-simple chip-primary">
+			<span class="chip-label">Residenza</span>
+		</div></a>
+	</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="d-none d-lg-block mt-2">
+        </div>
+
+        
+
+        <div class="container">
+            <div class="row mt-4 mt-lg-80 pb-lg-80 pb-40">
+                <div class="col-12 col-lg-3 mb-4 border-col">
+                    <aside class="cmp-navscroll sticky-top" aria-labelledby="accordion-title-one">
+                        <div class="inline-menu">
+                            <div class="link-list-wrapper">
+                                <ul>
+                                    <li>
+                                        <a class="list-item large medium right-icon p-0 text-decoration-none" href="#collapse-one" data-bs-toggle="collapse" aria-expanded="true" aria-controls="collapse-one" data-focus-mouse="true">
+                                            <span class="list-item-title-icon-wrapper pb-10 px-3">
+                                                <span id="accordion-title-one" class="title-xsmall-semi-bold">INDICE DELLA PAGINA</span>
+                                                <svg class="icon icon-xs right">
+                                                    <use href="assets/bootstrap-italia/dist/svg/sprites.svg#it-expand"></use>
+                                                </svg>
+                                            </span>
+                                            <!-- Progress Bar -->
+                                            <div class="progress bg-light">
+                                                <div class="progress-bar" id="progressBar" role="progressbar" style="width: 0%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </a>
+                                        <div id="ctl00_ContentPlaceHolder1_ctl00_SiscomUffici1_pnlIndicePagina" class="pnlIndicePagina">
+		<ul class='link-sublist collapse show' id='collapse-one' data-element='page-index'><li><a class="text-decoration-none list-item" href="#Contatti" data-focus-mouse="false"><span class="title-medium">Contatti</span></a></li><li><a class="text-decoration-none list-item" href="#Competenze" data-focus-mouse="false"><span class="title-medium">Competenze</span></a></li><li><a class="text-decoration-none list-item" href="#dirigente" data-focus-mouse="false"><span class="title-medium">Dirigente</span></a></li><li><a class="text-decoration-none list-item" href="#resp" data-focus-mouse="false"><span class="title-medium">Responsabile </span></a></li><li><a class="text-decoration-none list-item" href="#Personale" data-focus-mouse="false"><span class="title-medium">Personale</span></a></li><li><a class="text-decoration-none list-item" href="#Luogo" data-focus-mouse="false"><span class="title-medium">Sede principale</span></a></li><li><a class="text-decoration-none list-item" href="#Orario" data-focus-mouse="false"><span class="title-medium">Orario</span></a></li><li><a class="text-decoration-none list-item" href="#Servizi" data-focus-mouse="false"><span class="title-medium">Servizi</span></a></li></ul>
+	</div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+
+                <div class="col-12 col-lg-8 offset-lg-1">
+                    <div id="ctl00_ContentPlaceHolder1_ctl00_SiscomUffici1_Panel3" style="width:100%;">
+		<span id="Contatti"><h4 class='titoloSezioneDettaglio'>Contatti</h4></span><div class="card card-teaser shadow mt-3 rounded">
+			<div class="card-body">
+				<span id="telefono" class="SiscomDescrizione">Telefono: </span><span class="SiscomDescrizione2"><a href='tel:0125790184'>0125790184</a><br /></span><span id="email" class="SiscomDescrizione">E-mail: </span><a title="Invia mail alla casella di posta elettronica dell&#39;ufficio" class="SiscomLinkGrande" href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$ctl00$SiscomUffici1$ctl09&#39;,&#39;&#39;)">&#97;&#110;&#100;&#114;&#97;&#116;&#101;&#64;&#114;&#117;&#112;&#97;&#114;&#112;&#105;&#101;&#109;&#111;&#110;&#116;&#101;&#46;&#105;&#116;</a><span><br /></span><span id="pec" title="Posta elettronica certificata" class="SiscomDescrizione">PEC: </span><a title="Invia mail alla casella di posta elettronica certificata dell&#39;ufficio, preferibilmente da una casella di posta certificata." class="SiscomLinkGrande" href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$ctl00$SiscomUffici1$ctl11&#39;,&#39;&#39;)">&#97;&#110;&#100;&#114;&#97;&#116;&#101;&#64;&#99;&#101;&#114;&#116;&#46;&#114;&#117;&#112;&#97;&#114;&#112;&#105;&#101;&#109;&#111;&#110;&#116;&#101;&#46;&#105;&#116;</a><span><br /></span>
+			</div>
+		</div><span id="Competenze"><h4 class='titoloSezioneDettaglio'>Competenze</h4></span><span>Demografici, anagrafe, stato civile, ed elettorale</span><span id="dirigente" class="SiscomDescrizione"><h4 class='titoloSezioneDettaglio'>Dirigente</h4></span><div>
+			<a class="text-decoration-none" href="Personapubblica?ID=665"><div class="chip chip-simple chip-primary">
+				<span class="chip-label">Dott. Giuseppe COSTANTINO</span>
+			</div></a>
+		</div><span id="resp" class="SiscomDescrizione"><h4 class='titoloSezioneDettaglio'>Responsabile </h4></span><div>
+			<a class="text-decoration-none" href="Personapubblica?ID=661"><div class="chip chip-simple chip-primary">
+				<span class="chip-label">Manuela CHIAVETTO</span>
+			</div></a>
+		</div><span id="Personale"><h4 class='titoloSezioneDettaglio'>Personale</h4></span><div>
+			<a class="text-decoration-none" href="Personapubblica?ID=661"><div class="chip chip-simple chip-primary">
+				<span class="chip-label">Manuela CHIAVETTO</span>
+			</div></a>
+		</div><span id="Luogo"><h4 class='titoloSezioneDettaglio'>Sede principale</h4></span><div class="card-wrapper rounded h-auto mt-10 panelUffici">
+			<div class="card card-teaser card-teaser-info rounded shadow-sm p-3">
+				<div class="card-body pe-3">
+					<a class="card-title text-paragraph-regular-medium-semi mb-3" href="Luoghi?ID=324">Il Municipio</a><span class="card-text"><br/><b>Indirizzo: </b>Via della Parrocchia n. 18</span><span class="card-text"><br/><b>Telefono: </b></span><a href="tel:0125790184">0125790184</a><span class="card-text"><br/><b>Email: </b></span><a href="mailto:andrate@ruparpiemonte.it">andrate@ruparpiemonte.it</a><span class="card-text"><br/><b>PEC: </b></span><a href="mailto:andrate@cert.ruparpiemonte.it">andrate@cert.ruparpiemonte.it</a>
+				</div><div class="avatar size-xl">
+					<img src="portals/1826/SiscomImmaginiLuoghi/ImmagineDefault.webp" style="border-width:0px;" />
+				</div>
+			</div>
+		</div><span id="Orario" class="SiscomTitolo3"><h4 class='titoloSezioneDettaglio'>Orario</h4></span><div class="point-list-wrapper my-4">
+			<div class="point-list">
+				<div class="point-list-aside point-list-primary">
+					<span class="point-month font-monospace pt-2" style="min-width:100px">Luned&#236;</span>
+				</div><div class="point-list-content">
+					<div class="card card-teaser shadow rounded mb-1 mt-1">
+						<div class="card-body">
+							<span><h5 class='card-title mb-0'>09.00 - 11.00</h5></span>
+						</div>
+					</div>
+				</div>
+			</div><div class="point-list">
+				<div class="point-list-aside point-list-primary">
+					<span class="point-month font-monospace pt-2" style="min-width:100px">Marted&#236;</span>
+				</div><div class="point-list-content">
+					<div class="card card-teaser shadow rounded mb-1 mt-1">
+						<div class="card-body">
+							<span><h5 class='card-title mb-0'>09.00 - 11.00</h5></span>
+						</div>
+					</div>
+				</div>
+			</div><div class="point-list">
+				<div class="point-list-aside point-list-primary">
+					<span class="point-month font-monospace pt-2" style="min-width:100px">Mercoled&#236;</span>
+				</div><div class="point-list-content">
+					<div class="card card-teaser shadow rounded mb-1 mt-1">
+						<div class="card-body">
+							<span><h5 class='card-title mb-0'>09.00 - 11.00</h5></span>
+						</div>
+					</div>
+				</div>
+			</div><div class="point-list">
+				<div class="point-list-aside point-list-primary">
+					<span class="point-month font-monospace pt-2" style="min-width:100px">Gioved&#236;</span>
+				</div><div class="point-list-content">
+					<div class="card card-teaser shadow rounded mb-1 mt-1">
+						<div class="card-body">
+							<span><h5 class='card-title mb-0'>09.00 - 11.00</h5></span>
+						</div>
+					</div>
+				</div>
+			</div><div class="point-list">
+				<div class="point-list-aside point-list-primary">
+					<span class="point-month font-monospace pt-2" style="min-width:100px">Venerd&#236;</span>
+				</div><div class="point-list-content">
+					<div class="card card-teaser shadow rounded mb-1 mt-1">
+						<div class="card-body">
+							<span><h5 class='card-title mb-0'>09.00 - 11.00</h5></span>
+						</div>
+					</div>
+				</div>
+			</div><div class="point-list">
+				<div class="point-list-aside point-list-primary">
+					<span class="point-month font-monospace pt-2" style="min-width:100px">Sabato</span>
+				</div><div class="point-list-content">
+					<div class="card card-teaser shadow rounded mb-1 mt-1">
+						<div class="card-body">
+							<span><h5 class='card-title mb-0'>su appuntamento</h5></span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><div>
+			<div class="cmp-accordion">
+				<div>
+
+				</div>
+			</div>
+		</div><div>
+			<span id="Servizi" style="display:inline-block;width:100%;"><h4 class='titoloSezioneDettaglio'>Servizi</h4></span>
+		</div><div class="row mb-2">
+			<div class="col-12 col-md-6 col-lg-4  mb-10 DINAMICOROUTINDELMODULO">
+				<div class="card-wrapper border border-light rounded shadow-sm cmp-list-card-img cmp-list-card-img-hr">
+					<div class="card no-after rounded">
+						<div class="row g-2 g-md-0 flex-md-column">
+							<div class="col-12 order-1 order-md-2">
+								<div class="card-body">
+									<div class="category-top">
+										<a class="text-decoration-none fw-semibold"><i class='fa fa-cogs'></i>&nbsp;&nbsp;Anagrafe e stato civile</a>
+									</div><a class="text-decoration-none d-block" href="Servizi?ID=102891"><h3 class='card-title t-primary title-large'>Albo degli scrutatori di seggio</h3></a><span class="text-paragraph-card u-grey-light m-0">L'albo degli scrutatori &egrave; l'elenco di tutte le persone idonee e interessate a ricoprire questa funzione all'interno dei seggi elettorali. &Egrave; istituito in ogni Comune ed &egrave; aggiornato annualmente.</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div><div class="col-12 col-md-6 col-lg-4  mb-10 DINAMICOROUTINDELMODULO">
+				<div class="card-wrapper border border-light rounded shadow-sm cmp-list-card-img cmp-list-card-img-hr">
+					<div class="card no-after rounded">
+						<div class="row g-2 g-md-0 flex-md-column">
+							<div class="col-12 order-1 order-md-2">
+								<div class="card-body">
+									<div class="category-top">
+										<a class="text-decoration-none fw-semibold"><i class='fa fa-cogs'></i>&nbsp;&nbsp;Anagrafe e stato civile</a>
+									</div><a class="text-decoration-none d-block" href="Servizi?ID=102667"><h3 class='card-title t-primary title-large'>Dispersione ceneri</h3></a><span class="text-paragraph-card u-grey-light m-0">Disciplinare operativo per il rilascio delle autorizzazioni alla dispersione delle ceneri</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div><div class="col-12 col-md-6 col-lg-4  mb-10 DINAMICOROUTINDELMODULO">
+				<div class="card-wrapper border border-light rounded shadow-sm cmp-list-card-img cmp-list-card-img-hr">
+					<div class="card no-after rounded">
+						<div class="row g-2 g-md-0 flex-md-column">
+							<div class="col-12 order-1 order-md-2">
+								<div class="card-body">
+									<div class="category-top">
+										<a class="text-decoration-none fw-semibold"><i class='fa fa-cogs'></i>&nbsp;&nbsp;Anagrafe e stato civile</a>
+									</div><a class="text-decoration-none d-block" href="Servizi?ID=102892"><h3 class='card-title t-primary title-large'>Albo dei presidenti di seggio</h3></a><span class="text-paragraph-card u-grey-light m-0">Il Presidente di Seggio &egrave; colui che sovraintende alle operazioni elettorali del seggio elettorale. L'iscrizione all'Albo &egrave; condizione necessaria per essere nominati in qualit&agrave; di Presidente in occasione delle elezioni.</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div><div class="col-12 col-md-6 col-lg-4  mb-10 DINAMICOROUTINDELMODULO">
+				<div class="card-wrapper border border-light rounded shadow-sm cmp-list-card-img cmp-list-card-img-hr">
+					<div class="card no-after rounded">
+						<div class="row g-2 g-md-0 flex-md-column">
+							<div class="col-12 order-1 order-md-2">
+								<div class="card-body">
+									<div class="category-top">
+										<a class="text-decoration-none fw-semibold"><i class='fa fa-cogs'></i>&nbsp;&nbsp;Anagrafe e stato civile</a>
+									</div><a class="text-decoration-none d-block" href="Servizi?ID=102893"><h3 class='card-title t-primary title-large'>Atti di riconoscimento</h3></a><span class="text-paragraph-card u-grey-light m-0">Il riconoscimento di figlio naturale pu&ograve; essere fatto davanti all'Ufficiale di Stato Civile nei seguenti casi:<br />- prima della nascita del bambino, dalla sola madre o da entrambi i genitori naturali<br />- in sede di dichiarazione di nascit...</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div><div class="col-12 col-md-6 col-lg-4  mb-10 DINAMICOROUTINDELMODULO">
+				<div class="card-wrapper border border-light rounded shadow-sm cmp-list-card-img cmp-list-card-img-hr">
+					<div class="card no-after rounded">
+						<div class="row g-2 g-md-0 flex-md-column">
+							<div class="col-12 order-1 order-md-2">
+								<div class="card-body">
+									<div class="category-top">
+										<a class="text-decoration-none fw-semibold"><i class='fa fa-cogs'></i>&nbsp;&nbsp;Anagrafe e stato civile</a>
+									</div><a class="text-decoration-none d-block" href="Servizi?ID=102894"><h3 class='card-title t-primary title-large'>Atto di morte</h3></a><span class="text-paragraph-card u-grey-light m-0">La denuncia di morte &egrave; obbligatoria per legge.</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div><div class="col-12 col-md-6 col-lg-4  mb-10 DINAMICOROUTINDELMODULO">
+				<div class="card-wrapper border border-light rounded shadow-sm cmp-list-card-img cmp-list-card-img-hr">
+					<div class="card no-after rounded">
+						<div class="row g-2 g-md-0 flex-md-column">
+							<div class="col-12 order-1 order-md-2">
+								<div class="card-body">
+									<div class="category-top">
+										<a class="text-decoration-none fw-semibold"><i class='fa fa-cogs'></i>&nbsp;&nbsp;Anagrafe e stato civile</a>
+									</div><a class="text-decoration-none d-block" href="Servizi?ID=102895"><h3 class='card-title t-primary title-large'>Atto di nascita</h3></a><span class="text-paragraph-card u-grey-light m-0">La denuncia di nascita &egrave; l'atto con il quale si comunica formalmente agli Uffici dello Stato Civile del Comune la nascita di un bambino.</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div><div class="col-12 col-md-6 col-lg-4  mb-10 DINAMICOROUTINDELMODULO">
+				<div class="card-wrapper border border-light rounded shadow-sm cmp-list-card-img cmp-list-card-img-hr">
+					<div class="card no-after rounded">
+						<div class="row g-2 g-md-0 flex-md-column">
+							<div class="col-12 order-1 order-md-2">
+								<div class="card-body">
+									<div class="category-top">
+										<a class="text-decoration-none fw-semibold"><i class='fa fa-cogs'></i>&nbsp;&nbsp;Anagrafe e stato civile</a>
+									</div><a class="text-decoration-none d-block" href="Servizi?ID=102896"><h3 class='card-title t-primary title-large'>Autocertificazioni</h3></a><span class="text-paragraph-card u-grey-light m-0">L'autocertificazione &egrave; una semplice dichiarazione, conosciuta anche come "dichiarazione sostitutiva di certificazione", che sostituisce alcuni certificati senza che ci sia necessit&agrave; di presentare successivamente il certificato vero e pr...</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div><div class="col-12 col-md-6 col-lg-4  mb-10 DINAMICOROUTINDELMODULO">
+				<div class="card-wrapper border border-light rounded shadow-sm cmp-list-card-img cmp-list-card-img-hr">
+					<div class="card no-after rounded">
+						<div class="row g-2 g-md-0 flex-md-column">
+							<div class="col-12 order-1 order-md-2">
+								<div class="card-body">
+									<div class="category-top">
+										<a class="text-decoration-none fw-semibold"><i class='fa fa-cogs'></i>&nbsp;&nbsp;Anagrafe e stato civile</a>
+									</div><a class="text-decoration-none d-block" href="Servizi?ID=102897"><h3 class='card-title t-primary title-large'>Cambio di indirizzo</h3></a><span class="text-paragraph-card u-grey-light m-0">E&rsquo; la pratica relativa al cambiamento di indirizzo nell&rsquo;ambito del Comune di residenza.</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div><div class="col-12 col-md-6 col-lg-4  mb-10 DINAMICOROUTINDELMODULO">
+				<div class="card-wrapper border border-light rounded shadow-sm cmp-list-card-img cmp-list-card-img-hr">
+					<div class="card no-after rounded">
+						<div class="row g-2 g-md-0 flex-md-column">
+							<div class="col-12 order-1 order-md-2">
+								<div class="card-body">
+									<div class="category-top">
+										<a class="text-decoration-none fw-semibold"><i class='fa fa-cogs'></i>&nbsp;&nbsp;Anagrafe e stato civile</a>
+									</div><a class="text-decoration-none d-block" href="Servizi?ID=102665"><h3 class='card-title t-primary title-large'>Matrimonio civile</h3></a><span class="text-paragraph-card u-grey-light m-0">Celebrazioni matrimoni civili</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div><div class="col-12 col-md-6 col-lg-4  mb-10 DINAMICOROUTINDELMODULO">
+				<div class="card-wrapper border border-light rounded shadow-sm cmp-list-card-img cmp-list-card-img-hr">
+					<div class="card no-after rounded">
+						<div class="row g-2 g-md-0 flex-md-column">
+							<div class="col-12 order-1 order-md-2">
+								<div class="card-body">
+									<div class="category-top">
+										<a class="text-decoration-none fw-semibold"><i class='fa fa-cogs'></i>&nbsp;&nbsp;Anagrafe e stato civile</a>
+									</div><a class="text-decoration-none d-block" href="Servizi?ID=102666"><h3 class='card-title t-primary title-large'>Matrimonio religioso</h3></a><span class="text-paragraph-card u-grey-light m-0">Richiesta pubblicazioni per celebrazione matrimonio religioso</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div><div class="col-12 col-md-6 col-lg-4  mb-10 DINAMICOROUTINDELMODULO">
+				<div class="card-wrapper border border-light rounded shadow-sm cmp-list-card-img cmp-list-card-img-hr">
+					<div class="card no-after rounded">
+						<div class="row g-2 g-md-0 flex-md-column">
+							<div class="col-12 order-1 order-md-2">
+								<div class="card-body">
+									<div class="category-top">
+										<a class="text-decoration-none fw-semibold"><i class='fa fa-cogs'></i>&nbsp;&nbsp;Anagrafe e stato civile</a>
+									</div><a class="text-decoration-none d-block" href="Servizi?ID=102898"><h3 class='card-title t-primary title-large'>Cambio di residenza (Iscrizione anagrafica)</h3></a><span class="text-paragraph-card u-grey-light m-0">E&rsquo; la pratica relativa all&rsquo;inserimento nell&rsquo;elenco anagrafico del Comune in cui si decide di porre la propria residenza.</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div><div class="col-12 col-md-6 col-lg-4  mb-10 DINAMICOROUTINDELMODULO">
+				<div class="card-wrapper border border-light rounded shadow-sm cmp-list-card-img cmp-list-card-img-hr">
+					<div class="card no-after rounded">
+						<div class="row g-2 g-md-0 flex-md-column">
+							<div class="col-12 order-1 order-md-2">
+								<div class="card-body">
+									<div class="category-top">
+										<a class="text-decoration-none fw-semibold"><i class='fa fa-cogs'></i>&nbsp;&nbsp;Anagrafe e stato civile</a>
+									</div><a class="text-decoration-none d-block" href="Servizi?ID=102899"><h3 class='card-title t-primary title-large'>Cancellazione anagrafica</h3></a><span class="text-paragraph-card u-grey-light m-0">Variazioni all'archivio della popolazione residente.<br /><br />La cancellazione anagrafica pu&ograve; avvenire per:<br /><br />- morte, compresa la morte giudizialmente dichiarata:<br />- emigrazione presso un altro Comune italiano o all'estero, non...</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div><div class="col-12 col-md-6 col-lg-4  mb-10 DINAMICOROUTINDELMODULO">
+				<div class="card-wrapper border border-light rounded shadow-sm cmp-list-card-img cmp-list-card-img-hr">
+					<div class="card no-after rounded">
+						<div class="row g-2 g-md-0 flex-md-column">
+							<div class="col-12 order-1 order-md-2">
+								<div class="card-body">
+									<div class="category-top">
+										<a class="text-decoration-none fw-semibold"><i class='fa fa-cogs'></i>&nbsp;&nbsp;Anagrafe e stato civile</a>
+									</div><a class="text-decoration-none d-block" href="Servizi?ID=102668"><h3 class='card-title t-primary title-large'>Divorzi e separazioni</h3></a><span class="text-paragraph-card u-grey-light m-0">All'ufficio comunale di stato civile si pu&ograve; ottenere (Legge del 10/11/2014, n. 162): la separazione personale; lo scioglimento del matrimonio civile; la cessazione degli effetti civili del matrimonio religioso; la modifica degli accordi di sep...</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div><div class="col-12 col-md-6 col-lg-4  mb-10 DINAMICOROUTINDELMODULO">
+				<div class="card-wrapper border border-light rounded shadow-sm cmp-list-card-img cmp-list-card-img-hr">
+					<div class="card no-after rounded">
+						<div class="row g-2 g-md-0 flex-md-column">
+							<div class="col-12 order-1 order-md-2">
+								<div class="card-body">
+									<div class="category-top">
+										<a class="text-decoration-none fw-semibold"><i class='fa fa-cogs'></i>&nbsp;&nbsp;Anagrafe e stato civile</a>
+									</div><a class="text-decoration-none d-block" href="Servizi?ID=102669"><h3 class='card-title t-primary title-large'>Unioni civili</h3></a><span class="text-paragraph-card u-grey-light m-0">Due persone maggiorenni dello stesso sesso possono costituire un'unione civile. Dall'unione civile derivano diritti e doveri reciproci: &egrave; necessario contribuire ai bisogni comuni, coabitare e aiutarsi moralmente e materialmente.</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div><div class="col-12 col-md-6 col-lg-4  mb-10 DINAMICOROUTINDELMODULO">
+				<div class="card-wrapper border border-light rounded shadow-sm cmp-list-card-img cmp-list-card-img-hr">
+					<div class="card no-after rounded">
+						<div class="row g-2 g-md-0 flex-md-column">
+							<div class="col-12 order-1 order-md-2">
+								<div class="card-body">
+									<div class="category-top">
+										<a class="text-decoration-none fw-semibold"><i class='fa fa-cogs'></i>&nbsp;&nbsp;Anagrafe e stato civile</a>
+									</div><a class="text-decoration-none d-block" href="Servizi?ID=102900"><h3 class='card-title t-primary title-large'>Carta d'identità elettronica (CIE)</h3></a><span class="text-paragraph-card u-grey-light m-0">La Carta di Identit&agrave; Elettronica (CIE) &egrave; il documento d&rsquo;identit&agrave; dei cittadini italiani e consente l&rsquo;accesso ai servizi online delle Pubbliche Amministrazioni abilitate. Grazie all&rsquo;uso sempre pi&ugrave; diffuso ...</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div><div class="col-12 col-md-6 col-lg-4  mb-10 DINAMICOROUTINDELMODULO">
+				<div class="card-wrapper border border-light rounded shadow-sm cmp-list-card-img cmp-list-card-img-hr">
+					<div class="card no-after rounded">
+						<div class="row g-2 g-md-0 flex-md-column">
+							<div class="col-12 order-1 order-md-2">
+								<div class="card-body">
+									<div class="category-top">
+										<a class="text-decoration-none fw-semibold"><i class='fa fa-cogs'></i>&nbsp;&nbsp;Anagrafe e stato civile</a>
+									</div><a class="text-decoration-none d-block" href="Servizi?ID=102901"><h3 class='card-title t-primary title-large'>Certificati anagrafici</h3></a><span class="text-paragraph-card u-grey-light m-0">Dal 1&deg; gennaio 2012, con l&rsquo;entrata in vigore della Legge di stabilit&agrave; per l&rsquo;anno 2012 (che ha modificato l'art.40 del d.p.R. n.445/2000), le certificazioni rilasciate dalla pubblica amministrazione in merito a stati, qualit&agr...</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div><div class="col-12 col-md-6 col-lg-4  mb-10 DINAMICOROUTINDELMODULO">
+				<div class="card-wrapper border border-light rounded shadow-sm cmp-list-card-img cmp-list-card-img-hr">
+					<div class="card no-after rounded">
+						<div class="row g-2 g-md-0 flex-md-column">
+							<div class="col-12 order-1 order-md-2">
+								<div class="card-body">
+									<div class="category-top">
+										<a class="text-decoration-none fw-semibold"><i class='fa fa-cogs'></i>&nbsp;&nbsp;Anagrafe e stato civile</a>
+									</div><a class="text-decoration-none d-block" href="Servizi?ID=102902"><h3 class='card-title t-primary title-large'>Domanda per voto assistito</h3></a><span class="text-paragraph-card u-grey-light m-0">Gli elettori che hanno gravi difficolt&agrave; fisiche nell'esprimere il voto possono chiedere di essere accompagnati all'interno della cabina da altro elettore.</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div><div class="col-12 col-md-6 col-lg-4  mb-10 DINAMICOROUTINDELMODULO">
+				<div class="card-wrapper border border-light rounded shadow-sm cmp-list-card-img cmp-list-card-img-hr">
+					<div class="card no-after rounded">
+						<div class="row g-2 g-md-0 flex-md-column">
+							<div class="col-12 order-1 order-md-2">
+								<div class="card-body">
+									<div class="category-top">
+										<a class="text-decoration-none fw-semibold"><i class='fa fa-cogs'></i>&nbsp;&nbsp;Anagrafe e stato civile</a>
+									</div><a class="text-decoration-none d-block" href="Servizi?ID=102903"><h3 class='card-title t-primary title-large'>Liste elettorali aggiunte</h3></a><span class="text-paragraph-card u-grey-light m-0">I cittadini dell'Unione Europea residenti in Italia possono votare nel Comune di Residenza in occasione delle Elezioni europee e in occasione delle Elezioni Comunali.</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div><div class="col-12 col-md-6 col-lg-4  mb-10 DINAMICOROUTINDELMODULO">
+				<div class="card-wrapper border border-light rounded shadow-sm cmp-list-card-img cmp-list-card-img-hr">
+					<div class="card no-after rounded">
+						<div class="row g-2 g-md-0 flex-md-column">
+							<div class="col-12 order-1 order-md-2">
+								<div class="card-body">
+									<div class="category-top">
+										<a class="text-decoration-none fw-semibold"><i class='fa fa-cogs'></i>&nbsp;&nbsp;Anagrafe e stato civile</a>
+									</div><a class="text-decoration-none d-block" href="Servizi?ID=102905"><h3 class='card-title t-primary title-large'>Tessera elettorale</h3></a><span class="text-paragraph-card u-grey-light m-0">La tessera elettorale &egrave; il documento che permette all'elettore di votare in tutte le consultazioni elettorali o referendarie che viene rilasciata dal comune di residenza.</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div><div class="col-12 col-md-6 col-lg-4  mb-10 DINAMICOROUTINDELMODULO">
+				<div class="card-wrapper border border-light rounded shadow-sm cmp-list-card-img cmp-list-card-img-hr">
+					<div class="card no-after rounded">
+						<div class="row g-2 g-md-0 flex-md-column">
+							<div class="col-12 order-1 order-md-2">
+								<div class="card-body">
+									<div class="category-top">
+										<a class="text-decoration-none fw-semibold"><i class='fa fa-cogs'></i>&nbsp;&nbsp;Anagrafe e stato civile</a>
+									</div><a class="text-decoration-none d-block" href="Servizi?ID=131784"><h3 class='card-title t-primary title-large'>Rettifica dati scheda anagrafica ANPR</h3></a><span class="text-paragraph-card u-grey-light m-0">l servizio ANPR ti consente di inviare al tuo comune una richiesta di rettifica, cioè di correzione, di uno o più dati presenti nella tua scheda anagrafica: per esempio, un errore ortografico nell’indirizzo, oppure un CAP incompleto, oppure un nuovo ...</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div><div class="col-12 col-md-6 col-lg-4  mb-10 DINAMICOROUTINDELMODULO">
+				<div class="card-wrapper border border-light rounded shadow-sm cmp-list-card-img cmp-list-card-img-hr">
+					<div class="card no-after rounded">
+						<div class="row g-2 g-md-0 flex-md-column">
+							<div class="col-12 order-1 order-md-2">
+								<div class="card-body">
+									<div class="category-top">
+										<a class="text-decoration-none fw-semibold"><i class='fa fa-cogs'></i>&nbsp;&nbsp;Anagrafe e stato civile</a>
+									</div><a class="text-decoration-none d-block" href="Servizi?ID=132230"><h3 class='card-title t-primary title-large'>Iscrizione anagrafica per cittadini europei</h3></a><span class="text-paragraph-card u-grey-light m-0">L’iscrizione anagrafica ti consente di utilizzare i servizi dell’Anagrafe nazionale. Per ottenerla, devi trasferirti in un comune italiano e presentare una dichiarazione di residenza.</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+                    <br />
+                    <br />
+
+                    <div id="ctl00_ContentPlaceHolder1_ctl00_SiscomUffici1_Panel4" class="ParIndietro" style="width:100%;">
+		
+                        <a href="javascript:history.back()" class="btn btn-sm steppers-btn-prev p-0" title="Indietro">
+                            <svg class="icon icon-primary icon-sm" aria-hidden="true">
+                                <use href="assets/bootstrap-italia/dist/svg/sprites.svg#it-chevron-left"></use></svg>
+                            <span id="ctl00_ContentPlaceHolder1_ctl00_SiscomUffici1_Label1" class="SiscomLinkGrande">Indietro</span>
+                        </a>
+                    
+	</div>
+                </div>
+            </div>
+        </div>
+
+    
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+        <div id="ctl00_PanelMasterBottom">
+	
+
+
+
+<div class="bg-primary">
+    <div class="container">
+        <div class="row d-flex justify-content-center bg-primary">
+            <div class="col-12 col-lg-6">
+                <div class="cmp-rating pt-lg-80 pb-lg-80" id="">
+                    <div class="card shadow card-wrapper" data-element="feedback" id="feedback">
+                        <div id="ctl00_ctl13_SiscomFeedback1_pnlVoti" class="cmp-rating__card-first">
+		
+                            <div class="card-header border-0">
+                                <h2 class="title-medium-2-semi-bold mb-0" data-element="feedback-title">
+                                    <span id="ctl00_ctl13_SiscomFeedback1_lblTitolo">Quanto sono chiare le informazioni su questa pagina?</span></h2>
+                            </div>
+                            <div class="card-body">
+                                <fieldset class="rating">
+                                    <legend class="visually-hidden">Valuta da 1 a 5 stelle la pagina</legend>
+                                    <input type="radio" id="star5a" name="ratingA" value="5">
+                                    <label class="full rating-star active" for="star5a" data-element="feedback-rate-5">
+
+                                        <svg class="icon icon-sm" role="img" aria-labelledby="first-star">
+                                            <use href="assets/bootstrap-italia/dist/svg/sprites.svg#it-star-full"></use>
+                                        </svg>
+                                        <span class="visually-hidden" id="first-star">Valuta 5 stelle su 5</span>
+
+                                    </label>
+                                    <input type="radio" id="star4a" name="ratingA" value="4">
+                                    <label class="full rating-star active" for="star4a" data-element="feedback-rate-4">
+
+                                        <svg class="icon icon-sm" role="img" aria-labelledby="second-star">
+                                            <use href="assets/bootstrap-italia/dist/svg/sprites.svg#it-star-full"></use>
+                                        </svg>
+                                        <span class="visually-hidden" id="second-star">Valuta 4 stelle su 5</span>
+
+                                    </label>
+                                    <input type="radio" id="star3a" name="ratingA" value="3">
+                                    <label class="full rating-star active" for="star3a" data-element="feedback-rate-3">
+
+                                        <svg class="icon icon-sm" role="img" aria-labelledby="third-star">
+                                            <use href="assets/bootstrap-italia/dist/svg/sprites.svg#it-star-full"></use>
+                                        </svg>
+                                        <span class="visually-hidden" id="third-star">Valuta 3 stelle su 5</span>
+
+
+                                    </label>
+                                    <input type="radio" id="star2a" name="ratingA" value="2">
+                                    <label class="full rating-star active" for="star2a" data-element="feedback-rate-2">
+
+                                        <svg class="icon icon-sm" role="img" aria-labelledby="fourth-star">
+                                            <use href="assets/bootstrap-italia/dist/svg/sprites.svg#it-star-full"></use>
+                                        </svg>
+                                        <span class="visually-hidden" id="fourth-star">Valuta 2 stelle su 5</span>
+
+                                    </label>
+                                    <input type="radio" id="star1a" name="ratingA" value="1">
+                                    <label class="full rating-star active" for="star1a" data-element="feedback-rate-1">
+
+                                        <svg class="icon icon-sm" role="img" aria-labelledby="fifth-star">
+                                            <use href="assets/bootstrap-italia/dist/svg/sprites.svg#it-star-full"></use>
+                                        </svg>
+                                        <span class="visually-hidden" id="fifth-star">Valuta 1 stelle su 5</span>
+
+                                    </label>
+                                </fieldset>
+                            </div>
+                        
+	</div>
+                        <div id="ctl00_ctl13_SiscomFeedback1_pnlFine" class="cmp-rating__card-second d-none" data-step="3">
+		
+                            <div class="card-header border-0 mb-0">
+                                <h2 class="title-medium-2-bold mb-0" id="rating-feedback">Grazie, il tuo parere ci aiuterà a migliorare il servizio!</h2>
+                            </div>
+                        
+	</div>
+
+                        <div class="form-rating d-none">
+                            <div class="d-none" data-step="1">
+                                <div class="cmp-steps-rating">
+                                    <fieldset id="fieldset-rating-one" class="fieldset-rating-one" data-element="feedback-rating-positive">
+                                        <div class="iscrizioni-header w-100">
+                                            <h3 class="step-title d-flex align-items-center justify-content-between drop-shadow">
+                                                <legend class="d-block d-lg-inline" data-element="feedback-rating-question">Quali sono stati gli aspetti che hai preferito?
+                                                </legend>
+                                                <span class="step">1/2</span>
+                                            </h3>
+                                        </div>
+                                        <div class="cmp-steps-rating__body">
+                                            <div class="cmp-radio-list">
+                                                <div class="card card-teaser shadow-rating">
+                                                    <div class="card-body">
+                                                        <div class="form-check m-0">
+                                                            <div class="radio-body border-bottom border-light cmp-radio-list__item radioFeedback">
+                                                                <input name="rating1" type="radio" id="radio-1">
+                                                                <label for="radio-1" class="active" data-element="feedback-rating-answer">Le indicazioni erano chiare</label>
+                                                            </div>
+                                                            <div class="radio-body border-bottom border-light cmp-radio-list__item radioFeedback">
+                                                                <input name="rating1" type="radio" id="radio-2">
+                                                                <label for="radio-2" class="active" data-element="feedback-rating-answer">Le indicazioni erano complete</label>
+                                                            </div>
+                                                            <div class="radio-body border-bottom border-light cmp-radio-list__item radioFeedback">
+                                                                <input name="rating1" type="radio" id="radio-3">
+                                                                <label for="radio-3" class="active" data-element="feedback-rating-answer">Capivo sempre che stavo procedendo correttamente</label>
+                                                            </div>
+                                                            <div class="radio-body border-bottom border-light cmp-radio-list__item radioFeedback">
+                                                                <input name="rating1" type="radio" id="radio-4">
+                                                                <label for="radio-4" class="active" data-element="feedback-rating-answer">Non ho avuto problemi tecnici</label>
+                                                            </div>
+                                                            <div class="radio-body border-bottom border-light cmp-radio-list__item radioFeedback">
+                                                                <input name="rating1" type="radio" id="radio-5">
+                                                                <label for="radio-5" class="active" data-element="feedback-rating-answer">Altro</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset id="fieldset-rating-two" class="fieldset-rating-two" data-element="feedback-rating-negative">
+                                        <div class="iscrizioni-header w-100">
+                                            <h3 class="step-title d-flex align-items-center justify-content-between drop-shadow">
+                                                <legend class="d-block d-lg-inline" data-element="feedback-rating-question">Dove hai incontrato le maggiori difficoltà?
+                                                </legend>
+                                                <span class="step">1/2</span>
+                                            </h3>
+                                        </div>
+                                        <div class="cmp-steps-rating__body">
+                                            <div class="cmp-radio-list">
+                                                <div class="card card-teaser shadow-rating">
+                                                    <div class="card-body">
+                                                        <div class="form-check m-0">
+                                                            <div class="radio-body border-bottom border-light cmp-radio-list__item radioFeedback">
+                                                                <input name="rating2" type="radio" id="radio-6">
+                                                                <label for="radio-6" class="active" data-element="feedback-rating-answer">A volte le indicazioni non erano chiare</label>
+                                                            </div>
+                                                            <div class="radio-body border-bottom border-light cmp-radio-list__item radioFeedback">
+                                                                <input name="rating2" type="radio" id="radio-7">
+                                                                <label for="radio-7" class="active" data-element="feedback-rating-answer">A volte le indicazioni non erano complete</label>
+                                                            </div>
+                                                            <div class="radio-body border-bottom border-light cmp-radio-list__item radioFeedback">
+                                                                <input name="rating2" type="radio" id="radio-8">
+                                                                <label for="radio-8" class="active" data-element="feedback-rating-answer">A volte non capivo se stavo procedendo correttamente</label>
+                                                            </div>
+                                                            <div class="radio-body border-bottom border-light cmp-radio-list__item radioFeedback">
+                                                                <input name="rating2" type="radio" id="radio-9">
+                                                                <label for="radio-9" class="active" data-element="feedback-rating-answer">Ho avuto problemi tecnici</label>
+                                                            </div>
+                                                            <div class="radio-body border-bottom border-light cmp-radio-list__item radioFeedback">
+                                                                <input name="rating2" type="radio" id="radio-10">
+                                                                <label for="radio-10" class="active" data-element="feedback-rating-answer">Altro</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                                <div class="d-flex flex-nowrap pt-4 w-100 justify-content-center button-shadow">
+                                    <button class="btn btn-outline-primary fw-bold me-4 btn-back2" type="button">Indietro</button>
+                                    <button class="btn btn-primary fw-bold btn-next" type="button">Avanti</button>
+                                </div>
+                            </div>
+
+                            <div class="d-none" data-step="2">
+                                <div class="cmp-steps-rating">
+                                    <fieldset>
+                                        <div class="iscrizioni-header w-100">
+                                            <h3 class="step-title d-flex align-items-center justify-content-between drop-shadow mb-5">
+                                                <legend class="d-block d-lg-inline">Vuoi aggiungere altri dettagli?                      </legend>
+                                                <span class="step">2/2</span>
+                                            </h3>
+                                        </div>
+                                        <div class="cmp-steps-rating__body">
+                                            <div class="form-group">
+                                                <label for="TxtNoteFeedback">Dettaglio</label>
+                                                <input name="ctl00$ctl13$SiscomFeedback1$TxtNoteFeedback" type="text" maxlength="200" id="TxtNoteFeedback" class="form-control" data-element="feedback-input-text" aria-describedby="TxtNoteFeedbackDescription" />
+                                                <small id="TxtNoteFeedbackDescription" class="form-text">Inserire massimo 200 caratteri</small>
+                                            </div>
+                                            <br />
+                                            
+                                            <img id="ctl00_ctl13_SiscomFeedback1_imgCaptcha" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAABQCAYAAABcbTqwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAApySURBVHhe7Z3PixRHFMfnL0sI5LDXHHML5BZCIDD3eFiMByUeNuJhCB4keBDjQYigMAcPHiR4UBRdf6y/f+vqKiqKlf72dPVUv66f3b09XV3vAw+mp3/uzvvWe6+qunsiOuTSpUvFp2a03Z8ZBmP6HTsVCMMiHxsskMRgAYfBAiHcu3ev+MQwLJCSR48eif3794vZbCYOHz4s3r9/X6xhfEBkmk1nYqtYHgsskIzNzc1cGDs7O/ny+fPnxenTp/PPjJmt2ZqYTCalTefFihGRvECePXuWR4xPnz4V34j88759+yrfxU73tceWmK0txTFZG1/0AEkLBAKAOCASCr5H2kUZcpHb67XNp6OPHiBpgZw6dUpcuHChWKo6GF2XBnMxVZx+bWaKCbsbPYbUCCUrEPRWoe4wMZ/Pcxs782nm4HnzXxWHNG1k2JqJNcs2Q46yoSQpEKRWEIcuhZIgeiCKjA7i3JPJNJNGQW3dYj11+FxUcn2EtUeIgJMUiE8v1dWrV8WxY8eKpbFAUqPMahGC1Ba5qSIoRAQnwzpzGhY/+d9YfE4GjG9sbGyUXbombt++LY4cOVIsRUTmwFOD09Ju2UVqVae2XWZSCNV1SvQZKVaB3L9/X9y6dSs3fH7y5Elu29vb4u3bt7nF1hWKyIEI4qKJQB48eCA+fPhQLPUIafW1rTpNn6ypUT3SwKZZTeZXxI8Hq0A+fvxYCuHly5elQO7evVsKB6kIQhEMA27ye+T3cvs3b96Ux/ny5Utx9P5B1Dh48KCXqHH96OoNAeK4efOmeP36dfHNLlCIoeKcToFQh18Tbt/WF+1LG3/0AJ2mWEhfpBAwtiAFsrW1VQrn8uXLpaDkdzC57dOnT8tjvHv3rjhyN/hGD/Dq1atcTKF8/vxZ3LlzJ/9bOkFbOGempkd0G5I60ZTJu+U3nTsz32Pgdx4KTa5lpTWIFAJMCuTx48elaNAaSzFduXKl/F46IOzFixflMWzpTUj0AE0FIsG14TohmDBcLXdhvgIJSq006Ir2RKIHiKZIh6NJISCFkQJB3i+Fc/369VJQ165dK79H/XTixAlx5swZ7/qprUAArhMicWJpqbVGndwoEJpaNXNs3+J+jEQjkFDU+gkCOXDggHj48KF3/XTjxo18n17qJ6dAXI5Nok4hoO4cW3/8FGgsEDhVLPjUHrR+kgIx1U8w+b2MZvhOHiOsfqJplU8RraJxYIPommmEBTJakEbhPo/Q+ztcKZYUAkwKpFY//fVDxTkX9rX44z9aP/0rflW3CXZAOjdqKqaabtqFhYoP0ONXry+mxjKU0Quk6b0diCIYUAzCs5aAQ/30j1o//S1+VLf56vd2AnFaaC3STS2zKtoIeNQCQfRAFNhxjJrr8B4o1PbyeFilFba30EuK7WrrzQLJu2N11xgUpeIWSBuMAhlD2MTfcPz48WIpDJNAUJNUaCqQipOZHVA37UPn3JUJhJrttOsDCpLq/iyQUWC66cmHUiBK2gTB1ZyqllaZnMdWiNcjQH4uZbliXgKh10HPvzDfAb/q8ZvUMf3SVQPfWiChF9LVhbtoO9lwuT9xLJdALK2yzcm0LbzG8P/TnYLur72MFj1by+MPXxxdMtoIgqnqGOdwMxczzS9uFAhtvb0FYs/jbQLxaeWrqZjZibUpW2JOH8IoBeLsgfJw6osXL4qTJ09mn1xjAI4II6HnJMexRRcfqOPbooJejOnUFSGMUiCmgcEyvQsSCGn5XQLR1AeZRy7XF0ZPGeLgOsL2J9dsEUdfKfFQ6VQgq/9nzsUvk2/F97+5JiW6W32jQFzFbykQ6oSKac7XViBUhMH7M1oijyAWJ8zNlKqYnHqJv0DqPVBWM3hu1wLxntLOWIlUIGFOWXe2EIHA95Rta6LzvZaFsIxRtq2Ds0CC8cl4tAIZdN5p6Kq0m8OpDQJZ/07ZprQQgQQUvuzggySyCKJLqZZOKLt2db00VYejTr04Bk1z9FZP26rnCxCFCgtkkFgFMqxIUm+pVSeis2/rzq46rm9apDeasrXtos3xHk9h+iSeCEJaWOpA9a5dGm2qjqsfC6gbROgqoFkg4yUSgehTIolp1i4VgepzRoEUG6mPHnUJpLq+oUCYQRKHQBytq9rjpGJzbFerX3k2r6M+cAmIiZc4BEIclDqgadauzXFdrb4USF6HRS6QQfdKDhyjQIb0T7U5oO0p7f4CqTt1SARxCZiJlygiiC0dss3a7UwgrgLaJaCBwxHGTIQCWTozinI8kMFEdT8yPuFo9YME0jPs0P0RhUBoay9baPvjfBzTSRytfkUg9FgrFgjTH1EKBA6Krl31RZuVbTIxzB0pVKhAyo8Ebs3HTRQCUZ0ZDol06c/K43x0U1AU08y1ommTXSBMqsQhEJ0Avvk5n16iYhz8y6wWQRx1BQuEAZEIxOz8pV+TlMlkNaEYYIEs8E0hkeqqT5vUmfpKDJ2pT6Y0GZ6z3CfRCCRzWXsa5WX+M21jeYknngGsc0Zp6pPwTaY+0NtkEIrN0NWu20819aVKOlPfDWMyPJS8TyISSIaSFuFHqQugMLXmUFMp3/CRYZq+0idwKuqI1PAMYOqIqqnvUjEZjqNzRtVSJS6BFNR6tRoIwMUQBMKsnigF0gcsEAYMXiAI/6uABcIAjiAGUHRinheTNpNVtdBDp+2zfRl/huyDyUUQ35f926bRU7iRGS/JCUS+7N/VddnFW26HBIu4GUnWIHilNF6Eg3cEmhibQGJmleJOtkjHK52RbtlesLNnz57iE9MHQ4xyNYGs+iL7Pj/mB2G0GVGFgghCJ0QyS1JI25KNIED+wJivhGkZdJ4PerHQm+UiBUdJlaQFooL3qKN4x+Q/CQYKMWDIpMuuCiS2lhVTthFJtre382We8s50KpAxpBoo3jH9W85ybfoaaWYccIplAAJBeoWH0jHdElNDygKx8Pz5c7F37968PmEWtHHuGDMMFgiB/oiHDh3K7y5kkaQJC8QBbrvFs7dQvKM7mEkLFogDeW86BhIxoIiBxVUy9DQFPYGbm5t57x9uF4j9nhoWiAP6eFNMTcEUFfR2MQswmHr27Nl89vP6+ro4evRoLhDcU9N2JsKqGwQWiAd0RB2THDHZUTc9ZQjstlOhkTh37lwuBMxXw/8Hy7hFYGx4CSTG3ocuwY+PFlIF0+WRcqUAOijgA0iXEE3R9Y3/B1KpsUF9nSOIBzFPfW/auMkogbQJz0DGgCnGhZBypgQLxBM4yKoj6W6e3xQlxpg2hcAC8QQtJ6KIfJr8GIDzo5jezSix6kalLUkIpKsfyf4+kuGDtAnXj+IavU0QBgSSepSwwREkAKQh6LGx3YU4JKQgMB6BCIG0CSJHcb2KSDjkaGK6NhZIICjYIZI+7jQMdSgIAgObSJVkHQFBYDxCnSoTe9rTJyyQBkAcGxsbK72ZCiP6OD8EAMFiPAKCwKg/BLAbvU0pCosF0gA4CkSCHh845W47DsSAc6BXCWJA/QCB4vxIoXxuC2aawQJpCdIapDRowVH8SocNnf2LFh/7QQhyHpOMDBADzoFxCWwzpp60YSPE/wfZCZOY/7MEAAAAAElFTkSuQmCC" style="border-width:0px;" />
+                                            <a id="ctl00_ctl13_SiscomFeedback1_ButtonCambiaCodice" class="btn btn-primary btn-xs" href="javascript:__doPostBack(&#39;ctl00$ctl13$SiscomFeedback1$ButtonCambiaCodice&#39;,&#39;&#39;)" style="color:Black;">Ricrea Immagine</a>
+                                            
+
+                                            <br />
+                                            <span id="ctl00_ctl13_SiscomFeedback1_Label43" class="labelpassword" style="display:inline-block;width:260px;">Digita il codice visualizzato:</span>
+
+                                            <input name="ctl00$ctl13$SiscomFeedback1$txtPassword" type="text" maxlength="6" id="ctl00_ctl13_SiscomFeedback1_txtPassword" class="input-sm form-control FMAc" style="width:160px;" />
+
+                                        </div>
+                                    </fieldset>
+                                </div>
+
+                                <div class="d-flex flex-nowrap pt-4 w-100 justify-content-center button-shadow">
+                                    <button class="btn btn-outline-primary fw-bold me-4 btn-back" type="button">Indietro</button>
+                                    <input type="submit" name="ctl00$ctl13$SiscomFeedback1$btnSalva" value="Avanti" id="ctl00_ctl13_SiscomFeedback1_btnSalva" class="btn btn-primary fw-bold" />
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<input type="hidden" name="ctl00$ctl13$SiscomFeedback1$valueRating" id="valueRating" value="0" />
+<input type="hidden" name="ctl00$ctl13$SiscomFeedback1$valueDescrizione" id="valueDescrizione" />
+
+<input type="hidden" name="ctl00$ctl13$SiscomFeedback1$telefono" id="ctl00_ctl13_SiscomFeedback1_telefono" />
+<input type="hidden" name="ctl00$ctl13$SiscomFeedback1$Email" id="ctl00_ctl13_SiscomFeedback1_Email" />
+
+
+
+
+    <div id="ctl00_ctl13_pnlSiscomContattaIlComuneHomeAgid">
+		<div id="ctl00_ctl13_pnlSiscomContattaIlComuneHomeAgid">
+	
+
+<div class="bg-grey-card shadow-contacts">
+    <div class="container">
+        <div class="row d-flex justify-content-center p-contacts">
+            <div class="col-12 col-lg-6">
+                <div class="cmp-contacts">
+                    <div class="card w-100">
+                        <div class="card-body">
+                            <h2 class="title-medium-2-semi-bold">
+                                <span id="ctl00_ctl13_ctl01_lblContattaIlComune">Contatta il comune</span></h2>
+                            <ul class="contact-list p-0">
+                                <li>
+                                    <a id="ctl00_ctl13_ctl01_btnDomandeFrequenti" class="list-item" href="Domandefrequenti">
+                                <svg class="icon icon-primary icon-sm" aria-hidden="true">
+                                    <use href="assets/bootstrap-italia/dist/svg/sprites.svg#it-help-circle"></use>
+                                </svg><span>Leggi le domande frequenti</span></a></li>
+
+                                <li>
+                                    <a id="ctl00_ctl13_ctl01_btnRichAssistenza" class="list-item" data-element="contacts" href="Richiestaassistenza">
+                                <svg class="icon icon-primary icon-sm" aria-hidden="true">
+                                    <use href="assets/bootstrap-italia/dist/svg/sprites.svg#it-mail"></use>
+                                </svg><span>Richiedi assistenza</span></a></li>
+
+                                <li>
+                                    <a id="ctl00_ctl13_ctl01_btnTelefono" class="list-item" href="tel:0125790184">
+                                        <svg class="icon icon-primary icon-sm" aria-hidden="true">
+                                            <use href="assets/bootstrap-italia/dist/svg/sprites.svg#it-hearing"></use>
+                                        </svg>
+                                        <span id="ctl00_ctl13_ctl01_lblTelefono">Chiama il numero 0125790184</span></a></li>
+
+                                <li>
+                                    <a id="ctl00_ctl13_ctl01_btnPrenotaAppuntamento" class="list-item" data-element="appointment-booking" href="https://servizi.comune.andrate.to.it/servizi/prenotaappuntamenti/Login.Aspx?CE=ndrt136&amp;ACCESSO=C">
+                                <svg class="icon icon-primary icon-sm" aria-hidden="true">
+                                    <use href="assets/bootstrap-italia/dist/svg/sprites.svg#it-calendar"></use>
+                                </svg><span>Prenota appuntamento</span></a></li>
+                            </ul>
+
+                            <div id="ctl00_ctl13_ctl01_pnlProblemiInCitta">
+		
+                                <h2 class="title-medium-2-semi-bold mt-4">Problemi in citt&#224;</h2>
+                                <ul class="contact-list p-0">
+                                    <li>
+                                        
+                                <svg class="icon icon-primary icon-sm" aria-hidden="true">
+                                    <use href="assets/bootstrap-italia/dist/svg/sprites.svg#it-map-marker-circle"></use>
+                                </svg><span>Segnala disservizio </span></li>
+                                </ul>
+                            
+	</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+	</div>
+
+<footer class="it-footer" id="footer">
+    
+    <div id="ctl00_ctl13_pnlSiscomPiePaginaAGID">
+		<div id="ctl00_ctl13_pnlSiscomPiePaginaAGID">
+	
+
+
+<style type="text/css">
+    .e-mail:before {
+        content: attr(data-website) "\0040" attr(data-user);
+        unicode-bidi: bidi-override;
+        direction: rtl;
+    }
+
+    .cryptedmail:after {
+        content: attr(data-name) "@" attr(data-domain) "." attr(data-tld);
+    }
+</style>
+
+
+
+<div class="it-footer-main">
+    <div id="ctl00_ctl13_ctl00_PanelContenitore" class="container">
+		
+        <div id="ctl00_ctl13_ctl00_PanelIntestazioneFooter" class="row">
+			
+
+            <div class="col-12 footer-items-wrapper logo-wrapper">
+
+                <img id="ctl00_ctl13_ctl00_imgLogoEU" class="ue-logo" src="assets/images/logo-eu-inverted.svg" alt="logo Unione Europea" src="" style="height:56px;width:178px;border-width:0px;" />
+
+
+                <div class="it-brand-wrapper it-brand-wrapper-siscom">
+                    
+                    <a id="ctl00_ctl13_ctl00_LinkHomeStemma" href="Home"><img id="ctl00_ctl13_ctl00_ImageStemma" class="icon widthAuto" src="portals/1826/Skins/SkinXhtml/Images/StemmaFooter.webp" alt="Stemma dell&#39;Ente" style="border-width:0px;" /><div id="ctl00_ctl13_ctl00_PanelEnte" class="it-brand-text">
+				
+                            
+                            <span id="ctl00_ctl13_ctl00_LabelRagSoc" class="no_toc">Comune di Andrate</span>
+                            
+                        
+			</div></a>
+                    
+                </div>
+            </div>
+
+        
+		</div>
+        <div id="ctl00_ctl13_ctl00_PanelContenitoreFooter" class="row">
+			
+            <div id="ctl00_ctl13_ctl00_panelAmministrazioneContainer" class="col-md-3 footer-items-wrapper">
+				
+                <h3 class="footer-heading-title">Amministrazione</h3>
+                <div id="ctl00_ctl13_ctl00_panelAmministrazione">
+					
+                    
+                <ul class='footer-list'><li><a href="Areeamministrative">Aree amministrative</a></li><li><a href="Documenti">Documenti e dati</a></li><li><a href="Entifondazioni">Enti e fondazioni</a></li><li><a href="Organidigoverno">Organi di governo</a></li><li><a href="Personaleamministrativo">Personale amministrativo</a></li><li><a href="Politici">Politici</a></li><li><a href="Uffici">Uffici</a></li></ul>
+				</div>
+            
+			</div>
+            <div id="ctl00_ctl13_ctl00_pnlCategorieServizio" class="col-md-6 footer-items-wrapper">
+				
+                <h3 class="footer-heading-title">Categorie di servizio</h3>
+                <div class="row">
+                    <div id="ctl00_ctl13_ctl00_pnlCategorieServizio1" class="col-md-6">
+					
+                    <ul class='footer-list'><li><a href="Servizi?IDCategoria=13650">Anagrafe e stato civile</a></li><li><a href="Servizi?IDCategoria=13652">Autorizzazioni</a></li><li><a href="Servizi?IDCategoria=13655">Educazione e formazione</a></li></ul>
+				</div>
+                    <div id="ctl00_ctl13_ctl00_pnlCategorieServizio2" class="col-md-6">
+					
+                    <ul class='footer-list'><li><a href="Servizi?IDCategoria=13657">Imprese e commercio</a></li><li><a href="Servizi?IDCategoria=13658">Mobilit&#224; e trasporti</a></li></ul>
+				</div>
+                </div>
+            
+			</div>
+            <div id="ctl00_ctl13_ctl00_panelNovitaVivereIlComuneContainer" class="col-md-3 footer-items-wrapper">
+				
+                
+                    <h3 class="footer-heading-title">Novit&#224;</h3>
+                    
+                <ul class='footer-list'><li><a href="Notizie?idCat=1">Notizie</a></li></ul>
+                
+                    <h3 class="footer-heading-title">
+                        <span id="ctl00_ctl13_ctl00_lblViviereIlComune">Vivere il comune</span></h3>
+                    
+                <ul class='footer-list'><li><a href="Luoghi">Luoghi</a></li><li><a href="Eventi">Eventi</a></li></ul>
+            
+			</div>
+
+            <div class="col-md-3 mt-md-4 footer-items-wrapper">
+                <h3 class="footer-heading-title">
+                    <span id="ctl00_ctl13_ctl00_LabelContatti">Contatti</span></h3>
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <div id="ctl00_ctl13_ctl00_PanelColonnaFooter1">
+				
+
+
+                            <div id="ctl00_ctl13_ctl00_InternoColonna1" class="footer-list">
+					
+                                <span id="ctl00_ctl13_ctl00_LabelIndirizzo" class="FooterTestoContatti">Via della Parrocchia n. 18</span>
+                                <br />
+                                <span id="ctl00_ctl13_ctl00_LabelCapIndirizzo" class="FooterTestoContatti">10010 Andrate (TO)</span>
+                                <br />
+                                <div id="ctl00_ctl13_ctl00_PanelDescrRegImprese">
+						
+                                    <span id="ctl00_ctl13_ctl00_LabelDescrRegImprese" class="FooterTestoContatti">C.F. 84003370016 - P.Iva: 01861030011</span>
+                                
+					</div>
+                                <div id="ctl00_ctl13_ctl00_PanelTelefono">
+						
+                                    <span id="ctl00_ctl13_ctl00_LabelTelefono" class="FooterTestoContatti">Telefono: <a href='tel:0125790184' class='FooterLinkContatti'>0125790184</a> </span>
+                                
+					</div>
+                                <div id="ctl00_ctl13_ctl00_PanelFax">
+						
+                                    
+                                
+					</div>
+
+                                
+                                <div id="ctl00_ctl13_ctl00_PanelAltriDati">
+						
+                                    <div id="ctl00_ctl13_ctl00_PanelEmail">
+							
+                                        <span id="ctl00_ctl13_ctl00_Label12" class="FooterTestoContatti">E-mail:</span>
+
+                                        
+                                        <a href='#' class='cryptedmail FooterLinkContatti' data-name='andrate' data-domain='ruparpiemonte' data-tld='it' onclick ='window.location.href = "mailto:" + this.dataset.name + "@" + this.dataset.domain + "." + this.dataset.tld; return false;' title = "Invia mail alla casella di posta elettronica istituzionale dell'Ente" ></a>
+                                        
+                                    
+						</div>
+                                    <div id="ctl00_ctl13_ctl00_Panel1">
+							
+                                        <span id="ctl00_ctl13_ctl00_Label11" class="FooterTestoContatti">PEC:  </span>
+                                        <a href='#' class='cryptedmail FooterLinkContatti' data-name='andrate' data-domain='cert.ruparpiemonte' data-tld='it' onclick ='window.location.href = "mailto:" + this.dataset.name + "@" + this.dataset.domain + "." + this.dataset.tld; return false;' title = "Invia una mail alla casella di posta elettronica certificata dell'Ente utilizzando preferibilmente solo caselle di posta certificata" ></a>
+                                        
+                                    
+						</div>
+                                    <div id="ctl00_ctl13_ctl00_PanelVarie">
+							
+                                        <span id="ctl00_ctl13_ctl00_LabelVarie" class="FooterTestoContatti"><br />Codice Univoco per fatturazione elettronica UFP4YK<br />
+CODICE IBAN Banca Sella Agenzia di Chiaverano IT77 F 03268 30359 0B2860383560</span>
+                                    
+						</div>
+
+                                
+					</div>
+                                <div id="ctl00_ctl13_ctl00_PanelURP">
+						
+                                    <a id="ctl00_ctl13_ctl00_HyperLinkURP" title="Vai alla pagina Ufficio relazioni con il pubblico" class="FooterLinkContatti" href="Uffici?IDUfficio=21042">Ufficio relazioni con il pubblico</a>
+                                
+					</div>
+                                <div id="ctl00_ctl13_ctl00_PanelUffici">
+						
+                                    <a id="ctl00_ctl13_ctl00_LinkUffici" title="Link alla pagina degli uffici e degli orari" class="FooterLinkContatti" href="Ufficidettagli">Uffici e orari</a>
+                                
+					</div>
+                                <div id="ctl00_ctl13_ctl00_PanelNumeriUtili">
+						
+                                    <a id="ctl00_ctl13_ctl00_LinkNumeriUtili" title="Link alla pagina dei numeri utili dell&#39;Ente" class="FooterLinkContatti" href="Numeriutili">Numeri utili</a>
+                                
+					</div>
+                            
+				</div>
+
+                        
+			</div>
+                        <div id="ctl00_ctl13_ctl00_PanelDPO">
+				
+                            
+                            <h3 class="footer-heading-title  mt-30">Contatti D.P.O.</h3>
+                            <span id="ctl00_ctl13_ctl00_lblEmailDPO" class="FooterTestoContatti">E-mail:</span>
+                            
+                            <a href='#' class='cryptedmail FooterLinkContatti' data-name='privacy' data-domain='labor-service' data-tld='it' onclick ='window.location.href = "mailto:" + this.dataset.name + "@" + this.dataset.domain + "." + this.dataset.tld; return false;' title = "Invia mail alla casella di posta elettronica del DPO" ></a>
+                            
+                            <br />
+                            <span id="ctl00_ctl13_ctl00_lblPecDPO" class="FooterTestoContatti">PEC:</span>
+                            
+                            <a href='#' class='cryptedmail FooterLinkContatti' data-name='pec' data-domain='pec.labor-service' data-tld='it' onclick ='window.location.href = "mailto:" + this.dataset.name + "@" + this.dataset.domain + "." + this.dataset.tld; return false;' title = "Invia una mail alla casella di posta elettronica certificata del DPO utilizzando preferibilmente solo caselle di posta certificata" ></a>
+                            
+                            <br />
+                            <span id="ctl00_ctl13_ctl00_lblUlterioriDati" class="FooterTestoContatti">LABOR SERVICE S.R.L.</span><br />
+                        
+			</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mt-md-4 footer-items-wrapper">
+                <h3 class="footer-heading-title">
+                    <span id="ctl00_ctl13_ctl00_Label1">Link Utili</span></h3>
+                <div class="row">
+
+                    <div id="ctl00_ctl13_ctl00_PanelColonnaFooter3" class="col-md-6">
+				
+                        <div id="ctl00_ctl13_ctl00_InternoColonna3" class="footer-list">
+					
+                        <ul class="footer-list"><li><a title="Vai alla pagina Sito turistico Comune di Andrate" class="FooterLinkContatti" href="https://visitandrate.it/it-it/home">Sito turistico Comune di Andrate</a></li><li><a title="Vai alla pagina Regione Piemonte" class="FooterLinkContatti" href="http://www.regione.piemonte.it/">Regione Piemonte</a></li><li><a title="Vai alla pagina Societ&#224; Canavesana Servizi IVREA - SCS" class="FooterLinkContatti" href="http://www.scsivrea.it/">Societ&#224; Canavesana Servizi IVREA - SCS</a></li><li><a title="Vai alla pagina CITTA&#39; METROPOLITANA DI TORINO" class="FooterLinkContatti" href="http://www.cittametropolitana.torino.it/cms/">CITTA' METROPOLITANA DI TORINO</a></li></ul>
+				</div>
+                    
+			</div>
+                    <div id="ctl00_ctl13_ctl00_InternoColonna2" class="col-md-6">
+				
+
+                        <ul class="footer-list">
+                            <li>
+                                <a id="ctl00_ctl13_ctl00_HyperLink2" accesskey="2" title="Link alla pagina Privacy" class="FooterLinkContatti" data-element="privacy-policy-link" href="Privacy">Informativa privacy</a></li>
+                            <li>
+                                <a id="ctl00_ctl13_ctl00_HyperLink3" title="Link alla pagina Note legali" class="FooterLinkContatti" data-element="legal-notes" href="Paginedelcomune?ID=9792">Note legali</a></li>
+                            <li>
+                                <a id="ctl00_ctl13_ctl00_HyperLink9" title="Link alla pagina della Dichiarazione di accessibilit&#224;" class="FooterLinkContatti" data-element="accessibility-link" href="https://form.agid.gov.it/view/fac0d400-b2e9-11ef-ac26-7db2b761bf88">Dichiarazione di accessibilit&#224;</a></li>
+                            <li>
+                                </li>
+                        </ul>
+
+
+                    <a title="Vai alla pagina Amministrazione trasparente" class="FooterLinkContatti" href="Menu?IDVoceMenu=220176">Amministrazione trasparente</a><div>
+					<a title="Vai alle domande frequenti" class="FooterLinkContatti" data-element="faq" href="Domandefrequenti">Leggi le FAQ</a>
+				</div>Segnalazione disservizio<a class="FooterLinkContatti d-block" href="https://servizi.comune.andrate.to.it/servizi/prenotaappuntamenti/Login.Aspx?CE=ndrt136&amp;ACCESSO=C">Prenotazione appuntamento</a><a class="FooterLinkContatti d-block" href="Richiestaassistenza">Richiesta d'assistenza</a>
+			</div>
+
+                </div>
+            </div>
+            
+
+            
+
+            <div id="ctl00_ctl13_ctl00_PanelSeguici" class="col-md-3 mt-md-4 footer-items-wrapper">
+				
+                <h3 class="footer-heading-title">Seguici su</h3>
+                <div id="ctl00_ctl13_ctl00_PanelSocial" class="list-inline text-start social">
+					
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div id="ctl00_ctl13_ctl00_PanelRss" class="list-inline-item">
+						
+                        <a id="ctl00_ctl13_ctl00_LinkRss" title="Link alla pagina Rss dell&#39;Ente" href="Rss" target="_blank"><svg class='icon icon-sm icon-white align-top'><use xlink:href='assets/bootstrap-italia/dist/svg/sprites.svg#it-rss'></use></svg></a>
+                    
+					</div>
+
+                
+				</div>
+                <div id="ctl00_ctl13_ctl00_PanelNewsletter" class="footer-list">
+					
+                    <a id="ctl00_ctl13_ctl00_LinkNewsletter" title="Link alla pagina newsletter dell&#39;Ente" class="FooterLinkContatti" href="Newsletter">Newsletter</a>
+                
+				</div>
+                
+            
+			</div>
+        
+		</div>
+        <div id="ctl00_ctl13_ctl00_PanelFooterBottom" class="row">
+			
+            <div id="ctl00_ctl13_ctl00_PanelLinkPiePagina" class="col-12 footer-items-wrapper">
+				
+                <div class="footer-bottom">
+
+                    
+
+                    
+
+                    
+
+                    <a id="ctl00_ctl13_ctl00_HyperLink4" accesskey="4" title="Link alla pagina Dati Monitoraggio" class="FooterLinkContatti" href="Datimonitoraggio">Dati monitoraggio</a>
+
+                    
+
+                    <a id="ctl00_ctl13_ctl00_HyperLink5" accesskey="5" title="Link alla pagina dei Servizi" class="FooterLinkContatti" href="Servizi">Servizi</a>
+
+                    
+
+                    
+
+                    
+
+                    <a id="ctl00_ctl13_ctl00_HyperLink8" title="Credits" class="FooterLinkContatti" href="Login">Credits</a>
+
+                    <a id="ctl00_ctl13_ctl00_HlMappaSito" title="MappaSito" class="FooterLinkContatti" href="Mappasito">Mappa del Sito</a>
+
+                </div>
+            
+			</div>
+        
+		</div>
+        <div class="clear"></div>
+
+        
+
+        <div id="ctl00_ctl13_ctl00_PanelWebAnalitiics">
+			
+            
+        
+		</div>
+
+        
+
+        
+        
+
+        <div id="ctl00_ctl13_ctl00_PanelFooterCopyright" class="Footer_copyright">
+			
+            <span id="ctl00_ctl13_ctl00_LabelFooterCopyright" class="FooterTestoContatti">&copy; Comune di Andrate - Tutti i diritti riservati</span>
+        
+		</div>
+        <div class="clear"></div>
+        
+        <div id="backToTop" data-bs-toggle="backtotop" class="back-to-top overflow-hidden cursorPointer">
+            <svg class="icon icon-white" style="transform: scale(1.75); left: 1px;">
+                <use href="assets/bootstrap-italia/dist/svg/sprites.svg#it-collapse"></use></svg>
+        </div>
+    
+	</div>
+
+</div>
+
+
+
+
+
+
+
+
+</div>
+	</div>
+</footer>
+
+
+
+<input name="ScrollTop" type="hidden" id="ScrollTop" />
+
+<input type="hidden" name="ctl00$ctl13$CreaStaticPage" id="ctl00_ctl13_CreaStaticPage" value="False" />
+
+<script>
+    function loadBootstrapOrRetry() {
+        if (typeof bootstrap !== "undefined") {
+            // Bootstrap è disponibile, esegui il tuo codice qui
+            bootstrap.loadFonts("assets/bootstrap-italia/dist/fonts");
+        } else {
+            // Bootstrap non è ancora disponibile, ritenta dopo 50 millisecondi
+            setTimeout(loadBootstrapOrRetry, 50);
+        }
+    }
+
+    // Inizia il ciclo di controllo
+    loadBootstrapOrRetry();
+
+    //accessibilità
+    let defaultFontSize = 0;
+    let highContrast = false;
+    let linksHighlighted = false;
+    const touchedElements = new Map();
+
+    function increaseFontSize() {
+            defaultFontSize += 1;
+        //    document.body.style.fontSize = defaultFontSize + '%';
+        changeFontSize(1.1);
+    }
+
+    function decreaseFontSize() {
+            defaultFontSize -= 1;
+        //    document.body.style.fontSize = defaultFontSize + '%';
+        changeFontSize(0.9);
+    }
+
+    function changeFontSize(factor) {
+        const all = document.querySelectorAll('a,span, p');// document.querySelectorAll('*');
+   
+        all.forEach(el => {
+
+            const computed = window.getComputedStyle(el);
+            const current = parseFloat(computed.fontSize);
+
+            if (!touchedElements.has(el)) {
+                const original = el.getAttribute('style') || '';
+                touchedElements.set(el, original);
+            }
+
+            if (!isNaN(current)) {
+                el.style.fontSize = (current * factor) + 'px';
+            }
+        });
+        savePreferences();
+    }
+
+    function resetAccessibility() {
+        touchedElements.forEach((originalStyle, el) => {
+            el.setAttribute('style', originalStyle);
+        });
+        touchedElements.clear();
+
+        // Extra: reset body background, text color, speech synthesis
+        document.body.style.backgroundColor = '';
+        document.body.style.color = '';
+        window.speechSynthesis.cancel();
+
+        cursorMode = 3;
+        cycleCursorMode();
+
+        linksHighlighted = false;
+        document.body.classList.remove('bg-dark', 'text-white', 'cursor-large', 'highlight-links', 'dyslexia-font');
+        dyslexiaOn = false;
+
+        savePreferences();
+
+        localStorage.removeItem('accessPrefs');
+    }
+
+    function toggleContrast() {
+        if (!highContrast) {
+            document.body.style.backgroundColor = '#000';
+            document.body.style.color = '#fff';
+        } else {
+            document.body.style.backgroundColor = '';
+            document.body.style.color = '';
+        }
+        highContrast = !highContrast;
+        savePreferences();
+    }
+
+    //function resetAccessibility() {
+    //    defaultFontSize = 100;
+    //    document.body.style.fontSize = '';
+    //    document.body.style.backgroundColor = '';
+    //    document.body.style.color = '';
+    //    highContrast = false;
+    //    window.speechSynthesis.cancel();
+    //}
+
+    function leggiPagina() {
+        let testo = document.body.innerText;
+        let sintesi = window.speechSynthesis;
+        let messaggio = new SpeechSynthesisUtterance(testo);
+
+        messaggio.lang = 'it-IT'; // Imposta la lingua italiana
+        messaggio.rate = 1; // Velocità della voce
+        messaggio.pitch = 1; // Tonalità della voce
+
+        sintesi.speak(messaggio);
+        savePreferences();
+    }
+
+    function toggleToolbar() {
+        let toolbar = document.getElementById("accessibility-toolbar");
+        let options = document.getElementById("accessibility-options");
+
+        if (toolbar.classList.contains("collapsed")) {
+            toolbar.classList.remove("collapsed");
+            options.style.display = "flex";
+        } else {
+            toolbar.classList.add("collapsed");
+            options.style.display = "none";
+        }
+        savePreferences();
+    }
+
+    function toggleHighlightLinks() {
+        document.body.classList.toggle('highlight-links');
+        linksHighlighted = !linksHighlighted;
+        savePreferences();
+    }
+
+    let cursorMode = 0; // 0 = nessuna, 1 = grande, 2 = guida, 3 = spotlight
+    function cycleCursorMode() {
+        // Reset
+        document.body.classList.remove('cursor-large');
+        document.getElementById('spotlight').style.display = 'none';
+        document.getElementById('readingGuide').style.display = 'none';
+        document.removeEventListener('mousemove', updateSpotlight);
+        document.removeEventListener('mousemove', updateGuide);
+
+        // Next mode
+        cursorMode = (cursorMode + 1) % 4;
+        if (cursorMode === 1) {
+            document.body.classList.add('cursor-large');
+        } else if (cursorMode === 2) {
+            document.getElementById('spotlight').style.display = 'block';
+            document.addEventListener('mousemove', updateSpotlight);
+        } else if (cursorMode === 3) {
+            document.getElementById('readingGuide').style.display = 'block';
+            document.addEventListener('mousemove', updateGuide);
+        }
+        savePreferences();
+    }
+    function updateSpotlight(e) {
+        const spot = document.getElementById('spotlight');
+        spot.style.setProperty('--spotX', e.clientX + 'px');
+        spot.style.setProperty('--spotY', e.clientY + 'px');
+        savePreferences();
+    }
+    function updateGuide(e) {
+        document.getElementById('readingGuide')
+            .style.setProperty('--guideY', (e.clientY - 15) + 'px');
+        savePreferences();
+    }
+
+    let dyslexiaOn = false;
+    function toggleDyslexiaFont() {
+        document.body.classList.toggle('dyslexia-font');
+        dyslexiaOn = !dyslexiaOn;
+        savePreferences();
+    }
+
+    // Salva preferenze
+    function savePreferences() {
+        const prefs = {
+            highContrast,
+            linksHighlighted,
+            dyslexiaOn,
+            cursorMode,
+            fontSize: defaultFontSize
+        };
+        localStorage.setItem('accessPrefs', JSON.stringify(prefs));
+    }
+
+    // Applica preferenze al caricamento
+    function loadPreferences() {
+        
+        const prefs = JSON.parse(localStorage.getItem('accessPrefs'));
+        if (!prefs) return;
+
+        if (prefs.highContrast) toggleContrast();
+        if (prefs.linksHighlighted) toggleHighlightLinks();
+        if (prefs.dyslexiaOn) toggleDyslexiaFont();
+
+        defaultFontSize = prefs.fontSize;
+
+        for (let i = 0; i < prefs.cursorMode; i++) {
+            cycleCursorMode();
+        }
+
+        // Modifica la dimensione base
+        if (defaultFontSize > 0) {
+            for (let i = 0; i < defaultFontSize; i++) {
+                changeFontSize(1.1);
+            }
+        } else if (defaultFontSize < 0) {
+            for (let i = 0; i < Math.abs(defaultFontSize); i++) {
+                changeFontSize(0.9);
+            }
+        }
+    }
+
+    setTimeout(function () {  loadPreferences(); }, 0);
+
+</script>
+
+    
+    <nav id="accessibility-toolbar" class="accessibility-toolbar d-flex justify-content-center align-items-center collapsed">
+
+        <a onclick="toggleToolbar()" title="Accessibilità">
+            <svg class="icon fillColor" style="width: 40px; height: 40px;">
+                <use href="App_Themes/Images/Icon/accessibility-icon.svg"></use>
+            </svg></a>
+          <div id="accessibility-options" style="display: none; margin-left: 10px; margin-right: 10px">
+       <a class="btn btn-sm btn-light btnAccessibility" onclick="increaseFontSize()" data-focus-mouse="false">A+</a>
+       <a class="btn btn-sm btn-light btnAccessibility" onclick="decreaseFontSize()" data-focus-mouse="false">A-</a>
+       <a class="btn btn-sm btn-light btnAccessibility" onclick="leggiPagina();" data-focus-mouse="false"><i class="fa fas fa-volume-up"></i>Leggi </a>
+       <a class="btn btn-sm btn-light btnAccessibility" onclick="cycleCursorMode()" data-focus-mouse="false"><i class="fa fas fa-mouse-pointer"></i>Cursore</a>
+       <a class="btn btn-sm btn-light btnAccessibility" onclick="toggleHighlightLinks()" data-focus-mouse="false"><i class="fa fas fa-link"></i>Evidenzia Link</a>
+       <a class="btn btn-sm btn-light btnAccessibility" onclick="toggleDyslexiaFont()" style="font-family: 'OpenDyslexic', sans-serif !important;"  data-focus-mouse="false"><i class="fa fas fa-font"></i>Dislessia</a>
+       <a class="btn btn-sm btn-primary btnAccessibility" onclick="resetAccessibility()"><i class="fa fas fa-undo"></i>Reset</a>
+   </div>
+    </nav>
+
+    <div id="readingGuide"></div>
+    <div id="spotlight"></div>
+</div>
+
+        
+
+    
+
+<script type="text/javascript">
+//<![CDATA[
+localStorage.setItem('pathFavicon', 'portals/1826/Skins/skinXhtml/Images/stemma_Favicon.png');//]]>
+</script>
+</form>
+</body>
+</html>

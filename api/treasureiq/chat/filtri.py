@@ -549,6 +549,34 @@ _RICONOSCITORI = (
 )
 
 
+#: Turni distinti memoizzabili prima che la LRU inizi a sfrattare. Una
+#: conversazione lunga sta ampiamente sotto; il limite serve solo a impedire
+#: che testo arbitrario dei cittadini faccia crescere la cache senza fine.
+_CACHE_TURNI = 2048
+
+
+@lru_cache(maxsize=_CACHE_TURNI)
+def _riconosci_filtri_cached(testo: str) -> tuple[Filtro, ...]:
+    """Calcolo puro dietro `riconosci_filtri`, memoizzato per turno.
+
+    `accumula_filtri` rilegge OGNI turno della storia a ogni richiesta
+    (ciclo12/A1): la storia non cambia mai fra un turno e il successivo — solo
+    `message` e' nuovo — quindi ri-parsare i turni gia' visti e' lavoro buttato
+    (~6,5 ms/turno misurati). La chiave e' il testo, l'unico input: la
+    funzione e' deterministica e non tocca stato esterno, quindi la cache non
+    puo' servire un valore stale. Ritorna una tupla immutabile; il wrapper
+    pubblico ne fa una lista fresca a ogni chiamata, cosi' nessun chiamante
+    puo' corrompere il valore in cache mutando la lista che riceve.
+    """
+    filtri: list[Filtro] = []
+    for riconosci in _RICONOSCITORI:
+        try:
+            filtri.extend(riconosci(testo))
+        except Exception:
+            logger.warning("riconoscitore %s fallito su input libero", riconosci.__name__, exc_info=True)
+    return tuple(filtri)
+
+
 def riconosci_filtri(testo: str) -> list[Filtro]:
     """I filtri civici attivi riconosciuti in `testo`, con span di provenienza.
 
@@ -561,34 +589,33 @@ def riconosci_filtri(testo: str) -> list[Filtro]:
 
     Le negazioni sono gia' state filtrate via da ogni singolo riconoscitore
     (A2): questa lista contiene solo filtri ATTIVI.
+
+    Il calcolo e' memoizzato per turno (`_riconosci_filtri_cached`): qui si
+    restituisce sempre una lista NUOVA, cosi' l'API pubblica e la sua mutabilita'
+    restano invariate per i 63 chiamanti.
     """
     if not testo:
         return []
-    filtri: list[Filtro] = []
-    for riconosci in _RICONOSCITORI:
-        try:
-            filtri.extend(riconosci(testo))
-        except Exception:
-            logger.warning("riconoscitore %s fallito su input libero", riconosci.__name__, exc_info=True)
-    return filtri
+    return list(_riconosci_filtri_cached(testo))
+
+
+#: I test che rilegano i riconoscitori a runtime devono poter svuotare la
+#: memoizzazione fra un caso e l'altro; esposta sul wrapper pubblico.
+riconosci_filtri.cache_clear = _riconosci_filtri_cached.cache_clear  # type: ignore[attr-defined]
 
 
 # -- accumulo multi-turno (ciclo 12/A1) ----------------------------------------
 
 
-def negazioni_esplicite(testo: str) -> set[FiltroChiave]:
-    """Chiavi la cui evidenza testuale e' presente in `testo` ma negata.
+@lru_cache(maxsize=_CACHE_TURNI)
+def _negazioni_esplicite_cached(testo: str) -> frozenset[FiltroChiave]:
+    """Calcolo puro dietro `negazioni_esplicite`, memoizzato per turno.
 
-    Riusa i pattern e `_negato_prima_di` degli stessi riconoscitori (nessun
-    pattern nuovo, nessuna inferenza in piu'): un match che sarebbe un filtro
-    attivo se non fosse negato conta come negazione ESPLICITA di quella
-    chiave. Serve ad `accumula_filtri` per far cadere un filtro accumulato da
-    un turno precedente quando il cittadino lo ritratta ("sono disabile" e
-    poi, in un turno successivo, "non sono disabile") — mai per inventare una
-    negazione su una chiave che il testo non nomina affatto (D-03).
+    Come `_riconosci_filtri_cached`: `accumula_filtri` lo rigira su ogni turno
+    della storia a ogni richiesta, e i turni gia' visti danno sempre lo stesso
+    risultato. Ritorna un frozenset immutabile; il wrapper pubblico ne fa un
+    set fresco per non esporre in mutazione il valore in cache.
     """
-    if not testo:
-        return set()
     chiavi: set[FiltroChiave] = set()
     for match in _ETA_RE.finditer(testo):
         if _negato_prima_di(testo, match.start()):
@@ -614,7 +641,31 @@ def negazioni_esplicite(testo: str) -> set[FiltroChiave]:
             chiavi.add(FiltroChiave.DISABILITA_NUCLEO)
         else:
             chiavi.add(FiltroChiave.DISABILITA)
-    return chiavi
+    return frozenset(chiavi)
+
+
+def negazioni_esplicite(testo: str) -> set[FiltroChiave]:
+    """Chiavi la cui evidenza testuale e' presente in `testo` ma negata.
+
+    Riusa i pattern e `_negato_prima_di` degli stessi riconoscitori (nessun
+    pattern nuovo, nessuna inferenza in piu'): un match che sarebbe un filtro
+    attivo se non fosse negato conta come negazione ESPLICITA di quella
+    chiave. Serve ad `accumula_filtri` per far cadere un filtro accumulato da
+    un turno precedente quando il cittadino lo ritratta ("sono disabile" e
+    poi, in un turno successivo, "non sono disabile") — mai per inventare una
+    negazione su una chiave che il testo non nomina affatto (D-03).
+
+    Il calcolo e' memoizzato per turno (`_negazioni_esplicite_cached`); qui si
+    restituisce sempre un set NUOVO, cosi' i chiamanti restano liberi di
+    mutarlo senza toccare il valore in cache.
+    """
+    if not testo:
+        return set()
+    return set(_negazioni_esplicite_cached(testo))
+
+
+#: Gemello di `riconosci_filtri.cache_clear` per l'igiene dei test.
+negazioni_esplicite.cache_clear = _negazioni_esplicite_cached.cache_clear  # type: ignore[attr-defined]
 
 
 def accumula_filtri(

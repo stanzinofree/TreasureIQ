@@ -18,6 +18,7 @@ and outside the model keeps the retrieval step auditable.
 from __future__ import annotations
 
 import logging
+import os
 import re
 import unicodedata
 from enum import Enum
@@ -25,6 +26,7 @@ from typing import Literal
 
 from pydantic import BaseModel, Field
 
+from treasureiq.chat.intent_scorer import score_intent
 from treasureiq.extract.providers import LLMProvider
 from treasureiq.schema import EmploymentStatus
 
@@ -80,6 +82,14 @@ class Topic(str, Enum):
     #: `extract_intent`: «bandi per i mezzi pubblici» nomina "bandi" ma parla
     #: di TRASPORTO_PUBBLICO, non di un elenco di avvisi.
     BANDI = "bandi"
+    #: Modulistica e servizi online del comune (Ramo 3). Il cittadino chiede
+    #: «dove faccio la pratica / il modulo per X» e la risposta è un accesso,
+    #: non un elenco: modulo informativo, modulo scaricabile o servizio
+    #: autenticato. Il PRIMO incremento SP cabla solo il portale servizi
+    #: (servizio autenticato): TIQ indica la porta ufficiale e non entra mai
+    #: (D-R3-5). Il tipo di accesso è un ESITO dei dati trovati, non una scelta
+    #: iniziale del cittadino (D-R3-1).
+    MODULISTICA = "modulistica"
     #: The model could not map the message onto any of the above. Never
     #: guessed into just to avoid this value — see the system prompt.
     SCONOSCIUTO = "sconosciuto"
@@ -198,6 +208,29 @@ TOPIC_KEYWORDS: dict[Topic, tuple[str, ...]] = {
     #: TRASPORTO_PUBBLICO, e la guardia in `extract_intent`
     #: (`_e_bando_di_trasporto_pubblico`) si aspetta gli insiemi disgiunti.
     Topic.BANDI: ("bando", "bandi", "avviso pubblico", "avvisi pubblici", "graduatoria"),
+    #: Modulistica e servizi online (Ramo 3). Frasi che segnalano l'intento di
+    #: fare una pratica online o procurarsi un modulo, distinte dai bandi:
+    #: "sportello telematico"/"servizi online" indicano il portale autenticato,
+    #: "modulo"/"modulistica"/"formulario"/"scaricabile" il modulo pubblico.
+    #: Substring lowercase, come le altre voci — nessun modello in questo passo.
+    #: I quattro marcatori-modulo sono anche quelli che, letti sul testo grezzo,
+    #: danno a MODULISTICA precedenza deterministica sul topic di contenuto
+    #: (vedi `_MARCATORI_PRECEDENZA_MODULISTICA` in `respond`): tenerli qui fa sì
+    #: che il gate lessicale del ramo e la retrieval non possano contraddire
+    #: quell'instradamento.
+    Topic.MODULISTICA: (
+        "modulistica",
+        "modulo",
+        "formulario",
+        "scaricabile",
+        "sportello telematico",
+        "sportello online",
+        "servizi online",
+        "servizio online",
+        "area personale",
+        "domanda online",
+        "istanza online",
+    ),
     Topic.SCONOSCIUTO: (),
 }
 
@@ -467,6 +500,46 @@ class ChatIntent(BaseModel):
     )
 
 
+class ChatRecognitionContract(BaseModel):
+    """Contratto v1 dell'interpretazione di un turno cittadino.
+
+    `ChatIntent` resta la forma compatibile della classificazione; questo
+    involucro aggiunge le evidenze deterministiche che servono al planner.
+    Nessun campo decide la fonte o scrive la risposta: il contratto descrive
+    soltanto ciò che il cittadino ha detto e il contesto che può essere
+    riutilizzato.
+    """
+
+    version: Literal["v1"] = "v1"
+    message: str = Field(min_length=1)
+    intent: ChatIntent
+    filter_keys: tuple[str, ...] = ()
+    context_turns: int = Field(default=0, ge=0)
+    municipality_explicit: bool = False
+
+
+def build_recognition_contract(
+    *, message: str, intent: ChatIntent, storia: list[str] | None = None
+) -> ChatRecognitionContract:
+    """Envelope deterministico attorno all'intent già guard-railato.
+
+    I filtri sono letti dalla sola funzione canonica `riconosci_filtri`; il
+    modello non può aggiungerne. La funzione è intenzionalmente piccola: il
+    routing delle fonti appartiene al QueryPlan, non a questo contratto.
+    """
+
+    from treasureiq.chat.filtri import riconosci_filtri
+
+    filtri = riconosci_filtri(message)
+    return ChatRecognitionContract(
+        message=message,
+        intent=intent,
+        filter_keys=tuple(dict.fromkeys(f.chiave.value for f in filtri)),
+        context_turns=len(storia or []),
+        municipality_explicit=bool(intent.comune_hint),
+    )
+
+
 class _ModelIntent(BaseModel):
     """Minimal shape asked of the LLM (D-01, ciclo11): topic/kind/comune_hint/
     beneficiary_role only — no `slots`. Asking the model for anagraphic slots
@@ -511,9 +584,13 @@ def _topic_hint_lines() -> str:
     return "\n".join(lines)
 
 
-INTENT_SYSTEM_PROMPT = f"""Sei un classificatore per la chat civica del Comune di \
-Albano Laziale. Ricevi il messaggio libero di un cittadino e produci ESCLUSIVAMENTE \
+INTENT_SYSTEM_PROMPT = f"""Sei un classificatore per una chat civica comunale \
+italiana. Ricevi il messaggio libero di un cittadino e produci ESCLUSIVAMENTE \
 un oggetto strutturato, mai testo libero, mai una risposta al cittadino.
+
+Non conosci in anticipo di quale Comune parli il cittadino: NON assumerne mai uno. \
+Compila `comune_hint` solo se il cittadino scrive esplicitamente il nome del comune \
+nel proprio messaggio; altrimenti lascialo vuoto.
 
 Compila questi campi:
 - kind: la FORMA della domanda, da decidere PRIMA del topic.
@@ -564,8 +641,92 @@ lascia sempre vuoto: non indovinare mai.
 Non decidi se il cittadino ha diritto a qualcosa: quello lo fa un altro sistema."""
 
 
+#: Quale motore classifica topic/kind.
+#:   "model" (default): il modello LLM via `provider.aparse`, comportamento
+#:     storico invariato.
+#:   "scorer": lo scorer deterministico livello A in Python
+#:     (`intent_scorer.score_intent`) — niente modello, esito riproducibile.
+#:   "rust": lo stesso scorer, ma il crate nativo PyO3 `tiq_intent` (parità
+#:     35/35 sull'oracolo, ~6-7x piu' veloce dello scorer Python). Se il modulo
+#:     nativo non e' installato (immagine senza wheel) ripiega su "scorer".
+#: I rami deterministici ("scorer"/"rust") condividono la stessa cintura a
+#: valle (_confirm_*, R-8): cambia solo CHI propone topic/kind, non le guardie.
+#:
+#: CONTRATTO VARIABILI (due env, un solo backend effettivo):
+#:   - TREASUREIQ_ENGINE_INTENT_BACKEND: autorita' runtime, letta da
+#:     `CivicChatEngine` (engine.py); e' cio' che compose setta ("rust") e
+#:     diventa il PARAMETRO `backend` di ogni chiamata a `extract_intent`.
+#:   - TREASUREIQ_INTENT_BACKEND (questa costante): DEFAULT di fallback, usato
+#:     solo quando `extract_intent` e' chiamata senza il parametro `backend`
+#:     (chiamate dirette, alcuni test). Il path engine non la usa mai.
+#: Precedenza effettiva: parametro `backend` > `_INTENT_BACKEND` > "model".
+_INTENT_BACKEND = os.environ.get("TREASUREIQ_INTENT_BACKEND", "model").strip().lower()
+
+#: Backend che NON chiamano il modello: lo scorer deterministico livello A.
+_BACKEND_DETERMINISTICI = frozenset({"scorer", "rust"})
+
+
+def _beneficiary_role_da_testo(message: str) -> BeneficiaryRole | None:
+    """Deriva il ruolo dai SOLI marcatori nel testo — esattamente l'esito che
+    `_confirm_beneficiary_role` (R-9) terrebbe comunque.
+
+    Il ruolo finale non e' mai stato una scelta del modello: qualunque cosa
+    proponesse, sopravviveva solo se un marcatore era presente nel testo del
+    cittadino. Col backend scorer il modello non c'e' piu' a proporlo, quindi
+    lo si ricava direttamente dai marcatori. Nessun ruolo se il testo non lo
+    dichiara; nessun ruolo nemmeno se ne dichiara due insieme (ambiguo ->
+    None, non si indovina)."""
+    haystack = message.casefold()
+    trovati = [
+        role
+        for role, markers in BENEFICIARY_ROLE_MARKERS.items()
+        if any(marker in haystack for marker in markers)
+    ]
+    return trovati[0] if len(trovati) == 1 else None
+
+
+def _score_livello_a(message: str, backend: str) -> tuple[str, str]:
+    """(topic, kind) dallo scorer deterministico. `backend` e' il backend
+    EFFETTIVO della richiesta (`effective_backend` di `extract_intent`), non la
+    costante di modulo: e' l'unico punto che decide se interrogare il crate, e
+    deve rispettare la scelta per-richiesta dell'engine (che passa il backend
+    come parametro, mentre `_INTENT_BACKEND` resta solo il default quando nessun
+    parametro e' dato). Backend "rust" usa il crate nativo `tiq_intent` (parità
+    35/35, ~6-7x); se il modulo non c'e' ripiega sullo scorer Python — stesso
+    output, solo piu' lento (fail-safe, mai crash su un'immagine senza wheel)."""
+    if backend == "rust":
+        try:
+            import tiq_intent
+
+            topic, kind, _conf = tiq_intent.score(message)
+            return topic, kind
+        except ImportError:
+            pass  # nessun wheel nativo: giu' allo scorer Python
+    esito = score_intent(message)
+    return esito.topic, esito.kind
+
+
+def _intent_dallo_scorer(message: str, backend: str) -> "_ModelIntent":
+    """Costruisce un `_ModelIntent` dallo scorer deterministico, nella stessa
+    forma che il modello avrebbe restituito, cosi' la cintura a valle non
+    distingue i due backend. `comune_hint` resta None (lo scorer non tocca il
+    comune: lo risolve `_comuni_candidati`/`risolvi_comune` dal testo, e
+    `_confirm_comune_hint` lo azzererebbe comunque)."""
+    topic, kind = _score_livello_a(message, backend)
+    return _ModelIntent(
+        topic=Topic(topic),
+        kind=QuestionKind(kind),
+        comune_hint=None,
+        beneficiary_role=_beneficiary_role_da_testo(message),
+    )
+
+
 async def extract_intent(
-    *, message: str, provider: LLMProvider, storia: list[str] | None = None
+    *,
+    message: str,
+    provider: LLMProvider,
+    storia: list[str] | None = None,
+    backend: str | None = None,
 ) -> ChatIntent:
     """Classify one citizen message. Never raises — falls back to `SCONOSCIUTO`.
 
@@ -588,19 +749,28 @@ async def extract_intent(
     function's job: see `treasureiq.chat.respond._eredita_dal_contesto`,
     which never trusts the model alone for that (D-47 hard rule).
     """
+    # The engine can select its rail per request without mutating the module
+    # setting (and without a race between concurrent requests).
+    effective_backend = (backend or _INTENT_BACKEND).strip().lower()
     try:
-        user_message = message
-        if storia:
-            turni_precedenti = "\n".join(f"- {turno}" for turno in storia[-3:])
-            user_message = (
-                "Turni precedenti del cittadino (solo per capire il contesto, "
-                "NON classificare questi):\n"
-                f"{turni_precedenti}\n\n"
-                f"Messaggio da classificare: {message}"
+        if effective_backend in _BACKEND_DETERMINISTICI:
+            # Livello A deterministico: nessuna chiamata al modello, nessun
+            # bisogno di `storia` (il carryover di topic/comune fra turni non
+            # e' compito di questa funzione — lo fa `respond._eredita_dal_contesto`).
+            parsed = _intent_dallo_scorer(message, effective_backend)
+        else:
+            user_message = message
+            if storia:
+                turni_precedenti = "\n".join(f"- {turno}" for turno in storia[-3:])
+                user_message = (
+                    "Turni precedenti del cittadino (solo per capire il contesto, "
+                    "NON classificare questi):\n"
+                    f"{turni_precedenti}\n\n"
+                    f"Messaggio da classificare: {message}"
+                )
+            parsed = await provider.aparse(
+                system=INTENT_SYSTEM_PROMPT, user=user_message, output_model=_ModelIntent
             )
-        parsed = await provider.aparse(
-            system=INTENT_SYSTEM_PROMPT, user=user_message, output_model=_ModelIntent
-        )
         confirmed_role = _confirm_beneficiary_role(message=message, role=parsed.beneficiary_role)
         updates: dict[str, object] = {}
         if confirmed_role != parsed.beneficiary_role:
@@ -620,7 +790,8 @@ async def extract_intent(
             # hold for `beneficiary_role` either).
             updates["kind"] = QuestionKind.INFORMAZIONE
         if (
-            updates.get("kind", parsed.kind) is QuestionKind.AGEVOLAZIONE
+            effective_backend not in _BACKEND_DETERMINISTICI
+            and updates.get("kind", parsed.kind) is QuestionKind.AGEVOLAZIONE
             and parsed.topic is not Topic.SCONOSCIUTO
             and _BONUS_GENERICO_RE.search(message)
             and not _topic_keyword_presente(message)
@@ -631,6 +802,10 @@ async def extract_intent(
             # interesse mai dichiarato e la domanda-categoria (D-55) non partiva
             # mai. Senza un aggancio nel testo il topic torna a SCONOSCIUTO —
             # il segnale con cui `respond` chiede quale categoria.
+            # Esente il backend scorer: li' un topic != SCONOSCIUTO E' gia'
+            # la prova che una keyword ha matchato (lo scorer non incolla mai
+            # un topic senza hit), quindi questa toppa e' redundante e
+            # declasserebbe a torto casi legittimi tipo «bonus per il gas».
             updates["topic"] = Topic.SCONOSCIUTO
         if (
             updates.get("topic", parsed.topic) is Topic.BANDI
@@ -769,4 +944,3 @@ def _topic_keyword_presente(messaggio: str) -> bool:
             if parola.rstrip("-").casefold() in haystack:
                 return True
     return False
-

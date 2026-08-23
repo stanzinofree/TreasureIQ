@@ -40,12 +40,13 @@ def test_pdf_rediretto_fuori_host_e_scartato_toctou():
         transport=httpx.MockTransport(_transport_rediretto), follow_redirects=True
     )
 
-    segments, notes, skipped, illegible_count = collect_pdf_segments(
+    segments, notes, skipped, illegible_count, ocr_deferred_count = collect_pdf_segments(
         client, BASE_URL, ["/files/allegato.pdf"]
     )
 
     assert segments == []
     assert illegible_count == 0
+    assert ocr_deferred_count == 0
     assert len(skipped) == 1
     assert skipped[0].reason == "rediretto fuori host"
     assert any("rediretto fuori host" in nota for nota in notes)

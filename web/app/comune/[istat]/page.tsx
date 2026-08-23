@@ -12,8 +12,10 @@
  */
 
 import {
+  catalogAccessFor,
   fetchRegistroComune,
   fetchSchedaComune,
+  type CatalogAccess,
   type RegistroComune,
   type SchedaComune,
 } from "@/lib/api";
@@ -205,6 +207,57 @@ function BloccoConnettore({ scheda }: { scheda: SchedaComune }) {
   );
 }
 
+const SURFACE_LABEL: Record<CatalogAccess["surface"], string> = {
+  ordinary_data: "Dati ordinari",
+  transparency: "Amministrazione Trasparente",
+};
+
+const ACCESS_LABEL: Record<CatalogAccess["access_mode"], string> = {
+  direct: "Dato diretto",
+  mediated: "Dato mediato",
+  indirect: "Dato indiretto",
+  unavailable: "Fonte non disponibile",
+};
+
+const COMPATIBILITY_LABEL: Record<string, string> = {
+  compatible: "compatibilità AGID completa",
+  partial: "compatibilità AGID parziale",
+  incompatible: "non compatibile con AGID",
+  unknown: "compatibilità AGID non misurata",
+};
+
+function CatalogAccessPanel({ entries }: { entries: CatalogAccess[] }) {
+  if (entries.length === 0) return null;
+  return (
+    <section className="panel">
+      <h2>Come si raggiungono i dati</h2>
+      <p className="nota">
+        La misura distingue il portale dei dati ordinari da quello di
+        Amministrazione Trasparente. Non è un giudizio sul comune: indica solo
+        quanto il dato è immediato da leggere.
+      </p>
+      <dl className="scheda-comune__piattaforma">
+        {entries.map((entry) => (
+          <div key={entry.surface}>
+            <dt>{SURFACE_LABEL[entry.surface]}</dt>
+            <dd>
+              <strong>{ACCESS_LABEL[entry.access_mode]}</strong>
+              <br />
+              <span className="field__hint">
+                {entry.platform_id ?? "piattaforma non individuata"} ·{" "}
+                {COMPATIBILITY_LABEL[entry.platform_compatibility] ??
+                  entry.platform_compatibility}
+                <br />
+                misurato il {dataLeggibile(entry.measured_at)}
+              </span>
+            </dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+  );
+}
+
 export default async function SchedaComunePage({
   params,
 }: {
@@ -224,6 +277,13 @@ export default async function SchedaComunePage({
     registro = await fetchRegistroComune(istat);
   } catch {
     registro = null;
+  }
+
+  let accessEntries: CatalogAccess[] = [];
+  try {
+    accessEntries = await catalogAccessFor(istat);
+  } catch {
+    accessEntries = [];
   }
 
   if (!scheda) {
@@ -305,10 +365,14 @@ export default async function SchedaComunePage({
         </div>
       </section>
 
-      <section className="panel">
-        <h2>Connettore</h2>
-        <BloccoConnettore scheda={scheda} />
-      </section>
+      {accessEntries.length > 0 ? (
+        <CatalogAccessPanel entries={accessEntries} />
+      ) : (
+        <section className="panel">
+          <h2>Misura del portale</h2>
+          <BloccoConnettore scheda={scheda} />
+        </section>
+      )}
 
       <section className="panel">
         <h2>Servizi esposti</h2>

@@ -57,6 +57,19 @@ class FreshnessStatus(str, Enum):
     INVALID = "invalid"
 
 
+#: Vocabolario dei bandi, tenuto esplicito e centralizzato (Ramo 2): la
+#: capability del contratto utente e la sezione amministrativa del catalogo sono
+#: due cose diverse e non vanno confuse in una stringa duplicata.
+#:  - `CAPABILITY_NOTICES` è la capability del contratto chat/DataBatch (planner,
+#:    proiezione `notices`): ciò che il cittadino chiede.
+#:  - `CATALOG_SECTION_PUBLIC_NOTICES` è la sezione del catalogo amministrativo
+#:    (sweep/shadow), già presente: ciò che il backoffice censisce.
+#: Restano distinte di proposito — il vocabolario amministrativo non deve
+#: contaminare il contratto utente.
+CAPABILITY_NOTICES = "notices"
+CATALOG_SECTION_PUBLIC_NOTICES = "public_notices"
+
+
 class AccessContract(_StrictModel):
     transport: str = Field(min_length=1)
     endpoints: tuple[str, ...] = ()

@@ -69,6 +69,13 @@ class FreshnessStatus(str, Enum):
 CAPABILITY_NOTICES = "notices"
 CATALOG_SECTION_PUBLIC_NOTICES = "public_notices"
 
+#: Capability del contratto chat/DataBatch per i servizi comunali (Ramo 3): un
+#: `ServiceReference` — che può esporre insieme opzioni informativa, download e
+#: procedura autenticata. Centralizzata qui e riusata da builder e planner così
+#: nessun caller riscrive la stringa. Non `forms`: il contratto rappresenta un
+#: servizio, non solo un file scaricabile.
+CAPABILITY_SERVICES = "services"
+
 #: Ponte esplicito fra le due metà del vocabolario bandi (D-R2-3): la sezione del
 #: catalogo amministrativo (censimento/sweep/shadow) e la capability del contratto
 #: chat. Dichiarato in un solo posto, così un consumer del catalogo sa quale

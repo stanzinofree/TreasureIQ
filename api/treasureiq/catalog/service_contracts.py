@@ -16,6 +16,27 @@ from pydantic import AnyHttpUrl, Field
 from treasureiq.catalog.contracts import Surface, _StrictModel
 
 
+class ServiceKey(str, Enum):
+    """Closed vocabulary of civic services the chat can request (Ramo 3).
+
+    A normalized identity for the service the citizen asks about — distinct
+    from any portal entrypoint (``ServicePortalCandidate``) or access mode.
+    It is a domain contract shared by chat recognition, the query planner and
+    the (future) service cache/connectors, so it lives here and not in
+    ``chat/`` (chat recognises the key, it does not own the vocabulary).
+
+    Extended only by adding a value, never by falling back on the nearest
+    one: a service outside this vocabulary stays unrecognised (``None`` at the
+    recogniser), it is not mapped to a neighbour.
+    """
+
+    CARTA_IDENTITA = "carta_identita"
+    CAMBIO_RESIDENZA = "cambio_residenza"
+    ACCESSO_ATTI = "accesso_atti"
+    STATO_CIVILE = "stato_civile"
+    TRIBUTI = "tributi"
+
+
 class ServiceAccessMode(str, Enum):
     INFORMATION = "information"
     DOWNLOAD = "download"

@@ -8,10 +8,12 @@ from pydantic import Field
 
 from treasureiq.catalog.contracts import (
     CAPABILITY_NOTICES,
+    CAPABILITY_SERVICES,
     AccessMode,
     FreshnessStatus,
     Surface,
 )
+from treasureiq.catalog.service_contracts import ServiceKey
 from treasureiq.catalog.data_contracts import (
     DataBatch,
     DataRequest,
@@ -122,6 +124,40 @@ def service_portal_request(
         freshness=freshness or FreshnessPolicy(max_age_seconds=86400),
         manifest_revision=1,
     )
+
+
+def service_request(
+    *,
+    source_id: str,
+    service_key: ServiceKey,
+    freshness: FreshnessPolicy | None = None,
+) -> DataRequest:
+    """Build the deterministic request for a recognised civic service (Ramo 3).
+
+    ``service_key`` is a ``ServiceKey`` enum value, never free text: the type
+    itself guarantees no caller can synthesise a service capability from an
+    arbitrary string (same provenance discipline as ``service_portal_request``,
+    which keys on a confirmed entrypoint URL).  The request lands on the
+    ORDINARY_DATA surface with the shared ``CAPABILITY_SERVICES`` — distinct
+    from the SERVICE_PORTAL/INDIRECT authenticated sub-case (D-R3-2), which
+    keeps its own ``service_portal_request``.
+
+    No cache lookup or connector call happens here; this is only the request
+    contract.  Availability is evaluated later by ``build_query_plan`` /
+    ``select_batch``.
+    """
+
+    return DataRequest(
+        request_id=f"chat:{source_id}:{Surface.ORDINARY_DATA.value}:{service_key.value}",
+        source_id=source_id,
+        surface=Surface.ORDINARY_DATA,
+        capability=CAPABILITY_SERVICES,
+        selection={"service_key": service_key.value},
+        freshness=freshness or FreshnessPolicy(max_age_seconds=86400),
+        manifest_revision=1,
+    )
+
+
 def select_batch(plan: QueryPlan, batches: tuple[DataBatch, ...]) -> DataBatch | None:
     """Select the best result using only the plan and batch metadata.
 

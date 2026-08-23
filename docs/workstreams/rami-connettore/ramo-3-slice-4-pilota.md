@@ -36,11 +36,14 @@
    veniva usato direttamente come `source_url`/INFORMATION. Ora `_confermati`
    scarta ogni candidato il cui host ≠ host ufficiale (normalizzato `www`),
    **prima** della conferma: 0 confermati → `NOT_FOUND` (§2.4).
-8. **Guardia sui redirect nel fetcher reale.** `HttpxServiceFetcher.leggi_pagina`
-   non lascia più seguire i redirect a httpx: li segue a mano ricontrollando
-   l'host a **ogni hop** e sull'URL finale (redirect off-host → `None`). Host
-   verificato anche sull'URL iniziale. `transport` iniettabile → il confine HTTP
-   è testato con `httpx.MockTransport`, senza rete (§1.3).
+8. **Guardia sui redirect nel fetcher reale.** `HttpxServiceFetcher` non lascia
+   più seguire i redirect a httpx né sulla pagina né **sulla lettura REST**: la
+   logica è in un unico helper `_get_verificato` (usato da `leggi_pagina` **e**
+   `cerca_servizi`) che segue i redirect a mano ricontrollando l'host su URL
+   iniziale, a **ogni hop** e sull'URL finale (redirect off-host → risposta
+   vuota). La mappa è attendibile, ma il 30x è comportamento della rete remota:
+   il JSON REST non viene mai letto da un host non autorizzato. `transport`
+   iniettabile → confine HTTP testato con `httpx.MockTransport`, senza rete (§1.3).
 9. **Contesto autenticato ristretto.** `leggi_pagina_servizio` non usa più una
    finestra piatta di N caratteri: legge il **contenitore immediato** del link
    (indietro fino al confine di blocco più vicino) + `aria-label`/`title`

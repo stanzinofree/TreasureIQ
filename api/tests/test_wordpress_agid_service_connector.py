@@ -447,6 +447,50 @@ def test_fetcher_non_200_is_none():
     assert _fetcher_with(handler).leggi_pagina(url=_PAGE, official_host=_OFFICIAL) is None
 
 
+# ── cerca_servizi — same redirect discipline on the REST read ────────────────
+
+_BASE_URL = f"https://{_OFFICIAL}"
+_REST_JSON = [{"id": 7, "title": {"rendered": "Carta d'identità"}, "link": f"{_BASE_URL}/servizi/cie/"}]
+
+
+def _cerca(handler):
+    return _fetcher_with(handler).cerca_servizi(
+        base_url=_BASE_URL, rest_base="servizi", term="carta d'identità", limit=20
+    )
+
+
+def test_fetcher_search_reads_official_host():
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(200, json=_REST_JSON)
+
+    got = _cerca(handler)
+    assert len(got) == 1 and got[0].wordpress_id == 7
+
+
+def test_fetcher_search_rejects_redirect_to_external_host():
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.host == _OFFICIAL:
+            return httpx.Response(302, headers={"location": "https://evil.example/wp-json/wp/v2/servizi"})
+        # If the guard failed, this external JSON would be read as candidates.
+        return httpx.Response(200, json=_REST_JSON)
+
+    assert _cerca(handler) == ()
+
+
+def test_fetcher_search_follows_same_comune_redirect_www_to_apex():
+    apex = "comune.albano.rm.it"
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.host == _OFFICIAL:
+            return httpx.Response(
+                301, headers={"location": f"https://{apex}/wp-json/wp/v2/servizi"}
+            )
+        return httpx.Response(200, json=_REST_JSON)
+
+    got = _cerca(handler)
+    assert len(got) == 1 and got[0].wordpress_id == 7
+
+
 # ── recogniser re-run on WordPress service titles ───────────────────────────
 
 

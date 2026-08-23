@@ -264,18 +264,21 @@ class HttpxServiceFetcher:
         limit: int,
     ) -> tuple[ServiceCandidate, ...]:
         url = f"{base_url.rstrip('/')}/wp-json/wp/v2/{rest_base}"
+        # base_url comes from the trusted mappa, but the REST endpoint's own HTTP
+        # redirects are remote-network behaviour: a 30x could steer the JSON read
+        # to an unauthorised host.  Same discipline as the page fetch — redirects
+        # followed manually, host re-checked on every hop and the final URL.
+        host_ufficiale = _host_senza_www(urlparse(base_url).netloc.lower())
+        resp = self._get_verificato(
+            url,
+            host_ufficiale=host_ufficiale,
+            params={"search": term, "per_page": limit, "_fields": "id,title,link"},
+        )
+        if resp is None or resp.status_code != 200:
+            return ()
         try:
-            # base_url comes from the trusted mappa; every candidate `link` is
-            # re-checked against the official host in the connector, so following
-            # the REST endpoint's own redirects (typically http→https) is safe.
-            with self._client(follow_redirects=True) as client:
-                resp = client.get(
-                    url,
-                    params={"search": term, "per_page": limit, "_fields": "id,title,link"},
-                )
-                resp.raise_for_status()
-                dati = resp.json()
-        except (httpx.HTTPError, ValueError):
+            dati = resp.json()
+        except ValueError:
             return ()
         if not isinstance(dati, list):
             return ()
@@ -303,11 +306,31 @@ class HttpxServiceFetcher:
 
     def leggi_pagina(self, *, url: str, official_host: str) -> str | None:
         host_ufficiale = _host_senza_www(official_host.lower())
+        resp = self._get_verificato(url, host_ufficiale=host_ufficiale)
+        if resp is None or resp.status_code != 200:
+            return None
+        return resp.text
+
+    def _get_verificato(
+        self,
+        url: str,
+        *,
+        host_ufficiale: str,
+        params: dict | None = None,
+    ) -> httpx.Response | None:
+        """GET ``url`` never letting httpx follow redirects on its own: a remote
+        30x could steer the read to an external host.  Redirects are followed
+        manually with the host re-checked on the initial URL, on every hop, and
+        on the final URL — an off-host redirect ends the fetch (``None``), the
+        response is never read.  Applies to both the REST search and the page
+        fetch, so neither reads a body from an unauthorised host."""
         if not host_ufficiale or _host_senza_www(urlparse(url).netloc.lower()) != host_ufficiale:
             return None
+        # Bake params into the first URL; on redirects the server's Location
+        # carries the query, so re-passing params would duplicate it.
+        corrente = str(httpx.URL(url, params=params)) if params else url
         try:
             with self._client(follow_redirects=False) as client:
-                corrente = url
                 for _ in range(_MAX_REDIRECT + 1):
                     resp = client.get(corrente)
                     if resp.is_redirect:
@@ -320,9 +343,7 @@ class HttpxServiceFetcher:
                         if _host_senza_www(urlparse(corrente).netloc.lower()) != host_ufficiale:
                             return None
                         continue
-                    if resp.status_code != 200:
-                        return None
-                    return resp.text
+                    return resp
             return None  # too many redirects
         except httpx.HTTPError:
             return None

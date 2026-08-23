@@ -29,7 +29,7 @@ def test_corpus_routes_scanned_pdf_to_ocr_before_pypdf(monkeypatch) -> None:
     monkeypatch.setattr(corpus, "inspect_pdf_bytes", lambda *_args, **_kwargs: inspection)
     monkeypatch.setitem(__import__("sys").modules, "pypdf", SimpleNamespace())
 
-    segments, notes, skipped, illegible = corpus.collect_pdf_segments(
+    segments, notes, skipped, illegible, ocr_deferred = corpus.collect_pdf_segments(
         _Client(),
         "https://comune.example",
         ["https://comune.example/bando.pdf"],
@@ -38,4 +38,8 @@ def test_corpus_routes_scanned_pdf_to_ocr_before_pypdf(monkeypatch) -> None:
     assert segments == []
     assert "OCR" in notes[0]
     assert skipped[0].reason == "ispezione PDF: OCR richiesto prima dell'estrazione"
-    assert illegible == 1
+    # FULL_OCR is a valid-but-not-yet-measured document, NOT illegibility: it
+    # must count as OCR-deferred and never bump illegible_count (which gates
+    # L3). A page whose only PDF routes here stays L1_manuale, not L3.
+    assert illegible == 0
+    assert ocr_deferred == 1

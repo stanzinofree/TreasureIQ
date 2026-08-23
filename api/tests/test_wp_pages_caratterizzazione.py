@@ -92,6 +92,29 @@ class _RecordingExtractor:
         return None
 
 
+class _DeterministicPdfInspector:
+    """Injected PDF-inspection backend so the recovery-ladder assertions never
+    depend on the installed `pdf_inspector` package's heuristic or version.
+
+    Real PDF bytes (`%PDF` header) classify as TEXT_BASED with high confidence
+    -> `inspect_pdf_bytes` routes NATIVE_TEXT -> the attachment opens via pypdf.
+    Anything else raises, which `inspect_pdf_bytes` records as an INVALID
+    (illegible) skip. These are exactly the two routes this characterization
+    pins: `good.pdf` opens, `illegible.pdf` is unreadable — neither is left to
+    the live inspector's judgement, which drifts across package versions."""
+
+    class _Result:
+        pdf_type = "text_based"
+        confidence = 0.99
+        page_count = 1
+        pages_needing_ocr: tuple[int, ...] = ()
+
+    def classify_pdf_bytes(self, data: bytes) -> "_DeterministicPdfInspector._Result":
+        if data.startswith(b"%PDF"):
+            return self._Result()
+        raise ValueError("Not a PDF: file appears to be plain text")
+
+
 def _transport_handler(request: httpx.Request) -> httpx.Response:
     url = str(request.url)
 
@@ -136,6 +159,7 @@ def connector() -> WPPagesConnector:
         ente="Comune di Caratterizzazione",
         codice_istat="999999",
         extractor=extractor,  # type: ignore[arg-type]
+        pdf_inspector=_DeterministicPdfInspector(),
         max_pages=50,
     )
     conn._client = httpx.Client(
@@ -163,13 +187,17 @@ def test_pdf_budget_and_audit_trail(connector: WPPagesConnector) -> None:
 
     assert "oltre il limite di" in oversized_skip.reason
     assert str(MAX_PDF_BYTES) in oversized_skip.reason
-    assert "parsing fallito" in illegible_skip.reason
+    # illegible.pdf is plain-text bytes: the inspection gate rejects it as an
+    # INVALID PDF before pypdf is ever reached. Still an audited illegible skip
+    # (counts toward L3), only caught one stage earlier than a pypdf parse
+    # failure — the characterization pins "unreadable & audited", not the stage.
+    assert "Not a PDF" in illegible_skip.reason
 
     assert any(
         "Allegato PDF ignorato (troppo grande" in note for note in opp.extraction_notes
     )
     assert any(
-        "Allegato PDF illeggibile (parsing fallito)" in note
+        "Allegato PDF illeggibile (ispezione fallita)" in note
         for note in opp.extraction_notes
     )
 

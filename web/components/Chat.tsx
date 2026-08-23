@@ -61,6 +61,8 @@ import {
   type FiltroOverride,
   type InfoOut,
   type InfoWebResult,
+  type ServiceLinkOut,
+  type ServiceOut,
   type Match,
   type Requirements,
 } from "@/lib/api";
@@ -827,6 +829,15 @@ function InfoAnswer({ info }: { info: InfoOut }) {
         </p>
       )}
 
+      {/* Ramo 3, Slice 5 — il servizio risolto dal connettore. Le tre porte
+          restano DISTINTE: la pagina informativa, il modulo da scaricare e la
+          procedura online. TIQ indica la porta, non entra: l'autenticazione è
+          un'informazione mostrata SOLO sulla procedura online, mai una cosa che
+          facciamo noi (D-R3-5/6). */}
+      {info.service && (
+        <ServiceCard service={info.service} />
+      )}
+
       {/* La copertura conta i NOSTRI record. Su una risposta letta dal vivo
           non ce ne sono per definizione — il comune non è fra quelli che
           leggiamo — e scrivere «nessun risultato pubblicato dal comune»
@@ -870,6 +881,45 @@ function InfoAnswer({ info }: { info: InfoOut }) {
       )}
 
       <PagineWeb results={info.web_results} />
+    </div>
+  );
+}
+
+/** Un link a una porta ufficiale del servizio. `authentication` è non vuoto
+ * SOLO per la procedura online: allora si mostrano i metodi accettati (SPID,
+ * CIE…). È un'informazione al cittadino, non un'azione di TIQ. */
+function ServiceLink({ link }: { link: ServiceLinkOut }) {
+  return (
+    <li className="service-card__link">
+      <a href={link.url} target="_blank" rel="noreferrer">
+        {link.label}
+      </a>
+      {link.authentication.length > 0 && (
+        <span className="service-card__auth">
+          {" "}
+          — richiede {link.authentication.join(", ").toUpperCase()}
+        </span>
+      )}
+    </li>
+  );
+}
+
+/** Il servizio risolto dal connettore (Ramo 3, Slice 5). Tre porte DISTINTE,
+ * ciascuna col suo blocco: la pagina informativa, i moduli da scaricare, le
+ * procedure online autenticate. TIQ indica la porta e non entra. */
+function ServiceCard({ service }: { service: ServiceOut }) {
+  return (
+    <div className="service-card">
+      <p className="service-card__title">{service.title}</p>
+      <ul className="service-card__links">
+        {service.information && <ServiceLink link={service.information} />}
+        {service.downloads.map((link) => (
+          <ServiceLink key={link.url} link={link} />
+        ))}
+        {service.authenticated_online.map((link) => (
+          <ServiceLink key={link.url} link={link} />
+        ))}
+      </ul>
     </div>
   );
 }

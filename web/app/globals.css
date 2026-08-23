@@ -1723,6 +1723,41 @@ a {
   font-weight: 600;
 }
 
+/* Ramo 3, Slice 5 — la scheda del servizio risolto dal connettore. Tre porte
+   DISTINTE (pagina informativa, modulo, procedura online); l'autenticazione è
+   un'informazione mostrata solo sulla procedura, mai un'azione di TIQ. Registro
+   sobrio come il rail INFORMAZIONE: nessun sigillo, nessun bordo-verdetto. */
+.service-card {
+  display: grid;
+  gap: var(--ma-2);
+  padding: var(--ma-3);
+  background: var(--paper-raised);
+  border-left: var(--card-accent-w) solid var(--ai);
+  border-radius: var(--radius-sm);
+}
+
+.service-card__title {
+  font-weight: 600;
+  color: var(--sumi);
+}
+
+.service-card__links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--ma-1);
+}
+
+.service-card__link a {
+  font-weight: 600;
+}
+
+.service-card__auth {
+  color: var(--sumi-faint);
+  font-size: 0.82rem;
+}
+
 .info-answer__diagnosis {
   list-style: none;
   margin: 0;

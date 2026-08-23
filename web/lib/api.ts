@@ -456,9 +456,34 @@ export interface Azione {
  * because they answer different questions: what was checked, and what
  * checking it cost. `coverage_count` is a raw count of matching records;
  * the client composes the sentence around it. */
+/** Un'opzione d'accesso a un servizio comunale risolto dal connettore (Ramo 3,
+ * Slice 5): una porta ufficiale con la sua etichetta e — solo per la procedura
+ * online — i metodi di autenticazione accettati. `authentication` è vuoto per
+ * la pagina informativa e per il download del modulo. */
+export interface ServiceLinkOut {
+  url: string;
+  label: string;
+  authentication: string[];
+}
+
+/** Il servizio risolto, con le tre porte tenute DISTINTE (D-R3): la pagina
+ * informativa, i moduli scaricabili e le procedure online autenticate. TIQ
+ * indica la porta, non entra: nessun login, nessuna compilazione. */
+export interface ServiceOut {
+  service_id: string;
+  title: string;
+  information: ServiceLinkOut | null;
+  downloads: ServiceLinkOut[];
+  authenticated_online: ServiceLinkOut[];
+}
+
 export interface InfoOut {
   document: InfoDocument | null;
   office: InfoOffice | null;
+  /** Il servizio risolto dal connettore (Ramo 3, Slice 5). `null` quando la
+   * risposta non passa dal resolver dei servizi (la maggioranza delle
+   * INFORMAZIONI): allora vale eventualmente `document`. */
+  service: ServiceOut | null;
   coverage_count: number;
   diagnosis: string[];
   integration_cost: string[];

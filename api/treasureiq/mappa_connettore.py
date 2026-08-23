@@ -43,7 +43,7 @@ from pathlib import Path
 from pydantic import BaseModel, Field
 
 from treasureiq.ingest.censimento import REST_BASE_UFFICI, _Sonda
-from treasureiq.ingest.piattaforma import Piattaforma, firma_da_risposta
+from treasureiq.ingest.piattaforma import Piattaforma
 from treasureiq.sonda_live import LIVE_DIR, ComuneNoto, comune_per_codice
 
 logger = logging.getLogger(__name__)
@@ -395,7 +395,9 @@ def _sonda_mappa(comune: ComuneNoto, *, timeout: float = 8.0) -> MappaConnettore
             and risposta_home.text
         ):
             logo_url = _estrai_logo(risposta_home.text, base)
-            piattaforma_id = _piattaforma_da_home(risposta_home)
+            piattaforma_id = _piattaforma_da_home(
+                risposta_home, source_id=comune.codice_istat, entrypoint_url=base
+            )
 
     return MappaConnettore(
         codice_istat=comune.codice_istat,
@@ -420,18 +422,31 @@ _PIATTAFORME_NON_AGGANCIABILI = frozenset(
 )
 
 
-def _piattaforma_da_home(risposta) -> str | None:
+def _piattaforma_da_home(risposta, *, source_id: str, entrypoint_url: str) -> str | None:
     """La famiglia di piattaforma dedotta dalla home, o `None` se non riconosciuta.
 
-    Riusa la risposta già scaricata per il logo: nessun fetch in più. La stessa
-    firma che il censimento usa (`firma_da_risposta`), così il `piattaforma_id`
-    scritto in mappa combacia con l'id di piattaforma su cui il registry dei
-    connettori seleziona (D-R3). `includi_at=False`: qui si riconosce il
-    portale servizi, non l'Amministrazione Trasparente.
+    Riusa la risposta già scaricata per il logo: nessun fetch in più. Riconosce
+    via il **seam del registry** (`firma_da_registro`, `recognition_adapter.py`)
+    come i siti BASE già migrati (M1 `inventory_discovery`, M2 `censimento`), così
+    non resta una seconda verità di riconoscimento fuori dal registry e il
+    `piattaforma_id` scritto in mappa combacia con l'id su cui il registry dei
+    connettori seleziona (D-R3). `Surface.ORDINARY_DATA` = il portale servizi
+    BASE (l'ex `includi_at=False`), non l'Amministrazione Trasparente.
     """
+    # Import lazy: la catena `catalog` (contracts/recognition_adapter) tira
+    # `catalog.adapters → connettore → mappa_connettore`, quindi importarla a
+    # livello modulo qui chiuderebbe un ciclo. Il seam è un dettaglio di questa
+    # sola funzione, quindi l'import locale è anche il posto giusto.
+    from treasureiq.catalog.contracts import Surface
+    from treasureiq.catalog.recognition_adapter import firma_da_registro
+
     try:
-        firma = firma_da_risposta(
-            headers=dict(risposta.headers), html=risposta.text, includi_at=False
+        firma = firma_da_registro(
+            headers=dict(risposta.headers),
+            html=risposta.text,
+            surface=Surface.ORDINARY_DATA,
+            source_id=source_id,
+            entrypoint_url=entrypoint_url,
         )
     except Exception:  # noqa: BLE001 — firma muta: piattaforma ignota, non un errore
         return None

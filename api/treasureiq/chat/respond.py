@@ -41,6 +41,7 @@ import asyncio
 import logging
 import re
 import threading
+from collections.abc import Sequence
 from dataclasses import dataclass, field, replace
 from datetime import date, datetime, timezone
 from decimal import Decimal
@@ -68,8 +69,10 @@ from treasureiq.catalog import (
     request_from_recognition,
     CatalogRuntime,
     select_batch,
+    service_portal_request,
 )
 from treasureiq.catalog.contracts import CAPABILITY_NOTICES
+from treasureiq.catalog.data_contracts import DataStatus
 from treasureiq.catalog.notices import notices_batch, snapshot_da_bandi_live
 from treasureiq.chat.categorie import Categoria, topics_di
 from treasureiq.chat.intent import (
@@ -3572,6 +3575,270 @@ def _bando_tocca_il_tema(bando: BandoArricchito, tema: str) -> bool:
     return _keyword_hit(haystack=haystack, keywords=tuple(tema.split()))
 
 
+#: Etichette leggibili dei metodi di autenticazione per la motivazione mostrata
+#: al cittadino. `unknown` è volutamente assente: un metodo non riconosciuto non
+#: deve produrre un'etichetta inventata, ricade sulla motivazione generica
+#: (D-R3, vincolo 3).
+_AUTH_LABELS: dict[str, str] = {
+    "spid": "SPID",
+    "cie": "CIE",
+    "cns": "CNS",
+    "password": "credenziali del portale",
+}
+
+
+def _spid_reason_da_metodi(metodi: Sequence[object]) -> tuple[bool, str]:
+    """Deriva (autenticazione_richiesta, motivo) dai metodi del portale.
+
+    `spid_required` è storicamente il nome del campo, ma qui significa
+    «autenticazione richiesta», non «SPID obbligatorio» (D-R3, vincolo 3): un
+    portale servizi resta sempre dietro accesso, quindi il primo elemento è
+    sempre True. Il motivo elenca i SOLI metodi effettivamente presenti; se la
+    lista è vuota (o porta solo `unknown`) si usa una motivazione generica,
+    senza inventare un metodo che il portale non dichiara.
+    """
+    etichette = [
+        _AUTH_LABELS[str(getattr(m, "value", m))]
+        for m in metodi
+        if str(getattr(m, "value", m)) in _AUTH_LABELS
+    ]
+    etichette = list(dict.fromkeys(etichette))  # de-dup, ordine preservato
+    if etichette:
+        return True, (
+            f"L'accesso richiede autenticazione ({', '.join(etichette)}); "
+            "resta a carico del cittadino."
+        )
+    return True, "L'accesso richiede autenticazione; resta a carico del cittadino."
+
+
+async def _risposta_modulistica(
+    *, message: str, profile: CitizenProfile | None, comune_istat: str | None
+) -> ChatAnswer:
+    """Ramo Topic.MODULISTICA — primo incremento SP (Ramo 3, contratto §5).
+
+    Cabla alla chat il PUNTATORE al portale servizi già scoperto dallo sweep e
+    persistito come `SourceInventory`. TIQ indica la porta ufficiale (URL,
+    ruolo, metodi di autenticazione accettati) e non entra mai: nessun login,
+    nessuna compilazione, nessun dato dietro autenticazione (D-R3-5). L'esito
+    resta `INDIRECT`, come lo produce `ServicePortalConnettore`.
+
+    Selezione DETERMINISTICA dei candidati (D-R3, vincolo 1) — mai il primo
+    portale scelto arbitrariamente:
+      * 0 candidati  → non disponibile (mai un URL inventato, D-R3-7);
+      * 1 candidato  → handoff al portale ufficiale;
+      * ≥2 candidati → si chiede quale, elencando le porte ufficiali confermate.
+
+    Il `service_id` è ESATTAMENTE l'URL del `ServicePortalCandidate` confermato,
+    perché `ServicePortalConnettore._match` confronta quell'URL con l'inventario
+    (D-R3, vincolo 2 / D-R3-7): il riconoscimento sceglie tra candidati
+    confermati, non genera URL da testo libero. Per il primo incremento il
+    candidato è usato direttamente come sorgente del `service_id`: adattamento
+    provvisorio verso il contratto canonico `ServiceReference`.
+
+    Comune con la stessa precedenza dei bandi (profilo > scelta > nominato),
+    I6: niente default hardcoded, se il comune non è noto lo si chiede.
+
+    Il testo di risposta è FISSO, mai passato al verbalizzatore (D-07): URL,
+    ruolo e metodi viaggiano nei campi strutturati (`info`/`data_batches`), mai
+    interpolati in `reply`.
+    """
+    from treasureiq.catalog.service_portal_connector import _inventory_from_live
+    from treasureiq.mappa_connettore import MappaConnettore, _da_cache
+
+    # Precedenza del comune: identica ai bandi (memoria «ricerca live cieca al
+    # comune di profilo», R-9). I6: nessun ripiego hardcoded — se non sappiamo
+    # il comune, l'unica risposta onesta è chiederlo.
+    nominato = _comune_nominato(message)
+    target_istat = (
+        (profile.comune_istat if profile is not None else None)
+        or comune_istat
+        or (nominato.codice_istat if nominato is not None else None)
+    )
+    if target_istat is None:
+        return ChatAnswer(
+            reply=(
+                "Per indicarti lo sportello online giusto devo sapere di quale "
+                "comune parli. Scrivimelo nella chat, oppure usa «Usa la mia "
+                "posizione»."
+            ),
+            topic=Topic.MODULISTICA,
+            kind=QuestionKind.INFORMAZIONE,
+            data_gap="comune_non_noto",
+            needs_clarification=True,
+            matches=[],
+            spid_required=False,
+            spid_reason=None,
+            access_mode=None,
+            citizen_effort=1,
+            info=None,
+        )
+
+    mappa = _da_cache(target_istat)
+    inventory = _inventory_from_live(target_istat)
+    comune_nome = (
+        (mappa.nome if mappa is not None else None)
+        or (nominato.nome if nominato is not None else None)
+        or "questo comune"
+    )
+    candidates = list(inventory.service_portals) if inventory is not None else []
+
+    # 0 candidati: non disponibile. Non abbiamo (ancora) un portale confermato
+    # per questa fonte — mai un URL inventato (D-R3-7).
+    if not candidates:
+        return ChatAnswer(
+            reply=(
+                f"Per {comune_nome} non risulta ancora un portale servizi "
+                "online confermato tra i dati che ho letto. Per la pratica "
+                "conviene rivolgerti all'URP del comune, che ti indica il "
+                "canale corretto."
+            ),
+            topic=Topic.MODULISTICA,
+            kind=QuestionKind.INFORMAZIONE,
+            data_gap="not_published",
+            needs_clarification=False,
+            matches=[],
+            spid_required=False,
+            spid_reason=None,
+            access_mode=None,
+            citizen_effort=1,
+            info=None,
+        )
+
+    # ≥2 candidati: si chiede quale, elencando le porte ufficiali confermate —
+    # mai scelto il primo arbitrariamente (D-R3, vincolo 1).
+    if len(candidates) > 1:
+        metodi_uniti: list[object] = []
+        for candidato in candidates:
+            metodi_uniti.extend(candidato.authentication)
+        spid_required, spid_reason = _spid_reason_da_metodi(metodi_uniti)
+        azioni = [
+            Azione(
+                testo=candidato.label or "Sportello online",
+                url=str(candidato.url),
+                etichetta="Apri",
+                dettaglio="Procedura online: l'accesso richiede autenticazione.",
+            )
+            for candidato in candidates
+        ]
+        info = InfoAnswer(
+            document=None,
+            office=None,
+            coverage_count=len(candidates),
+            diagnosis=[],
+            integration_cost=[],
+            web_results=[],
+            letto_dal_vivo=False,
+            stato=StatoFonte.UFFICIALE,
+            azioni=azioni,
+            ente_nome=comune_nome,
+        )
+        return ChatAnswer(
+            reply=(
+                f"Per {comune_nome} ci sono più sportelli online ufficiali. "
+                "Quale ti serve? Sono tutte procedure online: l'autenticazione "
+                "resta a te, io non posso accedere al posto tuo."
+            ),
+            topic=Topic.MODULISTICA,
+            kind=QuestionKind.INFORMAZIONE,
+            data_gap=None,
+            needs_clarification=True,
+            matches=[],
+            spid_required=spid_required,
+            spid_reason=spid_reason,
+            access_mode=CatalogAccessMode.INDIRECT.value,
+            citizen_effort=2,
+            info=info,
+        )
+
+    # 1 candidato: handoff. Il service_id è ESATTAMENTE l'URL confermato
+    # (D-R3, vincolo 2); l'executor lo riconferma contro l'inventario.
+    candidate = candidates[0]
+    request = service_portal_request(source_id=target_istat, service_id=str(candidate.url))
+    if mappa is None:
+        mappa = MappaConnettore(
+            codice_istat=target_istat,
+            nome=comune_nome,
+            sito=str(inventory.base_url) if inventory is not None else "",
+            sondato_il=datetime.now(timezone.utc).isoformat(),
+        )
+    batch = await asyncio.to_thread(
+        CatalogRuntime().execute,
+        request,
+        platform_id=candidate.platform_id or "sconosciuta",
+        mappa=mappa,
+        esito=None,
+    )
+
+    # Miss onesto: l'inventario è cambiato tra selezione ed esecuzione, o
+    # l'adapter non risolve. Mai un puntatore inventato.
+    if batch is None or batch.status is not DataStatus.FULFILLED or not batch.records:
+        return ChatAnswer(
+            reply=(
+                f"Per {comune_nome} non riesco a confermare ora lo sportello "
+                "online ufficiale. Per la pratica rivolgiti all'URP del comune."
+            ),
+            topic=Topic.MODULISTICA,
+            kind=QuestionKind.INFORMAZIONE,
+            data_gap="not_verified",
+            needs_clarification=False,
+            matches=[],
+            spid_required=False,
+            spid_reason=None,
+            access_mode=None,
+            citizen_effort=1,
+            info=None,
+        )
+
+    # Catena canonica: DataBatch → QueryPlan → selected_data_batch, come uffici
+    # e bandi. Il piano rende tracciabile la richiesta dietro il puntatore.
+    plan = build_query_plan(request)
+    selected = select_batch(plan, (batch,))
+
+    record = batch.records[0]
+    spid_required, spid_reason = _spid_reason_da_metodi(record.get("authentication") or [])
+    verificato_il = None
+    if batch.freshness is not None and batch.freshness.retrieved_at is not None:
+        verificato_il = batch.freshness.retrieved_at.date()
+    document = DocumentAnswer(
+        title=record.get("label") or "Sportello online",
+        url=record["url"],
+        descrizione="Procedura online: l'accesso richiede autenticazione e resta a te.",
+        verificato_il=verificato_il,
+    )
+    info = InfoAnswer(
+        document=document,
+        office=None,
+        coverage_count=1,
+        diagnosis=[],
+        integration_cost=[],
+        web_results=[],
+        letto_dal_vivo=False,
+        stato=StatoFonte.UFFICIALE,
+        ente_nome=comune_nome,
+    )
+    return ChatAnswer(
+        reply=(
+            f"Per {comune_nome} la pratica si svolge online sul portale servizi "
+            "ufficiale del comune. È una procedura online: l'autenticazione "
+            "resta a te, io non posso accedere né compilarla al posto tuo. "
+            "Trovi la porta ufficiale qui accanto."
+        ),
+        topic=Topic.MODULISTICA,
+        kind=QuestionKind.INFORMAZIONE,
+        data_gap=None,
+        needs_clarification=False,
+        matches=[],
+        spid_required=spid_required,
+        spid_reason=spid_reason,
+        access_mode=batch.access_mode.value,
+        citizen_effort=2,
+        info=info,
+        data_batches=[batch],
+        query_plan=plan,
+        selected_data_batch=selected,
+    )
+
+
 async def _risposta_bandi(
     *, message: str, profile: CitizenProfile | None, comune_istat: str | None
 ) -> ChatAnswer:
@@ -3925,6 +4192,22 @@ async def _componi_risposta(
         return await _risposta_bandi(
             message=message,
             profile=profilo_bandi,
+            comune_istat=comune_bandi_istat or comune_istat,
+        )
+
+    # Ramo 3 — Modulistica, primo incremento SP (contratto §5). Gated sul
+    # supporto lessicale come i bandi: un MODULISTICA emesso dal modello ma non
+    # sostenuto dalle parole non deve dirottare il turno. Il comune segue la
+    # stessa precedenza dei bandi (profilo > scelta > nominato), I6 incluso.
+    if intent.topic is Topic.MODULISTICA and _tema_sostenuto(
+        topic=Topic.MODULISTICA, testo=message
+    ):
+        profilo_modulistica = profile or _profile_from_slots(
+            intent=intent, messaggio=message, filtri_esclusi=filtri_esclusi
+        )
+        return await _risposta_modulistica(
+            message=message,
+            profile=profilo_modulistica,
             comune_istat=comune_bandi_istat or comune_istat,
         )
 

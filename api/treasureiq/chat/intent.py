@@ -82,6 +82,14 @@ class Topic(str, Enum):
     #: `extract_intent`: «bandi per i mezzi pubblici» nomina "bandi" ma parla
     #: di TRASPORTO_PUBBLICO, non di un elenco di avvisi.
     BANDI = "bandi"
+    #: Modulistica e servizi online del comune (Ramo 3). Il cittadino chiede
+    #: «dove faccio la pratica / il modulo per X» e la risposta è un accesso,
+    #: non un elenco: modulo informativo, modulo scaricabile o servizio
+    #: autenticato. Il PRIMO incremento SP cabla solo il portale servizi
+    #: (servizio autenticato): TIQ indica la porta ufficiale e non entra mai
+    #: (D-R3-5). Il tipo di accesso è un ESITO dei dati trovati, non una scelta
+    #: iniziale del cittadino (D-R3-1).
+    MODULISTICA = "modulistica"
     #: The model could not map the message onto any of the above. Never
     #: guessed into just to avoid this value — see the system prompt.
     SCONOSCIUTO = "sconosciuto"
@@ -200,6 +208,22 @@ TOPIC_KEYWORDS: dict[Topic, tuple[str, ...]] = {
     #: TRASPORTO_PUBBLICO, e la guardia in `extract_intent`
     #: (`_e_bando_di_trasporto_pubblico`) si aspetta gli insiemi disgiunti.
     Topic.BANDI: ("bando", "bandi", "avviso pubblico", "avvisi pubblici", "graduatoria"),
+    #: Modulistica e servizi online (Ramo 3). Frasi che segnalano l'intento di
+    #: fare una pratica online o procurarsi un modulo, distinte dai bandi:
+    #: "sportello telematico"/"servizi online" indicano il portale autenticato,
+    #: "modulo per"/"modulistica" il modulo pubblico. Substring lowercase, come
+    #: le altre voci — nessun modello in questo passo.
+    Topic.MODULISTICA: (
+        "modulistica",
+        "modulo per",
+        "sportello telematico",
+        "sportello online",
+        "servizi online",
+        "servizio online",
+        "area personale",
+        "domanda online",
+        "istanza online",
+    ),
     Topic.SCONOSCIUTO: (),
 }
 

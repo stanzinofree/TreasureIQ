@@ -62,6 +62,9 @@ CATEGORIA_PER_TOPIC: dict[Topic, Categoria] = {
     # Bandi: letti dal vivo (B3, bandi-live-agid), fuori dalle tre categorie
     # di D-55 come gli altri servizi non ricorrenti.
     Topic.BANDI: Categoria.ALTRO,
+    # Modulistica / servizi online (Ramo 3): superficie trasversale, non una
+    # delle tre categorie di D-55 — mai proposta come scelta, mai omessa.
+    Topic.MODULISTICA: Categoria.ALTRO,
 }
 
 

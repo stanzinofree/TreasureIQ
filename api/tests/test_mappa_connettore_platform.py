@@ -18,14 +18,24 @@ def test_sonda_popola_piattaforma_da_home() -> None:
     home = _RispostaFinta(
         testo='<html><head><link rel="stylesheet" href="/wp-content/themes/x/s.css"></head>'
     )
-    assert _piattaforma_da_home(home) == "wordpress_generico"
+    assert (
+        _piattaforma_da_home(
+            home, source_id="058003", entrypoint_url="https://comune.example"
+        )
+        == "wordpress_generico"
+    )
 
 
 def test_home_ignota_niente_piattaforma() -> None:
     # Nessun marcatore → piattaforma ignota → None: il resolver cadrà nel miss
     # onesto invece di agganciare una famiglia a caso (mai un connettore inventato).
     home = _RispostaFinta(testo="<html><body>solo testo civico</body></html>")
-    assert _piattaforma_da_home(home) is None
+    assert (
+        _piattaforma_da_home(
+            home, source_id="058003", entrypoint_url="https://comune.example"
+        )
+        is None
+    )
 
 
 def test_home_muta_niente_piattaforma() -> None:
@@ -33,7 +43,12 @@ def test_home_muta_niente_piattaforma() -> None:
     class _Muta:
         pass
 
-    assert _piattaforma_da_home(_Muta()) is None
+    assert (
+        _piattaforma_da_home(
+            _Muta(), source_id="058003", entrypoint_url="https://comune.example"
+        )
+        is None
+    )
 
 
 def test_mappa_keeps_main_and_transparency_platforms_separate() -> None:

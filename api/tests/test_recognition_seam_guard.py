@@ -1,10 +1,11 @@
 """Guard test for invariant I1 (Fase 1 strangler, recognition seam).
 
-Two BASE call sites were migrated off the legacy classifier
+Three BASE call sites were migrated off the legacy classifier
 (`classifica_risposta` / `firma_da_risposta` in `piattaforma.py`) onto the
 registry seam `firma_da_registro` (`catalog/recognition_adapter.py`):
-`catalog/inventory_discovery.py` (M1) and `ingest/censimento.py::_impronta`
-(M2). This test is the tripwire that keeps a THIRD, unreviewed call site from
+`catalog/inventory_discovery.py` (M1), `ingest/censimento.py::_impronta`
+(M2), and `mappa_connettore.py::_piattaforma_da_home` (M3). This test is the
+tripwire that keeps a further, unreviewed call site from
 reappearing while the strangler is still in flight: it statically scans every
 production module under `api/treasureiq/` and asserts that only a fixed,
 named allowlist of files imports `classifica_risposta`, `firma_da_risposta`,

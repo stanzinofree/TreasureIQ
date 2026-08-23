@@ -105,7 +105,7 @@ class WordPressAgidServiceConnector:
             term=SERVICE_SEARCH_TERM[service_key],
             limit=_LIMITE_RICERCA,
         )
-        confermati = self._confermati(candidati, service_key)
+        confermati = self._confermati(candidati, service_key, official_host)
         if len(confermati) != 1:
             # 0 → honest miss; ≥2 → ambiguous, the choice belongs to a higher
             # level, never an implicit pick here.
@@ -150,12 +150,24 @@ class WordPressAgidServiceConnector:
 
     @staticmethod
     def _confermati(
-        candidati: tuple[ServiceCandidate, ...], service_key: ServiceKey
+        candidati: tuple[ServiceCandidate, ...],
+        service_key: ServiceKey,
+        official_host: str,
     ) -> tuple[ServiceCandidate, ...]:
-        # Confirm each candidate by the SHARED recogniser on its title: same
-        # key, unambiguous (the recogniser returns None on conflict), no
-        # nearest-neighbour.  A candidate that does not confirm is dropped.
-        return tuple(c for c in candidati if riconosci_service_key(c.title) is service_key)
+        # A candidate must (a) live on the comune's OWN host and (b) confirm the
+        # requested key via the SHARED recogniser on its title — same key,
+        # unambiguous (the recogniser returns None on conflict), no
+        # nearest-neighbour.  The host guard is here, not only in the fetcher: a
+        # REST payload could carry a `link` to an external host and that URL must
+        # never become a source_url or an INFORMATION option.  A candidate that
+        # fails either check is dropped (0 confirmed → NOT_FOUND).
+        host_ufficiale = _host_senza_www(official_host.lower())
+        return tuple(
+            c
+            for c in candidati
+            if _host_senza_www(urlparse(str(c.url)).netloc.lower()) == host_ufficiale
+            and riconosci_service_key(c.title) is service_key
+        )
 
     def _opzioni(
         self, candidato: ServiceCandidate, official_host: str
@@ -214,20 +226,33 @@ class WordPressAgidServiceConnector:
         )
 
 
+#: How many redirect hops to follow manually on a page fetch before giving up.
+_MAX_REDIRECT = 5
+
+
 class HttpxServiceFetcher:
-    """Real ``ServiceFetcher`` over httpx.  Not exercised by golden tests (it is
-    the only part that touches the network); the connector logic is tested with
-    a stub.  No login, no cookies; the official-host guard runs before any page
-    fetch."""
+    """Real ``ServiceFetcher`` over httpx.  The connector logic is covered by a
+    stub; this class owns the HTTP boundary, so its host discipline IS tested
+    (via an injected transport).  No login, no cookies.
 
-    def __init__(self, *, timeout: float = 10.0) -> None:
+    The page fetch never lets httpx follow redirects on its own: a comune page
+    could 30x to an external host and httpx would happily read it.  Redirects
+    are followed manually and the host is re-checked on every hop and on the
+    final URL, so an off-host redirect ends the fetch (``None``) instead of
+    leaking a third party's HTML."""
+
+    def __init__(
+        self, *, timeout: float = 10.0, transport: httpx.BaseTransport | None = None
+    ) -> None:
         self._timeout = timeout
+        self._transport = transport
 
-    def _client(self) -> httpx.Client:
+    def _client(self, *, follow_redirects: bool) -> httpx.Client:
         return httpx.Client(
             timeout=self._timeout,
             headers={"User-Agent": USER_AGENT},
-            follow_redirects=True,
+            follow_redirects=follow_redirects,
+            transport=self._transport,
         )
 
     def cerca_servizi(
@@ -240,7 +265,10 @@ class HttpxServiceFetcher:
     ) -> tuple[ServiceCandidate, ...]:
         url = f"{base_url.rstrip('/')}/wp-json/wp/v2/{rest_base}"
         try:
-            with self._client() as client:
+            # base_url comes from the trusted mappa; every candidate `link` is
+            # re-checked against the official host in the connector, so following
+            # the REST endpoint's own redirects (typically http→https) is safe.
+            with self._client(follow_redirects=True) as client:
                 resp = client.get(
                     url,
                     params={"search": term, "per_page": limit, "_fields": "id,title,link"},
@@ -274,15 +302,27 @@ class HttpxServiceFetcher:
             return None
 
     def leggi_pagina(self, *, url: str, official_host: str) -> str | None:
-        # Host guard: only read a page on the comune's own host (SSRF).
-        host_pagina = _host_senza_www(urlparse(url).netloc.lower())
-        host_ufficiale = _host_senza_www(urlparse(f"//{official_host}").netloc.lower())
-        if not host_pagina or host_pagina != host_ufficiale:
+        host_ufficiale = _host_senza_www(official_host.lower())
+        if not host_ufficiale or _host_senza_www(urlparse(url).netloc.lower()) != host_ufficiale:
             return None
         try:
-            with self._client() as client:
-                resp = client.get(url)
-                resp.raise_for_status()
-                return resp.text
+            with self._client(follow_redirects=False) as client:
+                corrente = url
+                for _ in range(_MAX_REDIRECT + 1):
+                    resp = client.get(corrente)
+                    if resp.is_redirect:
+                        location = resp.headers.get("location")
+                        if not location:
+                            return None
+                        corrente = str(httpx.URL(corrente).join(location))
+                        # Re-check the host on EVERY hop: an off-host redirect
+                        # ends the fetch, it is never read.
+                        if _host_senza_www(urlparse(corrente).netloc.lower()) != host_ufficiale:
+                            return None
+                        continue
+                    if resp.status_code != 200:
+                        return None
+                    return resp.text
+            return None  # too many redirects
         except httpx.HTTPError:
             return None

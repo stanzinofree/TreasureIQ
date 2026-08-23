@@ -30,11 +30,29 @@
    esplicito (`EvidenceKind`). Utility in **`catalog/service_page.py`** (§1.2),
    seam in **`catalog/service_connectors/base.py`** (§1.3).
 
+**v3 → v3.1 (review del commit `8965a2e`, confine HTTP)**
+
+7. **Guardia host sul candidato REST.** Un `link` REST verso un host esterno
+   veniva usato direttamente come `source_url`/INFORMATION. Ora `_confermati`
+   scarta ogni candidato il cui host ≠ host ufficiale (normalizzato `www`),
+   **prima** della conferma: 0 confermati → `NOT_FOUND` (§2.4).
+8. **Guardia sui redirect nel fetcher reale.** `HttpxServiceFetcher.leggi_pagina`
+   non lascia più seguire i redirect a httpx: li segue a mano ricontrollando
+   l'host a **ogni hop** e sull'URL finale (redirect off-host → `None`). Host
+   verificato anche sull'URL iniziale. `transport` iniettabile → il confine HTTP
+   è testato con `httpx.MockTransport`, senza rete (§1.3).
+9. **Contesto autenticato ristretto.** `leggi_pagina_servizio` non usa più una
+   finestra piatta di N caratteri: legge il **contenitore immediato** del link
+   (indietro fino al confine di blocco più vicino) + `aria-label`/`title`
+   dell'ancora. Una frase «servizio online» in un'altra sezione non contamina
+   più un link generico (§1.2).
+
 ## 0. Cosa risolve questa slice
 
 Slice 3 ha dato il **resolver** (cache↔connettore) e il seam (`SourceConnector`
 + `ConnectorResult.service_references` + `ConnectorRegistry`), col registry
-**vuoto**. Slice 4 mette il **primo connettore di piattaforma** nel registry:
+**vuoto**. Slice 4 **rende disponibile il primo connettore di piattaforma** per
+il registry (il wiring in un registry di produzione è demandato a Slice 5, §5):
 dato un `ServiceKey`, interroga il portale WordPress/AgID del comune e produce
 **esattamente un** `ServiceReference` con le sue `ServiceAccessOption`
 (informativa, download PDF/DOC, e — solo se collegata *sulla pagina* — accesso

@@ -62,11 +62,25 @@ _AUTH_METHOD_MARKERS: tuple[tuple[str, AuthenticationMethod], ...] = (
 
 _ANCHOR_RE = re.compile(r"<a\b([^>]*)>(.*?)</a>", re.IGNORECASE | re.DOTALL)
 _HREF_RE = re.compile(r"""href\s*=\s*["']([^"']+)["']""", re.IGNORECASE)
+_TITLE_RE = re.compile(r"""title\s*=\s*["']([^"']*)["']""", re.IGNORECASE)
+_ARIA_LABEL_RE = re.compile(r"""aria-label\s*=\s*["']([^"']*)["']""", re.IGNORECASE)
 _TAG_RE = re.compile(r"<[^>]+>")
 _WS_RE = re.compile(r"\s+")
 
-#: How much text before an anchor to keep as context for marker matching.
-_CONTEXT_WINDOW = 200
+#: Block-level boundaries.  Context is read back only to the nearest one before
+#: the anchor, so an "servizio online" phrase in a DIFFERENT block/section can
+#: never be misread as evidence for a generic link — the evidence must be in the
+#: link's own immediate container (review of Slice 4: contextual, not merely
+#: "text that happens to appear a little earlier in the HTML").
+_BLOCK_BOUNDARY_RE = re.compile(
+    r"</?(?:p|li|div|td|th|tr|table|section|article|ul|ol|dl|dd|dt"
+    r"|h[1-6]|nav|header|footer|main|aside|figure|figcaption|form)\b[^>]*>",
+    re.IGNORECASE,
+)
+
+#: Hard cap on the lookback, applied BEFORE the block boundary is found (a
+#: pathological block with no boundary tags still can't drag in the whole page).
+_CONTEXT_WINDOW = 300
 
 
 class EvidenceKind(str, Enum):
@@ -127,6 +141,19 @@ def _e_accesso_online(testo: str) -> bool:
     return any(marker in basso for marker in _AUTH_MARKERS)
 
 
+def _contesto_contenitore(html: str, anchor_start: int) -> str:
+    """Text of the anchor's immediate container, back to the nearest block
+    boundary (capped by ``_CONTEXT_WINDOW``).  Not the whole page, not a flat
+    N-char window that straddles sections."""
+    finestra = html[max(0, anchor_start - _CONTEXT_WINDOW) : anchor_start]
+    ultimo = None
+    for m in _BLOCK_BOUNDARY_RE.finditer(finestra):
+        ultimo = m
+    if ultimo is not None:
+        finestra = finestra[ultimo.end() :]
+    return _testo(finestra)
+
+
 def leggi_pagina_servizio(
     html: str,
     *,
@@ -160,8 +187,16 @@ def leggi_pagina_servizio(
         anchor_text = _testo(inner)
         if not anchor_text:
             continue
-        contesto = _testo(html[max(0, match.start() - _CONTEXT_WINDOW) : match.start()])
-        combinato = f"{contesto} {anchor_text}"
+        # Evidence is the link's own context: anchor text, its aria-label/title
+        # attributes, and the immediate container block — not a flat lookback.
+        title_match = _TITLE_RE.search(attrs)
+        aria_match = _ARIA_LABEL_RE.search(attrs)
+        attributi = " ".join(
+            _testo(m.group(1)) for m in (aria_match, title_match) if m is not None
+        )
+        contenitore = _contesto_contenitore(html, match.start())
+        contesto = " ".join(p for p in (contenitore, attributi) if p) or None
+        combinato = f"{contenitore} {attributi} {anchor_text}"
 
         kind: EvidenceKind | None = None
         autenticazione: tuple[AuthenticationMethod, ...] = ()

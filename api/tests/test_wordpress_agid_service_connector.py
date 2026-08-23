@@ -12,6 +12,7 @@ are exercised:
 
 from __future__ import annotations
 
+import httpx
 import pytest
 
 from treasureiq.catalog.contracts import AccessMode, CAPABILITY_SERVICES, Surface
@@ -22,6 +23,7 @@ from treasureiq.catalog.data_contracts import (
 )
 from treasureiq.catalog.service_connectors.base import ServiceCandidate
 from treasureiq.catalog.service_connectors.wordpress_agid import (
+    HttpxServiceFetcher,
     WordPressAgidServiceConnector,
 )
 from treasureiq.catalog.service_contracts import (
@@ -211,6 +213,32 @@ def test_retrieve_zero_confirmed_is_not_found():
     assert result.service_references == ()
 
 
+def test_retrieve_rejects_rest_candidate_on_external_host():
+    # The REST payload confirms the key by title but points at an external host:
+    # it must be dropped, never become a source_url or an INFORMATION option.
+    fetcher = StubFetcher(
+        candidati=(
+            _candidato(1, "Carta d'identità elettronica", url="https://evil.example/cie/"),
+        )
+    )
+    c = _connector(fetcher)
+    result = c.retrieve(_request(), mappa=_mappa(), esito=None)
+    assert result.status is DataStatus.NOT_FOUND
+    assert result.service_references == ()
+    # The page for an off-host candidate is never even read.
+    assert fetcher.pagine_lette == []
+
+
+def test_retrieve_apex_candidate_accepted_against_www_official_host():
+    # The REST permalink is on the apex, the mappa site keeps www: same comune.
+    url = "https://comune.albano.rm.it/servizi/cie/"
+    fetcher = StubFetcher(candidati=(_candidato(1, "Carta d'identità", url=url),))
+    c = _connector(fetcher)
+    result = c.retrieve(_request(), mappa=_mappa(), esito=None)
+    assert result.status is DataStatus.FULFILLED
+    assert str(result.service_references[0].source_url) == url
+
+
 def test_retrieve_two_confirmed_is_ambiguous_not_found():
     fetcher = StubFetcher(
         candidati=(
@@ -331,6 +359,92 @@ def test_page_dedup_same_url_and_kind():
     )
     pagina = leggi_pagina_servizio(html, page_url=f"https://{_BASE}/s/", official_host=_BASE)
     assert len(pagina.links) == 1
+
+
+def test_page_online_phrase_in_other_block_is_not_evidence():
+    # The "servizio online" phrase lives in its own paragraph; the generic link
+    # is in a DIFFERENT block and must NOT inherit that evidence.
+    html = (
+        "<p>Puoi anche usare il servizio online del comune.</p>"
+        '<div class="menu"><a href="https://area.comune.it/">Area personale</a></div>'
+    )
+    pagina = leggi_pagina_servizio(html, page_url=f"https://{_BASE}/s/", official_host=_BASE)
+    assert pagina.links == ()
+
+
+def test_page_evidence_from_aria_label_attribute():
+    html = (
+        '<a href="https://albano.urbi.it/portale" aria-label="Accedi al servizio online">'
+        "Vai</a>"
+    )
+    pagina = leggi_pagina_servizio(html, page_url=f"https://{_BASE}/s/", official_host=_BASE)
+    assert len(pagina.links) == 1
+    assert pagina.links[0].kind is EvidenceKind.AUTHENTICATED_ONLINE
+
+
+def test_page_online_phrase_in_same_container_is_evidence():
+    html = (
+        '<p>Presenta la domanda online: '
+        '<a href="https://albano.urbi.it/portale">Accedi al servizio</a></p>'
+    )
+    pagina = leggi_pagina_servizio(html, page_url=f"https://{_BASE}/s/", official_host=_BASE)
+    assert len(pagina.links) == 1
+    assert pagina.links[0].kind is EvidenceKind.AUTHENTICATED_ONLINE
+
+
+# ── HttpxServiceFetcher — the real HTTP boundary (net-free via MockTransport) ─
+
+_OFFICIAL = "www.comune.albano.rm.it"
+_PAGE = f"https://{_OFFICIAL}/servizi/cie/"
+
+
+def _fetcher_with(handler) -> HttpxServiceFetcher:
+    return HttpxServiceFetcher(transport=httpx.MockTransport(handler))
+
+
+def test_fetcher_reads_page_on_official_host():
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(200, text="<html>ok</html>")
+
+    assert _fetcher_with(handler).leggi_pagina(url=_PAGE, official_host=_OFFICIAL) == "<html>ok</html>"
+
+
+def test_fetcher_rejects_redirect_to_external_host():
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.host == _OFFICIAL:
+            return httpx.Response(302, headers={"location": "https://evil.example/steal"})
+        # If the guard failed, this external body would leak through.
+        return httpx.Response(200, text="<html>LEAKED</html>")
+
+    assert _fetcher_with(handler).leggi_pagina(url=_PAGE, official_host=_OFFICIAL) is None
+
+
+def test_fetcher_follows_same_comune_redirect_www_to_apex():
+    apex = "comune.albano.rm.it"
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.host == _OFFICIAL:
+            return httpx.Response(301, headers={"location": f"https://{apex}/servizi/cie/"})
+        return httpx.Response(200, text="<html>apex</html>")
+
+    assert _fetcher_with(handler).leggi_pagina(url=_PAGE, official_host=_OFFICIAL) == "<html>apex</html>"
+
+
+def test_fetcher_rejects_initial_url_off_host():
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(200, text="<html>should-not-be-fetched</html>")
+
+    result = _fetcher_with(handler).leggi_pagina(
+        url="https://evil.example/cie/", official_host=_OFFICIAL
+    )
+    assert result is None
+
+
+def test_fetcher_non_200_is_none():
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(404)
+
+    assert _fetcher_with(handler).leggi_pagina(url=_PAGE, official_host=_OFFICIAL) is None
 
 
 # ── recogniser re-run on WordPress service titles ───────────────────────────

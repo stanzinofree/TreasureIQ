@@ -69,6 +69,8 @@ from treasureiq.catalog import (
     CatalogRuntime,
     select_batch,
 )
+from treasureiq.catalog.contracts import CAPABILITY_NOTICES
+from treasureiq.catalog.notices import notices_batch, snapshot_da_bandi_live
 from treasureiq.chat.categorie import Categoria, topics_di
 from treasureiq.chat.intent import (
     AMBIGUOUS_ROLE_TOPICS,
@@ -2502,6 +2504,33 @@ def _plan_connettore(
     return plan, select_batch(plan, tuple(batches))
 
 
+def _notices_plan_e_batch(
+    esito_neutro: BandiLiveEsito, target_istat: str
+) -> tuple[list[DataBatch], QueryPlan, DataBatch | None]:
+    """Project the NEUTRAL acquisition result into a v1 `notices` DataBatch and
+    the closed plan that selects it (Ramo 2, slice 2).
+
+    Fed the acquisition result BEFORE the chat ranks/filters it: the canonical
+    record carries no presentation field (tema/consigliato/corrisponde stay in
+    `bandi_live`, projected downstream). Same shape as the office drill — the
+    batch travels in `ChatAnswer.data_batches` for censimento/API, the chat
+    reply and ordering are untouched.
+    """
+    request = DataRequest(
+        request_id=f"chat:{target_istat}:transparency:notices",
+        source_id=target_istat,
+        surface=Surface.TRANSPARENCY,
+        capability=CAPABILITY_NOTICES,
+        freshness=FreshnessPolicy(max_age_seconds=86400),
+        limits=RequestLimits(),
+        manifest_revision=1,
+    )
+    snapshot = snapshot_da_bandi_live(esito_neutro)
+    batch = notices_batch(snapshot, request)
+    plan = build_query_plan(request)
+    return [batch], plan, select_batch(plan, (batch,))
+
+
 async def _risposta_live(
     *,
     hint: str | None,
@@ -3635,6 +3664,12 @@ async def _risposta_bandi(
             bandi_live=None,
         )
 
+    # Neutral acquisition result, captured BEFORE the chat ranks/filters it: the
+    # canonical `notices` batch must not carry presentation order/fields. The
+    # coperto_con_bandi branch below rebinds `esito` via model_copy (new object),
+    # so this reference stays neutral.
+    esito_neutro = esito
+
     if esito.esito == "comune_ignoto":
         reply = (
             "Non riconosco questo comune per la ricerca dei bandi. Verifica "
@@ -3708,6 +3743,25 @@ async def _risposta_bandi(
                 "requisiti di ciascuno."
             )
 
+    # v1 contract (Ramo 2): the canonical `notices` DataBatch, projected from the
+    # NEUTRAL esito, rides alongside the rich `bandi_live` payload. The reply and
+    # the profile ordering above are untouched — presentation stays here, the
+    # canonical record stays clean.
+    data_batches, query_plan, selected = _notices_plan_e_batch(
+        esito_neutro, target_istat
+    )
+
+    # Propagate the batch access level to the answer (same as the office rail,
+    # line ~2362): the UI/consumer reads ChatAnswer.access_mode without opening
+    # the batch. coperto_senza_bandi stays MEDIATED (source read, just empty).
+    access_mode = (
+        selected.access_mode.value
+        if selected is not None
+        else data_batches[0].access_mode.value
+        if data_batches
+        else None
+    )
+
     return ChatAnswer(
         reply=reply,
         topic=Topic.BANDI,
@@ -3717,10 +3771,13 @@ async def _risposta_bandi(
         matches=[],
         spid_required=False,
         spid_reason=None,
-        access_mode=None,
+        access_mode=access_mode,
         citizen_effort=0,
         info=None,
         bandi_live=esito,
+        data_batches=data_batches,
+        query_plan=query_plan,
+        selected_data_batch=selected,
     )
 
 

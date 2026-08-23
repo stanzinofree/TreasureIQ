@@ -76,7 +76,14 @@ class ServicePortalRole(str, Enum):
 
 
 class ServiceAccessOption(_StrictModel):
-    """One official way to reach a service discovered by a connector."""
+    """One official way to reach a service discovered by a connector.
+
+    ``sp_*`` carry verified SP provenance merged in read-time (Ramo 3, Slice 6)
+    onto an ``AUTHENTICATED_ONLINE`` option whose URL matches a discovered
+    ``ServicePortalCandidate`` of the same source (per-link evidence, §2/§3.1).
+    Optional, default ``None`` — a pure BASE option (no SP link) leaves them
+    unset; a v2 entry read by a v3 reader stays valid because they are optional.
+    """
 
     mode: ServiceAccessMode
     url: AnyHttpUrl
@@ -86,6 +93,9 @@ class ServiceAccessOption(_StrictModel):
     official: bool = True
     source_url: AnyHttpUrl | None = None
     automatable: bool = False
+    sp_platform_id: str | None = None
+    sp_role: ServicePortalRole | None = None
+    sp_fingerprint: str | None = None
 
 
 class ServiceReference(_StrictModel):
@@ -110,7 +120,10 @@ class ServiceReference(_StrictModel):
 #: cache treats any ``schema_version`` other than this as a miss (re-resolve).
 #: v2 (Slice 5) added the ``connector`` field: a v1 entry has no connector and
 #: is not safely readable → miss/regenerate, no risky migration.
-SERVICE_CACHE_SCHEMA_VERSION = 2
+#: v3 (Slice 6) added the optional ``sp_*`` provenance fields on
+#: ``ServiceAccessOption``: read-time merge never writes them, so a v2 cache is
+#: still readable (fields optional), but the policy bumps on every shape change.
+SERVICE_CACHE_SCHEMA_VERSION = 3
 
 
 class CachedService(_StrictModel):

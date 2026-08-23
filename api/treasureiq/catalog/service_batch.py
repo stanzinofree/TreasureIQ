@@ -34,6 +34,12 @@ def _record(service_id: str, opzione: ServiceAccessOption) -> dict:
         "source_url": str(opzione.source_url) if opzione.source_url else None,
         "requires_authentication": opzione.requires_authentication,
         "authentication": tuple(metodo.value for metodo in opzione.authentication),
+        # Provenienza SP arricchita read-time (Ramo 3, Slice 6): `None` su
+        # un'opzione Base pura (nessun aggancio SP), valorizzata sull'opzione
+        # AUTHENTICATED_ONLINE con evidenza per-link. Viaggia nel DataBatch.
+        "sp_platform_id": opzione.sp_platform_id,
+        "sp_role": opzione.sp_role.value if opzione.sp_role else None,
+        "sp_fingerprint": opzione.sp_fingerprint,
     }
 
 

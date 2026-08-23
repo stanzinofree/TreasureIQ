@@ -77,6 +77,8 @@ from treasureiq.catalog.notices import notices_batch, snapshot_da_bandi_live
 from treasureiq.catalog.planner import service_request
 from treasureiq.catalog.service_batch import service_reference_batch
 from treasureiq.catalog.service_contracts import AuthenticationMethod, ServiceAccessMode
+from treasureiq.catalog.service_merge import merge_service_portals
+from treasureiq.catalog.service_portal_connector import _inventory_from_live
 from treasureiq.catalog.service_registry import (
     default_service_registry,
     service_query_fetch_coordinator,
@@ -3876,6 +3878,16 @@ async def _risposta_modulistica(
     # → miss onesto, niente fallback SP.
     if resolved is None:
         return _modulistica_miss_urp(comune_nome)
+
+    # Slice 6: arricchimento read-time della provenienza SP sulle opzioni
+    # AUTHENTICATED_ONLINE, SOLO per evidenza per-link (URL Base == entrypoint SP
+    # censito dello stesso comune). Pura, senza rete, senza scrittura in cache:
+    # legge l'inventory già persistito; assente/senza match → identità (§4).
+    inventory = _inventory_from_live(target_istat)
+    reference2 = merge_service_portals(
+        source_id=target_istat, reference=resolved.reference, inventory=inventory
+    )
+    resolved = resolved.model_copy(update={"reference": reference2})
 
     # Catena canonica: DataBatch → QueryPlan → selected_data_batch, come uffici
     # e bandi. La `Freshness` viene dall'envelope (FRESH per cache-hit, LIVE per

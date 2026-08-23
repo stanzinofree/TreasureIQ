@@ -114,7 +114,14 @@ def test_records_tipizzati_per_opzione():
             "source_url",
             "requires_authentication",
             "authentication",
+            "sp_platform_id",
+            "sp_role",
+            "sp_fingerprint",
         }
+        # Reference Base pura: nessun aggancio SP → campi provenienza a None.
+        assert r["sp_platform_id"] is None
+        assert r["sp_role"] is None
+        assert r["sp_fingerprint"] is None
     auth = next(r for r in batch.records if r["mode"] == ServiceAccessMode.AUTHENTICATED_ONLINE.value)
     assert auth["requires_authentication"] is True
     assert auth["authentication"] == ("spid", "cie")

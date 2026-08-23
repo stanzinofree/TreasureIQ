@@ -37,6 +37,22 @@ class ServiceKey(str, Enum):
     TRIBUTI = "tributi"
 
 
+#: One canonical REST search term per key, used to NARROW a single ``search=``
+#: query against the WordPress service CPT (Ramo 3, Slice 4).  This is the
+#: acquisition side of the vocabulary and is deliberately distinct from the
+#: recogniser's markers (``chat/service_key.py``): the recogniser interprets
+#: citizen text, this drives one deterministic fetch.  The candidate title is
+#: still confirmed by the recogniser afterwards, so a single term is enough —
+#: no multi-query fan-out (that would add traffic and ambiguity).
+SERVICE_SEARCH_TERM: dict["ServiceKey", str] = {
+    ServiceKey.CARTA_IDENTITA: "carta d'identità",
+    ServiceKey.CAMBIO_RESIDENZA: "cambio di residenza",
+    ServiceKey.ACCESSO_ATTI: "accesso agli atti",
+    ServiceKey.STATO_CIVILE: "stato civile",
+    ServiceKey.TRIBUTI: "tributi",
+}
+
+
 class ServiceAccessMode(str, Enum):
     INFORMATION = "information"
     DOWNLOAD = "download"

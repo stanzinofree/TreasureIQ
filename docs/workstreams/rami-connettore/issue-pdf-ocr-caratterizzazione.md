@@ -1,9 +1,46 @@
 # Issue (nota tecnica): 3 failure PDF/OCR in `test_wp_pages_caratterizzazione`
 
-**Stato:** aperta — problema noto, da risolvere indipendentemente.
+**Stato:** ✅ CHIUSA — 2026-08-23. Suite completamente verde: **1534 passed, 6 skipped, 0 failed**, PARITY 35/35.
 **Registrata:** 2026-08-23, alla chiusura del blocker seam-guard (M3) e al merge di ComWeb nell'integrazione.
-**Non blocca:** né il fix M3 (`mappa_connettore`), né il connettore ComWeb (Ramo 3 #2). Entrambi review-clean e mergiati.
-**Blocca:** dichiarare `make test` completamente verde → **niente merge su `main`** finché questa non è chiusa.
+**Non bloccava:** né il fix M3 (`mappa_connettore`), né il connettore ComWeb (Ramo 3 #2). Entrambi review-clean e mergiati.
+**Bloccava:** dichiarare `make test` completamente verde → niente merge su `main` finché aperta. **Ora chiusa.**
+
+## Soluzione applicata (triage confermato: sovrapposizione semantica in `corpus.py`)
+
+Radice reale: `FULL_OCR` ("serve OCR") veniva conflato con "PDF illeggibile"
+(`_skip(..., illegible=True)`), forzando `L3_illeggibile` su documenti validi ma
+con OCR non ancora eseguito.
+
+Fix in due parti, come da triage:
+
+1. **Produzione** — `FULL_OCR` non incrementa più `illegible_count`. Introdotto
+   uno stato dedicato **"OCR rinviato/non misurato"** (`ocr_deferred_count`),
+   restituito separatamente da `collect_pdf_segments`. Un PDF che richiede OCR
+   resta `L1_manuale` ("non ancora letto"), mai `L3` ("illeggibile"). File:
+   `extract/corpus.py` (nuovo conteggio + `_skip(..., ocr_deferred=True)`),
+   più i 3 chiamanti aggiornati alla firma a 5 valori (`ingest/wp_pages.py`,
+   `api.py`, `bandi_live.py`). `L3` resta riservato alla vera illeggibilità
+   (INVALID / parse-fail / zero testo estraibile).
+
+2. **Test** — `test_wp_pages_caratterizzazione` ora inietta un **inspector
+   deterministico** (`_DeterministicPdfInspector`) via nuovo parametro
+   `WPPagesConnector(pdf_inspector=...)`: `%PDF` → TEXT_BASED/NATIVE_TEXT (apre
+   via pypdf), altrimenti INVALID. Budget/segmenti/ladder non dipendono più
+   dall'euristica/versione del pacchetto PDF Inspector installato. Nessuna
+   fixture modificata; `FULL_OCR` non trattato indiscriminatamente come "PDF
+   aperto" (la distinzione testo-estratto vs OCR-da-eseguire è preservata).
+
+   La nuova semantica è bloccata da:
+   `test_corpus_pdf_inspection::test_corpus_routes_scanned_pdf_to_ocr_before_pypdf`
+   (ora asserisce `illegible == 0`, `ocr_deferred == 1`).
+
+Nota: l'asserzione su `illegible.pdf` è passata da "parsing fallito" (pypdf) a
+"ispezione fallita / Not a PDF" — i byte plain-text vengono ora respinti al gate
+d'ispezione uno stadio prima, restando comunque skip illeggibile audito.
+
+---
+
+### Cronistoria (analisi originale, mantenuta per tracciabilità)
 
 ## I test rossi
 

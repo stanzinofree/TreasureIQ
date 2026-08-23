@@ -153,6 +153,7 @@ class WPPagesConnector(Connector):
         ente: str,
         codice_istat: str,
         extractor: RequirementsExtractor | None = None,
+        pdf_inspector: Any | None = None,
         timeout: float = 30.0,
         max_pages: int = 50,
     ) -> None:
@@ -162,6 +163,11 @@ class WPPagesConnector(Connector):
         self.codice_istat = codice_istat
         self.stats.source_id = f"{self.name}:{codice_istat}"
         self._extractor = extractor
+        #: Optional PDF-inspection backend, threaded to `collect_pdf_segments`.
+        #: Default `None` uses the installed `pdf_inspector` heuristic in prod;
+        #: tests inject a deterministic stub so the recovery ladder is asserted
+        #: against a fixed route, never against the inspector's version/heuristic.
+        self._pdf_inspector = pdf_inspector
         self.max_pages = max_pages
         #: Audit trail of pages the content filter dropped, and why. Not part
         #: of `FetchStats` because these are pre-filter exclusions, not
@@ -274,7 +280,7 @@ class WPPagesConnector(Connector):
         # genuinely ran.
         recovery_started = time.perf_counter()
 
-        pdf_segments, pdf_notes, pdf_skipped, pdf_illegible_count = (
+        pdf_segments, pdf_notes, pdf_skipped, pdf_illegible_count, _pdf_ocr_deferred_count = (
             self._collect_pdf_segments(pdf_urls)
         )
 
@@ -382,11 +388,13 @@ class WPPagesConnector(Connector):
 
     def _collect_pdf_segments(
         self, pdf_urls: list[str]
-    ) -> tuple[list[dict[str, Any]], list[str], list[PdfSkip], int]:
+    ) -> tuple[list[dict[str, Any]], list[str], list[PdfSkip], int, int]:
         """Download and extract text from up to `MAX_PDFS_PER_PAGE` attachments.
 
         Thin wrapper over `extract.corpus.collect_pdf_segments` (B1): this
         connector owns the `httpx.Client` and `base_url`, the helper owns the
         budget/audit logic shared with the future `bandi_live` engine.
         """
-        return collect_pdf_segments(self._client, self.base_url, pdf_urls)
+        return collect_pdf_segments(
+            self._client, self.base_url, pdf_urls, inspector=self._pdf_inspector
+        )

@@ -2703,7 +2703,7 @@ def _analizza_at_pdf(codice_istat: str, pdf_url: str) -> ATAnalisiResponse:
     from treasureiq.ingest.censimento import _Sonda
 
     with _Sonda() as sonda:
-        pdf_segments, notes, skipped, _illegible_count = collect_pdf_segments(
+        pdf_segments, notes, skipped, _illegible_count, _ocr_deferred_count = collect_pdf_segments(
             sonda._client, base, ammessi
         )
         _corpus, _boundary_segments, visible_segments = build_corpus(

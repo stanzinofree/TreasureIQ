@@ -95,6 +95,8 @@ def fetch_guardato(
     max_bytes: int,
     max_redirect_hop: int = DEFAULT_MAX_REDIRECT_HOP,
     host_atteso: str | None = None,
+    allow_one_cross_host_redirect: bool = False,
+    return_non_200: bool = False,
 ) -> tuple[httpx.Headers, bytes, str] | None:
     """Scarica `url` con la guardia SSRF PER-HOP: schema http(s), identità
     host, risoluzione DNS a IP pubblico rivalidati su OGNI hop (compreso il
@@ -115,16 +117,28 @@ def fetch_guardato(
     — mai un'eccezione che risale al chiamante, mai un dato indovinato al
     suo posto."""
     corrente = url
-    for _ in range(max_redirect_hop + 1):
+    host_iniziale: str | None = None
+    cross_host_used = False
+    for hop in range(max_redirect_hop + 1):
         richiesta = urlsplit(corrente)
         if richiesta.scheme not in ("http", "https") or not richiesta.hostname:
             return None
         host_normalizzato = host_senza_www(richiesta.hostname.lower())
+        if host_iniziale is None:
+            host_iniziale = host_normalizzato
         if host_atteso is None:
             host_atteso = host_normalizzato
-        elif host_normalizzato != host_atteso:
+        elif host_normalizzato != host_atteso and not (
+            allow_one_cross_host_redirect and not cross_host_used
+        ):
             logger.warning("fetch guardato fuori host atteso, scartato: %s -> %s", url, corrente)
             return None
+        elif host_normalizzato != host_atteso:
+            # A single public cross-host redirect is allowed for known
+            # municipal SaaS entrypoints (AT/SP). Lock the following hops to
+            # the new host so redirect chains cannot turn into open fetching.
+            host_atteso = host_normalizzato
+            cross_host_used = True
         if not host_risolve_a_ip_sicuro(richiesta.hostname):
             logger.warning("fetch guardato host non risolve a IP pubblico, scartato: %s", corrente)
             return None
@@ -140,6 +154,8 @@ def fetch_guardato(
                         corrente = urljoin(corrente, location)
                         continue
                     if risposta.status_code != 200:
+                        if return_non_200:
+                            return risposta.headers, b"", corrente, risposta.status_code  # type: ignore[return-value]
                         return None
                     intestazioni = risposta.headers
                     buffer = bytearray()

@@ -746,6 +746,17 @@ class DocumentOut(BaseModel):
     verificato_il: date | None = None
 
 
+class ResponsabileOut(BaseModel):
+    """Chi risponde di un ufficio (accountability), mirror di
+    ``connettore.Responsabile``. Best-effort: solo dove la scheda lo pubblica
+    strutturato, mai inferito da un LLM (D-07). `nome` sempre presente;
+    `ruolo`/`email` `None` = non pubblicato (D-05)."""
+
+    nome: str
+    ruolo: str | None = None
+    email: str | None = None
+
+
 class OfficeOut(BaseModel):
     nome: str
     telefono: str | None
@@ -760,6 +771,13 @@ class OfficeOut(BaseModel):
     #: ordinary inbox does not — and a citizen asking their comune to publish
     #: its data deserves the channel that cannot simply be ignored.
     pec: str | None = None
+    #: Sede fisica dell'ufficio (o dell'edificio ospitante), letta dalla scheda
+    #: al drill (Ramo 1). `None` dove la pagina non la pubblica — degrado
+    #: onesto, mai un indirizzo inventato (D-05).
+    indirizzo: str | None = None
+    #: Chi risponde dell'ufficio, quando la scheda lo pubblica strutturato.
+    #: `None` altrimenti (D-05); mai inferito da un LLM (D-07).
+    responsabile: ResponsabileOut | None = None
 
 
 class WebResultOut(BaseModel):
@@ -975,6 +993,12 @@ def to_info_out(info: InfoAnswer) -> InfoOut:
                 # the certified address cannot end up belonging to a different
                 # body than the office printed beside it.
                 pec=_pec_di(target[0]) if target is not None else None,
+                indirizzo=info.office.indirizzo,
+                responsabile=(
+                    ResponsabileOut(**info.office.responsabile.model_dump())
+                    if info.office.responsabile is not None
+                    else None
+                ),
             )
             if info.office is not None
             else None

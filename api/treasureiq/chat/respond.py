@@ -84,7 +84,7 @@ from treasureiq.chat.intent import (
 )
 from treasureiq.chat.engine import chat_engine
 from treasureiq.chat.nomi_genere import sesso_da_nome
-from treasureiq.connettore import UfficioConnettore
+from treasureiq.connettore import Responsabile, UfficioConnettore
 from treasureiq.extract.providers import LLMProvider, load_provider
 from treasureiq.ingest.censimento import Indirizzabilita
 from treasureiq.ingest.websearch import WebSearchNonConfigurato, entro_ttl, search_web
@@ -219,6 +219,14 @@ class OfficeAnswer:
     #: ricontrollabile accanto alla forma normalizzata (D-07). `None` quando
     #: `orari` è già il verbatim (niente da affiancare) o manca del tutto.
     orari_fonte: str | None = None
+    #: Sede fisica dell'ufficio (o dell'edificio ospitante), letta dalla scheda
+    #: durante il drill (Ramo 1). `None` dove la pagina non la pubblica: degrado
+    #: onesto, mai un indirizzo inventato (D-05).
+    indirizzo: str | None = None
+    #: Chi risponde dell'ufficio (accountability). Best-effort, solo dove la
+    #: scheda lo pubblica strutturato — mai inferito da un LLM (D-07). `None`
+    #: dove non pubblicato.
+    responsabile: Responsabile | None = None
 
 
 @dataclass
@@ -2142,6 +2150,15 @@ async def _office_da_ufficio_nominato(
             email=", ".join(record["email"]) or None,
             orari=record["orari"],
             orari_fonte=arricchito.orari_fonte,
+            # Campi additivi Ramo 1: il record è il dump completo dell'ufficio,
+            # quindi indirizzo/responsabile viaggiano già qui. `None`/assente
+            # dove la scheda non li pubblica (D-05), mai un valore inventato.
+            indirizzo=record.get("indirizzo"),
+            responsabile=(
+                Responsabile(**record["responsabile"])
+                if record.get("responsabile")
+                else None
+            ),
         ),
         data_batches=[batch],
         query_plan=query_plan,

@@ -410,6 +410,14 @@ export interface InfoOffice {
   /** Certified address from IPA. Preferred as the recipient of a formal
    * request: a PEC obliges a reply, an ordinary inbox does not. */
   pec: string | null;
+  /** Physical seat of the office (or the building hosting it), read from the
+   *  office card during the drill (Ramo 1). `null`/absent where the page does
+   *  not publish it — honest degradation, never an invented address (D-05).
+   *  Optional for back-compat with answers produced before Ramo 1. */
+  indirizzo?: string | null;
+  /** Who is accountable for the office, when the card publishes it structured;
+   *  `null`/absent otherwise (D-05), never inferred by an LLM (D-07). */
+  responsabile?: Responsabile | null;
 }
 
 /** One cached web-search hit (D-28, `M6_web_aperto`) — verbatim title and

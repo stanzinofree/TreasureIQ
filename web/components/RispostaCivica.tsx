@@ -234,6 +234,28 @@ export default function RispostaCivica({
           <h4>Ufficio competente</h4>
           <p className="civica__ufficio">{office.nome}</p>
 
+          {/* Chi risponde dell'ufficio (accountability, Ramo 1). Best-effort:
+              solo dove la scheda lo pubblica, mai inferito (D-07). `email`
+              personale non è quasi mai pubblicata → di norma nome + ruolo. */}
+          {office.responsabile && (
+            <p className="civica__responsabile">
+              <span className="civica__responsabile-label">Responsabile</span>
+              <span className="civica__responsabile-nome">
+                {office.responsabile.nome}
+              </span>
+              {office.responsabile.ruolo && (
+                <span className="civica__responsabile-ruolo">
+                  {office.responsabile.ruolo}
+                </span>
+              )}
+              {office.responsabile.email && (
+                <a href={`mailto:${office.responsabile.email}`}>
+                  {office.responsabile.email}
+                </a>
+              )}
+            </p>
+          )}
+
           <div className="civica__contatti">
             {telefoni.length > 0 && (
               <div className="civica__contatto">
@@ -283,6 +305,23 @@ export default function RispostaCivica({
                     Scrivi via PEC
                   </a>
                   <Copia valore={office.pec} cosa="la PEC" />
+                </span>
+              </div>
+            )}
+
+            {office.indirizzo && (
+              <div className="civica__contatto">
+                <span className="civica__contatto-label">Indirizzo</span>
+                <span className="civica__indirizzo">{office.indirizzo}</span>
+                {/* Onestà semantica (Ramo 1): l'indirizzo è la sede
+                    dell'edificio/ente ospitante, spesso condivisa da più
+                    uffici — «dove vado di persona», non un recapito esclusivo
+                    di questo ufficio. */}
+                <span className="civica__nota">
+                  Sede dell'edificio, può ospitare più uffici
+                </span>
+                <span className="civica__contatto-azioni">
+                  <Copia valore={office.indirizzo} cosa="l'indirizzo" />
                 </span>
               </div>
             )}

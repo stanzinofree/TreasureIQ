@@ -4534,6 +4534,38 @@ a {
   font-weight: 600;
 }
 
+/* Chi risponde dell'ufficio: una riga di accountability sopra i recapiti, non
+ * un contatto fra gli altri — l'email personale non è quasi mai pubblicata,
+ * quindi di norma è nome + ruolo. */
+.civica__responsabile {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--ma-2);
+  margin: 0 0 var(--ma-2);
+  font-size: 0.9rem;
+}
+
+.civica__responsabile-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--sumi-faint);
+}
+
+.civica__responsabile-nome {
+  font-weight: 600;
+}
+
+.civica__responsabile-ruolo {
+  color: var(--sumi-soft);
+}
+
+/* L'indirizzo è la sede fisica, in cifre come le scrive il comune. */
+.civica__indirizzo {
+  font-variant-numeric: tabular-nums;
+}
+
 .civica__contatti {
   display: flex;
   flex-wrap: wrap;

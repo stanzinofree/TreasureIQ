@@ -40,7 +40,8 @@ def records(
         # Recapiti + `indirizzo` (canale fisico, "dove vado di persona").
         # Gate invariato sui recapiti telematici: l'indirizzo è supplementare,
         # non basta da solo a far comparire un ufficio fra i "contatti".
-        # `responsabile` resta fuori: vive nella capability `responsible`.
+        # `responsabile` resta fuori dai contatti: l'accountability viaggia nel
+        # dump `offices` (la scheda intera), non in una capability separata.
         return [
             {
                 "nome": office.nome,

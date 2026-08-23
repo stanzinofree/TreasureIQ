@@ -1,7 +1,9 @@
 # Ramo 1 — Ufficio
 
 > Orari, contatti e responsabili di un ufficio comunale.
-> Surface `ORDINARY_DATA` · capability `offices` + `contacts` (+ `responsible` da aggiungere).
+> Surface `ORDINARY_DATA` · capability `offices` + `contacts`. Il responsabile
+> viaggia nel dump `offices` (la scheda intera), **non** in una capability
+> separata (decisione E3).
 
 > **Nota di lettura.** Questo documento è aggiornato allo **stato reale della Fase 3**
 > (motore unico, branch `refactor/source-engine`). Ogni sezione distingue
@@ -118,13 +120,16 @@ direttamente in chat scavalcando `EsitoConnettore`.
 |------------|---------|------------------------------|------------|-------|
 | `offices` | ORDINARY_DATA | `uffici[]` (dump completo — porta anche `indirizzo`+`responsabile`) | **MEDIATED se record, UNAVAILABLE se no** | ① in Fase 3 |
 | `contacts` | ORDINARY_DATA | `uffici[]` → {nome,url,telefoni,email,pec,**indirizzo**} — gate sui recapiti telematici, indirizzo supplementare | **MEDIATED se record, UNAVAILABLE se no** | ① proiezione estesa |
-| `responsible` | ORDINARY_DATA | `uffici[]` → {nome, responsabile} | come sopra | ② nuova capability |
-
 > `offices` porta `indirizzo`/`responsabile` **gratis** (dump completo del
-> modello). `contacts` include `indirizzo` (canale fisico) ma **non**
-> `responsabile`: l'accountability avrà la capability dedicata `responsible`.
-> Il gate `contacts` resta sui recapiti telematici — l'indirizzo da solo non
-> basta a far comparire un ufficio fra i contatti.
+> modello) fino al `ChatAnswer`. `contacts` include `indirizzo` (canale fisico)
+> ma **non** `responsabile`. Il gate `contacts` resta sui recapiti telematici —
+> l'indirizzo da solo non basta a far comparire un ufficio fra i contatti.
+>
+> **E3 (deciso)**: nessuna capability `responsible` separata. L'accountability
+> viaggia già nel dump `offices` → DataBatch → `ChatAnswer`; una capability
+> dedicata sarebbe un secondo rail senza consumatore. Se un domani servisse
+> interrogarla da sola (censimento/API), si aggiunge allora — ramo in
+> `_projection.records` + capability + manifest — senza toccare la chat.
 
 > ⚠️ Correzione AccessMode: non è "DIRECT se REST / MEDIATED se scrape". Queste
 > piattaforme espongono dati strutturati **solo** via connettore HTML dedicato,
@@ -181,16 +186,21 @@ legacy** (vedi sotto), non passa dal contratto v1.
    completo; `contacts` aggiunge `indirizzo` (gate recapiti invariato). Un solo punto
    toccato, non 7 adapter.
 
-### ② Prossimo ciclo — cosa resta
-3. **Capability `responsible`** — aggiunta a `FlottaBaseConnettore.capabilities`,
-   manifest, planner (`_CAPABILITY_BY_TOPIC`), test. **Solo quando** almeno una
-   piattaforma produce dati reali (altrimenti capability sempre UNAVAILABLE = rumore).
-4. **Estrazione per famiglia** di `indirizzo`/`responsabile` (best-effort, degrado onesto).
-5. **Migrazione drill on-demand a v1**: oggi `_office_da_ufficio_nominato` →
-   `leggi_connettore` + `leggi_orari_ufficio` è **ancora legacy** (chiamata diretta
-   al reader v0, non un `DataRequest`/`DataBatch`). Va portato sul contratto v1 e
-   generalizzato oltre municipium.
-6. **Rendering UX/chat** — per ultimo, quando i campi arrivano dal `DataBatch`.
+### ② Spedito nel ciclo (2026-08-22/23)
+3. **Estrazione per famiglia** di `indirizzo`/`responsabile` — ✅ `ufficio_estrattori.py`
+   (puri, per famiglia, best-effort, degrado onesto), agganciati in `leggi_orari_ufficio`
+   sulla stessa pagina già fetchata (no doppia fetch). Guardia cache `VERSIONE_ESTRATTORI`.
+4. **Migrazione drill on-demand a v1** — ✅ `_office_da_ufficio_nominato` passa dal
+   `DataBatch` (`_batch_offices_decisione`) e ritorna `UfficioDrillResult` (OfficeAnswer
+   + artefatti v1); entrambi i chiamanti trasportano `data_batches`/`query_plan` nel
+   `ChatAnswer`, nessun batch perso.
+5. **Capability `responsible`** — ❌ **non aggiunta (decisione E3)**: l'accountability
+   viaggia già nel dump `offices` → DataBatch → `ChatAnswer`; un rail dedicato sarebbe
+   senza consumatore. Si aggiunge solo se servisse interrogarla da sola (censimento/API).
+
+### Cosa resta
+6. **Rendering UX/chat** — per ultimo: i campi arrivano al `DataBatch` ma la scheda verde
+   non li mostra ancora (OfficeAnswer/API web invariati).
 
 ---
 
@@ -210,12 +220,13 @@ legacy** (vedi sotto), non passa dal contratto v1.
    condivisa dall'intera flotta. Il "porting" della meccanica è chiuso.
 4. **Drill on-demand generalizzato** — sì, ma è ② prossimo ciclo: oggi è legacy v0.
 
-## Prossimo passo → estensione (non ricostruzione)
+## Stato finale (estensione, non ricostruzione)
 
-Ordine di lavoro, per livelli separati:
-1. Estendere modello `UfficioConnettore` (+`indirizzo`, +`responsabile`) + mirror TS.
-2. Estendere `_projection.records` per `offices`/`contacts` con i nuovi campi.
-3. Aggiungere capability `responsible` **solo** quando ≥1 piattaforma dà dati reali.
-4. Estrazione `indirizzo`/`responsabile` per famiglia (best-effort, degrado onesto).
-5. Migrare il drill on-demand su `DataRequest`/`DataBatch` e generalizzarlo.
-6. Rendering UX/chat per ultimo.
+Per livelli separati:
+1. ✅ Modello `UfficioConnettore` (+`indirizzo`, +`responsabile`) + mirror TS.
+2. ✅ `_projection.records` per `offices`/`contacts` coi nuovi campi.
+3. ❌ Capability `responsible` — non aggiunta (E3): l'accountability viaggia nel dump
+   `offices`; nessun rail dedicato finché non ha un consumatore proprio.
+4. ✅ Estrazione `indirizzo`/`responsabile` per famiglia (best-effort, degrado onesto).
+5. ✅ Drill on-demand su `DataRequest`/`DataBatch`, generalizzato oltre municipium.
+6. ⏳ Rendering UX/chat — unico rimasto (scheda verde non mostra ancora i campi).

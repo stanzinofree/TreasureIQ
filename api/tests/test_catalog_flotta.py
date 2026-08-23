@@ -236,8 +236,8 @@ def test_offices_batch_carries_indirizzo_e_responsabile():
 
 def test_contacts_batch_include_indirizzo_non_responsabile():
     """`contacts` porta `indirizzo` (canale fisico) ma NON `responsabile`:
-    l'accountability vive nella capability dedicata `responsible` (prossimo
-    step), non nei recapiti."""
+    l'accountability viaggia nel dump `offices` (la scheda intera), non nei
+    recapiti — nessuna capability separata."""
     esito = EsitoConnettore(
         codice_istat=ISTAT, piattaforma="municipium", letto_il=LETTO_IL,
         uffici=[_ufficio_arricchito()],

@@ -46,7 +46,7 @@ _BASE = "www.comune.albano.rm.it"
 class StubFetcher:
     """A ``ServiceFetcher`` returning canned candidates and page HTML.
 
-    Records the last ``cerca_servizi`` term so a test can assert the connector
+    Records the last ``scopri_servizi`` term so a test can assert the connector
     drove the query with the canonical term."""
 
     def __init__(
@@ -60,7 +60,7 @@ class StubFetcher:
         self.ultimo_term: str | None = None
         self.pagine_lette: list[str] = []
 
-    def cerca_servizi(self, *, base_url, rest_base, term, limit):
+    def scopri_servizi(self, *, base_url, term, limit):
         self.ultimo_term = term
         return self._candidati
 
@@ -110,7 +110,7 @@ def _connector(fetcher: StubFetcher) -> WordPressAgidServiceConnector:
 def _candidato(
     wid: int, title: str, url: str = f"https://{_BASE}/servizi/carta-identita/"
 ) -> ServiceCandidate:
-    return ServiceCandidate(wordpress_id=wid, title=title, url=url)
+    return ServiceCandidate(native_id=str(wid), title=title, url=url)
 
 
 # ── supports() — the barrier of non-confusion ───────────────────────────────
@@ -476,15 +476,18 @@ def test_fetcher_non_200_is_none():
     assert _fetcher_with(handler).leggi_pagina(url=_PAGE, official_host=_OFFICIAL) is None
 
 
-# ── cerca_servizi — same redirect discipline on the REST read ────────────────
+# ── scopri_servizi — same redirect discipline on the REST read ───────────────
 
 _BASE_URL = f"https://{_OFFICIAL}"
+#: The REST collection entry the connector composes (rest_base folded in): the
+#: neutral fetcher receives it as ``base_url``, never a bare ``rest_base``.
+_REST_ENTRY = f"{_BASE_URL}/wp-json/wp/v2/servizi"
 _REST_JSON = [{"id": 7, "title": {"rendered": "Carta d'identità"}, "link": f"{_BASE_URL}/servizi/cie/"}]
 
 
 def _cerca(handler):
-    return _fetcher_with(handler).cerca_servizi(
-        base_url=_BASE_URL, rest_base="servizi", term="carta d'identità", limit=20
+    return _fetcher_with(handler).scopri_servizi(
+        base_url=_REST_ENTRY, term="carta d'identità", limit=20
     )
 
 
@@ -493,7 +496,7 @@ def test_fetcher_search_reads_official_host():
         return httpx.Response(200, json=_REST_JSON)
 
     got = _cerca(handler)
-    assert len(got) == 1 and got[0].wordpress_id == 7
+    assert len(got) == 1 and got[0].native_id == "7"
 
 
 def test_fetcher_search_rejects_redirect_to_external_host():
@@ -517,7 +520,7 @@ def test_fetcher_search_follows_same_comune_redirect_www_to_apex():
         return httpx.Response(200, json=_REST_JSON)
 
     got = _cerca(handler)
-    assert len(got) == 1 and got[0].wordpress_id == 7
+    assert len(got) == 1 and got[0].native_id == "7"
 
 
 # ── recogniser re-run on WordPress service titles ───────────────────────────

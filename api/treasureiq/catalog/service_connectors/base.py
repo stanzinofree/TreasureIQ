@@ -16,11 +16,12 @@ from treasureiq.catalog.contracts import _StrictModel
 
 
 class ServiceCandidate(_StrictModel):
-    """One service found by a REST search — a candidate, not yet a canonical
-    service.  ``wordpress_id`` is the stable identity (the title changes, the id
-    does not); different URLs are never merged on title similarity."""
+    """One service found by discovery — a candidate, not yet a canonical service.
+    ``native_id`` is the stable, platform-native identity (the title changes, the
+    id does not): WordPress passes ``str(id)``, ComWeb the scheda's identifying
+    path segment. Different URLs are never merged on title similarity."""
 
-    wordpress_id: int = Field(gt=0)
+    native_id: str = Field(min_length=1)
     title: str = Field(min_length=1)
     url: AnyHttpUrl
 
@@ -28,22 +29,25 @@ class ServiceCandidate(_StrictModel):
 class ServiceFetcher(Protocol):
     """The only network seam of a service connector.
 
-    Implementations own: REST URL building, term encoding, ``per_page`` limit,
-    timeouts, HTTP status, malformed JSON, the host guard on the fetched page,
-    and the no-login/no-cookie discipline.  Everything else in the connector is
-    pure and deterministic.
+    The signature is platform-neutral: no WordPress concept (``rest_base``)
+    leaks here.  ``base_url`` is the family's discovery entry point, computed by
+    the connector from its ``mappa`` (WP: the REST collection URL; ComWeb: the
+    services index root).  Each implementation owns how it turns that entry point
+    into candidates — REST ``?search=`` for WordPress, index+category scrape for
+    ComWeb — plus timeouts, HTTP status, malformed responses, the host guard, and
+    the no-login/no-cookie discipline.  Everything else in the connector is pure
+    and deterministic.
     """
 
-    def cerca_servizi(
+    def scopri_servizi(
         self,
         *,
         base_url: str,
-        rest_base: str,
         term: str,
         limit: int,
     ) -> tuple[ServiceCandidate, ...]:
-        """Run one ``?search=`` query against the service CPT.  Never raises for
-        a reachable-but-empty or malformed source: returns ``()``."""
+        """Discover candidate services from the family entry point.  Never raises
+        for a reachable-but-empty or malformed source: returns ``()``."""
 
     def leggi_pagina(self, *, url: str, official_host: str) -> str | None:
         """Fetch one service page's HTML, or ``None`` if unreadable.  Must

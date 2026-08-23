@@ -7,6 +7,10 @@ in ``fetch_guardato``, never duplicated here), distinct ``max_bytes`` for REST v
 HTML, UTF-8 decode, and honest misses: a policy refusal (``consentito=False``),
 an unreachable resource (``fetched is None``) or malformed JSON all become a miss
 with **no autonomous retry**.
+
+Discovery goes through the WP strategy composed onto the common transport
+(``.con(_WpDiscovery())``): ``base_url`` is the REST collection endpoint the WP
+connector composes, so the neutral fetcher signature never sees ``rest_base``.
 """
 
 from __future__ import annotations
@@ -19,10 +23,13 @@ from treasureiq.catalog.service_connectors.esecutore_fetcher import (
     _MAX_BYTES_REST,
     _TIMEOUT_S,
     EsecutoreServiceFetcher,
+    _WpDiscovery,
 )
 
 _BASE = "https://www.comune.example.it"
 _REST_BASE = "servizi"
+#: The REST collection entry the WP connector composes and passes as base_url.
+_ENTRY = f"{_BASE}/wp-json/wp/v2/{_REST_BASE}"
 
 
 class _EsecutoreSpy:
@@ -41,6 +48,11 @@ class _EsecutoreSpy:
         )
 
 
+def _wp(spy: _EsecutoreSpy):
+    """Common transport composed with the WP discovery strategy."""
+    return EsecutoreServiceFetcher(spy).con(_WpDiscovery())
+
+
 def _ok(corpo: bytes) -> EsitoFetch:
     """A permitted fetch returning a 3-tuple (headers, bytes, final_url)."""
     return EsitoFetch(consentito=True, fetched=({}, corpo, "https://x"), motivo="ok")
@@ -52,17 +64,16 @@ def _json_lista() -> bytes:
     ).encode("utf-8")
 
 
-# --- cerca_servizi ----------------------------------------------------------
+# --- scopri_servizi (WP strategy) -------------------------------------------
 
 
-def test_cerca_url_params_host_e_maxbytes():
+def test_scopri_url_params_host_e_maxbytes():
     spy = _EsecutoreSpy(_ok(_json_lista()))
-    fetcher = EsecutoreServiceFetcher(spy)
-    got = fetcher.cerca_servizi(base_url=_BASE, rest_base=_REST_BASE, term="carta", limit=5)
-    assert len(got) == 1 and got[0].wordpress_id == 42
+    got = _wp(spy).scopri_servizi(base_url=_ENTRY, term="carta", limit=5)
+    assert len(got) == 1 and got[0].native_id == "42"
     assert str(got[0].url) == f"{_BASE}/servizi/cie"
     chiamata = spy.chiamate[0]
-    # URL: wp-json REST path with baked params
+    # URL: wp-json REST path (from base_url entry) with baked params
     assert chiamata["url"].startswith(f"{_BASE}/wp-json/wp/v2/{_REST_BASE}?")
     assert "search=carta" in chiamata["url"]
     assert "per_page=5" in chiamata["url"]
@@ -73,62 +84,50 @@ def test_cerca_url_params_host_e_maxbytes():
     assert chiamata["timeout"] == _TIMEOUT_S
 
 
-def test_cerca_rifiuto_politica_e_miss_senza_retry():
+def test_scopri_rifiuto_politica_e_miss_senza_retry():
     # consentito=False (budget/rate-limit) → miss, and the adapter does NOT retry.
     spy = _EsecutoreSpy(EsitoFetch(consentito=False, fetched=None, motivo="budget_esaurito"))
-    got = EsecutoreServiceFetcher(spy).cerca_servizi(
-        base_url=_BASE, rest_base=_REST_BASE, term="carta", limit=5
-    )
+    got = _wp(spy).scopri_servizi(base_url=_ENTRY, term="carta", limit=5)
     assert got == ()
     assert len(spy.chiamate) == 1  # single call, no autonomous retry
 
 
-def test_cerca_fetched_none_e_miss():
+def test_scopri_fetched_none_e_miss():
     spy = _EsecutoreSpy(EsitoFetch(consentito=True, fetched=None, motivo="irraggiungibile"))
-    got = EsecutoreServiceFetcher(spy).cerca_servizi(
-        base_url=_BASE, rest_base=_REST_BASE, term="carta", limit=5
-    )
+    got = _wp(spy).scopri_servizi(base_url=_ENTRY, term="carta", limit=5)
     assert got == ()
 
 
-def test_cerca_json_malformato_e_miss():
+def test_scopri_json_malformato_e_miss():
     spy = _EsecutoreSpy(_ok(b"{ not json"))
-    got = EsecutoreServiceFetcher(spy).cerca_servizi(
-        base_url=_BASE, rest_base=_REST_BASE, term="carta", limit=5
-    )
+    got = _wp(spy).scopri_servizi(base_url=_ENTRY, term="carta", limit=5)
     assert got == ()
 
 
-def test_cerca_json_non_lista_e_miss():
+def test_scopri_json_non_lista_e_miss():
     spy = _EsecutoreSpy(_ok(b'{"id": 42}'))  # object, not a list
-    got = EsecutoreServiceFetcher(spy).cerca_servizi(
-        base_url=_BASE, rest_base=_REST_BASE, term="carta", limit=5
-    )
+    got = _wp(spy).scopri_servizi(base_url=_ENTRY, term="carta", limit=5)
     assert got == ()
 
 
-def test_cerca_bytes_non_utf8_e_miss():
+def test_scopri_bytes_non_utf8_e_miss():
     spy = _EsecutoreSpy(_ok(b"\xff\xfe not utf8"))
-    got = EsecutoreServiceFetcher(spy).cerca_servizi(
-        base_url=_BASE, rest_base=_REST_BASE, term="carta", limit=5
-    )
+    got = _wp(spy).scopri_servizi(base_url=_ENTRY, term="carta", limit=5)
     assert got == ()
 
 
-def test_cerca_voce_malformata_scartata_non_alza():
+def test_scopri_voce_malformata_scartata_non_alza():
     corpo = json.dumps(
         [
             {"id": "non-un-int", "title": {"rendered": "x"}, "link": "https://x"},
             {"id": 7, "title": {"rendered": "Buona"}, "link": f"{_BASE}/ok"},
         ]
     ).encode("utf-8")
-    got = EsecutoreServiceFetcher(_EsecutoreSpy(_ok(corpo))).cerca_servizi(
-        base_url=_BASE, rest_base=_REST_BASE, term="x", limit=5
-    )
-    assert len(got) == 1 and got[0].wordpress_id == 7
+    got = _wp(_EsecutoreSpy(_ok(corpo))).scopri_servizi(base_url=_ENTRY, term="x", limit=5)
+    assert len(got) == 1 and got[0].native_id == "7"
 
 
-# --- leggi_pagina -----------------------------------------------------------
+# --- leggi_pagina (common transport) ----------------------------------------
 
 
 def test_leggi_pagina_ok_html_maxbytes():

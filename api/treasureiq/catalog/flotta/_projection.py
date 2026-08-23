@@ -17,11 +17,11 @@ is projection, never a re-fetch.
 
 from __future__ import annotations
 
-from datetime import datetime, timezone
 from typing import Any
 
 from treasureiq.catalog.contracts import AccessMode, FreshnessStatus, Surface
 from treasureiq.catalog.data_contracts import DataStatus, EvidenceRef, Freshness
+from treasureiq.catalog.freshness import freshness as _freshness_condiviso
 from treasureiq.connettore import EsitoConnettore
 
 
@@ -86,16 +86,12 @@ def evidence(record_dicts: list[dict[str, Any]]) -> tuple[EvidenceRef, ...]:
 
 
 def freshness(measured_at: str, max_age_seconds: int) -> Freshness:
-    """Datetime freshness from the moment the v0 connector read the source."""
-    try:
-        retrieved_at = datetime.fromisoformat(measured_at)
-    except (TypeError, ValueError):
-        return Freshness(status=FreshnessStatus.INVALID)
-    if retrieved_at.tzinfo is None:
-        retrieved_at = retrieved_at.replace(tzinfo=timezone.utc)
-    age = max(0, int((datetime.now(timezone.utc) - retrieved_at).total_seconds()))
-    status = FreshnessStatus.FRESH if age <= max_age_seconds else FreshnessStatus.STALE
-    return Freshness(status=status, retrieved_at=retrieved_at, source_age_seconds=age)
+    """Datetime freshness from the moment the v0 connector read the source.
+
+    Thin wrapper over the shared ``catalog.freshness`` policy so the whole
+    fleet, notices and the service cache share one age rule.
+    """
+    return _freshness_condiviso(measured_at, max_age_seconds)
 
 
 def status(

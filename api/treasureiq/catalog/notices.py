@@ -18,12 +18,13 @@ this is projection, exactly like ``flotta/_projection.py`` is for offices.
 
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import datetime
 from typing import Literal
 
 from pydantic import BaseModel
 
 from treasureiq.bandi_live import BandiLiveEsito, BandoArricchito
+from treasureiq.catalog.freshness import freshness as _freshness_condiviso
 from treasureiq.catalog.contracts import (
     CAPABILITY_NOTICES,
     AccessMode,
@@ -175,18 +176,12 @@ def _access_mode(coverage: CoverageStatus) -> AccessMode:
 
 
 def _freshness(measured_at: str | None, max_age_seconds: int) -> Freshness:
-    """Datetime freshness from the moment the engine read the source."""
-    if measured_at is None:
-        return Freshness(status=FreshnessStatus.UNKNOWN)
-    try:
-        retrieved_at = datetime.fromisoformat(measured_at)
-    except (TypeError, ValueError):
-        return Freshness(status=FreshnessStatus.INVALID)
-    if retrieved_at.tzinfo is None:
-        retrieved_at = retrieved_at.replace(tzinfo=timezone.utc)
-    age = max(0, int((datetime.now(timezone.utc) - retrieved_at).total_seconds()))
-    status = FreshnessStatus.FRESH if age <= max_age_seconds else FreshnessStatus.STALE
-    return Freshness(status=status, retrieved_at=retrieved_at, source_age_seconds=age)
+    """Datetime freshness from the moment the engine read the source.
+
+    Thin wrapper over the shared ``catalog.freshness`` policy (one age rule
+    across offices, notices and the service cache).
+    """
+    return _freshness_condiviso(measured_at, max_age_seconds)
 
 
 def _status(mode: AccessMode, records: list[dict], fresh: Freshness) -> DataStatus:

@@ -89,6 +89,35 @@ class ServiceReference(_StrictModel):
     discovered_at: datetime
 
 
+#: Bump when WHAT we normalise into a cached ``ServiceReference`` changes, so an
+#: entry written by an older (or newer) extractor is never served as-is.  The
+#: cache treats any ``schema_version`` other than this as a miss (re-resolve).
+SERVICE_CACHE_SCHEMA_VERSION = 1
+
+
+class CachedService(_StrictModel):
+    """One entry of the resolved-service cache, keyed by ``service_key``.
+
+    ``reference`` is the normalised service; ``retrieved_at`` is when the
+    connector RESOLVED it, distinct from ``reference.discovered_at`` (when the
+    entrypoint/service was first DISCOVERED).  ``schema_version`` gates the
+    entry: a value other than ``SERVICE_CACHE_SCHEMA_VERSION`` is a miss.
+    """
+
+    service_key: ServiceKey
+    reference: ServiceReference
+    retrieved_at: datetime
+    schema_version: int = Field(default=SERVICE_CACHE_SCHEMA_VERSION, ge=0)
+
+
+class ServiceCacheFile(_StrictModel):
+    """The per-municipality cache file: several ``service_key`` entries coexist."""
+
+    source_id: str = Field(min_length=1)
+    entries: tuple[CachedService, ...] = ()
+    updated_at: datetime
+
+
 class ServicePortalCandidate(_StrictModel):
     """A persisted SP entrypoint found on the official BASE site.
 

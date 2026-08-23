@@ -211,11 +211,18 @@ TOPIC_KEYWORDS: dict[Topic, tuple[str, ...]] = {
     #: Modulistica e servizi online (Ramo 3). Frasi che segnalano l'intento di
     #: fare una pratica online o procurarsi un modulo, distinte dai bandi:
     #: "sportello telematico"/"servizi online" indicano il portale autenticato,
-    #: "modulo per"/"modulistica" il modulo pubblico. Substring lowercase, come
-    #: le altre voci — nessun modello in questo passo.
+    #: "modulo"/"modulistica"/"formulario"/"scaricabile" il modulo pubblico.
+    #: Substring lowercase, come le altre voci — nessun modello in questo passo.
+    #: I quattro marcatori-modulo sono anche quelli che, letti sul testo grezzo,
+    #: danno a MODULISTICA precedenza deterministica sul topic di contenuto
+    #: (vedi `_MARCATORI_PRECEDENZA_MODULISTICA` in `respond`): tenerli qui fa sì
+    #: che il gate lessicale del ramo e la retrieval non possano contraddire
+    #: quell'instradamento.
     Topic.MODULISTICA: (
         "modulistica",
-        "modulo per",
+        "modulo",
+        "formulario",
+        "scaricabile",
         "sportello telematico",
         "sportello online",
         "servizi online",

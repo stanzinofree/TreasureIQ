@@ -121,7 +121,15 @@ def resolve_service_with_meta(
         or result.freshness.retrieved_at
         or datetime.now(timezone.utc)
     )
-    service_cache.salva(request.source_id, service_key, reference, result.connector)
+    # Fix D (Slice 5.2): persist the SAME stamp that goes in the envelope, so a
+    # later cache hit replays exactly this instant instead of the write time.
+    service_cache.salva(
+        request.source_id,
+        service_key,
+        reference,
+        result.connector,
+        retrieved_at=retrieved_at,
+    )
     return ResolvedService(
         reference=reference,
         retrieved_at=retrieved_at,

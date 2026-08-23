@@ -328,6 +328,35 @@ def test_page_download_same_host_only():
     assert all("altro-host.it" not in u for _, u in kinds)
 
 
+def test_page_scarta_boilerplate_tiene_modulo_cie():
+    # Fix C (Slice 5.2): su Albano la pagina CIE linkava anche il boilerplate
+    # del sito (cookie policy, termini e condizioni). Il modulo vero resta,
+    # cornice fuori — giudicato sul NOME del link, non sul filename.
+    html = (
+        f'<a href="https://{_BASE}/wp-content/uploads/modulo-cie.pdf">Modulo richiesta CIE</a>'
+        f'<a href="https://{_BASE}/wp-content/uploads/Cookie-Policy-2.pdf">Cookie policy</a>'
+        f'<a href="https://{_BASE}/wp-content/uploads/Termini-e-Condizioni-Di-Servizio.pdf">'
+        f'Termini e condizioni di servizio</a>'
+    )
+    pagina = leggi_pagina_servizio(html, page_url=f"https://{_BASE}/servizi/cie/", official_host=_BASE)
+    urls = [str(l.url) for l in pagina.links if l.kind is EvidenceKind.DOWNLOAD]
+    assert urls == [f"https://{_BASE}/wp-content/uploads/modulo-cie.pdf"]
+
+
+def test_page_boilerplate_giudicato_dal_nome_non_dal_filename():
+    # Il boilerplate si giudica sul NOME del link, mai sul filename: bare
+    # "accessibilità" dentro il nome di un modulo vero NON è boilerplate (resta),
+    # "note legali" lo è (cade) — anche con la stessa estensione .pdf.
+    html = (
+        f'<a href="https://{_BASE}/a.pdf">Modulo abbattimento barriere accessibilità edifici</a>'
+        f'<a href="https://{_BASE}/b.pdf">Note legali</a>'
+    )
+    pagina = leggi_pagina_servizio(html, page_url=f"https://{_BASE}/s/", official_host=_BASE)
+    kept = [str(l.url) for l in pagina.links if l.kind is EvidenceKind.DOWNLOAD]
+    assert f"https://{_BASE}/a.pdf" in kept
+    assert f"https://{_BASE}/b.pdf" not in kept
+
+
 def test_page_bare_area_personale_is_not_evidence():
     html = '<a href="https://area.comune.it/">Area personale</a>'
     pagina = leggi_pagina_servizio(html, page_url=f"https://{_BASE}/s/", official_host=_BASE)

@@ -107,24 +107,31 @@ def salva(
     service_key: ServiceKey,
     reference: ServiceReference,
     connector: ConnectorRef,
+    *,
+    retrieved_at: datetime | None = None,
 ) -> None:
     """Atomically upsert one ``service_key`` entry, preserving the others.
 
     Writes to a ``.tmp`` sibling then ``replace()`` so a concurrent reader sees
     the old file or the new one, never a half-written file.  ``connector`` is the
     provenance from the ``ConnectorResult`` and is persisted so a later cache hit
-    reports the same connector.  An absent/unwritable mount degrades to a warning
+    reports the same connector.  ``retrieved_at`` is the resolver's single
+    freshness stamp (Fix D, Slice 5.2): the caller passes the same value it put
+    in the resolution envelope so the persisted entry and the envelope agree, and
+    a later cache hit replays exactly that instant. When absent it defaults to
+    now (direct callers/tests).  An absent/unwritable mount degrades to a warning
     (the caller already holds the reference).  An invalid ``source_id`` raises
     before any filesystem access.
     """
     percorso = _percorso(source_id)
     now = datetime.now(timezone.utc)
+    stampa = retrieved_at or now
     esistente = _carica_file(source_id)
     altre = tuple(
         e for e in (esistente.entries if esistente else ()) if e.service_key is not service_key
     )
     nuova = CachedService(
-        service_key=service_key, reference=reference, retrieved_at=now, connector=connector
+        service_key=service_key, reference=reference, retrieved_at=stampa, connector=connector
     )
     contenuto = ServiceCacheFile(source_id=source_id, entries=altre + (nuova,), updated_at=now)
     provvisorio = percorso.with_suffix(".tmp")

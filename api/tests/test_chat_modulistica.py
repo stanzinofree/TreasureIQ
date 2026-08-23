@@ -219,3 +219,46 @@ def test_unknown_comune_is_asked_not_guessed(wiring):
 def test_modulistica_has_lexical_support():
     assert "modulistica" in TOPIC_KEYWORDS[Topic.MODULISTICA]
     assert respond._tema_sostenuto(topic=Topic.MODULISTICA, testo="serve la modulistica")
+
+
+# --- Fix A (Slice 5.2): precedenza deterministica del MODULO sul contenuto ---
+
+
+@pytest.mark.parametrize(
+    "messaggio",
+    [
+        "modulo carta d'identità",
+        "modulo della carta d'identità",
+        "dov'è la modulistica anagrafe",
+        "cerco il formulario per il cambio residenza",
+        "il documento è scaricabile?",
+    ],
+)
+def test_richiesta_modulo_ha_precedenza(messaggio):
+    # La parola-modulo instrada a MODULISTICA anche quando il testo porta la
+    # keyword forte di un topic di contenuto (qui «carta d'identità»/«anagrafe»).
+    assert respond._richiesta_modulo(messaggio) is True
+
+
+@pytest.mark.parametrize(
+    "messaggio",
+    [
+        "orari ufficio anagrafe",
+        "come rinnovo la carta d'identità",
+        "quanto costa la carta d'identità",
+    ],
+)
+def test_senza_parola_modulo_resta_sul_contenuto(messaggio):
+    # Nessun marcatore-modulo → il topic di contenuto NON viene scavalcato
+    # (l'override in dispatch non scatta). Il rinnovo resta anagrafe salvo
+    # richiesta esplicita di modulo.
+    assert respond._richiesta_modulo(messaggio) is False
+
+
+def test_marcatori_precedenza_sono_gate_coerenti():
+    # Ogni marcatore che scavalca il contenuto deve reggere anche il gate
+    # lessicale del ramo (`_tema_sostenuto`), altrimenti l'override porterebbe a
+    # MODULISTICA un turno che poi il gate scarterebbe: instradamento a vuoto.
+    for marcatore in respond._MARCATORI_PRECEDENZA_MODULISTICA:
+        assert marcatore in TOPIC_KEYWORDS[Topic.MODULISTICA]
+        assert respond._tema_sostenuto(topic=Topic.MODULISTICA, testo=f"serve {marcatore}")

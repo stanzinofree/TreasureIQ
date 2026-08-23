@@ -360,3 +360,29 @@ def test_cache_hit_zero_rete_provenienza(mappa, request_cie):
     assert second.connector == conn
     assert second.reference.service_id == "live"
     assert stub2.chiamate == 0
+
+
+# E4 (Fix D, Slice 5.2) — single retrieved_at: the value in the live envelope is
+# the value persisted, and the cache hit replays exactly that instant (no drift
+# between the connector fetch time and the cache write time).
+def test_envelope_e_persistito_stesso_retrieved_at(mappa, request_cie):
+    quando = datetime(2026, 8, 23, 14, 44, 34, tzinfo=timezone.utc)
+    conn = ConnectorRef(name="wordpress_agid_service", version="1")
+    stub = _StubConnettore(
+        _result(request_cie, (_reference("live"),), connector=conn, retrieved_at=quando)
+    )
+    env = service_resolver.resolve_service_with_meta(
+        request_cie, mappa=mappa, registry=_registry(stub)
+    )
+    assert env is not None and env.retrieved_at == quando
+    persistito = service_cache.carica(
+        _SOURCE, ServiceKey.CARTA_IDENTITA, policy=request_cie.freshness
+    )
+    assert persistito is not None
+    assert persistito.retrieved_at == quando  # non l'ora di scrittura
+    stub2 = _StubConnettore(_result(request_cie, (_reference("other"),), connector=conn))
+    second = service_resolver.resolve_service_with_meta(
+        request_cie, mappa=mappa, registry=_registry(stub2)
+    )
+    assert second is not None and second.from_cache is True
+    assert second.retrieved_at == quando  # cache hit replays exactly that instant

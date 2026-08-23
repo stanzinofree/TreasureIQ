@@ -34,6 +34,29 @@ from treasureiq.catalog.service_contracts import AuthenticationMethod
 #: Extensions that count as a downloadable form (casefolded, on the URL path).
 _DOWNLOAD_SUFFIXES: tuple[str, ...] = (".pdf", ".doc", ".docx", ".odt")
 
+#: Site-wide boilerplate documents that are NOT the service's form: cookie /
+#: privacy / terms / legal / accessibility statements sit on nearly every page
+#: and were being harvested as downloads (Albano: "Termini e condizioni di
+#: servizio", "Cookie policy"). Matched against the link's OWN NAME — anchor
+#: text plus title/aria — never the URL filename alone (a genuine form can have
+#: an opaque filename; per Fix C, Slice 5.2). Phrases, not bare civic words:
+#: "dichiarazione di accessibilità" is boilerplate, but a "modulo accessibilità
+#: edifici" is a real form, so bare "accessibilità"/"privacy" are deliberately
+#: absent.
+_DOWNLOAD_BOILERPLATE: tuple[str, ...] = (
+    "cookie policy",
+    "cookie",
+    "privacy policy",
+    "informativa privacy",
+    "informativa sulla privacy",
+    "termini e condizioni",
+    "condizioni di servizio",
+    "termini di servizio",
+    "note legali",
+    "dichiarazione di accessibilità",
+    "credits",
+)
+
 #: Explicit online/authenticated-service phrases.  A generic "area personale"
 #: is deliberately absent: on its own it is a nav-menu link, not evidence that
 #: THIS service is available online (review of Slice 4).
@@ -121,6 +144,15 @@ def _e_scaricabile(url: str) -> bool:
     return path.endswith(_DOWNLOAD_SUFFIXES)
 
 
+def _e_documento_boilerplate(nome: str) -> bool:
+    """Se il NOME del link (anchor + title/aria) è un documento di cornice del
+    sito — cookie/privacy/termini/note legali/accessibilità/credits — e non il
+    modulo del servizio. Solo sul nome, mai sul filename dell'URL: un modulo
+    vero può avere un filename opaco (Fix C, Slice 5.2)."""
+    basso = nome.casefold()
+    return any(frase in basso for frase in _DOWNLOAD_BOILERPLATE)
+
+
 def _metodi_auth(testo: str) -> tuple[AuthenticationMethod, ...]:
     basso = testo.casefold()
     metodi = tuple(
@@ -201,8 +233,13 @@ def leggi_pagina_servizio(
         kind: EvidenceKind | None = None
         autenticazione: tuple[AuthenticationMethod, ...] = ()
         if _e_scaricabile(assoluto):
-            # A form is the comune's own file: same-host only.
-            if _host(assoluto) == host_ufficiale:
+            # A form is the comune's own file: same-host only, and not a
+            # site-wide boilerplate document (cookie/privacy/terms/legal): those
+            # are named as such in the anchor/title, so we judge the link's own
+            # name — never the filename (Fix C, Slice 5.2).
+            if _host(assoluto) == host_ufficiale and not _e_documento_boilerplate(
+                f"{anchor_text} {attributi}"
+            ):
                 kind = EvidenceKind.DOWNLOAD
         elif _e_accesso_online(combinato):
             # Online service: external host allowed (URBI/Municipium/…).

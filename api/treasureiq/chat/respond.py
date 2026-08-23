@@ -645,6 +645,36 @@ def _tema_sostenuto(*, topic: Topic, testo: str) -> bool:
     return any(k in minuscolo for k in parole)
 
 
+#: Marcatori che segnalano l'intento esplicito di procurarsi il MODULO (non
+#: l'informazione di contenuto). Hanno precedenza deterministica sul topic di
+#: contenuto che il classificatore assegnerebbe: «modulo carta d'identità»
+#: porta la parola forte «carta d'identità» e il modello sceglie
+#: ANAGRAFE_CARTA_IDENTITA, così il turno non raggiungeva mai il connettore
+#: servizi. Sottoinsieme stretto di `TOPIC_KEYWORDS[MODULISTICA]`: le forme più
+#: deboli ("servizi online", "area personale") NON scavalcano un topic di
+#: contenuto, solo questi quattro. Letti sul testo grezzo come
+#: `_categoria_richiesta`, mai dal modello — «modulo» non è nel vocabolario di
+#: `Topic` e un classificatore lo assorbirebbe nel topic vicino.
+_MARCATORI_PRECEDENZA_MODULISTICA: tuple[str, ...] = (
+    "modulo",
+    "modulistica",
+    "formulario",
+    "scaricabile",
+)
+
+
+def _richiesta_modulo(messaggio: str) -> bool:
+    """Se il turno chiede esplicitamente un modulo/formulario.
+
+    Precedenza deterministica su qualunque topic di contenuto (Fix A, Slice
+    5.2): la scelta della ServiceKey e l'eventuale ambiguità le decide il
+    resolver a valle, mai questo gate — qui si stabilisce solo che la porta è
+    quella del connettore servizi, non l'informazione di contenuto.
+    """
+    haystack = messaggio.casefold()
+    return any(m in haystack for m in _MARCATORI_PRECEDENZA_MODULISTICA)
+
+
 def _topic_da_storia(*, storia: list[str]) -> Topic | None:
     """Il topic implicato dalle parole che il cittadino ha scritto prima.
 
@@ -4215,6 +4245,18 @@ async def _componi_risposta(
         message=message, intent=intent, storia=storia
     )
     intent = recognition.intent
+
+    # Fix A (Slice 5.2): la richiesta esplicita di un MODULO ha precedenza
+    # deterministica sul topic di contenuto. «modulo carta d'identità» porta la
+    # parola forte «carta d'identità» e il classificatore sceglie
+    # ANAGRAFE_CARTA_IDENTITA, così il turno non raggiungeva mai il connettore
+    # servizi. Letto sul testo grezzo come `_categoria_richiesta`, mai sul
+    # modello: «modulo» non è nel vocabolario di `Topic`. «orari ufficio
+    # anagrafe» e «come rinnovo la carta d'identità» non contengono un marcatore
+    # modulo e restano sul topic di contenuto; l'ambiguità tra più ServiceKey la
+    # scioglie il resolver a valle, mai questo gate.
+    if _richiesta_modulo(message):
+        intent = intent.model_copy(update={"topic": Topic.MODULISTICA})
 
     # D-55: se questo turno stesso risponde alla domanda «tutte le categorie
     # o una in particolare?» — letto sul testo grezzo, mai sulla

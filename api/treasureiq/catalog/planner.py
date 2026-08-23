@@ -6,7 +6,12 @@ from typing import TYPE_CHECKING
 
 from pydantic import Field
 
-from treasureiq.catalog.contracts import AccessMode, FreshnessStatus, Surface
+from treasureiq.catalog.contracts import (
+    CAPABILITY_NOTICES,
+    AccessMode,
+    FreshnessStatus,
+    Surface,
+)
 from treasureiq.catalog.data_contracts import (
     DataBatch,
     DataRequest,
@@ -57,7 +62,7 @@ _CAPABILITY_BY_TOPIC = {
     "anagrafe_carta_identita": "offices",
     "accesso_atti": "offices",
     "tributi": "services",
-    "bandi": "notices",
+    "bandi": CAPABILITY_NOTICES,
 }
 
 

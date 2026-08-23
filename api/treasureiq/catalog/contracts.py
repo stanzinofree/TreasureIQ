@@ -69,6 +69,20 @@ class FreshnessStatus(str, Enum):
 CAPABILITY_NOTICES = "notices"
 CATALOG_SECTION_PUBLIC_NOTICES = "public_notices"
 
+#: Ponte esplicito fra le due metà del vocabolario bandi (D-R2-3): la sezione del
+#: catalogo amministrativo (censimento/sweep/shadow) e la capability del contratto
+#: chat. Dichiarato in un solo posto, così un consumer del catalogo sa quale
+#: capability chat serve una sezione censita — senza rinominare nessuno dei due.
+#: Restano vocabolari distinti; qui il legame smette solo di essere implicito.
+CATALOG_SECTION_TO_CAPABILITY: dict[str, str] = {
+    CATALOG_SECTION_PUBLIC_NOTICES: CAPABILITY_NOTICES,
+}
+
+
+def capability_for_section(section: str) -> str | None:
+    """Return the chat capability a catalog census section maps to, if any."""
+    return CATALOG_SECTION_TO_CAPABILITY.get(section)
+
 
 class AccessContract(_StrictModel):
     transport: str = Field(min_length=1)

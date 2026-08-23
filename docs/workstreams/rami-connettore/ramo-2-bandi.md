@@ -152,11 +152,31 @@ esistente» — da confermare in fase contratto.
 
 ---
 
-## 4. Censimento da completare
+## 4. Censimento (slice 3, spedito 2026-08-23)
 
-`notices` va aggiunto ai 4 punti di sincronizzazione flotta (manifest/capabilities
-/planner/test) come per gli altri, una volta scelta la forma. Vedi il memo
-`flotta-connettori-nazionale`.
+Il §4 originale (brainstorm) diceva «aggiungi `notices` a manifest+capabilities
+flotta». **Corretto in fase esecuzione**: contraddice §2 e D-R2-2. I bandi NON
+passano da `EsitoConnettore`/flotta (`_projection.records(TRANSPARENCY, "notices")
+-> []` di proposito); nascono da `bandi_live`, e il DataBatch porta
+`connector="bandi_live"`. Aggiungerli a `FLOTTA_MANIFEST` farebbe dichiarare alla
+flotta una capability che risponderebbe SEMPRE con un batch vuoto — un falso
+positivo, la stessa disonestà «coperto vs vuoto» che il ramo combatte.
+
+Il censimento onesto è quindi **igiene di vocabolario**, non una proiezione flotta:
+
+1. **Costanti al posto delle stringhe** — `_CAPABILITY_BY_TOPIC["bandi"]` usa
+   `CAPABILITY_NOTICES`; `shadow.py`/`sweep_bridge.py` usano
+   `CATALOG_SECTION_PUBLIC_NOTICES` (7 punti). Nessun rename, valori identici.
+2. **Ponte esplicito** — `CATALOG_SECTION_TO_CAPABILITY` +
+   `capability_for_section()` in `contracts.py`: `public_notices -> notices` in un
+   solo posto, così un consumer del catalogo sa quale capability chat serve una
+   sezione censita, senza confondere i due vocabolari (D-R2-3).
+3. **Confine di onestà pinnato** — `test_notices_censimento.py` asserisce che la
+   flotta NON pubblicizza `notices` e che la proiezione non ha un ramo `notices`.
+
+I 4 punti per-connettore del memo `flotta-connettori-nazionale` (dispatch /
+`_LEGGIBILI` / analytics / logo) restano per un nuovo VENDOR, non per una
+capability: qui non si aggiunge un vendor.
 
 ---
 
@@ -194,8 +214,10 @@ esistente» — da confermare in fase contratto.
 2. **Wiring**: `_risposta_bandi` costruisce il DataBatch `notices` via il
    converter+builder e lo trasporta nel `ChatAnswer` (data_batches/query_plan/
    selected). Il ranking/filtro tema resta nel rail, fuori dal record.
-3. **Censimento**: `CAPABILITY_NOTICES` nei punti flotta + mapping esplicito
-   `public_notices` (senza rename).
+3. **Censimento** (✅ spedito): igiene di vocabolario — costanti al posto delle
+   stringhe (planner/shadow/sweep) + ponte esplicito `public_notices -> notices`
+   in `contracts.py` + test che pinna il confine di onestà (la flotta NON
+   pubblicizza `notices`). NON tocca `FLOTTA_MANIFEST` (vedi §4).
 4. **Rendering**: già presente (rail `bandi_live`); il DataBatch è per
    censimento/API, non cambia la scheda bandi.
 

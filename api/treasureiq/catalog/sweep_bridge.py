@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Mapping
 
 from treasureiq.catalog.contracts import (
+    CATALOG_SECTION_PUBLIC_NOTICES,
     AccessMode,
     AgidCompatibility,
     CapabilityStatus,
@@ -136,16 +137,16 @@ def snapshots_from_sweep_row(
         # it does not yet measure the AT platform against its own model.
         platform_compatibility=AgidCompatibility.UNKNOWN,
         municipality_adoption={
-            "public_notices": SectionStatus.PRESENT if platform_at_id else SectionStatus.UNKNOWN,
+            CATALOG_SECTION_PUBLIC_NOTICES: SectionStatus.PRESENT if platform_at_id else SectionStatus.UNKNOWN,
             "documents": SectionStatus.UNKNOWN,
             "deadlines": SectionStatus.UNKNOWN,
         },
         capabilities={
-            "public_notices": CapabilityStatus.VERIFIED if platform_at_id else CapabilityStatus.UNKNOWN,
+            CATALOG_SECTION_PUBLIC_NOTICES: CapabilityStatus.VERIFIED if platform_at_id else CapabilityStatus.UNKNOWN,
             "documents": CapabilityStatus.UNKNOWN,
             "deadlines": CapabilityStatus.UNKNOWN,
         },
-        capability_access_modes={"public_notices": at_mode},
+        capability_access_modes={CATALOG_SECTION_PUBLIC_NOTICES: at_mode},
         access_mode=at_mode,
         fingerprint=None,
         measured_at=measured_at,

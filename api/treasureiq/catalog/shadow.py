@@ -5,6 +5,7 @@ from __future__ import annotations
 from datetime import datetime
 
 from treasureiq.catalog.contracts import (
+    CATALOG_SECTION_PUBLIC_NOTICES,
     AccessContract,
     AccessMode,
     AgidCompatibility,
@@ -67,7 +68,7 @@ def platform_snapshot(
         )
     else:
         sections = {
-            "public_notices": "typed_or_free_text",
+            CATALOG_SECTION_PUBLIC_NOTICES: "typed_or_free_text",
             "documents": "linked_documents",
             "deadlines": "free_text_or_document",
         }
@@ -165,14 +166,14 @@ def municipality_snapshots(
         base_url=mappa.sito,
         platform_compatibility=AgidCompatibility.PARTIAL,
         municipality_adoption={
-            "public_notices": (
+            CATALOG_SECTION_PUBLIC_NOTICES: (
                 SectionStatus.PRESENT if at_via_rest else SectionStatus.UNKNOWN
             ),
             "documents": SectionStatus.UNKNOWN,
             "deadlines": SectionStatus.UNKNOWN,
         },
         capabilities={
-            "public_notices": (
+            CATALOG_SECTION_PUBLIC_NOTICES: (
                 CapabilityStatus.VERIFIED
                 if at_via_rest
                 else CapabilityStatus.UNKNOWN
@@ -181,7 +182,7 @@ def municipality_snapshots(
             "deadlines": CapabilityStatus.UNKNOWN,
         },
         capability_access_modes={
-            "public_notices": (
+            CATALOG_SECTION_PUBLIC_NOTICES: (
                 AccessMode.DIRECT if at_via_rest else AccessMode.MEDIATED
             ),
         },

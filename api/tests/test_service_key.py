@@ -21,6 +21,8 @@ from treasureiq.chat.service_key import riconosci_service_key
         ("voglio fare il cambio di residenza", ServiceKey.CAMBIO_RESIDENZA),
         ("come faccio l'accesso agli atti", ServiceKey.ACCESSO_ATTI),
         ("certificato di nascita", ServiceKey.STATO_CIVILE),
+        ("stato civile", ServiceKey.STATO_CIVILE),
+        ("certificato di matrimonio", ServiceKey.STATO_CIVILE),
         ("devo pagare la TARI", ServiceKey.TRIBUTI),
         ("informazioni sull'IMU", ServiceKey.TRIBUTI),
         # out of vocabulary → None (no nearest-neighbour fallback)
@@ -29,6 +31,11 @@ from treasureiq.chat.service_key import riconosci_service_key
         ("modulo per il passaporto", None),
         # generic 'residenza' alone is not a marker
         ("residenza", None),
+        # bare 'matrimonio' is NOT a marker: a distinct sub-service must not
+        # collapse into the generic civil-registry key.
+        ("richiedere una pubblicazione di matrimonio", None),
+        ("prenotazione sala matrimoni", None),
+        ("matrimonio", None),
         # ambiguous: two distinct keys → None
         ("carta d'identità e cambio residenza", None),
         ("carta d'identità e accesso agli atti", None),

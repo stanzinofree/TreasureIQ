@@ -22,6 +22,11 @@ from treasureiq.catalog.service_contracts import ServiceKey
 #: ``residenza`` on its own is deliberately absent: too generic (toponym /
 #: "residenza" as a place), it produced false positives.  ``cie`` is NOT here
 #: because it needs a whole-word match, not a substring (see ``_WORD_MARKERS``).
+#: ``matrimonio`` on its own is deliberately absent for the same reason: bare
+#: "matrimonio" over-matched distinct services ("pubblicazione di matrimonio",
+#: the banns, is NOT the generic civil-registry key), so STATO_CIVILE keeps only
+#: the unambiguous certificate phrases ("certificato di matrimonio", parallel to
+#: nascita/morte).  A specific sub-service demands its own key, never a collapse.
 _SUBSTRING_MARKERS: dict[ServiceKey, tuple[str, ...]] = {
     ServiceKey.CARTA_IDENTITA: (
         "carta d'identità",
@@ -43,7 +48,7 @@ _SUBSTRING_MARKERS: dict[ServiceKey, tuple[str, ...]] = {
         "stato civile",
         "certificato di nascita",
         "certificato di morte",
-        "matrimonio",
+        "certificato di matrimonio",
     ),
     ServiceKey.TRIBUTI: (
         "tributi",

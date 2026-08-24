@@ -444,19 +444,16 @@ def test_aglie_carta_identita_miss_is_two_confirmed_not_zero():
     ]
 
 
-def test_aglie_stato_civile_resolves_via_matrimonio_marker():
-    # REAL behaviour, documented: no card is titled "stato civile", but the
-    # shared recogniser marks STATO_CIVILE on the substring "matrimonio", and
-    # exactly one card carries it ("Richiedere una pubblicazione di
-    # matrimonio").  Exactly-1 + confirm → FULFILLED per the rule.  Whether the
-    # "matrimonio" marker is too broad for a generic stato-civile request is a
-    # recogniser (shared, cross-family) question — out of this connector's
-    # scope; see the workstream doc.
+def test_aglie_stato_civile_is_honest_not_found():
+    # REAL behaviour after the shared-recogniser fix: no Agliè card is titled
+    # "stato civile" or carries an unambiguous civil-registry certificate
+    # phrase.  The only near-hit, "Richiedere una pubblicazione di matrimonio"
+    # (the banns), is a DISTINCT service and no longer confirms STATO_CIVILE —
+    # bare "matrimonio" was dropped as a marker (see service_key.py).  Zero
+    # confirmed candidates → honest NOT_FOUND, never the nearest card.
     result, _ = _retrieve_aglie(ServiceKey.STATO_CIVILE)
-    assert result.status is DataStatus.FULFILLED
-    (ref,) = result.service_references
-    assert ref.title == "Richiedere una pubblicazione di matrimonio"
-    assert "richiedere-una-pubblicazione-di-matrimonio" in ref.service_id
+    assert result.status is DataStatus.NOT_FOUND
+    assert result.service_references == ()
 
 
 def test_aglie_tributi_two_confirmed_honest_not_found():

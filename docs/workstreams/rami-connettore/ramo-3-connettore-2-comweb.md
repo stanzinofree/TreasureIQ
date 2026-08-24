@@ -433,18 +433,21 @@ le opzioni di accesso). Mai un'altra categoria, mai crawl
 | `cambio_residenza` | «Cambio Residenza» | 1 | **FULFILLED** | exactly-1 + confirm; `service_id = 001001:comweb:cambio-residenza-305-22801-1-f8ed…` |
 | `accesso_atti` | «Richiedere l'accesso agli atti» | 1 | **FULFILLED** | «Accesso Civico» (istituto diverso) **non** porta marker `accesso [agli] atti` → mai confuso |
 | `carta_identita` | «Carta d'Identità Elettronica (CIE)» + «Carta d'identità per minori» | 2 | **NOT_FOUND** | ambiguità onesta (I-1): ≥2 confermate, nessuna scelta implicita |
-| `stato_civile` | «Richiedere una pubblicazione di matrimonio» | 1 | **FULFILLED** | il marker substring «matrimonio» di `STATO_CIVILE` conferma UNA card → la regola passa. Vedi caveat sotto |
+| `stato_civile` | nessuna (dopo fix recogniser) | 0 | **NOT_FOUND** | «pubblicazione di matrimonio» è un servizio distinto (banns), non più marker di `STATO_CIVILE`; 0 confermate → miss onesto. Vedi caveat sotto |
 | `tributi` | «Pagamento Tassa Rifiuti (TARI)» + «Pagare tributi IMU» | 2 | **NOT_FOUND** | key generica by design; IUC/TOSAP/ICP non portano marker |
 
-**Caveat `stato_civile` (scoperta di questa verifica).** L'ipotesi di partenza
-era NOT_FOUND («nessuna card titolata stato civile»). Il comportamento REALE è
-FULFILLED: il vocabolario del recogniser condiviso include «matrimonio» tra i
-marker di `STATO_CIVILE`, e ad Agliè una sola card lo porta. La regola
-exactly-1+confirm è rispettata alla lettera; la domanda se «pubblicazione di
-matrimonio» sia una risposta giusta a una richiesta *generica* di stato civile è
-una questione di **vocabolario del recogniser condiviso** (`service_key.py`,
-usato identico da WP) — fuori dal perimetro di questo connettore. Da valutare
-in una slice recognizer, non qui.
+**Caveat `stato_civile` — RISOLTO (slice recogniser, 24 ago).** La verifica
+aveva rilevato un FULFILLED indebito: il vocabolario condiviso includeva
+«matrimonio» come marker autonomo di `STATO_CIVILE`, e ad Agliè la sola card
+«Richiedere una pubblicazione di matrimonio» (i banns — servizio distinto) lo
+confermava. Il marker nudo «matrimonio» è stato **rimosso** da `service_key.py`
+(sostituito dalla frase inequivoca «certificato di matrimonio», in parallelo a
+nascita/morte): un sotto-servizio specifico non collassa più nella key generica.
+Effetto su Agliè: 0 card confermate → **NOT_FOUND onesto** (test
+`test_aglie_stato_civile_is_honest_not_found`). La fix è cross-family (usata
+identica da WP); golden positivi/negativi in `test_service_key.py`. Nessuna
+modifica al connettore ComWeb né a WP: solo il vocabolario condiviso e le
+asserzioni dei test che codificavano il bug.
 
 ### 8.3 Ambiguità: migliorabile-e-dimostrabile vs miss onesto
 

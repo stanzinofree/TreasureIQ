@@ -14,6 +14,7 @@ from datetime import datetime, timezone
 
 import pytest
 
+from treasureiq.catalog import freshness as _freshness
 from treasureiq.catalog import service_cache
 from treasureiq.catalog.contracts import ConnectorRef
 from treasureiq.catalog.planner import service_request
@@ -25,7 +26,6 @@ from treasureiq.catalog.service_contracts import (
     ServiceAccessOption,
     ServiceKey,
     ServicePortalCandidate,
-    ServicePortalGroup,
     ServicePortalRole,
     ServiceReference,
     SourceInventory,
@@ -36,6 +36,26 @@ _SOURCE = "058003"
 _CONN = ConnectorRef(name="wordpress_agid_service", version="1")
 _QUANDO = datetime(2026, 8, 23, 12, 0, tzinfo=timezone.utc)
 _SCOPERTA = datetime(2026, 1, 1, tzinfo=timezone.utc)
+
+
+class _OrologioCongelato:
+    """Injected clock for the freshness gate.
+
+    ``freshness`` measures age as ``datetime.now(utc) - retrieved_at``. A test
+    that saves at the fixed ``_QUANDO`` and then reads through the cache would
+    go stale — and start failing — once the wall clock passes ``_QUANDO +
+    max_age`` (i.e. the day after). Freezing ``now`` to ``_QUANDO`` makes the
+    read time-deterministic without touching any merge or cache logic."""
+
+    @staticmethod
+    def now(tz: object = None) -> datetime:
+        return _QUANDO
+
+
+@pytest.fixture
+def freshness_congelata(monkeypatch):
+    """Freeze the freshness clock at ``_QUANDO`` for cache reads under test."""
+    monkeypatch.setattr(_freshness, "datetime", _OrologioCongelato)
 
 
 def _auth_option(url: str, **kw) -> ServiceAccessOption:
@@ -290,7 +310,7 @@ def test_idempotenza():
 
 
 # 9 — read-time, no write: mtime/bytes del file cache invariati (review check 3).
-def test_read_time_nessuna_scrittura_cache(monkeypatch, tmp_path):
+def test_read_time_nessuna_scrittura_cache(monkeypatch, tmp_path, freshness_congelata):
     monkeypatch.setattr(service_cache, "LIVE_DIR", tmp_path)
     ref = _reference()
     service_cache.salva(_SOURCE, ServiceKey.CARTA_IDENTITA, ref, _CONN, retrieved_at=_QUANDO)

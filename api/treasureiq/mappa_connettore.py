@@ -472,16 +472,6 @@ def _da_cache(codice_istat: str) -> MappaConnettore | None:
     return voce if eta.days < GIORNI_VALIDITA else None
 
 
-def mappa_da_cache(codice_istat: str) -> MappaConnettore | None:
-    """Legge la mappa dal disco senza sondare il portale (cache-only).
-
-    Seam net-free per lo sweep di catalogo servizi: a differenza di
-    ``mappa_connettore(...)`` non ripiega mai sulla sonda live a cache fredda.
-    Cache assente, illeggibile o scaduta → ``None``.
-    """
-    return _da_cache(codice_istat)
-
-
 def _in_cache(voce: MappaConnettore) -> None:
     """Scrittura atomica: un lettore concorrente vede la voce vecchia o la nuova,
     mai mezza voce. Il mount live può mancare in sviluppo/test: la mappa è già

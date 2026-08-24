@@ -30,7 +30,7 @@ from treasureiq.catalog.service_sweep import (
 )
 from treasureiq.connettore import _da_store_raw as _connettore_cache
 from treasureiq.ingest.censimento import _gia_registrati
-from treasureiq.mappa_connettore import mappa_da_cache
+from treasureiq.registro import leggi_registro
 from treasureiq.registro_cli import _comuni_da_censimento
 from treasureiq.registro_cli import main as sweep_main
 from treasureiq.sonda_live import LIVE_DIR, comune_per_codice
@@ -227,8 +227,11 @@ def _seam_servizi(config: WorkerConfig):
     supporto_per_pf: dict[str, bool] = {}
 
     def platform_di(source_id: str) -> str | None:
-        mappa = mappa_da_cache(source_id)
-        return mappa.piattaforma_id if mappa else None
+        # La piattaforma catalogata vive nel registro (CONTRATTO-O2), non nella
+        # mappa-connettore: `leggi_registro` è cache-only (solo disco, nessuna
+        # rete) e ritorna None per i comuni mai scansionati.
+        record = leggi_registro(source_id)
+        return record.piattaforma if record else None
 
     def supportata(platform_id: str) -> bool:
         if platform_id not in supporto_per_pf:
@@ -250,7 +253,7 @@ def _seam_servizi(config: WorkerConfig):
 def _loga_report_servizi(report: ServiceSweepDryReport) -> None:
     logger.info(
         "service_catalog dry-run: %d comuni — pianificati %d, non supportati %d, "
-        "senza mappa %d",
+        "senza piattaforma nota %d",
         report.comuni_totali,
         report.comuni_pianificati,
         report.comuni_non_supportati,

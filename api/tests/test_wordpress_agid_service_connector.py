@@ -12,6 +12,8 @@ are exercised:
 
 from __future__ import annotations
 
+from pathlib import Path
+
 import httpx
 import pytest
 
@@ -547,3 +549,170 @@ def test_recognizer_on_ambiguous_title_is_none():
 
 def test_recognizer_on_unrelated_title_is_none():
     assert riconosci_service_key("Prenotazione appuntamenti allo sportello") is None
+
+
+# ── fixture-driven golden tests — real endpoint bytes, zero network ──────────
+#
+# The REST payloads below were captured live (2026-08) from real WP/AgID
+# comuni.  The full pipeline runs on the recorded BYTES: MockTransport serves
+# the fixture, HttpxServiceFetcher parses it, the connector confirms — so the
+# four honest outcomes (FULFILLED / empty / single-non-confirming / noisy
+# multi) are proven on ground truth, not on hand-written candidates.
+
+_FIXTURES = Path(__file__).parent / "fixtures" / "wordpress_agid"
+
+_ARONA_ISTAT = "003006"
+_ARONA_HOST = "comune.arona.no.it"
+_SAINTMARCEL_ISTAT = "007060"
+_SAINTMARCEL_HOST = "comune.saintmarcel.ao.it"
+
+
+class _TransportFixture:
+    """MockTransport handler: real fixture bytes for the REST search, 404 for
+    any page read.  Records every request for exact-form asserts."""
+
+    def __init__(self, corpo: bytes) -> None:
+        self._corpo = corpo
+        self.richieste: list[httpx.Request] = []
+
+    def __call__(self, request: httpx.Request) -> httpx.Response:
+        self.richieste.append(request)
+        if request.url.path.startswith("/wp-json/wp/v2/"):
+            return httpx.Response(
+                200, content=self._corpo, headers={"content-type": "application/json"}
+            )
+        return httpx.Response(404)
+
+    @property
+    def richieste_rest(self) -> list[httpx.Request]:
+        return [r for r in self.richieste if r.url.path.startswith("/wp-json/wp/v2/")]
+
+
+def _mappa_comune(istat: str, host: str) -> MappaConnettore:
+    return MappaConnettore(
+        codice_istat=istat,
+        nome=host,
+        sito=host,
+        sondato_il="2026-08-23T00:00:00+00:00",
+        piattaforma_id="wordpress_agid",
+        servizi=AssetServizi(esposto=True, rest_base="servizi", totale=42),
+    )
+
+
+def _retrieve_da_fixture(
+    nome: str, *, istat: str, host: str, service_key: ServiceKey
+) -> tuple[object, _TransportFixture]:
+    transport = _TransportFixture((_FIXTURES / nome).read_bytes())
+    connector = WordPressAgidServiceConnector(
+        HttpxServiceFetcher(transport=httpx.MockTransport(transport))
+    )
+    request = _request(source_id=istat, service_key=service_key)
+    result = connector.retrieve(request, mappa=_mappa_comune(istat, host), esito=None)
+    return result, transport
+
+
+def test_fixture_arona_carta_identita_is_fulfilled():
+    # n=1 "Rilascio carta d'identità elettronica (CIE)" → confirmed → FULFILLED.
+    result, _ = _retrieve_da_fixture(
+        "arona_carta_identita.json",
+        istat=_ARONA_ISTAT,
+        host=_ARONA_HOST,
+        service_key=ServiceKey.CARTA_IDENTITA,
+    )
+    assert result.status is DataStatus.FULFILLED
+    assert result.access_mode is AccessMode.MEDIATED
+    assert len(result.service_references) == 1
+    ref = result.service_references[0]
+    # Identity from the real WP id (1084 in the recorded payload), never the title.
+    assert ref.service_id == f"{_ARONA_ISTAT}:wp:1084"
+    assert str(ref.source_url) == (
+        f"https://{_ARONA_HOST}/servizio/rilascio-carta-didentita-elettronica-cie/"
+    )
+    # Page read 404s in this transport → honest INFORMATION-only options.
+    assert [o.mode for o in ref.options] == [ServiceAccessMode.INFORMATION]
+
+
+def test_fixture_request_form_is_the_contract():
+    # Exactly ONE REST GET, with the frozen shape:
+    #   {site}/wp-json/wp/v2/servizi?search=<canonical term>&per_page=20&_fields=id,title,link
+    _, transport = _retrieve_da_fixture(
+        "arona_carta_identita.json",
+        istat=_ARONA_ISTAT,
+        host=_ARONA_HOST,
+        service_key=ServiceKey.CARTA_IDENTITA,
+    )
+    assert len(transport.richieste_rest) == 1
+    rest = transport.richieste_rest[0]
+    assert rest.url.scheme == "https"
+    assert rest.url.host == _ARONA_HOST
+    assert rest.url.path == "/wp-json/wp/v2/servizi"
+    assert rest.url.params["search"] == SERVICE_SEARCH_TERM[ServiceKey.CARTA_IDENTITA]
+    assert rest.url.params["per_page"] == "20"
+    assert rest.url.params["_fields"] == "id,title,link"
+
+
+def test_fixture_saintmarcel_empty_payload_is_not_found():
+    # A genuine `[]` from the live endpoint: honest miss, no page ever read.
+    result, transport = _retrieve_da_fixture(
+        "saintmarcel_carta_empty.json",
+        istat=_SAINTMARCEL_ISTAT,
+        host=_SAINTMARCEL_HOST,
+        service_key=ServiceKey.CARTA_IDENTITA,
+    )
+    assert result.status is DataStatus.NOT_FOUND
+    assert result.access_mode is AccessMode.MEDIATED
+    assert result.service_references == ()
+    assert transport.richieste == transport.richieste_rest  # only the search ran
+
+
+def test_fixture_saintmarcel_single_non_confirming_is_not_found():
+    # n=1 "Certificati anagrafici" for STATO_CIVILE: the recogniser does not
+    # confirm it, and the near-miss is never picked — honest NOT_FOUND.
+    result, transport = _retrieve_da_fixture(
+        "saintmarcel_statocivile_single.json",
+        istat=_SAINTMARCEL_ISTAT,
+        host=_SAINTMARCEL_HOST,
+        service_key=ServiceKey.STATO_CIVILE,
+    )
+    assert result.status is DataStatus.NOT_FOUND
+    assert result.service_references == ()
+    # An unconfirmed candidate's page is never even read.
+    assert transport.richieste == transport.richieste_rest
+
+
+def test_fixture_arona_residenza_multi_is_not_found():
+    # >1 noisy candidates ("Affidamento ceneri", "Cambio nome e cognome",
+    # "Cambio e dichiarazione di residenza"): none confirms CAMBIO_RESIDENZA
+    # under the shared recogniser — honest NOT_FOUND, never the nearest title.
+    result, transport = _retrieve_da_fixture(
+        "arona_residenza_multi.json",
+        istat=_ARONA_ISTAT,
+        host=_ARONA_HOST,
+        service_key=ServiceKey.CAMBIO_RESIDENZA,
+    )
+    assert result.status is DataStatus.NOT_FOUND
+    assert result.service_references == ()
+    assert transport.richieste == transport.richieste_rest
+
+
+def test_fixture_albaredo_dialetto_b_reads_as_false_empty():
+    # KNOWN CLASSIFICATION DEFECT, asserted as today's behaviour: Albaredo
+    # d'Adige serves the same Design Comuni theme through a CUSTOM REST
+    # controller (dialect B) — items carry "ID"/"post_title" and direct AgID
+    # fields, no "id"/"title.rendered"/"link".  The A-standard parser yields 0
+    # candidates from a payload that IS full of services (e.g. "Calcolo IMU
+    # online"): the miss below is a false empty, not a real one.  Fixing it
+    # needs a dedicated dialect-B connector, not a looser parser here — 0/≥2
+    # stay an honest miss by contract.
+    result, transport = _retrieve_da_fixture(
+        "albaredo_dialettoB_raw.json",
+        istat="023002",
+        host="www.comune.albaredodadige.vr.it",
+        service_key=ServiceKey.TRIBUTI,
+    )
+    assert result.status is DataStatus.NOT_FOUND
+    assert result.service_references == ()
+    # The search ran (one REST GET) and nothing else: the payload's items were
+    # all dropped by the standard-shape parser.
+    assert len(transport.richieste_rest) == 1
+    assert transport.richieste == transport.richieste_rest

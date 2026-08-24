@@ -28,7 +28,7 @@ Contratto (D-S5-6):
 from __future__ import annotations
 
 import json
-from typing import Protocol
+from typing import Callable, Protocol
 from urllib.parse import urlencode, urlparse
 
 from treasureiq.catalog.fetch_runtime import EsecutoreFetch
@@ -81,6 +81,61 @@ def candidato_da_voce_wp(voce: object) -> ServiceCandidate | None:
         return None
 
 
+def candidato_da_voce_wp_custom(voce: object) -> ServiceCandidate | None:
+    """Un ``ServiceCandidate`` da una voce REST WP **dialetto B**, o ``None``.
+
+    Alcuni comuni servono lo stesso tema (Design Comuni) attraverso un
+    controller REST custom che *sovrascrive* ``wp/v2/servizi``: invece degli
+    oggetti standard restituisce le righe grezze del post — chiavi ``ID`` /
+    ``post_title`` / ``guid`` (non ``id`` / ``title.rendered`` / ``link``) — e
+    ignora ``search`` / ``per_page`` / ``_fields`` lato server (dump completo).
+    ``guid`` è un URL assoluto fornito dal server. Campo assente/errato →
+    scarto (mai alzare); l'host guard e il recogniser condivisi filtrano poi un
+    url off-host o un titolo non confermante, esattamente come per lo standard.
+    """
+    if not isinstance(voce, dict):
+        return None
+    try:
+        return ServiceCandidate(
+            native_id=str(int(voce["ID"])),
+            title=str(voce["post_title"]).strip(),
+            url=str(voce["guid"]),
+        )
+    except (KeyError, TypeError, ValueError):
+        return None
+
+
+def raccogli_candidati_wp(
+    dati: object, rileggi_grezzo: "Callable[[], object]"
+) -> tuple[ServiceCandidate, ...]:
+    """Candidati WP: prima lo standard, poi il fallback dialetto B se serve.
+
+    La ricerca «slim» (``_fields=id,title,link``) si legge come standard. Se
+    produce ≥1 candidato è autoritativa e **non** si fa una seconda richiesta —
+    byte-identica al comportamento pre-dialetto: lo standard non paga nulla.
+
+    Un controller dialetto B risponde alla slim con una lista **non vuota** di
+    righe non-standard (dal vivo: ``[[], [], …]`` array vuoti, perché ``_fields``
+    è ignorato) → 0 candidati standard da un payload non vuoto. **Solo** in quel
+    caso si fa una richiesta in più senza ``_fields`` (``rileggi_grezzo``) e la
+    si legge con la forma dialetto B. Un ``[]`` genuino resta un miss onesto a
+    una sola richiesta (nessun fallback su catalogo davvero vuoto).
+    """
+    if not isinstance(dati, list):
+        return ()
+    standard = tuple(
+        c for c in (candidato_da_voce_wp(v) for v in dati) if c is not None
+    )
+    if standard or not dati:
+        return standard
+    grezzo = rileggi_grezzo()
+    if not isinstance(grezzo, list):
+        return ()
+    return tuple(
+        c for c in (candidato_da_voce_wp_custom(v) for v in grezzo) if c is not None
+    )
+
+
 class _DiscoveryStrategy(Protocol):
     """La sola logica per-famiglia: da un entry point a candidati, usando i
     primitivi di rete del transport comune. Net-free rispetto a httpx (il
@@ -112,18 +167,18 @@ class _WpDiscovery:
         term: str,
         limit: int,
     ) -> tuple[ServiceCandidate, ...]:
-        params = urlencode({"search": term, "per_page": limit, "_fields": "id,title,link"})
-        url = f"{base_url.rstrip('/')}?{params}"
+        base = base_url.rstrip("/")
         host_atteso = host_senza_www(urlparse(base_url).netloc.lower())
-        dati = transport.scarica_json(url=url, host_atteso=host_atteso)
-        if not isinstance(dati, list):
-            return ()
-        candidati: list[ServiceCandidate] = []
-        for voce in dati:
-            candidato = candidato_da_voce_wp(voce)
-            if candidato is not None:
-                candidati.append(candidato)
-        return tuple(candidati)
+        slim = urlencode({"search": term, "per_page": limit, "_fields": "id,title,link"})
+        dati = transport.scarica_json(url=f"{base}?{slim}", host_atteso=host_atteso)
+
+        def _rileggi_grezzo() -> object | None:
+            # Solo se lo standard è vuoto-ma-non-``[]`` (dialetto B): una GET in
+            # più senza ``_fields`` (che il controller custom svuoterebbe).
+            grezzo = urlencode({"search": term, "per_page": limit})
+            return transport.scarica_json(url=f"{base}?{grezzo}", host_atteso=host_atteso)
+
+        return raccogli_candidati_wp(dati, _rileggi_grezzo)
 
 
 class EsecutoreServiceFetcher:

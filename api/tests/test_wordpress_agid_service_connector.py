@@ -12,6 +12,7 @@ are exercised:
 
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 import httpx
@@ -742,24 +743,110 @@ def test_fixture_arona_residenza_multi_is_not_found():
     assert transport.richieste == transport.richieste_rest
 
 
-def test_fixture_albaredo_dialetto_b_reads_as_false_empty():
-    # KNOWN CLASSIFICATION DEFECT, asserted as today's behaviour: Albaredo
-    # d'Adige serves the same Design Comuni theme through a CUSTOM REST
-    # controller (dialect B) — items carry "ID"/"post_title" and direct AgID
-    # fields, no "id"/"title.rendered"/"link".  The A-standard parser yields 0
-    # candidates from a payload that IS full of services (e.g. "Calcolo IMU
-    # online"): the miss below is a false empty, not a real one.  Fixing it
-    # needs a dedicated dialect-B connector, not a looser parser here — 0/≥2
-    # stay an honest miss by contract.
-    result, transport = _retrieve_da_fixture(
-        "albaredo_dialettoB_raw.json",
-        istat="023002",
-        host="www.comune.albaredodadige.vr.it",
-        service_key=ServiceKey.TRIBUTI_IMU,
+# --- Dialect B: the Design Comuni CUSTOM REST controller --------------------
+#
+# Some comuni serve the same AgID theme through a controller that OVERRIDES
+# wp/v2/servizi: its rows carry "ID"/"post_title"/"guid" (not "id"/"title.
+# rendered"/"link") and it IGNORES server-side search/per_page/_fields, dumping
+# the full catalogue every call.  Captured live (Albaredo d'Adige, 023002,
+# 2026-08): the slim search (with "_fields") comes back as [[], [], ...] empty
+# arrays — the standard parser reads 0 from a NON-empty payload, which is the
+# in-band signal to re-read once WITHOUT "_fields" and parse the dialect-B rows.
+# The confirm layer (host guard + shared recogniser, 0/≥2 → NOT_FOUND) is
+# unchanged: dialect B only changes how rows are FETCHED and shaped, never how
+# a match is judged.
+
+_ALBAREDO_ISTAT = "023002"
+_ALBAREDO_HOST = "www.comune.albaredodadige.vr.it"
+
+
+class _TransportDialettoB:
+    """MockTransport handler that reproduces the LIVE dialect-B behaviour: the
+    slim search ("_fields" present) yields ``[[], ...]`` empty arrays; any REST
+    read WITHOUT "_fields" returns the real full dump.  404 for page reads."""
+
+    def __init__(self, dump: bytes) -> None:
+        self._dump = dump
+        n = len(json.loads(dump))
+        self._vuoto = json.dumps([[] for _ in range(n)]).encode()
+        self.richieste: list[httpx.Request] = []
+
+    def __call__(self, request: httpx.Request) -> httpx.Response:
+        self.richieste.append(request)
+        if request.url.path.startswith("/wp-json/wp/v2/"):
+            corpo = self._vuoto if "_fields" in request.url.params else self._dump
+            return httpx.Response(
+                200, content=corpo, headers={"content-type": "application/json"}
+            )
+        return httpx.Response(404)
+
+    @property
+    def richieste_rest(self) -> list[httpx.Request]:
+        return [r for r in self.richieste if r.url.path.startswith("/wp-json/wp/v2/")]
+
+
+def _retrieve_dialetto_b(service_key: ServiceKey):
+    dump = (_FIXTURES / "albaredo_dialettoB_raw.json").read_bytes()
+    transport = _TransportDialettoB(dump)
+    connector = WordPressAgidServiceConnector(
+        HttpxServiceFetcher(transport=httpx.MockTransport(transport))
     )
+    request = _request(source_id=_ALBAREDO_ISTAT, service_key=service_key)
+    result = connector.retrieve(
+        request, mappa=_mappa_comune(_ALBAREDO_ISTAT, _ALBAREDO_HOST), esito=None
+    )
+    return result, transport
+
+
+def test_dialetto_b_imu_now_fulfilled():
+    # Was a FALSE empty (the standard parser dropped every row).  The slim search
+    # comes back [[], ...] → non-empty-but-0 → one re-read without "_fields" →
+    # the dialect-B row "Calcolo IMU online" (ID 1387) confirms TRIBUTI_IMU.
+    result, transport = _retrieve_dialetto_b(ServiceKey.TRIBUTI_IMU)
+    assert result.status is DataStatus.FULFILLED
+    assert result.access_mode is AccessMode.MEDIATED
+    assert len(result.service_references) == 1
+    ref = result.service_references[0]
+    # Identity from the real "ID", never the title; url from the server "guid".
+    assert ref.service_id == f"{_ALBAREDO_ISTAT}:wp:1387"
+    assert str(ref.source_url) == (
+        f"https://{_ALBAREDO_HOST}/?post_type=servizio&p=1387"
+    )
+    # Exactly TWO REST reads: the slim search, then the "_fields"-free re-read.
+    # Page read 404s → honest INFORMATION-only.
+    assert len(transport.richieste_rest) == 2
+    assert "_fields" in transport.richieste_rest[0].url.params
+    assert "_fields" not in transport.richieste_rest[1].url.params
+    assert [o.mode for o in ref.options] == [ServiceAccessMode.INFORMATION]
+
+
+def test_dialetto_b_tari_empty_is_honest_not_found():
+    # The recovery re-read runs (the catalogue is full), but NO row confirms
+    # TARI: an honest empty AFTER dialect-B recovery, not a parser artefact.
+    result, transport = _retrieve_dialetto_b(ServiceKey.TRIBUTI_TARI)
     assert result.status is DataStatus.NOT_FOUND
     assert result.service_references == ()
-    # The search ran (one REST GET) and nothing else: the payload's items were
-    # all dropped by the standard-shape parser.
-    assert len(transport.richieste_rest) == 1
-    assert transport.richieste == transport.richieste_rest
+    assert len(transport.richieste_rest) == 2  # slim + recovery, then nothing
+
+
+def test_dialetto_b_residenza_multi_is_not_found():
+    # The full dump carries TWO residence services, both on-host and both
+    # confirming CAMBIO_RESIDENZA → ≥2 → NOT_FOUND (never the nearest), exactly
+    # as for the standard dialect: recovery changes shape, not the 0/≥2 rule.
+    result, _ = _retrieve_dialetto_b(ServiceKey.CAMBIO_RESIDENZA)
+    assert result.status is DataStatus.NOT_FOUND
+    assert result.service_references == ()
+
+
+def test_standard_empty_does_not_trigger_dialect_b_refetch():
+    # Guard on the trigger: a GENUINE `[]` from the slim search is a one-request
+    # honest miss — the dialect-B re-read fires only on non-empty-but-0, never on
+    # a real empty catalogue.
+    result, transport = _retrieve_da_fixture(
+        "saintmarcel_carta_empty.json",
+        istat=_SAINTMARCEL_ISTAT,
+        host=_SAINTMARCEL_HOST,
+        service_key=ServiceKey.CARTA_IDENTITA,
+    )
+    assert result.status is DataStatus.NOT_FOUND
+    assert len(transport.richieste_rest) == 1  # no second, "_fields"-free read

@@ -127,6 +127,39 @@ def test_scopri_voce_malformata_scartata_non_alza():
     assert len(got) == 1 and got[0].native_id == "7"
 
 
+# --- dialect B: the full-dump custom controller (recovery, guarded path) ----
+
+
+def _dump_dialetto_b() -> bytes:
+    # One dialect-B row: "ID"/"post_title"/"guid", no id/title.rendered/link.
+    return json.dumps(
+        [{"ID": 7, "post_title": "Calcolo IMU online",
+          "guid": f"{_BASE}/?post_type=servizio&p=7"}]
+    ).encode("utf-8")
+
+
+def test_scopri_dialetto_b_recupera_senza_fields():
+    # Slim search (with "_fields") answers [[], []] (dialect B voids _fields);
+    # non-empty-but-0 → one re-read WITHOUT "_fields" parses the dialect-B row.
+    spy = _EsecutoreSpy(_ok(b"[[],[]]"), _ok(_dump_dialetto_b()))
+    got = _wp(spy).scopri_servizi(base_url=_ENTRY, term="imu", limit=5)
+    assert len(got) == 1 and got[0].native_id == "7"
+    assert str(got[0].url) == f"{_BASE}/?post_type=servizio&p=7"
+    assert len(spy.chiamate) == 2  # slim, then the recovery re-read
+    assert "_fields=id" in spy.chiamate[0]["url"]
+    assert "_fields" not in spy.chiamate[1]["url"]
+    # The recovery re-read keeps the same host guard as every other fetch.
+    assert spy.chiamate[1]["host_atteso"] == "comune.example.it"
+
+
+def test_scopri_lista_vuota_nessun_refetch():
+    # A GENUINE `[]` is a real empty catalogue: honest miss, NO second read.
+    spy = _EsecutoreSpy(_ok(b"[]"))
+    got = _wp(spy).scopri_servizi(base_url=_ENTRY, term="imu", limit=5)
+    assert got == ()
+    assert len(spy.chiamate) == 1  # no "_fields"-free recovery on a real empty
+
+
 # --- leggi_pagina (common transport) ----------------------------------------
 
 

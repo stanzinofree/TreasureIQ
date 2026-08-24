@@ -8,6 +8,7 @@ il resume giornaliero, quindi un riavvio non ripete i comuni già misurati.
 from __future__ import annotations
 
 import argparse
+import json
 import logging
 import os
 import time
@@ -24,12 +25,19 @@ from treasureiq.catalog.inventory_discovery import discover_source_inventory
 from treasureiq.catalog.planner import service_request
 from treasureiq.catalog.service_contracts import ServiceKey
 from treasureiq.catalog.service_registry import default_service_registry
+from treasureiq.catalog.service_resolver import resolve_service_with_meta
 from treasureiq.catalog.service_sweep import (
     ServiceSweepDryReport,
     pianifica_dry_run,
 )
 from treasureiq.connettore import _da_store_raw as _connettore_cache
 from treasureiq.ingest.censimento import _gia_registrati
+from treasureiq.mappa_connettore import (
+    ProbeBudgetEsaurito,
+    ProbeFallita,
+    mappa_connettore,
+)
+from treasureiq.mappa_connettore import _da_cache as _mappa_da_cache
 from treasureiq.registro import leggi_registro
 from treasureiq.registro_cli import _comuni_da_censimento
 from treasureiq.registro_cli import main as sweep_main
@@ -43,10 +51,35 @@ logger = logging.getLogger("treasureiq.sweep_worker")
 # (eseguito ok) e da 1 (eseguito con errori) così il chiamante non confonde
 # "rifiutato" con "riuscito".
 EXIT_REFRESH_SKIPPED = 2
-#: `service_catalog` senza `--dry-run`: l'esecuzione reale è lo Step 2, non
-#: ancora implementata.  Uscita dedicata così l'invocazione non fa nulla in
-#: silenzio.
+#: `service_catalog` senza `--dry-run` né `--execute`: l'esecuzione reale è
+#: dietro un gate esplicito.  Uscita dedicata così l'invocazione non fa nulla in
+#: silenzio.  Emessa anche quando un lotto reale non è ⊆ campione pinnato.
 EXIT_SERVICE_REAL_NOT_READY = 3
+#: Run reale `service_catalog`: il lotto è stato completato ma uno o più comuni
+#: hanno sollevato un errore.  Distinto da 0 così l'operatore sa che il campione
+#: ha buchi da guardare prima di fidarsi dei numeri.
+EXIT_SERVICE_PARTIAL_ERRORS = 4
+#: Run reale `service_catalog`: il budget-per-dominio si è esaurito durante una
+#: probe mappa guardata.  Il run si ferma onesto — nessuna risoluzione servizi
+#: speculativa oltre il muro, nessuna mappa fabbricata.
+EXIT_SERVICE_BUDGET_BLOCKED = 5
+
+#: Campione pinnato per il primo run reale (con rete) dello sweep servizi —
+#: docs/workstreams/rami-connettore/service-catalog-campione-20.md.  Il run
+#: reale rifiuta qualunque lotto non ⊆ questo insieme: il fan-out nazionale
+#: resta dietro un gate esplicito, non un flag.
+CAMPIONE_SERVICE_CATALOG_20: tuple[str, ...] = (
+    "001001", "002007", "003001", "004005", "006002", "007002",
+    "001028", "003008", "003084", "003095", "004009", "006009",
+    "020060", "023002", "024002", "025004",
+    "004059", "004203",
+    "007060", "012085",
+)
+
+#: I quattro esiti possibili per una risoluzione `ServiceKey` nel run reale.
+#: `da_cache`/`risolto_live` = trovato; `miss` = risolto ma nessuna reference;
+#: `senza_mappa` = nessuna mappa-connettore, la risoluzione non è nemmeno tentata.
+_ESITI_CHIAVE: tuple[str, ...] = ("da_cache", "risolto_live", "miss", "senza_mappa")
 
 
 def _nuovo_esecutore(config: "WorkerConfig") -> EsecutoreFetch:
@@ -78,6 +111,10 @@ class WorkerConfig:
     refresh_interval_seconds: float = 86400.0
     once: bool = False
     dry_run: bool = False
+    #: Gate del run reale `service_catalog`: senza questo (e senza `dry_run`) il
+    #: comando non fa nulla e ritorna `EXIT_SERVICE_REAL_NOT_READY`.  Il run reale
+    #: gira SOLO sul campione pinnato; il fan-out nazionale resta fuori.
+    execute: bool = False
     # Cortesia verso i portali (usata dalla confirmation via PoliticaFetch):
     # intervallo minimo fra due fetch sullo stesso dominio e tetto di fetch per
     # dominio per lotto. Il backoff sui fallimenti di rete parte da questa base.
@@ -92,6 +129,7 @@ class WorkerConfig:
 
 def config_from_env(
     *, db: Path | None = None, once: bool = False, dry_run: bool = False,
+    execute: bool = False,
 ) -> WorkerConfig:
     """Legge la configurazione solo da env, con default conservativi."""
 
@@ -138,6 +176,7 @@ def config_from_env(
         ),
         once=once,
         dry_run=dry_run or os.environ.get("TREASUREIQ_SWEEP_DRY_RUN", "0") == "1",
+        execute=execute or os.environ.get("TREASUREIQ_SERVICE_EXECUTE", "0") == "1",
         service_max_age_seconds=max(
             0.0, float(os.environ.get("TREASUREIQ_SERVICE_MAX_AGE_SECONDS", "86400"))
         ),
@@ -149,9 +188,21 @@ def next_batch(config: WorkerConfig) -> list[str]:
 
     comuni = _comuni_da_censimento(config.db)
     if config.mode == "service_catalog":
+        if config.execute and not config.dry_run:
+            # Run reale: SOLO il campione pinnato, intersecato col censimento
+            # (si eseguono solo comuni noti). Il fan-out nazionale resta fuori.
+            noti = set(comuni)
+            lotto = [c for c in CAMPIONE_SERVICE_CATALOG_20 if c in noti]
+            mancanti = [c for c in CAMPIONE_SERVICE_CATALOG_20 if c not in noti]
+            if mancanti:
+                logger.warning(
+                    "service_catalog reale: %d comuni del campione non sono nel "
+                    "censimento e verranno saltati: %s",
+                    len(mancanti), ", ".join(mancanti),
+                )
+            return lotto
         # Il dry-run del catalogo servizi è un censimento: classifica TUTTI i
         # comuni (supportati, non supportati, senza mappa), non un lotto da 20.
-        # Il filtro/cap arriverà con l'esecuzione reale (Step 2).
         return list(comuni)
     if config.mode in {"refresh", "confirmation"}:
         intervallo = (
@@ -276,26 +327,230 @@ def _loga_report_servizi(report: ServiceSweepDryReport) -> None:
 
 
 def _run_service_catalog(config: WorkerConfig, comuni: list[str]) -> int:
-    """Dry-run del catalogo servizi: censimento, zero rete, zero scritture.
+    """Instrada il catalogo servizi: dry-run, gate reale, o run reale.
 
-    L'esecuzione reale (risoluzione ``ServiceKey`` e scrittura
-    ``ServiceReference``) è lo Step 2 e non è ancora implementata: senza
-    ``--dry-run`` il comando non fa nulla e ritorna un'uscita dedicata.
+    - ``--dry-run`` → fotografia net-free (censimento, zero rete, zero scritture);
+    - né dry-run né ``--execute`` → gate esplicito, nessuna azione (uscita 3);
+    - ``--execute`` → run reale sul solo campione pinnato (rete via executor
+      guardato, cache servizi scritta dal resolver, metriche atomiche).
     """
-    if not config.dry_run:
+    if config.dry_run:
+        platform_di, supportata, in_cache = _seam_servizi(config)
+        report = pianifica_dry_run(
+            comuni, platform_di=platform_di, supportata=supportata, in_cache=in_cache
+        )
+        _loga_report_servizi(report)
+        return 0
+    if not config.execute:
         logger.warning(
-            "service_catalog: esecuzione reale non ancora implementata (Step 2); "
-            "usa --dry-run. Nessuna azione su %d comuni.",
+            "service_catalog: esecuzione reale dietro gate esplicito. Usa "
+            "--execute per il run reale sul campione pinnato, o --dry-run per la "
+            "fotografia net-free. Nessuna azione su %d comuni.",
             len(comuni),
         )
         return EXIT_SERVICE_REAL_NOT_READY
+    return _esegui_service_catalog(config, comuni)
 
-    platform_di, supportata, in_cache = _seam_servizi(config)
-    report = pianifica_dry_run(
-        comuni, platform_di=platform_di, supportata=supportata, in_cache=in_cache
+
+def _percorso_metriche_servizi() -> Path:
+    return LIVE_DIR / "service-catalog-metriche" / "ultimo.json"
+
+
+def _scrivi_metriche_servizi(metriche: dict) -> None:
+    """Scrittura atomica delle metriche per-run (mai in storico.db).
+
+    Riscritta per intero dopo ogni comune: un run interrotto lascia comunque
+    l'ultimo stato coerente su disco, e la ripresa riparte dalla cache servizi
+    (che è lo stato vero), non da questo file.
+    """
+    percorso = _percorso_metriche_servizi()
+    try:
+        percorso.parent.mkdir(parents=True, exist_ok=True)
+        provvisorio = percorso.with_suffix(".tmp")
+        provvisorio.write_text(
+            json.dumps(metriche, ensure_ascii=False, indent=2), "utf-8"
+        )
+        provvisorio.replace(percorso)
+    except OSError as exc:
+        logger.warning("metriche service_catalog non scrivibili (%s): %s", percorso, exc)
+
+
+def _metriche_iniziali(totale: int) -> dict:
+    """Lo scheletro delle metriche per-run, con i contatori a zero."""
+    return {
+        "avviato_il": datetime.now(timezone.utc).isoformat(),
+        "modo": "service_catalog",
+        "campione": "20-pinnato",
+        "comuni_totali": totale,
+        "comuni_completati": 0,
+        "budget_esaurito": False,
+        "esito_comuni": {"errore": 0},
+        "esito_chiavi": {esito: 0 for esito in _ESITI_CHIAVE},
+        # Il costo della probe mappa è contato a parte dalle risoluzioni: un
+        # comune su cache-mappa non tocca la rete per la mappa, uno live sì.
+        "probe": {
+            "comuni_da_cache_mappa": 0,
+            "comuni_probati_live": 0,
+            "probe_fallite": 0,
+        },
+        "per_piattaforma": {},
+        "per_comune": [],
+    }
+
+
+def _esito_chiave(
+    chiave: ServiceKey,
+    codice: str,
+    mappa,
+    platform_id: str,
+    registry,
+    freshness: FreshnessPolicy,
+) -> str:
+    """Risolve una `ServiceKey` e classifica l'esito, cache-first.
+
+    Senza mappa la risoluzione non è nemmeno tentata (`senza_mappa`): il
+    resolver richiede una `MappaConnettore`, e fabbricarne una vuota
+    produrrebbe miss speculativi. Un budget esaurito a livello di risoluzione
+    (connettore) degrada a `miss` onesto — solo la probe mappa ferma il run.
+    """
+    if mappa is None:
+        return "senza_mappa"
+    richiesta = service_request(
+        source_id=codice,
+        service_key=chiave,
+        freshness=freshness,
+        namespace="service-catalog",
     )
-    _loga_report_servizi(report)
-    return 0
+    resolved = resolve_service_with_meta(
+        richiesta, mappa=mappa, registry=registry, platform_id=platform_id
+    )
+    if resolved is None:
+        return "miss"
+    return "da_cache" if resolved.from_cache else "risolto_live"
+
+
+def _risolvi_comune_servizi(
+    codice: str, *, registry, esecutore, freshness: FreshnessPolicy, metriche: dict
+) -> dict:
+    """Risolve le 5 `ServiceKey` di un comune; ritorna la sua riga di metriche.
+
+    La mappa arriva dalla cache (nessuna rete) o da una probe live guardata; la
+    probe live può sollevare `ProbeBudgetEsaurito` (propagata: ferma il run) o
+    `ProbeFallita` (miss onesto: nessuna mappa, nessuna risoluzione tentata).
+    """
+    record = leggi_registro(codice)
+    platform_id = record.piattaforma if record else ""
+    riga: dict = {
+        "source_id": codice,
+        "piattaforma": platform_id or None,
+        "mappa": None,
+        "chiavi": {},
+    }
+
+    cache_mappa = _mappa_da_cache(codice)
+    if cache_mappa is not None:
+        mappa = cache_mappa
+        riga["mappa"] = "cache"
+        metriche["probe"]["comuni_da_cache_mappa"] += 1
+    else:
+        metriche["probe"]["comuni_probati_live"] += 1
+        try:
+            mappa = mappa_connettore(codice, esecutore=esecutore)
+            riga["mappa"] = "live"
+        except ProbeFallita:
+            mappa = None
+            riga["mappa"] = "probe_fallita"
+            metriche["probe"]["probe_fallite"] += 1
+
+    pf = metriche["per_piattaforma"].setdefault(
+        platform_id or "ignota",
+        {"comuni": 0, **{esito: 0 for esito in _ESITI_CHIAVE}},
+    )
+    pf["comuni"] += 1
+
+    for chiave in ServiceKey:
+        esito = _esito_chiave(chiave, codice, mappa, platform_id, registry, freshness)
+        riga["chiavi"][chiave.value] = esito
+        metriche["esito_chiavi"][esito] += 1
+        pf[esito] += 1
+    return riga
+
+
+def _loga_metriche_servizi(metriche: dict) -> None:
+    e = metriche["esito_chiavi"]
+    p = metriche["probe"]
+    logger.info(
+        "service_catalog reale: %d/%d comuni — chiavi cache=%d live=%d miss=%d "
+        "senza_mappa=%d; probe live=%d cache=%d fallite=%d; budget_esaurito=%s",
+        metriche["comuni_completati"], metriche["comuni_totali"],
+        e["da_cache"], e["risolto_live"], e["miss"], e["senza_mappa"],
+        p["comuni_probati_live"], p["comuni_da_cache_mappa"], p["probe_fallite"],
+        metriche["budget_esaurito"],
+    )
+
+
+def _esegui_service_catalog(config: WorkerConfig, comuni: list[str]) -> int:
+    """Run reale del catalogo servizi sul campione pinnato.
+
+    Rete solo attraverso l'executor guardato dello sweep (host guard, budget,
+    rate-limit); la cache servizi è scritta dal resolver su FULFILLED; le
+    metriche sono riscritte in modo atomico dopo ogni comune.  Il fan-out
+    nazionale resta fuori: un lotto non ⊆ campione pinnato è rifiutato.
+    """
+    ammessi = set(CAMPIONE_SERVICE_CATALOG_20)
+    fuori = [c for c in comuni if c not in ammessi]
+    if fuori:
+        logger.error(
+            "service_catalog reale: lotto non ⊆ campione pinnato (%d comuni fuori, "
+            "es. %s). Il fan-out nazionale resta dietro un gate esplicito.",
+            len(fuori), ", ".join(fuori[:5]),
+        )
+        return EXIT_SERVICE_REAL_NOT_READY
+
+    esecutore = _nuovo_esecutore(config)
+    registry = default_service_registry(esecutore)
+    freshness = FreshnessPolicy(max_age_seconds=config.service_max_age_seconds)
+    metriche = _metriche_iniziali(len(comuni))
+    errori = 0
+
+    for codice in comuni:
+        try:
+            riga = _risolvi_comune_servizi(
+                codice,
+                registry=registry,
+                esecutore=esecutore,
+                freshness=freshness,
+                metriche=metriche,
+            )
+        except ProbeBudgetEsaurito:
+            # Budget del dominio esaurito durante la probe mappa: run fermato
+            # onesto. Il comune corrente resta senza risoluzioni speculative.
+            metriche["budget_esaurito"] = True
+            metriche["per_comune"].append(
+                {"source_id": codice, "esito_comune": "budget_bloccato", "chiavi": {}}
+            )
+            _scrivi_metriche_servizi(metriche)
+            _loga_metriche_servizi(metriche)
+            logger.warning(
+                "service_catalog: budget dominio esaurito su %s, run fermato", codice
+            )
+            return EXIT_SERVICE_BUDGET_BLOCKED
+        except Exception:  # noqa: BLE001 — un comune non ferma il lotto
+            logger.exception("service_catalog: risoluzione fallita per %s", codice)
+            errori += 1
+            metriche["esito_comuni"]["errore"] += 1
+            metriche["per_comune"].append(
+                {"source_id": codice, "esito_comune": "errore", "chiavi": {}}
+            )
+        else:
+            metriche["per_comune"].append(riga)
+        metriche["comuni_completati"] += 1
+        _scrivi_metriche_servizi(metriche)
+        if config.delay:
+            time.sleep(config.delay)
+
+    _loga_metriche_servizi(metriche)
+    return EXIT_SERVICE_PARTIAL_ERRORS if errori else 0
 
 
 def run_batch(config: WorkerConfig, comuni: list[str]) -> int:
@@ -422,9 +677,18 @@ def main(argv: list[str] | None = None) -> int:
         "--dry-run", action="store_true",
         help="Esegue lo sweep senza scrivere data-live (refresh rifiutato).",
     )
+    parser.add_argument(
+        "--execute", action="store_true",
+        help=(
+            "Gate del run reale service_catalog: senza questo il comando non fa "
+            "nulla. Gira SOLO sul campione pinnato da 20 (nessun fan-out nazionale)."
+        ),
+    )
     args = parser.parse_args(argv)
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
-    config = config_from_env(db=args.db, once=args.once, dry_run=args.dry_run)
+    config = config_from_env(
+        db=args.db, once=args.once, dry_run=args.dry_run, execute=args.execute
+    )
     if config.dry_run:
         logger.info("dry-run attivo: nessuna scrittura su data-live")
     if args.mode:

@@ -33,18 +33,25 @@ from __future__ import annotations
 
 import argparse
 import html
+import json
 import logging
 import re
 import sys
-from urllib.parse import urlparse
+from contextlib import nullcontext
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import TYPE_CHECKING
+from urllib.parse import urlparse
 
 from pydantic import BaseModel, Field
 
 from treasureiq.ingest.censimento import REST_BASE_UFFICI, _Sonda
+from treasureiq.ingest.host_guard import host_senza_www
 from treasureiq.ingest.piattaforma import Piattaforma
 from treasureiq.sonda_live import LIVE_DIR, ComuneNoto, comune_per_codice
+
+if TYPE_CHECKING:
+    from treasureiq.catalog.fetch_runtime import EsecutoreFetch
 
 logger = logging.getLogger(__name__)
 
@@ -324,12 +331,23 @@ def _categorie(sonda: _Sonda, base: str, rest_base: str) -> list[CategoriaServiz
     return categorie
 
 
-def _sonda_mappa(comune: ComuneNoto, *, timeout: float = 8.0) -> MappaConnettore:
+def _sonda_mappa(
+    comune: ComuneNoto,
+    *,
+    timeout: float = 8.0,
+    esecutore: "EsecutoreFetch | None" = None,
+) -> MappaConnettore:
     """La misura vera: apre il portale una volta e legge tutti gli assi.
 
-    Non solleva mai. Un portale muto o storto dà una mappa con tutto `esposto`
-    a `False`, che è esattamente ciò che è successo, e non un errore da propagare
-    fino a chi ha fatto la domanda.
+    In modalità grezza (`esecutore=None`) non solleva mai: un portale muto o
+    storto dà una mappa con tutto `esposto` a `False`, che è esattamente ciò che
+    è successo, non un errore da propagare a chi ha fatto la domanda.
+
+    In modalità guardata (`esecutore` passato) ogni fetch passa dalla politica
+    dello sweep e la probe PUÒ sollevare: `ProbeBudgetEsaurito` (budget dominio)
+    o `ProbeFallita` (home autorizzata non confermabile). Entrambe risalgono: lo
+    sweep non deve mai fabbricare una mappa quando non ha potuto leggere il
+    portale sotto guardia.
     """
     sondato_il = datetime.now(timezone.utc).isoformat()
     base = _base_con_schema(comune.sito)
@@ -342,7 +360,28 @@ def _sonda_mappa(comune: ComuneNoto, *, timeout: float = 8.0) -> MappaConnettore
     if base is None:
         return vuota
 
-    with _Sonda(timeout=timeout) as sonda:
+    if esecutore is None:
+        contesto = _Sonda(timeout=timeout)
+    else:
+        host_atteso = host_senza_www((urlparse(base).hostname or "").lower())
+        contesto = nullcontext(
+            _LettoreEsecutore(esecutore, host_atteso=host_atteso, timeout=timeout)
+        )
+
+    with contesto as sonda:
+        # Modalità guardata: prima confermare la home autorizzata del comune.
+        # Muta/non-200/redirect fuori host → nessun portale confermabile → miss
+        # onesto (`ProbeFallita`), non una mappa fabbricata dal solo registro.
+        # Budget esaurito (`ProbeBudgetEsaurito`, BaseException) risale intatto.
+        # In modalità grezza la home resta tollerante (blocco più in basso): una
+        # home muta costa solo il logo.
+        risposta_home = None
+        if esecutore is not None:
+            try:
+                risposta_home = sonda.risposta(base)
+            except _ProbeMuta as muto:
+                raise ProbeFallita(comune.codice_istat) from muto
+
         tipi = _tipi_disponibili(sonda, base)
         rest_bases = set(tipi.values())
 
@@ -385,10 +424,13 @@ def _sonda_mappa(comune: ComuneNoto, *, timeout: float = 8.0) -> MappaConnettore
 
         logo_url = None
         piattaforma_id = None
-        try:
-            risposta_home = sonda.risposta(base)
-        except Exception:  # noqa: BLE001 — homepage muta: nessun logo, non un errore
-            risposta_home = None
+        if risposta_home is None:
+            # Modalità grezza (o guardata senza home già letta): la home è
+            # tollerante — muta = nessun logo, non un errore.
+            try:
+                risposta_home = sonda.risposta(base)
+            except Exception:  # noqa: BLE001 — homepage muta: nessun logo, non un errore
+                risposta_home = None
         if (
             risposta_home is not None
             and risposta_home.status_code == 200
@@ -455,6 +497,104 @@ def _piattaforma_da_home(risposta, *, source_id: str, entrypoint_url: str) -> st
     return firma.piattaforma.value
 
 
+#: Cap byte per un fetch di probe mappa sotto executor guardato (come gli altri
+#: connettori: 4 MB abbondano per un indice REST o una home).
+MAX_BYTES_PROBE = 4_000_000
+
+
+class ProbeBudgetEsaurito(BaseException):
+    """Il budget-per-dominio dello sweep è esaurito durante la probe mappa.
+
+    Deriva da `BaseException`, non da `Exception`, *apposta*: gli helper di probe
+    (`_totale_rest`/`_categorie`/`_tipi_disponibili`) catturano `except Exception`
+    per trattare un endpoint muto come «non esposto». Il budget esaurito NON è un
+    endpoint muto: deve risalire intatto fino a `_sonda_mappa` e oltre, dove il
+    chiamante sweep lo traduce in comune budget-bloccato — mai in una mappa vuota
+    speculativa né in risoluzioni servizi speculative."""
+
+
+class ProbeFallita(Exception):
+    """La home autorizzata del comune non è raggiungibile sotto guardia.
+
+    Sollevata solo in modalità guardata (executor iniettato): se la home del
+    comune è muta/non-200 o un redirect esce dall'host autorizzato, non si può
+    confermare il portale, quindi niente mappa e niente risoluzione — un miss
+    onesto, non una mappa fabbricata dal solo registro."""
+
+
+class _ProbeMuta(Exception):
+    """Endpoint interrogato ma muto/bloccato/non-200 sotto guardia.
+
+    Ordinaria di proposito: gli helper di probe la inghiottono (`except
+    Exception`) e trattano l'endpoint come «non esposto», esattamente come fanno
+    con un `_Sonda` grezzo che ritorna non-200."""
+
+
+class _RispostaProbe:
+    """Risposta minima in stile `httpx.Response` costruita dall'esito guardato.
+
+    Fa combaciare la sola interfaccia che gli helper di probe usano da
+    `_Sonda.risposta`: `.status_code`, `.headers`, `.text`, `.json()`. Il fetch
+    guardato ritorna solo su 200, quindi lo status è sempre 200 qui."""
+
+    def __init__(self, status_code: int, headers: object, content: bytes) -> None:
+        self.status_code = status_code
+        self.headers = headers
+        self._content = content
+
+    @property
+    def text(self) -> str:
+        return self._content.decode("utf-8", "replace")
+
+    def json(self) -> object:
+        return json.loads(self._content)
+
+
+class _LettoreEsecutore:
+    """Adatta `EsecutoreFetch` all'interfaccia `_Sonda` attesa dalla probe mappa.
+
+    Ogni lettura passa dalla politica guardata dello sweep: host guard/SSRF
+    (`fetch_guardato`), budget e rate-limit per dominio. Traduzione degli esiti:
+    `consentito=False` (budget) → `ProbeBudgetEsaurito`; `fetched is None`
+    (host fuori atteso, non-200, rete muta) → `_ProbeMuta`; 200 → `_RispostaProbe`."""
+
+    def __init__(
+        self, esecutore: "EsecutoreFetch", *, host_atteso: str, timeout: float = 8.0
+    ) -> None:
+        self._esecutore = esecutore
+        self._host = host_atteso
+        self._timeout = timeout
+
+    def _leggi(self, url: str) -> _RispostaProbe:
+        esito = self._esecutore.esegui(
+            url,
+            host_atteso=self._host,
+            timeout=self._timeout,
+            max_bytes=MAX_BYTES_PROBE,
+        )
+        if not esito.consentito:
+            raise ProbeBudgetEsaurito(url)
+        if esito.fetched is None:
+            raise _ProbeMuta(url)
+        intestazioni, dati, _url_finale = (
+            esito.fetched[0],
+            esito.fetched[1],
+            esito.fetched[2],
+        )
+        return _RispostaProbe(200, intestazioni, dati)
+
+    def risposta(self, url: str) -> _RispostaProbe:
+        return self._leggi(url)
+
+    def json(self, url: str, **params: object) -> object:
+        if params:
+            from urllib.parse import urlencode
+
+            separatore = "&" if "?" in url else "?"
+            url = f"{url}{separatore}{urlencode(params)}"
+        return self._leggi(url).json()
+
+
 def _percorso_cache(codice_istat: str) -> Path:
     return LIVE_DIR / "mappa-connettore" / f"{codice_istat}.json"
 
@@ -487,14 +627,25 @@ def _in_cache(voce: MappaConnettore) -> None:
 
 
 def mappa_connettore(
-    codice_istat: str | None, *, usa_cache: bool = True
+    codice_istat: str | None,
+    *,
+    usa_cache: bool = True,
+    esecutore: "EsecutoreFetch | None" = None,
 ) -> MappaConnettore | None:
     """La mappa di capacità di un comune. `None` se il comune non è noto.
 
     Con cache calda torna in memoria; a freddo sonda il portale una volta e
     scrive la cache — così la stessa lettura non si ripete a ogni domanda,
     educato verso il portale e istantaneo per chi guarda.
-    """
+
+    `esecutore` (nuovo seam, default `None`): se passato, la probe a freddo
+    passa dall'`EsecutoreFetch` guardato dello sweep (host guard, budget,
+    rate-limit) invece del `_Sonda` grezzo. I 14 chiamanti esistenti non lo
+    passano e restano invariati. In modalità guardata la probe può sollevare
+    `ProbeBudgetEsaurito` (budget dominio) o `ProbeFallita` (home non
+    confermabile): entrambe risalgono al chiamante sweep, che le traduce in
+    comune budget-bloccato / miss onesto — e in nessuno dei due casi si scrive
+    una mappa speculativa in cache."""
     comune = comune_per_codice(codice_istat)
     if comune is None:
         return None
@@ -502,7 +653,7 @@ def mappa_connettore(
         voce = _da_cache(comune.codice_istat)
         if voce is not None:
             return voce
-    mappa = _sonda_mappa(comune)
+    mappa = _sonda_mappa(comune, esecutore=esecutore)
     _in_cache(mappa)
     return mappa
 

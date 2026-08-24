@@ -1,7 +1,8 @@
 # Ramo 3 — Connettore servizi #2: ComWeb
 
-Stato: SPEDITO (23 ago) — passi 2-8 completi, smoke live Alpignano verde, commit
-isolato; 4 rossi pre-esistenti registrati §5.1 (triage separato). [storico header]
+Stato: SPEDITO (23 ago) + VERIFICA AGLIÈ (24 ago, §8) — passi 2-8 completi, smoke
+live Alpignano verde, commit isolato; 4 rossi pre-esistenti registrati §5.1
+(triage separato). [storico header]
 Stato precedente: IMPLEMENTATO (23 ago) — passi 2-6 spediti, net-free verde (71/71 sui test
 servizio); resta smoke reale (passo 7) + commit (passo 8)
 Branch previsto: `feat/ramo3-sp-increment1` (o dedicato `feat/ramo3-comweb`)
@@ -404,3 +405,82 @@ Verifiche obbligatorie prima del commit:
   sceglie **quale anchor categoria seguire** sull'indice; nessun URL fabbricato; conferma
   sempre sul titolo; carta_identita/stato_civile multi-scheda restano NOT_FOUND
   (disambiguazione = lavoro futuro del recognizer). Vincoli completi in §3.2.
+  *Aggiornamento 24 ago (§8.2): su Agliè `stato_civile` è in realtà FULFILLED — la
+  categoria ha UNA sola scheda col marker «matrimonio», quindi exactly-1+confirm passa.*
+
+---
+
+## 8. Verifica su seconda fixture reale — Agliè 001001 (24 ago)
+
+Seconda campagna net-free su fixture catturate dal vivo
+(`api/tests/fixtures/comweb/aglie_*.html`): indice (9 categorie), categoria
+anagrafe (16 card), categoria tributi (9 card). Host ufficiale
+`www.comune.aglie.to.it` (canonical nell'HTML); `servizi.comune.aglie.to.it` è
+un host **diverso** (servizi online) e cadrebbe sotto host guard.
+
+### 8.1 Forma e numero delle richieste (asserita nei test)
+
+Per **ogni** key: `GET /it-it/servizi` (indice) → `GET
+/it-it/servizi/{categoria mappata}` (una sola, quella di
+`COMWEB_SERVICE_CATEGORY`) → al più `GET` della singola scheda confermata (per
+le opzioni di accesso). Mai un'altra categoria, mai crawl
+(`test_aglie_every_key_reads_index_plus_its_one_mapped_category`).
+
+### 8.2 Esito per key (ground truth, non ipotesi)
+
+| ServiceKey | Card che confermano (recogniser sul titolo) | n | Esito | Perché |
+|---|---|---|---|---|
+| `cambio_residenza` | «Cambio Residenza» | 1 | **FULFILLED** | exactly-1 + confirm; `service_id = 001001:comweb:cambio-residenza-305-22801-1-f8ed…` |
+| `accesso_atti` | «Richiedere l'accesso agli atti» | 1 | **FULFILLED** | «Accesso Civico» (istituto diverso) **non** porta marker `accesso [agli] atti` → mai confuso |
+| `carta_identita` | «Carta d'Identità Elettronica (CIE)» + «Carta d'identità per minori» | 2 | **NOT_FOUND** | ambiguità onesta (I-1): ≥2 confermate, nessuna scelta implicita |
+| `stato_civile` | «Richiedere una pubblicazione di matrimonio» | 1 | **FULFILLED** | il marker substring «matrimonio» di `STATO_CIVILE` conferma UNA card → la regola passa. Vedi caveat sotto |
+| `tributi` | «Pagamento Tassa Rifiuti (TARI)» + «Pagare tributi IMU» | 2 | **NOT_FOUND** | key generica by design; IUC/TOSAP/ICP non portano marker |
+
+**Caveat `stato_civile` (scoperta di questa verifica).** L'ipotesi di partenza
+era NOT_FOUND («nessuna card titolata stato civile»). Il comportamento REALE è
+FULFILLED: il vocabolario del recogniser condiviso include «matrimonio» tra i
+marker di `STATO_CIVILE`, e ad Agliè una sola card lo porta. La regola
+exactly-1+confirm è rispettata alla lettera; la domanda se «pubblicazione di
+matrimonio» sia una risposta giusta a una richiesta *generica* di stato civile è
+una questione di **vocabolario del recogniser condiviso** (`service_key.py`,
+usato identico da WP) — fuori dal perimetro di questo connettore. Da valutare
+in una slice recognizer, non qui.
+
+### 8.3 Ambiguità: migliorabile-e-dimostrabile vs miss onesto
+
+- **`carta_identita` → resta miss onesto.** Le due card (CIE + per-minori) non
+  offrono una regola dimostrabile dalle card stesse per eleggere la CIE come
+  «rilascio canonico»: un tie-break su «qualificatore di platea nel titolo»
+  (*per minori*) sarebbe una scelta lessicale arbitraria, non evidenza. **Da
+  verificare con altra prova live**: se su più comuni ComWeb la card CIE è
+  strutturalmente distinta (es. categoria/metadato dedicato), la preferenza
+  diventerebbe dimostrabile.
+- **`tributi` → resta miss onesto.** Due card confermano (TARI, IMU): la key è
+  un ombrello. L'unico miglioramento vero è **splittare il vocabolario**
+  (`ServiceKey` per-tributo) — decisione di contratto condiviso, non un
+  tie-break del connettore.
+- **`accesso_atti` → già corretto.** La distinzione atti/civico regge da sola:
+  i marker (`accesso agli atti`/`accesso atti`) non matchano «Accesso Civico».
+
+### 8.4 Fingerprint ComWeb (primi test su fixture reali)
+
+Il plugin `plugins/recognition/base/comweb.py` (generator meta, definitivo,
+score 0.998, `comweb-base-v1`) aveva già una matrice di test **sintetici**
+(`test_plugin_comweb_recognition.py`); ora è coperto anche su **HTML reale**:
+le tre pagine di Agliè portano `generator: ComWeb - www.epublic.it` (branding
+vendor, identico su indice e categorie → fingerprint stabile per-portale), e il
+nativo pareggia il bridge legacy anche sulla fixture reale.
+
+**Marcatori NON aggiunti, con prova contraria.** `data-element="service-link"`
+è presente nelle fixture ComWeb ma anche in quelle **OpenPA e PeopleWeb** del
+repo: le fixture stesse ne falsificano la specificità — non è un marker ComWeb.
+L'host `servizi.comune.*` è un pattern di hosting, non una firma della
+piattaforma. Nessun marker nuovo nel plugin (che deve anche restare a parità di
+score col bridge v1).
+
+### 8.5 Cache/metriche
+
+Invariato rispetto a §2: cache v3 keyed `(source_id, service_key)`, un
+FULFILLED di Agliè entra in cache come quello di Alpignano; i NOT_FOUND onesti
+non fabbricano riferimenti. Nessun contatore nuovo introdotto da questa
+verifica.

@@ -46,7 +46,8 @@ COMWEB_SERVICE_CATEGORY: dict[ServiceKey, str] = {
     ServiceKey.CAMBIO_RESIDENZA: "anagrafe-e-stato-civile",
     ServiceKey.STATO_CIVILE: "anagrafe-e-stato-civile",
     ServiceKey.ACCESSO_ATTI: "anagrafe-e-stato-civile",
-    ServiceKey.TRIBUTI: "tributi-finanze-e-contravvenzioni",
+    ServiceKey.TRIBUTI_IMU: "tributi-finanze-e-contravvenzioni",
+    ServiceKey.TRIBUTI_TARI: "tributi-finanze-e-contravvenzioni",
 }
 
 #: L'unico entry-point costruito dal connettore (come il root REST di WP).

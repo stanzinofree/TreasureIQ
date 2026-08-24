@@ -34,7 +34,13 @@ class ServiceKey(str, Enum):
     CAMBIO_RESIDENZA = "cambio_residenza"
     ACCESSO_ATTI = "accesso_atti"
     STATO_CIVILE = "stato_civile"
-    TRIBUTI = "tributi"
+    # TRIBUTI is split per-tax (Ramo 3): the generic key resolved 0/6 useful on
+    # the real sample (a single "tributi" full-text search returns collection/
+    # riscossione services or >=2 taxes → honest NOT_FOUND) and its "tributi"
+    # substring marker leaked onto "contributi" (grants). IMU and TARI are the
+    # only tax entities municipalities title cleanly and citizens name directly.
+    TRIBUTI_IMU = "tributi_imu"
+    TRIBUTI_TARI = "tributi_tari"
 
 
 #: One canonical REST search term per key, used to NARROW a single ``search=``
@@ -49,7 +55,8 @@ SERVICE_SEARCH_TERM: dict["ServiceKey", str] = {
     ServiceKey.CAMBIO_RESIDENZA: "cambio di residenza",
     ServiceKey.ACCESSO_ATTI: "accesso agli atti",
     ServiceKey.STATO_CIVILE: "stato civile",
-    ServiceKey.TRIBUTI: "tributi",
+    ServiceKey.TRIBUTI_IMU: "imu",
+    ServiceKey.TRIBUTI_TARI: "tari",
 }
 
 

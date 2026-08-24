@@ -535,7 +535,12 @@ def test_fetcher_search_follows_same_comune_redirect_www_to_apex():
         ("Cambio di residenza", ServiceKey.CAMBIO_RESIDENZA),
         ("Accesso agli atti amministrativi", ServiceKey.ACCESSO_ATTI),
         ("Certificato di nascita (stato civile)", ServiceKey.STATO_CIVILE),
-        ("Pagamento tributi comunali (IMU/TARI)", ServiceKey.TRIBUTI),
+        # Per-tax split: a clean single-tax title confirms its own key.
+        ("IMU - Imposta Municipale Propria", ServiceKey.TRIBUTI_IMU),
+        ("Pagamento TARI (tassa rifiuti)", ServiceKey.TRIBUTI_TARI),
+        # A title naming BOTH taxes marks two keys → ambiguous → None (the
+        # honest outcome; the handler disambiguates, the recogniser never picks).
+        ("Pagamento tributi comunali (IMU/TARI)", None),
     ],
 )
 def test_recognizer_on_wordpress_titles(title, expected):
@@ -750,7 +755,7 @@ def test_fixture_albaredo_dialetto_b_reads_as_false_empty():
         "albaredo_dialettoB_raw.json",
         istat="023002",
         host="www.comune.albaredodadige.vr.it",
-        service_key=ServiceKey.TRIBUTI,
+        service_key=ServiceKey.TRIBUTI_IMU,
     )
     assert result.status is DataStatus.NOT_FOUND
     assert result.service_references == ()

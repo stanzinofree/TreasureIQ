@@ -23,10 +23,20 @@ from treasureiq.chat.service_key import riconosci_service_key
         ("certificato di nascita", ServiceKey.STATO_CIVILE),
         ("stato civile", ServiceKey.STATO_CIVILE),
         ("certificato di matrimonio", ServiceKey.STATO_CIVILE),
-        ("devo pagare la TARI", ServiceKey.TRIBUTI),
-        ("informazioni sull'IMU", ServiceKey.TRIBUTI),
+        # TRIBUTI split per-tax: each tax names its own key; the generic
+        # "tributi" is deliberately unrecognised (see negatives below).
+        ("devo pagare la TARI", ServiceKey.TRIBUTI_TARI),
+        ("informazioni sull'IMU", ServiceKey.TRIBUTI_IMU),
+        ("tassa rifiuti non pagata", ServiceKey.TRIBUTI_TARI),
         # out of vocabulary → None (no nearest-neighbour fallback)
         ("vorrei un contributo per l'affitto", None),
+        # generic "tributi" is NOT a marker after the split: it did not
+        # discriminate a tax and its substring leaked onto "contributi" (grants,
+        # a different service). Both stay honestly unrecognised.
+        ("pagamento tributi comunali", None),
+        ("Richiesta contributi per attività associazioni", None),
+        # both taxes named at once → two keys → ambiguous → None
+        ("devo pagare IMU e TARI", None),
         ("ciao", None),
         ("modulo per il passaporto", None),
         # generic 'residenza' alone is not a marker

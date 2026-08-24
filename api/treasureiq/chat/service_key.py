@@ -51,8 +51,9 @@ _SUBSTRING_MARKERS: dict[ServiceKey, tuple[str, ...]] = {
         "certificato di morte",
         "certificato di matrimonio",
     ),
-    ServiceKey.TRIBUTI: (
-        "tributi",
+    # No bare "tributi" substring: it leaked onto "contributi"/"contributiva"
+    # (grants, a different service) and did not discriminate a tax anyway.
+    ServiceKey.TRIBUTI_TARI: (
         "tassa rifiuti",
     ),
 }
@@ -61,7 +62,8 @@ _SUBSTRING_MARKERS: dict[ServiceKey, tuple[str, ...]] = {
 #: substring (``cie`` inside "società", ``imu``/``tari`` inside longer words).
 _WORD_MARKERS: dict[ServiceKey, tuple[str, ...]] = {
     ServiceKey.CARTA_IDENTITA: ("cie",),
-    ServiceKey.TRIBUTI: ("imu", "tari"),
+    ServiceKey.TRIBUTI_IMU: ("imu",),
+    ServiceKey.TRIBUTI_TARI: ("tari",),
 }
 
 

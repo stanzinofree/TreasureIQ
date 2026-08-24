@@ -299,9 +299,9 @@ def test_ambiguous_key_is_not_found():
 def test_tributi_follows_the_mapped_category():
     f = _FetcherComweb(_pagine_reali())
     ComWebServiceConnector(f).retrieve(
-        _request(service_key=ServiceKey.TRIBUTI), mappa=_mappa(), esito=None
+        _request(service_key=ServiceKey.TRIBUTI_IMU), mappa=_mappa(), esito=None
     )
-    # The tributi key drives the connector to the tributi category, not anagrafe.
+    # A tributi sub-key drives the connector to the tributi category, not anagrafe.
     assert _CAT_TRIBUTI in f.transport.letti
     assert _CAT_ANAGRAFE not in f.transport.letti
 
@@ -456,17 +456,38 @@ def test_aglie_stato_civile_is_honest_not_found():
     assert result.service_references == ()
 
 
-def test_aglie_tributi_two_confirmed_honest_not_found():
-    # Two tributi cards confirm TRIBUTI — "Pagamento Tassa Rifiuti (TARI)"
-    # (marker "tassa rifiuti"/"tari") and "Pagare tributi IMU" (marker
-    # "tributi"/"imu") — so ≥2 confirmed → NOT_FOUND (I-1).  The key is
-    # generic by design; splitting it is a vocabulary decision, not a
-    # connector tie-break.
-    result, letti = _retrieve_aglie(ServiceKey.TRIBUTI)
-    assert result.status is DataStatus.NOT_FOUND
-    assert result.service_references == ()
-    # The tributi key drives the tributi category, never anagrafe.
-    assert letti == [_INDEX_AGLIE, _CAT_TRIBUTI_AGLIE]
+def test_aglie_tributi_imu_single_card_fulfilled():
+    # After the TRIBUTI split, the tributi category's two tax cards resolve
+    # cleanly per key instead of colliding into an ambiguous NOT_FOUND.
+    # "Pagare tributi IMU" is the ONLY card confirming TRIBUTI_IMU (marker
+    # "imu"); the TARI card does not → exactly one confirmed → FULFILLED.
+    result, letti = _retrieve_aglie(ServiceKey.TRIBUTI_IMU)
+    assert result.status is DataStatus.FULFILLED
+    (ref,) = result.service_references
+    assert ref.service_id == (
+        f"{_ISTAT_AGLIE}:comweb:"
+        "pagare-tributi-imu-600-22892-1-a3256eda7bd21d2164edd278345c061f"
+    )
+    assert ref.title == "Pagare tributi IMU"
+    # Index → the ONE mapped (tributi) category → the scheda page. No anagrafe.
+    assert letti[:2] == [_INDEX_AGLIE, _CAT_TRIBUTI_AGLIE]
+    assert len(letti) == 3 and letti[2] == str(ref.source_url)
+
+
+def test_aglie_tributi_tari_single_card_fulfilled():
+    # "Pagamento Tassa Rifiuti (TARI)" is the ONLY card confirming TRIBUTI_TARI
+    # (markers "tassa rifiuti"/"tari"); the IMU card does not → one confirmed →
+    # FULFILLED.  The dropped bare "tributi" substring no longer cross-confirms.
+    result, letti = _retrieve_aglie(ServiceKey.TRIBUTI_TARI)
+    assert result.status is DataStatus.FULFILLED
+    (ref,) = result.service_references
+    assert ref.service_id == (
+        f"{_ISTAT_AGLIE}:comweb:"
+        "pagamento-tassa-rifiuti-tari-659-22883-1-809d1b6227988c467e9a06be0ea34eab"
+    )
+    assert ref.title == "Pagamento Tassa Rifiuti (TARI)"
+    assert letti[:2] == [_INDEX_AGLIE, _CAT_TRIBUTI_AGLIE]
+    assert len(letti) == 3 and letti[2] == str(ref.source_url)
 
 
 def test_aglie_every_key_reads_index_plus_its_one_mapped_category():

@@ -176,6 +176,43 @@ def test_service_key_ambigua_chiede_senza_fetch(wiring):
     assert wiring["chiamate"] == 0
 
 
+def test_tributo_generico_chiede_imu_o_tari_senza_fetch(wiring):
+    # D3: generic tax intent ("tasse"), no specific tax → after the split there
+    # is no generic key; the dispatcher asks WHICH tax, never resolves. No fetch.
+    wiring["mappa"] = _mappa()
+    answer = _run(message="devo pagare le tasse comunali", profile=None, comune_istat=ISTAT)
+    assert answer.needs_clarification is True
+    assert answer.data_gap == "tributo_non_specificato"
+    assert "IMU" in answer.reply and "TARI" in answer.reply
+    assert answer.info is None
+    assert answer.access_mode is None
+    assert wiring["chiamate"] == 0
+
+
+def test_tributi_generico_bare_word_chiede_imu_o_tari(wiring):
+    # The bare word "tributi" (dropped as a recogniser marker) still routes to
+    # the IMU/TARI clarification at the dispatcher, not to a fabricated key.
+    wiring["mappa"] = _mappa()
+    answer = _run(message="modulo per i tributi", profile=None, comune_istat=ISTAT)
+    assert answer.needs_clarification is True
+    assert answer.data_gap == "tributo_non_specificato"
+    assert "IMU" in answer.reply and "TARI" in answer.reply
+    assert wiring["chiamate"] == 0
+
+
+def test_contributi_non_e_tributo_lista_generica(wiring):
+    # "contributi" (grants) must NOT trigger the tax clarification: whole-word
+    # guard. It falls through to the generic vocabulary list (data_gap None).
+    wiring["mappa"] = _mappa()
+    answer = _run(message="vorrei un contributo per l'affitto", profile=None, comune_istat=ISTAT)
+    assert answer.needs_clarification is True
+    # The generic branch (not the tax one): its own data_gap and the full
+    # vocabulary list, not the "which tax?" prompt.
+    assert answer.data_gap is None
+    assert "carta d'identità" in answer.reply
+    assert wiring["chiamate"] == 0
+
+
 def test_piattaforma_assente_miss_urp_senza_sp(wiring):
     wiring["mappa"] = _mappa(piattaforma_id=None)
     answer = _run(message="modulo della carta d'identità", profile=None, comune_istat=ISTAT)

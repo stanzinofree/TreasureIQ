@@ -3771,6 +3771,29 @@ def _modulistica_miss_urp(comune_nome: str) -> ChatAnswer:
     )
 
 
+#: Generic municipal-tax vocabulary a citizen uses WITHOUT naming a specific
+#: tax ("tributi", "tasse", "imposte comunali").  Whole-word (``\b``) so it never
+#: fires inside "contributi"/"contributo" (grants — a distinct service, the exact
+#: false positive the TRIBUTI split removed from the recogniser).  This is a
+#: dispatcher-side UX signal, deliberately NOT a ``ServiceKey``: after the split
+#: there is no generic tax key, so a generic ask must be routed to an explicit
+#: "IMU o TARI?" clarification, never resolved to a fabricated fallback key.
+_TRIBUTO_GENERICO = re.compile(
+    r"\b(tributi|tributo|tasse|tassa|imposte|imposta)\b",
+    re.IGNORECASE,
+)
+
+
+def _intento_tributario_generico(message: str) -> bool:
+    """True if the message expresses a generic tax intent but no specific tax.
+
+    Called only once the recogniser has already returned ``None`` (no
+    ``TRIBUTI_IMU``/``TRIBUTI_TARI`` matched): a specific tax would have
+    resolved and never reached here.  ``contributi`` stays out by design.
+    """
+    return _TRIBUTO_GENERICO.search(message) is not None
+
+
 async def _risposta_modulistica(
     *, message: str, profile: CitizenProfile | None, comune_istat: str | None
 ) -> ChatAnswer:
@@ -3832,11 +3855,32 @@ async def _risposta_modulistica(
     # l'elenco chiuso del vocabolario; mai il vicino, mai indovinare (Slice 1).
     service_key = riconosci_service_key(message)
     if service_key is None:
+        if _intento_tributario_generico(message):
+            # Generic tax intent, no specific tax: after the TRIBUTI split there
+            # is deliberately no generic key (it resolved 0/6 and its substring
+            # leaked onto "contributi").  Ask WHICH tax — never invent a
+            # fallback key, coherent with "ambiguous → don't guess" (D3).
+            return ChatAnswer(
+                reply=(
+                    "Parli di tributi comunali: di quale si tratta? IMU o TARI? "
+                    "Dimmi quale e recupero il modulo giusto."
+                ),
+                topic=Topic.MODULISTICA,
+                kind=QuestionKind.INFORMAZIONE,
+                data_gap="tributo_non_specificato",
+                needs_clarification=True,
+                matches=[],
+                spid_required=False,
+                spid_reason=None,
+                access_mode=None,
+                citizen_effort=1,
+                info=None,
+            )
         return ChatAnswer(
             reply=(
                 "Per recuperare il modulo giusto dimmi quale pratica ti serve: "
                 "carta d'identità, cambio di residenza, accesso agli atti, "
-                "stato civile o tributi."
+                "stato civile, IMU o TARI."
             ),
             topic=Topic.MODULISTICA,
             kind=QuestionKind.INFORMAZIONE,

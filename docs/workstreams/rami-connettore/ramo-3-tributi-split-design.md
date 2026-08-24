@@ -10,9 +10,13 @@ Stato: **IMPLEMENTATO** (Opzione A). Evidenza da probe live multi-comune
   Substring `"tributi"` **eliminato** (chiudeva il falso positivo `contributi`).
 - **D2 = solo IMU+TARI ora** (estensibile: CANONE_UNICO/COSAP quando l'evidenza
   mostrerà titoli puliti).
-- **D3 = handler generico rimandato**: una richiesta «tributi/tasse» generica →
-  `None` onesto (nessun marker). Il prompt di disambiguazione «IMU o TARI?» nel
-  chat handler è un **follow-up separato** (chat-flow), non in questa slice.
+- **D3 = handler generico implementato** (commit separato, chat-flow): una
+  richiesta «tributi/tasse» generica → `None` dal recogniser; il dispatcher
+  `_risposta_modulistica` (`chat/respond.py`) rileva l'intento tributario
+  generico (`_intento_tributario_generico`, regex whole-word che esclude
+  `contributi`) e chiede «IMU o TARI?» (`data_gap="tributo_non_specificato"`,
+  nessun fetch, nessuna key ombrello). La lista vocabolario di fallback ora
+  elenca «…stato civile, IMU o TARI».
 
 Effetto misurato sul campione: da **0 risoluzioni utili** a ~7 singole oneste
 (WP IMU 4/6, TARI 3/6) + ComWeb Agliè che ora risolve **2 card pulite** (IMU e

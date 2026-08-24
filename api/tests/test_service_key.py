@@ -39,10 +39,31 @@ from treasureiq.chat.service_key import riconosci_service_key
         # ambiguous: two distinct keys → None
         ("carta d'identità e cambio residenza", None),
         ("carta d'identità e accesso agli atti", None),
+        # REAL connector title forms: titles arrive as HTML.  Entity-encoded
+        # and typographic apostrophes must confirm exactly like the ASCII form —
+        # these were live false-misses (Borgaro, Lesa, Meina) before the
+        # normalizer.
+        ("Carta d&#8217;identità elettronica (C.I.E)", ServiceKey.CARTA_IDENTITA),
+        ("Essere Cittadino &#8211; Carta d&#8217;Identità", ServiceKey.CARTA_IDENTITA),
+        ("Rilascio carta d’identità elettronica (CIE)", ServiceKey.CARTA_IDENTITA),
+        ("Carta d&#39;Identità Elettronica", ServiceKey.CARTA_IDENTITA),
     ],
 )
 def test_riconosci_service_key_golden(message, expected):
     assert riconosci_service_key(message) is expected
+
+
+def test_normalizzazione_idempotente_e_senza_falsi_positivi():
+    # The normalizer only canonicalises (unescape + apostrophe fold): a clean,
+    # unmarked string stays unmarked, and re-normalising an already-decoded
+    # title is a no-op — no marker is ever added.
+    from treasureiq.chat.service_key import _normalizza
+
+    assert _normalizza("carta d'identità") == "carta d'identità"
+    assert _normalizza("Carta d’Identità") == "carta d'identità"
+    assert _normalizza("Carta d&#8217;Identità") == "carta d'identità"
+    # unmarked text carries no key even after normalisation
+    assert riconosci_service_key("&#8217;&#8211; nessun servizio &#8230;") is None
 
 
 def test_riconoscimento_deterministico():

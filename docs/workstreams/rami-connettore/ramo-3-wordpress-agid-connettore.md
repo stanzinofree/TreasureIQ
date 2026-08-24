@@ -90,6 +90,45 @@ del tema NON basta a separare i dialetti** — serve la forma dell'item REST.
   onesto). Da correggere anche il conteggio `servizi.totale` in mappa per i
   comuni B.
 
+## Normalizzazione titoli — finding multi-comune `carta d'identità` (24 ago)
+
+Il campione multi-comune per `carta d'identità` ha rivelato un bug di conferma
+**a monte** della disambiguazione: i titoli WP arrivano come **HTML**
+(`title.rendered`) e il riconoscitore condiviso non li normalizzava.
+
+- Live su 6 comuni WP-ricchi: 003008 Arona confermava, ma **solo** perché il
+  titolo porta il token `(CIE)` che scatta sul marker whole-word `cie`. Il
+  percorso substring `carta d'identità` **falliva** su tutti gli altri:
+  - 001028 Borgaro: `Carta d&#8217;identità elettronica (C.I.E)` — entity
+    apostrofo **e** `C.I.E` puntato (nessun token `CIE`) → **falso NOT_FOUND**.
+  - 003084 Lesa / 003095 Meina: `Essere Cittadino &#8211; Carta d&#8217;Identità`
+    — entity, nessun token CIE → **falso NOT_FOUND**.
+  - 004009 Bagnolo / 006009 Arquata: `n=0` → vuoto genuino.
+- Due cause nel matcher condiviso: (a) entity HTML non decodificate
+  (`&#8217;`, `&#39;`, `&#8211;`); (b) anche decodificato, l'apostrofo
+  tipografico `’` (U+2019) ≠ `'` ASCII dei marker.
+- **Fix (cross-family, `chat/service_key.py`):** un chokepoint unico
+  `_normalizza` = `html.unescape` + fold apostrofi (`’‘ʼ\`` → `'`) + casefold,
+  applicato in `_keys_in`. Nessun connettore toccato. ComWeb faceva già
+  `unescape` nel proprio parser (`comweb_service.py:152`), quindi era immune al
+  caso `&#39;`; ora è coperto anche il caso `&#8217;` in modo uniforme. Il fold
+  è puramente canonicalizzante: non aggiunge marker, non può creare falsi
+  positivi; idempotente su testo già pulito.
+- **Effetto:** Borgaro/Lesa/Meina ora **FULFILLED** (substring conferma). La
+  disambiguazione CIE-vs-minori resta **NOT_FOUND onesto** su ≥2 schede
+  confermate (regola immutata; provata su ComWeb Agliè 2-card e su WP
+  `arona_residenza_multi`). Nessun comune del campione WP ha ≥2 schede carta,
+  quindi il multi-card carta è coperto dal caso ComWeb.
+- Fixture reali net-free aggiunte: `borgaro_carta_identita.json`,
+  `lesa_carta_identita.json` (byte live, entity incluse). Golden nel
+  recogniser: `test_riconosci_service_key_golden` (forme entity/tipografiche) +
+  `test_normalizzazione_idempotente_e_senza_falsi_positivi`.
+- **Residuo cosmetico (follow-up, non bloccante):** il connettore WP salva
+  `ServiceReference.title` dal `rendered` grezzo (entity), quindi il display
+  resta `Carta d&#8217;identità` finché il connettore non fa a sua volta
+  `unescape` sul titolo memorizzato. La **risoluzione** è corretta; è solo
+  qualità di visualizzazione, separata da questa slice.
+
 ## Fingerprint (plugin recognition `wordpress_agid_base` 1.1.0, `wordpress-base-v2`)
 
 Marcatori, tutti osservati in fixture reali — nessuno inventato:

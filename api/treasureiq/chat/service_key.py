@@ -14,6 +14,7 @@ nearest-neighbour fallback.  It is a pure function so both intent backends
 
 from __future__ import annotations
 
+import html
 import re
 
 from treasureiq.catalog.service_contracts import ServiceKey
@@ -64,8 +65,32 @@ _WORD_MARKERS: dict[ServiceKey, tuple[str, ...]] = {
 }
 
 
+#: Apostrophe variants folded to a plain ASCII ``'`` before matching.  Real
+#: connector titles arrive as HTML (WP ``title.rendered``, ComWeb card markup):
+#: entity-encoded (``&#8217;``, ``&#39;``) AND, once decoded, using the
+#: typographic ``’`` (U+2019) that the ASCII markers would miss.  Without this
+#: fold, "Carta d’identità" / "Carta d&#8217;identità" silently fail to confirm
+#: (observed live: Borgaro, Lesa, Meina — false NOT_FOUND).
+_APOSTROPHES = ("’", "‘", "ʼ", "`")
+
+
+def _normalizza(message: str) -> str:
+    """Decode HTML entities and fold apostrophe variants, then casefold.
+
+    The single chokepoint every candidate title flows through, so both families
+    (WP/AgID REST, ComWeb card HTML) confirm on the same canonical form without
+    touching either connector.  Purely canonicalising: it never adds a marker,
+    so it cannot create a false positive.  Idempotent on already-clean text
+    (an unescaped, apostrophe-free string is unchanged).
+    """
+    testo = html.unescape(message)
+    for apostrofo in _APOSTROPHES:
+        testo = testo.replace(apostrofo, "'")
+    return testo.casefold()
+
+
 def _keys_in(message: str) -> set[ServiceKey]:
-    haystack = message.casefold()
+    haystack = _normalizza(message)
     found: set[ServiceKey] = set()
     for key, markers in _SUBSTRING_MARKERS.items():
         if any(marker in haystack for marker in markers):

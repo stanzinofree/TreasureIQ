@@ -632,6 +632,48 @@ def test_fixture_arona_carta_identita_is_fulfilled():
     assert [o.mode for o in ref.options] == [ServiceAccessMode.INFORMATION]
 
 
+def test_fixture_borgaro_entity_dotted_cie_now_confirms():
+    # REAL payload: "Carta d&#8217;identità elettronica (C.I.E)" — HTML entity
+    # apostrophe AND dotted "C.I.E" (no bare "CIE" token).  Before the shared
+    # normalizer this was a FALSE NOT_FOUND (substring failed on the entity, the
+    # word marker failed on the dots).  html.unescape + apostrophe fold in the
+    # recogniser make the "carta d'identità" substring confirm → FULFILLED.
+    result, _ = _retrieve_da_fixture(
+        "borgaro_carta_identita.json",
+        istat="001028",
+        host="www.comune.borgaro-torinese.to.it",
+        service_key=ServiceKey.CARTA_IDENTITA,
+    )
+    assert result.status is DataStatus.FULFILLED
+    assert len(result.service_references) == 1
+    ref = result.service_references[0]
+    assert ref.service_id == "001028:wp:10911"
+    assert str(ref.source_url) == (
+        "https://www.comune.borgaro-torinese.to.it"
+        "/servizio/carta-didentita-elettronica-c-i-e/"
+    )
+
+
+def test_fixture_lesa_entity_no_cie_token_now_confirms():
+    # REAL payload: "Essere Cittadino &#8211; Carta d&#8217;Identità" — entity
+    # en-dash + entity apostrophe, and NO CIE token at all.  Pre-fix this had no
+    # path to confirm (Arona only slipped through on its "(CIE)" token); the
+    # normalizer makes the "carta d'identità" substring the confirming path.
+    result, _ = _retrieve_da_fixture(
+        "lesa_carta_identita.json",
+        istat="003084",
+        host="www.comune.lesa.no.it",
+        service_key=ServiceKey.CARTA_IDENTITA,
+    )
+    assert result.status is DataStatus.FULFILLED
+    assert len(result.service_references) == 1
+    ref = result.service_references[0]
+    assert ref.service_id == "003084:wp:467"
+    assert str(ref.source_url) == (
+        "https://www.comune.lesa.no.it/servizio/essere-cittadino-carta-didentita/"
+    )
+
+
 def test_fixture_request_form_is_the_contract():
     # Exactly ONE REST GET, with the frozen shape:
     #   {site}/wp-json/wp/v2/servizi?search=<canonical term>&per_page=20&_fields=id,title,link

@@ -15,15 +15,26 @@ from dataclasses import dataclass, replace
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-from treasureiq.ingest.censimento import _gia_registrati
+from treasureiq.catalog import service_cache
 from treasureiq.catalog.confirmation import confirm_inventory
+from treasureiq.catalog.data_contracts import FreshnessPolicy
 from treasureiq.catalog.fetch_policy import PoliticaFetch
 from treasureiq.catalog.fetch_runtime import EsecutoreFetch
 from treasureiq.catalog.inventory_discovery import discover_source_inventory
+from treasureiq.catalog.planner import service_request
+from treasureiq.catalog.service_contracts import ServiceKey
+from treasureiq.catalog.service_registry import default_service_registry
+from treasureiq.catalog.service_sweep import (
+    ServiceSweepDryReport,
+    pianifica_dry_run,
+)
 from treasureiq.connettore import _da_store_raw as _connettore_cache
-from treasureiq.registro_cli import _comuni_da_censimento, main as sweep_main
-from treasureiq.storico import apri
+from treasureiq.ingest.censimento import _gia_registrati
+from treasureiq.mappa_connettore import mappa_da_cache
+from treasureiq.registro_cli import _comuni_da_censimento
+from treasureiq.registro_cli import main as sweep_main
 from treasureiq.sonda_live import LIVE_DIR, comune_per_codice
+from treasureiq.storico import apri
 
 logger = logging.getLogger("treasureiq.sweep_worker")
 
@@ -32,6 +43,10 @@ logger = logging.getLogger("treasureiq.sweep_worker")
 # (eseguito ok) e da 1 (eseguito con errori) così il chiamante non confonde
 # "rifiutato" con "riuscito".
 EXIT_REFRESH_SKIPPED = 2
+#: `service_catalog` senza `--dry-run`: l'esecuzione reale è lo Step 2, non
+#: ancora implementata.  Uscita dedicata così l'invocazione non fa nulla in
+#: silenzio.
+EXIT_SERVICE_REAL_NOT_READY = 3
 
 
 def _nuovo_esecutore(config: "WorkerConfig") -> EsecutoreFetch:
@@ -70,6 +85,9 @@ class WorkerConfig:
     budget_per_dominio: int = 50
     backoff_base_s: float = 60.0
     backoff_cap_s: float = 3600.0
+    #: Freschezza cache servizi usata dal dry-run del catalogo: una voce più
+    #: giovane di questa soglia conta come "già in cache" (nessuna risoluzione).
+    service_max_age_seconds: float = 86400.0
 
 
 def config_from_env(
@@ -79,7 +97,7 @@ def config_from_env(
 
     resolved_db = db or Path(os.environ.get("TREASUREIQ_SWEEP_DB", "/scrivibile/storico.db"))
     mode = os.environ.get("TREASUREIQ_SWEEP_MODE", "refresh").strip().lower()
-    if mode not in {"refresh", "confirmation", "discovery"}:
+    if mode not in {"refresh", "confirmation", "discovery", "service_catalog"}:
         logger.warning("modalità sweep sconosciuta %r: uso refresh", mode)
         mode = "refresh"
     return WorkerConfig(
@@ -120,6 +138,9 @@ def config_from_env(
         ),
         once=once,
         dry_run=dry_run or os.environ.get("TREASUREIQ_SWEEP_DRY_RUN", "0") == "1",
+        service_max_age_seconds=max(
+            0.0, float(os.environ.get("TREASUREIQ_SERVICE_MAX_AGE_SECONDS", "86400"))
+        ),
     )
 
 
@@ -127,6 +148,11 @@ def next_batch(config: WorkerConfig) -> list[str]:
     """Seleziona un lotto secondo la modalità, senza discovery ripetuta."""
 
     comuni = _comuni_da_censimento(config.db)
+    if config.mode == "service_catalog":
+        # Il dry-run del catalogo servizi è un censimento: classifica TUTTI i
+        # comuni (supportati, non supportati, senza mappa), non un lotto da 20.
+        # Il filtro/cap arriverà con l'esecuzione reale (Step 2).
+        return list(comuni)
     if config.mode in {"refresh", "confirmation"}:
         intervallo = (
             config.confirmation_interval_seconds
@@ -184,6 +210,91 @@ def next_batch(config: WorkerConfig) -> list[str]:
     return candidati[: config.batch_size]
 
 
+def _seam_servizi(config: WorkerConfig):
+    """Costruisce i tre seam del dry-run servizi senza toccare la rete.
+
+    L'``EsecutoreFetch`` e il registry vengono istanziati (nessun fetch al
+    costruttore), ma il dry-run non chiama mai ``retrieve``: usa il registry
+    solo come predicato di supporto (``resolve`` esamina surface/capability/
+    platform_id) e legge la cache servizi da disco.  Namespace richieste
+    ``service-catalog``, mai ``chat`` — così budget e telemetria dello sweep
+    restano separati dalla chat live.
+    """
+    esecutore = _nuovo_esecutore(config)
+    registry = default_service_registry(esecutore)
+    policy = FreshnessPolicy(max_age_seconds=config.service_max_age_seconds)
+    prima_chiave = next(iter(ServiceKey))
+    supporto_per_pf: dict[str, bool] = {}
+
+    def platform_di(source_id: str) -> str | None:
+        mappa = mappa_da_cache(source_id)
+        return mappa.piattaforma_id if mappa else None
+
+    def supportata(platform_id: str) -> bool:
+        if platform_id not in supporto_per_pf:
+            richiesta = service_request(
+                source_id="000000",
+                service_key=prima_chiave,
+                namespace="service-catalog",
+            )
+            connettore = registry.resolve(request=richiesta, platform_id=platform_id)
+            supporto_per_pf[platform_id] = connettore is not None
+        return supporto_per_pf[platform_id]
+
+    def in_cache(source_id: str, chiave: ServiceKey) -> bool:
+        return service_cache.carica(source_id, chiave, policy=policy) is not None
+
+    return platform_di, supportata, in_cache
+
+
+def _loga_report_servizi(report: ServiceSweepDryReport) -> None:
+    logger.info(
+        "service_catalog dry-run: %d comuni — pianificati %d, non supportati %d, "
+        "senza mappa %d",
+        report.comuni_totali,
+        report.comuni_pianificati,
+        report.comuni_non_supportati,
+        report.comuni_senza_mappa,
+    )
+    logger.info(
+        "service_catalog dry-run: chiavi in cache %d, da risolvere %d "
+        "(risoluzioni da tentare, non richieste HTTP)",
+        report.chiavi_in_cache,
+        report.chiavi_da_risolvere,
+    )
+    for agg in report.per_piattaforma:
+        logger.info(
+            "  %-24s comuni=%-5d cache=%-5d da_risolvere=%d",
+            agg.platform_id,
+            agg.comuni,
+            agg.chiavi_in_cache,
+            agg.chiavi_da_risolvere,
+        )
+
+
+def _run_service_catalog(config: WorkerConfig, comuni: list[str]) -> int:
+    """Dry-run del catalogo servizi: censimento, zero rete, zero scritture.
+
+    L'esecuzione reale (risoluzione ``ServiceKey`` e scrittura
+    ``ServiceReference``) è lo Step 2 e non è ancora implementata: senza
+    ``--dry-run`` il comando non fa nulla e ritorna un'uscita dedicata.
+    """
+    if not config.dry_run:
+        logger.warning(
+            "service_catalog: esecuzione reale non ancora implementata (Step 2); "
+            "usa --dry-run. Nessuna azione su %d comuni.",
+            len(comuni),
+        )
+        return EXIT_SERVICE_REAL_NOT_READY
+
+    platform_di, supportata, in_cache = _seam_servizi(config)
+    report = pianifica_dry_run(
+        comuni, platform_di=platform_di, supportata=supportata, in_cache=in_cache
+    )
+    _loga_report_servizi(report)
+    return 0
+
+
 def run_batch(config: WorkerConfig, comuni: list[str]) -> int:
     """Esegue un lotto riusando il CLI esistente.
 
@@ -194,6 +305,8 @@ def run_batch(config: WorkerConfig, comuni: list[str]) -> int:
 
     if not comuni:
         return 0
+    if config.mode == "service_catalog":
+        return _run_service_catalog(config, comuni)
     if config.mode == "discovery":
         errors = 0
         # Stesso runtime di fetch della confirmation: anche la discovery
@@ -298,7 +411,9 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--once", action="store_true", help="Esegue un solo batch e termina.")
     parser.add_argument("--db", type=Path, default=None, help="Override del database storico.")
     parser.add_argument(
-        "--mode", choices=("refresh", "confirmation", "discovery"), default=None
+        "--mode",
+        choices=("refresh", "confirmation", "discovery", "service_catalog"),
+        default=None,
     )
     parser.add_argument(
         "--dry-run", action="store_true",

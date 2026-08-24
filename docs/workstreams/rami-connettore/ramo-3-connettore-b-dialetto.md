@@ -21,18 +21,37 @@ controller REST **custom** che *sovrascrive* `wp/v2/servizi`. Dal vivo (Albaredo
 
 ## 2. Copertura sul campione (perché conta)
 
-Sniff dei 20 comuni pinnati (`/wp-json/wp/v2/servizi?per_page=1`, classifica per
-forma della voce):
+La **misura live** (24 ago, connettore reale guardato sui 20 comuni × 6
+ServiceKey, `misura_dialetto_b.py`) classifica per *path effettivamente
+percorso* (segnale in-band), non per uno sniff a priori:
 
 | classe | n | comuni |
 |---|---|---|
-| standard (`id`/`title`/`link`) | 8 | 001028, 003008, 003084, 003095, 004009, 006009, 007060, 012085 |
-| **dialetto B** (`ID`/`post_title`) | **4** | 020060 Schivenoglia, 023002 Albaredo, 024002 Albettone, 025004 Arsiè |
-| non-WP (404 su wp-json) | 6 | ComWeb / altre famiglie |
-| auth-walled (401) | 2 | 004059 Cavallermaggiore, 004203 Saluzzo |
+| standard (`id`/`title`/`link`) | 7 | 001028, 003084, 003095, 004009, 006009, 007060, 012085 |
+| **dialetto B** (`ID`/`post_title`) | **5** | 003008, 020060 Schivenoglia, 023002 Albaredo, 024002 Albettone, 025004 Arsiè |
+| non-WP / non-esposto | 8 | ComWeb / altre famiglie / 401 (NOT_SUPPORTED, 0 fetch) |
 
-I 4 dialetto-B davano **quasi solo miss** (il parser standard scartava tutto):
-~6 ServiceKey × 4 comuni ≈ una fetta reale dei 94 miss.
+**003008 era stato pre-classificato «standard»** dallo sniff iniziale, ma dal
+vivo serve dialetto B: l'in-band l'ha riconosciuto **da solo**, senza alcuna
+pre-etichetta. I 5 dialetto-B davano **quasi solo miss** (il parser standard
+scartava tutto): una fetta reale dei 94 miss.
+
+### 2.1 Perché il fingerprint persistito avrebbe fallito (evidenza 003008)
+
+`AssetServizi.rest_item_custom` sarebbe stato scritto in scansione dallo stesso
+sniff che ha **mis-classificato 003008 come standard**: il connettore avrebbe
+letto un flag «standard», imboccato il path standard, letto 0 da un payload
+pieno → **miss silenzioso** su un comune servibile. Il fingerprint eredita
+l'errore del momento in cui è stato misurato; l'in-band legge il segnale dalla
+risposta HTTP corrente e non può sbagliare classe. Il quinto dialetto è la prova
+diretta: **non era prevedibile dal fingerprint, l'auto-detect l'ha preso.**
+
+### 2.2 Esito misura (parità standard, recupero dialetto-B)
+
+31 FULFILLED sul campione: **15 standard** (1 REST/chiave, byte-identico al
+pre-dialetto) + **16 dialetto-B** (2 REST/chiave, prima tutti miss). 48
+NOT_SUPPORTED sui non-WP/non-esposti (0 fetch). I miss residui sono tutti
+0/≥2 onesti (mai il più vicino). Nessuna scrittura su `storico.db`.
 
 ## 3. Decisione: in-band self-detect (non il fingerprint `rest_item_custom`)
 
@@ -72,6 +91,11 @@ Condiviso da entrambi i path WP: `HttpxServiceFetcher` (test/confine HTTP) e
 
 Il refetch senza `_fields` scarica il dump pieno (~45 KB per Albaredo, < cap REST
 512 KB). La ricerca resta full-dump lato server: la conferma per-titolo filtra.
+
+Nota misurata: sui dialetto-B la lettura della pagina servizio parte dal `guid`
+(`?post_type=servizio&p=ID`), che il server **redirige** al permalink → 1 hop di
+redirect in più sul fetch HTML delle opzioni (seguito dall'host guard, non una
+seconda query logica). Sul path standard il `link` è già il permalink: nessun hop.
 
 ## 5. Esiti onesti provati sul dump reale Albaredo (golden)
 

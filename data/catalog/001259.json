@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "001259",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001259:comweb:richiedere-l-accesso-agli-atti-317-24915-1-acda8378d08aef48036f6cb8c64424ec",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.sauzedoulx.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-24915-1-acda8378d08aef48036f6cb8c64424ec",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sauzedoulx.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-24915-1-acda8378d08aef48036f6cb8c64424ec",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sauzedoulx.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-24915-1-acda8378d08aef48036f6cb8c64424ec",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizidigitali.comune.sauzedoulx.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=szdlx254&IDPr=13438",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.sauzedoulx.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-24915-1-acda8378d08aef48036f6cb8c64424ec",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:49:40.957288Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001259:comweb:cambio-residenza-305-24913-1-7a0d8cb0e257dd0e139de216844e9c8c",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.sauzedoulx.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-24913-1-7a0d8cb0e257dd0e139de216844e9c8c",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sauzedoulx.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-24913-1-7a0d8cb0e257dd0e139de216844e9c8c",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sauzedoulx.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-24913-1-7a0d8cb0e257dd0e139de216844e9c8c",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.sauzedoulx.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-24913-1-7a0d8cb0e257dd0e139de216844e9c8c",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:49:46.504104Z"
+  },
+  "tributi_tari": {
+   "service_id": "001259:comweb:pagamento-tassa-rifiuti-tari-659-24995-1-3db0f940b38692e8405f4f56153a9917",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.sauzedoulx.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-24995-1-3db0f940b38692e8405f4f56153a9917",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sauzedoulx.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-24995-1-3db0f940b38692e8405f4f56153a9917",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sauzedoulx.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-24995-1-3db0f940b38692e8405f4f56153a9917",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:49:49.267460Z"
+  }
+ }
+}

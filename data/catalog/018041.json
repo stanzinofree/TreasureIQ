@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "018041",
+ "services": {
+  "accesso_atti": {
+   "service_id": "018041:comweb:richiedere-l-accesso-agli-atti-317-62223-1-3d93b4bb210b57acf4e24464f2d46083",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.cavamanara.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-62223-1-3d93b4bb210b57acf4e24464f2d46083",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cavamanara.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-62223-1-3d93b4bb210b57acf4e24464f2d46083",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cavamanara.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-62223-1-3d93b4bb210b57acf4e24464f2d46083",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:19:34.746637Z"
+  },
+  "carta_identita": {
+   "service_id": "018041:comweb:carta-d-identita-elettronica-cie-788-62211-1-633dbca67ac555502f2e5cce5cb1be83",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.cavamanara.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-62211-1-633dbca67ac555502f2e5cce5cb1be83",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cavamanara.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-62211-1-633dbca67ac555502f2e5cce5cb1be83",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cavamanara.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-62211-1-633dbca67ac555502f2e5cce5cb1be83",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:19:37.123196Z"
+  },
+  "tributi_imu": {
+   "service_id": "018041:comweb:pagare-tributi-imu-600-62312-1-d77df2d54b794dc454cc11f1fac147ed",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.cavamanara.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-62312-1-d77df2d54b794dc454cc11f1fac147ed",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cavamanara.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-62312-1-d77df2d54b794dc454cc11f1fac147ed",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cavamanara.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-62312-1-d77df2d54b794dc454cc11f1fac147ed",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:19:39.411498Z"
+  },
+  "tributi_tari": {
+   "service_id": "018041:comweb:pagamento-tassa-rifiuti-tari-659-62303-1-97f761c1126529ca437d6a83e3f14dde",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.cavamanara.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-62303-1-97f761c1126529ca437d6a83e3f14dde",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cavamanara.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-62303-1-97f761c1126529ca437d6a83e3f14dde",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cavamanara.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-62303-1-97f761c1126529ca437d6a83e3f14dde",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:19:41.997377Z"
+  }
+ }
+}

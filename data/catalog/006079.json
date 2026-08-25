@@ -1,0 +1,146 @@
+{
+ "municipality_istat": "006079",
+ "services": {
+  "accesso_atti": {
+   "service_id": "006079:comweb:richiedere-l-accesso-agli-atti-317-22011-1-98dabf7fafc172e078ca054057339885",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.garbagna.al.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-22011-1-98dabf7fafc172e078ca054057339885",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.garbagna.al.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-22011-1-98dabf7fafc172e078ca054057339885",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.garbagna.al.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-22011-1-98dabf7fafc172e078ca054057339885",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://sportello.comune.garbagna.al.it/su_procedimento/richiedere-laccesso-agli-atti/fattispecie/0?ambito=sugen&urlSite=https%3a%2f%2fwww.comune.garbagna.al.it%2fit-it%2fservizi%2fanagrafe-e-stato-civile%2frichiedere-l-accesso-agli-atti-317-22011-1-98dabf7fafc172e078ca054057339885",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.garbagna.al.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-22011-1-98dabf7fafc172e078ca054057339885",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:01:26.750847Z"
+  },
+  "cambio_residenza": {
+   "service_id": "006079:comweb:cambio-residenza-305-22009-1-8e5f0160e27a1a9e740421407d9c52c6",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.garbagna.al.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-22009-1-8e5f0160e27a1a9e740421407d9c52c6",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.garbagna.al.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-22009-1-8e5f0160e27a1a9e740421407d9c52c6",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.garbagna.al.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-22009-1-8e5f0160e27a1a9e740421407d9c52c6",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.garbagna.al.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-22009-1-8e5f0160e27a1a9e740421407d9c52c6",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:01:28.875407Z"
+  },
+  "carta_identita": {
+   "service_id": "006079:comweb:carta-d-identita-elettronica-cie-788-21999-1-03c7093cd12af27d3b115e4a75be0475",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.garbagna.al.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-21999-1-03c7093cd12af27d3b115e4a75be0475",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.garbagna.al.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-21999-1-03c7093cd12af27d3b115e4a75be0475",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.garbagna.al.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-21999-1-03c7093cd12af27d3b115e4a75be0475",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:01:31.000119Z"
+  },
+  "tributi_imu": {
+   "service_id": "006079:comweb:pagare-tributi-imu-600-22100-1-cda4ebf256b670743cef5b7a691247b5",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.garbagna.al.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-22100-1-cda4ebf256b670743cef5b7a691247b5",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.garbagna.al.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-22100-1-cda4ebf256b670743cef5b7a691247b5",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.garbagna.al.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-22100-1-cda4ebf256b670743cef5b7a691247b5",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:01:33.173332Z"
+  },
+  "tributi_tari": {
+   "service_id": "006079:comweb:pagamento-tassa-rifiuti-tari-659-22091-1-11328306d5f29c9957f9d6fc53615bb0",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.garbagna.al.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-22091-1-11328306d5f29c9957f9d6fc53615bb0",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.garbagna.al.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-22091-1-11328306d5f29c9957f9d6fc53615bb0",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.garbagna.al.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-22091-1-11328306d5f29c9957f9d6fc53615bb0",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:01:35.999519Z"
+  }
+ }
+}

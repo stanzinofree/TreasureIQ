@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "042017",
+ "services": {
+  "carta_identita": {
+   "service_id": "042017:wp:3591",
+   "title": "Rilascio e rinnovo carta d’identità",
+   "source_url": "https://comune.fabriano.an.it/servizio/rilascio-e-rinnovo-carta-didentita/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.fabriano.an.it/servizio/rilascio-e-rinnovo-carta-didentita/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.fabriano.an.it/servizio/rilascio-e-rinnovo-carta-didentita/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:54:03.098375Z"
+  },
+  "tributi_imu": {
+   "service_id": "042017:wp:1709",
+   "title": "Gestione tributo IMU",
+   "source_url": "https://comune.fabriano.an.it/servizio/gestione-tributo-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.fabriano.an.it/servizio/gestione-tributo-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.fabriano.an.it/servizio/gestione-tributo-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:54:04.380958Z"
+  },
+  "tributi_tari": {
+   "service_id": "042017:wp:1763",
+   "title": "Gestione tributo TARI",
+   "source_url": "https://comune.fabriano.an.it/servizio/gestione-tributo-tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.fabriano.an.it/servizio/gestione-tributo-tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.fabriano.an.it/servizio/gestione-tributo-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:54:05.706712Z"
+  }
+ }
+}

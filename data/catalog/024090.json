@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "024090",
+ "services": {
+  "carta_identita": {
+   "service_id": "024090:wp:473",
+   "title": "Rilascio Carta di Identità Elettronica",
+   "source_url": "https://www.comune.salcedo.vi.it/?post_type=servizio&p=473",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.salcedo.vi.it/?post_type=servizio&p=473",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.salcedo.vi.it/?post_type=servizio&p=473",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:14:32.650470Z"
+  },
+  "stato_civile": {
+   "service_id": "024090:wp:584",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.salcedo.vi.it/?post_type=servizio&p=584",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.salcedo.vi.it/?post_type=servizio&p=584",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.salcedo.vi.it/?post_type=servizio&p=584",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:14:40.875463Z"
+  },
+  "tributi_imu": {
+   "service_id": "024090:wp:596",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.salcedo.vi.it/?post_type=servizio&p=596",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.salcedo.vi.it/?post_type=servizio&p=596",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.salcedo.vi.it/?post_type=servizio&p=596",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:14:49.947699Z"
+  }
+ }
+}

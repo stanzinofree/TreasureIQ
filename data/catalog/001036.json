@@ -1,0 +1,110 @@
+{
+ "municipality_istat": "001036",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001036:comweb:richiedere-l-accesso-agli-atti-317-20030-1-0fb295fb98638047bb067b569be596df",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.brosso.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-20030-1-0fb295fb98638047bb067b569be596df",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.brosso.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-20030-1-0fb295fb98638047bb067b569be596df",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.brosso.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-20030-1-0fb295fb98638047bb067b569be596df",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.brosso.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=brss656&IDPr=11353",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.brosso.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-20030-1-0fb295fb98638047bb067b569be596df",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:39:55.279315Z"
+  },
+  "carta_identita": {
+   "service_id": "001036:comweb:carta-d-identita-elettronica-cie-788-20019-1-d3b63c36558f5abe59e7e32f298fc20f",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.brosso.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-20019-1-d3b63c36558f5abe59e7e32f298fc20f",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.brosso.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-20019-1-d3b63c36558f5abe59e7e32f298fc20f",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.brosso.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-20019-1-d3b63c36558f5abe59e7e32f298fc20f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:39:59.423631Z"
+  },
+  "tributi_imu": {
+   "service_id": "001036:comweb:imposta-municipale-propria-imu-953-20120-1-1e29161085ee057ba514a12dc9fca999",
+   "title": "Imposta Municipale Propria (IMU)",
+   "source_url": "https://www.comune.brosso.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-20120-1-1e29161085ee057ba514a12dc9fca999",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.brosso.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-20120-1-1e29161085ee057ba514a12dc9fca999",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.brosso.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-20120-1-1e29161085ee057ba514a12dc9fca999",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:40:01.547750Z"
+  },
+  "tributi_tari": {
+   "service_id": "001036:comweb:tassa-rifiuti-tari-954-20111-1-a9f7303dab76ff90a68207fb104a584c",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.brosso.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-20111-1-a9f7303dab76ff90a68207fb104a584c",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.brosso.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-20111-1-a9f7303dab76ff90a68207fb104a584c",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.brosso.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-20111-1-a9f7303dab76ff90a68207fb104a584c",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:40:03.637010Z"
+  }
+ }
+}

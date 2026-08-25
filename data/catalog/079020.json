@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "079020",
+ "services": {
+  "accesso_atti": {
+   "service_id": "079020:wp:152",
+   "title": "Richiesta di Accesso agli Atti",
+   "source_url": "https://comune.carlopoli.cz.it/servizio/richiesta-di-accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.carlopoli.cz.it/servizio/richiesta-di-accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.carlopoli.cz.it/servizio/richiesta-di-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:37:56.990458Z"
+  }
+ }
+}

@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "060064",
+ "services": {
+  "accesso_atti": {
+   "service_id": "060064:wp:3396",
+   "title": "Accesso agli atti",
+   "source_url": "https://comunesangiovanniincarico.fr.it/servizio/accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comunesangiovanniincarico.fr.it/servizio/accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comunesangiovanniincarico.fr.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:07:38.008710Z"
+  },
+  "cambio_residenza": {
+   "service_id": "060064:wp:3406",
+   "title": "Richiesta dichiarazione di cambio di residenza",
+   "source_url": "https://comunesangiovanniincarico.fr.it/servizio/richiesta-dichiarazione-di-cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comunesangiovanniincarico.fr.it/servizio/richiesta-dichiarazione-di-cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comunesangiovanniincarico.fr.it/servizio/richiesta-dichiarazione-di-cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:07:43.361098Z"
+  }
+ }
+}

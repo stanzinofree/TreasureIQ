@@ -1,0 +1,237 @@
+{
+ "municipality_istat": "048026",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "048026:wp:229",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.marradi.fi.it/?post_type=servizio&p=229",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.marradi.fi.it/?post_type=servizio&p=229",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marradi.fi.it/?post_type=servizio&p=229",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:55:53.643433Z"
+  },
+  "carta_identita": {
+   "service_id": "048026:wp:214",
+   "title": "Carta di Identità Elettronica e Cartacea",
+   "source_url": "https://www.comune.marradi.fi.it/?post_type=servizio&p=214",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.marradi.fi.it/?post_type=servizio&p=214",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marradi.fi.it/?post_type=servizio&p=214",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:55:59.746698Z"
+  },
+  "stato_civile": {
+   "service_id": "048026:wp:232",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.marradi.fi.it/?post_type=servizio&p=232",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.marradi.fi.it/?post_type=servizio&p=232",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marradi.fi.it/?post_type=servizio&p=232",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:56:06.772753Z"
+  },
+  "tributi_imu": {
+   "service_id": "048026:wp:504",
+   "title": "Regolamento Cresci Marradi - IMU per le Imprese",
+   "source_url": "https://www.comune.marradi.fi.it/?post_type=servizio&p=504",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.marradi.fi.it/?post_type=servizio&p=504",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marradi.fi.it/?post_type=servizio&p=504",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.marradi.fi.it/wp-content/uploads/2024/11/cresci_marradi_imu_pubblicato.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marradi.fi.it/?post_type=servizio&p=504",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.marradi.fi.it/wp-content/uploads/2024/11/allegato_a_avviso_cresci_marradi_imu.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marradi.fi.it/?post_type=servizio&p=504",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.marradi.fi.it/wp-content/uploads/2024/11/allegato_b_modulo_domanda_cresci_marradi_imu.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marradi.fi.it/?post_type=servizio&p=504",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.marradi.fi.it/wp-content/uploads/2024/11/allegato_b_modulo_domanda_cresci_marradi_imu.doc",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marradi.fi.it/?post_type=servizio&p=504",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:56:12.508801Z"
+  },
+  "tributi_tari": {
+   "service_id": "048026:wp:564",
+   "title": "TARI - norme generali",
+   "source_url": "https://www.comune.marradi.fi.it/?post_type=servizio&p=564",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.marradi.fi.it/?post_type=servizio&p=564",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marradi.fi.it/?post_type=servizio&p=564",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.marradi.fi.it/wp-content/uploads/2024/11/REGOL_MODIFICA-ART-9-LETTERA-A-SUB-LETTERA-E.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marradi.fi.it/?post_type=servizio&p=564",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.marradi.fi.it/wp-content/uploads/2025/03/Denuncia-di-cessazione-TAR-domestiche-e-non-domestiche.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marradi.fi.it/?post_type=servizio&p=564",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.marradi.fi.it/wp-content/uploads/2025/03/Denuncia-nuova-iscriz-variaz-TARI-utenze-domestiche-1.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marradi.fi.it/?post_type=servizio&p=564",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.marradi.fi.it/wp-content/uploads/2025/03/Denuncia-nuova-iscriz-variaz-TARI-utenze-NON-domestiche-1.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marradi.fi.it/?post_type=servizio&p=564",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.marradi.fi.it/wp-content/uploads/2025/03/DOMANDA-DI-RIMBORSO-TARI-2023.doc",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marradi.fi.it/?post_type=servizio&p=564",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:56:19.637727Z"
+  }
+ }
+}

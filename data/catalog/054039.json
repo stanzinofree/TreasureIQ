@@ -1,0 +1,90 @@
+{
+ "municipality_istat": "054039",
+ "services": {
+  "carta_identita": {
+   "service_id": "054039:wp:15038",
+   "title": "Anagrafe – Sostituzione Carta di Identità Cartacea (CIC) con Carta di Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.perugia.it/servizio/sostituzione-cic-con-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.perugia.it/servizio/sostituzione-cic-con-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.perugia.it/servizio/sostituzione-cic-con-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "http://www.comune.perugia.it/wp-content/uploads/2025/05/Anagrafe-CIE-DichiarazioneAssensoEspatrioMinore-GenitoreAssente.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.perugia.it/servizio/sostituzione-cic-con-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "http://www.comune.perugia.it/wp-content/uploads/2025/05/Anagrafe-CIE-ModuloPerRichiestaCodiciPIN-PUK.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.perugia.it/servizio/sostituzione-cic-con-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:58:13.944838Z"
+  },
+  "tributi_imu": {
+   "service_id": "054039:wp:6905",
+   "title": "Imposte e Tasse – IMU",
+   "source_url": "https://www.comune.perugia.it/servizio/imposte-e-tasse-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.perugia.it/servizio/imposte-e-tasse-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.perugia.it/servizio/imposte-e-tasse-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.perugia.it/wp-content/uploads/2026/06/interpello-1-2026-IMU_signed.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.perugia.it/servizio/imposte-e-tasse-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:58:16.314700Z"
+  }
+ }
+}

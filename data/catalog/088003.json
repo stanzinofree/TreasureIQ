@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "088003",
+ "services": {
+  "accesso_atti": {
+   "service_id": "088003:wp:4844",
+   "title": "Richiedere l’accesso agli Atti",
+   "source_url": "https://www.comune.comiso.rg.it/servizio/richiedere-laccesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.comiso.rg.it/servizio/richiedere-laccesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.comiso.rg.it/servizio/richiedere-laccesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:50:01.154360Z"
+  },
+  "cambio_residenza": {
+   "service_id": "088003:wp:468",
+   "title": "Cambio di residenza o domicilio",
+   "source_url": "https://www.comune.comiso.rg.it/servizio/cambio-di-residenza-o-domicilio/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.comiso.rg.it/servizio/cambio-di-residenza-o-domicilio/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.comiso.rg.it/servizio/cambio-di-residenza-o-domicilio/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:50:04.815897Z"
+  }
+ }
+}

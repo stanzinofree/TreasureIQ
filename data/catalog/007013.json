@@ -1,0 +1,136 @@
+{
+ "municipality_istat": "007013",
+ "services": {
+  "accesso_atti": {
+   "service_id": "007013:comweb:richiedere-l-accesso-agli-atti-317-29931-1-8f2c4dee48b1a73f2f4f664f1e205ba6",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.challand-st-anselme.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-29931-1-8f2c4dee48b1a73f2f4f664f1e205ba6",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.challand-st-anselme.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-29931-1-8f2c4dee48b1a73f2f4f664f1e205ba6",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.challand-st-anselme.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-29931-1-8f2c4dee48b1a73f2f4f664f1e205ba6",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.challand-st-anselme.ao.it/lang/it/servizi/richiedere-laccesso-agli-atti/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.challand-st-anselme.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-29931-1-8f2c4dee48b1a73f2f4f664f1e205ba6",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:04:34.436767Z"
+  },
+  "cambio_residenza": {
+   "service_id": "007013:comweb:cambio-residenza-305-29929-1-38f13e7ef23528e9184230bfa9f59fb4",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.challand-st-anselme.ao.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-29929-1-38f13e7ef23528e9184230bfa9f59fb4",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.challand-st-anselme.ao.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-29929-1-38f13e7ef23528e9184230bfa9f59fb4",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.challand-st-anselme.ao.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-29929-1-38f13e7ef23528e9184230bfa9f59fb4",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.challand-st-anselme.ao.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-29929-1-38f13e7ef23528e9184230bfa9f59fb4",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:04:36.230960Z"
+  },
+  "stato_civile": {
+   "service_id": "007013:comweb:certificato-di-nascita-26-29924-1-298d42d2c20cdfc60597dfbefc1a6e73",
+   "title": "Certificato di nascita",
+   "source_url": "https://www.comune.challand-st-anselme.ao.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-nascita-26-29924-1-298d42d2c20cdfc60597dfbefc1a6e73",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.challand-st-anselme.ao.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-nascita-26-29924-1-298d42d2c20cdfc60597dfbefc1a6e73",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.challand-st-anselme.ao.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-nascita-26-29924-1-298d42d2c20cdfc60597dfbefc1a6e73",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/certificati/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.challand-st-anselme.ao.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-nascita-26-29924-1-298d42d2c20cdfc60597dfbefc1a6e73",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:04:38.148384Z"
+  },
+  "tributi_tari": {
+   "service_id": "007013:comweb:pagamento-tassa-rifiuti-tari-659-30011-1-b5f945a7db86cc41a84567790720d8e0",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.challand-st-anselme.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-30011-1-b5f945a7db86cc41a84567790720d8e0",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.challand-st-anselme.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-30011-1-b5f945a7db86cc41a84567790720d8e0",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.challand-st-anselme.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-30011-1-b5f945a7db86cc41a84567790720d8e0",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:04:40.197372Z"
+  }
+ }
+}

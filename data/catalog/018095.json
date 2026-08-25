@@ -1,0 +1,110 @@
+{
+ "municipality_istat": "018095",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "018095:comweb:cambio-residenza-305-53589-1-cfc18ca640447a906d8c586972427590",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.montebellodellabattaglia.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-53589-1-cfc18ca640447a906d8c586972427590",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montebellodellabattaglia.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-53589-1-cfc18ca640447a906d8c586972427590",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montebellodellabattaglia.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-53589-1-cfc18ca640447a906d8c586972427590",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.montebellodellabattaglia.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-53589-1-cfc18ca640447a906d8c586972427590",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:21:40.551401Z"
+  },
+  "carta_identita": {
+   "service_id": "018095:comweb:carta-d-identita-elettronica-cie-788-53579-1-efd9530491fc7c10e714e800c46ab1da",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.montebellodellabattaglia.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-53579-1-efd9530491fc7c10e714e800c46ab1da",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montebellodellabattaglia.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-53579-1-efd9530491fc7c10e714e800c46ab1da",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montebellodellabattaglia.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-53579-1-efd9530491fc7c10e714e800c46ab1da",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:21:43.259811Z"
+  },
+  "tributi_imu": {
+   "service_id": "018095:comweb:imposta-municipale-propria-imu-953-53680-1-18183e0d082148cf63899c1f73d3ccaa",
+   "title": "Imposta Municipale Propria (IMU)",
+   "source_url": "https://www.comune.montebellodellabattaglia.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-53680-1-18183e0d082148cf63899c1f73d3ccaa",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montebellodellabattaglia.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-53680-1-18183e0d082148cf63899c1f73d3ccaa",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montebellodellabattaglia.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-53680-1-18183e0d082148cf63899c1f73d3ccaa",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:21:45.855917Z"
+  },
+  "tributi_tari": {
+   "service_id": "018095:comweb:pagamento-tassa-rifiuti-tari-659-53671-1-3c8f1e04426a72ce4ec1ce34f67f23da",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.montebellodellabattaglia.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-53671-1-3c8f1e04426a72ce4ec1ce34f67f23da",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montebellodellabattaglia.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-53671-1-3c8f1e04426a72ce4ec1ce34f67f23da",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montebellodellabattaglia.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-53671-1-3c8f1e04426a72ce4ec1ce34f67f23da",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:21:48.539813Z"
+  }
+ }
+}

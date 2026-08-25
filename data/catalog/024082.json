@@ -1,0 +1,120 @@
+{
+ "municipality_istat": "024082",
+ "services": {
+  "accesso_atti": {
+   "service_id": "024082:wp:735",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.pozzoleone.vi.it/?post_type=servizio&p=735",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pozzoleone.vi.it/?post_type=servizio&p=735",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pozzoleone.vi.it/?post_type=servizio&p=735",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:12:22.481463Z"
+  },
+  "cambio_residenza": {
+   "service_id": "024082:wp:912",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.pozzoleone.vi.it/?post_type=servizio&p=912",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pozzoleone.vi.it/?post_type=servizio&p=912",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pozzoleone.vi.it/?post_type=servizio&p=912",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:12:30.016711Z"
+  },
+  "carta_identita": {
+   "service_id": "024082:wp:641",
+   "title": "Carta di Identità Elettronica - CIE",
+   "source_url": "https://www.comune.pozzoleone.vi.it/?post_type=servizio&p=641",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pozzoleone.vi.it/?post_type=servizio&p=641",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pozzoleone.vi.it/?post_type=servizio&p=641",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:12:43.735258Z"
+  },
+  "stato_civile": {
+   "service_id": "024082:wp:919",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.pozzoleone.vi.it/?post_type=servizio&p=919",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pozzoleone.vi.it/?post_type=servizio&p=919",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pozzoleone.vi.it/?post_type=servizio&p=919",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:12:50.412096Z"
+  },
+  "tributi_imu": {
+   "service_id": "024082:wp:1006",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.pozzoleone.vi.it/?post_type=servizio&p=1006",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pozzoleone.vi.it/?post_type=servizio&p=1006",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pozzoleone.vi.it/?post_type=servizio&p=1006",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:12:58.946037Z"
+  }
+ }
+}

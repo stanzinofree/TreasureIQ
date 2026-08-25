@@ -1,0 +1,87 @@
+{
+ "municipality_istat": "001210",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001210:comweb:richiedere-l-accesso-agli-atti-317-43132-1-823db9ce1edc0beca66a7c388bd6524a",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.quincinetto.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-43132-1-823db9ce1edc0beca66a7c388bd6524a",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.quincinetto.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-43132-1-823db9ce1edc0beca66a7c388bd6524a",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.quincinetto.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-43132-1-823db9ce1edc0beca66a7c388bd6524a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.quincinetto.to.it/servizi/filodiretto2/Login.aspx?ce=qncntt673&IDPr=10912",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.quincinetto.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-43132-1-823db9ce1edc0beca66a7c388bd6524a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:46:59.862479Z"
+  },
+  "tributi_imu": {
+   "service_id": "001210:comweb:pagare-tributi-imu-600-43221-1-9e1fad5403c49539af1d6eecca8704df",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.quincinetto.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-43221-1-9e1fad5403c49539af1d6eecca8704df",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.quincinetto.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-43221-1-9e1fad5403c49539af1d6eecca8704df",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.quincinetto.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-43221-1-9e1fad5403c49539af1d6eecca8704df",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:47:01.790929Z"
+  },
+  "tributi_tari": {
+   "service_id": "001210:comweb:pagamento-tassa-rifiuti-tari-659-43212-1-5631e385897eb98ce5e431b06fb05190",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.quincinetto.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-43212-1-5631e385897eb98ce5e431b06fb05190",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.quincinetto.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-43212-1-5631e385897eb98ce5e431b06fb05190",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.quincinetto.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-43212-1-5631e385897eb98ce5e431b06fb05190",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:47:03.765754Z"
+  }
+ }
+}

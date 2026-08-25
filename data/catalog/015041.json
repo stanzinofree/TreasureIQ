@@ -1,0 +1,87 @@
+{
+ "municipality_istat": "015041",
+ "services": {
+  "accesso_atti": {
+   "service_id": "015041:comweb:richiedere-l-accesso-agli-atti-317-43792-1-028332c6f81b0652fe35104b0d60241b",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.bustogarolfo.mi.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-43792-1-028332c6f81b0652fe35104b0d60241b",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bustogarolfo.mi.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-43792-1-028332c6f81b0652fe35104b0d60241b",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bustogarolfo.mi.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-43792-1-028332c6f81b0652fe35104b0d60241b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.bustogarolfo.mi.it/lang/it/servizi/richiedere-laccesso-agli-atti/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.bustogarolfo.mi.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-43792-1-028332c6f81b0652fe35104b0d60241b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:15:22.014234Z"
+  },
+  "carta_identita": {
+   "service_id": "015041:comweb:carta-d-identita-elettronica-cie-788-43780-1-2af112d0d4d97d1cb3cb65de8e4d9ca8",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.bustogarolfo.mi.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-43780-1-2af112d0d4d97d1cb3cb65de8e4d9ca8",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bustogarolfo.mi.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-43780-1-2af112d0d4d97d1cb3cb65de8e4d9ca8",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bustogarolfo.mi.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-43780-1-2af112d0d4d97d1cb3cb65de8e4d9ca8",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:15:25.127606Z"
+  },
+  "tributi_tari": {
+   "service_id": "015041:comweb:pagamento-tassa-rifiuti-tari-659-43872-1-3e972c04b41986e98e4af714c33576dd",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.bustogarolfo.mi.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-43872-1-3e972c04b41986e98e4af714c33576dd",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bustogarolfo.mi.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-43872-1-3e972c04b41986e98e4af714c33576dd",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bustogarolfo.mi.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-43872-1-3e972c04b41986e98e4af714c33576dd",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:15:28.235406Z"
+  }
+ }
+}

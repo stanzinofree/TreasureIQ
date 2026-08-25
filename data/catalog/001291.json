@@ -1,0 +1,123 @@
+{
+ "municipality_istat": "001291",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001291:comweb:richiedere-l-accesso-agli-atti-317-40624-1-7b2dc81a442cc0aba4e79d5afde6a917",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.venaus.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-40624-1-7b2dc81a442cc0aba4e79d5afde6a917",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.venaus.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-40624-1-7b2dc81a442cc0aba4e79d5afde6a917",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.venaus.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-40624-1-7b2dc81a442cc0aba4e79d5afde6a917",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.venaus.to.it/lang/it/servizi/richiedere-laccesso-agli-atti/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.venaus.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-40624-1-7b2dc81a442cc0aba4e79d5afde6a917",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:52:10.484815Z"
+  },
+  "carta_identita": {
+   "service_id": "001291:comweb:carta-d-identita-1-40612-1-117d9b905f41c1162d300fd062a46f6c",
+   "title": "Carta d'Identità",
+   "source_url": "https://www.comune.venaus.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-40612-1-117d9b905f41c1162d300fd062a46f6c",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.venaus.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-40612-1-117d9b905f41c1162d300fd062a46f6c",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.venaus.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-40612-1-117d9b905f41c1162d300fd062a46f6c",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:52:13.152639Z"
+  },
+  "tributi_imu": {
+   "service_id": "001291:comweb:pagare-tributi-imu-600-40713-1-8b7b72cbd09e70f3ae1924cc094d6d33",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.venaus.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-40713-1-8b7b72cbd09e70f3ae1924cc094d6d33",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.venaus.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-40713-1-8b7b72cbd09e70f3ae1924cc094d6d33",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.venaus.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-40713-1-8b7b72cbd09e70f3ae1924cc094d6d33",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://siciportal.apkappa.it/comuni/VENAUS/imu/2026",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.venaus.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-40713-1-8b7b72cbd09e70f3ae1924cc094d6d33",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:52:16.810514Z"
+  },
+  "tributi_tari": {
+   "service_id": "001291:comweb:pagamento-tassa-rifiuti-tari-659-40704-1-0b2418ae44d78e38c2dbc6aef5d28c90",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.venaus.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-40704-1-0b2418ae44d78e38c2dbc6aef5d28c90",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.venaus.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-40704-1-0b2418ae44d78e38c2dbc6aef5d28c90",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.venaus.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-40704-1-0b2418ae44d78e38c2dbc6aef5d28c90",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:52:18.950920Z"
+  }
+ }
+}

@@ -1,0 +1,110 @@
+{
+ "municipality_istat": "023092",
+ "services": {
+  "accesso_atti": {
+   "service_id": "023092:wp:364",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.veronella.vr.it/?post_type=servizio&p=364",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.veronella.vr.it/?post_type=servizio&p=364",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.veronella.vr.it/?post_type=servizio&p=364",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.veronella.vr.it/wp-content/uploads/2024/09/DELIBERA_Num_103__Allegato1_tabella-diritti-di-segreteria.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.veronella.vr.it/?post_type=servizio&p=364",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:49:02.327006Z"
+  },
+  "cambio_residenza": {
+   "service_id": "023092:wp:229",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.veronella.vr.it/?post_type=servizio&p=229",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.veronella.vr.it/?post_type=servizio&p=229",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.veronella.vr.it/?post_type=servizio&p=229",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:49:08.610425Z"
+  },
+  "stato_civile": {
+   "service_id": "023092:wp:232",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.veronella.vr.it/?post_type=servizio&p=232",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.veronella.vr.it/?post_type=servizio&p=232",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.veronella.vr.it/?post_type=servizio&p=232",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:49:16.813971Z"
+  },
+  "tributi_imu": {
+   "service_id": "023092:wp:416",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.veronella.vr.it/?post_type=servizio&p=416",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.veronella.vr.it/?post_type=servizio&p=416",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.veronella.vr.it/?post_type=servizio&p=416",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:49:23.635545Z"
+  }
+ }
+}

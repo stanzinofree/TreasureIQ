@@ -1,0 +1,282 @@
+{
+ "municipality_istat": "049011",
+ "services": {
+  "accesso_atti": {
+   "service_id": "049011:wp:7437",
+   "title": "Accesso agli atti",
+   "source_url": "https://www.comune.marcianamarina.li.it/servizio/accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.marcianamarina.li.it/servizio/accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marcianamarina.li.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.marcianamarina.li.it/portal/servizi/pagamenti/?iddov=7&url_bd=https://www.comune.marcianamarina.li.it/servizio/accesso-agli-atti/&titolo_bd=accesso-agli-atti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.marcianamarina.li.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.marcianamarina.li.it/wp-content/uploads/2025/02/DELIBERAZIONEDIGIUNTA_Copia_88_2024.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marcianamarina.li.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.marcianamarina.li.it/wp-content/uploads/2025/02/istanza-di-accesso-civico.docx",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marcianamarina.li.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.marcianamarina.li.it/wp-content/uploads/2025/02/istanza-di-accesso-documentale.docx",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marcianamarina.li.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.marcianamarina.li.it/wp-content/uploads/2025/02/istanza-di-accesso-generalizzato.docx",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marcianamarina.li.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.marcianamarina.li.it/wp-content/uploads/2025/02/istanza-di-riesame.docx",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marcianamarina.li.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:57:00.627142Z"
+  },
+  "cambio_residenza": {
+   "service_id": "049011:wp:7440",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.marcianamarina.li.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.marcianamarina.li.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marcianamarina.li.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:57:02.377926Z"
+  },
+  "tributi_imu": {
+   "service_id": "049011:wp:7431",
+   "title": "Pagamento Tributi IMU",
+   "source_url": "https://www.comune.marcianamarina.li.it/servizio/pagamento-tributi-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.marcianamarina.li.it/servizio/pagamento-tributi-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marcianamarina.li.it/servizio/pagamento-tributi-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.marcianamarina.li.it/wp-content/uploads/2025/02/Modello-dichiarazione_imu_2022.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marcianamarina.li.it/servizio/pagamento-tributi-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.marcianamarina.li.it/wp-content/uploads/2025/02/Modello-istanza-aliquota-agevolata-per-locazione-IMU.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marcianamarina.li.it/servizio/pagamento-tributi-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.marcianamarina.li.it/wp-content/uploads/2025/02/Modello-istanza-aliquota-agevolata-per-comodato-IMU.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marcianamarina.li.it/servizio/pagamento-tributi-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.marcianamarina.li.it/wp-content/uploads/2025/02/Modello-dichiarazione_imu_2022-1.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marcianamarina.li.it/servizio/pagamento-tributi-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.marcianamarina.li.it/wp-content/uploads/2025/02/Deliberazione-C.C.-n.-22-del-30.07.2020-Approvazione-Regolamento-nuova-IMU.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marcianamarina.li.it/servizio/pagamento-tributi-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.marcianamarina.li.it/wp-content/uploads/2025/02/Allegato-Deliberazione-C.C.-n.-43-del-17-12-2024-Approvazione-aliquote-IMU-anno-2025.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marcianamarina.li.it/servizio/pagamento-tributi-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.marcianamarina.li.it/wp-content/uploads/2025/02/Deliberazione-C.C.-n.-43-del-17-12-2024-Approvazione-aliquote-IMU-anno-2025.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marcianamarina.li.it/servizio/pagamento-tributi-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.marcianamarina.li.it/wp-content/uploads/2025/02/deliberazione-CC-6_08-04-2021_approvazione-aliquote-IMU-anno-2021.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marcianamarina.li.it/servizio/pagamento-tributi-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.marcianamarina.li.it/wp-content/uploads/2026/06/Deliberazione-C.C.-n.-56-del-30.12.2025-Approvazione-aliquote-IMU-2026-1.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marcianamarina.li.it/servizio/pagamento-tributi-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.marcianamarina.li.it/wp-content/uploads/2026/06/Prospetto-aliquote-IMU-Comune-di-MARCIANA-MARINA.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marcianamarina.li.it/servizio/pagamento-tributi-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:57:03.926118Z"
+  }
+ }
+}

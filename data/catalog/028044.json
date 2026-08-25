@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "028044",
+ "services": {
+  "accesso_atti": {
+   "service_id": "028044:wp:408",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.legnaro.pd.it/?post_type=servizio&p=408",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.legnaro.pd.it/?post_type=servizio&p=408",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.legnaro.pd.it/?post_type=servizio&p=408",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:02:02.774065Z"
+  },
+  "cambio_residenza": {
+   "service_id": "028044:wp:229",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.legnaro.pd.it/?post_type=servizio&p=229",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.legnaro.pd.it/?post_type=servizio&p=229",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.legnaro.pd.it/?post_type=servizio&p=229",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:02:08.784837Z"
+  },
+  "stato_civile": {
+   "service_id": "028044:wp:232",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.legnaro.pd.it/?post_type=servizio&p=232",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.legnaro.pd.it/?post_type=servizio&p=232",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.legnaro.pd.it/?post_type=servizio&p=232",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:02:16.159016Z"
+  },
+  "tributi_tari": {
+   "service_id": "028044:wp:1982",
+   "title": "Richiedere esenzione parziale e/o totale tassa TARI",
+   "source_url": "https://www.comune.legnaro.pd.it/?post_type=servizio&p=1982",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.legnaro.pd.it/?post_type=servizio&p=1982",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.legnaro.pd.it/?post_type=servizio&p=1982",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:02:23.094768Z"
+  }
+ }
+}

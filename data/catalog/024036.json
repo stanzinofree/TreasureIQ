@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "024036",
+ "services": {
+  "accesso_atti": {
+   "service_id": "024036:wp:325",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.creazzo.vi.it/?post_type=servizio&p=325",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.creazzo.vi.it/?post_type=servizio&p=325",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.creazzo.vi.it/?post_type=servizio&p=325",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:58:29.394231Z"
+  },
+  "cambio_residenza": {
+   "service_id": "024036:wp:1363",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.creazzo.vi.it/?post_type=servizio&p=1363",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.creazzo.vi.it/?post_type=servizio&p=1363",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.creazzo.vi.it/?post_type=servizio&p=1363",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:58:36.431883Z"
+  },
+  "carta_identita": {
+   "service_id": "024036:wp:1079",
+   "title": "Carta di identità elettronica",
+   "source_url": "https://www.comune.creazzo.vi.it/?post_type=servizio&p=1079",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.creazzo.vi.it/?post_type=servizio&p=1079",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.creazzo.vi.it/?post_type=servizio&p=1079",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:58:52.102591Z"
+  }
+ }
+}

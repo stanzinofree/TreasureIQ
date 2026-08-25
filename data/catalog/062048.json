@@ -1,0 +1,64 @@
+{
+ "municipality_istat": "062048",
+ "services": {
+  "accesso_atti": {
+   "service_id": "062048:wp:1366",
+   "title": "Accesso agli atti",
+   "source_url": "https://comune.paolisi.bn.it/servizio/accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.paolisi.bn.it/servizio/accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.paolisi.bn.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.paolisi.bn.it/wp-content/uploads/2025/03/allegato%20b.-%20fotocopie%20e%20riproduzioni.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.paolisi.bn.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:12:15.519590Z"
+  },
+  "cambio_residenza": {
+   "service_id": "062048:wp:593",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.paolisi.bn.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.paolisi.bn.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.paolisi.bn.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:12:17.558396Z"
+  }
+ }
+}

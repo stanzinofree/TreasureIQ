@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "082077",
+ "services": {
+  "tributi_imu": {
+   "service_id": "082077:wp:307",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.ventimigliadisicilia.pa.it/?post_type=servizio&p=307",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ventimigliadisicilia.pa.it/?post_type=servizio&p=307",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ventimigliadisicilia.pa.it/?post_type=servizio&p=307",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:44:31.603185Z"
+  }
+ }
+}

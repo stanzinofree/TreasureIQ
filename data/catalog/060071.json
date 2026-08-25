@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "060071",
+ "services": {
+  "carta_identita": {
+   "service_id": "060071:wp:8443",
+   "title": "Carta d’Identità Elettronica (CIE)",
+   "source_url": "https://comune.serrone.fr.it/servizio/carta-didentita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.serrone.fr.it/servizio/carta-didentita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.serrone.fr.it/servizio/carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:08:01.656759Z"
+  },
+  "stato_civile": {
+   "service_id": "060071:wp:8446",
+   "title": "Certificato di Stato Civile",
+   "source_url": "https://comune.serrone.fr.it/servizio/certificato-di-stato-civile-2/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.serrone.fr.it/servizio/certificato-di-stato-civile-2/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.serrone.fr.it/servizio/certificato-di-stato-civile-2/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:08:07.160659Z"
+  },
+  "tributi_imu": {
+   "service_id": "060071:wp:4622",
+   "title": "Pagamento tributi IMU",
+   "source_url": "https://comune.serrone.fr.it/servizio/pagamento-tributi-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.serrone.fr.it/servizio/pagamento-tributi-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.serrone.fr.it/servizio/pagamento-tributi-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:08:10.974608Z"
+  }
+ }
+}

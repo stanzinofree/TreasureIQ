@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "019103",
+ "services": {
+  "accesso_atti": {
+   "service_id": "019103:wp:1496",
+   "title": "Richiedere l’accesso agli atti",
+   "source_url": "https://www.comune.stagnolombardo.cr.it/servizio/richiedere-laccesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.stagnolombardo.cr.it/servizio/richiedere-laccesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.stagnolombardo.cr.it/servizio/richiedere-laccesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:28:21.739851Z"
+  },
+  "carta_identita": {
+   "service_id": "019103:wp:1574",
+   "title": "Avviso per i possessori di carta d’identità cartacea",
+   "source_url": "https://www.comune.stagnolombardo.cr.it/servizio/avviso-per-i-possessori-di-carta-didentita-cartacea/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.stagnolombardo.cr.it/servizio/avviso-per-i-possessori-di-carta-didentita-cartacea/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.stagnolombardo.cr.it/servizio/avviso-per-i-possessori-di-carta-didentita-cartacea/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:28:26.281736Z"
+  }
+ }
+}

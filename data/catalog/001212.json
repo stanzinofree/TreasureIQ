@@ -1,0 +1,169 @@
+{
+ "municipality_istat": "001212",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001212:comweb:richiedere-l-accesso-agli-atti-317-27555-1-deb7fc7d7e7d817f8011e57a48705a52",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.ribordone.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-27555-1-deb7fc7d7e7d817f8011e57a48705a52",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ribordone.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-27555-1-deb7fc7d7e7d817f8011e57a48705a52",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ribordone.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-27555-1-deb7fc7d7e7d817f8011e57a48705a52",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.ribordone.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=rbrdnn154&IDPr=11597",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.ribordone.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-27555-1-deb7fc7d7e7d817f8011e57a48705a52",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:47:18.036887Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001212:comweb:cambio-residenza-305-27553-1-8adfc42318b29bd6436ee832758d307b",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.ribordone.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-27553-1-8adfc42318b29bd6436ee832758d307b",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ribordone.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-27553-1-8adfc42318b29bd6436ee832758d307b",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ribordone.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-27553-1-8adfc42318b29bd6436ee832758d307b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.ribordone.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-27553-1-8adfc42318b29bd6436ee832758d307b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:47:20.317673Z"
+  },
+  "carta_identita": {
+   "service_id": "001212:comweb:carta-d-identita-elettronica-cie-788-27543-1-20863c683dbe4ce34290a6b33d7a0267",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.ribordone.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-27543-1-20863c683dbe4ce34290a6b33d7a0267",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ribordone.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-27543-1-20863c683dbe4ce34290a6b33d7a0267",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ribordone.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-27543-1-20863c683dbe4ce34290a6b33d7a0267",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:47:22.405434Z"
+  },
+  "stato_civile": {
+   "service_id": "001212:comweb:richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-27543-1-de8d0006d3d2fd14a2534b89de9c463f",
+   "title": "Richiesta di certificati/attestazioni/estratti di stato civile",
+   "source_url": "https://www.comune.ribordone.to.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-27543-1-de8d0006d3d2fd14a2534b89de9c463f",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ribordone.to.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-27543-1-de8d0006d3d2fd14a2534b89de9c463f",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ribordone.to.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-27543-1-de8d0006d3d2fd14a2534b89de9c463f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:47:24.623373Z"
+  },
+  "tributi_imu": {
+   "service_id": "001212:comweb:pagare-tributi-imu-600-27644-1-567523cc7d101718a70c918ba3bab6ba",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.ribordone.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-27644-1-567523cc7d101718a70c918ba3bab6ba",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ribordone.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-27644-1-567523cc7d101718a70c918ba3bab6ba",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ribordone.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-27644-1-567523cc7d101718a70c918ba3bab6ba",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:47:26.721429Z"
+  },
+  "tributi_tari": {
+   "service_id": "001212:comweb:tassa-rifiuti-tari-954-27635-1-074ad3a19172d476b9166a31d7b3f115",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.ribordone.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-27635-1-074ad3a19172d476b9166a31d7b3f115",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ribordone.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-27635-1-074ad3a19172d476b9166a31d7b3f115",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ribordone.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-27635-1-074ad3a19172d476b9166a31d7b3f115",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:47:29.800841Z"
+  }
+ }
+}

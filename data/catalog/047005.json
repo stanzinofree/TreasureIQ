@@ -1,0 +1,133 @@
+{
+ "municipality_istat": "047005",
+ "services": {
+  "accesso_atti": {
+   "service_id": "047005:comweb:richiedere-l-accesso-agli-atti-317-39172-1-bdb4f04c257492ff13a2890bb4b4c27a",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.lamporecchio.pt.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-39172-1-bdb4f04c257492ff13a2890bb4b4c27a",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.lamporecchio.pt.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-39172-1-bdb4f04c257492ff13a2890bb4b4c27a",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.lamporecchio.pt.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-39172-1-bdb4f04c257492ff13a2890bb4b4c27a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T13:55:27.953991Z"
+  },
+  "cambio_residenza": {
+   "service_id": "047005:comweb:cambio-residenza-305-39170-1-85cd26a51e78ca1f47384910b5ea1502",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.lamporecchio.pt.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-39170-1-85cd26a51e78ca1f47384910b5ea1502",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.lamporecchio.pt.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-39170-1-85cd26a51e78ca1f47384910b5ea1502",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.lamporecchio.pt.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-39170-1-85cd26a51e78ca1f47384910b5ea1502",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.lamporecchio.pt.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-39170-1-85cd26a51e78ca1f47384910b5ea1502",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T13:55:29.860422Z"
+  },
+  "carta_identita": {
+   "service_id": "047005:comweb:carta-d-identita-elettronica-cie-788-39160-1-7e5ef8bedf930e3c91427db0d67a4c98",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.lamporecchio.pt.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-39160-1-7e5ef8bedf930e3c91427db0d67a4c98",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.lamporecchio.pt.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-39160-1-7e5ef8bedf930e3c91427db0d67a4c98",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.lamporecchio.pt.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-39160-1-7e5ef8bedf930e3c91427db0d67a4c98",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T13:55:33.226057Z"
+  },
+  "stato_civile": {
+   "service_id": "047005:comweb:richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-39160-1-6ca72456171f451678c230ddddf36a72",
+   "title": "Richiesta di certificati/attestazioni/estratti di stato civile",
+   "source_url": "https://www.comune.lamporecchio.pt.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-39160-1-6ca72456171f451678c230ddddf36a72",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.lamporecchio.pt.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-39160-1-6ca72456171f451678c230ddddf36a72",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.lamporecchio.pt.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-39160-1-6ca72456171f451678c230ddddf36a72",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T13:55:35.325405Z"
+  },
+  "tributi_imu": {
+   "service_id": "047005:comweb:pagare-tributi-imu-600-39261-1-fbfad6a839a2af46ee85f04625d89feb",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.lamporecchio.pt.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-39261-1-fbfad6a839a2af46ee85f04625d89feb",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.lamporecchio.pt.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-39261-1-fbfad6a839a2af46ee85f04625d89feb",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.lamporecchio.pt.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-39261-1-fbfad6a839a2af46ee85f04625d89feb",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T13:55:37.905078Z"
+  }
+ }
+}

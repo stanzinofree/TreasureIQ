@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "061090",
+ "services": {
+  "stato_civile": {
+   "service_id": "061090:comweb:certificato-di-nascita-26-58625-1-00fb4234527bc0bd41974da1380afdf3",
+   "title": "Certificato di nascita",
+   "source_url": "https://www.comune.succivo.ce.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-nascita-26-58625-1-00fb4234527bc0bd41974da1380afdf3",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.succivo.ce.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-nascita-26-58625-1-00fb4234527bc0bd41974da1380afdf3",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.succivo.ce.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-nascita-26-58625-1-00fb4234527bc0bd41974da1380afdf3",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:10:47.422570Z"
+  }
+ }
+}

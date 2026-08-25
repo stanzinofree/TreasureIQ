@@ -1,0 +1,146 @@
+{
+ "municipality_istat": "018145",
+ "services": {
+  "accesso_atti": {
+   "service_id": "018145:comweb:richiedere-l-accesso-agli-atti-317-28479-1-8c9eedd59f581c50f78badb3ed161e5d",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.sanzenonealpo.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-28479-1-8c9eedd59f581c50f78badb3ed161e5d",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanzenonealpo.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-28479-1-8c9eedd59f581c50f78badb3ed161e5d",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanzenonealpo.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-28479-1-8c9eedd59f581c50f78badb3ed161e5d",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:25:12.683970Z"
+  },
+  "cambio_residenza": {
+   "service_id": "018145:comweb:cambio-residenza-305-28477-1-11feda17d1769caab3507e2e2013724b",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.sanzenonealpo.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-28477-1-11feda17d1769caab3507e2e2013724b",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanzenonealpo.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-28477-1-11feda17d1769caab3507e2e2013724b",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanzenonealpo.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-28477-1-11feda17d1769caab3507e2e2013724b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.sanzenonealpo.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-28477-1-11feda17d1769caab3507e2e2013724b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:25:18.116037Z"
+  },
+  "carta_identita": {
+   "service_id": "018145:comweb:carta-d-identita-elettronica-cie-788-28467-1-c21d022326bbf86ccf35466eca45aa73",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.sanzenonealpo.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-28467-1-c21d022326bbf86ccf35466eca45aa73",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanzenonealpo.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-28467-1-c21d022326bbf86ccf35466eca45aa73",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanzenonealpo.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-28467-1-c21d022326bbf86ccf35466eca45aa73",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:25:21.024156Z"
+  },
+  "stato_civile": {
+   "service_id": "018145:comweb:certificato-di-stato-civile-6-28467-1-9b7ebdd518f92fea6e71d3e921869a57",
+   "title": "Certificato di stato civile",
+   "source_url": "https://www.comune.sanzenonealpo.pv.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-stato-civile-6-28467-1-9b7ebdd518f92fea6e71d3e921869a57",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanzenonealpo.pv.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-stato-civile-6-28467-1-9b7ebdd518f92fea6e71d3e921869a57",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanzenonealpo.pv.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-stato-civile-6-28467-1-9b7ebdd518f92fea6e71d3e921869a57",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/certificati/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.sanzenonealpo.pv.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-stato-civile-6-28467-1-9b7ebdd518f92fea6e71d3e921869a57",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:25:24.200979Z"
+  },
+  "tributi_tari": {
+   "service_id": "018145:comweb:pagamento-tassa-rifiuti-tari-659-28559-1-f4e0df2d3c24bdfb5c7184fcef089125",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.sanzenonealpo.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-28559-1-f4e0df2d3c24bdfb5c7184fcef089125",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanzenonealpo.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-28559-1-f4e0df2d3c24bdfb5c7184fcef089125",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanzenonealpo.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-28559-1-f4e0df2d3c24bdfb5c7184fcef089125",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:25:26.983824Z"
+  }
+ }
+}

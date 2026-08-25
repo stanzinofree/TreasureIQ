@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "075070",
+ "services": {
+  "tributi_tari": {
+   "service_id": "075070:wp:950",
+   "title": "TARI",
+   "source_url": "https://www.comune.sannicola.le.it/servizio/tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sannicola.le.it/servizio/tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sannicola.le.it/servizio/tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:30:47.256249Z"
+  }
+ }
+}

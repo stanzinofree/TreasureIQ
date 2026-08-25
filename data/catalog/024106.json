@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "024106",
+ "services": {
+  "accesso_atti": {
+   "service_id": "024106:wp:304",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.tonezzadelcimone.vi.it/?post_type=servizio&p=304",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.tonezzadelcimone.vi.it/?post_type=servizio&p=304",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.tonezzadelcimone.vi.it/?post_type=servizio&p=304",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:17:34.963001Z"
+  },
+  "cambio_residenza": {
+   "service_id": "024106:wp:603",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.tonezzadelcimone.vi.it/?post_type=servizio&p=603",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.tonezzadelcimone.vi.it/?post_type=servizio&p=603",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.tonezzadelcimone.vi.it/?post_type=servizio&p=603",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:17:41.319512Z"
+  },
+  "carta_identita": {
+   "service_id": "024106:wp:214",
+   "title": "Rilascio Carta di Identità Elettronica",
+   "source_url": "https://www.comune.tonezzadelcimone.vi.it/?post_type=servizio&p=214",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.tonezzadelcimone.vi.it/?post_type=servizio&p=214",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.tonezzadelcimone.vi.it/?post_type=servizio&p=214",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:17:51.312389Z"
+  },
+  "stato_civile": {
+   "service_id": "024106:wp:606",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.tonezzadelcimone.vi.it/?post_type=servizio&p=606",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.tonezzadelcimone.vi.it/?post_type=servizio&p=606",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.tonezzadelcimone.vi.it/?post_type=servizio&p=606",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:17:59.402107Z"
+  }
+ }
+}

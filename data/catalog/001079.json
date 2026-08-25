@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "001079",
+ "services": {
+  "tributi_imu": {
+   "service_id": "001079:comweb:pagare-tributi-imu-600-18140-1-d346251f9386598de35b9711a10bbb6b",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.chiesanuova.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-18140-1-d346251f9386598de35b9711a10bbb6b",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.chiesanuova.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-18140-1-d346251f9386598de35b9711a10bbb6b",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.chiesanuova.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-18140-1-d346251f9386598de35b9711a10bbb6b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:41:40.124520Z"
+  },
+  "tributi_tari": {
+   "service_id": "001079:comweb:pagamento-tassa-rifiuti-tari-659-18131-1-1aa399171803c7620683be8d9f2b4bc2",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.chiesanuova.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-18131-1-1aa399171803c7620683be8d9f2b4bc2",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.chiesanuova.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-18131-1-1aa399171803c7620683be8d9f2b4bc2",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.chiesanuova.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-18131-1-1aa399171803c7620683be8d9f2b4bc2",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:41:42.183064Z"
+  }
+ }
+}

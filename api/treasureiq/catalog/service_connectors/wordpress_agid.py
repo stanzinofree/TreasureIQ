@@ -27,6 +27,7 @@ from treasureiq.catalog.service_connectors.connettore_base import (
     DiscoveryTarget,
     _ServiceConnectorBase,
 )
+from treasureiq.catalog.service_connectors.esecutore_fetcher import raccogli_candidati_wp
 from treasureiq.catalog.service_contracts import SERVICE_SEARCH_TERM, ServiceKey
 from treasureiq.ingest.base import USER_AGENT
 from treasureiq.mappa_connettore import _base_con_schema, _host_senza_www
@@ -115,40 +116,24 @@ class HttpxServiceFetcher:
         # to an unauthorised host.  Same discipline as the page fetch — redirects
         # followed manually, host re-checked on every hop and the final URL.
         host_ufficiale = _host_senza_www(urlparse(base_url).netloc.lower())
-        resp = self._get_verificato(
-            url,
-            host_ufficiale=host_ufficiale,
-            params={"search": term, "per_page": limit, "_fields": "id,title,link"},
-        )
-        if resp is None or resp.status_code != 200:
-            return ()
-        try:
-            dati = resp.json()
-        except ValueError:
-            return ()
-        if not isinstance(dati, list):
-            return ()
-        candidati: list[ServiceCandidate] = []
-        for voce in dati:
-            candidato = self._candidato(voce)
-            if candidato is not None:
-                candidati.append(candidato)
-        return tuple(candidati)
 
-    @staticmethod
-    def _candidato(voce: object) -> ServiceCandidate | None:
-        if not isinstance(voce, dict):
-            return None
-        titolo_raw = voce.get("title")
-        titolo = titolo_raw.get("rendered") if isinstance(titolo_raw, dict) else titolo_raw
-        try:
-            return ServiceCandidate(
-                native_id=str(int(voce["id"])),
-                title=str(titolo).strip(),
-                url=str(voce["link"]),
-            )
-        except (KeyError, TypeError, ValueError):
-            return None
+        def _leggi(params: dict[str, object]) -> object | None:
+            resp = self._get_verificato(url, host_ufficiale=host_ufficiale, params=params)
+            if resp is None or resp.status_code != 200:
+                return None
+            try:
+                return resp.json()
+            except ValueError:
+                return None
+
+        # Standard-first (slim). Il fallback dialetto B (una GET senza ``_fields``)
+        # scatta SOLO se lo standard è vuoto-ma-non-``[]`` — la logica è condivisa
+        # col path guardato (``raccogli_candidati_wp``) così i due dialetti non
+        # divergono. Lo standard resta byte-identico: nessuna seconda richiesta.
+        dati = _leggi({"search": term, "per_page": limit, "_fields": "id,title,link"})
+        return raccogli_candidati_wp(
+            dati, lambda: _leggi({"search": term, "per_page": limit})
+        )
 
     def leggi_pagina(self, *, url: str, official_host: str) -> str | None:
         host_ufficiale = _host_senza_www(official_host.lower())

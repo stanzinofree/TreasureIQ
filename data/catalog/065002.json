@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "065002",
+ "services": {
+  "accesso_atti": {
+   "service_id": "065002:wp:746",
+   "title": "Richiesta di accesso agli atti",
+   "source_url": "https://comune.agropoli.sa.it/servizio/richiesta-di-accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.agropoli.sa.it/servizio/richiesta-di-accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.agropoli.sa.it/servizio/richiesta-di-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:17:38.047528Z"
+  },
+  "cambio_residenza": {
+   "service_id": "065002:wp:936",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.agropoli.sa.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.agropoli.sa.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.agropoli.sa.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:17:41.259102Z"
+  },
+  "tributi_imu": {
+   "service_id": "065002:wp:753",
+   "title": "Pagare Tributi IMU",
+   "source_url": "https://comune.agropoli.sa.it/servizio/pagare-tributi-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.agropoli.sa.it/servizio/pagare-tributi-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.agropoli.sa.it/servizio/pagare-tributi-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:17:44.109320Z"
+  }
+ }
+}

@@ -1,0 +1,87 @@
+{
+ "municipality_istat": "001183",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001183:comweb:richiedere-l-accesso-agli-atti-317-23463-1-5d719701c71d6380c26277deeb7347fd",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.pecetto.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-23463-1-5d719701c71d6380c26277deeb7347fd",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pecetto.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-23463-1-5d719701c71d6380c26277deeb7347fd",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pecetto.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-23463-1-5d719701c71d6380c26277deeb7347fd",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.pecetto.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=pctttrns205&IDPr=4328",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.pecetto.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-23463-1-5d719701c71d6380c26277deeb7347fd",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:45:41.853799Z"
+  },
+  "carta_identita": {
+   "service_id": "001183:comweb:carta-d-identita-elettronica-cie-788-23451-1-788e8c70b2f7096aca1b80005392440b",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.pecetto.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-23451-1-788e8c70b2f7096aca1b80005392440b",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pecetto.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-23451-1-788e8c70b2f7096aca1b80005392440b",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pecetto.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-23451-1-788e8c70b2f7096aca1b80005392440b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:45:43.756526Z"
+  },
+  "tributi_tari": {
+   "service_id": "001183:comweb:tassa-rifiuti-tari-954-23543-1-cef7aa0f3e473b5c080d23d8682e9e07",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.pecetto.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-23543-1-cef7aa0f3e473b5c080d23d8682e9e07",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pecetto.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-23543-1-cef7aa0f3e473b5c080d23d8682e9e07",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pecetto.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-23543-1-cef7aa0f3e473b5c080d23d8682e9e07",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:45:46.005225Z"
+  }
+ }
+}

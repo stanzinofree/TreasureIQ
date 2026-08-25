@@ -127,6 +127,64 @@ def test_scopri_voce_malformata_scartata_non_alza():
     assert len(got) == 1 and got[0].native_id == "7"
 
 
+def test_scopri_title_entita_html_decodificate():
+    # Golden: ``rendered`` è HTML — entità (&#8217; &#8211; &amp;) decodificate
+    # nel titolo prima di costruire la reference (niente entity-leak nel catalogo).
+    corpo = json.dumps(
+        [{"id": 9,
+          "title": {"rendered": "Carta d&#8217;identità &#8211; Anagrafe &amp; Stato civile"},
+          "link": f"{_BASE}/servizi/cie"}]
+    ).encode("utf-8")
+    got = _wp(_EsecutoreSpy(_ok(corpo))).scopri_servizi(base_url=_ENTRY, term="carta", limit=5)
+    assert len(got) == 1
+    assert got[0].title == "Carta d’identità – Anagrafe & Stato civile"
+
+
+# --- dialect B: the full-dump custom controller (recovery, guarded path) ----
+
+
+def _dump_dialetto_b() -> bytes:
+    # One dialect-B row: "ID"/"post_title"/"guid", no id/title.rendered/link.
+    return json.dumps(
+        [{"ID": 7, "post_title": "Calcolo IMU online",
+          "guid": f"{_BASE}/?post_type=servizio&p=7"}]
+    ).encode("utf-8")
+
+
+def test_scopri_dialetto_b_recupera_senza_fields():
+    # Slim search (with "_fields") answers [[], []] (dialect B voids _fields);
+    # non-empty-but-0 → one re-read WITHOUT "_fields" parses the dialect-B row.
+    spy = _EsecutoreSpy(_ok(b"[[],[]]"), _ok(_dump_dialetto_b()))
+    got = _wp(spy).scopri_servizi(base_url=_ENTRY, term="imu", limit=5)
+    assert len(got) == 1 and got[0].native_id == "7"
+    assert str(got[0].url) == f"{_BASE}/?post_type=servizio&p=7"
+    assert len(spy.chiamate) == 2  # slim, then the recovery re-read
+    assert "_fields=id" in spy.chiamate[0]["url"]
+    assert "_fields" not in spy.chiamate[1]["url"]
+    # The recovery re-read keeps the same host guard as every other fetch.
+    assert spy.chiamate[1]["host_atteso"] == "comune.example.it"
+
+
+def test_scopri_dialetto_b_title_entita_decodificate():
+    # Golden dialetto B: ``post_title`` con entità → titolo decodificato.
+    corpo = json.dumps(
+        [{"ID": 7, "post_title": "Cambio di residenza &#8211; modulo &amp; guida",
+          "guid": f"{_BASE}/?post_type=servizio&p=7"}]
+    ).encode("utf-8")
+    spy = _EsecutoreSpy(_ok(b"[[]]"), _ok(corpo))
+    got = _wp(spy).scopri_servizi(base_url=_ENTRY, term="residenza", limit=5)
+    assert len(got) == 1
+    assert got[0].title == "Cambio di residenza – modulo & guida"
+
+
+def test_scopri_lista_vuota_nessun_refetch():
+    # A GENUINE `[]` is a real empty catalogue: honest miss, NO second read.
+    spy = _EsecutoreSpy(_ok(b"[]"))
+    got = _wp(spy).scopri_servizi(base_url=_ENTRY, term="imu", limit=5)
+    assert got == ()
+    assert len(spy.chiamate) == 1  # no "_fields"-free recovery on a real empty
+
+
 # --- leggi_pagina (common transport) ----------------------------------------
 
 

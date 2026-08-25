@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "087021",
+ "services": {
+  "accesso_atti": {
+   "service_id": "087021:wp:2718",
+   "title": "Richiesta accesso agli atti",
+   "source_url": "https://comune.linguaglossa.ct.it/servizio/richiesta-accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.linguaglossa.ct.it/servizio/richiesta-accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.linguaglossa.ct.it/servizio/richiesta-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:49:14.575773Z"
+  },
+  "cambio_residenza": {
+   "service_id": "087021:wp:3570",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.linguaglossa.ct.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.linguaglossa.ct.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.linguaglossa.ct.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:49:16.888171Z"
+  },
+  "tributi_imu": {
+   "service_id": "087021:wp:3717",
+   "title": "Pagare tributo IMU",
+   "source_url": "https://comune.linguaglossa.ct.it/servizio/pagare-tributo-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.linguaglossa.ct.it/servizio/pagare-tributo-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.linguaglossa.ct.it/servizio/pagare-tributo-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:49:19.197099Z"
+  }
+ }
+}

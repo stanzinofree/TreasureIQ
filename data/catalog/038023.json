@@ -1,0 +1,211 @@
+{
+ "municipality_istat": "038023",
+ "services": {
+  "accesso_atti": {
+   "service_id": "038023:wp:3782",
+   "title": "Accesso agli atti",
+   "source_url": "https://www.comune.voghiera.fe.it/servizio/accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.voghiera.fe.it/servizio/accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.voghiera.fe.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.voghiera.fe.it/wp-content/uploads/2024/09/Mod-003-ACCESSO-ALLA-DOCUMENTAZIONE-AMMINISTRATIVA-Apr-2021.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.voghiera.fe.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.voghiera.fe.it/wp-content/uploads/2025/06/diritti-di-segreteria-anno-2024.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.voghiera.fe.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:52:29.882891Z"
+  },
+  "cambio_residenza": {
+   "service_id": "038023:wp:4017",
+   "title": "Cambio di Residenza",
+   "source_url": "https://www.comune.voghiera.fe.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.voghiera.fe.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.voghiera.fe.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:52:31.159539Z"
+  },
+  "carta_identita": {
+   "service_id": "038023:wp:4020",
+   "title": "Carta d’identità",
+   "source_url": "https://www.comune.voghiera.fe.it/servizio/carta-didentita/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.voghiera.fe.it/servizio/carta-didentita/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.voghiera.fe.it/servizio/carta-didentita/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:52:32.697761Z"
+  },
+  "tributi_imu": {
+   "service_id": "038023:wp:4252",
+   "title": "IMU Imposta Municipale Propria",
+   "source_url": "https://www.comune.voghiera.fe.it/servizio/imu-imposta-municipale-propria/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.voghiera.fe.it/servizio/imu-imposta-municipale-propria/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.voghiera.fe.it/servizio/imu-imposta-municipale-propria/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.voghiera.fe.it/wp-content/uploads/2025/03/Prospetto_aliquote_IMU_2026.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.voghiera.fe.it/servizio/imu-imposta-municipale-propria/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.voghiera.fe.it/wp-content/uploads/2025/03/DeliberadiConsiglio_Originale_31_2025.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.voghiera.fe.it/servizio/imu-imposta-municipale-propria/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.voghiera.fe.it/wp-content/uploads/2025/03/RICHIESTA-ALIQUOTA-AGEVOLATA-2026.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.voghiera.fe.it/servizio/imu-imposta-municipale-propria/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.voghiera.fe.it/wp-content/uploads/2025/03/DeliberadiGiunta_Originale_92_2025.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.voghiera.fe.it/servizio/imu-imposta-municipale-propria/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.voghiera.fe.it/wp-content/uploads/2025/03/Allegato_A_2026.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.voghiera.fe.it/servizio/imu-imposta-municipale-propria/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:52:34.030901Z"
+  },
+  "tributi_tari": {
+   "service_id": "038023:wp:3816",
+   "title": "TARI – Tariffa Rifiuti",
+   "source_url": "https://www.comune.voghiera.fe.it/servizio/tari-tariffa-rifiuti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.voghiera.fe.it/servizio/tari-tariffa-rifiuti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.voghiera.fe.it/servizio/tari-tariffa-rifiuti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:52:35.477271Z"
+  }
+ }
+}

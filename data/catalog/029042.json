@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "029042",
+ "services": {
+  "accesso_atti": {
+   "service_id": "029042:wp:253",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.salara.ro.it/?post_type=servizio&p=253",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.salara.ro.it/?post_type=servizio&p=253",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.salara.ro.it/?post_type=servizio&p=253",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:35:48.610463Z"
+  },
+  "cambio_residenza": {
+   "service_id": "029042:wp:785",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.salara.ro.it/?post_type=servizio&p=785",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.salara.ro.it/?post_type=servizio&p=785",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.salara.ro.it/?post_type=servizio&p=785",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:35:54.777605Z"
+  },
+  "stato_civile": {
+   "service_id": "029042:wp:876",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.salara.ro.it/?post_type=servizio&p=876",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.salara.ro.it/?post_type=servizio&p=876",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.salara.ro.it/?post_type=servizio&p=876",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:36:00.161115Z"
+  },
+  "tributi_imu": {
+   "service_id": "029042:wp:784",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.salara.ro.it/?post_type=servizio&p=784",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.salara.ro.it/?post_type=servizio&p=784",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.salara.ro.it/?post_type=servizio&p=784",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:36:06.843343Z"
+  }
+ }
+}

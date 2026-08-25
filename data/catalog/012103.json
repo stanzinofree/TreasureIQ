@@ -1,0 +1,87 @@
+{
+ "municipality_istat": "012103",
+ "services": {
+  "accesso_atti": {
+   "service_id": "012103:comweb:richiedere-l-accesso-agli-atti-317-47224-1-0bbcd0b7596aecff512b4167c3641126",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.montegrino-valtravaglia.va.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-47224-1-0bbcd0b7596aecff512b4167c3641126",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montegrino-valtravaglia.va.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-47224-1-0bbcd0b7596aecff512b4167c3641126",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montegrino-valtravaglia.va.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-47224-1-0bbcd0b7596aecff512b4167c3641126",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.montegrino-valtravaglia.va.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=mntgrnvltrvgl1101&IDPr=9968",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.montegrino-valtravaglia.va.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-47224-1-0bbcd0b7596aecff512b4167c3641126",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:13:40.900655Z"
+  },
+  "carta_identita": {
+   "service_id": "012103:comweb:carta-d-identita-elettronica-cie-788-47212-1-2b78f133c761a39f21e16ab5368d2dd2",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.montegrino-valtravaglia.va.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-47212-1-2b78f133c761a39f21e16ab5368d2dd2",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montegrino-valtravaglia.va.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-47212-1-2b78f133c761a39f21e16ab5368d2dd2",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montegrino-valtravaglia.va.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-47212-1-2b78f133c761a39f21e16ab5368d2dd2",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:13:43.696032Z"
+  },
+  "tributi_imu": {
+   "service_id": "012103:comweb:imposta-municipale-propria-imu-953-47313-1-1a7127e3b2756ac01c97993a06be5c1a",
+   "title": "Imposta Municipale Propria (IMU)",
+   "source_url": "https://www.comune.montegrino-valtravaglia.va.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-47313-1-1a7127e3b2756ac01c97993a06be5c1a",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montegrino-valtravaglia.va.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-47313-1-1a7127e3b2756ac01c97993a06be5c1a",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montegrino-valtravaglia.va.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-47313-1-1a7127e3b2756ac01c97993a06be5c1a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:13:46.171982Z"
+  }
+ }
+}

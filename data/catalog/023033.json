@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "023033",
+ "services": {
+  "stato_civile": {
+   "service_id": "023033:wp:436",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.erbezzo.vr.it/?post_type=servizio&p=436",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.erbezzo.vr.it/?post_type=servizio&p=436",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.erbezzo.vr.it/?post_type=servizio&p=436",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:34:56.986861Z"
+  },
+  "tributi_imu": {
+   "service_id": "023033:wp:431",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.erbezzo.vr.it/?post_type=servizio&p=431",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.erbezzo.vr.it/?post_type=servizio&p=431",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.erbezzo.vr.it/?post_type=servizio&p=431",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:35:04.055657Z"
+  }
+ }
+}

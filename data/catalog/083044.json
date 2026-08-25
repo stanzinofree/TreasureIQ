@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "083044",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "083044:wp:2033",
+   "title": "Cambio di Residenza",
+   "source_url": "https://www.comune.malvagna.me.it/t/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.malvagna.me.it/t/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.malvagna.me.it/t/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:45:12.942732Z"
+  },
+  "tributi_imu": {
+   "service_id": "083044:wp:1989",
+   "title": "IMU",
+   "source_url": "https://www.comune.malvagna.me.it/t/servizio/imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.malvagna.me.it/t/servizio/imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.malvagna.me.it/t/servizio/imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:45:15.009590Z"
+  }
+ }
+}

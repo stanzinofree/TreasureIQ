@@ -1,0 +1,77 @@
+{
+ "municipality_istat": "006133",
+ "services": {
+  "accesso_atti": {
+   "service_id": "006133:comweb:richiedere-l-accesso-agli-atti-317-17654-1-ea7b604234c9005b65b73188663e5be4",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.pontestura.al.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-17654-1-ea7b604234c9005b65b73188663e5be4",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pontestura.al.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-17654-1-ea7b604234c9005b65b73188663e5be4",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pontestura.al.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-17654-1-ea7b604234c9005b65b73188663e5be4",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.pontestura.al.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=pntstr866&IDPr=8952",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.pontestura.al.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-17654-1-ea7b604234c9005b65b73188663e5be4",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:02:17.402254Z"
+  },
+  "tributi_imu": {
+   "service_id": "006133:comweb:pagare-tributi-imu-600-17744-1-9b52dec35db4e76ac7267b3f31f61e3b",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.pontestura.al.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-17744-1-9b52dec35db4e76ac7267b3f31f61e3b",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pontestura.al.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-17744-1-9b52dec35db4e76ac7267b3f31f61e3b",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pontestura.al.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-17744-1-9b52dec35db4e76ac7267b3f31f61e3b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.pontestura.al.it/servizi/portalecontribuente/calcolatoreimu.aspx?CodCat=G858",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.pontestura.al.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-17744-1-9b52dec35db4e76ac7267b3f31f61e3b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:02:19.527024Z"
+  }
+ }
+}

@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "007044",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "007044:wp:2473",
+   "title": "Cambio di residenza/abitazione",
+   "source_url": "https://www.comune.morgex.ao.it/servizio/cambio-di-residenza-abitazione/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.morgex.ao.it/servizio/cambio-di-residenza-abitazione/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.morgex.ao.it/servizio/cambio-di-residenza-abitazione/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:08:16.960640Z"
+  },
+  "stato_civile": {
+   "service_id": "007044:wp:487",
+   "title": "Richiedere certificati di stato civile",
+   "source_url": "https://www.comune.morgex.ao.it/servizio/richiedere-certificati-di-stato-civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.morgex.ao.it/servizio/richiedere-certificati-di-stato-civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.morgex.ao.it/servizio/richiedere-certificati-di-stato-civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:08:21.450836Z"
+  },
+  "tributi_imu": {
+   "service_id": "007044:wp:805",
+   "title": "IMU – Imposta municipale propria",
+   "source_url": "https://www.comune.morgex.ao.it/servizio/imu-imposta-municipale-propria/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.morgex.ao.it/servizio/imu-imposta-municipale-propria/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.morgex.ao.it/servizio/imu-imposta-municipale-propria/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:08:25.191457Z"
+  },
+  "tributi_tari": {
+   "service_id": "007044:wp:812",
+   "title": "TARI – Tributo sui rifiuti",
+   "source_url": "https://www.comune.morgex.ao.it/servizio/tari-tributo-sui-rifiuti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.morgex.ao.it/servizio/tari-tributo-sui-rifiuti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.morgex.ao.it/servizio/tari-tributo-sui-rifiuti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:08:37.219066Z"
+  }
+ }
+}

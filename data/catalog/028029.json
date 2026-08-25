@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "028029",
+ "services": {
+  "accesso_atti": {
+   "service_id": "028029:wp:261",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.castelbaldo.pd.it/?post_type=servizio&p=261",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castelbaldo.pd.it/?post_type=servizio&p=261",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castelbaldo.pd.it/?post_type=servizio&p=261",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:57:09.650203Z"
+  },
+  "carta_identita": {
+   "service_id": "028029:wp:583",
+   "title": "Rilascio Carta di Identità Elettronica",
+   "source_url": "https://www.comune.castelbaldo.pd.it/?post_type=servizio&p=583",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castelbaldo.pd.it/?post_type=servizio&p=583",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castelbaldo.pd.it/?post_type=servizio&p=583",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:57:15.232873Z"
+  },
+  "stato_civile": {
+   "service_id": "028029:wp:715",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.castelbaldo.pd.it/?post_type=servizio&p=715",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castelbaldo.pd.it/?post_type=servizio&p=715",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castelbaldo.pd.it/?post_type=servizio&p=715",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:57:24.193371Z"
+  },
+  "tributi_imu": {
+   "service_id": "028029:wp:816",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.castelbaldo.pd.it/?post_type=servizio&p=816",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castelbaldo.pd.it/?post_type=servizio&p=816",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castelbaldo.pd.it/?post_type=servizio&p=816",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:57:33.558059Z"
+  }
+ }
+}

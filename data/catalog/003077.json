@@ -1,0 +1,64 @@
+{
+ "municipality_istat": "003077",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "003077:comweb:cambio-residenza-305-32438-1-289cc295e94618f052db979eade04a32",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.granozzoconmonticello.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-32438-1-289cc295e94618f052db979eade04a32",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.granozzoconmonticello.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-32438-1-289cc295e94618f052db979eade04a32",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.granozzoconmonticello.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-32438-1-289cc295e94618f052db979eade04a32",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.granozzoconmonticello.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-32438-1-289cc295e94618f052db979eade04a32",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:57:50.779710Z"
+  },
+  "tributi_tari": {
+   "service_id": "003077:comweb:pagamento-tassa-rifiuti-tari-659-32520-1-7cccffccb762d037716b5c2d2241a093",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.granozzoconmonticello.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-32520-1-7cccffccb762d037716b5c2d2241a093",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.granozzoconmonticello.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-32520-1-7cccffccb762d037716b5c2d2241a093",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.granozzoconmonticello.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-32520-1-7cccffccb762d037716b5c2d2241a093",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:57:52.820367Z"
+  }
+ }
+}

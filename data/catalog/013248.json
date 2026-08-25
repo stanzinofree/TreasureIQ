@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "013248",
+ "services": {
+  "accesso_atti": {
+   "service_id": "013248:wp:1547",
+   "title": "Richiedere l’accesso agli atti",
+   "source_url": "https://comune.sansiro.co.it/servizio/richiedere-laccesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.sansiro.co.it/servizio/richiedere-laccesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.sansiro.co.it/servizio/richiedere-laccesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:14:13.802695Z"
+  },
+  "cambio_residenza": {
+   "service_id": "013248:wp:1102",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.sansiro.co.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.sansiro.co.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.sansiro.co.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:14:17.148317Z"
+  },
+  "carta_identita": {
+   "service_id": "013248:wp:1096",
+   "title": "Rilascio carta d’identità",
+   "source_url": "https://comune.sansiro.co.it/servizio/rilascio-carta-didentita/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.sansiro.co.it/servizio/rilascio-carta-didentita/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.sansiro.co.it/servizio/rilascio-carta-didentita/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:14:20.973880Z"
+  },
+  "tributi_imu": {
+   "service_id": "013248:wp:1551",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://comune.sansiro.co.it/servizio/pagare-tributi-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.sansiro.co.it/servizio/pagare-tributi-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.sansiro.co.it/servizio/pagare-tributi-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:14:24.617582Z"
+  }
+ }
+}

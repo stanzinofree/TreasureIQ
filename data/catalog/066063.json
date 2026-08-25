@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "066063",
+ "services": {
+  "accesso_atti": {
+   "service_id": "066063:wp:474",
+   "title": "Richiedere l’accesso agli atti",
+   "source_url": "https://www.comune.ortona.aq.it/servizio/richiedere-laccesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ortona.aq.it/servizio/richiedere-laccesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ortona.aq.it/servizio/richiedere-laccesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:22:25.701566Z"
+  },
+  "tributi_imu": {
+   "service_id": "066063:wp:420",
+   "title": "Servizio Calcolo IMU",
+   "source_url": "https://www.comune.ortona.aq.it/servizio/servizio-calcolo-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ortona.aq.it/servizio/servizio-calcolo-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ortona.aq.it/servizio/servizio-calcolo-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:22:27.275194Z"
+  }
+ }
+}

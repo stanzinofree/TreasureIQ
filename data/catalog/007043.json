@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "007043",
+ "services": {
+  "accesso_atti": {
+   "service_id": "007043:wp:484",
+   "title": "Richiedere l’accesso agli atti",
+   "source_url": "https://www.comune.montjovet.ao.it/servizio/richiedere-laccesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montjovet.ao.it/servizio/richiedere-laccesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montjovet.ao.it/servizio/richiedere-laccesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:08:03.635820Z"
+  },
+  "cambio_residenza": {
+   "service_id": "007043:wp:410",
+   "title": "Cambio di Residenza",
+   "source_url": "https://www.comune.montjovet.ao.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montjovet.ao.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montjovet.ao.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:08:06.677602Z"
+  },
+  "tributi_imu": {
+   "service_id": "007043:wp:674",
+   "title": "IMU (Imposta municipale propria)",
+   "source_url": "https://www.comune.montjovet.ao.it/servizio/imu-imposta-municipale-propria/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montjovet.ao.it/servizio/imu-imposta-municipale-propria/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montjovet.ao.it/servizio/imu-imposta-municipale-propria/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:08:10.054333Z"
+  },
+  "tributi_tari": {
+   "service_id": "007043:wp:683",
+   "title": "TARI (tributo sui rifiuti)",
+   "source_url": "https://www.comune.montjovet.ao.it/servizio/tari-tributo-sui-rifiuti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montjovet.ao.it/servizio/tari-tributo-sui-rifiuti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montjovet.ao.it/servizio/tari-tributo-sui-rifiuti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:08:13.583711Z"
+  }
+ }
+}

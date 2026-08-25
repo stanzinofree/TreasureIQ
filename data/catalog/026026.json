@@ -1,0 +1,64 @@
+{
+ "municipality_istat": "026026",
+ "services": {
+  "accesso_atti": {
+   "service_id": "026026:wp:366",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.farradisoligo.tv.it/?post_type=servizio&p=366",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.farradisoligo.tv.it/?post_type=servizio&p=366",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.farradisoligo.tv.it/?post_type=servizio&p=366",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.farradisoligo.tv.it/wp-content/uploads/2024/09/DGC-5_23-diritti-segreteria.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.farradisoligo.tv.it/?post_type=servizio&p=366",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:29:43.451983Z"
+  },
+  "stato_civile": {
+   "service_id": "026026:wp:887",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.farradisoligo.tv.it/?post_type=servizio&p=887",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.farradisoligo.tv.it/?post_type=servizio&p=887",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.farradisoligo.tv.it/?post_type=servizio&p=887",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:30:01.849002Z"
+  }
+ }
+}

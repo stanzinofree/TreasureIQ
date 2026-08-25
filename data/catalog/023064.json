@@ -1,0 +1,159 @@
+{
+ "municipality_istat": "023064",
+ "services": {
+  "accesso_atti": {
+   "service_id": "023064:wp:256",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.roncoalladige.vr.it/?post_type=servizio&p=256",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.roncoalladige.vr.it/?post_type=servizio&p=256",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.roncoalladige.vr.it/?post_type=servizio&p=256",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:41:31.865943Z"
+  },
+  "cambio_residenza": {
+   "service_id": "023064:wp:884",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.roncoalladige.vr.it/?post_type=servizio&p=884",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.roncoalladige.vr.it/?post_type=servizio&p=884",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.roncoalladige.vr.it/?post_type=servizio&p=884",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:41:37.211838Z"
+  },
+  "carta_identita": {
+   "service_id": "023064:wp:673",
+   "title": "CIE - Carta di Identità Elettronica",
+   "source_url": "https://www.comune.roncoalladige.vr.it/?post_type=servizio&p=673",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.roncoalladige.vr.it/?post_type=servizio&p=673",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.roncoalladige.vr.it/?post_type=servizio&p=673",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.roncoalladige.vr.it/wp-content/uploads/2024/01/Assenso-rilascio-documento-valido-espatrio-MINORE.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.roncoalladige.vr.it/?post_type=servizio&p=673",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:41:48.021682Z"
+  },
+  "stato_civile": {
+   "service_id": "023064:wp:887",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.roncoalladige.vr.it/?post_type=servizio&p=887",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.roncoalladige.vr.it/?post_type=servizio&p=887",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.roncoalladige.vr.it/?post_type=servizio&p=887",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:41:58.120060Z"
+  },
+  "tributi_imu": {
+   "service_id": "023064:wp:1077",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.roncoalladige.vr.it/?post_type=servizio&p=1077",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.roncoalladige.vr.it/?post_type=servizio&p=1077",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.roncoalladige.vr.it/?post_type=servizio&p=1077",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.roncoalladige.vr.it/wp-content/uploads/2024/11/GC_85-DEL-26-06-2012.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.roncoalladige.vr.it/?post_type=servizio&p=1077",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.roncoalladige.vr.it/wp-content/uploads/2024/11/GC-39-del-26.02.2021.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.roncoalladige.vr.it/?post_type=servizio&p=1077",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:42:09.023256Z"
+  }
+ }
+}

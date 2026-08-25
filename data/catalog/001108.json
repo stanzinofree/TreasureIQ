@@ -1,0 +1,110 @@
+{
+ "municipality_istat": "001108",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001108:comweb:richiedere-l-accesso-agli-atti-317-10130-1-caa928d2b8d44311f1735bfa6707626f",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.frassinetto.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-10130-1-caa928d2b8d44311f1735bfa6707626f",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.frassinetto.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-10130-1-caa928d2b8d44311f1735bfa6707626f",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.frassinetto.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-10130-1-caa928d2b8d44311f1735bfa6707626f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.frassinetto.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=frssntt151&IDPr=11097",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.frassinetto.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-10130-1-caa928d2b8d44311f1735bfa6707626f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:42:56.652231Z"
+  },
+  "carta_identita": {
+   "service_id": "001108:comweb:carta-d-identita-elettronica-cie-788-10119-1-cd0719c8f7afa8f6307122427620f1cf",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.frassinetto.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-10119-1-cd0719c8f7afa8f6307122427620f1cf",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.frassinetto.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-10119-1-cd0719c8f7afa8f6307122427620f1cf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.frassinetto.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-10119-1-cd0719c8f7afa8f6307122427620f1cf",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:42:59.339354Z"
+  },
+  "tributi_imu": {
+   "service_id": "001108:comweb:pagare-tributi-imu-600-10220-1-2cf152b7b64e72a4e38bf07841f55527",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.frassinetto.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-10220-1-2cf152b7b64e72a4e38bf07841f55527",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.frassinetto.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-10220-1-2cf152b7b64e72a4e38bf07841f55527",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.frassinetto.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-10220-1-2cf152b7b64e72a4e38bf07841f55527",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:43:03.450902Z"
+  },
+  "tributi_tari": {
+   "service_id": "001108:comweb:pagamento-tassa-rifiuti-tari-659-10211-1-077ab6dbc662aa08cab1cf3f0029c3bc",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.frassinetto.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-10211-1-077ab6dbc662aa08cab1cf3f0029c3bc",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.frassinetto.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-10211-1-077ab6dbc662aa08cab1cf3f0029c3bc",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.frassinetto.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-10211-1-077ab6dbc662aa08cab1cf3f0029c3bc",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:43:05.553686Z"
+  }
+ }
+}

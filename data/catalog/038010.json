@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "038010",
+ "services": {
+  "accesso_atti": {
+   "service_id": "038010:wp:249",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.jolandadisavoia.fe.it/?post_type=servizio&p=249",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.jolandadisavoia.fe.it/?post_type=servizio&p=249",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.jolandadisavoia.fe.it/?post_type=servizio&p=249",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:50:32.549892Z"
+  },
+  "stato_civile": {
+   "service_id": "038010:wp:1009",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.jolandadisavoia.fe.it/?post_type=servizio&p=1009",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.jolandadisavoia.fe.it/?post_type=servizio&p=1009",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.jolandadisavoia.fe.it/?post_type=servizio&p=1009",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:50:37.612094Z"
+  }
+ }
+}

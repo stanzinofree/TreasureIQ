@@ -1,0 +1,87 @@
+{
+ "municipality_istat": "024034",
+ "services": {
+  "accesso_atti": {
+   "service_id": "024034:wp:393",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.cornedo-vicentino.vi.it/?post_type=servizio&p=393",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cornedo-vicentino.vi.it/?post_type=servizio&p=393",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cornedo-vicentino.vi.it/?post_type=servizio&p=393",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:58:04.693881Z"
+  },
+  "carta_identita": {
+   "service_id": "024034:wp:3784",
+   "title": "Rilascio carta d'identità elettronica (CIE)",
+   "source_url": "https://www.comune.cornedo-vicentino.vi.it/?post_type=servizio&p=3784",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cornedo-vicentino.vi.it/?post_type=servizio&p=3784",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cornedo-vicentino.vi.it/?post_type=servizio&p=3784",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.cornedo-vicentino.vi.it/wp-content/uploads/2024/10/Assenso-per-espatrio-minore-CIE-2.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cornedo-vicentino.vi.it/?post_type=servizio&p=3784",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:58:11.848923Z"
+  },
+  "tributi_imu": {
+   "service_id": "024034:wp:1732",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.cornedo-vicentino.vi.it/?post_type=servizio&p=1732",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cornedo-vicentino.vi.it/?post_type=servizio&p=1732",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cornedo-vicentino.vi.it/?post_type=servizio&p=1732",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:58:22.365212Z"
+  }
+ }
+}

@@ -1,0 +1,87 @@
+{
+ "municipality_istat": "026096",
+ "services": {
+  "accesso_atti": {
+   "service_id": "026096:wp:482",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.pievedelgrappa.tv.it/?post_type=servizio&p=482",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pievedelgrappa.tv.it/?post_type=servizio&p=482",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pievedelgrappa.tv.it/?post_type=servizio&p=482",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.pievedelgrappa.tv.it/wp-content/uploads/2023/12/62-modulistica-richiesta-di-accesso-agli-atti-pratiche-edilizie-agg-04-2021.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pievedelgrappa.tv.it/?post_type=servizio&p=482",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:37:13.093734Z"
+  },
+  "cambio_residenza": {
+   "service_id": "026096:wp:1141",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.pievedelgrappa.tv.it/?post_type=servizio&p=1141",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pievedelgrappa.tv.it/?post_type=servizio&p=1141",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pievedelgrappa.tv.it/?post_type=servizio&p=1141",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:37:33.248145Z"
+  },
+  "stato_civile": {
+   "service_id": "026096:wp:1208",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.pievedelgrappa.tv.it/?post_type=servizio&p=1208",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pievedelgrappa.tv.it/?post_type=servizio&p=1208",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pievedelgrappa.tv.it/?post_type=servizio&p=1208",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:37:44.604988Z"
+  }
+ }
+}

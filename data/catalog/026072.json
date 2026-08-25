@@ -1,0 +1,120 @@
+{
+ "municipality_istat": "026072",
+ "services": {
+  "accesso_atti": {
+   "service_id": "026072:wp:414",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.san-fior.tv.it/?post_type=servizio&p=414",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.san-fior.tv.it/?post_type=servizio&p=414",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.san-fior.tv.it/?post_type=servizio&p=414",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:34:24.548641Z"
+  },
+  "cambio_residenza": {
+   "service_id": "026072:wp:1542",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.san-fior.tv.it/?post_type=servizio&p=1542",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.san-fior.tv.it/?post_type=servizio&p=1542",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.san-fior.tv.it/?post_type=servizio&p=1542",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:34:32.204332Z"
+  },
+  "carta_identita": {
+   "service_id": "026072:wp:1421",
+   "title": "Richiesta Carta di Identità Elettronica",
+   "source_url": "https://www.comune.san-fior.tv.it/?post_type=servizio&p=1421",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.san-fior.tv.it/?post_type=servizio&p=1421",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.san-fior.tv.it/?post_type=servizio&p=1421",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:34:41.062331Z"
+  },
+  "stato_civile": {
+   "service_id": "026072:wp:1545",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.san-fior.tv.it/?post_type=servizio&p=1545",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.san-fior.tv.it/?post_type=servizio&p=1545",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.san-fior.tv.it/?post_type=servizio&p=1545",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:34:50.134600Z"
+  },
+  "tributi_imu": {
+   "service_id": "026072:wp:1551",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.san-fior.tv.it/?post_type=servizio&p=1551",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.san-fior.tv.it/?post_type=servizio&p=1551",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.san-fior.tv.it/?post_type=servizio&p=1551",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:34:58.787605Z"
+  }
+ }
+}

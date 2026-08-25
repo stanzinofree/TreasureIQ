@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "023062",
+ "services": {
+  "accesso_atti": {
+   "service_id": "023062:wp:284",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.rivoli.vr.it/?post_type=servizio&p=284",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rivoli.vr.it/?post_type=servizio&p=284",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rivoli.vr.it/?post_type=servizio&p=284",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:41:02.958699Z"
+  },
+  "carta_identita": {
+   "service_id": "023062:wp:795",
+   "title": "Rilascio Carta di Identità Elettronica",
+   "source_url": "https://www.comune.rivoli.vr.it/?post_type=servizio&p=795",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rivoli.vr.it/?post_type=servizio&p=795",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rivoli.vr.it/?post_type=servizio&p=795",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:41:08.842881Z"
+  },
+  "stato_civile": {
+   "service_id": "023062:wp:991",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.rivoli.vr.it/?post_type=servizio&p=991",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rivoli.vr.it/?post_type=servizio&p=991",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rivoli.vr.it/?post_type=servizio&p=991",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:41:19.436276Z"
+  },
+  "tributi_imu": {
+   "service_id": "023062:wp:996",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.rivoli.vr.it/?post_type=servizio&p=996",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rivoli.vr.it/?post_type=servizio&p=996",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rivoli.vr.it/?post_type=servizio&p=996",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:41:25.196333Z"
+  }
+ }
+}

@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "026029",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "026029:wp:1463",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.fonte.tv.it/?post_type=servizio&p=1463",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.fonte.tv.it/?post_type=servizio&p=1463",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.fonte.tv.it/?post_type=servizio&p=1463",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:30:24.370728Z"
+  },
+  "stato_civile": {
+   "service_id": "026029:wp:1511",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.fonte.tv.it/?post_type=servizio&p=1511",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.fonte.tv.it/?post_type=servizio&p=1511",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.fonte.tv.it/?post_type=servizio&p=1511",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:30:30.951305Z"
+  }
+ }
+}

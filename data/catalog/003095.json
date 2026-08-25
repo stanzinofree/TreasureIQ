@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "003095",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "003095:wp:416",
+   "title": "Abitare – Cambio Residenza",
+   "source_url": "https://www.comune.meina.no.it/servizio/abitare-cambio-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.meina.no.it/servizio/abitare-cambio-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.meina.no.it/servizio/abitare-cambio-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T10:58:28.013232Z"
+  },
+  "carta_identita": {
+   "service_id": "003095:wp:467",
+   "title": "Essere Cittadino – Carta d’Identità",
+   "source_url": "https://www.comune.meina.no.it/servizio/essere-cittadino-carta-didentita/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.meina.no.it/servizio/essere-cittadino-carta-didentita/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.meina.no.it/servizio/essere-cittadino-carta-didentita/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T10:58:32.145183Z"
+  }
+ }
+}

@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "024076",
+ "services": {
+  "accesso_atti": {
+   "service_id": "024076:wp:261",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.pedemonte.vi.it/?post_type=servizio&p=261",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pedemonte.vi.it/?post_type=servizio&p=261",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pedemonte.vi.it/?post_type=servizio&p=261",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:11:07.350130Z"
+  },
+  "carta_identita": {
+   "service_id": "024076:wp:995",
+   "title": "Rilascio Carta di Identità Elettronica",
+   "source_url": "https://www.comune.pedemonte.vi.it/?post_type=servizio&p=995",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pedemonte.vi.it/?post_type=servizio&p=995",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pedemonte.vi.it/?post_type=servizio&p=995",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:11:15.656480Z"
+  },
+  "stato_civile": {
+   "service_id": "024076:wp:1171",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.pedemonte.vi.it/?post_type=servizio&p=1171",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pedemonte.vi.it/?post_type=servizio&p=1171",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pedemonte.vi.it/?post_type=servizio&p=1171",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:11:21.508948Z"
+  },
+  "tributi_imu": {
+   "service_id": "024076:wp:1157",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.pedemonte.vi.it/?post_type=servizio&p=1157",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pedemonte.vi.it/?post_type=servizio&p=1157",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pedemonte.vi.it/?post_type=servizio&p=1157",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:11:31.402016Z"
+  }
+ }
+}

@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "057002",
+ "services": {
+  "carta_identita": {
+   "service_id": "057002:wp:1511",
+   "title": "Rilascio della carta d’identità elettronica per maggiorenni",
+   "source_url": "https://www.comune.amatrice.rieti.it/servizio/rilascio-della-carta-didentita-elettronica-per-maggiorenni/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.amatrice.rieti.it/servizio/rilascio-della-carta-didentita-elettronica-per-maggiorenni/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.amatrice.rieti.it/servizio/rilascio-della-carta-didentita-elettronica-per-maggiorenni/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:00:49.968651Z"
+  },
+  "tributi_imu": {
+   "service_id": "057002:wp:1460",
+   "title": "Dichiarazione IMU",
+   "source_url": "https://www.comune.amatrice.rieti.it/servizio/dichiarazione-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.amatrice.rieti.it/servizio/dichiarazione-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.amatrice.rieti.it/servizio/dichiarazione-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:00:51.497471Z"
+  }
+ }
+}

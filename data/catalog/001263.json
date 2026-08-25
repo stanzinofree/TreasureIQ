@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "001263",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001263:comweb:richiedere-l-accesso-agli-atti-317-25179-1-2f26fc83b5ed8f8603fdd8bd8ad559d9",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.sestriere.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-25179-1-2f26fc83b5ed8f8603fdd8bd8ad559d9",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sestriere.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-25179-1-2f26fc83b5ed8f8603fdd8bd8ad559d9",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sestriere.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-25179-1-2f26fc83b5ed8f8603fdd8bd8ad559d9",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizidigitali.comune.sestriere.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=sstrr1225&IDPr=13441",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.sestriere.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-25179-1-2f26fc83b5ed8f8603fdd8bd8ad559d9",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:50:07.278759Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001263:comweb:cambio-residenza-305-25177-1-ae0db111cd5d1b6c73207e96eaa5fee0",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.sestriere.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-25177-1-ae0db111cd5d1b6c73207e96eaa5fee0",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sestriere.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-25177-1-ae0db111cd5d1b6c73207e96eaa5fee0",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sestriere.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-25177-1-ae0db111cd5d1b6c73207e96eaa5fee0",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.sestriere.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-25177-1-ae0db111cd5d1b6c73207e96eaa5fee0",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:50:10.414832Z"
+  },
+  "tributi_tari": {
+   "service_id": "001263:comweb:pagamento-tassa-rifiuti-tari-659-25259-1-d1ffad85cd0240e91915f91cea2a07f9",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.sestriere.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-25259-1-d1ffad85cd0240e91915f91cea2a07f9",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sestriere.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-25259-1-d1ffad85cd0240e91915f91cea2a07f9",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sestriere.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-25259-1-d1ffad85cd0240e91915f91cea2a07f9",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:50:13.286655Z"
+  }
+ }
+}

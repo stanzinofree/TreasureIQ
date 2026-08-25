@@ -1,0 +1,123 @@
+{
+ "municipality_istat": "076065",
+ "services": {
+  "accesso_atti": {
+   "service_id": "076065:wp:85",
+   "title": "Richiedere accesso agli atti",
+   "source_url": "https://comune.rapone.pz.it/servizio/richiesta-accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.rapone.pz.it/servizio/richiesta-accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.rapone.pz.it/servizio/richiesta-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:30:51.533960Z"
+  },
+  "cambio_residenza": {
+   "service_id": "076065:wp:406",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.rapone.pz.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.rapone.pz.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.rapone.pz.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.rapone.pz.it/wp-content/uploads/sites/9/2024/01/residenza_Allegato_A.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.rapone.pz.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.rapone.pz.it/wp-content/uploads/sites/9/2024/01/residenza_Allegato_B.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.rapone.pz.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:30:52.916598Z"
+  },
+  "carta_identita": {
+   "service_id": "076065:wp:240",
+   "title": "Richiesta carta d’identità",
+   "source_url": "https://comune.rapone.pz.it/servizio/richiesta-carta-didentita/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.rapone.pz.it/servizio/richiesta-carta-didentita/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.rapone.pz.it/servizio/richiesta-carta-didentita/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:30:54.261951Z"
+  },
+  "stato_civile": {
+   "service_id": "076065:wp:459",
+   "title": "Certificati ed estratti di stato civile",
+   "source_url": "https://comune.rapone.pz.it/servizio/certificati-ed-estratti-di-stato-civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.rapone.pz.it/servizio/certificati-ed-estratti-di-stato-civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.rapone.pz.it/servizio/certificati-ed-estratti-di-stato-civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:30:55.606326Z"
+  }
+ }
+}

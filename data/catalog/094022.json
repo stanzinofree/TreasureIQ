@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "094022",
+ "services": {
+  "accesso_atti": {
+   "service_id": "094022:wp:381",
+   "title": "Richiedere accesso agli atti",
+   "source_url": "https://comune.frosolone.is.it/servizio/richiedere-accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.frosolone.is.it/servizio/richiedere-accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.frosolone.is.it/servizio/richiedere-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:53:35.988141Z"
+  },
+  "carta_identita": {
+   "service_id": "094022:wp:379",
+   "title": "Carta d’Identità Elettronica (CIE)",
+   "source_url": "https://comune.frosolone.is.it/servizio/carta-didentita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.frosolone.is.it/servizio/carta-didentita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.frosolone.is.it/servizio/carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:53:37.776372Z"
+  }
+ }
+}

@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "064050",
+ "services": {
+  "accesso_atti": {
+   "service_id": "064050:wp:703",
+   "title": "Accesso agli atti",
+   "source_url": "https://comune.mirabellaeclano.av.it/servizio/accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.mirabellaeclano.av.it/servizio/accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.mirabellaeclano.av.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:16:34.828715Z"
+  },
+  "tributi_imu": {
+   "service_id": "064050:wp:717",
+   "title": "Calcolo IMU/TASI e Generazione Modello F24",
+   "source_url": "https://comune.mirabellaeclano.av.it/servizio/calcolo-imu-tasi-e-generazione-modello-f24/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.mirabellaeclano.av.it/servizio/calcolo-imu-tasi-e-generazione-modello-f24/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.mirabellaeclano.av.it/servizio/calcolo-imu-tasi-e-generazione-modello-f24/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:16:37.063765Z"
+  },
+  "tributi_tari": {
+   "service_id": "064050:wp:721",
+   "title": "TARI",
+   "source_url": "https://comune.mirabellaeclano.av.it/servizio/tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.mirabellaeclano.av.it/servizio/tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.mirabellaeclano.av.it/servizio/tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:16:39.148710Z"
+  }
+ }
+}

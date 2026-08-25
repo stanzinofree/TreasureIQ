@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "003084",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "003084:wp:411",
+   "title": "Abitare – Cambio Residenza",
+   "source_url": "https://www.comune.lesa.no.it/servizio/abitare-cambio-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.lesa.no.it/servizio/abitare-cambio-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.lesa.no.it/servizio/abitare-cambio-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T10:58:12.505760Z"
+  },
+  "carta_identita": {
+   "service_id": "003084:wp:467",
+   "title": "Essere Cittadino – Carta d’Identità",
+   "source_url": "https://www.comune.lesa.no.it/servizio/essere-cittadino-carta-didentita/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.lesa.no.it/servizio/essere-cittadino-carta-didentita/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.lesa.no.it/servizio/essere-cittadino-carta-didentita/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T10:58:16.767147Z"
+  }
+ }
+}

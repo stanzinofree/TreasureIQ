@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "024065",
+ "services": {
+  "accesso_atti": {
+   "service_id": "024065:wp:387",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.montegaldella.vi.it/?post_type=servizio&p=387",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montegaldella.vi.it/?post_type=servizio&p=387",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montegaldella.vi.it/?post_type=servizio&p=387",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:05:48.387275Z"
+  },
+  "cambio_residenza": {
+   "service_id": "024065:wp:1134",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.montegaldella.vi.it/?post_type=servizio&p=1134",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montegaldella.vi.it/?post_type=servizio&p=1134",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montegaldella.vi.it/?post_type=servizio&p=1134",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:06:12.087583Z"
+  },
+  "stato_civile": {
+   "service_id": "024065:wp:1138",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.montegaldella.vi.it/?post_type=servizio&p=1138",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montegaldella.vi.it/?post_type=servizio&p=1138",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montegaldella.vi.it/?post_type=servizio&p=1138",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:06:48.437904Z"
+  }
+ }
+}

@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "001288",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001288:comweb:richiedere-l-accesso-agli-atti-317-13034-1-381cb7b5fa4306b0f08b86bcbd1fbee7",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://comune.valpratosoana.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-13034-1-381cb7b5fa4306b0f08b86bcbd1fbee7",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.valpratosoana.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-13034-1-381cb7b5fa4306b0f08b86bcbd1fbee7",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.valpratosoana.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-13034-1-381cb7b5fa4306b0f08b86bcbd1fbee7",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:51:47.585747Z"
+  },
+  "carta_identita": {
+   "service_id": "001288:comweb:carta-d-identita-1-13023-1-5b7ccdb2097654be3b84f7116f6e22e0",
+   "title": "Carta d'Identità",
+   "source_url": "https://comune.valpratosoana.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-13023-1-5b7ccdb2097654be3b84f7116f6e22e0",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.valpratosoana.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-13023-1-5b7ccdb2097654be3b84f7116f6e22e0",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.valpratosoana.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-13023-1-5b7ccdb2097654be3b84f7116f6e22e0",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.frassinetto.to.it/it-it/download/termini-e-condizioni-di-servizio-pdf-53797-122-1003-c816ab88ba1a65991ab1c93859b57d86",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://comune.valpratosoana.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-13023-1-5b7ccdb2097654be3b84f7116f6e22e0",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:51:49.908566Z"
+  },
+  "stato_civile": {
+   "service_id": "001288:comweb:certificato-di-matrimonio-30-13029-1-a4b68d7b390f56a67196e1aa44683491",
+   "title": "Certificato di matrimonio",
+   "source_url": "https://comune.valpratosoana.to.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-matrimonio-30-13029-1-a4b68d7b390f56a67196e1aa44683491",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.valpratosoana.to.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-matrimonio-30-13029-1-a4b68d7b390f56a67196e1aa44683491",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.valpratosoana.to.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-matrimonio-30-13029-1-a4b68d7b390f56a67196e1aa44683491",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/certificati/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://comune.valpratosoana.to.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-matrimonio-30-13029-1-a4b68d7b390f56a67196e1aa44683491",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:51:52.017687Z"
+  }
+ }
+}

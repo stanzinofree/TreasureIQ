@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "095084",
+ "services": {
+  "accesso_atti": {
+   "service_id": "095084:wp:1847",
+   "title": "Richiesta di accesso agli atti",
+   "source_url": "https://www.comune.modolo.or.it/servizio/richiesta-di-accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.modolo.or.it/servizio/richiesta-di-accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.modolo.or.it/servizio/richiesta-di-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:54:56.030138Z"
+  },
+  "cambio_residenza": {
+   "service_id": "095084:wp:3239",
+   "title": "Cambio di residenza tramite l’ufficio anagrafe comunale",
+   "source_url": "https://www.comune.modolo.or.it/servizio/cambio-di-residenza-tramite-lufficio-anagrafe-comunale/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.modolo.or.it/servizio/cambio-di-residenza-tramite-lufficio-anagrafe-comunale/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.modolo.or.it/servizio/cambio-di-residenza-tramite-lufficio-anagrafe-comunale/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:54:57.729463Z"
+  },
+  "carta_identita": {
+   "service_id": "095084:wp:2579",
+   "title": "Carta d’identità elettronica (CIE)",
+   "source_url": "https://www.comune.modolo.or.it/servizio/carta-didentita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.modolo.or.it/servizio/carta-didentita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.modolo.or.it/servizio/carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:54:59.665945Z"
+  },
+  "tributi_imu": {
+   "service_id": "095084:wp:4136",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.modolo.or.it/servizio/pagamento-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.modolo.or.it/servizio/pagamento-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.modolo.or.it/servizio/pagamento-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:55:01.625682Z"
+  }
+ }
+}

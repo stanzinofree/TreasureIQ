@@ -1,0 +1,116 @@
+{
+ "municipality_istat": "030121",
+ "services": {
+  "accesso_atti": {
+   "service_id": "030121:wp:2140",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.tolmezzo.ud.it/?post_type=servizio&p=2140",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.tolmezzo.ud.it/?post_type=servizio&p=2140",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.tolmezzo.ud.it/?post_type=servizio&p=2140",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.tolmezzo.ud.it/wp-content/uploads/2025/07/mod-ACCESSO-atti-2025.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.tolmezzo.ud.it/?post_type=servizio&p=2140",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:46:22.071477Z"
+  },
+  "carta_identita": {
+   "service_id": "030121:wp:1642",
+   "title": "Carta di identità elettronica - CIE",
+   "source_url": "https://www.comune.tolmezzo.ud.it/?post_type=servizio&p=1642",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.tolmezzo.ud.it/?post_type=servizio&p=1642",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.tolmezzo.ud.it/?post_type=servizio&p=1642",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.tolmezzo.ud.it/wp-content/uploads/2024/05/Regolamento-sul-procedimento-amministrativo.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.tolmezzo.ud.it/?post_type=servizio&p=1642",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.tolmezzo.ud.it/wp-content/uploads/2024/11/Mod-CIE-cittadini-dimoranti.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.tolmezzo.ud.it/?post_type=servizio&p=1642",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.tolmezzo.ud.it/wp-content/uploads/2024/11/Mod-CIE-assenso-espatrio-minore.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.tolmezzo.ud.it/?post_type=servizio&p=1642",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.tolmezzo.ud.it/wp-content/uploads/2024/11/Mod-CIE-autocert_imp_ta-ril_impronte-digitali.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.tolmezzo.ud.it/?post_type=servizio&p=1642",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:46:40.190418Z"
+  }
+ }
+}

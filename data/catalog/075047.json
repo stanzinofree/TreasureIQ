@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "075047",
+ "services": {
+  "accesso_atti": {
+   "service_id": "075047:wp:707",
+   "title": "Richiesta accesso agli atti",
+   "source_url": "https://comune.minervino.le.it/servizio/accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.minervino.le.it/servizio/accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.minervino.le.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:29:50.690047Z"
+  },
+  "cambio_residenza": {
+   "service_id": "075047:wp:2377",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.minervino.le.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.minervino.le.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.minervino.le.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:29:56.819962Z"
+  },
+  "tributi_imu": {
+   "service_id": "075047:wp:313",
+   "title": "IMU (Imposta Municipale Propria)",
+   "source_url": "https://comune.minervino.le.it/servizio/imu-imposta-municipale-propria/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.minervino.le.it/servizio/imu-imposta-municipale-propria/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.minervino.le.it/servizio/imu-imposta-municipale-propria/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:30:01.669067Z"
+  }
+ }
+}

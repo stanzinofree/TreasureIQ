@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "023098",
+ "services": {
+  "accesso_atti": {
+   "service_id": "023098:wp:343",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.zimella.vr.it/?post_type=servizio&p=343",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.zimella.vr.it/?post_type=servizio&p=343",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.zimella.vr.it/?post_type=servizio&p=343",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:50:17.062749Z"
+  },
+  "stato_civile": {
+   "service_id": "023098:wp:641",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.zimella.vr.it/?post_type=servizio&p=641",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.zimella.vr.it/?post_type=servizio&p=641",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.zimella.vr.it/?post_type=servizio&p=641",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:50:24.655448Z"
+  },
+  "tributi_imu": {
+   "service_id": "023098:wp:720",
+   "title": "Calcolo IMU",
+   "source_url": "https://www.comune.zimella.vr.it/?post_type=servizio&p=720",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.zimella.vr.it/?post_type=servizio&p=720",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.zimella.vr.it/?post_type=servizio&p=720",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:50:30.373181Z"
+  }
+ }
+}

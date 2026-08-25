@@ -1,0 +1,90 @@
+{
+ "municipality_istat": "079023",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "079023:wp:962",
+   "title": "Cambio di residenza e indirizzo",
+   "source_url": "https://www.comune.catanzaro.it/servizio/cambio-di-residenza-e-indirizzo/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.catanzaro.it/servizio/cambio-di-residenza-e-indirizzo/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.catanzaro.it/servizio/cambio-di-residenza-e-indirizzo/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.catanzaro.it/wp-content/uploads/2026/03/Mod._cambio_di_residenza_e_indirizzo-1.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.catanzaro.it/servizio/cambio-di-residenza-e-indirizzo/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.catanzaro.it/wp-content/uploads/2026/03/MODELLO-IUC-1.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.catanzaro.it/servizio/cambio-di-residenza-e-indirizzo/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:38:00.353343Z"
+  },
+  "tributi_tari": {
+   "service_id": "079023:wp:882",
+   "title": "Assistenza ai contribuenti TARI",
+   "source_url": "https://www.comune.catanzaro.it/servizio/assistenza-ai-contribuenti-tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.catanzaro.it/servizio/assistenza-ai-contribuenti-tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.catanzaro.it/servizio/assistenza-ai-contribuenti-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.catanzaro.it/wp-content/uploads/2026/03/Istanza-Sospensione-TributiEntrate-Comunali-Comune-di-Catanzaro.docx",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.catanzaro.it/servizio/assistenza-ai-contribuenti-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:38:02.017004Z"
+  }
+ }
+}

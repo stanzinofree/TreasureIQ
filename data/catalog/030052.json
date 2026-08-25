@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "030052",
+ "services": {
+  "accesso_atti": {
+   "service_id": "030052:wp:291",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.magnanoinriviera.ud.it/?post_type=servizio&p=291",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.magnanoinriviera.ud.it/?post_type=servizio&p=291",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.magnanoinriviera.ud.it/?post_type=servizio&p=291",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:40:39.947834Z"
+  },
+  "cambio_residenza": {
+   "service_id": "030052:wp:1632",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.magnanoinriviera.ud.it/?post_type=servizio&p=1632",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.magnanoinriviera.ud.it/?post_type=servizio&p=1632",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.magnanoinriviera.ud.it/?post_type=servizio&p=1632",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:40:46.212685Z"
+  },
+  "carta_identita": {
+   "service_id": "030052:wp:284",
+   "title": "Carta di identità elettronica",
+   "source_url": "https://www.comune.magnanoinriviera.ud.it/?post_type=servizio&p=284",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.magnanoinriviera.ud.it/?post_type=servizio&p=284",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.magnanoinriviera.ud.it/?post_type=servizio&p=284",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.magnanoinriviera.ud.it/wp-content/uploads/2023/10/ASSENSO_CIE_MINORE_2023.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.magnanoinriviera.ud.it/?post_type=servizio&p=284",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.magnanoinriviera.ud.it/wp-content/uploads/2025/05/Dichiarazione-raccolta-firma-a-domicilio.doc",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.magnanoinriviera.ud.it/?post_type=servizio&p=284",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:40:52.143869Z"
+  }
+ }
+}

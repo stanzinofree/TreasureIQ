@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "001034",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001034:comweb:richiedere-l-accesso-agli-atti-317-52660-1-b74679d0a1150f69dc3afb458e7bceea",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.brandizzo.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-52660-1-b74679d0a1150f69dc3afb458e7bceea",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.brandizzo.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-52660-1-b74679d0a1150f69dc3afb458e7bceea",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.brandizzo.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-52660-1-b74679d0a1150f69dc3afb458e7bceea",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.brandizzo.to.it/Servizi/FiloDiretto2/ProcedimentiClient.Aspx?CE=brndzz082&IDGruppoSelez=3743",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.brandizzo.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-52660-1-b74679d0a1150f69dc3afb458e7bceea",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:39:46.910361Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001034:comweb:cambio-residenza-305-52658-1-32d0a3d3021e831c5865cda98fc6babe",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.brandizzo.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-52658-1-32d0a3d3021e831c5865cda98fc6babe",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.brandizzo.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-52658-1-32d0a3d3021e831c5865cda98fc6babe",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.brandizzo.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-52658-1-32d0a3d3021e831c5865cda98fc6babe",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.brandizzo.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-52658-1-32d0a3d3021e831c5865cda98fc6babe",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:39:48.971552Z"
+  },
+  "carta_identita": {
+   "service_id": "001034:comweb:carta-d-identita-elettronica-cie-788-52648-1-724986d8351fc7c79cabc33b28ea81df",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.brandizzo.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-52648-1-724986d8351fc7c79cabc33b28ea81df",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.brandizzo.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-52648-1-724986d8351fc7c79cabc33b28ea81df",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.brandizzo.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-52648-1-724986d8351fc7c79cabc33b28ea81df",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:39:51.223828Z"
+  }
+ }
+}

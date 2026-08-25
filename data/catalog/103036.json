@@ -1,0 +1,159 @@
+{
+ "municipality_istat": "103036",
+ "services": {
+  "accesso_atti": {
+   "service_id": "103036:comweb:richiedere-l-accesso-agli-atti-317-36136-1-be66e7755496885192d3a3534c668bb1",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.gurro.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-36136-1-be66e7755496885192d3a3534c668bb1",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gurro.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-36136-1-be66e7755496885192d3a3534c668bb1",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gurro.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-36136-1-be66e7755496885192d3a3534c668bb1",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.gurro.vb.it/lang/it/servizi/richiedere-laccesso-agli-atti/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.gurro.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-36136-1-be66e7755496885192d3a3534c668bb1",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:02:35.099305Z"
+  },
+  "cambio_residenza": {
+   "service_id": "103036:comweb:cambio-residenza-305-36134-1-b5b02ee329dbcb6000995fa4e2417e4a",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.gurro.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-36134-1-b5b02ee329dbcb6000995fa4e2417e4a",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gurro.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-36134-1-b5b02ee329dbcb6000995fa4e2417e4a",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gurro.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-36134-1-b5b02ee329dbcb6000995fa4e2417e4a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.gurro.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-36134-1-b5b02ee329dbcb6000995fa4e2417e4a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:02:36.910648Z"
+  },
+  "carta_identita": {
+   "service_id": "103036:comweb:carta-d-identita-elettronica-cie-788-36124-1-698bb3fd5ae64bcf0e39716fd3a3c27c",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.gurro.vb.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-36124-1-698bb3fd5ae64bcf0e39716fd3a3c27c",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gurro.vb.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-36124-1-698bb3fd5ae64bcf0e39716fd3a3c27c",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gurro.vb.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-36124-1-698bb3fd5ae64bcf0e39716fd3a3c27c",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.cittadinodigitale.it/apspagopa/Payment/PagamentiAnonimiScegliServizio?tipoPagamentoLabel=noiuv&avvisoGenerico=False&codicePagamento=0",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.gurro.vb.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-36124-1-698bb3fd5ae64bcf0e39716fd3a3c27c",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:02:39.009534Z"
+  },
+  "tributi_imu": {
+   "service_id": "103036:comweb:pagare-tributi-imu-600-36225-1-75e680340de0b81ab77c9dc1861adbcf",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.gurro.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-36225-1-75e680340de0b81ab77c9dc1861adbcf",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gurro.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-36225-1-75e680340de0b81ab77c9dc1861adbcf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gurro.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-36225-1-75e680340de0b81ab77c9dc1861adbcf",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:02:40.919923Z"
+  },
+  "tributi_tari": {
+   "service_id": "103036:comweb:pagamento-tassa-rifiuti-tari-659-36216-1-6b1fb961fe15f4bc5c1e92695d814fb9",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.gurro.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-36216-1-6b1fb961fe15f4bc5c1e92695d814fb9",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gurro.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-36216-1-6b1fb961fe15f4bc5c1e92695d814fb9",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gurro.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-36216-1-6b1fb961fe15f4bc5c1e92695d814fb9",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:02:42.996811Z"
+  }
+ }
+}

@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "018089",
+ "services": {
+  "accesso_atti": {
+   "service_id": "018089:comweb:richiedere-l-accesso-agli-atti-317-16334-1-af68a00cd811969b513311d12f643128",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.menconico.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-16334-1-af68a00cd811969b513311d12f643128",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.menconico.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-16334-1-af68a00cd811969b513311d12f643128",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.menconico.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-16334-1-af68a00cd811969b513311d12f643128",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:21:09.072416Z"
+  },
+  "tributi_imu": {
+   "service_id": "018089:comweb:imposta-municipale-propria-imu-953-16424-1-b4c4340f1d615ff447eff777536ae1cb",
+   "title": "Imposta Municipale Propria (IMU)",
+   "source_url": "https://www.comune.menconico.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-16424-1-b4c4340f1d615ff447eff777536ae1cb",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.menconico.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-16424-1-b4c4340f1d615ff447eff777536ae1cb",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.menconico.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-16424-1-b4c4340f1d615ff447eff777536ae1cb",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:21:11.712048Z"
+  },
+  "tributi_tari": {
+   "service_id": "018089:comweb:tassa-rifiuti-tari-954-16415-1-d1b05effde975fc1593b169c5edc33f7",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.menconico.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-16415-1-d1b05effde975fc1593b169c5edc33f7",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.menconico.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-16415-1-d1b05effde975fc1593b169c5edc33f7",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.menconico.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-16415-1-d1b05effde975fc1593b169c5edc33f7",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:21:14.292684Z"
+  }
+ }
+}

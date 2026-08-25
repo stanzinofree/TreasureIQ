@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "024020",
+ "services": {
+  "accesso_atti": {
+   "service_id": "024020:wp:280",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.calvene.vi.it/?post_type=servizio&p=280",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.calvene.vi.it/?post_type=servizio&p=280",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.calvene.vi.it/?post_type=servizio&p=280",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:55:02.618244Z"
+  },
+  "cambio_residenza": {
+   "service_id": "024020:wp:881",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.calvene.vi.it/?post_type=servizio&p=881",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.calvene.vi.it/?post_type=servizio&p=881",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.calvene.vi.it/?post_type=servizio&p=881",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:55:11.242043Z"
+  },
+  "stato_civile": {
+   "service_id": "024020:wp:997",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.calvene.vi.it/?post_type=servizio&p=997",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.calvene.vi.it/?post_type=servizio&p=997",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.calvene.vi.it/?post_type=servizio&p=997",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:55:21.889738Z"
+  },
+  "tributi_imu": {
+   "service_id": "024020:wp:1043",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.calvene.vi.it/?post_type=servizio&p=1043",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.calvene.vi.it/?post_type=servizio&p=1043",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.calvene.vi.it/?post_type=servizio&p=1043",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:55:30.290256Z"
+  }
+ }
+}

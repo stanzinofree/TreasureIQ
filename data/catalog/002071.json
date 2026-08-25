@@ -1,0 +1,77 @@
+{
+ "municipality_istat": "002071",
+ "services": {
+  "accesso_atti": {
+   "service_id": "002071:comweb:richiedere-l-accesso-agli-atti-317-38380-1-3e02bd2a076006be63dc17b885881fd1",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.livornoferraris.vc.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-38380-1-3e02bd2a076006be63dc17b885881fd1",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.livornoferraris.vc.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-38380-1-3e02bd2a076006be63dc17b885881fd1",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.livornoferraris.vc.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-38380-1-3e02bd2a076006be63dc17b885881fd1",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.livornoferraris.vc.it/lang/it/servizi/richiedere-laccesso-agli-atti/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.livornoferraris.vc.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-38380-1-3e02bd2a076006be63dc17b885881fd1",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:54:34.670517Z"
+  },
+  "cambio_residenza": {
+   "service_id": "002071:comweb:cambio-residenza-305-38378-1-0827e91eec9df97e86a04cb77a43801a",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.livornoferraris.vc.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-38378-1-0827e91eec9df97e86a04cb77a43801a",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.livornoferraris.vc.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-38378-1-0827e91eec9df97e86a04cb77a43801a",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.livornoferraris.vc.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-38378-1-0827e91eec9df97e86a04cb77a43801a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.livornoferraris.vc.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-38378-1-0827e91eec9df97e86a04cb77a43801a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:54:41.860946Z"
+  }
+ }
+}

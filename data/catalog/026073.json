@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "026073",
+ "services": {
+  "carta_identita": {
+   "service_id": "026073:wp:922",
+   "title": "Rilascio Carta di Identità Elettronica",
+   "source_url": "https://www.comune.sanpietrodifeletto.tv.it/?post_type=servizio&p=922",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanpietrodifeletto.tv.it/?post_type=servizio&p=922",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanpietrodifeletto.tv.it/?post_type=servizio&p=922",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:35:09.020548Z"
+  },
+  "stato_civile": {
+   "service_id": "026073:wp:1207",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.sanpietrodifeletto.tv.it/?post_type=servizio&p=1207",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanpietrodifeletto.tv.it/?post_type=servizio&p=1207",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanpietrodifeletto.tv.it/?post_type=servizio&p=1207",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:35:14.671606Z"
+  },
+  "tributi_imu": {
+   "service_id": "026073:wp:1219",
+   "title": "Calcolo IMU Online",
+   "source_url": "https://www.comune.sanpietrodifeletto.tv.it/?post_type=servizio&p=1219",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanpietrodifeletto.tv.it/?post_type=servizio&p=1219",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanpietrodifeletto.tv.it/?post_type=servizio&p=1219",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:35:20.843997Z"
+  }
+ }
+}

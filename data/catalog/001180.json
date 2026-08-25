@@ -1,0 +1,64 @@
+{
+ "municipality_istat": "001180",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001180:comweb:richiedere-l-accesso-agli-atti-317-14750-1-8afba66ce993426c08f481f92279d44e",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.pavarolo.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-14750-1-8afba66ce993426c08f481f92279d44e",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pavarolo.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-14750-1-8afba66ce993426c08f481f92279d44e",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pavarolo.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-14750-1-8afba66ce993426c08f481f92279d44e",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.pavarolo.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=pvrl253&IDPr=9373",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.pavarolo.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-14750-1-8afba66ce993426c08f481f92279d44e",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:45:31.275485Z"
+  },
+  "tributi_tari": {
+   "service_id": "001180:comweb:pagamento-tassa-rifiuti-tari-659-14831-1-d6702be6b780b717202ebcacf4b66eba",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.pavarolo.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-14831-1-d6702be6b780b717202ebcacf4b66eba",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pavarolo.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-14831-1-d6702be6b780b717202ebcacf4b66eba",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pavarolo.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-14831-1-d6702be6b780b717202ebcacf4b66eba",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:45:33.180911Z"
+  }
+ }
+}

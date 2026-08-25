@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "073020",
+ "services": {
+  "tributi_imu": {
+   "service_id": "073020:wp:1820",
+   "title": "aliquote IMU",
+   "source_url": "https://www.comune.palagianello.ta.it/servizio/aliquote-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.palagianello.ta.it/servizio/aliquote-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.palagianello.ta.it/servizio/aliquote-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:26:54.518568Z"
+  }
+ }
+}

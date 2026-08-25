@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "042006",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "042006:wp:605",
+   "title": "Cambio di residenza in tempo reale",
+   "source_url": "https://comune.camerano.an.it/servizio/cambio-di-residenza-in-tempo-reale/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.camerano.an.it/servizio/cambio-di-residenza-in-tempo-reale/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.camerano.an.it/servizio/cambio-di-residenza-in-tempo-reale/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:54:00.528587Z"
+  },
+  "tributi_imu": {
+   "service_id": "042006:wp:1733",
+   "title": "Nuova IMU dal 2020",
+   "source_url": "https://comune.camerano.an.it/servizio/nuova-imu-dal-2020/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.camerano.an.it/servizio/nuova-imu-dal-2020/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.camerano.an.it/servizio/nuova-imu-dal-2020/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:54:01.835429Z"
+  }
+ }
+}

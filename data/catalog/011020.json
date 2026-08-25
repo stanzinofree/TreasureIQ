@@ -1,0 +1,77 @@
+{
+ "municipality_istat": "011020",
+ "services": {
+  "accesso_atti": {
+   "service_id": "011020:comweb:richiedere-l-accesso-agli-atti-317-54921-1-285bb6c9fb99b8eb071a42d0c13a5408",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.luni.sp.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-54921-1-285bb6c9fb99b8eb071a42d0c13a5408",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.luni.sp.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-54921-1-285bb6c9fb99b8eb071a42d0c13a5408",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.luni.sp.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-54921-1-285bb6c9fb99b8eb071a42d0c13a5408",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://vurp.comune.luni.sp.it/#/categoria/autorizzazioni/servizi/richiedere-l-accesso-agli-atti?avvio-istanza=1",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.luni.sp.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-54921-1-285bb6c9fb99b8eb071a42d0c13a5408",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:12:59.667806Z"
+  },
+  "cambio_residenza": {
+   "service_id": "011020:comweb:cambio-residenza-305-54919-1-25fce4880e00152cd776f3e68bc18363",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.luni.sp.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-54919-1-25fce4880e00152cd776f3e68bc18363",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.luni.sp.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-54919-1-25fce4880e00152cd776f3e68bc18363",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.luni.sp.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-54919-1-25fce4880e00152cd776f3e68bc18363",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.luni.sp.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-54919-1-25fce4880e00152cd776f3e68bc18363",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:13:01.675950Z"
+  }
+ }
+}

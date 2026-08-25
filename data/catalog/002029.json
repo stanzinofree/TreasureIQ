@@ -1,0 +1,123 @@
+{
+ "municipality_istat": "002029",
+ "services": {
+  "accesso_atti": {
+   "service_id": "002029:comweb:richiedere-l-accesso-agli-atti-317-43396-1-cf00be98a7da11140b7174f99903a487",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.carcoforo.vc.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-43396-1-cf00be98a7da11140b7174f99903a487",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.carcoforo.vc.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-43396-1-cf00be98a7da11140b7174f99903a487",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.carcoforo.vc.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-43396-1-cf00be98a7da11140b7174f99903a487",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.carcoforo.vc.it/lang/it/servizi/richiedere-laccesso-agli-atti/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.carcoforo.vc.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-43396-1-cf00be98a7da11140b7174f99903a487",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:54:01.825998Z"
+  },
+  "cambio_residenza": {
+   "service_id": "002029:comweb:cambio-residenza-305-43394-1-079fc950b86e2a34a35e9b048b4e4402",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.carcoforo.vc.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-43394-1-079fc950b86e2a34a35e9b048b4e4402",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.carcoforo.vc.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-43394-1-079fc950b86e2a34a35e9b048b4e4402",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.carcoforo.vc.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-43394-1-079fc950b86e2a34a35e9b048b4e4402",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.carcoforo.vc.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-43394-1-079fc950b86e2a34a35e9b048b4e4402",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:54:06.663401Z"
+  },
+  "carta_identita": {
+   "service_id": "002029:comweb:carta-d-identita-elettronica-cie-788-43384-1-997f431699070d6ce83c613703279b4e",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.carcoforo.vc.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-43384-1-997f431699070d6ce83c613703279b4e",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.carcoforo.vc.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-43384-1-997f431699070d6ce83c613703279b4e",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.carcoforo.vc.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-43384-1-997f431699070d6ce83c613703279b4e",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:54:10.015546Z"
+  },
+  "tributi_imu": {
+   "service_id": "002029:comweb:pagare-tributi-imu-600-43485-1-0af337f5e399a8d616bf1ea259b70872",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.carcoforo.vc.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-43485-1-0af337f5e399a8d616bf1ea259b70872",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.carcoforo.vc.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-43485-1-0af337f5e399a8d616bf1ea259b70872",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.carcoforo.vc.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-43485-1-0af337f5e399a8d616bf1ea259b70872",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:54:12.111560Z"
+  }
+ }
+}

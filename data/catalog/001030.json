@@ -1,0 +1,123 @@
+{
+ "municipality_istat": "001030",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001030:comweb:richiedere-l-accesso-agli-atti-317-41812-1-610460c50ef6d985c3fa720b7242ccc5",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.borgofranco.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-41812-1-610460c50ef6d985c3fa720b7242ccc5",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.borgofranco.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-41812-1-610460c50ef6d985c3fa720b7242ccc5",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.borgofranco.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-41812-1-610460c50ef6d985c3fa720b7242ccc5",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.borgofranco.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=brgfrncvr147&IDPr=11612",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.borgofranco.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-41812-1-610460c50ef6d985c3fa720b7242ccc5",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:39:29.381538Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001030:comweb:cambio-residenza-305-41810-1-42839af7ca33e1fb62b51a4f3954d46f",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.borgofranco.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-41810-1-42839af7ca33e1fb62b51a4f3954d46f",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.borgofranco.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-41810-1-42839af7ca33e1fb62b51a4f3954d46f",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.borgofranco.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-41810-1-42839af7ca33e1fb62b51a4f3954d46f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.borgofranco.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-41810-1-42839af7ca33e1fb62b51a4f3954d46f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:39:31.361999Z"
+  },
+  "tributi_imu": {
+   "service_id": "001030:comweb:imposta-municipale-propria-imu-953-41901-1-10c6c387480e09534c5f7167119704dc",
+   "title": "Imposta Municipale Propria (IMU)",
+   "source_url": "https://www.comune.borgofranco.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-41901-1-10c6c387480e09534c5f7167119704dc",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.borgofranco.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-41901-1-10c6c387480e09534c5f7167119704dc",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.borgofranco.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-41901-1-10c6c387480e09534c5f7167119704dc",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:39:33.293643Z"
+  },
+  "tributi_tari": {
+   "service_id": "001030:comweb:tassa-rifiuti-tari-954-41892-1-68657d2970a048107446090feaeafa92",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.borgofranco.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-41892-1-68657d2970a048107446090feaeafa92",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.borgofranco.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-41892-1-68657d2970a048107446090feaeafa92",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.borgofranco.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-41892-1-68657d2970a048107446090feaeafa92",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:39:35.870492Z"
+  }
+ }
+}

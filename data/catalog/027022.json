@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "027022",
+ "services": {
+  "accesso_atti": {
+   "service_id": "027022:wp:401",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.meolo.ve.it/?post_type=servizio&p=401",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.meolo.ve.it/?post_type=servizio&p=401",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.meolo.ve.it/?post_type=servizio&p=401",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:43:28.988577Z"
+  },
+  "cambio_residenza": {
+   "service_id": "027022:wp:1124",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.meolo.ve.it/?post_type=servizio&p=1124",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.meolo.ve.it/?post_type=servizio&p=1124",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.meolo.ve.it/?post_type=servizio&p=1124",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:43:37.334108Z"
+  },
+  "stato_civile": {
+   "service_id": "027022:wp:1127",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.meolo.ve.it/?post_type=servizio&p=1127",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.meolo.ve.it/?post_type=servizio&p=1127",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.meolo.ve.it/?post_type=servizio&p=1127",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:43:46.875608Z"
+  }
+ }
+}

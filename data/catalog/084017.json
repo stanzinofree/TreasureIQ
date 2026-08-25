@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "084017",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "084017:wp:6385",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.favara.ag.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.favara.ag.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.favara.ag.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:46:31.812860Z"
+  },
+  "carta_identita": {
+   "service_id": "084017:wp:697",
+   "title": "Carta d’Identità Elettronica (CIE)",
+   "source_url": "https://comune.favara.ag.it/servizio/carta-didentita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.favara.ag.it/servizio/carta-didentita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.favara.ag.it/servizio/carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:46:36.323681Z"
+  },
+  "tributi_imu": {
+   "service_id": "084017:wp:6397",
+   "title": "Pagare tributo IMU",
+   "source_url": "https://comune.favara.ag.it/servizio/pagare-tributo-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.favara.ag.it/servizio/pagare-tributo-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.favara.ag.it/servizio/pagare-tributo-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:46:40.458976Z"
+  }
+ }
+}

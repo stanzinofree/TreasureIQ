@@ -1,0 +1,64 @@
+{
+ "municipality_istat": "096016",
+ "services": {
+  "tributi_imu": {
+   "service_id": "096016:wp:695",
+   "title": "IMU (Imposta Municipale Propria)",
+   "source_url": "https://www.comune.cavaglia.bi.it/servizio/imu-imposta-municipale-propria/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cavaglia.bi.it/servizio/imu-imposta-municipale-propria/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cavaglia.bi.it/servizio/imu-imposta-municipale-propria/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.cavaglia.bi.it/wp-content/uploads/2025/10/Approvazione-aliquote-IMU-2025.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cavaglia.bi.it/servizio/imu-imposta-municipale-propria/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:55:12.460210Z"
+  },
+  "tributi_tari": {
+   "service_id": "096016:wp:696",
+   "title": "TARI (Tassa Rifiuti)",
+   "source_url": "https://www.comune.cavaglia.bi.it/servizio/tari-tassa-rifiuti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cavaglia.bi.it/servizio/tari-tassa-rifiuti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cavaglia.bi.it/servizio/tari-tassa-rifiuti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:55:14.754473Z"
+  }
+ }
+}

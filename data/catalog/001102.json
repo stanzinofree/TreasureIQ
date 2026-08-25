@@ -1,0 +1,41 @@
+{
+ "municipality_istat": "001102",
+ "services": {
+  "stato_civile": {
+   "service_id": "001102:comweb:certificato-di-nascita-26-18572-1-ee5d09c05f78fd4d75ad58ae8de5e900",
+   "title": "Certificato di nascita",
+   "source_url": "https://www.comune.feletto.to.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-nascita-26-18572-1-ee5d09c05f78fd4d75ad58ae8de5e900",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.feletto.to.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-nascita-26-18572-1-ee5d09c05f78fd4d75ad58ae8de5e900",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.feletto.to.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-nascita-26-18572-1-ee5d09c05f78fd4d75ad58ae8de5e900",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/certificati/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.feletto.to.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-nascita-26-18572-1-ee5d09c05f78fd4d75ad58ae8de5e900",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:42:51.092408Z"
+  }
+ }
+}

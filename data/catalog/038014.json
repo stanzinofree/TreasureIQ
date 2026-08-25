@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "038014",
+ "services": {
+  "accesso_atti": {
+   "service_id": "038014:wp:368",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.mesola.fe.it/?post_type=servizio&p=368",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.mesola.fe.it/?post_type=servizio&p=368",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.mesola.fe.it/?post_type=servizio&p=368",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:51:17.902490Z"
+  },
+  "stato_civile": {
+   "service_id": "038014:wp:232",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.mesola.fe.it/?post_type=servizio&p=232",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.mesola.fe.it/?post_type=servizio&p=232",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.mesola.fe.it/?post_type=servizio&p=232",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:51:23.855971Z"
+  },
+  "tributi_imu": {
+   "service_id": "038014:wp:559",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.mesola.fe.it/?post_type=servizio&p=559",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.mesola.fe.it/?post_type=servizio&p=559",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.mesola.fe.it/?post_type=servizio&p=559",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:51:29.315475Z"
+  }
+ }
+}

@@ -1,0 +1,87 @@
+{
+ "municipality_istat": "037046",
+ "services": {
+  "accesso_atti": {
+   "service_id": "037046:comweb:richiedere-l-accesso-agli-atti-317-51064-1-241d2e261e5d8bd9914e63d0dfeab49f",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.ozzano.bo.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-51064-1-241d2e261e5d8bd9914e63d0dfeab49f",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ozzano.bo.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-51064-1-241d2e261e5d8bd9914e63d0dfeab49f",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ozzano.bo.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-51064-1-241d2e261e5d8bd9914e63d0dfeab49f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.ozzano.bo.it/it-it/servizi-online-le?returnurl=https%3A%2F%2Fservizi.comune.ozzano.bo.it%2Fmodulistica%2FC_G205%2FC_G205_ACCESSO_ATTI",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.ozzano.bo.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-51064-1-241d2e261e5d8bd9914e63d0dfeab49f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T13:49:24.498462Z"
+  },
+  "carta_identita": {
+   "service_id": "037046:comweb:carta-d-identita-elettronica-cie-788-51052-1-2e063300cc587eddc0a55dc7ddac37a7",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.ozzano.bo.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-51052-1-2e063300cc587eddc0a55dc7ddac37a7",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ozzano.bo.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-51052-1-2e063300cc587eddc0a55dc7ddac37a7",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ozzano.bo.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-51052-1-2e063300cc587eddc0a55dc7ddac37a7",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T13:49:26.555747Z"
+  },
+  "tributi_tari": {
+   "service_id": "037046:comweb:dichiarazione-tassa-rifiuti-tari-1028-51144-1-7b7b356c45b12278b3f4f8b9a9b77587",
+   "title": "Dichiarazione Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.ozzano.bo.it/it-it/servizi/tributi-finanze-e-contravvenzioni/dichiarazione-tassa-rifiuti-tari-1028-51144-1-7b7b356c45b12278b3f4f8b9a9b77587",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ozzano.bo.it/it-it/servizi/tributi-finanze-e-contravvenzioni/dichiarazione-tassa-rifiuti-tari-1028-51144-1-7b7b356c45b12278b3f4f8b9a9b77587",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ozzano.bo.it/it-it/servizi/tributi-finanze-e-contravvenzioni/dichiarazione-tassa-rifiuti-tari-1028-51144-1-7b7b356c45b12278b3f4f8b9a9b77587",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T13:49:29.092793Z"
+  }
+ }
+}

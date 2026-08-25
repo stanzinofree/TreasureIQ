@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "028038",
+ "services": {
+  "accesso_atti": {
+   "service_id": "028038:wp:476",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.fontaniva.pd.it/?post_type=servizio&p=476",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.fontaniva.pd.it/?post_type=servizio&p=476",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.fontaniva.pd.it/?post_type=servizio&p=476",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:59:02.407911Z"
+  },
+  "cambio_residenza": {
+   "service_id": "028038:wp:229",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.fontaniva.pd.it/?post_type=servizio&p=229",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.fontaniva.pd.it/?post_type=servizio&p=229",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.fontaniva.pd.it/?post_type=servizio&p=229",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:59:09.700366Z"
+  },
+  "stato_civile": {
+   "service_id": "028038:wp:232",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.fontaniva.pd.it/?post_type=servizio&p=232",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.fontaniva.pd.it/?post_type=servizio&p=232",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.fontaniva.pd.it/?post_type=servizio&p=232",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:59:17.816755Z"
+  }
+ }
+}

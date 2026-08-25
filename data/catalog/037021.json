@@ -1,0 +1,146 @@
+{
+ "municipality_istat": "037021",
+ "services": {
+  "accesso_atti": {
+   "service_id": "037021:comweb:richiedere-l-accesso-agli-atti-317-50266-1-7a45647c95e9fd386f7e7baf48b1aa15",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.castenaso.bo.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-50266-1-7a45647c95e9fd386f7e7baf48b1aa15",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castenaso.bo.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-50266-1-7a45647c95e9fd386f7e7baf48b1aa15",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castenaso.bo.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-50266-1-7a45647c95e9fd386f7e7baf48b1aa15",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.castenaso.bo.it/it-it/servizi-online-le?returnurl=https%3A%2F%2Fservizi.comune.castenaso.bo.it%2Fmodulistica%2FC_C292%2FC_C292_ACCESSO_ATTI",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.castenaso.bo.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-50266-1-7a45647c95e9fd386f7e7baf48b1aa15",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T13:48:23.406009Z"
+  },
+  "cambio_residenza": {
+   "service_id": "037021:comweb:cambio-residenza-305-50264-1-53d0cb14d5ed2ee40f1909a862baf730",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.castenaso.bo.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-50264-1-53d0cb14d5ed2ee40f1909a862baf730",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castenaso.bo.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-50264-1-53d0cb14d5ed2ee40f1909a862baf730",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castenaso.bo.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-50264-1-53d0cb14d5ed2ee40f1909a862baf730",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.castenaso.bo.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-50264-1-53d0cb14d5ed2ee40f1909a862baf730",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T13:48:27.499768Z"
+  },
+  "carta_identita": {
+   "service_id": "037021:comweb:carta-d-identita-elettronica-cie-788-50254-1-eb720191340c51d23dfaa2f082691dd3",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.castenaso.bo.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-50254-1-eb720191340c51d23dfaa2f082691dd3",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castenaso.bo.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-50254-1-eb720191340c51d23dfaa2f082691dd3",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castenaso.bo.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-50254-1-eb720191340c51d23dfaa2f082691dd3",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T13:48:30.774113Z"
+  },
+  "tributi_imu": {
+   "service_id": "037021:comweb:pagare-tributi-imu-600-50355-1-d23a0840674868241a3daff07b117f9f",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.castenaso.bo.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-50355-1-d23a0840674868241a3daff07b117f9f",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castenaso.bo.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-50355-1-d23a0840674868241a3daff07b117f9f",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castenaso.bo.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-50355-1-d23a0840674868241a3daff07b117f9f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T13:48:34.447051Z"
+  },
+  "tributi_tari": {
+   "service_id": "037021:comweb:pagamento-tassa-rifiuti-tari-659-50346-1-ffa028850c5561979d9afb85ea8a2c75",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.castenaso.bo.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-50346-1-ffa028850c5561979d9afb85ea8a2c75",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castenaso.bo.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-50346-1-ffa028850c5561979d9afb85ea8a2c75",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castenaso.bo.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-50346-1-ffa028850c5561979d9afb85ea8a2c75",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T13:48:40.199230Z"
+  }
+ }
+}

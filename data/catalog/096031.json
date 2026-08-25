@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "096031",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "096031:comweb:cambio-residenza-305-61024-1-cc72a38a7629dc86997e333f212e5ea1",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.massazza.bi.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-61024-1-cc72a38a7629dc86997e333f212e5ea1",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.massazza.bi.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-61024-1-cc72a38a7629dc86997e333f212e5ea1",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.massazza.bi.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-61024-1-cc72a38a7629dc86997e333f212e5ea1",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:55:27.075665Z"
+  },
+  "carta_identita": {
+   "service_id": "096031:comweb:carta-d-identita-elettronica-cie-788-61014-1-3ab4b673564ad7f99bb9216d260cf8de",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.massazza.bi.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-61014-1-3ab4b673564ad7f99bb9216d260cf8de",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.massazza.bi.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-61014-1-3ab4b673564ad7f99bb9216d260cf8de",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.massazza.bi.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-61014-1-3ab4b673564ad7f99bb9216d260cf8de",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:55:29.760391Z"
+  },
+  "tributi_imu": {
+   "service_id": "096031:comweb:pagare-tributi-imu-600-61115-1-6848e8bd5b3d5161b1c0a1cc2554e877",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.massazza.bi.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-61115-1-6848e8bd5b3d5161b1c0a1cc2554e877",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.massazza.bi.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-61115-1-6848e8bd5b3d5161b1c0a1cc2554e877",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.massazza.bi.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-61115-1-6848e8bd5b3d5161b1c0a1cc2554e877",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:55:32.493637Z"
+  },
+  "tributi_tari": {
+   "service_id": "096031:comweb:pagamento-tassa-rifiuti-tari-659-61106-1-9c62316e44037233a21a3d80a2887bf8",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.massazza.bi.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-61106-1-9c62316e44037233a21a3d80a2887bf8",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.massazza.bi.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-61106-1-9c62316e44037233a21a3d80a2887bf8",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.massazza.bi.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-61106-1-9c62316e44037233a21a3d80a2887bf8",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:55:35.115310Z"
+  }
+ }
+}

@@ -1,0 +1,133 @@
+{
+ "municipality_istat": "018042",
+ "services": {
+  "accesso_atti": {
+   "service_id": "018042:comweb:richiedere-l-accesso-agli-atti-317-37192-1-c6e1dcbb90c1ee31ea987eddba86ff73",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.cecima.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-37192-1-c6e1dcbb90c1ee31ea987eddba86ff73",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cecima.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-37192-1-c6e1dcbb90c1ee31ea987eddba86ff73",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cecima.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-37192-1-c6e1dcbb90c1ee31ea987eddba86ff73",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:19:44.691023Z"
+  },
+  "cambio_residenza": {
+   "service_id": "018042:comweb:cambio-residenza-305-37190-1-405e2a8072682df1af16a0d1eb298174",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.cecima.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-37190-1-405e2a8072682df1af16a0d1eb298174",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cecima.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-37190-1-405e2a8072682df1af16a0d1eb298174",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cecima.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-37190-1-405e2a8072682df1af16a0d1eb298174",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.cecima.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-37190-1-405e2a8072682df1af16a0d1eb298174",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:19:47.636100Z"
+  },
+  "stato_civile": {
+   "service_id": "018042:comweb:richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-37180-1-91edaf8aad0e4ba65259782537b6e708",
+   "title": "Richiesta di certificati/attestazioni/estratti di stato civile",
+   "source_url": "https://www.comune.cecima.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-37180-1-91edaf8aad0e4ba65259782537b6e708",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cecima.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-37180-1-91edaf8aad0e4ba65259782537b6e708",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cecima.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-37180-1-91edaf8aad0e4ba65259782537b6e708",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:19:50.243661Z"
+  },
+  "tributi_imu": {
+   "service_id": "018042:comweb:imposta-municipale-propria-imu-953-37281-1-252b151e5c00c77acdd9add533ddc963",
+   "title": "Imposta Municipale Propria (IMU)",
+   "source_url": "https://www.comune.cecima.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-37281-1-252b151e5c00c77acdd9add533ddc963",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cecima.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-37281-1-252b151e5c00c77acdd9add533ddc963",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cecima.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-37281-1-252b151e5c00c77acdd9add533ddc963",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:19:52.870378Z"
+  },
+  "tributi_tari": {
+   "service_id": "018042:comweb:tassa-rifiuti-tari-954-37272-1-cbddbc40c19921a8d90a417bf9f88c25",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.cecima.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-37272-1-cbddbc40c19921a8d90a417bf9f88c25",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cecima.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-37272-1-cbddbc40c19921a8d90a417bf9f88c25",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cecima.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-37272-1-cbddbc40c19921a8d90a417bf9f88c25",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:19:55.843024Z"
+  }
+ }
+}

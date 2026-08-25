@@ -1,0 +1,120 @@
+{
+ "municipality_istat": "028083",
+ "services": {
+  "accesso_atti": {
+   "service_id": "028083:wp:263",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.santelena.pd.it/?post_type=servizio&p=263",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.santelena.pd.it/?post_type=servizio&p=263",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.santelena.pd.it/?post_type=servizio&p=263",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:19:30.012233Z"
+  },
+  "cambio_residenza": {
+   "service_id": "028083:wp:1304",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.santelena.pd.it/?post_type=servizio&p=1304",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.santelena.pd.it/?post_type=servizio&p=1304",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.santelena.pd.it/?post_type=servizio&p=1304",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:19:38.838920Z"
+  },
+  "carta_identita": {
+   "service_id": "028083:wp:1113",
+   "title": "Rilascio PIN e PUK per CIE",
+   "source_url": "https://www.comune.santelena.pd.it/?post_type=servizio&p=1113",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.santelena.pd.it/?post_type=servizio&p=1113",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.santelena.pd.it/?post_type=servizio&p=1113",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:20:09.769102Z"
+  },
+  "stato_civile": {
+   "service_id": "028083:wp:1309",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.santelena.pd.it/?post_type=servizio&p=1309",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.santelena.pd.it/?post_type=servizio&p=1309",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.santelena.pd.it/?post_type=servizio&p=1309",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:20:18.301359Z"
+  },
+  "tributi_imu": {
+   "service_id": "028083:wp:1303",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.santelena.pd.it/?post_type=servizio&p=1303",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.santelena.pd.it/?post_type=servizio&p=1303",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.santelena.pd.it/?post_type=servizio&p=1303",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:20:27.072051Z"
+  }
+ }
+}

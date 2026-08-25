@@ -1,0 +1,146 @@
+{
+ "municipality_istat": "018130",
+ "services": {
+  "accesso_atti": {
+   "service_id": "018130:comweb:richiedere-l-accesso-agli-atti-317-48412-1-0288b029449c843edfe6523bdf7e4dc5",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune-rosasco.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-48412-1-0288b029449c843edfe6523bdf7e4dc5",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune-rosasco.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-48412-1-0288b029449c843edfe6523bdf7e4dc5",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune-rosasco.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-48412-1-0288b029449c843edfe6523bdf7e4dc5",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.rosasco.pv.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=rssc1234&IDPr=11782",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune-rosasco.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-48412-1-0288b029449c843edfe6523bdf7e4dc5",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:24:19.693048Z"
+  },
+  "cambio_residenza": {
+   "service_id": "018130:comweb:cambio-residenza-305-48410-1-c4c160dc667a9d17657c9716c0ab1248",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune-rosasco.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-48410-1-c4c160dc667a9d17657c9716c0ab1248",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune-rosasco.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-48410-1-c4c160dc667a9d17657c9716c0ab1248",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune-rosasco.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-48410-1-c4c160dc667a9d17657c9716c0ab1248",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune-rosasco.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-48410-1-c4c160dc667a9d17657c9716c0ab1248",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:24:22.494171Z"
+  },
+  "carta_identita": {
+   "service_id": "018130:comweb:carta-d-identita-elettronica-cie-788-48400-1-daf84527bf971683f0e5617dadcff771",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune-rosasco.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-48400-1-daf84527bf971683f0e5617dadcff771",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune-rosasco.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-48400-1-daf84527bf971683f0e5617dadcff771",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune-rosasco.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-48400-1-daf84527bf971683f0e5617dadcff771",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:24:25.136948Z"
+  },
+  "tributi_imu": {
+   "service_id": "018130:comweb:imposta-municipale-propria-imu-953-48501-1-f0783f4763a6ab0a2b30aae65dc00b52",
+   "title": "Imposta Municipale Propria (IMU)",
+   "source_url": "https://www.comune-rosasco.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-48501-1-f0783f4763a6ab0a2b30aae65dc00b52",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune-rosasco.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-48501-1-f0783f4763a6ab0a2b30aae65dc00b52",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune-rosasco.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-48501-1-f0783f4763a6ab0a2b30aae65dc00b52",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:24:27.420770Z"
+  },
+  "tributi_tari": {
+   "service_id": "018130:comweb:tassa-rifiuti-tari-954-48492-1-0c866d90afabff1281d58f685b997fd9",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune-rosasco.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-48492-1-0c866d90afabff1281d58f685b997fd9",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune-rosasco.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-48492-1-0c866d90afabff1281d58f685b997fd9",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune-rosasco.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-48492-1-0c866d90afabff1281d58f685b997fd9",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:24:30.024768Z"
+  }
+ }
+}

@@ -1,0 +1,41 @@
+{
+ "municipality_istat": "004113",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "004113:comweb:cambio-residenza-305-51328-1-daade3ffb07916beae0d05a7a4cdfaa1",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.maglianoalfieri.cn.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-51328-1-daade3ffb07916beae0d05a7a4cdfaa1",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.maglianoalfieri.cn.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-51328-1-daade3ffb07916beae0d05a7a4cdfaa1",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.maglianoalfieri.cn.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-51328-1-daade3ffb07916beae0d05a7a4cdfaa1",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.maglianoalfieri.cn.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-51328-1-daade3ffb07916beae0d05a7a4cdfaa1",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:00:42.226207Z"
+  }
+ }
+}

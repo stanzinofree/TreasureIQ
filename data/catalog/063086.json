@@ -1,0 +1,103 @@
+{
+ "municipality_istat": "063086",
+ "services": {
+  "accesso_atti": {
+   "service_id": "063086:wp:979",
+   "title": "Accesso agli atti",
+   "source_url": "https://comune.vicoequense.na.it/servizio/accesso-documentale/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.vicoequense.na.it/servizio/accesso-documentale/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.vicoequense.na.it/servizio/accesso-documentale/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.vicoequense.na.it/wp-content/uploads/2026/07/Informativa.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.vicoequense.na.it/servizio/accesso-documentale/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.vicoequense.na.it/wp-content/uploads/2026/07/Policy-privacy.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.vicoequense.na.it/servizio/accesso-documentale/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:15:40.432579Z"
+  },
+  "tributi_imu": {
+   "service_id": "063086:wp:660",
+   "title": "Pagamento dell’imposta municipale propria (IMU)",
+   "source_url": "https://comune.vicoequense.na.it/servizio/pagamento-dellimposta-municipale-propria-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.vicoequense.na.it/servizio/pagamento-dellimposta-municipale-propria-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.vicoequense.na.it/servizio/pagamento-dellimposta-municipale-propria-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.vicoequense.na.it/wp-content/uploads/2026/07/Informativa.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.vicoequense.na.it/servizio/pagamento-dellimposta-municipale-propria-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.vicoequense.na.it/wp-content/uploads/2026/07/Policy-privacy.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.vicoequense.na.it/servizio/pagamento-dellimposta-municipale-propria-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:15:44.103300Z"
+  }
+ }
+}

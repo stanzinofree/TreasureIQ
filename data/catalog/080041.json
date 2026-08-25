@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "080041",
+ "services": {
+  "accesso_atti": {
+   "service_id": "080041:wp:228",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.laganadi.rc.it/?post_type=servizio&p=228",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.laganadi.rc.it/?post_type=servizio&p=228",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.laganadi.rc.it/?post_type=servizio&p=228",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:39:50.684384Z"
+  },
+  "cambio_residenza": {
+   "service_id": "080041:wp:153",
+   "title": "Cambio di residenza tramite Portale Nazionale – ANPR",
+   "source_url": "https://www.comune.laganadi.rc.it/?post_type=servizio&p=153",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.laganadi.rc.it/?post_type=servizio&p=153",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.laganadi.rc.it/?post_type=servizio&p=153",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:39:55.562909Z"
+  }
+ }
+}

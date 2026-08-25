@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "014040",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "014040:wp:502",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.mazzo.so.it/servizio/cambio-di-residenza-2/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.mazzo.so.it/servizio/cambio-di-residenza-2/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.mazzo.so.it/servizio/cambio-di-residenza-2/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:14:51.659993Z"
+  }
+ }
+}

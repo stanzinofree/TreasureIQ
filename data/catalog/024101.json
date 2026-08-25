@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "024101",
+ "services": {
+  "accesso_atti": {
+   "service_id": "024101:wp:237",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.solagna.vi.it/?post_type=servizio&p=237",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.solagna.vi.it/?post_type=servizio&p=237",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.solagna.vi.it/?post_type=servizio&p=237",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:17:04.589662Z"
+  },
+  "cambio_residenza": {
+   "service_id": "024101:wp:707",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.solagna.vi.it/?post_type=servizio&p=707",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.solagna.vi.it/?post_type=servizio&p=707",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.solagna.vi.it/?post_type=servizio&p=707",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:17:12.042860Z"
+  },
+  "stato_civile": {
+   "service_id": "024101:wp:716",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.solagna.vi.it/?post_type=servizio&p=716",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.solagna.vi.it/?post_type=servizio&p=716",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.solagna.vi.it/?post_type=servizio&p=716",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:17:19.162091Z"
+  },
+  "tributi_imu": {
+   "service_id": "024101:wp:814",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.solagna.vi.it/?post_type=servizio&p=814",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.solagna.vi.it/?post_type=servizio&p=814",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.solagna.vi.it/?post_type=servizio&p=814",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:17:26.794176Z"
+  }
+ }
+}

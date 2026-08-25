@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "097062",
+ "services": {
+  "stato_civile": {
+   "service_id": "097062:wp:801",
+   "title": "Rilascio dei certificati di stato civile – trascrizione di atti di stato civile",
+   "source_url": "https://comune.padernodadda.lc.it/servizio/rilascio-dei-certificati-di-stato-civile-trascrizione-di-atti-di-stato-civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.padernodadda.lc.it/servizio/rilascio-dei-certificati-di-stato-civile-trascrizione-di-atti-di-stato-civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.padernodadda.lc.it/servizio/rilascio-dei-certificati-di-stato-civile-trascrizione-di-atti-di-stato-civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:56:42.240630Z"
+  },
+  "tributi_imu": {
+   "service_id": "097062:wp:2806",
+   "title": "Calcolo IMU",
+   "source_url": "https://comune.padernodadda.lc.it/servizio/calcolo-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.padernodadda.lc.it/servizio/calcolo-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.padernodadda.lc.it/servizio/calcolo-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:56:45.686835Z"
+  }
+ }
+}

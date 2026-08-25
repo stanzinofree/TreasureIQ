@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "007032",
+ "services": {
+  "accesso_atti": {
+   "service_id": "007032:comweb:richiedere-l-accesso-agli-atti-317-30063-1-6716c691ab31c348df435966dfbeaea5",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.gressoneylatrinite.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-30063-1-6716c691ab31c348df435966dfbeaea5",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gressoneylatrinite.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-30063-1-6716c691ab31c348df435966dfbeaea5",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gressoneylatrinite.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-30063-1-6716c691ab31c348df435966dfbeaea5",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.gressoneylatrinite.ao.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=gssnyltrnt422&IDPr=10564",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.gressoneylatrinite.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-30063-1-6716c691ab31c348df435966dfbeaea5",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:07:22.907962Z"
+  },
+  "cambio_residenza": {
+   "service_id": "007032:comweb:cambio-residenza-305-30061-1-8f1bdc7504110cc09566c3060246022c",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.gressoneylatrinite.ao.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-30061-1-8f1bdc7504110cc09566c3060246022c",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gressoneylatrinite.ao.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-30061-1-8f1bdc7504110cc09566c3060246022c",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gressoneylatrinite.ao.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-30061-1-8f1bdc7504110cc09566c3060246022c",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.gressoneylatrinite.ao.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-30061-1-8f1bdc7504110cc09566c3060246022c",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:07:25.939241Z"
+  },
+  "carta_identita": {
+   "service_id": "007032:comweb:carta-d-identita-elettronica-cie-788-30051-1-0130ac726cd42f5e70af9e691dcdcc53",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.gressoneylatrinite.ao.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-30051-1-0130ac726cd42f5e70af9e691dcdcc53",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gressoneylatrinite.ao.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-30051-1-0130ac726cd42f5e70af9e691dcdcc53",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gressoneylatrinite.ao.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-30051-1-0130ac726cd42f5e70af9e691dcdcc53",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:07:29.082046Z"
+  }
+ }
+}

@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "023021",
+ "services": {
+  "accesso_atti": {
+   "service_id": "023021:wp:1559",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.castel-d-azzano.vr.it/?post_type=servizio&p=1559",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castel-d-azzano.vr.it/?post_type=servizio&p=1559",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castel-d-azzano.vr.it/?post_type=servizio&p=1559",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:31:56.318414Z"
+  },
+  "cambio_residenza": {
+   "service_id": "023021:wp:1939",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.castel-d-azzano.vr.it/?post_type=servizio&p=1939",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castel-d-azzano.vr.it/?post_type=servizio&p=1939",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castel-d-azzano.vr.it/?post_type=servizio&p=1939",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:32:04.291876Z"
+  },
+  "carta_identita": {
+   "service_id": "023021:wp:419",
+   "title": "Rilascio di una nuova carta di identità elettronica",
+   "source_url": "https://www.comune.castel-d-azzano.vr.it/?post_type=servizio&p=419",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castel-d-azzano.vr.it/?post_type=servizio&p=419",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castel-d-azzano.vr.it/?post_type=servizio&p=419",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:32:22.933799Z"
+  },
+  "stato_civile": {
+   "service_id": "023021:wp:1942",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.castel-d-azzano.vr.it/?post_type=servizio&p=1942",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castel-d-azzano.vr.it/?post_type=servizio&p=1942",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castel-d-azzano.vr.it/?post_type=servizio&p=1942",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:32:32.163448Z"
+  }
+ }
+}

@@ -211,7 +211,10 @@ def leggi_pagina_servizio(
         if not href or href.startswith("#"):
             continue
 
-        assoluto = urljoin(page_url, href)
+        # ``href`` grezzo dall'attributo HTML: le entità nei parametri query
+        # (``&amp;`` → ``&``) vanno decodificate prima di urljoin, altrimenti
+        # l'URL dell'opzione porta ``&amp;`` letterale nel catalogo.
+        assoluto = urljoin(page_url, _html.unescape(href))
         parsed = urlparse(assoluto)
         if parsed.scheme not in ("http", "https") or not parsed.netloc:
             continue

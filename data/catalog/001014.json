@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "001014",
+ "services": {
+  "carta_identita": {
+   "service_id": "001014:comweb:carta-d-identita-elettronica-cie-788-9855-1-c6c39075693f1aa757581a7e3bdfcc7a",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.azeglio.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-9855-1-c6c39075693f1aa757581a7e3bdfcc7a",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.azeglio.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-9855-1-c6c39075693f1aa757581a7e3bdfcc7a",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.azeglio.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-9855-1-c6c39075693f1aa757581a7e3bdfcc7a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:38:47.912502Z"
+  },
+  "tributi_tari": {
+   "service_id": "001014:comweb:tassa-rifiuti-tari-954-9947-1-efe0cd5046b596f0920f1e60673989c2",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.azeglio.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-9947-1-efe0cd5046b596f0920f1e60673989c2",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.azeglio.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-9947-1-efe0cd5046b596f0920f1e60673989c2",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.azeglio.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-9947-1-efe0cd5046b596f0920f1e60673989c2",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:38:49.993914Z"
+  }
+ }
+}

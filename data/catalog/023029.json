@@ -1,0 +1,175 @@
+{
+ "municipality_istat": "023029",
+ "services": {
+  "accesso_atti": {
+   "service_id": "023029:wp:317",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.concamarise.vr.it/?post_type=servizio&p=317",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.concamarise.vr.it/?post_type=servizio&p=317",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.concamarise.vr.it/?post_type=servizio&p=317",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.concamarise.vr.it/wp-content/uploads/2024/04/Delibera-diritti-di-segreteria.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.concamarise.vr.it/?post_type=servizio&p=317",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.concamarise.vr.it/wp-content/uploads/2024/04/Diritti-di-Segreteria-Tabella-A.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.concamarise.vr.it/?post_type=servizio&p=317",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.concamarise.vr.it/wp-content/uploads/2024/04/Diritti-di-Segreteria-Tabella-B.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.concamarise.vr.it/?post_type=servizio&p=317",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.concamarise.vr.it/wp-content/uploads/2024/04/35-regolamenti-regolamento-in-materia-di-accesso-civico-e-accesso-generalizzato.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.concamarise.vr.it/?post_type=servizio&p=317",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:33:38.151091Z"
+  },
+  "cambio_residenza": {
+   "service_id": "023029:wp:535",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.concamarise.vr.it/?post_type=servizio&p=535",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.concamarise.vr.it/?post_type=servizio&p=535",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.concamarise.vr.it/?post_type=servizio&p=535",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:33:44.374614Z"
+  },
+  "stato_civile": {
+   "service_id": "023029:wp:538",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.concamarise.vr.it/?post_type=servizio&p=538",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.concamarise.vr.it/?post_type=servizio&p=538",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.concamarise.vr.it/?post_type=servizio&p=538",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:34:00.376787Z"
+  },
+  "tributi_imu": {
+   "service_id": "023029:wp:435",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.concamarise.vr.it/?post_type=servizio&p=435",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.concamarise.vr.it/?post_type=servizio&p=435",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.concamarise.vr.it/?post_type=servizio&p=435",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.concamarise.vr.it/wp-content/uploads/2024/05/tabella-aliquote-IMU-2024.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.concamarise.vr.it/?post_type=servizio&p=435",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.concamarise.vr.it/wp-content/uploads/2024/05/tabella-riassuntiva-valori-aree-fabbricabili-2024.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.concamarise.vr.it/?post_type=servizio&p=435",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:34:14.497282Z"
+  }
+ }
+}

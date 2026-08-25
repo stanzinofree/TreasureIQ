@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "024009",
+ "services": {
+  "carta_identita": {
+   "service_id": "024009:wp:1055",
+   "title": "Rilascio Carta di Identità (CIE)",
+   "source_url": "https://www.comune.asiago.vi.it/?post_type=servizio&p=1055",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.asiago.vi.it/?post_type=servizio&p=1055",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.asiago.vi.it/?post_type=servizio&p=1055",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:52:25.670039Z"
+  },
+  "stato_civile": {
+   "service_id": "024009:wp:1376",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.asiago.vi.it/?post_type=servizio&p=1376",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.asiago.vi.it/?post_type=servizio&p=1376",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.asiago.vi.it/?post_type=servizio&p=1376",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:52:34.062315Z"
+  },
+  "tributi_imu": {
+   "service_id": "024009:wp:1353",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.asiago.vi.it/?post_type=servizio&p=1353",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.asiago.vi.it/?post_type=servizio&p=1353",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.asiago.vi.it/?post_type=servizio&p=1353",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:52:44.334398Z"
+  }
+ }
+}

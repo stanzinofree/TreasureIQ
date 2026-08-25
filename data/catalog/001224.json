@@ -1,0 +1,64 @@
+{
+ "municipality_istat": "001224",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "001224:comweb:cambio-residenza-305-23065-1-088d70767bd01381ca9792ace2c3ac5b",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.roncocanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-23065-1-088d70767bd01381ca9792ace2c3ac5b",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.roncocanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-23065-1-088d70767bd01381ca9792ace2c3ac5b",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.roncocanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-23065-1-088d70767bd01381ca9792ace2c3ac5b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://dait.interno.gov.it/servizi-demografici",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.roncocanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-23065-1-088d70767bd01381ca9792ace2c3ac5b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:48:03.355473Z"
+  },
+  "tributi_imu": {
+   "service_id": "001224:comweb:calcolo-imu-355-23156-1-9bf84112be7306dc7b9a233f0040bc10",
+   "title": "Calcolo IMU",
+   "source_url": "https://www.comune.roncocanavese.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-23156-1-9bf84112be7306dc7b9a233f0040bc10",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.roncocanavese.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-23156-1-9bf84112be7306dc7b9a233f0040bc10",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.roncocanavese.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-23156-1-9bf84112be7306dc7b9a233f0040bc10",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:48:06.010759Z"
+  }
+ }
+}

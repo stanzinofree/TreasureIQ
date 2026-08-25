@@ -1,0 +1,146 @@
+{
+ "municipality_istat": "001284",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001284:comweb:richiedere-l-accesso-agli-atti-317-55985-1-4bd7bcfc9610c8e6c699d39abd360809",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.valdellatorre.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-55985-1-4bd7bcfc9610c8e6c699d39abd360809",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.valdellatorre.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-55985-1-4bd7bcfc9610c8e6c699d39abd360809",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.valdellatorre.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-55985-1-4bd7bcfc9610c8e6c699d39abd360809",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.valdellatorre.to.it/Servizi/FiloDiretto2/Login.aspx?ce=vldlltrr383&IDPr=12336",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.valdellatorre.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-55985-1-4bd7bcfc9610c8e6c699d39abd360809",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:51:30.518820Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001284:comweb:cambio-residenza-305-55983-1-0ff72655875ff2f9c987bd6e0856a345",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.valdellatorre.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-55983-1-0ff72655875ff2f9c987bd6e0856a345",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.valdellatorre.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-55983-1-0ff72655875ff2f9c987bd6e0856a345",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.valdellatorre.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-55983-1-0ff72655875ff2f9c987bd6e0856a345",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.valdellatorre.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-55983-1-0ff72655875ff2f9c987bd6e0856a345",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:51:32.365644Z"
+  },
+  "carta_identita": {
+   "service_id": "001284:comweb:carta-d-identita-elettronica-cie-788-55973-1-84639b7805529709f7b6880eb949938a",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.valdellatorre.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-55973-1-84639b7805529709f7b6880eb949938a",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.valdellatorre.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-55973-1-84639b7805529709f7b6880eb949938a",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.valdellatorre.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-55973-1-84639b7805529709f7b6880eb949938a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:51:34.340217Z"
+  },
+  "stato_civile": {
+   "service_id": "001284:comweb:richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-55973-1-53900aa2bdfbe2d4864054c89817149a",
+   "title": "Richiesta di certificati/attestazioni/estratti di stato civile",
+   "source_url": "https://www.comune.valdellatorre.to.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-55973-1-53900aa2bdfbe2d4864054c89817149a",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.valdellatorre.to.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-55973-1-53900aa2bdfbe2d4864054c89817149a",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.valdellatorre.to.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-55973-1-53900aa2bdfbe2d4864054c89817149a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:51:36.503978Z"
+  },
+  "tributi_imu": {
+   "service_id": "001284:comweb:imposta-municipale-propria-imu-953-56074-1-c81dd038cb0620213dbb3eefab147f41",
+   "title": "Imposta Municipale Propria (IMU)",
+   "source_url": "https://www.comune.valdellatorre.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-56074-1-c81dd038cb0620213dbb3eefab147f41",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.valdellatorre.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-56074-1-c81dd038cb0620213dbb3eefab147f41",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.valdellatorre.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-56074-1-c81dd038cb0620213dbb3eefab147f41",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:51:39.130032Z"
+  }
+ }
+}

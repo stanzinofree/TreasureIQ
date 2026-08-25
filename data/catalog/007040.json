@@ -1,0 +1,64 @@
+{
+ "municipality_istat": "007040",
+ "services": {
+  "accesso_atti": {
+   "service_id": "007040:comweb:richiedere-l-accesso-agli-atti-317-35872-1-788b6ee2859ff3f22cd10fbe66a24602",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.lasalle.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-35872-1-788b6ee2859ff3f22cd10fbe66a24602",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.lasalle.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-35872-1-788b6ee2859ff3f22cd10fbe66a24602",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.lasalle.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-35872-1-788b6ee2859ff3f22cd10fbe66a24602",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.lasalle.ao.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=lsll618&IDPr=10575",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.lasalle.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-35872-1-788b6ee2859ff3f22cd10fbe66a24602",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:07:53.224632Z"
+  },
+  "tributi_imu": {
+   "service_id": "007040:comweb:imposta-municipale-propria-imu-953-35961-1-8fef64ed2adbc82e4f36ef08400594de",
+   "title": "Imposta Municipale Propria (IMU)",
+   "source_url": "https://www.comune.lasalle.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-35961-1-8fef64ed2adbc82e4f36ef08400594de",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.lasalle.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-35961-1-8fef64ed2adbc82e4f36ef08400594de",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.lasalle.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-35961-1-8fef64ed2adbc82e4f36ef08400594de",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:07:55.230494Z"
+  }
+ }
+}

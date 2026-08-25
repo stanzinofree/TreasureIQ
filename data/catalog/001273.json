@@ -1,0 +1,113 @@
+{
+ "municipality_istat": "001273",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001273:comweb:richiedere-l-accesso-agli-atti-317-30327-1-7403f5354e19608795bd79efb4318016",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.torrazzapiemonte.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-30327-1-7403f5354e19608795bd79efb4318016",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.torrazzapiemonte.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-30327-1-7403f5354e19608795bd79efb4318016",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.torrazzapiemonte.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-30327-1-7403f5354e19608795bd79efb4318016",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.torrazzapiemonte.to.it/Servizi/FiloDiretto2/ProcedimentiClient.aspx?CE=trrzzpmnt219&IDPr=10594",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.torrazzapiemonte.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-30327-1-7403f5354e19608795bd79efb4318016",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:51:16.488802Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001273:comweb:cambio-residenza-305-30325-1-b37ce58595a452c349b1d806845de971",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.torrazzapiemonte.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-30325-1-b37ce58595a452c349b1d806845de971",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.torrazzapiemonte.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-30325-1-b37ce58595a452c349b1d806845de971",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.torrazzapiemonte.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-30325-1-b37ce58595a452c349b1d806845de971",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/servizi-anagrafici/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.torrazzapiemonte.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-30325-1-b37ce58595a452c349b1d806845de971",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:51:19.115657Z"
+  },
+  "stato_civile": {
+   "service_id": "001273:comweb:certificato-di-nascita-26-30320-1-5960d52b50dd790c56654a4922645e26",
+   "title": "Certificato di nascita",
+   "source_url": "https://www.comune.torrazzapiemonte.to.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-nascita-26-30320-1-5960d52b50dd790c56654a4922645e26",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.torrazzapiemonte.to.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-nascita-26-30320-1-5960d52b50dd790c56654a4922645e26",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.torrazzapiemonte.to.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-nascita-26-30320-1-5960d52b50dd790c56654a4922645e26",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/certificati/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.torrazzapiemonte.to.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-nascita-26-30320-1-5960d52b50dd790c56654a4922645e26",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:51:21.306653Z"
+  }
+ }
+}

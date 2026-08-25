@@ -1,0 +1,87 @@
+{
+ "municipality_istat": "018128",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "018128:comweb:cambio-residenza-305-49732-1-e5e1fe00532f8b990c6f825cf08e08f1",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.romagnese.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-49732-1-e5e1fe00532f8b990c6f825cf08e08f1",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.romagnese.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-49732-1-e5e1fe00532f8b990c6f825cf08e08f1",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.romagnese.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-49732-1-e5e1fe00532f8b990c6f825cf08e08f1",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.romagnese.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-49732-1-e5e1fe00532f8b990c6f825cf08e08f1",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:24:11.752691Z"
+  },
+  "tributi_imu": {
+   "service_id": "018128:comweb:imposta-municipale-propria-imu-953-49823-1-02d8bae312763bc193c88b2f188d05a4",
+   "title": "Imposta Municipale Propria (IMU)",
+   "source_url": "https://www.comune.romagnese.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-49823-1-02d8bae312763bc193c88b2f188d05a4",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.romagnese.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-49823-1-02d8bae312763bc193c88b2f188d05a4",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.romagnese.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-49823-1-02d8bae312763bc193c88b2f188d05a4",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:24:14.324754Z"
+  },
+  "tributi_tari": {
+   "service_id": "018128:comweb:tassa-rifiuti-tari-954-49814-1-65b576fdc6a7d218a3bfe049afe2c136",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.romagnese.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-49814-1-65b576fdc6a7d218a3bfe049afe2c136",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.romagnese.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-49814-1-65b576fdc6a7d218a3bfe049afe2c136",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.romagnese.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-49814-1-65b576fdc6a7d218a3bfe049afe2c136",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:24:16.974070Z"
+  }
+ }
+}

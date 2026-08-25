@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "003158",
+ "services": {
+  "accesso_atti": {
+   "service_id": "003158:comweb:richiedere-l-accesso-agli-atti-317-53990-1-2350efe2fd338388faabd94d4d1cc6b7",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.vespolate.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-53990-1-2350efe2fd338388faabd94d4d1cc6b7",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vespolate.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-53990-1-2350efe2fd338388faabd94d4d1cc6b7",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vespolate.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-53990-1-2350efe2fd338388faabd94d4d1cc6b7",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:59:56.876668Z"
+  },
+  "carta_identita": {
+   "service_id": "003158:comweb:carta-d-identita-elettronica-cie-788-53978-1-59905afbac3ec249fb18ad38227107ff",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.vespolate.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-53978-1-59905afbac3ec249fb18ad38227107ff",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vespolate.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-53978-1-59905afbac3ec249fb18ad38227107ff",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vespolate.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-53978-1-59905afbac3ec249fb18ad38227107ff",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:59:59.176821Z"
+  }
+ }
+}

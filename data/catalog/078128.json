@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "078128",
+ "services": {
+  "accesso_atti": {
+   "service_id": "078128:wp:608",
+   "title": "Richiedere accesso agli atti",
+   "source_url": "https://www.comune.sansosti.cs.it/servizio/accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sansosti.cs.it/servizio/accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sansosti.cs.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:36:28.037188Z"
+  },
+  "cambio_residenza": {
+   "service_id": "078128:wp:604",
+   "title": "ANPR cambio di residenza",
+   "source_url": "https://www.comune.sansosti.cs.it/servizio/cambio-di-residenza-e-domicilio/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sansosti.cs.it/servizio/cambio-di-residenza-e-domicilio/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sansosti.cs.it/servizio/cambio-di-residenza-e-domicilio/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:36:29.245704Z"
+  },
+  "tributi_imu": {
+   "service_id": "078128:wp:178",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.sansosti.cs.it/servizio/tributi-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sansosti.cs.it/servizio/tributi-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sansosti.cs.it/servizio/tributi-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:36:30.555004Z"
+  }
+ }
+}

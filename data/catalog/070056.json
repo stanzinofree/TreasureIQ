@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "070056",
+ "services": {
+  "carta_identita": {
+   "service_id": "070056:wp:461",
+   "title": "Carta d’Identità Elettronica (CIE)",
+   "source_url": "https://comune.provvidenti.cb.it/servizio/carta-didentita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.provvidenti.cb.it/servizio/carta-didentita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.provvidenti.cb.it/servizio/carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:25:06.388799Z"
+  },
+  "tributi_imu": {
+   "service_id": "070056:wp:463",
+   "title": "Dichiarazione IMU",
+   "source_url": "https://comune.provvidenti.cb.it/servizio/dichiarazione-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.provvidenti.cb.it/servizio/dichiarazione-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.provvidenti.cb.it/servizio/dichiarazione-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:25:09.075938Z"
+  },
+  "tributi_tari": {
+   "service_id": "070056:wp:464",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://comune.provvidenti.cb.it/servizio/pagamento-tassa-rifiuti-tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.provvidenti.cb.it/servizio/pagamento-tassa-rifiuti-tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.provvidenti.cb.it/servizio/pagamento-tassa-rifiuti-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:25:11.029781Z"
+  }
+ }
+}

@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "024050",
+ "services": {
+  "accesso_atti": {
+   "service_id": "024050:wp:248",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.lastebasse.vi.it/?post_type=servizio&p=248",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.lastebasse.vi.it/?post_type=servizio&p=248",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.lastebasse.vi.it/?post_type=servizio&p=248",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:02:23.487631Z"
+  },
+  "cambio_residenza": {
+   "service_id": "024050:wp:653",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.lastebasse.vi.it/?post_type=servizio&p=653",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.lastebasse.vi.it/?post_type=servizio&p=653",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.lastebasse.vi.it/?post_type=servizio&p=653",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:02:31.598362Z"
+  },
+  "stato_civile": {
+   "service_id": "024050:wp:657",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.lastebasse.vi.it/?post_type=servizio&p=657",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.lastebasse.vi.it/?post_type=servizio&p=657",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.lastebasse.vi.it/?post_type=servizio&p=657",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:02:40.869309Z"
+  },
+  "tributi_imu": {
+   "service_id": "024050:wp:652",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.lastebasse.vi.it/?post_type=servizio&p=652",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.lastebasse.vi.it/?post_type=servizio&p=652",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.lastebasse.vi.it/?post_type=servizio&p=652",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:02:53.038044Z"
+  }
+ }
+}

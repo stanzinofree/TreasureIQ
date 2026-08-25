@@ -1,0 +1,103 @@
+{
+ "municipality_istat": "023007",
+ "services": {
+  "accesso_atti": {
+   "service_id": "023007:wp:383",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.belfiore.vr.it/?post_type=servizio&p=383",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.belfiore.vr.it/?post_type=servizio&p=383",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.belfiore.vr.it/?post_type=servizio&p=383",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.belfiore.vr.it/wp-content/uploads/2023/09/137-modulistica-tabella-diritti-di-segreteria-aggiornata-2023.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.belfiore.vr.it/?post_type=servizio&p=383",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.belfiore.vr.it/wp-content/uploads/2023/09/8-modulistica-regolamento-dei-diritti-di-accesso-dei-cittadini-alle-informazioni-ed-agli-atti-e-docu.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.belfiore.vr.it/?post_type=servizio&p=383",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.belfiore.vr.it/wp-content/uploads/2024/09/Delibera-18.2016-atti-Belfiore.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.belfiore.vr.it/?post_type=servizio&p=383",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.belfiore.vr.it/wp-content/uploads/2024/09/Delibera-68.2021-atti-Belfiore.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.belfiore.vr.it/?post_type=servizio&p=383",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:30:09.270171Z"
+  },
+  "cambio_residenza": {
+   "service_id": "023007:wp:1073",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.belfiore.vr.it/?post_type=servizio&p=1073",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.belfiore.vr.it/?post_type=servizio&p=1073",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.belfiore.vr.it/?post_type=servizio&p=1073",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:30:19.808287Z"
+  }
+ }
+}

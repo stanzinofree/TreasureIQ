@@ -1,0 +1,159 @@
+{
+ "municipality_istat": "003100",
+ "services": {
+  "accesso_atti": {
+   "service_id": "003100:comweb:richiedere-l-accesso-agli-atti-317-26367-1-c355664f7d919f2d0b2f0e34688e4e51",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.momo.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-26367-1-c355664f7d919f2d0b2f0e34688e4e51",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.momo.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-26367-1-c355664f7d919f2d0b2f0e34688e4e51",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.momo.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-26367-1-c355664f7d919f2d0b2f0e34688e4e51",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.momo.no.it/lang/it/servizi/richiedere-laccesso-agli-atti/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.momo.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-26367-1-c355664f7d919f2d0b2f0e34688e4e51",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:58:35.823778Z"
+  },
+  "cambio_residenza": {
+   "service_id": "003100:comweb:cambio-residenza-305-26365-1-f3c37df68b1c02989dbe1cdffa629f87",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.momo.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-26365-1-f3c37df68b1c02989dbe1cdffa629f87",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.momo.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-26365-1-f3c37df68b1c02989dbe1cdffa629f87",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.momo.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-26365-1-f3c37df68b1c02989dbe1cdffa629f87",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.momo.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-26365-1-f3c37df68b1c02989dbe1cdffa629f87",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:58:37.912793Z"
+  },
+  "carta_identita": {
+   "service_id": "003100:comweb:carta-d-identita-elettronica-cie-788-26355-1-4e01577256c14645173308838378615a",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.momo.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-26355-1-4e01577256c14645173308838378615a",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.momo.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-26355-1-4e01577256c14645173308838378615a",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.momo.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-26355-1-4e01577256c14645173308838378615a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:58:40.055393Z"
+  },
+  "tributi_imu": {
+   "service_id": "003100:comweb:pagare-tributi-imu-600-26456-1-4f42623fee47b881a24078140b77d5b0",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.momo.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-26456-1-4f42623fee47b881a24078140b77d5b0",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.momo.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-26456-1-4f42623fee47b881a24078140b77d5b0",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.momo.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-26456-1-4f42623fee47b881a24078140b77d5b0",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.momo.no.it/lang/it/servizi/pagare-tributi-imu/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.momo.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-26456-1-4f42623fee47b881a24078140b77d5b0",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:58:42.157285Z"
+  },
+  "tributi_tari": {
+   "service_id": "003100:comweb:tassa-rifiuti-tari-954-26447-1-7bf129cfa593f66fc41f83e4e8ec5e7f",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.momo.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-26447-1-7bf129cfa593f66fc41f83e4e8ec5e7f",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.momo.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-26447-1-7bf129cfa593f66fc41f83e4e8ec5e7f",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.momo.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-26447-1-7bf129cfa593f66fc41f83e4e8ec5e7f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:58:44.206644Z"
+  }
+ }
+}

@@ -1,0 +1,159 @@
+{
+ "municipality_istat": "006126",
+ "services": {
+  "accesso_atti": {
+   "service_id": "006126:comweb:richiedere-l-accesso-agli-atti-317-32968-1-a360038940a438e18a9641a3a435b8d0",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.parodiligure.al.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-32968-1-a360038940a438e18a9641a3a435b8d0",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.parodiligure.al.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-32968-1-a360038940a438e18a9641a3a435b8d0",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.parodiligure.al.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-32968-1-a360038940a438e18a9641a3a435b8d0",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://sportello.comune.parodiligure.al.it/su_procedimento/richiedere-laccesso-agli-atti/fattispecie/0/?ambito=sugen&urlSite=https%3a%2f%2fwww.comune.parodiligure.al.it%2fit-it%2fservizi%2fanagrafe-e-stato-civile%2frichiedere-l-accesso-agli-atti-317-32968-1-a360038940a438e18a9641a3a435b8d0",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.parodiligure.al.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-32968-1-a360038940a438e18a9641a3a435b8d0",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:02:06.065440Z"
+  },
+  "cambio_residenza": {
+   "service_id": "006126:comweb:cambio-residenza-305-32966-1-edb9dd4d5cc1f330e5e226936dc90288",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.parodiligure.al.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-32966-1-edb9dd4d5cc1f330e5e226936dc90288",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.parodiligure.al.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-32966-1-edb9dd4d5cc1f330e5e226936dc90288",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.parodiligure.al.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-32966-1-edb9dd4d5cc1f330e5e226936dc90288",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.parodiligure.al.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-32966-1-edb9dd4d5cc1f330e5e226936dc90288",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:02:07.943103Z"
+  },
+  "carta_identita": {
+   "service_id": "006126:comweb:carta-d-identita-elettronica-cie-788-32956-1-ab5bbaefeb9203c0d106de8953121521",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.parodiligure.al.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-32956-1-ab5bbaefeb9203c0d106de8953121521",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.parodiligure.al.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-32956-1-ab5bbaefeb9203c0d106de8953121521",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.parodiligure.al.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-32956-1-ab5bbaefeb9203c0d106de8953121521",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:02:09.993306Z"
+  },
+  "stato_civile": {
+   "service_id": "006126:comweb:certificato-di-nascita-26-32961-1-f0d28f6bc7487019377616d07fe709c1",
+   "title": "Certificato di nascita",
+   "source_url": "https://www.comune.parodiligure.al.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-nascita-26-32961-1-f0d28f6bc7487019377616d07fe709c1",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.parodiligure.al.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-nascita-26-32961-1-f0d28f6bc7487019377616d07fe709c1",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.parodiligure.al.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-nascita-26-32961-1-f0d28f6bc7487019377616d07fe709c1",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/certificati/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.parodiligure.al.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-nascita-26-32961-1-f0d28f6bc7487019377616d07fe709c1",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:02:12.101019Z"
+  },
+  "tributi_tari": {
+   "service_id": "006126:comweb:rimborso-tassa-rifiuti-tari-686-33048-1-8a12a60e0d4a38e8447821edb6611077",
+   "title": "Rimborso Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.parodiligure.al.it/it-it/servizi/tributi-finanze-e-contravvenzioni/rimborso-tassa-rifiuti-tari-686-33048-1-8a12a60e0d4a38e8447821edb6611077",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.parodiligure.al.it/it-it/servizi/tributi-finanze-e-contravvenzioni/rimborso-tassa-rifiuti-tari-686-33048-1-8a12a60e0d4a38e8447821edb6611077",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.parodiligure.al.it/it-it/servizi/tributi-finanze-e-contravvenzioni/rimborso-tassa-rifiuti-tari-686-33048-1-8a12a60e0d4a38e8447821edb6611077",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:02:14.511263Z"
+  }
+ }
+}

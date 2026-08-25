@@ -1,0 +1,159 @@
+{
+ "municipality_istat": "001235",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001235:comweb:richiedere-l-accesso-agli-atti-317-34816-1-9fedf97ee65cbcdfb3b92eefce3357b9",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.samone.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-34816-1-9fedf97ee65cbcdfb3b92eefce3357b9",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.samone.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-34816-1-9fedf97ee65cbcdfb3b92eefce3357b9",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.samone.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-34816-1-9fedf97ee65cbcdfb3b92eefce3357b9",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.samone.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=smn933&IDPr=12233",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.samone.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-34816-1-9fedf97ee65cbcdfb3b92eefce3357b9",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:48:31.194625Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001235:comweb:cambio-residenza-305-34814-1-bbcabf7cb5c661e90835badbee4a775c",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.samone.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-34814-1-bbcabf7cb5c661e90835badbee4a775c",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.samone.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-34814-1-bbcabf7cb5c661e90835badbee4a775c",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.samone.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-34814-1-bbcabf7cb5c661e90835badbee4a775c",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.samone.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-34814-1-bbcabf7cb5c661e90835badbee4a775c",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:48:33.265517Z"
+  },
+  "carta_identita": {
+   "service_id": "001235:comweb:carta-d-identita-elettronica-cie-788-34804-1-9129743e01cd5eee27e8d258afbacad3",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.samone.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-34804-1-9129743e01cd5eee27e8d258afbacad3",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.samone.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-34804-1-9129743e01cd5eee27e8d258afbacad3",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.samone.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-34804-1-9129743e01cd5eee27e8d258afbacad3",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:48:35.563165Z"
+  },
+  "stato_civile": {
+   "service_id": "001235:comweb:certificato-di-stato-civile-6-34804-1-8e1c16938e65593ee9a46e4e7c021049",
+   "title": "Certificato di stato civile",
+   "source_url": "https://www.comune.samone.to.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-stato-civile-6-34804-1-8e1c16938e65593ee9a46e4e7c021049",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.samone.to.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-stato-civile-6-34804-1-8e1c16938e65593ee9a46e4e7c021049",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.samone.to.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-stato-civile-6-34804-1-8e1c16938e65593ee9a46e4e7c021049",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/certificati/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.samone.to.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-stato-civile-6-34804-1-8e1c16938e65593ee9a46e4e7c021049",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:48:38.272302Z"
+  },
+  "tributi_tari": {
+   "service_id": "001235:comweb:pagamento-tassa-rifiuti-tari-659-34896-1-1aee444a32bffa18cf6ef6d8f5cbce5e",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.samone.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-34896-1-1aee444a32bffa18cf6ef6d8f5cbce5e",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.samone.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-34896-1-1aee444a32bffa18cf6ef6d8f5cbce5e",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.samone.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-34896-1-1aee444a32bffa18cf6ef6d8f5cbce5e",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:48:40.593496Z"
+  }
+ }
+}

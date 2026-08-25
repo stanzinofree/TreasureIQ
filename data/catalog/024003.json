@@ -1,0 +1,133 @@
+{
+ "municipality_istat": "024003",
+ "services": {
+  "accesso_atti": {
+   "service_id": "024003:wp:382",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.alonte.vi.it/?post_type=servizio&p=382",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.alonte.vi.it/?post_type=servizio&p=382",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.alonte.vi.it/?post_type=servizio&p=382",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:51:22.145046Z"
+  },
+  "cambio_residenza": {
+   "service_id": "024003:wp:1517",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.alonte.vi.it/?post_type=servizio&p=1517",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.alonte.vi.it/?post_type=servizio&p=1517",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.alonte.vi.it/?post_type=servizio&p=1517",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:51:26.302765Z"
+  },
+  "carta_identita": {
+   "service_id": "024003:wp:1217",
+   "title": "Rilascio Carta di Identità Elettronica",
+   "source_url": "https://www.comune.alonte.vi.it/?post_type=servizio&p=1217",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.alonte.vi.it/?post_type=servizio&p=1217",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.alonte.vi.it/?post_type=servizio&p=1217",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.alonte.vi.it/wp-content/uploads/2024/02/cie_minori_assenso.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.alonte.vi.it/?post_type=servizio&p=1217",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:51:34.346247Z"
+  },
+  "stato_civile": {
+   "service_id": "024003:wp:1683",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.alonte.vi.it/?post_type=servizio&p=1683",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.alonte.vi.it/?post_type=servizio&p=1683",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.alonte.vi.it/?post_type=servizio&p=1683",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:51:40.463086Z"
+  },
+  "tributi_imu": {
+   "service_id": "024003:wp:1516",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.alonte.vi.it/?post_type=servizio&p=1516",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.alonte.vi.it/?post_type=servizio&p=1516",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.alonte.vi.it/?post_type=servizio&p=1516",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:51:47.450816Z"
+  }
+ }
+}

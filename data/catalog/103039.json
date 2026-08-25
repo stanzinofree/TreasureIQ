@@ -1,0 +1,133 @@
+{
+ "municipality_istat": "103039",
+ "services": {
+  "accesso_atti": {
+   "service_id": "103039:comweb:richiedere-l-accesso-agli-atti-317-44452-1-7764d7c8951d53f047777a19d2b88664",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.macugnaga.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-44452-1-7764d7c8951d53f047777a19d2b88664",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.macugnaga.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-44452-1-7764d7c8951d53f047777a19d2b88664",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.macugnaga.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-44452-1-7764d7c8951d53f047777a19d2b88664",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:02:45.066797Z"
+  },
+  "cambio_residenza": {
+   "service_id": "103039:comweb:cambio-residenza-305-44450-1-7c2c31f55108a63141741503e3a09e7d",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.macugnaga.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-44450-1-7c2c31f55108a63141741503e3a09e7d",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.macugnaga.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-44450-1-7c2c31f55108a63141741503e3a09e7d",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.macugnaga.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-44450-1-7c2c31f55108a63141741503e3a09e7d",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.macugnaga.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-44450-1-7c2c31f55108a63141741503e3a09e7d",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:02:47.149926Z"
+  },
+  "carta_identita": {
+   "service_id": "103039:comweb:carta-d-identita-elettronica-cie-788-44440-1-4d54a2255506daeffc0158d4af8465ef",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.macugnaga.vb.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-44440-1-4d54a2255506daeffc0158d4af8465ef",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.macugnaga.vb.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-44440-1-4d54a2255506daeffc0158d4af8465ef",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.macugnaga.vb.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-44440-1-4d54a2255506daeffc0158d4af8465ef",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:02:49.252839Z"
+  },
+  "stato_civile": {
+   "service_id": "103039:comweb:richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-44440-1-15a1f3ec84cfb2814805ff5eb901151a",
+   "title": "Richiesta di certificati/attestazioni/estratti di stato civile",
+   "source_url": "https://www.comune.macugnaga.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-44440-1-15a1f3ec84cfb2814805ff5eb901151a",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.macugnaga.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-44440-1-15a1f3ec84cfb2814805ff5eb901151a",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.macugnaga.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-44440-1-15a1f3ec84cfb2814805ff5eb901151a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:02:51.392786Z"
+  },
+  "tributi_imu": {
+   "service_id": "103039:comweb:calcolo-imu-355-44541-1-4743075725e59f5d1ec8aa59a59e7ad6",
+   "title": "Calcolo IMU",
+   "source_url": "https://www.comune.macugnaga.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-44541-1-4743075725e59f5d1ec8aa59a59e7ad6",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.macugnaga.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-44541-1-4743075725e59f5d1ec8aa59a59e7ad6",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.macugnaga.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-44541-1-4743075725e59f5d1ec8aa59a59e7ad6",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:02:53.440930Z"
+  }
+ }
+}

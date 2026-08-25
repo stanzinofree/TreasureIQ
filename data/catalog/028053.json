@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "028053",
+ "services": {
+  "accesso_atti": {
+   "service_id": "028053:wp:309",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.merlara.pd.it/?post_type=servizio&p=309",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.merlara.pd.it/?post_type=servizio&p=309",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.merlara.pd.it/?post_type=servizio&p=309",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:08:58.179395Z"
+  },
+  "cambio_residenza": {
+   "service_id": "028053:wp:1287",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.merlara.pd.it/?post_type=servizio&p=1287",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.merlara.pd.it/?post_type=servizio&p=1287",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.merlara.pd.it/?post_type=servizio&p=1287",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:09:16.014120Z"
+  },
+  "stato_civile": {
+   "service_id": "028053:wp:1301",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.merlara.pd.it/?post_type=servizio&p=1301",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.merlara.pd.it/?post_type=servizio&p=1301",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.merlara.pd.it/?post_type=servizio&p=1301",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:09:34.083222Z"
+  },
+  "tributi_imu": {
+   "service_id": "028053:wp:1286",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.merlara.pd.it/?post_type=servizio&p=1286",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.merlara.pd.it/?post_type=servizio&p=1286",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.merlara.pd.it/?post_type=servizio&p=1286",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:10:00.882045Z"
+  }
+ }
+}

@@ -1,0 +1,41 @@
+{
+ "municipality_istat": "101017",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "101017:wp:505",
+   "title": "Cambio di residenza tramite Portale Nazionale – ANPR",
+   "source_url": "https://www.comune.petiliapolicastro.kr.it/?post_type=servizio&p=505",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.petiliapolicastro.kr.it/?post_type=servizio&p=505",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.petiliapolicastro.kr.it/?post_type=servizio&p=505",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.petiliapolicastro.kr.it/wp-content/uploads/2025/06/Codici-univoci.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.petiliapolicastro.kr.it/?post_type=servizio&p=505",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:58:53.395032Z"
+  }
+ }
+}

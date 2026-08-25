@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "019009",
+ "services": {
+  "accesso_atti": {
+   "service_id": "019009:wp:1085",
+   "title": "Accesso agli atti",
+   "source_url": "https://www.comune.calvatone.cr.it/servizio/accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.calvatone.cr.it/servizio/accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.calvatone.cr.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:27:29.243305Z"
+  },
+  "cambio_residenza": {
+   "service_id": "019009:wp:1292",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.calvatone.cr.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.calvatone.cr.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.calvatone.cr.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:27:32.578896Z"
+  },
+  "carta_identita": {
+   "service_id": "019009:wp:1295",
+   "title": "Carta d’Identità",
+   "source_url": "https://www.comune.calvatone.cr.it/servizio/carta-didentita/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.calvatone.cr.it/servizio/carta-didentita/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.calvatone.cr.it/servizio/carta-didentita/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:27:34.539283Z"
+  },
+  "stato_civile": {
+   "service_id": "019009:wp:1293",
+   "title": "Certificati di anagrafe, stato civile, elettorale",
+   "source_url": "https://www.comune.calvatone.cr.it/servizio/certificati-di-anagrafe-stato-civile-elettorale/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.calvatone.cr.it/servizio/certificati-di-anagrafe-stato-civile-elettorale/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.calvatone.cr.it/servizio/certificati-di-anagrafe-stato-civile-elettorale/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:27:38.118240Z"
+  }
+ }
+}

@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "001201",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001201:comweb:richiedere-l-accesso-agli-atti-317-24783-1-70fbd3bd57796aa77bb307dc1b8f7d6f",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.pragelato.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-24783-1-70fbd3bd57796aa77bb307dc1b8f7d6f",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pragelato.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-24783-1-70fbd3bd57796aa77bb307dc1b8f7d6f",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pragelato.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-24783-1-70fbd3bd57796aa77bb307dc1b8f7d6f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizidigitali.comune.pragelato.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=prglt1223&IDPr=13433",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.pragelato.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-24783-1-70fbd3bd57796aa77bb307dc1b8f7d6f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:46:20.984450Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001201:comweb:cambio-residenza-305-24781-1-34dd0e57fb035612865aa154f3581d21",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.pragelato.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-24781-1-34dd0e57fb035612865aa154f3581d21",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pragelato.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-24781-1-34dd0e57fb035612865aa154f3581d21",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pragelato.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-24781-1-34dd0e57fb035612865aa154f3581d21",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.pragelato.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-24781-1-34dd0e57fb035612865aa154f3581d21",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:46:23.807303Z"
+  },
+  "tributi_tari": {
+   "service_id": "001201:comweb:pagamento-tassa-rifiuti-tari-659-24863-1-2aeaf5a30e89f4cd60c82f8a81a49e6e",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.pragelato.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-24863-1-2aeaf5a30e89f4cd60c82f8a81a49e6e",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pragelato.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-24863-1-2aeaf5a30e89f4cd60c82f8a81a49e6e",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pragelato.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-24863-1-2aeaf5a30e89f4cd60c82f8a81a49e6e",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:46:26.552843Z"
+  }
+ }
+}

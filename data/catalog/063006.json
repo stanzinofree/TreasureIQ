@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "063006",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "063006:wp:2333",
+   "title": "Cambio di residenza o di indirizzo",
+   "source_url": "https://comune.bacoli.na.it/servizio/cambio-di-residenza-o-di-indirizzo/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.bacoli.na.it/servizio/cambio-di-residenza-o-di-indirizzo/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.bacoli.na.it/servizio/cambio-di-residenza-o-di-indirizzo/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:13:30.591160Z"
+  },
+  "carta_identita": {
+   "service_id": "063006:wp:2357",
+   "title": "Rilascio carta d’identità elettronica",
+   "source_url": "https://comune.bacoli.na.it/servizio/rilascio-carta-didentita-elettronica/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.bacoli.na.it/servizio/rilascio-carta-didentita-elettronica/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.bacoli.na.it/servizio/rilascio-carta-didentita-elettronica/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:13:35.440959Z"
+  }
+ }
+}

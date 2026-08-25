@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "081010",
+ "services": {
+  "accesso_atti": {
+   "service_id": "081010:wp:1348",
+   "title": "Richiesta di accesso agli atti",
+   "source_url": "https://www.comune.gibellina.tp.it/servizio/richiesta-di-accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gibellina.tp.it/servizio/richiesta-di-accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gibellina.tp.it/servizio/richiesta-di-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:41:18.502525Z"
+  },
+  "tributi_imu": {
+   "service_id": "081010:wp:1351",
+   "title": "Pagamento dei tributi IMU",
+   "source_url": "https://www.comune.gibellina.tp.it/servizio/pagamento-dei-tributi-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gibellina.tp.it/servizio/pagamento-dei-tributi-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gibellina.tp.it/servizio/pagamento-dei-tributi-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:41:21.762004Z"
+  }
+ }
+}

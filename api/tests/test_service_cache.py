@@ -90,7 +90,7 @@ def test_salva_poi_carica_fresco():
 def test_carica_fonte_o_chiave_assente():
     assert service_cache.carica("058003", ServiceKey.CARTA_IDENTITA, policy=_POLICY) is None
     service_cache.salva("058003", ServiceKey.CARTA_IDENTITA, _reference(), _CONN)
-    assert service_cache.carica("058003", ServiceKey.TRIBUTI, policy=_POLICY) is None
+    assert service_cache.carica("058003", ServiceKey.TRIBUTI_IMU, policy=_POLICY) is None
 
 
 # 3 — entry older than max_age_seconds → None (stale → live)
@@ -178,9 +178,9 @@ def test_no_clobber_altre_chiavi():
     ref_cie = _reference("svc-cie")
     ref_tributi = _reference("svc-tributi")
     service_cache.salva("058003", ServiceKey.CARTA_IDENTITA, ref_cie, _CONN)
-    service_cache.salva("058003", ServiceKey.TRIBUTI, ref_tributi, _CONN)
+    service_cache.salva("058003", ServiceKey.TRIBUTI_IMU, ref_tributi, _CONN)
     cie = service_cache.carica("058003", ServiceKey.CARTA_IDENTITA, policy=_POLICY)
-    tributi = service_cache.carica("058003", ServiceKey.TRIBUTI, policy=_POLICY)
+    tributi = service_cache.carica("058003", ServiceKey.TRIBUTI_IMU, policy=_POLICY)
     assert cie is not None and cie.reference == ref_cie
     assert tributi is not None and tributi.reference == ref_tributi
 

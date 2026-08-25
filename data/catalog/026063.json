@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "026063",
+ "services": {
+  "accesso_atti": {
+   "service_id": "026063:wp:3065",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.preganziol.tv.it/?post_type=servizio&p=3065",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.preganziol.tv.it/?post_type=servizio&p=3065",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.preganziol.tv.it/?post_type=servizio&p=3065",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:33:18.744788Z"
+  },
+  "cambio_residenza": {
+   "service_id": "026063:wp:229",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.preganziol.tv.it/?post_type=servizio&p=229",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.preganziol.tv.it/?post_type=servizio&p=229",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.preganziol.tv.it/?post_type=servizio&p=229",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:33:24.194649Z"
+  },
+  "stato_civile": {
+   "service_id": "026063:wp:232",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.preganziol.tv.it/?post_type=servizio&p=232",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.preganziol.tv.it/?post_type=servizio&p=232",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.preganziol.tv.it/?post_type=servizio&p=232",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:33:39.382224Z"
+  },
+  "tributi_imu": {
+   "service_id": "026063:wp:933",
+   "title": "Calcolo IMU Online",
+   "source_url": "https://www.comune.preganziol.tv.it/?post_type=servizio&p=933",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.preganziol.tv.it/?post_type=servizio&p=933",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.preganziol.tv.it/?post_type=servizio&p=933",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:33:45.728346Z"
+  }
+ }
+}

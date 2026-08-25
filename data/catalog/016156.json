@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "016156",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "016156:wp:2165",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.palazzago.bg.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.palazzago.bg.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.palazzago.bg.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:16:31.769248Z"
+  },
+  "carta_identita": {
+   "service_id": "016156:wp:621",
+   "title": "Carta d’identità elettronica",
+   "source_url": "https://comune.palazzago.bg.it/servizio/carta-didentita-elettronica/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.palazzago.bg.it/servizio/carta-didentita-elettronica/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.palazzago.bg.it/servizio/carta-didentita-elettronica/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:16:35.556500Z"
+  },
+  "tributi_imu": {
+   "service_id": "016156:wp:2120",
+   "title": "Pagamento dell’imposta municipale propria (IMU)",
+   "source_url": "https://comune.palazzago.bg.it/servizio/pagamento-dellimposta-municipale-propria-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.palazzago.bg.it/servizio/pagamento-dellimposta-municipale-propria-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.palazzago.bg.it/servizio/pagamento-dellimposta-municipale-propria-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:16:38.680199Z"
+  }
+ }
+}

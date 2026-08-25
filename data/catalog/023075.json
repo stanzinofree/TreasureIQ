@@ -1,0 +1,110 @@
+{
+ "municipality_istat": "023075",
+ "services": {
+  "accesso_atti": {
+   "service_id": "023075:wp:335",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.sanpietrodimorubio.vr.it/?post_type=servizio&p=335",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanpietrodimorubio.vr.it/?post_type=servizio&p=335",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanpietrodimorubio.vr.it/?post_type=servizio&p=335",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.sanpietrodimorubio.vr.it/wp-content/uploads/2024/03/Delega.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanpietrodimorubio.vr.it/?post_type=servizio&p=335",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:46:19.123881Z"
+  },
+  "cambio_residenza": {
+   "service_id": "023075:wp:822",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.sanpietrodimorubio.vr.it/?post_type=servizio&p=822",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanpietrodimorubio.vr.it/?post_type=servizio&p=822",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanpietrodimorubio.vr.it/?post_type=servizio&p=822",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:46:29.365277Z"
+  },
+  "stato_civile": {
+   "service_id": "023075:wp:2256",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.sanpietrodimorubio.vr.it/?post_type=servizio&p=2256",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanpietrodimorubio.vr.it/?post_type=servizio&p=2256",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanpietrodimorubio.vr.it/?post_type=servizio&p=2256",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:46:37.030547Z"
+  },
+  "tributi_imu": {
+   "service_id": "023075:wp:1269",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.sanpietrodimorubio.vr.it/?post_type=servizio&p=1269",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanpietrodimorubio.vr.it/?post_type=servizio&p=1269",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanpietrodimorubio.vr.it/?post_type=servizio&p=1269",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:46:55.322566Z"
+  }
+ }
+}

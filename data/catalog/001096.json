@@ -1,0 +1,182 @@
+{
+ "municipality_istat": "001096",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001096:comweb:richiedere-l-accesso-agli-atti-317-29007-1-88910127a4dd6813dd96179c95912db5",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.cuceglio.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-29007-1-88910127a4dd6813dd96179c95912db5",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cuceglio.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-29007-1-88910127a4dd6813dd96179c95912db5",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cuceglio.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-29007-1-88910127a4dd6813dd96179c95912db5",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.cuceglio.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=ccgl752&IDPr=10870",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.cuceglio.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-29007-1-88910127a4dd6813dd96179c95912db5",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:42:32.835296Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001096:comweb:cambio-residenza-305-29005-1-d388ad174800c73983e48c05e72fc0db",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.cuceglio.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-29005-1-d388ad174800c73983e48c05e72fc0db",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cuceglio.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-29005-1-d388ad174800c73983e48c05e72fc0db",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cuceglio.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-29005-1-d388ad174800c73983e48c05e72fc0db",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.cuceglio.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-29005-1-d388ad174800c73983e48c05e72fc0db",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:42:34.828777Z"
+  },
+  "carta_identita": {
+   "service_id": "001096:comweb:carta-d-identita-elettronica-cie-788-28995-1-ebc5f151471ccca1190c10059f718d63",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.cuceglio.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-28995-1-ebc5f151471ccca1190c10059f718d63",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cuceglio.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-28995-1-ebc5f151471ccca1190c10059f718d63",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cuceglio.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-28995-1-ebc5f151471ccca1190c10059f718d63",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:42:36.815428Z"
+  },
+  "stato_civile": {
+   "service_id": "001096:comweb:certificato-di-nascita-26-29000-1-1c917143601bfd41789155710b2fdc66",
+   "title": "Certificato di nascita",
+   "source_url": "https://www.comune.cuceglio.to.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-nascita-26-29000-1-1c917143601bfd41789155710b2fdc66",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cuceglio.to.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-nascita-26-29000-1-1c917143601bfd41789155710b2fdc66",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cuceglio.to.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-nascita-26-29000-1-1c917143601bfd41789155710b2fdc66",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.cuceglio.to.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-nascita-26-29000-1-1c917143601bfd41789155710b2fdc66",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:42:39.161215Z"
+  },
+  "tributi_imu": {
+   "service_id": "001096:comweb:imposta-municipale-propria-imu-953-29096-1-a4550088520e7037a69563e1abd73db2",
+   "title": "Imposta Municipale Propria (IMU)",
+   "source_url": "https://www.comune.cuceglio.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-29096-1-a4550088520e7037a69563e1abd73db2",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cuceglio.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-29096-1-a4550088520e7037a69563e1abd73db2",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cuceglio.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-29096-1-a4550088520e7037a69563e1abd73db2",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:42:40.946933Z"
+  },
+  "tributi_tari": {
+   "service_id": "001096:comweb:tassa-rifiuti-tari-954-29087-1-b4b0d777c47ebfba84ebb145a5f3b311",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.cuceglio.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-29087-1-b4b0d777c47ebfba84ebb145a5f3b311",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cuceglio.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-29087-1-b4b0d777c47ebfba84ebb145a5f3b311",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cuceglio.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-29087-1-b4b0d777c47ebfba84ebb145a5f3b311",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:42:42.865525Z"
+  }
+ }
+}

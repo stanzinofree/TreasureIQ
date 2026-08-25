@@ -1,0 +1,120 @@
+{
+ "municipality_istat": "016198",
+ "services": {
+  "accesso_atti": {
+   "service_id": "016198:wp:7449",
+   "title": "Richiesta di accesso agli atti",
+   "source_url": "https://comune.seriate.bg.it/servizio/richiesta-di-accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.seriate.bg.it/servizio/richiesta-di-accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.seriate.bg.it/servizio/richiesta-di-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:16:41.836412Z"
+  },
+  "carta_identita": {
+   "service_id": "016198:wp:1460",
+   "title": "Carta di Identità Elettronica",
+   "source_url": "https://comune.seriate.bg.it/servizio/carta-di-identita-elettronica/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.seriate.bg.it/servizio/carta-di-identita-elettronica/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.seriate.bg.it/servizio/carta-di-identita-elettronica/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:16:46.015843Z"
+  },
+  "stato_civile": {
+   "service_id": "016198:wp:7702",
+   "title": "Richiesta copia integrale atti di stato civile",
+   "source_url": "https://comune.seriate.bg.it/servizio/richiesta-copia-integrale-atti-di-stato-civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.seriate.bg.it/servizio/richiesta-copia-integrale-atti-di-stato-civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.seriate.bg.it/servizio/richiesta-copia-integrale-atti-di-stato-civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:16:50.905469Z"
+  },
+  "tributi_imu": {
+   "service_id": "016198:wp:8963",
+   "title": "Calcolo IMU",
+   "source_url": "https://comune.seriate.bg.it/servizio/calcolo-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.seriate.bg.it/servizio/calcolo-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.seriate.bg.it/servizio/calcolo-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:16:55.104114Z"
+  },
+  "tributi_tari": {
+   "service_id": "016198:wp:12489",
+   "title": "TARIP – Tassa rifiuti puntuale",
+   "source_url": "https://comune.seriate.bg.it/servizio/tarip-tassa-rifiuti-puntuale/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.seriate.bg.it/servizio/tarip-tassa-rifiuti-puntuale/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.seriate.bg.it/servizio/tarip-tassa-rifiuti-puntuale/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:16:58.018152Z"
+  }
+ }
+}

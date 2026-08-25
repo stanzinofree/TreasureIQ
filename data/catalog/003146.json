@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "003146",
+ "services": {
+  "stato_civile": {
+   "service_id": "003146:comweb:richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-48928-1-d8b8578cc1f00e065dd031fd2bb3ac3d",
+   "title": "Richiesta di certificati/attestazioni/estratti di stato civile",
+   "source_url": "https://www.comune.tornaco.no.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-48928-1-d8b8578cc1f00e065dd031fd2bb3ac3d",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.tornaco.no.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-48928-1-d8b8578cc1f00e065dd031fd2bb3ac3d",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.tornaco.no.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-48928-1-d8b8578cc1f00e065dd031fd2bb3ac3d",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:59:41.081239Z"
+  },
+  "tributi_tari": {
+   "service_id": "003146:comweb:pagamento-tassa-rifiuti-tari-659-49020-1-c70931f3a7d95fd44a13da82bfe9a287",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.tornaco.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-49020-1-c70931f3a7d95fd44a13da82bfe9a287",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.tornaco.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-49020-1-c70931f3a7d95fd44a13da82bfe9a287",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.tornaco.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-49020-1-c70931f3a7d95fd44a13da82bfe9a287",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:59:43.973492Z"
+  }
+ }
+}

@@ -1,0 +1,120 @@
+{
+ "municipality_istat": "030039",
+ "services": {
+  "accesso_atti": {
+   "service_id": "030039:wp:313",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.flaibano.ud.it/?post_type=servizio&p=313",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.flaibano.ud.it/?post_type=servizio&p=313",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.flaibano.ud.it/?post_type=servizio&p=313",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:39:46.654026Z"
+  },
+  "cambio_residenza": {
+   "service_id": "030039:wp:727",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.flaibano.ud.it/?post_type=servizio&p=727",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.flaibano.ud.it/?post_type=servizio&p=727",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.flaibano.ud.it/?post_type=servizio&p=727",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:39:51.866140Z"
+  },
+  "carta_identita": {
+   "service_id": "030039:wp:314",
+   "title": "Rilascio Carta di Identità Elettronica",
+   "source_url": "https://www.comune.flaibano.ud.it/?post_type=servizio&p=314",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.flaibano.ud.it/?post_type=servizio&p=314",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.flaibano.ud.it/?post_type=servizio&p=314",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:40:03.651791Z"
+  },
+  "stato_civile": {
+   "service_id": "030039:wp:730",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.flaibano.ud.it/?post_type=servizio&p=730",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.flaibano.ud.it/?post_type=servizio&p=730",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.flaibano.ud.it/?post_type=servizio&p=730",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:40:08.984074Z"
+  },
+  "tributi_imu": {
+   "service_id": "030039:wp:802",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.flaibano.ud.it/?post_type=servizio&p=802",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.flaibano.ud.it/?post_type=servizio&p=802",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.flaibano.ud.it/?post_type=servizio&p=802",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:40:13.939820Z"
+  }
+ }
+}

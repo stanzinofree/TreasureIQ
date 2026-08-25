@@ -1,0 +1,41 @@
+{
+ "municipality_istat": "087031",
+ "services": {
+  "stato_civile": {
+   "service_id": "087031:wp:1319",
+   "title": "Rettifica di dati anagrafici e di stato civile",
+   "source_url": "https://www.comune.nicolosi.ct.it/servizio/chiedere-la-rettifica-di-dati-anagrafici-e-di-stato-civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.nicolosi.ct.it/servizio/chiedere-la-rettifica-di-dati-anagrafici-e-di-stato-civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.nicolosi.ct.it/servizio/chiedere-la-rettifica-di-dati-anagrafici-e-di-stato-civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/servizi-anagrafici/rettifica-dati/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.nicolosi.ct.it/servizio/chiedere-la-rettifica-di-dati-anagrafici-e-di-stato-civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:49:21.516441Z"
+  }
+ }
+}

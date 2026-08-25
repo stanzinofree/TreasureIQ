@@ -1,0 +1,113 @@
+{
+ "municipality_istat": "029012",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "029012:wp:1689",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.castelmassa.ro.it/?post_type=servizio&p=1689",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castelmassa.ro.it/?post_type=servizio&p=1689",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castelmassa.ro.it/?post_type=servizio&p=1689",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.castelmassa.ro.it/wp-content/uploads/2024/03/Carta-dei-servizi-sociali.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castelmassa.ro.it/?post_type=servizio&p=1689",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:29:48.681042Z"
+  },
+  "stato_civile": {
+   "service_id": "029012:wp:1695",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.castelmassa.ro.it/?post_type=servizio&p=1695",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castelmassa.ro.it/?post_type=servizio&p=1695",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castelmassa.ro.it/?post_type=servizio&p=1695",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.castelmassa.ro.it/wp-content/uploads/2024/03/Carta-dei-servizi-sociali.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castelmassa.ro.it/?post_type=servizio&p=1695",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:29:54.128169Z"
+  },
+  "tributi_imu": {
+   "service_id": "029012:wp:1687",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.castelmassa.ro.it/?post_type=servizio&p=1687",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castelmassa.ro.it/?post_type=servizio&p=1687",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castelmassa.ro.it/?post_type=servizio&p=1687",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.castelmassa.ro.it/wp-content/uploads/2024/03/Carta-dei-servizi-sociali.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castelmassa.ro.it/?post_type=servizio&p=1687",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:29:59.450600Z"
+  }
+ }
+}

@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "073016",
+ "services": {
+  "carta_identita": {
+   "service_id": "073016:wp:1218",
+   "title": "Carta d’identità elettronica – CIE",
+   "source_url": "https://www.comune.monteiasi.ta.it/servizio/carta-didentita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.monteiasi.ta.it/servizio/carta-didentita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.monteiasi.ta.it/servizio/carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:26:40.807639Z"
+  },
+  "tributi_tari": {
+   "service_id": "073016:wp:1221",
+   "title": "Consultazione TARI",
+   "source_url": "https://www.comune.monteiasi.ta.it/servizio/consultazione-tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.monteiasi.ta.it/servizio/consultazione-tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.monteiasi.ta.it/servizio/consultazione-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:26:42.623421Z"
+  }
+ }
+}

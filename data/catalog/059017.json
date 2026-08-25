@@ -1,0 +1,64 @@
+{
+ "municipality_istat": "059017",
+ "services": {
+  "accesso_atti": {
+   "service_id": "059017:wp:4366",
+   "title": "Richiesta di accesso agli atti",
+   "source_url": "https://comune.pontinia.lt.it/servizio/richiesta-di-accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.pontinia.lt.it/servizio/richiesta-di-accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.pontinia.lt.it/servizio/richiesta-di-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "http://comune.pontinia.lt.it/wp-content/uploads/2023/06/MODULO-Richiesta-accesso-agli-atti-con-informativa.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.pontinia.lt.it/servizio/richiesta-di-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:04:11.579105Z"
+  },
+  "carta_identita": {
+   "service_id": "059017:wp:697",
+   "title": "Carta d’Identità Elettronica (CIE)",
+   "source_url": "https://comune.pontinia.lt.it/servizio/carta-didentita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.pontinia.lt.it/servizio/carta-didentita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.pontinia.lt.it/servizio/carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:04:15.211797Z"
+  }
+ }
+}

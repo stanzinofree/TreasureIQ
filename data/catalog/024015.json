@@ -1,0 +1,133 @@
+{
+ "municipality_istat": "024015",
+ "services": {
+  "accesso_atti": {
+   "service_id": "024015:wp:495",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.brendola.vi.it/?post_type=servizio&p=495",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.brendola.vi.it/?post_type=servizio&p=495",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.brendola.vi.it/?post_type=servizio&p=495",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.brendola.vi.it/wp-content/uploads/2024/08/D.G.-55.2012-Brendola.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.brendola.vi.it/?post_type=servizio&p=495",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:53:12.567134Z"
+  },
+  "cambio_residenza": {
+   "service_id": "024015:wp:1942",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.brendola.vi.it/?post_type=servizio&p=1942",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.brendola.vi.it/?post_type=servizio&p=1942",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.brendola.vi.it/?post_type=servizio&p=1942",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:53:19.703777Z"
+  },
+  "carta_identita": {
+   "service_id": "024015:wp:1376",
+   "title": "Rilascio Carta di Identità Elettronica",
+   "source_url": "https://www.comune.brendola.vi.it/?post_type=servizio&p=1376",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.brendola.vi.it/?post_type=servizio&p=1376",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.brendola.vi.it/?post_type=servizio&p=1376",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:53:26.014145Z"
+  },
+  "stato_civile": {
+   "service_id": "024015:wp:1972",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.brendola.vi.it/?post_type=servizio&p=1972",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.brendola.vi.it/?post_type=servizio&p=1972",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.brendola.vi.it/?post_type=servizio&p=1972",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:53:33.243817Z"
+  },
+  "tributi_imu": {
+   "service_id": "024015:wp:1941",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.brendola.vi.it/?post_type=servizio&p=1941",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.brendola.vi.it/?post_type=servizio&p=1941",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.brendola.vi.it/?post_type=servizio&p=1941",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:53:41.343862Z"
+  }
+ }
+}

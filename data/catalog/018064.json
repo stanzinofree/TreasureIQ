@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "018064",
+ "services": {
+  "accesso_atti": {
+   "service_id": "018064:comweb:richiedere-l-accesso-agli-atti-317-14882-1-11edf4c0a38cfb75bfbab41793b4b529",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.fortunago.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-14882-1-11edf4c0a38cfb75bfbab41793b4b529",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.fortunago.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-14882-1-11edf4c0a38cfb75bfbab41793b4b529",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.fortunago.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-14882-1-11edf4c0a38cfb75bfbab41793b4b529",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:20:40.422209Z"
+  },
+  "tributi_imu": {
+   "service_id": "018064:comweb:pagare-tributi-imu-600-14972-1-677bf40f4d4e29f3a775aa4dddd59809",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.fortunago.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-14972-1-677bf40f4d4e29f3a775aa4dddd59809",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.fortunago.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-14972-1-677bf40f4d4e29f3a775aa4dddd59809",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.fortunago.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-14972-1-677bf40f4d4e29f3a775aa4dddd59809",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:20:42.954781Z"
+  }
+ }
+}

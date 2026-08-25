@@ -1,0 +1,64 @@
+{
+ "municipality_istat": "086005",
+ "services": {
+  "accesso_atti": {
+   "service_id": "086005:comweb:richiedere-l-accesso-agli-atti-317-23595-1-a7cd939c00506c26b7d9187289d9c7e4",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.calascibetta.en.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-23595-1-a7cd939c00506c26b7d9187289d9c7e4",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.calascibetta.en.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-23595-1-a7cd939c00506c26b7d9187289d9c7e4",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.calascibetta.en.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-23595-1-a7cd939c00506c26b7d9187289d9c7e4",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:48:19.788483Z"
+  },
+  "cambio_residenza": {
+   "service_id": "086005:comweb:cambio-residenza-305-23593-1-e123cf9a21122da5bc2654b4df7e9c10",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.calascibetta.en.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-23593-1-e123cf9a21122da5bc2654b4df7e9c10",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.calascibetta.en.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-23593-1-e123cf9a21122da5bc2654b4df7e9c10",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.calascibetta.en.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-23593-1-e123cf9a21122da5bc2654b4df7e9c10",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.calascibetta.en.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-23593-1-e123cf9a21122da5bc2654b4df7e9c10",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:48:21.917805Z"
+  }
+ }
+}

@@ -1,0 +1,110 @@
+{
+ "municipality_istat": "007012",
+ "services": {
+  "accesso_atti": {
+   "service_id": "007012:comweb:richiedere-l-accesso-agli-atti-317-29799-1-04b2d9cc4236a7ea67ac5b2a00a23ff7",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.brusson.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-29799-1-04b2d9cc4236a7ea67ac5b2a00a23ff7",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.brusson.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-29799-1-04b2d9cc4236a7ea67ac5b2a00a23ff7",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.brusson.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-29799-1-04b2d9cc4236a7ea67ac5b2a00a23ff7",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:04:26.272536Z"
+  },
+  "cambio_residenza": {
+   "service_id": "007012:comweb:cambio-residenza-305-29797-1-7c0d5040f0641170d87a6c1b90c5e46f",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.brusson.ao.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-29797-1-7c0d5040f0641170d87a6c1b90c5e46f",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.brusson.ao.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-29797-1-7c0d5040f0641170d87a6c1b90c5e46f",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.brusson.ao.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-29797-1-7c0d5040f0641170d87a6c1b90c5e46f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/servizi-al-cittadino/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.brusson.ao.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-29797-1-7c0d5040f0641170d87a6c1b90c5e46f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:04:28.135045Z"
+  },
+  "tributi_imu": {
+   "service_id": "007012:comweb:pagare-tributi-imu-600-29888-1-8672ef29e74b73c34ee82f64926f7a09",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.brusson.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-29888-1-8672ef29e74b73c34ee82f64926f7a09",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.brusson.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-29888-1-8672ef29e74b73c34ee82f64926f7a09",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.brusson.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-29888-1-8672ef29e74b73c34ee82f64926f7a09",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:04:30.234008Z"
+  },
+  "tributi_tari": {
+   "service_id": "007012:comweb:pagamento-tassa-rifiuti-tari-659-29879-1-aa92d4e1869837f193bc7e73d02a4e8e",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.brusson.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-29879-1-aa92d4e1869837f193bc7e73d02a4e8e",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.brusson.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-29879-1-aa92d4e1869837f193bc7e73d02a4e8e",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.brusson.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-29879-1-aa92d4e1869837f193bc7e73d02a4e8e",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:04:32.378561Z"
+  }
+ }
+}

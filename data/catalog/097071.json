@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "097071",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "097071:wp:28849",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.robbiate.lc.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.robbiate.lc.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.robbiate.lc.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:56:58.011026Z"
+  },
+  "tributi_imu": {
+   "service_id": "097071:wp:29737",
+   "title": "Calcolo IMU",
+   "source_url": "https://comune.robbiate.lc.it/servizio/calcolo-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.robbiate.lc.it/servizio/calcolo-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.robbiate.lc.it/servizio/calcolo-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:57:01.816539Z"
+  }
+ }
+}

@@ -1,0 +1,87 @@
+{
+ "municipality_istat": "020010",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "020010:comweb:cambio-residenza-305-57832-1-c04c818b545c492d110bd454f078e737",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.casalmoro.mn.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-57832-1-c04c818b545c492d110bd454f078e737",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.casalmoro.mn.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-57832-1-c04c818b545c492d110bd454f078e737",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.casalmoro.mn.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-57832-1-c04c818b545c492d110bd454f078e737",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.casalmoro.mn.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-57832-1-c04c818b545c492d110bd454f078e737",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:28:49.138586Z"
+  },
+  "carta_identita": {
+   "service_id": "020010:comweb:carta-d-identita-elettronica-cie-788-57822-1-ae9cb1c9d64bc9e47058702b3dc93723",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.casalmoro.mn.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-57822-1-ae9cb1c9d64bc9e47058702b3dc93723",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.casalmoro.mn.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-57822-1-ae9cb1c9d64bc9e47058702b3dc93723",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.casalmoro.mn.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-57822-1-ae9cb1c9d64bc9e47058702b3dc93723",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:28:52.581417Z"
+  },
+  "tributi_imu": {
+   "service_id": "020010:comweb:calcolo-imu-355-57923-1-21405c1f44e514a183fd35f5d699f4e0",
+   "title": "Calcolo IMU",
+   "source_url": "https://www.comune.casalmoro.mn.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-57923-1-21405c1f44e514a183fd35f5d699f4e0",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.casalmoro.mn.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-57923-1-21405c1f44e514a183fd35f5d699f4e0",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.casalmoro.mn.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-57923-1-21405c1f44e514a183fd35f5d699f4e0",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:28:55.495591Z"
+  }
+ }
+}

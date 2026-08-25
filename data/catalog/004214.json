@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "004214",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "004214:comweb:cambio-residenza-305-61822-1-95dab3b204376e7af919be21a9e4e8f5",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.santo-stefano-roero.cn.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-61822-1-95dab3b204376e7af919be21a9e4e8f5",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.santo-stefano-roero.cn.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-61822-1-95dab3b204376e7af919be21a9e4e8f5",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.santo-stefano-roero.cn.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-61822-1-95dab3b204376e7af919be21a9e4e8f5",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:00:48.572699Z"
+  },
+  "carta_identita": {
+   "service_id": "004214:comweb:carta-d-identita-1-61812-1-cb80bbe105d096ceeb2523f597ed8776",
+   "title": "Carta d'Identità",
+   "source_url": "https://www.comune.santo-stefano-roero.cn.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-61812-1-cb80bbe105d096ceeb2523f597ed8776",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.santo-stefano-roero.cn.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-61812-1-cb80bbe105d096ceeb2523f597ed8776",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.santo-stefano-roero.cn.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-61812-1-cb80bbe105d096ceeb2523f597ed8776",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:00:51.286187Z"
+  },
+  "tributi_tari": {
+   "service_id": "004214:comweb:pagamento-tassa-rifiuti-tari-659-61904-1-95ac2c97471deeafd515666fa2be5faa",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.santo-stefano-roero.cn.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-61904-1-95ac2c97471deeafd515666fa2be5faa",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.santo-stefano-roero.cn.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-61904-1-95ac2c97471deeafd515666fa2be5faa",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.santo-stefano-roero.cn.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-61904-1-95ac2c97471deeafd515666fa2be5faa",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:00:54.130657Z"
+  }
+ }
+}

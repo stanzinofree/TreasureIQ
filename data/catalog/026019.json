@@ -1,0 +1,110 @@
+{
+ "municipality_istat": "026019",
+ "services": {
+  "accesso_atti": {
+   "service_id": "026019:wp:391",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.codogne.tv.it/?post_type=servizio&p=391",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.codogne.tv.it/?post_type=servizio&p=391",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.codogne.tv.it/?post_type=servizio&p=391",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:27:37.596310Z"
+  },
+  "cambio_residenza": {
+   "service_id": "026019:wp:1458",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.codogne.tv.it/?post_type=servizio&p=1458",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.codogne.tv.it/?post_type=servizio&p=1458",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.codogne.tv.it/?post_type=servizio&p=1458",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:27:47.798729Z"
+  },
+  "carta_identita": {
+   "service_id": "026019:wp:1846",
+   "title": "Carta di identità elettronica (CIE)",
+   "source_url": "https://www.comune.codogne.tv.it/?post_type=servizio&p=1846",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.codogne.tv.it/?post_type=servizio&p=1846",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.codogne.tv.it/?post_type=servizio&p=1846",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.codogne.tv.it/wp-content/uploads/2024/12/dichiarazione-di-assenso-allespatrio.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.codogne.tv.it/?post_type=servizio&p=1846",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:27:56.271885Z"
+  },
+  "stato_civile": {
+   "service_id": "026019:wp:1473",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.codogne.tv.it/?post_type=servizio&p=1473",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.codogne.tv.it/?post_type=servizio&p=1473",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.codogne.tv.it/?post_type=servizio&p=1473",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:28:06.476293Z"
+  }
+ }
+}

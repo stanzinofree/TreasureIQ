@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "062075",
+ "services": {
+  "accesso_atti": {
+   "service_id": "062075:wp:610",
+   "title": "Accesso agli atti",
+   "source_url": "https://comune.toccocaudio.bn.it/servizio/accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.toccocaudio.bn.it/servizio/accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.toccocaudio.bn.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:13:07.940657Z"
+  },
+  "cambio_residenza": {
+   "service_id": "062075:wp:626",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.toccocaudio.bn.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.toccocaudio.bn.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.toccocaudio.bn.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:13:11.971845Z"
+  }
+ }
+}

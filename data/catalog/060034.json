@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "060034",
+ "services": {
+  "accesso_atti": {
+   "service_id": "060034:wp:2811",
+   "title": "Richiedere accesso agli atti",
+   "source_url": "https://comune.filettino.fr.it/servizio/richiedere-laccesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.filettino.fr.it/servizio/richiedere-laccesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.filettino.fr.it/servizio/richiedere-laccesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:05:59.402322Z"
+  },
+  "cambio_residenza": {
+   "service_id": "060034:wp:2749",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.filettino.fr.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.filettino.fr.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.filettino.fr.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:06:03.441784Z"
+  },
+  "tributi_imu": {
+   "service_id": "060034:wp:2825",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://comune.filettino.fr.it/servizio/pagare-tributi-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.filettino.fr.it/servizio/pagare-tributi-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.filettino.fr.it/servizio/pagare-tributi-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:06:06.735759Z"
+  }
+ }
+}

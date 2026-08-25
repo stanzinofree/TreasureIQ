@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "024085",
+ "services": {
+  "accesso_atti": {
+   "service_id": "024085:wp:328",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.roana.vi.it/?post_type=servizio&p=328",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.roana.vi.it/?post_type=servizio&p=328",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.roana.vi.it/?post_type=servizio&p=328",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.roana.vi.it/wp-content/uploads/2023/05/5-regolamenti-regolamento-sul-diritto-di-accesso-dei-cittadini-agli-atti-e-ai-documenti-amministrati.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.roana.vi.it/?post_type=servizio&p=328",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.roana.vi.it/wp-content/uploads/2023/05/Aggiornamento-valore-diritti-di-segreteria-2025_rev01-.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.roana.vi.it/?post_type=servizio&p=328",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:13:07.062694Z"
+  },
+  "carta_identita": {
+   "service_id": "024085:wp:1128",
+   "title": "Rilascio Carta di Identità Elettronica",
+   "source_url": "https://www.comune.roana.vi.it/?post_type=servizio&p=1128",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.roana.vi.it/?post_type=servizio&p=1128",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.roana.vi.it/?post_type=servizio&p=1128",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:13:14.529732Z"
+  },
+  "stato_civile": {
+   "service_id": "024085:wp:1361",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.roana.vi.it/?post_type=servizio&p=1361",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.roana.vi.it/?post_type=servizio&p=1361",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.roana.vi.it/?post_type=servizio&p=1361",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:13:22.391976Z"
+  }
+ }
+}

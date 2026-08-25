@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "042045",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "042045:wp:3634",
+   "title": "Cambio di residenza all’interno dell’Anagrafe Nazionale della Popolazione Residente (ANPR)",
+   "source_url": "https://www.comune.senigallia.an.it/servizio/cambio-di-residenza-allinterno-dellanagrafe-nazionale-della-popolazione-residente-anpr/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.senigallia.an.it/servizio/cambio-di-residenza-allinterno-dellanagrafe-nazionale-della-popolazione-residente-anpr/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.senigallia.an.it/servizio/cambio-di-residenza-allinterno-dellanagrafe-nazionale-della-popolazione-residente-anpr/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:54:07.131195Z"
+  },
+  "tributi_imu": {
+   "service_id": "042045:wp:5743",
+   "title": "IMU-TASI e Nuova IMU",
+   "source_url": "https://www.comune.senigallia.an.it/servizio/imu-tasi-e-nuova-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.senigallia.an.it/servizio/imu-tasi-e-nuova-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.senigallia.an.it/servizio/imu-tasi-e-nuova-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:54:08.627558Z"
+  }
+ }
+}

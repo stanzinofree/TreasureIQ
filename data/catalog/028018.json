@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "028018",
+ "services": {
+  "accesso_atti": {
+   "service_id": "028018:wp:416",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.campodoro.pd.it/?post_type=servizio&p=416",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.campodoro.pd.it/?post_type=servizio&p=416",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.campodoro.pd.it/?post_type=servizio&p=416",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:53:19.872601Z"
+  },
+  "cambio_residenza": {
+   "service_id": "028018:wp:1249",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.campodoro.pd.it/?post_type=servizio&p=1249",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.campodoro.pd.it/?post_type=servizio&p=1249",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.campodoro.pd.it/?post_type=servizio&p=1249",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:53:25.846217Z"
+  },
+  "stato_civile": {
+   "service_id": "028018:wp:1309",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.campodoro.pd.it/?post_type=servizio&p=1309",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.campodoro.pd.it/?post_type=servizio&p=1309",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.campodoro.pd.it/?post_type=servizio&p=1309",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:53:33.111688Z"
+  },
+  "tributi_imu": {
+   "service_id": "028018:wp:1248",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.campodoro.pd.it/?post_type=servizio&p=1248",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.campodoro.pd.it/?post_type=servizio&p=1248",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.campodoro.pd.it/?post_type=servizio&p=1248",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:53:39.733711Z"
+  }
+ }
+}

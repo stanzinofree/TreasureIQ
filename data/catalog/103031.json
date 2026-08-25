@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "103031",
+ "services": {
+  "accesso_atti": {
+   "service_id": "103031:comweb:richiedere-l-accesso-agli-atti-317-46696-1-26f54214f1ab6670e17b6dad23fcb819",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.formazza.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-46696-1-26f54214f1ab6670e17b6dad23fcb819",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.formazza.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-46696-1-26f54214f1ab6670e17b6dad23fcb819",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.formazza.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-46696-1-26f54214f1ab6670e17b6dad23fcb819",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.formazza.vb.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=frmzz223&IDPr=11367",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.formazza.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-46696-1-26f54214f1ab6670e17b6dad23fcb819",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:02:06.394162Z"
+  },
+  "carta_identita": {
+   "service_id": "103031:comweb:carta-d-identita-1-46684-1-d6e14253955427e8e52006aff37fe850",
+   "title": "Carta d'Identità",
+   "source_url": "https://www.comune.formazza.vb.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-46684-1-d6e14253955427e8e52006aff37fe850",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.formazza.vb.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-46684-1-d6e14253955427e8e52006aff37fe850",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.formazza.vb.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-46684-1-d6e14253955427e8e52006aff37fe850",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:02:08.391616Z"
+  },
+  "tributi_imu": {
+   "service_id": "103031:comweb:calcolo-imu-355-46785-1-26ed29f59cc9abbedf4e9987ec745a9c",
+   "title": "Calcolo IMU",
+   "source_url": "https://www.comune.formazza.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-46785-1-26ed29f59cc9abbedf4e9987ec745a9c",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.formazza.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-46785-1-26ed29f59cc9abbedf4e9987ec745a9c",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.formazza.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-46785-1-26ed29f59cc9abbedf4e9987ec745a9c",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.formazza.vb.it/servizi/filodiretto2/Login.Aspx?CE=frmzz223&ACCESSO=C",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.formazza.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-46785-1-26ed29f59cc9abbedf4e9987ec745a9c",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:02:10.260966Z"
+  }
+ }
+}

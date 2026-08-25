@@ -1,0 +1,77 @@
+{
+ "municipality_istat": "098045",
+ "services": {
+  "accesso_atti": {
+   "service_id": "098045:comweb:richiedere-l-accesso-agli-atti-accesso-civico-generalizzato-1029-55453-1-5d28141b6e98016ad899f00ba7d5fb2e",
+   "title": "Richiedere l'accesso agli atti - Accesso civico generalizzato",
+   "source_url": "https://www.comune.pieve-fissiraga.lo.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-accesso-civico-generalizzato-1029-55453-1-5d28141b6e98016ad899f00ba7d5fb2e",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pieve-fissiraga.lo.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-accesso-civico-generalizzato-1029-55453-1-5d28141b6e98016ad899f00ba7d5fb2e",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pieve-fissiraga.lo.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-accesso-civico-generalizzato-1029-55453-1-5d28141b6e98016ad899f00ba7d5fb2e",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.pieve-fissiraga.lo.it/urbi/progs/urp/ur1PR003.sto?DB_NAME=n1200691&AmbitoBloccato=0&MacroTipoBloccato=147&TipoBloccato=16|3&catnome=Anagrafe%2520e%2520stato%2520civile&caturl=https://www.comune.pieve-fissiraga.lo.it/it-it/servizi/anagrafe-e-stato-civile&servnome=Richiedere%2520l%2527accesso%2520agli%2520atti%2520-%2520Accesso%2520civico%2520generalizzato&servurl=https://www.comune.pieve-fissiraga.lo.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-accesso-civico-generalizzato-1029-55453-1-5d28141b6e98016ad899f00ba7d5fb2e",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.pieve-fissiraga.lo.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-accesso-civico-generalizzato-1029-55453-1-5d28141b6e98016ad899f00ba7d5fb2e",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:57:27.500285Z"
+  },
+  "cambio_residenza": {
+   "service_id": "098045:comweb:cambio-residenza-305-55451-1-1b560677405447b9d5ae753edd98679a",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.pieve-fissiraga.lo.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-55451-1-1b560677405447b9d5ae753edd98679a",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pieve-fissiraga.lo.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-55451-1-1b560677405447b9d5ae753edd98679a",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pieve-fissiraga.lo.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-55451-1-1b560677405447b9d5ae753edd98679a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/?catnome=Anagrafe%2520e%2520stato%2520civile&caturl=https://www.comune.pieve-fissiraga.lo.it/it-it/servizi/anagrafe-e-stato-civile&servnome=Cambio%2520Residenza&servurl=https://www.comune.pieve-fissiraga.lo.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-55451-1-1b560677405447b9d5ae753edd98679a",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.pieve-fissiraga.lo.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-55451-1-1b560677405447b9d5ae753edd98679a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:57:29.496743Z"
+  }
+ }
+}

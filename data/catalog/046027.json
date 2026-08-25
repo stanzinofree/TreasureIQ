@@ -1,0 +1,41 @@
+{
+ "municipality_istat": "046027",
+ "services": {
+  "stato_civile": {
+   "service_id": "046027:wp:2897",
+   "title": "Ricerche di Archivio di Stato Civile",
+   "source_url": "https://comune.san-romano-in-garfagnana.lu.it/servizio/ricerche-di-archivio-di-stato-civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.san-romano-in-garfagnana.lu.it/servizio/ricerche-di-archivio-di-stato-civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.san-romano-in-garfagnana.lu.it/servizio/ricerche-di-archivio-di-stato-civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.san-romano-in-garfagnana.lu.it/wp-content/uploads/2025/03/RICHIESTA_RICERCA_STORICA_E_RELATIVI_CERTIFICATI_san-romano-in-garfagnanadocx.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.san-romano-in-garfagnana.lu.it/servizio/ricerche-di-archivio-di-stato-civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:54:58.852085Z"
+  }
+ }
+}

@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "007064",
+ "services": {
+  "accesso_atti": {
+   "service_id": "007064:comweb:richiedere-l-accesso-agli-atti-317-20822-1-2f8fb117496d66f0cc21437ff9f6f1cb",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.saintrhemyenbosses.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-20822-1-2f8fb117496d66f0cc21437ff9f6f1cb",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.saintrhemyenbosses.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-20822-1-2f8fb117496d66f0cc21437ff9f6f1cb",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.saintrhemyenbosses.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-20822-1-2f8fb117496d66f0cc21437ff9f6f1cb",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.saintrhemyenbosses.ao.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=sntrhmnbsss124&IDPr=11539",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.saintrhemyenbosses.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-20822-1-2f8fb117496d66f0cc21437ff9f6f1cb",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:10:22.101389Z"
+  },
+  "tributi_imu": {
+   "service_id": "007064:comweb:imposta-municipale-propria-imu-953-20912-1-65fbedb548818a447ebb557931ac96d9",
+   "title": "Imposta Municipale Propria (IMU)",
+   "source_url": "https://www.comune.saintrhemyenbosses.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-20912-1-65fbedb548818a447ebb557931ac96d9",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.saintrhemyenbosses.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-20912-1-65fbedb548818a447ebb557931ac96d9",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.saintrhemyenbosses.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-20912-1-65fbedb548818a447ebb557931ac96d9",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:10:23.938348Z"
+  },
+  "tributi_tari": {
+   "service_id": "007064:comweb:tassa-rifiuti-tari-954-20903-1-fd1cd1f244a538695f33a336c0b83edf",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.saintrhemyenbosses.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-20903-1-fd1cd1f244a538695f33a336c0b83edf",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.saintrhemyenbosses.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-20903-1-fd1cd1f244a538695f33a336c0b83edf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.saintrhemyenbosses.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-20903-1-fd1cd1f244a538695f33a336c0b83edf",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.celva.it/it/fines-tributi-e-imposte/tassa-rifiuti-tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.saintrhemyenbosses.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-20903-1-fd1cd1f244a538695f33a336c0b83edf",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:10:25.880243Z"
+  }
+ }
+}

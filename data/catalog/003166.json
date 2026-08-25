@@ -1,0 +1,146 @@
+{
+ "municipality_istat": "003166",
+ "services": {
+  "accesso_atti": {
+   "service_id": "003166:comweb:richiedere-l-accesso-agli-atti-317-25311-1-8ebdac7ddde8b4bc9560a4c6ab2daa83",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.gattico-veruno.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-25311-1-8ebdac7ddde8b4bc9560a4c6ab2daa83",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gattico-veruno.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-25311-1-8ebdac7ddde8b4bc9560a4c6ab2daa83",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gattico-veruno.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-25311-1-8ebdac7ddde8b4bc9560a4c6ab2daa83",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.gattico-veruno.no.it/lang/it/servizi/richiedere-laccesso-agli-atti/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.gattico-veruno.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-25311-1-8ebdac7ddde8b4bc9560a4c6ab2daa83",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:00:19.918977Z"
+  },
+  "cambio_residenza": {
+   "service_id": "003166:comweb:cambio-residenza-305-25309-1-6b81cc728ac51c3eb43dbbe67cedb0f5",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.gattico-veruno.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-25309-1-6b81cc728ac51c3eb43dbbe67cedb0f5",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gattico-veruno.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-25309-1-6b81cc728ac51c3eb43dbbe67cedb0f5",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gattico-veruno.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-25309-1-6b81cc728ac51c3eb43dbbe67cedb0f5",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.gattico-veruno.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-25309-1-6b81cc728ac51c3eb43dbbe67cedb0f5",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:00:22.048802Z"
+  },
+  "carta_identita": {
+   "service_id": "003166:comweb:carta-d-identita-elettronica-cie-788-25299-1-8b939d5fe4b7c40a02f1cc6f0690173a",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.gattico-veruno.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-25299-1-8b939d5fe4b7c40a02f1cc6f0690173a",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gattico-veruno.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-25299-1-8b939d5fe4b7c40a02f1cc6f0690173a",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gattico-veruno.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-25299-1-8b939d5fe4b7c40a02f1cc6f0690173a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:00:24.199999Z"
+  },
+  "tributi_imu": {
+   "service_id": "003166:comweb:imposta-municipale-propria-imu-953-25400-1-b435c8603efa33f789cd0144dccd8c1b",
+   "title": "Imposta Municipale Propria (IMU)",
+   "source_url": "https://www.comune.gattico-veruno.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-25400-1-b435c8603efa33f789cd0144dccd8c1b",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gattico-veruno.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-25400-1-b435c8603efa33f789cd0144dccd8c1b",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gattico-veruno.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-25400-1-b435c8603efa33f789cd0144dccd8c1b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:00:26.440743Z"
+  },
+  "tributi_tari": {
+   "service_id": "003166:comweb:tassa-rifiuti-tari-954-25391-1-936e26b17fbaf7879d0ec17e2f483ac4",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.gattico-veruno.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-25391-1-936e26b17fbaf7879d0ec17e2f483ac4",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gattico-veruno.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-25391-1-936e26b17fbaf7879d0ec17e2f483ac4",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gattico-veruno.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-25391-1-936e26b17fbaf7879d0ec17e2f483ac4",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:00:28.899545Z"
+  }
+ }
+}

@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "063083",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "063083:wp:1089",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.torreannunziata.na.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.torreannunziata.na.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.torreannunziata.na.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:15:30.048026Z"
+  }
+ }
+}

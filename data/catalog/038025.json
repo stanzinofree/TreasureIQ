@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "038025",
+ "services": {
+  "stato_civile": {
+   "service_id": "038025:wp:860",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.goro.fe.it/?post_type=servizio&p=860",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.goro.fe.it/?post_type=servizio&p=860",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.goro.fe.it/?post_type=servizio&p=860",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:52:37.054412Z"
+  },
+  "tributi_imu": {
+   "service_id": "038025:wp:842",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.goro.fe.it/?post_type=servizio&p=842",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.goro.fe.it/?post_type=servizio&p=842",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.goro.fe.it/?post_type=servizio&p=842",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:52:42.336885Z"
+  }
+ }
+}

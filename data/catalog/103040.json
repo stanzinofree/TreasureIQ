@@ -1,0 +1,64 @@
+{
+ "municipality_istat": "103040",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "103040:comweb:cambio-residenza-305-21481-1-aa750b3fe9f548a3a8af422a2f2f2065",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.madonnadelsasso.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-21481-1-aa750b3fe9f548a3a8af422a2f2f2065",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.madonnadelsasso.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-21481-1-aa750b3fe9f548a3a8af422a2f2f2065",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.madonnadelsasso.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-21481-1-aa750b3fe9f548a3a8af422a2f2f2065",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.madonnadelsasso.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-21481-1-aa750b3fe9f548a3a8af422a2f2f2065",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:02:55.443577Z"
+  },
+  "carta_identita": {
+   "service_id": "103040:comweb:carta-d-identita-1-21471-1-872356230598098556288aaffd6da274",
+   "title": "Carta d'Identità",
+   "source_url": "https://www.comune.madonnadelsasso.vb.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-21471-1-872356230598098556288aaffd6da274",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.madonnadelsasso.vb.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-21471-1-872356230598098556288aaffd6da274",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.madonnadelsasso.vb.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-21471-1-872356230598098556288aaffd6da274",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:02:57.426068Z"
+  }
+ }
+}

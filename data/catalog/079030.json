@@ -1,0 +1,41 @@
+{
+ "municipality_istat": "079030",
+ "services": {
+  "accesso_atti": {
+   "service_id": "079030:wp:240",
+   "title": "Richiedere l’accesso agli atti",
+   "source_url": "https://comune.cicala.cz.it/servizio/richiedere-laccesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.cicala.cz.it/servizio/richiedere-laccesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.cicala.cz.it/servizio/richiedere-laccesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.cicala.cz.it/wp-content/uploads/2025/05/Tariffario-accesso-agli-atti.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.cicala.cz.it/servizio/richiedere-laccesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:38:07.263234Z"
+  }
+ }
+}

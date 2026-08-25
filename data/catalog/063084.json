@@ -1,0 +1,77 @@
+{
+ "municipality_istat": "063084",
+ "services": {
+  "accesso_atti": {
+   "service_id": "063084:wp:9844",
+   "title": "Richiesta accesso agli atti documentale",
+   "source_url": "https://comune.torredelgreco.na.it/servizio/richiesta-accesso-agli-atti-documentale/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.torredelgreco.na.it/servizio/richiesta-accesso-agli-atti-documentale/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.torredelgreco.na.it/servizio/richiesta-accesso-agli-atti-documentale/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:15:31.785962Z"
+  },
+  "cambio_residenza": {
+   "service_id": "063084:wp:7128",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.torredelgreco.na.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.torredelgreco.na.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.torredelgreco.na.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.torredelgreco.na.it/wp-content/uploads/2025/10/Vademecum-residenza-Torre-del-greco.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.torredelgreco.na.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.torredelgreco.na.it/wp-content/uploads/2026/01/avviso-9.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.torredelgreco.na.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:15:36.502639Z"
+  }
+ }
+}

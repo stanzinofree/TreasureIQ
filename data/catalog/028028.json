@@ -1,0 +1,162 @@
+{
+ "municipality_istat": "028028",
+ "services": {
+  "accesso_atti": {
+   "service_id": "028028:wp:347",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.casalserugo.pd.it/?post_type=servizio&p=347",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.casalserugo.pd.it/?post_type=servizio&p=347",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.casalserugo.pd.it/?post_type=servizio&p=347",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:56:28.905913Z"
+  },
+  "carta_identita": {
+   "service_id": "028028:wp:1017",
+   "title": "Rilascio carta di identità elettronica",
+   "source_url": "https://www.comune.casalserugo.pd.it/?post_type=servizio&p=1017",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.casalserugo.pd.it/?post_type=servizio&p=1017",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.casalserugo.pd.it/?post_type=servizio&p=1017",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:56:39.184214Z"
+  },
+  "tributi_imu": {
+   "service_id": "028028:wp:1495",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.casalserugo.pd.it/?post_type=servizio&p=1495",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.casalserugo.pd.it/?post_type=servizio&p=1495",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.casalserugo.pd.it/?post_type=servizio&p=1495",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:56:51.925058Z"
+  },
+  "tributi_tari": {
+   "service_id": "028028:wp:1170",
+   "title": "TARI",
+   "source_url": "https://www.comune.casalserugo.pd.it/?post_type=servizio&p=1170",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.casalserugo.pd.it/?post_type=servizio&p=1170",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.casalserugo.pd.it/?post_type=servizio&p=1170",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.casalserugo.pd.it/wp-content/uploads/2025/01/Calendario-2025.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.casalserugo.pd.it/?post_type=servizio&p=1170",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.casalserugo.pd.it/wp-content/uploads/2023/11/DICHIARAZIONE-TARI.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.casalserugo.pd.it/?post_type=servizio&p=1170",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.casalserugo.pd.it/wp-content/uploads/2023/11/ELENCO-DOC.DA-ALLEGARE-ALLA-DICH.TARI_.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.casalserugo.pd.it/?post_type=servizio&p=1170",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.casalserugo.pd.it/wp-content/uploads/2024/05/Modello-di-Esclusione-Quota-variabile.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.casalserugo.pd.it/?post_type=servizio&p=1170",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.casalserugo.pd.it/wp-content/uploads/2025/05/Modello-richiesta-contenitore-pannolini-pdf.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.casalserugo.pd.it/?post_type=servizio&p=1170",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:56:59.296175Z"
+  }
+ }
+}

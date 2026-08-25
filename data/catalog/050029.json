@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "050029",
+ "services": {
+  "carta_identita": {
+   "service_id": "050029:wp:2142",
+   "title": "Carta d’identità elettronica",
+   "source_url": "https://www.comune.pontedera.pi.it/servizio/carta-identita-elettronica/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pontedera.pi.it/servizio/carta-identita-elettronica/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pontedera.pi.it/servizio/carta-identita-elettronica/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:57:12.912464Z"
+  }
+ }
+}

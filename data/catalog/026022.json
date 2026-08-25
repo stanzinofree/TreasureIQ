@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "026022",
+ "services": {
+  "accesso_atti": {
+   "service_id": "026022:wp:393",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.cordignano.tv.it/?post_type=servizio&p=393",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cordignano.tv.it/?post_type=servizio&p=393",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cordignano.tv.it/?post_type=servizio&p=393",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:28:51.769537Z"
+  },
+  "cambio_residenza": {
+   "service_id": "026022:wp:1399",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.cordignano.tv.it/?post_type=servizio&p=1399",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cordignano.tv.it/?post_type=servizio&p=1399",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cordignano.tv.it/?post_type=servizio&p=1399",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:28:57.188318Z"
+  },
+  "stato_civile": {
+   "service_id": "026022:wp:1402",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.cordignano.tv.it/?post_type=servizio&p=1402",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cordignano.tv.it/?post_type=servizio&p=1402",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cordignano.tv.it/?post_type=servizio&p=1402",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:29:04.236362Z"
+  },
+  "tributi_imu": {
+   "service_id": "026022:wp:1581",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.cordignano.tv.it/?post_type=servizio&p=1581",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cordignano.tv.it/?post_type=servizio&p=1581",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cordignano.tv.it/?post_type=servizio&p=1581",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:29:09.476619Z"
+  }
+ }
+}

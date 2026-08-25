@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "062064",
+ "services": {
+  "accesso_atti": {
+   "service_id": "062064:wp:572",
+   "title": "Richiedere accesso agli atti",
+   "source_url": "https://www.comune.sanmarcodeicavoti.bn.it/servizio/richiedere-accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanmarcodeicavoti.bn.it/servizio/richiedere-accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanmarcodeicavoti.bn.it/servizio/richiedere-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:12:51.116647Z"
+  },
+  "carta_identita": {
+   "service_id": "062064:wp:587",
+   "title": "Carta d’Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.sanmarcodeicavoti.bn.it/servizio/carta-didentita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanmarcodeicavoti.bn.it/servizio/carta-didentita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanmarcodeicavoti.bn.it/servizio/carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:12:53.926590Z"
+  },
+  "stato_civile": {
+   "service_id": "062064:wp:593",
+   "title": "Certificato di Morte",
+   "source_url": "https://www.comune.sanmarcodeicavoti.bn.it/servizio/certificato-di-morte/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanmarcodeicavoti.bn.it/servizio/certificato-di-morte/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanmarcodeicavoti.bn.it/servizio/certificato-di-morte/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:12:55.978125Z"
+  }
+ }
+}

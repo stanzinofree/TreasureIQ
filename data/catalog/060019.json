@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "060019",
+ "services": {
+  "tributi_tari": {
+   "service_id": "060019:comweb:tassa-rifiuti-tari-954-11795-1-0005f8a38741e53f8d3402f5ffffad8c",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.cassino.fr.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-11795-1-0005f8a38741e53f8d3402f5ffffad8c",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cassino.fr.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-11795-1-0005f8a38741e53f8d3402f5ffffad8c",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cassino.fr.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-11795-1-0005f8a38741e53f8d3402f5ffffad8c",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:05:04.314311Z"
+  }
+ }
+}

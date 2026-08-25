@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "035046",
+ "services": {
+  "accesso_atti": {
+   "service_id": "035046:wp:9867",
+   "title": "Accesso agli atti",
+   "source_url": "https://www.comune.ventasso.re.it/servizi/accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ventasso.re.it/servizi/accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ventasso.re.it/servizi/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:47:54.281576Z"
+  },
+  "cambio_residenza": {
+   "service_id": "035046:wp:12677",
+   "title": "Richiesta di Cambio di Residenza",
+   "source_url": "https://www.comune.ventasso.re.it/servizi/richiesta-di-cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ventasso.re.it/servizi/richiesta-di-cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ventasso.re.it/servizi/richiesta-di-cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:47:56.750374Z"
+  },
+  "tributi_imu": {
+   "service_id": "035046:wp:13371",
+   "title": "Presentazione della Dichiarazione IMU",
+   "source_url": "https://www.comune.ventasso.re.it/servizi/presentazione-della-dichiarazione-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ventasso.re.it/servizi/presentazione-della-dichiarazione-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ventasso.re.it/servizi/presentazione-della-dichiarazione-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:47:59.231691Z"
+  }
+ }
+}

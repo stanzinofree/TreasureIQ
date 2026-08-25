@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "069071",
+ "services": {
+  "accesso_atti": {
+   "service_id": "069071:wp:652",
+   "title": "Richiesta di accesso agli atti",
+   "source_url": "https://comune.rapino.ch.it/servizio/richiesta-di-accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.rapino.ch.it/servizio/richiesta-di-accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.rapino.ch.it/servizio/richiesta-di-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:23:43.113067Z"
+  },
+  "cambio_residenza": {
+   "service_id": "069071:wp:655",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.rapino.ch.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.rapino.ch.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.rapino.ch.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:23:46.965484Z"
+  },
+  "carta_identita": {
+   "service_id": "069071:wp:648",
+   "title": "Richiesta CIE",
+   "source_url": "https://comune.rapino.ch.it/servizio/richiesta-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.rapino.ch.it/servizio/richiesta-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.rapino.ch.it/servizio/richiesta-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:23:50.166906Z"
+  }
+ }
+}

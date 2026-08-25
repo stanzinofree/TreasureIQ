@@ -1,0 +1,64 @@
+{
+ "municipality_istat": "003021",
+ "services": {
+  "accesso_atti": {
+   "service_id": "003021:comweb:richiedere-l-accesso-agli-atti-317-53059-1-687a3c48ab208531a6a4b25c9f1503b7",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.bogogno.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-53059-1-687a3c48ab208531a6a4b25c9f1503b7",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bogogno.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-53059-1-687a3c48ab208531a6a4b25c9f1503b7",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bogogno.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-53059-1-687a3c48ab208531a6a4b25c9f1503b7",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:56:36.289655Z"
+  },
+  "cambio_residenza": {
+   "service_id": "003021:comweb:cambio-residenza-305-53057-1-6db901ebc071a65e2262d78e9a8de9da",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.bogogno.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-53057-1-6db901ebc071a65e2262d78e9a8de9da",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bogogno.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-53057-1-6db901ebc071a65e2262d78e9a8de9da",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bogogno.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-53057-1-6db901ebc071a65e2262d78e9a8de9da",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.bogogno.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-53057-1-6db901ebc071a65e2262d78e9a8de9da",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:56:38.123074Z"
+  }
+ }
+}

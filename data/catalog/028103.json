@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "028103",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "028103:wp:1282",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.villafranca.pd.it/?post_type=servizio&p=1282",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.villafranca.pd.it/?post_type=servizio&p=1282",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.villafranca.pd.it/?post_type=servizio&p=1282",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:25:43.062952Z"
+  },
+  "carta_identita": {
+   "service_id": "028103:wp:824",
+   "title": "Carta d'identità Elettronica",
+   "source_url": "https://www.comune.villafranca.pd.it/?post_type=servizio&p=824",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.villafranca.pd.it/?post_type=servizio&p=824",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.villafranca.pd.it/?post_type=servizio&p=824",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:25:50.278517Z"
+  },
+  "tributi_imu": {
+   "service_id": "028103:wp:1280",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.villafranca.pd.it/?post_type=servizio&p=1280",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.villafranca.pd.it/?post_type=servizio&p=1280",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.villafranca.pd.it/?post_type=servizio&p=1280",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:25:59.278553Z"
+  }
+ }
+}

@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "058003",
+ "services": {
+  "accesso_atti": {
+   "service_id": "058003:wp:18063",
+   "title": "Richiesta accesso agli atti documentale Legge n. 241/1990",
+   "source_url": "https://comune.albanolaziale.rm.it/servizio/richiesta-accesso-agli-atti-documentale/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.albanolaziale.rm.it/servizio/richiesta-accesso-agli-atti-documentale/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.albanolaziale.rm.it/servizio/richiesta-accesso-agli-atti-documentale/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:01:06.483938Z"
+  },
+  "carta_identita": {
+   "service_id": "058003:wp:15861",
+   "title": "Carta d’identità (CIE)",
+   "source_url": "https://comune.albanolaziale.rm.it/servizio/carta-identita/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.albanolaziale.rm.it/servizio/carta-identita/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.albanolaziale.rm.it/servizio/carta-identita/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:01:08.845694Z"
+  }
+ }
+}

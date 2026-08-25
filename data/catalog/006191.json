@@ -1,0 +1,123 @@
+{
+ "municipality_istat": "006191",
+ "services": {
+  "accesso_atti": {
+   "service_id": "006191:comweb:richiedere-l-accesso-agli-atti-317-27027-1-d443539671d98d9d166581c1b7f839d5",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.cassanospinola.al.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-27027-1-d443539671d98d9d166581c1b7f839d5",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cassanospinola.al.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-27027-1-d443539671d98d9d166581c1b7f839d5",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cassanospinola.al.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-27027-1-d443539671d98d9d166581c1b7f839d5",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://sportello.comune.cassanospinola.al.it/su_procedimento/richiedere-laccesso-agli-atti/fattispecie/0?ambito=sugen&urlSite=https%3a%2f%2fwww.comune.cassanospinola.al.it%2fit-it%2fservizi%2fanagrafe-e-stato-civile%2frichiedere-l-accesso-agli-atti-317-27027-1-d443539671d98d9d166581c1b7f839d5",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.cassanospinola.al.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-27027-1-d443539671d98d9d166581c1b7f839d5",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:02:44.385122Z"
+  },
+  "cambio_residenza": {
+   "service_id": "006191:comweb:cambio-residenza-305-27025-1-e7d80443641b97c723a9ef2c184251e9",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.cassanospinola.al.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-27025-1-e7d80443641b97c723a9ef2c184251e9",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cassanospinola.al.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-27025-1-e7d80443641b97c723a9ef2c184251e9",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cassanospinola.al.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-27025-1-e7d80443641b97c723a9ef2c184251e9",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.cassanospinola.al.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-27025-1-e7d80443641b97c723a9ef2c184251e9",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:02:46.424512Z"
+  },
+  "carta_identita": {
+   "service_id": "006191:comweb:carta-d-identita-elettronica-cie-788-27015-1-4625fcd5418fad8e578cfd5c3e90147c",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.cassanospinola.al.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-27015-1-4625fcd5418fad8e578cfd5c3e90147c",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cassanospinola.al.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-27015-1-4625fcd5418fad8e578cfd5c3e90147c",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cassanospinola.al.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-27015-1-4625fcd5418fad8e578cfd5c3e90147c",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:02:48.570243Z"
+  },
+  "tributi_imu": {
+   "service_id": "006191:comweb:calcolo-imu-355-27116-1-6e69928771166a080357feff87d234e9",
+   "title": "Calcolo IMU",
+   "source_url": "https://www.comune.cassanospinola.al.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-27116-1-6e69928771166a080357feff87d234e9",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cassanospinola.al.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-27116-1-6e69928771166a080357feff87d234e9",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cassanospinola.al.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-27116-1-6e69928771166a080357feff87d234e9",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:02:50.671596Z"
+  }
+ }
+}

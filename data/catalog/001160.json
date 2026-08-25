@@ -1,0 +1,64 @@
+{
+ "municipality_istat": "001160",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001160:comweb:richiedere-l-accesso-agli-atti-317-11582-1-f98d7d5ae465c35f9cf76460f76e89e7",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.montalto-dora.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-11582-1-f98d7d5ae465c35f9cf76460f76e89e7",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montalto-dora.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-11582-1-f98d7d5ae465c35f9cf76460f76e89e7",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montalto-dora.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-11582-1-f98d7d5ae465c35f9cf76460f76e89e7",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.montalto-dora.to.it/servizi/servizio-dettaglio/2169529/richiedi",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.montalto-dora.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-11582-1-f98d7d5ae465c35f9cf76460f76e89e7",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:44:40.947310Z"
+  },
+  "tributi_tari": {
+   "service_id": "001160:comweb:pagamento-tassa-rifiuti-tari-659-11663-1-6c505877ecc154dc2fd043b1a7c35c3d",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.montalto-dora.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-11663-1-6c505877ecc154dc2fd043b1a7c35c3d",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montalto-dora.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-11663-1-6c505877ecc154dc2fd043b1a7c35c3d",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montalto-dora.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-11663-1-6c505877ecc154dc2fd043b1a7c35c3d",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:44:43.034738Z"
+  }
+ }
+}

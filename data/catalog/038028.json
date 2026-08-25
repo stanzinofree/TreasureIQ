@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "038028",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "038028:wp:229",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.terredelreno.fe.it/?post_type=servizio&p=229",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.terredelreno.fe.it/?post_type=servizio&p=229",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.terredelreno.fe.it/?post_type=servizio&p=229",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:52:52.992360Z"
+  },
+  "stato_civile": {
+   "service_id": "038028:wp:232",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.terredelreno.fe.it/?post_type=servizio&p=232",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.terredelreno.fe.it/?post_type=servizio&p=232",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.terredelreno.fe.it/?post_type=servizio&p=232",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:52:59.430181Z"
+  },
+  "tributi_imu": {
+   "service_id": "038028:wp:1135",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.terredelreno.fe.it/?post_type=servizio&p=1135",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.terredelreno.fe.it/?post_type=servizio&p=1135",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.terredelreno.fe.it/?post_type=servizio&p=1135",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:53:05.773586Z"
+  }
+ }
+}

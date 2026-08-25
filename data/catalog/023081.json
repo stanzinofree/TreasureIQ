@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "023081",
+ "services": {
+  "accesso_atti": {
+   "service_id": "023081:wp:404",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.soave.vr.it/?post_type=servizio&p=404",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.soave.vr.it/?post_type=servizio&p=404",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.soave.vr.it/?post_type=servizio&p=404",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:47:45.319344Z"
+  },
+  "carta_identita": {
+   "service_id": "023081:wp:784",
+   "title": "Rilascio Carta di Identità Elettronica",
+   "source_url": "https://www.comune.soave.vr.it/?post_type=servizio&p=784",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.soave.vr.it/?post_type=servizio&p=784",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.soave.vr.it/?post_type=servizio&p=784",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:47:56.890347Z"
+  },
+  "stato_civile": {
+   "service_id": "023081:wp:991",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.soave.vr.it/?post_type=servizio&p=991",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.soave.vr.it/?post_type=servizio&p=991",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.soave.vr.it/?post_type=servizio&p=991",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:48:05.526154Z"
+  }
+ }
+}

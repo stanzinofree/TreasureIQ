@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "080080",
+ "services": {
+  "accesso_atti": {
+   "service_id": "080080:wp:321",
+   "title": "Richiedere l’accesso agli atti",
+   "source_url": "https://comune.santalessioinaspromonte.rc.it/servizio/richiedere-laccesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.santalessioinaspromonte.rc.it/servizio/richiedere-laccesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.santalessioinaspromonte.rc.it/servizio/richiedere-laccesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:40:50.218099Z"
+  },
+  "tributi_imu": {
+   "service_id": "080080:wp:326",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://comune.santalessioinaspromonte.rc.it/servizio/pagare-tributi-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.santalessioinaspromonte.rc.it/servizio/pagare-tributi-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.santalessioinaspromonte.rc.it/servizio/pagare-tributi-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:40:53.751332Z"
+  }
+ }
+}

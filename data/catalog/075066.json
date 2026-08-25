@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "075066",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "075066:wp:376",
+   "title": "ANPR – Certificati on-line e cambio di residenza",
+   "source_url": "https://comune.salve.le.it/servizio/anpr-certificati-on-line-e-cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.salve.le.it/servizio/anpr-certificati-on-line-e-cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.salve.le.it/servizio/anpr-certificati-on-line-e-cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:30:24.801710Z"
+  }
+ }
+}

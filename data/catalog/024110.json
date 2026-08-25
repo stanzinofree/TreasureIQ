@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "024110",
+ "services": {
+  "accesso_atti": {
+   "service_id": "024110:wp:290",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.trissino.vi.it/?post_type=servizio&p=290",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.trissino.vi.it/?post_type=servizio&p=290",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.trissino.vi.it/?post_type=servizio&p=290",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:18:57.564307Z"
+  },
+  "cambio_residenza": {
+   "service_id": "024110:wp:1826",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.trissino.vi.it/?post_type=servizio&p=1826",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.trissino.vi.it/?post_type=servizio&p=1826",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.trissino.vi.it/?post_type=servizio&p=1826",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:19:06.754828Z"
+  },
+  "stato_civile": {
+   "service_id": "024110:wp:1829",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.trissino.vi.it/?post_type=servizio&p=1829",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.trissino.vi.it/?post_type=servizio&p=1829",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.trissino.vi.it/?post_type=servizio&p=1829",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:19:11.980336Z"
+  },
+  "tributi_imu": {
+   "service_id": "024110:wp:1841",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.trissino.vi.it/?post_type=servizio&p=1841",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.trissino.vi.it/?post_type=servizio&p=1841",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.trissino.vi.it/?post_type=servizio&p=1841",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:19:17.135921Z"
+  }
+ }
+}

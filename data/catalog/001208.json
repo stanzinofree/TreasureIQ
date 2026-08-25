@@ -1,0 +1,110 @@
+{
+ "municipality_istat": "001208",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001208:comweb:richiedere-l-accesso-agli-atti-317-12638-1-2fc9b4da454139fd01c3ab975e4d10db",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.quagliuzzo.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-12638-1-2fc9b4da454139fd01c3ab975e4d10db",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.quagliuzzo.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-12638-1-2fc9b4da454139fd01c3ab975e4d10db",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.quagliuzzo.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-12638-1-2fc9b4da454139fd01c3ab975e4d10db",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.quagliuzzo.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?ce=qglzz1148&IDPr=11237",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.quagliuzzo.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-12638-1-2fc9b4da454139fd01c3ab975e4d10db",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:46:42.054596Z"
+  },
+  "carta_identita": {
+   "service_id": "001208:comweb:carta-d-identita-elettronica-cie-788-12627-1-9c213906d459d6eec8df3a35cb3762e7",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.quagliuzzo.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-12627-1-9c213906d459d6eec8df3a35cb3762e7",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.quagliuzzo.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-12627-1-9c213906d459d6eec8df3a35cb3762e7",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.quagliuzzo.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-12627-1-9c213906d459d6eec8df3a35cb3762e7",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:46:43.997926Z"
+  },
+  "tributi_imu": {
+   "service_id": "001208:comweb:pagare-tributi-imu-600-12728-1-11217c56b84023b68f92066cbb3ca99f",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.quagliuzzo.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-12728-1-11217c56b84023b68f92066cbb3ca99f",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.quagliuzzo.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-12728-1-11217c56b84023b68f92066cbb3ca99f",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.quagliuzzo.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-12728-1-11217c56b84023b68f92066cbb3ca99f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:46:45.939969Z"
+  },
+  "tributi_tari": {
+   "service_id": "001208:comweb:pagamento-tassa-rifiuti-tari-659-12719-1-dcfce9453db09f2379c44e954c08dc11",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.quagliuzzo.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-12719-1-dcfce9453db09f2379c44e954c08dc11",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.quagliuzzo.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-12719-1-dcfce9453db09f2379c44e954c08dc11",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.quagliuzzo.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-12719-1-dcfce9453db09f2379c44e954c08dc11",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:46:48.672215Z"
+  }
+ }
+}

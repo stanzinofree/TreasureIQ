@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "047008",
+ "services": {
+  "accesso_atti": {
+   "service_id": "047008:wp:518",
+   "title": "Richiesta accesso agli atti in materia edilizia per un edificio",
+   "source_url": "https://comune.massa-e-cozzile.pt.it/servizio/accesso-agli-atti-in-materia-edilizia-per-un-edificio/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.massa-e-cozzile.pt.it/servizio/accesso-agli-atti-in-materia-edilizia-per-un-edificio/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.massa-e-cozzile.pt.it/servizio/accesso-agli-atti-in-materia-edilizia-per-un-edificio/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:55:40.432638Z"
+  },
+  "cambio_residenza": {
+   "service_id": "047008:wp:755",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.massa-e-cozzile.pt.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.massa-e-cozzile.pt.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.massa-e-cozzile.pt.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:55:45.916022Z"
+  }
+ }
+}

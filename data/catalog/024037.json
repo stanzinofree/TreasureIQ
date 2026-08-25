@@ -1,0 +1,87 @@
+{
+ "municipality_istat": "024037",
+ "services": {
+  "carta_identita": {
+   "service_id": "024037:wp:246",
+   "title": "Carta di Identità Elettronica-CIE",
+   "source_url": "https://www.comune.crespadoro.vi.it/?post_type=servizio&p=246",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.crespadoro.vi.it/?post_type=servizio&p=246",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.crespadoro.vi.it/?post_type=servizio&p=246",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.crespadoro.vi.it/wp-content/uploads/2024/02/MODULO-ASSENSO-figli-minori.odt",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.crespadoro.vi.it/?post_type=servizio&p=246",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:59:00.889379Z"
+  },
+  "stato_civile": {
+   "service_id": "024037:wp:1067",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.crespadoro.vi.it/?post_type=servizio&p=1067",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.crespadoro.vi.it/?post_type=servizio&p=1067",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.crespadoro.vi.it/?post_type=servizio&p=1067",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:59:07.171925Z"
+  },
+  "tributi_imu": {
+   "service_id": "024037:wp:1035",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.crespadoro.vi.it/?post_type=servizio&p=1035",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.crespadoro.vi.it/?post_type=servizio&p=1035",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.crespadoro.vi.it/?post_type=servizio&p=1035",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:59:14.409627Z"
+  }
+ }
+}

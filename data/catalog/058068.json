@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "058068",
+ "services": {
+  "accesso_atti": {
+   "service_id": "058068:wp:3338",
+   "title": "Richiesta di accesso agli atti documentale",
+   "source_url": "https://comune.morlupo.roma.it/servizio/richiesta-di-accesso-agli-atti-documentale/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.morlupo.roma.it/servizio/richiesta-di-accesso-agli-atti-documentale/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.morlupo.roma.it/servizio/richiesta-di-accesso-agli-atti-documentale/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:01:48.854868Z"
+  },
+  "cambio_residenza": {
+   "service_id": "058068:wp:3551",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.morlupo.roma.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.morlupo.roma.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.morlupo.roma.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:01:51.624327Z"
+  },
+  "carta_identita": {
+   "service_id": "058068:wp:2988",
+   "title": "Carta d’identità elettronica (CIE)",
+   "source_url": "https://comune.morlupo.roma.it/servizio/carta-didentita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.morlupo.roma.it/servizio/carta-didentita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.morlupo.roma.it/servizio/carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:01:54.487459Z"
+  }
+ }
+}

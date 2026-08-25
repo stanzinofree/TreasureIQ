@@ -1,0 +1,123 @@
+{
+ "municipality_istat": "018112",
+ "services": {
+  "accesso_atti": {
+   "service_id": "018112:comweb:richiedere-l-accesso-agli-atti-317-52527-1-171e79e865a81fae5be724a2aee53bb7",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.pievealbignola.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-52527-1-171e79e865a81fae5be724a2aee53bb7",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pievealbignola.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-52527-1-171e79e865a81fae5be724a2aee53bb7",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pievealbignola.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-52527-1-171e79e865a81fae5be724a2aee53bb7",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.pievealbignola.pv.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=pvlbgnl1132&IDPr=12504",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.pievealbignola.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-52527-1-171e79e865a81fae5be724a2aee53bb7",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:22:41.438623Z"
+  },
+  "cambio_residenza": {
+   "service_id": "018112:comweb:cambio-residenza-305-52525-1-1af359bc238a21e88e5fff7d0a40eca9",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.pievealbignola.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-52525-1-1af359bc238a21e88e5fff7d0a40eca9",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pievealbignola.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-52525-1-1af359bc238a21e88e5fff7d0a40eca9",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pievealbignola.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-52525-1-1af359bc238a21e88e5fff7d0a40eca9",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.pievealbignola.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-52525-1-1af359bc238a21e88e5fff7d0a40eca9",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:22:43.755287Z"
+  },
+  "tributi_imu": {
+   "service_id": "018112:comweb:imposta-municipale-propria-imu-953-52616-1-4d3ad31ce2c3eb521e822465d17fb001",
+   "title": "Imposta Municipale Propria (IMU)",
+   "source_url": "https://www.comune.pievealbignola.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-52616-1-4d3ad31ce2c3eb521e822465d17fb001",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pievealbignola.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-52616-1-4d3ad31ce2c3eb521e822465d17fb001",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pievealbignola.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-52616-1-4d3ad31ce2c3eb521e822465d17fb001",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:22:46.057174Z"
+  },
+  "tributi_tari": {
+   "service_id": "018112:comweb:tassa-rifiuti-tari-954-52607-1-0abdf99c8585f6ea3de2cec9868d420f",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.pievealbignola.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-52607-1-0abdf99c8585f6ea3de2cec9868d420f",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pievealbignola.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-52607-1-0abdf99c8585f6ea3de2cec9868d420f",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pievealbignola.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-52607-1-0abdf99c8585f6ea3de2cec9868d420f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:22:48.671630Z"
+  }
+ }
+}

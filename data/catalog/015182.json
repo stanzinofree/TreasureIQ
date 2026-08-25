@@ -1,0 +1,64 @@
+{
+ "municipality_istat": "015182",
+ "services": {
+  "accesso_atti": {
+   "service_id": "015182:comweb:richiedere-l-accesso-agli-atti-317-6698-1-06fa95cb732d8bfa0bf4e5de50744e1e",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.rho.mi.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-6698-1-06fa95cb732d8bfa0bf4e5de50744e1e",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rho.mi.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-6698-1-06fa95cb732d8bfa0bf4e5de50744e1e",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rho.mi.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-6698-1-06fa95cb732d8bfa0bf4e5de50744e1e",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.rho.mi.it/lang/it/servizi/richiedere-laccesso-agli-atti/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.rho.mi.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-6698-1-06fa95cb732d8bfa0bf4e5de50744e1e",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:15:54.648871Z"
+  },
+  "carta_identita": {
+   "service_id": "015182:comweb:carta-d-identita-elettronica-cie-788-6687-1-e9c077d970d0c4a501328ff8db23799e",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.rho.mi.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-6687-1-e9c077d970d0c4a501328ff8db23799e",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rho.mi.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-6687-1-e9c077d970d0c4a501328ff8db23799e",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rho.mi.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-6687-1-e9c077d970d0c4a501328ff8db23799e",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:15:57.904599Z"
+  }
+ }
+}

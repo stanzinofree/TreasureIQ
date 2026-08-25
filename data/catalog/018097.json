@@ -1,0 +1,110 @@
+{
+ "municipality_istat": "018097",
+ "services": {
+  "accesso_atti": {
+   "service_id": "018097:comweb:richiedere-l-accesso-agli-atti-317-6170-1-780b01a86f46f1cb3a598b8cc0cf1d45",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.montescano.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-6170-1-780b01a86f46f1cb3a598b8cc0cf1d45",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montescano.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-6170-1-780b01a86f46f1cb3a598b8cc0cf1d45",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montescano.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-6170-1-780b01a86f46f1cb3a598b8cc0cf1d45",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.montescano.pv.it/Servizi/FiloDiretto2/ProcedimentiClient.aspx?CE=mntscn704&IDPr=1343",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.montescano.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-6170-1-780b01a86f46f1cb3a598b8cc0cf1d45",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:21:50.988420Z"
+  },
+  "carta_identita": {
+   "service_id": "018097:comweb:carta-d-identita-elettronica-cie-788-6159-1-8f74222508e634125e716da862c8d0cc",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.montescano.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-6159-1-8f74222508e634125e716da862c8d0cc",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montescano.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-6159-1-8f74222508e634125e716da862c8d0cc",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montescano.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-6159-1-8f74222508e634125e716da862c8d0cc",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:21:53.597646Z"
+  },
+  "tributi_imu": {
+   "service_id": "018097:comweb:imposta-municipale-propria-imu-953-6260-1-1570314f92d549d855abab52efcfba2c",
+   "title": "Imposta Municipale Propria (IMU)",
+   "source_url": "https://www.comune.montescano.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-6260-1-1570314f92d549d855abab52efcfba2c",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montescano.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-6260-1-1570314f92d549d855abab52efcfba2c",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montescano.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-6260-1-1570314f92d549d855abab52efcfba2c",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:21:56.099808Z"
+  },
+  "tributi_tari": {
+   "service_id": "018097:comweb:tassa-rifiuti-tari-954-6251-1-47867d207decec9e499f3bee8d5260db",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.montescano.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-6251-1-47867d207decec9e499f3bee8d5260db",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montescano.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-6251-1-47867d207decec9e499f3bee8d5260db",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montescano.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-6251-1-47867d207decec9e499f3bee8d5260db",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:21:59.093005Z"
+  }
+ }
+}

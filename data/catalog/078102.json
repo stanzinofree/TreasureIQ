@@ -1,0 +1,87 @@
+{
+ "municipality_istat": "078102",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "078102:wp:482",
+   "title": "Cambio Residenza e Cambio Abitazione + Cambio Residenza da Aire",
+   "source_url": "https://www.comune.rende.cs.it/servizio/cambio-residenza-e-cambio-abitazione-cambio-residenza-da-aire/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rende.cs.it/servizio/cambio-residenza-e-cambio-abitazione-cambio-residenza-da-aire/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rende.cs.it/servizio/cambio-residenza-e-cambio-abitazione-cambio-residenza-da-aire/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:35:00.606520Z"
+  },
+  "tributi_imu": {
+   "service_id": "078102:wp:963",
+   "title": "IMU",
+   "source_url": "https://www.comune.rende.cs.it/servizio/imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rende.cs.it/servizio/imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rende.cs.it/servizio/imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:35:03.011595Z"
+  },
+  "tributi_tari": {
+   "service_id": "078102:wp:938",
+   "title": "Pagamento TARI",
+   "source_url": "https://www.comune.rende.cs.it/servizio/pagamento-tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rende.cs.it/servizio/pagamento-tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rende.cs.it/servizio/pagamento-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.rende.cs.it/wp-content/uploads/2026/08/DeliberadiConsiglioComunale-tariffe-TARI.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rende.cs.it/servizio/pagamento-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:35:05.404466Z"
+  }
+ }
+}

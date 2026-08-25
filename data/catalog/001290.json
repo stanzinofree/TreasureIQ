@@ -1,0 +1,41 @@
+{
+ "municipality_istat": "001290",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001290:comweb:richiedere-l-accesso-agli-atti-317-57568-1-4854b5130e5fb16181cdd72a4a6e5511",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.vaudacanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-57568-1-4854b5130e5fb16181cdd72a4a6e5511",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vaudacanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-57568-1-4854b5130e5fb16181cdd72a4a6e5511",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vaudacanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-57568-1-4854b5130e5fb16181cdd72a4a6e5511",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.vaudacanavese.to.it/lang/it/servizi/richiedere-laccesso-agli-atti/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.vaudacanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-57568-1-4854b5130e5fb16181cdd72a4a6e5511",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:52:06.845741Z"
+  }
+ }
+}

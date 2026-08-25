@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "018029",
+ "services": {
+  "carta_identita": {
+   "service_id": "018029:comweb:carta-d-identita-elettronica-cie-788-6291-1-3735fc55adf7351e2a50362c03333e5f",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.cannetopavese.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-6291-1-3735fc55adf7351e2a50362c03333e5f",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cannetopavese.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-6291-1-3735fc55adf7351e2a50362c03333e5f",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cannetopavese.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-6291-1-3735fc55adf7351e2a50362c03333e5f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:18:52.876849Z"
+  },
+  "tributi_imu": {
+   "service_id": "018029:comweb:imposta-municipale-propria-imu-953-6392-1-f15ed9eb253e3c141201963c3f862155",
+   "title": "Imposta Municipale Propria (IMU)",
+   "source_url": "https://www.comune.cannetopavese.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-6392-1-f15ed9eb253e3c141201963c3f862155",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cannetopavese.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-6392-1-f15ed9eb253e3c141201963c3f862155",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cannetopavese.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-6392-1-f15ed9eb253e3c141201963c3f862155",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:18:55.457571Z"
+  },
+  "tributi_tari": {
+   "service_id": "018029:comweb:tassa-rifiuti-tari-954-6383-1-82ae092fc73880f25a2c4c991c82f0c6",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.cannetopavese.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-6383-1-82ae092fc73880f25a2c4c991c82f0c6",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cannetopavese.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-6383-1-82ae092fc73880f25a2c4c991c82f0c6",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cannetopavese.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-6383-1-82ae092fc73880f25a2c4c991c82f0c6",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:18:59.533713Z"
+  }
+ }
+}

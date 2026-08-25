@@ -1,0 +1,87 @@
+{
+ "municipality_istat": "080057",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "080057:wp:988",
+   "title": "ANPR Cambio di residenza",
+   "source_url": "https://www.comune.palmi.rc.it/servizio/anpr-cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.palmi.rc.it/servizio/anpr-cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.palmi.rc.it/servizio/anpr-cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:40:06.579450Z"
+  },
+  "stato_civile": {
+   "service_id": "080057:wp:2125",
+   "title": "Contributo amministrativo per le richieste di certificati o di estratti di stato civile formati da oltre un secolo",
+   "source_url": "https://www.comune.palmi.rc.it/servizio/contributo-amministrativo-per-le-richieste-di-certificati-o-di-estratti-di-stato-civile-formati-da-oltre-un-secolo/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.palmi.rc.it/servizio/contributo-amministrativo-per-le-richieste-di-certificati-o-di-estratti-di-stato-civile-formati-da-oltre-un-secolo/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.palmi.rc.it/servizio/contributo-amministrativo-per-le-richieste-di-certificati-o-di-estratti-di-stato-civile-formati-da-oltre-un-secolo/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.palmi.rc.it/wp-content/uploads/2025/06/67cad4dcaae2e-Modello_richiesta_di_ricerca_atti_di_Stato_Civile_formati_da_oltre_un_secolo_Palmi.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.palmi.rc.it/servizio/contributo-amministrativo-per-le-richieste-di-certificati-o-di-estratti-di-stato-civile-formati-da-oltre-un-secolo/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:40:08.239251Z"
+  },
+  "tributi_tari": {
+   "service_id": "080057:wp:3046",
+   "title": "Pagare gli avvisi di accertamento della Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.palmi.rc.it/servizio/pagare-gli-avvisi-di-accertamento-della-tassa-rifiuti-tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.palmi.rc.it/servizio/pagare-gli-avvisi-di-accertamento-della-tassa-rifiuti-tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.palmi.rc.it/servizio/pagare-gli-avvisi-di-accertamento-della-tassa-rifiuti-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:40:09.885015Z"
+  }
+ }
+}

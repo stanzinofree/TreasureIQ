@@ -1,0 +1,103 @@
+{
+ "municipality_istat": "082003",
+ "services": {
+  "accesso_atti": {
+   "service_id": "082003:wp:2244",
+   "title": "Richiesta di accesso agli atti",
+   "source_url": "https://www.comune.aliminusa.pa.it/servizio/richiesta-di-accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.aliminusa.pa.it/servizio/richiesta-di-accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.aliminusa.pa.it/servizio/richiesta-di-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:41:27.520980Z"
+  },
+  "tributi_imu": {
+   "service_id": "082003:wp:2994",
+   "title": "Pagamento IMU",
+   "source_url": "https://www.comune.aliminusa.pa.it/servizio/pagamento-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.aliminusa.pa.it/servizio/pagamento-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.aliminusa.pa.it/servizio/pagamento-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.aliminusa.pa.it/wp-content/uploads/2024/02/Delibera-aliquote-IMU-2014.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.aliminusa.pa.it/servizio/pagamento-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.aliminusa.pa.it/wp-content/uploads/2024/02/IMU-su-terreni-agricoli-2014.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.aliminusa.pa.it/servizio/pagamento-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.aliminusa.pa.it/wp-content/uploads/2024/02/Regolamento-Comunale-per-la-disciplina-dellimposta-municipale-propria-IMU.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.aliminusa.pa.it/servizio/pagamento-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.aliminusa.pa.it/wp-content/uploads/2024/02/Regolamento-generale-delle-entrate-tributarie-comunali.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.aliminusa.pa.it/servizio/pagamento-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:41:30.004781Z"
+  }
+ }
+}

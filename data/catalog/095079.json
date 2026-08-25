@@ -1,0 +1,87 @@
+{
+ "municipality_istat": "095079",
+ "services": {
+  "accesso_atti": {
+   "service_id": "095079:wp:171",
+   "title": "Richiesta di accesso agli atti",
+   "source_url": "https://comune.bosa.or.it/servizio/richiesta-di-accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.bosa.or.it/servizio/richiesta-di-accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.bosa.or.it/servizio/richiesta-di-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.bosa.or.it/wp-content/uploads/2025/06/3331-6.doc",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.bosa.or.it/servizio/richiesta-di-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:54:41.692038Z"
+  },
+  "cambio_residenza": {
+   "service_id": "095079:wp:5307",
+   "title": "Dichiarazioni di cambio residenza ANPR",
+   "source_url": "https://comune.bosa.or.it/servizio/dichiarazioni-di-cambio-residenza-anpr/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.bosa.or.it/servizio/dichiarazioni-di-cambio-residenza-anpr/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.bosa.or.it/servizio/dichiarazioni-di-cambio-residenza-anpr/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:54:44.779184Z"
+  },
+  "stato_civile": {
+   "service_id": "095079:wp:5314",
+   "title": "Rilascio certificati di stato civile",
+   "source_url": "https://comune.bosa.or.it/servizio/rilascio-certificati-di-stato-civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.bosa.or.it/servizio/rilascio-certificati-di-stato-civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.bosa.or.it/servizio/rilascio-certificati-di-stato-civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:54:47.920350Z"
+  }
+ }
+}

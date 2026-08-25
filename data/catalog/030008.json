@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "030008",
+ "services": {
+  "accesso_atti": {
+   "service_id": "030008:wp:342",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.bagnariaarsa.ud.it/?post_type=servizio&p=342",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bagnariaarsa.ud.it/?post_type=servizio&p=342",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bagnariaarsa.ud.it/?post_type=servizio&p=342",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.bagnariaarsa.ud.it/wp-content/uploads/2024/09/DG-121.2003-Bagnaria-Arsa.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bagnariaarsa.ud.it/?post_type=servizio&p=342",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.bagnariaarsa.ud.it/wp-content/uploads/2024/09/DG-156.2022-Bagnaria-Arsa.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bagnariaarsa.ud.it/?post_type=servizio&p=342",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:38:07.890022Z"
+  },
+  "cambio_residenza": {
+   "service_id": "030008:wp:1253",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.bagnariaarsa.ud.it/?post_type=servizio&p=1253",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bagnariaarsa.ud.it/?post_type=servizio&p=1253",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bagnariaarsa.ud.it/?post_type=servizio&p=1253",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:38:16.516094Z"
+  },
+  "stato_civile": {
+   "service_id": "030008:wp:1263",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.bagnariaarsa.ud.it/?post_type=servizio&p=1263",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bagnariaarsa.ud.it/?post_type=servizio&p=1263",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bagnariaarsa.ud.it/?post_type=servizio&p=1263",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:38:22.776483Z"
+  }
+ }
+}

@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "078050",
+ "services": {
+  "accesso_atti": {
+   "service_id": "078050:wp:269",
+   "title": "Richiedere l’accesso agli atti",
+   "source_url": "https://comune.domanico.cs.it/servizio/richiedere-laccesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.domanico.cs.it/servizio/richiedere-laccesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.domanico.cs.it/servizio/richiedere-laccesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:33:05.800495Z"
+  },
+  "cambio_residenza": {
+   "service_id": "078050:wp:285",
+   "title": "Richiesta dichiarazione di cambio di residenza",
+   "source_url": "https://comune.domanico.cs.it/servizio/richiesta-dichiarazione-di-cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.domanico.cs.it/servizio/richiesta-dichiarazione-di-cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.domanico.cs.it/servizio/richiesta-dichiarazione-di-cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:33:09.867242Z"
+  },
+  "tributi_imu": {
+   "service_id": "078050:wp:284",
+   "title": "Calcolo IMU (Imposta Municipale Propria)",
+   "source_url": "https://comune.domanico.cs.it/servizio/calcolo-imu-imposta-municipale-propria/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.domanico.cs.it/servizio/calcolo-imu-imposta-municipale-propria/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.domanico.cs.it/servizio/calcolo-imu-imposta-municipale-propria/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:33:13.170598Z"
+  }
+ }
+}

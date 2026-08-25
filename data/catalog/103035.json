@@ -1,0 +1,136 @@
+{
+ "municipality_istat": "103035",
+ "services": {
+  "accesso_atti": {
+   "service_id": "103035:comweb:richiedere-l-accesso-agli-atti-317-54655-1-db3db25067f9f91fd0ce1b0a41703179",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.gravellonatoce.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-54655-1-db3db25067f9f91fd0ce1b0a41703179",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gravellonatoce.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-54655-1-db3db25067f9f91fd0ce1b0a41703179",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gravellonatoce.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-54655-1-db3db25067f9f91fd0ce1b0a41703179",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.gravellonatoce.vb.it/lang/it/servizi/richiedere-laccesso-agli-atti/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.gravellonatoce.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-54655-1-db3db25067f9f91fd0ce1b0a41703179",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:02:26.789376Z"
+  },
+  "cambio_residenza": {
+   "service_id": "103035:comweb:cambio-residenza-305-54653-1-98325c362c5ca4bf5bb38e493ca1d5e0",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.gravellonatoce.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-54653-1-98325c362c5ca4bf5bb38e493ca1d5e0",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gravellonatoce.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-54653-1-98325c362c5ca4bf5bb38e493ca1d5e0",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gravellonatoce.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-54653-1-98325c362c5ca4bf5bb38e493ca1d5e0",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.gravellonatoce.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-54653-1-98325c362c5ca4bf5bb38e493ca1d5e0",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:02:28.806812Z"
+  },
+  "carta_identita": {
+   "service_id": "103035:comweb:carta-d-identita-elettronica-cie-788-54643-1-38700cd9159ec89262761598852a2c45",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.gravellonatoce.vb.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-54643-1-38700cd9159ec89262761598852a2c45",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gravellonatoce.vb.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-54643-1-38700cd9159ec89262761598852a2c45",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gravellonatoce.vb.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-54643-1-38700cd9159ec89262761598852a2c45",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:02:30.898639Z"
+  },
+  "stato_civile": {
+   "service_id": "103035:comweb:certificato-di-stato-civile-6-54643-1-3bf8431835ce286508cd7f512b3721be",
+   "title": "Certificato di stato civile",
+   "source_url": "https://www.comune.gravellonatoce.vb.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-stato-civile-6-54643-1-3bf8431835ce286508cd7f512b3721be",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gravellonatoce.vb.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-stato-civile-6-54643-1-3bf8431835ce286508cd7f512b3721be",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gravellonatoce.vb.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-stato-civile-6-54643-1-3bf8431835ce286508cd7f512b3721be",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/certificati/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.gravellonatoce.vb.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-stato-civile-6-54643-1-3bf8431835ce286508cd7f512b3721be",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:02:33.064336Z"
+  }
+ }
+}

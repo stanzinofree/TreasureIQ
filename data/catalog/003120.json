@@ -1,0 +1,110 @@
+{
+ "municipality_istat": "003120",
+ "services": {
+  "accesso_atti": {
+   "service_id": "003120:comweb:richiedere-l-accesso-agli-atti-317-45904-1-9a5e790a0a584b8c95e569b145199354",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.pogno.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-45904-1-9a5e790a0a584b8c95e569b145199354",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pogno.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-45904-1-9a5e790a0a584b8c95e569b145199354",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pogno.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-45904-1-9a5e790a0a584b8c95e569b145199354",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:58:46.229978Z"
+  },
+  "carta_identita": {
+   "service_id": "003120:comweb:carta-d-identita-elettronica-cie-788-45892-1-30829d63a14b1b75a21e339ac84261f2",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.pogno.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-45892-1-30829d63a14b1b75a21e339ac84261f2",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pogno.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-45892-1-30829d63a14b1b75a21e339ac84261f2",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pogno.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-45892-1-30829d63a14b1b75a21e339ac84261f2",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:58:48.457886Z"
+  },
+  "stato_civile": {
+   "service_id": "003120:comweb:certificato-di-nascita-26-45897-1-26e8c8d77f6396ad56a5128dab9f36c5",
+   "title": "Certificato di nascita",
+   "source_url": "https://www.comune.pogno.no.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-nascita-26-45897-1-26e8c8d77f6396ad56a5128dab9f36c5",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pogno.no.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-nascita-26-45897-1-26e8c8d77f6396ad56a5128dab9f36c5",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pogno.no.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-nascita-26-45897-1-26e8c8d77f6396ad56a5128dab9f36c5",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/certificati/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.pogno.no.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-nascita-26-45897-1-26e8c8d77f6396ad56a5128dab9f36c5",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:58:51.018976Z"
+  },
+  "tributi_tari": {
+   "service_id": "003120:comweb:pagamento-tassa-rifiuti-tari-659-45984-1-d15e0f8bcb38a8f25442d9675114c938",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.pogno.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-45984-1-d15e0f8bcb38a8f25442d9675114c938",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pogno.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-45984-1-d15e0f8bcb38a8f25442d9675114c938",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pogno.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-45984-1-d15e0f8bcb38a8f25442d9675114c938",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:58:52.957568Z"
+  }
+ }
+}

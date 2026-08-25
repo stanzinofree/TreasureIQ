@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "001114",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001114:comweb:richiedere-l-accesso-agli-atti-317-62090-1-6dbd5bffde64b969b3637d3b4283ab04",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.giaglione.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-62090-1-6dbd5bffde64b969b3637d3b4283ab04",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.giaglione.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-62090-1-6dbd5bffde64b969b3637d3b4283ab04",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.giaglione.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-62090-1-6dbd5bffde64b969b3637d3b4283ab04",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:43:17.648123Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001114:comweb:cambio-residenza-305-62088-1-6cf4a15a5690eb683264723a039be191",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.giaglione.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-62088-1-6cf4a15a5690eb683264723a039be191",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.giaglione.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-62088-1-6cf4a15a5690eb683264723a039be191",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.giaglione.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-62088-1-6cf4a15a5690eb683264723a039be191",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:43:20.304268Z"
+  }
+ }
+}

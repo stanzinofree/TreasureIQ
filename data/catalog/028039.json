@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "028039",
+ "services": {
+  "accesso_atti": {
+   "service_id": "028039:wp:388",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.gallieraveneta.pd.it/?post_type=servizio&p=388",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gallieraveneta.pd.it/?post_type=servizio&p=388",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gallieraveneta.pd.it/?post_type=servizio&p=388",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:59:26.743197Z"
+  },
+  "cambio_residenza": {
+   "service_id": "028039:wp:229",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.gallieraveneta.pd.it/?post_type=servizio&p=229",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gallieraveneta.pd.it/?post_type=servizio&p=229",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gallieraveneta.pd.it/?post_type=servizio&p=229",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:59:34.124503Z"
+  },
+  "stato_civile": {
+   "service_id": "028039:wp:232",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.gallieraveneta.pd.it/?post_type=servizio&p=232",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gallieraveneta.pd.it/?post_type=servizio&p=232",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gallieraveneta.pd.it/?post_type=servizio&p=232",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:59:41.209586Z"
+  }
+ }
+}

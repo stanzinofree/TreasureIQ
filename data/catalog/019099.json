@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "019099",
+ "services": {
+  "accesso_atti": {
+   "service_id": "019099:wp:1085",
+   "title": "Accesso agli atti",
+   "source_url": "https://www.comune.sospiro.cr.it/servizio/accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sospiro.cr.it/servizio/accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sospiro.cr.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:28:13.387627Z"
+  },
+  "cambio_residenza": {
+   "service_id": "019099:wp:1089",
+   "title": "Cambio di residenza – ANPR",
+   "source_url": "https://www.comune.sospiro.cr.it/servizio/cambio-di-residenza-anpr/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sospiro.cr.it/servizio/cambio-di-residenza-anpr/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sospiro.cr.it/servizio/cambio-di-residenza-anpr/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:28:16.513679Z"
+  },
+  "tributi_imu": {
+   "service_id": "019099:wp:1067",
+   "title": "IMU – IMPOSTA MUNICIPALE PROPRIA",
+   "source_url": "https://www.comune.sospiro.cr.it/servizio/imu-imposta-municipale-unica/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sospiro.cr.it/servizio/imu-imposta-municipale-unica/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sospiro.cr.it/servizio/imu-imposta-municipale-unica/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:28:18.849287Z"
+  },
+  "tributi_tari": {
+   "service_id": "019099:wp:1619",
+   "title": "TASSA SUI RIFIUTI – TARI",
+   "source_url": "https://www.comune.sospiro.cr.it/servizio/tassa-sui-rifiuti-tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sospiro.cr.it/servizio/tassa-sui-rifiuti-tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sospiro.cr.it/servizio/tassa-sui-rifiuti-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:28:20.202178Z"
+  }
+ }
+}

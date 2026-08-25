@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "029035",
+ "services": {
+  "accesso_atti": {
+   "service_id": "029035:wp:231",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.pettorazza.ro.it/?post_type=servizio&p=231",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pettorazza.ro.it/?post_type=servizio&p=231",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pettorazza.ro.it/?post_type=servizio&p=231",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:34:25.132601Z"
+  },
+  "cambio_residenza": {
+   "service_id": "029035:wp:983",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.pettorazza.ro.it/?post_type=servizio&p=983",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pettorazza.ro.it/?post_type=servizio&p=983",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pettorazza.ro.it/?post_type=servizio&p=983",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:34:30.980804Z"
+  },
+  "carta_identita": {
+   "service_id": "029035:wp:223",
+   "title": "Carta di identità elettronica",
+   "source_url": "https://www.comune.pettorazza.ro.it/?post_type=servizio&p=223",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pettorazza.ro.it/?post_type=servizio&p=223",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pettorazza.ro.it/?post_type=servizio&p=223",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:34:37.549717Z"
+  },
+  "stato_civile": {
+   "service_id": "029035:wp:987",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.pettorazza.ro.it/?post_type=servizio&p=987",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pettorazza.ro.it/?post_type=servizio&p=987",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pettorazza.ro.it/?post_type=servizio&p=987",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:34:46.561102Z"
+  }
+ }
+}

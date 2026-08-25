@@ -1,0 +1,64 @@
+{
+ "municipality_istat": "001230",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001230:comweb:richiedere-l-accesso-agli-atti-317-39040-1-4e0c2c2579ad94cb74ad31db55e3b93e",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.rueglio.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-39040-1-4e0c2c2579ad94cb74ad31db55e3b93e",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rueglio.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-39040-1-4e0c2c2579ad94cb74ad31db55e3b93e",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rueglio.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-39040-1-4e0c2c2579ad94cb74ad31db55e3b93e",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.rueglio.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=rgl1120&IDPr=11567",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.rueglio.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-39040-1-4e0c2c2579ad94cb74ad31db55e3b93e",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:48:08.264715Z"
+  },
+  "tributi_tari": {
+   "service_id": "001230:comweb:agevolazioni-tassa-rifiuti-tari-975-39120-1-eb724227f73d5eecc845c334af9e3115",
+   "title": "Agevolazioni Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.rueglio.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/agevolazioni-tassa-rifiuti-tari-975-39120-1-eb724227f73d5eecc845c334af9e3115",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rueglio.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/agevolazioni-tassa-rifiuti-tari-975-39120-1-eb724227f73d5eecc845c334af9e3115",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rueglio.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/agevolazioni-tassa-rifiuti-tari-975-39120-1-eb724227f73d5eecc845c334af9e3115",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:48:10.151326Z"
+  }
+ }
+}

@@ -1,0 +1,64 @@
+{
+ "municipality_istat": "074020",
+ "services": {
+  "accesso_atti": {
+   "service_id": "074020:wp:2551",
+   "title": "Domanda di accesso agli atti",
+   "source_url": "https://comune.villacastelli.br.it/servizio/domanda-di-accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.villacastelli.br.it/servizio/domanda-di-accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.villacastelli.br.it/servizio/domanda-di-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:27:24.515195Z"
+  },
+  "carta_identita": {
+   "service_id": "074020:wp:1452",
+   "title": "Carta di identità elettronica – agenda online",
+   "source_url": "https://comune.villacastelli.br.it/servizio/carta-di-identita-elettronica-agenda-online/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.villacastelli.br.it/servizio/carta-di-identita-elettronica-agenda-online/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.villacastelli.br.it/servizio/carta-di-identita-elettronica-agenda-online/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.villacastelli.br.it/wp-content/uploads/2025/04/DELEGA.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.villacastelli.br.it/servizio/carta-di-identita-elettronica-agenda-online/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:27:27.168134Z"
+  }
+ }
+}

@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "103071",
+ "services": {
+  "accesso_atti": {
+   "service_id": "103071:comweb:richiedere-l-accesso-agli-atti-317-61159-1-cc7f49da9170941402e495b846cede46",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.varzo.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-61159-1-cc7f49da9170941402e495b846cede46",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.varzo.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-61159-1-cc7f49da9170941402e495b846cede46",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.varzo.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-61159-1-cc7f49da9170941402e495b846cede46",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:04:00.694581Z"
+  },
+  "cambio_residenza": {
+   "service_id": "103071:comweb:cambio-residenza-305-61157-1-4f7d6e3ddfd01148e6dfe8ef32d28bd0",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.varzo.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-61157-1-4f7d6e3ddfd01148e6dfe8ef32d28bd0",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.varzo.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-61157-1-4f7d6e3ddfd01148e6dfe8ef32d28bd0",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.varzo.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-61157-1-4f7d6e3ddfd01148e6dfe8ef32d28bd0",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:04:03.173981Z"
+  }
+ }
+}

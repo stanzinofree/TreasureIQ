@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "001172",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001172:comweb:richiedere-l-accesso-agli-atti-317-22671-1-d28cd2490cc619f0f5908d2e73e7ca8c",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.oriocanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-22671-1-d28cd2490cc619f0f5908d2e73e7ca8c",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.oriocanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-22671-1-d28cd2490cc619f0f5908d2e73e7ca8c",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.oriocanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-22671-1-d28cd2490cc619f0f5908d2e73e7ca8c",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.oriocanavese.to.it/redirect.html?F=PRA11X4ADMwADMwADM",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.oriocanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-22671-1-d28cd2490cc619f0f5908d2e73e7ca8c",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:45:13.869875Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001172:comweb:cambio-residenza-305-22669-1-6e5db73e1426803dd2d4caaea6329444",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.oriocanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-22669-1-6e5db73e1426803dd2d4caaea6329444",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.oriocanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-22669-1-6e5db73e1426803dd2d4caaea6329444",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.oriocanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-22669-1-6e5db73e1426803dd2d4caaea6329444",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.oriocanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-22669-1-6e5db73e1426803dd2d4caaea6329444",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:45:16.326811Z"
+  },
+  "carta_identita": {
+   "service_id": "001172:comweb:carta-d-identita-elettronica-cie-788-22659-1-633668968489edfd350004329b7814e2",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.oriocanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-22659-1-633668968489edfd350004329b7814e2",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.oriocanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-22659-1-633668968489edfd350004329b7814e2",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.oriocanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-22659-1-633668968489edfd350004329b7814e2",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:45:18.563844Z"
+  }
+ }
+}

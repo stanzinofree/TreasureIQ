@@ -1,0 +1,146 @@
+{
+ "municipality_istat": "001231",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001231:comweb:richiedere-l-accesso-agli-atti-317-22407-1-e9267e49cdeebe62dac1e2efd510d404",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.salassa.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-22407-1-e9267e49cdeebe62dac1e2efd510d404",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.salassa.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-22407-1-e9267e49cdeebe62dac1e2efd510d404",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.salassa.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-22407-1-e9267e49cdeebe62dac1e2efd510d404",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.salassa.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=slss1152&IDPr=11511",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.salassa.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-22407-1-e9267e49cdeebe62dac1e2efd510d404",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:48:12.157507Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001231:comweb:cambio-residenza-305-22405-1-e1d85b3a83dbb12e6159acd91c919aa7",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.salassa.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-22405-1-e1d85b3a83dbb12e6159acd91c919aa7",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.salassa.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-22405-1-e1d85b3a83dbb12e6159acd91c919aa7",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.salassa.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-22405-1-e1d85b3a83dbb12e6159acd91c919aa7",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.salassa.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-22405-1-e1d85b3a83dbb12e6159acd91c919aa7",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:48:14.021839Z"
+  },
+  "carta_identita": {
+   "service_id": "001231:comweb:carta-d-identita-elettronica-cie-788-22395-1-4bc628a9f5e0c968f4e77434e74e4f06",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.salassa.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-22395-1-4bc628a9f5e0c968f4e77434e74e4f06",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.salassa.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-22395-1-4bc628a9f5e0c968f4e77434e74e4f06",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.salassa.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-22395-1-4bc628a9f5e0c968f4e77434e74e4f06",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:48:15.886052Z"
+  },
+  "tributi_imu": {
+   "service_id": "001231:comweb:imposta-municipale-propria-imu-953-22496-1-5e60473b4ad23e6e0c19c31fe98a7225",
+   "title": "Imposta Municipale Propria (IMU)",
+   "source_url": "https://www.comune.salassa.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-22496-1-5e60473b4ad23e6e0c19c31fe98a7225",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.salassa.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-22496-1-5e60473b4ad23e6e0c19c31fe98a7225",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.salassa.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-22496-1-5e60473b4ad23e6e0c19c31fe98a7225",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:48:18.351502Z"
+  },
+  "tributi_tari": {
+   "service_id": "001231:comweb:pagamento-tassa-rifiuti-tari-659-22487-1-17f42cd65cdddd5958a74c9309489be8",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.salassa.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-22487-1-17f42cd65cdddd5958a74c9309489be8",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.salassa.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-22487-1-17f42cd65cdddd5958a74c9309489be8",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.salassa.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-22487-1-17f42cd65cdddd5958a74c9309489be8",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:48:20.202937Z"
+  }
+ }
+}

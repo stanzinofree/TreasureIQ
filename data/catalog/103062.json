@@ -1,0 +1,87 @@
+{
+ "municipality_istat": "103062",
+ "services": {
+  "accesso_atti": {
+   "service_id": "103062:comweb:richiedere-l-accesso-agli-atti-317-30855-1-d797731251179660586aa88ca2f67d58",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.santamariamaggiore.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-30855-1-d797731251179660586aa88ca2f67d58",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.santamariamaggiore.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-30855-1-d797731251179660586aa88ca2f67d58",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.santamariamaggiore.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-30855-1-d797731251179660586aa88ca2f67d58",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.santamariamaggiore.vb.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=sntmr593&IDPr=5909",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.santamariamaggiore.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-30855-1-d797731251179660586aa88ca2f67d58",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:03:38.919780Z"
+  },
+  "cambio_residenza": {
+   "service_id": "103062:comweb:cambio-residenza-305-30853-1-325f01216a30ce8fd21597e3b2730976",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.santamariamaggiore.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-30853-1-325f01216a30ce8fd21597e3b2730976",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.santamariamaggiore.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-30853-1-325f01216a30ce8fd21597e3b2730976",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.santamariamaggiore.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-30853-1-325f01216a30ce8fd21597e3b2730976",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:03:40.827392Z"
+  },
+  "carta_identita": {
+   "service_id": "103062:comweb:carta-d-identita-1-30843-1-91787e2821a8085096b6017b5e8d684b",
+   "title": "Carta d'Identità",
+   "source_url": "https://www.comune.santamariamaggiore.vb.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-30843-1-91787e2821a8085096b6017b5e8d684b",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.santamariamaggiore.vb.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-30843-1-91787e2821a8085096b6017b5e8d684b",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.santamariamaggiore.vb.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-30843-1-91787e2821a8085096b6017b5e8d684b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:03:42.761576Z"
+  }
+ }
+}

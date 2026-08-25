@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "028004",
+ "services": {
+  "carta_identita": {
+   "service_id": "028004:wp:799",
+   "title": "Carta di Identita' Elettronica",
+   "source_url": "https://www.comune.anguillaraveneta.pd.it/?post_type=servizio&p=799",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.anguillaraveneta.pd.it/?post_type=servizio&p=799",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.anguillaraveneta.pd.it/?post_type=servizio&p=799",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:47:58.786266Z"
+  },
+  "stato_civile": {
+   "service_id": "028004:wp:1243",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.anguillaraveneta.pd.it/?post_type=servizio&p=1243",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.anguillaraveneta.pd.it/?post_type=servizio&p=1243",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.anguillaraveneta.pd.it/?post_type=servizio&p=1243",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:48:05.837335Z"
+  },
+  "tributi_imu": {
+   "service_id": "028004:wp:1102",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.anguillaraveneta.pd.it/?post_type=servizio&p=1102",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.anguillaraveneta.pd.it/?post_type=servizio&p=1102",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.anguillaraveneta.pd.it/?post_type=servizio&p=1102",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:48:25.335091Z"
+  }
+ }
+}

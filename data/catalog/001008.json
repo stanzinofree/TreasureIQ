@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "001008",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001008:comweb:richiedere-l-accesso-agli-atti-317-59430-1-f19445129c3be081dad0002f800cc477",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.alpignano.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-59430-1-f19445129c3be081dad0002f800cc477",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.alpignano.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-59430-1-f19445129c3be081dad0002f800cc477",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.alpignano.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-59430-1-f19445129c3be081dad0002f800cc477",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:38:27.264477Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001008:comweb:cambio-residenza-305-59428-1-ed80250a6bea88e349c3d678093f1e4f",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.alpignano.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-59428-1-ed80250a6bea88e349c3d678093f1e4f",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.alpignano.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-59428-1-ed80250a6bea88e349c3d678093f1e4f",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.alpignano.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-59428-1-ed80250a6bea88e349c3d678093f1e4f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:38:30.658525Z"
+  }
+ }
+}

@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "026014",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "026014:wp:1832",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.cavaso.tv.it/?post_type=servizio&p=1832",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cavaso.tv.it/?post_type=servizio&p=1832",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cavaso.tv.it/?post_type=servizio&p=1832",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:26:23.958540Z"
+  },
+  "carta_identita": {
+   "service_id": "026014:wp:366",
+   "title": "CIE - Carta di Identita' Elettronica",
+   "source_url": "https://www.comune.cavaso.tv.it/?post_type=servizio&p=366",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cavaso.tv.it/?post_type=servizio&p=366",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cavaso.tv.it/?post_type=servizio&p=366",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:26:33.728197Z"
+  },
+  "stato_civile": {
+   "service_id": "026014:wp:1854",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.cavaso.tv.it/?post_type=servizio&p=1854",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cavaso.tv.it/?post_type=servizio&p=1854",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cavaso.tv.it/?post_type=servizio&p=1854",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:26:40.579967Z"
+  },
+  "tributi_imu": {
+   "service_id": "026014:wp:1830",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.cavaso.tv.it/?post_type=servizio&p=1830",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cavaso.tv.it/?post_type=servizio&p=1830",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cavaso.tv.it/?post_type=servizio&p=1830",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:26:50.998445Z"
+  }
+ }
+}

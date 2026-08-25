@@ -1,0 +1,41 @@
+{
+ "municipality_istat": "063087",
+ "services": {
+  "stato_civile": {
+   "service_id": "063087:comweb:certificato-di-stato-civile-6-59152-1-ef327a6fc6823ba8a4f0ca44cb3b8d55",
+   "title": "Certificato di stato civile",
+   "source_url": "https://www.comune.villaricca.na.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-stato-civile-6-59152-1-ef327a6fc6823ba8a4f0ca44cb3b8d55",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.villaricca.na.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-stato-civile-6-59152-1-ef327a6fc6823ba8a4f0ca44cb3b8d55",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.villaricca.na.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-stato-civile-6-59152-1-ef327a6fc6823ba8a4f0ca44cb3b8d55",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/certificati/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.villaricca.na.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-stato-civile-6-59152-1-ef327a6fc6823ba8a4f0ca44cb3b8d55",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:15:49.238855Z"
+  }
+ }
+}

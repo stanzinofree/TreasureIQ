@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "029025",
+ "services": {
+  "accesso_atti": {
+   "service_id": "029025:wp:309",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.gaiba.ro.it/?post_type=servizio&p=309",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gaiba.ro.it/?post_type=servizio&p=309",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gaiba.ro.it/?post_type=servizio&p=309",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:33:26.071838Z"
+  },
+  "cambio_residenza": {
+   "service_id": "029025:wp:366",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.gaiba.ro.it/?post_type=servizio&p=366",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gaiba.ro.it/?post_type=servizio&p=366",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gaiba.ro.it/?post_type=servizio&p=366",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:33:32.161153Z"
+  },
+  "stato_civile": {
+   "service_id": "029025:wp:369",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.gaiba.ro.it/?post_type=servizio&p=369",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gaiba.ro.it/?post_type=servizio&p=369",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gaiba.ro.it/?post_type=servizio&p=369",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:33:41.640224Z"
+  },
+  "tributi_imu": {
+   "service_id": "029025:wp:588",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.gaiba.ro.it/?post_type=servizio&p=588",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gaiba.ro.it/?post_type=servizio&p=588",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gaiba.ro.it/?post_type=servizio&p=588",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:33:47.693317Z"
+  }
+ }
+}

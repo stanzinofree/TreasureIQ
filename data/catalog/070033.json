@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "070033",
+ "services": {
+  "accesso_atti": {
+   "service_id": "070033:wp:1858",
+   "title": "Accesso agli atti",
+   "source_url": "https://www.comune.lucito.cb.it/servizio/servizio-2/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.lucito.cb.it/servizio/servizio-2/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.lucito.cb.it/servizio/servizio-2/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:24:50.424956Z"
+  },
+  "carta_identita": {
+   "service_id": "070033:wp:123",
+   "title": "Carta d’identità elettronica (CIE)",
+   "source_url": "https://www.comune.lucito.cb.it/servizio/carta-didentita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.lucito.cb.it/servizio/carta-didentita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.lucito.cb.it/servizio/carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:24:52.034994Z"
+  },
+  "tributi_imu": {
+   "service_id": "070033:wp:1868",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.lucito.cb.it/servizio/pagare-tributi-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.lucito.cb.it/servizio/pagare-tributi-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.lucito.cb.it/servizio/pagare-tributi-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:24:53.598060Z"
+  }
+ }
+}

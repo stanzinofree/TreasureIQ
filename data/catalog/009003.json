@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "009003",
+ "services": {
+  "tributi_imu": {
+   "service_id": "009003:wp:457",
+   "title": "Calcolo imposta IMU dovuta alle scadenze annuali e ravvedimento operoso",
+   "source_url": "https://www.comune.albissolamarina.sv.it/servizio/calcolo-imposta-imu-dovuta-alle-scadenze-annuali-e-ravvedimento-operoso/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.albissolamarina.sv.it/servizio/calcolo-imposta-imu-dovuta-alle-scadenze-annuali-e-ravvedimento-operoso/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.albissolamarina.sv.it/servizio/calcolo-imposta-imu-dovuta-alle-scadenze-annuali-e-ravvedimento-operoso/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:11:40.767485Z"
+  },
+  "tributi_tari": {
+   "service_id": "009003:wp:458",
+   "title": "Attivazione – variazione – cessazione del servizio TARI",
+   "source_url": "https://www.comune.albissolamarina.sv.it/servizio/attivazione-variazione-cessazione-del-servizio-tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.albissolamarina.sv.it/servizio/attivazione-variazione-cessazione-del-servizio-tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.albissolamarina.sv.it/servizio/attivazione-variazione-cessazione-del-servizio-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:11:42.155459Z"
+  }
+ }
+}

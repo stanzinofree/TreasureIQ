@@ -1,0 +1,146 @@
+{
+ "municipality_istat": "001244",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001244:comweb:richiedere-l-accesso-agli-atti-317-33496-1-1003638864777846bbe07cdc8c5b0a42",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.sangiorgiocanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-33496-1-1003638864777846bbe07cdc8c5b0a42",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sangiorgiocanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-33496-1-1003638864777846bbe07cdc8c5b0a42",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sangiorgiocanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-33496-1-1003638864777846bbe07cdc8c5b0a42",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.sangiorgiocanavese.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=sngrgcnvs326&IDPr=10886",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.sangiorgiocanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-33496-1-1003638864777846bbe07cdc8c5b0a42",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:48:54.976028Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001244:comweb:cambio-residenza-305-33494-1-a15bc840ba379079d216cec94b3a6d15",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.sangiorgiocanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-33494-1-a15bc840ba379079d216cec94b3a6d15",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sangiorgiocanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-33494-1-a15bc840ba379079d216cec94b3a6d15",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sangiorgiocanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-33494-1-a15bc840ba379079d216cec94b3a6d15",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.sangiorgiocanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-33494-1-a15bc840ba379079d216cec94b3a6d15",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:48:56.748116Z"
+  },
+  "carta_identita": {
+   "service_id": "001244:comweb:carta-d-identita-1-33484-1-2f9a499346acea76a14e5cb67854c6fb",
+   "title": "Carta d'Identità",
+   "source_url": "https://www.comune.sangiorgiocanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-33484-1-2f9a499346acea76a14e5cb67854c6fb",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sangiorgiocanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-33484-1-2f9a499346acea76a14e5cb67854c6fb",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sangiorgiocanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-33484-1-2f9a499346acea76a14e5cb67854c6fb",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:48:59.147957Z"
+  },
+  "tributi_imu": {
+   "service_id": "001244:comweb:pagare-tributi-imu-600-33585-1-ff379bffd087382d63394053a7968258",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.sangiorgiocanavese.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-33585-1-ff379bffd087382d63394053a7968258",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sangiorgiocanavese.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-33585-1-ff379bffd087382d63394053a7968258",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sangiorgiocanavese.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-33585-1-ff379bffd087382d63394053a7968258",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:49:01.768401Z"
+  },
+  "tributi_tari": {
+   "service_id": "001244:comweb:pagamento-tassa-rifiuti-tari-659-33576-1-a8babf2bf9f907e9bddbb8613a0d92f8",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.sangiorgiocanavese.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-33576-1-a8babf2bf9f907e9bddbb8613a0d92f8",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sangiorgiocanavese.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-33576-1-a8babf2bf9f907e9bddbb8613a0d92f8",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sangiorgiocanavese.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-33576-1-a8babf2bf9f907e9bddbb8613a0d92f8",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:49:04.108297Z"
+  }
+ }
+}

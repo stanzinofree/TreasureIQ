@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "028078",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "028078:wp:1532",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.sanpietroingu.pd.it/?post_type=servizio&p=1532",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanpietroingu.pd.it/?post_type=servizio&p=1532",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanpietroingu.pd.it/?post_type=servizio&p=1532",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:18:34.505192Z"
+  },
+  "stato_civile": {
+   "service_id": "028078:wp:1536",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.sanpietroingu.pd.it/?post_type=servizio&p=1536",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanpietroingu.pd.it/?post_type=servizio&p=1536",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanpietroingu.pd.it/?post_type=servizio&p=1536",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:18:40.634002Z"
+  },
+  "tributi_imu": {
+   "service_id": "028078:wp:1529",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.sanpietroingu.pd.it/?post_type=servizio&p=1529",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanpietroingu.pd.it/?post_type=servizio&p=1529",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanpietroingu.pd.it/?post_type=servizio&p=1529",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:18:47.021810Z"
+  }
+ }
+}

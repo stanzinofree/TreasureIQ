@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "026025",
+ "services": {
+  "accesso_atti": {
+   "service_id": "026025:wp:476",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.crocetta.tv.it/?post_type=servizio&p=476",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.crocetta.tv.it/?post_type=servizio&p=476",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.crocetta.tv.it/?post_type=servizio&p=476",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:29:15.045543Z"
+  },
+  "stato_civile": {
+   "service_id": "026025:wp:1310",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.crocetta.tv.it/?post_type=servizio&p=1310",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.crocetta.tv.it/?post_type=servizio&p=1310",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.crocetta.tv.it/?post_type=servizio&p=1310",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:29:22.567422Z"
+  },
+  "tributi_imu": {
+   "service_id": "026025:wp:1632",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.crocetta.tv.it/?post_type=servizio&p=1632",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.crocetta.tv.it/?post_type=servizio&p=1632",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.crocetta.tv.it/?post_type=servizio&p=1632",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:29:32.225126Z"
+  }
+ }
+}

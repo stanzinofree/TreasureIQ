@@ -1,0 +1,110 @@
+{
+ "municipality_istat": "023008",
+ "services": {
+  "accesso_atti": {
+   "service_id": "023008:wp:443",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.bevilacqua.vr.it/?post_type=servizio&p=443",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bevilacqua.vr.it/?post_type=servizio&p=443",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bevilacqua.vr.it/?post_type=servizio&p=443",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.bevilacqua.vr.it/wp-content/uploads/2024/04/DGC-16_2010-aggiornamento-diritti-segreteria.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bevilacqua.vr.it/?post_type=servizio&p=443",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:30:27.270869Z"
+  },
+  "cambio_residenza": {
+   "service_id": "023008:wp:665",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.bevilacqua.vr.it/?post_type=servizio&p=665",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bevilacqua.vr.it/?post_type=servizio&p=665",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bevilacqua.vr.it/?post_type=servizio&p=665",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:30:35.678137Z"
+  },
+  "stato_civile": {
+   "service_id": "023008:wp:668",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.bevilacqua.vr.it/?post_type=servizio&p=668",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bevilacqua.vr.it/?post_type=servizio&p=668",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bevilacqua.vr.it/?post_type=servizio&p=668",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:30:43.370945Z"
+  },
+  "tributi_imu": {
+   "service_id": "023008:wp:634",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.bevilacqua.vr.it/?post_type=servizio&p=634",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bevilacqua.vr.it/?post_type=servizio&p=634",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bevilacqua.vr.it/?post_type=servizio&p=634",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:30:50.623082Z"
+  }
+ }
+}

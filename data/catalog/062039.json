@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "062039",
+ "services": {
+  "accesso_atti": {
+   "service_id": "062039:wp:711",
+   "title": "Accesso agli atti",
+   "source_url": "https://comune.melizzano.bn.it/servizio/accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.melizzano.bn.it/servizio/accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.melizzano.bn.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:12:01.267551Z"
+  },
+  "cambio_residenza": {
+   "service_id": "062039:wp:658",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.melizzano.bn.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.melizzano.bn.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.melizzano.bn.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:12:04.858379Z"
+  },
+  "carta_identita": {
+   "service_id": "062039:wp:700",
+   "title": "Richiesta Cie",
+   "source_url": "https://comune.melizzano.bn.it/servizio/richiesta-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.melizzano.bn.it/servizio/richiesta-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.melizzano.bn.it/servizio/richiesta-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:12:08.502449Z"
+  }
+ }
+}

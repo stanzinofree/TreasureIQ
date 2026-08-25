@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "001035",
+ "services": {
+  "carta_identita": {
+   "service_id": "001035:comweb:carta-d-identita-elettronica-cie-788-13815-1-6c2ae680393f2ad6a0c105d5b20c5a99",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.bricherasio.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-13815-1-6c2ae680393f2ad6a0c105d5b20c5a99",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bricherasio.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-13815-1-6c2ae680393f2ad6a0c105d5b20c5a99",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bricherasio.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-13815-1-6c2ae680393f2ad6a0c105d5b20c5a99",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:39:53.250249Z"
+  }
+ }
+}

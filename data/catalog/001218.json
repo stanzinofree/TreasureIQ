@@ -1,0 +1,123 @@
+{
+ "municipality_istat": "001218",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001218:comweb:richiedere-l-accesso-agli-atti-317-29271-1-5fbe10d311c96a6baf3cdf9adc706f8c",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.rivarossa.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-29271-1-5fbe10d311c96a6baf3cdf9adc706f8c",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rivarossa.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-29271-1-5fbe10d311c96a6baf3cdf9adc706f8c",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rivarossa.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-29271-1-5fbe10d311c96a6baf3cdf9adc706f8c",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.rivarossa.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=rvrss808&IDPr=10875",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.rivarossa.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-29271-1-5fbe10d311c96a6baf3cdf9adc706f8c",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:47:46.047348Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001218:comweb:cambio-residenza-305-29269-1-bf04a3ebbcb964c5e8e413889f0097cc",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.rivarossa.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-29269-1-bf04a3ebbcb964c5e8e413889f0097cc",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rivarossa.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-29269-1-bf04a3ebbcb964c5e8e413889f0097cc",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rivarossa.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-29269-1-bf04a3ebbcb964c5e8e413889f0097cc",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.rivarossa.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-29269-1-bf04a3ebbcb964c5e8e413889f0097cc",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:47:48.202620Z"
+  },
+  "carta_identita": {
+   "service_id": "001218:comweb:carta-d-identita-elettronica-cie-788-29259-1-34183370745893b94096b5af4571fbbf",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.rivarossa.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-29259-1-34183370745893b94096b5af4571fbbf",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rivarossa.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-29259-1-34183370745893b94096b5af4571fbbf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rivarossa.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-29259-1-34183370745893b94096b5af4571fbbf",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:47:50.426471Z"
+  },
+  "tributi_imu": {
+   "service_id": "001218:comweb:pagare-tributi-imu-600-29360-1-b5c61d2f1c8340c6308528d5770f3ae8",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.rivarossa.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-29360-1-b5c61d2f1c8340c6308528d5770f3ae8",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rivarossa.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-29360-1-b5c61d2f1c8340c6308528d5770f3ae8",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rivarossa.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-29360-1-b5c61d2f1c8340c6308528d5770f3ae8",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:47:52.436753Z"
+  }
+ }
+}

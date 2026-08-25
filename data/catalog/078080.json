@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "078080",
+ "services": {
+  "accesso_atti": {
+   "service_id": "078080:wp:250",
+   "title": "Richiedere l’accesso agli atti",
+   "source_url": "https://comune.mongrassano.cs.it/servizio/richiedere-laccesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.mongrassano.cs.it/servizio/richiedere-laccesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.mongrassano.cs.it/servizio/richiedere-laccesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:34:02.727981Z"
+  },
+  "cambio_residenza": {
+   "service_id": "078080:wp:305",
+   "title": "Richiesta dichiarazione di cambio di residenza",
+   "source_url": "https://comune.mongrassano.cs.it/servizio/richiesta-dichiarazione-di-cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.mongrassano.cs.it/servizio/richiesta-dichiarazione-di-cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.mongrassano.cs.it/servizio/richiesta-dichiarazione-di-cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:34:05.615259Z"
+  },
+  "tributi_imu": {
+   "service_id": "078080:wp:299",
+   "title": "Calcolo IMU (Imposta Municipale Propria)",
+   "source_url": "https://comune.mongrassano.cs.it/servizio/calcolo-imu-imposta-municipale-propria/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.mongrassano.cs.it/servizio/calcolo-imu-imposta-municipale-propria/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.mongrassano.cs.it/servizio/calcolo-imu-imposta-municipale-propria/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:34:08.721315Z"
+  }
+ }
+}

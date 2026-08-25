@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "001117",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001117:comweb:richiedere-l-accesso-agli-atti-317-33364-1-9a6801b7d9a493ee8322682863f53be4",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.gravere.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-33364-1-9a6801b7d9a493ee8322682863f53be4",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gravere.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-33364-1-9a6801b7d9a493ee8322682863f53be4",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gravere.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-33364-1-9a6801b7d9a493ee8322682863f53be4",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.servizipubblicaamministrazione.it/Servizi/FiloDiretto/ProcedimentiClient.Aspx?CE=grvr1245&IDGruppoSelez=1674",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.gravere.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-33364-1-9a6801b7d9a493ee8322682863f53be4",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:43:31.759952Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001117:comweb:cambio-residenza-305-33362-1-ecbcf7da6cecf8938a213a9f7da47c87",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.gravere.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-33362-1-ecbcf7da6cecf8938a213a9f7da47c87",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gravere.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-33362-1-ecbcf7da6cecf8938a213a9f7da47c87",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gravere.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-33362-1-ecbcf7da6cecf8938a213a9f7da47c87",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anpr.interno.it/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.gravere.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-33362-1-ecbcf7da6cecf8938a213a9f7da47c87",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:43:33.669510Z"
+  },
+  "carta_identita": {
+   "service_id": "001117:comweb:carta-d-identita-elettronica-cie-788-33352-1-0dbd9d16a9f54574d70412f777eb8d30",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.gravere.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-33352-1-0dbd9d16a9f54574d70412f777eb8d30",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gravere.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-33352-1-0dbd9d16a9f54574d70412f777eb8d30",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gravere.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-33352-1-0dbd9d16a9f54574d70412f777eb8d30",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:43:35.634072Z"
+  }
+ }
+}

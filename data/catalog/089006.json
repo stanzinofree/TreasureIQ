@@ -1,0 +1,113 @@
+{
+ "municipality_istat": "089006",
+ "services": {
+  "accesso_atti": {
+   "service_id": "089006:wp:4419",
+   "title": "Richiesta di accesso agli atti",
+   "source_url": "https://www.comune.carlentini.sr.it/servizio/richiesta-di-accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.carlentini.sr.it/servizio/richiesta-di-accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.carlentini.sr.it/servizio/richiesta-di-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.carlentini.sr.it/wp-content/uploads/2025/03/Piano-di-miglioramento-del-sito-e-dei-servizi.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.carlentini.sr.it/servizio/richiesta-di-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:50:11.846291Z"
+  },
+  "cambio_residenza": {
+   "service_id": "089006:wp:4421",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.carlentini.sr.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.carlentini.sr.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.carlentini.sr.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.carlentini.sr.it/wp-content/uploads/2025/03/Piano-di-miglioramento-del-sito-e-dei-servizi.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.carlentini.sr.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:50:15.409512Z"
+  },
+  "tributi_imu": {
+   "service_id": "089006:wp:4635",
+   "title": "Pagamento tributi IMU",
+   "source_url": "https://www.comune.carlentini.sr.it/servizio/pagamento-tributi-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.carlentini.sr.it/servizio/pagamento-tributi-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.carlentini.sr.it/servizio/pagamento-tributi-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.carlentini.sr.it/wp-content/uploads/2025/03/Piano-di-miglioramento-del-sito-e-dei-servizi.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.carlentini.sr.it/servizio/pagamento-tributi-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:50:18.852061Z"
+  }
+ }
+}

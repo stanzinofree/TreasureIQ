@@ -1,0 +1,87 @@
+{
+ "municipality_istat": "001091",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001091:comweb:richiedere-l-accesso-agli-atti-317-19766-1-51d5e7f24a26fbb22d5dac2118522094",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.collerettocastelnuovo.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-19766-1-51d5e7f24a26fbb22d5dac2118522094",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.collerettocastelnuovo.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-19766-1-51d5e7f24a26fbb22d5dac2118522094",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.collerettocastelnuovo.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-19766-1-51d5e7f24a26fbb22d5dac2118522094",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.collerettocastelnuovo.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=cllrtt169&IDPr=11338",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.collerettocastelnuovo.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-19766-1-51d5e7f24a26fbb22d5dac2118522094",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:42:12.821641Z"
+  },
+  "tributi_imu": {
+   "service_id": "001091:comweb:pagare-tributi-imu-600-19856-1-f790fd1b01ac6ea7081aea879751b0aa",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.collerettocastelnuovo.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-19856-1-f790fd1b01ac6ea7081aea879751b0aa",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.collerettocastelnuovo.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-19856-1-f790fd1b01ac6ea7081aea879751b0aa",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.collerettocastelnuovo.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-19856-1-f790fd1b01ac6ea7081aea879751b0aa",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:42:14.659712Z"
+  },
+  "tributi_tari": {
+   "service_id": "001091:comweb:pagamento-tassa-rifiuti-tari-659-19847-1-81cddf88f519ab21dd7bd88eab87d99a",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.collerettocastelnuovo.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-19847-1-81cddf88f519ab21dd7bd88eab87d99a",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.collerettocastelnuovo.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-19847-1-81cddf88f519ab21dd7bd88eab87d99a",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.collerettocastelnuovo.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-19847-1-81cddf88f519ab21dd7bd88eab87d99a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:42:17.035455Z"
+  }
+ }
+}

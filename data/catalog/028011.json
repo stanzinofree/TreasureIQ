@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "028011",
+ "services": {
+  "accesso_atti": {
+   "service_id": "028011:wp:345",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.battaglia-terme.pd.it/?post_type=servizio&p=345",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.battaglia-terme.pd.it/?post_type=servizio&p=345",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.battaglia-terme.pd.it/?post_type=servizio&p=345",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:51:40.424725Z"
+  },
+  "cambio_residenza": {
+   "service_id": "028011:wp:1555",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.battaglia-terme.pd.it/?post_type=servizio&p=1555",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.battaglia-terme.pd.it/?post_type=servizio&p=1555",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.battaglia-terme.pd.it/?post_type=servizio&p=1555",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:51:53.469427Z"
+  },
+  "stato_civile": {
+   "service_id": "028011:wp:1583",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.battaglia-terme.pd.it/?post_type=servizio&p=1583",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.battaglia-terme.pd.it/?post_type=servizio&p=1583",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.battaglia-terme.pd.it/?post_type=servizio&p=1583",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:52:01.290390Z"
+  },
+  "tributi_imu": {
+   "service_id": "028011:wp:1553",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.battaglia-terme.pd.it/?post_type=servizio&p=1553",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.battaglia-terme.pd.it/?post_type=servizio&p=1553",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.battaglia-terme.pd.it/?post_type=servizio&p=1553",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:52:07.635191Z"
+  }
+ }
+}

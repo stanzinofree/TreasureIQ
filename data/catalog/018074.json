@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "018074",
+ "services": {
+  "tributi_tari": {
+   "service_id": "018074:comweb:tassa-rifiuti-tari-954-17603-1-86468a4b68ff725f38411f369c59ffad",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.golferenzo.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-17603-1-86468a4b68ff725f38411f369c59ffad",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.golferenzo.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-17603-1-86468a4b68ff725f38411f369c59ffad",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.golferenzo.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-17603-1-86468a4b68ff725f38411f369c59ffad",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:20:51.224439Z"
+  }
+ }
+}

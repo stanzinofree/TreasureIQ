@@ -1,0 +1,110 @@
+{
+ "municipality_istat": "018169",
+ "services": {
+  "accesso_atti": {
+   "service_id": "018169:comweb:richiedere-l-accesso-agli-atti-317-36796-1-3b387e7f1af46f121744cf272b0b256b",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.vallesalimbene.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-36796-1-3b387e7f1af46f121744cf272b0b256b",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vallesalimbene.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-36796-1-3b387e7f1af46f121744cf272b0b256b",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vallesalimbene.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-36796-1-3b387e7f1af46f121744cf272b0b256b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:26:26.549829Z"
+  },
+  "cambio_residenza": {
+   "service_id": "018169:comweb:cambio-residenza-305-36794-1-264576a8a33dd352c57d447c1221dbee",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.vallesalimbene.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-36794-1-264576a8a33dd352c57d447c1221dbee",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vallesalimbene.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-36794-1-264576a8a33dd352c57d447c1221dbee",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vallesalimbene.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-36794-1-264576a8a33dd352c57d447c1221dbee",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.vallesalimbene.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-36794-1-264576a8a33dd352c57d447c1221dbee",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:26:32.240286Z"
+  },
+  "tributi_imu": {
+   "service_id": "018169:comweb:imposta-municipale-propria-imu-953-36885-1-e59929e9f10e0c5241791911700e907e",
+   "title": "Imposta Municipale Propria (IMU)",
+   "source_url": "https://www.comune.vallesalimbene.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-36885-1-e59929e9f10e0c5241791911700e907e",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vallesalimbene.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-36885-1-e59929e9f10e0c5241791911700e907e",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vallesalimbene.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-36885-1-e59929e9f10e0c5241791911700e907e",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:26:39.491672Z"
+  },
+  "tributi_tari": {
+   "service_id": "018169:comweb:tassa-rifiuti-tari-954-36876-1-d4d504c9ad4505feb0851dcfbdd7cc01",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.vallesalimbene.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-36876-1-d4d504c9ad4505feb0851dcfbdd7cc01",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vallesalimbene.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-36876-1-d4d504c9ad4505feb0851dcfbdd7cc01",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vallesalimbene.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-36876-1-d4d504c9ad4505feb0851dcfbdd7cc01",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:26:46.182860Z"
+  }
+ }
+}

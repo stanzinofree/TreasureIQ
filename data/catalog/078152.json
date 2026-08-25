@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "078152",
+ "services": {
+  "accesso_atti": {
+   "service_id": "078152:wp:1009",
+   "title": "Richiedere l’accesso agli atti",
+   "source_url": "https://www.comune.vaccarizzoalbanese.cs.it/servizio/richiedere-laccesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vaccarizzoalbanese.cs.it/servizio/richiedere-laccesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vaccarizzoalbanese.cs.it/servizio/richiedere-laccesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:37:23.212792Z"
+  },
+  "cambio_residenza": {
+   "service_id": "078152:wp:1006",
+   "title": "ANPR Cambio di residenza",
+   "source_url": "https://www.comune.vaccarizzoalbanese.cs.it/servizio/anpr-cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vaccarizzoalbanese.cs.it/servizio/anpr-cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vaccarizzoalbanese.cs.it/servizio/anpr-cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:37:24.418660Z"
+  },
+  "tributi_imu": {
+   "service_id": "078152:wp:1208",
+   "title": "Calcolo Tributi IMU",
+   "source_url": "https://www.comune.vaccarizzoalbanese.cs.it/servizio/pagare-tributi-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vaccarizzoalbanese.cs.it/servizio/pagare-tributi-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vaccarizzoalbanese.cs.it/servizio/pagare-tributi-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:37:25.846225Z"
+  }
+ }
+}

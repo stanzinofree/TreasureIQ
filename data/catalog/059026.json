@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "059026",
+ "services": {
+  "accesso_atti": {
+   "service_id": "059026:comweb:richiedere-l-accesso-agli-atti-317-39832-1-1d06570cb218ab317d9519384ce3e5e3",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.santicosmaedamiano.lt.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-39832-1-1d06570cb218ab317d9519384ce3e5e3",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.santicosmaedamiano.lt.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-39832-1-1d06570cb218ab317d9519384ce3e5e3",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.santicosmaedamiano.lt.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-39832-1-1d06570cb218ab317d9519384ce3e5e3",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.santicosmaedamiano.lt.it/urbi/progs/urp/ur1PR003.sto?DB_NAME=n85858&AmbitoBloccato=0&MacroTipoBloccato=641&TipoBloccato=603|3&catnome=Anagrafe%2520e%2520stato%2520civile&caturl=https://www.comune.santicosmaedamiano.lt.it/it-it/servizi/anagrafe-e-stato-civile&servnome=Richiedere%2520l%2527accesso%2520agli%2520atti&servurl=https://www.comune.santicosmaedamiano.lt.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-39832-1-1d06570cb218ab317d9519384ce3e5e3",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.santicosmaedamiano.lt.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-39832-1-1d06570cb218ab317d9519384ce3e5e3",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:04:18.931635Z"
+  },
+  "cambio_residenza": {
+   "service_id": "059026:comweb:cambio-residenza-305-39830-1-6c220a5b040f247ffa239a11a347331e",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.santicosmaedamiano.lt.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-39830-1-6c220a5b040f247ffa239a11a347331e",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.santicosmaedamiano.lt.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-39830-1-6c220a5b040f247ffa239a11a347331e",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.santicosmaedamiano.lt.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-39830-1-6c220a5b040f247ffa239a11a347331e",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/?catnome=Anagrafe%2520e%2520stato%2520civile&caturl=https://www.comune.santicosmaedamiano.lt.it/it-it/servizi/anagrafe-e-stato-civile&servnome=Cambio%2520Residenza&servurl=https://www.comune.santicosmaedamiano.lt.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-39830-1-6c220a5b040f247ffa239a11a347331e",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.santicosmaedamiano.lt.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-39830-1-6c220a5b040f247ffa239a11a347331e",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:04:21.015692Z"
+  },
+  "carta_identita": {
+   "service_id": "059026:comweb:carta-d-identita-elettronica-cie-788-39820-1-6741b68b40780dd4eea708d9f4a206ac",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.santicosmaedamiano.lt.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-39820-1-6741b68b40780dd4eea708d9f4a206ac",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.santicosmaedamiano.lt.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-39820-1-6741b68b40780dd4eea708d9f4a206ac",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.santicosmaedamiano.lt.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-39820-1-6741b68b40780dd4eea708d9f4a206ac",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:04:23.235181Z"
+  }
+ }
+}

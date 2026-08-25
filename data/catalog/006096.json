@@ -1,0 +1,64 @@
+{
+ "municipality_istat": "006096",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "006096:comweb:cambio-residenza-305-33098-1-0a337b8c1a2c148bdd8fc9ca6c324bba",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.molinodeitorti.al.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-33098-1-0a337b8c1a2c148bdd8fc9ca6c324bba",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.molinodeitorti.al.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-33098-1-0a337b8c1a2c148bdd8fc9ca6c324bba",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.molinodeitorti.al.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-33098-1-0a337b8c1a2c148bdd8fc9ca6c324bba",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.molinodeitorti.al.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-33098-1-0a337b8c1a2c148bdd8fc9ca6c324bba",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:01:44.333279Z"
+  },
+  "carta_identita": {
+   "service_id": "006096:comweb:carta-d-identita-elettronica-cie-788-33088-1-3c605fa1439d79f34d0a39f61d5e71ad",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.molinodeitorti.al.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-33088-1-3c605fa1439d79f34d0a39f61d5e71ad",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.molinodeitorti.al.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-33088-1-3c605fa1439d79f34d0a39f61d5e71ad",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.molinodeitorti.al.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-33088-1-3c605fa1439d79f34d0a39f61d5e71ad",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:01:47.705224Z"
+  }
+ }
+}

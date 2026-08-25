@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "078031",
+ "services": {
+  "accesso_atti": {
+   "service_id": "078031:wp:5314",
+   "title": "Richiedere accesso agli atti",
+   "source_url": "https://comune.castrolibero.cs.it/servizio/richiedere-accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.castrolibero.cs.it/servizio/richiedere-accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.castrolibero.cs.it/servizio/richiedere-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:32:15.570224Z"
+  },
+  "cambio_residenza": {
+   "service_id": "078031:wp:5308",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.castrolibero.cs.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.castrolibero.cs.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.castrolibero.cs.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:32:19.947567Z"
+  },
+  "carta_identita": {
+   "service_id": "078031:wp:5318",
+   "title": "Rilascio carta d’identità elettronica (CIE)",
+   "source_url": "https://comune.castrolibero.cs.it/servizio/rilascio-carta-didentita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.castrolibero.cs.it/servizio/rilascio-carta-didentita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.castrolibero.cs.it/servizio/rilascio-carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:32:24.188098Z"
+  }
+ }
+}

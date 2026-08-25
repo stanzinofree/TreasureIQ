@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "062068",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "062068:wp:725",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.sansalvatoretelesino.bn.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.sansalvatoretelesino.bn.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.sansalvatoretelesino.bn.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:12:57.895489Z"
+  },
+  "carta_identita": {
+   "service_id": "062068:wp:744",
+   "title": "Richiesta CIE",
+   "source_url": "https://comune.sansalvatoretelesino.bn.it/servizio/richiesta-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.sansalvatoretelesino.bn.it/servizio/richiesta-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.sansalvatoretelesino.bn.it/servizio/richiesta-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:13:01.824164Z"
+  }
+ }
+}

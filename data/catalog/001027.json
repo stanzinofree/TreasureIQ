@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "001027",
+ "services": {
+  "carta_identita": {
+   "service_id": "001027:comweb:carta-d-identita-elettronica-cie-788-7875-1-9c8d67bc4953303974aacc154dda1388",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.bollengo.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-7875-1-9c8d67bc4953303974aacc154dda1388",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bollengo.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-7875-1-9c8d67bc4953303974aacc154dda1388",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bollengo.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-7875-1-9c8d67bc4953303974aacc154dda1388",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:39:09.612962Z"
+  }
+ }
+}

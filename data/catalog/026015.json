@@ -1,0 +1,87 @@
+{
+ "municipality_istat": "026015",
+ "services": {
+  "carta_identita": {
+   "service_id": "026015:wp:1813",
+   "title": "RILASCIO CARTA D'IDENTITÀ ELETTRONICA (CIE)",
+   "source_url": "https://www.comune.cessalto.tv.it/?post_type=servizio&p=1813",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cessalto.tv.it/?post_type=servizio&p=1813",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cessalto.tv.it/?post_type=servizio&p=1813",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.cessalto.tv.it/wp-content/uploads/2025/10/CONSENSO-RILASCIO-C-I-MINORE-2.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cessalto.tv.it/?post_type=servizio&p=1813",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:27:01.296494Z"
+  },
+  "stato_civile": {
+   "service_id": "026015:wp:1258",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.cessalto.tv.it/?post_type=servizio&p=1258",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cessalto.tv.it/?post_type=servizio&p=1258",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cessalto.tv.it/?post_type=servizio&p=1258",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:27:12.179702Z"
+  },
+  "tributi_imu": {
+   "service_id": "026015:wp:1246",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.cessalto.tv.it/?post_type=servizio&p=1246",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cessalto.tv.it/?post_type=servizio&p=1246",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cessalto.tv.it/?post_type=servizio&p=1246",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:27:22.194227Z"
+  }
+ }
+}

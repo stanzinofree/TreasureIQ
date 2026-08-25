@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "028005",
+ "services": {
+  "accesso_atti": {
+   "service_id": "028005:wp:271",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.arqua.pd.it/?post_type=servizio&p=271",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.arqua.pd.it/?post_type=servizio&p=271",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.arqua.pd.it/?post_type=servizio&p=271",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:48:39.003283Z"
+  },
+  "cambio_residenza": {
+   "service_id": "028005:wp:706",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.arqua.pd.it/?post_type=servizio&p=706",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.arqua.pd.it/?post_type=servizio&p=706",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.arqua.pd.it/?post_type=servizio&p=706",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:48:46.291527Z"
+  },
+  "stato_civile": {
+   "service_id": "028005:wp:709",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.arqua.pd.it/?post_type=servizio&p=709",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.arqua.pd.it/?post_type=servizio&p=709",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.arqua.pd.it/?post_type=servizio&p=709",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:48:52.460860Z"
+  }
+ }
+}

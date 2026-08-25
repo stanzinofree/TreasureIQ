@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "085002",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "085002:wp:380",
+   "title": "Cambio di residenza tramite Portale Nazionale – ANPR",
+   "source_url": "https://www.comune.bompensiere.cl.it/?post_type=servizio&p=380",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bompensiere.cl.it/?post_type=servizio&p=380",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bompensiere.cl.it/?post_type=servizio&p=380",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:47:28.408993Z"
+  },
+  "tributi_imu": {
+   "service_id": "085002:wp:269",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.bompensiere.cl.it/?post_type=servizio&p=269",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bompensiere.cl.it/?post_type=servizio&p=269",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bompensiere.cl.it/?post_type=servizio&p=269",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:47:32.860918Z"
+  }
+ }
+}

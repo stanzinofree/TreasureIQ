@@ -1,0 +1,120 @@
+{
+ "municipality_istat": "007006",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "007006:comweb:cambio-residenza-305-62354-1-f5363d5e7a49e7d9bcb4f1a86e02d459",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.avise.ao.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-62354-1-f5363d5e7a49e7d9bcb4f1a86e02d459",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.avise.ao.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-62354-1-f5363d5e7a49e7d9bcb4f1a86e02d459",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.avise.ao.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-62354-1-f5363d5e7a49e7d9bcb4f1a86e02d459",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:03:10.367427Z"
+  },
+  "carta_identita": {
+   "service_id": "007006:comweb:carta-d-identita-elettronica-cie-788-62344-1-8aa2d843aaeb96c84f97efcfe8e4b227",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.avise.ao.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-62344-1-8aa2d843aaeb96c84f97efcfe8e4b227",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.avise.ao.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-62344-1-8aa2d843aaeb96c84f97efcfe8e4b227",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.avise.ao.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-62344-1-8aa2d843aaeb96c84f97efcfe8e4b227",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:03:12.691634Z"
+  },
+  "stato_civile": {
+   "service_id": "007006:comweb:richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-62344-1-33e0fd5a4f1d154eb854cd69f7568c8d",
+   "title": "Richiesta di certificati/attestazioni/estratti di stato civile",
+   "source_url": "https://www.comune.avise.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-62344-1-33e0fd5a4f1d154eb854cd69f7568c8d",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.avise.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-62344-1-33e0fd5a4f1d154eb854cd69f7568c8d",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.avise.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-62344-1-33e0fd5a4f1d154eb854cd69f7568c8d",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:03:15.054851Z"
+  },
+  "tributi_imu": {
+   "service_id": "007006:comweb:imposta-municipale-propria-imu-953-62445-1-a8877b3bcd5cc4ab555a6b14bc984bd8",
+   "title": "Imposta Municipale Propria (IMU)",
+   "source_url": "https://www.comune.avise.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-62445-1-a8877b3bcd5cc4ab555a6b14bc984bd8",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.avise.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-62445-1-a8877b3bcd5cc4ab555a6b14bc984bd8",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.avise.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-62445-1-a8877b3bcd5cc4ab555a6b14bc984bd8",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:03:17.459908Z"
+  },
+  "tributi_tari": {
+   "service_id": "007006:comweb:pagamento-tassa-rifiuti-tari-659-62436-1-2b6e32ee04b89b4f7cc36d3957062a2e",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.avise.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-62436-1-2b6e32ee04b89b4f7cc36d3957062a2e",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.avise.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-62436-1-2b6e32ee04b89b4f7cc36d3957062a2e",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.avise.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-62436-1-2b6e32ee04b89b4f7cc36d3957062a2e",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:03:20.174058Z"
+  }
+ }
+}

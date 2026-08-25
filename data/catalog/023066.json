@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "023066",
+ "services": {
+  "accesso_atti": {
+   "service_id": "023066:wp:217",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.roveredodigua.vr.it/?post_type=servizio&p=217",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.roveredodigua.vr.it/?post_type=servizio&p=217",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.roveredodigua.vr.it/?post_type=servizio&p=217",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:42:14.790643Z"
+  },
+  "cambio_residenza": {
+   "service_id": "023066:wp:633",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.roveredodigua.vr.it/?post_type=servizio&p=633",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.roveredodigua.vr.it/?post_type=servizio&p=633",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.roveredodigua.vr.it/?post_type=servizio&p=633",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:42:23.948616Z"
+  },
+  "stato_civile": {
+   "service_id": "023066:wp:700",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.roveredodigua.vr.it/?post_type=servizio&p=700",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.roveredodigua.vr.it/?post_type=servizio&p=700",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.roveredodigua.vr.it/?post_type=servizio&p=700",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:42:54.504235Z"
+  },
+  "tributi_imu": {
+   "service_id": "023066:wp:632",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.roveredodigua.vr.it/?post_type=servizio&p=632",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.roveredodigua.vr.it/?post_type=servizio&p=632",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.roveredodigua.vr.it/?post_type=servizio&p=632",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:43:21.618155Z"
+  }
+ }
+}

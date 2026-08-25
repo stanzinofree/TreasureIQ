@@ -1,0 +1,87 @@
+{
+ "municipality_istat": "060021",
+ "services": {
+  "accesso_atti": {
+   "service_id": "060021:wp:7010",
+   "title": "Accesso agli atti (documentale, civico e generalizzato)",
+   "source_url": "https://comune.castelnuovoparano.fr.it/servizio/accesso-agli-atti-documentale-civico-e-generalizzato/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.castelnuovoparano.fr.it/servizio/accesso-agli-atti-documentale-civico-e-generalizzato/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.castelnuovoparano.fr.it/servizio/accesso-agli-atti-documentale-civico-e-generalizzato/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.castelnuovoparano.fr.it/wp-content/uploads/2024/03/Richiesta-di-accesso-agli-atti.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.castelnuovoparano.fr.it/servizio/accesso-agli-atti-documentale-civico-e-generalizzato/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:05:06.245591Z"
+  },
+  "cambio_residenza": {
+   "service_id": "060021:wp:7035",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.castelnuovoparano.fr.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.castelnuovoparano.fr.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.castelnuovoparano.fr.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:05:10.637768Z"
+  },
+  "carta_identita": {
+   "service_id": "060021:wp:7006",
+   "title": "Carta d’identità elettronica (CIE)",
+   "source_url": "https://comune.castelnuovoparano.fr.it/servizio/carta-didentita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.castelnuovoparano.fr.it/servizio/carta-didentita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.castelnuovoparano.fr.it/servizio/carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:05:14.440269Z"
+  }
+ }
+}

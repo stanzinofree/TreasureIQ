@@ -1,0 +1,123 @@
+{
+ "municipality_istat": "028102",
+ "services": {
+  "accesso_atti": {
+   "service_id": "028102:wp:243",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.villaestense.pd.it/?post_type=servizio&p=243",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.villaestense.pd.it/?post_type=servizio&p=243",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.villaestense.pd.it/?post_type=servizio&p=243",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.villaestense.pd.it/wp-content/uploads/2023/08/regolamento_accesso_atti.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.villaestense.pd.it/?post_type=servizio&p=243",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.villaestense.pd.it/wp-content/uploads/2023/08/tabella-diritti-di-segreteria-2026-delibera-GC82-2025.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.villaestense.pd.it/?post_type=servizio&p=243",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:24:56.407609Z"
+  },
+  "cambio_residenza": {
+   "service_id": "028102:wp:1035",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.villaestense.pd.it/?post_type=servizio&p=1035",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.villaestense.pd.it/?post_type=servizio&p=1035",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.villaestense.pd.it/?post_type=servizio&p=1035",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:25:07.302170Z"
+  },
+  "stato_civile": {
+   "service_id": "028102:wp:1189",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.villaestense.pd.it/?post_type=servizio&p=1189",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.villaestense.pd.it/?post_type=servizio&p=1189",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.villaestense.pd.it/?post_type=servizio&p=1189",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:25:17.335803Z"
+  },
+  "tributi_imu": {
+   "service_id": "028102:wp:1034",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.villaestense.pd.it/?post_type=servizio&p=1034",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.villaestense.pd.it/?post_type=servizio&p=1034",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.villaestense.pd.it/?post_type=servizio&p=1034",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:25:33.472369Z"
+  }
+ }
+}

@@ -1,0 +1,41 @@
+{
+ "municipality_istat": "103075",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "103075:comweb:cambio-residenza-305-40754-1-72884cc6760e2e1b2d97eb1c04fddb4a",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.villadossola.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-40754-1-72884cc6760e2e1b2d97eb1c04fddb4a",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.villadossola.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-40754-1-72884cc6760e2e1b2d97eb1c04fddb4a",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.villadossola.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-40754-1-72884cc6760e2e1b2d97eb1c04fddb4a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.villadossola.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-40754-1-72884cc6760e2e1b2d97eb1c04fddb4a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:04:05.967134Z"
+  }
+ }
+}

@@ -1,0 +1,87 @@
+{
+ "municipality_istat": "024024",
+ "services": {
+  "accesso_atti": {
+   "service_id": "024024:wp:304",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.carre.vi.it/?post_type=servizio&p=304",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.carre.vi.it/?post_type=servizio&p=304",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.carre.vi.it/?post_type=servizio&p=304",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.carre.vi.it/wp-content/uploads/2024/09/D.G.-90.2023-Carre.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.carre.vi.it/?post_type=servizio&p=304",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:56:41.572575Z"
+  },
+  "carta_identita": {
+   "service_id": "024024:wp:846",
+   "title": "Carta di identità elettronica",
+   "source_url": "https://www.comune.carre.vi.it/?post_type=servizio&p=846",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.carre.vi.it/?post_type=servizio&p=846",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.carre.vi.it/?post_type=servizio&p=846",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:56:47.258891Z"
+  },
+  "stato_civile": {
+   "service_id": "024024:wp:1628",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.carre.vi.it/?post_type=servizio&p=1628",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.carre.vi.it/?post_type=servizio&p=1628",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.carre.vi.it/?post_type=servizio&p=1628",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:56:51.823452Z"
+  }
+ }
+}

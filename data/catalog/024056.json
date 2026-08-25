@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "024056",
+ "services": {
+  "accesso_atti": {
+   "service_id": "024056:wp:416",
+   "title": "Accesso agli atti",
+   "source_url": "https://www.comune.marano.vi.it/?post_type=servizio&p=416",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.marano.vi.it/?post_type=servizio&p=416",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marano.vi.it/?post_type=servizio&p=416",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:04:11.219311Z"
+  },
+  "cambio_residenza": {
+   "service_id": "024056:wp:229",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.marano.vi.it/?post_type=servizio&p=229",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.marano.vi.it/?post_type=servizio&p=229",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marano.vi.it/?post_type=servizio&p=229",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:04:18.845685Z"
+  },
+  "stato_civile": {
+   "service_id": "024056:wp:232",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.marano.vi.it/?post_type=servizio&p=232",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.marano.vi.it/?post_type=servizio&p=232",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marano.vi.it/?post_type=servizio&p=232",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:04:28.355189Z"
+  },
+  "tributi_imu": {
+   "service_id": "024056:wp:1040",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.marano.vi.it/?post_type=servizio&p=1040",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.marano.vi.it/?post_type=servizio&p=1040",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marano.vi.it/?post_type=servizio&p=1040",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:04:36.758433Z"
+  }
+ }
+}

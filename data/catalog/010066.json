@@ -1,0 +1,77 @@
+{
+ "municipality_istat": "010066",
+ "services": {
+  "tributi_imu": {
+   "service_id": "010066:wp:7667",
+   "title": "Calcolo IMU",
+   "source_url": "https://comune.vobbia.ge.it/servizio/calcolo-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.vobbia.ge.it/servizio/calcolo-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.vobbia.ge.it/servizio/calcolo-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.vobbia.ge.it/wp-content/uploads/2024/02/172163_DIMUNIC-08ge23m105d.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.vobbia.ge.it/servizio/calcolo-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:12:40.349896Z"
+  },
+  "tributi_tari": {
+   "service_id": "010066:wp:8150",
+   "title": "TARI",
+   "source_url": "https://comune.vobbia.ge.it/servizio/tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.vobbia.ge.it/servizio/tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.vobbia.ge.it/servizio/tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.vobbia.ge.it/wp-content/uploads/2024/03/Condiziondi-Servizio-TARI.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.vobbia.ge.it/servizio/tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:12:42.999134Z"
+  }
+ }
+}

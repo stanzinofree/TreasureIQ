@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "063024",
+ "services": {
+  "carta_identita": {
+   "service_id": "063024:wp:2966",
+   "title": "Carta d’Identità Elettronica",
+   "source_url": "https://comune.castellammare-di-stabia.napoli.it/servizio/carta-didentita-elettronica/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.castellammare-di-stabia.napoli.it/servizio/carta-didentita-elettronica/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.castellammare-di-stabia.napoli.it/servizio/carta-didentita-elettronica/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:13:55.268539Z"
+  }
+ }
+}

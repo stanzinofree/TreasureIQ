@@ -1,0 +1,77 @@
+{
+ "municipality_istat": "086006",
+ "services": {
+  "accesso_atti": {
+   "service_id": "086006:comweb:richiedere-l-accesso-agli-atti-317-50000-1-fc4e080f631c071b6fb81890b38bdee9",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.catenanuova.en.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-50000-1-fc4e080f631c071b6fb81890b38bdee9",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.catenanuova.en.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-50000-1-fc4e080f631c071b6fb81890b38bdee9",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.catenanuova.en.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-50000-1-fc4e080f631c071b6fb81890b38bdee9",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.catenanuova.en.it/lang/it/servizi/richiesta-di-accesso-agli-atti/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.catenanuova.en.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-50000-1-fc4e080f631c071b6fb81890b38bdee9",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:48:24.027622Z"
+  },
+  "tributi_imu": {
+   "service_id": "086006:comweb:pagare-tributi-imu-600-50089-1-083014d30a3119a685f065f3d7c802fa",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.catenanuova.en.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-50089-1-083014d30a3119a685f065f3d7c802fa",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.catenanuova.en.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-50089-1-083014d30a3119a685f065f3d7c802fa",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.catenanuova.en.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-50089-1-083014d30a3119a685f065f3d7c802fa",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.catenanuova.en.it/lang/it/servizi/pagare-tributi-imu/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.catenanuova.en.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-50089-1-083014d30a3119a685f065f3d7c802fa",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:48:25.966261Z"
+  }
+ }
+}

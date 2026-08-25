@@ -1,0 +1,87 @@
+{
+ "municipality_istat": "023085",
+ "services": {
+  "accesso_atti": {
+   "service_id": "023085:wp:322",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.terrazzo.vr.it/?post_type=servizio&p=322",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.terrazzo.vr.it/?post_type=servizio&p=322",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.terrazzo.vr.it/?post_type=servizio&p=322",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.terrazzo.vr.it/wp-content/uploads/2024/02/Diritti-di-segreteria-dal-2021.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.terrazzo.vr.it/?post_type=servizio&p=322",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:48:41.251668Z"
+  },
+  "stato_civile": {
+   "service_id": "023085:wp:742",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.terrazzo.vr.it/?post_type=servizio&p=742",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.terrazzo.vr.it/?post_type=servizio&p=742",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.terrazzo.vr.it/?post_type=servizio&p=742",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:48:48.410460Z"
+  },
+  "tributi_imu": {
+   "service_id": "023085:wp:675",
+   "title": "Calcolo IMU",
+   "source_url": "https://www.comune.terrazzo.vr.it/?post_type=servizio&p=675",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.terrazzo.vr.it/?post_type=servizio&p=675",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.terrazzo.vr.it/?post_type=servizio&p=675",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:48:56.162964Z"
+  }
+ }
+}

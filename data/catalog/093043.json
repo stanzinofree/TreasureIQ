@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "093043",
+ "services": {
+  "accesso_atti": {
+   "service_id": "093043:wp:402",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.sesto-al-reghena.pn.it/?post_type=servizio&p=402",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sesto-al-reghena.pn.it/?post_type=servizio&p=402",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sesto-al-reghena.pn.it/?post_type=servizio&p=402",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:52:56.179169Z"
+  },
+  "carta_identita": {
+   "service_id": "093043:wp:959",
+   "title": "Rilascio Carta di identità elettronica",
+   "source_url": "https://www.comune.sesto-al-reghena.pn.it/?post_type=servizio&p=959",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sesto-al-reghena.pn.it/?post_type=servizio&p=959",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sesto-al-reghena.pn.it/?post_type=servizio&p=959",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:53:03.350425Z"
+  },
+  "tributi_imu": {
+   "service_id": "093043:wp:1028",
+   "title": "IMU",
+   "source_url": "https://www.comune.sesto-al-reghena.pn.it/?post_type=servizio&p=1028",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sesto-al-reghena.pn.it/?post_type=servizio&p=1028",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sesto-al-reghena.pn.it/?post_type=servizio&p=1028",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:53:12.277964Z"
+  },
+  "tributi_tari": {
+   "service_id": "093043:wp:1025",
+   "title": "TARI",
+   "source_url": "https://www.comune.sesto-al-reghena.pn.it/?post_type=servizio&p=1025",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sesto-al-reghena.pn.it/?post_type=servizio&p=1025",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sesto-al-reghena.pn.it/?post_type=servizio&p=1025",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:53:19.235521Z"
+  }
+ }
+}

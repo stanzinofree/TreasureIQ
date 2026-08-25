@@ -1,0 +1,243 @@
+{
+ "municipality_istat": "012070",
+ "services": {
+  "carta_identita": {
+   "service_id": "012070:wp:47313",
+   "title": "Carta d’Identità Elettronica (C.I.E.)",
+   "source_url": "https://www.comune.gallarate.va.it/servizio/carta-didentita-elettronica-c-i-e/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gallarate.va.it/servizio/carta-didentita-elettronica-c-i-e/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gallarate.va.it/servizio/carta-didentita-elettronica-c-i-e/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.gallarate.va.it/wp-content/uploads/2025/12/Richiesta_CIE_Maggiorenni.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gallarate.va.it/servizio/carta-didentita-elettronica-c-i-e/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.gallarate.va.it/wp-content/uploads/2025/12/Richiesta_CIE_Minorenni.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gallarate.va.it/servizio/carta-didentita-elettronica-c-i-e/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.gallarate.va.it/wp-content/uploads/2025/12/Modello_Certificazione_Medica_Per_Cie_Domicilio.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gallarate.va.it/servizio/carta-didentita-elettronica-c-i-e/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:13:19.543935Z"
+  },
+  "stato_civile": {
+   "service_id": "012070:wp:44419",
+   "title": "Certificati Stato Civile",
+   "source_url": "https://www.comune.gallarate.va.it/servizio/certificati-stato-civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gallarate.va.it/servizio/certificati-stato-civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gallarate.va.it/servizio/certificati-stato-civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizionline.hspromilaprod.hypersicapp.net/cmsgallarate/servizionline.aspx",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.gallarate.va.it/servizio/certificati-stato-civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:13:21.265265Z"
+  },
+  "tributi_tari": {
+   "service_id": "012070:wp:46587",
+   "title": "Tassa Rifiuti – TARI",
+   "source_url": "https://www.comune.gallarate.va.it/servizio/tassa-rifiuti-tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gallarate.va.it/servizio/tassa-rifiuti-tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gallarate.va.it/servizio/tassa-rifiuti-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.gallarate.va.it/wp-content/uploads/2024/05/TARI-Utenze-non-domestiche_ICA.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gallarate.va.it/servizio/tassa-rifiuti-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.gallarate.va.it/wp-content/uploads/2024/05/TARI-Utenze-Domestiche_ICA.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gallarate.va.it/servizio/tassa-rifiuti-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.gallarate.va.it/wp-content/uploads/2024/05/TARI-Cessazione-utenza_ICA.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gallarate.va.it/servizio/tassa-rifiuti-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.gallarate.va.it/wp-content/uploads/2024/05/TARI-Agevolazioni-Utenze-Domestiche_ICA.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gallarate.va.it/servizio/tassa-rifiuti-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.gallarate.va.it/wp-content/uploads/2023/04/DOMANDA-RATEIZZAZIONE-DI-PAGAMENTI-2022-1.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gallarate.va.it/servizio/tassa-rifiuti-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.gallarate.va.it/wp-content/uploads/2026/01/TARI-Richiesta-Domiciliazione.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gallarate.va.it/servizio/tassa-rifiuti-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.gallarate.va.it/wp-content/uploads/2026/01/TARI-Istanza-di-Rimborso.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gallarate.va.it/servizio/tassa-rifiuti-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.gallarate.va.it/wp-content/uploads/2026/03/Modello_informativa_privacy_per_bonus_rifiuti.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gallarate.va.it/servizio/tassa-rifiuti-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.gallarate.va.it/wp-content/uploads/2026/05/kit-2026-domestiche.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gallarate.va.it/servizio/tassa-rifiuti-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:13:23.123461Z"
+  }
+ }
+}

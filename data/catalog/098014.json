@@ -1,0 +1,139 @@
+{
+ "municipality_istat": "098014",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "098014:wp:1959",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.castiglionedadda.lo.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.castiglionedadda.lo.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.castiglionedadda.lo.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/servizi-anagrafici/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://comune.castiglionedadda.lo.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.castiglionedadda.lo.it/wp-content/uploads/2024/04/MODULO_DICH._RESIDENZA.doc",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.castiglionedadda.lo.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.castiglionedadda.lo.it/wp-content/uploads/2025/04/datidipagamentoiban.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.castiglionedadda.lo.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:57:14.879063Z"
+  },
+  "carta_identita": {
+   "service_id": "098014:wp:2689",
+   "title": "Rilascio della carta d’identità elettronica per maggiorenni",
+   "source_url": "https://comune.castiglionedadda.lo.it/servizio/rilascio-della-carta-didentita-elettronica-per-maggiorenni/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.castiglionedadda.lo.it/servizio/rilascio-della-carta-didentita-elettronica-per-maggiorenni/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.castiglionedadda.lo.it/servizio/rilascio-della-carta-didentita-elettronica-per-maggiorenni/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.castiglionedadda.lo.it/wp-content/uploads/2025/04/datidipagamentoiban.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.castiglionedadda.lo.it/servizio/rilascio-della-carta-didentita-elettronica-per-maggiorenni/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:57:18.128083Z"
+  },
+  "tributi_imu": {
+   "service_id": "098014:wp:2953",
+   "title": "Calcolo IMU – sportello comunale gratuito",
+   "source_url": "https://comune.castiglionedadda.lo.it/servizio/calcolo-imu-sportello-comunale-gratuito/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.castiglionedadda.lo.it/servizio/calcolo-imu-sportello-comunale-gratuito/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.castiglionedadda.lo.it/servizio/calcolo-imu-sportello-comunale-gratuito/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.castiglionedadda.lo.it/wp-content/uploads/2025/04/datidipagamentoiban.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.castiglionedadda.lo.it/servizio/calcolo-imu-sportello-comunale-gratuito/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:57:21.343500Z"
+  }
+ }
+}

@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "082029",
+ "services": {
+  "accesso_atti": {
+   "service_id": "082029:wp:384",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.chiusasclafani.pa.it/?post_type=servizio&p=384",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.chiusasclafani.pa.it/?post_type=servizio&p=384",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.chiusasclafani.pa.it/?post_type=servizio&p=384",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:42:36.845307Z"
+  },
+  "cambio_residenza": {
+   "service_id": "082029:wp:787",
+   "title": "Cambio di residenza tramite Portale Nazionale – ANPR",
+   "source_url": "https://www.comune.chiusasclafani.pa.it/?post_type=servizio&p=787",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.chiusasclafani.pa.it/?post_type=servizio&p=787",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.chiusasclafani.pa.it/?post_type=servizio&p=787",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:42:42.603862Z"
+  }
+ }
+}

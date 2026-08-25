@@ -18,12 +18,12 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from treasureiq.catalog.contracts import AccessMode, CAPABILITY_SERVICES, Surface
+from treasureiq.catalog.contracts import CAPABILITY_SERVICES, AccessMode, Surface
 from treasureiq.catalog.data_contracts import DataRequest, DataStatus, FreshnessPolicy
 from treasureiq.catalog.service_connectors.comweb_service import (
+    _CAP_DIFENSIVO_SCHEDE,
     COMWEB_SERVICE_CATEGORY,
     ComWebServiceConnector,
-    _CAP_DIFENSIVO_SCHEDE,
     _ComWebDiscovery,
 )
 from treasureiq.catalog.service_contracts import ServiceAccessMode, ServiceKey
@@ -299,9 +299,9 @@ def test_ambiguous_key_is_not_found():
 def test_tributi_follows_the_mapped_category():
     f = _FetcherComweb(_pagine_reali())
     ComWebServiceConnector(f).retrieve(
-        _request(service_key=ServiceKey.TRIBUTI), mappa=_mappa(), esito=None
+        _request(service_key=ServiceKey.TRIBUTI_IMU), mappa=_mappa(), esito=None
     )
-    # The tributi key drives the connector to the tributi category, not anagrafe.
+    # A tributi sub-key drives the connector to the tributi category, not anagrafe.
     assert _CAT_TRIBUTI in f.transport.letti
     assert _CAT_ANAGRAFE not in f.transport.letti
 
@@ -337,3 +337,164 @@ def test_category_mapping_covers_the_closed_vocabulary():
     # The mapping must be total over ServiceKey: a new key without a category
     # would silently resolve to NOT_SUPPORTED.
     assert set(COMWEB_SERVICE_CATEGORY) == set(ServiceKey)
+
+
+# ── Agliè (001001) — second real municipality, per-key ground truth ─────────
+#
+# A second captured portal proves the mapping against a different card set.
+# Fixtures under fixtures/comweb/: index (9 categories), anagrafe category
+# (16 cards), tributi category (9 cards).  Every outcome below is the REAL
+# behaviour of the connector+recogniser on these cards — including the honest
+# misses (0 or ≥2 confirmed → NOT_FOUND, never the nearest neighbour).
+
+_ISTAT_AGLIE = "001001"
+_HOST_AGLIE = "www.comune.aglie.to.it"
+_BASE_AGLIE = f"https://{_HOST_AGLIE}"
+_INDEX_AGLIE = f"{_BASE_AGLIE}/it-it/servizi"
+_CAT_ANAGRAFE_AGLIE = f"{_BASE_AGLIE}/it-it/servizi/anagrafe-e-stato-civile"
+_CAT_TRIBUTI_AGLIE = f"{_BASE_AGLIE}/it-it/servizi/tributi-finanze-e-contravvenzioni"
+
+_INDICE_AGLIE_HTML = _fix("comweb/aglie_indice_servizi.html")
+_ANAGRAFE_AGLIE_HTML = _fix("comweb/aglie_anagrafe_categoria.html")
+_TRIBUTI_AGLIE_HTML = _fix("comweb/aglie_tributi_categoria.html")
+
+
+def _pagine_aglie() -> dict[str, str]:
+    return {
+        _INDEX_AGLIE: _INDICE_AGLIE_HTML,
+        _CAT_ANAGRAFE_AGLIE: _ANAGRAFE_AGLIE_HTML,
+        _CAT_TRIBUTI_AGLIE: _TRIBUTI_AGLIE_HTML,
+    }
+
+
+def _mappa_aglie() -> MappaConnettore:
+    return MappaConnettore(
+        codice_istat=_ISTAT_AGLIE,
+        nome="Agliè",
+        sito=_HOST_AGLIE,
+        sondato_il="2026-08-24T00:00:00+00:00",
+        piattaforma_id="comweb",
+        servizi=AssetServizi(esposto=False, rest_base=None, totale=0),
+    )
+
+
+def _retrieve_aglie(service_key: ServiceKey):
+    f = _FetcherComweb(_pagine_aglie())
+    result = ComWebServiceConnector(f).retrieve(
+        _request(source_id=_ISTAT_AGLIE, service_key=service_key),
+        mappa=_mappa_aglie(),
+        esito=None,
+    )
+    return result, f.transport.letti
+
+
+def test_aglie_cambio_residenza_single_card_fulfilled():
+    # Exactly one anagrafe card confirms CAMBIO_RESIDENZA ("Cambio Residenza").
+    result, letti = _retrieve_aglie(ServiceKey.CAMBIO_RESIDENZA)
+    assert result.status is DataStatus.FULFILLED
+    (ref,) = result.service_references
+    assert ref.service_id == (
+        f"{_ISTAT_AGLIE}:comweb:"
+        "cambio-residenza-305-22801-1-f8ed806f0a9e480cb1bd70418787502c"
+    )
+    assert ref.title == "Cambio Residenza"
+    # Request shape: index, then the ONE mapped category, then the scheda page
+    # (options read).  No other category, no crawl.
+    assert letti[:2] == [_INDEX_AGLIE, _CAT_ANAGRAFE_AGLIE]
+    assert len(letti) == 3 and letti[2] == str(ref.source_url)
+
+
+def test_aglie_accesso_atti_confirms_atti_never_accesso_civico():
+    # The anagrafe category carries BOTH "Richiedere l'accesso agli atti" and
+    # "Accesso Civico".  Only the former marks ACCESSO_ATTI; "Accesso Civico"
+    # (a different institute) carries no marker and is never confirmed.
+    result, _ = _retrieve_aglie(ServiceKey.ACCESSO_ATTI)
+    assert result.status is DataStatus.FULFILLED
+    (ref,) = result.service_references
+    assert "richiedere-l-accesso-agli-atti" in ref.service_id
+    assert "accesso-civico" not in ref.service_id
+    assert ref.title == "Richiedere l'accesso agli atti"
+
+
+def test_aglie_carta_identita_two_cards_honest_not_found():
+    # Two cards confirm CARTA_IDENTITA — "Carta d'Identità Elettronica (CIE)"
+    # and "Carta d'identità per minori" — so ≥2 confirmed → NOT_FOUND (I-1).
+    # No card-derivable rule elects one as canonical: an "audience qualifier"
+    # tie-break would be an arbitrary pick, not evidence.
+    result, _ = _retrieve_aglie(ServiceKey.CARTA_IDENTITA)
+    assert result.status is DataStatus.NOT_FOUND
+    assert result.service_references == ()
+
+
+def test_aglie_carta_identita_miss_is_two_confirmed_not_zero():
+    # Prove the miss above is ambiguity (2 confirmed), not a recogniser blind
+    # spot (0 confirmed): both CIE cards individually confirm the key.
+    from treasureiq.chat.service_key import riconosci_service_key
+
+    f = _FetcherComweb(_pagine_aglie())
+    candidati = f.scopri_servizi(
+        base_url=_INDEX_AGLIE, term="anagrafe-e-stato-civile", limit=_CAP_DIFENSIVO_SCHEDE
+    )
+    confermati = [
+        c.title for c in candidati if riconosci_service_key(c.title) is ServiceKey.CARTA_IDENTITA
+    ]
+    assert sorted(confermati) == [
+        "Carta d'Identità Elettronica (CIE)",
+        "Carta d'identità per minori",
+    ]
+
+
+def test_aglie_stato_civile_is_honest_not_found():
+    # REAL behaviour after the shared-recogniser fix: no Agliè card is titled
+    # "stato civile" or carries an unambiguous civil-registry certificate
+    # phrase.  The only near-hit, "Richiedere una pubblicazione di matrimonio"
+    # (the banns), is a DISTINCT service and no longer confirms STATO_CIVILE —
+    # bare "matrimonio" was dropped as a marker (see service_key.py).  Zero
+    # confirmed candidates → honest NOT_FOUND, never the nearest card.
+    result, _ = _retrieve_aglie(ServiceKey.STATO_CIVILE)
+    assert result.status is DataStatus.NOT_FOUND
+    assert result.service_references == ()
+
+
+def test_aglie_tributi_imu_single_card_fulfilled():
+    # After the TRIBUTI split, the tributi category's two tax cards resolve
+    # cleanly per key instead of colliding into an ambiguous NOT_FOUND.
+    # "Pagare tributi IMU" is the ONLY card confirming TRIBUTI_IMU (marker
+    # "imu"); the TARI card does not → exactly one confirmed → FULFILLED.
+    result, letti = _retrieve_aglie(ServiceKey.TRIBUTI_IMU)
+    assert result.status is DataStatus.FULFILLED
+    (ref,) = result.service_references
+    assert ref.service_id == (
+        f"{_ISTAT_AGLIE}:comweb:"
+        "pagare-tributi-imu-600-22892-1-a3256eda7bd21d2164edd278345c061f"
+    )
+    assert ref.title == "Pagare tributi IMU"
+    # Index → the ONE mapped (tributi) category → the scheda page. No anagrafe.
+    assert letti[:2] == [_INDEX_AGLIE, _CAT_TRIBUTI_AGLIE]
+    assert len(letti) == 3 and letti[2] == str(ref.source_url)
+
+
+def test_aglie_tributi_tari_single_card_fulfilled():
+    # "Pagamento Tassa Rifiuti (TARI)" is the ONLY card confirming TRIBUTI_TARI
+    # (markers "tassa rifiuti"/"tari"); the IMU card does not → one confirmed →
+    # FULFILLED.  The dropped bare "tributi" substring no longer cross-confirms.
+    result, letti = _retrieve_aglie(ServiceKey.TRIBUTI_TARI)
+    assert result.status is DataStatus.FULFILLED
+    (ref,) = result.service_references
+    assert ref.service_id == (
+        f"{_ISTAT_AGLIE}:comweb:"
+        "pagamento-tassa-rifiuti-tari-659-22883-1-809d1b6227988c467e9a06be0ea34eab"
+    )
+    assert ref.title == "Pagamento Tassa Rifiuti (TARI)"
+    assert letti[:2] == [_INDEX_AGLIE, _CAT_TRIBUTI_AGLIE]
+    assert len(letti) == 3 and letti[2] == str(ref.source_url)
+
+
+def test_aglie_every_key_reads_index_plus_its_one_mapped_category():
+    # Form of the requests, for every key: the index, then exactly the mapped
+    # category — plus at most the single scheda page when one card confirms.
+    for key in ServiceKey:
+        _, letti = _retrieve_aglie(key)
+        atteso_cat = f"{_BASE_AGLIE}/it-it/servizi/{COMWEB_SERVICE_CATEGORY[key]}"
+        assert letti[:2] == [_INDEX_AGLIE, atteso_cat], key
+        assert len(letti) <= 3, key

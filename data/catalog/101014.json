@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "101014",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "101014:wp:153",
+   "title": "Cambio di residenza tramite Portale Nazionale – ANPR",
+   "source_url": "https://www.comune.melissa.kr.it/?post_type=servizio&p=153",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.melissa.kr.it/?post_type=servizio&p=153",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.melissa.kr.it/?post_type=servizio&p=153",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:58:49.260173Z"
+  }
+ }
+}

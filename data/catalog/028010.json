@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "028010",
+ "services": {
+  "carta_identita": {
+   "service_id": "028010:wp:215",
+   "title": "Rilascio PIN e PUK per CIE",
+   "source_url": "https://www.comune.barbona.pd.it/?post_type=servizio&p=215",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.barbona.pd.it/?post_type=servizio&p=215",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.barbona.pd.it/?post_type=servizio&p=215",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:51:18.735574Z"
+  },
+  "stato_civile": {
+   "service_id": "028010:wp:1093",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.barbona.pd.it/?post_type=servizio&p=1093",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.barbona.pd.it/?post_type=servizio&p=1093",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.barbona.pd.it/?post_type=servizio&p=1093",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:51:23.744234Z"
+  },
+  "tributi_imu": {
+   "service_id": "028010:wp:1121",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.barbona.pd.it/?post_type=servizio&p=1121",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.barbona.pd.it/?post_type=servizio&p=1121",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.barbona.pd.it/?post_type=servizio&p=1121",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:51:33.474176Z"
+  }
+ }
+}

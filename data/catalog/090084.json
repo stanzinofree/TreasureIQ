@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "090084",
+ "services": {
+  "tributi_imu": {
+   "service_id": "090084:wp:7970",
+   "title": "Pagare tributi IMU (Imposta Municipale Unica)",
+   "source_url": "https://www.comune.loiriportosanpaolo.ss.it/servizio/pagare-tributi-imu-imposta-municipale-unica/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.loiriportosanpaolo.ss.it/servizio/pagare-tributi-imu-imposta-municipale-unica/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.loiriportosanpaolo.ss.it/servizio/pagare-tributi-imu-imposta-municipale-unica/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:51:35.764451Z"
+  }
+ }
+}

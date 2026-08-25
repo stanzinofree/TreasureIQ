@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "059003",
+ "services": {
+  "accesso_atti": {
+   "service_id": "059003:wp:1390",
+   "title": "Richiesta accesso agli atti",
+   "source_url": "https://www.comune.campodimele.lt.it/servizio/accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.campodimele.lt.it/servizio/accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.campodimele.lt.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:03:39.870490Z"
+  },
+  "cambio_residenza": {
+   "service_id": "059003:wp:2435",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.campodimele.lt.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.campodimele.lt.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.campodimele.lt.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:03:43.224883Z"
+  },
+  "tributi_imu": {
+   "service_id": "059003:wp:2486",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.campodimele.lt.it/servizio/pagare-tributi-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.campodimele.lt.it/servizio/pagare-tributi-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.campodimele.lt.it/servizio/pagare-tributi-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:03:46.322104Z"
+  },
+  "tributi_tari": {
+   "service_id": "059003:wp:1456",
+   "title": "Pagamento TARI",
+   "source_url": "https://www.comune.campodimele.lt.it/servizio/pagamento-tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.campodimele.lt.it/servizio/pagamento-tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.campodimele.lt.it/servizio/pagamento-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:03:50.728436Z"
+  }
+ }
+}

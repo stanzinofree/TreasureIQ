@@ -1,0 +1,123 @@
+{
+ "municipality_istat": "001311",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001311:comweb:richiedere-l-accesso-agli-atti-317-34156-1-371a112f4f136ecc2b50ac8f5e2315fe",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.vische.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-34156-1-371a112f4f136ecc2b50ac8f5e2315fe",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vische.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-34156-1-371a112f4f136ecc2b50ac8f5e2315fe",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vische.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-34156-1-371a112f4f136ecc2b50ac8f5e2315fe",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.vische.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=vsch1309&IDPr=10596",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.vische.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-34156-1-371a112f4f136ecc2b50ac8f5e2315fe",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:52:44.802116Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001311:comweb:cambio-residenza-305-34154-1-092d664db93e900cbfd582ab625a38a0",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.vische.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-34154-1-092d664db93e900cbfd582ab625a38a0",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vische.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-34154-1-092d664db93e900cbfd582ab625a38a0",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vische.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-34154-1-092d664db93e900cbfd582ab625a38a0",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.vische.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-34154-1-092d664db93e900cbfd582ab625a38a0",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:52:49.479361Z"
+  },
+  "carta_identita": {
+   "service_id": "001311:comweb:carta-d-identita-elettronica-cie-788-34144-1-7de811f01edda3a9e52d70144ebc7e03",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.vische.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-34144-1-7de811f01edda3a9e52d70144ebc7e03",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vische.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-34144-1-7de811f01edda3a9e52d70144ebc7e03",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vische.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-34144-1-7de811f01edda3a9e52d70144ebc7e03",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:52:51.464423Z"
+  },
+  "tributi_tari": {
+   "service_id": "001311:comweb:pagamento-tassa-rifiuti-tari-659-34236-1-88eae1cd8d54c21286c86c1ea04f15ff",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.vische.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-34236-1-88eae1cd8d54c21286c86c1ea04f15ff",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vische.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-34236-1-88eae1cd8d54c21286c86c1ea04f15ff",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vische.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-34236-1-88eae1cd8d54c21286c86c1ea04f15ff",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:52:53.572514Z"
+  }
+ }
+}

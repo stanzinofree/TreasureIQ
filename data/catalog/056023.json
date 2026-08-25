@@ -1,0 +1,123 @@
+{
+ "municipality_istat": "056023",
+ "services": {
+  "accesso_atti": {
+   "service_id": "056023:wp:4292",
+   "title": "Richiesta accesso agli atti",
+   "source_url": "https://comune.corchiano.vt.it/servizio/richiedere-accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.corchiano.vt.it/servizio/richiedere-accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.corchiano.vt.it/servizio/richiedere-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:59:23.355664Z"
+  },
+  "cambio_residenza": {
+   "service_id": "056023:wp:7133",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.corchiano.vt.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.corchiano.vt.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.corchiano.vt.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:59:26.387901Z"
+  },
+  "carta_identita": {
+   "service_id": "056023:wp:7138",
+   "title": "Rilascio carta d’identità elettronica (CIE)",
+   "source_url": "https://comune.corchiano.vt.it/servizio/rilascio-carta-didentita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.corchiano.vt.it/servizio/rilascio-carta-didentita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.corchiano.vt.it/servizio/rilascio-carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.corchiano.vt.it/wp-content/uploads/2025/08/Assenso-CIE-per-minori-1.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.corchiano.vt.it/servizio/rilascio-carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.corchiano.vt.it/wp-content/uploads/2025/08/Richiesta-CIE-non-residente_0-1.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.corchiano.vt.it/servizio/rilascio-carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:59:29.106151Z"
+  },
+  "tributi_imu": {
+   "service_id": "056023:wp:7424",
+   "title": "Calcolo IMU – Imposta Municipale Propria",
+   "source_url": "https://comune.corchiano.vt.it/servizio/calcolo-imu-imposta-municipale-propria/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.corchiano.vt.it/servizio/calcolo-imu-imposta-municipale-propria/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.corchiano.vt.it/servizio/calcolo-imu-imposta-municipale-propria/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:59:31.809351Z"
+  }
+ }
+}

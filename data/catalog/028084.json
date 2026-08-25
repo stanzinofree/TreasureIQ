@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "028084",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "028084:wp:1009",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.santurbano.pd.it/?post_type=servizio&p=1009",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.santurbano.pd.it/?post_type=servizio&p=1009",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.santurbano.pd.it/?post_type=servizio&p=1009",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:20:38.994533Z"
+  },
+  "stato_civile": {
+   "service_id": "028084:wp:1017",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.santurbano.pd.it/?post_type=servizio&p=1017",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.santurbano.pd.it/?post_type=servizio&p=1017",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.santurbano.pd.it/?post_type=servizio&p=1017",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:20:45.829860Z"
+  },
+  "tributi_imu": {
+   "service_id": "028084:wp:1006",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.santurbano.pd.it/?post_type=servizio&p=1006",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.santurbano.pd.it/?post_type=servizio&p=1006",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.santurbano.pd.it/?post_type=servizio&p=1006",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:20:53.862608Z"
+  }
+ }
+}

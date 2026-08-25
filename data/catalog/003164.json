@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "003164",
+ "services": {
+  "accesso_atti": {
+   "service_id": "003164:comweb:richiedere-l-accesso-agli-atti-317-41020-1-843dd3bd084874a0e0ff76b683d8f585",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://comune.vinzaglio.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-41020-1-843dd3bd084874a0e0ff76b683d8f585",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.vinzaglio.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-41020-1-843dd3bd084874a0e0ff76b683d8f585",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.vinzaglio.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-41020-1-843dd3bd084874a0e0ff76b683d8f585",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.vinzaglio.no.it/lang/it/servizi/richiedere-laccesso-agli-atti/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://comune.vinzaglio.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-41020-1-843dd3bd084874a0e0ff76b683d8f585",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:00:09.550118Z"
+  },
+  "cambio_residenza": {
+   "service_id": "003164:comweb:cambio-residenza-305-41018-1-836b8037da6bc9f65c408dda194ebae7",
+   "title": "Cambio Residenza",
+   "source_url": "https://comune.vinzaglio.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-41018-1-836b8037da6bc9f65c408dda194ebae7",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.vinzaglio.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-41018-1-836b8037da6bc9f65c408dda194ebae7",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.vinzaglio.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-41018-1-836b8037da6bc9f65c408dda194ebae7",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://comune.vinzaglio.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-41018-1-836b8037da6bc9f65c408dda194ebae7",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:00:12.570893Z"
+  },
+  "carta_identita": {
+   "service_id": "003164:comweb:carta-d-identita-elettronica-cie-788-41008-1-57f0262833c3469807303e54256d437a",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://comune.vinzaglio.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-41008-1-57f0262833c3469807303e54256d437a",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.vinzaglio.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-41008-1-57f0262833c3469807303e54256d437a",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.vinzaglio.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-41008-1-57f0262833c3469807303e54256d437a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:00:16.614356Z"
+  }
+ }
+}

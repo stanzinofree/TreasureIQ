@@ -1,0 +1,120 @@
+{
+ "municipality_istat": "023067",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "023067:wp:892",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.rovereveronese.vr.it/?post_type=servizio&p=892",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rovereveronese.vr.it/?post_type=servizio&p=892",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rovereveronese.vr.it/?post_type=servizio&p=892",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:43:32.588283Z"
+  },
+  "carta_identita": {
+   "service_id": "023067:wp:325",
+   "title": "CIE - Carta di Identià Elettronica",
+   "source_url": "https://www.comune.rovereveronese.vr.it/?post_type=servizio&p=325",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rovereveronese.vr.it/?post_type=servizio&p=325",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rovereveronese.vr.it/?post_type=servizio&p=325",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:43:48.824105Z"
+  },
+  "stato_civile": {
+   "service_id": "023067:wp:935",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.rovereveronese.vr.it/?post_type=servizio&p=935",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rovereveronese.vr.it/?post_type=servizio&p=935",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rovereveronese.vr.it/?post_type=servizio&p=935",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:43:57.481407Z"
+  },
+  "tributi_imu": {
+   "service_id": "023067:wp:936",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.rovereveronese.vr.it/?post_type=servizio&p=936",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rovereveronese.vr.it/?post_type=servizio&p=936",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rovereveronese.vr.it/?post_type=servizio&p=936",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:44:05.006989Z"
+  },
+  "tributi_tari": {
+   "service_id": "023067:wp:645",
+   "title": "Attivazione utenza domestica rifiuti urbani TARI",
+   "source_url": "https://www.comune.rovereveronese.vr.it/?post_type=servizio&p=645",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rovereveronese.vr.it/?post_type=servizio&p=645",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rovereveronese.vr.it/?post_type=servizio&p=645",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:44:19.074332Z"
+  }
+ }
+}

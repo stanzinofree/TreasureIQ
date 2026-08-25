@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "014033",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "014033:wp:1277",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.grosio.so.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.grosio.so.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.grosio.so.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:14:36.657279Z"
+  },
+  "carta_identita": {
+   "service_id": "014033:wp:1243",
+   "title": "Carta d’identità elettronica",
+   "source_url": "https://comune.grosio.so.it/servizio/carta-didentita-elettronica/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.grosio.so.it/servizio/carta-didentita-elettronica/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.grosio.so.it/servizio/carta-didentita-elettronica/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:14:39.894242Z"
+  },
+  "tributi_imu": {
+   "service_id": "014033:wp:1237",
+   "title": "Calcolo IMU online",
+   "source_url": "https://comune.grosio.so.it/servizio/calcolo-imu-online/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.grosio.so.it/servizio/calcolo-imu-online/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.grosio.so.it/servizio/calcolo-imu-online/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:14:43.156728Z"
+  }
+ }
+}

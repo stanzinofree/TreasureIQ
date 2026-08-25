@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "075042",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "075042:wp:716",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.matino.le.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.matino.le.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.matino.le.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:29:24.593338Z"
+  },
+  "carta_identita": {
+   "service_id": "075042:wp:719",
+   "title": "CIE – Carta di Identità Elettronica",
+   "source_url": "https://www.comune.matino.le.it/servizio/cie-carta-di-identita-elettronica/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.matino.le.it/servizio/cie-carta-di-identita-elettronica/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.matino.le.it/servizio/cie-carta-di-identita-elettronica/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:29:28.614199Z"
+  }
+ }
+}

@@ -287,13 +287,13 @@ def test_identita_risultato_incoerente(mappa, request_cie):
 # 9 — write-through preserves other service_keys already cached (no-clobber)
 def test_write_through_preserva_altre_chiavi(mappa, request_cie):
     altro = _reference("tributi")
-    service_cache.salva(_SOURCE, ServiceKey.TRIBUTI, altro, _CONN)
+    service_cache.salva(_SOURCE, ServiceKey.TRIBUTI_IMU, altro, _CONN)
     ref = _reference("cie")
     stub = _StubConnettore(_result(request_cie, (ref,)))
     service_resolver.resolve_service(
         request_cie, mappa=mappa, esito=None, registry=_registry(stub)
     )
-    tributi = service_cache.carica(_SOURCE, ServiceKey.TRIBUTI, policy=request_cie.freshness)
+    tributi = service_cache.carica(_SOURCE, ServiceKey.TRIBUTI_IMU, policy=request_cie.freshness)
     cie = service_cache.carica(_SOURCE, ServiceKey.CARTA_IDENTITA, policy=request_cie.freshness)
     assert tributi is not None and tributi.reference == altro
     assert cie is not None and cie.reference == ref

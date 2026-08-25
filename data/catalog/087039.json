@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "087039",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "087039:wp:7368",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.riposto.ct.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.riposto.ct.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.riposto.ct.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:49:33.500729Z"
+  },
+  "carta_identita": {
+   "service_id": "087039:wp:7893",
+   "title": "Rilascio carta d’identità elettronica (CIE)",
+   "source_url": "https://comune.riposto.ct.it/servizio/rilascio-carta-didentita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.riposto.ct.it/servizio/rilascio-carta-didentita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.riposto.ct.it/servizio/rilascio-carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:49:36.691844Z"
+  },
+  "tributi_imu": {
+   "service_id": "087039:wp:7618",
+   "title": "Pagamento dell’imposta municipale propria (IMU)",
+   "source_url": "https://comune.riposto.ct.it/servizio/pagamento-dellimposta-municipale-propria-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.riposto.ct.it/servizio/pagamento-dellimposta-municipale-propria-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.riposto.ct.it/servizio/pagamento-dellimposta-municipale-propria-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:49:39.682722Z"
+  }
+ }
+}

@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "078021",
+ "services": {
+  "accesso_atti": {
+   "service_id": "078021:wp:298",
+   "title": "Accesso agli atti",
+   "source_url": "https://comune.calopezzati.cs.it/servizio/accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.calopezzati.cs.it/servizio/accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.calopezzati.cs.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:31:53.441048Z"
+  },
+  "tributi_imu": {
+   "service_id": "078021:wp:305",
+   "title": "Calcolo IMU (Imposta Municipale Propria)",
+   "source_url": "https://comune.calopezzati.cs.it/servizio/calcolo-imu-imposta-municipale-propria/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.calopezzati.cs.it/servizio/calcolo-imu-imposta-municipale-propria/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.calopezzati.cs.it/servizio/calcolo-imu-imposta-municipale-propria/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:31:57.935432Z"
+  }
+ }
+}

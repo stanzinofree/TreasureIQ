@@ -1,0 +1,64 @@
+{
+ "municipality_istat": "006151",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "006151:comweb:cambio-residenza-305-33230-1-e09788c5e7fc29f7a9ad47de837ab935",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.sale.al.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-33230-1-e09788c5e7fc29f7a9ad47de837ab935",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sale.al.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-33230-1-e09788c5e7fc29f7a9ad47de837ab935",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sale.al.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-33230-1-e09788c5e7fc29f7a9ad47de837ab935",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.sale.al.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-33230-1-e09788c5e7fc29f7a9ad47de837ab935",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:02:27.058160Z"
+  },
+  "carta_identita": {
+   "service_id": "006151:comweb:carta-d-identita-elettronica-cie-788-33220-1-b648184575416cc127377a5d26246002",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.sale.al.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-33220-1-b648184575416cc127377a5d26246002",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sale.al.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-33220-1-b648184575416cc127377a5d26246002",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sale.al.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-33220-1-b648184575416cc127377a5d26246002",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:02:29.164479Z"
+  }
+ }
+}

@@ -1,0 +1,159 @@
+{
+ "municipality_istat": "002008",
+ "services": {
+  "accesso_atti": {
+   "service_id": "002008:comweb:richiedere-l-accesso-agli-atti-317-38908-1-937e33ddaa49eec0ef0737ad103a4b5b",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.balmuccia.vc.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-38908-1-937e33ddaa49eec0ef0737ad103a4b5b",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.balmuccia.vc.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-38908-1-937e33ddaa49eec0ef0737ad103a4b5b",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.balmuccia.vc.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-38908-1-937e33ddaa49eec0ef0737ad103a4b5b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.balmuccia.vc.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=blmcc901&IDPr=11327",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.balmuccia.vc.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-38908-1-937e33ddaa49eec0ef0737ad103a4b5b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:53:31.268990Z"
+  },
+  "cambio_residenza": {
+   "service_id": "002008:comweb:cambio-residenza-305-38906-1-9f2f5ea2fe63381f9b5fe4e8c569e25c",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.balmuccia.vc.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-38906-1-9f2f5ea2fe63381f9b5fe4e8c569e25c",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.balmuccia.vc.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-38906-1-9f2f5ea2fe63381f9b5fe4e8c569e25c",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.balmuccia.vc.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-38906-1-9f2f5ea2fe63381f9b5fe4e8c569e25c",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.balmuccia.vc.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-38906-1-9f2f5ea2fe63381f9b5fe4e8c569e25c",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:53:33.380988Z"
+  },
+  "stato_civile": {
+   "service_id": "002008:comweb:richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-38896-1-90a4a6c50c9b43ef769a40ef996bebca",
+   "title": "Richiesta di certificati/attestazioni/estratti di stato civile",
+   "source_url": "https://www.comune.balmuccia.vc.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-38896-1-90a4a6c50c9b43ef769a40ef996bebca",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.balmuccia.vc.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-38896-1-90a4a6c50c9b43ef769a40ef996bebca",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.balmuccia.vc.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-38896-1-90a4a6c50c9b43ef769a40ef996bebca",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:53:35.992343Z"
+  },
+  "tributi_imu": {
+   "service_id": "002008:comweb:pagare-tributi-imu-600-38997-1-29fe6c8be568912c4b8fa0de5fad393d",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.balmuccia.vc.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-38997-1-29fe6c8be568912c4b8fa0de5fad393d",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.balmuccia.vc.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-38997-1-29fe6c8be568912c4b8fa0de5fad393d",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.balmuccia.vc.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-38997-1-29fe6c8be568912c4b8fa0de5fad393d",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.servizipubblicaamministrazione.it/servizi/PortaleContribuente/CalcoloImuTasi.aspx?CodCat=A600",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.balmuccia.vc.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-38997-1-29fe6c8be568912c4b8fa0de5fad393d",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:53:38.957353Z"
+  },
+  "tributi_tari": {
+   "service_id": "002008:comweb:pagamento-tassa-rifiuti-tari-659-38988-1-e2c3a5da4ce0f0ca3df36fce45a0e030",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.balmuccia.vc.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-38988-1-e2c3a5da4ce0f0ca3df36fce45a0e030",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.balmuccia.vc.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-38988-1-e2c3a5da4ce0f0ca3df36fce45a0e030",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.balmuccia.vc.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-38988-1-e2c3a5da4ce0f0ca3df36fce45a0e030",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:53:41.228199Z"
+  }
+ }
+}

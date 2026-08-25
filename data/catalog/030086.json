@@ -1,0 +1,123 @@
+{
+ "municipality_istat": "030086",
+ "services": {
+  "accesso_atti": {
+   "service_id": "030086:wp:236",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.pulfero.ud.it/?post_type=servizio&p=236",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pulfero.ud.it/?post_type=servizio&p=236",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pulfero.ud.it/?post_type=servizio&p=236",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.pulfero.ud.it/wp-content/uploads/2023/05/3_Regolamento_Accesso_Documenti_Amministrativi_1993_ecPciE1.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pulfero.ud.it/?post_type=servizio&p=236",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.pulfero.ud.it/wp-content/uploads/2025/01/Richiesta-di-accesso.odt",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pulfero.ud.it/?post_type=servizio&p=236",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:43:08.592421Z"
+  },
+  "cambio_residenza": {
+   "service_id": "030086:wp:862",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.pulfero.ud.it/?post_type=servizio&p=862",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pulfero.ud.it/?post_type=servizio&p=862",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pulfero.ud.it/?post_type=servizio&p=862",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:43:14.826636Z"
+  },
+  "carta_identita": {
+   "service_id": "030086:wp:234",
+   "title": "Rilascio Carta di Identità Elettronica",
+   "source_url": "https://www.comune.pulfero.ud.it/?post_type=servizio&p=234",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pulfero.ud.it/?post_type=servizio&p=234",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pulfero.ud.it/?post_type=servizio&p=234",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:43:21.307365Z"
+  },
+  "stato_civile": {
+   "service_id": "030086:wp:923",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.pulfero.ud.it/?post_type=servizio&p=923",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pulfero.ud.it/?post_type=servizio&p=923",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pulfero.ud.it/?post_type=servizio&p=923",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:43:30.944467Z"
+  }
+ }
+}

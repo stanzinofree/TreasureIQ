@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "026034",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "026034:wp:1834",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.gorgoalmonticano.tv.it/?post_type=servizio&p=1834",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gorgoalmonticano.tv.it/?post_type=servizio&p=1834",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gorgoalmonticano.tv.it/?post_type=servizio&p=1834",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:30:58.416952Z"
+  },
+  "carta_identita": {
+   "service_id": "026034:wp:1508",
+   "title": "Ristampa PIN e PUK per CIE",
+   "source_url": "https://www.comune.gorgoalmonticano.tv.it/?post_type=servizio&p=1508",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gorgoalmonticano.tv.it/?post_type=servizio&p=1508",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gorgoalmonticano.tv.it/?post_type=servizio&p=1508",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:31:04.929557Z"
+  },
+  "stato_civile": {
+   "service_id": "026034:wp:1841",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.gorgoalmonticano.tv.it/?post_type=servizio&p=1841",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gorgoalmonticano.tv.it/?post_type=servizio&p=1841",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gorgoalmonticano.tv.it/?post_type=servizio&p=1841",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:31:12.853416Z"
+  },
+  "tributi_imu": {
+   "service_id": "026034:wp:1843",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.gorgoalmonticano.tv.it/?post_type=servizio&p=1843",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gorgoalmonticano.tv.it/?post_type=servizio&p=1843",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gorgoalmonticano.tv.it/?post_type=servizio&p=1843",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:31:22.066935Z"
+  }
+ }
+}

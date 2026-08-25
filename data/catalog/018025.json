@@ -1,0 +1,64 @@
+{
+ "municipality_istat": "018025",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "018025:comweb:cambio-residenza-305-58231-1-84e46b2f2973e20453d717be4e1032ae",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.calvignano.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-58231-1-84e46b2f2973e20453d717be4e1032ae",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.calvignano.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-58231-1-84e46b2f2973e20453d717be4e1032ae",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.calvignano.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-58231-1-84e46b2f2973e20453d717be4e1032ae",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.calvignano.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-58231-1-84e46b2f2973e20453d717be4e1032ae",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:18:40.503107Z"
+  },
+  "tributi_tari": {
+   "service_id": "018025:comweb:tassa-rifiuti-tari-954-58313-1-98c4cdac806d595de0c6996447ff7249",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.calvignano.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-58313-1-98c4cdac806d595de0c6996447ff7249",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.calvignano.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-58313-1-98c4cdac806d595de0c6996447ff7249",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.calvignano.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-58313-1-98c4cdac806d595de0c6996447ff7249",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:18:42.439600Z"
+  }
+ }
+}

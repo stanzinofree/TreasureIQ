@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "111067",
+ "services": {
+  "tributi_tari": {
+   "service_id": "111067:wp:5630",
+   "title": "TARI: Tassa sui Rifiuti",
+   "source_url": "https://www.comune.sanluri.su.it/servizio/tari-tassa-sui-rifiuti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanluri.su.it/servizio/tari-tassa-sui-rifiuti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanluri.su.it/servizio/tari-tassa-sui-rifiuti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T15:06:14.928288Z"
+  }
+ }
+}

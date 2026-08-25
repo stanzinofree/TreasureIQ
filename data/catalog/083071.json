@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "083071",
+ "services": {
+  "accesso_atti": {
+   "service_id": "083071:wp:20927",
+   "title": "Accesso agli atti",
+   "source_url": "https://comune.roccafiorita.me.it/servizio/accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.roccafiorita.me.it/servizio/accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.roccafiorita.me.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:45:43.777137Z"
+  },
+  "tributi_imu": {
+   "service_id": "083071:wp:21098",
+   "title": "ALIQUOTE IMU 2024 ROCCAFIORITA",
+   "source_url": "https://comune.roccafiorita.me.it/servizio/aliquote-imu-2024/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.roccafiorita.me.it/servizio/aliquote-imu-2024/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.roccafiorita.me.it/servizio/aliquote-imu-2024/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:45:47.505753Z"
+  }
+ }
+}

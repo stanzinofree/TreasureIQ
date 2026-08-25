@@ -1,0 +1,220 @@
+{
+ "municipality_istat": "020002",
+ "services": {
+  "stato_civile": {
+   "service_id": "020002:wp:3572",
+   "title": "Richiesta certificati di stato civile",
+   "source_url": "https://www.comune.asola.mn.it/servizio/richiesta-certificati-di-stato-civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.asola.mn.it/servizio/richiesta-certificati-di-stato-civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.asola.mn.it/servizio/richiesta-certificati-di-stato-civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.asola.mn.it/wp-content/uploads/2024/11/Condizioni-di-servizio.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.asola.mn.it/servizio/richiesta-certificati-di-stato-civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.asola.mn.it/wp-content/uploads/2023/06/Elenco_Uffici_FE_per_Sito-2.doc",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.asola.mn.it/servizio/richiesta-certificati-di-stato-civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:28:41.494751Z"
+  },
+  "tributi_tari": {
+   "service_id": "020002:wp:988",
+   "title": "Tari – tassa sui rifiuti",
+   "source_url": "https://www.comune.asola.mn.it/servizio/tari-tassa-sui-rifiuti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.asola.mn.it/servizio/tari-tassa-sui-rifiuti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.asola.mn.it/servizio/tari-tassa-sui-rifiuti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.asola.mn.it/wp-content/uploads/2026/07/PEF-COMPLETO.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.asola.mn.it/servizio/tari-tassa-sui-rifiuti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.asola.mn.it/wp-content/uploads/2026/07/Relazione-gestori-PEF-2026-2029.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.asola.mn.it/servizio/tari-tassa-sui-rifiuti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.asola.mn.it/wp-content/uploads/2026/07/Relazione-ETC-ASOLA.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.asola.mn.it/servizio/tari-tassa-sui-rifiuti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.asola.mn.it/wp-content/uploads/2026/07/Relazione-validazione-ASOLA-rev.-1.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.asola.mn.it/servizio/tari-tassa-sui-rifiuti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.asola.mn.it/wp-content/uploads/2023/06/REGOLAMENTO-GESTIONE-RIFIUTI.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.asola.mn.it/servizio/tari-tassa-sui-rifiuti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.asola.mn.it/wp-content/uploads/2023/06/DELIBERA_Num_7__Allegato7_Regolamento-TARI.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.asola.mn.it/servizio/tari-tassa-sui-rifiuti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.asola.mn.it/wp-content/uploads/2024/11/Condizioni-di-servizio.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.asola.mn.it/servizio/tari-tassa-sui-rifiuti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.asola.mn.it/wp-content/uploads/2025/05/TariffeDomestiche_vers_4_2026_Asola.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.asola.mn.it/servizio/tari-tassa-sui-rifiuti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.asola.mn.it/wp-content/uploads/2025/05/TariffeNonDomestiche_vers_4_2026_Asola.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.asola.mn.it/servizio/tari-tassa-sui-rifiuti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.asola.mn.it/wp-content/uploads/2025/05/RipartizioneCosti_vers_4_2026_Asola.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.asola.mn.it/servizio/tari-tassa-sui-rifiuti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.asola.mn.it/wp-content/uploads/2023/06/Elenco_Uffici_FE_per_Sito-2.doc",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.asola.mn.it/servizio/tari-tassa-sui-rifiuti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:28:45.893603Z"
+  }
+ }
+}

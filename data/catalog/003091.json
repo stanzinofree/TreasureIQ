@@ -1,0 +1,64 @@
+{
+ "municipality_istat": "003091",
+ "services": {
+  "accesso_atti": {
+   "service_id": "003091:comweb:richiedere-l-accesso-agli-atti-317-14090-1-fc95b7944f16983a58d593044d2d2638",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.maranoticino.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-14090-1-fc95b7944f16983a58d593044d2d2638",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.maranoticino.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-14090-1-fc95b7944f16983a58d593044d2d2638",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.maranoticino.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-14090-1-fc95b7944f16983a58d593044d2d2638",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.maranoticino.no.it/Servizi/FiloDiretto2/ProcedimentiClient.aspx?ce=mrntcn1249&IDPr=9464",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.maranoticino.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-14090-1-fc95b7944f16983a58d593044d2d2638",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:58:19.480038Z"
+  },
+  "carta_identita": {
+   "service_id": "003091:comweb:carta-d-identita-elettronica-cie-788-14079-1-a9f7187184de046e7c2b75f7cebaade1",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.maranoticino.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-14079-1-a9f7187184de046e7c2b75f7cebaade1",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.maranoticino.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-14079-1-a9f7187184de046e7c2b75f7cebaade1",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.maranoticino.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-14079-1-a9f7187184de046e7c2b75f7cebaade1",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:58:21.660335Z"
+  }
+ }
+}

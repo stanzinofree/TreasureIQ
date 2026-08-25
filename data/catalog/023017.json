@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "023017",
+ "services": {
+  "accesso_atti": {
+   "service_id": "023017:wp:436",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.caldiero.vr.it/?post_type=servizio&p=436",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.caldiero.vr.it/?post_type=servizio&p=436",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.caldiero.vr.it/?post_type=servizio&p=436",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:31:34.115742Z"
+  },
+  "stato_civile": {
+   "service_id": "023017:wp:1230",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.caldiero.vr.it/?post_type=servizio&p=1230",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.caldiero.vr.it/?post_type=servizio&p=1230",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.caldiero.vr.it/?post_type=servizio&p=1230",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:31:41.045965Z"
+  },
+  "tributi_imu": {
+   "service_id": "023017:wp:1385",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.caldiero.vr.it/?post_type=servizio&p=1385",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.caldiero.vr.it/?post_type=servizio&p=1385",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.caldiero.vr.it/?post_type=servizio&p=1385",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:31:49.464219Z"
+  }
+ }
+}

@@ -1,0 +1,136 @@
+{
+ "municipality_istat": "020026",
+ "services": {
+  "accesso_atti": {
+   "service_id": "020026:comweb:richiedere-l-accesso-agli-atti-317-22539-1-d194aebd8fe2cbadda2df693f96d0287",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.goito.mn.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-22539-1-d194aebd8fe2cbadda2df693f96d0287",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.goito.mn.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-22539-1-d194aebd8fe2cbadda2df693f96d0287",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.goito.mn.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-22539-1-d194aebd8fe2cbadda2df693f96d0287",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.goito.mn.it/lang/it/servizi/richiedere-laccesso-agli-atti/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.goito.mn.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-22539-1-d194aebd8fe2cbadda2df693f96d0287",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:29:02.261060Z"
+  },
+  "cambio_residenza": {
+   "service_id": "020026:comweb:cambio-residenza-305-22537-1-e09f3f5621308f28249c26f30549b4a8",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.goito.mn.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-22537-1-e09f3f5621308f28249c26f30549b4a8",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.goito.mn.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-22537-1-e09f3f5621308f28249c26f30549b4a8",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.goito.mn.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-22537-1-e09f3f5621308f28249c26f30549b4a8",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.goito.mn.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-22537-1-e09f3f5621308f28249c26f30549b4a8",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:29:04.032220Z"
+  },
+  "carta_identita": {
+   "service_id": "020026:comweb:carta-d-identita-elettronica-cie-788-22527-1-5549c3b5d2bcee84790a6695ea12c062",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.goito.mn.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-22527-1-5549c3b5d2bcee84790a6695ea12c062",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.goito.mn.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-22527-1-5549c3b5d2bcee84790a6695ea12c062",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.goito.mn.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-22527-1-5549c3b5d2bcee84790a6695ea12c062",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://pagamentinlombardia.servizirl.it/mypay4/cittadino/spontaneo?enteToChange=C_E078",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.goito.mn.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-22527-1-5549c3b5d2bcee84790a6695ea12c062",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:29:06.127110Z"
+  },
+  "tributi_tari": {
+   "service_id": "020026:comweb:pagamento-tassa-rifiuti-tari-659-22619-1-479feb67840fd2ff3a899a8c63c28867",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.goito.mn.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-22619-1-479feb67840fd2ff3a899a8c63c28867",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.goito.mn.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-22619-1-479feb67840fd2ff3a899a8c63c28867",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.goito.mn.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-22619-1-479feb67840fd2ff3a899a8c63c28867",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:29:08.079203Z"
+  }
+ }
+}

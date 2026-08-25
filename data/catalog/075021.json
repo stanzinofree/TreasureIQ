@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "075021",
+ "services": {
+  "accesso_atti": {
+   "service_id": "075021:wp:1045",
+   "title": "Richiesta di accesso agli atti",
+   "source_url": "https://comune.collepasso.le.it/servizio/richiesta-di-accesso-ad-atti-e-documenti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.collepasso.le.it/servizio/richiesta-di-accesso-ad-atti-e-documenti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.collepasso.le.it/servizio/richiesta-di-accesso-ad-atti-e-documenti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:28:11.008705Z"
+  },
+  "cambio_residenza": {
+   "service_id": "075021:wp:2019",
+   "title": "ANPR – Certificati on-line e cambio di residenza",
+   "source_url": "https://comune.collepasso.le.it/servizio/anpr-certificati-on-line-e-cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.collepasso.le.it/servizio/anpr-certificati-on-line-e-cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.collepasso.le.it/servizio/anpr-certificati-on-line-e-cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:28:15.924976Z"
+  },
+  "carta_identita": {
+   "service_id": "075021:wp:2074",
+   "title": "CIE – Carta di Identità Elettronica",
+   "source_url": "https://comune.collepasso.le.it/servizio/cie-carta-di-identita-elettronica/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.collepasso.le.it/servizio/cie-carta-di-identita-elettronica/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.collepasso.le.it/servizio/cie-carta-di-identita-elettronica/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:28:18.856823Z"
+  },
+  "stato_civile": {
+   "service_id": "075021:wp:1745",
+   "title": "Accordo per la separazione consensuale, il divorzio e la modifica delle relative condizioni innanzi all’Ufficiale dello Stato Civile",
+   "source_url": "https://comune.collepasso.le.it/servizio/accordo-per-la-separazione-consensuale-il-divorzio-e-la-modifica-delle-relative-condizioni-innanzi-allufficiale-dello-stato-civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.collepasso.le.it/servizio/accordo-per-la-separazione-consensuale-il-divorzio-e-la-modifica-delle-relative-condizioni-innanzi-allufficiale-dello-stato-civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.collepasso.le.it/servizio/accordo-per-la-separazione-consensuale-il-divorzio-e-la-modifica-delle-relative-condizioni-innanzi-allufficiale-dello-stato-civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:28:21.239248Z"
+  }
+ }
+}

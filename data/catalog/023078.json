@@ -1,0 +1,41 @@
+{
+ "municipality_istat": "023078",
+ "services": {
+  "carta_identita": {
+   "service_id": "023078:wp:558",
+   "title": "Rilascio Carta di Identità Elettronica",
+   "source_url": "https://www.comune.santannadalfaedo.verona.it/?post_type=servizio&p=558",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.santannadalfaedo.verona.it/?post_type=servizio&p=558",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.santannadalfaedo.verona.it/?post_type=servizio&p=558",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.santannadalfaedo.verona.it/wp-content/uploads/2024/01/Istanza-e-Contestuale-assenso-per-richiedente-minorenne.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.santannadalfaedo.verona.it/?post_type=servizio&p=558",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:47:38.300942Z"
+  }
+ }
+}

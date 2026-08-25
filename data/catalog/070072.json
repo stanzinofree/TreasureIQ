@@ -1,0 +1,103 @@
+{
+ "municipality_istat": "070072",
+ "services": {
+  "carta_identita": {
+   "service_id": "070072:wp:1891",
+   "title": "Carta d’Identità Elettronica (CIE)",
+   "source_url": "https://comune.santacrocedimagliano.cb.it/servizio/carta-didentita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.santacrocedimagliano.cb.it/servizio/carta-didentita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.santacrocedimagliano.cb.it/servizio/carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.cartaidentita.interno.gov.it/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://comune.santacrocedimagliano.cb.it/servizio/carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.santacrocedimagliano.cb.it/wp-content/uploads/2023/06/Termini_e_condizioni_di_servizio.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.santacrocedimagliano.cb.it/servizio/carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:25:30.628500Z"
+  },
+  "tributi_imu": {
+   "service_id": "070072:wp:1892",
+   "title": "Dichiarazione IMU",
+   "source_url": "https://comune.santacrocedimagliano.cb.it/servizio/dichiarazione-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.santacrocedimagliano.cb.it/servizio/dichiarazione-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.santacrocedimagliano.cb.it/servizio/dichiarazione-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizionline.comune.santacrocedimagliano.cb.it/urbi/progs/urp/ur1TR019.sto?DB_NAME=n1201144&w3cbt=S",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://comune.santacrocedimagliano.cb.it/servizio/dichiarazione-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.santacrocedimagliano.cb.it/wp-content/uploads/2023/06/Termini_e_condizioni_di_servizio.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.santacrocedimagliano.cb.it/servizio/dichiarazione-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:25:36.786631Z"
+  }
+ }
+}

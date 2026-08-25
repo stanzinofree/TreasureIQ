@@ -1,0 +1,120 @@
+{
+ "municipality_istat": "001211",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001211:comweb:richiedere-l-accesso-agli-atti-317-61558-1-fa289b20a6be828c6acd0db71d0d5fce",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.reano.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-61558-1-fa289b20a6be828c6acd0db71d0d5fce",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.reano.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-61558-1-fa289b20a6be828c6acd0db71d0d5fce",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.reano.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-61558-1-fa289b20a6be828c6acd0db71d0d5fce",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:47:05.919066Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001211:comweb:cambio-residenza-305-61556-1-0337447b14c7d6c1868518bcd5fa2a2b",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.reano.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-61556-1-0337447b14c7d6c1868518bcd5fa2a2b",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.reano.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-61556-1-0337447b14c7d6c1868518bcd5fa2a2b",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.reano.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-61556-1-0337447b14c7d6c1868518bcd5fa2a2b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:47:08.144876Z"
+  },
+  "carta_identita": {
+   "service_id": "001211:comweb:carta-d-identita-elettronica-cie-788-61546-1-e3c5e205a9bf225b7c20a875c228b075",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.reano.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-61546-1-e3c5e205a9bf225b7c20a875c228b075",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.reano.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-61546-1-e3c5e205a9bf225b7c20a875c228b075",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.reano.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-61546-1-e3c5e205a9bf225b7c20a875c228b075",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:47:10.612629Z"
+  },
+  "tributi_imu": {
+   "service_id": "001211:comweb:calcolo-imu-355-61647-1-6165bfff10220a1209c571d471bdc77a",
+   "title": "Calcolo IMU",
+   "source_url": "https://www.comune.reano.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-61647-1-6165bfff10220a1209c571d471bdc77a",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.reano.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-61647-1-6165bfff10220a1209c571d471bdc77a",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.reano.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-61647-1-6165bfff10220a1209c571d471bdc77a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:47:13.107627Z"
+  },
+  "tributi_tari": {
+   "service_id": "001211:comweb:pagamento-tassa-rifiuti-tari-659-61638-1-8d563c1678a51208b75f6c77e5885fbb",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.reano.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-61638-1-8d563c1678a51208b75f6c77e5885fbb",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.reano.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-61638-1-8d563c1678a51208b75f6c77e5885fbb",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.reano.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-61638-1-8d563c1678a51208b75f6c77e5885fbb",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:47:15.434339Z"
+  }
+ }
+}

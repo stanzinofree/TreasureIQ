@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "018023",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "018023:comweb:cambio-residenza-305-49865-1-96582aa0bc6b5e7135c4f622299e64cc",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.bressanabottarone.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-49865-1-96582aa0bc6b5e7135c4f622299e64cc",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bressanabottarone.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-49865-1-96582aa0bc6b5e7135c4f622299e64cc",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bressanabottarone.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-49865-1-96582aa0bc6b5e7135c4f622299e64cc",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:18:29.733461Z"
+  },
+  "stato_civile": {
+   "service_id": "018023:comweb:richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-49855-1-ddd269ea0290d8be8c5d7d972efa7cd2",
+   "title": "Richiesta di certificati/attestazioni/estratti di stato civile",
+   "source_url": "https://www.comune.bressanabottarone.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-49855-1-ddd269ea0290d8be8c5d7d972efa7cd2",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bressanabottarone.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-49855-1-ddd269ea0290d8be8c5d7d972efa7cd2",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bressanabottarone.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-49855-1-ddd269ea0290d8be8c5d7d972efa7cd2",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:18:32.592032Z"
+  },
+  "tributi_tari": {
+   "service_id": "018023:comweb:pagamento-tassa-rifiuti-tari-659-49947-1-d8dcdfa09afda6b67d2e2fe92287f908",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.bressanabottarone.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-49947-1-d8dcdfa09afda6b67d2e2fe92287f908",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bressanabottarone.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-49947-1-d8dcdfa09afda6b67d2e2fe92287f908",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bressanabottarone.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-49947-1-d8dcdfa09afda6b67d2e2fe92287f908",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:18:37.053040Z"
+  }
+ }
+}

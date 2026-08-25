@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "046009",
+ "services": {
+  "stato_civile": {
+   "service_id": "046009:wp:11388",
+   "title": "Reperibilità stato civile",
+   "source_url": "https://comune.castelnuovodigarfagnana.lu.it/servizio/reperibilita-stato-civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.castelnuovodigarfagnana.lu.it/servizio/reperibilita-stato-civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.castelnuovodigarfagnana.lu.it/servizio/reperibilita-stato-civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:54:33.422931Z"
+  },
+  "tributi_imu": {
+   "service_id": "046009:wp:11045",
+   "title": "Presentare domanda di agevolazione tributaria IMU",
+   "source_url": "https://comune.castelnuovodigarfagnana.lu.it/servizio/presentare-domanda-di-agevolazione-tributaria-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.castelnuovodigarfagnana.lu.it/servizio/presentare-domanda-di-agevolazione-tributaria-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.castelnuovodigarfagnana.lu.it/servizio/presentare-domanda-di-agevolazione-tributaria-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:54:35.739053Z"
+  },
+  "tributi_tari": {
+   "service_id": "046009:wp:11044",
+   "title": "Presentare domanda di agevolazione tributaria TARI",
+   "source_url": "https://comune.castelnuovodigarfagnana.lu.it/servizio/presentare-domanda-di-agevolazione-tributaria-tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.castelnuovodigarfagnana.lu.it/servizio/presentare-domanda-di-agevolazione-tributaria-tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.castelnuovodigarfagnana.lu.it/servizio/presentare-domanda-di-agevolazione-tributaria-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:54:37.802743Z"
+  }
+ }
+}

@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "037030",
+ "services": {
+  "accesso_atti": {
+   "service_id": "037030:comweb:richiedere-l-accesso-agli-atti-317-42208-1-387d1c3642b71cd3b4673ae9506a8242",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.granarolo-dellemilia.bo.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-42208-1-387d1c3642b71cd3b4673ae9506a8242",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.granarolo-dellemilia.bo.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-42208-1-387d1c3642b71cd3b4673ae9506a8242",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.granarolo-dellemilia.bo.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-42208-1-387d1c3642b71cd3b4673ae9506a8242",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.granarolo-dellemilia.bo.it/modulistica/C_E136/C_E136_ACCESSO_ATTI",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.granarolo-dellemilia.bo.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-42208-1-387d1c3642b71cd3b4673ae9506a8242",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T13:48:43.872313Z"
+  },
+  "cambio_residenza": {
+   "service_id": "037030:comweb:cambio-residenza-305-42206-1-192d997cb2be89fb5db0c8a9cdb185f5",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.granarolo-dellemilia.bo.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-42206-1-192d997cb2be89fb5db0c8a9cdb185f5",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.granarolo-dellemilia.bo.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-42206-1-192d997cb2be89fb5db0c8a9cdb185f5",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.granarolo-dellemilia.bo.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-42206-1-192d997cb2be89fb5db0c8a9cdb185f5",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.granarolo-dellemilia.bo.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-42206-1-192d997cb2be89fb5db0c8a9cdb185f5",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T13:48:47.793261Z"
+  },
+  "tributi_tari": {
+   "service_id": "037030:comweb:pagamento-tassa-rifiuti-tari-659-42288-1-fae30da3dd928be1bc3c14beaf530542",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.granarolo-dellemilia.bo.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-42288-1-fae30da3dd928be1bc3c14beaf530542",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.granarolo-dellemilia.bo.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-42288-1-fae30da3dd928be1bc3c14beaf530542",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.granarolo-dellemilia.bo.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-42288-1-fae30da3dd928be1bc3c14beaf530542",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T13:48:50.758468Z"
+  }
+ }
+}

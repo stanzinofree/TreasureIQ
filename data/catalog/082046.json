@@ -1,0 +1,64 @@
+{
+ "municipality_istat": "082046",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "082046:wp:745",
+   "title": "Cambio di residenza tramite Portale Nazionale – ANPR",
+   "source_url": "https://www.comune.marineo.pa.it/?post_type=servizio&p=745",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.marineo.pa.it/?post_type=servizio&p=745",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marineo.pa.it/?post_type=servizio&p=745",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:43:45.480257Z"
+  },
+  "tributi_imu": {
+   "service_id": "082046:wp:334",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.marineo.pa.it/?post_type=servizio&p=334",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.marineo.pa.it/?post_type=servizio&p=334",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marineo.pa.it/?post_type=servizio&p=334",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.marineo.pa.it/wp-content/uploads/2023/12/regolamento-imu-2020-emendata-con-del-CC-n.-18.2020.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marineo.pa.it/?post_type=servizio&p=334",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:43:50.676391Z"
+  }
+ }
+}

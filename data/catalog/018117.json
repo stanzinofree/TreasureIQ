@@ -1,0 +1,87 @@
+{
+ "municipality_istat": "018117",
+ "services": {
+  "accesso_atti": {
+   "service_id": "018117:comweb:richiedere-l-accesso-agli-atti-317-37324-1-8650ad4e3b8383a87390b4b9d26aa079",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.pontenizza.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-37324-1-8650ad4e3b8383a87390b4b9d26aa079",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pontenizza.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-37324-1-8650ad4e3b8383a87390b4b9d26aa079",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pontenizza.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-37324-1-8650ad4e3b8383a87390b4b9d26aa079",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:23:25.589995Z"
+  },
+  "cambio_residenza": {
+   "service_id": "018117:comweb:cambio-residenza-305-37322-1-8799d5f2988d931d3a3361e43efd9403",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.pontenizza.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-37322-1-8799d5f2988d931d3a3361e43efd9403",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pontenizza.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-37322-1-8799d5f2988d931d3a3361e43efd9403",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pontenizza.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-37322-1-8799d5f2988d931d3a3361e43efd9403",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.pontenizza.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-37322-1-8799d5f2988d931d3a3361e43efd9403",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:23:28.553865Z"
+  },
+  "tributi_tari": {
+   "service_id": "018117:comweb:tassa-rifiuti-tari-954-37404-1-37afc84826fbc1852e796e977a161f8b",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.pontenizza.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-37404-1-37afc84826fbc1852e796e977a161f8b",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pontenizza.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-37404-1-37afc84826fbc1852e796e977a161f8b",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pontenizza.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-37404-1-37afc84826fbc1852e796e977a161f8b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:23:31.634655Z"
+  }
+ }
+}

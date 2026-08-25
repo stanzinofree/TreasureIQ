@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "090019",
+ "services": {
+  "accesso_atti": {
+   "service_id": "090019:wp:534",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.bulzi.ss.it/?post_type=servizio&p=534",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bulzi.ss.it/?post_type=servizio&p=534",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bulzi.ss.it/?post_type=servizio&p=534",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:50:58.388440Z"
+  },
+  "tributi_imu": {
+   "service_id": "090019:wp:533",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.bulzi.ss.it/?post_type=servizio&p=533",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bulzi.ss.it/?post_type=servizio&p=533",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bulzi.ss.it/?post_type=servizio&p=533",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:51:04.062334Z"
+  }
+ }
+}

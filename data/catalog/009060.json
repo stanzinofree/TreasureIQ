@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "009060",
+ "services": {
+  "accesso_atti": {
+   "service_id": "009060:wp:524",
+   "title": "Accesso agli atti",
+   "source_url": "https://www.comune.testico.sv.it/servizio/accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.testico.sv.it/servizio/accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.testico.sv.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:11:51.352629Z"
+  },
+  "tributi_imu": {
+   "service_id": "009060:wp:530",
+   "title": "Pagamento IMU",
+   "source_url": "https://www.comune.testico.sv.it/servizio/pagamento-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.testico.sv.it/servizio/pagamento-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.testico.sv.it/servizio/pagamento-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:11:54.325236Z"
+  }
+ }
+}

@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "108014",
+ "services": {
+  "accesso_atti": {
+   "service_id": "108014:wp:1279",
+   "title": "Richiedere l’accesso agli atti",
+   "source_url": "https://comune.camparada.mb.it/servizio/richiedere-laccesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.camparada.mb.it/servizio/richiedere-laccesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.camparada.mb.it/servizio/richiedere-laccesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T15:04:23.105686Z"
+  },
+  "cambio_residenza": {
+   "service_id": "108014:wp:844",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.camparada.mb.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.camparada.mb.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.camparada.mb.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T15:04:25.724314Z"
+  },
+  "carta_identita": {
+   "service_id": "108014:wp:115",
+   "title": "CIE – Carta d’identità elettronica",
+   "source_url": "https://comune.camparada.mb.it/servizio/cie-carta-didentita-elettronica/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.camparada.mb.it/servizio/cie-carta-didentita-elettronica/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.camparada.mb.it/servizio/cie-carta-didentita-elettronica/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T15:04:28.502251Z"
+  }
+ }
+}

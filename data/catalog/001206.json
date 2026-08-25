@@ -1,0 +1,110 @@
+{
+ "municipality_istat": "001206",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001206:comweb:richiedere-l-accesso-agli-atti-317-18446-1-77a552c4ffe8dba07c71642a138c60ea",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.prascorsano.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-18446-1-77a552c4ffe8dba07c71642a138c60ea",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.prascorsano.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-18446-1-77a552c4ffe8dba07c71642a138c60ea",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.prascorsano.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-18446-1-77a552c4ffe8dba07c71642a138c60ea",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.prascorsano.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=prscrsn763&IDPr=11102",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.prascorsano.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-18446-1-77a552c4ffe8dba07c71642a138c60ea",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:46:29.822302Z"
+  },
+  "carta_identita": {
+   "service_id": "001206:comweb:carta-d-identita-elettronica-cie-788-18435-1-16bdb667bf142b6b6eb4e52e3124d831",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.prascorsano.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-18435-1-16bdb667bf142b6b6eb4e52e3124d831",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.prascorsano.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-18435-1-16bdb667bf142b6b6eb4e52e3124d831",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.prascorsano.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-18435-1-16bdb667bf142b6b6eb4e52e3124d831",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:46:31.956648Z"
+  },
+  "tributi_imu": {
+   "service_id": "001206:comweb:pagare-tributi-imu-600-18536-1-826b95fdb41f2bc2417a8e286eb84554",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.prascorsano.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-18536-1-826b95fdb41f2bc2417a8e286eb84554",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.prascorsano.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-18536-1-826b95fdb41f2bc2417a8e286eb84554",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.prascorsano.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-18536-1-826b95fdb41f2bc2417a8e286eb84554",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:46:34.056778Z"
+  },
+  "tributi_tari": {
+   "service_id": "001206:comweb:pagamento-tassa-rifiuti-tari-659-18527-1-a229861d2810203abf574e93f268b779",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.prascorsano.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-18527-1-a229861d2810203abf574e93f268b779",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.prascorsano.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-18527-1-a229861d2810203abf574e93f268b779",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.prascorsano.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-18527-1-a229861d2810203abf574e93f268b779",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:46:36.125484Z"
+  }
+ }
+}

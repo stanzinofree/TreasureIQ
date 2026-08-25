@@ -1,0 +1,64 @@
+{
+ "municipality_istat": "024128",
+ "services": {
+  "accesso_atti": {
+   "service_id": "024128:wp:473",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.sovizzo.vi.it/?post_type=servizio&p=473",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sovizzo.vi.it/?post_type=servizio&p=473",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sovizzo.vi.it/?post_type=servizio&p=473",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:20:38.166481Z"
+  },
+  "tributi_tari": {
+   "service_id": "024128:wp:3700",
+   "title": "Tassa sui Rifiuti (TARI)",
+   "source_url": "https://www.comune.sovizzo.vi.it/?post_type=servizio&p=3700",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sovizzo.vi.it/?post_type=servizio&p=3700",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sovizzo.vi.it/?post_type=servizio&p=3700",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.sovizzo.vi.it/wp-content/uploads/2026/08/relazione-piano-tariffario-sovizzo-2026_allegato-a.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sovizzo.vi.it/?post_type=servizio&p=3700",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:20:52.926538Z"
+  }
+ }
+}

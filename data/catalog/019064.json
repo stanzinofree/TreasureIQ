@@ -1,0 +1,191 @@
+{
+ "municipality_istat": "019064",
+ "services": {
+  "stato_civile": {
+   "service_id": "019064:wp:1317",
+   "title": "Certificati di anagrafe, stato civile, elettorale",
+   "source_url": "https://www.comune.ostiano.cr.it/servizio/certificati-di-anagrafe-stato-civile-elettorale/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ostiano.cr.it/servizio/certificati-di-anagrafe-stato-civile-elettorale/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ostiano.cr.it/servizio/certificati-di-anagrafe-stato-civile-elettorale/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:28:02.492522Z"
+  },
+  "tributi_imu": {
+   "service_id": "019064:wp:1251",
+   "title": "IMU 2026",
+   "source_url": "https://www.comune.ostiano.cr.it/servizio/imu-2026/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ostiano.cr.it/servizio/imu-2026/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ostiano.cr.it/servizio/imu-2026/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:28:05.915760Z"
+  },
+  "tributi_tari": {
+   "service_id": "019064:wp:1249",
+   "title": "TARI (TASSA RIFIUTI)",
+   "source_url": "https://www.comune.ostiano.cr.it/servizio/tari-2026/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ostiano.cr.it/servizio/tari-2026/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ostiano.cr.it/servizio/tari-2026/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.ostiano.cr.it/wp-content/uploads/2026/08/DELIBERA-CC-22-TARIFFE-TARI-2026.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ostiano.cr.it/servizio/tari-2026/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.ostiano.cr.it/wp-content/uploads/2026/08/DELIBERA-CC-21-PEF-2026.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ostiano.cr.it/servizio/tari-2026/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.ostiano.cr.it/wp-content/uploads/2026/07/REGOLAMENTO-TARI-2021-CC-23-DEL-29-GIUGNO-2021.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ostiano.cr.it/servizio/tari-2026/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.ostiano.cr.it/wp-content/uploads/2026/07/ISTITUTI-DEFLATTIVI-CONTENZIOSO-Modifica-dlb-cc17-del-30.04.2024.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ostiano.cr.it/servizio/tari-2026/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.ostiano.cr.it/wp-content/uploads/2026/07/CARTA-DELLA-QUALITA-GESTIONE-INTEGRATA-RIFIUTI.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ostiano.cr.it/servizio/tari-2026/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.ostiano.cr.it/wp-content/uploads/2026/07/REGOLAMENTO-DISCARICA-dlb-cc-21-del-21.07.2025.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ostiano.cr.it/servizio/tari-2026/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.ostiano.cr.it/wp-content/uploads/2026/07/DENUNCIA-TARI-DOMESTICHE.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ostiano.cr.it/servizio/tari-2026/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.ostiano.cr.it/wp-content/uploads/2026/07/denuncia-di-cessazione.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ostiano.cr.it/servizio/tari-2026/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.ostiano.cr.it/wp-content/uploads/2026/07/DENUNCIA-TARI-utenze-non-domestiche.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ostiano.cr.it/servizio/tari-2026/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:28:07.408620Z"
+  }
+ }
+}

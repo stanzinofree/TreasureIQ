@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "025053",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "025053:wp:643",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.sedico.bl.it/servizio/cambio-di-residenza-2/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.sedico.bl.it/servizio/cambio-di-residenza-2/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.sedico.bl.it/servizio/cambio-di-residenza-2/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:23:54.134517Z"
+  },
+  "stato_civile": {
+   "service_id": "025053:wp:607",
+   "title": "Certificati anagrafici e di stato civile",
+   "source_url": "https://comune.sedico.bl.it/servizio/certificati-anagrafici-e-di-stato-civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.sedico.bl.it/servizio/certificati-anagrafici-e-di-stato-civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.sedico.bl.it/servizio/certificati-anagrafici-e-di-stato-civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:23:56.178580Z"
+  },
+  "tributi_imu": {
+   "service_id": "025053:wp:1831",
+   "title": "Calcolo IMU",
+   "source_url": "https://comune.sedico.bl.it/servizio/calcolo-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.sedico.bl.it/servizio/calcolo-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.sedico.bl.it/servizio/calcolo-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:23:57.829809Z"
+  }
+ }
+}

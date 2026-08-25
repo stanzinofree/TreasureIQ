@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "024112",
+ "services": {
+  "accesso_atti": {
+   "service_id": "024112:wp:308",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.valdastico.vi.it/?post_type=servizio&p=308",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.valdastico.vi.it/?post_type=servizio&p=308",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.valdastico.vi.it/?post_type=servizio&p=308",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:19:27.821029Z"
+  },
+  "cambio_residenza": {
+   "service_id": "024112:wp:994",
+   "title": "Cambio di residenza tramite Portale Nazionale – ANPR",
+   "source_url": "https://www.comune.valdastico.vi.it/?post_type=servizio&p=994",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.valdastico.vi.it/?post_type=servizio&p=994",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.valdastico.vi.it/?post_type=servizio&p=994",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:19:32.591151Z"
+  },
+  "stato_civile": {
+   "service_id": "024112:wp:1013",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.valdastico.vi.it/?post_type=servizio&p=1013",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.valdastico.vi.it/?post_type=servizio&p=1013",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.valdastico.vi.it/?post_type=servizio&p=1013",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:19:37.393182Z"
+  },
+  "tributi_imu": {
+   "service_id": "024112:wp:995",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.valdastico.vi.it/?post_type=servizio&p=995",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.valdastico.vi.it/?post_type=servizio&p=995",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.valdastico.vi.it/?post_type=servizio&p=995",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:19:42.161123Z"
+  }
+ }
+}

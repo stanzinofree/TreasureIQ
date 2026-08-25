@@ -1,0 +1,64 @@
+{
+ "municipality_istat": "001057",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001057:comweb:richiedere-l-accesso-agli-atti-317-7490-1-30a8bee4a05fe94a462bf3e9b83d3eba",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.carema.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-7490-1-30a8bee4a05fe94a462bf3e9b83d3eba",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.carema.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-7490-1-30a8bee4a05fe94a462bf3e9b83d3eba",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.carema.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-7490-1-30a8bee4a05fe94a462bf3e9b83d3eba",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.carema.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=crm429&IDPr=11430",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.carema.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-7490-1-30a8bee4a05fe94a462bf3e9b83d3eba",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:40:57.074678Z"
+  },
+  "carta_identita": {
+   "service_id": "001057:comweb:carta-d-identita-elettronica-cie-788-7479-1-9b9c8cdfd46f003c9b9229be0d3cfba0",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.carema.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-7479-1-9b9c8cdfd46f003c9b9229be0d3cfba0",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.carema.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-7479-1-9b9c8cdfd46f003c9b9229be0d3cfba0",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.carema.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-7479-1-9b9c8cdfd46f003c9b9229be0d3cfba0",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:40:59.715500Z"
+  }
+ }
+}

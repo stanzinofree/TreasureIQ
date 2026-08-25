@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "070012",
+ "services": {
+  "accesso_atti": {
+   "service_id": "070012:wp:867",
+   "title": "Richiedere accesso agli atti",
+   "source_url": "https://comune.casalciprano.cb.it/servizio/richiedere-accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.casalciprano.cb.it/servizio/richiedere-accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.casalciprano.cb.it/servizio/richiedere-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:24:16.177188Z"
+  },
+  "carta_identita": {
+   "service_id": "070012:wp:863",
+   "title": "Carta d’Identità Elettronica (CIE)",
+   "source_url": "https://comune.casalciprano.cb.it/servizio/carta-didentita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.casalciprano.cb.it/servizio/carta-didentita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.casalciprano.cb.it/servizio/carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:24:20.970673Z"
+  },
+  "tributi_imu": {
+   "service_id": "070012:wp:878",
+   "title": "Dichiarazione IMU",
+   "source_url": "https://comune.casalciprano.cb.it/servizio/dichiarazione-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.casalciprano.cb.it/servizio/dichiarazione-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.casalciprano.cb.it/servizio/dichiarazione-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:24:23.001101Z"
+  }
+ }
+}

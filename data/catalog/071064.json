@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "071064",
+ "services": {
+  "accesso_atti": {
+   "service_id": "071064:wp:118",
+   "title": "Richiesta accesso agli atti",
+   "source_url": "https://comune.zapponeta.fg.it/servizio/richiesta-accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.zapponeta.fg.it/servizio/richiesta-accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.zapponeta.fg.it/servizio/richiesta-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:25:56.354712Z"
+  },
+  "cambio_residenza": {
+   "service_id": "071064:wp:122",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.zapponeta.fg.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.zapponeta.fg.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.zapponeta.fg.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:25:57.930704Z"
+  },
+  "tributi_imu": {
+   "service_id": "071064:wp:492",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://comune.zapponeta.fg.it/servizio/pagare-tributi-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.zapponeta.fg.it/servizio/pagare-tributi-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.zapponeta.fg.it/servizio/pagare-tributi-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:25:59.145441Z"
+  },
+  "tributi_tari": {
+   "service_id": "071064:wp:124",
+   "title": "Domanda di agevolazione tributaria – Tari",
+   "source_url": "https://comune.zapponeta.fg.it/servizio/domanda-di-agevolazione-tributaria-tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.zapponeta.fg.it/servizio/domanda-di-agevolazione-tributaria-tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.zapponeta.fg.it/servizio/domanda-di-agevolazione-tributaria-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:26:00.526390Z"
+  }
+ }
+}

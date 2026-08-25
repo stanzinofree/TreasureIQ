@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "046035",
+ "services": {
+  "carta_identita": {
+   "service_id": "046035:wp:534",
+   "title": "Rilascio CIE",
+   "source_url": "https://comune.villacollemandina.lu.it/servizio/rilascio-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.villacollemandina.lu.it/servizio/rilascio-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.villacollemandina.lu.it/servizio/rilascio-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:55:05.672019Z"
+  },
+  "tributi_imu": {
+   "service_id": "046035:wp:538",
+   "title": "Pagamento IMU",
+   "source_url": "https://comune.villacollemandina.lu.it/servizio/pagamento-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.villacollemandina.lu.it/servizio/pagamento-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.villacollemandina.lu.it/servizio/pagamento-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:55:08.281156Z"
+  },
+  "tributi_tari": {
+   "service_id": "046035:wp:535",
+   "title": "Pagamento TARI",
+   "source_url": "https://comune.villacollemandina.lu.it/servizio/pagamento-tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.villacollemandina.lu.it/servizio/pagamento-tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.villacollemandina.lu.it/servizio/pagamento-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:55:10.113422Z"
+  }
+ }
+}

@@ -1,0 +1,110 @@
+{
+ "municipality_istat": "096057",
+ "services": {
+  "accesso_atti": {
+   "service_id": "096057:comweb:richiedere-l-accesso-agli-atti-317-17786-1-b163ec2db2c6be8795e530417e1d2ff7",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.salabiellese.bi.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-17786-1-b163ec2db2c6be8795e530417e1d2ff7",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.salabiellese.bi.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-17786-1-b163ec2db2c6be8795e530417e1d2ff7",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.salabiellese.bi.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-17786-1-b163ec2db2c6be8795e530417e1d2ff7",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.salabiellese.bi.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=slblls203&IDPr=11081",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.salabiellese.bi.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-17786-1-b163ec2db2c6be8795e530417e1d2ff7",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:55:45.943293Z"
+  },
+  "carta_identita": {
+   "service_id": "096057:comweb:carta-d-identita-elettronica-cie-788-17775-1-c1c8a522d963b9c6fa51e914668f143d",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.salabiellese.bi.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-17775-1-c1c8a522d963b9c6fa51e914668f143d",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.salabiellese.bi.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-17775-1-c1c8a522d963b9c6fa51e914668f143d",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.salabiellese.bi.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-17775-1-c1c8a522d963b9c6fa51e914668f143d",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:55:47.918003Z"
+  },
+  "tributi_imu": {
+   "service_id": "096057:comweb:calcolo-imu-355-17876-1-ae18f3dcfa6c8fb02dfe65cf1e955fe9",
+   "title": "Calcolo IMU",
+   "source_url": "https://www.comune.salabiellese.bi.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-17876-1-ae18f3dcfa6c8fb02dfe65cf1e955fe9",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.salabiellese.bi.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-17876-1-ae18f3dcfa6c8fb02dfe65cf1e955fe9",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.salabiellese.bi.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-17876-1-ae18f3dcfa6c8fb02dfe65cf1e955fe9",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:55:49.841000Z"
+  },
+  "tributi_tari": {
+   "service_id": "096057:comweb:tassa-rifiuti-tari-954-17867-1-f50f2a63121808ad5835b4113f16ffc7",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.salabiellese.bi.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-17867-1-f50f2a63121808ad5835b4113f16ffc7",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.salabiellese.bi.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-17867-1-f50f2a63121808ad5835b4113f16ffc7",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.salabiellese.bi.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-17867-1-f50f2a63121808ad5835b4113f16ffc7",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:55:51.892199Z"
+  }
+ }
+}

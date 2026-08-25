@@ -1,0 +1,103 @@
+{
+ "municipality_istat": "027005",
+ "services": {
+  "carta_identita": {
+   "service_id": "027005:wp:1625",
+   "title": "Carta d'identità maggiorenni/minorenni",
+   "source_url": "https://www.comune.caorle.ve.it/?post_type=servizio&p=1625",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.caorle.ve.it/?post_type=servizio&p=1625",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.caorle.ve.it/?post_type=servizio&p=1625",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.caorle.ve.it/wp-content/uploads/2024/12/RICHIESTA-SERVIZIO-PRESSO-IL-DOMICILIO.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.caorle.ve.it/?post_type=servizio&p=1625",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.caorle.ve.it/wp-content/uploads/2024/12/ASSENSO-CIE-ESPATRIO-MINORE-.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.caorle.ve.it/?post_type=servizio&p=1625",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.caorle.ve.it/wp-content/uploads/2024/12/ASSENSO-CIE-ESPATRIO-MINORE-1-1.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.caorle.ve.it/?post_type=servizio&p=1625",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.caorle.ve.it/wp-content/uploads/2024/12/RICHIESTA-SERVIZIO-PRESSO-IL-DOMICILIO-1.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.caorle.ve.it/?post_type=servizio&p=1625",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:39:15.110686Z"
+  },
+  "tributi_imu": {
+   "service_id": "027005:wp:709",
+   "title": "IMU online",
+   "source_url": "https://www.comune.caorle.ve.it/?post_type=servizio&p=709",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.caorle.ve.it/?post_type=servizio&p=709",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.caorle.ve.it/?post_type=servizio&p=709",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:39:24.200203Z"
+  }
+ }
+}

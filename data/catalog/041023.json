@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "041023",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "041023:wp:1477",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.maceratafeltria.pu.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.maceratafeltria.pu.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.maceratafeltria.pu.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:53:53.365132Z"
+  },
+  "tributi_imu": {
+   "service_id": "041023:wp:1474",
+   "title": "IMU – Imposta Municipale Propria",
+   "source_url": "https://www.comune.maceratafeltria.pu.it/servizio/imu-imposta-municipale-propria/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.maceratafeltria.pu.it/servizio/imu-imposta-municipale-propria/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.maceratafeltria.pu.it/servizio/imu-imposta-municipale-propria/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:53:55.917501Z"
+  },
+  "tributi_tari": {
+   "service_id": "041023:wp:1476",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.maceratafeltria.pu.it/servizio/pagamento-tassa-rifiuti-tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.maceratafeltria.pu.it/servizio/pagamento-tassa-rifiuti-tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.maceratafeltria.pu.it/servizio/pagamento-tassa-rifiuti-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:53:57.471459Z"
+  }
+ }
+}

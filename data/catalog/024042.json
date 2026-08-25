@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "024042",
+ "services": {
+  "accesso_atti": {
+   "service_id": "024042:wp:283",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.gallio.vi.it/?post_type=servizio&p=283",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gallio.vi.it/?post_type=servizio&p=283",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gallio.vi.it/?post_type=servizio&p=283",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:00:38.019500Z"
+  },
+  "cambio_residenza": {
+   "service_id": "024042:wp:2872",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.gallio.vi.it/?post_type=servizio&p=2872",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gallio.vi.it/?post_type=servizio&p=2872",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gallio.vi.it/?post_type=servizio&p=2872",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:00:43.167600Z"
+  },
+  "stato_civile": {
+   "service_id": "024042:wp:2914",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.gallio.vi.it/?post_type=servizio&p=2914",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gallio.vi.it/?post_type=servizio&p=2914",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gallio.vi.it/?post_type=servizio&p=2914",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:00:58.374538Z"
+  },
+  "tributi_tari": {
+   "service_id": "024042:wp:926",
+   "title": "Richiedere rimborso TARI",
+   "source_url": "https://www.comune.gallio.vi.it/?post_type=servizio&p=926",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gallio.vi.it/?post_type=servizio&p=926",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gallio.vi.it/?post_type=servizio&p=926",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:01:04.659248Z"
+  }
+ }
+}

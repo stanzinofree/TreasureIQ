@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "029018",
+ "services": {
+  "accesso_atti": {
+   "service_id": "029018:wp:239",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.costadirovigo.ro.it/?post_type=servizio&p=239",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.costadirovigo.ro.it/?post_type=servizio&p=239",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.costadirovigo.ro.it/?post_type=servizio&p=239",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:30:58.685870Z"
+  },
+  "cambio_residenza": {
+   "service_id": "029018:wp:887",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.costadirovigo.ro.it/?post_type=servizio&p=887",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.costadirovigo.ro.it/?post_type=servizio&p=887",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.costadirovigo.ro.it/?post_type=servizio&p=887",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:31:03.748150Z"
+  },
+  "stato_civile": {
+   "service_id": "029018:wp:890",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.costadirovigo.ro.it/?post_type=servizio&p=890",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.costadirovigo.ro.it/?post_type=servizio&p=890",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.costadirovigo.ro.it/?post_type=servizio&p=890",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:31:09.941902Z"
+  },
+  "tributi_imu": {
+   "service_id": "029018:wp:893",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.costadirovigo.ro.it/?post_type=servizio&p=893",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.costadirovigo.ro.it/?post_type=servizio&p=893",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.costadirovigo.ro.it/?post_type=servizio&p=893",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:31:16.360352Z"
+  }
+ }
+}

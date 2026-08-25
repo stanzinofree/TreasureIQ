@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "102031",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "102031:wp:153",
+   "title": "Cambio di residenza tramite Portale Nazionale – ANPR",
+   "source_url": "https://www.comune.rombiolo.vv.it/?post_type=servizio&p=153",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rombiolo.vv.it/?post_type=servizio&p=153",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rombiolo.vv.it/?post_type=servizio&p=153",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T15:00:24.026702Z"
+  },
+  "tributi_imu": {
+   "service_id": "102031:wp:259",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.rombiolo.vv.it/?post_type=servizio&p=259",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rombiolo.vv.it/?post_type=servizio&p=259",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rombiolo.vv.it/?post_type=servizio&p=259",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T15:00:28.887624Z"
+  }
+ }
+}

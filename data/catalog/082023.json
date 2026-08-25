@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "082023",
+ "services": {
+  "accesso_atti": {
+   "service_id": "082023:wp:2368",
+   "title": "Richiesta accesso agli atti",
+   "source_url": "https://comune.casteldaccia.pa.it/servizio/richiesta-accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.casteldaccia.pa.it/servizio/richiesta-accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.casteldaccia.pa.it/servizio/richiesta-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:42:08.318989Z"
+  },
+  "cambio_residenza": {
+   "service_id": "082023:wp:3423",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.casteldaccia.pa.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.casteldaccia.pa.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.casteldaccia.pa.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:42:11.555168Z"
+  },
+  "carta_identita": {
+   "service_id": "082023:wp:3428",
+   "title": "Rilascio carta d’identità elettronica (CIE)",
+   "source_url": "https://comune.casteldaccia.pa.it/servizio/rilascio-carta-didentita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.casteldaccia.pa.it/servizio/rilascio-carta-didentita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.casteldaccia.pa.it/servizio/rilascio-carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:42:15.149755Z"
+  },
+  "tributi_imu": {
+   "service_id": "082023:wp:3459",
+   "title": "Pagare tributo IMU",
+   "source_url": "https://comune.casteldaccia.pa.it/servizio/pagare-tributo-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.casteldaccia.pa.it/servizio/pagare-tributo-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.casteldaccia.pa.it/servizio/pagare-tributo-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:42:18.473281Z"
+  }
+ }
+}

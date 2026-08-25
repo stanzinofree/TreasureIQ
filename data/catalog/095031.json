@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "095031",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "095031:wp:2131",
+   "title": "Cambio di residenza tramite Portale Nazionale – ANPR",
+   "source_url": "https://www.comune.narbolia.or.it/?post_type=servizio&p=2131",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.narbolia.or.it/?post_type=servizio&p=2131",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.narbolia.or.it/?post_type=servizio&p=2131",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:54:30.814835Z"
+  }
+ }
+}

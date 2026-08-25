@@ -1,0 +1,120 @@
+{
+ "municipality_istat": "111052",
+ "services": {
+  "accesso_atti": {
+   "service_id": "111052:wp:1473",
+   "title": "Richiedere l’accesso agli atti",
+   "source_url": "https://www.comune.pabillonis.vs.it/servizio/accesso-documentale/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pabillonis.vs.it/servizio/accesso-documentale/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pabillonis.vs.it/servizio/accesso-documentale/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T15:05:37.620074Z"
+  },
+  "carta_identita": {
+   "service_id": "111052:wp:1038",
+   "title": "Carta d’identità",
+   "source_url": "https://www.comune.pabillonis.vs.it/servizio/carta-didentita/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pabillonis.vs.it/servizio/carta-didentita/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pabillonis.vs.it/servizio/carta-didentita/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T15:05:39.425134Z"
+  },
+  "stato_civile": {
+   "service_id": "111052:wp:1040",
+   "title": "Certificati di anagrafe, stato civile, elettorale",
+   "source_url": "https://www.comune.pabillonis.vs.it/servizio/certificati-di-anagrafe-stato-civile-elettorale/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pabillonis.vs.it/servizio/certificati-di-anagrafe-stato-civile-elettorale/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pabillonis.vs.it/servizio/certificati-di-anagrafe-stato-civile-elettorale/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T15:05:40.901942Z"
+  },
+  "tributi_imu": {
+   "service_id": "111052:wp:942",
+   "title": "IMU",
+   "source_url": "https://www.comune.pabillonis.vs.it/servizio/calcolo-imu-online/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pabillonis.vs.it/servizio/calcolo-imu-online/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pabillonis.vs.it/servizio/calcolo-imu-online/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T15:05:42.599566Z"
+  },
+  "tributi_tari": {
+   "service_id": "111052:wp:1037",
+   "title": "TARI: Tassa sui rifiuti",
+   "source_url": "https://www.comune.pabillonis.vs.it/servizio/tari-tassa-sui-rifiuti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pabillonis.vs.it/servizio/tari-tassa-sui-rifiuti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pabillonis.vs.it/servizio/tari-tassa-sui-rifiuti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T15:05:44.133021Z"
+  }
+ }
+}

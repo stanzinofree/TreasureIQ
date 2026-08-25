@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "018037",
+ "services": {
+  "tributi_imu": {
+   "service_id": "018037:comweb:pagare-tributi-imu-600-37941-1-c9f9c599b2aa090bb0555f727c1e0752",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.casteggio.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-37941-1-c9f9c599b2aa090bb0555f727c1e0752",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.casteggio.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-37941-1-c9f9c599b2aa090bb0555f727c1e0752",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.casteggio.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-37941-1-c9f9c599b2aa090bb0555f727c1e0752",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:19:29.423164Z"
+  },
+  "tributi_tari": {
+   "service_id": "018037:comweb:pagamento-tassa-rifiuti-tari-659-37932-1-8e5a8afd63001df7039112f12abfc8eb",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.casteggio.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-37932-1-8e5a8afd63001df7039112f12abfc8eb",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.casteggio.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-37932-1-8e5a8afd63001df7039112f12abfc8eb",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.casteggio.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-37932-1-8e5a8afd63001df7039112f12abfc8eb",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:19:32.715916Z"
+  }
+ }
+}

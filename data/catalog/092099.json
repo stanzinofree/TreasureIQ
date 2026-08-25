@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "092099",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "092099:wp:1069",
+   "title": "Cambio di residenza tramite Portale Nazionale – ANPR",
+   "source_url": "https://www.comune.villasanpietro.ca.it/?post_type=servizio&p=1069",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.villasanpietro.ca.it/?post_type=servizio&p=1069",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.villasanpietro.ca.it/?post_type=servizio&p=1069",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:52:11.043006Z"
+  }
+ }
+}

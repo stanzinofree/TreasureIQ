@@ -1,0 +1,123 @@
+{
+ "municipality_istat": "037003",
+ "services": {
+  "accesso_atti": {
+   "service_id": "037003:comweb:richiedere-l-accesso-agli-atti-317-41548-1-42c7bf8af895f8c5538cc4868c1bf863",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.baricella.bo.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-41548-1-42c7bf8af895f8c5538cc4868c1bf863",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.baricella.bo.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-41548-1-42c7bf8af895f8c5538cc4868c1bf863",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.baricella.bo.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-41548-1-42c7bf8af895f8c5538cc4868c1bf863",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.baricella.bo.it/modulistica/C_A665/C_A665_ACCESSO_ATTI",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.baricella.bo.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-41548-1-42c7bf8af895f8c5538cc4868c1bf863",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T13:48:09.838539Z"
+  },
+  "cambio_residenza": {
+   "service_id": "037003:comweb:cambio-residenza-305-41546-1-c0a453b79fba7af23ea65984fc22a47e",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.baricella.bo.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-41546-1-c0a453b79fba7af23ea65984fc22a47e",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.baricella.bo.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-41546-1-c0a453b79fba7af23ea65984fc22a47e",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.baricella.bo.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-41546-1-c0a453b79fba7af23ea65984fc22a47e",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.baricella.bo.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-41546-1-c0a453b79fba7af23ea65984fc22a47e",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T13:48:12.910409Z"
+  },
+  "carta_identita": {
+   "service_id": "037003:comweb:carta-d-identita-elettronica-cie-788-41536-1-51943831393db263f4907fcc00662e2e",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.baricella.bo.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-41536-1-51943831393db263f4907fcc00662e2e",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.baricella.bo.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-41536-1-51943831393db263f4907fcc00662e2e",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.baricella.bo.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-41536-1-51943831393db263f4907fcc00662e2e",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T13:48:16.741218Z"
+  },
+  "tributi_tari": {
+   "service_id": "037003:comweb:pagamento-tassa-rifiuti-tari-659-41628-1-48c90c6e408816ca604fd76d3fa8412f",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.baricella.bo.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-41628-1-48c90c6e408816ca604fd76d3fa8412f",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.baricella.bo.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-41628-1-48c90c6e408816ca604fd76d3fa8412f",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.baricella.bo.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-41628-1-48c90c6e408816ca604fd76d3fa8412f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T13:48:20.430116Z"
+  }
+ }
+}

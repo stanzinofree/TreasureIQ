@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "003008",
+ "services": {
+  "carta_identita": {
+   "service_id": "003008:wp:1084",
+   "title": "Rilascio carta d’identità elettronica (CIE)",
+   "source_url": "https://comune.arona.no.it/servizio/rilascio-carta-didentita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.arona.no.it/servizio/rilascio-carta-didentita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.arona.no.it/servizio/rilascio-carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T10:55:55.913616Z"
+  },
+  "tributi_imu": {
+   "service_id": "003008:wp:1188",
+   "title": "Imposta Municipale propria IMU",
+   "source_url": "https://comune.arona.no.it/servizio/imposta-municipale-propria-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.arona.no.it/servizio/imposta-municipale-propria-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.arona.no.it/servizio/imposta-municipale-propria-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T10:56:00.098029Z"
+  },
+  "tributi_tari": {
+   "service_id": "003008:wp:11986",
+   "title": "Addebito in conto corrente per TARI",
+   "source_url": "https://comune.arona.no.it/servizio/addebito-in-conto-corrente-per-tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.arona.no.it/servizio/addebito-in-conto-corrente-per-tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.arona.no.it/servizio/addebito-in-conto-corrente-per-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T10:56:03.019816Z"
+  }
+ }
+}

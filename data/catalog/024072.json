@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "024072",
+ "services": {
+  "accesso_atti": {
+   "service_id": "024072:wp:267",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.nogarolevicentino.vi.it/?post_type=servizio&p=267",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.nogarolevicentino.vi.it/?post_type=servizio&p=267",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.nogarolevicentino.vi.it/?post_type=servizio&p=267",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:08:23.262140Z"
+  },
+  "cambio_residenza": {
+   "service_id": "024072:wp:677",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.nogarolevicentino.vi.it/?post_type=servizio&p=677",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.nogarolevicentino.vi.it/?post_type=servizio&p=677",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.nogarolevicentino.vi.it/?post_type=servizio&p=677",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:08:58.875250Z"
+  },
+  "tributi_imu": {
+   "service_id": "024072:wp:676",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.nogarolevicentino.vi.it/?post_type=servizio&p=676",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.nogarolevicentino.vi.it/?post_type=servizio&p=676",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.nogarolevicentino.vi.it/?post_type=servizio&p=676",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:09:53.905872Z"
+  }
+ }
+}

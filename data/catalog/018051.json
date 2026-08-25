@@ -1,0 +1,110 @@
+{
+ "municipality_istat": "018051",
+ "services": {
+  "carta_identita": {
+   "service_id": "018051:comweb:carta-d-identita-elettronica-cie-788-16455-1-cd9af09b35f9d53e2afca3af11b18eb0",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.codevilla.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-16455-1-cd9af09b35f9d53e2afca3af11b18eb0",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.codevilla.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-16455-1-cd9af09b35f9d53e2afca3af11b18eb0",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.codevilla.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-16455-1-cd9af09b35f9d53e2afca3af11b18eb0",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:20:05.159166Z"
+  },
+  "stato_civile": {
+   "service_id": "018051:comweb:certificato-di-stato-civile-6-16455-1-a60943dcfcc2013cc0e7a660bd9af678",
+   "title": "Certificato di stato civile",
+   "source_url": "https://www.comune.codevilla.pv.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-stato-civile-6-16455-1-a60943dcfcc2013cc0e7a660bd9af678",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.codevilla.pv.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-stato-civile-6-16455-1-a60943dcfcc2013cc0e7a660bd9af678",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.codevilla.pv.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-stato-civile-6-16455-1-a60943dcfcc2013cc0e7a660bd9af678",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/certificati/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.codevilla.pv.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-stato-civile-6-16455-1-a60943dcfcc2013cc0e7a660bd9af678",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:20:07.573868Z"
+  },
+  "tributi_imu": {
+   "service_id": "018051:comweb:imposta-municipale-propria-imu-953-16556-1-7b7c08bf69c0e7d9c8f9e72ab465ee93",
+   "title": "Imposta Municipale Propria (IMU)",
+   "source_url": "https://www.comune.codevilla.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-16556-1-7b7c08bf69c0e7d9c8f9e72ab465ee93",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.codevilla.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-16556-1-7b7c08bf69c0e7d9c8f9e72ab465ee93",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.codevilla.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-16556-1-7b7c08bf69c0e7d9c8f9e72ab465ee93",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:20:11.354441Z"
+  },
+  "tributi_tari": {
+   "service_id": "018051:comweb:tassa-rifiuti-tari-954-16547-1-fcb96c0120494ac7c309c92a3f2d5c12",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.codevilla.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-16547-1-fcb96c0120494ac7c309c92a3f2d5c12",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.codevilla.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-16547-1-fcb96c0120494ac7c309c92a3f2d5c12",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.codevilla.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-16547-1-fcb96c0120494ac7c309c92a3f2d5c12",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:20:14.195409Z"
+  }
+ }
+}

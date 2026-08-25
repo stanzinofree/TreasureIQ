@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "018193",
+ "services": {
+  "accesso_atti": {
+   "service_id": "018193:comweb:richiedere-l-accesso-agli-atti-317-17390-1-21b743ddef78af11bc8c747241e50a72",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.colliverdi.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-17390-1-21b743ddef78af11bc8c747241e50a72",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.colliverdi.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-17390-1-21b743ddef78af11bc8c747241e50a72",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.colliverdi.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-17390-1-21b743ddef78af11bc8c747241e50a72",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:27:19.713044Z"
+  },
+  "tributi_imu": {
+   "service_id": "018193:comweb:imposta-municipale-propria-imu-953-17480-1-7a71b07c090a675d1c40f97b60b3f436",
+   "title": "Imposta Municipale Propria (IMU)",
+   "source_url": "https://www.comune.colliverdi.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-17480-1-7a71b07c090a675d1c40f97b60b3f436",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.colliverdi.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-17480-1-7a71b07c090a675d1c40f97b60b3f436",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.colliverdi.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-17480-1-7a71b07c090a675d1c40f97b60b3f436",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:27:23.412420Z"
+  },
+  "tributi_tari": {
+   "service_id": "018193:comweb:tassa-rifiuti-tari-954-17471-1-05778766ffbc863ef8a29854e9a19bff",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.colliverdi.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-17471-1-05778766ffbc863ef8a29854e9a19bff",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.colliverdi.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-17471-1-05778766ffbc863ef8a29854e9a19bff",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.colliverdi.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-17471-1-05778766ffbc863ef8a29854e9a19bff",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:27:26.591011Z"
+  }
+ }
+}

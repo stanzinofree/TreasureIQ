@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "024007",
+ "services": {
+  "accesso_atti": {
+   "service_id": "024007:wp:379",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.arsiero.vi.it/?post_type=servizio&p=379",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.arsiero.vi.it/?post_type=servizio&p=379",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.arsiero.vi.it/?post_type=servizio&p=379",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:51:56.121962Z"
+  },
+  "carta_identita": {
+   "service_id": "024007:wp:1175",
+   "title": "Rilascio Carta di Identità Elettronica",
+   "source_url": "https://www.comune.arsiero.vi.it/?post_type=servizio&p=1175",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.arsiero.vi.it/?post_type=servizio&p=1175",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.arsiero.vi.it/?post_type=servizio&p=1175",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:52:02.534593Z"
+  },
+  "stato_civile": {
+   "service_id": "024007:wp:1451",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.arsiero.vi.it/?post_type=servizio&p=1451",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.arsiero.vi.it/?post_type=servizio&p=1451",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.arsiero.vi.it/?post_type=servizio&p=1451",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:52:08.264976Z"
+  },
+  "tributi_imu": {
+   "service_id": "024007:wp:1440",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.arsiero.vi.it/?post_type=servizio&p=1440",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.arsiero.vi.it/?post_type=servizio&p=1440",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.arsiero.vi.it/?post_type=servizio&p=1440",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:52:15.755442Z"
+  }
+ }
+}

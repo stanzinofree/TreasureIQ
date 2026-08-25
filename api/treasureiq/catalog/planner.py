@@ -131,6 +131,7 @@ def service_request(
     source_id: str,
     service_key: ServiceKey,
     freshness: FreshnessPolicy | None = None,
+    namespace: str = "chat",
 ) -> DataRequest:
     """Build the deterministic request for a recognised civic service (Ramo 3).
 
@@ -148,7 +149,7 @@ def service_request(
     """
 
     return DataRequest(
-        request_id=f"chat:{source_id}:{Surface.ORDINARY_DATA.value}:{service_key.value}",
+        request_id=f"{namespace}:{source_id}:{Surface.ORDINARY_DATA.value}:{service_key.value}",
         source_id=source_id,
         surface=Surface.ORDINARY_DATA,
         capability=CAPABILITY_SERVICES,

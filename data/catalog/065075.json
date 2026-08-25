@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "065075",
+ "services": {
+  "accesso_atti": {
+   "service_id": "065075:wp:265",
+   "title": "Accesso agli atti",
+   "source_url": "https://comune.montesangiacomo.sa.it/servizio/accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.montesangiacomo.sa.it/servizio/accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.montesangiacomo.sa.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:18:32.276873Z"
+  },
+  "cambio_residenza": {
+   "service_id": "065075:wp:267",
+   "title": "Richiesta dichiarazione di cambio di residenza",
+   "source_url": "https://comune.montesangiacomo.sa.it/servizio/richiesta-dichiarazione-di-cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.montesangiacomo.sa.it/servizio/richiesta-dichiarazione-di-cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.montesangiacomo.sa.it/servizio/richiesta-dichiarazione-di-cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:18:34.474426Z"
+  },
+  "tributi_imu": {
+   "service_id": "065075:wp:275",
+   "title": "Calcolo IMU (Imposta Municipale Propria)",
+   "source_url": "https://comune.montesangiacomo.sa.it/servizio/calcolo-imu-imposta-municipale-propria/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.montesangiacomo.sa.it/servizio/calcolo-imu-imposta-municipale-propria/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.montesangiacomo.sa.it/servizio/calcolo-imu-imposta-municipale-propria/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:18:37.013642Z"
+  }
+ }
+}

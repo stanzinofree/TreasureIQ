@@ -1,0 +1,110 @@
+{
+ "municipality_istat": "006177",
+ "services": {
+  "accesso_atti": {
+   "service_id": "006177:comweb:richiedere-l-accesso-agli-atti-317-40492-1-ee32aba2333bc02cca0ff9f4274464e1",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.valenza.al.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-40492-1-ee32aba2333bc02cca0ff9f4274464e1",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.valenza.al.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-40492-1-ee32aba2333bc02cca0ff9f4274464e1",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.valenza.al.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-40492-1-ee32aba2333bc02cca0ff9f4274464e1",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://portale.comune.valenza.al.it/portal/servizi/moduli/25/modulo?url_bd=https://www.comune.valenza.al.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-40492-1-ee32aba2333bc02cca0ff9f4274464e1&titolo_bd=Anagrafe%20e%20Stato%20Civile%20/%20Richiedere%20Accesso%20agli%20Atti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.valenza.al.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-40492-1-ee32aba2333bc02cca0ff9f4274464e1",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:02:35.426190Z"
+  },
+  "cambio_residenza": {
+   "service_id": "006177:comweb:cambio-residenza-305-40490-1-268a7728549f9fb0a323ede53cdc8d08",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.valenza.al.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-40490-1-268a7728549f9fb0a323ede53cdc8d08",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.valenza.al.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-40490-1-268a7728549f9fb0a323ede53cdc8d08",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.valenza.al.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-40490-1-268a7728549f9fb0a323ede53cdc8d08",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:02:37.513593Z"
+  },
+  "carta_identita": {
+   "service_id": "006177:comweb:carta-d-identita-elettronica-cie-788-40480-1-729d135a44cb04869126409f2451e31d",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.valenza.al.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-40480-1-729d135a44cb04869126409f2451e31d",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.valenza.al.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-40480-1-729d135a44cb04869126409f2451e31d",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.valenza.al.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-40480-1-729d135a44cb04869126409f2451e31d",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:02:40.134587Z"
+  },
+  "tributi_imu": {
+   "service_id": "006177:comweb:pagare-tributi-imu-600-40581-1-18df208c62d58b9315ca38a0db3b9bd6",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.valenza.al.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-40581-1-18df208c62d58b9315ca38a0db3b9bd6",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.valenza.al.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-40581-1-18df208c62d58b9315ca38a0db3b9bd6",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.valenza.al.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-40581-1-18df208c62d58b9315ca38a0db3b9bd6",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:02:42.288970Z"
+  }
+ }
+}

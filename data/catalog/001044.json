@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "001044",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001044:comweb:richiedere-l-accesso-agli-atti-317-42736-1-769229a527213b69d068e835d9a08c27",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.bussoleno.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-42736-1-769229a527213b69d068e835d9a08c27",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bussoleno.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-42736-1-769229a527213b69d068e835d9a08c27",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bussoleno.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-42736-1-769229a527213b69d068e835d9a08c27",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.bussoleno.to.it/lang/it/servizi/richiedere-laccesso-agli-atti/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.bussoleno.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-42736-1-769229a527213b69d068e835d9a08c27",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:40:10.479963Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001044:comweb:cambio-residenza-305-42734-1-8651aa03d28df94f7172e71c72436a2c",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.bussoleno.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-42734-1-8651aa03d28df94f7172e71c72436a2c",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bussoleno.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-42734-1-8651aa03d28df94f7172e71c72436a2c",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bussoleno.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-42734-1-8651aa03d28df94f7172e71c72436a2c",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.bussoleno.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-42734-1-8651aa03d28df94f7172e71c72436a2c",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:40:12.385891Z"
+  },
+  "tributi_tari": {
+   "service_id": "001044:comweb:pagamento-tassa-rifiuti-tari-659-42816-1-343b77032610a3d750d772f6a2714de6",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.bussoleno.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-42816-1-343b77032610a3d750d772f6a2714de6",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bussoleno.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-42816-1-343b77032610a3d750d772f6a2714de6",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bussoleno.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-42816-1-343b77032610a3d750d772f6a2714de6",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:40:14.383255Z"
+  }
+ }
+}

@@ -1,0 +1,87 @@
+{
+ "municipality_istat": "096064",
+ "services": {
+  "stato_civile": {
+   "service_id": "096064:comweb:certificato-di-nascita-26-35997-1-d34ac780471b77adfedb9df057f7c818",
+   "title": "Certificato di nascita",
+   "source_url": "https://www.comune.sostegno.bi.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-nascita-26-35997-1-d34ac780471b77adfedb9df057f7c818",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sostegno.bi.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-nascita-26-35997-1-d34ac780471b77adfedb9df057f7c818",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sostegno.bi.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-nascita-26-35997-1-d34ac780471b77adfedb9df057f7c818",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/certificati/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.sostegno.bi.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-nascita-26-35997-1-d34ac780471b77adfedb9df057f7c818",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:55:54.000568Z"
+  },
+  "tributi_imu": {
+   "service_id": "096064:comweb:imposta-municipale-propria-imu-953-36093-1-72957782834096f1b1f6550aee6cba97",
+   "title": "Imposta Municipale Propria (IMU)",
+   "source_url": "https://www.comune.sostegno.bi.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-36093-1-72957782834096f1b1f6550aee6cba97",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sostegno.bi.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-36093-1-72957782834096f1b1f6550aee6cba97",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sostegno.bi.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-36093-1-72957782834096f1b1f6550aee6cba97",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:55:55.888474Z"
+  },
+  "tributi_tari": {
+   "service_id": "096064:comweb:tassa-rifiuti-tari-954-36084-1-232ee573fb5b77fe0f2cfd33c649d8a6",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.sostegno.bi.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-36084-1-232ee573fb5b77fe0f2cfd33c649d8a6",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sostegno.bi.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-36084-1-232ee573fb5b77fe0f2cfd33c649d8a6",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sostegno.bi.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-36084-1-232ee573fb5b77fe0f2cfd33c649d8a6",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:55:58.080612Z"
+  }
+ }
+}

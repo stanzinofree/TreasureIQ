@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "028055",
+ "services": {
+  "stato_civile": {
+   "service_id": "028055:wp:1007",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.monselice.padova.it/?post_type=servizio&p=1007",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.monselice.padova.it/?post_type=servizio&p=1007",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.monselice.padova.it/?post_type=servizio&p=1007",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:10:20.247526Z"
+  },
+  "tributi_imu": {
+   "service_id": "028055:wp:1018",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.monselice.padova.it/?post_type=servizio&p=1018",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.monselice.padova.it/?post_type=servizio&p=1018",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.monselice.padova.it/?post_type=servizio&p=1018",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:10:32.133959Z"
+  }
+ }
+}

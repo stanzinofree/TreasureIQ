@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "003133",
+ "services": {
+  "carta_identita": {
+   "service_id": "003133:comweb:carta-d-identita-1-52116-1-a07854e7668ed7efffd02afba92d40fd",
+   "title": "Carta d'Identità",
+   "source_url": "https://www.comune.sanmauriziodopaglio.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-52116-1-a07854e7668ed7efffd02afba92d40fd",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanmauriziodopaglio.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-52116-1-a07854e7668ed7efffd02afba92d40fd",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanmauriziodopaglio.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-52116-1-a07854e7668ed7efffd02afba92d40fd",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:59:15.889158Z"
+  },
+  "tributi_tari": {
+   "service_id": "003133:comweb:pagamento-tassa-rifiuti-tari-659-52208-1-609367538363c05a1a015b8e9fbd98e3",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.sanmauriziodopaglio.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-52208-1-609367538363c05a1a015b8e9fbd98e3",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanmauriziodopaglio.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-52208-1-609367538363c05a1a015b8e9fbd98e3",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanmauriziodopaglio.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-52208-1-609367538363c05a1a015b8e9fbd98e3",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:59:18.087151Z"
+  }
+ }
+}

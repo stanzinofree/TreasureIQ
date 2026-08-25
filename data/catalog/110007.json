@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "110007",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "110007:wp:677",
+   "title": "Cambio di residenza e di abitazione",
+   "source_url": "https://comune.sanferdinandodipuglia.bt.it/servizio/cambio-di-residenza-e-di-abitazione/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.sanferdinandodipuglia.bt.it/servizio/cambio-di-residenza-e-di-abitazione/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.sanferdinandodipuglia.bt.it/servizio/cambio-di-residenza-e-di-abitazione/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T15:04:44.231185Z"
+  },
+  "tributi_tari": {
+   "service_id": "110007:wp:680",
+   "title": "TARI (Tassa rifiuti)",
+   "source_url": "https://comune.sanferdinandodipuglia.bt.it/servizio/tari-tassa-rifiuti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.sanferdinandodipuglia.bt.it/servizio/tari-tassa-rifiuti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.sanferdinandodipuglia.bt.it/servizio/tari-tassa-rifiuti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T15:04:45.861444Z"
+  }
+ }
+}

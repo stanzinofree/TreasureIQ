@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "030051",
+ "services": {
+  "accesso_atti": {
+   "service_id": "030051:wp:256",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.lusevera.ud.it/?post_type=servizio&p=256",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.lusevera.ud.it/?post_type=servizio&p=256",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.lusevera.ud.it/?post_type=servizio&p=256",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:40:22.650004Z"
+  },
+  "cambio_residenza": {
+   "service_id": "030051:wp:790",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.lusevera.ud.it/?post_type=servizio&p=790",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.lusevera.ud.it/?post_type=servizio&p=790",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.lusevera.ud.it/?post_type=servizio&p=790",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:40:27.521176Z"
+  },
+  "stato_civile": {
+   "service_id": "030051:wp:867",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.lusevera.ud.it/?post_type=servizio&p=867",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.lusevera.ud.it/?post_type=servizio&p=867",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.lusevera.ud.it/?post_type=servizio&p=867",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:40:32.854664Z"
+  }
+ }
+}

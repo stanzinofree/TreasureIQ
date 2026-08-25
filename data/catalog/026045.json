@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "026045",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "026045:wp:735",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.monfumo.tv.it/?post_type=servizio&p=735",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.monfumo.tv.it/?post_type=servizio&p=735",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.monfumo.tv.it/?post_type=servizio&p=735",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:32:12.604081Z"
+  },
+  "stato_civile": {
+   "service_id": "026045:wp:772",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.monfumo.tv.it/?post_type=servizio&p=772",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.monfumo.tv.it/?post_type=servizio&p=772",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.monfumo.tv.it/?post_type=servizio&p=772",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:32:19.634904Z"
+  }
+ }
+}

@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "078126",
+ "services": {
+  "accesso_atti": {
+   "service_id": "078126:wp:207",
+   "title": "Richiedere l’accesso agli atti",
+   "source_url": "https://comune.sanpietroinamantea.cs.it/servizio/richiedere-laccesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.sanpietroinamantea.cs.it/servizio/richiedere-laccesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.sanpietroinamantea.cs.it/servizio/richiedere-laccesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:36:22.042459Z"
+  },
+  "tributi_imu": {
+   "service_id": "078126:wp:249",
+   "title": "Calcolo IMU (Imposta Municipale Propria)",
+   "source_url": "https://comune.sanpietroinamantea.cs.it/servizio/calcolo-imu-imposta-municipale-propria/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.sanpietroinamantea.cs.it/servizio/calcolo-imu-imposta-municipale-propria/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.sanpietroinamantea.cs.it/servizio/calcolo-imu-imposta-municipale-propria/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:36:25.055692Z"
+  }
+ }
+}

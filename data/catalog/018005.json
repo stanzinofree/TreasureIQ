@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "018005",
+ "services": {
+  "accesso_atti": {
+   "service_id": "018005:comweb:richiedere-l-accesso-agli-atti-317-25707-1-c01af726a66cb0b6d60bbb2ed71efeda",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.arenapo.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-25707-1-c01af726a66cb0b6d60bbb2ed71efeda",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.arenapo.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-25707-1-c01af726a66cb0b6d60bbb2ed71efeda",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.arenapo.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-25707-1-c01af726a66cb0b6d60bbb2ed71efeda",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.arenapo.pv.it/lang/it/servizi/richiedere-laccesso-agli-atti/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.arenapo.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-25707-1-c01af726a66cb0b6d60bbb2ed71efeda",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:17:31.283345Z"
+  },
+  "cambio_residenza": {
+   "service_id": "018005:comweb:cambio-residenza-305-25705-1-b7f4c9e02b5260de184a36b374b58367",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.arenapo.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-25705-1-b7f4c9e02b5260de184a36b374b58367",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.arenapo.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-25705-1-b7f4c9e02b5260de184a36b374b58367",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.arenapo.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-25705-1-b7f4c9e02b5260de184a36b374b58367",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.arenapo.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-25705-1-b7f4c9e02b5260de184a36b374b58367",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:17:35.135478Z"
+  },
+  "stato_civile": {
+   "service_id": "018005:comweb:richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-25695-1-5ea98651eb21a473f94ee563e5f01c13",
+   "title": "Richiesta di certificati/attestazioni/estratti di stato civile",
+   "source_url": "https://www.comune.arenapo.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-25695-1-5ea98651eb21a473f94ee563e5f01c13",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.arenapo.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-25695-1-5ea98651eb21a473f94ee563e5f01c13",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.arenapo.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-25695-1-5ea98651eb21a473f94ee563e5f01c13",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:17:39.718655Z"
+  }
+ }
+}

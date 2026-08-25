@@ -1,0 +1,87 @@
+{
+ "municipality_istat": "001199",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001199:comweb:richiedere-l-accesso-agli-atti-317-35080-1-1ed9bd51a648305c1a7d477279367f0a",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.pontcanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-35080-1-1ed9bd51a648305c1a7d477279367f0a",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pontcanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-35080-1-1ed9bd51a648305c1a7d477279367f0a",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pontcanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-35080-1-1ed9bd51a648305c1a7d477279367f0a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:46:12.766220Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001199:comweb:cambio-residenza-305-35078-1-1fe6bfa880759358272027844e5cfd6e",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.pontcanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-35078-1-1fe6bfa880759358272027844e5cfd6e",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pontcanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-35078-1-1fe6bfa880759358272027844e5cfd6e",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pontcanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-35078-1-1fe6bfa880759358272027844e5cfd6e",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.pontcanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-35078-1-1fe6bfa880759358272027844e5cfd6e",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:46:15.349438Z"
+  },
+  "tributi_tari": {
+   "service_id": "001199:comweb:pagamento-tassa-rifiuti-tari-659-35160-1-ef08a45b65291b5589cb7fb45f84f192",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.pontcanavese.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-35160-1-ef08a45b65291b5589cb7fb45f84f192",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pontcanavese.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-35160-1-ef08a45b65291b5589cb7fb45f84f192",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pontcanavese.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-35160-1-ef08a45b65291b5589cb7fb45f84f192",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:46:18.120527Z"
+  }
+ }
+}

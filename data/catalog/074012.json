@@ -1,0 +1,159 @@
+{
+ "municipality_istat": "074012",
+ "services": {
+  "accesso_atti": {
+   "service_id": "074012:wp:1766",
+   "title": "Richiedere l’accesso agli atti",
+   "source_url": "https://www.comune.ostuni.br.it/servizio/richiesta-di-accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ostuni.br.it/servizio/richiesta-di-accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ostuni.br.it/servizio/richiesta-di-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:27:04.060388Z"
+  },
+  "cambio_residenza": {
+   "service_id": "074012:wp:1619",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.ostuni.br.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ostuni.br.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ostuni.br.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.ostuni.br.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:27:06.427071Z"
+  },
+  "carta_identita": {
+   "service_id": "074012:wp:1598",
+   "title": "Carta d’Identità Elettronica CIE",
+   "source_url": "https://www.comune.ostuni.br.it/servizio/carta-didentita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ostuni.br.it/servizio/carta-didentita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ostuni.br.it/servizio/carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.ostuni.br.it/wp-content/uploads/2026/04/Richiesta_codici_CIE_delega.docx",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ostuni.br.it/servizio/carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.ostuni.br.it/wp-content/uploads/2026/04/Richiesta_codici_CIE2_aggiornamento.docx",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ostuni.br.it/servizio/carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:27:07.871016Z"
+  },
+  "tributi_imu": {
+   "service_id": "074012:wp:1703",
+   "title": "IMU – Imposta municipale propria",
+   "source_url": "https://www.comune.ostuni.br.it/servizio/consultare-la-tua-situazione-contributiva-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ostuni.br.it/servizio/consultare-la-tua-situazione-contributiva-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ostuni.br.it/servizio/consultare-la-tua-situazione-contributiva-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:27:09.409288Z"
+  },
+  "tributi_tari": {
+   "service_id": "074012:wp:1712",
+   "title": "TARI – Tassa sui Rifiuti",
+   "source_url": "https://www.comune.ostuni.br.it/servizio/tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ostuni.br.it/servizio/tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ostuni.br.it/servizio/tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:27:10.814793Z"
+  }
+ }
+}

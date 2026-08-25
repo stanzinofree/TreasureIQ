@@ -1,0 +1,133 @@
+{
+ "municipality_istat": "037047",
+ "services": {
+  "accesso_atti": {
+   "service_id": "037047:comweb:richiedere-l-accesso-agli-atti-317-50931-1-bd9d83cc5112ab7ae69c58e080ab1209",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.pianoro.bo.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-50931-1-bd9d83cc5112ab7ae69c58e080ab1209",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pianoro.bo.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-50931-1-bd9d83cc5112ab7ae69c58e080ab1209",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pianoro.bo.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-50931-1-bd9d83cc5112ab7ae69c58e080ab1209",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.pianoro.bo.it/it-it/servizi-online-le?returnurl=https%3A%2F%2Fservizi.comune.pianoro.bo.it%2Fmodulistica%2FC_G570%2FC_G570_ACCESSO_ATTI",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.pianoro.bo.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-50931-1-bd9d83cc5112ab7ae69c58e080ab1209",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T13:49:31.341006Z"
+  },
+  "carta_identita": {
+   "service_id": "037047:comweb:carta-d-identita-elettronica-cie-788-50919-1-87fceeb6548264f7fc9b2ebcc0237643",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.pianoro.bo.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-50919-1-87fceeb6548264f7fc9b2ebcc0237643",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pianoro.bo.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-50919-1-87fceeb6548264f7fc9b2ebcc0237643",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pianoro.bo.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-50919-1-87fceeb6548264f7fc9b2ebcc0237643",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T13:49:33.320495Z"
+  },
+  "stato_civile": {
+   "service_id": "037047:comweb:richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-50919-1-a3e1fb626feecc09642a19b37faad82e",
+   "title": "Richiesta di certificati/attestazioni/estratti di stato civile",
+   "source_url": "https://www.comune.pianoro.bo.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-50919-1-a3e1fb626feecc09642a19b37faad82e",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pianoro.bo.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-50919-1-a3e1fb626feecc09642a19b37faad82e",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pianoro.bo.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-50919-1-a3e1fb626feecc09642a19b37faad82e",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T13:49:35.466748Z"
+  },
+  "tributi_imu": {
+   "service_id": "037047:comweb:calcolo-imu-355-51020-1-4125bc772e3247260c816f749e83f340",
+   "title": "Calcolo IMU",
+   "source_url": "https://www.comune.pianoro.bo.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-51020-1-4125bc772e3247260c816f749e83f340",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pianoro.bo.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-51020-1-4125bc772e3247260c816f749e83f340",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pianoro.bo.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-51020-1-4125bc772e3247260c816f749e83f340",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T13:49:37.984921Z"
+  },
+  "tributi_tari": {
+   "service_id": "037047:comweb:tassa-rifiuti-tari-954-51011-1-e5c92dc095271ff18df6b785f731327b",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.pianoro.bo.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-51011-1-e5c92dc095271ff18df6b785f731327b",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pianoro.bo.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-51011-1-e5c92dc095271ff18df6b785f731327b",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pianoro.bo.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-51011-1-e5c92dc095271ff18df6b785f731327b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T13:49:40.274350Z"
+  }
+ }
+}

@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "018044",
+ "services": {
+  "accesso_atti": {
+   "service_id": "018044:comweb:richiedere-l-accesso-agli-atti-317-50532-1-db6b8fa74f59f521799bbd39b8512427",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.cerettolomellina.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-50532-1-db6b8fa74f59f521799bbd39b8512427",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cerettolomellina.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-50532-1-db6b8fa74f59f521799bbd39b8512427",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cerettolomellina.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-50532-1-db6b8fa74f59f521799bbd39b8512427",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.cerettolomellina.pv.it/lang/it/servizi/richiedere-laccesso-agli-atti/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.cerettolomellina.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-50532-1-db6b8fa74f59f521799bbd39b8512427",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:19:59.305846Z"
+  },
+  "cambio_residenza": {
+   "service_id": "018044:comweb:cambio-residenza-305-50530-1-f7958e7b7e15018fbbed008c9a341a9a",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.cerettolomellina.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-50530-1-f7958e7b7e15018fbbed008c9a341a9a",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cerettolomellina.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-50530-1-f7958e7b7e15018fbbed008c9a341a9a",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cerettolomellina.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-50530-1-f7958e7b7e15018fbbed008c9a341a9a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.cerettolomellina.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-50530-1-f7958e7b7e15018fbbed008c9a341a9a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:20:01.227609Z"
+  },
+  "tributi_imu": {
+   "service_id": "018044:comweb:calcolo-imu-355-50621-1-74f1f7a3d92409a747a416632b08c047",
+   "title": "Calcolo IMU",
+   "source_url": "https://www.comune.cerettolomellina.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-50621-1-74f1f7a3d92409a747a416632b08c047",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cerettolomellina.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-50621-1-74f1f7a3d92409a747a416632b08c047",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cerettolomellina.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-50621-1-74f1f7a3d92409a747a416632b08c047",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:20:03.283296Z"
+  }
+ }
+}

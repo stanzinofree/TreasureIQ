@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "001270",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001270:comweb:richiedere-l-accesso-agli-atti-317-24123-1-7ce0168a47819c6869589b2a68c65cd7",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.susa.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-24123-1-7ce0168a47819c6869589b2a68c65cd7",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.susa.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-24123-1-7ce0168a47819c6869589b2a68c65cd7",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.susa.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-24123-1-7ce0168a47819c6869589b2a68c65cd7",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizidigitali.comune.susa.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=ss090&IDPr=13443",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.susa.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-24123-1-7ce0168a47819c6869589b2a68c65cd7",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:50:58.910879Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001270:comweb:cambio-residenza-305-24121-1-406dac526fe4efd84c55b9e2767306d0",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.susa.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-24121-1-406dac526fe4efd84c55b9e2767306d0",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.susa.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-24121-1-406dac526fe4efd84c55b9e2767306d0",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.susa.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-24121-1-406dac526fe4efd84c55b9e2767306d0",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.susa.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-24121-1-406dac526fe4efd84c55b9e2767306d0",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:51:01.495787Z"
+  },
+  "tributi_tari": {
+   "service_id": "001270:comweb:pagamento-tassa-rifiuti-tari-659-24203-1-d1f83b7c9ce010a692f6148af037dc2b",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.susa.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-24203-1-d1f83b7c9ce010a692f6148af037dc2b",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.susa.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-24203-1-d1f83b7c9ce010a692f6148af037dc2b",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.susa.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-24203-1-d1f83b7c9ce010a692f6148af037dc2b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:51:03.366245Z"
+  }
+ }
+}

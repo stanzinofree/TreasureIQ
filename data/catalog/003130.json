@@ -1,0 +1,152 @@
+{
+ "municipality_istat": "003130",
+ "services": {
+  "accesso_atti": {
+   "service_id": "003130:comweb:richiedere-l-accesso-agli-atti-317-42472-1-cfc6a6a662342fbdb4c85408570bec43",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.romagnano-sesia.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-42472-1-cfc6a6a662342fbdb4c85408570bec43",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.romagnano-sesia.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-42472-1-cfc6a6a662342fbdb4c85408570bec43",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.romagnano-sesia.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-42472-1-cfc6a6a662342fbdb4c85408570bec43",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.romagnano-sesia.no.it/lang/it/servizi/richiedere-laccesso-agli-atti/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.romagnano-sesia.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-42472-1-cfc6a6a662342fbdb4c85408570bec43",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:58:54.862699Z"
+  },
+  "cambio_residenza": {
+   "service_id": "003130:comweb:cambio-residenza-305-42470-1-4ea1694c9ca275297ddd6ef2f292a2ab",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.romagnano-sesia.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-42470-1-4ea1694c9ca275297ddd6ef2f292a2ab",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.romagnano-sesia.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-42470-1-4ea1694c9ca275297ddd6ef2f292a2ab",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.romagnano-sesia.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-42470-1-4ea1694c9ca275297ddd6ef2f292a2ab",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.romagnano-sesia.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-42470-1-4ea1694c9ca275297ddd6ef2f292a2ab",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:58:56.692888Z"
+  },
+  "carta_identita": {
+   "service_id": "003130:comweb:carta-d-identita-elettronica-cie-788-42460-1-10c7dfe31d49d09cf2c314658c51f772",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.romagnano-sesia.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-42460-1-10c7dfe31d49d09cf2c314658c51f772",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.romagnano-sesia.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-42460-1-10c7dfe31d49d09cf2c314658c51f772",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.romagnano-sesia.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-42460-1-10c7dfe31d49d09cf2c314658c51f772",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:58:58.710767Z"
+  },
+  "tributi_tari": {
+   "service_id": "003130:comweb:pagamento-tassa-rifiuti-tari-659-42552-1-7b62735cbc541b293c3d1fced0b58685",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.romagnano-sesia.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-42552-1-7b62735cbc541b293c3d1fced0b58685",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.romagnano-sesia.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-42552-1-7b62735cbc541b293c3d1fced0b58685",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.romagnano-sesia.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-42552-1-7b62735cbc541b293c3d1fced0b58685",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.servizipubblicaamministrazione.it/servizi/PortaleContribuente/Home.aspx?CodCat=H502",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.romagnano-sesia.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-42552-1-7b62735cbc541b293c3d1fced0b58685",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.servizipubblicaamministrazione.it/servizi/filodiretto/ProcedimentiClient.Aspx?CE=rmgnnss581",
+     "provider": null,
+     "authentication": [
+      "spid",
+      "cie"
+     ],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.romagnano-sesia.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-42552-1-7b62735cbc541b293c3d1fced0b58685",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:59:01.023440Z"
+  }
+ }
+}

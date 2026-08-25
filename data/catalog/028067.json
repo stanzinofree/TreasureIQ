@@ -1,0 +1,146 @@
+{
+ "municipality_istat": "028067",
+ "services": {
+  "accesso_atti": {
+   "service_id": "028067:wp:1110",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.ponso.pd.it/?post_type=servizio&p=1110",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ponso.pd.it/?post_type=servizio&p=1110",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ponso.pd.it/?post_type=servizio&p=1110",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:13:33.827572Z"
+  },
+  "cambio_residenza": {
+   "service_id": "028067:wp:229",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.ponso.pd.it/?post_type=servizio&p=229",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ponso.pd.it/?post_type=servizio&p=229",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ponso.pd.it/?post_type=servizio&p=229",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:13:43.937238Z"
+  },
+  "carta_identita": {
+   "service_id": "028067:wp:773",
+   "title": "Carta d'identità elettronica (CIE)",
+   "source_url": "https://www.comune.ponso.pd.it/?post_type=servizio&p=773",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ponso.pd.it/?post_type=servizio&p=773",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ponso.pd.it/?post_type=servizio&p=773",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:13:55.554659Z"
+  },
+  "tributi_imu": {
+   "service_id": "028067:wp:758",
+   "title": "IMU",
+   "source_url": "https://www.comune.ponso.pd.it/?post_type=servizio&p=758",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ponso.pd.it/?post_type=servizio&p=758",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ponso.pd.it/?post_type=servizio&p=758",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.ponso.pd.it/wp-content/uploads/2025/11/regolamento_imu.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ponso.pd.it/?post_type=servizio&p=758",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:14:07.485904Z"
+  },
+  "tributi_tari": {
+   "service_id": "028067:wp:699",
+   "title": "TARI",
+   "source_url": "https://www.comune.ponso.pd.it/?post_type=servizio&p=699",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ponso.pd.it/?post_type=servizio&p=699",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ponso.pd.it/?post_type=servizio&p=699",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.ponso.pd.it/wp-content/uploads/2025/11/regolamento_tari.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ponso.pd.it/?post_type=servizio&p=699",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:14:23.099149Z"
+  }
+ }
+}

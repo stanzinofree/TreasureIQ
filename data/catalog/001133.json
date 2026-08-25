@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "001133",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001133:comweb:richiedere-l-accesso-agli-atti-317-31515-1-2772be057029610533309b2dacc53a99",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.levone.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-31515-1-2772be057029610533309b2dacc53a99",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.levone.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-31515-1-2772be057029610533309b2dacc53a99",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.levone.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-31515-1-2772be057029610533309b2dacc53a99",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.levone.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=lvn1007&IDPr=10206",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.levone.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-31515-1-2772be057029610533309b2dacc53a99",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:43:57.563668Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001133:comweb:cambio-residenza-305-31513-1-c5aac4809089af73f16de22c6a450406",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.levone.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-31513-1-c5aac4809089af73f16de22c6a450406",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.levone.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-31513-1-c5aac4809089af73f16de22c6a450406",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.levone.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-31513-1-c5aac4809089af73f16de22c6a450406",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.levone.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-31513-1-c5aac4809089af73f16de22c6a450406",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:44:00.436072Z"
+  },
+  "tributi_tari": {
+   "service_id": "001133:comweb:pagamento-tassa-rifiuti-tari-659-31595-1-5b3b43d7aa3d5ea40dd4bd48b01197c0",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.levone.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-31595-1-5b3b43d7aa3d5ea40dd4bd48b01197c0",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.levone.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-31595-1-5b3b43d7aa3d5ea40dd4bd48b01197c0",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.levone.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-31595-1-5b3b43d7aa3d5ea40dd4bd48b01197c0",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:44:02.662470Z"
+  }
+ }
+}

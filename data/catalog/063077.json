@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "063077",
+ "services": {
+  "accesso_atti": {
+   "service_id": "063077:wp:1275",
+   "title": "Accesso agli atti",
+   "source_url": "https://comune.scisciano.na.it/servizio/accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.scisciano.na.it/servizio/accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.scisciano.na.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:15:06.778977Z"
+  },
+  "cambio_residenza": {
+   "service_id": "063077:wp:1273",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.scisciano.na.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.scisciano.na.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.scisciano.na.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:15:13.237814Z"
+  },
+  "tributi_imu": {
+   "service_id": "063077:wp:1277",
+   "title": "Pagamento dell’imposta municipale propria IMU",
+   "source_url": "https://comune.scisciano.na.it/servizio/pagamento-dellimposta-municipale-propria-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.scisciano.na.it/servizio/pagamento-dellimposta-municipale-propria-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.scisciano.na.it/servizio/pagamento-dellimposta-municipale-propria-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:15:17.938198Z"
+  }
+ }
+}

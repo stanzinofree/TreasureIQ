@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "074018",
+ "services": {
+  "carta_identita": {
+   "service_id": "074018:wp:283",
+   "title": "CIE – Carta di Identità Elettronica",
+   "source_url": "https://www.comune.torchiarolo.br.it/servizio/cie-carta-di-identita-elettronica/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.torchiarolo.br.it/servizio/cie-carta-di-identita-elettronica/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.torchiarolo.br.it/servizio/cie-carta-di-identita-elettronica/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:27:12.407015Z"
+  },
+  "tributi_imu": {
+   "service_id": "074018:wp:296",
+   "title": "Dichiarazione IMU",
+   "source_url": "https://www.comune.torchiarolo.br.it/servizio/dichiarazione-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.torchiarolo.br.it/servizio/dichiarazione-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.torchiarolo.br.it/servizio/dichiarazione-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:27:16.273912Z"
+  },
+  "tributi_tari": {
+   "service_id": "074018:wp:327",
+   "title": "TARI",
+   "source_url": "https://www.comune.torchiarolo.br.it/servizio/tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.torchiarolo.br.it/servizio/tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.torchiarolo.br.it/servizio/tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:27:20.412826Z"
+  }
+ }
+}

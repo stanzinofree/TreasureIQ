@@ -1,0 +1,77 @@
+{
+ "municipality_istat": "003041",
+ "services": {
+  "accesso_atti": {
+   "service_id": "003041:comweb:richiedere-l-accesso-agli-atti-317-26499-1-7e6ec1e9cb0768ad7d2a7e08dfb57adc",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.casalvolone.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-26499-1-7e6ec1e9cb0768ad7d2a7e08dfb57adc",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.casalvolone.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-26499-1-7e6ec1e9cb0768ad7d2a7e08dfb57adc",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.casalvolone.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-26499-1-7e6ec1e9cb0768ad7d2a7e08dfb57adc",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.casalvolone.no.it/lang/it/servizi/richiedere-laccesso-agli-atti/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.casalvolone.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-26499-1-7e6ec1e9cb0768ad7d2a7e08dfb57adc",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:56:56.788773Z"
+  },
+  "cambio_residenza": {
+   "service_id": "003041:comweb:cambio-residenza-305-26497-1-36ac11a895493f4b35ea871495826b19",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.casalvolone.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-26497-1-36ac11a895493f4b35ea871495826b19",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.casalvolone.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-26497-1-36ac11a895493f4b35ea871495826b19",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.casalvolone.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-26497-1-36ac11a895493f4b35ea871495826b19",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.casalvolone.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-26497-1-36ac11a895493f4b35ea871495826b19",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:56:59.770732Z"
+  }
+ }
+}

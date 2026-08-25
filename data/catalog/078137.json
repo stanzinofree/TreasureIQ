@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "078137",
+ "services": {
+  "accesso_atti": {
+   "service_id": "078137:wp:301",
+   "title": "Accesso agli atti",
+   "source_url": "https://comune.scalacoeli.cs.it/servizio/accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.scalacoeli.cs.it/servizio/accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.scalacoeli.cs.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:36:52.117559Z"
+  },
+  "tributi_imu": {
+   "service_id": "078137:wp:302",
+   "title": "Calcolo IMU (Imposta Municipale Propria)",
+   "source_url": "https://comune.scalacoeli.cs.it/servizio/calcolo-imu-imposta-municipale-propria/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.scalacoeli.cs.it/servizio/calcolo-imu-imposta-municipale-propria/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.scalacoeli.cs.it/servizio/calcolo-imu-imposta-municipale-propria/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:36:55.376938Z"
+  }
+ }
+}

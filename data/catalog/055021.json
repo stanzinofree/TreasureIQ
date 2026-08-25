@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "055021",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "055021:wp:8825",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.monteleone.tr.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.monteleone.tr.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.monteleone.tr.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:58:36.889553Z"
+  },
+  "carta_identita": {
+   "service_id": "055021:wp:8839",
+   "title": "Rilascio carta d’identità elettronica (CIE)",
+   "source_url": "https://comune.monteleone.tr.it/servizio/rilascio-carta-didentita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.monteleone.tr.it/servizio/rilascio-carta-didentita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.monteleone.tr.it/servizio/rilascio-carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:58:39.704651Z"
+  },
+  "tributi_imu": {
+   "service_id": "055021:wp:8900",
+   "title": "Pagare tributo IMU",
+   "source_url": "https://comune.monteleone.tr.it/servizio/pagare-tributo-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.monteleone.tr.it/servizio/pagare-tributo-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.monteleone.tr.it/servizio/pagare-tributo-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:58:42.133894Z"
+  }
+ }
+}

@@ -1,0 +1,64 @@
+{
+ "municipality_istat": "001167",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "001167:comweb:cambio-residenza-305-47618-1-e2c8c6b6f11c6afa1b9b9a4f59b85f07",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.nomaglio.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-47618-1-e2c8c6b6f11c6afa1b9b9a4f59b85f07",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.nomaglio.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-47618-1-e2c8c6b6f11c6afa1b9b9a4f59b85f07",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.nomaglio.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-47618-1-e2c8c6b6f11c6afa1b9b9a4f59b85f07",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://innovazione.gov.it/notizie/articoli/anagrafe-nazionale-attivo-il-cambio-di-residenza-online/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.nomaglio.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-47618-1-e2c8c6b6f11c6afa1b9b9a4f59b85f07",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:45:05.587371Z"
+  },
+  "carta_identita": {
+   "service_id": "001167:comweb:carta-d-identita-elettronica-cie-788-47608-1-3024562da4bd7dc48181cbdf9f1b2691",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.nomaglio.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-47608-1-3024562da4bd7dc48181cbdf9f1b2691",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.nomaglio.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-47608-1-3024562da4bd7dc48181cbdf9f1b2691",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.nomaglio.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-47608-1-3024562da4bd7dc48181cbdf9f1b2691",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:45:07.675476Z"
+  }
+ }
+}

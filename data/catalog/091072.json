@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "091072",
+ "services": {
+  "accesso_atti": {
+   "service_id": "091072:wp:1138",
+   "title": "Richiedere l’accesso agli atti",
+   "source_url": "https://www.comune.perdasdefogu.og.it/servizio/richiedere-laccesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.perdasdefogu.og.it/servizio/richiedere-laccesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.perdasdefogu.og.it/servizio/richiedere-laccesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:51:49.323377Z"
+  },
+  "cambio_residenza": {
+   "service_id": "091072:wp:1167",
+   "title": "Cambio di residenza/abitazione",
+   "source_url": "https://www.comune.perdasdefogu.og.it/servizio/cambio-di-residenza-abitazione/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.perdasdefogu.og.it/servizio/cambio-di-residenza-abitazione/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.perdasdefogu.og.it/servizio/cambio-di-residenza-abitazione/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:51:52.605209Z"
+  },
+  "stato_civile": {
+   "service_id": "091072:wp:1161",
+   "title": "Certificati ed estratti di stato civile",
+   "source_url": "https://www.comune.perdasdefogu.og.it/servizio/certificati-ed-estratti-di-stato-civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.perdasdefogu.og.it/servizio/certificati-ed-estratti-di-stato-civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.perdasdefogu.og.it/servizio/certificati-ed-estratti-di-stato-civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:51:54.032764Z"
+  },
+  "tributi_imu": {
+   "service_id": "091072:wp:1154",
+   "title": "Pagare Tributi IMU",
+   "source_url": "https://www.comune.perdasdefogu.og.it/servizio/imu-imposta-municipale-propria/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.perdasdefogu.og.it/servizio/imu-imposta-municipale-propria/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.perdasdefogu.og.it/servizio/imu-imposta-municipale-propria/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:51:56.487024Z"
+  }
+ }
+}

@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "046019",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "046019:wp:870",
+   "title": "Cambio residenza e cambio di indirizzo",
+   "source_url": "https://comune.minucciano.lu.it/servizio/cambio-residenza-e-cambio-di-indirizzo/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.minucciano.lu.it/servizio/cambio-residenza-e-cambio-di-indirizzo/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.minucciano.lu.it/servizio/cambio-residenza-e-cambio-di-indirizzo/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:54:45.142161Z"
+  },
+  "carta_identita": {
+   "service_id": "046019:wp:866",
+   "title": "Carta di Identità Elettronica – CIE",
+   "source_url": "https://comune.minucciano.lu.it/servizio/carta-di-identita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.minucciano.lu.it/servizio/carta-di-identita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.minucciano.lu.it/servizio/carta-di-identita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:54:46.816849Z"
+  }
+ }
+}

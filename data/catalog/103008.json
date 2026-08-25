@@ -1,0 +1,123 @@
+{
+ "municipality_istat": "103008",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "103008:comweb:cambio-residenza-305-47354-1-88000a2e2c8a2d3cb6ac07697bc281a6",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.baveno.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-47354-1-88000a2e2c8a2d3cb6ac07697bc281a6",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.baveno.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-47354-1-88000a2e2c8a2d3cb6ac07697bc281a6",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.baveno.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-47354-1-88000a2e2c8a2d3cb6ac07697bc281a6",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/?catnome=Anagrafe%2520e%2520stato%2520civile&caturl=https://www.comune.baveno.vb.it/it-it/servizi/anagrafe-e-stato-civile&servnome=Cambio%2520Residenza&servurl=https://www.comune.baveno.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-47354-1-88000a2e2c8a2d3cb6ac07697bc281a6",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.baveno.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-47354-1-88000a2e2c8a2d3cb6ac07697bc281a6",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:01:00.068367Z"
+  },
+  "carta_identita": {
+   "service_id": "103008:comweb:carta-d-identita-elettronica-cie-788-47344-1-bbf16ac85a8cfc6d09c2ffe880962298",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.baveno.vb.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-47344-1-bbf16ac85a8cfc6d09c2ffe880962298",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.baveno.vb.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-47344-1-bbf16ac85a8cfc6d09c2ffe880962298",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.baveno.vb.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-47344-1-bbf16ac85a8cfc6d09c2ffe880962298",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:01:02.124784Z"
+  },
+  "tributi_imu": {
+   "service_id": "103008:comweb:imposta-municipale-propria-imu-953-47445-1-e62f58e3f7275609c942f33da454d500",
+   "title": "Imposta Municipale Propria (IMU)",
+   "source_url": "https://www.comune.baveno.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-47445-1-e62f58e3f7275609c942f33da454d500",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.baveno.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-47445-1-e62f58e3f7275609c942f33da454d500",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.baveno.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-47445-1-e62f58e3f7275609c942f33da454d500",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.riscotel.it/calcoloimu/?comune=A725&catnome=Tributi%252c%2520finanze%2520e%2520contravvenzioni&caturl=https://www.comune.baveno.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni&servnome=Imposta%2520Municipale%2520Propria%2520(IMU)&servurl=https://www.comune.baveno.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-47445-1-e62f58e3f7275609c942f33da454d500",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.baveno.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-47445-1-e62f58e3f7275609c942f33da454d500",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:01:04.440202Z"
+  },
+  "tributi_tari": {
+   "service_id": "103008:comweb:tassa-rifiuti-tari-954-47436-1-f8074282357860261c1a9405a7ee2407",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.baveno.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-47436-1-f8074282357860261c1a9405a7ee2407",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.baveno.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-47436-1-f8074282357860261c1a9405a7ee2407",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.baveno.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-47436-1-f8074282357860261c1a9405a7ee2407",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:01:06.626196Z"
+  }
+ }
+}

@@ -1,0 +1,41 @@
+{
+ "municipality_istat": "003097",
+ "services": {
+  "accesso_atti": {
+   "service_id": "003097:comweb:richiedere-l-accesso-agli-atti-317-14486-1-484c935ede3165dd30e232710922684a",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.mezzomerico.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-14486-1-484c935ede3165dd30e232710922684a",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.mezzomerico.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-14486-1-484c935ede3165dd30e232710922684a",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.mezzomerico.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-14486-1-484c935ede3165dd30e232710922684a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.mezzomerico.no.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=mzzmrc1500&IDPr=9472",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.mezzomerico.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-14486-1-484c935ede3165dd30e232710922684a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:58:33.912773Z"
+  }
+ }
+}

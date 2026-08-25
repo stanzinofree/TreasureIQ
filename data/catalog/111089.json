@@ -1,0 +1,110 @@
+{
+ "municipality_istat": "111089",
+ "services": {
+  "accesso_atti": {
+   "service_id": "111089:wp:754",
+   "title": "Accesso agli atti",
+   "source_url": "https://comune.teulada.su.it/servizio/accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.teulada.su.it/servizio/accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.teulada.su.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T15:06:35.445863Z"
+  },
+  "carta_identita": {
+   "service_id": "111089:wp:1151",
+   "title": "Carta di Identità Elettronica (CIE)",
+   "source_url": "https://comune.teulada.su.it/servizio/carta-di-identita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.teulada.su.it/servizio/carta-di-identita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.teulada.su.it/servizio/carta-di-identita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T15:06:38.162689Z"
+  },
+  "tributi_imu": {
+   "service_id": "111089:wp:595",
+   "title": "Pagamento IMU",
+   "source_url": "https://comune.teulada.su.it/servizio/calcolo-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.teulada.su.it/servizio/calcolo-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.teulada.su.it/servizio/calcolo-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://sister.agenziaentrate.gov.it/CitizenVisure/index.do",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://comune.teulada.su.it/servizio/calcolo-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T15:06:39.714199Z"
+  },
+  "tributi_tari": {
+   "service_id": "111089:wp:3988",
+   "title": "TARI",
+   "source_url": "https://comune.teulada.su.it/servizio/tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.teulada.su.it/servizio/tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.teulada.su.it/servizio/tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T15:06:41.726115Z"
+  }
+ }
+}

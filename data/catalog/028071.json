@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "028071",
+ "services": {
+  "accesso_atti": {
+   "service_id": "028071:wp:261",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.rovolon.pd.it/?post_type=servizio&p=261",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rovolon.pd.it/?post_type=servizio&p=261",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rovolon.pd.it/?post_type=servizio&p=261",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:15:17.505778Z"
+  },
+  "carta_identita": {
+   "service_id": "028071:wp:1419",
+   "title": "Rilascio Carta di Identità Elettronica",
+   "source_url": "https://www.comune.rovolon.pd.it/?post_type=servizio&p=1419",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rovolon.pd.it/?post_type=servizio&p=1419",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rovolon.pd.it/?post_type=servizio&p=1419",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:15:26.648039Z"
+  },
+  "stato_civile": {
+   "service_id": "028071:wp:1666",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.rovolon.pd.it/?post_type=servizio&p=1666",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rovolon.pd.it/?post_type=servizio&p=1666",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rovolon.pd.it/?post_type=servizio&p=1666",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:15:37.327854Z"
+  },
+  "tributi_imu": {
+   "service_id": "028071:wp:1642",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.rovolon.pd.it/?post_type=servizio&p=1642",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rovolon.pd.it/?post_type=servizio&p=1642",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rovolon.pd.it/?post_type=servizio&p=1642",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:15:46.746562Z"
+  }
+ }
+}

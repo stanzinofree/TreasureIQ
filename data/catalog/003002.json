@@ -1,0 +1,146 @@
+{
+ "municipality_istat": "003002",
+ "services": {
+  "accesso_atti": {
+   "service_id": "003002:comweb:richiedere-l-accesso-agli-atti-317-41152-1-89e3aeb3871159e7f43651a02f6d275f",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.ameno.novara.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-41152-1-89e3aeb3871159e7f43651a02f6d275f",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ameno.novara.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-41152-1-89e3aeb3871159e7f43651a02f6d275f",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ameno.novara.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-41152-1-89e3aeb3871159e7f43651a02f6d275f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizidigitali.comune.ameno.novara.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=mn908&IDPr=10795",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.ameno.novara.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-41152-1-89e3aeb3871159e7f43651a02f6d275f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:55:43.204108Z"
+  },
+  "cambio_residenza": {
+   "service_id": "003002:comweb:cambio-residenza-305-41150-1-355abcfa14be187527a8e93f1c4f53f8",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.ameno.novara.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-41150-1-355abcfa14be187527a8e93f1c4f53f8",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ameno.novara.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-41150-1-355abcfa14be187527a8e93f1c4f53f8",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ameno.novara.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-41150-1-355abcfa14be187527a8e93f1c4f53f8",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.ameno.novara.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-41150-1-355abcfa14be187527a8e93f1c4f53f8",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:55:44.898677Z"
+  },
+  "carta_identita": {
+   "service_id": "003002:comweb:carta-d-identita-elettronica-cie-788-41140-1-a7696862053b7a889333e95fdab32aed",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.ameno.novara.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-41140-1-a7696862053b7a889333e95fdab32aed",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ameno.novara.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-41140-1-a7696862053b7a889333e95fdab32aed",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ameno.novara.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-41140-1-a7696862053b7a889333e95fdab32aed",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:55:46.898350Z"
+  },
+  "tributi_imu": {
+   "service_id": "003002:comweb:calcolo-imu-355-41241-1-afe674df4f7eb3c36599ba82d89996bb",
+   "title": "Calcolo IMU",
+   "source_url": "https://www.comune.ameno.novara.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-41241-1-afe674df4f7eb3c36599ba82d89996bb",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ameno.novara.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-41241-1-afe674df4f7eb3c36599ba82d89996bb",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ameno.novara.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-41241-1-afe674df4f7eb3c36599ba82d89996bb",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:55:48.954407Z"
+  },
+  "tributi_tari": {
+   "service_id": "003002:comweb:pagamento-tassa-rifiuti-tari-659-41232-1-c429600377289259cb116d2cbedf96aa",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.ameno.novara.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-41232-1-c429600377289259cb116d2cbedf96aa",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ameno.novara.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-41232-1-c429600377289259cb116d2cbedf96aa",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ameno.novara.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-41232-1-c429600377289259cb116d2cbedf96aa",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:55:51.483944Z"
+  }
+ }
+}

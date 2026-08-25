@@ -1,0 +1,149 @@
+{
+ "municipality_istat": "099005",
+ "services": {
+  "accesso_atti": {
+   "service_id": "099005:comweb:richiedere-l-accesso-agli-atti-317-39568-1-f0bf4ea70842e9cdf54f6dead1ca91f0",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.misano-adriatico.rn.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-39568-1-f0bf4ea70842e9cdf54f6dead1ca91f0",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.misano-adriatico.rn.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-39568-1-f0bf4ea70842e9cdf54f6dead1ca91f0",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.misano-adriatico.rn.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-39568-1-f0bf4ea70842e9cdf54f6dead1ca91f0",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.misano-adriatico.rn.it/urbi/progs/urp/ur1PR003.sto?DB_NAME=n1074255&AmbitoBloccato=0&MacroTipoBloccato=496&TipoBloccato=528|5&catnome=Anagrafe%2520e%2520stato%2520civile&caturl=https://www.comune.misano-adriatico.rn.it/it-it/servizi/anagrafe-e-stato-civile&servnome=Richiedere%2520l%2527accesso%2520agli%2520atti&servurl=https://www.comune.misano-adriatico.rn.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-39568-1-f0bf4ea70842e9cdf54f6dead1ca91f0",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.misano-adriatico.rn.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-39568-1-f0bf4ea70842e9cdf54f6dead1ca91f0",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:57:45.048631Z"
+  },
+  "cambio_residenza": {
+   "service_id": "099005:comweb:cambio-residenza-305-39566-1-7a5ce973fd1463bb9b04d476835156a6",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.misano-adriatico.rn.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-39566-1-7a5ce973fd1463bb9b04d476835156a6",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.misano-adriatico.rn.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-39566-1-7a5ce973fd1463bb9b04d476835156a6",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.misano-adriatico.rn.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-39566-1-7a5ce973fd1463bb9b04d476835156a6",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/servizi-al-cittadino/?catnome=Anagrafe%2520e%2520stato%2520civile&caturl=https://www.comune.misano-adriatico.rn.it/it-it/servizi/anagrafe-e-stato-civile&servnome=Cambio%2520Residenza&servurl=https://www.comune.misano-adriatico.rn.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-39566-1-7a5ce973fd1463bb9b04d476835156a6",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.misano-adriatico.rn.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-39566-1-7a5ce973fd1463bb9b04d476835156a6",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.misano-adriatico.rn.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-39566-1-7a5ce973fd1463bb9b04d476835156a6",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:57:47.067516Z"
+  },
+  "carta_identita": {
+   "service_id": "099005:comweb:carta-d-identita-elettronica-cie-788-39556-1-590751878e597ad99e6c90ffdd4459a9",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.misano-adriatico.rn.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-39556-1-590751878e597ad99e6c90ffdd4459a9",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.misano-adriatico.rn.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-39556-1-590751878e597ad99e6c90ffdd4459a9",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.misano-adriatico.rn.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-39556-1-590751878e597ad99e6c90ffdd4459a9",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:57:49.400270Z"
+  },
+  "tributi_imu": {
+   "service_id": "099005:comweb:imposta-municipale-propria-imu-953-39657-1-fd5a8053d3d9a9232cb870d4d3db6872",
+   "title": "Imposta Municipale Propria (IMU)",
+   "source_url": "https://www.comune.misano-adriatico.rn.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-39657-1-fd5a8053d3d9a9232cb870d4d3db6872",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.misano-adriatico.rn.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-39657-1-fd5a8053d3d9a9232cb870d4d3db6872",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.misano-adriatico.rn.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-39657-1-fd5a8053d3d9a9232cb870d4d3db6872",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.riscotel.it/calcoloimu/?comune=F244&catnome=Tributi%252c%2520finanze%2520e%2520contravvenzioni&caturl=https://www.comune.misano-adriatico.rn.it/it-it/servizi/tributi-finanze-e-contravvenzioni&servnome=Imposta%2520Municipale%2520Propria%2520(IMU)&servurl=https://www.comune.misano-adriatico.rn.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-39657-1-fd5a8053d3d9a9232cb870d4d3db6872",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.misano-adriatico.rn.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-39657-1-fd5a8053d3d9a9232cb870d4d3db6872",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:57:51.581204Z"
+  }
+ }
+}

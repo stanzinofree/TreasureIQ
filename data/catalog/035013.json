@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "035013",
+ "services": {
+  "accesso_atti": {
+   "service_id": "035013:wp:35116",
+   "title": "Accesso agli atti",
+   "source_url": "https://www.comune.casina.re.it/servizi/accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.casina.re.it/servizi/accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.casina.re.it/servizi/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:47:17.431165Z"
+  },
+  "carta_identita": {
+   "service_id": "035013:wp:35089",
+   "title": "Carta d’identità",
+   "source_url": "https://www.comune.casina.re.it/servizi/carta-didentita/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.casina.re.it/servizi/carta-didentita/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.casina.re.it/servizi/carta-didentita/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:47:20.290587Z"
+  }
+ }
+}

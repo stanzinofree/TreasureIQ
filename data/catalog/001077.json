@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "001077",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001077:comweb:richiedere-l-accesso-agli-atti-317-44980-1-6d094d862f7876e72092291946c27667",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://comune.chiaverano.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-44980-1-6d094d862f7876e72092291946c27667",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.chiaverano.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-44980-1-6d094d862f7876e72092291946c27667",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.chiaverano.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-44980-1-6d094d862f7876e72092291946c27667",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.chiaverano.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=chvrn150&IDPr=11555",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://comune.chiaverano.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-44980-1-6d094d862f7876e72092291946c27667",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:41:32.004653Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001077:comweb:cambio-residenza-305-44978-1-27e070afdd00ce5792d2a06071e51301",
+   "title": "Cambio Residenza",
+   "source_url": "https://comune.chiaverano.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-44978-1-27e070afdd00ce5792d2a06071e51301",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.chiaverano.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-44978-1-27e070afdd00ce5792d2a06071e51301",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.chiaverano.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-44978-1-27e070afdd00ce5792d2a06071e51301",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://comune.chiaverano.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-44978-1-27e070afdd00ce5792d2a06071e51301",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:41:34.391746Z"
+  },
+  "carta_identita": {
+   "service_id": "001077:comweb:carta-d-identita-elettronica-cie-788-44968-1-421511688953c2d8ccc8705a57fc5880",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://comune.chiaverano.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-44968-1-421511688953c2d8ccc8705a57fc5880",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.chiaverano.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-44968-1-421511688953c2d8ccc8705a57fc5880",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.chiaverano.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-44968-1-421511688953c2d8ccc8705a57fc5880",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:41:37.243455Z"
+  }
+ }
+}

@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "024088",
+ "services": {
+  "accesso_atti": {
+   "service_id": "024088:wp:643",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.rossano.vi.it/?post_type=servizio&p=643",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rossano.vi.it/?post_type=servizio&p=643",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rossano.vi.it/?post_type=servizio&p=643",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:13:29.985235Z"
+  },
+  "stato_civile": {
+   "service_id": "024088:wp:1583",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.rossano.vi.it/?post_type=servizio&p=1583",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rossano.vi.it/?post_type=servizio&p=1583",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rossano.vi.it/?post_type=servizio&p=1583",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:13:44.942424Z"
+  },
+  "tributi_imu": {
+   "service_id": "024088:wp:1567",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.rossano.vi.it/?post_type=servizio&p=1567",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rossano.vi.it/?post_type=servizio&p=1567",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rossano.vi.it/?post_type=servizio&p=1567",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:13:53.438057Z"
+  }
+ }
+}

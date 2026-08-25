@@ -1,0 +1,146 @@
+{
+ "municipality_istat": "001132",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001132:comweb:richiedere-l-accesso-agli-atti-317-45508-1-9b9399832c4321dae55a037e65c746b3",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.lessolo.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-45508-1-9b9399832c4321dae55a037e65c746b3",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.lessolo.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-45508-1-9b9399832c4321dae55a037e65c746b3",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.lessolo.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-45508-1-9b9399832c4321dae55a037e65c746b3",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.lessolo.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=lssl097&IDPr=11231",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.lessolo.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-45508-1-9b9399832c4321dae55a037e65c746b3",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:43:46.661315Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001132:comweb:cambio-residenza-305-45506-1-7ea7527a32d25574bc12e35188c40d52",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.lessolo.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-45506-1-7ea7527a32d25574bc12e35188c40d52",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.lessolo.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-45506-1-7ea7527a32d25574bc12e35188c40d52",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.lessolo.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-45506-1-7ea7527a32d25574bc12e35188c40d52",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.lessolo.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-45506-1-7ea7527a32d25574bc12e35188c40d52",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:43:49.033479Z"
+  },
+  "stato_civile": {
+   "service_id": "001132:comweb:trascrizione-atti-di-stato-civile-formati-all-estero-882-45510-1-ee36b09e82960572ced6547dd70374a1",
+   "title": "Trascrizione Atti di Stato Civile formati all’estero",
+   "source_url": "https://www.comune.lessolo.to.it/it-it/servizi/anagrafe-e-stato-civile/trascrizione-atti-di-stato-civile-formati-all-estero-882-45510-1-ee36b09e82960572ced6547dd70374a1",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.lessolo.to.it/it-it/servizi/anagrafe-e-stato-civile/trascrizione-atti-di-stato-civile-formati-all-estero-882-45510-1-ee36b09e82960572ced6547dd70374a1",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.lessolo.to.it/it-it/servizi/anagrafe-e-stato-civile/trascrizione-atti-di-stato-civile-formati-all-estero-882-45510-1-ee36b09e82960572ced6547dd70374a1",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:43:51.386048Z"
+  },
+  "tributi_imu": {
+   "service_id": "001132:comweb:imposta-municipale-propria-imu-953-45597-1-be837d215233f01505b68c45bdfe5840",
+   "title": "Imposta Municipale Propria (IMU)",
+   "source_url": "https://www.comune.lessolo.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-45597-1-be837d215233f01505b68c45bdfe5840",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.lessolo.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-45597-1-be837d215233f01505b68c45bdfe5840",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.lessolo.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-45597-1-be837d215233f01505b68c45bdfe5840",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:43:53.225642Z"
+  },
+  "tributi_tari": {
+   "service_id": "001132:comweb:pagamento-tassa-rifiuti-tari-659-45588-1-ba456d614861a068becfdc57be4a3f8a",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.lessolo.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-45588-1-ba456d614861a068becfdc57be4a3f8a",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.lessolo.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-45588-1-ba456d614861a068becfdc57be4a3f8a",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.lessolo.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-45588-1-ba456d614861a068becfdc57be4a3f8a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:43:55.217902Z"
+  }
+ }
+}

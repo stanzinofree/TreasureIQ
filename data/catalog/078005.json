@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "078005",
+ "services": {
+  "tributi_imu": {
+   "service_id": "078005:wp:394",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.aieta.cs.it/servizio/pagare-tributi-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.aieta.cs.it/servizio/pagare-tributi-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.aieta.cs.it/servizio/pagare-tributi-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:31:27.877985Z"
+  }
+ }
+}

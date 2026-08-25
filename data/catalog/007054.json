@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "007054",
+ "services": {
+  "accesso_atti": {
+   "service_id": "007054:wp:3020",
+   "title": "Richiedere l’accesso agli atti",
+   "source_url": "https://comune.quart.ao.it/servizio/richiedere-laccesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.quart.ao.it/servizio/richiedere-laccesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.quart.ao.it/servizio/richiedere-laccesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:09:44.114574Z"
+  },
+  "carta_identita": {
+   "service_id": "007054:wp:3028",
+   "title": "Carta d’identità elettronica (CIE)",
+   "source_url": "https://comune.quart.ao.it/servizio/carta-didentita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.quart.ao.it/servizio/carta-didentita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.quart.ao.it/servizio/carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.quart.ao.it/wp-content/uploads/2024/09/CARTA-DIDENTITA-ELETTRONICA.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.quart.ao.it/servizio/carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.quart.ao.it/wp-content/uploads/2024/03/Donazione-degli-organi.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.quart.ao.it/servizio/carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:09:53.547775Z"
+  },
+  "stato_civile": {
+   "service_id": "007054:wp:3039",
+   "title": "Stato civile",
+   "source_url": "https://comune.quart.ao.it/servizio/stato-civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.quart.ao.it/servizio/stato-civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.quart.ao.it/servizio/stato-civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:10:02.844415Z"
+  }
+ }
+}

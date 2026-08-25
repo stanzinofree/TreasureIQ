@@ -1,0 +1,64 @@
+{
+ "municipality_istat": "103076",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "103076:comweb:cambio-residenza-305-30721-1-fb73b262159b1c47c6dc15bb292253ff",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.villette.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-30721-1-fb73b262159b1c47c6dc15bb292253ff",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.villette.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-30721-1-fb73b262159b1c47c6dc15bb292253ff",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.villette.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-30721-1-fb73b262159b1c47c6dc15bb292253ff",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.villette.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-30721-1-fb73b262159b1c47c6dc15bb292253ff",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:04:08.299127Z"
+  },
+  "carta_identita": {
+   "service_id": "103076:comweb:carta-d-identita-elettronica-cie-788-30711-1-e9325f4c2b89106d0ebfd2e51fe92a23",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.villette.vb.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-30711-1-e9325f4c2b89106d0ebfd2e51fe92a23",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.villette.vb.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-30711-1-e9325f4c2b89106d0ebfd2e51fe92a23",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.villette.vb.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-30711-1-e9325f4c2b89106d0ebfd2e51fe92a23",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:04:10.058898Z"
+  }
+ }
+}

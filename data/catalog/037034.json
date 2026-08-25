@@ -1,0 +1,87 @@
+{
+ "municipality_istat": "037034",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "037034:comweb:cambio-residenza-305-50796-1-33c4120c5f62864802a5cbb5685ea1cb",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.loiano.bologna.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-50796-1-33c4120c5f62864802a5cbb5685ea1cb",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.loiano.bologna.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-50796-1-33c4120c5f62864802a5cbb5685ea1cb",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.loiano.bologna.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-50796-1-33c4120c5f62864802a5cbb5685ea1cb",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.loiano.bologna.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-50796-1-33c4120c5f62864802a5cbb5685ea1cb",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T13:48:53.920146Z"
+  },
+  "carta_identita": {
+   "service_id": "037034:comweb:carta-d-identita-elettronica-cie-788-50786-1-4814796187fb7d574ad8492e4523ed4a",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.loiano.bologna.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-50786-1-4814796187fb7d574ad8492e4523ed4a",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.loiano.bologna.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-50786-1-4814796187fb7d574ad8492e4523ed4a",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.loiano.bologna.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-50786-1-4814796187fb7d574ad8492e4523ed4a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T13:48:56.334192Z"
+  },
+  "tributi_tari": {
+   "service_id": "037034:comweb:pagamento-tassa-rifiuti-tari-659-50878-1-0c39402a32d55a84fb30518ecae5e149",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.loiano.bologna.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-50878-1-0c39402a32d55a84fb30518ecae5e149",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.loiano.bologna.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-50878-1-0c39402a32d55a84fb30518ecae5e149",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.loiano.bologna.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-50878-1-0c39402a32d55a84fb30518ecae5e149",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T13:48:59.727349Z"
+  }
+ }
+}

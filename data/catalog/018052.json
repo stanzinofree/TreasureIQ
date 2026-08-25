@@ -1,0 +1,87 @@
+{
+ "municipality_istat": "018052",
+ "services": {
+  "accesso_atti": {
+   "service_id": "018052:comweb:richiedere-l-accesso-agli-atti-317-5642-1-bfb875afaf457af56a78ba5ffd918f76",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.confienza.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-5642-1-bfb875afaf457af56a78ba5ffd918f76",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.confienza.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-5642-1-bfb875afaf457af56a78ba5ffd918f76",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.confienza.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-5642-1-bfb875afaf457af56a78ba5ffd918f76",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.confienza.pv.it/lang/it/servizi/richiedere-laccesso-agli-atti/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.confienza.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-5642-1-bfb875afaf457af56a78ba5ffd918f76",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:20:17.342010Z"
+  },
+  "tributi_imu": {
+   "service_id": "018052:comweb:pagare-tributi-imu-600-5732-1-74933143e69885cae5852a0942b6ac88",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.confienza.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-5732-1-74933143e69885cae5852a0942b6ac88",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.confienza.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-5732-1-74933143e69885cae5852a0942b6ac88",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.confienza.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-5732-1-74933143e69885cae5852a0942b6ac88",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:20:20.132253Z"
+  },
+  "tributi_tari": {
+   "service_id": "018052:comweb:pagamento-tassa-rifiuti-tari-659-5723-1-33908a0ac2f1c4d9ac5f64faf82edd99",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.confienza.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-5723-1-33908a0ac2f1c4d9ac5f64faf82edd99",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.confienza.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-5723-1-33908a0ac2f1c4d9ac5f64faf82edd99",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.confienza.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-5723-1-33908a0ac2f1c4d9ac5f64faf82edd99",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:20:22.893695Z"
+  }
+ }
+}

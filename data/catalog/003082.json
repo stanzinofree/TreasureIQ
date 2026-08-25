@@ -1,0 +1,123 @@
+{
+ "municipality_istat": "003082",
+ "services": {
+  "accesso_atti": {
+   "service_id": "003082:comweb:richiedere-l-accesso-agli-atti-317-49072-1-daf7b92ba5d2e169c97f0fb6b7bf0c45",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.invorio.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-49072-1-daf7b92ba5d2e169c97f0fb6b7bf0c45",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.invorio.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-49072-1-daf7b92ba5d2e169c97f0fb6b7bf0c45",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.invorio.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-49072-1-daf7b92ba5d2e169c97f0fb6b7bf0c45",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.invorio.no.it/lang/it/servizi/richiedere-laccesso-agli-atti/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.invorio.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-49072-1-daf7b92ba5d2e169c97f0fb6b7bf0c45",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:58:00.757382Z"
+  },
+  "cambio_residenza": {
+   "service_id": "003082:comweb:cambio-residenza-305-49070-1-509be110f88a6125dc7fd86f5fefa327",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.invorio.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-49070-1-509be110f88a6125dc7fd86f5fefa327",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.invorio.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-49070-1-509be110f88a6125dc7fd86f5fefa327",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.invorio.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-49070-1-509be110f88a6125dc7fd86f5fefa327",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.invorio.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-49070-1-509be110f88a6125dc7fd86f5fefa327",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:58:03.053124Z"
+  },
+  "carta_identita": {
+   "service_id": "003082:comweb:carta-d-identita-elettronica-cie-788-49060-1-05f7170f167298f018bbfab58506cdcb",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.invorio.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-49060-1-05f7170f167298f018bbfab58506cdcb",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.invorio.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-49060-1-05f7170f167298f018bbfab58506cdcb",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.invorio.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-49060-1-05f7170f167298f018bbfab58506cdcb",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:58:06.051956Z"
+  },
+  "tributi_tari": {
+   "service_id": "003082:comweb:pagamento-tassa-rifiuti-tari-659-49152-1-02d59c7622b10ad6b8ed082af0db835f",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.invorio.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-49152-1-02d59c7622b10ad6b8ed082af0db835f",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.invorio.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-49152-1-02d59c7622b10ad6b8ed082af0db835f",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.invorio.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-49152-1-02d59c7622b10ad6b8ed082af0db835f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:58:09.075708Z"
+  }
+ }
+}

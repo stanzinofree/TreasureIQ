@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "075010",
+ "services": {
+  "accesso_atti": {
+   "service_id": "075010:wp:676",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.calimera.le.it/servizio/accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.calimera.le.it/servizio/accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.calimera.le.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:27:43.236644Z"
+  },
+  "cambio_residenza": {
+   "service_id": "075010:wp:644",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.calimera.le.it/?post_type=servizio&p=644",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.calimera.le.it/?post_type=servizio&p=644",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.calimera.le.it/?post_type=servizio&p=644",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:27:47.990987Z"
+  }
+ }
+}

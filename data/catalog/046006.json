@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "046006",
+ "services": {
+  "accesso_atti": {
+   "service_id": "046006:wp:571",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.camporgiano.lu.it/?post_type=servizio&p=571",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.camporgiano.lu.it/?post_type=servizio&p=571",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.camporgiano.lu.it/?post_type=servizio&p=571",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:54:24.345341Z"
+  },
+  "carta_identita": {
+   "service_id": "046006:wp:605",
+   "title": "Rilascio Carta di Identità Elettronica",
+   "source_url": "https://www.comune.camporgiano.lu.it/?post_type=servizio&p=605",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.camporgiano.lu.it/?post_type=servizio&p=605",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.camporgiano.lu.it/?post_type=servizio&p=605",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:54:28.838417Z"
+  }
+ }
+}

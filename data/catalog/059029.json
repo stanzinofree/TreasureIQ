@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "059029",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "059029:wp:7128",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.sonnino.latina.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.sonnino.latina.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.sonnino.latina.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:04:25.387156Z"
+  },
+  "tributi_imu": {
+   "service_id": "059029:wp:7647",
+   "title": "Calcolo IMU",
+   "source_url": "https://comune.sonnino.latina.it/servizio/calcolo-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.sonnino.latina.it/servizio/calcolo-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.sonnino.latina.it/servizio/calcolo-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:04:28.683652Z"
+  }
+ }
+}

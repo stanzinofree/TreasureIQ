@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "061016",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "061016:comweb:cambio-residenza-305-58098-1-dd6f4d490f63ee456bf0fa21d736a47d",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.carinaro.ce.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-58098-1-dd6f4d490f63ee456bf0fa21d736a47d",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.carinaro.ce.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-58098-1-dd6f4d490f63ee456bf0fa21d736a47d",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.carinaro.ce.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-58098-1-dd6f4d490f63ee456bf0fa21d736a47d",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:09:28.013476Z"
+  },
+  "carta_identita": {
+   "service_id": "061016:comweb:carta-d-identita-elettronica-cie-788-58088-1-5d003df42ad5acd891a16c206bddee04",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.carinaro.ce.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-58088-1-5d003df42ad5acd891a16c206bddee04",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.carinaro.ce.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-58088-1-5d003df42ad5acd891a16c206bddee04",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.carinaro.ce.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-58088-1-5d003df42ad5acd891a16c206bddee04",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:09:29.956385Z"
+  },
+  "stato_civile": {
+   "service_id": "061016:comweb:certificato-di-stato-civile-6-58088-1-117424a687a1f834f6b30ed13d0e2ff0",
+   "title": "Certificato di stato civile",
+   "source_url": "https://www.comune.carinaro.ce.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-stato-civile-6-58088-1-117424a687a1f834f6b30ed13d0e2ff0",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.carinaro.ce.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-stato-civile-6-58088-1-117424a687a1f834f6b30ed13d0e2ff0",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.carinaro.ce.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-stato-civile-6-58088-1-117424a687a1f834f6b30ed13d0e2ff0",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:09:32.091985Z"
+  }
+ }
+}

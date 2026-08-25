@@ -1,0 +1,240 @@
+{
+ "municipality_istat": "028101",
+ "services": {
+  "accesso_atti": {
+   "service_id": "028101:wp:408",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.villa-del-conte.pd.it/?post_type=servizio&p=408",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.villa-del-conte.pd.it/?post_type=servizio&p=408",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.villa-del-conte.pd.it/?post_type=servizio&p=408",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:24:07.313141Z"
+  },
+  "cambio_residenza": {
+   "service_id": "028101:wp:229",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.villa-del-conte.pd.it/?post_type=servizio&p=229",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.villa-del-conte.pd.it/?post_type=servizio&p=229",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.villa-del-conte.pd.it/?post_type=servizio&p=229",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:24:22.828214Z"
+  },
+  "stato_civile": {
+   "service_id": "028101:wp:232",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.villa-del-conte.pd.it/?post_type=servizio&p=232",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.villa-del-conte.pd.it/?post_type=servizio&p=232",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.villa-del-conte.pd.it/?post_type=servizio&p=232",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:24:40.307668Z"
+  },
+  "tributi_imu": {
+   "service_id": "028101:wp:1051",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.villa-del-conte.pd.it/?post_type=servizio&p=1051",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.villa-del-conte.pd.it/?post_type=servizio&p=1051",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.villa-del-conte.pd.it/?post_type=servizio&p=1051",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.villa-del-conte.pd.it/wp-content/uploads/2026/04/IMU-2026.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.villa-del-conte.pd.it/?post_type=servizio&p=1051",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.villa-del-conte.pd.it/wp-content/uploads/2025/12/Prospetto-aliquote-IMU-ministeriale-2025.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.villa-del-conte.pd.it/?post_type=servizio&p=1051",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.villa-del-conte.pd.it/wp-content/uploads/2026/04/IMU-2025.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.villa-del-conte.pd.it/?post_type=servizio&p=1051",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.villa-del-conte.pd.it/wp-content/uploads/2026/04/IMU_IMPi_Istruzioni_2024_Definitivo-24.04.2024.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.villa-del-conte.pd.it/?post_type=servizio&p=1051",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.villa-del-conte.pd.it/wp-content/uploads/2025/03/IMU_IMPi_Modello_2024_Definitivo.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.villa-del-conte.pd.it/?post_type=servizio&p=1051",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.villa-del-conte.pd.it/wp-content/uploads/2026/04/Richiesta-di-rimborso-IMU.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.villa-del-conte.pd.it/?post_type=servizio&p=1051",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.villa-del-conte.pd.it/wp-content/uploads/2024/12/136-modulistica-dichiarazione-inagibilita-imu.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.villa-del-conte.pd.it/?post_type=servizio&p=1051",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.villa-del-conte.pd.it/wp-content/uploads/2026/04/IMU-2024.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.villa-del-conte.pd.it/?post_type=servizio&p=1051",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.villa-del-conte.pd.it/wp-content/uploads/2026/04/IMU-2023.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.villa-del-conte.pd.it/?post_type=servizio&p=1051",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.villa-del-conte.pd.it/wp-content/uploads/2026/04/IMU-2022.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.villa-del-conte.pd.it/?post_type=servizio&p=1051",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.villa-del-conte.pd.it/wp-content/uploads/2026/04/IMU-2021.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.villa-del-conte.pd.it/?post_type=servizio&p=1051",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:24:49.405115Z"
+  }
+ }
+}

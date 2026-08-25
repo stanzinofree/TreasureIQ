@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "028079",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "028079:wp:948",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.sanpietroviminario.pd.it/?post_type=servizio&p=948",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanpietroviminario.pd.it/?post_type=servizio&p=948",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanpietroviminario.pd.it/?post_type=servizio&p=948",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:18:57.524295Z"
+  },
+  "carta_identita": {
+   "service_id": "028079:wp:748",
+   "title": "Rilascio Carta di Identità Elettronica",
+   "source_url": "https://www.comune.sanpietroviminario.pd.it/?post_type=servizio&p=748",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanpietroviminario.pd.it/?post_type=servizio&p=748",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanpietroviminario.pd.it/?post_type=servizio&p=748",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:19:03.574593Z"
+  },
+  "stato_civile": {
+   "service_id": "028079:wp:951",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.sanpietroviminario.pd.it/?post_type=servizio&p=951",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanpietroviminario.pd.it/?post_type=servizio&p=951",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanpietroviminario.pd.it/?post_type=servizio&p=951",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:19:13.317267Z"
+  },
+  "tributi_imu": {
+   "service_id": "028079:wp:962",
+   "title": "Calcolo IMU e TASI",
+   "source_url": "https://www.comune.sanpietroviminario.pd.it/?post_type=servizio&p=962",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanpietroviminario.pd.it/?post_type=servizio&p=962",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanpietroviminario.pd.it/?post_type=servizio&p=962",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:19:19.957979Z"
+  }
+ }
+}

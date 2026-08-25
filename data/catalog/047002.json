@@ -1,0 +1,123 @@
+{
+ "municipality_istat": "047002",
+ "services": {
+  "accesso_atti": {
+   "service_id": "047002:comweb:richiedere-l-accesso-agli-atti-317-51197-1-e6858844bf0af71cb9eb93aa24380c9d",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.agliana.pt.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-51197-1-e6858844bf0af71cb9eb93aa24380c9d",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.agliana.pt.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-51197-1-e6858844bf0af71cb9eb93aa24380c9d",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.agliana.pt.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-51197-1-e6858844bf0af71cb9eb93aa24380c9d",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.agliana.pt.it/lang/it/servizi/richiesta-di-accesso-agli-atti/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.agliana.pt.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-51197-1-e6858844bf0af71cb9eb93aa24380c9d",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T13:55:14.012478Z"
+  },
+  "cambio_residenza": {
+   "service_id": "047002:comweb:cambio-residenza-305-51195-1-18ffc7f090227e439c311f002542789c",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.agliana.pt.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-51195-1-18ffc7f090227e439c311f002542789c",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.agliana.pt.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-51195-1-18ffc7f090227e439c311f002542789c",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.agliana.pt.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-51195-1-18ffc7f090227e439c311f002542789c",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.agliana.pt.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-51195-1-18ffc7f090227e439c311f002542789c",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T13:55:16.000816Z"
+  },
+  "carta_identita": {
+   "service_id": "047002:comweb:carta-d-identita-elettronica-cie-788-51185-1-51346c44f55645fb7329ef6536deebc0",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.agliana.pt.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-51185-1-51346c44f55645fb7329ef6536deebc0",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.agliana.pt.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-51185-1-51346c44f55645fb7329ef6536deebc0",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.agliana.pt.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-51185-1-51346c44f55645fb7329ef6536deebc0",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T13:55:18.221916Z"
+  },
+  "tributi_tari": {
+   "service_id": "047002:comweb:tassa-rifiuti-tari-954-51277-1-abdef85dd9bb02cbe5d052b9e0806e7d",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.agliana.pt.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-51277-1-abdef85dd9bb02cbe5d052b9e0806e7d",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.agliana.pt.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-51277-1-abdef85dd9bb02cbe5d052b9e0806e7d",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.agliana.pt.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-51277-1-abdef85dd9bb02cbe5d052b9e0806e7d",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T13:55:20.329787Z"
+  }
+ }
+}

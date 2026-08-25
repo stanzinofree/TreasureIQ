@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "001258",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001258:comweb:richiedere-l-accesso-agli-atti-317-25047-1-0b50b86229e85cf4648cd9cc8a7f91f7",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.sauzedicesana.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-25047-1-0b50b86229e85cf4648cd9cc8a7f91f7",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sauzedicesana.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-25047-1-0b50b86229e85cf4648cd9cc8a7f91f7",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sauzedicesana.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-25047-1-0b50b86229e85cf4648cd9cc8a7f91f7",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizidigitali.comune.sauzedicesana.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=szdcsn1224&IDPr=13435",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.sauzedicesana.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-25047-1-0b50b86229e85cf4648cd9cc8a7f91f7",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:49:26.971967Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001258:comweb:cambio-residenza-305-25045-1-04bc5eda1c5fc7c81df371aeef2dd79d",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.sauzedicesana.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-25045-1-04bc5eda1c5fc7c81df371aeef2dd79d",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sauzedicesana.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-25045-1-04bc5eda1c5fc7c81df371aeef2dd79d",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sauzedicesana.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-25045-1-04bc5eda1c5fc7c81df371aeef2dd79d",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.sauzedicesana.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-25045-1-04bc5eda1c5fc7c81df371aeef2dd79d",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:49:31.664066Z"
+  },
+  "tributi_tari": {
+   "service_id": "001258:comweb:pagamento-tassa-rifiuti-tari-659-25127-1-c2c346d03626bb5ff31419f2fb0cb2fa",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.sauzedicesana.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-25127-1-c2c346d03626bb5ff31419f2fb0cb2fa",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sauzedicesana.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-25127-1-c2c346d03626bb5ff31419f2fb0cb2fa",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sauzedicesana.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-25127-1-c2c346d03626bb5ff31419f2fb0cb2fa",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:49:34.617285Z"
+  }
+ }
+}

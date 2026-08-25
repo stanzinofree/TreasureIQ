@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "066028",
+ "services": {
+  "accesso_atti": {
+   "service_id": "066028:wp:1152",
+   "title": "Richiedere l’accesso agli atti",
+   "source_url": "https://www.comune.casteldisangro.aq.it/servizio/accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.casteldisangro.aq.it/servizio/accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.casteldisangro.aq.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:21:33.054130Z"
+  },
+  "cambio_residenza": {
+   "service_id": "066028:wp:1070",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.casteldisangro.aq.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.casteldisangro.aq.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.casteldisangro.aq.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:21:36.779062Z"
+  },
+  "tributi_imu": {
+   "service_id": "066028:wp:1067",
+   "title": "IMU",
+   "source_url": "https://www.comune.casteldisangro.aq.it/servizio/imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.casteldisangro.aq.it/servizio/imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.casteldisangro.aq.it/servizio/imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:21:38.324942Z"
+  },
+  "tributi_tari": {
+   "service_id": "066028:wp:1057",
+   "title": "TARI",
+   "source_url": "https://www.comune.casteldisangro.aq.it/servizio/tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.casteldisangro.aq.it/servizio/tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.casteldisangro.aq.it/servizio/tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:21:39.877574Z"
+  }
+ }
+}

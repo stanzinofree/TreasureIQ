@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "003051",
+ "services": {
+  "accesso_atti": {
+   "service_id": "003051:comweb:richiedere-l-accesso-agli-atti-317-55852-1-a5d0ed36cd370956baccd9228081e546",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.colazza.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-55852-1-a5d0ed36cd370956baccd9228081e546",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.colazza.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-55852-1-a5d0ed36cd370956baccd9228081e546",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.colazza.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-55852-1-a5d0ed36cd370956baccd9228081e546",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.colazza.no.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=clzz965&IDPr=12255",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.colazza.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-55852-1-a5d0ed36cd370956baccd9228081e546",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:57:25.137439Z"
+  },
+  "cambio_residenza": {
+   "service_id": "003051:comweb:cambio-residenza-305-55850-1-a2fbda886c6aa2672262ae9d1822c72c",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.colazza.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-55850-1-a2fbda886c6aa2672262ae9d1822c72c",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.colazza.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-55850-1-a2fbda886c6aa2672262ae9d1822c72c",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.colazza.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-55850-1-a2fbda886c6aa2672262ae9d1822c72c",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.colazza.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-55850-1-a2fbda886c6aa2672262ae9d1822c72c",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:57:27.131864Z"
+  },
+  "tributi_tari": {
+   "service_id": "003051:comweb:pagamento-tassa-rifiuti-tari-659-55932-1-0701420c872ddb56707f71eb93058cd4",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.colazza.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-55932-1-0701420c872ddb56707f71eb93058cd4",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.colazza.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-55932-1-0701420c872ddb56707f71eb93058cd4",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.colazza.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-55932-1-0701420c872ddb56707f71eb93058cd4",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:57:29.226668Z"
+  }
+ }
+}

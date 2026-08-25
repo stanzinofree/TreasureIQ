@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "010058",
+ "services": {
+  "tributi_imu": {
+   "service_id": "010058:wp:662",
+   "title": "IMU",
+   "source_url": "https://comune.serraricco.ge.it/servizio/imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.serraricco.ge.it/servizio/imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.serraricco.ge.it/servizio/imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:12:38.960466Z"
+  }
+ }
+}

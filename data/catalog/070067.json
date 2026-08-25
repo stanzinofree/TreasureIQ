@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "070067",
+ "services": {
+  "accesso_atti": {
+   "service_id": "070067:wp:1858",
+   "title": "Richiedere accesso agli atti",
+   "source_url": "https://www.comune.sangiulianodelsannio.cb.it/servizio/accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sangiulianodelsannio.cb.it/servizio/accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sangiulianodelsannio.cb.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:25:16.162567Z"
+  },
+  "carta_identita": {
+   "service_id": "070067:wp:123",
+   "title": "Carta d’identità elettronica (CIE)",
+   "source_url": "https://www.comune.sangiulianodelsannio.cb.it/servizio/carta-didentita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sangiulianodelsannio.cb.it/servizio/carta-didentita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sangiulianodelsannio.cb.it/servizio/carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:25:17.656598Z"
+  },
+  "stato_civile": {
+   "service_id": "070067:wp:2246",
+   "title": "Richiesta certificato di matrimonio",
+   "source_url": "https://www.comune.sangiulianodelsannio.cb.it/servizio/richiesta-certificato-di-matrimonio/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sangiulianodelsannio.cb.it/servizio/richiesta-certificato-di-matrimonio/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sangiulianodelsannio.cb.it/servizio/richiesta-certificato-di-matrimonio/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:25:19.298948Z"
+  },
+  "tributi_imu": {
+   "service_id": "070067:wp:2236",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.sangiulianodelsannio.cb.it/servizio/pagare-tributi-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sangiulianodelsannio.cb.it/servizio/pagare-tributi-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sangiulianodelsannio.cb.it/servizio/pagare-tributi-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:25:21.082444Z"
+  }
+ }
+}

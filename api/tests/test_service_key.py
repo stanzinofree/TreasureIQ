@@ -21,21 +21,59 @@ from treasureiq.chat.service_key import riconosci_service_key
         ("voglio fare il cambio di residenza", ServiceKey.CAMBIO_RESIDENZA),
         ("come faccio l'accesso agli atti", ServiceKey.ACCESSO_ATTI),
         ("certificato di nascita", ServiceKey.STATO_CIVILE),
-        ("devo pagare la TARI", ServiceKey.TRIBUTI),
-        ("informazioni sull'IMU", ServiceKey.TRIBUTI),
+        ("stato civile", ServiceKey.STATO_CIVILE),
+        ("certificato di matrimonio", ServiceKey.STATO_CIVILE),
+        # TRIBUTI split per-tax: each tax names its own key; the generic
+        # "tributi" is deliberately unrecognised (see negatives below).
+        ("devo pagare la TARI", ServiceKey.TRIBUTI_TARI),
+        ("informazioni sull'IMU", ServiceKey.TRIBUTI_IMU),
+        ("tassa rifiuti non pagata", ServiceKey.TRIBUTI_TARI),
         # out of vocabulary → None (no nearest-neighbour fallback)
         ("vorrei un contributo per l'affitto", None),
+        # generic "tributi" is NOT a marker after the split: it did not
+        # discriminate a tax and its substring leaked onto "contributi" (grants,
+        # a different service). Both stay honestly unrecognised.
+        ("pagamento tributi comunali", None),
+        ("Richiesta contributi per attività associazioni", None),
+        # both taxes named at once → two keys → ambiguous → None
+        ("devo pagare IMU e TARI", None),
         ("ciao", None),
         ("modulo per il passaporto", None),
         # generic 'residenza' alone is not a marker
         ("residenza", None),
+        # bare 'matrimonio' is NOT a marker: a distinct sub-service must not
+        # collapse into the generic civil-registry key.
+        ("richiedere una pubblicazione di matrimonio", None),
+        ("prenotazione sala matrimoni", None),
+        ("matrimonio", None),
         # ambiguous: two distinct keys → None
         ("carta d'identità e cambio residenza", None),
         ("carta d'identità e accesso agli atti", None),
+        # REAL connector title forms: titles arrive as HTML.  Entity-encoded
+        # and typographic apostrophes must confirm exactly like the ASCII form —
+        # these were live false-misses (Borgaro, Lesa, Meina) before the
+        # normalizer.
+        ("Carta d&#8217;identità elettronica (C.I.E)", ServiceKey.CARTA_IDENTITA),
+        ("Essere Cittadino &#8211; Carta d&#8217;Identità", ServiceKey.CARTA_IDENTITA),
+        ("Rilascio carta d’identità elettronica (CIE)", ServiceKey.CARTA_IDENTITA),
+        ("Carta d&#39;Identità Elettronica", ServiceKey.CARTA_IDENTITA),
     ],
 )
 def test_riconosci_service_key_golden(message, expected):
     assert riconosci_service_key(message) is expected
+
+
+def test_normalizzazione_idempotente_e_senza_falsi_positivi():
+    # The normalizer only canonicalises (unescape + apostrophe fold): a clean,
+    # unmarked string stays unmarked, and re-normalising an already-decoded
+    # title is a no-op — no marker is ever added.
+    from treasureiq.chat.service_key import _normalizza
+
+    assert _normalizza("carta d'identità") == "carta d'identità"
+    assert _normalizza("Carta d’Identità") == "carta d'identità"
+    assert _normalizza("Carta d&#8217;Identità") == "carta d'identità"
+    # unmarked text carries no key even after normalisation
+    assert riconosci_service_key("&#8217;&#8211; nessun servizio &#8230;") is None
 
 
 def test_riconoscimento_deterministico():

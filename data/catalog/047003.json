@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "047003",
+ "services": {
+  "carta_identita": {
+   "service_id": "047003:comweb:carta-d-identita-elettronica-cie-788-10251-1-7eacd68d7acd27d1a1c0107ff71832b8",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.buggiano.pt.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-10251-1-7eacd68d7acd27d1a1c0107ff71832b8",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.buggiano.pt.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-10251-1-7eacd68d7acd27d1a1c0107ff71832b8",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.buggiano.pt.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-10251-1-7eacd68d7acd27d1a1c0107ff71832b8",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T13:55:23.466849Z"
+  },
+  "tributi_tari": {
+   "service_id": "047003:comweb:pagamento-tassa-rifiuti-tari-659-10343-1-f60bf3ce9e3eca71701e6a2008cc307f",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.buggiano.pt.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-10343-1-f60bf3ce9e3eca71701e6a2008cc307f",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.buggiano.pt.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-10343-1-f60bf3ce9e3eca71701e6a2008cc307f",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.buggiano.pt.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-10343-1-f60bf3ce9e3eca71701e6a2008cc307f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T13:55:25.736659Z"
+  }
+ }
+}

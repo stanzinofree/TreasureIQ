@@ -1,0 +1,169 @@
+{
+ "municipality_istat": "001268",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001268:comweb:richiedere-l-accesso-agli-atti-317-21879-1-817fbfd162c1e01ceb6496a0411d3564",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.strambinello.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-21879-1-817fbfd162c1e01ceb6496a0411d3564",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.strambinello.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-21879-1-817fbfd162c1e01ceb6496a0411d3564",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.strambinello.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-21879-1-817fbfd162c1e01ceb6496a0411d3564",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.strambinello.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=strmbnll1111&IDPr=11505",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.strambinello.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-21879-1-817fbfd162c1e01ceb6496a0411d3564",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:50:42.726773Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001268:comweb:cambio-residenza-305-21877-1-97bd5d316092b9fb1f2b33f6fcc8db46",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.strambinello.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-21877-1-97bd5d316092b9fb1f2b33f6fcc8db46",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.strambinello.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-21877-1-97bd5d316092b9fb1f2b33f6fcc8db46",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.strambinello.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-21877-1-97bd5d316092b9fb1f2b33f6fcc8db46",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.strambinello.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-21877-1-97bd5d316092b9fb1f2b33f6fcc8db46",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:50:44.890456Z"
+  },
+  "carta_identita": {
+   "service_id": "001268:comweb:carta-d-identita-elettronica-cie-788-21867-1-d028ba749a3d3be621a90932b7fcb278",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.strambinello.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-21867-1-d028ba749a3d3be621a90932b7fcb278",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.strambinello.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-21867-1-d028ba749a3d3be621a90932b7fcb278",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.strambinello.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-21867-1-d028ba749a3d3be621a90932b7fcb278",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:50:47.526663Z"
+  },
+  "stato_civile": {
+   "service_id": "001268:comweb:richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-21867-1-258b8c3c058ab0c2941d2c043b668fd9",
+   "title": "Richiesta di certificati/attestazioni/estratti di stato civile",
+   "source_url": "https://www.comune.strambinello.to.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-21867-1-258b8c3c058ab0c2941d2c043b668fd9",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.strambinello.to.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-21867-1-258b8c3c058ab0c2941d2c043b668fd9",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.strambinello.to.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-21867-1-258b8c3c058ab0c2941d2c043b668fd9",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:50:50.538416Z"
+  },
+  "tributi_imu": {
+   "service_id": "001268:comweb:pagare-tributi-imu-600-21968-1-e92c5227a0365a261734478fef064f55",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.strambinello.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-21968-1-e92c5227a0365a261734478fef064f55",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.strambinello.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-21968-1-e92c5227a0365a261734478fef064f55",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.strambinello.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-21968-1-e92c5227a0365a261734478fef064f55",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:50:53.407716Z"
+  },
+  "tributi_tari": {
+   "service_id": "001268:comweb:pagamento-tassa-rifiuti-tari-659-21959-1-33eddcb2a12d8b7cc29e058a468ce587",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.strambinello.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-21959-1-33eddcb2a12d8b7cc29e058a468ce587",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.strambinello.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-21959-1-33eddcb2a12d8b7cc29e058a468ce587",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.strambinello.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-21959-1-33eddcb2a12d8b7cc29e058a468ce587",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:50:56.626962Z"
+  }
+ }
+}

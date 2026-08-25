@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "024073",
+ "services": {
+  "carta_identita": {
+   "service_id": "024073:wp:905",
+   "title": "Carta D'Identità Elettronica",
+   "source_url": "https://www.comune.nove.vi.it/?post_type=servizio&p=905",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.nove.vi.it/?post_type=servizio&p=905",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.nove.vi.it/?post_type=servizio&p=905",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:10:31.815242Z"
+  },
+  "stato_civile": {
+   "service_id": "024073:wp:1726",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.nove.vi.it/?post_type=servizio&p=1726",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.nove.vi.it/?post_type=servizio&p=1726",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.nove.vi.it/?post_type=servizio&p=1726",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:10:48.323100Z"
+  },
+  "tributi_imu": {
+   "service_id": "024073:wp:1695",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.nove.vi.it/?post_type=servizio&p=1695",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.nove.vi.it/?post_type=servizio&p=1695",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.nove.vi.it/?post_type=servizio&p=1695",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:11:00.441755Z"
+  }
+ }
+}

@@ -1,0 +1,87 @@
+{
+ "municipality_istat": "001098",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001098:comweb:richiedere-l-accesso-agli-atti-317-25839-1-473128c9333a6b07035d9191e9bf0fb0",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.cuorgne.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-25839-1-473128c9333a6b07035d9191e9bf0fb0",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cuorgne.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-25839-1-473128c9333a6b07035d9191e9bf0fb0",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cuorgne.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-25839-1-473128c9333a6b07035d9191e9bf0fb0",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:42:44.768724Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001098:comweb:cambio-residenza-305-25837-1-ed9c94309024dbe1e5047b4eebfc9f24",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.cuorgne.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-25837-1-ed9c94309024dbe1e5047b4eebfc9f24",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cuorgne.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-25837-1-ed9c94309024dbe1e5047b4eebfc9f24",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cuorgne.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-25837-1-ed9c94309024dbe1e5047b4eebfc9f24",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.cuorgne.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-25837-1-ed9c94309024dbe1e5047b4eebfc9f24",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:42:46.779413Z"
+  },
+  "tributi_tari": {
+   "service_id": "001098:comweb:pagamento-tassa-rifiuti-tari-659-25919-1-c4b8ec26a1ea65c0cf2cb012778c571b",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.cuorgne.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-25919-1-c4b8ec26a1ea65c0cf2cb012778c571b",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cuorgne.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-25919-1-c4b8ec26a1ea65c0cf2cb012778c571b",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cuorgne.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-25919-1-c4b8ec26a1ea65c0cf2cb012778c571b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:42:49.117432Z"
+  }
+ }
+}

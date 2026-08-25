@@ -1,0 +1,87 @@
+{
+ "municipality_istat": "001298",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001298:comweb:richiedere-l-accesso-agli-atti-317-12902-1-6792d22b73c8ed3535e5c5c02142072b",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.vidracco.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-12902-1-6792d22b73c8ed3535e5c5c02142072b",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vidracco.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-12902-1-6792d22b73c8ed3535e5c5c02142072b",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vidracco.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-12902-1-6792d22b73c8ed3535e5c5c02142072b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.vidracco.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=vdrcc212&IDPr=11240",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.vidracco.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-12902-1-6792d22b73c8ed3535e5c5c02142072b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:52:26.071725Z"
+  },
+  "carta_identita": {
+   "service_id": "001298:comweb:carta-d-identita-elettronica-cie-788-12891-1-edad6979eb6004caa03d45ca5f08a1d9",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.vidracco.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-12891-1-edad6979eb6004caa03d45ca5f08a1d9",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vidracco.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-12891-1-edad6979eb6004caa03d45ca5f08a1d9",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vidracco.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-12891-1-edad6979eb6004caa03d45ca5f08a1d9",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:52:29.182807Z"
+  },
+  "tributi_tari": {
+   "service_id": "001298:comweb:pagamento-tassa-rifiuti-tari-659-12983-1-b8363d72ebc0bae557f00d7e04804feb",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.vidracco.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-12983-1-b8363d72ebc0bae557f00d7e04804feb",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vidracco.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-12983-1-b8363d72ebc0bae557f00d7e04804feb",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vidracco.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-12983-1-b8363d72ebc0bae557f00d7e04804feb",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:52:31.494488Z"
+  }
+ }
+}

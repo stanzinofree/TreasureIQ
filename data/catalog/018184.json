@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "018184",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "018184:comweb:cambio-residenza-305-45242-1-4bfa69dfcfc79f4d817b2aa44ad121bf",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.zavattarello.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-45242-1-4bfa69dfcfc79f4d817b2aa44ad121bf",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.zavattarello.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-45242-1-4bfa69dfcfc79f4d817b2aa44ad121bf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.zavattarello.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-45242-1-4bfa69dfcfc79f4d817b2aa44ad121bf",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.zavattarello.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-45242-1-4bfa69dfcfc79f4d817b2aa44ad121bf",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:27:03.207630Z"
+  },
+  "tributi_imu": {
+   "service_id": "018184:comweb:pagare-tributi-imu-600-45333-1-70ae19c1339da69ec801b21fad6a99df",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.zavattarello.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-45333-1-70ae19c1339da69ec801b21fad6a99df",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.zavattarello.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-45333-1-70ae19c1339da69ec801b21fad6a99df",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.zavattarello.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-45333-1-70ae19c1339da69ec801b21fad6a99df",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.zavattarello.pv.it/servizi/portalecontribuente/LoginPNRR.Aspx?CodCat=M150&ACCESSO=C&View=CI",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.zavattarello.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-45333-1-70ae19c1339da69ec801b21fad6a99df",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:27:06.075387Z"
+  },
+  "tributi_tari": {
+   "service_id": "018184:comweb:tassa-rifiuti-tari-954-45324-1-50f6b9d3db206161eb5d6af8756cde39",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.zavattarello.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-45324-1-50f6b9d3db206161eb5d6af8756cde39",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.zavattarello.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-45324-1-50f6b9d3db206161eb5d6af8756cde39",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.zavattarello.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-45324-1-50f6b9d3db206161eb5d6af8756cde39",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:27:08.865915Z"
+  }
+ }
+}

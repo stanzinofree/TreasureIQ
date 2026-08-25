@@ -1,0 +1,159 @@
+{
+ "municipality_istat": "003036",
+ "services": {
+  "accesso_atti": {
+   "service_id": "003036:comweb:richiedere-l-accesso-agli-atti-317-26103-1-3e770c09a6f6e0fdb5bd2873d07e117f",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.carpignanosesia.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-26103-1-3e770c09a6f6e0fdb5bd2873d07e117f",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.carpignanosesia.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-26103-1-3e770c09a6f6e0fdb5bd2873d07e117f",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.carpignanosesia.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-26103-1-3e770c09a6f6e0fdb5bd2873d07e117f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.carpignanosesia.no.it/servizi/filodiretto2/Login.aspx?ce=crpgnn986&IDPr=9728",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.carpignanosesia.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-26103-1-3e770c09a6f6e0fdb5bd2873d07e117f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:56:40.356318Z"
+  },
+  "cambio_residenza": {
+   "service_id": "003036:comweb:cambio-residenza-305-26101-1-493e5686e6ad54a163c64177f21a6287",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.carpignanosesia.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-26101-1-493e5686e6ad54a163c64177f21a6287",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.carpignanosesia.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-26101-1-493e5686e6ad54a163c64177f21a6287",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.carpignanosesia.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-26101-1-493e5686e6ad54a163c64177f21a6287",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.carpignanosesia.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-26101-1-493e5686e6ad54a163c64177f21a6287",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:56:42.043011Z"
+  },
+  "carta_identita": {
+   "service_id": "003036:comweb:carta-d-identita-elettronica-cie-788-26091-1-8f1edd5c8a1283ff985bf6b16ecf8ab6",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.carpignanosesia.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-26091-1-8f1edd5c8a1283ff985bf6b16ecf8ab6",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.carpignanosesia.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-26091-1-8f1edd5c8a1283ff985bf6b16ecf8ab6",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.carpignanosesia.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-26091-1-8f1edd5c8a1283ff985bf6b16ecf8ab6",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:56:44.333775Z"
+  },
+  "tributi_imu": {
+   "service_id": "003036:comweb:pagare-tributi-imu-600-26192-1-719a29a90a35cd6913534ae7237170e6",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.carpignanosesia.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-26192-1-719a29a90a35cd6913534ae7237170e6",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.carpignanosesia.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-26192-1-719a29a90a35cd6913534ae7237170e6",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.carpignanosesia.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-26192-1-719a29a90a35cd6913534ae7237170e6",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.carpignanosesia.no.it/servizi/portalecontribuente/calcolatoreimu.aspx?CodCat=B823",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.carpignanosesia.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-26192-1-719a29a90a35cd6913534ae7237170e6",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:56:46.238785Z"
+  },
+  "tributi_tari": {
+   "service_id": "003036:comweb:pagamento-tassa-rifiuti-tari-659-26183-1-b70d68aa71acc5ee28b2a726f33b8518",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.carpignanosesia.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-26183-1-b70d68aa71acc5ee28b2a726f33b8518",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.carpignanosesia.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-26183-1-b70d68aa71acc5ee28b2a726f33b8518",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.carpignanosesia.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-26183-1-b70d68aa71acc5ee28b2a726f33b8518",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:56:48.176669Z"
+  }
+ }
+}

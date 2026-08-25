@@ -1,0 +1,41 @@
+{
+ "municipality_istat": "001267",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "001267:comweb:cambio-residenza-305-40226-1-76cf6c8b1064b0ba27ca3dc1b8b06dce",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.sparone.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-40226-1-76cf6c8b1064b0ba27ca3dc1b8b06dce",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sparone.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-40226-1-76cf6c8b1064b0ba27ca3dc1b8b06dce",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sparone.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-40226-1-76cf6c8b1064b0ba27ca3dc1b8b06dce",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.sparone.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-40226-1-76cf6c8b1064b0ba27ca3dc1b8b06dce",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:50:38.734208Z"
+  }
+ }
+}

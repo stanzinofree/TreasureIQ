@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "028041",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "028041:wp:1104",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.gazzo.pd.it/?post_type=servizio&p=1104",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gazzo.pd.it/?post_type=servizio&p=1104",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gazzo.pd.it/?post_type=servizio&p=1104",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:00:47.813768Z"
+  },
+  "stato_civile": {
+   "service_id": "028041:wp:1107",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.gazzo.pd.it/?post_type=servizio&p=1107",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gazzo.pd.it/?post_type=servizio&p=1107",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gazzo.pd.it/?post_type=servizio&p=1107",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:00:59.908269Z"
+  },
+  "tributi_imu": {
+   "service_id": "028041:wp:1111",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.gazzo.pd.it/?post_type=servizio&p=1111",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gazzo.pd.it/?post_type=servizio&p=1111",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gazzo.pd.it/?post_type=servizio&p=1111",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:01:08.868650Z"
+  }
+ }
+}

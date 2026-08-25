@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "027003",
+ "services": {
+  "accesso_atti": {
+   "service_id": "027003:wp:453",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.campolongo.ve.it/?post_type=servizio&p=453",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.campolongo.ve.it/?post_type=servizio&p=453",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.campolongo.ve.it/?post_type=servizio&p=453",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:38:39.869471Z"
+  },
+  "stato_civile": {
+   "service_id": "027003:wp:1391",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.campolongo.ve.it/?post_type=servizio&p=1391",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.campolongo.ve.it/?post_type=servizio&p=1391",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.campolongo.ve.it/?post_type=servizio&p=1391",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:38:46.789570Z"
+  },
+  "tributi_imu": {
+   "service_id": "027003:wp:1401",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.campolongo.ve.it/?post_type=servizio&p=1401",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.campolongo.ve.it/?post_type=servizio&p=1401",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.campolongo.ve.it/?post_type=servizio&p=1401",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:38:55.217912Z"
+  }
+ }
+}

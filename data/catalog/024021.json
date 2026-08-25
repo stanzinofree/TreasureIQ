@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "024021",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "024021:wp:1328",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.camisanovicentino.vi.it/?post_type=servizio&p=1328",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.camisanovicentino.vi.it/?post_type=servizio&p=1328",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.camisanovicentino.vi.it/?post_type=servizio&p=1328",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:55:36.747333Z"
+  },
+  "carta_identita": {
+   "service_id": "024021:wp:1325",
+   "title": "Rilascio Carta di Identità Elettronica",
+   "source_url": "https://www.comune.camisanovicentino.vi.it/?post_type=servizio&p=1325",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.camisanovicentino.vi.it/?post_type=servizio&p=1325",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.camisanovicentino.vi.it/?post_type=servizio&p=1325",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:55:44.514778Z"
+  },
+  "stato_civile": {
+   "service_id": "024021:wp:1331",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.camisanovicentino.vi.it/?post_type=servizio&p=1331",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.camisanovicentino.vi.it/?post_type=servizio&p=1331",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.camisanovicentino.vi.it/?post_type=servizio&p=1331",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:55:50.687799Z"
+  },
+  "tributi_imu": {
+   "service_id": "024021:wp:1500",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.camisanovicentino.vi.it/?post_type=servizio&p=1500",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.camisanovicentino.vi.it/?post_type=servizio&p=1500",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.camisanovicentino.vi.it/?post_type=servizio&p=1500",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:55:56.496522Z"
+  }
+ }
+}

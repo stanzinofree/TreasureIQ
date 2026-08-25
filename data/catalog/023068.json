@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "023068",
+ "services": {
+  "accesso_atti": {
+   "service_id": "023068:wp:382",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.salizzole.vr.it/?post_type=servizio&p=382",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.salizzole.vr.it/?post_type=servizio&p=382",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.salizzole.vr.it/?post_type=servizio&p=382",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:44:25.759277Z"
+  },
+  "cambio_residenza": {
+   "service_id": "023068:wp:1210",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.salizzole.vr.it/?post_type=servizio&p=1210",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.salizzole.vr.it/?post_type=servizio&p=1210",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.salizzole.vr.it/?post_type=servizio&p=1210",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:44:38.499920Z"
+  },
+  "stato_civile": {
+   "service_id": "023068:wp:1213",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.salizzole.vr.it/?post_type=servizio&p=1213",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.salizzole.vr.it/?post_type=servizio&p=1213",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.salizzole.vr.it/?post_type=servizio&p=1213",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:44:43.605810Z"
+  }
+ }
+}

@@ -1,0 +1,41 @@
+{
+ "municipality_istat": "009038",
+ "services": {
+  "tributi_imu": {
+   "service_id": "009038:wp:15353",
+   "title": "Calcolo IMU",
+   "source_url": "https://comune.millesimo.sv.it/servizio/calcolo-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.millesimo.sv.it/servizio/calcolo-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.millesimo.sv.it/servizio/calcolo-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.millesimo.sv.it/wp-content/uploads/2026/02/condizioni-uso-imu.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.millesimo.sv.it/servizio/calcolo-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:11:49.719255Z"
+  }
+ }
+}

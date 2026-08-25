@@ -1,0 +1,87 @@
+{
+ "municipality_istat": "001266",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001266:comweb:richiedere-l-accesso-agli-atti-317-11978-1-dfdca2d2389bc8639871a7366c09ae89",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.settimovittone.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-11978-1-dfdca2d2389bc8639871a7366c09ae89",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.settimovittone.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-11978-1-dfdca2d2389bc8639871a7366c09ae89",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.settimovittone.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-11978-1-dfdca2d2389bc8639871a7366c09ae89",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.settimovittone.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=sttmvttn153&IDPr=11515",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.settimovittone.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-11978-1-dfdca2d2389bc8639871a7366c09ae89",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:50:24.905633Z"
+  },
+  "carta_identita": {
+   "service_id": "001266:comweb:carta-d-identita-1-11967-1-77dd300f1b524f1c035d9fc930bf8236",
+   "title": "Carta d'Identità",
+   "source_url": "https://www.comune.settimovittone.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-11967-1-77dd300f1b524f1c035d9fc930bf8236",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.settimovittone.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-11967-1-77dd300f1b524f1c035d9fc930bf8236",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.settimovittone.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-11967-1-77dd300f1b524f1c035d9fc930bf8236",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:50:30.731687Z"
+  },
+  "tributi_tari": {
+   "service_id": "001266:comweb:tassa-rifiuti-tari-954-12059-1-1665eed6c8e858593025bebb1849955b",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.settimovittone.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-12059-1-1665eed6c8e858593025bebb1849955b",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.settimovittone.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-12059-1-1665eed6c8e858593025bebb1849955b",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.settimovittone.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-12059-1-1665eed6c8e858593025bebb1849955b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:50:34.127396Z"
+  }
+ }
+}

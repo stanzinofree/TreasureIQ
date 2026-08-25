@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "083074",
+ "services": {
+  "accesso_atti": {
+   "service_id": "083074:wp:247",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.roccellavaldemone.me.it/?post_type=servizio&p=247",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.roccellavaldemone.me.it/?post_type=servizio&p=247",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.roccellavaldemone.me.it/?post_type=servizio&p=247",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:45:49.543061Z"
+  }
+ }
+}

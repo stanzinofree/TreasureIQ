@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "001021",
+ "services": {
+  "tributi_imu": {
+   "service_id": "001021:comweb:pagare-tributi-imu-600-18272-1-f7535713f784bfeace514f98a4191e75",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.barbania.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-18272-1-f7535713f784bfeace514f98a4191e75",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.barbania.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-18272-1-f7535713f784bfeace514f98a4191e75",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.barbania.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-18272-1-f7535713f784bfeace514f98a4191e75",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:39:02.017382Z"
+  }
+ }
+}

@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "015042",
+ "services": {
+  "tributi_imu": {
+   "service_id": "015042:comweb:imposta-municipale-propria-imu-953-17084-1-09f14f6c9dd89d927cfbb3ae9509a60f",
+   "title": "Imposta Municipale Propria (IMU)",
+   "source_url": "https://www.comune.calvignasco.mi.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-17084-1-09f14f6c9dd89d927cfbb3ae9509a60f",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.calvignasco.mi.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-17084-1-09f14f6c9dd89d927cfbb3ae9509a60f",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.calvignasco.mi.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-17084-1-09f14f6c9dd89d927cfbb3ae9509a60f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:15:32.446666Z"
+  }
+ }
+}

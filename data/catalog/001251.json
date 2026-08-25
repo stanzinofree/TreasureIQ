@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "001251",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001251:comweb:richiedere-l-accesso-agli-atti-317-9998-1-ba058338bd88958477cef781fe64fc9d",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.sanponso.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-9998-1-ba058338bd88958477cef781fe64fc9d",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanponso.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-9998-1-ba058338bd88958477cef781fe64fc9d",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanponso.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-9998-1-ba058338bd88958477cef781fe64fc9d",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.sanponso.to.it/Servizi/FiloDiretto2/ProcedimentiClient.aspx?ce=snpns1293&IDPr=10997",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.sanponso.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-9998-1-ba058338bd88958477cef781fe64fc9d",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:49:16.424446Z"
+  },
+  "carta_identita": {
+   "service_id": "001251:comweb:carta-d-identita-elettronica-cie-788-9987-1-7bff9c258fa5124183adcc4d2a2cf67e",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.sanponso.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-9987-1-7bff9c258fa5124183adcc4d2a2cf67e",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanponso.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-9987-1-7bff9c258fa5124183adcc4d2a2cf67e",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanponso.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-9987-1-7bff9c258fa5124183adcc4d2a2cf67e",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.sanponso.to.it/servizi/filodiretto2/ProcedimentiClient.Aspx?CE=snpns1293",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.sanponso.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-9987-1-7bff9c258fa5124183adcc4d2a2cf67e",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:49:20.842097Z"
+  },
+  "tributi_tari": {
+   "service_id": "001251:comweb:pagamento-tassa-rifiuti-tari-659-10079-1-0d944f010bfd490181e7473eed5145d8",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.sanponso.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-10079-1-0d944f010bfd490181e7473eed5145d8",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanponso.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-10079-1-0d944f010bfd490181e7473eed5145d8",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanponso.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-10079-1-0d944f010bfd490181e7473eed5145d8",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:49:23.973806Z"
+  }
+ }
+}

@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "024019",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "024019:wp:945",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.caltrano.vi.it/?post_type=servizio&p=945",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.caltrano.vi.it/?post_type=servizio&p=945",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.caltrano.vi.it/?post_type=servizio&p=945",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:54:39.851544Z"
+  },
+  "stato_civile": {
+   "service_id": "024019:wp:948",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.caltrano.vi.it/?post_type=servizio&p=948",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.caltrano.vi.it/?post_type=servizio&p=948",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.caltrano.vi.it/?post_type=servizio&p=948",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:54:45.866466Z"
+  },
+  "tributi_imu": {
+   "service_id": "024019:wp:982",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.caltrano.vi.it/?post_type=servizio&p=982",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.caltrano.vi.it/?post_type=servizio&p=982",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.caltrano.vi.it/?post_type=servizio&p=982",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:54:52.925815Z"
+  }
+ }
+}

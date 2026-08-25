@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "024030",
+ "services": {
+  "accesso_atti": {
+   "service_id": "024030:wp:274",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.chiuppano.vi.it/?post_type=servizio&p=274",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.chiuppano.vi.it/?post_type=servizio&p=274",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.chiuppano.vi.it/?post_type=servizio&p=274",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:56:57.103537Z"
+  },
+  "cambio_residenza": {
+   "service_id": "024030:wp:1315",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.chiuppano.vi.it/?post_type=servizio&p=1315",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.chiuppano.vi.it/?post_type=servizio&p=1315",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.chiuppano.vi.it/?post_type=servizio&p=1315",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:57:02.392131Z"
+  },
+  "carta_identita": {
+   "service_id": "024030:wp:1064",
+   "title": "Rilascio PIN e PUK per CIE",
+   "source_url": "https://www.comune.chiuppano.vi.it/?post_type=servizio&p=1064",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.chiuppano.vi.it/?post_type=servizio&p=1064",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.chiuppano.vi.it/?post_type=servizio&p=1064",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:57:09.634717Z"
+  },
+  "stato_civile": {
+   "service_id": "024030:wp:1339",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.chiuppano.vi.it/?post_type=servizio&p=1339",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.chiuppano.vi.it/?post_type=servizio&p=1339",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.chiuppano.vi.it/?post_type=servizio&p=1339",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:57:17.039563Z"
+  }
+ }
+}

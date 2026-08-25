@@ -1,0 +1,64 @@
+{
+ "municipality_istat": "075048",
+ "services": {
+  "accesso_atti": {
+   "service_id": "075048:wp:2046",
+   "title": "Accesso agli Atti",
+   "source_url": "https://www.comune.monteroni.le.it/servizio/3/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.monteroni.le.it/servizio/3/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.monteroni.le.it/servizio/3/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.monteroni.le.it/portal/autenticazione/login?service=https%3A%2F%2Fservizi.comune.monteroni.le.it%2Fopenweb%2Fcaricamento_pratiche%2Fpratiche.php%3Fservizio%3Dcaricapratiche%26area%3DTPROC0003",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.monteroni.le.it/servizio/3/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:30:06.347521Z"
+  },
+  "carta_identita": {
+   "service_id": "075048:wp:610",
+   "title": "Rilascio carta d'identità elettronica (C.I.E.)",
+   "source_url": "https://www.comune.monteroni.le.it/servizio/affari-generali/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.monteroni.le.it/servizio/affari-generali/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.monteroni.le.it/servizio/affari-generali/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:30:08.761462Z"
+  }
+ }
+}

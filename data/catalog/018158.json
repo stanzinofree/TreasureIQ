@@ -1,0 +1,123 @@
+{
+ "municipality_istat": "018158",
+ "services": {
+  "accesso_atti": {
+   "service_id": "018158:comweb:richiedere-l-accesso-agli-atti-317-27423-1-7d74f6b8282f4e77cae35dc4acce11db",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.torredenegri.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-27423-1-7d74f6b8282f4e77cae35dc4acce11db",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.torredenegri.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-27423-1-7d74f6b8282f4e77cae35dc4acce11db",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.torredenegri.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-27423-1-7d74f6b8282f4e77cae35dc4acce11db",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.torredenegri.pv.it/lang/it/servizi/richiedere-laccesso-agli-atti/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.torredenegri.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-27423-1-7d74f6b8282f4e77cae35dc4acce11db",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:26:00.909392Z"
+  },
+  "cambio_residenza": {
+   "service_id": "018158:comweb:cambio-residenza-305-27421-1-c28de64b374f37294310391a26acf36c",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.torredenegri.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-27421-1-c28de64b374f37294310391a26acf36c",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.torredenegri.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-27421-1-c28de64b374f37294310391a26acf36c",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.torredenegri.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-27421-1-c28de64b374f37294310391a26acf36c",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.torredenegri.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-27421-1-c28de64b374f37294310391a26acf36c",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:26:04.347306Z"
+  },
+  "carta_identita": {
+   "service_id": "018158:comweb:carta-d-identita-elettronica-cie-788-27411-1-4dcd88376fb0a7fc1196a82e95e31443",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.torredenegri.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-27411-1-4dcd88376fb0a7fc1196a82e95e31443",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.torredenegri.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-27411-1-4dcd88376fb0a7fc1196a82e95e31443",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.torredenegri.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-27411-1-4dcd88376fb0a7fc1196a82e95e31443",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:26:06.824979Z"
+  },
+  "tributi_imu": {
+   "service_id": "018158:comweb:pagare-tributi-imu-600-27512-1-9b36873ab9bbbdc77794a76feec539c5",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.torredenegri.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-27512-1-9b36873ab9bbbdc77794a76feec539c5",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.torredenegri.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-27512-1-9b36873ab9bbbdc77794a76feec539c5",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.torredenegri.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-27512-1-9b36873ab9bbbdc77794a76feec539c5",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:26:09.264682Z"
+  }
+ }
+}

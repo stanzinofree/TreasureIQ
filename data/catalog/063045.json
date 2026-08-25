@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "063045",
+ "services": {
+  "accesso_atti": {
+   "service_id": "063045:wp:1137",
+   "title": "Accesso agli atti",
+   "source_url": "https://comune.melito.na.it/servizio/accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.melito.na.it/servizio/accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.melito.na.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:14:49.235685Z"
+  },
+  "cambio_residenza": {
+   "service_id": "063045:wp:1145",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.melito.na.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.melito.na.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.melito.na.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:14:55.400160Z"
+  },
+  "tributi_imu": {
+   "service_id": "063045:wp:1147",
+   "title": "Pagamento tributi IMU",
+   "source_url": "https://comune.melito.na.it/servizio/pagamento-tributi-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.melito.na.it/servizio/pagamento-tributi-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.melito.na.it/servizio/pagamento-tributi-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:15:01.456708Z"
+  }
+ }
+}

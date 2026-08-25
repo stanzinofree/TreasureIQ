@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "011021",
+ "services": {
+  "carta_identita": {
+   "service_id": "011021:wp:603",
+   "title": "Carta d’identità elettronica (CIE)",
+   "source_url": "https://www.comune.pignone.sp.it/servizio/carta-didentita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pignone.sp.it/servizio/carta-didentita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pignone.sp.it/servizio/carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:13:03.844703Z"
+  },
+  "stato_civile": {
+   "service_id": "011021:wp:597",
+   "title": "Richiesta Rilascio Certificati Anagrafici-Stato Civile",
+   "source_url": "https://www.comune.pignone.sp.it/servizio/richiesta-rilascio-certificati-anagrafici-stato-civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pignone.sp.it/servizio/richiesta-rilascio-certificati-anagrafici-stato-civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pignone.sp.it/servizio/richiesta-rilascio-certificati-anagrafici-stato-civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:13:06.841620Z"
+  },
+  "tributi_imu": {
+   "service_id": "011021:wp:610",
+   "title": "Pagamento IMU",
+   "source_url": "https://www.comune.pignone.sp.it/servizio/pagamento-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pignone.sp.it/servizio/pagamento-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pignone.sp.it/servizio/pagamento-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:13:08.860923Z"
+  },
+  "tributi_tari": {
+   "service_id": "011021:wp:617",
+   "title": "TARI &#8211; Tassa sui rifiuti",
+   "source_url": "https://www.comune.pignone.sp.it/servizio/tari-tassa-sui-rifiuti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pignone.sp.it/servizio/tari-tassa-sui-rifiuti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pignone.sp.it/servizio/tari-tassa-sui-rifiuti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:13:10.728062Z"
+  }
+ }
+}

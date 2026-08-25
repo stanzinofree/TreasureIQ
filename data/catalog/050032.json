@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "050032",
+ "services": {
+  "tributi_imu": {
+   "service_id": "050032:wp:313",
+   "title": "Calcolo e pagamento IMU",
+   "source_url": "https://comune.san-miniato.pi.it/servizio/calcolo-e-pagamento-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.san-miniato.pi.it/servizio/calcolo-e-pagamento-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.san-miniato.pi.it/servizio/calcolo-e-pagamento-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:57:14.023471Z"
+  }
+ }
+}

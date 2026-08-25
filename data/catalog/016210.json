@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "016210",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "016210:wp:1370",
+   "title": "Cambio di Residenza",
+   "source_url": "https://comune.taleggio.bg.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.taleggio.bg.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.taleggio.bg.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:17:00.643417Z"
+  },
+  "stato_civile": {
+   "service_id": "016210:wp:1365",
+   "title": "Stato civile cittadinanza italiana",
+   "source_url": "https://comune.taleggio.bg.it/servizio/stato-civile-cittadinanza-italiana/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.taleggio.bg.it/servizio/stato-civile-cittadinanza-italiana/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.taleggio.bg.it/servizio/stato-civile-cittadinanza-italiana/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:17:12.705494Z"
+  }
+ }
+}

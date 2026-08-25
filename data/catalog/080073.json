@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "080073",
+ "services": {
+  "accesso_atti": {
+   "service_id": "080073:wp:198",
+   "title": "Richiedere l’accesso agli atti",
+   "source_url": "https://comune.sanlorenzo.rc.it/servizio/richiedere-laccesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.sanlorenzo.rc.it/servizio/richiedere-laccesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.sanlorenzo.rc.it/servizio/richiedere-laccesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:40:37.357827Z"
+  },
+  "cambio_residenza": {
+   "service_id": "080073:wp:237",
+   "title": "Richiesta dichiarazione di cambio di residenza",
+   "source_url": "https://comune.sanlorenzo.rc.it/servizio/richiesta-dichiarazione-di-cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.sanlorenzo.rc.it/servizio/richiesta-dichiarazione-di-cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.sanlorenzo.rc.it/servizio/richiesta-dichiarazione-di-cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:40:41.559559Z"
+  }
+ }
+}

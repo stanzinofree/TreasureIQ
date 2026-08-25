@@ -1,0 +1,64 @@
+{
+ "municipality_istat": "002025",
+ "services": {
+  "accesso_atti": {
+   "service_id": "002025:comweb:richiedere-l-accesso-agli-atti-317-55187-1-271287678adb1084f974c42a0b296cdb",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.campertogno.vc.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-55187-1-271287678adb1084f974c42a0b296cdb",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.campertogno.vc.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-55187-1-271287678adb1084f974c42a0b296cdb",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.campertogno.vc.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-55187-1-271287678adb1084f974c42a0b296cdb",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.campertogno.vc.it/lang/it/servizi/richiedere-laccesso-agli-atti/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.campertogno.vc.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-55187-1-271287678adb1084f974c42a0b296cdb",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:53:55.884095Z"
+  },
+  "tributi_tari": {
+   "service_id": "002025:comweb:agevolazioni-tassa-rifiuti-tari-975-55267-1-d3f9a2849f07490ff20ba5897e2deb71",
+   "title": "Agevolazioni Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.campertogno.vc.it/it-it/servizi/tributi-finanze-e-contravvenzioni/agevolazioni-tassa-rifiuti-tari-975-55267-1-d3f9a2849f07490ff20ba5897e2deb71",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.campertogno.vc.it/it-it/servizi/tributi-finanze-e-contravvenzioni/agevolazioni-tassa-rifiuti-tari-975-55267-1-d3f9a2849f07490ff20ba5897e2deb71",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.campertogno.vc.it/it-it/servizi/tributi-finanze-e-contravvenzioni/agevolazioni-tassa-rifiuti-tari-975-55267-1-d3f9a2849f07490ff20ba5897e2deb71",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:53:58.593135Z"
+  }
+ }
+}

@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "023002",
+ "services": {
+  "carta_identita": {
+   "service_id": "023002:wp:289",
+   "title": "Rilascio Carta d'Identità Elettronica",
+   "source_url": "https://www.comune.albaredodadige.vr.it/?post_type=servizio&p=289",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.albaredodadige.vr.it/?post_type=servizio&p=289",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.albaredodadige.vr.it/?post_type=servizio&p=289",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:29:58.134936Z"
+  }
+ }
+}

@@ -1,0 +1,146 @@
+{
+ "municipality_istat": "023060",
+ "services": {
+  "accesso_atti": {
+   "service_id": "023060:wp:1062",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.poveglianoveronese.vr.it/?post_type=servizio&p=1062",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.poveglianoveronese.vr.it/?post_type=servizio&p=1062",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.poveglianoveronese.vr.it/?post_type=servizio&p=1062",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.poveglianoveronese.vr.it/wp-content/uploads/2024/08/TARIFFE.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.poveglianoveronese.vr.it/?post_type=servizio&p=1062",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.poveglianoveronese.vr.it/wp-content/uploads/2024/09/DGC-2017-UT-Povegliano-Veronese.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.poveglianoveronese.vr.it/?post_type=servizio&p=1062",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:39:12.741914Z"
+  },
+  "cambio_residenza": {
+   "service_id": "023060:wp:1510",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.poveglianoveronese.vr.it/?post_type=servizio&p=1510",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.poveglianoveronese.vr.it/?post_type=servizio&p=1510",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.poveglianoveronese.vr.it/?post_type=servizio&p=1510",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:39:25.170554Z"
+  },
+  "carta_identita": {
+   "service_id": "023060:wp:1195",
+   "title": "Rilascio Carta di Identità Elettronica",
+   "source_url": "https://www.comune.poveglianoveronese.vr.it/?post_type=servizio&p=1195",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.poveglianoveronese.vr.it/?post_type=servizio&p=1195",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.poveglianoveronese.vr.it/?post_type=servizio&p=1195",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:39:39.062847Z"
+  },
+  "stato_civile": {
+   "service_id": "023060:wp:1513",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.poveglianoveronese.vr.it/?post_type=servizio&p=1513",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.poveglianoveronese.vr.it/?post_type=servizio&p=1513",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.poveglianoveronese.vr.it/?post_type=servizio&p=1513",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:39:50.905437Z"
+  },
+  "tributi_imu": {
+   "service_id": "023060:wp:1495",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.poveglianoveronese.vr.it/?post_type=servizio&p=1495",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.poveglianoveronese.vr.it/?post_type=servizio&p=1495",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.poveglianoveronese.vr.it/?post_type=servizio&p=1495",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:39:59.614498Z"
+  }
+ }
+}

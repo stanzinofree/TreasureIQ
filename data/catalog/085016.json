@@ -1,0 +1,123 @@
+{
+ "municipality_istat": "085016",
+ "services": {
+  "accesso_atti": {
+   "service_id": "085016:comweb:richiedere-l-accesso-agli-atti-317-60095-1-f0395559aba0c1a3d94ed6d75c1a94d9",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.san-cataldo.cl.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-60095-1-f0395559aba0c1a3d94ed6d75c1a94d9",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.san-cataldo.cl.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-60095-1-f0395559aba0c1a3d94ed6d75c1a94d9",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.san-cataldo.cl.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-60095-1-f0395559aba0c1a3d94ed6d75c1a94d9",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:47:42.422710Z"
+  },
+  "cambio_residenza": {
+   "service_id": "085016:comweb:cambio-residenza-305-60093-1-e55a20d5e578f94602096ac19b6f1f87",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.san-cataldo.cl.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-60093-1-e55a20d5e578f94602096ac19b6f1f87",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.san-cataldo.cl.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-60093-1-e55a20d5e578f94602096ac19b6f1f87",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.san-cataldo.cl.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-60093-1-e55a20d5e578f94602096ac19b6f1f87",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.san-cataldo.cl.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-60093-1-e55a20d5e578f94602096ac19b6f1f87",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:47:46.012659Z"
+  },
+  "carta_identita": {
+   "service_id": "085016:comweb:carta-d-identita-elettronica-cie-788-60083-1-2e992c17b08e09aae9960833967407de",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.san-cataldo.cl.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-60083-1-2e992c17b08e09aae9960833967407de",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.san-cataldo.cl.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-60083-1-2e992c17b08e09aae9960833967407de",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.san-cataldo.cl.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-60083-1-2e992c17b08e09aae9960833967407de",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:47:49.675273Z"
+  },
+  "stato_civile": {
+   "service_id": "085016:comweb:certificato-di-nascita-26-60088-1-1b6b31c43f82106e927a1d89eb30843d",
+   "title": "Certificato di nascita",
+   "source_url": "https://www.comune.san-cataldo.cl.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-nascita-26-60088-1-1b6b31c43f82106e927a1d89eb30843d",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.san-cataldo.cl.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-nascita-26-60088-1-1b6b31c43f82106e927a1d89eb30843d",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.san-cataldo.cl.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-nascita-26-60088-1-1b6b31c43f82106e927a1d89eb30843d",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/certificati/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.san-cataldo.cl.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-nascita-26-60088-1-1b6b31c43f82106e927a1d89eb30843d",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:47:53.425097Z"
+  }
+ }
+}

@@ -1,0 +1,133 @@
+{
+ "municipality_istat": "018154",
+ "services": {
+  "accesso_atti": {
+   "service_id": "018154:comweb:richiedere-l-accesso-agli-atti-317-31780-1-a2f94abc13cde0cd10bfaecfa1d4ad17",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.suardi.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-31780-1-a2f94abc13cde0cd10bfaecfa1d4ad17",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.suardi.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-31780-1-a2f94abc13cde0cd10bfaecfa1d4ad17",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.suardi.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-31780-1-a2f94abc13cde0cd10bfaecfa1d4ad17",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:25:36.573839Z"
+  },
+  "cambio_residenza": {
+   "service_id": "018154:comweb:cambio-residenza-305-31778-1-78f58da8a202c943b026b4365fe1855b",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.suardi.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-31778-1-78f58da8a202c943b026b4365fe1855b",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.suardi.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-31778-1-78f58da8a202c943b026b4365fe1855b",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.suardi.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-31778-1-78f58da8a202c943b026b4365fe1855b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.suardi.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-31778-1-78f58da8a202c943b026b4365fe1855b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:25:39.336482Z"
+  },
+  "carta_identita": {
+   "service_id": "018154:comweb:carta-d-identita-elettronica-cie-788-31768-1-00e2751d74559c76e2a245d4cee08409",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.suardi.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-31768-1-00e2751d74559c76e2a245d4cee08409",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.suardi.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-31768-1-00e2751d74559c76e2a245d4cee08409",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.suardi.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-31768-1-00e2751d74559c76e2a245d4cee08409",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:25:43.103740Z"
+  },
+  "tributi_imu": {
+   "service_id": "018154:comweb:imposta-municipale-propria-imu-953-31869-1-860d162c3ccbee81439b73c15e97d402",
+   "title": "Imposta Municipale Propria (IMU)",
+   "source_url": "https://www.comune.suardi.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-31869-1-860d162c3ccbee81439b73c15e97d402",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.suardi.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-31869-1-860d162c3ccbee81439b73c15e97d402",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.suardi.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-31869-1-860d162c3ccbee81439b73c15e97d402",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:25:46.432927Z"
+  },
+  "tributi_tari": {
+   "service_id": "018154:comweb:tassa-rifiuti-tari-954-31860-1-b3e511a1f2e7f54181bf6db699b1dc59",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.suardi.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-31860-1-b3e511a1f2e7f54181bf6db699b1dc59",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.suardi.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-31860-1-b3e511a1f2e7f54181bf6db699b1dc59",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.suardi.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-31860-1-b3e511a1f2e7f54181bf6db699b1dc59",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:25:51.478751Z"
+  }
+ }
+}

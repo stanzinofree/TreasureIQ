@@ -1,0 +1,146 @@
+{
+ "municipality_istat": "103042",
+ "services": {
+  "accesso_atti": {
+   "service_id": "103042:comweb:richiedere-l-accesso-agli-atti-317-36532-1-b4abfddb3535d320c1c9097a52559835",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.masera.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-36532-1-b4abfddb3535d320c1c9097a52559835",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.masera.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-36532-1-b4abfddb3535d320c1c9097a52559835",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.masera.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-36532-1-b4abfddb3535d320c1c9097a52559835",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:03:07.613976Z"
+  },
+  "cambio_residenza": {
+   "service_id": "103042:comweb:cambio-residenza-305-36530-1-6d9b0eb3dca2b6244adbe0d18344e91f",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.masera.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-36530-1-6d9b0eb3dca2b6244adbe0d18344e91f",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.masera.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-36530-1-6d9b0eb3dca2b6244adbe0d18344e91f",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.masera.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-36530-1-6d9b0eb3dca2b6244adbe0d18344e91f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.masera.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-36530-1-6d9b0eb3dca2b6244adbe0d18344e91f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:03:09.601228Z"
+  },
+  "carta_identita": {
+   "service_id": "103042:comweb:carta-d-identita-elettronica-cie-788-36520-1-b373950ba197c348d4751583dfbe46a5",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.masera.vb.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-36520-1-b373950ba197c348d4751583dfbe46a5",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.masera.vb.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-36520-1-b373950ba197c348d4751583dfbe46a5",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.masera.vb.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-36520-1-b373950ba197c348d4751583dfbe46a5",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:03:11.796796Z"
+  },
+  "stato_civile": {
+   "service_id": "103042:comweb:certificato-di-nascita-26-36525-1-bac55ad80f19db89b6895e58cdbc271f",
+   "title": "Certificato di nascita",
+   "source_url": "https://www.comune.masera.vb.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-nascita-26-36525-1-bac55ad80f19db89b6895e58cdbc271f",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.masera.vb.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-nascita-26-36525-1-bac55ad80f19db89b6895e58cdbc271f",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.masera.vb.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-nascita-26-36525-1-bac55ad80f19db89b6895e58cdbc271f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/certificati/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.masera.vb.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-nascita-26-36525-1-bac55ad80f19db89b6895e58cdbc271f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:03:13.958805Z"
+  },
+  "tributi_tari": {
+   "service_id": "103042:comweb:pagamento-tassa-rifiuti-tari-659-36612-1-6604624d3acd5b99e6f6c0c54749996e",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.masera.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-36612-1-6604624d3acd5b99e6f6c0c54749996e",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.masera.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-36612-1-6604624d3acd5b99e6f6c0c54749996e",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.masera.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-36612-1-6604624d3acd5b99e6f6c0c54749996e",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:03:15.982974Z"
+  }
+ }
+}

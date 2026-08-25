@@ -1,0 +1,41 @@
+{
+ "municipality_istat": "001093",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001093:comweb:richiedere-l-accesso-agli-atti-317-46564-1-26c20ed568068a3a4a57cc05f65afc0a",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.condove.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-46564-1-26c20ed568068a3a4a57cc05f65afc0a",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.condove.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-46564-1-26c20ed568068a3a4a57cc05f65afc0a",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.condove.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-46564-1-26c20ed568068a3a4a57cc05f65afc0a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.condove.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=cndv412&amp;IDPr=12369",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.condove.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-46564-1-26c20ed568068a3a4a57cc05f65afc0a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:42:26.066061Z"
+  }
+ }
+}

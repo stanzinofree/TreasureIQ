@@ -1,0 +1,87 @@
+{
+ "municipality_istat": "001317",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "001317:comweb:cambio-residenza-305-32570-1-0234872e22adad418a21d5682f72b2bb",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.valdichy.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-32570-1-0234872e22adad418a21d5682f72b2bb",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.valdichy.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-32570-1-0234872e22adad418a21d5682f72b2bb",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.valdichy.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-32570-1-0234872e22adad418a21d5682f72b2bb",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.valdichy.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-32570-1-0234872e22adad418a21d5682f72b2bb",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:53:10.509831Z"
+  },
+  "carta_identita": {
+   "service_id": "001317:comweb:carta-d-identita-elettronica-cie-788-32560-1-20adeb64f96ca4cff40aada1f31cb1ee",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.valdichy.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-32560-1-20adeb64f96ca4cff40aada1f31cb1ee",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.valdichy.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-32560-1-20adeb64f96ca4cff40aada1f31cb1ee",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.valdichy.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-32560-1-20adeb64f96ca4cff40aada1f31cb1ee",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:53:13.447565Z"
+  },
+  "stato_civile": {
+   "service_id": "001317:comweb:richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-32560-1-0c6c708b2c5c3e981fb0090cf695f633",
+   "title": "Richiesta di certificati/attestazioni/estratti di stato civile",
+   "source_url": "https://www.comune.valdichy.to.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-32560-1-0c6c708b2c5c3e981fb0090cf695f633",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.valdichy.to.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-32560-1-0c6c708b2c5c3e981fb0090cf695f633",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.valdichy.to.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-32560-1-0c6c708b2c5c3e981fb0090cf695f633",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:53:16.341310Z"
+  }
+ }
+}

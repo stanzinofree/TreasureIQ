@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "029004",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "029004:wp:2043",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.badiapolesine.ro.it/?post_type=servizio&p=2043",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.badiapolesine.ro.it/?post_type=servizio&p=2043",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.badiapolesine.ro.it/?post_type=servizio&p=2043",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:27:59.417401Z"
+  },
+  "stato_civile": {
+   "service_id": "029004:wp:2046",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.badiapolesine.ro.it/?post_type=servizio&p=2046",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.badiapolesine.ro.it/?post_type=servizio&p=2046",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.badiapolesine.ro.it/?post_type=servizio&p=2046",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:28:05.118861Z"
+  },
+  "tributi_imu": {
+   "service_id": "029004:wp:587",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.badiapolesine.ro.it/?post_type=servizio&p=587",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.badiapolesine.ro.it/?post_type=servizio&p=587",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.badiapolesine.ro.it/?post_type=servizio&p=587",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:28:10.327507Z"
+  }
+ }
+}

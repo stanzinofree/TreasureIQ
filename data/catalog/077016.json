@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "077016",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "077016:wp:949",
+   "title": "Cambio di residenza e di abitazione",
+   "source_url": "https://comune.montalbano.mt.it/servizio/cambio-di-residenza-e-di-abitazione/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.montalbano.mt.it/servizio/cambio-di-residenza-e-di-abitazione/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.montalbano.mt.it/servizio/cambio-di-residenza-e-di-abitazione/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:31:14.138597Z"
+  },
+  "tributi_tari": {
+   "service_id": "077016:wp:1013",
+   "title": "TARI (Tassa rifiuti)",
+   "source_url": "https://comune.montalbano.mt.it/servizio/tari-tassa-rifiuti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.montalbano.mt.it/servizio/tari-tassa-rifiuti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.montalbano.mt.it/servizio/tari-tassa-rifiuti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:31:15.876453Z"
+  }
+ }
+}

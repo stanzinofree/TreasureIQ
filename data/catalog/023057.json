@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "023057",
+ "services": {
+  "accesso_atti": {
+   "service_id": "023057:wp:344",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.pastrengo.vr.it/?post_type=servizio&p=344",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pastrengo.vr.it/?post_type=servizio&p=344",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pastrengo.vr.it/?post_type=servizio&p=344",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:38:09.526619Z"
+  },
+  "stato_civile": {
+   "service_id": "023057:wp:824",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.pastrengo.vr.it/?post_type=servizio&p=824",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pastrengo.vr.it/?post_type=servizio&p=824",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pastrengo.vr.it/?post_type=servizio&p=824",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:38:16.408804Z"
+  },
+  "tributi_imu": {
+   "service_id": "023057:wp:1046",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.pastrengo.vr.it/?post_type=servizio&p=1046",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pastrengo.vr.it/?post_type=servizio&p=1046",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pastrengo.vr.it/?post_type=servizio&p=1046",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:38:27.492647Z"
+  }
+ }
+}

@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "097067",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "097067:wp:1090",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.perledo.lc.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.perledo.lc.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.perledo.lc.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:56:49.053590Z"
+  },
+  "carta_identita": {
+   "service_id": "097067:wp:327",
+   "title": "Carta d&#8217;identità",
+   "source_url": "https://comune.perledo.lc.it/servizio/carta-didentita/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.perledo.lc.it/servizio/carta-didentita/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.perledo.lc.it/servizio/carta-didentita/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:56:52.029223Z"
+  },
+  "stato_civile": {
+   "service_id": "097067:wp:324",
+   "title": "Certificati ed estratti dello stato civile (es. nascita, morte, matrimonio …)",
+   "source_url": "https://comune.perledo.lc.it/servizio/certificati-ed-estratti-dello-stato-civile-es-nascita-morte-matrimonio/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.perledo.lc.it/servizio/certificati-ed-estratti-dello-stato-civile-es-nascita-morte-matrimonio/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.perledo.lc.it/servizio/certificati-ed-estratti-dello-stato-civile-es-nascita-morte-matrimonio/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:56:54.994484Z"
+  }
+ }
+}

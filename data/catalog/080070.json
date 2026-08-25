@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "080070",
+ "services": {
+  "accesso_atti": {
+   "service_id": "080070:wp:325",
+   "title": "Accesso agli atti",
+   "source_url": "https://comune.samo.rc.it/servizio/accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.samo.rc.it/servizio/accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.samo.rc.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:40:30.554943Z"
+  },
+  "tributi_imu": {
+   "service_id": "080070:wp:300",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://comune.samo.rc.it/servizio/pagare-tributi-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.samo.rc.it/servizio/pagare-tributi-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.samo.rc.it/servizio/pagare-tributi-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:40:33.920536Z"
+  }
+ }
+}

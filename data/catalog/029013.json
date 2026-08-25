@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "029013",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "029013:wp:1123",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.castelnovobariano.ro.it/?post_type=servizio&p=1123",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castelnovobariano.ro.it/?post_type=servizio&p=1123",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castelnovobariano.ro.it/?post_type=servizio&p=1123",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:30:08.738129Z"
+  },
+  "carta_identita": {
+   "service_id": "029013:wp:890",
+   "title": "Rilascio Carta di Identità Elettronica",
+   "source_url": "https://www.comune.castelnovobariano.ro.it/?post_type=servizio&p=890",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castelnovobariano.ro.it/?post_type=servizio&p=890",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castelnovobariano.ro.it/?post_type=servizio&p=890",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:30:15.931513Z"
+  },
+  "stato_civile": {
+   "service_id": "029013:wp:1126",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.castelnovobariano.ro.it/?post_type=servizio&p=1126",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castelnovobariano.ro.it/?post_type=servizio&p=1126",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castelnovobariano.ro.it/?post_type=servizio&p=1126",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:30:22.839707Z"
+  },
+  "tributi_imu": {
+   "service_id": "029013:wp:1130",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.castelnovobariano.ro.it/?post_type=servizio&p=1130",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castelnovobariano.ro.it/?post_type=servizio&p=1130",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castelnovobariano.ro.it/?post_type=servizio&p=1130",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:30:28.579567Z"
+  }
+ }
+}

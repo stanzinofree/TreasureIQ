@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "006086",
+ "services": {
+  "accesso_atti": {
+   "service_id": "006086:comweb:richiedere-l-accesso-agli-atti-317-15014-1-8b0e7d8bfa0edd24e710ecc877d4a93c",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.guazzora.al.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-15014-1-8b0e7d8bfa0edd24e710ecc877d4a93c",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.guazzora.al.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-15014-1-8b0e7d8bfa0edd24e710ecc877d4a93c",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.guazzora.al.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-15014-1-8b0e7d8bfa0edd24e710ecc877d4a93c",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:01:38.341946Z"
+  },
+  "carta_identita": {
+   "service_id": "006086:comweb:carta-d-identita-1-15003-1-f0c7bbf985825b703c49a1770594eafc",
+   "title": "Carta d'Identità",
+   "source_url": "https://www.comune.guazzora.al.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-15003-1-f0c7bbf985825b703c49a1770594eafc",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.guazzora.al.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-15003-1-f0c7bbf985825b703c49a1770594eafc",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.guazzora.al.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-15003-1-f0c7bbf985825b703c49a1770594eafc",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:01:41.087366Z"
+  }
+ }
+}

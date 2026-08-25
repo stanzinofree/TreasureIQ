@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "001050",
+ "services": {
+  "carta_identita": {
+   "service_id": "001050:comweb:carta-d-identita-elettronica-cie-788-19623-1-e699a7359d48c15fe003205dfeb02aab",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.candia.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-19623-1-e699a7359d48c15fe003205dfeb02aab",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.candia.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-19623-1-e699a7359d48c15fe003205dfeb02aab",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.candia.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-19623-1-e699a7359d48c15fe003205dfeb02aab",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:40:25.149883Z"
+  },
+  "tributi_imu": {
+   "service_id": "001050:comweb:pagare-tributi-imu-600-19724-1-1e6c52c9d81b6d94b86bfd62a97da65c",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.candia.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-19724-1-1e6c52c9d81b6d94b86bfd62a97da65c",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.candia.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-19724-1-1e6c52c9d81b6d94b86bfd62a97da65c",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.candia.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-19724-1-1e6c52c9d81b6d94b86bfd62a97da65c",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:40:28.753876Z"
+  },
+  "tributi_tari": {
+   "service_id": "001050:comweb:pagamento-tassa-rifiuti-tari-659-19715-1-d35fee5c9c0aaba9c5195f8fa6203950",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.candia.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-19715-1-d35fee5c9c0aaba9c5195f8fa6203950",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.candia.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-19715-1-d35fee5c9c0aaba9c5195f8fa6203950",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.candia.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-19715-1-d35fee5c9c0aaba9c5195f8fa6203950",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:40:33.626654Z"
+  }
+ }
+}

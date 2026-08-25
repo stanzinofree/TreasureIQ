@@ -1,0 +1,87 @@
+{
+ "municipality_istat": "062018",
+ "services": {
+  "accesso_atti": {
+   "service_id": "062018:wp:539",
+   "title": "Accesso agli atti",
+   "source_url": "https://comune.castelpoto.bn.it/servizio/accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.castelpoto.bn.it/servizio/accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.castelpoto.bn.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.castelpoto.bn.it/wp-content/uploads/2024/06/costi-accesso_1_4237AT.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.castelpoto.bn.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:11:14.953876Z"
+  },
+  "cambio_residenza": {
+   "service_id": "062018:wp:742",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.castelpoto.bn.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.castelpoto.bn.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.castelpoto.bn.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:11:17.408707Z"
+  },
+  "carta_identita": {
+   "service_id": "062018:wp:543",
+   "title": "Richiesta CIE",
+   "source_url": "https://comune.castelpoto.bn.it/servizio/richiesta-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.castelpoto.bn.it/servizio/richiesta-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.castelpoto.bn.it/servizio/richiesta-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:11:18.809127Z"
+  }
+ }
+}

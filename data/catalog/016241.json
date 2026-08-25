@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "016241",
+ "services": {
+  "accesso_atti": {
+   "service_id": "016241:wp:2085",
+   "title": "Accesso agli atti",
+   "source_url": "https://www.comune.villadogna.bg.it/servizio/accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.villadogna.bg.it/servizio/accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.villadogna.bg.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:17:18.413424Z"
+  },
+  "stato_civile": {
+   "service_id": "016241:wp:3340",
+   "title": "Separazione o divorzio presso l&#8217;Ufficiale dello Stato Civile",
+   "source_url": "https://www.comune.villadogna.bg.it/servizio/separazione-o-divorzio-presso-lufficiale-dello-stato-civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.villadogna.bg.it/servizio/separazione-o-divorzio-presso-lufficiale-dello-stato-civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.villadogna.bg.it/servizio/separazione-o-divorzio-presso-lufficiale-dello-stato-civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:17:19.735780Z"
+  }
+ }
+}

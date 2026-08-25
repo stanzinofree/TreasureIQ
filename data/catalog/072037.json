@@ -1,0 +1,41 @@
+{
+ "municipality_istat": "072037",
+ "services": {
+  "carta_identita": {
+   "service_id": "072037:wp:388",
+   "title": "Carta d’identità elettronica (CIE)",
+   "source_url": "https://www.comune.rutigliano.ba.it/servizio/carta-didentita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rutigliano.ba.it/servizio/carta-didentita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rutigliano.ba.it/servizio/carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.rutigliano.ba.it/wp-content/uploads/2024/08/Cerificato-di-conformita-Comune-di-Rutigliano.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rutigliano.ba.it/servizio/carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:26:26.583763Z"
+  }
+ }
+}

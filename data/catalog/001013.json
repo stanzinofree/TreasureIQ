@@ -1,0 +1,159 @@
+{
+ "municipality_istat": "001013",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001013:comweb:richiedere-l-accesso-agli-atti-317-43660-1-5fe3e31ee4f500e1cd5430222328de4b",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.avigliana.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-43660-1-5fe3e31ee4f500e1cd5430222328de4b",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.avigliana.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-43660-1-5fe3e31ee4f500e1cd5430222328de4b",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.avigliana.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-43660-1-5fe3e31ee4f500e1cd5430222328de4b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.avigliana.to.it/lang/it/servizi/richiedere-laccesso-agli-atti/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.avigliana.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-43660-1-5fe3e31ee4f500e1cd5430222328de4b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.avigliana.to.it/it-it/servizi/catasto-e-urbanistica/pratiche-edilizie-accesso-agli-atti-987-43671-1-6b8c548c269c78e8c3bebed709799fa9",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.avigliana.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-43660-1-5fe3e31ee4f500e1cd5430222328de4b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:38:37.282046Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001013:comweb:cambio-residenza-305-43658-1-fd8583934fee1c50de962029c0e162dc",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.avigliana.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-43658-1-fd8583934fee1c50de962029c0e162dc",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.avigliana.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-43658-1-fd8583934fee1c50de962029c0e162dc",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.avigliana.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-43658-1-fd8583934fee1c50de962029c0e162dc",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.avigliana.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-43658-1-fd8583934fee1c50de962029c0e162dc",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:38:39.359715Z"
+  },
+  "carta_identita": {
+   "service_id": "001013:comweb:carta-d-identita-elettronica-cie-788-43648-1-1b8da57ae676066d208e3ee3feaa2d6f",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.avigliana.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-43648-1-1b8da57ae676066d208e3ee3feaa2d6f",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.avigliana.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-43648-1-1b8da57ae676066d208e3ee3feaa2d6f",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.avigliana.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-43648-1-1b8da57ae676066d208e3ee3feaa2d6f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:38:41.477180Z"
+  },
+  "stato_civile": {
+   "service_id": "001013:comweb:richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-43648-1-7f82a3319266ab7a9fd35045d1949551",
+   "title": "Richiesta di certificati/attestazioni/estratti di stato civile",
+   "source_url": "https://www.comune.avigliana.to.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-43648-1-7f82a3319266ab7a9fd35045d1949551",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.avigliana.to.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-43648-1-7f82a3319266ab7a9fd35045d1949551",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.avigliana.to.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-43648-1-7f82a3319266ab7a9fd35045d1949551",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:38:43.663071Z"
+  },
+  "tributi_tari": {
+   "service_id": "001013:comweb:tassa-rifiuti-tari-954-43740-1-8e58e2cca056bfadc06156867378793b",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.avigliana.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-43740-1-8e58e2cca056bfadc06156867378793b",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.avigliana.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-43740-1-8e58e2cca056bfadc06156867378793b",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.avigliana.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-43740-1-8e58e2cca056bfadc06156867378793b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:38:45.802492Z"
+  }
+ }
+}

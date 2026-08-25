@@ -1,0 +1,64 @@
+{
+ "municipality_istat": "001289",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001289:comweb:richiedere-l-accesso-agli-atti-317-46168-1-ee7ec031e408ea5d0ccaa5c5601d5e70",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.varisella.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-46168-1-ee7ec031e408ea5d0ccaa5c5601d5e70",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.varisella.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-46168-1-ee7ec031e408ea5d0ccaa5c5601d5e70",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.varisella.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-46168-1-ee7ec031e408ea5d0ccaa5c5601d5e70",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.varisella.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=vrsll192&amp;IDPr=12150",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.varisella.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-46168-1-ee7ec031e408ea5d0ccaa5c5601d5e70",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:51:54.543829Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001289:comweb:cambio-residenza-305-46166-1-9b8163a9c78e20c9e3fb949e0d8a7085",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.varisella.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-46166-1-9b8163a9c78e20c9e3fb949e0d8a7085",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.varisella.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-46166-1-9b8163a9c78e20c9e3fb949e0d8a7085",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.varisella.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-46166-1-9b8163a9c78e20c9e3fb949e0d8a7085",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:51:57.476721Z"
+  }
+ }
+}

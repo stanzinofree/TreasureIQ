@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "007048",
+ "services": {
+  "accesso_atti": {
+   "service_id": "007048:comweb:richiedere-l-accesso-agli-atti-317-30591-1-672ad924fc8d0327d4264b129b46e0c3",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.perloz.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-30591-1-672ad924fc8d0327d4264b129b46e0c3",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.perloz.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-30591-1-672ad924fc8d0327d4264b129b46e0c3",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.perloz.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-30591-1-672ad924fc8d0327d4264b129b46e0c3",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.perloz.ao.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=prlz1160&amp;IDPr=10587",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.perloz.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-30591-1-672ad924fc8d0327d4264b129b46e0c3",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:09:02.158373Z"
+  },
+  "carta_identita": {
+   "service_id": "007048:comweb:carta-d-identita-elettronica-cie-788-30579-1-5972dfbede0219f77937d8b682aeae57",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.perloz.ao.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-30579-1-5972dfbede0219f77937d8b682aeae57",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.perloz.ao.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-30579-1-5972dfbede0219f77937d8b682aeae57",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.perloz.ao.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-30579-1-5972dfbede0219f77937d8b682aeae57",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:09:04.479347Z"
+  },
+  "tributi_imu": {
+   "service_id": "007048:comweb:pagare-tributi-imu-600-30680-1-4a9b042adedb2a5196ab97c91460a4dd",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.perloz.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-30680-1-4a9b042adedb2a5196ab97c91460a4dd",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.perloz.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-30680-1-4a9b042adedb2a5196ab97c91460a4dd",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.perloz.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-30680-1-4a9b042adedb2a5196ab97c91460a4dd",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.amministrazionicomunali.it/imu/calcolo_imu.php",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.perloz.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-30680-1-4a9b042adedb2a5196ab97c91460a4dd",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:09:06.654960Z"
+  }
+ }
+}

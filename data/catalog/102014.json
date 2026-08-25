@@ -1,0 +1,120 @@
+{
+ "municipality_istat": "102014",
+ "services": {
+  "accesso_atti": {
+   "service_id": "102014:wp:2721",
+   "title": "Accesso agli atti",
+   "source_url": "https://www.comune.francavillaangitola.vv.it/servizio/accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.francavillaangitola.vv.it/servizio/accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.francavillaangitola.vv.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T15:00:02.141069Z"
+  },
+  "cambio_residenza": {
+   "service_id": "102014:wp:2730",
+   "title": "Cambio di Residenza",
+   "source_url": "https://www.comune.francavillaangitola.vv.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.francavillaangitola.vv.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.francavillaangitola.vv.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T15:00:06.891453Z"
+  },
+  "carta_identita": {
+   "service_id": "102014:wp:123",
+   "title": "Carta d&#8217;identità elettronica (CIE)",
+   "source_url": "https://www.comune.francavillaangitola.vv.it/servizio/carta-didentita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.francavillaangitola.vv.it/servizio/carta-didentita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.francavillaangitola.vv.it/servizio/carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T15:00:09.224246Z"
+  },
+  "stato_civile": {
+   "service_id": "102014:wp:2713",
+   "title": "Richiesta certificato di matrimonio",
+   "source_url": "https://www.comune.francavillaangitola.vv.it/servizio/richiesta-certificato-di-matrimonio/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.francavillaangitola.vv.it/servizio/richiesta-certificato-di-matrimonio/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.francavillaangitola.vv.it/servizio/richiesta-certificato-di-matrimonio/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T15:00:11.146113Z"
+  },
+  "tributi_imu": {
+   "service_id": "102014:wp:2504",
+   "title": "Calcolo tributi IMU",
+   "source_url": "https://www.comune.francavillaangitola.vv.it/servizio/pagare-tributi-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.francavillaangitola.vv.it/servizio/pagare-tributi-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.francavillaangitola.vv.it/servizio/pagare-tributi-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T15:00:13.190096Z"
+  }
+ }
+}

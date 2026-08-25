@@ -1,0 +1,103 @@
+{
+ "municipality_istat": "030132",
+ "services": {
+  "accesso_atti": {
+   "service_id": "030132:wp:1174",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.verzegnis.ud.it/?post_type=servizio&p=1174",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.verzegnis.ud.it/?post_type=servizio&p=1174",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.verzegnis.ud.it/?post_type=servizio&p=1174",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:46:55.769816Z"
+  },
+  "carta_identita": {
+   "service_id": "030132:wp:857",
+   "title": "Carta di identità elettronica",
+   "source_url": "https://www.comune.verzegnis.ud.it/?post_type=servizio&p=857",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.verzegnis.ud.it/?post_type=servizio&p=857",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.verzegnis.ud.it/?post_type=servizio&p=857",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.verzegnis.ud.it/wp-content/uploads/2024/11/Mod-CIE-assenso-espatrio-minore.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.verzegnis.ud.it/?post_type=servizio&p=857",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.verzegnis.ud.it/wp-content/uploads/2024/11/Mod-CIE-cittadini-dimoranti.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.verzegnis.ud.it/?post_type=servizio&p=857",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.verzegnis.ud.it/wp-content/uploads/2024/05/Regolamento-sul-procedimento-amministrativo.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.verzegnis.ud.it/?post_type=servizio&p=857",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.verzegnis.ud.it/wp-content/uploads/2024/11/Mod-CIE-autocert_imp_ta-ril_impronte-digitali.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.verzegnis.ud.it/?post_type=servizio&p=857",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:47:05.325331Z"
+  }
+ }
+}

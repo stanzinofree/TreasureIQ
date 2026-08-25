@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "001081",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001081:comweb:richiedere-l-accesso-agli-atti-317-13166-1-c028150688488600929a7cdc2c14ab9f",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.chiusadisanmichele.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-13166-1-c028150688488600929a7cdc2c14ab9f",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.chiusadisanmichele.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-13166-1-c028150688488600929a7cdc2c14ab9f",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.chiusadisanmichele.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-13166-1-c028150688488600929a7cdc2c14ab9f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.chiusadisanmichele.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=chssnmchl133&amp;IDPr=10563",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.chiusadisanmichele.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-13166-1-c028150688488600929a7cdc2c14ab9f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:41:44.332258Z"
+  },
+  "tributi_imu": {
+   "service_id": "001081:comweb:pagare-tributi-imu-600-13256-1-e700b31b58bf783427e6ddcba132a97b",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.chiusadisanmichele.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-13256-1-e700b31b58bf783427e6ddcba132a97b",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.chiusadisanmichele.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-13256-1-e700b31b58bf783427e6ddcba132a97b",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.chiusadisanmichele.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-13256-1-e700b31b58bf783427e6ddcba132a97b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.chiusadisanmichele.to.it/servizi/portalecontribuente/LoginPNRR.Aspx?CodCat=C655&amp;ACCESSO=C&amp;View=CI",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.chiusadisanmichele.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-13256-1-e700b31b58bf783427e6ddcba132a97b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:41:46.399629Z"
+  },
+  "tributi_tari": {
+   "service_id": "001081:comweb:pagamento-tassa-rifiuti-tari-659-13247-1-04f04c93d938a768ad8b50608e493cb4",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.chiusadisanmichele.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-13247-1-04f04c93d938a768ad8b50608e493cb4",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.chiusadisanmichele.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-13247-1-04f04c93d938a768ad8b50608e493cb4",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.chiusadisanmichele.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-13247-1-04f04c93d938a768ad8b50608e493cb4",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:41:49.020268Z"
+  }
+ }
+}

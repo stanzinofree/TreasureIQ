@@ -1,0 +1,123 @@
+{
+ "municipality_istat": "027031",
+ "services": {
+  "accesso_atti": {
+   "service_id": "027031:wp:2162",
+   "title": "Richiesta accesso agli atti",
+   "source_url": "https://www.comune.quartodaltino.ve.it/servizio/richiesta-accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.quartodaltino.ve.it/servizio/richiesta-accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.quartodaltino.ve.it/servizio/richiesta-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:45:30.849079Z"
+  },
+  "cambio_residenza": {
+   "service_id": "027031:wp:1518",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.quartodaltino.ve.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.quartodaltino.ve.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.quartodaltino.ve.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:45:34.175361Z"
+  },
+  "carta_identita": {
+   "service_id": "027031:wp:1248",
+   "title": "Carta d&#8217;Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.quartodaltino.ve.it/servizio/carta-didentita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.quartodaltino.ve.it/servizio/carta-didentita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.quartodaltino.ve.it/servizio/carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:45:36.421339Z"
+  },
+  "tributi_imu": {
+   "service_id": "027031:wp:2461",
+   "title": "Calcolo IMU &#8211; Imposta Municipale Unica",
+   "source_url": "https://www.comune.quartodaltino.ve.it/servizio/calcolo-imu-imposta-municipale-unica/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.quartodaltino.ve.it/servizio/calcolo-imu-imposta-municipale-unica/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.quartodaltino.ve.it/servizio/calcolo-imu-imposta-municipale-unica/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.quartodaltino.ve.it/wp-content/uploads/2025/06/Base-imponibile-ai-fini-Imu-1.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.quartodaltino.ve.it/servizio/calcolo-imu-imposta-municipale-unica/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.quartodaltino.ve.it/wp-content/uploads/2025/06/Informativa-aliquote-IMU-2025-4.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.quartodaltino.ve.it/servizio/calcolo-imu-imposta-municipale-unica/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:45:40.803705Z"
+  }
+ }
+}

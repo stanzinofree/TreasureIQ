@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "001031",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "001031:comweb:cambio-residenza-305-62487-1-96dd77c2197c945ac4a49b8bcbb80eab",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.borgomasino.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-62487-1-96dd77c2197c945ac4a49b8bcbb80eab",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.borgomasino.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-62487-1-96dd77c2197c945ac4a49b8bcbb80eab",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.borgomasino.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-62487-1-96dd77c2197c945ac4a49b8bcbb80eab",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:39:38.327911Z"
+  },
+  "tributi_imu": {
+   "service_id": "001031:comweb:pagare-tributi-imu-600-62578-1-e68368c569beaabde26cb4695b00461f",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.borgomasino.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-62578-1-e68368c569beaabde26cb4695b00461f",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.borgomasino.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-62578-1-e68368c569beaabde26cb4695b00461f",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.borgomasino.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-62578-1-e68368c569beaabde26cb4695b00461f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:39:41.714679Z"
+  },
+  "tributi_tari": {
+   "service_id": "001031:comweb:pagamento-tassa-rifiuti-tari-659-62569-1-eef8f07d7126a42634b9e05a30586cb3",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.borgomasino.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-62569-1-eef8f07d7126a42634b9e05a30586cb3",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.borgomasino.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-62569-1-eef8f07d7126a42634b9e05a30586cb3",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.borgomasino.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-62569-1-eef8f07d7126a42634b9e05a30586cb3",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:39:44.416121Z"
+  }
+ }
+}

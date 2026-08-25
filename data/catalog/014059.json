@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "014059",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "014059:wp:617",
+   "title": "Dichiarazione di Cambio di residenza",
+   "source_url": "https://comune.sernio.so.it/servizio/dichiarazione-di-cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.sernio.so.it/servizio/dichiarazione-di-cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.sernio.so.it/servizio/dichiarazione-di-cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:14:54.339982Z"
+  },
+  "tributi_imu": {
+   "service_id": "014059:wp:796",
+   "title": "Calcolo IMU",
+   "source_url": "https://comune.sernio.so.it/servizio/calcolo-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.sernio.so.it/servizio/calcolo-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.sernio.so.it/servizio/calcolo-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:14:57.130247Z"
+  }
+ }
+}

@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "084033",
+ "services": {
+  "accesso_atti": {
+   "service_id": "084033:wp:35128",
+   "title": "Richiesta Accesso Atti",
+   "source_url": "https://www.comune.ribera.ag.it/servizio/richiesta-accesso-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ribera.ag.it/servizio/richiesta-accesso-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ribera.ag.it/servizio/richiesta-accesso-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:47:11.429995Z"
+  },
+  "carta_identita": {
+   "service_id": "084033:wp:23631",
+   "title": "Agenda CIE",
+   "source_url": "https://www.comune.ribera.ag.it/servizio/agenda-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ribera.ag.it/servizio/agenda-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ribera.ag.it/servizio/agenda-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:47:12.988911Z"
+  },
+  "stato_civile": {
+   "service_id": "084033:wp:23635",
+   "title": "Servizio Stato Civile",
+   "source_url": "https://www.comune.ribera.ag.it/servizio/servizio-stato-civile-t/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ribera.ag.it/servizio/servizio-stato-civile-t/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ribera.ag.it/servizio/servizio-stato-civile-t/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:47:14.687962Z"
+  },
+  "tributi_imu": {
+   "service_id": "084033:wp:23622",
+   "title": "IMU (Imposta Municipale Propria)",
+   "source_url": "https://www.comune.ribera.ag.it/servizio/imu-imposta-municipale-propria/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ribera.ag.it/servizio/imu-imposta-municipale-propria/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ribera.ag.it/servizio/imu-imposta-municipale-propria/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:47:16.513179Z"
+  }
+ }
+}

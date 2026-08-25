@@ -1,0 +1,123 @@
+{
+ "municipality_istat": "001262",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001262:comweb:richiedere-l-accesso-agli-atti-317-23727-1-f6f6bebf43beadcd91b11c96f4a29d8e",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.sciolze.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-23727-1-f6f6bebf43beadcd91b11c96f4a29d8e",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sciolze.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-23727-1-f6f6bebf43beadcd91b11c96f4a29d8e",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sciolze.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-23727-1-f6f6bebf43beadcd91b11c96f4a29d8e",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.sciolze.to.it/lang/it/servizi/richiedere-laccesso-agli-atti/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.sciolze.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-23727-1-f6f6bebf43beadcd91b11c96f4a29d8e",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:49:54.273470Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001262:comweb:cambio-residenza-305-23725-1-f58e5f9f6211f494745b1fb504b3f754",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.sciolze.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-23725-1-f58e5f9f6211f494745b1fb504b3f754",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sciolze.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-23725-1-f58e5f9f6211f494745b1fb504b3f754",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sciolze.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-23725-1-f58e5f9f6211f494745b1fb504b3f754",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.sciolze.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-23725-1-f58e5f9f6211f494745b1fb504b3f754",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:49:58.700522Z"
+  },
+  "tributi_imu": {
+   "service_id": "001262:comweb:pagare-tributi-imu-600-23816-1-7c3c8ec627fd6e1876ad411e99be41fc",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.sciolze.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-23816-1-7c3c8ec627fd6e1876ad411e99be41fc",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sciolze.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-23816-1-7c3c8ec627fd6e1876ad411e99be41fc",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sciolze.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-23816-1-7c3c8ec627fd6e1876ad411e99be41fc",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:50:01.500404Z"
+  },
+  "tributi_tari": {
+   "service_id": "001262:comweb:pagamento-tassa-rifiuti-tari-659-23807-1-02801ba431cd7b6ae851186b7de5df98",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.sciolze.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-23807-1-02801ba431cd7b6ae851186b7de5df98",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sciolze.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-23807-1-02801ba431cd7b6ae851186b7de5df98",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sciolze.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-23807-1-02801ba431cd7b6ae851186b7de5df98",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:50:04.124850Z"
+  }
+ }
+}

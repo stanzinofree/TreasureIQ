@@ -1,0 +1,110 @@
+{
+ "municipality_istat": "019043",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "019043:comweb:cambio-residenza-305-27157-1-f1dc3f8e538ae7b9ad883ac728f0e605",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.fiesco.cr.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-27157-1-f1dc3f8e538ae7b9ad883ac728f0e605",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.fiesco.cr.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-27157-1-f1dc3f8e538ae7b9ad883ac728f0e605",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.fiesco.cr.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-27157-1-f1dc3f8e538ae7b9ad883ac728f0e605",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/?catnome=Anagrafe%2520e%2520stato%2520civile&amp;caturl=https://www.comune.fiesco.cr.it/it-it/servizi/anagrafe-e-stato-civile&amp;servnome=Cambio%2520Residenza&amp;servurl=https://www.comune.fiesco.cr.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-27157-1-f1dc3f8e538ae7b9ad883ac728f0e605",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.fiesco.cr.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-27157-1-f1dc3f8e538ae7b9ad883ac728f0e605",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:27:48.293109Z"
+  },
+  "carta_identita": {
+   "service_id": "019043:comweb:carta-d-identita-elettronica-cie-788-27147-1-af93677848b8374b809c3747440dd40c",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.fiesco.cr.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-27147-1-af93677848b8374b809c3747440dd40c",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.fiesco.cr.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-27147-1-af93677848b8374b809c3747440dd40c",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.fiesco.cr.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-27147-1-af93677848b8374b809c3747440dd40c",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:27:50.152866Z"
+  },
+  "tributi_imu": {
+   "service_id": "019043:comweb:pagare-tributi-imu-600-27248-1-e14aead41b22c9503d092fc662b7832c",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.fiesco.cr.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-27248-1-e14aead41b22c9503d092fc662b7832c",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.fiesco.cr.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-27248-1-e14aead41b22c9503d092fc662b7832c",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.fiesco.cr.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-27248-1-e14aead41b22c9503d092fc662b7832c",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:27:52.199613Z"
+  },
+  "tributi_tari": {
+   "service_id": "019043:comweb:pagamento-tassa-rifiuti-tari-659-27239-1-6a90e6f2da5a67b2e487e6e95b23ce4a",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.fiesco.cr.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-27239-1-6a90e6f2da5a67b2e487e6e95b23ce4a",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.fiesco.cr.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-27239-1-6a90e6f2da5a67b2e487e6e95b23ce4a",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.fiesco.cr.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-27239-1-6a90e6f2da5a67b2e487e6e95b23ce4a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:27:54.189677Z"
+  }
+ }
+}

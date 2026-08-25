@@ -1,0 +1,136 @@
+{
+ "municipality_istat": "029047",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "029047:wp:1469",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.trecenta.ro.it/?post_type=servizio&p=1469",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.trecenta.ro.it/?post_type=servizio&p=1469",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.trecenta.ro.it/?post_type=servizio&p=1469",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:37:06.711328Z"
+  },
+  "carta_identita": {
+   "service_id": "029047:wp:628",
+   "title": "Carta d'identità elettronica - CIE",
+   "source_url": "https://www.comune.trecenta.ro.it/?post_type=servizio&p=628",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.trecenta.ro.it/?post_type=servizio&p=628",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.trecenta.ro.it/?post_type=servizio&p=628",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.trecenta.ro.it/wp-content/uploads/2025/02/Delega-del-genitore-assente.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.trecenta.ro.it/?post_type=servizio&p=628",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.trecenta.ro.it/wp-content/uploads/2025/12/informazioni-pago-pa-CIE.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.trecenta.ro.it/?post_type=servizio&p=628",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:37:14.621075Z"
+  },
+  "stato_civile": {
+   "service_id": "029047:wp:1706",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.trecenta.ro.it/?post_type=servizio&p=1706",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.trecenta.ro.it/?post_type=servizio&p=1706",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.trecenta.ro.it/?post_type=servizio&p=1706",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:37:22.822630Z"
+  },
+  "tributi_imu": {
+   "service_id": "029047:wp:1468",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.trecenta.ro.it/?post_type=servizio&p=1468",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.trecenta.ro.it/?post_type=servizio&p=1468",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.trecenta.ro.it/?post_type=servizio&p=1468",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.trecenta.ro.it/wp-content/uploads/2026/01/Aliquote-IMU-2026.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.trecenta.ro.it/?post_type=servizio&p=1468",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:37:29.956896Z"
+  }
+ }
+}

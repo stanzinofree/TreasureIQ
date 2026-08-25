@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "007014",
+ "services": {
+  "accesso_atti": {
+   "service_id": "007014:comweb:richiedere-l-accesso-agli-atti-317-45640-1-d0de54c0f9debcd82e12fd15235f85f6",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.challand-st-victor.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-45640-1-d0de54c0f9debcd82e12fd15235f85f6",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.challand-st-victor.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-45640-1-d0de54c0f9debcd82e12fd15235f85f6",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.challand-st-victor.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-45640-1-d0de54c0f9debcd82e12fd15235f85f6",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.challand-st-victor.ao.it/lang/it/servizi/richiedere-laccesso-agli-atti/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.challand-st-victor.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-45640-1-d0de54c0f9debcd82e12fd15235f85f6",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:04:42.304440Z"
+  },
+  "cambio_residenza": {
+   "service_id": "007014:comweb:cambio-residenza-305-45638-1-b1095e50ed8cd547df75ea65bc5e83a9",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.challand-st-victor.ao.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-45638-1-b1095e50ed8cd547df75ea65bc5e83a9",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.challand-st-victor.ao.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-45638-1-b1095e50ed8cd547df75ea65bc5e83a9",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.challand-st-victor.ao.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-45638-1-b1095e50ed8cd547df75ea65bc5e83a9",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.challand-st-victor.ao.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-45638-1-b1095e50ed8cd547df75ea65bc5e83a9",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:04:44.237539Z"
+  },
+  "tributi_imu": {
+   "service_id": "007014:comweb:pagare-tributi-imu-600-45729-1-392177ba300be76700020f0fe8b08034",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.challand-st-victor.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-45729-1-392177ba300be76700020f0fe8b08034",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.challand-st-victor.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-45729-1-392177ba300be76700020f0fe8b08034",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.challand-st-victor.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-45729-1-392177ba300be76700020f0fe8b08034",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:04:46.313308Z"
+  }
+ }
+}

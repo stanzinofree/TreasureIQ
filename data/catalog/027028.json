@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "027028",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "027028:wp:2432",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.pianiga.ve.it/servizio/cambio-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pianiga.ve.it/servizio/cambio-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pianiga.ve.it/servizio/cambio-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:45:19.178131Z"
+  },
+  "carta_identita": {
+   "service_id": "027028:wp:1848",
+   "title": "Carta d&#8217;identità elettronica &#8211; CIE",
+   "source_url": "https://www.comune.pianiga.ve.it/servizio/carta-identita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pianiga.ve.it/servizio/carta-identita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pianiga.ve.it/servizio/carta-identita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:45:22.286835Z"
+  },
+  "stato_civile": {
+   "service_id": "027028:wp:2134",
+   "title": "Certificazioni di stato civile",
+   "source_url": "https://www.comune.pianiga.ve.it/servizio/certificazioni-di-stato-civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pianiga.ve.it/servizio/certificazioni-di-stato-civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pianiga.ve.it/servizio/certificazioni-di-stato-civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:45:24.801655Z"
+  },
+  "tributi_imu": {
+   "service_id": "027028:wp:2102",
+   "title": "Richiesta rimborso IMU &#8211; TASI",
+   "source_url": "https://www.comune.pianiga.ve.it/servizio/richiesta-rimborso-imu-tasi/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pianiga.ve.it/servizio/richiesta-rimborso-imu-tasi/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pianiga.ve.it/servizio/richiesta-rimborso-imu-tasi/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:45:28.215993Z"
+  }
+ }
+}

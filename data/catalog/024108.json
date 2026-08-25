@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "024108",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "024108:wp:1355",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.torridiquartesolo.vi.it/?post_type=servizio&p=1355",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.torridiquartesolo.vi.it/?post_type=servizio&p=1355",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.torridiquartesolo.vi.it/?post_type=servizio&p=1355",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:18:08.248606Z"
+  },
+  "carta_identita": {
+   "service_id": "024108:wp:2233",
+   "title": "CIE - Carta di Identità Elettronica",
+   "source_url": "https://www.comune.torridiquartesolo.vi.it/?post_type=servizio&p=2233",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.torridiquartesolo.vi.it/?post_type=servizio&p=2233",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.torridiquartesolo.vi.it/?post_type=servizio&p=2233",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:18:28.076231Z"
+  },
+  "stato_civile": {
+   "service_id": "024108:wp:1358",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.torridiquartesolo.vi.it/?post_type=servizio&p=1358",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.torridiquartesolo.vi.it/?post_type=servizio&p=1358",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.torridiquartesolo.vi.it/?post_type=servizio&p=1358",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:18:45.158364Z"
+  },
+  "tributi_imu": {
+   "service_id": "024108:wp:1371",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.torridiquartesolo.vi.it/?post_type=servizio&p=1371",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.torridiquartesolo.vi.it/?post_type=servizio&p=1371",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.torridiquartesolo.vi.it/?post_type=servizio&p=1371",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:18:50.918704Z"
+  }
+ }
+}

@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "018021",
+ "services": {
+  "tributi_imu": {
+   "service_id": "018021:comweb:imposta-municipale-propria-imu-953-16820-1-5695acfce26dc1b58ba5b0fbdae4a9c6",
+   "title": "Imposta Municipale Propria (IMU)",
+   "source_url": "https://www.comune.brallodipregola.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-16820-1-5695acfce26dc1b58ba5b0fbdae4a9c6",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.brallodipregola.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-16820-1-5695acfce26dc1b58ba5b0fbdae4a9c6",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.brallodipregola.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-16820-1-5695acfce26dc1b58ba5b0fbdae4a9c6",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:18:24.546628Z"
+  },
+  "tributi_tari": {
+   "service_id": "018021:comweb:tassa-rifiuti-tari-954-16811-1-791beb8e064e7643910b2dfc6f6b0994",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.brallodipregola.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-16811-1-791beb8e064e7643910b2dfc6f6b0994",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.brallodipregola.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-16811-1-791beb8e064e7643910b2dfc6f6b0994",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.brallodipregola.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-16811-1-791beb8e064e7643910b2dfc6f6b0994",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:18:27.107401Z"
+  }
+ }
+}

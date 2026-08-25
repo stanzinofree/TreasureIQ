@@ -1,0 +1,136 @@
+{
+ "municipality_istat": "029008",
+ "services": {
+  "accesso_atti": {
+   "service_id": "029008:wp:231",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.calto.ro.it/?post_type=servizio&p=231",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.calto.ro.it/?post_type=servizio&p=231",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.calto.ro.it/?post_type=servizio&p=231",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.calto.ro.it/wp-content/uploads/2023/08/47-regolamenti-accesso-agli-atti.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.calto.ro.it/?post_type=servizio&p=231",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.calto.ro.it/wp-content/uploads/2023/08/DIRITTI-UFFICIO-TECNICO.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.calto.ro.it/?post_type=servizio&p=231",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.calto.ro.it/wp-content/uploads/2023/08/ACCESSO_AGLI_ATTI_.doc",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.calto.ro.it/?post_type=servizio&p=231",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:29:25.653504Z"
+  },
+  "cambio_residenza": {
+   "service_id": "029008:wp:637",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.calto.ro.it/?post_type=servizio&p=637",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.calto.ro.it/?post_type=servizio&p=637",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.calto.ro.it/?post_type=servizio&p=637",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:29:30.846594Z"
+  },
+  "stato_civile": {
+   "service_id": "029008:wp:702",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.calto.ro.it/?post_type=servizio&p=702",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.calto.ro.it/?post_type=servizio&p=702",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.calto.ro.it/?post_type=servizio&p=702",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:29:36.283609Z"
+  },
+  "tributi_imu": {
+   "service_id": "029008:wp:636",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.calto.ro.it/?post_type=servizio&p=636",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.calto.ro.it/?post_type=servizio&p=636",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.calto.ro.it/?post_type=servizio&p=636",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:29:43.382354Z"
+  }
+ }
+}

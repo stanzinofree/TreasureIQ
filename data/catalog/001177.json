@@ -1,0 +1,64 @@
+{
+ "municipality_istat": "001177",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001177:comweb:richiedere-l-accesso-agli-atti-317-12506-1-3c9c17de75d9ac8acf9e66c727624655",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.palazzocanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-12506-1-3c9c17de75d9ac8acf9e66c727624655",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.palazzocanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-12506-1-3c9c17de75d9ac8acf9e66c727624655",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.palazzocanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-12506-1-3c9c17de75d9ac8acf9e66c727624655",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.palazzocanavese.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=plzzcnvs167&amp;IDPr=11063",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.palazzocanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-12506-1-3c9c17de75d9ac8acf9e66c727624655",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:45:20.555566Z"
+  },
+  "carta_identita": {
+   "service_id": "001177:comweb:carta-d-identita-elettronica-cie-788-12495-1-270210789937cca0c12d2966d43260d7",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.palazzocanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-12495-1-270210789937cca0c12d2966d43260d7",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.palazzocanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-12495-1-270210789937cca0c12d2966d43260d7",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.palazzocanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-12495-1-270210789937cca0c12d2966d43260d7",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:45:22.413840Z"
+  }
+ }
+}

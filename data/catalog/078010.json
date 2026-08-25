@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "078010",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "078010:wp:7128",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.amantea.cs.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.amantea.cs.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.amantea.cs.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:31:29.283037Z"
+  },
+  "carta_identita": {
+   "service_id": "078010:wp:9998008",
+   "title": "Rilascio carta d&#8217;identità elettronica (CIE)",
+   "source_url": "https://comune.amantea.cs.it/servizio/rilascio-carta-didentita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.amantea.cs.it/servizio/rilascio-carta-didentita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.amantea.cs.it/servizio/rilascio-carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:31:32.803451Z"
+  },
+  "tributi_imu": {
+   "service_id": "078010:wp:9992348",
+   "title": "Pagare tributo IMU",
+   "source_url": "https://comune.amantea.cs.it/servizio/pagare-tributo-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.amantea.cs.it/servizio/pagare-tributo-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.amantea.cs.it/servizio/pagare-tributo-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:31:36.114270Z"
+  }
+ }
+}

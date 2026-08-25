@@ -1,0 +1,139 @@
+{
+ "municipality_istat": "006009",
+ "services": {
+  "accesso_atti": {
+   "service_id": "006009:wp:9616",
+   "title": "Richiesta di accesso agli atti",
+   "source_url": "https://comune.arquatascrivia.al.it/servizio/richiesta-di-accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.arquatascrivia.al.it/servizio/richiesta-di-accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.arquatascrivia.al.it/servizio/richiesta-di-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.arquatascrivia.al.it/wp-content/uploads/2024/06/Urp-Modello-5-nuovo-Richiesta-accesso.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.arquatascrivia.al.it/servizio/richiesta-di-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.arquatascrivia.al.it/wp-content/uploads/2025/09/GC-2019-00019.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.arquatascrivia.al.it/servizio/richiesta-di-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.arquatascrivia.al.it/wp-content/uploads/2024/06/Regolamento-accesso-documentale-civico-e-civico-generalizzato.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.arquatascrivia.al.it/servizio/richiesta-di-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:00:56.862066Z"
+  },
+  "tributi_imu": {
+   "service_id": "006009:wp:7667",
+   "title": "IMU",
+   "source_url": "https://comune.arquatascrivia.al.it/servizio/calcolo-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.arquatascrivia.al.it/servizio/calcolo-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.arquatascrivia.al.it/servizio/calcolo-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.arquatascrivia.al.it/wp-content/uploads/2025/06/NOTA-INFORM-IMU-ACC-2025.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.arquatascrivia.al.it/servizio/calcolo-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:00:59.164272Z"
+  },
+  "tributi_tari": {
+   "service_id": "006009:wp:8150",
+   "title": "TARI",
+   "source_url": "https://comune.arquatascrivia.al.it/servizio/tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.arquatascrivia.al.it/servizio/tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.arquatascrivia.al.it/servizio/tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.arquatascrivia.al.it/wp-content/uploads/2024/06/Regolamento-nuovo-attuativo-reg.-UE2016_679-Trattamento-dati-personali-DCC-42_2019.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.arquatascrivia.al.it/servizio/tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:01:00.855065Z"
+  }
+ }
+}

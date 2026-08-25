@@ -1,0 +1,64 @@
+{
+ "municipality_istat": "001009",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001009:comweb:richiedere-l-accesso-agli-atti-317-52926-1-4a419ccb93a2c2f50b39e36b886fc429",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.andezeno.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-52926-1-4a419ccb93a2c2f50b39e36b886fc429",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.andezeno.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-52926-1-4a419ccb93a2c2f50b39e36b886fc429",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.andezeno.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-52926-1-4a419ccb93a2c2f50b39e36b886fc429",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.andezeno.to.it/lang/it/servizi/richiedere-laccesso-agli-atti/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.andezeno.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-52926-1-4a419ccb93a2c2f50b39e36b886fc429",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:38:33.081112Z"
+  },
+  "tributi_imu": {
+   "service_id": "001009:comweb:calcolo-imu-355-53015-1-0267b1cbf8711fc4e684a0770ef5c425",
+   "title": "Calcolo IMU",
+   "source_url": "https://www.comune.andezeno.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-53015-1-0267b1cbf8711fc4e684a0770ef5c425",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.andezeno.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-53015-1-0267b1cbf8711fc4e684a0770ef5c425",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.andezeno.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-53015-1-0267b1cbf8711fc4e684a0770ef5c425",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:38:35.319601Z"
+  }
+ }
+}

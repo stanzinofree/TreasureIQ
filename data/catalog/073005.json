@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "073005",
+ "services": {
+  "tributi_imu": {
+   "service_id": "073005:wp:1524",
+   "title": "IMU – Imposta Municipale Propria",
+   "source_url": "https://www.comune.faggiano.ta.it/servizio/imu-imposta-municipale-propria/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.faggiano.ta.it/servizio/imu-imposta-municipale-propria/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.faggiano.ta.it/servizio/imu-imposta-municipale-propria/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:26:33.618544Z"
+  },
+  "tributi_tari": {
+   "service_id": "073005:wp:1309",
+   "title": "TARI: Tassa sui rifiuti",
+   "source_url": "https://www.comune.faggiano.ta.it/servizio/tassa-rifiuti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.faggiano.ta.it/servizio/tassa-rifiuti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.faggiano.ta.it/servizio/tassa-rifiuti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:26:37.228192Z"
+  }
+ }
+}

@@ -1,0 +1,64 @@
+{
+ "municipality_istat": "007062",
+ "services": {
+  "accesso_atti": {
+   "service_id": "007062:comweb:richiedere-l-accesso-agli-atti-317-8678-1-b9b31dbc51421d19afaf034a036277ad",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.saintoyen.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-8678-1-b9b31dbc51421d19afaf034a036277ad",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.saintoyen.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-8678-1-b9b31dbc51421d19afaf034a036277ad",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.saintoyen.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-8678-1-b9b31dbc51421d19afaf034a036277ad",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.saintoyen.ao.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=sntyn128&amp;IDPr=11535",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.saintoyen.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-8678-1-b9b31dbc51421d19afaf034a036277ad",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:10:18.054064Z"
+  },
+  "carta_identita": {
+   "service_id": "007062:comweb:carta-d-identita-elettronica-cie-788-8667-1-c50ea92094afe0fe40b56ac1ba9ab30b",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.saintoyen.ao.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-8667-1-c50ea92094afe0fe40b56ac1ba9ab30b",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.saintoyen.ao.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-8667-1-c50ea92094afe0fe40b56ac1ba9ab30b",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.saintoyen.ao.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-8667-1-c50ea92094afe0fe40b56ac1ba9ab30b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:10:19.984817Z"
+  }
+ }
+}

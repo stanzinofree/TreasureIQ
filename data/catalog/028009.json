@@ -1,0 +1,263 @@
+{
+ "municipality_istat": "028009",
+ "services": {
+  "accesso_atti": {
+   "service_id": "028009:wp:406",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.baone.pd.it/?post_type=servizio&p=406",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.baone.pd.it/?post_type=servizio&p=406",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.baone.pd.it/?post_type=servizio&p=406",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.baone.pd.it/wp-content/uploads/2023/03/11-regolamenti-regolamento-accesso-atti-amministrativi.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.baone.pd.it/?post_type=servizio&p=406",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.baone.pd.it/wp-content/uploads/2023/03/tabella-diritti_2025.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.baone.pd.it/?post_type=servizio&p=406",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:49:31.418306Z"
+  },
+  "cambio_residenza": {
+   "service_id": "028009:wp:1489",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.baone.pd.it/?post_type=servizio&p=1489",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.baone.pd.it/?post_type=servizio&p=1489",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.baone.pd.it/?post_type=servizio&p=1489",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:49:52.766686Z"
+  },
+  "carta_identita": {
+   "service_id": "028009:wp:402",
+   "title": "Rilascio Carta di Identità Elettronica",
+   "source_url": "https://www.comune.baone.pd.it/?post_type=servizio&p=402",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.baone.pd.it/?post_type=servizio&p=402",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.baone.pd.it/?post_type=servizio&p=402",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:50:05.422722Z"
+  },
+  "stato_civile": {
+   "service_id": "028009:wp:1601",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.baone.pd.it/?post_type=servizio&p=1601",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.baone.pd.it/?post_type=servizio&p=1601",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.baone.pd.it/?post_type=servizio&p=1601",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:50:33.337905Z"
+  },
+  "tributi_imu": {
+   "service_id": "028009:wp:1492",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.baone.pd.it/?post_type=servizio&p=1492",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.baone.pd.it/?post_type=servizio&p=1492",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.baone.pd.it/?post_type=servizio&p=1492",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.baone.pd.it/wp-content/uploads/2023/06/ADEGUAMENTO-AREE-EDIFICABILI-PER-ANNO-2023.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.baone.pd.it/?post_type=servizio&p=1492",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.baone.pd.it/wp-content/uploads/2025/02/D.C.C.N.67-ALIQUOTE-IMU-2020.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.baone.pd.it/?post_type=servizio&p=1492",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.baone.pd.it/wp-content/uploads/2025/02/Approvazione-aliquote-IMU-2023-D.C.C.-34.2023.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.baone.pd.it/?post_type=servizio&p=1492",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.baone.pd.it/wp-content/uploads/2025/02/APPROVAZIONE-ALIQUOTE-IMU-2025.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.baone.pd.it/?post_type=servizio&p=1492",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.baone.pd.it/wp-content/uploads/2025/02/Approvazione-aliquote-2024-D.C.C.-n.-82-del-28.12.2023.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.baone.pd.it/?post_type=servizio&p=1492",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.baone.pd.it/wp-content/uploads/2025/02/Valori-aree-edificabili-D.G.C.-n.-37-del-30.05.2013.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.baone.pd.it/?post_type=servizio&p=1492",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.baone.pd.it/wp-content/uploads/2025/02/Regolamento-IMU-D.C.C.-N.66-DEL-13.07.2020-Copia.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.baone.pd.it/?post_type=servizio&p=1492",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.baone.pd.it/wp-content/uploads/2025/02/RETTIFICA-NELLESERCIZIO-DEL-POTERE-DI-AUTOTUTELA.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.baone.pd.it/?post_type=servizio&p=1492",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.baone.pd.it/wp-content/uploads/2026/02/Prospetto_Invio_A613_81_30122025.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.baone.pd.it/?post_type=servizio&p=1492",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:50:54.896610Z"
+  }
+ }
+}

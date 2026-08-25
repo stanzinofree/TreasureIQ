@@ -1,0 +1,113 @@
+{
+ "municipality_istat": "001221",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001221:comweb:richiedere-l-accesso-agli-atti-317-6038-1-d442436cd967093c16fd51ec28d3c43f",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.roccacanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-6038-1-d442436cd967093c16fd51ec28d3c43f",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.roccacanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-6038-1-d442436cd967093c16fd51ec28d3c43f",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.roccacanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-6038-1-d442436cd967093c16fd51ec28d3c43f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.roccacanavese.to.it/lang/it/servizi/richiedere-laccesso-agli-atti/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.roccacanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-6038-1-d442436cd967093c16fd51ec28d3c43f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:47:54.485037Z"
+  },
+  "tributi_imu": {
+   "service_id": "001221:comweb:pagare-tributi-imu-600-6128-1-8398bcc85d58d34e00e80d89bcf9a8ee",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.roccacanavese.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-6128-1-8398bcc85d58d34e00e80d89bcf9a8ee",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.roccacanavese.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-6128-1-8398bcc85d58d34e00e80d89bcf9a8ee",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.roccacanavese.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-6128-1-8398bcc85d58d34e00e80d89bcf9a8ee",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://webtributi.gesel.it/?associate=118",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.roccacanavese.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-6128-1-8398bcc85d58d34e00e80d89bcf9a8ee",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:47:56.443998Z"
+  },
+  "tributi_tari": {
+   "service_id": "001221:comweb:pagamento-tassa-rifiuti-tari-659-6119-1-1cd66be6093c69d27d6eca95e8d3b502",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.roccacanavese.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-6119-1-1cd66be6093c69d27d6eca95e8d3b502",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.roccacanavese.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-6119-1-1cd66be6093c69d27d6eca95e8d3b502",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.roccacanavese.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-6119-1-1cd66be6093c69d27d6eca95e8d3b502",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://webtributi.gesel.it/?associate=118",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.roccacanavese.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-6119-1-1cd66be6093c69d27d6eca95e8d3b502",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:47:58.816475Z"
+  }
+ }
+}

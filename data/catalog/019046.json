@@ -1,0 +1,64 @@
+{
+ "municipality_istat": "019046",
+ "services": {
+  "carta_identita": {
+   "service_id": "019046:wp:4243",
+   "title": "Carta d&#8217;identità elettronica",
+   "source_url": "https://www.unionedelmona.cr.it/servizio/carta-didentita-elettronica/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.unionedelmona.cr.it/servizio/carta-didentita-elettronica/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.unionedelmona.cr.it/servizio/carta-didentita-elettronica/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.unionedelmona.cr.it/wp-content/uploads/2023/12/NUOVE-SCADENZE-CIE-EMESSE-DAL-19.09.2022.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.unionedelmona.cr.it/servizio/carta-didentita-elettronica/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:27:57.135693Z"
+  },
+  "stato_civile": {
+   "service_id": "019046:wp:4251",
+   "title": "Stato civile",
+   "source_url": "https://www.unionedelmona.cr.it/servizio/stato-civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.unionedelmona.cr.it/servizio/stato-civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.unionedelmona.cr.it/servizio/stato-civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:28:00.295972Z"
+  }
+ }
+}

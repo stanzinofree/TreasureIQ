@@ -1,0 +1,146 @@
+{
+ "municipality_istat": "001161",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001161:comweb:richiedere-l-accesso-agli-atti-317-25971-1-ee3145e4dbd1eb2042d4da243258b1d6",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.montanaro.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-25971-1-ee3145e4dbd1eb2042d4da243258b1d6",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montanaro.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-25971-1-ee3145e4dbd1eb2042d4da243258b1d6",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montanaro.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-25971-1-ee3145e4dbd1eb2042d4da243258b1d6",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.montanaro.to.it/servizi/filodiretto2/Login.aspx?ce=mntnr793&amp;IDPr=11042",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.montanaro.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-25971-1-ee3145e4dbd1eb2042d4da243258b1d6",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:44:45.267000Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001161:comweb:cambio-residenza-305-25969-1-5185e8ce207799b57833ae534369f6df",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.montanaro.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-25969-1-5185e8ce207799b57833ae534369f6df",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montanaro.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-25969-1-5185e8ce207799b57833ae534369f6df",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montanaro.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-25969-1-5185e8ce207799b57833ae534369f6df",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.montanaro.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-25969-1-5185e8ce207799b57833ae534369f6df",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:44:47.100025Z"
+  },
+  "carta_identita": {
+   "service_id": "001161:comweb:carta-d-identita-elettronica-cie-788-25959-1-1d4b5fd1916ed45da029dbbb22cfc496",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.montanaro.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-25959-1-1d4b5fd1916ed45da029dbbb22cfc496",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montanaro.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-25959-1-1d4b5fd1916ed45da029dbbb22cfc496",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montanaro.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-25959-1-1d4b5fd1916ed45da029dbbb22cfc496",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:44:51.419075Z"
+  },
+  "tributi_imu": {
+   "service_id": "001161:comweb:pagare-tributi-imu-600-26060-1-b515c79ffd03f2be23614b7bb91c5168",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.montanaro.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-26060-1-b515c79ffd03f2be23614b7bb91c5168",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montanaro.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-26060-1-b515c79ffd03f2be23614b7bb91c5168",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montanaro.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-26060-1-b515c79ffd03f2be23614b7bb91c5168",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:44:53.518933Z"
+  },
+  "tributi_tari": {
+   "service_id": "001161:comweb:pagamento-tassa-rifiuti-tari-659-26051-1-59f20cfc3e20ee2b718480ec09daf5e5",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.montanaro.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-26051-1-59f20cfc3e20ee2b718480ec09daf5e5",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montanaro.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-26051-1-59f20cfc3e20ee2b718480ec09daf5e5",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montanaro.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-26051-1-59f20cfc3e20ee2b718480ec09daf5e5",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:44:56.192179Z"
+  }
+ }
+}

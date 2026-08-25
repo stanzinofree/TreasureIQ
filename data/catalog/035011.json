@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "035011",
+ "services": {
+  "accesso_atti": {
+   "service_id": "035011:wp:236241",
+   "title": "Accesso agli atti",
+   "source_url": "https://www.comune.carpineti.re.it/servizi/accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.carpineti.re.it/servizi/accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.carpineti.re.it/servizi/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:47:12.547681Z"
+  },
+  "cambio_residenza": {
+   "service_id": "035011:wp:236272",
+   "title": "Cambio di residenza, indirizzo o trasferimento all’estero",
+   "source_url": "https://www.comune.carpineti.re.it/servizi/cambio-di-residenza-indirizzo-o-trasferimento-allestero/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.carpineti.re.it/servizi/cambio-di-residenza-indirizzo-o-trasferimento-allestero/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.carpineti.re.it/servizi/cambio-di-residenza-indirizzo-o-trasferimento-allestero/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:47:15.011064Z"
+  }
+ }
+}

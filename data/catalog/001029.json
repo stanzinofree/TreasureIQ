@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "001029",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001029:comweb:richiedere-l-accesso-agli-atti-317-38248-1-87c2303366711695fb28a76151392e54",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.borgiallo.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-38248-1-87c2303366711695fb28a76151392e54",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.borgiallo.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-38248-1-87c2303366711695fb28a76151392e54",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.borgiallo.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-38248-1-87c2303366711695fb28a76151392e54",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.borgiallo.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=brgll800&amp;IDPr=11593",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.borgiallo.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-38248-1-87c2303366711695fb28a76151392e54",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:39:22.340241Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001029:comweb:cambio-residenza-305-38246-1-d97b76091bbfd667589fafedf2eb4358",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.borgiallo.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-38246-1-d97b76091bbfd667589fafedf2eb4358",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.borgiallo.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-38246-1-d97b76091bbfd667589fafedf2eb4358",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.borgiallo.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-38246-1-d97b76091bbfd667589fafedf2eb4358",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.borgiallo.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-38246-1-d97b76091bbfd667589fafedf2eb4358",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:39:24.549550Z"
+  },
+  "carta_identita": {
+   "service_id": "001029:comweb:carta-d-identita-elettronica-cie-788-38236-1-b6c3754d06b4f70072a7de2d033b48cf",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.borgiallo.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-38236-1-b6c3754d06b4f70072a7de2d033b48cf",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.borgiallo.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-38236-1-b6c3754d06b4f70072a7de2d033b48cf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.borgiallo.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-38236-1-b6c3754d06b4f70072a7de2d033b48cf",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:39:26.746033Z"
+  }
+ }
+}

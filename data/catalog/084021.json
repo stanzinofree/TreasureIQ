@@ -1,0 +1,133 @@
+{
+ "municipality_istat": "084021",
+ "services": {
+  "accesso_atti": {
+   "service_id": "084021:wp:809",
+   "title": "Richiesta di accesso agli atti",
+   "source_url": "https://comune.licata.ag.it/servizio/richiesta-di-accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.licata.ag.it/servizio/richiesta-di-accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.licata.ag.it/servizio/richiesta-di-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.licata.ag.it/wp-content/uploads/2024/04/Regolamento-accesso-vigente.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.licata.ag.it/servizio/richiesta-di-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:46:44.590448Z"
+  },
+  "cambio_residenza": {
+   "service_id": "084021:wp:527",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.licata.ag.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.licata.ag.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.licata.ag.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:46:47.492426Z"
+  },
+  "carta_identita": {
+   "service_id": "084021:wp:1130",
+   "title": "Rilascio carta di identità elettronica (CIE)",
+   "source_url": "https://comune.licata.ag.it/servizio/rilascio-carta-di-identita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.licata.ag.it/servizio/rilascio-carta-di-identita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.licata.ag.it/servizio/rilascio-carta-di-identita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:46:50.295459Z"
+  },
+  "tributi_imu": {
+   "service_id": "084021:wp:1069",
+   "title": "Pagare Tributi IMU",
+   "source_url": "https://comune.licata.ag.it/servizio/pagare-tributi-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.licata.ag.it/servizio/pagare-tributi-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.licata.ag.it/servizio/pagare-tributi-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:46:52.094423Z"
+  },
+  "tributi_tari": {
+   "service_id": "084021:wp:1409",
+   "title": "Pagare la TARI",
+   "source_url": "https://comune.licata.ag.it/servizio/tassa-sui-rifiuti-tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.licata.ag.it/servizio/tassa-sui-rifiuti-tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.licata.ag.it/servizio/tassa-sui-rifiuti-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:46:54.749870Z"
+  }
+ }
+}

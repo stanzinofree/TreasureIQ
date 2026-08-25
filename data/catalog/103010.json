@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "103010",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "103010:wp:411",
+   "title": "Abitare &#8211; Cambio Residenza",
+   "source_url": "https://www.comune.belgirate.vb.it/servizio/abitare-cambio-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.belgirate.vb.it/servizio/abitare-cambio-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.belgirate.vb.it/servizio/abitare-cambio-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T15:01:08.890503Z"
+  },
+  "carta_identita": {
+   "service_id": "103010:wp:467",
+   "title": "Essere Cittadino &#8211; Carta d&#8217;Identità",
+   "source_url": "https://www.comune.belgirate.vb.it/servizio/essere-cittadino-carta-didentita/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.belgirate.vb.it/servizio/essere-cittadino-carta-didentita/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.belgirate.vb.it/servizio/essere-cittadino-carta-didentita/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T15:01:11.398610Z"
+  }
+ }
+}

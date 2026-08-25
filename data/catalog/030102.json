@@ -1,0 +1,120 @@
+{
+ "municipality_istat": "030102",
+ "services": {
+  "accesso_atti": {
+   "service_id": "030102:wp:287",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.sanleonardo.ud.it/?post_type=servizio&p=287",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanleonardo.ud.it/?post_type=servizio&p=287",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanleonardo.ud.it/?post_type=servizio&p=287",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:45:04.462559Z"
+  },
+  "cambio_residenza": {
+   "service_id": "030102:wp:779",
+   "title": "Cambio di residenza tramite Portale Nazionale – ANPR",
+   "source_url": "https://www.comune.sanleonardo.ud.it/?post_type=servizio&p=779",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanleonardo.ud.it/?post_type=servizio&p=779",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanleonardo.ud.it/?post_type=servizio&p=779",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:45:09.982200Z"
+  },
+  "carta_identita": {
+   "service_id": "030102:wp:286",
+   "title": "Carta di identità elettronica",
+   "source_url": "https://www.comune.sanleonardo.ud.it/?post_type=servizio&p=286",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanleonardo.ud.it/?post_type=servizio&p=286",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanleonardo.ud.it/?post_type=servizio&p=286",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:45:16.024268Z"
+  },
+  "stato_civile": {
+   "service_id": "030102:wp:792",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.sanleonardo.ud.it/?post_type=servizio&p=792",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanleonardo.ud.it/?post_type=servizio&p=792",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanleonardo.ud.it/?post_type=servizio&p=792",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:45:21.131630Z"
+  },
+  "tributi_imu": {
+   "service_id": "030102:wp:785",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.sanleonardo.ud.it/?post_type=servizio&p=785",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanleonardo.ud.it/?post_type=servizio&p=785",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanleonardo.ud.it/?post_type=servizio&p=785",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:45:26.727137Z"
+  }
+ }
+}

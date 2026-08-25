@@ -1,0 +1,159 @@
+{
+ "municipality_istat": "096021",
+ "services": {
+  "accesso_atti": {
+   "service_id": "096021:comweb:richiedere-l-accesso-agli-atti-317-21219-1-41b679933d507cebea494141f7330c37",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.crevacuore.bi.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-21219-1-41b679933d507cebea494141f7330c37",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.crevacuore.bi.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-21219-1-41b679933d507cebea494141f7330c37",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.crevacuore.bi.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-21219-1-41b679933d507cebea494141f7330c37",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.crevacuore.bi.it/lang/it/servizi/richiedere-laccesso-agli-atti/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.crevacuore.bi.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-21219-1-41b679933d507cebea494141f7330c37",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:55:16.969116Z"
+  },
+  "cambio_residenza": {
+   "service_id": "096021:comweb:cambio-residenza-305-21217-1-9cc7907c48d3f612ebfd45c2a1e912f0",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.crevacuore.bi.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-21217-1-9cc7907c48d3f612ebfd45c2a1e912f0",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.crevacuore.bi.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-21217-1-9cc7907c48d3f612ebfd45c2a1e912f0",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.crevacuore.bi.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-21217-1-9cc7907c48d3f612ebfd45c2a1e912f0",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.crevacuore.bi.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-21217-1-9cc7907c48d3f612ebfd45c2a1e912f0",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:55:18.862310Z"
+  },
+  "carta_identita": {
+   "service_id": "096021:comweb:carta-d-identita-elettronica-cie-788-21207-1-0609bae4552adf498c80856f4dff7a8c",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.crevacuore.bi.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-21207-1-0609bae4552adf498c80856f4dff7a8c",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.crevacuore.bi.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-21207-1-0609bae4552adf498c80856f4dff7a8c",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.crevacuore.bi.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-21207-1-0609bae4552adf498c80856f4dff7a8c",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:55:20.812008Z"
+  },
+  "tributi_imu": {
+   "service_id": "096021:comweb:pagare-tributi-imu-600-21308-1-609340a61ebae26a26473a96b0a81619",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.crevacuore.bi.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-21308-1-609340a61ebae26a26473a96b0a81619",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.crevacuore.bi.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-21308-1-609340a61ebae26a26473a96b0a81619",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.crevacuore.bi.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-21308-1-609340a61ebae26a26473a96b0a81619",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.crevacuore.bi.it/lang/it/servizi/pagare-tributi-imu/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.crevacuore.bi.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-21308-1-609340a61ebae26a26473a96b0a81619",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:55:22.916210Z"
+  },
+  "tributi_tari": {
+   "service_id": "096021:comweb:pagamento-tassa-rifiuti-tari-659-21299-1-7fdf760df515fa4d723408bbc46d703a",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.crevacuore.bi.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-21299-1-7fdf760df515fa4d723408bbc46d703a",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.crevacuore.bi.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-21299-1-7fdf760df515fa4d723408bbc46d703a",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.crevacuore.bi.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-21299-1-7fdf760df515fa4d723408bbc46d703a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:55:24.953594Z"
+  }
+ }
+}

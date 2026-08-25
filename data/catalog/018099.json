@@ -1,0 +1,110 @@
+{
+ "municipality_istat": "018099",
+ "services": {
+  "accesso_atti": {
+   "service_id": "018099:comweb:richiedere-l-accesso-agli-atti-317-51729-1-90fe746dfa025fdf5870ffb21919d2d8",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.monticellipavese.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-51729-1-90fe746dfa025fdf5870ffb21919d2d8",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.monticellipavese.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-51729-1-90fe746dfa025fdf5870ffb21919d2d8",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.monticellipavese.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-51729-1-90fe746dfa025fdf5870ffb21919d2d8",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.monticellipavese.pv.it/lang/it/servizi/richiedere-laccesso-agli-atti/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.monticellipavese.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-51729-1-90fe746dfa025fdf5870ffb21919d2d8",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:22:10.961152Z"
+  },
+  "carta_identita": {
+   "service_id": "018099:comweb:carta-d-identita-elettronica-cie-788-51717-1-93aebd1724abc88be388150a950e7b3f",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.monticellipavese.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-51717-1-93aebd1724abc88be388150a950e7b3f",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.monticellipavese.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-51717-1-93aebd1724abc88be388150a950e7b3f",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.monticellipavese.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-51717-1-93aebd1724abc88be388150a950e7b3f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:22:15.272723Z"
+  },
+  "tributi_imu": {
+   "service_id": "018099:comweb:imposta-municipale-propria-imu-953-51818-1-03fcbbc3c68b8133ed8866e0a5a05ba5",
+   "title": "Imposta Municipale Propria (IMU)",
+   "source_url": "https://www.comune.monticellipavese.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-51818-1-03fcbbc3c68b8133ed8866e0a5a05ba5",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.monticellipavese.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-51818-1-03fcbbc3c68b8133ed8866e0a5a05ba5",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.monticellipavese.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-51818-1-03fcbbc3c68b8133ed8866e0a5a05ba5",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:22:17.314516Z"
+  },
+  "tributi_tari": {
+   "service_id": "018099:comweb:pagamento-tassa-rifiuti-tari-659-51809-1-d12ec7903f3368a760301c564e5a2662",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.monticellipavese.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-51809-1-d12ec7903f3368a760301c564e5a2662",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.monticellipavese.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-51809-1-d12ec7903f3368a760301c564e5a2662",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.monticellipavese.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-51809-1-d12ec7903f3368a760301c564e5a2662",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:22:19.283399Z"
+  }
+ }
+}

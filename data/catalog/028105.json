@@ -1,0 +1,54 @@
+{
+ "municipality_istat": "028105",
+ "services": {
+  "accesso_atti": {
+   "service_id": "028105:wp:454",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.vo.pd.it/?post_type=servizio&p=454",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vo.pd.it/?post_type=servizio&p=454",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vo.pd.it/?post_type=servizio&p=454",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.vo.pd.it/wp-content/uploads/2023/04/8-modulistica-accesso-atti.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vo.pd.it/?post_type=servizio&p=454",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.vo.pd.it/wp-content/uploads/2023/04/15-modulistica-diritti-di-segreteria.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vo.pd.it/?post_type=servizio&p=454",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:27:22.421702Z"
+  }
+ }
+}

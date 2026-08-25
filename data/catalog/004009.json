@@ -1,0 +1,103 @@
+{
+ "municipality_istat": "004009",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "004009:wp:2731",
+   "title": "Cambio di Residenza",
+   "source_url": "https://www.comune.bagnolo.cn.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bagnolo.cn.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bagnolo.cn.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.bagnolo.cn.it/wp-content/uploads/2024/01/2012-DichiarazioneDiTrasferimentoResidenzaEstero-All2.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bagnolo.cn.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.bagnolo.cn.it/wp-content/uploads/2024/01/Dichiarazione-di-residenza-all.-1.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bagnolo.cn.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.bagnolo.cn.it/wp-content/uploads/2024/01/dichiarazionepertassarifiuti.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bagnolo.cn.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.bagnolo.cn.it/wp-content/uploads/2024/01/documentazione-da-allegare-2.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bagnolo.cn.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:00:31.212886Z"
+  },
+  "tributi_imu": {
+   "service_id": "004009:wp:1471",
+   "title": "Calcolo online IMU e ravvedimento IUC",
+   "source_url": "https://www.comune.bagnolo.cn.it/servizio/calcolo-online-imu-e-ravvedimento-iuc/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bagnolo.cn.it/servizio/calcolo-online-imu-e-ravvedimento-iuc/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bagnolo.cn.it/servizio/calcolo-online-imu-e-ravvedimento-iuc/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:00:33.462017Z"
+  }
+ }
+}

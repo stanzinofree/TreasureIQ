@@ -1,0 +1,77 @@
+{
+ "municipality_istat": "082078",
+ "services": {
+  "accesso_atti": {
+   "service_id": "082078:wp:2393",
+   "title": "Accesso agli atti",
+   "source_url": "https://www.comune.vicari.pa.it/servizio/accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vicari.pa.it/servizio/accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vicari.pa.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.vicari.pa.it/wp-admin/index.php",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.vicari.pa.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:44:36.195607Z"
+  },
+  "tributi_imu": {
+   "service_id": "082078:wp:1864",
+   "title": "Calcolo IMU Comune di Vicari",
+   "source_url": "https://www.comune.vicari.pa.it/servizio/calcolo-imu-comune-di-vicari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vicari.pa.it/servizio/calcolo-imu-comune-di-vicari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vicari.pa.it/servizio/calcolo-imu-comune-di-vicari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.vicari.pa.it/wp-admin/index.php",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.vicari.pa.it/servizio/calcolo-imu-comune-di-vicari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:44:39.327949Z"
+  }
+ }
+}

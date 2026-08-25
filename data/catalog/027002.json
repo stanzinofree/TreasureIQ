@@ -1,0 +1,87 @@
+{
+ "municipality_istat": "027002",
+ "services": {
+  "accesso_atti": {
+   "service_id": "027002:wp:470",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.campagnalupia.ve.it/?post_type=servizio&p=470",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.campagnalupia.ve.it/?post_type=servizio&p=470",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.campagnalupia.ve.it/?post_type=servizio&p=470",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:37:59.828397Z"
+  },
+  "carta_identita": {
+   "service_id": "027002:wp:459",
+   "title": "Carta di Identità Elettronica - CIE",
+   "source_url": "https://www.comune.campagnalupia.ve.it/?post_type=servizio&p=459",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.campagnalupia.ve.it/?post_type=servizio&p=459",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.campagnalupia.ve.it/?post_type=servizio&p=459",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.campagnalupia.ve.it/wp-content/uploads/2024/12/Atto-di-assenso-CIE.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.campagnalupia.ve.it/?post_type=servizio&p=459",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:38:10.470339Z"
+  },
+  "tributi_imu": {
+   "service_id": "027002:wp:2046",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.campagnalupia.ve.it/?post_type=servizio&p=2046",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.campagnalupia.ve.it/?post_type=servizio&p=2046",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.campagnalupia.ve.it/?post_type=servizio&p=2046",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:38:29.489027Z"
+  }
+ }
+}

@@ -1,0 +1,77 @@
+{
+ "municipality_istat": "086003",
+ "services": {
+  "accesso_atti": {
+   "service_id": "086003:comweb:richiedere-l-accesso-agli-atti-317-50399-1-9391bb4f257d383b88992043b2bc822e",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.assoro.en.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-50399-1-9391bb4f257d383b88992043b2bc822e",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.assoro.en.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-50399-1-9391bb4f257d383b88992043b2bc822e",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.assoro.en.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-50399-1-9391bb4f257d383b88992043b2bc822e",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.assoro.en.it/lang/it/servizi/richiesta-di-accesso-agli-atti/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.assoro.en.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-50399-1-9391bb4f257d383b88992043b2bc822e",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:48:16.165772Z"
+  },
+  "tributi_imu": {
+   "service_id": "086003:comweb:pagare-tributi-imu-600-50488-1-1a6018f3065e7ca2e5beeefe8df0792d",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.assoro.en.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-50488-1-1a6018f3065e7ca2e5beeefe8df0792d",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.assoro.en.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-50488-1-1a6018f3065e7ca2e5beeefe8df0792d",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.assoro.en.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-50488-1-1a6018f3065e7ca2e5beeefe8df0792d",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.assoro.en.it/lang/it/servizi/pagare-tributi-imu/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.assoro.en.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-50488-1-1a6018f3065e7ca2e5beeefe8df0792d",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:48:17.859959Z"
+  }
+ }
+}

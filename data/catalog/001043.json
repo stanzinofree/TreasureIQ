@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "001043",
+ "services": {
+  "carta_identita": {
+   "service_id": "001043:comweb:carta-d-identita-1-19095-1-ce1944664ca871c21b3863cd9d495c1c",
+   "title": "Carta d'Identità",
+   "source_url": "https://www.comune.busano.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-19095-1-ce1944664ca871c21b3863cd9d495c1c",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.busano.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-19095-1-ce1944664ca871c21b3863cd9d495c1c",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.busano.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-19095-1-ce1944664ca871c21b3863cd9d495c1c",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:40:05.755648Z"
+  },
+  "tributi_tari": {
+   "service_id": "001043:comweb:pagamento-tassa-rifiuti-tari-659-19187-1-b7055f516b1b1b5d78524b9f319c7b3e",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.busano.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-19187-1-b7055f516b1b1b5d78524b9f319c7b3e",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.busano.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-19187-1-b7055f516b1b1b5d78524b9f319c7b3e",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.busano.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-19187-1-b7055f516b1b1b5d78524b9f319c7b3e",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:40:07.617595Z"
+  }
+ }
+}

@@ -1,0 +1,198 @@
+{
+ "municipality_istat": "029021",
+ "services": {
+  "accesso_atti": {
+   "service_id": "029021:wp:331",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.ficarolo.ro.it/?post_type=servizio&p=331",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ficarolo.ro.it/?post_type=servizio&p=331",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ficarolo.ro.it/?post_type=servizio&p=331",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.ficarolo.ro.it/wp-content/uploads/2025/10/Dati-per-Fatturazione-Elettronica.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ficarolo.ro.it/?post_type=servizio&p=331",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:31:26.198304Z"
+  },
+  "cambio_residenza": {
+   "service_id": "029021:wp:229",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.ficarolo.ro.it/?post_type=servizio&p=229",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ficarolo.ro.it/?post_type=servizio&p=229",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ficarolo.ro.it/?post_type=servizio&p=229",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.ficarolo.ro.it/wp-content/uploads/2025/10/Dati-per-Fatturazione-Elettronica.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ficarolo.ro.it/?post_type=servizio&p=229",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:31:31.952807Z"
+  },
+  "carta_identita": {
+   "service_id": "029021:wp:407",
+   "title": "Carta d’Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.ficarolo.ro.it/?post_type=servizio&p=407",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ficarolo.ro.it/?post_type=servizio&p=407",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ficarolo.ro.it/?post_type=servizio&p=407",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.ficarolo.ro.it/wp-content/uploads/2025/11/DELEGA_MINORE.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ficarolo.ro.it/?post_type=servizio&p=407",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.ficarolo.ro.it/wp-content/uploads/2025/10/Dati-per-Fatturazione-Elettronica.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ficarolo.ro.it/?post_type=servizio&p=407",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:31:41.434523Z"
+  },
+  "stato_civile": {
+   "service_id": "029021:wp:232",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.ficarolo.ro.it/?post_type=servizio&p=232",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ficarolo.ro.it/?post_type=servizio&p=232",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ficarolo.ro.it/?post_type=servizio&p=232",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.ficarolo.ro.it/wp-content/uploads/2025/10/Dati-per-Fatturazione-Elettronica.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ficarolo.ro.it/?post_type=servizio&p=232",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:31:46.771480Z"
+  },
+  "tributi_imu": {
+   "service_id": "029021:wp:397",
+   "title": "Calcolo IMU",
+   "source_url": "https://www.comune.ficarolo.ro.it/?post_type=servizio&p=397",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ficarolo.ro.it/?post_type=servizio&p=397",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ficarolo.ro.it/?post_type=servizio&p=397",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.ficarolo.ro.it/wp-content/uploads/2025/10/Dati-per-Fatturazione-Elettronica.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ficarolo.ro.it/?post_type=servizio&p=397",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:31:52.396737Z"
+  }
+ }
+}

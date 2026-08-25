@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "007037",
+ "services": {
+  "accesso_atti": {
+   "service_id": "007037:comweb:richiedere-l-accesso-agli-atti-317-52793-1-b3d71a66f4b2cb7dd82a83637d1138c7",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.issogne.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-52793-1-b3d71a66f4b2cb7dd82a83637d1138c7",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.issogne.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-52793-1-b3d71a66f4b2cb7dd82a83637d1138c7",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.issogne.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-52793-1-b3d71a66f4b2cb7dd82a83637d1138c7",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.issogne.ao.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=ssgn1181&amp;IDPr=10570",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.issogne.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-52793-1-b3d71a66f4b2cb7dd82a83637d1138c7",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:07:46.963800Z"
+  },
+  "cambio_residenza": {
+   "service_id": "007037:comweb:cambio-residenza-305-52791-1-dfa627eaaeff2998918801340d337351",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.issogne.ao.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-52791-1-dfa627eaaeff2998918801340d337351",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.issogne.ao.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-52791-1-dfa627eaaeff2998918801340d337351",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.issogne.ao.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-52791-1-dfa627eaaeff2998918801340d337351",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.issogne.ao.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-52791-1-dfa627eaaeff2998918801340d337351",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:07:48.995230Z"
+  },
+  "tributi_tari": {
+   "service_id": "007037:comweb:pagamento-tassa-rifiuti-tari-659-52873-1-0b1ecbe50ebe3c8d5fdbf83f862e8802",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.issogne.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-52873-1-0b1ecbe50ebe3c8d5fdbf83f862e8802",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.issogne.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-52873-1-0b1ecbe50ebe3c8d5fdbf83f862e8802",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.issogne.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-52873-1-0b1ecbe50ebe3c8d5fdbf83f862e8802",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:07:51.100906Z"
+  }
+ }
+}

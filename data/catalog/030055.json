@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "030055",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "030055:wp:2281",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.manzano.ud.it/?post_type=servizio&p=2281",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.manzano.ud.it/?post_type=servizio&p=2281",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.manzano.ud.it/?post_type=servizio&p=2281",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:41:05.014289Z"
+  },
+  "stato_civile": {
+   "service_id": "030055:wp:2284",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.manzano.ud.it/?post_type=servizio&p=2284",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.manzano.ud.it/?post_type=servizio&p=2284",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.manzano.ud.it/?post_type=servizio&p=2284",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:41:10.454630Z"
+  },
+  "tributi_imu": {
+   "service_id": "030055:wp:2307",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.manzano.ud.it/?post_type=servizio&p=2307",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.manzano.ud.it/?post_type=servizio&p=2307",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.manzano.ud.it/?post_type=servizio&p=2307",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:41:16.270378Z"
+  }
+ }
+}

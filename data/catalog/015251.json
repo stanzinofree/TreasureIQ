@@ -1,0 +1,136 @@
+{
+ "municipality_istat": "015251",
+ "services": {
+  "accesso_atti": {
+   "service_id": "015251:comweb:richiedere-l-accesso-agli-atti-317-54788-1-f75777b5e0a999185a60d98857fdb37b",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.vermezzoconzelo.mi.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-54788-1-f75777b5e0a999185a60d98857fdb37b",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vermezzoconzelo.mi.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-54788-1-f75777b5e0a999185a60d98857fdb37b",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vermezzoconzelo.mi.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-54788-1-f75777b5e0a999185a60d98857fdb37b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.vermezzoconzelo.mi.it/urbi/progs/urp/ur1PR003.sto?DB_NAME=n1231753&amp;w3cbt=S&amp;DB_NAME=n1231753&amp;AmbitoBloccato=0&amp;MacroTipoBloccato=91&amp;TipoBloccato=51|4&amp;catnome=Anagrafe%20e%20stato%20civile&amp;caturl=https://www.comune.vermezzoconzelo.mi.it/it-it/servizi/anagrafe-e-stato-civile&amp;servnome=Richiedere%20l%27accesso%20agli%20atti&amp;servurl=https://www.comune.vermezzoconzelo.mi.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-54788-1-f75777b5e0a999185a60d98857fdb37b",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.vermezzoconzelo.mi.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-54788-1-f75777b5e0a999185a60d98857fdb37b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:16:05.790462Z"
+  },
+  "cambio_residenza": {
+   "service_id": "015251:comweb:cambio-residenza-305-54786-1-d7994269e1194731477cc927915af95e",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.vermezzoconzelo.mi.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-54786-1-d7994269e1194731477cc927915af95e",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vermezzoconzelo.mi.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-54786-1-d7994269e1194731477cc927915af95e",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vermezzoconzelo.mi.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-54786-1-d7994269e1194731477cc927915af95e",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/?catnome=Anagrafe%2520e%2520stato%2520civile&amp;caturl=https://www.comune.vermezzoconzelo.mi.it/it-it/servizi/anagrafe-e-stato-civile&amp;servnome=Cambio%2520Residenza&amp;servurl=https://www.comune.vermezzoconzelo.mi.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-54786-1-d7994269e1194731477cc927915af95e",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.vermezzoconzelo.mi.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-54786-1-d7994269e1194731477cc927915af95e",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:16:08.464133Z"
+  },
+  "tributi_imu": {
+   "service_id": "015251:comweb:pagare-tributi-imu-600-54877-1-fd1a4dea1cf7d1800f625e1f7752b316",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.vermezzoconzelo.mi.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-54877-1-fd1a4dea1cf7d1800f625e1f7752b316",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vermezzoconzelo.mi.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-54877-1-fd1a4dea1cf7d1800f625e1f7752b316",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vermezzoconzelo.mi.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-54877-1-fd1a4dea1cf7d1800f625e1f7752b316",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.vermezzoconzelo.mi.it/urbi/progs/urp/ur1TR030.sto?DB_NAME=n1231753&amp;AnnoBloccato=2025&amp;amp;catnome=Tributi%252C%2520finanze%2520e%2520contravvenzioni&amp;amp;caturl=https://www.comune.vermezzoconzelo.mi.it/it-it/servizi/tributi-finanze-e-contravvenzioni&amp;amp;servnome=Pagare%2520tributi%2520IMU&amp;amp;servurl=https://www.comune.vermezzoconzelo.mi.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-54877-1-fd1a4dea1cf7d1800f625e1f7752b316",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.vermezzoconzelo.mi.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-54877-1-fd1a4dea1cf7d1800f625e1f7752b316",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:16:11.084213Z"
+  },
+  "tributi_tari": {
+   "service_id": "015251:comweb:tassa-rifiuti-tari-954-54868-1-6cf4735ad368827319415e96f670bada",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.vermezzoconzelo.mi.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-54868-1-6cf4735ad368827319415e96f670bada",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vermezzoconzelo.mi.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-54868-1-6cf4735ad368827319415e96f670bada",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vermezzoconzelo.mi.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-54868-1-6cf4735ad368827319415e96f670bada",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:16:13.850692Z"
+  }
+ }
+}

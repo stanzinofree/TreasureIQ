@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "073022",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "073022:wp:1089",
+   "title": "Cambio di residenza &#8211; ANPR",
+   "source_url": "https://www.comune.pulsano.ta.it/servizio/cambio-di-residenza-anpr/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pulsano.ta.it/servizio/cambio-di-residenza-anpr/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pulsano.ta.it/servizio/cambio-di-residenza-anpr/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:26:57.787352Z"
+  }
+ }
+}

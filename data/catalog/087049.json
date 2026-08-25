@@ -1,0 +1,123 @@
+{
+ "municipality_istat": "087049",
+ "services": {
+  "accesso_atti": {
+   "service_id": "087049:wp:608",
+   "title": "Accesso agli atti",
+   "source_url": "https://www.comune.scordia.ct.it/servizio/accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.scordia.ct.it/servizio/accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.scordia.ct.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:49:55.759613Z"
+  },
+  "cambio_residenza": {
+   "service_id": "087049:wp:604",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.scordia.ct.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.scordia.ct.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.scordia.ct.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:49:56.947511Z"
+  },
+  "tributi_imu": {
+   "service_id": "087049:wp:178",
+   "title": "Tributi IMU",
+   "source_url": "https://www.comune.scordia.ct.it/servizio/tributi-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.scordia.ct.it/servizio/tributi-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.scordia.ct.it/servizio/tributi-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.scordia.ct.it/wp-content/uploads/2024/09/176388_DIMUNIC-15ct23i548d.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.scordia.ct.it/servizio/tributi-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:49:58.408209Z"
+  },
+  "tributi_tari": {
+   "service_id": "087049:wp:1973",
+   "title": "TARI &#8211; Tassa sui Rifiuti",
+   "source_url": "https://www.comune.scordia.ct.it/servizio/tari-tassa-sui-rifiuti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.scordia.ct.it/servizio/tari-tassa-sui-rifiuti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.scordia.ct.it/servizio/tari-tassa-sui-rifiuti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.scordia.ct.it/wp-content/uploads/2026/02/Carta-di-qualita-del-Servizio.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.scordia.ct.it/servizio/tari-tassa-sui-rifiuti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:49:59.723756Z"
+  }
+ }
+}

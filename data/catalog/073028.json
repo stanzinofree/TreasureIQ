@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "073028",
+ "services": {
+  "accesso_atti": {
+   "service_id": "073028:wp:1146",
+   "title": "Domanda di accesso agli atti",
+   "source_url": "https://www.comune.torricella.ta.it/servizio/domanda-di-accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.torricella.ta.it/servizio/domanda-di-accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.torricella.ta.it/servizio/domanda-di-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:27:00.215323Z"
+  },
+  "tributi_imu": {
+   "service_id": "073028:wp:421",
+   "title": "Calcolo online IMU 2025",
+   "source_url": "https://www.comune.torricella.ta.it/servizio/calcolo-online-imu-2025/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.torricella.ta.it/servizio/calcolo-online-imu-2025/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.torricella.ta.it/servizio/calcolo-online-imu-2025/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:27:02.125258Z"
+  }
+ }
+}

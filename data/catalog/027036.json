@@ -1,0 +1,123 @@
+{
+ "municipality_istat": "027036",
+ "services": {
+  "accesso_atti": {
+   "service_id": "027036:wp:371",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.sanstinodilivenza.ve.it/?post_type=servizio&p=371",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanstinodilivenza.ve.it/?post_type=servizio&p=371",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanstinodilivenza.ve.it/?post_type=servizio&p=371",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.sanstinodilivenza.ve.it/wp-content/uploads/2024/09/Tariffe-2024-San-Stino-di-Livenza.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanstinodilivenza.ve.it/?post_type=servizio&p=371",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:45:43.435396Z"
+  },
+  "cambio_residenza": {
+   "service_id": "027036:wp:2729",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.sanstinodilivenza.ve.it/?post_type=servizio&p=2729",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanstinodilivenza.ve.it/?post_type=servizio&p=2729",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanstinodilivenza.ve.it/?post_type=servizio&p=2729",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:45:51.084872Z"
+  },
+  "carta_identita": {
+   "service_id": "027036:wp:925",
+   "title": "Rilascio Carta di Identità Elettronica",
+   "source_url": "https://www.comune.sanstinodilivenza.ve.it/?post_type=servizio&p=925",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanstinodilivenza.ve.it/?post_type=servizio&p=925",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanstinodilivenza.ve.it/?post_type=servizio&p=925",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.sanstinodilivenza.ve.it/wp-content/uploads/2023/12/carta-identita-minorenni-assenso.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanstinodilivenza.ve.it/?post_type=servizio&p=925",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:45:59.677222Z"
+  },
+  "stato_civile": {
+   "service_id": "027036:wp:2732",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.sanstinodilivenza.ve.it/?post_type=servizio&p=2732",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanstinodilivenza.ve.it/?post_type=servizio&p=2732",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanstinodilivenza.ve.it/?post_type=servizio&p=2732",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:46:08.923148Z"
+  }
+ }
+}

@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "015200",
+ "services": {
+  "accesso_atti": {
+   "service_id": "015200:wp:428",
+   "title": "Accesso agli atti",
+   "source_url": "https://comune.santostefanoticino.mi.it/servizio/accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.santostefanoticino.mi.it/servizio/accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.santostefanoticino.mi.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:16:00.838457Z"
+  },
+  "carta_identita": {
+   "service_id": "015200:wp:697",
+   "title": "Carta di Identità Elettronica (CIE)",
+   "source_url": "https://comune.santostefanoticino.mi.it/servizio/carta-di-identita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.santostefanoticino.mi.it/servizio/carta-di-identita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.santostefanoticino.mi.it/servizio/carta-di-identita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:16:03.650695Z"
+  }
+ }
+}

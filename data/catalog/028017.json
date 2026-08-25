@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "028017",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "028017:wp:679",
+   "title": "Cambio di residenza &#8211; cittadino italiano",
+   "source_url": "https://www.comune.campodarsego.pd.it/servizio/cambio-di-residenza-cittadino-italiano/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.campodarsego.pd.it/servizio/cambio-di-residenza-cittadino-italiano/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.campodarsego.pd.it/servizio/cambio-di-residenza-cittadino-italiano/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:53:09.826655Z"
+  },
+  "carta_identita": {
+   "service_id": "028017:wp:605",
+   "title": "Carta d&#8217;identità elettronica &#8211; CIE",
+   "source_url": "https://www.comune.campodarsego.pd.it/servizio/carta-didentita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.campodarsego.pd.it/servizio/carta-didentita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.campodarsego.pd.it/servizio/carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:53:14.051500Z"
+  },
+  "stato_civile": {
+   "service_id": "028017:wp:3261",
+   "title": "Certificati di Stato Civile",
+   "source_url": "https://www.comune.campodarsego.pd.it/servizio/certificati-di-stato-civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.campodarsego.pd.it/servizio/certificati-di-stato-civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.campodarsego.pd.it/servizio/certificati-di-stato-civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:53:16.154849Z"
+  },
+  "tributi_imu": {
+   "service_id": "028017:wp:1560",
+   "title": "Calcolo e pagamento IMU",
+   "source_url": "https://www.comune.campodarsego.pd.it/servizio/calcolo-e-pagamento-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.campodarsego.pd.it/servizio/calcolo-e-pagamento-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.campodarsego.pd.it/servizio/calcolo-e-pagamento-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:53:18.248260Z"
+  }
+ }
+}

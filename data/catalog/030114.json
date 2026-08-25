@@ -1,0 +1,227 @@
+{
+ "municipality_istat": "030114",
+ "services": {
+  "accesso_atti": {
+   "service_id": "030114:wp:218",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.talmassons.ud.it/?post_type=servizio&p=218",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.talmassons.ud.it/?post_type=servizio&p=218",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.talmassons.ud.it/?post_type=servizio&p=218",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:45:47.070563Z"
+  },
+  "carta_identita": {
+   "service_id": "030114:wp:1484",
+   "title": "Carta di identità elettronica CIE",
+   "source_url": "https://www.comune.talmassons.ud.it/?post_type=servizio&p=1484",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.talmassons.ud.it/?post_type=servizio&p=1484",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.talmassons.ud.it/?post_type=servizio&p=1484",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.talmassons.ud.it/wp-content/uploads/2023/08/CIE_NOTE_INFORMATIVE-convertito.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.talmassons.ud.it/?post_type=servizio&p=1484",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.talmassons.ud.it/wp-content/uploads/2023/08/1_cie_istanza_delega_per_minore_1_GENITORE_UFFICIALE.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.talmassons.ud.it/?post_type=servizio&p=1484",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.talmassons.ud.it/wp-content/uploads/2023/08/1_cie_richiesta_rilascio_per_persona_impossilitata.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.talmassons.ud.it/?post_type=servizio&p=1484",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.talmassons.ud.it/wp-content/uploads/2023/08/1.Autocertif_motivi_urgenza_carta_cartacea.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.talmassons.ud.it/?post_type=servizio&p=1484",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.talmassons.ud.it/wp-content/uploads/2023/08/2.Autocertif_motivi_urgenza_carta_cartacea_MINORI.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.talmassons.ud.it/?post_type=servizio&p=1484",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.talmassons.ud.it/wp-content/uploads/2023/09/1.Autocertif_motivi_urgenza_carta_cartacea.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.talmassons.ud.it/?post_type=servizio&p=1484",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.talmassons.ud.it/wp-content/uploads/2023/09/2.Autocertif_motivi_urgenza_carta_cartacea_MINORI.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.talmassons.ud.it/?post_type=servizio&p=1484",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.talmassons.ud.it/wp-content/uploads/2023/09/1_cie_istanza_delega_per_minore_1_GENITORE_UFFICIALE.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.talmassons.ud.it/?post_type=servizio&p=1484",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.talmassons.ud.it/wp-content/uploads/2023/09/CIE_NOTE_INFORMATIVE-convertito.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.talmassons.ud.it/?post_type=servizio&p=1484",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.talmassons.ud.it/wp-content/uploads/2023/09/1_cie_richiesta_rilascio_per_persona_impossilitata.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.talmassons.ud.it/?post_type=servizio&p=1484",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:45:52.661465Z"
+  },
+  "stato_civile": {
+   "service_id": "030114:wp:1702",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.talmassons.ud.it/?post_type=servizio&p=1702",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.talmassons.ud.it/?post_type=servizio&p=1702",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.talmassons.ud.it/?post_type=servizio&p=1702",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:45:59.194112Z"
+  },
+  "tributi_imu": {
+   "service_id": "030114:wp:1690",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.talmassons.ud.it/?post_type=servizio&p=1690",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.talmassons.ud.it/?post_type=servizio&p=1690",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.talmassons.ud.it/?post_type=servizio&p=1690",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:46:13.584192Z"
+  }
+ }
+}

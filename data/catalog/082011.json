@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "082011",
+ "services": {
+  "accesso_atti": {
+   "service_id": "082011:wp:5288",
+   "title": "Richiesta di Accesso agli Atti",
+   "source_url": "https://www.comune.bolognetta.pa.it/servizio/richiesta-di-accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bolognetta.pa.it/servizio/richiesta-di-accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bolognetta.pa.it/servizio/richiesta-di-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:41:33.240077Z"
+  },
+  "cambio_residenza": {
+   "service_id": "082011:wp:5778",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.bolognetta.pa.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bolognetta.pa.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bolognetta.pa.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:41:36.226743Z"
+  },
+  "carta_identita": {
+   "service_id": "082011:wp:5788",
+   "title": "Rilascio carta d&#8217;identità elettronica (CIE)",
+   "source_url": "https://www.comune.bolognetta.pa.it/servizio/rilascio-carta-didentita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bolognetta.pa.it/servizio/rilascio-carta-didentita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bolognetta.pa.it/servizio/rilascio-carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:41:39.100048Z"
+  },
+  "tributi_imu": {
+   "service_id": "082011:wp:5796",
+   "title": "Pagare tributo IMU",
+   "source_url": "https://www.comune.bolognetta.pa.it/servizio/pagare-tributo-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bolognetta.pa.it/servizio/pagare-tributo-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bolognetta.pa.it/servizio/pagare-tributo-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:41:42.363621Z"
+  }
+ }
+}

@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "001150",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001150:comweb:richiedere-l-accesso-agli-atti-317-20426-1-f56db082623715f280b904569af7391a",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.mercenasco.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-20426-1-f56db082623715f280b904569af7391a",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.mercenasco.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-20426-1-f56db082623715f280b904569af7391a",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.mercenasco.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-20426-1-f56db082623715f280b904569af7391a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.mercenasco.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=mrcnsc802&amp;IDPr=11401",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.mercenasco.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-20426-1-f56db082623715f280b904569af7391a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:44:26.474218Z"
+  },
+  "stato_civile": {
+   "service_id": "001150:comweb:certificato-di-matrimonio-30-20421-1-dbf0c9f08d01f2d5f3ec461c590db8e6",
+   "title": "Certificato di matrimonio",
+   "source_url": "https://www.comune.mercenasco.to.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-matrimonio-30-20421-1-dbf0c9f08d01f2d5f3ec461c590db8e6",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.mercenasco.to.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-matrimonio-30-20421-1-dbf0c9f08d01f2d5f3ec461c590db8e6",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.mercenasco.to.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-matrimonio-30-20421-1-dbf0c9f08d01f2d5f3ec461c590db8e6",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/certificati/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.mercenasco.to.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-matrimonio-30-20421-1-dbf0c9f08d01f2d5f3ec461c590db8e6",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:44:28.543380Z"
+  },
+  "tributi_imu": {
+   "service_id": "001150:comweb:calcolo-imu-355-20516-1-440690d5427d205d7bf1da82e60ca7f6",
+   "title": "Calcolo IMU",
+   "source_url": "https://www.comune.mercenasco.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-20516-1-440690d5427d205d7bf1da82e60ca7f6",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.mercenasco.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-20516-1-440690d5427d205d7bf1da82e60ca7f6",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.mercenasco.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-20516-1-440690d5427d205d7bf1da82e60ca7f6",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:44:30.449949Z"
+  }
+ }
+}

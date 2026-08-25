@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "038018",
+ "services": {
+  "accesso_atti": {
+   "service_id": "038018:wp:322",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.poggiorenatico.fe.it/?post_type=servizio&p=322",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.poggiorenatico.fe.it/?post_type=servizio&p=322",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.poggiorenatico.fe.it/?post_type=servizio&p=322",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:51:36.080983Z"
+  },
+  "cambio_residenza": {
+   "service_id": "038018:wp:1758",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.poggiorenatico.fe.it/?post_type=servizio&p=1758",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.poggiorenatico.fe.it/?post_type=servizio&p=1758",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.poggiorenatico.fe.it/?post_type=servizio&p=1758",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:51:41.684450Z"
+  },
+  "stato_civile": {
+   "service_id": "038018:wp:1761",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.poggiorenatico.fe.it/?post_type=servizio&p=1761",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.poggiorenatico.fe.it/?post_type=servizio&p=1761",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.poggiorenatico.fe.it/?post_type=servizio&p=1761",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:51:53.238421Z"
+  },
+  "tributi_imu": {
+   "service_id": "038018:wp:1811",
+   "title": "Calcolo IMU Online",
+   "source_url": "https://www.comune.poggiorenatico.fe.it/?post_type=servizio&p=1811",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.poggiorenatico.fe.it/?post_type=servizio&p=1811",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.poggiorenatico.fe.it/?post_type=servizio&p=1811",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:51:58.613119Z"
+  }
+ }
+}

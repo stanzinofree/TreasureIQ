@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "029031",
+ "services": {
+  "accesso_atti": {
+   "service_id": "029031:wp:483",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.lusia.ro.it/?post_type=servizio&p=483",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.lusia.ro.it/?post_type=servizio&p=483",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.lusia.ro.it/?post_type=servizio&p=483",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:34:05.843346Z"
+  },
+  "cambio_residenza": {
+   "service_id": "029031:wp:982",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.lusia.ro.it/?post_type=servizio&p=982",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.lusia.ro.it/?post_type=servizio&p=982",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.lusia.ro.it/?post_type=servizio&p=982",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:34:12.345840Z"
+  },
+  "stato_civile": {
+   "service_id": "029031:wp:985",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.lusia.ro.it/?post_type=servizio&p=985",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.lusia.ro.it/?post_type=servizio&p=985",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.lusia.ro.it/?post_type=servizio&p=985",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:34:18.859390Z"
+  }
+ }
+}

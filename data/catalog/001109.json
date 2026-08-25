@@ -1,0 +1,110 @@
+{
+ "municipality_istat": "001109",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001109:comweb:richiedere-l-accesso-agli-atti-317-18314-1-a7ba629023d582a1cfde7c8a430b412d",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.front.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-18314-1-a7ba629023d582a1cfde7c8a430b412d",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.front.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-18314-1-a7ba629023d582a1cfde7c8a430b412d",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.front.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-18314-1-a7ba629023d582a1cfde7c8a430b412d",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.front.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=frnt1037&amp;IDPr=11470",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.front.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-18314-1-a7ba629023d582a1cfde7c8a430b412d",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:43:07.769523Z"
+  },
+  "carta_identita": {
+   "service_id": "001109:comweb:carta-d-identita-elettronica-cie-788-18303-1-e4be03b720da110cf0b7245a3e8f71d1",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.front.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-18303-1-e4be03b720da110cf0b7245a3e8f71d1",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.front.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-18303-1-e4be03b720da110cf0b7245a3e8f71d1",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.front.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-18303-1-e4be03b720da110cf0b7245a3e8f71d1",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:43:11.159871Z"
+  },
+  "tributi_imu": {
+   "service_id": "001109:comweb:pagare-tributi-imu-600-18404-1-22fa01f54f89260cf1d44623d0d0bdf7",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.front.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-18404-1-22fa01f54f89260cf1d44623d0d0bdf7",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.front.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-18404-1-22fa01f54f89260cf1d44623d0d0bdf7",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.front.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-18404-1-22fa01f54f89260cf1d44623d0d0bdf7",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:43:13.141864Z"
+  },
+  "tributi_tari": {
+   "service_id": "001109:comweb:pagamento-tassa-rifiuti-tari-659-18395-1-a44f44c81c4d2c44724b1c92397f62c5",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.front.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-18395-1-a44f44c81c4d2c44724b1c92397f62c5",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.front.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-18395-1-a44f44c81c4d2c44724b1c92397f62c5",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.front.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-18395-1-a44f44c81c4d2c44724b1c92397f62c5",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:43:15.258327Z"
+  }
+ }
+}

@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "079012",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "079012:wp:3998",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.botricello.cz.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.botricello.cz.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.botricello.cz.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:37:36.530150Z"
+  },
+  "carta_identita": {
+   "service_id": "079012:wp:4071",
+   "title": "Rilascio carta d&#8217;identità elettronica (CIE)",
+   "source_url": "https://www.comune.botricello.cz.it/servizio/rilascio-carta-didentita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.botricello.cz.it/servizio/rilascio-carta-didentita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.botricello.cz.it/servizio/rilascio-carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:37:39.761468Z"
+  },
+  "tributi_imu": {
+   "service_id": "079012:wp:4094",
+   "title": "Pagare tributo IMU",
+   "source_url": "https://www.comune.botricello.cz.it/servizio/pagare-tributo-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.botricello.cz.it/servizio/pagare-tributo-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.botricello.cz.it/servizio/pagare-tributo-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:37:42.816359Z"
+  }
+ }
+}

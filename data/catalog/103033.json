@@ -1,0 +1,113 @@
+{
+ "municipality_istat": "103033",
+ "services": {
+  "accesso_atti": {
+   "service_id": "103033:comweb:richiedere-l-accesso-agli-atti-317-44320-1-1f08cfde1837474c71778eec09c29e36",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.ghiffa.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-44320-1-1f08cfde1837474c71778eec09c29e36",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ghiffa.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-44320-1-1f08cfde1837474c71778eec09c29e36",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ghiffa.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-44320-1-1f08cfde1837474c71778eec09c29e36",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.ghiffa.vb.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=ghff603&amp;IDPr=10836",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.ghiffa.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-44320-1-1f08cfde1837474c71778eec09c29e36",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:02:12.424551Z"
+  },
+  "cambio_residenza": {
+   "service_id": "103033:comweb:cambio-residenza-305-44318-1-8db89eeb409557c04345c1e114d14cff",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.ghiffa.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-44318-1-8db89eeb409557c04345c1e114d14cff",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ghiffa.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-44318-1-8db89eeb409557c04345c1e114d14cff",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ghiffa.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-44318-1-8db89eeb409557c04345c1e114d14cff",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.ghiffa.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-44318-1-8db89eeb409557c04345c1e114d14cff",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:02:14.821028Z"
+  },
+  "carta_identita": {
+   "service_id": "103033:comweb:carta-d-identita-elettronica-cie-788-44308-1-a3c9260e9a567c269db22f3eab1fa6d0",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.ghiffa.vb.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-44308-1-a3c9260e9a567c269db22f3eab1fa6d0",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ghiffa.vb.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-44308-1-a3c9260e9a567c269db22f3eab1fa6d0",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ghiffa.vb.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-44308-1-a3c9260e9a567c269db22f3eab1fa6d0",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.ghiffa.vb.it/servizi/PrenotaAppuntamenti/Login.aspx?CE=ghff603",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.ghiffa.vb.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-44308-1-a3c9260e9a567c269db22f3eab1fa6d0",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:02:17.414827Z"
+  }
+ }
+}

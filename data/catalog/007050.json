@@ -1,0 +1,110 @@
+{
+ "municipality_istat": "007050",
+ "services": {
+  "accesso_atti": {
+   "service_id": "007050:comweb:richiedere-l-accesso-agli-atti-317-18710-1-c9d7c5ba5111f3994e70312da56bbd4b",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.pontboset.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-18710-1-c9d7c5ba5111f3994e70312da56bbd4b",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pontboset.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-18710-1-c9d7c5ba5111f3994e70312da56bbd4b",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pontboset.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-18710-1-c9d7c5ba5111f3994e70312da56bbd4b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.pontboset.ao.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=pntbst235&amp;IDPr=11474",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.pontboset.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-18710-1-c9d7c5ba5111f3994e70312da56bbd4b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:09:18.224571Z"
+  },
+  "carta_identita": {
+   "service_id": "007050:comweb:carta-d-identita-elettronica-cie-788-18699-1-e56c38c1e40b15f35ffe678844b41c18",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.pontboset.ao.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-18699-1-e56c38c1e40b15f35ffe678844b41c18",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pontboset.ao.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-18699-1-e56c38c1e40b15f35ffe678844b41c18",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pontboset.ao.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-18699-1-e56c38c1e40b15f35ffe678844b41c18",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:09:20.900740Z"
+  },
+  "tributi_imu": {
+   "service_id": "007050:comweb:imposta-municipale-propria-imu-953-18800-1-7ee5b2ee13f81a696faa84691bdc9271",
+   "title": "Imposta Municipale Propria (IMU)",
+   "source_url": "https://www.comune.pontboset.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-18800-1-7ee5b2ee13f81a696faa84691bdc9271",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pontboset.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-18800-1-7ee5b2ee13f81a696faa84691bdc9271",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pontboset.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-18800-1-7ee5b2ee13f81a696faa84691bdc9271",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:09:23.175402Z"
+  },
+  "tributi_tari": {
+   "service_id": "007050:comweb:pagamento-tassa-rifiuti-tari-659-18791-1-63ab2ec6cc3a637445b37d6c4853330d",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.pontboset.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-18791-1-63ab2ec6cc3a637445b37d6c4853330d",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pontboset.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-18791-1-63ab2ec6cc3a637445b37d6c4853330d",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pontboset.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-18791-1-63ab2ec6cc3a637445b37d6c4853330d",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:09:25.454783Z"
+  }
+ }
+}

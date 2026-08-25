@@ -1,0 +1,87 @@
+{
+ "municipality_istat": "030091",
+ "services": {
+  "accesso_atti": {
+   "service_id": "030091:wp:360",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.remanzacco.ud.it/?post_type=servizio&p=360",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.remanzacco.ud.it/?post_type=servizio&p=360",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.remanzacco.ud.it/?post_type=servizio&p=360",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.remanzacco.ud.it/wp-content/uploads/2024/08/Costi-di-riproduzione.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.remanzacco.ud.it/?post_type=servizio&p=360",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:44:03.171967Z"
+  },
+  "cambio_residenza": {
+   "service_id": "030091:wp:1794",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.remanzacco.ud.it/?post_type=servizio&p=1794",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.remanzacco.ud.it/?post_type=servizio&p=1794",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.remanzacco.ud.it/?post_type=servizio&p=1794",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:44:15.355324Z"
+  },
+  "carta_identita": {
+   "service_id": "030091:wp:354",
+   "title": "Rilascio Carta di Identità Elettronica",
+   "source_url": "https://www.comune.remanzacco.ud.it/?post_type=servizio&p=354",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.remanzacco.ud.it/?post_type=servizio&p=354",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.remanzacco.ud.it/?post_type=servizio&p=354",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:44:22.967928Z"
+  }
+ }
+}

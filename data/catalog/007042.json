@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "007042",
+ "services": {
+  "accesso_atti": {
+   "service_id": "007042:comweb:richiedere-l-accesso-agli-atti-317-22935-1-6d901ddd0e13e755045c517117151b84",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.lillianes.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-22935-1-6d901ddd0e13e755045c517117151b84",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.lillianes.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-22935-1-6d901ddd0e13e755045c517117151b84",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.lillianes.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-22935-1-6d901ddd0e13e755045c517117151b84",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.lillianes.ao.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=lllns491&amp;IDPr=11546",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.lillianes.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-22935-1-6d901ddd0e13e755045c517117151b84",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:07:57.237216Z"
+  },
+  "cambio_residenza": {
+   "service_id": "007042:comweb:cambio-residenza-305-22933-1-fd9a97ce261cbc91d11109568fd9e294",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.lillianes.ao.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-22933-1-fd9a97ce261cbc91d11109568fd9e294",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.lillianes.ao.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-22933-1-fd9a97ce261cbc91d11109568fd9e294",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.lillianes.ao.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-22933-1-fd9a97ce261cbc91d11109568fd9e294",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.lillianes.ao.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-22933-1-fd9a97ce261cbc91d11109568fd9e294",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:07:59.466241Z"
+  },
+  "carta_identita": {
+   "service_id": "007042:comweb:carta-d-identita-elettronica-cie-788-22923-1-8b2484e7e58b7c176a687290734e5bd5",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.lillianes.ao.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-22923-1-8b2484e7e58b7c176a687290734e5bd5",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.lillianes.ao.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-22923-1-8b2484e7e58b7c176a687290734e5bd5",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.lillianes.ao.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-22923-1-8b2484e7e58b7c176a687290734e5bd5",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:08:01.630775Z"
+  }
+ }
+}

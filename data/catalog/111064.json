@@ -1,0 +1,143 @@
+{
+ "municipality_istat": "111064",
+ "services": {
+  "accesso_atti": {
+   "service_id": "111064:wp:1081",
+   "title": "Richiedere l&#8217;accesso agli atti",
+   "source_url": "https://www.comune.sannicologerrei.ca.it/servizio/richiedere-laccesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sannicologerrei.ca.it/servizio/richiedere-laccesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sannicologerrei.ca.it/servizio/richiedere-laccesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T15:06:04.297534Z"
+  },
+  "cambio_residenza": {
+   "service_id": "111064:wp:980",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.sannicologerrei.ca.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sannicologerrei.ca.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sannicologerrei.ca.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T15:06:07.655806Z"
+  },
+  "carta_identita": {
+   "service_id": "111064:wp:979",
+   "title": "Carta di identità",
+   "source_url": "https://www.comune.sannicologerrei.ca.it/servizio/carta-di-identita/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sannicologerrei.ca.it/servizio/carta-di-identita/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sannicologerrei.ca.it/servizio/carta-di-identita/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T15:06:09.149691Z"
+  },
+  "stato_civile": {
+   "service_id": "111064:wp:977",
+   "title": "Certificati di anagrafe, stato civile e di elettorale",
+   "source_url": "https://www.comune.sannicologerrei.ca.it/servizio/certificati-di-anagrafe-stato-civile-e-di-elettorale/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sannicologerrei.ca.it/servizio/certificati-di-anagrafe-stato-civile-e-di-elettorale/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sannicologerrei.ca.it/servizio/certificati-di-anagrafe-stato-civile-e-di-elettorale/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T15:06:10.575141Z"
+  },
+  "tributi_imu": {
+   "service_id": "111064:wp:1051",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.sannicologerrei.ca.it/servizio/pagare-tributi-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sannicologerrei.ca.it/servizio/pagare-tributi-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sannicologerrei.ca.it/servizio/pagare-tributi-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T15:06:11.967422Z"
+  },
+  "tributi_tari": {
+   "service_id": "111064:wp:1070",
+   "title": "Tributo TARI",
+   "source_url": "https://www.comune.sannicologerrei.ca.it/servizio/tributo-tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sannicologerrei.ca.it/servizio/tributo-tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sannicologerrei.ca.it/servizio/tributo-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T15:06:13.357753Z"
+  }
+ }
+}

@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "001179",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001179:comweb:richiedere-l-accesso-agli-atti-317-36400-1-bf2fee2d9727aaeeb67e20476df76eb0",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.parella.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-36400-1-bf2fee2d9727aaeeb67e20476df76eb0",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.parella.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-36400-1-bf2fee2d9727aaeeb67e20476df76eb0",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.parella.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-36400-1-bf2fee2d9727aaeeb67e20476df76eb0",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.parella.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=prll1123&amp;IDPr=10584",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.parella.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-36400-1-bf2fee2d9727aaeeb67e20476df76eb0",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:45:24.461858Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001179:comweb:cambio-residenza-305-36398-1-bc9e604d5ee49e5c34304021da1d6af3",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.parella.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-36398-1-bc9e604d5ee49e5c34304021da1d6af3",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.parella.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-36398-1-bc9e604d5ee49e5c34304021da1d6af3",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.parella.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-36398-1-bc9e604d5ee49e5c34304021da1d6af3",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.parella.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-36398-1-bc9e604d5ee49e5c34304021da1d6af3",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:45:26.700897Z"
+  },
+  "tributi_tari": {
+   "service_id": "001179:comweb:pagamento-tassa-rifiuti-tari-659-36480-1-590d9c2451e8ecee20819c04295d28e3",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.parella.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-36480-1-590d9c2451e8ecee20819c04295d28e3",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.parella.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-36480-1-590d9c2451e8ecee20819c04295d28e3",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.parella.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-36480-1-590d9c2451e8ecee20819c04295d28e3",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:45:29.386903Z"
+  }
+ }
+}

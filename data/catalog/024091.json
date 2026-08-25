@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "024091",
+ "services": {
+  "accesso_atti": {
+   "service_id": "024091:wp:894",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.sandrigo.vi.it/?post_type=servizio&p=894",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sandrigo.vi.it/?post_type=servizio&p=894",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sandrigo.vi.it/?post_type=servizio&p=894",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:15:09.542602Z"
+  },
+  "cambio_residenza": {
+   "service_id": "024091:wp:217",
+   "title": "Cambio di residenza tramite Portale Nazionale – ANPR",
+   "source_url": "https://www.comune.sandrigo.vi.it/?post_type=servizio&p=217",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sandrigo.vi.it/?post_type=servizio&p=217",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sandrigo.vi.it/?post_type=servizio&p=217",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:15:22.038476Z"
+  },
+  "stato_civile": {
+   "service_id": "024091:wp:1587",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.sandrigo.vi.it/?post_type=servizio&p=1587",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sandrigo.vi.it/?post_type=servizio&p=1587",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sandrigo.vi.it/?post_type=servizio&p=1587",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:15:29.901432Z"
+  },
+  "tributi_imu": {
+   "service_id": "024091:wp:1104",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.sandrigo.vi.it/?post_type=servizio&p=1104",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sandrigo.vi.it/?post_type=servizio&p=1104",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sandrigo.vi.it/?post_type=servizio&p=1104",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:15:38.659476Z"
+  }
+ }
+}

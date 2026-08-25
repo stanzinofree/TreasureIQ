@@ -1,0 +1,113 @@
+{
+ "municipality_istat": "096015",
+ "services": {
+  "accesso_atti": {
+   "service_id": "096015:comweb:richiedere-l-accesso-agli-atti-317-43924-1-167ad9b467f7169176904beb2ed00bc2",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.castellettocervo.bi.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-43924-1-167ad9b467f7169176904beb2ed00bc2",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castellettocervo.bi.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-43924-1-167ad9b467f7169176904beb2ed00bc2",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castellettocervo.bi.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-43924-1-167ad9b467f7169176904beb2ed00bc2",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.castellettocervo.bi.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=cstllttcrv379&amp;IDPr=11726",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.castellettocervo.bi.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-43924-1-167ad9b467f7169176904beb2ed00bc2",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:55:06.462143Z"
+  },
+  "cambio_residenza": {
+   "service_id": "096015:comweb:cambio-residenza-305-43922-1-c54d15ad61d7e875b0c42c93e1c9fae7",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.castellettocervo.bi.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-43922-1-c54d15ad61d7e875b0c42c93e1c9fae7",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castellettocervo.bi.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-43922-1-c54d15ad61d7e875b0c42c93e1c9fae7",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castellettocervo.bi.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-43922-1-c54d15ad61d7e875b0c42c93e1c9fae7",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.castellettocervo.bi.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-43922-1-c54d15ad61d7e875b0c42c93e1c9fae7",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:55:08.381006Z"
+  },
+  "carta_identita": {
+   "service_id": "096015:comweb:carta-d-identita-elettronica-cie-788-43912-1-509f7952ae45d5f5a811bc863acbe2bb",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.castellettocervo.bi.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-43912-1-509f7952ae45d5f5a811bc863acbe2bb",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castellettocervo.bi.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-43912-1-509f7952ae45d5f5a811bc863acbe2bb",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castellettocervo.bi.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-43912-1-509f7952ae45d5f5a811bc863acbe2bb",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.cartaidentita.interno.gov.it/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.castellettocervo.bi.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-43912-1-509f7952ae45d5f5a811bc863acbe2bb",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:55:10.471671Z"
+  }
+ }
+}

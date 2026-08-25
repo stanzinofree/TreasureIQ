@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "001189",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001189:comweb:richiedere-l-accesso-agli-atti-317-45112-1-b6993ec5e202dd9b80da92a3be07a937",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.pianezza.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-45112-1-b6993ec5e202dd9b80da92a3be07a937",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pianezza.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-45112-1-b6993ec5e202dd9b80da92a3be07a937",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pianezza.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-45112-1-b6993ec5e202dd9b80da92a3be07a937",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:45:57.019195Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001189:comweb:cambio-residenza-305-45110-1-c340e40e548f74a8368759f8ffe25b22",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.pianezza.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-45110-1-c340e40e548f74a8368759f8ffe25b22",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pianezza.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-45110-1-c340e40e548f74a8368759f8ffe25b22",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pianezza.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-45110-1-c340e40e548f74a8368759f8ffe25b22",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.pianezza.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-45110-1-c340e40e548f74a8368759f8ffe25b22",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:45:59.725394Z"
+  },
+  "carta_identita": {
+   "service_id": "001189:comweb:carta-d-identita-elettronica-cie-788-45100-1-c697369082ac36cf14c1198f0009fc86",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.pianezza.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-45100-1-c697369082ac36cf14c1198f0009fc86",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pianezza.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-45100-1-c697369082ac36cf14c1198f0009fc86",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pianezza.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-45100-1-c697369082ac36cf14c1198f0009fc86",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.pianezza.to.it/it-it/prenota-appuntamento#/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.pianezza.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-45100-1-c697369082ac36cf14c1198f0009fc86",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:46:01.675483Z"
+  }
+ }
+}

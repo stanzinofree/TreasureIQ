@@ -1,0 +1,123 @@
+{
+ "municipality_istat": "003055",
+ "services": {
+  "accesso_atti": {
+   "service_id": "003055:comweb:richiedere-l-accesso-agli-atti-317-46300-1-073595d10328ba522db5f3c202ca428d",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.cressa.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-46300-1-073595d10328ba522db5f3c202ca428d",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cressa.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-46300-1-073595d10328ba522db5f3c202ca428d",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cressa.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-46300-1-073595d10328ba522db5f3c202ca428d",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.cressa.no.it/lang/it/servizi/richiedere-laccesso-agli-atti/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.cressa.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-46300-1-073595d10328ba522db5f3c202ca428d",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:57:31.240525Z"
+  },
+  "cambio_residenza": {
+   "service_id": "003055:comweb:cambio-residenza-305-46298-1-76f3d666e59bd677c29c443544423a93",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.cressa.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-46298-1-76f3d666e59bd677c29c443544423a93",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cressa.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-46298-1-76f3d666e59bd677c29c443544423a93",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cressa.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-46298-1-76f3d666e59bd677c29c443544423a93",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.cressa.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-46298-1-76f3d666e59bd677c29c443544423a93",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:57:33.839434Z"
+  },
+  "carta_identita": {
+   "service_id": "003055:comweb:carta-d-identita-elettronica-cie-788-46288-1-ee43c14a9495f210e90b0774f4421f7d",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.cressa.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-46288-1-ee43c14a9495f210e90b0774f4421f7d",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cressa.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-46288-1-ee43c14a9495f210e90b0774f4421f7d",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cressa.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-46288-1-ee43c14a9495f210e90b0774f4421f7d",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:57:36.047129Z"
+  },
+  "stato_civile": {
+   "service_id": "003055:comweb:richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-46288-1-dc98eb6f7b95a09f9f3ecb03fae1d4f2",
+   "title": "Richiesta di certificati/attestazioni/estratti di stato civile",
+   "source_url": "https://www.comune.cressa.no.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-46288-1-dc98eb6f7b95a09f9f3ecb03fae1d4f2",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cressa.no.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-46288-1-dc98eb6f7b95a09f9f3ecb03fae1d4f2",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cressa.no.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-46288-1-dc98eb6f7b95a09f9f3ecb03fae1d4f2",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:57:38.184630Z"
+  }
+ }
+}

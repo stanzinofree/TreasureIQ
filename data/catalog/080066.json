@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "080066",
+ "services": {
+  "accesso_atti": {
+   "service_id": "080066:wp:300",
+   "title": "Richiesta di accesso agli atti",
+   "source_url": "https://comune.roccafortedelgreco.rc.it/servizio/richiesta-di-accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.roccafortedelgreco.rc.it/servizio/richiesta-di-accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.roccafortedelgreco.rc.it/servizio/richiesta-di-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:40:20.446267Z"
+  },
+  "cambio_residenza": {
+   "service_id": "080066:wp:304",
+   "title": "Richiesta dichiarazione di cambio di residenza",
+   "source_url": "https://comune.roccafortedelgreco.rc.it/servizio/richiesta-dichiarazione-di-cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.roccafortedelgreco.rc.it/servizio/richiesta-dichiarazione-di-cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.roccafortedelgreco.rc.it/servizio/richiesta-dichiarazione-di-cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:40:23.909652Z"
+  },
+  "tributi_imu": {
+   "service_id": "080066:wp:229",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://comune.roccafortedelgreco.rc.it/servizio/pagare-tributi-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.roccafortedelgreco.rc.it/servizio/pagare-tributi-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.roccafortedelgreco.rc.it/servizio/pagare-tributi-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:40:27.211607Z"
+  }
+ }
+}

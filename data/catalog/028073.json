@@ -1,0 +1,133 @@
+{
+ "municipality_istat": "028073",
+ "services": {
+  "accesso_atti": {
+   "service_id": "028073:wp:265",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.saccolongo.pd.it/?post_type=servizio&p=265",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.saccolongo.pd.it/?post_type=servizio&p=265",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.saccolongo.pd.it/?post_type=servizio&p=265",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:16:01.858058Z"
+  },
+  "cambio_residenza": {
+   "service_id": "028073:wp:1790",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.saccolongo.pd.it/?post_type=servizio&p=1790",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.saccolongo.pd.it/?post_type=servizio&p=1790",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.saccolongo.pd.it/?post_type=servizio&p=1790",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:16:11.744223Z"
+  },
+  "carta_identita": {
+   "service_id": "028073:wp:263",
+   "title": "Carta di Identita' Elettronica",
+   "source_url": "https://www.comune.saccolongo.pd.it/?post_type=servizio&p=263",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.saccolongo.pd.it/?post_type=servizio&p=263",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.saccolongo.pd.it/?post_type=servizio&p=263",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.saccolongo.pd.it/wp-content/uploads/2024/02/2025_ASSENSO-ESPATRIO-PER-MINORENNE.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.saccolongo.pd.it/?post_type=servizio&p=263",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:16:19.451866Z"
+  },
+  "stato_civile": {
+   "service_id": "028073:wp:1799",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.saccolongo.pd.it/?post_type=servizio&p=1799",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.saccolongo.pd.it/?post_type=servizio&p=1799",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.saccolongo.pd.it/?post_type=servizio&p=1799",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:16:35.892193Z"
+  },
+  "tributi_imu": {
+   "service_id": "028073:wp:1788",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.saccolongo.pd.it/?post_type=servizio&p=1788",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.saccolongo.pd.it/?post_type=servizio&p=1788",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.saccolongo.pd.it/?post_type=servizio&p=1788",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:16:43.724114Z"
+  }
+ }
+}

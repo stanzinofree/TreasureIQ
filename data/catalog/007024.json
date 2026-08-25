@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "007024",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "007024:wp:755",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.doues.ao.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.doues.ao.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.doues.ao.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:06:12.132434Z"
+  },
+  "tributi_imu": {
+   "service_id": "007024:wp:313",
+   "title": "IMU (Imposta Municipale Propria)",
+   "source_url": "https://comune.doues.ao.it/servizio/imu-imposta-municipale-propria/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.doues.ao.it/servizio/imu-imposta-municipale-propria/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.doues.ao.it/servizio/imu-imposta-municipale-propria/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:06:18.017606Z"
+  }
+ }
+}

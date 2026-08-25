@@ -1,0 +1,41 @@
+{
+ "municipality_istat": "087006",
+ "services": {
+  "accesso_atti": {
+   "service_id": "087006:wp:388",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.adrano.ct.it/?post_type=servizio&p=388",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.adrano.ct.it/?post_type=servizio&p=388",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.adrano.ct.it/?post_type=servizio&p=388",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.adrano.ct.it/wp-content/uploads/2024/09/Regolamento-in-materia-di-accesso-documentale-civico-e-generalizzato.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.adrano.ct.it/?post_type=servizio&p=388",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:48:51.484029Z"
+  }
+ }
+}

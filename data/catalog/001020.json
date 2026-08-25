@@ -1,0 +1,123 @@
+{
+ "municipality_istat": "001020",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001020:comweb:richiedere-l-accesso-agli-atti-317-33760-1-f84ebd565c591fa273004039a68d23eb",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.banchette.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-33760-1-f84ebd565c591fa273004039a68d23eb",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.banchette.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-33760-1-f84ebd565c591fa273004039a68d23eb",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.banchette.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-33760-1-f84ebd565c591fa273004039a68d23eb",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:38:53.105965Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001020:comweb:cambio-residenza-305-33758-1-522767200da3237ff531599e94556991",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.banchette.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-33758-1-522767200da3237ff531599e94556991",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.banchette.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-33758-1-522767200da3237ff531599e94556991",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.banchette.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-33758-1-522767200da3237ff531599e94556991",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.banchette.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-33758-1-522767200da3237ff531599e94556991",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:38:54.998294Z"
+  },
+  "carta_identita": {
+   "service_id": "001020:comweb:carta-d-identita-elettronica-cie-788-33748-1-e6a31f467858a577c1b3168136662446",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.banchette.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-33748-1-e6a31f467858a577c1b3168136662446",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.banchette.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-33748-1-e6a31f467858a577c1b3168136662446",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.banchette.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-33748-1-e6a31f467858a577c1b3168136662446",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:38:57.341884Z"
+  },
+  "tributi_imu": {
+   "service_id": "001020:comweb:pagare-tributi-imu-600-33849-1-db381d75604a320bed1fe8f41a073e6b",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.banchette.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-33849-1-db381d75604a320bed1fe8f41a073e6b",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.banchette.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-33849-1-db381d75604a320bed1fe8f41a073e6b",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.banchette.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-33849-1-db381d75604a320bed1fe8f41a073e6b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.riscotel.it/calcoloimu/?comune=A607",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.banchette.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-33849-1-db381d75604a320bed1fe8f41a073e6b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:38:59.964984Z"
+  }
+ }
+}

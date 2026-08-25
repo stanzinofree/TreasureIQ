@@ -1,0 +1,87 @@
+{
+ "municipality_istat": "012076",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "012076:comweb:cambio-residenza-305-47750-1-5d61a1c21fbd564bc77902a182f53b80",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.germignaga.va.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-47750-1-5d61a1c21fbd564bc77902a182f53b80",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.germignaga.va.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-47750-1-5d61a1c21fbd564bc77902a182f53b80",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.germignaga.va.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-47750-1-5d61a1c21fbd564bc77902a182f53b80",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.germignaga.va.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-47750-1-5d61a1c21fbd564bc77902a182f53b80",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:13:24.663370Z"
+  },
+  "tributi_imu": {
+   "service_id": "012076:comweb:imposta-municipale-propria-imu-953-47841-1-505b02038625a8716e03db2c5abcea08",
+   "title": "Imposta Municipale Propria (IMU)",
+   "source_url": "https://www.comune.germignaga.va.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-47841-1-505b02038625a8716e03db2c5abcea08",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.germignaga.va.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-47841-1-505b02038625a8716e03db2c5abcea08",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.germignaga.va.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-47841-1-505b02038625a8716e03db2c5abcea08",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:13:27.334431Z"
+  },
+  "tributi_tari": {
+   "service_id": "012076:comweb:tassa-rifiuti-tari-954-47832-1-851b5edea34fb0cf3757fab97526e0e2",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.germignaga.va.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-47832-1-851b5edea34fb0cf3757fab97526e0e2",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.germignaga.va.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-47832-1-851b5edea34fb0cf3757fab97526e0e2",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.germignaga.va.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-47832-1-851b5edea34fb0cf3757fab97526e0e2",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:13:29.997877Z"
+  }
+ }
+}

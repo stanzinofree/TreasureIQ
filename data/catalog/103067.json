@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "103067",
+ "services": {
+  "accesso_atti": {
+   "service_id": "103067:comweb:richiedere-l-accesso-agli-atti-317-61691-1-ba4fb6569a0f594cb104749c7e17d97a",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.trasquera.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-61691-1-ba4fb6569a0f594cb104749c7e17d97a",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.trasquera.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-61691-1-ba4fb6569a0f594cb104749c7e17d97a",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.trasquera.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-61691-1-ba4fb6569a0f594cb104749c7e17d97a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:03:55.606630Z"
+  },
+  "cambio_residenza": {
+   "service_id": "103067:comweb:cambio-residenza-305-61689-1-79993df21bdd721ed2d029ef3c5a35ec",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.trasquera.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-61689-1-79993df21bdd721ed2d029ef3c5a35ec",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.trasquera.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-61689-1-79993df21bdd721ed2d029ef3c5a35ec",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.trasquera.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-61689-1-79993df21bdd721ed2d029ef3c5a35ec",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:03:58.234403Z"
+  }
+ }
+}

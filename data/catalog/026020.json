@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "026020",
+ "services": {
+  "accesso_atti": {
+   "service_id": "026020:wp:320",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.colle-umberto.tv.it/?post_type=servizio&p=320",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.colle-umberto.tv.it/?post_type=servizio&p=320",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.colle-umberto.tv.it/?post_type=servizio&p=320",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:28:16.656423Z"
+  },
+  "carta_identita": {
+   "service_id": "026020:wp:690",
+   "title": "Rilascio Carta di Identità Elettronica",
+   "source_url": "https://www.comune.colle-umberto.tv.it/?post_type=servizio&p=690",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.colle-umberto.tv.it/?post_type=servizio&p=690",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.colle-umberto.tv.it/?post_type=servizio&p=690",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:28:25.590700Z"
+  },
+  "stato_civile": {
+   "service_id": "026020:wp:709",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.colle-umberto.tv.it/?post_type=servizio&p=709",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.colle-umberto.tv.it/?post_type=servizio&p=709",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.colle-umberto.tv.it/?post_type=servizio&p=709",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:28:35.690230Z"
+  },
+  "tributi_imu": {
+   "service_id": "026020:wp:717",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.colle-umberto.tv.it/?post_type=servizio&p=717",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.colle-umberto.tv.it/?post_type=servizio&p=717",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.colle-umberto.tv.it/?post_type=servizio&p=717",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:28:41.797596Z"
+  }
+ }
+}

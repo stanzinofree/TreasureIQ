@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "103055",
+ "services": {
+  "accesso_atti": {
+   "service_id": "103055:comweb:richiedere-l-accesso-agli-atti-317-55320-1-afd12eb3b6668ed4b07a5f91e07d3432",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.premeno.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-55320-1-afd12eb3b6668ed4b07a5f91e07d3432",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.premeno.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-55320-1-afd12eb3b6668ed4b07a5f91e07d3432",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.premeno.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-55320-1-afd12eb3b6668ed4b07a5f91e07d3432",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:03:22.814068Z"
+  },
+  "tributi_imu": {
+   "service_id": "103055:comweb:imposta-municipale-propria-imu-953-55409-1-29c9955f45185b5d577ff8475b45266b",
+   "title": "Imposta Municipale Propria (IMU)",
+   "source_url": "https://www.comune.premeno.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-55409-1-29c9955f45185b5d577ff8475b45266b",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.premeno.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-55409-1-29c9955f45185b5d577ff8475b45266b",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.premeno.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-55409-1-29c9955f45185b5d577ff8475b45266b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:03:25.219575Z"
+  },
+  "tributi_tari": {
+   "service_id": "103055:comweb:tassa-rifiuti-tari-954-55400-1-27b14ed24d0e48da6428ce80c9d8907f",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.premeno.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-55400-1-27b14ed24d0e48da6428ce80c9d8907f",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.premeno.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-55400-1-27b14ed24d0e48da6428ce80c9d8907f",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.premeno.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-55400-1-27b14ed24d0e48da6428ce80c9d8907f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:03:27.942796Z"
+  }
+ }
+}

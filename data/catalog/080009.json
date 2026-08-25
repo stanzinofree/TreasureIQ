@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "080009",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "080009:wp:409",
+   "title": "Cambio di residenza tramite Portale Nazionale – ANPR",
+   "source_url": "https://www.comune.bianco.rc.it/?post_type=servizio&p=409",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bianco.rc.it/?post_type=servizio&p=409",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bianco.rc.it/?post_type=servizio&p=409",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:39:11.674376Z"
+  },
+  "tributi_imu": {
+   "service_id": "080009:wp:292",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.bianco.rc.it/?post_type=servizio&p=292",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bianco.rc.it/?post_type=servizio&p=292",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bianco.rc.it/?post_type=servizio&p=292",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:39:16.901505Z"
+  }
+ }
+}

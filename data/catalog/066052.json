@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "066052",
+ "services": {
+  "accesso_atti": {
+   "service_id": "066052:wp:452",
+   "title": "Accesso agli atti amministrativi dei servizi demografici e richiesta di certificati",
+   "source_url": "https://comune.lucoli.aq.it/servizio/accesso-agli-atti-amministrativi/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.lucoli.aq.it/servizio/accesso-agli-atti-amministrativi/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.lucoli.aq.it/servizio/accesso-agli-atti-amministrativi/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:22:17.854331Z"
+  },
+  "carta_identita": {
+   "service_id": "066052:wp:275",
+   "title": "Prenotazione per Carta d&#8217;identità Elettronica",
+   "source_url": "https://comune.lucoli.aq.it/servizio/prenotazione-per-carta-didentita-elettronica/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.lucoli.aq.it/servizio/prenotazione-per-carta-didentita-elettronica/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.lucoli.aq.it/servizio/prenotazione-per-carta-didentita-elettronica/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:22:20.428798Z"
+  },
+  "tributi_tari": {
+   "service_id": "066052:wp:1282",
+   "title": "Bonus sociale rifiuti (TARI)",
+   "source_url": "https://comune.lucoli.aq.it/servizio/bonus-sociale-rifiuti-tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.lucoli.aq.it/servizio/bonus-sociale-rifiuti-tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.lucoli.aq.it/servizio/bonus-sociale-rifiuti-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:22:22.938326Z"
+  }
+ }
+}

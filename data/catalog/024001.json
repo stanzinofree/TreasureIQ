@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "024001",
+ "services": {
+  "accesso_atti": {
+   "service_id": "024001:wp:261",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.agugliaro.vi.it/?post_type=servizio&p=261",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.agugliaro.vi.it/?post_type=servizio&p=261",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.agugliaro.vi.it/?post_type=servizio&p=261",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:50:36.254298Z"
+  },
+  "stato_civile": {
+   "service_id": "024001:wp:779",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.agugliaro.vi.it/?post_type=servizio&p=779",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.agugliaro.vi.it/?post_type=servizio&p=779",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.agugliaro.vi.it/?post_type=servizio&p=779",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:50:42.594116Z"
+  },
+  "tributi_imu": {
+   "service_id": "024001:wp:721",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.agugliaro.vi.it/?post_type=servizio&p=721",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.agugliaro.vi.it/?post_type=servizio&p=721",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.agugliaro.vi.it/?post_type=servizio&p=721",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:50:48.102343Z"
+  }
+ }
+}

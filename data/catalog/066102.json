@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "066102",
+ "services": {
+  "carta_identita": {
+   "service_id": "066102:wp:237",
+   "title": "Carta d&#8217;identità",
+   "source_url": "https://comune.trasacco.aq.it/servizio/carta-didentita/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.trasacco.aq.it/servizio/carta-didentita/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.trasacco.aq.it/servizio/carta-didentita/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:23:05.918401Z"
+  },
+  "stato_civile": {
+   "service_id": "066102:wp:235",
+   "title": "Rilascio di certificati, estratti e copie integrali di atti di stato civile",
+   "source_url": "https://comune.trasacco.aq.it/servizio/rilascio-di-certificati-estratti-e-copie-integrali-di-atti-di-stato-civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.trasacco.aq.it/servizio/rilascio-di-certificati-estratti-e-copie-integrali-di-atti-di-stato-civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.trasacco.aq.it/servizio/rilascio-di-certificati-estratti-e-copie-integrali-di-atti-di-stato-civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:23:10.568650Z"
+  },
+  "tributi_imu": {
+   "service_id": "066102:wp:9095",
+   "title": "IMU &#8211; Imposta municipale propria",
+   "source_url": "https://comune.trasacco.aq.it/servizio/imu-imposta-municipale-propria/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.trasacco.aq.it/servizio/imu-imposta-municipale-propria/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.trasacco.aq.it/servizio/imu-imposta-municipale-propria/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:23:13.200663Z"
+  }
+ }
+}

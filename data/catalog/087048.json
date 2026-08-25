@@ -1,0 +1,113 @@
+{
+ "municipality_istat": "087048",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "087048:wp:7128",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.santavenerina.ct.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.santavenerina.ct.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.santavenerina.ct.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.santavenerina.ct.it/wp-content/uploads/2025/03/Piano-di-miglioramento-del-sito-e-dei-servizi.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.santavenerina.ct.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:49:45.834724Z"
+  },
+  "carta_identita": {
+   "service_id": "087048:wp:8948",
+   "title": "Rilascio carta d&#8217;identità elettronica (CIE)",
+   "source_url": "https://comune.santavenerina.ct.it/servizio/rilascio-carta-didentita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.santavenerina.ct.it/servizio/rilascio-carta-didentita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.santavenerina.ct.it/servizio/rilascio-carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.santavenerina.ct.it/wp-content/uploads/2025/03/Piano-di-miglioramento-del-sito-e-dei-servizi.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.santavenerina.ct.it/servizio/rilascio-carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:49:49.211761Z"
+  },
+  "tributi_tari": {
+   "service_id": "087048:wp:8778",
+   "title": "Domanda di agevolazioni tributarie e tariffarie – TARI",
+   "source_url": "https://comune.santavenerina.ct.it/servizio/domanda-di-agevolazioni-tributarie-e-tariffarie-tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.santavenerina.ct.it/servizio/domanda-di-agevolazioni-tributarie-e-tariffarie-tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.santavenerina.ct.it/servizio/domanda-di-agevolazioni-tributarie-e-tariffarie-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.santavenerina.ct.it/wp-content/uploads/2025/03/Piano-di-miglioramento-del-sito-e-dei-servizi.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.santavenerina.ct.it/servizio/domanda-di-agevolazioni-tributarie-e-tariffarie-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:49:52.616948Z"
+  }
+ }
+}

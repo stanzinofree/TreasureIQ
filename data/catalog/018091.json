@@ -1,0 +1,64 @@
+{
+ "municipality_istat": "018091",
+ "services": {
+  "accesso_atti": {
+   "service_id": "018091:comweb:richiedere-l-accesso-agli-atti-317-14354-1-e745ee809d25681514aa542e44d35c15",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.mezzanarabattone.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-14354-1-e745ee809d25681514aa542e44d35c15",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.mezzanarabattone.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-14354-1-e745ee809d25681514aa542e44d35c15",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.mezzanarabattone.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-14354-1-e745ee809d25681514aa542e44d35c15",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.mezzanarabattone.pv.it/lang/it/servizi/richiedere-laccesso-agli-atti/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.mezzanarabattone.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-14354-1-e745ee809d25681514aa542e44d35c15",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:21:24.244804Z"
+  },
+  "tributi_tari": {
+   "service_id": "018091:comweb:pagamento-tassa-rifiuti-tari-659-14435-1-506d3bb9d8abcfe22e12009c35014f6a",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.mezzanarabattone.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-14435-1-506d3bb9d8abcfe22e12009c35014f6a",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.mezzanarabattone.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-14435-1-506d3bb9d8abcfe22e12009c35014f6a",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.mezzanarabattone.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-14435-1-506d3bb9d8abcfe22e12009c35014f6a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:21:26.332463Z"
+  }
+ }
+}

@@ -1,0 +1,64 @@
+{
+ "municipality_istat": "001007",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001007:comweb:richiedere-l-accesso-agli-atti-317-19502-1-bcb22a65b03dca1fa15c99956cee0c27",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.alpette.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-19502-1-bcb22a65b03dca1fa15c99956cee0c27",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.alpette.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-19502-1-bcb22a65b03dca1fa15c99956cee0c27",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.alpette.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-19502-1-bcb22a65b03dca1fa15c99956cee0c27",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.alpette.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=lptt407&amp;IDPr=11311",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.alpette.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-19502-1-bcb22a65b03dca1fa15c99956cee0c27",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:38:21.694867Z"
+  },
+  "tributi_tari": {
+   "service_id": "001007:comweb:pagamento-tassa-rifiuti-tari-659-19583-1-2fd08fc3cfe5d3413c069519e80e5b21",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.alpette.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-19583-1-2fd08fc3cfe5d3413c069519e80e5b21",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.alpette.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-19583-1-2fd08fc3cfe5d3413c069519e80e5b21",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.alpette.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-19583-1-2fd08fc3cfe5d3413c069519e80e5b21",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:38:23.645235Z"
+  }
+ }
+}

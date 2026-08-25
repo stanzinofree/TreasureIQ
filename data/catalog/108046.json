@@ -1,0 +1,110 @@
+{
+ "municipality_istat": "108046",
+ "services": {
+  "accesso_atti": {
+   "service_id": "108046:wp:1206",
+   "title": "Accesso agli atti in materia di edilizia",
+   "source_url": "https://www.comune.vedanoallambro.mb.it/servizio/accesso-agli-atti-in-materia-di-edilizia/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vedanoallambro.mb.it/servizio/accesso-agli-atti-in-materia-di-edilizia/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vedanoallambro.mb.it/servizio/accesso-agli-atti-in-materia-di-edilizia/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T15:04:38.117272Z"
+  },
+  "carta_identita": {
+   "service_id": "108046:wp:1917",
+   "title": "Carta d&#8217;identità elettronica CIE",
+   "source_url": "https://www.comune.vedanoallambro.mb.it/servizio/carta-didentita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vedanoallambro.mb.it/servizio/carta-didentita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vedanoallambro.mb.it/servizio/carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.vedanoallambro.mb.it/wp-content/uploads/2024/08/ISTANZA-PER-RISTAMPA-PIN-PUK-1.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vedanoallambro.mb.it/servizio/carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T15:04:39.595972Z"
+  },
+  "tributi_imu": {
+   "service_id": "108046:wp:1118",
+   "title": "Imposta municipale propria &#8211; IMU",
+   "source_url": "https://www.comune.vedanoallambro.mb.it/servizio/imposta-municipale-propria-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vedanoallambro.mb.it/servizio/imposta-municipale-propria-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vedanoallambro.mb.it/servizio/imposta-municipale-propria-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T15:04:41.089459Z"
+  },
+  "tributi_tari": {
+   "service_id": "108046:wp:1111",
+   "title": "Tassa rifiuti &#8211; TARI",
+   "source_url": "https://www.comune.vedanoallambro.mb.it/servizio/tassa-rifiuti-tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vedanoallambro.mb.it/servizio/tassa-rifiuti-tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vedanoallambro.mb.it/servizio/tassa-rifiuti-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T15:04:42.642718Z"
+  }
+ }
+}

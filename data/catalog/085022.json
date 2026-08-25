@@ -1,0 +1,120 @@
+{
+ "municipality_istat": "085022",
+ "services": {
+  "accesso_atti": {
+   "service_id": "085022:wp:746",
+   "title": "Richiesta accesso agli atti",
+   "source_url": "https://comune.villalba.cl.it/servizio/accesso-civico/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.villalba.cl.it/servizio/accesso-civico/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.villalba.cl.it/servizio/accesso-civico/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:48:01.378266Z"
+  },
+  "cambio_residenza": {
+   "service_id": "085022:wp:2605",
+   "title": "Cambio residenza",
+   "source_url": "https://comune.villalba.cl.it/servizio/cambio-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.villalba.cl.it/servizio/cambio-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.villalba.cl.it/servizio/cambio-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:48:04.546466Z"
+  },
+  "carta_identita": {
+   "service_id": "085022:wp:577",
+   "title": "Carta d&#8217;Identità Elettronica (CIE)",
+   "source_url": "https://comune.villalba.cl.it/servizio/carta-didentita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.villalba.cl.it/servizio/carta-didentita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.villalba.cl.it/servizio/carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:48:07.257658Z"
+  },
+  "stato_civile": {
+   "service_id": "085022:wp:624",
+   "title": "Certificato di Stato Civile",
+   "source_url": "https://comune.villalba.cl.it/servizio/certificato-di-stato-civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.villalba.cl.it/servizio/certificato-di-stato-civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.villalba.cl.it/servizio/certificato-di-stato-civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:48:10.210621Z"
+  },
+  "tributi_imu": {
+   "service_id": "085022:wp:2518",
+   "title": "Pagare tributo IMU",
+   "source_url": "https://comune.villalba.cl.it/servizio/pagare-tributo-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.villalba.cl.it/servizio/pagare-tributo-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.villalba.cl.it/servizio/pagare-tributo-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:48:13.444888Z"
+  }
+ }
+}

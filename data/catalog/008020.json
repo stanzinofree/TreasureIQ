@@ -1,0 +1,123 @@
+{
+ "municipality_istat": "008020",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "008020:comweb:cambio-residenza-305-51594-1-b48dcf44da899b524a4309de2c3a68f4",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.chiusavecchia.im.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-51594-1-b48dcf44da899b524a4309de2c3a68f4",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.chiusavecchia.im.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-51594-1-b48dcf44da899b524a4309de2c3a68f4",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.chiusavecchia.im.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-51594-1-b48dcf44da899b524a4309de2c3a68f4",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.chiusavecchia.im.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-51594-1-b48dcf44da899b524a4309de2c3a68f4",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:11:14.898377Z"
+  },
+  "carta_identita": {
+   "service_id": "008020:comweb:carta-d-identita-elettronica-cie-788-51584-1-c75444d4e932465f2e2cc0b4783bde76",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.chiusavecchia.im.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-51584-1-c75444d4e932465f2e2cc0b4783bde76",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.chiusavecchia.im.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-51584-1-c75444d4e932465f2e2cc0b4783bde76",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.chiusavecchia.im.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-51584-1-c75444d4e932465f2e2cc0b4783bde76",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:11:16.906828Z"
+  },
+  "tributi_imu": {
+   "service_id": "008020:comweb:pagare-tributi-imu-600-51685-1-ebf005b85d4f28f0e6a40218911ee095",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.chiusavecchia.im.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-51685-1-ebf005b85d4f28f0e6a40218911ee095",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.chiusavecchia.im.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-51685-1-ebf005b85d4f28f0e6a40218911ee095",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.chiusavecchia.im.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-51685-1-ebf005b85d4f28f0e6a40218911ee095",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.chiusavecchia.im.it/lang/it/servizi/pagare-tributi-imu-1/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.chiusavecchia.im.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-51685-1-ebf005b85d4f28f0e6a40218911ee095",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:11:19.019520Z"
+  },
+  "tributi_tari": {
+   "service_id": "008020:comweb:tassa-rifiuti-tari-954-51676-1-a5e31c58b768dfb2b5949518f90a1931",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.chiusavecchia.im.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-51676-1-a5e31c58b768dfb2b5949518f90a1931",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.chiusavecchia.im.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-51676-1-a5e31c58b768dfb2b5949518f90a1931",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.chiusavecchia.im.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-51676-1-a5e31c58b768dfb2b5949518f90a1931",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:11:20.932945Z"
+  }
+ }
+}

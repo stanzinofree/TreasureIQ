@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "024123",
+ "services": {
+  "accesso_atti": {
+   "service_id": "024123:wp:387",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.valliona.vi.it/?post_type=servizio&p=387",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.valliona.vi.it/?post_type=servizio&p=387",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.valliona.vi.it/?post_type=servizio&p=387",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:20:08.864270Z"
+  },
+  "carta_identita": {
+   "service_id": "024123:wp:1197",
+   "title": "Rilascio PIN e PUK per CIE",
+   "source_url": "https://www.comune.valliona.vi.it/?post_type=servizio&p=1197",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.valliona.vi.it/?post_type=servizio&p=1197",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.valliona.vi.it/?post_type=servizio&p=1197",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:20:15.718596Z"
+  },
+  "stato_civile": {
+   "service_id": "024123:wp:1456",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.valliona.vi.it/?post_type=servizio&p=1456",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.valliona.vi.it/?post_type=servizio&p=1456",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.valliona.vi.it/?post_type=servizio&p=1456",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:20:25.361583Z"
+  }
+ }
+}

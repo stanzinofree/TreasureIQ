@@ -1,0 +1,110 @@
+{
+ "municipality_istat": "001052",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001052:comweb:richiedere-l-accesso-agli-atti-317-20294-1-012b2a273ffa6b680d0b4399869f54aa",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "http://www.comune.canischio.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-20294-1-012b2a273ffa6b680d0b4399869f54aa",
+   "options": [
+    {
+     "mode": "information",
+     "url": "http://www.comune.canischio.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-20294-1-012b2a273ffa6b680d0b4399869f54aa",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "http://www.comune.canischio.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-20294-1-012b2a273ffa6b680d0b4399869f54aa",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.canischio.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=cnsch655&amp;IDPr=11383",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "http://www.comune.canischio.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-20294-1-012b2a273ffa6b680d0b4399869f54aa",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:40:35.640736Z"
+  },
+  "carta_identita": {
+   "service_id": "001052:comweb:carta-d-identita-1-20283-1-081679faf0b31915c0f1d381d4148657",
+   "title": "Carta d'Identità",
+   "source_url": "http://www.comune.canischio.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-20283-1-081679faf0b31915c0f1d381d4148657",
+   "options": [
+    {
+     "mode": "information",
+     "url": "http://www.comune.canischio.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-20283-1-081679faf0b31915c0f1d381d4148657",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "http://www.comune.canischio.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-20283-1-081679faf0b31915c0f1d381d4148657",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:40:38.350368Z"
+  },
+  "tributi_imu": {
+   "service_id": "001052:comweb:pagare-tributi-imu-600-20384-1-eaa61424532f504de8c7e3fa8ab9a484",
+   "title": "Pagare tributi IMU",
+   "source_url": "http://www.comune.canischio.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-20384-1-eaa61424532f504de8c7e3fa8ab9a484",
+   "options": [
+    {
+     "mode": "information",
+     "url": "http://www.comune.canischio.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-20384-1-eaa61424532f504de8c7e3fa8ab9a484",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "http://www.comune.canischio.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-20384-1-eaa61424532f504de8c7e3fa8ab9a484",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:40:41.348257Z"
+  },
+  "tributi_tari": {
+   "service_id": "001052:comweb:pagamento-tassa-rifiuti-tari-659-20375-1-6e10f5e004fe9d7ff3441595bab9d9d1",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "http://www.comune.canischio.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-20375-1-6e10f5e004fe9d7ff3441595bab9d9d1",
+   "options": [
+    {
+     "mode": "information",
+     "url": "http://www.comune.canischio.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-20375-1-6e10f5e004fe9d7ff3441595bab9d9d1",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "http://www.comune.canischio.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-20375-1-6e10f5e004fe9d7ff3441595bab9d9d1",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:40:43.684908Z"
+  }
+ }
+}

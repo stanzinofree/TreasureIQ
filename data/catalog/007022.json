@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "007022",
+ "services": {
+  "accesso_atti": {
+   "service_id": "007022:wp:4482",
+   "title": "Richiedere l’accesso agli atti",
+   "source_url": "https://www.comune.courmayeur.ao.it/servizio/richiedere-accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.courmayeur.ao.it/servizio/richiedere-accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.courmayeur.ao.it/servizio/richiedere-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:06:00.079835Z"
+  },
+  "tributi_imu": {
+   "service_id": "007022:wp:4632",
+   "title": "Servizio IMU",
+   "source_url": "https://www.comune.courmayeur.ao.it/servizio/servizio-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.courmayeur.ao.it/servizio/servizio-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.courmayeur.ao.it/servizio/servizio-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:06:04.157642Z"
+  },
+  "tributi_tari": {
+   "service_id": "007022:wp:4634",
+   "title": "Servizio TARI",
+   "source_url": "https://www.comune.courmayeur.ao.it/servizio/servizio-tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.courmayeur.ao.it/servizio/servizio-tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.courmayeur.ao.it/servizio/servizio-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:06:08.447562Z"
+  }
+ }
+}

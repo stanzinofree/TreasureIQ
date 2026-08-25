@@ -1,0 +1,136 @@
+{
+ "municipality_istat": "003045",
+ "services": {
+  "accesso_atti": {
+   "service_id": "003045:comweb:richiedere-l-accesso-agli-atti-317-26235-1-ca9fffb29cee83a6130e9c9892eb0a68",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.cavagliodagogna.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-26235-1-ca9fffb29cee83a6130e9c9892eb0a68",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cavagliodagogna.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-26235-1-ca9fffb29cee83a6130e9c9892eb0a68",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cavagliodagogna.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-26235-1-ca9fffb29cee83a6130e9c9892eb0a68",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.cavagliodagogna.no.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=cvgldggn336&amp;IDPr=10556",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.cavagliodagogna.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-26235-1-ca9fffb29cee83a6130e9c9892eb0a68",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:57:16.739772Z"
+  },
+  "cambio_residenza": {
+   "service_id": "003045:comweb:cambio-residenza-305-26233-1-f54371e9637dbd885e6f2860d8535952",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.cavagliodagogna.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-26233-1-f54371e9637dbd885e6f2860d8535952",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cavagliodagogna.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-26233-1-f54371e9637dbd885e6f2860d8535952",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cavagliodagogna.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-26233-1-f54371e9637dbd885e6f2860d8535952",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.cavagliodagogna.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-26233-1-f54371e9637dbd885e6f2860d8535952",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:57:18.880914Z"
+  },
+  "carta_identita": {
+   "service_id": "003045:comweb:carta-d-identita-elettronica-cie-788-26223-1-0b1f06fa0675056563260d25d48e9593",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.cavagliodagogna.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-26223-1-0b1f06fa0675056563260d25d48e9593",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cavagliodagogna.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-26223-1-0b1f06fa0675056563260d25d48e9593",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cavagliodagogna.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-26223-1-0b1f06fa0675056563260d25d48e9593",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:57:20.842882Z"
+  },
+  "stato_civile": {
+   "service_id": "003045:comweb:certificato-di-matrimonio-30-26229-1-006360f1056497434188de8353d847d7",
+   "title": "Certificato di matrimonio",
+   "source_url": "https://www.comune.cavagliodagogna.no.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-matrimonio-30-26229-1-006360f1056497434188de8353d847d7",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cavagliodagogna.no.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-matrimonio-30-26229-1-006360f1056497434188de8353d847d7",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cavagliodagogna.no.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-matrimonio-30-26229-1-006360f1056497434188de8353d847d7",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.servizipubblicaamministrazione.it/Servizi/FiloDiretto/ProcedimentiClient.Aspx?CE=cvgldggn336&amp;IDGruppoSelez=2970",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.cavagliodagogna.no.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-matrimonio-30-26229-1-006360f1056497434188de8353d847d7",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:57:22.995295Z"
+  }
+ }
+}

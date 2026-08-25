@@ -1,0 +1,110 @@
+{
+ "municipality_istat": "007026",
+ "services": {
+  "accesso_atti": {
+   "service_id": "007026:comweb:richiedere-l-accesso-agli-atti-317-9470-1-47c929c2975d62d2730dae522d4cd2c3",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.etroubles.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-9470-1-47c929c2975d62d2730dae522d4cd2c3",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.etroubles.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-9470-1-47c929c2975d62d2730dae522d4cd2c3",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.etroubles.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-9470-1-47c929c2975d62d2730dae522d4cd2c3",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.etroubles.ao.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=trbls1087&amp;IDPr=11048",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.etroubles.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-9470-1-47c929c2975d62d2730dae522d4cd2c3",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:06:41.404339Z"
+  },
+  "carta_identita": {
+   "service_id": "007026:comweb:carta-d-identita-elettronica-cie-788-9459-1-83e78d07875a183bca99031b1862aff1",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.etroubles.ao.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-9459-1-83e78d07875a183bca99031b1862aff1",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.etroubles.ao.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-9459-1-83e78d07875a183bca99031b1862aff1",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.etroubles.ao.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-9459-1-83e78d07875a183bca99031b1862aff1",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:06:43.460099Z"
+  },
+  "tributi_imu": {
+   "service_id": "007026:comweb:pagare-tributi-imu-600-9560-1-4cdb329f8b46f20ca53365211e8e4082",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.etroubles.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-9560-1-4cdb329f8b46f20ca53365211e8e4082",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.etroubles.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-9560-1-4cdb329f8b46f20ca53365211e8e4082",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.etroubles.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-9560-1-4cdb329f8b46f20ca53365211e8e4082",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:06:45.564319Z"
+  },
+  "tributi_tari": {
+   "service_id": "007026:comweb:pagamento-tassa-rifiuti-tari-659-9551-1-f4568482038ad6ad7374584134c44d64",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.etroubles.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-9551-1-f4568482038ad6ad7374584134c44d64",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.etroubles.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-9551-1-f4568482038ad6ad7374584134c44d64",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.etroubles.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-9551-1-f4568482038ad6ad7374584134c44d64",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:06:47.647819Z"
+  }
+ }
+}

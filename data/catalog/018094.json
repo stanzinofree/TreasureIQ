@@ -1,0 +1,110 @@
+{
+ "municipality_istat": "018094",
+ "services": {
+  "accesso_atti": {
+   "service_id": "018094:comweb:richiedere-l-accesso-agli-atti-317-28743-1-5b55ff73c5473c30ea3e6c11e0e64243",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.montaltopavese.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-28743-1-5b55ff73c5473c30ea3e6c11e0e64243",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montaltopavese.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-28743-1-5b55ff73c5473c30ea3e6c11e0e64243",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montaltopavese.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-28743-1-5b55ff73c5473c30ea3e6c11e0e64243",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:21:28.493152Z"
+  },
+  "carta_identita": {
+   "service_id": "018094:comweb:carta-d-identita-per-minori-404-28731-1-f4b65cf1bd016724ed1269f9f52d060a",
+   "title": "Carta d'identità per minori",
+   "source_url": "https://www.comune.montaltopavese.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-per-minori-404-28731-1-f4b65cf1bd016724ed1269f9f52d060a",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montaltopavese.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-per-minori-404-28731-1-f4b65cf1bd016724ed1269f9f52d060a",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montaltopavese.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-per-minori-404-28731-1-f4b65cf1bd016724ed1269f9f52d060a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:21:32.099169Z"
+  },
+  "stato_civile": {
+   "service_id": "018094:comweb:certificato-di-stato-civile-6-28731-1-bc313492ca46e07ff1fe423c1e439ad1",
+   "title": "Certificato di stato civile",
+   "source_url": "https://www.comune.montaltopavese.pv.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-stato-civile-6-28731-1-bc313492ca46e07ff1fe423c1e439ad1",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montaltopavese.pv.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-stato-civile-6-28731-1-bc313492ca46e07ff1fe423c1e439ad1",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montaltopavese.pv.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-stato-civile-6-28731-1-bc313492ca46e07ff1fe423c1e439ad1",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/certificati/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.montaltopavese.pv.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-stato-civile-6-28731-1-bc313492ca46e07ff1fe423c1e439ad1",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:21:34.910643Z"
+  },
+  "tributi_tari": {
+   "service_id": "018094:comweb:tassa-rifiuti-tari-954-28823-1-f5b3918d4511c7887a31b0d2be86c52f",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.montaltopavese.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-28823-1-f5b3918d4511c7887a31b0d2be86c52f",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montaltopavese.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-28823-1-f5b3918d4511c7887a31b0d2be86c52f",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montaltopavese.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-28823-1-f5b3918d4511c7887a31b0d2be86c52f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:21:37.868616Z"
+  }
+ }
+}

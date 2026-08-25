@@ -1,0 +1,77 @@
+{
+ "municipality_istat": "001207",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001207:comweb:richiedere-l-accesso-agli-atti-317-38644-1-ae982c9f1642fc6a764b66bb79bad983",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.pratiglione.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-38644-1-ae982c9f1642fc6a764b66bb79bad983",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pratiglione.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-38644-1-ae982c9f1642fc6a764b66bb79bad983",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pratiglione.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-38644-1-ae982c9f1642fc6a764b66bb79bad983",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.pratiglione.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=prtgln689&amp;IDPr=10524",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.pratiglione.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-38644-1-ae982c9f1642fc6a764b66bb79bad983",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:46:38.246729Z"
+  },
+  "stato_civile": {
+   "service_id": "001207:comweb:certificato-di-stato-civile-6-38632-1-16b6b2b870f6bfa3a1fe8a620198e55d",
+   "title": "Certificato di stato civile",
+   "source_url": "https://www.comune.pratiglione.to.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-stato-civile-6-38632-1-16b6b2b870f6bfa3a1fe8a620198e55d",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pratiglione.to.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-stato-civile-6-38632-1-16b6b2b870f6bfa3a1fe8a620198e55d",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pratiglione.to.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-stato-civile-6-38632-1-16b6b2b870f6bfa3a1fe8a620198e55d",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/certificati/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.pratiglione.to.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-stato-civile-6-38632-1-16b6b2b870f6bfa3a1fe8a620198e55d",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:46:40.101905Z"
+  }
+ }
+}

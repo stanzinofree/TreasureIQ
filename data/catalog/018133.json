@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "018133",
+ "services": {
+  "accesso_atti": {
+   "service_id": "018133:comweb:richiedere-l-accesso-agli-atti-317-59962-1-f7e0025c51dbc57c271cf911536d37a5",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.sanciprianopo.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-59962-1-f7e0025c51dbc57c271cf911536d37a5",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanciprianopo.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-59962-1-f7e0025c51dbc57c271cf911536d37a5",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanciprianopo.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-59962-1-f7e0025c51dbc57c271cf911536d37a5",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:24:32.466170Z"
+  },
+  "cambio_residenza": {
+   "service_id": "018133:comweb:cambio-residenza-305-59960-1-4c6a30f210092e4366f097fb96cefed1",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.sanciprianopo.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-59960-1-4c6a30f210092e4366f097fb96cefed1",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanciprianopo.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-59960-1-4c6a30f210092e4366f097fb96cefed1",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanciprianopo.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-59960-1-4c6a30f210092e4366f097fb96cefed1",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:24:36.319384Z"
+  },
+  "stato_civile": {
+   "service_id": "018133:comweb:richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-59950-1-27aa265a32a1415fb7a93d934aa8960d",
+   "title": "Richiesta di certificati/attestazioni/estratti di stato civile",
+   "source_url": "https://www.comune.sanciprianopo.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-59950-1-27aa265a32a1415fb7a93d934aa8960d",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanciprianopo.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-59950-1-27aa265a32a1415fb7a93d934aa8960d",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanciprianopo.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-59950-1-27aa265a32a1415fb7a93d934aa8960d",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:24:39.391663Z"
+  }
+ }
+}

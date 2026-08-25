@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "103077",
+ "services": {
+  "accesso_atti": {
+   "service_id": "103077:comweb:richiedere-l-accesso-agli-atti-317-58765-1-de66dd90dfe62744e700b88ea67ba4ed",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.vogogna.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-58765-1-de66dd90dfe62744e700b88ea67ba4ed",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vogogna.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-58765-1-de66dd90dfe62744e700b88ea67ba4ed",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vogogna.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-58765-1-de66dd90dfe62744e700b88ea67ba4ed",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:04:11.934200Z"
+  },
+  "cambio_residenza": {
+   "service_id": "103077:comweb:cambio-residenza-305-58763-1-1f6e2031912b9d15c7930f88be2c3b4a",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.vogogna.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-58763-1-1f6e2031912b9d15c7930f88be2c3b4a",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vogogna.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-58763-1-1f6e2031912b9d15c7930f88be2c3b4a",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vogogna.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-58763-1-1f6e2031912b9d15c7930f88be2c3b4a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:04:14.761230Z"
+  },
+  "carta_identita": {
+   "service_id": "103077:comweb:carta-d-identita-elettronica-cie-788-58753-1-92194259f8bb85824b780f665e82f3fe",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.vogogna.vb.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-58753-1-92194259f8bb85824b780f665e82f3fe",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vogogna.vb.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-58753-1-92194259f8bb85824b780f665e82f3fe",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vogogna.vb.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-58753-1-92194259f8bb85824b780f665e82f3fe",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:04:17.428515Z"
+  },
+  "tributi_tari": {
+   "service_id": "103077:comweb:pagamento-tassa-rifiuti-tari-659-58845-1-ceae756422fab1b3c6aa706b4f15a914",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.vogogna.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-58845-1-ceae756422fab1b3c6aa706b4f15a914",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vogogna.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-58845-1-ceae756422fab1b3c6aa706b4f15a914",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vogogna.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-58845-1-ceae756422fab1b3c6aa706b4f15a914",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:04:20.473649Z"
+  }
+ }
+}

@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "070070",
+ "services": {
+  "tributi_imu": {
+   "service_id": "070070:wp:5906",
+   "title": "Dichiarazione IMU",
+   "source_url": "https://comune.sanmassimo.cb.it/servizio/dichiarazione-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.sanmassimo.cb.it/servizio/dichiarazione-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.sanmassimo.cb.it/servizio/dichiarazione-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:25:22.751395Z"
+  },
+  "tributi_tari": {
+   "service_id": "070070:wp:5907",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://comune.sanmassimo.cb.it/servizio/pagamento-tassa-rifiuti-tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.sanmassimo.cb.it/servizio/pagamento-tassa-rifiuti-tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.sanmassimo.cb.it/servizio/pagamento-tassa-rifiuti-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:25:28.376775Z"
+  }
+ }
+}

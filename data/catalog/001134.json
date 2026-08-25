@@ -1,0 +1,110 @@
+{
+ "municipality_istat": "001134",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001134:comweb:richiedere-l-accesso-agli-atti-317-39304-1-4404b5b465c2859e7d40eb796288c6f9",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.locana.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-39304-1-4404b5b465c2859e7d40eb796288c6f9",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.locana.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-39304-1-4404b5b465c2859e7d40eb796288c6f9",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.locana.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-39304-1-4404b5b465c2859e7d40eb796288c6f9",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.locana.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=lcn1289&amp;IDPr=12783",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.locana.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-39304-1-4404b5b465c2859e7d40eb796288c6f9",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:44:04.829448Z"
+  },
+  "carta_identita": {
+   "service_id": "001134:comweb:carta-d-identita-elettronica-cie-788-39292-1-17fd0eabedbd7605117df793f264c2db",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.locana.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-39292-1-17fd0eabedbd7605117df793f264c2db",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.locana.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-39292-1-17fd0eabedbd7605117df793f264c2db",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.locana.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-39292-1-17fd0eabedbd7605117df793f264c2db",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:44:07.034287Z"
+  },
+  "tributi_imu": {
+   "service_id": "001134:comweb:pagare-tributi-imu-600-39393-1-88d7e60c5168841a3941aa92456695e5",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.locana.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-39393-1-88d7e60c5168841a3941aa92456695e5",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.locana.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-39393-1-88d7e60c5168841a3941aa92456695e5",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.locana.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-39393-1-88d7e60c5168841a3941aa92456695e5",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:44:09.478958Z"
+  },
+  "tributi_tari": {
+   "service_id": "001134:comweb:pagamento-tassa-rifiuti-tari-659-39384-1-4e49d374d402e9692f6e3ce5ecf283a6",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.locana.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-39384-1-4e49d374d402e9692f6e3ce5ecf283a6",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.locana.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-39384-1-4e49d374d402e9692f6e3ce5ecf283a6",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.locana.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-39384-1-4e49d374d402e9692f6e3ce5ecf283a6",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:44:11.672604Z"
+  }
+ }
+}

@@ -1,0 +1,87 @@
+{
+ "municipality_istat": "011017",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "011017:wp:2746",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.levanto.sp.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.levanto.sp.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.levanto.sp.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:12:52.058417Z"
+  },
+  "carta_identita": {
+   "service_id": "011017:wp:920",
+   "title": "Carta d&#8217;identità elettronica",
+   "source_url": "https://comune.levanto.sp.it/servizio/carta-didentita/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.levanto.sp.it/servizio/carta-didentita/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.levanto.sp.it/servizio/carta-didentita/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.levanto.sp.it/wp-content/uploads/2023/06/Accesso-Carta-Identita-Figlio-Minorenne.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.levanto.sp.it/servizio/carta-didentita/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:12:54.486905Z"
+  },
+  "tributi_imu": {
+   "service_id": "011017:wp:3434",
+   "title": "Calcolo dell’IMU online",
+   "source_url": "https://comune.levanto.sp.it/servizio/calcolo-dellimu-online/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.levanto.sp.it/servizio/calcolo-dellimu-online/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.levanto.sp.it/servizio/calcolo-dellimu-online/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:12:56.992007Z"
+  }
+ }
+}

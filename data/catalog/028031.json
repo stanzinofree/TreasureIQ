@@ -1,0 +1,110 @@
+{
+ "municipality_istat": "028031",
+ "services": {
+  "accesso_atti": {
+   "service_id": "028031:wp:310",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.cintoeuganeo.pd.it/?post_type=servizio&p=310",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cintoeuganeo.pd.it/?post_type=servizio&p=310",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cintoeuganeo.pd.it/?post_type=servizio&p=310",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:57:41.540876Z"
+  },
+  "cambio_residenza": {
+   "service_id": "028031:wp:677",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.cintoeuganeo.pd.it/?post_type=servizio&p=677",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cintoeuganeo.pd.it/?post_type=servizio&p=677",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cintoeuganeo.pd.it/?post_type=servizio&p=677",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:57:54.598733Z"
+  },
+  "carta_identita": {
+   "service_id": "028031:wp:864",
+   "title": "Rilascio Carta di Identità Elettronica",
+   "source_url": "https://www.comune.cintoeuganeo.pd.it/?post_type=servizio&p=864",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cintoeuganeo.pd.it/?post_type=servizio&p=864",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cintoeuganeo.pd.it/?post_type=servizio&p=864",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.cintoeuganeo.pd.it/wp-content/uploads/2024/03/RICHIESTA-CARTA-IDENTITA-MINORE.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cintoeuganeo.pd.it/?post_type=servizio&p=864",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:58:03.643477Z"
+  },
+  "stato_civile": {
+   "service_id": "028031:wp:911",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.cintoeuganeo.pd.it/?post_type=servizio&p=911",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cintoeuganeo.pd.it/?post_type=servizio&p=911",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cintoeuganeo.pd.it/?post_type=servizio&p=911",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:58:10.534455Z"
+  }
+ }
+}

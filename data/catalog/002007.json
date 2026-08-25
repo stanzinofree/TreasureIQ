@@ -1,0 +1,87 @@
+{
+ "municipality_istat": "002007",
+ "services": {
+  "accesso_atti": {
+   "service_id": "002007:comweb:richiedere-l-accesso-agli-atti-317-54389-1-fe72ea96ef360fee368dc95a9f5b6338",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.asiglianovercellese.vc.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-54389-1-fe72ea96ef360fee368dc95a9f5b6338",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.asiglianovercellese.vc.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-54389-1-fe72ea96ef360fee368dc95a9f5b6338",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.asiglianovercellese.vc.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-54389-1-fe72ea96ef360fee368dc95a9f5b6338",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:53:24.141793Z"
+  },
+  "cambio_residenza": {
+   "service_id": "002007:comweb:cambio-residenza-305-54387-1-fb3fe690b5642cb61572e7e1c8d9dd65",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.asiglianovercellese.vc.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-54387-1-fb3fe690b5642cb61572e7e1c8d9dd65",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.asiglianovercellese.vc.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-54387-1-fb3fe690b5642cb61572e7e1c8d9dd65",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.asiglianovercellese.vc.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-54387-1-fb3fe690b5642cb61572e7e1c8d9dd65",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.asiglianovercellese.vc.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-54387-1-fb3fe690b5642cb61572e7e1c8d9dd65",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:53:26.497082Z"
+  },
+  "tributi_tari": {
+   "service_id": "002007:comweb:pagamento-tassa-rifiuti-tari-659-54469-1-56f1412344492778637439a1b0534954",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.asiglianovercellese.vc.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-54469-1-56f1412344492778637439a1b0534954",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.asiglianovercellese.vc.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-54469-1-56f1412344492778637439a1b0534954",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.asiglianovercellese.vc.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-54469-1-56f1412344492778637439a1b0534954",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:53:29.130247Z"
+  }
+ }
+}

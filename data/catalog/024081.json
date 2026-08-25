@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "024081",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "024081:wp:1047",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.pove.vi.it/?post_type=servizio&p=1047",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pove.vi.it/?post_type=servizio&p=1047",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pove.vi.it/?post_type=servizio&p=1047",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:12:09.126559Z"
+  },
+  "stato_civile": {
+   "service_id": "024081:wp:1106",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.pove.vi.it/?post_type=servizio&p=1106",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pove.vi.it/?post_type=servizio&p=1106",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pove.vi.it/?post_type=servizio&p=1106",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:12:15.956209Z"
+  }
+ }
+}

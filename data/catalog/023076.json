@@ -1,0 +1,87 @@
+{
+ "municipality_istat": "023076",
+ "services": {
+  "accesso_atti": {
+   "service_id": "023076:wp:414",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.sanpietroincariano.vr.it/?post_type=servizio&p=414",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanpietroincariano.vr.it/?post_type=servizio&p=414",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanpietroincariano.vr.it/?post_type=servizio&p=414",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:47:05.031281Z"
+  },
+  "carta_identita": {
+   "service_id": "023076:wp:2393",
+   "title": "Rilascio Carta di Identità Elettronica",
+   "source_url": "https://www.comune.sanpietroincariano.vr.it/?post_type=servizio&p=2393",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanpietroincariano.vr.it/?post_type=servizio&p=2393",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanpietroincariano.vr.it/?post_type=servizio&p=2393",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.sanpietroincariano.vr.it/wp-content/uploads/2026/02/ASSENSO-ALL_ESPATRIO-MINORI.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanpietroincariano.vr.it/?post_type=servizio&p=2393",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:47:19.893011Z"
+  },
+  "stato_civile": {
+   "service_id": "023076:wp:232",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.sanpietroincariano.vr.it/?post_type=servizio&p=232",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanpietroincariano.vr.it/?post_type=servizio&p=232",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanpietroincariano.vr.it/?post_type=servizio&p=232",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:47:28.596635Z"
+  }
+ }
+}

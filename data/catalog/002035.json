@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "002035",
+ "services": {
+  "accesso_atti": {
+   "service_id": "002035:comweb:richiedere-l-accesso-agli-atti-317-32836-1-8a41efa9ae8b24901fc1d0ee5c25ca6f",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.sangiacomovercellese.vc.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-32836-1-8a41efa9ae8b24901fc1d0ee5c25ca6f",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sangiacomovercellese.vc.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-32836-1-8a41efa9ae8b24901fc1d0ee5c25ca6f",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sangiacomovercellese.vc.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-32836-1-8a41efa9ae8b24901fc1d0ee5c25ca6f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.sangiacomovercellese.vc.it/lang/it/servizi/richiedere-laccesso-agli-atti/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.sangiacomovercellese.vc.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-32836-1-8a41efa9ae8b24901fc1d0ee5c25ca6f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:54:14.112853Z"
+  },
+  "cambio_residenza": {
+   "service_id": "002035:comweb:cambio-residenza-305-32834-1-6f767b0339a3de85d8589461bd09014c",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.sangiacomovercellese.vc.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-32834-1-6f767b0339a3de85d8589461bd09014c",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sangiacomovercellese.vc.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-32834-1-6f767b0339a3de85d8589461bd09014c",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sangiacomovercellese.vc.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-32834-1-6f767b0339a3de85d8589461bd09014c",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:54:16.459685Z"
+  },
+  "tributi_imu": {
+   "service_id": "002035:comweb:pagare-tributi-imu-600-32925-1-91ec3fdcd6f632cfed4130463c2dc665",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.sangiacomovercellese.vc.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-32925-1-91ec3fdcd6f632cfed4130463c2dc665",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sangiacomovercellese.vc.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-32925-1-91ec3fdcd6f632cfed4130463c2dc665",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sangiacomovercellese.vc.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-32925-1-91ec3fdcd6f632cfed4130463c2dc665",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.sangiacomovercellese.vc.it/lang/it/servizi/pagare-tributi-imu/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.sangiacomovercellese.vc.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-32925-1-91ec3fdcd6f632cfed4130463c2dc665",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:54:21.213385Z"
+  }
+ }
+}

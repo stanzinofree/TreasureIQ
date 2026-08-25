@@ -1,0 +1,120 @@
+{
+ "municipality_istat": "026050",
+ "services": {
+  "accesso_atti": {
+   "service_id": "026050:wp:393",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.nervesa.tv.it/?post_type=servizio&p=393",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.nervesa.tv.it/?post_type=servizio&p=393",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.nervesa.tv.it/?post_type=servizio&p=393",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:32:25.722710Z"
+  },
+  "cambio_residenza": {
+   "service_id": "026050:wp:1243",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.nervesa.tv.it/?post_type=servizio&p=1243",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.nervesa.tv.it/?post_type=servizio&p=1243",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.nervesa.tv.it/?post_type=servizio&p=1243",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:32:32.044042Z"
+  },
+  "carta_identita": {
+   "service_id": "026050:wp:851",
+   "title": "Rilascio PIN e PUK per CIE",
+   "source_url": "https://www.comune.nervesa.tv.it/?post_type=servizio&p=851",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.nervesa.tv.it/?post_type=servizio&p=851",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.nervesa.tv.it/?post_type=servizio&p=851",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:32:42.320131Z"
+  },
+  "stato_civile": {
+   "service_id": "026050:wp:1266",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.nervesa.tv.it/?post_type=servizio&p=1266",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.nervesa.tv.it/?post_type=servizio&p=1266",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.nervesa.tv.it/?post_type=servizio&p=1266",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:32:48.306677Z"
+  },
+  "tributi_imu": {
+   "service_id": "026050:wp:1236",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.nervesa.tv.it/?post_type=servizio&p=1236",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.nervesa.tv.it/?post_type=servizio&p=1236",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.nervesa.tv.it/?post_type=servizio&p=1236",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:32:58.604389Z"
+  }
+ }
+}

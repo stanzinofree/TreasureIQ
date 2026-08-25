@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "035041",
+ "services": {
+  "accesso_atti": {
+   "service_id": "035041:wp:1378",
+   "title": "Accesso agli atti",
+   "source_url": "https://www.comune.toano.re.it/servizi/accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.toano.re.it/servizi/accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.toano.re.it/servizi/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:47:36.510407Z"
+  },
+  "cambio_residenza": {
+   "service_id": "035041:wp:13860",
+   "title": "Cambio di residenza e variazioni anagrafiche",
+   "source_url": "https://www.comune.toano.re.it/servizi/cambio-di-residenza-e-variazioni-anagrafiche/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.toano.re.it/servizi/cambio-di-residenza-e-variazioni-anagrafiche/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.toano.re.it/servizi/cambio-di-residenza-e-variazioni-anagrafiche/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:47:39.461281Z"
+  },
+  "stato_civile": {
+   "service_id": "035041:wp:13856",
+   "title": "Separazioni e divorzi davanti all’Ufficiale di Stato Civile",
+   "source_url": "https://www.comune.toano.re.it/servizi/separazioni-e-divorzi-davanti-allufficiale-di-stato-civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.toano.re.it/servizi/separazioni-e-divorzi-davanti-allufficiale-di-stato-civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.toano.re.it/servizi/separazioni-e-divorzi-davanti-allufficiale-di-stato-civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:47:42.510652Z"
+  }
+ }
+}

@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "065110",
+ "services": {
+  "accesso_atti": {
+   "service_id": "065110:wp:132",
+   "title": "Accesso agli atti",
+   "source_url": "https://comune.romagnanoalmonte.sa.it/servizio/accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.romagnanoalmonte.sa.it/servizio/accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.romagnanoalmonte.sa.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:19:43.946280Z"
+  },
+  "tributi_imu": {
+   "service_id": "065110:wp:392",
+   "title": "Calcolo IMU (Imposta Municipale Propria)",
+   "source_url": "https://comune.romagnanoalmonte.sa.it/servizio/calcolo-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.romagnanoalmonte.sa.it/servizio/calcolo-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.romagnanoalmonte.sa.it/servizio/calcolo-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:19:46.395911Z"
+  }
+ }
+}

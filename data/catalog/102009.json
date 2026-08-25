@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "102009",
+ "services": {
+  "accesso_atti": {
+   "service_id": "102009:wp:388",
+   "title": "Accesso agli atti",
+   "source_url": "https://www.comune.drapia.vv.it/servizio/accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.drapia.vv.it/servizio/accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.drapia.vv.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:59:47.330914Z"
+  },
+  "cambio_residenza": {
+   "service_id": "102009:wp:404",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.drapia.vv.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.drapia.vv.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.drapia.vv.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:59:48.412775Z"
+  },
+  "tributi_imu": {
+   "service_id": "102009:wp:285",
+   "title": "Tributi IMU",
+   "source_url": "https://www.comune.drapia.vv.it/servizio/tributi-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.drapia.vv.it/servizio/tributi-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.drapia.vv.it/servizio/tributi-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:59:49.645762Z"
+  },
+  "tributi_tari": {
+   "service_id": "102009:wp:395",
+   "title": "Tributi Tari",
+   "source_url": "https://www.comune.drapia.vv.it/servizio/tributi-tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.drapia.vv.it/servizio/tributi-tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.drapia.vv.it/servizio/tributi-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:59:50.808862Z"
+  }
+ }
+}

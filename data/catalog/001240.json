@@ -1,0 +1,64 @@
+{
+ "municipality_istat": "001240",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001240:comweb:richiedere-l-accesso-agli-atti-317-53192-1-a6db6c2cb0b04d42dce00d64b3a642f3",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.sanfrancescoalcampo.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-53192-1-a6db6c2cb0b04d42dce00d64b3a642f3",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanfrancescoalcampo.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-53192-1-a6db6c2cb0b04d42dce00d64b3a642f3",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanfrancescoalcampo.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-53192-1-a6db6c2cb0b04d42dce00d64b3a642f3",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.sanfrancescoalcampo.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=snfrncsclcmp477&amp;IDPr=12639",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.sanfrancescoalcampo.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-53192-1-a6db6c2cb0b04d42dce00d64b3a642f3",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:48:50.420359Z"
+  },
+  "tributi_tari": {
+   "service_id": "001240:comweb:dichiarazione-tassa-rifiuti-tari-1028-53272-1-b94f71b8adbf1dc6c86cece64ea6097e",
+   "title": "Dichiarazione Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.sanfrancescoalcampo.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/dichiarazione-tassa-rifiuti-tari-1028-53272-1-b94f71b8adbf1dc6c86cece64ea6097e",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanfrancescoalcampo.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/dichiarazione-tassa-rifiuti-tari-1028-53272-1-b94f71b8adbf1dc6c86cece64ea6097e",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanfrancescoalcampo.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/dichiarazione-tassa-rifiuti-tari-1028-53272-1-b94f71b8adbf1dc6c86cece64ea6097e",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:48:52.815020Z"
+  }
+ }
+}

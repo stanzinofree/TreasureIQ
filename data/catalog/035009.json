@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "035009",
+ "services": {
+  "accesso_atti": {
+   "service_id": "035009:wp:17227",
+   "title": "Richiesta di accesso agli atti all&#8217;area Tecnica",
+   "source_url": "https://www.comune.campagnola-emilia.re.it/servizio/richiesta-di-accesso-agli-atti-allarea-tecnica/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.campagnola-emilia.re.it/servizio/richiesta-di-accesso-agli-atti-allarea-tecnica/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.campagnola-emilia.re.it/servizio/richiesta-di-accesso-agli-atti-allarea-tecnica/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:47:11.026444Z"
+  }
+ }
+}

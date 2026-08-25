@@ -1,0 +1,159 @@
+{
+ "municipality_istat": "063031",
+ "services": {
+  "accesso_atti": {
+   "service_id": "063031:comweb:richiedere-l-accesso-agli-atti-317-56251-1-5452562bf87e7150c1acecd8560858a4",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.forio.na.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-56251-1-5452562bf87e7150c1acecd8560858a4",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.forio.na.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-56251-1-5452562bf87e7150c1acecd8560858a4",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.forio.na.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-56251-1-5452562bf87e7150c1acecd8560858a4",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "http://cloud.urbi.it/urbi/progs/urp/ur1PR003.sto?DB_NAME=n201947&amp;AmbitoBloccato=0&amp;MacroTipoBloccato=621&amp;TipoBloccato=848|1&amp;catnome=Anagrafe%2520e%2520stato%2520civile&amp;caturl=https://www.comune.forio.na.it/it-it/servizi/anagrafe-e-stato-civile&amp;servnome=Richiedere%2520l%2527accesso%2520agli%2520atti&amp;servurl=https://www.comune.forio.na.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-56251-1-5452562bf87e7150c1acecd8560858a4",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.forio.na.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-56251-1-5452562bf87e7150c1acecd8560858a4",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:14:03.486487Z"
+  },
+  "cambio_residenza": {
+   "service_id": "063031:comweb:cambio-residenza-305-56249-1-3b7564ffb734774a2d64b329401bc5c8",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.forio.na.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-56249-1-3b7564ffb734774a2d64b329401bc5c8",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.forio.na.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-56249-1-3b7564ffb734774a2d64b329401bc5c8",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.forio.na.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-56249-1-3b7564ffb734774a2d64b329401bc5c8",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/?catnome=Anagrafe%2520e%2520stato%2520civile&amp;caturl=https://www.comune.forio.na.it/it-it/servizi/anagrafe-e-stato-civile&amp;servnome=Cambio%2520Residenza&amp;servurl=https://www.comune.forio.na.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-56249-1-3b7564ffb734774a2d64b329401bc5c8",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.forio.na.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-56249-1-3b7564ffb734774a2d64b329401bc5c8",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:14:07.837634Z"
+  },
+  "carta_identita": {
+   "service_id": "063031:comweb:carta-d-identita-elettronica-cie-788-56239-1-2bb8a872922037fa8f8558875e9d88fb",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.forio.na.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-56239-1-2bb8a872922037fa8f8558875e9d88fb",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.forio.na.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-56239-1-2bb8a872922037fa8f8558875e9d88fb",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.forio.na.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-56239-1-2bb8a872922037fa8f8558875e9d88fb",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.forio.na.it/urbi/progs/urp/ur1UR069.sto?DB_NAME=n201947&amp;catnome=Prenotazione%2520appuntamenti&amp;caturl=https://servizi.comune.forio.na.it/urbi/progs/urp/ur1UR069.sto?DB_NAME=n201947",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.forio.na.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-56239-1-2bb8a872922037fa8f8558875e9d88fb",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:14:13.383138Z"
+  },
+  "tributi_imu": {
+   "service_id": "063031:comweb:imposta-municipale-propria-imu-953-56340-1-70034c7d7ecc9aa4b6ea77c5375e0eea",
+   "title": "Imposta Municipale Propria (IMU)",
+   "source_url": "https://www.comune.forio.na.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-56340-1-70034c7d7ecc9aa4b6ea77c5375e0eea",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.forio.na.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-56340-1-70034c7d7ecc9aa4b6ea77c5375e0eea",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.forio.na.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-56340-1-70034c7d7ecc9aa4b6ea77c5375e0eea",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:14:21.619826Z"
+  },
+  "tributi_tari": {
+   "service_id": "063031:comweb:pagamento-tassa-rifiuti-tari-659-56331-1-087c1f1f67fc22fe3c0defeb05a6c95c",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.forio.na.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-56331-1-087c1f1f67fc22fe3c0defeb05a6c95c",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.forio.na.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-56331-1-087c1f1f67fc22fe3c0defeb05a6c95c",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.forio.na.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-56331-1-087c1f1f67fc22fe3c0defeb05a6c95c",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:14:43.259905Z"
+  }
+ }
+}

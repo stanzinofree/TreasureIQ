@@ -1,0 +1,120 @@
+{
+ "municipality_istat": "007017",
+ "services": {
+  "accesso_atti": {
+   "service_id": "007017:wp:822",
+   "title": "Richiedere l’accesso agli atti",
+   "source_url": "https://www.comune.champdepraz.ao.it/servizio/richiesta-accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.champdepraz.ao.it/servizio/richiesta-accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.champdepraz.ao.it/servizio/richiesta-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:04:48.316485Z"
+  },
+  "cambio_residenza": {
+   "service_id": "007017:wp:594",
+   "title": "Cambio di Residenza",
+   "source_url": "https://www.comune.champdepraz.ao.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.champdepraz.ao.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.champdepraz.ao.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:04:54.940323Z"
+  },
+  "carta_identita": {
+   "service_id": "007017:wp:615",
+   "title": "CIE – Carta d’Identità Elettronica",
+   "source_url": "https://www.comune.champdepraz.ao.it/servizio/cie-carta-didentita-elettronica/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.champdepraz.ao.it/servizio/cie-carta-didentita-elettronica/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.champdepraz.ao.it/servizio/cie-carta-didentita-elettronica/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:05:02.122562Z"
+  },
+  "tributi_imu": {
+   "service_id": "007017:wp:629",
+   "title": "IMU (Imposta municipale propria)",
+   "source_url": "https://www.comune.champdepraz.ao.it/servizio/imu-imposta-municipale-propria/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.champdepraz.ao.it/servizio/imu-imposta-municipale-propria/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.champdepraz.ao.it/servizio/imu-imposta-municipale-propria/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:05:09.695382Z"
+  },
+  "tributi_tari": {
+   "service_id": "007017:wp:648",
+   "title": "TARI (tributo sui rifiuti)",
+   "source_url": "https://www.comune.champdepraz.ao.it/servizio/tari-tributo-sui-rifiuti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.champdepraz.ao.it/servizio/tari-tributo-sui-rifiuti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.champdepraz.ao.it/servizio/tari-tributo-sui-rifiuti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:05:14.142521Z"
+  }
+ }
+}

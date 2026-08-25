@@ -1,0 +1,87 @@
+{
+ "municipality_istat": "003043",
+ "services": {
+  "accesso_atti": {
+   "service_id": "003043:comweb:richiedere-l-accesso-agli-atti-317-55586-1-7040abf3627c06ab341c95f2caab519d",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.castellettosopraticino.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-55586-1-7040abf3627c06ab341c95f2caab519d",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castellettosopraticino.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-55586-1-7040abf3627c06ab341c95f2caab519d",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castellettosopraticino.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-55586-1-7040abf3627c06ab341c95f2caab519d",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:57:02.620948Z"
+  },
+  "cambio_residenza": {
+   "service_id": "003043:comweb:cambio-residenza-305-55584-1-7e944f44d88fd94c2ffe0e458e66dc8e",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.castellettosopraticino.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-55584-1-7e944f44d88fd94c2ffe0e458e66dc8e",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castellettosopraticino.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-55584-1-7e944f44d88fd94c2ffe0e458e66dc8e",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castellettosopraticino.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-55584-1-7e944f44d88fd94c2ffe0e458e66dc8e",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.castellettosopraticino.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-55584-1-7e944f44d88fd94c2ffe0e458e66dc8e",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:57:04.818968Z"
+  },
+  "carta_identita": {
+   "service_id": "003043:comweb:carta-d-identita-elettronica-cie-788-55574-1-7ac65e7ebacc8c09bd59847de7604182",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.castellettosopraticino.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-55574-1-7ac65e7ebacc8c09bd59847de7604182",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castellettosopraticino.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-55574-1-7ac65e7ebacc8c09bd59847de7604182",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castellettosopraticino.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-55574-1-7ac65e7ebacc8c09bd59847de7604182",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:57:06.774837Z"
+  }
+ }
+}

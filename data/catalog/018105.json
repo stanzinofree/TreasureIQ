@@ -1,0 +1,133 @@
+{
+ "municipality_istat": "018105",
+ "services": {
+  "accesso_atti": {
+   "service_id": "018105:comweb:richiedere-l-accesso-agli-atti-317-48280-1-4416d9e40d1d803fd23e1f2b34a798b2",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.olivagessi.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-48280-1-4416d9e40d1d803fd23e1f2b34a798b2",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.olivagessi.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-48280-1-4416d9e40d1d803fd23e1f2b34a798b2",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.olivagessi.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-48280-1-4416d9e40d1d803fd23e1f2b34a798b2",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:22:29.261148Z"
+  },
+  "cambio_residenza": {
+   "service_id": "018105:comweb:cambio-residenza-305-48278-1-563458477e76812da9cb84b47b23d604",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.olivagessi.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-48278-1-563458477e76812da9cb84b47b23d604",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.olivagessi.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-48278-1-563458477e76812da9cb84b47b23d604",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.olivagessi.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-48278-1-563458477e76812da9cb84b47b23d604",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.olivagessi.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-48278-1-563458477e76812da9cb84b47b23d604",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:22:31.407270Z"
+  },
+  "carta_identita": {
+   "service_id": "018105:comweb:carta-d-identita-1-48268-1-ae710ae9f9a507b99397c5bbf3090fef",
+   "title": "Carta d'Identità",
+   "source_url": "https://www.comune.olivagessi.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-48268-1-ae710ae9f9a507b99397c5bbf3090fef",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.olivagessi.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-48268-1-ae710ae9f9a507b99397c5bbf3090fef",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.olivagessi.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-48268-1-ae710ae9f9a507b99397c5bbf3090fef",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:22:34.294758Z"
+  },
+  "tributi_imu": {
+   "service_id": "018105:comweb:imposta-municipale-propria-imu-953-48369-1-f90623a71731c83f55223f739058e14b",
+   "title": "Imposta Municipale Propria (IMU)",
+   "source_url": "https://www.comune.olivagessi.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-48369-1-f90623a71731c83f55223f739058e14b",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.olivagessi.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-48369-1-f90623a71731c83f55223f739058e14b",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.olivagessi.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-48369-1-f90623a71731c83f55223f739058e14b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:22:36.705587Z"
+  },
+  "tributi_tari": {
+   "service_id": "018105:comweb:tassa-rifiuti-tari-954-48360-1-86ca2e5ab11e01f7694bbb3364e9c02f",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.olivagessi.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-48360-1-86ca2e5ab11e01f7694bbb3364e9c02f",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.olivagessi.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-48360-1-86ca2e5ab11e01f7694bbb3364e9c02f",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.olivagessi.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-48360-1-86ca2e5ab11e01f7694bbb3364e9c02f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:22:39.066837Z"
+  }
+ }
+}

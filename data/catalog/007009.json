@@ -1,0 +1,146 @@
+{
+ "municipality_istat": "007009",
+ "services": {
+  "accesso_atti": {
+   "service_id": "007009:comweb:richiedere-l-accesso-agli-atti-317-27951-1-687675dba137a9d0ae456c393f776e5e",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.bard.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-27951-1-687675dba137a9d0ae456c393f776e5e",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bard.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-27951-1-687675dba137a9d0ae456c393f776e5e",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bard.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-27951-1-687675dba137a9d0ae456c393f776e5e",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:03:43.470994Z"
+  },
+  "cambio_residenza": {
+   "service_id": "007009:comweb:cambio-residenza-305-27949-1-c8833416436628d9ed28da48db35c720",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.bard.ao.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-27949-1-c8833416436628d9ed28da48db35c720",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bard.ao.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-27949-1-c8833416436628d9ed28da48db35c720",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bard.ao.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-27949-1-c8833416436628d9ed28da48db35c720",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.bard.ao.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-27949-1-c8833416436628d9ed28da48db35c720",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:03:45.815601Z"
+  },
+  "carta_identita": {
+   "service_id": "007009:comweb:carta-d-identita-elettronica-cie-788-27939-1-a426ee3d16fc18917fca12d3880c6d88",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.bard.ao.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-27939-1-a426ee3d16fc18917fca12d3880c6d88",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bard.ao.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-27939-1-a426ee3d16fc18917fca12d3880c6d88",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bard.ao.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-27939-1-a426ee3d16fc18917fca12d3880c6d88",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:03:48.351427Z"
+  },
+  "tributi_imu": {
+   "service_id": "007009:comweb:pagare-tributi-imu-600-28040-1-85e2c332c944ab60b793a983d8885e67",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.bard.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-28040-1-85e2c332c944ab60b793a983d8885e67",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bard.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-28040-1-85e2c332c944ab60b793a983d8885e67",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bard.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-28040-1-85e2c332c944ab60b793a983d8885e67",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.bard.ao.it/servizi/portalecontribuente/LoginPNRR.Aspx?CodCat=A643&amp;ACCESSO=C&amp;View=CI",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.bard.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-28040-1-85e2c332c944ab60b793a983d8885e67",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:03:50.490877Z"
+  },
+  "tributi_tari": {
+   "service_id": "007009:comweb:pagamento-tassa-rifiuti-tari-659-28031-1-f2632548bad0a836762228406d988001",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.bard.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-28031-1-f2632548bad0a836762228406d988001",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bard.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-28031-1-f2632548bad0a836762228406d988001",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bard.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-28031-1-f2632548bad0a836762228406d988001",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:03:52.775276Z"
+  }
+ }
+}

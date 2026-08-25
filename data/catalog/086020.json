@@ -1,0 +1,64 @@
+{
+ "municipality_istat": "086020",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "086020:wp:153",
+   "title": "Cambio di residenza tramite Portale Nazionale – ANPR",
+   "source_url": "https://www.comune.villarosa.en.it/?post_type=servizio&p=153",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.villarosa.en.it/?post_type=servizio&p=153",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.villarosa.en.it/?post_type=servizio&p=153",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:48:42.243650Z"
+  },
+  "tributi_imu": {
+   "service_id": "086020:wp:397",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.villarosa.en.it/?post_type=servizio&p=397",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.villarosa.en.it/?post_type=servizio&p=397",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.villarosa.en.it/?post_type=servizio&p=397",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.villarosa.en.it/wp-content/uploads/2024/06/Regolamento-per-lapplicazione-dellIMU.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.villarosa.en.it/?post_type=servizio&p=397",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:48:46.781941Z"
+  }
+ }
+}

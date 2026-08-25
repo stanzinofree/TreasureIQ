@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "023072",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "023072:wp:229",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.sanguinetto.vr.it/?post_type=servizio&p=229",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanguinetto.vr.it/?post_type=servizio&p=229",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanguinetto.vr.it/?post_type=servizio&p=229",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:44:53.164047Z"
+  },
+  "stato_civile": {
+   "service_id": "023072:wp:232",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.sanguinetto.vr.it/?post_type=servizio&p=232",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanguinetto.vr.it/?post_type=servizio&p=232",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanguinetto.vr.it/?post_type=servizio&p=232",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:44:59.340575Z"
+  },
+  "tributi_imu": {
+   "service_id": "023072:wp:928",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.sanguinetto.vr.it/?post_type=servizio&p=928",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanguinetto.vr.it/?post_type=servizio&p=928",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanguinetto.vr.it/?post_type=servizio&p=928",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:45:13.009643Z"
+  }
+ }
+}

@@ -1,0 +1,136 @@
+{
+ "municipality_istat": "001195",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001195:comweb:richiedere-l-accesso-agli-atti-317-32308-1-06da5584c84339e7d42d76744252ae10",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.piscina.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-32308-1-06da5584c84339e7d42d76744252ae10",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.piscina.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-32308-1-06da5584c84339e7d42d76744252ae10",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.piscina.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-32308-1-06da5584c84339e7d42d76744252ae10",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.piscina.to.it/lang/it/servizi/richiedere-laccesso-agli-atti/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.piscina.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-32308-1-06da5584c84339e7d42d76744252ae10",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:46:03.783084Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001195:comweb:cambio-residenza-305-32306-1-68c042e32a368461e86437f715abe84b",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.piscina.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-32306-1-68c042e32a368461e86437f715abe84b",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.piscina.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-32306-1-68c042e32a368461e86437f715abe84b",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.piscina.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-32306-1-68c042e32a368461e86437f715abe84b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.piscina.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-32306-1-68c042e32a368461e86437f715abe84b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:46:05.712163Z"
+  },
+  "carta_identita": {
+   "service_id": "001195:comweb:carta-d-identita-elettronica-cie-788-32296-1-791c8d34840eff78801343d812f1aed7",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.piscina.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-32296-1-791c8d34840eff78801343d812f1aed7",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.piscina.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-32296-1-791c8d34840eff78801343d812f1aed7",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.piscina.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-32296-1-791c8d34840eff78801343d812f1aed7",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:46:07.967426Z"
+  },
+  "stato_civile": {
+   "service_id": "001195:comweb:certificato-di-matrimonio-30-32302-1-b7235a9670bba2e6e27107e2b068a5be",
+   "title": "Certificato di matrimonio",
+   "source_url": "https://www.comune.piscina.to.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-matrimonio-30-32302-1-b7235a9670bba2e6e27107e2b068a5be",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.piscina.to.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-matrimonio-30-32302-1-b7235a9670bba2e6e27107e2b068a5be",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.piscina.to.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-matrimonio-30-32302-1-b7235a9670bba2e6e27107e2b068a5be",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/certificati/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.piscina.to.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-matrimonio-30-32302-1-b7235a9670bba2e6e27107e2b068a5be",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:46:10.696593Z"
+  }
+ }
+}

@@ -1,0 +1,146 @@
+{
+ "municipality_istat": "052016",
+ "services": {
+  "accesso_atti": {
+   "service_id": "052016:comweb:richiedere-l-accesso-agli-atti-317-0-1-2451c79ecd2e6f39017993bfc7b887a7",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.monteriggioni.si.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-0-1-2451c79ecd2e6f39017993bfc7b887a7",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.monteriggioni.si.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-0-1-2451c79ecd2e6f39017993bfc7b887a7",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.monteriggioni.si.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-0-1-2451c79ecd2e6f39017993bfc7b887a7",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T13:57:20.144895Z"
+  },
+  "cambio_residenza": {
+   "service_id": "052016:comweb:cambio-residenza-305-0-1-c280849ff9fb33aa7d15ca3e5e3b91f9",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.monteriggioni.si.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-0-1-c280849ff9fb33aa7d15ca3e5e3b91f9",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.monteriggioni.si.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-0-1-c280849ff9fb33aa7d15ca3e5e3b91f9",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.monteriggioni.si.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-0-1-c280849ff9fb33aa7d15ca3e5e3b91f9",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.monteriggioni.si.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-0-1-c280849ff9fb33aa7d15ca3e5e3b91f9",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T13:57:21.996524Z"
+  },
+  "carta_identita": {
+   "service_id": "052016:comweb:carta-d-identita-elettronica-cie-788-0-1-63ab6d0a250eb1c83bd2c0d030a5af61",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.monteriggioni.si.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-0-1-63ab6d0a250eb1c83bd2c0d030a5af61",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.monteriggioni.si.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-0-1-63ab6d0a250eb1c83bd2c0d030a5af61",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.monteriggioni.si.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-0-1-63ab6d0a250eb1c83bd2c0d030a5af61",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T13:57:24.329391Z"
+  },
+  "tributi_imu": {
+   "service_id": "052016:comweb:calcolo-imu-355-0-1-d107b556a5e3bad7b5a3f254c4e32142",
+   "title": "Calcolo IMU",
+   "source_url": "https://www.comune.monteriggioni.si.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-0-1-d107b556a5e3bad7b5a3f254c4e32142",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.monteriggioni.si.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-0-1-d107b556a5e3bad7b5a3f254c4e32142",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.monteriggioni.si.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-0-1-d107b556a5e3bad7b5a3f254c4e32142",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.riscotel.it/calcoloimu/?comune=F598",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.monteriggioni.si.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-0-1-d107b556a5e3bad7b5a3f254c4e32142",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T13:57:26.425698Z"
+  },
+  "tributi_tari": {
+   "service_id": "052016:comweb:agevolazioni-tassa-rifiuti-tari-975-0-1-5d3d5fa77f2fcf1269aa96b3379290ed",
+   "title": "Agevolazioni Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.monteriggioni.si.it/it-it/servizi/tributi-finanze-e-contravvenzioni/agevolazioni-tassa-rifiuti-tari-975-0-1-5d3d5fa77f2fcf1269aa96b3379290ed",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.monteriggioni.si.it/it-it/servizi/tributi-finanze-e-contravvenzioni/agevolazioni-tassa-rifiuti-tari-975-0-1-5d3d5fa77f2fcf1269aa96b3379290ed",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.monteriggioni.si.it/it-it/servizi/tributi-finanze-e-contravvenzioni/agevolazioni-tassa-rifiuti-tari-975-0-1-5d3d5fa77f2fcf1269aa96b3379290ed",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T13:57:28.602868Z"
+  }
+ }
+}

@@ -1,0 +1,103 @@
+{
+ "municipality_istat": "101010",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "101010:wp:7925",
+   "title": "Cambio di residenza e cambio di abitazione",
+   "source_url": "https://www.comune.crotone.it/servizio/cambio-di-residenza-e-cambio-di-abitazione/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.crotone.it/servizio/cambio-di-residenza-e-cambio-di-abitazione/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.crotone.it/servizio/cambio-di-residenza-e-cambio-di-abitazione/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.crotone.it/wp-content/uploads/2026/02/modello_iscrizione_revisione31_3_22.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.crotone.it/servizio/cambio-di-residenza-e-cambio-di-abitazione/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.crotone.it/wp-content/uploads/2026/02/vincoli_rapporti_di_parentela.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.crotone.it/servizio/cambio-di-residenza-e-cambio-di-abitazione/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.crotone.it/wp-content/uploads/2026/03/modello_iscrizione_revisione31_3_22.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.crotone.it/servizio/cambio-di-residenza-e-cambio-di-abitazione/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.crotone.it/wp-content/uploads/2026/03/vincoli_rapporti_di_parentela.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.crotone.it/servizio/cambio-di-residenza-e-cambio-di-abitazione/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:58:38.889663Z"
+  },
+  "tributi_imu": {
+   "service_id": "101010:wp:4940",
+   "title": "Pagare Tributi IMU",
+   "source_url": "https://www.comune.crotone.it/servizio/pagare-tributi-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.crotone.it/servizio/pagare-tributi-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.crotone.it/servizio/pagare-tributi-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:58:41.116314Z"
+  }
+ }
+}

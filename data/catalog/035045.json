@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "035045",
+ "services": {
+  "accesso_atti": {
+   "service_id": "035045:wp:19043",
+   "title": "Accesso agli atti",
+   "source_url": "https://www.comune.villa-minozzo.re.it/servizi/accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.villa-minozzo.re.it/servizi/accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.villa-minozzo.re.it/servizi/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:47:48.344835Z"
+  },
+  "carta_identita": {
+   "service_id": "035045:wp:17317",
+   "title": "Rilascio Carta d&#8217;Identità Elettronica CIE",
+   "source_url": "https://www.comune.villa-minozzo.re.it/servizi/rilascio-carta-didentita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.villa-minozzo.re.it/servizi/rilascio-carta-didentita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.villa-minozzo.re.it/servizi/rilascio-carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:47:51.084169Z"
+  }
+ }
+}

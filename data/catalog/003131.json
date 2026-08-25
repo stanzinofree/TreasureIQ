@@ -1,0 +1,195 @@
+{
+ "municipality_istat": "003131",
+ "services": {
+  "accesso_atti": {
+   "service_id": "003131:comweb:richiedere-l-accesso-agli-atti-317-44848-1-4065af9653b92221853bfc132745a1dd",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.romentino.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-44848-1-4065af9653b92221853bfc132745a1dd",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.romentino.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-44848-1-4065af9653b92221853bfc132745a1dd",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.romentino.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-44848-1-4065af9653b92221853bfc132745a1dd",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:59:03.089635Z"
+  },
+  "cambio_residenza": {
+   "service_id": "003131:comweb:cambio-residenza-305-44846-1-957f1181f080363dc49c948a1b9dbf94",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.romentino.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-44846-1-957f1181f080363dc49c948a1b9dbf94",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.romentino.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-44846-1-957f1181f080363dc49c948a1b9dbf94",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.romentino.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-44846-1-957f1181f080363dc49c948a1b9dbf94",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.romentino.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-44846-1-957f1181f080363dc49c948a1b9dbf94",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:59:05.175121Z"
+  },
+  "carta_identita": {
+   "service_id": "003131:comweb:carta-d-identita-elettronica-cie-788-44836-1-dddd97723e782d7d60b2a0cabf38c489",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.romentino.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-44836-1-dddd97723e782d7d60b2a0cabf38c489",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.romentino.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-44836-1-dddd97723e782d7d60b2a0cabf38c489",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.romentino.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-44836-1-dddd97723e782d7d60b2a0cabf38c489",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:59:07.181880Z"
+  },
+  "stato_civile": {
+   "service_id": "003131:comweb:certificato-di-stato-civile-6-44836-1-138409ab35bcbd300de396f09b4a04a3",
+   "title": "Certificato di stato civile",
+   "source_url": "https://www.comune.romentino.no.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-stato-civile-6-44836-1-138409ab35bcbd300de396f09b4a04a3",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.romentino.no.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-stato-civile-6-44836-1-138409ab35bcbd300de396f09b4a04a3",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.romentino.no.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-stato-civile-6-44836-1-138409ab35bcbd300de396f09b4a04a3",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/certificati/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.romentino.no.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-stato-civile-6-44836-1-138409ab35bcbd300de396f09b4a04a3",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:59:09.369877Z"
+  },
+  "tributi_imu": {
+   "service_id": "003131:comweb:pagare-tributi-imu-600-44937-1-7207e0aa1bf38c0d11520240c108bfbc",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.romentino.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-44937-1-7207e0aa1bf38c0d11520240c108bfbc",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.romentino.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-44937-1-7207e0aa1bf38c0d11520240c108bfbc",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.romentino.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-44937-1-7207e0aa1bf38c0d11520240c108bfbc",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://multi2.servizilocalispa.it/EDGT/H518/Edgt_AccessManager/PublicDir/CoverPage.aspx",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.romentino.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-44937-1-7207e0aa1bf38c0d11520240c108bfbc",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:59:11.511896Z"
+  },
+  "tributi_tari": {
+   "service_id": "003131:comweb:pagamento-tassa-rifiuti-tari-659-44928-1-92b001a29c25e6fda9918ffd77690b4f",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.romentino.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-44928-1-92b001a29c25e6fda9918ffd77690b4f",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.romentino.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-44928-1-92b001a29c25e6fda9918ffd77690b4f",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.romentino.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-44928-1-92b001a29c25e6fda9918ffd77690b4f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://multi2.servizilocalispa.it/EDGT/H518/Edgt_AccessManager/PublicDir/CoverPage.aspx",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.romentino.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-44928-1-92b001a29c25e6fda9918ffd77690b4f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:59:13.611914Z"
+  }
+ }
+}

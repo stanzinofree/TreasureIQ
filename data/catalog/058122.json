@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "058122",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "058122:wp:2594",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.fontenuova.rm.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.fontenuova.rm.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.fontenuova.rm.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:03:27.210322Z"
+  },
+  "carta_identita": {
+   "service_id": "058122:wp:2589",
+   "title": "Carta d&#8217;Identità Elettronica",
+   "source_url": "https://comune.fontenuova.rm.it/servizio/carta-di-identita-elettronica/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.fontenuova.rm.it/servizio/carta-di-identita-elettronica/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.fontenuova.rm.it/servizio/carta-di-identita-elettronica/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:03:28.870968Z"
+  },
+  "tributi_imu": {
+   "service_id": "058122:wp:2590",
+   "title": "IMU (Imposta Municipale Propria)",
+   "source_url": "https://comune.fontenuova.rm.it/servizio/imu-imposta-municipale-propria/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.fontenuova.rm.it/servizio/imu-imposta-municipale-propria/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.fontenuova.rm.it/servizio/imu-imposta-municipale-propria/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:03:30.608769Z"
+  }
+ }
+}

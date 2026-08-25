@@ -1,0 +1,103 @@
+{
+ "municipality_istat": "030002",
+ "services": {
+  "accesso_atti": {
+   "service_id": "030002:wp:1195",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.amaro.ud.it/?post_type=servizio&p=1195",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.amaro.ud.it/?post_type=servizio&p=1195",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.amaro.ud.it/?post_type=servizio&p=1195",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:37:48.754501Z"
+  },
+  "carta_identita": {
+   "service_id": "030002:wp:854",
+   "title": "Carta di identità elettronica",
+   "source_url": "https://www.comune.amaro.ud.it/?post_type=servizio&p=854",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.amaro.ud.it/?post_type=servizio&p=854",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.amaro.ud.it/?post_type=servizio&p=854",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.amaro.ud.it/wp-content/uploads/2024/11/Mod-CIE-assenso-espatrio-minore.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.amaro.ud.it/?post_type=servizio&p=854",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.amaro.ud.it/wp-content/uploads/2024/11/Mod-CIE-cittadini-dimoranti.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.amaro.ud.it/?post_type=servizio&p=854",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.amaro.ud.it/wp-content/uploads/2024/04/Reg-proc-AMARO.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.amaro.ud.it/?post_type=servizio&p=854",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.amaro.ud.it/wp-content/uploads/2024/11/Mod-CIE-autocert_imp_ta-ril_impronte-digitali.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.amaro.ud.it/?post_type=servizio&p=854",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:37:58.397103Z"
+  }
+ }
+}

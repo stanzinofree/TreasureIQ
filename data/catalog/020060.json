@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "020060",
+ "services": {
+  "accesso_atti": {
+   "service_id": "020060:wp:269",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.schivenoglia.mn.it/?post_type=servizio&p=269",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.schivenoglia.mn.it/?post_type=servizio&p=269",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.schivenoglia.mn.it/?post_type=servizio&p=269",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:29:29.736340Z"
+  },
+  "cambio_residenza": {
+   "service_id": "020060:wp:505",
+   "title": "Cambio di residenza tramite Portale Nazionale – ANPR",
+   "source_url": "https://www.comune.schivenoglia.mn.it/?post_type=servizio&p=505",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.schivenoglia.mn.it/?post_type=servizio&p=505",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.schivenoglia.mn.it/?post_type=servizio&p=505",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:29:37.366061Z"
+  },
+  "stato_civile": {
+   "service_id": "020060:wp:502",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.schivenoglia.mn.it/?post_type=servizio&p=502",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.schivenoglia.mn.it/?post_type=servizio&p=502",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.schivenoglia.mn.it/?post_type=servizio&p=502",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:29:50.796184Z"
+  }
+ }
+}

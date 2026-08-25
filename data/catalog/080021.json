@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "080021",
+ "services": {
+  "accesso_atti": {
+   "service_id": "080021:wp:1261",
+   "title": "Richiedere l&#8217;accesso agli atti",
+   "source_url": "https://www.comune.caraffadelbianco.rc.it/servizio/richiedere-l-accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.caraffadelbianco.rc.it/servizio/richiedere-l-accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.caraffadelbianco.rc.it/servizio/richiedere-l-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:39:45.164154Z"
+  },
+  "cambio_residenza": {
+   "service_id": "080021:wp:1253",
+   "title": "Cambio di residenza tramite Portale Nazionale – ANPR",
+   "source_url": "https://www.comune.caraffadelbianco.rc.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.caraffadelbianco.rc.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.caraffadelbianco.rc.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:39:47.169320Z"
+  },
+  "tributi_imu": {
+   "service_id": "080021:wp:1255",
+   "title": "IMU",
+   "source_url": "https://www.comune.caraffadelbianco.rc.it/servizio/imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.caraffadelbianco.rc.it/servizio/imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.caraffadelbianco.rc.it/servizio/imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:39:48.948799Z"
+  }
+ }
+}

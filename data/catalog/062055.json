@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "062055",
+ "services": {
+  "accesso_atti": {
+   "service_id": "062055:wp:616",
+   "title": "Richiesta di accesso agli atti",
+   "source_url": "https://comune.puglianello.bn.it/servizio/richiesta-di-accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.puglianello.bn.it/servizio/richiesta-di-accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.puglianello.bn.it/servizio/richiesta-di-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:12:28.372427Z"
+  },
+  "cambio_residenza": {
+   "service_id": "062055:wp:533",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.puglianello.bn.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.puglianello.bn.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.puglianello.bn.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:12:33.674162Z"
+  },
+  "carta_identita": {
+   "service_id": "062055:wp:546",
+   "title": "Richiesta CIE",
+   "source_url": "https://comune.puglianello.bn.it/servizio/richiesta-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.puglianello.bn.it/servizio/richiesta-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.puglianello.bn.it/servizio/richiesta-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:12:36.231136Z"
+  }
+ }
+}

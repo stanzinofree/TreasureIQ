@@ -1,0 +1,120 @@
+{
+ "municipality_istat": "082033",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "082033:wp:5583",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.contessaentellina.pa.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.contessaentellina.pa.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.contessaentellina.pa.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:42:51.897078Z"
+  },
+  "carta_identita": {
+   "service_id": "082033:wp:697",
+   "title": "Carta d&#8217;Identità Elettronica (CIE)",
+   "source_url": "https://comune.contessaentellina.pa.it/servizio/carta-didentita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.contessaentellina.pa.it/servizio/carta-didentita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.contessaentellina.pa.it/servizio/carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:42:59.184938Z"
+  },
+  "stato_civile": {
+   "service_id": "082033:wp:704",
+   "title": "Certificato di stato civile",
+   "source_url": "https://comune.contessaentellina.pa.it/servizio/certificato-di-stato-civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.contessaentellina.pa.it/servizio/certificato-di-stato-civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.contessaentellina.pa.it/servizio/certificato-di-stato-civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:43:03.543228Z"
+  },
+  "tributi_imu": {
+   "service_id": "082033:wp:4800",
+   "title": "Pagamento tributi IMU",
+   "source_url": "https://comune.contessaentellina.pa.it/servizio/pagamento-tributi-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.contessaentellina.pa.it/servizio/pagamento-tributi-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.contessaentellina.pa.it/servizio/pagamento-tributi-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:43:07.803365Z"
+  },
+  "tributi_tari": {
+   "service_id": "082033:wp:4781",
+   "title": "Domanda di agevolazioni tributarie e tariffarie &#8211; TARI",
+   "source_url": "https://comune.contessaentellina.pa.it/servizio/domanda-di-agevolazioni-tributarie-e-tariffarie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.contessaentellina.pa.it/servizio/domanda-di-agevolazioni-tributarie-e-tariffarie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.contessaentellina.pa.it/servizio/domanda-di-agevolazioni-tributarie-e-tariffarie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:43:11.891442Z"
+  }
+ }
+}

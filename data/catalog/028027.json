@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "028027",
+ "services": {
+  "accesso_atti": {
+   "service_id": "028027:wp:393",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.casale-di-scodosia.pd.it/?post_type=servizio&p=393",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.casale-di-scodosia.pd.it/?post_type=servizio&p=393",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.casale-di-scodosia.pd.it/?post_type=servizio&p=393",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:55:16.659480Z"
+  },
+  "cambio_residenza": {
+   "service_id": "028027:wp:600",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.casale-di-scodosia.pd.it/?post_type=servizio&p=600",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.casale-di-scodosia.pd.it/?post_type=servizio&p=600",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.casale-di-scodosia.pd.it/?post_type=servizio&p=600",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:55:23.578243Z"
+  },
+  "stato_civile": {
+   "service_id": "028027:wp:603",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.casale-di-scodosia.pd.it/?post_type=servizio&p=603",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.casale-di-scodosia.pd.it/?post_type=servizio&p=603",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.casale-di-scodosia.pd.it/?post_type=servizio&p=603",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:55:30.839278Z"
+  },
+  "tributi_imu": {
+   "service_id": "028027:wp:627",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.casale-di-scodosia.pd.it/?post_type=servizio&p=627",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.casale-di-scodosia.pd.it/?post_type=servizio&p=627",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.casale-di-scodosia.pd.it/?post_type=servizio&p=627",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:55:47.328091Z"
+  }
+ }
+}

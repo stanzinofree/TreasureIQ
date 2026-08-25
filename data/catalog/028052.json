@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "028052",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "028052:wp:892",
+   "title": "Cambio di residenza tramite Portale Nazionale – ANPR",
+   "source_url": "https://www.comune.megliadinosanvitale.pd.it/?post_type=servizio&p=892",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.megliadinosanvitale.pd.it/?post_type=servizio&p=892",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.megliadinosanvitale.pd.it/?post_type=servizio&p=892",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:08:12.341738Z"
+  },
+  "stato_civile": {
+   "service_id": "028052:wp:899",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.megliadinosanvitale.pd.it/?post_type=servizio&p=899",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.megliadinosanvitale.pd.it/?post_type=servizio&p=899",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.megliadinosanvitale.pd.it/?post_type=servizio&p=899",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:08:29.428188Z"
+  },
+  "tributi_imu": {
+   "service_id": "028052:wp:895",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.megliadinosanvitale.pd.it/?post_type=servizio&p=895",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.megliadinosanvitale.pd.it/?post_type=servizio&p=895",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.megliadinosanvitale.pd.it/?post_type=servizio&p=895",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:08:46.017616Z"
+  }
+ }
+}

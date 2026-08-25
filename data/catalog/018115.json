@@ -1,0 +1,136 @@
+{
+ "municipality_istat": "018115",
+ "services": {
+  "accesso_atti": {
+   "service_id": "018115:comweb:richiedere-l-accesso-agli-atti-317-21087-1-ba8fef1ea9d36cf7c89cbc0704554490",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.pinarolopo.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-21087-1-ba8fef1ea9d36cf7c89cbc0704554490",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pinarolopo.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-21087-1-ba8fef1ea9d36cf7c89cbc0704554490",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pinarolopo.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-21087-1-ba8fef1ea9d36cf7c89cbc0704554490",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.pinarolopo.pv.it/lang/it/servizi/richiedere-laccesso-agli-atti/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.pinarolopo.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-21087-1-ba8fef1ea9d36cf7c89cbc0704554490",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:23:06.010806Z"
+  },
+  "cambio_residenza": {
+   "service_id": "018115:comweb:cambio-residenza-305-21085-1-24336829e1d7d043c4804647b3508728",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.pinarolopo.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-21085-1-24336829e1d7d043c4804647b3508728",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pinarolopo.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-21085-1-24336829e1d7d043c4804647b3508728",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pinarolopo.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-21085-1-24336829e1d7d043c4804647b3508728",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.pinarolopo.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-21085-1-24336829e1d7d043c4804647b3508728",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:23:07.842602Z"
+  },
+  "carta_identita": {
+   "service_id": "018115:comweb:carta-d-identita-elettronica-cie-788-21075-1-692a15d7b3d5e086972fe7f48bc33971",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.pinarolopo.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-21075-1-692a15d7b3d5e086972fe7f48bc33971",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pinarolopo.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-21075-1-692a15d7b3d5e086972fe7f48bc33971",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pinarolopo.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-21075-1-692a15d7b3d5e086972fe7f48bc33971",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:23:09.871283Z"
+  },
+  "tributi_imu": {
+   "service_id": "018115:comweb:pagare-tributi-imu-600-21176-1-4ae4103d53b900737233b048ee1f8ad3",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.pinarolopo.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-21176-1-4ae4103d53b900737233b048ee1f8ad3",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pinarolopo.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-21176-1-4ae4103d53b900737233b048ee1f8ad3",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pinarolopo.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-21176-1-4ae4103d53b900737233b048ee1f8ad3",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.pinarolopo.pv.it/lang/it/servizi/pagare-tributi-imu-1/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.pinarolopo.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-21176-1-4ae4103d53b900737233b048ee1f8ad3",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:23:11.769217Z"
+  }
+ }
+}

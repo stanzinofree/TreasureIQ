@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "098019",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "098019:wp:3432",
+   "title": "Cambio residenza",
+   "source_url": "https://comune.codogno.lo.it/servizio/cambio-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.codogno.lo.it/servizio/cambio-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.codogno.lo.it/servizio/cambio-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:57:24.382749Z"
+  }
+ }
+}

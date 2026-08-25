@@ -1,0 +1,64 @@
+{
+ "municipality_istat": "103025",
+ "services": {
+  "carta_identita": {
+   "service_id": "103025:comweb:carta-d-identita-elettronica-cie-788-4722-1-43a8b3a676f50aadd4781a32d7937a40",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.crevoladossola.vb.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-4722-1-43a8b3a676f50aadd4781a32d7937a40",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.crevoladossola.vb.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-4722-1-43a8b3a676f50aadd4781a32d7937a40",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.crevoladossola.vb.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-4722-1-43a8b3a676f50aadd4781a32d7937a40",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:01:45.867954Z"
+  },
+  "stato_civile": {
+   "service_id": "103025:comweb:certificato-di-stato-civile-6-4722-1-7df8918d37fc2d7fee71b625aec7f860",
+   "title": "Certificato di stato civile",
+   "source_url": "https://www.comune.crevoladossola.vb.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-stato-civile-6-4722-1-7df8918d37fc2d7fee71b625aec7f860",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.crevoladossola.vb.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-stato-civile-6-4722-1-7df8918d37fc2d7fee71b625aec7f860",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.crevoladossola.vb.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-stato-civile-6-4722-1-7df8918d37fc2d7fee71b625aec7f860",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/certificati/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.crevoladossola.vb.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-stato-civile-6-4722-1-7df8918d37fc2d7fee71b625aec7f860",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:01:47.742087Z"
+  }
+ }
+}

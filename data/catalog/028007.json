@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "028007",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "028007:wp:1389",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.arzergrande.pd.it/?post_type=servizio&p=1389",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.arzergrande.pd.it/?post_type=servizio&p=1389",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.arzergrande.pd.it/?post_type=servizio&p=1389",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:49:02.838110Z"
+  },
+  "stato_civile": {
+   "service_id": "028007:wp:1398",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.arzergrande.pd.it/?post_type=servizio&p=1398",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.arzergrande.pd.it/?post_type=servizio&p=1398",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.arzergrande.pd.it/?post_type=servizio&p=1398",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:49:12.897126Z"
+  }
+ }
+}

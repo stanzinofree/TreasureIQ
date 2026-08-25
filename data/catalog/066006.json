@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "066006",
+ "services": {
+  "accesso_atti": {
+   "service_id": "066006:wp:14082",
+   "title": "SIT e documenti per l&#8217;accesso agli atti",
+   "source_url": "https://comune.avezzano.aq.it/servizio/sit-e-documenti-per-laccesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.avezzano.aq.it/servizio/sit-e-documenti-per-laccesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.avezzano.aq.it/servizio/sit-e-documenti-per-laccesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:21:14.261782Z"
+  },
+  "tributi_imu": {
+   "service_id": "066006:wp:9095",
+   "title": "IMU &#8211; Imposta municipale propria",
+   "source_url": "https://comune.avezzano.aq.it/servizio/imu-imposta-municipale-propria/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.avezzano.aq.it/servizio/imu-imposta-municipale-propria/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.avezzano.aq.it/servizio/imu-imposta-municipale-propria/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:21:16.792134Z"
+  }
+ }
+}

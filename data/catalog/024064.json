@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "024064",
+ "services": {
+  "accesso_atti": {
+   "service_id": "024064:wp:322",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.montegalda.vi.it/?post_type=servizio&p=322",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montegalda.vi.it/?post_type=servizio&p=322",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montegalda.vi.it/?post_type=servizio&p=322",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:04:47.155213Z"
+  },
+  "cambio_residenza": {
+   "service_id": "024064:wp:1066",
+   "title": "Cambio di residenza tramite Portale Nazionale – ANPR",
+   "source_url": "https://www.comune.montegalda.vi.it/?post_type=servizio&p=1066",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montegalda.vi.it/?post_type=servizio&p=1066",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montegalda.vi.it/?post_type=servizio&p=1066",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:05:01.355049Z"
+  },
+  "stato_civile": {
+   "service_id": "024064:wp:1082",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.montegalda.vi.it/?post_type=servizio&p=1082",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montegalda.vi.it/?post_type=servizio&p=1082",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montegalda.vi.it/?post_type=servizio&p=1082",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:05:18.640222Z"
+  }
+ }
+}

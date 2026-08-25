@@ -1,0 +1,64 @@
+{
+ "municipality_istat": "001314",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001314:comweb:richiedere-l-accesso-agli-atti-317-42340-1-b6a76feea8c21856adc0c00731e1187a",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.volpiano.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-42340-1-b6a76feea8c21856adc0c00731e1187a",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.volpiano.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-42340-1-b6a76feea8c21856adc0c00731e1187a",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.volpiano.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-42340-1-b6a76feea8c21856adc0c00731e1187a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:53:03.967058Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001314:comweb:cambio-residenza-305-42338-1-c667d6b090d34b82aa3a9d8ca35a03c1",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.volpiano.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-42338-1-c667d6b090d34b82aa3a9d8ca35a03c1",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.volpiano.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-42338-1-c667d6b090d34b82aa3a9d8ca35a03c1",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.volpiano.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-42338-1-c667d6b090d34b82aa3a9d8ca35a03c1",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.volpiano.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-42338-1-c667d6b090d34b82aa3a9d8ca35a03c1",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:53:08.396783Z"
+  }
+ }
+}

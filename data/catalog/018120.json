@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "018120",
+ "services": {
+  "accesso_atti": {
+   "service_id": "018120:comweb:richiedere-l-accesso-agli-atti-317-11186-1-c63815c86264ef60bfc3f7f523e501f3",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.redavalle.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-11186-1-c63815c86264ef60bfc3f7f523e501f3",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.redavalle.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-11186-1-c63815c86264ef60bfc3f7f523e501f3",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.redavalle.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-11186-1-c63815c86264ef60bfc3f7f523e501f3",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:23:34.267839Z"
+  },
+  "tributi_imu": {
+   "service_id": "018120:comweb:imposta-municipale-propria-imu-953-11276-1-b2023fef74be551da2ea59ca51973da4",
+   "title": "Imposta Municipale Propria (IMU)",
+   "source_url": "https://www.comune.redavalle.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-11276-1-b2023fef74be551da2ea59ca51973da4",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.redavalle.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-11276-1-b2023fef74be551da2ea59ca51973da4",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.redavalle.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-11276-1-b2023fef74be551da2ea59ca51973da4",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:23:36.762425Z"
+  },
+  "tributi_tari": {
+   "service_id": "018120:comweb:tassa-rifiuti-tari-954-11267-1-45368a08059b91def61987e6b1d0479b",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.redavalle.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-11267-1-45368a08059b91def61987e6b1d0479b",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.redavalle.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-11267-1-45368a08059b91def61987e6b1d0479b",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.redavalle.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-11267-1-45368a08059b91def61987e6b1d0479b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:23:39.498765Z"
+  }
+ }
+}

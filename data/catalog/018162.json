@@ -1,0 +1,87 @@
+{
+ "municipality_istat": "018162",
+ "services": {
+  "accesso_atti": {
+   "service_id": "018162:comweb:richiedere-l-accesso-agli-atti-317-10790-1-505027eafc45cd10c7406dade7a08ca4",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.travacosiccomario.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-10790-1-505027eafc45cd10c7406dade7a08ca4",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.travacosiccomario.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-10790-1-505027eafc45cd10c7406dade7a08ca4",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.travacosiccomario.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-10790-1-505027eafc45cd10c7406dade7a08ca4",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.travacosiccomario.pv.it/lang/it/servizi/richiedere-laccesso-agli-atti/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.travacosiccomario.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-10790-1-505027eafc45cd10c7406dade7a08ca4",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:26:11.898760Z"
+  },
+  "tributi_imu": {
+   "service_id": "018162:comweb:pagare-tributi-imu-600-10880-1-2612469edea94895dc73f4678d7f5cc7",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.travacosiccomario.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-10880-1-2612469edea94895dc73f4678d7f5cc7",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.travacosiccomario.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-10880-1-2612469edea94895dc73f4678d7f5cc7",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.travacosiccomario.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-10880-1-2612469edea94895dc73f4678d7f5cc7",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:26:13.925005Z"
+  },
+  "tributi_tari": {
+   "service_id": "018162:comweb:pagamento-tassa-rifiuti-tari-659-10871-1-ebac9df63dd543195862beec334533e5",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.travacosiccomario.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-10871-1-ebac9df63dd543195862beec334533e5",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.travacosiccomario.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-10871-1-ebac9df63dd543195862beec334533e5",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.travacosiccomario.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-10871-1-ebac9df63dd543195862beec334533e5",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:26:16.418791Z"
+  }
+ }
+}

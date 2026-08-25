@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "103003",
+ "services": {
+  "accesso_atti": {
+   "service_id": "103003:comweb:richiedere-l-accesso-agli-atti-317-21747-1-4e04a64c2b9eb9f9bb374913dc2c9a44",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.arizzano.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-21747-1-4e04a64c2b9eb9f9bb374913dc2c9a44",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.arizzano.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-21747-1-4e04a64c2b9eb9f9bb374913dc2c9a44",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.arizzano.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-21747-1-4e04a64c2b9eb9f9bb374913dc2c9a44",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.arizzano.vb.it/redirect.html?F=PRA11X4ADMwADMwADM",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.arizzano.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-21747-1-4e04a64c2b9eb9f9bb374913dc2c9a44",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:00:47.676180Z"
+  },
+  "cambio_residenza": {
+   "service_id": "103003:comweb:cambio-residenza-305-21745-1-c3e27a37fc899b8b67460240ce0f6d1f",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.arizzano.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-21745-1-c3e27a37fc899b8b67460240ce0f6d1f",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.arizzano.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-21745-1-c3e27a37fc899b8b67460240ce0f6d1f",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.arizzano.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-21745-1-c3e27a37fc899b8b67460240ce0f6d1f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.arizzano.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-21745-1-c3e27a37fc899b8b67460240ce0f6d1f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:00:49.710489Z"
+  },
+  "carta_identita": {
+   "service_id": "103003:comweb:carta-d-identita-elettronica-cie-788-21735-1-e2cd2257cfec661e184736b4097ca647",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.arizzano.vb.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-21735-1-e2cd2257cfec661e184736b4097ca647",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.arizzano.vb.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-21735-1-e2cd2257cfec661e184736b4097ca647",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.arizzano.vb.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-21735-1-e2cd2257cfec661e184736b4097ca647",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:00:51.892022Z"
+  }
+ }
+}

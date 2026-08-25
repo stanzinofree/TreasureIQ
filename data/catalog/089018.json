@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "089018",
+ "services": {
+  "accesso_atti": {
+   "service_id": "089018:wp:762",
+   "title": "Richiesta di accesso agli atti",
+   "source_url": "https://comune.solarino.sr.it/servizio/accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.solarino.sr.it/servizio/accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.solarino.sr.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:50:22.834663Z"
+  },
+  "cambio_residenza": {
+   "service_id": "089018:wp:1275",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.solarino.sr.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.solarino.sr.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.solarino.sr.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:50:28.215763Z"
+  },
+  "stato_civile": {
+   "service_id": "089018:wp:693",
+   "title": "Certificati ed estratti di stato civile",
+   "source_url": "https://comune.solarino.sr.it/servizio/certificati-ed-estratti-di-stato-civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.solarino.sr.it/servizio/certificati-ed-estratti-di-stato-civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.solarino.sr.it/servizio/certificati-ed-estratti-di-stato-civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:50:39.718024Z"
+  }
+ }
+}

@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "028047",
+ "services": {
+  "accesso_atti": {
+   "service_id": "028047:wp:399",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.lozzoatestino.pd.it/?post_type=servizio&p=399",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.lozzoatestino.pd.it/?post_type=servizio&p=399",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.lozzoatestino.pd.it/?post_type=servizio&p=399",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:03:14.286395Z"
+  },
+  "stato_civile": {
+   "service_id": "028047:wp:385",
+   "title": "Certificati ed estratti di Stato Civile",
+   "source_url": "https://www.comune.lozzoatestino.pd.it/?post_type=servizio&p=385",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.lozzoatestino.pd.it/?post_type=servizio&p=385",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.lozzoatestino.pd.it/?post_type=servizio&p=385",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:03:27.706680Z"
+  }
+ }
+}

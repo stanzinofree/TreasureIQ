@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "024041",
+ "services": {
+  "accesso_atti": {
+   "service_id": "024041:wp:201",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.foza.vi.it/?post_type=servizio&p=201",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.foza.vi.it/?post_type=servizio&p=201",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.foza.vi.it/?post_type=servizio&p=201",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.foza.vi.it/wp-content/uploads/2023/02/69-modulistica-diritti-di-segreteria-sportello-unico-edilizia-all-d-g-c-n-81-del-30-12-2021.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.foza.vi.it/?post_type=servizio&p=201",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.foza.vi.it/wp-content/uploads/2023/02/70-modulistica-richiesta-accesso-agli-atti.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.foza.vi.it/?post_type=servizio&p=201",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:00:08.670492Z"
+  },
+  "cambio_residenza": {
+   "service_id": "024041:wp:1831",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.foza.vi.it/?post_type=servizio&p=1831",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.foza.vi.it/?post_type=servizio&p=1831",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.foza.vi.it/?post_type=servizio&p=1831",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:00:15.800806Z"
+  },
+  "stato_civile": {
+   "service_id": "024041:wp:2015",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.foza.vi.it/?post_type=servizio&p=2015",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.foza.vi.it/?post_type=servizio&p=2015",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.foza.vi.it/?post_type=servizio&p=2015",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:00:26.583842Z"
+  }
+ }
+}

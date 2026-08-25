@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "018142",
+ "services": {
+  "accesso_atti": {
+   "service_id": "018142:comweb:richiedere-l-accesso-agli-atti-317-7754-1-d501253e14fe5f74daf8efcc8c64f902",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.santamargheritadistaffora.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-7754-1-d501253e14fe5f74daf8efcc8c64f902",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.santamargheritadistaffora.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-7754-1-d501253e14fe5f74daf8efcc8c64f902",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.santamargheritadistaffora.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-7754-1-d501253e14fe5f74daf8efcc8c64f902",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:24:56.656230Z"
+  },
+  "carta_identita": {
+   "service_id": "018142:comweb:carta-d-identita-elettronica-cie-788-7743-1-9e0bfdee89549ed49f5883f4fba9ab5a",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.santamargheritadistaffora.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-7743-1-9e0bfdee89549ed49f5883f4fba9ab5a",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.santamargheritadistaffora.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-7743-1-9e0bfdee89549ed49f5883f4fba9ab5a",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.santamargheritadistaffora.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-7743-1-9e0bfdee89549ed49f5883f4fba9ab5a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:25:00.390650Z"
+  },
+  "tributi_imu": {
+   "service_id": "018142:comweb:imposta-municipale-propria-imu-953-7844-1-2d29f9f2fd92070d081dd9967ecdd562",
+   "title": "Imposta Municipale Propria (IMU)",
+   "source_url": "https://www.comune.santamargheritadistaffora.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-7844-1-2d29f9f2fd92070d081dd9967ecdd562",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.santamargheritadistaffora.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-7844-1-2d29f9f2fd92070d081dd9967ecdd562",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.santamargheritadistaffora.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-7844-1-2d29f9f2fd92070d081dd9967ecdd562",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:25:04.681379Z"
+  },
+  "tributi_tari": {
+   "service_id": "018142:comweb:tassa-rifiuti-tari-954-7835-1-4d3feec6265af8d18a2e5845a22b11c1",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.santamargheritadistaffora.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-7835-1-4d3feec6265af8d18a2e5845a22b11c1",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.santamargheritadistaffora.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-7835-1-4d3feec6265af8d18a2e5845a22b11c1",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.santamargheritadistaffora.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-7835-1-4d3feec6265af8d18a2e5845a22b11c1",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:25:08.701046Z"
+  }
+ }
+}

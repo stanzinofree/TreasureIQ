@@ -1,0 +1,120 @@
+{
+ "municipality_istat": "090067",
+ "services": {
+  "accesso_atti": {
+   "service_id": "090067:wp:1392",
+   "title": "Richiedere l&#8217;accesso agli atti",
+   "source_url": "https://www.comune.sennori.ss.it/servizio/richiedere-laccesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sennori.ss.it/servizio/richiedere-laccesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sennori.ss.it/servizio/richiedere-laccesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:51:23.810047Z"
+  },
+  "cambio_residenza": {
+   "service_id": "090067:wp:1216",
+   "title": "Cambio di Residenza",
+   "source_url": "https://www.comune.sennori.ss.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sennori.ss.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sennori.ss.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:51:25.223331Z"
+  },
+  "stato_civile": {
+   "service_id": "090067:wp:1218",
+   "title": "Certificati di anagrafe, stato civile, elettorale",
+   "source_url": "https://www.comune.sennori.ss.it/servizio/certificati-di-anagrafe-stato-civile-elettorale/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sennori.ss.it/servizio/certificati-di-anagrafe-stato-civile-elettorale/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sennori.ss.it/servizio/certificati-di-anagrafe-stato-civile-elettorale/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:51:26.742529Z"
+  },
+  "tributi_imu": {
+   "service_id": "090067:wp:1212",
+   "title": "IMU",
+   "source_url": "https://www.comune.sennori.ss.it/servizio/imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sennori.ss.it/servizio/imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sennori.ss.it/servizio/imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:51:28.177241Z"
+  },
+  "tributi_tari": {
+   "service_id": "090067:wp:1213",
+   "title": "TARI",
+   "source_url": "https://www.comune.sennori.ss.it/servizio/tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sennori.ss.it/servizio/tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sennori.ss.it/servizio/tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:51:29.565064Z"
+  }
+ }
+}

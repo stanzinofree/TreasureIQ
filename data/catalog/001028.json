@@ -1,0 +1,87 @@
+{
+ "municipality_istat": "001028",
+ "services": {
+  "carta_identita": {
+   "service_id": "001028:wp:10911",
+   "title": "Carta d&#8217;identità elettronica (C.I.E)",
+   "source_url": "https://www.comune.borgaro-torinese.to.it/servizio/carta-didentita-elettronica-c-i-e/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.borgaro-torinese.to.it/servizio/carta-didentita-elettronica-c-i-e/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.borgaro-torinese.to.it/servizio/carta-didentita-elettronica-c-i-e/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T10:39:12.517191Z"
+  },
+  "tributi_imu": {
+   "service_id": "001028:wp:10632",
+   "title": "IMU",
+   "source_url": "https://www.comune.borgaro-torinese.to.it/servizio/imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.borgaro-torinese.to.it/servizio/imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.borgaro-torinese.to.it/servizio/imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.borgaro-torinese.to.it/wp-content/uploads/2023/11/Modello-dichiarazione-IMU.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.borgaro-torinese.to.it/servizio/imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T10:39:15.991032Z"
+  },
+  "tributi_tari": {
+   "service_id": "001028:wp:11961",
+   "title": "TARI",
+   "source_url": "https://www.comune.borgaro-torinese.to.it/servizio/tassa-rifiuti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.borgaro-torinese.to.it/servizio/tassa-rifiuti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.borgaro-torinese.to.it/servizio/tassa-rifiuti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T10:39:19.316726Z"
+  }
+ }
+}

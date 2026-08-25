@@ -1,0 +1,123 @@
+{
+ "municipality_istat": "001149",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001149:comweb:richiedere-l-accesso-agli-atti-317-29403-1-2ccc13a874ccbf18c584118ad1b77928",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.meanadisusa.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-29403-1-2ccc13a874ccbf18c584118ad1b77928",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.meanadisusa.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-29403-1-2ccc13a874ccbf18c584118ad1b77928",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.meanadisusa.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-29403-1-2ccc13a874ccbf18c584118ad1b77928",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://sportello.comune.meanadisusa.to.it/su_procedimento/richiedere-laccesso-agli-atti/fattispecie/0?ambito=sugen&amp;urlSite=https%3a%2f%2fwww.comune.meanadisusa.to.it%2fit-it%2fservizi%2fanagrafe-e-stato-civile%2frichiedere-l-accesso-agli-atti-317-29403-1-2ccc13a874ccbf18c584118ad1b77928",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.meanadisusa.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-29403-1-2ccc13a874ccbf18c584118ad1b77928",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:44:18.104133Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001149:comweb:cambio-residenza-305-29401-1-766649a006857efabea19f42a37c9ca1",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.meanadisusa.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-29401-1-766649a006857efabea19f42a37c9ca1",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.meanadisusa.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-29401-1-766649a006857efabea19f42a37c9ca1",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.meanadisusa.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-29401-1-766649a006857efabea19f42a37c9ca1",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.meanadisusa.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-29401-1-766649a006857efabea19f42a37c9ca1",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:44:20.217601Z"
+  },
+  "carta_identita": {
+   "service_id": "001149:comweb:carta-d-identita-elettronica-cie-788-29391-1-11975218eb5cf91eeaf414ce946f9d82",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.meanadisusa.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-29391-1-11975218eb5cf91eeaf414ce946f9d82",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.meanadisusa.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-29391-1-11975218eb5cf91eeaf414ce946f9d82",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.meanadisusa.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-29391-1-11975218eb5cf91eeaf414ce946f9d82",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:44:22.065271Z"
+  },
+  "tributi_tari": {
+   "service_id": "001149:comweb:pagamento-tassa-rifiuti-tari-659-29483-1-cb0fa033cc55069865e8b00c0814f321",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.meanadisusa.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-29483-1-cb0fa033cc55069865e8b00c0814f321",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.meanadisusa.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-29483-1-cb0fa033cc55069865e8b00c0814f321",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.meanadisusa.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-29483-1-cb0fa033cc55069865e8b00c0814f321",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:44:24.157849Z"
+  }
+ }
+}

@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "018155",
+ "services": {
+  "carta_identita": {
+   "service_id": "018155:comweb:carta-d-identita-elettronica-cie-788-8931-1-078efb9f36ca1aa1640831bcb59e5b4e",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.torrazzacoste.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-8931-1-078efb9f36ca1aa1640831bcb59e5b4e",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.torrazzacoste.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-8931-1-078efb9f36ca1aa1640831bcb59e5b4e",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.torrazzacoste.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-8931-1-078efb9f36ca1aa1640831bcb59e5b4e",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:25:54.667926Z"
+  },
+  "tributi_tari": {
+   "service_id": "018155:comweb:tassa-rifiuti-tari-954-9023-1-7f7526076b054869bc2db6af3d8a5041",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.torrazzacoste.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-9023-1-7f7526076b054869bc2db6af3d8a5041",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.torrazzacoste.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-9023-1-7f7526076b054869bc2db6af3d8a5041",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.torrazzacoste.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-9023-1-7f7526076b054869bc2db6af3d8a5041",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:25:57.586836Z"
+  }
+ }
+}

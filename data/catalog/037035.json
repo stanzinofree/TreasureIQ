@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "037035",
+ "services": {
+  "accesso_atti": {
+   "service_id": "037035:comweb:richiedere-l-accesso-agli-atti-317-41944-1-3be755e57a85b005feb67ab708ffd924",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.malalbergo.bo.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-41944-1-3be755e57a85b005feb67ab708ffd924",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.malalbergo.bo.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-41944-1-3be755e57a85b005feb67ab708ffd924",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.malalbergo.bo.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-41944-1-3be755e57a85b005feb67ab708ffd924",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.malalbergo.bo.it/modulistica/C_E844/C_E844_ACCESSO_ATTI",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.malalbergo.bo.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-41944-1-3be755e57a85b005feb67ab708ffd924",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T13:49:01.733052Z"
+  },
+  "cambio_residenza": {
+   "service_id": "037035:comweb:cambio-residenza-305-41942-1-3aa5442f3e7288d1f7a86c9e6f2c771b",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.malalbergo.bo.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-41942-1-3aa5442f3e7288d1f7a86c9e6f2c771b",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.malalbergo.bo.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-41942-1-3aa5442f3e7288d1f7a86c9e6f2c771b",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.malalbergo.bo.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-41942-1-3aa5442f3e7288d1f7a86c9e6f2c771b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.malalbergo.bo.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-41942-1-3aa5442f3e7288d1f7a86c9e6f2c771b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T13:49:04.249168Z"
+  },
+  "carta_identita": {
+   "service_id": "037035:comweb:carta-d-identita-elettronica-cie-788-41932-1-605b492b5e02a2d14092209ae45f8368",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.malalbergo.bo.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-41932-1-605b492b5e02a2d14092209ae45f8368",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.malalbergo.bo.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-41932-1-605b492b5e02a2d14092209ae45f8368",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.malalbergo.bo.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-41932-1-605b492b5e02a2d14092209ae45f8368",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T13:49:06.820816Z"
+  }
+ }
+}

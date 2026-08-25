@@ -1,0 +1,123 @@
+{
+ "municipality_istat": "001233",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001233:comweb:richiedere-l-accesso-agli-atti-317-32176-1-335de9480a42580d63b96b152a79bdd2",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.saleranocanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-32176-1-335de9480a42580d63b96b152a79bdd2",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.saleranocanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-32176-1-335de9480a42580d63b96b152a79bdd2",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.saleranocanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-32176-1-335de9480a42580d63b96b152a79bdd2",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.saleranocanavese.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=slrncnvs1113&amp;IDPr=10591",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.saleranocanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-32176-1-335de9480a42580d63b96b152a79bdd2",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:48:22.288323Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001233:comweb:cambio-residenza-305-32174-1-acd8fb37e1c3400285ce4c559598ebc7",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.saleranocanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-32174-1-acd8fb37e1c3400285ce4c559598ebc7",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.saleranocanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-32174-1-acd8fb37e1c3400285ce4c559598ebc7",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.saleranocanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-32174-1-acd8fb37e1c3400285ce4c559598ebc7",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.saleranocanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-32174-1-acd8fb37e1c3400285ce4c559598ebc7",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:48:24.366240Z"
+  },
+  "carta_identita": {
+   "service_id": "001233:comweb:carta-d-identita-elettronica-cie-788-32164-1-cc8a3d12d33d431b966c398d0940270c",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.saleranocanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-32164-1-cc8a3d12d33d431b966c398d0940270c",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.saleranocanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-32164-1-cc8a3d12d33d431b966c398d0940270c",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.saleranocanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-32164-1-cc8a3d12d33d431b966c398d0940270c",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:48:26.394067Z"
+  },
+  "tributi_imu": {
+   "service_id": "001233:comweb:pagare-tributi-imu-600-32265-1-ba5ef0716218bc6b6a9cf086a051621a",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.saleranocanavese.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-32265-1-ba5ef0716218bc6b6a9cf086a051621a",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.saleranocanavese.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-32265-1-ba5ef0716218bc6b6a9cf086a051621a",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.saleranocanavese.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-32265-1-ba5ef0716218bc6b6a9cf086a051621a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:48:28.834128Z"
+  }
+ }
+}

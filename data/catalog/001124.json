@@ -1,0 +1,87 @@
+{
+ "municipality_istat": "001124",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "001124:comweb:cambio-residenza-305-23197-1-9b482667ba015a4415e30845fe435e1f",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.issiglio.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-23197-1-9b482667ba015a4415e30845fe435e1f",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.issiglio.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-23197-1-9b482667ba015a4415e30845fe435e1f",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.issiglio.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-23197-1-9b482667ba015a4415e30845fe435e1f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.issiglio.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-23197-1-9b482667ba015a4415e30845fe435e1f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:43:40.391012Z"
+  },
+  "carta_identita": {
+   "service_id": "001124:comweb:carta-d-identita-elettronica-cie-788-23187-1-13d7675fd0305867ea259d894db6daf8",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.issiglio.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-23187-1-13d7675fd0305867ea259d894db6daf8",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.issiglio.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-23187-1-13d7675fd0305867ea259d894db6daf8",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.issiglio.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-23187-1-13d7675fd0305867ea259d894db6daf8",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:43:42.265055Z"
+  },
+  "tributi_tari": {
+   "service_id": "001124:comweb:pagamento-tassa-rifiuti-tari-659-23279-1-b865619a7a0e10ccd70bac0b05b5906f",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.issiglio.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-23279-1-b865619a7a0e10ccd70bac0b05b5906f",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.issiglio.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-23279-1-b865619a7a0e10ccd70bac0b05b5906f",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.issiglio.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-23279-1-b865619a7a0e10ccd70bac0b05b5906f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:43:44.369165Z"
+  }
+ }
+}

@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "026080",
+ "services": {
+  "accesso_atti": {
+   "service_id": "026080:wp:962",
+   "title": "Richiesta di accesso agli atti",
+   "source_url": "https://www.comune.sernaglia.tv.it/?post_type=servizio&p=962",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sernaglia.tv.it/?post_type=servizio&p=962",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sernaglia.tv.it/?post_type=servizio&p=962",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:36:27.749896Z"
+  },
+  "carta_identita": {
+   "service_id": "026080:wp:968",
+   "title": "Rilascio Carta di Identità Elettronica",
+   "source_url": "https://www.comune.sernaglia.tv.it/?post_type=servizio&p=968",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sernaglia.tv.it/?post_type=servizio&p=968",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sernaglia.tv.it/?post_type=servizio&p=968",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:36:43.635996Z"
+  },
+  "stato_civile": {
+   "service_id": "026080:wp:1045",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.sernaglia.tv.it/?post_type=servizio&p=1045",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sernaglia.tv.it/?post_type=servizio&p=1045",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sernaglia.tv.it/?post_type=servizio&p=1045",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:36:53.138852Z"
+  },
+  "tributi_imu": {
+   "service_id": "026080:wp:1065",
+   "title": "Calcolo IMU / TASI online",
+   "source_url": "https://www.comune.sernaglia.tv.it/?post_type=servizio&p=1065",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sernaglia.tv.it/?post_type=servizio&p=1065",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sernaglia.tv.it/?post_type=servizio&p=1065",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:37:02.458473Z"
+  }
+ }
+}

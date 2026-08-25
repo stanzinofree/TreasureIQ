@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "010028",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "010028:wp:734",
+   "title": "Cambio di residenza tramite Portale Nazionale – ANPR",
+   "source_url": "https://comune.lavagna.ge.it/servizio/cambio-di-residenza-tramite-portale-nazionale-anpr/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.lavagna.ge.it/servizio/cambio-di-residenza-tramite-portale-nazionale-anpr/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.lavagna.ge.it/servizio/cambio-di-residenza-tramite-portale-nazionale-anpr/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:12:09.629007Z"
+  },
+  "carta_identita": {
+   "service_id": "010028:wp:407",
+   "title": "Rilascio carta di identità",
+   "source_url": "https://comune.lavagna.ge.it/servizio/rilascio-carta-di-identita/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.lavagna.ge.it/servizio/rilascio-carta-di-identita/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.lavagna.ge.it/servizio/rilascio-carta-di-identita/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:12:13.310372Z"
+  },
+  "stato_civile": {
+   "service_id": "010028:wp:219",
+   "title": "Certificati anagrafici e di stato civile online",
+   "source_url": "https://comune.lavagna.ge.it/servizio/certificati-anagrafici-stato-civile-online/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.lavagna.ge.it/servizio/certificati-anagrafici-stato-civile-online/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.lavagna.ge.it/servizio/certificati-anagrafici-stato-civile-online/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:12:16.396195Z"
+  },
+  "tributi_imu": {
+   "service_id": "010028:wp:223",
+   "title": "Calcolo IMU online",
+   "source_url": "https://comune.lavagna.ge.it/servizio/calcolo-imu-online/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.lavagna.ge.it/servizio/calcolo-imu-online/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.lavagna.ge.it/servizio/calcolo-imu-online/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:12:19.758103Z"
+  }
+ }
+}

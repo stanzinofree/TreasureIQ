@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "082043",
+ "services": {
+  "accesso_atti": {
+   "service_id": "082043:wp:1157",
+   "title": "Richiesta accesso agli atti",
+   "source_url": "https://www.comune.isoladellefemmine.pa.it/servizio/richiesta-accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.isoladellefemmine.pa.it/servizio/richiesta-accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.isoladellefemmine.pa.it/servizio/richiesta-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:43:35.426882Z"
+  },
+  "carta_identita": {
+   "service_id": "082043:wp:1206",
+   "title": "Carta di identità cartacea",
+   "source_url": "https://www.comune.isoladellefemmine.pa.it/servizio/cartina-di-identita-cartacea/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.isoladellefemmine.pa.it/servizio/cartina-di-identita-cartacea/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.isoladellefemmine.pa.it/servizio/cartina-di-identita-cartacea/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:43:38.163953Z"
+  },
+  "tributi_imu": {
+   "service_id": "082043:wp:1263",
+   "title": "Calcolo IMU",
+   "source_url": "https://www.comune.isoladellefemmine.pa.it/servizio/pagamento-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.isoladellefemmine.pa.it/servizio/pagamento-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.isoladellefemmine.pa.it/servizio/pagamento-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:43:40.329354Z"
+  }
+ }
+}

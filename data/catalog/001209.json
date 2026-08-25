@@ -1,0 +1,110 @@
+{
+ "municipality_istat": "001209",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001209:comweb:richiedere-l-accesso-agli-atti-317-20690-1-39c3c33a0eda7be533801c1a6ab68628",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.quassolo.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-20690-1-39c3c33a0eda7be533801c1a6ab68628",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.quassolo.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-20690-1-39c3c33a0eda7be533801c1a6ab68628",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.quassolo.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-20690-1-39c3c33a0eda7be533801c1a6ab68628",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.quassolo.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=qssl152&amp;IDPr=11413",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.quassolo.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-20690-1-39c3c33a0eda7be533801c1a6ab68628",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:46:50.998178Z"
+  },
+  "carta_identita": {
+   "service_id": "001209:comweb:carta-d-identita-elettronica-cie-788-20679-1-0d4b2e78fa84f79db20fe93b3afadc81",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.quassolo.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-20679-1-0d4b2e78fa84f79db20fe93b3afadc81",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.quassolo.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-20679-1-0d4b2e78fa84f79db20fe93b3afadc81",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.quassolo.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-20679-1-0d4b2e78fa84f79db20fe93b3afadc81",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:46:53.279779Z"
+  },
+  "stato_civile": {
+   "service_id": "001209:comweb:certificato-di-morte-47-20688-1-d419fdf07d23180d07edc699f01c7fd5",
+   "title": "Certificato di Morte",
+   "source_url": "https://www.comune.quassolo.to.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-morte-47-20688-1-d419fdf07d23180d07edc699f01c7fd5",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.quassolo.to.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-morte-47-20688-1-d419fdf07d23180d07edc699f01c7fd5",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.quassolo.to.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-morte-47-20688-1-d419fdf07d23180d07edc699f01c7fd5",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:46:55.375962Z"
+  },
+  "tributi_imu": {
+   "service_id": "001209:comweb:calcolo-imu-355-20780-1-7ff8d530255937c22399e931b7a66096",
+   "title": "Calcolo IMU",
+   "source_url": "https://www.comune.quassolo.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-20780-1-7ff8d530255937c22399e931b7a66096",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.quassolo.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-20780-1-7ff8d530255937c22399e931b7a66096",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.quassolo.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-20780-1-7ff8d530255937c22399e931b7a66096",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:46:57.474948Z"
+  }
+ }
+}

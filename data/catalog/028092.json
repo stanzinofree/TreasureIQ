@@ -1,0 +1,64 @@
+{
+ "municipality_istat": "028092",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "028092:wp:2892",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.torreglia.pd.it/?post_type=servizio&p=2892",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.torreglia.pd.it/?post_type=servizio&p=2892",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.torreglia.pd.it/?post_type=servizio&p=2892",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:22:54.428922Z"
+  },
+  "carta_identita": {
+   "service_id": "028092:wp:4767",
+   "title": "Rilascio carta di identità elettronica",
+   "source_url": "https://www.comune.torreglia.pd.it/?post_type=servizio&p=4767",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.torreglia.pd.it/?post_type=servizio&p=4767",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.torreglia.pd.it/?post_type=servizio&p=4767",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.torreglia.pd.it/wp-content/uploads/2023/08/ASSENSO-AL-RILASCIO-DELLA-CARTA-DIDENTITA.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.torreglia.pd.it/?post_type=servizio&p=4767",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:23:12.406435Z"
+  }
+ }
+}

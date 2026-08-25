@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "095030",
+ "services": {
+  "accesso_atti": {
+   "service_id": "095030:wp:2326",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.morgongiori.or.it/?post_type=servizio&p=2326",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.morgongiori.or.it/?post_type=servizio&p=2326",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.morgongiori.or.it/?post_type=servizio&p=2326",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:54:21.297350Z"
+  },
+  "cambio_residenza": {
+   "service_id": "095030:wp:2664",
+   "title": "Cambio di residenza tramite Portale Nazionale – ANPR",
+   "source_url": "https://www.comune.morgongiori.or.it/?post_type=servizio&p=2664",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.morgongiori.or.it/?post_type=servizio&p=2664",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.morgongiori.or.it/?post_type=servizio&p=2664",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:54:25.949674Z"
+  }
+ }
+}

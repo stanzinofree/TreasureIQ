@@ -1,0 +1,123 @@
+{
+ "municipality_istat": "002121",
+ "services": {
+  "accesso_atti": {
+   "service_id": "002121:comweb:richiedere-l-accesso-agli-atti-317-29535-1-91e5ab7551666bbd04c020cf2b86afa7",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.rossa.vc.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-29535-1-91e5ab7551666bbd04c020cf2b86afa7",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rossa.vc.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-29535-1-91e5ab7551666bbd04c020cf2b86afa7",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rossa.vc.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-29535-1-91e5ab7551666bbd04c020cf2b86afa7",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.rossa.vc.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=rss930&amp;IDPr=11016",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.rossa.vc.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-29535-1-91e5ab7551666bbd04c020cf2b86afa7",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:55:30.628679Z"
+  },
+  "cambio_residenza": {
+   "service_id": "002121:comweb:cambio-residenza-305-29533-1-311512f43bc9493377e39306f18a365f",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.rossa.vc.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-29533-1-311512f43bc9493377e39306f18a365f",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rossa.vc.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-29533-1-311512f43bc9493377e39306f18a365f",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rossa.vc.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-29533-1-311512f43bc9493377e39306f18a365f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.rossa.vc.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-29533-1-311512f43bc9493377e39306f18a365f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:55:32.463182Z"
+  },
+  "carta_identita": {
+   "service_id": "002121:comweb:carta-d-identita-elettronica-cie-788-29523-1-7533d033f11e3c0a1e7de7d1c0bb951e",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.rossa.vc.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-29523-1-7533d033f11e3c0a1e7de7d1c0bb951e",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rossa.vc.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-29523-1-7533d033f11e3c0a1e7de7d1c0bb951e",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rossa.vc.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-29523-1-7533d033f11e3c0a1e7de7d1c0bb951e",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:55:34.700790Z"
+  },
+  "tributi_imu": {
+   "service_id": "002121:comweb:calcolo-imu-355-29624-1-0f5aec126a39115a4f8c8fb85b222c49",
+   "title": "Calcolo IMU",
+   "source_url": "https://www.comune.rossa.vc.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-29624-1-0f5aec126a39115a4f8c8fb85b222c49",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rossa.vc.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-29624-1-0f5aec126a39115a4f8c8fb85b222c49",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rossa.vc.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-29624-1-0f5aec126a39115a4f8c8fb85b222c49",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:55:36.763329Z"
+  }
+ }
+}

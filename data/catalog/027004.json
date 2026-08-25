@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "027004",
+ "services": {
+  "accesso_atti": {
+   "service_id": "027004:wp:471",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.camponogara.ve.it/?post_type=servizio&p=471",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.camponogara.ve.it/?post_type=servizio&p=471",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.camponogara.ve.it/?post_type=servizio&p=471",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:39:01.750348Z"
+  },
+  "stato_civile": {
+   "service_id": "027004:wp:1241",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.camponogara.ve.it/?post_type=servizio&p=1241",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.camponogara.ve.it/?post_type=servizio&p=1241",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.camponogara.ve.it/?post_type=servizio&p=1241",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:39:08.413737Z"
+  }
+ }
+}

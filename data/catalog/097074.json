@@ -1,0 +1,113 @@
+{
+ "municipality_istat": "097074",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "097074:wp:2191",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.santamariahoe.lc.it/servizio/cambio-di-residenza-2/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.santamariahoe.lc.it/servizio/cambio-di-residenza-2/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.santamariahoe.lc.it/servizio/cambio-di-residenza-2/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:57:05.536356Z"
+  },
+  "carta_identita": {
+   "service_id": "097074:wp:927",
+   "title": "Carta d&#8217;Identità",
+   "source_url": "https://comune.santamariahoe.lc.it/servizio/carta-didentita/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.santamariahoe.lc.it/servizio/carta-didentita/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.santamariahoe.lc.it/servizio/carta-didentita/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.santamariahoe.lc.it/wp-content/uploads/2024/01/ATTO-DI-ASSENSO.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.santamariahoe.lc.it/servizio/carta-didentita/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.santamariahoe.lc.it/wp-content/uploads/2023/12/Richiesta-CI-cartacea-urgente-1.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.santamariahoe.lc.it/servizio/carta-didentita/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:57:08.643504Z"
+  },
+  "tributi_imu": {
+   "service_id": "097074:wp:2183",
+   "title": "Dichiarazione IMU",
+   "source_url": "https://comune.santamariahoe.lc.it/servizio/dichiarazione-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.santamariahoe.lc.it/servizio/dichiarazione-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.santamariahoe.lc.it/servizio/dichiarazione-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.santamariahoe.lc.it/wp-content/uploads/2025/12/Dichiarazione-Immobili-inagibili-IMU-1.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.santamariahoe.lc.it/servizio/dichiarazione-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:57:11.764193Z"
+  }
+ }
+}

@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "007049",
+ "services": {
+  "accesso_atti": {
+   "service_id": "007049:wp:1464",
+   "title": "Richiedere l&#8217;accesso agli atti",
+   "source_url": "https://www.comune.pollein.ao.it/servizio/richiedere-laccesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pollein.ao.it/servizio/richiedere-laccesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pollein.ao.it/servizio/richiedere-laccesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:09:08.875661Z"
+  },
+  "cambio_residenza": {
+   "service_id": "007049:wp:1899",
+   "title": "Cambio di residenza cittadini italiani da altro comune",
+   "source_url": "https://www.comune.pollein.ao.it/servizio/cambio-di-residenza-cittadini-italiani-da-altro-comune/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pollein.ao.it/servizio/cambio-di-residenza-cittadini-italiani-da-altro-comune/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pollein.ao.it/servizio/cambio-di-residenza-cittadini-italiani-da-altro-comune/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:09:14.084254Z"
+  }
+ }
+}

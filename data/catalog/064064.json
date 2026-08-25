@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "064064",
+ "services": {
+  "accesso_atti": {
+   "service_id": "064064:wp:451",
+   "title": "Accesso agli atti",
+   "source_url": "https://comune.moschiano.av.it/servizio/accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.moschiano.av.it/servizio/accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.moschiano.av.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:16:41.195359Z"
+  },
+  "cambio_residenza": {
+   "service_id": "064064:wp:440",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.moschiano.av.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.moschiano.av.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.moschiano.av.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:16:44.032310Z"
+  },
+  "tributi_tari": {
+   "service_id": "064064:wp:457",
+   "title": "Riduzioni TARI",
+   "source_url": "https://comune.moschiano.av.it/servizio/riduzioni-tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.moschiano.av.it/servizio/riduzioni-tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.moschiano.av.it/servizio/riduzioni-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:16:45.851568Z"
+  }
+ }
+}

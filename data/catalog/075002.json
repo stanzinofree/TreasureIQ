@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "075002",
+ "services": {
+  "accesso_atti": {
+   "service_id": "075002:wp:930",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.alessano.le.it/servizio/accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.alessano.le.it/servizio/accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.alessano.le.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:27:28.978928Z"
+  },
+  "cambio_residenza": {
+   "service_id": "075002:wp:897",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.alessano.le.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.alessano.le.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.alessano.le.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:27:33.742686Z"
+  },
+  "carta_identita": {
+   "service_id": "075002:wp:900",
+   "title": "CIE – Carta di Identità Elettronica",
+   "source_url": "https://www.comune.alessano.le.it/servizio/cie-carta-di-identita-elettronica/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.alessano.le.it/servizio/cie-carta-di-identita-elettronica/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.alessano.le.it/servizio/cie-carta-di-identita-elettronica/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:27:39.024139Z"
+  }
+ }
+}

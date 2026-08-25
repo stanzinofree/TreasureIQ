@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "001092",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001092:comweb:richiedere-l-accesso-agli-atti-317-12770-1-9eab182f83b81a9da1020e18fb2d236e",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.collerettogiacosa.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-12770-1-9eab182f83b81a9da1020e18fb2d236e",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.collerettogiacosa.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-12770-1-9eab182f83b81a9da1020e18fb2d236e",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.collerettogiacosa.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-12770-1-9eab182f83b81a9da1020e18fb2d236e",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:42:19.795316Z"
+  },
+  "carta_identita": {
+   "service_id": "001092:comweb:carta-d-identita-elettronica-cie-788-12759-1-f5cd11183ef77687c21669f2e0e43454",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.collerettogiacosa.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-12759-1-f5cd11183ef77687c21669f2e0e43454",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.collerettogiacosa.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-12759-1-f5cd11183ef77687c21669f2e0e43454",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.collerettogiacosa.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-12759-1-f5cd11183ef77687c21669f2e0e43454",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:42:21.997372Z"
+  },
+  "tributi_tari": {
+   "service_id": "001092:comweb:pagamento-tassa-rifiuti-tari-659-12851-1-038dd6177ff5a3d63272a702ba1c3fb7",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.collerettogiacosa.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-12851-1-038dd6177ff5a3d63272a702ba1c3fb7",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.collerettogiacosa.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-12851-1-038dd6177ff5a3d63272a702ba1c3fb7",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.collerettogiacosa.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-12851-1-038dd6177ff5a3d63272a702ba1c3fb7",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:42:23.948348Z"
+  }
+ }
+}

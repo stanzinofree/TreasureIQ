@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "053016",
+ "services": {
+  "accesso_atti": {
+   "service_id": "053016:comweb:richiedere-l-accesso-agli-atti-317-59829-1-4c7c65e43f96c593cf7b4395298c8108",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "http://www.comune.monteargentario.gr.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-59829-1-4c7c65e43f96c593cf7b4395298c8108",
+   "options": [
+    {
+     "mode": "information",
+     "url": "http://www.comune.monteargentario.gr.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-59829-1-4c7c65e43f96c593cf7b4395298c8108",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "http://www.comune.monteargentario.gr.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-59829-1-4c7c65e43f96c593cf7b4395298c8108",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T13:57:35.445453Z"
+  },
+  "cambio_residenza": {
+   "service_id": "053016:comweb:cambio-residenza-305-59827-1-0f0303a63321ca14fa5c4996007b5e78",
+   "title": "Cambio Residenza",
+   "source_url": "http://www.comune.monteargentario.gr.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-59827-1-0f0303a63321ca14fa5c4996007b5e78",
+   "options": [
+    {
+     "mode": "information",
+     "url": "http://www.comune.monteargentario.gr.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-59827-1-0f0303a63321ca14fa5c4996007b5e78",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "http://www.comune.monteargentario.gr.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-59827-1-0f0303a63321ca14fa5c4996007b5e78",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T13:57:38.598105Z"
+  },
+  "stato_civile": {
+   "service_id": "053016:comweb:richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-59817-1-672d1bf685e5c2e3756f6a19d757a66e",
+   "title": "Richiesta di certificati/attestazioni/estratti di stato civile",
+   "source_url": "http://www.comune.monteargentario.gr.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-59817-1-672d1bf685e5c2e3756f6a19d757a66e",
+   "options": [
+    {
+     "mode": "information",
+     "url": "http://www.comune.monteargentario.gr.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-59817-1-672d1bf685e5c2e3756f6a19d757a66e",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "http://www.comune.monteargentario.gr.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-59817-1-672d1bf685e5c2e3756f6a19d757a66e",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T13:57:41.221875Z"
+  },
+  "tributi_tari": {
+   "service_id": "053016:comweb:pagamento-tassa-rifiuti-tari-659-59909-1-029a02601ba3b97d517d03d9d603bf8d",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "http://www.comune.monteargentario.gr.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-59909-1-029a02601ba3b97d517d03d9d603bf8d",
+   "options": [
+    {
+     "mode": "information",
+     "url": "http://www.comune.monteargentario.gr.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-59909-1-029a02601ba3b97d517d03d9d603bf8d",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "http://www.comune.monteargentario.gr.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-59909-1-029a02601ba3b97d517d03d9d603bf8d",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T13:57:43.986967Z"
+  }
+ }
+}

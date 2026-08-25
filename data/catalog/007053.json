@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "007053",
+ "services": {
+  "accesso_atti": {
+   "service_id": "007053:wp:180",
+   "title": "Richiedere l&#8217;accesso agli atti",
+   "source_url": "https://www.comune.pre-saint-didier.ao.it/servizio/richiedere-laccesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pre-saint-didier.ao.it/servizio/richiedere-laccesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pre-saint-didier.ao.it/servizio/richiedere-laccesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:09:37.610848Z"
+  },
+  "stato_civile": {
+   "service_id": "007053:wp:442",
+   "title": "Certificati di stato civile",
+   "source_url": "https://www.comune.pre-saint-didier.ao.it/servizio/certificati-di-stato-civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pre-saint-didier.ao.it/servizio/certificati-di-stato-civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pre-saint-didier.ao.it/servizio/certificati-di-stato-civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:09:40.987128Z"
+  }
+ }
+}

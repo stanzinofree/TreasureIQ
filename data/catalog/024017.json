@@ -1,0 +1,87 @@
+{
+ "municipality_istat": "024017",
+ "services": {
+  "accesso_atti": {
+   "service_id": "024017:wp:288",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.brogliano.vi.it/?post_type=servizio&p=288",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.brogliano.vi.it/?post_type=servizio&p=288",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.brogliano.vi.it/?post_type=servizio&p=288",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:53:46.835407Z"
+  },
+  "carta_identita": {
+   "service_id": "024017:wp:629",
+   "title": "Rilascio Carta di Identità Elettronica",
+   "source_url": "https://www.comune.brogliano.vi.it/?post_type=servizio&p=629",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.brogliano.vi.it/?post_type=servizio&p=629",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.brogliano.vi.it/?post_type=servizio&p=629",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.brogliano.vi.it/wp-content/uploads/2023/11/richiesta-carta-identita-minori.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.brogliano.vi.it/?post_type=servizio&p=629",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:53:54.937256Z"
+  },
+  "stato_civile": {
+   "service_id": "024017:wp:819",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.brogliano.vi.it/?post_type=servizio&p=819",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.brogliano.vi.it/?post_type=servizio&p=819",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.brogliano.vi.it/?post_type=servizio&p=819",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:54:05.908297Z"
+  }
+ }
+}

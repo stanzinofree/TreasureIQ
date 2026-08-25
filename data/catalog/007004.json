@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "007004",
+ "services": {
+  "accesso_atti": {
+   "service_id": "007004:comweb:richiedere-l-accesso-agli-atti-317-33892-1-3387c41fbdd9243b70bd9552d9b18969",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.arnad.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-33892-1-3387c41fbdd9243b70bd9552d9b18969",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.arnad.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-33892-1-3387c41fbdd9243b70bd9552d9b18969",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.arnad.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-33892-1-3387c41fbdd9243b70bd9552d9b18969",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.arnad.ao.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=rnd616&amp;IDPr=10546",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.arnad.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-33892-1-3387c41fbdd9243b70bd9552d9b18969",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:03:04.112854Z"
+  },
+  "stato_civile": {
+   "service_id": "007004:comweb:richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-33880-1-daa4832904722df4f5a1082f98ebf3c4",
+   "title": "Richiesta di certificati/attestazioni/estratti di stato civile",
+   "source_url": "https://www.comune.arnad.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-33880-1-daa4832904722df4f5a1082f98ebf3c4",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.arnad.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-33880-1-daa4832904722df4f5a1082f98ebf3c4",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.arnad.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-33880-1-daa4832904722df4f5a1082f98ebf3c4",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:03:06.139217Z"
+  },
+  "tributi_imu": {
+   "service_id": "007004:comweb:imposta-municipale-propria-imu-953-33981-1-374fd72dda3ae610a81307e94b7fbc9f",
+   "title": "Imposta Municipale Propria (IMU)",
+   "source_url": "https://www.comune.arnad.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-33981-1-374fd72dda3ae610a81307e94b7fbc9f",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.arnad.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-33981-1-374fd72dda3ae610a81307e94b7fbc9f",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.arnad.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-33981-1-374fd72dda3ae610a81307e94b7fbc9f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.riscotel.it/calcoloimu/?comune=A424",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.arnad.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-33981-1-374fd72dda3ae610a81307e94b7fbc9f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:03:08.110549Z"
+  }
+ }
+}

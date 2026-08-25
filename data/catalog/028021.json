@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "028021",
+ "services": {
+  "accesso_atti": {
+   "service_id": "028021:wp:398",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.candiana.pd.it/?post_type=servizio&p=398",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.candiana.pd.it/?post_type=servizio&p=398",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.candiana.pd.it/?post_type=servizio&p=398",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:54:48.348386Z"
+  },
+  "cambio_residenza": {
+   "service_id": "028021:wp:1009",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.candiana.pd.it/?post_type=servizio&p=1009",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.candiana.pd.it/?post_type=servizio&p=1009",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.candiana.pd.it/?post_type=servizio&p=1009",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:54:54.205942Z"
+  },
+  "stato_civile": {
+   "service_id": "028021:wp:1012",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.candiana.pd.it/?post_type=servizio&p=1012",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.candiana.pd.it/?post_type=servizio&p=1012",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.candiana.pd.it/?post_type=servizio&p=1012",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:55:00.502460Z"
+  },
+  "tributi_imu": {
+   "service_id": "028021:wp:1245",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.candiana.pd.it/?post_type=servizio&p=1245",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.candiana.pd.it/?post_type=servizio&p=1245",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.candiana.pd.it/?post_type=servizio&p=1245",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:55:09.394505Z"
+  }
+ }
+}

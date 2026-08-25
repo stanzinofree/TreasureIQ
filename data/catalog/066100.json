@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "066100",
+ "services": {
+  "carta_identita": {
+   "service_id": "066100:wp:242",
+   "title": "Prenotazione per Carta d&#8217;identità Elettronica",
+   "source_url": "https://comune.tionedegliabruzzi.aq.it/servizio/prenotazione-per-carta-didentita-elettronica/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.tionedegliabruzzi.aq.it/servizio/prenotazione-per-carta-didentita-elettronica/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.tionedegliabruzzi.aq.it/servizio/prenotazione-per-carta-didentita-elettronica/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:23:02.171253Z"
+  }
+ }
+}

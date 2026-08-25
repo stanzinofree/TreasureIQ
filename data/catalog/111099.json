@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "111099",
+ "services": {
+  "accesso_atti": {
+   "service_id": "111099:wp:1085",
+   "title": "Richiedere l&#8217;accesso agli atti",
+   "source_url": "https://www.comune.villanovatulo.ca.it/servizio/accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.villanovatulo.ca.it/servizio/accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.villanovatulo.ca.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T15:06:43.301908Z"
+  },
+  "cambio_residenza": {
+   "service_id": "111099:wp:1089",
+   "title": "Cambio di residenza &#8211; ANPR",
+   "source_url": "https://www.comune.villanovatulo.ca.it/servizio/cambio-di-residenza-anpr/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.villanovatulo.ca.it/servizio/cambio-di-residenza-anpr/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.villanovatulo.ca.it/servizio/cambio-di-residenza-anpr/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T15:06:45.549065Z"
+  },
+  "stato_civile": {
+   "service_id": "111099:wp:1175",
+   "title": "Rilascio certificati di Stato Civile",
+   "source_url": "https://www.comune.villanovatulo.ca.it/servizio/rilascio-certificati-di-stato-civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.villanovatulo.ca.it/servizio/rilascio-certificati-di-stato-civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.villanovatulo.ca.it/servizio/rilascio-certificati-di-stato-civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T15:06:46.900523Z"
+  },
+  "tributi_imu": {
+   "service_id": "111099:wp:1067",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.villanovatulo.ca.it/servizio/imu-imposta-municipale-unica/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.villanovatulo.ca.it/servizio/imu-imposta-municipale-unica/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.villanovatulo.ca.it/servizio/imu-imposta-municipale-unica/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T15:06:48.325622Z"
+  }
+ }
+}

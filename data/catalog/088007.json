@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "088007",
+ "services": {
+  "accesso_atti": {
+   "service_id": "088007:wp:5441",
+   "title": "Richiesta accesso agli atti",
+   "source_url": "https://comune.monterossoalmo.rg.it/servizio/richiesta-accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.monterossoalmo.rg.it/servizio/richiesta-accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.monterossoalmo.rg.it/servizio/richiesta-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:50:07.324354Z"
+  },
+  "cambio_residenza": {
+   "service_id": "088007:wp:3285",
+   "title": "Cambio di Residenza",
+   "source_url": "https://comune.monterossoalmo.rg.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.monterossoalmo.rg.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.monterossoalmo.rg.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:50:08.715103Z"
+  },
+  "carta_identita": {
+   "service_id": "088007:wp:3418",
+   "title": "Rilascio carta d&#8217;identità",
+   "source_url": "https://comune.monterossoalmo.rg.it/servizio/rilascio-carta-didentita/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.monterossoalmo.rg.it/servizio/rilascio-carta-didentita/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.monterossoalmo.rg.it/servizio/rilascio-carta-didentita/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:50:10.255390Z"
+  }
+ }
+}

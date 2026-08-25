@@ -1,0 +1,64 @@
+{
+ "municipality_istat": "006163",
+ "services": {
+  "accesso_atti": {
+   "service_id": "006163:comweb:richiedere-l-accesso-agli-atti-317-34684-1-d6380700809b0f2941385c10e577b5a4",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.solero.al.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-34684-1-d6380700809b0f2941385c10e577b5a4",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.solero.al.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-34684-1-d6380700809b0f2941385c10e577b5a4",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.solero.al.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-34684-1-d6380700809b0f2941385c10e577b5a4",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://sportello.comune.solero.al.it/su_procedimento/richiedere-laccesso-agli-atti/fattispecie/0?ambito=sugen&amp;urlSite=https://www.comune.solero.al.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-34684-1-d6380700809b0f2941385c10e577b5a4",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.solero.al.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-34684-1-d6380700809b0f2941385c10e577b5a4",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:02:31.422727Z"
+  },
+  "stato_civile": {
+   "service_id": "006163:comweb:richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-34672-1-90067faace95aba668831e7222df58fb",
+   "title": "Richiesta di certificati/attestazioni/estratti di stato civile",
+   "source_url": "https://www.comune.solero.al.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-34672-1-90067faace95aba668831e7222df58fb",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.solero.al.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-34672-1-90067faace95aba668831e7222df58fb",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.solero.al.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-34672-1-90067faace95aba668831e7222df58fb",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:02:33.352217Z"
+  }
+ }
+}

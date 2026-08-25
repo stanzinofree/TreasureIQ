@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "018140",
+ "services": {
+  "accesso_atti": {
+   "service_id": "018140:comweb:richiedere-l-accesso-agli-atti-317-11450-1-3ec736a02abed2e1a79ef53f27164f4e",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.santagiuletta.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-11450-1-3ec736a02abed2e1a79ef53f27164f4e",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.santagiuletta.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-11450-1-3ec736a02abed2e1a79ef53f27164f4e",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.santagiuletta.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-11450-1-3ec736a02abed2e1a79ef53f27164f4e",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:24:48.345603Z"
+  },
+  "tributi_imu": {
+   "service_id": "018140:comweb:imposta-municipale-propria-imu-953-11540-1-de9558e3df7a7851435b03ce6c1fcd73",
+   "title": "Imposta Municipale Propria (IMU)",
+   "source_url": "https://www.comune.santagiuletta.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-11540-1-de9558e3df7a7851435b03ce6c1fcd73",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.santagiuletta.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-11540-1-de9558e3df7a7851435b03ce6c1fcd73",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.santagiuletta.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-11540-1-de9558e3df7a7851435b03ce6c1fcd73",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:24:51.091579Z"
+  },
+  "tributi_tari": {
+   "service_id": "018140:comweb:tassa-rifiuti-tari-954-11531-1-37d6d3b321998fd61de41ee7bd748b5f",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.santagiuletta.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-11531-1-37d6d3b321998fd61de41ee7bd748b5f",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.santagiuletta.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-11531-1-37d6d3b321998fd61de41ee7bd748b5f",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.santagiuletta.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-11531-1-37d6d3b321998fd61de41ee7bd748b5f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:24:54.252949Z"
+  }
+ }
+}

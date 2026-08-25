@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "056021",
+ "services": {
+  "accesso_atti": {
+   "service_id": "056021:wp:2368",
+   "title": "Richiedere accesso agli atti (documentale, civico e generalizzato)",
+   "source_url": "https://comune.civitacastellana.vt.it/servizio/accesso-agli-atti-documentale-civico-e-generalizzato/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.civitacastellana.vt.it/servizio/accesso-agli-atti-documentale-civico-e-generalizzato/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.civitacastellana.vt.it/servizio/accesso-agli-atti-documentale-civico-e-generalizzato/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:59:11.484348Z"
+  },
+  "cambio_residenza": {
+   "service_id": "056021:wp:3718",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.civitacastellana.vt.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.civitacastellana.vt.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.civitacastellana.vt.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:59:15.563010Z"
+  },
+  "carta_identita": {
+   "service_id": "056021:wp:3661",
+   "title": "Carta d&#8217;Identità Elettronica (CIE)",
+   "source_url": "https://comune.civitacastellana.vt.it/servizio/carta-didentita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.civitacastellana.vt.it/servizio/carta-didentita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.civitacastellana.vt.it/servizio/carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:59:19.571082Z"
+  }
+ }
+}

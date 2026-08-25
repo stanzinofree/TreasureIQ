@@ -1,0 +1,110 @@
+{
+ "municipality_istat": "058064",
+ "services": {
+  "accesso_atti": {
+   "service_id": "058064:wp:3272",
+   "title": "Richiesta di accesso agli atti",
+   "source_url": "https://comune.monteporziocatone.rm.it/servizio/richiesta-di-accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.monteporziocatone.rm.it/servizio/richiesta-di-accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.monteporziocatone.rm.it/servizio/richiesta-di-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:01:37.704797Z"
+  },
+  "cambio_residenza": {
+   "service_id": "058064:wp:4290",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.monteporziocatone.rm.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.monteporziocatone.rm.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.monteporziocatone.rm.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:01:41.003424Z"
+  },
+  "carta_identita": {
+   "service_id": "058064:wp:8411",
+   "title": "Carta d&#8217;identità &#8211; Richiesta appuntamento",
+   "source_url": "https://comune.monteporziocatone.rm.it/servizio/carta-didentita-richiesta-appuntamento/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.monteporziocatone.rm.it/servizio/carta-didentita-richiesta-appuntamento/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.monteporziocatone.rm.it/servizio/carta-didentita-richiesta-appuntamento/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.monteporziocatone.rm.it/wp-content/uploads/2024/02/nulla-osta-minori.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.monteporziocatone.rm.it/servizio/carta-didentita-richiesta-appuntamento/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:01:44.011770Z"
+  },
+  "tributi_imu": {
+   "service_id": "058064:wp:3270",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://comune.monteporziocatone.rm.it/servizio/pagare-tributi-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.monteporziocatone.rm.it/servizio/pagare-tributi-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.monteporziocatone.rm.it/servizio/pagare-tributi-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:01:45.827712Z"
+  }
+ }
+}

@@ -1,0 +1,87 @@
+{
+ "municipality_istat": "001165",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001165:comweb:richiedere-l-accesso-agli-atti-317-20954-1-5a81283cdfd9da9d5fc915c9659b61da",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.noasca.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-20954-1-5a81283cdfd9da9d5fc915c9659b61da",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.noasca.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-20954-1-5a81283cdfd9da9d5fc915c9659b61da",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.noasca.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-20954-1-5a81283cdfd9da9d5fc915c9659b61da",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.noasca.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=nsc1539&amp;IDPr=11390",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.noasca.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-20954-1-5a81283cdfd9da9d5fc915c9659b61da",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:44:58.852151Z"
+  },
+  "tributi_imu": {
+   "service_id": "001165:comweb:pagare-tributi-imu-600-21044-1-4442900de28aac4544bad4ec1101c2b2",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.noasca.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-21044-1-4442900de28aac4544bad4ec1101c2b2",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.noasca.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-21044-1-4442900de28aac4544bad4ec1101c2b2",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.noasca.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-21044-1-4442900de28aac4544bad4ec1101c2b2",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:45:00.859604Z"
+  },
+  "tributi_tari": {
+   "service_id": "001165:comweb:pagamento-tassa-rifiuti-tari-659-21035-1-99043fcae004224e5ff800df4fd8d5b5",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.noasca.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-21035-1-99043fcae004224e5ff800df4fd8d5b5",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.noasca.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-21035-1-99043fcae004224e5ff800df4fd8d5b5",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.noasca.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-21035-1-99043fcae004224e5ff800df4fd8d5b5",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:45:02.956716Z"
+  }
+ }
+}

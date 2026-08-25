@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "083012",
+ "services": {
+  "stato_civile": {
+   "service_id": "083012:wp:341",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://comune.casalvecchiosiculo.me.it/servizio/anagrafe-stato-civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.casalvecchiosiculo.me.it/servizio/anagrafe-stato-civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.casalvecchiosiculo.me.it/servizio/anagrafe-stato-civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:44:50.832356Z"
+  }
+ }
+}

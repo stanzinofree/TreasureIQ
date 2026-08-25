@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "023022",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "023022:wp:1749",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.castelnuovodelgarda.vr.it/?post_type=servizio&p=1749",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castelnuovodelgarda.vr.it/?post_type=servizio&p=1749",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castelnuovodelgarda.vr.it/?post_type=servizio&p=1749",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:32:48.541131Z"
+  },
+  "stato_civile": {
+   "service_id": "023022:wp:1752",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.castelnuovodelgarda.vr.it/?post_type=servizio&p=1752",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castelnuovodelgarda.vr.it/?post_type=servizio&p=1752",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castelnuovodelgarda.vr.it/?post_type=servizio&p=1752",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:32:55.649070Z"
+  },
+  "tributi_imu": {
+   "service_id": "023022:wp:1757",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.castelnuovodelgarda.vr.it/?post_type=servizio&p=1757",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castelnuovodelgarda.vr.it/?post_type=servizio&p=1757",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castelnuovodelgarda.vr.it/?post_type=servizio&p=1757",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:33:03.110134Z"
+  }
+ }
+}

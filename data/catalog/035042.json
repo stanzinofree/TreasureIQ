@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "035042",
+ "services": {
+  "accesso_atti": {
+   "service_id": "035042:wp:549",
+   "title": "Accesso documentale                        (escluso accesso agli atti edilizia privata)",
+   "source_url": "https://www.comune.vetto.re.it/servizi/accesso-agli-atti-documentale/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vetto.re.it/servizi/accesso-agli-atti-documentale/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vetto.re.it/servizi/accesso-agli-atti-documentale/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:47:45.442198Z"
+  }
+ }
+}

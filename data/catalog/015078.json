@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "015078",
+ "services": {
+  "accesso_atti": {
+   "service_id": "015078:wp:1159",
+   "title": "Richiedere l&#8217;accesso agli atti",
+   "source_url": "https://www.comune.cisliano.mi.it/servizio/richiedere-laccesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cisliano.mi.it/servizio/richiedere-laccesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cisliano.mi.it/servizio/richiedere-laccesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:15:35.849513Z"
+  },
+  "stato_civile": {
+   "service_id": "015078:wp:2296",
+   "title": "Certificati e Estratti di Stato Civile",
+   "source_url": "https://www.comune.cisliano.mi.it/servizio/certificati-e-estratti-di-stato-civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cisliano.mi.it/servizio/certificati-e-estratti-di-stato-civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cisliano.mi.it/servizio/certificati-e-estratti-di-stato-civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:15:38.204721Z"
+  }
+ }
+}

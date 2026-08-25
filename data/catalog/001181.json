@@ -1,0 +1,87 @@
+{
+ "municipality_istat": "001181",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001181:comweb:richiedere-l-accesso-agli-atti-317-10394-1-86113c0ee7233b5e60db64a7097f06c1",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.pavone.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-10394-1-86113c0ee7233b5e60db64a7097f06c1",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pavone.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-10394-1-86113c0ee7233b5e60db64a7097f06c1",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pavone.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-10394-1-86113c0ee7233b5e60db64a7097f06c1",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.pavone.to.it/Servizi/Filodiretto2/ProcedimentiClient.aspx?CE=pvncnvs148&amp;IDPr=11100",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.pavone.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-10394-1-86113c0ee7233b5e60db64a7097f06c1",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:45:35.158253Z"
+  },
+  "tributi_imu": {
+   "service_id": "001181:comweb:imposta-municipale-propria-imu-953-10484-1-4edce30f76f500bb978e6a03b21ce424",
+   "title": "Imposta Municipale Propria (IMU)",
+   "source_url": "https://www.comune.pavone.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-10484-1-4edce30f76f500bb978e6a03b21ce424",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pavone.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-10484-1-4edce30f76f500bb978e6a03b21ce424",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pavone.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-10484-1-4edce30f76f500bb978e6a03b21ce424",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:45:37.329686Z"
+  },
+  "tributi_tari": {
+   "service_id": "001181:comweb:tassa-rifiuti-tari-954-10475-1-863194d7dcb046d800ff449ff2b0704e",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.pavone.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-10475-1-863194d7dcb046d800ff449ff2b0704e",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pavone.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-10475-1-863194d7dcb046d800ff449ff2b0704e",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pavone.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-10475-1-863194d7dcb046d800ff449ff2b0704e",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:45:39.782204Z"
+  }
+ }
+}

@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "029023",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "029023:wp:716",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.frassinelle-polesine.ro.it/?post_type=servizio&p=716",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.frassinelle-polesine.ro.it/?post_type=servizio&p=716",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.frassinelle-polesine.ro.it/?post_type=servizio&p=716",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:32:25.038941Z"
+  },
+  "carta_identita": {
+   "service_id": "029023:wp:527",
+   "title": "Rilascio PIN e PUK per CIE",
+   "source_url": "https://www.comune.frassinelle-polesine.ro.it/?post_type=servizio&p=527",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.frassinelle-polesine.ro.it/?post_type=servizio&p=527",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.frassinelle-polesine.ro.it/?post_type=servizio&p=527",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:32:30.977013Z"
+  },
+  "stato_civile": {
+   "service_id": "029023:wp:719",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.frassinelle-polesine.ro.it/?post_type=servizio&p=719",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.frassinelle-polesine.ro.it/?post_type=servizio&p=719",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.frassinelle-polesine.ro.it/?post_type=servizio&p=719",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:32:37.511493Z"
+  },
+  "tributi_imu": {
+   "service_id": "029023:wp:753",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.frassinelle-polesine.ro.it/?post_type=servizio&p=753",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.frassinelle-polesine.ro.it/?post_type=servizio&p=753",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.frassinelle-polesine.ro.it/?post_type=servizio&p=753",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:32:52.141363Z"
+  }
+ }
+}

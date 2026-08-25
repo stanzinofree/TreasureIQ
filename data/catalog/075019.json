@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "075019",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "075019:wp:706",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.castrignanodelcapo.le.it/?post_type=servizio&p=706",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castrignanodelcapo.le.it/?post_type=servizio&p=706",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castrignanodelcapo.le.it/?post_type=servizio&p=706",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:27:59.109063Z"
+  },
+  "carta_identita": {
+   "service_id": "075019:wp:709",
+   "title": "CIE – Carta di Identità Elettronica",
+   "source_url": "https://www.comune.castrignanodelcapo.le.it/?post_type=servizio&p=709",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castrignanodelcapo.le.it/?post_type=servizio&p=709",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castrignanodelcapo.le.it/?post_type=servizio&p=709",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:28:04.424492Z"
+  }
+ }
+}

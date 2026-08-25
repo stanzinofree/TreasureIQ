@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "018031",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "018031:comweb:cambio-residenza-305-37058-1-2d7fc531ecdf6c2709af8f979f11c8a2",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.casanovalonati.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-37058-1-2d7fc531ecdf6c2709af8f979f11c8a2",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.casanovalonati.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-37058-1-2d7fc531ecdf6c2709af8f979f11c8a2",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.casanovalonati.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-37058-1-2d7fc531ecdf6c2709af8f979f11c8a2",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.casanovalonati.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-37058-1-2d7fc531ecdf6c2709af8f979f11c8a2",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:19:14.405510Z"
+  },
+  "carta_identita": {
+   "service_id": "018031:comweb:carta-d-identita-elettronica-cie-788-37048-1-8bb56210dc0ca171806735b03dd3d60c",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.casanovalonati.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-37048-1-8bb56210dc0ca171806735b03dd3d60c",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.casanovalonati.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-37048-1-8bb56210dc0ca171806735b03dd3d60c",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.casanovalonati.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-37048-1-8bb56210dc0ca171806735b03dd3d60c",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:19:17.113577Z"
+  },
+  "tributi_imu": {
+   "service_id": "018031:comweb:calcolo-imu-355-37149-1-a4e9c775eabe14534b68fd2a8f99615f",
+   "title": "Calcolo IMU",
+   "source_url": "https://www.comune.casanovalonati.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-37149-1-a4e9c775eabe14534b68fd2a8f99615f",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.casanovalonati.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-37149-1-a4e9c775eabe14534b68fd2a8f99615f",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.casanovalonati.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-37149-1-a4e9c775eabe14534b68fd2a8f99615f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.amministrazionicomunali.it/imu/calcolo_imu.php",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.casanovalonati.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-37149-1-a4e9c775eabe14534b68fd2a8f99615f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:19:19.657822Z"
+  }
+ }
+}

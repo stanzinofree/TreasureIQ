@@ -1,0 +1,90 @@
+{
+ "municipality_istat": "048050",
+ "services": {
+  "stato_civile": {
+   "service_id": "048050:wp:1882",
+   "title": "Certificati di anagrafe, stato civile, elettorale",
+   "source_url": "https://www.comune.vinci.fi.it/servizio/certificati-di-anagrafe-stato-civile-elettorale/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vinci.fi.it/servizio/certificati-di-anagrafe-stato-civile-elettorale/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vinci.fi.it/servizio/certificati-di-anagrafe-stato-civile-elettorale/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:56:37.994182Z"
+  },
+  "tributi_imu": {
+   "service_id": "048050:wp:2659",
+   "title": "IMU Imposta Municipale Unica",
+   "source_url": "https://www.comune.vinci.fi.it/servizio/imu-2024/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vinci.fi.it/servizio/imu-2024/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vinci.fi.it/servizio/imu-2024/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.vinci.fi.it/wp-content/uploads/2025/06/MANIFESTO-IMU-acconto-2025.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vinci.fi.it/servizio/imu-2024/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.vinci.fi.it/wp-content/uploads/2024/06/MANIFESTO-IMU-saldo-2025.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vinci.fi.it/servizio/imu-2024/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.vinci.fi.it/wp-content/uploads/2024/06/Delibera-valore-aree-bianche.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vinci.fi.it/servizio/imu-2024/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:56:39.404895Z"
+  }
+ }
+}

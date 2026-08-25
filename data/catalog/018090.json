@@ -1,0 +1,87 @@
+{
+ "municipality_istat": "018090",
+ "services": {
+  "accesso_atti": {
+   "service_id": "018090:comweb:richiedere-l-accesso-agli-atti-317-56384-1-96bc0e8198fe4b6c97b5d5f8c1ccf80a",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.mezzanabigli.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-56384-1-96bc0e8198fe4b6c97b5d5f8c1ccf80a",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.mezzanabigli.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-56384-1-96bc0e8198fe4b6c97b5d5f8c1ccf80a",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.mezzanabigli.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-56384-1-96bc0e8198fe4b6c97b5d5f8c1ccf80a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:21:16.771909Z"
+  },
+  "cambio_residenza": {
+   "service_id": "018090:comweb:cambio-residenza-305-56382-1-d2542a556539ed233b5f1856b58a10c2",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.mezzanabigli.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-56382-1-d2542a556539ed233b5f1856b58a10c2",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.mezzanabigli.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-56382-1-d2542a556539ed233b5f1856b58a10c2",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.mezzanabigli.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-56382-1-d2542a556539ed233b5f1856b58a10c2",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.mezzanabigli.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-56382-1-d2542a556539ed233b5f1856b58a10c2",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:21:18.992326Z"
+  },
+  "tributi_tari": {
+   "service_id": "018090:comweb:tassa-rifiuti-tari-954-56464-1-385e44fe31003beb64ffa816cb8e57ac",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.mezzanabigli.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-56464-1-385e44fe31003beb64ffa816cb8e57ac",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.mezzanabigli.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-56464-1-385e44fe31003beb64ffa816cb8e57ac",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.mezzanabigli.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-56464-1-385e44fe31003beb64ffa816cb8e57ac",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:21:21.700139Z"
+  }
+ }
+}

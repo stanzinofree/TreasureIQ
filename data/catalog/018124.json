@@ -1,0 +1,133 @@
+{
+ "municipality_istat": "018124",
+ "services": {
+  "accesso_atti": {
+   "service_id": "018124:comweb:richiedere-l-accesso-agli-atti-317-28611-1-bf4ca771896f1f31356ea50aed53f789",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.robeccopavese.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-28611-1-bf4ca771896f1f31356ea50aed53f789",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.robeccopavese.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-28611-1-bf4ca771896f1f31356ea50aed53f789",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.robeccopavese.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-28611-1-bf4ca771896f1f31356ea50aed53f789",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:23:42.324719Z"
+  },
+  "cambio_residenza": {
+   "service_id": "018124:comweb:cambio-residenza-305-28609-1-967703992b7f5a8a6e720d9e56cb4fb6",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.robeccopavese.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-28609-1-967703992b7f5a8a6e720d9e56cb4fb6",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.robeccopavese.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-28609-1-967703992b7f5a8a6e720d9e56cb4fb6",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.robeccopavese.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-28609-1-967703992b7f5a8a6e720d9e56cb4fb6",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.robeccopavese.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-28609-1-967703992b7f5a8a6e720d9e56cb4fb6",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:23:44.808878Z"
+  },
+  "carta_identita": {
+   "service_id": "018124:comweb:carta-d-identita-per-minori-404-28599-1-6277e9f565f196a9c80dc986cd1d062c",
+   "title": "Carta d'identità per minori",
+   "source_url": "https://www.comune.robeccopavese.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-per-minori-404-28599-1-6277e9f565f196a9c80dc986cd1d062c",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.robeccopavese.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-per-minori-404-28599-1-6277e9f565f196a9c80dc986cd1d062c",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.robeccopavese.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-per-minori-404-28599-1-6277e9f565f196a9c80dc986cd1d062c",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:23:47.599138Z"
+  },
+  "tributi_imu": {
+   "service_id": "018124:comweb:imposta-municipale-propria-imu-953-28700-1-c11f1bf952fee364a641ff9a62ec6128",
+   "title": "Imposta Municipale Propria (IMU)",
+   "source_url": "https://www.comune.robeccopavese.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-28700-1-c11f1bf952fee364a641ff9a62ec6128",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.robeccopavese.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-28700-1-c11f1bf952fee364a641ff9a62ec6128",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.robeccopavese.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-28700-1-c11f1bf952fee364a641ff9a62ec6128",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:23:50.176362Z"
+  },
+  "tributi_tari": {
+   "service_id": "018124:comweb:tassa-rifiuti-tari-954-28691-1-60a6e1e05b499b32dd448838d985bcaf",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.robeccopavese.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-28691-1-60a6e1e05b499b32dd448838d985bcaf",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.robeccopavese.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-28691-1-60a6e1e05b499b32dd448838d985bcaf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.robeccopavese.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-28691-1-60a6e1e05b499b32dd448838d985bcaf",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:23:52.848943Z"
+  }
+ }
+}

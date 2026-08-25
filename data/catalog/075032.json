@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "075032",
+ "services": {
+  "accesso_atti": {
+   "service_id": "075032:wp:315",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.giuggianello.le.it/servizio/accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.giuggianello.le.it/servizio/accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.giuggianello.le.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:29:01.838967Z"
+  },
+  "tributi_tari": {
+   "service_id": "075032:wp:330",
+   "title": "TARI",
+   "source_url": "https://www.comune.giuggianello.le.it/servizio/tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.giuggianello.le.it/servizio/tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.giuggianello.le.it/servizio/tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:29:09.721793Z"
+  }
+ }
+}

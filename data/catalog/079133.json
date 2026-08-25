@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "079133",
+ "services": {
+  "accesso_atti": {
+   "service_id": "079133:wp:307",
+   "title": "Accesso agli atti",
+   "source_url": "https://comune.simericrichi.cz.it/servizio/accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.simericrichi.cz.it/servizio/accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.simericrichi.cz.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:38:43.214808Z"
+  },
+  "tributi_imu": {
+   "service_id": "079133:wp:303",
+   "title": "Calcolo IMU (Imposta Municipale Propria)",
+   "source_url": "https://comune.simericrichi.cz.it/servizio/calcolo-imu-imposta-municipale-propria/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.simericrichi.cz.it/servizio/calcolo-imu-imposta-municipale-propria/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.simericrichi.cz.it/servizio/calcolo-imu-imposta-municipale-propria/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:38:46.222343Z"
+  }
+ }
+}

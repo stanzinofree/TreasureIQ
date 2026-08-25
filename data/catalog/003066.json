@@ -1,0 +1,159 @@
+{
+ "municipality_istat": "003066",
+ "services": {
+  "accesso_atti": {
+   "service_id": "003066:comweb:richiedere-l-accesso-agli-atti-317-46960-1-91932197f97efadc5a42472f21f45d0f",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.fontaneto.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-46960-1-91932197f97efadc5a42472f21f45d0f",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.fontaneto.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-46960-1-91932197f97efadc5a42472f21f45d0f",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.fontaneto.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-46960-1-91932197f97efadc5a42472f21f45d0f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.fontaneto.no.it/lang/it/servizi/richiedere-laccesso-agli-atti/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.fontaneto.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-46960-1-91932197f97efadc5a42472f21f45d0f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:57:40.328327Z"
+  },
+  "cambio_residenza": {
+   "service_id": "003066:comweb:cambio-residenza-305-46958-1-90eada320e09e58716a122a4382b1cd8",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.fontaneto.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-46958-1-90eada320e09e58716a122a4382b1cd8",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.fontaneto.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-46958-1-90eada320e09e58716a122a4382b1cd8",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.fontaneto.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-46958-1-90eada320e09e58716a122a4382b1cd8",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.fontaneto.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-46958-1-90eada320e09e58716a122a4382b1cd8",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:57:42.214738Z"
+  },
+  "carta_identita": {
+   "service_id": "003066:comweb:carta-d-identita-elettronica-cie-788-46948-1-2007ebd2395ff68f73b22260b15159e4",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.fontaneto.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-46948-1-2007ebd2395ff68f73b22260b15159e4",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.fontaneto.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-46948-1-2007ebd2395ff68f73b22260b15159e4",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.fontaneto.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-46948-1-2007ebd2395ff68f73b22260b15159e4",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://solutionpa.intesasanpaolo.com/IntermediarioPaPortalFe/pagamenti/access?idDominioPA=00460900038",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.fontaneto.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-46948-1-2007ebd2395ff68f73b22260b15159e4",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:57:44.278292Z"
+  },
+  "stato_civile": {
+   "service_id": "003066:comweb:richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-46948-1-dfb11a6ce86ee61705572662d8b08a14",
+   "title": "Richiesta di certificati/attestazioni/estratti di stato civile",
+   "source_url": "https://www.comune.fontaneto.no.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-46948-1-dfb11a6ce86ee61705572662d8b08a14",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.fontaneto.no.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-46948-1-dfb11a6ce86ee61705572662d8b08a14",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.fontaneto.no.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-46948-1-dfb11a6ce86ee61705572662d8b08a14",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:57:46.854832Z"
+  },
+  "tributi_tari": {
+   "service_id": "003066:comweb:rimborso-tassa-rifiuti-tari-686-47040-1-fdc9d963a7a209e96d72bb4bb06489eb",
+   "title": "Rimborso Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.fontaneto.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/rimborso-tassa-rifiuti-tari-686-47040-1-fdc9d963a7a209e96d72bb4bb06489eb",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.fontaneto.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/rimborso-tassa-rifiuti-tari-686-47040-1-fdc9d963a7a209e96d72bb4bb06489eb",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.fontaneto.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/rimborso-tassa-rifiuti-tari-686-47040-1-fdc9d963a7a209e96d72bb4bb06489eb",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:57:48.864676Z"
+  }
+ }
+}

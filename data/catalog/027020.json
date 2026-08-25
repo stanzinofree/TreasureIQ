@@ -1,0 +1,149 @@
+{
+ "municipality_istat": "027020",
+ "services": {
+  "accesso_atti": {
+   "service_id": "027020:wp:603",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.marcon.ve.it/?post_type=servizio&p=603",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.marcon.ve.it/?post_type=servizio&p=603",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marcon.ve.it/?post_type=servizio&p=603",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:42:38.557103Z"
+  },
+  "cambio_residenza": {
+   "service_id": "027020:wp:1639",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.marcon.ve.it/?post_type=servizio&p=1639",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.marcon.ve.it/?post_type=servizio&p=1639",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marcon.ve.it/?post_type=servizio&p=1639",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:42:49.632582Z"
+  },
+  "stato_civile": {
+   "service_id": "027020:wp:1642",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.marcon.ve.it/?post_type=servizio&p=1642",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.marcon.ve.it/?post_type=servizio&p=1642",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marcon.ve.it/?post_type=servizio&p=1642",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:43:00.633151Z"
+  },
+  "tributi_imu": {
+   "service_id": "027020:wp:1647",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.marcon.ve.it/?post_type=servizio&p=1647",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.marcon.ve.it/?post_type=servizio&p=1647",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marcon.ve.it/?post_type=servizio&p=1647",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.marcon.ve.it/wp-content/uploads/2023/11/Regolamento-IMU-aggiornato-2023-con-delibera.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marcon.ve.it/?post_type=servizio&p=1647",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.marcon.ve.it/wp-content/uploads/2026/04/DELIBERA_Num_70__Allegato1_PROT-3439-RELAZIONE-ALL-1.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marcon.ve.it/?post_type=servizio&p=1647",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.marcon.ve.it/wp-content/uploads/2026/04/DELIBERA_Num_70_Delibera-copia-conforme.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marcon.ve.it/?post_type=servizio&p=1647",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.marcon.ve.it/wp-content/uploads/2026/04/DELIBERA_Num_70__Allegato2_PROT-3926-TABELLE-RIASSUNTIVE-ALL-2.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marcon.ve.it/?post_type=servizio&p=1647",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:43:16.360512Z"
+  }
+ }
+}

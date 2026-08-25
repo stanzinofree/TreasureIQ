@@ -1,0 +1,133 @@
+{
+ "municipality_istat": "018007",
+ "services": {
+  "accesso_atti": {
+   "service_id": "018007:comweb:richiedere-l-accesso-agli-atti-317-28875-1-bd55110e0afdeeb8037f221a98b6087a",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.bagnaria.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-28875-1-bd55110e0afdeeb8037f221a98b6087a",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bagnaria.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-28875-1-bd55110e0afdeeb8037f221a98b6087a",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bagnaria.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-28875-1-bd55110e0afdeeb8037f221a98b6087a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:17:56.275099Z"
+  },
+  "cambio_residenza": {
+   "service_id": "018007:comweb:cambio-residenza-305-28873-1-18d679dc2950605e468d850391b97d04",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.bagnaria.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-28873-1-18d679dc2950605e468d850391b97d04",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bagnaria.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-28873-1-18d679dc2950605e468d850391b97d04",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bagnaria.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-28873-1-18d679dc2950605e468d850391b97d04",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.bagnaria.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-28873-1-18d679dc2950605e468d850391b97d04",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:17:59.058957Z"
+  },
+  "carta_identita": {
+   "service_id": "018007:comweb:carta-d-identita-per-minori-404-28863-1-f1356fbdd2fbf0ff0881dcba2fb93785",
+   "title": "Carta d'identità per minori",
+   "source_url": "https://www.comune.bagnaria.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-per-minori-404-28863-1-f1356fbdd2fbf0ff0881dcba2fb93785",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bagnaria.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-per-minori-404-28863-1-f1356fbdd2fbf0ff0881dcba2fb93785",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bagnaria.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-per-minori-404-28863-1-f1356fbdd2fbf0ff0881dcba2fb93785",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:18:01.857256Z"
+  },
+  "tributi_imu": {
+   "service_id": "018007:comweb:imposta-municipale-propria-imu-953-28964-1-29b5307626370eeac85949d6f9cb9f25",
+   "title": "Imposta Municipale Propria (IMU)",
+   "source_url": "https://www.comune.bagnaria.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-28964-1-29b5307626370eeac85949d6f9cb9f25",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bagnaria.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-28964-1-29b5307626370eeac85949d6f9cb9f25",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bagnaria.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-28964-1-29b5307626370eeac85949d6f9cb9f25",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:18:04.477895Z"
+  },
+  "tributi_tari": {
+   "service_id": "018007:comweb:tassa-rifiuti-tari-954-28955-1-52044930086422aa55c4dba16157fa29",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.bagnaria.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-28955-1-52044930086422aa55c4dba16157fa29",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bagnaria.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-28955-1-52044930086422aa55c4dba16157fa29",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bagnaria.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-28955-1-52044930086422aa55c4dba16157fa29",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:18:07.101710Z"
+  }
+ }
+}

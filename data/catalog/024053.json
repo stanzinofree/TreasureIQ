@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "024053",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "024053:wp:1071",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.lugo.vi.it/?post_type=servizio&p=1071",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.lugo.vi.it/?post_type=servizio&p=1071",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.lugo.vi.it/?post_type=servizio&p=1071",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:03:38.707848Z"
+  },
+  "stato_civile": {
+   "service_id": "024053:wp:1265",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.lugo.vi.it/?post_type=servizio&p=1265",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.lugo.vi.it/?post_type=servizio&p=1265",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.lugo.vi.it/?post_type=servizio&p=1265",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:04:02.068527Z"
+  }
+ }
+}

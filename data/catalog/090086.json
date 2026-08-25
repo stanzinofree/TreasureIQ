@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "090086",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "090086:wp:608",
+   "title": "Cambio di residenza tramite Portale Nazionale – ANPR",
+   "source_url": "https://www.comune.tergu.ss.it/?post_type=servizio&p=608",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.tergu.ss.it/?post_type=servizio&p=608",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.tergu.ss.it/?post_type=servizio&p=608",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:51:37.319165Z"
+  },
+  "tributi_imu": {
+   "service_id": "090086:wp:610",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.tergu.ss.it/?post_type=servizio&p=610",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.tergu.ss.it/?post_type=servizio&p=610",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.tergu.ss.it/?post_type=servizio&p=610",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:51:41.481879Z"
+  }
+ }
+}

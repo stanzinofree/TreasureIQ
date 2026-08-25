@@ -1,0 +1,136 @@
+{
+ "municipality_istat": "023048",
+ "services": {
+  "accesso_atti": {
+   "service_id": "023048:wp:273",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.minerbe.vr.it/?post_type=servizio&p=273",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.minerbe.vr.it/?post_type=servizio&p=273",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.minerbe.vr.it/?post_type=servizio&p=273",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.minerbe.vr.it/wp-content/uploads/2023/09/12-modulistica-diritti-di-segreteria.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.minerbe.vr.it/?post_type=servizio&p=273",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.minerbe.vr.it/wp-content/uploads/2023/09/178-modulistica-diritti-di-segreteria.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.minerbe.vr.it/?post_type=servizio&p=273",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.minerbe.vr.it/wp-content/uploads/2023/09/RICHIESTA-ACCESSO-AGLI-ATTI.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.minerbe.vr.it/?post_type=servizio&p=273",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:36:34.617650Z"
+  },
+  "cambio_residenza": {
+   "service_id": "023048:wp:1028",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.minerbe.vr.it/?post_type=servizio&p=1028",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.minerbe.vr.it/?post_type=servizio&p=1028",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.minerbe.vr.it/?post_type=servizio&p=1028",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:36:43.413205Z"
+  },
+  "stato_civile": {
+   "service_id": "023048:wp:1218",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.minerbe.vr.it/?post_type=servizio&p=1218",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.minerbe.vr.it/?post_type=servizio&p=1218",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.minerbe.vr.it/?post_type=servizio&p=1218",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:36:57.232482Z"
+  },
+  "tributi_imu": {
+   "service_id": "023048:wp:1027",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.minerbe.vr.it/?post_type=servizio&p=1027",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.minerbe.vr.it/?post_type=servizio&p=1027",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.minerbe.vr.it/?post_type=servizio&p=1027",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:37:03.517630Z"
+  }
+ }
+}

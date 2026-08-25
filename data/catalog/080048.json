@@ -1,0 +1,77 @@
+{
+ "municipality_istat": "080048",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "080048:wp:1226",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.melicucca.rc.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.melicucca.rc.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.melicucca.rc.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.melicucca.rc.it/wp-content/uploads/2024/01/Condizioni-del-servizio.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.melicucca.rc.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:40:00.186066Z"
+  },
+  "tributi_tari": {
+   "service_id": "080048:wp:977",
+   "title": "Avvisi di accertamento Tari",
+   "source_url": "https://comune.melicucca.rc.it/servizio/avvisi-di-accertamento-tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.melicucca.rc.it/servizio/avvisi-di-accertamento-tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.melicucca.rc.it/servizio/avvisi-di-accertamento-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.melicucca.rc.it/wp-content/uploads/2024/01/Condizioni-del-servizio.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.melicucca.rc.it/servizio/avvisi-di-accertamento-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:40:03.560730Z"
+  }
+ }
+}

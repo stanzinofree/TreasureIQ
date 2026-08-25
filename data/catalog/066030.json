@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "066030",
+ "services": {
+  "accesso_atti": {
+   "service_id": "066030:wp:417",
+   "title": "Accesso agli atti",
+   "source_url": "https://www.comune.castelvecchiocalvisio.aq.it/servizio/accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castelvecchiocalvisio.aq.it/servizio/accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castelvecchiocalvisio.aq.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:21:41.330204Z"
+  },
+  "tributi_imu": {
+   "service_id": "066030:wp:991",
+   "title": "Sportello IMU",
+   "source_url": "https://www.comune.castelvecchiocalvisio.aq.it/servizio/sportello-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castelvecchiocalvisio.aq.it/servizio/sportello-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castelvecchiocalvisio.aq.it/servizio/sportello-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:21:43.208063Z"
+  }
+ }
+}

@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "001055",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001055:comweb:richiedere-l-accesso-agli-atti-317-60361-1-5b505b1ef6787c00d3591b3e0a031343",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.caprie.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-60361-1-5b505b1ef6787c00d3591b3e0a031343",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.caprie.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-60361-1-5b505b1ef6787c00d3591b3e0a031343",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.caprie.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-60361-1-5b505b1ef6787c00d3591b3e0a031343",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:40:47.026635Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001055:comweb:cambio-residenza-305-60359-1-09e44427e91b30e1ae8fbc71926287b6",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.caprie.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-60359-1-09e44427e91b30e1ae8fbc71926287b6",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.caprie.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-60359-1-09e44427e91b30e1ae8fbc71926287b6",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.caprie.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-60359-1-09e44427e91b30e1ae8fbc71926287b6",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:40:49.616201Z"
+  },
+  "carta_identita": {
+   "service_id": "001055:comweb:carta-d-identita-1-60349-1-501ed0072bc7c1df3cc693571c9dce96",
+   "title": "Carta d'Identità",
+   "source_url": "https://www.comune.caprie.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-60349-1-501ed0072bc7c1df3cc693571c9dce96",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.caprie.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-60349-1-501ed0072bc7c1df3cc693571c9dce96",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.caprie.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-60349-1-501ed0072bc7c1df3cc693571c9dce96",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:40:52.215786Z"
+  },
+  "tributi_tari": {
+   "service_id": "001055:comweb:pagamento-tassa-rifiuti-tari-659-60441-1-e5a4b6d54a08891e500fb47abbecb0dc",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.caprie.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-60441-1-e5a4b6d54a08891e500fb47abbecb0dc",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.caprie.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-60441-1-e5a4b6d54a08891e500fb47abbecb0dc",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.caprie.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-60441-1-e5a4b6d54a08891e500fb47abbecb0dc",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:40:54.681931Z"
+  }
+ }
+}

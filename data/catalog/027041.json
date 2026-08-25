@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "027041",
+ "services": {
+  "stato_civile": {
+   "service_id": "027041:wp:1201",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.torredimosto.ve.it/?post_type=servizio&p=1201",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.torredimosto.ve.it/?post_type=servizio&p=1201",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.torredimosto.ve.it/?post_type=servizio&p=1201",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:46:55.037539Z"
+  }
+ }
+}

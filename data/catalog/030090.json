@@ -1,0 +1,64 @@
+{
+ "municipality_istat": "030090",
+ "services": {
+  "accesso_atti": {
+   "service_id": "030090:wp:331",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.reanadelrojale.ud.it/?post_type=servizio&p=331",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.reanadelrojale.ud.it/?post_type=servizio&p=331",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.reanadelrojale.ud.it/?post_type=servizio&p=331",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.reanadelrojale.ud.it/wp-content/uploads/2024/08/DELIBERA_Num_28_Delibera-copia-conforme.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.reanadelrojale.ud.it/?post_type=servizio&p=331",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:43:41.870351Z"
+  },
+  "stato_civile": {
+   "service_id": "030090:wp:1844",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.reanadelrojale.ud.it/?post_type=servizio&p=1844",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.reanadelrojale.ud.it/?post_type=servizio&p=1844",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.reanadelrojale.ud.it/?post_type=servizio&p=1844",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:43:56.777528Z"
+  }
+ }
+}

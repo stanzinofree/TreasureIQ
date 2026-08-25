@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "026011",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "026011:wp:864",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.castelcucco.tv.it/?post_type=servizio&p=864",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castelcucco.tv.it/?post_type=servizio&p=864",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castelcucco.tv.it/?post_type=servizio&p=864",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:25:22.887765Z"
+  },
+  "stato_civile": {
+   "service_id": "026011:wp:867",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.castelcucco.tv.it/?post_type=servizio&p=867",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castelcucco.tv.it/?post_type=servizio&p=867",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castelcucco.tv.it/?post_type=servizio&p=867",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:25:29.993694Z"
+  },
+  "tributi_imu": {
+   "service_id": "026011:wp:873",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.castelcucco.tv.it/?post_type=servizio&p=873",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castelcucco.tv.it/?post_type=servizio&p=873",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castelcucco.tv.it/?post_type=servizio&p=873",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:25:37.659483Z"
+  }
+ }
+}

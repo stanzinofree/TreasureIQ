@@ -1,0 +1,146 @@
+{
+ "municipality_istat": "023061",
+ "services": {
+  "accesso_atti": {
+   "service_id": "023061:wp:234",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.pressana.vr.it/?post_type=servizio&p=234",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pressana.vr.it/?post_type=servizio&p=234",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pressana.vr.it/?post_type=servizio&p=234",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.pressana.vr.it/wp-content/uploads/2023/07/GC-14-2023-diritti-segreteria-allegato.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pressana.vr.it/?post_type=servizio&p=234",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.pressana.vr.it/wp-content/uploads/2023/07/Istanza-Accesso-Atti.docx",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pressana.vr.it/?post_type=servizio&p=234",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:40:09.131587Z"
+  },
+  "cambio_residenza": {
+   "service_id": "023061:wp:615",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.pressana.vr.it/?post_type=servizio&p=615",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pressana.vr.it/?post_type=servizio&p=615",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pressana.vr.it/?post_type=servizio&p=615",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:40:22.059658Z"
+  },
+  "carta_identita": {
+   "service_id": "023061:wp:492",
+   "title": "Rilascio PIN e PUK per CIE",
+   "source_url": "https://www.comune.pressana.vr.it/?post_type=servizio&p=492",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pressana.vr.it/?post_type=servizio&p=492",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pressana.vr.it/?post_type=servizio&p=492",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:40:37.929936Z"
+  },
+  "stato_civile": {
+   "service_id": "023061:wp:629",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.pressana.vr.it/?post_type=servizio&p=629",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pressana.vr.it/?post_type=servizio&p=629",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pressana.vr.it/?post_type=servizio&p=629",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:40:48.198376Z"
+  },
+  "tributi_imu": {
+   "service_id": "023061:wp:614",
+   "title": "Calcolo IMU",
+   "source_url": "https://www.comune.pressana.vr.it/?post_type=servizio&p=614",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pressana.vr.it/?post_type=servizio&p=614",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pressana.vr.it/?post_type=servizio&p=614",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:40:56.023330Z"
+  }
+ }
+}

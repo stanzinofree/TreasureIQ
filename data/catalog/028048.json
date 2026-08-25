@@ -1,0 +1,146 @@
+{
+ "municipality_istat": "028048",
+ "services": {
+  "accesso_atti": {
+   "service_id": "028048:wp:903",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.masera.pd.it/?post_type=servizio&p=903",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.masera.pd.it/?post_type=servizio&p=903",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.masera.pd.it/?post_type=servizio&p=903",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.masera.pd.it/wp-content/uploads/2024/09/tariffe_accesso_atti_fotocopie.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.masera.pd.it/?post_type=servizio&p=903",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:03:45.083450Z"
+  },
+  "cambio_residenza": {
+   "service_id": "028048:wp:2337",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.masera.pd.it/?post_type=servizio&p=2337",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.masera.pd.it/?post_type=servizio&p=2337",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.masera.pd.it/?post_type=servizio&p=2337",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:03:58.840335Z"
+  },
+  "carta_identita": {
+   "service_id": "028048:wp:901",
+   "title": "Rilascio Carta di Identità Elettronica",
+   "source_url": "https://www.comune.masera.pd.it/?post_type=servizio&p=901",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.masera.pd.it/?post_type=servizio&p=901",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.masera.pd.it/?post_type=servizio&p=901",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.masera.pd.it/wp-content/uploads/2023/07/Assenso-rilascio-carta-identita-per-lespatrio-minore.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.masera.pd.it/?post_type=servizio&p=901",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:04:17.242720Z"
+  },
+  "stato_civile": {
+   "service_id": "028048:wp:2347",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.masera.pd.it/?post_type=servizio&p=2347",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.masera.pd.it/?post_type=servizio&p=2347",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.masera.pd.it/?post_type=servizio&p=2347",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:04:27.769073Z"
+  },
+  "tributi_tari": {
+   "service_id": "028048:wp:898",
+   "title": "TARI - Tassa Rifiuti",
+   "source_url": "https://www.comune.masera.pd.it/?post_type=servizio&p=898",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.masera.pd.it/?post_type=servizio&p=898",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.masera.pd.it/?post_type=servizio&p=898",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:04:41.594575Z"
+  }
+ }
+}

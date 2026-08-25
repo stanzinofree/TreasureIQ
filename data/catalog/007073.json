@@ -1,0 +1,110 @@
+{
+ "municipality_istat": "007073",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "007073:wp:1059",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.verres.ao.it/servizio/cambio-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.verres.ao.it/servizio/cambio-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.verres.ao.it/servizio/cambio-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:10:46.518407Z"
+  },
+  "carta_identita": {
+   "service_id": "007073:wp:768",
+   "title": "CIE – Carta d’Identità Elettronica",
+   "source_url": "https://www.comune.verres.ao.it/servizio/cie-carta-didentita-elettronica/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.verres.ao.it/servizio/cie-carta-didentita-elettronica/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.verres.ao.it/servizio/cie-carta-didentita-elettronica/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:10:50.082765Z"
+  },
+  "tributi_imu": {
+   "service_id": "007073:wp:779",
+   "title": "IMU",
+   "source_url": "https://www.comune.verres.ao.it/servizio/imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.verres.ao.it/servizio/imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.verres.ao.it/servizio/imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.verres.ao.it/wp-content/uploads/2026/01/cc-2025-00041.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.verres.ao.it/servizio/imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:10:53.366314Z"
+  },
+  "tributi_tari": {
+   "service_id": "007073:wp:769",
+   "title": "TARI &#8211; Tassa sui rifiuti",
+   "source_url": "https://www.comune.verres.ao.it/servizio/tari-tassa-sui-rifiuti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.verres.ao.it/servizio/tari-tassa-sui-rifiuti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.verres.ao.it/servizio/tari-tassa-sui-rifiuti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:10:56.750862Z"
+  }
+ }
+}

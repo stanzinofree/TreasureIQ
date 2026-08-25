@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "001296",
+ "services": {
+  "tributi_imu": {
+   "service_id": "001296:comweb:pagare-tributi-imu-600-12200-1-7a4b6a2ca1c48742824e772b3d29d292",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.vialfre.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-12200-1-7a4b6a2ca1c48742824e772b3d29d292",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vialfre.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-12200-1-7a4b6a2ca1c48742824e772b3d29d292",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vialfre.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-12200-1-7a4b6a2ca1c48742824e772b3d29d292",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:52:21.543576Z"
+  },
+  "tributi_tari": {
+   "service_id": "001296:comweb:pagamento-tassa-rifiuti-tari-659-12191-1-54c8acd47448ba65ab9e4ad5687b7544",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.vialfre.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-12191-1-54c8acd47448ba65ab9e4ad5687b7544",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vialfre.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-12191-1-54c8acd47448ba65ab9e4ad5687b7544",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vialfre.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-12191-1-54c8acd47448ba65ab9e4ad5687b7544",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:52:23.426087Z"
+  }
+ }
+}

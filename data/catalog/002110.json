@@ -1,0 +1,159 @@
+{
+ "municipality_istat": "002110",
+ "services": {
+  "accesso_atti": {
+   "service_id": "002110:comweb:richiedere-l-accesso-agli-atti-317-30195-1-7ab9f37c5c8e582223b75c638c34704b",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.rassa.vc.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-30195-1-7ab9f37c5c8e582223b75c638c34704b",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rassa.vc.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-30195-1-7ab9f37c5c8e582223b75c638c34704b",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rassa.vc.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-30195-1-7ab9f37c5c8e582223b75c638c34704b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.rassa.vc.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=rss610&amp;IDPr=11012",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.rassa.vc.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-30195-1-7ab9f37c5c8e582223b75c638c34704b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:55:14.917861Z"
+  },
+  "cambio_residenza": {
+   "service_id": "002110:comweb:cambio-residenza-305-30193-1-71dda2954aa1147dfa661924d0976baa",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.rassa.vc.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-30193-1-71dda2954aa1147dfa661924d0976baa",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rassa.vc.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-30193-1-71dda2954aa1147dfa661924d0976baa",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rassa.vc.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-30193-1-71dda2954aa1147dfa661924d0976baa",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.rassa.vc.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-30193-1-71dda2954aa1147dfa661924d0976baa",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:55:19.232461Z"
+  },
+  "carta_identita": {
+   "service_id": "002110:comweb:carta-d-identita-elettronica-cie-788-30183-1-f94cd4f57e933e86828631522a484c11",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.rassa.vc.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-30183-1-f94cd4f57e933e86828631522a484c11",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rassa.vc.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-30183-1-f94cd4f57e933e86828631522a484c11",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rassa.vc.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-30183-1-f94cd4f57e933e86828631522a484c11",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:55:22.359691Z"
+  },
+  "tributi_imu": {
+   "service_id": "002110:comweb:calcolo-imu-355-30284-1-1994823ce9756560369ea72915347044",
+   "title": "Calcolo IMU",
+   "source_url": "https://www.comune.rassa.vc.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-30284-1-1994823ce9756560369ea72915347044",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rassa.vc.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-30284-1-1994823ce9756560369ea72915347044",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rassa.vc.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-30284-1-1994823ce9756560369ea72915347044",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.servizipubblicaamministrazione.it/servizi/PortaleContribuente/CalcoloImuTasi.aspx?CodCat=H188",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.rassa.vc.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-30284-1-1994823ce9756560369ea72915347044",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:55:24.841977Z"
+  },
+  "tributi_tari": {
+   "service_id": "002110:comweb:pagamento-tassa-rifiuti-tari-659-30275-1-1cc3f20767c13f856a5951a36049bf70",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.rassa.vc.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-30275-1-1cc3f20767c13f856a5951a36049bf70",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rassa.vc.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-30275-1-1cc3f20767c13f856a5951a36049bf70",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rassa.vc.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-30275-1-1cc3f20767c13f856a5951a36049bf70",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:55:26.968602Z"
+  }
+ }
+}

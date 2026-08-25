@@ -1,0 +1,120 @@
+{
+ "municipality_istat": "020051",
+ "services": {
+  "accesso_atti": {
+   "service_id": "020051:wp:1321",
+   "title": "Richiedere l&#8217;accesso agli atti",
+   "source_url": "https://www.comune.rodigo.mn.it/servizio/accesso-agli-atti-documentale/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rodigo.mn.it/servizio/accesso-agli-atti-documentale/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rodigo.mn.it/servizio/accesso-agli-atti-documentale/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:29:14.579287Z"
+  },
+  "carta_identita": {
+   "service_id": "020051:wp:1231",
+   "title": "Carta d&#8217;identità",
+   "source_url": "https://www.comune.rodigo.mn.it/servizio/carta-didentita/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rodigo.mn.it/servizio/carta-didentita/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rodigo.mn.it/servizio/carta-didentita/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:29:20.656193Z"
+  },
+  "stato_civile": {
+   "service_id": "020051:wp:1249",
+   "title": "Certificati di anagrafe, stato civile e di elettorale",
+   "source_url": "https://www.comune.rodigo.mn.it/servizio/certificati-di-anagrafe-stato-civile-e-di-elettorale/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rodigo.mn.it/servizio/certificati-di-anagrafe-stato-civile-e-di-elettorale/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rodigo.mn.it/servizio/certificati-di-anagrafe-stato-civile-e-di-elettorale/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:29:22.745173Z"
+  },
+  "tributi_imu": {
+   "service_id": "020051:wp:1225",
+   "title": "IMU: Imposta Municipale Propria",
+   "source_url": "https://www.comune.rodigo.mn.it/servizio/imu-imposta-municipale-propria/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rodigo.mn.it/servizio/imu-imposta-municipale-propria/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rodigo.mn.it/servizio/imu-imposta-municipale-propria/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:29:24.315959Z"
+  },
+  "tributi_tari": {
+   "service_id": "020051:wp:1226",
+   "title": "TARI: Tassa sui rifiuti",
+   "source_url": "https://www.comune.rodigo.mn.it/servizio/tari-tassa-sui-rifiuti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rodigo.mn.it/servizio/tari-tassa-sui-rifiuti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rodigo.mn.it/servizio/tari-tassa-sui-rifiuti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:29:28.234583Z"
+  }
+ }
+}

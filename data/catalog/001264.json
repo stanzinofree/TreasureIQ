@@ -1,0 +1,123 @@
+{
+ "municipality_istat": "001264",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001264:comweb:richiedere-l-accesso-agli-atti-317-40096-1-d84c67510922625d75b5c6af3425617d",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.settimorottaro.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-40096-1-d84c67510922625d75b5c6af3425617d",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.settimorottaro.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-40096-1-d84c67510922625d75b5c6af3425617d",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.settimorottaro.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-40096-1-d84c67510922625d75b5c6af3425617d",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.settimorottaro.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=sttmrttr1351&amp;IDPr=10592",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.settimorottaro.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-40096-1-d84c67510922625d75b5c6af3425617d",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:50:16.715422Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001264:comweb:cambio-residenza-305-40094-1-36e3b34933e45eddbf2c47f81851f3ff",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.settimorottaro.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-40094-1-36e3b34933e45eddbf2c47f81851f3ff",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.settimorottaro.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-40094-1-36e3b34933e45eddbf2c47f81851f3ff",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.settimorottaro.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-40094-1-36e3b34933e45eddbf2c47f81851f3ff",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.settimorottaro.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-40094-1-36e3b34933e45eddbf2c47f81851f3ff",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:50:18.873579Z"
+  },
+  "tributi_imu": {
+   "service_id": "001264:comweb:pagare-tributi-imu-600-40185-1-a5dffbc457d46392e8495574aefa2322",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.settimorottaro.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-40185-1-a5dffbc457d46392e8495574aefa2322",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.settimorottaro.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-40185-1-a5dffbc457d46392e8495574aefa2322",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.settimorottaro.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-40185-1-a5dffbc457d46392e8495574aefa2322",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:50:20.757667Z"
+  },
+  "tributi_tari": {
+   "service_id": "001264:comweb:pagamento-tassa-rifiuti-tari-659-40176-1-91b30b4c9ea876be6a66beb68b6404a3",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.settimorottaro.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-40176-1-91b30b4c9ea876be6a66beb68b6404a3",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.settimorottaro.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-40176-1-91b30b4c9ea876be6a66beb68b6404a3",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.settimorottaro.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-40176-1-91b30b4c9ea876be6a66beb68b6404a3",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:50:22.847215Z"
+  }
+ }
+}

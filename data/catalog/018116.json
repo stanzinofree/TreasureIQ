@@ -1,0 +1,110 @@
+{
+ "municipality_istat": "018116",
+ "services": {
+  "accesso_atti": {
+   "service_id": "018116:comweb:richiedere-l-accesso-agli-atti-317-17126-1-eda81b42d8d37bf1f7f2d97945e26237",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.pizzale.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-17126-1-eda81b42d8d37bf1f7f2d97945e26237",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pizzale.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-17126-1-eda81b42d8d37bf1f7f2d97945e26237",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pizzale.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-17126-1-eda81b42d8d37bf1f7f2d97945e26237",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.pizzale.pv.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=pzzl1540&amp;IDPr=9972",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.pizzale.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-17126-1-eda81b42d8d37bf1f7f2d97945e26237",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:23:14.607798Z"
+  },
+  "carta_identita": {
+   "service_id": "018116:comweb:carta-d-identita-elettronica-cie-788-17115-1-ad3df57fae9e697e650cfc8c76909f42",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.pizzale.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-17115-1-ad3df57fae9e697e650cfc8c76909f42",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pizzale.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-17115-1-ad3df57fae9e697e650cfc8c76909f42",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pizzale.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-17115-1-ad3df57fae9e697e650cfc8c76909f42",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:23:16.861290Z"
+  },
+  "tributi_imu": {
+   "service_id": "018116:comweb:pagare-tributi-imu-600-17216-1-067c93956b6851ca5c150c888b55ae0a",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.pizzale.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-17216-1-067c93956b6851ca5c150c888b55ae0a",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pizzale.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-17216-1-067c93956b6851ca5c150c888b55ae0a",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pizzale.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-17216-1-067c93956b6851ca5c150c888b55ae0a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:23:19.622902Z"
+  },
+  "tributi_tari": {
+   "service_id": "018116:comweb:pagamento-tassa-rifiuti-tari-659-17207-1-6842553a53b648cf0b851132b673679d",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.pizzale.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-17207-1-6842553a53b648cf0b851132b673679d",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pizzale.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-17207-1-6842553a53b648cf0b851132b673679d",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pizzale.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-17207-1-6842553a53b648cf0b851132b673679d",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:23:22.772367Z"
+  }
+ }
+}

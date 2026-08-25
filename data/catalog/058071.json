@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "058071",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "058071:wp:5296",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.nerola.rm.it/servizianagrafe-e-stato-civile/cambio-di-residenza",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.nerola.rm.it/servizianagrafe-e-stato-civile/cambio-di-residenza",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.nerola.rm.it/servizianagrafe-e-stato-civile/cambio-di-residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:01:57.281725Z"
+  },
+  "carta_identita": {
+   "service_id": "058071:wp:5194",
+   "title": "Carta d&#8217;identità elettronica (CIE)",
+   "source_url": "https://comune.nerola.rm.it/servizianagrafe-e-stato-civile/carta-didentita-elettronica-cie",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.nerola.rm.it/servizianagrafe-e-stato-civile/carta-didentita-elettronica-cie",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.nerola.rm.it/servizianagrafe-e-stato-civile/carta-didentita-elettronica-cie",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:02:00.949683Z"
+  }
+ }
+}

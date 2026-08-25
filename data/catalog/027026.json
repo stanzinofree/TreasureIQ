@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "027026",
+ "services": {
+  "accesso_atti": {
+   "service_id": "027026:wp:682",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.noale.ve.it/?post_type=servizio&p=682",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.noale.ve.it/?post_type=servizio&p=682",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.noale.ve.it/?post_type=servizio&p=682",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:44:55.896106Z"
+  },
+  "stato_civile": {
+   "service_id": "027026:wp:2808",
+   "title": "Richiedere certificati di stato civile",
+   "source_url": "https://www.comune.noale.ve.it/?post_type=servizio&p=2808",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.noale.ve.it/?post_type=servizio&p=2808",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.noale.ve.it/?post_type=servizio&p=2808",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:45:06.562851Z"
+  }
+ }
+}

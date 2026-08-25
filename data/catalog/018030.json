@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "018030",
+ "services": {
+  "accesso_atti": {
+   "service_id": "018030:wp:2673",
+   "title": "Richiesta di Accesso agli Atti",
+   "source_url": "https://comune.carbonaraalticino.pv.it/servizio/richiesta-di-accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.carbonaraalticino.pv.it/servizio/richiesta-di-accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.carbonaraalticino.pv.it/servizio/richiesta-di-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:19:02.163300Z"
+  },
+  "cambio_residenza": {
+   "service_id": "018030:wp:1261",
+   "title": "Cambio Residenza",
+   "source_url": "https://comune.carbonaraalticino.pv.it/servizio/cambio-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.carbonaraalticino.pv.it/servizio/cambio-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.carbonaraalticino.pv.it/servizio/cambio-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:19:06.469327Z"
+  },
+  "tributi_imu": {
+   "service_id": "018030:wp:2723",
+   "title": "Calcolo IMU",
+   "source_url": "https://comune.carbonaraalticino.pv.it/servizio/calcolo-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.carbonaraalticino.pv.it/servizio/calcolo-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.carbonaraalticino.pv.it/servizio/calcolo-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:19:09.284397Z"
+  },
+  "tributi_tari": {
+   "service_id": "018030:wp:2679",
+   "title": "Richiesta esenzione TARI per locali vuoti",
+   "source_url": "https://comune.carbonaraalticino.pv.it/servizio/richiesta-esenzione-tari-per-locali-vuoti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.carbonaraalticino.pv.it/servizio/richiesta-esenzione-tari-per-locali-vuoti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.carbonaraalticino.pv.it/servizio/richiesta-esenzione-tari-per-locali-vuoti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:19:11.845315Z"
+  }
+ }
+}

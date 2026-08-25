@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "001187",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001187:comweb:richiedere-l-accesso-agli-atti-317-18974-1-59ecde3a2a80a43b5aecebb24d28f6aa",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.pertusio.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-18974-1-59ecde3a2a80a43b5aecebb24d28f6aa",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pertusio.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-18974-1-59ecde3a2a80a43b5aecebb24d28f6aa",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pertusio.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-18974-1-59ecde3a2a80a43b5aecebb24d28f6aa",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:45:48.413744Z"
+  },
+  "carta_identita": {
+   "service_id": "001187:comweb:carta-d-identita-elettronica-cie-788-18963-1-563f84412cbe80720a6dbfbf711a537d",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.pertusio.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-18963-1-563f84412cbe80720a6dbfbf711a537d",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pertusio.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-18963-1-563f84412cbe80720a6dbfbf711a537d",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pertusio.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-18963-1-563f84412cbe80720a6dbfbf711a537d",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:45:50.735164Z"
+  },
+  "tributi_imu": {
+   "service_id": "001187:comweb:pagare-tributi-imu-600-19064-1-86a6933bfc8aa3378601ce76c1b99588",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.pertusio.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-19064-1-86a6933bfc8aa3378601ce76c1b99588",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pertusio.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-19064-1-86a6933bfc8aa3378601ce76c1b99588",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pertusio.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-19064-1-86a6933bfc8aa3378601ce76c1b99588",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:45:52.825310Z"
+  },
+  "tributi_tari": {
+   "service_id": "001187:comweb:pagamento-tassa-rifiuti-tari-659-19055-1-eded0f1573a6cd0bbe62c7185780581f",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.pertusio.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-19055-1-eded0f1573a6cd0bbe62c7185780581f",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pertusio.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-19055-1-eded0f1573a6cd0bbe62c7185780581f",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pertusio.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-19055-1-eded0f1573a6cd0bbe62c7185780581f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:45:54.913991Z"
+  }
+ }
+}

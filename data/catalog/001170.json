@@ -1,0 +1,64 @@
+{
+ "municipality_istat": "001170",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001170:comweb:richiedere-l-accesso-agli-atti-317-57967-1-15e877fdf776f86e3cee83742e893878",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.oglianico.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-57967-1-15e877fdf776f86e3cee83742e893878",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.oglianico.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-57967-1-15e877fdf776f86e3cee83742e893878",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.oglianico.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-57967-1-15e877fdf776f86e3cee83742e893878",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.oglianico.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=glnc1286&amp;IDPr=11101",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.oglianico.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-57967-1-15e877fdf776f86e3cee83742e893878",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:45:10.056759Z"
+  },
+  "carta_identita": {
+   "service_id": "001170:comweb:carta-d-identita-elettronica-cie-788-57955-1-4dfe9257dc2893e0ab7e859f57037f4b",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.oglianico.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-57955-1-4dfe9257dc2893e0ab7e859f57037f4b",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.oglianico.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-57955-1-4dfe9257dc2893e0ab7e859f57037f4b",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.oglianico.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-57955-1-4dfe9257dc2893e0ab7e859f57037f4b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:45:11.870405Z"
+  }
+ }
+}

@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "001115",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001115:comweb:richiedere-l-accesso-agli-atti-317-47488-1-e45ce4f264159bdc8bcfdd76f281f814",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.giaveno.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-47488-1-e45ce4f264159bdc8bcfdd76f281f814",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.giaveno.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-47488-1-e45ce4f264159bdc8bcfdd76f281f814",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.giaveno.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-47488-1-e45ce4f264159bdc8bcfdd76f281f814",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:43:22.888076Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001115:comweb:cambio-residenza-305-47486-1-35ee3f0c6016365e4d64e98dc0b60b70",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.giaveno.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-47486-1-35ee3f0c6016365e4d64e98dc0b60b70",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.giaveno.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-47486-1-35ee3f0c6016365e4d64e98dc0b60b70",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.giaveno.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-47486-1-35ee3f0c6016365e4d64e98dc0b60b70",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:43:25.326503Z"
+  },
+  "carta_identita": {
+   "service_id": "001115:comweb:carta-d-identita-1-47476-1-433524fc46bf1d98dd7174c9a34c4ff5",
+   "title": "Carta d'Identità",
+   "source_url": "https://www.comune.giaveno.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-47476-1-433524fc46bf1d98dd7174c9a34c4ff5",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.giaveno.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-47476-1-433524fc46bf1d98dd7174c9a34c4ff5",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.giaveno.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-47476-1-433524fc46bf1d98dd7174c9a34c4ff5",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:43:29.105593Z"
+  }
+ }
+}

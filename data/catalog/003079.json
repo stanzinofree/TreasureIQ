@@ -1,0 +1,87 @@
+{
+ "municipality_istat": "003079",
+ "services": {
+  "accesso_atti": {
+   "service_id": "003079:comweb:richiedere-l-accesso-agli-atti-317-37456-1-955c628dda5ef49c020bfa92b2c65f1f",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.grignasco.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-37456-1-955c628dda5ef49c020bfa92b2c65f1f",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.grignasco.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-37456-1-955c628dda5ef49c020bfa92b2c65f1f",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.grignasco.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-37456-1-955c628dda5ef49c020bfa92b2c65f1f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.grignasco.no.it/lang/it/servizi/richiedere-laccesso-agli-atti/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.grignasco.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-37456-1-955c628dda5ef49c020bfa92b2c65f1f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:57:54.802294Z"
+  },
+  "tributi_imu": {
+   "service_id": "003079:comweb:pagare-tributi-imu-600-37545-1-8554ebca50a257c737a5334bc00d7593",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.grignasco.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-37545-1-8554ebca50a257c737a5334bc00d7593",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.grignasco.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-37545-1-8554ebca50a257c737a5334bc00d7593",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.grignasco.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-37545-1-8554ebca50a257c737a5334bc00d7593",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:57:56.730998Z"
+  },
+  "tributi_tari": {
+   "service_id": "003079:comweb:pagamento-tassa-rifiuti-tari-659-37536-1-d55d157bbe3ec87f246563752d4eca8c",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.grignasco.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-37536-1-d55d157bbe3ec87f246563752d4eca8c",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.grignasco.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-37536-1-d55d157bbe3ec87f246563752d4eca8c",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.grignasco.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-37536-1-d55d157bbe3ec87f246563752d4eca8c",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:57:58.900273Z"
+  }
+ }
+}

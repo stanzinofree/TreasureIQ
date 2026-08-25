@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "079034",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "079034:wp:449",
+   "title": "Richiesta dichiarazione di cambio di residenza",
+   "source_url": "https://comune.cortale.cz.it/servizio/richiesta-dichiarazione-di-cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.cortale.cz.it/servizio/richiesta-dichiarazione-di-cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.cortale.cz.it/servizio/richiesta-dichiarazione-di-cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:38:10.706790Z"
+  },
+  "tributi_imu": {
+   "service_id": "079034:wp:441",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://comune.cortale.cz.it/servizio/pagare-tributi-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.cortale.cz.it/servizio/pagare-tributi-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.cortale.cz.it/servizio/pagare-tributi-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:38:13.903657Z"
+  }
+ }
+}

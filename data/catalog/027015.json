@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "027015",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "027015:wp:1039",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.fossaltadipiave.ve.it/?post_type=servizio&p=1039",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.fossaltadipiave.ve.it/?post_type=servizio&p=1039",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.fossaltadipiave.ve.it/?post_type=servizio&p=1039",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:41:04.323721Z"
+  },
+  "stato_civile": {
+   "service_id": "027015:wp:1042",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.fossaltadipiave.ve.it/?post_type=servizio&p=1042",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.fossaltadipiave.ve.it/?post_type=servizio&p=1042",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.fossaltadipiave.ve.it/?post_type=servizio&p=1042",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:41:11.712450Z"
+  },
+  "tributi_imu": {
+   "service_id": "027015:wp:2142",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.fossaltadipiave.ve.it/?post_type=servizio&p=2142",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.fossaltadipiave.ve.it/?post_type=servizio&p=2142",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.fossaltadipiave.ve.it/?post_type=servizio&p=2142",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:41:20.742698Z"
+  }
+ }
+}

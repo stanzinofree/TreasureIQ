@@ -1,0 +1,133 @@
+{
+ "municipality_istat": "028040",
+ "services": {
+  "accesso_atti": {
+   "service_id": "028040:wp:367",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.galzignanoterme.pd.it/?post_type=servizio&p=367",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.galzignanoterme.pd.it/?post_type=servizio&p=367",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.galzignanoterme.pd.it/?post_type=servizio&p=367",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:59:51.678343Z"
+  },
+  "cambio_residenza": {
+   "service_id": "028040:wp:1315",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.galzignanoterme.pd.it/?post_type=servizio&p=1315",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.galzignanoterme.pd.it/?post_type=servizio&p=1315",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.galzignanoterme.pd.it/?post_type=servizio&p=1315",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:59:57.224289Z"
+  },
+  "carta_identita": {
+   "service_id": "028040:wp:2354",
+   "title": "Rilascio Carta di Identità Elettronica - CIE",
+   "source_url": "https://www.comune.galzignanoterme.pd.it/?post_type=servizio&p=2354",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.galzignanoterme.pd.it/?post_type=servizio&p=2354",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.galzignanoterme.pd.it/?post_type=servizio&p=2354",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.galzignanoterme.pd.it/wp-content/uploads/2026/03/assenso-al-rilascio-della-CI-con-validita-per-lespatrio-a-persona-minorenne.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.galzignanoterme.pd.it/?post_type=servizio&p=2354",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:00:05.933643Z"
+  },
+  "stato_civile": {
+   "service_id": "028040:wp:1318",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.galzignanoterme.pd.it/?post_type=servizio&p=1318",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.galzignanoterme.pd.it/?post_type=servizio&p=1318",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.galzignanoterme.pd.it/?post_type=servizio&p=1318",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:00:21.570733Z"
+  },
+  "tributi_imu": {
+   "service_id": "028040:wp:1349",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.galzignanoterme.pd.it/?post_type=servizio&p=1349",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.galzignanoterme.pd.it/?post_type=servizio&p=1349",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.galzignanoterme.pd.it/?post_type=servizio&p=1349",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:00:33.316219Z"
+  }
+ }
+}

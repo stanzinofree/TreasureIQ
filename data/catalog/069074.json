@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "069074",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "069074:wp:2664",
+   "title": "Cambio residenza o domicilio",
+   "source_url": "https://comune.roccasangiovanni.ch.it/servizio/cambio-residenza-o-domicilio/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.roccasangiovanni.ch.it/servizio/cambio-residenza-o-domicilio/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.roccasangiovanni.ch.it/servizio/cambio-residenza-o-domicilio/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:23:52.272837Z"
+  },
+  "carta_identita": {
+   "service_id": "069074:wp:2663",
+   "title": "Richiesta carta d&#8217;Identità",
+   "source_url": "https://comune.roccasangiovanni.ch.it/servizio/richiesta-carta-didentita/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.roccasangiovanni.ch.it/servizio/richiesta-carta-didentita/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.roccasangiovanni.ch.it/servizio/richiesta-carta-didentita/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:23:55.730880Z"
+  }
+ }
+}

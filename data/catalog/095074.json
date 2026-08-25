@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "095074",
+ "services": {
+  "accesso_atti": {
+   "service_id": "095074:wp:1925",
+   "title": "Richiedere l&#8217;accesso agli Atti",
+   "source_url": "https://www.comune.zeddiani.or.it/servizio/richiedere-laccesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.zeddiani.or.it/servizio/richiedere-laccesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.zeddiani.or.it/servizio/richiedere-laccesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:54:36.799989Z"
+  },
+  "cambio_residenza": {
+   "service_id": "095074:wp:1802",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.zeddiani.or.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.zeddiani.or.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.zeddiani.or.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:54:38.579741Z"
+  },
+  "stato_civile": {
+   "service_id": "095074:wp:1921",
+   "title": "Separazione e divorzio di fronte all&#8217;ufficiale di Stato Civile",
+   "source_url": "https://www.comune.zeddiani.or.it/servizio/separazione-e-divorzio-di-fronte-allufficiale-di-stato-civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.zeddiani.or.it/servizio/separazione-e-divorzio-di-fronte-allufficiale-di-stato-civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.zeddiani.or.it/servizio/separazione-e-divorzio-di-fronte-allufficiale-di-stato-civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:54:40.142010Z"
+  }
+ }
+}

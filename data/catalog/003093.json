@@ -1,0 +1,64 @@
+{
+ "municipality_istat": "003093",
+ "services": {
+  "accesso_atti": {
+   "service_id": "003093:comweb:richiedere-l-accesso-agli-atti-317-52394-1-d4ec7bc439a501af8e5475376efea2cc",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.massinovisconti.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-52394-1-d4ec7bc439a501af8e5475376efea2cc",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.massinovisconti.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-52394-1-d4ec7bc439a501af8e5475376efea2cc",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.massinovisconti.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-52394-1-d4ec7bc439a501af8e5475376efea2cc",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.massinovisconti.no.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=mssnvscnt997&amp;IDPr=12092",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.massinovisconti.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-52394-1-d4ec7bc439a501af8e5475376efea2cc",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:58:23.883563Z"
+  },
+  "tributi_tari": {
+   "service_id": "003093:comweb:pagamento-tassa-rifiuti-tari-659-52474-1-76fd56c9fe419d1e69014757d16fb541",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.massinovisconti.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-52474-1-76fd56c9fe419d1e69014757d16fb541",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.massinovisconti.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-52474-1-76fd56c9fe419d1e69014757d16fb541",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.massinovisconti.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-52474-1-76fd56c9fe419d1e69014757d16fb541",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:58:25.705210Z"
+  }
+ }
+}

@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "060070",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "060070:wp:2901",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.sanvittoredellazio.fr.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.sanvittoredellazio.fr.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.sanvittoredellazio.fr.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:07:48.056981Z"
+  },
+  "stato_civile": {
+   "service_id": "060070:wp:739",
+   "title": "Richiesta certificato di nascita",
+   "source_url": "https://comune.sanvittoredellazio.fr.it/servizio/richiesta-certificato-di-nascita/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.sanvittoredellazio.fr.it/servizio/richiesta-certificato-di-nascita/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.sanvittoredellazio.fr.it/servizio/richiesta-certificato-di-nascita/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:07:54.295711Z"
+  },
+  "tributi_imu": {
+   "service_id": "060070:wp:313",
+   "title": "IMU (Imposta Municipale Propria)",
+   "source_url": "https://comune.sanvittoredellazio.fr.it/servizio/imu-imposta-municipale-propria/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.sanvittoredellazio.fr.it/servizio/imu-imposta-municipale-propria/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.sanvittoredellazio.fr.it/servizio/imu-imposta-municipale-propria/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:07:58.809932Z"
+  }
+ }
+}

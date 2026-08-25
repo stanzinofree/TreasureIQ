@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "086012",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "086012:wp:5851",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.nicosia.en.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.nicosia.en.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.nicosia.en.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:48:27.867990Z"
+  },
+  "tributi_imu": {
+   "service_id": "086012:wp:735",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://comune.nicosia.en.it/servizio/pagare-tributi-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.nicosia.en.it/servizio/pagare-tributi-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.nicosia.en.it/servizio/pagare-tributi-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:48:30.528860Z"
+  }
+ }
+}

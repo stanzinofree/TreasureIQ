@@ -1,0 +1,77 @@
+{
+ "municipality_istat": "002170",
+ "services": {
+  "accesso_atti": {
+   "service_id": "002170:comweb:richiedere-l-accesso-agli-atti-317-35476-1-19707e7a069b9de0fab000601da93d60",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.altosermenza.vc.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-35476-1-19707e7a069b9de0fab000601da93d60",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.altosermenza.vc.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-35476-1-19707e7a069b9de0fab000601da93d60",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.altosermenza.vc.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-35476-1-19707e7a069b9de0fab000601da93d60",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.altosermenza.vc.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=ltsrmnz1346&amp;IDPr=11373",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.altosermenza.vc.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-35476-1-19707e7a069b9de0fab000601da93d60",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:55:38.859130Z"
+  },
+  "cambio_residenza": {
+   "service_id": "002170:comweb:cambio-residenza-305-35474-1-379110749ea87f42d3f9e93964d2a8bc",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.altosermenza.vc.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-35474-1-379110749ea87f42d3f9e93964d2a8bc",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.altosermenza.vc.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-35474-1-379110749ea87f42d3f9e93964d2a8bc",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.altosermenza.vc.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-35474-1-379110749ea87f42d3f9e93964d2a8bc",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.altosermenza.vc.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-35474-1-379110749ea87f42d3f9e93964d2a8bc",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:55:40.963334Z"
+  }
+ }
+}

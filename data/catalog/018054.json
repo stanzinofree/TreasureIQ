@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "018054",
+ "services": {
+  "carta_identita": {
+   "service_id": "018054:comweb:carta-d-identita-elettronica-cie-788-9063-1-5995be0be4827c84aedbe9e78c7125d3",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.corana.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-9063-1-5995be0be4827c84aedbe9e78c7125d3",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.corana.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-9063-1-5995be0be4827c84aedbe9e78c7125d3",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.corana.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-9063-1-5995be0be4827c84aedbe9e78c7125d3",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:20:27.147804Z"
+  },
+  "tributi_tari": {
+   "service_id": "018054:comweb:tassa-rifiuti-tari-954-9155-1-0a0c58a69f428fa72be665d534b51e71",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.corana.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-9155-1-0a0c58a69f428fa72be665d534b51e71",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.corana.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-9155-1-0a0c58a69f428fa72be665d534b51e71",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.corana.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-9155-1-0a0c58a69f428fa72be665d534b51e71",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:20:30.095698Z"
+  }
+ }
+}

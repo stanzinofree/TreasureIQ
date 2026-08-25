@@ -1,0 +1,123 @@
+{
+ "municipality_istat": "103024",
+ "services": {
+  "accesso_atti": {
+   "service_id": "103024:comweb:richiedere-l-accesso-agli-atti-317-36268-1-54aff067e80708f8c26b58e55e77be7d",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.craveggia.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-36268-1-54aff067e80708f8c26b58e55e77be7d",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.craveggia.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-36268-1-54aff067e80708f8c26b58e55e77be7d",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.craveggia.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-36268-1-54aff067e80708f8c26b58e55e77be7d",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.craveggia.vb.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=crvgg255&amp;IDPr=10485",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.craveggia.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-36268-1-54aff067e80708f8c26b58e55e77be7d",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:01:37.325514Z"
+  },
+  "cambio_residenza": {
+   "service_id": "103024:comweb:cambio-residenza-305-36266-1-9fd932e7cdefe8589c9de164c3123c7e",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.craveggia.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-36266-1-9fd932e7cdefe8589c9de164c3123c7e",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.craveggia.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-36266-1-9fd932e7cdefe8589c9de164c3123c7e",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.craveggia.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-36266-1-9fd932e7cdefe8589c9de164c3123c7e",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.craveggia.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-36266-1-9fd932e7cdefe8589c9de164c3123c7e",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:01:39.412622Z"
+  },
+  "tributi_imu": {
+   "service_id": "103024:comweb:calcolo-imu-355-36357-1-11162c1bac288d48a5838f7adb69d68a",
+   "title": "Calcolo IMU",
+   "source_url": "https://www.comune.craveggia.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-36357-1-11162c1bac288d48a5838f7adb69d68a",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.craveggia.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-36357-1-11162c1bac288d48a5838f7adb69d68a",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.craveggia.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-36357-1-11162c1bac288d48a5838f7adb69d68a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:01:41.480035Z"
+  },
+  "tributi_tari": {
+   "service_id": "103024:comweb:pagamento-tassa-rifiuti-tari-659-36348-1-6247e1022c3522e68698084f08f2ff3b",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.craveggia.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-36348-1-6247e1022c3522e68698084f08f2ff3b",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.craveggia.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-36348-1-6247e1022c3522e68698084f08f2ff3b",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.craveggia.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-36348-1-6247e1022c3522e68698084f08f2ff3b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:01:43.563526Z"
+  }
+ }
+}

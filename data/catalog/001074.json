@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "001074",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001074:comweb:richiedere-l-accesso-agli-atti-317-24519-1-3aed46ee73e88d924a16a02ffbc914dd",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.cesana.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-24519-1-3aed46ee73e88d924a16a02ffbc914dd",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cesana.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-24519-1-3aed46ee73e88d924a16a02ffbc914dd",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cesana.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-24519-1-3aed46ee73e88d924a16a02ffbc914dd",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizidigitali.comune.cesana.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=csntrns1227&amp;IDPr=13427",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.cesana.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-24519-1-3aed46ee73e88d924a16a02ffbc914dd",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:41:23.814017Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001074:comweb:cambio-residenza-305-24517-1-03869a80ab63d4f9499c89b0883a7f62",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.cesana.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-24517-1-03869a80ab63d4f9499c89b0883a7f62",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cesana.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-24517-1-03869a80ab63d4f9499c89b0883a7f62",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cesana.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-24517-1-03869a80ab63d4f9499c89b0883a7f62",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.cesana.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-24517-1-03869a80ab63d4f9499c89b0883a7f62",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:41:26.313593Z"
+  },
+  "tributi_tari": {
+   "service_id": "001074:comweb:pagamento-tassa-rifiuti-tari-659-24599-1-65fc8f921c150c934f8bfffc8393e9c1",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.cesana.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-24599-1-65fc8f921c150c934f8bfffc8393e9c1",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cesana.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-24599-1-65fc8f921c150c934f8bfffc8393e9c1",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cesana.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-24599-1-65fc8f921c150c934f8bfffc8393e9c1",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:41:29.272930Z"
+  }
+ }
+}

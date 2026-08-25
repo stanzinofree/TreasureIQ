@@ -1,0 +1,110 @@
+{
+ "municipality_istat": "103002",
+ "services": {
+  "accesso_atti": {
+   "service_id": "103002:comweb:richiedere-l-accesso-agli-atti-317-34552-1-495730163c9e767d39af70b53399674e",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.anzoladossola.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-34552-1-495730163c9e767d39af70b53399674e",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.anzoladossola.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-34552-1-495730163c9e767d39af70b53399674e",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.anzoladossola.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-34552-1-495730163c9e767d39af70b53399674e",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:00:39.380815Z"
+  },
+  "cambio_residenza": {
+   "service_id": "103002:comweb:cambio-residenza-305-34550-1-a4140604a1d41dec38a5a6ba51dde6e1",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.anzoladossola.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-34550-1-a4140604a1d41dec38a5a6ba51dde6e1",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.anzoladossola.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-34550-1-a4140604a1d41dec38a5a6ba51dde6e1",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.anzoladossola.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-34550-1-a4140604a1d41dec38a5a6ba51dde6e1",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/?catnome=Anagrafe%2520e%2520stato%2520civile&amp;caturl=https://www.comune.anzoladossola.vb.it/it-it/servizi/anagrafe-e-stato-civile&amp;servnome=Cambio%2520Residenza&amp;servurl=https://www.comune.anzoladossola.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-34550-1-a4140604a1d41dec38a5a6ba51dde6e1",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.anzoladossola.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-34550-1-a4140604a1d41dec38a5a6ba51dde6e1",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:00:41.379200Z"
+  },
+  "carta_identita": {
+   "service_id": "103002:comweb:carta-d-identita-1-34540-1-e3e5e5a63738e9552a588338411cc314",
+   "title": "Carta d'Identità",
+   "source_url": "https://www.comune.anzoladossola.vb.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-34540-1-e3e5e5a63738e9552a588338411cc314",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.anzoladossola.vb.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-34540-1-e3e5e5a63738e9552a588338411cc314",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.anzoladossola.vb.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-34540-1-e3e5e5a63738e9552a588338411cc314",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:00:43.464484Z"
+  },
+  "tributi_tari": {
+   "service_id": "103002:comweb:pagamento-tassa-rifiuti-tari-659-34632-1-997d23c532ca5cc99fbbe914df5e80cb",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.anzoladossola.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-34632-1-997d23c532ca5cc99fbbe914df5e80cb",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.anzoladossola.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-34632-1-997d23c532ca5cc99fbbe914df5e80cb",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.anzoladossola.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-34632-1-997d23c532ca5cc99fbbe914df5e80cb",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:00:45.564153Z"
+  }
+ }
+}

@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "013193",
+ "services": {
+  "accesso_atti": {
+   "service_id": "013193:wp:2234",
+   "title": "Richiedere l&#8217;accesso agli atti",
+   "source_url": "https://comune.pusiano.co.it/servizio/richiedere-accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.pusiano.co.it/servizio/richiedere-accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.pusiano.co.it/servizio/richiedere-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:13:59.032000Z"
+  },
+  "carta_identita": {
+   "service_id": "013193:wp:878",
+   "title": "Anagrafe &#8211; Carta di identità elettronica (CIE)",
+   "source_url": "https://comune.pusiano.co.it/servizio/anagrafe-carta-di-identita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.pusiano.co.it/servizio/anagrafe-carta-di-identita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.pusiano.co.it/servizio/anagrafe-carta-di-identita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:14:04.379575Z"
+  },
+  "tributi_imu": {
+   "service_id": "013193:wp:1930",
+   "title": "Calcolo IMU",
+   "source_url": "https://comune.pusiano.co.it/servizio/calcolo-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.pusiano.co.it/servizio/calcolo-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.pusiano.co.it/servizio/calcolo-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:14:07.572794Z"
+  }
+ }
+}

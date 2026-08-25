@@ -1,0 +1,146 @@
+{
+ "municipality_istat": "007028",
+ "services": {
+  "accesso_atti": {
+   "service_id": "007028:comweb:richiedere-l-accesso-agli-atti-317-44188-1-1b0857343f70782b06c94107fa3689fe",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.fontainemore.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-44188-1-1b0857343f70782b06c94107fa3689fe",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.fontainemore.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-44188-1-1b0857343f70782b06c94107fa3689fe",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.fontainemore.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-44188-1-1b0857343f70782b06c94107fa3689fe",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.fontainemore.ao.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=fntnmr490&amp;IDPr=10827",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.fontainemore.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-44188-1-1b0857343f70782b06c94107fa3689fe",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:06:58.175583Z"
+  },
+  "cambio_residenza": {
+   "service_id": "007028:comweb:cambio-residenza-305-44186-1-3e7a7e6d0088aa767e59dc63423051cf",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.fontainemore.ao.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-44186-1-3e7a7e6d0088aa767e59dc63423051cf",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.fontainemore.ao.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-44186-1-3e7a7e6d0088aa767e59dc63423051cf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.fontainemore.ao.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-44186-1-3e7a7e6d0088aa767e59dc63423051cf",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.fontainemore.ao.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-44186-1-3e7a7e6d0088aa767e59dc63423051cf",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:07:00.261777Z"
+  },
+  "carta_identita": {
+   "service_id": "007028:comweb:carta-d-identita-elettronica-cie-788-44176-1-5c0b58441ea22e0912dff6cc5999882d",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.fontainemore.ao.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-44176-1-5c0b58441ea22e0912dff6cc5999882d",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.fontainemore.ao.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-44176-1-5c0b58441ea22e0912dff6cc5999882d",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.fontainemore.ao.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-44176-1-5c0b58441ea22e0912dff6cc5999882d",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:07:02.693369Z"
+  },
+  "tributi_imu": {
+   "service_id": "007028:comweb:imposta-municipale-propria-imu-953-44277-1-f095600ff12481bf785b866dc3ee5d0b",
+   "title": "Imposta Municipale Propria (IMU)",
+   "source_url": "https://www.comune.fontainemore.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-44277-1-f095600ff12481bf785b866dc3ee5d0b",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.fontainemore.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-44277-1-f095600ff12481bf785b866dc3ee5d0b",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.fontainemore.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-44277-1-f095600ff12481bf785b866dc3ee5d0b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:07:04.943366Z"
+  },
+  "tributi_tari": {
+   "service_id": "007028:comweb:tassa-rifiuti-tari-954-44268-1-eb3aa57796c091092d4e259afbdd20c8",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.fontainemore.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-44268-1-eb3aa57796c091092d4e259afbdd20c8",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.fontainemore.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-44268-1-eb3aa57796c091092d4e259afbdd20c8",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.fontainemore.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-44268-1-eb3aa57796c091092d4e259afbdd20c8",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:07:07.114963Z"
+  }
+ }
+}

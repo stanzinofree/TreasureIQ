@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "003012",
+ "services": {
+  "carta_identita": {
+   "service_id": "003012:comweb:carta-d-identita-elettronica-cie-788-60216-1-976169f28a61f0824e144c4ca78edc10",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.barengo.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-60216-1-976169f28a61f0824e144c4ca78edc10",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.barengo.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-60216-1-976169f28a61f0824e144c4ca78edc10",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.barengo.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-60216-1-976169f28a61f0824e144c4ca78edc10",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:56:25.056539Z"
+  }
+ }
+}

@@ -1,0 +1,123 @@
+{
+ "municipality_istat": "029006",
+ "services": {
+  "accesso_atti": {
+   "service_id": "029006:wp:467",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.bergantino.ro.it/?post_type=servizio&p=467",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bergantino.ro.it/?post_type=servizio&p=467",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bergantino.ro.it/?post_type=servizio&p=467",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.bergantino.ro.it/wp-content/uploads/2024/08/DELIBERA_Num_125_Delibera-copia-conforme.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bergantino.ro.it/?post_type=servizio&p=467",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.bergantino.ro.it/wp-content/uploads/2024/08/DELIBERA_Num_125__Allegato7_ALLEGATO-G-diritti-di-segreteria.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bergantino.ro.it/?post_type=servizio&p=467",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:28:19.638427Z"
+  },
+  "cambio_residenza": {
+   "service_id": "029006:wp:229",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.bergantino.ro.it/?post_type=servizio&p=229",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bergantino.ro.it/?post_type=servizio&p=229",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bergantino.ro.it/?post_type=servizio&p=229",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:28:32.288047Z"
+  },
+  "stato_civile": {
+   "service_id": "029006:wp:232",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.bergantino.ro.it/?post_type=servizio&p=232",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bergantino.ro.it/?post_type=servizio&p=232",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bergantino.ro.it/?post_type=servizio&p=232",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:28:41.279823Z"
+  },
+  "tributi_imu": {
+   "service_id": "029006:wp:1095",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.bergantino.ro.it/?post_type=servizio&p=1095",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bergantino.ro.it/?post_type=servizio&p=1095",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bergantino.ro.it/?post_type=servizio&p=1095",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:28:51.016042Z"
+  }
+ }
+}

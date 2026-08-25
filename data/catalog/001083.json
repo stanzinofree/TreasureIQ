@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "001083",
+ "services": {
+  "tributi_imu": {
+   "service_id": "001083:comweb:pagare-tributi-imu-600-19460-1-0d3d9b34daf5cde164fa12f7234641fb",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.ciconio.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-19460-1-0d3d9b34daf5cde164fa12f7234641fb",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ciconio.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-19460-1-0d3d9b34daf5cde164fa12f7234641fb",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ciconio.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-19460-1-0d3d9b34daf5cde164fa12f7234641fb",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:41:51.208406Z"
+  }
+ }
+}

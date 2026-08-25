@@ -1,0 +1,113 @@
+{
+ "municipality_istat": "066085",
+ "services": {
+  "accesso_atti": {
+   "service_id": "066085:wp:370",
+   "title": "Accesso agli atti",
+   "source_url": "https://www.comune.sanbenedettodeimarsi.aq.it/servizio/accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanbenedettodeimarsi.aq.it/servizio/accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanbenedettodeimarsi.aq.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:22:38.527119Z"
+  },
+  "tributi_imu": {
+   "service_id": "066085:wp:408",
+   "title": "IMU",
+   "source_url": "https://www.comune.sanbenedettodeimarsi.aq.it/servizio/imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanbenedettodeimarsi.aq.it/servizio/imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanbenedettodeimarsi.aq.it/servizio/imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:22:40.124254Z"
+  },
+  "tributi_tari": {
+   "service_id": "066085:wp:416",
+   "title": "TARI",
+   "source_url": "https://www.comune.sanbenedettodeimarsi.aq.it/servizio/tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanbenedettodeimarsi.aq.it/servizio/tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanbenedettodeimarsi.aq.it/servizio/tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.sanbenedettodeimarsi.aq.it/wp-content/uploads/2024/04/Modello-di-dichiarazione-inziale-utenza-domestica-TARI.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanbenedettodeimarsi.aq.it/servizio/tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.sanbenedettodeimarsi.aq.it/wp-content/uploads/2024/04/MODELLO-DI-DICHIARAZIONE-VARIAZIONI-TARI-1.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanbenedettodeimarsi.aq.it/servizio/tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.sanbenedettodeimarsi.aq.it/wp-content/uploads/2024/04/Denuncia-di-cessazione-TARI.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanbenedettodeimarsi.aq.it/servizio/tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:22:41.780723Z"
+  }
+ }
+}

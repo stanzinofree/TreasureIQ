@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "091086",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "091086:wp:1314",
+   "title": "Cambio di residenza da altro Comune o dall’estero per cittadini extracomunitari e comunitari",
+   "source_url": "https://www.comune.sorgono.nu.it/servizio/cambio-di-residenza-da-altro-comune-o-dallestero-per-cittadini-extracomunitari-e-comunitari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sorgono.nu.it/servizio/cambio-di-residenza-da-altro-comune-o-dallestero-per-cittadini-extracomunitari-e-comunitari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sorgono.nu.it/servizio/cambio-di-residenza-da-altro-comune-o-dallestero-per-cittadini-extracomunitari-e-comunitari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:51:57.896604Z"
+  },
+  "carta_identita": {
+   "service_id": "091086:wp:440",
+   "title": "Carta d&#8217;identità",
+   "source_url": "https://www.comune.sorgono.nu.it/servizio/anagrafe-e-stato-civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sorgono.nu.it/servizio/anagrafe-e-stato-civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sorgono.nu.it/servizio/anagrafe-e-stato-civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:51:59.737409Z"
+  },
+  "tributi_imu": {
+   "service_id": "091086:wp:1679",
+   "title": "IMU &#8211; Imposta Municipale Propria",
+   "source_url": "https://www.comune.sorgono.nu.it/servizio/imu-imposta-municipale-propria/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sorgono.nu.it/servizio/imu-imposta-municipale-propria/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sorgono.nu.it/servizio/imu-imposta-municipale-propria/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:52:01.428522Z"
+  },
+  "tributi_tari": {
+   "service_id": "091086:wp:1304",
+   "title": "TARI",
+   "source_url": "https://www.comune.sorgono.nu.it/servizio/tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sorgono.nu.it/servizio/tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sorgono.nu.it/servizio/tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:52:03.178098Z"
+  }
+ }
+}

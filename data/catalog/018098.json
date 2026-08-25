@@ -1,0 +1,87 @@
+{
+ "municipality_istat": "018098",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "018098:comweb:cambio-residenza-305-32042-1-a2eca67e18420d3bf651d0a7ce39bb3e",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.montesegale.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-32042-1-a2eca67e18420d3bf651d0a7ce39bb3e",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montesegale.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-32042-1-a2eca67e18420d3bf651d0a7ce39bb3e",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montesegale.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-32042-1-a2eca67e18420d3bf651d0a7ce39bb3e",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.montesegale.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-32042-1-a2eca67e18420d3bf651d0a7ce39bb3e",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:22:01.993322Z"
+  },
+  "tributi_imu": {
+   "service_id": "018098:comweb:imposta-municipale-propria-imu-953-32133-1-ff31e80153b0f9f6e790ca803a008151",
+   "title": "Imposta Municipale Propria (IMU)",
+   "source_url": "https://www.comune.montesegale.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-32133-1-ff31e80153b0f9f6e790ca803a008151",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montesegale.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-32133-1-ff31e80153b0f9f6e790ca803a008151",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montesegale.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-32133-1-ff31e80153b0f9f6e790ca803a008151",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:22:04.598299Z"
+  },
+  "tributi_tari": {
+   "service_id": "018098:comweb:tassa-rifiuti-tari-954-32124-1-7a7a065f86a69c37f5928f56a12a306c",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.montesegale.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-32124-1-7a7a065f86a69c37f5928f56a12a306c",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montesegale.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-32124-1-7a7a065f86a69c37f5928f56a12a306c",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montesegale.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-32124-1-7a7a065f86a69c37f5928f56a12a306c",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:22:07.332836Z"
+  }
+ }
+}

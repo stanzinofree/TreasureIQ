@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "060038",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "060038:wp:2061",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.frosinone.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.frosinone.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.frosinone.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:06:10.023552Z"
+  },
+  "stato_civile": {
+   "service_id": "060038:wp:2065",
+   "title": "Richiesta certificato di matrimonio",
+   "source_url": "https://comune.frosinone.it/servizio/richiesta-certificato-di-matrimonio/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.frosinone.it/servizio/richiesta-certificato-di-matrimonio/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.frosinone.it/servizio/richiesta-certificato-di-matrimonio/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:06:12.617628Z"
+  },
+  "tributi_imu": {
+   "service_id": "060038:wp:2057",
+   "title": "IMU (Imposta Municipale Propria)",
+   "source_url": "https://comune.frosinone.it/servizio/imu-imposta-municipale-propria/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.frosinone.it/servizio/imu-imposta-municipale-propria/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.frosinone.it/servizio/imu-imposta-municipale-propria/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:06:15.287686Z"
+  },
+  "tributi_tari": {
+   "service_id": "060038:wp:2099",
+   "title": "Tassa sui rifiuti (TARI)",
+   "source_url": "https://comune.frosinone.it/servizio/tassa-sui-rifiuti-tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.frosinone.it/servizio/tassa-sui-rifiuti-tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.frosinone.it/servizio/tassa-sui-rifiuti-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:06:18.239212Z"
+  }
+ }
+}

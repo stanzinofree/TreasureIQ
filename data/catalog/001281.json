@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "001281",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001281:comweb:richiedere-l-accesso-agli-atti-317-9734-1-db9706885f686caef4a6b86ed7ca0bdb",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.usseaux.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-9734-1-db9706885f686caef4a6b86ed7ca0bdb",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.usseaux.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-9734-1-db9706885f686caef4a6b86ed7ca0bdb",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.usseaux.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-9734-1-db9706885f686caef4a6b86ed7ca0bdb",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizidigitali.comune.usseaux.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=ssx834&amp;IDPr=13448",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.usseaux.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-9734-1-db9706885f686caef4a6b86ed7ca0bdb",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:51:23.419032Z"
+  },
+  "tributi_imu": {
+   "service_id": "001281:comweb:imposta-municipale-propria-imu-953-9824-1-dd0e80b26206244c34cbdede9989b26f",
+   "title": "Imposta Municipale Propria (IMU)",
+   "source_url": "https://www.comune.usseaux.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-9824-1-dd0e80b26206244c34cbdede9989b26f",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.usseaux.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-9824-1-dd0e80b26206244c34cbdede9989b26f",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.usseaux.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-9824-1-dd0e80b26206244c34cbdede9989b26f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.riscotel.it/calcoloimu/?comune=L515",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.usseaux.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-9824-1-dd0e80b26206244c34cbdede9989b26f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:51:25.263211Z"
+  },
+  "tributi_tari": {
+   "service_id": "001281:comweb:tassa-rifiuti-tari-954-9815-1-4f76552111a01355643e1a575a0847f4",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.usseaux.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-9815-1-4f76552111a01355643e1a575a0847f4",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.usseaux.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-9815-1-4f76552111a01355643e1a575a0847f4",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.usseaux.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-9815-1-4f76552111a01355643e1a575a0847f4",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:51:27.691694Z"
+  }
+ }
+}

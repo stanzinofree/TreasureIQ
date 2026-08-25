@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "065150",
+ "services": {
+  "carta_identita": {
+   "service_id": "065150:wp:4092",
+   "title": "Carta d&#8217;identità elettronica (CIE)",
+   "source_url": "https://comune.tortorella.sa.it/servizio/carta-didentita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.tortorella.sa.it/servizio/carta-didentita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.tortorella.sa.it/servizio/carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:21:02.277560Z"
+  },
+  "tributi_imu": {
+   "service_id": "065150:wp:3930",
+   "title": "Calcolo dell’imposta municipale propria (IMU)",
+   "source_url": "https://comune.tortorella.sa.it/servizio/pagamento-imu-2/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.tortorella.sa.it/servizio/pagamento-imu-2/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.tortorella.sa.it/servizio/pagamento-imu-2/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:21:03.918657Z"
+  }
+ }
+}

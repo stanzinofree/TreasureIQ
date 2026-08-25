@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "066037",
+ "services": {
+  "accesso_atti": {
+   "service_id": "066037:wp:275",
+   "title": "Accesso agli atti",
+   "source_url": "https://comune.cocullo.aq.it/servizio/accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.cocullo.aq.it/servizio/accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.cocullo.aq.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:21:45.207982Z"
+  },
+  "carta_identita": {
+   "service_id": "066037:wp:249",
+   "title": "Prenotazione per Carta d&#8217;identità Elettronica",
+   "source_url": "https://comune.cocullo.aq.it/servizio/prenotazione-per-carta-didentita-elettronica/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.cocullo.aq.it/servizio/prenotazione-per-carta-didentita-elettronica/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.cocullo.aq.it/servizio/prenotazione-per-carta-didentita-elettronica/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:21:48.894250Z"
+  }
+ }
+}

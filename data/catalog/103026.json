@@ -1,0 +1,136 @@
+{
+ "municipality_istat": "103026",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "103026:comweb:cambio-residenza-305-56515-1-eaa8b2d2b2f317427639905d098a7230",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.crodo.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-56515-1-eaa8b2d2b2f317427639905d098a7230",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.crodo.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-56515-1-eaa8b2d2b2f317427639905d098a7230",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.crodo.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-56515-1-eaa8b2d2b2f317427639905d098a7230",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.crodo.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-56515-1-eaa8b2d2b2f317427639905d098a7230",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:01:50.321145Z"
+  },
+  "carta_identita": {
+   "service_id": "103026:comweb:carta-d-identita-elettronica-cie-788-56505-1-7cd85d77d57954869edb113e4345162e",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.crodo.vb.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-56505-1-7cd85d77d57954869edb113e4345162e",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.crodo.vb.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-56505-1-7cd85d77d57954869edb113e4345162e",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.crodo.vb.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-56505-1-7cd85d77d57954869edb113e4345162e",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:01:52.629229Z"
+  },
+  "tributi_imu": {
+   "service_id": "103026:comweb:imposta-municipale-propria-imu-953-56606-1-ce83a7c5ba29cbb88f9f77c76f11d341",
+   "title": "Imposta Municipale Propria (IMU)",
+   "source_url": "https://www.comune.crodo.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-56606-1-ce83a7c5ba29cbb88f9f77c76f11d341",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.crodo.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-56606-1-ce83a7c5ba29cbb88f9f77c76f11d341",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.crodo.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-56606-1-ce83a7c5ba29cbb88f9f77c76f11d341",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.servizipubblicaamministrazione.it/servizi/PortaleContribuente/CalcoloImuTasi.aspx?CodCat=D177",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.crodo.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-56606-1-ce83a7c5ba29cbb88f9f77c76f11d341",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:01:55.365927Z"
+  },
+  "tributi_tari": {
+   "service_id": "103026:comweb:tassa-rifiuti-tari-954-56597-1-19cff2fa1645da49dbb3ea3d0e01ec42",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.crodo.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-56597-1-19cff2fa1645da49dbb3ea3d0e01ec42",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.crodo.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-56597-1-19cff2fa1645da49dbb3ea3d0e01ec42",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.crodo.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-56597-1-19cff2fa1645da49dbb3ea3d0e01ec42",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.servizipubblicaamministrazione.it/SERVIZI/PORTALECONTRIBUENTE/HomePNRR.aspx?CodCat=D177&amp;ID=3788",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.crodo.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-56597-1-19cff2fa1645da49dbb3ea3d0e01ec42",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:01:57.958165Z"
+  }
+ }
+}

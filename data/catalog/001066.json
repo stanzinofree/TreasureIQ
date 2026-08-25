@@ -1,0 +1,110 @@
+{
+ "municipality_istat": "001066",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001066:comweb:richiedere-l-accesso-agli-atti-317-25575-1-80d16496c43797c89991f9ec8d398a27",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.castellamonte.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-25575-1-80d16496c43797c89991f9ec8d398a27",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castellamonte.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-25575-1-80d16496c43797c89991f9ec8d398a27",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castellamonte.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-25575-1-80d16496c43797c89991f9ec8d398a27",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.castellamonte.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=cstllmnt1305&amp;IDPr=12042",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.castellamonte.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-25575-1-80d16496c43797c89991f9ec8d398a27",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:41:01.698652Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001066:comweb:cambio-residenza-305-25573-1-3bb6bda8f4e99c7f2c58b1a2696b7087",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.castellamonte.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-25573-1-3bb6bda8f4e99c7f2c58b1a2696b7087",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castellamonte.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-25573-1-3bb6bda8f4e99c7f2c58b1a2696b7087",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castellamonte.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-25573-1-3bb6bda8f4e99c7f2c58b1a2696b7087",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:41:03.942680Z"
+  },
+  "carta_identita": {
+   "service_id": "001066:comweb:carta-d-identita-elettronica-cie-788-25563-1-5e3b58a6b295d6f3af717401b332a9cc",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.castellamonte.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-25563-1-5e3b58a6b295d6f3af717401b332a9cc",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castellamonte.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-25563-1-5e3b58a6b295d6f3af717401b332a9cc",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castellamonte.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-25563-1-5e3b58a6b295d6f3af717401b332a9cc",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:41:06.405762Z"
+  },
+  "stato_civile": {
+   "service_id": "001066:comweb:certificato-di-morte-47-25572-1-8618024838ccdf241d5f8825615eedca",
+   "title": "Certificato di Morte",
+   "source_url": "https://www.comune.castellamonte.to.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-morte-47-25572-1-8618024838ccdf241d5f8825615eedca",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castellamonte.to.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-morte-47-25572-1-8618024838ccdf241d5f8825615eedca",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castellamonte.to.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-morte-47-25572-1-8618024838ccdf241d5f8825615eedca",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:41:09.123592Z"
+  }
+ }
+}

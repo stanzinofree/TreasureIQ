@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "018150",
+ "services": {
+  "carta_identita": {
+   "service_id": "018150:wp:1931",
+   "title": "Carta d&#8217;Identità Elettronica (CIE)",
+   "source_url": "https://comune.siziano.pv.it/servizio/carta-didentita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.siziano.pv.it/servizio/carta-didentita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.siziano.pv.it/servizio/carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:25:30.141948Z"
+  },
+  "tributi_imu": {
+   "service_id": "018150:wp:1964",
+   "title": "Calcolo IMU",
+   "source_url": "https://comune.siziano.pv.it/servizio/calcolo-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.siziano.pv.it/servizio/calcolo-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.siziano.pv.it/servizio/calcolo-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:25:32.127680Z"
+  },
+  "tributi_tari": {
+   "service_id": "018150:wp:1968",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://comune.siziano.pv.it/servizio/pagamento-tassa-rifiuti-tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.siziano.pv.it/servizio/pagamento-tassa-rifiuti-tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.siziano.pv.it/servizio/pagamento-tassa-rifiuti-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:25:34.325942Z"
+  }
+ }
+}

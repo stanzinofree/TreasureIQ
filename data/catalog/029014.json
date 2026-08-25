@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "029014",
+ "services": {
+  "accesso_atti": {
+   "service_id": "029014:wp:221",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.ceneselli.ro.it/?post_type=servizio&p=221",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ceneselli.ro.it/?post_type=servizio&p=221",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ceneselli.ro.it/?post_type=servizio&p=221",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:30:34.889759Z"
+  },
+  "cambio_residenza": {
+   "service_id": "029014:wp:724",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.ceneselli.ro.it/?post_type=servizio&p=724",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ceneselli.ro.it/?post_type=servizio&p=724",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ceneselli.ro.it/?post_type=servizio&p=724",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:30:41.052285Z"
+  },
+  "stato_civile": {
+   "service_id": "029014:wp:728",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.ceneselli.ro.it/?post_type=servizio&p=728",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ceneselli.ro.it/?post_type=servizio&p=728",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ceneselli.ro.it/?post_type=servizio&p=728",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:30:46.159220Z"
+  },
+  "tributi_imu": {
+   "service_id": "029014:wp:722",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.ceneselli.ro.it/?post_type=servizio&p=722",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ceneselli.ro.it/?post_type=servizio&p=722",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ceneselli.ro.it/?post_type=servizio&p=722",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:30:51.329851Z"
+  }
+ }
+}

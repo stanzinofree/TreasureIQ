@@ -1,0 +1,110 @@
+{
+ "municipality_istat": "018084",
+ "services": {
+  "accesso_atti": {
+   "service_id": "018084:comweb:richiedere-l-accesso-agli-atti-317-37984-1-05e83bfa69ea1e76a9263e2f8f3c58d5",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.lungavilla.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-37984-1-05e83bfa69ea1e76a9263e2f8f3c58d5",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.lungavilla.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-37984-1-05e83bfa69ea1e76a9263e2f8f3c58d5",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.lungavilla.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-37984-1-05e83bfa69ea1e76a9263e2f8f3c58d5",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:20:53.836783Z"
+  },
+  "cambio_residenza": {
+   "service_id": "018084:comweb:cambio-residenza-305-37982-1-089449136c38e09f3df98cd801164bef",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.lungavilla.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-37982-1-089449136c38e09f3df98cd801164bef",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.lungavilla.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-37982-1-089449136c38e09f3df98cd801164bef",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.lungavilla.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-37982-1-089449136c38e09f3df98cd801164bef",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.lungavilla.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-37982-1-089449136c38e09f3df98cd801164bef",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:20:55.792368Z"
+  },
+  "carta_identita": {
+   "service_id": "018084:comweb:carta-d-identita-elettronica-cie-788-37972-1-d3cea365aeb588e4c26ae8feb2501f07",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.lungavilla.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-37972-1-d3cea365aeb588e4c26ae8feb2501f07",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.lungavilla.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-37972-1-d3cea365aeb588e4c26ae8feb2501f07",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.lungavilla.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-37972-1-d3cea365aeb588e4c26ae8feb2501f07",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:20:59.136577Z"
+  },
+  "stato_civile": {
+   "service_id": "018084:comweb:richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-37972-1-8c3d3f3ac25e2601c8a1dac1da32dcc1",
+   "title": "Richiesta di certificati/attestazioni/estratti di stato civile",
+   "source_url": "https://www.comune.lungavilla.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-37972-1-8c3d3f3ac25e2601c8a1dac1da32dcc1",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.lungavilla.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-37972-1-8c3d3f3ac25e2601c8a1dac1da32dcc1",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.lungavilla.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-37972-1-8c3d3f3ac25e2601c8a1dac1da32dcc1",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:21:01.162878Z"
+  }
+ }
+}

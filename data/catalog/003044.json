@@ -1,0 +1,123 @@
+{
+ "municipality_istat": "003044",
+ "services": {
+  "accesso_atti": {
+   "service_id": "003044:comweb:richiedere-l-accesso-agli-atti-317-44056-1-8b2530539d44e33918e60c9484f15656",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.cavaglietto.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-44056-1-8b2530539d44e33918e60c9484f15656",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cavaglietto.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-44056-1-8b2530539d44e33918e60c9484f15656",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cavaglietto.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-44056-1-8b2530539d44e33918e60c9484f15656",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://sportello.comune.cavaglietto.no.it/su_procedimento/richiedere-laccesso-agli-atti/fattispecie/0?ambito=sugen&amp;urlSite=https%3a%2f%2fwww.comune.cavaglietto.no.it%2fit-it%2fservizi%2fanagrafe-e-stato-civile%2frichiedere-l-accesso-agli-atti-317-44056-1-8b2530539d44e33918e60c9484f15656",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.cavaglietto.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-44056-1-8b2530539d44e33918e60c9484f15656",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:57:08.905633Z"
+  },
+  "cambio_residenza": {
+   "service_id": "003044:comweb:cambio-residenza-305-44054-1-9463222e7674dc15f1292af4d734b03d",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.cavaglietto.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-44054-1-9463222e7674dc15f1292af4d734b03d",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cavaglietto.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-44054-1-9463222e7674dc15f1292af4d734b03d",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cavaglietto.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-44054-1-9463222e7674dc15f1292af4d734b03d",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.cavaglietto.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-44054-1-9463222e7674dc15f1292af4d734b03d",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:57:10.789299Z"
+  },
+  "carta_identita": {
+   "service_id": "003044:comweb:carta-d-identita-elettronica-cie-788-44044-1-d421805db99d17dde962492c162add67",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.cavaglietto.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-44044-1-d421805db99d17dde962492c162add67",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cavaglietto.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-44044-1-d421805db99d17dde962492c162add67",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cavaglietto.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-44044-1-d421805db99d17dde962492c162add67",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:57:12.752632Z"
+  },
+  "tributi_tari": {
+   "service_id": "003044:comweb:pagamento-tassa-rifiuti-tari-659-44136-1-591f8bcc9f9408094e23a8d3d0dea152",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.cavaglietto.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-44136-1-591f8bcc9f9408094e23a8d3d0dea152",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cavaglietto.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-44136-1-591f8bcc9f9408094e23a8d3d0dea152",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cavaglietto.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-44136-1-591f8bcc9f9408094e23a8d3d0dea152",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:57:14.744677Z"
+  }
+ }
+}

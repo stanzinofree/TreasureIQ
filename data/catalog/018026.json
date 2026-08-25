@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "018026",
+ "services": {
+  "accesso_atti": {
+   "service_id": "018026:comweb:richiedere-l-accesso-agli-atti-317-11318-1-a2432cd160ade924f2bba2e2ba040cef",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.campospinoso.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-11318-1-a2432cd160ade924f2bba2e2ba040cef",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.campospinoso.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-11318-1-a2432cd160ade924f2bba2e2ba040cef",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.campospinoso.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-11318-1-a2432cd160ade924f2bba2e2ba040cef",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.campospinoso.pv.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=cmpspnslbrd1610&amp;IDPr=11657",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.campospinoso.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-11318-1-a2432cd160ade924f2bba2e2ba040cef",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:18:44.941842Z"
+  },
+  "tributi_imu": {
+   "service_id": "018026:comweb:pagare-tributi-imu-600-11408-1-394798f64b27acc44650c8906d73c629",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.campospinoso.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-11408-1-394798f64b27acc44650c8906d73c629",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.campospinoso.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-11408-1-394798f64b27acc44650c8906d73c629",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.campospinoso.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-11408-1-394798f64b27acc44650c8906d73c629",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.campospinoso.pv.it/servizi/portalecontribuente/LoginPNRR.Aspx?CodCat=B567&amp;ACCESSO=C&amp;View=CI",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.campospinoso.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-11408-1-394798f64b27acc44650c8906d73c629",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:18:47.703597Z"
+  },
+  "tributi_tari": {
+   "service_id": "018026:comweb:tassa-rifiuti-tari-954-11399-1-8d64b7d39520d108a4aca45cd29a8190",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.campospinoso.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-11399-1-8d64b7d39520d108a4aca45cd29a8190",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.campospinoso.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-11399-1-8d64b7d39520d108a4aca45cd29a8190",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.campospinoso.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-11399-1-8d64b7d39520d108a4aca45cd29a8190",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:18:50.368161Z"
+  }
+ }
+}

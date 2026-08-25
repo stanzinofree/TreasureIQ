@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "102015",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "102015:wp:430",
+   "title": "Cambio di residenza tramite Portale Nazionale – ANPR",
+   "source_url": "https://www.comune.francica.vv.it/?post_type=servizio&p=430",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.francica.vv.it/?post_type=servizio&p=430",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.francica.vv.it/?post_type=servizio&p=430",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T15:00:15.260354Z"
+  }
+ }
+}

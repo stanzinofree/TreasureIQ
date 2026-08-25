@@ -1,0 +1,110 @@
+{
+ "municipality_istat": "018126",
+ "services": {
+  "accesso_atti": {
+   "service_id": "018126:comweb:richiedere-l-accesso-agli-atti-317-57169-1-e8c8d9d285c4a3147d556cefba4c7d1c",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.roccasusella.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-57169-1-e8c8d9d285c4a3147d556cefba4c7d1c",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.roccasusella.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-57169-1-e8c8d9d285c4a3147d556cefba4c7d1c",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.roccasusella.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-57169-1-e8c8d9d285c4a3147d556cefba4c7d1c",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:23:55.495940Z"
+  },
+  "cambio_residenza": {
+   "service_id": "018126:comweb:cambio-residenza-305-57167-1-94210dfc5567d07e8d3ee39e3b330c40",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.roccasusella.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-57167-1-94210dfc5567d07e8d3ee39e3b330c40",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.roccasusella.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-57167-1-94210dfc5567d07e8d3ee39e3b330c40",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.roccasusella.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-57167-1-94210dfc5567d07e8d3ee39e3b330c40",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.roccasusella.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-57167-1-94210dfc5567d07e8d3ee39e3b330c40",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:23:58.074826Z"
+  },
+  "tributi_imu": {
+   "service_id": "018126:comweb:imposta-municipale-propria-imu-953-57258-1-92d217c5f3b44af10e26421cd9da789d",
+   "title": "Imposta Municipale Propria (IMU)",
+   "source_url": "https://www.comune.roccasusella.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-57258-1-92d217c5f3b44af10e26421cd9da789d",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.roccasusella.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-57258-1-92d217c5f3b44af10e26421cd9da789d",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.roccasusella.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-57258-1-92d217c5f3b44af10e26421cd9da789d",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:24:01.608955Z"
+  },
+  "tributi_tari": {
+   "service_id": "018126:comweb:tassa-rifiuti-tari-954-57249-1-f4be0f8f0f645f46775a68928aedd4e1",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.roccasusella.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-57249-1-f4be0f8f0f645f46775a68928aedd4e1",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.roccasusella.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-57249-1-f4be0f8f0f645f46775a68928aedd4e1",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.roccasusella.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-57249-1-f4be0f8f0f645f46775a68928aedd4e1",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:24:04.800968Z"
+  }
+ }
+}

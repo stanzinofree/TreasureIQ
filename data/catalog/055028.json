@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "055028",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "055028:wp:3129",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.porano.tr.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.porano.tr.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.porano.tr.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:58:50.598584Z"
+  },
+  "carta_identita": {
+   "service_id": "055028:wp:3195",
+   "title": "Carta d&#8217;identità elettronica (CIE) &#8211; Per non residenti",
+   "source_url": "https://comune.porano.tr.it/servizio/carta-didentita-elettronica-cie-per-non-residenti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.porano.tr.it/servizio/carta-didentita-elettronica-cie-per-non-residenti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.porano.tr.it/servizio/carta-didentita-elettronica-cie-per-non-residenti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:58:53.302925Z"
+  }
+ }
+}

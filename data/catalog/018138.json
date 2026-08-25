@@ -1,0 +1,87 @@
+{
+ "municipality_istat": "018138",
+ "services": {
+  "accesso_atti": {
+   "service_id": "018138:comweb:richiedere-l-accesso-agli-atti-317-5774-1-8d15b00d8cccf4bd70a15e1963150141",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.sannazzarodeburgondi.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-5774-1-8d15b00d8cccf4bd70a15e1963150141",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sannazzarodeburgondi.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-5774-1-8d15b00d8cccf4bd70a15e1963150141",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sannazzarodeburgondi.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-5774-1-8d15b00d8cccf4bd70a15e1963150141",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.sannazzarodeburgondi.pv.it/lang/it/servizi/richiedere-laccesso-agli-atti/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.sannazzarodeburgondi.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-5774-1-8d15b00d8cccf4bd70a15e1963150141",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:24:42.484394Z"
+  },
+  "stato_civile": {
+   "service_id": "018138:comweb:richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-5763-1-d21ad8a7e65c3294d08f1e0d98877422",
+   "title": "Richiesta di certificati/attestazioni/estratti di stato civile",
+   "source_url": "https://www.comune.sannazzarodeburgondi.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-5763-1-d21ad8a7e65c3294d08f1e0d98877422",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sannazzarodeburgondi.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-5763-1-d21ad8a7e65c3294d08f1e0d98877422",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sannazzarodeburgondi.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-5763-1-d21ad8a7e65c3294d08f1e0d98877422",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:24:44.320034Z"
+  },
+  "tributi_tari": {
+   "service_id": "018138:comweb:pagamento-tassa-rifiuti-tari-659-5855-1-96fc2f18affcfdf6ab75c02c62cfe14e",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.sannazzarodeburgondi.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-5855-1-96fc2f18affcfdf6ab75c02c62cfe14e",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sannazzarodeburgondi.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-5855-1-96fc2f18affcfdf6ab75c02c62cfe14e",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sannazzarodeburgondi.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-5855-1-96fc2f18affcfdf6ab75c02c62cfe14e",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:24:46.301159Z"
+  }
+ }
+}

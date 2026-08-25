@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "078046",
+ "services": {
+  "accesso_atti": {
+   "service_id": "078046:wp:273",
+   "title": "Accesso agli atti",
+   "source_url": "https://comune.cropalati.cs.it/servizio/accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.cropalati.cs.it/servizio/accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.cropalati.cs.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:32:52.699646Z"
+  },
+  "tributi_imu": {
+   "service_id": "078046:wp:274",
+   "title": "Calcolo IMU (Imposta Municipale Propria)",
+   "source_url": "https://comune.cropalati.cs.it/servizio/calcolo-imu-imposta-municipale-propria/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.cropalati.cs.it/servizio/calcolo-imu-imposta-municipale-propria/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.cropalati.cs.it/servizio/calcolo-imu-imposta-municipale-propria/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:32:56.250056Z"
+  }
+ }
+}

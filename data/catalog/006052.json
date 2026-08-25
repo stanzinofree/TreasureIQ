@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "006052",
+ "services": {
+  "accesso_atti": {
+   "service_id": "006052:comweb:richiedere-l-accesso-agli-atti-317-23331-1-428073bca5e6a3cea96af5b78a0d9f77",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.castelnuovobormida.al.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-23331-1-428073bca5e6a3cea96af5b78a0d9f77",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castelnuovobormida.al.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-23331-1-428073bca5e6a3cea96af5b78a0d9f77",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castelnuovobormida.al.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-23331-1-428073bca5e6a3cea96af5b78a0d9f77",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.castelnuovobormida.al.it/lang/it/servizi/richiedere-laccesso-agli-atti/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.castelnuovobormida.al.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-23331-1-428073bca5e6a3cea96af5b78a0d9f77",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:01:19.249209Z"
+  },
+  "cambio_residenza": {
+   "service_id": "006052:comweb:cambio-residenza-305-23329-1-58de0db3dcc2c58a8912c7f1bb69ade5",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.castelnuovobormida.al.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-23329-1-58de0db3dcc2c58a8912c7f1bb69ade5",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castelnuovobormida.al.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-23329-1-58de0db3dcc2c58a8912c7f1bb69ade5",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castelnuovobormida.al.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-23329-1-58de0db3dcc2c58a8912c7f1bb69ade5",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.castelnuovobormida.al.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-23329-1-58de0db3dcc2c58a8912c7f1bb69ade5",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:01:21.826454Z"
+  },
+  "tributi_tari": {
+   "service_id": "006052:comweb:pagamento-tassa-rifiuti-tari-659-23411-1-6ec2c9eda859d89211be247274a35bf7",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.castelnuovobormida.al.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-23411-1-6ec2c9eda859d89211be247274a35bf7",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castelnuovobormida.al.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-23411-1-6ec2c9eda859d89211be247274a35bf7",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castelnuovobormida.al.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-23411-1-6ec2c9eda859d89211be247274a35bf7",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:01:24.211706Z"
+  }
+ }
+}

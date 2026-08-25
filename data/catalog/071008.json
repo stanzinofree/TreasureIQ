@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "071008",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "071008:wp:258",
+   "title": "Cambio di residenza e di abitazione",
+   "source_url": "https://comune.cagnanovarano.fg.it/servizio/cambio-di-residenza-e-di-abitazione/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.cagnanovarano.fg.it/servizio/cambio-di-residenza-e-di-abitazione/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.cagnanovarano.fg.it/servizio/cambio-di-residenza-e-di-abitazione/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:25:48.918072Z"
+  },
+  "tributi_tari": {
+   "service_id": "071008:wp:263",
+   "title": "TARI (Tassa rifiuti)",
+   "source_url": "https://comune.cagnanovarano.fg.it/servizio/tari-tassa-rifiuti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.cagnanovarano.fg.it/servizio/tari-tassa-rifiuti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.cagnanovarano.fg.it/servizio/tari-tassa-rifiuti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:25:50.740416Z"
+  }
+ }
+}

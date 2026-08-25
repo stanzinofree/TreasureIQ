@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "023028",
+ "services": {
+  "accesso_atti": {
+   "service_id": "023028:wp:370",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.colognola.vr.it/?post_type=servizio&p=370",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.colognola.vr.it/?post_type=servizio&p=370",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.colognola.vr.it/?post_type=servizio&p=370",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:33:12.958256Z"
+  },
+  "cambio_residenza": {
+   "service_id": "023028:wp:1040",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.colognola.vr.it/?post_type=servizio&p=1040",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.colognola.vr.it/?post_type=servizio&p=1040",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.colognola.vr.it/?post_type=servizio&p=1040",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:33:19.199129Z"
+  },
+  "stato_civile": {
+   "service_id": "023028:wp:1043",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.colognola.vr.it/?post_type=servizio&p=1043",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.colognola.vr.it/?post_type=servizio&p=1043",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.colognola.vr.it/?post_type=servizio&p=1043",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:33:26.021259Z"
+  },
+  "tributi_imu": {
+   "service_id": "023028:wp:1053",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.colognola.vr.it/?post_type=servizio&p=1053",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.colognola.vr.it/?post_type=servizio&p=1053",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.colognola.vr.it/?post_type=servizio&p=1053",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:33:32.993588Z"
+  }
+ }
+}

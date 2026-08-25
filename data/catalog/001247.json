@@ -1,0 +1,110 @@
+{
+ "municipality_istat": "001247",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001247:comweb:richiedere-l-accesso-agli-atti-317-20558-1-454c837ef211524fddb566950fca21d9",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://comune.sanmartinocanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-20558-1-454c837ef211524fddb566950fca21d9",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.sanmartinocanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-20558-1-454c837ef211524fddb566950fca21d9",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.sanmartinocanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-20558-1-454c837ef211524fddb566950fca21d9",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.sanmartinocanavese.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=snmrtncnvs1175&amp;IDPr=11394",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://comune.sanmartinocanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-20558-1-454c837ef211524fddb566950fca21d9",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:49:06.334246Z"
+  },
+  "carta_identita": {
+   "service_id": "001247:comweb:carta-d-identita-elettronica-cie-788-20547-1-243682956a4da3c16cf0d442bf931b15",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://comune.sanmartinocanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-20547-1-243682956a4da3c16cf0d442bf931b15",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.sanmartinocanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-20547-1-243682956a4da3c16cf0d442bf931b15",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.sanmartinocanavese.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-20547-1-243682956a4da3c16cf0d442bf931b15",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:49:08.600256Z"
+  },
+  "tributi_imu": {
+   "service_id": "001247:comweb:calcolo-imu-355-20648-1-6947de08463d62266abf816c5db4a6cf",
+   "title": "Calcolo IMU",
+   "source_url": "https://comune.sanmartinocanavese.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-20648-1-6947de08463d62266abf816c5db4a6cf",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.sanmartinocanavese.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-20648-1-6947de08463d62266abf816c5db4a6cf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.sanmartinocanavese.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/calcolo-imu-355-20648-1-6947de08463d62266abf816c5db4a6cf",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:49:10.640683Z"
+  },
+  "tributi_tari": {
+   "service_id": "001247:comweb:dichiarazione-tassa-rifiuti-tari-1028-20639-1-5a85da2dcb11765fc7d7d60076d02a38",
+   "title": "Dichiarazione Tassa Rifiuti (TARI)",
+   "source_url": "https://comune.sanmartinocanavese.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/dichiarazione-tassa-rifiuti-tari-1028-20639-1-5a85da2dcb11765fc7d7d60076d02a38",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.sanmartinocanavese.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/dichiarazione-tassa-rifiuti-tari-1028-20639-1-5a85da2dcb11765fc7d7d60076d02a38",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.sanmartinocanavese.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/dichiarazione-tassa-rifiuti-tari-1028-20639-1-5a85da2dcb11765fc7d7d60076d02a38",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:49:13.944054Z"
+  }
+ }
+}

@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "028062",
+ "services": {
+  "accesso_atti": {
+   "service_id": "028062:wp:359",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.piacenza-d-adige.pd.it/?post_type=servizio&p=359",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.piacenza-d-adige.pd.it/?post_type=servizio&p=359",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.piacenza-d-adige.pd.it/?post_type=servizio&p=359",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:12:02.281458Z"
+  },
+  "cambio_residenza": {
+   "service_id": "028062:wp:357",
+   "title": "Cambio di residenza in tempo reale",
+   "source_url": "https://www.comune.piacenza-d-adige.pd.it/?post_type=servizio&p=357",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.piacenza-d-adige.pd.it/?post_type=servizio&p=357",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.piacenza-d-adige.pd.it/?post_type=servizio&p=357",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:12:13.047732Z"
+  },
+  "carta_identita": {
+   "service_id": "028062:wp:723",
+   "title": "Rilascio Carta di Identità Elettronica",
+   "source_url": "https://www.comune.piacenza-d-adige.pd.it/?post_type=servizio&p=723",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.piacenza-d-adige.pd.it/?post_type=servizio&p=723",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.piacenza-d-adige.pd.it/?post_type=servizio&p=723",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:12:35.226815Z"
+  },
+  "tributi_imu": {
+   "service_id": "028062:wp:760",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.piacenza-d-adige.pd.it/?post_type=servizio&p=760",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.piacenza-d-adige.pd.it/?post_type=servizio&p=760",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.piacenza-d-adige.pd.it/?post_type=servizio&p=760",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:13:10.235171Z"
+  }
+ }
+}

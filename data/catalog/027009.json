@@ -1,0 +1,146 @@
+{
+ "municipality_istat": "027009",
+ "services": {
+  "accesso_atti": {
+   "service_id": "027009:wp:379",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.cinto.ve.it/?post_type=servizio&p=379",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cinto.ve.it/?post_type=servizio&p=379",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cinto.ve.it/?post_type=servizio&p=379",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.cinto.ve.it/wp-content/uploads/2024/02/Richiesta-accesso-atti.doc",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cinto.ve.it/?post_type=servizio&p=379",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.cinto.ve.it/wp-content/uploads/2024/02/DELIBERA-DI-GIUNTA-2023-Num.-0000097-Delibera-copia-uso-amministrativo.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cinto.ve.it/?post_type=servizio&p=379",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:40:03.231690Z"
+  },
+  "cambio_residenza": {
+   "service_id": "027009:wp:1715",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.cinto.ve.it/?post_type=servizio&p=1715",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cinto.ve.it/?post_type=servizio&p=1715",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cinto.ve.it/?post_type=servizio&p=1715",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:40:12.615770Z"
+  },
+  "carta_identita": {
+   "service_id": "027009:wp:1581",
+   "title": "Rilascio PIN e PUK per CIE",
+   "source_url": "https://www.comune.cinto.ve.it/?post_type=servizio&p=1581",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cinto.ve.it/?post_type=servizio&p=1581",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cinto.ve.it/?post_type=servizio&p=1581",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:40:19.928922Z"
+  },
+  "stato_civile": {
+   "service_id": "027009:wp:2052",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.cinto.ve.it/?post_type=servizio&p=2052",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cinto.ve.it/?post_type=servizio&p=2052",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cinto.ve.it/?post_type=servizio&p=2052",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:40:27.828896Z"
+  },
+  "tributi_imu": {
+   "service_id": "027009:wp:1714",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.cinto.ve.it/?post_type=servizio&p=1714",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cinto.ve.it/?post_type=servizio&p=1714",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cinto.ve.it/?post_type=servizio&p=1714",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:40:42.018399Z"
+  }
+ }
+}

@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "046037",
+ "services": {
+  "stato_civile": {
+   "service_id": "046037:wp:2653",
+   "title": "Rilascio di certificati o di estratti di stato civile formati da oltre un secolo e relativi a persone diverse dal richiedente",
+   "source_url": "https://comune.sillanogiuncugnano.lu.it/servizi/rilascio-di-certificati-o-di-estratti-di-stato-civile-formati-da-oltre-un-secolo-e-relativi-a-persone-diverse-dal-richiedente/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.sillanogiuncugnano.lu.it/servizi/rilascio-di-certificati-o-di-estratti-di-stato-civile-formati-da-oltre-un-secolo-e-relativi-a-persone-diverse-dal-richiedente/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.sillanogiuncugnano.lu.it/servizi/rilascio-di-certificati-o-di-estratti-di-stato-civile-formati-da-oltre-un-secolo-e-relativi-a-persone-diverse-dal-richiedente/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:55:12.120813Z"
+  }
+ }
+}

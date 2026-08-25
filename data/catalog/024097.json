@@ -1,0 +1,159 @@
+{
+ "municipality_istat": "024097",
+ "services": {
+  "accesso_atti": {
+   "service_id": "024097:wp:680",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.sarcedo.vi.it/?post_type=servizio&p=680",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sarcedo.vi.it/?post_type=servizio&p=680",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sarcedo.vi.it/?post_type=servizio&p=680",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:15:47.042594Z"
+  },
+  "cambio_residenza": {
+   "service_id": "024097:wp:931",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.sarcedo.vi.it/?post_type=servizio&p=931",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sarcedo.vi.it/?post_type=servizio&p=931",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sarcedo.vi.it/?post_type=servizio&p=931",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:15:56.125929Z"
+  },
+  "carta_identita": {
+   "service_id": "024097:wp:2332",
+   "title": "Carta d'identità elettronica",
+   "source_url": "https://www.comune.sarcedo.vi.it/?post_type=servizio&p=2332",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sarcedo.vi.it/?post_type=servizio&p=2332",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sarcedo.vi.it/?post_type=servizio&p=2332",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.sarcedo.vi.it/wp-content/uploads/2025/11/Informativa-CIE.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sarcedo.vi.it/?post_type=servizio&p=2332",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.sarcedo.vi.it/wp-content/uploads/2025/11/Richiesta-CIE-espatrio.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sarcedo.vi.it/?post_type=servizio&p=2332",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:16:03.243734Z"
+  },
+  "tributi_imu": {
+   "service_id": "024097:wp:939",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.sarcedo.vi.it/?post_type=servizio&p=939",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sarcedo.vi.it/?post_type=servizio&p=939",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sarcedo.vi.it/?post_type=servizio&p=939",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:16:10.724263Z"
+  },
+  "tributi_tari": {
+   "service_id": "024097:wp:451",
+   "title": "TARI Tassa sui rifiuti",
+   "source_url": "https://www.comune.sarcedo.vi.it/?post_type=servizio&p=451",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sarcedo.vi.it/?post_type=servizio&p=451",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sarcedo.vi.it/?post_type=servizio&p=451",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.sarcedo.vi.it/wp-content/uploads/2024/06/regolamento-tari.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sarcedo.vi.it/?post_type=servizio&p=451",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:16:22.752456Z"
+  }
+ }
+}

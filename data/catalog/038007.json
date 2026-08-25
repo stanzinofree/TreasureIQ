@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "038007",
+ "services": {
+  "accesso_atti": {
+   "service_id": "038007:wp:475",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.copparo.fe.it/?post_type=servizio&p=475",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.copparo.fe.it/?post_type=servizio&p=475",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.copparo.fe.it/?post_type=servizio&p=475",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:50:05.699113Z"
+  },
+  "cambio_residenza": {
+   "service_id": "038007:wp:229",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.copparo.fe.it/?post_type=servizio&p=229",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.copparo.fe.it/?post_type=servizio&p=229",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.copparo.fe.it/?post_type=servizio&p=229",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:50:11.872488Z"
+  },
+  "stato_civile": {
+   "service_id": "038007:wp:232",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.copparo.fe.it/?post_type=servizio&p=232",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.copparo.fe.it/?post_type=servizio&p=232",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.copparo.fe.it/?post_type=servizio&p=232",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:50:19.767313Z"
+  },
+  "tributi_imu": {
+   "service_id": "038007:wp:1587",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.copparo.fe.it/?post_type=servizio&p=1587",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.copparo.fe.it/?post_type=servizio&p=1587",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.copparo.fe.it/?post_type=servizio&p=1587",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:50:26.131800Z"
+  }
+ }
+}

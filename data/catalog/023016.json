@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "023016",
+ "services": {
+  "accesso_atti": {
+   "service_id": "023016:wp:359",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.buttapietra.vr.it/?post_type=servizio&p=359",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.buttapietra.vr.it/?post_type=servizio&p=359",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.buttapietra.vr.it/?post_type=servizio&p=359",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:31:13.767572Z"
+  },
+  "stato_civile": {
+   "service_id": "023016:wp:1089",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.buttapietra.vr.it/?post_type=servizio&p=1089",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.buttapietra.vr.it/?post_type=servizio&p=1089",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.buttapietra.vr.it/?post_type=servizio&p=1089",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:31:20.486473Z"
+  },
+  "tributi_imu": {
+   "service_id": "023016:wp:1101",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.buttapietra.vr.it/?post_type=servizio&p=1101",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.buttapietra.vr.it/?post_type=servizio&p=1101",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.buttapietra.vr.it/?post_type=servizio&p=1101",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:31:26.817343Z"
+  }
+ }
+}

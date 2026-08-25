@@ -1,0 +1,120 @@
+{
+ "municipality_istat": "103064",
+ "services": {
+  "accesso_atti": {
+   "service_id": "103064:comweb:richiedere-l-accesso-agli-atti-317-56903-1-51d4783fb57956f802a51c9e8a4a4f37",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.stresa.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-56903-1-51d4783fb57956f802a51c9e8a4a4f37",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.stresa.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-56903-1-51d4783fb57956f802a51c9e8a4a4f37",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.stresa.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-56903-1-51d4783fb57956f802a51c9e8a4a4f37",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:03:44.837447Z"
+  },
+  "cambio_residenza": {
+   "service_id": "103064:comweb:cambio-residenza-305-56901-1-8691fd5aaf598907baae862d9924603f",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.stresa.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-56901-1-8691fd5aaf598907baae862d9924603f",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.stresa.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-56901-1-8691fd5aaf598907baae862d9924603f",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.stresa.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-56901-1-8691fd5aaf598907baae862d9924603f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:03:46.922577Z"
+  },
+  "carta_identita": {
+   "service_id": "103064:comweb:carta-d-identita-1-56891-1-85013d610e7409f12f732db7c44bdd97",
+   "title": "Carta d'Identità",
+   "source_url": "https://www.comune.stresa.vb.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-56891-1-85013d610e7409f12f732db7c44bdd97",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.stresa.vb.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-56891-1-85013d610e7409f12f732db7c44bdd97",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.stresa.vb.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-56891-1-85013d610e7409f12f732db7c44bdd97",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:03:49.020466Z"
+  },
+  "tributi_imu": {
+   "service_id": "103064:comweb:dichiarazione-imu-602-56992-1-6839f4d4a635f2c005d573189a13099a",
+   "title": "Dichiarazione IMU",
+   "source_url": "https://www.comune.stresa.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/dichiarazione-imu-602-56992-1-6839f4d4a635f2c005d573189a13099a",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.stresa.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/dichiarazione-imu-602-56992-1-6839f4d4a635f2c005d573189a13099a",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.stresa.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/dichiarazione-imu-602-56992-1-6839f4d4a635f2c005d573189a13099a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:03:51.112965Z"
+  },
+  "tributi_tari": {
+   "service_id": "103064:comweb:tassa-rifiuti-tari-954-56983-1-4918e43bb6134c5331498a2f3a837bd6",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.stresa.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-56983-1-4918e43bb6134c5331498a2f3a837bd6",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.stresa.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-56983-1-4918e43bb6134c5331498a2f3a837bd6",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.stresa.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-56983-1-4918e43bb6134c5331498a2f3a837bd6",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:03:53.337719Z"
+  }
+ }
+}

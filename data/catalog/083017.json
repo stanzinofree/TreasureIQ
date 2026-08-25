@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "083017",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "083017:wp:380",
+   "title": "Cambio di residenza tramite Portale Nazionale – ANPR",
+   "source_url": "https://www.comune.cesaro.me.it/?post_type=servizio&p=380",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cesaro.me.it/?post_type=servizio&p=380",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cesaro.me.it/?post_type=servizio&p=380",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:44:58.226823Z"
+  },
+  "tributi_imu": {
+   "service_id": "083017:wp:257",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.cesaro.me.it/?post_type=servizio&p=257",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cesaro.me.it/?post_type=servizio&p=257",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cesaro.me.it/?post_type=servizio&p=257",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:45:02.949588Z"
+  }
+ }
+}

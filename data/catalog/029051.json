@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "029051",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "029051:wp:670",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.villanovamarchesana.ro.it/?post_type=servizio&p=670",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.villanovamarchesana.ro.it/?post_type=servizio&p=670",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.villanovamarchesana.ro.it/?post_type=servizio&p=670",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:37:36.359115Z"
+  },
+  "stato_civile": {
+   "service_id": "029051:wp:678",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.villanovamarchesana.ro.it/?post_type=servizio&p=678",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.villanovamarchesana.ro.it/?post_type=servizio&p=678",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.villanovamarchesana.ro.it/?post_type=servizio&p=678",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:37:42.565469Z"
+  }
+ }
+}

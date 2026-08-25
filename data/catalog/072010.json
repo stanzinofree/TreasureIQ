@@ -1,0 +1,77 @@
+{
+ "municipality_istat": "072010",
+ "services": {
+  "accesso_atti": {
+   "service_id": "072010:wp:2159",
+   "title": "Richiesta di accesso agli atti amministrativi",
+   "source_url": "https://www.comune.bitetto.ba.it/servizio/richiesta-di-accesso-agli-atti-amministrativi/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bitetto.ba.it/servizio/richiesta-di-accesso-agli-atti-amministrativi/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bitetto.ba.it/servizio/richiesta-di-accesso-agli-atti-amministrativi/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.bitetto.ba.it/wp-content/uploads/2025/03/Rich-accesso-atti-amministrativi.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bitetto.ba.it/servizio/richiesta-di-accesso-agli-atti-amministrativi/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:26:11.562015Z"
+  },
+  "carta_identita": {
+   "service_id": "072010:wp:812",
+   "title": "Carta di Identità Elettronica",
+   "source_url": "https://www.comune.bitetto.ba.it/servizio/carta-di-identita-elettronica/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bitetto.ba.it/servizio/carta-di-identita-elettronica/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bitetto.ba.it/servizio/carta-di-identita-elettronica/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.bitetto.ba.it/wp-content/uploads/2024/12/Atto_di_assenso_del_genitore_per_rilascio_carta_identit__.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bitetto.ba.it/servizio/carta-di-identita-elettronica/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:26:14.507536Z"
+  }
+ }
+}

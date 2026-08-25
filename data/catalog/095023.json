@@ -1,0 +1,113 @@
+{
+ "municipality_istat": "095023",
+ "services": {
+  "accesso_atti": {
+   "service_id": "095023:wp:16783",
+   "title": "Richiedere l&#8217;accesso agli atti",
+   "source_url": "https://comune.gonnosno.or.it/servizio/richiedere-laccesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.gonnosno.or.it/servizio/richiedere-laccesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.gonnosno.or.it/servizio/richiedere-laccesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.gonnosno.or.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=gnnsn346&#038;IDPr=7476",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://comune.gonnosno.or.it/servizio/richiedere-laccesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:54:11.878515Z"
+  },
+  "cambio_residenza": {
+   "service_id": "095023:wp:19084",
+   "title": "Cambio di residenza &#8211; ANPR",
+   "source_url": "https://comune.gonnosno.or.it/servizio/cambio-di-residenza-anpr/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.gonnosno.or.it/servizio/cambio-di-residenza-anpr/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.gonnosno.or.it/servizio/cambio-di-residenza-anpr/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://comune.gonnosno.or.it/servizio/cambio-di-residenza-anpr/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:54:15.230283Z"
+  },
+  "carta_identita": {
+   "service_id": "095023:wp:19483",
+   "title": "Rilascio carta d&#8217;identità elettronica (CIE)",
+   "source_url": "https://comune.gonnosno.or.it/servizio/rilascio-carta-didentita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.gonnosno.or.it/servizio/rilascio-carta-didentita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.gonnosno.or.it/servizio/rilascio-carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.prenotazionicie.interno.gov.it/cittadino/a/sc/wizardAppuntamentoCittadino/sceltaComune",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://comune.gonnosno.or.it/servizio/rilascio-carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:54:18.203013Z"
+  }
+ }
+}

@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "009018",
+ "services": {
+  "accesso_atti": {
+   "service_id": "009018:wp:9098",
+   "title": "Richiesta di accesso agli atti",
+   "source_url": "https://comune.carcare.sv.it/servizio/richiesta-di-accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.carcare.sv.it/servizio/richiesta-di-accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.carcare.sv.it/servizio/richiesta-di-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:11:43.584706Z"
+  },
+  "tributi_imu": {
+   "service_id": "009018:wp:7667",
+   "title": "IMU",
+   "source_url": "https://comune.carcare.sv.it/servizio/calcolo-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.carcare.sv.it/servizio/calcolo-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.carcare.sv.it/servizio/calcolo-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:11:45.073478Z"
+  },
+  "tributi_tari": {
+   "service_id": "009018:wp:8150",
+   "title": "TARI",
+   "source_url": "https://comune.carcare.sv.it/servizio/tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.carcare.sv.it/servizio/tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.carcare.sv.it/servizio/tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:11:47.357282Z"
+  }
+ }
+}

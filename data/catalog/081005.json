@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "081005",
+ "services": {
+  "accesso_atti": {
+   "service_id": "081005:wp:310",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.castellammare.tp.it/?post_type=servizio&p=310",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castellammare.tp.it/?post_type=servizio&p=310",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castellammare.tp.it/?post_type=servizio&p=310",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:41:03.292744Z"
+  },
+  "cambio_residenza": {
+   "service_id": "081005:wp:418",
+   "title": "Cambio di residenza tramite Portale Nazionale – ANPR",
+   "source_url": "https://www.comune.castellammare.tp.it/?post_type=servizio&p=418",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castellammare.tp.it/?post_type=servizio&p=418",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castellammare.tp.it/?post_type=servizio&p=418",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:41:07.955802Z"
+  },
+  "carta_identita": {
+   "service_id": "081005:wp:1394",
+   "title": "Rilascio Carta di Identità Elettronica",
+   "source_url": "https://www.comune.castellammare.tp.it/?post_type=servizio&p=1394",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castellammare.tp.it/?post_type=servizio&p=1394",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castellammare.tp.it/?post_type=servizio&p=1394",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:41:13.877569Z"
+  }
+ }
+}

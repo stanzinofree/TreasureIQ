@@ -1,0 +1,64 @@
+{
+ "municipality_istat": "037038",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "037038:comweb:cambio-residenza-305-42074-1-b2945209b26391761104b8e4da5015db",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.minerbio.bo.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-42074-1-b2945209b26391761104b8e4da5015db",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.minerbio.bo.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-42074-1-b2945209b26391761104b8e4da5015db",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.minerbio.bo.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-42074-1-b2945209b26391761104b8e4da5015db",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.minerbio.bo.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-42074-1-b2945209b26391761104b8e4da5015db",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T13:49:09.272522Z"
+  },
+  "tributi_tari": {
+   "service_id": "037038:comweb:pagamento-tassa-rifiuti-tari-659-42156-1-bb81fefd9f842eeb1fb0498d1dae8747",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.minerbio.bo.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-42156-1-bb81fefd9f842eeb1fb0498d1dae8747",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.minerbio.bo.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-42156-1-bb81fefd9f842eeb1fb0498d1dae8747",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.minerbio.bo.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-42156-1-bb81fefd9f842eeb1fb0498d1dae8747",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T13:49:11.895722Z"
+  }
+ }
+}

@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "002097",
+ "services": {
+  "carta_identita": {
+   "service_id": "002097:comweb:carta-d-identita-elettronica-cie-788-10515-1-c3813b20654f956456f85ecee14fbdeb",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.piode.vc.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-10515-1-c3813b20654f956456f85ecee14fbdeb",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.piode.vc.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-10515-1-c3813b20654f956456f85ecee14fbdeb",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.piode.vc.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-10515-1-c3813b20654f956456f85ecee14fbdeb",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:55:09.001724Z"
+  },
+  "tributi_tari": {
+   "service_id": "002097:comweb:pagamento-tassa-rifiuti-tari-659-10607-1-09f516d6ab46543cf2d510cd9c150b27",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.piode.vc.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-10607-1-09f516d6ab46543cf2d510cd9c150b27",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.piode.vc.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-10607-1-09f516d6ab46543cf2d510cd9c150b27",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.piode.vc.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-10607-1-09f516d6ab46543cf2d510cd9c150b27",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:55:12.184318Z"
+  }
+ }
+}

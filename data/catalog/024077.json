@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "024077",
+ "services": {
+  "accesso_atti": {
+   "service_id": "024077:wp:275",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.pianezze.vi.it/?post_type=servizio&p=275",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pianezze.vi.it/?post_type=servizio&p=275",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pianezze.vi.it/?post_type=servizio&p=275",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:11:39.807738Z"
+  },
+  "stato_civile": {
+   "service_id": "024077:wp:1641",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.pianezze.vi.it/?post_type=servizio&p=1641",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pianezze.vi.it/?post_type=servizio&p=1641",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pianezze.vi.it/?post_type=servizio&p=1641",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:11:46.375661Z"
+  },
+  "tributi_imu": {
+   "service_id": "024077:wp:1352",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.pianezze.vi.it/?post_type=servizio&p=1352",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pianezze.vi.it/?post_type=servizio&p=1352",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pianezze.vi.it/?post_type=servizio&p=1352",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:11:59.987319Z"
+  }
+ }
+}

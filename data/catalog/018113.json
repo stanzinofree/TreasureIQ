@@ -1,0 +1,133 @@
+{
+ "municipality_istat": "018113",
+ "services": {
+  "accesso_atti": {
+   "service_id": "018113:comweb:richiedere-l-accesso-agli-atti-317-8810-1-c055756a979817377d6a414b538f9408",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.pievedelcairo.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-8810-1-c055756a979817377d6a414b538f9408",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pievedelcairo.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-8810-1-c055756a979817377d6a414b538f9408",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pievedelcairo.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-8810-1-c055756a979817377d6a414b538f9408",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:22:51.145250Z"
+  },
+  "carta_identita": {
+   "service_id": "018113:comweb:carta-d-identita-elettronica-cie-788-8799-1-f25c5535f9106400571279290b20e1cf",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.pievedelcairo.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-8799-1-f25c5535f9106400571279290b20e1cf",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pievedelcairo.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-8799-1-f25c5535f9106400571279290b20e1cf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pievedelcairo.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-8799-1-f25c5535f9106400571279290b20e1cf",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:22:53.468575Z"
+  },
+  "stato_civile": {
+   "service_id": "018113:comweb:certificato-di-matrimonio-30-8805-1-8edf1eb9e4f8c980ec97d6522b68334a",
+   "title": "Certificato di matrimonio",
+   "source_url": "https://www.comune.pievedelcairo.pv.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-matrimonio-30-8805-1-8edf1eb9e4f8c980ec97d6522b68334a",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pievedelcairo.pv.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-matrimonio-30-8805-1-8edf1eb9e4f8c980ec97d6522b68334a",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pievedelcairo.pv.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-matrimonio-30-8805-1-8edf1eb9e4f8c980ec97d6522b68334a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/certificati/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.pievedelcairo.pv.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-matrimonio-30-8805-1-8edf1eb9e4f8c980ec97d6522b68334a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:22:57.585159Z"
+  },
+  "tributi_imu": {
+   "service_id": "018113:comweb:imposta-municipale-propria-imu-953-8900-1-76d9bc17715fee8437eebc2208e68f8e",
+   "title": "Imposta Municipale Propria (IMU)",
+   "source_url": "https://www.comune.pievedelcairo.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-8900-1-76d9bc17715fee8437eebc2208e68f8e",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pievedelcairo.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-8900-1-76d9bc17715fee8437eebc2208e68f8e",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pievedelcairo.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-8900-1-76d9bc17715fee8437eebc2208e68f8e",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:23:00.266867Z"
+  },
+  "tributi_tari": {
+   "service_id": "018113:comweb:tassa-rifiuti-tari-954-8891-1-d7ca1ec0b859d155d695c5a96cbbf7ea",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.pievedelcairo.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-8891-1-d7ca1ec0b859d155d695c5a96cbbf7ea",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pievedelcairo.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-8891-1-d7ca1ec0b859d155d695c5a96cbbf7ea",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pievedelcairo.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-8891-1-d7ca1ec0b859d155d695c5a96cbbf7ea",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:23:02.864800Z"
+  }
+ }
+}

@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "030113",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "030113:wp:612",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.taipana.ud.it/?post_type=servizio&p=612",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.taipana.ud.it/?post_type=servizio&p=612",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.taipana.ud.it/?post_type=servizio&p=612",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:45:32.688477Z"
+  },
+  "stato_civile": {
+   "service_id": "030113:wp:789",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.taipana.ud.it/?post_type=servizio&p=789",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.taipana.ud.it/?post_type=servizio&p=789",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.taipana.ud.it/?post_type=servizio&p=789",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:45:41.897177Z"
+  }
+ }
+}

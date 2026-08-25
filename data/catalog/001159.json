@@ -1,0 +1,123 @@
+{
+ "municipality_istat": "001159",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001159:comweb:richiedere-l-accesso-agli-atti-317-21351-1-303344b567f40d3c0c525e296a26928e",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.montalenghe.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-21351-1-303344b567f40d3c0c525e296a26928e",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montalenghe.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-21351-1-303344b567f40d3c0c525e296a26928e",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montalenghe.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-21351-1-303344b567f40d3c0c525e296a26928e",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.montalenghe.to.it/lang/it/servizi/richiedere-laccesso-agli-atti/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.montalenghe.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-21351-1-303344b567f40d3c0c525e296a26928e",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:44:32.581426Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001159:comweb:cambio-residenza-305-21349-1-3fe02a21b5b8c58f40bc6b494fa26e2c",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.montalenghe.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-21349-1-3fe02a21b5b8c58f40bc6b494fa26e2c",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montalenghe.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-21349-1-3fe02a21b5b8c58f40bc6b494fa26e2c",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montalenghe.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-21349-1-3fe02a21b5b8c58f40bc6b494fa26e2c",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.montalenghe.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-21349-1-3fe02a21b5b8c58f40bc6b494fa26e2c",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:44:34.414072Z"
+  },
+  "tributi_imu": {
+   "service_id": "001159:comweb:imposta-municipale-propria-imu-953-21440-1-218afffe6962c573dfcc4f095c7fc359",
+   "title": "Imposta Municipale Propria (IMU)",
+   "source_url": "https://www.comune.montalenghe.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-21440-1-218afffe6962c573dfcc4f095c7fc359",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montalenghe.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-21440-1-218afffe6962c573dfcc4f095c7fc359",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montalenghe.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-21440-1-218afffe6962c573dfcc4f095c7fc359",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:44:36.220008Z"
+  },
+  "tributi_tari": {
+   "service_id": "001159:comweb:tassa-rifiuti-tari-954-21431-1-091652a443a545616d03264632512e0c",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.montalenghe.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-21431-1-091652a443a545616d03264632512e0c",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montalenghe.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-21431-1-091652a443a545616d03264632512e0c",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montalenghe.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-21431-1-091652a443a545616d03264632512e0c",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:44:38.897199Z"
+  }
+ }
+}

@@ -1,0 +1,64 @@
+{
+ "municipality_istat": "007007",
+ "services": {
+  "accesso_atti": {
+   "service_id": "007007:comweb:richiedere-l-accesso-agli-atti-317-19898-1-1caba5f6bd37ce41ed9537fe201b2c10",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.ayas.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-19898-1-1caba5f6bd37ce41ed9537fe201b2c10",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ayas.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-19898-1-1caba5f6bd37ce41ed9537fe201b2c10",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ayas.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-19898-1-1caba5f6bd37ce41ed9537fe201b2c10",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.celva.it/it/fines-richieste-concessioni-e-permessi-vari/accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.ayas.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-19898-1-1caba5f6bd37ce41ed9537fe201b2c10",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:03:23.022131Z"
+  },
+  "carta_identita": {
+   "service_id": "007007:comweb:carta-d-identita-elettronica-cie-788-19887-1-df8c2f5377b8547ad1da5617cc884439",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.ayas.ao.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-19887-1-df8c2f5377b8547ad1da5617cc884439",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ayas.ao.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-19887-1-df8c2f5377b8547ad1da5617cc884439",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ayas.ao.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-19887-1-df8c2f5377b8547ad1da5617cc884439",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:03:25.023809Z"
+  }
+ }
+}

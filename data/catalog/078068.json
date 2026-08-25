@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "078068",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "078068:wp:357",
+   "title": "Richiesta dichiarazione di cambio di residenza",
+   "source_url": "https://comune.longobucco.cs.it/servizio/richiesta-dichiarazione-di-cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.longobucco.cs.it/servizio/richiesta-dichiarazione-di-cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.longobucco.cs.it/servizio/richiesta-dichiarazione-di-cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:33:51.238910Z"
+  }
+ }
+}

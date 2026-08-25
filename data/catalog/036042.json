@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "036042",
+ "services": {
+  "carta_identita": {
+   "service_id": "036042:wp:1242",
+   "title": "CIE Carta di identità elettronica",
+   "source_url": "https://www.comune.serramazzoni.mo.it/servizio/cie-carta-di-identita-elettronica/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.serramazzoni.mo.it/servizio/cie-carta-di-identita-elettronica/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.serramazzoni.mo.it/servizio/cie-carta-di-identita-elettronica/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:48:01.823276Z"
+  },
+  "tributi_imu": {
+   "service_id": "036042:wp:1431",
+   "title": "IMU: Imposta Municipale Unica",
+   "source_url": "https://www.comune.serramazzoni.mo.it/servizio/imu-imposta-municipale-unica/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.serramazzoni.mo.it/servizio/imu-imposta-municipale-unica/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.serramazzoni.mo.it/servizio/imu-imposta-municipale-unica/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:48:05.638562Z"
+  },
+  "tributi_tari": {
+   "service_id": "036042:wp:1367",
+   "title": "TARI: tassa sui rifiuti",
+   "source_url": "https://www.comune.serramazzoni.mo.it/servizio/tari-tassa-sui-rifiuti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.serramazzoni.mo.it/servizio/tari-tassa-sui-rifiuti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.serramazzoni.mo.it/servizio/tari-tassa-sui-rifiuti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:48:07.876315Z"
+  }
+ }
+}

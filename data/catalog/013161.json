@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "013161",
+ "services": {
+  "accesso_atti": {
+   "service_id": "013161:wp:153",
+   "title": "Richiedere l&#8217;accesso agli atti",
+   "source_url": "https://comune.nesso.co.it/servizio/richiedere-accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.nesso.co.it/servizio/richiedere-accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.nesso.co.it/servizio/richiedere-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:13:53.722352Z"
+  },
+  "cambio_residenza": {
+   "service_id": "013161:wp:507",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.nesso.co.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.nesso.co.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.nesso.co.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:13:54.976567Z"
+  },
+  "carta_identita": {
+   "service_id": "013161:wp:862",
+   "title": "Rilascio carta d’identità",
+   "source_url": "https://comune.nesso.co.it/servizio/rilascio-carta-didentita/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.nesso.co.it/servizio/rilascio-carta-didentita/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.nesso.co.it/servizio/rilascio-carta-didentita/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:13:56.346578Z"
+  },
+  "tributi_imu": {
+   "service_id": "013161:wp:509",
+   "title": "Dichiarazione IMU",
+   "source_url": "https://comune.nesso.co.it/servizio/dichiarazione-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.nesso.co.it/servizio/dichiarazione-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.nesso.co.it/servizio/dichiarazione-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:13:57.598087Z"
+  }
+ }
+}

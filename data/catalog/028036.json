@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "028036",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "028036:wp:1180",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.curtarolo.pd.it/?post_type=servizio&p=1180",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.curtarolo.pd.it/?post_type=servizio&p=1180",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.curtarolo.pd.it/?post_type=servizio&p=1180",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:58:25.708669Z"
+  },
+  "carta_identita": {
+   "service_id": "028036:wp:214",
+   "title": "Rilascio Carta di Identità Elettronica",
+   "source_url": "https://www.comune.curtarolo.pd.it/?post_type=servizio&p=214",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.curtarolo.pd.it/?post_type=servizio&p=214",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.curtarolo.pd.it/?post_type=servizio&p=214",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:58:34.432476Z"
+  },
+  "stato_civile": {
+   "service_id": "028036:wp:1190",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.curtarolo.pd.it/?post_type=servizio&p=1190",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.curtarolo.pd.it/?post_type=servizio&p=1190",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.curtarolo.pd.it/?post_type=servizio&p=1190",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:58:41.645593Z"
+  },
+  "tributi_imu": {
+   "service_id": "028036:wp:1001",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.curtarolo.pd.it/?post_type=servizio&p=1001",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.curtarolo.pd.it/?post_type=servizio&p=1001",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.curtarolo.pd.it/?post_type=servizio&p=1001",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:58:54.557192Z"
+  }
+ }
+}

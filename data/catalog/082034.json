@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "082034",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "082034:wp:9435",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.corleone.pa.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.corleone.pa.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.corleone.pa.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:43:16.190424Z"
+  },
+  "carta_identita": {
+   "service_id": "082034:wp:697",
+   "title": "Carta d&#8217;Identità Elettronica (CIE)",
+   "source_url": "https://comune.corleone.pa.it/servizio/carta-didentita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.corleone.pa.it/servizio/carta-didentita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.corleone.pa.it/servizio/carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:43:19.047635Z"
+  },
+  "tributi_imu": {
+   "service_id": "082034:wp:10337",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://comune.corleone.pa.it/servizio/pagare-tributi-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.corleone.pa.it/servizio/pagare-tributi-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.corleone.pa.it/servizio/pagare-tributi-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:43:22.357747Z"
+  }
+ }
+}

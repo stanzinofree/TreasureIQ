@@ -1,0 +1,195 @@
+{
+ "municipality_istat": "002072",
+ "services": {
+  "accesso_atti": {
+   "service_id": "002072:comweb:richiedere-l-accesso-agli-atti-317-27687-1-15da1085774dc0eb4caa51bc22bff835",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.lozzolo.vc.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-27687-1-15da1085774dc0eb4caa51bc22bff835",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.lozzolo.vc.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-27687-1-15da1085774dc0eb4caa51bc22bff835",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.lozzolo.vc.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-27687-1-15da1085774dc0eb4caa51bc22bff835",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.lozzolo.vc.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=lzzl199&amp;IDPr=11440",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.lozzolo.vc.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-27687-1-15da1085774dc0eb4caa51bc22bff835",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:54:44.366982Z"
+  },
+  "cambio_residenza": {
+   "service_id": "002072:comweb:cambio-residenza-305-27685-1-106b35d2ce51b65b9f87daabea29675f",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.lozzolo.vc.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-27685-1-106b35d2ce51b65b9f87daabea29675f",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.lozzolo.vc.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-27685-1-106b35d2ce51b65b9f87daabea29675f",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.lozzolo.vc.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-27685-1-106b35d2ce51b65b9f87daabea29675f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.lozzolo.vc.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-27685-1-106b35d2ce51b65b9f87daabea29675f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:54:47.547151Z"
+  },
+  "carta_identita": {
+   "service_id": "002072:comweb:carta-d-identita-elettronica-cie-788-27675-1-f10ab5ae6b838e257d9fd1860e216989",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.lozzolo.vc.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-27675-1-f10ab5ae6b838e257d9fd1860e216989",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.lozzolo.vc.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-27675-1-f10ab5ae6b838e257d9fd1860e216989",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.lozzolo.vc.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-27675-1-f10ab5ae6b838e257d9fd1860e216989",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:54:51.435415Z"
+  },
+  "stato_civile": {
+   "service_id": "002072:comweb:certificato-di-nascita-26-27680-1-a21ed6d6ece4d4fe561001334fc57b11",
+   "title": "Certificato di nascita",
+   "source_url": "https://www.comune.lozzolo.vc.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-nascita-26-27680-1-a21ed6d6ece4d4fe561001334fc57b11",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.lozzolo.vc.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-nascita-26-27680-1-a21ed6d6ece4d4fe561001334fc57b11",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.lozzolo.vc.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-nascita-26-27680-1-a21ed6d6ece4d4fe561001334fc57b11",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/certificati/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.lozzolo.vc.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-nascita-26-27680-1-a21ed6d6ece4d4fe561001334fc57b11",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:54:57.084211Z"
+  },
+  "tributi_imu": {
+   "service_id": "002072:comweb:pagare-tributi-imu-600-27776-1-153c40da1399c1474a19f6e32dd06bde",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.lozzolo.vc.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-27776-1-153c40da1399c1474a19f6e32dd06bde",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.lozzolo.vc.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-27776-1-153c40da1399c1474a19f6e32dd06bde",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.lozzolo.vc.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-27776-1-153c40da1399c1474a19f6e32dd06bde",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.servizipubblicaamministrazione.it/servizi/PortaleContribuente/CalcoloImuTasi.aspx?CodCat=E711",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.lozzolo.vc.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-27776-1-153c40da1399c1474a19f6e32dd06bde",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:55:03.585515Z"
+  },
+  "tributi_tari": {
+   "service_id": "002072:comweb:pagamento-tassa-rifiuti-tari-659-27767-1-6966989c46b7f904b5a01236d085b553",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.lozzolo.vc.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-27767-1-6966989c46b7f904b5a01236d085b553",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.lozzolo.vc.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-27767-1-6966989c46b7f904b5a01236d085b553",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.lozzolo.vc.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-27767-1-6966989c46b7f904b5a01236d085b553",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:55:06.115026Z"
+  }
+ }
+}

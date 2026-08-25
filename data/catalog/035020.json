@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "035020",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "035020:wp:1050",
+   "title": "Dichiarazione di cambio di residenza o di indirizzo all’interno del Comune",
+   "source_url": "https://www.comune.correggio.re.it/servizi/dichiarazione-di-cambio-di-residenza-o-di-indirizzo-allinterno-del-comune/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.correggio.re.it/servizi/dichiarazione-di-cambio-di-residenza-o-di-indirizzo-allinterno-del-comune/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.correggio.re.it/servizi/dichiarazione-di-cambio-di-residenza-o-di-indirizzo-allinterno-del-comune/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:47:26.589429Z"
+  }
+ }
+}

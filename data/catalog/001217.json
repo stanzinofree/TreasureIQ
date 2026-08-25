@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "001217",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001217:comweb:richiedere-l-accesso-agli-atti-317-49204-1-4262c43bd635b210b973219e95636276",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.rivarolocanavese.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-49204-1-4262c43bd635b210b973219e95636276",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.rivarolocanavese.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-49204-1-4262c43bd635b210b973219e95636276",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.rivarolocanavese.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-49204-1-4262c43bd635b210b973219e95636276",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.rivarolo.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=rvrlcnvs792&amp;IDPr=11622",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.rivarolocanavese.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-49204-1-4262c43bd635b210b973219e95636276",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:47:40.250849Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001217:comweb:cambio-residenza-305-49202-1-5461edee1d0c9b24b166131a84fd70d4",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.rivarolocanavese.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-49202-1-5461edee1d0c9b24b166131a84fd70d4",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.rivarolocanavese.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-49202-1-5461edee1d0c9b24b166131a84fd70d4",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.rivarolocanavese.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-49202-1-5461edee1d0c9b24b166131a84fd70d4",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.rivarolocanavese.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-49202-1-5461edee1d0c9b24b166131a84fd70d4",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:47:42.113542Z"
+  },
+  "carta_identita": {
+   "service_id": "001217:comweb:carta-d-identita-elettronica-cie-788-49192-1-235b84170a376f798b377b3e1e608b28",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.rivarolocanavese.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-49192-1-235b84170a376f798b377b3e1e608b28",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.rivarolocanavese.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-49192-1-235b84170a376f798b377b3e1e608b28",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.rivarolocanavese.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-49192-1-235b84170a376f798b377b3e1e608b28",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:47:44.136066Z"
+  }
+ }
+}

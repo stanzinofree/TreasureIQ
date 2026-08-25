@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "090013",
+ "services": {
+  "accesso_atti": {
+   "service_id": "090013:wp:1123",
+   "title": "Richiedere l&#8217;accesso agli atti",
+   "source_url": "https://www.comune.bonorva.ss.it/servizio/richiedere-laccesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bonorva.ss.it/servizio/richiedere-laccesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bonorva.ss.it/servizio/richiedere-laccesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:50:51.480613Z"
+  },
+  "cambio_residenza": {
+   "service_id": "090013:wp:1053",
+   "title": "Cambio di Residenza",
+   "source_url": "https://www.comune.bonorva.ss.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bonorva.ss.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bonorva.ss.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:50:53.803242Z"
+  },
+  "stato_civile": {
+   "service_id": "090013:wp:1054",
+   "title": "Certificati di anagrafe, stato civile, elettorale",
+   "source_url": "https://www.comune.bonorva.ss.it/servizio/certificati-di-anagrafe-stato-civile-elettorale/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bonorva.ss.it/servizio/certificati-di-anagrafe-stato-civile-elettorale/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bonorva.ss.it/servizio/certificati-di-anagrafe-stato-civile-elettorale/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:50:55.296632Z"
+  },
+  "tributi_tari": {
+   "service_id": "090013:wp:1096",
+   "title": "Tari",
+   "source_url": "https://www.comune.bonorva.ss.it/servizio/tari-2024/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bonorva.ss.it/servizio/tari-2024/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bonorva.ss.it/servizio/tari-2024/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:50:56.867731Z"
+  }
+ }
+}

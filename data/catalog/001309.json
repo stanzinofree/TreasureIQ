@@ -1,0 +1,159 @@
+{
+ "municipality_istat": "001309",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001309:comweb:richiedere-l-accesso-agli-atti-317-26895-1-be5e4dc20d662441a738780ee010e2cb",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.vinovo.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-26895-1-be5e4dc20d662441a738780ee010e2cb",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vinovo.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-26895-1-be5e4dc20d662441a738780ee010e2cb",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vinovo.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-26895-1-be5e4dc20d662441a738780ee010e2cb",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://sportello.comune.vinovo.to.it/su_procedimento/richiedere-laccesso-agli-atti/fattispecie/0/?ambito=sugen&amp;urlSite=https%3a%2f%2fwww.comune.vinovo.to.it%2fit-it%2fservizi%2fanagrafe-e-stato-civile%2frichiedere-l-accesso-agli-atti-317-26895-1-be5e4dc20d662441a738780ee010e2cb",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.vinovo.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-26895-1-be5e4dc20d662441a738780ee010e2cb",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:52:33.558020Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001309:comweb:cambio-residenza-305-26893-1-6556d2fd50cfc13938d4b53da912a1ce",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.vinovo.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-26893-1-6556d2fd50cfc13938d4b53da912a1ce",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vinovo.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-26893-1-6556d2fd50cfc13938d4b53da912a1ce",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vinovo.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-26893-1-6556d2fd50cfc13938d4b53da912a1ce",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.vinovo.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-26893-1-6556d2fd50cfc13938d4b53da912a1ce",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:52:35.699510Z"
+  },
+  "carta_identita": {
+   "service_id": "001309:comweb:carta-d-identita-1-26883-1-a80c36c6fbe8c3cb8c3e045aa25e01d6",
+   "title": "Carta d'Identità",
+   "source_url": "https://www.comune.vinovo.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-26883-1-a80c36c6fbe8c3cb8c3e045aa25e01d6",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vinovo.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-26883-1-a80c36c6fbe8c3cb8c3e045aa25e01d6",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vinovo.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-26883-1-a80c36c6fbe8c3cb8c3e045aa25e01d6",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:52:38.125253Z"
+  },
+  "stato_civile": {
+   "service_id": "001309:comweb:certificato-di-matrimonio-30-26889-1-4d8ff60e41f6f82de729588a28dbb4f5",
+   "title": "Certificato di matrimonio",
+   "source_url": "https://www.comune.vinovo.to.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-matrimonio-30-26889-1-4d8ff60e41f6f82de729588a28dbb4f5",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vinovo.to.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-matrimonio-30-26889-1-4d8ff60e41f6f82de729588a28dbb4f5",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vinovo.to.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-matrimonio-30-26889-1-4d8ff60e41f6f82de729588a28dbb4f5",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/certificati/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.vinovo.to.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-matrimonio-30-26889-1-4d8ff60e41f6f82de729588a28dbb4f5",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:52:40.412696Z"
+  },
+  "tributi_tari": {
+   "service_id": "001309:comweb:agevolazioni-tassa-rifiuti-tari-975-26975-1-3a28bce4951abcc543cd4bf320151dd3",
+   "title": "Agevolazioni Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.vinovo.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/agevolazioni-tassa-rifiuti-tari-975-26975-1-3a28bce4951abcc543cd4bf320151dd3",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vinovo.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/agevolazioni-tassa-rifiuti-tari-975-26975-1-3a28bce4951abcc543cd4bf320151dd3",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vinovo.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/agevolazioni-tassa-rifiuti-tari-975-26975-1-3a28bce4951abcc543cd4bf320151dd3",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:52:42.516581Z"
+  }
+ }
+}

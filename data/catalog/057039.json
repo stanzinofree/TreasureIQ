@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "057039",
+ "services": {
+  "tributi_imu": {
+   "service_id": "057039:wp:1527",
+   "title": "Dichiarazione IMU",
+   "source_url": "https://comune.montasola.ri.it/servizio/procedure:s_italia:imposta.municipale.unica;dichiarazione/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.montasola.ri.it/servizio/procedure:s_italia:imposta.municipale.unica;dichiarazione/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.montasola.ri.it/servizio/procedure:s_italia:imposta.municipale.unica;dichiarazione/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:01:02.830916Z"
+  }
+ }
+}

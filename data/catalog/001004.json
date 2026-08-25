@@ -1,0 +1,123 @@
+{
+ "municipality_istat": "001004",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001004:comweb:richiedere-l-accesso-agli-atti-317-42604-1-e0634a9d787aa5b9c41d2be78c83e8b6",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.albianodivrea.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-42604-1-e0634a9d787aa5b9c41d2be78c83e8b6",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.albianodivrea.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-42604-1-e0634a9d787aa5b9c41d2be78c83e8b6",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.albianodivrea.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-42604-1-e0634a9d787aa5b9c41d2be78c83e8b6",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.albianodivrea.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=albnvr114&amp;IDPr=10481",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.albianodivrea.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-42604-1-e0634a9d787aa5b9c41d2be78c83e8b6",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:38:11.356476Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001004:comweb:cambio-residenza-305-42602-1-f07c39a4610c9e84937cd7d6cad0e023",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.albianodivrea.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-42602-1-f07c39a4610c9e84937cd7d6cad0e023",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.albianodivrea.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-42602-1-f07c39a4610c9e84937cd7d6cad0e023",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.albianodivrea.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-42602-1-f07c39a4610c9e84937cd7d6cad0e023",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.albianodivrea.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-42602-1-f07c39a4610c9e84937cd7d6cad0e023",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:38:13.109058Z"
+  },
+  "tributi_imu": {
+   "service_id": "001004:comweb:pagare-tributi-imu-600-42693-1-d58ea830d12fef5603f814df07bab9e2",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.albianodivrea.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-42693-1-d58ea830d12fef5603f814df07bab9e2",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.albianodivrea.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-42693-1-d58ea830d12fef5603f814df07bab9e2",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.albianodivrea.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-42693-1-d58ea830d12fef5603f814df07bab9e2",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:38:15.214202Z"
+  },
+  "tributi_tari": {
+   "service_id": "001004:comweb:pagamento-tassa-rifiuti-tari-659-42684-1-691aa46e90a69f9214313666446a0904",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.albianodivrea.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-42684-1-691aa46e90a69f9214313666446a0904",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.albianodivrea.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-42684-1-691aa46e90a69f9214313666446a0904",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.albianodivrea.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-42684-1-691aa46e90a69f9214313666446a0904",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:38:19.759972Z"
+  }
+ }
+}

@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "066087",
+ "services": {
+  "tributi_imu": {
+   "service_id": "066087:wp:1357",
+   "title": "Modulo Dichiarazione IMU",
+   "source_url": "https://www.comune.sandemetrionevestini.aq.it/servizio/modulo-dichiarazione-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sandemetrionevestini.aq.it/servizio/modulo-dichiarazione-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sandemetrionevestini.aq.it/servizio/modulo-dichiarazione-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:22:44.373700Z"
+  },
+  "tributi_tari": {
+   "service_id": "066087:wp:1356",
+   "title": "Modulo Dichiarazione TARI",
+   "source_url": "https://www.comune.sandemetrionevestini.aq.it/servizio/modulo-dichiarazione-tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sandemetrionevestini.aq.it/servizio/modulo-dichiarazione-tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sandemetrionevestini.aq.it/servizio/modulo-dichiarazione-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:22:46.849543Z"
+  }
+ }
+}

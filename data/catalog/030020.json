@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "030020",
+ "services": {
+  "accesso_atti": {
+   "service_id": "030020:wp:336",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.castionsdistrada.ud.it/?post_type=servizio&p=336",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castionsdistrada.ud.it/?post_type=servizio&p=336",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castionsdistrada.ud.it/?post_type=servizio&p=336",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:38:45.681469Z"
+  },
+  "stato_civile": {
+   "service_id": "030020:wp:972",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.castionsdistrada.ud.it/?post_type=servizio&p=972",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castionsdistrada.ud.it/?post_type=servizio&p=972",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castionsdistrada.ud.it/?post_type=servizio&p=972",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:38:52.012086Z"
+  },
+  "tributi_imu": {
+   "service_id": "030020:wp:1054",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.castionsdistrada.ud.it/?post_type=servizio&p=1054",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castionsdistrada.ud.it/?post_type=servizio&p=1054",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castionsdistrada.ud.it/?post_type=servizio&p=1054",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:38:57.881115Z"
+  }
+ }
+}

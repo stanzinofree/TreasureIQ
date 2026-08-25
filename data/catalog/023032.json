@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "023032",
+ "services": {
+  "accesso_atti": {
+   "service_id": "023032:wp:255",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.erbe.vr.it/?post_type=servizio&p=255",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.erbe.vr.it/?post_type=servizio&p=255",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.erbe.vr.it/?post_type=servizio&p=255",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:34:25.578257Z"
+  },
+  "cambio_residenza": {
+   "service_id": "023032:wp:908",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.erbe.vr.it/?post_type=servizio&p=908",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.erbe.vr.it/?post_type=servizio&p=908",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.erbe.vr.it/?post_type=servizio&p=908",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:34:31.540365Z"
+  },
+  "stato_civile": {
+   "service_id": "023032:wp:911",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.erbe.vr.it/?post_type=servizio&p=911",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.erbe.vr.it/?post_type=servizio&p=911",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.erbe.vr.it/?post_type=servizio&p=911",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:34:40.540755Z"
+  },
+  "tributi_imu": {
+   "service_id": "023032:wp:1029",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.erbe.vr.it/?post_type=servizio&p=1029",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.erbe.vr.it/?post_type=servizio&p=1029",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.erbe.vr.it/?post_type=servizio&p=1029",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:34:46.916775Z"
+  }
+ }
+}

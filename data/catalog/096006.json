@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "096006",
+ "services": {
+  "tributi_imu": {
+   "service_id": "096006:comweb:imposta-municipale-propria-imu-953-57524-1-a9641b0ee7c0e329b688a855cb11229a",
+   "title": "Imposta Municipale Propria (IMU)",
+   "source_url": "https://www.comune.borriana.bi.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-57524-1-a9641b0ee7c0e329b688a855cb11229a",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.borriana.bi.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-57524-1-a9641b0ee7c0e329b688a855cb11229a",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.borriana.bi.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-57524-1-a9641b0ee7c0e329b688a855cb11229a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:55:03.726402Z"
+  }
+ }
+}

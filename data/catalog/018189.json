@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "018189",
+ "services": {
+  "accesso_atti": {
+   "service_id": "018189:comweb:richiedere-l-accesso-agli-atti-317-10922-1-e2f14e7f1427c27799ac2da89c671352",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.zerbolo.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-10922-1-e2f14e7f1427c27799ac2da89c671352",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.zerbolo.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-10922-1-e2f14e7f1427c27799ac2da89c671352",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.zerbolo.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-10922-1-e2f14e7f1427c27799ac2da89c671352",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.zerbolo.pv.it/lang/it/servizi/richiedere-laccesso-agli-atti/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.zerbolo.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-10922-1-e2f14e7f1427c27799ac2da89c671352",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:27:13.487233Z"
+  },
+  "carta_identita": {
+   "service_id": "018189:comweb:carta-d-identita-1-10911-1-8c6ac97e6035c5f0e232f51d6ad93602",
+   "title": "Carta d'Identità",
+   "source_url": "https://www.comune.zerbolo.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-10911-1-8c6ac97e6035c5f0e232f51d6ad93602",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.zerbolo.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-10911-1-8c6ac97e6035c5f0e232f51d6ad93602",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.zerbolo.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-10911-1-8c6ac97e6035c5f0e232f51d6ad93602",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:27:15.330222Z"
+  },
+  "tributi_imu": {
+   "service_id": "018189:comweb:pagare-tributi-imu-600-11012-1-5046745b227ab35fa147fb5a8211ada9",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.zerbolo.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-11012-1-5046745b227ab35fa147fb5a8211ada9",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.zerbolo.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-11012-1-5046745b227ab35fa147fb5a8211ada9",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.zerbolo.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-11012-1-5046745b227ab35fa147fb5a8211ada9",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.zerbolo.pv.it/lang/it/servizi/pagare-tributi-imu/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.zerbolo.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-11012-1-5046745b227ab35fa147fb5a8211ada9",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:27:17.285405Z"
+  }
+ }
+}

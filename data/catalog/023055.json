@@ -1,0 +1,120 @@
+{
+ "municipality_istat": "023055",
+ "services": {
+  "accesso_atti": {
+   "service_id": "023055:wp:419",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.oppeano.vr.it/?post_type=servizio&p=419",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.oppeano.vr.it/?post_type=servizio&p=419",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.oppeano.vr.it/?post_type=servizio&p=419",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:37:16.559312Z"
+  },
+  "cambio_residenza": {
+   "service_id": "023055:wp:229",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.oppeano.vr.it/?post_type=servizio&p=229",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.oppeano.vr.it/?post_type=servizio&p=229",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.oppeano.vr.it/?post_type=servizio&p=229",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:37:24.811064Z"
+  },
+  "carta_identita": {
+   "service_id": "023055:wp:1073",
+   "title": "Rilascio Carta di Identità Elettronica - CIE",
+   "source_url": "https://www.comune.oppeano.vr.it/?post_type=servizio&p=1073",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.oppeano.vr.it/?post_type=servizio&p=1073",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.oppeano.vr.it/?post_type=servizio&p=1073",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:37:35.531327Z"
+  },
+  "stato_civile": {
+   "service_id": "023055:wp:232",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.oppeano.vr.it/?post_type=servizio&p=232",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.oppeano.vr.it/?post_type=servizio&p=232",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.oppeano.vr.it/?post_type=servizio&p=232",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:37:50.475063Z"
+  },
+  "tributi_imu": {
+   "service_id": "023055:wp:1020",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.oppeano.vr.it/?post_type=servizio&p=1020",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.oppeano.vr.it/?post_type=servizio&p=1020",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.oppeano.vr.it/?post_type=servizio&p=1020",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:38:00.637969Z"
+  }
+ }
+}

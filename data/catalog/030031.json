@@ -1,0 +1,123 @@
+{
+ "municipality_istat": "030031",
+ "services": {
+  "accesso_atti": {
+   "service_id": "030031:wp:306",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.coseano.ud.it/?post_type=servizio&p=306",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.coseano.ud.it/?post_type=servizio&p=306",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.coseano.ud.it/?post_type=servizio&p=306",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.coseano.ud.it/wp-content/uploads/2024/06/Tariffe-servizi-comunali-2025.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.coseano.ud.it/?post_type=servizio&p=306",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.coseano.ud.it/wp-content/uploads/2024/09/Delibera-68-2023-Coseano.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.coseano.ud.it/?post_type=servizio&p=306",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:39:21.473884Z"
+  },
+  "cambio_residenza": {
+   "service_id": "030031:wp:855",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.coseano.ud.it/?post_type=servizio&p=855",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.coseano.ud.it/?post_type=servizio&p=855",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.coseano.ud.it/?post_type=servizio&p=855",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:39:27.268877Z"
+  },
+  "carta_identita": {
+   "service_id": "030031:wp:731",
+   "title": "Rilascio PIN e PUK per CIE",
+   "source_url": "https://www.comune.coseano.ud.it/?post_type=servizio&p=731",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.coseano.ud.it/?post_type=servizio&p=731",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.coseano.ud.it/?post_type=servizio&p=731",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:39:33.768944Z"
+  },
+  "stato_civile": {
+   "service_id": "030031:wp:859",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.coseano.ud.it/?post_type=servizio&p=859",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.coseano.ud.it/?post_type=servizio&p=859",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.coseano.ud.it/?post_type=servizio&p=859",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:39:39.836476Z"
+  }
+ }
+}

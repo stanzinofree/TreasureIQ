@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "082071",
+ "services": {
+  "tributi_imu": {
+   "service_id": "082071:wp:2836",
+   "title": "Tributi &#8211; Imu e Tasi",
+   "source_url": "https://www.comune.terrasini.pa.it/servizio/tributi-imu-e-tasi/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.terrasini.pa.it/servizio/tributi-imu-e-tasi/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.terrasini.pa.it/servizio/tributi-imu-e-tasi/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:44:23.401450Z"
+  },
+  "tributi_tari": {
+   "service_id": "082071:wp:2839",
+   "title": "Tributi &#8211; Tari",
+   "source_url": "https://www.comune.terrasini.pa.it/servizio/tributi-tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.terrasini.pa.it/servizio/tributi-tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.terrasini.pa.it/servizio/tributi-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:44:25.766396Z"
+  }
+ }
+}

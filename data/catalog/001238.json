@@ -1,0 +1,87 @@
+{
+ "municipality_istat": "001238",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001238:comweb:richiedere-l-accesso-agli-atti-317-20162-1-b4d2cffd4056dfe6b6f545612f1e5523",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.sancolombanobelmonte.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-20162-1-b4d2cffd4056dfe6b6f545612f1e5523",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sancolombanobelmonte.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-20162-1-b4d2cffd4056dfe6b6f545612f1e5523",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sancolombanobelmonte.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-20162-1-b4d2cffd4056dfe6b6f545612f1e5523",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.sancolombanobelmonte.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=snclmbn450&amp;IDPr=11318",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.sancolombanobelmonte.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-20162-1-b4d2cffd4056dfe6b6f545612f1e5523",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:48:42.869038Z"
+  },
+  "carta_identita": {
+   "service_id": "001238:comweb:carta-d-identita-elettronica-cie-788-20151-1-f68bfc4bb3eb6051734e4208f4481c7d",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.sancolombanobelmonte.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-20151-1-f68bfc4bb3eb6051734e4208f4481c7d",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sancolombanobelmonte.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-20151-1-f68bfc4bb3eb6051734e4208f4481c7d",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sancolombanobelmonte.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-20151-1-f68bfc4bb3eb6051734e4208f4481c7d",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:48:44.963987Z"
+  },
+  "tributi_tari": {
+   "service_id": "001238:comweb:pagamento-tassa-rifiuti-tari-659-20243-1-138dcf3e224defb6126d73aeb007e26f",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.sancolombanobelmonte.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-20243-1-138dcf3e224defb6126d73aeb007e26f",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sancolombanobelmonte.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-20243-1-138dcf3e224defb6126d73aeb007e26f",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sancolombanobelmonte.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-20243-1-138dcf3e224defb6126d73aeb007e26f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:48:47.124277Z"
+  }
+ }
+}

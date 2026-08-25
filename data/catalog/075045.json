@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "075045",
+ "services": {
+  "accesso_atti": {
+   "service_id": "075045:wp:486",
+   "title": "Accesso agli atti",
+   "source_url": "https://www.comune.melpignano.le.it/servizio/accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.melpignano.le.it/servizio/accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.melpignano.le.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:29:34.388250Z"
+  },
+  "cambio_residenza": {
+   "service_id": "075045:wp:454",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.melpignano.le.it/?post_type=servizio&p=454",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.melpignano.le.it/?post_type=servizio&p=454",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.melpignano.le.it/?post_type=servizio&p=454",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:29:39.555723Z"
+  }
+ }
+}

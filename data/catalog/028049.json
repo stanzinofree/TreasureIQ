@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "028049",
+ "services": {
+  "accesso_atti": {
+   "service_id": "028049:wp:239",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.masi.pd.it/?post_type=servizio&p=239",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.masi.pd.it/?post_type=servizio&p=239",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.masi.pd.it/?post_type=servizio&p=239",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:05:13.309038Z"
+  },
+  "carta_identita": {
+   "service_id": "028049:wp:244",
+   "title": "Rilascio carta d'identità",
+   "source_url": "https://www.comune.masi.pd.it/?post_type=servizio&p=244",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.masi.pd.it/?post_type=servizio&p=244",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.masi.pd.it/?post_type=servizio&p=244",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:05:27.220901Z"
+  },
+  "stato_civile": {
+   "service_id": "028049:wp:816",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.masi.pd.it/?post_type=servizio&p=816",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.masi.pd.it/?post_type=servizio&p=816",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.masi.pd.it/?post_type=servizio&p=816",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:05:45.642551Z"
+  },
+  "tributi_imu": {
+   "service_id": "028049:wp:821",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.masi.pd.it/?post_type=servizio&p=821",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.masi.pd.it/?post_type=servizio&p=821",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.masi.pd.it/?post_type=servizio&p=821",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:06:09.991759Z"
+  }
+ }
+}

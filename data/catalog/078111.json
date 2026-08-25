@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "078111",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "078111:wp:257",
+   "title": "ANPR – Cambio di residenza",
+   "source_url": "https://www.comune.sanbasile.cs.it/servizio/anpr-cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanbasile.cs.it/servizio/anpr-cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanbasile.cs.it/servizio/anpr-cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:35:29.912907Z"
+  },
+  "tributi_imu": {
+   "service_id": "078111:wp:266",
+   "title": "Pagamento tributi IMU – F24",
+   "source_url": "https://www.comune.sanbasile.cs.it/servizio/pagamento-tributi-imu-f24/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanbasile.cs.it/servizio/pagamento-tributi-imu-f24/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanbasile.cs.it/servizio/pagamento-tributi-imu-f24/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:35:33.116721Z"
+  }
+ }
+}

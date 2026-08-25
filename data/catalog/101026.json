@@ -1,0 +1,41 @@
+{
+ "municipality_istat": "101026",
+ "services": {
+  "tributi_imu": {
+   "service_id": "101026:wp:563",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://comune.umbriatico.kr.it/servizio/imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.umbriatico.kr.it/servizio/imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.umbriatico.kr.it/servizio/imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "http://comune.umbriatico.kr.it/wp-content/uploads/2024/04/DEL._C.C._N._2_DEL_17.03.2025.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.umbriatico.kr.it/servizio/imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:59:30.849687Z"
+  }
+ }
+}

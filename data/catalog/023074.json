@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "023074",
+ "services": {
+  "accesso_atti": {
+   "service_id": "023074:wp:287",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.sanmaurodisaline.vr.it/?post_type=servizio&p=287",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanmaurodisaline.vr.it/?post_type=servizio&p=287",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanmaurodisaline.vr.it/?post_type=servizio&p=287",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:45:36.598834Z"
+  },
+  "cambio_residenza": {
+   "service_id": "023074:wp:362",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.sanmaurodisaline.vr.it/?post_type=servizio&p=362",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanmaurodisaline.vr.it/?post_type=servizio&p=362",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanmaurodisaline.vr.it/?post_type=servizio&p=362",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:45:43.674760Z"
+  },
+  "stato_civile": {
+   "service_id": "023074:wp:365",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.sanmaurodisaline.vr.it/?post_type=servizio&p=365",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanmaurodisaline.vr.it/?post_type=servizio&p=365",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanmaurodisaline.vr.it/?post_type=servizio&p=365",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:45:54.038162Z"
+  },
+  "tributi_imu": {
+   "service_id": "023074:wp:437",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.sanmaurodisaline.vr.it/?post_type=servizio&p=437",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanmaurodisaline.vr.it/?post_type=servizio&p=437",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanmaurodisaline.vr.it/?post_type=servizio&p=437",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:46:05.487725Z"
+  }
+ }
+}

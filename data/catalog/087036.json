@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "087036",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "087036:wp:7128",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.raddusa.ct.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.raddusa.ct.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.raddusa.ct.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:49:23.021274Z"
+  },
+  "carta_identita": {
+   "service_id": "087036:wp:7498",
+   "title": "Prenotazione Carta d&#8217;identità (CIE)",
+   "source_url": "https://comune.raddusa.ct.it/servizio/prenotazione-carta-didentita-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.raddusa.ct.it/servizio/prenotazione-carta-didentita-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.raddusa.ct.it/servizio/prenotazione-carta-didentita-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:49:26.190975Z"
+  },
+  "tributi_imu": {
+   "service_id": "087036:wp:7497",
+   "title": "Pagamento tributi IMU",
+   "source_url": "https://comune.raddusa.ct.it/servizio/pagamento-tributi-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.raddusa.ct.it/servizio/pagamento-tributi-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.raddusa.ct.it/servizio/pagamento-tributi-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:49:29.059072Z"
+  }
+ }
+}

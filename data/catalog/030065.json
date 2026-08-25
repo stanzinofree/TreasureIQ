@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "030065",
+ "services": {
+  "accesso_atti": {
+   "service_id": "030065:wp:424",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.nimis.ud.it/?post_type=servizio&p=424",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.nimis.ud.it/?post_type=servizio&p=424",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.nimis.ud.it/?post_type=servizio&p=424",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:41:49.239333Z"
+  },
+  "cambio_residenza": {
+   "service_id": "030065:wp:1523",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.nimis.ud.it/?post_type=servizio&p=1523",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.nimis.ud.it/?post_type=servizio&p=1523",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.nimis.ud.it/?post_type=servizio&p=1523",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:41:55.416539Z"
+  },
+  "stato_civile": {
+   "service_id": "030065:wp:1546",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.nimis.ud.it/?post_type=servizio&p=1546",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.nimis.ud.it/?post_type=servizio&p=1546",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.nimis.ud.it/?post_type=servizio&p=1546",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:42:01.835254Z"
+  }
+ }
+}

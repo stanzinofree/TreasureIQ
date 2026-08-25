@@ -1,0 +1,87 @@
+{
+ "municipality_istat": "097046",
+ "services": {
+  "accesso_atti": {
+   "service_id": "097046:comweb:richiedere-l-accesso-agli-atti-317-36664-1-4c594f27cd55d4ab392398381bcf81c7",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.mandello.lc.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-36664-1-4c594f27cd55d4ab392398381bcf81c7",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.mandello.lc.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-36664-1-4c594f27cd55d4ab392398381bcf81c7",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.mandello.lc.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-36664-1-4c594f27cd55d4ab392398381bcf81c7",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:56:35.646064Z"
+  },
+  "cambio_residenza": {
+   "service_id": "097046:comweb:cambio-residenza-305-36662-1-f198a357cbaffabed75b639e78cb8fed",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.mandello.lc.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-36662-1-f198a357cbaffabed75b639e78cb8fed",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.mandello.lc.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-36662-1-f198a357cbaffabed75b639e78cb8fed",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.mandello.lc.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-36662-1-f198a357cbaffabed75b639e78cb8fed",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.mandello.lc.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-36662-1-f198a357cbaffabed75b639e78cb8fed",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:56:37.814060Z"
+  },
+  "tributi_tari": {
+   "service_id": "097046:comweb:tassa-rifiuti-tari-954-36744-1-9ae4a9267fe8eb9b6288d11b5a8a5b40",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.mandello.lc.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-36744-1-9ae4a9267fe8eb9b6288d11b5a8a5b40",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.mandello.lc.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-36744-1-9ae4a9267fe8eb9b6288d11b5a8a5b40",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.mandello.lc.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-36744-1-9ae4a9267fe8eb9b6288d11b5a8a5b40",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:56:39.959538Z"
+  }
+ }
+}

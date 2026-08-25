@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "003040",
+ "services": {
+  "accesso_atti": {
+   "service_id": "003040:comweb:richiedere-l-accesso-agli-atti-317-24387-1-79edf3d1cbed04cded38da95eec3abe1",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.casalino.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-24387-1-79edf3d1cbed04cded38da95eec3abe1",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.casalino.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-24387-1-79edf3d1cbed04cded38da95eec3abe1",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.casalino.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-24387-1-79edf3d1cbed04cded38da95eec3abe1",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:56:50.200948Z"
+  },
+  "cambio_residenza": {
+   "service_id": "003040:comweb:cambio-residenza-305-24385-1-9861568cf18494065a474a18696f0684",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.casalino.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-24385-1-9861568cf18494065a474a18696f0684",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.casalino.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-24385-1-9861568cf18494065a474a18696f0684",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.casalino.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-24385-1-9861568cf18494065a474a18696f0684",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.casalino.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-24385-1-9861568cf18494065a474a18696f0684",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:56:52.074711Z"
+  },
+  "carta_identita": {
+   "service_id": "003040:comweb:carta-d-identita-elettronica-cie-788-24375-1-2cbe0b0e8afb0d438b983484f4eb2b6c",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.casalino.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-24375-1-2cbe0b0e8afb0d438b983484f4eb2b6c",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.casalino.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-24375-1-2cbe0b0e8afb0d438b983484f4eb2b6c",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.casalino.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-24375-1-2cbe0b0e8afb0d438b983484f4eb2b6c",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.cartaidentita.interno.gov.it/la-carta/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.casalino.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-24375-1-2cbe0b0e8afb0d438b983484f4eb2b6c",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:56:54.440288Z"
+  }
+ }
+}

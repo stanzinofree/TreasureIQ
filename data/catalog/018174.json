@@ -1,0 +1,133 @@
+{
+ "municipality_istat": "018174",
+ "services": {
+  "accesso_atti": {
+   "service_id": "018174:comweb:richiedere-l-accesso-agli-atti-317-38116-1-56bc4bf49899c3aeeb45d23c315b2953",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.verretto.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-38116-1-56bc4bf49899c3aeeb45d23c315b2953",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.verretto.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-38116-1-56bc4bf49899c3aeeb45d23c315b2953",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.verretto.pv.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-38116-1-56bc4bf49899c3aeeb45d23c315b2953",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:26:50.432534Z"
+  },
+  "cambio_residenza": {
+   "service_id": "018174:comweb:cambio-residenza-305-38114-1-650a64b60875d129f0444a0e8e24ac3c",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.verretto.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-38114-1-650a64b60875d129f0444a0e8e24ac3c",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.verretto.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-38114-1-650a64b60875d129f0444a0e8e24ac3c",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.verretto.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-38114-1-650a64b60875d129f0444a0e8e24ac3c",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.verretto.pv.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-38114-1-650a64b60875d129f0444a0e8e24ac3c",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:26:52.754972Z"
+  },
+  "carta_identita": {
+   "service_id": "018174:comweb:carta-d-identita-elettronica-cie-788-38104-1-93ddf16a7767f8f9a2f83688aaebd2fc",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.verretto.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-38104-1-93ddf16a7767f8f9a2f83688aaebd2fc",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.verretto.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-38104-1-93ddf16a7767f8f9a2f83688aaebd2fc",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.verretto.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-38104-1-93ddf16a7767f8f9a2f83688aaebd2fc",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:26:55.829655Z"
+  },
+  "tributi_imu": {
+   "service_id": "018174:comweb:pagare-tributi-imu-600-38205-1-b440dee87effe936447526096864aa55",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.verretto.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-38205-1-b440dee87effe936447526096864aa55",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.verretto.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-38205-1-b440dee87effe936447526096864aa55",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.verretto.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-38205-1-b440dee87effe936447526096864aa55",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:26:58.375560Z"
+  },
+  "tributi_tari": {
+   "service_id": "018174:comweb:pagamento-tassa-rifiuti-tari-659-38196-1-7342efec1741a25c19a8ea02db2c5880",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.verretto.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-38196-1-7342efec1741a25c19a8ea02db2c5880",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.verretto.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-38196-1-7342efec1741a25c19a8ea02db2c5880",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.verretto.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-38196-1-7342efec1741a25c19a8ea02db2c5880",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:27:00.834250Z"
+  }
+ }
+}

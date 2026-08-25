@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "078104",
+ "services": {
+  "accesso_atti": {
+   "service_id": "078104:wp:279",
+   "title": "Accesso agli atti",
+   "source_url": "https://comune.roggianogravina.cs.it/servizio/accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.roggianogravina.cs.it/servizio/accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.roggianogravina.cs.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:35:07.900521Z"
+  },
+  "tributi_imu": {
+   "service_id": "078104:wp:277",
+   "title": "Calcolo IMU (Imposta Municipale Propria)",
+   "source_url": "https://comune.roggianogravina.cs.it/servizio/calcolo-imu-imposta-municipale-propria/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.roggianogravina.cs.it/servizio/calcolo-imu-imposta-municipale-propria/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.roggianogravina.cs.it/servizio/calcolo-imu-imposta-municipale-propria/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:35:11.391929Z"
+  }
+ }
+}

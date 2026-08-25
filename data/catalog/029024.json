@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "029024",
+ "services": {
+  "accesso_atti": {
+   "service_id": "029024:wp:865",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.frattapolesine.ro.it/?post_type=servizio&p=865",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.frattapolesine.ro.it/?post_type=servizio&p=865",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.frattapolesine.ro.it/?post_type=servizio&p=865",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:32:58.298635Z"
+  },
+  "carta_identita": {
+   "service_id": "029024:wp:214",
+   "title": "Rilascio Carta di Identità Elettronica",
+   "source_url": "https://www.comune.frattapolesine.ro.it/?post_type=servizio&p=214",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.frattapolesine.ro.it/?post_type=servizio&p=214",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.frattapolesine.ro.it/?post_type=servizio&p=214",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:33:04.835078Z"
+  },
+  "stato_civile": {
+   "service_id": "029024:wp:940",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.frattapolesine.ro.it/?post_type=servizio&p=940",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.frattapolesine.ro.it/?post_type=servizio&p=940",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.frattapolesine.ro.it/?post_type=servizio&p=940",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:33:10.496936Z"
+  },
+  "tributi_imu": {
+   "service_id": "029024:wp:870",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.frattapolesine.ro.it/?post_type=servizio&p=870",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.frattapolesine.ro.it/?post_type=servizio&p=870",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.frattapolesine.ro.it/?post_type=servizio&p=870",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:33:17.821111Z"
+  }
+ }
+}

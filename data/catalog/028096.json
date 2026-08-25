@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "028096",
+ "services": {
+  "accesso_atti": {
+   "service_id": "028096:wp:427",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.veggiano.pd.it/?post_type=servizio&p=427",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.veggiano.pd.it/?post_type=servizio&p=427",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.veggiano.pd.it/?post_type=servizio&p=427",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:23:21.765340Z"
+  },
+  "cambio_residenza": {
+   "service_id": "028096:wp:998",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.veggiano.pd.it/?post_type=servizio&p=998",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.veggiano.pd.it/?post_type=servizio&p=998",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.veggiano.pd.it/?post_type=servizio&p=998",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:23:37.404950Z"
+  },
+  "stato_civile": {
+   "service_id": "028096:wp:1001",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.veggiano.pd.it/?post_type=servizio&p=1001",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.veggiano.pd.it/?post_type=servizio&p=1001",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.veggiano.pd.it/?post_type=servizio&p=1001",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:23:48.963328Z"
+  }
+ }
+}

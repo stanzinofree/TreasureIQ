@@ -1,0 +1,64 @@
+{
+ "municipality_istat": "086013",
+ "services": {
+  "accesso_atti": {
+   "service_id": "086013:comweb:richiedere-l-accesso-agli-atti-317-48016-1-a84df8709b32797ae46c9bef303dbdbd",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.nissoria.en.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-48016-1-a84df8709b32797ae46c9bef303dbdbd",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.nissoria.en.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-48016-1-a84df8709b32797ae46c9bef303dbdbd",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.nissoria.en.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-48016-1-a84df8709b32797ae46c9bef303dbdbd",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.nissoria.en.it/lang/it/servizi/richiesta-di-accesso-agli-atti/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.nissoria.en.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-48016-1-a84df8709b32797ae46c9bef303dbdbd",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:48:33.124071Z"
+  },
+  "tributi_tari": {
+   "service_id": "086013:comweb:tassa-rifiuti-tari-954-48096-1-503b380183250b5ac90904413b879b2f",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.nissoria.en.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-48096-1-503b380183250b5ac90904413b879b2f",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.nissoria.en.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-48096-1-503b380183250b5ac90904413b879b2f",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.nissoria.en.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-48096-1-503b380183250b5ac90904413b879b2f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T14:48:35.025805Z"
+  }
+ }
+}

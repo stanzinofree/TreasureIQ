@@ -1,0 +1,87 @@
+{
+ "municipality_istat": "007034",
+ "services": {
+  "accesso_atti": {
+   "service_id": "007034:comweb:richiedere-l-accesso-agli-atti-317-17918-1-5ead4fa0422fa5af978052a8d8f5ca45",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.hone.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-17918-1-5ead4fa0422fa5af978052a8d8f5ca45",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.hone.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-17918-1-5ead4fa0422fa5af978052a8d8f5ca45",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.hone.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-17918-1-5ead4fa0422fa5af978052a8d8f5ca45",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.hone.ao.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=hn1107&amp;IDPr=11452",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.hone.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-17918-1-5ead4fa0422fa5af978052a8d8f5ca45",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:07:37.937023Z"
+  },
+  "carta_identita": {
+   "service_id": "007034:comweb:carta-d-identita-elettronica-cie-788-17907-1-d5495d96becb76c4606266378e9a2414",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.hone.ao.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-17907-1-d5495d96becb76c4606266378e9a2414",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.hone.ao.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-17907-1-d5495d96becb76c4606266378e9a2414",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.hone.ao.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-17907-1-d5495d96becb76c4606266378e9a2414",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:07:40.164157Z"
+  },
+  "tributi_tari": {
+   "service_id": "007034:comweb:pagamento-tassa-rifiuti-tari-659-17999-1-f361a52b3ebbf3a5231fe32771ba8ea5",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.hone.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-17999-1-f361a52b3ebbf3a5231fe32771ba8ea5",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.hone.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-17999-1-f361a52b3ebbf3a5231fe32771ba8ea5",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.hone.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-17999-1-f361a52b3ebbf3a5231fe32771ba8ea5",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:07:42.430025Z"
+  }
+ }
+}

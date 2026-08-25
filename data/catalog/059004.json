@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "059004",
+ "services": {
+  "accesso_atti": {
+   "service_id": "059004:wp:2452",
+   "title": "Richiesta accesso agli atti",
+   "source_url": "https://www.comune.castelforte.lt.it/servizio/accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castelforte.lt.it/servizio/accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castelforte.lt.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:03:53.887622Z"
+  },
+  "cambio_residenza": {
+   "service_id": "059004:wp:755",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.castelforte.lt.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castelforte.lt.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castelforte.lt.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:03:56.283524Z"
+  },
+  "stato_civile": {
+   "service_id": "059004:wp:1551",
+   "title": "Certificato di nascita",
+   "source_url": "https://www.comune.castelforte.lt.it/servizio/certificato-di-nascita/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castelforte.lt.it/servizio/certificato-di-nascita/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castelforte.lt.it/servizio/certificato-di-nascita/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:03:58.929740Z"
+  }
+ }
+}

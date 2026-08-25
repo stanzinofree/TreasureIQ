@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "038022",
+ "services": {
+  "accesso_atti": {
+   "service_id": "038022:wp:403",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.vigarano.fe.it/?post_type=servizio&p=403",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vigarano.fe.it/?post_type=servizio&p=403",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vigarano.fe.it/?post_type=servizio&p=403",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:52:04.747703Z"
+  },
+  "cambio_residenza": {
+   "service_id": "038022:wp:229",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.vigarano.fe.it/?post_type=servizio&p=229",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vigarano.fe.it/?post_type=servizio&p=229",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vigarano.fe.it/?post_type=servizio&p=229",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:52:10.882471Z"
+  },
+  "stato_civile": {
+   "service_id": "038022:wp:232",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.vigarano.fe.it/?post_type=servizio&p=232",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vigarano.fe.it/?post_type=servizio&p=232",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vigarano.fe.it/?post_type=servizio&p=232",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:52:18.185230Z"
+  },
+  "tributi_imu": {
+   "service_id": "038022:wp:589",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.vigarano.fe.it/?post_type=servizio&p=589",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vigarano.fe.it/?post_type=servizio&p=589",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vigarano.fe.it/?post_type=servizio&p=589",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:52:24.347352Z"
+  }
+ }
+}

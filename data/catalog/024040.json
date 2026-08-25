@@ -1,0 +1,77 @@
+{
+ "municipality_istat": "024040",
+ "services": {
+  "accesso_atti": {
+   "service_id": "024040:wp:1179",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.faravicentino.vi.it/?post_type=servizio&p=1179",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.faravicentino.vi.it/?post_type=servizio&p=1179",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.faravicentino.vi.it/?post_type=servizio&p=1179",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.faravicentino.vi.it/servizio/richiedere-laccesso-a-pratiche-edilizie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.faravicentino.vi.it/?post_type=servizio&p=1179",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.faravicentino.vi.it/wp-content/uploads/2024/09/DELIBERA_79_2023-fara-vicentino.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.faravicentino.vi.it/?post_type=servizio&p=1179",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:59:52.029806Z"
+  },
+  "stato_civile": {
+   "service_id": "024040:wp:2296",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.faravicentino.vi.it/?post_type=servizio&p=2296",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.faravicentino.vi.it/?post_type=servizio&p=2296",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.faravicentino.vi.it/?post_type=servizio&p=2296",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:59:58.543220Z"
+  }
+ }
+}

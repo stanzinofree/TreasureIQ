@@ -1,0 +1,110 @@
+{
+ "municipality_istat": "007018",
+ "services": {
+  "accesso_atti": {
+   "service_id": "007018:comweb:richiedere-l-accesso-agli-atti-317-28083-1-e78a5e0f9e4d29a15121afa0c7e63e63",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.champorcher.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-28083-1-e78a5e0f9e4d29a15121afa0c7e63e63",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.champorcher.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-28083-1-e78a5e0f9e4d29a15121afa0c7e63e63",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.champorcher.ao.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-28083-1-e78a5e0f9e4d29a15121afa0c7e63e63",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:05:18.204307Z"
+  },
+  "cambio_residenza": {
+   "service_id": "007018:comweb:cambio-residenza-305-28081-1-0f4ce59dd61997ec1feaa1b5ecb7c72a",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.champorcher.ao.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-28081-1-0f4ce59dd61997ec1feaa1b5ecb7c72a",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.champorcher.ao.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-28081-1-0f4ce59dd61997ec1feaa1b5ecb7c72a",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.champorcher.ao.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-28081-1-0f4ce59dd61997ec1feaa1b5ecb7c72a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.champorcher.ao.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-28081-1-0f4ce59dd61997ec1feaa1b5ecb7c72a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:05:20.367014Z"
+  },
+  "carta_identita": {
+   "service_id": "007018:comweb:carta-d-identita-elettronica-cie-788-28071-1-383cdc2c443b9ff1fafa9751f035fe84",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.champorcher.ao.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-28071-1-383cdc2c443b9ff1fafa9751f035fe84",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.champorcher.ao.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-28071-1-383cdc2c443b9ff1fafa9751f035fe84",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.champorcher.ao.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-28071-1-383cdc2c443b9ff1fafa9751f035fe84",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:05:22.714857Z"
+  },
+  "tributi_tari": {
+   "service_id": "007018:comweb:tassa-rifiuti-tari-954-28163-1-7b3d6616b0041a090710b36f082ec850",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.champorcher.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-28163-1-7b3d6616b0041a090710b36f082ec850",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.champorcher.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-28163-1-7b3d6616b0041a090710b36f082ec850",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.champorcher.ao.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-28163-1-7b3d6616b0041a090710b36f082ec850",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:05:25.182087Z"
+  }
+ }
+}

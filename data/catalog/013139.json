@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "013139",
+ "services": {
+  "accesso_atti": {
+   "service_id": "013139:wp:2811",
+   "title": "Richiedere l’accesso agli atti",
+   "source_url": "https://comune.magreglio.co.it/servizio/accesso-agli-atti-documentale/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.magreglio.co.it/servizio/accesso-agli-atti-documentale/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.magreglio.co.it/servizio/accesso-agli-atti-documentale/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:13:48.785321Z"
+  },
+  "tributi_imu": {
+   "service_id": "013139:wp:2563",
+   "title": "Calcolo IMU",
+   "source_url": "https://comune.magreglio.co.it/servizio/calcolo-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.magreglio.co.it/servizio/calcolo-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.magreglio.co.it/servizio/calcolo-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:13:51.551264Z"
+  }
+ }
+}

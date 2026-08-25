@@ -1,0 +1,123 @@
+{
+ "municipality_istat": "001045",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001045:comweb:richiedere-l-accesso-agli-atti-317-53458-1-50cc999ca0a508f84e9d20e1efa4ce7a",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.buttiglieraalta.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-53458-1-50cc999ca0a508f84e9d20e1efa4ce7a",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.buttiglieraalta.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-53458-1-50cc999ca0a508f84e9d20e1efa4ce7a",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.buttiglieraalta.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-53458-1-50cc999ca0a508f84e9d20e1efa4ce7a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.buttiglieraalta.to.it/lang/it/servizi/richiedere-laccesso-agli-atti/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.buttiglieraalta.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-53458-1-50cc999ca0a508f84e9d20e1efa4ce7a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:40:16.583544Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001045:comweb:cambio-residenza-305-53456-1-6b933ed92a4f86fd0941f5669e51ae31",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.buttiglieraalta.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-53456-1-6b933ed92a4f86fd0941f5669e51ae31",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.buttiglieraalta.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-53456-1-6b933ed92a4f86fd0941f5669e51ae31",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.buttiglieraalta.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-53456-1-6b933ed92a4f86fd0941f5669e51ae31",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.buttiglieraalta.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-53456-1-6b933ed92a4f86fd0941f5669e51ae31",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:40:18.793131Z"
+  },
+  "carta_identita": {
+   "service_id": "001045:comweb:carta-d-identita-elettronica-cie-788-53446-1-dd41d58c612d49451f3ff1aec26fb5f1",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.buttiglieraalta.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-53446-1-dd41d58c612d49451f3ff1aec26fb5f1",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.buttiglieraalta.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-53446-1-dd41d58c612d49451f3ff1aec26fb5f1",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.buttiglieraalta.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-53446-1-dd41d58c612d49451f3ff1aec26fb5f1",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:40:20.889498Z"
+  },
+  "tributi_tari": {
+   "service_id": "001045:comweb:pagamento-tassa-rifiuti-tari-659-53538-1-842ca869ac8e06dd91976888d8d61ddb",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.buttiglieraalta.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-53538-1-842ca869ac8e06dd91976888d8d61ddb",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.buttiglieraalta.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-53538-1-842ca869ac8e06dd91976888d8d61ddb",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.buttiglieraalta.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-53538-1-842ca869ac8e06dd91976888d8d61ddb",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:40:23.059348Z"
+  }
+ }
+}

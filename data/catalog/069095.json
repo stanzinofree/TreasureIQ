@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "069095",
+ "services": {
+  "accesso_atti": {
+   "service_id": "069095:wp:302",
+   "title": "Richiedere l’accesso agli atti",
+   "source_url": "https://comune.torricellapeligna.ch.it/servizio/richiedere-laccesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.torricellapeligna.ch.it/servizio/richiedere-laccesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.torricellapeligna.ch.it/servizio/richiedere-laccesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:23:58.687225Z"
+  },
+  "tributi_tari": {
+   "service_id": "069095:wp:1317",
+   "title": "Accesso al servizio TARI &#8211; Tassa sui rifiuti",
+   "source_url": "https://comune.torricellapeligna.ch.it/servizio/accesso-al-servizio-tari-tassa-sui-rifiuti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.torricellapeligna.ch.it/servizio/accesso-al-servizio-tari-tassa-sui-rifiuti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.torricellapeligna.ch.it/servizio/accesso-al-servizio-tari-tassa-sui-rifiuti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:24:00.418866Z"
+  }
+ }
+}

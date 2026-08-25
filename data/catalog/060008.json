@@ -1,0 +1,120 @@
+{
+ "municipality_istat": "060008",
+ "services": {
+  "accesso_atti": {
+   "service_id": "060008:wp:2213",
+   "title": "Richiedere accesso agli Atti",
+   "source_url": "https://www.comune.arce.fr.it/servizio/richiedere-laccesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.arce.fr.it/servizio/richiedere-laccesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.arce.fr.it/servizio/richiedere-laccesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:04:38.260078Z"
+  },
+  "carta_identita": {
+   "service_id": "060008:wp:1951",
+   "title": "Rilascio Carta Identita &#8211; CIE",
+   "source_url": "https://www.comune.arce.fr.it/servizio/rilascio-carta-identita/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.arce.fr.it/servizio/rilascio-carta-identita/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.arce.fr.it/servizio/rilascio-carta-identita/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:04:40.071176Z"
+  },
+  "stato_civile": {
+   "service_id": "060008:wp:2061",
+   "title": "Certificati di Stato Civile",
+   "source_url": "https://www.comune.arce.fr.it/servizio/certificati-stato-civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.arce.fr.it/servizio/certificati-stato-civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.arce.fr.it/servizio/certificati-stato-civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:04:41.731543Z"
+  },
+  "tributi_imu": {
+   "service_id": "060008:wp:2434",
+   "title": "Calcolare IUC/IMU",
+   "source_url": "https://www.comune.arce.fr.it/servizio/calcolare-iuc-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.arce.fr.it/servizio/calcolare-iuc-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.arce.fr.it/servizio/calcolare-iuc-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:04:43.319842Z"
+  },
+  "tributi_tari": {
+   "service_id": "060008:wp:2436",
+   "title": "Pagare TARI",
+   "source_url": "https://www.comune.arce.fr.it/servizio/pagare-tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.arce.fr.it/servizio/pagare-tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.arce.fr.it/servizio/pagare-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:04:44.953509Z"
+  }
+ }
+}

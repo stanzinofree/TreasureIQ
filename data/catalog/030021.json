@@ -1,0 +1,103 @@
+{
+ "municipality_istat": "030021",
+ "services": {
+  "accesso_atti": {
+   "service_id": "030021:wp:1151",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.cavazzocarnico.ud.it/?post_type=servizio&p=1151",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cavazzocarnico.ud.it/?post_type=servizio&p=1151",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cavazzocarnico.ud.it/?post_type=servizio&p=1151",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:39:03.184693Z"
+  },
+  "carta_identita": {
+   "service_id": "030021:wp:816",
+   "title": "Carta di identità elettronica",
+   "source_url": "https://www.comune.cavazzocarnico.ud.it/?post_type=servizio&p=816",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cavazzocarnico.ud.it/?post_type=servizio&p=816",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cavazzocarnico.ud.it/?post_type=servizio&p=816",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.cavazzocarnico.ud.it/wp-content/uploads/2024/11/Mod-CIE-assenso-espatrio-minore.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cavazzocarnico.ud.it/?post_type=servizio&p=816",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.cavazzocarnico.ud.it/wp-content/uploads/2024/11/Mod-CIE-cittadini-dimoranti.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cavazzocarnico.ud.it/?post_type=servizio&p=816",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.cavazzocarnico.ud.it/wp-content/uploads/2024/04/Reg_procedim_amm_vo_Cavazzo.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cavazzocarnico.ud.it/?post_type=servizio&p=816",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.cavazzocarnico.ud.it/wp-content/uploads/2024/11/Mod-CIE-autocert_imp_ta-ril_impronte-digitali.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cavazzocarnico.ud.it/?post_type=servizio&p=816",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T13:39:11.030835Z"
+  }
+ }
+}

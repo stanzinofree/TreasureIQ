@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "026057",
+ "services": {
+  "tributi_imu": {
+   "service_id": "026057:wp:3433",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.pievedisoligo.tv.it/?post_type=servizio&p=3433",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pievedisoligo.tv.it/?post_type=servizio&p=3433",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pievedisoligo.tv.it/?post_type=servizio&p=3433",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:33:11.295574Z"
+  }
+ }
+}

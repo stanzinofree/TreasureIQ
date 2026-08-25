@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "061097",
+ "services": {
+  "accesso_atti": {
+   "service_id": "061097:wp:644",
+   "title": "Richiesta di accesso agli atti",
+   "source_url": "https://comune.valledimaddaloni.ce.it/servizio/richiesta-di-accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.valledimaddaloni.ce.it/servizio/richiesta-di-accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.valledimaddaloni.ce.it/servizio/richiesta-di-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:10:49.280225Z"
+  },
+  "cambio_residenza": {
+   "service_id": "061097:wp:606",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.valledimaddaloni.ce.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.valledimaddaloni.ce.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.valledimaddaloni.ce.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:10:52.658290Z"
+  },
+  "carta_identita": {
+   "service_id": "061097:wp:615",
+   "title": "Richiesta CIE",
+   "source_url": "https://comune.valledimaddaloni.ce.it/servizio/richiesta-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.valledimaddaloni.ce.it/servizio/richiesta-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.valledimaddaloni.ce.it/servizio/richiesta-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:10:54.702121Z"
+  }
+ }
+}

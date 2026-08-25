@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "098055",
+ "services": {
+  "accesso_atti": {
+   "service_id": "098055:wp:1324",
+   "title": "Richiedere l’accesso agli atti edilizi",
+   "source_url": "https://comune.sordio.lo.it/servizio/richiedere-laccesso-agli-atti-edilizi/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.sordio.lo.it/servizio/richiedere-laccesso-agli-atti-edilizi/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.sordio.lo.it/servizio/richiedere-laccesso-agli-atti-edilizi/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:57:38.048284Z"
+  },
+  "cambio_residenza": {
+   "service_id": "098055:wp:1092",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.sordio.lo.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.sordio.lo.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.sordio.lo.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:57:39.733224Z"
+  },
+  "tributi_imu": {
+   "service_id": "098055:wp:692",
+   "title": "Calcolo IMU",
+   "source_url": "https://comune.sordio.lo.it/servizio/calcolo-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.sordio.lo.it/servizio/calcolo-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.sordio.lo.it/servizio/calcolo-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:57:41.304336Z"
+  }
+ }
+}

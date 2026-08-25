@@ -1,0 +1,64 @@
+{
+ "municipality_istat": "001318",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "001318:comweb:cambio-residenza-305-40358-1-dbf240ef9281a1d7fe829929ee2b416f",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.valchiusa.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-40358-1-dbf240ef9281a1d7fe829929ee2b416f",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.valchiusa.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-40358-1-dbf240ef9281a1d7fe829929ee2b416f",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.valchiusa.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-40358-1-dbf240ef9281a1d7fe829929ee2b416f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.valchiusa.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-40358-1-dbf240ef9281a1d7fe829929ee2b416f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:53:19.693883Z"
+  },
+  "carta_identita": {
+   "service_id": "001318:comweb:carta-d-identita-elettronica-cie-788-40348-1-3f7d508219f1d06c9ae8233078350929",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.valchiusa.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-40348-1-3f7d508219f1d06c9ae8233078350929",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.valchiusa.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-40348-1-3f7d508219f1d06c9ae8233078350929",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.valchiusa.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-40348-1-3f7d508219f1d06c9ae8233078350929",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:53:22.055300Z"
+  }
+ }
+}

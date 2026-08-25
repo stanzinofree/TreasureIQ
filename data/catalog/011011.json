@@ -1,0 +1,64 @@
+{
+ "municipality_istat": "011011",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "011011:comweb:cambio-residenza-305-43526-1-889a424eaa2ee9af3109bb5087f2b9b4",
+   "title": "Cambio Residenza",
+   "source_url": "https://comune.castelnuovomagra.sp.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-43526-1-889a424eaa2ee9af3109bb5087f2b9b4",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.castelnuovomagra.sp.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-43526-1-889a424eaa2ee9af3109bb5087f2b9b4",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.castelnuovomagra.sp.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-43526-1-889a424eaa2ee9af3109bb5087f2b9b4",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://comune.castelnuovomagra.sp.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-43526-1-889a424eaa2ee9af3109bb5087f2b9b4",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:12:46.248100Z"
+  },
+  "tributi_tari": {
+   "service_id": "011011:comweb:pagamento-tassa-rifiuti-tari-659-43608-1-aad46100db29f73a46dfbaf9f441b305",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://comune.castelnuovomagra.sp.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-43608-1-aad46100db29f73a46dfbaf9f441b305",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.castelnuovomagra.sp.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-43608-1-aad46100db29f73a46dfbaf9f441b305",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.castelnuovomagra.sp.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-43608-1-aad46100db29f73a46dfbaf9f441b305",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:12:49.382488Z"
+  }
+ }
+}

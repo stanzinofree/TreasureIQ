@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "083016",
+ "services": {
+  "tributi_imu": {
+   "service_id": "083016:wp:584",
+   "title": "Calcolo IMU",
+   "source_url": "https://www.comune.castroreale.me.it/servizio/calcolo-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castroreale.me.it/servizio/calcolo-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castroreale.me.it/servizio/calcolo-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:44:55.142683Z"
+  }
+ }
+}

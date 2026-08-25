@@ -1,0 +1,41 @@
+{
+ "municipality_istat": "007036",
+ "services": {
+  "stato_civile": {
+   "service_id": "007036:comweb:certificato-di-matrimonio-30-8541-1-2fdece121960001d27dc10d16e2c209f",
+   "title": "Certificato di matrimonio",
+   "source_url": "https://www.comune.issime.ao.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-matrimonio-30-8541-1-2fdece121960001d27dc10d16e2c209f",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.issime.ao.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-matrimonio-30-8541-1-2fdece121960001d27dc10d16e2c209f",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.issime.ao.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-matrimonio-30-8541-1-2fdece121960001d27dc10d16e2c209f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/certificati/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.issime.ao.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-matrimonio-30-8541-1-2fdece121960001d27dc10d16e2c209f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:07:44.811374Z"
+  }
+ }
+}

@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "061005",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "061005:wp:4301",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.aversa.ce.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.aversa.ce.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.aversa.ce.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:09:03.104217Z"
+  },
+  "carta_identita": {
+   "service_id": "061005:wp:4401",
+   "title": "Prenotazione carta di identità elettronica",
+   "source_url": "https://comune.aversa.ce.it/servizio/prenotazione-carta-di-identita-elettronica/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.aversa.ce.it/servizio/prenotazione-carta-di-identita-elettronica/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.aversa.ce.it/servizio/prenotazione-carta-di-identita-elettronica/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:09:04.784190Z"
+  },
+  "tributi_tari": {
+   "service_id": "061005:wp:4631",
+   "title": "TARI &#8211; Tassa sui Rifiuti",
+   "source_url": "https://comune.aversa.ce.it/servizio/tari-tassa-sui-rifiuti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.aversa.ce.it/servizio/tari-tassa-sui-rifiuti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.aversa.ce.it/servizio/tari-tassa-sui-rifiuti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:09:06.646271Z"
+  }
+ }
+}

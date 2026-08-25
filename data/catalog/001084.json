@@ -1,0 +1,146 @@
+{
+ "municipality_istat": "001084",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001084:comweb:richiedere-l-accesso-agli-atti-317-34420-1-bd806da40ff7b68c1c5c9fb01d7a81c4",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.cintano.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-34420-1-bd806da40ff7b68c1c5c9fb01d7a81c4",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cintano.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-34420-1-bd806da40ff7b68c1c5c9fb01d7a81c4",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cintano.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-34420-1-bd806da40ff7b68c1c5c9fb01d7a81c4",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.cintano.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=cntn1264&amp;IDPr=11143",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.cintano.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-34420-1-bd806da40ff7b68c1c5c9fb01d7a81c4",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:41:53.172374Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001084:comweb:cambio-residenza-305-34418-1-881fd262a2cbd7671920eb991687c6a9",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.cintano.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-34418-1-881fd262a2cbd7671920eb991687c6a9",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cintano.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-34418-1-881fd262a2cbd7671920eb991687c6a9",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cintano.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-34418-1-881fd262a2cbd7671920eb991687c6a9",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.cintano.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-34418-1-881fd262a2cbd7671920eb991687c6a9",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:41:55.078010Z"
+  },
+  "carta_identita": {
+   "service_id": "001084:comweb:carta-d-identita-elettronica-cie-788-34408-1-9345dc9ad070ce5ccba7cf84b57096cc",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.cintano.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-34408-1-9345dc9ad070ce5ccba7cf84b57096cc",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cintano.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-34408-1-9345dc9ad070ce5ccba7cf84b57096cc",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cintano.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-34408-1-9345dc9ad070ce5ccba7cf84b57096cc",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:41:57.424128Z"
+  },
+  "tributi_imu": {
+   "service_id": "001084:comweb:pagare-tributi-imu-600-34509-1-b82abf820c3e62f26b74c376138c7c25",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.cintano.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-34509-1-b82abf820c3e62f26b74c376138c7c25",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cintano.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-34509-1-b82abf820c3e62f26b74c376138c7c25",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cintano.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-34509-1-b82abf820c3e62f26b74c376138c7c25",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:41:59.982515Z"
+  },
+  "tributi_tari": {
+   "service_id": "001084:comweb:pagamento-tassa-rifiuti-tari-659-34500-1-9171fe2afe673a9b0c84cd3b8bfbd0ae",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.cintano.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-34500-1-9171fe2afe673a9b0c84cd3b8bfbd0ae",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cintano.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-34500-1-9171fe2afe673a9b0c84cd3b8bfbd0ae",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cintano.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-34500-1-9171fe2afe673a9b0c84cd3b8bfbd0ae",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:42:02.076327Z"
+  }
+ }
+}

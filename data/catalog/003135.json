@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "003135",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "003135:comweb:cambio-residenza-305-51860-1-898baa665780838e6ff614fd267fa8b2",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.sanpietromosezzo.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-51860-1-898baa665780838e6ff614fd267fa8b2",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanpietromosezzo.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-51860-1-898baa665780838e6ff614fd267fa8b2",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanpietromosezzo.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-51860-1-898baa665780838e6ff614fd267fa8b2",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:59:34.776839Z"
+  },
+  "carta_identita": {
+   "service_id": "003135:comweb:carta-d-identita-1-51850-1-aa5aaeee9fa5005ae9643627b14c39c6",
+   "title": "Carta d'Identità",
+   "source_url": "https://www.comune.sanpietromosezzo.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-51850-1-aa5aaeee9fa5005ae9643627b14c39c6",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanpietromosezzo.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-51850-1-aa5aaeee9fa5005ae9643627b14c39c6",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanpietromosezzo.no.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-1-51850-1-aa5aaeee9fa5005ae9643627b14c39c6",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:59:37.757611Z"
+  }
+ }
+}

@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "111076",
+ "services": {
+  "accesso_atti": {
+   "service_id": "111076:wp:2362",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.serdiana.su.it/?post_type=servizio&p=2362",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.serdiana.su.it/?post_type=servizio&p=2362",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.serdiana.su.it/?post_type=servizio&p=2362",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T15:06:17.523796Z"
+  }
+ }
+}

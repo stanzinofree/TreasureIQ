@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "015165",
+ "services": {
+  "carta_identita": {
+   "service_id": "015165:comweb:carta-d-identita-per-minori-404-6819-1-0223f10d9ecf24758282e944d9afdced",
+   "title": "Carta d'identità per minori",
+   "source_url": "https://www.comune.ozzero.mi.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-per-minori-404-6819-1-0223f10d9ecf24758282e944d9afdced",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ozzero.mi.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-per-minori-404-6819-1-0223f10d9ecf24758282e944d9afdced",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ozzero.mi.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-per-minori-404-6819-1-0223f10d9ecf24758282e944d9afdced",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:15:47.264285Z"
+  },
+  "tributi_imu": {
+   "service_id": "015165:comweb:imposta-municipale-propria-imu-953-6920-1-b754c903a5a6e3c67310b5bb3eac9bb6",
+   "title": "Imposta Municipale Propria (IMU)",
+   "source_url": "https://www.comune.ozzero.mi.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-6920-1-b754c903a5a6e3c67310b5bb3eac9bb6",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ozzero.mi.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-6920-1-b754c903a5a6e3c67310b5bb3eac9bb6",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ozzero.mi.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-6920-1-b754c903a5a6e3c67310b5bb3eac9bb6",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:15:51.056688Z"
+  }
+ }
+}

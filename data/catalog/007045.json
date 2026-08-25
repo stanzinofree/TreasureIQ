@@ -1,0 +1,116 @@
+{
+ "municipality_istat": "007045",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "007045:wp:1830",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.nus.ao.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.nus.ao.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.nus.ao.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:08:40.600040Z"
+  },
+  "tributi_tari": {
+   "service_id": "007045:wp:3658",
+   "title": "Tassa sui rifiuti (TARI)",
+   "source_url": "https://comune.nus.ao.it/servizio/tassa-sui-rifiuti-tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.nus.ao.it/servizio/tassa-sui-rifiuti-tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.nus.ao.it/servizio/tassa-sui-rifiuti-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.nus.ao.it/wp-content/uploads/2026/08/DCC-28-2026-presa-datto-PEF-2026.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.nus.ao.it/servizio/tassa-sui-rifiuti-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.nus.ao.it/wp-content/uploads/2026/08/Modalita-applicative-del-bonus-sociale-rifiuti.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.nus.ao.it/servizio/tassa-sui-rifiuti-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.nus.ao.it/wp-content/uploads/2026/08/Modalita-applicative-delle-componenti-perequative.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.nus.ao.it/servizio/tassa-sui-rifiuti-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.nus.ao.it/wp-content/uploads/2026/08/Piano-tariffario-TARI-2026.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.nus.ao.it/servizio/tassa-sui-rifiuti-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.nus.ao.it/wp-content/uploads/2026/08/DGC-108-2026-scadenze-riscossione-TARI-2026-1.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.nus.ao.it/servizio/tassa-sui-rifiuti-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:08:47.829452Z"
+  }
+ }
+}

@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "053021",
+ "services": {
+  "carta_identita": {
+   "service_id": "053021:comweb:carta-d-identita-elettronica-cie-788-60615-1-1580d142086efbdb68b4e135d6d52a6d",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.roccastrada.gr.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-60615-1-1580d142086efbdb68b4e135d6d52a6d",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.roccastrada.gr.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-60615-1-1580d142086efbdb68b4e135d6d52a6d",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.roccastrada.gr.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-60615-1-1580d142086efbdb68b4e135d6d52a6d",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T13:57:54.226613Z"
+  },
+  "stato_civile": {
+   "service_id": "053021:comweb:certificato-di-nascita-26-60620-1-e87b715ca2489abb604316605abbe620",
+   "title": "Certificato di nascita",
+   "source_url": "https://www.comune.roccastrada.gr.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-nascita-26-60620-1-e87b715ca2489abb604316605abbe620",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.roccastrada.gr.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-nascita-26-60620-1-e87b715ca2489abb604316605abbe620",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.roccastrada.gr.it/it-it/servizi/anagrafe-e-stato-civile/certificato-di-nascita-26-60620-1-e87b715ca2489abb604316605abbe620",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T13:57:56.947192Z"
+  },
+  "tributi_imu": {
+   "service_id": "053021:comweb:pagare-tributi-imu-600-60716-1-7f8a1fdb2c89f89b12b12b1bdcd97d5a",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.roccastrada.gr.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-60716-1-7f8a1fdb2c89f89b12b12b1bdcd97d5a",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.roccastrada.gr.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-60716-1-7f8a1fdb2c89f89b12b12b1bdcd97d5a",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.roccastrada.gr.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-60716-1-7f8a1fdb2c89f89b12b12b1bdcd97d5a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T13:57:59.979479Z"
+  },
+  "tributi_tari": {
+   "service_id": "053021:comweb:pagamento-tassa-rifiuti-tari-659-60707-1-dd0c151e946e12d32d94c4d32bc242ff",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.roccastrada.gr.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-60707-1-dd0c151e946e12d32d94c4d32bc242ff",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.roccastrada.gr.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-60707-1-dd0c151e946e12d32d94c4d32bc242ff",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.roccastrada.gr.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-60707-1-dd0c151e946e12d32d94c4d32bc242ff",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T13:58:03.144151Z"
+  }
+ }
+}

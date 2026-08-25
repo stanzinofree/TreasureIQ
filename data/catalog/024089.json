@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "024089",
+ "services": {
+  "accesso_atti": {
+   "service_id": "024089:wp:175",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.rotzo.vi.it/?post_type=servizio&p=175",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rotzo.vi.it/?post_type=servizio&p=175",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rotzo.vi.it/?post_type=servizio&p=175",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:14:00.570250Z"
+  },
+  "cambio_residenza": {
+   "service_id": "024089:wp:497",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.rotzo.vi.it/?post_type=servizio&p=497",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rotzo.vi.it/?post_type=servizio&p=497",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rotzo.vi.it/?post_type=servizio&p=497",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:14:08.232938Z"
+  },
+  "stato_civile": {
+   "service_id": "024089:wp:505",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.rotzo.vi.it/?post_type=servizio&p=505",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rotzo.vi.it/?post_type=servizio&p=505",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rotzo.vi.it/?post_type=servizio&p=505",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:14:17.284290Z"
+  },
+  "tributi_imu": {
+   "service_id": "024089:wp:498",
+   "title": "Calcolo IMU online",
+   "source_url": "https://www.comune.rotzo.vi.it/?post_type=servizio&p=498",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rotzo.vi.it/?post_type=servizio&p=498",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rotzo.vi.it/?post_type=servizio&p=498",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:14:24.436588Z"
+  }
+ }
+}

@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "103046",
+ "services": {
+  "accesso_atti": {
+   "service_id": "103046:comweb:richiedere-l-accesso-agli-atti-317-61425-1-cf99f9aebc489b491b9470aa7c3d67f6",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.montecrestese.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-61425-1-cf99f9aebc489b491b9470aa7c3d67f6",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montecrestese.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-61425-1-cf99f9aebc489b491b9470aa7c3d67f6",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montecrestese.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-61425-1-cf99f9aebc489b491b9470aa7c3d67f6",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:03:18.094803Z"
+  },
+  "cambio_residenza": {
+   "service_id": "103046:comweb:cambio-residenza-305-61423-1-c529e15d9c6b6fd350f75fee823f6a82",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.montecrestese.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-61423-1-c529e15d9c6b6fd350f75fee823f6a82",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montecrestese.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-61423-1-c529e15d9c6b6fd350f75fee823f6a82",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montecrestese.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-61423-1-c529e15d9c6b6fd350f75fee823f6a82",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:03:20.180593Z"
+  }
+ }
+}

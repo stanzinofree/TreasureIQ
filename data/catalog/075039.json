@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "075039",
+ "services": {
+  "tributi_imu": {
+   "service_id": "075039:wp:829",
+   "title": "Dichiarazione IMU",
+   "source_url": "https://www.comune.maglie.le.it/servizio/dichiarazione-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.maglie.le.it/servizio/dichiarazione-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.maglie.le.it/servizio/dichiarazione-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:29:18.386349Z"
+  }
+ }
+}

@@ -1,0 +1,87 @@
+{
+ "municipality_istat": "018036",
+ "services": {
+  "carta_identita": {
+   "service_id": "018036:comweb:carta-d-identita-elettronica-cie-788-6423-1-e25e16796872cf82d9ce3e707941ce83",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.castana.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-6423-1-e25e16796872cf82d9ce3e707941ce83",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castana.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-6423-1-e25e16796872cf82d9ce3e707941ce83",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castana.pv.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-6423-1-e25e16796872cf82d9ce3e707941ce83",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:19:22.274042Z"
+  },
+  "tributi_imu": {
+   "service_id": "018036:comweb:imposta-municipale-propria-imu-953-6524-1-e7922aab416db66e66060d8c45ee44d0",
+   "title": "Imposta Municipale Propria (IMU)",
+   "source_url": "https://www.comune.castana.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-6524-1-e7922aab416db66e66060d8c45ee44d0",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castana.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-6524-1-e7922aab416db66e66060d8c45ee44d0",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castana.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-6524-1-e7922aab416db66e66060d8c45ee44d0",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.amministrazionicomunali.it/imu/calcolo_imu.php",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.castana.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-6524-1-e7922aab416db66e66060d8c45ee44d0",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:19:24.697474Z"
+  },
+  "tributi_tari": {
+   "service_id": "018036:comweb:tassa-rifiuti-tari-954-6515-1-30bf77f28e856083efc7c2f82c56c2e3",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.castana.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-6515-1-30bf77f28e856083efc7c2f82c56c2e3",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castana.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-6515-1-30bf77f28e856083efc7c2f82c56c2e3",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castana.pv.it/it-it/servizi/tributi-finanze-e-contravvenzioni/tassa-rifiuti-tari-954-6515-1-30bf77f28e856083efc7c2f82c56c2e3",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:19:27.037113Z"
+  }
+ }
+}

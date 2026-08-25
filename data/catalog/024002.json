@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "024002",
+ "services": {
+  "carta_identita": {
+   "service_id": "024002:wp:878",
+   "title": "Rilascio Carta di Identità Elettronica",
+   "source_url": "https://www.comune.albettone.vi.it/?post_type=servizio&p=878",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.albettone.vi.it/?post_type=servizio&p=878",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.albettone.vi.it/?post_type=servizio&p=878",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:50:53.203348Z"
+  },
+  "stato_civile": {
+   "service_id": "024002:wp:1012",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.albettone.vi.it/?post_type=servizio&p=1012",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.albettone.vi.it/?post_type=servizio&p=1012",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.albettone.vi.it/?post_type=servizio&p=1012",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:51:05.948989Z"
+  },
+  "tributi_imu": {
+   "service_id": "024002:wp:996",
+   "title": "Calcolo IMU online 2026",
+   "source_url": "https://www.comune.albettone.vi.it/?post_type=servizio&p=996",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.albettone.vi.it/?post_type=servizio&p=996",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.albettone.vi.it/?post_type=servizio&p=996",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:51:12.797417Z"
+  }
+ }
+}

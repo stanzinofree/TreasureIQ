@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "082045",
+ "services": {
+  "accesso_atti": {
+   "service_id": "082045:wp:2044",
+   "title": "Richiedere Accesso agli atti",
+   "source_url": "https://www.comune.lercarafriddi.pa.it/servizio/richiedere-accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.lercarafriddi.pa.it/servizio/richiedere-accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.lercarafriddi.pa.it/servizio/richiedere-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:43:42.609799Z"
+  }
+ }
+}

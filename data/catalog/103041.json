@@ -1,0 +1,123 @@
+{
+ "municipality_istat": "103041",
+ "services": {
+  "accesso_atti": {
+   "service_id": "103041:comweb:richiedere-l-accesso-agli-atti-317-30987-1-3523b601c896fa594d3eb9c36ab5cb3d",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.malesco.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-30987-1-3523b601c896fa594d3eb9c36ab5cb3d",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.malesco.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-30987-1-3523b601c896fa594d3eb9c36ab5cb3d",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.malesco.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-30987-1-3523b601c896fa594d3eb9c36ab5cb3d",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.malesco.vb.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=mlsc1258&amp;IDPr=12192",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.malesco.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-30987-1-3523b601c896fa594d3eb9c36ab5cb3d",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:02:59.365207Z"
+  },
+  "cambio_residenza": {
+   "service_id": "103041:comweb:cambio-residenza-305-30985-1-5abafa461f4c82225cc2055eb306480b",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.malesco.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-30985-1-5abafa461f4c82225cc2055eb306480b",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.malesco.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-30985-1-5abafa461f4c82225cc2055eb306480b",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.malesco.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-30985-1-5abafa461f4c82225cc2055eb306480b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.malesco.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-30985-1-5abafa461f4c82225cc2055eb306480b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:03:01.305964Z"
+  },
+  "carta_identita": {
+   "service_id": "103041:comweb:carta-d-identita-elettronica-cie-788-30975-1-d198f18fe5e61660877183a62e623b1b",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.malesco.vb.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-30975-1-d198f18fe5e61660877183a62e623b1b",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.malesco.vb.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-30975-1-d198f18fe5e61660877183a62e623b1b",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.malesco.vb.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-30975-1-d198f18fe5e61660877183a62e623b1b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:03:03.402921Z"
+  },
+  "tributi_tari": {
+   "service_id": "103041:comweb:pagamento-tassa-rifiuti-tari-659-31067-1-134e025a195bca2885cbc73d4b1ab071",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.malesco.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-31067-1-134e025a195bca2885cbc73d4b1ab071",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.malesco.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-31067-1-134e025a195bca2885cbc73d4b1ab071",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.malesco.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-31067-1-134e025a195bca2885cbc73d4b1ab071",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:03:05.502750Z"
+  }
+ }
+}

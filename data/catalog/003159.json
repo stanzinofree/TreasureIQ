@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "003159",
+ "services": {
+  "accesso_atti": {
+   "service_id": "003159:comweb:richiedere-l-accesso-agli-atti-317-49601-1-dee29cbba36258fcc0a8d42ca7996b1f",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.vicolungo.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-49601-1-dee29cbba36258fcc0a8d42ca7996b1f",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vicolungo.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-49601-1-dee29cbba36258fcc0a8d42ca7996b1f",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vicolungo.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-49601-1-dee29cbba36258fcc0a8d42ca7996b1f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.vicolungo.no.it/lang/it/servizi/richiedere-laccesso-agli-atti/access",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.vicolungo.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-49601-1-dee29cbba36258fcc0a8d42ca7996b1f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:00:03.147861Z"
+  },
+  "cambio_residenza": {
+   "service_id": "003159:comweb:cambio-residenza-305-49599-1-edd54b22d8cd87a27ce604d490774c5f",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.vicolungo.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-49599-1-edd54b22d8cd87a27ce604d490774c5f",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vicolungo.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-49599-1-edd54b22d8cd87a27ce604d490774c5f",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vicolungo.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-49599-1-edd54b22d8cd87a27ce604d490774c5f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.vicolungo.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-49599-1-edd54b22d8cd87a27ce604d490774c5f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:00:05.289783Z"
+  },
+  "tributi_tari": {
+   "service_id": "003159:comweb:pagamento-tassa-rifiuti-tari-659-49681-1-9c29d17a887d2cbe746c882b4023d5e0",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.vicolungo.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-49681-1-9c29d17a887d2cbe746c882b4023d5e0",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vicolungo.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-49681-1-9c29d17a887d2cbe746c882b4023d5e0",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vicolungo.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-49681-1-9c29d17a887d2cbe746c882b4023d5e0",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T11:00:07.472279Z"
+  }
+ }
+}

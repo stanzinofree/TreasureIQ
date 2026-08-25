@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "007025",
+ "services": {
+  "accesso_atti": {
+   "service_id": "007025:wp:1632",
+   "title": "Richiedere l&#8217;accesso agli atti",
+   "source_url": "https://www.comune.emarese.ao.it/servizio/richiedere-laccesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.emarese.ao.it/servizio/richiedere-laccesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.emarese.ao.it/servizio/richiedere-laccesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:06:25.451700Z"
+  },
+  "carta_identita": {
+   "service_id": "007025:wp:1023",
+   "title": "Carta di identità elettronica – CIE",
+   "source_url": "https://www.comune.emarese.ao.it/servizio/carta-di-identita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.emarese.ao.it/servizio/carta-di-identita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.emarese.ao.it/servizio/carta-di-identita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:06:31.964646Z"
+  },
+  "tributi_tari": {
+   "service_id": "007025:wp:2004",
+   "title": "Approvazione aliquote 2026 &#8211; Tassa sui rifiuti (TARI)",
+   "source_url": "https://www.comune.emarese.ao.it/servizio/approvazione-aliquote-2026-tassa-sui-rifiuti-tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.emarese.ao.it/servizio/approvazione-aliquote-2026-tassa-sui-rifiuti-tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.emarese.ao.it/servizio/approvazione-aliquote-2026-tassa-sui-rifiuti-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T11:06:37.379853Z"
+  }
+ }
+}

@@ -1,0 +1,123 @@
+{
+ "municipality_istat": "001216",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001216:comweb:richiedere-l-accesso-agli-atti-317-34288-1-8a392dfba831d86c457f13c97ec6a9d6",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.rivara.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-34288-1-8a392dfba831d86c457f13c97ec6a9d6",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rivara.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-34288-1-8a392dfba831d86c457f13c97ec6a9d6",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rivara.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-34288-1-8a392dfba831d86c457f13c97ec6a9d6",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.rivara.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=rvr1018&amp;IDPr=10791",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.rivara.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-34288-1-8a392dfba831d86c457f13c97ec6a9d6",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:47:32.180473Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001216:comweb:cambio-residenza-305-34286-1-b22ef143ff4d6d11c5f836b1f8e1c10a",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.rivara.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-34286-1-b22ef143ff4d6d11c5f836b1f8e1c10a",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rivara.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-34286-1-b22ef143ff4d6d11c5f836b1f8e1c10a",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rivara.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-34286-1-b22ef143ff4d6d11c5f836b1f8e1c10a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.rivara.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-34286-1-b22ef143ff4d6d11c5f836b1f8e1c10a",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:47:34.062787Z"
+  },
+  "carta_identita": {
+   "service_id": "001216:comweb:carta-d-identita-elettronica-cie-788-34276-1-ea5790354104fa98abb22d39b38bc85c",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.rivara.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-34276-1-ea5790354104fa98abb22d39b38bc85c",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rivara.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-34276-1-ea5790354104fa98abb22d39b38bc85c",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rivara.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-34276-1-ea5790354104fa98abb22d39b38bc85c",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:47:36.120061Z"
+  },
+  "tributi_tari": {
+   "service_id": "001216:comweb:pagamento-tassa-rifiuti-tari-659-34368-1-cfdaedc9b49483f7316630de79eac102",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.rivara.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-34368-1-cfdaedc9b49483f7316630de79eac102",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rivara.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-34368-1-cfdaedc9b49483f7316630de79eac102",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rivara.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-34368-1-cfdaedc9b49483f7316630de79eac102",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:47:38.264349Z"
+  }
+ }
+}

@@ -1,0 +1,123 @@
+{
+ "municipality_istat": "001001",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001001:comweb:richiedere-l-accesso-agli-atti-317-22803-1-f2f57469e2e34317d5612d9f2d0e7f50",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.aglie.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-22803-1-f2f57469e2e34317d5612d9f2d0e7f50",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.aglie.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-22803-1-f2f57469e2e34317d5612d9f2d0e7f50",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.aglie.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-22803-1-f2f57469e2e34317d5612d9f2d0e7f50",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.aglie.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=gl1285&amp;IDPr=11543",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.aglie.to.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-22803-1-f2f57469e2e34317d5612d9f2d0e7f50",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:38:03.122400Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001001:comweb:cambio-residenza-305-22801-1-f8ed806f0a9e480cb1bd70418787502c",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.aglie.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-22801-1-f8ed806f0a9e480cb1bd70418787502c",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.aglie.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-22801-1-f8ed806f0a9e480cb1bd70418787502c",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.aglie.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-22801-1-f8ed806f0a9e480cb1bd70418787502c",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.aglie.to.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-22801-1-f8ed806f0a9e480cb1bd70418787502c",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:38:04.867427Z"
+  },
+  "tributi_imu": {
+   "service_id": "001001:comweb:pagare-tributi-imu-600-22892-1-a3256eda7bd21d2164edd278345c061f",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.aglie.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-22892-1-a3256eda7bd21d2164edd278345c061f",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.aglie.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-22892-1-a3256eda7bd21d2164edd278345c061f",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.aglie.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-22892-1-a3256eda7bd21d2164edd278345c061f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:38:07.393466Z"
+  },
+  "tributi_tari": {
+   "service_id": "001001:comweb:pagamento-tassa-rifiuti-tari-659-22883-1-809d1b6227988c467e9a06be0ea34eab",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.aglie.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-22883-1-809d1b6227988c467e9a06be0ea34eab",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.aglie.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-22883-1-809d1b6227988c467e9a06be0ea34eab",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.aglie.to.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-22883-1-809d1b6227988c467e9a06be0ea34eab",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T10:38:09.428929Z"
+  }
+ }
+}

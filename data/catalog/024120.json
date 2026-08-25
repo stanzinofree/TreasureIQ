@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "024120",
+ "services": {
+  "accesso_atti": {
+   "service_id": "024120:wp:286",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.zermeghedo.vi.it/?post_type=servizio&p=286",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.zermeghedo.vi.it/?post_type=servizio&p=286",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.zermeghedo.vi.it/?post_type=servizio&p=286",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:19:47.241471Z"
+  },
+  "cambio_residenza": {
+   "service_id": "024120:wp:755",
+   "title": "Cambio di residenza tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.zermeghedo.vi.it/?post_type=servizio&p=755",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.zermeghedo.vi.it/?post_type=servizio&p=755",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.zermeghedo.vi.it/?post_type=servizio&p=755",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:19:52.460800Z"
+  },
+  "stato_civile": {
+   "service_id": "024120:wp:900",
+   "title": "Certificato di nascita per cittadini europei tramite Portale Nazionale - ANPR",
+   "source_url": "https://www.comune.zermeghedo.vi.it/?post_type=servizio&p=900",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.zermeghedo.vi.it/?post_type=servizio&p=900",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.zermeghedo.vi.it/?post_type=servizio&p=900",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T12:20:03.361406Z"
+  }
+ }
+}

@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "103029",
+ "services": {
+  "accesso_atti": {
+   "service_id": "103029:comweb:richiedere-l-accesso-agli-atti-317-35740-1-4c4a12eaae8df890619ddeffc4da6a18",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.druogno.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-35740-1-4c4a12eaae8df890619ddeffc4da6a18",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.druogno.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-35740-1-4c4a12eaae8df890619ddeffc4da6a18",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.druogno.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-35740-1-4c4a12eaae8df890619ddeffc4da6a18",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.druogno.vb.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=drgn770&amp;IDPr=11333",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.druogno.vb.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-35740-1-4c4a12eaae8df890619ddeffc4da6a18",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:02:00.353108Z"
+  },
+  "cambio_residenza": {
+   "service_id": "103029:comweb:cambio-residenza-305-35738-1-ff8a2b1a57a0748887bc3e1e72a11543",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.druogno.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-35738-1-ff8a2b1a57a0748887bc3e1e72a11543",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.druogno.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-35738-1-ff8a2b1a57a0748887bc3e1e72a11543",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.druogno.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-35738-1-ff8a2b1a57a0748887bc3e1e72a11543",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.druogno.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-35738-1-ff8a2b1a57a0748887bc3e1e72a11543",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:02:02.376007Z"
+  },
+  "tributi_tari": {
+   "service_id": "103029:comweb:pagamento-tassa-rifiuti-tari-659-35820-1-323427c3e157debd38c7a43640f8c046",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.druogno.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-35820-1-323427c3e157debd38c7a43640f8c046",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.druogno.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-35820-1-323427c3e157debd38c7a43640f8c046",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.druogno.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-35820-1-323427c3e157debd38c7a43640f8c046",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-25T15:02:04.358774Z"
+  }
+ }
+}

@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "072003",
+ "services": {
+  "accesso_atti": {
+   "service_id": "072003:wp:459",
+   "title": "Richiedere accesso agli atti",
+   "source_url": "https://www.comune.alberobello.ba.it/servizio/accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.alberobello.ba.it/servizio/accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.alberobello.ba.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:26:01.920809Z"
+  },
+  "tributi_imu": {
+   "service_id": "072003:wp:445",
+   "title": "Dichiarazione IMU",
+   "source_url": "https://www.comune.alberobello.ba.it/servizio/dichiarazione-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.alberobello.ba.it/servizio/dichiarazione-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.alberobello.ba.it/servizio/dichiarazione-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:26:06.690553Z"
+  }
+ }
+}

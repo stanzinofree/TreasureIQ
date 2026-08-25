@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "097026",
+ "services": {
+  "stato_civile": {
+   "service_id": "097026:wp:325",
+   "title": "Richiesta certificato di nascita",
+   "source_url": "https://comune.costamasnaga.lc.it/servizio/richiesta-certificato-di-nascita/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.costamasnaga.lc.it/servizio/richiesta-certificato-di-nascita/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.costamasnaga.lc.it/servizio/richiesta-certificato-di-nascita/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:56:27.540608Z"
+  },
+  "tributi_imu": {
+   "service_id": "097026:wp:313",
+   "title": "IMU (Imposta Municipale Propria)",
+   "source_url": "https://comune.costamasnaga.lc.it/servizio/imu-imposta-municipale-propria/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.costamasnaga.lc.it/servizio/imu-imposta-municipale-propria/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.costamasnaga.lc.it/servizio/imu-imposta-municipale-propria/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "wordpress_agid",
+   "discovered_at": "2026-08-25T14:56:33.075518Z"
+  }
+ }
+}

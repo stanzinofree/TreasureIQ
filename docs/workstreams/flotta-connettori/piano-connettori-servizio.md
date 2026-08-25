@@ -99,6 +99,35 @@ Sonda live read-only su 2 comuni: **Storo** `022183` (`www.comune.storo.tn.it`) 
 9. **dialetti / sovrapposizione**: vendor unico OpenCity Labs/eZ. **Stesso ceppo di comunibootstrapitalia (order 1)**: entrambi bootstrap-italia su CDN `opencityitalia`. Da verificare se comunibootstrapitalia espone lo stesso `/opendata/api/` — **potrebbero essere lo stesso adapter**, non due. Cfr. [[comunibootstrapitalia-e-openweb]], §3-bis.
 10. **DECISIONE**: la pista **OpenData REST è concreta e viva** (endpoint confermato su **2 comuni**: stesso stack `opencityitalia`, stessa semantica d'errore) **ma la scheda NON è ancora verde**: manca la grammatica `q` per-ServiceKey e gli identifier di classe; il catalogo HTML non è una GET secca. ⇒ **Nessuna implementazione ora.** Prossimi passi recon (read-only): (a) ottenere una risposta *hit* valida da `content/search` con la DSL eZ Find corretta + un class-id reale (leggere il bundle JS per il query-builder, o `tags_tree`); (b) mappare le 6 ServiceKey a query deterministiche; (c) sciogliere la sovrapposizione con order 1; (d) allargare il campione a un comune OpenPA grande (Storo/Lodrino sono istanze PNRR piccole). Solo allora OpenPA diventa il primo nuovo adapter.
 
+## 3-quater. Recon grammatica eZ Find — VERDE 6/6 (order 2, 2026-08-25)
+
+Sessione read-only successiva a §3-ter. Chiude i punti aperti 3/9/10: grammatica `q`, class-id reale, mapping 6 ServiceKey con query live, confronto order 1. **Criterio verde soddisfatto** (query live riproducibile per ogni chiave), con 2 caveat implementativi documentati.
+
+- **Grammatica `q`** (verbatim dal query-builder JS, `baseQuery = "q = '" + escapeValue(q) + "' and " + baseQuery`):
+  ```
+  q = '<testo>' and classes [<classIdentifier>] and limit <n> [offset <m>] [sort [<campo>=><asc|desc>]]
+  ```
+  Full-text = campo letterale `q`, operatore `=`, valore single-quoted. Supporta anche `in [...]`, `range [...]`, `raw[<solr_field>] = <val>`, `select-fields [...]`. Endpoint effettivi: `/opendata/api/content/search/`, `/classes/`, `/tags_tree/`, `/geo/search/`.
+- **classIdentifier reale = `public_service`**. Base-query server-side osservata: `raw[ezf_df_tag_ids] = 2455 and classes [public_service] sort [name=>asc]`. Confermato in `metadata.classIdentifier` di ogni hit. (Ex punto 3 §3-ter: la stringa `servizio` era sbagliata.)
+- **Mapping 6 ServiceKey — tutte HTTP 200, live** (Storo `022183` TN, Lodrino BS):
+
+  | ServiceKey | comune | hits | id / nota |
+  |---|---|---|---|
+  | `carta_identita` | Storo | 18 | id 567 (CIE) |
+  | `cambio_residenza` | Storo | 6 | id 596 |
+  | `accesso_atti` | Storo | 1 | id 425 |
+  | `stato_civile` | Storo | 44 | alta recall |
+  | `tributi_imu` | Lodrino | 2 | id 1264. **Storo IMU=0** → in Trentino è **IMIS** (id 587): fallback lessicale ⚠ |
+  | `tributi_tari` | Lodrino | 4 | id 496 in classe **`document`**, NON `public_service` ⚠ |
+
+- **Confronto order 1 (comunibootstrapitalia/OpenWeb)**: Castro (BG) `www.comune.castro.bg.it/opendata/api/content/search/?q=` → **HTTP 404 (HTML)**, nessuna semantica eZ. ⇒ **due adapter distinti**: OpenPA/OpenCity (eZ Publish + OpenData REST) vs comunibootstrapitalia/OpenWeb (HTML-only, no `/opendata/api/`). L'ipotesi §3-bis/§3-ter punto 9 "stesso adapter" è **SMENTITA**.
+- **Caveat per il futuro connettore** (aperti, da gestire in impl):
+  1. **IMU→IMIS**: nei comuni TN il tributo è IMIS; il match per-key vuole un fallback lessicale, non solo `imu`.
+  2. **TARI in classe `document`**: la ricerca per-key non può fissare `classes [public_service]` per i tributi — TARI cade in `document`.
+  3. **URL cittadino non nei metadata**: `link` = API `read/<id>`; il `source_url` cittadino va derivato dal path nodo (`assignedNodes.path_string` / `mainNodeId`), non usato diretto.
+
+⇒ **OpenPA è il primo nuovo adapter candidato pronto** (superficie documentata + verificata). Implementazione ancora **non autorizzata**: attende go-ahead esplicito. Cfr. §4 (punti di sincronizzazione), [[openpa-recon-opendata-rest]].
+
 ## 4. Punti di sincronizzazione a ogni nuovo connettore-servizio
 
 > ⚠️ Riferimenti da ispezione codice 2026-08-25 + memory. Verificare file:line prima di dare per fatto.

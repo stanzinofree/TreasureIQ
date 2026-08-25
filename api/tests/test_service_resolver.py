@@ -14,6 +14,7 @@ from datetime import datetime, timedelta, timezone
 
 import pytest
 
+from treasureiq.catalog import freshness as _freshness
 from treasureiq.catalog import service_cache, service_resolver
 from treasureiq.catalog.connector_registry import ConnectorRegistry
 from treasureiq.catalog.connectors import ConnectorResult
@@ -38,6 +39,30 @@ from treasureiq.mappa_connettore import MappaConnettore
 
 _SOURCE = "058003"
 _CONN = ConnectorRef(name="stub_service", version="1")
+# Istante fisso della risoluzione (E4): deve restare distinto dall'ora di
+# scrittura per provare che la cache persiste il momento del fetch, non del write.
+_QUANDO = datetime(2026, 8, 23, 14, 44, 34, tzinfo=timezone.utc)
+
+
+class _OrologioCongelato:
+    """Injected clock for the freshness gate.
+
+    ``freshness`` measures age as ``datetime.now(utc) - retrieved_at``. E4 saves
+    at the fixed ``_QUANDO`` and reads it back through ``service_cache.carica``;
+    once the wall clock passes ``_QUANDO + max_age`` (the next day) the entry
+    goes stale, ``carica`` returns ``None`` and the test fails — a time bomb, not
+    a regression. Freezing ``now`` to ``_QUANDO`` makes the read deterministic
+    without touching any resolver or cache logic."""
+
+    @staticmethod
+    def now(tz: object = None) -> datetime:
+        return _QUANDO
+
+
+@pytest.fixture
+def freshness_congelata(monkeypatch):
+    """Freeze the freshness clock at ``_QUANDO`` for cache reads under test."""
+    monkeypatch.setattr(_freshness, "datetime", _OrologioCongelato)
 
 
 @pytest.fixture(autouse=True)
@@ -365,8 +390,8 @@ def test_cache_hit_zero_rete_provenienza(mappa, request_cie):
 # E4 (Fix D, Slice 5.2) — single retrieved_at: the value in the live envelope is
 # the value persisted, and the cache hit replays exactly that instant (no drift
 # between the connector fetch time and the cache write time).
-def test_envelope_e_persistito_stesso_retrieved_at(mappa, request_cie):
-    quando = datetime(2026, 8, 23, 14, 44, 34, tzinfo=timezone.utc)
+def test_envelope_e_persistito_stesso_retrieved_at(mappa, request_cie, freshness_congelata):
+    quando = _QUANDO
     conn = ConnectorRef(name="wordpress_agid_service", version="1")
     stub = _StubConnettore(
         _result(request_cie, (_reference("live"),), connector=conn, retrieved_at=quando)

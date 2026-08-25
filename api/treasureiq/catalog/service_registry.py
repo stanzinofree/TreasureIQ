@@ -33,6 +33,10 @@ from treasureiq.catalog.service_connectors.esecutore_fetcher import (
     EsecutoreServiceFetcher,
     _WpDiscovery,
 )
+from treasureiq.catalog.service_connectors.openpa_service import (
+    OpenPAServiceConnector,
+    _EzFindDiscovery,
+)
 from treasureiq.catalog.service_connectors.wordpress_agid import (
     WordPressAgidServiceConnector,
 )
@@ -59,6 +63,7 @@ def default_service_registry(esecutore: EsecutoreFetch) -> ConnectorRegistry:
     transport = EsecutoreServiceFetcher(esecutore)
     reg.register(WordPressAgidServiceConnector(transport.con(_WpDiscovery())))
     reg.register(ComWebServiceConnector(transport.con(_ComWebDiscovery())))
+    reg.register(OpenPAServiceConnector(transport.con(_EzFindDiscovery())))
     return reg
 
 

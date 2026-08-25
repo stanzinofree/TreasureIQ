@@ -3,7 +3,7 @@
  "services": {
   "cambio_residenza": {
    "service_id": "103010:wp:411",
-   "title": "Abitare &#8211; Cambio Residenza",
+   "title": "Abitare – Cambio Residenza",
    "source_url": "https://www.comune.belgirate.vb.it/servizio/abitare-cambio-residenza/",
    "options": [
     {
@@ -26,7 +26,7 @@
   },
   "carta_identita": {
    "service_id": "103010:wp:467",
-   "title": "Essere Cittadino &#8211; Carta d&#8217;Identità",
+   "title": "Essere Cittadino – Carta d’Identità",
    "source_url": "https://www.comune.belgirate.vb.it/servizio/essere-cittadino-carta-didentita/",
    "options": [
     {

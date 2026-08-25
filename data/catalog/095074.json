@@ -3,7 +3,7 @@
  "services": {
   "accesso_atti": {
    "service_id": "095074:wp:1925",
-   "title": "Richiedere l&#8217;accesso agli Atti",
+   "title": "Richiedere l’accesso agli Atti",
    "source_url": "https://www.comune.zeddiani.or.it/servizio/richiedere-laccesso-agli-atti/",
    "options": [
     {
@@ -49,7 +49,7 @@
   },
   "stato_civile": {
    "service_id": "095074:wp:1921",
-   "title": "Separazione e divorzio di fronte all&#8217;ufficiale di Stato Civile",
+   "title": "Separazione e divorzio di fronte all’ufficiale di Stato Civile",
    "source_url": "https://www.comune.zeddiani.or.it/servizio/separazione-e-divorzio-di-fronte-allufficiale-di-stato-civile/",
    "options": [
     {

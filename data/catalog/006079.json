@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://sportello.comune.garbagna.al.it/su_procedimento/richiedere-laccesso-agli-atti/fattispecie/0?ambito=sugen&amp;urlSite=https%3a%2f%2fwww.comune.garbagna.al.it%2fit-it%2fservizi%2fanagrafe-e-stato-civile%2frichiedere-l-accesso-agli-atti-317-22011-1-98dabf7fafc172e078ca054057339885",
+     "url": "https://sportello.comune.garbagna.al.it/su_procedimento/richiedere-laccesso-agli-atti/fattispecie/0?ambito=sugen&urlSite=https%3a%2f%2fwww.comune.garbagna.al.it%2fit-it%2fservizi%2fanagrafe-e-stato-civile%2frichiedere-l-accesso-agli-atti-317-22011-1-98dabf7fafc172e078ca054057339885",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

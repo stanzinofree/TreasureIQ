@@ -3,7 +3,7 @@
  "services": {
   "accesso_atti": {
    "service_id": "088003:wp:4844",
-   "title": "Richiedere l&#8217;accesso agli Atti",
+   "title": "Richiedere l’accesso agli Atti",
    "source_url": "https://www.comune.comiso.rg.it/servizio/richiedere-laccesso-agli-atti/",
    "options": [
     {

@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.vische.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=vsch1309&amp;IDPr=10596",
+     "url": "https://servizi.comune.vische.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=vsch1309&IDPr=10596",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

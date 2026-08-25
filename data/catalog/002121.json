@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.rossa.vc.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=rss930&amp;IDPr=11016",
+     "url": "https://servizi.comune.rossa.vc.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=rss930&IDPr=11016",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

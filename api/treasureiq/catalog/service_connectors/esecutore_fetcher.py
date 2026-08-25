@@ -28,6 +28,7 @@ Contratto (D-S5-6):
 from __future__ import annotations
 
 import json
+from html import unescape
 from typing import Callable, Protocol
 from urllib.parse import urlencode, urlparse
 
@@ -74,7 +75,9 @@ def candidato_da_voce_wp(voce: object) -> ServiceCandidate | None:
     try:
         return ServiceCandidate(
             native_id=str(int(voce["id"])),
-            title=str(titolo).strip(),
+            # ``rendered`` è HTML: le entità (``&#8217;`` `&#8211;` `&amp;``)
+            # vanno decodificate qui, prima di costruire la reference.
+            title=unescape(str(titolo)).strip(),
             url=str(voce["link"]),
         )
     except (KeyError, TypeError, ValueError):
@@ -98,7 +101,7 @@ def candidato_da_voce_wp_custom(voce: object) -> ServiceCandidate | None:
     try:
         return ServiceCandidate(
             native_id=str(int(voce["ID"])),
-            title=str(voce["post_title"]).strip(),
+            title=unescape(str(voce["post_title"])).strip(),
             url=str(voce["guid"]),
         )
     except (KeyError, TypeError, ValueError):

@@ -3,7 +3,7 @@
  "services": {
   "carta_identita": {
    "service_id": "050029:wp:2142",
-   "title": "Carta d&#8217;identità elettronica",
+   "title": "Carta d’identità elettronica",
    "source_url": "https://www.comune.pontedera.pi.it/servizio/carta-identita-elettronica/",
    "options": [
     {

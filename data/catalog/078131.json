@@ -3,7 +3,7 @@
  "services": {
   "accesso_atti": {
    "service_id": "078131:wp:276",
-   "title": "Richiedere l&#8217;accesso agli atti",
+   "title": "Richiedere l’accesso agli atti",
    "source_url": "https://comune.santagatadiesaro.cs.it/servizio/richiedere-laccesso-agli-atti/",
    "options": [
     {

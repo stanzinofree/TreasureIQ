@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.baceno.vb.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=bcn406&amp;IDPr=10569",
+     "url": "https://servizi.comune.baceno.vb.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=bcn406&IDPr=10569",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

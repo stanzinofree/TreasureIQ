@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.valdellatorre.to.it/Servizi/FiloDiretto2/Login.aspx?ce=vldlltrr383&amp;IDPr=12336",
+     "url": "https://servizi.comune.valdellatorre.to.it/Servizi/FiloDiretto2/Login.aspx?ce=vldlltrr383&IDPr=12336",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

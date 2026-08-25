@@ -3,7 +3,7 @@
  "services": {
   "carta_identita": {
    "service_id": "070076:wp:123",
-   "title": "Carta d&#8217;identità elettronica (CIE)",
+   "title": "Carta d’identità elettronica (CIE)",
    "source_url": "https://www.comune.spinete.cb.it/servizio/carta-didentita-elettronica-cie/",
    "options": [
     {

@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.noasca.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=nsc1539&amp;IDPr=11390",
+     "url": "https://servizi.comune.noasca.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=nsc1539&IDPr=11390",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

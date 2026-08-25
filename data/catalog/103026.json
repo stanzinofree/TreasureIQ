@@ -116,7 +116,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://www.servizipubblicaamministrazione.it/SERVIZI/PORTALECONTRIBUENTE/HomePNRR.aspx?CodCat=D177&amp;ID=3788",
+     "url": "https://www.servizipubblicaamministrazione.it/SERVIZI/PORTALECONTRIBUENTE/HomePNRR.aspx?CodCat=D177&ID=3788",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

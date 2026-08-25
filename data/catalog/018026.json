@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.campospinoso.pv.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=cmpspnslbrd1610&amp;IDPr=11657",
+     "url": "https://servizi.comune.campospinoso.pv.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=cmpspnslbrd1610&IDPr=11657",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,
@@ -57,7 +57,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.campospinoso.pv.it/servizi/portalecontribuente/LoginPNRR.Aspx?CodCat=B567&amp;ACCESSO=C&amp;View=CI",
+     "url": "https://servizi.comune.campospinoso.pv.it/servizi/portalecontribuente/LoginPNRR.Aspx?CodCat=B567&ACCESSO=C&View=CI",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

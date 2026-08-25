@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.fontainemore.ao.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=fntnmr490&amp;IDPr=10827",
+     "url": "https://servizi.comune.fontainemore.ao.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=fntnmr490&IDPr=10827",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

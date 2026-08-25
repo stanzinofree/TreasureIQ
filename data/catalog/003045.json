@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.cavagliodagogna.no.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=cvgldggn336&amp;IDPr=10556",
+     "url": "https://servizi.comune.cavagliodagogna.no.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=cvgldggn336&IDPr=10556",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,
@@ -116,7 +116,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://www.servizipubblicaamministrazione.it/Servizi/FiloDiretto/ProcedimentiClient.Aspx?CE=cvgldggn336&amp;IDGruppoSelez=2970",
+     "url": "https://www.servizipubblicaamministrazione.it/Servizi/FiloDiretto/ProcedimentiClient.Aspx?CE=cvgldggn336&IDGruppoSelez=2970",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

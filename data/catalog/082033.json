@@ -26,7 +26,7 @@
   },
   "carta_identita": {
    "service_id": "082033:wp:697",
-   "title": "Carta d&#8217;Identità Elettronica (CIE)",
+   "title": "Carta d’Identità Elettronica (CIE)",
    "source_url": "https://comune.contessaentellina.pa.it/servizio/carta-didentita-elettronica-cie/",
    "options": [
     {
@@ -95,7 +95,7 @@
   },
   "tributi_tari": {
    "service_id": "082033:wp:4781",
-   "title": "Domanda di agevolazioni tributarie e tariffarie &#8211; TARI",
+   "title": "Domanda di agevolazioni tributarie e tariffarie – TARI",
    "source_url": "https://comune.contessaentellina.pa.it/servizio/domanda-di-agevolazioni-tributarie-e-tariffarie/",
    "options": [
     {

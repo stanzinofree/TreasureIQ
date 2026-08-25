@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.aglie.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=gl1285&amp;IDPr=11543",
+     "url": "https://servizi.comune.aglie.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=gl1285&IDPr=11543",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

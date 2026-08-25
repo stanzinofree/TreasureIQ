@@ -49,7 +49,7 @@
   },
   "tributi_imu": {
    "service_id": "008052:wp:1607",
-   "title": "IMU &#8211; Imposta Municipale Unica",
+   "title": "IMU – Imposta Municipale Unica",
    "source_url": "https://www.comune.sanbartolomeoalmare.im.it/servizio/pagare-tributi-imu/",
    "options": [
     {

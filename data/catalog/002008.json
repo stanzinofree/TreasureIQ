@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.balmuccia.vc.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=blmcc901&amp;IDPr=11327",
+     "url": "https://servizi.comune.balmuccia.vc.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=blmcc901&IDPr=11327",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

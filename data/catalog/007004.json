@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.arnad.ao.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=rnd616&amp;IDPr=10546",
+     "url": "https://servizi.comune.arnad.ao.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=rnd616&IDPr=10546",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

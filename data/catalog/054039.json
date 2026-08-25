@@ -3,7 +3,7 @@
  "services": {
   "carta_identita": {
    "service_id": "054039:wp:15038",
-   "title": "Anagrafe &#8211; Sostituzione Carta di Identità Cartacea (CIC) con Carta di Identità Elettronica (CIE)",
+   "title": "Anagrafe – Sostituzione Carta di Identità Cartacea (CIC) con Carta di Identità Elettronica (CIE)",
    "source_url": "https://www.comune.perugia.it/servizio/sostituzione-cic-con-cie/",
    "options": [
     {
@@ -52,7 +52,7 @@
   },
   "tributi_imu": {
    "service_id": "054039:wp:6905",
-   "title": "Imposte e Tasse &#8211; IMU",
+   "title": "Imposte e Tasse – IMU",
    "source_url": "https://www.comune.perugia.it/servizio/imposte-e-tasse-imu/",
    "options": [
     {

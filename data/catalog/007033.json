@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.gressoneystjean.ao.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=grssnsntjn086&amp;IDPr=10566",
+     "url": "https://servizi.comune.gressoneystjean.ao.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=grssnsntjn086&IDPr=10566",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

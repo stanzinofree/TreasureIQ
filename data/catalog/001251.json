@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.sanponso.to.it/Servizi/FiloDiretto2/ProcedimentiClient.aspx?ce=snpns1293&amp;IDPr=10997",
+     "url": "https://servizi.comune.sanponso.to.it/Servizi/FiloDiretto2/ProcedimentiClient.aspx?ce=snpns1293&IDPr=10997",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

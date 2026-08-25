@@ -3,7 +3,7 @@
  "services": {
   "accesso_atti": {
    "service_id": "013248:wp:1547",
-   "title": "Richiedere l&#8217;accesso agli atti",
+   "title": "Richiedere l’accesso agli atti",
    "source_url": "https://comune.sansiro.co.it/servizio/richiedere-laccesso-agli-atti/",
    "options": [
     {
@@ -49,7 +49,7 @@
   },
   "carta_identita": {
    "service_id": "013248:wp:1096",
-   "title": "Rilascio carta d&#8217;identità",
+   "title": "Rilascio carta d’identità",
    "source_url": "https://comune.sansiro.co.it/servizio/rilascio-carta-didentita/",
    "options": [
     {

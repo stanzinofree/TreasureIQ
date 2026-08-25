@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.santicosmaedamiano.lt.it/urbi/progs/urp/ur1PR003.sto?DB_NAME=n85858&amp;AmbitoBloccato=0&amp;MacroTipoBloccato=641&amp;TipoBloccato=603|3&amp;catnome=Anagrafe%2520e%2520stato%2520civile&amp;caturl=https://www.comune.santicosmaedamiano.lt.it/it-it/servizi/anagrafe-e-stato-civile&amp;servnome=Richiedere%2520l%2527accesso%2520agli%2520atti&amp;servurl=https://www.comune.santicosmaedamiano.lt.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-39832-1-1d06570cb218ab317d9519384ce3e5e3",
+     "url": "https://servizi.comune.santicosmaedamiano.lt.it/urbi/progs/urp/ur1PR003.sto?DB_NAME=n85858&AmbitoBloccato=0&MacroTipoBloccato=641&TipoBloccato=603|3&catnome=Anagrafe%2520e%2520stato%2520civile&caturl=https://www.comune.santicosmaedamiano.lt.it/it-it/servizi/anagrafe-e-stato-civile&servnome=Richiedere%2520l%2527accesso%2520agli%2520atti&servurl=https://www.comune.santicosmaedamiano.lt.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-39832-1-1d06570cb218ab317d9519384ce3e5e3",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,
@@ -57,7 +57,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/?catnome=Anagrafe%2520e%2520stato%2520civile&amp;caturl=https://www.comune.santicosmaedamiano.lt.it/it-it/servizi/anagrafe-e-stato-civile&amp;servnome=Cambio%2520Residenza&amp;servurl=https://www.comune.santicosmaedamiano.lt.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-39830-1-6c220a5b040f247ffa239a11a347331e",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/?catnome=Anagrafe%2520e%2520stato%2520civile&caturl=https://www.comune.santicosmaedamiano.lt.it/it-it/servizi/anagrafe-e-stato-civile&servnome=Cambio%2520Residenza&servurl=https://www.comune.santicosmaedamiano.lt.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-39830-1-6c220a5b040f247ffa239a11a347331e",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

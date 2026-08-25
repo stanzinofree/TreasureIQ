@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.armeno.no.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=rmn648&amp;IDPr=11498",
+     "url": "https://servizi.comune.armeno.no.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=rmn648&IDPr=11498",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

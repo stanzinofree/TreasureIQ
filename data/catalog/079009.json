@@ -3,7 +3,7 @@
  "services": {
   "accesso_atti": {
    "service_id": "079009:wp:272",
-   "title": "Richiedere l&#8217;accesso agli atti",
+   "title": "Richiedere l’accesso agli atti",
    "source_url": "https://comune.belcastro.cz.it/servizio/richiedere-laccesso-agli-atti/",
    "options": [
     {

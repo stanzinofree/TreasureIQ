@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.alpette.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=lptt407&amp;IDPr=11311",
+     "url": "https://servizi.comune.alpette.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=lptt407&IDPr=11311",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

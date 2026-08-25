@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.settimorottaro.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=sttmrttr1351&amp;IDPr=10592",
+     "url": "https://servizi.comune.settimorottaro.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=sttmrttr1351&IDPr=10592",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

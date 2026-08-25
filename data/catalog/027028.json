@@ -26,7 +26,7 @@
   },
   "carta_identita": {
    "service_id": "027028:wp:1848",
-   "title": "Carta d&#8217;identità elettronica &#8211; CIE",
+   "title": "Carta d’identità elettronica – CIE",
    "source_url": "https://www.comune.pianiga.ve.it/servizio/carta-identita-elettronica-cie/",
    "options": [
     {
@@ -72,7 +72,7 @@
   },
   "tributi_imu": {
    "service_id": "027028:wp:2102",
-   "title": "Richiesta rimborso IMU &#8211; TASI",
+   "title": "Richiesta rimborso IMU – TASI",
    "source_url": "https://www.comune.pianiga.ve.it/servizio/richiesta-rimborso-imu-tasi/",
    "options": [
     {

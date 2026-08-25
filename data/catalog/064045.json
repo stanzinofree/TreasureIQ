@@ -3,7 +3,7 @@
  "services": {
   "tributi_imu": {
    "service_id": "064045:wp:3091",
-   "title": "Pagamento Imposta Municipale Propria &#8211; IMU",
+   "title": "Pagamento Imposta Municipale Propria – IMU",
    "source_url": "https://www.comune.luogosano.av.it/servizio/imu/",
    "options": [
     {

@@ -3,7 +3,7 @@
  "services": {
   "accesso_atti": {
    "service_id": "111099:wp:1085",
-   "title": "Richiedere l&#8217;accesso agli atti",
+   "title": "Richiedere l’accesso agli atti",
    "source_url": "https://www.comune.villanovatulo.ca.it/servizio/accesso-agli-atti/",
    "options": [
     {
@@ -26,7 +26,7 @@
   },
   "cambio_residenza": {
    "service_id": "111099:wp:1089",
-   "title": "Cambio di residenza &#8211; ANPR",
+   "title": "Cambio di residenza – ANPR",
    "source_url": "https://www.comune.villanovatulo.ca.it/servizio/cambio-di-residenza-anpr/",
    "options": [
     {

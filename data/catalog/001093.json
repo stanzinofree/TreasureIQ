@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.condove.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=cndv412&amp;IDPr=12369",
+     "url": "https://servizi.comune.condove.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=cndv412&IDPr=12369",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

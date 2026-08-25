@@ -3,7 +3,7 @@
  "services": {
   "carta_identita": {
    "service_id": "018150:wp:1931",
-   "title": "Carta d&#8217;Identità Elettronica (CIE)",
+   "title": "Carta d’Identità Elettronica (CIE)",
    "source_url": "https://comune.siziano.pv.it/servizio/carta-didentita-elettronica-cie/",
    "options": [
     {

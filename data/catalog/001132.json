@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.lessolo.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=lssl097&amp;IDPr=11231",
+     "url": "https://servizi.comune.lessolo.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=lssl097&IDPr=11231",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

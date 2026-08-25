@@ -93,7 +93,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://www.cittadinodigitale.it/apspagopa/Payment/PagamentiAnonimiScegliServizio?tipoPagamentoLabel=noiuv&amp;avvisoGenerico=False&amp;codicePagamento=0",
+     "url": "https://www.cittadinodigitale.it/apspagopa/Payment/PagamentiAnonimiScegliServizio?tipoPagamentoLabel=noiuv&avvisoGenerico=False&codicePagamento=0",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

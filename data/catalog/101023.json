@@ -3,7 +3,7 @@
  "services": {
   "accesso_atti": {
    "service_id": "101023:wp:261",
-   "title": "Richiedere l&#8217;accesso agli atti",
+   "title": "Richiedere l’accesso agli atti",
    "source_url": "https://comune.savelli.kr.it/servizio/richiedere-laccesso-agli-atti/",
    "options": [
     {

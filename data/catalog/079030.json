@@ -3,7 +3,7 @@
  "services": {
   "accesso_atti": {
    "service_id": "079030:wp:240",
-   "title": "Richiedere l&#8217;accesso agli atti",
+   "title": "Richiedere l’accesso agli atti",
    "source_url": "https://comune.cicala.cz.it/servizio/richiedere-laccesso-agli-atti/",
    "options": [
     {

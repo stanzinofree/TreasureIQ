@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.salabiellese.bi.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=slblls203&amp;IDPr=11081",
+     "url": "https://servizi.comune.salabiellese.bi.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=slblls203&IDPr=11081",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

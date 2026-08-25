@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/?catnome=Anagrafe%2520e%2520stato%2520civile&amp;caturl=https://www.comune.fiesco.cr.it/it-it/servizi/anagrafe-e-stato-civile&amp;servnome=Cambio%2520Residenza&amp;servurl=https://www.comune.fiesco.cr.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-27157-1-f1dc3f8e538ae7b9ad883ac728f0e605",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/?catnome=Anagrafe%2520e%2520stato%2520civile&caturl=https://www.comune.fiesco.cr.it/it-it/servizi/anagrafe-e-stato-civile&servnome=Cambio%2520Residenza&servurl=https://www.comune.fiesco.cr.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-27157-1-f1dc3f8e538ae7b9ad883ac728f0e605",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

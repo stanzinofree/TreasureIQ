@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.rivara.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=rvr1018&amp;IDPr=10791",
+     "url": "https://servizi.comune.rivara.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=rvr1018&IDPr=10791",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

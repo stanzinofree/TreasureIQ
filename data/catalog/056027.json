@@ -26,7 +26,7 @@
   },
   "tributi_imu": {
    "service_id": "056027:wp:8722",
-   "title": "Calcolo IMU &#8211; Imposta Municipale Propria",
+   "title": "Calcolo IMU – Imposta Municipale Propria",
    "source_url": "https://comune.gallese.vt.it/servizio/calcolo-imu-imposta-municipale-propria/",
    "options": [
     {

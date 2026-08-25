@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizidigitali.comune.susa.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=ss090&amp;IDPr=13443",
+     "url": "https://servizidigitali.comune.susa.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=ss090&IDPr=13443",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

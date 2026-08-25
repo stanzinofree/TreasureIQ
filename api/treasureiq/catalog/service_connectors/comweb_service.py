@@ -122,7 +122,9 @@ class _ComWebDiscovery:
         host_ufficiale = _host_senza_www(host.lower())
         term_norm = term.lower()
         for href, _testo in _RE_ANCHOR.findall(html):
-            assoluto = urljoin(base_url, href)
+            # ``href`` grezzo dall'HTML: le entità nei parametri query
+            # (``&amp;``) vanno decodificate prima di urljoin/normalizzazione.
+            assoluto = urljoin(base_url, unescape(href))
             parti = urlparse(assoluto)
             if _host_senza_www(parti.netloc.lower()) != host_ufficiale:
                 continue
@@ -140,7 +142,9 @@ class _ComWebDiscovery:
             if len(candidati) >= limit:
                 break  # cap DIFENSIVO (guardia memoria), non selezione: sta
                 # sopra ogni categoria reale, la conferma è a valle (P1)
-            assoluto = urljoin(categoria_url, href)
+            # ``href`` grezzo: entità nei parametri query (``&amp;``) decodificate
+            # prima di urljoin/normalizzazione, così l'URL finale è pulito.
+            assoluto = urljoin(categoria_url, unescape(href))
             parti = urlparse(assoluto)
             if _host_senza_www(parti.netloc.lower()) != host_ufficiale:
                 continue  # host guard (I-5)

@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.sanmartinocanavese.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=snmrtncnvs1175&amp;IDPr=11394",
+     "url": "https://servizi.comune.sanmartinocanavese.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=snmrtncnvs1175&IDPr=11394",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

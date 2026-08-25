@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.settimovittone.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=sttmvttn153&amp;IDPr=11515",
+     "url": "https://servizi.comune.settimovittone.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=sttmvttn153&IDPr=11515",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizidigitali.comune.pragelato.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=prglt1223&amp;IDPr=13433",
+     "url": "https://servizidigitali.comune.pragelato.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=prglt1223&IDPr=13433",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

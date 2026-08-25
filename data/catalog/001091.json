@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.collerettocastelnuovo.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=cllrtt169&amp;IDPr=11338",
+     "url": "https://servizi.comune.collerettocastelnuovo.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=cllrtt169&IDPr=11338",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

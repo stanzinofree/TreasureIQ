@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.sanfrancescoalcampo.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=snfrncsclcmp477&amp;IDPr=12639",
+     "url": "https://servizi.comune.sanfrancescoalcampo.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=snfrncsclcmp477&IDPr=12639",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

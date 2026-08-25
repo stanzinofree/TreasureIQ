@@ -3,7 +3,7 @@
  "services": {
   "accesso_atti": {
    "service_id": "078123:wp:201",
-   "title": "Richiedere l&#8217;accesso agli atti",
+   "title": "Richiedere l’accesso agli atti",
    "source_url": "https://comune.sanmarcoargentano.cs.it/servizio/richiedere-laccesso-agli-atti/",
    "options": [
     {

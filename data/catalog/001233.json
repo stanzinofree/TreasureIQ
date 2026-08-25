@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.saleranocanavese.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=slrncnvs1113&amp;IDPr=10591",
+     "url": "https://servizi.comune.saleranocanavese.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=slrncnvs1113&IDPr=10591",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.hone.ao.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=hn1107&amp;IDPr=11452",
+     "url": "https://servizi.comune.hone.ao.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=hn1107&IDPr=11452",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

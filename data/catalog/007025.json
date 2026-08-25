@@ -3,7 +3,7 @@
  "services": {
   "accesso_atti": {
    "service_id": "007025:wp:1632",
-   "title": "Richiedere l&#8217;accesso agli atti",
+   "title": "Richiedere l’accesso agli atti",
    "source_url": "https://www.comune.emarese.ao.it/servizio/richiedere-laccesso-agli-atti/",
    "options": [
     {
@@ -49,7 +49,7 @@
   },
   "tributi_tari": {
    "service_id": "007025:wp:2004",
-   "title": "Approvazione aliquote 2026 &#8211; Tassa sui rifiuti (TARI)",
+   "title": "Approvazione aliquote 2026 – Tassa sui rifiuti (TARI)",
    "source_url": "https://www.comune.emarese.ao.it/servizio/approvazione-aliquote-2026-tassa-sui-rifiuti-tari/",
    "options": [
     {

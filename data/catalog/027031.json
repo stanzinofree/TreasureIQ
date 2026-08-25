@@ -49,7 +49,7 @@
   },
   "carta_identita": {
    "service_id": "027031:wp:1248",
-   "title": "Carta d&#8217;Identità Elettronica (CIE)",
+   "title": "Carta d’Identità Elettronica (CIE)",
    "source_url": "https://www.comune.quartodaltino.ve.it/servizio/carta-didentita-elettronica-cie/",
    "options": [
     {
@@ -72,7 +72,7 @@
   },
   "tributi_imu": {
    "service_id": "027031:wp:2461",
-   "title": "Calcolo IMU &#8211; Imposta Municipale Unica",
+   "title": "Calcolo IMU – Imposta Municipale Unica",
    "source_url": "https://www.comune.quartodaltino.ve.it/servizio/calcolo-imu-imposta-municipale-unica/",
    "options": [
     {

@@ -3,7 +3,7 @@
  "services": {
   "accesso_atti": {
    "service_id": "095023:wp:16783",
-   "title": "Richiedere l&#8217;accesso agli atti",
+   "title": "Richiedere l’accesso agli atti",
    "source_url": "https://comune.gonnosno.or.it/servizio/richiedere-laccesso-agli-atti/",
    "options": [
     {
@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.gonnosno.or.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=gnnsn346&#038;IDPr=7476",
+     "url": "https://servizi.comune.gonnosno.or.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=gnnsn346&IDPr=7476",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,
@@ -39,7 +39,7 @@
   },
   "cambio_residenza": {
    "service_id": "095023:wp:19084",
-   "title": "Cambio di residenza &#8211; ANPR",
+   "title": "Cambio di residenza – ANPR",
    "source_url": "https://comune.gonnosno.or.it/servizio/cambio-di-residenza-anpr/",
    "options": [
     {
@@ -75,7 +75,7 @@
   },
   "carta_identita": {
    "service_id": "095023:wp:19483",
-   "title": "Rilascio carta d&#8217;identità elettronica (CIE)",
+   "title": "Rilascio carta d’identità elettronica (CIE)",
    "source_url": "https://comune.gonnosno.or.it/servizio/rilascio-carta-didentita-elettronica-cie/",
    "options": [
     {

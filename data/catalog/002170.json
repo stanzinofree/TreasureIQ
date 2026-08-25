@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.altosermenza.vc.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=ltsrmnz1346&amp;IDPr=11373",
+     "url": "https://servizi.comune.altosermenza.vc.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=ltsrmnz1346&IDPr=11373",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

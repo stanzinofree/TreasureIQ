@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.pontboset.ao.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=pntbst235&amp;IDPr=11474",
+     "url": "https://servizi.comune.pontboset.ao.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=pntbst235&IDPr=11474",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

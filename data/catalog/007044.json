@@ -49,7 +49,7 @@
   },
   "tributi_imu": {
    "service_id": "007044:wp:805",
-   "title": "IMU &#8211; Imposta municipale propria",
+   "title": "IMU – Imposta municipale propria",
    "source_url": "https://www.comune.morgex.ao.it/servizio/imu-imposta-municipale-propria/",
    "options": [
     {
@@ -72,7 +72,7 @@
   },
   "tributi_tari": {
    "service_id": "007044:wp:812",
-   "title": "TARI &#8211; Tributo sui rifiuti",
+   "title": "TARI – Tributo sui rifiuti",
    "source_url": "https://www.comune.morgex.ao.it/servizio/tari-tributo-sui-rifiuti/",
    "options": [
     {

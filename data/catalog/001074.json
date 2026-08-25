@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizidigitali.comune.cesana.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=csntrns1227&amp;IDPr=13427",
+     "url": "https://servizidigitali.comune.cesana.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=csntrns1227&IDPr=13427",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

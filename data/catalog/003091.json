@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.maranoticino.no.it/Servizi/FiloDiretto2/ProcedimentiClient.aspx?ce=mrntcn1249&amp;IDPr=9464",
+     "url": "https://servizi.comune.maranoticino.no.it/Servizi/FiloDiretto2/ProcedimentiClient.aspx?ce=mrntcn1249&IDPr=9464",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

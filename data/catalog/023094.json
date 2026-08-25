@@ -3,7 +3,7 @@
  "services": {
   "carta_identita": {
    "service_id": "023094:wp:894",
-   "title": "Carta d&#8217;identità elettronica &#8211; CIE",
+   "title": "Carta d’identità elettronica – CIE",
    "source_url": "https://comune.vigasio.vr.it/servizio/carta-didentita-elettronica-cie/",
    "options": [
     {

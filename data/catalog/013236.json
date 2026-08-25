@@ -3,7 +3,7 @@
  "services": {
   "accesso_atti": {
    "service_id": "013236:wp:129",
-   "title": "Richiedere l&#8217;accesso agli atti",
+   "title": "Richiedere l’accesso agli atti",
    "source_url": "https://comune.veleso.co.it/servizio/richiedere-laccesso-agli-atti/",
    "options": [
     {

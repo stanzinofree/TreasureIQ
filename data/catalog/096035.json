@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.mongrando.bi.it/urbi/progs/urp/ur1PR003.sto?DB_NAME=n200499&amp;AmbitoBloccato=0&amp;MacroTipoBloccato=167&amp;TipoBloccato=22|1&amp;catnome=Anagrafe%2520e%2520stato%2520civile&amp;caturl=https://www.comune.mongrando.bi.it/it-it/servizi/anagrafe-e-stato-civile&amp;servnome=Richiedere%2520l%2527accesso%2520agli%2520atti&amp;servurl=https://www.comune.mongrando.bi.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-31648-1-21c67c0c1273e62d48c0a8f92b6288e6",
+     "url": "https://servizi.comune.mongrando.bi.it/urbi/progs/urp/ur1PR003.sto?DB_NAME=n200499&AmbitoBloccato=0&MacroTipoBloccato=167&TipoBloccato=22|1&catnome=Anagrafe%2520e%2520stato%2520civile&caturl=https://www.comune.mongrando.bi.it/it-it/servizi/anagrafe-e-stato-civile&servnome=Richiedere%2520l%2527accesso%2520agli%2520atti&servurl=https://www.comune.mongrando.bi.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-31648-1-21c67c0c1273e62d48c0a8f92b6288e6",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,
@@ -57,7 +57,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://www.anagrafenazionale.interno.it/servizi-anagrafici/cambio-di-residenza/?catnome=Anagrafe%2520e%2520stato%2520civile&amp;caturl=https://www.comune.mongrando.bi.it/it-it/servizi/anagrafe-e-stato-civile&amp;servnome=Cambio%2520Residenza&amp;servurl=https://www.comune.mongrando.bi.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-31646-1-68f9c0c81e49954bf3ed6c98d3aaa4e0",
+     "url": "https://www.anagrafenazionale.interno.it/servizi-anagrafici/cambio-di-residenza/?catnome=Anagrafe%2520e%2520stato%2520civile&caturl=https://www.comune.mongrando.bi.it/it-it/servizi/anagrafe-e-stato-civile&servnome=Cambio%2520Residenza&servurl=https://www.comune.mongrando.bi.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-31646-1-68f9c0c81e49954bf3ed6c98d3aaa4e0",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

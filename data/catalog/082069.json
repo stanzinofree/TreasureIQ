@@ -3,7 +3,7 @@
  "services": {
   "accesso_atti": {
    "service_id": "082069:wp:273",
-   "title": "Richiedere l&#8217;accesso agli atti",
+   "title": "Richiedere l’accesso agli atti",
    "source_url": "https://comune.sclafanibagni.pa.it/servizio/accesso-agli-atti/",
    "options": [
     {

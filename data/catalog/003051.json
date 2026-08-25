@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.colazza.no.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=clzz965&amp;IDPr=12255",
+     "url": "https://servizi.comune.colazza.no.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=clzz965&IDPr=12255",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

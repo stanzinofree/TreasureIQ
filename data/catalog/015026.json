@@ -3,7 +3,7 @@
  "services": {
   "accesso_atti": {
    "service_id": "015026:wp:11896",
-   "title": "Richiedere l&#8217;accesso agli atti",
+   "title": "Richiedere l’accesso agli atti",
    "source_url": "https://comune.boffalorasopraticino.mi.it/servizio/richiedere-accesso-agli-atti/",
    "options": [
     {
@@ -49,7 +49,7 @@
   },
   "carta_identita": {
    "service_id": "015026:wp:928",
-   "title": "Carta d&#8217;identità elettronica",
+   "title": "Carta d’identità elettronica",
    "source_url": "https://comune.boffalorasopraticino.mi.it/servizio/carta-didentita-elettronica/",
    "options": [
     {

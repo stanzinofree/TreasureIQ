@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.ribordone.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=rbrdnn154&amp;IDPr=11597",
+     "url": "https://servizi.comune.ribordone.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=rbrdnn154&IDPr=11597",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.tavagnasco.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=tvgnsc119&amp;IDPr=10593",
+     "url": "https://servizi.comune.tavagnasco.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=tvgnsc119&IDPr=10593",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

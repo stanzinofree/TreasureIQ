@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.brandizzo.to.it/Servizi/FiloDiretto2/ProcedimentiClient.Aspx?CE=brndzz082&amp;IDGruppoSelez=3743",
+     "url": "https://servizi.comune.brandizzo.to.it/Servizi/FiloDiretto2/ProcedimentiClient.Aspx?CE=brndzz082&IDGruppoSelez=3743",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

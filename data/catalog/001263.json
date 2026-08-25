@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizidigitali.comune.sestriere.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=sstrr1225&amp;IDPr=13441",
+     "url": "https://servizidigitali.comune.sestriere.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=sstrr1225&IDPr=13441",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

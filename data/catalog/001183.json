@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.pecetto.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=pctttrns205&amp;IDPr=4328",
+     "url": "https://servizi.comune.pecetto.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=pctttrns205&IDPr=4328",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

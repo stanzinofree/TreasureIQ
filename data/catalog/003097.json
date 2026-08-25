@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.mezzomerico.no.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=mzzmrc1500&amp;IDPr=9472",
+     "url": "https://servizi.comune.mezzomerico.no.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=mzzmrc1500&IDPr=9472",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

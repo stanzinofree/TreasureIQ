@@ -127,6 +127,19 @@ def test_scopri_voce_malformata_scartata_non_alza():
     assert len(got) == 1 and got[0].native_id == "7"
 
 
+def test_scopri_title_entita_html_decodificate():
+    # Golden: ``rendered`` è HTML — entità (&#8217; &#8211; &amp;) decodificate
+    # nel titolo prima di costruire la reference (niente entity-leak nel catalogo).
+    corpo = json.dumps(
+        [{"id": 9,
+          "title": {"rendered": "Carta d&#8217;identità &#8211; Anagrafe &amp; Stato civile"},
+          "link": f"{_BASE}/servizi/cie"}]
+    ).encode("utf-8")
+    got = _wp(_EsecutoreSpy(_ok(corpo))).scopri_servizi(base_url=_ENTRY, term="carta", limit=5)
+    assert len(got) == 1
+    assert got[0].title == "Carta d’identità – Anagrafe & Stato civile"
+
+
 # --- dialect B: the full-dump custom controller (recovery, guarded path) ----
 
 
@@ -150,6 +163,18 @@ def test_scopri_dialetto_b_recupera_senza_fields():
     assert "_fields" not in spy.chiamate[1]["url"]
     # The recovery re-read keeps the same host guard as every other fetch.
     assert spy.chiamate[1]["host_atteso"] == "comune.example.it"
+
+
+def test_scopri_dialetto_b_title_entita_decodificate():
+    # Golden dialetto B: ``post_title`` con entità → titolo decodificato.
+    corpo = json.dumps(
+        [{"ID": 7, "post_title": "Cambio di residenza &#8211; modulo &amp; guida",
+          "guid": f"{_BASE}/?post_type=servizio&p=7"}]
+    ).encode("utf-8")
+    spy = _EsecutoreSpy(_ok(b"[[]]"), _ok(corpo))
+    got = _wp(spy).scopri_servizi(base_url=_ENTRY, term="residenza", limit=5)
+    assert len(got) == 1
+    assert got[0].title == "Cambio di residenza – modulo & guida"
 
 
 def test_scopri_lista_vuota_nessun_refetch():

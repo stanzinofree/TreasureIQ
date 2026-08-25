@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.oglianico.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=glnc1286&amp;IDPr=11101",
+     "url": "https://servizi.comune.oglianico.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=glnc1286&IDPr=11101",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

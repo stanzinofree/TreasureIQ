@@ -3,7 +3,7 @@
  "services": {
   "accesso_atti": {
    "service_id": "108014:wp:1279",
-   "title": "Richiedere l&#8217;accesso agli atti",
+   "title": "Richiedere l’accesso agli atti",
    "source_url": "https://comune.camparada.mb.it/servizio/richiedere-laccesso-agli-atti/",
    "options": [
     {
@@ -49,7 +49,7 @@
   },
   "carta_identita": {
    "service_id": "108014:wp:115",
-   "title": "CIE &#8211; Carta d&#8217;identità elettronica",
+   "title": "CIE – Carta d’identità elettronica",
    "source_url": "https://comune.camparada.mb.it/servizio/cie-carta-didentita-elettronica/",
    "options": [
     {

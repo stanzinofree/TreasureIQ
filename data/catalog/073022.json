@@ -3,7 +3,7 @@
  "services": {
   "cambio_residenza": {
    "service_id": "073022:wp:1089",
-   "title": "Cambio di residenza &#8211; ANPR",
+   "title": "Cambio di residenza – ANPR",
    "source_url": "https://www.comune.pulsano.ta.it/servizio/cambio-di-residenza-anpr/",
    "options": [
     {

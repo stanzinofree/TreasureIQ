@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://sportello.comune.cavaglietto.no.it/su_procedimento/richiedere-laccesso-agli-atti/fattispecie/0?ambito=sugen&amp;urlSite=https%3a%2f%2fwww.comune.cavaglietto.no.it%2fit-it%2fservizi%2fanagrafe-e-stato-civile%2frichiedere-l-accesso-agli-atti-317-44056-1-8b2530539d44e33918e60c9484f15656",
+     "url": "https://sportello.comune.cavaglietto.no.it/su_procedimento/richiedere-laccesso-agli-atti/fattispecie/0?ambito=sugen&urlSite=https%3a%2f%2fwww.comune.cavaglietto.no.it%2fit-it%2fservizi%2fanagrafe-e-stato-civile%2frichiedere-l-accesso-agli-atti-317-44056-1-8b2530539d44e33918e60c9484f15656",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

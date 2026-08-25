@@ -331,6 +331,21 @@ def test_page_download_same_host_only():
     assert all("altro-host.it" not in u for _, u in kinds)
 
 
+def test_page_href_entita_amp_decodificata_nell_url():
+    # Golden: un href con ``&amp;`` nei parametri query (portale esterno
+    # tipo filodiretto/ProcedimentiClient.aspx) deve produrre un URL con ``&``
+    # letterale decodificato, non ``&amp;`` — altrimenti l'opzione del catalogo
+    # porta l'entità nel link.  Il seam è ``_html.unescape(href)`` in service_page.
+    html = (
+        f'<a href="https://{_BASE}/filodiretto2/ProcedimentiClient.aspx?CE=rnd616&amp;IDPr=10546">'
+        f'Accedi al servizio online</a>'
+    )
+    pagina = leggi_pagina_servizio(html, page_url=f"https://{_BASE}/s/", official_host=_BASE)
+    urls = [str(l.url) for l in pagina.links]
+    assert urls == [f"https://{_BASE}/filodiretto2/ProcedimentiClient.aspx?CE=rnd616&IDPr=10546"]
+    assert all("&amp;" not in u for u in urls)
+
+
 def test_page_scarta_boilerplate_tiene_modulo_cie():
     # Fix C (Slice 5.2): su Albano la pagina CIE linkava anche il boilerplate
     # del sito (cookie policy, termini e condizioni). Il modulo vero resta,

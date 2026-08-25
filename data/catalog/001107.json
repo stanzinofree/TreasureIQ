@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.fornocanavese.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=frncnvs193&amp;IDPr=11581",
+     "url": "https://servizi.comune.fornocanavese.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=frncnvs193&IDPr=11581",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

@@ -3,7 +3,7 @@
  "services": {
   "accesso_atti": {
    "service_id": "024004:wp:95656",
-   "title": "Richiedere l&#8217;accesso agli atti",
+   "title": "Richiedere l’accesso agli atti",
    "source_url": "https://comune.altavillavicentina.vi.it/servizio/richiedere-laccesso-agli-atti/",
    "options": [
     {

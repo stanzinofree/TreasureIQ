@@ -3,7 +3,7 @@
  "services": {
   "carta_identita": {
    "service_id": "035029:wp:1289",
-   "title": "Carta d&#8217;Identità Elettronica CIE &#8211; Rilascio",
+   "title": "Carta d’Identità Elettronica CIE – Rilascio",
    "source_url": "https://www.comune.poviglio.re.it/servizi/carta-didentita-elettronica-cie-rilascio/",
    "options": [
     {

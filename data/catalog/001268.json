@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.strambinello.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=strmbnll1111&amp;IDPr=11505",
+     "url": "https://servizi.comune.strambinello.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=strmbnll1111&IDPr=11505",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

@@ -3,7 +3,7 @@
  "services": {
   "accesso_atti": {
    "service_id": "023009:wp:2023",
-   "title": "Richiedere l&#8217;accesso agli atti",
+   "title": "Richiedere l’accesso agli atti",
    "source_url": "https://comune.bonavigo.vr.it/servizio/richiedere-accesso-agli-atti/",
    "options": [
     {

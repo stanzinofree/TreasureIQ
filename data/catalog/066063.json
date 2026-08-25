@@ -3,7 +3,7 @@
  "services": {
   "accesso_atti": {
    "service_id": "066063:wp:474",
-   "title": "Richiedere l&#8217;accesso agli atti",
+   "title": "Richiedere l’accesso agli atti",
    "source_url": "https://www.comune.ortona.aq.it/servizio/richiedere-laccesso-agli-atti/",
    "options": [
     {

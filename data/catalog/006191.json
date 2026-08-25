@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://sportello.comune.cassanospinola.al.it/su_procedimento/richiedere-laccesso-agli-atti/fattispecie/0?ambito=sugen&amp;urlSite=https%3a%2f%2fwww.comune.cassanospinola.al.it%2fit-it%2fservizi%2fanagrafe-e-stato-civile%2frichiedere-l-accesso-agli-atti-317-27027-1-d443539671d98d9d166581c1b7f839d5",
+     "url": "https://sportello.comune.cassanospinola.al.it/su_procedimento/richiedere-laccesso-agli-atti/fattispecie/0?ambito=sugen&urlSite=https%3a%2f%2fwww.comune.cassanospinola.al.it%2fit-it%2fservizi%2fanagrafe-e-stato-civile%2frichiedere-l-accesso-agli-atti-317-27027-1-d443539671d98d9d166581c1b7f839d5",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

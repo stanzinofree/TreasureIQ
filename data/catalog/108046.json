@@ -26,7 +26,7 @@
   },
   "carta_identita": {
    "service_id": "108046:wp:1917",
-   "title": "Carta d&#8217;identità elettronica CIE",
+   "title": "Carta d’identità elettronica CIE",
    "source_url": "https://www.comune.vedanoallambro.mb.it/servizio/carta-didentita-elettronica-cie/",
    "options": [
     {
@@ -62,7 +62,7 @@
   },
   "tributi_imu": {
    "service_id": "108046:wp:1118",
-   "title": "Imposta municipale propria &#8211; IMU",
+   "title": "Imposta municipale propria – IMU",
    "source_url": "https://www.comune.vedanoallambro.mb.it/servizio/imposta-municipale-propria-imu/",
    "options": [
     {
@@ -85,7 +85,7 @@
   },
   "tributi_tari": {
    "service_id": "108046:wp:1111",
-   "title": "Tassa rifiuti &#8211; TARI",
+   "title": "Tassa rifiuti – TARI",
    "source_url": "https://www.comune.vedanoallambro.mb.it/servizio/tassa-rifiuti-tari/",
    "options": [
     {

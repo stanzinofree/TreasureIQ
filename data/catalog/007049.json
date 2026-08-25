@@ -3,7 +3,7 @@
  "services": {
   "accesso_atti": {
    "service_id": "007049:wp:1464",
-   "title": "Richiedere l&#8217;accesso agli atti",
+   "title": "Richiedere l’accesso agli atti",
    "source_url": "https://www.comune.pollein.ao.it/servizio/richiedere-laccesso-agli-atti/",
    "options": [
     {

@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.prascorsano.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=prscrsn763&amp;IDPr=11102",
+     "url": "https://servizi.comune.prascorsano.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=prscrsn763&IDPr=11102",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

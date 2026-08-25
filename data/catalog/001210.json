@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.quincinetto.to.it/servizi/filodiretto2/Login.aspx?ce=qncntt673&amp;IDPr=10912",
+     "url": "https://servizi.comune.quincinetto.to.it/servizi/filodiretto2/Login.aspx?ce=qncntt673&IDPr=10912",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

@@ -3,7 +3,7 @@
  "services": {
   "accesso_atti": {
    "service_id": "013193:wp:2234",
-   "title": "Richiedere l&#8217;accesso agli atti",
+   "title": "Richiedere l’accesso agli atti",
    "source_url": "https://comune.pusiano.co.it/servizio/richiedere-accesso-agli-atti/",
    "options": [
     {
@@ -26,7 +26,7 @@
   },
   "carta_identita": {
    "service_id": "013193:wp:878",
-   "title": "Anagrafe &#8211; Carta di identità elettronica (CIE)",
+   "title": "Anagrafe – Carta di identità elettronica (CIE)",
    "source_url": "https://comune.pusiano.co.it/servizio/anagrafe-carta-di-identita-elettronica-cie/",
    "options": [
     {

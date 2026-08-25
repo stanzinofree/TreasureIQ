@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.sangiorgiocanavese.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=sngrgcnvs326&amp;IDPr=10886",
+     "url": "https://servizi.comune.sangiorgiocanavese.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=sngrgcnvs326&IDPr=10886",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

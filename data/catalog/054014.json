@@ -3,7 +3,7 @@
  "services": {
   "accesso_atti": {
    "service_id": "054014:wp:126",
-   "title": "Richiedere l&#8217;accesso agli atti",
+   "title": "Richiedere l’accesso agli atti",
    "source_url": "https://comune.collazzone.pg.it/servizio/richiedere-l-accesso-agli-atti/",
    "options": [
     {

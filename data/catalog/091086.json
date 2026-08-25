@@ -26,7 +26,7 @@
   },
   "carta_identita": {
    "service_id": "091086:wp:440",
-   "title": "Carta d&#8217;identità",
+   "title": "Carta d’identità",
    "source_url": "https://www.comune.sorgono.nu.it/servizio/anagrafe-e-stato-civile/",
    "options": [
     {
@@ -49,7 +49,7 @@
   },
   "tributi_imu": {
    "service_id": "091086:wp:1679",
-   "title": "IMU &#8211; Imposta Municipale Propria",
+   "title": "IMU – Imposta Municipale Propria",
    "source_url": "https://www.comune.sorgono.nu.it/servizio/imu-imposta-municipale-propria/",
    "options": [
     {

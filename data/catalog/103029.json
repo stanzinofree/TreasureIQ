@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.druogno.vb.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=drgn770&amp;IDPr=11333",
+     "url": "https://servizi.comune.druogno.vb.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=drgn770&IDPr=11333",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

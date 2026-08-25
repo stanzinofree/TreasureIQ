@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.sancolombanobelmonte.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=snclmbn450&amp;IDPr=11318",
+     "url": "https://servizi.comune.sancolombanobelmonte.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=snclmbn450&IDPr=11318",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.lillianes.ao.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=lllns491&amp;IDPr=11546",
+     "url": "https://servizi.comune.lillianes.ao.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=lllns491&IDPr=11546",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

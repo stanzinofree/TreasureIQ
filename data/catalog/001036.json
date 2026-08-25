@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.brosso.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=brss656&amp;IDPr=11353",
+     "url": "https://servizi.comune.brosso.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=brss656&IDPr=11353",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

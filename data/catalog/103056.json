@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.premia.vb.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=prm485&amp;IDPr=11340",
+     "url": "https://servizi.comune.premia.vb.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=prm485&IDPr=11340",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

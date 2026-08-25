@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/?catnome=Anagrafe%2520e%2520stato%2520civile&amp;caturl=https://www.comune.baveno.vb.it/it-it/servizi/anagrafe-e-stato-civile&amp;servnome=Cambio%2520Residenza&amp;servurl=https://www.comune.baveno.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-47354-1-88000a2e2c8a2d3cb6ac07697bc281a6",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/?catnome=Anagrafe%2520e%2520stato%2520civile&caturl=https://www.comune.baveno.vb.it/it-it/servizi/anagrafe-e-stato-civile&servnome=Cambio%2520Residenza&servurl=https://www.comune.baveno.vb.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-47354-1-88000a2e2c8a2d3cb6ac07697bc281a6",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,
@@ -80,7 +80,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://www.riscotel.it/calcoloimu/?comune=A725&amp;catnome=Tributi%252c%2520finanze%2520e%2520contravvenzioni&amp;caturl=https://www.comune.baveno.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni&amp;servnome=Imposta%2520Municipale%2520Propria%2520(IMU)&amp;servurl=https://www.comune.baveno.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-47445-1-e62f58e3f7275609c942f33da454d500",
+     "url": "https://www.riscotel.it/calcoloimu/?comune=A725&catnome=Tributi%252c%2520finanze%2520e%2520contravvenzioni&caturl=https://www.comune.baveno.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni&servnome=Imposta%2520Municipale%2520Propria%2520(IMU)&servurl=https://www.comune.baveno.vb.it/it-it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu-953-47445-1-e62f58e3f7275609c942f33da454d500",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

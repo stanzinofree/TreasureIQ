@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.pavarolo.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=pvrl253&amp;IDPr=9373",
+     "url": "https://servizi.comune.pavarolo.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=pvrl253&IDPr=9373",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

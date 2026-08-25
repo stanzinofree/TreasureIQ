@@ -3,7 +3,7 @@
  "services": {
   "carta_identita": {
    "service_id": "060071:wp:8443",
-   "title": "Carta d&#8217;Identità Elettronica (CIE)",
+   "title": "Carta d’Identità Elettronica (CIE)",
    "source_url": "https://comune.serrone.fr.it/servizio/carta-didentita-elettronica-cie/",
    "options": [
     {

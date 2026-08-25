@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://sportello.comune.vinovo.to.it/su_procedimento/richiedere-laccesso-agli-atti/fattispecie/0/?ambito=sugen&amp;urlSite=https%3a%2f%2fwww.comune.vinovo.to.it%2fit-it%2fservizi%2fanagrafe-e-stato-civile%2frichiedere-l-accesso-agli-atti-317-26895-1-be5e4dc20d662441a738780ee010e2cb",
+     "url": "https://sportello.comune.vinovo.to.it/su_procedimento/richiedere-laccesso-agli-atti/fattispecie/0/?ambito=sugen&urlSite=https%3a%2f%2fwww.comune.vinovo.to.it%2fit-it%2fservizi%2fanagrafe-e-stato-civile%2frichiedere-l-accesso-agli-atti-317-26895-1-be5e4dc20d662441a738780ee010e2cb",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

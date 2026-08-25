@@ -26,7 +26,7 @@
   },
   "cambio_residenza": {
    "service_id": "019099:wp:1089",
-   "title": "Cambio di residenza &#8211; ANPR",
+   "title": "Cambio di residenza – ANPR",
    "source_url": "https://www.comune.sospiro.cr.it/servizio/cambio-di-residenza-anpr/",
    "options": [
     {
@@ -49,7 +49,7 @@
   },
   "tributi_imu": {
    "service_id": "019099:wp:1067",
-   "title": "IMU &#8211; IMPOSTA MUNICIPALE PROPRIA",
+   "title": "IMU – IMPOSTA MUNICIPALE PROPRIA",
    "source_url": "https://www.comune.sospiro.cr.it/servizio/imu-imposta-municipale-unica/",
    "options": [
     {
@@ -72,7 +72,7 @@
   },
   "tributi_tari": {
    "service_id": "019099:wp:1619",
-   "title": "TASSA SUI RIFIUTI &#8211; TARI",
+   "title": "TASSA SUI RIFIUTI – TARI",
    "source_url": "https://www.comune.sospiro.cr.it/servizio/tassa-sui-rifiuti-tari/",
    "options": [
     {

@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.greggio.vc.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=grgg395&amp;IDPr=10619",
+     "url": "https://servizi.comune.greggio.vc.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=grgg395&IDPr=10619",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

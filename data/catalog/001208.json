@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.quagliuzzo.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?ce=qglzz1148&amp;IDPr=11237",
+     "url": "https://servizi.comune.quagliuzzo.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?ce=qglzz1148&IDPr=11237",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

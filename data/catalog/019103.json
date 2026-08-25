@@ -3,7 +3,7 @@
  "services": {
   "accesso_atti": {
    "service_id": "019103:wp:1496",
-   "title": "Richiedere l&#8217;accesso agli atti",
+   "title": "Richiedere l’accesso agli atti",
    "source_url": "https://www.comune.stagnolombardo.cr.it/servizio/richiedere-laccesso-agli-atti/",
    "options": [
     {
@@ -26,7 +26,7 @@
   },
   "carta_identita": {
    "service_id": "019103:wp:1574",
-   "title": "Avviso per i possessori di carta d&#8217;identità cartacea",
+   "title": "Avviso per i possessori di carta d’identità cartacea",
    "source_url": "https://www.comune.stagnolombardo.cr.it/servizio/avviso-per-i-possessori-di-carta-didentita-cartacea/",
    "options": [
     {

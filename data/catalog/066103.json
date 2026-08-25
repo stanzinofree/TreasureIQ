@@ -3,7 +3,7 @@
  "services": {
   "carta_identita": {
    "service_id": "066103:wp:212",
-   "title": "Prenotazione per Carta d&#8217;identità Elettronica",
+   "title": "Prenotazione per Carta d’identità Elettronica",
    "source_url": "https://comune.villalago.aq.it/servizio/prenotazione-per-carta-didentita-elettronica/",
    "options": [
     {

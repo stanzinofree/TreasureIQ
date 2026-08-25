@@ -3,7 +3,7 @@
  "services": {
   "carta_identita": {
    "service_id": "063024:wp:2966",
-   "title": "Carta d&#8217;Identità Elettronica",
+   "title": "Carta d’Identità Elettronica",
    "source_url": "https://comune.castellammare-di-stabia.napoli.it/servizio/carta-didentita-elettronica/",
    "options": [
     {

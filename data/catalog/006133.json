@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.pontestura.al.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=pntstr866&amp;IDPr=8952",
+     "url": "https://servizi.comune.pontestura.al.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=pntstr866&IDPr=8952",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

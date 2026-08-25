@@ -52,7 +52,7 @@
   },
   "tributi_imu": {
    "service_id": "063086:wp:660",
-   "title": "Pagamento dell&#8217;imposta municipale propria (IMU)",
+   "title": "Pagamento dell’imposta municipale propria (IMU)",
    "source_url": "https://comune.vicoequense.na.it/servizio/pagamento-dellimposta-municipale-propria-imu/",
    "options": [
     {

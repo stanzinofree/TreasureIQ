@@ -3,7 +3,7 @@
  "services": {
   "carta_identita": {
    "service_id": "082017:wp:5773",
-   "title": "Carta d&#8217;identità elettronica (C.I.E.)",
+   "title": "Carta d’identità elettronica (C.I.E.)",
    "source_url": "https://comune.campofelicediroccella.pa.it/servizio/carta-didentita-elettronica-c-i-e/",
    "options": [
     {

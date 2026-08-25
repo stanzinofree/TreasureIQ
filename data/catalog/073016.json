@@ -3,7 +3,7 @@
  "services": {
   "carta_identita": {
    "service_id": "073016:wp:1218",
-   "title": "Carta d’identità elettronica &#8211; CIE",
+   "title": "Carta d’identità elettronica – CIE",
    "source_url": "https://www.comune.monteiasi.ta.it/servizio/carta-didentita-elettronica-cie/",
    "options": [
     {

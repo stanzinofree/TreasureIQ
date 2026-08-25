@@ -3,7 +3,7 @@
  "services": {
   "accesso_atti": {
    "service_id": "078023:wp:283",
-   "title": "Richiedere l&#8217;accesso agli atti",
+   "title": "Richiedere l’accesso agli atti",
    "source_url": "https://comune.campana.cs.it/servizio/accesso-agli-atti/",
    "options": [
     {

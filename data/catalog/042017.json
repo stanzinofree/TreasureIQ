@@ -3,7 +3,7 @@
  "services": {
   "carta_identita": {
    "service_id": "042017:wp:3591",
-   "title": "Rilascio e rinnovo carta d&#8217;identità",
+   "title": "Rilascio e rinnovo carta d’identità",
    "source_url": "https://comune.fabriano.an.it/servizio/rilascio-e-rinnovo-carta-didentita/",
    "options": [
     {

@@ -26,7 +26,7 @@
   },
   "carta_identita": {
    "service_id": "016156:wp:621",
-   "title": "Carta d&#8217;identità elettronica",
+   "title": "Carta d’identità elettronica",
    "source_url": "https://comune.palazzago.bg.it/servizio/carta-didentita-elettronica/",
    "options": [
     {
@@ -49,7 +49,7 @@
   },
   "tributi_imu": {
    "service_id": "016156:wp:2120",
-   "title": "Pagamento dell&#8217;imposta municipale propria (IMU)",
+   "title": "Pagamento dell’imposta municipale propria (IMU)",
    "source_url": "https://comune.palazzago.bg.it/servizio/pagamento-dellimposta-municipale-propria-imu/",
    "options": [
     {

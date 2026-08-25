@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizidigitali.comune.sauzedoulx.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=szdlx254&amp;IDPr=13438",
+     "url": "https://servizidigitali.comune.sauzedoulx.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=szdlx254&IDPr=13438",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

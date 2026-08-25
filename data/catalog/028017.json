@@ -3,7 +3,7 @@
  "services": {
   "cambio_residenza": {
    "service_id": "028017:wp:679",
-   "title": "Cambio di residenza &#8211; cittadino italiano",
+   "title": "Cambio di residenza – cittadino italiano",
    "source_url": "https://www.comune.campodarsego.pd.it/servizio/cambio-di-residenza-cittadino-italiano/",
    "options": [
     {
@@ -26,7 +26,7 @@
   },
   "carta_identita": {
    "service_id": "028017:wp:605",
-   "title": "Carta d&#8217;identità elettronica &#8211; CIE",
+   "title": "Carta d’identità elettronica – CIE",
    "source_url": "https://www.comune.campodarsego.pd.it/servizio/carta-didentita-elettronica-cie/",
    "options": [
     {

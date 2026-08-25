@@ -3,7 +3,7 @@
  "services": {
   "accesso_atti": {
    "service_id": "080021:wp:1261",
-   "title": "Richiedere l&#8217;accesso agli atti",
+   "title": "Richiedere l’accesso agli atti",
    "source_url": "https://www.comune.caraffadelbianco.rc.it/servizio/richiedere-l-accesso-agli-atti/",
    "options": [
     {

@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.gignese.vb.it/EG0/EGHOMEPAGE.HBL?ss=1&amp;F=PRA11X4ADMwADMwADM&amp;freeze=1",
+     "url": "https://servizi.comune.gignese.vb.it/EG0/EGHOMEPAGE.HBL?ss=1&F=PRA11X4ADMwADMwADM&freeze=1",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

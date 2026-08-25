@@ -65,7 +65,7 @@
   },
   "carta_identita": {
    "service_id": "098014:wp:2689",
-   "title": "Rilascio della carta d&#8217;identità elettronica per maggiorenni",
+   "title": "Rilascio della carta d’identità elettronica per maggiorenni",
    "source_url": "https://comune.castiglionedadda.lo.it/servizio/rilascio-della-carta-didentita-elettronica-per-maggiorenni/",
    "options": [
     {
@@ -101,7 +101,7 @@
   },
   "tributi_imu": {
    "service_id": "098014:wp:2953",
-   "title": "Calcolo IMU &#8211; sportello comunale gratuito",
+   "title": "Calcolo IMU – sportello comunale gratuito",
    "source_url": "https://comune.castiglionedadda.lo.it/servizio/calcolo-imu-sportello-comunale-gratuito/",
    "options": [
     {

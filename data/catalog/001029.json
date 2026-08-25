@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.borgiallo.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=brgll800&amp;IDPr=11593",
+     "url": "https://servizi.comune.borgiallo.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=brgll800&IDPr=11593",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

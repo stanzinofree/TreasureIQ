@@ -3,7 +3,7 @@
  "services": {
   "accesso_atti": {
    "service_id": "111064:wp:1081",
-   "title": "Richiedere l&#8217;accesso agli atti",
+   "title": "Richiedere l’accesso agli atti",
    "source_url": "https://www.comune.sannicologerrei.ca.it/servizio/richiedere-laccesso-agli-atti/",
    "options": [
     {

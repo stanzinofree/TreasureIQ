@@ -3,7 +3,7 @@
  "services": {
   "accesso_atti": {
    "service_id": "044023:wp:10506",
-   "title": "Richiedere l&#8217;accesso agli atti",
+   "title": "Richiedere l’accesso agli atti",
    "source_url": "https://www.comune.grottammare.ap.it/servizio/accesso-civico-semplice/",
    "options": [
     {

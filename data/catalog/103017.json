@@ -3,7 +3,7 @@
  "services": {
   "accesso_atti": {
    "service_id": "103017:wp:1133",
-   "title": "Richiedere l&#8217;accesso agli atti",
+   "title": "Richiedere l’accesso agli atti",
    "source_url": "https://comune.cannobio.vb.it/servizio/accesso-agli-atti/",
    "options": [
     {
@@ -49,7 +49,7 @@
   },
   "carta_identita": {
    "service_id": "103017:wp:326",
-   "title": "Carta d&#8217;identità elettronica (CIE)",
+   "title": "Carta d’identità elettronica (CIE)",
    "source_url": "https://comune.cannobio.vb.it/servizio/emissione-carta-didentita-elettronica-cie/",
    "options": [
     {

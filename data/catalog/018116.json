@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.pizzale.pv.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=pzzl1540&amp;IDPr=9972",
+     "url": "https://servizi.comune.pizzale.pv.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=pzzl1540&IDPr=9972",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

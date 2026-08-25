@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://sportello.comune.parodiligure.al.it/su_procedimento/richiedere-laccesso-agli-atti/fattispecie/0/?ambito=sugen&amp;urlSite=https%3a%2f%2fwww.comune.parodiligure.al.it%2fit-it%2fservizi%2fanagrafe-e-stato-civile%2frichiedere-l-accesso-agli-atti-317-32968-1-a360038940a438e18a9641a3a435b8d0",
+     "url": "https://sportello.comune.parodiligure.al.it/su_procedimento/richiedere-laccesso-agli-atti/fattispecie/0/?ambito=sugen&urlSite=https%3a%2f%2fwww.comune.parodiligure.al.it%2fit-it%2fservizi%2fanagrafe-e-stato-civile%2frichiedere-l-accesso-agli-atti-317-32968-1-a360038940a438e18a9641a3a435b8d0",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

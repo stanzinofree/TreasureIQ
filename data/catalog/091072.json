@@ -3,7 +3,7 @@
  "services": {
   "accesso_atti": {
    "service_id": "091072:wp:1138",
-   "title": "Richiedere l&#8217;accesso agli atti",
+   "title": "Richiedere l’accesso agli atti",
    "source_url": "https://www.comune.perdasdefogu.og.it/servizio/richiedere-laccesso-agli-atti/",
    "options": [
     {

@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.rueglio.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=rgl1120&amp;IDPr=11567",
+     "url": "https://servizi.comune.rueglio.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=rgl1120&IDPr=11567",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

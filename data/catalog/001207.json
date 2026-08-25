@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.pratiglione.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=prtgln689&amp;IDPr=10524",
+     "url": "https://servizi.comune.pratiglione.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=prtgln689&IDPr=10524",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

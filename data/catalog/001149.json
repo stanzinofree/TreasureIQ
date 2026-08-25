@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://sportello.comune.meanadisusa.to.it/su_procedimento/richiedere-laccesso-agli-atti/fattispecie/0?ambito=sugen&amp;urlSite=https%3a%2f%2fwww.comune.meanadisusa.to.it%2fit-it%2fservizi%2fanagrafe-e-stato-civile%2frichiedere-l-accesso-agli-atti-317-29403-1-2ccc13a874ccbf18c584118ad1b77928",
+     "url": "https://sportello.comune.meanadisusa.to.it/su_procedimento/richiedere-laccesso-agli-atti/fattispecie/0?ambito=sugen&urlSite=https%3a%2f%2fwww.comune.meanadisusa.to.it%2fit-it%2fservizi%2fanagrafe-e-stato-civile%2frichiedere-l-accesso-agli-atti-317-29403-1-2ccc13a874ccbf18c584118ad1b77928",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

@@ -3,7 +3,7 @@
  "services": {
   "accesso_atti": {
    "service_id": "020051:wp:1321",
-   "title": "Richiedere l&#8217;accesso agli atti",
+   "title": "Richiedere l’accesso agli atti",
    "source_url": "https://www.comune.rodigo.mn.it/servizio/accesso-agli-atti-documentale/",
    "options": [
     {
@@ -26,7 +26,7 @@
   },
   "carta_identita": {
    "service_id": "020051:wp:1231",
-   "title": "Carta d&#8217;identità",
+   "title": "Carta d’identità",
    "source_url": "https://www.comune.rodigo.mn.it/servizio/carta-didentita/",
    "options": [
     {

@@ -3,7 +3,7 @@
  "services": {
   "accesso_atti": {
    "service_id": "080060:wp:305",
-   "title": "Richiedere l&#8217;accesso agli atti",
+   "title": "Richiedere l’accesso agli atti",
    "source_url": "https://comune.plati.rc.it/servizio/richiedere-laccesso-agli-atti/",
    "options": [
     {

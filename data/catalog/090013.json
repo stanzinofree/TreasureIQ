@@ -3,7 +3,7 @@
  "services": {
   "accesso_atti": {
    "service_id": "090013:wp:1123",
-   "title": "Richiedere l&#8217;accesso agli atti",
+   "title": "Richiedere l’accesso agli atti",
    "source_url": "https://www.comune.bonorva.ss.it/servizio/richiedere-laccesso-agli-atti/",
    "options": [
     {

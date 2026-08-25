@@ -3,7 +3,7 @@
  "services": {
   "accesso_atti": {
    "service_id": "111052:wp:1473",
-   "title": "Richiedere l&#8217;accesso agli atti",
+   "title": "Richiedere l’accesso agli atti",
    "source_url": "https://www.comune.pabillonis.vs.it/servizio/accesso-documentale/",
    "options": [
     {
@@ -26,7 +26,7 @@
   },
   "carta_identita": {
    "service_id": "111052:wp:1038",
-   "title": "Carta d&#8217;identità",
+   "title": "Carta d’identità",
    "source_url": "https://www.comune.pabillonis.vs.it/servizio/carta-didentita/",
    "options": [
     {

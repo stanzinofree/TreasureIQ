@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.etroubles.ao.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=trbls1087&amp;IDPr=11048",
+     "url": "https://servizi.comune.etroubles.ao.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=trbls1087&IDPr=11048",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

@@ -3,7 +3,7 @@
  "services": {
   "accesso_atti": {
    "service_id": "066006:wp:14082",
-   "title": "SIT e documenti per l&#8217;accesso agli atti",
+   "title": "SIT e documenti per l’accesso agli atti",
    "source_url": "https://comune.avezzano.aq.it/servizio/sit-e-documenti-per-laccesso-agli-atti/",
    "options": [
     {
@@ -26,7 +26,7 @@
   },
   "tributi_imu": {
    "service_id": "066006:wp:9095",
-   "title": "IMU &#8211; Imposta municipale propria",
+   "title": "IMU – Imposta municipale propria",
    "source_url": "https://comune.avezzano.aq.it/servizio/imu-imposta-municipale-propria/",
    "options": [
     {

@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.montegrino-valtravaglia.va.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=mntgrnvltrvgl1101&amp;IDPr=9968",
+     "url": "https://servizi.comune.montegrino-valtravaglia.va.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=mntgrnvltrvgl1101&IDPr=9968",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

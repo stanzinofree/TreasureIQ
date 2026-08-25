@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.cintano.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=cntn1264&amp;IDPr=11143",
+     "url": "https://servizi.comune.cintano.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=cntn1264&IDPr=11143",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

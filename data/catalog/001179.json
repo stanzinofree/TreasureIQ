@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.parella.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=prll1123&amp;IDPr=10584",
+     "url": "https://servizi.comune.parella.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=prll1123&IDPr=10584",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

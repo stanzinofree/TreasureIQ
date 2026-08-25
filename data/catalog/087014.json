@@ -3,7 +3,7 @@
  "services": {
   "carta_identita": {
    "service_id": "087014:wp:235",
-   "title": "Carta D&#8217;identità",
+   "title": "Carta D’identità",
    "source_url": "https://www.comune.castiglionedisicilia.ct.it/servizio/carta-didentita/",
    "options": [
     {

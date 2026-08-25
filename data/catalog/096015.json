@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.castellettocervo.bi.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=cstllttcrv379&amp;IDPr=11726",
+     "url": "https://servizi.comune.castellettocervo.bi.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=cstllttcrv379&IDPr=11726",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

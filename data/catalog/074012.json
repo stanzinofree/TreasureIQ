@@ -3,7 +3,7 @@
  "services": {
   "accesso_atti": {
    "service_id": "074012:wp:1766",
-   "title": "Richiedere l&#8217;accesso agli atti",
+   "title": "Richiedere l’accesso agli atti",
    "source_url": "https://www.comune.ostuni.br.it/servizio/richiesta-di-accesso-agli-atti/",
    "options": [
     {
@@ -62,7 +62,7 @@
   },
   "carta_identita": {
    "service_id": "074012:wp:1598",
-   "title": "Carta d&#8217;Identità Elettronica CIE",
+   "title": "Carta d’Identità Elettronica CIE",
    "source_url": "https://www.comune.ostuni.br.it/servizio/carta-didentita-elettronica-cie/",
    "options": [
     {
@@ -111,7 +111,7 @@
   },
   "tributi_imu": {
    "service_id": "074012:wp:1703",
-   "title": "IMU &#8211; Imposta municipale propria",
+   "title": "IMU – Imposta municipale propria",
    "source_url": "https://www.comune.ostuni.br.it/servizio/consultare-la-tua-situazione-contributiva-imu/",
    "options": [
     {
@@ -134,7 +134,7 @@
   },
   "tributi_tari": {
    "service_id": "074012:wp:1712",
-   "title": "TARI &#8211; Tassa sui Rifiuti",
+   "title": "TARI – Tassa sui Rifiuti",
    "source_url": "https://www.comune.ostuni.br.it/servizio/tari/",
    "options": [
     {

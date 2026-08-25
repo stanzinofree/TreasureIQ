@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.vidracco.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=vdrcc212&amp;IDPr=11240",
+     "url": "https://servizi.comune.vidracco.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=vdrcc212&IDPr=11240",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

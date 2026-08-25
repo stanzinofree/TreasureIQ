@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://portale.comune.valenza.al.it/portal/servizi/moduli/25/modulo?url_bd=https://www.comune.valenza.al.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-40492-1-ee32aba2333bc02cca0ff9f4274464e1&amp;titolo_bd=Anagrafe%20e%20Stato%20Civile%20/%20Richiedere%20Accesso%20agli%20Atti",
+     "url": "https://portale.comune.valenza.al.it/portal/servizi/moduli/25/modulo?url_bd=https://www.comune.valenza.al.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-40492-1-ee32aba2333bc02cca0ff9f4274464e1&titolo_bd=Anagrafe%20e%20Stato%20Civile%20/%20Richiedere%20Accesso%20agli%20Atti",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

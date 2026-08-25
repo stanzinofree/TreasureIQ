@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.malesco.vb.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=mlsc1258&amp;IDPr=12192",
+     "url": "https://servizi.comune.malesco.vb.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=mlsc1258&IDPr=12192",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

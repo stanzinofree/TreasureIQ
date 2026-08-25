@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.quassolo.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=qssl152&amp;IDPr=11413",
+     "url": "https://servizi.comune.quassolo.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=qssl152&IDPr=11413",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

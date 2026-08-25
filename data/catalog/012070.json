@@ -3,7 +3,7 @@
  "services": {
   "carta_identita": {
    "service_id": "012070:wp:47313",
-   "title": "Carta d&#8217;Identità Elettronica (C.I.E.)",
+   "title": "Carta d’Identità Elettronica (C.I.E.)",
    "source_url": "https://www.comune.gallarate.va.it/servizio/carta-didentita-elettronica-c-i-e/",
    "options": [
     {
@@ -101,7 +101,7 @@
   },
   "tributi_tari": {
    "service_id": "012070:wp:46587",
-   "title": "Tassa Rifiuti &#8211; TARI",
+   "title": "Tassa Rifiuti – TARI",
    "source_url": "https://www.comune.gallarate.va.it/servizio/tassa-rifiuti-tari/",
    "options": [
     {

@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.saintoyen.ao.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=sntyn128&amp;IDPr=11535",
+     "url": "https://servizi.comune.saintoyen.ao.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=sntyn128&IDPr=11535",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

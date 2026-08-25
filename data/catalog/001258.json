@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizidigitali.comune.sauzedicesana.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=szdcsn1224&amp;IDPr=13435",
+     "url": "https://servizidigitali.comune.sauzedicesana.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=szdcsn1224&IDPr=13435",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

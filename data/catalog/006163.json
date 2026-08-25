@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://sportello.comune.solero.al.it/su_procedimento/richiedere-laccesso-agli-atti/fattispecie/0?ambito=sugen&amp;urlSite=https://www.comune.solero.al.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-34684-1-d6380700809b0f2941385c10e577b5a4",
+     "url": "https://sportello.comune.solero.al.it/su_procedimento/richiedere-laccesso-agli-atti/fattispecie/0?ambito=sugen&urlSite=https://www.comune.solero.al.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-34684-1-d6380700809b0f2941385c10e577b5a4",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

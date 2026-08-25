@@ -3,7 +3,7 @@
  "services": {
   "tributi_imu": {
    "service_id": "082071:wp:2836",
-   "title": "Tributi &#8211; Imu e Tasi",
+   "title": "Tributi – Imu e Tasi",
    "source_url": "https://www.comune.terrasini.pa.it/servizio/tributi-imu-e-tasi/",
    "options": [
     {
@@ -26,7 +26,7 @@
   },
   "tributi_tari": {
    "service_id": "082071:wp:2839",
-   "title": "Tributi &#8211; Tari",
+   "title": "Tributi – Tari",
    "source_url": "https://www.comune.terrasini.pa.it/servizio/tributi-tari/",
    "options": [
     {

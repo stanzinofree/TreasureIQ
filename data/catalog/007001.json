@@ -3,7 +3,7 @@
  "services": {
   "accesso_atti": {
    "service_id": "007001:wp:2731",
-   "title": "Richiedere l&#8217;accesso agli atti",
+   "title": "Richiedere l’accesso agli atti",
    "source_url": "https://comune.allein.ao.it/servizio/richiedere-laccesso-agli-atti/",
    "options": [
     {

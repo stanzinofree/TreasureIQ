@@ -3,7 +3,7 @@
  "services": {
   "accesso_atti": {
    "service_id": "080013:wp:350",
-   "title": "Richiede l&#8217;accesso agli atti",
+   "title": "Richiede l’accesso agli atti",
    "source_url": "https://comune.bovamarina.rc.it/servizio/richiede-laccesso-agli-atti/",
    "options": [
     {

@@ -70,7 +70,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizionline.comune.santacrocedimagliano.cb.it/urbi/progs/urp/ur1TR019.sto?DB_NAME=n1201144&#038;w3cbt=S",
+     "url": "https://servizionline.comune.santacrocedimagliano.cb.it/urbi/progs/urp/ur1TR019.sto?DB_NAME=n1201144&w3cbt=S",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

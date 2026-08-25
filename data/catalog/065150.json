@@ -3,7 +3,7 @@
  "services": {
   "carta_identita": {
    "service_id": "065150:wp:4092",
-   "title": "Carta d&#8217;identità elettronica (CIE)",
+   "title": "Carta d’identità elettronica (CIE)",
    "source_url": "https://comune.tortorella.sa.it/servizio/carta-didentita-elettronica-cie/",
    "options": [
     {

@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.front.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=frnt1037&amp;IDPr=11470",
+     "url": "https://servizi.comune.front.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=frnt1037&IDPr=11470",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

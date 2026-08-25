@@ -3,7 +3,7 @@
  "services": {
   "accesso_atti": {
    "service_id": "026017:wp:25816",
-   "title": "Richiedere l&#8217;accesso agli atti",
+   "title": "Richiedere l’accesso agli atti",
    "source_url": "https://comune.cimadolmo.tv.it/servizio/richiedere-laccesso-agli-atti/",
    "options": [
     {
@@ -62,7 +62,7 @@
   },
   "carta_identita": {
    "service_id": "026017:wp:3497",
-   "title": "Carta d&#8217;identità elettronica",
+   "title": "Carta d’identità elettronica",
    "source_url": "https://comune.cimadolmo.tv.it/servizio/carta-didentita-elettronica/",
    "options": [
     {

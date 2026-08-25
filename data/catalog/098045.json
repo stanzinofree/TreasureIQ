@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.pieve-fissiraga.lo.it/urbi/progs/urp/ur1PR003.sto?DB_NAME=n1200691&amp;AmbitoBloccato=0&amp;MacroTipoBloccato=147&amp;TipoBloccato=16|3&amp;catnome=Anagrafe%2520e%2520stato%2520civile&amp;caturl=https://www.comune.pieve-fissiraga.lo.it/it-it/servizi/anagrafe-e-stato-civile&amp;servnome=Richiedere%2520l%2527accesso%2520agli%2520atti%2520-%2520Accesso%2520civico%2520generalizzato&amp;servurl=https://www.comune.pieve-fissiraga.lo.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-accesso-civico-generalizzato-1029-55453-1-5d28141b6e98016ad899f00ba7d5fb2e",
+     "url": "https://servizi.comune.pieve-fissiraga.lo.it/urbi/progs/urp/ur1PR003.sto?DB_NAME=n1200691&AmbitoBloccato=0&MacroTipoBloccato=147&TipoBloccato=16|3&catnome=Anagrafe%2520e%2520stato%2520civile&caturl=https://www.comune.pieve-fissiraga.lo.it/it-it/servizi/anagrafe-e-stato-civile&servnome=Richiedere%2520l%2527accesso%2520agli%2520atti%2520-%2520Accesso%2520civico%2520generalizzato&servurl=https://www.comune.pieve-fissiraga.lo.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-accesso-civico-generalizzato-1029-55453-1-5d28141b6e98016ad899f00ba7d5fb2e",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,
@@ -57,7 +57,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/?catnome=Anagrafe%2520e%2520stato%2520civile&amp;caturl=https://www.comune.pieve-fissiraga.lo.it/it-it/servizi/anagrafe-e-stato-civile&amp;servnome=Cambio%2520Residenza&amp;servurl=https://www.comune.pieve-fissiraga.lo.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-55451-1-1b560677405447b9d5ae753edd98679a",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/?catnome=Anagrafe%2520e%2520stato%2520civile&caturl=https://www.comune.pieve-fissiraga.lo.it/it-it/servizi/anagrafe-e-stato-civile&servnome=Cambio%2520Residenza&servurl=https://www.comune.pieve-fissiraga.lo.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-55451-1-1b560677405447b9d5ae753edd98679a",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

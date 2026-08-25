@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.varisella.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=vrsll192&amp;IDPr=12150",
+     "url": "https://servizi.comune.varisella.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=vrsll192&IDPr=12150",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

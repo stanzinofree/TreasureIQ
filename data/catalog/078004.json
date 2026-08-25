@@ -3,7 +3,7 @@
  "services": {
   "accesso_atti": {
    "service_id": "078004:wp:135",
-   "title": "Richiedere l&#8217;accesso agli atti",
+   "title": "Richiedere l’accesso agli atti",
    "source_url": "https://comune.aiellocalabro.cs.it/servizio/richiedere-laccesso-agli-atti/",
    "options": [
     {

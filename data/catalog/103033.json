@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.ghiffa.vb.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=ghff603&amp;IDPr=10836",
+     "url": "https://servizi.comune.ghiffa.vb.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=ghff603&IDPr=10836",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.montanaro.to.it/servizi/filodiretto2/Login.aspx?ce=mntnr793&amp;IDPr=11042",
+     "url": "https://servizi.comune.montanaro.to.it/servizi/filodiretto2/Login.aspx?ce=mntnr793&IDPr=11042",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

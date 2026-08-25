@@ -21,7 +21,7 @@
     },
     {
      "mode": "authenticated_online",
-     "url": "https://servizi.comune.palazzocanavese.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=plzzcnvs167&amp;IDPr=11063",
+     "url": "https://servizi.comune.palazzocanavese.to.it/servizi/filodiretto2/ProcedimentiClient.aspx?CE=plzzcnvs167&IDPr=11063",
      "provider": null,
      "authentication": [],
      "requires_authentication": true,

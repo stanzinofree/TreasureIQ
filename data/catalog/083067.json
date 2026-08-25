@@ -3,7 +3,7 @@
  "services": {
   "carta_identita": {
    "service_id": "083067:wp:1453",
-   "title": "Carta d&#8217;identità",
+   "title": "Carta d’identità",
    "source_url": "https://www.comune.pettineo.me.it/servizio/carta-didentita/",
    "options": [
     {

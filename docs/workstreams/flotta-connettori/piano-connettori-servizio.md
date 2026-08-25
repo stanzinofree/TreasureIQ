@@ -45,10 +45,10 @@ _Rev 2, 2026-08-25. Incorpora la review Codex. **Non è ancora un piano esecutiv
 
 | Ordine | Target | Azione | Stato evidenza |
 |---|---|---|---|
-| **0** | baseline attuale | chiudere live-resolve + promozione del catalogo esistente | in corso |
-| **1** | comunibootstrapitalia | recon breve: compatibile WP/AgID o dialetto proprio? | spike economico |
+| **0** | baseline attuale | chiudere live-resolve + promozione del catalogo esistente | ✅ fatto — PR #28 (1244 comuni, 3402 reference) |
+| **1** | comunibootstrapitalia | recon breve: compatibile WP/AgID o dialetto proprio? | ✅ spike fatto (2026-08-25) → **dialetto proprio OpenWeb, NON WP/AgID**; vedi scheda §3-bis. Converge su order 3 (PeopleWeb-OpenWeb) |
 | **2** | OpenPA | recon REST + fixture; candidato al **primo nuovo adapter reale** | pista REST concreta, da validare |
-| **3** | PeopleWeb | **separare** i due vendor (OpenWeb vs Siscom), poi scegliere il più esposto | 2 dialetti, non 1 connettore |
+| **3** | PeopleWeb / OpenWeb | **separare** i due vendor (OpenWeb vs Siscom), poi scegliere il più esposto; comunibootstrapitalia rientra qui (stesso dialetto OpenWeb) | 2 dialetti, non 1 connettore |
 | **4** | Hgate / Halley | verificare portale `/zf`, URL, access mode | recon dedicata prima |
 | **5** | Municipium | **solo se** emerge una superficie per-servizio | ⛔ oggi SPA/API WAF-bloccata, nessuna superficie HTML per-ServiceKey → **honest miss documentato** finché l'evidenza non cambia |
 
@@ -68,6 +68,21 @@ Ogni target passa da questa scheda **verde** prima di scrivere il connettore:
 8. **casi vuoto / ambiguo** — come si comporta.
 9. **eventuali dialetti** (es. peopleweb 2 vendor).
 10. **decisione**: connettibile **oppure** honest miss documentato.
+
+## 3-bis. Scheda recon COMPILATA — comunibootstrapitalia (spike order 1, 2026-08-25)
+
+Sonda live read-only su 3 comuni (Castro `016065`, Bianzano `016026`, Predore) + census `portale_snapshot`.
+
+1. **platform ID**: `comunibootstrapitalia` (50 comuni snapshot). Home: nginx, tema `bootstrap-italia`, `rotte=php`.
+2. **superficie per-ServiceKey**: schede servizio `/scheda-ist/<slug>` (HTML, family-wide: presenti su tutti e 3 i comuni). Portale autenticato OpenWeb su host separato `servizi.<comune>/openweb/` + `/portal/autenticazione/`. AT su `/Pages/amministrazione_trasparente_v3_0/?code=AT.*` (codificata).
+3. **ServiceKey dimostrabili**: da confermare per-key; le schede esistono ma **non c'è indice/REST**: `/scheda-ist/` nudo → 404, gli slug sono diretti. Discovery per-key richiede una pagina di ricerca/indice, non una GET secca.
+4. **forma candidati**: **HTML** (no REST). `/wp-json/` → **404 su tutti e 3** (prova che NON è WordPress). `/api/` → 404.
+5. **evidenza URL**: scheda `/scheda-ist/<slug>` = source_url plausibile; opzione autenticata = portale `servizi.<host>/openweb/`. Da verificare che la scheda porti ≥1 link accesso (come per comweb via `service_page`).
+6. **access mode**: misto — informazione (scheda HTML) + autenticato (portale OpenWeb, host separato → attenzione host-guard cross-host).
+7. **budget**: ignoto finché non si trova il meccanismo di discovery per-key (probabile: 1 fetch indice + 1 scheda).
+8. **casi vuoto/ambiguo**: `/Pages/` → 302 `/Error/404`; slug errato → 404. Miss onesto pulito.
+9. **dialetto**: **OpenWeb** (marker `soluzionipa`/`openweb` su Castro). Stesso vendor di PeopleWeb-OpenWeb ([[peopleweb-due-vendor-openweb-siscom]]) → **non un connettore a sé**, va unificato con order 3.
+10. **DECISIONE**: **NON riducibile al `WordPressAgidServiceConnector`** (nessuna REST wp/v2, provato). È il dialetto OpenWeb, superficie HTML `/scheda-ist/`. **Non è il primo nuovo adapter**: rientra nella recon OpenWeb (order 3). Nessuna implementazione ora; il prossimo adapter reale resta **OpenPA (order 2)** dopo la sua recon.
 
 ## 4. Punti di sincronizzazione a ogni nuovo connettore-servizio
 

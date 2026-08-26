@@ -139,35 +139,57 @@ restano invariati (blast radius zero fuori dal connettore).
 
 | Layer | Cosa fa | Simbolo |
 |---|---|---|
-| 0 | marcatore negativo per-chiave dominio-sbagliato (`taxi` per anagrafe) | `_MARCATORI_NEGATIVI` |
-| — | **short-circuit `len(matched) <= 1`**: un match solitario NON viene mai scartato (protegge i 39 golden) | — |
-| B | stoplist substring detrito + regex token di confine `\b(ruolo\|det\|delib\|imp)\b` | `_STOPLIST_DETRITO`, `_DETRITO_RX`, `_e_detrito` |
-| A | priorità classe: se sopravvive **un solo** `public_service`, vince su document/output | — |
+| 0 | marcatore negativo per-chiave dominio-sbagliato (`taxi` per anagrafe) — **incondizionale** | `_MARCATORI_NEGATIVI` |
+| B | detrito amministrativo (regolamenti/delibere/determine/tariffe/registri) — **incondizionale, anche a match unico** | `_STOPLIST_DETRITO`, `_DETRITO_RX`, `_e_detrito` |
+| — | **short-circuit `len(non_detrito) <= 1`**: 0 → NOT_FOUND onesto, 1 → confermato dal gate; salta solo il Layer A | — |
+| A | priorità classe: fra i **≥2** non-detrito, se sopravvive **un solo** `public_service` vince su document/output | — |
 
-Ordine: neg → gate `len==1` short-circuit → B → A. Se dopo A restano 0 o ≥2
-`public_service` non-detrito, resta **ambiguo** → NOT_FOUND (I-1): il filtro non
+Ordine: **neg → B (incondizionale) → short-circuit ≤1 → A**. Se dopo A restano 0 o
+≥2 `public_service` non-detrito, resta **ambiguo** → NOT_FOUND (I-1): il filtro non
 inventa un vincitore.
+
+> **Revisione (review PR #37).** La prima stesura applicava il detrito **solo** in
+> presenza di ≥2 match (short-circuit prima del Layer B): un `Regolamento`/`Registro`
+> **solitario** passava comunque. Il falso positivo era coperto solo nel contesto del
+> replay, non come invariante. Corretto: il detrito è **incondizionale**, quindi
+> «detrito solitario → NOT_FOUND» è ora una proprietà del connettore, con test
+> dedicato. Costo: 6 confermati-di-controllo erano `Regolamento` solitari — falsi
+> positivi, non servizi veri — ora onestamente NOT_FOUND.
+>
+> Inoltre `accertament` è stato **rimosso** dalla stoplist: è polisemico
+> («avviso di accertamento» = atto, ma «rateizzazione / riesame / autotutela
+> accertamento» = servizi veri e frequenti). La substring li uccideva insieme; il
+> rischio di rimuovere servizi tributari legittimi supera il guadagno. Verificato:
+> **0** confermati contengono «accertament» (nessun FP introdotto dalla rimozione).
 
 **Risultato replay (offline, baseline congelata):**
 
 | | confermati | ambiguo | vuoto |
 |---|---|---|---|
 | control (solo allow-list, = `main`) | 39 | 96 | 33 |
-| **filtro-2** | **90** | 42 | 36 |
+| **filtro-2** | **84** | 42 | 42 |
 
-**0 regressioni** sui 39 confermati di controllo (test golden lo verifica caso per
-caso, stesso `native_id`). **0 falsi positivi netti.**
+Scomposizione degli 84: **33 veri-servizio** già confermati dal controllo e rimasti
+invarianti (stesso `native_id`, test golden caso per caso) + **51 nuovi** recuperati
+dalla disambiguazione a ≥2. **0 regressioni vere** (nessun servizio non-detrito
+perso) e **0 falsi positivi netti**.
 
-### Discrepanza 91 vs 90 — chiarita
+### Conteggi: da 90 (prima stesura) a 84 (dopo review)
 
-Una prima versione del replay dava **91** confermati **con 2 falsi positivi**:
-- *Maddaloni* — `Registro di accesso agli atti`: è il **registro/log**, non il servizio.
-- *Verona* — `…cambio residenza taxi`: dominio **licenze taxi**, non anagrafe.
+La prima stesura riportava **90** confermati. La review ha mostrato che **6** di
+quei confermati erano `Regolamento …` **solitari**, passati perché il detrito
+agiva solo a ≥2: falsi positivi, non servizi veri. Con il detrito incondizionale
+diventano NOT_FOUND → **84**, tutti servizi reali. La precisione migliora (6 FP
+rimossi), la recall dei servizi veri è invariata (i 51 nuovi non cambiano).
 
-Chiusi entrambi aggiungendo `registro` alla stoplist e `taxi` ai marcatori negativi
-anagrafici. La versione finale è quindi **90 confermati con 0 FP netti**. Il numero
-canonico del report e dei test è **90**; il 91 è la misura pre-fix, tenuta qui solo
-come traccia.
+I 6 droppati (tutti `Regolamento`): Chianocco/TARI, Pantelleria/ACCESSO_ATTI,
+Pantelleria/IMU, Bolzano/IMU, Storo/TARI, Verona/TARI. Verificato con
+`_e_detrito`: tutti detrito, nessun servizio vero fra loro.
+
+> Nota storica sui numeri precedenti: una misura ancora anteriore dava **91** con 2
+> FP egregi (Maddaloni `Registro…`, Verona `…residenza taxi`), chiusi con `registro`
+> in stoplist e `taxi` nei marcatori negativi → 90. La review ha poi portato a 84.
+> Numero canonico corrente = **84**.
 
 ### «Stesso dominio» è un criterio scelto, non una certezza semantica
 
@@ -205,13 +227,17 @@ dominio-ristretto all'edilizia. Da confermare in review se la policy li accetta.
 ### Test (questa PR)
 
 `tests/test_openpa_filtro_titolo_classe.py`, net-free:
-- **golden 39**: ogni caso confermato pre-filtro resta confermato con lo stesso `native_id`;
+- **golden 33 veri-servizio**: ogni caso resta confermato con lo stesso `native_id`;
 - **stoplist**: parametrico su **ogni** termine di `_STOPLIST_DETRITO` e ogni token della regex;
 - **regex `\b`**: `det`/`imp` dentro parola legittima (`Detrazione`, `Impegno civico`) NON è detrito;
 - **taxi**: `residenza taxi` rimosso dalle chiavi anagrafiche; guardia sui marcatori registrati;
-- **registro**: `Registro di accesso agli atti` escluso;
-- **short-circuit**: match solitario detrito NON scartato;
+- **detrito solitario → NOT_FOUND** (review #1): `Regolamento TARI` da solo e
+  `Registro di accesso agli atti` da solo → nessun confermato;
+- **servizio vero solitario resta** (non-detrito, es. `IMU istanza rimborso`);
+- **accertamento legittimo** (review #2): `_e_detrito` è `False` su
+  rateizzazione/riesame/autotutela accertamento, e `accertament` non è più in stoplist;
+  un servizio di accertamento solitario resta confermato;
 - **priorità classe** + **due public_service veri restano ambigui** + **classi fuori allow-list scartate**.
 
-105 test verdi (nuovi + connettore esistente); blast radius connettori/recogniser 564 verdi.
+102 test verdi (nuovi + connettore esistente); blast radius connettori/recogniser 564 verdi.
 Suite completa in locale si blocca su test pre-esistenti Ollama-dipendenti (ambientale, CI autorità).

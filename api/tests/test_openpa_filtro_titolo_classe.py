@@ -75,8 +75,11 @@ def _golden_cases() -> list[dict]:
         return json.load(fh)
 
 
-def test_golden_fixture_ha_39_casi() -> None:
-    assert len(_golden_cases()) == 39
+def test_golden_fixture_ha_33_veri_servizio() -> None:
+    # 33 = 39 control-confermati MENO i 6 "Regolamento …" solitari, che il detrito
+    # incondizionale ora rifiuta come NOT_FOUND (erano falsi positivi di controllo,
+    # mai servizi veri).  Vedi test_regolamento_solitario_e_not_found.
+    assert len(_golden_cases()) == 33
 
 
 @pytest.mark.parametrize(
@@ -84,9 +87,9 @@ def test_golden_fixture_ha_39_casi() -> None:
     _golden_cases(),
     ids=[f"{c['comune']}-{c['key']}" for c in _golden_cases()],
 )
-def test_golden_39_restano_confermati_stesso_id(caso: dict) -> None:
-    """Nessuna regressione: ogni caso confermato pre-filtro resta confermato,
-    e punta allo stesso native_id (I-1 non deve mai perdere il match solitario)."""
+def test_golden_veri_servizio_restano_confermati_stesso_id(caso: dict) -> None:
+    """Nessuna regressione sui SERVIZI VERI: ogni caso resta confermato e punta
+    allo stesso native_id.  Il detrito solitario è escluso dal golden apposta."""
     esito, cand = _resolve(caso["hits"], ServiceKey[caso["key"]])
     assert esito == "confermato", f"{caso['comune']}/{caso['key']} → {esito}"
     assert cand is not None
@@ -170,16 +173,63 @@ def test_marcatori_negativi_registrati_sulle_chiavi_anagrafiche() -> None:
 
 
 # --------------------------------------------------------------------------- #
-# Short-circuit len(matched)<=1: un match solitario detrito NON va scartato.
+# Detrito INCONDIZIONALE: un servizio vero solitario resta, un detrito solitario
+# diventa NOT_FOUND (invariante del connettore, non del solo contesto di replay).
 # --------------------------------------------------------------------------- #
-def test_match_solitario_non_scartato_anche_se_detrito() -> None:
-    """Se il recogniser matcha UN SOLO candidato, quello passa comunque: il
-    detrito/priorità agisce solo per disambiguare ≥2 match (protegge i 39)."""
+def test_servizio_vero_solitario_resta_confermato() -> None:
+    """Match unico NON-detrito: passa (short-circuit ≤1 lo protegge dalla
+    priorità di classe).  "IMU istanza rimborso" è modulo azionabile, non detrito."""
     key = ServiceKey.TRIBUTI_IMU
-    # un solo candidato IMU, per giunta document "istanza rimborso": deve restare.
     cands = (
         _c(1, "IMU istanza rimborso", "document"),
         _c(2, "Ufficio Protocollo", "public_service"),  # non matcha IMU
+    )
+    filtrati = _CONN._filtra_candidati(cands, key)
+    conf = [c for c in filtrati if riconosci_service_key(c.title) is key]
+    assert [c.native_id for c in conf] == ["1"]
+
+
+def test_regolamento_solitario_e_not_found() -> None:
+    """(review #1) Detrito SOLITARIO → NOT_FOUND come invariante del connettore.
+    Un solo candidato "Regolamento TARI" non deve confermare nulla."""
+    key = ServiceKey.TRIBUTI_TARI
+    cands = (_c(1, "Regolamento TARI", "document"),)
+    filtrati = _CONN._filtra_candidati(cands, key)
+    conf = [c for c in filtrati if riconosci_service_key(c.title) is key]
+    assert conf == []  # 0 → NOT_FOUND
+
+
+def test_registro_solitario_e_not_found() -> None:
+    """(review #1) "Registro di accesso agli atti" da solo = il registro/log,
+    non il servizio: NOT_FOUND, non un confermato mascherato."""
+    key = ServiceKey.ACCESSO_ATTI
+    cands = (_c(1, "Registro di accesso agli atti", "public_service"),)
+    filtrati = _CONN._filtra_candidati(cands, key)
+    conf = [c for c in filtrati if riconosci_service_key(c.title) is key]
+    assert conf == []
+
+
+# --------------------------------------------------------------------------- #
+# (review #2) "accertament" NON è detrito: i servizi di accertamento restano.
+# --------------------------------------------------------------------------- #
+def test_accertamento_non_e_detrito() -> None:
+    for servizio in (
+        "Richiesta di rateizzazione avviso di accertamento IMU",
+        "Istanza in autotutela per l'annullamento dell'accertamento IMU",
+        "TARI - istanza di riesame avviso di accertamento",
+    ):
+        assert _e_detrito(servizio) is False, servizio
+    # e il termine non è nemmeno più nella stoplist substring.
+    assert not any("accertament" in s for s in _STOPLIST_DETRITO)
+
+
+def test_servizio_accertamento_solitario_resta_confermato() -> None:
+    """(review #2) Un servizio di accertamento legittimo, unico match, resta
+    confermato: non viene ucciso da una stoplist troppo larga."""
+    key = ServiceKey.TRIBUTI_IMU
+    cands = (
+        _c(1, "Richiesta di rateizzazione avviso di accertamento IMU", "public_service"),
+        _c(2, "Ufficio Tributi", "public_service"),  # non matcha IMU
     )
     filtrati = _CONN._filtra_candidati(cands, key)
     conf = [c for c in filtrati if riconosci_service_key(c.title) is key]

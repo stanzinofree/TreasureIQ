@@ -193,12 +193,20 @@ _CLASSI_AMMESSE: dict[ServiceKey, frozenset[str]] = {
 #: servizio di accesso).  Substring, confronto lowercase.  Deliberatamente NON
 #: include modulo/modello/istanza/domanda/richiesta: quelli SONO artefatti
 #: azionabili (moduli da scaricare, richieste) e restano candidati validi.
-#: Applicato SOLO come tie-break fra ≥2 match del recogniser — mai per rimuovere
-#: un match unico: un servizio già risolto esattamente-1 non viene toccato
-#: (vedi il golden dei 39 casi in test).
+#: Applicato INCONDIZIONALMENTE ai match del recogniser (anche a un match unico):
+#: un detrito solitario — es. "Registro/Regolamento X" da solo — deve dare
+#: NOT_FOUND, non passare.  Non tocca i servizi veri (il golden lo verifica): un
+#: titolo di servizio non è detrito.  Deliberatamente esclusi da qui modulo/
+#: modello/istanza/domanda/richiesta — sono artefatti azionabili dal cittadino.
+#: NB: "accertament" NON è in stoplist di proposito.  È polisemico: "avviso di
+#: accertamento" è un atto emesso al cittadino, ma "richiesta di rateizzazione/
+#: riesame/autotutela dell'accertamento" sono servizi VERI e frequenti.  La
+#: substring li ucciderebbe insieme; il rischio di rimuovere servizi tributari
+#: legittimi supera il guadagno.  Gli avvisi-atto residui sono gestiti
+#: dall'ambiguità a valle (di norma ≥2), non da questa stoplist.
 _STOPLIST_DETRITO: tuple[str, ...] = (
     "regolament", "delibera", "deliber", "determina", "aliquot", "tariff",
-    "approvazione", "impegno di spesa", "accertament", "affidament",
+    "approvazione", "impegno di spesa", "affidament",
     "comunicato", "verbale", "assunzione impegno", "a contrarre", "registro",
 )
 #: Token stand-alone (evita il match dentro parole non correlate): sigle e parole
@@ -266,15 +274,15 @@ class OpenPAServiceConnector(_ServiceConnectorBase):
           fuori.  ``native_class`` None → scartato (non classificabile ≠ servizio).
         - **Layer 0** (``_MARCATORI_NEGATIVI``): via i titoli in un dominio
           amministrativo diverso (es. residenza *taxi* per l'anagrafe).
-        - **disambiguazione SOLO fra ≥2 match del recogniser**: sotto i 2 match il
-          set passa intatto e sono ``_confermati`` + il gate 0/≥2 a risolvere — un
-          match unico resta confermato, MAI toccato (golden dei 39).  Il recogniser
-          è *chiamato*, non modificato.
-        - **Layer B** (``_e_detrito``): fra i ≥2 match, via il detrito
-          amministrativo (regolamenti/determine/tariffe/registri).  Se ne resta
-          uno solo → quello; se non ne resta nessuno (solo detrito) → il set
-          intatto resta ambiguo → NOT_FOUND onesto.
-        - **Layer A** (priorità classe): fra i match non-detrito, se ne esiste
+        - **Layer B** (``_e_detrito``): via il detrito amministrativo
+          (regolamenti/determine/tariffe/registri) dai match del recogniser.
+          INCONDIZIONALE — anche a match unico: un detrito solitario deve dare
+          NOT_FOUND, non passare.  Il recogniser è *chiamato*, non modificato.
+        - **short-circuit ≤1 non-detrito**: 0 o 1 servizio reale → nessuna
+          ambiguità; decidono ``_confermati`` + il gate esattamente-1 (0 →
+          NOT_FOUND onesto, 1 → confermato).  Un servizio vero solitario non è
+          detrito → resta confermato (golden dei 33 veri-servizio).
+        - **Layer A** (priorità classe): fra i ≥2 match non-detrito, se ne esiste
           **uno solo** ``public_service`` vince su ``document``/``output``.  È il
           criterio "stesso dominio" (preferiamo la classe che OpenPA usa per la
           scheda-servizio), NON una certezza semantica; se restano ≥2
@@ -294,18 +302,19 @@ class OpenPAServiceConnector(_ServiceConnectorBase):
             c = tuple(x for x in c if not any(n in x.title.lower() for n in neg))
 
         matched = tuple(x for x in c if riconosci_service_key(x.title) is service_key)
-        if len(matched) <= 1:
-            # 0 o 1 match: nessuna ambiguità da sciogliere.  Lascia decidere
-            # _confermati (recogniser + host) e il gate — il match unico è confermato.
-            return c
 
+        # Layer B — detrito amministrativo, INCONDIZIONALE (anche a match unico):
+        # un "Registro/Regolamento X" solitario deve dare NOT_FOUND, non passare.
         non_detrito = tuple(x for x in matched if not _e_detrito(x.title))
-        if len(non_detrito) == 1:
-            return non_detrito
-        if not non_detrito:
-            # Solo detrito: nessun servizio azionabile → resta ambiguo (NOT_FOUND).
-            return matched
 
+        if len(non_detrito) <= 1:
+            # 0 o 1 servizio reale: nessuna ambiguità da sciogliere.  0 → NOT_FOUND
+            # onesto (solo detrito o niente); 1 → confermato dal gate esattamente-1.
+            # Lascia decidere _confermati (recogniser + host) e il gate.
+            return non_detrito
+
+        # Layer A — priorità classe: fra i ≥2 non-detrito, un solo public_service
+        # vince su document/output.  ≥2 public_service = servizi distinti → NOT_FOUND.
         ps = tuple(x for x in non_detrito if x.native_class == "public_service")
         if len(ps) == 1:
             return ps

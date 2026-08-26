@@ -103,7 +103,7 @@ def test_campi_letti_dal_vivo_entrano_nel_batch_trasportato(
 
     async def _live(*, codice_istat, ufficio, piattaforma=None):
         assert piattaforma == "wordpress_agid"  # la piattaforma è inoltrata
-        return arricchito, "lunedì 9-12"
+        return arricchito, "lunedì 9-12", True
 
     monkeypatch.setattr(R, "_orari_ufficio_live", _live)
 
@@ -139,7 +139,7 @@ def test_batch_trasportato_senza_lettura_resta_onesto(
     _monkeypatch_infra(monkeypatch, esito)
 
     async def _live(*, codice_istat, ufficio, piattaforma=None):
-        return _ufficio_catalogo(), None  # nessun arricchimento
+        return _ufficio_catalogo(), None, False  # nessun arricchimento
 
     monkeypatch.setattr(R, "_orari_ufficio_live", _live)
 
@@ -184,7 +184,7 @@ def test_office_answer_ramo_connettore_porta_indirizzo_e_responsabile(
     )
 
     async def _live(*, codice_istat, ufficio, piattaforma=None):
-        return arricchito, "lunedì 9-12"
+        return arricchito, "lunedì 9-12", True
 
     monkeypatch.setattr(R, "_orari_ufficio_live", _live)
 
@@ -206,6 +206,7 @@ def test_office_answer_ramo_connettore_porta_indirizzo_e_responsabile(
     assert office.responsabile is not None
     assert office.responsabile.nome == "Mario Rossi"
     assert office.responsabile.ruolo == "Responsabile"
+    assert office.responsabile_ispezionato is True  # segnale Slice 2 propagato
 
 
 def test_office_answer_ramo_connettore_onesto_senza_lettura(
@@ -216,7 +217,7 @@ def test_office_answer_ramo_connettore_onesto_senza_lettura(
     _monkeypatch_infra(monkeypatch, esito)
 
     async def _live(*, codice_istat, ufficio, piattaforma=None):
-        return _ufficio_catalogo(), None
+        return _ufficio_catalogo(), None, False
 
     monkeypatch.setattr(R, "_orari_ufficio_live", _live)
 
@@ -236,6 +237,42 @@ def test_office_answer_ramo_connettore_onesto_senza_lettura(
     assert office is not None
     assert office.indirizzo is None
     assert office.responsabile is None
+    # Nessuna ispezione (fetch fallita/famiglia senza estrattore): il segnale
+    # resta False — a valle il campo si nasconde, non «non pubblicato».
+    assert office.responsabile_ispezionato is False
+
+
+def test_office_answer_ramo_connettore_ispezionato_ma_assente(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Ramo A, caso Slice 2: la scheda è stata ispezionata ma il Comune non
+    pubblica il responsabile → `responsabile is None` MA `responsabile_ispezionato`
+    è True, così la UI può dire «non pubblicato dal Comune» invece di nascondere."""
+    esito = _esito(_ufficio_catalogo())
+    _monkeypatch_infra(monkeypatch, esito)
+
+    async def _live(*, codice_istat, ufficio, piattaforma=None):
+        # Pagina letta (fonte orari presente) ma nessun responsabile pubblicato.
+        return _ufficio_catalogo().model_copy(update={"orari": "Lun 9-12"}), None, True
+
+    monkeypatch.setattr(R, "_orari_ufficio_live", _live)
+
+    res = asyncio.run(
+        R._risposta_da_connettore(
+            comune_nome="Albano",
+            topic=Topic.ANAGRAFE_CARTA_IDENTITA,
+            diagnosi=[],
+            esito=esito,
+            ufficio_chiesto="anagrafe",
+            disabilita_attiva=False,
+            recognition=None,
+        )
+    )
+
+    office = res.info.office
+    assert office is not None
+    assert office.responsabile is None
+    assert office.responsabile_ispezionato is True
 
 
 def test_office_answer_ramo_nominato_porta_indirizzo_e_responsabile(
@@ -261,7 +298,9 @@ def test_office_answer_ramo_nominato_porta_indirizzo_e_responsabile(
         R,
         "arricchisci_ufficio",
         lambda *, codice_istat, ufficio, piattaforma=None: UfficioArricchito(
-            ufficio=arricchito, orari_fonte="lunedì 9-12"
+            ufficio=arricchito,
+            orari_fonte="lunedì 9-12",
+            responsabile_ispezionato=True,
         ),
     )
 
@@ -280,3 +319,4 @@ def test_office_answer_ramo_nominato_porta_indirizzo_e_responsabile(
     assert office.responsabile is not None
     assert office.responsabile.nome == "Lucia Bianchi"
     assert office.responsabile.ruolo == "Dirigente"
+    assert office.responsabile_ispezionato is True  # il wrapper porta il segnale

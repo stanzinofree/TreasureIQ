@@ -36,7 +36,9 @@ def _ufficio(*, url: str = URL_UFFICIO, orari: str | None = None) -> UfficioConn
     )
 
 
-def _voce(*, orari, schema=None, indirizzo=None, responsabile=None) -> OrariUfficio:
+def _voce(
+    *, orari, schema=None, indirizzo=None, responsabile=None, pagina_letta=True
+) -> OrariUfficio:
     return OrariUfficio(
         codice_istat="058003",
         slug="ufficio-anagrafe-e-leva",
@@ -45,6 +47,7 @@ def _voce(*, orari, schema=None, indirizzo=None, responsabile=None) -> OrariUffi
         orario_schema=schema,
         indirizzo=indirizzo,
         responsabile=responsabile,
+        pagina_letta=pagina_letta,
         letto_il="2026-08-12T00:00:00+00:00",
     )
 
@@ -172,3 +175,72 @@ def test_piattaforma_inoltrata_al_reader(monkeypatch) -> None:
     monkeypatch.setattr(ud, "leggi_orari_ufficio", _cattura)
     ud.arricchisci_ufficio(codice_istat="058003", ufficio=_ufficio(), piattaforma="peopleweb")
     assert visto["piattaforma"] == "peopleweb"
+
+
+# --- Segnale «scheda realmente ispezionata» (Slice 2) -------------------------
+# `responsabile_ispezionato` è vero SOLO quando la pagina è stata davvero
+# raggiunta (`pagina_letta`) E la famiglia ha un estrattore responsabile
+# (`piattaforma in _RESP_PER_FAMIGLIA`). Solo allora un `responsabile is None`
+# significa «il Comune non lo pubblica»; altrove è «mai verificato».
+
+
+def test_ispezionato_vero_con_pagina_letta_e_famiglia_con_estrattore(monkeypatch) -> None:
+    # Pagina raggiunta + famiglia con estrattore (openpa): assenza verificata.
+    monkeypatch.setattr(
+        ud, "leggi_orari_ufficio",
+        lambda *, codice_istat, url, piattaforma=None: _voce(orari=None, pagina_letta=True),
+    )
+    arr = ud.arricchisci_ufficio(codice_istat="058003", ufficio=_ufficio(), piattaforma="openpa")
+    assert arr.responsabile_ispezionato is True
+
+
+def test_ispezionato_falso_famiglia_senza_estrattore(monkeypatch) -> None:
+    # Pagina raggiunta ma famiglia senza estrattore responsabile (isweb): non
+    # possiamo affermare «non pubblicato», resta «non verificato».
+    monkeypatch.setattr(
+        ud, "leggi_orari_ufficio",
+        lambda *, codice_istat, url, piattaforma=None: _voce(orari=None, pagina_letta=True),
+    )
+    arr = ud.arricchisci_ufficio(codice_istat="058003", ufficio=_ufficio(), piattaforma="isweb")
+    assert arr.responsabile_ispezionato is False
+
+
+def test_ispezionato_falso_fetch_fallita(monkeypatch) -> None:
+    # Voce presente ma pagina NON raggiunta (fetch fallita): mai «non pubblicato».
+    monkeypatch.setattr(
+        ud, "leggi_orari_ufficio",
+        lambda *, codice_istat, url, piattaforma=None: _voce(orari=None, pagina_letta=False),
+    )
+    arr = ud.arricchisci_ufficio(codice_istat="058003", ufficio=_ufficio(), piattaforma="openpa")
+    assert arr.responsabile_ispezionato is False
+
+
+def test_ispezionato_falso_reader_none(monkeypatch) -> None:
+    # Reader torna None (URL non interrogabile): nessuna ispezione.
+    monkeypatch.setattr(ud, "leggi_orari_ufficio", lambda *, codice_istat, url, piattaforma=None: None)
+    arr = ud.arricchisci_ufficio(
+        codice_istat="058003", ufficio=_ufficio(orari="dal catalogo"), piattaforma="openpa"
+    )
+    assert arr.responsabile_ispezionato is False
+
+
+def test_ispezionato_falso_senza_url(monkeypatch) -> None:
+    # Nessuna URL: early-return, mai ispezionata.
+    monkeypatch.setattr(
+        ud, "leggi_orari_ufficio",
+        lambda *, codice_istat, url, piattaforma=None: _voce(orari=None, pagina_letta=True),
+    )
+    arr = ud.arricchisci_ufficio(
+        codice_istat="058003", ufficio=_ufficio(url=""), piattaforma="openpa"
+    )
+    assert arr.responsabile_ispezionato is False
+
+
+def test_ispezionato_falso_piattaforma_none(monkeypatch) -> None:
+    # Senza piattaforma nota non c'è famiglia da interrogare: non verificato.
+    monkeypatch.setattr(
+        ud, "leggi_orari_ufficio",
+        lambda *, codice_istat, url, piattaforma=None: _voce(orari=None, pagina_letta=True),
+    )
+    arr = ud.arricchisci_ufficio(codice_istat="058003", ufficio=_ufficio())
+    assert arr.responsabile_ispezionato is False

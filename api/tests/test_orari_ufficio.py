@@ -96,6 +96,22 @@ def test_pagina_irraggiungibile_degrada_a_none(
     monkeypatch.setattr(ou, "fetch_guardato", lambda *a, **k: None)
     voce = ou.leggi_orari_ufficio(codice_istat="058003", url=URL_UFFICIO)
     assert voce is not None and voce.orari is None
+    # La voce esiste (esito negativo in cache) ma la pagina NON è stata raggiunta:
+    # `pagina_letta` False separa «letto e assente» da «mai verificato» (Slice 2).
+    assert voce.pagina_letta is False
+
+
+def test_pagina_raggiunta_segna_pagina_letta(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    # Fetch riuscita (anche se la pagina non pubblica un orario): pagina_letta True.
+    monkeypatch.setattr(ou, "LIVE_DIR", tmp_path)
+    monkeypatch.setattr(
+        ou, "fetch_guardato", _stub_fetch("<p>Nessun orario qui</p>", chiamate=[])
+    )
+    voce = ou.leggi_orari_ufficio(codice_istat="058003", url=URL_UFFICIO)
+    assert voce is not None and voce.orari is None
+    assert voce.pagina_letta is True
 
 
 def test_cache_stantia_rilegge(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:

@@ -63,3 +63,33 @@ def test_office_out_absent_fields_are_none_not_invented():
     assert out.office is not None
     assert out.office.indirizzo is None
     assert out.office.responsabile is None
+
+
+def test_office_out_carries_responsabile_ispezionato_true():
+    """Segnale Slice 2: scheda ispezionata ma responsabile assente → il bool
+    arriva `True` al payload, così la UI può dire «non pubblicato dal Comune»."""
+    office = OfficeAnswer(
+        nome="Anagrafe",
+        telefono=None,
+        email=None,
+        orari=None,
+        responsabile=None,
+        responsabile_ispezionato=True,
+    )
+
+    out = to_info_out(_info(office))
+
+    assert out.office is not None
+    assert out.office.responsabile is None
+    assert out.office.responsabile_ispezionato is True
+
+
+def test_office_out_responsabile_ispezionato_defaults_false():
+    """Percorsi non-connettore (URP, web, ingerito): il bool resta `False`,
+    così un `responsabile is None` non viene mai spacciato per «non pubblicato»."""
+    office = OfficeAnswer(nome="Protocollo", telefono=None, email=None, orari=None)
+
+    out = to_info_out(_info(office))
+
+    assert out.office is not None
+    assert out.office.responsabile_ispezionato is False

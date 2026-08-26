@@ -272,6 +272,12 @@ class OfficeAnswer:
     #: scheda lo pubblica strutturato — mai inferito da un LLM (D-07). `None`
     #: dove non pubblicato.
     responsabile: Responsabile | None = None
+    #: La scheda è stata davvero ispezionata da una famiglia che pubblica il
+    #: responsabile strutturato (Slice 2). Solo con questo `True` un
+    #: `responsabile is None` va mostrato come «non pubblicato dal Comune»;
+    #: `False` (default) → il campo assente resta nascosto, mai una falsa
+    #: dichiarazione di assenza su una scheda mai verificata.
+    responsabile_ispezionato: bool = False
 
 
 @dataclass
@@ -2238,6 +2244,9 @@ async def _office_da_ufficio_nominato(
                 if record.get("responsabile")
                 else None
             ),
+            # Segnale onesto (Slice 2): il wrapper del drill sa se la scheda è
+            # stata davvero ispezionata da una famiglia con estrattore.
+            responsabile_ispezionato=arricchito.responsabile_ispezionato,
         ),
         data_batches=[batch],
         query_plan=query_plan,
@@ -2247,11 +2256,16 @@ async def _office_da_ufficio_nominato(
 
 async def _orari_ufficio_live(
     *, codice_istat: str, ufficio: UfficioConnettore, piattaforma: str | None = None
-) -> tuple[UfficioConnettore, str | None]:
+) -> tuple[UfficioConnettore, str | None, bool]:
     """QUESTO ufficio letto adesso dalla sua pagina: una COPIA arricchita
     dell'`UfficioConnettore` (orari in forma normalizzata da mostrare, più
     `indirizzo`/`responsabile` dove la famiglia li pubblica) con ripiego onesto
-    sul catalogo. Ritorna `(ufficio_arricchito, fonte)`.
+    sul catalogo. Ritorna `(ufficio_arricchito, fonte, responsabile_ispezionato)`.
+
+    Il terzo elemento è il segnale Slice 2: la scheda è stata davvero ispezionata
+    da una famiglia che pubblica il responsabile strutturato. Viaggia accanto a
+    `fonte` perché — come `fonte` — `_orari_ufficio_live` scarta il wrapper e i
+    due percorsi office lo perderebbero altrimenti.
 
     Ritorna l'oggetto INTERO — non solo l'orario — così il chiamante può
     sostituirlo nell'`EsitoConnettore` e far fluire i campi letti fino al
@@ -2280,7 +2294,7 @@ async def _orari_ufficio_live(
         ufficio=ufficio,
         piattaforma=piattaforma,
     )
-    return arricchito.ufficio, arricchito.orari_fonte
+    return arricchito.ufficio, arricchito.orari_fonte, arricchito.responsabile_ispezionato
 
 
 def _testo_ufficio_connettore(*, comune_nome: str, ufficio: UfficioConnettore) -> str:
@@ -2387,7 +2401,7 @@ async def _risposta_da_connettore(
         # il testo (`_testo_ufficio_connettore`) citi l'orario vero, e — più
         # sotto — la sostituzione nell'esito porti i campi letti fino al
         # `DataBatch` trasportato. La fonte verbatim resta accanto sulla scheda.
-        ufficio, fonte = await _orari_ufficio_live(
+        ufficio, fonte, responsabile_ispezionato = await _orari_ufficio_live(
             codice_istat=esito.codice_istat, ufficio=ufficio, piattaforma=esito.piattaforma
         )
         reply = _testo_ufficio_connettore(comune_nome=comune_nome, ufficio=ufficio)
@@ -2404,6 +2418,10 @@ async def _risposta_da_connettore(
             # pubblicati (D-05), mai inventati — come il ramo `_office_da_ufficio_nominato`.
             indirizzo=ufficio.indirizzo,
             responsabile=ufficio.responsabile,
+            # Segnale onesto (Slice 2): vero solo se la scheda è stata davvero
+            # letta da una famiglia con estrattore responsabile. Solo allora un
+            # `responsabile is None` significa «il Comune non lo pubblica».
+            responsabile_ispezionato=responsabile_ispezionato,
         )
         citizen_effort = 1
 

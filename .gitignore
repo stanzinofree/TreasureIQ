@@ -65,6 +65,9 @@ site/_preview/
 # non deve mai finire in git, per questo vive in data-live/ e non in data/.
 data-live/
 data/feedback.jsonl
+# conversations.sqlite3: store runtime delle sessioni di chat. In container vive
+# su /live; in locale ripiega su data/ — artefatto rigenerato, mai versionato.
+data/conversations.sqlite3
 
 # Catture di rete (HAR): decine di megabyte di traffico registrato, utili per
 # capire l'API di una piattaforma e inutili da conservare. Quello che si e'

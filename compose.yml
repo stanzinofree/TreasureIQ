@@ -153,4 +153,11 @@ services:
     depends_on:
       api:
         condition: service_healthy
+    # Nginx Proxy Manager usa questo alias storico come upstream pubblico.
+    # Il servizio resta `web` (niente container_name fisso), ma il nome è
+    # risolvibile anche dai proxy collegati alla rete di progetto.
+    networks:
+      default:
+        aliases:
+          - tiq-web
     restart: unless-stopped

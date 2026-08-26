@@ -58,7 +58,10 @@ GIORNI_VALIDITA = 6
 #: se la pagina li pubblica, quindi va riletta invece di servita stantia
 #: (default 0 sulle voci pre-versione → considerate da rileggere una volta).
 #: 1 = indirizzo + responsabile per famiglia (Ramo 1).
-VERSIONE_ESTRATTORI = 1
+#: 2 = `pagina_letta` (Ramo 1, Slice 2): distingue una pagina davvero raggiunta
+#:     da una fetch fallita — le voci v1 non hanno il bit, vanno rilette una volta
+#:     perché un `False` stantio direbbe «mai ispezionata» dove invece lo era.
+VERSIONE_ESTRATTORI = 2
 
 #: Tetto sui byte scaricati dalla pagina dell'ufficio (guardia, non un dato).
 MAX_BYTES_PAGINA = 2_000_000
@@ -90,6 +93,13 @@ class OrariUfficio(BaseModel):
     #: resta sempre `None` (mai pubblicata dai portali).
     indirizzo: str | None = None
     responsabile: Responsabile | None = None
+    #: La pagina-dettaglio è stata DAVVERO raggiunta e parsata (Slice 2). Falso
+    #: quando la fetch è fallita (rete/SSRF/timeout): la voce esiste comunque —
+    #: con tutti i campi `None` — ma non è mai stata ispezionata. È il segnale che
+    #: separa «letto e non pubblicato» da «mai verificato»: senza, un
+    #: `responsabile is None` è ambiguo. Default `False`: le voci pre-Slice-2
+    #: (versione < 2) vengono rilette, mai servite con un `False` stantio.
+    pagina_letta: bool = False
     #: La versione degli estrattori con cui è stata prodotta questa voce. Una
     #: voce scritta con `versione < VERSIONE_ESTRATTORI` non ha i campi introdotti
     #: dopo, quindi `_da_cache` la scarta e rilegge (default 0: le voci scritte
@@ -187,11 +197,15 @@ def leggi_orari_ufficio(
     schema: OrarioSettimanale | None = None
     indirizzo: str | None = None
     responsabile: Responsabile | None = None
+    pagina_letta = False
     try:
         esito = fetch_guardato(
             url, timeout=timeout, max_bytes=MAX_BYTES_PAGINA, host_atteso=host_atteso
         )
         if esito is not None:
+            # Pagina davvero raggiunta e parsata: da qui un campo `None` è un
+            # esito negativo verificato, non «mai guardato» (Slice 2).
+            pagina_letta = True
             intestazioni, contenuto, _url_finale = esito
             pagina = _decodifica_bytes(intestazioni.get("content-type", "") or "", contenuto)
             orari = estrai_orari_da_testo(pagina)
@@ -218,6 +232,7 @@ def leggi_orari_ufficio(
         orario_schema=schema,
         indirizzo=indirizzo,
         responsabile=responsabile,
+        pagina_letta=pagina_letta,
         versione=VERSIONE_ESTRATTORI,
         letto_il=datetime.now(timezone.utc).isoformat(),
     )

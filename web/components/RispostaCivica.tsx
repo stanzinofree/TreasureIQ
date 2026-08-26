@@ -256,6 +256,21 @@ export default function RispostaCivica({
             </p>
           )}
 
+          {/* Assenza ONESTA (Slice 2): la diciamo solo quando la scheda è stata
+              davvero ispezionata da una famiglia con estrattore responsabile e
+              il nominativo non c'era. Senza quel segnale (`responsabile` null
+              ma mai verificato: URP di ripiego, famiglia senza estrattore,
+              fetch fallita) il campo resta nascosto — mai spacciato per
+              «non pubblicato». */}
+          {!office.responsabile && office.responsabile_ispezionato && (
+            <p className="civica__responsabile civica__responsabile--assente">
+              <span className="civica__responsabile-label">Responsabile</span>
+              <span className="civica__responsabile-assente">
+                non pubblicato dal Comune
+              </span>
+            </p>
+          )}
+
           <div className="civica__contatti">
             {telefoni.length > 0 && (
               <div className="civica__contatto">

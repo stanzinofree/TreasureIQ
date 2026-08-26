@@ -418,6 +418,13 @@ export interface InfoOffice {
   /** Who is accountable for the office, when the card publishes it structured;
    *  `null`/absent otherwise (D-05), never inferred by an LLM (D-07). */
   responsabile?: Responsabile | null;
+  /** The office card was actually inspected by a platform family that has a
+   *  responsabile extractor (Slice 2). Only when `true` does a null
+   *  `responsabile` mean "the comune does not publish it" — which the UI may
+   *  state as such. `false`/absent (URP fallback, family without extractor,
+   *  failed fetch) means "never verified": the field stays hidden, never
+   *  announced as absent. Optional for back-compat with pre-Slice-2 answers. */
+  responsabile_ispezionato?: boolean;
 }
 
 /** One cached web-search hit (D-28, `M6_web_aperto`) — verbatim title and

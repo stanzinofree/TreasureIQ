@@ -778,6 +778,12 @@ class OfficeOut(BaseModel):
     #: Chi risponde dell'ufficio, quando la scheda lo pubblica strutturato.
     #: `None` altrimenti (D-05); mai inferito da un LLM (D-07).
     responsabile: ResponsabileOut | None = None
+    #: La scheda-dettaglio è stata DAVVERO ispezionata da una famiglia con
+    #: estrattore responsabile (Slice 2). Solo con `True` un `responsabile is
+    #: None` significa «il Comune non lo pubblica» e la UI può dirlo; con
+    #: `False` (URP di ripiego, famiglia senza estrattore, fetch fallita) il
+    #: campo resta semplicemente nascosto — «mai verificato», non «assente».
+    responsabile_ispezionato: bool = False
 
 
 class WebResultOut(BaseModel):
@@ -1027,6 +1033,7 @@ def to_info_out(info: InfoAnswer) -> InfoOut:
                     if info.office.responsabile is not None
                     else None
                 ),
+                responsabile_ispezionato=info.office.responsabile_ispezionato,
             )
             if info.office is not None
             else None

@@ -4596,6 +4596,13 @@ a {
   color: var(--sumi-soft);
 }
 
+/* Assenza onesta (Slice 2): scheda ispezionata, nominativo non pubblicato.
+   Tono attenuato — è un'assenza dichiarata, non un dato. */
+.civica__responsabile-assente {
+  color: var(--sumi-faint);
+  font-style: italic;
+}
+
 /* L'indirizzo è la sede fisica, in cifre come le scrive il comune. */
 .civica__indirizzo {
   font-variant-numeric: tabular-nums;

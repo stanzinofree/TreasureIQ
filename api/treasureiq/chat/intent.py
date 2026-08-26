@@ -792,6 +792,17 @@ async def extract_intent(
         if (
             effective_backend not in _BACKEND_DETERMINISTICI
             and updates.get("kind", parsed.kind) is QuestionKind.AGEVOLAZIONE
+            and _RICHIESTA_INFORMAZIONE_FORTE_RE.search(message)
+        ):
+            # R-8/D-19: una domanda come «chi e' il responsabile dell'ufficio
+            # anagrafe?» deve entrare nel rail informativo anche quando il
+            # modello ha riconosciuto correttamente il topic ma ha lasciato
+            # AGEVOLAZIONE. Il backend scorer applica gia' la stessa regola;
+            # questa e' la cintura equivalente sul percorso model.
+            updates["kind"] = QuestionKind.INFORMAZIONE
+        if (
+            effective_backend not in _BACKEND_DETERMINISTICI
+            and updates.get("kind", parsed.kind) is QuestionKind.AGEVOLAZIONE
             and parsed.topic is not Topic.SCONOSCIUTO
             and _BONUS_GENERICO_RE.search(message)
             and not _topic_keyword_presente(message)
@@ -928,6 +939,24 @@ def slot_dal_testo(messaggio: str) -> dict:
 #: verbo di richiesta generica, non solo un beneficio).
 _BONUS_GENERICO_RE = re.compile(
     r"\b(?:bonus|agevolazion\w*|incentiv\w*|sussid\w*|contribut\w*)\b",
+    re.IGNORECASE,
+)
+
+# Richieste esplicitamente rivolte a un ufficio, a un referente o ai suoi
+# recapiti. Il modello puo' assegnare AGEVOLAZIONE per inerzia del prompt, ma
+# la forma della domanda e' qui deterministica. Restano fuori marcatori
+# informativi generici come "come", che possono comparire in richieste di
+# contributi.
+_RICHIESTA_INFORMAZIONE_FORTE_RE = re.compile(
+    r"(?:"
+    r"\bresponsabil\w*\b|"
+    r"\borar(?:io|i)\b|"
+    r"\btelefon\w*\b|"
+    r"\bindirizz\w*\b|"
+    r"\buffic(?:io|i)\s+(?:di\s+|del\s+|dell['’]\s*|della\s+|dei\s+|degli\s+)?"
+    r"[a-zàèéìòù]{3,}\b|"
+    r"\ba\s+chi\s+mi\s+rivolg\w*\b"
+    r")",
     re.IGNORECASE,
 )
 

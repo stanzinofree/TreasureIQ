@@ -58,6 +58,46 @@ def test_non_inventa_mai_un_comune():
     assert conferma("abito a Trento", None) is None
 
 
+def test_responsabile_ufficio_forza_rail_informazione():
+    """Una domanda sull'ufficio non deve diventare un verdetto agevolazione
+    solo perche' il modello ha riconosciuto il topic anagrafe."""
+    import asyncio
+
+    messaggio = "sono di Albano Laziale, chi è il responsabile dell'ufficio anagrafe?"
+    provider = _ProviderFinto(
+        {
+            messaggio: ChatIntent(
+                topic=Topic.ANAGRAFE_CARTA_IDENTITA,
+                kind=QuestionKind.AGEVOLAZIONE,
+            )
+        }
+    )
+
+    intent = asyncio.run(extract_intent(message=messaggio, provider=provider))
+
+    assert intent.topic is Topic.ANAGRAFE_CARTA_IDENTITA
+    assert intent.kind is QuestionKind.INFORMAZIONE
+
+
+def test_richiesta_contributo_resta_agevolazione():
+    """Il fix non deve interpretare ogni richiesta come informativa."""
+    import asyncio
+
+    messaggio = "posso ottenere un contributo per la mensa?"
+    provider = _ProviderFinto(
+        {
+            messaggio: ChatIntent(
+                topic=Topic.MENSA_SCOLASTICA,
+                kind=QuestionKind.AGEVOLAZIONE,
+            )
+        }
+    )
+
+    intent = asyncio.run(extract_intent(message=messaggio, provider=provider))
+
+    assert intent.kind is QuestionKind.AGEVOLAZIONE
+
+
 @pytest.mark.parametrize("hint", ["", "   "])
 def test_hint_vuoto_e_come_assente(hint: str):
     assert conferma("una domanda qualsiasi", hint) is None

@@ -1,6 +1,10 @@
 # Filtro class-aware per il connettore OpenPA
 
-**Stato:** IMPLEMENTATO — branch `feat/openpa-filtro-class-aware`, PR dedicata.
+**Stato:** due strati, entrambi OpenPA-local, recogniser condiviso **intatto**.
+1. **Allow-list di classe** (`_CLASSI_AMMESSE`) — già su `main` (commit b2455d4).
+2. **Filtro titolo/classe** (filtro-2) — questa PR, branch `feat/openpa-filtro-titolo-classe`.
+   Vedi la sezione [«Filtro-2»](#filtro-2--stoplist-detrito--priorità-classe) in fondo.
+
 **Origine:** campione read-only 28 comuni OpenPA (2026-08-26), Fase B.
 **Vincolo:** nessuno sweep live aggiuntivo, nessun deploy, nessun aggiornamento del
 catalogo finché PR + suite + review non sono verdi.
@@ -114,3 +118,100 @@ sotto la policy uniforme. Nessun run nazionale finché non esplicitamente autori
 `scratchpad/openpa_campione/`: `manifest.json`
 (sha256 `db996829b889aaf39cc531aa1a492d223a9c4160da200e57c216639dd5208d5d`),
 `results.json`, `openpa_campione.sqlite3`, `report-fase-b.md`, `build_manifest.py`, `collect.py`.
+
+---
+
+## Filtro-2 — stoplist detrito + priorità classe
+
+**Problema residuo dopo l'allow-list.** Con la sola allow-list di classe, il replay
+offline sulla baseline congelata (`baseline_results.LOCKED.json`, md5 `92187dd9…`,
+168 query, zero rete) dà **39/168 confermati** ma **96 ambigui**: 13–20 comuni per
+chiave hanno ≥2 titoli class-ammessi che il recogniser condiviso matcha, quindi il
+gate esattamente-1 (I-1) cade su NOT_FOUND. Il rumore è quasi tutto **detrito
+amministrativo in `document`** (regolamenti, delibere, determine, tariffe, aliquote,
+ruoli, registri) più due over-match egregi del recogniser (`residenza taxi`,
+`Registro di accesso agli atti`). Non è separabile per classe: `document` va tenuto
+(la TARI legittima vive lì), il taglio va fatto sul **titolo**.
+
+**Design — 3 layer OpenPA-local, `riconosci_service_key` NON toccato.**
+Tutto vive in `_filtra_candidati` di `OpenPAServiceConnector`; base e recogniser
+restano invariati (blast radius zero fuori dal connettore).
+
+| Layer | Cosa fa | Simbolo |
+|---|---|---|
+| 0 | marcatore negativo per-chiave dominio-sbagliato (`taxi` per anagrafe) | `_MARCATORI_NEGATIVI` |
+| — | **short-circuit `len(matched) <= 1`**: un match solitario NON viene mai scartato (protegge i 39 golden) | — |
+| B | stoplist substring detrito + regex token di confine `\b(ruolo\|det\|delib\|imp)\b` | `_STOPLIST_DETRITO`, `_DETRITO_RX`, `_e_detrito` |
+| A | priorità classe: se sopravvive **un solo** `public_service`, vince su document/output | — |
+
+Ordine: neg → gate `len==1` short-circuit → B → A. Se dopo A restano 0 o ≥2
+`public_service` non-detrito, resta **ambiguo** → NOT_FOUND (I-1): il filtro non
+inventa un vincitore.
+
+**Risultato replay (offline, baseline congelata):**
+
+| | confermati | ambiguo | vuoto |
+|---|---|---|---|
+| control (solo allow-list, = `main`) | 39 | 96 | 33 |
+| **filtro-2** | **90** | 42 | 36 |
+
+**0 regressioni** sui 39 confermati di controllo (test golden lo verifica caso per
+caso, stesso `native_id`). **0 falsi positivi netti.**
+
+### Discrepanza 91 vs 90 — chiarita
+
+Una prima versione del replay dava **91** confermati **con 2 falsi positivi**:
+- *Maddaloni* — `Registro di accesso agli atti`: è il **registro/log**, non il servizio.
+- *Verona* — `…cambio residenza taxi`: dominio **licenze taxi**, non anagrafe.
+
+Chiusi entrambi aggiungendo `registro` alla stoplist e `taxi` ai marcatori negativi
+anagrafici. La versione finale è quindi **90 confermati con 0 FP netti**. Il numero
+canonico del report e dei test è **90**; il 91 è la misura pre-fix, tenuta qui solo
+come traccia.
+
+### «Stesso dominio» è un criterio scelto, non una certezza semantica
+
+Il Layer A assume che, tra i candidati che (a) il recogniser matcha sulla chiave e
+(b) non sono detrito, l'unico `public_service` sia **la scheda-servizio**. È
+un'euristica di dominio — «stesso comune, classe scheda-servizio» — **non** una prova
+che il contenuto sia semanticamente quel servizio. OpenPA è mono-sito per comune (host
+guard, 0 fallimenti sul campione), quindi il rischio cross-dominio è basso; ma dove
+sopravvivono ≥2 `public_service` plausibili il filtro **fallisce in sicurezza** verso
+NOT_FOUND anziché indovinare. È una scelta di precisione, dichiarata come tale.
+
+### Borderline (~8) — narrow ma difendibili, da riveder e in review
+
+Confermati «stretti»: titolo corretto sulla chiave ma sotto-servizio o modulistica,
+non la scheda canonica. Nessuno è un errore di dominio; li elenco per trasparenza.
+
+| Comune | Chiave | Classe | Titolo | URL |
+|---|---|---|---|---|
+| Maddaloni | STATO_CIVILE | public_service | Certificato di nascita per cittadini europei | https://www.comune.maddaloni.ce.it/Servizi/Certificato-di-nascita-per-cittadini-europei |
+| Sorso | STATO_CIVILE | public_service | Certificato di nascita per cittadini europei | https://www.comune.sorso.ss.it/Servizi/Certificato-di-nascita-per-cittadini-europei |
+| Pantelleria | STATO_CIVILE | public_service | Certificato di nascita per cittadini europei | https://www.comune.pantelleria.tp.it/Servizi/Certificato-di-nascita-per-cittadini-europei |
+| Tarquinia | STATO_CIVILE | public_service | Reperibilità Stato Civile per decessi | https://www.comune.tarquinia.vt.it/Servizi/Reperibilita-Stato-Civile-per-decessi |
+| Sorso | TRIBUTI_IMU | document | IMU istanza rimborso | https://www.comune.sorso.ss.it/Amministrazione/Documenti-e-dati/Modulistica/IMU-istanza-rimborso |
+| Pantelleria | TRIBUTI_TARI | document | Modulistica TARI | https://www.comune.pantelleria.tp.it/Amministrazione/Documenti-e-dati/Modulistica/Modulistica-TARI |
+| Verona | CAMBIO_RESIDENZA | document | Dichiarazione di trasferimento di residenza all'estero: modulo | https://www.comune.verona.it/Amministrazione/Documenti-e-dati/Modulistica/Dichiarazione-di-trasferimento-di-residenza-all-estero-modulo |
+| Verona | ACCESSO_ATTI | public_service | Accesso agli atti Edilizia e Imprese | https://www.comune.verona.it/Servizi/Accesso-agli-atti-Edilizia-e-Imprese |
+
+I tre `Certificato di nascita per cittadini europei` sono l'unica scheda-nascita
+esposta da quei comuni: confermarli è ragionevole finché non compare una scheda
+stato-civile più generale. `IMU istanza rimborso` / `Modulistica TARI` /
+`…residenza all'estero` sono moduli reali e azionabili (per questo `modulo`/`istanza`
+NON sono in stoplist), ma stretti. `Accesso agli atti Edilizia e Imprese` è
+dominio-ristretto all'edilizia. Da confermare in review se la policy li accetta.
+
+### Test (questa PR)
+
+`tests/test_openpa_filtro_titolo_classe.py`, net-free:
+- **golden 39**: ogni caso confermato pre-filtro resta confermato con lo stesso `native_id`;
+- **stoplist**: parametrico su **ogni** termine di `_STOPLIST_DETRITO` e ogni token della regex;
+- **regex `\b`**: `det`/`imp` dentro parola legittima (`Detrazione`, `Impegno civico`) NON è detrito;
+- **taxi**: `residenza taxi` rimosso dalle chiavi anagrafiche; guardia sui marcatori registrati;
+- **registro**: `Registro di accesso agli atti` escluso;
+- **short-circuit**: match solitario detrito NON scartato;
+- **priorità classe** + **due public_service veri restano ambigui** + **classi fuori allow-list scartate**.
+
+105 test verdi (nuovi + connettore esistente); blast radius connettori/recogniser 564 verdi.
+Suite completa in locale si blocca su test pre-esistenti Ollama-dipendenti (ambientale, CI autorità).

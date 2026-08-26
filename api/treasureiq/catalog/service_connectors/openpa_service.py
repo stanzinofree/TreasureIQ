@@ -34,6 +34,7 @@ families) and is deliberately out of this slice.
 
 from __future__ import annotations
 
+import re
 from html import unescape
 from urllib.parse import urljoin, urlparse
 
@@ -45,6 +46,7 @@ from treasureiq.catalog.service_connectors.connettore_base import (
 )
 from treasureiq.catalog.service_connectors.esecutore_fetcher import EsecutoreServiceFetcher
 from treasureiq.catalog.service_contracts import SERVICE_SEARCH_TERM, ServiceKey
+from treasureiq.chat.service_key import riconosci_service_key
 from treasureiq.ingest.piattaforma import Piattaforma
 from treasureiq.mappa_connettore import _base_con_schema, _host_senza_www
 
@@ -185,6 +187,48 @@ _CLASSI_AMMESSE: dict[ServiceKey, frozenset[str]] = {
     ServiceKey.TRIBUTI_TARI: frozenset({"public_service", "document", "output"}),
 }
 
+#: Layer B — detrito amministrativo di back-office che un cittadino non cerca mai
+#: come "il servizio": regolamenti, delibere, determine, tariffe/aliquote, ruoli,
+#: impegni di spesa, verbali, registri (il *registro* degli accessi non è il
+#: servizio di accesso).  Substring, confronto lowercase.  Deliberatamente NON
+#: include modulo/modello/istanza/domanda/richiesta: quelli SONO artefatti
+#: azionabili (moduli da scaricare, richieste) e restano candidati validi.
+#: Applicato SOLO come tie-break fra ≥2 match del recogniser — mai per rimuovere
+#: un match unico: un servizio già risolto esattamente-1 non viene toccato
+#: (vedi il golden dei 39 casi in test).
+_STOPLIST_DETRITO: tuple[str, ...] = (
+    "regolament", "delibera", "deliber", "determina", "aliquot", "tariff",
+    "approvazione", "impegno di spesa", "accertament", "affidament",
+    "comunicato", "verbale", "assunzione impegno", "a contrarre", "registro",
+)
+#: Token stand-alone (evita il match dentro parole non correlate): sigle e parole
+#: brevi di atti amministrativi.  ``ruolo`` = ruolo tributario; ``det``/``delib``
+#: = sigle di determina/delibera; ``imp`` = impegno.
+_DETRITO_RX = re.compile(r"\b(ruolo|det|delib|imp)\b", re.IGNORECASE)
+
+#: Layer 0 — marcatori dominio-negativi per chiave: un titolo che il recogniser
+#: condiviso matcha ma che appartiene a un dominio amministrativo diverso.  Es.
+#: "cambio residenza taxi" = spostamento di una licenza taxi, non l'anagrafe del
+#: cittadino.  OpenPA-local, recogniser intatto; esclusione hard PRIMA del gate.
+#: Criterio "stesso dominio": scegliamo di NON confermare un match fuori-dominio,
+#: non è una certezza semantica del titolo.
+_MARCATORI_NEGATIVI: dict[ServiceKey, tuple[str, ...]] = {
+    ServiceKey.CAMBIO_RESIDENZA: ("taxi",),
+    ServiceKey.STATO_CIVILE: ("taxi",),
+    ServiceKey.ACCESSO_ATTI: ("taxi",),
+}
+
+
+def _e_detrito(title: str) -> bool:
+    """True se il titolo è detrito amministrativo di back-office (Layer B).
+
+    Substring per le forme lunghe (regolamento, determina, …) più i token
+    stand-alone brevi (ruolo, det, delib, imp).  Puro, deterministico."""
+    t = title.lower()
+    if any(s in t for s in _STOPLIST_DETRITO):
+        return True
+    return bool(_DETRITO_RX.search(t))
+
 
 class OpenPAServiceConnector(_ServiceConnectorBase):
     """Resolve a ``ServiceKey`` to one ``ServiceReference`` on OpenPA/OpenCity portals.
@@ -213,11 +257,56 @@ class OpenPAServiceConnector(_ServiceConnectorBase):
         candidati: tuple[ServiceCandidate, ...],
         service_key: ServiceKey,
     ) -> tuple[ServiceCandidate, ...]:
-        # Allow-list class-aware, PRIMA del gate host/recogniser e del gate 0/≥2:
-        # tiene solo i candidati la cui classe eZ è ammessa per la key.  Una key
-        # fuori mappa (non dovrebbe accadere: le 6 sono tutte elencate) → nessuna
-        # classe ammessa → 0 candidati (NOT_FOUND onesto), mai un pass-through
-        # permissivo.  ``native_class`` None (hit senza classIdentifier) non è in
-        # allow-list → scartato: un candidato non classificabile non è un servizio.
+        """Filtro OpenPA-local a strati, PRIMA di ``_confermati`` e del gate 0/≥2.
+
+        Ordine (tutto OpenPA-local, recogniser condiviso e contratti INTATTI):
+
+        - **classe** (allow-list ``_CLASSI_AMMESSE``): tiene solo le classi eZ
+          ammesse per la key; ``article``/``channel``/``organization``/media
+          fuori.  ``native_class`` None → scartato (non classificabile ≠ servizio).
+        - **Layer 0** (``_MARCATORI_NEGATIVI``): via i titoli in un dominio
+          amministrativo diverso (es. residenza *taxi* per l'anagrafe).
+        - **disambiguazione SOLO fra ≥2 match del recogniser**: sotto i 2 match il
+          set passa intatto e sono ``_confermati`` + il gate 0/≥2 a risolvere — un
+          match unico resta confermato, MAI toccato (golden dei 39).  Il recogniser
+          è *chiamato*, non modificato.
+        - **Layer B** (``_e_detrito``): fra i ≥2 match, via il detrito
+          amministrativo (regolamenti/determine/tariffe/registri).  Se ne resta
+          uno solo → quello; se non ne resta nessuno (solo detrito) → il set
+          intatto resta ambiguo → NOT_FOUND onesto.
+        - **Layer A** (priorità classe): fra i match non-detrito, se ne esiste
+          **uno solo** ``public_service`` vince su ``document``/``output``.  È il
+          criterio "stesso dominio" (preferiamo la classe che OpenPA usa per la
+          scheda-servizio), NON una certezza semantica; se restano ≥2
+          ``public_service`` sono servizi davvero distinti → NOT_FOUND (I-1, la
+          scelta è di un livello superiore, mai un nearest-neighbour qui).
+
+        NB host guard: il tie-break precede l'host guard di ``_confermati``; su
+        OpenPA l'endpoint è mono-sito (0 fallimenti host nel campione) quindi
+        innocuo, e comunque fallisce SICURO — un ``public_service`` su host
+        esterno verrebbe scartato da ``_confermati`` (→ NOT_FOUND), mai confermato.
+        """
         ammesse = _CLASSI_AMMESSE.get(service_key, frozenset())
-        return tuple(c for c in candidati if c.native_class in ammesse)
+        c = tuple(x for x in candidati if x.native_class in ammesse)
+
+        neg = _MARCATORI_NEGATIVI.get(service_key, ())
+        if neg:
+            c = tuple(x for x in c if not any(n in x.title.lower() for n in neg))
+
+        matched = tuple(x for x in c if riconosci_service_key(x.title) is service_key)
+        if len(matched) <= 1:
+            # 0 o 1 match: nessuna ambiguità da sciogliere.  Lascia decidere
+            # _confermati (recogniser + host) e il gate — il match unico è confermato.
+            return c
+
+        non_detrito = tuple(x for x in matched if not _e_detrito(x.title))
+        if len(non_detrito) == 1:
+            return non_detrito
+        if not non_detrito:
+            # Solo detrito: nessun servizio azionabile → resta ambiguo (NOT_FOUND).
+            return matched
+
+        ps = tuple(x for x in non_detrito if x.native_class == "public_service")
+        if len(ps) == 1:
+            return ps
+        return non_detrito

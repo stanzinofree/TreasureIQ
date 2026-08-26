@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "097052",
+ "services": {
+  "accesso_atti": {
+   "service_id": "097052:openpa:774",
+   "title": "Richiesta di accesso agli atti",
+   "source_url": "https://www.comune.monte-marenzo.lc.it/Servizi/Richiesta-di-accesso-agli-atti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.monte-marenzo.lc.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.monte-marenzo.lc.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "097052:openpa:505",
+   "title": "Calcolo dell'IMU",
+   "source_url": "https://www.comune.monte-marenzo.lc.it/Servizi/Calcolo-dell-IMU",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.monte-marenzo.lc.it/Servizi/Calcolo-dell-IMU",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.monte-marenzo.lc.it/Servizi/Calcolo-dell-IMU",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_tari": {
+   "service_id": "097052:openpa:535",
+   "title": "TARI (Tributo sui rifiuti)",
+   "source_url": "https://www.comune.monte-marenzo.lc.it/Amministrazione/Documenti-e-dati/Modulistica/TARI-Tributo-sui-rifiuti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.monte-marenzo.lc.it/Amministrazione/Documenti-e-dati/Modulistica/TARI-Tributo-sui-rifiuti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.monte-marenzo.lc.it/Amministrazione/Documenti-e-dati/Modulistica/TARI-Tributo-sui-rifiuti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

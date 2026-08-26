@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "097004",
+ "services": {
+  "carta_identita": {
+   "service_id": "097004:openpa:1006",
+   "title": "Carta di Identità Elettronica",
+   "source_url": "https://www.comune.ballabio.lc.it/Classificazioni/Cosa-puoi-richiedere/Carta-di-Identita-Elettronica",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ballabio.lc.it/Classificazioni/Cosa-puoi-richiedere/Carta-di-Identita-Elettronica",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ballabio.lc.it/Classificazioni/Cosa-puoi-richiedere/Carta-di-Identita-Elettronica",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "accesso_atti": {
+   "service_id": "097004:openpa:254",
+   "title": "Richiesta di accesso agli atti",
+   "source_url": "https://www.comune.ballabio.lc.it/Servizi/Richiesta-di-accesso-agli-atti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ballabio.lc.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ballabio.lc.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

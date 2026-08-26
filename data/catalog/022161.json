@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "022161",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "022161:openpa:4362",
+   "title": "Dichiarare il cambio di residenza o di indirizzo",
+   "source_url": "https://www.comune.rovereto.tn.it/Servizi/Dichiarare-il-cambio-di-residenza-o-di-indirizzo",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rovereto.tn.it/Servizi/Dichiarare-il-cambio-di-residenza-o-di-indirizzo",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rovereto.tn.it/Servizi/Dichiarare-il-cambio-di-residenza-o-di-indirizzo",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "accesso_atti": {
+   "service_id": "022161:openpa:4333",
+   "title": "Richiesta di accesso agli atti",
+   "source_url": "https://www.comune.rovereto.tn.it/Servizi/Richiesta-di-accesso-agli-atti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rovereto.tn.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rovereto.tn.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

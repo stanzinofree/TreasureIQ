@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "049018",
+ "services": {
+  "carta_identita": {
+   "service_id": "049018:openpa:2881",
+   "title": "Carta d'Identità",
+   "source_url": "https://www.comune.sanvincenzo.li.it/Servizi/Carta-d-Identita",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanvincenzo.li.it/Servizi/Carta-d-Identita",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanvincenzo.li.it/Servizi/Carta-d-Identita",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "049018:openpa:2807",
+   "title": "Nuova IMU ",
+   "source_url": "https://www.comune.sanvincenzo.li.it/Servizi/Nuova-IMU",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanvincenzo.li.it/Servizi/Nuova-IMU",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanvincenzo.li.it/Servizi/Nuova-IMU",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_tari": {
+   "service_id": "049018:openpa:2285",
+   "title": "Richiesta di rimborso TARI",
+   "source_url": "https://www.comune.sanvincenzo.li.it/Servizi/Richiesta-di-rimborso-TARI",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanvincenzo.li.it/Servizi/Richiesta-di-rimborso-TARI",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanvincenzo.li.it/Servizi/Richiesta-di-rimborso-TARI",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

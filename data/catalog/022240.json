@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "022240",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "022240:openpa:991",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.castel-ivano.tn.it/Servizi/Cambio-di-residenza",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castel-ivano.tn.it/Servizi/Cambio-di-residenza",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castel-ivano.tn.it/Servizi/Cambio-di-residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "accesso_atti": {
+   "service_id": "022240:openpa:704",
+   "title": "Richiesta di accesso agli atti",
+   "source_url": "https://www.comune.castel-ivano.tn.it/Servizi/Richiesta-di-accesso-agli-atti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castel-ivano.tn.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castel-ivano.tn.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "stato_civile": {
+   "service_id": "022240:openpa:4477",
+   "title": "Servizi anagrafici per cittadini europei - Certificato di nascita",
+   "source_url": "https://www.comune.castel-ivano.tn.it/Servizi/Servizi-anagrafici-per-cittadini-europei-Certificato-di-nascita",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castel-ivano.tn.it/Servizi/Servizi-anagrafici-per-cittadini-europei-Certificato-di-nascita",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castel-ivano.tn.it/Servizi/Servizi-anagrafici-per-cittadini-europei-Certificato-di-nascita",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_tari": {
+   "service_id": "022240:openpa:542",
+   "title": "Richiesta rimborso IMIS-TASI-TARI",
+   "source_url": "https://www.comune.castel-ivano.tn.it/Amministrazione/Documenti-e-dati/Modulistica/Richiesta-rimborso-IMIS-TASI-TARI",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castel-ivano.tn.it/Amministrazione/Documenti-e-dati/Modulistica/Richiesta-rimborso-IMIS-TASI-TARI",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castel-ivano.tn.it/Amministrazione/Documenti-e-dati/Modulistica/Richiesta-rimborso-IMIS-TASI-TARI",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "022243",
+ "services": {
+  "carta_identita": {
+   "service_id": "022243:openpa:845",
+   "title": "Mod. 718 - Carta d'identità per minorenni per espatrio",
+   "source_url": "https://www.comune.madruzzo.tn.it/Amministrazione/Documenti-e-dati/Modulistica/Mod.-718-Carta-d-identita-per-minorenni-per-espatrio",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.madruzzo.tn.it/Amministrazione/Documenti-e-dati/Modulistica/Mod.-718-Carta-d-identita-per-minorenni-per-espatrio",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.madruzzo.tn.it/Amministrazione/Documenti-e-dati/Modulistica/Mod.-718-Carta-d-identita-per-minorenni-per-espatrio",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "cambio_residenza": {
+   "service_id": "022243:openpa:1248",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.madruzzo.tn.it/Servizi/Cambio-di-residenza",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.madruzzo.tn.it/Servizi/Cambio-di-residenza",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.madruzzo.tn.it/Servizi/Cambio-di-residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "accesso_atti": {
+   "service_id": "022243:openpa:900",
+   "title": "Richiesta di accesso agli atti",
+   "source_url": "https://www.comune.madruzzo.tn.it/Servizi/Richiesta-di-accesso-agli-atti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.madruzzo.tn.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.madruzzo.tn.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "stato_civile": {
+   "service_id": "022243:openpa:1845",
+   "title": "Servizi anagrafici per cittadini europei - Certificato di nascita",
+   "source_url": "https://www.comune.madruzzo.tn.it/Servizi/Servizi-anagrafici-per-cittadini-europei-Certificato-di-nascita",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.madruzzo.tn.it/Servizi/Servizi-anagrafici-per-cittadini-europei-Certificato-di-nascita",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.madruzzo.tn.it/Servizi/Servizi-anagrafici-per-cittadini-europei-Certificato-di-nascita",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

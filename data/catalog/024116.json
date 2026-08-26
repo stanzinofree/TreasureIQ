@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "024116",
+ "services": {
+  "carta_identita": {
+   "service_id": "024116:openpa:580",
+   "title": "Carta d'identità elettronica ",
+   "source_url": "https://www.comune.vicenza.it/Servizi/Carta-d-identita-elettronica",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vicenza.it/Servizi/Carta-d-identita-elettronica",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vicenza.it/Servizi/Carta-d-identita-elettronica",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "stato_civile": {
+   "service_id": "024116:openpa:1631",
+   "title": "Trascrizione atti di stato civile formati all'estero",
+   "source_url": "https://www.comune.vicenza.it/Servizi/Trascrizione-atti-di-stato-civile-formati-all-estero",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vicenza.it/Servizi/Trascrizione-atti-di-stato-civile-formati-all-estero",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vicenza.it/Servizi/Trascrizione-atti-di-stato-civile-formati-all-estero",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "024116:openpa:1959",
+   "title": "Imu Imposta municipale propria e calcolatore online",
+   "source_url": "https://www.comune.vicenza.it/Servizi/Imu-Imposta-municipale-propria-e-calcolatore-online",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vicenza.it/Servizi/Imu-Imposta-municipale-propria-e-calcolatore-online",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vicenza.it/Servizi/Imu-Imposta-municipale-propria-e-calcolatore-online",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_tari": {
+   "service_id": "024116:openpa:1892",
+   "title": "Tari",
+   "source_url": "https://www.comune.vicenza.it/Classificazioni/Cosa-puoi-richiedere/Tari",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vicenza.it/Classificazioni/Cosa-puoi-richiedere/Tari",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vicenza.it/Classificazioni/Cosa-puoi-richiedere/Tari",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

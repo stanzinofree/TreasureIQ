@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "023003",
+ "services": {
+  "tributi_tari": {
+   "service_id": "023003:openpa:581",
+   "title": "TARI - Servizio Rifiuti",
+   "source_url": "https://www.comune.angiari.vr.it/Amministrazione/Documenti-e-dati/Modulistica/TARI-Servizio-Rifiuti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.angiari.vr.it/Amministrazione/Documenti-e-dati/Modulistica/TARI-Servizio-Rifiuti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.angiari.vr.it/Amministrazione/Documenti-e-dati/Modulistica/TARI-Servizio-Rifiuti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

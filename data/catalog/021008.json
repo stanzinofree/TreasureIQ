@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "021008",
+ "services": {
+  "carta_identita": {
+   "service_id": "021008:openpa:10404",
+   "title": "Chiedere la Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.bolzano.bz.it/Servizi/Chiedere-la-Carta-d-Identita-Elettronica-CIE",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bolzano.bz.it/Servizi/Chiedere-la-Carta-d-Identita-Elettronica-CIE",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bolzano.bz.it/Servizi/Chiedere-la-Carta-d-Identita-Elettronica-CIE",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "accesso_atti": {
+   "service_id": "021008:openpa:10432",
+   "title": "Richiesta di accesso agli atti dei Servizi Demografici ",
+   "source_url": "https://www.comune.bolzano.bz.it/Servizi/Richiesta-di-accesso-agli-atti-dei-Servizi-Demografici",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bolzano.bz.it/Servizi/Richiesta-di-accesso-agli-atti-dei-Servizi-Demografici",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bolzano.bz.it/Servizi/Richiesta-di-accesso-agli-atti-dei-Servizi-Demografici",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "050003",
+ "services": {
+  "carta_identita": {
+   "service_id": "050003:openpa:582",
+   "title": "Carta d'Identità elettronica CIE",
+   "source_url": "https://www.comune.calci.pi.it/Servizi/Carta-d-Identita-elettronica-CIE",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.calci.pi.it/Servizi/Carta-d-Identita-elettronica-CIE",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.calci.pi.it/Servizi/Carta-d-Identita-elettronica-CIE",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "stato_civile": {
+   "service_id": "050003:openpa:1532",
+   "title": "Certificato di nascita per cittadini europei",
+   "source_url": "https://www.comune.calci.pi.it/Servizi/Certificato-di-nascita-per-cittadini-europei",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.calci.pi.it/Servizi/Certificato-di-nascita-per-cittadini-europei",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.calci.pi.it/Servizi/Certificato-di-nascita-per-cittadini-europei",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "050003:openpa:550",
+   "title": "CALCOLO IMU - ON LINE",
+   "source_url": "https://www.comune.calci.pi.it/Servizi/CALCOLO-IMU-ON-LINE",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.calci.pi.it/Servizi/CALCOLO-IMU-ON-LINE",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.calci.pi.it/Servizi/CALCOLO-IMU-ON-LINE",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_tari": {
+   "service_id": "050003:openpa:554",
+   "title": "TARI - Tassa sui Rifiuti",
+   "source_url": "https://www.comune.calci.pi.it/Servizi/TARI-Tassa-sui-Rifiuti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.calci.pi.it/Servizi/TARI-Tassa-sui-Rifiuti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.calci.pi.it/Servizi/TARI-Tassa-sui-Rifiuti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

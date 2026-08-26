@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "008008",
+ "services": {
+  "carta_identita": {
+   "service_id": "008008:openpa:1118",
+   "title": "Rilascio Carta d'Identità Elettronica ",
+   "source_url": "https://www.comune.bordighera.im.it/Servizi/Rilascio-Carta-d-Identita-Elettronica",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bordighera.im.it/Servizi/Rilascio-Carta-d-Identita-Elettronica",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bordighera.im.it/Servizi/Rilascio-Carta-d-Identita-Elettronica",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "008008:openpa:965",
+   "title": "IMU Bordighera",
+   "source_url": "https://www.comune.bordighera.im.it/Servizi/IMU-Bordighera",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bordighera.im.it/Servizi/IMU-Bordighera",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bordighera.im.it/Servizi/IMU-Bordighera",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_tari": {
+   "service_id": "008008:openpa:951",
+   "title": "TARI Bordighera",
+   "source_url": "https://www.comune.bordighera.im.it/Servizi/TARI-Bordighera",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bordighera.im.it/Servizi/TARI-Bordighera",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bordighera.im.it/Servizi/TARI-Bordighera",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

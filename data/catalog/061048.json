@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "061048",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "061048:openpa:1029",
+   "title": "Cambio di Residenza",
+   "source_url": "https://www.comune.maddaloni.caserta.it/Servizi/Cambio-di-Residenza",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.maddaloni.caserta.it/Servizi/Cambio-di-Residenza",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.maddaloni.caserta.it/Servizi/Cambio-di-Residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "stato_civile": {
+   "service_id": "061048:openpa:1473",
+   "title": "Certificato di nascita per cittadini europei",
+   "source_url": "https://www.comune.maddaloni.caserta.it/Servizi/Certificato-di-nascita-per-cittadini-europei",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.maddaloni.caserta.it/Servizi/Certificato-di-nascita-per-cittadini-europei",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.maddaloni.caserta.it/Servizi/Certificato-di-nascita-per-cittadini-europei",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "061048:openpa:642",
+   "title": "Calcolo IMU e Stampa modello F24",
+   "source_url": "https://www.comune.maddaloni.caserta.it/Servizi/Calcolo-IMU-e-Stampa-modello-F24",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.maddaloni.caserta.it/Servizi/Calcolo-IMU-e-Stampa-modello-F24",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.maddaloni.caserta.it/Servizi/Calcolo-IMU-e-Stampa-modello-F24",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

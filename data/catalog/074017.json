@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "074017",
+ "services": {
+  "carta_identita": {
+   "service_id": "074017:openpa:3426",
+   "title": "Rinnovo della carta di identità",
+   "source_url": "https://www.comune.sanvitodeinormanni.br.it/Servizi/Rinnovo-della-carta-di-identita",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanvitodeinormanni.br.it/Servizi/Rinnovo-della-carta-di-identita",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanvitodeinormanni.br.it/Servizi/Rinnovo-della-carta-di-identita",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "accesso_atti": {
+   "service_id": "074017:openpa:398",
+   "title": "Richiesta di accesso agli atti",
+   "source_url": "https://www.comune.sanvitodeinormanni.br.it/Servizi/Richiesta-di-accesso-agli-atti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanvitodeinormanni.br.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanvitodeinormanni.br.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "stato_civile": {
+   "service_id": "074017:openpa:3422",
+   "title": "Certificati ed estratti per riassunto di atti di stato civile",
+   "source_url": "https://www.comune.sanvitodeinormanni.br.it/Servizi/Certificati-ed-estratti-per-riassunto-di-atti-di-stato-civile",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanvitodeinormanni.br.it/Servizi/Certificati-ed-estratti-per-riassunto-di-atti-di-stato-civile",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanvitodeinormanni.br.it/Servizi/Certificati-ed-estratti-per-riassunto-di-atti-di-stato-civile",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

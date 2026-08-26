@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "017073",
+ "services": {
+  "carta_identita": {
+   "service_id": "017073:openpa:491",
+   "title": "Rilascio e rinnovo carta d'identità",
+   "source_url": "https://www.comune.gambara.bs.it/Servizi/Rilascio-e-rinnovo-carta-d-identita",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gambara.bs.it/Servizi/Rilascio-e-rinnovo-carta-d-identita",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gambara.bs.it/Servizi/Rilascio-e-rinnovo-carta-d-identita",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "017073:openpa:595",
+   "title": "Calcolo IMU",
+   "source_url": "https://www.comune.gambara.bs.it/Servizi/Calcolo-IMU",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gambara.bs.it/Servizi/Calcolo-IMU",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gambara.bs.it/Servizi/Calcolo-IMU",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

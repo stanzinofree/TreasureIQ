@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "081014",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "081014:openpa:1144",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.pantelleria.tp.it/Servizi/Cambio-di-residenza",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pantelleria.tp.it/Servizi/Cambio-di-residenza",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pantelleria.tp.it/Servizi/Cambio-di-residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "stato_civile": {
+   "service_id": "081014:openpa:1151",
+   "title": "Certificato di nascita per cittadini europei",
+   "source_url": "https://www.comune.pantelleria.tp.it/Servizi/Certificato-di-nascita-per-cittadini-europei",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pantelleria.tp.it/Servizi/Certificato-di-nascita-per-cittadini-europei",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pantelleria.tp.it/Servizi/Certificato-di-nascita-per-cittadini-europei",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_tari": {
+   "service_id": "081014:openpa:750",
+   "title": "Modulistica TARI",
+   "source_url": "https://www.comune.pantelleria.tp.it/Amministrazione/Documenti-e-dati/Modulistica/Modulistica-TARI",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pantelleria.tp.it/Amministrazione/Documenti-e-dati/Modulistica/Modulistica-TARI",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pantelleria.tp.it/Amministrazione/Documenti-e-dati/Modulistica/Modulistica-TARI",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

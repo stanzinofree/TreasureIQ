@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "022205",
+ "services": {
+  "accesso_atti": {
+   "service_id": "022205:openpa:6162",
+   "title": "Richiesta di accesso agli atti relativi agli incidenti sulle piste da sci",
+   "source_url": "https://www.comune.trento.it/Servizi/Richiesta-di-accesso-agli-atti-relativi-agli-incidenti-sulle-piste-da-sci",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.trento.it/Servizi/Richiesta-di-accesso-agli-atti-relativi-agli-incidenti-sulle-piste-da-sci",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.trento.it/Servizi/Richiesta-di-accesso-agli-atti-relativi-agli-incidenti-sulle-piste-da-sci",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "stato_civile": {
+   "service_id": "022205:openpa:6214",
+   "title": "Rettifica dati anagrafici e di stato civile",
+   "source_url": "https://www.comune.trento.it/Servizi/Rettifica-dati-anagrafici-e-di-stato-civile",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.trento.it/Servizi/Rettifica-dati-anagrafici-e-di-stato-civile",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.trento.it/Servizi/Rettifica-dati-anagrafici-e-di-stato-civile",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

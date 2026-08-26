@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "072030",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "072030:openpa:5031",
+   "title": "Iscrizione anagrafica per trasferimento di residenza da altro comune",
+   "source_url": "https://www.comune.monopoli.ba.it/Servizi/Iscrizione-anagrafica-per-trasferimento-di-residenza-da-altro-comune",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.monopoli.ba.it/Servizi/Iscrizione-anagrafica-per-trasferimento-di-residenza-da-altro-comune",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.monopoli.ba.it/Servizi/Iscrizione-anagrafica-per-trasferimento-di-residenza-da-altro-comune",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "072030:openpa:5033",
+   "title": "IMU - Imposta Municipale Propria",
+   "source_url": "https://www.comune.monopoli.ba.it/Servizi/IMU-Imposta-Municipale-Propria",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.monopoli.ba.it/Servizi/IMU-Imposta-Municipale-Propria",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.monopoli.ba.it/Servizi/IMU-Imposta-Municipale-Propria",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_tari": {
+   "service_id": "072030:openpa:5058",
+   "title": "TARI - Tassa sui rifiuti",
+   "source_url": "https://www.comune.monopoli.ba.it/Servizi/TARI-Tassa-sui-rifiuti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.monopoli.ba.it/Servizi/TARI-Tassa-sui-rifiuti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.monopoli.ba.it/Servizi/TARI-Tassa-sui-rifiuti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

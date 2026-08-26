@@ -1,0 +1,120 @@
+{
+ "municipality_istat": "053009",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "053009:openpa:2305",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.follonica.gr.it/Servizi/Cambio-di-residenza",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.follonica.gr.it/Servizi/Cambio-di-residenza",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.follonica.gr.it/Servizi/Cambio-di-residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "accesso_atti": {
+   "service_id": "053009:openpa:367",
+   "title": "Richiesta di accesso agli atti",
+   "source_url": "https://www.comune.follonica.gr.it/Servizi/Richiesta-di-accesso-agli-atti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.follonica.gr.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.follonica.gr.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "stato_civile": {
+   "service_id": "053009:openpa:1626",
+   "title": "Certificati anagrafici e di stato civile e autodichiarazioni",
+   "source_url": "https://www.comune.follonica.gr.it/Classificazioni/Cosa-puoi-richiedere/Certificati-anagrafici-e-di-stato-civile-e-autodichiarazioni",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.follonica.gr.it/Classificazioni/Cosa-puoi-richiedere/Certificati-anagrafici-e-di-stato-civile-e-autodichiarazioni",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.follonica.gr.it/Classificazioni/Cosa-puoi-richiedere/Certificati-anagrafici-e-di-stato-civile-e-autodichiarazioni",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "053009:openpa:6101",
+   "title": "Dichiarazione Imu (Imposta municipale propria)",
+   "source_url": "https://www.comune.follonica.gr.it/Servizi/Dichiarazione-Imu-Imposta-municipale-propria",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.follonica.gr.it/Servizi/Dichiarazione-Imu-Imposta-municipale-propria",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.follonica.gr.it/Servizi/Dichiarazione-Imu-Imposta-municipale-propria",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_tari": {
+   "service_id": "053009:openpa:6093",
+   "title": "Dichiarazione Tari (Tassa rifiuti)",
+   "source_url": "https://www.comune.follonica.gr.it/Servizi/Dichiarazione-Tari-Tassa-rifiuti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.follonica.gr.it/Servizi/Dichiarazione-Tari-Tassa-rifiuti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.follonica.gr.it/Servizi/Dichiarazione-Tari-Tassa-rifiuti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

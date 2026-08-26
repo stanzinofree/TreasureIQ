@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "065006",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "065006:openpa:2998",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.amalfi.sa.it/Servizi/Cambio-di-residenza",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.amalfi.sa.it/Servizi/Cambio-di-residenza",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.amalfi.sa.it/Servizi/Cambio-di-residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "stato_civile": {
+   "service_id": "065006:openpa:3004",
+   "title": "Certificato di nascita per cittadini europei",
+   "source_url": "https://comune.amalfi.sa.it/Servizi/Certificato-di-nascita-per-cittadini-europei",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.amalfi.sa.it/Servizi/Certificato-di-nascita-per-cittadini-europei",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.amalfi.sa.it/Servizi/Certificato-di-nascita-per-cittadini-europei",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_tari": {
+   "service_id": "065006:openpa:3098",
+   "title": "Modulo MISURA AGEVOLATIVA AI FINI TARI ANNO 2024",
+   "source_url": "https://comune.amalfi.sa.it/Amministrazione/Documenti-e-dati/Modulistica/Modulo-MISURA-AGEVOLATIVA-AI-FINI-TARI-ANNO-2024",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.amalfi.sa.it/Amministrazione/Documenti-e-dati/Modulistica/Modulo-MISURA-AGEVOLATIVA-AI-FINI-TARI-ANNO-2024",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.amalfi.sa.it/Amministrazione/Documenti-e-dati/Modulistica/Modulo-MISURA-AGEVOLATIVA-AI-FINI-TARI-ANNO-2024",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

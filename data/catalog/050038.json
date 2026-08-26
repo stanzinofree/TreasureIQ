@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "050038",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "050038:openpa:7779",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.vicopisano.pi.it/Servizi/Cambio-di-residenza",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vicopisano.pi.it/Servizi/Cambio-di-residenza",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vicopisano.pi.it/Servizi/Cambio-di-residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "stato_civile": {
+   "service_id": "050038:openpa:5976",
+   "title": "Certificati di Stato Civile",
+   "source_url": "https://www.comune.vicopisano.pi.it/Servizi/Certificati-di-Stato-Civile",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vicopisano.pi.it/Servizi/Certificati-di-Stato-Civile",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vicopisano.pi.it/Servizi/Certificati-di-Stato-Civile",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "050038:openpa:6100",
+   "title": "IMU - Imposta municipale propria - Calcolatore IMU",
+   "source_url": "https://www.comune.vicopisano.pi.it/Servizi/IMU-Imposta-municipale-propria-Calcolatore-IMU",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vicopisano.pi.it/Servizi/IMU-Imposta-municipale-propria-Calcolatore-IMU",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vicopisano.pi.it/Servizi/IMU-Imposta-municipale-propria-Calcolatore-IMU",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_tari": {
+   "service_id": "050038:openpa:6129",
+   "title": "GEOFOR - GESTIONE RIFIUTI - TARI",
+   "source_url": "https://www.comune.vicopisano.pi.it/Servizi/GEOFOR-GESTIONE-RIFIUTI-TARI",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vicopisano.pi.it/Servizi/GEOFOR-GESTIONE-RIFIUTI-TARI",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vicopisano.pi.it/Servizi/GEOFOR-GESTIONE-RIFIUTI-TARI",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

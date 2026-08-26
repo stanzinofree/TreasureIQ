@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "019053",
+ "services": {
+  "accesso_atti": {
+   "service_id": "019053:openpa:255",
+   "title": "Richiesta di accesso agli atti",
+   "source_url": "https://www.comune.isoladovarese.cr.it/Servizi/Richiesta-di-accesso-agli-atti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.isoladovarese.cr.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.isoladovarese.cr.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_tari": {
+   "service_id": "019053:openpa:521",
+   "title": "Modalità e termini per la presentazione delle richieste TARI",
+   "source_url": "https://www.comune.isoladovarese.cr.it/Amministrazione/Documenti-e-dati/Documenti-tecnici-di-supporto/Modalita-e-termini-per-la-presentazione-delle-richieste-TARI",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.isoladovarese.cr.it/Amministrazione/Documenti-e-dati/Documenti-tecnici-di-supporto/Modalita-e-termini-per-la-presentazione-delle-richieste-TARI",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.isoladovarese.cr.it/Amministrazione/Documenti-e-dati/Documenti-tecnici-di-supporto/Modalita-e-termini-per-la-presentazione-delle-richieste-TARI",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

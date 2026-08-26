@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "073007",
+ "services": {
+  "carta_identita": {
+   "service_id": "073007:openpa:16010",
+   "title": "Carta di identità elettronica",
+   "source_url": "https://www.comune.ginosa.ta.it/Servizi/Carta-di-identita-elettronica",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ginosa.ta.it/Servizi/Carta-di-identita-elettronica",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ginosa.ta.it/Servizi/Carta-di-identita-elettronica",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "accesso_atti": {
+   "service_id": "073007:openpa:6249",
+   "title": "Richiesta di accesso agli atti",
+   "source_url": "https://www.comune.ginosa.ta.it/Servizi/Richiesta-di-accesso-agli-atti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ginosa.ta.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ginosa.ta.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "stato_civile": {
+   "service_id": "073007:openpa:15963",
+   "title": "CERTIFICAZIONE DI STATO CIVILE",
+   "source_url": "https://www.comune.ginosa.ta.it/Servizi/CERTIFICAZIONE-DI-STATO-CIVILE",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ginosa.ta.it/Servizi/CERTIFICAZIONE-DI-STATO-CIVILE",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ginosa.ta.it/Servizi/CERTIFICAZIONE-DI-STATO-CIVILE",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

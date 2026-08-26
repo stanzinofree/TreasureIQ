@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "075077",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "075077:openpa:1737",
+   "title": "Dichiarazione di trasferimento residenza all'estero",
+   "source_url": "https://www.comune.specchia.le.it/Amministrazione/Documenti-e-dati/Modulistica/Dichiarazione-di-trasferimento-residenza-all-estero",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.specchia.le.it/Amministrazione/Documenti-e-dati/Modulistica/Dichiarazione-di-trasferimento-residenza-all-estero",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.specchia.le.it/Amministrazione/Documenti-e-dati/Modulistica/Dichiarazione-di-trasferimento-residenza-all-estero",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "accesso_atti": {
+   "service_id": "075077:openpa:2579",
+   "title": "Richiesta di accesso agli atti",
+   "source_url": "https://www.comune.specchia.le.it/Servizi/Richiesta-di-accesso-agli-atti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.specchia.le.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.specchia.le.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "075077:openpa:2483",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.specchia.le.it/Servizi/Pagare-tributi-IMU",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.specchia.le.it/Servizi/Pagare-tributi-IMU",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.specchia.le.it/Servizi/Pagare-tributi-IMU",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

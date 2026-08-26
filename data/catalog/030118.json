@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "030118",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "030118:openpa:3259",
+   "title": "Cambio di residenza alla nuova abitazione",
+   "source_url": "https://www.comune.tavagnacco.ud.it/Classificazioni/Cosa-puoi-richiedere/Cambio-di-residenza-alla-nuova-abitazione",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.tavagnacco.ud.it/Classificazioni/Cosa-puoi-richiedere/Cambio-di-residenza-alla-nuova-abitazione",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.tavagnacco.ud.it/Classificazioni/Cosa-puoi-richiedere/Cambio-di-residenza-alla-nuova-abitazione",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "stato_civile": {
+   "service_id": "030118:openpa:2422",
+   "title": "Richiedere un Certificato o un Estratto dagli Atti di Stato Civile",
+   "source_url": "https://www.comune.tavagnacco.ud.it/Servizi/Richiedere-un-Certificato-o-un-Estratto-dagli-Atti-di-Stato-Civile",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.tavagnacco.ud.it/Servizi/Richiedere-un-Certificato-o-un-Estratto-dagli-Atti-di-Stato-Civile",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.tavagnacco.ud.it/Servizi/Richiedere-un-Certificato-o-un-Estratto-dagli-Atti-di-Stato-Civile",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "030118:openpa:2339",
+   "title": "Pagare l'IMU (Imposta Municipale Propria)",
+   "source_url": "https://www.comune.tavagnacco.ud.it/Servizi/Pagare-l-IMU-Imposta-Municipale-Propria",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.tavagnacco.ud.it/Servizi/Pagare-l-IMU-Imposta-Municipale-Propria",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.tavagnacco.ud.it/Servizi/Pagare-l-IMU-Imposta-Municipale-Propria",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_tari": {
+   "service_id": "030118:openpa:2342",
+   "title": "Pagare la Tassa sui Rifiuti (TARI)",
+   "source_url": "https://www.comune.tavagnacco.ud.it/Servizi/Pagare-la-Tassa-sui-Rifiuti-TARI",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.tavagnacco.ud.it/Servizi/Pagare-la-Tassa-sui-Rifiuti-TARI",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.tavagnacco.ud.it/Servizi/Pagare-la-Tassa-sui-Rifiuti-TARI",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "081013",
+ "services": {
+  "carta_identita": {
+   "service_id": "081013:openpa:490",
+   "title": "Rilascio carta di identità elettronica",
+   "source_url": "https://www.comune.paceco.tp.it/Servizi/Rilascio-carta-di-identita-elettronica",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.paceco.tp.it/Servizi/Rilascio-carta-di-identita-elettronica",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.paceco.tp.it/Servizi/Rilascio-carta-di-identita-elettronica",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "cambio_residenza": {
+   "service_id": "081013:openpa:729",
+   "title": "ISCRIZIONI ANAGRAFICHE E CAMBIO DI RESIDENZA - CITTADINI ITALIANI",
+   "source_url": "https://www.comune.paceco.tp.it/Servizi/ISCRIZIONI-ANAGRAFICHE-E-CAMBIO-DI-RESIDENZA-CITTADINI-ITALIANI",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.paceco.tp.it/Servizi/ISCRIZIONI-ANAGRAFICHE-E-CAMBIO-DI-RESIDENZA-CITTADINI-ITALIANI",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.paceco.tp.it/Servizi/ISCRIZIONI-ANAGRAFICHE-E-CAMBIO-DI-RESIDENZA-CITTADINI-ITALIANI",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "stato_civile": {
+   "service_id": "081013:openpa:509",
+   "title": "Certificato di nascita per cittadini europei",
+   "source_url": "https://www.comune.paceco.tp.it/Servizi/Certificato-di-nascita-per-cittadini-europei",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.paceco.tp.it/Servizi/Certificato-di-nascita-per-cittadini-europei",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.paceco.tp.it/Servizi/Certificato-di-nascita-per-cittadini-europei",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

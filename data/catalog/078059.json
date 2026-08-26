@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "078059",
+ "services": {
+  "carta_identita": {
+   "service_id": "078059:openpa:399",
+   "title": "Appuntamento per rilascio Carta d’Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.grimaldi.cs.it/Servizi/Appuntamento-per-rilascio-Carta-d-Identita-Elettronica-CIE",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.grimaldi.cs.it/Servizi/Appuntamento-per-rilascio-Carta-d-Identita-Elettronica-CIE",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.grimaldi.cs.it/Servizi/Appuntamento-per-rilascio-Carta-d-Identita-Elettronica-CIE",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "cambio_residenza": {
+   "service_id": "078059:openpa:469",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.grimaldi.cs.it/Servizi/Cambio-di-residenza",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.grimaldi.cs.it/Servizi/Cambio-di-residenza",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.grimaldi.cs.it/Servizi/Cambio-di-residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "067001",
+ "services": {
+  "carta_identita": {
+   "service_id": "067001:openpa:1650",
+   "title": "Carta d'Identità Elettronica (C.I.E.)",
+   "source_url": "https://www.comune.alba-adriatica.te.it/Servizi/Carta-d-Identita-Elettronica-C.I.E",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.alba-adriatica.te.it/Servizi/Carta-d-Identita-Elettronica-C.I.E",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.alba-adriatica.te.it/Servizi/Carta-d-Identita-Elettronica-C.I.E",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "cambio_residenza": {
+   "service_id": "067001:openpa:1656",
+   "title": "Cambio di residenza online",
+   "source_url": "https://www.comune.alba-adriatica.te.it/Servizi/Cambio-di-residenza-online",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.alba-adriatica.te.it/Servizi/Cambio-di-residenza-online",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.alba-adriatica.te.it/Servizi/Cambio-di-residenza-online",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "accesso_atti": {
+   "service_id": "067001:openpa:398",
+   "title": "Richiesta di accesso agli atti",
+   "source_url": "https://www.comune.alba-adriatica.te.it/Servizi/Richiesta-di-accesso-agli-atti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.alba-adriatica.te.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.alba-adriatica.te.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

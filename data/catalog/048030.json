@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "048030",
+ "services": {
+  "stato_civile": {
+   "service_id": "048030:openpa:2853",
+   "title": "Certificazioni Anagrafiche e di Stato Civile ",
+   "source_url": "https://www.comune.montespertoli.fi.it/Servizi/Certificazioni-Anagrafiche-e-di-Stato-Civile",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montespertoli.fi.it/Servizi/Certificazioni-Anagrafiche-e-di-Stato-Civile",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montespertoli.fi.it/Servizi/Certificazioni-Anagrafiche-e-di-Stato-Civile",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "048030:openpa:2254",
+   "title": "IMU",
+   "source_url": "https://www.comune.montespertoli.fi.it/Servizi/IMU",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montespertoli.fi.it/Servizi/IMU",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montespertoli.fi.it/Servizi/IMU",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_tari": {
+   "service_id": "048030:openpa:2130",
+   "title": "TARI - Tassa sui Rifiuti ",
+   "source_url": "https://www.comune.montespertoli.fi.it/Servizi/TARI-Tassa-sui-Rifiuti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montespertoli.fi.it/Servizi/TARI-Tassa-sui-Rifiuti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montespertoli.fi.it/Servizi/TARI-Tassa-sui-Rifiuti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

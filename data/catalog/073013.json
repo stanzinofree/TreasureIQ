@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "073013",
+ "services": {
+  "carta_identita": {
+   "service_id": "073013:openpa:517",
+   "title": "Carta d'identità",
+   "source_url": "https://www.comune.martinafranca.ta.it/Servizi/Carta-d-identita",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.martinafranca.ta.it/Servizi/Carta-d-identita",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.martinafranca.ta.it/Servizi/Carta-d-identita",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "accesso_atti": {
+   "service_id": "073013:openpa:1479",
+   "title": "Richieste di accesso agli atti ex L. 241/90 (c.d. accesso documentale)",
+   "source_url": "https://www.comune.martinafranca.ta.it/Servizi/Richieste-di-accesso-agli-atti-ex-L.-241-90-c.d.-accesso-documentale",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.martinafranca.ta.it/Servizi/Richieste-di-accesso-agli-atti-ex-L.-241-90-c.d.-accesso-documentale",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.martinafranca.ta.it/Servizi/Richieste-di-accesso-agli-atti-ex-L.-241-90-c.d.-accesso-documentale",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_tari": {
+   "service_id": "073013:openpa:5565",
+   "title": "TARI",
+   "source_url": "https://www.comune.martinafranca.ta.it/Servizi/TARI",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.martinafranca.ta.it/Servizi/TARI",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.martinafranca.ta.it/Servizi/TARI",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "023091",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "023091:openpa:2216",
+   "title": "Dichiarazione di trasferimento di residenza all'estero: modulo",
+   "source_url": "https://www.comune.verona.it/Amministrazione/Documenti-e-dati/Modulistica/Dichiarazione-di-trasferimento-di-residenza-all-estero-modulo",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.verona.it/Amministrazione/Documenti-e-dati/Modulistica/Dichiarazione-di-trasferimento-di-residenza-all-estero-modulo",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.verona.it/Amministrazione/Documenti-e-dati/Modulistica/Dichiarazione-di-trasferimento-di-residenza-all-estero-modulo",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "accesso_atti": {
+   "service_id": "023091:openpa:7256",
+   "title": "Accesso agli atti Edilizia e Imprese",
+   "source_url": "https://www.comune.verona.it/Servizi/Accesso-agli-atti-Edilizia-e-Imprese",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.verona.it/Servizi/Accesso-agli-atti-Edilizia-e-Imprese",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.verona.it/Servizi/Accesso-agli-atti-Edilizia-e-Imprese",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

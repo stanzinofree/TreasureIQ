@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "097084",
+ "services": {
+  "carta_identita": {
+   "service_id": "097084:openpa:371",
+   "title": "Carta d'identita elettronica",
+   "source_url": "https://www.comune.varenna.lc.it/Servizi/Carta-d-identita-elettronica",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.varenna.lc.it/Servizi/Carta-d-identita-elettronica",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.varenna.lc.it/Servizi/Carta-d-identita-elettronica",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "accesso_atti": {
+   "service_id": "097084:openpa:566",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.varenna.lc.it/Servizi/Richiedere-l-accesso-agli-atti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.varenna.lc.it/Servizi/Richiedere-l-accesso-agli-atti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.varenna.lc.it/Servizi/Richiedere-l-accesso-agli-atti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "097084:openpa:303",
+   "title": "IMU",
+   "source_url": "https://www.comune.varenna.lc.it/Servizi/IMU",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.varenna.lc.it/Servizi/IMU",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.varenna.lc.it/Servizi/IMU",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_tari": {
+   "service_id": "097084:openpa:301",
+   "title": "TARI",
+   "source_url": "https://www.comune.varenna.lc.it/Servizi/TARI",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.varenna.lc.it/Servizi/TARI",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.varenna.lc.it/Servizi/TARI",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

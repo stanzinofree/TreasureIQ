@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "097015",
+ "services": {
+  "carta_identita": {
+   "service_id": "097015:openpa:765",
+   "title": "Carta d'identità Elettronica",
+   "source_url": "https://www.comune.casargo.lc.it/Servizi/Carta-d-identita-Elettronica",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.casargo.lc.it/Servizi/Carta-d-identita-Elettronica",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.casargo.lc.it/Servizi/Carta-d-identita-Elettronica",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "cambio_residenza": {
+   "service_id": "097015:openpa:427",
+   "title": "Dichiarazione di trasferimento di residenza all'estero ",
+   "source_url": "https://www.comune.casargo.lc.it/Documenti-e-dati/Modulistica/Dichiarazione-di-trasferimento-di-residenza-all-estero",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.casargo.lc.it/Documenti-e-dati/Modulistica/Dichiarazione-di-trasferimento-di-residenza-all-estero",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.casargo.lc.it/Documenti-e-dati/Modulistica/Dichiarazione-di-trasferimento-di-residenza-all-estero",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "stato_civile": {
+   "service_id": "097015:openpa:757",
+   "title": "Certificati ed estratti dello stato civile",
+   "source_url": "https://www.comune.casargo.lc.it/Servizi/Certificati-ed-estratti-dello-stato-civile",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.casargo.lc.it/Servizi/Certificati-ed-estratti-dello-stato-civile",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.casargo.lc.it/Servizi/Certificati-ed-estratti-dello-stato-civile",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "097015:openpa:416",
+   "title": "Calcolo IMU Online ",
+   "source_url": "https://www.comune.casargo.lc.it/Servizi/Calcolo-IMU-Online",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.casargo.lc.it/Servizi/Calcolo-IMU-Online",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.casargo.lc.it/Servizi/Calcolo-IMU-Online",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

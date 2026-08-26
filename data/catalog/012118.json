@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "012118",
+ "services": {
+  "carta_identita": {
+   "service_id": "012118:openpa:1695",
+   "title": "CIE - Carta di identità elettronica",
+   "source_url": "https://www.comune.samarate.va.it/Servizi/CIE-Carta-di-identita-elettronica",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.samarate.va.it/Servizi/CIE-Carta-di-identita-elettronica",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.samarate.va.it/Servizi/CIE-Carta-di-identita-elettronica",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "cambio_residenza": {
+   "service_id": "012118:openpa:1679",
+   "title": "Cambio di residenza, di indirizzo ed emigrazione all'estero",
+   "source_url": "https://www.comune.samarate.va.it/Servizi/Cambio-di-residenza-di-indirizzo-ed-emigrazione-all-estero",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.samarate.va.it/Servizi/Cambio-di-residenza-di-indirizzo-ed-emigrazione-all-estero",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.samarate.va.it/Servizi/Cambio-di-residenza-di-indirizzo-ed-emigrazione-all-estero",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "012118:openpa:1255",
+   "title": "IMU",
+   "source_url": "https://www.comune.samarate.va.it/Servizi/IMU",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.samarate.va.it/Servizi/IMU",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.samarate.va.it/Servizi/IMU",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_tari": {
+   "service_id": "012118:openpa:1237",
+   "title": "TARI",
+   "source_url": "https://www.comune.samarate.va.it/Servizi/TARI",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.samarate.va.it/Servizi/TARI",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.samarate.va.it/Servizi/TARI",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

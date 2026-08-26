@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "017104",
+ "services": {
+  "carta_identita": {
+   "service_id": "017104:openpa:2506",
+   "title": "Carta di Identità Elettronica",
+   "source_url": "https://www.comune.marcheno.bs.it/Servizi/Carta-di-Identita-Elettronica",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.marcheno.bs.it/Servizi/Carta-di-Identita-Elettronica",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marcheno.bs.it/Servizi/Carta-di-Identita-Elettronica",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "cambio_residenza": {
+   "service_id": "017104:openpa:1960",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.marcheno.bs.it/Servizi/Cambio-di-residenza",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.marcheno.bs.it/Servizi/Cambio-di-residenza",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marcheno.bs.it/Servizi/Cambio-di-residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "017104:openpa:1679",
+   "title": "Tributo IMU",
+   "source_url": "https://www.comune.marcheno.bs.it/Servizi/Tributo-IMU",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.marcheno.bs.it/Servizi/Tributo-IMU",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marcheno.bs.it/Servizi/Tributo-IMU",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_tari": {
+   "service_id": "017104:openpa:1830",
+   "title": "TARI - Tassa sui Rifiuti",
+   "source_url": "https://www.comune.marcheno.bs.it/Servizi/TARI-Tassa-sui-Rifiuti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.marcheno.bs.it/Servizi/TARI-Tassa-sui-Rifiuti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marcheno.bs.it/Servizi/TARI-Tassa-sui-Rifiuti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

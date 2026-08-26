@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "075011",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "075011:openpa:1638",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.campi-salentina.le.it/Servizi/Cambio-di-residenza",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.campi-salentina.le.it/Servizi/Cambio-di-residenza",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.campi-salentina.le.it/Servizi/Cambio-di-residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "accesso_atti": {
+   "service_id": "075011:openpa:968",
+   "title": "Richiesta accesso atti",
+   "source_url": "https://www.comune.campi-salentina.le.it/Amministrazione/Documenti-e-dati/Modulistica/Richiesta-accesso-atti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.campi-salentina.le.it/Amministrazione/Documenti-e-dati/Modulistica/Richiesta-accesso-atti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.campi-salentina.le.it/Amministrazione/Documenti-e-dati/Modulistica/Richiesta-accesso-atti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

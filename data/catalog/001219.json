@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "001219",
+ "services": {
+  "carta_identita": {
+   "service_id": "001219:openpa:1970",
+   "title": "Rilascio di carta d'identità",
+   "source_url": "https://www.comune.rivoli.to.it/Servizi/Rilascio-di-carta-d-identita",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rivoli.to.it/Servizi/Rilascio-di-carta-d-identita",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rivoli.to.it/Servizi/Rilascio-di-carta-d-identita",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001219:openpa:1895",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.rivoli.to.it/Servizi/Cambio-di-residenza",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rivoli.to.it/Servizi/Cambio-di-residenza",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rivoli.to.it/Servizi/Cambio-di-residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "stato_civile": {
+   "service_id": "001219:openpa:1967",
+   "title": "Rilascio di certificati di stato civile",
+   "source_url": "https://www.comune.rivoli.to.it/Servizi/Rilascio-di-certificati-di-stato-civile",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rivoli.to.it/Servizi/Rilascio-di-certificati-di-stato-civile",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rivoli.to.it/Servizi/Rilascio-di-certificati-di-stato-civile",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

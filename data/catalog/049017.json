@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "049017",
+ "services": {
+  "carta_identita": {
+   "service_id": "049017:openpa:3821",
+   "title": "Carta d'Identità Elettronica - C.I.E.",
+   "source_url": "https://www.comune.rosignano.livorno.it/Amministrazione/Documenti-e-dati/Documenti-tecnici-di-supporto/Carta-d-Identita-Elettronica-C.I.E",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rosignano.livorno.it/Amministrazione/Documenti-e-dati/Documenti-tecnici-di-supporto/Carta-d-Identita-Elettronica-C.I.E",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rosignano.livorno.it/Amministrazione/Documenti-e-dati/Documenti-tecnici-di-supporto/Carta-d-Identita-Elettronica-C.I.E",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "cambio_residenza": {
+   "service_id": "049017:openpa:2784",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.rosignano.livorno.it/Servizi/Cambio-di-residenza",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rosignano.livorno.it/Servizi/Cambio-di-residenza",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rosignano.livorno.it/Servizi/Cambio-di-residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "stato_civile": {
+   "service_id": "049017:openpa:2797",
+   "title": "Certificato di nascita per cittadini europei",
+   "source_url": "https://www.comune.rosignano.livorno.it/Servizi/Certificato-di-nascita-per-cittadini-europei",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rosignano.livorno.it/Servizi/Certificato-di-nascita-per-cittadini-europei",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rosignano.livorno.it/Servizi/Certificato-di-nascita-per-cittadini-europei",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "049017:openpa:3052",
+   "title": "Calcolo IMU",
+   "source_url": "https://www.comune.rosignano.livorno.it/Servizi/Calcolo-IMU",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rosignano.livorno.it/Servizi/Calcolo-IMU",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rosignano.livorno.it/Servizi/Calcolo-IMU",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

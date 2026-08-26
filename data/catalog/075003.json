@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "075003",
+ "services": {
+  "carta_identita": {
+   "service_id": "075003:openpa:1520",
+   "title": "Rinnovo e rilascio Carta d'identità",
+   "source_url": "https://www.comune.alezio.le.it/Servizi/Rinnovo-e-rilascio-Carta-d-identita",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.alezio.le.it/Servizi/Rinnovo-e-rilascio-Carta-d-identita",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.alezio.le.it/Servizi/Rinnovo-e-rilascio-Carta-d-identita",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "cambio_residenza": {
+   "service_id": "075003:openpa:246",
+   "title": "Cambio di residenza e certificati anagrafici o elettorali",
+   "source_url": "https://www.comune.alezio.le.it/Servizi/Cambio-di-residenza-e-certificati-anagrafici-o-elettorali",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.alezio.le.it/Servizi/Cambio-di-residenza-e-certificati-anagrafici-o-elettorali",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.alezio.le.it/Servizi/Cambio-di-residenza-e-certificati-anagrafici-o-elettorali",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "accesso_atti": {
+   "service_id": "075003:openpa:279",
+   "title": "Richiesta di accesso agli atti",
+   "source_url": "https://www.comune.alezio.le.it/Servizi/Richiesta-di-accesso-agli-atti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.alezio.le.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.alezio.le.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "stato_civile": {
+   "service_id": "075003:openpa:253",
+   "title": "Certificato di nascita per cittadini europei",
+   "source_url": "https://www.comune.alezio.le.it/Servizi/Certificato-di-nascita-per-cittadini-europei",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.alezio.le.it/Servizi/Certificato-di-nascita-per-cittadini-europei",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.alezio.le.it/Servizi/Certificato-di-nascita-per-cittadini-europei",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

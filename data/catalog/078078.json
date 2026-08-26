@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "078078",
+ "services": {
+  "carta_identita": {
+   "service_id": "078078:openpa:339",
+   "title": "Appuntamento per rilascio Carta d’Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.marzi.cs.it/Servizi/Appuntamento-per-rilascio-Carta-d-Identita-Elettronica-CIE",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.marzi.cs.it/Servizi/Appuntamento-per-rilascio-Carta-d-Identita-Elettronica-CIE",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marzi.cs.it/Servizi/Appuntamento-per-rilascio-Carta-d-Identita-Elettronica-CIE",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "cambio_residenza": {
+   "service_id": "078078:openpa:342",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.marzi.cs.it/Servizi/Cambio-di-residenza",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.marzi.cs.it/Servizi/Cambio-di-residenza",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marzi.cs.it/Servizi/Cambio-di-residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "078078:openpa:463",
+   "title": "Informazioni a carattere tecnico (destinazione urbanistica, normative, ecc.) o fiscale (Imposte IMU)",
+   "source_url": "https://www.comune.marzi.cs.it/Classificazioni/Cosa-puoi-richiedere/Informazioni-a-carattere-tecnico-destinazione-urbanistica-normative-ecc.-o-fiscale-Imposte-IMU",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.marzi.cs.it/Classificazioni/Cosa-puoi-richiedere/Informazioni-a-carattere-tecnico-destinazione-urbanistica-normative-ecc.-o-fiscale-Imposte-IMU",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marzi.cs.it/Classificazioni/Cosa-puoi-richiedere/Informazioni-a-carattere-tecnico-destinazione-urbanistica-normative-ecc.-o-fiscale-Imposte-IMU",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

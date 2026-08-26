@@ -1,0 +1,120 @@
+{
+ "municipality_istat": "017125",
+ "services": {
+  "carta_identita": {
+   "service_id": "017125:openpa:844",
+   "title": "Carta di Identità Elettronica CIE",
+   "source_url": "https://www.comune.orzinuovi.bs.it/Servizi/Carta-di-Identita-Elettronica-CIE",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.orzinuovi.bs.it/Servizi/Carta-di-Identita-Elettronica-CIE",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.orzinuovi.bs.it/Servizi/Carta-di-Identita-Elettronica-CIE",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "accesso_atti": {
+   "service_id": "017125:openpa:399",
+   "title": "Richiesta di accesso agli atti",
+   "source_url": "https://www.comune.orzinuovi.bs.it/Servizi/Richiesta-di-accesso-agli-atti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.orzinuovi.bs.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.orzinuovi.bs.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "stato_civile": {
+   "service_id": "017125:openpa:1827",
+   "title": "Rilascio certificazione di stato civile per atti formati da oltre un secolo per l'acquisto cittadinanza Iure Sanguinis",
+   "source_url": "https://www.comune.orzinuovi.bs.it/Servizi/Rilascio-certificazione-di-stato-civile-per-atti-formati-da-oltre-un-secolo-per-l-acquisto-cittadinanza-Iure-Sanguinis",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.orzinuovi.bs.it/Servizi/Rilascio-certificazione-di-stato-civile-per-atti-formati-da-oltre-un-secolo-per-l-acquisto-cittadinanza-Iure-Sanguinis",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.orzinuovi.bs.it/Servizi/Rilascio-certificazione-di-stato-civile-per-atti-formati-da-oltre-un-secolo-per-l-acquisto-cittadinanza-Iure-Sanguinis",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "017125:openpa:769",
+   "title": "IMU",
+   "source_url": "https://www.comune.orzinuovi.bs.it/Servizi/IMU",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.orzinuovi.bs.it/Servizi/IMU",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.orzinuovi.bs.it/Servizi/IMU",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_tari": {
+   "service_id": "017125:openpa:772",
+   "title": "TARI (Tassa Rifiuti)",
+   "source_url": "https://www.comune.orzinuovi.bs.it/Servizi/TARI-Tassa-Rifiuti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.orzinuovi.bs.it/Servizi/TARI-Tassa-Rifiuti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.orzinuovi.bs.it/Servizi/TARI-Tassa-Rifiuti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

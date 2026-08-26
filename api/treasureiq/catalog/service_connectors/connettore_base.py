@@ -122,6 +122,12 @@ class _ServiceConnectorBase:
             term=target.term,
             limit=self._LIMITE_RICERCA,
         )
+        # Filtro class-aware PRIMA del gate host/recogniser e del gate 0/≥2: una
+        # famiglia che espone una classe di contenuto nativa (OpenPA/eZ Find)
+        # scarta qui le classi non ammesse per la key (notizie, canali, enti), così
+        # il gate esattamente-1 vede solo candidati della classe giusta.  Default
+        # no-op: le famiglie senza classe (WP, ComWeb) passano invariate.
+        candidati = self._filtra_candidati(candidati, service_key)
         confermati = self._confermati(candidati, service_key, target.official_host)
         if len(confermati) != 1:
             # 0 → miss onesto; ≥2 → ambiguo, la scelta è di un livello superiore,
@@ -171,6 +177,19 @@ class _ServiceConnectorBase:
             return ServiceKey(raw)
         except ValueError:
             return None
+
+    def _filtra_candidati(
+        self,
+        candidati: tuple[ServiceCandidate, ...],
+        service_key: ServiceKey,
+    ) -> tuple[ServiceCandidate, ...]:
+        """Hook per-famiglia: restringe i candidati PRIMA del gate host/recogniser.
+
+        Default no-op — le famiglie senza una classe di contenuto nativa (WP,
+        ComWeb) non filtrano nulla qui.  OpenPA lo sovrascrive con un'allow-list
+        per ``classIdentifier``.  Può solo restringere: non conia mai candidati,
+        quindi non introduce falsi confermati (al più più ``vuoto`` onesti)."""
+        return candidati
 
     @staticmethod
     def _confermati(

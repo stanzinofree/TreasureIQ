@@ -136,11 +136,16 @@ def _connector(fetcher: StubFetcher) -> OpenPAServiceConnector:
     return OpenPAServiceConnector(fetcher)
 
 
-def _candidato(native_id: int, title: str, path: str) -> ServiceCandidate:
+def _candidato(
+    native_id: int, title: str, path: str, *, native_class: str | None = "public_service"
+) -> ServiceCandidate:
+    # Default ``public_service`` so the existing behavioural tests survive the
+    # class-aware filter; the filter cases pass an explicit class.
     return ServiceCandidate(
         native_id=str(native_id),
         title=title,
         url=f"{_SITE}{path}",
+        native_class=native_class,
     )
 
 
@@ -151,6 +156,7 @@ def test_parser_costruisce_candidato_da_hit_reale_public_service() -> None:
     cand = candidato_da_hit_ezfind(_HIT_CIE, site_base=_SITE)
     assert cand is not None
     assert cand.native_id == "567"  # the eZ node id, not the title
+    assert cand.native_class == "public_service"  # eZ class carried onto the candidate
     assert "Carta d’Identità" in cand.title
     # citizen URL from urlAlias, resolved absolute — never ``link`` (read/567)
     assert str(cand.url) == f"{_SITE}/Servizi/Appuntamento-per-rilascio-Carta-d-Identita-Elettronica-CIE"
@@ -161,6 +167,7 @@ def test_parser_legge_anche_classe_document() -> None:
     cand = candidato_da_hit_ezfind(_HIT_TARI, site_base=_SITE)
     assert cand is not None
     assert cand.native_id == "496"
+    assert cand.native_class == "document"  # document is admitted by the allow-list
     assert str(cand.url) == f"{_SITE}/Amministrazione/Documenti-e-dati/Modulistica/TARI"
 
 
@@ -279,6 +286,7 @@ def test_retrieve_host_esterno_scartato() -> None:
                 native_id="9",
                 title="Carta d'identità elettronica",
                 url="https://evil.example.org/Servizi/CIE",
+                native_class="public_service",  # passes the class filter; host guard must still drop it
             ),
         )
     )
@@ -319,3 +327,125 @@ def test_recogniser_non_confonde_imis_con_imu() -> None:
     # Honest gap (I-1): in TN IMU is titled IMIS; the recogniser does NOT map it
     # to a neighbour — it stays unrecognised, so IMU resolves NOT_FOUND there.
     assert riconosci_service_key("Calcolatore IMIS") is None
+
+
+# ── filtro class-aware (Fase B → policy allow-list) ──────────────────────────
+#
+# Policy misurata sul campione dei 28 comuni OpenPA (2026-08-26): un candidato è
+# ammesso solo se la sua classe eZ (``classIdentifier``) è in allow-list per la
+# key, PRIMA del gate esattamente-1.  Allow-list uniforme sulle 6 chiavi:
+# {public_service, document, output}; ``article`` (notizie), ``channel``,
+# ``organization`` e le altre classi sono escluse.  Erano la sorgente #1 di
+# ambiguità e di confermati-notizia.
+
+
+def _req(service_key: str) -> DataRequest:
+    return _request(service_key=service_key)
+
+
+def test_allow_list_copre_le_sei_chiavi_e_esclude_le_classi_giuste() -> None:
+    # La policy è per-key ma uniforme: tutte e sei le chiavi mappate, stessa lista.
+    # Guardia: se una key sparisce dalla mappa, l'override torna 0-candidati per
+    # essa (NOT_FOUND onesto), mai un pass-through permissivo.
+    from treasureiq.catalog.service_connectors.openpa_service import _CLASSI_AMMESSE
+
+    assert set(_CLASSI_AMMESSE) == set(ServiceKey)
+    for ammesse in _CLASSI_AMMESSE.values():
+        assert ammesse == frozenset({"public_service", "document", "output"})
+        assert not ({"article", "channel", "organization"} & ammesse)
+
+
+def test_filtro_esclude_articolo_notizia() -> None:
+    # Un ``article`` (notizia) il cui titolo il recogniser conferma per la key
+    # sarebbe, senza filtro, un confermato SBAGLIATO (pagina di notizia, non un
+    # servizio).  L'allow-list lo scarta PRIMA del gate → NOT_FOUND.
+    fetcher = StubFetcher(
+        candidati=(
+            _candidato(
+                998,
+                "Carta d'identità cartacea: valida fino alla naturale scadenza",
+                "/Novita/Notizie/Carta-d-identita-cartacea",
+                native_class="article",
+            ),
+        )
+    )
+    result = _connector(fetcher).retrieve(_request(), mappa=_mappa(), esito=None)
+    assert result.status is DataStatus.NOT_FOUND
+
+
+def test_filtro_risolve_ambiguita_tra_servizio_e_notizia() -> None:
+    # Due candidati che il recogniser mappa entrambi a CARTA_IDENTITA: il servizio
+    # vero (public_service, id 567) e una notizia (article, id 998).  Senza filtro
+    # è 2 → ambiguo → NOT_FOUND.  L'allow-list scarta la notizia → esattamente 1 →
+    # FULFILLED, e la reference superstite è il public_service, non la notizia.
+    fetcher = StubFetcher(
+        candidati=(
+            _candidato(
+                567,
+                "Appuntamento per rilascio Carta d'Identità Elettronica (CIE)",
+                "/Servizi/Appuntamento-CIE",
+                native_class="public_service",
+            ),
+            _candidato(
+                998,
+                "Carta d'identità cartacea: nuove modalità",
+                "/Novita/Notizie/Carta-d-identita-cartacea",
+                native_class="article",
+            ),
+        )
+    )
+    result = _connector(fetcher).retrieve(_request(), mappa=_mappa(), esito=None)
+    assert result.status is DataStatus.FULFILLED
+    assert len(result.service_references) == 1
+    assert result.service_references[0].service_id == f"{_ISTAT}:openpa:567"
+
+
+def test_filtro_mantiene_servizio_valido() -> None:
+    # Il filtro può solo restringere: un solo ``public_service`` valido risolve
+    # comunque (nessun danno al servizio buono).
+    fetcher = StubFetcher(
+        candidati=(
+            _candidato(
+                567,
+                "Appuntamento per rilascio Carta d'Identità Elettronica (CIE)",
+                "/Servizi/Appuntamento-CIE",
+                native_class="public_service",
+            ),
+        )
+    )
+    result = _connector(fetcher).retrieve(_request(), mappa=_mappa(), esito=None)
+    assert result.status is DataStatus.FULFILLED
+    assert result.service_references[0].service_id == f"{_ISTAT}:openpa:567"
+
+
+def test_filtro_mantiene_document_per_tributi() -> None:
+    # TARI/IMU su OpenPA vivono in ``document``/``output``, non ``public_service``:
+    # l'allow-list li ammette, così una TARI in classe ``document`` risolve.  (I
+    # tributi restano strutturalmente più deboli — il rumore lì non è separabile
+    # per classe — ma il filtro non deve uccidere neanche l'unico document vero.)
+    fetcher = StubFetcher(
+        candidati=(
+            _candidato(
+                496,
+                "TARI",
+                "/Amministrazione/Documenti-e-dati/Modulistica/TARI",
+                native_class="document",
+            ),
+        )
+    )
+    result = _connector(fetcher).retrieve(_req("tributi_tari"), mappa=_mappa(), esito=None)
+    assert result.status is DataStatus.FULFILLED
+    assert result.service_references[0].service_id == f"{_ISTAT}:openpa:496"
+
+
+@pytest.mark.parametrize("classe", ["article", "channel", "organization", "image", None])
+def test_filtro_zero_candidati_ammessi_not_found(classe: str | None) -> None:
+    # Ogni candidato ha un titolo riconosciuto ma una classe esclusa (o assente):
+    # l'allow-list svuota il set → 0 → NOT_FOUND onesto, mai una scelta indovinata.
+    fetcher = StubFetcher(
+        candidati=(
+            _candidato(1, "Carta d'identità elettronica", "/x/CIE", native_class=classe),
+        )
+    )
+    result = _connector(fetcher).retrieve(_request(), mappa=_mappa(), esito=None)
+    assert result.status is DataStatus.NOT_FOUND

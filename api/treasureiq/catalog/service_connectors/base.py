@@ -24,6 +24,11 @@ class ServiceCandidate(_StrictModel):
     native_id: str = Field(min_length=1)
     title: str = Field(min_length=1)
     url: AnyHttpUrl
+    #: Platform-native content class, when the source exposes one (OpenPA/eZ Find:
+    #: ``classIdentifier`` — ``public_service``/``document``/``article``/...).
+    #: ``None`` for families without the notion (WP/ComWeb): the class-aware gate
+    #: is opt-in per connector, so ``None`` means "no class filter applies here".
+    native_class: str | None = None
 
 
 class ServiceFetcher(Protocol):

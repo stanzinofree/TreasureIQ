@@ -101,6 +101,12 @@ def candidato_da_hit_ezfind(hit: object, *, site_base: str) -> ServiceCandidate 
         native_id = str(int(metadata["id"]))
     except (KeyError, TypeError, ValueError):
         return None
+    # eZ content class of this hit (``public_service``/``document``/``article``/…);
+    # kept on the candidate so the connector's class-aware allow-list can gate on
+    # it BEFORE the exactly-1 gate.  Missing/ill-typed → ``None`` (dropped by the
+    # allow-list: an unclassifiable hit is never a confirmed service).
+    classe = metadata.get("classIdentifier")
+    classe = classe if isinstance(classe, str) and classe else None
     # urlAlias is a site-relative SEO path; resolve it against the site root.
     url = urljoin(site_base.rstrip("/") + "/", str(alias).lstrip("/"))
     try:
@@ -108,6 +114,7 @@ def candidato_da_hit_ezfind(hit: object, *, site_base: str) -> ServiceCandidate 
             native_id=native_id,
             title=unescape(str(nome)).strip(),
             url=url,
+            native_class=classe,
         )
     except ValueError:
         return None
@@ -157,6 +164,28 @@ class _EzFindDiscovery:
         return raccogli_candidati_ezfind(payload, site_base=site_base)
 
 
+#: Allow-list class-aware per ServiceKey — policy misurata sul campione dei 28
+#: comuni OpenPA (2026-08-26, vedi docs/workstreams/flotta-connettori/
+#: proposta-filtro-class-aware-openpa.md).  Uniforme sulle 6 chiavi: ``public_service``
+#: è il servizio vero; ``document`` e ``output`` restano ammessi perché su OpenPA
+#: i tributi (IMU/TARI) e parte dell'anagrafe/atti vivono lì (regolamenti, moduli,
+#: nodi "cosa puoi richiedere"), non in ``public_service``.  Tutto il resto —
+#: ``article`` (notizie), ``channel``, ``organization``, media, … — è escluso PRIMA
+#: del gate esattamente-1: era la sorgente #1 di ambiguità e di confermati-notizia.
+#: NB: IMU/TARI restano strutturalmente più deboli — il rumore in ``document``/
+#: ``output`` non è separabile per classe; questa allow-list lo contiene, non lo
+#: risolve.  Per-key (non un set globale) così una chiave può divergere in futuro
+#: senza allargare le altre.
+_CLASSI_AMMESSE: dict[ServiceKey, frozenset[str]] = {
+    ServiceKey.CARTA_IDENTITA: frozenset({"public_service", "document", "output"}),
+    ServiceKey.CAMBIO_RESIDENZA: frozenset({"public_service", "document", "output"}),
+    ServiceKey.ACCESSO_ATTI: frozenset({"public_service", "document", "output"}),
+    ServiceKey.STATO_CIVILE: frozenset({"public_service", "document", "output"}),
+    ServiceKey.TRIBUTI_IMU: frozenset({"public_service", "document", "output"}),
+    ServiceKey.TRIBUTI_TARI: frozenset({"public_service", "document", "output"}),
+}
+
+
 class OpenPAServiceConnector(_ServiceConnectorBase):
     """Resolve a ``ServiceKey`` to one ``ServiceReference`` on OpenPA/OpenCity portals.
 
@@ -178,3 +207,17 @@ class OpenPAServiceConnector(_ServiceConnectorBase):
             return None
         entry = f"{base.rstrip('/')}{_ENDPOINT_RICERCA}"
         return DiscoveryTarget(entry, SERVICE_SEARCH_TERM[service_key], urlparse(base).netloc)
+
+    def _filtra_candidati(
+        self,
+        candidati: tuple[ServiceCandidate, ...],
+        service_key: ServiceKey,
+    ) -> tuple[ServiceCandidate, ...]:
+        # Allow-list class-aware, PRIMA del gate host/recogniser e del gate 0/≥2:
+        # tiene solo i candidati la cui classe eZ è ammessa per la key.  Una key
+        # fuori mappa (non dovrebbe accadere: le 6 sono tutte elencate) → nessuna
+        # classe ammessa → 0 candidati (NOT_FOUND onesto), mai un pass-through
+        # permissivo.  ``native_class`` None (hit senza classIdentifier) non è in
+        # allow-list → scartato: un candidato non classificabile non è un servizio.
+        ammesse = _CLASSI_AMMESSE.get(service_key, frozenset())
+        return tuple(c for c in candidati if c.native_class in ammesse)

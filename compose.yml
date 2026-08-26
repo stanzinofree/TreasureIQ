@@ -46,6 +46,11 @@ services:
       TREASUREIQ_NARRATOR_BACKEND: ${TREASUREIQ_NARRATOR_BACKEND:-deterministic}
       TREASUREIQ_LLAMACPP_URL: ${TREASUREIQ_LLAMACPP_URL:-http://llama-cpp:8080}
       TREASUREIQ_DATA_DIR: /data
+      # Flat-catalog resolver tier (cache fresca → catalogo flat → live).
+      # Serves promoted ServiceReferences from the read-only /data/catalog
+      # mount; ON here activates the tier in this deployment (code default is
+      # OFF). Set to 0 to fall back to cache/live-only without a redeploy.
+      TREASUREIQ_SERVICE_CATALOG: ${TREASUREIQ_SERVICE_CATALOG:-1}
       # The curated data mount is read-only; anonymous conversation state is
       # runtime data and must live on the writable persistent /live mount.
       TREASUREIQ_CONVERSATION_DB: /live/conversations.sqlite3

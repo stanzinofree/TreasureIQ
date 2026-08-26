@@ -17,11 +17,12 @@ No network here: the connector registry is empty until Slice 4 wires a pilot.
 
 from __future__ import annotations
 
+import os
 from datetime import datetime, timezone
 
-from treasureiq.catalog import service_cache
+from treasureiq.catalog import service_catalog, service_cache
 from treasureiq.catalog.connector_registry import ConnectorRegistry
-from treasureiq.catalog.contracts import CAPABILITY_SERVICES, Surface
+from treasureiq.catalog.contracts import CAPABILITY_SERVICES, ConnectorRef, Surface
 from treasureiq.catalog.data_contracts import DataRequest, DataStatus
 from treasureiq.catalog.service_contracts import (
     ResolvedService,
@@ -30,6 +31,27 @@ from treasureiq.catalog.service_contracts import (
 )
 from treasureiq.connettore import EsitoConnettore
 from treasureiq.mappa_connettore import MappaConnettore
+
+#: Provenance stamped on a service served from the promoted flat catalog, so a
+#: catalog hit is never mistaken for a live connector call.  ``name="catalog"``
+#: marks the versioned national catalog (the originating platform stays on
+#: ``reference.provider_platform``); ``version`` tracks the catalog format.
+_CATALOG_CONNECTOR = ConnectorRef(name="catalog", version="1")
+
+
+def _catalogo_flat_attivo() -> bool:
+    """Whether the flat-catalog step is enabled (env gate, default OFF).
+
+    The step is wired but inert until ``TREASUREIQ_SERVICE_CATALOG`` is truthy,
+    so deploying the code changes no citizen answer until prod flips it on
+    deliberately — a reversible switch, not an implicit behaviour change.
+    """
+    return os.environ.get("TREASUREIQ_SERVICE_CATALOG", "").strip().lower() in {
+        "1",
+        "true",
+        "yes",
+        "on",
+    }
 
 
 def _service_key_da_selezione(request: DataRequest) -> ServiceKey | None:
@@ -93,6 +115,23 @@ def resolve_service_with_meta(
             from_cache=True,
             connector=hit.connector,
         )
+
+    # Second tier (``cache fresca → catalogo flat → live``): the promoted national
+    # catalog is authoritative-until-next-promotion, so a hit here answers with no
+    # network and no write-back — a stored resolution, reported like a cache hit
+    # (``from_cache=True`` → FRESH).  ``retrieved_at`` is the promotion/discovery
+    # stamp: for a catalog entry there is no separate live resolution event, so
+    # ``discovered_at`` IS when it was measured (the deliberate exception to the
+    # "never discovered_at" rule that holds for live/cache).  Gated OFF by default.
+    if _catalogo_flat_attivo():
+        catalog_ref = service_catalog.carica(request.source_id, service_key)
+        if catalog_ref is not None:
+            return ResolvedService(
+                reference=catalog_ref,
+                retrieved_at=catalog_ref.discovered_at,
+                from_cache=True,
+                connector=_CATALOG_CONNECTOR,
+            )
 
     registry = registry or ConnectorRegistry()
     connector = registry.resolve(request=request, platform_id=platform_id)

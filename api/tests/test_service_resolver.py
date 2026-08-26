@@ -14,6 +14,8 @@ from datetime import datetime, timedelta, timezone
 
 import pytest
 
+import json
+
 from treasureiq.catalog import freshness as _freshness
 from treasureiq.catalog import service_cache, service_resolver
 from treasureiq.catalog.connector_registry import ConnectorRegistry
@@ -411,3 +413,120 @@ def test_envelope_e_persistito_stesso_retrieved_at(mappa, request_cie, freshness
     )
     assert second is not None and second.from_cache is True
     assert second.retrieved_at == quando  # cache hit replays exactly that instant
+
+
+# --- Flat-catalog tier (cache fresca → catalogo flat → live) -----------------
+
+_CATALOG_DISCOVERED = datetime(2026, 8, 26, tzinfo=timezone.utc)
+
+
+def _catalogo_flat(base, istat: str, service_id: str = "catalogo") -> ServiceReference:
+    """Write a flat-catalog entry for CARTA_IDENTITA and return the reference."""
+    ref = ServiceReference(
+        service_id=service_id,
+        title="Carta d'identità — dal catalogo",
+        source_url="https://comune.example.it/Servizi/CIE",
+        options=(
+            ServiceAccessOption(
+                mode=ServiceAccessMode.INFORMATION,
+                url="https://comune.example.it/Servizi/CIE",
+            ),
+        ),
+        provider_platform="openpa",
+        discovered_at=_CATALOG_DISCOVERED,
+    )
+    cartella = base / "catalog"
+    cartella.mkdir(parents=True, exist_ok=True)
+    (cartella / f"{istat}.json").write_text(
+        json.dumps(
+            {"municipality_istat": istat, "services": {"carta_identita": ref.model_dump(mode="json")}},
+            ensure_ascii=False,
+        ),
+        "utf-8",
+    )
+    return ref
+
+
+@pytest.fixture
+def catalogo_attivo(monkeypatch, tmp_path):
+    """Enable the flat-catalog tier and point it at ``tmp_path/catalog``."""
+    monkeypatch.setenv("TREASUREIQ_SERVICE_CATALOG", "1")
+    monkeypatch.setenv("TREASUREIQ_DATA_DIR", str(tmp_path))
+    return tmp_path
+
+
+# C1 — gate OFF (default): catalog present but env unset → tier skipped, live wins
+def test_catalogo_gate_off_ignora(monkeypatch, tmp_path, mappa, request_cie):
+    monkeypatch.delenv("TREASUREIQ_SERVICE_CATALOG", raising=False)
+    monkeypatch.setenv("TREASUREIQ_DATA_DIR", str(tmp_path))
+    _catalogo_flat(tmp_path, _SOURCE)
+    stub = _StubConnettore(_result(request_cie, (_reference("live"),)))
+    env = service_resolver.resolve_service_with_meta(
+        request_cie, mappa=mappa, registry=_registry(stub)
+    )
+    assert env is not None and env.reference.service_id == "live"
+    assert stub.chiamate == 1
+
+
+# C2 — gate ON, cache miss, catalog HIT → catalog served, connector never called,
+#      envelope from_cache=True/FRESH-shaped, connector=catalog, retrieved_at=discovered_at
+def test_catalogo_hit_su_miss_cache(catalogo_attivo, mappa, request_cie):
+    ref = _catalogo_flat(catalogo_attivo, _SOURCE)
+    stub = _StubConnettore(_result(request_cie, (_reference("live"),)))
+    env = service_resolver.resolve_service_with_meta(
+        request_cie, mappa=mappa, registry=_registry(stub)
+    )
+    assert env is not None
+    assert env.reference == ref
+    assert env.from_cache is True
+    assert env.connector == service_resolver._CATALOG_CONNECTOR
+    assert env.connector.name == "catalog"
+    assert env.retrieved_at == _CATALOG_DISCOVERED  # promotion/discovery stamp
+    assert stub.chiamate == 0
+    # read-only: the catalog hit writes nothing into the service_cache
+    assert service_cache.carica(
+        _SOURCE, ServiceKey.CARTA_IDENTITA, policy=request_cie.freshness
+    ) is None
+
+
+# C3 — gate ON but a FRESH cache entry wins over the catalog (cache più fresca prevale)
+def test_cache_fresca_prevale_su_catalogo(catalogo_attivo, mappa, request_cie):
+    _catalogo_flat(catalogo_attivo, _SOURCE)
+    cached = _reference("cached")
+    service_cache.salva(_SOURCE, ServiceKey.CARTA_IDENTITA, cached, _CONN)
+    stub = _StubConnettore(_result(request_cie, (_reference("live"),)))
+    env = service_resolver.resolve_service_with_meta(
+        request_cie, mappa=mappa, registry=_registry(stub)
+    )
+    assert env is not None
+    assert env.reference == cached  # cache, non catalogo
+    assert env.connector == _CONN
+    assert stub.chiamate == 0
+
+
+# C4 — gate ON, cache miss, catalog MISS (no file) → falls through to live connector
+def test_catalogo_miss_ripiega_live(catalogo_attivo, mappa, request_cie):
+    # nessun file catalogo scritto per _SOURCE
+    ref = _reference("live")
+    stub = _StubConnettore(_result(request_cie, (ref,)))
+    env = service_resolver.resolve_service_with_meta(
+        request_cie, mappa=mappa, registry=_registry(stub)
+    )
+    assert env is not None
+    assert env.reference == ref
+    assert env.from_cache is False
+    assert stub.chiamate == 1
+
+
+# C5 — gate ON, catalog file MALFORMED → reader returns None → live fallback
+def test_catalogo_malformato_ripiega_live(catalogo_attivo, mappa, request_cie):
+    cartella = catalogo_attivo / "catalog"
+    cartella.mkdir(parents=True, exist_ok=True)
+    (cartella / f"{_SOURCE}.json").write_text("{ rotto", "utf-8")
+    ref = _reference("live")
+    stub = _StubConnettore(_result(request_cie, (ref,)))
+    env = service_resolver.resolve_service_with_meta(
+        request_cie, mappa=mappa, registry=_registry(stub)
+    )
+    assert env is not None and env.reference == ref
+    assert stub.chiamate == 1

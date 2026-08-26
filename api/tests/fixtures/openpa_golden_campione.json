@@ -1,0 +1,3653 @@
+[
+ {
+  "comune": "Cappadocia",
+  "key": "ACCESSO_ATTI",
+  "expected_native_id": "273",
+  "hits": [
+   {
+    "id": 273,
+    "title": "Richiesta di accesso agli atti",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.cappadocia.aq.it/Servizi/Richiesta-di-accesso-agli-atti"
+   },
+   {
+    "id": 342,
+    "title": "Ufficio Protocollo",
+    "classIdentifier": "organization",
+    "url": "https://www.comune.cappadocia.aq.it/Amministrazione/Uffici/Ufficio-Protocollo"
+   },
+   {
+    "id": 338,
+    "title": "Area Amministrativa",
+    "classIdentifier": "organization",
+    "url": "https://www.comune.cappadocia.aq.it/Amministrazione/Aree-amministrative/Area-Amministrativa"
+   },
+   {
+    "id": 271,
+    "title": "Accedi al servizio online - Richiesta di accesso agli atti ",
+    "classIdentifier": "channel",
+    "url": "https://www.comune.cappadocia.aq.it/Classificazioni/Canali-digitali/Accedi-al-servizio-online-Richiesta-di-accesso-agli-atti"
+   },
+   {
+    "id": 272,
+    "title": "Prenota appuntamento - Richiesta di accesso agli atti",
+    "classIdentifier": "channel",
+    "url": "https://www.comune.cappadocia.aq.it/Classificazioni/Canali-digitali/Prenota-appuntamento-Richiesta-di-accesso-agli-atti"
+   },
+   {
+    "id": 227,
+    "title": "Con il nuovo sito web, il Comune è sempre più digitale",
+    "classIdentifier": "article",
+    "url": "https://www.comune.cappadocia.aq.it/Novita/Notizie/Con-il-nuovo-sito-web-il-Comune-e-sempre-piu-digitale"
+   },
+   {
+    "id": 226,
+    "title": "PNRR: la digitalizzazione dei servizi comunali",
+    "classIdentifier": "article",
+    "url": "https://www.comune.cappadocia.aq.it/Novita/Notizie/PNRR-la-digitalizzazione-dei-servizi-comunali"
+   },
+   {
+    "id": 592,
+    "title": "CONDIZIONI GENERALI DI SERVIZIO",
+    "classIdentifier": "document",
+    "url": "https://www.comune.cappadocia.aq.it/Amministrazione/Documenti-e-dati/Atti-normativi/CONDIZIONI-GENERALI-DI-SERVIZIO"
+   },
+   {
+    "id": 324,
+    "title": "Sede Area Amministrativa",
+    "classIdentifier": "place",
+    "url": "https://www.comune.cappadocia.aq.it/Vivere-il-comune/Luoghi/Sede-Area-Amministrativa"
+   },
+   {
+    "id": 74,
+    "title": "Note legali",
+    "classIdentifier": "pagina_sito",
+    "url": "https://www.comune.cappadocia.aq.it/Note-legali"
+   },
+   {
+    "id": 89,
+    "title": "Informativa trattamento dati (Sito web)",
+    "classIdentifier": "pagina_sito",
+    "url": "https://www.comune.cappadocia.aq.it/Privacy/Informativa-trattamento-dati-Sito-web"
+   }
+  ]
+ },
+ {
+  "comune": "Cappadocia",
+  "key": "STATO_CIVILE",
+  "expected_native_id": "252",
+  "hits": [
+   {
+    "id": 151,
+    "title": "Protezione civile",
+    "classIdentifier": "topic",
+    "url": "https://www.comune.cappadocia.aq.it/Argomenti/Diritto/Protezione-civile"
+   },
+   {
+    "id": 249,
+    "title": "Certificati anagrafici",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.cappadocia.aq.it/Servizi/Certificati-anagrafici"
+   },
+   {
+    "id": 245,
+    "title": "Cambio di residenza",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.cappadocia.aq.it/Servizi/Cambio-di-residenza"
+   },
+   {
+    "id": 252,
+    "title": "Certificato di nascita per cittadini europei",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.cappadocia.aq.it/Servizi/Certificato-di-nascita-per-cittadini-europei"
+   },
+   {
+    "id": 255,
+    "title": "Iscrizione anagrafica per cittadini europei",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.cappadocia.aq.it/Servizi/Iscrizione-anagrafica-per-cittadini-europei"
+   },
+   {
+    "id": 273,
+    "title": "Richiesta di accesso agli atti",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.cappadocia.aq.it/Servizi/Richiesta-di-accesso-agli-atti"
+   },
+   {
+    "id": 330,
+    "title": "Servizi Demografici",
+    "classIdentifier": "organization",
+    "url": "https://www.comune.cappadocia.aq.it/Amministrazione/Uffici/Servizi-Demografici"
+   },
+   {
+    "id": 277,
+    "title": "Richiesta sepoltura di un defunto",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.cappadocia.aq.it/Servizi/Richiesta-sepoltura-di-un-defunto"
+   },
+   {
+    "id": 547,
+    "title": "Servizio di revisione e rifacimento della numerazione civica esterna",
+    "classIdentifier": "article",
+    "url": "https://www.comune.cappadocia.aq.it/Novita/Avvisi/Servizio-di-revisione-e-rifacimento-della-numerazione-civica-esterna"
+   },
+   {
+    "id": 126,
+    "title": "Diritto",
+    "classIdentifier": "topic",
+    "url": "https://www.comune.cappadocia.aq.it/Argomenti/Diritto"
+   },
+   {
+    "id": 253,
+    "title": "Iscrizione all’Anagrafe nazionale per te e tutte le persone che si traferiscono insieme a te",
+    "classIdentifier": "output",
+    "url": "https://www.comune.cappadocia.aq.it/Classificazioni/Cosa-puoi-richiedere/Iscrizione-all-Anagrafe-nazionale-per-te-e-tutte-le-persone-che-si-traferiscono-insieme-a-te"
+   },
+   {
+    "id": 280,
+    "title": "Segnala disservizio",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.cappadocia.aq.it/Servizi/Segnala-disservizio"
+   },
+   {
+    "id": 287,
+    "title": "Pagare tributi IMU",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.cappadocia.aq.it/Servizi/Pagare-tributi-IMU2"
+   },
+   {
+    "id": 266,
+    "title": "Prenotazione appuntamento",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.cappadocia.aq.it/Servizi/Prenotazione-appuntamento"
+   },
+   {
+    "id": 283,
+    "title": "Sportello Unico Attività Produttive (SUAP)",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.cappadocia.aq.it/Servizi/Sportello-Unico-Attivita-Produttive-SUAP"
+   },
+   {
+    "id": 269,
+    "title": "Richiedi assistenza",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.cappadocia.aq.it/Servizi/Richiedi-assistenza"
+   },
+   {
+    "id": 259,
+    "title": "Pagare il canone per le lampade votive",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.cappadocia.aq.it/Servizi/Pagare-il-canone-per-le-lampade-votive"
+   },
+   {
+    "id": 574,
+    "title": "Webcam Borgo di Cappadocia",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.cappadocia.aq.it/Servizi/Webcam-Borgo-di-Cappadocia"
+   },
+   {
+    "id": 555,
+    "title": "Comune di Cappadocia",
+    "classIdentifier": "organization",
+    "url": "https://www.comune.cappadocia.aq.it/Amministrazione/Enti-e-fondazioni/Comune-di-Cappadocia"
+   },
+   {
+    "id": 227,
+    "title": "Con il nuovo sito web, il Comune è sempre più digitale",
+    "classIdentifier": "article",
+    "url": "https://www.comune.cappadocia.aq.it/Novita/Notizie/Con-il-nuovo-sito-web-il-Comune-e-sempre-piu-digitale"
+   }
+  ]
+ },
+ {
+  "comune": "Cellara",
+  "key": "CARTA_IDENTITA",
+  "expected_native_id": "354",
+  "hits": [
+   {
+    "id": 354,
+    "title": "Appuntamento per rilascio Carta d’Identità Elettronica (CIE)",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.cellara.cs.it/Servizi/Appuntamento-per-rilascio-Carta-d-Identita-Elettronica-CIE"
+   },
+   {
+    "id": 355,
+    "title": "Appuntamento per il rilascio della Carta Identità Elettronica  ",
+    "classIdentifier": "output",
+    "url": "https://www.comune.cellara.cs.it/Classificazioni/Cosa-puoi-richiedere/Appuntamento-per-il-rilascio-della-Carta-Identita-Elettronica"
+   },
+   {
+    "id": 84,
+    "title": "Informativa trattamento dati (Sito web)",
+    "classIdentifier": "pagina_sito",
+    "url": "https://www.comune.cellara.cs.it/Privacy/Informativa-trattamento-dati-Sito-web"
+   },
+   {
+    "id": 221,
+    "title": "Con il nuovo sito web, il Comune è sempre più digitale",
+    "classIdentifier": "article",
+    "url": "https://www.comune.cellara.cs.it/Novita/Notizie/Con-il-nuovo-sito-web-il-Comune-e-sempre-piu-digitale"
+   },
+   {
+    "id": 356,
+    "title": "Prenota appuntamento - CIE",
+    "classIdentifier": "channel",
+    "url": "https://www.comune.cellara.cs.it/Classificazioni/Canali-digitali/Prenota-appuntamento-CIE"
+   },
+   {
+    "id": 175,
+    "title": "Programma d'azione",
+    "classIdentifier": "topic",
+    "url": "https://www.comune.cellara.cs.it/Argomenti/Politica/Programma-d-azione"
+   },
+   {
+    "id": 368,
+    "title": "MyPay2 Regione Calabria PagoPa",
+    "classIdentifier": "banner",
+    "url": "https://www.comune.cellara.cs.it/Media/Banner-e-link/MyPay2-Regione-Calabria-PagoPa"
+   },
+   {
+    "id": 340,
+    "title": "Richiesta pubblicazione matrimonio",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.cellara.cs.it/Servizi/Richiesta-pubblicazione-matrimonio"
+   },
+   {
+    "id": 345,
+    "title": "Domanda di assegno maternità",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.cellara.cs.it/Servizi/Domanda-di-assegno-maternita"
+   },
+   {
+    "id": 256,
+    "title": "Richiesta di accesso agli atti",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.cellara.cs.it/Servizi/Richiesta-di-accesso-agli-atti"
+   },
+   {
+    "id": 389,
+    "title": "Prenotazione Impianto sportivo",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.cellara.cs.it/Servizi/Prenotazione-Impianto-sportivo"
+   },
+   {
+    "id": 127,
+    "title": "Acqua",
+    "classIdentifier": "topic",
+    "url": "https://www.comune.cellara.cs.it/Argomenti/Ambiente/Acqua"
+   },
+   {
+    "id": 161,
+    "title": "Città intelligente",
+    "classIdentifier": "topic",
+    "url": "https://www.comune.cellara.cs.it/Argomenti/Innovazione/Citta-intelligente"
+   },
+   {
+    "id": 242,
+    "title": "Iscrizione al trasporto scolastico",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.cellara.cs.it/Servizi/Iscrizione-al-trasporto-scolastico"
+   },
+   {
+    "id": 387,
+    "title": "La Pullicinella",
+    "classIdentifier": "event",
+    "url": "https://www.comune.cellara.cs.it/Vivere-il-comune/Eventi/La-Pullicinella"
+   },
+   {
+    "id": 376,
+    "title": "Richiesta Raccolta Ingombrante",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.cellara.cs.it/Servizi/Richiesta-Raccolta-Ingombrante"
+   },
+   {
+    "id": 405,
+    "title": "Avviso Manifestazione d'interesse per l’adesione alla fase costitutiva di una “Comunità Energetica Rinnovabile”",
+    "classIdentifier": "article",
+    "url": "https://www.comune.cellara.cs.it/Novita/Avvisi/Avviso-Manifestazione-d-interesse-per-l-adesione-alla-fase-costitutiva-di-una-Comunita-Energetica-Rinnovabile"
+   },
+   {
+    "id": 369,
+    "title": "Cambio di residenza",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.cellara.cs.it/Servizi/Cambio-di-residenza"
+   },
+   {
+    "id": 394,
+    "title": "Informativa newsletter",
+    "classIdentifier": "pagina_sito",
+    "url": "https://www.comune.cellara.cs.it/Privacy/Informativa-newsletter"
+   },
+   {
+    "id": 74,
+    "title": "Note legali",
+    "classIdentifier": "pagina_sito",
+    "url": "https://www.comune.cellara.cs.it/Note-legali"
+   }
+  ]
+ },
+ {
+  "comune": "Cellara",
+  "key": "ACCESSO_ATTI",
+  "expected_native_id": "256",
+  "hits": [
+   {
+    "id": 256,
+    "title": "Richiesta di accesso agli atti",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.cellara.cs.it/Servizi/Richiesta-di-accesso-agli-atti"
+   },
+   {
+    "id": 291,
+    "title": "Ufficio relazioni con il Pubblico",
+    "classIdentifier": "organization",
+    "url": "https://www.comune.cellara.cs.it/Amministrazione/Uffici/Ufficio-relazioni-con-il-Pubblico"
+   },
+   {
+    "id": 404,
+    "title": "AVVISO 2024 Fondi Sostegno Locazione",
+    "classIdentifier": "document",
+    "url": "https://www.comune.cellara.cs.it/Amministrazione/Documenti-e-dati/Documenti-tecnici-di-supporto/AVVISO-2024-Fondi-Sostegno-Locazione"
+   },
+   {
+    "id": 221,
+    "title": "Con il nuovo sito web, il Comune è sempre più digitale",
+    "classIdentifier": "article",
+    "url": "https://www.comune.cellara.cs.it/Novita/Notizie/Con-il-nuovo-sito-web-il-Comune-e-sempre-piu-digitale"
+   },
+   {
+    "id": 255,
+    "title": "Prenota appuntamento - Richiesta di accesso agli atti",
+    "classIdentifier": "channel",
+    "url": "https://www.comune.cellara.cs.it/Classificazioni/Canali-digitali/Prenota-appuntamento-Richiesta-di-accesso-agli-atti"
+   },
+   {
+    "id": 254,
+    "title": "Accedi al servizio online - Richiesta di accesso agli atti",
+    "classIdentifier": "channel",
+    "url": "https://www.comune.cellara.cs.it/Classificazioni/Canali-digitali/Accedi-al-servizio-online-Richiesta-di-accesso-agli-atti"
+   },
+   {
+    "id": 406,
+    "title": "GeoPortale",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.cellara.cs.it/Servizi/GeoPortale"
+   },
+   {
+    "id": 394,
+    "title": "Informativa newsletter",
+    "classIdentifier": "pagina_sito",
+    "url": "https://www.comune.cellara.cs.it/Privacy/Informativa-newsletter"
+   },
+   {
+    "id": 382,
+    "title": "Chiesa San Pietro apostolo",
+    "classIdentifier": "place",
+    "url": "https://www.comune.cellara.cs.it/Vivere-il-comune/Luoghi/Chiesa-San-Pietro-apostolo"
+   },
+   {
+    "id": 74,
+    "title": "Note legali",
+    "classIdentifier": "pagina_sito",
+    "url": "https://www.comune.cellara.cs.it/Note-legali"
+   },
+   {
+    "id": 349,
+    "title": "Chiesa San Pietro",
+    "classIdentifier": "place",
+    "url": "https://www.comune.cellara.cs.it/Vivere-il-comune/Luoghi/Chiesa-San-Pietro"
+   },
+   {
+    "id": 84,
+    "title": "Informativa trattamento dati (Sito web)",
+    "classIdentifier": "pagina_sito",
+    "url": "https://www.comune.cellara.cs.it/Privacy/Informativa-trattamento-dati-Sito-web"
+   },
+   {
+    "id": 410,
+    "title": "Nuovo Servizio GEOPORTALE",
+    "classIdentifier": "article",
+    "url": "https://www.comune.cellara.cs.it/Novita/Avvisi/Nuovo-Servizio-GEOPORTALE"
+   }
+  ]
+ },
+ {
+  "comune": "Cellara",
+  "key": "TRIBUTI_IMU",
+  "expected_native_id": "408",
+  "hits": [
+   {
+    "id": 406,
+    "title": "GeoPortale",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.cellara.cs.it/Servizi/GeoPortale"
+   },
+   {
+    "id": 408,
+    "title": "Informazioni a carattere tecnico (destinazione urbanistica, normative, ecc.) o fiscale (Imposte IMU)",
+    "classIdentifier": "output",
+    "url": "https://www.comune.cellara.cs.it/Classificazioni/Cosa-puoi-richiedere/Informazioni-a-carattere-tecnico-destinazione-urbanistica-normative-ecc.-o-fiscale-Imposte-IMU"
+   },
+   {
+    "id": 409,
+    "title": "Accedi al servizio Online",
+    "classIdentifier": "channel",
+    "url": "https://www.comune.cellara.cs.it/Classificazioni/Canali-digitali/Accedi-al-servizio-Online8"
+   },
+   {
+    "id": 410,
+    "title": "Nuovo Servizio GEOPORTALE",
+    "classIdentifier": "article",
+    "url": "https://www.comune.cellara.cs.it/Novita/Avvisi/Nuovo-Servizio-GEOPORTALE"
+   }
+  ]
+ },
+ {
+  "comune": "Grisolia",
+  "key": "STATO_CIVILE",
+  "expected_native_id": "251",
+  "hits": [
+   {
+    "id": 248,
+    "title": "Certificati anagrafici",
+    "classIdentifier": "public_service",
+    "url": "https://comune.grisolia.cs.it/Servizi/Certificati-anagrafici"
+   },
+   {
+    "id": 251,
+    "title": "Certificato di nascita per cittadini europei",
+    "classIdentifier": "public_service",
+    "url": "https://comune.grisolia.cs.it/Servizi/Certificato-di-nascita-per-cittadini-europei"
+   },
+   {
+    "id": 244,
+    "title": "Cambio di residenza",
+    "classIdentifier": "public_service",
+    "url": "https://comune.grisolia.cs.it/Servizi/Cambio-di-residenza"
+   },
+   {
+    "id": 263,
+    "title": "Iscrizione anagrafica per cittadini europei",
+    "classIdentifier": "public_service",
+    "url": "https://comune.grisolia.cs.it/Servizi/Iscrizione-anagrafica-per-cittadini-europei"
+   },
+   {
+    "id": 146,
+    "title": "Protezione civile",
+    "classIdentifier": "topic",
+    "url": "https://comune.grisolia.cs.it/Argomenti/Diritto/Protezione-civile"
+   },
+   {
+    "id": 112,
+    "title": "Diritto",
+    "classIdentifier": "topic",
+    "url": "https://comune.grisolia.cs.it/Argomenti/Diritto"
+   },
+   {
+    "id": 324,
+    "title": "Ufficio Polizia Municipale",
+    "classIdentifier": "organization",
+    "url": "https://comune.grisolia.cs.it/Amministrazione/Uffici/Ufficio-Polizia-Municipale"
+   },
+   {
+    "id": 372,
+    "title": "SERVIZIO CIVILE - Progetto: GrisoliaAmbiente",
+    "classIdentifier": "article",
+    "url": "https://comune.grisolia.cs.it/Novita/Comunicati/SERVIZIO-CIVILE-Progetto-GrisoliaAmbiente"
+   },
+   {
+    "id": 269,
+    "title": "Richiedi assistenza",
+    "classIdentifier": "public_service",
+    "url": "https://comune.grisolia.cs.it/Servizi/Richiedi-assistenza"
+   },
+   {
+    "id": 280,
+    "title": "Sportello Unico Attività Produttive (SUAP)",
+    "classIdentifier": "public_service",
+    "url": "https://comune.grisolia.cs.it/Servizi/Sportello-Unico-Attivita-Produttive-SUAP"
+   },
+   {
+    "id": 374,
+    "title": "PagoPA",
+    "classIdentifier": "public_service",
+    "url": "https://comune.grisolia.cs.it/Servizi/PagoPA"
+   },
+   {
+    "id": 369,
+    "title": "WhistleBlowing PA",
+    "classIdentifier": "public_service",
+    "url": "https://comune.grisolia.cs.it/Servizi/WhistleBlowing-PA"
+   },
+   {
+    "id": 261,
+    "title": "Iscrizione all’Anagrafe nazionale per te e tutte le persone che si traferiscono insieme a te",
+    "classIdentifier": "output",
+    "url": "https://comune.grisolia.cs.it/Classificazioni/Cosa-puoi-richiedere/Iscrizione-all-Anagrafe-nazionale-per-te-e-tutte-le-persone-che-si-traferiscono-insieme-a-te"
+   },
+   {
+    "id": 392,
+    "title": "Pagare il canone idrico",
+    "classIdentifier": "public_service",
+    "url": "https://comune.grisolia.cs.it/Servizi/Pagare-il-canone-idrico"
+   },
+   {
+    "id": 266,
+    "title": "Prenotazione appuntamento",
+    "classIdentifier": "public_service",
+    "url": "https://comune.grisolia.cs.it/Servizi/Prenotazione-appuntamento"
+   },
+   {
+    "id": 396,
+    "title": "Pagare contravvenzioni",
+    "classIdentifier": "public_service",
+    "url": "https://comune.grisolia.cs.it/Servizi/Pagare-contravvenzioni"
+   },
+   {
+    "id": 388,
+    "title": "Iscrizione alla mensa scolastica",
+    "classIdentifier": "public_service",
+    "url": "https://comune.grisolia.cs.it/Servizi/Iscrizione-alla-mensa-scolastica"
+   },
+   {
+    "id": 384,
+    "title": "Iscrizione al trasporto scolastico",
+    "classIdentifier": "public_service",
+    "url": "https://comune.grisolia.cs.it/Servizi/Iscrizione-al-trasporto-scolastico"
+   },
+   {
+    "id": 86,
+    "title": "Informativa trattamento dati (Sito web)",
+    "classIdentifier": "pagina_sito",
+    "url": "https://comune.grisolia.cs.it/Privacy/Informativa-trattamento-dati-Sito-web"
+   },
+   {
+    "id": 341,
+    "title": "Gite turistiche",
+    "classIdentifier": "article",
+    "url": "https://comune.grisolia.cs.it/Novita/Comunicati/Gite-turistiche"
+   }
+  ]
+ },
+ {
+  "comune": "Marzi",
+  "key": "CARTA_IDENTITA",
+  "expected_native_id": "339",
+  "hits": [
+   {
+    "id": 339,
+    "title": "Appuntamento per rilascio Carta d’Identità Elettronica (CIE)",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.marzi.cs.it/Servizi/Appuntamento-per-rilascio-Carta-d-Identita-Elettronica-CIE"
+   },
+   {
+    "id": 342,
+    "title": "Cambio di residenza",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.marzi.cs.it/Servizi/Cambio-di-residenza"
+   },
+   {
+    "id": 468,
+    "title": "carta d'identità",
+    "classIdentifier": "image",
+    "url": "https://www.comune.marzi.cs.it/Media/Images/carta-d-identita"
+   },
+   {
+    "id": 467,
+    "title": "Avviso",
+    "classIdentifier": "article",
+    "url": "https://www.comune.marzi.cs.it/Novita/Avvisi/Avviso"
+   },
+   {
+    "id": 474,
+    "title": "Scadenza validità delle carte d'identità CARTACEE",
+    "classIdentifier": "article",
+    "url": "https://www.comune.marzi.cs.it/Novita/Notizie/Scadenza-validita-delle-carte-d-identita-CARTACEE"
+   },
+   {
+    "id": 341,
+    "title": "Appuntamento per il rilascio della Carta Identità Elettronica",
+    "classIdentifier": "output",
+    "url": "https://www.comune.marzi.cs.it/Classificazioni/Cosa-puoi-richiedere/Appuntamento-per-il-rilascio-della-Carta-Identita-Elettronica"
+   },
+   {
+    "id": 84,
+    "title": "Informativa trattamento dati (Sito web)",
+    "classIdentifier": "pagina_sito",
+    "url": "https://www.comune.marzi.cs.it/Privacy/Informativa-trattamento-dati-Sito-web"
+   },
+   {
+    "id": 292,
+    "title": "Ufficio Anagrafe Stato civile ed Elettorale",
+    "classIdentifier": "organization",
+    "url": "https://www.comune.marzi.cs.it/Amministrazione/Uffici/Ufficio-Anagrafe-Stato-civile-ed-Elettorale"
+   },
+   {
+    "id": 221,
+    "title": "Con i nuovi Servizi web, il Comune è sempre più digitale",
+    "classIdentifier": "article",
+    "url": "https://www.comune.marzi.cs.it/Novita/Notizie/Con-i-nuovi-Servizi-web-il-Comune-e-sempre-piu-digitale"
+   },
+   {
+    "id": 421,
+    "title": "Aggiornamento Albo Presidenti e Scrutatori di seggio",
+    "classIdentifier": "article",
+    "url": "https://www.comune.marzi.cs.it/Novita/Avvisi/Aggiornamento-Albo-Presidenti-e-Scrutatori-di-seggio"
+   },
+   {
+    "id": 175,
+    "title": "Programma d'azione",
+    "classIdentifier": "topic",
+    "url": "https://www.comune.marzi.cs.it/Argomenti/Politica/Programma-d-azione"
+   },
+   {
+    "id": 331,
+    "title": "MyPay Regione Calabria PagoPa",
+    "classIdentifier": "banner",
+    "url": "https://www.comune.marzi.cs.it/Media/Banner-e-link/MyPay-Regione-Calabria-PagoPa"
+   },
+   {
+    "id": 475,
+    "title": "Carta iden",
+    "classIdentifier": "image",
+    "url": "https://www.comune.marzi.cs.it/Media/Images/Carta-iden"
+   },
+   {
+    "id": 363,
+    "title": "Prenotazione Palestra",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.marzi.cs.it/Servizi/Prenotazione-Palestra"
+   },
+   {
+    "id": 380,
+    "title": "Domanda per bonus economici ",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.marzi.cs.it/Servizi/Domanda-per-bonus-economici"
+   },
+   {
+    "id": 127,
+    "title": "Acqua",
+    "classIdentifier": "topic",
+    "url": "https://www.comune.marzi.cs.it/Argomenti/Ambiente/Acqua"
+   },
+   {
+    "id": 161,
+    "title": "Città intelligente",
+    "classIdentifier": "topic",
+    "url": "https://www.comune.marzi.cs.it/Argomenti/Innovazione/Citta-intelligente"
+   },
+   {
+    "id": 406,
+    "title": "Iscrizione all'asilo nido",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.marzi.cs.it/Servizi/Iscrizione-all-asilo-nido"
+   },
+   {
+    "id": 352,
+    "title": "Richiesta Raccolta Ingombrante",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.marzi.cs.it/Servizi/Richiesta-Raccolta-Ingombrante"
+   },
+   {
+    "id": 402,
+    "title": "Iscrizione al trasporto scolastico",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.marzi.cs.it/Servizi/Iscrizione-al-trasporto-scolastico"
+   }
+  ]
+ },
+ {
+  "comune": "Marzi",
+  "key": "TRIBUTI_IMU",
+  "expected_native_id": "463",
+  "hits": [
+   {
+    "id": 463,
+    "title": "Informazioni a carattere tecnico (destinazione urbanistica, normative, ecc.) o fiscale (Imposte IMU)",
+    "classIdentifier": "output",
+    "url": "https://www.comune.marzi.cs.it/Classificazioni/Cosa-puoi-richiedere/Informazioni-a-carattere-tecnico-destinazione-urbanistica-normative-ecc.-o-fiscale-Imposte-IMU"
+   },
+   {
+    "id": 461,
+    "title": "GeoPortale",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.marzi.cs.it/Servizi/GeoPortale"
+   },
+   {
+    "id": 465,
+    "title": "Nuovo Servizio GEOPORTALE",
+    "classIdentifier": "article",
+    "url": "https://www.comune.marzi.cs.it/Novita/Avvisi/Nuovo-Servizio-GEOPORTALE"
+   }
+  ]
+ },
+ {
+  "comune": "San Prisco",
+  "key": "ACCESSO_ATTI",
+  "expected_native_id": "429",
+  "hits": [
+   {
+    "id": 429,
+    "title": "Richiesta di accesso agli atti di pratiche edilizie",
+    "classIdentifier": "document",
+    "url": "https://www.comune.sanprisco.caserta.it/Amministrazione/Documenti-e-dati/Modulistica/Richiesta-di-accesso-agli-atti-di-pratiche-edilizie"
+   },
+   {
+    "id": 1035,
+    "title": "Ufficio Segreteria Generale",
+    "classIdentifier": "organization",
+    "url": "https://www.comune.sanprisco.caserta.it/Amministrazione/Uffici/Ufficio-Segreteria-Generale"
+   },
+   {
+    "id": 1122,
+    "title": "Ufficio SUAP e Commercio",
+    "classIdentifier": "organization",
+    "url": "https://www.comune.sanprisco.caserta.it/Amministrazione/Uffici/Ufficio-SUAP-e-Commercio"
+   },
+   {
+    "id": 1269,
+    "title": "AVVISO PUBBLICO PER L’ACCESSO AL FONDO DESTINATO AGLI INQUILINI MOROSI INCOLPEVOLI 2026",
+    "classIdentifier": "article",
+    "url": "https://www.comune.sanprisco.caserta.it/Novita/Avvisi/AVVISO-PUBBLICO-PER-L-ACCESSO-AL-FONDO-DESTINATO-AGLI-INQUILINI-MOROSI-INCOLPEVOLI-2026"
+   },
+   {
+    "id": 221,
+    "title": "Con il nuovo sito web, il Comune è sempre più digitale",
+    "classIdentifier": "article",
+    "url": "https://www.comune.sanprisco.caserta.it/Novita/Notizie/Con-il-nuovo-sito-web-il-Comune-e-sempre-piu-digitale"
+   },
+   {
+    "id": 83,
+    "title": "Informativa newsletter",
+    "classIdentifier": "pagina_sito",
+    "url": "https://www.comune.sanprisco.caserta.it/Privacy/Informativa-newsletter"
+   },
+   {
+    "id": 300,
+    "title": "Ufficio Protocollo e Archivio",
+    "classIdentifier": "organization",
+    "url": "https://www.comune.sanprisco.caserta.it/Amministrazione/Uffici/Ufficio-Protocollo-e-Archivio"
+   },
+   {
+    "id": 74,
+    "title": "Note legali",
+    "classIdentifier": "pagina_sito",
+    "url": "https://www.comune.sanprisco.caserta.it/Note-legali"
+   },
+   {
+    "id": 1030,
+    "title": "Carta di Identità Elettronica (CIE)",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.sanprisco.caserta.it/Servizi/Carta-di-Identita-Elettronica-CIE"
+   },
+   {
+    "id": 220,
+    "title": "PNRR: la digitalizzazione dei servizi comunali",
+    "classIdentifier": "article",
+    "url": "https://www.comune.sanprisco.caserta.it/Novita/Notizie/PNRR-la-digitalizzazione-dei-servizi-comunali"
+   }
+  ]
+ },
+ {
+  "comune": "San Prisco",
+  "key": "STATO_CIVILE",
+  "expected_native_id": "573",
+  "hits": [
+   {
+    "id": 243,
+    "title": "Iscrizione alla mensa scolastica",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.sanprisco.caserta.it/Servizi/Iscrizione-alla-mensa-scolastica"
+   },
+   {
+    "id": 1039,
+    "title": "Ufficio Anagrafe e Stato Civile",
+    "classIdentifier": "organization",
+    "url": "https://www.comune.sanprisco.caserta.it/Amministrazione/Uffici/Ufficio-Anagrafe-e-Stato-Civile"
+   },
+   {
+    "id": 1051,
+    "title": "Orario Ufficio Anagrafe e Stato Civile",
+    "classIdentifier": "opening_hours_specification",
+    "url": "https://www.comune.sanprisco.caserta.it/Classificazioni/Orari-uffici-e-strutture/Orario-Ufficio-Anagrafe-e-Stato-Civile"
+   },
+   {
+    "id": 1048,
+    "title": "Contatti Ufficio Anagrafe e Stato Civile",
+    "classIdentifier": "online_contact_point",
+    "url": "https://www.comune.sanprisco.caserta.it/Classificazioni/Punti-di-contatto/Contatti-Ufficio-Anagrafe-e-Stato-Civile"
+   },
+   {
+    "id": 1049,
+    "title": "Ufficio Anagrafe e Stato Civile",
+    "classIdentifier": "place",
+    "url": "https://www.comune.sanprisco.caserta.it/Vivere-il-comune/Luoghi/Ufficio-Anagrafe-e-Stato-Civile"
+   },
+   {
+    "id": 561,
+    "title": "Rettifica dati",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.sanprisco.caserta.it/Servizi/Rettifica-dati"
+   },
+   {
+    "id": 573,
+    "title": "Certificato di nascita per cittadini europei",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.sanprisco.caserta.it/Servizi/Certificato-di-nascita-per-cittadini-europei"
+   },
+   {
+    "id": 565,
+    "title": "Certificati anagrafici",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.sanprisco.caserta.it/Servizi/Certificati-anagrafici"
+   },
+   {
+    "id": 1030,
+    "title": "Carta di Identità Elettronica (CIE)",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.sanprisco.caserta.it/Servizi/Carta-di-Identita-Elettronica-CIE"
+   },
+   {
+    "id": 557,
+    "title": "Cambio di residenza",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.sanprisco.caserta.it/Servizi/Cambio-di-residenza"
+   },
+   {
+    "id": 569,
+    "title": "Iscrizione anagrafica per cittadini europei",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.sanprisco.caserta.it/Servizi/Iscrizione-anagrafica-per-cittadini-europei"
+   },
+   {
+    "id": 1212,
+    "title": "PRONTO FARMACO: servizio gratuito di consegna farmaci e dispositivi medici a domicilio rivolto a cittadini in condizione di fragilità",
+    "classIdentifier": "article",
+    "url": "https://www.comune.sanprisco.caserta.it/Novita/Notizie/PRONTO-FARMACO-servizio-gratuito-di-consegna-farmaci-e-dispositivi-medici-a-domicilio-rivolto-a-cittadini-in-condizione-di-fragilita"
+   },
+   {
+    "id": 1187,
+    "title": "SCADENZA CARTE D'IDENTITA' RILASCIATE SU MODELLO CARTACEO",
+    "classIdentifier": "article",
+    "url": "https://www.comune.sanprisco.caserta.it/Novita/Notizie/SCADENZA-CARTE-D-IDENTITA-RILASCIATE-SU-MODELLO-CARTACEO"
+   },
+   {
+    "id": 144,
+    "title": "Protezione civile",
+    "classIdentifier": "topic",
+    "url": "https://www.comune.sanprisco.caserta.it/Argomenti/Diritto/Protezione-civile"
+   },
+   {
+    "id": 1053,
+    "title": "“Impariamo a riciclare” – Tre giornate di educazione ambientale per i più piccoli",
+    "classIdentifier": "article",
+    "url": "https://www.comune.sanprisco.caserta.it/Novita/Notizie/Impariamo-a-riciclare-Tre-giornate-di-educazione-ambientale-per-i-piu-piccoli"
+   },
+   {
+    "id": 1136,
+    "title": "Ufficio Anagrafe e Stato Civile",
+    "classIdentifier": "channel",
+    "url": "https://www.comune.sanprisco.caserta.it/Classificazioni/Canali-digitali/Ufficio-Anagrafe-e-Stato-Civile"
+   },
+   {
+    "id": 586,
+    "title": "Piano di Emergenza Comunale",
+    "classIdentifier": "article",
+    "url": "https://www.comune.sanprisco.caserta.it/Novita/Avvisi/Piano-di-Emergenza-Comunale"
+   },
+   {
+    "id": 1044,
+    "title": "Ruolo \"Dipendente\" di Ufficio Servizi Demografici",
+    "classIdentifier": "time_indexed_role",
+    "url": "https://www.comune.sanprisco.caserta.it/Media/Ruoli/Ruolo-Dipendente-di-Ufficio-Servizi-Demografici"
+   },
+   {
+    "id": 1045,
+    "title": "Ruolo \"Dipendente\" di Ufficio Servizi Demografici",
+    "classIdentifier": "time_indexed_role",
+    "url": "https://www.comune.sanprisco.caserta.it/Media/Ruoli/Ruolo-Dipendente-di-Ufficio-Servizi-Demografici2"
+   },
+   {
+    "id": 1046,
+    "title": "Ruolo \"Dipendente\" di Ufficio Servizi Demografici",
+    "classIdentifier": "time_indexed_role",
+    "url": "https://www.comune.sanprisco.caserta.it/Media/Ruoli/Ruolo-Dipendente-di-Ufficio-Servizi-Demografici3"
+   }
+  ]
+ },
+ {
+  "comune": "Brescello",
+  "key": "ACCESSO_ATTI",
+  "expected_native_id": "1445",
+  "hits": [
+   {
+    "id": 1433,
+    "title": "Consultazione Piano Regolatore Generale (PRG)",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.brescello.re.it/Servizi/Consultazione-Piano-Regolatore-Generale-PRG"
+   },
+   {
+    "id": 1517,
+    "title": "Accesso alle tavole e agli atti del PRG",
+    "classIdentifier": "output",
+    "url": "https://www.comune.brescello.re.it/Classificazioni/Cosa-puoi-richiedere/Accesso-alle-tavole-e-agli-atti-del-PRG"
+   },
+   {
+    "id": 1445,
+    "title": "Richiedere l'accesso agli atti",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.brescello.re.it/Servizi/Richiedere-l-accesso-agli-atti"
+   },
+   {
+    "id": 1819,
+    "title": "Accedi al servizio online - Richiesta accesso agli atti",
+    "classIdentifier": "channel",
+    "url": "https://www.comune.brescello.re.it/Classificazioni/Canali-digitali/Accedi-al-servizio-online-Richiesta-accesso-agli-atti"
+   },
+   {
+    "id": 726,
+    "title": "Ufficio Urbanistica e SUE (Edilizia Privata), attività edilizia SUAP",
+    "classIdentifier": "organization",
+    "url": "https://www.comune.brescello.re.it/Amministrazione/Uffici/Ufficio-Urbanistica-e-SUE-Edilizia-Privata-attivita-edilizia-SUAP"
+   },
+   {
+    "id": 1308,
+    "title": "Elenco atti esclusi",
+    "classIdentifier": "document",
+    "url": "https://www.comune.brescello.re.it/Amministrazione/Documenti-e-dati/Documenti-tecnici-di-supporto/Elenco-atti-esclusi"
+   },
+   {
+    "id": 1359,
+    "title": "Modalità str. accesso agli uffici comunali",
+    "classIdentifier": "document",
+    "url": "https://www.comune.brescello.re.it/Amministrazione/Documenti-e-dati/Documenti-albo-pretorio/Modalita-str.-accesso-agli-uffici-comunali"
+   },
+   {
+    "id": 1334,
+    "title": "Modalità straordinarie di accesso agli uffici comunali",
+    "classIdentifier": "document",
+    "url": "https://www.comune.brescello.re.it/Amministrazione/Documenti-e-dati/Documenti-albo-pretorio/Modalita-straordinarie-di-accesso-agli-uffici-comunali"
+   },
+   {
+    "id": 1409,
+    "title": "Modalità straordinarie di accesso agli uffici comunali",
+    "classIdentifier": "article",
+    "url": "https://www.comune.brescello.re.it/Novita/Avvisi/Modalita-straordinarie-di-accesso-agli-uffici-comunali"
+   },
+   {
+    "id": 3013,
+    "title": "Accesso a fonti archivistiche conservate in biblioteca",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.brescello.re.it/Servizi/Accesso-a-fonti-archivistiche-conservate-in-biblioteca"
+   },
+   {
+    "id": 1446,
+    "title": "Organizzare attività nei Parchi Comunali",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.brescello.re.it/Servizi/Organizzare-attivita-nei-Parchi-Comunali"
+   },
+   {
+    "id": 1411,
+    "title": "Modalità straordinarie di accesso agli Uffici demografici",
+    "classIdentifier": "article",
+    "url": "https://www.comune.brescello.re.it/Novita/Avvisi/Modalita-straordinarie-di-accesso-agli-Uffici-demografici"
+   },
+   {
+    "id": 1196,
+    "title": "Albo Pretorio ",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.brescello.re.it/Servizi/Albo-Pretorio"
+   },
+   {
+    "id": 1020,
+    "title": "Coronavirus: modalità straordinarie di accesso agli uffici comunali dal 6 aprile 2020",
+    "classIdentifier": "article",
+    "url": "https://www.comune.brescello.re.it/Novita/Avvisi/Coronavirus-modalita-straordinarie-di-accesso-agli-uffici-comunali-dal-6-aprile-2020"
+   },
+   {
+    "id": 680,
+    "title": "Sede Ufficio Azienda Servizi alla Persona - Progetto Persona",
+    "classIdentifier": "place",
+    "url": "https://www.comune.brescello.re.it/Vivere-il-comune/Luoghi/Sede-Ufficio-Azienda-Servizi-alla-Persona-Progetto-Persona"
+   },
+   {
+    "id": 1861,
+    "title": "Atti e documenti di carattere generale",
+    "classIdentifier": "pagina_trasparenza",
+    "url": "https://www.comune.brescello.re.it/Atti-e-documenti-di-carattere-generale"
+   },
+   {
+    "id": 221,
+    "title": "Con il nuovo sito web, il Comune è sempre più digitale",
+    "classIdentifier": "article",
+    "url": "https://www.comune.brescello.re.it/Novita/Notizie/Con-il-nuovo-sito-web-il-Comune-e-sempre-piu-digitale"
+   },
+   {
+    "id": 2318,
+    "title": "CONSULTAZIONE DEGLI STAKEHOLDERS ai fini dell’approvazione del Piano Triennale Integrato di attività e organizzazione PIAO ",
+    "classIdentifier": "document",
+    "url": "https://www.comune.brescello.re.it/Amministrazione/Documenti-e-dati/Modulistica/CONSULTAZIONE-DEGLI-STAKEHOLDERS-ai-fini-dell-approvazione-del-Piano-Triennale-Integrato-di-attivita-e-organizzazione-PIAO"
+   },
+   {
+    "id": 1862,
+    "title": "Atti e documenti relativi alle singole procedure e link alla BDNCP ",
+    "classIdentifier": "pagina_trasparenza",
+    "url": "https://www.comune.brescello.re.it/Atti-e-documenti-relativi-alle-singole-procedure-e-link-alla-BDNCP"
+   },
+   {
+    "id": 1119,
+    "title": "SALTA SU! Abbonamento gratuito per i trasporti riservato agli studenti residenti in Emilia-Romagna",
+    "classIdentifier": "article",
+    "url": "https://www.comune.brescello.re.it/Novita/Notizie/SALTA-SU!-Abbonamento-gratuito-per-i-trasporti-riservato-agli-studenti-residenti-in-Emilia-Romagna"
+   }
+  ]
+ },
+ {
+  "comune": "Tavagnacco",
+  "key": "CAMBIO_RESIDENZA",
+  "expected_native_id": "3259",
+  "hits": [
+   {
+    "id": 2356,
+    "title": "Dichiarare la nuova residenza",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.tavagnacco.ud.it/Servizi/Dichiarare-la-nuova-residenza"
+   },
+   {
+    "id": 2335,
+    "title": "Richiedere la cittadinanza italiana Iure Sanguinis",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.tavagnacco.ud.it/Servizi/Richiedere-la-cittadinanza-italiana-Iure-Sanguinis"
+   },
+   {
+    "id": 2341,
+    "title": "Richiedere l'assegnazione del numero civico",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.tavagnacco.ud.it/Servizi/Richiedere-l-assegnazione-del-numero-civico"
+   },
+   {
+    "id": 3259,
+    "title": "Cambio di residenza alla nuova abitazione",
+    "classIdentifier": "output",
+    "url": "https://www.comune.tavagnacco.ud.it/Classificazioni/Cosa-puoi-richiedere/Cambio-di-residenza-alla-nuova-abitazione"
+   },
+   {
+    "id": 1805,
+    "title": "Anche a Tavagnacco  il cambio di residenza è on line",
+    "classIdentifier": "article",
+    "url": "https://www.comune.tavagnacco.ud.it/Novita/Notizie/Anche-a-Tavagnacco-il-cambio-di-residenza-e-on-line"
+   },
+   {
+    "id": 2317,
+    "title": "Cittadinanza italiana per stranieri",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.tavagnacco.ud.it/Servizi/Cittadinanza-italiana-per-stranieri"
+   },
+   {
+    "id": 2378,
+    "title": "Richiedere il Bonus elettrico per gravi condizioni di salute (disagio fisico)",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.tavagnacco.ud.it/Servizi/Richiedere-il-Bonus-elettrico-per-gravi-condizioni-di-salute-disagio-fisico"
+   },
+   {
+    "id": 2358,
+    "title": "Istituire una convivenza di fatto",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.tavagnacco.ud.it/Servizi/Istituire-una-convivenza-di-fatto"
+   },
+   {
+    "id": 2381,
+    "title": "Come compilare un'Autocertificazione",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.tavagnacco.ud.it/Servizi/Come-compilare-un-Autocertificazione"
+   },
+   {
+    "id": 2349,
+    "title": "Richiedere l'Attestato di Soggiorno Permanente per  cittadini comunitari",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.tavagnacco.ud.it/Servizi/Richiedere-l-Attestato-di-Soggiorno-Permanente-per-cittadini-comunitari"
+   },
+   {
+    "id": 2424,
+    "title": "Richiedere un certificato anagrafico",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.tavagnacco.ud.it/Servizi/Richiedere-un-certificato-anagrafico"
+   },
+   {
+    "id": 2407,
+    "title": "Trasferimento all'estero per i cittadini stranieri",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.tavagnacco.ud.it/Servizi/Trasferimento-all-estero-per-i-cittadini-stranieri"
+   },
+   {
+    "id": 2365,
+    "title": "Iscrizione all'Anagrafe degli Italiani Residenti all'Estero (AIRE)",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.tavagnacco.ud.it/Servizi/Iscrizione-all-Anagrafe-degli-Italiani-Residenti-all-Estero-AIRE"
+   },
+   {
+    "id": 2318,
+    "title": "Cittadinanza italiana per giovani stranieri nati in Italia",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.tavagnacco.ud.it/Servizi/Cittadinanza-italiana-per-giovani-stranieri-nati-in-Italia"
+   },
+   {
+    "id": 2325,
+    "title": "Richiedere il Passaporto",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.tavagnacco.ud.it/Servizi/Richiedere-il-Passaporto"
+   },
+   {
+    "id": 2426,
+    "title": "Richiedere PIN e PUK della Carta d'Identità elettronica",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.tavagnacco.ud.it/Servizi/Richiedere-PIN-e-PUK-della-Carta-d-Identita-elettronica"
+   },
+   {
+    "id": 2391,
+    "title": "Iscrizione del cane all'Anagrafe canina",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.tavagnacco.ud.it/Servizi/Iscrizione-del-cane-all-Anagrafe-canina"
+   },
+   {
+    "id": 2373,
+    "title": "Come ottenere il Bonus per disagio economico sui consumi di luce, acqua e gas",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.tavagnacco.ud.it/Servizi/Come-ottenere-il-Bonus-per-disagio-economico-sui-consumi-di-luce-acqua-e-gas"
+   },
+   {
+    "id": 3260,
+    "title": "Comunica cambio residenza su ANPR",
+    "classIdentifier": "channel",
+    "url": "https://www.comune.tavagnacco.ud.it/Classificazioni/Canali-digitali/Comunica-cambio-residenza-su-ANPR"
+   },
+   {
+    "id": 3271,
+    "title": "Iscrizione anagrafica per cittadini europei",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.tavagnacco.ud.it/Servizi/Iscrizione-anagrafica-per-cittadini-europei"
+   }
+  ]
+ },
+ {
+  "comune": "Tavagnacco",
+  "key": "STATO_CIVILE",
+  "expected_native_id": "2422",
+  "hits": [
+   {
+    "id": 2422,
+    "title": "Richiedere un Certificato o un Estratto dagli Atti di Stato Civile",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.tavagnacco.ud.it/Servizi/Richiedere-un-Certificato-o-un-Estratto-dagli-Atti-di-Stato-Civile"
+   },
+   {
+    "id": 2417,
+    "title": "Separazione e Divorzio",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.tavagnacco.ud.it/Servizi/Separazione-e-Divorzio"
+   },
+   {
+    "id": 2397,
+    "title": "Costituire un'unione civile ",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.tavagnacco.ud.it/Servizi/Costituire-un-unione-civile"
+   },
+   {
+    "id": 2405,
+    "title": "Denunciare il decesso di un congiunto",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.tavagnacco.ud.it/Servizi/Denunciare-il-decesso-di-un-congiunto"
+   },
+   {
+    "id": 2318,
+    "title": "Cittadinanza italiana per giovani stranieri nati in Italia",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.tavagnacco.ud.it/Servizi/Cittadinanza-italiana-per-giovani-stranieri-nati-in-Italia"
+   },
+   {
+    "id": 2355,
+    "title": "Fare lo Scrutatore di seggio elettorale",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.tavagnacco.ud.it/Servizi/Fare-lo-Scrutatore-di-seggio-elettorale"
+   },
+   {
+    "id": 2348,
+    "title": "Fare il Presidente di seggio elettorale",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.tavagnacco.ud.it/Servizi/Fare-il-Presidente-di-seggio-elettorale"
+   },
+   {
+    "id": 2407,
+    "title": "Trasferimento all'estero per i cittadini stranieri",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.tavagnacco.ud.it/Servizi/Trasferimento-all-estero-per-i-cittadini-stranieri"
+   },
+   {
+    "id": 2310,
+    "title": "Autenticare una fotografia (legalizzare) ",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.tavagnacco.ud.it/Servizi/Autenticare-una-fotografia-legalizzare"
+   },
+   {
+    "id": 2346,
+    "title": "Richiedere la Tessera Elettorale",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.tavagnacco.ud.it/Servizi/Richiedere-la-Tessera-Elettorale"
+   },
+   {
+    "id": 2305,
+    "title": "Autenticare una copia",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.tavagnacco.ud.it/Servizi/Autenticare-una-copia"
+   },
+   {
+    "id": 2312,
+    "title": "Autenticare la firma sui passaggi di proprietà di beni mobili registrati",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.tavagnacco.ud.it/Servizi/Autenticare-la-firma-sui-passaggi-di-proprieta-di-beni-mobili-registrati"
+   },
+   {
+    "id": 2377,
+    "title": "Denunciare la nascita di un figlio",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.tavagnacco.ud.it/Servizi/Denunciare-la-nascita-di-un-figlio"
+   },
+   {
+    "id": 2329,
+    "title": "Richiedere informazioni per le Pubblicazioni di Matrimonio",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.tavagnacco.ud.it/Servizi/Richiedere-informazioni-per-le-Pubblicazioni-di-Matrimonio"
+   },
+   {
+    "id": 2317,
+    "title": "Cittadinanza italiana per stranieri",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.tavagnacco.ud.it/Servizi/Cittadinanza-italiana-per-stranieri"
+   },
+   {
+    "id": 2749,
+    "title": "Riconoscimento prima della nascita (o prericonoscimento)",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.tavagnacco.ud.it/Servizi/Riconoscimento-prima-della-nascita-o-prericonoscimento"
+   },
+   {
+    "id": 2404,
+    "title": "Consegnare la Disposizione Anticipata di Trattamento (DAT)",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.tavagnacco.ud.it/Servizi/Consegnare-la-Disposizione-Anticipata-di-Trattamento-DAT"
+   },
+   {
+    "id": 2358,
+    "title": "Istituire una convivenza di fatto",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.tavagnacco.ud.it/Servizi/Istituire-una-convivenza-di-fatto"
+   },
+   {
+    "id": 2349,
+    "title": "Richiedere l'Attestato di Soggiorno Permanente per  cittadini comunitari",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.tavagnacco.ud.it/Servizi/Richiedere-l-Attestato-di-Soggiorno-Permanente-per-cittadini-comunitari"
+   },
+   {
+    "id": 2426,
+    "title": "Richiedere PIN e PUK della Carta d'Identità elettronica",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.tavagnacco.ud.it/Servizi/Richiedere-PIN-e-PUK-della-Carta-d-Identita-elettronica"
+   }
+  ]
+ },
+ {
+  "comune": "Samarate",
+  "key": "CARTA_IDENTITA",
+  "expected_native_id": "1695",
+  "hits": [
+   {
+    "id": 2214,
+    "title": "Scadenza delle Carte D'Identità cartacee in data 3 agosto 2026",
+    "classIdentifier": "article",
+    "url": "https://www.comune.samarate.va.it/Novita/Avvisi/Scadenza-delle-Carte-D-Identita-cartacee-in-data-3-agosto-2026"
+   },
+   {
+    "id": 1695,
+    "title": "CIE - Carta di identità elettronica",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.samarate.va.it/Servizi/CIE-Carta-di-identita-elettronica"
+   },
+   {
+    "id": 221,
+    "title": "Con il nuovo sito web, il Comune è sempre più digitale",
+    "classIdentifier": "article",
+    "url": "https://www.comune.samarate.va.it/Novita/Notizie/Con-il-nuovo-sito-web-il-Comune-e-sempre-piu-digitale"
+   },
+   {
+    "id": 2261,
+    "title": "Cittadinanza attiva",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.samarate.va.it/Servizi/Cittadinanza-attiva"
+   },
+   {
+    "id": 1679,
+    "title": "Cambio di residenza, di indirizzo ed emigrazione all'estero",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.samarate.va.it/Servizi/Cambio-di-residenza-di-indirizzo-ed-emigrazione-all-estero"
+   },
+   {
+    "id": 1205,
+    "title": "Assegno Maternità",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.samarate.va.it/Servizi/Assegno-Maternita"
+   },
+   {
+    "id": 344,
+    "title": "Carta dei servizi e standard di qualità",
+    "classIdentifier": "pagina_trasparenza",
+    "url": "https://www.comune.samarate.va.it/Amministrazione-Trasparente/Servizi-erogati/Carta-dei-servizi-e-standard-di-qualita"
+   },
+   {
+    "id": 175,
+    "title": "Programma d'azione",
+    "classIdentifier": "topic",
+    "url": "https://www.comune.samarate.va.it/Argomenti/Politica/Programma-d-azione"
+   },
+   {
+    "id": 1714,
+    "title": "Separazione, divorzio e modifica delle condizioni davanti all’Ufficiale di Stato Civile",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.samarate.va.it/Servizi/Separazione-divorzio-e-modifica-delle-condizioni-davanti-all-Ufficiale-di-Stato-Civile"
+   },
+   {
+    "id": 1712,
+    "title": "Rinuncia concessione cimiteriale",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.samarate.va.it/Servizi/Rinuncia-concessione-cimiteriale"
+   },
+   {
+    "id": 1716,
+    "title": "Tessera elettorale",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.samarate.va.it/Servizi/Tessera-elettorale"
+   },
+   {
+    "id": 1577,
+    "title": "Carta di Vincoli (b)",
+    "classIdentifier": "document",
+    "url": "https://www.comune.samarate.va.it/Amministrazione/Documenti-e-dati/Documenti-tecnici-di-supporto/Carta-di-Vincoli-b"
+   },
+   {
+    "id": 1578,
+    "title": "Carta di Vincoli (a)",
+    "classIdentifier": "document",
+    "url": "https://www.comune.samarate.va.it/Amministrazione/Documenti-e-dati/Documenti-tecnici-di-supporto/Carta-di-Vincoli-a"
+   },
+   {
+    "id": 1556,
+    "title": "Carta dei vincoli territoriali",
+    "classIdentifier": "document",
+    "url": "https://www.comune.samarate.va.it/Amministrazione/Documenti-e-dati/Documenti-tecnici-di-supporto/Carta-dei-vincoli-territoriali"
+   },
+   {
+    "id": 1554,
+    "title": "Carta dei vincoli territoriali",
+    "classIdentifier": "document",
+    "url": "https://www.comune.samarate.va.it/Amministrazione/Documenti-e-dati/Documenti-tecnici-di-supporto/Carta-dei-vincoli-territoriali2"
+   },
+   {
+    "id": 1946,
+    "title": "Carta dedicata a te",
+    "classIdentifier": "image",
+    "url": "https://www.comune.samarate.va.it/Media/Images/Carta-dedicata-a-te"
+   },
+   {
+    "id": 127,
+    "title": "Acqua",
+    "classIdentifier": "topic",
+    "url": "https://www.comune.samarate.va.it/Argomenti/Gestione-dell-ambiente/Acqua"
+   },
+   {
+    "id": 161,
+    "title": "Città intelligente",
+    "classIdentifier": "topic",
+    "url": "https://www.comune.samarate.va.it/Argomenti/Innovazione/Citta-intelligente"
+   },
+   {
+    "id": 1214,
+    "title": "Bonifica siti inquinati",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.samarate.va.it/Servizi/Bonifica-siti-inquinati"
+   },
+   {
+    "id": 1250,
+    "title": "Gestione amministrativa degli immobili di proprietà comunale dei Servizi Abitativi Pubblici (d'ufficio)",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.samarate.va.it/Servizi/Gestione-amministrativa-degli-immobili-di-proprieta-comunale-dei-Servizi-Abitativi-Pubblici-d-ufficio"
+   }
+  ]
+ },
+ {
+  "comune": "Lodrino",
+  "key": "ACCESSO_ATTI",
+  "expected_native_id": "247",
+  "hits": [
+   {
+    "id": 1096,
+    "title": "ACCESSO CIVICO",
+    "classIdentifier": "document",
+    "url": "https://www.comune.lodrino.bs.it/Amministrazione-Trasparente/Altri-contenuti/Accesso-civico/ACCESSO-CIVICO"
+   },
+   {
+    "id": 247,
+    "title": "Richiesta di accesso agli atti",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.lodrino.bs.it/Servizi/Richiesta-di-accesso-agli-atti"
+   },
+   {
+    "id": 250,
+    "title": "Prenota appuntamento - Richiesta di accesso agli atti",
+    "classIdentifier": "channel",
+    "url": "https://www.comune.lodrino.bs.it/Classificazioni/Canali-digitali/Prenota-appuntamento-Richiesta-di-accesso-agli-atti"
+   },
+   {
+    "id": 249,
+    "title": "Accedi al servizio online - Richiesta di accesso agli atti",
+    "classIdentifier": "channel",
+    "url": "https://www.comune.lodrino.bs.it/Classificazioni/Canali-digitali/Accedi-al-servizio-online-Richiesta-di-accesso-agli-atti"
+   },
+   {
+    "id": 565,
+    "title": "Anagrafe - Autocertificazione",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.lodrino.bs.it/Servizi/Anagrafe-Autocertificazione"
+   },
+   {
+    "id": 908,
+    "title": "Atti generali",
+    "classIdentifier": "document",
+    "url": "https://www.comune.lodrino.bs.it/Amministrazione-Trasparente/Disposizioni-generali/Atti-generali/Atti-generali"
+   },
+   {
+    "id": 567,
+    "title": "Certificati - destinazione urbanistica",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.lodrino.bs.it/Servizi/Certificati-destinazione-urbanistica"
+   },
+   {
+    "id": 589,
+    "title": "Imposta sulla pubblicità e diritti sulle pubbliche affissioni",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.lodrino.bs.it/Servizi/Imposta-sulla-pubblicita-e-diritti-sulle-pubbliche-affissioni"
+   },
+   {
+    "id": 1170,
+    "title": "Atti e documenti di carattere generale",
+    "classIdentifier": "pagina_trasparenza",
+    "url": "https://www.comune.lodrino.bs.it/Amministrazione-Trasparente/Bandi-di-gara-e-contratti/Atti-e-documenti-di-carattere-generale"
+   },
+   {
+    "id": 221,
+    "title": "Con il nuovo sito web, il Comune è sempre più digitale",
+    "classIdentifier": "article",
+    "url": "https://www.comune.lodrino.bs.it/Novita/Notizie/Con-il-nuovo-sito-web-il-Comune-e-sempre-piu-digitale"
+   },
+   {
+    "id": 83,
+    "title": "Informativa newsletter",
+    "classIdentifier": "pagina_sito",
+    "url": "https://www.comune.lodrino.bs.it/Privacy/Informativa-newsletter"
+   },
+   {
+    "id": 1171,
+    "title": "Atti e documenti relativi alle singole procedure e link alla BDNCP ",
+    "classIdentifier": "pagina_trasparenza",
+    "url": "https://www.comune.lodrino.bs.it/Amministrazione-Trasparente/Bandi-di-gara-e-contratti/Atti-e-documenti-relativi-alle-singole-procedure-e-link-alla-BDNCP"
+   },
+   {
+    "id": 541,
+    "title": "Determinazioni",
+    "classIdentifier": "document",
+    "url": "https://www.comune.lodrino.bs.it/Amministrazione/Documenti-e-dati/Documenti-tecnici-di-supporto/Determinazioni"
+   },
+   {
+    "id": 218,
+    "title": "Giunta comunale",
+    "classIdentifier": "organization",
+    "url": "https://www.comune.lodrino.bs.it/Amministrazione/Organi-di-governo/Giunta-comunale"
+   },
+   {
+    "id": 273,
+    "title": "Ufficio messo notificatore",
+    "classIdentifier": "organization",
+    "url": "https://www.comune.lodrino.bs.it/Amministrazione/Uffici/Ufficio-messo-notificatore"
+   },
+   {
+    "id": 441,
+    "title": "Parco degli Alpini - località Pineta",
+    "classIdentifier": "place",
+    "url": "https://www.comune.lodrino.bs.it/Vivere-il-comune/Luoghi/Parco-degli-Alpini-localita-Pineta"
+   },
+   {
+    "id": 763,
+    "title": "Registro degli accessi",
+    "classIdentifier": "pagina_trasparenza",
+    "url": "https://www.comune.lodrino.bs.it/Amministrazione-Trasparente/Altri-contenuti/Accesso-civico/Registro-degli-accessi"
+   },
+   {
+    "id": 216,
+    "title": "Ufficio relazioni con il pubblico",
+    "classIdentifier": "organization",
+    "url": "https://www.comune.lodrino.bs.it/Amministrazione/Uffici/Ufficio-relazioni-con-il-pubblico"
+   },
+   {
+    "id": 986,
+    "title": "",
+    "classIdentifier": "nota_trasparenza",
+    "url": "https://www.comune.lodrino.bs.it/Amministrazione-Trasparente/Sovvenzioni-contributi-sussidi-vantaggi-economici/Atti-di-concessione/node_1009"
+   },
+   {
+    "id": 74,
+    "title": "NOTE LEGALI E PRIVACY DEL SITO",
+    "classIdentifier": "pagina_sito",
+    "url": "https://www.comune.lodrino.bs.it/NOTE-LEGALI-E-PRIVACY-DEL-SITO"
+   }
+  ]
+ },
+ {
+  "comune": "Lodrino",
+  "key": "STATO_CIVILE",
+  "expected_native_id": "553",
+  "hits": [
+   {
+    "id": 1188,
+    "title": "ANPR",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.lodrino.bs.it/Servizi/ANPR"
+   },
+   {
+    "id": 567,
+    "title": "Certificati - destinazione urbanistica",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.lodrino.bs.it/Servizi/Certificati-destinazione-urbanistica"
+   },
+   {
+    "id": 565,
+    "title": "Anagrafe - Autocertificazione",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.lodrino.bs.it/Servizi/Anagrafe-Autocertificazione"
+   },
+   {
+    "id": 1190,
+    "title": "SUAP",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.lodrino.bs.it/Servizi/SUAP"
+   },
+   {
+    "id": 555,
+    "title": "TARSU - smaltimento dei rifiuti solidi urbani",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.lodrino.bs.it/Servizi/TARSU-smaltimento-dei-rifiuti-solidi-urbani"
+   },
+   {
+    "id": 569,
+    "title": "ICI - Informazioni",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.lodrino.bs.it/Servizi/ICI-Informazioni"
+   },
+   {
+    "id": 574,
+    "title": "Tessera elettorale (rilascio, aggiornamento, duplicato)",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.lodrino.bs.it/Servizi/Tessera-elettorale-rilascio-aggiornamento-duplicato"
+   },
+   {
+    "id": 1270,
+    "title": "Imposta di Soggiorno",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.lodrino.bs.it/Servizi/Imposta-di-Soggiorno"
+   },
+   {
+    "id": 275,
+    "title": "Ufficio anagrafe, stato civile e tributi",
+    "classIdentifier": "organization",
+    "url": "https://www.comune.lodrino.bs.it/Amministrazione/Uffici/Ufficio-anagrafe-stato-civile-e-tributi"
+   },
+   {
+    "id": 553,
+    "title": "Anagrafe e stato civile ",
+    "classIdentifier": "document",
+    "url": "https://www.comune.lodrino.bs.it/Amministrazione/Documenti-e-dati/Documenti-tecnici-di-supporto/Anagrafe-e-stato-civile"
+   },
+   {
+    "id": 276,
+    "title": "UFFICIO ANAGRAFE, STATO CIVILE E TRIBUTI",
+    "classIdentifier": "online_contact_point",
+    "url": "https://www.comune.lodrino.bs.it/Classificazioni/Punti-di-contatto/UFFICIO-ANAGRAFE-STATO-CIVILE-E-TRIBUTI"
+   },
+   {
+    "id": 277,
+    "title": "UFFICIO ANAGRAFE, STATO CIVILE E TRIBUTI",
+    "classIdentifier": "opening_hours_specification",
+    "url": "https://www.comune.lodrino.bs.it/Classificazioni/Orari-uffici-e-strutture/UFFICIO-ANAGRAFE-STATO-CIVILE-E-TRIBUTI"
+   },
+   {
+    "id": 540,
+    "title": "Statuto e regolamenti",
+    "classIdentifier": "document",
+    "url": "https://www.comune.lodrino.bs.it/Amministrazione/Documenti-e-dati/Documenti-tecnici-di-supporto/Statuto-e-regolamenti"
+   },
+   {
+    "id": 144,
+    "title": "Protezione civile",
+    "classIdentifier": "topic",
+    "url": "https://www.comune.lodrino.bs.it/Argomenti/Diritto/Protezione-civile"
+   },
+   {
+    "id": 255,
+    "title": "Richiesta sepoltura di un defunto",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.lodrino.bs.it/Servizi/Richiesta-sepoltura-di-un-defunto"
+   },
+   {
+    "id": 251,
+    "title": "Richiesta pubblicazione matrimonio",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.lodrino.bs.it/Servizi/Richiesta-pubblicazione-matrimonio"
+   },
+   {
+    "id": 279,
+    "title": "Ufficio tributi",
+    "classIdentifier": "organization",
+    "url": "https://www.comune.lodrino.bs.it/Amministrazione/Uffici/Ufficio-tributi"
+   },
+   {
+    "id": 541,
+    "title": "Determinazioni",
+    "classIdentifier": "document",
+    "url": "https://www.comune.lodrino.bs.it/Amministrazione/Documenti-e-dati/Documenti-tecnici-di-supporto/Determinazioni"
+   },
+   {
+    "id": 110,
+    "title": "Diritto",
+    "classIdentifier": "topic",
+    "url": "https://www.comune.lodrino.bs.it/Argomenti/Diritto"
+   },
+   {
+    "id": 1264,
+    "title": "IMU ",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.lodrino.bs.it/Servizi/IMU"
+   }
+  ]
+ },
+ {
+  "comune": "Lodrino",
+  "key": "TRIBUTI_TARI",
+  "expected_native_id": "496",
+  "hits": [
+   {
+    "id": 496,
+    "title": "TARI",
+    "classIdentifier": "document",
+    "url": "https://www.comune.lodrino.bs.it/Amministrazione/Documenti-e-dati/Modulistica/TARI"
+   },
+   {
+    "id": 497,
+    "title": "Monitoraggio controlli interni 1° semestre 2022",
+    "classIdentifier": "document",
+    "url": "https://www.comune.lodrino.bs.it/Amministrazione/Documenti-e-dati/Modulistica/Monitoraggio-controlli-interni-1-semestre-2022"
+   },
+   {
+    "id": 540,
+    "title": "Statuto e regolamenti",
+    "classIdentifier": "document",
+    "url": "https://www.comune.lodrino.bs.it/Amministrazione/Documenti-e-dati/Documenti-tecnici-di-supporto/Statuto-e-regolamenti"
+   },
+   {
+    "id": 984,
+    "title": "Bandi",
+    "classIdentifier": "document",
+    "url": "https://www.comune.lodrino.bs.it/Amministrazione-Trasparente/Bandi-di-gara-e-contratti/Bandi"
+   },
+   {
+    "id": 221,
+    "title": "Con il nuovo sito web, il Comune è sempre più digitale",
+    "classIdentifier": "article",
+    "url": "https://www.comune.lodrino.bs.it/Novita/Notizie/Con-il-nuovo-sito-web-il-Comune-e-sempre-piu-digitale"
+   }
+  ]
+ },
+ {
+  "comune": "Chianocco",
+  "key": "ACCESSO_ATTI",
+  "expected_native_id": "564",
+  "hits": [
+   {
+    "id": 564,
+    "title": "Accesso agli atti - Pratiche Edilizie",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.chianocco.to.it/Servizi/Accesso-agli-atti-Pratiche-Edilizie"
+   },
+   {
+    "id": 648,
+    "title": "CON.I.SA. - Consorzio Intercomunale di Servizi - gestione Politiche per il Sociale",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.chianocco.to.it/Servizi/CON.I.SA.-Consorzio-Intercomunale-di-Servizi-gestione-Politiche-per-il-Sociale"
+   },
+   {
+    "id": 583,
+    "title": "PIAO - Piano Integrato di Attività e Organizzazione 2023 – 2025",
+    "classIdentifier": "document",
+    "url": "https://www.comune.chianocco.to.it/Amministrazione-Trasparente/Disposizioni-generali/Piano-triennale-per-la-prevenzione-della-corruzione-e-della-trasparenza/PIAO-Piano-Integrato-di-Attivita-e-Organizzazione-2023-2025"
+   },
+   {
+    "id": 582,
+    "title": "Scheda Relazione Responsabile della Prevenzione della Corruzione e della Trasparenza Anno 2023",
+    "classIdentifier": "document",
+    "url": "https://www.comune.chianocco.to.it/Amministrazione-Trasparente/Disposizioni-generali/Piano-triennale-per-la-prevenzione-della-corruzione-e-della-trasparenza/Scheda-Relazione-Responsabile-della-Prevenzione-della-Corruzione-e-della-Trasparenza-Anno-2023"
+   },
+   {
+    "id": 633,
+    "title": "Deliberazioni di Giunta Comunale e di Consiglio Comunale - Atti di indirizzo Politico ",
+    "classIdentifier": "document",
+    "url": "https://www.comune.chianocco.to.it/Amministrazione/Documenti-e-dati/Documenti-attivita-politica/Deliberazioni-di-Giunta-Comunale-e-di-Consiglio-Comunale-Atti-di-indirizzo-Politico"
+   },
+   {
+    "id": 769,
+    "title": "Atti e documenti di carattere generale",
+    "classIdentifier": "pagina_trasparenza",
+    "url": "https://www.comune.chianocco.to.it/Amministrazione-Trasparente/Bandi-di-gara-e-contratti/Atti-e-documenti-di-carattere-generale"
+   },
+   {
+    "id": 221,
+    "title": "Con il nuovo sito web, il Comune è sempre più digitale",
+    "classIdentifier": "article",
+    "url": "https://www.comune.chianocco.to.it/Novita/Notizie/Con-il-nuovo-sito-web-il-Comune-e-sempre-piu-digitale"
+   },
+   {
+    "id": 83,
+    "title": "Informativa newsletter",
+    "classIdentifier": "pagina_sito",
+    "url": "https://www.comune.chianocco.to.it/Privacy/Informativa-newsletter"
+   },
+   {
+    "id": 1072,
+    "title": "Riapertura Orrido di Chianocco",
+    "classIdentifier": "article",
+    "url": "https://www.comune.chianocco.to.it/Novita/Avvisi/Riapertura-Orrido-di-Chianocco"
+   },
+   {
+    "id": 1074,
+    "title": "Hai un progetto di investimento in Mente? Scopri il Bando GAL",
+    "classIdentifier": "article",
+    "url": "https://www.comune.chianocco.to.it/Novita/Notizie/Hai-un-progetto-di-investimento-in-Mente-Scopri-il-Bando-GAL"
+   },
+   {
+    "id": 770,
+    "title": "Atti e documenti relativi alle singole procedure e link alla BDNCP ",
+    "classIdentifier": "pagina_trasparenza",
+    "url": "https://www.comune.chianocco.to.it/Amministrazione-Trasparente/Bandi-di-gara-e-contratti/Atti-e-documenti-relativi-alle-singole-procedure-e-link-alla-BDNCP"
+   },
+   {
+    "id": 369,
+    "title": "Registro degli accessi",
+    "classIdentifier": "pagina_trasparenza",
+    "url": "https://www.comune.chianocco.to.it/Amministrazione-Trasparente/Altri-contenuti/Accesso-civico/Registro-degli-accessi"
+   },
+   {
+    "id": 1128,
+    "title": "Fondo potenziamento Trasporto Studenti Disabili A.S. 2022/2023 - 2023/2024 - Avviso e modello di istanza",
+    "classIdentifier": "article",
+    "url": "https://www.comune.chianocco.to.it/Novita/Avvisi/Fondo-potenziamento-Trasporto-Studenti-Disabili-A.S.-2022-2023-2023-2024-Avviso-e-modello-di-istanza"
+   },
+   {
+    "id": 1481,
+    "title": "Fondo Potenziamento Trasporto Studenti Disabili A.S. 2025/2026 ",
+    "classIdentifier": "article",
+    "url": "https://www.comune.chianocco.to.it/Novita/Notizie/Fondo-Potenziamento-Trasporto-Studenti-Disabili-A.S.-2025-2026"
+   },
+   {
+    "id": 329,
+    "title": "Affidamenti in house",
+    "classIdentifier": "pagina_trasparenza",
+    "url": "https://www.comune.chianocco.to.it/Amministrazione-Trasparente/Bandi-di-gara-e-contratti/Obblighi-precedenti-il-31-12-2023/Atti-delle-amministrazioni-aggiudicatrici-e-degli-enti-aggiudicatori-distintamente-per-ogni-procedura/Atti-relativi-alle-procedure-per-l-affidamento-di-appalti-pubblici-di-servizi-forniture-lavori-e-opere-di-concorsi-pubblici-di-progettazione-di-concorsi-di-idee-e-di-concessioni.-Compresi-quelli-tra-enti-nell-ambito-del-settore-pubblico-di-cui-all-art/Affidamenti-in-house"
+   },
+   {
+    "id": 962,
+    "title": "Incontri: Punto Digitale Facile - assistenza e formazione gratuita",
+    "classIdentifier": "article",
+    "url": "https://www.comune.chianocco.to.it/Novita/Notizie/Incontri-Punto-Digitale-Facile-assistenza-e-formazione-gratuita"
+   },
+   {
+    "id": 328,
+    "title": "Affidamenti diretti di lavori, servizi e forniture di somma urgenza e di protezione civile",
+    "classIdentifier": "pagina_trasparenza",
+    "url": "https://www.comune.chianocco.to.it/Amministrazione-Trasparente/Bandi-di-gara-e-contratti/Obblighi-precedenti-il-31-12-2023/Atti-delle-amministrazioni-aggiudicatrici-e-degli-enti-aggiudicatori-distintamente-per-ogni-procedura/Atti-relativi-alle-procedure-per-l-affidamento-di-appalti-pubblici-di-servizi-forniture-lavori-e-opere-di-concorsi-pubblici-di-progettazione-di-concorsi-di-idee-e-di-concessioni.-Compresi-quelli-tra-enti-nell-ambito-del-settore-pubblico-di-cui-all-art/Affidamenti-diretti-di-lavori-servizi-e-forniture-di-somma-urgenza-e-di-protezione-civile"
+   },
+   {
+    "id": 73,
+    "title": "Privacy",
+    "classIdentifier": "pagina_sito",
+    "url": "https://www.comune.chianocco.to.it/Privacy"
+   },
+   {
+    "id": 74,
+    "title": "Note legali",
+    "classIdentifier": "pagina_sito",
+    "url": "https://www.comune.chianocco.to.it/Note-legali"
+   },
+   {
+    "id": 220,
+    "title": "PNRR: la digitalizzazione dei servizi comunali",
+    "classIdentifier": "article",
+    "url": "https://www.comune.chianocco.to.it/Novita/Notizie/PNRR-la-digitalizzazione-dei-servizi-comunali"
+   }
+  ]
+ },
+ {
+  "comune": "Casamassima",
+  "key": "ACCESSO_ATTI",
+  "expected_native_id": "2785",
+  "hits": [
+   {
+    "id": 2785,
+    "title": "Richiesta di accesso agli atti",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.casamassima.ba.it/Servizi/Richiesta-di-accesso-agli-atti"
+   },
+   {
+    "id": 7802,
+    "title": "Accesso agli atti pratiche edilizie: la richiesta va fatta attraverso lo Sportello Unico per l’Edilizia  ",
+    "classIdentifier": "article",
+    "url": "https://www.comune.casamassima.ba.it/Novita/Notizie/Accesso-agli-atti-pratiche-edilizie-la-richiesta-va-fatta-attraverso-lo-Sportello-Unico-per-l-Edilizia"
+   },
+   {
+    "id": 1219,
+    "title": "Idoneita Allogiativa Autocertif. Norme Igienico Sanitarie (1)",
+    "classIdentifier": "document",
+    "url": "https://www.comune.casamassima.ba.it/Amministrazione/Documenti-e-dati/Modulistica/Idoneita-Allogiativa-Autocertif.-Norme-Igienico-Sanitarie-1"
+   },
+   {
+    "id": 5483,
+    "title": "Nuove modalità di accesso presso gli uffici Comunali",
+    "classIdentifier": "article",
+    "url": "https://www.comune.casamassima.ba.it/Novita/Notizie/Nuove-modalita-di-accesso-presso-gli-uffici-Comunali"
+   },
+   {
+    "id": 2784,
+    "title": "Prenota appuntamento - Richiesta di accesso agli atti",
+    "classIdentifier": "channel",
+    "url": "https://www.comune.casamassima.ba.it/Classificazioni/Canali-digitali/Prenota-appuntamento-Richiesta-di-accesso-agli-atti"
+   },
+   {
+    "id": 2783,
+    "title": "Accedi al servizio online - Richiesta di accesso agli atti",
+    "classIdentifier": "channel",
+    "url": "https://www.comune.casamassima.ba.it/Classificazioni/Canali-digitali/Accedi-al-servizio-online-Richiesta-di-accesso-agli-atti"
+   },
+   {
+    "id": 4184,
+    "title": "Accesso agli uffici",
+    "classIdentifier": "image",
+    "url": "https://www.comune.casamassima.ba.it/Media/Images/Accesso-agli-uffici"
+   },
+   {
+    "id": 4162,
+    "title": "accesso_agli_uffici428",
+    "classIdentifier": "image",
+    "url": "https://www.comune.casamassima.ba.it/Media/Images/accesso_agli_uffici428"
+   },
+   {
+    "id": 964,
+    "title": "Contratti",
+    "classIdentifier": "organization",
+    "url": "https://www.comune.casamassima.ba.it/Amministrazione/Uffici/Contratti"
+   },
+   {
+    "id": 5118,
+    "title": "Da gennaio 2024 attivo il nuovo Sportello telematico per l’edilizia",
+    "classIdentifier": "article",
+    "url": "https://www.comune.casamassima.ba.it/Novita/Notizie/Da-gennaio-2024-attivo-il-nuovo-Sportello-telematico-per-l-edilizia"
+   },
+   {
+    "id": 13234,
+    "title": "Rinvii alle principali norme organizzative ",
+    "classIdentifier": "document",
+    "url": "https://www.comune.casamassima.ba.it/Amministrazione-Trasparente/Disposizioni-generali/Atti-generali/Riferimenti-normativi-su-organizzazione-e-attivita/Rinvii-alle-principali-norme-organizzative"
+   },
+   {
+    "id": 5854,
+    "title": "Nuovo sito web e servizi digitali per il cittadino",
+    "classIdentifier": "article",
+    "url": "https://www.comune.casamassima.ba.it/Novita/Notizie/Nuovo-sito-web-e-servizi-digitali-per-il-cittadino"
+   },
+   {
+    "id": 73,
+    "title": "Privacy",
+    "classIdentifier": "pagina_sito",
+    "url": "https://www.comune.casamassima.ba.it/Privacy"
+   },
+   {
+    "id": 11526,
+    "title": "Atti e documenti di carattere generale",
+    "classIdentifier": "pagina_trasparenza",
+    "url": "https://www.comune.casamassima.ba.it/Amministrazione-Trasparente/Bandi-di-gara-e-contratti/Atti-e-documenti-di-carattere-generale"
+   },
+   {
+    "id": 6660,
+    "title": "Ag. Funebre FIERMONTE Margherita",
+    "classIdentifier": "document",
+    "url": "https://www.comune.casamassima.ba.it/Amministrazione-Trasparente/Sovvenzioni-contributi-sussidi-vantaggi-economici/Atti-di-concessione/Ag.-Funebre-FIERMONTE-Margherita"
+   },
+   {
+    "id": 12342,
+    "title": "Relazione semestrale sul controllo successivo di regolarità amministrativa. II semestre 2024",
+    "classIdentifier": "document",
+    "url": "https://www.comune.casamassima.ba.it/Amministrazione-Trasparente/Controlli-e-rilievi-sull-amministrazione/Organismi-indipendenti-di-valutazione-nuclei-di-valutazione-o-altri-organismi-con-funzioni-analoghe/Relazione-semestrale-sul-controllo-successivo-di-regolarita-amministrativa.-II-semestre-2024"
+   },
+   {
+    "id": 6647,
+    "title": "Ag. Funebre di PALUMBO Raffaele",
+    "classIdentifier": "document",
+    "url": "https://www.comune.casamassima.ba.it/Amministrazione-Trasparente/Sovvenzioni-contributi-sussidi-vantaggi-economici/Atti-di-concessione/Ag.-Funebre-di-PALUMBO-Raffaele"
+   },
+   {
+    "id": 84,
+    "title": "Informativa newsletter",
+    "classIdentifier": "pagina_sito",
+    "url": "https://www.comune.casamassima.ba.it/Privacy/Informativa-newsletter"
+   },
+   {
+    "id": 12471,
+    "title": "Regolamento relativo alle modalità di raccolta, pubblicazione, accesso e riutilizzo dei dati di elevato valore ",
+    "classIdentifier": "document",
+    "url": "https://www.comune.casamassima.ba.it/Amministrazione-Trasparente/Altri-contenuti/Accessibilita-e-Catalogo-di-dati-metadati-e-banche-dati/Catalogo-dei-dati-metadati-e-delle-banche-dati/Regolamento-relativo-alle-modalita-di-raccolta-pubblicazione-accesso-e-riutilizzo-dei-dati-di-elevato-valore"
+   },
+   {
+    "id": 5601,
+    "title": "Progetti utili alla collettività (Puc) - Avviso pubblico",
+    "classIdentifier": "article",
+    "url": "https://www.comune.casamassima.ba.it/Novita/Notizie/Progetti-utili-alla-collettivita-Puc-Avviso-pubblico"
+   }
+  ]
+ },
+ {
+  "comune": "Casamassima",
+  "key": "STATO_CIVILE",
+  "expected_native_id": "1146",
+  "hits": [
+   {
+    "id": 5923,
+    "title": "Dichiarazione di morte",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.casamassima.ba.it/Servizi/Dichiarazione-di-morte"
+   },
+   {
+    "id": 5940,
+    "title": "Richiesta pubblicazione matrimonio",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.casamassima.ba.it/Servizi/Richiesta-pubblicazione-matrimonio"
+   },
+   {
+    "id": 5944,
+    "title": "Dichiarazione di nascita",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.casamassima.ba.it/Servizi/Dichiarazione-di-nascita"
+   },
+   {
+    "id": 5936,
+    "title": "Richiesta contributo per enti e associazioni",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.casamassima.ba.it/Servizi/Richiesta-contributo-per-enti-e-associazioni"
+   },
+   {
+    "id": 5931,
+    "title": "Iscrizione alla mensa scolastica",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.casamassima.ba.it/Servizi/Iscrizione-alla-mensa-scolastica"
+   },
+   {
+    "id": 5919,
+    "title": "Comunicazione di inizio attività di raccolta funghi",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.casamassima.ba.it/Servizi/Comunicazione-di-inizio-attivita-di-raccolta-funghi"
+   },
+   {
+    "id": 5927,
+    "title": "Domanda di iscrizione all'Albo comunale delle associazioni e Richiesta di conferma dell'interesse all'iscrizione all'Albo comunale delle Associazioni",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.casamassima.ba.it/Servizi/Domanda-di-iscrizione-all-Albo-comunale-delle-associazioni-e-Richiesta-di-conferma-dell-interesse-all-iscrizione-all-Albo-comunale-delle-Associazioni"
+   },
+   {
+    "id": 2785,
+    "title": "Richiesta di accesso agli atti",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.casamassima.ba.it/Servizi/Richiesta-di-accesso-agli-atti"
+   },
+   {
+    "id": 972,
+    "title": "Stato Civile",
+    "classIdentifier": "organization",
+    "url": "https://www.comune.casamassima.ba.it/Amministrazione/Uffici/Stato-Civile"
+   },
+   {
+    "id": 669,
+    "title": "Contatti Stato Civile",
+    "classIdentifier": "online_contact_point",
+    "url": "https://www.comune.casamassima.ba.it/Classificazioni/Punti-di-contatto/Contatti-Stato-Civile"
+   },
+   {
+    "id": 444,
+    "title": "Immagine Stato Civile",
+    "classIdentifier": "image",
+    "url": "https://www.comune.casamassima.ba.it/Media/Images/Immagine-Stato-Civile"
+   },
+   {
+    "id": 639,
+    "title": "Orario Stato Civile",
+    "classIdentifier": "opening_hours_specification",
+    "url": "https://www.comune.casamassima.ba.it/Classificazioni/Orari-uffici-e-strutture/Orario-Stato-Civile"
+   },
+   {
+    "id": 1146,
+    "title": "Autocertificazione di Stato Civile (1)",
+    "classIdentifier": "document",
+    "url": "https://www.comune.casamassima.ba.it/Amministrazione/Documenti-e-dati/Modulistica/Autocertificazione-di-Stato-Civile-1"
+   },
+   {
+    "id": 5797,
+    "title": "Ufficio Stato Civile",
+    "classIdentifier": "online_contact_point",
+    "url": "https://www.comune.casamassima.ba.it/Classificazioni/Punti-di-contatto/Ufficio-Stato-Civile"
+   },
+   {
+    "id": 5413,
+    "title": "Martedì 24 giugno l’ufficio di stato civile resterà chiuso al pubblico",
+    "classIdentifier": "article",
+    "url": "https://www.comune.casamassima.ba.it/Novita/Notizie/Martedi-24-giugno-l-ufficio-di-stato-civile-restera-chiuso-al-pubblico"
+   },
+   {
+    "id": 12160,
+    "title": "Uffici di anagrafe e stato civile chiusi al pubblico l’11 e il 12 dicembre 2024",
+    "classIdentifier": "article",
+    "url": "https://www.comune.casamassima.ba.it/Novita/Notizie/Uffici-di-anagrafe-e-stato-civile-chiusi-al-pubblico-l-11-e-il-12-dicembre-2024"
+   },
+   {
+    "id": 4981,
+    "title": "Celebrazioni di matrimoni in uffici separati di Stato Civile",
+    "classIdentifier": "article",
+    "url": "https://www.comune.casamassima.ba.it/Novita/Notizie/Celebrazioni-di-matrimoni-in-uffici-separati-di-Stato-Civile"
+   },
+   {
+    "id": 12251,
+    "title": "Gli sportelli di anagrafe, elettorale e stato civile resteranno chiusi al pubblico martedì 28 gennaio 2025",
+    "classIdentifier": "article",
+    "url": "https://www.comune.casamassima.ba.it/Novita/Notizie/Gli-sportelli-di-anagrafe-elettorale-e-stato-civile-resteranno-chiusi-al-pubblico-martedi-28-gennaio-2025"
+   },
+   {
+    "id": 5505,
+    "title": "NUOVE REGOLE PER SEPARAZIONI E DIVORZI",
+    "classIdentifier": "article",
+    "url": "https://www.comune.casamassima.ba.it/Novita/Notizie/NUOVE-REGOLE-PER-SEPARAZIONI-E-DIVORZI"
+   },
+   {
+    "id": 929,
+    "title": "Servizio Affari Generali - Servizi al Cittadino",
+    "classIdentifier": "organization",
+    "url": "https://www.comune.casamassima.ba.it/Amministrazione/Aree-amministrative/Servizio-Affari-Generali-Servizi-al-Cittadino"
+   }
+  ]
+ },
+ {
+  "comune": "Casamassima",
+  "key": "TRIBUTI_IMU",
+  "expected_native_id": "7694",
+  "hits": [
+   {
+    "id": 5294,
+    "title": "IMU 2013",
+    "classIdentifier": "article",
+    "url": "https://www.comune.casamassima.ba.it/Novita/Notizie/IMU-2013"
+   },
+   {
+    "id": 3665,
+    "title": "IMU 2023",
+    "classIdentifier": "image",
+    "url": "https://www.comune.casamassima.ba.it/Media/Images/IMU-2023"
+   },
+   {
+    "id": 4185,
+    "title": "Imu 2020",
+    "classIdentifier": "image",
+    "url": "https://www.comune.casamassima.ba.it/Media/Images/Imu-2020"
+   },
+   {
+    "id": 13453,
+    "title": "Regolamento per l'applicazione dell'imposta municipale propria ",
+    "classIdentifier": "document",
+    "url": "https://www.comune.casamassima.ba.it/Amministrazione-Trasparente/Disposizioni-generali/Atti-generali/Riferimenti-normativi-su-organizzazione-e-attivita/Regolamento-per-l-applicazione-dell-imposta-municipale-propria"
+   },
+   {
+    "id": 3642,
+    "title": "IMU-2023101",
+    "classIdentifier": "image",
+    "url": "https://www.comune.casamassima.ba.it/Media/Images/IMU-2023101"
+   },
+   {
+    "id": 4157,
+    "title": "Imu_2020490",
+    "classIdentifier": "image",
+    "url": "https://www.comune.casamassima.ba.it/Media/Images/Imu_2020490"
+   },
+   {
+    "id": 5520,
+    "title": "Nuova Imu 2020, informativa",
+    "classIdentifier": "article",
+    "url": "https://www.comune.casamassima.ba.it/Novita/Notizie/Nuova-Imu-2020-informativa"
+   },
+   {
+    "id": 4922,
+    "title": "Calcolo IMU - TASI",
+    "classIdentifier": "article",
+    "url": "https://www.comune.casamassima.ba.it/Novita/Notizie/Calcolo-IMU-TASI"
+   },
+   {
+    "id": 12696,
+    "title": "IMU 2026 – Guida al pagamento",
+    "classIdentifier": "article",
+    "url": "https://www.comune.casamassima.ba.it/Novita/Notizie/IMU-2026-Guida-al-pagamento"
+   },
+   {
+    "id": 5239,
+    "title": "IMU E TASI 2016 - ACCONTO",
+    "classIdentifier": "article",
+    "url": "https://www.comune.casamassima.ba.it/Novita/Notizie/IMU-E-TASI-2016-ACCONTO"
+   },
+   {
+    "id": 4287,
+    "title": "Imu e Tasi",
+    "classIdentifier": "image",
+    "url": "https://www.comune.casamassima.ba.it/Media/Images/Imu-e-Tasi"
+   },
+   {
+    "id": 4324,
+    "title": "Imu_e_Tasi486",
+    "classIdentifier": "image",
+    "url": "https://www.comune.casamassima.ba.it/Media/Images/Imu_e_Tasi486"
+   },
+   {
+    "id": 5183,
+    "title": "GUIDA AL PAGAMENTO I.M.U. 2023",
+    "classIdentifier": "article",
+    "url": "https://www.comune.casamassima.ba.it/Novita/Notizie/GUIDA-AL-PAGAMENTO-I.M.U.-2023"
+   },
+   {
+    "id": 5375,
+    "title": "Informazione ai contribuenti",
+    "classIdentifier": "article",
+    "url": "https://www.comune.casamassima.ba.it/Novita/Notizie/Informazione-ai-contribuenti"
+   },
+   {
+    "id": 5529,
+    "title": "Possibile pagare Imu e Tasi attraverso il servizio PagoPA",
+    "classIdentifier": "article",
+    "url": "https://www.comune.casamassima.ba.it/Novita/Notizie/Possibile-pagare-Imu-e-Tasi-attraverso-il-servizio-PagoPA"
+   },
+   {
+    "id": 5488,
+    "title": "NOVITA' IUC 2016",
+    "classIdentifier": "article",
+    "url": "https://www.comune.casamassima.ba.it/Novita/Notizie/NOVITA-IUC-2016"
+   },
+   {
+    "id": 12214,
+    "title": "Procedura B476B3AD60",
+    "classIdentifier": "bando",
+    "url": "https://www.comune.casamassima.ba.it/Amministrazione-Trasparente/Bandi-di-gara-e-contratti/Atti-e-documenti-relativi-alle-singole-procedure-e-link-alla-BDNCP/Procedura-B476B3AD60"
+   },
+   {
+    "id": 9410,
+    "title": "AFFRANCATURA MEDIANTE CONTO DI CREDITO SERVIZI POSTALI UNIVERSALI n. 3800 plichi IMU-TASI-TARI 2016",
+    "classIdentifier": "document",
+    "url": "https://www.comune.casamassima.ba.it/Amministrazione-Trasparente/Bandi-di-gara-e-contratti/Obblighi-precedenti-il-31-12-2023/Atti-delle-amministrazioni-aggiudicatrici-e-degli-enti-aggiudicatori-distintamente-per-ogni-procedura/Atti-relativi-alle-procedure-per-l-affidamento-di-appalti-pubblici-di-servizi-forniture-lavori-e-opere-di-concorsi-pubblici-di-progettazione-di-concorsi-di-idee-e-di-concessioni.-Compresi-quelli-tra-enti-nell-ambito-del-settore-pubblico-di-cui-all-art/AFFRANCATURA-MEDIANTE-CONTO-DI-CREDITO-SERVIZI-POSTALI-UNIVERSALI-n.-3800-plichi-IMU-TASI-TARI-2016"
+   },
+   {
+    "id": 1532,
+    "title": "Calcolo IMU 2026",
+    "classIdentifier": "banner",
+    "url": "https://www.comune.casamassima.ba.it/Media/Banner-e-link/Banner/Calcolo-IMU-2026"
+   },
+   {
+    "id": 7694,
+    "title": "Comune di Casamassima c/ Soc. LUM JEAN MONET - Ricorso avverso avviso di accertamento del tributo IMU (anno 2014",
+    "classIdentifier": "document",
+    "url": "https://www.comune.casamassima.ba.it/Amministrazione-Trasparente/Consulenti-e-collaboratori/Titolari-di-incarichi-di-collaborazione-o-consulenza/Comune-di-Casamassima-c-Soc.-LUM-JEAN-MONET-Ricorso-avverso-avviso-di-accertamento-del-tributo-IMU-anno-2014"
+   }
+  ]
+ },
+ {
+  "comune": "Molfetta",
+  "key": "CAMBIO_RESIDENZA",
+  "expected_native_id": "32645",
+  "hits": [
+   {
+    "id": 32645,
+    "title": "Modulo Cambio di Residenza aggiornato 2022",
+    "classIdentifier": "document",
+    "url": "https://www.comune.molfetta.ba.it/Amministrazione/Documenti-e-dati/Documenti-tecnici-di-supporto/Modulo-Cambio-di-Residenza-aggiornato-2022"
+   },
+   {
+    "id": 35272,
+    "title": "Cambio di Residenza in Tempo Reale - AVVISO",
+    "classIdentifier": "article",
+    "url": "https://www.comune.molfetta.ba.it/Novita/Notizie/Cambio-di-Residenza-in-Tempo-Reale-AVVISO"
+   },
+   {
+    "id": 35305,
+    "title": "Cambiare residenza in tempo reale. A Molfetta si può con un solo click",
+    "classIdentifier": "article",
+    "url": "https://www.comune.molfetta.ba.it/Novita/Notizie/Cambiare-residenza-in-tempo-reale.-A-Molfetta-si-puo-con-un-solo-click"
+   },
+   {
+    "id": 31091,
+    "title": "Anagrafe  - ANPR",
+    "classIdentifier": "organization",
+    "url": "https://www.comune.molfetta.ba.it/Amministrazione/Uffici/Anagrafe-ANPR"
+   },
+   {
+    "id": 45638,
+    "title": "Avviso interruzione servizi anagrafici del Comune di Molfetta per la giornata del  10 dicembre ",
+    "classIdentifier": "article",
+    "url": "https://www.comune.molfetta.ba.it/Novita/Notizie/Avviso-interruzione-servizi-anagrafici-del-Comune-di-Molfetta-per-la-giornata-del-10-dicembre"
+   },
+   {
+    "id": 45592,
+    "title": "Molfetta nell’anagrafe nazionale della popolazione",
+    "classIdentifier": "article",
+    "url": "https://www.comune.molfetta.ba.it/Novita/Notizie/Molfetta-nell-anagrafe-nazionale-della-popolazione"
+   },
+   {
+    "id": 33339,
+    "title": "modulo di autocertificazione di residenza",
+    "classIdentifier": "document",
+    "url": "https://www.comune.molfetta.ba.it/Amministrazione/Documenti-e-dati/Documenti-tecnici-di-supporto/modulo-di-autocertificazione-di-residenza"
+   },
+   {
+    "id": 32617,
+    "title": "Modulo per la dichiarazione di residenza",
+    "classIdentifier": "document",
+    "url": "https://www.comune.molfetta.ba.it/Amministrazione/Documenti-e-dati/Documenti-tecnici-di-supporto/Modulo-per-la-dichiarazione-di-residenza"
+   },
+   {
+    "id": 31792,
+    "title": "Dichiarazione sostitutiva di residenza e dello stato di famiglia",
+    "classIdentifier": "document",
+    "url": "https://www.comune.molfetta.ba.it/Amministrazione/Documenti-e-dati/Documenti-tecnici-di-supporto/Dichiarazione-sostitutiva-di-residenza-e-dello-stato-di-famiglia"
+   },
+   {
+    "id": 68364,
+    "title": "Approvata la nuova Carta dei Servizi della Demografia",
+    "classIdentifier": "article",
+    "url": "https://www.comune.molfetta.ba.it/Novita/Comunicati/Approvata-la-nuova-Carta-dei-Servizi-della-Demografia"
+   },
+   {
+    "id": 3512,
+    "title": "Avvio del procedimento di pubblicazione di matrimonio religioso",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.molfetta.ba.it/Servizi/Avvio-del-procedimento-di-pubblicazione-di-matrimonio-religioso"
+   },
+   {
+    "id": 3535,
+    "title": "Contrassegno per veicoli a servizio dei disabili: rilascio del contrassegno permanente",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.molfetta.ba.it/Servizi/Contrassegno-per-veicoli-a-servizio-dei-disabili-rilascio-del-contrassegno-permanente"
+   },
+   {
+    "id": 38075,
+    "title": "Come accedere ai servizi online per cittadini e imprese del Comune di Molfetta  ",
+    "classIdentifier": "article",
+    "url": "https://www.comune.molfetta.ba.it/Novita/Comunicati/Come-accedere-ai-servizi-online-per-cittadini-e-imprese-del-Comune-di-Molfetta"
+   },
+   {
+    "id": 49539,
+    "title": "Comincia la rivoluzione digitale per i servizi comunali",
+    "classIdentifier": "article",
+    "url": "https://www.comune.molfetta.ba.it/Novita/Notizie/Comincia-la-rivoluzione-digitale-per-i-servizi-comunali"
+   },
+   {
+    "id": 49422,
+    "title": "Rivoluzione digitale per i servizi comunali. Si invitano i cittadini a munirsi dello Spid ",
+    "classIdentifier": "article",
+    "url": "https://www.comune.molfetta.ba.it/Novita/Notizie/Rivoluzione-digitale-per-i-servizi-comunali.-Si-invitano-i-cittadini-a-munirsi-dello-Spid"
+   },
+   {
+    "id": 3541,
+    "title": "Permesso per il transito e la sosta in una zona a traffico limitato (ZTL): rilascio del permesso permanente ",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.molfetta.ba.it/Servizi/Permesso-per-il-transito-e-la-sosta-in-una-zona-a-traffico-limitato-ZTL-rilascio-del-permesso-permanente"
+   },
+   {
+    "id": 67976,
+    "title": "Rilascio pass per sosta a pagamento per residenti Comune di Molfetta",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.molfetta.ba.it/Servizi/Rilascio-pass-per-sosta-a-pagamento-per-residenti-Comune-di-Molfetta"
+   },
+   {
+    "id": 31086,
+    "title": "Area  Demografia Stato Civile Elettorale (carta di identità- aire - anpr - statistica - residenza)",
+    "classIdentifier": "organization",
+    "url": "https://www.comune.molfetta.ba.it/Amministrazione/Aree-amministrative/Area-Demografia-Stato-Civile-Elettorale-carta-di-identita-aire-anpr-statistica-residenza"
+   },
+   {
+    "id": 68272,
+    "title": "Autorizzazione cambio titolarità sede farmaceutica n. 17 ",
+    "classIdentifier": "document",
+    "url": "https://www.comune.molfetta.ba.it/Amministrazione/Documenti-e-dati/Documenti-albo-pretorio/Autorizzazione-cambio-titolarita-sede-farmaceutica-n.-17"
+   },
+   {
+    "id": 54927,
+    "title": "Cambio di menù nelle mense scolastiche",
+    "classIdentifier": "article",
+    "url": "https://www.comune.molfetta.ba.it/Novita/Notizie/Cambio-di-menu-nelle-mense-scolastiche"
+   }
+  ]
+ },
+ {
+  "comune": "Monopoli",
+  "key": "CAMBIO_RESIDENZA",
+  "expected_native_id": "5031",
+  "hits": [
+   {
+    "id": 5031,
+    "title": "Iscrizione anagrafica per trasferimento di residenza da altro comune",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.monopoli.ba.it/Servizi/Iscrizione-anagrafica-per-trasferimento-di-residenza-da-altro-comune"
+   },
+   {
+    "id": 4508,
+    "title": "Modulo dichiarazione di residenza o cambio di abitazione",
+    "classIdentifier": "document",
+    "url": "https://www.comune.monopoli.ba.it/Amministrazione/Documenti-e-dati/Modulistica/Modulo-dichiarazione-di-residenza-o-cambio-di-abitazione"
+   },
+   {
+    "id": 5091,
+    "title": "Cambio di abitazione",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.monopoli.ba.it/Servizi/Cambio-di-abitazione"
+   },
+   {
+    "id": 2870,
+    "title": "Chiusura uffici demografici lunedì 10 giugno 2024",
+    "classIdentifier": "article",
+    "url": "https://www.comune.monopoli.ba.it/Novita/Comunicati/Chiusura-uffici-demografici-lunedi-10-giugno-2024"
+   },
+   {
+    "id": 6967,
+    "title": "Chiusura uffici demografici lunedì 9 giugno 2025",
+    "classIdentifier": "article",
+    "url": "https://www.comune.monopoli.ba.it/Novita/Comunicati/Chiusura-uffici-demografici-lunedi-9-giugno-2025"
+   },
+   {
+    "id": 5036,
+    "title": "Esercizi extralberghieri - Affittacamere",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.monopoli.ba.it/Servizi/Esercizi-extralberghieri-Affittacamere"
+   },
+   {
+    "id": 7855,
+    "title": "Chiusura Sportelli Demografici, Servizio di fiscalità locale e Riscossione coattiva - 5 gennaio 2026",
+    "classIdentifier": "article",
+    "url": "https://www.comune.monopoli.ba.it/Novita/Avvisi/Chiusura-Sportelli-Demografici-Servizio-di-fiscalita-locale-e-Riscossione-coattiva-5-gennaio-2026"
+   },
+   {
+    "id": 8369,
+    "title": "Chiusura uffici demografici lunedì 23 marzo 2026",
+    "classIdentifier": "article",
+    "url": "https://www.comune.monopoli.ba.it/Novita/Comunicati/Chiusura-uffici-demografici-lunedi-23-marzo-2026"
+   },
+   {
+    "id": 303,
+    "title": "Richiesta pubblicazione matrimonio",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.monopoli.ba.it/Servizi/Richiesta-pubblicazione-matrimonio"
+   },
+   {
+    "id": 5037,
+    "title": "Carta di identità elettronica (C.I.E.)",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.monopoli.ba.it/Servizi/Carta-di-identita-elettronica-C.I.E"
+   },
+   {
+    "id": 7968,
+    "title": "Chiusura uffici demografici lunedì 24 novembre 2025",
+    "classIdentifier": "article",
+    "url": "https://www.comune.monopoli.ba.it/Novita/Comunicati/Chiusura-uffici-demografici-lunedi-24-novembre-2025"
+   },
+   {
+    "id": 3839,
+    "title": "Contributi regionali per il sostegno al pagamento dei canoni di locazione",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.monopoli.ba.it/Servizi/Contributi-regionali-per-il-sostegno-al-pagamento-dei-canoni-di-locazione"
+   },
+   {
+    "id": 4572,
+    "title": "Modulo di iscrizione schedario della popolazione temporanea",
+    "classIdentifier": "document",
+    "url": "https://www.comune.monopoli.ba.it/Amministrazione/Documenti-e-dati/Modulistica/Modulo-di-iscrizione-schedario-della-popolazione-temporanea"
+   },
+   {
+    "id": 3936,
+    "title": "Rilascio certificato di iscrizione nelle liste elettorali",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.monopoli.ba.it/Servizi/Rilascio-certificato-di-iscrizione-nelle-liste-elettorali"
+   },
+   {
+    "id": 4635,
+    "title": "Modulo iscrizione anagrafica persone senza fissa dimora",
+    "classIdentifier": "document",
+    "url": "https://www.comune.monopoli.ba.it/Amministrazione/Documenti-e-dati/Modulistica/Modulo-iscrizione-anagrafica-persone-senza-fissa-dimora"
+   },
+   {
+    "id": 5044,
+    "title": "Rilascio certificati di anagrafe",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.monopoli.ba.it/Servizi/Rilascio-certificati-di-anagrafe"
+   },
+   {
+    "id": 1459,
+    "title": "Anagrafe",
+    "classIdentifier": "organization",
+    "url": "https://www.comune.monopoli.ba.it/Amministrazione/Uffici/Anagrafe"
+   },
+   {
+    "id": 3942,
+    "title": "Iscrizione all'Anagrafe degli Italiani Residenti all'Estero (AIRE)",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.monopoli.ba.it/Servizi/Iscrizione-all-Anagrafe-degli-Italiani-Residenti-all-Estero-AIRE"
+   },
+   {
+    "id": 4552,
+    "title": "Modulo denuncia di non presenza",
+    "classIdentifier": "document",
+    "url": "https://www.comune.monopoli.ba.it/Amministrazione/Documenti-e-dati/Modulistica/Modulo-denuncia-di-non-presenza"
+   },
+   {
+    "id": 5042,
+    "title": "Posti auto disabili",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.monopoli.ba.it/Servizi/Posti-auto-disabili"
+   }
+  ]
+ },
+ {
+  "comune": "Paceco",
+  "key": "CARTA_IDENTITA",
+  "expected_native_id": "490",
+  "hits": [
+   {
+    "id": 702,
+    "title": "Avviso carte di identità cartacee",
+    "classIdentifier": "article",
+    "url": "https://www.comune.paceco.tp.it/Novita/Avvisi/Avviso-carte-di-identita-cartacee"
+   },
+   {
+    "id": 490,
+    "title": "Rilascio carta di identità elettronica",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.paceco.tp.it/Servizi/Rilascio-carta-di-identita-elettronica"
+   },
+   {
+    "id": 784,
+    "title": "DEFINIZIONE AGEVOLATA DEI TRIBUTI COMUNALI",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.paceco.tp.it/Servizi/DEFINIZIONE-AGEVOLATA-DEI-TRIBUTI-COMUNALI"
+   },
+   {
+    "id": 504,
+    "title": "Iscrizione anagrafica per cittadini europei",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.paceco.tp.it/Servizi/Iscrizione-anagrafica-per-cittadini-europei"
+   },
+   {
+    "id": 763,
+    "title": "Sportello Unico per l’Edilizia (SUE) ",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.paceco.tp.it/Servizi/Sportello-Unico-per-l-Edilizia-SUE"
+   },
+   {
+    "id": 760,
+    "title": "IMPOSTA DI SOGGIORNO",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.paceco.tp.it/Servizi/IMPOSTA-DI-SOGGIORNO"
+   },
+   {
+    "id": 478,
+    "title": "carta identità",
+    "classIdentifier": "output",
+    "url": "https://www.comune.paceco.tp.it/Classificazioni/Cosa-puoi-richiedere/carta-identita"
+   },
+   {
+    "id": 729,
+    "title": "ISCRIZIONI ANAGRAFICHE E CAMBIO DI RESIDENZA - CITTADINI ITALIANI",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.paceco.tp.it/Servizi/ISCRIZIONI-ANAGRAFICHE-E-CAMBIO-DI-RESIDENZA-CITTADINI-ITALIANI"
+   },
+   {
+    "id": 754,
+    "title": "Attivazione Sportello Unico per l’Edilizia (SUE) Telematico",
+    "classIdentifier": "article",
+    "url": "https://www.comune.paceco.tp.it/Novita/Avvisi/Attivazione-Sportello-Unico-per-l-Edilizia-SUE-Telematico"
+   },
+   {
+    "id": 175,
+    "title": "Programma d'azione",
+    "classIdentifier": "topic",
+    "url": "https://www.comune.paceco.tp.it/Argomenti/Politica/Programma-d-azione"
+   },
+   {
+    "id": 245,
+    "title": "Permesso di parcheggio invalidi",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.paceco.tp.it/Servizi/Permesso-di-parcheggio-invalidi"
+   },
+   {
+    "id": 127,
+    "title": "Acqua",
+    "classIdentifier": "topic",
+    "url": "https://www.comune.paceco.tp.it/Argomenti/Gestione-dell-ambiente/Acqua"
+   },
+   {
+    "id": 161,
+    "title": "Città intelligente",
+    "classIdentifier": "topic",
+    "url": "https://www.comune.paceco.tp.it/Argomenti/Innovazione/Citta-intelligente"
+   },
+   {
+    "id": 733,
+    "title": "Modulo D - Delega",
+    "classIdentifier": "document",
+    "url": "https://www.comune.paceco.tp.it/Amministrazione/Documenti-e-dati/Modulistica/Modulo-D-Delega"
+   },
+   {
+    "id": 590,
+    "title": "MODELLI UNICI ISTANZE L.R.10/08/2016 ( D.P.R. 380/2001) AGG. AL D.A. N. 123/GAB/2025 e D.A. N. 281/GAB/2025",
+    "classIdentifier": "document",
+    "url": "https://www.comune.paceco.tp.it/Amministrazione/Documenti-e-dati/Modulistica/MODELLI-UNICI-ISTANZE-L.R.10-08-2016-D.P.R.-380-2001-AGG.-AL-D.A.-N.-123-GAB-2025-e-D.A.-N.-281-GAB-2025"
+   },
+   {
+    "id": 545,
+    "title": "Richiesta del certificato di destinazione urbanistica",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.paceco.tp.it/Servizi/Richiesta-del-certificato-di-destinazione-urbanistica"
+   },
+   {
+    "id": 578,
+    "title": "DELIMITAZIONE DEI CENTRI ABITATI PACECO - DATTILO E NUBIA in base al Codice della Strada D.Lgs.n. 285/92 - D.P.R. n. 495/92",
+    "classIdentifier": "document",
+    "url": "https://www.comune.paceco.tp.it/Amministrazione/Documenti-e-dati/Documenti-tecnici-di-supporto/DELIMITAZIONE-DEI-CENTRI-ABITATI-PACECO-DATTILO-E-NUBIA-in-base-al-Codice-della-Strada-D.Lgs.n.-285-92-D.P.R.-n.-495-92"
+   },
+   {
+    "id": 502,
+    "title": "Iscrizione all’Anagrafe nazionale per te e tutte le persone che si traferiscono insieme a te",
+    "classIdentifier": "output",
+    "url": "https://www.comune.paceco.tp.it/Classificazioni/Cosa-puoi-richiedere/Iscrizione-all-Anagrafe-nazionale-per-te-e-tutte-le-persone-che-si-traferiscono-insieme-a-te"
+   },
+   {
+    "id": 501,
+    "title": "Certificato in formato PDF non modificabile",
+    "classIdentifier": "output",
+    "url": "https://www.comune.paceco.tp.it/Classificazioni/Cosa-puoi-richiedere/Certificato-in-formato-PDF-non-modificabile2"
+   },
+   {
+    "id": 84,
+    "title": "Informativa trattamento dati (Sito web)",
+    "classIdentifier": "pagina_sito",
+    "url": "https://www.comune.paceco.tp.it/Privacy/Informativa-trattamento-dati-Sito-web"
+   }
+  ]
+ },
+ {
+  "comune": "Paceco",
+  "key": "STATO_CIVILE",
+  "expected_native_id": "509",
+  "hits": [
+   {
+    "id": 144,
+    "title": "Protezione civile",
+    "classIdentifier": "topic",
+    "url": "https://www.comune.paceco.tp.it/Argomenti/Diritto/Protezione-civile"
+   },
+   {
+    "id": 364,
+    "title": "Settore III",
+    "classIdentifier": "organization",
+    "url": "https://www.comune.paceco.tp.it/Amministrazione/Aree-amministrative/Settore-III"
+   },
+   {
+    "id": 489,
+    "title": "Pubblicazione di matrimonio",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.paceco.tp.it/Servizi/Pubblicazione-di-matrimonio"
+   },
+   {
+    "id": 486,
+    "title": "Attestati di regolarità di soggiorno",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.paceco.tp.it/Servizi/Attestati-di-regolarita-di-soggiorno"
+   },
+   {
+    "id": 488,
+    "title": "Autenticazione copie documenti",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.paceco.tp.it/Servizi/Autenticazione-copie-documenti"
+   },
+   {
+    "id": 487,
+    "title": "Autenticazione firma",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.paceco.tp.it/Servizi/Autenticazione-firma"
+   },
+   {
+    "id": 352,
+    "title": "Sede Settore III",
+    "classIdentifier": "place",
+    "url": "https://www.comune.paceco.tp.it/Vivere-il-comune/Luoghi/Sede-Settore-III"
+   },
+   {
+    "id": 490,
+    "title": "Rilascio carta di identità elettronica",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.paceco.tp.it/Servizi/Rilascio-carta-di-identita-elettronica"
+   },
+   {
+    "id": 500,
+    "title": "Certificati anagrafici",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.paceco.tp.it/Servizi/Certificati-anagrafici"
+   },
+   {
+    "id": 504,
+    "title": "Iscrizione anagrafica per cittadini europei",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.paceco.tp.it/Servizi/Iscrizione-anagrafica-per-cittadini-europei"
+   },
+   {
+    "id": 509,
+    "title": "Certificato di nascita per cittadini europei",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.paceco.tp.it/Servizi/Certificato-di-nascita-per-cittadini-europei"
+   },
+   {
+    "id": 729,
+    "title": "ISCRIZIONI ANAGRAFICHE E CAMBIO DI RESIDENZA - CITTADINI ITALIANI",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.paceco.tp.it/Servizi/ISCRIZIONI-ANAGRAFICHE-E-CAMBIO-DI-RESIDENZA-CITTADINI-ITALIANI"
+   },
+   {
+    "id": 579,
+    "title": "PIANO COMUNALE DI PROTEZIONE CIVILE",
+    "classIdentifier": "document",
+    "url": "https://www.comune.paceco.tp.it/Amministrazione/Documenti-e-dati/Documenti-tecnici-di-supporto/PIANO-COMUNALE-DI-PROTEZIONE-CIVILE"
+   },
+   {
+    "id": 110,
+    "title": "Diritto",
+    "classIdentifier": "topic",
+    "url": "https://www.comune.paceco.tp.it/Argomenti/Diritto"
+   },
+   {
+    "id": 359,
+    "title": "Protezione civile",
+    "classIdentifier": "organization",
+    "url": "https://www.comune.paceco.tp.it/Amministrazione/Uffici/Protezione-civile"
+   },
+   {
+    "id": 268,
+    "title": "Orario Protezione civile",
+    "classIdentifier": "opening_hours_specification",
+    "url": "https://www.comune.paceco.tp.it/Classificazioni/Orari-uffici-e-strutture/Orario-Protezione-civile"
+   },
+   {
+    "id": 296,
+    "title": "Contatti Protezione civile",
+    "classIdentifier": "online_contact_point",
+    "url": "https://www.comune.paceco.tp.it/Classificazioni/Punti-di-contatto/Contatti-Protezione-civile"
+   },
+   {
+    "id": 369,
+    "title": "Ufficio Gestione economica del Personale",
+    "classIdentifier": "organization",
+    "url": "https://www.comune.paceco.tp.it/Amministrazione/Uffici/Ufficio-Gestione-economica-del-Personale"
+   },
+   {
+    "id": 701,
+    "title": "Calendario erogazione idrica",
+    "classIdentifier": "article",
+    "url": "https://www.comune.paceco.tp.it/Novita/Comunicati/Calendario-erogazione-idrica"
+   },
+   {
+    "id": 365,
+    "title": "Settore II",
+    "classIdentifier": "organization",
+    "url": "https://www.comune.paceco.tp.it/Amministrazione/Aree-amministrative/Settore-II"
+   }
+  ]
+ },
+ {
+  "comune": "Alia",
+  "key": "CARTA_IDENTITA",
+  "expected_native_id": "1013",
+  "hits": [
+   {
+    "id": 1016,
+    "title": "Anagrafe - Stato Civile - Elettorale - Statistica - Aire",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.alia.pa.it/Servizi/Anagrafe-Stato-Civile-Elettorale-Statistica-Aire"
+   },
+   {
+    "id": 1943,
+    "title": "Iscrizione anagrafica per cittadini europei",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.alia.pa.it/Servizi/Iscrizione-anagrafica-per-cittadini-europei"
+   },
+   {
+    "id": 3324,
+    "title": "Pagare tributi IMU",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.alia.pa.it/Servizi/Pagare-tributi-IMU2"
+   },
+   {
+    "id": 1013,
+    "title": "Carta d'Identità",
+    "classIdentifier": "output",
+    "url": "https://www.comune.alia.pa.it/Classificazioni/Cosa-puoi-richiedere/Carta-d-Identita"
+   },
+   {
+    "id": 4237,
+    "title": "AVVISO CARTA D'IDENTITA' CARTACEA_1",
+    "classIdentifier": "image",
+    "url": "https://www.comune.alia.pa.it/Media/Images/AVVISO-CARTA-D-IDENTITA-CARTACEA_1"
+   },
+   {
+    "id": 4235,
+    "title": "Carta d'identità cartacea",
+    "classIdentifier": "article",
+    "url": "https://www.comune.alia.pa.it/Novita/Notizie/Carta-d-identita-cartacea"
+   },
+   {
+    "id": 3574,
+    "title": "Cessazione validità carta d’identità cartacea",
+    "classIdentifier": "article",
+    "url": "https://www.comune.alia.pa.it/Novita/Notizie/Cessazione-validita-carta-d-identita-cartacea"
+   },
+   {
+    "id": 4099,
+    "title": "AVVISO",
+    "classIdentifier": "article",
+    "url": "https://www.comune.alia.pa.it/Novita/Notizie/AVVISO42"
+   },
+   {
+    "id": 1895,
+    "title": "Sportello Unico per l'edilizia (SUE)",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.alia.pa.it/Servizi/Sportello-Unico-per-l-edilizia-SUE"
+   },
+   {
+    "id": 3577,
+    "title": "carta_identita",
+    "classIdentifier": "image",
+    "url": "https://www.comune.alia.pa.it/Media/Images/carta_identita"
+   },
+   {
+    "id": 1892,
+    "title": "Sportello Unico Attività Produttive (SUAP)",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.alia.pa.it/Servizi/Sportello-Unico-Attivita-Produttive-SUAP"
+   },
+   {
+    "id": 324,
+    "title": "Carta dei servizi e standard di qualità",
+    "classIdentifier": "pagina_trasparenza",
+    "url": "https://www.comune.alia.pa.it/Amministrazione-Trasparente/Servizi-erogati/Carta-dei-servizi-e-standard-di-qualita"
+   },
+   {
+    "id": 1133,
+    "title": "Consulta giovanile",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.alia.pa.it/Servizi/Consulta-giovanile"
+   },
+   {
+    "id": 398,
+    "title": "Richiesta di accesso agli atti",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.alia.pa.it/Servizi/Richiesta-di-accesso-agli-atti"
+   },
+   {
+    "id": 384,
+    "title": "Domanda per bonus economici ",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.alia.pa.it/Servizi/Domanda-per-bonus-economici"
+   },
+   {
+    "id": 3643,
+    "title": "CARTA DEDICATA A TE_4",
+    "classIdentifier": "image",
+    "url": "https://www.comune.alia.pa.it/Media/Images/CARTA-DEDICATA-A-TE_4"
+   },
+   {
+    "id": 3640,
+    "title": "CARTA DEDICATA A TE_1",
+    "classIdentifier": "image",
+    "url": "https://www.comune.alia.pa.it/Media/Images/CARTA-DEDICATA-A-TE_1"
+   },
+   {
+    "id": 3641,
+    "title": "CARTA DEDICATA A TE_2",
+    "classIdentifier": "image",
+    "url": "https://www.comune.alia.pa.it/Media/Images/CARTA-DEDICATA-A-TE_2"
+   },
+   {
+    "id": 3642,
+    "title": "CARTA DEDICATA A TE_3",
+    "classIdentifier": "image",
+    "url": "https://www.comune.alia.pa.it/Media/Images/CARTA-DEDICATA-A-TE_3"
+   },
+   {
+    "id": 175,
+    "title": "Programma d'azione",
+    "classIdentifier": "topic",
+    "url": "https://www.comune.alia.pa.it/Argomenti/Politica/Programma-d-azione"
+   }
+  ]
+ },
+ {
+  "comune": "Alia",
+  "key": "ACCESSO_ATTI",
+  "expected_native_id": "398",
+  "hits": [
+   {
+    "id": 398,
+    "title": "Richiesta di accesso agli atti",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.alia.pa.it/Servizi/Richiesta-di-accesso-agli-atti"
+   },
+   {
+    "id": 397,
+    "title": "Prenota appuntamento - Richiesta di accesso agli atti",
+    "classIdentifier": "channel",
+    "url": "https://www.comune.alia.pa.it/Classificazioni/Canali-digitali/Prenota-appuntamento-Richiesta-di-accesso-agli-atti"
+   },
+   {
+    "id": 396,
+    "title": "Accedi al servizio online - Richiesta di accesso agli atti",
+    "classIdentifier": "channel",
+    "url": "https://www.comune.alia.pa.it/Classificazioni/Canali-digitali/Accedi-al-servizio-online-Richiesta-di-accesso-agli-atti"
+   },
+   {
+    "id": 4177,
+    "title": "Avviso agli operatori economici",
+    "classIdentifier": "article",
+    "url": "https://www.comune.alia.pa.it/Novita/Notizie/Avviso-agli-operatori-economici"
+   },
+   {
+    "id": 1895,
+    "title": "Sportello Unico per l'edilizia (SUE)",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.alia.pa.it/Servizi/Sportello-Unico-per-l-edilizia-SUE"
+   },
+   {
+    "id": 2870,
+    "title": "Atti esaminati dalla Giunta Municipale - Anno 2025",
+    "classIdentifier": "document",
+    "url": "https://www.comune.alia.pa.it/Amministrazione/Documenti-e-dati/Atti-normativi/Atti-esaminati-dalla-Giunta-Municipale-Anno-2025"
+   },
+   {
+    "id": 3722,
+    "title": "Pubblicazioni atti ex art. 6 L. R. 11/2015",
+    "classIdentifier": "document",
+    "url": "https://www.comune.alia.pa.it/Amministrazione/Documenti-e-dati/Atti-normativi/Pubblicazioni-atti-ex-art.-6-L.-R.-11-20153"
+   },
+   {
+    "id": 2747,
+    "title": "Pubblicazioni atti ex art. 6 L. R. 11/2015",
+    "classIdentifier": "document",
+    "url": "https://www.comune.alia.pa.it/Amministrazione/Documenti-e-dati/Atti-normativi/Pubblicazioni-atti-ex-art.-6-L.-R.-11-2015"
+   },
+   {
+    "id": 2773,
+    "title": "Pubblicazioni atti ex art. 6 L. R. 11/2015",
+    "classIdentifier": "document",
+    "url": "https://www.comune.alia.pa.it/Amministrazione/Documenti-e-dati/Atti-normativi/Pubblicazioni-atti-ex-art.-6-L.-R.-11-20152"
+   },
+   {
+    "id": 704,
+    "title": "Ufficio Staff - Assistenza agli Organi e Gabinetto del Sindaco",
+    "classIdentifier": "organization",
+    "url": "https://www.comune.alia.pa.it/Amministrazione/Uffici/Ufficio-Staff-Assistenza-agli-Organi-e-Gabinetto-del-Sindaco"
+   },
+   {
+    "id": 4038,
+    "title": "Erogazione del contributo finalizzato all'accesso alle abitazioni in locazione",
+    "classIdentifier": "article",
+    "url": "https://www.comune.alia.pa.it/Novita/Notizie/Erogazione-del-contributo-finalizzato-all-accesso-alle-abitazioni-in-locazione"
+   },
+   {
+    "id": 578,
+    "title": "Sede Ufficio Staff  - Assistenza agli  Organi e Gabinetto del Sindaco",
+    "classIdentifier": "place",
+    "url": "https://www.comune.alia.pa.it/Vivere-il-comune/Luoghi/Sede-Ufficio-Staff-Assistenza-agli-Organi-e-Gabinetto-del-Sindaco"
+   },
+   {
+    "id": 1516,
+    "title": "Ripristino servizio scuolabus...",
+    "classIdentifier": "article",
+    "url": "https://www.comune.alia.pa.it/Novita/Notizie/Ripristino-servizio-scuolabus"
+   },
+   {
+    "id": 3066,
+    "title": "Convocazioni Consiglio Comunale - Anno 2025",
+    "classIdentifier": "document",
+    "url": "https://www.comune.alia.pa.it/Amministrazione/Documenti-e-dati/Atti-normativi/Convocazioni-Consiglio-Comunale-Anno-2025"
+   },
+   {
+    "id": 3147,
+    "title": "AVVISO PUBBLICO ",
+    "classIdentifier": "article",
+    "url": "https://www.comune.alia.pa.it/Novita/Notizie/AVVISO-PUBBLICO17"
+   },
+   {
+    "id": 556,
+    "title": "Sede Ufficio Amministrazione trasparente e Pubblicazione relativi atti",
+    "classIdentifier": "place",
+    "url": "https://www.comune.alia.pa.it/Vivere-il-comune/Luoghi/Sede-Ufficio-Amministrazione-trasparente-e-Pubblicazione-relativi-atti"
+   },
+   {
+    "id": 2241,
+    "title": "Atti e documenti di carattere generale",
+    "classIdentifier": "pagina_trasparenza",
+    "url": "https://www.comune.alia.pa.it/Amministrazione-Trasparente/Bandi-di-gara-e-contratti/Atti-e-documenti-di-carattere-generale"
+   },
+   {
+    "id": 3860,
+    "title": "Delibere del Consiglio Comunale - Anno 2026",
+    "classIdentifier": "document",
+    "url": "https://www.comune.alia.pa.it/Amministrazione/Documenti-e-dati/Atti-normativi/Delibere-del-Consiglio-Comunale-Anno-2026"
+   },
+   {
+    "id": 3697,
+    "title": "Delibere di Giunta Municipale - Anno 2026",
+    "classIdentifier": "document",
+    "url": "https://www.comune.alia.pa.it/Amministrazione/Documenti-e-dati/Atti-normativi/Delibere-di-Giunta-Municipale-Anno-2026"
+   },
+   {
+    "id": 2858,
+    "title": "Delibere di Giunta Municipale - Anno 2025",
+    "classIdentifier": "document",
+    "url": "https://www.comune.alia.pa.it/Amministrazione/Documenti-e-dati/Atti-normativi/Delibere-di-Giunta-Municipale-Anno-2025"
+   }
+  ]
+ },
+ {
+  "comune": "Alia",
+  "key": "STATO_CIVILE",
+  "expected_native_id": "1016",
+  "hits": [
+   {
+    "id": 1016,
+    "title": "Anagrafe - Stato Civile - Elettorale - Statistica - Aire",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.alia.pa.it/Servizi/Anagrafe-Stato-Civile-Elettorale-Statistica-Aire"
+   },
+   {
+    "id": 1928,
+    "title": "Certificati anagrafici",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.alia.pa.it/Servizi/Certificati-anagrafici"
+   },
+   {
+    "id": 1946,
+    "title": "Certificati di nascita per cittadini europei",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.alia.pa.it/Servizi/Certificati-di-nascita-per-cittadini-europei"
+   },
+   {
+    "id": 1886,
+    "title": "Cambio di residenza",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.alia.pa.it/Servizi/Cambio-di-residenza"
+   },
+   {
+    "id": 1943,
+    "title": "Iscrizione anagrafica per cittadini europei",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.alia.pa.it/Servizi/Iscrizione-anagrafica-per-cittadini-europei"
+   },
+   {
+    "id": 580,
+    "title": "Sede Ufficio Stato civile - Statistica e Leva",
+    "classIdentifier": "place",
+    "url": "https://www.comune.alia.pa.it/Vivere-il-comune/Luoghi/Sede-Ufficio-Stato-civile-Statistica-e-Leva"
+   },
+   {
+    "id": 693,
+    "title": "Ufficio Stato civile - Statistica e Leva",
+    "classIdentifier": "organization",
+    "url": "https://www.comune.alia.pa.it/Amministrazione/Uffici/Ufficio-Stato-civile-Statistica-e-Leva"
+   },
+   {
+    "id": 410,
+    "title": "Orari Ufficio Stato civile e Statistica",
+    "classIdentifier": "opening_hours_specification",
+    "url": "https://www.comune.alia.pa.it/Classificazioni/Orari-uffici-e-strutture/Orari-Ufficio-Stato-civile-e-Statistica"
+   },
+   {
+    "id": 502,
+    "title": "Contatti Ufficio Stato civile - Statistica e Leva",
+    "classIdentifier": "online_contact_point",
+    "url": "https://www.comune.alia.pa.it/Classificazioni/Punti-di-contatto/Contatti-Ufficio-Stato-civile-Statistica-e-Leva"
+   },
+   {
+    "id": 503,
+    "title": "Contatti Ufficio Stato civile e Statistica",
+    "classIdentifier": "online_contact_point",
+    "url": "https://www.comune.alia.pa.it/Classificazioni/Punti-di-contatto/Contatti-Ufficio-Stato-civile-e-Statistica"
+   },
+   {
+    "id": 409,
+    "title": "Orari Ufficio Stato civile - Statistica e Leva",
+    "classIdentifier": "opening_hours_specification",
+    "url": "https://www.comune.alia.pa.it/Classificazioni/Orari-uffici-e-strutture/Orari-Ufficio-Stato-civile-Statistica-e-Leva"
+   },
+   {
+    "id": 579,
+    "title": "Sede Ufficio Stato civile e Statistica",
+    "classIdentifier": "place",
+    "url": "https://www.comune.alia.pa.it/Vivere-il-comune/Luoghi/Sede-Ufficio-Stato-civile-e-Statistica"
+   },
+   {
+    "id": 671,
+    "title": "Settore 1 - Affari generali",
+    "classIdentifier": "organization",
+    "url": "https://www.comune.alia.pa.it/Amministrazione/Aree-amministrative/Settore-1-Affari-generali"
+   },
+   {
+    "id": 144,
+    "title": "Protezione civile",
+    "classIdentifier": "topic",
+    "url": "https://www.comune.alia.pa.it/Argomenti/Diritto/Protezione-civile"
+   },
+   {
+    "id": 684,
+    "title": "Comune di Alia",
+    "classIdentifier": "organization",
+    "url": "https://www.comune.alia.pa.it/Amministrazione/Enti-e-fondazioni/Comune-di-Alia"
+   },
+   {
+    "id": 701,
+    "title": "Ufficio Servizi alla Persona e Politiche giovanili",
+    "classIdentifier": "organization",
+    "url": "https://www.comune.alia.pa.it/Amministrazione/Uffici/Ufficio-Servizi-alla-Persona-e-Politiche-giovanili"
+   },
+   {
+    "id": 681,
+    "title": "Ufficio Elettorale Anagrafe e AIRE",
+    "classIdentifier": "organization",
+    "url": "https://www.comune.alia.pa.it/Amministrazione/Uffici/Ufficio-Elettorale-Anagrafe-e-AIRE"
+   },
+   {
+    "id": 1513,
+    "title": "Documenti Settori 1 - Affari generali",
+    "classIdentifier": "document",
+    "url": "https://www.comune.alia.pa.it/Amministrazione/Documenti-e-dati/Modulistica/Documenti-Settori-1-Affari-generali"
+   },
+   {
+    "id": 719,
+    "title": "Ruolo \"Dipendente\" di Ufficio Stato civile - Statistica e Leva",
+    "classIdentifier": "time_indexed_role",
+    "url": "https://www.comune.alia.pa.it/Media/Ruoli/Ruolo-Dipendente-di-Ufficio-Stato-civile-Statistica-e-Leva"
+   },
+   {
+    "id": 729,
+    "title": "Ruolo \"Dipendente\" di Ufficio Stato civile - Statistica e Leva",
+    "classIdentifier": "time_indexed_role",
+    "url": "https://www.comune.alia.pa.it/Media/Ruoli/Ruolo-Dipendente-di-Ufficio-Stato-civile-Statistica-e-Leva2"
+   }
+  ]
+ },
+ {
+  "comune": "Alia",
+  "key": "TRIBUTI_TARI",
+  "expected_native_id": "1086",
+  "hits": [
+   {
+    "id": 1086,
+    "title": "Avvisi di accertamento Tari ",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.alia.pa.it/Servizi/Avvisi-di-accertamento-Tari"
+   },
+   {
+    "id": 402,
+    "title": "Pagare tributi IMU",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.alia.pa.it/Servizi/Pagare-tributi-IMU"
+   },
+   {
+    "id": 1078,
+    "title": "Permesso per passo carrabile",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.alia.pa.it/Servizi/Permesso-per-passo-carrabile"
+   },
+   {
+    "id": 697,
+    "title": "Ufficio Tassa sui Rifiuti (TARI) - Tassa per lo smaltimento dei Rifiuti Solidi Urbani (TARSU) - Tassa per i Servizi Indivisibili (TASI)",
+    "classIdentifier": "organization",
+    "url": "https://www.comune.alia.pa.it/Amministrazione/Uffici/Ufficio-Tassa-sui-Rifiuti-TARI-Tassa-per-lo-smaltimento-dei-Rifiuti-Solidi-Urbani-TARSU-Tassa-per-i-Servizi-Indivisibili-TASI"
+   },
+   {
+    "id": 581,
+    "title": "Sede Ufficio Tassa sui Rifiuti (TARI) - Tassa per lo smaltimento dei Rifiuti Solidi Urbani (TARSU) - Tassa per i Servizi Indivisibili (TASI)",
+    "classIdentifier": "place",
+    "url": "https://www.comune.alia.pa.it/Vivere-il-comune/Luoghi/Sede-Ufficio-Tassa-sui-Rifiuti-TARI-Tassa-per-lo-smaltimento-dei-Rifiuti-Solidi-Urbani-TARSU-Tassa-per-i-Servizi-Indivisibili-TASI"
+   },
+   {
+    "id": 408,
+    "title": "Orari Ufficio Tassa sui Rifiuti (TARI) - Tassa per lo smaltimento dei Rifiuti Solidi Urbani (TARSU) - Tassa per i Servizi Indivisibili (TASI)",
+    "classIdentifier": "opening_hours_specification",
+    "url": "https://www.comune.alia.pa.it/Classificazioni/Orari-uffici-e-strutture/Orari-Ufficio-Tassa-sui-Rifiuti-TARI-Tassa-per-lo-smaltimento-dei-Rifiuti-Solidi-Urbani-TARSU-Tassa-per-i-Servizi-Indivisibili-TASI"
+   },
+   {
+    "id": 501,
+    "title": "Contatti Ufficio Tassa sui Rifiuti (TARI) - Tassa per lo smaltimento dei Rifiuti Solidi Urbani (TARSU) - Tassa per i Servizi Indivisibili (TASI)",
+    "classIdentifier": "online_contact_point",
+    "url": "https://www.comune.alia.pa.it/Classificazioni/Punti-di-contatto/Contatti-Ufficio-Tassa-sui-Rifiuti-TARI-Tassa-per-lo-smaltimento-dei-Rifiuti-Solidi-Urbani-TARSU-Tassa-per-i-Servizi-Indivisibili-TASI"
+   },
+   {
+    "id": 1553,
+    "title": "Documenti Settore 2 - Affari finanziari e tributi",
+    "classIdentifier": "document",
+    "url": "https://www.comune.alia.pa.it/Amministrazione/Documenti-e-dati/Modulistica/Documenti-Settore-2-Affari-finanziari-e-tributi"
+   },
+   {
+    "id": 713,
+    "title": "Ruolo \"Dipendente\" di Ufficio Tassa sui Rifiuti (TARI) - Tassa per lo smaltimento dei Rifiuti Solidi Urbani (TARSU) - Tassa per i Servizi Indivisibili (TASI)",
+    "classIdentifier": "time_indexed_role",
+    "url": "https://www.comune.alia.pa.it/Media/Ruoli/Ruolo-Dipendente-di-Ufficio-Tassa-sui-Rifiuti-TARI-Tassa-per-lo-smaltimento-dei-Rifiuti-Solidi-Urbani-TARSU-Tassa-per-i-Servizi-Indivisibili-TASI"
+   },
+   {
+    "id": 716,
+    "title": "Ruolo \"Dipendente\" di Ufficio Tassa sui Rifiuti (TARI) - Tassa per lo smaltimento dei Rifiuti Solidi Urbani (TARSU) - Tassa per i Servizi Indivisibili (TASI)",
+    "classIdentifier": "time_indexed_role",
+    "url": "https://www.comune.alia.pa.it/Media/Ruoli/Ruolo-Dipendente-di-Ufficio-Tassa-sui-Rifiuti-TARI-Tassa-per-lo-smaltimento-dei-Rifiuti-Solidi-Urbani-TARSU-Tassa-per-i-Servizi-Indivisibili-TASI2"
+   },
+   {
+    "id": 731,
+    "title": "Ruolo \"Dipendente\" di Ufficio Tassa sui Rifiuti (TARI) - Tassa per lo smaltimento dei Rifiuti Solidi Urbani (TARSU) - Tassa per i Servizi Indivisibili (TASI)",
+    "classIdentifier": "time_indexed_role",
+    "url": "https://www.comune.alia.pa.it/Media/Ruoli/Ruolo-Dipendente-di-Ufficio-Tassa-sui-Rifiuti-TARI-Tassa-per-lo-smaltimento-dei-Rifiuti-Solidi-Urbani-TARSU-Tassa-per-i-Servizi-Indivisibili-TASI3"
+   },
+   {
+    "id": 610,
+    "title": "Di Marco Salvatrice",
+    "classIdentifier": "public_person",
+    "url": "https://www.comune.alia.pa.it/Amministrazione/Personale-amministrativo/Di-Marco-Salvatrice"
+   },
+   {
+    "id": 607,
+    "title": "Cimò Impalli Francesca",
+    "classIdentifier": "public_person",
+    "url": "https://www.comune.alia.pa.it/Amministrazione/Personale-amministrativo/Cimo-Impalli-Francesca"
+   },
+   {
+    "id": 621,
+    "title": "Rizzotto Rosa",
+    "classIdentifier": "public_person",
+    "url": "https://www.comune.alia.pa.it/Amministrazione/Personale-amministrativo/Rizzotto-Rosa"
+   },
+   {
+    "id": 1871,
+    "title": "Regolamenti comunali",
+    "classIdentifier": "document",
+    "url": "https://www.comune.alia.pa.it/Amministrazione/Documenti-e-dati/Atti-normativi/Regolamenti-comunali"
+   },
+   {
+    "id": 1335,
+    "title": "Determine 2023",
+    "classIdentifier": "document",
+    "url": "https://www.comune.alia.pa.it/Amministrazione/Documenti-e-dati/Atti-normativi/Determine-2023"
+   },
+   {
+    "id": 2787,
+    "title": "Determine 2025",
+    "classIdentifier": "document",
+    "url": "https://www.comune.alia.pa.it/Amministrazione/Documenti-e-dati/Atti-normativi/Determine-2025"
+   },
+   {
+    "id": 1144,
+    "title": "Delibere del Consiglio comunale - Anno 2024",
+    "classIdentifier": "document",
+    "url": "https://www.comune.alia.pa.it/Amministrazione/Documenti-e-dati/Atti-normativi/Delibere-del-Consiglio-comunale-Anno-2024"
+   },
+   {
+    "id": 3737,
+    "title": "Determine 2026",
+    "classIdentifier": "document",
+    "url": "https://www.comune.alia.pa.it/Amministrazione/Documenti-e-dati/Atti-normativi/Determine-2026"
+   },
+   {
+    "id": 3162,
+    "title": "Delibere del Consiglio Comunale - Anno 2025",
+    "classIdentifier": "document",
+    "url": "https://www.comune.alia.pa.it/Amministrazione/Documenti-e-dati/Atti-normativi/Delibere-del-Consiglio-Comunale-Anno-2025"
+   }
+  ]
+ },
+ {
+  "comune": "Empoli",
+  "key": "STATO_CIVILE",
+  "expected_native_id": "6966",
+  "hits": [
+   {
+    "id": 6966,
+    "title": "Trascrizione atti di stato civile formati all'estero riguardanti cittadini italiani",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.empoli.fi.it/Servizi/Trascrizione-atti-di-stato-civile-formati-all-estero-riguardanti-cittadini-italiani"
+   },
+   {
+    "id": 4784,
+    "title": "Trascrizione del decreto di adozione",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.empoli.fi.it/Servizi/Trascrizione-del-decreto-di-adozione"
+   },
+   {
+    "id": 6961,
+    "title": "Cambio cognome/nome",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.empoli.fi.it/Servizi/Cambio-cognome-nome"
+   },
+   {
+    "id": 6963,
+    "title": "Unioni civili",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.empoli.fi.it/Servizi/Unioni-civili"
+   },
+   {
+    "id": 5202,
+    "title": "Pubblicazioni di matrimonio",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.empoli.fi.it/Servizi/Pubblicazioni-di-matrimonio"
+   },
+   {
+    "id": 17564,
+    "title": "Cittadinanza italiana",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.empoli.fi.it/Servizi/Cittadinanza-italiana"
+   },
+   {
+    "id": 6962,
+    "title": "Dichiarazione di morte",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.empoli.fi.it/Servizi/Dichiarazione-di-morte"
+   },
+   {
+    "id": 4770,
+    "title": "Dichiarazione di nascita",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.empoli.fi.it/Servizi/Dichiarazione-di-nascita"
+   },
+   {
+    "id": 6976,
+    "title": "Matrimoni e Unioni civili",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.empoli.fi.it/Servizi/Matrimoni-e-Unioni-civili"
+   },
+   {
+    "id": 6968,
+    "title": "Separazione e divorzio",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.empoli.fi.it/Servizi/Separazione-e-divorzio"
+   },
+   {
+    "id": 4757,
+    "title": "Certificato di godimento dei diritti politici",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.empoli.fi.it/Servizi/Certificato-di-godimento-dei-diritti-politici"
+   },
+   {
+    "id": 4769,
+    "title": "Convivenza di fatto e Contratto di Convivenza",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.empoli.fi.it/Servizi/Convivenza-di-fatto-e-Contratto-di-Convivenza"
+   },
+   {
+    "id": 4780,
+    "title": "Modifica dovuta ad errori materiali dei dati anagrafici e indicazioni sul nome",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.empoli.fi.it/Servizi/Modifica-dovuta-ad-errori-materiali-dei-dati-anagrafici-e-indicazioni-sul-nome"
+   },
+   {
+    "id": 5192,
+    "title": "Albo dei Giudici Popolari di Corte d'Assise e Corte d'Assise d'Appello",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.empoli.fi.it/Servizi/Albo-dei-Giudici-Popolari-di-Corte-d-Assise-e-Corte-d-Assise-d-Appello"
+   },
+   {
+    "id": 6954,
+    "title": "Copia delle liste elettorali",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.empoli.fi.it/Servizi/Copia-delle-liste-elettorali"
+   },
+   {
+    "id": 5197,
+    "title": "Assegnazione numero civico",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.empoli.fi.it/Servizi/Assegnazione-numero-civico"
+   },
+   {
+    "id": 5191,
+    "title": "Albo dei Presidenti di seggio elettorale",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.empoli.fi.it/Servizi/Albo-dei-Presidenti-di-seggio-elettorale"
+   },
+   {
+    "id": 5196,
+    "title": "Attestato di soggiorno permanente per i cittadini dell'Unione Europea e i loro familiari",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.empoli.fi.it/Servizi/Attestato-di-soggiorno-permanente-per-i-cittadini-dell-Unione-Europea-e-i-loro-familiari"
+   },
+   {
+    "id": 4773,
+    "title": "Domanda di Iscrizione nello schedario della popolazione temporanea",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.empoli.fi.it/Servizi/Domanda-di-Iscrizione-nello-schedario-della-popolazione-temporanea"
+   },
+   {
+    "id": 7023,
+    "title": "Dichiarazione di trasferimento all'estero",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.empoli.fi.it/Servizi/Dichiarazione-di-trasferimento-all-estero"
+   }
+  ]
+ },
+ {
+  "comune": "Montespertoli",
+  "key": "STATO_CIVILE",
+  "expected_native_id": "2853",
+  "hits": [
+   {
+    "id": 2853,
+    "title": "Certificazioni Anagrafiche e di Stato Civile ",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.montespertoli.fi.it/Servizi/Certificazioni-Anagrafiche-e-di-Stato-Civile"
+   },
+   {
+    "id": 3217,
+    "title": "Denuncia di Morte",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.montespertoli.fi.it/Servizi/Denuncia-di-Morte"
+   },
+   {
+    "id": 2205,
+    "title": "Richiesta celebrante esterno",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.montespertoli.fi.it/Servizi/Richiesta-celebrante-esterno"
+   },
+   {
+    "id": 2203,
+    "title": "Pubblicazione di matrimonio",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.montespertoli.fi.it/Servizi/Pubblicazione-di-matrimonio"
+   },
+   {
+    "id": 2202,
+    "title": "Unione Civile",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.montespertoli.fi.it/Servizi/Unione-Civile"
+   },
+   {
+    "id": 2206,
+    "title": "Separazione e divorzio in Italia ",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.montespertoli.fi.it/Servizi/Separazione-e-divorzio-in-Italia"
+   },
+   {
+    "id": 2207,
+    "title": "Trascrizione di sentenza straniera di divorzio",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.montespertoli.fi.it/Servizi/Trascrizione-di-sentenza-straniera-di-divorzio"
+   },
+   {
+    "id": 2142,
+    "title": "Disposizione anticipata di trattamento",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.montespertoli.fi.it/Servizi/Disposizione-anticipata-di-trattamento"
+   },
+   {
+    "id": 2797,
+    "title": "Matrimonio di cittadini stranieri in Italia ",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.montespertoli.fi.it/Servizi/Matrimonio-di-cittadini-stranieri-in-Italia"
+   },
+   {
+    "id": 2181,
+    "title": "Trasferimento di residenza on line",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.montespertoli.fi.it/Servizi/Trasferimento-di-residenza-on-line"
+   },
+   {
+    "id": 2032,
+    "title": "Convivenza di fatto",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.montespertoli.fi.it/Servizi/Convivenza-di-fatto"
+   },
+   {
+    "id": 2135,
+    "title": "SPID in Comune",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.montespertoli.fi.it/Servizi/SPID-in-Comune"
+   },
+   {
+    "id": 2146,
+    "title": "Emigrazione all'estero e iscrizione AIRE",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.montespertoli.fi.it/Servizi/Emigrazione-all-estero-e-iscrizione-AIRE"
+   },
+   {
+    "id": 1993,
+    "title": "Albo dei Giudici Popolari",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.montespertoli.fi.it/Servizi/Albo-dei-Giudici-Popolari"
+   },
+   {
+    "id": 2139,
+    "title": "Diritto di Voto dei Cittadini Europei ",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.montespertoli.fi.it/Servizi/Diritto-di-Voto-dei-Cittadini-Europei"
+   },
+   {
+    "id": 2154,
+    "title": "Iscrizione anagrafica e regolarità al soggiorno dei cittadini comunitari ",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.montespertoli.fi.it/Servizi/Iscrizione-anagrafica-e-regolarita-al-soggiorno-dei-cittadini-comunitari"
+   },
+   {
+    "id": 2175,
+    "title": "Trasferimento di residenza",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.montespertoli.fi.it/Servizi/Trasferimento-di-residenza"
+   },
+   {
+    "id": 2158,
+    "title": "Attestato di soggiorno per cittadini comunitari",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.montespertoli.fi.it/Servizi/Attestato-di-soggiorno-per-cittadini-comunitari"
+   },
+   {
+    "id": 2173,
+    "title": "Contributo per cremazione defunti",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.montespertoli.fi.it/Servizi/Contributo-per-cremazione-defunti"
+   },
+   {
+    "id": 2168,
+    "title": "Rilascio delle liste elettorali ",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.montespertoli.fi.it/Servizi/Rilascio-delle-liste-elettorali"
+   }
+  ]
+ },
+ {
+  "comune": "Ala",
+  "key": "CARTA_IDENTITA",
+  "expected_native_id": "1101",
+  "hits": [
+   {
+    "id": 299,
+    "title": "Identità digitale SPID LepidaID",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.ala.tn.it/Servizi/Identita-digitale-SPID-LepidaID"
+   },
+   {
+    "id": 239,
+    "title": "Appuntamento per il rilascio della Carta Identità Elettronica",
+    "classIdentifier": "output",
+    "url": "https://www.comune.ala.tn.it/Classificazioni/Cosa-puoi-richiedere/Appuntamento-per-il-rilascio-della-Carta-Identita-Elettronica"
+   },
+   {
+    "id": 384,
+    "title": "Visura o autocertificazione",
+    "classIdentifier": "output",
+    "url": "https://www.comune.ala.tn.it/Classificazioni/Cosa-puoi-richiedere/Visura-o-autocertificazione"
+   },
+   {
+    "id": 86,
+    "title": "Informativa trattamento dati del sito web istituzionale, dei servizi digitali e dell’area personale del cittadino",
+    "classIdentifier": "pagina_sito",
+    "url": "https://www.comune.ala.tn.it/Privacy/Informativa-trattamento-dati-del-sito-web-istituzionale-dei-servizi-digitali-e-dell-area-personale-del-cittadino"
+   },
+   {
+    "id": 3170,
+    "title": "Autorizzazione alla sepoltura di un defunto",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.ala.tn.it/Servizi/Autorizzazione-alla-sepoltura-di-un-defunto"
+   },
+   {
+    "id": 3174,
+    "title": "Autorizzazione alla cremazione di un defunto",
+    "classIdentifier": "public_service",
+    "url": "https://www.comune.ala.tn.it/Servizi/Autorizzazione-alla-cremazione-di-un-defunto"
+   },
+   {
+    "id": 1479,
+    "title": "SCIA - somministrazione temporanea alimenti e bevande",
+    "classIdentifier": "document",
+    "url": "https://www.comune.ala.tn.it/Amministrazione/Documenti-e-dati/Modulistica/SCIA-somministrazione-temporanea-alimenti-e-bevande"
+   },
+   {
+    "id": 1495,
+    "title": "Ufficio Igiene - comunicazione somministrazione occasionale",
+    "classIdentifier": "document",
+    "url": "https://www.comune.ala.tn.it/Amministrazione/Documenti-e-dati/Modulistica/Ufficio-Igiene-comunicazione-somministrazione-occasionale"
+   },
+   {
+    "id": 2818,
+    "title": "XXI SECOLO DELLA RAI DEDICA UN SERVIZIO ALLO SPORTELLO PARLA",
+    "classIdentifier": "article",
+    "url": "https://www.comune.ala.tn.it/Novita/Comunicati/XXI-SECOLO-DELLA-RAI-DEDICA-UN-SERVIZIO-ALLO-SPORTELLO-PARLA2"
+   },
+   {
+    "id": 1574,
+    "title": "Nasce INAD: l’Indice Nazionale dei Domicili Digitali",
+    "classIdentifier": "article",
+    "url": "https://www.comune.ala.tn.it/Novita/Avvisi/Nasce-INAD-l-Indice-Nazionale-dei-Domicili-Digitali"
+   },
+   {
+    "id": 1599,
+    "title": "Nuovo sito web e servizi digitali per il cittadino: il Comune ha colto le opportunità offerte dal PNRR",
+    "classIdentifier": "article",
+    "url": "https://www.comune.ala.tn.it/Novita/Notizie/Nuovo-sito-web-e-servizi-digitali-per-il-cittadino-il-Comune-ha-colto-le-opportunita-offerte-dal-PNRR"
+   },
+   {
+    "id": 1101,
+    "title": "Assenso genitore per rilascio CIE valida per l'espatrio",
+    "classIdentifier": "document",
+    "url": "https://www.comune.ala.tn.it/Amministrazione/Documenti-e-dati/Modulistica/Assenso-genitore-per-rilascio-CIE-valida-per-l-espatrio"
+   },
+   {
+    "id": 882,
+    "title": "Accedi al servizio online - Appuntamento per rilascio Carta d’Identità Elettronica (CIE)",
+    "classIdentifier": "channel",
+    "url": "https://www.comune.ala.tn.it/Classificazioni/Canali-digitali/Accedi-al-servizio-online-Appuntamento-per-rilascio-Carta-d-Identita-Elettronica-CIE"
+   },
+   {
+    "id": 3697,
+    "title": "MARTEDÌ “SCOPRI IL COMUNE DI ALA”: UFFICI APERTI, VISITE, INCONTRI",
+    "classIdentifier": "article",
+    "url": "https://www.comune.ala.tn.it/Novita/Comunicati/MARTEDI-SCOPRI-IL-COMUNE-DI-ALA-UFFICI-APERTI-VISITE-INCONTRI"
+   },
+   {
+    "id": 1038,
+    "title": "Carta dei servizi e standard di qualità",
+    "classIdentifier": "pagina_trasparenza",
+    "url": "https://www.comune.ala.tn.it/Amministrazione-Trasparente/Servizi-erogati/Carta-dei-servizi-e-standard-di-qualita"
+   },
+   {
+    "id": 2780,
+    "title": "SIPARIO D'ORO",
+    "classIdentifier": "event",
+    "url": "https://www.comune.ala.tn.it/Vivere-il-comune/Eventi/SIPARIO-D-ORO"
+   },
+   {
+    "id": 3476,
+    "title": "Rinnovo carte d'identità",
+    "classIdentifier": "image",
+    "url": "https://www.comune.ala.tn.it/Media/Images/Rinnovo-carte-d-identita"
+   },
+   {
+    "id": 177,
+    "title": "Programma d'azione",
+    "classIdentifier": "topic",
+    "url": "https://www.comune.ala.tn.it/Argomenti/Politica/Programma-d-azione"
+   },
+   {
+    "id": 3234,
+    "title": "carta dedicata a te 2025",
+    "classIdentifier": "image",
+    "url": "https://www.comune.ala.tn.it/Media/Images/carta-dedicata-a-te-2025"
+   },
+   {
+    "id": 129,
+    "title": "Acqua",
+    "classIdentifier": "topic",
+    "url": "https://www.comune.ala.tn.it/Argomenti/Gestione-dell-ambiente/Acqua"
+   }
+  ]
+ },
+ {
+  "comune": "Angiari",
+  "key": "TRIBUTI_TARI",
+  "expected_native_id": "581",
+  "hits": [
+   {
+    "id": 581,
+    "title": "TARI - Servizio Rifiuti",
+    "classIdentifier": "document",
+    "url": "https://www.comune.angiari.vr.it/Amministrazione/Documenti-e-dati/Modulistica/TARI-Servizio-Rifiuti"
+   },
+   {
+    "id": 580,
+    "title": "Tari - Servizio rifiuti",
+    "classIdentifier": "banner",
+    "url": "https://www.comune.angiari.vr.it/Media/Banner-e-link/Siti-Tematici/Tari-Servizio-rifiuti"
+   },
+   {
+    "id": 221,
+    "title": "Con il nuovo sito web, il Comune è sempre più digitale",
+    "classIdentifier": "article",
+    "url": "https://www.comune.angiari.vr.it/Novita/Notizie/Con-il-nuovo-sito-web-il-Comune-e-sempre-piu-digitale"
+   },
+   {
+    "id": 506,
+    "title": "Tributo servizi indivisibili - TASI",
+    "classIdentifier": "document",
+    "url": "https://www.comune.angiari.vr.it/Amministrazione/Documenti-e-dati/Modulistica/Tributo-servizi-indivisibili-TASI"
+   }
+  ]
+ }
+]

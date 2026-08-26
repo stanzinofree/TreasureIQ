@@ -3925,10 +3925,14 @@ async def _risposta_modulistica(
         or "questo comune"
     )
 
-    # Piattaforma nota e di una famiglia con connettore: senza, il resolver non
-    # ha chi interrogare → miss onesto (URP), MAI il puntatore SP a coprire il
-    # buco (D-S5-2, vincolo centrale della slice).
-    if mappa is None or not mappa.piattaforma_id:
+    # Serve una mappa per contestualizzare la risoluzione; senza, miss onesto (URP).
+    # NON si esce più sul solo `piattaforma_id` assente: il resolver ha un tier
+    # catalogo flat (nazionale, promosso) che risponde SENZA piattaforma nota —
+    # è il caso OpenPA in cui lo store dice `openpa` ma la mappa ha
+    # `piattaforma_id=None`. Quando il catalogo non copre e la piattaforma manca,
+    # `registry.resolve` non trova connettore → `resolved is None` → URL più sotto,
+    # MAI il puntatore SP a coprire il buco (D-S5-2, vincolo centrale della slice).
+    if mappa is None:
         return _modulistica_miss_urp(comune_nome)
 
     # Catena nuova: resolver cache-first → connettore WP/AgID reale (Slice 4),
@@ -3940,7 +3944,7 @@ async def _risposta_modulistica(
         request,
         mappa=mappa,
         registry=default_service_registry(service_query_fetch_coordinator()),
-        platform_id=mappa.piattaforma_id,
+        platform_id=mappa.piattaforma_id or "",
     )
     # Miss del resolver (piattaforma non coperta, 0/≥2 confermati, irraggiungibile)
     # → miss onesto, niente fallback SP.

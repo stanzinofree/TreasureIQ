@@ -213,14 +213,33 @@ def test_contributi_non_e_tributo_lista_generica(wiring):
     assert wiring["chiamate"] == 0
 
 
-def test_piattaforma_assente_miss_urp_senza_sp(wiring):
+def test_piattaforma_assente_resolver_miss_urp_senza_sp(wiring):
+    # Piattaforma assente + resolver a vuoto (catalogo non copre, nessun
+    # connettore per piattaforma vuota) → URP onesto, MAI il puntatore SP.
+    # Il resolver ORA È consultato anche senza piattaforma: il suo tier catalogo
+    # flat non ne ha bisogno (Slice A). Il "senza SP" resta garantito da
+    # `resolved is None → URP`, non dal bail anticipato sul solo piattaforma_id.
     wiring["mappa"] = _mappa(piattaforma_id=None)
+    wiring["resolved"] = None
     answer = _run(message="modulo della carta d'identità", profile=None, comune_istat=ISTAT)
     assert answer.data_gap == "not_verified"
     assert answer.access_mode is None
     assert answer.info is None
     assert answer.needs_clarification is False
-    assert wiring["chiamate"] == 0  # no platform → no resolver call
+    assert wiring["chiamate"] == 1  # resolver consultato: il catalogo vive lì dentro
+
+
+def test_catalogo_flat_risolve_senza_piattaforma(wiring):
+    # Slice A: comune OpenPA con mappa senza piattaforma_id ma catalogo flat che
+    # copre la ServiceKey. Il resolver (tier catalogo, net-free) risponde e la
+    # ServiceReference arriva in chat — non più ripiego URP muto.
+    wiring["mappa"] = _mappa(piattaforma_id=None)
+    wiring["resolved"] = _resolved(_reference(), from_cache=True)
+    answer = _run(message="modulo della carta d'identità", profile=None, comune_istat=ISTAT)
+    assert wiring["chiamate"] == 1
+    assert answer.data_gap is None
+    assert answer.info is not None
+    assert answer.info.service is not None
 
 
 def test_mappa_assente_miss_urp(wiring):

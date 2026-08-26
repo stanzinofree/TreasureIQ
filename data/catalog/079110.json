@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "079110",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "079110:openpa:584",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.sanmangodaquino.cz.it/Servizi/Cambio-di-residenza",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanmangodaquino.cz.it/Servizi/Cambio-di-residenza",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanmangodaquino.cz.it/Servizi/Cambio-di-residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "stato_civile": {
+   "service_id": "079110:openpa:588",
+   "title": "Certificato di nascita per cittadini europei",
+   "source_url": "https://www.comune.sanmangodaquino.cz.it/Servizi/Certificato-di-nascita-per-cittadini-europei",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanmangodaquino.cz.it/Servizi/Certificato-di-nascita-per-cittadini-europei",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanmangodaquino.cz.it/Servizi/Certificato-di-nascita-per-cittadini-europei",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "079110:openpa:488",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.sanmangodaquino.cz.it/Servizi/Pagare-tributi-IMU",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanmangodaquino.cz.it/Servizi/Pagare-tributi-IMU",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanmangodaquino.cz.it/Servizi/Pagare-tributi-IMU",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

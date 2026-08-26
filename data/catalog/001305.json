@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "001305",
+ "services": {
+  "carta_identita": {
+   "service_id": "001305:openpa:782",
+   "title": "Rilascio carta d’identità elettronica (CIE) ",
+   "source_url": "https://www.comune.villarfocchiardo.to.it/Servizi/Rilascio-carta-d-identita-elettronica-CIE",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.villarfocchiardo.to.it/Servizi/Rilascio-carta-d-identita-elettronica-CIE",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.villarfocchiardo.to.it/Servizi/Rilascio-carta-d-identita-elettronica-CIE",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001305:openpa:791",
+   "title": "Cambio di Residenza ",
+   "source_url": "https://www.comune.villarfocchiardo.to.it/Servizi/Cambio-di-Residenza",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.villarfocchiardo.to.it/Servizi/Cambio-di-Residenza",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.villarfocchiardo.to.it/Servizi/Cambio-di-Residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_tari": {
+   "service_id": "001305:openpa:922",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.villarfocchiardo.to.it/Servizi/Pagamento-Tassa-Rifiuti-TARI",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.villarfocchiardo.to.it/Servizi/Pagamento-Tassa-Rifiuti-TARI",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.villarfocchiardo.to.it/Servizi/Pagamento-Tassa-Rifiuti-TARI",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

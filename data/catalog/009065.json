@@ -1,0 +1,120 @@
+{
+ "municipality_istat": "009065",
+ "services": {
+  "carta_identita": {
+   "service_id": "009065:openpa:832",
+   "title": "Carta identità elettronica (CIE)",
+   "source_url": "https://www.comune.varazze.sv.it/Servizi/Carta-identita-elettronica-CIE",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.varazze.sv.it/Servizi/Carta-identita-elettronica-CIE",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.varazze.sv.it/Servizi/Carta-identita-elettronica-CIE",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "cambio_residenza": {
+   "service_id": "009065:openpa:1320",
+   "title": "Iscrizioni anagrafiche e cambio di residenza",
+   "source_url": "https://www.comune.varazze.sv.it/Servizi/Iscrizioni-anagrafiche-e-cambio-di-residenza",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.varazze.sv.it/Servizi/Iscrizioni-anagrafiche-e-cambio-di-residenza",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.varazze.sv.it/Servizi/Iscrizioni-anagrafiche-e-cambio-di-residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "stato_civile": {
+   "service_id": "009065:openpa:826",
+   "title": "Certificati di stato civile",
+   "source_url": "https://www.comune.varazze.sv.it/Servizi/Certificati-di-stato-civile",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.varazze.sv.it/Servizi/Certificati-di-stato-civile",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.varazze.sv.it/Servizi/Certificati-di-stato-civile",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "009065:openpa:829",
+   "title": "IMU – Imposta Municipale Propria",
+   "source_url": "https://www.comune.varazze.sv.it/Servizi/IMU-Imposta-Municipale-Propria",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.varazze.sv.it/Servizi/IMU-Imposta-Municipale-Propria",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.varazze.sv.it/Servizi/IMU-Imposta-Municipale-Propria",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_tari": {
+   "service_id": "009065:openpa:827",
+   "title": "TARI – Tassa sui rifiuti",
+   "source_url": "https://www.comune.varazze.sv.it/Servizi/TARI-Tassa-sui-rifiuti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.varazze.sv.it/Servizi/TARI-Tassa-sui-rifiuti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.varazze.sv.it/Servizi/TARI-Tassa-sui-rifiuti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "069057",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "069057:openpa:246",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.orsogna.chieti.it/Servizi/Cambio-di-residenza",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.orsogna.chieti.it/Servizi/Cambio-di-residenza",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.orsogna.chieti.it/Servizi/Cambio-di-residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "accesso_atti": {
+   "service_id": "069057:openpa:271",
+   "title": "Richiesta di accesso agli atti",
+   "source_url": "https://www.comune.orsogna.chieti.it/Servizi/Richiesta-di-accesso-agli-atti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.orsogna.chieti.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.orsogna.chieti.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "stato_civile": {
+   "service_id": "069057:openpa:253",
+   "title": "Certificato di nascita per cittadini europei",
+   "source_url": "https://www.comune.orsogna.chieti.it/Servizi/Certificato-di-nascita-per-cittadini-europei",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.orsogna.chieti.it/Servizi/Certificato-di-nascita-per-cittadini-europei",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.orsogna.chieti.it/Servizi/Certificato-di-nascita-per-cittadini-europei",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

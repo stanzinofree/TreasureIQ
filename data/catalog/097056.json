@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "097056",
+ "services": {
+  "accesso_atti": {
+   "service_id": "097056:openpa:241",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.nibionno.lc.it/Servizi/Richiedere-l-accesso-agli-atti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.nibionno.lc.it/Servizi/Richiedere-l-accesso-agli-atti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.nibionno.lc.it/Servizi/Richiedere-l-accesso-agli-atti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "stato_civile": {
+   "service_id": "097056:openpa:864",
+   "title": "Avviso Misura 1.4.4 Adesione allo stato civile digitale ( ANSC )",
+   "source_url": "https://www.comune.nibionno.lc.it/Amministrazione/Documenti-e-dati/Documenti-funzionamento-interno/Avviso-Misura-1.4.4-Adesione-allo-stato-civile-digitale-ANSC",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.nibionno.lc.it/Amministrazione/Documenti-e-dati/Documenti-funzionamento-interno/Avviso-Misura-1.4.4-Adesione-allo-stato-civile-digitale-ANSC",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.nibionno.lc.it/Amministrazione/Documenti-e-dati/Documenti-funzionamento-interno/Avviso-Misura-1.4.4-Adesione-allo-stato-civile-digitale-ANSC",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

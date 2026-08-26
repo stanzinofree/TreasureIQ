@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "017067",
+ "services": {
+  "carta_identita": {
+   "service_id": "017067:openpa:3826",
+   "title": "CIE",
+   "source_url": "https://www.comune.desenzano.brescia.it/Classificazioni/Cosa-puoi-richiedere/CIE",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.desenzano.brescia.it/Classificazioni/Cosa-puoi-richiedere/CIE",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.desenzano.brescia.it/Classificazioni/Cosa-puoi-richiedere/CIE",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_tari": {
+   "service_id": "017067:openpa:4033",
+   "title": "Tassa Rifiuti 2024",
+   "source_url": "https://www.comune.desenzano.brescia.it/Servizi/Tassa-Rifiuti-2024",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.desenzano.brescia.it/Servizi/Tassa-Rifiuti-2024",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.desenzano.brescia.it/Servizi/Tassa-Rifiuti-2024",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

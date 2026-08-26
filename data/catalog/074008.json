@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "074008",
+ "services": {
+  "carta_identita": {
+   "service_id": "074008:openpa:1187",
+   "title": "Rilascio/Rinnovo CIE ",
+   "source_url": "https://www.comune.francavillafontana.br.it/Servizi/Rilascio-Rinnovo-CIE",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.francavillafontana.br.it/Servizi/Rilascio-Rinnovo-CIE",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.francavillafontana.br.it/Servizi/Rilascio-Rinnovo-CIE",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "accesso_atti": {
+   "service_id": "074008:openpa:772",
+   "title": "Richiesta di accesso agli atti",
+   "source_url": "https://www.comune.francavillafontana.br.it/Servizi/Richiesta-di-accesso-agli-atti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.francavillafontana.br.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.francavillafontana.br.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

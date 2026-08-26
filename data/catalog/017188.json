@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "017188",
+ "services": {
+  "carta_identita": {
+   "service_id": "017188:openpa:1229",
+   "title": "Rilascio della carta d’identità elettronica (C.I.E.) ",
+   "source_url": "https://www.comune.travagliato.bs.it/Amministrazione/Documenti-e-dati/Documenti-tecnici-di-supporto/Rilascio-della-carta-d-identita-elettronica-C.I.E",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.travagliato.bs.it/Amministrazione/Documenti-e-dati/Documenti-tecnici-di-supporto/Rilascio-della-carta-d-identita-elettronica-C.I.E",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.travagliato.bs.it/Amministrazione/Documenti-e-dati/Documenti-tecnici-di-supporto/Rilascio-della-carta-d-identita-elettronica-C.I.E",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "accesso_atti": {
+   "service_id": "017188:openpa:261",
+   "title": "Richiesta di accesso agli atti",
+   "source_url": "https://www.comune.travagliato.bs.it/Servizi/Richiesta-di-accesso-agli-atti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.travagliato.bs.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.travagliato.bs.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "017188:openpa:1109",
+   "title": "IMU - Imposta Municipale Propria",
+   "source_url": "https://www.comune.travagliato.bs.it/Servizi/IMU-Imposta-Municipale-Propria",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.travagliato.bs.it/Servizi/IMU-Imposta-Municipale-Propria",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.travagliato.bs.it/Servizi/IMU-Imposta-Municipale-Propria",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

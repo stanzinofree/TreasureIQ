@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "097086",
+ "services": {
+  "carta_identita": {
+   "service_id": "097086:openpa:1219",
+   "title": "Carta d'identità elettronica",
+   "source_url": "https://www.comune.vercurago.lc.it/Servizi/Carta-d-identita-elettronica",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vercurago.lc.it/Servizi/Carta-d-identita-elettronica",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vercurago.lc.it/Servizi/Carta-d-identita-elettronica",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "accesso_atti": {
+   "service_id": "097086:openpa:817",
+   "title": "Richiesta di accesso agli atti",
+   "source_url": "https://www.comune.vercurago.lc.it/Servizi/Richiesta-di-accesso-agli-atti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vercurago.lc.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vercurago.lc.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "097086:openpa:619",
+   "title": "Calcolo IMU",
+   "source_url": "https://www.comune.vercurago.lc.it/Classificazioni/Cosa-puoi-richiedere/Calcolo-IMU",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vercurago.lc.it/Classificazioni/Cosa-puoi-richiedere/Calcolo-IMU",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vercurago.lc.it/Classificazioni/Cosa-puoi-richiedere/Calcolo-IMU",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_tari": {
+   "service_id": "097086:openpa:617",
+   "title": "Come viene calcolata la TARI",
+   "source_url": "https://www.comune.vercurago.lc.it/Servizi/Come-viene-calcolata-la-TARI",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vercurago.lc.it/Servizi/Come-viene-calcolata-la-TARI",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vercurago.lc.it/Servizi/Come-viene-calcolata-la-TARI",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

@@ -1,0 +1,143 @@
+{
+ "municipality_istat": "017021",
+ "services": {
+  "carta_identita": {
+   "service_id": "017021:openpa:393",
+   "title": "Carta d’Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.borgosatollo.bs.it/Servizi/Carta-d-Identita-Elettronica-CIE",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.borgosatollo.bs.it/Servizi/Carta-d-Identita-Elettronica-CIE",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.borgosatollo.bs.it/Servizi/Carta-d-Identita-Elettronica-CIE",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "cambio_residenza": {
+   "service_id": "017021:openpa:386",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.borgosatollo.bs.it/Servizi/Cambio-di-residenza",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.borgosatollo.bs.it/Servizi/Cambio-di-residenza",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.borgosatollo.bs.it/Servizi/Cambio-di-residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "accesso_atti": {
+   "service_id": "017021:openpa:1416",
+   "title": "Modulo accesso agli atti",
+   "source_url": "https://www.comune.borgosatollo.bs.it/Amministrazione/Documenti-e-dati/Documenti-tecnici-di-supporto/Modulo-accesso-agli-atti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.borgosatollo.bs.it/Amministrazione/Documenti-e-dati/Documenti-tecnici-di-supporto/Modulo-accesso-agli-atti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.borgosatollo.bs.it/Amministrazione/Documenti-e-dati/Documenti-tecnici-di-supporto/Modulo-accesso-agli-atti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "stato_civile": {
+   "service_id": "017021:openpa:388",
+   "title": "Stato civile",
+   "source_url": "https://www.comune.borgosatollo.bs.it/Servizi/Stato-civile",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.borgosatollo.bs.it/Servizi/Stato-civile",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.borgosatollo.bs.it/Servizi/Stato-civile",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "017021:openpa:900",
+   "title": "IMU - Imposta Municipale Unica",
+   "source_url": "https://www.comune.borgosatollo.bs.it/Servizi/IMU-Imposta-Municipale-Unica",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.borgosatollo.bs.it/Servizi/IMU-Imposta-Municipale-Unica",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.borgosatollo.bs.it/Servizi/IMU-Imposta-Municipale-Unica",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_tari": {
+   "service_id": "017021:openpa:911",
+   "title": "TARI - TASSA RIFIUTI",
+   "source_url": "https://www.comune.borgosatollo.bs.it/Servizi/TARI-TASSA-RIFIUTI",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.borgosatollo.bs.it/Servizi/TARI-TASSA-RIFIUTI",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.borgosatollo.bs.it/Servizi/TARI-TASSA-RIFIUTI",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "022254",
+ "services": {
+  "carta_identita": {
+   "service_id": "022254:openpa:567",
+   "title": "Appuntamento per rilascio Carta d’Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.villedifiemme.tn.it/Servizi/Appuntamento-per-rilascio-Carta-d-Identita-Elettronica-CIE",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.villedifiemme.tn.it/Servizi/Appuntamento-per-rilascio-Carta-d-Identita-Elettronica-CIE",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.villedifiemme.tn.it/Servizi/Appuntamento-per-rilascio-Carta-d-Identita-Elettronica-CIE",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "cambio_residenza": {
+   "service_id": "022254:openpa:596",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.villedifiemme.tn.it/Servizi/Cambio-di-residenza",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.villedifiemme.tn.it/Servizi/Cambio-di-residenza",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.villedifiemme.tn.it/Servizi/Cambio-di-residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "accesso_atti": {
+   "service_id": "022254:openpa:425",
+   "title": "Richiesta di accesso agli atti",
+   "source_url": "https://www.comune.villedifiemme.tn.it/Servizi/Richiesta-di-accesso-agli-atti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.villedifiemme.tn.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.villedifiemme.tn.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

@@ -1,0 +1,120 @@
+{
+ "municipality_istat": "097070",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "097070:openpa:328",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.primaluna.lc.it/Servizi/Cambio-di-residenza",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.primaluna.lc.it/Servizi/Cambio-di-residenza",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.primaluna.lc.it/Servizi/Cambio-di-residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "accesso_atti": {
+   "service_id": "097070:openpa:248",
+   "title": "Richiesta di accesso agli atti",
+   "source_url": "https://www.comune.primaluna.lc.it/Servizi/Richiesta-di-accesso-agli-atti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.primaluna.lc.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.primaluna.lc.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "stato_civile": {
+   "service_id": "097070:openpa:316",
+   "title": "Autocertificazione di stato civile",
+   "source_url": "https://www.comune.primaluna.lc.it/Amministrazione/Documenti-e-dati/Documenti-tecnici-di-supporto/Autocertificazione-di-stato-civile",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.primaluna.lc.it/Amministrazione/Documenti-e-dati/Documenti-tecnici-di-supporto/Autocertificazione-di-stato-civile",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.primaluna.lc.it/Amministrazione/Documenti-e-dati/Documenti-tecnici-di-supporto/Autocertificazione-di-stato-civile",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "097070:openpa:271",
+   "title": "IMU",
+   "source_url": "https://www.comune.primaluna.lc.it/Servizi/IMU",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.primaluna.lc.it/Servizi/IMU",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.primaluna.lc.it/Servizi/IMU",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_tari": {
+   "service_id": "097070:openpa:272",
+   "title": "TARI",
+   "source_url": "https://www.comune.primaluna.lc.it/Servizi/TARI",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.primaluna.lc.it/Servizi/TARI",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.primaluna.lc.it/Servizi/TARI",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

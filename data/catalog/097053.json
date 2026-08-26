@@ -1,0 +1,120 @@
+{
+ "municipality_istat": "097053",
+ "services": {
+  "carta_identita": {
+   "service_id": "097053:openpa:280",
+   "title": "CIE - Carta di Identità Elettronica",
+   "source_url": "https://www.comune.montevecchia.lc.it/Servizi/CIE-Carta-di-Identita-Elettronica",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montevecchia.lc.it/Servizi/CIE-Carta-di-Identita-Elettronica",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montevecchia.lc.it/Servizi/CIE-Carta-di-Identita-Elettronica",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "accesso_atti": {
+   "service_id": "097053:openpa:1684",
+   "title": "Accesso atti civico e generalizzato",
+   "source_url": "https://www.comune.montevecchia.lc.it/Classificazioni/Cosa-puoi-richiedere/Accesso-atti-civico-e-generalizzato",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montevecchia.lc.it/Classificazioni/Cosa-puoi-richiedere/Accesso-atti-civico-e-generalizzato",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montevecchia.lc.it/Classificazioni/Cosa-puoi-richiedere/Accesso-atti-civico-e-generalizzato",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "stato_civile": {
+   "service_id": "097053:openpa:277",
+   "title": "Anagrafe/Stato Civile ed Elettorale",
+   "source_url": "https://www.comune.montevecchia.lc.it/Amministrazione/Documenti-e-dati/Modulistica/Anagrafe-Stato-Civile-ed-Elettorale",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montevecchia.lc.it/Amministrazione/Documenti-e-dati/Modulistica/Anagrafe-Stato-Civile-ed-Elettorale",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montevecchia.lc.it/Amministrazione/Documenti-e-dati/Modulistica/Anagrafe-Stato-Civile-ed-Elettorale",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "097053:openpa:377",
+   "title": "IMU - Imposta Municipale Propria",
+   "source_url": "https://www.comune.montevecchia.lc.it/Servizi/IMU-Imposta-Municipale-Propria",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montevecchia.lc.it/Servizi/IMU-Imposta-Municipale-Propria",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montevecchia.lc.it/Servizi/IMU-Imposta-Municipale-Propria",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_tari": {
+   "service_id": "097053:openpa:378",
+   "title": "TARI - Tassa Rifiuti ",
+   "source_url": "https://www.comune.montevecchia.lc.it/Servizi/TARI-Tassa-Rifiuti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montevecchia.lc.it/Servizi/TARI-Tassa-Rifiuti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montevecchia.lc.it/Servizi/TARI-Tassa-Rifiuti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

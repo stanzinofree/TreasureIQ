@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "035006",
+ "services": {
+  "carta_identita": {
+   "service_id": "035006:openpa:1236",
+   "title": "Rilascio Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.brescello.re.it/Servizi/Rilascio-Carta-d-Identita-Elettronica-CIE",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.brescello.re.it/Servizi/Rilascio-Carta-d-Identita-Elettronica-CIE",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.brescello.re.it/Servizi/Rilascio-Carta-d-Identita-Elettronica-CIE",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "cambio_residenza": {
+   "service_id": "035006:openpa:1205",
+   "title": "Richiesta di Cambio Residenza Anagrafica/indirizzo",
+   "source_url": "https://www.comune.brescello.re.it/Servizi/Richiesta-di-Cambio-Residenza-Anagrafica-indirizzo",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.brescello.re.it/Servizi/Richiesta-di-Cambio-Residenza-Anagrafica-indirizzo",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.brescello.re.it/Servizi/Richiesta-di-Cambio-Residenza-Anagrafica-indirizzo",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "accesso_atti": {
+   "service_id": "035006:openpa:1445",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.brescello.re.it/Servizi/Richiedere-l-accesso-agli-atti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.brescello.re.it/Servizi/Richiedere-l-accesso-agli-atti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.brescello.re.it/Servizi/Richiedere-l-accesso-agli-atti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_tari": {
+   "service_id": "035006:openpa:1465",
+   "title": "Tassa sui Rifiuti - TARI ",
+   "source_url": "https://www.comune.brescello.re.it/Servizi/Tassa-sui-Rifiuti-TARI",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.brescello.re.it/Servizi/Tassa-sui-Rifiuti-TARI",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.brescello.re.it/Servizi/Tassa-sui-Rifiuti-TARI",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

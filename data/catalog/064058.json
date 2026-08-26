@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "064058",
+ "services": {
+  "tributi_imu": {
+   "service_id": "064058:openpa:629",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.montemarano.av.it/Servizi/Pagare-tributi-IMU",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montemarano.av.it/Servizi/Pagare-tributi-IMU",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montemarano.av.it/Servizi/Pagare-tributi-IMU",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

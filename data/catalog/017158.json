@@ -1,0 +1,143 @@
+{
+ "municipality_istat": "017158",
+ "services": {
+  "carta_identita": {
+   "service_id": "017158:openpa:402",
+   "title": "Carta d’Identità Elettronica ",
+   "source_url": "https://www.comune.puegnagodelgarda.bs.it/Servizi/Carta-d-Identita-Elettronica",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.puegnagodelgarda.bs.it/Servizi/Carta-d-Identita-Elettronica",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.puegnagodelgarda.bs.it/Servizi/Carta-d-Identita-Elettronica",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "cambio_residenza": {
+   "service_id": "017158:openpa:400",
+   "title": "Cambio di residenza in via telematica ",
+   "source_url": "https://www.comune.puegnagodelgarda.bs.it/Servizi/Cambio-di-residenza-in-via-telematica",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.puegnagodelgarda.bs.it/Servizi/Cambio-di-residenza-in-via-telematica",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.puegnagodelgarda.bs.it/Servizi/Cambio-di-residenza-in-via-telematica",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "accesso_atti": {
+   "service_id": "017158:openpa:431",
+   "title": " Richiesta accesso agli atti",
+   "source_url": "https://www.comune.puegnagodelgarda.bs.it/Documenti-e-dati/Modulistica/Richiesta-accesso-agli-atti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.puegnagodelgarda.bs.it/Documenti-e-dati/Modulistica/Richiesta-accesso-agli-atti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.puegnagodelgarda.bs.it/Documenti-e-dati/Modulistica/Richiesta-accesso-agli-atti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "stato_civile": {
+   "service_id": "017158:openpa:415",
+   "title": "Rilascio certificazioni di stato civile",
+   "source_url": "https://www.comune.puegnagodelgarda.bs.it/Servizi/Rilascio-certificazioni-di-stato-civile",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.puegnagodelgarda.bs.it/Servizi/Rilascio-certificazioni-di-stato-civile",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.puegnagodelgarda.bs.it/Servizi/Rilascio-certificazioni-di-stato-civile",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "017158:openpa:505",
+   "title": "Imu",
+   "source_url": "https://www.comune.puegnagodelgarda.bs.it/Servizi/Imu",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.puegnagodelgarda.bs.it/Servizi/Imu",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.puegnagodelgarda.bs.it/Servizi/Imu",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_tari": {
+   "service_id": "017158:openpa:421",
+   "title": "Tassa rifiuti (attivazione, variazione, cessazione)",
+   "source_url": "https://www.comune.puegnagodelgarda.bs.it/Servizi/Tassa-rifiuti-attivazione-variazione-cessazione",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.puegnagodelgarda.bs.it/Servizi/Tassa-rifiuti-attivazione-variazione-cessazione",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.puegnagodelgarda.bs.it/Servizi/Tassa-rifiuti-attivazione-variazione-cessazione",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

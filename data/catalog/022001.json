@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "022001",
+ "services": {
+  "carta_identita": {
+   "service_id": "022001:openpa:1101",
+   "title": "Assenso genitore per rilascio CIE valida per l'espatrio",
+   "source_url": "https://www.comune.ala.tn.it/Amministrazione/Documenti-e-dati/Modulistica/Assenso-genitore-per-rilascio-CIE-valida-per-l-espatrio",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ala.tn.it/Amministrazione/Documenti-e-dati/Modulistica/Assenso-genitore-per-rilascio-CIE-valida-per-l-espatrio",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ala.tn.it/Amministrazione/Documenti-e-dati/Modulistica/Assenso-genitore-per-rilascio-CIE-valida-per-l-espatrio",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "cambio_residenza": {
+   "service_id": "022001:openpa:417",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.ala.tn.it/Servizi/Cambio-di-residenza",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ala.tn.it/Servizi/Cambio-di-residenza",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ala.tn.it/Servizi/Cambio-di-residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

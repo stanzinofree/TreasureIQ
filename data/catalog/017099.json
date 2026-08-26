@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "017099",
+ "services": {
+  "accesso_atti": {
+   "service_id": "017099:openpa:355",
+   "title": "Richiesta accesso agli atti amministrativi ",
+   "source_url": "https://www.comune.mairano.bs.it/Documenti-e-dati/Modulistica/Richiesta-accesso-agli-atti-amministrativi",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.mairano.bs.it/Documenti-e-dati/Modulistica/Richiesta-accesso-agli-atti-amministrativi",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.mairano.bs.it/Documenti-e-dati/Modulistica/Richiesta-accesso-agli-atti-amministrativi",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "017099:openpa:1273",
+   "title": "IMU",
+   "source_url": "https://www.comune.mairano.bs.it/Servizi/IMU",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.mairano.bs.it/Servizi/IMU",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.mairano.bs.it/Servizi/IMU",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_tari": {
+   "service_id": "017099:openpa:1223",
+   "title": "Gestione rifiuti e TARI",
+   "source_url": "https://www.comune.mairano.bs.it/Servizi/Gestione-rifiuti-e-TARI",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.mairano.bs.it/Servizi/Gestione-rifiuti-e-TARI",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.mairano.bs.it/Servizi/Gestione-rifiuti-e-TARI",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

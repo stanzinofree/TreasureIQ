@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "072038",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "072038:openpa:1581",
+   "title": "MODELLO RICHIESTA CAMBIO DI RESIDENZA",
+   "source_url": "https://www.comune.ruvodipuglia.ba.it/Amministrazione/Documenti-e-dati/Modulistica/MODELLO-RICHIESTA-CAMBIO-DI-RESIDENZA",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ruvodipuglia.ba.it/Amministrazione/Documenti-e-dati/Modulistica/MODELLO-RICHIESTA-CAMBIO-DI-RESIDENZA",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ruvodipuglia.ba.it/Amministrazione/Documenti-e-dati/Modulistica/MODELLO-RICHIESTA-CAMBIO-DI-RESIDENZA",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "accesso_atti": {
+   "service_id": "072038:openpa:420",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.ruvodipuglia.ba.it/Servizi/Richiedere-l-accesso-agli-atti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ruvodipuglia.ba.it/Servizi/Richiedere-l-accesso-agli-atti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ruvodipuglia.ba.it/Servizi/Richiedere-l-accesso-agli-atti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

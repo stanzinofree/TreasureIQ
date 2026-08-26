@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "089020",
+ "services": {
+  "carta_identita": {
+   "service_id": "089020:openpa:383",
+   "title": "CIE - Carta Identità Elettronica",
+   "source_url": "https://www.comune.portopalo.sr.it/Servizi/CIE-Carta-Identita-Elettronica",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.portopalo.sr.it/Servizi/CIE-Carta-Identita-Elettronica",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.portopalo.sr.it/Servizi/CIE-Carta-Identita-Elettronica",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "cambio_residenza": {
+   "service_id": "089020:openpa:402",
+   "title": "Cambio di Residenza",
+   "source_url": "https://www.comune.portopalo.sr.it/Servizi/Cambio-di-Residenza",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.portopalo.sr.it/Servizi/Cambio-di-Residenza",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.portopalo.sr.it/Servizi/Cambio-di-Residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "accesso_atti": {
+   "service_id": "089020:openpa:259",
+   "title": "Richiesta di accesso agli atti ",
+   "source_url": "https://www.comune.portopalo.sr.it/Servizi/Richiesta-di-accesso-agli-atti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.portopalo.sr.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.portopalo.sr.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

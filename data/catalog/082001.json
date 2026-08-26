@@ -1,0 +1,120 @@
+{
+ "municipality_istat": "082001",
+ "services": {
+  "carta_identita": {
+   "service_id": "082001:openpa:1013",
+   "title": "Carta d'Identità",
+   "source_url": "https://www.comune.alia.pa.it/Classificazioni/Cosa-puoi-richiedere/Carta-d-Identita",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.alia.pa.it/Classificazioni/Cosa-puoi-richiedere/Carta-d-Identita",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.alia.pa.it/Classificazioni/Cosa-puoi-richiedere/Carta-d-Identita",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "cambio_residenza": {
+   "service_id": "082001:openpa:1886",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.alia.pa.it/Servizi/Cambio-di-residenza",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.alia.pa.it/Servizi/Cambio-di-residenza",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.alia.pa.it/Servizi/Cambio-di-residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "accesso_atti": {
+   "service_id": "082001:openpa:398",
+   "title": "Richiesta di accesso agli atti",
+   "source_url": "https://www.comune.alia.pa.it/Servizi/Richiesta-di-accesso-agli-atti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.alia.pa.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.alia.pa.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "stato_civile": {
+   "service_id": "082001:openpa:1016",
+   "title": "Anagrafe - Stato Civile - Elettorale - Statistica - Aire",
+   "source_url": "https://www.comune.alia.pa.it/Servizi/Anagrafe-Stato-Civile-Elettorale-Statistica-Aire",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.alia.pa.it/Servizi/Anagrafe-Stato-Civile-Elettorale-Statistica-Aire",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.alia.pa.it/Servizi/Anagrafe-Stato-Civile-Elettorale-Statistica-Aire",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_tari": {
+   "service_id": "082001:openpa:1086",
+   "title": "Avvisi di accertamento Tari ",
+   "source_url": "https://www.comune.alia.pa.it/Servizi/Avvisi-di-accertamento-Tari",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.alia.pa.it/Servizi/Avvisi-di-accertamento-Tari",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.alia.pa.it/Servizi/Avvisi-di-accertamento-Tari",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

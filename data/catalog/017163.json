@@ -1,0 +1,120 @@
+{
+ "municipality_istat": "017163",
+ "services": {
+  "carta_identita": {
+   "service_id": "017163:openpa:540",
+   "title": "CIE",
+   "source_url": "https://www.comune.rodengo-saiano.bs.it/Servizi/CIE",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rodengo-saiano.bs.it/Servizi/CIE",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rodengo-saiano.bs.it/Servizi/CIE",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "cambio_residenza": {
+   "service_id": "017163:openpa:539",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.rodengo-saiano.bs.it/Servizi/Cambio-di-residenza",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rodengo-saiano.bs.it/Servizi/Cambio-di-residenza",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rodengo-saiano.bs.it/Servizi/Cambio-di-residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "accesso_atti": {
+   "service_id": "017163:openpa:402",
+   "title": "Richiesta di accesso agli atti (escluso Pratiche Edilizie)",
+   "source_url": "https://www.comune.rodengo-saiano.bs.it/Servizi/Richiesta-di-accesso-agli-atti-escluso-Pratiche-Edilizie",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rodengo-saiano.bs.it/Servizi/Richiesta-di-accesso-agli-atti-escluso-Pratiche-Edilizie",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rodengo-saiano.bs.it/Servizi/Richiesta-di-accesso-agli-atti-escluso-Pratiche-Edilizie",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "stato_civile": {
+   "service_id": "017163:openpa:737",
+   "title": "Elenco procedimenti Serv.Anagrafe-Stato Civile-Toponomastica",
+   "source_url": "https://www.comune.rodengo-saiano.bs.it/Amministrazione/Documenti-e-dati/Documenti-funzionamento-interno/Elenco-procedimenti-Serv.Anagrafe-Stato-Civile-Toponomastica",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rodengo-saiano.bs.it/Amministrazione/Documenti-e-dati/Documenti-funzionamento-interno/Elenco-procedimenti-Serv.Anagrafe-Stato-Civile-Toponomastica",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rodengo-saiano.bs.it/Amministrazione/Documenti-e-dati/Documenti-funzionamento-interno/Elenco-procedimenti-Serv.Anagrafe-Stato-Civile-Toponomastica",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_tari": {
+   "service_id": "017163:openpa:432",
+   "title": "Tassa rifiuti",
+   "source_url": "https://www.comune.rodengo-saiano.bs.it/Servizi/Tassa-rifiuti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rodengo-saiano.bs.it/Servizi/Tassa-rifiuti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rodengo-saiano.bs.it/Servizi/Tassa-rifiuti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "097013",
+ "services": {
+  "carta_identita": {
+   "service_id": "097013:openpa:869",
+   "title": "Carta d'identità",
+   "source_url": "https://www.comune.calolziocorte.lc.it/Servizi/Carta-d-identita",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.calolziocorte.lc.it/Servizi/Carta-d-identita",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.calolziocorte.lc.it/Servizi/Carta-d-identita",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "cambio_residenza": {
+   "service_id": "097013:openpa:864",
+   "title": "Trasferimento di residenza (da altro Comune o dall’estero)",
+   "source_url": "https://www.comune.calolziocorte.lc.it/Servizi/Trasferimento-di-residenza-da-altro-Comune-o-dall-estero",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.calolziocorte.lc.it/Servizi/Trasferimento-di-residenza-da-altro-Comune-o-dall-estero",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.calolziocorte.lc.it/Servizi/Trasferimento-di-residenza-da-altro-Comune-o-dall-estero",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "accesso_atti": {
+   "service_id": "097013:openpa:803",
+   "title": "Accesso atti amministrativi",
+   "source_url": "https://www.comune.calolziocorte.lc.it/Classificazioni/Cosa-puoi-richiedere/Accesso-atti-amministrativi",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.calolziocorte.lc.it/Classificazioni/Cosa-puoi-richiedere/Accesso-atti-amministrativi",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.calolziocorte.lc.it/Classificazioni/Cosa-puoi-richiedere/Accesso-atti-amministrativi",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "stato_civile": {
+   "service_id": "097013:openpa:2677",
+   "title": "Certificati ed estratti dello stato civile (es. nascita, morte, matrimonio …)",
+   "source_url": "https://www.comune.calolziocorte.lc.it/Servizi/Certificati-ed-estratti-dello-stato-civile-es.-nascita-morte-matrimonio",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.calolziocorte.lc.it/Servizi/Certificati-ed-estratti-dello-stato-civile-es.-nascita-morte-matrimonio",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.calolziocorte.lc.it/Servizi/Certificati-ed-estratti-dello-stato-civile-es.-nascita-morte-matrimonio",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

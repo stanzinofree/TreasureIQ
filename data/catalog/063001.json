@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "063001",
+ "services": {
+  "carta_identita": {
+   "service_id": "063001:openpa:690",
+   "title": "Carta d’identità",
+   "source_url": "https://www.comune.acerra.na.it/Servizi/Carta-d-identita",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.acerra.na.it/Servizi/Carta-d-identita",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.acerra.na.it/Servizi/Carta-d-identita",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "cambio_residenza": {
+   "service_id": "063001:openpa:1172",
+   "title": "Cambio di residenza alla nuova abitazione",
+   "source_url": "https://www.comune.acerra.na.it/Classificazioni/Cosa-puoi-richiedere/Cambio-di-residenza-alla-nuova-abitazione",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.acerra.na.it/Classificazioni/Cosa-puoi-richiedere/Cambio-di-residenza-alla-nuova-abitazione",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.acerra.na.it/Classificazioni/Cosa-puoi-richiedere/Cambio-di-residenza-alla-nuova-abitazione",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "accesso_atti": {
+   "service_id": "063001:openpa:20743",
+   "title": "Accesso agli atti di pratiche edilizie",
+   "source_url": "https://www.comune.acerra.na.it/Servizi/Accesso-agli-atti-di-pratiche-edilizie",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.acerra.na.it/Servizi/Accesso-agli-atti-di-pratiche-edilizie",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.acerra.na.it/Servizi/Accesso-agli-atti-di-pratiche-edilizie",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_tari": {
+   "service_id": "063001:openpa:25841",
+   "title": "Istanza in autotutela TARI ",
+   "source_url": "https://www.comune.acerra.na.it/Amministrazione/Documenti-e-dati/Modulistica/Istanza-in-autotutela-TARI",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.acerra.na.it/Amministrazione/Documenti-e-dati/Modulistica/Istanza-in-autotutela-TARI",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.acerra.na.it/Amministrazione/Documenti-e-dati/Modulistica/Istanza-in-autotutela-TARI",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "050026",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "050026:openpa:13808",
+   "title": "Cambio di residenza (portale ANPR)",
+   "source_url": "https://www.comune.pisa.it/Servizi/Cambio-di-residenza-portale-ANPR",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pisa.it/Servizi/Cambio-di-residenza-portale-ANPR",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pisa.it/Servizi/Cambio-di-residenza-portale-ANPR",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "stato_civile": {
+   "service_id": "050026:openpa:13803",
+   "title": "Certificato di stato civile con timbro digitale",
+   "source_url": "https://www.comune.pisa.it/Classificazioni/Cosa-puoi-richiedere/Certificato-di-stato-civile-con-timbro-digitale",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pisa.it/Classificazioni/Cosa-puoi-richiedere/Certificato-di-stato-civile-con-timbro-digitale",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pisa.it/Classificazioni/Cosa-puoi-richiedere/Certificato-di-stato-civile-con-timbro-digitale",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_tari": {
+   "service_id": "050026:openpa:18322",
+   "title": "BONUS TARI (famiglie e giovani) 2025",
+   "source_url": "https://www.comune.pisa.it/Servizi/BONUS-TARI-famiglie-e-giovani-2025",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pisa.it/Servizi/BONUS-TARI-famiglie-e-giovani-2025",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pisa.it/Servizi/BONUS-TARI-famiglie-e-giovani-2025",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

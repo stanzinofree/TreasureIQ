@@ -1,0 +1,120 @@
+{
+ "municipality_istat": "092050",
+ "services": {
+  "carta_identita": {
+   "service_id": "092050:openpa:3361",
+   "title": "Carta di identità elettronica (CIE) - Rilascio e rinnovo ",
+   "source_url": "https://www.comune.pula.ca.it/Servizi/Carta-di-identita-elettronica-CIE-Rilascio-e-rinnovo",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pula.ca.it/Servizi/Carta-di-identita-elettronica-CIE-Rilascio-e-rinnovo",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pula.ca.it/Servizi/Carta-di-identita-elettronica-CIE-Rilascio-e-rinnovo",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "cambio_residenza": {
+   "service_id": "092050:openpa:1996",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.pula.ca.it/Servizi/Cambio-di-residenza",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pula.ca.it/Servizi/Cambio-di-residenza",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pula.ca.it/Servizi/Cambio-di-residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "stato_civile": {
+   "service_id": "092050:openpa:1988",
+   "title": "Certificato di nascita per cittadini europei",
+   "source_url": "https://www.comune.pula.ca.it/Servizi/Certificato-di-nascita-per-cittadini-europei",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pula.ca.it/Servizi/Certificato-di-nascita-per-cittadini-europei",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pula.ca.it/Servizi/Certificato-di-nascita-per-cittadini-europei",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "092050:openpa:2759",
+   "title": "Informazioni sull’Imposta Municipale Propria (IMU)",
+   "source_url": "https://www.comune.pula.ca.it/Servizi/Informazioni-sull-Imposta-Municipale-Propria-IMU",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pula.ca.it/Servizi/Informazioni-sull-Imposta-Municipale-Propria-IMU",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pula.ca.it/Servizi/Informazioni-sull-Imposta-Municipale-Propria-IMU",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_tari": {
+   "service_id": "092050:openpa:3993",
+   "title": "TARI (Tassa sui rifiuti)",
+   "source_url": "https://www.comune.pula.ca.it/Servizi/TARI-Tassa-sui-rifiuti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pula.ca.it/Servizi/TARI-Tassa-sui-rifiuti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pula.ca.it/Servizi/TARI-Tassa-sui-rifiuti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

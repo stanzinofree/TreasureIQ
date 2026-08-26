@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "039017",
+ "services": {
+  "carta_identita": {
+   "service_id": "039017:openpa:2164",
+   "title": "Richiedere la Carta d’identità elettronica (CIE)",
+   "source_url": "https://www.comune.santagatasulsanterno.ra.it/Servizi/Richiedere-la-Carta-d-identita-elettronica-CIE",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.santagatasulsanterno.ra.it/Servizi/Richiedere-la-Carta-d-identita-elettronica-CIE",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.santagatasulsanterno.ra.it/Servizi/Richiedere-la-Carta-d-identita-elettronica-CIE",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "cambio_residenza": {
+   "service_id": "039017:openpa:2088",
+   "title": "Cambio residenza",
+   "source_url": "https://www.comune.santagatasulsanterno.ra.it/Classificazioni/Cosa-puoi-richiedere/Cambio-residenza",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.santagatasulsanterno.ra.it/Classificazioni/Cosa-puoi-richiedere/Cambio-residenza",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.santagatasulsanterno.ra.it/Classificazioni/Cosa-puoi-richiedere/Cambio-residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "stato_civile": {
+   "service_id": "039017:openpa:2171",
+   "title": "Richiedere un certificato o un estratto di stato civile",
+   "source_url": "https://www.comune.santagatasulsanterno.ra.it/Servizi/Richiedere-un-certificato-o-un-estratto-di-stato-civile",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.santagatasulsanterno.ra.it/Servizi/Richiedere-un-certificato-o-un-estratto-di-stato-civile",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.santagatasulsanterno.ra.it/Servizi/Richiedere-un-certificato-o-un-estratto-di-stato-civile",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "039017:openpa:3256",
+   "title": "Pagare l'IMU 2025 - Imposta municipale propria",
+   "source_url": "https://www.comune.santagatasulsanterno.ra.it/Servizi/Pagare-l-IMU-2025-Imposta-municipale-propria",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.santagatasulsanterno.ra.it/Servizi/Pagare-l-IMU-2025-Imposta-municipale-propria",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.santagatasulsanterno.ra.it/Servizi/Pagare-l-IMU-2025-Imposta-municipale-propria",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

@@ -1,0 +1,120 @@
+{
+ "municipality_istat": "016003",
+ "services": {
+  "carta_identita": {
+   "service_id": "016003:openpa:687",
+   "title": "Carta d'Identità Elettronica",
+   "source_url": "https://www.comune.albano.bg.it/Servizi/Carta-d-Identita-Elettronica",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.albano.bg.it/Servizi/Carta-d-Identita-Elettronica",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.albano.bg.it/Servizi/Carta-d-Identita-Elettronica",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "cambio_residenza": {
+   "service_id": "016003:openpa:245",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.albano.bg.it/Servizi/Cambio-di-residenza",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.albano.bg.it/Servizi/Cambio-di-residenza",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.albano.bg.it/Servizi/Cambio-di-residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "stato_civile": {
+   "service_id": "016003:openpa:712",
+   "title": "Richiesta di trascrizione atto di stato civile formato all'estero riguardante cittadini stranieri",
+   "source_url": "https://www.comune.albano.bg.it/Servizi/Richiesta-di-trascrizione-atto-di-stato-civile-formato-all-estero-riguardante-cittadini-stranieri",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.albano.bg.it/Servizi/Richiesta-di-trascrizione-atto-di-stato-civile-formato-all-estero-riguardante-cittadini-stranieri",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.albano.bg.it/Servizi/Richiesta-di-trascrizione-atto-di-stato-civile-formato-all-estero-riguardante-cittadini-stranieri",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "016003:openpa:702",
+   "title": "Istanza di rimborso IMU",
+   "source_url": "https://www.comune.albano.bg.it/Servizi/Istanza-di-rimborso-IMU",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.albano.bg.it/Servizi/Istanza-di-rimborso-IMU",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.albano.bg.it/Servizi/Istanza-di-rimborso-IMU",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_tari": {
+   "service_id": "016003:openpa:1129",
+   "title": "TARI - TRASPARENZA ARERA - Informativa per l'utente del Servizio Integrato Gestione dei Rifiuti Urbani ",
+   "source_url": "https://www.comune.albano.bg.it/Amministrazione/Documenti-e-dati/Modulistica/TARI-TRASPARENZA-ARERA-Informativa-per-l-utente-del-Servizio-Integrato-Gestione-dei-Rifiuti-Urbani",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.albano.bg.it/Amministrazione/Documenti-e-dati/Modulistica/TARI-TRASPARENZA-ARERA-Informativa-per-l-utente-del-Servizio-Integrato-Gestione-dei-Rifiuti-Urbani",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.albano.bg.it/Amministrazione/Documenti-e-dati/Modulistica/TARI-TRASPARENZA-ARERA-Informativa-per-l-utente-del-Servizio-Integrato-Gestione-dei-Rifiuti-Urbani",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "097003",
+ "services": {
+  "carta_identita": {
+   "service_id": "097003:openpa:297",
+   "title": "Carta di Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.annone-di-brianza.lc.it/Servizi/Carta-di-Identita-Elettronica-CIE",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.annone-di-brianza.lc.it/Servizi/Carta-di-Identita-Elettronica-CIE",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.annone-di-brianza.lc.it/Servizi/Carta-di-Identita-Elettronica-CIE",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "097003:openpa:411",
+   "title": "Imposta Municipale Unica - IMU",
+   "source_url": "https://www.comune.annone-di-brianza.lc.it/Servizi/Imposta-Municipale-Unica-IMU",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.annone-di-brianza.lc.it/Servizi/Imposta-Municipale-Unica-IMU",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.annone-di-brianza.lc.it/Servizi/Imposta-Municipale-Unica-IMU",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "063046",
+ "services": {
+  "carta_identita": {
+   "service_id": "063046:openpa:499",
+   "title": "Richiedere la carta di identità elettronica",
+   "source_url": "https://www.comune.meta.na.it/Servizi/Richiedere-la-carta-di-identita-elettronica",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.meta.na.it/Servizi/Richiedere-la-carta-di-identita-elettronica",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.meta.na.it/Servizi/Richiedere-la-carta-di-identita-elettronica",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "accesso_atti": {
+   "service_id": "063046:openpa:578",
+   "title": "Modello richiesta Accesso Atti",
+   "source_url": "https://www.comune.meta.na.it/Amministrazione/Documenti-e-dati/Modulistica/Modello-richiesta-Accesso-Atti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.meta.na.it/Amministrazione/Documenti-e-dati/Modulistica/Modello-richiesta-Accesso-Atti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.meta.na.it/Amministrazione/Documenti-e-dati/Modulistica/Modello-richiesta-Accesso-Atti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "stato_civile": {
+   "service_id": "063046:openpa:502",
+   "title": "Certificati Stato Civile",
+   "source_url": "https://www.comune.meta.na.it/Servizi/Certificati-Stato-Civile",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.meta.na.it/Servizi/Certificati-Stato-Civile",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.meta.na.it/Servizi/Certificati-Stato-Civile",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

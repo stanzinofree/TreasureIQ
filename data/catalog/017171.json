@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "017171",
+ "services": {
+  "accesso_atti": {
+   "service_id": "017171:openpa:255",
+   "title": "Richiesta di accesso agli atti",
+   "source_url": "https://www.comune.sanfelicedelbenaco.bs.it/Servizi/Richiesta-di-accesso-agli-atti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanfelicedelbenaco.bs.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanfelicedelbenaco.bs.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "017171:openpa:629",
+   "title": "Calcolatore IMU",
+   "source_url": "https://www.comune.sanfelicedelbenaco.bs.it/Servizi/Calcolatore-IMU",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanfelicedelbenaco.bs.it/Servizi/Calcolatore-IMU",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanfelicedelbenaco.bs.it/Servizi/Calcolatore-IMU",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_tari": {
+   "service_id": "017171:openpa:464",
+   "title": "SERVIZIO RIFIUTI/TARI",
+   "source_url": "https://www.comune.sanfelicedelbenaco.bs.it/Amministrazione/Documenti-e-dati/Documenti-albo-pretorio/SERVIZIO-RIFIUTI-TARI",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanfelicedelbenaco.bs.it/Amministrazione/Documenti-e-dati/Documenti-albo-pretorio/SERVIZIO-RIFIUTI-TARI",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanfelicedelbenaco.bs.it/Amministrazione/Documenti-e-dati/Documenti-albo-pretorio/SERVIZIO-RIFIUTI-TARI",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "048014",
+ "services": {
+  "stato_civile": {
+   "service_id": "048014:openpa:6966",
+   "title": "Trascrizione atti di stato civile formati all'estero riguardanti cittadini italiani",
+   "source_url": "https://www.comune.empoli.fi.it/Servizi/Trascrizione-atti-di-stato-civile-formati-all-estero-riguardanti-cittadini-italiani",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.empoli.fi.it/Servizi/Trascrizione-atti-di-stato-civile-formati-all-estero-riguardanti-cittadini-italiani",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.empoli.fi.it/Servizi/Trascrizione-atti-di-stato-civile-formati-all-estero-riguardanti-cittadini-italiani",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "017030",
+ "services": {
+  "accesso_atti": {
+   "service_id": "017030:openpa:248",
+   "title": "Richiesta di accesso agli atti",
+   "source_url": "https://www.comune.brione.bs.it/Servizi/Richiesta-di-accesso-agli-atti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.brione.bs.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.brione.bs.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_tari": {
+   "service_id": "017030:openpa:1067",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.brione.bs.it/Servizi/Tassa-Rifiuti-TARI",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.brione.bs.it/Servizi/Tassa-Rifiuti-TARI",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.brione.bs.it/Servizi/Tassa-Rifiuti-TARI",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "068041",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "068041:openpa:243",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.spoltore.pe.it/Servizi/Cambio-di-residenza",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.spoltore.pe.it/Servizi/Cambio-di-residenza",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.spoltore.pe.it/Servizi/Cambio-di-residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "accesso_atti": {
+   "service_id": "068041:openpa:1037",
+   "title": "Accesso agli atti - Edilizia Privata",
+   "source_url": "https://www.comune.spoltore.pe.it/Servizi/Accesso-agli-atti-Edilizia-Privata",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.spoltore.pe.it/Servizi/Accesso-agli-atti-Edilizia-Privata",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.spoltore.pe.it/Servizi/Accesso-agli-atti-Edilizia-Privata",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "068041:openpa:803",
+   "title": "Imposta municipale propria (IMU)",
+   "source_url": "https://www.comune.spoltore.pe.it/Servizi/Imposta-municipale-propria-IMU",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.spoltore.pe.it/Servizi/Imposta-municipale-propria-IMU",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.spoltore.pe.it/Servizi/Imposta-municipale-propria-IMU",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_tari": {
+   "service_id": "068041:openpa:812",
+   "title": "Tassa sui rifiuti (TARI)",
+   "source_url": "https://www.comune.spoltore.pe.it/Servizi/Tassa-sui-rifiuti-TARI",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.spoltore.pe.it/Servizi/Tassa-sui-rifiuti-TARI",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.spoltore.pe.it/Servizi/Tassa-sui-rifiuti-TARI",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "086007",
+ "services": {
+  "carta_identita": {
+   "service_id": "086007:openpa:566",
+   "title": "Carta Di Identità Elettronica",
+   "source_url": "https://www.comune.centuripe.en.it/Servizi/Carta-Di-Identita-Elettronica",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.centuripe.en.it/Servizi/Carta-Di-Identita-Elettronica",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.centuripe.en.it/Servizi/Carta-Di-Identita-Elettronica",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "accesso_atti": {
+   "service_id": "086007:openpa:570",
+   "title": "Richiesta Accesso Agli Atti",
+   "source_url": "https://www.comune.centuripe.en.it/Servizi/Richiesta-Accesso-Agli-Atti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.centuripe.en.it/Servizi/Richiesta-Accesso-Agli-Atti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.centuripe.en.it/Servizi/Richiesta-Accesso-Agli-Atti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

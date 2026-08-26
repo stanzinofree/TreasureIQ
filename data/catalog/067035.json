@@ -1,0 +1,143 @@
+{
+ "municipality_istat": "067035",
+ "services": {
+  "carta_identita": {
+   "service_id": "067035:openpa:1867",
+   "title": "Richiedere la carta d'identità elettronica",
+   "source_url": "https://www.comune.pineto.te.it/Servizi/Richiedere-la-carta-d-identita-elettronica",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pineto.te.it/Servizi/Richiedere-la-carta-d-identita-elettronica",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pineto.te.it/Servizi/Richiedere-la-carta-d-identita-elettronica",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "cambio_residenza": {
+   "service_id": "067035:openpa:1828",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.pineto.te.it/Servizi/Cambio-di-residenza",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pineto.te.it/Servizi/Cambio-di-residenza",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pineto.te.it/Servizi/Cambio-di-residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "accesso_atti": {
+   "service_id": "067035:openpa:272",
+   "title": "Richiesta di accesso agli atti",
+   "source_url": "https://www.comune.pineto.te.it/Servizi/Richiesta-di-accesso-agli-atti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pineto.te.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pineto.te.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "stato_civile": {
+   "service_id": "067035:openpa:1871",
+   "title": "Certificazioni Anagrafiche e di Stato Civile",
+   "source_url": "https://www.comune.pineto.te.it/Servizi/Certificazioni-Anagrafiche-e-di-Stato-Civile",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pineto.te.it/Servizi/Certificazioni-Anagrafiche-e-di-Stato-Civile",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pineto.te.it/Servizi/Certificazioni-Anagrafiche-e-di-Stato-Civile",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "067035:openpa:1931",
+   "title": "IMU (Imposta Municipale Propria)",
+   "source_url": "https://www.comune.pineto.te.it/Servizi/IMU-Imposta-Municipale-Propria",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pineto.te.it/Servizi/IMU-Imposta-Municipale-Propria",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pineto.te.it/Servizi/IMU-Imposta-Municipale-Propria",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_tari": {
+   "service_id": "067035:openpa:1940",
+   "title": "Tari - Tributo sui rifiuti",
+   "source_url": "https://www.comune.pineto.te.it/Servizi/Tari-Tributo-sui-rifiuti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pineto.te.it/Servizi/Tari-Tributo-sui-rifiuti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pineto.te.it/Servizi/Tari-Tributo-sui-rifiuti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

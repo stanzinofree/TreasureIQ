@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "097090",
+ "services": {
+  "carta_identita": {
+   "service_id": "097090:openpa:601",
+   "title": "CIE - carta d'identità elettronica",
+   "source_url": "https://www.comune.vigano.lc.it/Servizi/CIE-carta-d-identita-elettronica",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vigano.lc.it/Servizi/CIE-carta-d-identita-elettronica",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vigano.lc.it/Servizi/CIE-carta-d-identita-elettronica",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "accesso_atti": {
+   "service_id": "097090:openpa:769",
+   "title": "Richiesta di accesso agli atti",
+   "source_url": "https://www.comune.vigano.lc.it/Servizi/Richiesta-di-accesso-agli-atti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vigano.lc.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vigano.lc.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "097090:openpa:1037",
+   "title": "IMU 2025 - Calcolo on line",
+   "source_url": "https://www.comune.vigano.lc.it/Servizi/IMU-2025-Calcolo-on-line",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vigano.lc.it/Servizi/IMU-2025-Calcolo-on-line",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vigano.lc.it/Servizi/IMU-2025-Calcolo-on-line",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

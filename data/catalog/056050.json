@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "056050",
+ "services": {
+  "carta_identita": {
+   "service_id": "056050:openpa:804",
+   "title": "Prenotazione rilascio Carta d'Identità Elettronica (C.I.E.)",
+   "source_url": "https://www.comune.tarquinia.vt.it/Servizi/Prenotazione-rilascio-Carta-d-Identita-Elettronica-C.I.E",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.tarquinia.vt.it/Servizi/Prenotazione-rilascio-Carta-d-Identita-Elettronica-C.I.E",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.tarquinia.vt.it/Servizi/Prenotazione-rilascio-Carta-d-Identita-Elettronica-C.I.E",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "cambio_residenza": {
+   "service_id": "056050:openpa:1532",
+   "title": "Cambio di Residenza",
+   "source_url": "https://www.comune.tarquinia.vt.it/Servizi/Cambio-di-Residenza",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.tarquinia.vt.it/Servizi/Cambio-di-Residenza",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.tarquinia.vt.it/Servizi/Cambio-di-Residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "stato_civile": {
+   "service_id": "056050:openpa:2385",
+   "title": "Reperibilità Stato Civile per decessi",
+   "source_url": "https://www.comune.tarquinia.vt.it/Servizi/Reperibilita-Stato-Civile-per-decessi",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.tarquinia.vt.it/Servizi/Reperibilita-Stato-Civile-per-decessi",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.tarquinia.vt.it/Servizi/Reperibilita-Stato-Civile-per-decessi",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "097038",
+ "services": {
+  "accesso_atti": {
+   "service_id": "097038:openpa:252",
+   "title": "Richiesta di accesso agli atti",
+   "source_url": "https://www.comune.garlate.lc.it/Servizi/Richiesta-di-accesso-agli-atti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.garlate.lc.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.garlate.lc.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "097038:openpa:450",
+   "title": "Calcolo IMU",
+   "source_url": "https://www.comune.garlate.lc.it/Servizi/Calcolo-IMU",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.garlate.lc.it/Servizi/Calcolo-IMU",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.garlate.lc.it/Servizi/Calcolo-IMU",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_tari": {
+   "service_id": "097038:openpa:504",
+   "title": "Modulistica ufficio tributi ( TARES, TARI, TASI, TOSAP )",
+   "source_url": "https://www.comune.garlate.lc.it/Amministrazione/Documenti-e-dati/Modulistica/Modulistica-ufficio-tributi-TARES-TARI-TASI-TOSAP",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.garlate.lc.it/Amministrazione/Documenti-e-dati/Modulistica/Modulistica-ufficio-tributi-TARES-TARI-TASI-TOSAP",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.garlate.lc.it/Amministrazione/Documenti-e-dati/Modulistica/Modulistica-ufficio-tributi-TARES-TARI-TASI-TOSAP",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

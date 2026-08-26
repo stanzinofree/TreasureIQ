@@ -1,0 +1,120 @@
+{
+ "municipality_istat": "095042",
+ "services": {
+  "carta_identita": {
+   "service_id": "095042:openpa:717",
+   "title": "Appuntamento per rilascio Carta d’Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.pompu.or.it/Servizi/Appuntamento-per-rilascio-Carta-d-Identita-Elettronica-CIE",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pompu.or.it/Servizi/Appuntamento-per-rilascio-Carta-d-Identita-Elettronica-CIE",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pompu.or.it/Servizi/Appuntamento-per-rilascio-Carta-d-Identita-Elettronica-CIE",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "cambio_residenza": {
+   "service_id": "095042:openpa:845",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.pompu.or.it/Servizi/Cambio-di-residenza",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pompu.or.it/Servizi/Cambio-di-residenza",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pompu.or.it/Servizi/Cambio-di-residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "accesso_atti": {
+   "service_id": "095042:openpa:504",
+   "title": "Modulo richiesta accesso atti Ufficio Tecnico",
+   "source_url": "https://www.comune.pompu.or.it/Amministrazione/Documenti-e-dati/Modulistica/Modulo-richiesta-accesso-atti-Ufficio-Tecnico",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pompu.or.it/Amministrazione/Documenti-e-dati/Modulistica/Modulo-richiesta-accesso-atti-Ufficio-Tecnico",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pompu.or.it/Amministrazione/Documenti-e-dati/Modulistica/Modulo-richiesta-accesso-atti-Ufficio-Tecnico",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "stato_civile": {
+   "service_id": "095042:openpa:856",
+   "title": "Certificato di nascita per cittadini europei",
+   "source_url": "https://www.comune.pompu.or.it/Servizi/Certificato-di-nascita-per-cittadini-europei",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pompu.or.it/Servizi/Certificato-di-nascita-per-cittadini-europei",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pompu.or.it/Servizi/Certificato-di-nascita-per-cittadini-europei",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "095042:openpa:502",
+   "title": "Modulo di rimborso IMU",
+   "source_url": "https://www.comune.pompu.or.it/Amministrazione/Documenti-e-dati/Modulistica/Modulo-di-rimborso-IMU",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pompu.or.it/Amministrazione/Documenti-e-dati/Modulistica/Modulo-di-rimborso-IMU",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pompu.or.it/Amministrazione/Documenti-e-dati/Modulistica/Modulo-di-rimborso-IMU",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

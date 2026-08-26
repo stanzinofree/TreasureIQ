@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "019070",
+ "services": {
+  "accesso_atti": {
+   "service_id": "019070:openpa:255",
+   "title": "Richiesta di accesso agli atti",
+   "source_url": "https://www.comune.pessinacremonese.cr.it/Servizi/Richiesta-di-accesso-agli-atti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pessinacremonese.cr.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pessinacremonese.cr.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "019070:openpa:311",
+   "title": "IMU 2020",
+   "source_url": "https://www.comune.pessinacremonese.cr.it/Amministrazione/Documenti-e-dati/Modulistica/IMU-2020",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pessinacremonese.cr.it/Amministrazione/Documenti-e-dati/Modulistica/IMU-2020",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pessinacremonese.cr.it/Amministrazione/Documenti-e-dati/Modulistica/IMU-2020",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

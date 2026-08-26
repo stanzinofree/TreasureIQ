@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "022034",
+ "services": {
+  "carta_identita": {
+   "service_id": "022034:openpa:1048",
+   "title": "Appuntamento per rilascio Carta d’Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.caldonazzo.tn.it/Servizi/Appuntamento-per-rilascio-Carta-d-Identita-Elettronica-CIE",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.caldonazzo.tn.it/Servizi/Appuntamento-per-rilascio-Carta-d-Identita-Elettronica-CIE",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.caldonazzo.tn.it/Servizi/Appuntamento-per-rilascio-Carta-d-Identita-Elettronica-CIE",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "cambio_residenza": {
+   "service_id": "022034:openpa:1122",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.caldonazzo.tn.it/Servizi/Cambio-di-residenza",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.caldonazzo.tn.it/Servizi/Cambio-di-residenza",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.caldonazzo.tn.it/Servizi/Cambio-di-residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "accesso_atti": {
+   "service_id": "022034:openpa:789",
+   "title": "Richiesta di accesso agli atti",
+   "source_url": "https://www.comune.caldonazzo.tn.it/Servizi/Richiesta-di-accesso-agli-atti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.caldonazzo.tn.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.caldonazzo.tn.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "022034:openpa:621",
+   "title": "Domanda di rimborso ICI/IMU/IMIS",
+   "source_url": "https://www.comune.caldonazzo.tn.it/Amministrazione/Documenti-e-dati/Modulistica/Domanda-di-rimborso-ICI-IMU-IMIS",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.caldonazzo.tn.it/Amministrazione/Documenti-e-dati/Modulistica/Domanda-di-rimborso-ICI-IMU-IMIS",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.caldonazzo.tn.it/Amministrazione/Documenti-e-dati/Modulistica/Domanda-di-rimborso-ICI-IMU-IMIS",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

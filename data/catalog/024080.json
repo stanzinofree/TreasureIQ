@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "024080",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "024080:openpa:652",
+   "title": "Cambio di Residenza",
+   "source_url": "https://www.comune.posina.vi.it/Servizi/Cambio-di-Residenza",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.posina.vi.it/Servizi/Cambio-di-Residenza",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.posina.vi.it/Servizi/Cambio-di-Residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "accesso_atti": {
+   "service_id": "024080:openpa:665",
+   "title": " Accesso agli atti",
+   "source_url": "https://www.comune.posina.vi.it/Servizi/Accesso-agli-atti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.posina.vi.it/Servizi/Accesso-agli-atti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.posina.vi.it/Servizi/Accesso-agli-atti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "stato_civile": {
+   "service_id": "024080:openpa:643",
+   "title": "Certificati di Stato Civile",
+   "source_url": "https://www.comune.posina.vi.it/Servizi/Certificati-di-Stato-Civile",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.posina.vi.it/Servizi/Certificati-di-Stato-Civile",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.posina.vi.it/Servizi/Certificati-di-Stato-Civile",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_tari": {
+   "service_id": "024080:openpa:681",
+   "title": "Dichiarazione chiusura/variazione utenze TARI",
+   "source_url": "https://www.comune.posina.vi.it/Servizi/Dichiarazione-chiusura-variazione-utenze-TARI",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.posina.vi.it/Servizi/Dichiarazione-chiusura-variazione-utenze-TARI",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.posina.vi.it/Servizi/Dichiarazione-chiusura-variazione-utenze-TARI",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "013035",
+ "services": {
+  "carta_identita": {
+   "service_id": "013035:openpa:1023",
+   "title": "Richiesta di carta d'identità elettronica e dichiarazione di donazione organi",
+   "source_url": "https://www.comune.cabiate.co.it/Servizi/Richiesta-di-carta-d-identita-elettronica-e-dichiarazione-di-donazione-organi",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cabiate.co.it/Servizi/Richiesta-di-carta-d-identita-elettronica-e-dichiarazione-di-donazione-organi",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cabiate.co.it/Servizi/Richiesta-di-carta-d-identita-elettronica-e-dichiarazione-di-donazione-organi",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "accesso_atti": {
+   "service_id": "013035:openpa:1166",
+   "title": "Richiesta accesso agli atti - Pratiche edilizie",
+   "source_url": "https://www.comune.cabiate.co.it/Servizi/Richiesta-accesso-agli-atti-Pratiche-edilizie",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cabiate.co.it/Servizi/Richiesta-accesso-agli-atti-Pratiche-edilizie",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cabiate.co.it/Servizi/Richiesta-accesso-agli-atti-Pratiche-edilizie",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "013035:openpa:889",
+   "title": "Pagare IMU",
+   "source_url": "https://www.comune.cabiate.co.it/Servizi/Pagare-IMU",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cabiate.co.it/Servizi/Pagare-IMU",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cabiate.co.it/Servizi/Pagare-IMU",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

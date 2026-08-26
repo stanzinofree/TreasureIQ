@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "085013",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "085013:openpa:272",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.niscemi.cl.it/Servizi/Cambio-di-residenza",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.niscemi.cl.it/Servizi/Cambio-di-residenza",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.niscemi.cl.it/Servizi/Cambio-di-residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "accesso_atti": {
+   "service_id": "085013:openpa:251",
+   "title": "Richiesta di accesso agli atti",
+   "source_url": "https://www.comune.niscemi.cl.it/Servizi/Richiesta-di-accesso-agli-atti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.niscemi.cl.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.niscemi.cl.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "stato_civile": {
+   "service_id": "085013:openpa:1084",
+   "title": "Modulistica Anagrafe e Stato Civile",
+   "source_url": "https://www.comune.niscemi.cl.it/Classificazioni/Cosa-puoi-richiedere/Modulistica-Anagrafe-e-Stato-Civile",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.niscemi.cl.it/Classificazioni/Cosa-puoi-richiedere/Modulistica-Anagrafe-e-Stato-Civile",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.niscemi.cl.it/Classificazioni/Cosa-puoi-richiedere/Modulistica-Anagrafe-e-Stato-Civile",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

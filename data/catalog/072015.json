@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "072015",
+ "services": {
+  "accesso_atti": {
+   "service_id": "072015:openpa:2785",
+   "title": "Richiesta di accesso agli atti",
+   "source_url": "https://www.comune.casamassima.ba.it/Servizi/Richiesta-di-accesso-agli-atti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.casamassima.ba.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.casamassima.ba.it/Servizi/Richiesta-di-accesso-agli-atti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "stato_civile": {
+   "service_id": "072015:openpa:1146",
+   "title": "Autocertificazione di Stato Civile (1)",
+   "source_url": "https://www.comune.casamassima.ba.it/Amministrazione/Documenti-e-dati/Modulistica/Autocertificazione-di-Stato-Civile-1",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.casamassima.ba.it/Amministrazione/Documenti-e-dati/Modulistica/Autocertificazione-di-Stato-Civile-1",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.casamassima.ba.it/Amministrazione/Documenti-e-dati/Modulistica/Autocertificazione-di-Stato-Civile-1",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "072015:openpa:7694",
+   "title": "Comune di Casamassima c/ Soc. LUM JEAN MONET - Ricorso avverso avviso di accertamento del tributo IMU (anno 2014",
+   "source_url": "https://www.comune.casamassima.ba.it/Amministrazione-Trasparente/Consulenti-e-collaboratori/Titolari-di-incarichi-di-collaborazione-o-consulenza/Comune-di-Casamassima-c-Soc.-LUM-JEAN-MONET-Ricorso-avverso-avviso-di-accertamento-del-tributo-IMU-anno-2014",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.casamassima.ba.it/Amministrazione-Trasparente/Consulenti-e-collaboratori/Titolari-di-incarichi-di-collaborazione-o-consulenza/Comune-di-Casamassima-c-Soc.-LUM-JEAN-MONET-Ricorso-avverso-avviso-di-accertamento-del-tributo-IMU-anno-2014",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.casamassima.ba.it/Amministrazione-Trasparente/Consulenti-e-collaboratori/Titolari-di-incarichi-di-collaborazione-o-consulenza/Comune-di-Casamassima-c-Soc.-LUM-JEAN-MONET-Ricorso-avverso-avviso-di-accertamento-del-tributo-IMU-anno-2014",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-08-26T00:00:00Z"
+  }
+ }
+}

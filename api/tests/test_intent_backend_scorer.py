@@ -11,6 +11,7 @@ della costante di modulo, letta una sola volta all'import.
 import asyncio
 import json
 import sys
+import types
 from pathlib import Path
 
 import pytest
@@ -135,6 +136,20 @@ def test_rust_assente_ripiega_su_python(monkeypatch):
     monkeypatch.setitem(sys.modules, "tiq_intent", None)
 
     msg = "voglio pagare la tari"
+    intent = asyncio.run(
+        extract_intent(message=msg, provider=_ProviderCheEsplode(), backend="rust")
+    )
+    atteso = score_intent(msg)
+    assert intent.topic == Topic(atteso.topic)
+    assert intent.kind == QuestionKind(atteso.kind)
+
+
+def test_rust_namespace_senza_score_ripiega_su_python(monkeypatch):
+    """Il runtime può avere il namespace della taxonomy senza il wheel PyO3."""
+    monkeypatch.setattr(intent_mod, "_INTENT_BACKEND", "model")
+    monkeypatch.setitem(sys.modules, "tiq_intent", types.ModuleType("tiq_intent"))
+
+    msg = "orari ufficio anagrafe"
     intent = asyncio.run(
         extract_intent(message=msg, provider=_ProviderCheEsplode(), backend="rust")
     )

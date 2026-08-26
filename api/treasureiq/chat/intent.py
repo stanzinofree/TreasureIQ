@@ -700,8 +700,12 @@ def _score_livello_a(message: str, backend: str) -> tuple[str, str]:
 
             topic, kind, _conf = tiq_intent.score(message)
             return topic, kind
-        except ImportError:
-            pass  # nessun wheel nativo: giu' allo scorer Python
+        except (ImportError, AttributeError):
+            # L'immagine runtime può contenere il namespace `tiq_intent` per
+            # la taxonomy senza il wheel PyO3 (e quindi senza `score`).
+            # Anche in quel caso il fallback Python è deterministico e
+            # mantiene il contratto del backend rust senza degradare a errore.
+            pass
     esito = score_intent(message)
     return esito.topic, esito.kind
 

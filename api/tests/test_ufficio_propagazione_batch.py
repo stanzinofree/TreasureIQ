@@ -158,3 +158,125 @@ def test_batch_trasportato_senza_lettura_resta_onesto(
     record = _offices_record(res)
     assert record["indirizzo"] is None
     assert record["responsabile"] is None
+
+
+# --- La scheda VERDE (`info.office`), non solo il batch trasportato -----------
+# I due rami che costruiscono un `OfficeAnswer` devono entrambi portare i campi
+# additivi letti dalla scheda (indirizzo, responsabile). Il batch li portava già
+# (test sopra); l'`OfficeAnswer` renderizzato — ciò che la UI mostra come scheda
+# verde via `OfficeOut` — su un ramo li lasciava cadere. Questi test pinnano il
+# surface `info.office` su ENTRAMBI i rami.
+
+
+def test_office_answer_ramo_connettore_porta_indirizzo_e_responsabile(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Ramo A (`_risposta_da_connettore`): la scheda verde porta i campi letti."""
+    esito = _esito(_ufficio_catalogo())
+    _monkeypatch_infra(monkeypatch, esito)
+
+    arricchito = _ufficio_catalogo().model_copy(
+        update={
+            "orari": "Lun 9-12",
+            "indirizzo": "Piazza Roma, 1 - 00041 Albano (RM)",
+            "responsabile": Responsabile(nome="Mario Rossi", ruolo="Responsabile"),
+        }
+    )
+
+    async def _live(*, codice_istat, ufficio, piattaforma=None):
+        return arricchito, "lunedì 9-12"
+
+    monkeypatch.setattr(R, "_orari_ufficio_live", _live)
+
+    res = asyncio.run(
+        R._risposta_da_connettore(
+            comune_nome="Albano",
+            topic=Topic.ANAGRAFE_CARTA_IDENTITA,
+            diagnosi=[],
+            esito=esito,
+            ufficio_chiesto="anagrafe",
+            disabilita_attiva=False,
+            recognition=None,
+        )
+    )
+
+    office = res.info.office
+    assert office is not None
+    assert office.indirizzo == "Piazza Roma, 1 - 00041 Albano (RM)"
+    assert office.responsabile is not None
+    assert office.responsabile.nome == "Mario Rossi"
+    assert office.responsabile.ruolo == "Responsabile"
+
+
+def test_office_answer_ramo_connettore_onesto_senza_lettura(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Ramo A, degrado onesto: pagina senza i campi → `None`, mai inventati."""
+    esito = _esito(_ufficio_catalogo())
+    _monkeypatch_infra(monkeypatch, esito)
+
+    async def _live(*, codice_istat, ufficio, piattaforma=None):
+        return _ufficio_catalogo(), None
+
+    monkeypatch.setattr(R, "_orari_ufficio_live", _live)
+
+    res = asyncio.run(
+        R._risposta_da_connettore(
+            comune_nome="Albano",
+            topic=Topic.ANAGRAFE_CARTA_IDENTITA,
+            diagnosi=[],
+            esito=esito,
+            ufficio_chiesto="anagrafe",
+            disabilita_attiva=False,
+            recognition=None,
+        )
+    )
+
+    office = res.info.office
+    assert office is not None
+    assert office.indirizzo is None
+    assert office.responsabile is None
+
+
+def test_office_answer_ramo_nominato_porta_indirizzo_e_responsabile(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Ramo B (`_office_da_ufficio_nominato`): il drill già consegnava i campi —
+    lo pinniamo perché resti simmetrico al ramo A."""
+    from treasureiq.ufficio_dettaglio import UfficioArricchito
+
+    esito = _esito(_ufficio_catalogo())
+    arricchito = _ufficio_catalogo().model_copy(
+        update={
+            "orari": "Lun 9-12",
+            "indirizzo": "Via Garibaldi, 3 - 00041 Albano (RM)",
+            "responsabile": Responsabile(nome="Lucia Bianchi", ruolo="Dirigente"),
+        }
+    )
+
+    monkeypatch.setattr(
+        R.connettore, "leggi_connettore", lambda codice_istat: esito
+    )
+    monkeypatch.setattr(
+        R,
+        "arricchisci_ufficio",
+        lambda *, codice_istat, ufficio, piattaforma=None: UfficioArricchito(
+            ufficio=arricchito, orari_fonte="lunedì 9-12"
+        ),
+    )
+
+    res = asyncio.run(
+        R._office_da_ufficio_nominato(
+            codice_istat=ISTAT,
+            topic=Topic.ANAGRAFE_CARTA_IDENTITA,
+            ufficio_chiesto="anagrafe",
+            disabilita_attiva=False,
+        )
+    )
+
+    assert res is not None
+    office = res.office
+    assert office.indirizzo == "Via Garibaldi, 3 - 00041 Albano (RM)"
+    assert office.responsabile is not None
+    assert office.responsabile.nome == "Lucia Bianchi"
+    assert office.responsabile.ruolo == "Dirigente"

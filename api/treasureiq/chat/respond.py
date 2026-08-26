@@ -2398,6 +2398,12 @@ async def _risposta_da_connettore(
             email=", ".join(ufficio.email) or None,
             orari=ufficio.orari,
             orari_fonte=fonte,
+            # Campi additivi Ramo 1: l'ufficio è la copia arricchita dal drill
+            # (`_orari_ufficio_live` → `arricchisci_ufficio`), quindi indirizzo e
+            # responsabile letti dalla scheda viaggiano già qui. `None` dove non
+            # pubblicati (D-05), mai inventati — come il ramo `_office_da_ufficio_nominato`.
+            indirizzo=ufficio.indirizzo,
+            responsabile=ufficio.responsabile,
         )
         citizen_effort = 1
 

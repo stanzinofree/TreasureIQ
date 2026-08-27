@@ -2984,7 +2984,11 @@ _CONNETTIVI_NOME = frozenset(
 #: invece del comune del cittadino. E' un avverbio di tempo prima che un
 #: toponimo: un cittadino di Ora (~3.600 ab.) resta comunque raggiungibile dal
 #: selettore per ISTAT, che non passa di qui.
-_PAROLE_NON_TOPONIMI = frozenset({"minori", "minore", "ora"})
+#: "cambio": parola-servizio ("cambio (di) residenza") che è anche l'unica
+#: coda-nome di Rocca di Cambio (AQ, 066081). Senza questa guardia «cambio di
+#: residenza» dirottava il comune del cittadino sul toponimo — stesso difetto
+#: di "minori"/"ora": il selettore per ISTAT resta la via per Rocca di Cambio.
+_PAROLE_NON_TOPONIMI = frozenset({"minori", "minore", "ora", "cambio"})
 
 
 @lru_cache(maxsize=1)

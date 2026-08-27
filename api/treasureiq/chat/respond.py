@@ -2220,6 +2220,18 @@ def _area_municipium_per_topic(
     return _MUNICIPIUM_TOPIC_AREA.get(codice_istat, {}).get(topic)
 
 
+def _parola_intera(needle: str, testo: str) -> bool:
+    """`needle` compare in `testo` come parola INTERA (confine \\b a inizio e
+    fine).
+
+    Nasce per il topic-split di `_ufficio_connettore_pertinente`: «atti» (pezzo
+    di `accesso_atti`) NON deve matchare «attività» — tra 'i' e 'v' non c'è un
+    confine di parola — così un intento di accesso agli atti non pesca «Attività
+    Produttive - SUAP» (falso positivo D-04). «suap» resta parola intera in
+    «Attività Produttive - SUAP», «anagrafe» in «Servizio Anagrafe»."""
+    return re.search(rf"\b{re.escape(needle)}\b", testo) is not None
+
+
 def _ufficio_connettore_pertinente(
     uffici: list[UfficioConnettore],
     *,
@@ -2245,12 +2257,18 @@ def _ufficio_connettore_pertinente(
     presenta e il cittadino sceglie (A, ciclo18k). `(None, [])`: nessuna
     parola-chiave ha trovato un ufficio, il cittadino non ha nominato nulla di
     specifico — si elenca l'organigramma."""
-    candidati = []
+    # Ogni candidato porta `parola_intera`: i pezzi del topic vanno matchati
+    # come parola INTERA (confine a inizio e fine), l'ufficio nominato dal
+    # cittadino e `disabilita` restano a sottostringa perché possono essere
+    # radici d'Area (es. «finanziari» in «…finanziarie») o testo libero.
+    candidati: list[tuple[str, bool]] = []
     if ufficio_chiesto:
-        candidati.append(ufficio_chiesto.lower())
+        candidati.append((ufficio_chiesto.lower(), False))
     if disabilita_attiva:
-        candidati.append("disabilita")
-    candidati.extend(pezzo for pezzo in topic.value.split("_") if len(pezzo) > 3)
+        candidati.append(("disabilita", False))
+    candidati.extend(
+        (pezzo, True) for pezzo in topic.value.split("_") if len(pezzo) > 3
+    )
 
     # B (ciclo18k): gli organi politici/deliberativi restano fuori dal match per
     # nome d'ufficio — chi cerca «edilizia» non vuole la «Commissione … edilizia
@@ -2259,14 +2277,21 @@ def _ufficio_connettore_pertinente(
     # sporchino la disambiguazione.
     pool = [u for u in uffici if not _e_organo_politico(u.nome)]
 
-    for chiave in candidati:
+    for chiave, parola_intera in candidati:
         # La parola LETTERALE prima dei suoi sinonimi: se «anagrafe» compare in
         # un solo nome d'ufficio, è quello — anche quando i sinonimi
         # (demografic/stato civile) ne toccherebbero altri e renderebbero il
         # match «ambiguo». Un match letterale unico non è un indovinello
         # (D-04): un comune con più uffici demografici non deve ricadere
         # sull'URP per una parola che, presa alla lettera, è univoca.
-        letterali = [u for u in pool if chiave in u.nome.lower()]
+        # I pezzi del topic matchano a PAROLA INTERA: «atti» (da accesso_atti)
+        # non deve pescare «Attività Produttive - SUAP» (falso positivo D-04).
+        # L'ufficio nominato / «disabilita» restano a sottostringa: possono
+        # essere radici d'Area (es. «finanziari» in «…finanziarie») o testo libero.
+        if parola_intera:
+            letterali = [u for u in pool if _parola_intera(chiave, u.nome.lower())]
+        else:
+            letterali = [u for u in pool if chiave in u.nome.lower()]
         if len(letterali) == 1:
             return letterali[0], []
         if len(letterali) > 1:
@@ -2276,7 +2301,14 @@ def _ufficio_connettore_pertinente(
             # cittadino scelga — coi loro recapiti, non una ricerca web.
             return None, letterali
 
-        sottostringhe = _SINONIMI_UFFICIO_CONNETTORE.get(chiave, (chiave,))
+        # Sinonimi-radice SOLO per chiavi note (sottostringa: stem «tribut»→
+        # «Tributi», «suap» resta valido). Per una chiave senza voce il fallback
+        # storico era `(chiave,)` a sottostringa — ridondante col match letterale
+        # sopra e, per i pezzi a parola intera, proprio il seam del falso match
+        # «atti»⊂«attività». Niente voce ⇒ niente ricaduta a sottostringa libera.
+        sottostringhe = _SINONIMI_UFFICIO_CONNETTORE.get(chiave)
+        if sottostringhe is None:
+            continue
         trovati = [
             ufficio
             for ufficio in pool

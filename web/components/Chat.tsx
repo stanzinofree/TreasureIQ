@@ -35,6 +35,7 @@ import RispostaCivica from "@/components/RispostaCivica";
 import SchedaLettoOra from "@/components/SchedaLettoOra";
 import { useProfilo } from "@/lib/profilo";
 import { conTagVerifica } from "@/lib/testo";
+import { accessLabel } from "@/lib/access";
 import { useRisultati } from "@/lib/risultati";
 import { useScan } from "@/lib/scan";
 
@@ -314,18 +315,8 @@ function SourceAccessBadge({
 }: {
   accessMode: string | null;
 }) {
-  if (!accessMode) return null;
-  const etichette: Record<string, string> = {
-    direct: "Dato diretto",
-    mediated: "Dato mediato",
-    indirect: "Dato da verificare",
-    unavailable: "Fonte non disponibile",
-    M2_prosa_api: "Dato mediato",
-    M4_connettore: "Dato mediato",
-    M5_nessuno: "Dato da verificare",
-    M6_web_aperto: "Dato da verificare",
-  };
-  const etichetta = etichette[accessMode] ?? "Fonte verificata";
+  const etichetta = accessLabel(accessMode);
+  if (!etichetta) return null;
 
   return (
     <div
@@ -1523,7 +1514,24 @@ export default function Chat() {
         )}
 
         {messages.map((m) => (
-          <div key={m.id} className={`bubble bubble--${m.role}`}>
+          <div
+            key={m.id}
+            className={`bubble bubble--${m.role}`}
+            // Stato di fiducia della risposta: guida il colore della barra
+            // laterale del fumetto (lime=ok, ambra=parziale, ocra=non
+            // pubblicato, grigio=non verificato/miss). Se manca uno `stato`
+            // esplicito: lime solo per un esito davvero positivo (agevolazioni
+            // con match), altrimenti grigio — un miss non deve sembrare "ok".
+            data-stato={
+              m.reply?.info?.stato ??
+              (m.reply
+                ? m.reply.kind === "agevolazione" &&
+                  (m.reply.matches?.length ?? 0) > 0
+                  ? "ufficiale"
+                  : "non_verificato"
+                : undefined)
+            }
+          >
             {/* Who is speaking, said once per bubble. Alignment alone carries
                 it for a sighted reader on a wide screen and for nobody else:
                 on a phone the bubbles nearly touch both edges, and a screen
@@ -1639,7 +1647,12 @@ export default function Chat() {
                       (x) => x.livello === "comunale" && x.ente_codice_istat,
                     )?.ente_codice_istat ??
                     null;
-                  return istatBanner ? (
+                  // Quando c'e' `info`, RispostaCivica rende la riga di
+                  // provenienza in coda alla card: la chip d'accesso vive LI',
+                  // sulla stessa riga di stato/freschezza (un solo blocco
+                  // metadati). Il badge standalone resta solo dove RispostaCivica
+                  // non c'e' (rami senza `info`).
+                  return istatBanner && !m.reply.info ? (
                     <SourceAccessBadge
                       accessMode={
                         m.reply.source_access.find(
@@ -1688,7 +1701,15 @@ export default function Chat() {
                   // AGEVOLAZIONE furniture below.
                   m.reply.info && (
                     <>
-                      <RispostaCivica reply={m.content} info={m.reply.info} />
+                      <RispostaCivica
+                        reply={m.content}
+                        info={m.reply.info}
+                        accessMode={
+                          m.reply.source_access.find(
+                            (source) => source.surface === "ordinary_data",
+                          )?.access_mode ?? m.reply.access_mode
+                        }
+                      />
                       {m.reply.access_mode &&
                         SEGNALAZIONE_ACCESS_MODES.has(m.reply.access_mode) &&
                         m.reply.info.codice_istat &&
@@ -1784,7 +1805,15 @@ export default function Chat() {
         ))}
 
         {busy && (
-          <p className="chat__hint" aria-hidden="true">
+          <p className="chat__hint tiq-typing" aria-hidden="true">
+            {/* Tre punti che rimbalzano (stile Three Dots, CSS puro) accanto
+                al testo che ruota: il moto dà il segnale "sto lavorando" che
+                il solo testo statico non dava. Decorativo → aria-hidden. */}
+            <span className="tiq-typing__dots" aria-hidden="true">
+              <span />
+              <span />
+              <span />
+            </span>
             {ATTESA[passoAttesa % ATTESA.length]}
           </p>
         )}

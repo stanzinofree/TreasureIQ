@@ -4,6 +4,7 @@ import { useState } from "react";
 
 import type { InfoOut } from "@/lib/api";
 import { conTagVerifica } from "@/lib/testo";
+import { accessLabel } from "@/lib/access";
 
 /**
  * La risposta come scheda civica, non come dump narrativo.
@@ -120,9 +121,14 @@ function righeOrari(orari: string): string[] {
 export default function RispostaCivica({
   reply,
   info,
+  accessMode,
 }: {
   reply: string;
   info: InfoOut;
+  // Modalita' d'accesso della fonte: apre la riga di provenienza in coda alla
+  // card, cosi' «Fonte non disponibile / Catalogo / ...» sta sulla stessa riga
+  // di stato e freschezza invece di essere un badge separato.
+  accessMode?: string | null;
 }) {
   const { office, document: documento } = info;
 
@@ -154,6 +160,14 @@ export default function RispostaCivica({
         aria-hidden="true"
       />
       <p className="civica__bolli">
+        {accessLabel(accessMode) && (
+          <span
+            className="civica__access"
+            data-access-mode={accessMode ?? undefined}
+          >
+            {accessLabel(accessMode)}
+          </span>
+        )}
         <span className="civica__stato" data-stato={info.stato}>
           {ETICHETTA_STATO[info.stato]}
         </span>

@@ -84,7 +84,7 @@ from treasureiq.catalog.service_registry import (
     service_query_fetch_coordinator,
 )
 from treasureiq.catalog.service_resolver import resolve_service_with_meta
-from treasureiq.chat.service_key import riconosci_service_key
+from treasureiq.chat.service_key import ServiceKey, riconosci_service_key
 from treasureiq.chat.categorie import Categoria, topics_di
 from treasureiq.chat.intent import (
     AMBIGUOUS_ROLE_TOPICS,
@@ -1915,6 +1915,7 @@ async def _build_informazione_answer(
                 ufficio_chiesto=_ufficio_chiesto(parole),
                 disabilita_attiva=_disabilita_attiva_nel_testo(parole),
                 recognition=recognition,
+                service_key=riconosci_service_key(parole),
             )
             if risposta_connettore is not None:
                 return risposta_connettore
@@ -2136,6 +2137,87 @@ _ORGANI_POLITICI = ("commissione", "giunta", "consiglio", "conferenza", "collegi
 def _e_organo_politico(nome: str) -> bool:
     testa = nome.strip().lower().split()
     return bool(testa) and testa[0] in _ORGANI_POLITICI
+
+
+#: Municipium pubblica gli uffici come macro-Aree il cui NOME non nomina il
+#: servizio: a Ariccia (058009) «Area V – Amministrativa» ospita anagrafe/stato
+#: civile ed «Area I – …finanziarie» i tributi. Il match diretto per-topic
+#: (`_ufficio_connettore_pertinente` splitta `topic.value`) non trova «anagrafe»
+#: in nessun nome d'Area → il drill ripiega su Centralino, mai sull'ufficio
+#: giusto. Questa mappa collega topic→Area SOLO dove la PAGINA dell'Area
+#: pubblica quel servizio nelle competenze (recon read-only, evidence-locked):
+#: mai dedotta dal nome generico dell'Area (D-04, «no ufficio indovinato»).
+#: Keyed per ISTAT — ogni Municipium nuovo va verificato prima di aggiungere una
+#: voce, perché un'«Area Amministrativa» altrove può NON ospitare l'anagrafe. Il
+#: valore è la sottostringa che identifica univocamente l'Area nel comune;
+#: assente la voce (o il topic), resta il fallback onesto a Centralino.
+_MUNICIPIUM_TOPIC_AREA: dict[str, dict[Topic, str]] = {
+    # Ariccia (058009) — competenze pubblicate su comune.ariccia.rm.it/it/
+    # unita_organizzative/: Area V «Elettorale, Stato Civile, Anagrafe,
+    # Statistiche, Messi, Protocolli…»; Area I «Servizio Tributi e Ambiente,
+    # Servizio Finanziaria».
+    #   - `ANAGRAFE_CARTA_IDENTITA`: la pagina cita «Anagrafe» (e stato civile,
+    #     residenza) esplicito → Area V. NON cita «carta d'identità»/«CIE»: il
+    #     topic accorpa anagrafe+CIE in un unico valore, così la carta d'identità
+    #     esplicita è ESCLUSA alla granularità ServiceKey (vedi guardia sotto),
+    #     per non ereditare un'evidenza che la pagina non pubblica (D-04).
+    #   - `MATRIMONIO_SEPARAZIONE`: la pagina cita «Stato Civile» → Area V.
+    #   - `TRIBUTI` (IMU/TARI): la pagina cita «Servizio Tributi» → Area I.
+    #   - `accesso_atti`: nessuna Area dedicata pubblicata (Protocollo è in
+    #     Area V ma non è «accesso agli atti») → nessuna voce.
+    "058009": {
+        Topic.ANAGRAFE_CARTA_IDENTITA: "amministrativa",
+        Topic.MATRIMONIO_SEPARAZIONE: "amministrativa",
+        Topic.TRIBUTI: "finanziari",
+    },
+}
+
+#: ServiceKey da ESCLUDERE dalla mappa anche quando il loro Topic è mappato:
+#: `ANAGRAFE_CARTA_IDENTITA` accorpa anagrafe e carta d'identità in un unico
+#: Topic, ma a Ariccia la pagina Area V pubblica «Anagrafe», non «carta
+#: d'identità»/«CIE». La carta d'identità esplicita (ServiceKey deterministica,
+#: marker «carta d'identità»/«cie») non eredita l'evidenza dell'anagrafe: cade
+#: al fallback onesto finché una pagina Area non la cita testualmente (D-04).
+_MUNICIPIUM_SERVICE_KEY_ESCLUSE: dict[Topic, frozenset[ServiceKey]] = {
+    Topic.ANAGRAFE_CARTA_IDENTITA: frozenset({ServiceKey.CARTA_IDENTITA}),
+}
+
+
+def _area_municipium_per_topic(
+    *,
+    codice_istat: str,
+    piattaforma: str | None,
+    topic: Topic,
+    ufficio_chiesto: str | None,
+    service_key: ServiceKey | None = None,
+) -> str | None:
+    """Sottostringa dell'Area competente per `topic` su un comune Municipium.
+
+    Serve solo il caso censito-Municipium in cui le Aree non nominano il
+    servizio: torna la sottostringa da passare a `_ufficio_connettore_pertinente`
+    come se il cittadino avesse nominato quell'Area. Vale SOLO quando il
+    cittadino non ha già nominato un ufficio (`ufficio_chiesto` vuoto) e solo per
+    le voci evidence-locked di `_MUNICIPIUM_TOPIC_AREA`.
+
+    `service_key` è la ServiceKey deterministica del turno (`riconosci_service_key`,
+    pura): serve a escludere le formulazioni più fini di un Topic accorpato che
+    la pagina Area non pubblica — a Ariccia la carta d'identità esplicita, che
+    condivide il Topic `ANAGRAFE_CARTA_IDENTITA` con l'anagrafe ma non è citata
+    dall'Area V (`_MUNICIPIUM_SERVICE_KEY_ESCLUSE`, D-04).
+
+    Torna `None` — e il chiamante mantiene il fallback onesto — se la piattaforma
+    non è Municipium, il comune non è mappato, il topic non ha un'Area dimostrata,
+    o la ServiceKey è tra quelle escluse: mai un'Area indovinata (D-04).
+    """
+    if ufficio_chiesto:
+        return None
+    if piattaforma != "municipium":
+        return None
+    if service_key is not None and service_key in _MUNICIPIUM_SERVICE_KEY_ESCLUSE.get(
+        topic, frozenset()
+    ):
+        return None
+    return _MUNICIPIUM_TOPIC_AREA.get(codice_istat, {}).get(topic)
 
 
 def _ufficio_connettore_pertinente(
@@ -2379,6 +2461,7 @@ async def _risposta_da_connettore(
     ufficio_chiesto: str | None,
     disabilita_attiva: bool = False,
     recognition=None,
+    service_key: ServiceKey | None = None,
 ) -> ChatAnswer | None:
     """Risposta INFORMAZIONE costruita dal connettore (B4, D-09/D-11): stesso
     schema di `_chat_live`, ma con recapiti VERBATIM e onestà campo-per-campo
@@ -2407,6 +2490,24 @@ async def _risposta_da_connettore(
     ]
     if not uffici_decisione:
         return None
+
+    # Municipium: le Aree non nominano il servizio nel titolo, così il match
+    # diretto per-topic fallisce e senza questo il drill ripiegherebbe su
+    # Centralino anche dove il comune dichiara l'Area competente. Deriva l'Area
+    # dalla mappa per-ISTAT evidence-locked SOLO se il cittadino non ha già
+    # nominato un ufficio; `_area_municipium_per_topic` torna `None` (→ fallback
+    # onesto invariato) per piattaforme non-Municipium, comuni non mappati o
+    # topic senza Area dimostrata, o ServiceKey esclusa (es. carta d'identità,
+    # che condivide il Topic con l'anagrafe ma non è citata dall'Area Ariccia).
+    # La sottostringa entra nel match come un ufficio nominato: nessun ramo nuovo,
+    # stesso `_ufficio_connettore_pertinente`.
+    ufficio_chiesto = ufficio_chiesto or _area_municipium_per_topic(
+        codice_istat=esito.codice_istat,
+        piattaforma=esito.piattaforma,
+        topic=topic,
+        ufficio_chiesto=ufficio_chiesto,
+        service_key=service_key,
+    )
 
     ufficio, ambigui = _ufficio_connettore_pertinente(
         uffici_decisione,
@@ -2812,6 +2913,7 @@ async def _risposta_live(
             esito=esito_connettore,
             ufficio_chiesto=_ufficio_chiesto(parole),
             disabilita_attiva=_disabilita_attiva_nel_testo(parole),
+            service_key=riconosci_service_key(parole),
         )
         if risposta_connettore is not None:
             return risposta_connettore

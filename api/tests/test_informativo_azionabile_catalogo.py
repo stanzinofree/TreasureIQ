@@ -16,17 +16,18 @@ Due livelli:
 from __future__ import annotations
 
 import asyncio
+import json
 from datetime import datetime, timezone
+from pathlib import Path
 from unittest import mock
 
 import pytest
 
-from treasureiq.catalog import (
-    AccessMode,
-    AgidCompatibility,
-    MunicipalityPlatformSnapshot,
-    SnapshotStore,
-    Surface,
+from treasureiq.catalog.service_contracts import (
+    ServiceAccessMode,
+    ServiceAccessOption,
+    ServiceKey,
+    ServiceReference,
 )
 from treasureiq.chat import respond as respond_mod
 from treasureiq.chat.intent import ChatIntent, QuestionKind, Topic
@@ -73,15 +74,41 @@ _COMUNE_CON_CATALOGO = "058003"
 _COMUNE_SENZA_CATALOGO = "058003"
 
 
-def _snapshot(codice_istat: str) -> MunicipalityPlatformSnapshot:
-    return MunicipalityPlatformSnapshot(
-        municipality_istat=codice_istat,
-        surface=Surface.ORDINARY_DATA,
-        platform_id="wp_design_comuni",
-        platform_compatibility=AgidCompatibility.PARTIAL,
-        access_mode=AccessMode.MEDIATED,
-        measured_at=datetime.now(timezone.utc),
-        measurement_id="sweep-1",
+def _service_ref(service_id: str) -> ServiceReference:
+    return ServiceReference(
+        service_id=service_id,
+        title="Servizio",
+        source_url="https://comune.example.it/servizio",
+        options=(
+            ServiceAccessOption(
+                mode=ServiceAccessMode.INFORMATION,
+                url="https://comune.example.it/servizio",
+            ),
+        ),
+        discovered_at=datetime.now(timezone.utc),
+    )
+
+
+def _scrivi_catalogo_flat(
+    base: Path, codice_istat: str, chiavi: tuple[ServiceKey, ...]
+) -> None:
+    """Scrive un catalogo flat `{base}/catalog/{istat}.json` con SOLO le chiavi
+    date (schema `{municipality_istat, services}`, come il catalogo promosso).
+
+    Il gate della slice legge PROPRIO questo (`service_catalog.carica`), non lo
+    snapshot piattaforma: il pre-gate è per-chiave, quindi una chiave assente da
+    `chiavi` non è nel file e la voce risulta None."""
+    directory = base / "catalog"
+    directory.mkdir(parents=True, exist_ok=True)
+    services = {
+        chiave.value: json.loads(
+            _service_ref(f"{codice_istat}:openpa:{indice}").model_dump_json()
+        )
+        for indice, chiave in enumerate(chiavi)
+    }
+    (directory / f"{codice_istat}.json").write_text(
+        json.dumps({"municipality_istat": codice_istat, "services": services}),
+        encoding="utf-8",
     )
 
 
@@ -128,14 +155,24 @@ def _guida_build(
 
 @pytest.fixture()
 def catalogo_tmp(monkeypatch, tmp_path):
-    """Installa un catalogo per `_COMUNE_CON_CATALOGO` in una DATA_DIR tmp."""
-    store = SnapshotStore(tmp_path / "catalog")
-    store.save_municipality(_snapshot(_COMUNE_CON_CATALOGO))
-    monkeypatch.setattr(respond_mod, "DATA_DIR", tmp_path)
+    """Catalogo flat per `_COMUNE_CON_CATALOGO` (carta + residenza) in una
+    DATA_DIR tmp.
+
+    Il gate della slice legge il catalogo flat via `service_catalog.carica`, che
+    risolve `catalog_dir()` dall'env `TREASUREIQ_DATA_DIR`. Scriviamo entrambe le
+    chiavi in-ambito così i due casi «hit esatto» passano; l'assenza di una
+    chiave si prova in un test dedicato con un catalogo di sole `carta`."""
+    _scrivi_catalogo_flat(
+        tmp_path,
+        _COMUNE_CON_CATALOGO,
+        (ServiceKey.CARTA_IDENTITA, ServiceKey.CAMBIO_RESIDENZA),
+    )
+    monkeypatch.setenv("TREASUREIQ_DATA_DIR", str(tmp_path))
     return tmp_path
 
 
 def test_carta_azionabile_con_catalogo_consulta_modulistica(catalogo_tmp):
+    # Hit esatto: cornice azionabile + carta ammessa + voce carta nel flat.
     intento = ChatIntent(
         topic=Topic.SCONOSCIUTO, kind=QuestionKind.INFORMAZIONE
     )
@@ -148,6 +185,8 @@ def test_carta_azionabile_con_catalogo_consulta_modulistica(catalogo_tmp):
 
 
 def test_residenza_azionabile_con_catalogo_consulta_modulistica(catalogo_tmp):
+    # Hit esatto sul caso 001076: la residenza informativa/verbale ora raggiunge
+    # il catalogo perché la voce `cambio_residenza` È nel flat.
     intento = ChatIntent(
         topic=Topic.SCONOSCIUTO, kind=QuestionKind.INFORMAZIONE
     )
@@ -175,7 +214,7 @@ def test_domanda_informativa_non_consulta_catalogo(catalogo_tmp):
 
 def test_chiave_fuori_ambito_non_consulta_catalogo(catalogo_tmp):
     """Cornice azionabile ma chiave ≠ {carta, residenza}: fuori dallo scope
-    della slice, il catalogo non viene forzato."""
+    della slice, il catalogo non viene forzato (guardia sulla ServiceKey)."""
     intento = ChatIntent(
         topic=Topic.SCONOSCIUTO, kind=QuestionKind.INFORMAZIONE
     )
@@ -187,11 +226,29 @@ def test_chiave_fuori_ambito_non_consulta_catalogo(catalogo_tmp):
     assert spia.await_count == 0
 
 
+def test_chiave_in_ambito_ma_assente_dal_flat_non_consulta(monkeypatch, tmp_path):
+    """Gate PER-CHIAVE: cornice azionabile + chiave ammessa (residenza), ma la
+    voce NON è nel catalogo flat di quel comune (qui il flat ha solo `carta`).
+    `service_catalog.carica` → None → ramo saltato, nessuna modulistica forzata.
+    È il caso «una chiave assente non forza la modulistica»."""
+    _scrivi_catalogo_flat(tmp_path, _COMUNE_CON_CATALOGO, (ServiceKey.CARTA_IDENTITA,))
+    monkeypatch.setenv("TREASUREIQ_DATA_DIR", str(tmp_path))
+    intento = ChatIntent(
+        topic=Topic.SCONOSCIUTO, kind=QuestionKind.INFORMAZIONE
+    )
+    spia = _guida_build(
+        message="voglio cambiare residenza",
+        intento=intento,
+        comune_istat=_COMUNE_CON_CATALOGO,
+    )
+    assert spia.await_count == 0
+
+
 def test_senza_catalogo_non_consulta_modulistica(monkeypatch, tmp_path):
-    """Stessa richiesta azionabile ma comune SENZA catalogo: il pre-gate
-    `_catalog_access_mode is None` salta il ramo, routing informativo invariato
-    (protegge Municipium/WP)."""
-    monkeypatch.setattr(respond_mod, "DATA_DIR", tmp_path)
+    """Comune SENZA file catalogo (DATA_DIR tmp vuota): `service_catalog.carica`
+    → None → il pre-gate salta il ramo, routing informativo invariato
+    (protegge Municipium/WP e i comuni non coperti)."""
+    monkeypatch.setenv("TREASUREIQ_DATA_DIR", str(tmp_path))
     intento = ChatIntent(
         topic=Topic.SCONOSCIUTO, kind=QuestionKind.INFORMAZIONE
     )

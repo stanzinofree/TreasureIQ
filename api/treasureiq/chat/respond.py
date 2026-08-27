@@ -83,6 +83,7 @@ from treasureiq.catalog.service_registry import (
     default_service_registry,
     service_query_fetch_coordinator,
 )
+from treasureiq.catalog import service_catalog
 from treasureiq.catalog.service_resolver import resolve_service_with_meta
 from treasureiq.chat.service_key import ServiceKey, riconosci_service_key
 from treasureiq.chat.categorie import Categoria, topics_di
@@ -4661,16 +4662,20 @@ async def _componi_risposta(
     #      domanda-dato («quanto pago l'IMU?») non ha cornice e resta informativa;
     #   2. ServiceKey ∈ {carta, residenza} (`riconosci_service_key`) — l'ambito
     #      di questa slice, non qualunque chiave (IMU/TARI restano informativi);
-    #   3. il comune HA un catalogo (`_catalog_access_mode is not None`) — pre-gate
-    #      che protegge il routing Municipium/WP: senza catalogo il ramo si salta
-    #      e il turno prosegue invariato sul rail informazione.
+    #   3. il catalogo flat copre PROPRIO quella ServiceKey per quel comune
+    #      (`service_catalog.carica(...) is not None`) — pre-gate per-chiave: più
+    #      preciso dello snapshot piattaforma (che copre solo i 64 comuni sweep-ati
+    #      e mancava i comuni OpenPA flat-only come 001076). Scatta solo se la voce
+    #      esiste davvero nel catalogo promosso; comune/chiave senza voce → ramo
+    #      saltato, turno invariato sul rail informazione (protegge Municipium/WP).
     comune_servizio = comune_bandi_istat or comune_istat
+    service_key_azionabile = riconosci_service_key(message)
     if (
         comune_servizio
         and _richiesta_servizio_azionabile(message)
-        and riconosci_service_key(message)
+        and service_key_azionabile
         in {ServiceKey.CARTA_IDENTITA, ServiceKey.CAMBIO_RESIDENZA}
-        and _catalog_access_mode(comune_servizio) is not None
+        and service_catalog.carica(comune_servizio, service_key_azionabile) is not None
     ):
         profilo_servizio = profile or _profile_from_slots(
             intent=intent, messaggio=message, filtri_esclusi=filtri_esclusi

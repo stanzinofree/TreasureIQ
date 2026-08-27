@@ -19,6 +19,11 @@ from treasureiq.chat.service_key import riconosci_service_key
         ("mi serve il modulo della carta d'identità", ServiceKey.CARTA_IDENTITA),
         ("posso fare la CIE?", ServiceKey.CARTA_IDENTITA),
         ("voglio fare il cambio di residenza", ServiceKey.CAMBIO_RESIDENZA),
+        # verbal form: "cambiare residenza" is the natural phrasing of an
+        # actionable request and must confirm exactly like the noun form.
+        ("voglio cambiare residenza", ServiceKey.CAMBIO_RESIDENZA),
+        ("come cambio residenza", ServiceKey.CAMBIO_RESIDENZA),
+        ("devo cambiare la residenza", ServiceKey.CAMBIO_RESIDENZA),
         ("come faccio l'accesso agli atti", ServiceKey.ACCESSO_ATTI),
         ("certificato di nascita", ServiceKey.STATO_CIVILE),
         ("stato civile", ServiceKey.STATO_CIVILE),

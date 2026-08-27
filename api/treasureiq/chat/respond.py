@@ -683,6 +683,56 @@ def _richiesta_modulo(messaggio: str) -> bool:
     return any(m in haystack for m in _MARCATORI_PRECEDENZA_MODULISTICA)
 
 
+#: Cornici verbali che rendono AZIONABILE una richiesta di servizio: il
+#: cittadino non chiede un dato («quanto pago», «quando scade») ma come
+#: *ottenere/rinnovare/cambiare* un servizio catalogato. Whitelist chiusa e
+#: verbale — mai una parola-servizio da sola («carta», «residenza»): la chiave
+#: la decide `riconosci_service_key`, questa cornice decide solo se l'intento è
+#: procedurale. «quanto pago l'IMU?» non contiene nessuna cornice → resta
+#: informativo (nessuna ServiceReference forzata). Letto sul testo grezzo come
+#: `_richiesta_modulo`, mai sul modello: queste cornici non sono nel
+#: vocabolario di `Topic`.
+_CORNICI_SERVIZIO_AZIONABILE: tuple[str, ...] = (
+    "come richiedo",
+    "come rinnovo",
+    "come ottengo",
+    "come faccio per",
+    "come faccio a",
+    "come cambio",
+    "come posso richiedere",
+    "come posso rinnovare",
+    "come posso cambiare",
+    "come posso ottenere",
+    "come si richiede",
+    "come si rinnova",
+    "come si cambia",
+    "come rifare",
+    "voglio richiedere",
+    "voglio rinnovare",
+    "voglio cambiare",
+    "vorrei richiedere",
+    "vorrei rinnovare",
+    "vorrei cambiare",
+    "devo richiedere",
+    "devo rinnovare",
+    "devo cambiare",
+    "devo rifare",
+)
+
+
+def _richiesta_servizio_azionabile(messaggio: str) -> bool:
+    """True se il turno chiede COME procurarsi/rinnovare/cambiare un servizio.
+
+    Deterministica sul testo grezzo, whitelist chiusa (nessuno stemming): la
+    presenza di una cornice procedurale distingue «come rinnovo la carta»
+    (azionabile → catalogo servizi) da «quanto costa la carta» (informativa →
+    ufficio/Area come prima). Non decide QUALE servizio — quello è compito di
+    `riconosci_service_key` — solo se l'intento è procedurale.
+    """
+    haystack = messaggio.casefold()
+    return any(c in haystack for c in _CORNICI_SERVIZIO_AZIONABILE)
+
+
 def _topic_da_storia(*, storia: list[str]) -> Topic | None:
     """Il topic implicato dalle parole che il cittadino ha scritto prima.
 
@@ -4596,6 +4646,39 @@ async def _componi_risposta(
             message=message,
             profile=profilo_modulistica,
             comune_istat=comune_bandi_istat or comune_istat,
+        )
+
+    # Slice informativo-azionabile → catalogo. «come rinnovo la carta d'identità?»
+    # / «voglio cambiare residenza» sono informative per FORMA (topic
+    # ANAGRAFE/CAMBIO_RESIDENZA, non MODULISTICA, e `_tema_sostenuto` è False:
+    # nessuna parola-modulo), ma AZIONABILI per intento: chiedono come
+    # procurarsi un servizio catalogato. Senza questo ramo cadevano sul rail
+    # informazione (ufficio/Area) e NON consultavano il catalogo OpenPA/AgID che
+    # ha la pagina-servizio (miss #1 acceptance matrix 27 ago). Riusa lo stesso
+    # `_risposta_modulistica` (zero fetch, service_id dal catalogo) senza toccare
+    # connettori né contratti. Tre guardie in AND, tutte deterministiche:
+    #   1. cornice procedurale presente (`_richiesta_servizio_azionabile`) — una
+    #      domanda-dato («quanto pago l'IMU?») non ha cornice e resta informativa;
+    #   2. ServiceKey ∈ {carta, residenza} (`riconosci_service_key`) — l'ambito
+    #      di questa slice, non qualunque chiave (IMU/TARI restano informativi);
+    #   3. il comune HA un catalogo (`_catalog_access_mode is not None`) — pre-gate
+    #      che protegge il routing Municipium/WP: senza catalogo il ramo si salta
+    #      e il turno prosegue invariato sul rail informazione.
+    comune_servizio = comune_bandi_istat or comune_istat
+    if (
+        comune_servizio
+        and _richiesta_servizio_azionabile(message)
+        and riconosci_service_key(message)
+        in {ServiceKey.CARTA_IDENTITA, ServiceKey.CAMBIO_RESIDENZA}
+        and _catalog_access_mode(comune_servizio) is not None
+    ):
+        profilo_servizio = profile or _profile_from_slots(
+            intent=intent, messaggio=message, filtri_esclusi=filtri_esclusi
+        )
+        return await _risposta_modulistica(
+            message=message,
+            profile=profilo_servizio,
+            comune_istat=comune_servizio,
         )
 
     # C (ciclo18k): «orari ufficio edilizia» arriva con topic SCONOSCIUTO (non è

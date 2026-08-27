@@ -38,6 +38,8 @@ _SUBSTRING_MARKERS: dict[ServiceKey, tuple[str, ...]] = {
     ServiceKey.CAMBIO_RESIDENZA: (
         "cambio residenza",
         "cambio di residenza",
+        "cambiare residenza",
+        "cambiare la residenza",
         "trasferimento di residenza",
         "trasferimento residenza",
     ),

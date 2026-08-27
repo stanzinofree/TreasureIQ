@@ -5893,3 +5893,328 @@ a {
     opacity: 1;
   }
 }
+
+/* ================================================================
+   RISPOSTA CIVICA — restyle v1 (slice: bandi)
+   "Un acido, non un arcobaleno." Lime erba = accento UNICO, corallo
+   = CTA. Ispirazione MailChecker adattata ai token TIQ: bordi marcati
+   + offset shadow, MAI gradienti/emoji/arcobaleno di fondi. Layer
+   bolt-on in coda -> vince per ordine sui blocchi componente
+   (doctrine globals-css-bolt-on-cascade). Scope: SOLO .chat__answer
+   dentro la bolla assistente, così sidebar e altri usi degli stessi
+   componenti (.civica, .panel, .tiq-card) restano intatti.
+   Semantici (wakatake/shu/yamabuki) NON toccati: restano per gli stati.
+   ================================================================ */
+
+:root {
+  --lime: #a3e635; /* acido primario: accento/underline/focus, MAI testo */
+  --lime-ink: #3f6212; /* lime leggibile quando serve come testo forte */
+  --cta: #ff6b5c; /* corallo: SOLO CTA + dettagli interattivi */
+  --cta-deep: #e8503f; /* corallo hover */
+  --cta-ink: #0b1d3a; /* testo scuro su corallo (AA ~7:1; bianco fallirebbe) */
+  /* Scala UNICA di fiducia sulla barra del fumetto: ok / non so / ko / non
+     definito. Lime E' il "verde ok" del progetto (l'unico acido primario). */
+  --stato-ok: var(--lime); /* ufficiale -> ok */
+  --stato-parziale: #f6c445; /* parziale -> ambra (non so) */
+  --stato-manca: #b06d1f; /* non pubblicato -> ocra (ko / manca) */
+  --stato-ignoto: #98a2b3; /* non verificato -> grigio (non definito) */
+}
+
+/* 1 - UN SOLO fumetto: la card E' la bolla assistente, non un box interno.
+      Niente card annidata. La barra di STATO (lime) vive sul bordo sinistro
+      della BOLLA; messaggio, CTA e fonti condividono lo stesso fondo. */
+.bubble.bubble--assistant {
+  position: relative;
+  overflow: hidden;
+  border: 1.5px solid var(--sumi);
+  box-shadow: 4px 4px 0 0 var(--sumi);
+  padding-left: calc(var(--ma-6) + 10px); /* spazio per la barra di stato */
+}
+.bubble.bubble--assistant::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 8px;
+  /* Colore di STATO: scala unica ok/non-so/ko/non-definito guidata da
+     `data-stato` sul fumetto. Default lime = ok (anche per risposte senza
+     stato, es. agevolazioni). */
+  background: var(--stato-ok);
+}
+.bubble.bubble--assistant[data-stato="parziale"]::before {
+  background: var(--stato-parziale);
+}
+.bubble.bubble--assistant[data-stato="non_pubblicato"]::before {
+  background: var(--stato-manca);
+}
+.bubble.bubble--assistant[data-stato="non_verificato"]::before {
+  background: var(--stato-ignoto);
+}
+/* La risposta e' solo CONTENUTO dentro la bolla: nessun contorno, nessun
+   fondo, nessuna ombra propria. Colonna flat, sezioni separate da hairline. */
+.bubble--assistant .chat__answer {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: var(--ma-3);
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* 2 - Ordine di lettura: messaggio umano + CTA prima, provenienza/web
+      dopo, chip d'accesso in coda (era in cima = rumore). */
+.bubble--assistant .chat__answer > .bandi-comune {
+  order: 0;
+}
+.bubble--assistant .chat__answer > .civica {
+  order: 1;
+}
+.bubble--assistant .chat__answer > .badge-connettore-box {
+  order: 2;
+}
+
+/* 3 - Appiattisci i box interni: diventano SEZIONI, non contenitori. */
+.bubble--assistant .chat__answer > .badge-connettore-box,
+.bubble--assistant .chat__answer > .bandi-comune,
+.bubble--assistant .chat__answer > .civica.tiq-card,
+.bubble--assistant .chat__answer .panel {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+}
+/* separatore fra sezioni: hairline, non un secondo bordo-scatola */
+.bubble--assistant .chat__answer > * + * {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--kasumi);
+}
+/* la barra-stato interna della civica sparisce: l'accento e' la card */
+.bubble--assistant .chat__answer .civica.tiq-card {
+  padding-left: 0;
+}
+.bubble--assistant .chat__answer .civica .tiq-card__banda {
+  display: none;
+}
+/* civica come colonna: fonti (web) PRIMA, riga di provenienza DOPO.
+   Sezioni separate da spazio, MAI da box (grammatica «nessun box interno»). */
+.bubble--assistant .chat__answer .civica.tiq-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ma-3);
+}
+/* Servizio e recapiti (telefono/email/orari) erano riquadri: ora tipografia
+   flat sullo stesso fondo del fumetto. L'unico box ammesso e' il pannello
+   fonti richiudibile, non questi. */
+.bubble--assistant .chat__answer .civica__servizio,
+.bubble--assistant .chat__answer .civica__contatto {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+}
+.bubble--assistant .chat__answer .civica__contatti {
+  gap: var(--ma-4);
+}
+/* Il tick blu sui titoletti di sezione (non solo web): via, sono etichette. */
+.bubble--assistant .chat__answer .civica__blocco h4 {
+  border-left: none;
+  padding-left: 0;
+}
+/* La CTA del servizio segue la stessa grammatica del pulsante corallo. */
+.bubble--assistant .chat__answer .civica__cta {
+  background: var(--cta);
+  color: var(--cta-ink);
+  border: 1.5px solid var(--sumi);
+  box-shadow: 3px 3px 0 0 var(--sumi);
+  border-radius: 10px;
+  font-weight: 700;
+  transition:
+    transform 0.12s var(--ease-overshoot),
+    box-shadow 0.12s ease,
+    background 0.12s ease;
+}
+.bubble--assistant .chat__answer .civica__cta:hover {
+  background: var(--cta-deep);
+  filter: none;
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 0 var(--sumi);
+}
+.bubble--assistant .chat__answer .civica__blocco--web {
+  order: 0;
+}
+.bubble--assistant .chat__answer .civica__bolli {
+  order: 1;
+}
+/* via il vecchio "tick" verticale: la sezione web e' tipografia pura. */
+.bubble--assistant .chat__answer .civica__blocco--web {
+  border: none;
+  padding-left: 0;
+  margin-left: 0;
+}
+
+/* 4 - Messaggio umano in primo piano: niente scatola ambra, e' testo. */
+.bubble--assistant .chat__answer .bandi-comune__caveat {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: var(--sumi);
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+/* 5 - CTA unica, corallo. Un solo bottone pieno per risposta. */
+.bubble--assistant .chat__answer .panel .button {
+  background: var(--cta);
+  color: var(--cta-ink);
+  border: 1.5px solid var(--sumi);
+  box-shadow: 3px 3px 0 0 var(--sumi);
+  border-radius: 10px;
+  font-weight: 700;
+  transition:
+    transform 0.12s var(--ease-overshoot),
+    box-shadow 0.12s ease,
+    background 0.12s ease;
+}
+.bubble--assistant .chat__answer .panel .button:hover {
+  background: var(--cta-deep);
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 0 var(--sumi);
+}
+
+/* 6 - Provenienza: riga di metadati quieta in CODA (sotto le fonti),
+      non due badge riquadrati in cima. */
+.bubble--assistant .chat__answer .civica__bolli {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--ma-2);
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: var(--sumi-faint);
+  text-transform: none;
+}
+/* la chip d'accesso continua la stessa riga di metadati: tight, no hairline. */
+.bubble--assistant .chat__answer > .badge-connettore-box {
+  margin-top: var(--ma-2);
+  padding-top: 0;
+  border-top: none;
+}
+.bubble--assistant .chat__answer .civica__stato,
+.bubble--assistant .chat__answer .civica__vivo-bollo {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+}
+.bubble--assistant .chat__answer .civica__vivo-wrap::before {
+  content: "·";
+  margin-right: var(--ma-2);
+  color: var(--kasumi);
+}
+/* La chip d'accesso e' il primo elemento della riga di provenienza:
+   stesso registro mono quieto, separatore "·" verso lo stato. */
+.bubble--assistant .chat__answer .civica__access {
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: uppercase; /* coerente con stato/freschezza sulla riga */
+}
+.bubble--assistant .chat__answer .civica__access + .civica__stato::before {
+  content: "·";
+  margin-right: var(--ma-2);
+  color: var(--kasumi);
+}
+
+/* 7 - Header web = etichetta di provenienza quieta, non un titolo. */
+.bubble--assistant .chat__answer .civica__blocco--web h4 {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--sumi-faint);
+  text-transform: none;
+  margin: 0 0 var(--ma-2);
+  /* via il tick blu: la provenienza e' etichetta tipografica, non un titolo. */
+  border-left: none;
+  padding-left: 0;
+}
+/* link web: underline lime (l'unico posto dove l'acido tocca il testo,
+   come sottolineatura - non come colore del testo). */
+.bubble--assistant .chat__answer .civica__web a {
+  color: var(--sumi); /* testo scuro leggibile: il lime resta accento, non testo */
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--lime);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.12s ease;
+}
+.bubble--assistant .chat__answer .civica__web a:hover {
+  text-decoration-color: var(--lime-ink);
+}
+
+/* 8 - Chip d'accesso in coda: piccolo, quieto. */
+.bubble--assistant .chat__answer .badge-connettore {
+  font-size: 0.72rem;
+  color: var(--sumi-faint);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bubble--assistant .chat__answer .panel .button {
+    transition: none;
+  }
+}
+
+/* 9 - Dump uffici "letto ora" (.scheda-letto-ora): stesso appiattimento del
+   ramo .civica. E' un box a se' (banda ambra + fondo crema + bordo) che
+   dentro il fumetto diventava un box-nel-box. Lo riduco a sezione
+   tipografica: nessun fondo, nessun bordo, la barra di stato la mette gia'
+   il ::before del fumetto. */
+.bubble--assistant .chat__answer .scheda-letto-ora.tiq-card {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+}
+.bubble--assistant .chat__answer .scheda-letto-ora .tiq-card__banda {
+  display: none;
+}
+/* Testa provenienza: da titolone maiuscolo a intestazione quieta, come
+   "Pagine trovate sul web". */
+.bubble--assistant .chat__answer .scheda-letto-ora__provenienza-testa {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--sumi-faint);
+  text-transform: none;
+  margin: 0 0 var(--ma-3);
+}
+.bubble--assistant .chat__answer .scheda-letto-ora__ufficio {
+  background: transparent;
+}
+/* Link (nome ufficio + telefono/email): navy + underline lime, mai il blu
+   --ai che era un terzo colore fuori tavolozza. */
+.bubble--assistant .chat__answer .scheda-letto-ora__ufficio-nome,
+.bubble--assistant .chat__answer .scheda-letto-ora__link {
+  color: var(--sumi);
+  text-decoration: underline;
+  text-decoration-color: var(--lime);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.12s ease;
+}
+.bubble--assistant .chat__answer .scheda-letto-ora__ufficio-nome:hover,
+.bubble--assistant .chat__answer .scheda-letto-ora__link:hover {
+  text-decoration-color: var(--lime-ink);
+}

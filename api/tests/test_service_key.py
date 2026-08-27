@@ -18,6 +18,10 @@ from treasureiq.chat.service_key import riconosci_service_key
         # hits
         ("mi serve il modulo della carta d'identità", ServiceKey.CARTA_IDENTITA),
         ("posso fare la CIE?", ServiceKey.CARTA_IDENTITA),
+        # REAL corpus: apostrophe elided to a space. High-confidence — "identità"
+        # is explicit — so it must confirm exactly like the apostrophe form.
+        ("come richiedo la carta d identità?", ServiceKey.CARTA_IDENTITA),
+        ("carta d identita a bordighera", ServiceKey.CARTA_IDENTITA),
         ("voglio fare il cambio di residenza", ServiceKey.CAMBIO_RESIDENZA),
         # verbal form: "cambiare residenza" is the natural phrasing of an
         # actionable request and must confirm exactly like the noun form.
@@ -44,6 +48,11 @@ from treasureiq.chat.service_key import riconosci_service_key
         ("devo pagare IMU e TARI", None),
         ("ciao", None),
         ("modulo per il passaporto", None),
+        # bare "carta" is deliberately ambiguous (identità / credito / soggiorno):
+        # it must NOT collapse into CARTA_IDENTITA. Only the explicit-"identità"
+        # forms above are high-confidence. (Real corpus miss, kept out on purpose.)
+        ("come rinnovo la carta", None),
+        ("come richiedo la carta", None),
         # generic 'residenza' alone is not a marker
         ("residenza", None),
         # bare 'matrimonio' is NOT a marker: a distinct sub-service must not

@@ -56,6 +56,18 @@ _PAROLE_VUOTE = frozenset(
     {"di", "del", "della", "dei", "delle", "in", "nel", "nell", "sul",
      "sull", "su", "a", "al", "alla", "d", "l", "e", "con"}
 )
+#: Parole-funzione (articoli/preposizioni) usate SOLO per disinnescare la chiave
+#: compatta, mai per costruire gli indici: espandere `_PAROLE_VUOTE` cambierebbe
+#: le chiavi di nomi reali («San Vito Lo Capo» perderebbe «lo» dall'indice). La
+#: chiave compatta salda i token adiacenti per recuperare un nome scritto
+#: spezzato («monte rotondo» → «monterotondo»); se però OGNI token della finestra
+#: è una parola-funzione, la fusione salda solo grammatica in un toponimo
+#: fantasma («per lo» → «perlo» = Perlo, CN). `_PAROLE_VUOTE` non basta: non
+#: contiene «per»/«lo». Le finestre con almeno un token di contenuto restano
+#: fondibili; quelle tutte-funzionali no.
+_PAROLE_FUNZIONE = _PAROLE_VUOTE | frozenset(
+    {"per", "lo", "la", "il", "i", "le", "gli", "un", "uno", "una", "tra", "fra"}
+)
 _PREFISSO_COMUNE = re.compile(
     r"^\s*(?:il\s+|la\s+)?(?:comune|citt[àa]|municipio|paese)\s+(?:di\s+|d['’]\s*)?",
     re.IGNORECASE,
@@ -243,9 +255,18 @@ class SourceFrame:
                     and tokens[inizio - 1] in _PREFISSI_TOPONIMO
                 ):
                     continue
-                frase = " ".join(tokens[inizio : inizio + lunghezza])
-                compatta = "".join(tokens[inizio : inizio + lunghezza])
-                candidati = self._per_nome.get(frase) or self._per_nome.get(compatta)
+                finestra = tokens[inizio : inizio + lunghezza]
+                frase = " ".join(finestra)
+                compatta = "".join(finestra)
+                # La frase (nome scritto com'è) vince sempre; la chiave compatta
+                # è solo il recupero del nome spezzato. La si consulta a meno che
+                # l'intera finestra sia grammatica: «per lo» → «perlo» saldava
+                # due parole-funzione nel comune Perlo (CN), derapando la
+                # risposta fuori-copertura. Un token di contenuto (es. «monte
+                # rotondo») lascia intatta la fusione legittima.
+                candidati = self._per_nome.get(frase)
+                if candidati is None and not all(t in _PAROLE_FUNZIONE for t in finestra):
+                    candidati = self._per_nome.get(compatta)
                 if candidati is None:
                     continue
                 # Omonimi: più di un comune con questo nome → non indovinare.

@@ -57,6 +57,13 @@ def _frame():
         _row("058061", "Monterotondo", "RM", "Lazio", "www.comune.monterotondo.rm.it", "C_F611"),
         _row("035033", "Reggio nell'Emilia", "RE", "Emilia-Romagna", "www.comune.re.it", "C_H223"),
         _row("058091", "Roma", "RM", "Lazio", "www.comune.roma.it", "C_H501"),
+        # "Perlo" (CN) is the compact-key hazard: "per lo" (preposition +
+        # article) fuses to "perlo" and used to derail an answer to this comune.
+        _row("004162", "Perlo", "CN", "Piemonte", "www.comune.perlo.cn.it", "C_G455"),
+        # Two real names carrying a function word as a genuine token — the
+        # regression guard: fixing "per lo" must NOT stop these resolving.
+        _row("081021", "San Vito Lo Capo", "TP", "Sicilia", "www.comune.sanvitolocapo.tp.it", "C_I407"),
+        _row("014002", "Albaredo per San Marco", "SO", "Lombardia", "www.comune.albaredo.so.it", "C_A134"),
     ]
 
 
@@ -115,6 +122,28 @@ def test_parity_risolvi_compact_key(sonda_su_frame) -> None:
     theirs = sonda_live.risolvi_comune("sto a monte rotondo")
     assert mine is not None and theirs is not None
     assert mine.codice_istat == theirs.codice_istat == "058061"
+
+
+def test_risolvi_ignora_fusione_parole_funzione(sonda_su_frame) -> None:
+    reg = MunicipalityRegistry.from_path(sonda_su_frame)
+    # "per lo" (preposizione + articolo) NON deve fondersi nel comune Perlo:
+    # la chiave compatta salta le finestre tutte-funzionali. Vale in entrambi.
+    for testo in ("a chi mi rivolgo per lo sportello imprese", "per lo"):
+        assert reg.risolvi_comune(testo) is None
+        assert sonda_live.risolvi_comune(testo) is None
+    # ...ma "Perlo" scritto per intero resta il comune vero: nessuna perdita.
+    assert reg.risolvi_comune("vivo a Perlo").codice_istat == "004162"
+
+
+def test_risolvi_preserva_parola_funzione_nel_nome(sonda_su_frame) -> None:
+    reg = MunicipalityRegistry.from_path(sonda_su_frame)
+    # Il fix non tocca i nomi che PORTANO una parola-funzione come token vero:
+    # la finestra ha un token di contenuto, quindi non è tutta-funzionale e la
+    # frase (nome scritto com'è) vince comunque.
+    assert reg.risolvi_comune("vivo a San Vito Lo Capo").codice_istat == "081021"
+    assert sonda_live.risolvi_comune("vivo a San Vito Lo Capo").codice_istat == "081021"
+    assert reg.risolvi_comune("abito ad Albaredo per San Marco").codice_istat == "014002"
+    assert sonda_live.risolvi_comune("abito ad Albaredo per San Marco").codice_istat == "014002"
 
 
 def test_parity_cerca_order_and_membership(sonda_su_frame) -> None:

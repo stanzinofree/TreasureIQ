@@ -1860,6 +1860,7 @@ async def _build_informazione_answer(
             topic=intent.topic,
             ufficio_chiesto=ufficio_nominato or "",
             disabilita_attiva=_disabilita_attiva_nel_testo(parole),
+            service_key=riconosci_service_key(parole),
         )
         if office_ufficio is not None:
             office = office_ufficio.office
@@ -2327,6 +2328,7 @@ async def _office_da_ufficio_nominato(
     topic: Topic,
     ufficio_chiesto: str,
     disabilita_attiva: bool,
+    service_key: ServiceKey | None = None,
 ) -> UfficioDrillResult | None:
     """L'ufficio NOMINATO dal cittadino, con il SUO orario letto adesso, servito
     ATTRAVERSO il contratto v1 (DataRequest/DataBatch) come il rail decisione.
@@ -2352,6 +2354,20 @@ async def _office_da_ufficio_nominato(
     esito = await asyncio.to_thread(connettore.leggi_connettore, codice_istat)
     if esito is None or not esito.uffici:
         return None
+    # Stesso innesto Municipium del ramo connettore (site-2, `_risposta_da_connettore`):
+    # quando il cittadino NON ha nominato un ufficio e la piattaforma è Municipium con
+    # Aree che non nominano il servizio (Ariccia), il topic deduce la sottostringa
+    # d'Area evidence-locked, passata come se l'avesse nominata. `_area_municipium_per_topic`
+    # torna `None` — e resta il fallback onesto — se non è Municipium, il comune non è
+    # mappato, o la ServiceKey è tra quelle escluse (carta d'identità, D-04). Nessuna
+    # mappa duplicata: stessa funzione, stessa guardia del site-2.
+    ufficio_chiesto = ufficio_chiesto or _area_municipium_per_topic(
+        codice_istat=codice_istat,
+        piattaforma=esito.piattaforma,
+        topic=topic,
+        ufficio_chiesto=ufficio_chiesto,
+        service_key=service_key,
+    ) or ""
     # Stessa disciplina di match del ramo connettore (`_risposta_da_connettore`):
     # unica definizione di «quale ufficio intendeva», letterale-prima-dei-sinonimi
     # inclusa. Nessuna logica di match duplicata qui.
@@ -5196,6 +5212,7 @@ async def build_chat_answer(
                 topic=risposta.topic,
                 ufficio_chiesto=_ufficio_chiesto(parole) or "",
                 disabilita_attiva=_disabilita_attiva_nel_testo(message),
+                service_key=riconosci_service_key(parole),
             )
             if office_letto is not None:
                 risposta = replace(

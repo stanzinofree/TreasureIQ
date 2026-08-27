@@ -1450,6 +1450,42 @@ def _ufficio_chiesto(parole: str) -> str | None:
     return None
 
 
+#: «Chi è il responsabile / a chi mi rivolgo»: la domanda chiede la PERSONA o
+#: lo sportello di riferimento, non un modulo né una spiegazione del servizio.
+#: Da sola — senza «ufficio X» né «orari» — non attivava il drill per-ufficio:
+#: il cittadino cadeva sull'URP muto (ramo coperto) o su nessuno sportello (ramo
+#: fuori copertura), mai sull'ufficio DEDOTTO dal topic. Parole intere (`\b`)
+#: per non pescarle dentro altre; le locuzioni sono sottostringhe esplicite. Il
+#: marker è ADDITIVO al trigger del drill: non tocca servizio/modulistica (rail
+#: diverso) né il routing di orari/ufficio nominato (già gestiti a monte), e il
+#: drill resta self-guarding (deduce dal topic o degrada onesto, mai indovina).
+_MARCATORI_RESPONSABILE_PAROLA = (
+    re.compile(r"\bresponsabil[ei]\b"),
+    re.compile(r"\breferent[ei]\b"),
+)
+_MARCATORI_RESPONSABILE_FRASE = (
+    "a chi mi rivolgo",
+    "a chi rivolgersi",
+    "chi si occupa",
+    "contatto dell'ufficio",
+    "contatto dell ufficio",
+)
+
+
+def _richiesta_responsabile(parole: str) -> bool:
+    """La domanda chiede il responsabile/referente di uno sportello?
+
+    Vero per «chi è il responsabile dell'anagrafe», «a chi mi rivolgo per il
+    cambio di residenza», «chi si occupa dei tributi». Falso per le richieste
+    di servizio, informative o di modulistica che non nominano un referente:
+    il marker è additivo al trigger del drill, mai un dirottamento del routing.
+    Riceve `parole` già in minuscolo (come `_ufficio_chiesto`).
+    """
+    if any(rx.search(parole) for rx in _MARCATORI_RESPONSABILE_PAROLA):
+        return True
+    return any(frase in parole for frase in _MARCATORI_RESPONSABILE_FRASE)
+
+
 def _disabilita_attiva_nel_testo(parole: str) -> bool:
     """Il filtro disabilita (proprio o del nucleo) e' acceso in questo testo?
 
@@ -1812,11 +1848,17 @@ async def _build_informazione_answer(
     drill_batches: list[DataBatch] = []
     drill_plan: QueryPlan | None = None
     drill_selected: DataBatch | None = None
-    if ufficio_nominato is not None:
+    # Il drill parte anche quando il cittadino chiede il RESPONSABILE senza
+    # nominare l'ufficio («chi è il responsabile dell'anagrafe»): passando
+    # `ufficio_chiesto=""` è il topic a dedurre lo sportello dentro
+    # `_office_da_ufficio_nominato` (via `_ufficio_connettore_pertinente`),
+    # invece di ripiegare sull'URP muto. Nessun cambiamento per orari/ufficio
+    # nominato: quel ramo resta identico quando `ufficio_nominato` c'è.
+    if ufficio_nominato is not None or _richiesta_responsabile(parole):
         office_ufficio = await _office_da_ufficio_nominato(
             codice_istat=ente.codice_istat,
             topic=intent.topic,
-            ufficio_chiesto=ufficio_nominato,
+            ufficio_chiesto=ufficio_nominato or "",
             disabilita_attiva=_disabilita_attiva_nel_testo(parole),
         )
         if office_ufficio is not None:
@@ -5009,7 +5051,11 @@ async def build_chat_answer(
             connettore is not None
             and risposta.info is not None
             and risposta.topic is not None
-            and (_ufficio_chiesto(parole) is not None or "orari" in parole)
+            and (
+                _ufficio_chiesto(parole) is not None
+                or "orari" in parole
+                or _richiesta_responsabile(parole)
+            )
         ):
             office_letto = await _office_da_ufficio_nominato(
                 codice_istat=nominato.codice_istat,

@@ -138,6 +138,37 @@ def test_ora_e_un_avverbio_non_il_comune_di_ora():
     assert _comuni_candidati("ditemi ora quali bandi sono aperti") == []
 
 
+def test_cambio_e_parola_servizio_non_il_comune_di_rocca_di_cambio():
+    """«cambio (di) residenza» dirottava il comune del cittadino su Rocca di
+    Cambio (AQ, 066081): «cambio» è l'unica coda-nome di quel toponimo e il
+    match per-parola lo pescava. Sia la richiesta modulistica sia quella
+    informativa (orari/responsabile) devono restare senza candidati toponimo."""
+    from treasureiq.chat.respond import _comuni_candidati, _comune_nominato
+
+    assert _comuni_candidati("modulo cambio di residenza") == []
+    assert _comuni_candidati("come faccio il cambio residenza") == []
+    assert _comuni_candidati("orari per il cambio di residenza") == []
+    assert _comuni_candidati("responsabile ufficio cambio residenza") == []
+    assert _comune_nominato("modulo cambio di residenza") is None
+    assert _comune_nominato("orari cambio residenza") is None
+
+
+def test_rocca_di_cambio_solo_via_selettore_istat_non_da_testo():
+    """Tradeoff dichiarato della stoplist: «Rocca di Cambio» in testo libero
+    NON viene più selezionato dalla chat (il match per-parola cade su «rocca»,
+    ambiguo). Resta raggiungibile via selettore ISTAT / nome esatto nel
+    registry — il dato non sparisce, cade solo il path testuale della chat."""
+    from treasureiq.chat.respond import _comune_nominato
+    from treasureiq.sonda_live import risolvi_comune
+
+    # path testuale chat: non più selezionato (ambiguo su «rocca»)
+    assert _comune_nominato("Rocca di Cambio") is None
+    # registry / selettore: comune intatto, 066081 (AQ)
+    rocca = risolvi_comune("Rocca di Cambio")
+    assert rocca is not None
+    assert rocca.codice_istat == "066081"
+
+
 def test_gorla_minore_risolve_ancora_via_parola_distintiva():
     """Togliere «minore» non deve togliere il comune vero: «gorla» resta e
     risolve il nome intero — qui l'omonimia Maggiore/Minore fa chiedere quale,

@@ -104,6 +104,11 @@
   --shadow-rest: 0 1px 2px rgba(27, 33, 29, 0.06);
   --shadow-lift: 0 4px 16px rgba(27, 33, 29, 0.09);
 
+  /* Easing con overshoot leggero: l'elemento supera di poco la posizione e
+     rientra. È l'unica curva "giocosa" che ci concediamo, presa dal report
+     MailChecker; la durata la tiene il budget animazioni (ingresso ≤420ms). */
+  --ease-overshoot: cubic-bezier(0.34, 1.56, 0.64, 1);
+
   /* --- Card contract (ciclo 13, congelato) — struttura, non palette. --- */
   --card-accent-w: 3px;   /* spessore accento sinistro .tiq-card */
   --elev-1: 0 1px 3px rgba(11, 29, 58, 0.08), 0 1px 2px rgba(11, 29, 58, 0.05);
@@ -1648,7 +1653,22 @@ a {
   border-radius: var(--radius);
   padding: var(--ma-4) var(--ma-6);
   max-width: 88%;
+  /* Ingresso: ogni bolla nasce con un piccolo scatto (overshoot) al mount.
+     React inserisce un nodo alla volta, quindi il turno nuovo si anima da
+     solo; sul ripristino della cronologia lo scaglionamento sotto (nth-child)
+     dà l'effetto a cascata. Rispetta prefers-reduced-motion (blocco globale
+     azzera durata e iterazioni). Ispirazione MailChecker, tono TIQ. */
+  animation: tiq-bubble-in 0.42s var(--ease-overshoot) both;
 }
+
+/* Cascata sul ripristino: le prime bolle entrano a scalare. Oltre la sesta
+   il ritardo si azzera — nessuno guarda in fondo mentre scorre. */
+.bubble:nth-child(1) { animation-delay: 0ms; }
+.bubble:nth-child(2) { animation-delay: 45ms; }
+.bubble:nth-child(3) { animation-delay: 90ms; }
+.bubble:nth-child(4) { animation-delay: 135ms; }
+.bubble:nth-child(5) { animation-delay: 180ms; }
+.bubble:nth-child(6) { animation-delay: 225ms; }
 
 /* `align-self`, not `justify-self`: the transcript became a flex column when
    it started scrolling, and in a flex column `justify-self` does nothing at
@@ -1657,15 +1677,37 @@ a {
 .bubble--user {
   align-self: flex-end;
   background: var(--paper-sunken);
-  border: 1px solid var(--kasumi);
+  /* Eco sobria del linguaggio brutalist: bordo pieno + ombra offset piccola
+     su --sumi (navy di marca), non la generica --shadow-rest. La bolla del
+     cittadino resta più leggera di quella dell'assistente. */
+  border: 1.5px solid var(--sumi);
+  box-shadow: 3px 3px 0 0 var(--sumi);
+  transition: transform 0.15s var(--ease-overshoot), box-shadow 0.15s ease;
 }
 
 .bubble--assistant {
   align-self: stretch;
   max-width: 100%;
   background: var(--paper-raised);
-  border: 1px solid var(--kasumi);
-  box-shadow: var(--shadow-rest);
+  /* Trattamento neo-brutalist adattato ai token TIQ: bordo 2px --sumi e
+     ombra offset dura (5px, non morbida). L'accento resta navy/blu di marca —
+     niente tinte acide, niente gradient: il registro civico-giapponese
+     comanda la palette, MailChecker solo la grammatica dell'ombra. */
+  border: 2px solid var(--sumi);
+  box-shadow: 5px 5px 0 0 var(--sumi);
+  transition: transform 0.15s var(--ease-overshoot), box-shadow 0.15s ease;
+}
+
+/* Hover: la scheda si solleva verso l'alto-sinistra e l'ombra cresce — il
+   gesto MailChecker, misurato. Solo transform/opacity/box-shadow (budget
+   animazioni: hover ≤150ms, solo proprietà composited). */
+.bubble--assistant:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 7px 7px 0 0 var(--sumi);
+}
+.bubble--user:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 0 var(--sumi);
 }
 
 /* Who is speaking. Said in words rather than left to alignment alone: on a
@@ -5787,5 +5829,67 @@ a {
   .tiq-card__apertura {
     transition: none;
     animation: none;
+  }
+}
+
+/* ==========================================================================
+   Animazioni chat — ispirazione grafica: report MailChecker (neo-brutalist),
+   librerie dal catalogo skill ux-designer. Tutto pure-CSS, zero dipendenze,
+   zero fetch remoti: coerente col self-hosted. Il blocco globale
+   prefers-reduced-motion (in cima al file) azzera già durata e iterazioni,
+   quindi ogni cosa qui è automaticamente sicura per chi disattiva il moto.
+   ========================================================================== */
+
+/* Ingresso bolla: scatto con overshoot (Open Props easing, riscritto a mano).
+   Sostituisce l'apparizione secca con un movimento breve verso l'alto. */
+@keyframes tiq-bubble-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Indicatore di attesa: tre punti che rimbalzano in sequenza, sul modello di
+   "Three Dots" (CSS puro, 0 dep — catalogo ux-designer). Prende il posto del
+   solo testo che ruotava durante `busy`: il testo resta accanto, i punti
+   danno il segnale "sto lavorando" che il testo statico non dava. */
+.tiq-typing {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ma-2);
+}
+.tiq-typing__dots {
+  display: inline-flex;
+  gap: 5px;
+}
+.tiq-typing__dots span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ai); /* blu di marca, non tinta acida */
+  display: inline-block;
+  animation: tiq-typing-bounce 1.2s var(--ease-overshoot) infinite both;
+}
+.tiq-typing__dots span:nth-child(2) {
+  animation-delay: 0.16s;
+}
+.tiq-typing__dots span:nth-child(3) {
+  animation-delay: 0.32s;
+}
+
+@keyframes tiq-typing-bounce {
+  0%,
+  70%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.45;
+  }
+  35% {
+    transform: translateY(-6px);
+    opacity: 1;
   }
 }

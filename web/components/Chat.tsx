@@ -1784,7 +1784,15 @@ export default function Chat() {
         ))}
 
         {busy && (
-          <p className="chat__hint" aria-hidden="true">
+          <p className="chat__hint tiq-typing" aria-hidden="true">
+            {/* Tre punti che rimbalzano (stile Three Dots, CSS puro) accanto
+                al testo che ruota: il moto dà il segnale "sto lavorando" che
+                il solo testo statico non dava. Decorativo → aria-hidden. */}
+            <span className="tiq-typing__dots" aria-hidden="true">
+              <span />
+              <span />
+              <span />
+            </span>
             {ATTESA[passoAttesa % ATTESA.length]}
           </p>
         )}

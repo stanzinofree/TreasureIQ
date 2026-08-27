@@ -34,6 +34,11 @@ _SUBSTRING_MARKERS: dict[ServiceKey, tuple[str, ...]] = {
         "carta d'identita",
         "carta di identità",
         "carta di identita",
+        # Apostrophe elided to a bare space when typed ("carta d identità").
+        # Still high-confidence: "identit…" is explicit, so no collision with
+        # "carta di credito"/"carta di soggiorno". Bare "carta" stays unmatched.
+        "carta d identità",
+        "carta d identita",
     ),
     ServiceKey.CAMBIO_RESIDENZA: (
         "cambio residenza",

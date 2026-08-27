@@ -2096,6 +2096,57 @@ def _e_organo_politico(nome: str) -> bool:
     return bool(testa) and testa[0] in _ORGANI_POLITICI
 
 
+#: Municipium pubblica gli uffici come macro-Aree il cui NOME non nomina il
+#: servizio: a Ariccia (058009) «Area V – Amministrativa» ospita anagrafe/stato
+#: civile ed «Area I – …finanziarie» i tributi. Il match diretto per-topic
+#: (`_ufficio_connettore_pertinente` splitta `topic.value`) non trova «anagrafe»
+#: in nessun nome d'Area → il drill ripiega su Centralino, mai sull'ufficio
+#: giusto. Questa mappa collega topic→Area SOLO dove la PAGINA dell'Area
+#: pubblica quel servizio nelle competenze (recon read-only, evidence-locked):
+#: mai dedotta dal nome generico dell'Area (D-04, «no ufficio indovinato»).
+#: Keyed per ISTAT — ogni Municipium nuovo va verificato prima di aggiungere una
+#: voce, perché un'«Area Amministrativa» altrove può NON ospitare l'anagrafe. Il
+#: valore è la sottostringa che identifica univocamente l'Area nel comune;
+#: assente la voce (o il topic), resta il fallback onesto a Centralino.
+_MUNICIPIUM_TOPIC_AREA: dict[str, dict[Topic, str]] = {
+    # Ariccia (058009) — competenze pubblicate su comune.ariccia.rm.it/it/
+    # unita_organizzative/: Area V «Elettorale, Stato Civile, Anagrafe,
+    # Statistiche, Messi, Protocolli…»; Area I «Servizio Tributi e Ambiente,
+    # Servizio Finanziaria». `accesso_atti`: nessuna Area dedicata pubblicata
+    # (Protocollo è in Area V ma non è «accesso agli atti») → nessuna voce.
+    "058009": {
+        Topic.ANAGRAFE_CARTA_IDENTITA: "amministrativa",
+        Topic.MATRIMONIO_SEPARAZIONE: "amministrativa",
+        Topic.TRIBUTI: "finanziari",
+    },
+}
+
+
+def _area_municipium_per_topic(
+    *,
+    codice_istat: str,
+    piattaforma: str | None,
+    topic: Topic,
+    ufficio_chiesto: str | None,
+) -> str | None:
+    """Sottostringa dell'Area competente per `topic` su un comune Municipium.
+
+    Serve solo il caso censito-Municipium in cui le Aree non nominano il
+    servizio: torna la sottostringa da passare a `_ufficio_connettore_pertinente`
+    come se il cittadino avesse nominato quell'Area. Vale SOLO quando il
+    cittadino non ha già nominato un ufficio (`ufficio_chiesto` vuoto) e solo per
+    le voci evidence-locked di `_MUNICIPIUM_TOPIC_AREA`. Torna `None` — e il
+    chiamante mantiene il fallback onesto — se la piattaforma non è Municipium,
+    il comune non è mappato, o il topic non ha un'Area dimostrata: mai un'Area
+    indovinata dal nome generico (D-04).
+    """
+    if ufficio_chiesto:
+        return None
+    if piattaforma != "municipium":
+        return None
+    return _MUNICIPIUM_TOPIC_AREA.get(codice_istat, {}).get(topic)
+
+
 def _ufficio_connettore_pertinente(
     uffici: list[UfficioConnettore],
     *,
@@ -2365,6 +2416,21 @@ async def _risposta_da_connettore(
     ]
     if not uffici_decisione:
         return None
+
+    # Municipium: le Aree non nominano il servizio nel titolo, così il match
+    # diretto per-topic fallisce e senza questo il drill ripiegherebbe su
+    # Centralino anche dove il comune dichiara l'Area competente. Deriva l'Area
+    # dalla mappa per-ISTAT evidence-locked SOLO se il cittadino non ha già
+    # nominato un ufficio; `_area_municipium_per_topic` torna `None` (→ fallback
+    # onesto invariato) per piattaforme non-Municipium, comuni non mappati o
+    # topic senza Area dimostrata. La sottostringa entra nel match come un
+    # ufficio nominato: nessun ramo nuovo, stesso `_ufficio_connettore_pertinente`.
+    ufficio_chiesto = ufficio_chiesto or _area_municipium_per_topic(
+        codice_istat=esito.codice_istat,
+        piattaforma=esito.piattaforma,
+        topic=topic,
+        ufficio_chiesto=ufficio_chiesto,
+    )
 
     ufficio, ambigui = _ufficio_connettore_pertinente(
         uffici_decisione,

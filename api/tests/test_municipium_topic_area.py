@@ -11,6 +11,12 @@ pubblica quel servizio nelle competenze (recon read-only). Il criterio-successo
 è non trasformare una macro-Area generica in un falso «Ufficio Anagrafe»:
 questi test bloccano le due regressioni simmetriche — la mappa che non aggancia
 (buco riaperto) e la mappa che aggancia dove non c'è evidenza (Area inventata).
+
+Granularità: la mappa è keyed per Topic, ma il Topic `ANAGRAFE_CARTA_IDENTITA`
+accorpa anagrafe e carta d'identità. La pagina Area V pubblica «Anagrafe» (e
+stato civile, residenza), NON «carta d'identità»/«CIE»: la carta d'identità
+esplicita è esclusa alla granularità ServiceKey (`_MUNICIPIUM_SERVICE_KEY_ESCLUSE`)
+per non ereditare un'evidenza che la pagina non cita.
 """
 
 from __future__ import annotations
@@ -22,6 +28,7 @@ from treasureiq.chat.respond import (
     _area_municipium_per_topic,
     _ufficio_connettore_pertinente,
 )
+from treasureiq.chat.service_key import ServiceKey
 from treasureiq.connettore import UfficioConnettore
 
 ARICCIA = "058009"
@@ -50,48 +57,64 @@ def _aree_ariccia() -> list[UfficioConnettore]:
     ]
 
 
-# --- La mappa: topic → sottostringa d'Area, solo con evidenza ---
+def _area(topic: Topic, service_key: ServiceKey | None = None) -> str | None:
+    return _area_municipium_per_topic(
+        codice_istat=ARICCIA,
+        piattaforma="municipium",
+        topic=topic,
+        ufficio_chiesto=None,
+        service_key=service_key,
+    )
+
+
+# --- La mappa aggancia dove c'è evidenza esplicita ---
 @pytest.mark.parametrize(
-    "topic, atteso",
+    "topic, service_key, atteso",
     [
-        (Topic.ANAGRAFE_CARTA_IDENTITA, "amministrativa"),  # Area V pubblica «Anagrafe»
-        (Topic.MATRIMONIO_SEPARAZIONE, "amministrativa"),  # Area V pubblica «Stato Civile»
-        (Topic.TRIBUTI, "finanziari"),  # Area I pubblica «Servizio Tributi»
+        # anagrafe bare (nessuna ServiceKey fine) → Area V: la pagina cita «Anagrafe»
+        (Topic.ANAGRAFE_CARTA_IDENTITA, None, "amministrativa"),
+        # cambio residenza → stessa Area V (residenza è competenza dell'Area V)
+        (Topic.ANAGRAFE_CARTA_IDENTITA, ServiceKey.CAMBIO_RESIDENZA, "amministrativa"),
+        # stato civile → Area V, sia che il turno resti sul topic anagrafico...
+        (Topic.ANAGRAFE_CARTA_IDENTITA, ServiceKey.STATO_CIVILE, "amministrativa"),
+        # ...sia che il modello lo classifichi come matrimonio/stato civile
+        (Topic.MATRIMONIO_SEPARAZIONE, ServiceKey.STATO_CIVILE, "amministrativa"),
+        (Topic.MATRIMONIO_SEPARAZIONE, None, "amministrativa"),
+        # tributi IMU/TARI → Area I (la pagina cita «Servizio Tributi»)
+        (Topic.TRIBUTI, ServiceKey.TRIBUTI_IMU, "finanziari"),
+        (Topic.TRIBUTI, ServiceKey.TRIBUTI_TARI, "finanziari"),
+        (Topic.TRIBUTI, None, "finanziari"),
     ],
 )
-def test_mappa_aggancia_dove_c_e_evidenza(topic, atteso):
-    assert (
-        _area_municipium_per_topic(
-            codice_istat=ARICCIA, piattaforma="municipium", topic=topic, ufficio_chiesto=None
-        )
-        == atteso
-    )
+def test_mappa_aggancia_dove_c_e_evidenza(topic, service_key, atteso):
+    assert _area(topic, service_key) == atteso
 
 
+# --- Carta d'identità: esclusa finché la pagina non cita CIE/carta d'identità ---
+def test_carta_identita_esplicita_resta_fallback():
+    """La carta d'identità condivide il Topic `ANAGRAFE_CARTA_IDENTITA` con
+    l'anagrafe, ma l'Area V pubblica «Anagrafe», non «carta d'identità»/«CIE».
+    La ServiceKey esplicita (marker «carta d'identità»/«cie») NON eredita
+    l'evidenza dell'anagrafe: cade al fallback onesto (Centralino)."""
+    assert _area(Topic.ANAGRAFE_CARTA_IDENTITA, ServiceKey.CARTA_IDENTITA) is None
+
+
+def test_anagrafe_bare_non_e_toccata_dall_esclusione():
+    """L'esclusione morde solo la ServiceKey `CARTA_IDENTITA`: l'anagrafe senza
+    ServiceKey fine resta agganciata all'Area V (non un effetto collaterale)."""
+    assert _area(Topic.ANAGRAFE_CARTA_IDENTITA, None) == "amministrativa"
+
+
+# --- Assenza di evidenza → nessuna Area inventata ---
 def test_accesso_atti_non_ha_area_dimostrata_resta_fallback():
-    """Ariccia non pubblica un'Area «accesso agli atti»: nessuna voce, il
-    chiamante mantiene il fallback onesto (Centralino), non inventa un'Area."""
-    assert (
-        _area_municipium_per_topic(
-            codice_istat=ARICCIA,
-            piattaforma="municipium",
-            topic=Topic.ACCESSO_ATTI,
-            ufficio_chiesto=None,
-        )
-        is None
-    )
+    """Ariccia non pubblica un'Area «accesso agli atti»: né il Topic né la
+    ServiceKey agganciano, il chiamante mantiene il fallback onesto (Centralino)."""
+    assert _area(Topic.ACCESSO_ATTI, ServiceKey.ACCESSO_ATTI) is None
+    assert _area(Topic.ACCESSO_ATTI, None) is None
 
 
 def test_topic_sconosciuto_non_inventa_area():
-    assert (
-        _area_municipium_per_topic(
-            codice_istat=ARICCIA,
-            piattaforma="municipium",
-            topic=Topic.SCONOSCIUTO,
-            ufficio_chiesto=None,
-        )
-        is None
-    )
+    assert _area(Topic.SCONOSCIUTO, None) is None
 
 
 @pytest.mark.parametrize("piattaforma", ["openpa", "wordpress_agid", "egov", None])
@@ -104,6 +127,7 @@ def test_mappa_non_tocca_altre_piattaforme(piattaforma):
             piattaforma=piattaforma,
             topic=Topic.ANAGRAFE_CARTA_IDENTITA,
             ufficio_chiesto=None,
+            service_key=None,
         )
         is None
     )
@@ -118,6 +142,7 @@ def test_comune_municipium_non_mappato_resta_fallback():
             piattaforma="municipium",
             topic=Topic.ANAGRAFE_CARTA_IDENTITA,
             ufficio_chiesto=None,
+            service_key=None,
         )
         is None
     )
@@ -132,6 +157,7 @@ def test_ufficio_gia_nominato_non_viene_sovrascritto():
             piattaforma="municipium",
             topic=Topic.TRIBUTI,
             ufficio_chiesto="tributi",
+            service_key=ServiceKey.TRIBUTI_IMU,
         )
         is None
     )

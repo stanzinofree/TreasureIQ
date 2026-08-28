@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "003104",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "003104:comweb:cambio-residenza-305-15-1-b48e267ff879a9a03db5f99db9893926",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.nibbiola.no.it/it-it/servizi/abitare-c/cambio-residenza-305-15-1-b48e267ff879a9a03db5f99db9893926",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.nibbiola.no.it/it-it/servizi/abitare-c/cambio-residenza-305-15-1-b48e267ff879a9a03db5f99db9893926",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.nibbiola.no.it/it-it/servizi/abitare-c/cambio-residenza-305-15-1-b48e267ff879a9a03db5f99db9893926",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:33:23.792270Z"
+  },
+  "stato_civile": {
+   "service_id": "003104:comweb:richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-1-1-c23df1f350cf0148bd36d010555fb127",
+   "title": "Richiesta di certificati/attestazioni/estratti di stato civile",
+   "source_url": "https://www.comune.nibbiola.no.it/it-it/servizi/essere-cittadino-c/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-1-1-c23df1f350cf0148bd36d010555fb127",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.nibbiola.no.it/it-it/servizi/essere-cittadino-c/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-1-1-c23df1f350cf0148bd36d010555fb127",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.nibbiola.no.it/it-it/servizi/essere-cittadino-c/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-1-1-c23df1f350cf0148bd36d010555fb127",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:33:27.215927Z"
+  },
+  "tributi_tari": {
+   "service_id": "003104:comweb:pagamento-tassa-rifiuti-tari-659-45-1-a77454aaaf19786987ca0f5eea28ff41",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.nibbiola.no.it/it-it/servizi/pagare-le-tasse-c/pagamento-tassa-rifiuti-tari-659-45-1-a77454aaaf19786987ca0f5eea28ff41",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.nibbiola.no.it/it-it/servizi/pagare-le-tasse-c/pagamento-tassa-rifiuti-tari-659-45-1-a77454aaaf19786987ca0f5eea28ff41",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.nibbiola.no.it/it-it/servizi/pagare-le-tasse-c/pagamento-tassa-rifiuti-tari-659-45-1-a77454aaaf19786987ca0f5eea28ff41",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:33:33.628118Z"
+  }
+ }
+}

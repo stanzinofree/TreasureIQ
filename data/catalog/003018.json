@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "003018",
+ "services": {
+  "carta_identita": {
+   "service_id": "003018:comweb:carta-d-identita-elettronica-cie-788-1-1-0052c1075a1722c887344430f8843d33",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.biandrate.no.it/it-it/servizi/essere-cittadino-c/carta-d-identita-elettronica-cie-788-1-1-0052c1075a1722c887344430f8843d33",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.biandrate.no.it/it-it/servizi/essere-cittadino-c/carta-d-identita-elettronica-cie-788-1-1-0052c1075a1722c887344430f8843d33",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.biandrate.no.it/it-it/servizi/essere-cittadino-c/carta-d-identita-elettronica-cie-788-1-1-0052c1075a1722c887344430f8843d33",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:32:41.108725Z"
+  },
+  "cambio_residenza": {
+   "service_id": "003018:comweb:cambio-residenza-305-15-1-b48e267ff879a9a03db5f99db9893926",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.biandrate.no.it/it-it/servizi/abitare-c/cambio-residenza-305-15-1-b48e267ff879a9a03db5f99db9893926",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.biandrate.no.it/it-it/servizi/abitare-c/cambio-residenza-305-15-1-b48e267ff879a9a03db5f99db9893926",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.biandrate.no.it/it-it/servizi/abitare-c/cambio-residenza-305-15-1-b48e267ff879a9a03db5f99db9893926",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:32:44.535720Z"
+  },
+  "tributi_tari": {
+   "service_id": "003018:comweb:pagamento-tassa-rifiuti-tari-659-45-1-a77454aaaf19786987ca0f5eea28ff41",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.biandrate.no.it/it-it/servizi/pagare-le-tasse-c/pagamento-tassa-rifiuti-tari-659-45-1-a77454aaaf19786987ca0f5eea28ff41",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.biandrate.no.it/it-it/servizi/pagare-le-tasse-c/pagamento-tassa-rifiuti-tari-659-45-1-a77454aaaf19786987ca0f5eea28ff41",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.biandrate.no.it/it-it/servizi/pagare-le-tasse-c/pagamento-tassa-rifiuti-tari-659-45-1-a77454aaaf19786987ca0f5eea28ff41",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:32:48.870363Z"
+  }
+ }
+}

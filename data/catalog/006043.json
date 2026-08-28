@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "006043",
+ "services": {
+  "stato_civile": {
+   "service_id": "006043:comweb:certificato-di-stato-civile-6-1-1-c1b50b5c2414650162cd4983aa424f6c",
+   "title": "Certificato di stato civile",
+   "source_url": "https://www.comune.cassine.al.it/it-it/servizi/essere-cittadino-c/certificato-di-stato-civile-6-1-1-c1b50b5c2414650162cd4983aa424f6c",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cassine.al.it/it-it/servizi/essere-cittadino-c/certificato-di-stato-civile-6-1-1-c1b50b5c2414650162cd4983aa424f6c",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cassine.al.it/it-it/servizi/essere-cittadino-c/certificato-di-stato-civile-6-1-1-c1b50b5c2414650162cd4983aa424f6c",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:34:22.036966Z"
+  }
+ }
+}

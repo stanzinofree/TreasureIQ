@@ -1,0 +1,120 @@
+{
+ "municipality_istat": "004135",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "004135:comweb:cambio-residenza-305-15-1-b48e267ff879a9a03db5f99db9893926",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.montaldoroero.cn.it/it-it/servizi/abitare-c/cambio-residenza-305-15-1-b48e267ff879a9a03db5f99db9893926",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montaldoroero.cn.it/it-it/servizi/abitare-c/cambio-residenza-305-15-1-b48e267ff879a9a03db5f99db9893926",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montaldoroero.cn.it/it-it/servizi/abitare-c/cambio-residenza-305-15-1-b48e267ff879a9a03db5f99db9893926",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:34:01.793925Z"
+  },
+  "accesso_atti": {
+   "service_id": "004135:comweb:richiedere-l-accesso-agli-atti-317-138-1-3b6732cd9f65b5ea6fe47593ed78d394",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.montaldoroero.cn.it/it-it/servizi/essere-cittadino-c/richiedere-l-accesso-agli-atti-317-138-1-3b6732cd9f65b5ea6fe47593ed78d394",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montaldoroero.cn.it/it-it/servizi/essere-cittadino-c/richiedere-l-accesso-agli-atti-317-138-1-3b6732cd9f65b5ea6fe47593ed78d394",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montaldoroero.cn.it/it-it/servizi/essere-cittadino-c/richiedere-l-accesso-agli-atti-317-138-1-3b6732cd9f65b5ea6fe47593ed78d394",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:34:04.919848Z"
+  },
+  "stato_civile": {
+   "service_id": "004135:comweb:richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-1-1-c23df1f350cf0148bd36d010555fb127",
+   "title": "Richiesta di certificati/attestazioni/estratti di stato civile",
+   "source_url": "https://www.comune.montaldoroero.cn.it/it-it/servizi/essere-cittadino-c/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-1-1-c23df1f350cf0148bd36d010555fb127",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montaldoroero.cn.it/it-it/servizi/essere-cittadino-c/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-1-1-c23df1f350cf0148bd36d010555fb127",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montaldoroero.cn.it/it-it/servizi/essere-cittadino-c/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-1-1-c23df1f350cf0148bd36d010555fb127",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:34:09.249542Z"
+  },
+  "tributi_imu": {
+   "service_id": "004135:comweb:pagare-tributi-imu-600-210-1-5f227f78ae688ee2260115d08501a967",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.montaldoroero.cn.it/it-it/servizi/pagare-le-tasse-c/pagare-tributi-imu-600-210-1-5f227f78ae688ee2260115d08501a967",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montaldoroero.cn.it/it-it/servizi/pagare-le-tasse-c/pagare-tributi-imu-600-210-1-5f227f78ae688ee2260115d08501a967",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montaldoroero.cn.it/it-it/servizi/pagare-le-tasse-c/pagare-tributi-imu-600-210-1-5f227f78ae688ee2260115d08501a967",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:34:13.482468Z"
+  },
+  "tributi_tari": {
+   "service_id": "004135:comweb:pagamento-tassa-rifiuti-tari-659-45-1-a77454aaaf19786987ca0f5eea28ff41",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.montaldoroero.cn.it/it-it/servizi/pagare-le-tasse-c/pagamento-tassa-rifiuti-tari-659-45-1-a77454aaaf19786987ca0f5eea28ff41",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montaldoroero.cn.it/it-it/servizi/pagare-le-tasse-c/pagamento-tassa-rifiuti-tari-659-45-1-a77454aaaf19786987ca0f5eea28ff41",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montaldoroero.cn.it/it-it/servizi/pagare-le-tasse-c/pagamento-tassa-rifiuti-tari-659-45-1-a77454aaaf19786987ca0f5eea28ff41",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:34:17.794321Z"
+  }
+ }
+}

@@ -141,6 +141,29 @@
    "discovered_from": "ordinary_data",
    "provider_platform": "comweb",
    "discovered_at": "2026-08-25T10:43:55.217902Z"
+  },
+  "carta_identita": {
+   "service_id": "001132:comweb:carta-d-identita-elettronica-cie-788-45496-1-4c2864ab347fa1775fdd6e9c630dab24",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.lessolo.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-45496-1-4c2864ab347fa1775fdd6e9c630dab24",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.lessolo.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-45496-1-4c2864ab347fa1775fdd6e9c630dab24",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.lessolo.to.it/it-it/servizi/anagrafe-e-stato-civile/carta-d-identita-elettronica-cie-788-45496-1-4c2864ab347fa1775fdd6e9c630dab24",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:29:44.423531Z"
   }
  }
 }

@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "006002",
+ "services": {
+  "carta_identita": {
+   "service_id": "006002:comweb:carta-d-identita-elettronica-cie-788-1-1-0052c1075a1722c887344430f8843d33",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.alberaligure.al.it/it-it/servizi/essere-cittadino-c/carta-d-identita-elettronica-cie-788-1-1-0052c1075a1722c887344430f8843d33",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.alberaligure.al.it/it-it/servizi/essere-cittadino-c/carta-d-identita-elettronica-cie-788-1-1-0052c1075a1722c887344430f8843d33",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.alberaligure.al.it/it-it/servizi/essere-cittadino-c/carta-d-identita-elettronica-cie-788-1-1-0052c1075a1722c887344430f8843d33",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:34:11.864073Z"
+  },
+  "cambio_residenza": {
+   "service_id": "006002:comweb:cambio-residenza-305-15-1-b48e267ff879a9a03db5f99db9893926",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.alberaligure.al.it/it-it/servizi/abitare-c/cambio-residenza-305-15-1-b48e267ff879a9a03db5f99db9893926",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.alberaligure.al.it/it-it/servizi/abitare-c/cambio-residenza-305-15-1-b48e267ff879a9a03db5f99db9893926",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.alberaligure.al.it/it-it/servizi/abitare-c/cambio-residenza-305-15-1-b48e267ff879a9a03db5f99db9893926",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:34:15.263634Z"
+  },
+  "stato_civile": {
+   "service_id": "006002:comweb:trascrizione-atti-di-stato-civile-formati-all-estero-882-143-1-533795b15b565042f13dcf06d943c905",
+   "title": "Trascrizione Atti di Stato Civile formati all’estero",
+   "source_url": "https://www.comune.alberaligure.al.it/it-it/servizi/essere-cittadino-c/trascrizione-atti-di-stato-civile-formati-all-estero-882-143-1-533795b15b565042f13dcf06d943c905",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.alberaligure.al.it/it-it/servizi/essere-cittadino-c/trascrizione-atti-di-stato-civile-formati-all-estero-882-143-1-533795b15b565042f13dcf06d943c905",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.alberaligure.al.it/it-it/servizi/essere-cittadino-c/trascrizione-atti-di-stato-civile-formati-all-estero-882-143-1-533795b15b565042f13dcf06d943c905",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:34:19.568007Z"
+  },
+  "tributi_imu": {
+   "service_id": "006002:comweb:imposta-municipale-propria-imu-953-210-1-27cd0c1015230648c11ed73ed5bb5a9b",
+   "title": "Imposta Municipale Propria (IMU)",
+   "source_url": "https://www.comune.alberaligure.al.it/it-it/servizi/pagare-le-tasse-c/imposta-municipale-propria-imu-953-210-1-27cd0c1015230648c11ed73ed5bb5a9b",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.alberaligure.al.it/it-it/servizi/pagare-le-tasse-c/imposta-municipale-propria-imu-953-210-1-27cd0c1015230648c11ed73ed5bb5a9b",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.alberaligure.al.it/it-it/servizi/pagare-le-tasse-c/imposta-municipale-propria-imu-953-210-1-27cd0c1015230648c11ed73ed5bb5a9b",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:34:23.894185Z"
+  }
+ }
+}

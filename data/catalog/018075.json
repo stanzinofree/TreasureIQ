@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "018075",
+ "services": {
+  "carta_identita": {
+   "service_id": "018075:comweb:carta-d-identita-1-1-1-f4ca5a18b39d779849774113df8b0391",
+   "title": "Carta d'Identità",
+   "source_url": "https://www.comune.gravellonalomellina.pv.it/it-it/servizi/essere-cittadino-c/carta-d-identita-1-1-1-f4ca5a18b39d779849774113df8b0391",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gravellonalomellina.pv.it/it-it/servizi/essere-cittadino-c/carta-d-identita-1-1-1-f4ca5a18b39d779849774113df8b0391",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gravellonalomellina.pv.it/it-it/servizi/essere-cittadino-c/carta-d-identita-1-1-1-f4ca5a18b39d779849774113df8b0391",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:36:58.241568Z"
+  },
+  "stato_civile": {
+   "service_id": "018075:comweb:richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-1-1-c23df1f350cf0148bd36d010555fb127",
+   "title": "Richiesta di certificati/attestazioni/estratti di stato civile",
+   "source_url": "https://www.comune.gravellonalomellina.pv.it/it-it/servizi/essere-cittadino-c/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-1-1-c23df1f350cf0148bd36d010555fb127",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gravellonalomellina.pv.it/it-it/servizi/essere-cittadino-c/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-1-1-c23df1f350cf0148bd36d010555fb127",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gravellonalomellina.pv.it/it-it/servizi/essere-cittadino-c/richiesta-di-certificati-attestazioni-estratti-di-stato-civile-664-1-1-c23df1f350cf0148bd36d010555fb127",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:37:01.461297Z"
+  },
+  "tributi_imu": {
+   "service_id": "018075:comweb:dichiarazione-imu-602-210-1-dc938bad93a720487f5a639792377a58",
+   "title": "Dichiarazione IMU",
+   "source_url": "https://www.comune.gravellonalomellina.pv.it/it-it/servizi/pagare-le-tasse-c/dichiarazione-imu-602-210-1-dc938bad93a720487f5a639792377a58",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gravellonalomellina.pv.it/it-it/servizi/pagare-le-tasse-c/dichiarazione-imu-602-210-1-dc938bad93a720487f5a639792377a58",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gravellonalomellina.pv.it/it-it/servizi/pagare-le-tasse-c/dichiarazione-imu-602-210-1-dc938bad93a720487f5a639792377a58",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:37:05.781347Z"
+  },
+  "tributi_tari": {
+   "service_id": "018075:comweb:tassa-rifiuti-tari-954-45-1-4d3a57d0f43120738845bd44825a8269",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.gravellonalomellina.pv.it/it-it/servizi/pagare-le-tasse-c/tassa-rifiuti-tari-954-45-1-4d3a57d0f43120738845bd44825a8269",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gravellonalomellina.pv.it/it-it/servizi/pagare-le-tasse-c/tassa-rifiuti-tari-954-45-1-4d3a57d0f43120738845bd44825a8269",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gravellonalomellina.pv.it/it-it/servizi/pagare-le-tasse-c/tassa-rifiuti-tari-954-45-1-4d3a57d0f43120738845bd44825a8269",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:37:10.003869Z"
+  }
+ }
+}

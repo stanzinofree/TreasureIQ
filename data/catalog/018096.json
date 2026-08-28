@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "018096",
+ "services": {
+  "carta_identita": {
+   "service_id": "018096:comweb:carta-d-identita-1-1-1-f4ca5a18b39d779849774113df8b0391",
+   "title": "Carta d'Identità",
+   "source_url": "https://www.comune.montecalvo.pv.it/it-it/servizi/essere-cittadino-c/carta-d-identita-1-1-1-f4ca5a18b39d779849774113df8b0391",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montecalvo.pv.it/it-it/servizi/essere-cittadino-c/carta-d-identita-1-1-1-f4ca5a18b39d779849774113df8b0391",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montecalvo.pv.it/it-it/servizi/essere-cittadino-c/carta-d-identita-1-1-1-f4ca5a18b39d779849774113df8b0391",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:37:09.519276Z"
+  },
+  "cambio_residenza": {
+   "service_id": "018096:comweb:cambio-residenza-305-15-1-b48e267ff879a9a03db5f99db9893926",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.montecalvo.pv.it/it-it/servizi/abitare-c/cambio-residenza-305-15-1-b48e267ff879a9a03db5f99db9893926",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montecalvo.pv.it/it-it/servizi/abitare-c/cambio-residenza-305-15-1-b48e267ff879a9a03db5f99db9893926",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montecalvo.pv.it/it-it/servizi/abitare-c/cambio-residenza-305-15-1-b48e267ff879a9a03db5f99db9893926",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:37:12.904518Z"
+  },
+  "tributi_imu": {
+   "service_id": "018096:comweb:calcolo-imu-355-210-1-5b7bcd39d7c148c6f326b067881f3789",
+   "title": "Calcolo IMU",
+   "source_url": "https://www.comune.montecalvo.pv.it/it-it/servizi/pagare-le-tasse-c/calcolo-imu-355-210-1-5b7bcd39d7c148c6f326b067881f3789",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montecalvo.pv.it/it-it/servizi/pagare-le-tasse-c/calcolo-imu-355-210-1-5b7bcd39d7c148c6f326b067881f3789",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montecalvo.pv.it/it-it/servizi/pagare-le-tasse-c/calcolo-imu-355-210-1-5b7bcd39d7c148c6f326b067881f3789",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:37:17.450613Z"
+  }
+ }
+}

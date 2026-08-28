@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import type { InfoOut } from "@/lib/api";
 import { conTagVerifica } from "@/lib/testo";
-import { accessLabel } from "@/lib/access";
+import { Provenienza, Freschezza } from "@/components/Provenienza";
 
 /**
  * La risposta come scheda civica, non come dump narrativo.
@@ -33,28 +33,6 @@ import { accessLabel } from "@/lib/access";
  * un «N/A». Un'assenza si dichiara dove significa qualcosa — fra le prove —
  * non replicando etichette senza valore.
  */
-
-/** Un solo bollo di stato: provenienza e completezza in un'etichetta sola, per
- * non moltiplicare i marcatori sulla stessa risposta. «Fonte parziale» tiene
- * insieme «viene dall'ufficiale» e «non c'è tutto»; il dettaglio di cosa manca
- * resta nelle righe ◐ di «Cosa sappiamo dalla fonte», non in un secondo bollo. */
-const ETICHETTA_STATO: Record<InfoOut["stato"], string> = {
-  ufficiale: "Fonte ufficiale",
-  parziale: "Fonte parziale",
-  non_verificato: "Ricerca web",
-  non_pubblicato: "Niente di pubblicato",
-};
-
-/** La data di lettura, scritta come la scriverebbe una persona. */
-function dataVerifica(iso: string): string {
-  const d = new Date(iso);
-  if (Number.isNaN(d.getTime())) return iso;
-  return d.toLocaleDateString("it-IT", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
-}
 
 /** Copia negli appunti senza dire di averlo fatto se non è vero. */
 function Copia({ valore, cosa }: { valore: string; cosa: string }) {
@@ -89,7 +67,7 @@ const SEGNI: Record<string, string> = {
 };
 
 /** Colore della banda-stato in cima alla card: dato visivo (D-03), non
- *  verdetto. Segue la stessa provenienza del bollo in `ETICHETTA_STATO`. */
+ *  verdetto. Segue lo stato completezza, come il chip di <Provenienza>. */
 const BANDA_STATO: Record<InfoOut["stato"], string> = {
   ufficiale: "verde",
   parziale: "ambra",
@@ -148,93 +126,21 @@ export default function RispostaCivica({
     ? office.telefono.split(/[/,]/).map((t) => t.trim()).filter(Boolean)
     : [];
 
-  // Il «pippone» sul dato live non sta più sempre a schermo: il bollo ambra
-  // «letto ora» apre a richiesta una nota che spiega cos'è (fonte, non
-  // verdetto). Meno rumore sotto ogni risposta, spiegazione a un tap.
-  const [spiegaVivo, setSpiegaVivo] = useState(false);
-
-  // Grammatica fonti (Ramo 3): la provenienza della scheda servizio prende il
-  // posto dell'etichetta di stato quando c'è. Tre stati distinti a colpo
-  // d'occhio — catalogo nazionale (blu, autorevole e conservato), letto ora dal
-  // comune (verde, live), fonte del comune conservata (verde, live da cache) —
-  // più il fallback informativo (ETICHETTA_STATO) fuori dal rail servizio. Non
-  // è un diritto d'accesso: dice DA DOVE arriva il dato, non se sei autorizzato.
-  const liveOra = info.origine === "live" && info.letto_dal_vivo;
-  const etichettaFonte =
-    info.origine === "catalogo"
-      ? "Catalogo nazionale"
-      : info.origine === "live"
-        ? info.letto_dal_vivo
-          ? "Letto ora dal comune"
-          : "Fonte del comune"
-        : ETICHETTA_STATO[info.stato];
-
   return (
     <div className="civica tiq-card">
       <span
         className={`tiq-card__banda tiq-card__banda--${BANDA_STATO[info.stato]}`}
         aria-hidden="true"
       />
-      <p className="civica__bolli">
-        {/* L'etichetta d'accesso (diretto/mediato/…) è un asse diverso dalla
-            provenienza. Quando la provenienza c'è (rail servizio) la fonte parla
-            da sé: sopprimo il chip d'accesso per non dare due segnali insieme. */}
-        {accessLabel(accessMode) && info.origine == null && (
-          <span
-            className="civica__access"
-            data-access-mode={accessMode ?? undefined}
-          >
-            {accessLabel(accessMode)}
-          </span>
-        )}
-        {liveOra ? (
-          <span className="civica__vivo-wrap">
-            <button
-              type="button"
-              className="civica__stato civica__stato--vivo"
-              data-origine="live"
-              aria-expanded={spiegaVivo}
-              onClick={() => setSpiegaVivo((v) => !v)}
-            >
-              {etichettaFonte}
-            </button>
-            {spiegaVivo && (
-              <span className="civica__vivo-nota" role="note">
-                Dal portale del comune, in questo momento e alla lettera. Non è
-                un dato che abbiamo verificato né conservato.
-              </span>
-            )}
-          </span>
-        ) : (
-          <span
-            className="civica__stato"
-            data-stato={info.stato}
-            data-origine={info.origine ?? undefined}
-          >
-            {etichettaFonte}
-          </span>
-        )}
-        {/* Bollo «letto ora» del rail informativo: resta solo fuori dal rail
-            servizio (origine null), dove la scheda non porta la propria fonte. */}
-        {info.letto_dal_vivo && info.origine == null && (
-          <span className="civica__vivo-wrap">
-            <button
-              type="button"
-              className="civica__vivo-bollo"
-              aria-expanded={spiegaVivo}
-              onClick={() => setSpiegaVivo((v) => !v)}
-            >
-              letto ora
-            </button>
-            {spiegaVivo && (
-              <span className="civica__vivo-nota" role="note">
-                Dal portale del comune, in questo momento e alla lettera. Non è
-                un dato che abbiamo verificato né conservato.
-              </span>
-            )}
-          </span>
-        )}
-      </p>
+      {/* Grammatica fonti condivisa (S2): un solo vocabolario per i quattro
+          render vivi. Il chip colorato è la provenienza; lo stato è testo
+          neutro accanto; la freschezza è la riga <Freschezza> nel servizio. */}
+      <Provenienza
+        origine={info.origine}
+        stato={info.stato}
+        lettoDalVivo={info.letto_dal_vivo}
+        accessMode={accessMode}
+      />
 
       {soloProsa && (
         <p className="civica__sintesi tiq-sintesi">{conTagVerifica(reply)}</p>
@@ -258,11 +164,10 @@ export default function RispostaCivica({
             </a>
             <span className="civica__dominio">{dominioDi(documento.url)}</span>
           </p>
-          {documento.verificato_il && (
-            <p className="civica__verifica">
-              Letta da TreasureIQ il {dataVerifica(documento.verificato_il)}
-            </p>
-          )}
+          <Freschezza
+            prefisso="Letta da TreasureIQ il"
+            iso={documento.verificato_il}
+          />
         </div>
       )}
 

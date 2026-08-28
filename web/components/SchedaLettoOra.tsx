@@ -22,6 +22,7 @@ import {
   type EsitoConnettore,
   type UfficioConnettore,
 } from "@/lib/api";
+import { Provenienza, Freschezza } from "@/components/Provenienza";
 
 /** `pagina` va mostrato così com'è (D-07, number-guard): nessuna
  *  ricalcolo/offset, il numero è quello che il backend ha già letto. */
@@ -102,9 +103,7 @@ function UfficioCard({ ufficio }: { ufficio: UfficioConnettore }) {
           </dd>
         </div>
       </dl>
-      <span className="scheda-letto-ora__provenienza">
-        Letto dal portale il {dataLeggibile(ufficio.letto_il)}
-      </span>
+      <Freschezza prefisso="Letto dal portale il" iso={ufficio.letto_il} />
     </li>
   );
 }
@@ -219,9 +218,10 @@ export default function SchedaLettoOra({ esito }: { esito: EsitoConnettore }) {
       aria-label="Dati letti ora dal portale del comune"
     >
       <span className="tiq-card__banda tiq-card__banda--ambra" aria-hidden="true" />
-      <p className="scheda-letto-ora__provenienza-testa tiq-sintesi">
-        Dati letti ora dal portale ufficiale · {dataLeggibile(esito.letto_il)}
-      </p>
+      {/* Grammatica fonti condivisa (S2): chip di provenienza (verde, portale
+          live) + riga di freschezza, invece del testo-provenienza ad-hoc. */}
+      <Provenienza origine="live" etichetta="Portale del comune" />
+      <Freschezza prefisso="Letti ora dal portale il" iso={esito.letto_il} />
 
       {haUffici && (
         <ul className="scheda-letto-ora__uffici">

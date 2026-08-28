@@ -33,6 +33,7 @@ import SchedaDettaglio from "@/components/SchedaDettaglio";
 import SceltaComune from "@/components/SceltaComune";
 import RispostaCivica from "@/components/RispostaCivica";
 import SchedaLettoOra from "@/components/SchedaLettoOra";
+import { Provenienza } from "@/components/Provenienza";
 import { useProfilo } from "@/lib/profilo";
 import { conTagVerifica } from "@/lib/testo";
 import { accessLabel } from "@/lib/access";
@@ -278,9 +279,7 @@ function DataGapNotice({ kind }: { kind: "not_published" | "none_found" }) {
   if (kind === "not_published") {
     return (
       <div className="tiq-card tiq-source-card" data-gap="not_published">
-        <span className="tiq-source-card__bollo" data-stato="unavailable">
-          Fonte non disponibile
-        </span>
+        <Provenienza stato="unavailable" />
         <h3 className="tiq-source-card__title">
           Il comune non lo ha pubblicato.
         </h3>
@@ -293,9 +292,7 @@ function DataGapNotice({ kind }: { kind: "not_published" | "none_found" }) {
   }
   return (
     <div className="tiq-card tiq-source-card" data-gap="none_found">
-      <span className="tiq-source-card__bollo" data-stato="unavailable">
-        Fonte non disponibile
-      </span>
+      <Provenienza stato="unavailable" />
       <h3 className="tiq-source-card__title">Non ho trovato nulla.</h3>
       <p className="tiq-source-card__lead">
         Nessun servizio pubblicato sembra corrispondere a questa domanda. Prova
@@ -451,9 +448,14 @@ function BandiComune({ istat }: { istat: string }) {
 
   return (
     <div className="bandi-comune" role="group" aria-label="Bandi e avvisi del comune">
-      <span className="tiq-source-card__bollo" data-stato="non_verificato">
-        Non un verdetto
-      </span>
+      {/* Grammatica fonti condivisa (S2): chip di provenienza (verde, portale
+          live) + caveat come nota statica, invece del bollo non_verificato
+          + .bandi-comune__caveat ad-hoc. */}
+      <Provenienza
+        origine="live"
+        etichetta="Letti ora dal portale"
+        nota="Non un verdetto: controlla sul sito del comune se il bando è ancora aperto."
+      />
       <h3 className="bandi-comune__titolo-card">
         <button
           type="button"
@@ -466,10 +468,6 @@ function BandiComune({ istat }: { istat: string }) {
       </h3>
       {aperta && (
         <>
-          <p className="bandi-comune__caveat">
-            Letti adesso dal portale del comune, non verificati: controlla sul sito
-            se il bando è ancora aperto.
-          </p>
           <ul className="bandi-comune__lista">{bandoCard(primo)}</ul>
           {resto.length > 0 && (
             <details className="bandi-comune__espandi">

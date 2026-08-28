@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "103053",
+ "services": {
+  "carta_identita": {
+   "service_id": "103053:comweb:carta-d-identita-1-1-1-f4ca5a18b39d779849774113df8b0391",
+   "title": "Carta d'Identità",
+   "source_url": "https://comune.piedimulera.vb.it/it-it/servizi/essere-cittadino-c/carta-d-identita-1-1-1-f4ca5a18b39d779849774113df8b0391",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.piedimulera.vb.it/it-it/servizi/essere-cittadino-c/carta-d-identita-1-1-1-f4ca5a18b39d779849774113df8b0391",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.piedimulera.vb.it/it-it/servizi/essere-cittadino-c/carta-d-identita-1-1-1-f4ca5a18b39d779849774113df8b0391",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:41:03.601106Z"
+  },
+  "cambio_residenza": {
+   "service_id": "103053:comweb:cambio-residenza-305-15-1-b48e267ff879a9a03db5f99db9893926",
+   "title": "Cambio Residenza",
+   "source_url": "https://comune.piedimulera.vb.it/it-it/servizi/abitare-c/cambio-residenza-305-15-1-b48e267ff879a9a03db5f99db9893926",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.piedimulera.vb.it/it-it/servizi/abitare-c/cambio-residenza-305-15-1-b48e267ff879a9a03db5f99db9893926",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.piedimulera.vb.it/it-it/servizi/abitare-c/cambio-residenza-305-15-1-b48e267ff879a9a03db5f99db9893926",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:41:07.160711Z"
+  },
+  "tributi_tari": {
+   "service_id": "103053:comweb:dichiarazione-tassa-rifiuti-tari-1028-45-1-edc0f1b9e3c8a90ba451381e181ebfb9",
+   "title": "Dichiarazione Tassa Rifiuti (TARI)",
+   "source_url": "https://comune.piedimulera.vb.it/it-it/servizi/pagare-le-tasse-c/dichiarazione-tassa-rifiuti-tari-1028-45-1-edc0f1b9e3c8a90ba451381e181ebfb9",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.piedimulera.vb.it/it-it/servizi/pagare-le-tasse-c/dichiarazione-tassa-rifiuti-tari-1028-45-1-edc0f1b9e3c8a90ba451381e181ebfb9",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.piedimulera.vb.it/it-it/servizi/pagare-le-tasse-c/dichiarazione-tassa-rifiuti-tari-1028-45-1-edc0f1b9e3c8a90ba451381e181ebfb9",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:41:11.569555Z"
+  }
+ }
+}

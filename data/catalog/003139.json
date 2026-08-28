@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "003139",
+ "services": {
+  "carta_identita": {
+   "service_id": "003139:comweb:carta-d-identita-elettronica-cie-788-1-1-0052c1075a1722c887344430f8843d33",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.sizzano.no.it/it-it/servizi/essere-cittadino-c/carta-d-identita-elettronica-cie-788-1-1-0052c1075a1722c887344430f8843d33",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sizzano.no.it/it-it/servizi/essere-cittadino-c/carta-d-identita-elettronica-cie-788-1-1-0052c1075a1722c887344430f8843d33",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sizzano.no.it/it-it/servizi/essere-cittadino-c/carta-d-identita-elettronica-cie-788-1-1-0052c1075a1722c887344430f8843d33",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:33:40.122300Z"
+  },
+  "accesso_atti": {
+   "service_id": "003139:comweb:richiedere-l-accesso-agli-atti-317-138-1-3b6732cd9f65b5ea6fe47593ed78d394",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.sizzano.no.it/it-it/servizi/essere-cittadino-c/richiedere-l-accesso-agli-atti-317-138-1-3b6732cd9f65b5ea6fe47593ed78d394",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sizzano.no.it/it-it/servizi/essere-cittadino-c/richiedere-l-accesso-agli-atti-317-138-1-3b6732cd9f65b5ea6fe47593ed78d394",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sizzano.no.it/it-it/servizi/essere-cittadino-c/richiedere-l-accesso-agli-atti-317-138-1-3b6732cd9f65b5ea6fe47593ed78d394",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:33:43.486391Z"
+  },
+  "tributi_imu": {
+   "service_id": "003139:comweb:pagare-tributi-imu-600-210-1-5f227f78ae688ee2260115d08501a967",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.sizzano.no.it/it-it/servizi/pagare-le-tasse-c/pagare-tributi-imu-600-210-1-5f227f78ae688ee2260115d08501a967",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sizzano.no.it/it-it/servizi/pagare-le-tasse-c/pagare-tributi-imu-600-210-1-5f227f78ae688ee2260115d08501a967",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sizzano.no.it/it-it/servizi/pagare-le-tasse-c/pagare-tributi-imu-600-210-1-5f227f78ae688ee2260115d08501a967",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:33:47.904080Z"
+  },
+  "tributi_tari": {
+   "service_id": "003139:comweb:pagamento-tassa-rifiuti-tari-659-45-1-a77454aaaf19786987ca0f5eea28ff41",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.sizzano.no.it/it-it/servizi/pagare-le-tasse-c/pagamento-tassa-rifiuti-tari-659-45-1-a77454aaaf19786987ca0f5eea28ff41",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sizzano.no.it/it-it/servizi/pagare-le-tasse-c/pagamento-tassa-rifiuti-tari-659-45-1-a77454aaaf19786987ca0f5eea28ff41",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sizzano.no.it/it-it/servizi/pagare-le-tasse-c/pagamento-tassa-rifiuti-tari-659-45-1-a77454aaaf19786987ca0f5eea28ff41",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:33:52.388684Z"
+  }
+ }
+}

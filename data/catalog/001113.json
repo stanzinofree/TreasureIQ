@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "001113",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "001113:comweb:cambio-residenza-305-15-1-b48e267ff879a9a03db5f99db9893926",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.germagnano.to.it/it-it/servizi/abitare-c/cambio-residenza-305-15-1-b48e267ff879a9a03db5f99db9893926",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.germagnano.to.it/it-it/servizi/abitare-c/cambio-residenza-305-15-1-b48e267ff879a9a03db5f99db9893926",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.germagnano.to.it/it-it/servizi/abitare-c/cambio-residenza-305-15-1-b48e267ff879a9a03db5f99db9893926",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:29:27.990991Z"
+  },
+  "accesso_atti": {
+   "service_id": "001113:comweb:richiedere-l-accesso-agli-atti-317-138-1-3b6732cd9f65b5ea6fe47593ed78d394",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.germagnano.to.it/it-it/servizi/essere-cittadino-c/richiedere-l-accesso-agli-atti-317-138-1-3b6732cd9f65b5ea6fe47593ed78d394",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.germagnano.to.it/it-it/servizi/essere-cittadino-c/richiedere-l-accesso-agli-atti-317-138-1-3b6732cd9f65b5ea6fe47593ed78d394",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.germagnano.to.it/it-it/servizi/essere-cittadino-c/richiedere-l-accesso-agli-atti-317-138-1-3b6732cd9f65b5ea6fe47593ed78d394",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:29:31.398162Z"
+  },
+  "stato_civile": {
+   "service_id": "001113:comweb:certificato-di-morte-47-10-1-9e583f8cf40fe759208a51236166f0ad",
+   "title": "Certificato di Morte",
+   "source_url": "https://www.comune.germagnano.to.it/it-it/servizi/avere-una-famiglia-c/certificato-di-morte-47-10-1-9e583f8cf40fe759208a51236166f0ad",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.germagnano.to.it/it-it/servizi/avere-una-famiglia-c/certificato-di-morte-47-10-1-9e583f8cf40fe759208a51236166f0ad",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.germagnano.to.it/it-it/servizi/avere-una-famiglia-c/certificato-di-morte-47-10-1-9e583f8cf40fe759208a51236166f0ad",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:29:35.982399Z"
+  }
+ }
+}

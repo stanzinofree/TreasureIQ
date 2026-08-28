@@ -1,0 +1,110 @@
+{
+ "municipality_istat": "003143",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "003143:comweb:cambio-residenza-305-23989-1-47839a47ed6e66fa19a20892cfccdd4f",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.suno.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-23989-1-47839a47ed6e66fa19a20892cfccdd4f",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.suno.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-23989-1-47839a47ed6e66fa19a20892cfccdd4f",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.suno.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-23989-1-47839a47ed6e66fa19a20892cfccdd4f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/area-cittadino/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.suno.no.it/it-it/servizi/anagrafe-e-stato-civile/cambio-residenza-305-23989-1-47839a47ed6e66fa19a20892cfccdd4f",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:33:42.565262Z"
+  },
+  "accesso_atti": {
+   "service_id": "003143:comweb:richiedere-l-accesso-agli-atti-317-23991-1-c58cd8e92f406f166dad44009e5971cb",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.suno.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-23991-1-c58cd8e92f406f166dad44009e5971cb",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.suno.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-23991-1-c58cd8e92f406f166dad44009e5971cb",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.suno.no.it/it-it/servizi/anagrafe-e-stato-civile/richiedere-l-accesso-agli-atti-317-23991-1-c58cd8e92f406f166dad44009e5971cb",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:33:45.891733Z"
+  },
+  "tributi_imu": {
+   "service_id": "003143:comweb:pagare-tributi-imu-600-24080-1-366e240bc82c977a7589ce73f19f7e51",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.suno.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-24080-1-366e240bc82c977a7589ce73f19f7e51",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.suno.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-24080-1-366e240bc82c977a7589ce73f19f7e51",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.suno.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagare-tributi-imu-600-24080-1-366e240bc82c977a7589ce73f19f7e51",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:33:50.052895Z"
+  },
+  "tributi_tari": {
+   "service_id": "003143:comweb:pagamento-tassa-rifiuti-tari-659-24071-1-f3a86f953bda63f76701c7217d3be60d",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.suno.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-24071-1-f3a86f953bda63f76701c7217d3be60d",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.suno.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-24071-1-f3a86f953bda63f76701c7217d3be60d",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.suno.no.it/it-it/servizi/tributi-finanze-e-contravvenzioni/pagamento-tassa-rifiuti-tari-659-24071-1-f3a86f953bda63f76701c7217d3be60d",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:33:54.232966Z"
+  }
+ }
+}

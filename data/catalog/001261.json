@@ -1,0 +1,120 @@
+{
+ "municipality_istat": "001261",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "001261:comweb:cambio-residenza-305-15-1-b48e267ff879a9a03db5f99db9893926",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.scarmagno.to.it/it-it/servizi/abitare-c/cambio-residenza-305-15-1-b48e267ff879a9a03db5f99db9893926",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.scarmagno.to.it/it-it/servizi/abitare-c/cambio-residenza-305-15-1-b48e267ff879a9a03db5f99db9893926",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.scarmagno.to.it/it-it/servizi/abitare-c/cambio-residenza-305-15-1-b48e267ff879a9a03db5f99db9893926",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:31:21.537806Z"
+  },
+  "accesso_atti": {
+   "service_id": "001261:comweb:richiedere-l-accesso-agli-atti-317-138-1-3b6732cd9f65b5ea6fe47593ed78d394",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.scarmagno.to.it/it-it/servizi/essere-cittadino-c/richiedere-l-accesso-agli-atti-317-138-1-3b6732cd9f65b5ea6fe47593ed78d394",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.scarmagno.to.it/it-it/servizi/essere-cittadino-c/richiedere-l-accesso-agli-atti-317-138-1-3b6732cd9f65b5ea6fe47593ed78d394",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.scarmagno.to.it/it-it/servizi/essere-cittadino-c/richiedere-l-accesso-agli-atti-317-138-1-3b6732cd9f65b5ea6fe47593ed78d394",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:31:25.299764Z"
+  },
+  "stato_civile": {
+   "service_id": "001261:comweb:certificato-di-morte-47-10-1-9e583f8cf40fe759208a51236166f0ad",
+   "title": "Certificato di Morte",
+   "source_url": "https://www.comune.scarmagno.to.it/it-it/servizi/avere-una-famiglia-c/certificato-di-morte-47-10-1-9e583f8cf40fe759208a51236166f0ad",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.scarmagno.to.it/it-it/servizi/avere-una-famiglia-c/certificato-di-morte-47-10-1-9e583f8cf40fe759208a51236166f0ad",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.scarmagno.to.it/it-it/servizi/avere-una-famiglia-c/certificato-di-morte-47-10-1-9e583f8cf40fe759208a51236166f0ad",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:31:29.497564Z"
+  },
+  "tributi_imu": {
+   "service_id": "001261:comweb:pagare-tributi-imu-600-210-1-5f227f78ae688ee2260115d08501a967",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.scarmagno.to.it/it-it/servizi/pagare-le-tasse-c/pagare-tributi-imu-600-210-1-5f227f78ae688ee2260115d08501a967",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.scarmagno.to.it/it-it/servizi/pagare-le-tasse-c/pagare-tributi-imu-600-210-1-5f227f78ae688ee2260115d08501a967",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.scarmagno.to.it/it-it/servizi/pagare-le-tasse-c/pagare-tributi-imu-600-210-1-5f227f78ae688ee2260115d08501a967",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:31:35.694608Z"
+  },
+  "tributi_tari": {
+   "service_id": "001261:comweb:pagamento-tassa-rifiuti-tari-659-45-1-a77454aaaf19786987ca0f5eea28ff41",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.scarmagno.to.it/it-it/servizi/pagare-le-tasse-c/pagamento-tassa-rifiuti-tari-659-45-1-a77454aaaf19786987ca0f5eea28ff41",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.scarmagno.to.it/it-it/servizi/pagare-le-tasse-c/pagamento-tassa-rifiuti-tari-659-45-1-a77454aaaf19786987ca0f5eea28ff41",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.scarmagno.to.it/it-it/servizi/pagare-le-tasse-c/pagamento-tassa-rifiuti-tari-659-45-1-a77454aaaf19786987ca0f5eea28ff41",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:31:40.511597Z"
+  }
+ }
+}

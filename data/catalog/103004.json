@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "103004",
+ "services": {
+  "carta_identita": {
+   "service_id": "103004:comweb:carta-d-identita-1-1-1-f4ca5a18b39d779849774113df8b0391",
+   "title": "Carta d'Identità",
+   "source_url": "https://www.comune.arola.vb.it/it-it/servizi/essere-cittadino-c/carta-d-identita-1-1-1-f4ca5a18b39d779849774113df8b0391",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.arola.vb.it/it-it/servizi/essere-cittadino-c/carta-d-identita-1-1-1-f4ca5a18b39d779849774113df8b0391",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.arola.vb.it/it-it/servizi/essere-cittadino-c/carta-d-identita-1-1-1-f4ca5a18b39d779849774113df8b0391",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:40:05.293649Z"
+  },
+  "accesso_atti": {
+   "service_id": "103004:comweb:richiedere-l-accesso-agli-atti-317-138-1-3b6732cd9f65b5ea6fe47593ed78d394",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.arola.vb.it/it-it/servizi/essere-cittadino-c/richiedere-l-accesso-agli-atti-317-138-1-3b6732cd9f65b5ea6fe47593ed78d394",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.arola.vb.it/it-it/servizi/essere-cittadino-c/richiedere-l-accesso-agli-atti-317-138-1-3b6732cd9f65b5ea6fe47593ed78d394",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.arola.vb.it/it-it/servizi/essere-cittadino-c/richiedere-l-accesso-agli-atti-317-138-1-3b6732cd9f65b5ea6fe47593ed78d394",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:40:09.075953Z"
+  },
+  "tributi_tari": {
+   "service_id": "103004:comweb:pagamento-tassa-rifiuti-tari-659-45-1-a77454aaaf19786987ca0f5eea28ff41",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.arola.vb.it/it-it/servizi/pagare-le-tasse-c/pagamento-tassa-rifiuti-tari-659-45-1-a77454aaaf19786987ca0f5eea28ff41",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.arola.vb.it/it-it/servizi/pagare-le-tasse-c/pagamento-tassa-rifiuti-tari-659-45-1-a77454aaaf19786987ca0f5eea28ff41",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.arola.vb.it/it-it/servizi/pagare-le-tasse-c/pagamento-tassa-rifiuti-tari-659-45-1-a77454aaaf19786987ca0f5eea28ff41",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:40:13.960209Z"
+  }
+ }
+}

@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "103051",
+ "services": {
+  "accesso_atti": {
+   "service_id": "103051:comweb:richiedere-l-accesso-agli-atti-317-138-1-3b6732cd9f65b5ea6fe47593ed78d394",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.ornavasso.vb.it/it-it/servizi/essere-cittadino-c/richiedere-l-accesso-agli-atti-317-138-1-3b6732cd9f65b5ea6fe47593ed78d394",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ornavasso.vb.it/it-it/servizi/essere-cittadino-c/richiedere-l-accesso-agli-atti-317-138-1-3b6732cd9f65b5ea6fe47593ed78d394",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ornavasso.vb.it/it-it/servizi/essere-cittadino-c/richiedere-l-accesso-agli-atti-317-138-1-3b6732cd9f65b5ea6fe47593ed78d394",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:40:59.663115Z"
+  },
+  "tributi_imu": {
+   "service_id": "103051:comweb:calcolo-imu-355-210-1-5b7bcd39d7c148c6f326b067881f3789",
+   "title": "Calcolo IMU",
+   "source_url": "https://www.comune.ornavasso.vb.it/it-it/servizi/pagare-le-tasse-c/calcolo-imu-355-210-1-5b7bcd39d7c148c6f326b067881f3789",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ornavasso.vb.it/it-it/servizi/pagare-le-tasse-c/calcolo-imu-355-210-1-5b7bcd39d7c148c6f326b067881f3789",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ornavasso.vb.it/it-it/servizi/pagare-le-tasse-c/calcolo-imu-355-210-1-5b7bcd39d7c148c6f326b067881f3789",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:41:03.264906Z"
+  },
+  "tributi_tari": {
+   "service_id": "103051:comweb:pagamento-tassa-rifiuti-tari-659-45-1-a77454aaaf19786987ca0f5eea28ff41",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.ornavasso.vb.it/it-it/servizi/pagare-le-tasse-c/pagamento-tassa-rifiuti-tari-659-45-1-a77454aaaf19786987ca0f5eea28ff41",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ornavasso.vb.it/it-it/servizi/pagare-le-tasse-c/pagamento-tassa-rifiuti-tari-659-45-1-a77454aaaf19786987ca0f5eea28ff41",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ornavasso.vb.it/it-it/servizi/pagare-le-tasse-c/pagamento-tassa-rifiuti-tari-659-45-1-a77454aaaf19786987ca0f5eea28ff41",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:41:07.805282Z"
+  }
+ }
+}

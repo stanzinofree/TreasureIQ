@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "003083",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "003083:comweb:cambio-residenza-305-15-1-b48e267ff879a9a03db5f99db9893926",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.landiona.no.it/it-it/servizi/abitare-c/cambio-residenza-305-15-1-b48e267ff879a9a03db5f99db9893926",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.landiona.no.it/it-it/servizi/abitare-c/cambio-residenza-305-15-1-b48e267ff879a9a03db5f99db9893926",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.landiona.no.it/it-it/servizi/abitare-c/cambio-residenza-305-15-1-b48e267ff879a9a03db5f99db9893926",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:33:14.917311Z"
+  },
+  "tributi_tari": {
+   "service_id": "003083:comweb:pagamento-tassa-rifiuti-tari-659-45-1-a77454aaaf19786987ca0f5eea28ff41",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.landiona.no.it/it-it/servizi/pagare-le-tasse-c/pagamento-tassa-rifiuti-tari-659-45-1-a77454aaaf19786987ca0f5eea28ff41",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.landiona.no.it/it-it/servizi/pagare-le-tasse-c/pagamento-tassa-rifiuti-tari-659-45-1-a77454aaaf19786987ca0f5eea28ff41",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.landiona.no.it/it-it/servizi/pagare-le-tasse-c/pagamento-tassa-rifiuti-tari-659-45-1-a77454aaaf19786987ca0f5eea28ff41",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:33:18.592523Z"
+  }
+ }
+}

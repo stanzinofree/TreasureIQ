@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "003042",
+ "services": {
+  "tributi_imu": {
+   "service_id": "003042:comweb:pagare-tributi-imu-600-210-1-5f227f78ae688ee2260115d08501a967",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.castellazzonovarese.no.it/it-it/servizi/pagare-le-tasse-c/pagare-tributi-imu-600-210-1-5f227f78ae688ee2260115d08501a967",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castellazzonovarese.no.it/it-it/servizi/pagare-le-tasse-c/pagare-tributi-imu-600-210-1-5f227f78ae688ee2260115d08501a967",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castellazzonovarese.no.it/it-it/servizi/pagare-le-tasse-c/pagare-tributi-imu-600-210-1-5f227f78ae688ee2260115d08501a967",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:32:55.189915Z"
+  }
+ }
+}

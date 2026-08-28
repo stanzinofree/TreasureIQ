@@ -1,0 +1,113 @@
+{
+ "municipality_istat": "003116",
+ "services": {
+  "carta_identita": {
+   "service_id": "003116:comweb:carta-d-identita-elettronica-cie-788-1-1-0052c1075a1722c887344430f8843d33",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.pettenasco.no.it/it-it/servizi/essere-cittadino-c/carta-d-identita-elettronica-cie-788-1-1-0052c1075a1722c887344430f8843d33",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pettenasco.no.it/it-it/servizi/essere-cittadino-c/carta-d-identita-elettronica-cie-788-1-1-0052c1075a1722c887344430f8843d33",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pettenasco.no.it/it-it/servizi/essere-cittadino-c/carta-d-identita-elettronica-cie-788-1-1-0052c1075a1722c887344430f8843d33",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:33:23.796994Z"
+  },
+  "cambio_residenza": {
+   "service_id": "003116:comweb:cambio-residenza-305-15-1-b48e267ff879a9a03db5f99db9893926",
+   "title": "Cambio Residenza",
+   "source_url": "https://www.comune.pettenasco.no.it/it-it/servizi/abitare-c/cambio-residenza-305-15-1-b48e267ff879a9a03db5f99db9893926",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pettenasco.no.it/it-it/servizi/abitare-c/cambio-residenza-305-15-1-b48e267ff879a9a03db5f99db9893926",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pettenasco.no.it/it-it/servizi/abitare-c/cambio-residenza-305-15-1-b48e267ff879a9a03db5f99db9893926",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.pettenasco.no.it/it-it/servizi/abitare-c/Cambio%20di%20residenza%20Invia%20online%20al%20tuo%20comune%20la%20dichiarazione%20di%20cambio%20di%20residenza%20per%20te%20e%20per%20la%20tua%20famiglia%20anagrafica.%20%20Che%20cos%E2%80%99%C3%A8%20Il%20cambio%20di%20residenza%20%C3%A8%20il%20servizio%20che%20ti%20consente%20di%20inviare%20per%20te%20e%20per%20i%20componenti%20della%20tua%20famiglia%20anagrafica%20una%20dichiarazione%20al%20comune%20di%20competenza%20nei%20seguenti%20casi:%20%20hai%20cambiato%20abitazione%20nell%E2%80%99ambito%20dello%20stesso%20comune;%20hai%20cambiato%20residenza%20trasferendoti%20in%20un%20altro%20comune;%20sei%20rientrato%20in%20Italia%20dall%E2%80%99estero%20(se%20sei%20un%20cittadino%20italiano%20iscritto%20all%E2%80%99AIRE).%20Per%20tutte%20le%20altre%20tipologie%20di%20richiesta,%20%C3%A8%20necessario%20rivolgersi%20al%20comune%20di%20competenza.%20%20Quando%20serve%20In%20caso%20di%20trasferimento,%20devi%20tempestivamente%20inviare%20la%20dichiarazione%20al%20comune%20di%20competenza%20per%20comunicare%20i%20dati%20della%20nuova%20abitazione,%20i%20dati%20di%20coloro%20che%20gi%C3%A0%20vi%20risiedono%20e%20i%20dati%20delle%20persone%20che%20si%20sono%20trasferite%20con%20te.%20%20Come%20richiederlo%20Accedendo%20al%20servizio%20nella%20tua%20area%20riservata,%20ti%20sar%C3%A0%20chiesto%20di%20dichiarare%20se%20ti%20trasferisci%20in%20una%20nuova%20residenza%20o%20in%20una%20famiglia%20esistente.%20%20Scegli%20il%20primo%20caso%20(nuova%20residenza)%20se:%20%20vai%20ad%20abitare%20in%20una%20casa%20dove%20non%20risiedono%20altre%20persone;%20nella%20casa%20dove%20ti%20trasferisci%20ci%20sono%20altre%20persone%20con%20cui%20non%20hai%20vincoli%20di%20parentela%20o%20affettivi%20(per%20esempio,%20un%20gruppo%20di%20studenti%20che%20dividono%20un%20appartamento).%20Scegli%20il%20secondo%20caso%20(famiglia%20esistente)%20se,%20viceversa,%20nella%20nuova%20casa%20ci%20sono%20persone%20con%20le%20quali%20hai%20vincoli%20di%20parentela%20o%20affettivi%20(per%20esempio,%20una%20coppia%20di%20fidanzati).%20%20Prima%20di%20inviare%20la%20richiesta,%20ti%20consigliamo%20di%20verificare%20attentamente%20i%20dati%20inseriti:%20dopo%20l%E2%80%99invio,%20infatti,%20non%20sar%C3%A0%20possibile%20effettuare%20ulteriori%20modifiche,%20poich%C3%A9%20la%20richiesta%20sar%C3%A0%20gestita%20direttamente%20dagli%20operatori%20d%E2%80%99anagrafe%20del%20comune%20di%20competenza.%20Potrai%20seguire%20l%E2%80%99evoluzione%20della%20pratica%20nella%20tua%20area%20riservata;%20inoltre,%20qualora%20tu%20l%E2%80%99abbia%20indicata%20nel%20tuo%20profilo%20utente,%20sarai%20informato%20anche%20per%20email.%20%20Accedi%20al%20portale%20ANPR%20tramite%20SPID%20o%20CIE%20al%20seguente%20link:%20https:/www.anagrafenazionale.interno.it/servizi-anagrafici/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [
+      "spid",
+      "cie"
+     ],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.pettenasco.no.it/it-it/servizi/abitare-c/cambio-residenza-305-15-1-b48e267ff879a9a03db5f99db9893926",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:33:27.098573Z"
+  },
+  "accesso_atti": {
+   "service_id": "003116:comweb:richiedere-l-accesso-agli-atti-317-138-1-3b6732cd9f65b5ea6fe47593ed78d394",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.pettenasco.no.it/it-it/servizi/essere-cittadino-c/richiedere-l-accesso-agli-atti-317-138-1-3b6732cd9f65b5ea6fe47593ed78d394",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pettenasco.no.it/it-it/servizi/essere-cittadino-c/richiedere-l-accesso-agli-atti-317-138-1-3b6732cd9f65b5ea6fe47593ed78d394",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pettenasco.no.it/it-it/servizi/essere-cittadino-c/richiedere-l-accesso-agli-atti-317-138-1-3b6732cd9f65b5ea6fe47593ed78d394",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:33:31.717602Z"
+  },
+  "tributi_tari": {
+   "service_id": "003116:comweb:pagamento-tassa-rifiuti-tari-659-45-1-a77454aaaf19786987ca0f5eea28ff41",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.pettenasco.no.it/it-it/servizi/pagare-le-tasse-c/pagamento-tassa-rifiuti-tari-659-45-1-a77454aaaf19786987ca0f5eea28ff41",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pettenasco.no.it/it-it/servizi/pagare-le-tasse-c/pagamento-tassa-rifiuti-tari-659-45-1-a77454aaaf19786987ca0f5eea28ff41",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pettenasco.no.it/it-it/servizi/pagare-le-tasse-c/pagamento-tassa-rifiuti-tari-659-45-1-a77454aaaf19786987ca0f5eea28ff41",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comweb",
+   "discovered_at": "2026-08-28T09:33:36.119235Z"
+  }
+ }
+}

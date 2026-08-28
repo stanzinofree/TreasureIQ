@@ -5893,6 +5893,128 @@ a {
   font-weight: inherit;
 }
 
+/* ── S2 · Grammatica fonti condivisa (componente <Provenienza>) ──────────────
+   Un solo vocabolario visivo per i quattro render vivi. Tre assi separati:
+   il CHIP colorato è l'unico segnale di PROVENIENZA; lo STATO è testo neutro
+   accanto (mai un secondo badge colorato); la FRESCHEZZA è una riga a parte.
+   I colori di provenienza sono scoped sotto `.bubble--assistant .chat__answer`
+   (0,4,0) per battere il `color:inherit` del layer bolt-on (0,3,0) — stessa
+   lezione di .civica__stato / .tiq-source-card__bollo. */
+.fonte-grammatica {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--ma-2);
+  margin: 0;
+}
+
+/* Il chip: colore dal dato, mai un riempimento pieno. Stessa forma dei bolli
+   S1/civica così i tre convivono senza stridere finché il patchwork non cade. */
+.fonte-bollo {
+  display: inline-block;
+  align-self: flex-start;
+  margin: 0;
+  padding: 2px var(--ma-2);
+  border: 1px solid currentColor;
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.08em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: var(--sumi-soft);
+}
+/* Ripiego sullo stato quando NON c'è provenienza (origine null, rail
+   informativo): stesse tinte di .civica__stato. Nessun rosso: un dato non
+   pubblicato non è l'errore di nessuno. Quando origine c'è, le regole scoped
+   sotto (0,4,0) vincono e il chip porta il colore di provenienza. */
+.fonte-bollo[data-stato="ufficiale"] { color: var(--verde, #1b7f5a); }
+.fonte-bollo[data-stato="parziale"] { color: var(--ambra, #8a6100); }
+.fonte-bollo[data-stato="non_verificato"] { color: var(--ambra, #8a6100); }
+.fonte-bollo[data-stato="non_pubblicato"] { color: var(--ambra, #8a6100); }
+/* Miss vero: nessuna fonte, non un'incompletezza. Grigio, non ambra. */
+.fonte-bollo[data-stato="unavailable"] { color: var(--sumi-soft); }
+.bubble--assistant .chat__answer .fonte-bollo[data-origine="catalogo"] {
+  color: var(--ai);
+}
+.bubble--assistant .chat__answer .fonte-bollo[data-origine="live"] {
+  color: var(--wakatake-deep, #067647);
+}
+
+/* «Letto ora dal comune»: chip cliccabile che apre la nota. Reset bottone, la
+   cornice del bollo resta. */
+.fonte-bollo-wrap {
+  position: relative;
+  display: inline-flex;
+}
+.fonte-bollo--vivo {
+  background: none;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.fonte-bollo--vivo:hover { background: var(--wakatake-wash, #dcfae6); }
+
+/* Lo STATO come testo neutro: completezza, non provenienza. Niente bordo,
+   niente colore-per-stato, niente maiuscolo — deve leggersi come una chiosa,
+   non come un secondo bollo. */
+.fonte-stato {
+  font-size: 0.8rem;
+  color: var(--sumi-soft);
+}
+
+/* Il chip d'accesso (solo rail informativo): asse diverso, tono spento. */
+.fonte-access {
+  align-self: flex-start;
+  padding: 2px var(--ma-2);
+  border: 1px solid var(--kasumi);
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sumi-soft);
+}
+
+/* Freschezza: quando il dato è stato letto/verificato. Riga caption, come
+   .civica__verifica. */
+.fonte-freschezza {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--sumi-soft);
+}
+
+/* Nota: a comparsa sotto il chip «letto ora» (popover, come .civica__vivo-nota)
+   oppure statica come caveat inline (bandi). */
+.fonte-nota {
+  position: absolute;
+  top: calc(100% + var(--ma-1, 4px));
+  inset-inline-start: 0;
+  z-index: 5;
+  width: max-content;
+  max-width: 22rem;
+  padding: var(--ma-2);
+  border: 1px solid var(--kasumi);
+  border-inline-start: 3px solid var(--wakatake-deep, #067647);
+  background: var(--paper-sunken);
+  font-size: 0.82rem;
+  line-height: 1.4;
+  color: var(--sumi-soft);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+/* Caveat statico (bandi): non un popover, una riga a piena larghezza sotto il
+   chip. */
+.fonte-nota--statica {
+  position: static;
+  width: 100%;
+  max-width: none;
+  box-shadow: none;
+  border-inline-start-color: var(--ambra, #8a6100);
+  background: none;
+  border: none;
+  padding: 0;
+}
+
 /* Apertura leggera per contenuti che compaiono dentro una .tiq-card (es.
    dettagli espansi): un filo di movimento, non un effetto. */
 @keyframes tiq-card-open {

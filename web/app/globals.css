@@ -5826,6 +5826,73 @@ a {
   font-weight: 600;
 }
 
+/* ── S1 · Primitiva card fonte (seed) ────────────────────────────────────
+   Grammatica condivisa per le risposte-fonte in chat. Questa slice serve i
+   due gap strutturali: la card «fonte non disponibile» (miss) e il bollo di
+   provenienza a 4 stati su bandi + miss. civica/scheda restano sul layer
+   bolt-on esistente; l'estensione a tutti e la rimozione del patchwork sono
+   una slice dedicata. Nessun box annidato: le sezioni sono liste piatte. */
+.tiq-source-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ma-3);
+  padding: var(--ma-4);
+}
+
+/* slot 1 — stato/provenienza. inline-block: regge anche fuori da un flex
+   container (es. .bandi-comune, che resta block). Colore dal dato, mai un
+   riempimento pieno. */
+.tiq-source-card__bollo {
+  display: inline-block;
+  align-self: flex-start;
+  margin: 0;
+  padding: 2px var(--ma-2);
+  border: 1px solid currentColor;
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.08em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: var(--sumi-soft);
+}
+.tiq-source-card__bollo[data-stato="non_verificato"] { color: var(--ambra, #8a6100); }
+.tiq-source-card__bollo[data-stato="unavailable"] { color: var(--sumi-soft); }
+/* miss: accento neutro, non il teal di .tiq-card (che segnala fonte attiva). */
+.tiq-source-card[data-gap] { border-left-color: var(--sumi-soft); }
+/* provenienza scoped come .civica__stato: batte l'eventuale color:inherit del
+   layer bolla (lezione globals-css-bolt-on-cascade). */
+.bubble--assistant .chat__answer .tiq-source-card__bollo[data-origine="catalogo"] {
+  color: var(--ai);
+}
+.bubble--assistant .chat__answer .tiq-source-card__bollo[data-origine="live"] {
+  color: var(--wakatake-deep, #067647);
+}
+
+/* slot 2 — titolo, sempre un heading */
+.tiq-source-card__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  line-height: 1.3;
+  color: var(--sumi);
+}
+
+/* slot 3 — messaggio umano */
+.tiq-source-card__lead {
+  margin: 0;
+  line-height: 1.5;
+  color: var(--sumi);
+}
+
+/* Bandi: il titolo-card è ora un <h3> che avvolge il toggle. Reset del
+   default del browser così il layout mono del bottone non cambia. */
+.bandi-comune__titolo-card {
+  margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
 /* Apertura leggera per contenuti che compaiono dentro una .tiq-card (es.
    dettagli espansi): un filo di movimento, non un effetto. */
 @keyframes tiq-card-open {

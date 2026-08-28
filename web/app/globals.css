@@ -4518,6 +4518,24 @@ a {
 .civica__stato[data-stato="non_verificato"] { color: var(--sumi-soft); }
 .civica__stato[data-stato="non_pubblicato"] { color: var(--ambra, #8a6100); }
 
+/* Grammatica fonti (Ramo 3): la provenienza della scheda servizio vince sullo
+ * stato quando c'è. Blu = catalogo nazionale (autorevole e conservato); verde =
+ * letto dal comune (live ora, o da cache del connettore). Regole DOPO quelle
+ * [data-stato] così, a parità di specificità, l'ordine sorgente le fa prevalere
+ * sull'elemento che porta entrambi gli attributi. */
+.civica__stato[data-origine="catalogo"] { color: var(--ai); }
+.civica__stato[data-origine="live"] { color: var(--wakatake-deep, #067647); }
+
+/* Il bollo «letto ora dal comune» è cliccabile (apre la nota): reset
+ * dell'aspetto bottone, la cornice del bollo resta. */
+.civica__stato--vivo {
+  background: none;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.civica__stato--vivo:hover { background: var(--wakatake-wash, #dcfae6); }
+
 .civica__sintesi {
   margin: 0;
   font-size: var(--fs-sintesi);

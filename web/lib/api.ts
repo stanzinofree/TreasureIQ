@@ -491,6 +491,11 @@ export interface InfoOut {
    * risposta non passa dal resolver dei servizi (la maggioranza delle
    * INFORMAZIONI): allora vale eventualmente `document`. */
   service: ServiceOut | null;
+  /** Provenienza della scheda servizio per la grammatica fonti (Ramo 3):
+   * `"catalogo"` = catalogo nazionale flat, `"live"` = letto dal connettore del
+   * comune, `null` fuori dal rail servizio. Non è un diritto d'accesso: dice
+   * DA DOVE arriva il dato, non se sei autorizzato. */
+  origine: "catalogo" | "live" | null;
   coverage_count: number;
   diagnosis: string[];
   integration_cost: string[];

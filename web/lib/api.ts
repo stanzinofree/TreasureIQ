@@ -765,8 +765,8 @@ export const postAtAnalisi = (codiceIstat: string, pdfUrl: string) =>
   });
 
 export interface ChatOut {
-  /** Opaque anonymous conversation token, retained by the browser cookie for 90 days. */
-  conversation_id: string;
+  // The session token lives only in the httponly cookie, never in the body:
+  // the client rides it via `credentials: "include"` and never reads it.
   profilo_capito: ProfiloCapito | null;
   reply: string;
   /** The topic this answer was retrieved for. The API has always sent it;
@@ -1080,7 +1080,6 @@ export interface ChatTurn {
 }
 
 export interface ConversationTranscript {
-  conversation_id: string | null;
   messages: ChatTurn[];
 }
 

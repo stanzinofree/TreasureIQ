@@ -157,7 +157,7 @@ def test_drill_category_collects_schede_never_categories():
     got = _ComWebDiscovery().scopri_servizi(
         _FetcherComweb(_pagine_reali()).transport,
         base_url=_INDEX,
-        term="anagrafe-e-stato-civile",
+        term=ServiceKey.CARTA_IDENTITA.value,  # thematic → anagrafe-e-stato-civile
         limit=200,
     )
     # Every candidate is a two-segment scheda (numeric id + hash), never a
@@ -171,16 +171,22 @@ def test_drill_category_collects_schede_never_categories():
 
 def test_discovery_follows_only_index_and_one_category():
     f = _FetcherComweb(_pagine_reali())
-    f.scopri_servizi(base_url=_INDEX, term="anagrafe-e-stato-civile", limit=200)
+    f.scopri_servizi(base_url=_INDEX, term=ServiceKey.CARTA_IDENTITA.value, limit=200)
     # Exactly two page reads: the index, then the one mapped category.  No crawl.
     assert f.transport.letti == [_INDEX, _CAT_ANAGRAFE]
 
 
 def test_unmapped_category_absent_from_index_no_fabricated_url():
-    # An index without the requested category anchor: discovery must NOT fabricate
-    # the category URL — it reads the index and stops.
-    f = _FetcherComweb({_INDEX: _INDICE_HTML})
-    got = f.scopri_servizi(base_url=_INDEX, term="categoria-che-non-esiste", limit=200)
+    # An index whose only category is neither thematic nor life-event: schema
+    # detection falls back to THEMATIC, the mapped category (anagrafe) is absent
+    # from the anchors → discovery must NOT fabricate its URL: reads index, stops.
+    indice_senza_mappata = (
+        '<a href="/it-it/servizi/bandi-e-concorsi/">Bandi e concorsi</a>'
+    )
+    f = _FetcherComweb({_INDEX: indice_senza_mappata})
+    got = f.scopri_servizi(
+        base_url=_INDEX, term=ServiceKey.CARTA_IDENTITA.value, limit=200
+    )
     assert got == ()
     assert f.transport.letti == [_INDEX]  # category page never fetched
 
@@ -433,7 +439,9 @@ def test_aglie_carta_identita_miss_is_two_confirmed_not_zero():
 
     f = _FetcherComweb(_pagine_aglie())
     candidati = f.scopri_servizi(
-        base_url=_INDEX_AGLIE, term="anagrafe-e-stato-civile", limit=_CAP_DIFENSIVO_SCHEDE
+        base_url=_INDEX_AGLIE,
+        term=ServiceKey.CARTA_IDENTITA.value,  # aglie index = thematic → anagrafe
+        limit=_CAP_DIFENSIVO_SCHEDE,
     )
     confermati = [
         c.title for c in candidati if riconosci_service_key(c.title) is ServiceKey.CARTA_IDENTITA

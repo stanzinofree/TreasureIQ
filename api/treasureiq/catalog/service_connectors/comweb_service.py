@@ -2,8 +2,9 @@
 
 Secondo connettore-servizio: prova che l'astrazione del pilota WP/AgID regge su
 un trasporto diverso.  ComWeb è HTML statico Bootstrap Italia (niente SPA, niente
-WAF): la discovery **scrape** l'indice servizi, segue **una** pagina categoria e
-raccoglie gli anchor scheda — nessun REST, nessun crawler.
+WAF): la discovery **scrape** l'indice servizi, rileva la tassonomia (tematica o
+life-events), segue le pagine categoria mappate e raccoglie gli anchor scheda —
+nessun REST, nessun crawler.
 
 Contratto/invarianti/opzioni sono condivisi in ``_ServiceConnectorBase``.  Qui
 vivono solo le due parti ComWeb:
@@ -50,6 +51,42 @@ COMWEB_SERVICE_CATEGORY: dict[ServiceKey, str] = {
     ServiceKey.TRIBUTI_TARI: "tributi-finanze-e-contravvenzioni",
 }
 
+#: Slug **life-events** (schema per evento-di-vita/attore) → ServiceKey.  ~1/4
+#: dei comuni ComWeb usa questa tassonomia invece di quella tematica (recon
+#: 28 ago: 124/503).  Multi-slug: STATO_CIVILE vive su due categorie (famiglia
+#: + cittadino), unite e deduplicate a valle.  Mapping verificato sui titoli
+#: reali di Strevi (006168), non dedotto.  ``c`` = cittadino, ``i`` = impresa.
+COMWEB_LIFE_EVENT_CATEGORY: dict[ServiceKey, tuple[str, ...]] = {
+    ServiceKey.CARTA_IDENTITA: ("essere-cittadino-c",),
+    ServiceKey.ACCESSO_ATTI: ("essere-cittadino-c",),
+    ServiceKey.CAMBIO_RESIDENZA: ("abitare-c",),
+    ServiceKey.STATO_CIVILE: ("avere-una-famiglia-c", "essere-cittadino-c"),
+    ServiceKey.TRIBUTI_IMU: ("pagare-le-tasse-c",),
+    ServiceKey.TRIBUTI_TARI: ("pagare-le-tasse-c",),
+}
+
+#: Marcatori di rilevamento schema sull'indice (slug categoria di primo
+#: livello).  Co-presenti in 123/124 comuni life-event misurati.
+_THEMATIC_MARK = frozenset(
+    {"anagrafe-e-stato-civile", "tributi-finanze-e-contravvenzioni"}
+)
+_LIFE_MARK = frozenset({"essere-cittadino-c", "pagare-le-tasse-c"})
+
+
+def _rileva_schema(slug_indice: set[str]) -> str:
+    """Rileva lo schema dai soli slug realmente presenti sull'indice.
+
+    Priorità al noto: un marcatore tematico → ``thematic`` (anche su indice
+    misto).  Solo life-event dimostrabile → ``life_event``.  Nessuno dei due
+    (variante ``-a``, ignoti) → ``thematic`` (fallback sicuro: si segue la
+    categoria tematica mappata e, se assente, NOT_FOUND onesto)."""
+    if slug_indice & _THEMATIC_MARK:
+        return "thematic"
+    if slug_indice & _LIFE_MARK:
+        return "life_event"
+    return "thematic"
+
+
 #: L'unico entry-point costruito dal connettore (come il root REST di WP).
 _INDICE = "/it-it/servizi"
 
@@ -84,11 +121,15 @@ _CONNECTOR = ConnectorRef(name="comweb_service", version="1")
 
 
 class _ComWebDiscovery:
-    """Scoperta ComWeb bounded: indice → **una** categoria → anchor scheda.
+    """Scoperta ComWeb bounded: indice → schema → categorie mappate → schede.
 
     Net-free rispetto a httpx: usa i primitivi guardati del transport comune
     (``leggi_pagina``).  ``base_url`` è l'indice servizi già composto dal
-    connettore; ``term`` è lo slug della categoria da seguire.  Nessun URL
+    connettore; ``term`` è il **value** della ServiceKey: lo schema (tematico o
+    life-event) si rileva dall'indice già scaricato (0 fetch extra) e sceglie gli
+    slug categoria dalla mappa giusta.  Una key può mappare più categorie
+    (STATO_CIVILE life-event): l'unione è deduplicata **globalmente** per
+    ``native_id`` del parser, il cap difensivo morde sul TOTALE.  Nessun URL
     fabbricato: si segue l'anchor realmente presente.  Nessun crawler ricorsivo.
     """
 
@@ -103,16 +144,51 @@ class _ComWebDiscovery:
         host = urlparse(base_url).netloc
         indice = transport.leggi_pagina(url=base_url, official_host=host)
         if not indice:
+            return ()  # indice muto → miss onesto (endpoint_muto a monte)
+        # ``term`` = value della ServiceKey (vedi _discovery_target): la discovery
+        # rileva lo schema dall'indice GIÀ scaricato (0 fetch extra) e sceglie gli
+        # slug dalla mappa giusta.
+        try:
+            service_key = ServiceKey(term)
+        except ValueError:
             return ()
-        categoria_url = self._trova_categoria(indice, base_url, host, term)
-        if categoria_url is None:
-            # Categoria mappata assente dagli anchor indice: nessun path
-            # fabbricato → miss onesto (il connettore ripiega su NOT_FOUND).
-            return ()
-        pagina = transport.leggi_pagina(url=categoria_url, official_host=host)
-        if not pagina:
-            return ()
-        return self._schede(pagina, categoria_url, host, limit)
+        schema = _rileva_schema(self._slug_indice(indice, base_url, host))
+        if schema == "life_event":
+            slugs = COMWEB_LIFE_EVENT_CATEGORY.get(service_key, ())
+        else:  # thematic (incl. fallback su misto/ignoto): comportamento invariato
+            tematica = COMWEB_SERVICE_CATEGORY.get(service_key)
+            slugs = (tematica,) if tematica else ()
+        # Unione multi-categoria (STATO_CIVILE life-event = 2 slug) con dedup
+        # GLOBALE per native_id del parser e cap DIFENSIVO sul TOTALE unito.
+        visti: set[str] = set()
+        candidati: list[ServiceCandidate] = []
+        for slug in slugs:
+            if len(candidati) >= limit:
+                break
+            categoria_url = self._trova_categoria(indice, base_url, host, slug)
+            if categoria_url is None:
+                # Categoria mappata assente dagli anchor indice: nessun path
+                # fabbricato → miss onesto (il connettore ripiega su NOT_FOUND).
+                continue
+            pagina = transport.leggi_pagina(url=categoria_url, official_host=host)
+            if not pagina:
+                continue
+            self._raccogli_schede(pagina, categoria_url, host, limit, visti, candidati)
+        return tuple(candidati)
+
+    @staticmethod
+    def _slug_indice(html: str, base_url: str, host: str) -> set[str]:
+        """Slug categoria di primo livello presenti sull'indice (host ufficiale)."""
+        host_ufficiale = _host_senza_www(host.lower())
+        slugs: set[str] = set()
+        for href, _testo in _RE_ANCHOR.findall(html):
+            parti = urlparse(urljoin(base_url, unescape(href)))
+            if _host_senza_www(parti.netloc.lower()) != host_ufficiale:
+                continue
+            match = _RE_CATEGORIA.match(parti.path)
+            if match:
+                slugs.add(match.group(1).lower())
+        return slugs
 
     @staticmethod
     def _trova_categoria(html: str, base_url: str, host: str, term: str) -> str | None:
@@ -133,11 +209,28 @@ class _ComWebDiscovery:
                 return assoluto
         return None
 
-    @staticmethod
-    def _schede(html: str, categoria_url: str, host: str, limit: int) -> tuple[ServiceCandidate, ...]:
-        host_ufficiale = _host_senza_www(host.lower())
+    @classmethod
+    def _schede(
+        cls, html: str, categoria_url: str, host: str, limit: int
+    ) -> tuple[ServiceCandidate, ...]:
+        # Wrapper single-categoria (back-compat): contenitori freschi.
         visti: set[str] = set()
         candidati: list[ServiceCandidate] = []
+        cls._raccogli_schede(html, categoria_url, host, limit, visti, candidati)
+        return tuple(candidati)
+
+    @staticmethod
+    def _raccogli_schede(
+        html: str,
+        categoria_url: str,
+        host: str,
+        limit: int,
+        visti: set[str],
+        candidati: list[ServiceCandidate],
+    ) -> None:
+        # Accumula in ``candidati`` (in-place), deduplicando su ``visti``
+        # condivisi tra categorie: cap e dedup valgono sul TOTALE unito.
+        host_ufficiale = _host_senza_www(host.lower())
         for href, testo in _RE_ANCHOR.findall(html):
             if len(candidati) >= limit:
                 break  # cap DIFENSIVO (guardia memoria), non selezione: sta
@@ -153,7 +246,7 @@ class _ComWebDiscovery:
                 continue  # categorie/link non-scheda scartati
             native_id = match.group(1)
             if native_id in visti:
-                continue
+                continue  # dedup globale per native_id del parser (cross-categoria)
             titolo = unescape(_RE_TAG.sub("", testo)).strip()
             if not titolo:
                 continue
@@ -163,7 +256,6 @@ class _ComWebDiscovery:
                 continue
             visti.add(native_id)
             candidati.append(candidato)
-        return tuple(candidati)
 
 
 class ComWebServiceConnector(_ServiceConnectorBase):
@@ -186,8 +278,10 @@ class ComWebServiceConnector(_ServiceConnectorBase):
         base = _base_con_schema(getattr(mappa, "sito", None))
         if base is None:
             return None
-        categoria = COMWEB_SERVICE_CATEGORY.get(service_key)
-        if categoria is None:
+        if service_key not in COMWEB_SERVICE_CATEGORY:
             return None
         entry = f"{base.rstrip('/')}{_INDICE}"
-        return DiscoveryTarget(entry, categoria, urlparse(base).netloc)
+        # term = la ServiceKey (value): la discovery rileva lo schema dall'indice
+        # e sceglie gli slug dalla mappa giusta (tematica o life-event).  Il gate
+        # esattamente-uno (_confermati) resta ancorato a ``service_key``.
+        return DiscoveryTarget(entry, service_key.value, urlparse(base).netloc)

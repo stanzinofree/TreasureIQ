@@ -1,13 +1,7 @@
 "use client";
 
 import { useScan } from "@/lib/scan";
-
-/** Data breve it-IT (ISO → «28 lug»), mai «Invalid Date» a schermo. */
-function dataBreve(iso: string): string {
-  const d = new Date(iso);
-  if (Number.isNaN(d.getTime())) return "";
-  return d.toLocaleDateString("it-IT", { day: "numeric", month: "short" });
-}
+import { dataBreve } from "@/lib/date";
 
 /**
  * La spia «scansione live» del comune, in due punti (chat e pannello) con lo

@@ -24,24 +24,13 @@ import {
 } from "@/lib/api";
 import { useProfilo, type NumeriUtiliProfilo } from "@/lib/profilo";
 import { useRisultati } from "@/lib/risultati";
+import { dataLeggibile } from "@/lib/date";
 
 const LIVELLO_LABEL: Record<string, string> = {
   comunale: "Comunale",
   regionale: "Regionale",
   nazionale: "Nazionale",
 };
-
-/** Data del controllo, leggibile: «6 agosto 2026». Se l'ISO è illeggibile,
- * ripiega sulla stringa grezza — mai un «Invalid Date» a schermo. */
-function dataLeggibile(iso: string): string {
-  const d = new Date(iso);
-  if (Number.isNaN(d.getTime())) return iso;
-  return d.toLocaleDateString("it-IT", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
-}
 
 /** Una riga di recapito nella card comune: etichetta + valore linkato. Non
  * si rende se il valore manca (nessun campo vuoto spacciato per dato). */

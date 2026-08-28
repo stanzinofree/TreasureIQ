@@ -21,6 +21,7 @@ import {
 } from "@/lib/api";
 import { linkAperturaDati, mailtoSicuro, LINK_ESTERNO } from "@/lib/moduli";
 import { nome } from "@/lib/palette";
+import { dataLeggibile } from "@/lib/date";
 
 export const dynamic = "force-dynamic";
 
@@ -28,19 +29,6 @@ export const dynamic = "force-dynamic";
  *  non ha trovato/riconosciuto un portale trasparenza. Copertura onesta, non
  *  un nome da mostrare come se fosse un prodotto. */
 const AT_NON_VENDOR = new Set(["non_trovata", "ignota", "non_misurata", ""]);
-
-/** Data leggibile in it-IT, mai «Invalid Date» a schermo. Stesso formato di
- * `dataLeggibile` in Pannello.tsx — duplicato qui perché quella è privata al
- * suo modulo, non perché la forma debba divergere. */
-function dataLeggibile(iso: string): string {
-  const d = new Date(iso);
-  if (Number.isNaN(d.getTime())) return iso;
-  return d.toLocaleDateString("it-IT", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
-}
 
 /** Iconcina per superficie AgID: un glifo per riconoscere a colpo d'occhio di
  * cosa parla la mini-card, senza emoji (design system). SVG 18px, stroke

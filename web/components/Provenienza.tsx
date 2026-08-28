@@ -23,6 +23,7 @@
 import { useState } from "react";
 import type { InfoOut } from "@/lib/api";
 import { accessLabel } from "@/lib/access";
+import { dataLeggibile } from "@/lib/date";
 
 type StatoFonte = InfoOut["stato"] | "unavailable";
 
@@ -45,18 +46,6 @@ const ETICHETTA_STATO_NEUTRA: Record<Exclude<StatoFonte, "unavailable">, string>
   non_verificato: "non verificato",
   non_pubblicato: "non pubblicato",
 };
-
-/** Data leggibile it-IT (giorno / mese esteso / anno). Formatter locale al
- *  componente: la deduplica globale dei formatter è la slice S3. */
-export function dataLeggibile(iso: string): string {
-  const d = new Date(iso);
-  if (Number.isNaN(d.getTime())) return iso;
-  return d.toLocaleDateString("it-IT", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
-}
 
 /** La riga di freschezza: quando un dato è stato letto/verificato. Prefisso
  *  scelto dal render (portale vs TreasureIQ), forma unica. */

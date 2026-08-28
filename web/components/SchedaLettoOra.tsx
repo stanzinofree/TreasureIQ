@@ -23,21 +23,12 @@ import {
   type UfficioConnettore,
 } from "@/lib/api";
 import { Provenienza, Freschezza } from "@/components/Provenienza";
+import { dataLeggibile } from "@/lib/date";
 
 /** `pagina` va mostrato così com'è (D-07, number-guard): nessuna
  *  ricalcolo/offset, il numero è quello che il backend ha già letto. */
 function etichettaPagina(pagina: number | null): string | null {
   return pagina == null ? null : `pag. ${pagina}`;
-}
-
-function dataLeggibile(iso: string): string {
-  const d = new Date(iso);
-  if (Number.isNaN(d.getTime())) return iso;
-  return d.toLocaleDateString("it-IT", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
 }
 
 /** Una riga di recapito, o la sua assenza dichiarata — mai un campo che

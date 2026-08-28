@@ -4520,11 +4520,13 @@ a {
 
 /* Grammatica fonti (Ramo 3): la provenienza della scheda servizio vince sullo
  * stato quando c'è. Blu = catalogo nazionale (autorevole e conservato); verde =
- * letto dal comune (live ora, o da cache del connettore). Regole DOPO quelle
- * [data-stato] così, a parità di specificità, l'ordine sorgente le fa prevalere
- * sull'elemento che porta entrambi gli attributi. */
-.civica__stato[data-origine="catalogo"] { color: var(--ai); }
-.civica__stato[data-origine="live"] { color: var(--wakatake-deep, #067647); }
+ * letto dal comune (live ora, o da cache del connettore). Scope sotto
+ * `.bubble--assistant .chat__answer` per battere l'override bolt-on
+ * `.bubble--assistant .chat__answer .civica__stato { color: inherit }` (0,3,0)
+ * che dentro la bolla neutralizza il colore-stato: qui (0,4,0) vince e il bollo
+ * porta davvero blu/verde. Vedi lezione cascade bolt-on. */
+.bubble--assistant .chat__answer .civica__stato[data-origine="catalogo"] { color: var(--ai); }
+.bubble--assistant .chat__answer .civica__stato[data-origine="live"] { color: var(--wakatake-deep, #067647); }
 
 /* Il bollo «letto ora dal comune» è cliccabile (apre la nota): reset
  * dell'aspetto bottone, la cornice del bollo resta. */

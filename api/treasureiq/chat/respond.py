@@ -384,6 +384,11 @@ class InfoAnswer:
     #: un caso del rail informativo (D-S5-4): si aggancia qui, non a un campo di
     #: primo livello in `ChatAnswer`. `None` fuori dal ramo MODULISTICA.
     service: ServiceAnswer | None = None
+    #: Provenienza della scheda servizio (grammatica fonti UI, Ramo 3): "catalogo"
+    #: se risolta dal catalogo nazionale flat, "live" se letta dal connettore del
+    #: comune, `None` fuori dal rail servizio. Non è un diritto d'accesso: dice
+    #: DA DOVE arriva il dato, ortogonale a `stato`/`access_mode`.
+    origine: str | None = None
 
 
 @dataclass
@@ -4239,6 +4244,10 @@ async def _risposta_modulistica(
         stato=StatoFonte.UFFICIALE,
         ente_nome=comune_nome,
         service=service,
+        # Provenienza per la grammatica fonti UI: "catalogo" quando il gradino
+        # del catalogo nazionale flat ha risolto, "live" quando è stato il
+        # connettore del comune. Il nome connettore è la sola sorgente di verità.
+        origine="catalogo" if resolved.connector.name == "catalog" else "live",
     )
     # Testo FISSO (D-07): titoli, URL e metodi vivono solo nei campi strutturati
     # (`info.service`/`data_batches`), mai interpolati nella prosa.

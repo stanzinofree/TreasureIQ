@@ -153,6 +153,22 @@ export default function RispostaCivica({
   // verdetto). Meno rumore sotto ogni risposta, spiegazione a un tap.
   const [spiegaVivo, setSpiegaVivo] = useState(false);
 
+  // Grammatica fonti (Ramo 3): la provenienza della scheda servizio prende il
+  // posto dell'etichetta di stato quando c'è. Tre stati distinti a colpo
+  // d'occhio — catalogo nazionale (blu, autorevole e conservato), letto ora dal
+  // comune (verde, live), fonte del comune conservata (verde, live da cache) —
+  // più il fallback informativo (ETICHETTA_STATO) fuori dal rail servizio. Non
+  // è un diritto d'accesso: dice DA DOVE arriva il dato, non se sei autorizzato.
+  const liveOra = info.origine === "live" && info.letto_dal_vivo;
+  const etichettaFonte =
+    info.origine === "catalogo"
+      ? "Catalogo nazionale"
+      : info.origine === "live"
+        ? info.letto_dal_vivo
+          ? "Letto ora dal comune"
+          : "Fonte del comune"
+        : ETICHETTA_STATO[info.stato];
+
   return (
     <div className="civica tiq-card">
       <span
@@ -160,7 +176,10 @@ export default function RispostaCivica({
         aria-hidden="true"
       />
       <p className="civica__bolli">
-        {accessLabel(accessMode) && (
+        {/* L'etichetta d'accesso (diretto/mediato/…) è un asse diverso dalla
+            provenienza. Quando la provenienza c'è (rail servizio) la fonte parla
+            da sé: sopprimo il chip d'accesso per non dare due segnali insieme. */}
+        {accessLabel(accessMode) && info.origine == null && (
           <span
             className="civica__access"
             data-access-mode={accessMode ?? undefined}
@@ -168,10 +187,36 @@ export default function RispostaCivica({
             {accessLabel(accessMode)}
           </span>
         )}
-        <span className="civica__stato" data-stato={info.stato}>
-          {ETICHETTA_STATO[info.stato]}
-        </span>
-        {info.letto_dal_vivo && (
+        {liveOra ? (
+          <span className="civica__vivo-wrap">
+            <button
+              type="button"
+              className="civica__stato civica__stato--vivo"
+              data-origine="live"
+              aria-expanded={spiegaVivo}
+              onClick={() => setSpiegaVivo((v) => !v)}
+            >
+              {etichettaFonte}
+            </button>
+            {spiegaVivo && (
+              <span className="civica__vivo-nota" role="note">
+                Dal portale del comune, in questo momento e alla lettera. Non è
+                un dato che abbiamo verificato né conservato.
+              </span>
+            )}
+          </span>
+        ) : (
+          <span
+            className="civica__stato"
+            data-stato={info.stato}
+            data-origine={info.origine ?? undefined}
+          >
+            {etichettaFonte}
+          </span>
+        )}
+        {/* Bollo «letto ora» del rail informativo: resta solo fuori dal rail
+            servizio (origine null), dove la scheda non porta la propria fonte. */}
+        {info.letto_dal_vivo && info.origine == null && (
           <span className="civica__vivo-wrap">
             <button
               type="button"

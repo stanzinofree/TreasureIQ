@@ -870,6 +870,10 @@ class InfoOut(BaseModel):
     #: Le opzioni di un servizio comunale (Ramo 3, Slice 5). `None` fuori dal
     #: ramo MODULISTICA.
     service: ServiceOut | None = None
+    #: Provenienza della scheda servizio per la grammatica fonti UI: "catalogo"
+    #: (catalogo nazionale flat) o "live" (letto dal connettore del comune).
+    #: `None` fuori dal rail servizio. Ortogonale a `stato` e all'access_mode.
+    origine: str | None = None
 
 
 class SourceAccessOut(BaseModel):
@@ -993,6 +997,7 @@ def to_info_out(info: InfoAnswer) -> InfoOut:
     return InfoOut(
         letto_dal_vivo=info.letto_dal_vivo,
         stato=info.stato.value,
+        origine=info.origine,
         ente_nome=info.ente_nome,
         prove=[ProvaOut(stato=p.stato.value, testo=p.testo) for p in info.prove],
         azioni=[

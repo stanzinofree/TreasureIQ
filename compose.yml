@@ -54,6 +54,10 @@ services:
       # The curated data mount is read-only; anonymous conversation state is
       # runtime data and must live on the writable persistent /live mount.
       TREASUREIQ_CONVERSATION_DB: /live/conversations.sqlite3
+      # Marca il cookie di sessione Secure (solo HTTPS). Default 0: lo sviluppo
+      # locale gira su http://localhost, dove Secure bloccherebbe il set. La
+      # prod dietro HTTPS lo mette a 1 (nel .env del box, non qui).
+      TREASUREIQ_COOKIE_SECURE: ${TREASUREIQ_COOKIE_SECURE:-0}
       TREASUREIQ_CORS_ORIGINS: "http://localhost:3000,http://127.0.0.1:3000"
       # Signs the demo session cookie. Override in any real deployment — the
       # default is public in this repository and therefore not a secret.

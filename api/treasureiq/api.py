@@ -132,6 +132,11 @@ DATA_DIR = Path(os.environ.get("TREASUREIQ_DATA_DIR", REPO_ROOT / "data"))
 SEED_DIR = DATA_DIR / "seed"
 CONVERSATION_COOKIE = "tiq_conversation"
 CONVERSATION_MAX_AGE = 90 * 24 * 60 * 60
+# Il cookie di sessione va marcato Secure in produzione (solo HTTPS): impedisce
+# che il token viaggi su una richiesta in chiaro intercettabile. Spento di
+# default perche' lo sviluppo locale gira su http://localhost, dove Secure
+# bloccherebbe il set del cookie. La prod (dietro HTTPS) lo abilita con =1.
+COOKIE_SECURE = os.environ.get("TREASUREIQ_COOKIE_SECURE", "") == "1"
 CONVERSATION_DB = Path(
     os.environ.get("TREASUREIQ_CONVERSATION_DB", str(DATA_DIR / "conversations.sqlite3"))
 )
@@ -1207,9 +1212,10 @@ class FiltroOut(BaseModel):
 
 
 class ChatOut(BaseModel):
-    #: Token opaco della conversazione anonima, riapribile per 90 giorni.
-    #: Lo stato resta server-side: il cookie non contiene il profilo o la chat.
-    conversation_id: str
+    #: Il token di sessione NON viaggia nel body: sta solo nel cookie httponly
+    #: (`tiq_conversation`), non leggibile da JS. Rieccheggiarlo qui lo avrebbe
+    #: esposto a un eventuale XSS, vanificando l'httponly. Lo stato resta
+    #: server-side: il cookie non contiene il profilo o la chat.
     reply: str
     #: Cosa abbiamo capito della domanda. Il pannello laterale lo mostra come
     #: filtri attivi, cosi' il cittadino puo' smentirci.
@@ -1266,7 +1272,8 @@ class ConversationMessageOut(BaseModel):
 
 
 class ConversationOut(BaseModel):
-    conversation_id: str | None = None
+    #: Il token di sessione resta nel cookie httponly, mai nel body (vedi
+    #: ChatOut): questa risposta espone solo la trascrizione.
     messages: list[ConversationMessageOut] = []
 
 
@@ -2786,6 +2793,7 @@ async def chat(body: ChatIn, request: Request, response: Response) -> ChatOut:
         CONVERSATION_COOKIE,
         conversation.conversation_id,
         httponly=True,
+        secure=COOKIE_SECURE,
         samesite="lax",
         max_age=CONVERSATION_MAX_AGE,
     )
@@ -2957,7 +2965,6 @@ async def chat(body: ChatIn, request: Request, response: Response) -> ChatOut:
         )
     )
     output = ChatOut(
-        conversation_id=conversation.conversation_id,
         reply=narrated.text,
         profilo_capito=profilo_capito,
         topic=answer.topic.value,
@@ -3050,11 +3057,11 @@ def get_conversation(request: Request, response: Response) -> ConversationOut:
         CONVERSATION_COOKIE,
         conversation.conversation_id,
         httponly=True,
+        secure=COOKIE_SECURE,
         samesite="lax",
         max_age=CONVERSATION_MAX_AGE,
     )
     return ConversationOut(
-        conversation_id=conversation.conversation_id,
         messages=[ConversationMessageOut(role=m.role, content=m.content) for m in messages],
     )
 

@@ -277,19 +277,31 @@ function MatchCard({
 function DataGapNotice({ kind }: { kind: "not_published" | "none_found" }) {
   if (kind === "not_published") {
     return (
-      <p className="notice" data-gap="not_published">
-        <strong>Il comune non lo ha pubblicato.</strong> Non significa che tu
-        non abbia diritto: significa che questo dato manca. Verificalo
-        direttamente con l&rsquo;ufficio competente.
-      </p>
+      <div className="tiq-card tiq-source-card" data-gap="not_published">
+        <span className="tiq-source-card__bollo" data-stato="unavailable">
+          Fonte non disponibile
+        </span>
+        <h3 className="tiq-source-card__title">
+          Il comune non lo ha pubblicato.
+        </h3>
+        <p className="tiq-source-card__lead">
+          Non significa che tu non abbia diritto: significa che questo dato
+          manca. Verificalo direttamente con l&rsquo;ufficio competente.
+        </p>
+      </div>
     );
   }
   return (
-    <p className="notice notice--muted" data-gap="none_found">
-      <strong>Non ho trovato nulla.</strong> Nessun servizio pubblicato sembra
-      corrispondere a questa domanda. Prova a riformularla, oppure guarda{" "}
-      <a href="/dati">quali dati abbiamo letto</a>.
-    </p>
+    <div className="tiq-card tiq-source-card" data-gap="none_found">
+      <span className="tiq-source-card__bollo" data-stato="unavailable">
+        Fonte non disponibile
+      </span>
+      <h3 className="tiq-source-card__title">Non ho trovato nulla.</h3>
+      <p className="tiq-source-card__lead">
+        Nessun servizio pubblicato sembra corrispondere a questa domanda. Prova
+        a riformularla, oppure guarda <a href="/dati">quali dati abbiamo letto</a>.
+      </p>
+    </div>
   );
 }
 
@@ -439,14 +451,19 @@ function BandiComune({ istat }: { istat: string }) {
 
   return (
     <div className="bandi-comune" role="group" aria-label="Bandi e avvisi del comune">
-      <button
-        type="button"
-        className="bandi-comune__header"
-        onClick={() => setAperta((a) => !a)}
-        aria-expanded={aperta}
-      >
-        Bandi e avvisi del comune ({bandi.length})
-      </button>
+      <span className="tiq-source-card__bollo" data-stato="non_verificato">
+        Non un verdetto
+      </span>
+      <h3 className="bandi-comune__titolo-card">
+        <button
+          type="button"
+          className="bandi-comune__header"
+          onClick={() => setAperta((a) => !a)}
+          aria-expanded={aperta}
+        >
+          Bandi e avvisi del comune ({bandi.length})
+        </button>
+      </h3>
       {aperta && (
         <>
           <p className="bandi-comune__caveat">

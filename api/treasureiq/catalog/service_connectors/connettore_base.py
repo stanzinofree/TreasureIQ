@@ -65,6 +65,27 @@ class DiscoveryTarget(NamedTuple):
     official_host: str
 
 
+class DiagnosticaConnettore(NamedTuple):
+    """Conteggi read-only di una risoluzione, per lo sweep di misura (Fase 1).
+
+    ``retrieve`` collassa 0 e ≥2 confermati nello stesso ``NOT_FOUND``: per
+    misurare *onestamente* «miss» (0) contro «ambiguo» (≥2) serve il conteggio,
+    che qui viene esposto senza coniare identità né scrivere nulla.
+
+    - ``chiave_valida``: la request portava una ``ServiceKey`` in vocabolario;
+    - ``target_presente``: la piattaforma ha un entry-point per quella key
+      (``False`` → la famiglia non serve questa key su questo comune);
+    - ``grezzi`` / ``filtrati`` / ``confermati``: candidati a ogni stadio della
+      pipeline di discovery (discovery → filtro class-aware → gate host+recogniser).
+    """
+
+    chiave_valida: bool
+    target_presente: bool
+    grezzi: int
+    filtrati: int
+    confermati: int
+
+
 class _ServiceConnectorBase:
     """Risolve un ``ServiceKey`` in **esattamente un** ``ServiceReference``.
 
@@ -158,6 +179,58 @@ class _ServiceConnectorBase:
             connector=self._CONNECTOR,
             retrieved_at=now,
         )
+
+    def diagnostica(self, request: DataRequest, *, mappa) -> DiagnosticaConnettore:
+        """Misura read-only dell'esito di risoluzione (sweep di misura, Fase 1).
+
+        Esegue la STESSA discovery live di ``retrieve`` — discovery + filtro
+        class-aware + gate host/recogniser — e riporta i conteggi dei candidati
+        a ogni stadio, così un livello superiore distingue «miss» (0 confermati)
+        da «ambiguo» (≥2), che ``retrieve`` collassa entrambi in ``NOT_FOUND``.
+        Non chiama ``_opzioni`` (nessuna lettura di pagina extra), non conia una
+        ``ServiceReference`` e non scrive nulla: nessun effetto sul path live.
+        """
+        if request.source_id != mappa.codice_istat:
+            raise ValueError("request.source_id does not match the measured source")
+        service_key = self._service_key(request)
+        if service_key is None:
+            return DiagnosticaConnettore(False, False, 0, 0, 0)
+        target = self._discovery_target(mappa, service_key)
+        if target is None:
+            return DiagnosticaConnettore(True, False, 0, 0, 0)
+        grezzi = self._fetcher.scopri_servizi(
+            base_url=target.entry_url,
+            term=target.term,
+            limit=self._LIMITE_RICERCA,
+        )
+        filtrati = self._filtra_candidati(grezzi, service_key)
+        confermati = self._confermati(filtrati, service_key, target.official_host)
+        return DiagnosticaConnettore(
+            True, True, len(grezzi), len(filtrati), len(confermati)
+        )
+
+    def entry_raggiungibile(self, request: DataRequest, *, mappa) -> bool | None:
+        """Sonda read-only la sola raggiungibilità dell'``entry_url``.
+
+        Serve allo strumento di misura per distinguere, quando ``diagnostica``
+        ritorna 0 grezzi, un endpoint **muto** (fetch fallito / vuoto = transient
+        o infra) da una **assenza reale** (endpoint OK, 0 candidati). Fetcha solo
+        l'entry-point (indice REST/servizi) e riporta se ha risposto — nessuna
+        discovery, nessun filtro, nessuna reference, nessuna scrittura.
+
+        Ritorna ``None`` se non c'è target (chiave non valida o sito assente):
+        in quel caso la (non-)raggiungibilità non è definita.
+        """
+        service_key = self._service_key(request)
+        if service_key is None:
+            return None
+        target = self._discovery_target(mappa, service_key)
+        if target is None:
+            return None
+        pagina = self._fetcher.leggi_pagina(
+            url=target.entry_url, official_host=target.official_host
+        )
+        return bool(pagina)
 
     # -- hook per-famiglia -------------------------------------------------
 

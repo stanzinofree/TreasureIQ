@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "026036",
+ "services": {
+  "accesso_atti": {
+   "service_id": "026036:magnolia:landingIstanza-Id-1",
+   "title": "Richiedere l'accesso agli atti (ESCLUSE PRATICHE EDILIZIE - SUAP/SUE)",
+   "source_url": "https://servizi.comune.loria.tv.it/ServiziOnLine/Istanze/landingIstanza?Id=1",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.loria.tv.it/ServiziOnLine/Istanze/landingIstanza?Id=1",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.loria.tv.it/ServiziOnLine/Istanze/landingIstanza?Id=1",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:36.641416Z"
+  },
+  "carta_identita": {
+   "service_id": "026036:magnolia:Servizio-2",
+   "title": "Carta d'Identità Elettronica",
+   "source_url": "https://www.comune.loria.tv.it/home/servizi/servizio/Servizio-2.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.loria.tv.it/home/servizi/servizio/Servizio-2.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.loria.tv.it/home/servizi/servizio/Servizio-2.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:36.641097Z"
+  },
+  "tributi_imu": {
+   "service_id": "026036:magnolia:landingIstanza-Id-84",
+   "title": "Sportello del Contribuente (IMU)",
+   "source_url": "https://servizi.comune.loria.tv.it/ServiziOnLine/Istanze/landingIstanza?Id=84",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.loria.tv.it/ServiziOnLine/Istanze/landingIstanza?Id=84",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.loria.tv.it/ServiziOnLine/Istanze/landingIstanza?Id=84",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:36.641581Z"
+  }
+ }
+}

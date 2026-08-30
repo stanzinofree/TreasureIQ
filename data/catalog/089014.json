@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "089014",
+ "services": {
+  "stato_civile": {
+   "service_id": "089014:magnolia:landingIstanza-Id-6",
+   "title": "Richiedere una pubblicazione di matrimonio",
+   "source_url": "https://servizi.comune.pachino.sr.it/ServiziOnLine/Istanze/landingIstanza?Id=6",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.pachino.sr.it/ServiziOnLine/Istanze/landingIstanza?Id=6",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.pachino.sr.it/ServiziOnLine/Istanze/landingIstanza?Id=6",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:58:36.162037Z"
+  }
+ }
+}

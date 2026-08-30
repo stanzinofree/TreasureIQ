@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "026084",
+ "services": {
+  "accesso_atti": {
+   "service_id": "026084:magnolia:landingIstanza-Id-8",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://servizi.comune.tarzo.tv.it/ServiziOnLine/Istanze/landingIstanza?Id=8",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.tarzo.tv.it/ServiziOnLine/Istanze/landingIstanza?Id=8",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.tarzo.tv.it/ServiziOnLine/Istanze/landingIstanza?Id=8",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:41.837200Z"
+  },
+  "carta_identita": {
+   "service_id": "026084:magnolia:landingIstanza-Id-37",
+   "title": "Rilascio Carta di Identità Elettronica (CIE)",
+   "source_url": "https://servizi.comune.tarzo.tv.it/ServiziOnLine/Istanze/landingIstanza?Id=37",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.tarzo.tv.it/ServiziOnLine/Istanze/landingIstanza?Id=37",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.tarzo.tv.it/ServiziOnLine/Istanze/landingIstanza?Id=37",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:41.836935Z"
+  },
+  "stato_civile": {
+   "service_id": "026084:magnolia:landingIstanza-Id-53",
+   "title": "Certificato di nascita per cittadini europei - ANPR",
+   "source_url": "https://servizi.comune.tarzo.tv.it/ServiziOnLine/Istanze/landingIstanza?Id=53",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.tarzo.tv.it/ServiziOnLine/Istanze/landingIstanza?Id=53",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.tarzo.tv.it/ServiziOnLine/Istanze/landingIstanza?Id=53",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:41.837313Z"
+  },
+  "tributi_imu": {
+   "service_id": "026084:magnolia:landingIstanza-Id-55",
+   "title": "Calcolo IMU",
+   "source_url": "https://servizi.comune.tarzo.tv.it/ServiziOnLine/Istanze/landingIstanza?Id=55",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.tarzo.tv.it/ServiziOnLine/Istanze/landingIstanza?Id=55",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.tarzo.tv.it/ServiziOnLine/Istanze/landingIstanza?Id=55",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:41.837414Z"
+  }
+ }
+}

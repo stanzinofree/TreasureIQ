@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "026053",
+ "services": {
+  "accesso_atti": {
+   "service_id": "026053:magnolia:landingIstanza-Id-56",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://servizi.comune.orsago.tv.it/ServiziOnLine/Istanze/landingIstanza?Id=56",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.orsago.tv.it/ServiziOnLine/Istanze/landingIstanza?Id=56",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.orsago.tv.it/ServiziOnLine/Istanze/landingIstanza?Id=56",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:38.709404Z"
+  },
+  "cambio_residenza": {
+   "service_id": "026053:magnolia:landingIstanza-Id-93",
+   "title": "Cambio di residenza - ANPR",
+   "source_url": "https://servizi.comune.orsago.tv.it/ServiziOnLine/Istanze/landingIstanza?Id=93",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.orsago.tv.it/ServiziOnLine/Istanze/landingIstanza?Id=93",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.orsago.tv.it/ServiziOnLine/Istanze/landingIstanza?Id=93",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:38.709316Z"
+  },
+  "carta_identita": {
+   "service_id": "026053:magnolia:landingIstanza-Id-91",
+   "title": "Rilascio Carta di Identità Elettronica (CIE)",
+   "source_url": "https://servizi.comune.orsago.tv.it/ServiziOnLine/Istanze/landingIstanza?Id=91",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.orsago.tv.it/ServiziOnLine/Istanze/landingIstanza?Id=91",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.orsago.tv.it/ServiziOnLine/Istanze/landingIstanza?Id=91",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:38.709127Z"
+  }
+ }
+}

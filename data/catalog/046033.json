@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "046033",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "046033:magnolia:landingIstanza-Id-78",
+   "title": "Richiedere cambio di residenza",
+   "source_url": "https://servizi.comune.viareggio.lu.it/ServiziOnLine/Istanze/landingIstanza?Id=78",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.viareggio.lu.it/ServiziOnLine/Istanze/landingIstanza?Id=78",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.viareggio.lu.it/ServiziOnLine/Istanze/landingIstanza?Id=78",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:58:00.160517Z"
+  },
+  "tributi_imu": {
+   "service_id": "046033:magnolia:landingIstanza-Id-33",
+   "title": "Calcolo IMU",
+   "source_url": "https://servizi.comune.viareggio.lu.it/ServiziOnLine/Istanze/landingIstanza?Id=33",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.viareggio.lu.it/ServiziOnLine/Istanze/landingIstanza?Id=33",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.viareggio.lu.it/ServiziOnLine/Istanze/landingIstanza?Id=33",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:58:00.160641Z"
+  }
+ }
+}

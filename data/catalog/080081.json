@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "080081",
+ "services": {
+  "accesso_atti": {
+   "service_id": "080081:magnolia:landingIstanza-Id-4",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://servizi.comune.santeufemiadaspromonte.rc.it/ServiziOnLine/Istanze/landingIstanza?Id=4",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.santeufemiadaspromonte.rc.it/ServiziOnLine/Istanze/landingIstanza?Id=4",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.santeufemiadaspromonte.rc.it/ServiziOnLine/Istanze/landingIstanza?Id=4",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:58:33.708267Z"
+  },
+  "cambio_residenza": {
+   "service_id": "080081:magnolia:landingIstanza-Id-8",
+   "title": "Cambio di residenza - ANPR",
+   "source_url": "https://servizi.comune.santeufemiadaspromonte.rc.it/ServiziOnLine/Istanze/landingIstanza?Id=8",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.santeufemiadaspromonte.rc.it/ServiziOnLine/Istanze/landingIstanza?Id=8",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.santeufemiadaspromonte.rc.it/ServiziOnLine/Istanze/landingIstanza?Id=8",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:58:33.708063Z"
+  },
+  "tributi_imu": {
+   "service_id": "080081:magnolia:landingIstanza-Id-22",
+   "title": "Pagare Tributi IMU",
+   "source_url": "https://servizi.comune.santeufemiadaspromonte.rc.it/ServiziOnLine/Istanze/landingIstanza?Id=22",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.santeufemiadaspromonte.rc.it/ServiziOnLine/Istanze/landingIstanza?Id=22",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.santeufemiadaspromonte.rc.it/ServiziOnLine/Istanze/landingIstanza?Id=22",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:58:33.708377Z"
+  }
+ }
+}

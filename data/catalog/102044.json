@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "102044",
+ "services": {
+  "accesso_atti": {
+   "service_id": "102044:magnolia:landingIstanza-Id-1",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://servizi.comune.tropea.vv.it/ServiziOnLine/Istanze/landingIstanza?Id=1",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.tropea.vv.it/ServiziOnLine/Istanze/landingIstanza?Id=1",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.tropea.vv.it/ServiziOnLine/Istanze/landingIstanza?Id=1",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:58:40.224852Z"
+  }
+ }
+}

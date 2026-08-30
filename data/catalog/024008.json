@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "024008",
+ "services": {
+  "accesso_atti": {
+   "service_id": "024008:magnolia:landingIstanza-Id-18",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://servizi.comune.arzignano.vi.it/ServiziOnLine/Istanze/landingIstanza?Id=18",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.arzignano.vi.it/ServiziOnLine/Istanze/landingIstanza?Id=18",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.arzignano.vi.it/ServiziOnLine/Istanze/landingIstanza?Id=18",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:31.535351Z"
+  },
+  "cambio_residenza": {
+   "service_id": "024008:magnolia:landingIstanza-Id-21",
+   "title": "Cambio di residenza - ANPR",
+   "source_url": "https://servizi.comune.arzignano.vi.it/ServiziOnLine/Istanze/landingIstanza?Id=21",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.arzignano.vi.it/ServiziOnLine/Istanze/landingIstanza?Id=21",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.arzignano.vi.it/ServiziOnLine/Istanze/landingIstanza?Id=21",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:31.535161Z"
+  },
+  "tributi_imu": {
+   "service_id": "024008:magnolia:Servizio-17",
+   "title": "Servizio IMU",
+   "source_url": "https://www.comune.arzignano.vi.it/home/servizi/servizio/Servizio-17.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.arzignano.vi.it/home/servizi/servizio/Servizio-17.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.arzignano.vi.it/home/servizi/servizio/Servizio-17.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:31.535490Z"
+  },
+  "tributi_tari": {
+   "service_id": "024008:magnolia:Servizio-16",
+   "title": "Servizio TARI",
+   "source_url": "https://www.comune.arzignano.vi.it/home/servizi/servizio/Servizio-16.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.arzignano.vi.it/home/servizi/servizio/Servizio-16.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.arzignano.vi.it/home/servizi/servizio/Servizio-16.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:31.535594Z"
+  }
+ }
+}

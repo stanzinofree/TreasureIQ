@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "024014",
+ "services": {
+  "accesso_atti": {
+   "service_id": "024014:magnolia:landingIstanza-Id-13",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://servizi.comune.breganze.vi.it/ServiziOnLine/Istanze/landingIstanza?Id=13",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.breganze.vi.it/ServiziOnLine/Istanze/landingIstanza?Id=13",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.breganze.vi.it/ServiziOnLine/Istanze/landingIstanza?Id=13",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:32.660499Z"
+  },
+  "cambio_residenza": {
+   "service_id": "024014:magnolia:landingIstanza-Id-25",
+   "title": "Cambio di residenza - ANPR",
+   "source_url": "https://servizi.comune.breganze.vi.it/ServiziOnLine/Istanze/landingIstanza?Id=25",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.breganze.vi.it/ServiziOnLine/Istanze/landingIstanza?Id=25",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.breganze.vi.it/ServiziOnLine/Istanze/landingIstanza?Id=25",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:32.660431Z"
+  },
+  "carta_identita": {
+   "service_id": "024014:magnolia:landingIstanza-Id-9",
+   "title": "Rilascio Carta di Identità Elettronica (CIE)",
+   "source_url": "https://servizi.comune.breganze.vi.it/ServiziOnLine/Istanze/landingIstanza?Id=9",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.breganze.vi.it/ServiziOnLine/Istanze/landingIstanza?Id=9",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.breganze.vi.it/ServiziOnLine/Istanze/landingIstanza?Id=9",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:32.660277Z"
+  },
+  "tributi_imu": {
+   "service_id": "024014:magnolia:Servizio-1",
+   "title": "IMU on-line",
+   "source_url": "https://www.comune.breganze.vi.it/home/servizi/servizio/Servizio-1.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.breganze.vi.it/home/servizi/servizio/Servizio-1.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.breganze.vi.it/home/servizi/servizio/Servizio-1.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:32.660579Z"
+  }
+ }
+}

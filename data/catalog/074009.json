@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "074009",
+ "services": {
+  "accesso_atti": {
+   "service_id": "074009:magnolia:landingIstanza-Id-2",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://sportello.comune.latiano.br.it/ServiziOnLine/Istanze/landingIstanza?Id=2",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://sportello.comune.latiano.br.it/ServiziOnLine/Istanze/landingIstanza?Id=2",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://sportello.comune.latiano.br.it/ServiziOnLine/Istanze/landingIstanza?Id=2",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:58:24.696559Z"
+  },
+  "carta_identita": {
+   "service_id": "074009:magnolia:landingIstanza-Id-57",
+   "title": "Rilascio Carta di Identità Elettronica (CIE)",
+   "source_url": "https://sportello.comune.latiano.br.it/ServiziOnLine/Istanze/landingIstanza?Id=57",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://sportello.comune.latiano.br.it/ServiziOnLine/Istanze/landingIstanza?Id=57",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://sportello.comune.latiano.br.it/ServiziOnLine/Istanze/landingIstanza?Id=57",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:58:24.696244Z"
+  },
+  "tributi_imu": {
+   "service_id": "074009:magnolia:landingIstanza-Id-26",
+   "title": "Domanda di rimborso per errato versamento - IMU",
+   "source_url": "https://sportello.comune.latiano.br.it/ServiziOnLine/Istanze/landingIstanza?Id=26",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://sportello.comune.latiano.br.it/ServiziOnLine/Istanze/landingIstanza?Id=26",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://sportello.comune.latiano.br.it/ServiziOnLine/Istanze/landingIstanza?Id=26",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:58:24.696668Z"
+  }
+ }
+}

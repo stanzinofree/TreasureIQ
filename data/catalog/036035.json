@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "036035",
+ "services": {
+  "accesso_atti": {
+   "service_id": "036035:magnolia:landingIstanza-Id-15",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://servizi.comune.riolunato.mo.it/ServiziOnLine/Istanze/landingIstanza?Id=15",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.riolunato.mo.it/ServiziOnLine/Istanze/landingIstanza?Id=15",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.riolunato.mo.it/ServiziOnLine/Istanze/landingIstanza?Id=15",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:58.055931Z"
+  },
+  "cambio_residenza": {
+   "service_id": "036035:magnolia:landingIstanza-Id-50",
+   "title": "Cambio di residenza - ANPR",
+   "source_url": "https://servizi.comune.riolunato.mo.it/ServiziOnLine/Istanze/landingIstanza?Id=50",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.riolunato.mo.it/ServiziOnLine/Istanze/landingIstanza?Id=50",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.riolunato.mo.it/ServiziOnLine/Istanze/landingIstanza?Id=50",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:58.055842Z"
+  },
+  "carta_identita": {
+   "service_id": "036035:magnolia:landingIstanza-Id-32",
+   "title": "Rilascio Carta di Identità Elettronica (CIE)",
+   "source_url": "https://servizi.comune.riolunato.mo.it/ServiziOnLine/Istanze/landingIstanza?Id=32",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.riolunato.mo.it/ServiziOnLine/Istanze/landingIstanza?Id=32",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.riolunato.mo.it/ServiziOnLine/Istanze/landingIstanza?Id=32",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:58.055633Z"
+  },
+  "tributi_tari": {
+   "service_id": "036035:magnolia:Servizio-5",
+   "title": "TARI",
+   "source_url": "https://www.comune.riolunato.mo.it/home/servizi/servizio/Servizio-5.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.riolunato.mo.it/home/servizi/servizio/Servizio-5.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.riolunato.mo.it/home/servizi/servizio/Servizio-5.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:58.056055Z"
+  }
+ }
+}

@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "023077",
+ "services": {
+  "carta_identita": {
+   "service_id": "023077:magnolia:landingIstanza-Id-39",
+   "title": "Rilascio Carta di Identità Elettronica (CIE)",
+   "source_url": "https://servizi.comune.santambrogio.vr.it/ServiziOnLine/Istanze/landingIstanza?Id=39",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.santambrogio.vr.it/ServiziOnLine/Istanze/landingIstanza?Id=39",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.santambrogio.vr.it/ServiziOnLine/Istanze/landingIstanza?Id=39",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:30.489795Z"
+  },
+  "tributi_imu": {
+   "service_id": "023077:magnolia:landingIstanza-Id-42",
+   "title": "Pagare tributi IMU - Accertamenti",
+   "source_url": "https://servizi.comune.santambrogio.vr.it/ServiziOnLine/Istanze/landingIstanza?Id=42",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.santambrogio.vr.it/ServiziOnLine/Istanze/landingIstanza?Id=42",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.santambrogio.vr.it/ServiziOnLine/Istanze/landingIstanza?Id=42",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:30.489998Z"
+  }
+ }
+}

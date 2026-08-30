@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "036031",
+ "services": {
+  "accesso_atti": {
+   "service_id": "036031:magnolia:landingIstanza-Id-15",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://servizi.comune.pievepelago.mo.it/ServiziOnLine/Istanze/landingIstanza?Id=15",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.pievepelago.mo.it/ServiziOnLine/Istanze/landingIstanza?Id=15",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.pievepelago.mo.it/ServiziOnLine/Istanze/landingIstanza?Id=15",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:56.985416Z"
+  },
+  "carta_identita": {
+   "service_id": "036031:magnolia:landingIstanza-Id-12",
+   "title": "Rilascio Carta di Identità Elettronica (CIE)",
+   "source_url": "https://servizi.comune.pievepelago.mo.it/ServiziOnLine/Istanze/landingIstanza?Id=12",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.pievepelago.mo.it/ServiziOnLine/Istanze/landingIstanza?Id=12",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.pievepelago.mo.it/ServiziOnLine/Istanze/landingIstanza?Id=12",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:56.985166Z"
+  },
+  "tributi_tari": {
+   "service_id": "036031:magnolia:Servizio-3",
+   "title": "Portale Trasparenza TARI",
+   "source_url": "https://www.comune.pievepelago.mo.it/home/servizi/servizio/Servizio-3.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pievepelago.mo.it/home/servizi/servizio/Servizio-3.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pievepelago.mo.it/home/servizi/servizio/Servizio-3.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:56.985578Z"
+  }
+ }
+}

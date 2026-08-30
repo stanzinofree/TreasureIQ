@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "020028",
+ "services": {
+  "accesso_atti": {
+   "service_id": "020028:magnolia:landingIstanza-Id-18",
+   "title": "Richiesta Accesso agli Atti - pratiche edilizie",
+   "source_url": "https://servizi.comune.guidizzolo.mn.it/ServiziOnLine/Istanze/landingIstanza?Id=18",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.guidizzolo.mn.it/ServiziOnLine/Istanze/landingIstanza?Id=18",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.guidizzolo.mn.it/ServiziOnLine/Istanze/landingIstanza?Id=18",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:25.451547Z"
+  },
+  "cambio_residenza": {
+   "service_id": "020028:magnolia:landingIstanza-Id-8",
+   "title": "Cambio di residenza - ANPR",
+   "source_url": "https://servizi.comune.guidizzolo.mn.it/ServiziOnLine/Istanze/landingIstanza?Id=8",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.guidizzolo.mn.it/ServiziOnLine/Istanze/landingIstanza?Id=8",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.guidizzolo.mn.it/ServiziOnLine/Istanze/landingIstanza?Id=8",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:25.451434Z"
+  },
+  "carta_identita": {
+   "service_id": "020028:magnolia:landingIstanza-Id-14",
+   "title": "Rilascio Carta di Identità Elettronica (CIE)",
+   "source_url": "https://servizi.comune.guidizzolo.mn.it/ServiziOnLine/Istanze/landingIstanza?Id=14",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.guidizzolo.mn.it/ServiziOnLine/Istanze/landingIstanza?Id=14",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.guidizzolo.mn.it/ServiziOnLine/Istanze/landingIstanza?Id=14",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:25.451199Z"
+  }
+ }
+}

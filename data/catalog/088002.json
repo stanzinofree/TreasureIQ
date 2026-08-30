@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "088002",
+ "services": {
+  "accesso_atti": {
+   "service_id": "088002:magnolia:landingIstanza-Id-20",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://servizi.comune.chiaramonte.rg.it/ServiziOnLine/Istanze/landingIstanza?Id=20",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.chiaramonte.rg.it/ServiziOnLine/Istanze/landingIstanza?Id=20",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.chiaramonte.rg.it/ServiziOnLine/Istanze/landingIstanza?Id=20",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:58:35.718231Z"
+  },
+  "stato_civile": {
+   "service_id": "088002:magnolia:landingIstanza-Id-25",
+   "title": "Richiesta avvio procedimento per la costituzione di unione civile con appuntamento",
+   "source_url": "https://servizi.comune.chiaramonte.rg.it/ServiziOnLine/Istanze/landingIstanza?Id=25",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.chiaramonte.rg.it/ServiziOnLine/Istanze/landingIstanza?Id=25",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.chiaramonte.rg.it/ServiziOnLine/Istanze/landingIstanza?Id=25",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:58:35.718424Z"
+  }
+ }
+}

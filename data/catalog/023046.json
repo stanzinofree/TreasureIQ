@@ -1,0 +1,120 @@
+{
+ "municipality_istat": "023046",
+ "services": {
+  "accesso_atti": {
+   "service_id": "023046:magnolia:landingIstanza-Id-7",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://servizi.comune.maranodivalpolicella.vr.it/ServiziOnLine/Istanze/landingIstanza?Id=7",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.maranodivalpolicella.vr.it/ServiziOnLine/Istanze/landingIstanza?Id=7",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.maranodivalpolicella.vr.it/ServiziOnLine/Istanze/landingIstanza?Id=7",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:28.393444Z"
+  },
+  "cambio_residenza": {
+   "service_id": "023046:magnolia:landingIstanza-Id-17",
+   "title": "Cambio di residenza - ANPR",
+   "source_url": "https://servizi.comune.maranodivalpolicella.vr.it/ServiziOnLine/Istanze/landingIstanza?Id=17",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.maranodivalpolicella.vr.it/ServiziOnLine/Istanze/landingIstanza?Id=17",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.maranodivalpolicella.vr.it/ServiziOnLine/Istanze/landingIstanza?Id=17",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:28.393357Z"
+  },
+  "carta_identita": {
+   "service_id": "023046:magnolia:landingIstanza-Id-13",
+   "title": "Rilascio Carta di Identità Elettronica (CIE)",
+   "source_url": "https://servizi.comune.maranodivalpolicella.vr.it/ServiziOnLine/Istanze/landingIstanza?Id=13",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.maranodivalpolicella.vr.it/ServiziOnLine/Istanze/landingIstanza?Id=13",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.maranodivalpolicella.vr.it/ServiziOnLine/Istanze/landingIstanza?Id=13",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:28.393173Z"
+  },
+  "stato_civile": {
+   "service_id": "023046:magnolia:landingIstanza-Id-19",
+   "title": "Certificato di nascita per cittadini europei - ANPR",
+   "source_url": "https://servizi.comune.maranodivalpolicella.vr.it/ServiziOnLine/Istanze/landingIstanza?Id=19",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.maranodivalpolicella.vr.it/ServiziOnLine/Istanze/landingIstanza?Id=19",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.maranodivalpolicella.vr.it/ServiziOnLine/Istanze/landingIstanza?Id=19",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:28.393522Z"
+  },
+  "tributi_imu": {
+   "service_id": "023046:magnolia:Servizio-3",
+   "title": "IMU",
+   "source_url": "https://www.comune.maranodivalpolicella.vr.it/home/servizi/servizio/Servizio-3.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.maranodivalpolicella.vr.it/home/servizi/servizio/Servizio-3.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.maranodivalpolicella.vr.it/home/servizi/servizio/Servizio-3.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:28.393592Z"
+  }
+ }
+}

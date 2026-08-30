@@ -1,0 +1,120 @@
+{
+ "municipality_istat": "033019",
+ "services": {
+  "accesso_atti": {
+   "service_id": "033019:magnolia:landingIstanza-Id-10",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://servizi.comune.farini.pc.it/ServiziOnLine/Istanze/landingIstanza?Id=10",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.farini.pc.it/ServiziOnLine/Istanze/landingIstanza?Id=10",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.farini.pc.it/ServiziOnLine/Istanze/landingIstanza?Id=10",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:47.096300Z"
+  },
+  "cambio_residenza": {
+   "service_id": "033019:magnolia:landingIstanza-Id-16",
+   "title": "Cambio di residenza - ANPR",
+   "source_url": "https://servizi.comune.farini.pc.it/ServiziOnLine/Istanze/landingIstanza?Id=16",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.farini.pc.it/ServiziOnLine/Istanze/landingIstanza?Id=16",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.farini.pc.it/ServiziOnLine/Istanze/landingIstanza?Id=16",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:47.096170Z"
+  },
+  "carta_identita": {
+   "service_id": "033019:magnolia:landingIstanza-Id-14",
+   "title": "Rilascio Carta di Identità Elettronica (CIE)",
+   "source_url": "https://servizi.comune.farini.pc.it/ServiziOnLine/Istanze/landingIstanza?Id=14",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.farini.pc.it/ServiziOnLine/Istanze/landingIstanza?Id=14",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.farini.pc.it/ServiziOnLine/Istanze/landingIstanza?Id=14",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:47.095934Z"
+  },
+  "tributi_imu": {
+   "service_id": "033019:magnolia:Servizio-3",
+   "title": "portale IMU",
+   "source_url": "https://www.comune.farini.pc.it/home/servizi/servizio/Servizio-3.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.farini.pc.it/home/servizi/servizio/Servizio-3.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.farini.pc.it/home/servizi/servizio/Servizio-3.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:47.096438Z"
+  },
+  "tributi_tari": {
+   "service_id": "033019:magnolia:Servizio-1",
+   "title": "Portale Trasparenza TARI",
+   "source_url": "https://www.comune.farini.pc.it/home/servizi/servizio/Servizio-1.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.farini.pc.it/home/servizi/servizio/Servizio-1.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.farini.pc.it/home/servizi/servizio/Servizio-1.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:47.096539Z"
+  }
+ }
+}

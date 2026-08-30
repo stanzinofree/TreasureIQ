@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "024124",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "024124:magnolia:landingIstanza-Id-57",
+   "title": "Cambio di residenza - ANPR",
+   "source_url": "https://servizi.comune.barbaranomossano.vi.it/ServiziOnLine/Istanze/landingIstanza?Id=57",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.barbaranomossano.vi.it/ServiziOnLine/Istanze/landingIstanza?Id=57",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.barbaranomossano.vi.it/ServiziOnLine/Istanze/landingIstanza?Id=57",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:34.752032Z"
+  },
+  "carta_identita": {
+   "service_id": "024124:magnolia:landingIstanza-Id-26",
+   "title": "Rilascio Carta di Identità Elettronica (CIE)",
+   "source_url": "https://servizi.comune.barbaranomossano.vi.it/ServiziOnLine/Istanze/landingIstanza?Id=26",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.barbaranomossano.vi.it/ServiziOnLine/Istanze/landingIstanza?Id=26",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.barbaranomossano.vi.it/ServiziOnLine/Istanze/landingIstanza?Id=26",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:34.751858Z"
+  }
+ }
+}

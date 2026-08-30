@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "038027",
+ "services": {
+  "tributi_imu": {
+   "service_id": "038027:magnolia:Servizio-22",
+   "title": "Servizio di calcolo IMU online 2026",
+   "source_url": "https://www.comune.fiscaglia.fe.it/home/servizi/servizio/Servizio-22.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.fiscaglia.fe.it/home/servizi/servizio/Servizio-22.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.fiscaglia.fe.it/home/servizi/servizio/Servizio-22.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:59.164204Z"
+  },
+  "tributi_tari": {
+   "service_id": "038027:magnolia:Servizio-24",
+   "title": "TARI",
+   "source_url": "https://www.comune.fiscaglia.fe.it/home/servizi/servizio/Servizio-24.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.fiscaglia.fe.it/home/servizi/servizio/Servizio-24.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.fiscaglia.fe.it/home/servizi/servizio/Servizio-24.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:59.164394Z"
+  }
+ }
+}

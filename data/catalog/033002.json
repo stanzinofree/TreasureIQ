@@ -1,0 +1,143 @@
+{
+ "municipality_istat": "033002",
+ "services": {
+  "accesso_atti": {
+   "service_id": "033002:magnolia:landingIstanza-Id-1",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://servizi.comune.alseno.pc.it/ServiziOnLine/Istanze/landingIstanza?Id=1",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.alseno.pc.it/ServiziOnLine/Istanze/landingIstanza?Id=1",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.alseno.pc.it/ServiziOnLine/Istanze/landingIstanza?Id=1",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:45.040932Z"
+  },
+  "cambio_residenza": {
+   "service_id": "033002:magnolia:landingIstanza-Id-45",
+   "title": "Cambio di residenza - ANPR",
+   "source_url": "https://servizi.comune.alseno.pc.it/ServiziOnLine/Istanze/landingIstanza?Id=45",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.alseno.pc.it/ServiziOnLine/Istanze/landingIstanza?Id=45",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.alseno.pc.it/ServiziOnLine/Istanze/landingIstanza?Id=45",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:45.040820Z"
+  },
+  "carta_identita": {
+   "service_id": "033002:magnolia:landingIstanza-Id-41",
+   "title": "Rilascio Carta di Identità Elettronica (CIE)",
+   "source_url": "https://servizi.comune.alseno.pc.it/ServiziOnLine/Istanze/landingIstanza?Id=41",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.alseno.pc.it/ServiziOnLine/Istanze/landingIstanza?Id=41",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.alseno.pc.it/ServiziOnLine/Istanze/landingIstanza?Id=41",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:45.040604Z"
+  },
+  "stato_civile": {
+   "service_id": "033002:magnolia:landingIstanza-Id-47",
+   "title": "Certificato di nascita per cittadini europei - ANPR",
+   "source_url": "https://servizi.comune.alseno.pc.it/ServiziOnLine/Istanze/landingIstanza?Id=47",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.alseno.pc.it/ServiziOnLine/Istanze/landingIstanza?Id=47",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.alseno.pc.it/ServiziOnLine/Istanze/landingIstanza?Id=47",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:45.041024Z"
+  },
+  "tributi_imu": {
+   "service_id": "033002:magnolia:Servizio-14",
+   "title": "Imposta Municipale Unica",
+   "source_url": "https://www.comune.alseno.pc.it/home/servizi/servizio/Servizio-14.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.alseno.pc.it/home/servizi/servizio/Servizio-14.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.alseno.pc.it/home/servizi/servizio/Servizio-14.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:45.041104Z"
+  },
+  "tributi_tari": {
+   "service_id": "033002:magnolia:Servizio-13",
+   "title": "Tassa sui Rifiuti",
+   "source_url": "https://www.comune.alseno.pc.it/home/servizi/servizio/Servizio-13.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.alseno.pc.it/home/servizi/servizio/Servizio-13.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.alseno.pc.it/home/servizi/servizio/Servizio-13.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:45.041190Z"
+  }
+ }
+}

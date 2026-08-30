@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "101009",
+ "services": {
+  "accesso_atti": {
+   "service_id": "101009:magnolia:landingIstanza-Id-4",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://servizi.comune.cotronei.kr.it/ServiziOnLine/Istanze/landingIstanza?Id=4",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.cotronei.kr.it/ServiziOnLine/Istanze/landingIstanza?Id=4",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.cotronei.kr.it/ServiziOnLine/Istanze/landingIstanza?Id=4",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:58:37.142200Z"
+  },
+  "cambio_residenza": {
+   "service_id": "101009:magnolia:landingIstanza-Id-18",
+   "title": "Cambio di residenza - ANPR",
+   "source_url": "https://servizi.comune.cotronei.kr.it/ServiziOnLine/Istanze/landingIstanza?Id=18",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.cotronei.kr.it/ServiziOnLine/Istanze/landingIstanza?Id=18",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.cotronei.kr.it/ServiziOnLine/Istanze/landingIstanza?Id=18",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:58:37.141991Z"
+  }
+ }
+}

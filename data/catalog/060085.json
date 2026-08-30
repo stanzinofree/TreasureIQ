@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "060085",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "060085:magnolia:landingIstanza-Id-19",
+   "title": "Cambio di residenza - ANPR",
+   "source_url": "https://servizi.comune.veroli.fr.it/ServiziOnLine/Istanze/landingIstanza?Id=19",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.veroli.fr.it/ServiziOnLine/Istanze/landingIstanza?Id=19",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.veroli.fr.it/ServiziOnLine/Istanze/landingIstanza?Id=19",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:58:21.481161Z"
+  },
+  "carta_identita": {
+   "service_id": "060085:magnolia:landingIstanza-Id-11",
+   "title": "Rilascio Carta di Identità Elettronica (CIE)",
+   "source_url": "https://servizi.comune.veroli.fr.it/ServiziOnLine/Istanze/landingIstanza?Id=11",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.veroli.fr.it/ServiziOnLine/Istanze/landingIstanza?Id=11",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.veroli.fr.it/ServiziOnLine/Istanze/landingIstanza?Id=11",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:58:21.481020Z"
+  },
+  "stato_civile": {
+   "service_id": "060085:magnolia:landingIstanza-Id-21",
+   "title": "Certificato di nascita per cittadini europei - ANPR",
+   "source_url": "https://servizi.comune.veroli.fr.it/ServiziOnLine/Istanze/landingIstanza?Id=21",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.veroli.fr.it/ServiziOnLine/Istanze/landingIstanza?Id=21",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.veroli.fr.it/ServiziOnLine/Istanze/landingIstanza?Id=21",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:58:21.481207Z"
+  }
+ }
+}

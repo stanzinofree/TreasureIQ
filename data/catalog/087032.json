@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "087032",
+ "services": {
+  "accesso_atti": {
+   "service_id": "087032:magnolia:landingIstanza-Id-16",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://servizi.comune.palagonia.ct.it/ServiziOnLine/Istanze/landingIstanza?Id=16",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.palagonia.ct.it/ServiziOnLine/Istanze/landingIstanza?Id=16",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.palagonia.ct.it/ServiziOnLine/Istanze/landingIstanza?Id=16",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:58:34.730476Z"
+  }
+ }
+}

@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "028054",
+ "services": {
+  "accesso_atti": {
+   "service_id": "028054:magnolia:landingIstanza-Id-23",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://servizi.comune.mestrino.pd.it/ServiziOnLine/Istanze/landingIstanza?Id=23",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.mestrino.pd.it/ServiziOnLine/Istanze/landingIstanza?Id=23",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.mestrino.pd.it/ServiziOnLine/Istanze/landingIstanza?Id=23",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:43.976151Z"
+  },
+  "carta_identita": {
+   "service_id": "028054:magnolia:landingIstanza-Id-16",
+   "title": "Rilascio Carta di Identità Elettronica (CIE)",
+   "source_url": "https://servizi.comune.mestrino.pd.it/ServiziOnLine/Istanze/landingIstanza?Id=16",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.mestrino.pd.it/ServiziOnLine/Istanze/landingIstanza?Id=16",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.mestrino.pd.it/ServiziOnLine/Istanze/landingIstanza?Id=16",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:43.975891Z"
+  },
+  "tributi_tari": {
+   "service_id": "028054:magnolia:Servizio-35",
+   "title": "TARI - Tassa servizio rifiuti",
+   "source_url": "https://www.comune.mestrino.pd.it/home/servizi/servizio/Servizio-35.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.mestrino.pd.it/home/servizi/servizio/Servizio-35.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.mestrino.pd.it/home/servizi/servizio/Servizio-35.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:43.976334Z"
+  }
+ }
+}

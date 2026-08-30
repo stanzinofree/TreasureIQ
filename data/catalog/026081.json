@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "026081",
+ "services": {
+  "carta_identita": {
+   "service_id": "026081:magnolia:landingIstanza-Id-50",
+   "title": "Rilascio Carta di Identità Elettronica (CIE)",
+   "source_url": "https://servizi.comune.silea.tv.it/ServiziOnLine/Istanze/landingIstanza?Id=50",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.silea.tv.it/ServiziOnLine/Istanze/landingIstanza?Id=50",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.silea.tv.it/ServiziOnLine/Istanze/landingIstanza?Id=50",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:40.827772Z"
+  }
+ }
+}

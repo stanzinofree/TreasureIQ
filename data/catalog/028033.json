@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "028033",
+ "services": {
+  "accesso_atti": {
+   "service_id": "028033:magnolia:landingIstanza-Id-1",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://servizi.comune.codevigo.pd.it/ServiziOnLine/Istanze/landingIstanza?Id=1",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.codevigo.pd.it/ServiziOnLine/Istanze/landingIstanza?Id=1",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.codevigo.pd.it/ServiziOnLine/Istanze/landingIstanza?Id=1",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:42.952398Z"
+  },
+  "carta_identita": {
+   "service_id": "028033:magnolia:landingIstanza-Id-22",
+   "title": "Rilascio Carta di Identità Elettronica (CIE)",
+   "source_url": "https://servizi.comune.codevigo.pd.it/ServiziOnLine/Istanze/landingIstanza?Id=22",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.codevigo.pd.it/ServiziOnLine/Istanze/landingIstanza?Id=22",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.codevigo.pd.it/ServiziOnLine/Istanze/landingIstanza?Id=22",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:42.952217Z"
+  },
+  "stato_civile": {
+   "service_id": "028033:magnolia:landingIstanza-Id-30",
+   "title": "Certificato di nascita per cittadini europei - ANPR",
+   "source_url": "https://servizi.comune.codevigo.pd.it/ServiziOnLine/Istanze/landingIstanza?Id=30",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.codevigo.pd.it/ServiziOnLine/Istanze/landingIstanza?Id=30",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.codevigo.pd.it/ServiziOnLine/Istanze/landingIstanza?Id=30",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:42.952470Z"
+  }
+ }
+}

@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "026067",
+ "services": {
+  "accesso_atti": {
+   "service_id": "026067:magnolia:landingIstanza-Id-1",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://servizi.comune.revine-lago.tv.it/ServiziOnLine/Istanze/landingIstanza?Id=1",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.revine-lago.tv.it/ServiziOnLine/Istanze/landingIstanza?Id=1",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.revine-lago.tv.it/ServiziOnLine/Istanze/landingIstanza?Id=1",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:39.727824Z"
+  },
+  "carta_identita": {
+   "service_id": "026067:magnolia:landingIstanza-Id-23",
+   "title": "Rilascio Carta di Identità Elettronica (CIE)",
+   "source_url": "https://servizi.comune.revine-lago.tv.it/ServiziOnLine/Istanze/landingIstanza?Id=23",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.revine-lago.tv.it/ServiziOnLine/Istanze/landingIstanza?Id=23",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.revine-lago.tv.it/ServiziOnLine/Istanze/landingIstanza?Id=23",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:39.727562Z"
+  },
+  "stato_civile": {
+   "service_id": "026067:magnolia:landingIstanza-Id-41",
+   "title": "Certificato di nascita per cittadini europei - ANPR",
+   "source_url": "https://servizi.comune.revine-lago.tv.it/ServiziOnLine/Istanze/landingIstanza?Id=41",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.revine-lago.tv.it/ServiziOnLine/Istanze/landingIstanza?Id=41",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.revine-lago.tv.it/ServiziOnLine/Istanze/landingIstanza?Id=41",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:39.727938Z"
+  }
+ }
+}

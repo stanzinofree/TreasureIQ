@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "058065",
+ "services": {
+  "carta_identita": {
+   "service_id": "058065:magnolia:Servizio-7",
+   "title": "Carta d'Identità elettronica",
+   "source_url": "https://www.comune.monterotondo.rm.it/home/servizi/servizio/Servizio-7.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.monterotondo.rm.it/home/servizi/servizio/Servizio-7.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.monterotondo.rm.it/home/servizi/servizio/Servizio-7.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:58:07.955033Z"
+  },
+  "stato_civile": {
+   "service_id": "058065:magnolia:landingIstanza-Id-17",
+   "title": "Certificato di nascita per cittadini europei - ANPR",
+   "source_url": "https://servizi.comune.monterotondo.rm.it/ServiziOnLine/Istanze/landingIstanza?Id=17",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.monterotondo.rm.it/ServiziOnLine/Istanze/landingIstanza?Id=17",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.monterotondo.rm.it/ServiziOnLine/Istanze/landingIstanza?Id=17",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:58:07.955306Z"
+  },
+  "tributi_imu": {
+   "service_id": "058065:magnolia:Servizio-17",
+   "title": "Sportello telematico - Dichiarazioni IMU",
+   "source_url": "https://www.comune.monterotondo.rm.it/home/servizi/servizio/Servizio-17.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.monterotondo.rm.it/home/servizi/servizio/Servizio-17.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.monterotondo.rm.it/home/servizi/servizio/Servizio-17.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:58:07.955419Z"
+  }
+ }
+}

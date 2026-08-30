@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "020053",
+ "services": {
+  "carta_identita": {
+   "service_id": "020053:magnolia:landingIstanza-Id-17",
+   "title": "Rilascio Carta di Identità Elettronica (CIE)",
+   "source_url": "https://servizi.comune.roverbella.mn.it/ServiziOnLine/Istanze/landingIstanza?Id=17",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.roverbella.mn.it/ServiziOnLine/Istanze/landingIstanza?Id=17",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.roverbella.mn.it/ServiziOnLine/Istanze/landingIstanza?Id=17",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:26.430477Z"
+  },
+  "tributi_imu": {
+   "service_id": "020053:magnolia:Servizio-6",
+   "title": "Calcolo IMU",
+   "source_url": "https://www.comune.roverbella.mn.it/home/servizi/servizio/Servizio-6.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.roverbella.mn.it/home/servizi/servizio/Servizio-6.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.roverbella.mn.it/home/servizi/servizio/Servizio-6.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:26.430810Z"
+  }
+ }
+}

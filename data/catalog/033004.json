@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "033004",
+ "services": {
+  "accesso_atti": {
+   "service_id": "033004:magnolia:landingIstanza-Id-13",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://servizi.comune.bettola.pc.it/ServiziOnLine/Istanze/landingIstanza?Id=13",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.bettola.pc.it/ServiziOnLine/Istanze/landingIstanza?Id=13",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.bettola.pc.it/ServiziOnLine/Istanze/landingIstanza?Id=13",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:46.044069Z"
+  },
+  "cambio_residenza": {
+   "service_id": "033004:magnolia:landingIstanza-Id-17",
+   "title": "Cambio di residenza - ANPR",
+   "source_url": "https://servizi.comune.bettola.pc.it/ServiziOnLine/Istanze/landingIstanza?Id=17",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.bettola.pc.it/ServiziOnLine/Istanze/landingIstanza?Id=17",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.bettola.pc.it/ServiziOnLine/Istanze/landingIstanza?Id=17",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:46.043940Z"
+  }
+ }
+}

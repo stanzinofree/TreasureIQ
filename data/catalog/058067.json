@@ -1,0 +1,120 @@
+{
+ "municipality_istat": "058067",
+ "services": {
+  "accesso_atti": {
+   "service_id": "058067:magnolia:landingIstanza-Id-17",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://servizi.comune.moricone.rm.it/ServiziOnLine/Istanze/landingIstanza?Id=17",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.moricone.rm.it/ServiziOnLine/Istanze/landingIstanza?Id=17",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.moricone.rm.it/ServiziOnLine/Istanze/landingIstanza?Id=17",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:58:12.960225Z"
+  },
+  "cambio_residenza": {
+   "service_id": "058067:magnolia:landingIstanza-Id-12",
+   "title": "Cambio di residenza - ANPR",
+   "source_url": "https://servizi.comune.moricone.rm.it/ServiziOnLine/Istanze/landingIstanza?Id=12",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.moricone.rm.it/ServiziOnLine/Istanze/landingIstanza?Id=12",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.moricone.rm.it/ServiziOnLine/Istanze/landingIstanza?Id=12",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:58:12.960135Z"
+  },
+  "carta_identita": {
+   "service_id": "058067:magnolia:landingIstanza-Id-6",
+   "title": "Rilascio Carta di Identità Elettronica (CIE)",
+   "source_url": "https://servizi.comune.moricone.rm.it/ServiziOnLine/Istanze/landingIstanza?Id=6",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.moricone.rm.it/ServiziOnLine/Istanze/landingIstanza?Id=6",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.moricone.rm.it/ServiziOnLine/Istanze/landingIstanza?Id=6",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:58:12.959922Z"
+  },
+  "stato_civile": {
+   "service_id": "058067:magnolia:landingIstanza-Id-14",
+   "title": "Certificato di nascita per cittadini europei - ANPR",
+   "source_url": "https://servizi.comune.moricone.rm.it/ServiziOnLine/Istanze/landingIstanza?Id=14",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.moricone.rm.it/ServiziOnLine/Istanze/landingIstanza?Id=14",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.moricone.rm.it/ServiziOnLine/Istanze/landingIstanza?Id=14",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:58:12.960299Z"
+  },
+  "tributi_imu": {
+   "service_id": "058067:magnolia:landingIstanza-Id-22",
+   "title": "Calcolo dell'IMU",
+   "source_url": "https://servizi.comune.moricone.rm.it/ServiziOnLine/Istanze/landingIstanza?Id=22",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.moricone.rm.it/ServiziOnLine/Istanze/landingIstanza?Id=22",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.moricone.rm.it/ServiziOnLine/Istanze/landingIstanza?Id=22",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:58:12.960367Z"
+  }
+ }
+}

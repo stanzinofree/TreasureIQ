@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "069008",
+ "services": {
+  "accesso_atti": {
+   "service_id": "069008:magnolia:Servizio-14",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://www.comune.bucchianico.ch.it/home/servizi/servizio/Servizio-14.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bucchianico.ch.it/home/servizi/servizio/Servizio-14.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bucchianico.ch.it/home/servizi/servizio/Servizio-14.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:58:23.009966Z"
+  },
+  "cambio_residenza": {
+   "service_id": "069008:magnolia:Servizio-4",
+   "title": "Cambio di residenza - ANPR",
+   "source_url": "https://www.comune.bucchianico.ch.it/home/servizi/servizio/Servizio-4.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bucchianico.ch.it/home/servizi/servizio/Servizio-4.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bucchianico.ch.it/home/servizi/servizio/Servizio-4.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:58:23.009899Z"
+  },
+  "carta_identita": {
+   "service_id": "069008:magnolia:Servizio-9",
+   "title": "Rilascio Carta di Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.bucchianico.ch.it/home/servizi/servizio/Servizio-9.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bucchianico.ch.it/home/servizi/servizio/Servizio-9.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bucchianico.ch.it/home/servizi/servizio/Servizio-9.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:58:23.009740Z"
+  },
+  "stato_civile": {
+   "service_id": "069008:magnolia:Servizio-6",
+   "title": "Certificato di nascita per cittadini europei - ANPR",
+   "source_url": "https://www.comune.bucchianico.ch.it/home/servizi/servizio/Servizio-6.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bucchianico.ch.it/home/servizi/servizio/Servizio-6.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bucchianico.ch.it/home/servizi/servizio/Servizio-6.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:58:23.010054Z"
+  }
+ }
+}

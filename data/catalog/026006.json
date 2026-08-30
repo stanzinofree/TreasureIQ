@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "026006",
+ "services": {
+  "accesso_atti": {
+   "service_id": "026006:magnolia:landingIstanza-Id-19",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://servizi.comune.caerano-di-san-marco.tv.it/ServiziOnLine/Istanze/landingIstanza?Id=19",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.caerano-di-san-marco.tv.it/ServiziOnLine/Istanze/landingIstanza?Id=19",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.caerano-di-san-marco.tv.it/ServiziOnLine/Istanze/landingIstanza?Id=19",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:35.730955Z"
+  },
+  "cambio_residenza": {
+   "service_id": "026006:magnolia:landingIstanza-Id-58",
+   "title": "Cambio di residenza - ANPR",
+   "source_url": "https://servizi.comune.caerano-di-san-marco.tv.it/ServiziOnLine/Istanze/landingIstanza?Id=58",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.caerano-di-san-marco.tv.it/ServiziOnLine/Istanze/landingIstanza?Id=58",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.caerano-di-san-marco.tv.it/ServiziOnLine/Istanze/landingIstanza?Id=58",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:35.730842Z"
+  },
+  "carta_identita": {
+   "service_id": "026006:magnolia:landingIstanza-Id-46",
+   "title": "Rilascio Carta di Identità Elettronica (CIE)",
+   "source_url": "https://servizi.comune.caerano-di-san-marco.tv.it/ServiziOnLine/Istanze/landingIstanza?Id=46",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.caerano-di-san-marco.tv.it/ServiziOnLine/Istanze/landingIstanza?Id=46",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.caerano-di-san-marco.tv.it/ServiziOnLine/Istanze/landingIstanza?Id=46",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:35.730533Z"
+  },
+  "stato_civile": {
+   "service_id": "026006:magnolia:landingIstanza-Id-60",
+   "title": "Certificato di nascita per cittadini europei - ANPR",
+   "source_url": "https://servizi.comune.caerano-di-san-marco.tv.it/ServiziOnLine/Istanze/landingIstanza?Id=60",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.caerano-di-san-marco.tv.it/ServiziOnLine/Istanze/landingIstanza?Id=60",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.caerano-di-san-marco.tv.it/ServiziOnLine/Istanze/landingIstanza?Id=60",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:35.731050Z"
+  }
+ }
+}

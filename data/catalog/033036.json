@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "033036",
+ "services": {
+  "accesso_atti": {
+   "service_id": "033036:magnolia:landingIstanza-Id-9",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://servizi.comune.pontedellolio.pc.it/ServiziOnLine/Istanze/landingIstanza?Id=9",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.pontedellolio.pc.it/ServiziOnLine/Istanze/landingIstanza?Id=9",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.pontedellolio.pc.it/ServiziOnLine/Istanze/landingIstanza?Id=9",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:53.042940Z"
+  },
+  "cambio_residenza": {
+   "service_id": "033036:magnolia:landingIstanza-Id-13",
+   "title": "Cambio di residenza - ANPR",
+   "source_url": "https://servizi.comune.pontedellolio.pc.it/ServiziOnLine/Istanze/landingIstanza?Id=13",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.pontedellolio.pc.it/ServiziOnLine/Istanze/landingIstanza?Id=13",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.pontedellolio.pc.it/ServiziOnLine/Istanze/landingIstanza?Id=13",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:53.042802Z"
+  },
+  "stato_civile": {
+   "service_id": "033036:magnolia:landingIstanza-Id-15",
+   "title": "Certificato di nascita per cittadini europei - ANPR",
+   "source_url": "https://servizi.comune.pontedellolio.pc.it/ServiziOnLine/Istanze/landingIstanza?Id=15",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.pontedellolio.pc.it/ServiziOnLine/Istanze/landingIstanza?Id=15",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.pontedellolio.pc.it/ServiziOnLine/Istanze/landingIstanza?Id=15",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:53.043012Z"
+  }
+ }
+}

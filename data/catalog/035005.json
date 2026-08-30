@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "035005",
+ "services": {
+  "accesso_atti": {
+   "service_id": "035005:magnolia:landingIstanza-Id-1",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://servizi.comune.boretto.re.it/ServiziOnLine/Istanze/landingIstanza?Id=1",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.boretto.re.it/ServiziOnLine/Istanze/landingIstanza?Id=1",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.boretto.re.it/ServiziOnLine/Istanze/landingIstanza?Id=1",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:54.985904Z"
+  },
+  "carta_identita": {
+   "service_id": "035005:magnolia:landingIstanza-Id-34",
+   "title": "Rilascio Carta di Identità Elettronica (CIE)",
+   "source_url": "https://servizi.comune.boretto.re.it/ServiziOnLine/Istanze/landingIstanza?Id=34",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.boretto.re.it/ServiziOnLine/Istanze/landingIstanza?Id=34",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.boretto.re.it/ServiziOnLine/Istanze/landingIstanza?Id=34",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:54.985621Z"
+  },
+  "tributi_tari": {
+   "service_id": "035005:magnolia:Servizio-3",
+   "title": "Tassa sui Rifiuti - TARI",
+   "source_url": "https://www.comune.boretto.re.it/home/servizi/servizio/Servizio-3.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.boretto.re.it/home/servizi/servizio/Servizio-3.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.boretto.re.it/home/servizi/servizio/Servizio-3.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:54.986072Z"
+  }
+ }
+}

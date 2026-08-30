@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "052035",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "052035:magnolia:Servizio-18",
+   "title": "Cambio di residenza - ANPR",
+   "source_url": "https://www.comune.torrita.siena.it/home/servizi/servizio/Servizio-18.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.torrita.siena.it/home/servizi/servizio/Servizio-18.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.torrita.siena.it/home/servizi/servizio/Servizio-18.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:58:02.167156Z"
+  },
+  "carta_identita": {
+   "service_id": "052035:magnolia:Servizio-23",
+   "title": "Carta d'Identità Elettronica",
+   "source_url": "https://www.comune.torrita.siena.it/home/servizi/servizio/Servizio-23.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.torrita.siena.it/home/servizi/servizio/Servizio-23.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.torrita.siena.it/home/servizi/servizio/Servizio-23.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:58:02.166954Z"
+  },
+  "tributi_imu": {
+   "service_id": "052035:magnolia:Servizio-7",
+   "title": "IMU - Imposta Municipale Unica",
+   "source_url": "https://www.comune.torrita.siena.it/home/servizi/servizio/Servizio-7.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.torrita.siena.it/home/servizi/servizio/Servizio-7.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.torrita.siena.it/home/servizi/servizio/Servizio-7.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:58:02.167291Z"
+  },
+  "tributi_tari": {
+   "service_id": "052035:magnolia:Servizio-6",
+   "title": "TARI – Tributo sui rifiuti",
+   "source_url": "https://www.comune.torrita.siena.it/home/servizi/servizio/Servizio-6.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.torrita.siena.it/home/servizi/servizio/Servizio-6.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.torrita.siena.it/home/servizi/servizio/Servizio-6.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:58:02.167356Z"
+  }
+ }
+}

@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "036024",
+ "services": {
+  "accesso_atti": {
+   "service_id": "036024:magnolia:landingIstanza-Id-12",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://servizi.comune.montecreto.mo.it/ServiziOnLine/Istanze/landingIstanza?Id=12",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.montecreto.mo.it/ServiziOnLine/Istanze/landingIstanza?Id=12",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.montecreto.mo.it/ServiziOnLine/Istanze/landingIstanza?Id=12",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:56.008543Z"
+  },
+  "carta_identita": {
+   "service_id": "036024:magnolia:landingIstanza-Id-6",
+   "title": "Rilascio Carta di Identità Elettronica (CIE)",
+   "source_url": "https://servizi.comune.montecreto.mo.it/ServiziOnLine/Istanze/landingIstanza?Id=6",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.montecreto.mo.it/ServiziOnLine/Istanze/landingIstanza?Id=6",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.montecreto.mo.it/ServiziOnLine/Istanze/landingIstanza?Id=6",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:56.008326Z"
+  },
+  "tributi_imu": {
+   "service_id": "036024:magnolia:landingIstanza-Id-19",
+   "title": "Sportello contribuente IMU/TARI",
+   "source_url": "https://servizi.comune.montecreto.mo.it/ServiziOnLine/Istanze/landingIstanza?Id=19",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://servizi.comune.montecreto.mo.it/ServiziOnLine/Istanze/landingIstanza?Id=19",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://servizi.comune.montecreto.mo.it/ServiziOnLine/Istanze/landingIstanza?Id=19",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "magnolia",
+   "discovered_at": "2026-08-30T21:57:56.008693Z"
+  }
+ }
+}

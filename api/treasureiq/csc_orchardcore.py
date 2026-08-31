@@ -63,7 +63,10 @@ MAX_PAGINE = 15
 #: tariffa rifiuti, rifiuti solidi urbani) — ma mai forzata.
 _SERVICE_KEY: dict[str, str] = {
     "CARTA_IDENTITA": r"carta d.?identit|\bcie\b|identit[aà] elettronic",
-    "CAMBIO_RESIDENZA": r"residenz|cambio di (indirizzo|abitazione)",
+    # `residenz(?!ial)` tiene «cambio di residenza», «certificato di residenza»
+    # ma esclude «(edilizia) residenziale» / ERP (falso positivo cross-categoria
+    # visto sul crawl full di Borno). Il gate I-1 resta l'ultima difesa.
+    "CAMBIO_RESIDENZA": r"residenz(?!ial)|cambio di (indirizzo|abitazione)",
     "ACCESSO_ATTI": r"accesso agli atti|accesso civico|accesso document",
     "STATO_CIVILE": r"stato civile|matrimoni|nascit|cittadinanz|unione civile|morte|decess",
     "TRIBUTI_IMU": r"\bimu\b|imposta municipale",

@@ -14,6 +14,7 @@ import pytest
 
 from treasureiq.csc_orchardcore import (
     EsitoCscServizi,
+    ServizioCsc,
     leggi_csc_servizi,
     risolvi_per_chiave,
     service_key_di,
@@ -32,6 +33,8 @@ BORNO_MAP = {
     "/servizi/categoria/anagrafe-e-stato-civile?pagenum=3": "borno_anagrafe_p3.html",
     "/servizi/categoria/tributi-finanze-e-contravvenzioni?pagenum=1": "borno_tributi_p1.html",
     "/servizi/categoria/autorizzazioni?pagenum=1": "borno_autorizzazioni_p1.html",
+    # categoria reale che contiene il falso positivo ERP «edilizia residenziale».
+    "/servizi/categoria/salute-benessere-e-assistenza?pagenum=1": "borno_salute_p1.html",
 }
 BRAONE_MAP = {
     "/servizi/": "braone_index.html",
@@ -290,3 +293,68 @@ def test_indice_senza_categorie_vuoto():
     assert esito.esito == "vuoto"
     assert esito.categorie == []
     assert any("catalogo assente" in n for n in esito.note)
+
+
+# --------------------------------------------------------------------------- #
+# Falso positivo ERP: «edilizia residenziale» non è CAMBIO_RESIDENZA          #
+# (fix parser CSC, gate I-1 come ultima difesa)                               #
+# --------------------------------------------------------------------------- #
+ERP_TITOLO = (
+    "Richiedere l'assegnazione di un alloggio di edilizia residenziale pubblica (Erp)"
+)
+
+
+def test_service_key_di_erp_non_e_cambio_residenza():
+    # il servizio ERP (categoria salute) NON deve matchare CAMBIO_RESIDENZA...
+    assert service_key_di(ERP_TITOLO) != "CAMBIO_RESIDENZA"
+    # ...mentre il servizio legittimo resta riconosciuto.
+    assert service_key_di("Dichiarare il cambio di residenza") == "CAMBIO_RESIDENZA"
+    # varianti «residenziale/residenziali» tutte escluse.
+    assert service_key_di("Bando edilizia residenziale pubblica") is None
+    assert service_key_di("Alloggi residenziali comunali") is None
+    # «certificato di residenza» resta un match (non è residenziale).
+    assert service_key_di("Certificato di residenza") == "CAMBIO_RESIDENZA"
+
+
+def test_borno_full_crawl_residenza_esattamente_uno_nonostante_erp():
+    """Crawl full con la categoria salute (che contiene l'ERP): la residenza
+    deve restare esattamente-1 e risolvere sul cambio, non degradare ad ambigua."""
+    esito = _leggi_borno()
+    # l'ERP è presente a catalogo (crawl onesto)...
+    erp = [s for s in esito.servizi if "residenziale-pubblica-erp" in s.url.lower()]
+    assert erp, "il servizio ERP deve essere estratto dalla categoria salute"
+    # ...ma NON è etichettato come cambio residenza.
+    assert all(s.service_key != "CAMBIO_RESIDENZA" for s in erp)
+    # residenza resta esattamente-1 → risolve sul cambio.
+    residenza = [s for s in esito.servizi if s.service_key == "CAMBIO_RESIDENZA"]
+    assert len(residenza) == 1
+    scelto = risolvi_per_chiave(esito, "CAMBIO_RESIDENZA")
+    assert scelto is not None
+    assert scelto.url.endswith("/servizio/dichiarare-il-cambio-di-residenza")
+
+
+def test_gate_i1_resta_ultima_difesa_su_residenza():
+    """Anche col regex stretto, se il catalogo esponesse 2 servizi residenza
+    legittimi il gate I-1 deve restituire None (ambiguo, ultima difesa)."""
+    host = "comune.esempio.bs.it"
+    due = EsitoCscServizi(
+        esito="ok", codice_istat="099000", comune="Esempio",
+        home=f"https://www.{host}", servizi=[
+            ServizioCsc(
+                titolo="Dichiarare il cambio di residenza",
+                url=f"https://www.{host}/servizio/cambio-residenza",
+                host=host, categoria="anagrafe-e-stato-civile",
+                service_key="CAMBIO_RESIDENZA",
+            ),
+            ServizioCsc(
+                titolo="Cambio di residenza per cittadini stranieri",
+                url=f"https://www.{host}/servizio/cambio-residenza-stranieri",
+                host=host, categoria="anagrafe-e-stato-civile",
+                service_key="CAMBIO_RESIDENZA",
+            ),
+        ],
+        categorie=["anagrafe-e-stato-civile"],
+        per_categoria={"anagrafe-e-stato-civile": 2},
+        service_keys=["CAMBIO_RESIDENZA"], note=[],
+    )
+    assert risolvi_per_chiave(due, "CAMBIO_RESIDENZA") is None

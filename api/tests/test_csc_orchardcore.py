@@ -25,7 +25,16 @@ FIXTURES = Path(__file__).parent / "fixtures" / "csc_orchardcore"
 BORNO_HOME = "https://www.comune.borno.bs.it"
 BRAONE_HOME = "https://www.comune.braone.bs.it"
 
-#: URL relativo (path?query) → file fixture. Categorie senza fixture = muto (None).
+#: pagina categoria reale ma senza servizi: risponde 200, catalogo vuoto, no pager.
+#: modella una categoria realmente vuota (≠ fetch fallito, che è None).
+CAT_VUOTA_HTML = (
+    b"<!doctype html><html><body><main>"
+    b"<h1>Categoria</h1><p>Nessun servizio.</p></main></body></html>"
+)
+
+#: URL relativo (path?query) → file fixture. Categorie senza fixture rispondono
+#: 200 con pagina vuota (categoria reale vuota); il fetch fallito (None) è simulato
+#: a parte nei test di crawl incompleto.
 BORNO_MAP = {
     "/servizi/": "borno_index.html",
     "/servizi/categoria/anagrafe-e-stato-civile?pagenum=1": "borno_anagrafe_p1.html",
@@ -57,16 +66,25 @@ def _chiave_url(url: str) -> str:
 
 
 def fetch_da_mappa(mappa: dict[str, str], log: list[str] | None = None):
-    """Costruisce un ``fetch`` net-free: URL noto → (None, bytes, url), altrimenti None."""
+    """Costruisce un ``fetch`` net-free: URL noto → (None, bytes, url).
+
+    Una categoria non mappata risponde 200 con pagina vuota (categoria reale
+    vuota, non fetch fallito): così il crawl resta *completo* e ``esito`` resta
+    ``ok``/``vuoto``, non ``parziale``. Un URL che NON è una pagina categoria e
+    non è mappato → None (indice muto = irraggiungibile). Il fetch fallito su una
+    categoria (crawl incompleto) si simula con un ``fetch`` dedicato nei test.
+    """
 
     def _fetch(url, *, timeout=None, max_bytes=None, host_atteso=None):
+        chiave = _chiave_url(url)
         if log is not None:
-            log.append(_chiave_url(url))
-        nome = mappa.get(_chiave_url(url))
-        if nome is None:
-            return None
-        body = (FIXTURES / nome).read_bytes()
-        return (None, body, url)
+            log.append(chiave)
+        nome = mappa.get(chiave)
+        if nome is not None:
+            return (None, (FIXTURES / nome).read_bytes(), url)
+        if "/servizi/categoria/" in chiave:
+            return (None, CAT_VUOTA_HTML, url)  # categoria reale vuota (200)
+        return None  # indice o URL sconosciuto → muto
 
     return _fetch
 
@@ -358,3 +376,137 @@ def test_gate_i1_resta_ultima_difesa_su_residenza():
         service_keys=["CAMBIO_RESIDENZA"], note=[],
     )
     assert risolvi_per_chiave(due, "CAMBIO_RESIDENZA") is None
+
+
+# --------------------------------------------------------------------------- #
+# Gap crawl incompleto: fetch=None ≠ categoria vuota                          #
+# (distinzione non_sondata / vuota, esito parziale, no promozione)            #
+# --------------------------------------------------------------------------- #
+def _fetch_con_buchi(mappa, buchi: set[str], log: list[str] | None = None):
+    """fetch_da_mappa ma le chiavi in ``buchi`` ritornano None (fetch fallito)."""
+    base = fetch_da_mappa(mappa)
+
+    def _fetch(url, *, timeout=None, max_bytes=None, host_atteso=None):
+        chiave = _chiave_url(url)
+        if log is not None:
+            log.append(chiave)
+        if chiave in buchi:
+            return None
+        return base(url, timeout=timeout, max_bytes=max_bytes, host_atteso=host_atteso)
+
+    return _fetch
+
+
+def test_categoria_non_sondata_da_fetch_none_e_parziale():
+    """Pagina 1 di anagrafe muta (fetch None) → categoria NON sondata: l'esito è
+    ``parziale`` (non ``ok``), la categoria è marcata, il crawl non è completo,
+    e la residenza NON risolve come falso-miss promuovibile."""
+    buco = "/servizi/categoria/anagrafe-e-stato-civile?pagenum=1"
+    esito = leggi_csc_servizi(
+        "017022", home=BORNO_HOME, comune="Borno",
+        fetch=_fetch_con_buchi(BORNO_MAP, {buco}),
+    )
+    assert esito.esito == "parziale"
+    assert esito.crawl_completo is False
+    assert "anagrafe-e-stato-civile" in esito.categorie_non_sondate
+    assert "anagrafe-e-stato-civile" not in esito.categorie_troncate
+    assert any("non sondate" in n for n in esito.note)
+    # anagrafe non letta → 0 servizi lì, ma è crawl incompleto, non assenza reale.
+    assert esito.per_categoria["anagrafe-e-stato-civile"] == 0
+    assert risolvi_per_chiave(esito, "CAMBIO_RESIDENZA") is None
+
+
+def test_fetch_none_a_meta_paginazione_e_incompleta():
+    """anagrafe p1 OK, p2 muta (fetch None) → lettura parziale: i servizi di p1
+    restano, ma l'esito è ``parziale`` e la categoria è tra le non sondate."""
+    buco = "/servizi/categoria/anagrafe-e-stato-civile?pagenum=2"
+    log: list[str] = []
+    esito = leggi_csc_servizi(
+        "017022", home=BORNO_HOME, comune="Borno",
+        fetch=_fetch_con_buchi(BORNO_MAP, {buco}, log),
+    )
+    assert esito.esito == "parziale"
+    assert esito.crawl_completo is False
+    assert "anagrafe-e-stato-civile" in esito.categorie_non_sondate
+    # p1 è stata letta → i suoi servizi ci sono (lettura parziale, non zero).
+    assert esito.per_categoria["anagrafe-e-stato-civile"] > 0
+    # p2 è stata tentata (poi None), p3 no (crawl interrotto sul buco).
+    assert buco in log
+    assert "/servizi/categoria/anagrafe-e-stato-civile?pagenum=3" not in log
+
+
+def test_categoria_realmente_vuota_e_assenza_reale():
+    """Categoria che risponde 200 senza servizi = assenza reale: crawl completo,
+    esito NON ``parziale``. 0-servizi conta come assenza solo dopo lettura corretta."""
+    idx = (
+        "<!doctype html><html><body><main>"
+        '<a href="/servizi/categoria/anagrafe-e-stato-civile">x</a>'
+        "</main></body></html>"
+    ).encode()
+
+    def fetch(url, *, timeout=None, max_bytes=None, host_atteso=None):
+        k = _chiave_url(url)
+        if k == "/servizi/":
+            return (None, idx, url)
+        if "/servizi/categoria/" in k:
+            return (None, CAT_VUOTA_HTML, url)  # 200, zero servizi = vuota reale
+        return None
+
+    esito = leggi_csc_servizi("099003", home=BORNO_HOME, comune="Vuota", fetch=fetch)
+    assert esito.esito == "vuoto"
+    assert esito.crawl_completo is True
+    assert esito.categorie_non_sondate == []
+    assert esito.servizi == []
+
+
+def test_zero_servizi_con_fetch_fallito_non_e_vuoto():
+    """Unica categoria muta per fetch fallito → 0 servizi, ma NON ``vuoto``:
+    l'assenza non è provata perché la categoria non è stata letta."""
+    idx = (
+        "<!doctype html><html><body><main>"
+        '<a href="/servizi/categoria/anagrafe-e-stato-civile">x</a>'
+        "</main></body></html>"
+    ).encode()
+
+    def fetch(url, *, timeout=None, max_bytes=None, host_atteso=None):
+        if _chiave_url(url) == "/servizi/":
+            return (None, idx, url)
+        return None  # ogni categoria muta (fetch fallito)
+
+    esito = leggi_csc_servizi("099004", home=BORNO_HOME, comune="Muta", fetch=fetch)
+    assert esito.esito == "parziale"
+    assert esito.crawl_completo is False
+    assert "anagrafe-e-stato-civile" in esito.categorie_non_sondate
+
+
+def test_troncata_distinta_da_fetch_fallito():
+    """Cap MAX_PAGINE (pager patologico) → categoria TRONCATA, non 'non sondata':
+    i due segnali restano distinti anche se entrambi rendono il crawl incompleto."""
+    from treasureiq.csc_orchardcore import MAX_PAGINE
+
+    idx = (
+        "<!doctype html><html><body><main>"
+        '<a href="/servizi/categoria/infinita">x</a></main></body></html>'
+    )
+
+    def fetch(url, *, timeout=None, max_bytes=None, host_atteso=None):
+        k = _chiave_url(url)
+        if k == "/servizi/":
+            return (None, idx.encode(), url)
+        import re as _re
+        n = int(_re.search(r"pagenum=(\d+)", k).group(1))
+        html = (
+            "<!doctype html><html><body><main>"
+            f'<a href="/servizio/serv-{n}" data-element="service-link"><span>S{n}</span></a>'
+            '<nav><ul class="pagination"><li><a aria-label="Vai alla pagina successiva" '
+            f'href="/servizi/categoria/infinita?pagenum={n + 1}&amp;Destination=Next">succ</a>'
+            "</li></ul></nav></main></body></html>"
+        )
+        return (None, html.encode(), url)
+
+    esito = leggi_csc_servizi("099005", home=BORNO_HOME, comune="Inf", fetch=fetch)
+    assert "infinita" in esito.categorie_troncate
+    assert esito.categorie_non_sondate == []  # NON è un fetch fallito
+    assert esito.crawl_completo is False
+    assert esito.esito == "parziale"  # troncata = incompleto → non promuovibile
+    assert MAX_PAGINE  # cap resta il criterio distinto dal fetch=None

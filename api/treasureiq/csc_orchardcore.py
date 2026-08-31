@@ -110,8 +110,18 @@ class ServizioCsc:
 class EsitoCscServizi:
     """Esito del lettore servizi CSC per un comune.
 
-    ``esito``: ``ok`` | ``vuoto`` (indice presente, 0 servizi) |
-    ``irraggiungibile`` (indice /servizi/ muto).
+    ``esito``:
+    - ``ok``              indice presente, crawl completo, ≥1 servizio;
+    - ``vuoto``           indice presente, crawl completo, 0 servizi = assenza
+                          reale (ogni categoria letta correttamente);
+    - ``parziale``        crawl INCOMPLETO (≥1 categoria non sondata/incompleta/
+                          troncata): risultato NON promuovibile, uno 0-servizi qui
+                          NON prova assenza. Va ri-misurato (retry) prima di usarlo;
+    - ``irraggiungibile`` indice /servizi/ muto.
+
+    ``crawl_completo`` è False su ``parziale``: usarlo come gate di promozione.
+    ``categorie_non_sondate`` (fetch fallito, distinte per requisito) e
+    ``categorie_troncate`` (cap MAX_PAGINE) elencano le categorie problematiche.
     """
 
     esito: str
@@ -123,6 +133,9 @@ class EsitoCscServizi:
     per_categoria: dict[str, int] = field(default_factory=dict)
     service_keys: list[str] = field(default_factory=list)
     note: tuple[str, ...] = ()
+    crawl_completo: bool = True
+    categorie_non_sondate: list[str] = field(default_factory=list)
+    categorie_troncate: list[str] = field(default_factory=list)
 
 
 # --------------------------------------------------------------------------- #
@@ -231,28 +244,50 @@ def _fetch(fetch, url: str, host_atteso: str, timeout: float):
     return res[1]
 
 
+#: esiti possibili del crawl di una categoria.
+#: ``completa``     = pager arrivato a fine (segnale affidabile) o pagina unica;
+#: ``troncata``     = cap hard ``MAX_PAGINE`` senza fine pager (pager patologico);
+#: ``non_sondata``  = pagina 1 muta (fetch=None) → categoria MAI letta;
+#: ``incompleta``   = fetch=None su pagina ≥2 → lettura parziale.
+#: ``non_sondata``/``incompleta`` = crawl NON affidabile: uno 0-servizi qui NON è
+#: assenza reale. ``troncata`` è tenuto distinto dal fetch fallito (requisito).
+_STATO_COMPLETA = "completa"
+_STATO_TRONCATA = "troncata"
+_STATO_NON_SONDATA = "non_sondata"
+_STATO_INCOMPLETA = "incompleta"
+
+
 def _sonda_categoria(fetch, root: str, host: str, slug: str, timeout: float):
-    """Crawl paginato di una categoria. Ritorna (servizi, n_scartati, troncata).
+    """Crawl paginato di una categoria. Ritorna ``(servizi, n_scartati, stato)``.
 
     **Criterio di fine = il pager stesso.** Si segue il link "pagina successiva"
     finché il pager lo emette; la sua ASSENZA è il segnale affidabile di ultima
     pagina. NON ci si ferma su "0 servizi nuovi": una pagina di soli duplicati
     (pager a finestra) può precedere una pagina con servizi nuovi. In assenza di
-    un pager leggibile si procede fino al limite hard ``MAX_PAGINE`` (``troncata``
-    = True se raggiunto senza segnale di fine → possibile catalogo incompleto).
-    Nota: il server risponde 200 anche a ``pagenum`` oltre l'ultima (clamp
-    sull'ultima pagina), quindi il non-200 NON è un criterio di stop valido.
+    un pager leggibile si procede fino al limite hard ``MAX_PAGINE`` (stato
+    ``troncata`` se raggiunto senza segnale di fine → possibile catalogo incompleto).
+
+    **Fetch fallito ≠ categoria vuota.** ``_fetch`` ritorna None su errore rete/HTTP.
+    Un None a pagina 1 → ``non_sondata`` (la categoria non è stata letta: uno
+    0-servizi NON è assenza reale). Un None a pagina ≥2 → ``incompleta`` (lettura
+    parziale). Entrambi sono distinti da ``troncata`` (cap MAX_PAGINE): il non-200
+    NON è un criterio di fine valido perché il server clampa i ``pagenum`` oltre
+    l'ultima pagina rispondendo comunque 200.
     """
     servizi: list[ServizioCsc] = []
     scartati = 0
     visti: set[str] = set()
     pagina = 1
-    troncata = False
+    pagine_lette = 0
+    stato = _STATO_COMPLETA
     for iterazione in range(MAX_PAGINE):
         url = urljoin(root, f"servizi/categoria/{slug}?pagenum={pagina}")
         body = _fetch(fetch, url, host, timeout)
         if body is None:
+            # fetch fallito: categoria mai letta (pag.1) o letta a metà (pag.≥2).
+            stato = _STATO_NON_SONDATA if pagine_lette == 0 else _STATO_INCOMPLETA
             break
+        pagine_lette += 1
         html = body.decode("utf-8", "replace")
         trovati, sc = _estrai_servizi(html, slug, host, root)
         scartati += sc
@@ -269,8 +304,8 @@ def _sonda_categoria(fetch, root: str, host: str, slug: str, timeout: float):
             break  # pager senza link successiva → ultima pagina (segnale affidabile)
         pagina = prossima
     else:
-        troncata = True  # cap hard raggiunto senza segnale di fine dal pager
-    return servizi, scartati, troncata
+        stato = _STATO_TRONCATA  # cap hard raggiunto senza segnale di fine dal pager
+    return servizi, scartati, stato
 
 
 # --------------------------------------------------------------------------- #
@@ -311,19 +346,31 @@ def leggi_csc_servizi(
     tutti: list[ServizioCsc] = []
     n_scartati = 0
     troncate: list[str] = []
+    non_sondate: list[str] = []
     for slug in categorie:
-        servizi, sc, troncata = _sonda_categoria(fetch, root, host, slug, timeout)
+        servizi, sc, stato = _sonda_categoria(fetch, root, host, slug, timeout)
         per_categoria[slug] = len(servizi)
         n_scartati += sc
-        if troncata:
+        if stato == _STATO_TRONCATA:
             troncate.append(slug)
+        elif stato in (_STATO_NON_SONDATA, _STATO_INCOMPLETA):
+            non_sondate.append(slug)
         tutti.extend(servizi)
 
     servizi = _dedup(tutti)
     chiavi = sorted({s.service_key for s in servizi if s.service_key})
+    # crawl affidabile solo se OGNI categoria è stata letta per intero: un fetch
+    # fallito (non_sondata/incompleta) o un cap MAX_PAGINE lascia il catalogo
+    # possibilmente incompleto → non promuovibile.
+    crawl_completo = not non_sondate and not troncate
     note: list[str] = []
     if n_scartati:
         note.append(f"{n_scartati} link servizio scartati (host fuori dal comune)")
+    if non_sondate:
+        note.append(
+            "categorie non sondate (fetch fallito, crawl incompleto → NON "
+            f"promuovibile, 0-servizi non è assenza): {', '.join(non_sondate)}"
+        )
     if troncate:
         note.append(
             f"limite hard {MAX_PAGINE} pagine raggiunto senza fine pager "
@@ -331,11 +378,21 @@ def leggi_csc_servizi(
         )
     if not categorie:
         note.append("indice /servizi/ senza categorie: catalogo assente")
+    # "vuoto" (assenza reale) SOLO se ogni categoria è stata letta correttamente;
+    # con crawl incompleto un catalogo a 0 servizi è "parziale", non "vuoto".
+    if not crawl_completo:
+        esito = "parziale"
+    elif servizi:
+        esito = "ok"
+    else:
+        esito = "vuoto"
     return EsitoCscServizi(
-        esito="ok" if servizi else "vuoto",
+        esito=esito,
         codice_istat=codice_istat, comune=comune, home=home,
         servizi=servizi, categorie=categorie, per_categoria=per_categoria,
         service_keys=chiavi, note=tuple(note),
+        crawl_completo=crawl_completo,
+        categorie_non_sondate=non_sondate, categorie_troncate=troncate,
     )
 
 

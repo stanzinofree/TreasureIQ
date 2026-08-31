@@ -6,22 +6,39 @@ né sul catalogo flat, né su ``storico.db``. Il suo unico prodotto è un report
 copertura/precisione e un checkpoint JSONL, entrambi in una cartella scratch
 separata (``--out``).
 
+Ogni riga porta due assi distinti: l'**esito** (fulfilled / ambiguita / …, la
+tassonomia sotto) e la **provenienza** — da quale tier del resolver è arrivata
+la risposta (``catalog`` / ``cache`` / ``live``). Servono separati: un
+``fulfilled`` servito dal catalogo flat (zero rete) non è lo stesso di uno
+scoperto dal vivo, e senza questa distinzione ogni misura globale sottostima
+sistematicamente i cataloghi standalone (es. CSC, il cui adapter è fuori
+registry ma i cui dati vivono nel catalogo flat, chiave-ISTAT).
+
 Come misura, per ogni ``(comune, probe)``:
 
 1. **recogniser** (``riconosci_service_key``): testo → ``ServiceKey`` | ``None``.
    ``None`` = ``chiave_non_riconosciuta`` (0 o ≥2 marker: il recogniser resta
    indeciso). Confrontato con l'attesa del golden per scovare miss/falsi-positivi
    deterministici (materiale per la Fase 2, non corretto qui).
-2. **comune**: mappa-connettore da cache (nessuna rete) + registro. Assenti →
-   ``comune_non_risolto``.
-3. **connettore**: ``registry.resolve``; assente → ``connettore_non_disponibile``.
-4. **diagnostica live** (``connettore.diagnostica``, read-only): discovery +
-   filtro + gate, conta i confermati:
-   - ``target`` assente → ``connettore_non_disponibile`` (la famiglia non serve
-     quella chiave su questo comune);
-   - 0 confermati → ``fonte_assente`` (cercato, non trovato: miss onesto);
-   - 1 confermato → ``fulfilled``;
-   - ≥2 confermati → ``ambiguita``.
+2. **tier cache → catalogo** (``resolve_service_with_meta`` con un ConnectorRegistry
+   **vuoto**): il resolver consulta cache poi catalogo flat e — registry isolato —
+   NON può mai arrivare al connettore live, quindi non scrive nulla (il write-back
+   del resolver è dopo il ``retrieve``, irraggiungibile). È ISTAT-keyed: non serve
+   la mappa, perciò va PRIMA della sonda live, così i comuni serviti da un adapter
+   standalone via catalogo non cadono in ``comune_non_risolto``. Hit → ``fulfilled``
+   con provenienza ``catalog`` (o ``cache``), zero rete.
+3. **comune** (solo sul miss del tier 2): mappa-connettore da cache (nessuna rete)
+   + registro. Assenti → ``comune_non_risolto``.
+4. **connettore live**: ``registry.resolve``; assente → ``connettore_non_disponibile``.
+   - connettore con ``diagnostica`` (base condivisa): discovery + filtro + gate
+     read-only, conta i confermati → ``target`` assente = ``connettore_non_disponibile``;
+     0 = ``fonte_assente``; 1 = ``fulfilled``; ≥2 = ``ambiguita``;
+   - connettore **senza** ``diagnostica`` (es. Magnolia, adapter su ``retrieve``):
+     misura read-only via ``retrieve`` diretto (il write-back sta nel resolver, che
+     qui non chiamiamo → zero scritture) → FULFILLED+1 = ``fulfilled``; NOT_SUPPORTED
+     = ``connettore_non_disponibile``; resto = ``fonte_assente`` (l'ambiguità ≥2 è
+     collassata dal connettore in NOT_FOUND: limite noto, annotato ``via_retrieve``).
+   Tutti gli esiti del tier live portano provenienza ``live``.
 
 Il campione è **stratificato per famiglia Base** (piattaforma in ``storico.db``)
 e ogni comune porta il **tag AT** (``piattaforma_at`` presente). La superficie
@@ -40,7 +57,9 @@ Riprende in automatico saltando le coppie ``(comune, probe)`` già nel checkpoin
 from __future__ import annotations
 
 import argparse
+import contextlib
 import json
+import os
 import random
 import sys
 import time
@@ -49,11 +68,17 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable, Sequence
 
+from treasureiq.catalog.connector_registry import ConnectorRegistry
+from treasureiq.catalog.data_contracts import DataStatus
 from treasureiq.catalog.fetch_policy import PoliticaFetch
 from treasureiq.catalog.fetch_runtime import EsecutoreFetch
 from treasureiq.catalog.planner import service_request
 from treasureiq.catalog.service_contracts import ServiceKey
 from treasureiq.catalog.service_registry import default_service_registry
+from treasureiq.catalog.service_resolver import (
+    _CATALOG_CONNECTOR,
+    resolve_service_with_meta,
+)
 from treasureiq.chat.service_key import riconosci_service_key
 from treasureiq.mappa_connettore import (
     ProbeBudgetEsaurito,
@@ -94,6 +119,59 @@ _ESITI = (
 #: separare l'endpoint muto (transient) dall'assenza reale. Default prudenti.
 _RETRY_ENDPOINT = 2
 _BACKOFF_S = 2.0
+
+# --- provenienza (il tier del resolver che ha prodotto l'esito) ---------------
+#: Secondo asse, ortogonale all'esito: `catalog`/`cache` = servito zero-rete dal
+#: tier 2 del resolver; `live` = misurato dal vivo (tier 4); `""` = nessuna
+#: risoluzione tentata (recogniser fermo prima dei tier).
+PROV_CATALOG = "catalog"
+PROV_CACHE = "cache"
+PROV_LIVE = "live"
+PROV_NESSUNA = ""
+
+#: Env-gate del tier catalogo nel resolver. Lo strumento di misura DEVE contare
+#: ciò che il catalogo può servire a prescindere dal rollout di produzione: lo
+#: forziamo attivo attorno al probe (poi ripristinato), senza mutare lo stato
+#: globale del processo.
+_ENV_CATALOGO = "TREASUREIQ_SERVICE_CATALOG"
+
+#: Registry VUOTO per il probe cache→catalogo: nessun connettore vi è registrato,
+#: quindi il resolver non può raggiungere il tier live né il suo write-back →
+#: garanzia strutturale di zero-scrittura del probe.
+_REGISTRY_ISOLATO = ConnectorRegistry()
+
+
+@contextlib.contextmanager
+def _catalogo_forzato():
+    """Attiva il gate del catalogo per la durata del blocco, poi ripristina.
+
+    La misura conta sempre il catalogo (è il suo scopo), indipendentemente
+    dall'env ambientale; il ripristino evita di lasciare il processo mutato.
+    """
+    prima = os.environ.get(_ENV_CATALOGO)
+    os.environ[_ENV_CATALOGO] = "1"
+    try:
+        yield
+    finally:
+        if prima is None:
+            os.environ.pop(_ENV_CATALOGO, None)
+        else:
+            os.environ[_ENV_CATALOGO] = prima
+
+
+def _risolvi_da_catalogo(richiesta, *, registry_isolato=None):
+    """Tier cache → catalogo via resolver con registry ISOLATO (zero-write).
+
+    Ritorna il ``ResolvedService`` se cache o catalogo servono la coppia, altrimenti
+    ``None`` (segnale di fall-through al tier live). ``mappa=None`` è sicuro: con un
+    registry vuoto il resolver ritorna prima di toccare la mappa (usata solo dentro
+    ``retrieve``, mai raggiunto).
+    """
+    reg = registry_isolato if registry_isolato is not None else _REGISTRY_ISOLATO
+    with _catalogo_forzato():
+        return resolve_service_with_meta(
+            richiesta, mappa=None, registry=reg, platform_id=""
+        )
 
 
 @dataclass(frozen=True)
@@ -164,6 +242,9 @@ class Misura:
     filtrati: int
     confermati: int
     note: str = ""
+    #: Tier del resolver che ha prodotto l'esito (catalog/cache/live) o "" quando
+    #: nessun tier è stato interrogato (recogniser fermo). Asse ortogonale all'esito.
+    provenienza: str = ""
 
     def chiave(self) -> tuple[str, str]:
         """Identità per il resume: una coppia comune×probe è misurata una volta."""
@@ -184,6 +265,7 @@ class Misura:
             "filtrati": self.filtrati,
             "confermati": self.confermati,
             "note": self.note,
+            "provenienza": self.provenienza,
         }
 
 
@@ -329,6 +411,34 @@ def _diagnostica_affidabile(
     return diag, "endpoint_muto"
 
 
+def _misura_via_retrieve(connettore, richiesta, mappa, _riga, nota_fp: str) -> Misura:
+    """Misura un connettore privo di ``diagnostica`` via ``retrieve`` diretto.
+
+    Read-only: il write-back sta nel resolver (``service_cache.salva`` dopo il
+    retrieve), che qui NON chiamiamo — invochiamo il connettore direttamente.
+    Mappa ``ConnectorResult.status`` sugli esiti; l'ambiguità ≥2 è collassata dal
+    connettore in NOT_FOUND (limite noto), perciò annotata ``via_retrieve``.
+    """
+    res = connettore.retrieve(richiesta, mappa=mappa)
+    n = len(res.service_references)
+    if res.status is DataStatus.FULFILLED and n == 1:
+        return _riga(ESITO_FULFILLED, confermati=1, note=nota_fp)
+    if res.status is DataStatus.FULFILLED and n >= 2:
+        return _riga(ESITO_AMBIGUITA, confermati=n, note=nota_fp)
+    if res.status is DataStatus.NOT_SUPPORTED:
+        # La famiglia non serve questa chiave su questo comune (variant B/URP):
+        # stesso significato di ``target_assente`` nel path diagnostica.
+        return _riga(ESITO_CONNETTORE_NON_DISPONIBILE,
+                     note=_giunta(nota_fp, "target_assente"))
+    # NOT_FOUND (0 confermati, oppure ≥2 collassati): assenza onesta lato connettore.
+    return _riga(ESITO_FONTE_ASSENTE, note=_giunta(nota_fp, "via_retrieve"))
+
+
+def _giunta(*parti: str) -> str:
+    """Unisce le note non vuote con uno spazio (helper condiviso)."""
+    return " ".join(p for p in parti if p)
+
+
 def misura_coppia(
     comune: ComuneCampione,
     probe: Probe,
@@ -338,16 +448,21 @@ def misura_coppia(
     tentativi: int = _RETRY_ENDPOINT,
     backoff_s: float = _BACKOFF_S,
     host_raggiungibili: dict[str, bool] | None = None,
+    catalog_registry: ConnectorRegistry | None = None,
 ) -> Misura:
     """Misura una singola ``(comune, probe)`` — nessuna scrittura.
 
-    Rete: sonda-mappa live sul cache-miss (``_risolvi_mappa_live``) + discovery
-    live dentro ``connettore.diagnostica``, con retry/backoff sull'endpoint muto
-    (``_diagnostica_affidabile``). Il registro è cache-only su disco.
+    Ordine (resolver completo): tier cache → catalogo (``_risolvi_da_catalogo``,
+    registry isolato, zero-rete) e solo sul suo miss il tier live — sonda-mappa
+    sul cache-miss (``_risolvi_mappa_live``) + discovery ``diagnostica`` con
+    retry/backoff (``_diagnostica_affidabile``), oppure ``retrieve`` read-only per
+    i connettori privi di ``diagnostica``. Il registro è cache-only su disco.
+    ``catalog_registry`` sovrascrive il registry isolato del probe (per i test).
     """
     if host_raggiungibili is None:
         host_raggiungibili = {}
-    def _riga(esito: str, *, grezzi=0, filtrati=0, confermati=0, note="") -> Misura:
+    def _riga(esito: str, *, grezzi=0, filtrati=0, confermati=0, note="",
+              provenienza=PROV_LIVE) -> Misura:
         return Misura(
             codice_istat=comune.codice_istat,
             base_famiglia=comune.base_famiglia,
@@ -362,6 +477,7 @@ def misura_coppia(
             filtrati=filtrati,
             confermati=confermati,
             note=note,
+            provenienza=provenienza,
         )
 
     riconosciuto = riconosci_service_key(probe.raw)
@@ -371,9 +487,24 @@ def misura_coppia(
         # Onesto solo se il probe era fuori-vocabolario; altrimenti è un miss di
         # riconoscimento deterministico (materiale Fase 2), annotato ma non forzato.
         nota = "" if probe.atteso is None else "miss_riconoscimento"
-        return _riga(ESITO_CHIAVE_NON_RICONOSCIUTA, note=nota)
+        return _riga(ESITO_CHIAVE_NON_RICONOSCIUTA, note=nota, provenienza=PROV_NESSUNA)
 
     nota_fp = "" if recognizer_ok else "falso_positivo_riconoscimento"
+
+    richiesta = service_request(
+        source_id=comune.codice_istat,
+        service_key=riconosciuto,
+        namespace="measure",
+    )
+
+    # Tier cache → catalogo (zero-rete, zero-write): ISTAT-keyed, va PRIMA della
+    # sonda-mappa così un comune servito da un adapter standalone via catalogo non
+    # cade in ``comune_non_risolto``. Un hit è per costruzione exactly-one (il gate
+    # di promozione ha già applicato I-1) → fulfilled con la provenienza del tier.
+    risolto = _risolvi_da_catalogo(richiesta, registry_isolato=catalog_registry)
+    if risolto is not None:
+        prov = PROV_CATALOG if risolto.connector.name == _CATALOG_CONNECTOR.name else PROV_CACHE
+        return _riga(ESITO_FULFILLED, confermati=1, note=nota_fp, provenienza=prov)
 
     mappa, nota_mappa = _risolvi_mappa_live(comune.codice_istat, esecutore=esecutore)
     if mappa is None:
@@ -386,14 +517,14 @@ def misura_coppia(
     # ha la precedenza (è ciò che userebbe il runtime).
     record = leggi_registro(comune.codice_istat)
     platform_id = (record.piattaforma if record else "") or comune.base_famiglia
-    richiesta = service_request(
-        source_id=comune.codice_istat,
-        service_key=riconosciuto,
-        namespace="measure",
-    )
     connettore = registry.resolve(request=richiesta, platform_id=platform_id)
     if connettore is None:
         return _riga(ESITO_CONNETTORE_NON_DISPONIBILE, note=(nota_fp or "no_connettore"))
+
+    # Connettore senza discovery diagnostica (es. Magnolia, adapter su ``retrieve``):
+    # niente bucket grezzi/filtrati, misura read-only via ``retrieve`` diretto.
+    if not hasattr(connettore, "diagnostica"):
+        return _misura_via_retrieve(connettore, richiesta, mappa, _riga, nota_fp)
 
     diag, nota_endpoint = _diagnostica_affidabile(
         connettore, richiesta, mappa,
@@ -494,6 +625,15 @@ def costruisci_report(checkpoint: Path) -> dict:
     # così i fuori-vocabolario non gonfiano né il numeratore né il totale.
     reali = [m for m in misure if m["atteso"] is not None]
     esiti_riconoscibili = Counter(m["esito"] for m in reali)
+    # Provenienza dei fulfilled riconoscibili (asse ortogonale all'esito): un
+    # ``fulfilled`` da catalogo (zero-rete) non equivale a uno scoperto dal vivo.
+    # ``or PROV_LIVE`` copre i checkpoint pre-tier (senza campo provenienza): erano
+    # tutti misurati dal vivo, quindi l'assenza del campo significa ``live``.
+    fulfilled_per_provenienza = Counter(
+        (m.get("provenienza") or PROV_LIVE)
+        for m in reali
+        if m["esito"] == ESITO_FULFILLED
+    )
     miss_riconoscimento = [
         {"codice_istat": m["codice_istat"], "probe_id": m["probe_id"], "raw": m["raw"]}
         for m in misure
@@ -512,6 +652,7 @@ def costruisci_report(checkpoint: Path) -> dict:
         "comuni": len(comuni),
         "esiti_totali": dict(tot),
         "esiti_riconoscibili": dict(esiti_riconoscibili),
+        "fulfilled_per_provenienza": dict(fulfilled_per_provenienza),
         "chiave_non_riconosciuta_attesa": chiave_attesa,
         "comune_non_risolto_per_causa": dict(cnr_cause),
         "fonte_assente_per_causa": dict(fa_cause),
@@ -539,10 +680,17 @@ def _stampa_report(report: dict) -> None:
         "\nesiti (denominatore = probe riconoscibili; i probe fuori-vocabolario\n"
         f"sono {attesa} `chiave_non_riconosciuta` ATTESI, esclusi dal conteggio):"
     )
+    prov = report.get("fulfilled_per_provenienza", {})
     for esito in _ESITI:
         if esito == ESITO_CHIAVE_NON_RICONOSCIUTA:
             continue  # sotto, separato attesi vs miss
         print(f"  {esito:<28} {report.get('esiti_riconoscibili', {}).get(esito, 0)}")
+        if esito == ESITO_FULFILLED and prov:
+            dettaglio = "  ".join(
+                f"{tier}={prov[tier]}" for tier in (PROV_CATALOG, PROV_CACHE, PROV_LIVE)
+                if prov.get(tier)
+            )
+            print(f"  {'  └ per provenienza':<28} {dettaglio}")
     print(
         f"  {'chiave_non_riconosciuta':<28} "
         f"attesi={attesa}  miss_reali={len(report['recognizer_miss'])}"

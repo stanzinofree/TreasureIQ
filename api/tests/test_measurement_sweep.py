@@ -362,6 +362,81 @@ def test_magnolia_not_supported_e_connettore_non_disponibile(tmp_path, monkeypat
     assert m.note == "target_assente"
 
 
+def _vieta_scrittura_cache(monkeypatch):
+    """Rende ``service_cache.salva`` un'esplosione: qualunque write-back fallisce
+    il test. Il resolver importa il modulo, quindi il patch lo copre."""
+    from treasureiq.catalog import service_cache
+
+    def _boom(*a, **k):  # pragma: no cover - deve restare mai chiamato
+        raise AssertionError("scrittura service-cache vietata nella misura")
+
+    monkeypatch.setattr(service_cache, "salva", _boom)
+
+
+def test_catalog_miss_non_scrive_in_cache(tmp_path, monkeypatch):
+    # Catalog miss → ripiego live via diagnostica: nessun write-back in service-cache.
+    monkeypatch.setenv("TREASUREIQ_DATA_DIR", str(tmp_path))  # catalog dir vuota
+    _vieta_scrittura_cache(monkeypatch)
+    _stubba_comune(monkeypatch)
+    reg = _RegistryStub(_ConnettoreStub(DiagnosticaConnettore(True, True, 3, 2, 1)))
+    probe = ms.Probe("imu", "imu", ServiceKey.TRIBUTI_IMU)
+    m = ms.misura_coppia(COMUNE, probe, registry=reg, esecutore=_ESEC)
+    assert m.esito == ms.ESITO_FULFILLED
+    assert m.provenienza == ms.PROV_LIVE  # salva() non è esploso → zero-write
+
+
+def test_retrieve_path_read_only_non_scrive_in_cache(tmp_path, monkeypatch):
+    # Connettore senza diagnostica misurato via retrieve diretto: il write-back sta
+    # nel resolver (mai chiamato qui) → nessuna scrittura in service-cache.
+    from types import SimpleNamespace
+
+    from treasureiq.catalog.service_connectors.magnolia_service import (
+        MagnoliaServiceConnector,
+    )
+
+    monkeypatch.setenv("TREASUREIQ_DATA_DIR", str(tmp_path))
+    _vieta_scrittura_cache(monkeypatch)
+    _stubba_comune(monkeypatch, piattaforma="magnolia")
+    conn = MagnoliaServiceConnector(
+        lettore=lambda istat: SimpleNamespace(
+            esito="ok", home="https://comune.example",
+            servizi=[SimpleNamespace(service_key="CARTA_IDENTITA",
+                                     titolo="Carta d'identità", url="/servizio/carta",
+                                     host="comune.example", categoria="106")]),
+    )
+    probe = ms.Probe("carta", "carta d'identità", ServiceKey.CARTA_IDENTITA)
+    comune = ms.ComuneCampione("099004", "magnolia", at_presente=False)
+    m = ms.misura_coppia(comune, probe, registry=_RegistryStub(conn), esecutore=_ESEC)
+    assert m.esito == ms.ESITO_FULFILLED  # salva() non è esploso → zero-write
+
+
+def test_report_compat_formato_precedente_senza_provenienza(tmp_path):
+    # Checkpoint pre-tier (righe SENZA campo `provenienza`): il report non deve
+    # rompersi e i fulfilled storici (tutti live) ricadono su provenienza `live`.
+    checkpoint = tmp_path / "checkpoint.jsonl"
+    vecchie = [
+        {"codice_istat": "001", "base_famiglia": "wp", "at_presente": True,
+         "probe_id": "imu", "raw": "imu", "atteso": "tributi_imu",
+         "riconosciuto": "tributi_imu", "recognizer_ok": True,
+         "esito": ms.ESITO_FULFILLED, "grezzi": 3, "filtrati": 2, "confermati": 1,
+         "note": ""},  # NESSUN campo provenienza (formato vecchio)
+        {"codice_istat": "002", "base_famiglia": "wp", "at_presente": False,
+         "probe_id": "tari", "raw": "tari", "atteso": "tributi_tari",
+         "riconosciuto": "tributi_tari", "recognizer_ok": True,
+         "esito": ms.ESITO_FONTE_ASSENTE, "grezzi": 0, "filtrati": 0,
+         "confermati": 0, "note": "assenza_reale"},
+    ]
+    checkpoint.write_text(
+        "\n".join(json.dumps(r, ensure_ascii=False) for r in vecchie) + "\n",
+        encoding="utf-8",
+    )
+    report = ms.costruisci_report(checkpoint)
+    assert report["esiti_riconoscibili"][ms.ESITO_FULFILLED] == 1
+    assert report["fulfilled_per_provenienza"] == {ms.PROV_LIVE: 1}
+    # Nessuna KeyError sulle chiavi storiche; lo stampatore regge il report vecchio+nuovo.
+    ms._stampa_report(report)
+
+
 def test_report_fulfilled_per_provenienza(tmp_path):
     # Il report separa i fulfilled per tier (catalog/cache/live).
     checkpoint = tmp_path / "checkpoint.jsonl"

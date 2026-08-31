@@ -83,6 +83,10 @@ _ANCHOR_SERVIZIO = re.compile(
 _ANCHOR_CATEGORIA = re.compile(
     r'href=["\']([^"\']*/servizi/categoria/[^"\'?#]+)', re.I
 )
+#: link "pagina successiva" del pager Bootstrap-Italia (segnale di fine esplicito).
+_ANCHOR_A = re.compile(r"<a\b[^>]*>", re.I)
+_HREF = re.compile(r'href=["\']([^"\']+)["\']', re.I)
+_SEGNALE_NEXT = re.compile(r"successiv|rel=[\"']next[\"']|destination=next", re.I)
 
 
 # --------------------------------------------------------------------------- #
@@ -186,6 +190,36 @@ def _estrai_servizi(
     return dentro, scartati
 
 
+def _next_href(html: str) -> str | None:
+    """href del link 'pagina successiva' del pager, o None se assente (ultima pagina).
+
+    Cerca un ``<a>`` con segnale next (aria-label 'successiva', ``rel=next`` o
+    ``Destination=Next``). L'assenza è il segnale di fine AFFIDABILE: sull'ultima
+    pagina il pager Bootstrap-Italia non emette il link successiva.
+    """
+    for tag in _ANCHOR_A.findall(html):
+        if _SEGNALE_NEXT.search(tag):
+            m = _HREF.search(tag)
+            if m:
+                return unescape(m.group(1))
+    return None
+
+
+def _prossima_pagina(html: str, corrente: int) -> int | None:
+    """Numero della pagina successiva secondo il pager, o None se è l'ultima.
+
+    Il ``pagenum`` viene letto dall'href del link successiva (URL canonico,
+    ignorando il ``Destination=Next`` del SaaS); se l'href non lo espone si
+    incrementa. Ritorna None anche se il pager punta indietro/uguale (guardia
+    anti-loop)."""
+    href = _next_href(html)
+    if href is None:
+        return None
+    m = re.search(r"pagenum=(\d+)", href)
+    prossima = int(m.group(1)) if m else corrente + 1
+    return prossima if prossima > corrente else None
+
+
 def _fetch(fetch, url: str, host_atteso: str, timeout: float):
     """Wrapper: ritorna body_bytes o None. Isola la forma del guard."""
     res = fetch(url, timeout=timeout, max_bytes=MAX_BYTES, host_atteso=host_atteso)
@@ -195,16 +229,23 @@ def _fetch(fetch, url: str, host_atteso: str, timeout: float):
 
 
 def _sonda_categoria(fetch, root: str, host: str, slug: str, timeout: float):
-    """Crawl paginato di una categoria. Ritorna (servizi, n_scartati).
+    """Crawl paginato di una categoria. Ritorna (servizi, n_scartati, troncata).
 
-    Paginazione incrementale: itera ``?pagenum=N`` finché una pagina non aggiunge
-    URL servizio nuovi (pager a finestra → il massimo non è noto a priori),
-    oppure risponde muta, fino a ``MAX_PAGINE``.
+    **Criterio di fine = il pager stesso.** Si segue il link "pagina successiva"
+    finché il pager lo emette; la sua ASSENZA è il segnale affidabile di ultima
+    pagina. NON ci si ferma su "0 servizi nuovi": una pagina di soli duplicati
+    (pager a finestra) può precedere una pagina con servizi nuovi. In assenza di
+    un pager leggibile si procede fino al limite hard ``MAX_PAGINE`` (``troncata``
+    = True se raggiunto senza segnale di fine → possibile catalogo incompleto).
+    Nota: il server risponde 200 anche a ``pagenum`` oltre l'ultima (clamp
+    sull'ultima pagina), quindi il non-200 NON è un criterio di stop valido.
     """
     servizi: list[ServizioCsc] = []
     scartati = 0
     visti: set[str] = set()
-    for pagina in range(1, MAX_PAGINE + 1):
+    pagina = 1
+    troncata = False
+    for iterazione in range(MAX_PAGINE):
         url = urljoin(root, f"servizi/categoria/{slug}?pagenum={pagina}")
         body = _fetch(fetch, url, host, timeout)
         if body is None:
@@ -213,19 +254,20 @@ def _sonda_categoria(fetch, root: str, host: str, slug: str, timeout: float):
         trovati, sc = _estrai_servizi(html, slug, host, root)
         scartati += sc
         # ogni servizio ha due ancore (titolo + "Vai alla pagina", stesso URL):
-        # il titolo reale arriva per primo → tenuto; dedup su URL intra- e
-        # cross-pagina. Pager a finestra: 0 servizi nuovi → fine categoria.
-        nuovi = 0
+        # il titolo reale arriva per primo → tenuto; dedup su URL intra/cross-pagina.
         for s in trovati:
             u = s.url.lower()
             if u in visti:
                 continue
             visti.add(u)
             servizi.append(s)
-            nuovi += 1
-        if nuovi == 0:
-            break
-    return servizi, scartati
+        prossima = _prossima_pagina(html, pagina)
+        if prossima is None:
+            break  # pager senza link successiva → ultima pagina (segnale affidabile)
+        pagina = prossima
+    else:
+        troncata = True  # cap hard raggiunto senza segnale di fine dal pager
+    return servizi, scartati, troncata
 
 
 # --------------------------------------------------------------------------- #
@@ -265,10 +307,13 @@ def leggi_csc_servizi(
     per_categoria: dict[str, int] = {}
     tutti: list[ServizioCsc] = []
     n_scartati = 0
+    troncate: list[str] = []
     for slug in categorie:
-        servizi, sc = _sonda_categoria(fetch, root, host, slug, timeout)
+        servizi, sc, troncata = _sonda_categoria(fetch, root, host, slug, timeout)
         per_categoria[slug] = len(servizi)
         n_scartati += sc
+        if troncata:
+            troncate.append(slug)
         tutti.extend(servizi)
 
     servizi = _dedup(tutti)
@@ -276,6 +321,11 @@ def leggi_csc_servizi(
     note: list[str] = []
     if n_scartati:
         note.append(f"{n_scartati} link servizio scartati (host fuori dal comune)")
+    if troncate:
+        note.append(
+            f"limite hard {MAX_PAGINE} pagine raggiunto senza fine pager "
+            f"(catalogo possibilmente incompleto): {', '.join(troncate)}"
+        )
     if not categorie:
         note.append("indice /servizi/ senza categorie: catalogo assente")
     return EsitoCscServizi(

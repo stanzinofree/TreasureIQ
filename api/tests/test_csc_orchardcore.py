@@ -37,6 +37,15 @@ BRAONE_MAP = {
     "/servizi/": "braone_index.html",
     "/servizi/categoria/tributi-finanze-e-contravvenzioni?pagenum=1": "braone_tributi_p1.html",
 }
+#: scenario sintetico del blocker: p3 = SOLO duplicato, ma il pager punta a p4
+#: che ha un servizio NUOVO. Il criterio "0-nuovi → stop" perderebbe p4.
+PAG_MAP = {
+    "/servizi/": "pag_index.html",
+    "/servizi/categoria/prova-paginazione?pagenum=1": "pag_p1.html",
+    "/servizi/categoria/prova-paginazione?pagenum=2": "pag_p2.html",
+    "/servizi/categoria/prova-paginazione?pagenum=3": "pag_p3.html",
+    "/servizi/categoria/prova-paginazione?pagenum=4": "pag_p4.html",
+}
 
 
 def _chiave_url(url: str) -> str:
@@ -114,8 +123,8 @@ def test_paginazione_anagrafe_segue_tre_pagine():
     log: list[str] = []
     esito = _leggi_borno(log)
     an = "/servizi/categoria/anagrafe-e-stato-civile"
-    # p1,p2 aggiungono servizi; p3 (pager a finestra) ripete solo un servizio
-    # già visto → 0 nuovi → stop. p4 non viene mai sondata.
+    # si segue il link "successiva" del pager: p1→p2→p3; p3 non ha link
+    # successiva (ultima pagina reale) → stop. p4 non viene mai sondata.
     assert f"{an}?pagenum=1" in log
     assert f"{an}?pagenum=2" in log
     assert f"{an}?pagenum=3" in log
@@ -123,6 +132,59 @@ def test_paginazione_anagrafe_segue_tre_pagine():
     # 18 servizi dedup dalle pagine (doppioni titolo/link e cross-pagina collassati).
     anagrafe = [s for s in esito.servizi if s.categoria == "anagrafe-e-stato-civile"]
     assert len(anagrafe) == 18
+
+
+def test_paginazione_non_si_ferma_su_pagina_di_soli_duplicati():
+    """BLOCKER PR #67: p3 contiene solo un duplicato (0 nuovi) ma il pager punta
+    a p4, che ha un servizio nuovo. Il crawler DEVE seguire il pager, non fermarsi
+    sui '0 nuovi', altrimenti perde il servizio di p4."""
+    log: list[str] = []
+    esito = leggi_csc_servizi(
+        "099001", home=BORNO_HOME, comune="Prova",
+        fetch=fetch_da_mappa(PAG_MAP, log),
+    )
+    slug = [s.url.rsplit("/", 1)[-1] for s in esito.servizi]
+    # tutte e 4 le pagine seguite, incluse p3 (soli dup) e p4 (nuovo).
+    cat = "/servizi/categoria/prova-paginazione"
+    assert f"{cat}?pagenum=3" in log
+    assert f"{cat}?pagenum=4" in log
+    # 4 servizi unici: alfa, beta, gamma, delta — delta vive SOLO su p4.
+    assert slug == ["servizio-alfa", "servizio-beta", "servizio-gamma", "servizio-delta"]
+    assert "servizio-delta" in slug
+
+
+def test_cap_hard_su_pager_senza_fine():
+    """Pager che dichiara sempre 'successiva' → si procede fino a MAX_PAGINE e si
+    annota il troncamento (catalogo possibilmente incompleto), senza loop infinito."""
+    from treasureiq.csc_orchardcore import MAX_PAGINE
+
+    idx = (
+        "<!doctype html><html><body><main>"
+        '<a href="/servizi/categoria/infinita">x</a></main></body></html>'
+    )
+    log: list[str] = []
+
+    def fetch(url, *, timeout=None, max_bytes=None, host_atteso=None):
+        k = _chiave_url(url)
+        log.append(k)
+        if k == "/servizi/":
+            return (None, idx.encode(), url)
+        # ogni pagina espone un servizio nuovo + link successiva → mai fine.
+        import re as _re
+        n = int(_re.search(r"pagenum=(\d+)", k).group(1))
+        html = (
+            "<!doctype html><html><body><main>"
+            f'<a href="/servizio/serv-{n}" data-element="service-link"><span>S{n}</span></a>'
+            '<nav><ul class="pagination"><li><a aria-label="Vai alla pagina successiva" '
+            f'href="/servizi/categoria/infinita?pagenum={n + 1}&amp;Destination=Next">succ</a>'
+            "</li></ul></nav></main></body></html>"
+        )
+        return (None, html.encode(), url)
+
+    esito = leggi_csc_servizi("099002", home=BORNO_HOME, comune="Inf", fetch=fetch)
+    fetch_pagine = [k for k in log if "pagenum=" in k]
+    assert len(fetch_pagine) == MAX_PAGINE  # fermato dal cap, non oltre
+    assert any("limite hard" in n for n in esito.note)
 
 
 def test_categoria_muta_si_ferma_subito():

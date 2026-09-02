@@ -65,6 +65,8 @@ import {
   type InfoWebResult,
   type ServiceLinkOut,
   type ServiceOut,
+  type ServizioScelto,
+  type VoceServizioAmbiguo,
   type Match,
   type Requirements,
 } from "@/lib/api";
@@ -1119,7 +1121,11 @@ export default function Chat() {
     return `m${nextId.current}`;
   }
 
-  async function send(text: string, comuneIstatScelto?: string) {
+  async function send(
+    text: string,
+    comuneIstatScelto?: string,
+    servizioScelto?: ServizioScelto,
+  ) {
     const trimmed = text.trim();
     if (!trimmed || busy || invioInCorso.current || rimozioneInCorso.current) return;
     invioInCorso.current = true;
@@ -1146,6 +1152,7 @@ export default function Chat() {
         comuneIstatScelto ?? profilo.comune?.istat ?? null,
         overrideSessione.length > 0 ? overrideSessione : null,
         chiarimentoPendente,
+        servizioScelto ?? null,
       );
       // Lo slot appena rimandato vale solo per questo turno (D-04): si
       // azzera qui e si ripopola solo se la risposta ne apre uno nuovo.
@@ -1379,6 +1386,21 @@ export default function Chat() {
     if (lastUser) send(lastUser.content, cand.codice_istat);
   }
 
+  // Disambiguazione servizio a un tap (Ramo 3, contratto ≥2): il comune
+  // pubblica più servizi confermati per la stessa chiave, l'utente sceglie
+  // quello giusto e rimandiamo la STESSA domanda con l'id opaco. Il comune
+  // resta quello del turno (nessun `comuneIstatScelto`): stiamo scegliendo il
+  // servizio, non il comune. `service_id` viaggia verbatim — la UI non lo
+  // interpreta, il backend lo valida contro l'insieme confermato del turno.
+  function scegliServizio(voce: VoceServizioAmbiguo, serviceKey: string) {
+    const lastUser = [...messages].reverse().find((m) => m.role === "user");
+    if (lastUser)
+      send(lastUser.content, undefined, {
+        service_id: voce.service_id,
+        service_key: serviceKey,
+      });
+  }
+
   /**
    * Geolocation tells us where the citizen is *standing*, never where they
    * are *resident* — the two are routinely different (someone at the URP
@@ -1603,6 +1625,50 @@ export default function Chat() {
                 ))}
               </div>
             )}
+
+            {/* Servizio ambiguo (Ramo 3, contratto ≥2): il comune pubblica più
+                servizi confermati per la stessa chiave. Si espone la scelta
+                raggruppata per intento — non si elegge (I-1). Un tap sceglie e
+                rimanda la domanda con l'id opaco; TIQ mostra la porta, non entra
+                (titoli/URL solo nei campi, mai interpolati — D-07). */}
+            {m.reply?.servizi_ambigui &&
+              m.reply.servizi_ambigui.gruppi.length > 0 && (
+                <div
+                  className="scelta-servizio"
+                  role="group"
+                  aria-label="Scegli il servizio"
+                >
+                  {(() => {
+                    // Catturata una volta: la chiave del turno è la stessa per
+                    // ogni voce, e legarla qui evita l'assertion non-null dentro
+                    // la closure dell'onClick.
+                    const serviceKey = m.reply.servizi_ambigui.service_key;
+                    return m.reply.servizi_ambigui.gruppi.map((gruppo) => (
+                      <div
+                        className="scelta-servizio__gruppo"
+                        key={gruppo.intento}
+                      >
+                        <p className="scelta-servizio__etichetta">
+                          {gruppo.etichetta}
+                        </p>
+                        {gruppo.voci.map((voce) => (
+                          <button
+                            type="button"
+                            key={voce.service_id}
+                            className="scelta-servizio__scheda"
+                            onClick={() => scegliServizio(voce, serviceKey)}
+                            disabled={busy}
+                          >
+                            <span className="scelta-servizio__titolo">
+                              {voce.title}
+                            </span>
+                          </button>
+                        ))}
+                      </div>
+                    ));
+                  })()}
+                </div>
+              )}
 
             {/* D-52/D-53 (acc1): quello che TIQ ha capito, TUTTO nella stessa
                 riga. Il sesso dedotto dal nome e l'età non sono più testo

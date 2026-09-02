@@ -28,6 +28,12 @@ class DataStatus(str, Enum):
     STALE = "stale"
     UNREADABLE = "unreadable"
     FAILED = "failed"
+    #: ≥2 servizi confermati per la stessa ServiceKey: nessuno è "quello giusto"
+    #: da eleggere (il gate exactly-one rifiuta), ma i candidati sono validi e
+    #: vanno esposti come SCELTA al cittadino. Distinto da NOT_FOUND (0 = miss
+    #: onesto) e da FULFILLED (1 = risoluzione singola). Non promuovibile né
+    #: cacheabile: è una lista di riferimenti del turno, non un dato risolto.
+    DISAMBIGUATION = "disambiguation"
 
 
 class FreshnessPolicy(_StrictModel):

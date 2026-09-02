@@ -45,6 +45,7 @@ from treasureiq.chat.respond import (
     ChatAnswer,
     InfoAnswer,
     RecoveryStats,
+    ServizioScelto,
     approfondisci_nel_comune,
     build_chat_answer,
     compute_recovery_stats,
@@ -670,6 +671,19 @@ class FiltroOverride(BaseModel):
     azione: Literal["rimuovi"] = "rimuovi"
 
 
+class ServizioSceltoIn(BaseModel):
+    """La scelta del cittadino dopo una disambiguazione ≥2 (round-trip strutturato).
+
+    Come `comune_istat`, è un campo STRUTTURATO — mai testo libero: il client
+    rimanda il `service_id` OPACO ricevuto nella lista e la `service_key` del
+    turno. Il resolver ri-deriva l'insieme confermato e valida la scelta
+    server-side; un `service_id` fuori insieme è rifiutato (miss onesto), mai
+    risolto al vicino. La scelta non entra in cache (I-1)."""
+
+    service_id: str = Field(min_length=1, max_length=200)
+    service_key: str = Field(min_length=1, max_length=64)
+
+
 class ChatIn(BaseModel):
     message: str
     #: The exchange so far. The client had been sending this all along and the
@@ -700,6 +714,11 @@ class ChatIn(BaseModel):
     chiarimento_atteso: (
         Literal["figli_quanti", "disabile_minorenne", "composizione_famiglia"] | None
     ) = None
+    #: Ramo 3 ≥2: la scelta del cittadino dopo una lista di disambiguazione. Il
+    #: client la rimanda nel turno successivo (service_id opaco + service_key);
+    #: `None` nel caso normale. Intercettata prima del routing per topic:
+    #: un'intenzione strutturata, non una frase da riclassificare.
+    servizio_scelto: ServizioSceltoIn | None = None
 
 
 class ComuneScelta(BaseModel):
@@ -840,6 +859,38 @@ class ServiceOut(BaseModel):
     information: ServiceLinkOut | None
     downloads: list[ServiceLinkOut] = []
     authenticated_online: list[ServiceLinkOut] = []
+
+
+class VoceServizioAmbiguoOut(BaseModel):
+    """Una scelta della lista di disambiguazione (Ramo 3, ≥2).
+
+    `service_id` è l'identificatore OPACO che il client rimanda per scegliere
+    (mai testo libero). Solo la pagina informativa: le opzioni piene (moduli,
+    procedure) si risolvono dopo la scelta."""
+
+    service_id: str
+    title: str
+    url: str
+
+
+class GruppoServiziAmbiguiOut(BaseModel):
+    """Un bucket di intento con le sue voci, in ordine fisso di presentazione.
+
+    `intento` è la chiave stabile (valore enum) per il client; `etichetta` è la
+    stringa umana già pronta per la UI."""
+
+    intento: str
+    etichetta: str
+    voci: list[VoceServizioAmbiguoOut]
+
+
+class ServiziAmbiguiOut(BaseModel):
+    """Esito ≥2 per la UI: la ServiceKey ha confermato più servizi, nessuno
+    eletto. `service_key` torna nel turno di scelta insieme al `service_id`
+    (campo `ChatIn.servizio_scelto`)."""
+
+    service_key: str
+    gruppi: list[GruppoServiziAmbiguiOut]
 
 
 class InfoOut(BaseModel):
@@ -1264,6 +1315,10 @@ class ChatOut(BaseModel):
     chiarimento: (
         Literal["figli_quanti", "disabile_minorenne", "composizione_famiglia"] | None
     ) = None
+    #: Ramo 3 ≥2: più servizi confermati per la stessa ServiceKey, nessuno
+    #: eletto. La UI mostra la lista raggruppata per intento; la scelta torna nel
+    #: turno dopo via `ChatIn.servizio_scelto`. `None` fuori dal caso ≥2.
+    servizi_ambigui: ServiziAmbiguiOut | None = None
 
 
 class ConversationMessageOut(BaseModel):
@@ -2897,6 +2952,16 @@ async def chat(body: ChatIn, request: Request, response: Response) -> ChatOut:
         comune_coperto=comune_coperto,
         filtri_esclusi=filtri_esclusi,
         filtri_accumulati=filtri_conversazione,
+        # Ramo 3 ≥2: la scelta strutturata del cittadino (service_id opaco), se
+        # il turno la porta. Intercettata prima del routing per topic.
+        servizio_scelto=(
+            ServizioScelto(
+                service_id=body.servizio_scelto.service_id,
+                service_key=body.servizio_scelto.service_key,
+            )
+            if body.servizio_scelto is not None
+            else None
+        ),
     )
 
     # Ciclo11/A6-L-3: proiezione reale sul ChatOut — stesso filtro escluso
@@ -3037,6 +3102,26 @@ async def chat(body: ChatIn, request: Request, response: Response) -> ChatOut:
         esito_connettore=answer.esito_connettore,
         filtri=filtri_out,
         chiarimento=getattr(answer, "chiarimento", None),
+        servizi_ambigui=(
+            ServiziAmbiguiOut(
+                service_key=answer.servizi_ambigui.service_key,
+                gruppi=[
+                    GruppoServiziAmbiguiOut(
+                        intento=g.intento,
+                        etichetta=g.etichetta,
+                        voci=[
+                            VoceServizioAmbiguoOut(
+                                service_id=v.service_id, title=v.title, url=v.url
+                            )
+                            for v in g.voci
+                        ],
+                    )
+                    for g in answer.servizi_ambigui.gruppi
+                ],
+            )
+            if getattr(answer, "servizi_ambigui", None) is not None
+            else None
+        ),
     )
     conversation_store.append_message(conversation.conversation_id, "assistant", output.reply)
     return output

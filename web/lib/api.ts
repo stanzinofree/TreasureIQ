@@ -484,6 +484,44 @@ export interface ServiceOut {
   authenticated_online: ServiceLinkOut[];
 }
 
+/** Una voce della lista di scelta ≥2 (Ramo 3, disambiguazione). Mirror di
+ * `VoceServizioAmbiguoOut` (`api.py`). `service_id` è opaco: la UI lo rimanda
+ * verbatim come `ServizioScelto.service_id`, non lo interpreta né lo compone. */
+export interface VoceServizioAmbiguo {
+  service_id: string;
+  title: string;
+  url: string;
+}
+
+/** Un gruppo di servizi con lo stesso intento d'azione (calcolatore,
+ * agevolazione, …). Mirror di `GruppoServiziAmbiguiOut`. `etichetta` è la
+ * dicitura umana già composta dal backend: la UI la rende, non la deduce da
+ * `intento`. */
+export interface GruppoServiziAmbigui {
+  intento: string;
+  etichetta: string;
+  voci: VoceServizioAmbiguo[];
+}
+
+/** La lista di scelta quando il comune pubblica ≥2 servizi confermati per la
+ * stessa chiave (contratto universale). Mirror di `ServiziAmbiguiOut`. Non è
+ * un verdetto e non è cacheabile (I-1): si espone la scelta, TIQ non elegge.
+ * Un tap su una voce rimanda la domanda con `ServizioScelto`. */
+export interface ServiziAmbigui {
+  service_key: string;
+  gruppi: GruppoServiziAmbigui[];
+}
+
+/** La scelta di UNA reference fra quelle esposte da `ServiziAmbigui`. Mirror di
+ * `ServizioSceltoIn` (`api.py`): intento strutturato, non testo. `service_id`
+ * è l'id opaco della voce; `service_key` è la chiave del turno (echo di
+ * `ServiziAmbigui.service_key`). Validati server-side contro l'insieme
+ * confermato del turno — un id fuori insieme → miss URP, mai il vicino. */
+export interface ServizioScelto {
+  service_id: string;
+  service_key: string;
+}
+
 export interface InfoOut {
   document: InfoDocument | null;
   office: InfoOffice | null;
@@ -839,6 +877,11 @@ export interface ChatOut {
    *  `ChatIn.chiarimento_atteso` nel turno immediatamente successivo, poi
    *  la azzera (uno slot vale un turno, non bloccante — D-04). */
   chiarimento?: Chiarimento | null;
+  /** Ramo 3 — lista di scelta quando il comune pubblica ≥2 servizi confermati
+   *  per la stessa chiave (contratto universale). `null`/assente nel caso
+   *  normale (0 → miss, 1 → risolto). La UI la rende come schede raggruppate;
+   *  un tap rimanda la domanda con `ServizioScelto`. Non cacheabile (I-1). */
+  servizi_ambigui?: ServiziAmbigui | null;
 }
 
 export interface SourceAccess {
@@ -1089,6 +1132,7 @@ export const chat = (
   comuneIstat: string | null = null,
   filtriOverride: FiltroOverride[] | null = null,
   chiarimentoAtteso: Chiarimento | null = null,
+  servizioScelto: ServizioScelto | null = null,
 ) =>
   call<ChatOut>("/api/chat", {
     method: "POST",
@@ -1098,6 +1142,7 @@ export const chat = (
       comune_istat: comuneIstat,
       filtri_override: filtriOverride,
       chiarimento_atteso: chiarimentoAtteso,
+      servizio_scelto: servizioScelto,
     }),
   });
 

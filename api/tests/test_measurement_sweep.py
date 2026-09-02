@@ -9,6 +9,7 @@ resolver) — più il fatto che l'unico output su disco è la cartella scratch.
 from __future__ import annotations
 
 import json
+import types
 from pathlib import Path
 
 from treasureiq.catalog import measurement_sweep as ms
@@ -516,3 +517,69 @@ def test_campione_deterministico_e_stratificato(tmp_path: Path, monkeypatch):
     assert fam == {"wp", "comweb"}
     assert sum(1 for c in a if c.base_famiglia == "wp") == 4  # cap per famiglia
     assert sum(1 for c in a if c.base_famiglia == "comweb") == 3  # meno del cap → tutti
+
+
+# --------------------------------------------------------------------------- #
+# Step 2: budget per dominio configurabile + budget effettivo nel report
+# --------------------------------------------------------------------------- #
+def test_nuovo_esecutore_budget_configurabile():
+    # Default = costante; alzarlo cambia SOLO il tetto per dominio.
+    assert ms._nuovo_esecutore()._politica._budget._massimo == ms._MASSIMO_PER_DOMINIO
+    assert ms._nuovo_esecutore(budget_dominio=500)._politica._budget._massimo == 500
+
+
+def test_report_registra_parametri_misura(tmp_path: Path):
+    checkpoint = tmp_path / "checkpoint.jsonl"
+    ms._append_checkpoint(checkpoint, ms.Misura(
+        "001", "wp", True, "imu", "imu", "tributi_imu", "tributi_imu",
+        True, ms.ESITO_FULFILLED, 1, 1, 1))
+    par = {"budget_dominio": 500, "budget_dominio_default": 50, "classifica_fallite": True}
+    report = ms.costruisci_report(checkpoint, parametri=par)
+    assert report["parametri_misura"] == par
+    # Compat: senza parametri il report li espone come {} (i vecchi non li avevano).
+    assert ms.costruisci_report(checkpoint)["parametri_misura"] == {}
+
+
+# --------------------------------------------------------------------------- #
+# Step 2: ProbeFallita separata nelle 4 cause distinte (opt-in, read-only)
+# --------------------------------------------------------------------------- #
+def test_classifica_portale_fallito_quattro_cause():
+    comune = types.SimpleNamespace(sito="http://comune.maddaloni.ce.it")
+    # redirect off-host verso il dominio canonico DELLO STESSO comune, 200.
+    assert ms._classifica_portale_fallito(
+        comune, fetch=lambda b: ("comune.maddaloni.caserta.it", 200)
+    ) == ms.NOTA_REDIRECT_URL_OBSOLETO
+    # redirect verso dominio NON riconducibile al comune → vero off-host.
+    assert ms._classifica_portale_fallito(
+        comune, fetch=lambda b: ("sito-estraneo.com", 200)
+    ) == ms.NOTA_RISPOSTA_INVALIDA
+    # nessuna risposta (timeout/conn/DNS) → infra muta.
+    assert ms._classifica_portale_fallito(
+        comune, fetch=lambda b: None
+    ) == ms.NOTA_ENDPOINT_MUTO_MAPPA
+    # home 200 sull'host atteso ma non mappabile → classe storica non-sondabile.
+    assert ms._classifica_portale_fallito(
+        comune, fetch=lambda b: ("comune.maddaloni.ce.it", 200)
+    ) == ms.NOTA_PORTALE_NON_SONDABILE
+
+
+def test_classificatore_opt_in_non_altera_default(monkeypatch):
+    # Sonda che fallisce sempre; il comune esiste e la cache è vuota.
+    monkeypatch.setattr(ms, "_mappa_da_cache", lambda istat: None)
+    monkeypatch.setattr(
+        ms, "comune_per_codice",
+        lambda istat: types.SimpleNamespace(sito="http://x.it", codice_istat=istat))
+
+    def _fallisce(comune, *, esecutore):
+        raise ms.ProbeFallita("boom")
+
+    monkeypatch.setattr(ms, "_sonda_mappa", _fallisce)
+
+    # Default (classificatore=None): comportamento storico invariato, nessuna rete.
+    _, nota = ms._risolvi_mappa_live("001", esecutore=None)
+    assert nota == ms.NOTA_PORTALE_NON_SONDABILE
+    # Opt-in: la nota viene dal classificatore iniettato (qui uno stub, zero rete).
+    _, nota = ms._risolvi_mappa_live(
+        "001", esecutore=None,
+        classificatore=lambda c: ms.NOTA_REDIRECT_URL_OBSOLETO)
+    assert nota == ms.NOTA_REDIRECT_URL_OBSOLETO

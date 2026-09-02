@@ -67,6 +67,9 @@ from collections import Counter, defaultdict
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable, Sequence
+from urllib.parse import urlparse
+
+import httpx
 
 from treasureiq.catalog.connector_registry import ConnectorRegistry
 from treasureiq.catalog.data_contracts import DataStatus
@@ -83,8 +86,10 @@ from treasureiq.chat.service_key import riconosci_service_key
 from treasureiq.mappa_connettore import (
     ProbeBudgetEsaurito,
     ProbeFallita,
+    _base_con_schema,
     _sonda_mappa,
     comune_per_codice,
+    host_senza_www,
 )
 from treasureiq.mappa_connettore import (
     _da_cache as _mappa_da_cache,
@@ -119,6 +124,29 @@ _ESITI = (
 #: separare l'endpoint muto (transient) dall'assenza reale. Default prudenti.
 _RETRY_ENDPOINT = 2
 _BACKOFF_S = 2.0
+
+#: Budget di fetch per dominio (rate-limit dell'esecutore per-sweep). Configurabile
+#: da CLI: alzarlo recupera i comuni caduti in ``budget_probe_esaurito`` (artefatto
+#: di misura, non assenza reale) senza toccare il rate-limit temporale.
+_MASSIMO_PER_DOMINIO = 50
+
+#: Cause di ``comune_non_risolto`` quando la sonda mappa fallisce. Prima erano
+#: collassate in un unico ``portale_non_sondabile``; l'audit dei drift ha mostrato
+#: che ``ProbeFallita`` mescola realtà distinte. La classificazione (opt-in) le separa:
+#:   - ``redirect_url_obsoleto`` : la home dichiarata 301/302 fuori host verso il
+#:     dominio canonico DELLO STESSO comune (URL stale nel registro), finale 200;
+#:   - ``endpoint_muto``         : nessuna risposta (timeout/conn/DNS) → infra transient;
+#:   - ``risposta_invalida``     : server risponde ma non-200, o redirect off-host
+#:     verso un dominio NON riconducibile al comune (vero off-host);
+#:   - ``portale_non_sondabile`` : home 200 sull'host atteso ma non interpretabile
+#:     come portale (raggiungibile ma vuota) — la classe storica, mantenuta.
+NOTA_REDIRECT_URL_OBSOLETO = "redirect_url_obsoleto"
+NOTA_ENDPOINT_MUTO_MAPPA = "endpoint_muto"
+NOTA_RISPOSTA_INVALIDA = "risposta_invalida"
+NOTA_PORTALE_NON_SONDABILE = "portale_non_sondabile"
+
+#: Timeout del singolo GET diagnostico della classificazione (read-only, no retry).
+_TIMEOUT_CLASSIFICA_S = 8.0
 
 # --- provenienza (il tier del resolver che ha prodotto l'esito) ---------------
 #: Secondo asse, ortogonale all'esito: `catalog`/`cache` = servito zero-rete dal
@@ -319,24 +347,91 @@ def campiona(
 
 
 # --- misura -------------------------------------------------------------------
-def _nuovo_esecutore() -> EsecutoreFetch:
+def _nuovo_esecutore(budget_dominio: int = _MASSIMO_PER_DOMINIO) -> EsecutoreFetch:
     """Un esecutore per-sweep (rate-limit/budget per dominio).
 
     Prudente di default: il worker tocca molti comuni, alcuni su host SaaS
     condivisi, quindi l'esecutore ricorda gli host già visti nel lotto. Serve
     sia alla sonda-mappa che alla discovery-servizi, quindi è condiviso.
+
+    ``budget_dominio`` (``massimo_per_dominio``) è configurabile: solo il tetto
+    di fetch per host cambia, il rate-limit temporale e il backoff restano fissi.
     """
     return EsecutoreFetch(
         PoliticaFetch(
             intervallo_minimo_s=1.0,
-            massimo_per_dominio=50,
+            massimo_per_dominio=budget_dominio,
             backoff_base_s=60.0,
             backoff_cap_s=3600.0,
         )
     )
 
 
-def _risolvi_mappa_live(codice_istat: str, *, esecutore):
+def _fetch_home_finale(base: str, *, timeout_s: float = _TIMEOUT_CLASSIFICA_S):
+    """Un GET read-only che segue i redirect; ritorna ``(host_finale, status)``
+    oppure ``None`` se l'host è muto (timeout/conn/DNS). Nessuna scrittura.
+
+    Isolato apposta per essere iniettabile nei test senza toccare la rete.
+    """
+    try:
+        with httpx.Client(follow_redirects=True, timeout=timeout_s) as c:
+            r = c.get(base)
+    except httpx.HTTPError:
+        return None
+    host_finale = host_senza_www((urlparse(str(r.url)).hostname or "").lower())
+    return host_finale, r.status_code
+
+
+def _core_comune(host: str) -> str:
+    """Nucleo alfabetico del nome comune in un host, per confronto same-comune.
+
+    Toglie TLD/prefissi generici e le sigle provincia (etichette ≤2 lettere),
+    poi concatena. Es. ``comune.maddaloni.ce.it`` → ``maddaloni`` e
+    ``comune.maddaloni.caserta.it`` → ``maddalonicaserta`` (contenimento OK).
+    Euristica deliberata: serve solo a etichettare la causa, non a promuovere dati.
+    """
+    generici = {"www", "it", "gov", "org", "eu", "net", "com"}
+    prefissi = ("comunedi", "cittadi", "citta", "comune")
+    labels = [l for l in host.split(".") if l and l not in generici and len(l) > 2]
+    nucleo = "".join(labels)
+    for p in prefissi:
+        if nucleo.startswith(p) and len(nucleo) > len(p) + 3:
+            nucleo = nucleo[len(p):]
+            break
+    return nucleo
+
+
+def _stesso_comune(host_atteso: str, host_finale: str) -> bool:
+    a, b = _core_comune(host_atteso), _core_comune(host_finale)
+    if len(a) < 4 or len(b) < 4:
+        return False
+    return a in b or b in a
+
+
+def _classifica_portale_fallito(comune, *, fetch=_fetch_home_finale) -> str:
+    """Classifica una ``ProbeFallita`` in una delle 4 cause distinte.
+
+    Un solo GET read-only (via ``fetch``), zero scritture. Vedi le costanti
+    ``NOTA_*`` per la semantica delle classi.
+    """
+    base = _base_con_schema(comune.sito) if getattr(comune, "sito", None) else None
+    if not base:
+        return NOTA_ENDPOINT_MUTO_MAPPA
+    host_atteso = host_senza_www((urlparse(base).hostname or "").lower())
+    esito = fetch(base)
+    if esito is None:
+        return NOTA_ENDPOINT_MUTO_MAPPA
+    host_finale, status = esito
+    if host_finale == host_atteso:
+        # raggiungibile on-host ma la sonda guardata non ha mappato: vuota/anomala.
+        return NOTA_PORTALE_NON_SONDABILE
+    if status == 200 and _stesso_comune(host_atteso, host_finale):
+        # redirect fuori host verso il dominio canonico dello stesso comune.
+        return NOTA_REDIRECT_URL_OBSOLETO
+    return NOTA_RISPOSTA_INVALIDA
+
+
+def _risolvi_mappa_live(codice_istat: str, *, esecutore, classificatore=None):
     """Mappa-connettore del comune: cache prima, sonda live sul miss, MAI scrive.
 
     ``mappa_connettore()`` scriverebbe la cache dopo la sonda (``_in_cache``):
@@ -344,6 +439,11 @@ def _risolvi_mappa_live(codice_istat: str, *, esecutore):
     la misura resta a scrittura-zero. Ritorna ``(mappa, nota)``: ``mappa`` è
     ``None`` quando il comune è ignoto al registro o il portale non è sondabile,
     con ``nota`` che ne distingue la causa.
+
+    ``classificatore`` (opt-in): se passato, una ``ProbeFallita`` viene separata
+    nelle 4 cause distinte (vedi ``NOTA_*``) con un GET read-only; se ``None`` la
+    causa resta la classe storica ``portale_non_sondabile`` (nessuna rete extra,
+    comportamento di default invariato).
     """
     voce = _mappa_da_cache(codice_istat)
     if voce is not None:
@@ -356,7 +456,9 @@ def _risolvi_mappa_live(codice_istat: str, *, esecutore):
     except ProbeBudgetEsaurito:
         return None, "budget_probe_esaurito"
     except ProbeFallita:
-        return None, "portale_non_sondabile"
+        if classificatore is None:
+            return None, NOTA_PORTALE_NON_SONDABILE
+        return None, classificatore(comune)
 
 
 def _entry_host(connettore, richiesta, mappa) -> str:
@@ -449,6 +551,7 @@ def misura_coppia(
     backoff_s: float = _BACKOFF_S,
     host_raggiungibili: dict[str, bool] | None = None,
     catalog_registry: ConnectorRegistry | None = None,
+    classificatore=None,
 ) -> Misura:
     """Misura una singola ``(comune, probe)`` — nessuna scrittura.
 
@@ -506,7 +609,9 @@ def misura_coppia(
         prov = PROV_CATALOG if risolto.connector.name == _CATALOG_CONNECTOR.name else PROV_CACHE
         return _riga(ESITO_FULFILLED, confermati=1, note=nota_fp, provenienza=prov)
 
-    mappa, nota_mappa = _risolvi_mappa_live(comune.codice_istat, esecutore=esecutore)
+    mappa, nota_mappa = _risolvi_mappa_live(
+        comune.codice_istat, esecutore=esecutore, classificatore=classificatore
+    )
     if mappa is None:
         return _riga(ESITO_COMUNE_NON_RISOLTO, note=(nota_fp or nota_mappa))
 
@@ -589,9 +694,13 @@ def _leggi_misure(checkpoint: Path) -> list[dict]:
     return righe
 
 
-def costruisci_report(checkpoint: Path) -> dict:
+def costruisci_report(checkpoint: Path, parametri: dict | None = None) -> dict:
     """Aggregato dal checkpoint: esiti totali, per famiglia Base, per tag AT,
     e i segnali di riconoscimento (miss / falsi positivi) per la Fase 2.
+
+    ``parametri`` registra le condizioni di misura (budget per dominio effettivo,
+    rate-limit, retry, seed…) così ogni report dice sotto quale budget è stato
+    prodotto. ``None``/assente → ``{}`` (compat: i vecchi report non lo avevano).
     """
     misure = _leggi_misure(checkpoint)
     tot = Counter(m["esito"] for m in misure)
@@ -647,6 +756,7 @@ def costruisci_report(checkpoint: Path) -> dict:
     ]
     comuni = {m["codice_istat"] for m in misure}
     return {
+        "parametri_misura": parametri or {},
         "coppie_misurate": len(misure),
         "coppie_riconoscibili": len(reali),
         "comuni": len(comuni),
@@ -675,6 +785,14 @@ def _stampa_report(report: dict) -> None:
         f"coppie misurate: {report['coppie_misurate']}  |  comuni: {report['comuni']}  "
         f"|  di cui riconoscibili: {report.get('coppie_riconoscibili', 0)}"
     )
+    par = report.get("parametri_misura") or {}
+    if par:
+        marca = "" if par.get("budget_dominio") == par.get("budget_dominio_default") else " (ALZATO)"
+        print(
+            f"parametri: budget/dominio={par.get('budget_dominio')}{marca}  "
+            f"rate={par.get('intervallo_minimo_s')}s  retry={par.get('tentativi_endpoint')}  "
+            f"classifica_fallite={par.get('classifica_fallite')}  seed={par.get('seed')}"
+        )
     attesa = report.get("chiave_non_riconosciuta_attesa", 0)
     print(
         "\nesiti (denominatore = probe riconoscibili; i probe fuori-vocabolario\n"
@@ -739,18 +857,40 @@ def esegui(
     limite_comuni: int | None = None,
     tentativi: int = _RETRY_ENDPOINT,
     backoff_s: float = _BACKOFF_S,
+    budget_dominio: int = _MASSIMO_PER_DOMINIO,
+    classifica_fallite: bool = False,
 ) -> dict:
     """Esegue lo sweep di misura e ritorna il report. Nessuna scrittura fuori
-    da ``out`` (checkpoint + report). Riprende dal checkpoint esistente.
+    da ``out`` (checkpoint + report + parametri). Riprende dal checkpoint esistente.
+
+    ``budget_dominio`` è il tetto di fetch per host (rate-limit budget). Con
+    ``classifica_fallite`` ogni ``ProbeFallita`` viene separata nelle 4 cause
+    distinte (redirect/URL obsoleto, endpoint muto, risposta invalida,
+    non-sondabile) con un GET read-only; di default resta OFF (sweep nazionale
+    invariato e più veloce).
     """
     out.mkdir(parents=True, exist_ok=True)
     checkpoint = out / "checkpoint.jsonl"
+    parametri = {
+        "budget_dominio": budget_dominio,
+        "budget_dominio_default": _MASSIMO_PER_DOMINIO,
+        "intervallo_minimo_s": 1.0,
+        "tentativi_endpoint": tentativi,
+        "backoff_s": backoff_s,
+        "classifica_fallite": classifica_fallite,
+        "seed": seed,
+        "per_famiglia": per_famiglia,
+    }
+    (out / "parametri.json").write_text(
+        json.dumps(parametri, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
     campione = campiona(db, per_famiglia=per_famiglia, seed=seed)
     if limite_comuni is not None:
         campione = campione[:limite_comuni]
     fatte = _carica_fatte(checkpoint)
-    esecutore = _nuovo_esecutore()
+    esecutore = _nuovo_esecutore(budget_dominio=budget_dominio)
     registry = default_service_registry(esecutore)
+    classificatore = _classifica_portale_fallito if classifica_fallite else None
     da_fare = [
         (c, p) for c in campione for p in probes if (c.codice_istat, p.probe_id) not in fatte
     ]
@@ -767,11 +907,12 @@ def esegui(
             comune, probe, registry=registry, esecutore=esecutore,
             tentativi=tentativi, backoff_s=backoff_s,
             host_raggiungibili=host_raggiungibili,
+            classificatore=classificatore,
         )
         _append_checkpoint(checkpoint, misura)
         if i % 25 == 0 or i == len(da_fare):
             print(f"  … {i}/{len(da_fare)}  (ultimo: {misura.esito} @ {comune.codice_istat})")
-    report = costruisci_report(checkpoint)
+    report = costruisci_report(checkpoint, parametri=parametri)
     (out / "report.json").write_text(
         json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8"
     )
@@ -800,6 +941,14 @@ def main(argv: Iterable[str] | None = None) -> int:
                         help="retry dello stesso endpoint sul 0-grezzi (muto vs assenza).")
     parser.add_argument("--backoff-s", type=float, default=_BACKOFF_S,
                         help="backoff base (s) tra i retry; 0 = nessuna attesa.")
+    parser.add_argument("--budget-dominio", type=int, default=_MASSIMO_PER_DOMINIO,
+                        help=(f"tetto di fetch per host (rate-limit budget); default "
+                              f"{_MASSIMO_PER_DOMINIO}. Alzarlo recupera i casi "
+                              "budget_probe_esaurito senza toccare il rate-limit temporale."))
+    parser.add_argument("--classifica-fallite", action="store_true",
+                        help=("separa ogni ProbeFallita nelle 4 cause distinte "
+                              "(redirect/URL obsoleto, endpoint muto, risposta invalida, "
+                              "non-sondabile) con un GET read-only; OFF di default."))
     args = parser.parse_args(list(argv) if argv is not None else None)
 
     if args.solo_report:
@@ -807,7 +956,9 @@ def main(argv: Iterable[str] | None = None) -> int:
         if not checkpoint.exists():
             print(f"nessun checkpoint in {checkpoint}", file=sys.stderr)
             return 1
-        _stampa_report(costruisci_report(checkpoint))
+        par_file = args.out / "parametri.json"
+        parametri = json.loads(par_file.read_text(encoding="utf-8")) if par_file.exists() else None
+        _stampa_report(costruisci_report(checkpoint, parametri=parametri))
         return 0
 
     esegui(
@@ -818,6 +969,8 @@ def main(argv: Iterable[str] | None = None) -> int:
         limite_comuni=args.limite_comuni,
         tentativi=args.tentativi,
         backoff_s=args.backoff_s,
+        budget_dominio=args.budget_dominio,
+        classifica_fallite=args.classifica_fallite,
     )
     return 0
 

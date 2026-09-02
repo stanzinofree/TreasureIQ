@@ -25,6 +25,7 @@ from treasureiq.catalog.connector_registry import ConnectorRegistry
 from treasureiq.catalog.contracts import CAPABILITY_SERVICES, ConnectorRef, Surface
 from treasureiq.catalog.data_contracts import DataRequest, DataStatus
 from treasureiq.catalog.service_contracts import (
+    DisambiguazioneServizi,
     ResolvedService,
     ServiceKey,
     ServiceReference,
@@ -77,6 +78,27 @@ def resolve_service_with_meta(
     registry: ConnectorRegistry | None = None,
     platform_id: str = "",
 ) -> ResolvedService | None:
+    """Cache-first resolution into a ``ResolvedService`` envelope, single only.
+
+    Thin façade over ``risolvi_o_disambigua`` for the callers that want exactly
+    the one-service case: a ≥2 ``DisambiguazioneServizi`` collapses to ``None``
+    (the historical behaviour — a miss to the caller — so nothing regresses until
+    a caller opts into the disambiguation branch explicitly).
+    """
+    esito_r = risolvi_o_disambigua(
+        request, mappa=mappa, esito=esito, registry=registry, platform_id=platform_id
+    )
+    return esito_r if isinstance(esito_r, ResolvedService) else None
+
+
+def risolvi_o_disambigua(
+    request: DataRequest,
+    *,
+    mappa: MappaConnettore,
+    esito: EsitoConnettore | None = None,
+    registry: ConnectorRegistry | None = None,
+    platform_id: str = "",
+) -> ResolvedService | DisambiguazioneServizi | None:
     """Cache-first resolution into a ``ResolvedService`` envelope (reference + provenance).
 
     Fresh cache-hit → ``ResolvedService(from_cache=True)`` with the cached
@@ -140,6 +162,26 @@ def resolve_service_with_meta(
 
     result = connector.retrieve(request, mappa=mappa, esito=esito)
 
+    # ≥2 confermati: il connettore emette DISAMBIGUATION con TUTTE le reference
+    # (leggere). Non è un miss e non è cacheabile — è la lista del turno, esposta
+    # come scelta. Nessun write-back: cacheare una scelta poisonerebbe la key per
+    # tutti. La selezione torna via ``seleziona_servizio`` (service_id opaco).
+    if result.status is DataStatus.DISAMBIGUATION:
+        if result.source_id != request.source_id or result.request_id != request.request_id:
+            return None
+        if len(result.service_references) < 2:
+            return None
+        retrieved_at = (
+            result.retrieved_at
+            or result.freshness.retrieved_at
+            or datetime.now(timezone.utc)
+        )
+        return DisambiguazioneServizi(
+            references=result.service_references,
+            retrieved_at=retrieved_at,
+            connector=result.connector,
+        )
+
     # Guard 2: exactly one reference. Zero is a miss; more than one demands an
     # explicit decision at a higher level, never an implicit pick here.
     if result.status is not DataStatus.FULFILLED:
@@ -194,3 +236,60 @@ def resolve_service(
         request, mappa=mappa, esito=esito, registry=registry, platform_id=platform_id
     )
     return resolved.reference if resolved is not None else None
+
+
+def seleziona_servizio(
+    request: DataRequest,
+    *,
+    mappa: MappaConnettore,
+    service_id: str,
+    registry: ConnectorRegistry | None = None,
+    platform_id: str = "",
+) -> ResolvedService | None:
+    """Risolve la scelta del cittadino (un ``service_id`` opaco) dopo una
+    disambiguazione, come lookup puro dentro l'insieme confermato del turno.
+
+    Delega a ``connector.seleziona``, che ri-deriva l'insieme e accetta SOLO un
+    id appartenente ad esso (id ignoto → NOT_FOUND, mai il vicino). L'esito è un
+    ``ResolvedService`` con opzioni piene (la sola pagina scelta viene letta), ma
+    **non** viene cacheato: la scelta è del turno, non un dato promosso per la
+    key (cacheare una scelta scavalcherebbe la disambiguazione per tutti).
+
+    Guardie di coerenza (surface/capability/source) identiche al resolver, così
+    una selezione non può risolvere fuori dal comune/servizio del turno.
+    """
+    if request.surface is not Surface.ORDINARY_DATA:
+        raise ValueError(
+            f"seleziona_servizio richiede Surface.ORDINARY_DATA, non {request.surface}"
+        )
+    if request.capability != CAPABILITY_SERVICES:
+        raise ValueError(
+            f"seleziona_servizio richiede capability {CAPABILITY_SERVICES!r}, "
+            f"non {request.capability!r}"
+        )
+
+    registry = registry or ConnectorRegistry()
+    connector = registry.resolve(request=request, platform_id=platform_id)
+    if connector is None:
+        return None
+
+    result = connector.seleziona(request, mappa=mappa, service_id=service_id)
+    if result.status is not DataStatus.FULFILLED:
+        return None
+    if len(result.service_references) != 1:
+        return None
+    if result.source_id != request.source_id or result.request_id != request.request_id:
+        return None
+
+    reference = result.service_references[0]
+    retrieved_at = (
+        result.retrieved_at
+        or result.freshness.retrieved_at
+        or datetime.now(timezone.utc)
+    )
+    return ResolvedService(
+        reference=reference,
+        retrieved_at=retrieved_at,
+        from_cache=False,
+        connector=result.connector,
+    )

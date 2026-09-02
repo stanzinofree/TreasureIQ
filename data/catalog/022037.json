@@ -69,6 +69,55 @@
    "discovered_from": "ordinary_data",
    "provider_platform": "openpa",
    "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "022037:openpa:587",
+   "title": "Calcolatore IMIS",
+   "source_url": "https://www.comune.campodenno.tn.it/Servizi/Calcolatore-IMIS",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.campodenno.tn.it/Servizi/Calcolatore-IMIS",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.campodenno.tn.it/Servizi/Calcolatore-IMIS",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.consulenza.comunitrentini.tn.it/imis/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.campodenno.tn.it/Servizi/Calcolatore-IMIS",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.campodenno.tn.it/ocmultibinary/download/587/9057/4/5d9eadfc8006980d38a80b72caf612dd.pdf/file/Condizioni%25252Bgenerali%25252Bdel%25252Bservizio.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.campodenno.tn.it/Servizi/Calcolatore-IMIS",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-09-02T00:00:00Z"
   }
  }
 }

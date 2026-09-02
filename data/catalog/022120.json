@@ -69,6 +69,42 @@
    "discovered_from": "ordinary_data",
    "provider_platform": "openpa",
    "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "022120:openpa:587",
+   "title": "Calcolatore IMIS",
+   "source_url": "https://www.comune.molveno.tn.it/Servizi/Calcolatore-IMIS",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.molveno.tn.it/Servizi/Calcolatore-IMIS",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.molveno.tn.it/Servizi/Calcolatore-IMIS",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.consulenza.comunitrentini.tn.it/imis/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.molveno.tn.it/Servizi/Calcolatore-IMIS",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-09-02T00:00:00Z"
   }
  }
 }

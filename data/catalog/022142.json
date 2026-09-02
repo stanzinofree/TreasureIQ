@@ -92,6 +92,29 @@
    "discovered_from": "ordinary_data",
    "provider_platform": "openpa",
    "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "022142:openpa:414",
+   "title": "Agevolazione tributaria (IMIS)",
+   "source_url": "https://www.comune.pievetesino.tn.it/Classificazioni/Cosa-puoi-richiedere/Agevolazione-tributaria-IMIS",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pievetesino.tn.it/Classificazioni/Cosa-puoi-richiedere/Agevolazione-tributaria-IMIS",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pievetesino.tn.it/Classificazioni/Cosa-puoi-richiedere/Agevolazione-tributaria-IMIS",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-09-02T00:00:00Z"
   }
  }
 }

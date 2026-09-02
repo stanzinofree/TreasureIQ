@@ -279,6 +279,26 @@ FINESTRA_ASSET = 40_000
 #: farsi riconoscere, e sopravvive al fatto che il fornitore non si nomini mai.
 _PEOPLEWEB = re.compile(r"bootstrap-italia-comuni[^\"']*\.css|assets\\bootstrap-italia", re.I)
 
+#: Siscom serve una fetta di comuni dietro una skin DotNetNuke: la home
+#: fingerprinta come DNN (`generator: DotNetNuke`, directory `/Portals/`) e
+#: sfugge alla firma PeopleWeb classica, cadendo in `dotnetnuke` — un falso
+#: confine di piattaforma, perché DNN è il motore e Siscom è il fornitore.
+#: I servizi utili vivono comunque sul SaaS Siscom (`servizipubblicaamministrazione.it`,
+#: app `saturnweb`/`venereweb`/`filodiretto`/`portalecontribuente`), non on-host.
+#: Ogni segnale da solo è troppo largo (un link isolato a un servizio Siscom di
+#: un vicino non fa un'installazione Siscom): la firma vale solo con ALMENO DUE
+#: segnali concordanti, come per Halley. La finestra è più larga di FINESTRA_ASSET
+#: perché l'host SaaS e i nomi-app compaiono anche oltre i 40 KB (menù, footer).
+FINESTRA_SISCOM = 120_000
+_SISCOM_SEGNALI: tuple[tuple[str, re.Pattern[str]], ...] = (
+    ("saas_host", re.compile(r"servizipubblicaamministrazione\.it", re.I)),
+    ("app", re.compile(r"\b(?:saturnweb|venereweb|filodiretto|portalecontribuente)\b", re.I)),
+    ("modulo_agid", re.compile(r"SiscomServiziOnLineAGID", re.I)),
+    ("vendor", re.compile(r"\bsiscom\b", re.I)),
+)
+#: Soglia di concordanza: due segnali distinti bastano a fissare il vendor.
+_SISCOM_MIN_SEGNALI = 2
+
 _META_GENERATOR = re.compile(
     r"<meta[^>]+name=[\"']generator[\"'][^>]+content=[\"'](?P<v>[^\"']{1,120})",
     re.I,
@@ -387,6 +407,10 @@ _SCORE_EURISTICO = 50.0
 #: perche' e' un aggiustamento, non una seconda gerarchia di forza.
 _RANGO_TAVOLA = {
     "header_spia": 1,
+    # Siscom prima di `generator`: due segnali vendor concordanti sono più
+    # specifici di un `generator: DotNetNuke`, che nomina il motore e non il
+    # fornitore. Così la skin DNN di Siscom vince e diventa PeopleWeb.
+    "siscom": 1,
     "generator": 2,
     "link_wp_api": 3,
     "json_api_drupal": 4,
@@ -601,6 +625,21 @@ def classifica_risposta(
                 )
             )
             break
+
+    # Siscom dietro skin DotNetNuke: due segnali vendor concordanti (host SaaS,
+    # nome-app, modulo AGID, credito) fissano il fornitore. DEFINITIVO e con
+    # rango sopra `generator`, così batte un `generator: DotNetNuke` che nomina
+    # solo il motore. Sotto la soglia resta zitto: un segnale solo è troppo largo.
+    finestra_siscom = html[:FINESTRA_SISCOM]
+    siscom_visti = [nome for nome, atteso in _SISCOM_SEGNALI if atteso.search(finestra_siscom)]
+    if len(siscom_visti) >= _SISCOM_MIN_SEGNALI:
+        scattate.append(
+            FirmaScattata(
+                Piattaforma.PEOPLEWEB,
+                _score(_SCORE_DEFINITIVO, "siscom"),
+                _tronca(f"siscom: {'+'.join(siscom_visti)}"),
+            )
+        )
 
     scattate.sort(key=lambda s: s.score, reverse=True)
 

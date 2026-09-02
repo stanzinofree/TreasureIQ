@@ -405,3 +405,52 @@ def test_famiglia_at_nuove_non_vincono_su_base_senza_includi_at():
         esito = classifica_risposta(headers={}, html=html, includi_at=False)
         assert esito.vincitore.piattaforma is Piattaforma.WORDPRESS_GENERICO
         assert any(s.piattaforma is piattaforma_at for s in esito.scattate)
+
+
+_FIXTURE_SISCOM = Path(__file__).parent / "fixtures" / "siscom"
+
+
+def test_siscom_skin_dnn_con_generator_vince_come_peopleweb():
+    """Siscom dietro skin DotNetNuke, con `generator: DotNetNuke` dichiarato.
+
+    Due segnali vendor concordanti (host SaaS + app + modulo AGID + credito)
+    battono il generator DNN, che nomina solo il motore: il vincitore è
+    PeopleWeb, la famiglia Siscom, non `dotnetnuke`."""
+    html = (_FIXTURE_SISCOM / "siscom_dnn_generator_home.html").read_text(encoding="utf-8")
+    esito = classifica_risposta(headers={}, html=html, includi_at=False)
+    assert esito.vincitore.piattaforma is Piattaforma.PEOPLEWEB
+    assert "siscom" in (esito.vincitore.prova or "")
+    # il generator DNN ha comunque scattato: resta come runner-up diagnostico
+    assert any(s.piattaforma is Piattaforma.DOTNETNUKE for s in esito.scattate)
+
+
+def test_siscom_skin_dnn_senza_generator_vince_come_peopleweb():
+    """Stessa famiglia ma senza meta generator (il caso che prima cadeva su
+    `dotnetnuke` solo via impronta `|portals`). Due segnali Siscom bastano."""
+    html = (_FIXTURE_SISCOM / "siscom_dnn_no_generator_home.html").read_text(encoding="utf-8")
+    esito = classifica_risposta(headers={}, html=html, includi_at=False)
+    assert esito.vincitore.piattaforma is Piattaforma.PEOPLEWEB
+
+
+def test_dnn_senza_segnali_siscom_resta_dotnetnuke():
+    """Guardia falso-positivo: un DotNetNuke non-Siscom non deve diventare
+    PeopleWeb. Nessun segnale vendor -> la firma Siscom non scatta."""
+    html = (_FIXTURE_SISCOM / "dnn_plain_no_siscom_home.html").read_text(encoding="utf-8")
+    esito = classifica_risposta(headers={}, html=html, includi_at=False)
+    assert esito.vincitore.piattaforma is Piattaforma.DOTNETNUKE
+    assert not any(
+        s.piattaforma is Piattaforma.PEOPLEWEB and (s.prova or "").startswith("siscom")
+        for s in esito.scattate
+    )
+
+
+def test_un_solo_segnale_siscom_non_basta():
+    """Concordanza minima = 2: un solo riferimento (il credito nel footer) è
+    troppo largo — un link isolato non fa un'installazione Siscom."""
+    html = (_FIXTURE_SISCOM / "dnn_un_solo_segnale_siscom_home.html").read_text(encoding="utf-8")
+    esito = classifica_risposta(headers={}, html=html, includi_at=False)
+    assert esito.vincitore.piattaforma is Piattaforma.DOTNETNUKE
+    assert not any(
+        s.piattaforma is Piattaforma.PEOPLEWEB and (s.prova or "").startswith("siscom")
+        for s in esito.scattate
+    )

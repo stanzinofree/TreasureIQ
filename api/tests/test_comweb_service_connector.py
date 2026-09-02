@@ -292,14 +292,14 @@ def test_service_id_from_path_never_from_title():
     assert ref.title == "Cambio Residenza"
 
 
-def test_ambiguous_key_is_disambiguation():
-    # carta_identita matches two schede (carta + CIE) → ≥2 → DISAMBIGUATION: the
-    # gate never picks implicitly (I-1), it hands back BOTH references as a choice.
+def test_ambiguous_key_is_not_found():
+    # carta_identita matches two schede (carta + CIE) → ambiguous → NOT_FOUND,
+    # never an implicit pick (I-1).
     result = _connector(_pagine_reali()).retrieve(
         _request(service_key=ServiceKey.CARTA_IDENTITA), mappa=_mappa(), esito=None
     )
-    assert result.status is DataStatus.DISAMBIGUATION
-    assert len(result.service_references) >= 2
+    assert result.status is DataStatus.NOT_FOUND
+    assert result.service_references == ()
 
 
 def test_tributi_follows_the_mapped_category():
@@ -422,14 +422,14 @@ def test_aglie_accesso_atti_confirms_atti_never_accesso_civico():
     assert ref.title == "Richiedere l'accesso agli atti"
 
 
-def test_aglie_carta_identita_two_cards_is_disambiguation():
+def test_aglie_carta_identita_two_cards_honest_not_found():
     # Two cards confirm CARTA_IDENTITA — "Carta d'Identità Elettronica (CIE)"
-    # and "Carta d'identità per minori" — so ≥2 confirmed → DISAMBIGUATION (I-1
-    # unchanged: no card-derivable rule elects one as canonical, so the gate
-    # elects none and exposes BOTH as an explicit choice instead of a miss).
+    # and "Carta d'identità per minori" — so ≥2 confirmed → NOT_FOUND (I-1).
+    # No card-derivable rule elects one as canonical: an "audience qualifier"
+    # tie-break would be an arbitrary pick, not evidence.
     result, _ = _retrieve_aglie(ServiceKey.CARTA_IDENTITA)
-    assert result.status is DataStatus.DISAMBIGUATION
-    assert len(result.service_references) == 2
+    assert result.status is DataStatus.NOT_FOUND
+    assert result.service_references == ()
 
 
 def test_aglie_carta_identita_miss_is_two_confirmed_not_zero():

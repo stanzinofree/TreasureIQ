@@ -242,9 +242,7 @@ def test_retrieve_apex_candidate_accepted_against_www_official_host():
     assert str(result.service_references[0].source_url) == url
 
 
-def test_retrieve_two_confirmed_is_disambiguation():
-    # ≥2 confermati su URL distinte → il gate exactly-one non elegge un vincitore:
-    # emette DISAMBIGUATION con TUTTE le reference (mai nearest-neighbour).
+def test_retrieve_two_confirmed_is_ambiguous_not_found():
     fetcher = StubFetcher(
         candidati=(
             _candidato(1, "Carta d'identità elettronica", url=f"https://{_BASE}/a/"),
@@ -253,11 +251,8 @@ def test_retrieve_two_confirmed_is_disambiguation():
     )
     c = _connector(fetcher)
     result = c.retrieve(_request(), mappa=_mappa(), esito=None)
-    assert result.status is DataStatus.DISAMBIGUATION
-    assert {r.service_id for r in result.service_references} == {
-        f"{_ISTAT}:wp:1",
-        f"{_ISTAT}:wp:2",
-    }
+    assert result.status is DataStatus.NOT_FOUND
+    assert result.service_references == ()
 
 
 def test_retrieve_unconfirmed_candidates_are_dropped_leaving_one():
@@ -849,15 +844,13 @@ def test_dialetto_b_tari_empty_is_honest_not_found():
     assert len(transport.richieste_rest) == 2  # slim + recovery, then nothing
 
 
-def test_dialetto_b_residenza_multi_is_disambiguation():
+def test_dialetto_b_residenza_multi_is_not_found():
     # The full dump carries TWO residence services, both on-host and both
-    # confirming CAMBIO_RESIDENZA. They live on guid-style URLs (/?…&p=<id>):
-    # same path, DISTINCT query → the url-dedup keeps them apart (it keys on the
-    # normalized query too), so ≥2 → DISAMBIGUATION with both references — never
-    # the nearest, never collapsed into one. Recovery changes shape, not the rule.
+    # confirming CAMBIO_RESIDENZA → ≥2 → NOT_FOUND (never the nearest), exactly
+    # as for the standard dialect: recovery changes shape, not the 0/≥2 rule.
     result, _ = _retrieve_dialetto_b(ServiceKey.CAMBIO_RESIDENZA)
-    assert result.status is DataStatus.DISAMBIGUATION
-    assert len(result.service_references) == 2
+    assert result.status is DataStatus.NOT_FOUND
+    assert result.service_references == ()
 
 
 def test_standard_empty_does_not_trigger_dialect_b_refetch():

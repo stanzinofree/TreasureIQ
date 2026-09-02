@@ -258,6 +258,12 @@ class OpenPAServiceConnector(_ServiceConnectorBase):
     _PIATTAFORME = frozenset({Piattaforma.OPENPA.value})
     _PREFISSO = "openpa"
     _PROVIDER_PLATFORM = "openpa"
+    # Unica famiglia che aderisce al contratto ≥2: i portali OpenPA/OpenCity
+    # pubblicano più servizi distinti per la stessa chiave (es. IMIS →
+    # calcolatore + domanda agevolazione + pagina valori), raggruppabili per
+    # intento dal titolo. Su ≥2 emette la lista di scelta invece del miss; le
+    # altre famiglie (ComWeb, WP) restano al gate exactly-one storico.
+    _AMMETTE_DISAMBIGUAZIONE = True
 
     def _discovery_target(self, mappa, service_key: ServiceKey) -> DiscoveryTarget | None:
         base = _base_con_schema(getattr(mappa, "sito", None))

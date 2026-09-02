@@ -102,6 +102,12 @@ class _ServiceConnectorBase:
     _PROVIDER_PLATFORM: str = ""
     #: Tetto di candidati raccolti dalla discovery (anti fan-out, configurabile).
     _LIMITE_RICERCA: int = 20
+    #: Opt-in dichiarativo al ramo DISAMBIGUATION (contratto ≥2). Default False:
+    #: il gate exactly-one storico resta invariato per le famiglie che NON hanno
+    #: aderito (WP, ComWeb) — ≥2 collassa in NOT_FOUND come prima. Solo una
+    #: famiglia che sa raggruppare i propri titoli per intento (OpenPA/IMIS) lo
+    #: alza a True e, su ≥2, emette la lista di scelta invece del miss.
+    _AMMETTE_DISAMBIGUAZIONE: bool = False
 
     def __init__(self, fetcher: ServiceFetcher) -> None:
         self._fetcher = fetcher
@@ -149,21 +155,34 @@ class _ServiceConnectorBase:
         # il gate esattamente-1 vede solo candidati della classe giusta.  Default
         # no-op: le famiglie senza classe (WP, ComWeb) passano invariate.
         candidati = self._filtra_candidati(candidati, service_key)
-        confermati = self._dedup_source_url(
-            self._confermati(candidati, service_key, target.official_host)
-        )
+        confermati = self._confermati(candidati, service_key, target.official_host)
         if not confermati:
             # 0 → miss onesto.
             return self._esito(request, now, DataStatus.NOT_FOUND, AccessMode.MEDIATED)
-        if len(confermati) >= 2:
-            # ≥2 → nessuno è "quello giusto" da eleggere qui (I-1, niente scelta
-            # implicita), ma i candidati sono validi: esito DISAMBIGUATION con la
-            # lista, la scelta la fa il cittadino con un service_id esplicito.
-            return self._disambiguazione(request, now, confermati, target.official_host)
+        if len(confermati) == 1:
+            # 1 → risoluzione singola, opzioni piene (una lettura di pagina).
+            reference = self._riferimento(
+                confermati[0], target.official_host, now, request.source_id
+            )
+            return self._fulfilled(request, now, reference)
 
-        # 1 → risoluzione singola, opzioni piene (una lettura di pagina).
-        reference = self._riferimento(confermati[0], target.official_host, now, request.source_id)
-        return self._fulfilled(request, now, reference)
+        # ≥2 candidati grezzi. Il gate exactly-one storico chiude qui in
+        # NOT_FOUND (I-1, niente scelta implicita) per TUTTE le famiglie che non
+        # hanno aderito al contratto ≥2: ComWeb, WordPress restano invariate.
+        if not self._AMMETTE_DISAMBIGUAZIONE:
+            return self._esito(request, now, DataStatus.NOT_FOUND, AccessMode.MEDIATED)
+
+        # Solo la famiglia opted-in dedup-a sull'URL canonica (stesso comune +
+        # stessa source_url) PRIMA di decidere: due voci che puntano alla stessa
+        # pagina non sono un'ambiguità. Se il dedup collassa a uno → risoluzione
+        # singola; se restano ≥2 → lista di scelta, la elegge il cittadino.
+        dedup = self._dedup_source_url(confermati)
+        if len(dedup) == 1:
+            reference = self._riferimento(
+                dedup[0], target.official_host, now, request.source_id
+            )
+            return self._fulfilled(request, now, reference)
+        return self._disambiguazione(request, now, dedup, target.official_host)
 
     def seleziona(
         self, request: DataRequest, *, mappa, service_id: str

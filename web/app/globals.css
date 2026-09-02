@@ -2885,6 +2885,54 @@ a {
   color: var(--sumi-soft);
 }
 
+/* Scelta servizio (Ramo 3, contratto ≥2): il comune pubblica più servizi
+   confermati per la stessa chiave, raggruppati per intento d'azione. Stessa
+   grammatica visiva della scelta-comune — è una scelta a un tap, non un
+   verdetto — ma impilata in verticale: i titoli dei servizi sono lunghi, non
+   stanno su una riga a chip come i nomi di comune. */
+.scelta-servizio {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ma-4);
+  margin: var(--ma-4) 0 0;
+}
+.scelta-servizio__gruppo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ma-2);
+}
+.scelta-servizio__etichetta {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--sumi-soft);
+}
+.scelta-servizio__scheda {
+  display: block;
+  text-align: left;
+  padding: var(--ma-2) var(--ma-4);
+  border: 1px solid var(--kasumi, #d5dbe6);
+  border-radius: 4px;
+  background: var(--washi, #fff);
+  cursor: pointer;
+  font: inherit;
+  color: var(--sumi, #1f2733);
+  transition: border-color 0.12s, background 0.12s;
+}
+.scelta-servizio__scheda:hover:not(:disabled) {
+  border-color: var(--matcha, #2f9e6f);
+  background: var(--matcha-wash, #eef8f2);
+}
+.scelta-servizio__scheda:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.scelta-servizio__titolo {
+  font-weight: 600;
+}
+
 /* Mappa servizi (fase 1): categorie del portale come chip a cascata sotto il
    badge connettore. Verde matcha come il badge — è la stessa «capacità del
    connettore», non un «da verificare» (che è giallo). Riusa .scelta-comune__scheda

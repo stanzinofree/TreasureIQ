@@ -69,6 +69,55 @@
    "discovered_from": "ordinary_data",
    "provider_platform": "openpa",
    "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "022039:openpa:2818",
+   "title": "Calcolatore IMIS",
+   "source_url": "https://www.comune.canazei.tn.it/Servizi/Calcolatore-IMIS",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.canazei.tn.it/Servizi/Calcolatore-IMIS",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.canazei.tn.it/Servizi/Calcolatore-IMIS",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.consulenza.comunitrentini.tn.it/imis/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.canazei.tn.it/Servizi/Calcolatore-IMIS",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.canazei.tn.it/ocmultibinary/download/2818/33432/4/42b1945a6041e3969517ef32b54bf13d.pdf/file/Condizioni+generali+del+servizio.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.canazei.tn.it/Servizi/Calcolatore-IMIS",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-09-02T00:00:00Z"
   }
  }
 }

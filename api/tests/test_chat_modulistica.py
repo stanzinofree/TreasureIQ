@@ -1,14 +1,15 @@
 """Ramo 3 — Modulistica chat wiring through the resolver (Slice 5, §5).
 
 Pin the NEW behaviour: Topic.MODULISTICA reaches the real WP/AgID resolver
-(no network here — ``resolve_service_with_meta`` is stubbed at the module seam)
+(no network here — ``risolvi_o_disambigua`` is stubbed at the module seam)
 and produces a MEDIATED DataBatch + ``InfoAnswer.service`` that keeps the
 information page, the downloadable form and the online procedure distinct.
 
 The central invariant (D-S5-2): a resolver miss — unknown platform, no connector,
-0/≥2 confirmed, unreachable — answers honestly (ask comune / URP redirect) and
-NEVER falls back to the old SP pointer. Plus: 0/≥2 service keys → ask which
-pratica (no fetch); unknown comune → ask (I6).
+0 confirmed, unreachable — answers honestly (ask comune / URP redirect) and
+NEVER falls back to the old SP pointer. Plus: 0 service keys → ask which
+pratica (no fetch); unknown comune → ask (I6). The ≥2 disambiguation and
+selection branches live in ``test_chat_modulistica_disambiguazione.py``.
 """
 
 from __future__ import annotations
@@ -90,8 +91,10 @@ def wiring(monkeypatch):
     """Patch the two seams the handler crosses: the cached mappa and the resolver.
 
     ``_da_cache`` is imported inside the handler → patch the module attribute.
-    ``resolve_service_with_meta`` is a module-level import in ``respond``. A spy
-    records whether the resolver was called at all (0/≥2 keys must not fetch).
+    ``risolvi_o_disambigua`` is a module-level import in ``respond``. A spy
+    records whether the resolver was called at all (0 keys must not fetch). The
+    canned ``resolved`` is a ``ResolvedService`` or ``None`` — the single/miss
+    branches; the ≥2 ``DisambiguazioneServizi`` branch has its own tests.
     """
     stato = {"chiamate": 0, "resolved": None, "mappa": _mappa()}
 
@@ -103,7 +106,7 @@ def wiring(monkeypatch):
         return stato["resolved"]
 
     monkeypatch.setattr("treasureiq.mappa_connettore._da_cache", _da_cache)
-    monkeypatch.setattr(respond, "resolve_service_with_meta", _resolver)
+    monkeypatch.setattr(respond, "risolvi_o_disambigua", _resolver)
     return stato
 
 

@@ -84,7 +84,18 @@ from treasureiq.catalog.service_registry import (
     service_query_fetch_coordinator,
 )
 from treasureiq.catalog import service_catalog
-from treasureiq.catalog.service_resolver import resolve_service_with_meta
+from treasureiq.catalog.service_resolver import (
+    risolvi_o_disambigua,
+    seleziona_servizio,
+)
+from treasureiq.catalog.service_contracts import (
+    DisambiguazioneServizi,
+    ResolvedService,
+)
+from treasureiq.catalog.service_connectors.intento_azione import (
+    IntentoAzione,
+    raggruppa_per_intento,
+)
 from treasureiq.chat.service_key import ServiceKey, riconosci_service_key
 from treasureiq.chat.categorie import Categoria, topics_di
 from treasureiq.chat.intent import (
@@ -251,6 +262,68 @@ class ServiceAnswer:
     information: ServiceLink | None
     downloads: list[ServiceLink]
     authenticated_online: list[ServiceLink]
+
+
+@dataclass(frozen=True)
+class VoceServizioAmbiguo:
+    """Una scelta della lista di disambiguazione: un servizio confermato fra i ≥2.
+
+    `service_id` è l'identificatore OPACO che il cittadino rimanda per scegliere
+    (mai testo libero). `intento` è l'etichetta di raggruppamento (presentazione),
+    non un dato del servizio. Solo la pagina informativa: le opzioni piene
+    (moduli, procedure) si risolvono dopo la scelta, su `seleziona_servizio`.
+    """
+
+    service_id: str
+    title: str
+    url: str
+
+
+@dataclass(frozen=True)
+class GruppoServiziAmbigui:
+    """Un bucket di intento con le sue voci, in ordine fisso di presentazione."""
+
+    intento: str
+    etichetta: str
+    voci: list[VoceServizioAmbiguo]
+
+
+@dataclass(frozen=True)
+class ServiziAmbigui:
+    """Esito ≥2 per la UI: la ServiceKey ha confermato più servizi, nessuno
+    eletto. Porta la chiave (per il round-trip di selezione) e i gruppi per
+    intento. `service_key` torna nel turno di scelta insieme al `service_id`."""
+
+    service_key: str
+    gruppi: list[GruppoServiziAmbigui]
+
+
+@dataclass(frozen=True)
+class ServizioScelto:
+    """La scelta del cittadino dopo una disambiguazione ≥2 (round-trip di selezione).
+
+    Campo STRUTTURATO del turno (mai testo libero, come `ChatIn.comune_istat`):
+    porta il `service_id` opaco ricevuto nella lista e la `service_key` del turno
+    originale, così `seleziona_servizio` ri-deriva l'insieme confermato e valida
+    la scelta server-side. Un `service_id` fuori dall'insieme viene rifiutato
+    (miss onesto), mai risolto al vicino.
+    """
+
+    service_id: str
+    service_key: str
+
+
+#: Etichette umane per i bucket di intento (presentazione UI). Ordine e chiavi
+#: allineati a `IntentoAzione`; il fallback ha un'etichetta esplicita, non vuota.
+_ETICHETTA_INTENTO: dict[IntentoAzione, str] = {
+    IntentoAzione.CALCOLATORE: "Calcola l'importo",
+    IntentoAzione.AGEVOLAZIONE: "Chiedi un'agevolazione",
+    IntentoAzione.COMUNICAZIONE: "Comunica una variazione",
+    IntentoAzione.DICHIARAZIONE_ISTANZA: "Presenta una domanda",
+    IntentoAzione.VERSAMENTO_RIMBORSO: "Versa o chiedi un rimborso",
+    IntentoAzione.MODULISTICA: "Scarica la modulistica",
+    IntentoAzione.ALTRO_INFORMAZIONI: "Altre informazioni",
+}
 
 
 @dataclass
@@ -493,6 +566,14 @@ class ChatAnswer:
     #: la domanda si accoda (D-04, mai bloccante). Stesso enum chiuso di
     #: `ChatIn.chiarimento_atteso`/`ChatOut.chiarimento`.
     chiarimento: str | None = None
+    #: Ramo MODULISTICA ≥2: la ServiceKey ha confermato più servizi distinti
+    #: (es. IMIS/OpenPA: calcolatore, agevolazione, domanda…). Nessuno è "quello
+    #: giusto" da eleggere (I-1), quindi si espone la SCELTA raggruppata per
+    #: intento. Il cittadino rimanda un `service_id` opaco (mai testo libero);
+    #: `seleziona_servizio` lo risolve dentro l'insieme del turno. Non è un miss:
+    #: `needs_clarification=True`, `data_gap="servizio_ambiguo"`. Testo FISSO
+    #: (D-07): titoli/URL vivono solo qui, mai interpolati in `reply`.
+    servizi_ambigui: ServiziAmbigui | None = None
 
 
 @dataclass(frozen=True)
@@ -4071,11 +4152,15 @@ def _intento_tributario_generico(message: str) -> bool:
 
 
 async def _risposta_modulistica(
-    *, message: str, profile: CitizenProfile | None, comune_istat: str | None
+    *,
+    message: str,
+    profile: CitizenProfile | None,
+    comune_istat: str | None,
+    servizio_scelto: ServizioScelto | None = None,
 ) -> ChatAnswer:
     """Ramo Topic.MODULISTICA — wiring del connettore servizi (Ramo 3, Slice 5).
 
-    Cabla la chat al connettore reale via `resolve_service_with_meta`: la
+    Cabla la chat al connettore reale via `risolvi_o_disambigua`: la
     `ServiceKey` riconosciuta dal messaggio è risolta cache-first in una
     `ServiceReference` (pagina informativa, modulo scaricabile, procedura
     online autenticata, tenuti DISTINTI). TIQ indica la porta ufficiale e non
@@ -4085,9 +4170,15 @@ async def _risposta_modulistica(
     Miss ONESTO, mai il vecchio puntatore SP (D-S5-2): ogni buco risponde con
     verità, non con un ripiego.
       * comune non noto            → lo si chiede (I6, `comune_non_noto`);
-      * 0/≥2 service key           → si chiede quale pratica (nessun fetch);
+      * 0 service key / testo       → si chiede quale pratica (nessun fetch);
       * piattaforma/mappa assente  → redirect URP (`not_verified`);
-      * resolver miss (0/≥2 conferme, irraggiungibile) → redirect URP.
+      * resolver miss (0 conferme, irraggiungibile) → redirect URP.
+
+    Esito ≥2 (contratto universale): il resolver ritorna una
+    `DisambiguazioneServizi` e la chat espone la lista come SCELTA
+    (`servizi_ambigui`, `servizio_ambiguo`), senza eleggere. La scelta torna nel
+    turno successivo come `servizio_scelto` (service_id opaco + service_key) e
+    risolve a UN servizio via `_modulistica_selezione`.
 
     Comune con la stessa precedenza dei bandi (profilo > scelta > nominato).
     La freschezza (FRESH da cache / LIVE dal vivo) viene dall'envelope
@@ -4125,6 +4216,18 @@ async def _risposta_modulistica(
             access_mode=None,
             citizen_effort=1,
             info=None,
+        )
+
+    # Turno di SELEZIONE: il cittadino ha scelto un servizio dalla lista di
+    # disambiguazione. La `ServiceKey` viene dal campo strutturato del turno (mai
+    # dal testo), e il `service_id` opaco è validato server-side contro l'insieme
+    # confermato (`seleziona_servizio`): fuori insieme → miss onesto, mai il
+    # vicino; la scelta non entra in cache (I-1).
+    if servizio_scelto is not None:
+        return await _modulistica_selezione(
+            servizio_scelto=servizio_scelto,
+            target_istat=target_istat,
+            nominato=nominato,
         )
 
     # service_key: 0 o ≥2 chiavi riconosciute → si chiede QUALE pratica, con
@@ -4187,22 +4290,100 @@ async def _risposta_modulistica(
     if mappa is None:
         return _modulistica_miss_urp(comune_nome)
 
-    # Catena nuova: resolver cache-first → connettore WP/AgID reale (Slice 4),
-    # via `EsecutoreServiceFetcher` guardato (nessun httpx grezzo nel path
-    # chat). Il resolver gira in un thread perché il fetch live è sincrono.
+    # Catena nuova: resolver cache-first → connettore reale (Slice 4), via
+    # `EsecutoreServiceFetcher` guardato (nessun httpx grezzo nel path chat). Il
+    # resolver gira in un thread perché il fetch live è sincrono. Tre esiti
+    # (contratto universale ≥2, valido per tutte le famiglie):
+    #   None                    → miss onesto (URP), mai fallback SP (D-S5-2);
+    #   DisambiguazioneServizi  → ≥2 confermati: si espone la scelta, non si elegge;
+    #   ResolvedService         → un servizio: si mostra la porta ufficiale.
     request = service_request(source_id=target_istat, service_key=service_key)
-    resolved = await asyncio.to_thread(
-        resolve_service_with_meta,
+    esito = await asyncio.to_thread(
+        risolvi_o_disambigua,
         request,
         mappa=mappa,
         registry=default_service_registry(service_query_fetch_coordinator()),
         platform_id=mappa.piattaforma_id or "",
     )
-    # Miss del resolver (piattaforma non coperta, 0/≥2 confermati, irraggiungibile)
-    # → miss onesto, niente fallback SP.
-    if resolved is None:
+    if esito is None:
         return _modulistica_miss_urp(comune_nome)
+    if isinstance(esito, DisambiguazioneServizi):
+        return _modulistica_servizi_ambigui(
+            esito=esito, service_key=service_key, comune_nome=comune_nome
+        )
+    return _modulistica_fulfilled(
+        resolved=esito,
+        request=request,
+        comune_nome=comune_nome,
+        target_istat=target_istat,
+    )
 
+
+def _modulistica_servizi_ambigui(
+    *, esito: DisambiguazioneServizi, service_key: ServiceKey, comune_nome: str
+) -> ChatAnswer:
+    """Esito ≥2 (DISAMBIGUATION): più servizi confermati, nessuno eletto.
+
+    Non è un miss (i candidati sono validi) e non è un fulfilled (nessuno è
+    «quello giusto»): si espone la lista come SCELTA. Le reference sono leggere
+    (solo INFORMATION), raggruppate per intento con un classificatore puro
+    titolo→intento; la scelta torna come `service_id` opaco (mai testo libero),
+    validata server-side contro questo stesso insieme (`seleziona_servizio`).
+    Non cacheabile, non promuovibile (I-1): è la lista del turno.
+
+    Testo FISSO (D-07): titoli e URL viaggiano nei campi strutturati
+    (`servizi_ambigui`), mai interpolati nella prosa.
+    """
+    gruppi = [
+        GruppoServiziAmbigui(
+            intento=intento.value,
+            etichetta=_ETICHETTA_INTENTO[intento],
+            voci=[
+                VoceServizioAmbiguo(
+                    service_id=ref.service_id,
+                    title=ref.title,
+                    url=str(ref.source_url),
+                )
+                for ref in refs
+            ],
+        )
+        for intento, refs in raggruppa_per_intento(list(esito.references))
+    ]
+    servizi_ambigui = ServiziAmbigui(service_key=service_key.value, gruppi=gruppi)
+    return ChatAnswer(
+        reply=(
+            f"Per {comune_nome} il comune pubblica più servizi che corrispondono "
+            "a quello che cerchi. Scegli qui accanto quello che ti serve e ti "
+            "porto alla pagina ufficiale giusta."
+        ),
+        topic=Topic.MODULISTICA,
+        kind=QuestionKind.INFORMAZIONE,
+        data_gap="servizio_ambiguo",
+        needs_clarification=True,
+        matches=[],
+        spid_required=False,
+        spid_reason=None,
+        access_mode=None,
+        citizen_effort=1,
+        info=None,
+        servizi_ambigui=servizi_ambigui,
+    )
+
+
+def _modulistica_fulfilled(
+    *,
+    resolved: ResolvedService,
+    request: DataRequest,
+    comune_nome: str,
+    target_istat: str,
+) -> ChatAnswer:
+    """Render del servizio risolto (un solo confermato, o la scelta selezionata).
+
+    Condiviso dal ramo FULFILLED del resolver e dal ramo di selezione
+    (`seleziona_servizio`): dato un `ResolvedService` costruisce la scheda
+    ufficiale (pagina informativa, modulo, procedura online tenuti distinti).
+    Testo FISSO (D-07): URL/ruolo/metodi solo nei campi strutturati.
+    """
     # Slice 6: arricchimento read-time della provenienza SP sulle opzioni
     # AUTHENTICATED_ONLINE, SOLO per evidenza per-link (URL Base == entrypoint SP
     # censito dello stesso comune). Pura, senza rete, senza scrittura in cache:
@@ -4271,6 +4452,57 @@ async def _risposta_modulistica(
         data_batches=[batch],
         query_plan=plan,
         selected_data_batch=selected,
+    )
+
+
+async def _modulistica_selezione(
+    *,
+    servizio_scelto: ServizioScelto,
+    target_istat: str,
+    nominato,
+) -> ChatAnswer:
+    """Turno di selezione: risolve la scelta del cittadino a UN servizio.
+
+    Delega a `seleziona_servizio`, che ri-deriva l'insieme confermato del turno e
+    accetta SOLO un `service_id` che vi appartiene (id ignoto / fuori comune →
+    NOT_FOUND → miss onesto, mai il vicino). La scelta NON entra in cache: è del
+    turno, non un dato promosso per la key. Rende la scheda con lo stesso helper
+    del ramo fulfilled (opzioni piene: la sola pagina scelta viene letta).
+    """
+    from treasureiq.mappa_connettore import _da_cache
+
+    mappa = _da_cache(target_istat)
+    comune_nome = (
+        (mappa.nome if mappa is not None else None)
+        or (nominato.nome if nominato is not None else None)
+        or "questo comune"
+    )
+    if mappa is None:
+        return _modulistica_miss_urp(comune_nome)
+
+    # La chiave del turno viene dal campo strutturato (echo del round-trip); un
+    # valore fuori vocabolario è malformato → miss onesto, mai il vicino (Slice 1).
+    try:
+        service_key = ServiceKey(servizio_scelto.service_key)
+    except ValueError:
+        return _modulistica_miss_urp(comune_nome)
+
+    request = service_request(source_id=target_istat, service_key=service_key)
+    resolved = await asyncio.to_thread(
+        seleziona_servizio,
+        request,
+        mappa=mappa,
+        service_id=servizio_scelto.service_id,
+        registry=default_service_registry(service_query_fetch_coordinator()),
+        platform_id=mappa.piattaforma_id or "",
+    )
+    if resolved is None:
+        return _modulistica_miss_urp(comune_nome)
+    return _modulistica_fulfilled(
+        resolved=resolved,
+        request=request,
+        comune_nome=comune_nome,
+        target_istat=target_istat,
     )
 
 
@@ -4518,6 +4750,7 @@ async def _componi_risposta(
     today: date | None = None,
     filtri_esclusi: frozenset | None = None,
     comune_bandi_istat: str | None = None,
+    servizio_scelto: ServizioScelto | None = None,
 ) -> ChatAnswer:
     """Answer one citizen turn. Never raises for model unavailability.
 
@@ -4623,6 +4856,21 @@ async def _componi_risposta(
     # ottengono dalla ricerca per parole chiave: senza le parole del
     # cittadino a confermarlo, un BANDI del modello non ancorato non basta a
     # far partire una scansione di rete.
+    # Turno di SELEZIONE servizio: intento STRUTTURATO (service_id opaco + chiave),
+    # non linguaggio naturale. Bypassa il routing per topic — una scelta non porta
+    # parole da classificare — e va dritto al ramo modulistica, che valida la
+    # scelta server-side contro l'insieme confermato del turno (mai il vicino).
+    if servizio_scelto is not None:
+        profilo_scelta = profile or _profile_from_slots(
+            intent=intent, messaggio=message, filtri_esclusi=filtri_esclusi
+        )
+        return await _risposta_modulistica(
+            message=message,
+            profile=profilo_scelta,
+            comune_istat=comune_bandi_istat or comune_istat,
+            servizio_scelto=servizio_scelto,
+        )
+
     if intent.topic is Topic.BANDI and _tema_sostenuto(topic=Topic.BANDI, testo=message):
         # Come gli altri rail (righe ~2660/2749): se non c'è un profilo di
         # sessione, si ricava dai segnali di QUESTO turno. Senza, il ramo bandi

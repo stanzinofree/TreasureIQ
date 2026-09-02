@@ -46,7 +46,6 @@ from treasureiq.catalog.service_connectors.connettore_base import (
 )
 from treasureiq.catalog.service_connectors.esecutore_fetcher import EsecutoreServiceFetcher
 from treasureiq.catalog.service_contracts import SERVICE_SEARCH_TERM, ServiceKey
-from treasureiq.chat.service_key import riconosci_service_key
 from treasureiq.ingest.piattaforma import Piattaforma
 from treasureiq.mappa_connettore import _base_con_schema, _host_senza_www
 
@@ -58,6 +57,14 @@ _ENDPOINT_RICERCA = "/opendata/api/content/search/"
 _LINGUA = "ita-IT"
 
 _CONNECTOR = ConnectorRef(name="openpa_service", version="1")
+
+#: Alias OpenPA-local per ``TRIBUTI_IMU`` (SOLO questa key).  In Trentino l'IMU è
+#: l'«IMIS» (Imposta Immobiliare Semplice): il full-text ``imu`` non recupera le
+#: schede titolate «IMIS/IM.I.S.» e il recogniser condiviso non le mappa, così
+#: l'IMU trentina cadeva sempre in NOT_FOUND.  La regex riconosce la sigla nelle
+#: forme osservate — ``IMIS``, ``IM.I.S.``, ``I.M.I.S`` — a confine di parola, coi
+#: soli punti opzionali (mai spazi): niente falsi come ``primis``/``optimism``.
+_IMIS_RX = re.compile(r"\bi\.?m\.?i\.?s\b", re.IGNORECASE)
 
 
 def _valore_q(term: str) -> str:
@@ -258,7 +265,26 @@ class OpenPAServiceConnector(_ServiceConnectorBase):
             # No site: the platform is not servable for this comune.
             return None
         entry = f"{base.rstrip('/')}{_ENDPOINT_RICERCA}"
-        return DiscoveryTarget(entry, SERVICE_SEARCH_TERM[service_key], urlparse(base).netloc)
+        return DiscoveryTarget(entry, self._termine(service_key), urlparse(base).netloc)
+
+    def _termine(self, service_key: ServiceKey) -> str:
+        """Termine full-text eZ Find per la key.  Default: il termine CONDIVISO
+        (``SERVICE_SEARCH_TERM``, intatto).  Solo per ``TRIBUTI_IMU`` aggiunge
+        ``imis``: eZ Find tratta lo spazio come OR, quindi ``imu imis`` recupera sia
+        la superficie IMU (comuni non trentini, invariati: 0 schede IMIS) sia
+        l'IMIS trentina — senza fan-out di richieste né modifica al contratto."""
+        termine = SERVICE_SEARCH_TERM[service_key]
+        if service_key is ServiceKey.TRIBUTI_IMU:
+            return f"{termine} imis"
+        return termine
+
+    def _riconosce(self, title: str, service_key: ServiceKey) -> bool:
+        # Allarga il recogniser condiviso col SOLO alias IMIS→TRIBUTI_IMU, gated a
+        # quella key.  Fira solo se il condiviso NON ha già classificato il titolo:
+        # un «TARI e IMIS» resta TARI (mai contaminato), un «IMU/IMIS» è già IMU.
+        if super()._riconosce(title, service_key):
+            return True
+        return service_key is ServiceKey.TRIBUTI_IMU and bool(_IMIS_RX.search(title))
 
     def _filtra_candidati(
         self,
@@ -301,7 +327,7 @@ class OpenPAServiceConnector(_ServiceConnectorBase):
         if neg:
             c = tuple(x for x in c if not any(n in x.title.lower() for n in neg))
 
-        matched = tuple(x for x in c if riconosci_service_key(x.title) is service_key)
+        matched = tuple(x for x in c if self._riconosce(x.title, service_key))
 
         # Layer B — detrito amministrativo, INCONDIZIONALE (anche a match unico):
         # un "Registro/Regolamento X" solitario deve dare NOT_FOUND, non passare.

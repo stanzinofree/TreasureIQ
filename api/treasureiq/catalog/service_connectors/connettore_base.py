@@ -264,15 +264,23 @@ class _ServiceConnectorBase:
         quindi non introduce falsi confermati (al più più ``vuoto`` onesti)."""
         return candidati
 
-    @staticmethod
+    def _riconosce(self, title: str, service_key: ServiceKey) -> bool:
+        """Il titolo conferma la key richiesta?  Default: il recogniser CONDIVISO,
+        stessa key e non ambiguo (torna None sul conflitto), nessun
+        nearest-neighbour.  Hook per-famiglia: una famiglia può *allargarlo* con un
+        alias locale (OpenPA: in Trentino l'IMU è titolata «IMIS») senza toccare il
+        recogniser condiviso né i suoi contratti — l'alias resta confinato al
+        sottotipo e alla sua sola key."""
+        return riconosci_service_key(title) is service_key
+
     def _confermati(
+        self,
         candidati: tuple[ServiceCandidate, ...],
         service_key: ServiceKey,
         official_host: str,
     ) -> tuple[ServiceCandidate, ...]:
         # Un candidato dev'essere (a) sull'host DEL comune e (b) confermare la key
-        # richiesta col recogniser CONDIVISO sul titolo — stessa key, non ambiguo
-        # (il recogniser torna None sul conflitto), nessun nearest-neighbour.
+        # richiesta via ``_riconosce`` (default: recogniser CONDIVISO) sul titolo.
         # L'host guard è qui, non solo nel fetcher: un payload potrebbe portare un
         # url a un host esterno e quell'URL non deve mai diventare source_url o
         # opzione.  Chi fallisce un check è scartato (0 confermati → NOT_FOUND).
@@ -281,7 +289,7 @@ class _ServiceConnectorBase:
             c
             for c in candidati
             if _host_senza_www(urlparse(str(c.url)).netloc.lower()) == host_ufficiale
-            and riconosci_service_key(c.title) is service_key
+            and self._riconosce(c.title, service_key)
         )
 
     def _opzioni(

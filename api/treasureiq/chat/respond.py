@@ -5435,6 +5435,7 @@ async def build_chat_answer(
     today: date | None = None,
     filtri_esclusi: frozenset | None = None,
     filtri_accumulati: dict | None = None,
+    servizio_scelto: ServizioScelto | None = None,
 ) -> ChatAnswer:
     """Compone la risposta, e se il comune non e' coperto lo dice **in testa**.
 
@@ -5451,6 +5452,23 @@ async def build_chat_answer(
     interna ha sei punti di uscita, ognuno dei quali avrebbe dovuto
     ricordarsi di anteporre la stessa frase.
     """
+    # Turno di SELEZIONE servizio: intento strutturato (service_id opaco), non
+    # linguaggio — non porta parole da classificare né un comune da disambiguare.
+    # Va dritto a `_componi_risposta`, che lo intercetta prima del routing per
+    # topic e risolve la scelta contro l'insieme confermato del turno.
+    if servizio_scelto is not None:
+        return await _componi_risposta(
+            message=message,
+            profile=profile,
+            records=records,
+            storia=storia,
+            comune_istat=comune_istat,
+            comune_coperto=comune_coperto,
+            today=today,
+            filtri_esclusi=filtri_esclusi,
+            servizio_scelto=servizio_scelto,
+        )
+
     candidati = _comuni_candidati(message)
     if len(candidati) >= 2:
         # D-54: prima l'ambiguita' spariva dentro `_comune_nominato` (tornava

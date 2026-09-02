@@ -165,16 +165,17 @@ def test_imu_titolo_mainland_ancora_risolve() -> None:
 # -- gate esattamente-1: ambiguità e detrito → NOT_FOUND onesto -----------
 
 
-def test_due_public_service_imis_ambiguo_not_found() -> None:
+def test_due_public_service_imis_ambiguo_disambiguation() -> None:
     # Calcolatore IMIS e Domanda di agevolazione (IMIS) sono servizi distinti:
-    # nessun nearest-neighbour, la scelta è di un livello superiore (I-1).
+    # nessun nearest-neighbour (I-1). ≥2 confermati → DISAMBIGUATION con tutte
+    # le reference, non NOT_FOUND: la scelta è del cittadino, esposta esplicita.
     result = _conn(StubFetcher(candidati=_BOCENAGO)).retrieve(
         _request(istat="022018"),
         mappa=_mappa(sito=_BOC_SITE, istat="022018"),
         esito=None,
     )
-    assert result.status is DataStatus.NOT_FOUND
-    assert result.service_references == ()
+    assert result.status is DataStatus.DISAMBIGUATION
+    assert len(result.service_references) >= 2
 
 
 def test_regolamento_imis_solo_e_detrito_not_found() -> None:

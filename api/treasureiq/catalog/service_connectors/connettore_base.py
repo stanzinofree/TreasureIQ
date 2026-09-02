@@ -22,7 +22,7 @@ from __future__ import annotations
 
 from datetime import datetime, timezone
 from typing import NamedTuple
-from urllib.parse import urlparse
+from urllib.parse import parse_qsl, urlparse
 
 from treasureiq.catalog.connectors import ConnectorResult
 from treasureiq.catalog.contracts import (
@@ -149,46 +149,81 @@ class _ServiceConnectorBase:
         # il gate esattamente-1 vede solo candidati della classe giusta.  Default
         # no-op: le famiglie senza classe (WP, ComWeb) passano invariate.
         candidati = self._filtra_candidati(candidati, service_key)
-        confermati = self._confermati(candidati, service_key, target.official_host)
-        if len(confermati) != 1:
-            # 0 → miss onesto; ≥2 → ambiguo, la scelta è di un livello superiore,
-            # mai una scelta implicita qui (I-1).
+        confermati = self._dedup_source_url(
+            self._confermati(candidati, service_key, target.official_host)
+        )
+        if not confermati:
+            # 0 → miss onesto.
             return self._esito(request, now, DataStatus.NOT_FOUND, AccessMode.MEDIATED)
+        if len(confermati) >= 2:
+            # ≥2 → nessuno è "quello giusto" da eleggere qui (I-1, niente scelta
+            # implicita), ma i candidati sono validi: esito DISAMBIGUATION con la
+            # lista, la scelta la fa il cittadino con un service_id esplicito.
+            return self._disambiguazione(request, now, confermati, target.official_host)
 
-        candidato = confermati[0]
-        opzioni = self._opzioni(candidato, target.official_host)
-        reference = ServiceReference(
-            service_id=f"{request.source_id}:{self._PREFISSO}:{candidato.native_id}",
-            title=candidato.title,
-            source_url=candidato.url,
-            options=opzioni,
-            discovered_from=Surface.ORDINARY_DATA,
-            provider_platform=self._PROVIDER_PLATFORM,
-            discovered_at=now,
+        # 1 → risoluzione singola, opzioni piene (una lettura di pagina).
+        reference = self._riferimento(confermati[0], target.official_host, now, request.source_id)
+        return self._fulfilled(request, now, reference)
+
+    def seleziona(
+        self, request: DataRequest, *, mappa, service_id: str
+    ) -> ConnectorResult:
+        """Risolve la UNA reference scelta dal cittadino a valle di un DISAMBIGUATION.
+
+        La scelta arriva come ``service_id`` **opaco** (mai testo libero). Qui il
+        service_id è validato **server-side contro l'insieme confermato CORRENTE**,
+        ri-derivato con la stessa discovery+filtro+dedup di ``retrieve`` (l'insieme
+        è riproducibile da ``(comune, service_key)``, non ci si fida del client):
+        - match esatto → la reference PIENA (opzioni con una lettura di pagina),
+          come un FULFILLED singolo;
+        - ``service_id`` non nell'insieme corrente → **rifiuto esplicito**
+          (``NOT_FOUND``), MAI il vicino più prossimo.
+
+        Non passa dal gate exactly-one: la scelta esplicita del cittadino È la
+        disambiguazione. Il risultato non va promosso né cachato sotto la chiave
+        (la chiave resta ambigua): la cache-write è responsabilità del chiamante,
+        che per la selezione deve astenersi.
+        """
+        now = datetime.now(timezone.utc)
+        if request.source_id != mappa.codice_istat:
+            raise ValueError("request.source_id does not match the measured source")
+        service_key = self._service_key(request)
+        if service_key is None:
+            return self._esito(request, now, DataStatus.NOT_FOUND, AccessMode.UNAVAILABLE)
+        target = self._discovery_target(mappa, service_key)
+        if target is None:
+            return self._esito(request, now, DataStatus.NOT_SUPPORTED, AccessMode.UNAVAILABLE)
+        candidati = self._fetcher.scopri_servizi(
+            base_url=target.entry_url, term=target.term, limit=self._LIMITE_RICERCA
         )
-        return ConnectorResult(
-            request_id=request.request_id,
-            source_id=request.source_id,
-            status=DataStatus.FULFILLED,
-            access_mode=AccessMode.MEDIATED,
-            service_references=(reference,),
-            evidence=tuple(
-                EvidenceRef(evidence_id=str(opzione.url), field="url") for opzione in opzioni
+        candidati = self._filtra_candidati(candidati, service_key)
+        confermati = self._dedup_source_url(
+            self._confermati(candidati, service_key, target.official_host)
+        )
+        scelto = next(
+            (
+                c
+                for c in confermati
+                if f"{request.source_id}:{self._PREFISSO}:{c.native_id}" == service_id
             ),
-            freshness=Freshness(status=FreshnessStatus.LIVE, retrieved_at=now),
-            connector=self._CONNECTOR,
-            retrieved_at=now,
+            None,
         )
+        if scelto is None:
+            # service_id ignoto o non più fra i confermati: rifiuto, non ripiego.
+            return self._esito(request, now, DataStatus.NOT_FOUND, AccessMode.MEDIATED)
+        reference = self._riferimento(scelto, target.official_host, now, request.source_id)
+        return self._fulfilled(request, now, reference)
 
     def diagnostica(self, request: DataRequest, *, mappa) -> DiagnosticaConnettore:
         """Misura read-only dell'esito di risoluzione (sweep di misura, Fase 1).
 
         Esegue la STESSA discovery live di ``retrieve`` — discovery + filtro
-        class-aware + gate host/recogniser — e riporta i conteggi dei candidati
-        a ogni stadio, così un livello superiore distingue «miss» (0 confermati)
-        da «ambiguo» (≥2), che ``retrieve`` collassa entrambi in ``NOT_FOUND``.
-        Non chiama ``_opzioni`` (nessuna lettura di pagina extra), non conia una
-        ``ServiceReference`` e non scrive nulla: nessun effetto sul path live.
+        class-aware + gate host/recogniser + dedup su URL canonica — e riporta i
+        conteggi dei candidati a ogni stadio, così un livello superiore distingue
+        «miss» (0 confermati → ``NOT_FOUND``) da «ambiguo» (≥2 → ``DISAMBIGUATION``).
+        Il conteggio ``confermati`` è post-dedup, per combaciare col gate di
+        ``retrieve``. Non chiama ``_opzioni`` (nessuna lettura di pagina extra),
+        non conia una ``ServiceReference`` e non scrive nulla: zero effetto sul path.
         """
         if request.source_id != mappa.codice_istat:
             raise ValueError("request.source_id does not match the measured source")
@@ -204,7 +239,9 @@ class _ServiceConnectorBase:
             limit=self._LIMITE_RICERCA,
         )
         filtrati = self._filtra_candidati(grezzi, service_key)
-        confermati = self._confermati(filtrati, service_key, target.official_host)
+        confermati = self._dedup_source_url(
+            self._confermati(filtrati, service_key, target.official_host)
+        )
         return DiagnosticaConnettore(
             True, True, len(grezzi), len(filtrati), len(confermati)
         )
@@ -292,8 +329,108 @@ class _ServiceConnectorBase:
             and self._riconosce(c.title, service_key)
         )
 
+    def _dedup_source_url(
+        self, confermati: tuple[ServiceCandidate, ...]
+    ) -> tuple[ServiceCandidate, ...]:
+        """Collassa i confermati con la STESSA ``source_url`` canonica.
+
+        Stesso comune, stessa pagina: due rese della medesima risorsa (es. il nodo
+        ``public_service`` e il suo ``output`` su un eZ Find) non sono due servizi.
+        Chiave = ``(host senza www, path senza slash finale, query normalizzata)``.
+        La query È significativa: i dialetti WP guid-style indirizzano il servizio
+        con ``/?post_type=servizio&p=<id>`` — path identico, l'``id`` in query
+        distingue. Ignorarla collasserebbe servizi diversi (regressione CAMBIO_
+        RESIDENZA dialetto B). MAI su titolo o service_id: titoli quasi-uguali su
+        URL diverse restano DISTINTI (direttiva). A parità di URL preferisce la
+        classe ``public_service`` — il servizio, non la sua resa. Ordine d'ingresso
+        preservato (dict ordinato).
+        """
+        visti: dict[tuple[str, str, tuple[tuple[str, str], ...]], ServiceCandidate] = {}
+        for c in confermati:
+            parti = urlparse(str(c.url))
+            query = tuple(sorted(parse_qsl(parti.query)))
+            chiave = (
+                _host_senza_www(parti.netloc.lower()),
+                parti.path.rstrip("/").lower(),
+                query,
+            )
+            corrente = visti.get(chiave)
+            if corrente is None:
+                visti[chiave] = c
+            elif c.native_class == "public_service" and corrente.native_class != "public_service":
+                visti[chiave] = c
+        return tuple(visti.values())
+
+    def _riferimento(
+        self,
+        candidato: ServiceCandidate,
+        official_host: str,
+        now: datetime,
+        source_id: str,
+        *,
+        leggero: bool = False,
+    ) -> ServiceReference:
+        """Una ServiceReference da un candidato. ``leggero``: solo INFORMATION,
+        nessuna lettura di pagina (lista di DISAMBIGUATION)."""
+        return ServiceReference(
+            service_id=f"{source_id}:{self._PREFISSO}:{candidato.native_id}",
+            title=candidato.title,
+            source_url=candidato.url,
+            options=self._opzioni(candidato, official_host, leggero=leggero),
+            discovered_from=Surface.ORDINARY_DATA,
+            provider_platform=self._PROVIDER_PLATFORM,
+            discovered_at=now,
+        )
+
+    def _fulfilled(
+        self, request: DataRequest, now: datetime, reference: ServiceReference
+    ) -> ConnectorResult:
+        """ConnectorResult FULFILLED per una singola reference risolta."""
+        return ConnectorResult(
+            request_id=request.request_id,
+            source_id=request.source_id,
+            status=DataStatus.FULFILLED,
+            access_mode=AccessMode.MEDIATED,
+            service_references=(reference,),
+            evidence=tuple(
+                EvidenceRef(evidence_id=str(opzione.url), field="url")
+                for opzione in reference.options
+            ),
+            freshness=Freshness(status=FreshnessStatus.LIVE, retrieved_at=now),
+            connector=self._CONNECTOR,
+            retrieved_at=now,
+        )
+
+    def _disambiguazione(
+        self,
+        request: DataRequest,
+        now: datetime,
+        confermati: tuple[ServiceCandidate, ...],
+        official_host: str,
+    ) -> ConnectorResult:
+        """ConnectorResult DISAMBIGUATION: tutti i confermati come reference leggere
+        (solo INFORMATION, nessun fetch per-candidato). Il raggruppamento per
+        intento è presentazione (``intento_azione``), non dato del connettore."""
+        refs = tuple(
+            self._riferimento(c, official_host, now, request.source_id, leggero=True)
+            for c in confermati
+        )
+        return ConnectorResult(
+            request_id=request.request_id,
+            source_id=request.source_id,
+            status=DataStatus.DISAMBIGUATION,
+            access_mode=AccessMode.MEDIATED,
+            service_references=refs,
+            evidence=tuple(
+                EvidenceRef(evidence_id=str(ref.source_url), field="url") for ref in refs
+            ),
+            freshness=Freshness(status=FreshnessStatus.LIVE, retrieved_at=now),
+            connector=self._CONNECTOR,
+            retrieved_at=now,
+        )
+
     def _opzioni(
-        self, candidato: ServiceCandidate, official_host: str
+        self, candidato: ServiceCandidate, official_host: str, *, leggero: bool = False
     ) -> tuple[ServiceAccessOption, ...]:
         # INFORMATION è sempre presente: la pagina servizio è la fonte citata.
         opzioni: list[ServiceAccessOption] = [
@@ -303,6 +440,14 @@ class _ServiceConnectorBase:
                 source_url=candidato.url,
             )
         ]
+        # ``leggero``: la sola INFORMATION, senza leggere la pagina.  Serve alla
+        # lista di DISAMBIGUATION, dove i confermati possono essere fino a ~18 per
+        # comune: leggere ogni pagina per arricchire download/login costerebbe N
+        # fetch per una lista che il cittadino non ha ancora scelto.  Le opzioni
+        # piene si risolvono su ``seleziona`` (una sola pagina, quella scelta).
+        # ``options`` resta ``min_length=1`` valido: INFORMATION basta.
+        if leggero:
+            return tuple(opzioni)
         html = self._fetcher.leggi_pagina(url=str(candidato.url), official_host=official_host)
         if not html:
             return tuple(opzioni)

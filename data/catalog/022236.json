@@ -69,6 +69,42 @@
    "discovered_from": "ordinary_data",
    "provider_platform": "openpa",
    "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "022236:openpa:1415",
+   "title": "IMIS on line",
+   "source_url": "https://www.comune.vigolana.tn.it/Servizi/IMIS-on-line",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vigolana.tn.it/Servizi/IMIS-on-line",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vigolana.tn.it/Servizi/IMIS-on-line",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://dgegovpa.it/Vigolana/login",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.vigolana.tn.it/Servizi/IMIS-on-line",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-09-02T00:00:00Z"
   }
  }
 }

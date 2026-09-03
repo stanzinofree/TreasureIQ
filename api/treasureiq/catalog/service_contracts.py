@@ -170,6 +170,22 @@ class ResolvedService(_StrictModel):
     connector: ConnectorRef
 
 
+class DisambiguazioneServizi(_StrictModel):
+    """L'esito ≥2 del resolver: più servizi confermati per la stessa ServiceKey.
+
+    Non è un ``ResolvedService`` (nessuno è "quello giusto" da eleggere) e non è
+    un miss (i candidati sono validi). È la lista di riferimenti del TURNO, da
+    esporre come scelta: mai cacheabile, mai promuovibile. La selezione del
+    cittadino torna al resolver come ``service_id`` opaco (``seleziona_servizio``),
+    validato contro questo stesso insieme.  Le reference sono leggere (solo
+    INFORMATION): le opzioni piene si risolvono sulla scelta.
+    """
+
+    references: tuple[ServiceReference, ...] = Field(min_length=2)
+    retrieved_at: datetime
+    connector: ConnectorRef
+
+
 class ServiceCacheFile(_StrictModel):
     """The per-municipality cache file: several ``service_key`` entries coexist."""
 

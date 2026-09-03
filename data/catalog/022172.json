@@ -92,6 +92,55 @@
    "discovered_from": "ordinary_data",
    "provider_platform": "openpa",
    "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "022172:openpa:916",
+   "title": "Calcolatore IMIS",
+   "source_url": "https://www.comune.segonzano.tn.it/Servizi/Calcolatore-IMIS",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.segonzano.tn.it/Servizi/Calcolatore-IMIS",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.segonzano.tn.it/Servizi/Calcolatore-IMIS",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.consulenza.comunitrentini.tn.it/imis/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.segonzano.tn.it/Servizi/Calcolatore-IMIS",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.segonzano.tn.it/ocmultibinary/download/916/16520/5/3f68968a6a520d173daacac49a5d6ca2.pdf/file/Condizioni+generali+del+servizio+%282%29.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.segonzano.tn.it/Servizi/Calcolatore-IMIS",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-09-02T00:00:00Z"
   }
  }
 }

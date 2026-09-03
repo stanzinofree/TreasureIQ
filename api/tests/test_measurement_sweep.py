@@ -8,6 +8,8 @@ resolver) — più il fatto che l'unico output su disco è la cartella scratch.
 
 from __future__ import annotations
 
+import json
+import types
 from pathlib import Path
 
 from treasureiq.catalog import measurement_sweep as ms
@@ -234,6 +236,225 @@ def test_connettore_non_disponibile_target_assente(monkeypatch):
 
 
 # --------------------------------------------------------------------------- #
+# Tier catalogo/cache (resolver completo) e provenienza
+# --------------------------------------------------------------------------- #
+class _RegistryTrappola:
+    """``resolve`` esplode: il tier live NON deve partire quando il catalogo serve.
+
+    Prova strutturale che un hit di catalogo corto-circuita prima del live: se lo
+    sweep interrogasse il registry live, il test fallirebbe subito.
+    """
+
+    def resolve(self, *, request, platform_id):  # pragma: no cover - trappola
+        raise AssertionError("registry live interrogato nonostante un hit di catalogo")
+
+
+def _scrivi_catalogo(base, istat, chiave_val, url):
+    """Scrive ``{base}/catalog/{istat}.json`` con una ServiceReference valida.
+
+    Stesso schema/costruzione della promozione: il test esercita il vero
+    ``service_catalog.carica`` letto dal resolver, non un mock.
+    """
+    from datetime import datetime, timezone
+
+    from treasureiq.catalog.contracts import Surface
+    from treasureiq.catalog.service_contracts import (
+        ServiceAccessMode,
+        ServiceAccessOption,
+        ServiceReference,
+    )
+
+    ref = ServiceReference(
+        service_id=f"{istat}:comunibootstrapitalia:{chiave_val}",
+        title="Servizio di prova",
+        source_url=url,
+        options=(ServiceAccessOption(
+            mode=ServiceAccessMode.INFORMATION, url=url, official=True, source_url=url),),
+        discovered_from=Surface.ORDINARY_DATA,
+        provider_platform="comunibootstrapitalia",
+        discovered_at=datetime.now(timezone.utc),
+    )
+    cartella = base / "catalog"
+    cartella.mkdir(parents=True, exist_ok=True)
+    doc = {"municipality_istat": istat, "services": {chiave_val: json.loads(ref.model_dump_json())}}
+    (cartella / f"{istat}.json").write_text(
+        json.dumps(doc, ensure_ascii=False, indent=1), encoding="utf-8"
+    )
+
+
+def test_csc_catalogo_standalone_fulfilled_zero_fetch(tmp_path, monkeypatch):
+    # CSC: adapter FUORI dal registry, dati nel catalogo flat (ISTAT-keyed). Il
+    # tier catalogo lo serve zero-rete; il registry live è una trappola → mai toccato.
+    _scrivi_catalogo(tmp_path, "099001", "carta_identita",
+                     "https://comune.example/servizio/carta-identita")
+    monkeypatch.setenv("TREASUREIQ_DATA_DIR", str(tmp_path))
+    _stubba_comune(monkeypatch, piattaforma="comunibootstrapitalia")
+    probe = ms.Probe("carta", "carta d'identità", ServiceKey.CARTA_IDENTITA)
+    comune = ms.ComuneCampione("099001", "comunibootstrapitalia", at_presente=False)
+    m = ms.misura_coppia(comune, probe, registry=_RegistryTrappola(), esecutore=_ESEC)
+    assert m.esito == ms.ESITO_FULFILLED
+    assert m.provenienza == ms.PROV_CATALOG
+    assert m.confermati == 1
+
+
+def test_catalogo_miss_ripiega_sul_live(tmp_path, monkeypatch):
+    # Nessun file di catalogo per questo comune: il tier catalogo manca e la misura
+    # ripiega sul tier live (diagnostica), con provenienza `live`.
+    monkeypatch.setenv("TREASUREIQ_DATA_DIR", str(tmp_path))  # catalog dir vuota
+    _stubba_comune(monkeypatch)
+    reg = _RegistryStub(_ConnettoreStub(DiagnosticaConnettore(True, True, 3, 2, 1)))
+    probe = ms.Probe("imu", "imu", ServiceKey.TRIBUTI_IMU)
+    m = ms.misura_coppia(COMUNE, probe, registry=reg, esecutore=_ESEC)
+    assert m.esito == ms.ESITO_FULFILLED
+    assert m.provenienza == ms.PROV_LIVE
+
+
+def test_magnolia_registry_via_retrieve_senza_diagnostica(tmp_path, monkeypatch):
+    # Magnolia è nel registry ma NON espone `diagnostica`: la misura live lo risolve
+    # read-only via `retrieve` diretto (nessun write-back del resolver). Cataloghi
+    # vuoti (tmp) → il tier catalogo manca e si arriva al connettore live.
+    from types import SimpleNamespace
+
+    from treasureiq.catalog.service_connectors.magnolia_service import (
+        MagnoliaServiceConnector,
+    )
+
+    monkeypatch.setenv("TREASUREIQ_DATA_DIR", str(tmp_path))
+    _stubba_comune(monkeypatch, piattaforma="magnolia")
+
+    def _lettore(istat):
+        return SimpleNamespace(
+            esito="ok",
+            home="https://comune.example",
+            servizi=[SimpleNamespace(
+                service_key="CARTA_IDENTITA", titolo="Carta d'identità",
+                url="/servizio/carta", host="comune.example", categoria="106")],
+        )
+
+    conn = MagnoliaServiceConnector(lettore=_lettore)
+    assert not hasattr(conn, "diagnostica")  # precondizione del path retrieve
+    probe = ms.Probe("carta", "carta d'identità", ServiceKey.CARTA_IDENTITA)
+    comune = ms.ComuneCampione("099002", "magnolia", at_presente=False)
+    m = ms.misura_coppia(comune, probe, registry=_RegistryStub(conn), esecutore=_ESEC)
+    assert m.esito == ms.ESITO_FULFILLED
+    assert m.provenienza == ms.PROV_LIVE
+    assert m.note == ""  # via_retrieve solo sui non-fulfilled
+
+
+def test_magnolia_not_supported_e_connettore_non_disponibile(tmp_path, monkeypatch):
+    # variant B/URP: il lettore Magnolia non struttura → retrieve NOT_SUPPORTED →
+    # connettore_non_disponibile (stesso significato di target_assente).
+    from types import SimpleNamespace
+
+    from treasureiq.catalog.service_connectors.magnolia_service import (
+        MagnoliaServiceConnector,
+    )
+
+    monkeypatch.setenv("TREASUREIQ_DATA_DIR", str(tmp_path))
+    _stubba_comune(monkeypatch, piattaforma="magnolia")
+    conn = MagnoliaServiceConnector(
+        lettore=lambda istat: SimpleNamespace(
+            esito="variante_non_strutturata", home="https://comune.example", servizi=[]),
+    )
+    probe = ms.Probe("carta", "carta d'identità", ServiceKey.CARTA_IDENTITA)
+    comune = ms.ComuneCampione("099003", "magnolia", at_presente=False)
+    m = ms.misura_coppia(comune, probe, registry=_RegistryStub(conn), esecutore=_ESEC)
+    assert m.esito == ms.ESITO_CONNETTORE_NON_DISPONIBILE
+    assert m.note == "target_assente"
+
+
+def _vieta_scrittura_cache(monkeypatch):
+    """Rende ``service_cache.salva`` un'esplosione: qualunque write-back fallisce
+    il test. Il resolver importa il modulo, quindi il patch lo copre."""
+    from treasureiq.catalog import service_cache
+
+    def _boom(*a, **k):  # pragma: no cover - deve restare mai chiamato
+        raise AssertionError("scrittura service-cache vietata nella misura")
+
+    monkeypatch.setattr(service_cache, "salva", _boom)
+
+
+def test_catalog_miss_non_scrive_in_cache(tmp_path, monkeypatch):
+    # Catalog miss → ripiego live via diagnostica: nessun write-back in service-cache.
+    monkeypatch.setenv("TREASUREIQ_DATA_DIR", str(tmp_path))  # catalog dir vuota
+    _vieta_scrittura_cache(monkeypatch)
+    _stubba_comune(monkeypatch)
+    reg = _RegistryStub(_ConnettoreStub(DiagnosticaConnettore(True, True, 3, 2, 1)))
+    probe = ms.Probe("imu", "imu", ServiceKey.TRIBUTI_IMU)
+    m = ms.misura_coppia(COMUNE, probe, registry=reg, esecutore=_ESEC)
+    assert m.esito == ms.ESITO_FULFILLED
+    assert m.provenienza == ms.PROV_LIVE  # salva() non è esploso → zero-write
+
+
+def test_retrieve_path_read_only_non_scrive_in_cache(tmp_path, monkeypatch):
+    # Connettore senza diagnostica misurato via retrieve diretto: il write-back sta
+    # nel resolver (mai chiamato qui) → nessuna scrittura in service-cache.
+    from types import SimpleNamespace
+
+    from treasureiq.catalog.service_connectors.magnolia_service import (
+        MagnoliaServiceConnector,
+    )
+
+    monkeypatch.setenv("TREASUREIQ_DATA_DIR", str(tmp_path))
+    _vieta_scrittura_cache(monkeypatch)
+    _stubba_comune(monkeypatch, piattaforma="magnolia")
+    conn = MagnoliaServiceConnector(
+        lettore=lambda istat: SimpleNamespace(
+            esito="ok", home="https://comune.example",
+            servizi=[SimpleNamespace(service_key="CARTA_IDENTITA",
+                                     titolo="Carta d'identità", url="/servizio/carta",
+                                     host="comune.example", categoria="106")]),
+    )
+    probe = ms.Probe("carta", "carta d'identità", ServiceKey.CARTA_IDENTITA)
+    comune = ms.ComuneCampione("099004", "magnolia", at_presente=False)
+    m = ms.misura_coppia(comune, probe, registry=_RegistryStub(conn), esecutore=_ESEC)
+    assert m.esito == ms.ESITO_FULFILLED  # salva() non è esploso → zero-write
+
+
+def test_report_compat_formato_precedente_senza_provenienza(tmp_path):
+    # Checkpoint pre-tier (righe SENZA campo `provenienza`): il report non deve
+    # rompersi e i fulfilled storici (tutti live) ricadono su provenienza `live`.
+    checkpoint = tmp_path / "checkpoint.jsonl"
+    vecchie = [
+        {"codice_istat": "001", "base_famiglia": "wp", "at_presente": True,
+         "probe_id": "imu", "raw": "imu", "atteso": "tributi_imu",
+         "riconosciuto": "tributi_imu", "recognizer_ok": True,
+         "esito": ms.ESITO_FULFILLED, "grezzi": 3, "filtrati": 2, "confermati": 1,
+         "note": ""},  # NESSUN campo provenienza (formato vecchio)
+        {"codice_istat": "002", "base_famiglia": "wp", "at_presente": False,
+         "probe_id": "tari", "raw": "tari", "atteso": "tributi_tari",
+         "riconosciuto": "tributi_tari", "recognizer_ok": True,
+         "esito": ms.ESITO_FONTE_ASSENTE, "grezzi": 0, "filtrati": 0,
+         "confermati": 0, "note": "assenza_reale"},
+    ]
+    checkpoint.write_text(
+        "\n".join(json.dumps(r, ensure_ascii=False) for r in vecchie) + "\n",
+        encoding="utf-8",
+    )
+    report = ms.costruisci_report(checkpoint)
+    assert report["esiti_riconoscibili"][ms.ESITO_FULFILLED] == 1
+    assert report["fulfilled_per_provenienza"] == {ms.PROV_LIVE: 1}
+    # Nessuna KeyError sulle chiavi storiche; lo stampatore regge il report vecchio+nuovo.
+    ms._stampa_report(report)
+
+
+def test_report_fulfilled_per_provenienza(tmp_path):
+    # Il report separa i fulfilled per tier (catalog/cache/live).
+    checkpoint = tmp_path / "checkpoint.jsonl"
+    righe = [
+        ms.Misura("099001", "csc", False, "carta", "carta d'identità",
+                  "carta_identita", "carta_identita", True, ms.ESITO_FULFILLED,
+                  0, 0, 1, provenienza=ms.PROV_CATALOG),
+        ms.Misura("001", "wp", True, "imu", "imu", "tributi_imu", "tributi_imu",
+                  True, ms.ESITO_FULFILLED, 3, 2, 1, provenienza=ms.PROV_LIVE),
+    ]
+    for r in righe:
+        ms._append_checkpoint(checkpoint, r)
+    report = ms.costruisci_report(checkpoint)
+    assert report["fulfilled_per_provenienza"] == {ms.PROV_CATALOG: 1, ms.PROV_LIVE: 1}
+
+
+# --------------------------------------------------------------------------- #
 # Checkpoint / resume
 # --------------------------------------------------------------------------- #
 def test_resume_salta_le_coppie_gia_fatte(tmp_path: Path):
@@ -296,3 +517,69 @@ def test_campione_deterministico_e_stratificato(tmp_path: Path, monkeypatch):
     assert fam == {"wp", "comweb"}
     assert sum(1 for c in a if c.base_famiglia == "wp") == 4  # cap per famiglia
     assert sum(1 for c in a if c.base_famiglia == "comweb") == 3  # meno del cap → tutti
+
+
+# --------------------------------------------------------------------------- #
+# Step 2: budget per dominio configurabile + budget effettivo nel report
+# --------------------------------------------------------------------------- #
+def test_nuovo_esecutore_budget_configurabile():
+    # Default = costante; alzarlo cambia SOLO il tetto per dominio.
+    assert ms._nuovo_esecutore()._politica._budget._massimo == ms._MASSIMO_PER_DOMINIO
+    assert ms._nuovo_esecutore(budget_dominio=500)._politica._budget._massimo == 500
+
+
+def test_report_registra_parametri_misura(tmp_path: Path):
+    checkpoint = tmp_path / "checkpoint.jsonl"
+    ms._append_checkpoint(checkpoint, ms.Misura(
+        "001", "wp", True, "imu", "imu", "tributi_imu", "tributi_imu",
+        True, ms.ESITO_FULFILLED, 1, 1, 1))
+    par = {"budget_dominio": 500, "budget_dominio_default": 50, "classifica_fallite": True}
+    report = ms.costruisci_report(checkpoint, parametri=par)
+    assert report["parametri_misura"] == par
+    # Compat: senza parametri il report li espone come {} (i vecchi non li avevano).
+    assert ms.costruisci_report(checkpoint)["parametri_misura"] == {}
+
+
+# --------------------------------------------------------------------------- #
+# Step 2: ProbeFallita separata nelle 4 cause distinte (opt-in, read-only)
+# --------------------------------------------------------------------------- #
+def test_classifica_portale_fallito_quattro_cause():
+    comune = types.SimpleNamespace(sito="http://comune.maddaloni.ce.it")
+    # redirect off-host verso il dominio canonico DELLO STESSO comune, 200.
+    assert ms._classifica_portale_fallito(
+        comune, fetch=lambda b: ("comune.maddaloni.caserta.it", 200)
+    ) == ms.NOTA_REDIRECT_URL_OBSOLETO
+    # redirect verso dominio NON riconducibile al comune → vero off-host.
+    assert ms._classifica_portale_fallito(
+        comune, fetch=lambda b: ("sito-estraneo.com", 200)
+    ) == ms.NOTA_RISPOSTA_INVALIDA
+    # nessuna risposta (timeout/conn/DNS) → infra muta.
+    assert ms._classifica_portale_fallito(
+        comune, fetch=lambda b: None
+    ) == ms.NOTA_ENDPOINT_MUTO_MAPPA
+    # home 200 sull'host atteso ma non mappabile → classe storica non-sondabile.
+    assert ms._classifica_portale_fallito(
+        comune, fetch=lambda b: ("comune.maddaloni.ce.it", 200)
+    ) == ms.NOTA_PORTALE_NON_SONDABILE
+
+
+def test_classificatore_opt_in_non_altera_default(monkeypatch):
+    # Sonda che fallisce sempre; il comune esiste e la cache è vuota.
+    monkeypatch.setattr(ms, "_mappa_da_cache", lambda istat: None)
+    monkeypatch.setattr(
+        ms, "comune_per_codice",
+        lambda istat: types.SimpleNamespace(sito="http://x.it", codice_istat=istat))
+
+    def _fallisce(comune, *, esecutore):
+        raise ms.ProbeFallita("boom")
+
+    monkeypatch.setattr(ms, "_sonda_mappa", _fallisce)
+
+    # Default (classificatore=None): comportamento storico invariato, nessuna rete.
+    _, nota = ms._risolvi_mappa_live("001", esecutore=None)
+    assert nota == ms.NOTA_PORTALE_NON_SONDABILE
+    # Opt-in: la nota viene dal classificatore iniettato (qui uno stub, zero rete).
+    _, nota = ms._risolvi_mappa_live(
+        "001", esecutore=None,
+        classificatore=lambda c: ms.NOTA_REDIRECT_URL_OBSOLETO)
+    assert nota == ms.NOTA_REDIRECT_URL_OBSOLETO

@@ -6,22 +6,39 @@ né sul catalogo flat, né su ``storico.db``. Il suo unico prodotto è un report
 copertura/precisione e un checkpoint JSONL, entrambi in una cartella scratch
 separata (``--out``).
 
+Ogni riga porta due assi distinti: l'**esito** (fulfilled / ambiguita / …, la
+tassonomia sotto) e la **provenienza** — da quale tier del resolver è arrivata
+la risposta (``catalog`` / ``cache`` / ``live``). Servono separati: un
+``fulfilled`` servito dal catalogo flat (zero rete) non è lo stesso di uno
+scoperto dal vivo, e senza questa distinzione ogni misura globale sottostima
+sistematicamente i cataloghi standalone (es. CSC, il cui adapter è fuori
+registry ma i cui dati vivono nel catalogo flat, chiave-ISTAT).
+
 Come misura, per ogni ``(comune, probe)``:
 
 1. **recogniser** (``riconosci_service_key``): testo → ``ServiceKey`` | ``None``.
    ``None`` = ``chiave_non_riconosciuta`` (0 o ≥2 marker: il recogniser resta
    indeciso). Confrontato con l'attesa del golden per scovare miss/falsi-positivi
    deterministici (materiale per la Fase 2, non corretto qui).
-2. **comune**: mappa-connettore da cache (nessuna rete) + registro. Assenti →
-   ``comune_non_risolto``.
-3. **connettore**: ``registry.resolve``; assente → ``connettore_non_disponibile``.
-4. **diagnostica live** (``connettore.diagnostica``, read-only): discovery +
-   filtro + gate, conta i confermati:
-   - ``target`` assente → ``connettore_non_disponibile`` (la famiglia non serve
-     quella chiave su questo comune);
-   - 0 confermati → ``fonte_assente`` (cercato, non trovato: miss onesto);
-   - 1 confermato → ``fulfilled``;
-   - ≥2 confermati → ``ambiguita``.
+2. **tier cache → catalogo** (``resolve_service_with_meta`` con un ConnectorRegistry
+   **vuoto**): il resolver consulta cache poi catalogo flat e — registry isolato —
+   NON può mai arrivare al connettore live, quindi non scrive nulla (il write-back
+   del resolver è dopo il ``retrieve``, irraggiungibile). È ISTAT-keyed: non serve
+   la mappa, perciò va PRIMA della sonda live, così i comuni serviti da un adapter
+   standalone via catalogo non cadono in ``comune_non_risolto``. Hit → ``fulfilled``
+   con provenienza ``catalog`` (o ``cache``), zero rete.
+3. **comune** (solo sul miss del tier 2): mappa-connettore da cache (nessuna rete)
+   + registro. Assenti → ``comune_non_risolto``.
+4. **connettore live**: ``registry.resolve``; assente → ``connettore_non_disponibile``.
+   - connettore con ``diagnostica`` (base condivisa): discovery + filtro + gate
+     read-only, conta i confermati → ``target`` assente = ``connettore_non_disponibile``;
+     0 = ``fonte_assente``; 1 = ``fulfilled``; ≥2 = ``ambiguita``;
+   - connettore **senza** ``diagnostica`` (es. Magnolia, adapter su ``retrieve``):
+     misura read-only via ``retrieve`` diretto (il write-back sta nel resolver, che
+     qui non chiamiamo → zero scritture) → FULFILLED+1 = ``fulfilled``; NOT_SUPPORTED
+     = ``connettore_non_disponibile``; resto = ``fonte_assente`` (l'ambiguità ≥2 è
+     collassata dal connettore in NOT_FOUND: limite noto, annotato ``via_retrieve``).
+   Tutti gli esiti del tier live portano provenienza ``live``.
 
 Il campione è **stratificato per famiglia Base** (piattaforma in ``storico.db``)
 e ogni comune porta il **tag AT** (``piattaforma_at`` presente). La superficie
@@ -40,7 +57,9 @@ Riprende in automatico saltando le coppie ``(comune, probe)`` già nel checkpoin
 from __future__ import annotations
 
 import argparse
+import contextlib
 import json
+import os
 import random
 import sys
 import time
@@ -48,18 +67,29 @@ from collections import Counter, defaultdict
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable, Sequence
+from urllib.parse import urlparse
 
+import httpx
+
+from treasureiq.catalog.connector_registry import ConnectorRegistry
+from treasureiq.catalog.data_contracts import DataStatus
 from treasureiq.catalog.fetch_policy import PoliticaFetch
 from treasureiq.catalog.fetch_runtime import EsecutoreFetch
 from treasureiq.catalog.planner import service_request
 from treasureiq.catalog.service_contracts import ServiceKey
 from treasureiq.catalog.service_registry import default_service_registry
+from treasureiq.catalog.service_resolver import (
+    _CATALOG_CONNECTOR,
+    resolve_service_with_meta,
+)
 from treasureiq.chat.service_key import riconosci_service_key
 from treasureiq.mappa_connettore import (
     ProbeBudgetEsaurito,
     ProbeFallita,
+    _base_con_schema,
     _sonda_mappa,
     comune_per_codice,
+    host_senza_www,
 )
 from treasureiq.mappa_connettore import (
     _da_cache as _mappa_da_cache,
@@ -94,6 +124,82 @@ _ESITI = (
 #: separare l'endpoint muto (transient) dall'assenza reale. Default prudenti.
 _RETRY_ENDPOINT = 2
 _BACKOFF_S = 2.0
+
+#: Budget di fetch per dominio (rate-limit dell'esecutore per-sweep). Configurabile
+#: da CLI: alzarlo recupera i comuni caduti in ``budget_probe_esaurito`` (artefatto
+#: di misura, non assenza reale) senza toccare il rate-limit temporale.
+_MASSIMO_PER_DOMINIO = 50
+
+#: Cause di ``comune_non_risolto`` quando la sonda mappa fallisce. Prima erano
+#: collassate in un unico ``portale_non_sondabile``; l'audit dei drift ha mostrato
+#: che ``ProbeFallita`` mescola realtà distinte. La classificazione (opt-in) le separa:
+#:   - ``redirect_url_obsoleto`` : la home dichiarata 301/302 fuori host verso il
+#:     dominio canonico DELLO STESSO comune (URL stale nel registro), finale 200;
+#:   - ``endpoint_muto``         : nessuna risposta (timeout/conn/DNS) → infra transient;
+#:   - ``risposta_invalida``     : server risponde ma non-200, o redirect off-host
+#:     verso un dominio NON riconducibile al comune (vero off-host);
+#:   - ``portale_non_sondabile`` : home 200 sull'host atteso ma non interpretabile
+#:     come portale (raggiungibile ma vuota) — la classe storica, mantenuta.
+NOTA_REDIRECT_URL_OBSOLETO = "redirect_url_obsoleto"
+NOTA_ENDPOINT_MUTO_MAPPA = "endpoint_muto"
+NOTA_RISPOSTA_INVALIDA = "risposta_invalida"
+NOTA_PORTALE_NON_SONDABILE = "portale_non_sondabile"
+
+#: Timeout del singolo GET diagnostico della classificazione (read-only, no retry).
+_TIMEOUT_CLASSIFICA_S = 8.0
+
+# --- provenienza (il tier del resolver che ha prodotto l'esito) ---------------
+#: Secondo asse, ortogonale all'esito: `catalog`/`cache` = servito zero-rete dal
+#: tier 2 del resolver; `live` = misurato dal vivo (tier 4); `""` = nessuna
+#: risoluzione tentata (recogniser fermo prima dei tier).
+PROV_CATALOG = "catalog"
+PROV_CACHE = "cache"
+PROV_LIVE = "live"
+PROV_NESSUNA = ""
+
+#: Env-gate del tier catalogo nel resolver. Lo strumento di misura DEVE contare
+#: ciò che il catalogo può servire a prescindere dal rollout di produzione: lo
+#: forziamo attivo attorno al probe (poi ripristinato), senza mutare lo stato
+#: globale del processo.
+_ENV_CATALOGO = "TREASUREIQ_SERVICE_CATALOG"
+
+#: Registry VUOTO per il probe cache→catalogo: nessun connettore vi è registrato,
+#: quindi il resolver non può raggiungere il tier live né il suo write-back →
+#: garanzia strutturale di zero-scrittura del probe.
+_REGISTRY_ISOLATO = ConnectorRegistry()
+
+
+@contextlib.contextmanager
+def _catalogo_forzato():
+    """Attiva il gate del catalogo per la durata del blocco, poi ripristina.
+
+    La misura conta sempre il catalogo (è il suo scopo), indipendentemente
+    dall'env ambientale; il ripristino evita di lasciare il processo mutato.
+    """
+    prima = os.environ.get(_ENV_CATALOGO)
+    os.environ[_ENV_CATALOGO] = "1"
+    try:
+        yield
+    finally:
+        if prima is None:
+            os.environ.pop(_ENV_CATALOGO, None)
+        else:
+            os.environ[_ENV_CATALOGO] = prima
+
+
+def _risolvi_da_catalogo(richiesta, *, registry_isolato=None):
+    """Tier cache → catalogo via resolver con registry ISOLATO (zero-write).
+
+    Ritorna il ``ResolvedService`` se cache o catalogo servono la coppia, altrimenti
+    ``None`` (segnale di fall-through al tier live). ``mappa=None`` è sicuro: con un
+    registry vuoto il resolver ritorna prima di toccare la mappa (usata solo dentro
+    ``retrieve``, mai raggiunto).
+    """
+    reg = registry_isolato if registry_isolato is not None else _REGISTRY_ISOLATO
+    with _catalogo_forzato():
+        return resolve_service_with_meta(
+            richiesta, mappa=None, registry=reg, platform_id=""
+        )
 
 
 @dataclass(frozen=True)
@@ -164,6 +270,9 @@ class Misura:
     filtrati: int
     confermati: int
     note: str = ""
+    #: Tier del resolver che ha prodotto l'esito (catalog/cache/live) o "" quando
+    #: nessun tier è stato interrogato (recogniser fermo). Asse ortogonale all'esito.
+    provenienza: str = ""
 
     def chiave(self) -> tuple[str, str]:
         """Identità per il resume: una coppia comune×probe è misurata una volta."""
@@ -184,6 +293,7 @@ class Misura:
             "filtrati": self.filtrati,
             "confermati": self.confermati,
             "note": self.note,
+            "provenienza": self.provenienza,
         }
 
 
@@ -237,24 +347,91 @@ def campiona(
 
 
 # --- misura -------------------------------------------------------------------
-def _nuovo_esecutore() -> EsecutoreFetch:
+def _nuovo_esecutore(budget_dominio: int = _MASSIMO_PER_DOMINIO) -> EsecutoreFetch:
     """Un esecutore per-sweep (rate-limit/budget per dominio).
 
     Prudente di default: il worker tocca molti comuni, alcuni su host SaaS
     condivisi, quindi l'esecutore ricorda gli host già visti nel lotto. Serve
     sia alla sonda-mappa che alla discovery-servizi, quindi è condiviso.
+
+    ``budget_dominio`` (``massimo_per_dominio``) è configurabile: solo il tetto
+    di fetch per host cambia, il rate-limit temporale e il backoff restano fissi.
     """
     return EsecutoreFetch(
         PoliticaFetch(
             intervallo_minimo_s=1.0,
-            massimo_per_dominio=50,
+            massimo_per_dominio=budget_dominio,
             backoff_base_s=60.0,
             backoff_cap_s=3600.0,
         )
     )
 
 
-def _risolvi_mappa_live(codice_istat: str, *, esecutore):
+def _fetch_home_finale(base: str, *, timeout_s: float = _TIMEOUT_CLASSIFICA_S):
+    """Un GET read-only che segue i redirect; ritorna ``(host_finale, status)``
+    oppure ``None`` se l'host è muto (timeout/conn/DNS). Nessuna scrittura.
+
+    Isolato apposta per essere iniettabile nei test senza toccare la rete.
+    """
+    try:
+        with httpx.Client(follow_redirects=True, timeout=timeout_s) as c:
+            r = c.get(base)
+    except httpx.HTTPError:
+        return None
+    host_finale = host_senza_www((urlparse(str(r.url)).hostname or "").lower())
+    return host_finale, r.status_code
+
+
+def _core_comune(host: str) -> str:
+    """Nucleo alfabetico del nome comune in un host, per confronto same-comune.
+
+    Toglie TLD/prefissi generici e le sigle provincia (etichette ≤2 lettere),
+    poi concatena. Es. ``comune.maddaloni.ce.it`` → ``maddaloni`` e
+    ``comune.maddaloni.caserta.it`` → ``maddalonicaserta`` (contenimento OK).
+    Euristica deliberata: serve solo a etichettare la causa, non a promuovere dati.
+    """
+    generici = {"www", "it", "gov", "org", "eu", "net", "com"}
+    prefissi = ("comunedi", "cittadi", "citta", "comune")
+    labels = [l for l in host.split(".") if l and l not in generici and len(l) > 2]
+    nucleo = "".join(labels)
+    for p in prefissi:
+        if nucleo.startswith(p) and len(nucleo) > len(p) + 3:
+            nucleo = nucleo[len(p):]
+            break
+    return nucleo
+
+
+def _stesso_comune(host_atteso: str, host_finale: str) -> bool:
+    a, b = _core_comune(host_atteso), _core_comune(host_finale)
+    if len(a) < 4 or len(b) < 4:
+        return False
+    return a in b or b in a
+
+
+def _classifica_portale_fallito(comune, *, fetch=_fetch_home_finale) -> str:
+    """Classifica una ``ProbeFallita`` in una delle 4 cause distinte.
+
+    Un solo GET read-only (via ``fetch``), zero scritture. Vedi le costanti
+    ``NOTA_*`` per la semantica delle classi.
+    """
+    base = _base_con_schema(comune.sito) if getattr(comune, "sito", None) else None
+    if not base:
+        return NOTA_ENDPOINT_MUTO_MAPPA
+    host_atteso = host_senza_www((urlparse(base).hostname or "").lower())
+    esito = fetch(base)
+    if esito is None:
+        return NOTA_ENDPOINT_MUTO_MAPPA
+    host_finale, status = esito
+    if host_finale == host_atteso:
+        # raggiungibile on-host ma la sonda guardata non ha mappato: vuota/anomala.
+        return NOTA_PORTALE_NON_SONDABILE
+    if status == 200 and _stesso_comune(host_atteso, host_finale):
+        # redirect fuori host verso il dominio canonico dello stesso comune.
+        return NOTA_REDIRECT_URL_OBSOLETO
+    return NOTA_RISPOSTA_INVALIDA
+
+
+def _risolvi_mappa_live(codice_istat: str, *, esecutore, classificatore=None):
     """Mappa-connettore del comune: cache prima, sonda live sul miss, MAI scrive.
 
     ``mappa_connettore()`` scriverebbe la cache dopo la sonda (``_in_cache``):
@@ -262,6 +439,11 @@ def _risolvi_mappa_live(codice_istat: str, *, esecutore):
     la misura resta a scrittura-zero. Ritorna ``(mappa, nota)``: ``mappa`` è
     ``None`` quando il comune è ignoto al registro o il portale non è sondabile,
     con ``nota`` che ne distingue la causa.
+
+    ``classificatore`` (opt-in): se passato, una ``ProbeFallita`` viene separata
+    nelle 4 cause distinte (vedi ``NOTA_*``) con un GET read-only; se ``None`` la
+    causa resta la classe storica ``portale_non_sondabile`` (nessuna rete extra,
+    comportamento di default invariato).
     """
     voce = _mappa_da_cache(codice_istat)
     if voce is not None:
@@ -274,7 +456,9 @@ def _risolvi_mappa_live(codice_istat: str, *, esecutore):
     except ProbeBudgetEsaurito:
         return None, "budget_probe_esaurito"
     except ProbeFallita:
-        return None, "portale_non_sondabile"
+        if classificatore is None:
+            return None, NOTA_PORTALE_NON_SONDABILE
+        return None, classificatore(comune)
 
 
 def _entry_host(connettore, richiesta, mappa) -> str:
@@ -329,6 +513,34 @@ def _diagnostica_affidabile(
     return diag, "endpoint_muto"
 
 
+def _misura_via_retrieve(connettore, richiesta, mappa, _riga, nota_fp: str) -> Misura:
+    """Misura un connettore privo di ``diagnostica`` via ``retrieve`` diretto.
+
+    Read-only: il write-back sta nel resolver (``service_cache.salva`` dopo il
+    retrieve), che qui NON chiamiamo — invochiamo il connettore direttamente.
+    Mappa ``ConnectorResult.status`` sugli esiti; l'ambiguità ≥2 è collassata dal
+    connettore in NOT_FOUND (limite noto), perciò annotata ``via_retrieve``.
+    """
+    res = connettore.retrieve(richiesta, mappa=mappa)
+    n = len(res.service_references)
+    if res.status is DataStatus.FULFILLED and n == 1:
+        return _riga(ESITO_FULFILLED, confermati=1, note=nota_fp)
+    if res.status is DataStatus.FULFILLED and n >= 2:
+        return _riga(ESITO_AMBIGUITA, confermati=n, note=nota_fp)
+    if res.status is DataStatus.NOT_SUPPORTED:
+        # La famiglia non serve questa chiave su questo comune (variant B/URP):
+        # stesso significato di ``target_assente`` nel path diagnostica.
+        return _riga(ESITO_CONNETTORE_NON_DISPONIBILE,
+                     note=_giunta(nota_fp, "target_assente"))
+    # NOT_FOUND (0 confermati, oppure ≥2 collassati): assenza onesta lato connettore.
+    return _riga(ESITO_FONTE_ASSENTE, note=_giunta(nota_fp, "via_retrieve"))
+
+
+def _giunta(*parti: str) -> str:
+    """Unisce le note non vuote con uno spazio (helper condiviso)."""
+    return " ".join(p for p in parti if p)
+
+
 def misura_coppia(
     comune: ComuneCampione,
     probe: Probe,
@@ -338,16 +550,22 @@ def misura_coppia(
     tentativi: int = _RETRY_ENDPOINT,
     backoff_s: float = _BACKOFF_S,
     host_raggiungibili: dict[str, bool] | None = None,
+    catalog_registry: ConnectorRegistry | None = None,
+    classificatore=None,
 ) -> Misura:
     """Misura una singola ``(comune, probe)`` — nessuna scrittura.
 
-    Rete: sonda-mappa live sul cache-miss (``_risolvi_mappa_live``) + discovery
-    live dentro ``connettore.diagnostica``, con retry/backoff sull'endpoint muto
-    (``_diagnostica_affidabile``). Il registro è cache-only su disco.
+    Ordine (resolver completo): tier cache → catalogo (``_risolvi_da_catalogo``,
+    registry isolato, zero-rete) e solo sul suo miss il tier live — sonda-mappa
+    sul cache-miss (``_risolvi_mappa_live``) + discovery ``diagnostica`` con
+    retry/backoff (``_diagnostica_affidabile``), oppure ``retrieve`` read-only per
+    i connettori privi di ``diagnostica``. Il registro è cache-only su disco.
+    ``catalog_registry`` sovrascrive il registry isolato del probe (per i test).
     """
     if host_raggiungibili is None:
         host_raggiungibili = {}
-    def _riga(esito: str, *, grezzi=0, filtrati=0, confermati=0, note="") -> Misura:
+    def _riga(esito: str, *, grezzi=0, filtrati=0, confermati=0, note="",
+              provenienza=PROV_LIVE) -> Misura:
         return Misura(
             codice_istat=comune.codice_istat,
             base_famiglia=comune.base_famiglia,
@@ -362,6 +580,7 @@ def misura_coppia(
             filtrati=filtrati,
             confermati=confermati,
             note=note,
+            provenienza=provenienza,
         )
 
     riconosciuto = riconosci_service_key(probe.raw)
@@ -371,11 +590,28 @@ def misura_coppia(
         # Onesto solo se il probe era fuori-vocabolario; altrimenti è un miss di
         # riconoscimento deterministico (materiale Fase 2), annotato ma non forzato.
         nota = "" if probe.atteso is None else "miss_riconoscimento"
-        return _riga(ESITO_CHIAVE_NON_RICONOSCIUTA, note=nota)
+        return _riga(ESITO_CHIAVE_NON_RICONOSCIUTA, note=nota, provenienza=PROV_NESSUNA)
 
     nota_fp = "" if recognizer_ok else "falso_positivo_riconoscimento"
 
-    mappa, nota_mappa = _risolvi_mappa_live(comune.codice_istat, esecutore=esecutore)
+    richiesta = service_request(
+        source_id=comune.codice_istat,
+        service_key=riconosciuto,
+        namespace="measure",
+    )
+
+    # Tier cache → catalogo (zero-rete, zero-write): ISTAT-keyed, va PRIMA della
+    # sonda-mappa così un comune servito da un adapter standalone via catalogo non
+    # cade in ``comune_non_risolto``. Un hit è per costruzione exactly-one (il gate
+    # di promozione ha già applicato I-1) → fulfilled con la provenienza del tier.
+    risolto = _risolvi_da_catalogo(richiesta, registry_isolato=catalog_registry)
+    if risolto is not None:
+        prov = PROV_CATALOG if risolto.connector.name == _CATALOG_CONNECTOR.name else PROV_CACHE
+        return _riga(ESITO_FULFILLED, confermati=1, note=nota_fp, provenienza=prov)
+
+    mappa, nota_mappa = _risolvi_mappa_live(
+        comune.codice_istat, esecutore=esecutore, classificatore=classificatore
+    )
     if mappa is None:
         return _riga(ESITO_COMUNE_NON_RISOLTO, note=(nota_fp or nota_mappa))
 
@@ -386,14 +622,14 @@ def misura_coppia(
     # ha la precedenza (è ciò che userebbe il runtime).
     record = leggi_registro(comune.codice_istat)
     platform_id = (record.piattaforma if record else "") or comune.base_famiglia
-    richiesta = service_request(
-        source_id=comune.codice_istat,
-        service_key=riconosciuto,
-        namespace="measure",
-    )
     connettore = registry.resolve(request=richiesta, platform_id=platform_id)
     if connettore is None:
         return _riga(ESITO_CONNETTORE_NON_DISPONIBILE, note=(nota_fp or "no_connettore"))
+
+    # Connettore senza discovery diagnostica (es. Magnolia, adapter su ``retrieve``):
+    # niente bucket grezzi/filtrati, misura read-only via ``retrieve`` diretto.
+    if not hasattr(connettore, "diagnostica"):
+        return _misura_via_retrieve(connettore, richiesta, mappa, _riga, nota_fp)
 
     diag, nota_endpoint = _diagnostica_affidabile(
         connettore, richiesta, mappa,
@@ -458,9 +694,13 @@ def _leggi_misure(checkpoint: Path) -> list[dict]:
     return righe
 
 
-def costruisci_report(checkpoint: Path) -> dict:
+def costruisci_report(checkpoint: Path, parametri: dict | None = None) -> dict:
     """Aggregato dal checkpoint: esiti totali, per famiglia Base, per tag AT,
     e i segnali di riconoscimento (miss / falsi positivi) per la Fase 2.
+
+    ``parametri`` registra le condizioni di misura (budget per dominio effettivo,
+    rate-limit, retry, seed…) così ogni report dice sotto quale budget è stato
+    prodotto. ``None``/assente → ``{}`` (compat: i vecchi report non lo avevano).
     """
     misure = _leggi_misure(checkpoint)
     tot = Counter(m["esito"] for m in misure)
@@ -494,6 +734,15 @@ def costruisci_report(checkpoint: Path) -> dict:
     # così i fuori-vocabolario non gonfiano né il numeratore né il totale.
     reali = [m for m in misure if m["atteso"] is not None]
     esiti_riconoscibili = Counter(m["esito"] for m in reali)
+    # Provenienza dei fulfilled riconoscibili (asse ortogonale all'esito): un
+    # ``fulfilled`` da catalogo (zero-rete) non equivale a uno scoperto dal vivo.
+    # ``or PROV_LIVE`` copre i checkpoint pre-tier (senza campo provenienza): erano
+    # tutti misurati dal vivo, quindi l'assenza del campo significa ``live``.
+    fulfilled_per_provenienza = Counter(
+        (m.get("provenienza") or PROV_LIVE)
+        for m in reali
+        if m["esito"] == ESITO_FULFILLED
+    )
     miss_riconoscimento = [
         {"codice_istat": m["codice_istat"], "probe_id": m["probe_id"], "raw": m["raw"]}
         for m in misure
@@ -507,11 +756,13 @@ def costruisci_report(checkpoint: Path) -> dict:
     ]
     comuni = {m["codice_istat"] for m in misure}
     return {
+        "parametri_misura": parametri or {},
         "coppie_misurate": len(misure),
         "coppie_riconoscibili": len(reali),
         "comuni": len(comuni),
         "esiti_totali": dict(tot),
         "esiti_riconoscibili": dict(esiti_riconoscibili),
+        "fulfilled_per_provenienza": dict(fulfilled_per_provenienza),
         "chiave_non_riconosciuta_attesa": chiave_attesa,
         "comune_non_risolto_per_causa": dict(cnr_cause),
         "fonte_assente_per_causa": dict(fa_cause),
@@ -534,15 +785,30 @@ def _stampa_report(report: dict) -> None:
         f"coppie misurate: {report['coppie_misurate']}  |  comuni: {report['comuni']}  "
         f"|  di cui riconoscibili: {report.get('coppie_riconoscibili', 0)}"
     )
+    par = report.get("parametri_misura") or {}
+    if par:
+        marca = "" if par.get("budget_dominio") == par.get("budget_dominio_default") else " (ALZATO)"
+        print(
+            f"parametri: budget/dominio={par.get('budget_dominio')}{marca}  "
+            f"rate={par.get('intervallo_minimo_s')}s  retry={par.get('tentativi_endpoint')}  "
+            f"classifica_fallite={par.get('classifica_fallite')}  seed={par.get('seed')}"
+        )
     attesa = report.get("chiave_non_riconosciuta_attesa", 0)
     print(
         "\nesiti (denominatore = probe riconoscibili; i probe fuori-vocabolario\n"
         f"sono {attesa} `chiave_non_riconosciuta` ATTESI, esclusi dal conteggio):"
     )
+    prov = report.get("fulfilled_per_provenienza", {})
     for esito in _ESITI:
         if esito == ESITO_CHIAVE_NON_RICONOSCIUTA:
             continue  # sotto, separato attesi vs miss
         print(f"  {esito:<28} {report.get('esiti_riconoscibili', {}).get(esito, 0)}")
+        if esito == ESITO_FULFILLED and prov:
+            dettaglio = "  ".join(
+                f"{tier}={prov[tier]}" for tier in (PROV_CATALOG, PROV_CACHE, PROV_LIVE)
+                if prov.get(tier)
+            )
+            print(f"  {'  └ per provenienza':<28} {dettaglio}")
     print(
         f"  {'chiave_non_riconosciuta':<28} "
         f"attesi={attesa}  miss_reali={len(report['recognizer_miss'])}"
@@ -591,18 +857,40 @@ def esegui(
     limite_comuni: int | None = None,
     tentativi: int = _RETRY_ENDPOINT,
     backoff_s: float = _BACKOFF_S,
+    budget_dominio: int = _MASSIMO_PER_DOMINIO,
+    classifica_fallite: bool = False,
 ) -> dict:
     """Esegue lo sweep di misura e ritorna il report. Nessuna scrittura fuori
-    da ``out`` (checkpoint + report). Riprende dal checkpoint esistente.
+    da ``out`` (checkpoint + report + parametri). Riprende dal checkpoint esistente.
+
+    ``budget_dominio`` è il tetto di fetch per host (rate-limit budget). Con
+    ``classifica_fallite`` ogni ``ProbeFallita`` viene separata nelle 4 cause
+    distinte (redirect/URL obsoleto, endpoint muto, risposta invalida,
+    non-sondabile) con un GET read-only; di default resta OFF (sweep nazionale
+    invariato e più veloce).
     """
     out.mkdir(parents=True, exist_ok=True)
     checkpoint = out / "checkpoint.jsonl"
+    parametri = {
+        "budget_dominio": budget_dominio,
+        "budget_dominio_default": _MASSIMO_PER_DOMINIO,
+        "intervallo_minimo_s": 1.0,
+        "tentativi_endpoint": tentativi,
+        "backoff_s": backoff_s,
+        "classifica_fallite": classifica_fallite,
+        "seed": seed,
+        "per_famiglia": per_famiglia,
+    }
+    (out / "parametri.json").write_text(
+        json.dumps(parametri, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
     campione = campiona(db, per_famiglia=per_famiglia, seed=seed)
     if limite_comuni is not None:
         campione = campione[:limite_comuni]
     fatte = _carica_fatte(checkpoint)
-    esecutore = _nuovo_esecutore()
+    esecutore = _nuovo_esecutore(budget_dominio=budget_dominio)
     registry = default_service_registry(esecutore)
+    classificatore = _classifica_portale_fallito if classifica_fallite else None
     da_fare = [
         (c, p) for c in campione for p in probes if (c.codice_istat, p.probe_id) not in fatte
     ]
@@ -619,11 +907,12 @@ def esegui(
             comune, probe, registry=registry, esecutore=esecutore,
             tentativi=tentativi, backoff_s=backoff_s,
             host_raggiungibili=host_raggiungibili,
+            classificatore=classificatore,
         )
         _append_checkpoint(checkpoint, misura)
         if i % 25 == 0 or i == len(da_fare):
             print(f"  … {i}/{len(da_fare)}  (ultimo: {misura.esito} @ {comune.codice_istat})")
-    report = costruisci_report(checkpoint)
+    report = costruisci_report(checkpoint, parametri=parametri)
     (out / "report.json").write_text(
         json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8"
     )
@@ -652,6 +941,14 @@ def main(argv: Iterable[str] | None = None) -> int:
                         help="retry dello stesso endpoint sul 0-grezzi (muto vs assenza).")
     parser.add_argument("--backoff-s", type=float, default=_BACKOFF_S,
                         help="backoff base (s) tra i retry; 0 = nessuna attesa.")
+    parser.add_argument("--budget-dominio", type=int, default=_MASSIMO_PER_DOMINIO,
+                        help=(f"tetto di fetch per host (rate-limit budget); default "
+                              f"{_MASSIMO_PER_DOMINIO}. Alzarlo recupera i casi "
+                              "budget_probe_esaurito senza toccare il rate-limit temporale."))
+    parser.add_argument("--classifica-fallite", action="store_true",
+                        help=("separa ogni ProbeFallita nelle 4 cause distinte "
+                              "(redirect/URL obsoleto, endpoint muto, risposta invalida, "
+                              "non-sondabile) con un GET read-only; OFF di default."))
     args = parser.parse_args(list(argv) if argv is not None else None)
 
     if args.solo_report:
@@ -659,7 +956,9 @@ def main(argv: Iterable[str] | None = None) -> int:
         if not checkpoint.exists():
             print(f"nessun checkpoint in {checkpoint}", file=sys.stderr)
             return 1
-        _stampa_report(costruisci_report(checkpoint))
+        par_file = args.out / "parametri.json"
+        parametri = json.loads(par_file.read_text(encoding="utf-8")) if par_file.exists() else None
+        _stampa_report(costruisci_report(checkpoint, parametri=parametri))
         return 0
 
     esegui(
@@ -670,6 +969,8 @@ def main(argv: Iterable[str] | None = None) -> int:
         limite_comuni=args.limite_comuni,
         tentativi=args.tentativi,
         backoff_s=args.backoff_s,
+        budget_dominio=args.budget_dominio,
+        classifica_fallite=args.classifica_fallite,
     )
     return 0
 

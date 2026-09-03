@@ -2885,6 +2885,54 @@ a {
   color: var(--sumi-soft);
 }
 
+/* Scelta servizio (Ramo 3, contratto ≥2): il comune pubblica più servizi
+   confermati per la stessa chiave, raggruppati per intento d'azione. Stessa
+   grammatica visiva della scelta-comune — è una scelta a un tap, non un
+   verdetto — ma impilata in verticale: i titoli dei servizi sono lunghi, non
+   stanno su una riga a chip come i nomi di comune. */
+.scelta-servizio {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ma-4);
+  margin: var(--ma-4) 0 0;
+}
+.scelta-servizio__gruppo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ma-2);
+}
+.scelta-servizio__etichetta {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--sumi-soft);
+}
+.scelta-servizio__scheda {
+  display: block;
+  text-align: left;
+  padding: var(--ma-2) var(--ma-4);
+  border: 1px solid var(--kasumi, #d5dbe6);
+  border-radius: 4px;
+  background: var(--washi, #fff);
+  cursor: pointer;
+  font: inherit;
+  color: var(--sumi, #1f2733);
+  transition: border-color 0.12s, background 0.12s;
+}
+.scelta-servizio__scheda:hover:not(:disabled) {
+  border-color: var(--matcha, #2f9e6f);
+  background: var(--matcha-wash, #eef8f2);
+}
+.scelta-servizio__scheda:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.scelta-servizio__titolo {
+  font-weight: 600;
+}
+
 /* Mappa servizi (fase 1): categorie del portale come chip a cascata sotto il
    badge connettore. Verde matcha come il badge — è la stessa «capacità del
    connettore», non un «da verificare» (che è giallo). Riusa .scelta-comune__scheda
@@ -3469,14 +3517,6 @@ a {
   border-left: 3px solid var(--yamabuki, #e0a80d);
   background: var(--yamabuki-wash);
 }
-.scheda-letto-ora__provenienza-testa {
-  margin: 0;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: var(--yamabuki-deep);
-}
 .scheda-letto-ora__uffici {
   list-style: none;
   margin: 0;
@@ -3530,12 +3570,6 @@ a {
 .scheda-letto-ora__assente {
   color: var(--sumi-faint);
   font-style: italic;
-}
-.scheda-letto-ora__provenienza {
-  margin-top: 0.3em;
-  font-size: 0.72rem;
-  font-style: italic;
-  color: var(--sumi-soft);
 }
 .scheda-letto-ora__at {
   border-top: 1px solid var(--kasumi);
@@ -4499,45 +4533,6 @@ a {
   margin-top: 0;
 }
 
-.civica__stato {
-  align-self: flex-start;
-  margin: 0;
-  padding: 2px var(--ma-2);
-  border: 1px solid currentColor;
-  font-family: var(--font-mono);
-  font-size: var(--fs-micro);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-/* Il verde solo dove qualcosa è davvero confermato; l'ambra per ciò che manca
- * — è già il codice che il resto dell'app usa per `unknown_source`. Nessun
- * rosso: un dato non pubblicato non è un errore di nessuno. */
-.civica__stato[data-stato="ufficiale"] { color: var(--verde, #1b7f5a); }
-.civica__stato[data-stato="parziale"] { color: var(--ambra, #8a6100); }
-.civica__stato[data-stato="non_verificato"] { color: var(--sumi-soft); }
-.civica__stato[data-stato="non_pubblicato"] { color: var(--ambra, #8a6100); }
-
-/* Grammatica fonti (Ramo 3): la provenienza della scheda servizio vince sullo
- * stato quando c'è. Blu = catalogo nazionale (autorevole e conservato); verde =
- * letto dal comune (live ora, o da cache del connettore). Scope sotto
- * `.bubble--assistant .chat__answer` per battere l'override bolt-on
- * `.bubble--assistant .chat__answer .civica__stato { color: inherit }` (0,3,0)
- * che dentro la bolla neutralizza il colore-stato: qui (0,4,0) vince e il bollo
- * porta davvero blu/verde. Vedi lezione cascade bolt-on. */
-.bubble--assistant .chat__answer .civica__stato[data-origine="catalogo"] { color: var(--ai); }
-.bubble--assistant .chat__answer .civica__stato[data-origine="live"] { color: var(--wakatake-deep, #067647); }
-
-/* Il bollo «letto ora dal comune» è cliccabile (apre la nota): reset
- * dell'aspetto bottone, la cornice del bollo resta. */
-.civica__stato--vivo {
-  background: none;
-  cursor: pointer;
-  -webkit-appearance: none;
-  appearance: none;
-}
-.civica__stato--vivo:hover { background: var(--wakatake-wash, #dcfae6); }
-
 .civica__sintesi {
   margin: 0;
   font-size: var(--fs-sintesi);
@@ -4755,46 +4750,6 @@ a {
   gap: 2px;
 }
 
-/* «letto ora»: bollo ambra cliccabile accanto allo stato. Ambra = dato letto
-   dal vivo, non conservato. Il click apre la nota a comparsa (civica__vivo-nota)
-   invece della vecchia banda grigia sempre a schermo. */
-.civica__vivo-wrap {
-  position: relative;
-  display: inline-flex;
-}
-.civica__vivo-bollo {
-  flex: none;
-  padding: 1px var(--ma-2);
-  border: 1px solid var(--ambra, #8a6100);
-  background: none;
-  color: var(--ambra, #8a6100);
-  font: inherit;
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  white-space: nowrap;
-  cursor: pointer;
-}
-.civica__vivo-bollo::before {
-  content: "● ";
-}
-.civica__vivo-nota {
-  position: absolute;
-  top: calc(100% + var(--ma-1, 4px));
-  inset-inline-start: 0;
-  z-index: 5;
-  width: max-content;
-  max-width: 22rem;
-  padding: var(--ma-2);
-  border: 1px solid var(--kasumi);
-  border-inline-start: 3px solid var(--ambra, #8a6100);
-  background: var(--paper-sunken);
-  font-size: 0.82rem;
-  line-height: 1.4;
-  color: var(--sumi-soft);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-}
-
 /* ── Scheda civica, seconda passata ──────────────────────────────────────────
  * Tre cambi di sostanza, non di gusto.
  *
@@ -4806,14 +4761,6 @@ a {
  * 3. I contatti stanno su due colonne fisse invece che a flusso: la PEC, che è
  *    l'indirizzo più lungo, tirava la riga e sbilanciava tutto il blocco.
  */
-
-.civica__bolli {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: var(--ma-2);
-  margin: 0;
-}
 
 .civica__blocco h4 {
   font-size: 0.95rem;
@@ -4838,12 +4785,6 @@ a {
   align-items: baseline;
   gap: var(--ma-2);
   margin: 0;
-}
-
-.civica__verifica {
-  margin: 0;
-  font-size: 0.8rem;
-  color: var(--sumi-soft);
 }
 
 .civica__azioni {
@@ -6255,9 +6196,6 @@ a {
 .bubble--assistant .chat__answer .civica__blocco--web {
   order: 0;
 }
-.bubble--assistant .chat__answer .civica__bolli {
-  order: 1;
-}
 /* via il vecchio "tick" verticale: la sezione web e' tipografia pura. */
 .bubble--assistant .chat__answer .civica__blocco--web {
   border: none;
@@ -6294,54 +6232,13 @@ a {
   box-shadow: 4px 4px 0 0 var(--sumi);
 }
 
-/* 6 - Provenienza: riga di metadati quieta in CODA (sotto le fonti),
-      non due badge riquadrati in cima. */
-.bubble--assistant .chat__answer .civica__bolli {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: var(--ma-2);
-  margin: 0;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.04em;
-  color: var(--sumi-faint);
-  text-transform: none;
-}
+/* 6 - Provenienza: riga di metadati quieta in CODA (sotto le fonti). */
 /* la chip d'accesso continua la stessa riga di metadati: tight, no hairline. */
 .bubble--assistant .chat__answer > .badge-connettore-box {
   margin-top: var(--ma-2);
   padding-top: 0;
   border-top: none;
 }
-.bubble--assistant .chat__answer .civica__stato,
-.bubble--assistant .chat__answer .civica__vivo-bollo {
-  background: transparent;
-  border: none;
-  padding: 0;
-  color: inherit;
-  font: inherit;
-  letter-spacing: inherit;
-}
-.bubble--assistant .chat__answer .civica__vivo-wrap::before {
-  content: "·";
-  margin-right: var(--ma-2);
-  color: var(--kasumi);
-}
-/* La chip d'accesso e' il primo elemento della riga di provenienza:
-   stesso registro mono quieto, separatore "·" verso lo stato. */
-.bubble--assistant .chat__answer .civica__access {
-  color: inherit;
-  font: inherit;
-  letter-spacing: inherit;
-  text-transform: uppercase; /* coerente con stato/freschezza sulla riga */
-}
-.bubble--assistant .chat__answer .civica__access + .civica__stato::before {
-  content: "·";
-  margin-right: var(--ma-2);
-  color: var(--kasumi);
-}
-
 /* 7 - Header web = etichetta di provenienza quieta, non un titolo. */
 .bubble--assistant .chat__answer .civica__blocco--web h4 {
   font-family: var(--font-mono);
@@ -6397,17 +6294,6 @@ a {
 }
 .bubble--assistant .chat__answer .scheda-letto-ora .tiq-card__banda {
   display: none;
-}
-/* Testa provenienza: da titolone maiuscolo a intestazione quieta, come
-   "Pagine trovate sul web". */
-.bubble--assistant .chat__answer .scheda-letto-ora__provenienza-testa {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  color: var(--sumi-faint);
-  text-transform: none;
-  margin: 0 0 var(--ma-3);
 }
 .bubble--assistant .chat__answer .scheda-letto-ora__ufficio {
   background: transparent;

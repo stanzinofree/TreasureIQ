@@ -69,6 +69,55 @@
    "discovered_from": "ordinary_data",
    "provider_platform": "openpa",
    "discovered_at": "2026-08-26T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "022169:openpa:2687",
+   "title": "Calcolatore IMIS",
+   "source_url": "https://www.comune.sanzeno.tn.it/Servizi/Calcolatore-IMIS",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanzeno.tn.it/Servizi/Calcolatore-IMIS",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanzeno.tn.it/Servizi/Calcolatore-IMIS",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.consulenza.comunitrentini.tn.it/imis/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.sanzeno.tn.it/Servizi/Calcolatore-IMIS",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.sanzeno.tn.it/ocmultibinary/download/2687/36113/4/76c7f5bde540e0b70545cfe001729f3f.pdf/file/Condizioni+generali+del+servizio+%281%29.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanzeno.tn.it/Servizi/Calcolatore-IMIS",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openpa",
+   "discovered_at": "2026-09-02T00:00:00Z"
   }
  }
 }

@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "017063",
+ "services": {
+  "carta_identita": {
+   "service_id": "017063:comunibootstrapitalia:richiedere-la-carta-d-identita-elettronica-cie",
+   "title": "Richiedere la carta d’identità elettronica (Cie)",
+   "source_url": "https://www.comune.corteno-golgi.bs.it/servizio/richiedere-la-carta-d-identita-elettronica-cie",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.corteno-golgi.bs.it/servizio/richiedere-la-carta-d-identita-elettronica-cie",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.corteno-golgi.bs.it/servizio/richiedere-la-carta-d-identita-elettronica-cie",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comunibootstrapitalia",
+   "discovered_at": "2026-08-31T07:01:44.312693Z"
+  },
+  "cambio_residenza": {
+   "service_id": "017063:comunibootstrapitalia:dichiarare-il-cambio-di-residenza",
+   "title": "Dichiarare il cambio di residenza",
+   "source_url": "https://www.comune.corteno-golgi.bs.it/servizio/dichiarare-il-cambio-di-residenza",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.corteno-golgi.bs.it/servizio/dichiarare-il-cambio-di-residenza",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.corteno-golgi.bs.it/servizio/dichiarare-il-cambio-di-residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "comunibootstrapitalia",
+   "discovered_at": "2026-08-31T07:01:44.312693Z"
+  }
+ }
+}

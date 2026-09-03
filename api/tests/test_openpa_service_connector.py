@@ -266,7 +266,9 @@ def test_retrieve_zero_confermati_not_found() -> None:
     assert result.status is DataStatus.NOT_FOUND
 
 
-def test_retrieve_ambiguo_due_confermati_not_found() -> None:
+def test_retrieve_ambiguo_due_confermati_disambiguation() -> None:
+    # ≥2 confermati su path distinti (CIE-1/CIE-2) → DISAMBIGUATION con entrambe
+    # le reference: il gate non elegge, espone la scelta.
     fetcher = StubFetcher(
         candidati=(
             _candidato(1, "Carta d'identità elettronica", "/Servizi/CIE-1"),
@@ -275,7 +277,8 @@ def test_retrieve_ambiguo_due_confermati_not_found() -> None:
     )
     conn = _connector(fetcher)
     result = conn.retrieve(_request(), mappa=_mappa(), esito=None)
-    assert result.status is DataStatus.NOT_FOUND
+    assert result.status is DataStatus.DISAMBIGUATION
+    assert len(result.service_references) == 2
 
 
 def test_retrieve_host_esterno_scartato() -> None:

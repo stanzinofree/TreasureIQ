@@ -29,6 +29,10 @@ from treasureiq.catalog.service_connectors.comweb_service import (
     ComWebServiceConnector,
     _ComWebDiscovery,
 )
+from treasureiq.catalog.service_connectors.drupal_bi_service import (
+    DrupalBiServiceConnector,
+    _DrupalBiDiscovery,
+)
 from treasureiq.catalog.service_connectors.esecutore_fetcher import (
     EsecutoreServiceFetcher,
     _WpDiscovery,
@@ -67,6 +71,7 @@ def default_service_registry(esecutore: EsecutoreFetch) -> ConnectorRegistry:
     reg.register(WordPressAgidServiceConnector(transport.con(_WpDiscovery())))
     reg.register(ComWebServiceConnector(transport.con(_ComWebDiscovery())))
     reg.register(OpenPAServiceConnector(transport.con(_EzFindDiscovery())))
+    reg.register(DrupalBiServiceConnector(transport.con(_DrupalBiDiscovery())))
     # Magnolia (variant A) non usa il transport/discovery condiviso: legge il
     # proprio catalogo REST KIB col parser dedicato (magnolia.py), invariato.
     reg.register(MagnoliaServiceConnector())

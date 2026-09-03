@@ -112,6 +112,26 @@ def _href_di(attrs: str) -> str | None:
     return unescape(m.group(1)) if m else None
 
 
+class _RisultatoServizi(tuple):
+    """``tuple`` di ``ServiceCandidate`` che porta il segnale ``troncato``.
+
+    Il contratto ``ServiceFetcher`` espone una tuple piatta di candidati. La
+    troncatura (cap ``_MAX_PAGINE`` raggiunto con la lista ancora aperta, o cap
+    difensivo servizi toccato) è un fatto sulla *completezza* del crawl, non un
+    candidato: la si porta come attributo extra, invisibile a chi tratta il
+    risultato come sequenza (``len``/iterazione/indice restano quelli della
+    tuple) e letta a valle solo via ``getattr(result, "troncato", False)``. Le
+    altre famiglie restituiscono una tuple nuda → ``troncato`` assente = ``False``.
+    """
+
+    troncato: bool
+
+    def __new__(cls, candidati, *, troncato: bool) -> "_RisultatoServizi":
+        self = super().__new__(cls, candidati)
+        self.troncato = troncato
+        return self
+
+
 class _DrupalBiDiscovery:
     """Scoperta Drupal BI bounded, robusta a **due layout reali** dell'indice.
 
@@ -166,13 +186,15 @@ class _DrupalBiDiscovery:
         categoria_url = self._trova_argomento(indice, base_url, host, parola)
         if categoria_url is not None:
             # Ramo vetrina/normale: la pagina categoria mappata (bounded).
-            self._paginare(transport, categoria_url, host, limit, visti, candidati)
+            troncato = self._paginare(transport, categoria_url, host, limit, visti, candidati)
         else:
             # Ramo indice-impaginato (tile assenti dall'HTML statico): l'indice è
             # già la lista servizi; si impagina esso stesso, riusando la p0 già
             # scaricata per non rifetcharla.
-            self._paginare(transport, base_url, host, limit, visti, candidati, prima_pagina=indice)
-        return tuple(candidati)
+            troncato = self._paginare(
+                transport, base_url, host, limit, visti, candidati, prima_pagina=indice
+            )
+        return _RisultatoServizi(candidati, troncato=troncato)
 
     @classmethod
     def _paginare(
@@ -185,24 +207,38 @@ class _DrupalBiDiscovery:
         candidati: list[ServiceCandidate],
         *,
         prima_pagina: str | None = None,
-    ) -> None:
+    ) -> bool:
         """Segue ``?page=N`` da ``start_url`` accumulando i servizi, finché una
         pagina non porta slug nuovi (cap ``_MAX_PAGINE``).  ``prima_pagina``, se
-        dato, è l'HTML già scaricato di ``start_url`` (evita un refetch)."""
+        dato, è l'HTML già scaricato di ``start_url`` (evita un refetch).
+
+        Ritorna ``True`` se la paginazione è stata **troncata** da un cap — cap
+        difensivo servizi raggiunto, oppure ``_MAX_PAGINE`` esaurito mentre
+        l'ultima pagina portava ancora slug freschi: oltre il tetto restano
+        pagine non lette, il crawl è parziale.  Ritorna ``False`` sulle fini
+        **naturali** (pagina muta / oltre la fine, o nessuno slug nuovo): la
+        lista è completa.  Al confine esatto (contenuto multiplo pieno della
+        dimensione pagina) non si può distinguere «completo al cap» da «altro
+        oltre» senza una fetch in più: si marca troncato in via **prudente** —
+        sbagliare verso il parziale non promuove dati incompleti (requisito)."""
         for page in range(_MAX_PAGINE):
             if len(candidati) >= limit:
-                break
+                return True  # cap difensivo servizi: lista troncata
             if page == 0 and prima_pagina is not None:
                 url, pagina = start_url, prima_pagina
             else:
                 url = start_url if page == 0 else f"{start_url}?page={page}"
                 pagina = transport.leggi_pagina(url=url, official_host=host)
             if not pagina:
-                break  # pagina muta / oltre la fine
+                return False  # pagina muta / oltre la fine: paginazione completa
             prima = len(visti)
             cls._raccogli_servizi(pagina, url, host, limit, visti, candidati)
             if page > 0 and len(visti) == prima:
-                break  # nessun servizio nuovo: fine paginazione (o ?page ignorato)
+                return False  # nessun servizio nuovo: fine naturale, lista completa
+        # ``range`` esaurito senza fine naturale: l'ultima pagina letta portava
+        # ancora slug freschi (altrimenti sarebbe uscito col ramo sopra) →
+        # ``_MAX_PAGINE`` ha tagliato una lista ancora aperta.
+        return True
 
     @staticmethod
     def _trova_argomento(html: str, base_url: str, host: str, parola: str) -> str | None:

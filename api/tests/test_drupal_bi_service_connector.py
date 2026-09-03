@@ -27,6 +27,7 @@ from pathlib import Path
 from treasureiq.catalog.contracts import CAPABILITY_SERVICES, Surface
 from treasureiq.catalog.data_contracts import DataRequest, DataStatus, FreshnessPolicy
 from treasureiq.catalog.service_connectors.drupal_bi_service import (
+    _MAX_PAGINE,
     DRUPAL_BI_ARGOMENTO,
     DrupalBiServiceConnector,
     _DrupalBiDiscovery,
@@ -369,3 +370,79 @@ def test_missing_service_key_is_not_found():
         esito=None,
     )
     assert result.status is DataStatus.NOT_FOUND
+
+
+# ── truncation signal — the _MAX_PAGINE cap must not masquerade as absence ────
+# A deep-flat comune (Salerno/Massa class) has more service pages than the pager
+# cap.  A crawl cut by the cap is PARTIAL: its 0/≥2-confirmed outcome is not a
+# reliable absence/ambiguity, so the diagnostica must flag it (``troncato``) and
+# the sweep must exclude it from promotion.  Synthetic markup: the discovery is
+# what is under test, and no real portal in the fixture set exceeds the cap.
+
+_DF = "comune.deepflat.rm.it"
+_DF_INDEX = f"https://{_DF}/servizi"
+
+
+def _pagina_deepflat(n: int) -> str:
+    # One fresh service-link per page → the paginator never hits a natural stop.
+    return (
+        f'<a data-element="service-link" href="/servizi/servizio-{n}">'
+        f"<span>Servizio {n}</span></a>"
+    )
+
+
+def _pagine_deepflat(n_pagine: int) -> dict[str, str]:
+    """Tile-less paginated index with a fresh service-link on every ``?page=N``,
+    for more pages than the pager cap (fallback-paginator path)."""
+    pagine = {_DF_INDEX: _pagina_deepflat(0)}
+    for n in range(1, n_pagine):
+        pagine[f"{_DF_INDEX}?page={n}"] = _pagina_deepflat(n)
+    return pagine
+
+
+def test_deepflat_over_cap_reports_troncato():
+    # > _MAX_PAGINE pages, each fresh: the fallback paginator exhausts the cap
+    # with the list still open → diagnostica flags the crawl partial.
+    diag = _connector(_pagine_deepflat(_MAX_PAGINE + 5)).diagnostica(
+        _request(source_id="058091", service_key=ServiceKey.CARTA_IDENTITA),
+        mappa=_mappa(istat="058091", host=_DF),
+    )
+    assert diag.troncato is True
+    assert diag.grezzi == _MAX_PAGINE  # exactly the cap of pages was read, no more
+
+
+def test_complete_paginated_index_not_troncato():
+    # Monsummano's index ends naturally within the cap (the page past the last is
+    # muted) → the crawl is complete, not truncated.
+    diag = _connector(_pagine_monsummano()).diagnostica(
+        _request(source_id="047009", service_key=ServiceKey.CARTA_IDENTITA),
+        mappa=_mappa(istat="047009", host=_MO),
+    )
+    assert diag.troncato is False
+
+
+def test_bounded_drill_not_troncato():
+    # A showcase drill whose mapped category fits in one page ends naturally →
+    # a complete crawl must never be flagged partial.
+    diag = _connector(_pagine_dicomano()).diagnostica(
+        _request(source_id="048013", service_key=ServiceKey.CARTA_IDENTITA),
+        mappa=_mappa(istat="048013", host=_DIC),
+    )
+    assert diag.troncato is False
+
+
+def test_defensive_service_cap_also_marks_troncato():
+    # The memory-guard service cap truncates too: hitting it leaves the list open.
+    visti: set[str] = set()
+    cand: list = []
+    troncato = _DrupalBiDiscovery._paginare(
+        _StubTransport(_pagine_deepflat(_MAX_PAGINE + 5)),
+        _DF_INDEX,
+        _DF,
+        1,  # tiny defensive cap → truncates after the first candidate
+        visti,
+        cand,
+        prima_pagina=_pagina_deepflat(0),
+    )
+    assert troncato is True
+    assert len(cand) == 1

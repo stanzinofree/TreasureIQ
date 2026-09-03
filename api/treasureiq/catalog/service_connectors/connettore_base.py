@@ -76,7 +76,12 @@ class DiagnosticaConnettore(NamedTuple):
     - ``target_presente``: la piattaforma ha un entry-point per quella key
       (``False`` → la famiglia non serve questa key su questo comune);
     - ``grezzi`` / ``filtrati`` / ``confermati``: candidati a ogni stadio della
-      pipeline di discovery (discovery → filtro class-aware → gate host+recogniser).
+      pipeline di discovery (discovery → filtro class-aware → gate host+recogniser);
+    - ``troncato``: la discovery ha raggiunto un cap (es. ``_MAX_PAGINE``) con la
+      lista ancora aperta → il crawl è **parziale**, non completo. Uno 0/≥2
+      confermati su un crawl troncato NON è un'assenza/ambiguità affidabile: lo
+      sweep deve tenerlo distinto e **non promuoverne** i dati. Default ``False``:
+      le famiglie con paginazione bounded o senza cap non lo settano.
     """
 
     chiave_valida: bool
@@ -84,6 +89,7 @@ class DiagnosticaConnettore(NamedTuple):
     grezzi: int
     filtrati: int
     confermati: int
+    troncato: bool = False
 
 
 class _ServiceConnectorBase:
@@ -205,8 +211,13 @@ class _ServiceConnectorBase:
         )
         filtrati = self._filtra_candidati(grezzi, service_key)
         confermati = self._confermati(filtrati, service_key, target.official_host)
+        # ``troncato`` è opzionale nel contratto ServiceFetcher: le famiglie che
+        # possono lasciare la lista aperta a un cap lo espongono come attributo
+        # extra sul risultato (una ``tuple`` che resta piatta per len/iter); le
+        # altre restituiscono una tuple nuda → assente = False.
         return DiagnosticaConnettore(
-            True, True, len(grezzi), len(filtrati), len(confermati)
+            True, True, len(grezzi), len(filtrati), len(confermati),
+            getattr(grezzi, "troncato", False),
         )
 
     def entry_raggiungibile(self, request: DataRequest, *, mappa) -> bool | None:

@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "070041",
+ "services": {
+  "carta_identita": {
+   "service_id": "070041:openweb:729",
+   "title": "Carta d’Identità Elettronica (CIE)",
+   "source_url": "https://comune.montagano.cb.it/servizio/carta-didentita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.montagano.cb.it/servizio/carta-didentita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.montagano.cb.it/servizio/carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:22:56.128319Z"
+  },
+  "accesso_atti": {
+   "service_id": "070041:openweb:723",
+   "title": "Richiedere accesso agli atti",
+   "source_url": "https://comune.montagano.cb.it/servizio/richiedere-accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.montagano.cb.it/servizio/richiedere-accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.montagano.cb.it/servizio/richiedere-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:23:08.111062Z"
+  }
+ }
+}

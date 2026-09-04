@@ -1,0 +1,64 @@
+{
+ "municipality_istat": "075057",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "075057:openweb:12960",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.otranto.le.it/servizio/cambio-di-residenza-mutazione-con-provenienza-da-altro-comune-a-n-p-r-o-rimpatrio-di-italiani-iscritti-in-a-i-r-e/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.otranto.le.it/servizio/cambio-di-residenza-mutazione-con-provenienza-da-altro-comune-a-n-p-r-o-rimpatrio-di-italiani-iscritti-in-a-i-r-e/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.otranto.le.it/servizio/cambio-di-residenza-mutazione-con-provenienza-da-altro-comune-a-n-p-r-o-rimpatrio-di-italiani-iscritti-in-a-i-r-e/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/servizi-al-cittadino/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://comune.otranto.le.it/servizio/cambio-di-residenza-mutazione-con-provenienza-da-altro-comune-a-n-p-r-o-rimpatrio-di-italiani-iscritti-in-a-i-r-e/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:35:47.096690Z"
+  },
+  "accesso_atti": {
+   "service_id": "075057:openweb:12180",
+   "title": "Richiesta di accesso agli atti",
+   "source_url": "https://comune.otranto.le.it/servizio/richiesta-di-accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.otranto.le.it/servizio/richiesta-di-accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.otranto.le.it/servizio/richiesta-di-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:36:02.963611Z"
+  }
+ }
+}

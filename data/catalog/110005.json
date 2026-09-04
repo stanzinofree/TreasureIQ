@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "110005",
+ "services": {
+  "tributi_imu": {
+   "service_id": "110005:openweb:946",
+   "title": "Servizio Calcolo IMU",
+   "source_url": "https://www.comune.margheritadisavoia.bt.it/servizio/servizio-calcolo-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.margheritadisavoia.bt.it/servizio/servizio-calcolo-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.margheritadisavoia.bt.it/servizio/servizio-calcolo-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:55:08.731169Z"
+  }
+ }
+}

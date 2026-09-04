@@ -1,0 +1,113 @@
+{
+ "municipality_istat": "078066",
+ "services": {
+  "carta_identita": {
+   "service_id": "078066:openweb:305",
+   "title": "Richiedere il rilascio di carta d’identità",
+   "source_url": "https://comune.lattarico.cs.it/servizi/anagrafe-e-stato-civile/richiedere-il-rilascio-di-carta-didentita",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.lattarico.cs.it/servizi/anagrafe-e-stato-civile/richiedere-il-rilascio-di-carta-didentita",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.lattarico.cs.it/servizi/anagrafe-e-stato-civile/richiedere-il-rilascio-di-carta-didentita",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.lattarico.cs.it/wp-content/uploads/2023/09/C_S_richiedere-il-ri.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.lattarico.cs.it/servizi/anagrafe-e-stato-civile/richiedere-il-rilascio-di-carta-didentita",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:40:56.709358Z"
+  },
+  "cambio_residenza": {
+   "service_id": "078066:openweb:2271",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.lattarico.cs.it/servizi/anagrafe-e-stato-civile/cambio-di-residenza",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.lattarico.cs.it/servizi/anagrafe-e-stato-civile/cambio-di-residenza",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.lattarico.cs.it/servizi/anagrafe-e-stato-civile/cambio-di-residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.lattarico.cs.it/wp-content/uploads/2024/04/C_S_cambio-di-reside.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.lattarico.cs.it/servizi/anagrafe-e-stato-civile/cambio-di-residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:41:13.245161Z"
+  },
+  "accesso_atti": {
+   "service_id": "078066:openweb:304",
+   "title": "Richiedere l’accesso agli atti",
+   "source_url": "https://comune.lattarico.cs.it/servizi/autorizzazioni/richiedere-laccesso-agli-atti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.lattarico.cs.it/servizi/autorizzazioni/richiedere-laccesso-agli-atti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.lattarico.cs.it/servizi/autorizzazioni/richiedere-laccesso-agli-atti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.lattarico.cs.it/wp-content/uploads/2023/07/C_S_richiedere-accesso-atti.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.lattarico.cs.it/servizi/autorizzazioni/richiedere-laccesso-agli-atti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:41:29.254043Z"
+  }
+ }
+}

@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "016040",
+ "services": {
+  "carta_identita": {
+   "service_id": "016040:openweb:1613",
+   "title": "Carta d’Identità Elettronica – C.I.E.",
+   "source_url": "https://comune.brignano.bg.it/servizio/carta-didentita-elettronica-c-i-e/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.brignano.bg.it/servizio/carta-didentita-elettronica-c-i-e/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.brignano.bg.it/servizio/carta-didentita-elettronica-c-i-e/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:43:30.178355Z"
+  },
+  "tributi_imu": {
+   "service_id": "016040:openweb:1615",
+   "title": "Servizio Calcolo IMU",
+   "source_url": "https://comune.brignano.bg.it/servizio/servizio-calcolo-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.brignano.bg.it/servizio/servizio-calcolo-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.brignano.bg.it/servizio/servizio-calcolo-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:43:45.750375Z"
+  }
+ }
+}

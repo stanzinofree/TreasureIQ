@@ -1,0 +1,87 @@
+{
+ "municipality_istat": "019052",
+ "services": {
+  "carta_identita": {
+   "service_id": "019052:openweb:2429",
+   "title": "Carta d’Identità Elettronica",
+   "source_url": "https://comune.gussola.cr.it/servizio/carta-didentita-elettronica/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.gussola.cr.it/servizio/carta-didentita-elettronica/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.gussola.cr.it/servizio/carta-didentita-elettronica/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.gussola.cr.it/wp-content/uploads/2025/03/delega-cie.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.gussola.cr.it/servizio/carta-didentita-elettronica/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:44:53.203865Z"
+  },
+  "cambio_residenza": {
+   "service_id": "019052:openweb:2414",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.gussola.cr.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.gussola.cr.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.gussola.cr.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:45:06.049050Z"
+  },
+  "accesso_atti": {
+   "service_id": "019052:openweb:2426",
+   "title": "Richiedere l’accesso agli atti",
+   "source_url": "https://comune.gussola.cr.it/servizio/richiedere-laccesso-documentale/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.gussola.cr.it/servizio/richiedere-laccesso-documentale/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.gussola.cr.it/servizio/richiedere-laccesso-documentale/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:45:19.419329Z"
+  }
+ }
+}

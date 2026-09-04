@@ -1,0 +1,120 @@
+{
+ "municipality_istat": "089017",
+ "services": {
+  "carta_identita": {
+   "service_id": "089017:openweb:86",
+   "title": "Rilascio carta di identità Elettronica (CIE)",
+   "source_url": "https://www.comune.siracusa.it/servizio/carta-didentita",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.siracusa.it/servizio/carta-didentita",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.siracusa.it/servizio/carta-didentita",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:46:18.808981Z"
+  },
+  "cambio_residenza": {
+   "service_id": "089017:openweb:220",
+   "title": "Cambio di residenza con ANPR",
+   "source_url": "https://www.comune.siracusa.it/servizio/cambio-di-residenza",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.siracusa.it/servizio/cambio-di-residenza",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.siracusa.it/servizio/cambio-di-residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:46:28.798834Z"
+  },
+  "stato_civile": {
+   "service_id": "089017:openweb:3866",
+   "title": "Atti di Stato civile",
+   "source_url": "https://www.comune.siracusa.it/servizio/atti-di-stato-civile",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.siracusa.it/servizio/atti-di-stato-civile",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.siracusa.it/servizio/atti-di-stato-civile",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:46:38.751522Z"
+  },
+  "tributi_imu": {
+   "service_id": "089017:openweb:7555",
+   "title": "Imposta Municipale Unica (IMU)",
+   "source_url": "https://www.comune.siracusa.it/servizio/imposta-municipale-unica-imu",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.siracusa.it/servizio/imposta-municipale-unica-imu",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.siracusa.it/servizio/imposta-municipale-unica-imu",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:46:48.728218Z"
+  },
+  "tributi_tari": {
+   "service_id": "089017:openweb:8086",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.siracusa.it/servizio/tassa-rifiuti-tari",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.siracusa.it/servizio/tassa-rifiuti-tari",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.siracusa.it/servizio/tassa-rifiuti-tari",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:46:59.425259Z"
+  }
+ }
+}

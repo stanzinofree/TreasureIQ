@@ -1,0 +1,41 @@
+{
+ "municipality_istat": "052015",
+ "services": {
+  "tributi_tari": {
+   "service_id": "052015:openweb:10359",
+   "title": "Riduzione TARI 2026",
+   "source_url": "https://www.comune.montepulciano.si.it/servizio/riduzione-tari-2026/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.montepulciano.si.it/servizio/riduzione-tari-2026/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montepulciano.si.it/servizio/riduzione-tari-2026/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.montepulciano.si.it/wp-content/uploads/2026/07/DeliberadiConsiglio_Originale_51_2026.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.montepulciano.si.it/servizio/riduzione-tari-2026/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:05:43.070050Z"
+  }
+ }
+}

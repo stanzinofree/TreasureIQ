@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "058069",
+ "services": {
+  "tributi_imu": {
+   "service_id": "058069:openweb:530",
+   "title": "IMU",
+   "source_url": "https://comune.nazzano.rm.it/servizio/imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.nazzano.rm.it/servizio/imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.nazzano.rm.it/servizio/imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:11:08.760143Z"
+  },
+  "tributi_tari": {
+   "service_id": "058069:openweb:466",
+   "title": "Pagamento TARI",
+   "source_url": "https://comune.nazzano.rm.it/servizio/pagamento-tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.nazzano.rm.it/servizio/pagamento-tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.nazzano.rm.it/servizio/pagamento-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:11:20.444851Z"
+  }
+ }
+}

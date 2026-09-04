@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "070075",
+ "services": {
+  "carta_identita": {
+   "service_id": "070075:openweb:2384",
+   "title": "Carta d’Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.sepino.cb.it/servizio/carta-didentita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sepino.cb.it/servizio/carta-didentita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sepino.cb.it/servizio/carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:23:54.854345Z"
+  }
+ }
+}

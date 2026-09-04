@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "075073",
+ "services": {
+  "carta_identita": {
+   "service_id": "075073:openweb:392",
+   "title": "Carta di Identità Elettronica",
+   "source_url": "https://www.comune.scorrano.le.it/servizio/carta-di-identita-elettronica/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.scorrano.le.it/servizio/carta-di-identita-elettronica/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.scorrano.le.it/servizio/carta-di-identita-elettronica/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:37:09.765755Z"
+  }
+ }
+}

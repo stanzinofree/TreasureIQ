@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "063041",
+ "services": {
+  "carta_identita": {
+   "service_id": "063041:openweb:674",
+   "title": "Carta d’Identità elettronica (CIE)",
+   "source_url": "https://www.comune.marano.na.it/servizio/carta-didentita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.marano.na.it/servizio/carta-didentita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marano.na.it/servizio/carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:16:51.718193Z"
+  },
+  "accesso_atti": {
+   "service_id": "063041:openweb:1327",
+   "title": "Richiedere accesso agli atti",
+   "source_url": "https://www.comune.marano.na.it/servizio/richiedere-accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.marano.na.it/servizio/richiedere-accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marano.na.it/servizio/richiedere-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:17:01.546857Z"
+  },
+  "tributi_tari": {
+   "service_id": "063041:openweb:1340",
+   "title": "Presentare domanda di agevolazione tributaria (TARI)",
+   "source_url": "https://www.comune.marano.na.it/servizio/presentare-domanda-di-agevolazione-tributaria-tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.marano.na.it/servizio/presentare-domanda-di-agevolazione-tributaria-tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marano.na.it/servizio/presentare-domanda-di-agevolazione-tributaria-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:17:11.343905Z"
+  }
+ }
+}

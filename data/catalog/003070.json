@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "003070",
+ "services": {
+  "carta_identita": {
+   "service_id": "003070:openweb:870",
+   "title": "Carta di identità elettronica",
+   "source_url": "https://comune.gargallo.no.it/servizio/carta-di-identita-elettronica/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.gargallo.no.it/servizio/carta-di-identita-elettronica/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.gargallo.no.it/servizio/carta-di-identita-elettronica/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:32:43.616651Z"
+  },
+  "cambio_residenza": {
+   "service_id": "003070:openweb:4489",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.gargallo.no.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.gargallo.no.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.gargallo.no.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:32:58.308957Z"
+  },
+  "tributi_imu": {
+   "service_id": "003070:openweb:4405",
+   "title": "Pagare tributi – IMU",
+   "source_url": "https://comune.gargallo.no.it/servizio/pagare-imu-tributi/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.gargallo.no.it/servizio/pagare-imu-tributi/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.gargallo.no.it/servizio/pagare-imu-tributi/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:33:13.248779Z"
+  }
+ }
+}

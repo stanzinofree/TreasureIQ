@@ -1,0 +1,110 @@
+{
+ "municipality_istat": "108031",
+ "services": {
+  "carta_identita": {
+   "service_id": "108031:openweb:275",
+   "title": "Carta D’Identità Elettronica",
+   "source_url": "https://comune.mezzago.mb.it/servizio/carta-didentita-elettronica/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.mezzago.mb.it/servizio/carta-didentita-elettronica/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.mezzago.mb.it/servizio/carta-didentita-elettronica/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:54:14.764525Z"
+  },
+  "cambio_residenza": {
+   "service_id": "108031:openweb:1905",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.mezzago.mb.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.mezzago.mb.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.mezzago.mb.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://comune.mezzago.mb.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:54:27.595388Z"
+  },
+  "tributi_imu": {
+   "service_id": "108031:openweb:1780",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://comune.mezzago.mb.it/servizio/pagare-tributi-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.mezzago.mb.it/servizio/pagare-tributi-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.mezzago.mb.it/servizio/pagare-tributi-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:54:40.693785Z"
+  },
+  "tributi_tari": {
+   "service_id": "108031:openweb:2704",
+   "title": "Bonus Sociale Tari",
+   "source_url": "https://comune.mezzago.mb.it/servizio/bonus-sociale-tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.mezzago.mb.it/servizio/bonus-sociale-tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.mezzago.mb.it/servizio/bonus-sociale-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:54:53.500251Z"
+  }
+ }
+}

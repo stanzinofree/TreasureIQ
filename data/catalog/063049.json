@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "063049",
+ "services": {
+  "carta_identita": {
+   "service_id": "063049:openweb:217",
+   "title": "Carta di Identità Elettronica (C.I.E.)",
+   "source_url": "https://www.comune.napoli.it/servizio/prenotacie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.napoli.it/servizio/prenotacie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.napoli.it/servizio/prenotacie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:17:24.098458Z"
+  }
+ }
+}

@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "052036",
+ "services": {
+  "carta_identita": {
+   "service_id": "052036:openweb:5410",
+   "title": "Rilascio Carta di Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.trequanda.si.it/servizio/rilascio-carta-di-identita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.trequanda.si.it/servizio/rilascio-carta-di-identita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.trequanda.si.it/servizio/rilascio-carta-di-identita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:06:31.485817Z"
+  },
+  "cambio_residenza": {
+   "service_id": "052036:openweb:5412",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.trequanda.si.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.trequanda.si.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.trequanda.si.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:06:46.011114Z"
+  },
+  "tributi_tari": {
+   "service_id": "052036:openweb:6047",
+   "title": "Tari – Tassa sui rifiuti",
+   "source_url": "https://www.comune.trequanda.si.it/servizio/tari-tassa-sui-rifiuti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.trequanda.si.it/servizio/tari-tassa-sui-rifiuti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.trequanda.si.it/servizio/tari-tassa-sui-rifiuti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:07:03.615544Z"
+  }
+ }
+}

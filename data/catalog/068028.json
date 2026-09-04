@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "068028",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "068028:openweb:202",
+   "title": "Comunicare il cambio di residenza (Riservato ai dipendenti del Comune)",
+   "source_url": "https://www.comune.pescara.it/servizio/__trashed-3/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pescara.it/servizio/__trashed-3/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pescara.it/servizio/__trashed-3/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:19:23.806338Z"
+  },
+  "accesso_atti": {
+   "service_id": "068028:openweb:14387",
+   "title": "Accesso agli atti per l’edilizia (SUE)",
+   "source_url": "https://www.comune.pescara.it/servizio/accesso-agli-atti-per-ledilizia-sue/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pescara.it/servizio/accesso-agli-atti-per-ledilizia-sue/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pescara.it/servizio/accesso-agli-atti-per-ledilizia-sue/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:19:37.481071Z"
+  },
+  "stato_civile": {
+   "service_id": "068028:openweb:14454",
+   "title": "Trascrizione di atti di stato civile formati all’estero",
+   "source_url": "https://www.comune.pescara.it/servizio/trascrizione-di-atti-di-stato-civile-formati-allestero/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pescara.it/servizio/trascrizione-di-atti-di-stato-civile-formati-allestero/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pescara.it/servizio/trascrizione-di-atti-di-stato-civile-formati-allestero/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:19:50.885115Z"
+  },
+  "tributi_imu": {
+   "service_id": "068028:openweb:18963",
+   "title": "Calcolatrice IMU",
+   "source_url": "https://www.comune.pescara.it/servizio/calcolatrice-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pescara.it/servizio/calcolatrice-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pescara.it/servizio/calcolatrice-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:20:04.662121Z"
+  }
+ }
+}

@@ -1,0 +1,123 @@
+{
+ "municipality_istat": "075008",
+ "services": {
+  "carta_identita": {
+   "service_id": "075008:openweb:409",
+   "title": "Carta di identità elettronica (CIE)",
+   "source_url": "https://comune.bagnolodelsalento.le.it/servizio/carta-di-identita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.bagnolodelsalento.le.it/servizio/carta-di-identita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.bagnolodelsalento.le.it/servizio/carta-di-identita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:33:38.445858Z"
+  },
+  "cambio_residenza": {
+   "service_id": "075008:openweb:411",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.bagnolodelsalento.le.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.bagnolodelsalento.le.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.bagnolodelsalento.le.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/servizi-al-cittadino/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://comune.bagnolodelsalento.le.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:33:52.221940Z"
+  },
+  "accesso_atti": {
+   "service_id": "075008:openweb:365",
+   "title": "Richiesta di Accesso agli Atti",
+   "source_url": "https://comune.bagnolodelsalento.le.it/servizio/richiesta-di-accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.bagnolodelsalento.le.it/servizio/richiesta-di-accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.bagnolodelsalento.le.it/servizio/richiesta-di-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:34:07.124498Z"
+  },
+  "stato_civile": {
+   "service_id": "075008:openweb:483",
+   "title": "Certificato di nascita per cittadini europei",
+   "source_url": "https://comune.bagnolodelsalento.le.it/servizio/certificato-di-nascita-per-cittadini-europei/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.bagnolodelsalento.le.it/servizio/certificato-di-nascita-per-cittadini-europei/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.bagnolodelsalento.le.it/servizio/certificato-di-nascita-per-cittadini-europei/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/servizi-al-cittadino/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://comune.bagnolodelsalento.le.it/servizio/certificato-di-nascita-per-cittadini-europei/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:34:22.417022Z"
+  }
+ }
+}

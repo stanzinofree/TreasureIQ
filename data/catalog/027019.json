@@ -1,0 +1,91 @@
+{
+ "municipality_istat": "027019",
+ "services": {
+  "carta_identita": {
+   "service_id": "027019:openweb:1329",
+   "title": "Richiesta carta d’identità",
+   "source_url": "https://www.comune.jesolo.ve.it/servizio/richiesta-carta-didentita/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.jesolo.ve.it/servizio/richiesta-carta-didentita/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.jesolo.ve.it/servizio/richiesta-carta-didentita/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:50:51.395725Z"
+  },
+  "cambio_residenza": {
+   "service_id": "027019:openweb:1235",
+   "title": "Dichiarazione di cambio di residenza",
+   "source_url": "https://www.comune.jesolo.ve.it/servizio/dichiarazione-di-cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.jesolo.ve.it/servizio/dichiarazione-di-cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.jesolo.ve.it/servizio/dichiarazione-di-cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.jesolo.ve.it/public/sitoistituzionale?client_code=C388&service_code=DOMANDE_ONLINE&module_code=AN_CARE&callback_url=https://www.comune.jesolo.ve.it/home",
+     "provider": null,
+     "authentication": [
+      "spid",
+      "cie",
+      "cns"
+     ],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.jesolo.ve.it/servizio/dichiarazione-di-cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:51:06.057918Z"
+  },
+  "tributi_imu": {
+   "service_id": "027019:openweb:1660",
+   "title": "Richiesta calcolo IMU",
+   "source_url": "https://www.comune.jesolo.ve.it/servizio/richiesta-calcolo-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.jesolo.ve.it/servizio/richiesta-calcolo-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.jesolo.ve.it/servizio/richiesta-calcolo-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:51:19.279447Z"
+  }
+ }
+}

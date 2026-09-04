@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "015113",
+ "services": {
+  "carta_identita": {
+   "service_id": "015113:openweb:33420",
+   "title": "Carta d’Identità Elettronica – C.I.E.",
+   "source_url": "https://www.comune.inveruno.mi.it/servizio/carta-didentita-elettronica-c-i-e/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.inveruno.mi.it/servizio/carta-didentita-elettronica-c-i-e/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.inveruno.mi.it/servizio/carta-didentita-elettronica-c-i-e/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:42:43.086076Z"
+  },
+  "stato_civile": {
+   "service_id": "015113:openweb:37592",
+   "title": "Richiedere certificati ed estratti di stato civile (ANSC)",
+   "source_url": "https://www.comune.inveruno.mi.it/servizio/richiedere-certificati-ed-estratti-di-stato-civile-ansc/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.inveruno.mi.it/servizio/richiedere-certificati-ed-estratti-di-stato-civile-ansc/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.inveruno.mi.it/servizio/richiedere-certificati-ed-estratti-di-stato-civile-ansc/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:42:58.549839Z"
+  },
+  "tributi_tari": {
+   "service_id": "015113:openweb:33789",
+   "title": "TARI",
+   "source_url": "https://www.comune.inveruno.mi.it/servizio/tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.inveruno.mi.it/servizio/tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.inveruno.mi.it/servizio/tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:43:14.484057Z"
+  }
+ }
+}

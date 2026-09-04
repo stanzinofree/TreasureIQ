@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "026007",
+ "services": {
+  "carta_identita": {
+   "service_id": "026007:openweb:529",
+   "title": "Carta d’Identità Elettronica",
+   "source_url": "https://comune.cappellamaggiore.tv.it/servizio/servizio-emissione-carta-didentita/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.cappellamaggiore.tv.it/servizio/servizio-emissione-carta-didentita/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.cappellamaggiore.tv.it/servizio/servizio-emissione-carta-didentita/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.cappellamaggiore.tv.it/wp-content/uploads/2023/05/dichiarazione_atto_notorio_dimora_abituale.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.cappellamaggiore.tv.it/servizio/servizio-emissione-carta-didentita/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.cappellamaggiore.tv.it/wp-content/uploads/2023/03/Dichiarazione-di-assenso-dei-genitori-per-la-CIE-ai-figli-minori.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.cappellamaggiore.tv.it/servizio/servizio-emissione-carta-didentita/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:49:06.707342Z"
+  },
+  "cambio_residenza": {
+   "service_id": "026007:openweb:2364",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.cappellamaggiore.tv.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.cappellamaggiore.tv.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.cappellamaggiore.tv.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:49:19.171864Z"
+  },
+  "tributi_imu": {
+   "service_id": "026007:openweb:2327",
+   "title": "Calcolo dell’IMU on line",
+   "source_url": "https://comune.cappellamaggiore.tv.it/servizio/calcolo-dellimu-on-line/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.cappellamaggiore.tv.it/servizio/calcolo-dellimu-on-line/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.cappellamaggiore.tv.it/servizio/calcolo-dellimu-on-line/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:49:32.926704Z"
+  }
+ }
+}

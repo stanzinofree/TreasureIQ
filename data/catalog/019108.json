@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "019108",
+ "services": {
+  "carta_identita": {
+   "service_id": "019108:openweb:2371",
+   "title": "Emissione Carta d’identità elettronica",
+   "source_url": "https://comune.torricelladelpizzo.cr.it/servizio/emissione-carta-didentita-elettronica/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.torricelladelpizzo.cr.it/servizio/emissione-carta-didentita-elettronica/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.torricelladelpizzo.cr.it/servizio/emissione-carta-didentita-elettronica/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:45:36.381552Z"
+  },
+  "cambio_residenza": {
+   "service_id": "019108:openweb:2370",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.torricelladelpizzo.cr.it/servizio/cambio-di-residenza-2/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.torricelladelpizzo.cr.it/servizio/cambio-di-residenza-2/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.torricelladelpizzo.cr.it/servizio/cambio-di-residenza-2/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:45:49.187526Z"
+  },
+  "accesso_atti": {
+   "service_id": "019108:openweb:2368",
+   "title": "Richiedere l’accesso agli atti",
+   "source_url": "https://comune.torricelladelpizzo.cr.it/servizio/richiedere-laccesso-documentale/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.torricelladelpizzo.cr.it/servizio/richiedere-laccesso-documentale/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.torricelladelpizzo.cr.it/servizio/richiedere-laccesso-documentale/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:46:01.876829Z"
+  }
+ }
+}

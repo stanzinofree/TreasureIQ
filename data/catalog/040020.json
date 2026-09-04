@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "040020",
+ "services": {
+  "tributi_tari": {
+   "service_id": "040020:openweb:1685",
+   "title": "Tari – Informazioni e reclami",
+   "source_url": "https://www.comune.mercatosaraceno.fc.it/servizio/tari-informazioni-e-reclami/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.mercatosaraceno.fc.it/servizio/tari-informazioni-e-reclami/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.mercatosaraceno.fc.it/servizio/tari-informazioni-e-reclami/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:53:12.420566Z"
+  }
+ }
+}

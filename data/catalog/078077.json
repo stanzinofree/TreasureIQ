@@ -1,0 +1,224 @@
+{
+ "municipality_istat": "078077",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "078077:openweb:1889",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.maranoprincipato.cs.it/servizi/anagrafe-e-stato-civile/cambio-di-residenza",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.maranoprincipato.cs.it/servizi/anagrafe-e-stato-civile/cambio-di-residenza",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.maranoprincipato.cs.it/servizi/anagrafe-e-stato-civile/cambio-di-residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.maranoprincipato.cs.it/wp-content/uploads/2024/03/C_S_cambio-di-reside.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.maranoprincipato.cs.it/servizi/anagrafe-e-stato-civile/cambio-di-residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:41:44.575347Z"
+  },
+  "accesso_atti": {
+   "service_id": "078077:openweb:1333",
+   "title": "Richiedere l’accesso agli atti",
+   "source_url": "https://comune.maranoprincipato.cs.it/servizi/autorizzazioni/richiedere-laccesso-agli-atti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.maranoprincipato.cs.it/servizi/autorizzazioni/richiedere-laccesso-agli-atti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.maranoprincipato.cs.it/servizi/autorizzazioni/richiedere-laccesso-agli-atti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.maranoprincipato.cs.it/wp-content/uploads/2023/08/C_S_richiedere-.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.maranoprincipato.cs.it/servizi/autorizzazioni/richiedere-laccesso-agli-atti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.maranoprincipato.cs.it/wp-content/uploads/2023/08/Modulo-richiesta-accesso-civico.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.maranoprincipato.cs.it/servizi/autorizzazioni/richiedere-laccesso-agli-atti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:42:01.750620Z"
+  },
+  "stato_civile": {
+   "service_id": "078077:openweb:262",
+   "title": "Richiedere stato civile",
+   "source_url": "https://comune.maranoprincipato.cs.it/servizi/anagrafe-e-stato-civile/richiedere-stato-civile",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.maranoprincipato.cs.it/servizi/anagrafe-e-stato-civile/richiedere-stato-civile",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.maranoprincipato.cs.it/servizi/anagrafe-e-stato-civile/richiedere-stato-civile",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.maranoprincipato.cs.it/wp-content/uploads/2023/08/C_S_richiedere-stato.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.maranoprincipato.cs.it/servizi/anagrafe-e-stato-civile/richiedere-stato-civile",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:42:18.168453Z"
+  },
+  "tributi_imu": {
+   "service_id": "078077:openweb:438",
+   "title": "Richiedere informazioni Imposta Municipale Unica (IMU)",
+   "source_url": "https://comune.maranoprincipato.cs.it/servizi/tributi-finanze-e-contravvenzioni/richiedere-informazioni-imposta-municipale-unica-imu",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.maranoprincipato.cs.it/servizi/tributi-finanze-e-contravvenzioni/richiedere-informazioni-imposta-municipale-unica-imu",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.maranoprincipato.cs.it/servizi/tributi-finanze-e-contravvenzioni/richiedere-informazioni-imposta-municipale-unica-imu",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.maranoprincipato.cs.it/wp-content/uploads/2023/08/C_S_richiedere-infor.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.maranoprincipato.cs.it/servizi/tributi-finanze-e-contravvenzioni/richiedere-informazioni-imposta-municipale-unica-imu",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.maranoprincipato.cs.it/wp-content/uploads/2023/06/InformativagenericaIMU.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.maranoprincipato.cs.it/servizi/tributi-finanze-e-contravvenzioni/richiedere-informazioni-imposta-municipale-unica-imu",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:42:35.197493Z"
+  },
+  "tributi_tari": {
+   "service_id": "078077:openweb:442",
+   "title": "Presentare Tassa TARI",
+   "source_url": "https://comune.maranoprincipato.cs.it/servizi/tributi-finanze-e-contravvenzioni/presentare-tassa-tari",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.maranoprincipato.cs.it/servizi/tributi-finanze-e-contravvenzioni/presentare-tassa-tari",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.maranoprincipato.cs.it/servizi/tributi-finanze-e-contravvenzioni/presentare-tassa-tari",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.maranoprincipato.cs.it/wp-content/uploads/2023/08/C_S_presentare-tassa.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.maranoprincipato.cs.it/servizi/tributi-finanze-e-contravvenzioni/presentare-tassa-tari",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.maranoprincipato.cs.it/wp-content/uploads/2023/06/modello-iscrizione-ruoloTARI.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.maranoprincipato.cs.it/servizi/tributi-finanze-e-contravvenzioni/presentare-tassa-tari",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:42:51.462838Z"
+  }
+ }
+}

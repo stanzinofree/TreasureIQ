@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "058024",
+ "services": {
+  "carta_identita": {
+   "service_id": "058024:openweb:499",
+   "title": "Carta d’identità elettronica (CIE)",
+   "source_url": "https://www.comune.castelnuovodiporto.rm.it/servizio/carta-didentita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castelnuovodiporto.rm.it/servizio/carta-didentita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castelnuovodiporto.rm.it/servizio/carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:09:43.761173Z"
+  },
+  "cambio_residenza": {
+   "service_id": "058024:openweb:498",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.castelnuovodiporto.rm.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castelnuovodiporto.rm.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castelnuovodiporto.rm.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.castelnuovodiporto.rm.it/wp-content/uploads/2025/09/cambio-di-residenza-.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castelnuovodiporto.rm.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:09:55.648532Z"
+  },
+  "accesso_atti": {
+   "service_id": "058024:openweb:504",
+   "title": "Accesso agli atti",
+   "source_url": "https://www.comune.castelnuovodiporto.rm.it/servizio/accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castelnuovodiporto.rm.it/servizio/accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castelnuovodiporto.rm.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.castelnuovodiporto.rm.it/wp-content/uploads/2025/11/diritti-di-segreteria-tariffe-relative-servizi-tecnici.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castelnuovodiporto.rm.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:10:08.101901Z"
+  }
+ }
+}

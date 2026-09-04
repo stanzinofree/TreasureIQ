@@ -1,0 +1,159 @@
+{
+ "municipality_istat": "051014",
+ "services": {
+  "carta_identita": {
+   "service_id": "051014:openweb:8309",
+   "title": "Carta di Identità Elettronica CIE",
+   "source_url": "https://comune.chitignano.arezzo.it/servizio/carta-di-identita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.chitignano.arezzo.it/servizio/carta-di-identita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.chitignano.arezzo.it/servizio/carta-di-identita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:00:40.101336Z"
+  },
+  "accesso_atti": {
+   "service_id": "051014:openweb:8300",
+   "title": "Accesso agli atti generalizzato",
+   "source_url": "https://comune.chitignano.arezzo.it/servizio/accesso-agli-atti-generalizzato/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.chitignano.arezzo.it/servizio/accesso-agli-atti-generalizzato/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.chitignano.arezzo.it/servizio/accesso-agli-atti-generalizzato/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.chitignano.arezzo.it/wp-content/uploads/2025/08/Istanza-accesso-generalizzato-art-5-comma-2-d-lgs-n-33-2013-1.doc",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.chitignano.arezzo.it/servizio/accesso-agli-atti-generalizzato/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:00:53.555842Z"
+  },
+  "stato_civile": {
+   "service_id": "051014:openweb:8320",
+   "title": "Rilascio di certificati anagrafici e atti di stato civile",
+   "source_url": "https://comune.chitignano.arezzo.it/servizio/rilascio-di-certificati-anagrafici-e-atti-di-stato-civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.chitignano.arezzo.it/servizio/rilascio-di-certificati-anagrafici-e-atti-di-stato-civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.chitignano.arezzo.it/servizio/rilascio-di-certificati-anagrafici-e-atti-di-stato-civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:01:05.754861Z"
+  },
+  "tributi_imu": {
+   "service_id": "051014:openweb:227",
+   "title": "IMU – Modalità e termini per la dichiarazione",
+   "source_url": "https://comune.chitignano.arezzo.it/servizio/imu-modalita-e-termini-per-la-dichiarazione/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.chitignano.arezzo.it/servizio/imu-modalita-e-termini-per-la-dichiarazione/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.chitignano.arezzo.it/servizio/imu-modalita-e-termini-per-la-dichiarazione/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "http://www.uc.casentino.toscana.it/tributi/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://comune.chitignano.arezzo.it/servizio/imu-modalita-e-termini-per-la-dichiarazione/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.chitignano.arezzo.it/wp-content/uploads/2024/11/D-64-GC-CONCESSIONI-CIMITERIALI-2025.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.chitignano.arezzo.it/servizio/imu-modalita-e-termini-per-la-dichiarazione/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:01:18.081393Z"
+  },
+  "tributi_tari": {
+   "service_id": "051014:openweb:172",
+   "title": "TARI (tributo sui rifiuti)",
+   "source_url": "https://comune.chitignano.arezzo.it/servizio/tari-tributo-sui-rifiuti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.chitignano.arezzo.it/servizio/tari-tributo-sui-rifiuti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.chitignano.arezzo.it/servizio/tari-tributo-sui-rifiuti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:01:32.701284Z"
+  }
+ }
+}

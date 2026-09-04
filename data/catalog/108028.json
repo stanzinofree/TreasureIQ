@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "108028",
+ "services": {
+  "carta_identita": {
+   "service_id": "108028:openweb:746",
+   "title": "Carta d’Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.lissone.mb.it/servizio/carta-didentita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.lissone.mb.it/servizio/carta-didentita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.lissone.mb.it/servizio/carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:53:48.754497Z"
+  },
+  "cambio_residenza": {
+   "service_id": "108028:openweb:1648",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.lissone.mb.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.lissone.mb.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.lissone.mb.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:53:59.224097Z"
+  }
+ }
+}

@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "041008",
+ "services": {
+  "carta_identita": {
+   "service_id": "041008:openweb:921",
+   "title": "Costo per emissione Carta d’identità cartacea",
+   "source_url": "https://comune.cantiano.pu.it/servizio/costo-per-emissione-carta-didentita-cartacea/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.cantiano.pu.it/servizio/costo-per-emissione-carta-didentita-cartacea/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.cantiano.pu.it/servizio/costo-per-emissione-carta-didentita-cartacea/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:54:03.332741Z"
+  },
+  "tributi_imu": {
+   "service_id": "041008:openweb:927",
+   "title": "IMU – Imposta Municipale Unica",
+   "source_url": "https://comune.cantiano.pu.it/servizio/imu-imposta-municipale-unica/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.cantiano.pu.it/servizio/imu-imposta-municipale-unica/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.cantiano.pu.it/servizio/imu-imposta-municipale-unica/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:54:24.599432Z"
+  },
+  "tributi_tari": {
+   "service_id": "041008:openweb:940",
+   "title": "TARI – Tassa sui rifiuti",
+   "source_url": "https://comune.cantiano.pu.it/servizio/tari-tassa-sui-rifiuti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.cantiano.pu.it/servizio/tari-tassa-sui-rifiuti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.cantiano.pu.it/servizio/tari-tassa-sui-rifiuti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:54:45.682358Z"
+  }
+ }
+}

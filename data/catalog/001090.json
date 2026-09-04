@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "001090",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "001090:openweb:1236",
+   "title": "Il cambio di residenza e la variazione di indirizzo",
+   "source_url": "https://www.comune.collegno.to.it/servizio/il-cambio-di-residenza-e-la-variazione-di-indirizzo/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.collegno.to.it/servizio/il-cambio-di-residenza-e-la-variazione-di-indirizzo/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.collegno.to.it/servizio/il-cambio-di-residenza-e-la-variazione-di-indirizzo/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:31:13.716517Z"
+  }
+ }
+}

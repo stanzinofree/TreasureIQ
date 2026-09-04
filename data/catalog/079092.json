@@ -1,0 +1,103 @@
+{
+ "municipality_istat": "079092",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "079092:openweb:964",
+   "title": "Cambio di residenza e domicilio",
+   "source_url": "https://www.comune.pentone.cz.it/servizio/cambio-di-residenza-e-domicilio/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pentone.cz.it/servizio/cambio-di-residenza-e-domicilio/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pentone.cz.it/servizio/cambio-di-residenza-e-domicilio/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.pentone.cz.it/wp-content/uploads/2026/01/dichirazione_residenza_.doc",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pentone.cz.it/servizio/cambio-di-residenza-e-domicilio/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.pentone.cz.it/wp-content/uploads/2026/01/DICHIARAZIONE_DI_TRASFERIMENTO_DI_RESIDENZA_ALL__ESTERO.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pentone.cz.it/servizio/cambio-di-residenza-e-domicilio/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.pentone.cz.it/wp-content/uploads/2026/01/ALLEGATO_A.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pentone.cz.it/servizio/cambio-di-residenza-e-domicilio/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.pentone.cz.it/wp-content/uploads/2026/01/ALLEGATO_B.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pentone.cz.it/servizio/cambio-di-residenza-e-domicilio/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:43:36.201487Z"
+  },
+  "tributi_imu": {
+   "service_id": "079092:openweb:381",
+   "title": "IMU",
+   "source_url": "https://www.comune.pentone.cz.it/servizio/imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pentone.cz.it/servizio/imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pentone.cz.it/servizio/imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:43:49.197861Z"
+  }
+ }
+}

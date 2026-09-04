@@ -1,0 +1,146 @@
+{
+ "municipality_istat": "013071",
+ "services": {
+  "carta_identita": {
+   "service_id": "013071:openweb:1523",
+   "title": "Rilascio carta di identità elettronica",
+   "source_url": "https://comune.clainoconosteno.co.it/servizio/certificato-di-nascita-per-cittadini-europei/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.clainoconosteno.co.it/servizio/certificato-di-nascita-per-cittadini-europei/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.clainoconosteno.co.it/servizio/certificato-di-nascita-per-cittadini-europei/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:38:28.356266Z"
+  },
+  "cambio_residenza": {
+   "service_id": "013071:openweb:1519",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.clainoconosteno.co.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.clainoconosteno.co.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.clainoconosteno.co.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:38:51.174681Z"
+  },
+  "accesso_atti": {
+   "service_id": "013071:openweb:1461",
+   "title": "Richiedere l’accesso agli Atti – Accesso Civico e generalizzato",
+   "source_url": "https://comune.clainoconosteno.co.it/servizio/richiedere-laccesso-agli-atti-accesso-civico-e-generalizzato/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.clainoconosteno.co.it/servizio/richiedere-laccesso-agli-atti-accesso-civico-e-generalizzato/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.clainoconosteno.co.it/servizio/richiedere-laccesso-agli-atti-accesso-civico-e-generalizzato/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://servizi.comune.clainoconosteno.co.it/servizi/servizio-dettaglio/2454727/richiedi",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://comune.clainoconosteno.co.it/servizio/richiedere-laccesso-agli-atti-accesso-civico-e-generalizzato/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.clainoconosteno.co.it/wp-content/uploads/2024/03/DELIBERA-CC24-2007.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.clainoconosteno.co.it/servizio/richiedere-laccesso-agli-atti-accesso-civico-e-generalizzato/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:39:14.213768Z"
+  },
+  "stato_civile": {
+   "service_id": "013071:openweb:1518",
+   "title": "Certificati anagrafici e di stato civile",
+   "source_url": "https://comune.clainoconosteno.co.it/servizio/certificati-anagrafici/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.clainoconosteno.co.it/servizio/certificati-anagrafici/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.clainoconosteno.co.it/servizio/certificati-anagrafici/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:39:38.134854Z"
+  },
+  "tributi_tari": {
+   "service_id": "013071:openweb:1581",
+   "title": "Tributi – TARI",
+   "source_url": "https://comune.clainoconosteno.co.it/servizio/tributi-tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.clainoconosteno.co.it/servizio/tributi-tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.clainoconosteno.co.it/servizio/tributi-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:40:02.000630Z"
+  }
+ }
+}

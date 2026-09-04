@@ -1,0 +1,136 @@
+{
+ "municipality_istat": "073014",
+ "services": {
+  "carta_identita": {
+   "service_id": "073014:openweb:8938",
+   "title": "Carta d’identità elettronica (CIE)",
+   "source_url": "https://comune.maruggio.ta.it/servizio/carta-didentita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.maruggio.ta.it/servizio/carta-didentita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.maruggio.ta.it/servizio/carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:30:32.779954Z"
+  },
+  "accesso_atti": {
+   "service_id": "073014:openweb:8508",
+   "title": "Richiesta di Accesso agli atti",
+   "source_url": "https://comune.maruggio.ta.it/servizio/richiesta-di-accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.maruggio.ta.it/servizio/richiesta-di-accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.maruggio.ta.it/servizio/richiesta-di-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:30:50.260056Z"
+  },
+  "tributi_imu": {
+   "service_id": "073014:openweb:5800",
+   "title": "IMU",
+   "source_url": "https://comune.maruggio.ta.it/servizio/imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.maruggio.ta.it/servizio/imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.maruggio.ta.it/servizio/imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:31:06.371144Z"
+  },
+  "tributi_tari": {
+   "service_id": "073014:openweb:8396",
+   "title": "Tari",
+   "source_url": "https://comune.maruggio.ta.it/servizio/tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.maruggio.ta.it/servizio/tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.maruggio.ta.it/servizio/tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.maruggio.ta.it/wp-content/uploads/2026/07/Allegato-B_.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.maruggio.ta.it/servizio/tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.maruggio.ta.it/wp-content/uploads/2026/07/Allegato-C_.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.maruggio.ta.it/servizio/tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.maruggio.ta.it/wp-content/uploads/2026/07/copia_Delibera_n_33_Prop_2026_1481_1.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.maruggio.ta.it/servizio/tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:31:21.973110Z"
+  }
+ }
+}

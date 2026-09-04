@@ -1,0 +1,133 @@
+{
+ "municipality_istat": "051038",
+ "services": {
+  "carta_identita": {
+   "service_id": "051038:openweb:168839",
+   "title": "Carta di Identità Elettronica CIE",
+   "source_url": "https://comune.talla.ar.it/servizio/carta-di-identita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.talla.ar.it/servizio/carta-di-identita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.talla.ar.it/servizio/carta-di-identita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:04:30.581381Z"
+  },
+  "accesso_atti": {
+   "service_id": "051038:openweb:343",
+   "title": "Accesso agli atti generalizzato",
+   "source_url": "https://comune.talla.ar.it/servizio/accesso-agli-atti-generalizzato/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.talla.ar.it/servizio/accesso-agli-atti-generalizzato/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.talla.ar.it/servizio/accesso-agli-atti-generalizzato/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.talla.ar.it/wp-content/uploads/2026/05/Istanza-accesso-generalizzato-art-5-comma-2-d-lgs-n-33-2013.docx",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.talla.ar.it/servizio/accesso-agli-atti-generalizzato/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:04:41.715085Z"
+  },
+  "stato_civile": {
+   "service_id": "051038:openweb:345",
+   "title": "Rilascio di certificati anagrafici e atti di stato civile",
+   "source_url": "https://comune.talla.ar.it/servizio/rilascio-di-certificati-anagrafici-e-atti-di-stato-civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.talla.ar.it/servizio/rilascio-di-certificati-anagrafici-e-atti-di-stato-civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.talla.ar.it/servizio/rilascio-di-certificati-anagrafici-e-atti-di-stato-civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:04:52.879081Z"
+  },
+  "tributi_imu": {
+   "service_id": "051038:openweb:227",
+   "title": "IMU – Modalità e termini per la dichiarazione",
+   "source_url": "https://comune.talla.ar.it/servizio/imu-modalita-e-termini-per-la-dichiarazione/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.talla.ar.it/servizio/imu-modalita-e-termini-per-la-dichiarazione/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.talla.ar.it/servizio/imu-modalita-e-termini-per-la-dichiarazione/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:05:03.951696Z"
+  },
+  "tributi_tari": {
+   "service_id": "051038:openweb:172",
+   "title": "TARI (tributo sui rifiuti)",
+   "source_url": "https://comune.talla.ar.it/servizio/tari-tributo-sui-rifiuti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.talla.ar.it/servizio/tari-tributo-sui-rifiuti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.talla.ar.it/servizio/tari-tributo-sui-rifiuti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:05:15.431890Z"
+  }
+ }
+}

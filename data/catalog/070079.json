@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "070079",
+ "services": {
+  "carta_identita": {
+   "service_id": "070079:openweb:822",
+   "title": "Carta d’Identità Elettronica (CIE)",
+   "source_url": "https://comune.torelladelsannio.cb.it/servizio/carta-didentita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.torelladelsannio.cb.it/servizio/carta-didentita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.torelladelsannio.cb.it/servizio/carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:24:11.954658Z"
+  },
+  "cambio_residenza": {
+   "service_id": "070079:openweb:823",
+   "title": "Cambio Residenza",
+   "source_url": "https://comune.torelladelsannio.cb.it/servizio/cambio-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.torelladelsannio.cb.it/servizio/cambio-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.torelladelsannio.cb.it/servizio/cambio-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:24:24.846023Z"
+  },
+  "accesso_atti": {
+   "service_id": "070079:openweb:821",
+   "title": "Richiedere accesso agli atti",
+   "source_url": "https://comune.torelladelsannio.cb.it/servizio/richiedere-accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.torelladelsannio.cb.it/servizio/richiedere-accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.torelladelsannio.cb.it/servizio/richiedere-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:24:37.250216Z"
+  },
+  "tributi_imu": {
+   "service_id": "070079:openweb:825",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://comune.torelladelsannio.cb.it/servizio/pagare-tributi-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.torelladelsannio.cb.it/servizio/pagare-tributi-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.torelladelsannio.cb.it/servizio/pagare-tributi-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:24:49.182531Z"
+  }
+ }
+}

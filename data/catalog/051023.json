@@ -1,0 +1,110 @@
+{
+ "municipality_istat": "051023",
+ "services": {
+  "accesso_atti": {
+   "service_id": "051023:openweb:343",
+   "title": "Accesso agli atti generalizzato",
+   "source_url": "https://comune.montemignaio.ar.it/servizio/accesso-agli-atti-generalizzato/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.montemignaio.ar.it/servizio/accesso-agli-atti-generalizzato/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.montemignaio.ar.it/servizio/accesso-agli-atti-generalizzato/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.montemignaio.ar.it/wp-content/uploads/2025/08/Istanza-accesso-generalizzato-agli-atti.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.montemignaio.ar.it/servizio/accesso-agli-atti-generalizzato/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:01:46.853198Z"
+  },
+  "stato_civile": {
+   "service_id": "051023:openweb:345",
+   "title": "Rilascio di certificati anagrafici e atti di stato civile",
+   "source_url": "https://comune.montemignaio.ar.it/servizio/rilascio-di-certificati-anagrafici-e-atti-di-stato-civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.montemignaio.ar.it/servizio/rilascio-di-certificati-anagrafici-e-atti-di-stato-civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.montemignaio.ar.it/servizio/rilascio-di-certificati-anagrafici-e-atti-di-stato-civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:02:04.504595Z"
+  },
+  "tributi_imu": {
+   "service_id": "051023:openweb:227",
+   "title": "IMU – Modalità e termini per la dichiarazione",
+   "source_url": "https://comune.montemignaio.ar.it/servizio/imu-modalita-e-termini-per-la-dichiarazione/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.montemignaio.ar.it/servizio/imu-modalita-e-termini-per-la-dichiarazione/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.montemignaio.ar.it/servizio/imu-modalita-e-termini-per-la-dichiarazione/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:02:19.623865Z"
+  },
+  "tributi_tari": {
+   "service_id": "051023:openweb:172",
+   "title": "TARI (tributo sui rifiuti)",
+   "source_url": "https://comune.montemignaio.ar.it/servizio/tari-tributo-sui-rifiuti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.montemignaio.ar.it/servizio/tari-tributo-sui-rifiuti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.montemignaio.ar.it/servizio/tari-tributo-sui-rifiuti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:02:32.845266Z"
+  }
+ }
+}

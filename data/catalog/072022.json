@@ -1,0 +1,159 @@
+{
+ "municipality_istat": "072022",
+ "services": {
+  "carta_identita": {
+   "service_id": "072022:openweb:1586",
+   "title": "Carta di identità elettronica (C.I.E.)",
+   "source_url": "https://www.comune.giovinazzo.ba.it/servizio/carta-di-identita-elettronica-c-i-e/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.giovinazzo.ba.it/servizio/carta-di-identita-elettronica-c-i-e/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.giovinazzo.ba.it/servizio/carta-di-identita-elettronica-c-i-e/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:28:05.144312Z"
+  },
+  "cambio_residenza": {
+   "service_id": "072022:openweb:1622",
+   "title": "Cambio di residenza/abitazione",
+   "source_url": "https://www.comune.giovinazzo.ba.it/servizio/cambio-di-residenza-abitazione/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.giovinazzo.ba.it/servizio/cambio-di-residenza-abitazione/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.giovinazzo.ba.it/servizio/cambio-di-residenza-abitazione/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.giovinazzo.ba.it/wp-content/uploads/2025/02/Dichiarazione-di-residenza.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.giovinazzo.ba.it/servizio/cambio-di-residenza-abitazione/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.giovinazzo.ba.it/wp-content/uploads/2025/02/Dichiarazione-ospitalita.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.giovinazzo.ba.it/servizio/cambio-di-residenza-abitazione/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:28:18.558513Z"
+  },
+  "accesso_atti": {
+   "service_id": "072022:openweb:1693",
+   "title": "Accesso agli atti e Accesso civico",
+   "source_url": "https://www.comune.giovinazzo.ba.it/servizio/richiesta-di-accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.giovinazzo.ba.it/servizio/richiesta-di-accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.giovinazzo.ba.it/servizio/richiesta-di-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:28:33.774571Z"
+  },
+  "stato_civile": {
+   "service_id": "072022:openweb:1619",
+   "title": "Accordi davanti all’ufficiale di stato civile – Riconciliazione di coniugi separati",
+   "source_url": "https://www.comune.giovinazzo.ba.it/servizio/accordi-davanti-allufficiale-di-stato-civile-riconciliazione-di-coniugi-separati/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.giovinazzo.ba.it/servizio/accordi-davanti-allufficiale-di-stato-civile-riconciliazione-di-coniugi-separati/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.giovinazzo.ba.it/servizio/accordi-davanti-allufficiale-di-stato-civile-riconciliazione-di-coniugi-separati/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:28:46.941332Z"
+  },
+  "tributi_tari": {
+   "service_id": "072022:openweb:3220",
+   "title": "Esenzione TARI",
+   "source_url": "https://www.comune.giovinazzo.ba.it/servizio/esanzione-tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.giovinazzo.ba.it/servizio/esanzione-tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.giovinazzo.ba.it/servizio/esanzione-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.giovinazzo.ba.it/wp-content/uploads/2026/08/AVVISO-PUBBLICO-ESENZIONE-TARI-2026_Marcato.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.giovinazzo.ba.it/servizio/esanzione-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:29:01.831951Z"
+  }
+ }
+}

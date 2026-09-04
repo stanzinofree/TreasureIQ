@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "078138",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "078138:openweb:1964",
+   "title": "Cambiare residenza",
+   "source_url": "https://www.comune.scalea.cs.it/servizio/cambiare-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.scalea.cs.it/servizio/cambiare-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.scalea.cs.it/servizio/cambiare-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:43:05.517210Z"
+  },
+  "accesso_atti": {
+   "service_id": "078138:openweb:274",
+   "title": "Richiesta di Accesso agli atti",
+   "source_url": "https://www.comune.scalea.cs.it/servizio/richiesta-di-accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.scalea.cs.it/servizio/richiesta-di-accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.scalea.cs.it/servizio/richiesta-di-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:43:19.408051Z"
+  }
+ }
+}

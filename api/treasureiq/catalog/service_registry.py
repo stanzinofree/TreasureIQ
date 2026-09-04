@@ -37,6 +37,10 @@ from treasureiq.catalog.service_connectors.esecutore_fetcher import (
     EsecutoreServiceFetcher,
     _WpDiscovery,
 )
+from treasureiq.catalog.service_connectors.hgate_service import (
+    HGateServiceConnector,
+    _HGateDiscovery,
+)
 from treasureiq.catalog.service_connectors.magnolia_service import (
     MagnoliaServiceConnector,
 )
@@ -78,6 +82,7 @@ def default_service_registry(esecutore: EsecutoreFetch) -> ConnectorRegistry:
     reg.register(ComWebServiceConnector(transport.con(_ComWebDiscovery())))
     reg.register(OpenPAServiceConnector(transport.con(_EzFindDiscovery())))
     reg.register(DrupalBiServiceConnector(transport.con(_DrupalBiDiscovery())))
+    reg.register(HGateServiceConnector(transport.con(_HGateDiscovery())))
     # Magnolia (variant A) non usa il transport/discovery condiviso: legge il
     # proprio catalogo REST KIB col parser dedicato (magnolia.py), invariato.
     reg.register(MagnoliaServiceConnector())

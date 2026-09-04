@@ -12,6 +12,9 @@ from __future__ import annotations
 from treasureiq.catalog import service_registry
 from treasureiq.catalog.fetch_runtime import EsecutoreFetchSerializzato
 from treasureiq.catalog.planner import service_request
+from treasureiq.catalog.service_connectors.openweb_service import (
+    OpenWebServiceConnector,
+)
 from treasureiq.catalog.service_connectors.wordpress_agid import (
     WordPressAgidServiceConnector,
 )
@@ -41,6 +44,29 @@ def test_resolve_piattaforma_estranea_none():
     reg = service_registry.default_service_registry(_EsecutoreFinto())
     assert reg.resolve(request=_request(), platform_id="municipium") is None
     assert reg.resolve(request=_request(), platform_id="") is None
+
+
+# 2b — the factory selects OpenWeb on peopleweb, independently of order
+def test_factory_seleziona_openweb_su_peopleweb():
+    reg = service_registry.default_service_registry(_EsecutoreFinto())
+    connettore = reg.resolve(request=_request(), platform_id="peopleweb")
+    # peopleweb resolves to OpenWeb and NOT to the WP/AgID pilot, even though
+    # both share the same /wp-json/wp/v2/servizi surface: selection is by
+    # platform gate, not registration order. OpenWeb is a WP/AgID subclass, so
+    # assert the EXACT type — the plain pilot must not answer for peopleweb.
+    assert type(connettore) is OpenWebServiceConnector
+
+
+# 2c — WP/AgID and OpenWeb do not cross-select each other's platform
+def test_wp_e_openweb_non_si_scambiano_piattaforma():
+    reg = service_registry.default_service_registry(_EsecutoreFinto())
+    # wordpress_agid → the pilot, never OpenWeb.
+    wp = reg.resolve(request=_request(), platform_id="wordpress_agid")
+    assert isinstance(wp, WordPressAgidServiceConnector)
+    assert not isinstance(wp, OpenWebServiceConnector)
+    # peopleweb → OpenWeb only; the pilot's gate rejects it.
+    ow = reg.resolve(request=_request(), platform_id="peopleweb")
+    assert isinstance(ow, OpenWebServiceConnector)
 
 
 # 3 — the coordinator is a single shared thread-safe instance

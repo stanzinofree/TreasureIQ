@@ -1,0 +1,168 @@
+{
+ "municipality_istat": "058059",
+ "services": {
+  "carta_identita": {
+   "service_id": "058059:drupal:rilascio-carta-didentita-elettronica-cie",
+   "title": "Rilascio carta d'identità elettronica (CIE)",
+   "source_url": "https://www.comune.mentana.rm.it/servizi/rilascio-carta-didentita-elettronica-cie",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.mentana.rm.it/servizi/rilascio-carta-didentita-elettronica-cie",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.mentana.rm.it/servizi/rilascio-carta-didentita-elettronica-cie",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.mentana.rm.it/sites/comune.mentana.rm.it/files/2024-04/Richiesta%20CIE%20non%20residente_0.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.mentana.rm.it/servizi/rilascio-carta-didentita-elettronica-cie",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.mentana.rm.it/sites/comune.mentana.rm.it/files/2024-04/Assenso%20CIE%20per%20minori.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.mentana.rm.it/servizi/rilascio-carta-didentita-elettronica-cie",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.mentana.rm.it/sites/comune.mentana.rm.it/files/2025-04/Richiesta%20carta%20di%20identit%C3%A0%20elettronica%20a%20domicilio.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.mentana.rm.it/servizi/rilascio-carta-didentita-elettronica-cie",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.mentana.rm.it/sites/comune.mentana.rm.it/files/2025-11/Richiesta%20ristampa%20codici%20CIE%20e%20delega%20ritiro.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.mentana.rm.it/servizi/rilascio-carta-didentita-elettronica-cie",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.mentana.rm.it/sites/comune.mentana.rm.it/files/2024-02/Carta%20dei%20Servizi.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.mentana.rm.it/servizi/rilascio-carta-didentita-elettronica-cie",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.mentana.rm.it/sites/comune.mentana.rm.it/files/2025-06/Piano_miglioramento_Anthesi.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.mentana.rm.it/servizi/rilascio-carta-didentita-elettronica-cie",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  },
+  "cambio_residenza": {
+   "service_id": "058059:drupal:trasferimento-di-residenza-allestero-da-parte-di-cittadino-non-italiano",
+   "title": "Trasferimento di residenza all'estero da parte di cittadino non italiano",
+   "source_url": "https://www.comune.mentana.rm.it/servizi/trasferimento-di-residenza-allestero-da-parte-di-cittadino-non-italiano",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.mentana.rm.it/servizi/trasferimento-di-residenza-allestero-da-parte-di-cittadino-non-italiano",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.mentana.rm.it/servizi/trasferimento-di-residenza-allestero-da-parte-di-cittadino-non-italiano",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.mentana.rm.it/sites/comune.mentana.rm.it/files/2024-04/Modulo%20trasferimento%20residenza%20all%27estero.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.mentana.rm.it/servizi/trasferimento-di-residenza-allestero-da-parte-di-cittadino-non-italiano",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.mentana.rm.it/sites/comune.mentana.rm.it/files/2024-02/Carta%20dei%20Servizi.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.mentana.rm.it/servizi/trasferimento-di-residenza-allestero-da-parte-di-cittadino-non-italiano",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.mentana.rm.it/sites/comune.mentana.rm.it/files/2025-06/Piano_miglioramento_Anthesi.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.mentana.rm.it/servizi/trasferimento-di-residenza-allestero-da-parte-di-cittadino-non-italiano",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  }
+ }
+}

@@ -1,0 +1,253 @@
+{
+ "municipality_istat": "048033",
+ "services": {
+  "stato_civile": {
+   "service_id": "048033:drupal:certificati-ed-estratti-di-stato-civile",
+   "title": "Certificati ed estratti di stato civile",
+   "source_url": "https://www.comune.pontassieve.fi.it/servizi/anagrafe-stato-civile-ed-elettorale/certificati-ed-estratti-di-stato-civile",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pontassieve.fi.it/servizi/anagrafe-stato-civile-ed-elettorale/certificati-ed-estratti-di-stato-civile",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pontassieve.fi.it/servizi/anagrafe-stato-civile-ed-elettorale/certificati-ed-estratti-di-stato-civile",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.pontassieve.fi.it/sites/default/files/2024-02/Condizioni_del_servizio_Pontassieve.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pontassieve.fi.it/servizi/anagrafe-stato-civile-ed-elettorale/certificati-ed-estratti-di-stato-civile",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  },
+  "accesso_atti": {
+   "service_id": "048033:drupal:richiesta-di-accesso-agli-atti",
+   "title": "Richiesta di accesso agli atti",
+   "source_url": "https://www.comune.pontassieve.fi.it/servizi/anagrafe-stato-civile-ed-elettorale/richiesta-di-accesso-agli-atti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pontassieve.fi.it/servizi/anagrafe-stato-civile-ed-elettorale/richiesta-di-accesso-agli-atti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pontassieve.fi.it/servizi/anagrafe-stato-civile-ed-elettorale/richiesta-di-accesso-agli-atti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.pontassieve.fi.it/sites/default/files/2024-02/Condizioni_del_servizio_Pontassieve.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pontassieve.fi.it/servizi/anagrafe-stato-civile-ed-elettorale/richiesta-di-accesso-agli-atti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "048033:drupal:imu-informazioni-regolamento-e-aliquote",
+   "title": "IMU - Informazioni regolamento e aliquote",
+   "source_url": "https://www.comune.pontassieve.fi.it/servizi/tributi-finanze-e-contravvenzioni/imu-informazioni-regolamento-e-aliquote",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pontassieve.fi.it/servizi/tributi-finanze-e-contravvenzioni/imu-informazioni-regolamento-e-aliquote",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pontassieve.fi.it/servizi/tributi-finanze-e-contravvenzioni/imu-informazioni-regolamento-e-aliquote",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.pontassieve.fi.it/sites/default/files/2024-02/Condizioni_del_servizio_Pontassieve.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pontassieve.fi.it/servizi/tributi-finanze-e-contravvenzioni/imu-informazioni-regolamento-e-aliquote",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.pontassieve.fi.it/sites/default/files/inagibilita_2023.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pontassieve.fi.it/servizi/tributi-finanze-e-contravvenzioni/imu-informazioni-regolamento-e-aliquote",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.pontassieve.fi.it/system/files/2024-05/IMU_IMPi_Istruzioni_2024.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pontassieve.fi.it/servizi/tributi-finanze-e-contravvenzioni/imu-informazioni-regolamento-e-aliquote",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.pontassieve.fi.it/system/files/2025-05/dlc_00132_23-12-2024.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pontassieve.fi.it/servizi/tributi-finanze-e-contravvenzioni/imu-informazioni-regolamento-e-aliquote",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.pontassieve.fi.it/system/files/2025-05/ALLEGATO-1-Prospetto-aliquote-IMU.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pontassieve.fi.it/servizi/tributi-finanze-e-contravvenzioni/imu-informazioni-regolamento-e-aliquote",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.pontassieve.fi.it/system/files/2025-07/DICHIARAZIONE_PENSIONATO_STATO_ESTERO.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pontassieve.fi.it/servizi/tributi-finanze-e-contravvenzioni/imu-informazioni-regolamento-e-aliquote",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.pontassieve.fi.it/system/files/2025-07/Accorro-territoriale-Firenze-e-comuni-limitrofi-sottoscritto-il-03.07.2025-e-valido-dal-07.07.2025_250704_105950.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pontassieve.fi.it/servizi/tributi-finanze-e-contravvenzioni/imu-informazioni-regolamento-e-aliquote",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  },
+  "tributi_tari": {
+   "service_id": "048033:drupal:tari-tariffe-e-rapporti-con-gli-utenti",
+   "title": "TARI - Tariffe e rapporti con gli utenti",
+   "source_url": "https://www.comune.pontassieve.fi.it/servizi/tributi-finanze-e-contravvenzioni/tari-tariffe-e-rapporti-con-gli-utenti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pontassieve.fi.it/servizi/tributi-finanze-e-contravvenzioni/tari-tariffe-e-rapporti-con-gli-utenti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pontassieve.fi.it/servizi/tributi-finanze-e-contravvenzioni/tari-tariffe-e-rapporti-con-gli-utenti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.pontassieve.fi.it/sites/default/files/2024-02/Condizioni_del_servizio_Pontassieve.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pontassieve.fi.it/servizi/tributi-finanze-e-contravvenzioni/tari-tariffe-e-rapporti-con-gli-utenti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.pontassieve.fi.it/system/files/2024-11/Tariffe-TARI-2024.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pontassieve.fi.it/servizi/tributi-finanze-e-contravvenzioni/tari-tariffe-e-rapporti-con-gli-utenti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.pontassieve.fi.it/system/files/2025-06/TARI_TARIFFE-2025.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pontassieve.fi.it/servizi/tributi-finanze-e-contravvenzioni/tari-tariffe-e-rapporti-con-gli-utenti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  }
+ }
+}

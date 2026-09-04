@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "001156",
+ "services": {
+  "carta_identita": {
+   "service_id": "001156:drupal:carta-identita-elettronica-cie",
+   "title": "Carta di identità elettronica (CIE)",
+   "source_url": "https://www.comune.moncalieri.to.it/servizi/carta-identita-elettronica-cie",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.moncalieri.to.it/servizi/carta-identita-elettronica-cie",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.moncalieri.to.it/servizi/carta-identita-elettronica-cie",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "001156:drupal:imposta-municipale-propria-imu",
+   "title": "Imposta Municipale Propria - IMU",
+   "source_url": "https://www.comune.moncalieri.to.it/servizi/imposta-municipale-propria-imu",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.moncalieri.to.it/servizi/imposta-municipale-propria-imu",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.moncalieri.to.it/servizi/imposta-municipale-propria-imu",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  }
+ }
+}

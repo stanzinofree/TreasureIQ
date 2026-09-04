@@ -1,0 +1,54 @@
+{
+ "municipality_istat": "058043",
+ "services": {
+  "stato_civile": {
+   "service_id": "058043:drupal:separazione-e-divorzio-di-fronte-allufficiale-di-stato-civile",
+   "title": "Separazione e divorzio di fronte all’ufficiale di stato civile",
+   "source_url": "https://www.comune.genzanodiroma.roma.it/servizi/separazione-e-divorzio-di-fronte-allufficiale-di-stato-civile",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.genzanodiroma.roma.it/servizi/separazione-e-divorzio-di-fronte-allufficiale-di-stato-civile",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.genzanodiroma.roma.it/servizi/separazione-e-divorzio-di-fronte-allufficiale-di-stato-civile",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.genzanodiroma.roma.it/sites/comune.genzanodiroma.roma.it/files/2023-12/modulo%20separazione%20in%20Comune.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.genzanodiroma.roma.it/servizi/separazione-e-divorzio-di-fronte-allufficiale-di-stato-civile",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.genzanodiroma.roma.it/sites/comune.genzanodiroma.roma.it/files/2023-12/modulo%20divorzio%20dopo%20separazione%20in%20Comune.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.genzanodiroma.roma.it/servizi/separazione-e-divorzio-di-fronte-allufficiale-di-stato-civile",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  }
+ }
+}

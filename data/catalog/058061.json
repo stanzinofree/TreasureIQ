@@ -1,0 +1,129 @@
+{
+ "municipality_istat": "058061",
+ "services": {
+  "carta_identita": {
+   "service_id": "058061:drupal:rilascio-carta-didentita-elettronica-cie",
+   "title": "Rilascio carta d'identità elettronica (CIE)",
+   "source_url": "https://www.comune.monteflavio.rm.it/servizi/rilascio-carta-didentita-elettronica-cie",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.monteflavio.rm.it/servizi/rilascio-carta-didentita-elettronica-cie",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.monteflavio.rm.it/servizi/rilascio-carta-didentita-elettronica-cie",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.monteflavio.rm.it/sites/comune.monteflavio.rm.it/files/2023-12/Atto%20di%20assenso%20per%20adulti%20con%20figli%20minori.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.monteflavio.rm.it/servizi/rilascio-carta-didentita-elettronica-cie",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.monteflavio.rm.it/sites/comune.monteflavio.rm.it/files/2023-12/Atto%20di%20assenso%20per%20figli%20minori.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.monteflavio.rm.it/servizi/rilascio-carta-didentita-elettronica-cie",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  },
+  "tributi_tari": {
+   "service_id": "058061:drupal:pagamento-tari",
+   "title": "Pagamento tari",
+   "source_url": "https://www.comune.monteflavio.rm.it/servizi/pagamento-tari",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.monteflavio.rm.it/servizi/pagamento-tari",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.monteflavio.rm.it/servizi/pagamento-tari",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.monteflavio.rm.it/sites/comune.monteflavio.rm.it/files/2025-07/Carta%20Qalita%20Servizi%20TQRIF.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.monteflavio.rm.it/servizi/pagamento-tari",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.monteflavio.rm.it/sites/comune.monteflavio.rm.it/files/2025-07/MODULO%20RIMBORSO%20TARI.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.monteflavio.rm.it/servizi/pagamento-tari",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.monteflavio.rm.it/sites/comune.monteflavio.rm.it/files/2025-08/Denuncia%20o%20variazione%20TARI%20utenze%20non%20domestiche.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.monteflavio.rm.it/servizi/pagamento-tari",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.monteflavio.rm.it/sites/comune.monteflavio.rm.it/files/2025-08/DENUNCIA%20O%20VARIAZIONE%20TARI%20Utenze%20Domestiche.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.monteflavio.rm.it/servizi/pagamento-tari",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  }
+ }
+}

@@ -1,0 +1,64 @@
+{
+ "municipality_istat": "096080",
+ "services": {
+  "carta_identita": {
+   "service_id": "096080:drupal:carta-di-identita-elettronica-cie",
+   "title": "Carta di Identità Elettronica - CIE",
+   "source_url": "https://www.comune.viverone.bi.it/servizi/carta-di-identita-elettronica-cie",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.viverone.bi.it/servizi/carta-di-identita-elettronica-cie",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.viverone.bi.it/servizi/carta-di-identita-elettronica-cie",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.viverone.bi.it/sites/sito-comuneviverone.cittadinopratico.it/files/2023-03/Delega%20rilascio%20CIE%20minori.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.viverone.bi.it/servizi/carta-di-identita-elettronica-cie",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  },
+  "cambio_residenza": {
+   "service_id": "096080:drupal:cambio-di-residenza-iscrizione-anagrafica",
+   "title": "Cambio di residenza (Iscrizione Anagrafica)",
+   "source_url": "https://www.comune.viverone.bi.it/servizi/cambio-di-residenza-iscrizione-anagrafica",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.viverone.bi.it/servizi/cambio-di-residenza-iscrizione-anagrafica",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.viverone.bi.it/servizi/cambio-di-residenza-iscrizione-anagrafica",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  }
+ }
+}

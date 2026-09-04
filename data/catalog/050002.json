@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "050002",
+ "services": {
+  "carta_identita": {
+   "service_id": "050002:drupal:attivazione-carta-di-identita-elettronica-cie",
+   "title": "Attivazione Carta di Identità Elettronica CIE",
+   "source_url": "https://www.comune.buti.pi.it/servizi/attivazione-carta-di-identita-elettronica-cie",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.buti.pi.it/servizi/attivazione-carta-di-identita-elettronica-cie",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.buti.pi.it/servizi/attivazione-carta-di-identita-elettronica-cie",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  }
+ }
+}

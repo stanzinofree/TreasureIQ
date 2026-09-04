@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "055022",
+ "services": {
+  "carta_identita": {
+   "service_id": "055022:drupal:carta-didentita-elettronica-cie",
+   "title": "Carta d'Identità Elettronica - CIE",
+   "source_url": "https://www.comune.narni.tr.it/servizi/anagrafe-e-stato-civile/carta-didentita-elettronica-cie",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.narni.tr.it/servizi/anagrafe-e-stato-civile/carta-didentita-elettronica-cie",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.narni.tr.it/servizi/anagrafe-e-stato-civile/carta-didentita-elettronica-cie",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  },
+  "cambio_residenza": {
+   "service_id": "055022:drupal:cambio-di-residenza",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.narni.tr.it/servizi/anagrafe-e-stato-civile/cambio-di-residenza",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.narni.tr.it/servizi/anagrafe-e-stato-civile/cambio-di-residenza",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.narni.tr.it/servizi/anagrafe-e-stato-civile/cambio-di-residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  },
+  "stato_civile": {
+   "service_id": "055022:drupal:certificato-di-nascita-cittadini-europei",
+   "title": "Certificato di nascita per cittadini europei",
+   "source_url": "https://www.comune.narni.tr.it/servizi/anagrafe-e-stato-civile/certificato-di-nascita-cittadini-europei",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.narni.tr.it/servizi/anagrafe-e-stato-civile/certificato-di-nascita-cittadini-europei",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.narni.tr.it/servizi/anagrafe-e-stato-civile/certificato-di-nascita-cittadini-europei",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  }
+ }
+}

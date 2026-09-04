@@ -1,0 +1,217 @@
+{
+ "municipality_istat": "048043",
+ "services": {
+  "carta_identita": {
+   "service_id": "048043:drupal:carta-di-identita",
+   "title": "Carta di identità",
+   "source_url": "https://www.comune.sesto-fiorentino.fi.it/servizi/anagrafe-e-stato-civile/carta-di-identita",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sesto-fiorentino.fi.it/servizi/anagrafe-e-stato-civile/carta-di-identita",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sesto-fiorentino.fi.it/servizi/anagrafe-e-stato-civile/carta-di-identita",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.sesto-fiorentino.fi.it/sites/default/files/carta_id_scheda_tecnica_foto_2.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sesto-fiorentino.fi.it/servizi/anagrafe-e-stato-civile/carta-di-identita",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.sesto-fiorentino.fi.it/sites/default/files/foto_carte_identita_0.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sesto-fiorentino.fi.it/servizi/anagrafe-e-stato-civile/carta-di-identita",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.sesto-fiorentino.fi.it/sites/default/files/cie-depliant-web-1.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sesto-fiorentino.fi.it/servizi/anagrafe-e-stato-civile/carta-di-identita",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "048043:drupal:imu-imposta-municipale-propria",
+   "title": "IMU - Imposta Municipale Propria",
+   "source_url": "https://www.comune.sesto-fiorentino.fi.it/servizi/tributi-finanze-e-contravvenzioni/imu-imposta-municipale-propria",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sesto-fiorentino.fi.it/servizi/tributi-finanze-e-contravvenzioni/imu-imposta-municipale-propria",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sesto-fiorentino.fi.it/servizi/tributi-finanze-e-contravvenzioni/imu-imposta-municipale-propria",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.sesto-fiorentino.fi.it/system/files/2025-03/Prospetto%20aliquote%20IMU%20-%20Comune%20di%20SESTO%20FIORENTINO.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sesto-fiorentino.fi.it/servizi/tributi-finanze-e-contravvenzioni/imu-imposta-municipale-propria",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.sesto-fiorentino.fi.it/system/files/2025-03/Istruzioni%20Ravvedimento%20Operoso%20dal%202024.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sesto-fiorentino.fi.it/servizi/tributi-finanze-e-contravvenzioni/imu-imposta-municipale-propria",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  },
+  "tributi_tari": {
+   "service_id": "048043:drupal:tassa-sui-rifiuti-tari",
+   "title": "Tassa sui Rifiuti  - TARI",
+   "source_url": "https://www.comune.sesto-fiorentino.fi.it/servizi/tributi-finanze-e-contravvenzioni/tassa-sui-rifiuti-tari",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sesto-fiorentino.fi.it/servizi/tributi-finanze-e-contravvenzioni/tassa-sui-rifiuti-tari",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sesto-fiorentino.fi.it/servizi/tributi-finanze-e-contravvenzioni/tassa-sui-rifiuti-tari",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.sesto-fiorentino.fi.it/system/files/2026-08/Tariffe%20TARI%202026.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sesto-fiorentino.fi.it/servizi/tributi-finanze-e-contravvenzioni/tassa-sui-rifiuti-tari",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.sesto-fiorentino.fi.it/system/files/2025-05/tariffe%20tari%202025.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sesto-fiorentino.fi.it/servizi/tributi-finanze-e-contravvenzioni/tassa-sui-rifiuti-tari",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.sesto-fiorentino.fi.it/sites/default/files/tariffe_tari_2024.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sesto-fiorentino.fi.it/servizi/tributi-finanze-e-contravvenzioni/tassa-sui-rifiuti-tari",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.sesto-fiorentino.fi.it/sites/default/files/tariffe_tari_2023.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sesto-fiorentino.fi.it/servizi/tributi-finanze-e-contravvenzioni/tassa-sui-rifiuti-tari",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.sesto-fiorentino.fi.it/system/files/2025-03/Istruzioni%20Ravvedimento%20Operoso%20dal%202024.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sesto-fiorentino.fi.it/servizi/tributi-finanze-e-contravvenzioni/tassa-sui-rifiuti-tari",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.sesto-fiorentino.fi.it/sites/default/files/istruzioni_per_luso_del_portale_servizi_tributari.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sesto-fiorentino.fi.it/servizi/tributi-finanze-e-contravvenzioni/tassa-sui-rifiuti-tari",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  }
+ }
+}

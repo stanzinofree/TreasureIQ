@@ -1,0 +1,113 @@
+{
+ "municipality_istat": "048049",
+ "services": {
+  "carta_identita": {
+   "service_id": "048049:drupal:carta-di-identita-elettronica",
+   "title": "Carta di identità elettronica",
+   "source_url": "https://www.comune.vicchio.fi.it/servizi/anagrafe-e-stato-civile/carta-di-identita-elettronica",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vicchio.fi.it/servizi/anagrafe-e-stato-civile/carta-di-identita-elettronica",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vicchio.fi.it/servizi/anagrafe-e-stato-civile/carta-di-identita-elettronica",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  },
+  "stato_civile": {
+   "service_id": "048049:drupal:certificati-anagrafici-stato-civile-e-elettorali",
+   "title": "Certificati anagrafici, stato civile e elettorali",
+   "source_url": "https://www.comune.vicchio.fi.it/servizi/anagrafe-e-stato-civile/certificati-anagrafici-stato-civile-e-elettorali",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vicchio.fi.it/servizi/anagrafe-e-stato-civile/certificati-anagrafici-stato-civile-e-elettorali",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vicchio.fi.it/servizi/anagrafe-e-stato-civile/certificati-anagrafici-stato-civile-e-elettorali",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  },
+  "accesso_atti": {
+   "service_id": "048049:drupal:accesso-agli-atti-pubblici",
+   "title": "Accesso agli atti pubblici",
+   "source_url": "https://www.comune.vicchio.fi.it/servizi/anagrafe-e-stato-civile/accesso-agli-atti-pubblici",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vicchio.fi.it/servizi/anagrafe-e-stato-civile/accesso-agli-atti-pubblici",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vicchio.fi.it/servizi/anagrafe-e-stato-civile/accesso-agli-atti-pubblici",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.vicchio.fi.it/sites/default/files/REGACCESSO.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vicchio.fi.it/servizi/anagrafe-e-stato-civile/accesso-agli-atti-pubblici",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.vicchio.fi.it/sites/default/files/costi_riproduzione.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vicchio.fi.it/servizi/anagrafe-e-stato-civile/accesso-agli-atti-pubblici",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.vicchio.fi.it/sites/default/files/regolamento_accesso_civico_e_civico_genearalizzato.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vicchio.fi.it/servizi/anagrafe-e-stato-civile/accesso-agli-atti-pubblici",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  }
+ }
+}

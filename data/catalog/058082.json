@@ -1,0 +1,103 @@
+{
+ "municipality_istat": "058082",
+ "services": {
+  "carta_identita": {
+   "service_id": "058082:drupal:rilascio-carta-di-identita-elettronica",
+   "title": "Rilascio carta di identità elettronica",
+   "source_url": "https://www.comune.rignanoflaminio.rm.it/servizi/rilascio-carta-di-identita-elettronica",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rignanoflaminio.rm.it/servizi/rilascio-carta-di-identita-elettronica",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rignanoflaminio.rm.it/servizi/rilascio-carta-di-identita-elettronica",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.rignanoflaminio.rm.it/sites/comune.rignanoflaminio.rm.it/files/2025-09/Atto%20di%20assenso%20x%20minore%20ok.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rignanoflaminio.rm.it/servizi/rilascio-carta-di-identita-elettronica",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "058082:drupal:imu-imposta-comunale-propria",
+   "title": "IMU - Imposta Comunale Propria",
+   "source_url": "https://www.comune.rignanoflaminio.rm.it/servizi/imu-imposta-comunale-propria",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rignanoflaminio.rm.it/servizi/imu-imposta-comunale-propria",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rignanoflaminio.rm.it/servizi/imu-imposta-comunale-propria",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.rignanoflaminio.rm.it/sites/comune.rignanoflaminio.rm.it/files/2024-04/Modello_dichiarazione_IMU.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rignanoflaminio.rm.it/servizi/imu-imposta-comunale-propria",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.rignanoflaminio.rm.it/sites/comune.rignanoflaminio.rm.it/files/2024-01/Regolamento%20IMU_2020.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rignanoflaminio.rm.it/servizi/imu-imposta-comunale-propria",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.rignanoflaminio.rm.it/sites/comune.rignanoflaminio.rm.it/files/2024-01/Delibera%20CC%20tariffe%20e%20detrazioni%20IMU%202022.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rignanoflaminio.rm.it/servizi/imu-imposta-comunale-propria",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  }
+ }
+}

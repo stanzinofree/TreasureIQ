@@ -1,0 +1,171 @@
+{
+ "municipality_istat": "059001",
+ "services": {
+  "tributi_imu": {
+   "service_id": "059001:drupal:sportello-imu-imposta-municipale-propria",
+   "title": "Sportello Imu - Imposta Municipale Propria",
+   "source_url": "https://www.comune.aprilia.lt.it/servizi/sportello-imu-imposta-municipale-propria",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.aprilia.lt.it/servizi/sportello-imu-imposta-municipale-propria",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.aprilia.lt.it/servizi/sportello-imu-imposta-municipale-propria",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.aprilia.lt.it/sites/comune.aprilia.lt.it/files/2025-02/Comunicazione%20uso%20gratuito%20o%20locazione%20a%20canone%20concordato.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.aprilia.lt.it/servizi/sportello-imu-imposta-municipale-propria",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.aprilia.lt.it/sites/comune.aprilia.lt.it/files/2025-06/Dichiarazione-inagibilita-IMU.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.aprilia.lt.it/servizi/sportello-imu-imposta-municipale-propria",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.aprilia.lt.it/sites/comune.aprilia.lt.it/files/2024-07/istanza%20di%20rimborso.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.aprilia.lt.it/servizi/sportello-imu-imposta-municipale-propria",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.aprilia.lt.it/sites/comune.aprilia.lt.it/files/2025-02/Modulo%20istanza%20rateizzazione.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.aprilia.lt.it/servizi/sportello-imu-imposta-municipale-propria",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.aprilia.lt.it/sites/comune.aprilia.lt.it/files/2025-02/Modulo%20istanza%20annullamento_rettifica%20in%20autotutela%20.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.aprilia.lt.it/servizi/sportello-imu-imposta-municipale-propria",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.aprilia.lt.it/sites/comune.aprilia.lt.it/files/2025-02/Regolamento%20generale%20delle%20Entrate%20tributarie%20e%20patrimoniali.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.aprilia.lt.it/servizi/sportello-imu-imposta-municipale-propria",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.aprilia.lt.it/sites/comune.aprilia.lt.it/files/2025-02/Regolamento%20comunale%20per%20l%27applicazione%20dello%20statuto%20dei%20diritti%20del%20contribuente.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.aprilia.lt.it/servizi/sportello-imu-imposta-municipale-propria",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.aprilia.lt.it/sites/comune.aprilia.lt.it/files/2026-04/Accordo%20territoriale%20per%20il%20Comune%20di%20Aprilia.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.aprilia.lt.it/servizi/sportello-imu-imposta-municipale-propria",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.aprilia.lt.it/sites/comune.aprilia.lt.it/files/2026-05/Manifesto-aliquote-IMU-2026-acconto_1.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.aprilia.lt.it/servizi/sportello-imu-imposta-municipale-propria",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.aprilia.lt.it/sites/comune.aprilia.lt.it/files/2026-08/Adesione%20Accordo%20Territoriale-Confabitare.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.aprilia.lt.it/servizi/sportello-imu-imposta-municipale-propria",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.aprilia.lt.it/sites/comune.aprilia.lt.it/files/2025-02/Regolamento%20Imu%202025.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.aprilia.lt.it/servizi/sportello-imu-imposta-municipale-propria",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  }
+ }
+}

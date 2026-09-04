@@ -1,0 +1,67 @@
+{
+ "municipality_istat": "099014",
+ "services": {
+  "carta_identita": {
+   "service_id": "099014:drupal:richiedere-la-carta-di-identita-elettronica",
+   "title": "Richiedere la carta di identità elettronica",
+   "source_url": "https://www.comune.rimini.it/servizi/anagrafe-e-stato-civile/richiedere-la-carta-di-identita-elettronica",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rimini.it/servizi/anagrafe-e-stato-civile/richiedere-la-carta-di-identita-elettronica",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rimini.it/servizi/anagrafe-e-stato-civile/richiedere-la-carta-di-identita-elettronica",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.rimini.it/system/files/2026-06/Modello_richiesta_CIE_AIRE_NO_Rimini.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rimini.it/servizi/anagrafe-e-stato-civile/richiedere-la-carta-di-identita-elettronica",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.rimini.it/system/files/2025-08/ASSENSO%20MINORE%20ESPATRIO_aggiornato2025_.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rimini.it/servizi/anagrafe-e-stato-civile/richiedere-la-carta-di-identita-elettronica",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.rimini.it/sites/default/files/2022-03/2022_02_28_Valerin%20funzioni%20aggiuntive%20.stamped.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rimini.it/servizi/anagrafe-e-stato-civile/richiedere-la-carta-di-identita-elettronica",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  }
+ }
+}

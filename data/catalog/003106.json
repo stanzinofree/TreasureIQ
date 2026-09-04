@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "003106",
+ "services": {
+  "stato_civile": {
+   "service_id": "003106:drupal:certificati-estratti-copie-integrali-stato-civile",
+   "title": "Certificati, estratti e copie integrali di stato civile",
+   "source_url": "https://www.comune.novara.it/servizi/certificati-estratti-copie-integrali-stato-civile",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.novara.it/servizi/certificati-estratti-copie-integrali-stato-civile",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.novara.it/servizi/certificati-estratti-copie-integrali-stato-civile",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  }
+ }
+}

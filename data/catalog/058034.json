@@ -1,0 +1,87 @@
+{
+ "municipality_istat": "058034",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "058034:drupal:cambio-di-residenza",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.colleferro.rm.it/servizi/cambio-di-residenza",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.colleferro.rm.it/servizi/cambio-di-residenza",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.colleferro.rm.it/servizi/cambio-di-residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  },
+  "stato_civile": {
+   "service_id": "058034:drupal:annotazioni-e-trascrizioni-su-atti-di-stato-civile",
+   "title": "Annotazioni e trascrizioni su atti di stato civile",
+   "source_url": "https://www.comune.colleferro.rm.it/servizi/annotazioni-e-trascrizioni-su-atti-di-stato-civile",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.colleferro.rm.it/servizi/annotazioni-e-trascrizioni-su-atti-di-stato-civile",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.colleferro.rm.it/servizi/annotazioni-e-trascrizioni-su-atti-di-stato-civile",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "058034:drupal:calcolo-e-pagamento-imu",
+   "title": "Calcolo e pagamento IMU",
+   "source_url": "https://www.comune.colleferro.rm.it/servizi/calcolo-e-pagamento-imu",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.colleferro.rm.it/servizi/calcolo-e-pagamento-imu",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.colleferro.rm.it/servizi/calcolo-e-pagamento-imu",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.colleferro.rm.it/sites/comune.colleferro.rm.it/files/2025-05/Imposta%20Municipale%20Propria%20%28IMU%29%20%E2%80%93%20Anno%202025.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.colleferro.rm.it/servizi/calcolo-e-pagamento-imu",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  }
+ }
+}

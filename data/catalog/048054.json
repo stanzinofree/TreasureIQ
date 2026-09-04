@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "048054",
+ "services": {
+  "carta_identita": {
+   "service_id": "048054:drupal:carta-didentita-elettronica-cie",
+   "title": "Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.barberinotavarnelle.fi.it/servizi/anagrafe-e-stato-civile/carta-didentita-elettronica-cie",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.barberinotavarnelle.fi.it/servizi/anagrafe-e-stato-civile/carta-didentita-elettronica-cie",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.barberinotavarnelle.fi.it/servizi/anagrafe-e-stato-civile/carta-didentita-elettronica-cie",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  },
+  "stato_civile": {
+   "service_id": "048054:drupal:certificati-di-stato-civile",
+   "title": "Certificati di stato civile",
+   "source_url": "https://www.comune.barberinotavarnelle.fi.it/servizi/anagrafe-e-stato-civile/certificati-di-stato-civile",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.barberinotavarnelle.fi.it/servizi/anagrafe-e-stato-civile/certificati-di-stato-civile",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.barberinotavarnelle.fi.it/servizi/anagrafe-e-stato-civile/certificati-di-stato-civile",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  }
+ }
+}

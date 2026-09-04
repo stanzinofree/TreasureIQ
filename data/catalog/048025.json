@@ -1,0 +1,149 @@
+{
+ "municipality_istat": "048025",
+ "services": {
+  "carta_identita": {
+   "service_id": "048025:drupal:carta-di-identita-elettronica-cie",
+   "title": "Carta di Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.londa.fi.it/servizi/anagrafe-stato-civile-ed-elettorale/carta-di-identita-elettronica-cie",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.londa.fi.it/servizi/anagrafe-stato-civile-ed-elettorale/carta-di-identita-elettronica-cie",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.londa.fi.it/servizi/anagrafe-stato-civile-ed-elettorale/carta-di-identita-elettronica-cie",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.londa.fi.it/system/files/2024-11/Brochure-una-scelta-in-comune.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.londa.fi.it/servizi/anagrafe-stato-civile-ed-elettorale/carta-di-identita-elettronica-cie",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  },
+  "accesso_atti": {
+   "service_id": "048025:drupal:richiesta-di-accesso-agli-atti",
+   "title": "Richiesta di accesso agli atti",
+   "source_url": "https://www.comune.londa.fi.it/servizi/anagrafe-stato-civile-ed-elettorale/richiesta-di-accesso-agli-atti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.londa.fi.it/servizi/anagrafe-stato-civile-ed-elettorale/richiesta-di-accesso-agli-atti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.londa.fi.it/servizi/anagrafe-stato-civile-ed-elettorale/richiesta-di-accesso-agli-atti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "048025:drupal:pagamento-imu",
+   "title": "Pagamento IMU",
+   "source_url": "https://www.comune.londa.fi.it/servizi/tributi-finanze-e-contravvenzioni/pagamento-imu",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.londa.fi.it/servizi/tributi-finanze-e-contravvenzioni/pagamento-imu",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.londa.fi.it/servizi/tributi-finanze-e-contravvenzioni/pagamento-imu",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.londa.fi.it/system/files/2025-03/delibera%20copia%20conforme.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.londa.fi.it/servizi/tributi-finanze-e-contravvenzioni/pagamento-imu",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.londa.fi.it/system/files/2025-03/prospetto%20aliquote%20imu_londa.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.londa.fi.it/servizi/tributi-finanze-e-contravvenzioni/pagamento-imu",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.londa.fi.it/system/files/2025-04/Ulteriori%20Informazioni.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.londa.fi.it/servizi/tributi-finanze-e-contravvenzioni/pagamento-imu",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  },
+  "tributi_tari": {
+   "service_id": "048025:drupal:domanda-di-agevolazione-tributaria-tari",
+   "title": "Domanda di agevolazione tributaria TARI",
+   "source_url": "https://www.comune.londa.fi.it/servizi/tributi-finanze-e-contravvenzioni/domanda-di-agevolazione-tributaria-tari",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.londa.fi.it/servizi/tributi-finanze-e-contravvenzioni/domanda-di-agevolazione-tributaria-tari",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.londa.fi.it/servizi/tributi-finanze-e-contravvenzioni/domanda-di-agevolazione-tributaria-tari",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  }
+ }
+}

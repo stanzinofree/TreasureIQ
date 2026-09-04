@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "019036",
+ "services": {
+  "carta_identita": {
+   "service_id": "019036:drupal:chiedere-pinpuk-della-cie-abilitarla-per-servizi-online",
+   "title": "Chiedere PIN/PUK della CIE e abilitarla per i servizi online",
+   "source_url": "https://www.comune.cremona.it/servizi/chiedere-pinpuk-della-cie-abilitarla-per-servizi-online",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cremona.it/servizi/chiedere-pinpuk-della-cie-abilitarla-per-servizi-online",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cremona.it/servizi/chiedere-pinpuk-della-cie-abilitarla-per-servizi-online",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  }
+ }
+}

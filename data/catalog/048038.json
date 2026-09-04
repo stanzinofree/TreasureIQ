@@ -1,0 +1,152 @@
+{
+ "municipality_istat": "048038",
+ "services": {
+  "carta_identita": {
+   "service_id": "048038:drupal:carta-didentita-elettronica-cie",
+   "title": "Carta d'Identità Elettronica - CIE",
+   "source_url": "https://www.comune.san-casciano-val-di-pesa.fi.it/servizi/anagrafe-e-stato-civile/carta-didentita-elettronica-cie",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.san-casciano-val-di-pesa.fi.it/servizi/anagrafe-e-stato-civile/carta-didentita-elettronica-cie",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.san-casciano-val-di-pesa.fi.it/servizi/anagrafe-e-stato-civile/carta-didentita-elettronica-cie",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.san-casciano-val-di-pesa.fi.it/sites/default/files/2024-02/Regolamento%20ordinamento%20uffici%20e%20servizi.odt",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.san-casciano-val-di-pesa.fi.it/servizi/anagrafe-e-stato-civile/carta-didentita-elettronica-cie",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  },
+  "cambio_residenza": {
+   "service_id": "048038:drupal:cambio-di-residenza",
+   "title": "Cambio di Residenza",
+   "source_url": "https://www.comune.san-casciano-val-di-pesa.fi.it/servizi/anagrafe-e-stato-civile/cambio-di-residenza",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.san-casciano-val-di-pesa.fi.it/servizi/anagrafe-e-stato-civile/cambio-di-residenza",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.san-casciano-val-di-pesa.fi.it/servizi/anagrafe-e-stato-civile/cambio-di-residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.san-casciano-val-di-pesa.fi.it/sites/default/files/2024-02/Regolamento%20ordinamento%20uffici%20e%20servizi.odt",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.san-casciano-val-di-pesa.fi.it/servizi/anagrafe-e-stato-civile/cambio-di-residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.san-casciano-val-di-pesa.fi.it/sites/default/files/informativa_-_cambio_di_residenza.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.san-casciano-val-di-pesa.fi.it/servizi/anagrafe-e-stato-civile/cambio-di-residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.san-casciano-val-di-pesa.fi.it/sites/default/files/residenza_all_a_documentazione_cittadini_stranieri.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.san-casciano-val-di-pesa.fi.it/servizi/anagrafe-e-stato-civile/cambio-di-residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.san-casciano-val-di-pesa.fi.it/sites/default/files/residenza_all_b_documentazione_cittadini_eu.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.san-casciano-val-di-pesa.fi.it/servizi/anagrafe-e-stato-civile/cambio-di-residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  },
+  "accesso_atti": {
+   "service_id": "048038:drupal:richiesta-line-di-accesso-agli-atti",
+   "title": "Richiesta on line di accesso agli atti",
+   "source_url": "https://www.comune.san-casciano-val-di-pesa.fi.it/servizi/anagrafe-e-stato-civile/richiesta-line-di-accesso-agli-atti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.san-casciano-val-di-pesa.fi.it/servizi/anagrafe-e-stato-civile/richiesta-line-di-accesso-agli-atti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.san-casciano-val-di-pesa.fi.it/servizi/anagrafe-e-stato-civile/richiesta-line-di-accesso-agli-atti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.san-casciano-val-di-pesa.fi.it/sites/default/files/2024-02/Regolamento%20ordinamento%20uffici%20e%20servizi.odt",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.san-casciano-val-di-pesa.fi.it/servizi/anagrafe-e-stato-civile/richiesta-line-di-accesso-agli-atti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  }
+ }
+}

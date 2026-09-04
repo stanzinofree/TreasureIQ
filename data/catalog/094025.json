@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "094025",
+ "services": {
+  "carta_identita": {
+   "service_id": "094025:openweb:888",
+   "title": "Carta d’Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.macchiadisernia.is.it/servizio/carta-didentita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.macchiadisernia.is.it/servizio/carta-didentita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.macchiadisernia.is.it/servizio/carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:48:28.894706Z"
+  },
+  "tributi_imu": {
+   "service_id": "094025:openweb:892",
+   "title": "Dichiarazione IMU",
+   "source_url": "https://www.comune.macchiadisernia.is.it/servizio/dichiarazione-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.macchiadisernia.is.it/servizio/dichiarazione-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.macchiadisernia.is.it/servizio/dichiarazione-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:48:39.672490Z"
+  }
+ }
+}

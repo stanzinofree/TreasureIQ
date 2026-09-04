@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "004031",
+ "services": {
+  "accesso_atti": {
+   "service_id": "004031:openweb:20297",
+   "title": "Stato Avanzamento e Accesso agli Atti – Pratiche Edilizie",
+   "source_url": "https://comune.brigaalta.cn.it/servizio/stato-avanzamento-e-accesso-agli-atti-pratiche-edilizie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.brigaalta.cn.it/servizio/stato-avanzamento-e-accesso-agli-atti-pratiche-edilizie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.brigaalta.cn.it/servizio/stato-avanzamento-e-accesso-agli-atti-pratiche-edilizie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:33:28.000350Z"
+  },
+  "tributi_imu": {
+   "service_id": "004031:openweb:492",
+   "title": "Pagamento tributi IMU – F24",
+   "source_url": "https://comune.brigaalta.cn.it/servizio/pagamento-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.brigaalta.cn.it/servizio/pagamento-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.brigaalta.cn.it/servizio/pagamento-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:33:41.745697Z"
+  }
+ }
+}

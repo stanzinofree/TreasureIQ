@@ -1,0 +1,224 @@
+{
+ "municipality_istat": "051008",
+ "services": {
+  "carta_identita": {
+   "service_id": "051008:openweb:1500",
+   "title": "Carta d’identità – CIE",
+   "source_url": "https://comune.castel-focognano.ar.it/servizio/carta-didentita-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.castel-focognano.ar.it/servizio/carta-didentita-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.castel-focognano.ar.it/servizio/carta-didentita-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:59:36.942967Z"
+  },
+  "accesso_atti": {
+   "service_id": "051008:openweb:343",
+   "title": "Accesso agli atti generalizzato",
+   "source_url": "https://comune.castel-focognano.ar.it/servizio/accesso-agli-atti-generalizzato/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.castel-focognano.ar.it/servizio/accesso-agli-atti-generalizzato/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.castel-focognano.ar.it/servizio/accesso-agli-atti-generalizzato/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:59:49.643063Z"
+  },
+  "stato_civile": {
+   "service_id": "051008:openweb:345",
+   "title": "Anagrafe, Stato Civile, Elettorale, Leva",
+   "source_url": "https://comune.castel-focognano.ar.it/servizio/rilascio-di-certificati-anagrafici-e-atti-di-stato-civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.castel-focognano.ar.it/servizio/rilascio-di-certificati-anagrafici-e-atti-di-stato-civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.castel-focognano.ar.it/servizio/rilascio-di-certificati-anagrafici-e-atti-di-stato-civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:00:03.122066Z"
+  },
+  "tributi_imu": {
+   "service_id": "051008:openweb:227",
+   "title": "IMU – Modalità e termini per la dichiarazione",
+   "source_url": "https://comune.castel-focognano.ar.it/servizio/imu-modalita-e-termini-per-la-dichiarazione/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.castel-focognano.ar.it/servizio/imu-modalita-e-termini-per-la-dichiarazione/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.castel-focognano.ar.it/servizio/imu-modalita-e-termini-per-la-dichiarazione/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:00:15.205461Z"
+  },
+  "tributi_tari": {
+   "service_id": "051008:openweb:172",
+   "title": "TARI (tributo sui rifiuti)",
+   "source_url": "https://comune.castel-focognano.ar.it/servizio/tari-tributo-sui-rifiuti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.castel-focognano.ar.it/servizio/tari-tributo-sui-rifiuti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.castel-focognano.ar.it/servizio/tari-tributo-sui-rifiuti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.castel-focognano.ar.it/wp-content/uploads/2025/09/aliquote-tari-Castel-Focognano.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.castel-focognano.ar.it/servizio/tari-tributo-sui-rifiuti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.castel-focognano.ar.it/wp-content/uploads/2025/09/RICHIESTA-RATEIZZAZIONE-ACCERTAMENTI-TARI.docx",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.castel-focognano.ar.it/servizio/tari-tributo-sui-rifiuti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.castel-focognano.ar.it/wp-content/uploads/2025/09/TARI_denuncia-sospensione-per-inutilizzo-immobile.docx",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.castel-focognano.ar.it/servizio/tari-tributo-sui-rifiuti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.castel-focognano.ar.it/wp-content/uploads/2025/09/TARI_dichiarazione_2017.docx",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.castel-focognano.ar.it/servizio/tari-tributo-sui-rifiuti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.castel-focognano.ar.it/wp-content/uploads/2025/09/TARI_domanda-di-riduzione-per-compostaggio-domestico.docx",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.castel-focognano.ar.it/servizio/tari-tributo-sui-rifiuti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.castel-focognano.ar.it/wp-content/uploads/2025/09/TARI_richiesta-riduzione-per-uso-discontinuo.doc",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.castel-focognano.ar.it/servizio/tari-tributo-sui-rifiuti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.castel-focognano.ar.it/wp-content/uploads/2025/09/TARI_Richiesta-rimborso-generica.docx",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.castel-focognano.ar.it/servizio/tari-tributo-sui-rifiuti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.castel-focognano.ar.it/wp-content/uploads/2018/01/modello-tari.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.castel-focognano.ar.it/servizio/tari-tributo-sui-rifiuti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:00:27.919444Z"
+  }
+ }
+}

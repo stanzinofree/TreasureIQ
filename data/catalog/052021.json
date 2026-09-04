@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "052021",
+ "services": {
+  "accesso_atti": {
+   "service_id": "052021:openweb:918",
+   "title": "Accesso agli atti Pratiche Edilizie",
+   "source_url": "https://www.comune.pienza.si.it/servizio/accesso-agli-atti-pratiche-edilizie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pienza.si.it/servizio/accesso-agli-atti-pratiche-edilizie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pienza.si.it/servizio/accesso-agli-atti-pratiche-edilizie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:05:54.383974Z"
+  },
+  "tributi_imu": {
+   "service_id": "052021:openweb:1242",
+   "title": "IMU",
+   "source_url": "https://www.comune.pienza.si.it/servizio/imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pienza.si.it/servizio/imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pienza.si.it/servizio/imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:06:06.228683Z"
+  },
+  "tributi_tari": {
+   "service_id": "052021:openweb:1226",
+   "title": "TARI",
+   "source_url": "https://www.comune.pienza.si.it/servizio/tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pienza.si.it/servizio/tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pienza.si.it/servizio/tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:06:16.828155Z"
+  }
+ }
+}

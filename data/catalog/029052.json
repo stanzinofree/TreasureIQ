@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "029052",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "029052:openweb:3364",
+   "title": "Cambio di residenza in tempo reale",
+   "source_url": "https://comune.portoviro.ro.it/servizio/cambio-di-residenza-in-tempo-reale/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.portoviro.ro.it/servizio/cambio-di-residenza-in-tempo-reale/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.portoviro.ro.it/servizio/cambio-di-residenza-in-tempo-reale/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:52:44.780108Z"
+  },
+  "accesso_atti": {
+   "service_id": "029052:openweb:4999",
+   "title": "Accesso agli Atti",
+   "source_url": "https://comune.portoviro.ro.it/servizio/accesso-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.portoviro.ro.it/servizio/accesso-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.portoviro.ro.it/servizio/accesso-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:52:59.413450Z"
+  }
+ }
+}

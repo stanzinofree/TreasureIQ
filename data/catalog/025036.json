@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "025036",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "025036:openweb:714",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.pedavena.bl.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.pedavena.bl.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.pedavena.bl.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:47:12.235132Z"
+  },
+  "stato_civile": {
+   "service_id": "025036:openweb:1692",
+   "title": "Richiesta di Certificazioni di Stato Civile (certificati estratti) di nascita, matrimonio/unione civile, morte.",
+   "source_url": "https://comune.pedavena.bl.it/servizio/richiesta-di-certificazioni-di-stato-civile-certificati-estratti-di-nascita-matrimonio-unione-civile-morte/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.pedavena.bl.it/servizio/richiesta-di-certificazioni-di-stato-civile-certificati-estratti-di-nascita-matrimonio-unione-civile-morte/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.pedavena.bl.it/servizio/richiesta-di-certificazioni-di-stato-civile-certificati-estratti-di-nascita-matrimonio-unione-civile-morte/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:47:23.846903Z"
+  },
+  "tributi_imu": {
+   "service_id": "025036:openweb:1148",
+   "title": "IMU – Regolamento e aliquote",
+   "source_url": "https://comune.pedavena.bl.it/servizio/imu-regolamento-e-aliquote/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.pedavena.bl.it/servizio/imu-regolamento-e-aliquote/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.pedavena.bl.it/servizio/imu-regolamento-e-aliquote/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:47:36.689633Z"
+  }
+ }
+}

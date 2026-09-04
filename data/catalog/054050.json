@@ -1,0 +1,230 @@
+{
+ "municipality_istat": "054050",
+ "services": {
+  "accesso_atti": {
+   "service_id": "054050:openweb:1509",
+   "title": "Accesso agli atti – servizio edilizia",
+   "source_url": "https://www.comune.spello.pg.it/servizio/accesso-agli-atti-servizio-edilizia/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.spello.pg.it/servizio/accesso-agli-atti-servizio-edilizia/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.spello.pg.it/servizio/accesso-agli-atti-servizio-edilizia/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.spello.pg.it/servizio/sportello-unico-edilizia-sue",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.spello.pg.it/servizio/accesso-agli-atti-servizio-edilizia/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:08:52.838773Z"
+  },
+  "tributi_imu": {
+   "service_id": "054050:openweb:543",
+   "title": "Informazioni sull’IMU",
+   "source_url": "https://www.comune.spello.pg.it/servizio/informazioni-sullimu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.spello.pg.it/servizio/informazioni-sullimu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.spello.pg.it/servizio/informazioni-sullimu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.spello.pg.it/wp-content/uploads/2026/04/Prospetto-aliquote-IMU-2026.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.spello.pg.it/servizio/informazioni-sullimu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:09:09.066256Z"
+  },
+  "tributi_tari": {
+   "service_id": "054050:openweb:542",
+   "title": "Tassa sui Rifiuti (TARI)",
+   "source_url": "https://www.comune.spello.pg.it/servizio/tassa-sui-rifiuti-tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.spello.pg.it/servizio/tassa-sui-rifiuti-tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.spello.pg.it/servizio/tassa-sui-rifiuti-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.spello.pg.it/wp-content/uploads/2025/10/Carta_Servizi_TRU_-_Comune_di_Spello_-_14_02_2023-10_16_45.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.spello.pg.it/servizio/tassa-sui-rifiuti-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.spello.pg.it/wp-content/uploads/2025/10/Regolamento-TARI-2023-testo-coordinato.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.spello.pg.it/servizio/tassa-sui-rifiuti-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.spello.pg.it/wp-content/uploads/2026/04/ACCERTAMENTO-TARI-ISTANZA-DI-RATEIZZAZIONE-1.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.spello.pg.it/servizio/tassa-sui-rifiuti-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.spello.pg.it/wp-content/uploads/2026/04/BONARIO-TARI-ISTANZA-DI-RATEIZZAZIONE-1.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.spello.pg.it/servizio/tassa-sui-rifiuti-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.spello.pg.it/wp-content/uploads/2026/04/ISTANZA-DI-RIMBORSO-TARI-1.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.spello.pg.it/servizio/tassa-sui-rifiuti-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.spello.pg.it/wp-content/uploads/2026/04/TARI-RIDUZIONE-INVALIDITA-1.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.spello.pg.it/servizio/tassa-sui-rifiuti-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.spello.pg.it/wp-content/uploads/2026/04/TARI-MODELLO-RECLAMO-AL-GESTORE-TARIFFE-E-RAPPORTI-CON-GLI-UTENTI.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.spello.pg.it/servizio/tassa-sui-rifiuti-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.spello.pg.it/wp-content/uploads/2026/04/TARI-NUOVA-DENUNCIA.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.spello.pg.it/servizio/tassa-sui-rifiuti-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.spello.pg.it/wp-content/uploads/2026/04/TARI-CESSAZIONE.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.spello.pg.it/servizio/tassa-sui-rifiuti-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.spello.pg.it/wp-content/uploads/2026/04/TARI-RIDUZIONI.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.spello.pg.it/servizio/tassa-sui-rifiuti-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:09:29.832100Z"
+  }
+ }
+}

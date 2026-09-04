@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "041018",
+ "services": {
+  "accesso_atti": {
+   "service_id": "041018:openweb:1274",
+   "title": "Diritti di accesso atti ufficio tecnico",
+   "source_url": "https://comune.frontone.pu.it/servizio/diritti-di-accesso-atti-ufficio-tecnico/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.frontone.pu.it/servizio/diritti-di-accesso-atti-ufficio-tecnico/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.frontone.pu.it/servizio/diritti-di-accesso-atti-ufficio-tecnico/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:55:05.890655Z"
+  }
+ }
+}

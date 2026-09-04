@@ -1,0 +1,116 @@
+{
+ "municipality_istat": "071020",
+ "services": {
+  "carta_identita": {
+   "service_id": "071020:openweb:4876",
+   "title": "Prenotare la Carta d’identità elettronica (CIE) in autonomia",
+   "source_url": "https://comune.cerignola.fg.it/servizio/prenotare-la-carta-didentita-elettronica-cie-in-autonomia/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.cerignola.fg.it/servizio/prenotare-la-carta-didentita-elettronica-cie-in-autonomia/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.cerignola.fg.it/servizio/prenotare-la-carta-didentita-elettronica-cie-in-autonomia/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.cerignola.fg.it/wp-content/uploads/2024/01/Codice-univoci.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.cerignola.fg.it/servizio/prenotare-la-carta-didentita-elettronica-cie-in-autonomia/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:25:39.281159Z"
+  },
+  "accesso_atti": {
+   "service_id": "071020:openweb:3330",
+   "title": "Richiedere l’accesso agli atti amministrativi",
+   "source_url": "https://comune.cerignola.fg.it/servizio/richiedere-laccesso-agli-atti-amministrativi/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.cerignola.fg.it/servizio/richiedere-laccesso-agli-atti-amministrativi/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.cerignola.fg.it/servizio/richiedere-laccesso-agli-atti-amministrativi/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.cerignola.fg.it/wp-content/uploads/2026/02/Allegato-A-Modulo-richiesta-accesso-documentale.doc",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.cerignola.fg.it/servizio/richiedere-laccesso-agli-atti-amministrativi/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.cerignola.fg.it/wp-content/uploads/2026/02/Allegato-B-Modulo-richiesta-accesso-civico-semplice.doc",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.cerignola.fg.it/servizio/richiedere-laccesso-agli-atti-amministrativi/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.cerignola.fg.it/wp-content/uploads/2026/02/Allegato-C-Modulo-richiesta-accesso-civico-generalizzato.doc",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.cerignola.fg.it/servizio/richiedere-laccesso-agli-atti-amministrativi/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.cerignola.fg.it/wp-content/uploads/2024/01/Codice-univoci.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.cerignola.fg.it/servizio/richiedere-laccesso-agli-atti-amministrativi/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:25:53.669045Z"
+  }
+ }
+}

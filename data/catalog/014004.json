@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "014004",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "014004:openweb:759",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.aprica.so.it/servizio/cambio-di-residenza-2/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.aprica.so.it/servizio/cambio-di-residenza-2/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.aprica.so.it/servizio/cambio-di-residenza-2/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:40:24.304102Z"
+  },
+  "tributi_imu": {
+   "service_id": "014004:openweb:1256",
+   "title": "Calcolo IMU",
+   "source_url": "https://comune.aprica.so.it/servizio/calcolo-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.aprica.so.it/servizio/calcolo-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.aprica.so.it/servizio/calcolo-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:40:38.692624Z"
+  }
+ }
+}

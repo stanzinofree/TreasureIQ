@@ -1,0 +1,41 @@
+{
+ "municipality_istat": "041043",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "041043:openweb:681",
+   "title": "Dichiarazione di cambio residenza online",
+   "source_url": "https://www.comune.pergola.pu.it/servizio/dichiarazione-di-cambio-residenza-online/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pergola.pu.it/servizio/dichiarazione-di-cambio-residenza-online/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pergola.pu.it/servizio/dichiarazione-di-cambio-residenza-online/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.pergola.pu.it/wp-content/uploads/2025/10/Numeri-telefonici.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pergola.pu.it/servizio/dichiarazione-di-cambio-residenza-online/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:55:19.892475Z"
+  }
+ }
+}

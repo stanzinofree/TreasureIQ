@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "047012",
+ "services": {
+  "carta_identita": {
+   "service_id": "047012:openweb:2388",
+   "title": "Rilascio Carta di Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.pescia.pt.it/servizio/rilascio-carta-di-identita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pescia.pt.it/servizio/rilascio-carta-di-identita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pescia.pt.it/servizio/rilascio-carta-di-identita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:58:11.737918Z"
+  },
+  "tributi_imu": {
+   "service_id": "047012:openweb:4043",
+   "title": "Imposta Municipale Unica (IMU)",
+   "source_url": "https://www.comune.pescia.pt.it/servizio/imposta-municipale-unica-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pescia.pt.it/servizio/imposta-municipale-unica-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pescia.pt.it/servizio/imposta-municipale-unica-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:58:22.198615Z"
+  },
+  "tributi_tari": {
+   "service_id": "047012:openweb:3746",
+   "title": "TARI",
+   "source_url": "https://www.comune.pescia.pt.it/servizio/tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pescia.pt.it/servizio/tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pescia.pt.it/servizio/tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:58:35.787551Z"
+  }
+ }
+}

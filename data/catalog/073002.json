@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "073002",
+ "services": {
+  "tributi_imu": {
+   "service_id": "073002:openweb:506",
+   "title": "Consultazione IMU",
+   "source_url": "https://www.comune.carosino.ta.it/servizio/consultazione-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.carosino.ta.it/servizio/consultazione-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.carosino.ta.it/servizio/consultazione-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:29:30.272380Z"
+  }
+ }
+}

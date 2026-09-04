@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "040044",
+ "services": {
+  "accesso_atti": {
+   "service_id": "040044:openweb:3336",
+   "title": "Accesso agli atti",
+   "source_url": "https://www.comune.sarsina.fc.it/servizio/accesso-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sarsina.fc.it/servizio/accesso-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sarsina.fc.it/servizio/accesso-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:53:44.532024Z"
+  }
+ }
+}

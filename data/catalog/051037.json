@@ -1,0 +1,276 @@
+{
+ "municipality_istat": "051037",
+ "services": {
+  "carta_identita": {
+   "service_id": "051037:openweb:167",
+   "title": "Carta d’Identità Elettronica",
+   "source_url": "https://comune.subbiano.ar.it/servizio/carta-didentita-elettronica/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.subbiano.ar.it/servizio/carta-didentita-elettronica/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.subbiano.ar.it/servizio/carta-didentita-elettronica/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.subbiano.ar.it/wp-content/uploads/2024/07/Richiesta-carta-identita-per-figlio-minore-14anni.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.subbiano.ar.it/servizio/carta-didentita-elettronica/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.subbiano.ar.it/wp-content/uploads/2024/07/Richiesta-carta-identita-per-figlio-maggiore-14anni.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.subbiano.ar.it/servizio/carta-didentita-elettronica/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:03:31.218357Z"
+  },
+  "cambio_residenza": {
+   "service_id": "051037:openweb:989",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.subbiano.ar.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.subbiano.ar.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.subbiano.ar.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.subbiano.ar.it/wp-content/uploads/2023/09/Modulo_residenza_con_allegato_agosto_2014.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.subbiano.ar.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.subbiano.ar.it/wp-content/uploads/2023/09/allegato_a_no_UE.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.subbiano.ar.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.subbiano.ar.it/wp-content/uploads/2023/09/allegato_b_UE.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.subbiano.ar.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.subbiano.ar.it/wp-content/uploads/2023/09/residenza_modulo_cancellazione.doc",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.subbiano.ar.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:03:43.416231Z"
+  },
+  "accesso_atti": {
+   "service_id": "051037:openweb:2287",
+   "title": "Accesso agli atti (segreteria)",
+   "source_url": "https://comune.subbiano.ar.it/servizio/accesso-agli-atti-segreteria/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.subbiano.ar.it/servizio/accesso-agli-atti-segreteria/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.subbiano.ar.it/servizio/accesso-agli-atti-segreteria/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:03:55.543179Z"
+  },
+  "stato_civile": {
+   "service_id": "051037:openweb:91",
+   "title": "Anagrafe e Stato civile",
+   "source_url": "https://comune.subbiano.ar.it/servizio/anagrafe-stato-civle/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.subbiano.ar.it/servizio/anagrafe-stato-civle/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.subbiano.ar.it/servizio/anagrafe-stato-civle/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.subbiano.ar.it/wp-content/uploads/2023/07/Disposizioni_anticipate_di_trattamento_DAT_12-08-2020-1.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.subbiano.ar.it/servizio/anagrafe-stato-civle/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.subbiano.ar.it/wp-content/uploads/2023/07/Istanza_per_registrazione_DAT_12-08-2020-2.doc",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.subbiano.ar.it/servizio/anagrafe-stato-civle/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.subbiano.ar.it/wp-content/uploads/2023/07/Ministero_salute_informativa_DAT_12-08-2020-1.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.subbiano.ar.it/servizio/anagrafe-stato-civle/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.subbiano.ar.it/wp-content/uploads/2023/06/delega-Minore-oltre-14-anni.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.subbiano.ar.it/servizio/anagrafe-stato-civle/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.subbiano.ar.it/wp-content/uploads/2023/06/delega-minore-fino-a-14-anni.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.subbiano.ar.it/servizio/anagrafe-stato-civle/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://comune.subbiano.ar.it/wp-content/uploads/2023/07/Indormativa-Separazioni-e-divorzi-davanti-all-ufficiale-di-stato-civile.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.subbiano.ar.it/servizio/anagrafe-stato-civle/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:04:07.807221Z"
+  },
+  "tributi_imu": {
+   "service_id": "051037:openweb:201",
+   "title": "Calcolatore IMU",
+   "source_url": "https://comune.subbiano.ar.it/servizio/calcolatore-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.subbiano.ar.it/servizio/calcolatore-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.subbiano.ar.it/servizio/calcolatore-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:04:20.023425Z"
+  }
+ }
+}

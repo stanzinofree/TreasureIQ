@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "049008",
+ "services": {
+  "carta_identita": {
+   "service_id": "049008:openweb:281",
+   "title": "Rilascio Carta d’Identità Elettronica",
+   "source_url": "https://www.comune.collesalvetti.li.it/servizio/rilascio-carta-didentita-elettronica/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.collesalvetti.li.it/servizio/rilascio-carta-didentita-elettronica/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.collesalvetti.li.it/servizio/rilascio-carta-didentita-elettronica/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:58:47.814916Z"
+  },
+  "cambio_residenza": {
+   "service_id": "049008:openweb:330",
+   "title": "Cambio di Residenza",
+   "source_url": "https://www.comune.collesalvetti.li.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.collesalvetti.li.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.collesalvetti.li.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:59:01.939518Z"
+  },
+  "stato_civile": {
+   "service_id": "049008:openweb:353",
+   "title": "Rilascio certificati ed estratti di Stato Civile",
+   "source_url": "https://www.comune.collesalvetti.li.it/servizio/rilascio-certificati-ed-estratti-di-stato-civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.collesalvetti.li.it/servizio/rilascio-certificati-ed-estratti-di-stato-civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.collesalvetti.li.it/servizio/rilascio-certificati-ed-estratti-di-stato-civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:59:13.454292Z"
+  },
+  "tributi_imu": {
+   "service_id": "049008:openweb:12836",
+   "title": "Pagare Tributi IMU",
+   "source_url": "https://www.comune.collesalvetti.li.it/servizio/imu-imposta-municipale-propria/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.collesalvetti.li.it/servizio/imu-imposta-municipale-propria/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.collesalvetti.li.it/servizio/imu-imposta-municipale-propria/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:59:24.636996Z"
+  }
+ }
+}

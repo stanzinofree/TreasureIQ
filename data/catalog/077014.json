@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "077014",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "077014:openweb:1305",
+   "title": "Cambio di residenza/abitazione",
+   "source_url": "https://comune.matera.it/servizio/cambio-di-residenza-abitazione/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.matera.it/servizio/cambio-di-residenza-abitazione/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.matera.it/servizio/cambio-di-residenza-abitazione/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:39:52.001013Z"
+  }
+ }
+}

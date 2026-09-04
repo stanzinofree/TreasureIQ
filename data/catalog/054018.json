@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "054018",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "054018:openweb:8656",
+   "title": "Cambio di residenza in tempo reale",
+   "source_url": "https://comune.foligno.pg.it/servizio/cambio-di-residenza-in-tempo-reale/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.foligno.pg.it/servizio/cambio-di-residenza-in-tempo-reale/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.foligno.pg.it/servizio/cambio-di-residenza-in-tempo-reale/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:08:19.447129Z"
+  },
+  "accesso_atti": {
+   "service_id": "054018:openweb:7328",
+   "title": "Richiedere l’accesso agli atti civico",
+   "source_url": "https://comune.foligno.pg.it/servizio/richiedere-laccesso-agli-atti-civico/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.foligno.pg.it/servizio/richiedere-laccesso-agli-atti-civico/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.foligno.pg.it/servizio/richiedere-laccesso-agli-atti-civico/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:08:34.480608Z"
+  }
+ }
+}

@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "110008",
+ "services": {
+  "carta_identita": {
+   "service_id": "110008:openweb:830",
+   "title": "Carta d’Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.spinazzola.bt.it/servizio/carta-didentita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.spinazzola.bt.it/servizio/carta-didentita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.spinazzola.bt.it/servizio/carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:55:22.908979Z"
+  },
+  "accesso_atti": {
+   "service_id": "110008:openweb:832",
+   "title": "Richiedere accesso agli atti",
+   "source_url": "https://www.comune.spinazzola.bt.it/servizio/richiedere-accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.spinazzola.bt.it/servizio/richiedere-accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.spinazzola.bt.it/servizio/richiedere-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:55:33.761200Z"
+  },
+  "tributi_imu": {
+   "service_id": "110008:openweb:1166",
+   "title": "Calcolo dovuto IMU/ICI",
+   "source_url": "https://www.comune.spinazzola.bt.it/servizio/calcolo-dovuto-imu-ici/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.spinazzola.bt.it/servizio/calcolo-dovuto-imu-ici/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.spinazzola.bt.it/servizio/calcolo-dovuto-imu-ici/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:55:44.596506Z"
+  }
+ }
+}

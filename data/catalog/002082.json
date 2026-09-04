@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "002082",
+ "services": {
+  "accesso_atti": {
+   "service_id": "002082:openweb:1710",
+   "title": "Richiedere l’accesso agli atti",
+   "source_url": "https://www.comune.mottadeconti.vc.it/servizio/richiedere-laccesso-agli-atti-2/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.mottadeconti.vc.it/servizio/richiedere-laccesso-agli-atti-2/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.mottadeconti.vc.it/servizio/richiedere-laccesso-agli-atti-2/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:32:08.434821Z"
+  },
+  "tributi_imu": {
+   "service_id": "002082:openweb:1638",
+   "title": "Pagare Imu",
+   "source_url": "https://www.comune.mottadeconti.vc.it/servizio/pagare-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.mottadeconti.vc.it/servizio/pagare-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.mottadeconti.vc.it/servizio/pagare-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:32:24.025874Z"
+  }
+ }
+}

@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "062007",
+ "services": {
+  "accesso_atti": {
+   "service_id": "062007:openweb:434",
+   "title": "Richiedere l’accesso agli atti",
+   "source_url": "https://www.comune.baselice.bn.it/servizio/richiedere-laccesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.baselice.bn.it/servizio/richiedere-laccesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.baselice.bn.it/servizio/richiedere-laccesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:14:42.303798Z"
+  },
+  "tributi_imu": {
+   "service_id": "062007:openweb:450",
+   "title": "Servizio Calcolo IMU",
+   "source_url": "https://www.comune.baselice.bn.it/servizio/servizio-calcolo-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.baselice.bn.it/servizio/servizio-calcolo-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.baselice.bn.it/servizio/servizio-calcolo-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:14:54.609563Z"
+  }
+ }
+}

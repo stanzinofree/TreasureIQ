@@ -1,0 +1,136 @@
+{
+ "municipality_istat": "053010",
+ "services": {
+  "carta_identita": {
+   "service_id": "053010:openweb:1091",
+   "title": "Carta di identità elettronica (C.I.E.)",
+   "source_url": "https://www.comune.gavorrano.gr.it/servizio/carta-di-identita-elettronica-c-i-e/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gavorrano.gr.it/servizio/carta-di-identita-elettronica-c-i-e/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gavorrano.gr.it/servizio/carta-di-identita-elettronica-c-i-e/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:07:19.880987Z"
+  },
+  "accesso_atti": {
+   "service_id": "053010:openweb:3695",
+   "title": "Accesso agli Atti Edilizia",
+   "source_url": "https://www.comune.gavorrano.gr.it/servizio/accesso-agli-atti-edilizia/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gavorrano.gr.it/servizio/accesso-agli-atti-edilizia/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gavorrano.gr.it/servizio/accesso-agli-atti-edilizia/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.gavorrano.gr.it/servizio/richiesta-online-dei-certificati-anagrafici/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.gavorrano.gr.it/servizio/accesso-agli-atti-edilizia/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:07:32.085037Z"
+  },
+  "tributi_imu": {
+   "service_id": "053010:openweb:3613",
+   "title": "IMU – Imposta Municipale Propria",
+   "source_url": "https://www.comune.gavorrano.gr.it/servizio/imu-imposta-municipale-propria/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gavorrano.gr.it/servizio/imu-imposta-municipale-propria/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gavorrano.gr.it/servizio/imu-imposta-municipale-propria/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.gavorrano.gr.it/wp-content/uploads/2026/04/Modello-per-richiesta-riversamento-intermediario.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gavorrano.gr.it/servizio/imu-imposta-municipale-propria/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:07:46.658384Z"
+  },
+  "tributi_tari": {
+   "service_id": "053010:openweb:3600",
+   "title": "TARI – Tributo sui Rifiuti",
+   "source_url": "https://www.comune.gavorrano.gr.it/servizio/tari-tributo-sui-rifiuti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gavorrano.gr.it/servizio/tari-tributo-sui-rifiuti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gavorrano.gr.it/servizio/tari-tributo-sui-rifiuti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.gavorrano.gr.it/wp-content/uploads/2026/04/Modello-per-richiesta-riversamento-intermediario.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gavorrano.gr.it/servizio/tari-tributo-sui-rifiuti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:07:59.426553Z"
+  }
+ }
+}

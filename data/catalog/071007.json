@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "071007",
+ "services": {
+  "carta_identita": {
+   "service_id": "071007:openweb:2664",
+   "title": "Rilascio o rinnovo della carta d’identità elettronica (CIE)",
+   "source_url": "https://comune.bovino.fg.it/servizio/rilascio-o-rinnovo-della-carta-didentita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.bovino.fg.it/servizio/rilascio-o-rinnovo-della-carta-didentita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.bovino.fg.it/servizio/rilascio-o-rinnovo-della-carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:25:03.442881Z"
+  },
+  "cambio_residenza": {
+   "service_id": "071007:openweb:2666",
+   "title": "Cambio di residenza e cambio di indirizzo",
+   "source_url": "https://comune.bovino.fg.it/servizio/cambio-di-residenza-e-cambio-di-indirizzo/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.bovino.fg.it/servizio/cambio-di-residenza-e-cambio-di-indirizzo/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.bovino.fg.it/servizio/cambio-di-residenza-e-cambio-di-indirizzo/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:25:19.146175Z"
+  }
+ }
+}

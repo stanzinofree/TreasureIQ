@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "094049",
+ "services": {
+  "carta_identita": {
+   "service_id": "094049:openweb:663",
+   "title": "Carta d’Identità Elettronica (CIE)",
+   "source_url": "https://comune.sessanodelmolise.is.it/servizio/carta-didentita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.sessanodelmolise.is.it/servizio/carta-didentita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.sessanodelmolise.is.it/servizio/carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:51:58.810611Z"
+  },
+  "accesso_atti": {
+   "service_id": "094049:openweb:659",
+   "title": "Richiedere accesso agli atti",
+   "source_url": "https://comune.sessanodelmolise.is.it/servizio/richiedere-accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.sessanodelmolise.is.it/servizio/richiedere-accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.sessanodelmolise.is.it/servizio/richiedere-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:52:09.658643Z"
+  },
+  "tributi_imu": {
+   "service_id": "094049:openweb:669",
+   "title": "Dichiarazione IMU",
+   "source_url": "https://comune.sessanodelmolise.is.it/servizio/dichiarazione-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.sessanodelmolise.is.it/servizio/dichiarazione-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.sessanodelmolise.is.it/servizio/dichiarazione-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:52:20.708359Z"
+  },
+  "tributi_tari": {
+   "service_id": "094049:openweb:668",
+   "title": "Pagamento Tassa Rifiuti (TARI)",
+   "source_url": "https://comune.sessanodelmolise.is.it/servizio/pagamento-tassa-rifiuti-tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.sessanodelmolise.is.it/servizio/pagamento-tassa-rifiuti-tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.sessanodelmolise.is.it/servizio/pagamento-tassa-rifiuti-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:52:31.503726Z"
+  }
+ }
+}

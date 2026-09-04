@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "058033",
+ "services": {
+  "tributi_tari": {
+   "service_id": "058033:openweb:12255",
+   "title": "Tassa sui rifiuti (TARI)",
+   "source_url": "https://www.comune.civitellasanpaolo.rm.it/servizio/tassa-sui-rifiuti-tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.civitellasanpaolo.rm.it/servizio/tassa-sui-rifiuti-tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.civitellasanpaolo.rm.it/servizio/tassa-sui-rifiuti-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:10:52.785511Z"
+  }
+ }
+}

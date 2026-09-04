@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "072008",
+ "services": {
+  "accesso_atti": {
+   "service_id": "072008:openweb:1009",
+   "title": "Domanda di accesso agli atti",
+   "source_url": "https://www.comune.binetto.ba.it/servizio/domanda-di-accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.binetto.ba.it/servizio/domanda-di-accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.binetto.ba.it/servizio/domanda-di-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:26:40.722987Z"
+  }
+ }
+}

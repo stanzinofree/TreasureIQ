@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "072047",
+ "services": {
+  "tributi_imu": {
+   "service_id": "072047:openweb:7396",
+   "title": "Pagare tributi IMU",
+   "source_url": "https://www.comune.turi.ba.it/servizio/pagare-tributi-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.turi.ba.it/servizio/pagare-tributi-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.turi.ba.it/servizio/pagare-tributi-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:29:15.927661Z"
+  }
+ }
+}

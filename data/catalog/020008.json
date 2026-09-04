@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "020008",
+ "services": {
+  "carta_identita": {
+   "service_id": "020008:openweb:3041",
+   "title": "Rilascio carte d’identità/CIE",
+   "source_url": "https://comune.canneto.mn.it/servizio/rilascio-carte-didentita-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.canneto.mn.it/servizio/rilascio-carte-didentita-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.canneto.mn.it/servizio/rilascio-carte-didentita-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:46:22.086192Z"
+  },
+  "tributi_imu": {
+   "service_id": "020008:openweb:3504",
+   "title": "Calcolo IMU",
+   "source_url": "https://comune.canneto.mn.it/servizio/calcolo-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.canneto.mn.it/servizio/calcolo-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.canneto.mn.it/servizio/calcolo-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:46:36.157670Z"
+  }
+ }
+}

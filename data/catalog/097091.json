@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "097091",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "097091:openweb:2231",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.verderio.lc.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.verderio.lc.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.verderio.lc.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:53:10.477463Z"
+  },
+  "accesso_atti": {
+   "service_id": "097091:openweb:2648",
+   "title": "Richiedere accesso agli atti",
+   "source_url": "https://comune.verderio.lc.it/servizio/richiedere-accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.verderio.lc.it/servizio/richiedere-accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.verderio.lc.it/servizio/richiedere-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:53:22.782659Z"
+  },
+  "tributi_imu": {
+   "service_id": "097091:openweb:2326",
+   "title": "Calcolo IMU",
+   "source_url": "https://comune.verderio.lc.it/servizio/calcolo-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.verderio.lc.it/servizio/calcolo-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.verderio.lc.it/servizio/calcolo-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:53:35.205731Z"
+  }
+ }
+}

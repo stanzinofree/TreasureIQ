@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "020019",
+ "services": {
+  "stato_civile": {
+   "service_id": "020019:openweb:1476",
+   "title": "ANAGRAFE – STATO CIVILE",
+   "source_url": "https://comune.ceresara.mn.it/servizio/anagrafe-stato-civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.ceresara.mn.it/servizio/anagrafe-stato-civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.ceresara.mn.it/servizio/anagrafe-stato-civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:46:56.851013Z"
+  }
+ }
+}

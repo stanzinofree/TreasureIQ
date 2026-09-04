@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "025056",
+ "services": {
+  "carta_identita": {
+   "service_id": "025056:openweb:669",
+   "title": "C.I.E. Carta d’Identità Elettronica",
+   "source_url": "https://comune.sospirolo.bl.it/servizio/c-i-e-carta-di-identita-elettronica/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.sospirolo.bl.it/servizio/c-i-e-carta-di-identita-elettronica/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.sospirolo.bl.it/servizio/c-i-e-carta-di-identita-elettronica/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:47:53.762185Z"
+  },
+  "cambio_residenza": {
+   "service_id": "025056:openweb:1032",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.sospirolo.bl.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.sospirolo.bl.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.sospirolo.bl.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:48:12.257397Z"
+  },
+  "stato_civile": {
+   "service_id": "025056:openweb:1656",
+   "title": "Richiesta di certificati o di estratti di atti di stato civile formati da oltre un secolo.",
+   "source_url": "https://comune.sospirolo.bl.it/servizio/richiesta-di-certificati-o-di-estratti-di-atti-di-stato-civile-formati-da-oltre-un-secolo/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.sospirolo.bl.it/servizio/richiesta-di-certificati-o-di-estratti-di-atti-di-stato-civile-formati-da-oltre-un-secolo/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.sospirolo.bl.it/servizio/richiesta-di-certificati-o-di-estratti-di-atti-di-stato-civile-formati-da-oltre-un-secolo/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:48:29.512762Z"
+  },
+  "tributi_imu": {
+   "service_id": "025056:openweb:1459",
+   "title": "Calcolo IMU",
+   "source_url": "https://comune.sospirolo.bl.it/servizio/calcolo-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.sospirolo.bl.it/servizio/calcolo-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.sospirolo.bl.it/servizio/calcolo-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:48:47.170500Z"
+  }
+ }
+}

@@ -1,0 +1,123 @@
+{
+ "municipality_istat": "075079",
+ "services": {
+  "carta_identita": {
+   "service_id": "075079:openweb:652",
+   "title": "Rilascio carta d’identità elettronica (C.I.E.)",
+   "source_url": "https://comune.squinzano.le.it/servizio/rilascio-carta-didentita-elettronica-c-i-e/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.squinzano.le.it/servizio/rilascio-carta-didentita-elettronica-c-i-e/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.squinzano.le.it/servizio/rilascio-carta-didentita-elettronica-c-i-e/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:37:24.419047Z"
+  },
+  "cambio_residenza": {
+   "service_id": "075079:openweb:656",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.squinzano.le.it/servizio/cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.squinzano.le.it/servizio/cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.squinzano.le.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/servizi-al-cittadino/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://comune.squinzano.le.it/servizio/cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:37:39.062479Z"
+  },
+  "accesso_atti": {
+   "service_id": "075079:openweb:297",
+   "title": "Accesso agli atti",
+   "source_url": "https://comune.squinzano.le.it/servizio/accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.squinzano.le.it/servizio/accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.squinzano.le.it/servizio/accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:37:53.945004Z"
+  },
+  "stato_civile": {
+   "service_id": "075079:openweb:953",
+   "title": "Certificato di nascita per cittadini europei",
+   "source_url": "https://comune.squinzano.le.it/servizio/certificato-di-nascita-per-cittadini-europei/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.squinzano.le.it/servizio/certificato-di-nascita-per-cittadini-europei/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.squinzano.le.it/servizio/certificato-di-nascita-per-cittadini-europei/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/servizi-al-cittadino/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://comune.squinzano.le.it/servizio/certificato-di-nascita-per-cittadini-europei/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:38:07.996646Z"
+  }
+ }
+}

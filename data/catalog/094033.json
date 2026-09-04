@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "094033",
+ "services": {
+  "carta_identita": {
+   "service_id": "094033:openweb:383",
+   "title": "Carta d’Identità Elettronica (CIE)",
+   "source_url": "https://comune.pescopennataro.is.it/servizio/carta-didentita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.pescopennataro.is.it/servizio/carta-didentita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.pescopennataro.is.it/servizio/carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:49:50.638032Z"
+  },
+  "tributi_imu": {
+   "service_id": "094033:openweb:381",
+   "title": "Pagare Tributi IMU",
+   "source_url": "https://comune.pescopennataro.is.it/servizio/pagare-tributi-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.pescopennataro.is.it/servizio/pagare-tributi-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.pescopennataro.is.it/servizio/pagare-tributi-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:50:01.412855Z"
+  }
+ }
+}

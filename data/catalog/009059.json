@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "009059",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "009059:openweb:14312",
+   "title": "ANPR – Cambio di residenza",
+   "source_url": "https://comune.stellanello.sv.it/servizio/anpr-cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.stellanello.sv.it/servizio/anpr-cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.stellanello.sv.it/servizio/anpr-cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:35:23.214396Z"
+  },
+  "tributi_imu": {
+   "service_id": "009059:openweb:492",
+   "title": "Pagamento tributi IMU – F24",
+   "source_url": "https://comune.stellanello.sv.it/servizio/pagamento-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.stellanello.sv.it/servizio/pagamento-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.stellanello.sv.it/servizio/pagamento-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:35:37.236580Z"
+  }
+ }
+}

@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "060043",
+ "services": {
+  "carta_identita": {
+   "service_id": "060043:openweb:1951",
+   "title": "Rilascio Carta Identita – CIE",
+   "source_url": "https://www.comune.isoladelliri.fr.it/servizio/rilascio-carta-identita/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.isoladelliri.fr.it/servizio/rilascio-carta-identita/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.isoladelliri.fr.it/servizio/rilascio-carta-identita/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:12:05.403028Z"
+  },
+  "accesso_atti": {
+   "service_id": "060043:openweb:5027",
+   "title": "Richiedere accesso agli Atti",
+   "source_url": "https://www.comune.isoladelliri.fr.it/servizio/richiedere-accesso-agli-atti/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.isoladelliri.fr.it/servizio/richiedere-accesso-agli-atti/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.isoladelliri.fr.it/servizio/richiedere-accesso-agli-atti/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:12:20.568270Z"
+  },
+  "tributi_tari": {
+   "service_id": "060043:openweb:5376",
+   "title": "Agevolazione TARI",
+   "source_url": "https://www.comune.isoladelliri.fr.it/servizio/agevolazione-tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.isoladelliri.fr.it/servizio/agevolazione-tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.isoladelliri.fr.it/servizio/agevolazione-tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:12:34.366063Z"
+  }
+ }
+}

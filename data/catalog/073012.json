@@ -1,0 +1,110 @@
+{
+ "municipality_istat": "073012",
+ "services": {
+  "carta_identita": {
+   "service_id": "073012:openweb:302",
+   "title": "Carta d’Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.manduria.ta.it/servizio/carta-didentita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.manduria.ta.it/servizio/carta-didentita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.manduria.ta.it/servizio/carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.manduria.ta.it/wp-content/uploads/2025/01/20220052G.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.manduria.ta.it/servizio/carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:29:41.683059Z"
+  },
+  "cambio_residenza": {
+   "service_id": "073012:openweb:2902",
+   "title": "Richiesta e Cambio di Residenza",
+   "source_url": "https://www.comune.manduria.ta.it/servizio/richiesta-e-cambio-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.manduria.ta.it/servizio/richiesta-e-cambio-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.manduria.ta.it/servizio/richiesta-e-cambio-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:29:54.657342Z"
+  },
+  "stato_civile": {
+   "service_id": "073012:openweb:2903",
+   "title": "Rilascio certificati ed estratti di stato civile",
+   "source_url": "https://www.comune.manduria.ta.it/servizio/rilascio-certificati-ed-estratti-di-stato-civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.manduria.ta.it/servizio/rilascio-certificati-ed-estratti-di-stato-civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.manduria.ta.it/servizio/rilascio-certificati-ed-estratti-di-stato-civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:30:07.065034Z"
+  },
+  "tributi_imu": {
+   "service_id": "073012:openweb:3921",
+   "title": "IMU – Imposta Municipale Propria",
+   "source_url": "https://www.comune.manduria.ta.it/servizio/imu-imposta-municipale-propria/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.manduria.ta.it/servizio/imu-imposta-municipale-propria/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.manduria.ta.it/servizio/imu-imposta-municipale-propria/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:30:18.044688Z"
+  }
+ }
+}

@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "046013",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "046013:openweb:1174",
+   "title": "Trasferimento di residenza",
+   "source_url": "https://www.comune.fortedeimarmi.lu.it/servizio/trasferimento-di-residenza/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.fortedeimarmi.lu.it/servizio/trasferimento-di-residenza/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.fortedeimarmi.lu.it/servizio/trasferimento-di-residenza/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:56:41.089720Z"
+  },
+  "accesso_atti": {
+   "service_id": "046013:openweb:4134",
+   "title": "Accesso agli Atti – L. 241/90",
+   "source_url": "https://www.comune.fortedeimarmi.lu.it/servizio/accesso-agli-atti-2/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.fortedeimarmi.lu.it/servizio/accesso-agli-atti-2/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.fortedeimarmi.lu.it/servizio/accesso-agli-atti-2/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:56:52.924607Z"
+  },
+  "tributi_imu": {
+   "service_id": "046013:openweb:2771",
+   "title": "IMU",
+   "source_url": "https://www.comune.fortedeimarmi.lu.it/servizio/imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.fortedeimarmi.lu.it/servizio/imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.fortedeimarmi.lu.it/servizio/imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:57:04.421895Z"
+  },
+  "tributi_tari": {
+   "service_id": "046013:openweb:2766",
+   "title": "Tari",
+   "source_url": "https://www.comune.fortedeimarmi.lu.it/servizio/tari/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.fortedeimarmi.lu.it/servizio/tari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.fortedeimarmi.lu.it/servizio/tari/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T12:57:15.326407Z"
+  }
+ }
+}

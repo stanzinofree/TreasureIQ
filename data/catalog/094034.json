@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "094034",
+ "services": {
+  "carta_identita": {
+   "service_id": "094034:openweb:363",
+   "title": "Carta d’Identità Elettronica (CIE)",
+   "source_url": "https://comune.pettoranellodelmolise.is.it/servizio/carta-didentita-elettronica-cie/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.pettoranellodelmolise.is.it/servizio/carta-didentita-elettronica-cie/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.pettoranellodelmolise.is.it/servizio/carta-didentita-elettronica-cie/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:50:23.237627Z"
+  },
+  "tributi_imu": {
+   "service_id": "094034:openweb:354",
+   "title": "Calcolo IMU F24",
+   "source_url": "https://comune.pettoranellodelmolise.is.it/servizio/calcolo-imuimiimisilia-2023-e-stampa-modello-f24/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.pettoranellodelmolise.is.it/servizio/calcolo-imuimiimisilia-2023-e-stampa-modello-f24/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.pettoranellodelmolise.is.it/servizio/calcolo-imuimiimisilia-2023-e-stampa-modello-f24/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:50:37.977438Z"
+  }
+ }
+}

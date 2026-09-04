@@ -1,0 +1,90 @@
+{
+ "municipality_istat": "072019",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "072019:openweb:564",
+   "title": "Cambio di residenza e di indirizzo",
+   "source_url": "https://www.comune.conversano.ba.it/servizio/cambio-di-residenza-e-di-indirizzo/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.conversano.ba.it/servizio/cambio-di-residenza-e-di-indirizzo/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.conversano.ba.it/servizio/cambio-di-residenza-e-di-indirizzo/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.conversano.ba.it/wp-content/uploads/2025/07/Dichiarazione-di-RESIDENZA.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.conversano.ba.it/servizio/cambio-di-residenza-e-di-indirizzo/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.conversano.ba.it/wp-content/uploads/2025/07/Allegato-A-per-stranieri.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.conversano.ba.it/servizio/cambio-di-residenza-e-di-indirizzo/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.conversano.ba.it/wp-content/uploads/2025/07/Allegato-B-per-comunitari.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.conversano.ba.it/servizio/cambio-di-residenza-e-di-indirizzo/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:27:40.275518Z"
+  },
+  "tributi_imu": {
+   "service_id": "072019:openweb:589",
+   "title": "Pagare IMU",
+   "source_url": "https://www.comune.conversano.ba.it/servizio/pagare-imu/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.conversano.ba.it/servizio/pagare-imu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.conversano.ba.it/servizio/pagare-imu/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "openweb",
+   "discovered_at": "2026-09-04T13:27:53.025472Z"
+  }
+ }
+}

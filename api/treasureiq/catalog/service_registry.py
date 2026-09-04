@@ -44,6 +44,9 @@ from treasureiq.catalog.service_connectors.openpa_service import (
     OpenPAServiceConnector,
     _EzFindDiscovery,
 )
+from treasureiq.catalog.service_connectors.openweb_service import (
+    OpenWebServiceConnector,
+)
 from treasureiq.catalog.service_connectors.wordpress_agid import (
     WordPressAgidServiceConnector,
 )
@@ -69,6 +72,9 @@ def default_service_registry(esecutore: EsecutoreFetch) -> ConnectorRegistry:
     # discovery per famiglia (§3.2): il connettore riceve il fetcher composto.
     transport = EsecutoreServiceFetcher(esecutore)
     reg.register(WordPressAgidServiceConnector(transport.con(_WpDiscovery())))
+    # OpenWeb è WordPress/AgID sulla superficie servizi: stessa discovery WP,
+    # gate su ``peopleweb`` (Siscom escluso da ``servizi.esposto=False``).
+    reg.register(OpenWebServiceConnector(transport.con(_WpDiscovery())))
     reg.register(ComWebServiceConnector(transport.con(_ComWebDiscovery())))
     reg.register(OpenPAServiceConnector(transport.con(_EzFindDiscovery())))
     reg.register(DrupalBiServiceConnector(transport.con(_DrupalBiDiscovery())))

@@ -1,0 +1,120 @@
+{
+ "municipality_istat": "003024",
+ "services": {
+  "carta_identita": {
+   "service_id": "003024:drupal:rilascio-carta-didentita-elettronica-cie",
+   "title": "Rilascio carta d’identità elettronica (CIE)",
+   "source_url": "https://comune.borgomanero.no.it/servizi/rilascio-carta-didentita-elettronica-cie",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.borgomanero.no.it/servizi/rilascio-carta-didentita-elettronica-cie",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.borgomanero.no.it/servizi/rilascio-carta-didentita-elettronica-cie",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  },
+  "cambio_residenza": {
+   "service_id": "003024:drupal:iscrizione-anagraficacambio-residenza",
+   "title": "Iscrizione anagrafica/cambio di residenza",
+   "source_url": "https://comune.borgomanero.no.it/servizi/iscrizione-anagraficacambio-residenza",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.borgomanero.no.it/servizi/iscrizione-anagraficacambio-residenza",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.borgomanero.no.it/servizi/iscrizione-anagraficacambio-residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  },
+  "stato_civile": {
+   "service_id": "003024:drupal:rilascio-certificati-stato-civile",
+   "title": "Rilascio certificati di stato civile",
+   "source_url": "https://comune.borgomanero.no.it/servizi/rilascio-certificati-stato-civile",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.borgomanero.no.it/servizi/rilascio-certificati-stato-civile",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.borgomanero.no.it/servizi/rilascio-certificati-stato-civile",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "003024:drupal:imu",
+   "title": "IMU",
+   "source_url": "https://comune.borgomanero.no.it/servizi/imu",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.borgomanero.no.it/servizi/imu",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.borgomanero.no.it/servizi/imu",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  },
+  "tributi_tari": {
+   "service_id": "003024:drupal:tari",
+   "title": "TARI",
+   "source_url": "https://comune.borgomanero.no.it/servizi/tari",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.borgomanero.no.it/servizi/tari",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.borgomanero.no.it/servizi/tari",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  }
+ }
+}

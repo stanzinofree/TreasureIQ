@@ -1,0 +1,207 @@
+{
+ "municipality_istat": "058038",
+ "services": {
+  "tributi_imu": {
+   "service_id": "058038:drupal:imu-imposta-comunale-propria",
+   "title": "IMU - Imposta Comunale Propria",
+   "source_url": "https://www.comune.formello.rm.it/servizi/imu-imposta-comunale-propria",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.formello.rm.it/servizi/imu-imposta-comunale-propria",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.formello.rm.it/servizi/imu-imposta-comunale-propria",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.formello.rm.it/sites/comune.formello.rm.it/files/2025-05/Domanda_esenzione_IMU.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.formello.rm.it/servizi/imu-imposta-comunale-propria",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.formello.rm.it/sites/comune.formello.rm.it/files/2025-05/IMU_IMPi_Modello_2024.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.formello.rm.it/servizi/imu-imposta-comunale-propria",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.formello.rm.it/sites/comune.formello.rm.it/files/2026-07/Modulo_Delega_Sportello_Tributi.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.formello.rm.it/servizi/imu-imposta-comunale-propria",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.formello.rm.it/sites/comune.formello.rm.it/files/2025-09/IMU-valori%20aree%20edificabili.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.formello.rm.it/servizi/imu-imposta-comunale-propria",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  },
+  "tributi_tari": {
+   "service_id": "058038:drupal:tari-tassa-rifiuti",
+   "title": "TARI - Tassa Rifiuti",
+   "source_url": "https://www.comune.formello.rm.it/servizi/tari-tassa-rifiuti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.formello.rm.it/servizi/tari-tassa-rifiuti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.formello.rm.it/servizi/tari-tassa-rifiuti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.formello.rm.it/sites/comune.formello.rm.it/files/2025-07/Regolamento%20TARIP.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.formello.rm.it/servizi/tari-tassa-rifiuti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.formello.rm.it/sites/comune.formello.rm.it/files/2026-08/Tariffe%20Tarip%202026.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.formello.rm.it/servizi/tari-tassa-rifiuti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.formello.rm.it/sites/comune.formello.rm.it/files/2025-05/DICHIARAZIONE_TARI_persone_fisiche.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.formello.rm.it/servizi/tari-tassa-rifiuti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.formello.rm.it/sites/comune.formello.rm.it/files/2025-05/RIDUZIONE_TARI.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.formello.rm.it/servizi/tari-tassa-rifiuti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.formello.rm.it/sites/comune.formello.rm.it/files/2025-03/ESENZIONE_TARI.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.formello.rm.it/servizi/tari-tassa-rifiuti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.formello.rm.it/sites/comune.formello.rm.it/files/2025-05/TARI_USCITA_SERVIZI_PUBBLICO.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.formello.rm.it/servizi/tari-tassa-rifiuti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.formello.rm.it/sites/comune.formello.rm.it/files/2025-12/tassa%20rifiuti%20denuncia%20PERSONE%20GIURIDICHE.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.formello.rm.it/servizi/tari-tassa-rifiuti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.formello.rm.it/sites/comune.formello.rm.it/files/2026-07/Modulo_Delega_Sportello_Tributi.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.formello.rm.it/servizi/tari-tassa-rifiuti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  }
+ }
+}

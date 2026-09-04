@@ -1,0 +1,126 @@
+{
+ "municipality_istat": "058094",
+ "services": {
+  "stato_civile": {
+   "service_id": "058094:drupal:certificati-anagrafici-e-di-stato-civile",
+   "title": "Certificati Anagrafici e di Stato Civile",
+   "source_url": "https://www.comune.sambuci.rm.it/servizi/certificati-anagrafici-e-di-stato-civile",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sambuci.rm.it/servizi/certificati-anagrafici-e-di-stato-civile",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sambuci.rm.it/servizi/certificati-anagrafici-e-di-stato-civile",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.sambuci.rm.it/sites/comune.sambuci.rm.it/files/2024-04/Richiesta%20certificato.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sambuci.rm.it/servizi/certificati-anagrafici-e-di-stato-civile",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "058094:drupal:pagamento-imu",
+   "title": "Pagamento IMU",
+   "source_url": "https://www.comune.sambuci.rm.it/servizi/pagamento-imu",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sambuci.rm.it/servizi/pagamento-imu",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sambuci.rm.it/servizi/pagamento-imu",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  },
+  "tributi_tari": {
+   "service_id": "058094:drupal:denuncia-effetti-della-tari",
+   "title": "Denuncia effetti della TARI",
+   "source_url": "https://www.comune.sambuci.rm.it/servizi/denuncia-effetti-della-tari",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sambuci.rm.it/servizi/denuncia-effetti-della-tari",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sambuci.rm.it/servizi/denuncia-effetti-della-tari",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.sambuci.rm.it/sites/comune.sambuci.rm.it/files/2024-04/DENUNCIA%20TASSA%20RIFIUTI%20-%20ABITAZIONI_1.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sambuci.rm.it/servizi/denuncia-effetti-della-tari",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.sambuci.rm.it/sites/comune.sambuci.rm.it/files/2024-04/DENUNCIA%20DI%20CESSAZIONE_1.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sambuci.rm.it/servizi/denuncia-effetti-della-tari",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.sambuci.rm.it/sites/comune.sambuci.rm.it/files/2025-01/esclusione%20ruolo%20tari%20per%20inidoniet%C3%A0%20a%20produrre%20rifiuti.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sambuci.rm.it/servizi/denuncia-effetti-della-tari",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  }
+ }
+}

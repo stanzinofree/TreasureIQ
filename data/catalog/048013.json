@@ -1,0 +1,175 @@
+{
+ "municipality_istat": "048013",
+ "services": {
+  "carta_identita": {
+   "service_id": "048013:drupal:carta-didentita-elettronica-cie",
+   "title": "Carta d'identità elettronica CIE",
+   "source_url": "https://www.comune.dicomano.fi.it/servizi/anagrafe-e-stato-civile/carta-didentita-elettronica-cie",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.dicomano.fi.it/servizi/anagrafe-e-stato-civile/carta-didentita-elettronica-cie",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.dicomano.fi.it/servizi/anagrafe-e-stato-civile/carta-didentita-elettronica-cie",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.dicomano.fi.it/system/files/2024-05/condizioni-di-servizio.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.dicomano.fi.it/servizi/anagrafe-e-stato-civile/carta-didentita-elettronica-cie",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  },
+  "stato_civile": {
+   "service_id": "048013:drupal:certificati-ed-estratti-di-stato-civile",
+   "title": "Certificati ed estratti di stato civile",
+   "source_url": "https://www.comune.dicomano.fi.it/servizi/anagrafe-e-stato-civile/certificati-ed-estratti-di-stato-civile",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.dicomano.fi.it/servizi/anagrafe-e-stato-civile/certificati-ed-estratti-di-stato-civile",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.dicomano.fi.it/servizi/anagrafe-e-stato-civile/certificati-ed-estratti-di-stato-civile",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.dicomano.fi.it/system/files/2024-05/condizioni-di-servizio.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.dicomano.fi.it/servizi/anagrafe-e-stato-civile/certificati-ed-estratti-di-stato-civile",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "048013:drupal:imu",
+   "title": "IMU",
+   "source_url": "https://www.comune.dicomano.fi.it/servizi/tributi-finanze-e-contravvenzioni/imu",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.dicomano.fi.it/servizi/tributi-finanze-e-contravvenzioni/imu",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.dicomano.fi.it/servizi/tributi-finanze-e-contravvenzioni/imu",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.dicomano.fi.it/system/files/2024-05/regolamento-IMU.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.dicomano.fi.it/servizi/tributi-finanze-e-contravvenzioni/imu",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.dicomano.fi.it/sites/default/files/regolamento_i.m.u_testo_modificato.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.dicomano.fi.it/servizi/tributi-finanze-e-contravvenzioni/imu",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  },
+  "tributi_tari": {
+   "service_id": "048013:drupal:tari",
+   "title": "TARI",
+   "source_url": "https://www.comune.dicomano.fi.it/servizi/tributi-finanze-e-contravvenzioni/tari",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.dicomano.fi.it/servizi/tributi-finanze-e-contravvenzioni/tari",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.dicomano.fi.it/servizi/tributi-finanze-e-contravvenzioni/tari",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.dicomano.fi.it/system/files/2026-06/REGOLAMENTO-TARI-COMUNE-DI-DICOMANO_TESTO-MODIFICATO-DAL-01.01.2024.PDF",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.dicomano.fi.it/servizi/tributi-finanze-e-contravvenzioni/tari",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.dicomano.fi.it/sites/default/files/regolamento_tari_comune_di_dicomano_testo_modificato_dal_01.01.2023.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.dicomano.fi.it/servizi/tributi-finanze-e-contravvenzioni/tari",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  }
+ }
+}

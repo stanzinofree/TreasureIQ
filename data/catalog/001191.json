@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "001191",
+ "services": {
+  "carta_identita": {
+   "service_id": "001191:drupal:carta-identita-elettronica",
+   "title": "Carta di identità elettronica",
+   "source_url": "https://www.comune.pinerolo.to.it/servizi/carta-identita-elettronica",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pinerolo.to.it/servizi/carta-identita-elettronica",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pinerolo.to.it/servizi/carta-identita-elettronica",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001191:drupal:cambio-residenza-anagrafica",
+   "title": "Cambio di residenza anagrafica",
+   "source_url": "https://www.comune.pinerolo.to.it/servizi/cambio-residenza-anagrafica",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pinerolo.to.it/servizi/cambio-residenza-anagrafica",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pinerolo.to.it/servizi/cambio-residenza-anagrafica",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "001191:drupal:imposta-municipale-unica-imu",
+   "title": "Imposta Municipale Unica - IMU",
+   "source_url": "https://www.comune.pinerolo.to.it/servizi/imposta-municipale-unica-imu",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pinerolo.to.it/servizi/imposta-municipale-unica-imu",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pinerolo.to.it/servizi/imposta-municipale-unica-imu",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  },
+  "tributi_tari": {
+   "service_id": "001191:drupal:tassa-rifiuti",
+   "title": "Tassa Rifiuti",
+   "source_url": "https://www.comune.pinerolo.to.it/servizi/tassa-rifiuti",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pinerolo.to.it/servizi/tassa-rifiuti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pinerolo.to.it/servizi/tassa-rifiuti",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  }
+ }
+}

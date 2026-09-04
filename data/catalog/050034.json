@@ -1,0 +1,28 @@
+{
+ "municipality_istat": "050034",
+ "services": {
+  "carta_identita": {
+   "service_id": "050034:drupal:rilascio-e-rinnovo-carta-didentita-elettronica-cie",
+   "title": "Rilascio e rinnovo Carta d'Identità elettronica (C.I.E.)",
+   "source_url": "https://www.comune.santaluce.pi.it/servizi/rilascio-e-rinnovo-carta-didentita-elettronica-cie",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.santaluce.pi.it/servizi/rilascio-e-rinnovo-carta-didentita-elettronica-cie",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.santaluce.pi.it/servizi/rilascio-e-rinnovo-carta-didentita-elettronica-cie",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  }
+ }
+}

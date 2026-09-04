@@ -1,0 +1,103 @@
+{
+ "municipality_istat": "058088",
+ "services": {
+  "carta_identita": {
+   "service_id": "058088:drupal:carta-didentita-elettronica-cie",
+   "title": "Carta d'identità elettronica (CIE)",
+   "source_url": "https://www.comune.roccapriora.rm.it/servizi/carta-didentita-elettronica-cie",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.roccapriora.rm.it/servizi/carta-didentita-elettronica-cie",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.roccapriora.rm.it/servizi/carta-didentita-elettronica-cie",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.roccapriora.rm.it/sites/comune.roccapriora.rm.it/files/2026-07/INFORMAZIONI%20PER%20CIE.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.roccapriora.rm.it/servizi/carta-didentita-elettronica-cie",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  },
+  "stato_civile": {
+   "service_id": "058088:drupal:richiesta-di-separazione-o-divorzio-breve-dinanzi-allufficiale-di-stato-civile",
+   "title": "Richiesta di Separazione o Divorzio breve dinanzi all'Ufficiale di Stato Civile",
+   "source_url": "https://www.comune.roccapriora.rm.it/servizi/richiesta-di-separazione-o-divorzio-breve-dinanzi-allufficiale-di-stato-civile",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.roccapriora.rm.it/servizi/richiesta-di-separazione-o-divorzio-breve-dinanzi-allufficiale-di-stato-civile",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.roccapriora.rm.it/servizi/richiesta-di-separazione-o-divorzio-breve-dinanzi-allufficiale-di-stato-civile",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.roccapriora.rm.it/sites/comune.roccapriora.rm.it/files/2024-05/RICHIESTA%20SEPARAZIONE%20-%20DIVORZIO.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.roccapriora.rm.it/servizi/richiesta-di-separazione-o-divorzio-breve-dinanzi-allufficiale-di-stato-civile",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.roccapriora.rm.it/sites/comune.roccapriora.rm.it/files/2024-05/DICHIARAZIONE%20SOSTITUTIVA%20PER%20SEPARAZIONE.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.roccapriora.rm.it/servizi/richiesta-di-separazione-o-divorzio-breve-dinanzi-allufficiale-di-stato-civile",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.roccapriora.rm.it/sites/comune.roccapriora.rm.it/files/2024-05/DICHIARAZIONE%20SOSTITUTIVA%20PER%20DIVORZIO.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.roccapriora.rm.it/servizi/richiesta-di-separazione-o-divorzio-breve-dinanzi-allufficiale-di-stato-civile",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  }
+ }
+}

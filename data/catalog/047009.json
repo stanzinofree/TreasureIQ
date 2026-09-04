@@ -1,0 +1,41 @@
+{
+ "municipality_istat": "047009",
+ "services": {
+  "carta_identita": {
+   "service_id": "047009:drupal:carta-di-identita-elettronica-cie",
+   "title": "Carta di Identità Elettronica C.I.E.",
+   "source_url": "https://www.comune.monsummano-terme.pt.it/servizi/carta-di-identita-elettronica-cie",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.monsummano-terme.pt.it/servizi/carta-di-identita-elettronica-cie",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.monsummano-terme.pt.it/servizi/carta-di-identita-elettronica-cie",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.monsummano-terme.pt.it/sites/default/files/2025-11/Assenso_per_CI_espatrio_minori.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.monsummano-terme.pt.it/servizi/carta-di-identita-elettronica-cie",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  }
+ }
+}

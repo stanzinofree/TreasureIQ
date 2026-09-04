@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "048032",
+ "services": {
+  "stato_civile": {
+   "service_id": "048032:drupal:certificati-di-stato-civile",
+   "title": "Certificati di stato civile",
+   "source_url": "https://www.comune.pelago.fi.it/servizi/anagrafe-e-stato-civile/certificati-di-stato-civile",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pelago.fi.it/servizi/anagrafe-e-stato-civile/certificati-di-stato-civile",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pelago.fi.it/servizi/anagrafe-e-stato-civile/certificati-di-stato-civile",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "048032:drupal:imu-imposta-municipale",
+   "title": "IMU Imposta MUnicipale",
+   "source_url": "https://www.comune.pelago.fi.it/servizi/tributi-finanze-e-contravvenzioni/imu-imposta-municipale",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pelago.fi.it/servizi/tributi-finanze-e-contravvenzioni/imu-imposta-municipale",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pelago.fi.it/servizi/tributi-finanze-e-contravvenzioni/imu-imposta-municipale",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  }
+ }
+}

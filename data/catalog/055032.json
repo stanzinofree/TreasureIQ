@@ -1,0 +1,116 @@
+{
+ "municipality_istat": "055032",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "055032:drupal:cambio-residenza",
+   "title": "Cambio residenza",
+   "source_url": "https://www.comune.terni.it/servizi/anagrafe-e-stato-civile/cambio-residenza",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.terni.it/servizi/anagrafe-e-stato-civile/cambio-residenza",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.terni.it/servizi/anagrafe-e-stato-civile/cambio-residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.terni.it/system/files/documenti/dichiarazione_di_residenza.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.terni.it/servizi/anagrafe-e-stato-civile/cambio-residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.terni.it/system/files/documenti/dichiarazione_di_conoscenza_minore.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.terni.it/servizi/anagrafe-e-stato-civile/cambio-residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.terni.it/system/files/documenti/dichiarazione_del_proprietario.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.terni.it/servizi/anagrafe-e-stato-civile/cambio-residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.terni.it/system/files/documenti/residenza-allegatoa_0.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.terni.it/servizi/anagrafe-e-stato-civile/cambio-residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.terni.it/system/files/documenti/residenza-allegatob_0.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.terni.it/servizi/anagrafe-e-stato-civile/cambio-residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  },
+  "stato_civile": {
+   "service_id": "055032:drupal:certificati-di-stato-civile",
+   "title": "Certificati di stato civile",
+   "source_url": "https://www.comune.terni.it/servizi/anagrafe-e-stato-civile/certificati-di-stato-civile",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.terni.it/servizi/anagrafe-e-stato-civile/certificati-di-stato-civile",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.terni.it/servizi/anagrafe-e-stato-civile/certificati-di-stato-civile",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  }
+ }
+}

@@ -1,0 +1,74 @@
+{
+ "municipality_istat": "001130",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "001130:drupal:cambiare-residenza-richiesta-assegnazione-numero-civico",
+   "title": "Cambiare Residenza e richiesta assegnazione numero civico",
+   "source_url": "https://www.comune.leini.to.it/servizi/cambiare-residenza-richiesta-assegnazione-numero-civico",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.leini.to.it/servizi/cambiare-residenza-richiesta-assegnazione-numero-civico",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.leini.to.it/servizi/cambiare-residenza-richiesta-assegnazione-numero-civico",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  },
+  "stato_civile": {
+   "service_id": "001130:drupal:certificato-stato-civile",
+   "title": "Certificato di Stato Civile",
+   "source_url": "https://www.comune.leini.to.it/servizi/certificato-stato-civile",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.leini.to.it/servizi/certificato-stato-civile",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.leini.to.it/servizi/certificato-stato-civile",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  },
+  "tributi_tari": {
+   "service_id": "001130:drupal:tassa-rifiuti-tari",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.leini.to.it/servizi/tassa-rifiuti-tari",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.leini.to.it/servizi/tassa-rifiuti-tari",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.leini.to.it/servizi/tassa-rifiuti-tari",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  }
+ }
+}

@@ -1,0 +1,97 @@
+{
+ "municipality_istat": "001194",
+ "services": {
+  "carta_identita": {
+   "service_id": "001194:drupal:carta-identita-elettronica",
+   "title": "Carta di identità elettronica",
+   "source_url": "https://www.comune.piossasco.to.it/servizi/carta-identita-elettronica",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.piossasco.to.it/servizi/carta-identita-elettronica",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.piossasco.to.it/servizi/carta-identita-elettronica",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001194:drupal:cambio-residenza-variazione-indirizzo",
+   "title": "Cambio di residenza e variazione di indirizzo",
+   "source_url": "https://www.comune.piossasco.to.it/servizi/cambio-residenza-variazione-indirizzo",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.piossasco.to.it/servizi/cambio-residenza-variazione-indirizzo",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.piossasco.to.it/servizi/cambio-residenza-variazione-indirizzo",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  },
+  "stato_civile": {
+   "service_id": "001194:drupal:separazione-personale-divorzio-davanti-allufficiale-dello-stato-civile",
+   "title": "Separazione personale e divorzio davanti all'Ufficiale dello Stato Civile",
+   "source_url": "https://www.comune.piossasco.to.it/servizi/separazione-personale-divorzio-davanti-allufficiale-dello-stato-civile",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.piossasco.to.it/servizi/separazione-personale-divorzio-davanti-allufficiale-dello-stato-civile",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.piossasco.to.it/servizi/separazione-personale-divorzio-davanti-allufficiale-dello-stato-civile",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "001194:drupal:richiesta-agevolazione-imu-caso-affitto-canone-concordato",
+   "title": "Richiesta agevolazione IMU in caso di affitto in canone concordato",
+   "source_url": "https://www.comune.piossasco.to.it/servizi/richiesta-agevolazione-imu-caso-affitto-canone-concordato",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.piossasco.to.it/servizi/richiesta-agevolazione-imu-caso-affitto-canone-concordato",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.piossasco.to.it/servizi/richiesta-agevolazione-imu-caso-affitto-canone-concordato",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  }
+ }
+}

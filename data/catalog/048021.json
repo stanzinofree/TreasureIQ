@@ -1,0 +1,126 @@
+{
+ "municipality_istat": "048021",
+ "services": {
+  "carta_identita": {
+   "service_id": "048021:drupal:carta-didentita-elettronica-cie",
+   "title": "Carta d'Identità Elettronica CIE",
+   "source_url": "https://www.comune.greve-in-chianti.fi.it/servizi/anagrafe-e-stato-civile/carta-didentita-elettronica-cie",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.greve-in-chianti.fi.it/servizi/anagrafe-e-stato-civile/carta-didentita-elettronica-cie",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.greve-in-chianti.fi.it/servizi/anagrafe-e-stato-civile/carta-didentita-elettronica-cie",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.greve-in-chianti.fi.it/system/files/2024-08/termini-e-condizioni-di-servizio_1.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.greve-in-chianti.fi.it/servizi/anagrafe-e-stato-civile/carta-didentita-elettronica-cie",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  },
+  "stato_civile": {
+   "service_id": "048021:drupal:certificati-ed-estratti-di-atti-stato-civile-nascita-matrimonio-0",
+   "title": "Certificati ed estratti di atti stato civile (nascita, matrimonio, cittadinanza, morte)",
+   "source_url": "https://www.comune.greve-in-chianti.fi.it/servizi/anagrafe-e-stato-civile/certificati-ed-estratti-di-atti-stato-civile-nascita-matrimonio-0",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.greve-in-chianti.fi.it/servizi/anagrafe-e-stato-civile/certificati-ed-estratti-di-atti-stato-civile-nascita-matrimonio-0",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.greve-in-chianti.fi.it/servizi/anagrafe-e-stato-civile/certificati-ed-estratti-di-atti-stato-civile-nascita-matrimonio-0",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.greve-in-chianti.fi.it/system/files/2026-05/termini-e-condizioni-di-servizio_1_0.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.greve-in-chianti.fi.it/servizi/anagrafe-e-stato-civile/certificati-ed-estratti-di-atti-stato-civile-nascita-matrimonio-0",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "048021:drupal:imposta-municipale-propria-imu",
+   "title": "Imposta Municipale propria (IMU)",
+   "source_url": "https://www.comune.greve-in-chianti.fi.it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.greve-in-chianti.fi.it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.greve-in-chianti.fi.it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.greve-in-chianti.fi.it/system/files/2024-03/Termini-e-condizioni-di-servizio.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.greve-in-chianti.fi.it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.greve-in-chianti.fi.it/sites/default/files/regolam-imu-30-09-2020_1.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.greve-in-chianti.fi.it/servizi/tributi-finanze-e-contravvenzioni/imposta-municipale-propria-imu",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  }
+ }
+}

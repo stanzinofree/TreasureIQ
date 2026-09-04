@@ -1,0 +1,51 @@
+{
+ "municipality_istat": "018110",
+ "services": {
+  "carta_identita": {
+   "service_id": "018110:drupal:cie-carta-identita-elettronica",
+   "title": "C.I.E. - Carta di Identità Elettronica",
+   "source_url": "https://www.comune.pavia.it/servizi/cie-carta-identita-elettronica",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pavia.it/servizi/cie-carta-identita-elettronica",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pavia.it/servizi/cie-carta-identita-elettronica",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  },
+  "cambio_residenza": {
+   "service_id": "018110:drupal:cambiare-residenza",
+   "title": "Cambiare la residenza",
+   "source_url": "https://www.comune.pavia.it/servizi/cambiare-residenza",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pavia.it/servizi/cambiare-residenza",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pavia.it/servizi/cambiare-residenza",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  }
+ }
+}

@@ -1,0 +1,87 @@
+{
+ "municipality_istat": "047013",
+ "services": {
+  "carta_identita": {
+   "service_id": "047013:drupal:carta-di-identita-elettronica-cie",
+   "title": "Carta di Identità Elettronica C.I.E.",
+   "source_url": "https://www.comune.pieve-a-nievole.pt.it/servizi/carta-di-identita-elettronica-cie",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pieve-a-nievole.pt.it/servizi/carta-di-identita-elettronica-cie",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pieve-a-nievole.pt.it/servizi/carta-di-identita-elettronica-cie",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.pieve-a-nievole.pt.it/sites/default/files/2026-02/Atto_di_assenso_CIE.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pieve-a-nievole.pt.it/servizi/carta-di-identita-elettronica-cie",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  },
+  "accesso_atti": {
+   "service_id": "047013:drupal:accesso-agli-atti-pratiche-edilizie",
+   "title": "Accesso agli atti - Pratiche edilizie",
+   "source_url": "https://www.comune.pieve-a-nievole.pt.it/servizi/accesso-agli-atti-pratiche-edilizie",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pieve-a-nievole.pt.it/servizi/accesso-agli-atti-pratiche-edilizie",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pieve-a-nievole.pt.it/servizi/accesso-agli-atti-pratiche-edilizie",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "047013:drupal:imu-imposta-municipale-propria",
+   "title": "IMU - Imposta Municipale Propria",
+   "source_url": "https://www.comune.pieve-a-nievole.pt.it/servizi/imu-imposta-municipale-propria",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pieve-a-nievole.pt.it/servizi/imu-imposta-municipale-propria",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pieve-a-nievole.pt.it/servizi/imu-imposta-municipale-propria",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  }
+ }
+}

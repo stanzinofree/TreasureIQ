@@ -1,0 +1,64 @@
+{
+ "municipality_istat": "048015",
+ "services": {
+  "carta_identita": {
+   "service_id": "048015:drupal:carta-di-identita-elettronica",
+   "title": "Carta di Identità Elettronica",
+   "source_url": "https://www.comune.fiesole.fi.it/servizi/anagrafe-e-stato-civile/carta-di-identita-elettronica",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.fiesole.fi.it/servizi/anagrafe-e-stato-civile/carta-di-identita-elettronica",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.fiesole.fi.it/servizi/anagrafe-e-stato-civile/carta-di-identita-elettronica",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.fiesole.fi.it/system/files/2024-11/ASSENSO%20ESPATRIO%20MINORE.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.fiesole.fi.it/servizi/anagrafe-e-stato-civile/carta-di-identita-elettronica",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  },
+  "tributi_imu": {
+   "service_id": "048015:drupal:imu",
+   "title": "IMU",
+   "source_url": "https://www.comune.fiesole.fi.it/servizi/tributi-finanze-e-contravvenzioni/imu",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.fiesole.fi.it/servizi/tributi-finanze-e-contravvenzioni/imu",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.fiesole.fi.it/servizi/tributi-finanze-e-contravvenzioni/imu",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "drupal",
+   "discovered_at": "2026-09-04T00:00:00Z"
+  }
+ }
+}

@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "062034",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "062034:hgate:35",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.fragnetomonforte.bn.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.fragnetomonforte.bn.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.fragnetomonforte.bn.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.fragnetomonforte.bn.it/servizi/anagrafe_e_stato_civile/servizio_35.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.fragnetomonforte.bn.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:16:46.858101Z"
+  },
+  "carta_identita": {
+   "service_id": "062034:hgate:37",
+   "title": "Carta di Identità Elettronica",
+   "source_url": "https://www.comune.fragnetomonforte.bn.it/servizi/anagrafe_e_stato_civile/servizio_37.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.fragnetomonforte.bn.it/servizi/anagrafe_e_stato_civile/servizio_37.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.fragnetomonforte.bn.it/servizi/anagrafe_e_stato_civile/servizio_37.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.fragnetomonforte.bn.it/servizi/anagrafe_e_stato_civile/servizio_37.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.fragnetomonforte.bn.it/servizi/anagrafe_e_stato_civile/servizio_37.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:16:43.288955Z"
+  },
+  "stato_civile": {
+   "service_id": "062034:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.fragnetomonforte.bn.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.fragnetomonforte.bn.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.fragnetomonforte.bn.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:16:48.089673Z"
+  }
+ }
+}

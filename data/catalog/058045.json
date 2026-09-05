@@ -1,0 +1,172 @@
+{
+ "municipality_istat": "058045",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "058045:hgate:96",
+   "title": "Cambiare la residenza",
+   "source_url": "https://www.comune.gorga.rm.it/servizi/anagrafe_e_stato_civile/servizio_96.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gorga.rm.it/servizi/anagrafe_e_stato_civile/servizio_96.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gorga.rm.it/servizi/anagrafe_e_stato_civile/servizio_96.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.gorga.rm.it/servizi/anagrafe_e_stato_civile/servizio_96.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.gorga.rm.it/servizi/anagrafe_e_stato_civile/servizio_96.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:05:45.753405Z"
+  },
+  "carta_identita": {
+   "service_id": "058045:hgate:111",
+   "title": "Carta identità (CIE)",
+   "source_url": "https://www.comune.gorga.rm.it/servizi/anagrafe_e_stato_civile/servizio_111.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gorga.rm.it/servizi/anagrafe_e_stato_civile/servizio_111.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gorga.rm.it/servizi/anagrafe_e_stato_civile/servizio_111.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.gorga.rm.it/servizi/anagrafe_e_stato_civile/servizio_111.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.gorga.rm.it/servizi/anagrafe_e_stato_civile/servizio_111.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:05:41.993493Z"
+  },
+  "stato_civile": {
+   "service_id": "058045:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.gorga.rm.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gorga.rm.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gorga.rm.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:05:46.997558Z"
+  },
+  "tributi_imu": {
+   "service_id": "058045:hgate:75",
+   "title": "Sportello IMU",
+   "source_url": "https://www.comune.gorga.rm.it/servizi/tributi_finanze_e_contravvenzioni/servizio_75.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gorga.rm.it/servizi/tributi_finanze_e_contravvenzioni/servizio_75.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gorga.rm.it/servizi/tributi_finanze_e_contravvenzioni/servizio_75.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.gorga.rm.it/servizi/tributi_finanze_e_contravvenzioni/servizio_75.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.gorga.rm.it/servizi/tributi_finanze_e_contravvenzioni/servizio_75.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:05:48.315033Z"
+  },
+  "tributi_tari": {
+   "service_id": "058045:hgate:52",
+   "title": "TARI",
+   "source_url": "https://www.comune.gorga.rm.it/servizi/tributi_finanze_e_contravvenzioni/servizio_52.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.gorga.rm.it/servizi/tributi_finanze_e_contravvenzioni/servizio_52.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.gorga.rm.it/servizi/tributi_finanze_e_contravvenzioni/servizio_52.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.gorga.rm.it/servizi/tributi_finanze_e_contravvenzioni/servizio_52.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.gorga.rm.it/servizi/tributi_finanze_e_contravvenzioni/servizio_52.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:05:49.769727Z"
+  }
+ }
+}

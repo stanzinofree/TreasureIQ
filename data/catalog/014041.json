@@ -1,0 +1,136 @@
+{
+ "municipality_istat": "014041",
+ "services": {
+  "accesso_atti": {
+   "service_id": "014041:hgate:8",
+   "title": "Accesso agli atti",
+   "source_url": "https://www.comune.mello.so.it/servizi/vita_lavorativa/servizio_8.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.mello.so.it/servizi/vita_lavorativa/servizio_8.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.mello.so.it/servizi/vita_lavorativa/servizio_8.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.mello.so.it/servizi/vita_lavorativa/servizio_8.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.mello.so.it/servizi/vita_lavorativa/servizio_8.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:19:19.770216Z"
+  },
+  "cambio_residenza": {
+   "service_id": "014041:hgate:50",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.mello.so.it/servizi/anagrafe_e_stato_civile/servizio_50.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.mello.so.it/servizi/anagrafe_e_stato_civile/servizio_50.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.mello.so.it/servizi/anagrafe_e_stato_civile/servizio_50.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.mello.so.it/servizi/anagrafe_e_stato_civile/servizio_50.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.mello.so.it/servizi/anagrafe_e_stato_civile/servizio_50.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:19:17.176319Z"
+  },
+  "carta_identita": {
+   "service_id": "014041:hgate:37",
+   "title": "Carta di Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.mello.so.it/servizi/anagrafe_e_stato_civile/servizio_37.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.mello.so.it/servizi/anagrafe_e_stato_civile/servizio_37.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.mello.so.it/servizi/anagrafe_e_stato_civile/servizio_37.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.mello.so.it/servizi/anagrafe_e_stato_civile/servizio_37.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.mello.so.it/servizi/anagrafe_e_stato_civile/servizio_37.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:19:13.569322Z"
+  },
+  "stato_civile": {
+   "service_id": "014041:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.mello.so.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.mello.so.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.mello.so.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:19:18.427821Z"
+  }
+ }
+}

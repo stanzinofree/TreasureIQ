@@ -1,0 +1,273 @@
+{
+ "municipality_istat": "018086",
+ "services": {
+  "accesso_atti": {
+   "service_id": "018086:hgate:8",
+   "title": "Accesso agli atti",
+   "source_url": "https://www.comune.marcignago.pv.it/servizi/vita_lavorativa/servizio_8.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.marcignago.pv.it/servizi/vita_lavorativa/servizio_8.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marcignago.pv.it/servizi/vita_lavorativa/servizio_8.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.marcignago.pv.it/servizi/vita_lavorativa/servizio_8.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.marcignago.pv.it/servizi/vita_lavorativa/servizio_8.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:35:54.098197Z"
+  },
+  "cambio_residenza": {
+   "service_id": "018086:hgate:77",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.marcignago.pv.it/servizi/anagrafe_e_stato_civile/servizio_77.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.marcignago.pv.it/servizi/anagrafe_e_stato_civile/servizio_77.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marcignago.pv.it/servizi/anagrafe_e_stato_civile/servizio_77.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.marcignago.pv.it/servizi/anagrafe_e_stato_civile/servizio_77.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.marcignago.pv.it/servizi/anagrafe_e_stato_civile/servizio_77.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:35:51.563705Z"
+  },
+  "carta_identita": {
+   "service_id": "018086:hgate:45",
+   "title": "Carta d'identità elettronica",
+   "source_url": "https://www.comune.marcignago.pv.it/servizi/anagrafe_e_stato_civile/servizio_45.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.marcignago.pv.it/servizi/anagrafe_e_stato_civile/servizio_45.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marcignago.pv.it/servizi/anagrafe_e_stato_civile/servizio_45.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.marcignago.pv.it/servizi/anagrafe_e_stato_civile/servizio_45.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.marcignago.pv.it/servizi/anagrafe_e_stato_civile/servizio_45.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:35:47.632374Z"
+  },
+  "stato_civile": {
+   "service_id": "018086:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.marcignago.pv.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.marcignago.pv.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marcignago.pv.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.schoolesuite.it/default1/NSC_Login.aspx?installation_code=marcigna",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.marcignago.pv.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://openbdap.rgs.mef.gov.it/BO/OpenDocument?modalita=link&docID=FgAUHFlfxgsAFwYAAACHAiUbeOO1D67w&T=BusinessObject&idType=CUID&noDetailsPanel=true&X_Ente=80012330751",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.marcignago.pv.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "http://www.ilquotidianodellapa.it/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.marcignago.pv.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.indicepa.gov.it/ipa-portale/consultazione/indirizzo-sede/ricerca-ente/scheda-ente/7263",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.marcignago.pv.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://forecast7.com/it/45d259d08/marcignago/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.marcignago.pv.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:35:52.847067Z"
+  },
+  "tributi_imu": {
+   "service_id": "018086:hgate:71",
+   "title": "Sportello IMU",
+   "source_url": "https://www.comune.marcignago.pv.it/servizi/tributi_finanze_e_contravvenzioni/servizio_71.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.marcignago.pv.it/servizi/tributi_finanze_e_contravvenzioni/servizio_71.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marcignago.pv.it/servizi/tributi_finanze_e_contravvenzioni/servizio_71.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.marcignago.pv.it/servizi/tributi_finanze_e_contravvenzioni/servizio_71.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.marcignago.pv.it/servizi/tributi_finanze_e_contravvenzioni/servizio_71.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:35:55.448033Z"
+  },
+  "tributi_tari": {
+   "service_id": "018086:hgate:69",
+   "title": "TARI",
+   "source_url": "https://www.comune.marcignago.pv.it/servizi/tributi_finanze_e_contravvenzioni/servizio_69.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.marcignago.pv.it/servizi/tributi_finanze_e_contravvenzioni/servizio_69.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.marcignago.pv.it/servizi/tributi_finanze_e_contravvenzioni/servizio_69.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.marcignago.pv.it/servizi/tributi_finanze_e_contravvenzioni/servizio_69.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.marcignago.pv.it/servizi/tributi_finanze_e_contravvenzioni/servizio_69.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:35:56.716831Z"
+  }
+ }
+}

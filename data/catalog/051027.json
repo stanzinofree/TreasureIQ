@@ -1,0 +1,208 @@
+{
+ "municipality_istat": "051027",
+ "services": {
+  "accesso_atti": {
+   "service_id": "051027:hgate:157",
+   "title": "Accesso agli atti",
+   "source_url": "https://www.comune.ortignano-raggiolo.ar.it/servizi/urp/servizio_157.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ortignano-raggiolo.ar.it/servizi/urp/servizio_157.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ortignano-raggiolo.ar.it/servizi/urp/servizio_157.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.ortignano-raggiolo.ar.it/servizi/urp/servizio_157.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.ortignano-raggiolo.ar.it/servizi/urp/servizio_157.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:53:10.741616Z"
+  },
+  "cambio_residenza": {
+   "service_id": "051027:hgate:169",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.ortignano-raggiolo.ar.it/servizi/anagrafe_e_stato_civile/servizio_169.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ortignano-raggiolo.ar.it/servizi/anagrafe_e_stato_civile/servizio_169.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ortignano-raggiolo.ar.it/servizi/anagrafe_e_stato_civile/servizio_169.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.ortignano-raggiolo.ar.it/servizi/anagrafe_e_stato_civile/servizio_169.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.ortignano-raggiolo.ar.it/servizi/anagrafe_e_stato_civile/servizio_169.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:53:08.256507Z"
+  },
+  "carta_identita": {
+   "service_id": "051027:hgate:138",
+   "title": "Carta d'identità Elettronica",
+   "source_url": "https://www.comune.ortignano-raggiolo.ar.it/servizi/anagrafe_e_stato_civile/servizio_138.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ortignano-raggiolo.ar.it/servizi/anagrafe_e_stato_civile/servizio_138.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ortignano-raggiolo.ar.it/servizi/anagrafe_e_stato_civile/servizio_138.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.ortignano-raggiolo.ar.it/servizi/anagrafe_e_stato_civile/servizio_138.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.ortignano-raggiolo.ar.it/servizi/anagrafe_e_stato_civile/servizio_138.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:53:04.518553Z"
+  },
+  "stato_civile": {
+   "service_id": "051027:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.ortignano-raggiolo.ar.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ortignano-raggiolo.ar.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ortignano-raggiolo.ar.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:53:09.510047Z"
+  },
+  "tributi_imu": {
+   "service_id": "051027:hgate:156",
+   "title": "IMU",
+   "source_url": "https://www.comune.ortignano-raggiolo.ar.it/servizi/tributi_finanze_e_contravvenzioni/servizio_156.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ortignano-raggiolo.ar.it/servizi/tributi_finanze_e_contravvenzioni/servizio_156.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ortignano-raggiolo.ar.it/servizi/tributi_finanze_e_contravvenzioni/servizio_156.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.ortignano-raggiolo.ar.it/servizi/tributi_finanze_e_contravvenzioni/servizio_156.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.ortignano-raggiolo.ar.it/servizi/tributi_finanze_e_contravvenzioni/servizio_156.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:53:12.037295Z"
+  },
+  "tributi_tari": {
+   "service_id": "051027:hgate:154",
+   "title": "TARI",
+   "source_url": "https://www.comune.ortignano-raggiolo.ar.it/servizi/tributi_finanze_e_contravvenzioni/servizio_154.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.ortignano-raggiolo.ar.it/servizi/tributi_finanze_e_contravvenzioni/servizio_154.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.ortignano-raggiolo.ar.it/servizi/tributi_finanze_e_contravvenzioni/servizio_154.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.ortignano-raggiolo.ar.it/servizi/tributi_finanze_e_contravvenzioni/servizio_154.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.ortignano-raggiolo.ar.it/servizi/tributi_finanze_e_contravvenzioni/servizio_154.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:53:17.334426Z"
+  }
+ }
+}

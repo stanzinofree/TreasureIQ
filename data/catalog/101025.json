@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "101025",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "101025:hgate:32",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.strongoli.kr.it/servizi/anagrafe_e_stato_civile/servizio_32.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.strongoli.kr.it/servizi/anagrafe_e_stato_civile/servizio_32.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.strongoli.kr.it/servizi/anagrafe_e_stato_civile/servizio_32.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.strongoli.kr.it/servizi/anagrafe_e_stato_civile/servizio_32.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.strongoli.kr.it/servizi/anagrafe_e_stato_civile/servizio_32.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T03:26:42.198792Z"
+  },
+  "stato_civile": {
+   "service_id": "101025:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.strongoli.kr.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.strongoli.kr.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.strongoli.kr.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T03:26:45.831528Z"
+  },
+  "tributi_imu": {
+   "service_id": "101025:hgate:31",
+   "title": "Sportello IMU",
+   "source_url": "https://www.comune.strongoli.kr.it/servizi/tributi_finanze_e_contravvenzioni/servizio_31.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.strongoli.kr.it/servizi/tributi_finanze_e_contravvenzioni/servizio_31.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.strongoli.kr.it/servizi/tributi_finanze_e_contravvenzioni/servizio_31.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.strongoli.kr.it/servizi/tributi_finanze_e_contravvenzioni/servizio_31.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.strongoli.kr.it/servizi/tributi_finanze_e_contravvenzioni/servizio_31.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T03:26:47.162750Z"
+  }
+ }
+}

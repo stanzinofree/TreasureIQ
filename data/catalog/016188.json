@@ -1,0 +1,289 @@
+{
+ "municipality_istat": "016188",
+ "services": {
+  "accesso_atti": {
+   "service_id": "016188:hgate:8",
+   "title": "Accesso agli atti",
+   "source_url": "https://www.comune.sangiovannibianco.bg.it/servizi/vita_lavorativa/servizio_8.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sangiovannibianco.bg.it/servizi/vita_lavorativa/servizio_8.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sangiovannibianco.bg.it/servizi/vita_lavorativa/servizio_8.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.sangiovannibianco.bg.it/servizi/vita_lavorativa/servizio_8.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.sangiovannibianco.bg.it/servizi/vita_lavorativa/servizio_8.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:29:16.417922Z"
+  },
+  "cambio_residenza": {
+   "service_id": "016188:hgate:72",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.sangiovannibianco.bg.it/servizi/anagrafe_e_stato_civile/servizio_72.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sangiovannibianco.bg.it/servizi/anagrafe_e_stato_civile/servizio_72.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sangiovannibianco.bg.it/servizi/anagrafe_e_stato_civile/servizio_72.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.sangiovannibianco.bg.it/servizi/anagrafe_e_stato_civile/servizio_72.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.sangiovannibianco.bg.it/servizi/anagrafe_e_stato_civile/servizio_72.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:29:10.825444Z"
+  },
+  "carta_identita": {
+   "service_id": "016188:hgate:70",
+   "title": "Carta d'identità elettronica",
+   "source_url": "https://www.comune.sangiovannibianco.bg.it/servizi/anagrafe_e_stato_civile/servizio_70.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sangiovannibianco.bg.it/servizi/anagrafe_e_stato_civile/servizio_70.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sangiovannibianco.bg.it/servizi/anagrafe_e_stato_civile/servizio_70.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.sangiovannibianco.bg.it/servizi/anagrafe_e_stato_civile/servizio_70.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.sangiovannibianco.bg.it/servizi/anagrafe_e_stato_civile/servizio_70.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:29:04.045307Z"
+  },
+  "stato_civile": {
+   "service_id": "016188:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.sangiovannibianco.bg.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sangiovannibianco.bg.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sangiovannibianco.bg.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.vallebrembana.bg.it/home/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.sangiovannibianco.bg.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.provincia.bergamo.it/hh/index.php",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.sangiovannibianco.bg.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.percorsimtbvalbrembana.it/home.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.sangiovannibianco.bg.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.geoportale.vallebrembana.bg.it/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.sangiovannibianco.bg.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.multiplan.servizirl.it/pgtwebn/#/public/dettaglio-piano/120743/documenti",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.sangiovannibianco.bg.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anticorruzione.it/-/whistleblowing",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.sangiovannibianco.bg.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "http://mercatorumpriula.eu/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.sangiovannibianco.bg.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.impresainungiorno.gov.it/web/guest/comune?codCatastale=H910",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.sangiovannibianco.bg.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://sportellotelematico.comunibrembani.it/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.sangiovannibianco.bg.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:29:15.095880Z"
+  },
+  "tributi_tari": {
+   "service_id": "016188:hgate:68",
+   "title": "TARI",
+   "source_url": "https://www.comune.sangiovannibianco.bg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_68.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sangiovannibianco.bg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_68.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sangiovannibianco.bg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_68.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.sangiovannibianco.bg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_68.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.sangiovannibianco.bg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_68.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:29:17.660805Z"
+  }
+ }
+}

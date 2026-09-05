@@ -1,0 +1,208 @@
+{
+ "municipality_istat": "058058",
+ "services": {
+  "accesso_atti": {
+   "service_id": "058058:hgate:8",
+   "title": "Accesso agli atti",
+   "source_url": "https://www.comune.mazzanoromano.rm.it/servizi/autorizzazioni/servizio_8.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.mazzanoromano.rm.it/servizi/autorizzazioni/servizio_8.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.mazzanoromano.rm.it/servizi/autorizzazioni/servizio_8.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.mazzanoromano.rm.it/servizi/autorizzazioni/servizio_8.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.mazzanoromano.rm.it/servizi/autorizzazioni/servizio_8.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:07:00.289670Z"
+  },
+  "cambio_residenza": {
+   "service_id": "058058:hgate:44",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.mazzanoromano.rm.it/servizi/anagrafe_e_stato_civile/servizio_44.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.mazzanoromano.rm.it/servizi/anagrafe_e_stato_civile/servizio_44.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.mazzanoromano.rm.it/servizi/anagrafe_e_stato_civile/servizio_44.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.mazzanoromano.rm.it/servizi/anagrafe_e_stato_civile/servizio_44.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.mazzanoromano.rm.it/servizi/anagrafe_e_stato_civile/servizio_44.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:06:57.823763Z"
+  },
+  "carta_identita": {
+   "service_id": "058058:hgate:55",
+   "title": "Carta d'identità elettronica",
+   "source_url": "https://www.comune.mazzanoromano.rm.it/servizi/anagrafe_e_stato_civile/servizio_55.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.mazzanoromano.rm.it/servizi/anagrafe_e_stato_civile/servizio_55.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.mazzanoromano.rm.it/servizi/anagrafe_e_stato_civile/servizio_55.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.mazzanoromano.rm.it/servizi/anagrafe_e_stato_civile/servizio_55.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.mazzanoromano.rm.it/servizi/anagrafe_e_stato_civile/servizio_55.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:06:54.030718Z"
+  },
+  "stato_civile": {
+   "service_id": "058058:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.mazzanoromano.rm.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.mazzanoromano.rm.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.mazzanoromano.rm.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:06:59.055819Z"
+  },
+  "tributi_imu": {
+   "service_id": "058058:hgate:33",
+   "title": "Calcolo IMU",
+   "source_url": "https://www.comune.mazzanoromano.rm.it/servizi/tributi_finanze_e_contravvenzioni/servizio_33.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.mazzanoromano.rm.it/servizi/tributi_finanze_e_contravvenzioni/servizio_33.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.mazzanoromano.rm.it/servizi/tributi_finanze_e_contravvenzioni/servizio_33.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.mazzanoromano.rm.it/servizi/tributi_finanze_e_contravvenzioni/servizio_33.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.mazzanoromano.rm.it/servizi/tributi_finanze_e_contravvenzioni/servizio_33.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:07:01.509731Z"
+  },
+  "tributi_tari": {
+   "service_id": "058058:hgate:31",
+   "title": "TARI",
+   "source_url": "https://www.comune.mazzanoromano.rm.it/servizi/tributi_finanze_e_contravvenzioni/servizio_31.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.mazzanoromano.rm.it/servizi/tributi_finanze_e_contravvenzioni/servizio_31.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.mazzanoromano.rm.it/servizi/tributi_finanze_e_contravvenzioni/servizio_31.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.mazzanoromano.rm.it/servizi/tributi_finanze_e_contravvenzioni/servizio_31.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.mazzanoromano.rm.it/servizi/tributi_finanze_e_contravvenzioni/servizio_31.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:07:02.753261Z"
+  }
+ }
+}

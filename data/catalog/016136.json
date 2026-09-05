@@ -1,0 +1,227 @@
+{
+ "municipality_istat": "016136",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "016136:hgate:44",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.moiodecalvi.bg.it/servizi/anagrafe_e_stato_civile/servizio_44.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.moiodecalvi.bg.it/servizi/anagrafe_e_stato_civile/servizio_44.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.moiodecalvi.bg.it/servizi/anagrafe_e_stato_civile/servizio_44.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.moiodecalvi.bg.it/servizi/anagrafe_e_stato_civile/servizio_44.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.moiodecalvi.bg.it/servizi/anagrafe_e_stato_civile/servizio_44.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:27:49.674440Z"
+  },
+  "carta_identita": {
+   "service_id": "016136:hgate:32",
+   "title": "Carta d'identità elettronica",
+   "source_url": "https://www.comune.moiodecalvi.bg.it/servizi/anagrafe_e_stato_civile/servizio_32.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.moiodecalvi.bg.it/servizi/anagrafe_e_stato_civile/servizio_32.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.moiodecalvi.bg.it/servizi/anagrafe_e_stato_civile/servizio_32.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.moiodecalvi.bg.it/servizi/anagrafe_e_stato_civile/servizio_32.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.moiodecalvi.bg.it/servizi/anagrafe_e_stato_civile/servizio_32.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:27:46.078500Z"
+  },
+  "stato_civile": {
+   "service_id": "016136:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.moiodecalvi.bg.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.moiodecalvi.bg.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.moiodecalvi.bg.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.orobiemeteo.com/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.moiodecalvi.bg.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.ats-bg.it/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.moiodecalvi.bg.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.areu.lombardia.it/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.moiodecalvi.bg.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.provincia.bergamo.it/hh/index.php",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.moiodecalvi.bg.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.vallebrembana.bg.it/home/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.moiodecalvi.bg.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.geoportale.vallebrembana.bg.it/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.moiodecalvi.bg.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.aziendavallebrembana.it/home/index.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.moiodecalvi.bg.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:27:51.030594Z"
+  },
+  "tributi_imu": {
+   "service_id": "016136:hgate:38",
+   "title": "Calcolo IMU",
+   "source_url": "https://www.comune.moiodecalvi.bg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_38.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.moiodecalvi.bg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_38.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.moiodecalvi.bg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_38.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.moiodecalvi.bg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_38.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.moiodecalvi.bg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_38.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:27:52.344130Z"
+  }
+ }
+}

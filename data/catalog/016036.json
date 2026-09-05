@@ -1,0 +1,188 @@
+{
+ "municipality_istat": "016036",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "016036:hgate:39",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.branzi.bg.it/servizi/anagrafe_e_stato_civile/servizio_39.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.branzi.bg.it/servizi/anagrafe_e_stato_civile/servizio_39.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.branzi.bg.it/servizi/anagrafe_e_stato_civile/servizio_39.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.branzi.bg.it/servizi/anagrafe_e_stato_civile/servizio_39.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.branzi.bg.it/servizi/anagrafe_e_stato_civile/servizio_39.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:25:01.787586Z"
+  },
+  "carta_identita": {
+   "service_id": "016036:hgate:35",
+   "title": "Carta d'Identità Elettronica",
+   "source_url": "https://www.comune.branzi.bg.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.branzi.bg.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.branzi.bg.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.branzi.bg.it/servizi/anagrafe_e_stato_civile/servizio_35.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.branzi.bg.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:24:58.243867Z"
+  },
+  "stato_civile": {
+   "service_id": "016036:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.branzi.bg.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.branzi.bg.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.branzi.bg.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://sportellotelematico.comunibrembani.it/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.branzi.bg.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.interno.gov.it/it/notizie/anpr-certificati-anagrafici-online-e-gratuiti-i-cittadini",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.branzi.bg.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://visitbranzi.it/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.branzi.bg.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.geoportale.vallebrembana.bg.it/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.branzi.bg.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:25:03.055473Z"
+  },
+  "tributi_imu": {
+   "service_id": "016036:hgate:47",
+   "title": "Calcolo IMU",
+   "source_url": "https://www.comune.branzi.bg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_47.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.branzi.bg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_47.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.branzi.bg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_47.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.branzi.bg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_47.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.branzi.bg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_47.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:25:04.350137Z"
+  }
+ }
+}

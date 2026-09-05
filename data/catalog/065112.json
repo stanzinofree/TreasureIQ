@@ -1,0 +1,172 @@
+{
+ "municipality_istat": "065112",
+ "services": {
+  "accesso_atti": {
+   "service_id": "065112:hgate:8",
+   "title": "Accesso agli atti",
+   "source_url": "https://www.comune.rutino.sa.it/servizi/vita_lavorativa/servizio_8.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rutino.sa.it/servizi/vita_lavorativa/servizio_8.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rutino.sa.it/servizi/vita_lavorativa/servizio_8.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.rutino.sa.it/servizi/vita_lavorativa/servizio_8.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.rutino.sa.it/servizi/vita_lavorativa/servizio_8.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:35:15.634388Z"
+  },
+  "cambio_residenza": {
+   "service_id": "065112:hgate:101",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.rutino.sa.it/servizi/anagrafe_e_stato_civile/servizio_101.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rutino.sa.it/servizi/anagrafe_e_stato_civile/servizio_101.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rutino.sa.it/servizi/anagrafe_e_stato_civile/servizio_101.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.rutino.sa.it/servizi/anagrafe_e_stato_civile/servizio_101.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.rutino.sa.it/servizi/anagrafe_e_stato_civile/servizio_101.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:35:13.051824Z"
+  },
+  "carta_identita": {
+   "service_id": "065112:hgate:92",
+   "title": "Carta d'identità elettronica",
+   "source_url": "https://www.comune.rutino.sa.it/servizi/catasto_e_urbanistica/servizio_92.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rutino.sa.it/servizi/catasto_e_urbanistica/servizio_92.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rutino.sa.it/servizi/catasto_e_urbanistica/servizio_92.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.rutino.sa.it/servizi/catasto_e_urbanistica/servizio_92.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.rutino.sa.it/servizi/catasto_e_urbanistica/servizio_92.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:35:09.304454Z"
+  },
+  "stato_civile": {
+   "service_id": "065112:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.rutino.sa.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rutino.sa.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rutino.sa.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:35:14.316635Z"
+  },
+  "tributi_imu": {
+   "service_id": "065112:hgate:90",
+   "title": "Sportello IMU",
+   "source_url": "https://www.comune.rutino.sa.it/servizi/tributi_finanze_e_contravvenzioni/servizio_90.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rutino.sa.it/servizi/tributi_finanze_e_contravvenzioni/servizio_90.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rutino.sa.it/servizi/tributi_finanze_e_contravvenzioni/servizio_90.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.rutino.sa.it/servizi/tributi_finanze_e_contravvenzioni/servizio_90.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.rutino.sa.it/servizi/tributi_finanze_e_contravvenzioni/servizio_90.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:35:16.912003Z"
+  }
+ }
+}

@@ -1,0 +1,234 @@
+{
+ "municipality_istat": "071012",
+ "services": {
+  "accesso_atti": {
+   "service_id": "071012:hgate:101",
+   "title": "Accesso agli atti",
+   "source_url": "https://www.comune.carpino.fg.it/servizi/autorizzazioni/servizio_101.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.carpino.fg.it/servizi/autorizzazioni/servizio_101.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.carpino.fg.it/servizi/autorizzazioni/servizio_101.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.carpino.fg.it/servizi/autorizzazioni/servizio_101.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.carpino.fg.it/servizi/autorizzazioni/servizio_101.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:54:26.349870Z"
+  },
+  "cambio_residenza": {
+   "service_id": "071012:hgate:111",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.carpino.fg.it/servizi/anagrafe_e_stato_civile/servizio_111.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.carpino.fg.it/servizi/anagrafe_e_stato_civile/servizio_111.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.carpino.fg.it/servizi/anagrafe_e_stato_civile/servizio_111.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.carpino.fg.it/servizi/anagrafe_e_stato_civile/servizio_111.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.carpino.fg.it/servizi/anagrafe_e_stato_civile/servizio_111.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:54:23.771076Z"
+  },
+  "carta_identita": {
+   "service_id": "071012:hgate:107",
+   "title": "Carta d'identità elettronica",
+   "source_url": "https://www.comune.carpino.fg.it/servizi/anagrafe_e_stato_civile/servizio_107.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.carpino.fg.it/servizi/anagrafe_e_stato_civile/servizio_107.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.carpino.fg.it/servizi/anagrafe_e_stato_civile/servizio_107.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.carpino.fg.it/servizi/anagrafe_e_stato_civile/servizio_107.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.carpino.fg.it/servizi/anagrafe_e_stato_civile/servizio_107.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:54:20.101270Z"
+  },
+  "stato_civile": {
+   "service_id": "071012:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.carpino.fg.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.carpino.fg.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.carpino.fg.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://arpal.regione.puglia.it/capgrptv/po/mostra_news.php?id=81",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.carpino.fg.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.normattiva.it/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.carpino.fg.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:54:25.047600Z"
+  },
+  "tributi_imu": {
+   "service_id": "071012:hgate:110",
+   "title": "IMU",
+   "source_url": "https://www.comune.carpino.fg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_110.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.carpino.fg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_110.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.carpino.fg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_110.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.carpino.fg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_110.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.carpino.fg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_110.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:54:27.601538Z"
+  },
+  "tributi_tari": {
+   "service_id": "071012:hgate:109",
+   "title": "TARI",
+   "source_url": "https://www.comune.carpino.fg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_109.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.carpino.fg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_109.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.carpino.fg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_109.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.carpino.fg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_109.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.carpino.fg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_109.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:54:32.893465Z"
+  }
+ }
+}

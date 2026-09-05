@@ -1,0 +1,136 @@
+{
+ "municipality_istat": "042003",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "042003:hgate:57",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.arcevia.an.it/servizi/anagrafe_e_stato_civile/servizio_57.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.arcevia.an.it/servizi/anagrafe_e_stato_civile/servizio_57.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.arcevia.an.it/servizi/anagrafe_e_stato_civile/servizio_57.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.arcevia.an.it/servizi/anagrafe_e_stato_civile/servizio_57.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.arcevia.an.it/servizi/anagrafe_e_stato_civile/servizio_57.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:47:56.561465Z"
+  },
+  "carta_identita": {
+   "service_id": "042003:hgate:51",
+   "title": "Carta d'identità elettronica",
+   "source_url": "https://www.comune.arcevia.an.it/servizi/anagrafe_e_stato_civile/servizio_51.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.arcevia.an.it/servizi/anagrafe_e_stato_civile/servizio_51.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.arcevia.an.it/servizi/anagrafe_e_stato_civile/servizio_51.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.arcevia.an.it/servizi/anagrafe_e_stato_civile/servizio_51.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.arcevia.an.it/servizi/anagrafe_e_stato_civile/servizio_51.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:47:51.606505Z"
+  },
+  "stato_civile": {
+   "service_id": "042003:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.arcevia.an.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.arcevia.an.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.arcevia.an.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:47:57.836765Z"
+  },
+  "tributi_imu": {
+   "service_id": "042003:hgate:80",
+   "title": "IMU",
+   "source_url": "https://www.comune.arcevia.an.it/servizi/tributi_finanze_e_contravvenzioni/servizio_80.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.arcevia.an.it/servizi/tributi_finanze_e_contravvenzioni/servizio_80.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.arcevia.an.it/servizi/tributi_finanze_e_contravvenzioni/servizio_80.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.arcevia.an.it/servizi/tributi_finanze_e_contravvenzioni/servizio_80.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.arcevia.an.it/servizi/tributi_finanze_e_contravvenzioni/servizio_80.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:47:59.189660Z"
+  }
+ }
+}

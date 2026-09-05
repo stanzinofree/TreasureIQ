@@ -1,0 +1,221 @@
+{
+ "municipality_istat": "012093",
+ "services": {
+  "accesso_atti": {
+   "service_id": "012093:hgate:8",
+   "title": "Accesso agli atti",
+   "source_url": "https://www.comune.luvinate.va.it/servizi/vita_lavorativa/servizio_8.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.luvinate.va.it/servizi/vita_lavorativa/servizio_8.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.luvinate.va.it/servizi/vita_lavorativa/servizio_8.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.luvinate.va.it/servizi/vita_lavorativa/servizio_8.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.luvinate.va.it/servizi/vita_lavorativa/servizio_8.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T00:58:23.673006Z"
+  },
+  "cambio_residenza": {
+   "service_id": "012093:hgate:83",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.luvinate.va.it/servizi/anagrafe_e_stato_civile/servizio_83.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.luvinate.va.it/servizi/anagrafe_e_stato_civile/servizio_83.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.luvinate.va.it/servizi/anagrafe_e_stato_civile/servizio_83.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.luvinate.va.it/servizi/anagrafe_e_stato_civile/servizio_83.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.luvinate.va.it/servizi/anagrafe_e_stato_civile/servizio_83.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T00:58:17.013914Z"
+  },
+  "carta_identita": {
+   "service_id": "012093:hgate:26",
+   "title": "Carta d'identità elettronica (CIE)",
+   "source_url": "https://www.comune.luvinate.va.it/servizi/anagrafe_e_stato_civile/servizio_26.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.luvinate.va.it/servizi/anagrafe_e_stato_civile/servizio_26.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.luvinate.va.it/servizi/anagrafe_e_stato_civile/servizio_26.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.luvinate.va.it/servizi/anagrafe_e_stato_civile/servizio_26.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.luvinate.va.it/servizi/anagrafe_e_stato_civile/servizio_26.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T00:58:13.052183Z"
+  },
+  "stato_civile": {
+   "service_id": "012093:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.luvinate.va.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.luvinate.va.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.luvinate.va.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T00:58:18.323037Z"
+  },
+  "tributi_imu": {
+   "service_id": "012093:hgate:75",
+   "title": "Calcolo IMU",
+   "source_url": "https://www.comune.luvinate.va.it/servizi/tributi_finanze_e_contravvenzioni/servizio_75.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.luvinate.va.it/servizi/tributi_finanze_e_contravvenzioni/servizio_75.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.luvinate.va.it/servizi/tributi_finanze_e_contravvenzioni/servizio_75.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.luvinate.va.it/servizi/tributi_finanze_e_contravvenzioni/servizio_75.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.luvinate.va.it/servizi/tributi_finanze_e_contravvenzioni/servizio_75.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.agenziaentrate.gov.it/wps/content/Nsilib/Nsi/Cittadini/Fabbricati+e+terreni/Consultazione+dati+catastali+e+ipotecari/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.luvinate.va.it/servizi/tributi_finanze_e_contravvenzioni/servizio_75.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T00:58:24.929954Z"
+  },
+  "tributi_tari": {
+   "service_id": "012093:hgate:42",
+   "title": "TARI - Tassa sui rifiuti",
+   "source_url": "https://www.comune.luvinate.va.it/servizi/tributi_finanze_e_contravvenzioni/servizio_42.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.luvinate.va.it/servizi/tributi_finanze_e_contravvenzioni/servizio_42.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.luvinate.va.it/servizi/tributi_finanze_e_contravvenzioni/servizio_42.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.luvinate.va.it/servizi/tributi_finanze_e_contravvenzioni/servizio_42.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.luvinate.va.it/servizi/tributi_finanze_e_contravvenzioni/servizio_42.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T00:58:26.196131Z"
+  }
+ }
+}

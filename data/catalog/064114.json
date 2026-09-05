@@ -1,0 +1,172 @@
+{
+ "municipality_istat": "064114",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "064114:hgate:51",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.vallata.av.it/servizi/anagrafe_e_stato_civile/servizio_51.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vallata.av.it/servizi/anagrafe_e_stato_civile/servizio_51.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vallata.av.it/servizi/anagrafe_e_stato_civile/servizio_51.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.vallata.av.it/servizi/anagrafe_e_stato_civile/servizio_51.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.vallata.av.it/servizi/anagrafe_e_stato_civile/servizio_51.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:30:18.619764Z"
+  },
+  "carta_identita": {
+   "service_id": "064114:hgate:48",
+   "title": "Carta d'identità elettronica",
+   "source_url": "https://www.comune.vallata.av.it/servizi/educazione_e_formazione/servizio_48.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vallata.av.it/servizi/educazione_e_formazione/servizio_48.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vallata.av.it/servizi/educazione_e_formazione/servizio_48.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.vallata.av.it/servizi/educazione_e_formazione/servizio_48.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.vallata.av.it/servizi/educazione_e_formazione/servizio_48.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:30:15.037511Z"
+  },
+  "stato_civile": {
+   "service_id": "064114:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.vallata.av.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vallata.av.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vallata.av.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:30:19.875843Z"
+  },
+  "tributi_imu": {
+   "service_id": "064114:hgate:46",
+   "title": "Sportello IMU",
+   "source_url": "https://www.comune.vallata.av.it/servizi/tributi_finanze_e_contravvenzioni/servizio_46.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vallata.av.it/servizi/tributi_finanze_e_contravvenzioni/servizio_46.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vallata.av.it/servizi/tributi_finanze_e_contravvenzioni/servizio_46.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.vallata.av.it/servizi/tributi_finanze_e_contravvenzioni/servizio_46.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.vallata.av.it/servizi/tributi_finanze_e_contravvenzioni/servizio_46.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:30:21.112387Z"
+  },
+  "tributi_tari": {
+   "service_id": "064114:hgate:32",
+   "title": "TARI",
+   "source_url": "https://www.comune.vallata.av.it/servizi/tributi_finanze_e_contravvenzioni/servizio_32.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vallata.av.it/servizi/tributi_finanze_e_contravvenzioni/servizio_32.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vallata.av.it/servizi/tributi_finanze_e_contravvenzioni/servizio_32.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.vallata.av.it/servizi/tributi_finanze_e_contravvenzioni/servizio_32.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.vallata.av.it/servizi/tributi_finanze_e_contravvenzioni/servizio_32.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:30:22.356154Z"
+  }
+ }
+}

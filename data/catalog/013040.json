@@ -1,0 +1,136 @@
+{
+ "municipality_istat": "013040",
+ "services": {
+  "accesso_atti": {
+   "service_id": "013040:hgate:59",
+   "title": "Richiesta di accesso agli atti",
+   "source_url": "https://www.comune.campione-d-italia.co.it/servizi/catasto_e_urbanistica/servizio_59.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.campione-d-italia.co.it/servizi/catasto_e_urbanistica/servizio_59.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.campione-d-italia.co.it/servizi/catasto_e_urbanistica/servizio_59.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.campione-d-italia.co.it/servizi/catasto_e_urbanistica/servizio_59.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.campione-d-italia.co.it/servizi/catasto_e_urbanistica/servizio_59.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:03:55.253208Z"
+  },
+  "cambio_residenza": {
+   "service_id": "013040:hgate:35",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.campione-d-italia.co.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.campione-d-italia.co.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.campione-d-italia.co.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.campione-d-italia.co.it/servizi/anagrafe_e_stato_civile/servizio_35.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.campione-d-italia.co.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:03:50.255057Z"
+  },
+  "stato_civile": {
+   "service_id": "013040:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.campione-d-italia.co.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.campione-d-italia.co.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.campione-d-italia.co.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:03:53.932351Z"
+  },
+  "tributi_imu": {
+   "service_id": "013040:hgate:69",
+   "title": "IMU",
+   "source_url": "https://www.comune.campione-d-italia.co.it/servizi/tributi_finanze_e_contravvenzioni/servizio_69.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.campione-d-italia.co.it/servizi/tributi_finanze_e_contravvenzioni/servizio_69.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.campione-d-italia.co.it/servizi/tributi_finanze_e_contravvenzioni/servizio_69.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.campione-d-italia.co.it/servizi/tributi_finanze_e_contravvenzioni/servizio_69.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.campione-d-italia.co.it/servizi/tributi_finanze_e_contravvenzioni/servizio_69.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:03:56.562566Z"
+  }
+ }
+}

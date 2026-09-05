@@ -1,0 +1,276 @@
+{
+ "municipality_istat": "108055",
+ "services": {
+  "accesso_atti": {
+   "service_id": "108055:hgate:74",
+   "title": "Richiedere l'accesso atti per le Pratiche Edilizie",
+   "source_url": "https://www.comune.roncello.mb.it/servizi/ambiente/servizio_74.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.roncello.mb.it/servizi/ambiente/servizio_74.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.roncello.mb.it/servizi/ambiente/servizio_74.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.roncello.mb.it/servizi/ambiente/servizio_74.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.roncello.mb.it/servizi/ambiente/servizio_74.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T03:29:31.908367Z"
+  },
+  "cambio_residenza": {
+   "service_id": "108055:hgate:62",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.roncello.mb.it/servizi/anagrafe_e_stato_civile/servizio_62.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.roncello.mb.it/servizi/anagrafe_e_stato_civile/servizio_62.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.roncello.mb.it/servizi/anagrafe_e_stato_civile/servizio_62.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.roncello.mb.it/servizi/anagrafe_e_stato_civile/servizio_62.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.roncello.mb.it/servizi/anagrafe_e_stato_civile/servizio_62.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T03:29:29.324491Z"
+  },
+  "carta_identita": {
+   "service_id": "108055:hgate:37",
+   "title": "CIE",
+   "source_url": "https://www.comune.roncello.mb.it/servizi/anagrafe_e_stato_civile/servizio_37.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.roncello.mb.it/servizi/anagrafe_e_stato_civile/servizio_37.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.roncello.mb.it/servizi/anagrafe_e_stato_civile/servizio_37.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.roncello.mb.it/servizi/anagrafe_e_stato_civile/servizio_37.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.roncello.mb.it/servizi/anagrafe_e_stato_civile/servizio_37.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.roncello.mb.it/halley//ht/eg118/TMPA215056.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.roncello.mb.it/servizi/anagrafe_e_stato_civile/servizio_37.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T03:29:25.511275Z"
+  },
+  "stato_civile": {
+   "service_id": "108055:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.roncello.mb.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.roncello.mb.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.roncello.mb.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.roncello.mb.it/servizi/catasto_e_urbanistica/servizio_58.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.roncello.mb.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://roncello.multeonline.it/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.roncello.mb.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.cemambiente.it/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.roncello.mb.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.nordesttrasporti.it/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.roncello.mb.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "http://www.offertasociale.it/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.roncello.mb.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://afolmonzabrianza.it/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.roncello.mb.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://comunedironcello.whistleblowing.it/#/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.roncello.mb.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T03:29:30.638873Z"
+  },
+  "tributi_imu": {
+   "service_id": "108055:hgate:53",
+   "title": "Calcolo IMU",
+   "source_url": "https://www.comune.roncello.mb.it/servizi/tributi_finanze_e_contravvenzioni/servizio_53.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.roncello.mb.it/servizi/tributi_finanze_e_contravvenzioni/servizio_53.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.roncello.mb.it/servizi/tributi_finanze_e_contravvenzioni/servizio_53.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.roncello.mb.it/servizi/tributi_finanze_e_contravvenzioni/servizio_53.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.roncello.mb.it/servizi/tributi_finanze_e_contravvenzioni/servizio_53.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T03:29:40.221368Z"
+  }
+ }
+}

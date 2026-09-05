@@ -1,0 +1,198 @@
+{
+ "municipality_istat": "076055",
+ "services": {
+  "accesso_atti": {
+   "service_id": "076055:hgate:8",
+   "title": "Accesso agli atti",
+   "source_url": "https://www.comune.noepoli.pz.it/servizi/vita_lavorativa/servizio_8.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.noepoli.pz.it/servizi/vita_lavorativa/servizio_8.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.noepoli.pz.it/servizi/vita_lavorativa/servizio_8.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.noepoli.pz.it/servizi/vita_lavorativa/servizio_8.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.noepoli.pz.it/servizi/vita_lavorativa/servizio_8.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:59:20.572570Z"
+  },
+  "cambio_residenza": {
+   "service_id": "076055:hgate:40",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.noepoli.pz.it/servizi/anagrafe_e_stato_civile/servizio_40.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.noepoli.pz.it/servizi/anagrafe_e_stato_civile/servizio_40.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.noepoli.pz.it/servizi/anagrafe_e_stato_civile/servizio_40.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.noepoli.pz.it/servizi/anagrafe_e_stato_civile/servizio_40.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.noepoli.pz.it/servizi/anagrafe_e_stato_civile/servizio_40.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:59:18.082530Z"
+  },
+  "carta_identita": {
+   "service_id": "076055:hgate:36",
+   "title": "Carta d'identità elettronica",
+   "source_url": "https://www.comune.noepoli.pz.it/servizi/anagrafe_e_stato_civile/servizio_36.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.noepoli.pz.it/servizi/anagrafe_e_stato_civile/servizio_36.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.noepoli.pz.it/servizi/anagrafe_e_stato_civile/servizio_36.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.noepoli.pz.it/servizi/anagrafe_e_stato_civile/servizio_36.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.noepoli.pz.it/servizi/anagrafe_e_stato_civile/servizio_36.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:59:14.479121Z"
+  },
+  "stato_civile": {
+   "service_id": "076055:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.noepoli.pz.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.noepoli.pz.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.noepoli.pz.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.regione.basilicata.it/giunta/site/giunta/department.jsp?dep=100050&area=2992547&level=0",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.noepoli.pz.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.servizidemografici.com/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.noepoli.pz.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:59:19.331937Z"
+  },
+  "tributi_imu": {
+   "service_id": "076055:hgate:35",
+   "title": "Calcolo IMU",
+   "source_url": "https://www.comune.noepoli.pz.it/servizi/tributi_finanze_e_contravvenzioni/servizio_35.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.noepoli.pz.it/servizi/tributi_finanze_e_contravvenzioni/servizio_35.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.noepoli.pz.it/servizi/tributi_finanze_e_contravvenzioni/servizio_35.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.noepoli.pz.it/servizi/tributi_finanze_e_contravvenzioni/servizio_35.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.noepoli.pz.it/servizi/tributi_finanze_e_contravvenzioni/servizio_35.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:59:21.814757Z"
+  }
+ }
+}

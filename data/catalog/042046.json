@@ -1,0 +1,208 @@
+{
+ "municipality_istat": "042046",
+ "services": {
+  "accesso_atti": {
+   "service_id": "042046:hgate:12",
+   "title": "Accesso agli atti",
+   "source_url": "https://www.comune.serradeconti.an.it/servizi/autorizzazioni/servizio_12.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.serradeconti.an.it/servizi/autorizzazioni/servizio_12.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.serradeconti.an.it/servizi/autorizzazioni/servizio_12.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.serradeconti.an.it/servizi/autorizzazioni/servizio_12.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.serradeconti.an.it/servizi/autorizzazioni/servizio_12.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:50:15.094587Z"
+  },
+  "cambio_residenza": {
+   "service_id": "042046:hgate:83",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.serradeconti.an.it/servizi/anagrafe_e_stato_civile/servizio_83.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.serradeconti.an.it/servizi/anagrafe_e_stato_civile/servizio_83.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.serradeconti.an.it/servizi/anagrafe_e_stato_civile/servizio_83.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.serradeconti.an.it/servizi/anagrafe_e_stato_civile/servizio_83.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.serradeconti.an.it/servizi/anagrafe_e_stato_civile/servizio_83.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:50:12.416014Z"
+  },
+  "carta_identita": {
+   "service_id": "042046:hgate:86",
+   "title": "Carta d'identità elettronica",
+   "source_url": "https://www.comune.serradeconti.an.it/servizi/anagrafe_e_stato_civile/servizio_86.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.serradeconti.an.it/servizi/anagrafe_e_stato_civile/servizio_86.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.serradeconti.an.it/servizi/anagrafe_e_stato_civile/servizio_86.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.serradeconti.an.it/servizi/anagrafe_e_stato_civile/servizio_86.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.serradeconti.an.it/servizi/anagrafe_e_stato_civile/servizio_86.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:50:08.690574Z"
+  },
+  "stato_civile": {
+   "service_id": "042046:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.serradeconti.an.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.serradeconti.an.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.serradeconti.an.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:50:13.701117Z"
+  },
+  "tributi_imu": {
+   "service_id": "042046:hgate:70",
+   "title": "Calcolo IMU",
+   "source_url": "https://www.comune.serradeconti.an.it/servizi/tributi_finanze_e_contravvenzioni/servizio_70.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.serradeconti.an.it/servizi/tributi_finanze_e_contravvenzioni/servizio_70.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.serradeconti.an.it/servizi/tributi_finanze_e_contravvenzioni/servizio_70.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.serradeconti.an.it/servizi/tributi_finanze_e_contravvenzioni/servizio_70.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.serradeconti.an.it/servizi/tributi_finanze_e_contravvenzioni/servizio_70.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:50:16.595721Z"
+  },
+  "tributi_tari": {
+   "service_id": "042046:hgate:31",
+   "title": "TARI",
+   "source_url": "https://www.comune.serradeconti.an.it/servizi/tributi_finanze_e_contravvenzioni/servizio_31.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.serradeconti.an.it/servizi/tributi_finanze_e_contravvenzioni/servizio_31.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.serradeconti.an.it/servizi/tributi_finanze_e_contravvenzioni/servizio_31.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.serradeconti.an.it/servizi/tributi_finanze_e_contravvenzioni/servizio_31.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.serradeconti.an.it/servizi/tributi_finanze_e_contravvenzioni/servizio_31.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:50:17.852392Z"
+  }
+ }
+}

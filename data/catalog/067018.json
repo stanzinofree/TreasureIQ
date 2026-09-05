@@ -1,0 +1,211 @@
+{
+ "municipality_istat": "067018",
+ "services": {
+  "accesso_atti": {
+   "service_id": "067018:hgate:8",
+   "title": "Accesso agli atti amministrativi",
+   "source_url": "https://www.comune.colledara.te.it/servizi/autorizzazioni/servizio_8.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.colledara.te.it/servizi/autorizzazioni/servizio_8.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.colledara.te.it/servizi/autorizzazioni/servizio_8.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.colledara.te.it/servizi/autorizzazioni/servizio_8.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.colledara.te.it/servizi/autorizzazioni/servizio_8.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:40:25.526642Z"
+  },
+  "cambio_residenza": {
+   "service_id": "067018:hgate:35",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.colledara.te.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.colledara.te.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.colledara.te.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.colledara.te.it/servizi/anagrafe_e_stato_civile/servizio_35.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.colledara.te.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:40:23.050014Z"
+  },
+  "carta_identita": {
+   "service_id": "067018:hgate:39",
+   "title": "Carta d'identità elettronica",
+   "source_url": "https://www.comune.colledara.te.it/servizi/educazione_e_formazione/servizio_39.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.colledara.te.it/servizi/educazione_e_formazione/servizio_39.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.colledara.te.it/servizi/educazione_e_formazione/servizio_39.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.colledara.te.it/servizi/educazione_e_formazione/servizio_39.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.colledara.te.it/servizi/educazione_e_formazione/servizio_39.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:40:19.411239Z"
+  },
+  "stato_civile": {
+   "service_id": "067018:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.colledara.te.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.colledara.te.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.colledara.te.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://colledara.geoportal.it/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.colledara.te.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.valledelgransasso.it/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.colledara.te.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.indicepa.it/ipa-portale/consultazione/domicilio-digitale/ricerca-domicili-digitali-ente/scheda-ente/5299",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.colledara.te.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:40:24.314546Z"
+  },
+  "tributi_imu": {
+   "service_id": "067018:hgate:46",
+   "title": "IMU",
+   "source_url": "https://www.comune.colledara.te.it/servizi/tributi_finanze_e_contravvenzioni/servizio_46.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.colledara.te.it/servizi/tributi_finanze_e_contravvenzioni/servizio_46.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.colledara.te.it/servizi/tributi_finanze_e_contravvenzioni/servizio_46.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.colledara.te.it/servizi/tributi_finanze_e_contravvenzioni/servizio_46.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.colledara.te.it/servizi/tributi_finanze_e_contravvenzioni/servizio_46.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:40:26.762005Z"
+  }
+ }
+}

@@ -1,0 +1,136 @@
+{
+ "municipality_istat": "015051",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "015051:hgate:35",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.carugate.mi.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.carugate.mi.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.carugate.mi.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.carugate.mi.it/servizi/anagrafe_e_stato_civile/servizio_35.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.carugate.mi.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:22:29.632463Z"
+  },
+  "carta_identita": {
+   "service_id": "015051:hgate:46",
+   "title": "Carta d'Identità Elettronica",
+   "source_url": "https://www.comune.carugate.mi.it/servizi/anagrafe_e_stato_civile/servizio_46.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.carugate.mi.it/servizi/anagrafe_e_stato_civile/servizio_46.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.carugate.mi.it/servizi/anagrafe_e_stato_civile/servizio_46.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.carugate.mi.it/servizi/anagrafe_e_stato_civile/servizio_46.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.carugate.mi.it/servizi/anagrafe_e_stato_civile/servizio_46.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:22:25.407163Z"
+  },
+  "stato_civile": {
+   "service_id": "015051:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.carugate.mi.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.carugate.mi.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.carugate.mi.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:22:31.148706Z"
+  },
+  "tributi_tari": {
+   "service_id": "015051:hgate:42",
+   "title": "TARI",
+   "source_url": "https://www.comune.carugate.mi.it/servizi/tributi_finanze_e_contravvenzioni/servizio_42.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.carugate.mi.it/servizi/tributi_finanze_e_contravvenzioni/servizio_42.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.carugate.mi.it/servizi/tributi_finanze_e_contravvenzioni/servizio_42.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.carugate.mi.it/servizi/tributi_finanze_e_contravvenzioni/servizio_42.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.carugate.mi.it/servizi/tributi_finanze_e_contravvenzioni/servizio_42.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:22:32.405926Z"
+  }
+ }
+}

@@ -1,0 +1,172 @@
+{
+ "municipality_istat": "066061",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "066061:hgate:35",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.opi.aq.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.opi.aq.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.opi.aq.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.opi.aq.it/servizi/anagrafe_e_stato_civile/servizio_35.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.opi.aq.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:38:00.005159Z"
+  },
+  "carta_identita": {
+   "service_id": "066061:hgate:41",
+   "title": "Carta d'identità elettronica",
+   "source_url": "https://www.comune.opi.aq.it/servizi/anagrafe_e_stato_civile/servizio_41.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.opi.aq.it/servizi/anagrafe_e_stato_civile/servizio_41.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.opi.aq.it/servizi/anagrafe_e_stato_civile/servizio_41.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.opi.aq.it/servizi/anagrafe_e_stato_civile/servizio_41.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.opi.aq.it/servizi/anagrafe_e_stato_civile/servizio_41.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:37:55.785635Z"
+  },
+  "stato_civile": {
+   "service_id": "066061:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.opi.aq.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.opi.aq.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.opi.aq.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:38:01.310404Z"
+  },
+  "tributi_imu": {
+   "service_id": "066061:hgate:18",
+   "title": "Pagamento IMU",
+   "source_url": "https://www.comune.opi.aq.it/servizi/tributi_finanze_e_contravvenzioni/servizio_18.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.opi.aq.it/servizi/tributi_finanze_e_contravvenzioni/servizio_18.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.opi.aq.it/servizi/tributi_finanze_e_contravvenzioni/servizio_18.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.opi.aq.it/servizi/tributi_finanze_e_contravvenzioni/servizio_18.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.opi.aq.it/servizi/tributi_finanze_e_contravvenzioni/servizio_18.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:38:02.667274Z"
+  },
+  "tributi_tari": {
+   "service_id": "066061:hgate:38",
+   "title": "TARI",
+   "source_url": "https://www.comune.opi.aq.it/servizi/tributi_finanze_e_contravvenzioni/servizio_38.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.opi.aq.it/servizi/tributi_finanze_e_contravvenzioni/servizio_38.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.opi.aq.it/servizi/tributi_finanze_e_contravvenzioni/servizio_38.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.opi.aq.it/servizi/tributi_finanze_e_contravvenzioni/servizio_38.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.opi.aq.it/servizi/tributi_finanze_e_contravvenzioni/servizio_38.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:38:03.912869Z"
+  }
+ }
+}

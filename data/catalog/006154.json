@@ -1,0 +1,172 @@
+{
+ "municipality_istat": "006154",
+ "services": {
+  "accesso_atti": {
+   "service_id": "006154:hgate:8",
+   "title": "Accesso agli atti",
+   "source_url": "https://www.comune.sansalvatoremonferrato.al.it/servizi/vita_lavorativa/servizio_8.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sansalvatoremonferrato.al.it/servizi/vita_lavorativa/servizio_8.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sansalvatoremonferrato.al.it/servizi/vita_lavorativa/servizio_8.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.sansalvatoremonferrato.al.it/servizi/vita_lavorativa/servizio_8.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.sansalvatoremonferrato.al.it/servizi/vita_lavorativa/servizio_8.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T00:44:27.508636Z"
+  },
+  "cambio_residenza": {
+   "service_id": "006154:hgate:35",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.sansalvatoremonferrato.al.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sansalvatoremonferrato.al.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sansalvatoremonferrato.al.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.sansalvatoremonferrato.al.it/servizi/anagrafe_e_stato_civile/servizio_35.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.sansalvatoremonferrato.al.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T00:44:21.919400Z"
+  },
+  "stato_civile": {
+   "service_id": "006154:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.sansalvatoremonferrato.al.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sansalvatoremonferrato.al.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sansalvatoremonferrato.al.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T00:44:26.192640Z"
+  },
+  "tributi_imu": {
+   "service_id": "006154:hgate:40",
+   "title": "IMU",
+   "source_url": "https://www.comune.sansalvatoremonferrato.al.it/servizi/tributi_finanze_e_contravvenzioni/servizio_40.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sansalvatoremonferrato.al.it/servizi/tributi_finanze_e_contravvenzioni/servizio_40.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sansalvatoremonferrato.al.it/servizi/tributi_finanze_e_contravvenzioni/servizio_40.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.sansalvatoremonferrato.al.it/servizi/tributi_finanze_e_contravvenzioni/servizio_40.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.sansalvatoremonferrato.al.it/servizi/tributi_finanze_e_contravvenzioni/servizio_40.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T00:44:28.790336Z"
+  },
+  "tributi_tari": {
+   "service_id": "006154:hgate:39",
+   "title": "TARI",
+   "source_url": "https://www.comune.sansalvatoremonferrato.al.it/servizi/tributi_finanze_e_contravvenzioni/servizio_39.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sansalvatoremonferrato.al.it/servizi/tributi_finanze_e_contravvenzioni/servizio_39.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sansalvatoremonferrato.al.it/servizi/tributi_finanze_e_contravvenzioni/servizio_39.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.sansalvatoremonferrato.al.it/servizi/tributi_finanze_e_contravvenzioni/servizio_39.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.sansalvatoremonferrato.al.it/servizi/tributi_finanze_e_contravvenzioni/servizio_39.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T00:44:30.110110Z"
+  }
+ }
+}

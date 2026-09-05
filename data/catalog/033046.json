@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "033046",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "033046:hgate:58",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.villanova.pc.it/servizi/anagrafe_e_stato_civile/servizio_58.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.villanova.pc.it/servizi/anagrafe_e_stato_civile/servizio_58.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.villanova.pc.it/servizi/anagrafe_e_stato_civile/servizio_58.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.villanova.pc.it/servizi/anagrafe_e_stato_civile/servizio_58.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.villanova.pc.it/servizi/anagrafe_e_stato_civile/servizio_58.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:45:48.001435Z"
+  },
+  "carta_identita": {
+   "service_id": "033046:hgate:77",
+   "title": "Carta d'Identità Elettronica CIE",
+   "source_url": "https://www.comune.villanova.pc.it/servizi/anagrafe_e_stato_civile/servizio_77.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.villanova.pc.it/servizi/anagrafe_e_stato_civile/servizio_77.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.villanova.pc.it/servizi/anagrafe_e_stato_civile/servizio_77.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.villanova.pc.it/servizi/anagrafe_e_stato_civile/servizio_77.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.villanova.pc.it/servizi/anagrafe_e_stato_civile/servizio_77.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:45:44.226988Z"
+  },
+  "stato_civile": {
+   "service_id": "033046:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.villanova.pc.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.villanova.pc.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.villanova.pc.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:45:49.293674Z"
+  }
+ }
+}

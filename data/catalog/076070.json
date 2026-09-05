@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "076070",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "076070:hgate:102",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.rotonda.pz.it/servizi/anagrafe_e_stato_civile/servizio_102.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rotonda.pz.it/servizi/anagrafe_e_stato_civile/servizio_102.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rotonda.pz.it/servizi/anagrafe_e_stato_civile/servizio_102.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.rotonda.pz.it/servizi/anagrafe_e_stato_civile/servizio_102.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.rotonda.pz.it/servizi/anagrafe_e_stato_civile/servizio_102.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:59:50.029849Z"
+  },
+  "carta_identita": {
+   "service_id": "076070:hgate:94",
+   "title": "Carta d'identità elettronica",
+   "source_url": "https://www.comune.rotonda.pz.it/servizi/anagrafe_e_stato_civile/servizio_94.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rotonda.pz.it/servizi/anagrafe_e_stato_civile/servizio_94.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rotonda.pz.it/servizi/anagrafe_e_stato_civile/servizio_94.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.rotonda.pz.it/servizi/anagrafe_e_stato_civile/servizio_94.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.rotonda.pz.it/servizi/anagrafe_e_stato_civile/servizio_94.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:59:46.358738Z"
+  },
+  "stato_civile": {
+   "service_id": "076070:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.rotonda.pz.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rotonda.pz.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rotonda.pz.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:59:51.292198Z"
+  }
+ }
+}

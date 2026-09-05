@@ -1,0 +1,172 @@
+{
+ "municipality_istat": "065106",
+ "services": {
+  "accesso_atti": {
+   "service_id": "065106:hgate:8",
+   "title": "Accesso agli atti",
+   "source_url": "https://www.comune.roccadaspide.sa.it/servizi/vita_lavorativa/servizio_8.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.roccadaspide.sa.it/servizi/vita_lavorativa/servizio_8.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.roccadaspide.sa.it/servizi/vita_lavorativa/servizio_8.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.roccadaspide.sa.it/servizi/vita_lavorativa/servizio_8.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.roccadaspide.sa.it/servizi/vita_lavorativa/servizio_8.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:34:48.601506Z"
+  },
+  "cambio_residenza": {
+   "service_id": "065106:hgate:35",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.roccadaspide.sa.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.roccadaspide.sa.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.roccadaspide.sa.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.roccadaspide.sa.it/servizi/anagrafe_e_stato_civile/servizio_35.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.roccadaspide.sa.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:34:43.370292Z"
+  },
+  "stato_civile": {
+   "service_id": "065106:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.roccadaspide.sa.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.roccadaspide.sa.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.roccadaspide.sa.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:34:47.196748Z"
+  },
+  "tributi_imu": {
+   "service_id": "065106:hgate:31",
+   "title": "Sportello IMU",
+   "source_url": "https://www.comune.roccadaspide.sa.it/servizi/tributi_finanze_e_contravvenzioni/servizio_31.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.roccadaspide.sa.it/servizi/tributi_finanze_e_contravvenzioni/servizio_31.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.roccadaspide.sa.it/servizi/tributi_finanze_e_contravvenzioni/servizio_31.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.roccadaspide.sa.it/servizi/tributi_finanze_e_contravvenzioni/servizio_31.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.roccadaspide.sa.it/servizi/tributi_finanze_e_contravvenzioni/servizio_31.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:34:49.853252Z"
+  },
+  "tributi_tari": {
+   "service_id": "065106:hgate:38",
+   "title": "Pagamento TARI",
+   "source_url": "https://www.comune.roccadaspide.sa.it/servizi/tributi_finanze_e_contravvenzioni/servizio_38.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.roccadaspide.sa.it/servizi/tributi_finanze_e_contravvenzioni/servizio_38.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.roccadaspide.sa.it/servizi/tributi_finanze_e_contravvenzioni/servizio_38.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.roccadaspide.sa.it/servizi/tributi_finanze_e_contravvenzioni/servizio_38.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.roccadaspide.sa.it/servizi/tributi_finanze_e_contravvenzioni/servizio_38.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:34:51.104936Z"
+  }
+ }
+}

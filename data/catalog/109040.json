@@ -1,0 +1,136 @@
+{
+ "municipality_istat": "109040",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "109040:hgate:45",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.torresanpatrizio.fm.it/servizi/anagrafe_e_stato_civile/servizio_45.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.torresanpatrizio.fm.it/servizi/anagrafe_e_stato_civile/servizio_45.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.torresanpatrizio.fm.it/servizi/anagrafe_e_stato_civile/servizio_45.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.torresanpatrizio.fm.it/servizi/anagrafe_e_stato_civile/servizio_45.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.torresanpatrizio.fm.it/servizi/anagrafe_e_stato_civile/servizio_45.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T03:30:21.426097Z"
+  },
+  "carta_identita": {
+   "service_id": "109040:hgate:38",
+   "title": "Carta d'Identità Elettronica",
+   "source_url": "https://www.comune.torresanpatrizio.fm.it/servizi/anagrafe_e_stato_civile/servizio_38.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.torresanpatrizio.fm.it/servizi/anagrafe_e_stato_civile/servizio_38.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.torresanpatrizio.fm.it/servizi/anagrafe_e_stato_civile/servizio_38.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.torresanpatrizio.fm.it/servizi/anagrafe_e_stato_civile/servizio_38.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.torresanpatrizio.fm.it/servizi/anagrafe_e_stato_civile/servizio_38.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T03:30:17.693557Z"
+  },
+  "stato_civile": {
+   "service_id": "109040:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.torresanpatrizio.fm.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.torresanpatrizio.fm.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.torresanpatrizio.fm.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T03:30:22.724347Z"
+  },
+  "tributi_tari": {
+   "service_id": "109040:hgate:39",
+   "title": "TARI",
+   "source_url": "https://www.comune.torresanpatrizio.fm.it/servizi/tributi_finanze_e_contravvenzioni/servizio_39.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.torresanpatrizio.fm.it/servizi/tributi_finanze_e_contravvenzioni/servizio_39.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.torresanpatrizio.fm.it/servizi/tributi_finanze_e_contravvenzioni/servizio_39.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.torresanpatrizio.fm.it/servizi/tributi_finanze_e_contravvenzioni/servizio_39.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.torresanpatrizio.fm.it/servizi/tributi_finanze_e_contravvenzioni/servizio_39.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T03:30:24.023433Z"
+  }
+ }
+}

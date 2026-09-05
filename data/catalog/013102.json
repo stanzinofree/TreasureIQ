@@ -1,0 +1,208 @@
+{
+ "municipality_istat": "013102",
+ "services": {
+  "accesso_atti": {
+   "service_id": "013102:hgate:41",
+   "title": "Accesso agli atti",
+   "source_url": "https://www.comune.finomornasco.co.it/servizi/catasto_e_urbanistica/servizio_41.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.finomornasco.co.it/servizi/catasto_e_urbanistica/servizio_41.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.finomornasco.co.it/servizi/catasto_e_urbanistica/servizio_41.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.finomornasco.co.it/servizi/catasto_e_urbanistica/servizio_41.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.finomornasco.co.it/servizi/catasto_e_urbanistica/servizio_41.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:07:24.864461Z"
+  },
+  "cambio_residenza": {
+   "service_id": "013102:hgate:35",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.finomornasco.co.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.finomornasco.co.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.finomornasco.co.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.finomornasco.co.it/servizi/anagrafe_e_stato_civile/servizio_35.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.finomornasco.co.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:07:22.184918Z"
+  },
+  "carta_identita": {
+   "service_id": "013102:hgate:38",
+   "title": "Carta d'identità elettronica (CIE)",
+   "source_url": "https://www.comune.finomornasco.co.it/servizi/anagrafe_e_stato_civile/servizio_38.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.finomornasco.co.it/servizi/anagrafe_e_stato_civile/servizio_38.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.finomornasco.co.it/servizi/anagrafe_e_stato_civile/servizio_38.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.finomornasco.co.it/servizi/anagrafe_e_stato_civile/servizio_38.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.finomornasco.co.it/servizi/anagrafe_e_stato_civile/servizio_38.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:07:18.201511Z"
+  },
+  "stato_civile": {
+   "service_id": "013102:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.finomornasco.co.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.finomornasco.co.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.finomornasco.co.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:07:23.482647Z"
+  },
+  "tributi_imu": {
+   "service_id": "013102:hgate:46",
+   "title": "IMU",
+   "source_url": "https://www.comune.finomornasco.co.it/servizi/tributi_finanze_e_contravvenzioni/servizio_46.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.finomornasco.co.it/servizi/tributi_finanze_e_contravvenzioni/servizio_46.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.finomornasco.co.it/servizi/tributi_finanze_e_contravvenzioni/servizio_46.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.finomornasco.co.it/servizi/tributi_finanze_e_contravvenzioni/servizio_46.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.finomornasco.co.it/servizi/tributi_finanze_e_contravvenzioni/servizio_46.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:07:26.154488Z"
+  },
+  "tributi_tari": {
+   "service_id": "013102:hgate:45",
+   "title": "Tassa Rifiuti (TARI)",
+   "source_url": "https://www.comune.finomornasco.co.it/servizi/tributi_finanze_e_contravvenzioni/servizio_45.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.finomornasco.co.it/servizi/tributi_finanze_e_contravvenzioni/servizio_45.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.finomornasco.co.it/servizi/tributi_finanze_e_contravvenzioni/servizio_45.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.finomornasco.co.it/servizi/tributi_finanze_e_contravvenzioni/servizio_45.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.finomornasco.co.it/servizi/tributi_finanze_e_contravvenzioni/servizio_45.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:07:27.439817Z"
+  }
+ }
+}

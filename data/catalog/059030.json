@@ -1,0 +1,172 @@
+{
+ "municipality_istat": "059030",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "059030:hgate:56",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.sperlonga.lt.it/servizi/anagrafe_e_stato_civile/servizio_56.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sperlonga.lt.it/servizi/anagrafe_e_stato_civile/servizio_56.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sperlonga.lt.it/servizi/anagrafe_e_stato_civile/servizio_56.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.sperlonga.lt.it/servizi/anagrafe_e_stato_civile/servizio_56.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.sperlonga.lt.it/servizi/anagrafe_e_stato_civile/servizio_56.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:08:15.737608Z"
+  },
+  "carta_identita": {
+   "service_id": "059030:hgate:59",
+   "title": "Carta d'identità elettronica",
+   "source_url": "https://www.comune.sperlonga.lt.it/servizi/anagrafe_e_stato_civile/servizio_59.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sperlonga.lt.it/servizi/anagrafe_e_stato_civile/servizio_59.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sperlonga.lt.it/servizi/anagrafe_e_stato_civile/servizio_59.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.sperlonga.lt.it/servizi/anagrafe_e_stato_civile/servizio_59.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.sperlonga.lt.it/servizi/anagrafe_e_stato_civile/servizio_59.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:08:12.026045Z"
+  },
+  "stato_civile": {
+   "service_id": "059030:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.sperlonga.lt.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sperlonga.lt.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sperlonga.lt.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:08:16.988330Z"
+  },
+  "tributi_imu": {
+   "service_id": "059030:hgate:43",
+   "title": "Sportello IMU",
+   "source_url": "https://www.comune.sperlonga.lt.it/servizi/tributi_finanze_e_contravvenzioni/servizio_43.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sperlonga.lt.it/servizi/tributi_finanze_e_contravvenzioni/servizio_43.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sperlonga.lt.it/servizi/tributi_finanze_e_contravvenzioni/servizio_43.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.sperlonga.lt.it/servizi/tributi_finanze_e_contravvenzioni/servizio_43.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.sperlonga.lt.it/servizi/tributi_finanze_e_contravvenzioni/servizio_43.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:08:18.238409Z"
+  },
+  "tributi_tari": {
+   "service_id": "059030:hgate:36",
+   "title": "TARI",
+   "source_url": "https://www.comune.sperlonga.lt.it/servizi/tributi_finanze_e_contravvenzioni/servizio_36.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sperlonga.lt.it/servizi/tributi_finanze_e_contravvenzioni/servizio_36.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sperlonga.lt.it/servizi/tributi_finanze_e_contravvenzioni/servizio_36.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.sperlonga.lt.it/servizi/tributi_finanze_e_contravvenzioni/servizio_36.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.sperlonga.lt.it/servizi/tributi_finanze_e_contravvenzioni/servizio_36.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:08:22.485251Z"
+  }
+ }
+}

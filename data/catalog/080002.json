@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "080002",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "080002:hgate:38",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.agnana.rc.it/servizi/anagrafe_e_stato_civile/servizio_38.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.agnana.rc.it/servizi/anagrafe_e_stato_civile/servizio_38.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.agnana.rc.it/servizi/anagrafe_e_stato_civile/servizio_38.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.agnana.rc.it/servizi/anagrafe_e_stato_civile/servizio_38.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.agnana.rc.it/servizi/anagrafe_e_stato_civile/servizio_38.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T03:03:15.269402Z"
+  },
+  "carta_identita": {
+   "service_id": "080002:hgate:33",
+   "title": "La Carta Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.agnana.rc.it/servizi/anagrafe_e_stato_civile/servizio_33.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.agnana.rc.it/servizi/anagrafe_e_stato_civile/servizio_33.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.agnana.rc.it/servizi/anagrafe_e_stato_civile/servizio_33.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.agnana.rc.it/servizi/anagrafe_e_stato_civile/servizio_33.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.agnana.rc.it/servizi/anagrafe_e_stato_civile/servizio_33.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T03:03:11.672561Z"
+  },
+  "stato_civile": {
+   "service_id": "080002:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.agnana.rc.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.agnana.rc.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.agnana.rc.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T03:03:16.648663Z"
+  }
+ }
+}

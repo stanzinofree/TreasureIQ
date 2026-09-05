@@ -1,0 +1,175 @@
+{
+ "municipality_istat": "060083",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "060083:hgate:106",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.vallemaio.fr.it/servizi/anagrafe_e_stato_civile/servizio_106.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vallemaio.fr.it/servizi/anagrafe_e_stato_civile/servizio_106.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vallemaio.fr.it/servizi/anagrafe_e_stato_civile/servizio_106.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.vallemaio.fr.it/servizi/anagrafe_e_stato_civile/servizio_106.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.vallemaio.fr.it/servizi/anagrafe_e_stato_civile/servizio_106.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:09:34.095267Z"
+  },
+  "carta_identita": {
+   "service_id": "060083:hgate:30",
+   "title": "Carta d'identità elettronica",
+   "source_url": "https://www.comune.vallemaio.fr.it/servizi/anagrafe_e_stato_civile/servizio_30.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vallemaio.fr.it/servizi/anagrafe_e_stato_civile/servizio_30.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vallemaio.fr.it/servizi/anagrafe_e_stato_civile/servizio_30.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.vallemaio.fr.it/servizi/anagrafe_e_stato_civile/servizio_30.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.vallemaio.fr.it/servizi/anagrafe_e_stato_civile/servizio_30.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:09:23.274945Z"
+  },
+  "stato_civile": {
+   "service_id": "060083:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.vallemaio.fr.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vallemaio.fr.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vallemaio.fr.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.consorzioservizisociali.fr.it/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.vallemaio.fr.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.normattiva.it/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.vallemaio.fr.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.halleyweb.com/c060083/zf/index.php/trasparenza-rifiuti/index/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.vallemaio.fr.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:09:35.400855Z"
+  },
+  "tributi_imu": {
+   "service_id": "060083:hgate:46",
+   "title": "IMU",
+   "source_url": "https://www.comune.vallemaio.fr.it/servizi/tributi_finanze_e_contravvenzioni/servizio_46.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.vallemaio.fr.it/servizi/tributi_finanze_e_contravvenzioni/servizio_46.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.vallemaio.fr.it/servizi/tributi_finanze_e_contravvenzioni/servizio_46.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.vallemaio.fr.it/servizi/tributi_finanze_e_contravvenzioni/servizio_46.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.vallemaio.fr.it/servizi/tributi_finanze_e_contravvenzioni/servizio_46.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:09:37.287999Z"
+  }
+ }
+}

@@ -1,0 +1,149 @@
+{
+ "municipality_istat": "017038",
+ "services": {
+  "accesso_atti": {
+   "service_id": "017038:hgate:8",
+   "title": "Accesso agli atti",
+   "source_url": "https://www.capriolo.org/servizi/catasto_e_urbanistica/servizio_8.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.capriolo.org/servizi/catasto_e_urbanistica/servizio_8.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.capriolo.org/servizi/catasto_e_urbanistica/servizio_8.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.capriolo.org/servizi/catasto_e_urbanistica/servizio_8.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.capriolo.org/servizi/catasto_e_urbanistica/servizio_8.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.capriolo.cportal.it/Sportello/starch-cportal/crea-pratica/sue?Page=SCRIVANIA",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.capriolo.org/servizi/catasto_e_urbanistica/servizio_8.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:31:48.671779Z"
+  },
+  "cambio_residenza": {
+   "service_id": "017038:hgate:35",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.capriolo.org/servizi/anagrafe_e_stato_civile/servizio_35.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.capriolo.org/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.capriolo.org/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.capriolo.org/servizi/anagrafe_e_stato_civile/servizio_35.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.capriolo.org/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:31:46.009748Z"
+  },
+  "carta_identita": {
+   "service_id": "017038:hgate:47",
+   "title": "Carta d'identità elettronica",
+   "source_url": "https://www.capriolo.org/servizi/anagrafe_e_stato_civile/servizio_47.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.capriolo.org/servizi/anagrafe_e_stato_civile/servizio_47.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.capriolo.org/servizi/anagrafe_e_stato_civile/servizio_47.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.capriolo.org/servizi/anagrafe_e_stato_civile/servizio_47.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.capriolo.org/servizi/anagrafe_e_stato_civile/servizio_47.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:31:42.033302Z"
+  },
+  "stato_civile": {
+   "service_id": "017038:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.capriolo.org/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.capriolo.org/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.capriolo.org/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:31:47.317620Z"
+  }
+ }
+}

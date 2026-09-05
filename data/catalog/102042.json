@@ -1,0 +1,64 @@
+{
+ "municipality_istat": "102042",
+ "services": {
+  "stato_civile": {
+   "service_id": "102042:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.spilinga.vv.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.spilinga.vv.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.spilinga.vv.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T03:27:37.576505Z"
+  },
+  "tributi_imu": {
+   "service_id": "102042:hgate:18",
+   "title": "Sportello IMU",
+   "source_url": "https://www.comune.spilinga.vv.it/servizi/tributi_finanze_e_contravvenzioni/servizio_18.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.spilinga.vv.it/servizi/tributi_finanze_e_contravvenzioni/servizio_18.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.spilinga.vv.it/servizi/tributi_finanze_e_contravvenzioni/servizio_18.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.spilinga.vv.it/servizi/tributi_finanze_e_contravvenzioni/servizio_18.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.spilinga.vv.it/servizi/tributi_finanze_e_contravvenzioni/servizio_18.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T03:27:41.240194Z"
+  }
+ }
+}

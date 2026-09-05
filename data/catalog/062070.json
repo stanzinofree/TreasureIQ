@@ -1,0 +1,136 @@
+{
+ "municipality_istat": "062070",
+ "services": {
+  "accesso_atti": {
+   "service_id": "062070:hgate:8",
+   "title": "Accesso agli atti",
+   "source_url": "https://www.comune.santagatadegoti.bn.it/servizi/vita_lavorativa/servizio_8.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.santagatadegoti.bn.it/servizi/vita_lavorativa/servizio_8.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.santagatadegoti.bn.it/servizi/vita_lavorativa/servizio_8.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.santagatadegoti.bn.it/servizi/vita_lavorativa/servizio_8.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.santagatadegoti.bn.it/servizi/vita_lavorativa/servizio_8.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:20:07.305311Z"
+  },
+  "cambio_residenza": {
+   "service_id": "062070:hgate:40",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.santagatadegoti.bn.it/servizi/anagrafe_e_stato_civile/servizio_40.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.santagatadegoti.bn.it/servizi/anagrafe_e_stato_civile/servizio_40.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.santagatadegoti.bn.it/servizi/anagrafe_e_stato_civile/servizio_40.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.santagatadegoti.bn.it/servizi/anagrafe_e_stato_civile/servizio_40.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.santagatadegoti.bn.it/servizi/anagrafe_e_stato_civile/servizio_40.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:20:04.679688Z"
+  },
+  "carta_identita": {
+   "service_id": "062070:hgate:45",
+   "title": "Carta d'identità elettronica",
+   "source_url": "https://www.comune.santagatadegoti.bn.it/servizi/anagrafe_e_stato_civile/servizio_45.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.santagatadegoti.bn.it/servizi/anagrafe_e_stato_civile/servizio_45.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.santagatadegoti.bn.it/servizi/anagrafe_e_stato_civile/servizio_45.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.santagatadegoti.bn.it/servizi/anagrafe_e_stato_civile/servizio_45.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.santagatadegoti.bn.it/servizi/anagrafe_e_stato_civile/servizio_45.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:20:01.081418Z"
+  },
+  "stato_civile": {
+   "service_id": "062070:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.santagatadegoti.bn.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.santagatadegoti.bn.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.santagatadegoti.bn.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:20:05.971672Z"
+  }
+ }
+}

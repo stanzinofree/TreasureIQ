@@ -1,0 +1,208 @@
+{
+ "municipality_istat": "033014",
+ "services": {
+  "accesso_atti": {
+   "service_id": "033014:hgate:8",
+   "title": "Accesso agli atti amministrativi",
+   "source_url": "https://www.comune.castelvetro.pc.it/servizi/vita_lavorativa/servizio_8.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castelvetro.pc.it/servizi/vita_lavorativa/servizio_8.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castelvetro.pc.it/servizi/vita_lavorativa/servizio_8.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.castelvetro.pc.it/servizi/vita_lavorativa/servizio_8.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.castelvetro.pc.it/servizi/vita_lavorativa/servizio_8.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:44:14.083669Z"
+  },
+  "cambio_residenza": {
+   "service_id": "033014:hgate:41",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.castelvetro.pc.it/servizi/anagrafe_e_stato_civile/servizio_41.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castelvetro.pc.it/servizi/anagrafe_e_stato_civile/servizio_41.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castelvetro.pc.it/servizi/anagrafe_e_stato_civile/servizio_41.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.castelvetro.pc.it/servizi/anagrafe_e_stato_civile/servizio_41.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.castelvetro.pc.it/servizi/anagrafe_e_stato_civile/servizio_41.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:44:11.403302Z"
+  },
+  "carta_identita": {
+   "service_id": "033014:hgate:33",
+   "title": "CIE",
+   "source_url": "https://www.comune.castelvetro.pc.it/servizi/anagrafe_e_stato_civile/servizio_33.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castelvetro.pc.it/servizi/anagrafe_e_stato_civile/servizio_33.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castelvetro.pc.it/servizi/anagrafe_e_stato_civile/servizio_33.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.castelvetro.pc.it/servizi/anagrafe_e_stato_civile/servizio_33.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.castelvetro.pc.it/servizi/anagrafe_e_stato_civile/servizio_33.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:44:07.581887Z"
+  },
+  "stato_civile": {
+   "service_id": "033014:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.castelvetro.pc.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castelvetro.pc.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castelvetro.pc.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:44:12.706148Z"
+  },
+  "tributi_imu": {
+   "service_id": "033014:hgate:37",
+   "title": "Calcolo IMU",
+   "source_url": "https://www.comune.castelvetro.pc.it/servizi/tributi_finanze_e_contravvenzioni/servizio_37.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castelvetro.pc.it/servizi/tributi_finanze_e_contravvenzioni/servizio_37.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castelvetro.pc.it/servizi/tributi_finanze_e_contravvenzioni/servizio_37.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.castelvetro.pc.it/servizi/tributi_finanze_e_contravvenzioni/servizio_37.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.castelvetro.pc.it/servizi/tributi_finanze_e_contravvenzioni/servizio_37.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:44:15.418724Z"
+  },
+  "tributi_tari": {
+   "service_id": "033014:hgate:24",
+   "title": "TARI",
+   "source_url": "https://www.comune.castelvetro.pc.it/servizi/tributi_finanze_e_contravvenzioni/servizio_24.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.castelvetro.pc.it/servizi/tributi_finanze_e_contravvenzioni/servizio_24.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.castelvetro.pc.it/servizi/tributi_finanze_e_contravvenzioni/servizio_24.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.castelvetro.pc.it/servizi/tributi_finanze_e_contravvenzioni/servizio_24.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.castelvetro.pc.it/servizi/tributi_finanze_e_contravvenzioni/servizio_24.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:44:16.713819Z"
+  }
+ }
+}

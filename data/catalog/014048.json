@@ -1,0 +1,185 @@
+{
+ "municipality_istat": "014048",
+ "services": {
+  "accesso_atti": {
+   "service_id": "014048:hgate:8",
+   "title": "Accesso agli atti",
+   "source_url": "https://www.comune.piantedo.so.it/servizi/vita_lavorativa/servizio_8.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.piantedo.so.it/servizi/vita_lavorativa/servizio_8.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.piantedo.so.it/servizi/vita_lavorativa/servizio_8.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.piantedo.so.it/servizi/vita_lavorativa/servizio_8.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.piantedo.so.it/servizi/vita_lavorativa/servizio_8.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:19:49.326327Z"
+  },
+  "cambio_residenza": {
+   "service_id": "014048:hgate:42",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.piantedo.so.it/servizi/anagrafe_e_stato_civile/servizio_42.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.piantedo.so.it/servizi/anagrafe_e_stato_civile/servizio_42.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.piantedo.so.it/servizi/anagrafe_e_stato_civile/servizio_42.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.piantedo.so.it/servizi/anagrafe_e_stato_civile/servizio_42.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.piantedo.so.it/servizi/anagrafe_e_stato_civile/servizio_42.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.anagrafenazionale.interno.it/servizi-al-cittadino/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.piantedo.so.it/servizi/anagrafe_e_stato_civile/servizio_42.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:19:46.607327Z"
+  },
+  "carta_identita": {
+   "service_id": "014048:hgate:34",
+   "title": "Carta di Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.piantedo.so.it/servizi/anagrafe_e_stato_civile/servizio_34.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.piantedo.so.it/servizi/anagrafe_e_stato_civile/servizio_34.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.piantedo.so.it/servizi/anagrafe_e_stato_civile/servizio_34.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.piantedo.so.it/servizi/anagrafe_e_stato_civile/servizio_34.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.piantedo.so.it/servizi/anagrafe_e_stato_civile/servizio_34.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:19:42.833877Z"
+  },
+  "stato_civile": {
+   "service_id": "014048:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.piantedo.so.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.piantedo.so.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.piantedo.so.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:19:47.986204Z"
+  },
+  "tributi_imu": {
+   "service_id": "014048:hgate:38",
+   "title": "Sportello IMU",
+   "source_url": "https://www.comune.piantedo.so.it/servizi/tributi_finanze_e_contravvenzioni/servizio_38.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.piantedo.so.it/servizi/tributi_finanze_e_contravvenzioni/servizio_38.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.piantedo.so.it/servizi/tributi_finanze_e_contravvenzioni/servizio_38.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.piantedo.so.it/servizi/tributi_finanze_e_contravvenzioni/servizio_38.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.piantedo.so.it/servizi/tributi_finanze_e_contravvenzioni/servizio_38.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:19:50.598510Z"
+  }
+ }
+}

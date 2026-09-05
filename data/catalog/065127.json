@@ -1,0 +1,136 @@
+{
+ "municipality_istat": "065127",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "065127:hgate:35",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.santamarina.sa.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.santamarina.sa.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.santamarina.sa.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.santamarina.sa.it/servizi/anagrafe_e_stato_civile/servizio_35.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.santamarina.sa.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:35:34.412176Z"
+  },
+  "carta_identita": {
+   "service_id": "065127:hgate:47",
+   "title": "Carta d'identità elettronica",
+   "source_url": "https://www.comune.santamarina.sa.it/servizi/anagrafe_e_stato_civile/servizio_47.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.santamarina.sa.it/servizi/anagrafe_e_stato_civile/servizio_47.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.santamarina.sa.it/servizi/anagrafe_e_stato_civile/servizio_47.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.santamarina.sa.it/servizi/anagrafe_e_stato_civile/servizio_47.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.santamarina.sa.it/servizi/anagrafe_e_stato_civile/servizio_47.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:35:30.479920Z"
+  },
+  "stato_civile": {
+   "service_id": "065127:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.santamarina.sa.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.santamarina.sa.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.santamarina.sa.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:35:35.688387Z"
+  },
+  "tributi_imu": {
+   "service_id": "065127:hgate:45",
+   "title": "Calcolo IMU",
+   "source_url": "https://www.comune.santamarina.sa.it/servizi/tributi_finanze_e_contravvenzioni/servizio_45.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.santamarina.sa.it/servizi/tributi_finanze_e_contravvenzioni/servizio_45.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.santamarina.sa.it/servizi/tributi_finanze_e_contravvenzioni/servizio_45.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.santamarina.sa.it/servizi/tributi_finanze_e_contravvenzioni/servizio_45.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.santamarina.sa.it/servizi/tributi_finanze_e_contravvenzioni/servizio_45.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:35:36.955606Z"
+  }
+ }
+}

@@ -1,0 +1,185 @@
+{
+ "municipality_istat": "015058",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "015058:hgate:41",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.casorezzo.mi.it/servizi/anagrafe_e_stato_civile/servizio_41.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.casorezzo.mi.it/servizi/anagrafe_e_stato_civile/servizio_41.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.casorezzo.mi.it/servizi/anagrafe_e_stato_civile/servizio_41.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.casorezzo.mi.it/servizi/anagrafe_e_stato_civile/servizio_41.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.casorezzo.mi.it/servizi/anagrafe_e_stato_civile/servizio_41.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:22:39.313032Z"
+  },
+  "carta_identita": {
+   "service_id": "015058:hgate:33",
+   "title": "Carta d'identità elettronica",
+   "source_url": "https://www.comune.casorezzo.mi.it/servizi/anagrafe_e_stato_civile/servizio_33.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.casorezzo.mi.it/servizi/anagrafe_e_stato_civile/servizio_33.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.casorezzo.mi.it/servizi/anagrafe_e_stato_civile/servizio_33.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.casorezzo.mi.it/servizi/anagrafe_e_stato_civile/servizio_33.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.casorezzo.mi.it/servizi/anagrafe_e_stato_civile/servizio_33.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.casorezzo.mi.it/halley//ht/eg520/TMPF064971.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.casorezzo.mi.it/servizi/anagrafe_e_stato_civile/servizio_33.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:22:35.339656Z"
+  },
+  "stato_civile": {
+   "service_id": "015058:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.casorezzo.mi.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.casorezzo.mi.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.casorezzo.mi.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:22:40.592047Z"
+  },
+  "tributi_imu": {
+   "service_id": "015058:hgate:59",
+   "title": "Sportello IMU",
+   "source_url": "https://www.comune.casorezzo.mi.it/servizi/tributi_finanze_e_contravvenzioni/servizio_59.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.casorezzo.mi.it/servizi/tributi_finanze_e_contravvenzioni/servizio_59.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.casorezzo.mi.it/servizi/tributi_finanze_e_contravvenzioni/servizio_59.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.casorezzo.mi.it/servizi/tributi_finanze_e_contravvenzioni/servizio_59.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.casorezzo.mi.it/servizi/tributi_finanze_e_contravvenzioni/servizio_59.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:22:41.830132Z"
+  },
+  "tributi_tari": {
+   "service_id": "015058:hgate:60",
+   "title": "Tributo rifiuti TARI",
+   "source_url": "https://www.comune.casorezzo.mi.it/servizi/tributi_finanze_e_contravvenzioni/servizio_60.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.casorezzo.mi.it/servizi/tributi_finanze_e_contravvenzioni/servizio_60.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.casorezzo.mi.it/servizi/tributi_finanze_e_contravvenzioni/servizio_60.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.casorezzo.mi.it/servizi/tributi_finanze_e_contravvenzioni/servizio_60.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.casorezzo.mi.it/servizi/tributi_finanze_e_contravvenzioni/servizio_60.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:22:43.097805Z"
+  }
+ }
+}

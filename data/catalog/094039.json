@@ -1,0 +1,312 @@
+{
+ "municipality_istat": "094039",
+ "services": {
+  "accesso_atti": {
+   "service_id": "094039:hgate:8",
+   "title": "Accesso agli atti",
+   "source_url": "https://www.comune.rionerosannitico.is.it/servizi/autorizzazioni/servizio_8.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rionerosannitico.is.it/servizi/autorizzazioni/servizio_8.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rionerosannitico.is.it/servizi/autorizzazioni/servizio_8.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.rionerosannitico.is.it/servizi/autorizzazioni/servizio_8.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.rionerosannitico.is.it/servizi/autorizzazioni/servizio_8.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T03:18:21.331913Z"
+  },
+  "cambio_residenza": {
+   "service_id": "094039:hgate:51",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.rionerosannitico.is.it/servizi/anagrafe_e_stato_civile/servizio_51.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rionerosannitico.is.it/servizi/anagrafe_e_stato_civile/servizio_51.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rionerosannitico.is.it/servizi/anagrafe_e_stato_civile/servizio_51.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.rionerosannitico.is.it/servizi/anagrafe_e_stato_civile/servizio_51.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.rionerosannitico.is.it/servizi/anagrafe_e_stato_civile/servizio_51.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T03:18:15.857687Z"
+  },
+  "carta_identita": {
+   "service_id": "094039:hgate:36",
+   "title": "Carta d'identità elettronica",
+   "source_url": "https://www.comune.rionerosannitico.is.it/servizi/anagrafe_e_stato_civile/servizio_36.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rionerosannitico.is.it/servizi/anagrafe_e_stato_civile/servizio_36.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rionerosannitico.is.it/servizi/anagrafe_e_stato_civile/servizio_36.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.rionerosannitico.is.it/servizi/anagrafe_e_stato_civile/servizio_36.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.rionerosannitico.is.it/servizi/anagrafe_e_stato_civile/servizio_36.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T03:18:11.826969Z"
+  },
+  "stato_civile": {
+   "service_id": "094039:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.rionerosannitico.is.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rionerosannitico.is.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rionerosannitico.is.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "http://www.provincia.isernia.it/hh/index.php",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.rionerosannitico.is.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "http://www.assomab.it/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.rionerosannitico.is.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.gazzettaufficiale.it/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.rionerosannitico.is.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.meteoam.it/it/meteo-citta/rionero-sannitico",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.rionerosannitico.is.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.galaltomolise.org/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.rionerosannitico.is.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.turismometeo.it/webcam/valico-rionero-sannitico-strada-statale-17-is",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.rionerosannitico.is.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.meteo2.it/custom/webcam/rionero-sannitico/webcam.php",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.rionerosannitico.is.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.turismometeo.it/stazioni-meteo/rionero-sannitico-valico",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.rionerosannitico.is.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T03:18:17.094182Z"
+  },
+  "tributi_imu": {
+   "service_id": "094039:hgate:34",
+   "title": "Sportello IMU",
+   "source_url": "https://www.comune.rionerosannitico.is.it/servizi/tributi_finanze_e_contravvenzioni/servizio_34.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rionerosannitico.is.it/servizi/tributi_finanze_e_contravvenzioni/servizio_34.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rionerosannitico.is.it/servizi/tributi_finanze_e_contravvenzioni/servizio_34.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.rionerosannitico.is.it/servizi/tributi_finanze_e_contravvenzioni/servizio_34.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.rionerosannitico.is.it/servizi/tributi_finanze_e_contravvenzioni/servizio_34.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T03:18:22.601943Z"
+  },
+  "tributi_tari": {
+   "service_id": "094039:hgate:40",
+   "title": "TARI",
+   "source_url": "https://www.comune.rionerosannitico.is.it/servizi/educazione_e_formazione/servizio_40.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rionerosannitico.is.it/servizi/educazione_e_formazione/servizio_40.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rionerosannitico.is.it/servizi/educazione_e_formazione/servizio_40.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.rionerosannitico.is.it/servizi/educazione_e_formazione/servizio_40.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.rionerosannitico.is.it/servizi/educazione_e_formazione/servizio_40.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T03:18:23.887879Z"
+  }
+ }
+}

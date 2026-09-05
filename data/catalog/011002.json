@@ -1,0 +1,172 @@
+{
+ "municipality_istat": "011002",
+ "services": {
+  "accesso_atti": {
+   "service_id": "011002:hgate:8",
+   "title": "Richiedere l'accesso agli atti",
+   "source_url": "https://comune.arcola.sp.it/servizi/autorizzazioni/servizio_8.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.arcola.sp.it/servizi/autorizzazioni/servizio_8.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.arcola.sp.it/servizi/autorizzazioni/servizio_8.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://comune.arcola.sp.it/servizi/autorizzazioni/servizio_8.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://comune.arcola.sp.it/servizi/autorizzazioni/servizio_8.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T00:52:03.510658Z"
+  },
+  "cambio_residenza": {
+   "service_id": "011002:hgate:119",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.arcola.sp.it/servizi/anagrafe_e_stato_civile/servizio_119.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.arcola.sp.it/servizi/anagrafe_e_stato_civile/servizio_119.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.arcola.sp.it/servizi/anagrafe_e_stato_civile/servizio_119.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://comune.arcola.sp.it/servizi/anagrafe_e_stato_civile/servizio_119.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://comune.arcola.sp.it/servizi/anagrafe_e_stato_civile/servizio_119.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T00:52:00.875813Z"
+  },
+  "carta_identita": {
+   "service_id": "011002:hgate:123",
+   "title": "Carta d'identità Elettronica",
+   "source_url": "https://comune.arcola.sp.it/servizi/anagrafe_e_stato_civile/servizio_123.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.arcola.sp.it/servizi/anagrafe_e_stato_civile/servizio_123.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.arcola.sp.it/servizi/anagrafe_e_stato_civile/servizio_123.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://comune.arcola.sp.it/servizi/anagrafe_e_stato_civile/servizio_123.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://comune.arcola.sp.it/servizi/anagrafe_e_stato_civile/servizio_123.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T00:51:56.666714Z"
+  },
+  "stato_civile": {
+   "service_id": "011002:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://comune.arcola.sp.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.arcola.sp.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.arcola.sp.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T00:52:02.169516Z"
+  },
+  "tributi_tari": {
+   "service_id": "011002:hgate:122",
+   "title": "TARI",
+   "source_url": "https://comune.arcola.sp.it/servizi/tributi_finanze_e_contravvenzioni/servizio_122.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.arcola.sp.it/servizi/tributi_finanze_e_contravvenzioni/servizio_122.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.arcola.sp.it/servizi/tributi_finanze_e_contravvenzioni/servizio_122.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://comune.arcola.sp.it/servizi/tributi_finanze_e_contravvenzioni/servizio_122.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://comune.arcola.sp.it/servizi/tributi_finanze_e_contravvenzioni/servizio_122.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T00:52:04.936002Z"
+  }
+ }
+}

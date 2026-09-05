@@ -1,0 +1,221 @@
+{
+ "municipality_istat": "016104",
+ "services": {
+  "accesso_atti": {
+   "service_id": "016104:hgate:8",
+   "title": "Accesso agli atti",
+   "source_url": "https://www.comune.forestosparso.bg.it/servizi/vita_lavorativa/servizio_8.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.forestosparso.bg.it/servizi/vita_lavorativa/servizio_8.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.forestosparso.bg.it/servizi/vita_lavorativa/servizio_8.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.forestosparso.bg.it/servizi/vita_lavorativa/servizio_8.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.forestosparso.bg.it/servizi/vita_lavorativa/servizio_8.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "download",
+     "url": "https://www.comune.forestosparso.bg.it/halley//ht/eg165/TMPA298099.pdf",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.forestosparso.bg.it/servizi/vita_lavorativa/servizio_8.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:26:56.977248Z"
+  },
+  "cambio_residenza": {
+   "service_id": "016104:hgate:50",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.forestosparso.bg.it/servizi/anagrafe_e_stato_civile/servizio_50.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.forestosparso.bg.it/servizi/anagrafe_e_stato_civile/servizio_50.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.forestosparso.bg.it/servizi/anagrafe_e_stato_civile/servizio_50.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.forestosparso.bg.it/servizi/anagrafe_e_stato_civile/servizio_50.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.forestosparso.bg.it/servizi/anagrafe_e_stato_civile/servizio_50.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:26:54.336587Z"
+  },
+  "carta_identita": {
+   "service_id": "016104:hgate:41",
+   "title": "Carta d'identità elettronica (CIE)",
+   "source_url": "https://www.comune.forestosparso.bg.it/servizi/anagrafe_e_stato_civile/servizio_41.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.forestosparso.bg.it/servizi/anagrafe_e_stato_civile/servizio_41.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.forestosparso.bg.it/servizi/anagrafe_e_stato_civile/servizio_41.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.forestosparso.bg.it/servizi/anagrafe_e_stato_civile/servizio_41.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.forestosparso.bg.it/servizi/anagrafe_e_stato_civile/servizio_41.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:26:50.688383Z"
+  },
+  "stato_civile": {
+   "service_id": "016104:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.forestosparso.bg.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.forestosparso.bg.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.forestosparso.bg.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:26:55.622836Z"
+  },
+  "tributi_imu": {
+   "service_id": "016104:hgate:46",
+   "title": "Sportello IMU",
+   "source_url": "https://www.comune.forestosparso.bg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_46.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.forestosparso.bg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_46.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.forestosparso.bg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_46.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.forestosparso.bg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_46.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.forestosparso.bg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_46.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:26:58.289824Z"
+  },
+  "tributi_tari": {
+   "service_id": "016104:hgate:24",
+   "title": "TARI",
+   "source_url": "https://www.comune.forestosparso.bg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_24.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.forestosparso.bg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_24.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.forestosparso.bg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_24.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.forestosparso.bg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_24.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.forestosparso.bg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_24.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:26:59.607648Z"
+  }
+ }
+}

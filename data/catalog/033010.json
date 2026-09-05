@@ -1,0 +1,172 @@
+{
+ "municipality_istat": "033010",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "033010:hgate:43",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.caorso.pc.it/servizi/anagrafe_e_stato_civile/servizio_43.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.caorso.pc.it/servizi/anagrafe_e_stato_civile/servizio_43.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.caorso.pc.it/servizi/anagrafe_e_stato_civile/servizio_43.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.caorso.pc.it/servizi/anagrafe_e_stato_civile/servizio_43.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.caorso.pc.it/servizi/anagrafe_e_stato_civile/servizio_43.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:43:57.565948Z"
+  },
+  "carta_identita": {
+   "service_id": "033010:hgate:36",
+   "title": "CIE",
+   "source_url": "https://www.comune.caorso.pc.it/servizi/anagrafe_e_stato_civile/servizio_36.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.caorso.pc.it/servizi/anagrafe_e_stato_civile/servizio_36.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.caorso.pc.it/servizi/anagrafe_e_stato_civile/servizio_36.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.caorso.pc.it/servizi/anagrafe_e_stato_civile/servizio_36.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.caorso.pc.it/servizi/anagrafe_e_stato_civile/servizio_36.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:43:53.602786Z"
+  },
+  "stato_civile": {
+   "service_id": "033010:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.caorso.pc.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.caorso.pc.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.caorso.pc.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:43:58.869695Z"
+  },
+  "tributi_imu": {
+   "service_id": "033010:hgate:18",
+   "title": "IMU",
+   "source_url": "https://www.comune.caorso.pc.it/servizi/tributi_finanze_e_contravvenzioni/servizio_18.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.caorso.pc.it/servizi/tributi_finanze_e_contravvenzioni/servizio_18.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.caorso.pc.it/servizi/tributi_finanze_e_contravvenzioni/servizio_18.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.caorso.pc.it/servizi/tributi_finanze_e_contravvenzioni/servizio_18.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.caorso.pc.it/servizi/tributi_finanze_e_contravvenzioni/servizio_18.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:44:03.221121Z"
+  },
+  "tributi_tari": {
+   "service_id": "033010:hgate:24",
+   "title": "TARI",
+   "source_url": "https://www.comune.caorso.pc.it/servizi/tributi_finanze_e_contravvenzioni/servizio_24.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.caorso.pc.it/servizi/tributi_finanze_e_contravvenzioni/servizio_24.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.caorso.pc.it/servizi/tributi_finanze_e_contravvenzioni/servizio_24.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.caorso.pc.it/servizi/tributi_finanze_e_contravvenzioni/servizio_24.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.caorso.pc.it/servizi/tributi_finanze_e_contravvenzioni/servizio_24.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:44:04.501677Z"
+  }
+ }
+}

@@ -1,0 +1,208 @@
+{
+ "municipality_istat": "054002",
+ "services": {
+  "accesso_atti": {
+   "service_id": "054002:hgate:101",
+   "title": "Accesso Atti Sinistro stradale",
+   "source_url": "https://www.comune.bastia.pg.it/servizi/autorizzazioni/servizio_101.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bastia.pg.it/servizi/autorizzazioni/servizio_101.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bastia.pg.it/servizi/autorizzazioni/servizio_101.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.bastia.pg.it/servizi/autorizzazioni/servizio_101.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.bastia.pg.it/servizi/autorizzazioni/servizio_101.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:54:15.436954Z"
+  },
+  "cambio_residenza": {
+   "service_id": "054002:hgate:35",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.bastia.pg.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bastia.pg.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bastia.pg.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.bastia.pg.it/servizi/anagrafe_e_stato_civile/servizio_35.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.bastia.pg.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:54:12.847947Z"
+  },
+  "carta_identita": {
+   "service_id": "054002:hgate:116",
+   "title": "Carta d'Identità Elettronica - CIE",
+   "source_url": "https://www.comune.bastia.pg.it/servizi/anagrafe_e_stato_civile/servizio_116.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bastia.pg.it/servizi/anagrafe_e_stato_civile/servizio_116.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bastia.pg.it/servizi/anagrafe_e_stato_civile/servizio_116.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.bastia.pg.it/servizi/anagrafe_e_stato_civile/servizio_116.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.bastia.pg.it/servizi/anagrafe_e_stato_civile/servizio_116.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:54:08.403610Z"
+  },
+  "stato_civile": {
+   "service_id": "054002:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.bastia.pg.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bastia.pg.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bastia.pg.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:54:14.099427Z"
+  },
+  "tributi_imu": {
+   "service_id": "054002:hgate:103",
+   "title": "IMU",
+   "source_url": "https://www.comune.bastia.pg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_103.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bastia.pg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_103.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bastia.pg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_103.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.bastia.pg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_103.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.bastia.pg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_103.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:54:16.689514Z"
+  },
+  "tributi_tari": {
+   "service_id": "054002:hgate:104",
+   "title": "TARI",
+   "source_url": "https://www.comune.bastia.pg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_104.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bastia.pg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_104.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bastia.pg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_104.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.bastia.pg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_104.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.bastia.pg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_104.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:54:17.938524Z"
+  }
+ }
+}

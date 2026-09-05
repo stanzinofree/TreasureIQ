@@ -1,0 +1,172 @@
+{
+ "municipality_istat": "045012",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "045012:hgate:50",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.mulazzo.ms.it/servizi/anagrafe_e_stato_civile/servizio_50.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.mulazzo.ms.it/servizi/anagrafe_e_stato_civile/servizio_50.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.mulazzo.ms.it/servizi/anagrafe_e_stato_civile/servizio_50.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.mulazzo.ms.it/servizi/anagrafe_e_stato_civile/servizio_50.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.mulazzo.ms.it/servizi/anagrafe_e_stato_civile/servizio_50.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:51:57.786498Z"
+  },
+  "carta_identita": {
+   "service_id": "045012:hgate:37",
+   "title": "Carta d'identità elettronica",
+   "source_url": "https://www.comune.mulazzo.ms.it/servizi/anagrafe_e_stato_civile/servizio_37.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.mulazzo.ms.it/servizi/anagrafe_e_stato_civile/servizio_37.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.mulazzo.ms.it/servizi/anagrafe_e_stato_civile/servizio_37.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.mulazzo.ms.it/servizi/anagrafe_e_stato_civile/servizio_37.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.mulazzo.ms.it/servizi/anagrafe_e_stato_civile/servizio_37.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:51:54.127124Z"
+  },
+  "stato_civile": {
+   "service_id": "045012:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.mulazzo.ms.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.mulazzo.ms.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.mulazzo.ms.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:51:59.037412Z"
+  },
+  "tributi_imu": {
+   "service_id": "045012:hgate:38",
+   "title": "Sportello IMU",
+   "source_url": "https://www.comune.mulazzo.ms.it/servizi/tributi_finanze_e_contravvenzioni/servizio_38.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.mulazzo.ms.it/servizi/tributi_finanze_e_contravvenzioni/servizio_38.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.mulazzo.ms.it/servizi/tributi_finanze_e_contravvenzioni/servizio_38.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.mulazzo.ms.it/servizi/tributi_finanze_e_contravvenzioni/servizio_38.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.mulazzo.ms.it/servizi/tributi_finanze_e_contravvenzioni/servizio_38.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:52:00.394953Z"
+  },
+  "tributi_tari": {
+   "service_id": "045012:hgate:34",
+   "title": "TARI",
+   "source_url": "https://www.comune.mulazzo.ms.it/servizi/tributi_finanze_e_contravvenzioni/servizio_34.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.mulazzo.ms.it/servizi/tributi_finanze_e_contravvenzioni/servizio_34.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.mulazzo.ms.it/servizi/tributi_finanze_e_contravvenzioni/servizio_34.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.mulazzo.ms.it/servizi/tributi_finanze_e_contravvenzioni/servizio_34.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.mulazzo.ms.it/servizi/tributi_finanze_e_contravvenzioni/servizio_34.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:52:01.661564Z"
+  }
+ }
+}

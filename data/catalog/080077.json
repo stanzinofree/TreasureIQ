@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "080077",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "080077:hgate:44",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.sanroberto.rc.it/servizi/anagrafe_e_stato_civile/servizio_44.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanroberto.rc.it/servizi/anagrafe_e_stato_civile/servizio_44.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanroberto.rc.it/servizi/anagrafe_e_stato_civile/servizio_44.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.sanroberto.rc.it/servizi/anagrafe_e_stato_civile/servizio_44.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.sanroberto.rc.it/servizi/anagrafe_e_stato_civile/servizio_44.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T03:05:26.353390Z"
+  },
+  "stato_civile": {
+   "service_id": "080077:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.sanroberto.rc.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanroberto.rc.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanroberto.rc.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T03:05:31.974763Z"
+  },
+  "tributi_imu": {
+   "service_id": "080077:hgate:39",
+   "title": "Pagamento Tributi IMU",
+   "source_url": "https://www.comune.sanroberto.rc.it/servizi/tributi_finanze_e_contravvenzioni/servizio_39.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sanroberto.rc.it/servizi/tributi_finanze_e_contravvenzioni/servizio_39.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sanroberto.rc.it/servizi/tributi_finanze_e_contravvenzioni/servizio_39.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.sanroberto.rc.it/servizi/tributi_finanze_e_contravvenzioni/servizio_39.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.sanroberto.rc.it/servizi/tributi_finanze_e_contravvenzioni/servizio_39.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T03:05:33.267676Z"
+  }
+ }
+}

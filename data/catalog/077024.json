@@ -1,0 +1,41 @@
+{
+ "municipality_istat": "077024",
+ "services": {
+  "tributi_tari": {
+   "service_id": "077024:hgate:24",
+   "title": "Richiesta agevolazione TARI",
+   "source_url": "https://www.comune.salandra.mt.it/servizi/tributi_finanze_e_contravvenzioni/servizio_24.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.salandra.mt.it/servizi/tributi_finanze_e_contravvenzioni/servizio_24.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.salandra.mt.it/servizi/tributi_finanze_e_contravvenzioni/servizio_24.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.salandra.mt.it/servizi/tributi_finanze_e_contravvenzioni/servizio_24.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.salandra.mt.it/servizi/tributi_finanze_e_contravvenzioni/servizio_24.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T03:00:18.450239Z"
+  }
+ }
+}

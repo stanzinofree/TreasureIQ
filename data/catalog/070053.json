@@ -1,0 +1,136 @@
+{
+ "municipality_istat": "070053",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "070053:hgate:35",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.pietracatella.cb.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pietracatella.cb.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pietracatella.cb.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.pietracatella.cb.it/servizi/anagrafe_e_stato_civile/servizio_35.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.pietracatella.cb.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:50:42.103268Z"
+  },
+  "carta_identita": {
+   "service_id": "070053:hgate:39",
+   "title": "Carta d'identità elettronica",
+   "source_url": "https://www.comune.pietracatella.cb.it/servizi/anagrafe_e_stato_civile/servizio_39.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pietracatella.cb.it/servizi/anagrafe_e_stato_civile/servizio_39.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pietracatella.cb.it/servizi/anagrafe_e_stato_civile/servizio_39.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.pietracatella.cb.it/servizi/anagrafe_e_stato_civile/servizio_39.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.pietracatella.cb.it/servizi/anagrafe_e_stato_civile/servizio_39.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:50:38.475299Z"
+  },
+  "stato_civile": {
+   "service_id": "070053:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.pietracatella.cb.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pietracatella.cb.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pietracatella.cb.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:50:43.483527Z"
+  },
+  "tributi_imu": {
+   "service_id": "070053:hgate:45",
+   "title": "Calcolo IMU",
+   "source_url": "https://www.comune.pietracatella.cb.it/servizi/tributi_finanze_e_contravvenzioni/servizio_45.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.pietracatella.cb.it/servizi/tributi_finanze_e_contravvenzioni/servizio_45.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.pietracatella.cb.it/servizi/tributi_finanze_e_contravvenzioni/servizio_45.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.pietracatella.cb.it/servizi/tributi_finanze_e_contravvenzioni/servizio_45.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.pietracatella.cb.it/servizi/tributi_finanze_e_contravvenzioni/servizio_45.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:50:44.817800Z"
+  }
+ }
+}

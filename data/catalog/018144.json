@@ -1,0 +1,172 @@
+{
+ "municipality_istat": "018144",
+ "services": {
+  "accesso_atti": {
+   "service_id": "018144:hgate:50",
+   "title": "Accesso agli atti Polizia Locale",
+   "source_url": "https://www.comune.santangelolomellina.pv.it/servizi/autorizzazioni/servizio_50.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.santangelolomellina.pv.it/servizi/autorizzazioni/servizio_50.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.santangelolomellina.pv.it/servizi/autorizzazioni/servizio_50.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.santangelolomellina.pv.it/servizi/autorizzazioni/servizio_50.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.santangelolomellina.pv.it/servizi/autorizzazioni/servizio_50.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:37:43.788828Z"
+  },
+  "cambio_residenza": {
+   "service_id": "018144:hgate:35",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.santangelolomellina.pv.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.santangelolomellina.pv.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.santangelolomellina.pv.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.santangelolomellina.pv.it/servizi/anagrafe_e_stato_civile/servizio_35.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.santangelolomellina.pv.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:37:41.219837Z"
+  },
+  "carta_identita": {
+   "service_id": "018144:hgate:39",
+   "title": "Carta d'identità elettronica",
+   "source_url": "https://www.comune.santangelolomellina.pv.it/servizi/anagrafe_e_stato_civile/servizio_39.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.santangelolomellina.pv.it/servizi/anagrafe_e_stato_civile/servizio_39.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.santangelolomellina.pv.it/servizi/anagrafe_e_stato_civile/servizio_39.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.santangelolomellina.pv.it/servizi/anagrafe_e_stato_civile/servizio_39.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.santangelolomellina.pv.it/servizi/anagrafe_e_stato_civile/servizio_39.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:37:37.397717Z"
+  },
+  "stato_civile": {
+   "service_id": "018144:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.santangelolomellina.pv.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.santangelolomellina.pv.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.santangelolomellina.pv.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:37:42.465065Z"
+  },
+  "tributi_tari": {
+   "service_id": "018144:hgate:24",
+   "title": "Richiesta agevolazione TARI",
+   "source_url": "https://www.comune.santangelolomellina.pv.it/servizi/tributi_finanze_e_contravvenzioni/servizio_24.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.santangelolomellina.pv.it/servizi/tributi_finanze_e_contravvenzioni/servizio_24.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.santangelolomellina.pv.it/servizi/tributi_finanze_e_contravvenzioni/servizio_24.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.santangelolomellina.pv.it/servizi/tributi_finanze_e_contravvenzioni/servizio_24.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.santangelolomellina.pv.it/servizi/tributi_finanze_e_contravvenzioni/servizio_24.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:37:45.040556Z"
+  }
+ }
+}

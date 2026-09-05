@@ -1,0 +1,136 @@
+{
+ "municipality_istat": "042030",
+ "services": {
+  "accesso_atti": {
+   "service_id": "042030:hgate:13",
+   "title": "Accesso agli atti",
+   "source_url": "https://comune.montesanvito.an.it/servizi/vita_lavorativa/servizio_13.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.montesanvito.an.it/servizi/vita_lavorativa/servizio_13.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.montesanvito.an.it/servizi/vita_lavorativa/servizio_13.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://comune.montesanvito.an.it/servizi/vita_lavorativa/servizio_13.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://comune.montesanvito.an.it/servizi/vita_lavorativa/servizio_13.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:49:15.139358Z"
+  },
+  "cambio_residenza": {
+   "service_id": "042030:hgate:104",
+   "title": "Cambio di residenza",
+   "source_url": "https://comune.montesanvito.an.it/servizi/anagrafe_e_stato_civile/servizio_104.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.montesanvito.an.it/servizi/anagrafe_e_stato_civile/servizio_104.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.montesanvito.an.it/servizi/anagrafe_e_stato_civile/servizio_104.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://comune.montesanvito.an.it/servizi/anagrafe_e_stato_civile/servizio_104.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://comune.montesanvito.an.it/servizi/anagrafe_e_stato_civile/servizio_104.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:49:12.655630Z"
+  },
+  "carta_identita": {
+   "service_id": "042030:hgate:31",
+   "title": "Carta d'identità elettronica",
+   "source_url": "https://comune.montesanvito.an.it/servizi/anagrafe_e_stato_civile/servizio_31.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.montesanvito.an.it/servizi/anagrafe_e_stato_civile/servizio_31.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.montesanvito.an.it/servizi/anagrafe_e_stato_civile/servizio_31.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://comune.montesanvito.an.it/servizi/anagrafe_e_stato_civile/servizio_31.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://comune.montesanvito.an.it/servizi/anagrafe_e_stato_civile/servizio_31.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:49:08.641066Z"
+  },
+  "stato_civile": {
+   "service_id": "042030:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://comune.montesanvito.an.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://comune.montesanvito.an.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://comune.montesanvito.an.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:49:13.890250Z"
+  }
+ }
+}

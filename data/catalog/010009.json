@@ -1,0 +1,172 @@
+{
+ "municipality_istat": "010009",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "010009:hgate:36",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.campomorone.ge.it/servizi/anagrafe_e_stato_civile/servizio_36.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.campomorone.ge.it/servizi/anagrafe_e_stato_civile/servizio_36.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.campomorone.ge.it/servizi/anagrafe_e_stato_civile/servizio_36.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.campomorone.ge.it/servizi/anagrafe_e_stato_civile/servizio_36.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.campomorone.ge.it/servizi/anagrafe_e_stato_civile/servizio_36.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T00:47:19.775664Z"
+  },
+  "carta_identita": {
+   "service_id": "010009:hgate:33",
+   "title": "Carta d'identità elettronica (CIE)",
+   "source_url": "https://www.comune.campomorone.ge.it/servizi/anagrafe_e_stato_civile/servizio_33.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.campomorone.ge.it/servizi/anagrafe_e_stato_civile/servizio_33.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.campomorone.ge.it/servizi/anagrafe_e_stato_civile/servizio_33.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.campomorone.ge.it/servizi/anagrafe_e_stato_civile/servizio_33.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.campomorone.ge.it/servizi/anagrafe_e_stato_civile/servizio_33.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T00:47:15.675278Z"
+  },
+  "stato_civile": {
+   "service_id": "010009:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.campomorone.ge.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.campomorone.ge.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.campomorone.ge.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T00:47:21.089886Z"
+  },
+  "tributi_imu": {
+   "service_id": "010009:hgate:34",
+   "title": "IMU - Imposta Municipale Propria",
+   "source_url": "https://www.comune.campomorone.ge.it/servizi/tributi_finanze_e_contravvenzioni/servizio_34.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.campomorone.ge.it/servizi/tributi_finanze_e_contravvenzioni/servizio_34.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.campomorone.ge.it/servizi/tributi_finanze_e_contravvenzioni/servizio_34.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.campomorone.ge.it/servizi/tributi_finanze_e_contravvenzioni/servizio_34.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.campomorone.ge.it/servizi/tributi_finanze_e_contravvenzioni/servizio_34.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T00:47:22.394698Z"
+  },
+  "tributi_tari": {
+   "service_id": "010009:hgate:49",
+   "title": "TARI",
+   "source_url": "https://www.comune.campomorone.ge.it/servizi/tributi_finanze_e_contravvenzioni/servizio_49.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.campomorone.ge.it/servizi/tributi_finanze_e_contravvenzioni/servizio_49.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.campomorone.ge.it/servizi/tributi_finanze_e_contravvenzioni/servizio_49.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.campomorone.ge.it/servizi/tributi_finanze_e_contravvenzioni/servizio_49.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.campomorone.ge.it/servizi/tributi_finanze_e_contravvenzioni/servizio_49.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T00:47:23.674298Z"
+  }
+ }
+}

@@ -1,0 +1,172 @@
+{
+ "municipality_istat": "009009",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "009009:hgate:39",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.bardineto.sv.it/servizi/anagrafe_e_stato_civile/servizio_39.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bardineto.sv.it/servizi/anagrafe_e_stato_civile/servizio_39.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bardineto.sv.it/servizi/anagrafe_e_stato_civile/servizio_39.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.bardineto.sv.it/servizi/anagrafe_e_stato_civile/servizio_39.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.bardineto.sv.it/servizi/anagrafe_e_stato_civile/servizio_39.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T00:45:06.809366Z"
+  },
+  "carta_identita": {
+   "service_id": "009009:hgate:33",
+   "title": "Carta d'identità elettronica",
+   "source_url": "https://www.comune.bardineto.sv.it/servizi/anagrafe_e_stato_civile/servizio_33.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bardineto.sv.it/servizi/anagrafe_e_stato_civile/servizio_33.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bardineto.sv.it/servizi/anagrafe_e_stato_civile/servizio_33.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.bardineto.sv.it/servizi/anagrafe_e_stato_civile/servizio_33.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.bardineto.sv.it/servizi/anagrafe_e_stato_civile/servizio_33.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T00:45:02.833956Z"
+  },
+  "stato_civile": {
+   "service_id": "009009:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.bardineto.sv.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bardineto.sv.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bardineto.sv.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T00:45:08.099045Z"
+  },
+  "tributi_imu": {
+   "service_id": "009009:hgate:13",
+   "title": "Richiesta agevolazione IMU",
+   "source_url": "https://www.comune.bardineto.sv.it/servizi/tributi_finanze_e_contravvenzioni/servizio_13.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bardineto.sv.it/servizi/tributi_finanze_e_contravvenzioni/servizio_13.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bardineto.sv.it/servizi/tributi_finanze_e_contravvenzioni/servizio_13.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.bardineto.sv.it/servizi/tributi_finanze_e_contravvenzioni/servizio_13.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.bardineto.sv.it/servizi/tributi_finanze_e_contravvenzioni/servizio_13.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T00:45:09.392751Z"
+  },
+  "tributi_tari": {
+   "service_id": "009009:hgate:24",
+   "title": "Richiesta agevolazione TARI",
+   "source_url": "https://www.comune.bardineto.sv.it/servizi/tributi_finanze_e_contravvenzioni/servizio_24.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bardineto.sv.it/servizi/tributi_finanze_e_contravvenzioni/servizio_24.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bardineto.sv.it/servizi/tributi_finanze_e_contravvenzioni/servizio_24.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.bardineto.sv.it/servizi/tributi_finanze_e_contravvenzioni/servizio_24.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.bardineto.sv.it/servizi/tributi_finanze_e_contravvenzioni/servizio_24.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T00:45:10.675035Z"
+  }
+ }
+}

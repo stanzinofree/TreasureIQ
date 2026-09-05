@@ -1,0 +1,136 @@
+{
+ "municipality_istat": "042033",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "042033:hgate:35",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.offagna.an.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.offagna.an.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.offagna.an.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.offagna.an.it/servizi/anagrafe_e_stato_civile/servizio_35.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.offagna.an.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:49:22.004037Z"
+  },
+  "carta_identita": {
+   "service_id": "042033:hgate:64",
+   "title": "Rilascio Carta d'Identità Elettronica (CIE)",
+   "source_url": "https://www.comune.offagna.an.it/servizi/anagrafe_e_stato_civile/servizio_64.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.offagna.an.it/servizi/anagrafe_e_stato_civile/servizio_64.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.offagna.an.it/servizi/anagrafe_e_stato_civile/servizio_64.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.offagna.an.it/servizi/anagrafe_e_stato_civile/servizio_64.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.offagna.an.it/servizi/anagrafe_e_stato_civile/servizio_64.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:49:18.110203Z"
+  },
+  "stato_civile": {
+   "service_id": "042033:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.offagna.an.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.offagna.an.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.offagna.an.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:49:23.281904Z"
+  },
+  "tributi_tari": {
+   "service_id": "042033:hgate:42",
+   "title": "TARI",
+   "source_url": "https://www.comune.offagna.an.it/servizi/tributi_finanze_e_contravvenzioni/servizio_42.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.offagna.an.it/servizi/tributi_finanze_e_contravvenzioni/servizio_42.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.offagna.an.it/servizi/tributi_finanze_e_contravvenzioni/servizio_42.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.offagna.an.it/servizi/tributi_finanze_e_contravvenzioni/servizio_42.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.offagna.an.it/servizi/tributi_finanze_e_contravvenzioni/servizio_42.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:49:24.642606Z"
+  }
+ }
+}

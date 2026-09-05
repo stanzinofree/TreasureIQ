@@ -1,0 +1,136 @@
+{
+ "municipality_istat": "060004",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "060004:hgate:35",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.alvito.fr.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.alvito.fr.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.alvito.fr.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.alvito.fr.it/servizi/anagrafe_e_stato_civile/servizio_35.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.alvito.fr.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:08:38.592545Z"
+  },
+  "carta_identita": {
+   "service_id": "060004:hgate:40",
+   "title": "Rilascio Carta di Identità Elettronica",
+   "source_url": "https://www.comune.alvito.fr.it/servizi/anagrafe_e_stato_civile/servizio_40.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.alvito.fr.it/servizi/anagrafe_e_stato_civile/servizio_40.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.alvito.fr.it/servizi/anagrafe_e_stato_civile/servizio_40.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.alvito.fr.it/servizi/anagrafe_e_stato_civile/servizio_40.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.alvito.fr.it/servizi/anagrafe_e_stato_civile/servizio_40.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:08:34.645203Z"
+  },
+  "stato_civile": {
+   "service_id": "060004:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.alvito.fr.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.alvito.fr.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.alvito.fr.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:08:39.833716Z"
+  },
+  "tributi_imu": {
+   "service_id": "060004:hgate:44",
+   "title": "Calcolo IMU",
+   "source_url": "https://www.comune.alvito.fr.it/servizi/tributi_finanze_e_contravvenzioni/servizio_44.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.alvito.fr.it/servizi/tributi_finanze_e_contravvenzioni/servizio_44.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.alvito.fr.it/servizi/tributi_finanze_e_contravvenzioni/servizio_44.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.alvito.fr.it/servizi/tributi_finanze_e_contravvenzioni/servizio_44.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.alvito.fr.it/servizi/tributi_finanze_e_contravvenzioni/servizio_44.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:08:41.144849Z"
+  }
+ }
+}

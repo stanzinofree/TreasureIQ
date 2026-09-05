@@ -1,0 +1,208 @@
+{
+ "municipality_istat": "001225",
+ "services": {
+  "accesso_atti": {
+   "service_id": "001225:hgate:47",
+   "title": "Accesso agli atti",
+   "source_url": "https://www.comune.rondissone.to.it/servizi/autorizzazioni/servizio_47.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rondissone.to.it/servizi/autorizzazioni/servizio_47.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rondissone.to.it/servizi/autorizzazioni/servizio_47.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.rondissone.to.it/servizi/autorizzazioni/servizio_47.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.rondissone.to.it/servizi/autorizzazioni/servizio_47.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T00:40:54.593276Z"
+  },
+  "cambio_residenza": {
+   "service_id": "001225:hgate:35",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.rondissone.to.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rondissone.to.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rondissone.to.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.rondissone.to.it/servizi/anagrafe_e_stato_civile/servizio_35.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.rondissone.to.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T00:40:51.976605Z"
+  },
+  "carta_identita": {
+   "service_id": "001225:hgate:40",
+   "title": "Carta d'identità elettronica",
+   "source_url": "https://www.comune.rondissone.to.it/servizi/anagrafe_e_stato_civile/servizio_40.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rondissone.to.it/servizi/anagrafe_e_stato_civile/servizio_40.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rondissone.to.it/servizi/anagrafe_e_stato_civile/servizio_40.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.rondissone.to.it/servizi/anagrafe_e_stato_civile/servizio_40.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.rondissone.to.it/servizi/anagrafe_e_stato_civile/servizio_40.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T00:40:42.705609Z"
+  },
+  "stato_civile": {
+   "service_id": "001225:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.rondissone.to.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rondissone.to.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rondissone.to.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T00:40:53.260516Z"
+  },
+  "tributi_imu": {
+   "service_id": "001225:hgate:41",
+   "title": "Calcolo IMU",
+   "source_url": "https://www.comune.rondissone.to.it/servizi/tributi_finanze_e_contravvenzioni/servizio_41.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rondissone.to.it/servizi/tributi_finanze_e_contravvenzioni/servizio_41.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rondissone.to.it/servizi/tributi_finanze_e_contravvenzioni/servizio_41.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.rondissone.to.it/servizi/tributi_finanze_e_contravvenzioni/servizio_41.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.rondissone.to.it/servizi/tributi_finanze_e_contravvenzioni/servizio_41.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T00:40:56.392798Z"
+  },
+  "tributi_tari": {
+   "service_id": "001225:hgate:39",
+   "title": "TARI",
+   "source_url": "https://www.comune.rondissone.to.it/servizi/tributi_finanze_e_contravvenzioni/servizio_39.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.rondissone.to.it/servizi/tributi_finanze_e_contravvenzioni/servizio_39.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.rondissone.to.it/servizi/tributi_finanze_e_contravvenzioni/servizio_39.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.rondissone.to.it/servizi/tributi_finanze_e_contravvenzioni/servizio_39.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.rondissone.to.it/servizi/tributi_finanze_e_contravvenzioni/servizio_39.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T00:40:57.916402Z"
+  }
+ }
+}

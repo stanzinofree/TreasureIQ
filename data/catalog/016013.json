@@ -1,0 +1,286 @@
+{
+ "municipality_istat": "016013",
+ "services": {
+  "accesso_atti": {
+   "service_id": "016013:hgate:8",
+   "title": "Accesso agli atti amministrativi",
+   "source_url": "https://www.comune.arzago.bg.it/servizi/urp/servizio_8.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.arzago.bg.it/servizi/urp/servizio_8.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.arzago.bg.it/servizi/urp/servizio_8.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.arzago.bg.it/servizi/urp/servizio_8.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.arzago.bg.it/servizi/urp/servizio_8.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:24:07.147425Z"
+  },
+  "cambio_residenza": {
+   "service_id": "016013:hgate:42",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.arzago.bg.it/servizi/anagrafe_e_stato_civile/servizio_42.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.arzago.bg.it/servizi/anagrafe_e_stato_civile/servizio_42.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.arzago.bg.it/servizi/anagrafe_e_stato_civile/servizio_42.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.arzago.bg.it/servizi/anagrafe_e_stato_civile/servizio_42.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.arzago.bg.it/servizi/anagrafe_e_stato_civile/servizio_42.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:24:04.565539Z"
+  },
+  "carta_identita": {
+   "service_id": "016013:hgate:38",
+   "title": "Carta d'identità elettronica",
+   "source_url": "https://www.comune.arzago.bg.it/servizi/anagrafe_e_stato_civile/servizio_38.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.arzago.bg.it/servizi/anagrafe_e_stato_civile/servizio_38.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.arzago.bg.it/servizi/anagrafe_e_stato_civile/servizio_38.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.arzago.bg.it/servizi/anagrafe_e_stato_civile/servizio_38.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.arzago.bg.it/servizi/anagrafe_e_stato_civile/servizio_38.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:24:00.724873Z"
+  },
+  "stato_civile": {
+   "service_id": "016013:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.arzago.bg.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.arzago.bg.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.arzago.bg.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.regione.lombardia.it/wps/portal/istituzionale/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.arzago.bg.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.provincia.bergamo.it/hh/index.php",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.arzago.bg.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.pianuradascoprire.com/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.arzago.bg.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "http://www.parcodeltormo.it/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.arzago.bg.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.ilmeteo.it/meteo/Arzago+d%27Adda",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.arzago.bg.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://dati.anticorruzione.it/superset/dashboard/appalti/?native_filters_key=rvE2BJzf2GlCZBQOxICzNPW4AhsahBg7eNof-RITXCZw0km-I259ATNAa9gWwJbR",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.arzago.bg.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:24:05.855923Z"
+  },
+  "tributi_imu": {
+   "service_id": "016013:hgate:39",
+   "title": "Calcolo IMU",
+   "source_url": "https://www.comune.arzago.bg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_39.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.arzago.bg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_39.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.arzago.bg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_39.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.arzago.bg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_39.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.arzago.bg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_39.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:24:08.432631Z"
+  },
+  "tributi_tari": {
+   "service_id": "016013:hgate:40",
+   "title": "TARI",
+   "source_url": "https://www.comune.arzago.bg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_40.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.arzago.bg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_40.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.arzago.bg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_40.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.arzago.bg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_40.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.arzago.bg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_40.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:24:09.736009Z"
+  }
+ }
+}

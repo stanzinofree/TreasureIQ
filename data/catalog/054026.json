@@ -1,0 +1,208 @@
+{
+ "municipality_istat": "054026",
+ "services": {
+  "accesso_atti": {
+   "service_id": "054026:hgate:53",
+   "title": "Ufficio accesso atti edilizia e urbanistica",
+   "source_url": "https://www.comune.magione.pg.it/servizi/catasto_e_urbanistica/servizio_53.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.magione.pg.it/servizi/catasto_e_urbanistica/servizio_53.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.magione.pg.it/servizi/catasto_e_urbanistica/servizio_53.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.magione.pg.it/servizi/catasto_e_urbanistica/servizio_53.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.magione.pg.it/servizi/catasto_e_urbanistica/servizio_53.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:55:32.810574Z"
+  },
+  "cambio_residenza": {
+   "service_id": "054026:hgate:35",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.magione.pg.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.magione.pg.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.magione.pg.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.magione.pg.it/servizi/anagrafe_e_stato_civile/servizio_35.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.magione.pg.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:55:30.206789Z"
+  },
+  "carta_identita": {
+   "service_id": "054026:hgate:39",
+   "title": "Carta d'identità elettronica",
+   "source_url": "https://www.comune.magione.pg.it/servizi/anagrafe_e_stato_civile/servizio_39.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.magione.pg.it/servizi/anagrafe_e_stato_civile/servizio_39.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.magione.pg.it/servizi/anagrafe_e_stato_civile/servizio_39.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.magione.pg.it/servizi/anagrafe_e_stato_civile/servizio_39.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.magione.pg.it/servizi/anagrafe_e_stato_civile/servizio_39.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:55:26.236377Z"
+  },
+  "stato_civile": {
+   "service_id": "054026:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.magione.pg.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.magione.pg.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.magione.pg.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:55:31.471528Z"
+  },
+  "tributi_imu": {
+   "service_id": "054026:hgate:42",
+   "title": "Calcolo IMU",
+   "source_url": "https://www.comune.magione.pg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_42.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.magione.pg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_42.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.magione.pg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_42.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.magione.pg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_42.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.magione.pg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_42.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:55:34.236134Z"
+  },
+  "tributi_tari": {
+   "service_id": "054026:hgate:41",
+   "title": "TARI",
+   "source_url": "https://www.comune.magione.pg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_41.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.magione.pg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_41.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.magione.pg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_41.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.magione.pg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_41.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.magione.pg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_41.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:55:35.743654Z"
+  }
+ }
+}

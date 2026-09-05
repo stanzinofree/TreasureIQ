@@ -1,0 +1,172 @@
+{
+ "municipality_istat": "065143",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "065143:hgate:47",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.sicignanodeglialburni.sa.it/servizi/anagrafe_e_stato_civile/servizio_47.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sicignanodeglialburni.sa.it/servizi/anagrafe_e_stato_civile/servizio_47.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sicignanodeglialburni.sa.it/servizi/anagrafe_e_stato_civile/servizio_47.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.sicignanodeglialburni.sa.it/servizi/anagrafe_e_stato_civile/servizio_47.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.sicignanodeglialburni.sa.it/servizi/anagrafe_e_stato_civile/servizio_47.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:36:10.436955Z"
+  },
+  "carta_identita": {
+   "service_id": "065143:hgate:40",
+   "title": "Carta d'identità elettronica",
+   "source_url": "https://www.comune.sicignanodeglialburni.sa.it/servizi/anagrafe_e_stato_civile/servizio_40.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sicignanodeglialburni.sa.it/servizi/anagrafe_e_stato_civile/servizio_40.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sicignanodeglialburni.sa.it/servizi/anagrafe_e_stato_civile/servizio_40.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.sicignanodeglialburni.sa.it/servizi/anagrafe_e_stato_civile/servizio_40.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.sicignanodeglialburni.sa.it/servizi/anagrafe_e_stato_civile/servizio_40.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:36:06.709146Z"
+  },
+  "stato_civile": {
+   "service_id": "065143:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.sicignanodeglialburni.sa.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sicignanodeglialburni.sa.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sicignanodeglialburni.sa.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:36:11.714886Z"
+  },
+  "tributi_imu": {
+   "service_id": "065143:hgate:13",
+   "title": "Calcolo IMU",
+   "source_url": "https://www.comune.sicignanodeglialburni.sa.it/servizi/tributi_finanze_e_contravvenzioni/servizio_13.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sicignanodeglialburni.sa.it/servizi/tributi_finanze_e_contravvenzioni/servizio_13.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sicignanodeglialburni.sa.it/servizi/tributi_finanze_e_contravvenzioni/servizio_13.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.sicignanodeglialburni.sa.it/servizi/tributi_finanze_e_contravvenzioni/servizio_13.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.sicignanodeglialburni.sa.it/servizi/tributi_finanze_e_contravvenzioni/servizio_13.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:36:13.010869Z"
+  },
+  "tributi_tari": {
+   "service_id": "065143:hgate:45",
+   "title": "TARI",
+   "source_url": "https://www.comune.sicignanodeglialburni.sa.it/servizi/tributi_finanze_e_contravvenzioni/servizio_45.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.sicignanodeglialburni.sa.it/servizi/tributi_finanze_e_contravvenzioni/servizio_45.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.sicignanodeglialburni.sa.it/servizi/tributi_finanze_e_contravvenzioni/servizio_45.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.sicignanodeglialburni.sa.it/servizi/tributi_finanze_e_contravvenzioni/servizio_45.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.sicignanodeglialburni.sa.it/servizi/tributi_finanze_e_contravvenzioni/servizio_45.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:36:14.240152Z"
+  }
+ }
+}

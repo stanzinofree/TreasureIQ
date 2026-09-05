@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "070050",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "070050:hgate:53",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.palata.cb.it/servizi/anagrafe_e_stato_civile/servizio_53.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.palata.cb.it/servizi/anagrafe_e_stato_civile/servizio_53.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.palata.cb.it/servizi/anagrafe_e_stato_civile/servizio_53.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.palata.cb.it/servizi/anagrafe_e_stato_civile/servizio_53.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.palata.cb.it/servizi/anagrafe_e_stato_civile/servizio_53.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:50:32.251223Z"
+  },
+  "carta_identita": {
+   "service_id": "070050:hgate:56",
+   "title": "Carta d'identità elettronica",
+   "source_url": "https://www.comune.palata.cb.it/servizi/anagrafe_e_stato_civile/servizio_56.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.palata.cb.it/servizi/anagrafe_e_stato_civile/servizio_56.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.palata.cb.it/servizi/anagrafe_e_stato_civile/servizio_56.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.palata.cb.it/servizi/anagrafe_e_stato_civile/servizio_56.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.palata.cb.it/servizi/anagrafe_e_stato_civile/servizio_56.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:50:28.644152Z"
+  },
+  "stato_civile": {
+   "service_id": "070050:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.palata.cb.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.palata.cb.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.palata.cb.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:50:33.498374Z"
+  }
+ }
+}

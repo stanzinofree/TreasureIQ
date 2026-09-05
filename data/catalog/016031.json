@@ -1,0 +1,172 @@
+{
+ "municipality_istat": "016031",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "016031:hgate:35",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.bonatesotto.bg.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bonatesotto.bg.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bonatesotto.bg.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.bonatesotto.bg.it/servizi/anagrafe_e_stato_civile/servizio_35.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.bonatesotto.bg.it/servizi/anagrafe_e_stato_civile/servizio_35.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:24:46.449224Z"
+  },
+  "carta_identita": {
+   "service_id": "016031:hgate:38",
+   "title": "Carta d'identità elettronica",
+   "source_url": "https://www.comune.bonatesotto.bg.it/servizi/anagrafe_e_stato_civile/servizio_38.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bonatesotto.bg.it/servizi/anagrafe_e_stato_civile/servizio_38.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bonatesotto.bg.it/servizi/anagrafe_e_stato_civile/servizio_38.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.bonatesotto.bg.it/servizi/anagrafe_e_stato_civile/servizio_38.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.bonatesotto.bg.it/servizi/anagrafe_e_stato_civile/servizio_38.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:24:42.431227Z"
+  },
+  "stato_civile": {
+   "service_id": "016031:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.bonatesotto.bg.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bonatesotto.bg.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bonatesotto.bg.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:24:47.724531Z"
+  },
+  "tributi_imu": {
+   "service_id": "016031:hgate:64",
+   "title": "IMU Imposta municipale propria",
+   "source_url": "https://www.comune.bonatesotto.bg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_64.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bonatesotto.bg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_64.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bonatesotto.bg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_64.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.bonatesotto.bg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_64.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.bonatesotto.bg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_64.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:24:49.048173Z"
+  },
+  "tributi_tari": {
+   "service_id": "016031:hgate:65",
+   "title": "TARI-Tassa rifiuti",
+   "source_url": "https://www.comune.bonatesotto.bg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_65.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.bonatesotto.bg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_65.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.bonatesotto.bg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_65.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.bonatesotto.bg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_65.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.bonatesotto.bg.it/servizi/tributi_finanze_e_contravvenzioni/servizio_65.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T01:24:50.317059Z"
+  }
+ }
+}

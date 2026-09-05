@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "101018",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "101018:hgate:39",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.roccabernarda.kr.it/servizi/anagrafe_e_stato_civile/servizio_39.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.roccabernarda.kr.it/servizi/anagrafe_e_stato_civile/servizio_39.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.roccabernarda.kr.it/servizi/anagrafe_e_stato_civile/servizio_39.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.roccabernarda.kr.it/servizi/anagrafe_e_stato_civile/servizio_39.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.roccabernarda.kr.it/servizi/anagrafe_e_stato_civile/servizio_39.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T03:26:25.891599Z"
+  },
+  "stato_civile": {
+   "service_id": "101018:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.roccabernarda.kr.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.roccabernarda.kr.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.roccabernarda.kr.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T03:26:29.571963Z"
+  },
+  "tributi_imu": {
+   "service_id": "101018:hgate:35",
+   "title": "Sportello IMU",
+   "source_url": "https://www.comune.roccabernarda.kr.it/servizi/tributi_finanze_e_contravvenzioni/servizio_35.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.roccabernarda.kr.it/servizi/tributi_finanze_e_contravvenzioni/servizio_35.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.roccabernarda.kr.it/servizi/tributi_finanze_e_contravvenzioni/servizio_35.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.roccabernarda.kr.it/servizi/tributi_finanze_e_contravvenzioni/servizio_35.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.roccabernarda.kr.it/servizi/tributi_finanze_e_contravvenzioni/servizio_35.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T03:26:30.901193Z"
+  }
+ }
+}

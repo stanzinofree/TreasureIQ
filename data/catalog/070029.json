@@ -1,0 +1,100 @@
+{
+ "municipality_istat": "070029",
+ "services": {
+  "cambio_residenza": {
+   "service_id": "070029:hgate:68",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.guglionesi.cb.it/servizi/anagrafe_e_stato_civile/servizio_68.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.guglionesi.cb.it/servizi/anagrafe_e_stato_civile/servizio_68.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.guglionesi.cb.it/servizi/anagrafe_e_stato_civile/servizio_68.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.guglionesi.cb.it/servizi/anagrafe_e_stato_civile/servizio_68.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.guglionesi.cb.it/servizi/anagrafe_e_stato_civile/servizio_68.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:49:03.041664Z"
+  },
+  "carta_identita": {
+   "service_id": "070029:hgate:59",
+   "title": "Carta di Identità Elettronica",
+   "source_url": "https://www.comune.guglionesi.cb.it/servizi/anagrafe_e_stato_civile/servizio_59.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.guglionesi.cb.it/servizi/anagrafe_e_stato_civile/servizio_59.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.guglionesi.cb.it/servizi/anagrafe_e_stato_civile/servizio_59.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.guglionesi.cb.it/servizi/anagrafe_e_stato_civile/servizio_59.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.guglionesi.cb.it/servizi/anagrafe_e_stato_civile/servizio_59.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:48:59.300275Z"
+  },
+  "stato_civile": {
+   "service_id": "070029:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.guglionesi.cb.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.guglionesi.cb.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.guglionesi.cb.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:49:04.627563Z"
+  }
+ }
+}

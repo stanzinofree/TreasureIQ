@@ -1,0 +1,299 @@
+{
+ "municipality_istat": "065068",
+ "services": {
+  "accesso_atti": {
+   "service_id": "065068:hgate:8",
+   "title": "Accesso agli atti",
+   "source_url": "https://www.comune.minori.sa.it/servizi/urp/servizio_8.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.minori.sa.it/servizi/urp/servizio_8.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.minori.sa.it/servizi/urp/servizio_8.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.minori.sa.it/servizi/urp/servizio_8.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.minori.sa.it/servizi/urp/servizio_8.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:33:40.288425Z"
+  },
+  "cambio_residenza": {
+   "service_id": "065068:hgate:55",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.minori.sa.it/servizi/anagrafe_e_stato_civile/servizio_55.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.minori.sa.it/servizi/anagrafe_e_stato_civile/servizio_55.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.minori.sa.it/servizi/anagrafe_e_stato_civile/servizio_55.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.minori.sa.it/servizi/anagrafe_e_stato_civile/servizio_55.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.minori.sa.it/servizi/anagrafe_e_stato_civile/servizio_55.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:33:37.742286Z"
+  },
+  "carta_identita": {
+   "service_id": "065068:hgate:46",
+   "title": "Carta di identità elettronica",
+   "source_url": "https://www.comune.minori.sa.it/servizi/anagrafe_e_stato_civile/servizio_46.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.minori.sa.it/servizi/anagrafe_e_stato_civile/servizio_46.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.minori.sa.it/servizi/anagrafe_e_stato_civile/servizio_46.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.minori.sa.it/servizi/anagrafe_e_stato_civile/servizio_46.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.minori.sa.it/servizi/anagrafe_e_stato_civile/servizio_46.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:33:33.906153Z"
+  },
+  "stato_civile": {
+   "service_id": "065068:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.minori.sa.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.minori.sa.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.minori.sa.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://regione.campania.it/regione/it/news/regione-informa/modulistica-unificata-e-standardizzata-in-materia-di-attivita-commerciali-e-assimilate-ed-edilizia?page=1",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.minori.sa.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "http://www.parlamento.it/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.minori.sa.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.calameo.com/read/00241664769a95c374c94",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.minori.sa.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.calameo.com/read/0024166471518cc435885",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.minori.sa.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.calameo.com/read/002416647b8c250fc2b62",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.minori.sa.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.calameo.com/read/0024166478605ac2ba774",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.minori.sa.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.skylinewebcams.com/it/webcam/italia/campania/salerno/minori-spiaggia.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.minori.sa.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:33:39.027771Z"
+  },
+  "tributi_imu": {
+   "service_id": "065068:hgate:44",
+   "title": "Sportello IMU",
+   "source_url": "https://www.comune.minori.sa.it/servizi/tributi_finanze_e_contravvenzioni/servizio_44.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.minori.sa.it/servizi/tributi_finanze_e_contravvenzioni/servizio_44.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.minori.sa.it/servizi/tributi_finanze_e_contravvenzioni/servizio_44.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.minori.sa.it/servizi/tributi_finanze_e_contravvenzioni/servizio_44.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.minori.sa.it/servizi/tributi_finanze_e_contravvenzioni/servizio_44.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:33:41.559207Z"
+  },
+  "tributi_tari": {
+   "service_id": "065068:hgate:52",
+   "title": "TARI",
+   "source_url": "https://www.comune.minori.sa.it/servizi/tributi_finanze_e_contravvenzioni/servizio_52.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.minori.sa.it/servizi/tributi_finanze_e_contravvenzioni/servizio_52.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.minori.sa.it/servizi/tributi_finanze_e_contravvenzioni/servizio_52.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.minori.sa.it/servizi/tributi_finanze_e_contravvenzioni/servizio_52.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.minori.sa.it/servizi/tributi_finanze_e_contravvenzioni/servizio_52.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:33:42.882025Z"
+  }
+ }
+}

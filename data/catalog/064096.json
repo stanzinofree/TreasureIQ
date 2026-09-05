@@ -1,0 +1,221 @@
+{
+ "municipality_istat": "064096",
+ "services": {
+  "accesso_atti": {
+   "service_id": "064096:hgate:31",
+   "title": "Accesso atti pratiche edilizie",
+   "source_url": "https://www.comune.savignano.av.it/servizi/autorizzazioni/servizio_31.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.savignano.av.it/servizi/autorizzazioni/servizio_31.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.savignano.av.it/servizi/autorizzazioni/servizio_31.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.savignano.av.it/servizi/autorizzazioni/servizio_31.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.savignano.av.it/servizi/autorizzazioni/servizio_31.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:29:04.592247Z"
+  },
+  "cambio_residenza": {
+   "service_id": "064096:hgate:37",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.savignano.av.it/servizi/anagrafe_e_stato_civile/servizio_37.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.savignano.av.it/servizi/anagrafe_e_stato_civile/servizio_37.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.savignano.av.it/servizi/anagrafe_e_stato_civile/servizio_37.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.savignano.av.it/servizi/anagrafe_e_stato_civile/servizio_37.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.savignano.av.it/servizi/anagrafe_e_stato_civile/servizio_37.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:29:02.076422Z"
+  },
+  "carta_identita": {
+   "service_id": "064096:hgate:40",
+   "title": "Carta d'identità Elettronica",
+   "source_url": "https://www.comune.savignano.av.it/servizi/anagrafe_e_stato_civile/servizio_40.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.savignano.av.it/servizi/anagrafe_e_stato_civile/servizio_40.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.savignano.av.it/servizi/anagrafe_e_stato_civile/servizio_40.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.savignano.av.it/servizi/anagrafe_e_stato_civile/servizio_40.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.savignano.av.it/servizi/anagrafe_e_stato_civile/servizio_40.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:28:58.550001Z"
+  },
+  "stato_civile": {
+   "service_id": "064096:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.savignano.av.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.savignano.av.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.savignano.av.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://segnalazioni.asmenet.it/#/submission?context=8b9a19a2-93da-4523-9e14-51a309302d41",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.savignano.av.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:29:03.331648Z"
+  },
+  "tributi_imu": {
+   "service_id": "064096:hgate:33",
+   "title": "Sportello IMU",
+   "source_url": "https://www.comune.savignano.av.it/servizi/tributi_finanze_e_contravvenzioni/servizio_33.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.savignano.av.it/servizi/tributi_finanze_e_contravvenzioni/servizio_33.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.savignano.av.it/servizi/tributi_finanze_e_contravvenzioni/servizio_33.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.savignano.av.it/servizi/tributi_finanze_e_contravvenzioni/servizio_33.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.savignano.av.it/servizi/tributi_finanze_e_contravvenzioni/servizio_33.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:29:05.845282Z"
+  },
+  "tributi_tari": {
+   "service_id": "064096:hgate:42",
+   "title": "TARI",
+   "source_url": "https://www.comune.savignano.av.it/servizi/tributi_finanze_e_contravvenzioni/servizio_42.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.savignano.av.it/servizi/tributi_finanze_e_contravvenzioni/servizio_42.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.savignano.av.it/servizi/tributi_finanze_e_contravvenzioni/servizio_42.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.savignano.av.it/servizi/tributi_finanze_e_contravvenzioni/servizio_42.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.savignano.av.it/servizi/tributi_finanze_e_contravvenzioni/servizio_42.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:29:07.083945Z"
+  }
+ }
+}

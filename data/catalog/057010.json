@@ -1,0 +1,208 @@
+{
+ "municipality_istat": "057010",
+ "services": {
+  "accesso_atti": {
+   "service_id": "057010:hgate:8",
+   "title": "Accesso agli atti",
+   "source_url": "https://www.comune.cantalupoinsabina.ri.it/servizi/vita_lavorativa/servizio_8.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cantalupoinsabina.ri.it/servizi/vita_lavorativa/servizio_8.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cantalupoinsabina.ri.it/servizi/vita_lavorativa/servizio_8.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.cantalupoinsabina.ri.it/servizi/vita_lavorativa/servizio_8.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.cantalupoinsabina.ri.it/servizi/vita_lavorativa/servizio_8.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:01:51.210954Z"
+  },
+  "cambio_residenza": {
+   "service_id": "057010:hgate:174",
+   "title": "Cambio di residenza",
+   "source_url": "https://www.comune.cantalupoinsabina.ri.it/servizi/anagrafe_e_stato_civile/servizio_174.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cantalupoinsabina.ri.it/servizi/anagrafe_e_stato_civile/servizio_174.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cantalupoinsabina.ri.it/servizi/anagrafe_e_stato_civile/servizio_174.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.cantalupoinsabina.ri.it/servizi/anagrafe_e_stato_civile/servizio_174.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.cantalupoinsabina.ri.it/servizi/anagrafe_e_stato_civile/servizio_174.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:01:48.584456Z"
+  },
+  "carta_identita": {
+   "service_id": "057010:hgate:186",
+   "title": "Carta d'identità elettronica",
+   "source_url": "https://www.comune.cantalupoinsabina.ri.it/servizi/anagrafe_e_stato_civile/servizio_186.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cantalupoinsabina.ri.it/servizi/anagrafe_e_stato_civile/servizio_186.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cantalupoinsabina.ri.it/servizi/anagrafe_e_stato_civile/servizio_186.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.cantalupoinsabina.ri.it/servizi/anagrafe_e_stato_civile/servizio_186.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.cantalupoinsabina.ri.it/servizi/anagrafe_e_stato_civile/servizio_186.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:01:44.739575Z"
+  },
+  "stato_civile": {
+   "service_id": "057010:hgate:anagrafe_e_stato_civile",
+   "title": "Anagrafe e stato civile",
+   "source_url": "https://www.comune.cantalupoinsabina.ri.it/servizi/anagrafe_e_stato_civile/",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cantalupoinsabina.ri.it/servizi/anagrafe_e_stato_civile/",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cantalupoinsabina.ri.it/servizi/anagrafe_e_stato_civile/",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:01:49.848503Z"
+  },
+  "tributi_imu": {
+   "service_id": "057010:hgate:189",
+   "title": "Calcolo IMU",
+   "source_url": "https://www.comune.cantalupoinsabina.ri.it/servizi/tributi_finanze_e_contravvenzioni/servizio_189.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cantalupoinsabina.ri.it/servizi/tributi_finanze_e_contravvenzioni/servizio_189.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cantalupoinsabina.ri.it/servizi/tributi_finanze_e_contravvenzioni/servizio_189.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.cantalupoinsabina.ri.it/servizi/tributi_finanze_e_contravvenzioni/servizio_189.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.cantalupoinsabina.ri.it/servizi/tributi_finanze_e_contravvenzioni/servizio_189.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:01:52.450472Z"
+  },
+  "tributi_tari": {
+   "service_id": "057010:hgate:169",
+   "title": "TARI",
+   "source_url": "https://www.comune.cantalupoinsabina.ri.it/servizi/tributi_finanze_e_contravvenzioni/servizio_169.html",
+   "options": [
+    {
+     "mode": "information",
+     "url": "https://www.comune.cantalupoinsabina.ri.it/servizi/tributi_finanze_e_contravvenzioni/servizio_169.html",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": false,
+     "official": true,
+     "source_url": "https://www.comune.cantalupoinsabina.ri.it/servizi/tributi_finanze_e_contravvenzioni/servizio_169.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    },
+    {
+     "mode": "authenticated_online",
+     "url": "https://www.comune.cantalupoinsabina.ri.it/servizi/tributi_finanze_e_contravvenzioni/servizio_169.html#submit-request",
+     "provider": null,
+     "authentication": [],
+     "requires_authentication": true,
+     "official": true,
+     "source_url": "https://www.comune.cantalupoinsabina.ri.it/servizi/tributi_finanze_e_contravvenzioni/servizio_169.html",
+     "automatable": false,
+     "sp_platform_id": null,
+     "sp_role": null,
+     "sp_fingerprint": null
+    }
+   ],
+   "discovered_from": "ordinary_data",
+   "provider_platform": "hgate",
+   "discovered_at": "2026-09-05T02:01:53.707551Z"
+  }
+ }
+}

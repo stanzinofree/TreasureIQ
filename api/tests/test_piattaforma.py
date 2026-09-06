@@ -454,3 +454,34 @@ def test_un_solo_segnale_siscom_non_basta():
         s.piattaforma is Piattaforma.PEOPLEWEB and (s.prova or "").startswith("siscom")
         for s in esito.scattate
     )
+
+
+_FIXTURE_SPORTELLO = Path(__file__).parent / "fixtures" / "sportello"
+
+
+def test_sportello_telematico_batte_drupal_generico():
+    """Lo Sportello Telematico (Globo) È un Drupal: senza discriminante finirebbe
+    in DRUPAL generico e nessun connettore-servizio lo aggancerebbe. La firma
+    dedicata — marker Drupal + URL a schema `procedure:`/`action:<ns>` — lo separa
+    e vince (rango 0) su un Drupal qualunque, anche con header Drupal veri."""
+    html = (_FIXTURE_SPORTELLO / "cologno_imu.html").read_text(encoding="utf-8")
+    esito = classifica_risposta(
+        headers={"x-drupal-cache": "HIT"}, html=html, includi_at=False
+    )
+    assert esito.vincitore.piattaforma is Piattaforma.SPORTELLO_TELEMATICO
+    assert any(
+        s.piattaforma is Piattaforma.SPORTELLO_TELEMATICO for s in esito.scattate
+    )
+    assert any(s.piattaforma is Piattaforma.DRUPAL for s in esito.scattate)
+
+
+def test_drupal_senza_schema_procedure_resta_drupal():
+    """Un Drupal senza gli URL procedure:/action:<ns> NON è lo Sportello: la
+    firma dedicata richiede ENTRAMBI i marker, così un Drupal civico qualunque
+    resta DRUPAL e non viene attribuito alla famiglia Sportello."""
+    html = '<meta name="generator" content="Drupal 10 (https://www.drupal.org)">'
+    esito = classifica_risposta(headers={}, html=html, includi_at=False)
+    assert esito.vincitore.piattaforma is Piattaforma.DRUPAL
+    assert not any(
+        s.piattaforma is Piattaforma.SPORTELLO_TELEMATICO for s in esito.scattate
+    )

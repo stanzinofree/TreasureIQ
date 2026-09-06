@@ -104,6 +104,14 @@ class Piattaforma(str, Enum):
     #: che risponde su sei comuni su sei di tre regioni diverse.
     PAGEOBJECT = "pageobject"
     DRUPAL = "drupal"
+    #: Sportello Telematico Polifunzionale (Globo srl): un Drupal specializzato a
+    #: portale-procedure. Si riconosce da due segnali concordanti — il marker
+    #: Drupal (generator/asset) E lo schema URL `procedure:<ns>:<slug>` (encoded
+    #: `procedure%3A…`), unico della famiglia Globo e assente da un Drupal
+    #: qualunque. Distinto da `DRUPAL` perché il connettore-servizio lo legge
+    #: dalla sitemap paginata col vocabolario nazionale `s_italia`/`s_globo`,
+    #: cross-comune: Municipium spesso ne è solo la vetrina che vi rimanda.
+    SPORTELLO_TELEMATICO = "sportello_telematico"
     JOOMLA = "joomla"
     LIFERAY = "liferay"
     TYPO3 = "typo3"
@@ -299,6 +307,18 @@ _SISCOM_SEGNALI: tuple[tuple[str, re.Pattern[str]], ...] = (
 #: Soglia di concordanza: due segnali distinti bastano a fissare il vendor.
 _SISCOM_MIN_SEGNALI = 2
 
+#: Sportello Telematico (Globo) sopra un Drupal: come Siscom sopra DotNetNuke,
+#: due segnali concordanti fissano il fornitore contro il motore nudo. (1) il
+#: marker Drupal (generator o `drupal-settings-json`, nella testa) — c'è anche
+#: su un Drupal qualunque; (2) lo schema URL `procedure:<ns>:<slug>` col
+#: namespace (encoded `procedure%3A…` o pieno), UNICO della famiglia Globo e
+#: assente da un Drupal generico. Da soli sono larghi (un Drupal, un link
+#: qualsiasi); insieme sono il fingerprint dello Sportello.
+_SPORTELLO_DRUPAL = re.compile(r"\bDrupal\b|drupal-settings-json", re.I)
+_SPORTELLO_PROCEDURE = re.compile(
+    r"(?:procedure|action)(?:%3a|:)(?:s_italia|s_globo|c_[a-z]\d|r_[a-z])", re.I
+)
+
 _META_GENERATOR = re.compile(
     r"<meta[^>]+name=[\"']generator[\"'][^>]+content=[\"'](?P<v>[^\"']{1,120})",
     re.I,
@@ -406,6 +426,11 @@ _SCORE_EURISTICO = 50.0
 #: piccolo del salto fra classi (_SCORE_DEFINITIVO - _SCORE_EURISTICO = 50)
 #: perche' e' un aggiustamento, non una seconda gerarchia di forza.
 _RANGO_TAVOLA = {
+    # Sportello (Globo) prima di tutto: su una sua pagina scattano anche i
+    # segnali Drupal nudi (header `x-drupal-cache`, generator, asset). I due
+    # segnali concordanti Sportello sono più specifici del motore Drupal
+    # sottostante, quindi devono batterli tutti — anche l'header, rango 1.
+    "sportello": 0,
     "header_spia": 1,
     # Siscom prima di `generator`: due segnali vendor concordanti sono più
     # specifici di un `generator: DotNetNuke`, che nomina il motore e non il
@@ -638,6 +663,25 @@ def classifica_risposta(
                 Piattaforma.PEOPLEWEB,
                 _score(_SCORE_DEFINITIVO, "siscom"),
                 _tronca(f"siscom: {'+'.join(siscom_visti)}"),
+            )
+        )
+
+    # Sportello Telematico (Globo) sopra Drupal: come Siscom sopra DNN, due
+    # segnali concordanti — marker Drupal + schema URL `procedure:<ns>:<slug>` —
+    # fissano il portale-procedure contro il motore nudo. DEFINITIVO con rango 0,
+    # così batte anche i segnali Drupal (header/generator/asset) scattati sulla
+    # stessa pagina. Un segnale solo resta zitto: un Drupal qualunque ha il
+    # generator ma non lo schema `procedure:`, un link isolato non basta.
+    marker_drupal = _SPORTELLO_DRUPAL.search(corpo)
+    schema_procedure = _SPORTELLO_PROCEDURE.search(corpo)
+    if marker_drupal and schema_procedure:
+        scattate.append(
+            FirmaScattata(
+                Piattaforma.SPORTELLO_TELEMATICO,
+                _score(_SCORE_DEFINITIVO, "sportello"),
+                _tronca(
+                    f"sportello: drupal+{_tronca(schema_procedure.group(0), 40)}"
+                ),
             )
         )
 

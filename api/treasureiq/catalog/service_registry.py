@@ -55,6 +55,10 @@ from treasureiq.catalog.service_connectors.openpa_service import (
 from treasureiq.catalog.service_connectors.openweb_service import (
     OpenWebServiceConnector,
 )
+from treasureiq.catalog.service_connectors.sportello_service import (
+    SportelloServiceConnector,
+    _SportelloDiscovery,
+)
 from treasureiq.catalog.service_connectors.wordpress_agid import (
     WordPressAgidServiceConnector,
 )
@@ -91,6 +95,11 @@ def default_service_registry(esecutore: EsecutoreFetch) -> ConnectorRegistry:
     # discovery GET-only (home→IPA, tipi, elenco), il gate di piattaforma tiene
     # fuori ogni altra variante MyPortal (Veneto incluso) per costruzione.
     reg.register(LepidaServiceConnector(transport.con(_LepidaDiscovery())))
+    # Sportello Telematico (Globo) su host proprio (non Municipium): discovery
+    # sitemap Drupal → titolo dalla pagina, mapping ai soli namespace nazionali
+    # ``s_italia``/``s_globo``; il gate di piattaforma (``sportello_telematico``)
+    # tiene fuori un Drupal qualunque.
+    reg.register(SportelloServiceConnector(transport.con(_SportelloDiscovery())))
     # Magnolia (variant A) non usa il transport/discovery condiviso: legge il
     # proprio catalogo REST KIB col parser dedicato (magnolia.py), invariato.
     reg.register(MagnoliaServiceConnector())

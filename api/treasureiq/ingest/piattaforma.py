@@ -318,6 +318,13 @@ _SPORTELLO_DRUPAL = re.compile(r"\bDrupal\b|drupal-settings-json", re.I)
 _SPORTELLO_PROCEDURE = re.compile(
     r"(?:procedure|action)(?:%3a|:)(?:s_italia|s_globo|c_[a-z]\d|r_[a-z])", re.I
 )
+#: Il marker Drupal vive nella `<head>` (generator, settings-json), ma lo schema
+#: `procedure:`/`action:` compare spesso solo nel menù/footer della home: su una
+#: home Sportello reale (Codogno, Drupal 10/STU3) il primo link a schema è oltre
+#: i 40 KB di FINESTRA_ASSET. Come per Siscom, allarghiamo la sola ricerca dello
+#: schema a una finestra ampia, così la home viene attribuita alla famiglia e
+#: non a un Drupal generico. Lo schema resta specifico: non falsa su altro.
+FINESTRA_SPORTELLO = 120_000
 
 _META_GENERATOR = re.compile(
     r"<meta[^>]+name=[\"']generator[\"'][^>]+content=[\"'](?P<v>[^\"']{1,120})",
@@ -673,7 +680,7 @@ def classifica_risposta(
     # stessa pagina. Un segnale solo resta zitto: un Drupal qualunque ha il
     # generator ma non lo schema `procedure:`, un link isolato non basta.
     marker_drupal = _SPORTELLO_DRUPAL.search(corpo)
-    schema_procedure = _SPORTELLO_PROCEDURE.search(corpo)
+    schema_procedure = _SPORTELLO_PROCEDURE.search(html[:FINESTRA_SPORTELLO])
     if marker_drupal and schema_procedure:
         scattate.append(
             FirmaScattata(

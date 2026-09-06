@@ -485,3 +485,26 @@ def test_drupal_senza_schema_procedure_resta_drupal():
     assert not any(
         s.piattaforma is Piattaforma.SPORTELLO_TELEMATICO for s in esito.scattate
     )
+
+
+def test_sportelloamico_reale_riconosciuto():
+    """Terza variante di sottodominio della famiglia Globo (`sportelloamico.*`,
+    Codogno, Drupal 10 / STU3): pagina reale. La firma dedicata scatta su un
+    host diverso da Cologno/Pomezia — il gate è per-piattaforma, non per-host —
+    e vince sui segnali Drupal nudi della stessa pagina."""
+    html = (_FIXTURE_SPORTELLO / "codogno_home.html").read_text(encoding="utf-8")
+    esito = classifica_risposta(headers={}, html=html, includi_at=False)
+    assert esito.vincitore.piattaforma is Piattaforma.SPORTELLO_TELEMATICO
+    assert any(s.piattaforma is Piattaforma.DRUPAL for s in esito.scattate)
+
+
+def test_wordpress_sportello_comune_non_e_sportello_telematico():
+    """Anti-falso-positivo su un look-alike reale: `sportello.comune.<x>.it`
+    (Vinovo) NON è la famiglia Globo ma un «sportello unico digitale» WordPress.
+    Manca il motore Drupal e lo schema procedure:/action:<ns>, quindi la firma
+    Sportello resta zitta e l'host non viene attribuito alla famiglia."""
+    html = (_FIXTURE_SPORTELLO / "vinovo_wp_home.html").read_text(encoding="utf-8")
+    esito = classifica_risposta(headers={}, html=html, includi_at=False)
+    assert not any(
+        s.piattaforma is Piattaforma.SPORTELLO_TELEMATICO for s in esito.scattate
+    )

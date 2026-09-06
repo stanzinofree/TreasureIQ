@@ -1,0 +1,21 @@
+{
+ "status": "ok",
+ "entities": [
+  {
+   "type": "rer_schedaservizio",
+   "name": "SchedaServizio"
+  },
+  {
+   "type": "rer_news",
+   "name": "News"
+  },
+  {
+   "type": "rer_pagina_di_orientamento",
+   "name": "PaginaDiOrientamento"
+  },
+  {
+   "type": "rer_settore",
+   "name": "Settore"
+  }
+ ]
+}

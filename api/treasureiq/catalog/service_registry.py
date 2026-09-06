@@ -41,6 +41,10 @@ from treasureiq.catalog.service_connectors.hgate_service import (
     HGateServiceConnector,
     _HGateDiscovery,
 )
+from treasureiq.catalog.service_connectors.lepida_service import (
+    LepidaServiceConnector,
+    _LepidaDiscovery,
+)
 from treasureiq.catalog.service_connectors.magnolia_service import (
     MagnoliaServiceConnector,
 )
@@ -83,6 +87,10 @@ def default_service_registry(esecutore: EsecutoreFetch) -> ConnectorRegistry:
     reg.register(OpenPAServiceConnector(transport.con(_EzFindDiscovery())))
     reg.register(DrupalBiServiceConnector(transport.con(_DrupalBiDiscovery())))
     reg.register(HGateServiceConnector(transport.con(_HGateDiscovery())))
+    # Lepida/MyPortal, scoped alla sola Rete Civica ER (rete_civica_lepida):
+    # discovery GET-only (home→IPA, tipi, elenco), il gate di piattaforma tiene
+    # fuori ogni altra variante MyPortal (Veneto incluso) per costruzione.
+    reg.register(LepidaServiceConnector(transport.con(_LepidaDiscovery())))
     # Magnolia (variant A) non usa il transport/discovery condiviso: legge il
     # proprio catalogo REST KIB col parser dedicato (magnolia.py), invariato.
     reg.register(MagnoliaServiceConnector())

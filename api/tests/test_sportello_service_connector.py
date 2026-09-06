@@ -85,6 +85,23 @@ _P_TRASC_DOM = _u(
     _POMEZIA_HOST, "/procedure%3As_italia%3Atrascrizione.atti.stato.civile%3Besteri%3Bdomanda"
 )
 
+# Terza variante di sottodominio della famiglia Globo: `sportelloamico.*`
+# (Codogno, Drupal 10 / STU3). Stesso motore, sitemap flat; il connettore è
+# host-agnostico (la base viene da mappa.sito, nessun host cablato). `<loc>`
+# reali: nazionali s_italia (mappati) + locali r_lombar/c_c816 (esclusi).
+_CODOGNO = "098019"
+_CODOGNO_HOST = "sportelloamico.comune.codogno.lo.it"
+_CO_SITEMAP = _u(_CODOGNO_HOST, "/sitemap.xml")
+_CO_IMU = _u(_CODOGNO_HOST, "/procedure%3As_italia%3Aimposta.municipale.unica%3Bdichiarazione")
+_CO_IMU_ACTION = _u(
+    _CODOGNO_HOST, "/action%3As_italia%3Aimposta.municipale.unica%3Bdichiarazione"
+)
+_CO_IMU_PAG = _u(_CODOGNO_HOST, "/procedure%3As_italia%3Aimposta.municipale.unica%3Bpagamento")
+_CO_LOC_R = _u(
+    _CODOGNO_HOST, "/action%3Ar_lombar%3Aedilizia.residenziale.pubblica%3Bassegnazione.alloggio"
+)
+_CO_LOC_C = _u(_CODOGNO_HOST, "/action%3Ac_c816%3Aasilo.nido%3Biscrizione")
+
 
 def _pagine_cologno() -> dict[str, str]:
     return {
@@ -104,6 +121,27 @@ def _pagine_pomezia() -> dict[str, str]:
         _P_SITEMAP: _fix("pomezia_sitemap_root.xml"),
         _P_TRASC: _fix("pomezia_trascrizione.html"),
         _P_TRASC_DOM: _fix("pomezia_trascrizione_domanda.html"),
+    }
+
+
+def _pagine_codogno() -> dict[str, str]:
+    # Subset curato esattamente-uno: la sola scheda procedure IMU (+ il gemello
+    # action nello stesso slug, dedotto → mai fetchato) e due loc locali
+    # r_lombar/c_c816 presenti NEL sitemap ma non nel dict: escluse per
+    # namespace, non devono mai essere fetchate.
+    return {
+        _CO_SITEMAP: _fix("codogno_sitemap.xml"),
+        _CO_IMU: _fix("codogno_imu.html"),
+    }
+
+
+def _pagine_codogno_ambiguo() -> dict[str, str]:
+    # Verità di terra reale: due schede IMU nazionali distinte (dichiarazione +
+    # pagamento), entrambe TRIBUTI_IMU → ≥2 → NOT_FOUND onesto.
+    return {
+        _CO_SITEMAP: _fix("codogno_sitemap_ambiguo.xml"),
+        _CO_IMU: _fix("codogno_imu.html"),
+        _CO_IMU_PAG: _fix("codogno_imu_pagamento.html"),
     }
 
 
@@ -363,3 +401,39 @@ def test_source_id_mismatch_solleva():
     except ValueError:
         return
     raise AssertionError("atteso ValueError su source_id mismatch")
+
+
+# ── 3ª variante di sottodominio: sportelloamico (Codogno) ────────────────────
+
+
+def test_sportelloamico_imu_fulfilled_host_agnostico():
+    # Stesso motore Globo su un terzo pattern di host (sportelloamico.*): il
+    # connettore NON cabla host, la base viene da mappa.sito. procedure:+action:
+    # stesso slug → UN servizio (dedup ns:slug) → FULFILLED; r_lombar e c_c816
+    # locali sono nel sitemap ma restano fuori (namespace non nazionale).
+    r, fetcher = _risolvi(
+        _CODOGNO, _CODOGNO_HOST, _pagine_codogno(), ServiceKey.TRIBUTI_IMU
+    )
+    assert r.status is DataStatus.FULFILLED
+    (ref,) = r.service_references
+    assert ref.service_id == (
+        f"{_CODOGNO}:sportello:s_italia:imposta.municipale.unica;dichiarazione"
+    )
+    letti = fetcher.transport.letti
+    # dedup: la scheda procedure è tenuta, l'action gemello NON è fetchato.
+    assert _CO_IMU in letti
+    assert _CO_IMU_ACTION not in letti
+    # esclusione namespace locali: r_lombar e c_c816 mai fetchati.
+    assert _CO_LOC_R not in letti
+    assert _CO_LOC_C not in letti
+
+
+def test_sportelloamico_imu_ambiguo_not_found():
+    # Verità di terra reale: su Codogno l'IMU nazionale ha più schede distinte
+    # (dichiarazione + pagamento), entrambe TRIBUTI_IMU → ≥2 → NOT_FOUND onesto
+    # (I-1), esattamente come live. Nessuna elezione arbitraria.
+    r, _ = _risolvi(
+        _CODOGNO, _CODOGNO_HOST, _pagine_codogno_ambiguo(), ServiceKey.TRIBUTI_IMU
+    )
+    assert r.status is DataStatus.NOT_FOUND
+    assert r.service_references == ()

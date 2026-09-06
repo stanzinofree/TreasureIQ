@@ -1,0 +1,57 @@
+{
+ "status": "ok",
+ "page": {
+  "index": 1,
+  "entitiesCount": 6,
+  "entities": [
+   {
+    "sourceId": "674f036adbae62009a6bad28",
+    "name": "Cambio di residenza Iscrizione in anagrafe",
+    "parent": "/Servizi/Anagrafe e stato civile",
+    "attributes": {
+     "sys_canonical_url": "/servizi/anagrafe-e-stato-civile/cambio-di-residenza-iscrizione-in-anagrafe"
+    }
+   },
+   {
+    "sourceId": "673b6877b67fc80097c5da05",
+    "name": "Carta didentita elettronica CIE",
+    "parent": "/Servizi/Anagrafe e stato civile",
+    "attributes": {
+     "sys_canonical_url": "/servizi/anagrafe-e-stato-civile/carta-didentita-elettronica-cie"
+    }
+   },
+   {
+    "sourceId": "6705433c567dad009890f3f0",
+    "name": "Accesso agli atti e ai documenti amministrativi",
+    "parent": "/Servizi/Anagrafe e stato civile",
+    "attributes": {
+     "sys_canonical_url": "/servizi/anagrafe-e-stato-civile/accesso-agli-atti-e-documenti-amministrativi"
+    }
+   },
+   {
+    "sourceId": "674f1360e0cdaf00986d7333",
+    "name": "Accesso agli atti e ai documenti amministrativi ufficio tecnico",
+    "parent": "/Servizi/Urbanistica, Edilizia, SIT",
+    "attributes": {
+     "sys_canonical_url": "/servizi/urbanistica-edilizia-sit/accesso-agli-atti-e-ai-documenti-amministrativi"
+    }
+   },
+   {
+    "sourceId": "6705525d567dad00989105ce",
+    "name": "AIRE Anagrafe degli italiani residenti allestero",
+    "parent": "/Servizi/Anagrafe e stato civile",
+    "attributes": {
+     "sys_canonical_url": "/servizi/anagrafe-e-stato-civile/aire-anagrafe-degli-italiani-residenti-allestero"
+    }
+   },
+   {
+    "sourceId": "66fe516a430ec30099dd18e7",
+    "name": "Abbattimento e potatura alberi Segnalazione Certificata di Inizio Attivita",
+    "parent": "/Servizi/Ambiente",
+    "attributes": {
+     "sys_canonical_url": "/servizi/ambiente/abbattimento-e-potatura-alberi-segnalazione-certificata-di-inizio-attivita"
+    }
+   }
+  ]
+ }
+}

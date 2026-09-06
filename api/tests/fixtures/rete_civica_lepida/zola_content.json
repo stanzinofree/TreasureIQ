@@ -1,0 +1,65 @@
+{
+ "status": "ok",
+ "page": {
+  "index": 1,
+  "entitiesCount": 7,
+  "entities": [
+   {
+    "sourceId": "66e22003149ce5009bb5b3b8",
+    "name": "TARI Tassa sui Rifiuti sostituita da TCP",
+    "parent": "/Servizi/Tributi, finanze e contravvenzioni",
+    "attributes": {
+     "sys_canonical_url": "/servizi/tributi-finanze-e-contravvenzioni/tari-tassa-sui-rifiuti"
+    }
+   },
+   {
+    "sourceId": "66d9bc224347260099881e0a",
+    "name": "IMU Imposta Municipale Propria",
+    "parent": "/Servizi/Tributi, finanze e contravvenzioni",
+    "attributes": {
+     "sys_canonical_url": "/servizi/tributi-finanze-e-contravvenzioni/imu-imposta-municipale-propria"
+    }
+   },
+   {
+    "sourceId": "66e21576149ce5009bb5b14a",
+    "name": "Separazione o divorzio davanti allufficiale di stato civile",
+    "parent": "/Servizi/Anagrafe e stato civile",
+    "attributes": {
+     "sys_canonical_url": "/servizi/anagrafe-e-stato-civile/separazione-o-divorzio-davanti-allufficiale-di-stato-civile"
+    }
+   },
+   {
+    "sourceId": "66c3768ccdbf350099b413b9",
+    "name": "Carta di Identita Elettronica CIE",
+    "parent": "/Servizi/Anagrafe e stato civile",
+    "attributes": {
+     "sys_canonical_url": "/servizi/anagrafe-e-stato-civile/carta-di-identita-elettronica-cie"
+    }
+   },
+   {
+    "sourceId": "66c88ee9c9756b00993c9595",
+    "name": "Carta di identita in formato cartaceo",
+    "parent": "/Servizi/Anagrafe e stato civile",
+    "attributes": {
+     "sys_canonical_url": "/servizi/anagrafe-e-stato-civile/carta-di-identita-in-formato-cartaceo"
+    }
+   },
+   {
+    "sourceId": "66f28cab954b1f009904a176",
+    "name": "Accesso ai Servizi sociali",
+    "parent": "/Servizi/Salute, benessere e assistenza",
+    "attributes": {
+     "sys_canonical_url": "/servizi/salute-benessere-e-assistenza/accesso-ai-servizi-sociali"
+    }
+   },
+   {
+    "sourceId": "664ded2c481d12009775ea8e",
+    "name": "Dichiarazione dei requisiti per lacquisto o locazione di edilizia convenzionata",
+    "parent": "/Servizi/Salute, benessere e assistenza",
+    "attributes": {
+     "sys_canonical_url": "/servizi/salute-benessere-e-assistenza/edilizia-convenzionata-dichiarazione-di-possesso-dei-requisiti-per-lacquisto-o-locazione"
+    }
+   }
+  ]
+ }
+}

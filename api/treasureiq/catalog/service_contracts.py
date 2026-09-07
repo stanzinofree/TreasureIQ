@@ -43,6 +43,32 @@ class ServiceKey(str, Enum):
     TRIBUTI_TARI = "tributi_tari"
 
 
+class AzioneServizio(str, Enum):
+    """Orthogonal ACTION axis over a ``ServiceKey`` (Ramo 3, facet-azione MVP).
+
+    A ``ServiceKey`` names *what* civic entity the citizen asks about (IMU, TARI);
+    an ``AzioneServizio`` names *what they want to do* with it (pay it, declare
+    it).  The two are independent: the same topic fans out into several portal
+    services that differ only by action ("Pagamento IMU" vs "Dichiarazione IMU"),
+    and the shared portals expose that finer service granularity while the
+    ServiceKey stays at topic granularity — the root cause of honest ≥2
+    NOT_FOUND on dense catalogs.
+
+    Resolve-time only: the recogniser reads it from citizen text
+    (``chat/service_key.py``) and the connector confirms it on the candidate
+    title/slug (``service_connectors/facet_azione.py``), narrowing ≥2 confirmed
+    candidates to exactly one WITHOUT touching I-1 (0 or ≥2 after the facet stays
+    NOT_FOUND, no arbitrary fallback).  Extended only by adding a value — a topic
+    outside this closed axis stays actionless (``None``), never mapped to a
+    neighbour.  MVP restricted to the two actions municipalities title cleanly and
+    citizens name directly; comunicazione/residenza/CIE and the semantic splits
+    are deferred sub-cycles.
+    """
+
+    PAGAMENTO = "pagamento"
+    DICHIARAZIONE = "dichiarazione"
+
+
 #: One canonical REST search term per key, used to NARROW a single ``search=``
 #: query against the WordPress service CPT (Ramo 3, Slice 4).  This is the
 #: acquisition side of the vocabulary and is deliberately distinct from the

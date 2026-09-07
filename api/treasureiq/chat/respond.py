@@ -96,7 +96,11 @@ from treasureiq.catalog.service_connectors.intento_azione import (
     IntentoAzione,
     raggruppa_per_intento,
 )
-from treasureiq.chat.service_key import ServiceKey, riconosci_service_key
+from treasureiq.chat.service_key import (
+    ServiceKey,
+    riconosci_azione,
+    riconosci_service_key,
+)
 from treasureiq.chat.categorie import Categoria, topics_di
 from treasureiq.chat.intent import (
     AMBIGUOUS_ROLE_TOPICS,
@@ -4297,7 +4301,14 @@ async def _risposta_modulistica(
     #   None                    → miss onesto (URP), mai fallback SP (D-S5-2);
     #   DisambiguazioneServizi  → ≥2 confermati: si espone la scelta, non si elegge;
     #   ResolvedService         → un servizio: si mostra la porta ufficiale.
-    request = service_request(source_id=target_istat, service_key=service_key)
+    # Facet-azione (Ramo 3): l'azione riconosciuta nel messaggio viaggia accanto
+    # alla key. È None se assente/ambigua → facet no-op nel connettore. Serve solo
+    # a restringere ≥2 confermati facetabili a esattamente-1 (nessun fallback).
+    request = service_request(
+        source_id=target_istat,
+        service_key=service_key,
+        azione=riconosci_azione(message),
+    )
     esito = await asyncio.to_thread(
         risolvi_o_disambigua,
         request,

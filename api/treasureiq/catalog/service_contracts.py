@@ -85,7 +85,14 @@ class VarianteServizio(str, Enum):
     estero/abitazione), so the recogniser is keyed on the ``ServiceKey`` and a
     value only ever applies to the topics that declare it.  Composable with the
     action facet at the same shared punto comune, as a second filter — never a
-    replacement.  MVP: TARI only; residenza/CIE are deferred sub-cycles.
+    replacement.  MVP: TARI (domestiche/non.domestiche) and CAMBIO_RESIDENZA
+    (interno/immigrazione); estero/AIRE, convivenza and comunitari are deferred
+    sub-cycles.  The residenza scenarios live in the SAME slug segment slot as the
+    action (``;abitazione``/``;residenza`` vs ``;dichiarazione``), so the variant
+    markers are anchored on that trailing segment; estero is deferred because its
+    candidate set is 2 (istanza + dichiarazione) and would need action
+    composition, and because ``estero`` is directionally ambiguous on the citizen
+    side (``all'estero`` emigration vs ``dall'estero`` immigration).
 
     Same I-1 discipline as the action facet: resolve-time only, exactly-one-or-
     ``None`` on both sides (citizen text and candidate slug), 0 or ≥2 survivors
@@ -96,6 +103,10 @@ class VarianteServizio(str, Enum):
     DOMESTICHE = "domestiche"
     #: TARI utenza non domestica (business waste tax).  Slug: ``utenze.non.domestiche``.
     NON_DOMESTICHE = "non_domestiche"
+    #: Cambio residenza nello stesso comune.  Portal slug: ``...residenza;abitazione``.
+    INTERNO = "interno"
+    #: Immigrazione da altro comune italiano.  Portal slug: ``...residenza;residenza``.
+    IMMIGRAZIONE = "immigrazione"
 
 
 #: One canonical REST search term per key, used to NARROW a single ``search=``

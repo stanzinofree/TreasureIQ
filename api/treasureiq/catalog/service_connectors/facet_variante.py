@@ -19,7 +19,8 @@ Contract (never weakens I-1, composes with — never replaces — the action fac
 - TOPIC-SCOPED.  The variant vocabulary is per-key (``_VARIANT_MARKERS``): TARI's
   domestiche/non.domestiche do not generalise to other topics, so a key absent
   from that table is never narrowed (the facet stays a strict no-op for it).  MVP
-  covers TARI only; residenza/CIE are deferred sub-cycles.
+  covers TARI (domestiche/non.domestiche) and CAMBIO_RESIDENZA (interno/
+  immigrazione); estero/AIRE, convivenza, comunitari and CIE are deferred.
 
 - The facet applies ONLY to keys in ``_VARIANT_MARKERS`` and ONLY when the turn
   carries a variant.  Otherwise it is a strict no-op (candidates unchanged), so
@@ -63,10 +64,23 @@ _DOMANDA = "domanda"
 #: ``tassa.rifiuti;utenze.non.domestiche;dichiarazione``.  Non-domestic is checked
 #: with no anti-marker; domestic carries ``non.domestiche`` as anti so the shared
 #: ``domestiche`` substring cannot double-fire it.
+#:
+#: RESIDENZA evidence (17-comune recon, national ``s_italia`` taxonomy): the change
+#: family shares base ``cambio.abitazione.residenza`` and splits on the TRAILING
+#: segment — ``;abitazione`` (cambio interno, exactly-1/host) vs ``;residenza``
+#: (immigrazione da altro comune, exactly-1/host) vs ``;dichiarazione`` (the action
+#: axis, matches neither variant → ``None``).  The markers carry the leading ``;``
+#: so they anchor on that segment: the base's dot-separated ``.abitazione.`` and
+#: ``.residenza`` cannot double-fire, so no anti-marker is needed.  ``estero`` is
+#: deferred (candidate set 2 + directional ambiguity — see ``VarianteServizio``).
 _VARIANT_MARKERS: dict[ServiceKey, tuple[tuple[VarianteServizio, tuple[str, ...], tuple[str, ...]], ...]] = {
     ServiceKey.TRIBUTI_TARI: (
         (VarianteServizio.NON_DOMESTICHE, ("non.domestiche",), ()),
         (VarianteServizio.DOMESTICHE, ("domestiche",), ("non.domestiche",)),
+    ),
+    ServiceKey.CAMBIO_RESIDENZA: (
+        (VarianteServizio.INTERNO, (";abitazione",), ()),
+        (VarianteServizio.IMMIGRAZIONE, (";residenza",), ()),
     ),
 }
 

@@ -375,3 +375,201 @@ def test_unico_candidato_senza_variante_resta_fulfilled():
     assert r.status is DataStatus.FULFILLED
     (ref,) = r.service_references
     assert ref.service_id.endswith("s_italia:tassa.rifiuti;utenze.domestiche;dichiarazione")
+
+
+# ── RESIDENZA (Ramo 3, sotto-ciclo MVP) ─────────────────────────────────────
+# Secondo topic sull'asse VARIANT.  La famiglia "cambio residenza" condivide la
+# base ``cambio.abitazione.residenza`` e si sdoppia sul segmento finale:
+# ``;abitazione`` (interno) vs ``;residenza`` (immigrazione da altro comune).
+# ``;dichiarazione`` è l'asse azione, non variante → il candidato non matcha e
+# resta None.  estero/AIRE è deferred (cardinalità 2 + ambiguità direzionale):
+# un qualsiasi cenno a "estero"/"aire" è vetato → None (fail-closed).
+
+# — recogniser cittadino: exactly-one-or-None + veto estero direzionale —
+@pytest.mark.parametrize(
+    "message, atteso",
+    [
+        ("voglio fare il cambio residenza nello stesso comune", VarianteServizio.INTERNO),
+        ("cambio residenza, solo cambio abitazione", VarianteServizio.INTERNO),
+        ("cambio residenza con nuovo indirizzo", VarianteServizio.INTERNO),
+        ("cambio residenza da un altro comune", VarianteServizio.IMMIGRAZIONE),
+        ("mi trasferisco da Milano, cambio residenza", VarianteServizio.IMMIGRAZIONE),
+        ("cambio residenza, vengo da fuori", VarianteServizio.IMMIGRAZIONE),
+    ],
+)
+def test_riconosci_variante_residenza(message, atteso):
+    assert riconosci_variante(message, ServiceKey.CAMBIO_RESIDENZA) is atteso
+
+
+@pytest.mark.parametrize(
+    "message",
+    [
+        "cambio residenza",                               # bare → ambiguo
+        "trasferimento residenza",                        # bare → ambiguo
+        "cambio residenza stesso comune da altro comune",  # entrambe → ambiguo
+    ],
+)
+def test_riconosci_variante_residenza_ambiguo_none(message):
+    # 0 o 2 famiglie accese → None → NOT_FOUND a valle (I-1, fail-closed).
+    assert riconosci_variante(message, ServiceKey.CAMBIO_RESIDENZA) is None
+
+
+@pytest.mark.parametrize(
+    "message",
+    [
+        "cambio residenza, mi trasferisco all'estero",  # emigrazione → deferred
+        "cambio residenza, iscrizione AIRE",             # AIRE → deferred
+        "cambio residenza: vengo dall'estero",           # direzionale: NON immigrazione inter-comune
+        "cambio residenza per espatrio",
+    ],
+)
+def test_riconosci_variante_residenza_veto_estero(message):
+    # "vengo dall'estero" contiene il marker immigrazione "vengo da", ma il veto
+    # estero ha la precedenza: rientro dall'estero ≠ immigrazione da altro comune.
+    assert riconosci_variante(message, ServiceKey.CAMBIO_RESIDENZA) is None
+
+
+# — candidato lato slug: segmento finale discrimina, dichiarazione → None —
+def test_candidato_residenza_interno_da_slug():
+    c = _cand(
+        "s_italia:cambio.abitazione.residenza;abitazione",
+        "Cambio residenza - nuova abitazione nello stesso comune",
+    )
+    assert variante_del_candidato(c, ServiceKey.CAMBIO_RESIDENZA) is VarianteServizio.INTERNO
+
+
+def test_candidato_residenza_immigrazione_da_slug():
+    c = _cand(
+        "s_italia:cambio.abitazione.residenza;residenza",
+        "Cambio residenza - iscrizione da altro comune",
+    )
+    assert variante_del_candidato(c, ServiceKey.CAMBIO_RESIDENZA) is VarianteServizio.IMMIGRAZIONE
+
+
+def test_candidato_residenza_dichiarazione_none():
+    # ``;dichiarazione`` è l'asse azione: nessun marker variante → None.
+    c = _cand(
+        "s_italia:cambio.abitazione.residenza;dichiarazione",
+        "Dichiarazione di cambio residenza",
+    )
+    assert variante_del_candidato(c, ServiceKey.CAMBIO_RESIDENZA) is None
+
+
+def _due_residenza() -> tuple[ServiceCandidate, ServiceCandidate]:
+    return (
+        _cand(
+            "s_italia:cambio.abitazione.residenza;abitazione",
+            "Cambio residenza - nuova abitazione",
+        ),
+        _cand(
+            "s_italia:cambio.abitazione.residenza;residenza",
+            "Cambio residenza - da altro comune",
+        ),
+    )
+
+
+def test_filtra_residenza_restringe_a_uno():
+    (solo,) = filtra_per_variante(
+        list(_due_residenza()), ServiceKey.CAMBIO_RESIDENZA, VarianteServizio.INTERNO
+    )
+    assert solo.native_id.endswith("cambio.abitazione.residenza;abitazione")
+
+
+# — end-to-end Sportello (net-free), fail-closed sulla cardinalità —
+_CO_RES_INT = "/procedure%3As_italia%3Acambio.abitazione.residenza%3Babitazione"
+_CO_RES_IMM = "/procedure%3As_italia%3Acambio.abitazione.residenza%3Bresidenza"
+
+
+def _pagina_res(titolo: str) -> str:
+    return (
+        f"<!DOCTYPE html><html lang='it'><head>"
+        f"<title>{titolo} | Comune di Codogno</title></head><body></body></html>"
+    )
+
+
+def _pagine_codogno_residenza(*, solo_interno: bool = False) -> dict[str, str]:
+    urls = [_CO_RES_INT] if solo_interno else [_CO_RES_INT, _CO_RES_IMM]
+    sitemap = (
+        "<?xml version='1.0' encoding='UTF-8'?>"
+        "<urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>"
+        + "".join(f"<url><loc>{_u(_CODOGNO_HOST, p)}</loc></url>" for p in urls)
+        + "</urlset>"
+    )
+    pagine = {
+        _u(_CODOGNO_HOST, "/sitemap.xml"): sitemap,
+        _u(_CODOGNO_HOST, _CO_RES_INT): _pagina_res("Cambio residenza - nuova abitazione"),
+    }
+    if not solo_interno:
+        pagine[_u(_CODOGNO_HOST, _CO_RES_IMM)] = _pagina_res("Cambio residenza - da altro comune")
+    return pagine
+
+
+def _request_residenza(*, variante: VarianteServizio | None) -> DataRequest:
+    selection: dict[str, object] = {"service_key": ServiceKey.CAMBIO_RESIDENZA.value}
+    if variante is not None:
+        selection["variante"] = variante.value
+    return DataRequest(
+        request_id=f"t:{_CODOGNO}:variante-residenza",
+        source_id=_CODOGNO,
+        surface=Surface.ORDINARY_DATA,
+        capability=CAPABILITY_SERVICES,
+        selection=selection,
+        freshness=FreshnessPolicy(max_age_seconds=86_400),
+        manifest_revision=1,
+    )
+
+
+def _risolvi_residenza(*, variante: VarianteServizio | None, solo_interno: bool = False):
+    fetcher = _FetcherSportello(_pagine_codogno_residenza(solo_interno=solo_interno))
+    conn = SportelloServiceConnector(fetcher)
+    return conn.retrieve(
+        _request_residenza(variante=variante),
+        mappa=_mappa(istat=_CODOGNO, host=_CODOGNO_HOST),
+        esito=None,
+    )
+
+
+def test_residenza_interno_fulfilled():
+    # I due (interno + immigrazione) sarebbero ≥2 → NOT_FOUND; la variante INTERNO
+    # risolve esattamente ``;abitazione``.
+    r = _risolvi_residenza(variante=VarianteServizio.INTERNO)
+    assert r.status is DataStatus.FULFILLED
+    (ref,) = r.service_references
+    assert ref.service_id.endswith("s_italia:cambio.abitazione.residenza;abitazione")
+
+
+def test_residenza_immigrazione_fulfilled():
+    r = _risolvi_residenza(variante=VarianteServizio.IMMIGRAZIONE)
+    assert r.status is DataStatus.FULFILLED
+    (ref,) = r.service_references
+    assert ref.service_id.endswith("s_italia:cambio.abitazione.residenza;residenza")
+
+
+def test_residenza_senza_variante_ambiguo_not_found():
+    # ≥2 candidati, nessuna variante: Sportello non ammette disambiguazione → NOT_FOUND.
+    r = _risolvi_residenza(variante=None)
+    assert r.status is DataStatus.NOT_FOUND
+    assert not r.service_references
+
+
+def test_residenza_unico_candidato_variante_opposta_not_found():
+    # Un solo candidato (interno); cittadino chiede IMMIGRAZIONE.  Il facet è
+    # calcolato PRIMA del ramo len==1: variante opposta → 0 superstiti → NOT_FOUND.
+    r = _risolvi_residenza(variante=VarianteServizio.IMMIGRAZIONE, solo_interno=True)
+    assert r.status is DataStatus.NOT_FOUND
+    assert not r.service_references
+
+
+def test_residenza_unico_candidato_variante_corretta_fulfilled():
+    r = _risolvi_residenza(variante=VarianteServizio.INTERNO, solo_interno=True)
+    assert r.status is DataStatus.FULFILLED
+    (ref,) = r.service_references
+    assert ref.service_id.endswith("s_italia:cambio.abitazione.residenza;abitazione")
+
+
+def test_residenza_unico_candidato_senza_variante_resta_fulfilled():
+    # Nessuna variante + unico candidato confermato → FULFILLED (facet inerte).
+    r = _risolvi_residenza(variante=None, solo_interno=True)
+    assert r.status is DataStatus.FULFILLED
+    (ref,) = r.service_references
+    assert ref.service_id.endswith("s_italia:cambio.abitazione.residenza;abitazione")

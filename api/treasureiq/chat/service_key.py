@@ -224,6 +224,26 @@ _VARIANTE_TARI_NONDOM: tuple[str, ...] = (
 #: household family when it is the negated "non domestica" form (lexical overlap).
 _VARIANTE_TARI_DOM_NEG: tuple[str, ...] = ("non domestica", "non domestiche")
 
+#: CAMBIO_RESIDENZA INTERNO signals: change of dwelling within the SAME comune
+#: (maps to the ``...residenza;abitazione`` slug).  Kept strict — bare "cambio
+#: residenza"/"cambio casa" stay ambiguous (fire neither family → ``None``),
+#: because a wrong scenario would promote the wrong card.
+_VARIANTE_RES_INTERNO: tuple[str, ...] = (
+    "stesso comune", "nello stesso comune", "stessa citta", "stesso paese",
+    "cambio abitazione", "cambio di abitazione", "cambio indirizzo",
+    "nuovo indirizzo", "cambio via", "cambio di via", "cambio strada",
+    "cambio interno", "trasferimento interno",
+)
+#: CAMBIO_RESIDENZA IMMIGRAZIONE signals: moving in FROM another Italian comune
+#: (maps to the ``...residenza;residenza`` slug).  ``estero``/``aire`` are vetoed
+#: upstream (deferred + directionally ambiguous), so "vengo da" cannot mis-fire on
+#: "vengo dall'estero".
+_VARIANTE_RES_IMMIGR: tuple[str, ...] = (
+    "altro comune", "da un altro comune", "da altro comune", "nuovo comune",
+    "trasferimento da", "mi trasferisco da", "vengo da", "provengo da",
+    "immigrazione", "prendere la residenza", "prendo la residenza",
+)
+
 #: Per-key variant families: ``(A_family, A_neg, A_value, B_family, B_neg, B_value)``.
 #: TOPIC-SCOPED — a key absent here never recognises a variant (strict ``None``).
 _VARIANTE_FAMIGLIE: dict[
@@ -237,6 +257,21 @@ _VARIANTE_FAMIGLIE: dict[
         _VARIANTE_TARI_DOM, _VARIANTE_TARI_DOM_NEG, VarianteServizio.DOMESTICHE,
         _VARIANTE_TARI_NONDOM, (), VarianteServizio.NON_DOMESTICHE,
     ),
+    ServiceKey.CAMBIO_RESIDENZA: (
+        _VARIANTE_RES_INTERNO, (), VarianteServizio.INTERNO,
+        _VARIANTE_RES_IMMIGR, (), VarianteServizio.IMMIGRAZIONE,
+    ),
+}
+
+#: Per-key HARD veto: a deferred/out-of-scope scenario token anywhere in the
+#: message forces a strict ``None`` (fail-closed), before any family fires.  This
+#: is a true veto, unlike the per-family ``neg`` (which only cleans up lexical
+#: overlap).  RESIDENZA vetoes estero/AIRE: the scenario is deferred, and
+#: ``estero`` is directionally ambiguous (``all'estero`` emigration vs
+#: ``dall'estero`` immigration), so any estero mention stays undecided.  Tokens are
+#: space-padded where a bare stem could hit an unrelated word.
+_VARIANTE_VETO: dict[ServiceKey, tuple[str, ...]] = {
+    ServiceKey.CAMBIO_RESIDENZA: (" estero ", " aire ", "espatri", "emigra"),
 }
 
 
@@ -275,6 +310,9 @@ def riconosci_variante(
         return None
     fam_a, neg_a, val_a, fam_b, neg_b, val_b = famiglie
     haystack = _normalizza_variante(message)
+    veto = _VARIANTE_VETO.get(service_key)
+    if veto and any(v in haystack for v in veto):
+        return None
     a = _famiglia_spara(haystack, fam_a, neg_a)
     b = _famiglia_spara(haystack, fam_b, neg_b)
     if a and not b:

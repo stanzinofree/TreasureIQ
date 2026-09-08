@@ -259,6 +259,87 @@ def _request_tari(*, azione: AzioneServizio | None) -> DataRequest:
     )
 
 
+# ── OpenPA: facet decisivo su una famiglia che AMMETTE disambiguazione ───────
+
+# OpenPA è l'unico connettore con _AMMETTE_DISAMBIGUAZIONE=True: senza facet, ≥2
+# IMU confermati → DISAMBIGUATION. Col facet applicabile (IMU + azione) il facet
+# DECIDE da solo — esattamente-1 → FULFILLED, 0 o ≥2 → NOT_FOUND — e NON ripiega
+# MAI a mostrare i confermati non ristretti. Regressione del 🔴 della review.
+
+from tests.test_openpa_imis_tributi_imu import (  # noqa: E402
+    StubFetcher as _OpenPAStub,
+)
+from tests.test_openpa_imis_tributi_imu import (  # noqa: E402
+    _ISTAT as _OPENPA_ISTAT,
+)
+from tests.test_openpa_imis_tributi_imu import (  # noqa: E402
+    _cand as _openpa_cand,
+)
+from tests.test_openpa_imis_tributi_imu import (  # noqa: E402
+    _conn as _openpa_conn,
+)
+from tests.test_openpa_imis_tributi_imu import (  # noqa: E402
+    _mappa as _openpa_mappa,
+)
+
+
+def _request_openpa(*, azione: AzioneServizio | None) -> DataRequest:
+    selection: dict[str, object] = {"service_key": ServiceKey.TRIBUTI_IMU.value}
+    if azione is not None:
+        selection["azione"] = azione.value
+    return DataRequest(
+        request_id="r-openpa-facet",
+        source_id=_OPENPA_ISTAT,
+        surface=Surface.ORDINARY_DATA,
+        capability=CAPABILITY_SERVICES,
+        selection=selection,
+        freshness=FreshnessPolicy(max_age_seconds=86_400),
+        manifest_revision=1,
+    )
+
+
+def _risolvi_openpa(candidati, *, azione):
+    conn = _openpa_conn(_OpenPAStub(candidati=candidati))
+    return conn.retrieve(_request_openpa(azione=azione), mappa=_openpa_mappa(), esito=None)
+
+
+# Due public_service IMU distinti per azione (entrambi confermano IMU via titolo).
+_PAG = _openpa_cand(701, "Pagamento IMU", "/Servizi/Pagamento-IMU", "public_service")
+_DIC = _openpa_cand(702, "Dichiarazione IMU", "/Servizi/Dichiarazione-IMU", "public_service")
+
+
+def test_openpa_baseline_due_imu_senza_azione_disambigua():
+    # Percorso storico invariato: senza azione, ≥2 IMU → DISAMBIGUATION (OpenPA
+    # ammette la scelta). È la baseline che il facet NON deve alterare.
+    r = _risolvi_openpa((_PAG, _DIC), azione=None)
+    assert r.status is DataStatus.DISAMBIGUATION
+
+
+def test_openpa_imu_azione_esattamente_uno_fulfilled():
+    # Facet applicabile, ristretti=1 → FULFILLED (non disambigua).
+    r = _risolvi_openpa((_PAG, _DIC), azione=AzioneServizio.PAGAMENTO)
+    assert r.status is DataStatus.FULFILLED
+    (ref,) = r.service_references
+    assert ref.service_id.endswith(":openpa:701")  # id da native_id (I-2), scheda pagamento
+
+
+def test_openpa_imu_azione_zero_match_not_found_mai_disambigua():
+    # ristretti=0 (nessun candidato offre pagamento) → NOT_FOUND, MAI la
+    # disambiguazione dei confermati non ristretti (contratto MVP).
+    dic2 = _openpa_cand(703, "Dichiarazione acconto IMU", "/Servizi/Dich-2", "public_service")
+    r = _risolvi_openpa((_DIC, dic2), azione=AzioneServizio.PAGAMENTO)
+    assert r.status is DataStatus.NOT_FOUND
+    assert r.service_references == ()
+
+
+def test_openpa_imu_azione_multipli_match_not_found_mai_disambigua():
+    # ristretti≥2 (due candidati offrono pagamento) → NOT_FOUND, MAI DISAMBIGUATION.
+    pag2 = _openpa_cand(704, "Pagamento acconto IMU", "/Servizi/Pag-2", "public_service")
+    r = _risolvi_openpa((_PAG, pag2), azione=AzioneServizio.PAGAMENTO)
+    assert r.status is DataStatus.NOT_FOUND
+    assert r.service_references == ()
+
+
 def test_tari_con_pagamento_non_promuove_resta_not_found():
     # Guard end-to-end al punto comune: TARI ∉ _FACET_KEYS → filtra_per_azione è
     # no-op anche con azione=pagamento presente → i due TARI restano ≥2 → gate

@@ -55,19 +55,24 @@ _DOMANDA = "domanda"
 
 
 def _testo_candidato(candidato: ServiceCandidate) -> str:
-    """Title + decoded slug, with any ``;domanda…`` launcher tail removed.
+    """Title + decoded slug, casefolded, with any ``;domanda…`` launcher tail cut.
 
     The slug (``native_id``) may arrive URL-encoded (``%3B``=``;``, ``%3A``=``:``)
     and carry an action suffix after ``;``.  We decode it so the substring markers
     see ``;dichiarazione`` plainly, then cut a ``;domanda`` tail (hard exclusion).
+
+    Casefold happens BEFORE the cut and the index is taken on that same casefolded
+    string, so the offset can never mismatch the string it slices — casefold() can
+    change length (``ß``→``ss``, ligatures), so folding-then-indexing-the-original
+    would corrupt the cut on a non-ASCII slug.
     """
-    slug = unquote(candidato.native_id)
+    slug = unquote(candidato.native_id).casefold()
     marcatore = f";{_DOMANDA}"
-    if marcatore in slug.casefold():
+    taglio = slug.find(marcatore)
+    if taglio != -1:
         # Drop from the launcher marker onward: the tail is a form, not an action.
-        taglio = slug.casefold().index(marcatore)
         slug = slug[:taglio]
-    return f"{candidato.title}\n{slug}".casefold()
+    return f"{candidato.title.casefold()}\n{slug}"
 
 
 def azione_del_candidato(candidato: ServiceCandidate) -> AzioneServizio | None:
@@ -87,6 +92,20 @@ def azione_del_candidato(candidato: ServiceCandidate) -> AzioneServizio | None:
     if len(trovate) == 1:
         return next(iter(trovate))
     return None
+
+
+def facet_applicabile(service_key: ServiceKey, azione: AzioneServizio | None) -> bool:
+    """Whether the action facet DECIDES this turn (turn has an action + facetable key).
+
+    The caller uses this to make the facet authoritative when it applies: it then
+    resolves to exactly-one or NOT_FOUND on its own, never falling back to the ≥2
+    disambiguation branch (which would otherwise show the pre-facet candidates for
+    a family that admits disambiguation).  When it returns ``False`` the facet is a
+    strict no-op and the historic path is left byte-identical.  Distinct from
+    ``filtra_per_azione`` returning ``confermati`` unchanged: that identity can
+    also happen when every candidate already matches, which is NOT a no-op.
+    """
+    return azione is not None and service_key in _FACET_KEYS
 
 
 def filtra_per_azione(

@@ -130,7 +130,10 @@ _AZIONE_SUBSTRING: dict[AzioneServizio, tuple[str, ...]] = {
 #: Whole-word markers: short verb forms that would over-match as a substring
 #: (``pago`` inside "pagola", ``paga`` inside "pagatore").
 _AZIONE_WORD: dict[AzioneServizio, tuple[str, ...]] = {
-    AzioneServizio.PAGAMENTO: ("pago", "pagare", "paga", "paghi", "pagarla"),
+    # "paga"/"pagarla" volutamente esclusi: "la paga" (retribuzione) è un falso
+    # segnale lessicale evitabile; "pagament"/"versament" (substring) e le forme
+    # verbali sotto coprono il pagamento senza il rumore del sostantivo.
+    AzioneServizio.PAGAMENTO: ("pago", "pagare", "paghi"),
     AzioneServizio.DICHIARAZIONE: ("dichiaro", "dichiarare", "denuncia", "denunciare"),
 }
 

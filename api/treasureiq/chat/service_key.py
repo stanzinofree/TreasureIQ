@@ -17,7 +17,7 @@ from __future__ import annotations
 import html
 import re
 
-from treasureiq.catalog.service_contracts import ServiceKey
+from treasureiq.catalog.service_contracts import AzioneServizio, ServiceKey
 
 #: Substring markers per service key (casefold, exact form — no stemming).
 #: ``residenza`` on its own is deliberately absent: too generic (toponym /
@@ -108,6 +108,61 @@ def _keys_in(message: str) -> set[ServiceKey]:
         if any(re.search(rf"\b{re.escape(word)}\b", haystack) for word in words):
             found.add(key)
     return found
+
+
+#: Citizen-side markers for the ACTION axis (facet-azione MVP).  Same discipline
+#: as the ServiceKey markers: a closed set, casefold, no stemming, no nearest
+#: neighbour.  This is the RECOGNISER side (what the citizen wants); the CANDIDATE
+#: side (what a portal title/slug offers) has its own vocabulary in
+#: ``service_connectors/facet_azione.py`` — kept separate so citizen phrasing and
+#: portal titling evolve independently (exactly like the ServiceKey split between
+#: recogniser markers and ``SERVICE_SEARCH_TERM``).
+#:
+#: ``;domanda`` (the Sportello launcher marker) is NOT an action and appears in
+#: none of these lists on purpose: it is a submission-form suffix, not a verb the
+#: citizen would type, and the ``domand`` token used by ``intento_azione`` for
+#: DISAMBIGUATION grouping is deliberately not reused here.
+_AZIONE_SUBSTRING: dict[AzioneServizio, tuple[str, ...]] = {
+    AzioneServizio.PAGAMENTO: ("pagament", "versament", "f24"),
+    AzioneServizio.DICHIARAZIONE: ("dichiaraz",),
+}
+
+#: Whole-word markers: short verb forms that would over-match as a substring
+#: (``pago`` inside "pagola", ``paga`` inside "pagatore").
+_AZIONE_WORD: dict[AzioneServizio, tuple[str, ...]] = {
+    # "paga"/"pagarla" volutamente esclusi: "la paga" (retribuzione) è un falso
+    # segnale lessicale evitabile; "pagament"/"versament" (substring) e le forme
+    # verbali sotto coprono il pagamento senza il rumore del sostantivo.
+    AzioneServizio.PAGAMENTO: ("pago", "pagare", "paghi"),
+    AzioneServizio.DICHIARAZIONE: ("dichiaro", "dichiarare", "denuncia", "denunciare"),
+}
+
+
+def _azioni_in(message: str) -> set[AzioneServizio]:
+    haystack = _normalizza(message)
+    found: set[AzioneServizio] = set()
+    for azione, markers in _AZIONE_SUBSTRING.items():
+        if any(marker in haystack for marker in markers):
+            found.add(azione)
+    for azione, words in _AZIONE_WORD.items():
+        if any(re.search(rf"\b{re.escape(word)}\b", haystack) for word in words):
+            found.add(azione)
+    return found
+
+
+def riconosci_azione(message: str) -> AzioneServizio | None:
+    """Return the ACTION marked in ``message``, or ``None`` (facet-azione MVP).
+
+    Same honesty as ``riconosci_service_key``: no marker → ``None`` (the turn is
+    actionless, never the nearest action); two distinct actions in one message →
+    ``None`` (ambiguous → the facet does not narrow, the ≥2 gate decides).  A
+    ``None`` here means the facet is a no-op: the connector keeps its ordinary
+    exactly-one-or-NOT_FOUND behaviour.
+    """
+    found = _azioni_in(message)
+    if len(found) == 1:
+        return next(iter(found))
+    return None
 
 
 def riconosci_service_key(message: str) -> ServiceKey | None:

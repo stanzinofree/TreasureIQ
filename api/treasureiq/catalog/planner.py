@@ -13,7 +13,7 @@ from treasureiq.catalog.contracts import (
     FreshnessStatus,
     Surface,
 )
-from treasureiq.catalog.service_contracts import ServiceKey
+from treasureiq.catalog.service_contracts import AzioneServizio, ServiceKey
 from treasureiq.catalog.data_contracts import (
     DataBatch,
     DataRequest,
@@ -130,6 +130,7 @@ def service_request(
     *,
     source_id: str,
     service_key: ServiceKey,
+    azione: AzioneServizio | None = None,
     freshness: FreshnessPolicy | None = None,
     namespace: str = "chat",
 ) -> DataRequest:
@@ -153,7 +154,11 @@ def service_request(
         source_id=source_id,
         surface=Surface.ORDINARY_DATA,
         capability=CAPABILITY_SERVICES,
-        selection={"service_key": service_key.value},
+        selection=(
+            {"service_key": service_key.value}
+            if azione is None
+            else {"service_key": service_key.value, "azione": azione.value}
+        ),
         freshness=freshness or FreshnessPolicy(max_age_seconds=86400),
         manifest_revision=1,
     )

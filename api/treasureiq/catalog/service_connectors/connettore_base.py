@@ -39,7 +39,12 @@ from treasureiq.catalog.data_contracts import (
     Freshness,
 )
 from treasureiq.catalog.service_connectors.base import ServiceCandidate, ServiceFetcher
+from treasureiq.catalog.service_connectors.facet_azione import (
+    facet_applicabile,
+    filtra_per_azione,
+)
 from treasureiq.catalog.service_contracts import (
+    AzioneServizio,
     ServiceAccessMode,
     ServiceAccessOption,
     ServiceKey,
@@ -172,7 +177,25 @@ class _ServiceConnectorBase:
             )
             return self._fulfilled(request, now, reference)
 
-        # ≥2 candidati grezzi. Il gate exactly-one storico chiude qui in
+        # ≥2 confermati: se il facet-azione è APPLICABILE (turno con azione +
+        # key facetabile, Ramo 3) DECIDE da solo e non scende mai nel gate ≥2
+        # storico. Restringe per azione offerta dal candidato: esattamente-1 →
+        # risoluzione singola; 0 o ≥2 → NOT_FOUND (contratto "(topic × azione) =
+        # esattamente-uno, altrimenti NOT_FOUND senza fallback arbitrari"). Così
+        # una famiglia che ammette la disambiguazione (OpenPA) non ripiega mai a
+        # mostrare i confermati NON ristretti quando è stata data un'azione.
+        azione = self._azione(request)
+        if facet_applicabile(service_key, azione):
+            ristretti = filtra_per_azione(confermati, service_key, azione)
+            if len(ristretti) == 1:
+                reference = self._riferimento(
+                    ristretti[0], target.official_host, now, request.source_id
+                )
+                return self._fulfilled(request, now, reference)
+            return self._esito(request, now, DataStatus.NOT_FOUND, AccessMode.MEDIATED)
+
+        # Facet no-op (azione assente o key non facetabile): percorso storico
+        # invariato. ≥2 candidati grezzi. Il gate exactly-one storico chiude qui in
         # NOT_FOUND (I-1, niente scelta implicita) per TUTTE le famiglie che non
         # hanno aderito al contratto ≥2: ComWeb, WordPress restano invariate.
         if not self._AMMETTE_DISAMBIGUAZIONE:
@@ -315,6 +338,21 @@ class _ServiceConnectorBase:
             return None
         try:
             return ServiceKey(raw)
+        except ValueError:
+            return None
+
+    @staticmethod
+    def _azione(request: DataRequest) -> AzioneServizio | None:
+        """Resolve-time ACTION carried alongside the key in ``selection`` (Ramo 3).
+
+        Parallel to ``_service_key`` and equally defensive: an absent or
+        unrecognised value is ``None`` (the facet stays a no-op), never guessed —
+        so a malformed selection can only fail closed, never widen resolution."""
+        raw = request.selection.get("azione")
+        if not raw:
+            return None
+        try:
+            return AzioneServizio(raw)
         except ValueError:
             return None
 

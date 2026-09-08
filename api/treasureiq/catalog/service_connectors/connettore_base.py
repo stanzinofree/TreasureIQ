@@ -43,12 +43,17 @@ from treasureiq.catalog.service_connectors.facet_azione import (
     facet_applicabile,
     filtra_per_azione,
 )
+from treasureiq.catalog.service_connectors.facet_variante import (
+    filtra_per_variante,
+    variante_applicabile,
+)
 from treasureiq.catalog.service_contracts import (
     AzioneServizio,
     ServiceAccessMode,
     ServiceAccessOption,
     ServiceKey,
     ServiceReference,
+    VarianteServizio,
 )
 from treasureiq.catalog.service_page import EvidenceKind, leggi_pagina_servizio
 from treasureiq.chat.service_key import riconosci_service_key
@@ -177,16 +182,24 @@ class _ServiceConnectorBase:
             )
             return self._fulfilled(request, now, reference)
 
-        # ≥2 confermati: se il facet-azione è APPLICABILE (turno con azione +
-        # key facetabile, Ramo 3) DECIDE da solo e non scende mai nel gate ≥2
-        # storico. Restringe per azione offerta dal candidato: esattamente-1 →
-        # risoluzione singola; 0 o ≥2 → NOT_FOUND (contratto "(topic × azione) =
-        # esattamente-uno, altrimenti NOT_FOUND senza fallback arbitrari"). Così
-        # una famiglia che ammette la disambiguazione (OpenPA) non ripiega mai a
-        # mostrare i confermati NON ristretti quando è stata data un'azione.
+        # ≥2 confermati: se un facet resolve-time è APPLICABILE (turno con
+        # azione E/O variante + key facetabile, Ramo 3) DECIDE da solo e non
+        # scende mai nel gate ≥2 storico. I due assi COMPONGONO: si restringe per
+        # azione offerta dal candidato, POI per variante offerta — ciascun filtro
+        # è un no-op quando il suo asse è inerte (azione/variante assente o key
+        # fuori scope), quindi IMU (solo azione) e TARI (solo variante) restano
+        # ognuno sul proprio asse. Esito: esattamente-1 → risoluzione singola; 0 o
+        # ≥2 → NOT_FOUND (contratto "(topic × discriminatore) = esattamente-uno,
+        # altrimenti NOT_FOUND senza fallback arbitrari"). Così una famiglia che
+        # ammette la disambiguazione (OpenPA) non ripiega mai a mostrare i
+        # confermati NON ristretti quando è stato dato un discriminatore.
         azione = self._azione(request)
-        if facet_applicabile(service_key, azione):
+        variante = self._variante(request)
+        if facet_applicabile(service_key, azione) or variante_applicabile(
+            service_key, variante
+        ):
             ristretti = filtra_per_azione(confermati, service_key, azione)
+            ristretti = filtra_per_variante(ristretti, service_key, variante)
             if len(ristretti) == 1:
                 reference = self._riferimento(
                     ristretti[0], target.official_host, now, request.source_id
@@ -353,6 +366,21 @@ class _ServiceConnectorBase:
             return None
         try:
             return AzioneServizio(raw)
+        except ValueError:
+            return None
+
+    @staticmethod
+    def _variante(request: DataRequest) -> VarianteServizio | None:
+        """Resolve-time VARIANT carried alongside the key in ``selection`` (Ramo 3).
+
+        Parallel to ``_azione`` and equally defensive: an absent or unrecognised
+        value is ``None`` (the variant facet stays a no-op), never guessed — so a
+        malformed selection can only fail closed, never widen resolution."""
+        raw = request.selection.get("variante")
+        if not raw:
+            return None
+        try:
+            return VarianteServizio(raw)
         except ValueError:
             return None
 

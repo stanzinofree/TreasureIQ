@@ -100,6 +100,7 @@ from treasureiq.chat.service_key import (
     ServiceKey,
     riconosci_azione,
     riconosci_service_key,
+    riconosci_variante,
 )
 from treasureiq.chat.categorie import Categoria, topics_di
 from treasureiq.chat.intent import (
@@ -4301,13 +4302,16 @@ async def _risposta_modulistica(
     #   None                    → miss onesto (URP), mai fallback SP (D-S5-2);
     #   DisambiguazioneServizi  → ≥2 confermati: si espone la scelta, non si elegge;
     #   ResolvedService         → un servizio: si mostra la porta ufficiale.
-    # Facet-azione (Ramo 3): l'azione riconosciuta nel messaggio viaggia accanto
-    # alla key. È None se assente/ambigua → facet no-op nel connettore. Serve solo
-    # a restringere ≥2 confermati facetabili a esattamente-1 (nessun fallback).
+    # Facet resolve-time (Ramo 3): azione E variante riconosciute nel messaggio
+    # viaggiano accanto alla key. Ciascuna è None se assente/ambigua → facet no-op
+    # nel connettore. Compongono: restringono ≥2 confermati facetabili a
+    # esattamente-1 (nessun fallback). La variante è topic-scoped (TARI:
+    # domestiche/non.domestiche) e riconosciuta solo per le key che la dichiarano.
     request = service_request(
         source_id=target_istat,
         service_key=service_key,
         azione=riconosci_azione(message),
+        variante=riconosci_variante(message, service_key),
     )
     esito = await asyncio.to_thread(
         risolvi_o_disambigua,

@@ -16,8 +16,13 @@ from __future__ import annotations
 
 import html
 import re
+import unicodedata
 
-from treasureiq.catalog.service_contracts import AzioneServizio, ServiceKey
+from treasureiq.catalog.service_contracts import (
+    AzioneServizio,
+    ServiceKey,
+    VarianteServizio,
+)
 
 #: Substring markers per service key (casefold, exact form — no stemming).
 #: ``residenza`` on its own is deliberately absent: too generic (toponym /
@@ -162,6 +167,120 @@ def riconosci_azione(message: str) -> AzioneServizio | None:
     found = _azioni_in(message)
     if len(found) == 1:
         return next(iter(found))
+    return None
+
+
+# --------------------------------------------------------------------------- #
+# VARIANT recogniser (Ramo 3, TARI MVP) — citizen side of the variant facet.
+#
+# TOPIC-SCOPED and exactly-one-or-``None``: a variant fires only when EXACTLY one
+# signal family is present.  Zero families (no variant named) → ``None``; both
+# families (ambiguous: home-business, "negozio di famiglia") → ``None``.  Fail-
+# closed by construction: a ``None`` here means the facet does not narrow, so the
+# connector keeps its ordinary exactly-one-or-NOT_FOUND behaviour (I-1 safe).  The
+# measured profile on an adversarial held-out corpus was precision-when-fires
+# 1.00 with zero cross-confusion and zero false-fire; recall degrades to ``None``
+# on unseen vocabulary — the safe direction.
+#
+# Its own accent-stripping normaliser (distinct from ``_normalizza`` above, which
+# preserves accents): the variant lexicon is written accent-free ("attivita",
+# "societa"), so citizen accents are folded here to match it.  The candidate side
+# (``facet_variante``) keeps its OWN slug vocabulary, apart from this one.
+
+
+def _normalizza_variante(message: str) -> str:
+    """Accent-stripped, non-alphanumeric-collapsed, space-padded haystack.
+
+    NFKD + combining-mark removal folds ``à``→``a`` so the accent-free lexicon
+    matches; every non-alphanumeric run becomes a single space and the string is
+    space-padded, so word-boundary markers ("da casa") match without a regex.
+    """
+    folded = unicodedata.normalize("NFKD", message.lower())
+    stripped = "".join(c for c in folded if not unicodedata.combining(c))
+    return " " + re.sub(r"[^a-z0-9]+", " ", stripped).strip() + " "
+
+
+#: TARI DOMESTICHE signals (household waste tax): the citizen names a home.
+_VARIANTE_TARI_DOM: tuple[str, ...] = (
+    "domestica", "domestiche", "uso domestico", "abitazione", "appartamento",
+    "casa mia", "mia casa", "di casa", "in casa", "della casa", "da casa",
+    "nucleo familiare", "famiglia", "privato cittadino", "unita abitativa",
+    "dove abito", "dove vivo", "prima casa", "seconda casa", "abito",
+)
+#: TARI NON_DOMESTICHE signals (business waste tax): the citizen names an activity.
+#: Includes explicit-business forms that co-occur with "casa" (B&B, casa vacanze,
+#: casa di riposo): on their own they are non-domestic; when a domestic signal also
+#: fires (home-business) the two families co-fire → ``None`` (ambiguous, safe).
+_VARIANTE_TARI_NONDOM: tuple[str, ...] = (
+    "non domestica", "non domestiche", "utenza non domestica",
+    "negozio", "attivita", "azienda", "ditta", "impresa", "societa",
+    "bar", "ristorante", "pizzeria", "esercizio commerciale", "locale commerciale",
+    "capannone", "ufficio", "studio professionale", "partita iva",
+    "commerciale", "artigiano", "laboratorio", "magazzino", "opificio",
+    "bed and breakfast", "affittacamere", "casa vacanze", "casa vacanza",
+    "casa di riposo", "agriturismo", "b e b",
+)
+#: DOMESTICHE anti-markers: ``domestica``/``domestiche`` must NOT count for the
+#: household family when it is the negated "non domestica" form (lexical overlap).
+_VARIANTE_TARI_DOM_NEG: tuple[str, ...] = ("non domestica", "non domestiche")
+
+#: Per-key variant families: ``(A_family, A_neg, A_value, B_family, B_neg, B_value)``.
+#: TOPIC-SCOPED — a key absent here never recognises a variant (strict ``None``).
+_VARIANTE_FAMIGLIE: dict[
+    ServiceKey,
+    tuple[
+        tuple[str, ...], tuple[str, ...], VarianteServizio,
+        tuple[str, ...], tuple[str, ...], VarianteServizio,
+    ],
+] = {
+    ServiceKey.TRIBUTI_TARI: (
+        _VARIANTE_TARI_DOM, _VARIANTE_TARI_DOM_NEG, VarianteServizio.DOMESTICHE,
+        _VARIANTE_TARI_NONDOM, (), VarianteServizio.NON_DOMESTICHE,
+    ),
+}
+
+
+def _famiglia_spara(haystack: str, famiglia: tuple[str, ...], neg: tuple[str, ...]) -> bool:
+    """A signal family fires iff a marker is present AND not solely a negated form.
+
+    If a marker matches but a negation substring is also present, the negated
+    substrings are blanked and the family fires only if a marker STILL matches the
+    remainder — so "non domestica" suppresses the household family, while
+    "casa non domestica lontano" keeps it (a genuine second household marker).
+    """
+    if not any(m in haystack for m in famiglia):
+        return False
+    if neg and any(n in haystack for n in neg):
+        ripulito = haystack
+        for n in neg:
+            ripulito = ripulito.replace(n, " ")
+        return any(m in ripulito for m in famiglia)
+    return True
+
+
+def riconosci_variante(
+    message: str, service_key: ServiceKey
+) -> VarianteServizio | None:
+    """Return the VARIANT marked in ``message`` for ``service_key``, or ``None``.
+
+    Exactly-one-or-``None``, TOPIC-SCOPED: only keys with a variant vocabulary can
+    ever fire (others → ``None``, a strict no-op).  One signal family present → its
+    variant; zero families (no variant named) or both families (ambiguous) →
+    ``None``.  No inference: a turn without an explicit-enough variant resolves to
+    ``None``, and the connector's variant facet then stays inert (fail-closed, the
+    ≥2 gate keeps its honest NOT_FOUND).
+    """
+    famiglie = _VARIANTE_FAMIGLIE.get(service_key)
+    if famiglie is None:
+        return None
+    fam_a, neg_a, val_a, fam_b, neg_b, val_b = famiglie
+    haystack = _normalizza_variante(message)
+    a = _famiglia_spara(haystack, fam_a, neg_a)
+    b = _famiglia_spara(haystack, fam_b, neg_b)
+    if a and not b:
+        return val_a
+    if b and not a:
+        return val_b
     return None
 
 

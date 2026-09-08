@@ -69,6 +69,35 @@ class AzioneServizio(str, Enum):
     DICHIARAZIONE = "dichiarazione"
 
 
+class VarianteServizio(str, Enum):
+    """Orthogonal, TOPIC-SCOPED semantic axis over a ``ServiceKey`` (Ramo 3).
+
+    A second narrowing axis alongside ``AzioneServizio``, for topics whose portal
+    services fan out by *who/what the service is for* rather than by action.  The
+    TARI declaration, for instance, splits into a domestic (household) and a
+    non-domestic (business) variant that the ServiceKey cannot tell apart and the
+    action cannot either — on the real corpus both variants carry the SAME action
+    (``dichiarazione``), so an action-only facet leaves an honest ≥2 NOT_FOUND.
+    The variant is what narrows that pair to exactly one.
+
+    Deliberately NOT a single global facet: the vocabulary is per-topic (TARI's
+    ``domestiche``/``non.domestiche`` do not generalise to residenza's
+    estero/abitazione), so the recogniser is keyed on the ``ServiceKey`` and a
+    value only ever applies to the topics that declare it.  Composable with the
+    action facet at the same shared punto comune, as a second filter — never a
+    replacement.  MVP: TARI only; residenza/CIE are deferred sub-cycles.
+
+    Same I-1 discipline as the action facet: resolve-time only, exactly-one-or-
+    ``None`` on both sides (citizen text and candidate slug), 0 or ≥2 survivors
+    after narrowing stays NOT_FOUND with no arbitrary fallback.
+    """
+
+    #: TARI utenza domestica (household waste tax).  Portal slug: ``utenze.domestiche``.
+    DOMESTICHE = "domestiche"
+    #: TARI utenza non domestica (business waste tax).  Slug: ``utenze.non.domestiche``.
+    NON_DOMESTICHE = "non_domestiche"
+
+
 #: One canonical REST search term per key, used to NARROW a single ``search=``
 #: query against the WordPress service CPT (Ramo 3, Slice 4).  This is the
 #: acquisition side of the vocabulary and is deliberately distinct from the

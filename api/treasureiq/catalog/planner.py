@@ -13,7 +13,11 @@ from treasureiq.catalog.contracts import (
     FreshnessStatus,
     Surface,
 )
-from treasureiq.catalog.service_contracts import AzioneServizio, ServiceKey
+from treasureiq.catalog.service_contracts import (
+    AzioneServizio,
+    ServiceKey,
+    VarianteServizio,
+)
 from treasureiq.catalog.data_contracts import (
     DataBatch,
     DataRequest,
@@ -131,6 +135,7 @@ def service_request(
     source_id: str,
     service_key: ServiceKey,
     azione: AzioneServizio | None = None,
+    variante: VarianteServizio | None = None,
     freshness: FreshnessPolicy | None = None,
     namespace: str = "chat",
 ) -> DataRequest:
@@ -144,21 +149,28 @@ def service_request(
     from the SERVICE_PORTAL/INDIRECT authenticated sub-case (D-R3-2), which
     keeps its own ``service_portal_request``.
 
+    ``azione`` and ``variante`` are the two OPTIONAL resolve-time narrowing axes
+    (Ramo 3): each travels in ``selection`` only when present, so a request with
+    neither is byte-identical to the pre-facet contract.  Both are ``None`` when
+    the recogniser is undecided → the connector's facets stay no-ops.
+
     No cache lookup or connector call happens here; this is only the request
     contract.  Availability is evaluated later by ``build_query_plan`` /
     ``select_batch``.
     """
+
+    selection: dict[str, str] = {"service_key": service_key.value}
+    if azione is not None:
+        selection["azione"] = azione.value
+    if variante is not None:
+        selection["variante"] = variante.value
 
     return DataRequest(
         request_id=f"{namespace}:{source_id}:{Surface.ORDINARY_DATA.value}:{service_key.value}",
         source_id=source_id,
         surface=Surface.ORDINARY_DATA,
         capability=CAPABILITY_SERVICES,
-        selection=(
-            {"service_key": service_key.value}
-            if azione is None
-            else {"service_key": service_key.value, "azione": azione.value}
-        ),
+        selection=selection,
         freshness=freshness or FreshnessPolicy(max_age_seconds=86400),
         manifest_revision=1,
     )

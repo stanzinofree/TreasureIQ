@@ -235,13 +235,16 @@ _VARIANTE_RES_INTERNO: tuple[str, ...] = (
     "cambio interno", "trasferimento interno",
 )
 #: CAMBIO_RESIDENZA IMMIGRAZIONE signals: moving in FROM another Italian comune
-#: (maps to the ``...residenza;residenza`` slug).  ``estero``/``aire`` are vetoed
-#: upstream (deferred + directionally ambiguous), so "vengo da" cannot mis-fire on
-#: "vengo dall'estero".
+#: (maps to the ``...residenza;residenza`` slug).  Requires EXPLICIT inter-comune
+#: evidence — generic origin markers ("vengo da", "trasferimento da", …) are
+#: deliberately excluded: they also match intra-comune moves ("mi trasferisco da
+#: via Roma a via Milano", "vengo da via Garibaldi") and would promote the wrong
+#: ``;residenza`` card on a lone candidate (fail-closed violation).  With no
+#: explicit inter-comune cue such phrasings fire neither family → ``None`` →
+#: NOT_FOUND, which is the safe outcome.  ``estero``/``aire`` are vetoed upstream.
 _VARIANTE_RES_IMMIGR: tuple[str, ...] = (
-    "altro comune", "da un altro comune", "da altro comune", "nuovo comune",
-    "trasferimento da", "mi trasferisco da", "vengo da", "provengo da",
-    "immigrazione", "prendere la residenza", "prendo la residenza",
+    "altro comune", "nuovo comune", "diverso comune", "altra citta",
+    "immigrazione",
 )
 
 #: Per-key variant families: ``(A_family, A_neg, A_value, B_family, B_neg, B_value)``.

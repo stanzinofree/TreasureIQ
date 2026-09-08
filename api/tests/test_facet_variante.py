@@ -393,12 +393,27 @@ def test_unico_candidato_senza_variante_resta_fulfilled():
         ("cambio residenza, solo cambio abitazione", VarianteServizio.INTERNO),
         ("cambio residenza con nuovo indirizzo", VarianteServizio.INTERNO),
         ("cambio residenza da un altro comune", VarianteServizio.IMMIGRAZIONE),
-        ("mi trasferisco da Milano, cambio residenza", VarianteServizio.IMMIGRAZIONE),
-        ("cambio residenza, vengo da fuori", VarianteServizio.IMMIGRAZIONE),
+        ("cambio residenza, mi trasferisco da un altro comune", VarianteServizio.IMMIGRAZIONE),
+        ("cambio residenza, arrivo da un'altra citta", VarianteServizio.IMMIGRAZIONE),
     ],
 )
 def test_riconosci_variante_residenza(message, atteso):
     assert riconosci_variante(message, ServiceKey.CAMBIO_RESIDENZA) is atteso
+
+
+@pytest.mark.parametrize(
+    "message",
+    [
+        # Movimenti intra-comune: nessuna evidenza inter-comune esplicita.  I marker
+        # generici "... da" sono stati rimossi apposta perche' promuoverebbero
+        # erroneamente ;residenza su un candidato singolo (violazione fail-closed).
+        "cambio residenza, mi trasferisco da via Roma a via Milano",
+        "cambio residenza, trasferimento da un appartamento a un altro",
+        "cambio residenza, vengo da via Garibaldi",
+    ],
+)
+def test_riconosci_variante_residenza_intra_comune_none(message):
+    assert riconosci_variante(message, ServiceKey.CAMBIO_RESIDENZA) is None
 
 
 @pytest.mark.parametrize(

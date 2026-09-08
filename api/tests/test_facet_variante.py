@@ -321,3 +321,57 @@ def test_codogno_tari_variante_e_azione_compongono():
     assert r.status is DataStatus.FULFILLED
     (ref,) = r.service_references
     assert ref.service_id.endswith("s_italia:tassa.rifiuti;utenze.domestiche;dichiarazione")
+
+
+# ── singolo candidato: il facet DECIDE anche a cardinalità 1 (fail-closed) ───
+# Regressione review PR #93: con UN solo confermato il ramo len==1 NON deve
+# corto-circuitare il facet. Un candidato con variante OPPOSTA a quella chiesta
+# è NOT_FOUND, non FULFILLED su una scheda che il cittadino non ha chiesto.
+
+
+def _pagine_codogno_tari_solo_domestiche() -> dict[str, str]:
+    sitemap = (
+        "<?xml version='1.0' encoding='UTF-8'?>"
+        "<urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>"
+        f"<url><loc>{_u(_CODOGNO_HOST, _CO_TARI_DOM)}</loc></url>"
+        "</urlset>"
+    )
+    return {
+        _u(_CODOGNO_HOST, "/sitemap.xml"): sitemap,
+        _u(_CODOGNO_HOST, _CO_TARI_DOM): _pagina_tari("Dichiarazione TARI utenze domestiche"),
+    }
+
+
+def _risolvi_tari_solo_domestiche(*, variante: VarianteServizio | None):
+    fetcher = _FetcherSportello(_pagine_codogno_tari_solo_domestiche())
+    conn = SportelloServiceConnector(fetcher)
+    return conn.retrieve(
+        _request_tari(variante=variante),
+        mappa=_mappa(istat=_CODOGNO, host=_CODOGNO_HOST),
+        esito=None,
+    )
+
+
+def test_unico_candidato_variante_opposta_not_found():
+    # Unico confermato = domestiche; cittadino chiede non_domestiche → il candidato
+    # NON sopravvive al filtro → 0 → NOT_FOUND (mai FULFILLED sulla domestica).
+    r = _risolvi_tari_solo_domestiche(variante=VarianteServizio.NON_DOMESTICHE)
+    assert r.status is DataStatus.NOT_FOUND
+    assert r.service_references == ()
+
+
+def test_unico_candidato_variante_corretta_fulfilled():
+    # Unico confermato = domestiche; cittadino chiede domestiche → sopravvive → 1.
+    r = _risolvi_tari_solo_domestiche(variante=VarianteServizio.DOMESTICHE)
+    assert r.status is DataStatus.FULFILLED
+    (ref,) = r.service_references
+    assert ref.service_id.endswith("s_italia:tassa.rifiuti;utenze.domestiche;dichiarazione")
+
+
+def test_unico_candidato_senza_variante_resta_fulfilled():
+    # Nessun discriminatore nel turno → facet no-op → percorso storico len==1 →
+    # FULFILLED (comportamento invariato per chi non usa il facet).
+    r = _risolvi_tari_solo_domestiche(variante=None)
+    assert r.status is DataStatus.FULFILLED
+    (ref,) = r.service_references
+    assert ref.service_id.endswith("s_italia:tassa.rifiuti;utenze.domestiche;dichiarazione")

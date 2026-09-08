@@ -340,6 +340,34 @@ def test_openpa_imu_azione_multipli_match_not_found_mai_disambigua():
     assert r.service_references == ()
 
 
+def test_openpa_imu_unico_candidato_azione_opposta_not_found():
+    # Regressione review PR #93: UN solo confermato (dichiarazione) con azione
+    # richiesta OPPOSTA (pagamento) → il facet DECIDE anche a cardinalità 1 →
+    # 0 sopravvissuti → NOT_FOUND. Il ramo len==1 NON deve corto-circuitare il
+    # facet promuovendo la scheda dichiarazione che il cittadino non ha chiesto.
+    r = _risolvi_openpa((_DIC,), azione=AzioneServizio.PAGAMENTO)
+    assert r.status is DataStatus.NOT_FOUND
+    assert r.service_references == ()
+
+
+def test_openpa_imu_unico_candidato_azione_corretta_fulfilled():
+    # Speculare: unico confermato (pagamento) con azione corretta → sopravvive → 1
+    # → FULFILLED sulla scheda giusta.
+    r = _risolvi_openpa((_PAG,), azione=AzioneServizio.PAGAMENTO)
+    assert r.status is DataStatus.FULFILLED
+    (ref,) = r.service_references
+    assert ref.service_id.endswith(":openpa:701")
+
+
+def test_openpa_imu_unico_candidato_senza_azione_fulfilled():
+    # Facet no-op (nessuna azione) → percorso storico len==1 → FULFILLED
+    # (comportamento invariato per chi non usa il facet).
+    r = _risolvi_openpa((_PAG,), azione=None)
+    assert r.status is DataStatus.FULFILLED
+    (ref,) = r.service_references
+    assert ref.service_id.endswith(":openpa:701")
+
+
 def test_tari_con_pagamento_non_promuove_resta_not_found():
     # Guard end-to-end al punto comune: TARI ∉ _FACET_KEYS → filtra_per_azione è
     # no-op anche con azione=pagamento presente → i due TARI restano ≥2 → gate

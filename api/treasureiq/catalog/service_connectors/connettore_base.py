@@ -175,24 +175,18 @@ class _ServiceConnectorBase:
         if not confermati:
             # 0 → miss onesto.
             return self._esito(request, now, DataStatus.NOT_FOUND, AccessMode.MEDIATED)
-        if len(confermati) == 1:
-            # 1 → risoluzione singola, opzioni piene (una lettura di pagina).
-            reference = self._riferimento(
-                confermati[0], target.official_host, now, request.source_id
-            )
-            return self._fulfilled(request, now, reference)
-
-        # ≥2 confermati: se un facet resolve-time è APPLICABILE (turno con
-        # azione E/O variante + key facetabile, Ramo 3) DECIDE da solo e non
-        # scende mai nel gate ≥2 storico. I due assi COMPONGONO: si restringe per
-        # azione offerta dal candidato, POI per variante offerta — ciascun filtro
-        # è un no-op quando il suo asse è inerte (azione/variante assente o key
-        # fuori scope), quindi IMU (solo azione) e TARI (solo variante) restano
-        # ognuno sul proprio asse. Esito: esattamente-1 → risoluzione singola; 0 o
-        # ≥2 → NOT_FOUND (contratto "(topic × discriminatore) = esattamente-uno,
-        # altrimenti NOT_FOUND senza fallback arbitrari"). Così una famiglia che
-        # ammette la disambiguazione (OpenPA) non ripiega mai a mostrare i
-        # confermati NON ristretti quando è stato dato un discriminatore.
+        # Facet resolve-time (Ramo 3): calcolato PRIMA di decidere la cardinalità.
+        # Se un facet è APPLICABILE (turno con azione E/O variante + key facetabile)
+        # DECIDE sull'INTERO insieme confermato, QUALUNQUE ne sia la cardinalità —
+        # incluso il singolo candidato. Un turno con un discriminatore esplicito è
+        # FULFILLED solo se il candidato SOPRAVVIVE al filtro; altrimenti NOT_FOUND.
+        # Corto-circuitare qui il caso len==1 salterebbe il facet e promuoverebbe una
+        # scheda che il cittadino NON ha chiesto (variante/azione opposta) →
+        # violazione fail-closed. I due assi COMPONGONO in sequenza (azione poi
+        # variante), ciascun filtro no-op quando il suo asse è inerte: IMU resta
+        # sull'azione, TARI sulla variante. 0 o ≥2 sopravvissuti → NOT_FOUND (nessun
+        # fallback), così una famiglia che ammette la disambiguazione (OpenPA) non
+        # ripiega mai ai confermati NON ristretti quando è stato dato un discriminatore.
         azione = self._azione(request)
         variante = self._variante(request)
         if facet_applicabile(service_key, azione) or variante_applicabile(
@@ -207,10 +201,18 @@ class _ServiceConnectorBase:
                 return self._fulfilled(request, now, reference)
             return self._esito(request, now, DataStatus.NOT_FOUND, AccessMode.MEDIATED)
 
-        # Facet no-op (azione assente o key non facetabile): percorso storico
-        # invariato. ≥2 candidati grezzi. Il gate exactly-one storico chiude qui in
-        # NOT_FOUND (I-1, niente scelta implicita) per TUTTE le famiglie che non
-        # hanno aderito al contratto ≥2: ComWeb, WordPress restano invariate.
+        # Facet no-op (nessun discriminatore o key non facetabile): percorso storico
+        # invariato.
+        if len(confermati) == 1:
+            # 1 → risoluzione singola, opzioni piene (una lettura di pagina).
+            reference = self._riferimento(
+                confermati[0], target.official_host, now, request.source_id
+            )
+            return self._fulfilled(request, now, reference)
+
+        # ≥2 candidati grezzi. Il gate exactly-one storico chiude qui in NOT_FOUND
+        # (I-1, niente scelta implicita) per TUTTE le famiglie che non hanno aderito
+        # al contratto ≥2: ComWeb, WordPress restano invariate.
         if not self._AMMETTE_DISAMBIGUAZIONE:
             return self._esito(request, now, DataStatus.NOT_FOUND, AccessMode.MEDIATED)
 

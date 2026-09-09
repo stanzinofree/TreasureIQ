@@ -298,6 +298,20 @@ Le modifiche del contesto devono essere operazioni esplicite: `SET`, `REMOVE`,
 Deliverable: schema registry, reducer puro, replay deterministico e test di
 compatibilità con il comportamento v0.
 
+### Ciclo di vita e retention dello storage
+
+Dove vive il transcript, per quanto e con quali uscite è descritto in
+`docs/workstreams/storage-lifecycle/analysis.md`. In sintesi: il transcript è
+stato temporaneo (TTL 90gg + purge), non fonte di verità operativa.
+
+Conseguenza sul backup — **R3A**: `make backup` esclude il DB delle
+conversazioni, che resta sul volume live soggetto alla retention applicativa.
+Dopo un disaster restore le conversazioni possono andare perse: comportamento
+voluto. Conservarle oltre il volume live (**R3B**: backup separato, cifratura,
+chiave fuori archivio, retention propria, restore auditato, cancellazione dalle
+copie cifrate) resta non attivo, da valutare solo se emerge il requisito
+«resume dopo disaster recovery».
+
 ### Contratto di `TurnInterpretation`
 
 `TurnInterpretation` descrive esclusivamente ciò che il sistema ha capito del

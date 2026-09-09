@@ -9,6 +9,20 @@ The contract is async-first on purpose: the chat route (`api.py`) awaits a
 provider directly and must never block the event loop on a synchronous HTTP
 call. `parse()` exists only for the ingestion CLI, which has no event loop of
 its own to await into.
+
+Egress surfaces (R5) — distinct, and only the third leaves the machine:
+
+- ``OllamaProvider`` — local daemon (``localhost:11434`` on the dev host, or
+  ``host.docker.internal`` under compose). No internet. Default for both roles.
+- llama.cpp narrator (``treasureiq.chat.llamacpp``) — a separate local surface
+  on the compose network, off by default; polishes an already-deterministic
+  answer, never classifies. Not built here.
+- ``AnthropicProvider`` — the ONLY external-internet surface. On the chat rail
+  it sends the citizen's message (plus the labeled last few turns) to a
+  third party, so it is treated as egress: ``external_egress = True`` and
+  ``load_provider`` refuses to build it unless egress is explicitly
+  acknowledged (``TREASUREIQ_ALLOW_EXTERNAL_LLM``). Naming the provider is not
+  enough — leaving the process is a second, deliberate key.
 """
 
 from __future__ import annotations
@@ -36,6 +50,19 @@ ANTHROPIC_MODEL = "claude-opus-5"
 # measurably changing what gets recovered.
 ANTHROPIC_EFFORT = "low"
 
+#: R5: opt-in esplicito per l'egress verso un provider esterno (internet). Un
+#: provider ``external_egress`` non viene costruito se questa env non e'
+#: attiva: selezionare il provider e' una scelta, farne uscire il testo del
+#: cittadino ne e' una seconda e distinta.
+EXTERNAL_LLM_ACK_ENV = "TREASUREIQ_ALLOW_EXTERNAL_LLM"
+
+_TRUE = frozenset({"1", "true", "yes", "on"})
+
+
+def _egress_esterno_autorizzato() -> bool:
+    """True se l'egress esterno e' stato acconsentito esplicitamente."""
+    return os.environ.get(EXTERNAL_LLM_ACK_ENV, "").strip().lower() in _TRUE
+
 
 @runtime_checkable
 class LLMProvider(Protocol):
@@ -50,6 +77,10 @@ class LLMProvider(Protocol):
     """
 
     name: str
+
+    #: True se le richieste lasciano la macchina verso un servizio esterno
+    #: (internet). Governa il gate di egress in ``load_provider`` (R5).
+    external_egress: bool
 
     @property
     def available(self) -> bool:
@@ -108,6 +139,7 @@ class OllamaProvider(_SyncParseMixin):
     """
 
     name = "ollama"
+    external_egress = False  # daemon locale: nessuna uscita su internet
 
     def __init__(self, *, model: str, base_url: str | None = None) -> None:
         self.model = model
@@ -159,6 +191,7 @@ class AnthropicProvider(_SyncParseMixin):
     """
 
     name = "anthropic"
+    external_egress = True  # API esterna: il testo lascia la macchina (R5)
 
     def __init__(self, *, model: str = ANTHROPIC_MODEL, api_key: str | None = None) -> None:
         self.model = model
@@ -218,6 +251,16 @@ def load_provider(*, role: Literal["extract", "chat"]) -> LLMProvider:
     backend = os.environ.get("TREASUREIQ_LLM_PROVIDER", "ollama").strip().lower()
 
     if backend == "anthropic":
+        # R5: l'egress esterno e' una seconda chiave. Selezionare il provider
+        # non basta: senza consenso esplicito il testo del cittadino non esce
+        # dalla macchina. Config incoerente => fail-fast, non egress silenzioso.
+        if not _egress_esterno_autorizzato():
+            raise RuntimeError(
+                f"provider esterno {backend!r} richiede egress esplicito: il "
+                "testo lascerebbe la macchina verso un servizio esterno. "
+                f"Imposta {EXTERNAL_LLM_ACK_ENV}=1 per acconsentire, "
+                "oppure usa il provider locale 'ollama'."
+            )
         return AnthropicProvider()
 
     if backend == "ollama":

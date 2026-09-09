@@ -26,6 +26,7 @@ from treasureiq.extract.providers import (
     EXTERNAL_LLM_ACK_ENV,
     AnthropicProvider,
     OllamaProvider,
+    _assicura_egress_autorizzato,
     load_provider,
 )
 
@@ -117,6 +118,38 @@ def test_rail_model_delimita_messaggio_e_storia() -> None:
     assert "primo turno" not in user
     assert "secondo turno" in user
     assert "quarto turno" in user
+
+
+# --- F2: gate egress applicato al provider, non solo alla factory ---
+
+
+def test_helper_blocca_provider_esterno_senza_consenso(monkeypatch) -> None:
+    monkeypatch.delenv(EXTERNAL_LLM_ACK_ENV, raising=False)
+    with pytest.raises(RuntimeError, match=EXTERNAL_LLM_ACK_ENV):
+        _assicura_egress_autorizzato(AnthropicProvider(api_key="x"))
+
+
+def test_helper_consente_provider_esterno_con_consenso(monkeypatch) -> None:
+    monkeypatch.setenv(EXTERNAL_LLM_ACK_ENV, "1")
+    _assicura_egress_autorizzato(AnthropicProvider(api_key="x"))  # nessun raise
+
+
+def test_helper_ignora_provider_locale(monkeypatch) -> None:
+    monkeypatch.delenv(EXTERNAL_LLM_ACK_ENV, raising=False)
+    _assicura_egress_autorizzato(OllamaProvider(model="qwen3:4b"))  # locale: mai raise
+
+
+def test_aparse_esterno_diretto_fail_fast_prima_della_rete(monkeypatch) -> None:
+    # Bypass della factory: si istanzia il provider esterno direttamente. La
+    # guardia in aparse deve scattare PRIMA di qualsiasi contatto con l'SDK
+    # (nessun anthropic installato serve). api_key presente per isolare che a
+    # fermare la chiamata sia il gate egress, non la mancanza di credenziale.
+    monkeypatch.delenv(EXTERNAL_LLM_ACK_ENV, raising=False)
+    provider = AnthropicProvider(api_key="x")
+    with pytest.raises(RuntimeError, match=EXTERNAL_LLM_ACK_ENV):
+        asyncio.run(
+            provider.aparse(system="s", user="u", output_model=_ModelIntent)
+        )
 
 
 def test_rail_deterministico_non_invia_nessun_payload() -> None:

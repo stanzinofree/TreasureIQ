@@ -64,6 +64,23 @@ def _egress_esterno_autorizzato() -> bool:
     return os.environ.get(EXTERNAL_LLM_ACK_ENV, "").strip().lower() in _TRUE
 
 
+def _assicura_egress_autorizzato(provider: "LLMProvider") -> None:
+    """Blocca l'egress di un provider esterno senza consenso esplicito.
+
+    Difesa in profondita' sul gate di ``load_provider`` (R5): questo controllo
+    e' al choke point dove il testo lascerebbe la macchina, quindi vale per
+    QUALSIASI call-site — anche nuovo codice che istanzi il provider
+    direttamente saltando la factory. ``load_provider`` fallisce prima e con un
+    messaggio di config; questo e' l'ultima linea, non la sola.
+    """
+    if getattr(provider, "external_egress", False) and not _egress_esterno_autorizzato():
+        raise RuntimeError(
+            f"egress verso provider esterno {getattr(provider, 'name', '?')!r} "
+            f"non autorizzato: imposta {EXTERNAL_LLM_ACK_ENV}=1 per acconsentire "
+            "prima di inviare testo del cittadino fuori dalla macchina."
+        )
+
+
 @runtime_checkable
 class LLMProvider(Protocol):
     """A backend that turns a system/user prompt pair into structured output.
@@ -212,6 +229,11 @@ class AnthropicProvider(_SyncParseMixin):
     async def aparse(
         self, *, system: str, user: str, output_model: type[OutputModelT]
     ) -> OutputModelT:
+        # Difesa in profondita' (R5/F2): il gate egress e' verificato QUI, dove
+        # il testo sta per lasciare la macchina, non solo in ``load_provider``.
+        # Cosi' un call-site che istanzia il provider direttamente non aggira
+        # il consenso esplicito. Il raise precede qualsiasi contatto con l'SDK.
+        _assicura_egress_autorizzato(self)
         client = self._get_client()
         response = await client.messages.parse(
             model=self.model,

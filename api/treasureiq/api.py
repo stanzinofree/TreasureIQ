@@ -139,6 +139,15 @@ CONVERSATION_MAX_AGE = 90 * 24 * 60 * 60
 # default perche' lo sviluppo locale gira su http://localhost, dove Secure
 # bloccherebbe il set del cookie. La prod (dietro HTTPS) lo abilita con =1.
 COOKIE_SECURE = os.environ.get("TREASUREIQ_COOKIE_SECURE", "") == "1"
+# Ambiente di esecuzione (R2). `production` impone Secure sul cookie di sessione:
+# quel cookie e' il bearer del transcript e in produzione non deve mai viaggiare
+# su HTTP in chiaro. Lo sviluppo locale (`development`, default) gira su
+# http://localhost, dove Secure bloccherebbe il set del cookie, quindi li' resta
+# permesso. Una produzione con Secure spento e' una config incoerente: la
+# validazione all'avvio (`_verifica_coerenza_cookie`) la ferma, senza degradare
+# in silenzio.
+APP_ENV = os.environ.get("TREASUREIQ_ENV", "development").strip().lower()
+IS_PRODUCTION = APP_ENV == "production"
 CONVERSATION_DB = Path(
     os.environ.get("TREASUREIQ_CONVERSATION_DB", str(DATA_DIR / "conversations.sqlite3"))
 )
@@ -184,8 +193,27 @@ async def _loop_purge_conversazioni() -> None:
         await asyncio.to_thread(_purge_conversazioni_scadute)
 
 
+def _verifica_coerenza_cookie() -> None:
+    """Fail-fast se la produzione gira col cookie di sessione non Secure (R2).
+
+    In produzione il cookie e' il bearer del transcript: senza Secure puo'
+    viaggiare su HTTP in chiaro ed essere intercettato. Una config incoerente
+    (``TREASUREIQ_ENV=production`` con ``TREASUREIQ_COOKIE_SECURE`` != 1) ferma
+    l'avvio invece di degradare in silenzio. In sviluppo (default) non impone
+    nulla, cosi' http://localhost continua a funzionare.
+    """
+    if IS_PRODUCTION and not COOKIE_SECURE:
+        raise RuntimeError(
+            "config produzione incoerente: TREASUREIQ_ENV=production richiede "
+            "TREASUREIQ_COOKIE_SECURE=1 — il cookie di sessione e' un bearer del "
+            "transcript e non deve viaggiare su HTTP in chiaro."
+        )
+
+
 @contextlib.asynccontextmanager
 async def _lifespan(_app: FastAPI):
+    # R2: config produzione incoerente = avvio abortito, non fallback silenzioso.
+    _verifica_coerenza_cookie()
     # Purge deterministico all'avvio: lo stato scaduto non sopravvive a un
     # riavvio, a prescindere dal loop periodico.
     _purge_conversazioni_scadute()

@@ -1,9 +1,14 @@
 """LLM provider abstraction: one async transport contract, two backends.
 
-TreasureIQ runs extraction and chat against a local Ollama model by default —
-the demo must work with no network and no API key, per the offline-build
-commitment. Anthropic is kept as an optional fallback, selected purely by an
-environment variable, so switching backends never touches call sites.
+TreasureIQ runs extraction against a local Ollama model by default — the demo
+must work with no network and no API key, per the offline-build commitment.
+Chat is different: since R4 the chat engine defaults to a deterministic rail
+(``scorer``) that answers without calling any provider at all; a provider is
+built only when the ``model`` rail is explicitly selected. So "Ollama by
+default" describes the transport provider, not the chat engine's default
+behaviour — no LLM is invoked on the default path. Anthropic is kept as an
+optional fallback, selected purely by an environment variable, so switching
+backends never touches call sites.
 
 The contract is async-first on purpose: the chat route (`api.py`) awaits a
 provider directly and must never block the event loop on a synchronous HTTP
@@ -13,7 +18,9 @@ its own to await into.
 Egress surfaces (R5) — distinct, and only the third leaves the machine:
 
 - ``OllamaProvider`` — local daemon (``localhost:11434`` on the dev host, or
-  ``host.docker.internal`` under compose). No internet. Default for both roles.
+  ``host.docker.internal`` under compose). No internet. Default transport
+  whenever a provider is built (always for extraction; for chat only on the
+  ``model`` rail).
 - llama.cpp narrator (``treasureiq.chat.llamacpp``) — a separate local surface
   on the compose network, off by default; polishes an already-deterministic
   answer, never classifies. Not built here.

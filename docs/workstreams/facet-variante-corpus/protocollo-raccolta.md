@@ -26,6 +26,25 @@ Misura del 2026-09-09 (read-only, 32 frasi distinte dai DB conversazioni dev):
 lessico variante **non è validabile** finché non esiste un corpus reale. Questo
 protocollo definisce come costruirlo in forma anonimizzata.
 
+### 1.1 Confine col transcript ordinario persistito
+
+Il **transcript ordinario** della chat e il **corpus** sono due cose distinte;
+questo protocollo riguarda solo il secondo.
+
+- Il transcript persistito (`data-live/conversations.sqlite3`) è **stato
+  operativo temporaneo**: serve a riaprire una conversazione in corso, ha TTL
+  90gg con purge, non è un dataset e non è condiviso. Il suo ciclo di vita è in
+  `docs/workstreams/storage-lifecycle/analysis.md`.
+- Il corpus è un **dataset costruito apposta**, fuori sessione, previa base
+  giuridica, secondo gli stadi `raw`→`staging`→`corpus` di questo documento.
+
+Non c'è promozione automatica dall'uno all'altro: il transcript **non diventa**
+corpus per il solo fatto di esistere. Un record entra nel corpus solo attraverso
+il percorso di raccolta descritto qui, con redazione, etichettatura umana e le
+garanzie GDPR di §6 — che questa sezione non modifica. Finché quel percorso non
+è attivato (nessun deploy, §2), il transcript resta soggetto alla sola retention
+applicativa e nessun dato di conversazione alimenta un corpus.
+
 ## 2. Principi
 
 - **No deploy in questa fase.** Nessun logging di produzione viene acceso qui. Il

@@ -439,6 +439,12 @@ def test_figlio_disabile_senza_eta_fa_partire_la_domanda_minore():
 
     monkeypatch = _pytest.MonkeyPatch()
     monkeypatch.setattr(respond_mod, "load_provider", lambda **_: provider)
+    # Questi test verificano le guardie sul rail model con un provider finto:
+    # dal R4 il default del codice e' deterministico (scorer), che ignorerebbe
+    # il provider. Si fissa esplicitamente il rail model.
+    from treasureiq.chat.engine import CivicChatEngine
+
+    monkeypatch.setattr(respond_mod, "chat_engine", CivicChatEngine(backend="model"))
     try:
         answer = asyncio.run(
             respond_mod._componi_risposta(
@@ -522,6 +528,12 @@ def test_profilo_ricco_e_topic_sconosciuto_chiede_la_categoria():
 
     monkeypatch = _pytest.MonkeyPatch()
     monkeypatch.setattr(respond_mod, "load_provider", lambda **_: provider)
+    # Questi test verificano le guardie sul rail model con un provider finto:
+    # dal R4 il default del codice e' deterministico (scorer), che ignorerebbe
+    # il provider. Si fissa esplicitamente il rail model.
+    from treasureiq.chat.engine import CivicChatEngine
+
+    monkeypatch.setattr(respond_mod, "chat_engine", CivicChatEngine(backend="model"))
     try:
         answer = asyncio.run(
             respond_mod._componi_risposta(message=messaggio, profile=None, records=[])
@@ -572,6 +584,12 @@ def test_tutte_le_categorie_produce_match_multi_topic():
 
     monkeypatch = _pytest.MonkeyPatch()
     monkeypatch.setattr(respond_mod, "load_provider", lambda **_: provider)
+    # Questi test verificano le guardie sul rail model con un provider finto:
+    # dal R4 il default del codice e' deterministico (scorer), che ignorerebbe
+    # il provider. Si fissa esplicitamente il rail model.
+    from treasureiq.chat.engine import CivicChatEngine
+
+    monkeypatch.setattr(respond_mod, "chat_engine", CivicChatEngine(backend="model"))
     try:
         answer = asyncio.run(
             respond_mod._componi_risposta(message=messaggio, profile=profilo, records=records)
@@ -629,6 +647,12 @@ def test_categoria_scelta_filtra_ai_topic_della_categoria():
 
     monkeypatch = _pytest.MonkeyPatch()
     monkeypatch.setattr(respond_mod, "load_provider", lambda **_: provider)
+    # Questi test verificano le guardie sul rail model con un provider finto:
+    # dal R4 il default del codice e' deterministico (scorer), che ignorerebbe
+    # il provider. Si fissa esplicitamente il rail model.
+    from treasureiq.chat.engine import CivicChatEngine
+
+    monkeypatch.setattr(respond_mod, "chat_engine", CivicChatEngine(backend="model"))
     try:
         answer = asyncio.run(
             respond_mod._componi_risposta(message=messaggio, profile=profilo, records=records)

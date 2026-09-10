@@ -26,6 +26,21 @@ from treasureiq.chat.intent import (
 from treasureiq.chat.llamacpp import NarrationContext, NarrationResult, load_narrator
 from treasureiq.extract.providers import LLMProvider, load_provider
 
+#: Rail deterministici: nessun provider caricato, nessuna chiamata di rete, il
+#: testo del cittadino non lascia il processo.
+_BACKEND_DETERMINISTICI = frozenset({"rust", "scorer"})
+
+#: Default sicuro del codice (R4): senza scelta esplicita si resta sul rail
+#: deterministico. Il rail ``model`` (che invia messaggio + storia a un
+#: provider) va chiesto apposta via env; non e' piu' il fallback implicito. Il
+#: deployment sceglie il proprio backend (compose usa ``rust``).
+_DEFAULT_BACKEND = "scorer"
+
+
+def _in_produzione() -> bool:
+    """True se ``TREASUREIQ_ENV=production``. Letto live per testabilita'."""
+    return os.environ.get("TREASUREIQ_ENV", "development").strip().lower() == "production"
+
 
 @dataclass(frozen=True)
 class EngineAnalysis:
@@ -65,12 +80,24 @@ class CivicChatEngine:
             backend
             or engine_env
             or intent_env
-            or "model"
+            or _DEFAULT_BACKEND
         ).strip().lower()
+        # R4: in produzione il rail model non e' autorizzato. Sul rail model il
+        # testo del cittadino (messaggio + storia) esce dalla pipeline verso un
+        # provider: in prod deve essere una decisione esplicita (vedi R5), non
+        # un default o una env lasciata a "model". Config incoerente => avvio
+        # abortito, non egress silenzioso.
+        if _in_produzione() and self.backend not in _BACKEND_DETERMINISTICI:
+            raise RuntimeError(
+                "config produzione incoerente: in TREASUREIQ_ENV=production il "
+                f"backend intent {self.backend!r} non e' autorizzato (invia il "
+                "testo del cittadino a un provider). Usa un rail deterministico "
+                f"({', '.join(sorted(_BACKEND_DETERMINISTICI))})."
+            )
 
     @property
     def deterministic(self) -> bool:
-        return self.backend in {"rust", "scorer"}
+        return self.backend in _BACKEND_DETERMINISTICI
 
     async def analyse(
         self,

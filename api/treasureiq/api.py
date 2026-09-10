@@ -9,6 +9,7 @@ session.
 from __future__ import annotations
 
 import asyncio
+import contextlib
 import json
 import logging
 import os
@@ -138,10 +139,94 @@ CONVERSATION_MAX_AGE = 90 * 24 * 60 * 60
 # default perche' lo sviluppo locale gira su http://localhost, dove Secure
 # bloccherebbe il set del cookie. La prod (dietro HTTPS) lo abilita con =1.
 COOKIE_SECURE = os.environ.get("TREASUREIQ_COOKIE_SECURE", "") == "1"
+# Ambiente di esecuzione (R2). `production` impone Secure sul cookie di sessione:
+# quel cookie e' il bearer del transcript e in produzione non deve mai viaggiare
+# su HTTP in chiaro. Lo sviluppo locale (`development`, default) gira su
+# http://localhost, dove Secure bloccherebbe il set del cookie, quindi li' resta
+# permesso. Una produzione con Secure spento e' una config incoerente: la
+# validazione all'avvio (`_verifica_coerenza_cookie`) la ferma, senza degradare
+# in silenzio.
+APP_ENV = os.environ.get("TREASUREIQ_ENV", "development").strip().lower()
+IS_PRODUCTION = APP_ENV == "production"
 CONVERSATION_DB = Path(
     os.environ.get("TREASUREIQ_CONVERSATION_DB", str(DATA_DIR / "conversations.sqlite3"))
 )
 conversation_store = ConversationStore(CONVERSATION_DB)
+
+# Retention del transcript (R1). Il TTL vive in `conversation.CONVERSATION_TTL`
+# (90 giorni, rinnovato all'accesso); `purge_expired()` elimina le conversazioni
+# scadute con messaggi ed eventi collegati. Qui lo agganciamo al ciclo di vita
+# dell'app: un purge deterministico all'avvio, poi a intervalli regolari. Lo
+# scheduling e' in-process (un task asyncio), coerente col deployment a processo
+# singolo (uvicorn) senza dipendere da un cron esterno. `=0` disabilita il loop
+# periodico: il purge all'avvio resta comunque. Nessun VACUUM qui (decisione R6
+# separata): questo commit non tocca il file oltre le DELETE gia' esistenti.
+CONVERSATION_PURGE_INTERVAL_SECONDS = int(
+    os.environ.get("TREASUREIQ_CONVERSATION_PURGE_INTERVAL", str(24 * 60 * 60))
+)
+
+
+def _purge_conversazioni_scadute() -> int:
+    """Purge the expired conversations; a failure logs but never aborts.
+
+    Retention is background maintenance: a broken purge must not take the app
+    down or fail a request, so any error is swallowed after logging.
+    """
+    try:
+        rimosse = conversation_store.purge_expired()
+    except Exception:  # noqa: BLE001 — la retention non deve mai abbattere l'app
+        logger.exception("purge conversazioni scadute fallito")
+        return 0
+    if rimosse:
+        logger.info("purge conversazioni scadute: %d rimosse", rimosse)
+    return rimosse
+
+
+async def _loop_purge_conversazioni() -> None:
+    """Run the purge every ``CONVERSATION_PURGE_INTERVAL_SECONDS`` until cancelled.
+
+    ``purge_expired`` is a short synchronous SQLite job: run it on a worker
+    thread so the periodic sweep never blocks the event loop.
+    """
+    while True:
+        await asyncio.sleep(CONVERSATION_PURGE_INTERVAL_SECONDS)
+        await asyncio.to_thread(_purge_conversazioni_scadute)
+
+
+def _verifica_coerenza_cookie() -> None:
+    """Fail-fast se la produzione gira col cookie di sessione non Secure (R2).
+
+    In produzione il cookie e' il bearer del transcript: senza Secure puo'
+    viaggiare su HTTP in chiaro ed essere intercettato. Una config incoerente
+    (``TREASUREIQ_ENV=production`` con ``TREASUREIQ_COOKIE_SECURE`` != 1) ferma
+    l'avvio invece di degradare in silenzio. In sviluppo (default) non impone
+    nulla, cosi' http://localhost continua a funzionare.
+    """
+    if IS_PRODUCTION and not COOKIE_SECURE:
+        raise RuntimeError(
+            "config produzione incoerente: TREASUREIQ_ENV=production richiede "
+            "TREASUREIQ_COOKIE_SECURE=1 — il cookie di sessione e' un bearer del "
+            "transcript e non deve viaggiare su HTTP in chiaro."
+        )
+
+
+@contextlib.asynccontextmanager
+async def _lifespan(_app: FastAPI):
+    # R2: config produzione incoerente = avvio abortito, non fallback silenzioso.
+    _verifica_coerenza_cookie()
+    # Purge deterministico all'avvio: lo stato scaduto non sopravvive a un
+    # riavvio, a prescindere dal loop periodico.
+    _purge_conversazioni_scadute()
+    task: asyncio.Task[None] | None = None
+    if CONVERSATION_PURGE_INTERVAL_SECONDS > 0:
+        task = asyncio.create_task(_loop_purge_conversazioni())
+    try:
+        yield
+    finally:
+        if task is not None:
+            task.cancel()
+            with contextlib.suppress(asyncio.CancelledError):
+                await task
 
 #: Comuni whose seed snapshots ship with the repository.
 COMUNI = {
@@ -273,6 +358,7 @@ app = FastAPI(
     openapi_tags=TAG_METADATA,
     contact={"name": "TreasureIQ", "url": "https://github.com/stanzinofree/TreasureIQ"},
     license_info={"name": "Vedi LICENSE nel repository"},
+    lifespan=_lifespan,
 )
 
 # The web client is served from a different origin in development.

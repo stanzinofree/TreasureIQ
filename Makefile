@@ -176,24 +176,29 @@ registro-list: ## Elenca i record presenti in data-live/registro (read-only)
 # --- Backup ---------------------------------------------------------------
 # data-live/ e data/storico.db sono bind mount: già persistenti ai rebuild
 # (compose.yml). Questo backup e' la cintura extra, non la sola garanzia.
+#
+# R3A: il DB delle conversazioni (data-live/conversations.sqlite3) e' ESCLUSO
+# dal backup di proposito. Il transcript e' stato temporaneo, non fonte di
+# verita' operativa: e' soggetto alla retention applicativa (TTL 90gg + purge,
+# R1) sul volume /live e non va replicato in archivi di lunga durata. Dopo un
+# disaster restore le conversazioni possono andare perse: e' il comportamento
+# voluto, non un difetto. Conservare i transcript oltre il volume live
+# richiederebbe backup separato + cifratura + chiave fuori archivio + retention
+# propria (R3B), da attivare solo se emerge il requisito "resume dopo disaster
+# recovery". Vedi docs/workstreams/storage-lifecycle/analysis.md.
+#
+# La logica sta in api/scripts/backup.sh (testabile: tests/test_backup_esclude_
+# conversazioni.py). Questi target sono wrapper.
 
 .PHONY: backup
-backup: ## Copia storico.db + data-live/ in backups/treasureiq-<timestamp>.tgz
-	@mkdir -p backups
-	@stamp=$$(date -u +%Y%m%dT%H%M%SZ); \
-	tar_path="backups/treasureiq-$$stamp.tgz"; \
-	if [ -f data/storico.db ]; then \
-		tar -czf "$$tar_path" data/storico.db data-live; \
-	else \
-		echo "data/storico.db assente, backup solo di data-live/"; \
-		tar -czf "$$tar_path" data-live; \
-	fi; \
-	echo "backup: $$tar_path"
+backup: ## Copia storico.db + data-live/ (ESCLUSO il DB conversazioni) in backups/treasureiq-<timestamp>.tgz
+	@api/scripts/backup.sh . >/dev/null
 
+# restore estrae solo i file presenti nell'archivio: non toccando il DB
+# conversazioni (escluso dal backup, R3A), un eventuale conversations.sqlite3
+# gia' sul volume /live sopravvive al restore. Nessun transcript viene
+# reintrodotto da un archivio. Logica in api/scripts/restore.sh.
 .PHONY: restore
 restore: ## Ripristina un backup: make restore FILE=backups/treasureiq-....tgz
 	@test -n "$(FILE)" || { echo "manca FILE, es. make restore FILE=backups/treasureiq-20260810T120000Z.tgz"; exit 1; }
-	@test -f "$(FILE)" || { echo "file non trovato: $(FILE)"; exit 1; }
-	@echo "questo sovrascrive data/storico.db e data-live/ con il contenuto di $(FILE):"
-	@tar -tzf "$(FILE)"
-	tar -xzf "$(FILE)" -C .
+	@api/scripts/restore.sh "$(FILE)" .

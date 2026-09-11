@@ -210,10 +210,28 @@ def _verifica_coerenza_cookie() -> None:
         )
 
 
+def _verifica_intervallo_purge() -> None:
+    """Fail-fast su ``TREASUREIQ_CONVERSATION_PURGE_INTERVAL`` negativo (F3).
+
+    Un intervallo negativo e' una misconfig, non un secondo modo per spegnere il
+    loop: solo ``0`` lo disabilita (il purge all'avvio resta comunque), un intero
+    ``> 0`` e' l'intervallo. Rifiutiamo il negativo all'avvio invece di saltare in
+    silenzio la sweep periodica, coerente con lo stile fail-fast del check cookie.
+    """
+    if CONVERSATION_PURGE_INTERVAL_SECONDS < 0:
+        raise RuntimeError(
+            "TREASUREIQ_CONVERSATION_PURGE_INTERVAL negativo non valido: "
+            f"{CONVERSATION_PURGE_INTERVAL_SECONDS} — usa 0 per disabilitare il "
+            "loop periodico, un intero > 0 per l'intervallo."
+        )
+
+
 @contextlib.asynccontextmanager
 async def _lifespan(_app: FastAPI):
     # R2: config produzione incoerente = avvio abortito, non fallback silenzioso.
     _verifica_coerenza_cookie()
+    # F3: intervallo purge negativo = misconfig, avvio abortito.
+    _verifica_intervallo_purge()
     # Purge deterministico all'avvio: lo stato scaduto non sopravvive a un
     # riavvio, a prescindere dal loop periodico.
     _purge_conversazioni_scadute()

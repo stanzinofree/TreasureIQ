@@ -1542,12 +1542,31 @@ export default function Chat() {
 
       <div className="chat__log" aria-live="polite" ref={logRef}>
         {messages.length === 0 && (
-          <>
-            <p className="chat__hint">
-              Ad esempio: &laquo;ho la bolletta elettrica troppo alta&raquo;,
-              &laquo;ci sono bandi per informatici in scadenza?&raquo;
+          <div className="chat__empty" aria-labelledby="chat-welcome-title">
+            <p className="chat__empty-eyebrow">ASSISTENTE CIVICO · TIQ</p>
+            <h2 id="chat-welcome-title">Da dove partiamo?</h2>
+            <p className="chat__empty-copy">
+              Scrivi una situazione concreta. Ti aiuto a trovare il servizio
+              giusto, nel comune giusto, con la fonte sempre in vista.
             </p>
-          </>
+            <div className="chat__suggestions" aria-label="Domande suggerite">
+              {[
+                "Devo cambiare residenza",
+                "Come rinnovo la carta d'identità?",
+                "Ci sono bandi aperti nel mio comune?",
+              ].map((suggestione) => (
+                <button
+                  key={suggestione}
+                  type="button"
+                  className="chat__suggestion"
+                  onClick={() => setInput(suggestione)}
+                >
+                  {suggestione}
+                  <span aria-hidden="true">↗</span>
+                </button>
+              ))}
+            </div>
+          </div>
         )}
 
         {messages.map((m) => (

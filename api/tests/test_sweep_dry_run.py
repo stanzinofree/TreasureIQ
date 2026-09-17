@@ -100,18 +100,18 @@ def test_config_from_env_legge_dry_run(monkeypatch):
     assert config.dry_run is True
 
 
-def test_run_batch_refresh_dry_run_rifiuta_e_non_chiama_sweep_main(monkeypatch):
-    chiamato = {"sweep_main": False}
+def test_run_batch_refresh_dry_run_rifiuta_e_non_esegue(monkeypatch):
+    chiamato = {"refresh": False}
     monkeypatch.setattr(
-        sweep_worker, "sweep_main",
-        lambda argv: chiamato.__setitem__("sweep_main", True) or 0,
+        sweep_worker, "refresh_dati_connettore",
+        lambda codice, **kwargs: chiamato.__setitem__("refresh", True) or None,
     )
     config = sweep_worker.WorkerConfig(
         db=None, mode="refresh", dry_run=True,
     )
     rc = sweep_worker.run_batch(config, ["058003"])
-    # Refresh sotto dry-run: rifiutato, zero mutazioni, sweep_main mai invocato.
+    # Refresh sotto dry-run: rifiutato, zero mutazioni, refresh mai eseguito.
     # Exit code dedicato: SKIPPED, non 0 — il chiamante distingue rifiuto da
     # esecuzione riuscita.
     assert rc == sweep_worker.EXIT_REFRESH_SKIPPED
-    assert chiamato["sweep_main"] is False
+    assert chiamato["refresh"] is False

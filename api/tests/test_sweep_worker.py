@@ -31,22 +31,45 @@ def test_discovery_batch_aggiorna_solo_inventario(monkeypatch, tmp_path):
     assert [item["source_id"] for item in chiamate] == ["001", "002"]
 
 
-def test_refresh_batch_usa_il_probe_della_fonte(monkeypatch, tmp_path):
+def test_refresh_batch_chiama_refresh_dati_in_process(monkeypatch, tmp_path):
+    # Il refresh gira in-process (come confirmation), un comune alla volta via
+    # refresh_dati_connettore — non più shell-out a registro_cli.
     config = sweep_worker.WorkerConfig(
         db=tmp_path / "storico.db", mode="refresh", delay=0, refresh_interval_seconds=60
     )
-    chiamata = {}
+    chiamati = []
 
-    def fake_main(argv):
-        chiamata["argv"] = argv
-        return 0
+    class _Esito:
+        piattaforma = "municipium"
+        letto_il = "2026-01-01T00:00:00+00:00"
 
-    monkeypatch.setattr(sweep_worker, "sweep_main", fake_main)
+    def fake_refresh(codice, **kwargs):
+        chiamati.append(codice)
+        return _Esito()
 
-    assert sweep_worker.run_batch(config, ["001"]) == 0
-    assert chiamata["argv"][:3] == ["scan", "001", "--db"]
-    assert "--refresh-dati" in chiamata["argv"]
-    assert "--lavoratori" not in chiamata["argv"]
+    monkeypatch.setattr(sweep_worker, "refresh_dati_connettore", fake_refresh)
+
+    assert sweep_worker.run_batch(config, ["001", "002"]) == 0
+    assert chiamati == ["001", "002"]
+
+
+def test_refresh_batch_un_errore_non_ferma_il_lotto(monkeypatch, tmp_path):
+    config = sweep_worker.WorkerConfig(
+        db=tmp_path / "storico.db", mode="refresh", delay=0, refresh_interval_seconds=60
+    )
+    visti = []
+
+    def fake_refresh(codice, **kwargs):
+        visti.append(codice)
+        if codice == "001":
+            raise RuntimeError("boom")
+        return None
+
+    monkeypatch.setattr(sweep_worker, "refresh_dati_connettore", fake_refresh)
+
+    # Un comune fallito → exit 1, ma il lotto prosegue su tutti.
+    assert sweep_worker.run_batch(config, ["001", "002"]) == 1
+    assert visti == ["001", "002"]
 
 
 def test_refresh_non_promuove_un_comune_senza_cache_a_discovery(monkeypatch, tmp_path):

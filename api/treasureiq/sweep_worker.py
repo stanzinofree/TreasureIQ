@@ -30,7 +30,11 @@ from treasureiq.catalog.service_sweep import (
     ServiceSweepDryReport,
     pianifica_dry_run,
 )
-from treasureiq.connettore import _da_store_raw as _connettore_cache
+from treasureiq.connettore import (
+    _da_store_raw as _connettore_cache,
+    refresh_dati_connettore,
+    refresh_supportato,
+)
 from treasureiq.ingest.censimento import _gia_registrati
 from treasureiq.mappa_connettore import (
     ProbeBudgetEsaurito,
@@ -40,7 +44,6 @@ from treasureiq.mappa_connettore import (
 from treasureiq.mappa_connettore import _da_cache as _mappa_da_cache
 from treasureiq.registro import leggi_registro
 from treasureiq.registro_cli import _comuni_da_censimento
-from treasureiq.registro_cli import main as sweep_main
 from treasureiq.sonda_live import LIVE_DIR, comune_per_codice
 from treasureiq.storico import apri
 
@@ -217,6 +220,13 @@ def next_batch(config: WorkerConfig) -> list[str]:
             # contratto connettore: quello è lavoro della modalità discovery.
             record = _connettore_cache(codice)
             if record is None:
+                continue
+            # Refresh su una piattaforma senza lettore dedicato è un no-op: non
+            # aggiorna letto_il, quindi il comune resta in testa alla coda
+            # oldest-first e affama i comuni write-capable a valle. La
+            # confirmation deve comunque poterla riclassificare, perciò il
+            # filtro vale solo in modalità refresh.
+            if config.mode == "refresh" and not refresh_supportato(record.piattaforma):
                 continue
             try:
                 letto = datetime.fromisoformat(record.controllato_il or record.letto_il)
@@ -594,21 +604,38 @@ def run_batch(config: WorkerConfig, comuni: list[str]) -> int:
         return 1 if errors else 0
     if config.mode == "refresh":
         if config.dry_run:
-            # Il refresh scrive lo storico via il CLI legacy (sweep_main), fuori
-            # dalla guardia dry_run del path catalog: non lo simuliamo, lo
-            # rifiutiamo, così --dry-run non muta mai dati (invariante I4).
+            # Il refresh persiste sempre (data-live via _in_store + registro via
+            # registra_scansione): non lo simuliamo, lo rifiutiamo, così
+            # --dry-run non muta mai dati (invariante I4). Exit code dedicato:
+            # il chiamante distingue "rifiutato" (SKIPPED) da "eseguito con
+            # successo" (0). run() lo propaga e ferma il ciclo.
             logger.warning(
-                "dry-run: modalità refresh non supportata (scrive lo storico "
-                "via path legacy); nessuna azione su %d comuni", len(comuni),
+                "dry-run: modalità refresh non supportata (persiste su "
+                "data-live/registro); nessuna azione su %d comuni", len(comuni),
             )
-            # Exit code dedicato: il chiamante distingue "rifiutato" (SKIPPED) da
-            # "eseguito con successo" (0). run() lo propaga e ferma il ciclo.
             return EXIT_REFRESH_SKIPPED
-        argv = [
-            "scan", *comuni, "--db", str(config.db), "--refresh-dati",
-            "--delay", str(config.delay),
-        ]
-    elif config.mode == "confirmation":
+        # Refresh in-process, come confirmation: dispatch per-comune sulla
+        # piattaforma già nota (refresh_dati_connettore), che scrive data-live
+        # e registro e lascia intatto lo storico.db. next_batch ha già filtrato
+        # le piattaforme senza lettore, quindi qui ogni comune ha un write path.
+        errors = 0
+        for codice in comuni:
+            try:
+                esito = refresh_dati_connettore(codice)
+                if esito is None:
+                    logger.warning("refresh %s: nessun contratto in store", codice)
+                else:
+                    logger.info(
+                        "refresh %s: %s letto_il=%s", codice, esito.piattaforma,
+                        esito.letto_il,
+                    )
+            except Exception:  # noqa: BLE001 — un comune non ferma il lotto
+                logger.exception("refresh fallito per %s", codice)
+                errors += 1
+            if config.delay:
+                time.sleep(config.delay)
+        return 1 if errors else 0
+    if config.mode == "confirmation":
         errors = 0
         esecutore = _nuovo_esecutore(config)
         for codice in comuni:
@@ -628,14 +655,7 @@ def run_batch(config: WorkerConfig, comuni: list[str]) -> int:
             if config.delay:
                 time.sleep(config.delay)
         return 1 if errors else 0
-    else:
-        raise ValueError(f"modalità worker non gestita: {config.mode}")
-    # A questo punto mode è garantito "refresh": discovery e confirmation sono
-    # già ritornati sopra, ogni altro valore ha sollevato. L'aderenza è calcolata
-    # dal path legacy (sweep_main), quindi il flag va propagato qui.
-    if config.aderenza:
-        argv.append("--aderenza")
-    return sweep_main(argv)
+    raise ValueError(f"modalità worker non gestita: {config.mode}")
 
 
 def run(config: WorkerConfig) -> int:

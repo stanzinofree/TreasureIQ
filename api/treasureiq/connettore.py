@@ -257,6 +257,41 @@ def refresh_connettore(
     return leggi_connettore(codice_istat, usa_cache=False, timeout=timeout)
 
 
+#: Platforms with a dedicated refresh reader in ``refresh_dati_connettore``.
+#: Only these have a write path; anything else (e.g. the legacy value
+#: ``wordpress_agid``, no longer an enum member) hits the no-op branch below,
+#: which returns ``precedente`` unchanged and never bumps ``letto_il``. This set
+#: MUST stay aligned with the dispatch chain in ``refresh_dati_connettore``: a
+#: value here without a branch there (or vice versa) is a bug. The sweep
+#: selection (mode ``refresh``) uses ``refresh_supportato`` to skip platforms
+#: outside this set — otherwise their no-ops sit at the head of the oldest-first
+#: queue forever (no ``letto_il`` bump) and starve the write-capable comuni.
+PIATTAFORME_REFRESH: frozenset[str] = frozenset(
+    {
+        Piattaforma.MUNICIPIUM.value,
+        Piattaforma.EGOV.value,
+        Piattaforma.HGATE.value,
+        Piattaforma.PEOPLEWEB.value,
+        "openweb",  # literal: no dedicated enum member, dispatched by string
+        Piattaforma.WP_DESIGN_COMUNI.value,
+        Piattaforma.WORDPRESS_GENERICO.value,
+        Piattaforma.COMUNIBOOTSTRAPITALIA.value,
+        Piattaforma.COMWEB.value,
+        Piattaforma.OPENPA.value,
+    }
+)
+
+
+def refresh_supportato(piattaforma: str | None) -> bool:
+    """Return True when ``piattaforma`` has a dedicated refresh reader.
+
+    Mirrors the dispatch chain of :func:`refresh_dati_connettore`. Platforms
+    outside this set fall through to the no-op branch, so refreshing them is
+    wasted work that never updates freshness.
+    """
+    return piattaforma in PIATTAFORME_REFRESH
+
+
 def refresh_dati_connettore(
     codice_istat: str, *, timeout: float = 8.0
 ) -> EsitoConnettore | None:

@@ -36,6 +36,11 @@ from treasureiq.connettore import (
     refresh_supportato,
 )
 from treasureiq.ingest.censimento import _gia_registrati
+from treasureiq.ingest.fetch_pacing import (
+    PacerDominio,
+    attiva_pacer,
+    ripristina_pacer,
+)
 from treasureiq.mappa_connettore import (
     ProbeBudgetEsaurito,
     ProbeFallita,
@@ -128,6 +133,11 @@ class WorkerConfig:
     #: Freschezza cache servizi usata dal dry-run del catalogo: una voce più
     #: giovane di questa soglia conta come "già in cache" (nessuna risoluzione).
     service_max_age_seconds: float = 86400.0
+    #: Cortesia refresh (in-process): intervallo minimo fra due GET allo stesso
+    #: dominio durante il refresh di UN comune. I reader OpenPA/OpenCity leggono
+    #: decine di sotto-pagine sullo stesso host e i portali rispondono 429 alla
+    #: raffica; questo le distanzia. 0 disattiva il pacing (comportamento legacy).
+    pace_dominio_s: float = 0.5
 
 
 def config_from_env(
@@ -182,6 +192,9 @@ def config_from_env(
         execute=execute or os.environ.get("TREASUREIQ_SERVICE_EXECUTE", "0") == "1",
         service_max_age_seconds=max(
             0.0, float(os.environ.get("TREASUREIQ_SERVICE_MAX_AGE_SECONDS", "86400"))
+        ),
+        pace_dominio_s=max(
+            0.0, float(os.environ.get("TREASUREIQ_SWEEP_PACE_S", "0.5"))
         ),
     )
 
@@ -620,6 +633,15 @@ def run_batch(config: WorkerConfig, comuni: list[str]) -> int:
         # le piattaforme senza lettore, quindi qui ogni comune ha un write path.
         errors = 0
         for codice in comuni:
+            # Un pacer per comune: dentro un comune ogni GET va sullo stesso
+            # host, quindi lo stato per-dominio è tutto ciò che serve a spezzare
+            # la raffica. Scoped via ContextVar → attivo solo per questo refresh,
+            # _Sonda e fetch_guardato lo vedono, la chat live no.
+            token = attiva_pacer(
+                PacerDominio(intervallo_minimo_s=config.pace_dominio_s)
+                if config.pace_dominio_s > 0
+                else None
+            )
             try:
                 esito = refresh_dati_connettore(codice)
                 if esito is None:
@@ -632,6 +654,8 @@ def run_batch(config: WorkerConfig, comuni: list[str]) -> int:
             except Exception:  # noqa: BLE001 — un comune non ferma il lotto
                 logger.exception("refresh fallito per %s", codice)
                 errors += 1
+            finally:
+                ripristina_pacer(token)
             if config.delay:
                 time.sleep(config.delay)
         return 1 if errors else 0

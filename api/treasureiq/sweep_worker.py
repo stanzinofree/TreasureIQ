@@ -30,7 +30,10 @@ from treasureiq.catalog.service_sweep import (
     ServiceSweepDryReport,
     pianifica_dry_run,
 )
-from treasureiq.connettore import _da_store_raw as _connettore_cache
+from treasureiq.connettore import (
+    _da_store_raw as _connettore_cache,
+    refresh_supportato,
+)
 from treasureiq.ingest.censimento import _gia_registrati
 from treasureiq.mappa_connettore import (
     ProbeBudgetEsaurito,
@@ -217,6 +220,13 @@ def next_batch(config: WorkerConfig) -> list[str]:
             # contratto connettore: quello è lavoro della modalità discovery.
             record = _connettore_cache(codice)
             if record is None:
+                continue
+            # Refresh su una piattaforma senza lettore dedicato è un no-op: non
+            # aggiorna letto_il, quindi il comune resta in testa alla coda
+            # oldest-first e affama i comuni write-capable a valle. La
+            # confirmation deve comunque poterla riclassificare, perciò il
+            # filtro vale solo in modalità refresh.
+            if config.mode == "refresh" and not refresh_supportato(record.piattaforma):
                 continue
             try:
                 letto = datetime.fromisoformat(record.controllato_il or record.letto_il)

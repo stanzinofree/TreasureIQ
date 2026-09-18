@@ -149,6 +149,9 @@ def fetch_guardato(
         tentativo_429 = 0
         while True:
             if pace is not None:
+                if pace.bloccato(corrente):
+                    logger.info("fetch guardato saltato: circuito pacing aperto per %s", corrente)
+                    return None
                 pace.prima(corrente)
             try:
                 with httpx.Client(
@@ -156,7 +159,7 @@ def fetch_guardato(
                 ) as client:
                     with client.stream("GET", corrente) as risposta:
                         if pace is not None:
-                            pace.dopo(corrente)
+                            pace.dopo(corrente, risposta.status_code)
                         if (
                             risposta.status_code == 429
                             and pace is not None

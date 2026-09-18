@@ -30,6 +30,7 @@ import httpx
 
 from treasureiq import freschezza
 from treasureiq.ingest.base import USER_AGENT
+from treasureiq.ingest.fetch_pacing import pacer_attivo
 
 logger = logging.getLogger(__name__)
 
@@ -119,6 +120,9 @@ def fetch_guardato(
     corrente = url
     host_iniziale: str | None = None
     cross_host_used = False
+    # Opt-in per-domain pacing (refresh/sweep only): None outside a refresh, so
+    # the live resolver and every other caller keep their old, unthrottled path.
+    pace = pacer_attivo()
     for hop in range(max_redirect_hop + 1):
         richiesta = urlsplit(corrente)
         if richiesta.scheme not in ("http", "https") or not richiesta.hostname:
@@ -142,11 +146,15 @@ def fetch_guardato(
         if not host_risolve_a_ip_sicuro(richiesta.hostname):
             logger.warning("fetch guardato host non risolve a IP pubblico, scartato: %s", corrente)
             return None
+        if pace is not None:
+            pace.prima(corrente)
         try:
             with httpx.Client(
                 timeout=timeout, headers={"User-Agent": USER_AGENT}, follow_redirects=False
             ) as client:
                 with client.stream("GET", corrente) as risposta:
+                    if pace is not None:
+                        pace.dopo(corrente)
                     if risposta.status_code in REDIRECT_STATUS:
                         location = risposta.headers.get("location")
                         if not location:

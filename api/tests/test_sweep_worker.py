@@ -126,3 +126,52 @@ def test_config_from_env_modalita_invalida_ricade_su_refresh(monkeypatch):
     monkeypatch.setenv("TREASUREIQ_SWEEP_MODE", "banana")
     config = sweep_worker.config_from_env()
     assert config.mode == "refresh"
+
+
+def test_config_from_env_legge_pace_dominio(monkeypatch):
+    monkeypatch.setenv("TREASUREIQ_SWEEP_PACE_S", "1.5")
+    assert sweep_worker.config_from_env().pace_dominio_s == 1.5
+
+
+def test_config_from_env_pace_dominio_default(monkeypatch):
+    monkeypatch.delenv("TREASUREIQ_SWEEP_PACE_S", raising=False)
+    assert sweep_worker.config_from_env().pace_dominio_s == 0.5
+
+
+def test_refresh_batch_attiva_il_pacer_per_comune(monkeypatch, tmp_path):
+    # Il refresh scopa la raffica 429 attivando un PacerDominio per ogni comune;
+    # refresh_dati_connettore lo vede via ContextVar, e resta ripristinato dopo.
+    from treasureiq.ingest.fetch_pacing import pacer_attivo
+
+    config = sweep_worker.WorkerConfig(
+        db=tmp_path / "storico.db", mode="refresh", delay=0, pace_dominio_s=0.5
+    )
+    visti = []
+
+    def fake_refresh(codice, **kwargs):
+        visti.append((codice, pacer_attivo() is not None))
+        return None
+
+    monkeypatch.setattr(sweep_worker, "refresh_dati_connettore", fake_refresh)
+
+    assert sweep_worker.run_batch(config, ["001", "002"]) == 0
+    assert visti == [("001", True), ("002", True)]
+    assert pacer_attivo() is None  # ripristinato a fine lotto
+
+
+def test_refresh_batch_pace_zero_niente_pacer(monkeypatch, tmp_path):
+    # pace_dominio_s=0 disattiva il pacing: nessun pacer installato.
+    from treasureiq.ingest.fetch_pacing import pacer_attivo
+
+    config = sweep_worker.WorkerConfig(
+        db=tmp_path / "storico.db", mode="refresh", delay=0, pace_dominio_s=0.0
+    )
+    visti = []
+    monkeypatch.setattr(
+        sweep_worker,
+        "refresh_dati_connettore",
+        lambda codice, **k: visti.append(pacer_attivo()) or None,
+    )
+
+    assert sweep_worker.run_batch(config, ["001"]) == 0
+    assert visti == [None]

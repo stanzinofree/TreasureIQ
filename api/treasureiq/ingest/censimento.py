@@ -64,6 +64,7 @@ import httpx
 from pydantic import BaseModel, Field
 
 from treasureiq.ingest.base import USER_AGENT
+from treasureiq.ingest.fetch_pacing import pacer_attivo, retry_after_secondi
 from treasureiq.ingest.host_guard import fetch_guardato, host_senza_www
 from treasureiq.ingest.modello_agid import (
     PREFISSO_MYPORTAL,
@@ -450,6 +451,30 @@ class _Sonda:
     def __exit__(self, *exc: object) -> None:
         self.close()
 
+    def _get_pacato(self, url: str, **params: object) -> httpx.Response:
+        """A GET that honours the refresh pacer if one is active.
+
+        Outside a refresh (`pacer_attivo() is None`) this is exactly
+        `self._client.get(...)`: no sleep, no retry — the recognition and
+        measurement paths keep their old behaviour. Under a refresh the pacer
+        spaces same-host requests and, on a 429, backs off and retries a
+        bounded number of times before returning the 429 to the caller.
+        """
+        pace = pacer_attivo()
+        tentativo = 0
+        while True:
+            if pace is not None:
+                pace.prima(url)
+            resp = self._client.get(url, params=params) if params else self._client.get(url)
+            if pace is not None:
+                pace.dopo(url)
+                if resp.status_code == 429 and pace.backoff_429(
+                    url, tentativo, retry_after_secondi(resp.headers.get("retry-after"))
+                ):
+                    tentativo += 1
+                    continue
+            return resp
+
     def _get(self, url: str, **params: object) -> httpx.Response:
         self.richieste += 1
         try:
@@ -458,7 +483,7 @@ class _Sonda:
             # `Servizi?ID=130875` diventava `Servizi`, cioè l'indice — e
             # l'aderenza di PeopleWeb risultava non misurabile su 35 comuni
             # mentre le schede erano lì e si leggevano benissimo.
-            resp = self._client.get(url, params=params) if params else self._client.get(url)
+            resp = self._get_pacato(url, **params)
         except httpx.RequestError:
             if self.raggiungibile is None:
                 self.raggiungibile = False
@@ -476,7 +501,7 @@ class _Sonda:
         `IGNOTA` un comune che si era presentato.
         """
         self.richieste += 1
-        resp = self._client.get(url)
+        resp = self._get_pacato(url)
         self.raggiungibile = True
         return resp
 

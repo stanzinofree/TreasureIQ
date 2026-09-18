@@ -201,12 +201,17 @@ class _PacerSpia(PacerDominio):
         super().__init__(intervallo_minimo_s=0.0)
         self.prima_viste: list[str] = []
         self.dopo_viste: list[str] = []
+        self.backoff_viste: list[tuple[str, int, float | None]] = []
 
     def prima(self, url: str) -> None:
         self.prima_viste.append(url)
 
     def dopo(self, url: str) -> None:
         self.dopo_viste.append(url)
+
+    def backoff_429(self, url: str, tentativo: int, retry_after_s: float | None = None) -> bool:
+        self.backoff_viste.append((url, tentativo, retry_after_s))
+        return tentativo < 1
 
 
 def test_fetch_guardato_usa_il_pacer_attivo(monkeypatch) -> None:
@@ -234,6 +239,46 @@ def test_fetch_guardato_senza_pacer_non_rompe(monkeypatch) -> None:
     esito = host_guard.fetch_guardato("https://www.c.it/a", max_bytes=1000)
     assert esito is not None
     assert esito[1] == b"ok"
+
+
+class _ClientStreamSequenza:
+    def __init__(self, risposte: list[_StreamFinto], **_kwargs: object) -> None:
+        self._risposte = risposte
+        self.chiamate = 0
+
+    def __enter__(self) -> "_ClientStreamSequenza":
+        return self
+
+    def __exit__(self, *exc: object) -> None:
+        return None
+
+    def stream(self, method: str, url: str) -> _StreamFinto:
+        risposta = self._risposte[min(self.chiamate, len(self._risposte) - 1)]
+        self.chiamate += 1
+        return risposta
+
+
+def test_fetch_guardato_riprova_sul_429_sotto_pacer(monkeypatch) -> None:
+    monkeypatch.setattr(host_guard, "host_risolve_a_ip_sicuro", lambda hostname: True)
+    sequenza = _ClientStreamSequenza(
+        [
+            _StreamFinto(429, "https://www.c.it/a", {"retry-after": "3"}, []),
+            _StreamFinto(200, "https://www.c.it/a", {"content-type": "text/html"}, [b"ok"]),
+        ]
+    )
+    monkeypatch.setattr(host_guard.httpx, "Client", lambda **k: sequenza)
+    spia = _PacerSpia()
+    token = attiva_pacer(spia)
+    try:
+        esito = host_guard.fetch_guardato("https://www.c.it/a", max_bytes=1000)
+    finally:
+        ripristina_pacer(token)
+    assert esito is not None
+    assert esito[1] == b"ok"
+    assert sequenza.chiamate == 2
+    assert spia.backoff_viste == [("https://www.c.it/a", 0, 3.0)]
+    assert spia.prima_viste == ["https://www.c.it/a", "https://www.c.it/a"]
+    assert spia.dopo_viste == ["https://www.c.it/a", "https://www.c.it/a"]
 
 
 # --- integrazione: _Sonda ripete sul 429 sotto pacer -----------------------

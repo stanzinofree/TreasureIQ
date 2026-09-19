@@ -62,14 +62,22 @@ class PacerDominio:
         *,
         intervallo_minimo_s: float = 0.5,
         max_retry_429: int = 2,
+        max_429_dominio: int = 3,
         backoff_base_s: float = 2.0,
         backoff_cap_s: float = 30.0,
     ) -> None:
         self._intervallo = max(0.0, intervallo_minimo_s)
         self._max_retry = max(0, max_retry_429)
+        self._max_429_dominio = max(1, max_429_dominio)
         self._base = backoff_base_s
         self._cap = backoff_cap_s
         self._ultimo: dict[str, datetime] = {}
+        self._429_consecutivi: dict[str, int] = {}
+        self._domini_bloccati: set[str] = set()
+
+    def bloccato(self, url: str) -> bool:
+        """True when this domain has exhausted its 429 budget for this comune."""
+        return dominio_di(url) in self._domini_bloccati
 
     def prima(self, url: str) -> None:
         """Sleep the residual min-interval before a GET to ``url``'s domain."""
@@ -82,9 +90,23 @@ class PacerDominio:
         if attesa > 0:
             time.sleep(attesa)
 
-    def dopo(self, url: str) -> None:
-        """Mark ``url``'s domain as just queried (call after every GET)."""
-        self._ultimo[dominio_di(url)] = _now()
+    def dopo(self, url: str, status_code: int | None = None) -> None:
+        """Mark a GET and update the consecutive-429 circuit state."""
+        dominio = dominio_di(url)
+        self._ultimo[dominio] = _now()
+        if status_code == 429:
+            consecutivi = self._429_consecutivi.get(dominio, 0) + 1
+            self._429_consecutivi[dominio] = consecutivi
+            if consecutivi >= self._max_429_dominio:
+                self._domini_bloccati.add(dominio)
+                logger.warning(
+                    "circuito pacing aperto per %s dopo %d risposte 429",
+                    dominio,
+                    consecutivi,
+                )
+        elif status_code is not None:
+            self._429_consecutivi.pop(dominio, None)
+            self._domini_bloccati.discard(dominio)
 
     def backoff_429(
         self, url: str, tentativo: int, retry_after_s: float | None = None
@@ -97,6 +119,8 @@ class PacerDominio:
         looping forever on a host that keeps refusing.
         """
         if tentativo >= self._max_retry:
+            return False
+        if self.bloccato(url):
             return False
         if retry_after_s is not None and retry_after_s >= 0:
             attesa = min(self._cap, retry_after_s)

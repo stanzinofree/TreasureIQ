@@ -464,10 +464,19 @@ class _Sonda:
         tentativo = 0
         while True:
             if pace is not None:
+                if pace.bloccato(url):
+                    # `_Sonda` must return a response, not None. A synthetic
+                    # 429 follows the existing degraded-platform path without
+                    # turning an exhausted domain into a comune-level error.
+                    return httpx.Response(
+                        429,
+                        request=httpx.Request("GET", url),
+                        headers={"x-tiq-pacing": "circuit-open"},
+                    )
                 pace.prima(url)
             resp = self._client.get(url, params=params) if params else self._client.get(url)
             if pace is not None:
-                pace.dopo(url)
+                pace.dopo(url, resp.status_code)
                 if resp.status_code == 429 and pace.backoff_429(
                     url, tentativo, retry_after_secondi(resp.headers.get("retry-after"))
                 ):

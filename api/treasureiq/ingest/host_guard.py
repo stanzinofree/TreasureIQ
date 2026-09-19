@@ -30,7 +30,7 @@ import httpx
 
 from treasureiq import freschezza
 from treasureiq.ingest.base import USER_AGENT
-from treasureiq.ingest.fetch_pacing import pacer_attivo
+from treasureiq.ingest.fetch_pacing import pacer_attivo, retry_after_secondi
 
 logger = logging.getLogger(__name__)
 
@@ -146,40 +146,59 @@ def fetch_guardato(
         if not host_risolve_a_ip_sicuro(richiesta.hostname):
             logger.warning("fetch guardato host non risolve a IP pubblico, scartato: %s", corrente)
             return None
-        if pace is not None:
-            pace.prima(corrente)
-        try:
-            with httpx.Client(
-                timeout=timeout, headers={"User-Agent": USER_AGENT}, follow_redirects=False
-            ) as client:
-                with client.stream("GET", corrente) as risposta:
-                    if pace is not None:
-                        pace.dopo(corrente)
-                    if risposta.status_code in REDIRECT_STATUS:
-                        location = risposta.headers.get("location")
-                        if not location:
+        tentativo_429 = 0
+        while True:
+            if pace is not None:
+                if pace.bloccato(corrente):
+                    logger.info("fetch guardato saltato: circuito pacing aperto per %s", corrente)
+                    return None
+                pace.prima(corrente)
+            try:
+                with httpx.Client(
+                    timeout=timeout, headers={"User-Agent": USER_AGENT}, follow_redirects=False
+                ) as client:
+                    with client.stream("GET", corrente) as risposta:
+                        if pace is not None:
+                            pace.dopo(corrente, risposta.status_code)
+                        if (
+                            risposta.status_code == 429
+                            and pace is not None
+                            and pace.backoff_429(
+                                corrente,
+                                tentativo_429,
+                                retry_after_secondi(risposta.headers.get("retry-after")),
+                            )
+                        ):
+                            tentativo_429 += 1
+                            continue
+                        if risposta.status_code in REDIRECT_STATUS:
+                            location = risposta.headers.get("location")
+                            if not location:
+                                return None
+                            corrente = urljoin(corrente, location)
+                            break
+                        if risposta.status_code != 200:
+                            if return_non_200:
+                                return risposta.headers, b"", corrente, risposta.status_code  # type: ignore[return-value]
                             return None
-                        corrente = urljoin(corrente, location)
-                        continue
-                    if risposta.status_code != 200:
-                        if return_non_200:
-                            return risposta.headers, b"", corrente, risposta.status_code  # type: ignore[return-value]
-                        return None
-                    intestazioni = risposta.headers
-                    buffer = bytearray()
-                    for pezzo in risposta.iter_bytes():
-                        buffer.extend(pezzo)
-                        if len(buffer) > max_bytes:
-                            logger.info("fetch guardato oltre cap, connessione interrotta: %s", corrente)
-                            return None
-                    # Traccia di freschezza: ogni fetch live andato a buon fine —
-                    # è la prova auditabile che il dato viene ORA dal sito del
-                    # comune, non da un DB stantio (un cache-hit non arriva qui).
-                    logger.info("fetch live: %s (%d byte)", corrente, len(buffer))
-                    freschezza.registra(corrente, len(buffer))
-                    return intestazioni, bytes(buffer), corrente
-        except Exception:  # noqa: BLE001 — risorsa muta: None, mai un crash
-            logger.info("fetch guardato irraggiungibile: %s", corrente)
-            return None
+                        intestazioni = risposta.headers
+                        buffer = bytearray()
+                        for pezzo in risposta.iter_bytes():
+                            buffer.extend(pezzo)
+                            if len(buffer) > max_bytes:
+                                logger.info("fetch guardato oltre cap, connessione interrotta: %s", corrente)
+                                return None
+                        # Traccia di freschezza: ogni fetch live andato a buon fine —
+                        # è la prova auditabile che il dato viene ORA dal sito del
+                        # comune, non da un DB stantio (un cache-hit non arriva qui).
+                        logger.info("fetch live: %s (%d byte)", corrente, len(buffer))
+                        freschezza.registra(corrente, len(buffer))
+                        return intestazioni, bytes(buffer), corrente
+            except Exception:  # noqa: BLE001 — risorsa muta: None, mai un crash
+                logger.info("fetch guardato irraggiungibile: %s", corrente)
+                return None
+            # A redirect advances the guarded hop; a 429 retry continues inside
+            # the same hop so it does not consume the redirect budget.
+            break
     logger.warning("fetch guardato troppi redirect, scartato: %s", url)
     return None

@@ -201,12 +201,17 @@ class _PacerSpia(PacerDominio):
         super().__init__(intervallo_minimo_s=0.0)
         self.prima_viste: list[str] = []
         self.dopo_viste: list[str] = []
+        self.backoff_viste: list[tuple[str, int, float | None]] = []
 
     def prima(self, url: str) -> None:
         self.prima_viste.append(url)
 
-    def dopo(self, url: str) -> None:
+    def dopo(self, url: str, status_code: int | None = None) -> None:
         self.dopo_viste.append(url)
+
+    def backoff_429(self, url: str, tentativo: int, retry_after_s: float | None = None) -> bool:
+        self.backoff_viste.append((url, tentativo, retry_after_s))
+        return tentativo < 1
 
 
 def test_fetch_guardato_usa_il_pacer_attivo(monkeypatch) -> None:
@@ -234,6 +239,78 @@ def test_fetch_guardato_senza_pacer_non_rompe(monkeypatch) -> None:
     esito = host_guard.fetch_guardato("https://www.c.it/a", max_bytes=1000)
     assert esito is not None
     assert esito[1] == b"ok"
+
+
+def test_pacer_apre_e_resetta_il_circuito_per_dominio() -> None:
+    pacer = PacerDominio(max_429_dominio=2)
+    url = "https://c.it/a"
+    assert not pacer.bloccato(url)
+    pacer.dopo(url, 429)
+    assert not pacer.bloccato(url)
+    pacer.dopo(url, 429)
+    assert pacer.bloccato(url)
+    pacer.dopo(url, 200)
+    assert not pacer.bloccato(url)
+
+
+def test_fetch_guardato_salta_dominio_con_circuito_aperto(monkeypatch) -> None:
+    monkeypatch.setattr(host_guard, "host_risolve_a_ip_sicuro", lambda hostname: True)
+    pacer = PacerDominio(max_429_dominio=1)
+    pacer.dopo("https://www.c.it/precedente", 429)
+    token = attiva_pacer(pacer)
+    chiamate = []
+
+    class _ClientMaiChiamato(_ClientFinto):
+        def stream(self, method: str, url: str):
+            chiamate.append(url)
+            raise AssertionError("il circuito aperto non deve fare GET")
+
+    monkeypatch.setattr(host_guard.httpx, "Client", lambda **k: _ClientMaiChiamato(None, **k))
+    try:
+        assert host_guard.fetch_guardato("https://www.c.it/a", max_bytes=1000) is None
+    finally:
+        ripristina_pacer(token)
+    assert chiamate == []
+
+
+class _ClientStreamSequenza:
+    def __init__(self, risposte: list[_StreamFinto], **_kwargs: object) -> None:
+        self._risposte = risposte
+        self.chiamate = 0
+
+    def __enter__(self) -> "_ClientStreamSequenza":
+        return self
+
+    def __exit__(self, *exc: object) -> None:
+        return None
+
+    def stream(self, method: str, url: str) -> _StreamFinto:
+        risposta = self._risposte[min(self.chiamate, len(self._risposte) - 1)]
+        self.chiamate += 1
+        return risposta
+
+
+def test_fetch_guardato_riprova_sul_429_sotto_pacer(monkeypatch) -> None:
+    monkeypatch.setattr(host_guard, "host_risolve_a_ip_sicuro", lambda hostname: True)
+    sequenza = _ClientStreamSequenza(
+        [
+            _StreamFinto(429, "https://www.c.it/a", {"retry-after": "3"}, []),
+            _StreamFinto(200, "https://www.c.it/a", {"content-type": "text/html"}, [b"ok"]),
+        ]
+    )
+    monkeypatch.setattr(host_guard.httpx, "Client", lambda **k: sequenza)
+    spia = _PacerSpia()
+    token = attiva_pacer(spia)
+    try:
+        esito = host_guard.fetch_guardato("https://www.c.it/a", max_bytes=1000)
+    finally:
+        ripristina_pacer(token)
+    assert esito is not None
+    assert esito[1] == b"ok"
+    assert sequenza.chiamate == 2
+    assert spia.backoff_viste == [("https://www.c.it/a", 0, 3.0)]
+    assert spia.prima_viste == ["https://www.c.it/a", "https://www.c.it/a"]
+    assert spia.dopo_viste == ["https://www.c.it/a", "https://www.c.it/a"]
 
 
 # --- integrazione: _Sonda ripete sul 429 sotto pacer -----------------------
@@ -285,3 +362,18 @@ def test_sonda_senza_pacer_non_ripete(monkeypatch) -> None:
     resp = sonda.risposta("https://c.it/a")
     assert resp.status_code == 429
     assert sonda._client.chiamate == 1
+
+
+def test_sonda_circuito_aperto_restituisce_429_sintetico() -> None:
+    sonda = _Sonda(timeout=1.0)
+    sonda._client = _ClientSequenza([_RespFinta(200)])
+    pacer = PacerDominio(max_429_dominio=1)
+    pacer.dopo("https://c.it/precedente", 429)
+    token = attiva_pacer(pacer)
+    try:
+        resp = sonda.risposta("https://c.it/a")
+    finally:
+        ripristina_pacer(token)
+    assert resp.status_code == 429
+    assert resp.headers["x-tiq-pacing"] == "circuit-open"
+    assert sonda._client.chiamate == 0

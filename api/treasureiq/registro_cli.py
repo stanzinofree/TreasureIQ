@@ -30,6 +30,7 @@ import json
 import sqlite3
 import sys
 import time
+from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -45,6 +46,7 @@ from treasureiq.municipality_registry import (
 from treasureiq.registro import LIVE_DIR, _da_store
 import treasureiq.sonda_live as sonda_live
 from treasureiq.sonda_live import comune_per_codice
+from treasureiq import bootstrap as bootstrap_sel
 
 #: Piattaforme che `leggi_connettore` sa davvero leggere oggi. Tenere in
 #: sincrono con i dispatch in connettore.py — aggiungerne una lì senza
@@ -241,6 +243,176 @@ def cmd_scan(args: argparse.Namespace) -> int:
         file=sys.stderr,
     )
     return 0
+
+
+# --------------------------------------------------------------------------- #
+# bootstrap: canary-first enrolment of eligible, uninitialised comuni
+# --------------------------------------------------------------------------- #
+#: Exit codes distinct so an operator (or a wrapper script) can tell apart a
+#: clean run, per-comune errors, and a deliberate stop.
+BOOTSTRAP_OK = 0
+BOOTSTRAP_ERRORI = 1
+BOOTSTRAP_STOP = 3
+
+
+def _connettore_inizializzati() -> set[str]:
+    """ISTAT codes that already hold a data-live connettore record.
+
+    This is what "initialised" means for the refresh loop (and for the
+    monitoring dashboard): the presence of ``data-live/connettore/<cod>.json``,
+    not a registro entry.
+    """
+    conn_dir = LIVE_DIR / "connettore"
+    if not conn_dir.exists():
+        return set()
+    return {percorso.stem for percorso in conn_dir.glob("*.json")}
+
+
+def _bootstrap_stop_path(checkpoint: Path) -> Path:
+    """Sibling stop-file: ``bootstrap.json`` -> ``bootstrap.stop``."""
+    return checkpoint.with_suffix(".stop")
+
+
+def _bootstrap_carica_checkpoint(checkpoint: Path) -> tuple[set[str], list[str], str | None]:
+    """Return ``(completati, errori, avviato_il)`` from a checkpoint.
+
+    A missing or corrupt file yields empty state (never raises): a resume must
+    degrade to "start over", not crash. Errors are deduplicated on load.
+    """
+    try:
+        dati = json.loads(checkpoint.read_text("utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return set(), [], None
+    completati = set(dati.get("completati") or [])
+    errori = list(dict.fromkeys(dati.get("errori") or []))  # dedup, keep order
+    return completati, errori, dati.get("avviato_il")
+
+
+def _bootstrap_salva_checkpoint(
+    checkpoint: Path,
+    *,
+    avviato_il: str,
+    completati: set[str],
+    errori: list[str],
+    totale_candidati: int,
+) -> None:
+    payload = {
+        "avviato_il": avviato_il,
+        "aggiornato_il": datetime.now(timezone.utc).isoformat(),
+        "totale_candidati": totale_candidati,
+        "completati": sorted(completati),
+        "errori": sorted(errori),
+    }
+    checkpoint.parent.mkdir(parents=True, exist_ok=True)
+    provvisorio = checkpoint.with_suffix(checkpoint.suffix + ".tmp")
+    provvisorio.write_text(json.dumps(payload, ensure_ascii=False, indent=2), "utf-8")
+    provvisorio.replace(checkpoint)
+
+
+def cmd_bootstrap(args: argparse.Namespace) -> int:
+    if args.delay < 0:
+        print("errore: --delay deve essere >= 0.", file=sys.stderr)
+        return 2
+    if args.limit is not None and args.limit < 1:
+        print("errore: --limit deve essere >= 1.", file=sys.stderr)
+        return 2
+    if args.per_piattaforma < 1:
+        print("errore: --per-piattaforma deve essere >= 1.", file=sys.stderr)
+        return 2
+
+    catalog_dir = args.catalog
+    coda = set(_comuni_da_censimento(args.db))
+    gia_init = _connettore_inizializzati()
+    candidati = bootstrap_sel.seleziona(catalog_dir, coda, gia_init)
+
+    if args.canary:
+        selezione = bootstrap_sel.canary(candidati, per_piattaforma=args.per_piattaforma)
+        if args.limit is not None:
+            print("nota: --canary ignora --limit.", file=sys.stderr)
+    else:
+        selezione = bootstrap_sel.lotto(candidati, args.limit)
+
+    # Resume: drop already-completed codes; refuse to clobber a checkpoint
+    # that exists unless the caller explicitly asked to resume.
+    avviato_il = datetime.now(timezone.utc).isoformat()
+    completati: set[str] = set()
+    errori: list[str] = []
+    if args.checkpoint is not None and args.checkpoint.exists():
+        if not args.resume:
+            print(
+                f"errore: checkpoint {args.checkpoint} esiste gia'. Usa --resume "
+                "per continuarlo, o indica un percorso nuovo.",
+                file=sys.stderr,
+            )
+            return 2
+        completati, errori, avviato_prec = _bootstrap_carica_checkpoint(args.checkpoint)
+        if avviato_prec:
+            avviato_il = avviato_prec
+    # Errored comuni are deliberately NOT in `completati`, so a resume retries
+    # them; only successful (ok/vuoto) reads are considered done.
+    da_fare = [c for c in selezione if c not in completati]
+
+    conteggio_piattaforme = Counter(
+        plat for codice, plat in candidati if codice in set(selezione)
+    )
+    print(
+        f"bootstrap: candidati totali {len(candidati)} · selezione {len(selezione)} · "
+        f"da fare {len(da_fare)} · gia' completati {len(selezione) - len(da_fare)} · "
+        f"piattaforme {dict(conteggio_piattaforme)}",
+        file=sys.stderr,
+    )
+
+    if args.dry_run:
+        for codice in da_fare:
+            print(f"DRY {codice}", file=sys.stderr)
+        print(f"dry-run: {len(da_fare)} comuni verrebbero inizializzati (nessuna scrittura).",
+              file=sys.stderr)
+        return BOOTSTRAP_OK
+
+    stop_path = _bootstrap_stop_path(args.checkpoint) if args.checkpoint is not None else None
+    fermato = False
+    ok = vuoti = err_run = 0
+    for indice, istat in enumerate(da_fare):
+        if stop_path is not None and stop_path.exists():
+            print(f"stop richiesto ({stop_path}): interrompo prima di {istat}.",
+                  file=sys.stderr)
+            fermato = True
+            break
+        stato, riga = _scansiona_uno(istat)
+        print(riga, file=sys.stderr)
+        if stato in ("ok", "vuoto"):
+            # A successful read (even one with no services) is done: mark it
+            # completed and clear any prior error for this comune.
+            completati.add(istat)
+            errori = [e for e in errori if e != istat]
+            if stato == "ok":
+                ok += 1
+            else:
+                vuoti += 1
+        else:  # "errore": keep OUT of completati so --resume retries it
+            err_run += 1
+            if istat not in errori:
+                errori.append(istat)
+        if args.checkpoint is not None:
+            _bootstrap_salva_checkpoint(
+                args.checkpoint,
+                avviato_il=avviato_il,
+                completati=completati,
+                errori=errori,
+                totale_candidati=len(candidati),
+            )
+        if args.delay and indice < len(da_fare) - 1:
+            time.sleep(args.delay)
+
+    print(
+        f"bootstrap fatto: ok {ok} · vuoti {vuoti} · errori {err_run} · "
+        f"errori-cumulativi {len(errori)}"
+        + (" · FERMATO" if fermato else ""),
+        file=sys.stderr,
+    )
+    if fermato:
+        return BOOTSTRAP_STOP
+    return BOOTSTRAP_ERRORI if errori else BOOTSTRAP_OK
 
 
 def _anagrafe_comuni() -> dict[str, MunicipalityRecord]:
@@ -452,12 +624,39 @@ def _build_parser() -> argparse.ArgumentParser:
     elenco = sub.add_parser("list", help="Elenca i record presenti nel registro (read-only).")
     elenco.set_defaults(func=cmd_list)
 
+    boot = sub.add_parser(
+        "bootstrap",
+        help="Inizializza i comuni eleggibili mai inizializzati (canary-first). "
+             "Scrive solo data-live; catalogo e storico.db restano invariati.",
+    )
+    boot.add_argument("--canary", action="store_true",
+                      help="Seleziona --per-piattaforma comuni per ognuna delle piattaforme "
+                           "eleggibili (default 2 x 5 = 10). Ignora --limit.")
+    boot.add_argument("--per-piattaforma", type=int, default=2,
+                      help="Comuni per piattaforma in modalita' --canary (default 2).")
+    boot.add_argument("--limit", type=int, default=None,
+                      help="Numero massimo di comuni da inizializzare in questo lotto.")
+    boot.add_argument("--delay", type=float, default=2.0,
+                      help="Secondi di pausa fra un comune e l'altro (default 2.0).")
+    boot.add_argument("--checkpoint", type=Path, default=None,
+                      help="File JSON di avanzamento: aggiornato dopo ogni comune. "
+                           "Il file gemello .stop, se creato, ferma il lotto.")
+    boot.add_argument("--resume", action="store_true",
+                      help="Riprende un checkpoint esistente saltando i comuni gia' completati.")
+    boot.add_argument("--dry-run", action="store_true",
+                      help="Stampa la selezione senza alcun fetch ne' scrittura.")
+    boot.add_argument("--catalog", type=Path, default=DATA_DIR / "catalog",
+                      help="Directory del catalogo (default data/catalog).")
+    boot.add_argument("--db", type=Path, default=DATA_DIR / "storico.db",
+                      help="Path a storico.db per la coda di censimento (default data/storico.db).")
+    boot.set_defaults(func=cmd_bootstrap)
+
     return parser
 
 
 def main(argv: list[str] | None = None) -> int:
     argv = list(sys.argv[1:] if argv is None else argv)
-    if not argv or argv[0] not in {"scan", "sweep", "list", "-h", "--help"}:
+    if not argv or argv[0] not in {"scan", "sweep", "list", "bootstrap", "-h", "--help"}:
         argv = ["scan", *argv]
     parser = _build_parser()
     args = parser.parse_args(argv)

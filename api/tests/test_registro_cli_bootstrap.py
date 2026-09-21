@@ -89,7 +89,8 @@ def test_checkpoint_scritto_dopo_ogni_comune(tmp_path, _stub):
     cp = tmp_path / "bootstrap.json"
     registro_cli.cmd_bootstrap(_args(cat, limit=3, checkpoint=cp))
     dati = json.loads(cp.read_text("utf-8"))
-    assert len(dati["completati"]) == 3
+    assert len(dati["arruolati"]) == 3  # stub returns ok -> enrolled
+    assert dati["vuoti"] == []
     assert dati["totale_candidati"] == 15
     assert dati["errori"] == []
 
@@ -259,7 +260,8 @@ def test_resume_ritenta_gli_errori(tmp_path, monkeypatch):
     rc1 = registro_cli.cmd_bootstrap(_args(cat, limit=3, checkpoint=cp))
     assert rc1 == registro_cli.BOOTSTRAP_ERRORI
     dati1 = json.loads(cp.read_text("utf-8"))
-    assert guasto not in dati1["completati"]  # errored -> NOT completed
+    assert guasto not in dati1["arruolati"]  # errored -> NOT enrolled
+    assert guasto not in dati1["vuoti"]
     assert dati1["errori"] == [guasto]
 
     # Resume: the connector now succeeds for the previously-failed comune.
@@ -276,8 +278,57 @@ def test_resume_ritenta_gli_errori(tmp_path, monkeypatch):
     assert rc2 == registro_cli.BOOTSTRAP_OK
     assert fetched == [guasto]  # only the failed comune retried, others skipped
     dati2 = json.loads(cp.read_text("utf-8"))
-    assert guasto in dati2["completati"]
+    assert guasto in dati2["arruolati"]  # ok on retry -> enrolled
     assert dati2["errori"] == []  # cleared on successful retry
+
+
+def test_vuoto_non_arruolato_e_terminale(tmp_path, monkeypatch):
+    """A `vuoto` read (no record) lands in `vuoti`, never `arruolati`.
+
+    Semantics (option 3): vuoto is a successful read with NO data-live record.
+    It must NOT count as enrolled, must stay out of the refresh, and must be
+    terminal on --resume (skipped, not retried) — only `errori` are retried.
+    """
+    cat = _scena(tmp_path)
+    cp = tmp_path / "bootstrap.json"
+
+    def fake_coda(_db):
+        return sorted(p.stem for p in cat.glob("*.json"))
+
+    monkeypatch.setattr(registro_cli, "_comuni_da_censimento", fake_coda)
+    monkeypatch.setattr(registro_cli, "_connettore_inizializzati", lambda: set())
+
+    selezione = registro_cli.bootstrap_sel.lotto(
+        registro_cli.bootstrap_sel.seleziona(cat, set(fake_coda(None)), set()), 3
+    )
+    svuota = selezione[0]  # this one reads empty; the other two enrol
+
+    def fake_scan(istat):
+        if istat == svuota:
+            return "vuoto", f"{istat} — vuoto"
+        return "ok", f"{istat} — ok"
+
+    monkeypatch.setattr(registro_cli, "_scansiona_uno", fake_scan)
+    rc = registro_cli.cmd_bootstrap(_args(cat, limit=3, checkpoint=cp))
+    assert rc == registro_cli.BOOTSTRAP_OK  # a vuoto alone is not an error
+
+    dati = json.loads(cp.read_text("utf-8"))
+    assert svuota in dati["vuoti"]
+    assert svuota not in dati["arruolati"]
+    assert len(dati["arruolati"]) == 2
+    assert dati["errori"] == []
+
+    # Resume: the vuoto is terminal — skipped, not retried.
+    fetched: list[str] = []
+
+    def fake_scan2(istat):
+        fetched.append(istat)
+        return fake_scan(istat)
+
+    monkeypatch.setattr(registro_cli, "_scansiona_uno", fake_scan2)
+    rc2 = registro_cli.cmd_bootstrap(_args(cat, limit=3, checkpoint=cp, resume=True))
+    assert rc2 == registro_cli.BOOTSTRAP_OK
+    assert fetched == []  # nothing left to do: arruolati + vuoti cover the selection
 
 
 def test_checkpoint_esistente_senza_resume_rifiuta(tmp_path, _stub):

@@ -282,16 +282,30 @@ class _CheckpointInvalido(ValueError):
     """
 
 
+def _lista_stringhe(dati: dict, chiave: str) -> list[str]:
+    """Validated ``list[str]`` for one checkpoint field (empty if absent)."""
+    grezzo = dati.get(chiave) or []
+    if not isinstance(grezzo, list):
+        raise _CheckpointInvalido(f"campo '{chiave}' non e' una lista")
+    return [c for c in grezzo if isinstance(c, str)]
+
+
 def _bootstrap_carica_checkpoint(
     checkpoint: Path,
-) -> tuple[list[str], set[str], list[str], str | None, int]:
-    """Return ``(selezione, completati, errori, avviato_il, totale)``.
+) -> tuple[list[str], set[str], set[str], list[str], str | None, int]:
+    """Return ``(selezione, arruolati, vuoti, errori, avviato_il, totale)``.
+
+    Three disjoint outcome categories, never merged:
+      * ``arruolati`` — an ``ok`` read that wrote a data-live record; the only
+        ones the refresh worker will pick up.
+      * ``vuoti`` — a successful read with NO record written; terminal for now,
+        skipped on --resume, and NEVER counted as initialised.
+      * ``errori`` — a failed read; retried on --resume.
 
     Raises ``_CheckpointInvalido`` if the file is unreadable, not a JSON
     object, or missing the frozen ``selezione`` list. No silent fallback to
     empty state: the caller stops (exit 2) rather than recompute a fresh
-    selection and clobber the record of what was already initialised. Errors
-    are deduplicated on load.
+    selection and clobber the record of what was already initialised.
     """
     try:
         dati = json.loads(checkpoint.read_text("utf-8"))
@@ -302,19 +316,16 @@ def _bootstrap_carica_checkpoint(
     selezione = dati.get("selezione")
     if not isinstance(selezione, list) or not all(isinstance(c, str) for c in selezione):
         raise _CheckpointInvalido("campo 'selezione' mancante o non valido")
-    completati_raw = dati.get("completati") or []
-    errori_raw = dati.get("errori") or []
-    if not isinstance(completati_raw, list) or not isinstance(errori_raw, list):
-        raise _CheckpointInvalido("campi 'completati'/'errori' non validi")
-    completati = {c for c in completati_raw if isinstance(c, str)}
-    errori = list(dict.fromkeys(c for c in errori_raw if isinstance(c, str)))
+    arruolati = set(_lista_stringhe(dati, "arruolati"))
+    vuoti = set(_lista_stringhe(dati, "vuoti"))
+    errori = list(dict.fromkeys(_lista_stringhe(dati, "errori")))  # dedup, keep order
     avviato = dati.get("avviato_il")
     if not isinstance(avviato, str):
         avviato = None
     totale = dati.get("totale_candidati")
     if not isinstance(totale, int) or totale < 0:
         totale = len(selezione)
-    return selezione, completati, errori, avviato, totale
+    return selezione, arruolati, vuoti, errori, avviato, totale
 
 
 def _bootstrap_salva_checkpoint(
@@ -322,7 +333,8 @@ def _bootstrap_salva_checkpoint(
     *,
     avviato_il: str,
     selezione: list[str],
-    completati: set[str],
+    arruolati: set[str],
+    vuoti: set[str],
     errori: list[str],
     totale_candidati: int,
 ) -> None:
@@ -334,7 +346,10 @@ def _bootstrap_salva_checkpoint(
         # so a canary/lotto stays the SAME set even after some comuni have
         # already been initialised (and thus dropped from a fresh selection).
         "selezione": list(selezione),
-        "completati": sorted(completati),
+        # Three disjoint categories — arruolati are the only enrolled comuni;
+        # vuoti are terminal-for-now and out of the refresh; errori are retried.
+        "arruolati": sorted(arruolati),
+        "vuoti": sorted(vuoti),
         "errori": sorted(errori),
     }
     checkpoint.parent.mkdir(parents=True, exist_ok=True)
@@ -357,7 +372,8 @@ def cmd_bootstrap(args: argparse.Namespace) -> int:
     catalog_dir = args.catalog
 
     avviato_il = datetime.now(timezone.utc).isoformat()
-    completati: set[str] = set()
+    arruolati: set[str] = set()
+    vuoti: set[str] = set()
     errori: list[str] = []
     selezione: list[str]
     totale_candidati: int
@@ -375,7 +391,7 @@ def cmd_bootstrap(args: argparse.Namespace) -> int:
             )
             return 2
         try:
-            selezione, completati, errori, avviato_prec, totale_candidati = (
+            selezione, arruolati, vuoti, errori, avviato_prec, totale_candidati = (
                 _bootstrap_carica_checkpoint(args.checkpoint)
             )
         except _CheckpointInvalido as exc:
@@ -411,16 +427,17 @@ def cmd_bootstrap(args: argparse.Namespace) -> int:
         else:
             selezione = bootstrap_sel.lotto(candidati, args.limit)
 
-    # Errored comuni are deliberately NOT in `completati`, so a resume retries
-    # them; only successful (ok/vuoto) reads are considered done.
-    da_fare = [c for c in selezione if c not in completati]
+    # Skip terminal outcomes: arruolati (record written) and vuoti (successful
+    # read, no record — terminal for now, out of the refresh). Errored comuni
+    # are NOT skipped, so a --resume retries them.
+    da_fare = [c for c in selezione if c not in arruolati and c not in vuoti]
 
     plat_map = bootstrap_sel.mappa_eleggibili(catalog_dir)
     conteggio_piattaforme = Counter(plat_map.get(c, "?") for c in selezione)
     print(
         f"bootstrap: candidati totali {totale_candidati} · selezione {len(selezione)} · "
-        f"da fare {len(da_fare)} · gia' completati {len(selezione) - len(da_fare)} · "
-        f"piattaforme {dict(conteggio_piattaforme)}"
+        f"arruolati {len(arruolati)} · vuoti {len(vuoti)} · errori {len(errori)} · "
+        f"da fare {len(da_fare)} · piattaforme {dict(conteggio_piattaforme)}"
         + (" · RESUME" if resuming else ""),
         file=sys.stderr,
     )
@@ -442,13 +459,14 @@ def cmd_bootstrap(args: argparse.Namespace) -> int:
             args.checkpoint,
             avviato_il=avviato_il,
             selezione=selezione,
-            completati=completati,
+            arruolati=arruolati,
+            vuoti=vuoti,
             errori=errori,
             totale_candidati=totale_candidati,
         )
 
     fermato = False
-    ok = vuoti = err_run = 0
+    ok_run = vuoti_run = err_run = 0
     for indice, istat in enumerate(da_fare):
         if stop_path is not None and stop_path.exists():
             print(f"stop richiesto ({stop_path}): interrompo prima di {istat}.",
@@ -457,16 +475,19 @@ def cmd_bootstrap(args: argparse.Namespace) -> int:
             break
         stato, riga = _scansiona_uno(istat)
         print(riga, file=sys.stderr)
-        if stato in ("ok", "vuoto"):
-            # A successful read (even one with no services) is done: mark it
-            # completed and clear any prior error for this comune.
-            completati.add(istat)
+        if stato == "ok":
+            # A record was written: enrolled. The refresh worker will pick it up.
+            arruolati.add(istat)
+            vuoti.discard(istat)
             errori = [e for e in errori if e != istat]
-            if stato == "ok":
-                ok += 1
-            else:
-                vuoti += 1
-        else:  # "errore": keep OUT of completati so --resume retries it
+            ok_run += 1
+        elif stato == "vuoto":
+            # Successful read but NO record: terminal for now, out of the refresh
+            # and never counted as initialised. NOT arruolato.
+            vuoti.add(istat)
+            errori = [e for e in errori if e != istat]
+            vuoti_run += 1
+        else:  # "errore": keep OUT of arruolati/vuoti so --resume retries it
             err_run += 1
             if istat not in errori:
                 errori.append(istat)
@@ -475,7 +496,8 @@ def cmd_bootstrap(args: argparse.Namespace) -> int:
                 args.checkpoint,
                 avviato_il=avviato_il,
                 selezione=selezione,
-                completati=completati,
+                arruolati=arruolati,
+                vuoti=vuoti,
                 errori=errori,
                 totale_candidati=totale_candidati,
             )
@@ -483,7 +505,8 @@ def cmd_bootstrap(args: argparse.Namespace) -> int:
             time.sleep(args.delay)
 
     print(
-        f"bootstrap fatto: ok {ok} · vuoti {vuoti} · errori {err_run} · "
+        f"bootstrap fatto: arruolati +{ok_run} (tot {len(arruolati)}) · "
+        f"vuoti +{vuoti_run} (tot {len(vuoti)}) · errori-run {err_run} · "
         f"errori-cumulativi {len(errori)}"
         + (" · FERMATO" if fermato else ""),
         file=sys.stderr,

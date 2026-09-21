@@ -273,25 +273,55 @@ def _bootstrap_stop_path(checkpoint: Path) -> Path:
     return checkpoint.with_suffix(".stop")
 
 
-def _bootstrap_carica_checkpoint(checkpoint: Path) -> tuple[set[str], list[str], str | None]:
-    """Return ``(completati, errori, avviato_il)`` from a checkpoint.
+class _CheckpointInvalido(ValueError):
+    """A checkpoint file exists but is corrupt or structurally invalid.
 
-    A missing or corrupt file yields empty state (never raises): a resume must
-    degrade to "start over", not crash. Errors are deduplicated on load.
+    Raised instead of degrading to empty state: a resume must never silently
+    restart from scratch and overwrite prior progress — the data-live records
+    already created for the completed comuni would be lost from the ledger.
+    """
+
+
+def _bootstrap_carica_checkpoint(
+    checkpoint: Path,
+) -> tuple[list[str], set[str], list[str], str | None, int]:
+    """Return ``(selezione, completati, errori, avviato_il, totale)``.
+
+    Raises ``_CheckpointInvalido`` if the file is unreadable, not a JSON
+    object, or missing the frozen ``selezione`` list. No silent fallback to
+    empty state: the caller stops (exit 2) rather than recompute a fresh
+    selection and clobber the record of what was already initialised. Errors
+    are deduplicated on load.
     """
     try:
         dati = json.loads(checkpoint.read_text("utf-8"))
-    except (OSError, json.JSONDecodeError):
-        return set(), [], None
-    completati = set(dati.get("completati") or [])
-    errori = list(dict.fromkeys(dati.get("errori") or []))  # dedup, keep order
-    return completati, errori, dati.get("avviato_il")
+    except (OSError, json.JSONDecodeError) as exc:
+        raise _CheckpointInvalido(f"illeggibile o non JSON: {exc}") from exc
+    if not isinstance(dati, dict):
+        raise _CheckpointInvalido("il contenuto non e' un oggetto JSON")
+    selezione = dati.get("selezione")
+    if not isinstance(selezione, list) or not all(isinstance(c, str) for c in selezione):
+        raise _CheckpointInvalido("campo 'selezione' mancante o non valido")
+    completati_raw = dati.get("completati") or []
+    errori_raw = dati.get("errori") or []
+    if not isinstance(completati_raw, list) or not isinstance(errori_raw, list):
+        raise _CheckpointInvalido("campi 'completati'/'errori' non validi")
+    completati = {c for c in completati_raw if isinstance(c, str)}
+    errori = list(dict.fromkeys(c for c in errori_raw if isinstance(c, str)))
+    avviato = dati.get("avviato_il")
+    if not isinstance(avviato, str):
+        avviato = None
+    totale = dati.get("totale_candidati")
+    if not isinstance(totale, int) or totale < 0:
+        totale = len(selezione)
+    return selezione, completati, errori, avviato, totale
 
 
 def _bootstrap_salva_checkpoint(
     checkpoint: Path,
     *,
     avviato_il: str,
+    selezione: list[str],
     completati: set[str],
     errori: list[str],
     totale_candidati: int,
@@ -300,6 +330,10 @@ def _bootstrap_salva_checkpoint(
         "avviato_il": avviato_il,
         "aggiornato_il": datetime.now(timezone.utc).isoformat(),
         "totale_candidati": totale_candidati,
+        # Frozen selection: on --resume it is authoritative, never recomputed,
+        # so a canary/lotto stays the SAME set even after some comuni have
+        # already been initialised (and thus dropped from a fresh selection).
+        "selezione": list(selezione),
         "completati": sorted(completati),
         "errori": sorted(errori),
     }
@@ -321,23 +355,18 @@ def cmd_bootstrap(args: argparse.Namespace) -> int:
         return 2
 
     catalog_dir = args.catalog
-    coda = set(_comuni_da_censimento(args.db))
-    gia_init = _connettore_inizializzati()
-    candidati = bootstrap_sel.seleziona(catalog_dir, coda, gia_init)
 
-    if args.canary:
-        selezione = bootstrap_sel.canary(candidati, per_piattaforma=args.per_piattaforma)
-        if args.limit is not None:
-            print("nota: --canary ignora --limit.", file=sys.stderr)
-    else:
-        selezione = bootstrap_sel.lotto(candidati, args.limit)
-
-    # Resume: drop already-completed codes; refuse to clobber a checkpoint
-    # that exists unless the caller explicitly asked to resume.
     avviato_il = datetime.now(timezone.utc).isoformat()
     completati: set[str] = set()
     errori: list[str] = []
+    selezione: list[str]
+    totale_candidati: int
+    resuming = False
+
     if args.checkpoint is not None and args.checkpoint.exists():
+        # A checkpoint on disk: only --resume may touch it. Anything wrong with
+        # its contents stops the run (exit 2, no fetch) — never a silent restart
+        # that would recompute a different selection and clobber the ledger.
         if not args.resume:
             print(
                 f"errore: checkpoint {args.checkpoint} esiste gia'. Usa --resume "
@@ -345,20 +374,54 @@ def cmd_bootstrap(args: argparse.Namespace) -> int:
                 file=sys.stderr,
             )
             return 2
-        completati, errori, avviato_prec = _bootstrap_carica_checkpoint(args.checkpoint)
+        try:
+            selezione, completati, errori, avviato_prec, totale_candidati = (
+                _bootstrap_carica_checkpoint(args.checkpoint)
+            )
+        except _CheckpointInvalido as exc:
+            print(
+                f"errore: checkpoint {args.checkpoint} corrotto o invalido ({exc}). "
+                "Nessun fetch eseguito; correggi o rimuovi il file.",
+                file=sys.stderr,
+            )
+            return 2
         if avviato_prec:
             avviato_il = avviato_prec
+        resuming = True
+    elif args.resume and args.checkpoint is not None:
+        # --resume but nothing to resume from: refuse rather than start a fresh
+        # run under a resume flag (the operator expected an existing ledger).
+        print(
+            f"errore: --resume ma il checkpoint {args.checkpoint} non esiste. "
+            "Nessun fetch eseguito.",
+            file=sys.stderr,
+        )
+        return 2
+
+    if not resuming:
+        # Fresh run: compute the selection ONCE and freeze it in the checkpoint.
+        coda = set(_comuni_da_censimento(args.db))
+        gia_init = _connettore_inizializzati()
+        candidati = bootstrap_sel.seleziona(catalog_dir, coda, gia_init)
+        totale_candidati = len(candidati)
+        if args.canary:
+            selezione = bootstrap_sel.canary(candidati, per_piattaforma=args.per_piattaforma)
+            if args.limit is not None:
+                print("nota: --canary ignora --limit.", file=sys.stderr)
+        else:
+            selezione = bootstrap_sel.lotto(candidati, args.limit)
+
     # Errored comuni are deliberately NOT in `completati`, so a resume retries
     # them; only successful (ok/vuoto) reads are considered done.
     da_fare = [c for c in selezione if c not in completati]
 
-    conteggio_piattaforme = Counter(
-        plat for codice, plat in candidati if codice in set(selezione)
-    )
+    plat_map = bootstrap_sel.mappa_eleggibili(catalog_dir)
+    conteggio_piattaforme = Counter(plat_map.get(c, "?") for c in selezione)
     print(
-        f"bootstrap: candidati totali {len(candidati)} · selezione {len(selezione)} · "
+        f"bootstrap: candidati totali {totale_candidati} · selezione {len(selezione)} · "
         f"da fare {len(da_fare)} · gia' completati {len(selezione) - len(da_fare)} · "
-        f"piattaforme {dict(conteggio_piattaforme)}",
+        f"piattaforme {dict(conteggio_piattaforme)}"
+        + (" · RESUME" if resuming else ""),
         file=sys.stderr,
     )
 
@@ -370,6 +433,20 @@ def cmd_bootstrap(args: argparse.Namespace) -> int:
         return BOOTSTRAP_OK
 
     stop_path = _bootstrap_stop_path(args.checkpoint) if args.checkpoint is not None else None
+
+    # Freeze the selection to disk BEFORE the first fetch, so a --resume always
+    # continues the ORIGINAL selection even if the run is stopped after zero
+    # completed comuni (blocker: a fresh selection would then drift).
+    if args.checkpoint is not None and not resuming:
+        _bootstrap_salva_checkpoint(
+            args.checkpoint,
+            avviato_il=avviato_il,
+            selezione=selezione,
+            completati=completati,
+            errori=errori,
+            totale_candidati=totale_candidati,
+        )
+
     fermato = False
     ok = vuoti = err_run = 0
     for indice, istat in enumerate(da_fare):
@@ -397,9 +474,10 @@ def cmd_bootstrap(args: argparse.Namespace) -> int:
             _bootstrap_salva_checkpoint(
                 args.checkpoint,
                 avviato_il=avviato_il,
+                selezione=selezione,
                 completati=completati,
                 errori=errori,
-                totale_candidati=len(candidati),
+                totale_candidati=totale_candidati,
             )
         if args.delay and indice < len(da_fare) - 1:
             time.sleep(args.delay)

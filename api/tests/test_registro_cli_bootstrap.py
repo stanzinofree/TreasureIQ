@@ -94,18 +94,135 @@ def test_checkpoint_scritto_dopo_ogni_comune(tmp_path, _stub):
     assert dati["errori"] == []
 
 
-def test_resume_salta_completati(tmp_path, _stub):
+def test_resume_salta_completati(tmp_path, monkeypatch):
+    """Resume continues the FROZEN selection, never re-fetching a completed comune."""
     cat = _scena(tmp_path)
     cp = tmp_path / "bootstrap.json"
-    # First lotto of 4.
-    registro_cli.cmd_bootstrap(_args(cat, limit=4, checkpoint=cp))
-    fatti_prima = list(_stub)
-    assert len(fatti_prima) == 4
-    _stub.clear()
-    # Resume with a bigger lotto: only the remaining are fetched again.
-    registro_cli.cmd_bootstrap(_args(cat, limit=8, checkpoint=cp, resume=True))
-    assert set(_stub).isdisjoint(fatti_prima)  # never re-fetch a completed comune
-    assert len(_stub) == 4  # 8 selected - 4 already done
+
+    def fake_coda(_db):
+        return sorted(p.stem for p in cat.glob("*.json"))
+
+    monkeypatch.setattr(registro_cli, "_comuni_da_censimento", fake_coda)
+    monkeypatch.setattr(registro_cli, "_connettore_inizializzati", lambda: set())
+
+    stop = cp.with_suffix(".stop")
+    n = {"i": 0}
+    fatti1: list[str] = []
+
+    def scan1(istat):
+        fatti1.append(istat)
+        n["i"] += 1
+        if n["i"] >= 2:
+            stop.write_text("stop", "utf-8")  # halt after 2 comuni
+        return "ok", f"{istat} — ok"
+
+    monkeypatch.setattr(registro_cli, "_scansiona_uno", scan1)
+    rc1 = registro_cli.cmd_bootstrap(_args(cat, limit=5, checkpoint=cp))
+    assert rc1 == registro_cli.BOOTSTRAP_STOP
+    assert len(fatti1) == 2
+
+    congelata = json.loads(cp.read_text("utf-8"))["selezione"]
+    assert len(congelata) == 5  # frozen lotto of 5
+
+    stop.unlink()
+    fatti2: list[str] = []
+
+    def scan2(istat):
+        fatti2.append(istat)
+        return "ok", f"{istat} — ok"
+
+    monkeypatch.setattr(registro_cli, "_scansiona_uno", scan2)
+    rc2 = registro_cli.cmd_bootstrap(_args(cat, limit=5, checkpoint=cp, resume=True))
+    assert rc2 == registro_cli.BOOTSTRAP_OK
+    assert set(fatti2).isdisjoint(fatti1)               # never re-fetch a completed comune
+    assert set(fatti1) | set(fatti2) == set(congelata)  # together finish the frozen selection
+    assert len(fatti2) == 3
+
+
+def test_resume_canary_dopo_stop_usa_selezione_congelata(tmp_path, monkeypatch):
+    """Blocker: on --resume the canary must finish the ORIGINAL selection.
+
+    Once the first comuni are initialised they drop out of the candidate pool,
+    so a recomputed canary would pick OTHER comuni. The frozen `selezione` in
+    the checkpoint is authoritative — resume never re-runs canary()/lotto().
+    """
+    cat = _scena(tmp_path)
+    cp = tmp_path / "bootstrap.json"
+    stop = cp.with_suffix(".stop")
+
+    coda_piena = sorted(p.stem for p in cat.glob("*.json"))
+    attesa = registro_cli.bootstrap_sel.canary(
+        registro_cli.bootstrap_sel.seleziona(cat, set(coda_piena), set()), per_piattaforma=2
+    )
+    assert len(attesa) == 10  # 2 x 5 platforms
+
+    monkeypatch.setattr(registro_cli, "_comuni_da_censimento", lambda _db: coda_piena)
+    monkeypatch.setattr(registro_cli, "_connettore_inizializzati", lambda: set())
+
+    n = {"i": 0}
+    fatti1: list[str] = []
+
+    def scan1(istat):
+        fatti1.append(istat)
+        n["i"] += 1
+        if n["i"] >= 5:
+            stop.write_text("stop", "utf-8")  # halt after the first 5 of the canary
+        return "ok", f"{istat} — ok"
+
+    monkeypatch.setattr(registro_cli, "_scansiona_uno", scan1)
+    rc1 = registro_cli.cmd_bootstrap(_args(cat, canary=True, checkpoint=cp))
+    assert rc1 == registro_cli.BOOTSTRAP_STOP
+    assert set(fatti1) == set(attesa[:5])
+
+    # Prod drift: the 5 done comuni are now initialised and leave the queue.
+    stop.unlink()
+    fatti = set(fatti1)
+    monkeypatch.setattr(registro_cli, "_connettore_inizializzati", lambda: set(fatti))
+    monkeypatch.setattr(
+        registro_cli, "_comuni_da_censimento",
+        lambda _db: [c for c in coda_piena if c not in fatti],
+    )
+    fatti2: list[str] = []
+
+    def scan2(istat):
+        fatti2.append(istat)
+        return "ok", f"{istat} — ok"
+
+    monkeypatch.setattr(registro_cli, "_scansiona_uno", scan2)
+    rc2 = registro_cli.cmd_bootstrap(_args(cat, canary=True, checkpoint=cp, resume=True))
+    assert rc2 == registro_cli.BOOTSTRAP_OK
+    # Resume finishes the ORIGINAL canary (its remaining 5), not a fresh one.
+    assert set(fatti2) == set(attesa[5:])
+    assert set(fatti1) | set(fatti2) == set(attesa)
+
+
+def test_checkpoint_corrotto_non_esegue_fetch(tmp_path, _stub):
+    """A corrupt checkpoint stops the run (exit 2) with no fetch — no silent restart."""
+    cat = _scena(tmp_path)
+    cp = tmp_path / "bootstrap.json"
+    cp.write_text("{ not json", "utf-8")
+    rc = registro_cli.cmd_bootstrap(_args(cat, limit=3, checkpoint=cp, resume=True))
+    assert rc == 2
+    assert _stub == []  # never fetched on a corrupt checkpoint
+
+
+def test_checkpoint_senza_selezione_e_invalido(tmp_path, _stub):
+    """Valid JSON but missing the frozen `selezione` is rejected on resume."""
+    cat = _scena(tmp_path)
+    cp = tmp_path / "bootstrap.json"
+    cp.write_text(json.dumps({"completati": [], "errori": [], "avviato_il": "x"}), "utf-8")
+    rc = registro_cli.cmd_bootstrap(_args(cat, limit=3, checkpoint=cp, resume=True))
+    assert rc == 2
+    assert _stub == []
+
+
+def test_resume_senza_checkpoint_esistente_rifiuta(tmp_path, _stub):
+    """--resume with no checkpoint on disk refuses rather than start fresh."""
+    cat = _scena(tmp_path)
+    cp = tmp_path / "assente.json"
+    rc = registro_cli.cmd_bootstrap(_args(cat, limit=3, checkpoint=cp, resume=True))
+    assert rc == 2
+    assert _stub == []
 
 
 def test_resume_ritenta_gli_errori(tmp_path, monkeypatch):

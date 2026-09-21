@@ -1285,6 +1285,7 @@ export interface RefreshOperativo {
   eleggibili: number;
   inizializzati: number;
   mai_inizializzati: number;
+  fuori_perimetro: number;
   ultimo_refresh: string | null;
   worker_stato: "attivo" | "fermo" | "sconosciuto";
   sidecar_aggiornato_il: string | null;

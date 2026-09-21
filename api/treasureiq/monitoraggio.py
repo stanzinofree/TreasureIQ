@@ -83,8 +83,9 @@ class UltimoBatch(BaseModel):
 
 class RefreshOperativoOut(BaseModel):
     eleggibili: int
-    inizializzati: int
+    inizializzati: int  # eligible AND initialised (intersection, not file count)
     mai_inizializzati: int
+    fuori_perimetro: int  # data-live records outside the eligible set (demo, pilot)
     ultimo_refresh: str | None
     worker_stato: str  # "attivo" | "fermo" | "sconosciuto"
     sidecar_aggiornato_il: str | None
@@ -149,6 +150,28 @@ def _aggrega_catalogo(catalog_dir: str) -> tuple[int, tuple[tuple[str, int], ...
         plat = _piattaforma_del_file(payload)
         per_piattaforma[plat or "sconosciuta"] += 1
     return catalogati, tuple(sorted(per_piattaforma.items(), key=lambda kv: (-kv[1], kv[0])))
+
+
+@lru_cache(maxsize=8)
+def _codici_eleggibili(catalog_dir: str) -> frozenset[str]:
+    """ISTAT codes of catalogued comuni on a refresh-capable platform.
+
+    The refresh perimeter, as a set of codes (not just a count): the caller
+    intersects it with the initialised comuni so "inizializzati" means *eligible
+    and initialised*, never a raw connettore file count. Cached; catalog frozen.
+    """
+    root = Path(catalog_dir)
+    codici: set[str] = set()
+    if not root.exists():
+        return frozenset()
+    for percorso in root.glob("*.json"):
+        try:
+            payload = json.loads(percorso.read_text("utf-8"))
+        except (OSError, json.JSONDecodeError):
+            continue
+        if _piattaforma_del_file(payload) in PIATTAFORME_REFRESH:
+            codici.add(percorso.stem)
+    return frozenset(codici)
 
 
 @lru_cache(maxsize=8)
@@ -233,13 +256,18 @@ def _stato_worker(sidecar: dict | None, aggiornato: datetime | None) -> str:
     return "attivo" if eta <= WORKER_STALE_SECONDS else "fermo"
 
 
-def _refresh(live_dir: Path, eleggibili: int) -> RefreshOperativoOut:
+def _refresh(live_dir: Path, eleggibili_codici: frozenset[str]) -> RefreshOperativoOut:
+    eleggibili = len(eleggibili_codici)
     conn_dir = live_dir / "connettore"
-    inizializzati = 0
+    inizializzati = 0     # eligible comuni that already hold a data-live record
+    fuori_perimetro = 0   # records outside the eligible set (demo, pilot, non-refresh)
     ultimo: datetime | None = None
     if conn_dir.exists():
         for percorso in conn_dir.glob("*.json"):
-            inizializzati += 1
+            if percorso.stem in eleggibili_codici:
+                inizializzati += 1
+            else:
+                fuori_perimetro += 1
             try:
                 record = json.loads(percorso.read_text("utf-8"))
             except (OSError, json.JSONDecodeError):
@@ -268,6 +296,7 @@ def _refresh(live_dir: Path, eleggibili: int) -> RefreshOperativoOut:
         eleggibili=eleggibili,
         inizializzati=inizializzati,
         mai_inizializzati=max(0, eleggibili - inizializzati),
+        fuori_perimetro=fuori_perimetro,
         ultimo_refresh=ultimo.isoformat() if ultimo else None,
         worker_stato=_stato_worker(sidecar, aggiornato),
         sidecar_aggiornato_il=aggiornato.isoformat() if aggiornato else None,
@@ -317,7 +346,7 @@ def build_monitoraggio(
     """Assemble the four monitoring sections from disk, aggregate-only."""
     demo = _demo(seed_dir, curated_name)
     copertura = _copertura(catalog_dir, comuni_istat_path)
-    refresh = _refresh(live_dir, copertura.eleggibili)
+    refresh = _refresh(live_dir, _codici_eleggibili(str(catalog_dir)))
     return MonitoraggioOut(
         demo=demo,
         copertura=copertura,

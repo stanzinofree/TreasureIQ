@@ -118,8 +118,46 @@ def test_refresh_inizializzati_e_mai_inizializzati(tmp_path: Path) -> None:
     assert r.refresh.inizializzati == 2
     assert r.refresh.eleggibili == 3
     assert r.refresh.mai_inizializzati == 1  # 3 eligible - 2 initialised
+    assert r.refresh.fuori_perimetro == 0  # both initialised comuni are eligible
     assert r.refresh.ultimo_refresh is not None
     assert r.refresh.ultimo_refresh.startswith(now.strftime("%Y-%m-%d"))
+
+
+def test_refresh_conta_solo_intersezione_eleggibile(tmp_path: Path) -> None:
+    """`inizializzati` = eligible AND initialised, never a raw file count.
+
+    A data-live record on a non-eligible platform (wordpress_agid) or with no
+    catalog entry at all must land in `fuori_perimetro`, not inflate
+    `inizializzati` — the semantic bug the dashboard shipped as 1872 vs 1905.
+    """
+    paths = _scena(tmp_path)
+    now = datetime.now(timezone.utc)
+    _connettore(paths["live"], "001001", now.isoformat())  # hgate, eligible
+    _connettore(paths["live"], "001004", now.isoformat())  # wordpress_agid, NOT eligible
+    _connettore(paths["live"], "999999", now.isoformat())  # not catalogued at all
+    r = _build(paths)
+    assert r.refresh.inizializzati == 1       # only 001001 is inside the perimeter
+    assert r.refresh.fuori_perimetro == 2     # 001004 + 999999 kept separate
+    assert r.refresh.mai_inizializzati == 2   # 3 eligible - 1 initialised eligible
+
+
+def test_quadratura_perimetro(tmp_path: Path) -> None:
+    """Coverage must close: catalogati = mai_inizializzati + inizializzati + non_eleggibili.
+
+    The production shape is 2938 = 1905 + 36 + 997; here the tiny fixture is
+    5 = 2 + 1 + 2 after initialising one eligible comune.
+    """
+    paths = _scena(tmp_path)
+    _connettore(paths["live"], "001001", datetime.now(timezone.utc).isoformat())
+    r = _build(paths)
+    assert (
+        r.copertura.catalogati
+        == r.refresh.mai_inizializzati + r.refresh.inizializzati + r.copertura.non_eleggibili
+    )
+    assert r.copertura.catalogati == 5
+    assert r.refresh.mai_inizializzati == 2
+    assert r.refresh.inizializzati == 1
+    assert r.copertura.non_eleggibili == 2
 
 
 def test_worker_sconosciuto_senza_sidecar(tmp_path: Path) -> None:
@@ -189,4 +227,5 @@ def test_live_dir_assente_non_rompe(tmp_path: Path) -> None:
     paths = _scena(tmp_path)  # live dir never created
     r = _build(paths)
     assert r.refresh.inizializzati == 0
+    assert r.refresh.fuori_perimetro == 0
     assert r.refresh.mai_inizializzati == r.refresh.eleggibili

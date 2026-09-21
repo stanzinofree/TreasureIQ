@@ -211,6 +211,14 @@ export default async function Monitoraggio() {
               <em>inizializzati</em> è la pipeline di ingresso ancora da
               completare, non uno sweep lento. Ultimo refresh:{" "}
               {formatDate(refresh.ultimo_refresh)}.
+              {refresh.fuori_perimetro > 0 && (
+                <>
+                  {" "}
+                  Altri {n(refresh.fuori_perimetro)} record già presenti sono
+                  fuori dal perimetro eleggibile (demo e pilot) e non contano fra
+                  gli inizializzati.
+                </>
+              )}
             </p>
 
             <ul className="status-list">

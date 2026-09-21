@@ -91,6 +91,7 @@ from treasureiq.sonda_live import (
     comune_per_codice,
     recupera_contatti,
 )
+from treasureiq.monitoraggio import MonitoraggioOut, build_monitoraggio
 from treasureiq.stats import (
     APP_VERSION,
     AppStats,
@@ -2428,6 +2429,24 @@ def stats() -> StatsOut:
 def status() -> StatusOut:
     """Public system status — derived from disk, never a live probe (see `stats.py`)."""
     return to_status_out(build_system_status(comuni=COMUNI, seed_dir=SEED_DIR))
+
+
+@app.get("/api/monitoraggio", response_model=MonitoraggioOut, tags=["Sistema"])
+def monitoraggio() -> MonitoraggioOut:
+    """Operational dashboard — three data layers plus refresh worker state.
+
+    Aggregate counts and worker metadata only, read from disk; never the content
+    of a comune's records or a conversation, never a live probe. Distinct from
+    `/api/status` on purpose: this view reports where the ingress pipeline stands
+    (demo vs. catalog vs. data-live), not per-source reachability.
+    """
+    return build_monitoraggio(
+        catalog_dir=DATA_DIR / "catalog",
+        seed_dir=SEED_DIR,
+        live_dir=LIVE_DIR,
+        comuni_istat_path=DATA_DIR / "comuni-istat.json",
+        curated_name=CURATED_SEED,
+    )
 
 
 @app.get("/api/comune-nearby", response_model=NearbyOut, tags=["Cittadino"])

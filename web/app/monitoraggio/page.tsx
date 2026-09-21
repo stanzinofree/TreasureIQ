@@ -1,30 +1,28 @@
 /**
- * Service status — "Stato sistemi", the full picture (v3).
+ * Monitoraggio — where the data pipeline actually stands (v4).
  *
- * Sourced from `GET /api/status`, which is itself derived from disk (the last
- * committed ingestion), never a live probe of the comune's own site. Three
- * groups, all from the same honest evidence:
+ * Sourced from `GET /api/monitoraggio`, derived from disk (aggregate counts and
+ * worker metadata only, never a comune's content, never a live probe). Four
+ * sections, three of them one data layer each, kept apart on purpose:
  *
- *   - Fonti — which comuni TreasureIQ can currently answer from, and how many
- *     records each holds.
- *   - Sistemi — TreasureIQ's own components. Components that are only used at
- *     ingestion time (the local LLM, the Brave web search) are NOT probed on
- *     every page load, so they report "non verificato" — a real state, never a
- *     masked "down".
- *   - Stato dati interni — headline numbers on what was actually recovered.
- *
- * `reachable`/`stato` are nullable by design until a run has checked them, and
- * a `null` must never be read as "down": it renders as "non verificato",
- * visually distinct from both working and broken.
+ *   - Demo curata — the handful of deep-extracted MVP comuni (`data/seed`). A
+ *     proof the method works, NOT national coverage.
+ *   - Copertura nazionale — the shallow service maps (`data/catalog`): which
+ *     comuni are catalogued, on which platform, and how many of those platforms
+ *     even have a refresh reader ("eleggibili").
+ *   - Refresh operativo — the continuous refresh of comuni ALREADY initialised
+ *     (`data-live`). This is freshness, not discovery: it re-reads comuni that
+ *     already hold a connettore record, it does not enrol new ones. The gap
+ *     between "eleggibili" and "inizializzati" is the ingress pipeline still to
+ *     be filled, not a slow sweep.
+ *   - Sistemi — component health from real signals only; the refresh worker's
+ *     state comes from its own sidecar, never from how fresh the seed is.
  */
 
 import {
-  catalogAccess,
-  status,
-  type CatalogAccess,
-  type InternalDatum,
-  type SourceStatus,
-  type StatusOut,
+  monitoraggio,
+  type MonitoraggioOut,
+  type RefreshOperativo,
   type SystemComponent,
 } from "@/lib/api";
 
@@ -32,19 +30,22 @@ export const dynamic = "force-dynamic";
 
 type State = "ok" | "degraded" | "down" | "unknown";
 
-const OVERALL_LABEL: Record<string, string> = {
-  ok: "Tutti i sistemi rispondono",
-  degraded: "Alcuni sistemi in difficoltà",
-  down: "Sistemi irraggiungibili",
-  unknown: "Stato non verificato",
-};
-
 const STATE_LABEL: Record<State, string> = {
   ok: "operativo",
   degraded: "in difficoltà",
   down: "non disponibile",
   unknown: "non verificato",
 };
+
+const WORKER_LABEL: Record<RefreshOperativo["worker_stato"], { label: string; state: State }> = {
+  attivo: { label: "attivo", state: "ok" },
+  fermo: { label: "fermo o sospeso", state: "degraded" },
+  sconosciuto: { label: "stato non registrato", state: "unknown" },
+};
+
+function n(value: number | null | undefined): string {
+  return value == null ? "—" : value.toLocaleString("it-IT");
+}
 
 function formatDate(iso: string | null): string {
   if (!iso) return "mai";
@@ -57,37 +58,6 @@ function formatDate(iso: string | null): string {
     hour: "2-digit",
     minute: "2-digit",
   });
-}
-
-function reachabilityLabel(reachable: boolean | null): {
-  label: string;
-  state: State;
-} {
-  if (reachable === true) return { label: "raggiungibile", state: "ok" };
-  if (reachable === false) return { label: "irraggiungibile", state: "down" };
-  return { label: "non verificato", state: "unknown" };
-}
-
-function SourceRow({ source }: { source: SourceStatus }) {
-  const r = reachabilityLabel(source.reachable);
-  return (
-    <li className="status-row" data-stato={r.state}>
-      <span className="status-row__dot" aria-hidden="true" />
-      <div className="status-row__body">
-        <div className="status-row__head">
-          <strong>{source.nome}</strong>
-          <span className="status-row__badge">{r.label}</span>
-        </div>
-        <p className="status-row__meta">
-          {source.records != null
-            ? `${source.records.toLocaleString("it-IT")} record in archivio`
-            : "nessun record in archivio"}
-          {" · "}
-          ultima ingestion: {formatDate(source.last_ingested)}
-        </p>
-      </div>
-    </li>
-  );
 }
 
 function ComponentRow({ component }: { component: SystemComponent }) {
@@ -107,109 +77,21 @@ function ComponentRow({ component }: { component: SystemComponent }) {
   );
 }
 
-function DatumRow({ datum }: { datum: InternalDatum }) {
+function Tessera({ value, label }: { value: string; label: string }) {
   return (
-    <div className="datum-row" data-stato={datum.stato}>
-      <span className="datum-row__value">{datum.value}</span>
-      <div className="datum-row__body">
-        <p className="datum-row__detail">
-          <strong>{datum.nome}.</strong> {datum.detail}
-        </p>
-      </div>
+    <div className="tessera">
+      <b>{value}</b>
+      <span>{label}</span>
     </div>
   );
 }
 
-const SURFACE_LABEL: Record<CatalogAccess["surface"], string> = {
-  ordinary_data: "Dati ordinari",
-  transparency: "Amministrazione Trasparente",
-};
-
-const ACCESS_LABEL: Record<CatalogAccess["access_mode"], string> = {
-  direct: "Diretto",
-  mediated: "Mediato",
-  indirect: "Indiretto",
-  unavailable: "Non disponibile",
-};
-
-function CatalogAccessPanel({ entries }: { entries: CatalogAccess[] }) {
-  const surfaces = ["ordinary_data", "transparency"] as const;
-  const modes = ["direct", "mediated", "indirect", "unavailable"] as const;
-  return (
-    <section className="systems__group">
-      <div className="systems__group-head">
-        <h2>Catalogo delle fonti</h2>
-        <span className="systems__group-note">ultima misura per superficie</span>
-      </div>
-      <div className="panel">
-        {entries.length === 0 ? (
-          <p className="lede">Nessuna misura del catalogo disponibile.</p>
-        ) : (
-          <>
-            <div className="tessere">
-              {surfaces.map((surface) => (
-                <div className="tessera" key={surface}>
-                  <b>{entries.filter((e) => e.surface === surface).length}</b>
-                  <span>{SURFACE_LABEL[surface]} misurati</span>
-                </div>
-              ))}
-            </div>
-            <div className="tabella-scorrevole">
-              <table>
-                <caption>
-                  Distribuzione delle modalità di accesso sulle ultime misure.
-                </caption>
-                <thead>
-                  <tr>
-                    <th>Superficie</th>
-                    {modes.map((mode) => <th key={mode}>{ACCESS_LABEL[mode]}</th>)}
-                    <th>Misurazione</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {surfaces.map((surface) => {
-                    const righe = entries.filter((e) => e.surface === surface);
-                    const ultima = righe.reduce<CatalogAccess | null>(
-                      (current, entry) =>
-                        !current || entry.measured_at > current.measured_at
-                          ? entry
-                          : current,
-                      null,
-                    );
-                    return (
-                      <tr key={surface}>
-                        <th scope="row">{SURFACE_LABEL[surface]}</th>
-                        {modes.map((mode) => (
-                          <td key={mode} className="data-table__num">
-                            {righe.filter((e) => e.access_mode === mode).length}
-                          </td>
-                        ))}
-                        <td>{ultima?.measurement_id ?? "—"}</td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
-          </>
-        )}
-      </div>
-    </section>
-  );
-}
-
 export default async function Monitoraggio() {
-  let report: StatusOut | null = null;
+  let report: MonitoraggioOut | null = null;
   try {
-    report = await status();
+    report = await monitoraggio();
   } catch {
     report = null;
-  }
-  let catalogReport: CatalogAccess[] = [];
-  try {
-    catalogReport = await catalogAccess();
-  } catch {
-    catalogReport = [];
   }
 
   if (!report) {
@@ -224,51 +106,154 @@ export default async function Monitoraggio() {
     );
   }
 
-  const overall = report.overall ?? "unknown";
+  const { demo, copertura, refresh, sistemi } = report;
+  const worker = WORKER_LABEL[refresh.worker_stato];
+  const batch = refresh.ultimo_batch;
 
   return (
     <div className="stack">
       <section>
-        <p className="eyebrow">Stato sistemi</p>
-        <h1>{OVERALL_LABEL[overall] ?? OVERALL_LABEL.unknown}</h1>
+        <p className="eyebrow">Monitoraggio</p>
+        <h1>Stato della pipeline dati</h1>
         <p className="lede">
-          Tre gruppi, una sola fonte di verità: quello che TreasureIQ ha
-          effettivamente recuperato da ciascuna fonte, lo stato delle proprie
-          componenti e i numeri su cosa è stato ingerito l&apos;ultima volta.
-          Non un cruscotto di uptime: un&apos;istantanea onesta di cosa c&apos;è
-          davvero.
-        </p>
-        <p className="lede">
-          Qui i comuni che TreasureIQ legge oggi, servizio per servizio. La
-          misura su tutti i comuni italiani è in{" "}
-          <a href="/analytics">Analytics</a>.
+          Tre livelli tenuti distinti, perché confonderli porta alla
+          conclusione sbagliata: la <strong>demo curata</strong> (pochi comuni,
+          dati profondi), la <strong>copertura nazionale</strong> (le mappe di
+          servizio del catalogo) e il <strong>refresh operativo</strong> (la
+          freschezza dei comuni già inizializzati). Solo conteggi aggregati e
+          metadati: nessun contenuto dei comuni, nessuna sonda in tempo reale.
         </p>
       </section>
 
       <div className="systems">
+        {/* 1 — Demo curata */}
         <section className="systems__group">
           <div className="systems__group-head">
-            <h2>Fonti</h2>
-            {/* The (MVP) is load-bearing. A handful of comuni out of roughly
-                eight thousand is a proof that the method works, not a service
-                that covers the country, and a reader who mistakes one for the
-                other will conclude we are tiny rather than that we are early. */}
+            <h2>Demo curata</h2>
+            {/* The (MVP) is load-bearing: a handful of comuni is a proof the
+                method works, not a service that covers the country. */}
             <span className="systems__group-note">
-              i comuni da cui TreasureIQ risponde oggi <strong>(MVP)</strong>
+              i comuni con estrazione profonda <strong>(MVP)</strong>
             </span>
           </div>
           <div className="panel">
-            <ul className="status-list">
-              {(report.sources ?? []).map((s) => (
-                <SourceRow key={s.codice_istat} source={s} />
-              ))}
-            </ul>
-            {(report.sources ?? []).length === 0 && (
-              <p className="lede">Nessuna fonte configurata.</p>
-            )}
+            <div className="tessere">
+              <Tessera value={n(demo.comuni)} label="comuni MVP" />
+              <Tessera value={n(demo.record_totali)} label="record in archivio" />
+              <Tessera value={n(demo.curato_nazionale)} label="record curati nazionali" />
+            </div>
+            <p className="status-row__meta">
+              Statici, aggiornati a mano. Ultima ingestion:{" "}
+              {formatDate(demo.aggiornato_il)}.
+            </p>
           </div>
         </section>
 
+        {/* 2 — Copertura nazionale */}
+        <section className="systems__group">
+          <div className="systems__group-head">
+            <h2>Copertura nazionale</h2>
+            <span className="systems__group-note">
+              le mappe di servizio dal catalogo
+            </span>
+          </div>
+          <div className="panel">
+            <div className="tessere">
+              <Tessera value={n(copertura.universo)} label="comuni italiani" />
+              <Tessera value={n(copertura.catalogati)} label="catalogati" />
+              <Tessera value={n(copertura.eleggibili)} label="eleggibili al refresh" />
+            </div>
+            <div className="tabella-scorrevole">
+              <table>
+                <caption>
+                  Comuni catalogati per piattaforma. Solo le piattaforme con un
+                  lettore di refresh dedicato sono eleggibili al refresh
+                  continuo; le altre restano copertura statica.
+                </caption>
+                <thead>
+                  <tr>
+                    <th>Piattaforma</th>
+                    <th>Comuni</th>
+                    <th>Refresh</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {copertura.per_piattaforma.map((p) => (
+                    <tr key={p.piattaforma}>
+                      <th scope="row">{p.piattaforma}</th>
+                      <td className="data-table__num">{n(p.comuni)}</td>
+                      <td>{p.eleggibile ? "eleggibile" : "non eleggibile"}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        {/* 3 — Refresh operativo */}
+        <section className="systems__group">
+          <div className="systems__group-head">
+            <h2>Refresh operativo</h2>
+            <span className="systems__group-note">
+              refresh continuo dei comuni già inizializzati
+            </span>
+          </div>
+          <div className="panel">
+            <div className="tessere">
+              <Tessera value={n(refresh.inizializzati)} label="inizializzati / refreshabili" />
+              <Tessera value={n(refresh.mai_inizializzati)} label="eleggibili mai inizializzati" />
+              <Tessera value={n(refresh.eleggibili)} label="totale eleggibili" />
+            </div>
+            <p className="status-row__meta">
+              Il refresh rilegge solo i comuni che hanno già un record connettore:
+              è freschezza, non scoperta. Lo scarto fra <em>eleggibili</em> e{" "}
+              <em>inizializzati</em> è la pipeline di ingresso ancora da
+              completare, non uno sweep lento. Ultimo refresh:{" "}
+              {formatDate(refresh.ultimo_refresh)}.
+              {refresh.fuori_perimetro > 0 && (
+                <>
+                  {" "}
+                  Altri {n(refresh.fuori_perimetro)} record già presenti sono
+                  fuori dal perimetro eleggibile (demo e pilot) e non contano fra
+                  gli inizializzati.
+                </>
+              )}
+            </p>
+
+            <ul className="status-list">
+              <li className="status-row" data-stato={worker.state}>
+                <span className="status-row__dot" aria-hidden="true" />
+                <div className="status-row__body">
+                  <div className="status-row__head">
+                    <strong>Worker di refresh</strong>
+                    <span className="status-row__badge">{worker.label}</span>
+                  </div>
+                  <p className="status-row__meta">
+                    {batch ? (
+                      <>
+                        Ultimo batch: {n(batch.comuni)} comuni in{" "}
+                        {batch.durata_s == null ? "—" : `${batch.durata_s.toLocaleString("it-IT")}s`}
+                        {" · "}
+                        riusciti {n(batch.riusciti)}, falliti {n(batch.falliti)},
+                        senza contratto {n(batch.senza_contratto)}
+                        {" · "}
+                        eventi 429 {n(batch.eventi_429)}, circuiti aperti{" "}
+                        {n(batch.domini_bloccati)}
+                        {" · "}
+                        registrato {formatDate(refresh.sidecar_aggiornato_il)}
+                      </>
+                    ) : (
+                      "Nessuno stato operativo registrato: il worker non ha ancora scritto un batch."
+                    )}
+                  </p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        {/* 4 — Sistemi */}
         <section className="systems__group">
           <div className="systems__group-head">
             <h2>Sistemi</h2>
@@ -278,46 +263,24 @@ export default async function Monitoraggio() {
           </div>
           <div className="panel">
             <ul className="status-list">
-              {(report.sistemi ?? []).map((c) => (
+              {sistemi.map((c) => (
                 <ComponentRow key={c.nome} component={c} />
               ))}
             </ul>
           </div>
         </section>
-
-        <section className="systems__group">
-          <div className="systems__group-head">
-            <h2>Stato dati interni</h2>
-            <span className="systems__group-note">
-              cosa è stato effettivamente recuperato
-            </span>
-          </div>
-          <div className="panel">
-            {(report.dati_interni ?? []).map((d) => (
-              <DatumRow key={d.nome} datum={d} />
-            ))}
-          </div>
-        </section>
-
-        <CatalogAccessPanel entries={catalogReport} />
       </div>
 
       <section className="panel">
-        <h2>Perché &ldquo;non verificato&rdquo; e non un pallino verde o rosso</h2>
+        <h2>Perché tre livelli e non un numero solo</h2>
         <p className="lede">
-          Questa pagina non manda una richiesta al sito del comune ogni volta
-          che qualcuno la apre. Farlo vorrebbe dire interrogare
-          un&apos;infrastruttura pubblica che non gestiamo, ad ogni visita, per
-          un numero che racconta poco. E non sonda neppure le proprie componenti
-          a ogni visita: il modello linguistico locale e la ricerca web vivono
-          solo durante l&apos;ingestion.
-        </p>
-        <p className="lede">
-          &ldquo;Non verificato&rdquo; è quindi uno stato reale, non un errore
-          nascosto: significa che nessun controllo recente ha riguardato quella
-          voce. Non significa che sia rotta, e non deve mai essere letto come se
-          lo fosse — è la stessa onestà sui limiti dei dati che il resto del
-          progetto applica ai requisiti dei bandi.
+          Un solo totale nasconde la differenza che conta. La demo curata dice
+          quanto sappiamo fare in profondità su pochi comuni; la copertura
+          nazionale dice su quanti comuni sappiamo almeno indirizzare i servizi;
+          il refresh operativo dice per quanti di quelli teniamo il dato fresco.
+          Sono misure diverse, e vanno lette come tali — la stessa onestà sui
+          limiti dei dati che il resto del progetto applica ai requisiti dei
+          bandi.
         </p>
       </section>
     </div>

@@ -398,6 +398,31 @@ def _scrivi_metriche_servizi(metriche: dict) -> None:
         logger.warning("metriche service_catalog non scrivibili (%s): %s", percorso, exc)
 
 
+def _percorso_stato_worker() -> Path:
+    return LIVE_DIR / "_worker_status.json"
+
+
+def _scrivi_stato_worker(stato: dict) -> None:
+    """Scrittura atomica dello stato operativo del refresh (mai in storico.db).
+
+    Sidecar per la dashboard di monitoraggio: contatori aggregati dell'ultimo
+    batch (durata, esiti, eventi 429, circuiti aperti), nessun contenuto dei
+    comuni. Riscritto per intero a fine batch; un batch interrotto lascia
+    l'ultimo stato coerente, e la verità di terra resta comunque il registro su
+    ``data-live/registro`` (questo file è solo osservabilità).
+    """
+    percorso = _percorso_stato_worker()
+    try:
+        percorso.parent.mkdir(parents=True, exist_ok=True)
+        provvisorio = percorso.with_suffix(".tmp")
+        provvisorio.write_text(
+            json.dumps(stato, ensure_ascii=False, indent=2), "utf-8"
+        )
+        provvisorio.replace(percorso)
+    except OSError as exc:
+        logger.warning("stato worker non scrivibile (%s): %s", percorso, exc)
+
+
 def _metriche_iniziali(totale: int) -> dict:
     """Lo scheletro delle metriche per-run, con i contatori a zero."""
     return {
@@ -632,21 +657,31 @@ def run_batch(config: WorkerConfig, comuni: list[str]) -> int:
         # e registro e lascia intatto lo storico.db. next_batch ha già filtrato
         # le piattaforme senza lettore, quindi qui ogni comune ha un write path.
         errors = 0
+        avviato = datetime.now(timezone.utc)
+        iniziato = time.monotonic()
+        # Contatori aggregati per la dashboard di monitoraggio (sidecar). Solo
+        # numeri: nessun contenuto dei comuni finisce nello stato operativo.
+        tentati = riusciti = senza_contratto = 0
+        eventi_429 = domini_bloccati = 0
         for codice in comuni:
             # Un pacer per comune: dentro un comune ogni GET va sullo stesso
             # host, quindi lo stato per-dominio è tutto ciò che serve a spezzare
             # la raffica. Scoped via ContextVar → attivo solo per questo refresh,
             # _Sonda e fetch_guardato lo vedono, la chat live no.
-            token = attiva_pacer(
+            pacer = (
                 PacerDominio(intervallo_minimo_s=config.pace_dominio_s)
                 if config.pace_dominio_s > 0
                 else None
             )
+            token = attiva_pacer(pacer)
+            tentati += 1
             try:
                 esito = refresh_dati_connettore(codice)
                 if esito is None:
                     logger.warning("refresh %s: nessun contratto in store", codice)
+                    senza_contratto += 1
                 else:
+                    riusciti += 1
                     logger.info(
                         "refresh %s: %s letto_il=%s", codice, esito.piattaforma,
                         esito.letto_il,
@@ -655,10 +690,32 @@ def run_batch(config: WorkerConfig, comuni: list[str]) -> int:
                 logger.exception("refresh fallito per %s", codice)
                 errors += 1
             finally:
+                if pacer is not None:
+                    eventi_429 += pacer.eventi_429
+                    domini_bloccati += pacer.n_domini_bloccati
                 ripristina_pacer(token)
             if config.delay:
                 time.sleep(config.delay)
-        return 1 if errors else 0
+        codice_uscita = 1 if errors else 0
+        _scrivi_stato_worker(
+            {
+                "aggiornato_il": datetime.now(timezone.utc).isoformat(),
+                "modo": "refresh",
+                "ultimo_batch": {
+                    "avviato_il": avviato.isoformat(),
+                    "durata_s": round(time.monotonic() - iniziato, 1),
+                    "comuni": len(comuni),
+                    "tentati": tentati,
+                    "riusciti": riusciti,
+                    "falliti": errors,
+                    "senza_contratto": senza_contratto,
+                    "eventi_429": eventi_429,
+                    "domini_bloccati": domini_bloccati,
+                    "codice": codice_uscita,
+                },
+            }
+        )
+        return codice_uscita
     if config.mode == "confirmation":
         errors = 0
         esecutore = _nuovo_esecutore(config)

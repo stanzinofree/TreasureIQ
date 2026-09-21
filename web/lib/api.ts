@@ -1232,6 +1232,75 @@ export interface StatusOut {
 
 export const status = () => call<StatusOut>("/api/status");
 
+/* -------------------------------------------------------------------------- */
+/* Operational monitoring — `GET /api/monitoraggio`                            */
+/*                                                                             */
+/* Three data layers kept apart on purpose (demo / catalog / data-live), plus  */
+/* the refresh worker's own state. Aggregate counts and worker metadata only.  */
+/* -------------------------------------------------------------------------- */
+
+/** Demo curata — the deep-extracted MVP comuni in `data/seed`. Static. */
+export interface DemoCurata {
+  comuni: number;
+  record_totali: number;
+  curato_nazionale: number;
+  aggiornato_il: string | null;
+}
+
+/** One provider platform's slice of national coverage, and whether that
+ * platform has a refresh reader at all (`eleggibile`). */
+export interface PiattaformaCopertura {
+  piattaforma: string;
+  comuni: number;
+  eleggibile: boolean;
+}
+
+/** Copertura nazionale — the shallow service maps in `data/catalog`. */
+export interface Copertura {
+  universo: number;
+  catalogati: number;
+  eleggibili: number;
+  non_eleggibili: number;
+  per_piattaforma: PiattaformaCopertura[];
+}
+
+/** Aggregate counters from the refresh worker's last batch. All nullable: the
+ * sidecar may be absent (worker never ran) or older than a field. */
+export interface UltimoBatch {
+  avviato_il: string | null;
+  durata_s: number | null;
+  comuni: number | null;
+  tentati: number | null;
+  riusciti: number | null;
+  falliti: number | null;
+  senza_contratto: number | null;
+  eventi_429: number | null;
+  domini_bloccati: number | null;
+  codice: number | null;
+}
+
+/** Refresh operativo — the continuous refresh of already-initialised comuni.
+ * `worker_stato` is derived from the sidecar's freshness, never from the seed. */
+export interface RefreshOperativo {
+  eleggibili: number;
+  inizializzati: number;
+  mai_inizializzati: number;
+  fuori_perimetro: number;
+  ultimo_refresh: string | null;
+  worker_stato: "attivo" | "fermo" | "sconosciuto";
+  sidecar_aggiornato_il: string | null;
+  ultimo_batch: UltimoBatch | null;
+}
+
+export interface MonitoraggioOut {
+  demo: DemoCurata;
+  copertura: Copertura;
+  refresh: RefreshOperativo;
+  sistemi: SystemComponent[];
+}
+
+export const monitoraggio = () => call<MonitoraggioOut>("/api/monitoraggio");
+
 /** Latest catalog measurements for the internal monitoring view. */
 export interface CatalogAccess {
   municipality_istat: string;

@@ -74,10 +74,20 @@ class PacerDominio:
         self._ultimo: dict[str, datetime] = {}
         self._429_consecutivi: dict[str, int] = {}
         self._domini_bloccati: set[str] = set()
+        #: Cumulative count of distinct 429 responses seen by this pacer, across
+        #: every domain it touched. One increment per 429 GET (not per retry
+        #: line): the refresh loop reads it after a comune to feed the operational
+        #: sidecar without re-parsing logs — see ``sweep_worker.run_batch``.
+        self.eventi_429: int = 0
 
     def bloccato(self, url: str) -> bool:
         """True when this domain has exhausted its 429 budget for this comune."""
         return dominio_di(url) in self._domini_bloccati
+
+    @property
+    def n_domini_bloccati(self) -> int:
+        """How many domains this pacer has tripped open (read-only, for metrics)."""
+        return len(self._domini_bloccati)
 
     def prima(self, url: str) -> None:
         """Sleep the residual min-interval before a GET to ``url``'s domain."""
@@ -95,6 +105,7 @@ class PacerDominio:
         dominio = dominio_di(url)
         self._ultimo[dominio] = _now()
         if status_code == 429:
+            self.eventi_429 += 1
             consecutivi = self._429_consecutivi.get(dominio, 0) + 1
             self._429_consecutivi[dominio] = consecutivi
             if consecutivi >= self._max_429_dominio:

@@ -30,6 +30,7 @@ import json
 import sqlite3
 import sys
 import time
+from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -45,6 +46,7 @@ from treasureiq.municipality_registry import (
 from treasureiq.registro import LIVE_DIR, _da_store
 import treasureiq.sonda_live as sonda_live
 from treasureiq.sonda_live import comune_per_codice
+from treasureiq import bootstrap as bootstrap_sel
 
 #: Piattaforme che `leggi_connettore` sa davvero leggere oggi. Tenere in
 #: sincrono con i dispatch in connettore.py — aggiungerne una lì senza
@@ -241,6 +243,254 @@ def cmd_scan(args: argparse.Namespace) -> int:
         file=sys.stderr,
     )
     return 0
+
+
+# --------------------------------------------------------------------------- #
+# bootstrap: canary-first enrolment of eligible, uninitialised comuni
+# --------------------------------------------------------------------------- #
+#: Exit codes distinct so an operator (or a wrapper script) can tell apart a
+#: clean run, per-comune errors, and a deliberate stop.
+BOOTSTRAP_OK = 0
+BOOTSTRAP_ERRORI = 1
+BOOTSTRAP_STOP = 3
+
+
+def _connettore_inizializzati() -> set[str]:
+    """ISTAT codes that already hold a data-live connettore record.
+
+    This is what "initialised" means for the refresh loop (and for the
+    monitoring dashboard): the presence of ``data-live/connettore/<cod>.json``,
+    not a registro entry.
+    """
+    conn_dir = LIVE_DIR / "connettore"
+    if not conn_dir.exists():
+        return set()
+    return {percorso.stem for percorso in conn_dir.glob("*.json")}
+
+
+def _bootstrap_stop_path(checkpoint: Path) -> Path:
+    """Sibling stop-file: ``bootstrap.json`` -> ``bootstrap.stop``."""
+    return checkpoint.with_suffix(".stop")
+
+
+class _CheckpointInvalido(ValueError):
+    """A checkpoint file exists but is corrupt or structurally invalid.
+
+    Raised instead of degrading to empty state: a resume must never silently
+    restart from scratch and overwrite prior progress — the data-live records
+    already created for the completed comuni would be lost from the ledger.
+    """
+
+
+def _bootstrap_carica_checkpoint(
+    checkpoint: Path,
+) -> tuple[list[str], set[str], list[str], str | None, int]:
+    """Return ``(selezione, completati, errori, avviato_il, totale)``.
+
+    Raises ``_CheckpointInvalido`` if the file is unreadable, not a JSON
+    object, or missing the frozen ``selezione`` list. No silent fallback to
+    empty state: the caller stops (exit 2) rather than recompute a fresh
+    selection and clobber the record of what was already initialised. Errors
+    are deduplicated on load.
+    """
+    try:
+        dati = json.loads(checkpoint.read_text("utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise _CheckpointInvalido(f"illeggibile o non JSON: {exc}") from exc
+    if not isinstance(dati, dict):
+        raise _CheckpointInvalido("il contenuto non e' un oggetto JSON")
+    selezione = dati.get("selezione")
+    if not isinstance(selezione, list) or not all(isinstance(c, str) for c in selezione):
+        raise _CheckpointInvalido("campo 'selezione' mancante o non valido")
+    completati_raw = dati.get("completati") or []
+    errori_raw = dati.get("errori") or []
+    if not isinstance(completati_raw, list) or not isinstance(errori_raw, list):
+        raise _CheckpointInvalido("campi 'completati'/'errori' non validi")
+    completati = {c for c in completati_raw if isinstance(c, str)}
+    errori = list(dict.fromkeys(c for c in errori_raw if isinstance(c, str)))
+    avviato = dati.get("avviato_il")
+    if not isinstance(avviato, str):
+        avviato = None
+    totale = dati.get("totale_candidati")
+    if not isinstance(totale, int) or totale < 0:
+        totale = len(selezione)
+    return selezione, completati, errori, avviato, totale
+
+
+def _bootstrap_salva_checkpoint(
+    checkpoint: Path,
+    *,
+    avviato_il: str,
+    selezione: list[str],
+    completati: set[str],
+    errori: list[str],
+    totale_candidati: int,
+) -> None:
+    payload = {
+        "avviato_il": avviato_il,
+        "aggiornato_il": datetime.now(timezone.utc).isoformat(),
+        "totale_candidati": totale_candidati,
+        # Frozen selection: on --resume it is authoritative, never recomputed,
+        # so a canary/lotto stays the SAME set even after some comuni have
+        # already been initialised (and thus dropped from a fresh selection).
+        "selezione": list(selezione),
+        "completati": sorted(completati),
+        "errori": sorted(errori),
+    }
+    checkpoint.parent.mkdir(parents=True, exist_ok=True)
+    provvisorio = checkpoint.with_suffix(checkpoint.suffix + ".tmp")
+    provvisorio.write_text(json.dumps(payload, ensure_ascii=False, indent=2), "utf-8")
+    provvisorio.replace(checkpoint)
+
+
+def cmd_bootstrap(args: argparse.Namespace) -> int:
+    if args.delay < 0:
+        print("errore: --delay deve essere >= 0.", file=sys.stderr)
+        return 2
+    if args.limit is not None and args.limit < 1:
+        print("errore: --limit deve essere >= 1.", file=sys.stderr)
+        return 2
+    if args.per_piattaforma < 1:
+        print("errore: --per-piattaforma deve essere >= 1.", file=sys.stderr)
+        return 2
+
+    catalog_dir = args.catalog
+
+    avviato_il = datetime.now(timezone.utc).isoformat()
+    completati: set[str] = set()
+    errori: list[str] = []
+    selezione: list[str]
+    totale_candidati: int
+    resuming = False
+
+    if args.checkpoint is not None and args.checkpoint.exists():
+        # A checkpoint on disk: only --resume may touch it. Anything wrong with
+        # its contents stops the run (exit 2, no fetch) — never a silent restart
+        # that would recompute a different selection and clobber the ledger.
+        if not args.resume:
+            print(
+                f"errore: checkpoint {args.checkpoint} esiste gia'. Usa --resume "
+                "per continuarlo, o indica un percorso nuovo.",
+                file=sys.stderr,
+            )
+            return 2
+        try:
+            selezione, completati, errori, avviato_prec, totale_candidati = (
+                _bootstrap_carica_checkpoint(args.checkpoint)
+            )
+        except _CheckpointInvalido as exc:
+            print(
+                f"errore: checkpoint {args.checkpoint} corrotto o invalido ({exc}). "
+                "Nessun fetch eseguito; correggi o rimuovi il file.",
+                file=sys.stderr,
+            )
+            return 2
+        if avviato_prec:
+            avviato_il = avviato_prec
+        resuming = True
+    elif args.resume and args.checkpoint is not None:
+        # --resume but nothing to resume from: refuse rather than start a fresh
+        # run under a resume flag (the operator expected an existing ledger).
+        print(
+            f"errore: --resume ma il checkpoint {args.checkpoint} non esiste. "
+            "Nessun fetch eseguito.",
+            file=sys.stderr,
+        )
+        return 2
+
+    if not resuming:
+        # Fresh run: compute the selection ONCE and freeze it in the checkpoint.
+        coda = set(_comuni_da_censimento(args.db))
+        gia_init = _connettore_inizializzati()
+        candidati = bootstrap_sel.seleziona(catalog_dir, coda, gia_init)
+        totale_candidati = len(candidati)
+        if args.canary:
+            selezione = bootstrap_sel.canary(candidati, per_piattaforma=args.per_piattaforma)
+            if args.limit is not None:
+                print("nota: --canary ignora --limit.", file=sys.stderr)
+        else:
+            selezione = bootstrap_sel.lotto(candidati, args.limit)
+
+    # Errored comuni are deliberately NOT in `completati`, so a resume retries
+    # them; only successful (ok/vuoto) reads are considered done.
+    da_fare = [c for c in selezione if c not in completati]
+
+    plat_map = bootstrap_sel.mappa_eleggibili(catalog_dir)
+    conteggio_piattaforme = Counter(plat_map.get(c, "?") for c in selezione)
+    print(
+        f"bootstrap: candidati totali {totale_candidati} · selezione {len(selezione)} · "
+        f"da fare {len(da_fare)} · gia' completati {len(selezione) - len(da_fare)} · "
+        f"piattaforme {dict(conteggio_piattaforme)}"
+        + (" · RESUME" if resuming else ""),
+        file=sys.stderr,
+    )
+
+    if args.dry_run:
+        for codice in da_fare:
+            print(f"DRY {codice}", file=sys.stderr)
+        print(f"dry-run: {len(da_fare)} comuni verrebbero inizializzati (nessuna scrittura).",
+              file=sys.stderr)
+        return BOOTSTRAP_OK
+
+    stop_path = _bootstrap_stop_path(args.checkpoint) if args.checkpoint is not None else None
+
+    # Freeze the selection to disk BEFORE the first fetch, so a --resume always
+    # continues the ORIGINAL selection even if the run is stopped after zero
+    # completed comuni (blocker: a fresh selection would then drift).
+    if args.checkpoint is not None and not resuming:
+        _bootstrap_salva_checkpoint(
+            args.checkpoint,
+            avviato_il=avviato_il,
+            selezione=selezione,
+            completati=completati,
+            errori=errori,
+            totale_candidati=totale_candidati,
+        )
+
+    fermato = False
+    ok = vuoti = err_run = 0
+    for indice, istat in enumerate(da_fare):
+        if stop_path is not None and stop_path.exists():
+            print(f"stop richiesto ({stop_path}): interrompo prima di {istat}.",
+                  file=sys.stderr)
+            fermato = True
+            break
+        stato, riga = _scansiona_uno(istat)
+        print(riga, file=sys.stderr)
+        if stato in ("ok", "vuoto"):
+            # A successful read (even one with no services) is done: mark it
+            # completed and clear any prior error for this comune.
+            completati.add(istat)
+            errori = [e for e in errori if e != istat]
+            if stato == "ok":
+                ok += 1
+            else:
+                vuoti += 1
+        else:  # "errore": keep OUT of completati so --resume retries it
+            err_run += 1
+            if istat not in errori:
+                errori.append(istat)
+        if args.checkpoint is not None:
+            _bootstrap_salva_checkpoint(
+                args.checkpoint,
+                avviato_il=avviato_il,
+                selezione=selezione,
+                completati=completati,
+                errori=errori,
+                totale_candidati=totale_candidati,
+            )
+        if args.delay and indice < len(da_fare) - 1:
+            time.sleep(args.delay)
+
+    print(
+        f"bootstrap fatto: ok {ok} · vuoti {vuoti} · errori {err_run} · "
+        f"errori-cumulativi {len(errori)}"
+        + (" · FERMATO" if fermato else ""),
+        file=sys.stderr,
+    )
+    if fermato:
+        return BOOTSTRAP_STOP
+    return BOOTSTRAP_ERRORI if errori else BOOTSTRAP_OK
 
 
 def _anagrafe_comuni() -> dict[str, MunicipalityRecord]:
@@ -452,12 +702,39 @@ def _build_parser() -> argparse.ArgumentParser:
     elenco = sub.add_parser("list", help="Elenca i record presenti nel registro (read-only).")
     elenco.set_defaults(func=cmd_list)
 
+    boot = sub.add_parser(
+        "bootstrap",
+        help="Inizializza i comuni eleggibili mai inizializzati (canary-first). "
+             "Scrive solo data-live; catalogo e storico.db restano invariati.",
+    )
+    boot.add_argument("--canary", action="store_true",
+                      help="Seleziona --per-piattaforma comuni per ognuna delle piattaforme "
+                           "eleggibili (default 2 x 5 = 10). Ignora --limit.")
+    boot.add_argument("--per-piattaforma", type=int, default=2,
+                      help="Comuni per piattaforma in modalita' --canary (default 2).")
+    boot.add_argument("--limit", type=int, default=None,
+                      help="Numero massimo di comuni da inizializzare in questo lotto.")
+    boot.add_argument("--delay", type=float, default=2.0,
+                      help="Secondi di pausa fra un comune e l'altro (default 2.0).")
+    boot.add_argument("--checkpoint", type=Path, default=None,
+                      help="File JSON di avanzamento: aggiornato dopo ogni comune. "
+                           "Il file gemello .stop, se creato, ferma il lotto.")
+    boot.add_argument("--resume", action="store_true",
+                      help="Riprende un checkpoint esistente saltando i comuni gia' completati.")
+    boot.add_argument("--dry-run", action="store_true",
+                      help="Stampa la selezione senza alcun fetch ne' scrittura.")
+    boot.add_argument("--catalog", type=Path, default=DATA_DIR / "catalog",
+                      help="Directory del catalogo (default data/catalog).")
+    boot.add_argument("--db", type=Path, default=DATA_DIR / "storico.db",
+                      help="Path a storico.db per la coda di censimento (default data/storico.db).")
+    boot.set_defaults(func=cmd_bootstrap)
+
     return parser
 
 
 def main(argv: list[str] | None = None) -> int:
     argv = list(sys.argv[1:] if argv is None else argv)
-    if not argv or argv[0] not in {"scan", "sweep", "list", "-h", "--help"}:
+    if not argv or argv[0] not in {"scan", "sweep", "list", "bootstrap", "-h", "--help"}:
         argv = ["scan", *argv]
     parser = _build_parser()
     args = parser.parse_args(argv)

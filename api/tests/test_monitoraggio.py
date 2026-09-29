@@ -123,6 +123,15 @@ def test_refresh_inizializzati_e_mai_inizializzati(tmp_path: Path) -> None:
     assert r.refresh.ultimo_refresh.startswith(now.strftime("%Y-%m-%d"))
 
 
+def test_ultimo_refresh_usa_la_lettura_recente(tmp_path: Path) -> None:
+    paths = _scena(tmp_path)
+    _scrivi(paths["live"] / "connettore" / "001001.json", {
+        "controllato_il": "2026-09-21T16:00:00+00:00",
+        "letto_il": "2026-09-29T16:49:25+00:00",
+    })
+    assert _build(paths).refresh.ultimo_refresh == "2026-09-29T16:49:25+00:00"
+
+
 def test_refresh_conta_solo_intersezione_eleggibile(tmp_path: Path) -> None:
     """`inizializzati` = eligible AND initialised, never a raw file count.
 

@@ -272,7 +272,7 @@ def _refresh(live_dir: Path, eleggibili_codici: frozenset[str]) -> RefreshOperat
                 record = json.loads(percorso.read_text("utf-8"))
             except (OSError, json.JSONDecodeError):
                 continue
-            letto = _parse_iso(record.get("controllato_il") or record.get("letto_il"))
+            letto = _parse_iso(record.get("letto_il") or record.get("controllato_il"))
             if letto and (ultimo is None or letto > ultimo):
                 ultimo = letto
 

@@ -34,7 +34,7 @@ from pathlib import Path
 
 from pydantic import BaseModel
 
-from treasureiq.connettore import PIATTAFORME_REFRESH
+from treasureiq.bootstrap import PIATTAFORME_CATALOGO_REFRESH
 
 logger = logging.getLogger(__name__)
 
@@ -169,7 +169,7 @@ def _codici_eleggibili(catalog_dir: str) -> frozenset[str]:
             payload = json.loads(percorso.read_text("utf-8"))
         except (OSError, json.JSONDecodeError):
             continue
-        if _piattaforma_del_file(payload) in PIATTAFORME_REFRESH:
+        if _piattaforma_del_file(payload) in PIATTAFORME_CATALOGO_REFRESH:
             codici.add(percorso.stem)
     return frozenset(codici)
 
@@ -232,7 +232,7 @@ def _copertura(catalog_dir: Path, comuni_istat_path: Path) -> CoperturaOut:
     righe: list[PiattaformaCopertura] = []
     eleggibili = 0
     for piattaforma, conteggio in per_piattaforma:
-        eleggibile = piattaforma in PIATTAFORME_REFRESH
+        eleggibile = piattaforma in PIATTAFORME_CATALOGO_REFRESH
         if eleggibile:
             eleggibili += conteggio
         righe.append(

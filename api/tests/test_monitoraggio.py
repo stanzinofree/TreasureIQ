@@ -46,8 +46,7 @@ def _scena(tmp_path: Path) -> dict[str, Path]:
     catalog = tmp_path / "catalog"
     seed = tmp_path / "seed"
     live = tmp_path / "live"
-    # Coverage: 2 hgate (eligible) + 1 comweb (eligible) + 1 wordpress_agid
-    # (NOT eligible) + 1 magnolia (NOT eligible) = 5 catalogati, 3 eligible.
+    # Coverage: 2 hgate + 1 comweb + 1 WordPress alias eligible; magnolia excluded.
     _catalog_file(catalog, "001001", "hgate")
     _catalog_file(catalog, "001002", "hgate")
     _catalog_file(catalog, "001003", "comweb")
@@ -87,14 +86,14 @@ def test_copertura_conteggi_e_eleggibilita(tmp_path: Path) -> None:
     r = _build(_scena(tmp_path))
     assert r.copertura.universo == 50
     assert r.copertura.catalogati == 5
-    assert r.copertura.eleggibili == 3
-    assert r.copertura.non_eleggibili == 2
+    assert r.copertura.eleggibili == 4
+    assert r.copertura.non_eleggibili == 1
     # Coverage arithmetic must always close.
     assert r.copertura.non_eleggibili == r.copertura.catalogati - r.copertura.eleggibili
     per = {p.piattaforma: p for p in r.copertura.per_piattaforma}
     assert per["hgate"].comuni == 2 and per["hgate"].eleggibile
     assert per["comweb"].eleggibile
-    assert not per["wordpress_agid"].eleggibile
+    assert per["wordpress_agid"].eleggibile
     assert not per["magnolia"].eleggibile
     # Per-platform counts sum to catalogati.
     assert sum(p.comuni for p in r.copertura.per_piattaforma) == r.copertura.catalogati
@@ -116,8 +115,8 @@ def test_refresh_inizializzati_e_mai_inizializzati(tmp_path: Path) -> None:
     _connettore(paths["live"], "001003", now.isoformat())
     r = _build(paths)
     assert r.refresh.inizializzati == 2
-    assert r.refresh.eleggibili == 3
-    assert r.refresh.mai_inizializzati == 1  # 3 eligible - 2 initialised
+    assert r.refresh.eleggibili == 4
+    assert r.refresh.mai_inizializzati == 2  # 4 eligible - 2 initialised
     assert r.refresh.fuori_perimetro == 0  # both initialised comuni are eligible
     assert r.refresh.ultimo_refresh is not None
     assert r.refresh.ultimo_refresh.startswith(now.strftime("%Y-%m-%d"))
@@ -135,26 +134,24 @@ def test_ultimo_refresh_usa_la_lettura_recente(tmp_path: Path) -> None:
 def test_refresh_conta_solo_intersezione_eleggibile(tmp_path: Path) -> None:
     """`inizializzati` = eligible AND initialised, never a raw file count.
 
-    A data-live record on a non-eligible platform (wordpress_agid) or with no
-    catalog entry at all must land in `fuori_perimetro`, not inflate
-    `inizializzati` — the semantic bug the dashboard shipped as 1872 vs 1905.
+    A WordPress catalog record is eligible through its census alias. A record
+    with no catalog entry remains outside the perimeter.
     """
     paths = _scena(tmp_path)
     now = datetime.now(timezone.utc)
     _connettore(paths["live"], "001001", now.isoformat())  # hgate, eligible
-    _connettore(paths["live"], "001004", now.isoformat())  # wordpress_agid, NOT eligible
+    _connettore(paths["live"], "001004", now.isoformat())  # WordPress alias, eligible
     _connettore(paths["live"], "999999", now.isoformat())  # not catalogued at all
     r = _build(paths)
-    assert r.refresh.inizializzati == 1       # only 001001 is inside the perimeter
-    assert r.refresh.fuori_perimetro == 2     # 001004 + 999999 kept separate
-    assert r.refresh.mai_inizializzati == 2   # 3 eligible - 1 initialised eligible
+    assert r.refresh.inizializzati == 2
+    assert r.refresh.fuori_perimetro == 1     # only 999999 is outside
+    assert r.refresh.mai_inizializzati == 2
 
 
 def test_quadratura_perimetro(tmp_path: Path) -> None:
     """Coverage must close: catalogati = mai_inizializzati + inizializzati + non_eleggibili.
 
-    The production shape is 2938 = 1905 + 36 + 997; here the tiny fixture is
-    5 = 2 + 1 + 2 after initialising one eligible comune.
+    The tiny fixture closes at 5 = 3 missing + 1 initialised + 1 ineligible.
     """
     paths = _scena(tmp_path)
     _connettore(paths["live"], "001001", datetime.now(timezone.utc).isoformat())
@@ -164,9 +161,9 @@ def test_quadratura_perimetro(tmp_path: Path) -> None:
         == r.refresh.mai_inizializzati + r.refresh.inizializzati + r.copertura.non_eleggibili
     )
     assert r.copertura.catalogati == 5
-    assert r.refresh.mai_inizializzati == 2
+    assert r.refresh.mai_inizializzati == 3
     assert r.refresh.inizializzati == 1
-    assert r.copertura.non_eleggibili == 2
+    assert r.copertura.non_eleggibili == 1
 
 
 def test_worker_sconosciuto_senza_sidecar(tmp_path: Path) -> None:

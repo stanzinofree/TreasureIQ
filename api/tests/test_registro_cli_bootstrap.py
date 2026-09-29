@@ -35,7 +35,8 @@ def _scena(tmp_path: Path) -> Path:
 
 def _args(cat: Path, **over) -> argparse.Namespace:
     base = dict(
-        canary=False, per_piattaforma=2, limit=None, delay=0.0,
+        canary=False, per_piattaforma=2, limit=None, max_per_run=None,
+        piattaforma=None, delay=0.0,
         checkpoint=None, resume=False, dry_run=False,
         catalog=cat, db=Path("/nonexistent/storico.db"),
     )
@@ -82,6 +83,17 @@ def test_limit_lotto(tmp_path, _stub):
     rc = registro_cli.cmd_bootstrap(_args(cat, limit=4))
     assert rc == registro_cli.BOOTSTRAP_OK
     assert len(_stub) == 4
+
+
+def test_lotto_per_piattaforma_riprende_senza_ripetere(tmp_path, _stub):
+    cat = _scena(tmp_path)
+    cp = tmp_path / "bootstrap.json"
+    assert registro_cli.cmd_bootstrap(_args(cat, piattaforma="hgate", max_per_run=2, checkpoint=cp)) == 0
+    assert len(_stub) == 2
+    assert len(json.loads(cp.read_text("utf-8"))["selezione"]) == 3
+    assert registro_cli.cmd_bootstrap(_args(cat, max_per_run=2, checkpoint=cp, resume=True)) == 0
+    assert len(_stub) == 3
+    assert len(set(_stub)) == 3
 
 
 def test_checkpoint_scritto_dopo_ogni_comune(tmp_path, _stub):
@@ -383,6 +395,8 @@ def test_exit_code_errori(tmp_path, monkeypatch):
 @pytest.mark.parametrize("over", [
     {"delay": -1.0},
     {"limit": 0},
+    {"max_per_run": 0},
+    {"max_per_run": 2},
     {"per_piattaforma": 0},
 ])
 def test_validazione_argomenti(tmp_path, _stub, over):

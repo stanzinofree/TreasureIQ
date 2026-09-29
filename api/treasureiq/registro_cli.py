@@ -365,6 +365,12 @@ def cmd_bootstrap(args: argparse.Namespace) -> int:
     if args.limit is not None and args.limit < 1:
         print("errore: --limit deve essere >= 1.", file=sys.stderr)
         return 2
+    if args.max_per_run is not None and args.max_per_run < 1:
+        print("errore: --max-per-run deve essere >= 1.", file=sys.stderr)
+        return 2
+    if args.max_per_run is not None and args.checkpoint is None:
+        print("errore: --max-per-run richiede --checkpoint.", file=sys.stderr)
+        return 2
     if args.per_piattaforma < 1:
         print("errore: --per-piattaforma deve essere >= 1.", file=sys.stderr)
         return 2
@@ -419,6 +425,8 @@ def cmd_bootstrap(args: argparse.Namespace) -> int:
         coda = set(_comuni_da_censimento(args.db))
         gia_init = _connettore_inizializzati()
         candidati = bootstrap_sel.seleziona(catalog_dir, coda, gia_init)
+        if args.piattaforma:
+            candidati = [c for c in candidati if c[1] == args.piattaforma]
         totale_candidati = len(candidati)
         if args.canary:
             selezione = bootstrap_sel.canary(candidati, per_piattaforma=args.per_piattaforma)
@@ -431,6 +439,7 @@ def cmd_bootstrap(args: argparse.Namespace) -> int:
     # read, no record — terminal for now, out of the refresh). Errored comuni
     # are NOT skipped, so a --resume retries them.
     da_fare = [c for c in selezione if c not in arruolati and c not in vuoti]
+    da_fare_run = da_fare[:args.max_per_run]
 
     plat_map = bootstrap_sel.mappa_eleggibili(catalog_dir)
     conteggio_piattaforme = Counter(plat_map.get(c, "?") for c in selezione)
@@ -443,9 +452,9 @@ def cmd_bootstrap(args: argparse.Namespace) -> int:
     )
 
     if args.dry_run:
-        for codice in da_fare:
+        for codice in da_fare_run:
             print(f"DRY {codice}", file=sys.stderr)
-        print(f"dry-run: {len(da_fare)} comuni verrebbero inizializzati (nessuna scrittura).",
+        print(f"dry-run: {len(da_fare_run)} comuni verrebbero inizializzati (nessuna scrittura).",
               file=sys.stderr)
         return BOOTSTRAP_OK
 
@@ -467,7 +476,7 @@ def cmd_bootstrap(args: argparse.Namespace) -> int:
 
     fermato = False
     ok_run = vuoti_run = err_run = 0
-    for indice, istat in enumerate(da_fare):
+    for indice, istat in enumerate(da_fare_run):
         if stop_path is not None and stop_path.exists():
             print(f"stop richiesto ({stop_path}): interrompo prima di {istat}.",
                   file=sys.stderr)
@@ -501,7 +510,7 @@ def cmd_bootstrap(args: argparse.Namespace) -> int:
                 errori=errori,
                 totale_candidati=totale_candidati,
             )
-        if args.delay and indice < len(da_fare) - 1:
+        if args.delay and indice < len(da_fare_run) - 1:
             time.sleep(args.delay)
 
     print(
@@ -737,6 +746,10 @@ def _build_parser() -> argparse.ArgumentParser:
                       help="Comuni per piattaforma in modalita' --canary (default 2).")
     boot.add_argument("--limit", type=int, default=None,
                       help="Numero massimo di comuni da inizializzare in questo lotto.")
+    boot.add_argument("--piattaforma", choices=sorted(bootstrap_sel.PIATTAFORME_CATALOGO_REFRESH),
+                      help="Seleziona una sola piattaforma del catalogo nel nuovo checkpoint.")
+    boot.add_argument("--max-per-run", type=int, default=None,
+                      help="Tenta al massimo N comuni per esecuzione; richiede --checkpoint.")
     boot.add_argument("--delay", type=float, default=2.0,
                       help="Secondi di pausa fra un comune e l'altro (default 2.0).")
     boot.add_argument("--checkpoint", type=Path, default=None,

@@ -25,6 +25,9 @@ from pathlib import Path
 
 from treasureiq.connettore import PIATTAFORME_REFRESH
 
+# Il catalogo servizi chiama entrambe le varianti WP del censimento "wordpress_agid".
+PIATTAFORME_CATALOGO_REFRESH = PIATTAFORME_REFRESH | {"wordpress_agid"}
+
 
 def _piattaforma_del_file(payload: dict) -> str | None:
     """Dominant provider platform of one catalog file, or None.
@@ -60,7 +63,7 @@ def mappa_eleggibili(catalog_dir: Path) -> dict[str, str]:
         except (OSError, json.JSONDecodeError):
             continue
         plat = _piattaforma_del_file(payload)
-        if plat in PIATTAFORME_REFRESH:
+        if plat in PIATTAFORME_CATALOGO_REFRESH:
             eleggibili[percorso.stem] = plat
     return eleggibili
 

@@ -29,12 +29,12 @@ def _catalog(dir_: Path, codice: str, piattaforma: str) -> None:
 
 def _scena(tmp_path: Path) -> Path:
     cat = tmp_path / "catalog"
-    # Five eligible platforms, 3 comuni each, plus two NON-eligible platforms.
+    # Five native catalog labels plus the WordPress catalog alias.
     plats = ["hgate", "comweb", "openpa", "openweb", "comunibootstrapitalia"]
     for pi, plat in enumerate(plats):
         for j in range(3):
             _catalog(cat, f"{pi:02d}{j:04d}", plat)
-    _catalog(cat, "990001", "wordpress_agid")  # NOT eligible
+    _catalog(cat, "990001", "wordpress_agid")  # eligible via census WP mapping
     _catalog(cat, "990002", "magnolia")        # NOT eligible
     return cat
 
@@ -42,9 +42,8 @@ def _scena(tmp_path: Path) -> Path:
 def test_mappa_eleggibili_solo_piattaforme_refresh(tmp_path: Path) -> None:
     cat = _scena(tmp_path)
     m = bootstrap.mappa_eleggibili(cat)
-    assert len(m) == 15  # 5 platforms x 3
-    assert "990001" not in m and "990002" not in m
-    assert set(m.values()) == {"hgate", "comweb", "openpa", "openweb", "comunibootstrapitalia"}
+    assert len(m) == 16
+    assert m["990001"] == "wordpress_agid" and "990002" not in m
 
 
 def test_seleziona_interseca_coda_e_non_inizializzati(tmp_path: Path) -> None:
@@ -58,7 +57,7 @@ def test_seleziona_interseca_coda_e_non_inizializzati(tmp_path: Path) -> None:
     codici = {c for c, _ in cand}
     assert fuori_coda not in codici  # not in queue -> excluded
     assert gia_init not in codici    # already initialised -> excluded
-    assert len(cand) == 13           # 15 - 2
+    assert len(cand) == 14           # 16 - 2
     # Ordered by (platform, codice): stable and reproducible.
     assert cand == sorted(cand, key=lambda cp: (cp[1], cp[0]))
 
@@ -68,14 +67,15 @@ def test_canary_due_per_piattaforma_round_robin(tmp_path: Path) -> None:
     eleggibili = set(bootstrap.mappa_eleggibili(cat))
     cand = bootstrap.seleziona(cat, eleggibili, set())
     scelti = bootstrap.canary(cand, per_piattaforma=2)
-    assert len(scelti) == 10  # 2 x 5 platforms
+    assert len(scelti) == 11  # 2 x 5 platforms + 1 WordPress
     plats = [dict(cand)[c] for c in scelti]
     from collections import Counter
     assert Counter(plats) == {
         "hgate": 2, "comweb": 2, "openpa": 2, "openweb": 2, "comunibootstrapitalia": 2,
+        "wordpress_agid": 1,
     }
-    # Round-robin: first five are rank-0 of each platform (all distinct platforms).
-    assert len(set(plats[:5])) == 5
+    # Round-robin: first six are rank-0 of each platform.
+    assert len(set(plats[:6])) == 6
 
 
 def test_canary_regge_piattaforma_scarsa(tmp_path: Path) -> None:
@@ -93,4 +93,4 @@ def test_lotto_rispetta_limit(tmp_path: Path) -> None:
     cat = _scena(tmp_path)
     cand = bootstrap.seleziona(cat, set(bootstrap.mappa_eleggibili(cat)), set())
     assert len(bootstrap.lotto(cand, 4)) == 4
-    assert len(bootstrap.lotto(cand, None)) == 15
+    assert len(bootstrap.lotto(cand, None)) == 16

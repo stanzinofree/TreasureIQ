@@ -82,6 +82,22 @@ def test_refresh_non_promuove_un_comune_senza_cache_a_discovery(monkeypatch, tmp
     assert sweep_worker.next_batch(config) == []
 
 
+def test_refresh_non_rimette_in_coda_una_lettura_recente(monkeypatch, tmp_path):
+    monkeypatch.setattr(sweep_worker, "_comuni_da_censimento", lambda db: ["001"])
+
+    class Cache:
+        piattaforma = "municipium"
+        controllato_il = "2020-01-01T00:00:00+00:00"
+        letto_il = "9999-01-01T00:00:00+00:00"
+
+    monkeypatch.setattr(sweep_worker, "_connettore_cache", lambda codice: Cache())
+    config = sweep_worker.WorkerConfig(db=tmp_path / "storico.db", mode="refresh")
+    assert sweep_worker.next_batch(config) == []
+    assert sweep_worker.next_batch(
+        sweep_worker.WorkerConfig(db=config.db, mode="confirmation")
+    ) == ["001"]
+
+
 def test_confirmation_usa_la_scadenza_quindicinale_del_contratto(
     monkeypatch, tmp_path
 ):

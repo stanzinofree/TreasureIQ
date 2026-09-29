@@ -242,7 +242,13 @@ def next_batch(config: WorkerConfig) -> list[str]:
             if config.mode == "refresh" and not refresh_supportato(record.piattaforma):
                 continue
             try:
-                letto = datetime.fromisoformat(record.controllato_il or record.letto_il)
+                # Il refresh aggiorna letto_il e conserva controllato_il del contratto.
+                timestamp = (
+                    record.letto_il
+                    if config.mode == "refresh"
+                    else record.controllato_il or record.letto_il
+                )
+                letto = datetime.fromisoformat(timestamp)
             except ValueError:
                 candidati.append(codice)
                 continue

@@ -322,6 +322,24 @@ def test_dispatcher_piattaforma_non_municipium_ritorna_none(
     assert leggi_connettore(ISTAT, usa_cache=False) is None
 
 
+def test_dispatcher_hgate_usa_il_lettore_egov(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+    monkeypatch.setattr(connettore_mod, "LIVE_DIR", tmp_path)
+    monkeypatch.setattr(connettore_mod, "comune_per_codice", lambda codice: _comune())
+    monkeypatch.setattr(connettore_mod, "_Sonda", _SondaFinta)
+    monkeypatch.setattr(
+        recognition_adapter_mod, "firma_da_registro",
+        lambda **_kw: Firma(piattaforma=Piattaforma.HGATE, prova="server: HGATE"),
+    )
+    fake_mod = types.ModuleType("treasureiq.egov")
+    fake_mod.leggi_egov = lambda comune, sonda: _esito(
+        at=AmministrazioneTrasparente(indice_url="https://x/at")
+    )
+    monkeypatch.setitem(sys.modules, "treasureiq.egov", fake_mod)
+
+    assert leggi_connettore(ISTAT, usa_cache=False) is not None
+    assert (tmp_path / "connettore" / f"{ISTAT}.json").exists()
+
+
 def test_dispatcher_comune_ignoto_ritorna_none(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(connettore_mod, "comune_per_codice", lambda codice: None)
     assert leggi_connettore("000000", usa_cache=False) is None

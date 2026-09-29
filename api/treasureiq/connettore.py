@@ -471,7 +471,7 @@ def leggi_connettore(
                     logger.info("connettore Municipium non ancora disponibile")
                     return None
                 esito = leggi_municipium(comune, sonda)
-            elif firma.piattaforma == Piattaforma.EGOV:
+            elif firma.piattaforma in (Piattaforma.EGOV, Piattaforma.HGATE):
                 try:
                     from treasureiq.egov import leggi_egov
                 except ImportError:  # noqa: BLE001 — B4b non ancora costruito: deferred, non un crash

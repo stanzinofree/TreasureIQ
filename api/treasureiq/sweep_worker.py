@@ -429,6 +429,18 @@ def _scrivi_stato_worker(stato: dict) -> None:
         logger.warning("stato worker non scrivibile (%s): %s", percorso, exc)
 
 
+def _heartbeat_refresh() -> None:
+    """Conferma che il worker è vivo anche quando non ci sono batch da fare."""
+    try:
+        stato = json.loads(_percorso_stato_worker().read_text("utf-8"))
+    except (OSError, json.JSONDecodeError):
+        stato = {}
+    if not isinstance(stato, dict):
+        stato = {}
+    stato.update(aggiornato_il=datetime.now(timezone.utc).isoformat(), modo="refresh")
+    _scrivi_stato_worker(stato)
+
+
 def _metriche_iniziali(totale: int) -> dict:
     """Lo scheletro delle metriche per-run, con i contatori a zero."""
     return {
@@ -754,6 +766,8 @@ def run(config: WorkerConfig) -> int:
             logger.info("nessun comune residuo nel ciclo giornaliero")
             if config.once:
                 return 0
+            if config.mode == "refresh":
+                _heartbeat_refresh()
             # Keep the long-running container alive until the next UTC day;
             # exiting would make restart: unless-stopped spin the container.
             time.sleep(max(config.interval_seconds, 60.0))

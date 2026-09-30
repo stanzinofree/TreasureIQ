@@ -1,4 +1,35 @@
+import json
+from datetime import datetime, timezone
+
+import pytest
+
 from treasureiq import sweep_worker
+
+
+def test_refresh_idle_aggiorna_heartbeat_e_conserva_ultimo_batch(monkeypatch, tmp_path):
+    monkeypatch.setattr(sweep_worker, "LIVE_DIR", tmp_path)
+    monkeypatch.setattr(sweep_worker, "next_batch", lambda config: [])
+    stato = tmp_path / "_worker_status.json"
+    stato.write_text(json.dumps({
+        "aggiornato_il": "2020-01-01T00:00:00+00:00",
+        "ultimo_batch": {"riusciti": 3},
+    }))
+
+    def ferma_dopo_heartbeat(seconds):
+        raise StopIteration
+
+    monkeypatch.setattr(sweep_worker.time, "sleep", ferma_dopo_heartbeat)
+    with pytest.raises(StopIteration):
+        sweep_worker.run(
+            sweep_worker.WorkerConfig(db=tmp_path / "storico.db", mode="refresh")
+        )
+
+    aggiornato = json.loads(stato.read_text())
+    assert aggiornato["ultimo_batch"] == {"riusciti": 3}
+    assert aggiornato["modo"] == "refresh"
+    assert datetime.fromisoformat(aggiornato["aggiornato_il"]) > datetime(
+        2020, 1, 1, tzinfo=timezone.utc
+    )
 
 
 def test_next_batch_esclude_i_comuni_gia_misurati(monkeypatch, tmp_path):

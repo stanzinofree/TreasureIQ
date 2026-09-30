@@ -309,8 +309,8 @@ def _sistemi(
 ) -> list[ComponenteOut]:
     """Component health from real signals only — never from seed freshness."""
     stato_worker = {
-        "attivo": ("ok", "il refresh continuo ha completato un batch di recente"),
-        "fermo": ("degraded", "nessun batch di refresh recente: worker fermo o sospeso"),
+        "attivo": ("ok", "worker refresh attivo"),
+        "fermo": ("degraded", "nessun segnale recente dal worker refresh"),
         "sconosciuto": ("unknown", "nessuno stato worker registrato"),
     }[refresh.worker_stato]
     return [

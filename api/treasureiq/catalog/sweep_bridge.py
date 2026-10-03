@@ -25,14 +25,22 @@ def _platform(value: object) -> str | None:
     return None if text in _UNKNOWN_PLATFORMS else text
 
 
-def _compatibility(value: object) -> AgidCompatibility:
+def _compatibility(value: object, base_misura: object) -> AgidCompatibility:
+    """Map the sweep's AgID adherence to the catalog verdict.
+
+    The producer (`censimento._riassumi`) writes a 0..1 share computed either
+    on the whole AgID service model (`modello_intero`) or only on the boxes
+    the portal API exposes (`schema_esposto`). Only a complete whole-model
+    reading is COMPATIBLE: 100% of the exposed schema says nothing about the
+    boxes the API does not serialize.
+    """
     if value is None or value == "":
         return AgidCompatibility.UNKNOWN
     try:
         score = float(value)
     except (TypeError, ValueError):
         return AgidCompatibility.UNKNOWN
-    if score >= 100:
+    if score >= 1.0 and base_misura == "modello_intero":
         return AgidCompatibility.COMPATIBLE
     if score > 0:
         return AgidCompatibility.PARTIAL
@@ -58,26 +66,40 @@ def _ordinary_mode(
     return AccessMode.UNAVAILABLE
 
 
+_EVIDENCE_FIELDS = (
+    "aderenza",
+    "base_misura",
+    "sezioni_esposte",
+    "sezioni_dichiarate",
+    "scheda_campione",
+    "nota_misura",
+)
+
+
 def _section_statuses(row: Mapping[str, object]) -> tuple[dict[str, SectionStatus], dict[str, CapabilityStatus]]:
-    exposed = {
-        item.strip()
-        for item in str(row.get("sezioni_esposte") or "").split(",")
-        if item.strip()
-    }
-    measured = row.get("sezioni_esposte") is not None
+    """What the sweep row actually measured.
+
+    `sezioni_esposte` lists the AgID sections (descrizione, come_fare, …) of
+    ONE sample service page. Finding them proves the comune publishes service
+    pages; it says nothing about offices or contacts (a service page's
+    `contatti` box is not an office directory), and reading a single sample is
+    not a verified connector capability. Everything else stays UNKNOWN.
+    """
     section_names = ("services", "offices", "contacts", "transparency")
-    sections = {
-        name: SectionStatus.PRESENT if name in exposed else SectionStatus.UNKNOWN
-        for name in section_names
-    }
-    capabilities = {
-        name: CapabilityStatus.VERIFIED if name in exposed else CapabilityStatus.UNKNOWN
-        for name in section_names
-    }
-    if not measured:
-        sections = {name: SectionStatus.UNKNOWN for name in section_names}
-        capabilities = {name: CapabilityStatus.UNKNOWN for name in section_names}
+    sections = {name: SectionStatus.UNKNOWN for name in section_names}
+    capabilities = {name: CapabilityStatus.UNKNOWN for name in section_names}
+    if str(row.get("sezioni_esposte") or "").strip():
+        sections["services"] = SectionStatus.PRESENT
     return sections, capabilities
+
+
+def _evidence(row: Mapping[str, object]) -> dict[str, str]:
+    """The sweep's own measurement fields, verbatim, minus the empty ones."""
+    return {
+        name: str(row[name])
+        for name in _EVIDENCE_FIELDS
+        if row.get(name) is not None and str(row[name]) != ""
+    }
 
 
 def snapshots_from_sweep_row(
@@ -91,7 +113,7 @@ def snapshots_from_sweep_row(
     istat = str(row["codice_istat"])
     platform_id = _platform(row.get("piattaforma"))
     platform_at_id = _platform(row.get("piattaforma_at"))
-    compatibility = _compatibility(row.get("aderenza"))
+    compatibility = _compatibility(row.get("aderenza"), row.get("base_misura"))
     sections, capabilities = _section_statuses(row)
     ordinary_mode = _ordinary_mode(
         row.get("indirizzabilita"),
@@ -126,6 +148,7 @@ def snapshots_from_sweep_row(
         fingerprint=str(row.get("impronta_declinazione") or row.get("impronta_grezza") or "") or None,
         measured_at=measured_at,
         measurement_id=measurement_id,
+        measurement_evidence=_evidence(row),
     )
     at_mode = AccessMode.MEDIATED if platform_at_id else AccessMode.UNAVAILABLE
     transparency = MunicipalityPlatformSnapshot(

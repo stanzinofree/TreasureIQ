@@ -61,6 +61,16 @@ def _transitorio(exc: BaseException) -> bool:
     return False
 
 
+#: Definitive "you cannot have this" answers. 401/403 are included on
+#: purpose: many WordPress sites block `wp-json` for good with a security
+#: plugin, and treating that as an outage would freeze their records forever.
+_STATI_ASSENZA = frozenset({401, 403, 404, 410})
+
+
+def _assente(exc: BaseException) -> bool:
+    return isinstance(exc, httpx.HTTPStatusError) and exc.response.status_code in _STATI_ASSENZA
+
+
 def _fine_pagine(exc: BaseException) -> bool:
     """The proven end of the list: WordPress' 400 with its own error code.
     Any other 400 (e.g. `rest_invalid_param`) is not an end."""
@@ -98,9 +108,11 @@ def _slug_per_id(sonda: object, base: str) -> dict[int, str] | None:
     try:
         termini = sonda.json(f"{base}/wp-json/wp/v2/{TASSONOMIA}?per_page=100&_fields=id,slug")
     except Exception as exc:  # noqa: BLE001 — absence vs outage decided below
-        if _transitorio(exc):
+        if _transitorio(exc) or (
+            isinstance(exc, httpx.HTTPStatusError) and not _assente(exc)
+        ):
             raise LetturaIncompleta(f"tassonomia non disponibile: {exc}") from exc
-        return None  # 404, not JSON, …: the site has no usable taxonomy
+        return None  # 401/403/404/410 or not JSON: no usable taxonomy
     if not isinstance(termini, list):
         return None
     mappa = {
@@ -125,8 +137,9 @@ def _righe(sonda: object, base: str, rest_base: str) -> list[dict]:
                 raise LetturaIncompleta(f"pagina {pagina} non disponibile: {exc}") from exc
             if pagina > 1 and _fine_pagine(exc):
                 break
-            if pagina == 1:
+            if pagina == 1 and _assente(exc):
                 raise _CollezioneAssente(str(exc)) from exc
+            # 400, invalid JSON once the taxonomy proved REST works, …
             raise LetturaIncompleta(f"pagina {pagina} illeggibile: {exc}") from exc
         if not isinstance(blocco, list):
             # A WordPress error object served with 200, or anything else that

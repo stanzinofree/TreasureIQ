@@ -308,3 +308,25 @@ def test_lettura_incompleta_esce_dal_lettore() -> None:
 
     with pytest.raises(LetturaIncompleta):
         wp_agid_mod._leggi_unita_wordpress_agid(_SondaGiu(), _BASE, "unita_organizzative")
+
+
+
+def test_prima_pagina_400_non_ripiega_sull_indice_non_tipizzato() -> None:
+    """QA repro through the real adapter: typed page 1 answers 400 while the
+    untyped request would succeed; the Giunta must not come back as an office."""
+    import httpx
+
+    from treasureiq.unita_tipizzate import LetturaIncompleta
+
+    class _Sonda400(_SondaTipizzata):
+        def json(self, url: str) -> object:
+            if "page=1" in url:
+                richiesta = httpx.Request("GET", url)
+                risposta = httpx.Response(400, request=richiesta, json={"code": "rest_invalid_param"})
+                raise httpx.HTTPStatusError("400", request=richiesta, response=risposta)
+            if "/tipi_unita_organizzativa" in url:
+                return super().json(url)
+            return [{"title": {"rendered": "Giunta Comunale"}, "link": f"{_BASE}/u/giunta/"}]
+
+    with pytest.raises(LetturaIncompleta):
+        wp_agid_mod._leggi_unita_wordpress_agid(_Sonda400(), _BASE, "unita_organizzative")

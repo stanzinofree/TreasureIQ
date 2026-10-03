@@ -189,3 +189,27 @@ def test_collezione_unita_inesistente_resta_non_tipizzata() -> None:
     """Taxonomy present but no unit collection at this rest_base (404 on
     page 1): absent, so the caller keeps its untyped path."""
     assert leggi_unita_tipizzate(_Sonda(_termini(ufficio=9), [_http(404)]), _BASE, "x") is None
+
+
+
+@pytest.mark.parametrize(
+    "prima", [_http(400, "rest_invalid_param"), _http(400), ValueError("Expecting value")]
+)
+def test_prima_pagina_in_errore_non_e_collezione_assente(prima: BaseException) -> None:
+    """QA addendum 2: only a definitive refusal (401/403/404/410) means the
+    collection is absent; anything else on page 1 is an incomplete read."""
+    with pytest.raises(LetturaIncompleta):
+        leggi_unita_tipizzate(_Sonda(_termini(ufficio=9), [prima]), _BASE, "x")
+
+
+@pytest.mark.parametrize("stato", [401, 403, 410])
+def test_rest_negato_resta_non_tipizzato(stato: int) -> None:
+    """A site that refuses REST for good keeps the untyped path instead of
+    never being updated again."""
+    assert leggi_unita_tipizzate(_Sonda(_termini(ufficio=9), [_http(stato)]), _BASE, "x") is None
+    assert leggi_unita_tipizzate(_Sonda(_http(stato), [[]]), _BASE, "x") is None
+
+
+def test_tassonomia_400_e_lettura_incompleta() -> None:
+    with pytest.raises(LetturaIncompleta):
+        leggi_unita_tipizzate(_Sonda(_http(400, "rest_invalid_param"), [[]]), _BASE, "x")

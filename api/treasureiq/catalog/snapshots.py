@@ -48,3 +48,7 @@ class MunicipalityPlatformSnapshot(_SnapshotModel):
     fingerprint: str | None = None
     measured_at: datetime
     measurement_id: str = Field(min_length=1)
+    #: Verbatim evidence of the source measurement (e.g. the sweep's
+    #: `base_misura`, `aderenza`, sampled sections), so the common format keeps
+    #: what a number was measured against. Empty when nothing was measured.
+    measurement_evidence: dict[str, str] = {}

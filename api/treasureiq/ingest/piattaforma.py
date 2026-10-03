@@ -306,6 +306,20 @@ _SISCOM_SEGNALI: tuple[tuple[str, re.Pattern[str]], ...] = (
 )
 #: Soglia di concordanza: due segnali distinti bastano a fissare il vendor.
 _SISCOM_MIN_SEGNALI = 2
+#: Testimone LOCALE del CMS Siscom/DNN. `saas_host`, `app` e la parola
+#: "Siscom" compaiono anche in link uscenti e nelle loro etichette: li hanno
+#: siti ComWeb, OpenPA, Magnolia che usano i servizi SaaS Siscom. Contano
+#: solo prove che appartengono al sito stesso: un attributo con percorso
+#: RELATIVO verso la skin DNN (`/Portals/<n>/`) o il modulo Siscom
+#: (`/DesktopModules/SiscomServiziOnLineAGID`), oppure il meta generator
+#: DotNetNuke. Un URL assoluto (`https://…/Portals/0/…`) non vale: puo'
+#: puntare al SaaS esterno.
+_SISCOM_DNN_LOCALE = re.compile(
+    r"""(?:href|src|action)\s*=\s*["'](?:\./|/)?"""
+    r"""(?:Portals/\d+/|DesktopModules/SiscomServiziOnLineAGID)"""
+    r"""|<meta[^>]+generator[^>]+DotNetNuke""",
+    re.I,
+)
 
 #: Sportello Telematico (Globo) sopra un Drupal: come Siscom sopra DotNetNuke,
 #: due segnali concordanti fissano il fornitore contro il motore nudo. (1) il
@@ -662,9 +676,12 @@ def classifica_risposta(
     # nome-app, modulo AGID, credito) fissano il fornitore. DEFINITIVO e con
     # rango sopra `generator`, così batte un `generator: DotNetNuke` che nomina
     # solo il motore. Sotto la soglia resta zitto: un segnale solo è troppo largo.
+    # Vendor signals alone are not enough: links and their labels name the
+    # comune's service provider. A local CMS witness (relative DNN skin or
+    # Siscom module path, DNN generator) must back them.
     finestra_siscom = html[:FINESTRA_SISCOM]
     siscom_visti = [nome for nome, atteso in _SISCOM_SEGNALI if atteso.search(finestra_siscom)]
-    if len(siscom_visti) >= _SISCOM_MIN_SEGNALI:
+    if len(siscom_visti) >= _SISCOM_MIN_SEGNALI and _SISCOM_DNN_LOCALE.search(finestra_siscom):
         scattate.append(
             FirmaScattata(
                 Piattaforma.PEOPLEWEB,

@@ -15,6 +15,9 @@
  *     already hold a connettore record, it does not enrol new ones. The gap
  *     between "eleggibili" and "inizializzati" is the ingress pipeline still to
  *     be filled, not a slow sweep.
+ *   - Aderenza al modello AgID — platform recognition fused with the coverage
+ *     the census measured. A verdict only on a whole-model measurement of the
+ *     same family; exposed-schema coverage is shown but never a verdict.
  *   - Sistemi — component health from real signals only; the refresh worker's
  *     state comes from its own sidecar, never from how fresh the seed is.
  */
@@ -106,7 +109,7 @@ export default async function Monitoraggio() {
     );
   }
 
-  const { demo, copertura, refresh, sistemi } = report;
+  const { demo, copertura, refresh, aderenza, sistemi } = report;
   const worker = WORKER_LABEL[refresh.worker_stato];
   const batch = refresh.ultimo_batch;
 
@@ -253,7 +256,59 @@ export default async function Monitoraggio() {
           </div>
         </section>
 
-        {/* 4 — Sistemi */}
+        {/* 4 — Aderenza al modello AgID */}
+        <section className="systems__group">
+          <div className="systems__group-head">
+            <h2>Aderenza al modello AgID</h2>
+            <span className="systems__group-note">
+              riconoscimento della piattaforma unito alla copertura misurata dal censimento
+            </span>
+          </div>
+          <div className="panel">
+            <div className="tessere">
+              <Tessera value={n(aderenza.riconosciuti)} label="comuni riconosciuti" />
+              <Tessera value={n(aderenza.con_copertura)} label="con copertura misurata" />
+              <Tessera value={n(aderenza.con_verdetto)} label="con verdetto" />
+            </div>
+            <div className="tabella-scorrevole">
+              <table>
+                <caption>
+                  Il verdetto esiste solo dove la piattaforma è riconosciuta e il
+                  censimento ha misurato la stessa famiglia sul modello AgID
+                  intero. La copertura misurata solo sulle sezioni che l&apos;API
+                  espone è registrata ma non diventa un verdetto: il 100% di quelle
+                  sezioni non prova la conformità al modello.
+                </caption>
+                <thead>
+                  <tr>
+                    <th>Piattaforma</th>
+                    <th>Riconosciuti</th>
+                    <th>Modello intero</th>
+                    <th>Solo schema esposto</th>
+                    <th>Con verdetto</th>
+                    <th>Verdetto medio</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {aderenza.per_piattaforma.map((p) => (
+                    <tr key={p.piattaforma}>
+                      <th scope="row">{p.piattaforma}</th>
+                      <td className="data-table__num">{n(p.riconosciuti)}</td>
+                      <td className="data-table__num">{n(p.su_modello_intero)}</td>
+                      <td className="data-table__num">{n(p.su_schema_esposto)}</td>
+                      <td className="data-table__num">{n(p.con_verdetto)}</td>
+                      <td className="data-table__num">
+                        {p.verdetto_medio == null ? "—" : `${Math.round(p.verdetto_medio * 100)}%`}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        {/* 5 — Sistemi */}
         <section className="systems__group">
           <div className="systems__group-head">
             <h2>Sistemi</h2>

@@ -98,10 +98,35 @@ class ComponenteOut(BaseModel):
     detail: str
 
 
+class AderenzaPiattaforma(BaseModel):
+    piattaforma: str
+    riconosciuti: int
+    con_copertura: int  # census coverage measured on the same family
+    su_modello_intero: int
+    su_schema_esposto: int
+    con_verdetto: int
+    verdetto_medio: float | None
+
+
+class AderenzaOut(BaseModel):
+    """Adherence synthesis: recognition fused with the census coverage.
+
+    A verdict exists only where the comune was recognised and the census
+    measured the same family on the whole AgID model; coverage measured on the
+    exposed schema alone is counted but never becomes a verdict.
+    """
+
+    riconosciuti: int
+    con_copertura: int
+    con_verdetto: int
+    per_piattaforma: list[AderenzaPiattaforma]
+
+
 class MonitoraggioOut(BaseModel):
     demo: DemoCurataOut
     copertura: CoperturaOut
     refresh: RefreshOperativoOut
+    aderenza: AderenzaOut
     sistemi: list[ComponenteOut]
 
 
@@ -304,6 +329,85 @@ def _refresh(live_dir: Path, eleggibili_codici: frozenset[str]) -> RefreshOperat
     )
 
 
+def _misure_censimento(storico_db: Path | None) -> dict[str, dict]:
+    """Latest census row per comune that carries a coverage, read-only."""
+    if storico_db is None or not storico_db.exists():
+        return {}
+    from treasureiq.storico import apri
+
+    try:
+        with apri(storico_db) as conn:
+            righe = conn.execute(
+                "SELECT p.codice_istat, p.piattaforma, p.aderenza, p.base_misura, p.rilevato_il "
+                "FROM portale_snapshot p JOIN (SELECT codice_istat, MAX(rilevato_il) AS r "
+                "FROM portale_snapshot GROUP BY codice_istat) u "
+                "ON p.codice_istat = u.codice_istat AND p.rilevato_il = u.r "
+                "WHERE p.aderenza IS NOT NULL"
+            ).fetchall()
+    except Exception:  # noqa: BLE001 — a broken census must not take the dashboard down
+        logger.warning("monitoraggio: storico.db illeggibile per l'aderenza")
+        return {}
+    return {str(r["codice_istat"]): dict(r) for r in righe}
+
+
+def _aderenza(live_dir: Path, storico_db: Path | None) -> AderenzaOut:
+    """Fuse every persisted ORDINARY_DATA recognition with the census coverage."""
+    from treasureiq.catalog.aderenza import (
+        check_da_riconoscimento,
+        coverage_da_misura,
+        fondi_aderenza,
+        stessa_famiglia,
+    )
+    from treasureiq.catalog.recognition import RecognitionResult
+
+    misure = _misure_censimento(storico_db)
+    per: dict[str, Counter[str]] = {}
+    verdetti: dict[str, list[float]] = {}
+    for percorso in sorted((live_dir / "riconoscimento" / "ordinary_data").glob("*.json")):
+        try:
+            risultato = RecognitionResult.model_validate_json(percorso.read_text("utf-8"))
+        except Exception:  # noqa: BLE001 — one corrupt record is skipped, not fatal
+            continue
+        piattaforma = risultato.platform_id or "non riconosciuta"
+        conta = per.setdefault(piattaforma, Counter())
+        conta["riconosciuti"] += 1
+        misura = misure.get(risultato.source_id)
+        stessa = misura is not None and stessa_famiglia(misura["piattaforma"], risultato.platform_id)
+        aderenza = fondi_aderenza(
+            check_da_riconoscimento(risultato),
+            coverage=coverage_da_misura(misura) if stessa else None,
+            coverage_base=misura["base_misura"] if stessa else None,
+            coverage_misurata_il=misura["rilevato_il"] if stessa else None,
+        )
+        if aderenza.coverage_score is not None:
+            conta["con_copertura"] += 1
+            conta["su_" + str(aderenza.coverage_base)] += 1
+        if aderenza.verdetto is not None:
+            conta["con_verdetto"] += 1
+            verdetti.setdefault(piattaforma, []).append(aderenza.verdetto)
+    righe = [
+        AderenzaPiattaforma(
+            piattaforma=piattaforma,
+            riconosciuti=c["riconosciuti"],
+            con_copertura=c["con_copertura"],
+            su_modello_intero=c["su_modello_intero"],
+            su_schema_esposto=c["su_schema_esposto"],
+            con_verdetto=c["con_verdetto"],
+            verdetto_medio=(
+                round(sum(verdetti[piattaforma]) / len(verdetti[piattaforma]), 3)
+                if verdetti.get(piattaforma) else None
+            ),
+        )
+        for piattaforma, c in sorted(per.items(), key=lambda kv: -kv[1]["riconosciuti"])
+    ]
+    return AderenzaOut(
+        riconosciuti=sum(r.riconosciuti for r in righe),
+        con_copertura=sum(r.con_copertura for r in righe),
+        con_verdetto=sum(r.con_verdetto for r in righe),
+        per_piattaforma=righe,
+    )
+
+
 def _sistemi(
     demo: DemoCurataOut, copertura: CoperturaOut, refresh: RefreshOperativoOut
 ) -> list[ComponenteOut]:
@@ -342,6 +446,7 @@ def build_monitoraggio(
     live_dir: Path,
     comuni_istat_path: Path,
     curated_name: str,
+    storico_db: Path | None = None,
 ) -> MonitoraggioOut:
     """Assemble the four monitoring sections from disk, aggregate-only."""
     demo = _demo(seed_dir, curated_name)
@@ -351,5 +456,6 @@ def build_monitoraggio(
         demo=demo,
         copertura=copertura,
         refresh=refresh,
+        aderenza=_aderenza(live_dir, storico_db),
         sistemi=_sistemi(demo, copertura, refresh),
     )

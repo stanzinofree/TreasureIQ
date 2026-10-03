@@ -6909,7 +6909,9 @@ body {
   margin-top: var(--ma-3);
   padding-left: var(--ma-3);
   border-left: 3px solid var(--kasumi);
-  color: var(--sumi-faint);
+  /* sumi-soft, not sumi-faint: faint measured 4.02:1 on paper at this size,
+     under AA 4.5:1. */
+  color: var(--sumi-soft);
   font-size: 0.88rem;
 }
 

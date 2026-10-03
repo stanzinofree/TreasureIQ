@@ -444,6 +444,37 @@ def test_dnn_senza_segnali_siscom_resta_dotnetnuke():
     )
 
 
+def _siscom_scattata(esito) -> bool:
+    return any(
+        s.piattaforma is Piattaforma.PEOPLEWEB and (s.prova or "").startswith("siscom")
+        for s in esito.scattate
+    )
+
+
+def test_link_siscom_su_home_comweb_non_fanno_un_sito_siscom():
+    """ComWeb (ePublic) home linking the Siscom SaaS services its comune uses.
+
+    Those links name the comune's SERVICE provider, not the site's CMS: with
+    no on-site Siscom witness (module, credit, DNN skin) the signature stays
+    silent and the declared ComWeb generator wins. Real case: 6 of 8 ComWeb
+    comuni in the 2026-09-30 bootstrap batch were routed to the PeopleWeb
+    reader and came back with no offices."""
+    html = (_FIXTURE_SISCOM / "comweb_con_link_siscom_home.html").read_text(encoding="utf-8")
+    esito = classifica_risposta(headers={}, html=html, includi_at=False)
+    assert esito.vincitore.piattaforma is Piattaforma.COMWEB
+    assert not _siscom_scattata(esito)
+
+
+def test_link_siscom_su_home_openpa_non_battono_l_asset_opencity():
+    """OpenPA/OpenCity home with no generator: the only OpenPA evidence is a
+    heuristic asset, which a definitive Siscom signature used to outrank on
+    links alone (Villar Focchiardo 001305, Bordighera 008008)."""
+    html = (_FIXTURE_SISCOM / "openpa_con_link_siscom_home.html").read_text(encoding="utf-8")
+    esito = classifica_risposta(headers={}, html=html, includi_at=False)
+    assert esito.vincitore.piattaforma is Piattaforma.OPENPA
+    assert not _siscom_scattata(esito)
+
+
 def test_un_solo_segnale_siscom_non_basta():
     """Concordanza minima = 2: un solo riferimento (il credito nel footer) è
     troppo largo — un link isolato non fa un'installazione Siscom."""

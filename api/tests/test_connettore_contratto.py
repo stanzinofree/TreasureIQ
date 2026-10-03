@@ -225,6 +225,48 @@ def test_esito_vuoto_non_persistito_dal_dispatcher(monkeypatch: pytest.MonkeyPat
     assert not (tmp_path / "connettore" / f"{ISTAT}.json").exists()
 
 
+def test_home_comweb_con_link_siscom_va_al_lettore_comweb(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    """Full path firma_da_registro -> leggi_connettore, no recognition mock.
+
+    A ComWeb home that links the comune's Siscom SaaS services must reach the
+    ComWeb reader, never the PeopleWeb one (6 of 8 ComWeb comuni in the
+    2026-09-30 bootstrap batch did, and came back with no offices)."""
+    home = (Path(__file__).parent / "fixtures" / "siscom" / "comweb_con_link_siscom_home.html").read_text(
+        encoding="utf-8"
+    )
+
+    class _SondaComWeb(_SondaFinta):
+        def risposta(self, url: str) -> _RispostaFinta:
+            return _RispostaFinta(headers={}, text=home)
+
+    monkeypatch.setattr(connettore_mod, "LIVE_DIR", tmp_path)
+    monkeypatch.setattr(connettore_mod, "comune_per_codice", lambda codice: _comune())
+    monkeypatch.setattr(connettore_mod, "_Sonda", _SondaComWeb)
+    monkeypatch.setattr("treasureiq.registro.registra_scansione", lambda comune, esito: None)
+
+    letto = UfficioConnettore(
+        nome="Ufficio Anagrafe",
+        url="https://www.comunefiv.it/it-it/amministrazione/uffici/anagrafe",
+        source_typed=True,
+        letto_il=datetime.now(timezone.utc).isoformat(),
+    )
+    comweb_finto = types.ModuleType("treasureiq.comweb")
+    comweb_finto.leggi_comweb = lambda comune, sonda: _esito(uffici=[letto]).model_copy(
+        update={"piattaforma": Piattaforma.COMWEB.value}
+    )
+    peopleweb_finto = types.ModuleType("treasureiq.peopleweb")
+    peopleweb_finto.leggi_peopleweb = lambda comune, sonda: pytest.fail("ComWeb home routed to PeopleWeb")
+    monkeypatch.setitem(sys.modules, "treasureiq.comweb", comweb_finto)
+    monkeypatch.setitem(sys.modules, "treasureiq.peopleweb", peopleweb_finto)
+
+    esito = leggi_connettore(ISTAT, usa_cache=False)
+    assert esito is not None
+    assert esito.piattaforma == Piattaforma.COMWEB.value
+    assert [u.nome for u in esito.uffici] == ["Ufficio Anagrafe"]
+
+
 def test_esito_con_sole_aree_non_e_vuoto() -> None:
     """Regressione: eGov produce `uffici=[]` e riempie solo
     `aree_amministrative`; un esito così NON è vuoto e va cachato, altrimenti

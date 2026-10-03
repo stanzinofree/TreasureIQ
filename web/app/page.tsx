@@ -41,15 +41,25 @@ export default function Home() {
                 most granular administration we read, not the only one, and a
                 title that says otherwise undersells the product and misleads
                 about where an answer came from. */}
+            {/* One short, honest welcome. It names what the service does
+                (finds the official page, says when it was read) and what it
+                does not (decide or file anything): no promise of benefits,
+                no claim of national completeness. */}
             <section className="hero-band">
               <div className="hero-band__inner">
-                <p className="hero-claim">Ogni cittadino ha diritti.</p>
-                <h1>Trovarli non dovrebbe essere una caccia al tesoro.</h1>
+                <h1>
+                  Chiedi un servizio pubblico.{" "}
+                  <span className="hero-band__evidenza">Ti mostriamo la fonte.</span>
+                </h1>
                 <p className="lede">
-                  TreasureIQ legge ciò che Stato, Regioni e Comuni hanno
-                  pubblicato e lo confronta con la tua situazione. Ti mostra
-                  cosa puoi ottenere e, quando i dati non bastano, evidenzia
-                  esattamente cosa manca.
+                  Scrivi cosa ti serve e per quale comune. TreasureIQ cerca
+                  nelle pagine pubblicate da Comuni, Regioni e Stato, ti porta
+                  al link ufficiale e dice quando lo ha letto. Se un dato manca,
+                  te lo dice.
+                </p>
+                <p className="hero-band__limiti">
+                  Non invia pratiche e non decide al posto dell&apos;ufficio:
+                  per requisiti e scadenze fa fede la fonte ufficiale.
                 </p>
               </div>
             </section>

@@ -62,8 +62,19 @@ def _transitorio(exc: BaseException) -> bool:
 
 
 def _fine_pagine(exc: BaseException) -> bool:
-    """WordPress answers 400 (`rest_post_invalid_page_number`) past the end."""
-    return isinstance(exc, httpx.HTTPStatusError) and exc.response.status_code == 400
+    """The proven end of the list: WordPress' 400 with its own error code.
+    Any other 400 (e.g. `rest_invalid_param`) is not an end."""
+    if not (isinstance(exc, httpx.HTTPStatusError) and exc.response.status_code == 400):
+        return False
+    try:
+        corpo = exc.response.json()
+    except ValueError:
+        return False
+    return isinstance(corpo, dict) and corpo.get("code") == "rest_post_invalid_page_number"
+
+
+class _CollezioneAssente(Exception):
+    """Page 1 of the unit collection does not exist (e.g. 404)."""
 
 
 @dataclass(frozen=True)
@@ -112,11 +123,15 @@ def _righe(sonda: object, base: str, rest_base: str) -> list[dict]:
         except Exception as exc:  # noqa: BLE001 — end of pages vs outage decided below
             if _transitorio(exc):
                 raise LetturaIncompleta(f"pagina {pagina} non disponibile: {exc}") from exc
-            if pagina > 1 and not _fine_pagine(exc):
-                raise LetturaIncompleta(f"pagina {pagina} illeggibile: {exc}") from exc
-            break
+            if pagina > 1 and _fine_pagine(exc):
+                break
+            if pagina == 1:
+                raise _CollezioneAssente(str(exc)) from exc
+            raise LetturaIncompleta(f"pagina {pagina} illeggibile: {exc}") from exc
         if not isinstance(blocco, list):
-            break
+            # A WordPress error object served with 200, or anything else that
+            # is not a page of units: never read it as "no more units".
+            raise LetturaIncompleta(f"pagina {pagina} non e' un elenco di unita'")
         righe.extend(r for r in blocco if isinstance(r, dict))
         if len(blocco) < _PER_PAGINA:
             break
@@ -131,9 +146,13 @@ def leggi_unita_tipizzate(
     slug_per_id = _slug_per_id(sonda, base)
     if slug_per_id is None:
         return None
+    try:
+        righe = _righe(sonda, base, rest_base)
+    except _CollezioneAssente:
+        return None  # taxonomy without this unit collection: stay untyped
     unita: list[UnitaTipizzata] = []
     visti: set[str] = set()
-    for riga in _righe(sonda, base, rest_base):
+    for riga in righe:
         titolo_raw = riga.get("title")
         titolo = titolo_raw.get("rendered") if isinstance(titolo_raw, dict) else titolo_raw
         link = riga.get("link")

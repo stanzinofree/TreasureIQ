@@ -14,9 +14,15 @@ from treasureiq.unita_tipizzate import AREA, FUORI, UFFICIO, LetturaIncompleta, 
 _BASE = "https://www.comune.esempio.it"
 
 
-def _http(stato: int) -> httpx.HTTPStatusError:
+def _http(stato: int, codice: str | None = None) -> httpx.HTTPStatusError:
     richiesta = httpx.Request("GET", _BASE)
-    return httpx.HTTPStatusError(str(stato), request=richiesta, response=httpx.Response(stato, request=richiesta))
+    corpo = {"code": codice, "message": "x", "data": {"status": stato}} if codice else None
+    risposta = httpx.Response(stato, request=richiesta, json=corpo) if corpo else httpx.Response(stato, request=richiesta)
+    return httpx.HTTPStatusError(str(stato), request=richiesta, response=risposta)
+
+
+#: What WordPress really answers past the last page.
+_FINE_WP = "rest_post_invalid_page_number"
 
 
 def _termini(**ids: int) -> list[dict]:
@@ -45,7 +51,7 @@ class _Sonda:
             return self.termini
         pagina = int(parse_qs(urlparse(url).query).get("page", ["1"])[0])
         if pagina > len(self.pagine):
-            raise _http(400)  # rest_post_invalid_page_number: the valid end
+            raise _http(400, _FINE_WP)  # the valid end, with WordPress' own code
         blocco = self.pagine[pagina - 1]
         if isinstance(blocco, BaseException):
             raise blocco
@@ -148,3 +154,38 @@ def test_pagina_piena_seguita_da_400_e_la_fine_valida() -> None:
     prima = [_unita(f"Ufficio {n}", 9) for n in range(100)]
     unita = leggi_unita_tipizzate(_Sonda(_termini(ufficio=9), [prima]), _BASE, "unita_organizzative")
     assert len(unita) == 100
+
+
+@pytest.mark.parametrize(
+    "seconda",
+    [
+        _http(400, "rest_invalid_param"),        # a 400 that is not the end
+        _http(400),                              # a 400 with no WordPress code
+        {"code": "unexpected_error"},            # an error object served with 200
+    ],
+)
+def test_dopo_pagina_piena_solo_la_fine_wp_comprovata_chiude(seconda: object) -> None:
+    """QA addendum: only `rest_post_invalid_page_number` proves the end."""
+
+    class _SondaSeconda(_Sonda):
+        def json(self, url: str) -> object:
+            if "page=2" in url:
+                if isinstance(seconda, BaseException):
+                    raise seconda
+                return seconda
+            return super().json(url)
+
+    prima = [_unita(f"Ufficio {n}", 9) for n in range(100)]
+    with pytest.raises(LetturaIncompleta):
+        leggi_unita_tipizzate(_SondaSeconda(_termini(ufficio=9), [prima]), _BASE, "unita_organizzative")
+
+
+def test_prima_pagina_non_elenco_e_lettura_incompleta() -> None:
+    with pytest.raises(LetturaIncompleta):
+        leggi_unita_tipizzate(_Sonda(_termini(ufficio=9), [{"code": "unexpected_error"}]), _BASE, "x")
+
+
+def test_collezione_unita_inesistente_resta_non_tipizzata() -> None:
+    """Taxonomy present but no unit collection at this rest_base (404 on
+    page 1): absent, so the caller keeps its untyped path."""
+    assert leggi_unita_tipizzate(_Sonda(_termini(ufficio=9), [_http(404)]), _BASE, "x") is None

@@ -325,6 +325,42 @@ def test_refresh_dati_usa_la_piattaforma_in_cache_senza_firma_home(
     assert esito.controllato_il == precedente.controllato_il
 
 
+def test_refresh_con_lettura_incompleta_conserva_il_record_precedente(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    """A typed reader that only got part of the site (timeout/429/5xx) must
+    not replace a complete record with a truncated one marked fresh."""
+    from treasureiq.unita_tipizzate import LetturaIncompleta
+
+    monkeypatch.setattr(connettore_mod, "LIVE_DIR", tmp_path)
+    precedente = _esito(
+        uffici=[
+            UfficioConnettore(
+                nome="Completo", url="https://x/completo", source_typed=False,
+                letto_il="2026-01-01T00:00:00+00:00",
+            )
+        ],
+        letto_il="2026-01-01T00:00:00+00:00",
+    ).model_copy(update={"piattaforma": Piattaforma.WORDPRESS_GENERICO.value})
+    _in_store(precedente)
+    file_store = tmp_path / "connettore" / f"{ISTAT}.json"
+    prima = file_store.read_text("utf-8")
+    monkeypatch.setattr(connettore_mod, "comune_per_codice", lambda codice: _comune())
+    monkeypatch.setattr(connettore_mod, "_Sonda", _SondaFinta)
+
+    def _parziale(comune, sonda):
+        raise LetturaIncompleta("pagina 2 non disponibile")
+
+    fake_mod = types.ModuleType("treasureiq.wordpress_agid")
+    fake_mod.leggi_wordpress_agid = _parziale
+    monkeypatch.setitem(sys.modules, "treasureiq.wordpress_agid", fake_mod)
+
+    esito = refresh_dati_connettore(ISTAT)
+
+    assert esito == precedente
+    assert file_store.read_text("utf-8") == prima
+
+
 # --- Dispatcher (deferred piattaforme, degrado muto) -------------------
 
 

@@ -260,3 +260,73 @@ def test_estrai_logo_wordpress_agid_nessun_markup_ritorna_none() -> None:
 
 def test_estrai_logo_wordpress_agid_pagina_vuota_ritorna_none() -> None:
     assert wp_agid_mod.estrai_logo_wordpress_agid("", _BASE, HOST) is None
+
+
+# --- Unit types: AgID taxonomy splits offices, areas and political bodies ---
+
+
+class _SondaTipizzata(_SondaFinta):
+    """Answers by URL: the unit-type taxonomy, then one page of typed units.
+    Ids as on Lesa (area=234, ufficio=235) — another site may differ."""
+
+    def json(self, url: str) -> object:
+        if "/wp-json/wp/v2/tipi_unita_organizzativa" in url:
+            return [{"id": 234, "slug": "area"}, {"id": 235, "slug": "ufficio"},
+                    {"id": 237, "slug": "giunta-comunale"}, {"id": 238, "slug": "consiglio-comunale"}]
+        if "page=1" in url:
+            return [
+                {"title": {"rendered": "AREA TECNICA"}, "link": f"{_BASE}/u/area-tecnica/", "tipi_unita_organizzativa": [234]},
+                {"title": {"rendered": "Tributi"}, "link": f"{_BASE}/u/tributi/", "tipi_unita_organizzativa": [235]},
+                {"title": {"rendered": "Giunta Comunale"}, "link": f"{_BASE}/u/giunta/", "tipi_unita_organizzativa": [237]},
+                {"title": {"rendered": "Consiglio Comunale"}, "link": f"{_BASE}/u/consiglio/", "tipi_unita_organizzativa": [238]},
+            ]
+        raise RuntimeError("rest_post_invalid_page_number")
+
+
+def test_tassonomia_separa_uffici_aree_e_organi() -> None:
+    """Real Lesa shape: areas and political bodies used to sit in `uffici`
+    and `aree_amministrative` was always empty."""
+    uffici, aree = wp_agid_mod._leggi_unita_wordpress_agid(_SondaTipizzata(), _BASE, "unita_organizzative")
+
+    assert [u.nome for u in uffici] == ["Tributi"]
+    assert [a.nome for a in aree] == ["AREA TECNICA"]
+
+
+
+def test_lettura_incompleta_esce_dal_lettore() -> None:
+    """A partial typed read must not become a saved esito with fewer offices
+    (or with only the AT link): it leaves the reader for the caller."""
+    import httpx
+
+    from treasureiq.unita_tipizzate import LetturaIncompleta
+
+    class _SondaGiu(_SondaTipizzata):
+        def json(self, url: str) -> object:
+            if "/tipi_unita_organizzativa" in url:
+                raise httpx.ReadTimeout("t")
+            return super().json(url)
+
+    with pytest.raises(LetturaIncompleta):
+        wp_agid_mod._leggi_unita_wordpress_agid(_SondaGiu(), _BASE, "unita_organizzative")
+
+
+
+def test_prima_pagina_400_non_ripiega_sull_indice_non_tipizzato() -> None:
+    """QA repro through the real adapter: typed page 1 answers 400 while the
+    untyped request would succeed; the Giunta must not come back as an office."""
+    import httpx
+
+    from treasureiq.unita_tipizzate import LetturaIncompleta
+
+    class _Sonda400(_SondaTipizzata):
+        def json(self, url: str) -> object:
+            if "page=1" in url:
+                richiesta = httpx.Request("GET", url)
+                risposta = httpx.Response(400, request=richiesta, json={"code": "rest_invalid_param"})
+                raise httpx.HTTPStatusError("400", request=richiesta, response=risposta)
+            if "/tipi_unita_organizzativa" in url:
+                return super().json(url)
+            return [{"title": {"rendered": "Giunta Comunale"}, "link": f"{_BASE}/u/giunta/"}]
+
+    with pytest.raises(LetturaIncompleta):
+        wp_agid_mod._leggi_unita_wordpress_agid(_Sonda400(), _BASE, "unita_organizzative")

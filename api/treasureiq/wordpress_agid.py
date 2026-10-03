@@ -36,7 +36,7 @@ ripiego: entrambi i temi Bootstrap-Italia osservati sulle famiglie WP-AgID
 vicine. Same-HOST stretto (D-S8): un url fuori dall'host esatto del comune
 torna `None`, mai un CDN terzo.
 
-`leggi_wordpress_agid` non solleva MAI: una sezione impraticabile resta al
+`leggi_wordpress_agid` non solleva MAI (eccetto `LetturaIncompleta`: risposta parziale per timeout/429/5xx sulle unità tipizzate, così il chiamante conserva l'ultimo esito completo): una sezione impraticabile resta al
 degrado D-10 (lista/valore vuoto per quella sola sezione), le altre
 estraggono comunque — stesso taglio di `openweb.leggi_openweb`.
 """
@@ -56,6 +56,7 @@ from treasureiq.connettore import (
     UfficioConnettore,
 )
 from treasureiq.ingest.censimento import _Sonda
+from treasureiq.unita_tipizzate import AREA, UFFICIO, LetturaIncompleta, leggi_unita_tipizzate
 from treasureiq.mappa_connettore import (
     MappaConnettore,
     _base_con_schema,
@@ -142,6 +143,27 @@ def _leggi_uffici_wordpress_agid(
         if len(uffici) >= MAX_UFFICI_INDICE:
             break
     return uffici
+
+
+def _leggi_unita_wordpress_agid(
+    sonda: _Sonda, base: str, rest_base: str
+) -> tuple[list[UfficioConnettore], list[AreaAmministrativa]]:
+    """Offices and administrative areas from the AgID unit-type taxonomy.
+
+    Political bodies and external entities leave `uffici`; `area` units fill
+    `aree_amministrative`. A site with no usable taxonomy keeps the untyped
+    index (every unit an office) and no areas, as before."""
+    tipizzate = leggi_unita_tipizzate(sonda, base, rest_base)
+    if tipizzate is None:
+        return _leggi_uffici_wordpress_agid(sonda, base, rest_base), []
+    ora = _ora()
+    uffici = [
+        UfficioConnettore(nome=u.nome, url=u.url, source_typed=False, letto_il=ora)
+        for u in tipizzate
+        if u.categoria == UFFICIO
+    ][:MAX_UFFICI_INDICE]
+    aree = [AreaAmministrativa(nome=u.nome, url=u.url) for u in tipizzate if u.categoria == AREA]
+    return uffici, aree
 
 
 def _leggi_at_wordpress_agid(
@@ -306,16 +328,20 @@ def leggi_wordpress_agid(comune: ComuneNoto, sonda: _Sonda) -> EsitoConnettore:
         )
 
     uffici: list[UfficioConnettore] = []
+    aree_amministrative: list[AreaAmministrativa] = []
     if mappa.uffici.esposto and mappa.uffici.rest_base:
         try:
-            uffici = _leggi_uffici_wordpress_agid(sonda, base, mappa.uffici.rest_base)
+            uffici, aree_amministrative = _leggi_unita_wordpress_agid(
+                sonda, base, mappa.uffici.rest_base
+            )
+        except LetturaIncompleta:
+            # Partial answer (timeout/429/5xx): raise past the per-section
+            # guards so callers keep the previous complete record instead of
+            # saving a truncated one (an AT link alone would make it "non-empty").
+            raise
         except Exception:  # noqa: BLE001 — indice uffici muto: esito senza uffici, mai un crash
             logger.warning("wordpress_agid: lettura indice uffici fallita per %s", comune.nome)
-            uffici = []
-
-    # `CategoriaServizio` (mappa.servizi.categorie) non porta un `url`: senza
-    # un link reale non si fabbrica una `AreaAmministrativa` (D-01 onesto).
-    aree_amministrative: list[AreaAmministrativa] = []
+            uffici, aree_amministrative = [], []
 
     amministrazione_trasparente: AmministrazioneTrasparente | None = None
     try:

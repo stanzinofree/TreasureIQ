@@ -45,9 +45,9 @@ const mono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "TreasureIQ — chatta con i tuoi dati",
+  title: "TreasureIQ — servizi del Comune, con la fonte",
   description:
-    "Incrocia gli open data della PA con il tuo profilo e ti dice a quali agevolazioni hai davvero accesso.",
+    "Chiedi un servizio del tuo Comune: TreasureIQ cerca nelle pagine pubblicate dalle amministrazioni e ti mostra la fonte ufficiale e quando l'ha letta.",
 };
 
 export default function RootLayout({
@@ -70,17 +70,27 @@ export default function RootLayout({
                 nav item, and keeping it separate lets the links become their
                 own scrollable row on narrow screens instead of wrapping the
                 whole masthead onto three lines. */}
+            {/* Two links for the citizen, everything operational behind one
+                native disclosure. The technical pages stay one tab away and
+                keyboard-reachable, but no longer sit level with the service
+                itself. The status pill moves in with them, unchanged: it
+                reports availability, and its meaning is not softened. */}
             <nav className="nav" aria-label="Principale">
-              <Link href="/dati">Qualità dei dati</Link>
-              <Link href="/monitoraggio">Monitoraggio</Link>
-              <Link href="/analytics">Analytics</Link>
-              <Link href="/connectors">Connettori</Link>
-              <Link href="/manifesto">Manifesto</Link>
               <Link href="/info">Come funziona</Link>
+              <Link href="/dati">Fonti e dati</Link>
+              <details className="nav-tecnica">
+                <summary>Area tecnica</summary>
+                <div className="nav-tecnica__menu">
+                  <StatusPill />
+                  <Link href="/monitoraggio">Monitoraggio</Link>
+                  <Link href="/analytics">Analytics</Link>
+                  <Link href="/connectors">Connettori</Link>
+                  <Link href="/manifesto">Manifesto</Link>
+                </div>
+              </details>
             </nav>
             <div className="masthead__right">
               <FeedbackHeader />
-              <StatusPill />
             </div>
           </div>
         </header>

@@ -260,3 +260,33 @@ def test_estrai_logo_wordpress_agid_nessun_markup_ritorna_none() -> None:
 
 def test_estrai_logo_wordpress_agid_pagina_vuota_ritorna_none() -> None:
     assert wp_agid_mod.estrai_logo_wordpress_agid("", _BASE, HOST) is None
+
+
+# --- Unit types: AgID taxonomy splits offices, areas and political bodies ---
+
+
+class _SondaTipizzata(_SondaFinta):
+    """Answers by URL: the unit-type taxonomy, then one page of typed units.
+    Ids as on Lesa (area=234, ufficio=235) — another site may differ."""
+
+    def json(self, url: str) -> object:
+        if "/wp-json/wp/v2/tipi_unita_organizzativa" in url:
+            return [{"id": 234, "slug": "area"}, {"id": 235, "slug": "ufficio"},
+                    {"id": 237, "slug": "giunta-comunale"}, {"id": 238, "slug": "consiglio-comunale"}]
+        if "page=1" in url:
+            return [
+                {"title": {"rendered": "AREA TECNICA"}, "link": f"{_BASE}/u/area-tecnica/", "tipi_unita_organizzativa": [234]},
+                {"title": {"rendered": "Tributi"}, "link": f"{_BASE}/u/tributi/", "tipi_unita_organizzativa": [235]},
+                {"title": {"rendered": "Giunta Comunale"}, "link": f"{_BASE}/u/giunta/", "tipi_unita_organizzativa": [237]},
+                {"title": {"rendered": "Consiglio Comunale"}, "link": f"{_BASE}/u/consiglio/", "tipi_unita_organizzativa": [238]},
+            ]
+        raise RuntimeError("rest_post_invalid_page_number")
+
+
+def test_tassonomia_separa_uffici_aree_e_organi() -> None:
+    """Real Lesa shape: areas and political bodies used to sit in `uffici`
+    and `aree_amministrative` was always empty."""
+    uffici, aree = wp_agid_mod._leggi_unita_wordpress_agid(_SondaTipizzata(), _BASE, "unita_organizzative")
+
+    assert [u.nome for u in uffici] == ["Tributi"]
+    assert [a.nome for a in aree] == ["AREA TECNICA"]

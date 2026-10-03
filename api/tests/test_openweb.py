@@ -331,10 +331,45 @@ def test_leggi_openweb_end_to_end_fixture_reali_collegno(monkeypatch: pytest.Mon
     assert at.indice_url is not None
     assert "openweb/trasparenza" in at.indice_url or "soluzionipa.it" in at.indice_url
 
-    # `/servizi/` non è nella mappa -> il doppio ripiega sulla home (unico
-    # prefisso ancora compatibile) -> le categorie linkate lì bastano a
-    # popolare `aree_amministrative` con dati reali, non un degrado qui.
-    assert len(esito.aree_amministrative) > 0
-    assert all("/servizi-categoria/" in area.url for area in esito.aree_amministrative)
+    # No unit-type taxonomy reachable (this sonda has no REST): offices come
+    # from the HTML index, and service categories are NOT turned into
+    # administrative areas any more.
+    assert esito.aree_amministrative == []
     assert sonda.raggiungibile is True
     assert sonda.richieste >= 1
+
+
+class _SondaTipizzata(_SondaFinta):
+    """Adds the WordPress REST answers for the AgID unit-type taxonomy."""
+
+    def json(self, url: str) -> object:
+        if "/wp-json/wp/v2/tipi_unita_organizzativa" in url:
+            return [{"id": 234, "slug": "area"}, {"id": 235, "slug": "ufficio"},
+                    {"id": 237, "slug": "giunta-comunale"}, {"id": 244, "slug": "ente"}]
+        if "/wp-json/wp/v2/unita_organizzative" in url and "page=1" in url:
+            unita = _BASE_COLLEGNO + "/amministrazione/unita_organizzativa/"
+            return [
+                {"title": {"rendered": "Area Servizi al Cittadino"}, "link": unita + "area-servizi/", "tipi_unita_organizzativa": [234]},
+                {"title": {"rendered": "Ufficio Anagrafe"}, "link": unita + "anagrafe/", "tipi_unita_organizzativa": [235]},
+                {"title": {"rendered": "Giunta Comunale"}, "link": unita + "giunta/", "tipi_unita_organizzativa": [237]},
+                {"title": {"rendered": "Consorzio Rifiuti"}, "link": unita + "consorzio/", "tipi_unita_organizzativa": [244]},
+            ]
+        raise RuntimeError("rest_post_invalid_page_number")
+
+
+def test_leggi_openweb_con_tassonomia_separa_uffici_aree_e_organi(monkeypatch: pytest.MonkeyPatch) -> None:
+    """With the AgID unit types, political bodies and external entities leave
+    the offices and `area` units become the administrative areas."""
+    pagine = {
+        _BASE_COLLEGNO + "/amministrazione/uffici/": _leggi_fixture("openweb_uffici_collegno.html"),
+        _BASE_COLLEGNO: _leggi_fixture("openweb_home_collegno.html"),
+    }
+    muti = {_BASE_COLLEGNO + "/amministrazione/amministrazione-trasparente/"}
+    monkeypatch.setattr(
+        openweb_mod.httpx, "Client", lambda **kwargs: _ClientPerUrl(pagine, muti=muti, **kwargs)
+    )
+
+    esito = openweb_mod.leggi_openweb(_comune(), _SondaTipizzata())
+
+    assert [u.nome for u in esito.uffici] == ["Ufficio Anagrafe"]
+    assert [a.nome for a in esito.aree_amministrative] == ["Area Servizi al Cittadino"]

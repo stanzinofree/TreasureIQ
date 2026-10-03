@@ -24,10 +24,12 @@ Gargallo (NO, solo verifica live, markup non salvato a fixture — CK-3):
   `/openweb/trasparenza`), MAI fetchato — resta un link noto (D-10), non un
   contenuto letto: è fuori dal dominio del comune, quindi fuori dal
   perimetro della guardia SSRF same-host di questo modulo.
-- **Aree amministrative**: best-effort dalle categorie di `{base}/servizi/`
-  (`/servizi-categoria/{slug}/`, un solo GET in più) — se il fetch fallisce
-  o il markup non presenta questa forma, lista vuota onesta: gli uffici
-  restano il risultato principale di questo connettore, non le aree.
+- **Tipi di unità**: OpenWeb è WordPress e pubblica le unità organizzative
+  con la tassonomia AgID `tipi_unita_organizzativa` (`unita_tipizzate`).
+  Dove c'è, uffici = unità `ufficio` e aree amministrative = unità `area`;
+  organi politici ed enti esterni restano fuori. Dove manca, gli uffici
+  vengono dall'indice HTML come prima e le aree restano vuote: le categorie
+  dei servizi (`/servizi-categoria/`) non sono aree amministrative.
 
 `leggi_openweb` non solleva MAI: una sezione impraticabile degrada a vuoto/
 None per quella sola sezione (stesso taglio di `egov.leggi_egov`), le altre
@@ -63,6 +65,7 @@ from treasureiq.ingest.base import USER_AGENT
 from treasureiq.ingest.censimento import _Sonda
 from treasureiq.mappa_connettore import _base_con_schema, _host_senza_www
 from treasureiq.sonda_live import ComuneNoto
+from treasureiq.unita_tipizzate import AREA, UFFICIO, leggi_unita_tipizzate
 
 logger = logging.getLogger(__name__)
 
@@ -98,9 +101,8 @@ MAX_PAGINE_UFFICI = 10
 #: `egov.MAX_UFFICI_INDICE`.
 MAX_UFFICI_INDICE = 200
 
-#: Categoria di servizio (D-09 osservato: Collegno) — best-effort per
-#: `aree_amministrative`, non il risultato principale di questo connettore.
-_RE_SERVIZI_CATEGORIA = re.compile(r"/servizi-categoria/[^\"'?#]+/?", re.IGNORECASE)
+#: REST collection of AgID organisational units on SoluzioniPA OpenWeb.
+_REST_BASE_UNITA = "unita_organizzative"
 
 #: Il link vendor di Amministrazione Trasparente quando NON è same-domain
 #: (osservato reale: Collegno risponde 404 sulla pagina same-domain e la AT
@@ -247,28 +249,6 @@ def _leggi_uffici_openweb(
     return uffici
 
 
-def _leggi_aree_openweb(
-    base: str, host_comune: str, sonda: _Sonda, timeout: float
-) -> list[AreaAmministrativa]:
-    """`aree_amministrative`: categorie di `{base}/servizi/`, best-effort —
-    un solo GET in più. Fetch fallito o markup senza questa forma → `[]`
-    onesto: gli uffici restano il risultato principale di questo
-    connettore."""
-    url = urljoin(base, "/servizi/")
-    letto = _fetch(url, host_comune, timeout, sonda)
-    if letto is None:
-        return []
-    pagina, url_finale = letto
-    aree: list[AreaAmministrativa] = []
-    visti: set[str] = set()
-    for url_area, testo in _ancore(pagina, url_finale, host_comune):
-        if not _RE_SERVIZI_CATEGORIA.search(url_area) or url_area in visti or not testo:
-            continue
-        visti.add(url_area)
-        aree.append(AreaAmministrativa(nome=testo, url=url_area))
-    return aree
-
-
 def _cerca_link_at_vendor(pagina_home: str, base: str) -> str | None:
     """Il link vendor di Amministrazione Trasparente (SoluzioniPA/OpenWeb)
     quando non è same-domain — scansione TESTUALE della home già letta, MAI
@@ -372,11 +352,7 @@ def leggi_openweb(comune: ComuneNoto, sonda: _Sonda) -> EsitoConnettore:
     sonda.raggiungibile = True
     pagina_home, url_home_finale = letta
 
-    try:
-        uffici = _leggi_uffici_openweb(url_home_finale, host_comune, sonda, 8.0)
-    except Exception:  # noqa: BLE001 — indice uffici muto: esito senza uffici, mai un crash
-        logger.warning("openweb: lettura indice uffici fallita per %s", comune.nome)
-        uffici = []
+    uffici, aree = _leggi_unita_openweb(url_home_finale, host_comune, sonda, comune.nome)
 
     try:
         amministrazione_trasparente = _leggi_at_openweb(
@@ -386,12 +362,6 @@ def leggi_openweb(comune: ComuneNoto, sonda: _Sonda) -> EsitoConnettore:
         logger.warning("openweb: lettura amministrazione trasparente fallita per %s", comune.nome)
         amministrazione_trasparente = None
 
-    try:
-        aree = _leggi_aree_openweb(url_home_finale, host_comune, sonda, 8.0)
-    except Exception:  # noqa: BLE001 — categorie servizi mute: esito senza aree, mai un crash
-        logger.warning("openweb: lettura aree amministrative fallita per %s", comune.nome)
-        aree = []
-
     return EsitoConnettore(
         codice_istat=comune.codice_istat,
         piattaforma=PIATTAFORMA_OPENWEB,
@@ -400,6 +370,33 @@ def leggi_openweb(comune: ComuneNoto, sonda: _Sonda) -> EsitoConnettore:
         uffici=uffici,
         amministrazione_trasparente=amministrazione_trasparente,
     )
+
+
+def _leggi_unita_openweb(
+    url_home: str, host_comune: str, sonda: _Sonda, nome_comune: str
+) -> tuple[list[UfficioConnettore], list[AreaAmministrativa]]:
+    """Typed units when the site exposes the AgID taxonomy, otherwise the
+    untyped HTML office index and no areas. Never raises."""
+    parti = urlparse(url_home)
+    base = f"{parti.scheme}://{parti.netloc}"
+    try:
+        tipizzate = leggi_unita_tipizzate(sonda, base, _REST_BASE_UNITA)
+    except Exception:  # noqa: BLE001 — REST muto: si ripiega sull'indice HTML
+        tipizzate = None
+    if tipizzate:
+        ora = _ora()
+        uffici = [
+            UfficioConnettore(nome=u.nome, url=u.url, source_typed=False, letto_il=ora)
+            for u in tipizzate
+            if u.categoria == UFFICIO
+        ][:MAX_UFFICI_INDICE]
+        aree = [AreaAmministrativa(nome=u.nome, url=u.url) for u in tipizzate if u.categoria == AREA]
+        return uffici, aree
+    try:
+        return _leggi_uffici_openweb(url_home, host_comune, sonda, 8.0), []
+    except Exception:  # noqa: BLE001 — indice uffici muto: esito senza uffici, mai un crash
+        logger.warning("openweb: lettura indice uffici fallita per %s", nome_comune)
+        return [], []
 
 
 def _leggi_openweb_cli(codice_istat: str, *, timeout: float = 8.0) -> None:

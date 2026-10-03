@@ -56,6 +56,7 @@ from treasureiq.connettore import (
     UfficioConnettore,
 )
 from treasureiq.ingest.censimento import _Sonda
+from treasureiq.unita_tipizzate import AREA, UFFICIO, leggi_unita_tipizzate
 from treasureiq.mappa_connettore import (
     MappaConnettore,
     _base_con_schema,
@@ -142,6 +143,27 @@ def _leggi_uffici_wordpress_agid(
         if len(uffici) >= MAX_UFFICI_INDICE:
             break
     return uffici
+
+
+def _leggi_unita_wordpress_agid(
+    sonda: _Sonda, base: str, rest_base: str
+) -> tuple[list[UfficioConnettore], list[AreaAmministrativa]]:
+    """Offices and administrative areas from the AgID unit-type taxonomy.
+
+    Political bodies and external entities leave `uffici`; `area` units fill
+    `aree_amministrative`. A site with no usable taxonomy keeps the untyped
+    index (every unit an office) and no areas, as before."""
+    tipizzate = leggi_unita_tipizzate(sonda, base, rest_base)
+    if tipizzate is None:
+        return _leggi_uffici_wordpress_agid(sonda, base, rest_base), []
+    ora = _ora()
+    uffici = [
+        UfficioConnettore(nome=u.nome, url=u.url, source_typed=False, letto_il=ora)
+        for u in tipizzate
+        if u.categoria == UFFICIO
+    ][:MAX_UFFICI_INDICE]
+    aree = [AreaAmministrativa(nome=u.nome, url=u.url) for u in tipizzate if u.categoria == AREA]
+    return uffici, aree
 
 
 def _leggi_at_wordpress_agid(
@@ -306,16 +328,15 @@ def leggi_wordpress_agid(comune: ComuneNoto, sonda: _Sonda) -> EsitoConnettore:
         )
 
     uffici: list[UfficioConnettore] = []
+    aree_amministrative: list[AreaAmministrativa] = []
     if mappa.uffici.esposto and mappa.uffici.rest_base:
         try:
-            uffici = _leggi_uffici_wordpress_agid(sonda, base, mappa.uffici.rest_base)
+            uffici, aree_amministrative = _leggi_unita_wordpress_agid(
+                sonda, base, mappa.uffici.rest_base
+            )
         except Exception:  # noqa: BLE001 — indice uffici muto: esito senza uffici, mai un crash
             logger.warning("wordpress_agid: lettura indice uffici fallita per %s", comune.nome)
-            uffici = []
-
-    # `CategoriaServizio` (mappa.servizi.categorie) non porta un `url`: senza
-    # un link reale non si fabbrica una `AreaAmministrativa` (D-01 onesto).
-    aree_amministrative: list[AreaAmministrativa] = []
+            uffici, aree_amministrative = [], []
 
     amministrazione_trasparente: AmministrazioneTrasparente | None = None
     try:

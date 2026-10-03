@@ -11,6 +11,8 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import pytest
+
 from treasureiq.ingest.piattaforma import (
     Piattaforma,
     classifica_risposta,
@@ -473,6 +475,35 @@ def test_link_siscom_su_home_openpa_non_battono_l_asset_opencity():
     esito = classifica_risposta(headers={}, html=html, includi_at=False)
     assert esito.vincitore.piattaforma is Piattaforma.OPENPA
     assert not _siscom_scattata(esito)
+
+
+_GENERATOR_COMWEB = '<meta name="generator" content="ComWeb - www.epublic.it">'
+
+
+@pytest.mark.parametrize(
+    "link",
+    [
+        # QA repro 1: the vendor name only in the label of an outbound link.
+        '<a href="https://servizipubblicaamministrazione.it/saturnweb/">Servizi Siscom</a>',
+        # QA repro 2: the DNN path only inside the external SaaS URL.
+        '<a href="https://servizipubblicaamministrazione.it/saturnweb/Portals/0/manuale.pdf">Manuale</a>',
+    ],
+)
+def test_etichetta_o_path_esterni_non_sono_testimoni_del_cms(link: str) -> None:
+    """Vendor labels and DNN paths inside an outbound link describe the
+    service provider, not the site: ComWeb must win on both paths."""
+    from treasureiq.catalog import recognition_adapter
+    from treasureiq.catalog.contracts import Surface
+
+    html = f"<html><head>{_GENERATOR_COMWEB}</head><body>{link}</body></html>"
+    esito = classifica_risposta(headers={}, html=html, includi_at=False)
+    assert esito.vincitore.piattaforma is Piattaforma.COMWEB
+    assert not _siscom_scattata(esito)
+    firma = recognition_adapter.firma_da_registro(
+        headers={}, html=html, surface=Surface.ORDINARY_DATA,
+        source_id="001081", entrypoint_url="https://www.comune.example.it/",
+    )
+    assert firma.piattaforma is Piattaforma.COMWEB
 
 
 def test_un_solo_segnale_siscom_non_basta():

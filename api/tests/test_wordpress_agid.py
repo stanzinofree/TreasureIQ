@@ -290,3 +290,21 @@ def test_tassonomia_separa_uffici_aree_e_organi() -> None:
 
     assert [u.nome for u in uffici] == ["Tributi"]
     assert [a.nome for a in aree] == ["AREA TECNICA"]
+
+
+
+def test_lettura_incompleta_esce_dal_lettore() -> None:
+    """A partial typed read must not become a saved esito with fewer offices
+    (or with only the AT link): it leaves the reader for the caller."""
+    import httpx
+
+    from treasureiq.unita_tipizzate import LetturaIncompleta
+
+    class _SondaGiu(_SondaTipizzata):
+        def json(self, url: str) -> object:
+            if "/tipi_unita_organizzativa" in url:
+                raise httpx.ReadTimeout("t")
+            return super().json(url)
+
+    with pytest.raises(LetturaIncompleta):
+        wp_agid_mod._leggi_unita_wordpress_agid(_SondaGiu(), _BASE, "unita_organizzative")

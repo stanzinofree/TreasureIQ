@@ -373,3 +373,23 @@ def test_leggi_openweb_con_tassonomia_separa_uffici_aree_e_organi(monkeypatch: p
 
     assert [u.nome for u in esito.uffici] == ["Ufficio Anagrafe"]
     assert [a.nome for a in esito.aree_amministrative] == ["Area Servizi al Cittadino"]
+
+
+
+def test_leggi_openweb_tassonomia_indisponibile_non_ripiega(monkeypatch: pytest.MonkeyPatch) -> None:
+    """An outage on the typed REST must not fall back to the untyped HTML
+    index (which would put political bodies back among the offices)."""
+    from treasureiq.unita_tipizzate import LetturaIncompleta
+
+    pagine = {
+        _BASE_COLLEGNO + "/amministrazione/uffici/": _leggi_fixture("openweb_uffici_collegno.html"),
+        _BASE_COLLEGNO: _leggi_fixture("openweb_home_collegno.html"),
+    }
+    monkeypatch.setattr(openweb_mod.httpx, "Client", lambda **kwargs: _ClientPerUrl(pagine, **kwargs))
+
+    class _SondaGiu(_SondaFinta):
+        def json(self, url: str) -> object:
+            raise openweb_mod.httpx.ReadTimeout("t")
+
+    with pytest.raises(LetturaIncompleta):
+        openweb_mod.leggi_openweb(_comune(), _SondaGiu())

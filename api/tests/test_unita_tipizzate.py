@@ -6,9 +6,17 @@ from __future__ import annotations
 
 from urllib.parse import parse_qs, urlparse
 
-from treasureiq.unita_tipizzate import AREA, FUORI, UFFICIO, leggi_unita_tipizzate
+import httpx
+import pytest
+
+from treasureiq.unita_tipizzate import AREA, FUORI, UFFICIO, LetturaIncompleta, leggi_unita_tipizzate
 
 _BASE = "https://www.comune.esempio.it"
+
+
+def _http(stato: int) -> httpx.HTTPStatusError:
+    richiesta = httpx.Request("GET", _BASE)
+    return httpx.HTTPStatusError(str(stato), request=richiesta, response=httpx.Response(stato, request=richiesta))
 
 
 def _termini(**ids: int) -> list[dict]:
@@ -37,8 +45,11 @@ class _Sonda:
             return self.termini
         pagina = int(parse_qs(urlparse(url).query).get("page", ["1"])[0])
         if pagina > len(self.pagine):
-            raise RuntimeError("rest_post_invalid_page_number")  # what WordPress answers (400)
-        return self.pagine[pagina - 1]
+            raise _http(400)  # rest_post_invalid_page_number: the valid end
+        blocco = self.pagine[pagina - 1]
+        if isinstance(blocco, BaseException):
+            raise blocco
+        return blocco
 
 
 def test_classifica_per_slug_letto_dal_sito() -> None:
@@ -94,7 +105,7 @@ def test_pagina_oltre_la_prima_finche_il_sito_risponde() -> None:
 def test_senza_tassonomia_ritorna_none() -> None:
     """No taxonomy (error, or rows without slugs) means "cannot tell":
     callers keep their current behaviour."""
-    assert leggi_unita_tipizzate(_Sonda(RuntimeError("404"), [[]]), _BASE, "x") is None
+    assert leggi_unita_tipizzate(_Sonda(_http(404), [[]]), _BASE, "x") is None
     righe_senza_slug = [{"title": {"rendered": "Tributi"}, "link": f"{_BASE}/t/"}]
     assert leggi_unita_tipizzate(_Sonda(righe_senza_slug, [righe_senza_slug]), _BASE, "x") is None
 
@@ -107,3 +118,33 @@ def test_unita_senza_titolo_o_link_scartate_e_dedup_per_url() -> None:
     unita = leggi_unita_tipizzate(sonda, _BASE, "unita_organizzative")
 
     assert [u.nome for u in unita] == ["Tributi"]
+
+
+# --- absence vs outage: an outage must never look like "no taxonomy" ------
+
+
+@pytest.mark.parametrize("guasto", [httpx.ReadTimeout("t"), _http(429), _http(503)])
+def test_tassonomia_indisponibile_non_e_tassonomia_assente(guasto: BaseException) -> None:
+    """QA repro: a taxonomy timeout fell back to the untyped list and put the
+    Giunta back among the offices."""
+    with pytest.raises(LetturaIncompleta):
+        leggi_unita_tipizzate(_Sonda(guasto, [[_unita("Anagrafe", 1)]]), _BASE, "unita_organizzative")
+
+
+@pytest.mark.parametrize("guasto", [httpx.ReadTimeout("t"), _http(429), _http(502)])
+def test_pagina_successiva_indisponibile_e_lettura_incompleta(guasto: BaseException) -> None:
+    """QA repro: page 2 timing out returned page 1 alone as if complete."""
+    prima = [_unita(f"Ufficio {n}", 9) for n in range(100)]
+    with pytest.raises(LetturaIncompleta):
+        leggi_unita_tipizzate(_Sonda(_termini(ufficio=9), [prima, guasto]), _BASE, "unita_organizzative")
+
+
+def test_prima_pagina_indisponibile_e_lettura_incompleta() -> None:
+    with pytest.raises(LetturaIncompleta):
+        leggi_unita_tipizzate(_Sonda(_termini(ufficio=9), [httpx.ConnectError("x")]), _BASE, "x")
+
+
+def test_pagina_piena_seguita_da_400_e_la_fine_valida() -> None:
+    prima = [_unita(f"Ufficio {n}", 9) for n in range(100)]
+    unita = leggi_unita_tipizzate(_Sonda(_termini(ufficio=9), [prima]), _BASE, "unita_organizzative")
+    assert len(unita) == 100

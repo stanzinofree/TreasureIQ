@@ -31,7 +31,7 @@ Gargallo (NO, solo verifica live, markup non salvato a fixture — CK-3):
   vengono dall'indice HTML come prima e le aree restano vuote: le categorie
   dei servizi (`/servizi-categoria/`) non sono aree amministrative.
 
-`leggi_openweb` non solleva MAI: una sezione impraticabile degrada a vuoto/
+`leggi_openweb` non solleva MAI (eccetto `LetturaIncompleta`: risposta parziale per timeout/429/5xx sulle unità tipizzate, così il chiamante conserva l'ultimo esito completo): una sezione impraticabile degrada a vuoto/
 None per quella sola sezione (stesso taglio di `egov.leggi_egov`), le altre
 sezioni estraggono comunque.
 
@@ -65,7 +65,7 @@ from treasureiq.ingest.base import USER_AGENT
 from treasureiq.ingest.censimento import _Sonda
 from treasureiq.mappa_connettore import _base_con_schema, _host_senza_www
 from treasureiq.sonda_live import ComuneNoto
-from treasureiq.unita_tipizzate import AREA, UFFICIO, leggi_unita_tipizzate
+from treasureiq.unita_tipizzate import AREA, UFFICIO, LetturaIncompleta, leggi_unita_tipizzate
 
 logger = logging.getLogger(__name__)
 
@@ -376,12 +376,14 @@ def _leggi_unita_openweb(
     url_home: str, host_comune: str, sonda: _Sonda, nome_comune: str
 ) -> tuple[list[UfficioConnettore], list[AreaAmministrativa]]:
     """Typed units when the site exposes the AgID taxonomy, otherwise the
-    untyped HTML office index and no areas. Never raises."""
+    untyped HTML office index and no areas. Raises only `LetturaIncompleta`."""
     parti = urlparse(url_home)
     base = f"{parti.scheme}://{parti.netloc}"
     try:
         tipizzate = leggi_unita_tipizzate(sonda, base, _REST_BASE_UNITA)
-    except Exception:  # noqa: BLE001 — REST muto: si ripiega sull'indice HTML
+    except LetturaIncompleta:
+        raise  # outage, not absence: never fall back to the untyped index
+    except Exception:  # noqa: BLE001 — REST assente: si ripiega sull'indice HTML
         tipizzate = None
     if tipizzate:
         ora = _ora()

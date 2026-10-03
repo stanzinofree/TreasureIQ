@@ -12,13 +12,18 @@ is by slug, read from the same site. The editorial tagging is a strong
 default, not ground truth (on Lesa "Sindaco" is tagged `commissione`).
 
 `leggi_unita_tipizzate` returns ``None`` when the site exposes no usable
-taxonomy: callers then keep their previous, untyped behaviour.
+taxonomy: callers then keep their previous, untyped behaviour. A site that is
+only temporarily unavailable (timeout, 429, 5xx) is NOT "no taxonomy": that
+raises `LetturaIncompleta`, so callers keep the last complete reading instead
+of saving a truncated or untyped one.
 """
 
 from __future__ import annotations
 
 import html
 from dataclasses import dataclass
+
+import httpx
 
 TASSONOMIA = "tipi_unita_organizzativa"
 
@@ -42,6 +47,25 @@ _PER_PAGINA = 100
 MAX_PAGINE = 3
 
 
+class LetturaIncompleta(RuntimeError):
+    """The site answered only in part: keep the previous reading."""
+
+
+def _transitorio(exc: BaseException) -> bool:
+    """Network failure, rate limit or server error: try again later."""
+    if isinstance(exc, httpx.RequestError):
+        return True
+    if isinstance(exc, httpx.HTTPStatusError):
+        stato = exc.response.status_code
+        return stato == 429 or stato >= 500
+    return False
+
+
+def _fine_pagine(exc: BaseException) -> bool:
+    """WordPress answers 400 (`rest_post_invalid_page_number`) past the end."""
+    return isinstance(exc, httpx.HTTPStatusError) and exc.response.status_code == 400
+
+
 @dataclass(frozen=True)
 class UnitaTipizzata:
     nome: str
@@ -62,8 +86,10 @@ def _categoria(slugs: set[str]) -> str:
 def _slug_per_id(sonda: object, base: str) -> dict[int, str] | None:
     try:
         termini = sonda.json(f"{base}/wp-json/wp/v2/{TASSONOMIA}?per_page=100&_fields=id,slug")
-    except Exception:  # noqa: BLE001 — no taxonomy: caller keeps untyped behaviour
-        return None
+    except Exception as exc:  # noqa: BLE001 — absence vs outage decided below
+        if _transitorio(exc):
+            raise LetturaIncompleta(f"tassonomia non disponibile: {exc}") from exc
+        return None  # 404, not JSON, …: the site has no usable taxonomy
     if not isinstance(termini, list):
         return None
     mappa = {
@@ -83,7 +109,11 @@ def _righe(sonda: object, base: str, rest_base: str) -> list[dict]:
         )
         try:
             blocco = sonda.json(url)
-        except Exception:  # noqa: BLE001 — WordPress answers 400 past the last page
+        except Exception as exc:  # noqa: BLE001 — end of pages vs outage decided below
+            if _transitorio(exc):
+                raise LetturaIncompleta(f"pagina {pagina} non disponibile: {exc}") from exc
+            if pagina > 1 and not _fine_pagine(exc):
+                raise LetturaIncompleta(f"pagina {pagina} illeggibile: {exc}") from exc
             break
         if not isinstance(blocco, list):
             break

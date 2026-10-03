@@ -300,3 +300,42 @@ def test_aderenza_senza_censimento_conta_solo_i_riconosciuti(tmp_path) -> None:
     out = mod._aderenza(tmp_path, None)
 
     assert (out.riconosciuti, out.con_copertura, out.con_verdetto) == (1, 0, 0)
+
+
+
+def test_aderenza_verdetto_solo_su_modello_intero_e_riconosciuti_veri(tmp_path) -> None:
+    """QA repro: four ComWeb records with coverage 0.8 on bases NULL,
+    'ignota', modello_intero, schema_esposto gave 3 verdicts for 1 whole-model
+    measurement; an unrecognised record counted as recognised."""
+    import json as _json
+
+    from treasureiq import monitoraggio as mod
+    from treasureiq.storico import apri
+
+    cartella = tmp_path / "riconoscimento" / "ordinary_data"
+    cartella.mkdir(parents=True)
+    basi = {"001001": None, "001002": "ignota", "001003": "modello_intero", "001004": "schema_esposto"}
+    for codice in basi:
+        (cartella / f"{codice}.json").write_text(_riconoscimento_json(codice, "comweb"), "utf-8")
+    ignoto = _json.loads(_riconoscimento_json("001005", "comweb"))
+    ignoto.update(platform_id=None, recognition_score=0.0)
+    (cartella / "001005.json").write_text(_json.dumps(ignoto), "utf-8")
+
+    db = tmp_path / "storico.db"
+    with apri(db, scrittura=True) as conn:
+        for codice, base in basi.items():
+            conn.execute(
+                "INSERT INTO portale_snapshot (rilevato_il, codice_istat, nome, indirizzabilita, "
+                "recuperabilita, piattaforma, aderenza, base_misura) VALUES (?,?,?,?,?,?,?,?)",
+                ("2026-08-20T00:00:00", codice, codice, "solo_html", "ok", "comweb", 0.8, base),
+            )
+        conn.commit()
+
+    out = mod._aderenza(tmp_path, db)
+
+    assert (out.riconosciuti, out.non_riconosciuti) == (4, 1)
+    assert [r.piattaforma for r in out.per_piattaforma] == ["comweb"]
+    comweb = out.per_piattaforma[0]
+    assert (comweb.con_copertura, comweb.su_modello_intero, comweb.su_schema_esposto) == (2, 1, 1)
+    assert (comweb.con_verdetto, comweb.verdetto_medio) == (1, 0.8)
+    assert out.con_verdetto == 1

@@ -1307,6 +1307,8 @@ export interface AderenzaPiattaforma {
 
 export interface Aderenza {
   riconosciuti: number;
+  /** Recognition records with no platform or a zero score. */
+  non_riconosciuti: number;
   con_copertura: number;
   con_verdetto: number;
   per_piattaforma: AderenzaPiattaforma[];
@@ -1316,7 +1318,8 @@ export interface MonitoraggioOut {
   demo: DemoCurata;
   copertura: Copertura;
   refresh: RefreshOperativo;
-  aderenza: Aderenza;
+  /** Absent when the API predates the adherence synthesis. */
+  aderenza?: Aderenza;
   sistemi: SystemComponent[];
 }
 

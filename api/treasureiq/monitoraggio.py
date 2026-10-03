@@ -117,6 +117,9 @@ class AderenzaOut(BaseModel):
     """
 
     riconosciuti: int
+    #: Recognition records without a platform or with a zero score: kept out
+    #: of every per-platform figure, counted here so nothing disappears.
+    non_riconosciuti: int
     con_copertura: int
     con_verdetto: int
     per_piattaforma: list[AderenzaPiattaforma]
@@ -350,6 +353,9 @@ def _misure_censimento(storico_db: Path | None) -> dict[str, dict]:
     return {str(r["codice_istat"]): dict(r) for r in righe}
 
 
+_BASI_NOTE = frozenset({"modello_intero", "schema_esposto"})
+
+
 def _aderenza(live_dir: Path, storico_db: Path | None) -> AderenzaOut:
     """Fuse every persisted ORDINARY_DATA recognition with the census coverage."""
     from treasureiq.catalog.aderenza import (
@@ -361,6 +367,7 @@ def _aderenza(live_dir: Path, storico_db: Path | None) -> AderenzaOut:
     from treasureiq.catalog.recognition import RecognitionResult
 
     misure = _misure_censimento(storico_db)
+    non_riconosciuti = 0
     per: dict[str, Counter[str]] = {}
     verdetti: dict[str, list[float]] = {}
     for percorso in sorted((live_dir / "riconoscimento" / "ordinary_data").glob("*.json")):
@@ -368,21 +375,32 @@ def _aderenza(live_dir: Path, storico_db: Path | None) -> AderenzaOut:
             risultato = RecognitionResult.model_validate_json(percorso.read_text("utf-8"))
         except Exception:  # noqa: BLE001 — one corrupt record is skipped, not fatal
             continue
-        piattaforma = risultato.platform_id or "non riconosciuta"
+        # Same rule as check_da_riconoscimento: a platform and a positive score.
+        if not risultato.platform_id or risultato.recognition_score <= 0:
+            non_riconosciuti += 1
+            continue
+        piattaforma = risultato.platform_id
         conta = per.setdefault(piattaforma, Counter())
         conta["riconosciuti"] += 1
         misura = misure.get(risultato.source_id)
-        stessa = misura is not None and stessa_famiglia(misura["piattaforma"], risultato.platform_id)
+        # A coverage counts only with a known base: a NULL or unknown
+        # `base_misura` says nothing about what the share was measured on.
+        usabile = (
+            misura is not None
+            and stessa_famiglia(misura["piattaforma"], risultato.platform_id)
+            and misura["base_misura"] in _BASI_NOTE
+        )
         aderenza = fondi_aderenza(
             check_da_riconoscimento(risultato),
-            coverage=coverage_da_misura(misura) if stessa else None,
-            coverage_base=misura["base_misura"] if stessa else None,
-            coverage_misurata_il=misura["rilevato_il"] if stessa else None,
+            coverage=coverage_da_misura(misura) if usabile else None,
+            coverage_base=misura["base_misura"] if usabile else None,
+            coverage_misurata_il=misura["rilevato_il"] if usabile else None,
         )
         if aderenza.coverage_score is not None:
             conta["con_copertura"] += 1
             conta["su_" + str(aderenza.coverage_base)] += 1
-        if aderenza.verdetto is not None:
+        # The new synthesis gives a verdict only on the whole AgID model.
+        if aderenza.verdetto is not None and aderenza.coverage_base == "modello_intero":
             conta["con_verdetto"] += 1
             verdetti.setdefault(piattaforma, []).append(aderenza.verdetto)
     righe = [
@@ -402,6 +420,7 @@ def _aderenza(live_dir: Path, storico_db: Path | None) -> AderenzaOut:
     ]
     return AderenzaOut(
         riconosciuti=sum(r.riconosciuti for r in righe),
+        non_riconosciuti=non_riconosciuti,
         con_copertura=sum(r.con_copertura for r in righe),
         con_verdetto=sum(r.con_verdetto for r in righe),
         per_piattaforma=righe,

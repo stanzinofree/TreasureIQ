@@ -256,7 +256,8 @@ export default async function Monitoraggio() {
           </div>
         </section>
 
-        {/* 4 — Aderenza al modello AgID */}
+        {/* 4 — Aderenza al modello AgID (absent from an older API: skip it) */}
+        {aderenza && (
         <section className="systems__group">
           <div className="systems__group-head">
             <h2>Aderenza al modello AgID</h2>
@@ -305,8 +306,15 @@ export default async function Monitoraggio() {
                 </tbody>
               </table>
             </div>
+            {aderenza.non_riconosciuti > 0 && (
+              <p className="systems__group-note">
+                {n(aderenza.non_riconosciuti)} record di riconoscimento senza
+                piattaforma o con punteggio nullo: esclusi da questa tabella.
+              </p>
+            )}
           </div>
         </section>
+        )}
 
         {/* 5 — Sistemi */}
         <section className="systems__group">

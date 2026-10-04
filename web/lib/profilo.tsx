@@ -39,6 +39,8 @@ export type FattoComune = {
    * publish this?" control only makes sense where the answer can be honest,
    * i.e. where we have snapshots to check against. */
   coperto?: boolean;
+  /** A restored answer must not trigger a new portal read on page load. */
+  ripristinato?: boolean;
 };
 
 /** Recapiti letti al volo dal portale di un comune fuori copertura. Nessun

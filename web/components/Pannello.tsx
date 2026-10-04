@@ -262,7 +262,11 @@ export default function Pannello() {
           tenerla pulita. Si mostra solo se il portale è REST-indirizzabile:
           altrimenti MappaServizi non disegna nulla. */}
       {profilo.comune?.istat && (
-        <MappaServizi istat={profilo.comune.istat} variante="pannello" />
+        <MappaServizi
+          istat={profilo.comune.istat}
+          variante="pannello"
+          caricaAlMount={!profilo.comune.ripristinato}
+        />
       )}
 
       {trovate.length > 0 && (

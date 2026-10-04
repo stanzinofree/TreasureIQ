@@ -5310,6 +5310,12 @@ a {
   color: var(--sumi-faint);
 }
 
+.bubble__restored-at {
+  margin: 0.2rem 0 0.8rem;
+  color: var(--sumi-faint);
+  font-size: 0.76rem;
+}
+
 /* Il titolo del servizio e' quello del comune, e a volte il comune ci mette
  * dentro nove uffici in fila ("Anagrafe, Stato civile, Elettorale,
  * Statistica, Leva, Protocollo, Polizia mortuaria e Servizi cimiteriali, URP,

@@ -20,6 +20,24 @@ def test_conversation_reopens_and_keeps_messages(tmp_path) -> None:
     ]
 
 
+def test_response_snapshot_is_bound_to_its_assistant_message(tmp_path) -> None:
+    store = ConversationStore(tmp_path / "conversation.sqlite")
+    conversation_id = store.open().conversation_id
+    store.append_message(conversation_id, "user", "Prima domanda")
+    store.append_message(conversation_id, "assistant", "Prima risposta", {"reply": "Prima risposta"})
+    store.append_message(conversation_id, "user", "Seconda domanda")
+    store.append_message(conversation_id, "assistant", "Seconda risposta", {"reply": "Seconda risposta"})
+
+    messages = store.messages(conversation_id)
+    assert [m.response_snapshot for m in messages] == [
+        None, {"reply": "Prima risposta"}, None, {"reply": "Seconda risposta"},
+    ]
+
+    store.append_event(conversation_id, "risposta", '{"v":2,"message_sequence":2,"response":{"reply":"future"}}')
+    store.append_event(conversation_id, "risposta", "malformed")
+    assert store.messages(conversation_id)[1].response_snapshot == {"reply": "Prima risposta"}
+
+
 def test_forget_deletes_conversation_immediately(tmp_path) -> None:
     store = ConversationStore(tmp_path / "conversation.sqlite")
     opened = store.open()

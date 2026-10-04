@@ -135,3 +135,72 @@ def test_connettore_e_connector_id_piattaforma_none_se_assente():
     result = fondi_aderenza(check, coverage=0.5)
     assert result.connettore == "filodiretto_sp"
     assert result.piattaforma is None
+
+
+# --- census coverage fused with any connector's recognition -------------
+
+from datetime import datetime as _dt, timezone as _tz
+
+from treasureiq.catalog.aderenza import check_da_riconoscimento, stessa_famiglia
+from treasureiq.catalog.contracts import Surface as _Surface
+from treasureiq.catalog.recognition import RecognitionResult
+
+
+def _riconoscimento(*, piattaforma: str | None = "comweb", score: float = 0.998, coverage: float | None = None):
+    return RecognitionResult(
+        source_id="001081",
+        surface=_Surface.ORDINARY_DATA,
+        platform_id=piattaforma,
+        connector_id="comweb_base",
+        connector_version="1.0.0",
+        fingerprint_version="1.0",
+        recognition_score=score,
+        coverage_score=coverage,
+        checked_at=_dt(2026, 10, 3, tzinfo=_tz.utc),
+    )
+
+
+def test_copertura_su_modello_intero_diventa_verdetto() -> None:
+    aderenza = fondi_aderenza(
+        check_da_riconoscimento(_riconoscimento()),
+        coverage=0.818, coverage_base="modello_intero", coverage_misurata_il="2026-08-20",
+    )
+    assert aderenza.verdetto == 0.818
+    assert aderenza.coverage_base == "modello_intero"
+    assert aderenza.coverage_misurata_il == "2026-08-20"
+    assert aderenza.piattaforma == "comweb"
+
+
+def test_copertura_su_schema_esposto_registrata_senza_verdetto() -> None:
+    """User decision: 100% of the exposed boxes is recorded, not a verdict."""
+    aderenza = fondi_aderenza(
+        check_da_riconoscimento(_riconoscimento(piattaforma="wordpress_generico")),
+        coverage=1.0, coverage_base="schema_esposto",
+    )
+    assert aderenza.coverage_score == 1.0
+    assert aderenza.coverage_base == "schema_esposto"
+    assert aderenza.verdetto is None
+
+
+def test_copertura_capability_del_riconoscimento_non_e_il_verdetto() -> None:
+    """The recognition's own coverage (capabilities recovered) is another
+    measure: without a census coverage there is no verdict, not a zero."""
+    aderenza = fondi_aderenza(check_da_riconoscimento(_riconoscimento(coverage=0.0)))
+    assert aderenza.coverage_score is None
+    assert aderenza.verdetto is None
+
+
+def test_riconoscimento_senza_piattaforma_non_sblocca() -> None:
+    check = check_da_riconoscimento(_riconoscimento(piattaforma=None, score=0.0))
+    aderenza = fondi_aderenza(check, coverage=1.0, coverage_base="modello_intero")
+    assert aderenza.verdetto is None
+
+
+def test_stessa_famiglia_censimento_riconoscimento() -> None:
+    assert stessa_famiglia("peopleweb", "openweb")
+    assert stessa_famiglia("peopleweb", "peopleweb")
+    assert stessa_famiglia("wp_design_comuni", "wordpress_agid")
+    assert stessa_famiglia("comweb", "comweb")
+    assert not stessa_famiglia("comweb", "peopleweb")
+    assert not stessa_famiglia("regione_veneto", "wordpress_agid")
+    assert not stessa_famiglia(None, "comweb")

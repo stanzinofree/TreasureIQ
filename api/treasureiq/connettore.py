@@ -533,6 +533,25 @@ def leggi_connettore(
         return None
     if esito.riconoscimento is not None:
         _in_recognition_store(esito.riconoscimento)
+    else:
+        # Readers without a recognition of their own (ComWeb, PeopleWeb,
+        # OpenWeb, eGov, …): persist the registry's, computed offline on the
+        # home already fetched, so the adherence synthesis can fuse them too.
+        try:
+            from treasureiq.catalog.contracts import Surface
+            from treasureiq.catalog.recognition_adapter import risultato_registro
+
+            risultato = risultato_registro(
+                headers=dict(risposta.headers),
+                html=risposta.text,
+                surface=Surface.ORDINARY_DATA,
+                source_id=codice_istat,
+                entrypoint_url=base,
+            )
+            if risultato is not None:
+                _in_recognition_store(risultato.model_dump(mode="json"))
+        except Exception:  # noqa: BLE001 — recognition is diagnostic, never blocks BASE
+            logger.info("riconoscimento registro non salvato per %s", codice_istat)
     fonte_hash, fonte_etag, fonte_last_modified = _firma_fonte(risposta)
     esito = esito.model_copy(
         update={

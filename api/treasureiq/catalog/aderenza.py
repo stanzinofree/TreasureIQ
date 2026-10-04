@@ -22,6 +22,51 @@ from pydantic import Field
 
 from treasureiq.catalog.checks import CheckResult, CheckStatus
 from treasureiq.catalog.contracts import Surface, _StrictModel
+from treasureiq.catalog.recognition import RecognitionResult
+
+#: Census platform family -> platform ids the recognition may report for the
+#: same data contract. The census measures families (one service-sheet model
+#: per family); recognition names connectors. Only a match lets a coverage
+#: measured by the census describe the connector that was recognised.
+FAMIGLIE_CENSIMENTO: dict[str, frozenset[str]] = {
+    "wp_design_comuni": frozenset({
+        "wp_design_comuni", "wordpress_generico", "wordpress_agid", "comunibootstrapitalia",
+    }),
+    "peopleweb": frozenset({"peopleweb", "openweb"}),  # Siscom + SoluzioniPA OpenWeb
+    "comweb": frozenset({"comweb"}),
+}
+
+
+def stessa_famiglia(piattaforma_censimento: object, piattaforma_riconosciuta: object) -> bool:
+    """True when the census measured the same data contract that was recognised."""
+    famiglia = FAMIGLIE_CENSIMENTO.get(str(piattaforma_censimento or ""))
+    return bool(famiglia and piattaforma_riconosciuta in famiglia)
+
+
+def check_da_riconoscimento(risultato: RecognitionResult) -> CheckResult:
+    """The `CheckResult` view of a persisted recognition, for `fondi_aderenza`.
+
+    The recognition's own `coverage_score` (connector capabilities recovered)
+    is deliberately NOT carried over: the verdict must come from the census's
+    data-model coverage, not from a different measure under the same name.
+    """
+    riconosciuto = bool(risultato.platform_id) and risultato.recognition_score > 0
+    return CheckResult(
+        source_id=risultato.source_id,
+        surface=risultato.surface,
+        status=CheckStatus.OK if riconosciuto else CheckStatus.UNKNOWN,
+        source_health=risultato.source_health,
+        recognition_score=risultato.recognition_score,
+        connector_id=risultato.connector_id,
+        connector_version=risultato.connector_version,
+        fingerprint_version=risultato.fingerprint_version,
+        fingerprint=risultato.fingerprint,
+        identity={"platform": risultato.platform_id},
+        evidence=risultato.evidence,
+        failure_reason=risultato.failure_reason,
+        action=risultato.action,
+        checked_at=risultato.checked_at,
+    )
 
 
 def coverage_da_misura(misura: Mapping[str, object] | None) -> float | None:
@@ -56,6 +101,12 @@ class Aderenza(_StrictModel):
     status: CheckStatus
     recognition_score: float | None = Field(default=None, ge=0.0, le=1.0)
     coverage_score: float | None = Field(default=None, ge=0.0, le=1.0)
+    #: What the coverage was measured against (census `base_misura`):
+    #: `modello_intero` (the whole AgID model) or `schema_esposto` (only the
+    #: boxes the portal API exposes). None when unknown or not measured.
+    coverage_base: str | None = None
+    #: When the coverage was measured (census `rilevato_il`), verbatim.
+    coverage_misurata_il: str | None = None
     #: Sintesi 0..1: la copertura misurata, sbloccata dal riconoscimento e
     #: azzerata a None dal drift. None = non sintetizzabile (non riconosciuto,
     #: difforme, o copertura non misurata), mai uno zero inventato.
@@ -66,7 +117,11 @@ class Aderenza(_StrictModel):
 
 
 def fondi_aderenza(
-    check: CheckResult, *, coverage: float | None = None
+    check: CheckResult,
+    *,
+    coverage: float | None = None,
+    coverage_base: str | None = None,
+    coverage_misurata_il: str | None = None,
 ) -> Aderenza:
     """Fonde un `CheckResult` con una copertura misurata (opzionale).
 
@@ -85,6 +140,9 @@ def fondi_aderenza(
       può essere OK con recognition non misurato): serve il riconoscimento vero.
     - riconosciuto + copertura misurata → la copertura stessa.
     - riconosciuto + copertura non misurata → ``None`` (onesto, non uno zero).
+    - copertura misurata solo sullo schema esposto (``coverage_base ==
+      "schema_esposto"``) → ``None``: è registrata nel record, ma il 100% dei
+      box che l'API espone non prova la conformità al modello intero.
     """
     difforme = check.status is CheckStatus.DIFFORME
     # La recognition sblocca la coverage solo se è davvero avvenuta: uno score
@@ -96,7 +154,8 @@ def fondi_aderenza(
     # La copertura fornita ha la precedenza; in mancanza si usa quella che il
     # check porta già con sé (oggi None sul path confirmation).
     coverage_score = coverage if coverage is not None else check.coverage_score
-    verdetto = coverage_score if (riconosciuto and not difforme) else None
+    sintetizzabile = riconosciuto and not difforme and coverage_base != "schema_esposto"
+    verdetto = coverage_score if sintetizzabile else None
     # connettore = motore/plugin (connector_id), stabile per il versionamento e
     # per l'admin; piattaforma = ciò che il riconoscimento ha visto. Sono due
     # cose diverse e vanno tenute separate, non collassate su una chiave sola.
@@ -109,6 +168,8 @@ def fondi_aderenza(
         status=check.status,
         recognition_score=check.recognition_score,
         coverage_score=coverage_score,
+        coverage_base=coverage_base,
+        coverage_misurata_il=coverage_misurata_il,
         verdetto=verdetto,
         difforme=difforme,
         fingerprint=check.fingerprint,

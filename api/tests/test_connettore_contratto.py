@@ -266,6 +266,16 @@ def test_home_comweb_con_link_siscom_va_al_lettore_comweb(
     assert esito.piattaforma == Piattaforma.COMWEB.value
     assert [u.nome for u in esito.uffici] == ["Ufficio Anagrafe"]
 
+    # The ComWeb reader builds no recognition of its own: the registry's is
+    # persisted, so the adherence synthesis has a record to fuse.
+    import json as _json
+
+    riconoscimento = _json.loads(
+        (tmp_path / "riconoscimento" / "ordinary_data" / f"{ISTAT}.json").read_text("utf-8")
+    )
+    assert riconoscimento["platform_id"] == "comweb"
+    assert riconoscimento["recognition_score"] > 0
+
 
 def test_esito_con_sole_aree_non_e_vuoto() -> None:
     """Regressione: eGov produce `uffici=[]` e riempie solo

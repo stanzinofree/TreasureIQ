@@ -25,15 +25,16 @@ from __future__ import annotations
 
 import logging
 from dataclasses import dataclass
+from datetime import datetime, timezone
 
 from treasureiq.catalog.contracts import Surface
-from treasureiq.catalog.recognition import FingerprintEvidence
+from treasureiq.catalog.recognition import FingerprintEvidence, RecognitionResult
 from treasureiq.catalog.recognition_bridge import (
     build_recognition_registry,
     build_service_portal_registry,
 )
 from treasureiq.catalog.recognition_plugins import RecognitionObservation
-from treasureiq.catalog.recognition_registry import RecognitionMatch
+from treasureiq.catalog.recognition_registry import RecognitionMatch, build_recognition_result
 from treasureiq.ingest.piattaforma import Firma, Piattaforma
 
 logger = logging.getLogger(__name__)
@@ -129,6 +130,40 @@ def firma_da_registro(
         return Firma(Piattaforma.IGNOTA, None)
 
     return Firma(piattaforma, _prova_da_evidence(match))
+
+
+def risultato_registro(
+    *,
+    headers: dict[str, str],
+    html: str,
+    surface: Surface,
+    source_id: str,
+    entrypoint_url: str,
+) -> RecognitionResult | None:
+    """The full recognition outcome behind ``firma_da_registro``, to persist.
+
+    ``firma_da_registro`` keeps only platform and proof; readers that build no
+    recognition of their own (ComWeb, PeopleWeb, OpenWeb, …) persist this one,
+    so every recognised comune has a record the adherence synthesis can fuse.
+    Pure and offline: it reads the home already fetched. ``None`` on a miss or
+    an unsupported surface.
+    """
+    if surface not in _SUPPORTED_SURFACES:
+        return None
+    observation = RecognitionObservation(
+        source_id=source_id,
+        surface=surface,
+        entrypoint_url=entrypoint_url,
+        http_status=200,
+        headers=headers,
+        body=html,
+    )
+    match = _REGISTRY.recognize(observation)
+    if match is None or match.result.platform_id is None:
+        return None
+    return build_recognition_result(
+        observation, match, checked_at=datetime.now(timezone.utc), source_health=True
+    )
 
 
 @dataclass(frozen=True)

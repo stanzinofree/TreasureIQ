@@ -407,13 +407,15 @@ def _in_check_store(result: object) -> None:
 
 
 def leggi_connettore(
-    codice_istat: str, *, usa_cache: bool = True, timeout: float = 8.0
+    codice_istat: str, *, usa_cache: bool = True, timeout: float = 8.0,
+    segnala_errore: bool = False,
 ) -> EsitoConnettore | None:
     """Il connettore di un comune, letto dal vivo o servito dallo store.
 
     `None` se il comune non è noto o non ha sito, o se la piattaforma non ha
-    (ancora) un connettore che sa leggerla — deferred, non un guasto: WP,
-    Halley, AgID aggiungeranno la loro entry senza toccare questa firma.
+    (ancora) un connettore che sa leggerla — deferred, non un guasto. Il
+    bootstrap usa `segnala_errore` per distinguere un guasto di lettura da un
+    esito davvero vuoto e ritentarlo nel checkpoint.
     """
     if usa_cache:
         cache = _da_store(codice_istat)
@@ -525,8 +527,10 @@ def leggi_connettore(
                 esito = leggi_openpa(comune, sonda)
             else:
                 return None
-    except Exception:  # noqa: BLE001 — portale muto: esito assente, mai un crash
-        logger.warning("connettore illeggibile per %s", codice_istat)
+    except Exception:  # noqa: BLE001 — lettura normale degrada; bootstrap ritenta
+        logger.warning("connettore illeggibile per %s", codice_istat, exc_info=True)
+        if segnala_errore:
+            raise
         return None
 
     if esito is None:

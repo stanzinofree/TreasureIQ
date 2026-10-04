@@ -159,8 +159,12 @@ function ComuneRecoveryBlock({ report }: { report: Recovery }) {
             })}
           </ol>
 
-          {/* Screen-reader / no-JS equivalent: the same numbers as a table. */}
-          <table className="sr-only">
+          {/* Screen-reader / no-JS equivalent: the same numbers as a table.
+              `sr-only` sits on a wrapper, not on the table: a table ignores
+              the 1px width and, absolutely positioned, widened the whole page
+              on phones. The div honours 1px and clips the table inside. */}
+          <div className="sr-only">
+          <table>
             <caption>Costo di estrazione per bando, {report.ente}</caption>
             <thead>
               <tr>
@@ -185,6 +189,7 @@ function ComuneRecoveryBlock({ report }: { report: Recovery }) {
               ))}
             </tbody>
           </table>
+          </div>
         </>
       )}
     </section>

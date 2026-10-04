@@ -94,6 +94,12 @@ def arricchisci_ufficio(
         aggiornamento["indirizzo"] = letto.indirizzo
     if letto is not None and letto.responsabile is not None:
         aggiornamento["responsabile"] = letto.responsabile
+    if letto is not None and letto.persone:
+        aggiornamento["persone"] = letto.persone
+    if letto is not None and letto.telefoni:
+        aggiornamento["telefoni"] = letto.telefoni
+    if letto is not None and letto.email:
+        aggiornamento["email"] = letto.email
 
     # Segnale onesto (Slice 2): il responsabile è «verificato assente» solo se la
     # pagina è stata davvero raggiunta E la famiglia ha un estrattore responsabile.

@@ -11,11 +11,15 @@ from __future__ import annotations
 
 from pathlib import Path
 
-import pytest
-
-from treasureiq.ufficio_estrattori import estrai_indirizzo, estrai_responsabile
+from treasureiq.ufficio_estrattori import (
+    estrai_indirizzo,
+    estrai_persone,
+    estrai_recapiti,
+    estrai_responsabile,
+)
 
 FIX = Path(__file__).parent / "fixtures"
+POGGIO_URL = "https://comune.poggiomirteto.ri.it/amministrazione/unita_organizzativa/anagrafe/"
 
 
 def _pagina(nome: str) -> str:
@@ -118,3 +122,33 @@ def test_indirizzo_municipium_postal_address() -> None:
 def test_indirizzo_piattaforma_sconosciuta_none() -> None:
     assert estrai_indirizzo(_pagina("openpa_storo"), piattaforma="isweb") is None
     assert estrai_indirizzo(_pagina("openpa_storo"), piattaforma=None) is None
+
+
+def test_wordpress_agid_anagrafe_persone_sede_e_recapiti() -> None:
+    pagina = (FIX / "wordpress_agid_poggio_mirteto_anagrafe.html").read_text("utf-8")
+    persone = estrai_persone(pagina, piattaforma="wordpress_agid", url=POGGIO_URL)
+    assert [(p.nome, p.ruolo) for p in persone] == [
+        ("Emiliano Armini", "Referente"),
+        ("Simonetta Caramignoli", "Referente"),
+    ]
+    assert [p.url for p in persone] == [
+        "https://comune.poggiomirteto.ri.it/persona_pubblica/emiliano-armini/",
+        "https://comune.poggiomirteto.ri.it/persona_pubblica/simonetta-caramignoli/",
+    ]
+    assert estrai_responsabile(pagina, piattaforma="wordpress_agid") is None
+    assert estrai_indirizzo(pagina, piattaforma="wordpress_agid") == (
+        "Piazza Martiri della Libertà n. 40"
+    )
+    assert estrai_recapiti(pagina, piattaforma="wordpress_agid") == (
+        ["+390765545209", "+390765545230"],
+        ["anagrafe.statocivile@comune.poggiomirteto.ri.it"],
+    )
+
+
+def test_persone_assenti_e_link_fuori_host_non_inventano_referenti() -> None:
+    assert estrai_persone("<section id='contatti'></section>", piattaforma="wordpress_agid", url=POGGIO_URL) == []
+    pagina = (
+        '<section id="persone"><h4><a href="https://example.org/persona">Mario Rossi</a></h4>'
+        '<p>Referente</p></section>'
+    )
+    assert estrai_persone(pagina, piattaforma="wordpress_agid", url=POGGIO_URL) == []

@@ -55,6 +55,18 @@ class Responsabile(BaseModel):
     email: str | None = None
 
 
+class PersonaUfficio(BaseModel):
+    """Persona associata all'ufficio, col ruolo verbatim pubblicato dal Comune.
+
+    L'ordine della pagina non implica gerarchia: più «Referente» restano più
+    persone, senza scegliere un responsabile principale.
+    """
+
+    nome: str = Field(min_length=1)
+    ruolo: str | None = None
+    url: str | None = None
+
+
 class UfficioConnettore(BaseModel):
     """Un ufficio letto dal connettore, coi suoi recapiti verbatim (D-07:
     nessuna cifra passa da un LLM). `source_typed` distingue un recapito
@@ -75,6 +87,7 @@ class UfficioConnettore(BaseModel):
     letto_il: str
     indirizzo: str | None = None
     responsabile: Responsabile | None = None
+    persone: list[PersonaUfficio] = Field(default_factory=list)
 
 
 class BandoAT(BaseModel):

@@ -418,6 +418,9 @@ export interface InfoOffice {
   /** Who is accountable for the office, when the card publishes it structured;
    *  `null`/absent otherwise (D-05), never inferred by an LLM (D-07). */
   responsabile?: Responsabile | null;
+  /** People listed on the official office page, with its verbatim role.
+   *  Their order does not imply a lead contact. */
+  persone?: PersonaUfficio[];
   /** The office card was actually inspected by a platform family that has a
    *  responsabile extractor (Slice 2). Only when `true` does a null
    *  `responsabile` mean "the comune does not publish it" — which the UI may
@@ -742,6 +745,12 @@ export interface Responsabile {
   email: string | null;
 }
 
+export interface PersonaUfficio {
+  nome: string;
+  ruolo: string | null;
+  url: string | null;
+}
+
 /** Un ufficio letto dal connettore, coi suoi recapiti verbatim (D-07:
  *  nessuna cifra passa da un LLM). `source_typed` distingue un recapito
  *  tipizzato dal portale (`tel:`/`mailto:`) da uno solo scritto in prosa —
@@ -761,6 +770,7 @@ export interface UfficioConnettore {
   letto_il: string;
   indirizzo?: string | null;
   responsabile?: Responsabile | null;
+  persone?: PersonaUfficio[];
 }
 
 /** Mirror esatto di `EsitoConnettore` (`api/treasureiq/connettore.py`): il

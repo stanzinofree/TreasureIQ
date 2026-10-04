@@ -28,8 +28,9 @@ from __future__ import annotations
 
 import html
 import re
+from urllib.parse import urljoin, urlsplit
 
-from treasureiq.connettore import Responsabile
+from treasureiq.connettore import PersonaUfficio, Responsabile
 
 _RE_TAG = re.compile(r"<[^>]+>")
 
@@ -191,6 +192,61 @@ def estrai_responsabile(pagina: str, *, piattaforma: str | None) -> Responsabile
     return estrattore(pagina) if estrattore else None
 
 
+def estrai_persone(
+    pagina: str, *, piattaforma: str | None, url: str
+) -> list[PersonaUfficio]:
+    """Tutte le persone del blocco WordPress `#persone`, senza gerarchizzarle."""
+    if piattaforma != "wordpress_agid":
+        return []
+    blocco = _inner(pagina, "persone")
+    if not blocco:
+        return []
+    persone: list[PersonaUfficio] = []
+    visti: set[str] = set()
+    for titolo, ruolo_html in re.findall(
+        r"<h4\b[^>]*>(.*?)</h4>\s*<p\b[^>]*>(.*?)</p>", blocco, re.I | re.S
+    ):
+        anchor = re.search(r'<a\b[^>]*href=["\']([^"\']+)["\'][^>]*>(.*?)</a>',
+                           titolo, re.I | re.S)
+        if anchor is None:
+            continue
+        persona_url = urljoin(url, html.unescape(anchor.group(1)))
+        if (urlsplit(persona_url).scheme not in {"http", "https"}
+                or (urlsplit(persona_url).hostname or "").removeprefix("www.")
+                != (urlsplit(url).hostname or "").removeprefix("www.")):
+            continue
+        nome = _testo(anchor.group(2))
+        if not nome or persona_url in visti:
+            continue
+        visti.add(persona_url)
+        persone.append(PersonaUfficio(
+            nome=nome, ruolo=_testo(ruolo_html) or None, url=persona_url,
+        ))
+    return persone
+
+
+def estrai_recapiti(
+    pagina: str, *, piattaforma: str | None
+) -> tuple[list[str], list[str]]:
+    """Recapiti diretti nel solo blocco `#contatti` della scheda WordPress."""
+    if piattaforma != "wordpress_agid":
+        return [], []
+    blocco = _inner(pagina, "contatti")
+    if not blocco:
+        return [], []
+    telefoni = [
+        _testo(valore)
+        for valore in re.findall(r"<p\b[^>]*>\s*Tel\.?\s*([^<]+)</p>", blocco, re.I)
+    ]
+    telefoni = list(dict.fromkeys(v for v in telefoni if re.fullmatch(r"\+?[\d\s().-]{6,}", v)))
+    email = [
+        html.unescape(valore).strip()
+        for valore in re.findall(r'href=["\']mailto:([^"\']+)["\']', blocco, re.I)
+    ]
+    email = list(dict.fromkeys(v for v in email if "@" in v))
+    return telefoni, email
+
+
 # --------------------------------------------------------------------------- #
 # indirizzo — per famiglia
 # --------------------------------------------------------------------------- #
@@ -232,11 +288,21 @@ def _ind_municipium(pagina: str) -> str | None:
     return _testo(m.group(1)) or None
 
 
+def _ind_wordpress_agid(pagina: str) -> str | None:
+    blocco = _inner(pagina, "sede-principale")
+    if not blocco:
+        return None
+    testo = re.search(r'<div\b[^>]*class=["\'][^"\']*card-text[^"\']*["\'][^>]*>\s*<p>(.*?)</p>',
+                      blocco, re.I | re.S)
+    return _testo(testo.group(1)) if testo else _indirizzo_civico(blocco)
+
+
 _IND_PER_FAMIGLIA = {
     "openpa": _ind_openpa,
     "openweb": _ind_openweb,
     "peopleweb": _ind_peopleweb,
     "municipium": _ind_municipium,
+    "wordpress_agid": _ind_wordpress_agid,
 }
 
 

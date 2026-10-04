@@ -24,7 +24,7 @@ La route REST `/wp-json/wp/v2/unita_organizzative?slug=anagrafe` restituisce
 quindi solo nome e URL. Gli orari arrivano da un successivo percorso di lettura
 della pagina, che oggi non proietta questi dettagli nella scheda risposta.
 
-## Intervento successivo
+## Intervento realizzato nel ramo `feat/municipal-connector-coverage`
 
 1. Leggere la scheda HTML dell'ufficio indicato dalla risposta, con guardia
    host e limiti di timeout/dimensione, usando le sezioni identificate da `id`.
@@ -43,3 +43,10 @@ della pagina, che oggi non proietta questi dettagli nella scheda risposta.
 I modelli esistenti hanno già `indirizzo` e un `responsabile` opzionali, ma
 `OfficeAnswer` ha un solo telefono e un solo responsabile. La forma dei dati
 va estesa per rappresentare fedelmente questo caso prima di popolare la UI.
+
+La lettura su richiesta della scheda ora estrae le persone, i recapiti diretti
+e la sede dallo stesso HTML usato per gli orari. La risposta API espone
+`persone` come elenco di nome, ruolo verbatim e URL. La card mostra «Persone
+indicate dal Comune» e non converte «Referente» in «Responsabile».
+Il telefono resta un campo testuale nella risposta chat, con i due numeri
+separati da virgola; la card li presenta come due link distinti.

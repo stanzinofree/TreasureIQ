@@ -117,7 +117,7 @@ from treasureiq.chat.intent import (
 )
 from treasureiq.chat.engine import chat_engine
 from treasureiq.chat.nomi_genere import sesso_da_nome
-from treasureiq.connettore import Responsabile, UfficioConnettore
+from treasureiq.connettore import PersonaUfficio, Responsabile, UfficioConnettore
 from treasureiq.extract.providers import LLMProvider, load_provider
 from treasureiq.ingest.censimento import Indirizzabilita
 from treasureiq.ingest.websearch import WebSearchNonConfigurato, entro_ttl, search_web
@@ -351,6 +351,9 @@ class OfficeAnswer:
     #: scheda lo pubblica strutturato — mai inferito da un LLM (D-07). `None`
     #: dove non pubblicato.
     responsabile: Responsabile | None = None
+    #: Persone elencate nella scheda, col ruolo pubblicato dal Comune.
+    #: L'ordine non indica un responsabile principale.
+    persone: list[PersonaUfficio] = field(default_factory=list)
     #: La scheda è stata davvero ispezionata da una famiglia che pubblica il
     #: responsabile strutturato (Slice 2). Solo con questo `True` un
     #: `responsabile is None` va mostrato come «non pubblicato dal Comune»;
@@ -2558,6 +2561,7 @@ async def _office_da_ufficio_nominato(
                 if record.get("responsabile")
                 else None
             ),
+            persone=[PersonaUfficio(**p) for p in record.get("persone", [])],
             # Segnale onesto (Slice 2): il wrapper del drill sa se la scheda è
             # stata davvero ispezionata da una famiglia con estrattore.
             responsabile_ispezionato=arricchito.responsabile_ispezionato,
@@ -2751,6 +2755,7 @@ async def _risposta_da_connettore(
             # pubblicati (D-05), mai inventati — come il ramo `_office_da_ufficio_nominato`.
             indirizzo=ufficio.indirizzo,
             responsabile=ufficio.responsabile,
+            persone=ufficio.persone,
             # Segnale onesto (Slice 2): vero solo se la scheda è stata davvero
             # letta da una famiglia con estrattore responsabile. Solo allora un
             # `responsabile is None` significa «il Comune non lo pubblica».

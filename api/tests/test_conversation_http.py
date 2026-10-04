@@ -62,14 +62,18 @@ def test_get_conversation_restores_transcript(monkeypatch, tmp_path) -> None:
     transcript = reopened.get("/api/conversation")
 
     assert transcript.status_code == 200
-    assert transcript.json() == {
-        "messages": [
-            {"role": "user", "content": "ciao"},
-            {"role": "assistant", "content": first.json()["reply"]},
-            {"role": "user", "content": "dove trovo l'anagrafe?"},
-            {"role": "assistant", "content": second.json()["reply"]},
-        ],
-    }
+    messages = transcript.json()["messages"]
+    assert [(m["role"], m["content"]) for m in messages] == [
+        ("user", "ciao"),
+        ("assistant", first.json()["reply"]),
+        ("user", "dove trovo l'anagrafe?"),
+        ("assistant", second.json()["reply"]),
+    ]
+    assert messages[0]["response"] is None
+    assert messages[1]["response"] == first.json()
+    assert messages[3]["response"] == second.json()
+    assert all(m["created_at"] for m in messages)
+    assert "conversation_id" not in str(messages)
 
 
 def test_get_conversation_without_cookie_is_empty(tmp_path, monkeypatch) -> None:
@@ -80,6 +84,20 @@ def test_get_conversation_without_cookie_is_empty(tmp_path, monkeypatch) -> None
     response = TestClient(app).get("/api/conversation")
     assert response.status_code == 200
     assert response.json() == {"messages": []}
+
+
+def test_legacy_turn_without_snapshot_remains_readable(tmp_path, monkeypatch) -> None:
+    store = ConversationStore(tmp_path / "legacy.sqlite")
+    monkeypatch.setattr("treasureiq.api.conversation_store", store)
+    conversation_id = store.open().conversation_id
+    store.append_message(conversation_id, "user", "Dove si trova l'URP?")
+    store.append_message(conversation_id, "assistant", "Contatta l'URP del Comune.")
+    client = TestClient(app)
+    client.cookies.set("tiq_conversation", conversation_id)
+
+    messages = client.get("/api/conversation").json()["messages"]
+    assert messages[1]["content"] == "Contatta l'URP del Comune."
+    assert messages[1]["response"] is None
 
 
 def test_cookie_secure_flag_gates_secure_attribute(monkeypatch, tmp_path) -> None:

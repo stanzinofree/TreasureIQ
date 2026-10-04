@@ -7,6 +7,7 @@ server-side and ``forget`` deletes messages and events immediately.
 
 from __future__ import annotations
 
+import json
 import secrets
 import sqlite3
 from dataclasses import dataclass
@@ -29,6 +30,7 @@ class ConversationMessage:
     role: str
     content: str
     created_at: datetime
+    response_snapshot: dict | None = None
 
 
 class ConversationStore:
@@ -85,11 +87,16 @@ class ConversationStore:
             )
         return Conversation(token, now, now)
 
-    def append_message(self, conversation_id: str, role: str, content: str) -> None:
+    def append_message(
+        self, conversation_id: str, role: str, content: str,
+        response_snapshot: dict | None = None,
+    ) -> None:
         if role not in {"user", "assistant"}:
             raise ValueError("conversation message role must be user or assistant")
         if not content.strip():
             raise ValueError("conversation message cannot be empty")
+        if response_snapshot is not None and role != "assistant":
+            raise ValueError("only assistant messages can have a response snapshot")
         now = _now()
         with self._connect() as db:
             self._require_live(db, conversation_id, now)
@@ -101,6 +108,19 @@ class ConversationStore:
                 "INSERT INTO conversation_messages VALUES (?, ?, ?, ?, ?)",
                 (conversation_id, sequence, role, content, _iso(now)),
             )
+            if response_snapshot is not None:
+                event_sequence = db.execute(
+                    "SELECT COALESCE(MAX(sequence), 0) + 1 FROM conversation_events WHERE conversation_id = ?",
+                    (conversation_id,),
+                ).fetchone()[0]
+                db.execute(
+                    "INSERT INTO conversation_events VALUES (?, ?, ?, ?, ?)",
+                    (
+                        conversation_id, event_sequence, "risposta",
+                        json.dumps({"v": 1, "message_sequence": sequence, "response": response_snapshot}),
+                        _iso(now),
+                    ),
+                )
             db.execute(
                 "UPDATE conversations SET last_seen_at = ? WHERE conversation_id = ?",
                 (_iso(now), conversation_id),
@@ -127,11 +147,28 @@ class ConversationStore:
         with self._connect() as db:
             self._require_live(db, conversation_id, now)
             rows = db.execute(
-                "SELECT role, content, created_at FROM conversation_messages "
+                "SELECT sequence, role, content, created_at FROM conversation_messages "
                 "WHERE conversation_id = ? ORDER BY sequence",
                 (conversation_id,),
             ).fetchall()
-        return [ConversationMessage(row[0], row[1], _parse(row[2])) for row in rows]
+            events = db.execute(
+                "SELECT payload FROM conversation_events "
+                "WHERE conversation_id = ? AND event_type = 'risposta' ORDER BY sequence",
+                (conversation_id,),
+            ).fetchall()
+        snapshots: dict[int, dict] = {}
+        for (payload,) in events:
+            try:
+                event = json.loads(payload)
+                if (event.get("v") == 1 and type(event.get("message_sequence")) is int
+                        and isinstance(event.get("response"), dict)):
+                    snapshots[event["message_sequence"]] = event["response"]
+            except (TypeError, ValueError, AttributeError):
+                continue
+        return [
+            ConversationMessage(row[1], row[2], _parse(row[3]), snapshots.get(row[0]) if row[1] == "assistant" else None)
+            for row in rows
+        ]
 
     def forget(self, conversation_id: str) -> None:
         with self._connect() as db:

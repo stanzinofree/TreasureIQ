@@ -1123,7 +1123,10 @@ export interface ChatTurn {
 }
 
 export interface ConversationTranscript {
-  messages: ChatTurn[];
+  messages: (ChatTurn & {
+    created_at?: string | null;
+    response?: ChatOut | null;
+  })[];
 }
 
 export const chat = (

@@ -24,7 +24,7 @@ from typing import Literal
 
 from fastapi import Depends, FastAPI, HTTPException, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ValidationError
 
 from treasureiq import freschezza
 from treasureiq.catalog import SnapshotStore, Surface
@@ -1429,11 +1429,14 @@ class ChatOut(BaseModel):
 class ConversationMessageOut(BaseModel):
     role: Literal["user", "assistant"]
     content: str
+    created_at: datetime | None = None
+    response: ChatOut | None = None
 
 
 class ConversationOut(BaseModel):
     #: Il token di sessione resta nel cookie httponly, mai nel body (vedi
-    #: ChatOut): questa risposta espone solo la trascrizione.
+    #: ChatOut): questa risposta espone la trascrizione e gli snapshot delle
+    #: risposte, senza il token.
     messages: list[ConversationMessageOut] = []
 
 
@@ -3247,7 +3250,10 @@ async def chat(body: ChatIn, request: Request, response: Response) -> ChatOut:
             else None
         ),
     )
-    conversation_store.append_message(conversation.conversation_id, "assistant", output.reply)
+    conversation_store.append_message(
+        conversation.conversation_id, "assistant", output.reply,
+        response_snapshot=output.model_dump(mode="json"),
+    )
     return output
 
 
@@ -3270,9 +3276,22 @@ def get_conversation(request: Request, response: Response) -> ConversationOut:
         samesite="lax",
         max_age=CONVERSATION_MAX_AGE,
     )
-    return ConversationOut(
-        messages=[ConversationMessageOut(role=m.role, content=m.content) for m in messages],
-    )
+    restored = []
+    for message in messages:
+        snapshot = None
+        if message.response_snapshot is not None:
+            try:
+                candidate = ChatOut.model_validate(message.response_snapshot)
+                if candidate.reply == message.content:
+                    snapshot = candidate
+            except ValidationError:
+                # An older or damaged snapshot must not hide the transcript.
+                pass
+        restored.append(ConversationMessageOut(
+            role=message.role, content=message.content,
+            created_at=message.created_at, response=snapshot,
+        ))
+    return ConversationOut(messages=restored)
 
 
 @app.delete("/api/conversation", tags=["Cittadino"])

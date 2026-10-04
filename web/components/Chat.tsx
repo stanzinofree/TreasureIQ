@@ -190,6 +190,7 @@ interface ChatMessage {
   role: "user" | "assistant";
   content: string;
   reply?: ChatOut;
+  restoredAt?: string;
 }
 
 function MatchCard({
@@ -379,7 +380,8 @@ function PagineWeb({ results }: { results: InfoWebResult[] }) {
  *  (`criteri-e-modalita`). Indipendente dalla mappa servizi (D-B6): niente
  *  intent-gating, si carica al mount come la sonda connettore. Nessun
  *  verdetto di apertura (D-B4) — solo data e caveat di verifica. */
-function BandiComune({ istat }: { istat: string }) {
+function BandiComune({ istat, caricaAlMount = true }: { istat: string; caricaAlMount?: boolean }) {
+  const [caricaSuRichiesta, setCaricaSuRichiesta] = useState(false);
   const [bandi, setBandi] = useState<Bando[] | null>(null);
   const [stato, setStato] = useState<"idle" | "caricamento" | "pronto" | "errore">(
     "idle",
@@ -387,6 +389,7 @@ function BandiComune({ istat }: { istat: string }) {
   const [aperta, setAperta] = useState(false);
 
   useEffect(() => {
+    if (!caricaAlMount && !caricaSuRichiesta) return;
     let vivo = true;
     setStato("caricamento");
     setBandi(null);
@@ -403,7 +406,15 @@ function BandiComune({ istat }: { istat: string }) {
     return () => {
       vivo = false;
     };
-  }, [istat]);
+  }, [istat, caricaAlMount, caricaSuRichiesta]);
+
+  if (!caricaAlMount && !caricaSuRichiesta) {
+    return (
+      <button type="button" className="mappa-servizi__scheda-btn" onClick={() => setCaricaSuRichiesta(true)}>
+        Carica bandi e avvisi del comune
+      </button>
+    );
+  }
 
   // Nessun blocco vuoto persistente (D-B5): comune senza `criteri-e-modalita`
   // o errore di lettura → il blocco non c'è, non un contenitore vuoto.
@@ -988,26 +999,70 @@ export default function Chat() {
   const [passoAttesa, setPassoAttesa] = useState(0);
   const [mostraAvvisoCookie, setMostraAvvisoCookie] = useState(true);
 
-  // A conversation is reopenable, not merely addressable: on a fresh page
-  // load restore the server-side transcript before the citizen asks the next
-  // question. Result cards are intentionally not reconstructed from prose;
-  // the transcript remains truthful and the next answer is recomputed from
-  // the deterministic data path.
+  // Restore the response snapshot saved with each assistant turn. Older turns
+  // without a snapshot remain readable as text.
   useEffect(() => {
     let attivo = true;
     openConversation()
       .then((transcript) => {
-        if (!attivo || transcript.messages.length === 0) return;
-        setMessages((precedenti) => {
-          if (precedenti.length > 0) return precedenti;
-          const ripristinati = transcript.messages.map((message, indice) => ({
-            id: `restored-${indice + 1}`,
-            role: message.role,
-            content: message.content,
-          }));
-          nextId.current = ripristinati.length;
-          return ripristinati;
-        });
+        if (!attivo || transcript.messages.length === 0 || nextId.current > 0) return;
+        const ripristinati: ChatMessage[] = transcript.messages.map((message, indice) => ({
+          id: `restored-${indice + 1}`,
+          role: message.role,
+          content: message.content,
+          ...(message.role === "assistant" && message.response?.reply === message.content
+            ? { reply: message.response, restoredAt: message.created_at ?? undefined }
+            : {}),
+        }));
+        nextId.current = ripristinati.length;
+        setMessages(ripristinati);
+        for (const message of ripristinati) {
+          if (!message.reply) continue;
+          registraTrovate(message.reply.matches.map((match) => ({
+            ancora: ancoraDi(message.id, match.id),
+            titolo: match.title,
+            verdict: match.verdict,
+            verdictLabel: match.verdict_label,
+            livello: match.livello,
+          })));
+        }
+        const ultima = ripristinati.at(-1)?.reply;
+        const capito = ultima?.profilo_capito;
+        if (capito && ultima) {
+          registra({
+              ...(capito.eta != null ? { eta: capito.eta } : {}),
+              ...(capito.sesso ? { sesso: capito.sesso, sessoDedotto: capito.sesso_dedotto } : {}),
+              ...(capito.disabilita === true ? { disabilita: true } : {}),
+              ...(capito.nucleo_familiare != null ? { nucleoFamiliare: capito.nucleo_familiare } : {}),
+              ...(capito.disabilita_nucleo === true ? { disabilitaNucleo: true } : {}),
+              ...(capito.figli_minori != null ? { figliMinori: capito.figli_minori } : {}),
+              ...(ultima.topic && ultima.topic !== "sconosciuto"
+                ? { interessi: [ultima.topic.replace(/_/g, " ")] } : {}),
+              ...(capito.comune_istat && capito.comune_nome ? {
+                comune: {
+                  nome: capito.comune_nome,
+                  istat: capito.comune_istat,
+                  origine: "dichiarato" as const,
+                  confermato: capito.comune_coperto === true,
+                  coperto: capito.comune_coperto === true,
+                  ripristinato: true,
+                },
+              } : {}),
+              ...(ultima.numeri_utili && capito.comune_istat && capito.comune_nome ? {
+                numeriUtili: {
+                  istat: capito.comune_istat,
+                  comune: capito.comune_nome,
+                  telefoni: ultima.numeri_utili.telefoni,
+                  email: ultima.numeri_utili.email,
+                  pec: ultima.numeri_utili.pec,
+                  fonte: ultima.numeri_utili.fonte,
+                  fonteTipo: ultima.numeri_utili.fonte_tipo,
+                  lettoIl: ultima.numeri_utili.letto_il,
+                },
+              } : {}),
+          });
+        }
+        setChiarimentoPendente(ultima?.chiarimento ?? null);
       })
       .catch(() => {
         // An unavailable transcript must not block a new anonymous chat.
@@ -1606,6 +1661,13 @@ export default function Chat() {
                 </>
               )}
             </p>
+            {m.restoredAt && (
+              <p className="bubble__restored-at">
+                Risposta del {new Date(m.restoredAt).toLocaleString("it-IT", {
+                  dateStyle: "medium", timeStyle: "short",
+                })} · ripristinata dalla conversazione
+              </p>
+            )}
             {/* Sul rail INFORMAZIONE la sintesi è la prima riga della scheda,
                 non un paragrafo sciolto sopra di essa: `RispostaCivica` la
                 rende insieme allo stato, così le due cose che qualificano
@@ -1777,7 +1839,10 @@ export default function Chat() {
                     source.access_mode !== "unavailable",
                 ) &&
                   m.reply.profilo_capito?.comune_istat && (
-                    <BandiComune istat={m.reply.profilo_capito.comune_istat} />
+                    <BandiComune
+                      istat={m.reply.profilo_capito.comune_istat}
+                      caricaAlMount={!m.restoredAt}
+                    />
                   )}
 
                 {/* B4 (KAPI 7, bandi-live-agid): esito verificato del topic

@@ -29,13 +29,16 @@ import {
 export default function MappaServizi({
   istat,
   variante,
+  caricaAlMount = true,
 }: {
   istat: string;
   /** «pannello»: si incornicia in un accordion collassato nel pannello di
    *  sinistra e resta muto finché il catalogo non è pronto (niente riga di
    *  caricamento nella colonna). Default: inline, come stava in chat. */
   variante?: "pannello";
+  caricaAlMount?: boolean;
 }) {
+  const [caricaSuRichiesta, setCaricaSuRichiesta] = useState(false);
   const [mappa, setMappa] = useState<MappaConnettore | null>(null);
   const [stato, setStato] = useState<"carico" | "pronto" | "vuoto">("carico");
 
@@ -66,6 +69,7 @@ export default function MappaServizi({
   }
 
   useEffect(() => {
+    if (!caricaAlMount && !caricaSuRichiesta) return;
     let vivo = true;
     setStato("carico");
     setMappa(null);
@@ -86,7 +90,7 @@ export default function MappaServizi({
     return () => {
       vivo = false;
     };
-  }, [istat]);
+  }, [istat, caricaAlMount, caricaSuRichiesta]);
 
   function apri(cat: CategoriaServizio) {
     if (!cat.id) return; // senza term non si può filtrare: chip non-imbuto
@@ -120,6 +124,13 @@ export default function MappaServizi({
     setScheda(null);
   }
 
+  if (!caricaAlMount && !caricaSuRichiesta) {
+    return (
+      <button type="button" className="mappa-servizi__scheda-btn" onClick={() => setCaricaSuRichiesta(true)}>
+        Carica la mappa servizi del comune
+      </button>
+    );
+  }
   if (stato === "vuoto") return null;
   if (stato === "carico") {
     // Nel pannello non mostriamo la riga di attesa: la colonna resta pulita

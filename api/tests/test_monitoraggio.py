@@ -235,3 +235,107 @@ def test_live_dir_assente_non_rompe(tmp_path: Path) -> None:
     assert r.refresh.inizializzati == 0
     assert r.refresh.fuori_perimetro == 0
     assert r.refresh.mai_inizializzati == r.refresh.eleggibili
+
+
+# --- adherence synthesis: recognition fused with census coverage -------
+
+
+def _riconoscimento_json(source_id: str, piattaforma: str) -> str:
+    import json as _json
+
+    return _json.dumps({
+        "source_id": source_id, "surface": "ordinary_data", "platform_id": piattaforma,
+        "connector_id": f"{piattaforma}_base", "connector_version": "1.0.0",
+        "fingerprint_version": "1.0", "recognition_score": 0.99,
+        "checked_at": "2026-10-03T10:00:00Z",
+    })
+
+
+def test_aderenza_fonde_riconoscimento_e_censimento(tmp_path) -> None:
+    from treasureiq import monitoraggio as mod
+    from treasureiq.storico import apri
+
+    live = tmp_path / "live"
+    cartella = live / "riconoscimento" / "ordinary_data"
+    cartella.mkdir(parents=True)
+    for codice, piattaforma in [
+        ("001081", "comweb"),              # whole-model coverage -> verdict
+        ("001082", "wordpress_generico"),  # exposed-schema coverage -> no verdict
+        ("001083", "comweb"),              # census measured another family -> no coverage
+        ("001084", "comweb"),              # never measured
+    ]:
+        (cartella / f"{codice}.json").write_text(_riconoscimento_json(codice, piattaforma), "utf-8")
+
+    db = tmp_path / "storico.db"
+    with apri(db, scrittura=True) as conn:
+        for codice, piattaforma, aderenza, base in [
+            ("001081", "comweb", 0.818, "modello_intero"),
+            ("001082", "wp_design_comuni", 1.0, "schema_esposto"),
+            ("001083", "peopleweb", 0.9, "modello_intero"),
+        ]:
+            conn.execute(
+                "INSERT INTO portale_snapshot (rilevato_il, codice_istat, nome, indirizzabilita, "
+                "recuperabilita, piattaforma, aderenza, base_misura) VALUES (?,?,?,?,?,?,?,?)",
+                ("2026-08-20T00:00:00", codice, codice, "api_uffici", "ok", piattaforma, aderenza, base),
+            )
+        conn.commit()
+
+    out = mod._aderenza(live, db)
+
+    assert (out.riconosciuti, out.con_copertura, out.con_verdetto) == (4, 2, 1)
+    comweb = next(r for r in out.per_piattaforma if r.piattaforma == "comweb")
+    assert (comweb.riconosciuti, comweb.con_copertura, comweb.su_modello_intero) == (3, 1, 1)
+    assert comweb.con_verdetto == 1 and comweb.verdetto_medio == 0.818
+    wp = next(r for r in out.per_piattaforma if r.piattaforma == "wordpress_generico")
+    assert (wp.con_copertura, wp.su_schema_esposto, wp.con_verdetto, wp.verdetto_medio) == (1, 1, 0, None)
+
+
+def test_aderenza_senza_censimento_conta_solo_i_riconosciuti(tmp_path) -> None:
+    from treasureiq import monitoraggio as mod
+
+    cartella = tmp_path / "riconoscimento" / "ordinary_data"
+    cartella.mkdir(parents=True)
+    (cartella / "001081.json").write_text(_riconoscimento_json("001081", "comweb"), "utf-8")
+
+    out = mod._aderenza(tmp_path, None)
+
+    assert (out.riconosciuti, out.con_copertura, out.con_verdetto) == (1, 0, 0)
+
+
+
+def test_aderenza_verdetto_solo_su_modello_intero_e_riconosciuti_veri(tmp_path) -> None:
+    """QA repro: four ComWeb records with coverage 0.8 on bases NULL,
+    'ignota', modello_intero, schema_esposto gave 3 verdicts for 1 whole-model
+    measurement; an unrecognised record counted as recognised."""
+    import json as _json
+
+    from treasureiq import monitoraggio as mod
+    from treasureiq.storico import apri
+
+    cartella = tmp_path / "riconoscimento" / "ordinary_data"
+    cartella.mkdir(parents=True)
+    basi = {"001001": None, "001002": "ignota", "001003": "modello_intero", "001004": "schema_esposto"}
+    for codice in basi:
+        (cartella / f"{codice}.json").write_text(_riconoscimento_json(codice, "comweb"), "utf-8")
+    ignoto = _json.loads(_riconoscimento_json("001005", "comweb"))
+    ignoto.update(platform_id=None, recognition_score=0.0)
+    (cartella / "001005.json").write_text(_json.dumps(ignoto), "utf-8")
+
+    db = tmp_path / "storico.db"
+    with apri(db, scrittura=True) as conn:
+        for codice, base in basi.items():
+            conn.execute(
+                "INSERT INTO portale_snapshot (rilevato_il, codice_istat, nome, indirizzabilita, "
+                "recuperabilita, piattaforma, aderenza, base_misura) VALUES (?,?,?,?,?,?,?,?)",
+                ("2026-08-20T00:00:00", codice, codice, "solo_html", "ok", "comweb", 0.8, base),
+            )
+        conn.commit()
+
+    out = mod._aderenza(tmp_path, db)
+
+    assert (out.riconosciuti, out.non_riconosciuti) == (4, 1)
+    assert [r.piattaforma for r in out.per_piattaforma] == ["comweb"]
+    comweb = out.per_piattaforma[0]
+    assert (comweb.con_copertura, comweb.su_modello_intero, comweb.su_schema_esposto) == (2, 1, 1)
+    assert (comweb.con_verdetto, comweb.verdetto_medio) == (1, 0.8)
+    assert out.con_verdetto == 1

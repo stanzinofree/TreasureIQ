@@ -1292,10 +1292,34 @@ export interface RefreshOperativo {
   ultimo_batch: UltimoBatch | null;
 }
 
+/** Adherence synthesis per platform: recognition fused with the census
+ * coverage. A verdict exists only on a whole-AgID-model measurement of the
+ * same family; exposed-schema coverage is counted, never a verdict. */
+export interface AderenzaPiattaforma {
+  piattaforma: string;
+  riconosciuti: number;
+  con_copertura: number;
+  su_modello_intero: number;
+  su_schema_esposto: number;
+  con_verdetto: number;
+  verdetto_medio: number | null;
+}
+
+export interface Aderenza {
+  riconosciuti: number;
+  /** Recognition records with no platform or a zero score. */
+  non_riconosciuti: number;
+  con_copertura: number;
+  con_verdetto: number;
+  per_piattaforma: AderenzaPiattaforma[];
+}
+
 export interface MonitoraggioOut {
   demo: DemoCurata;
   copertura: Copertura;
   refresh: RefreshOperativo;
+  /** Absent when the API predates the adherence synthesis. */
+  aderenza?: Aderenza;
   sistemi: SystemComponent[];
 }
 

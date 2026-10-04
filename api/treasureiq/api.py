@@ -2446,6 +2446,7 @@ def monitoraggio() -> MonitoraggioOut:
         live_dir=LIVE_DIR,
         comuni_istat_path=DATA_DIR / "comuni-istat.json",
         curated_name=CURATED_SEED,
+        storico_db=DATA_DIR / "storico.db",
     )
 
 

@@ -427,12 +427,11 @@ def test_dispatcher_piattaforma_non_municipium_ritorna_none(
     monkeypatch.setattr(connettore_mod, "LIVE_DIR", tmp_path)
     monkeypatch.setattr(connettore_mod, "comune_per_codice", lambda codice: _comune())
     monkeypatch.setattr(connettore_mod, "_Sonda", _SondaFinta)
-    # DRUPAL: nessun connettore la legge (a differenza di WORDPRESS_GENERICO,
-    # ora instradata su `wordpress_agid.leggi_wordpress_agid`, D-09).
+    # Una piattaforma senza lettore resta un miss esplicito.
     monkeypatch.setattr(
         recognition_adapter_mod, "firma_da_registro",
         lambda **_kw: Firma(
-            piattaforma=Piattaforma.DRUPAL, prova="drupal"
+            piattaforma=Piattaforma.JOOMLA, prova="joomla"
         ),
     )
 

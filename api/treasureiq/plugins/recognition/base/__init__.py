@@ -2,6 +2,10 @@ from treasureiq.plugins.recognition.base.comweb import (
     COMWEB_RECOGNITION_PLUGIN,
     ComWebRecognitionPlugin,
 )
+from treasureiq.plugins.recognition.base.magnolia import (
+    MAGNOLIA_RECOGNITION_PLUGIN,
+    MagnoliaRecognitionPlugin,
+)
 from treasureiq.plugins.recognition.base.wordpress_agid import (
     PLUGIN,
     WordPressAgidRecognitionPlugin,
@@ -15,4 +19,6 @@ __all__ = [
     "WordPressAgidRecognitionPlugin",
     "COMWEB_RECOGNITION_PLUGIN",
     "ComWebRecognitionPlugin",
+    "MAGNOLIA_RECOGNITION_PLUGIN",
+    "MagnoliaRecognitionPlugin",
 ]

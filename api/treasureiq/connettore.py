@@ -278,6 +278,8 @@ PIATTAFORME_REFRESH: frozenset[str] = frozenset(
         Piattaforma.COMUNIBOOTSTRAPITALIA.value,
         Piattaforma.COMWEB.value,
         Piattaforma.OPENPA.value,
+        Piattaforma.DRUPAL.value,
+        Piattaforma.MAGNOLIA.value,
     }
 )
 
@@ -336,6 +338,10 @@ def refresh_dati_connettore(
             elif piattaforma == Piattaforma.OPENPA.value:
                 from treasureiq.openpa import leggi_openpa
                 esito = leggi_openpa(comune, sonda)
+            elif piattaforma in {Piattaforma.DRUPAL.value, Piattaforma.MAGNOLIA.value}:
+                from treasureiq.portali_uffici import leggi_drupal, leggi_magnolia
+                lettore = leggi_drupal if piattaforma == Piattaforma.DRUPAL.value else leggi_magnolia
+                esito = lettore(comune, sonda, timeout=timeout)
             else:
                 logger.info("refresh dati non supportato per piattaforma %s", piattaforma)
                 return precedente
@@ -525,6 +531,10 @@ def leggi_connettore(
                     logger.info("connettore OpenPA non ancora disponibile")
                     return None
                 esito = leggi_openpa(comune, sonda)
+            elif firma.piattaforma in (Piattaforma.DRUPAL, Piattaforma.MAGNOLIA):
+                from treasureiq.portali_uffici import leggi_drupal, leggi_magnolia
+                lettore = leggi_drupal if firma.piattaforma == Piattaforma.DRUPAL else leggi_magnolia
+                esito = lettore(comune, sonda, timeout=timeout, home_html=risposta.text)
             else:
                 return None
     except Exception:  # noqa: BLE001 — lettura normale degrada; bootstrap ritenta

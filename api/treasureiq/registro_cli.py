@@ -73,6 +73,8 @@ _LEGGIBILI = {
     # openpa.py), rotte AgID + argomenti confermate su comuni reali.
     "comweb",
     "openpa",
+    "drupal",
+    "magnolia",
 }
 
 

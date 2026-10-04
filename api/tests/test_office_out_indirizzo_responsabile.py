@@ -63,6 +63,18 @@ def test_office_out_absent_fields_are_none_not_invented():
     assert out.office is not None
     assert out.office.indirizzo is None
     assert out.office.responsabile is None
+    assert out.office.persone_ispezionate is False
+
+
+def test_office_out_carries_verified_absence_of_people():
+    office = OfficeAnswer(
+        nome="Ufficio prova", telefono=None, email=None, orari=None,
+        persone_ispezionate=True,
+    )
+    out = to_info_out(_info(office))
+    assert out.office is not None
+    assert out.office.persone == []
+    assert out.office.persone_ispezionate is True
 
 
 def test_office_out_carries_responsabile_ispezionato_true():

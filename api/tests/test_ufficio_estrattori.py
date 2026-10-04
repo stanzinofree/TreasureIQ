@@ -16,6 +16,7 @@ from treasureiq.ufficio_estrattori import (
     estrai_persone,
     estrai_recapiti,
     estrai_responsabile,
+    persone_ispezionate,
 )
 
 FIX = Path(__file__).parent / "fixtures"
@@ -145,6 +146,19 @@ def test_wordpress_agid_anagrafe_persone_sede_e_recapiti() -> None:
     )
 
 
+def test_wordpress_agid_albano_persone_con_ruolo_in_testo_libero() -> None:
+    pagina = (FIX / "wordpress_agid_albano_anagrafe_persone.html").read_text("utf-8")
+    url = "https://comune.albanolaziale.rm.it/amministrazione/unita_organizzativa/ufficio-anagrafe-e-leva/"
+    persone = estrai_persone(pagina, piattaforma="wordpress_agid", url=url)
+    assert len(persone) == 1
+    assert persone[0].nome == "Simona Polizzano"
+    assert persone[0].ruolo == (
+        "Incarico di dirigente del settore III – politiche educative, sociali e culturali "
+        "– demografici – Simona Polizzano"
+    )
+    assert persone[0].url == "https://comune.albanolaziale.rm.it/persona_pubblica/simona-polizzano/"
+
+
 def test_persone_assenti_e_link_fuori_host_non_inventano_referenti() -> None:
     assert estrai_persone("<section id='contatti'></section>", piattaforma="wordpress_agid", url=POGGIO_URL) == []
     pagina = (
@@ -152,3 +166,5 @@ def test_persone_assenti_e_link_fuori_host_non_inventano_referenti() -> None:
         '<p>Referente</p></section>'
     )
     assert estrai_persone(pagina, piattaforma="wordpress_agid", url=POGGIO_URL) == []
+    assert persone_ispezionate(pagina, piattaforma="wordpress_agid", persone=[]) is False
+    assert persone_ispezionate("<html></html>", piattaforma="wordpress_agid", persone=[]) is True

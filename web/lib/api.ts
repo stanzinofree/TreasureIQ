@@ -421,6 +421,8 @@ export interface InfoOffice {
   /** People listed on the official office page, with its verbatim role.
    *  Their order does not imply a lead contact. */
   persone?: PersonaUfficio[];
+  /** True only after a supported office page was actually read. */
+  persone_ispezionate?: boolean;
   /** The office card was actually inspected by a platform family that has a
    *  responsabile extractor (Slice 2). Only when `true` does a null
    *  `responsabile` mean "the comune does not publish it" — which the UI may

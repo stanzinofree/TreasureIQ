@@ -50,3 +50,10 @@ e la sede dallo stesso HTML usato per gli orari. La risposta API espone
 indicate dal Comune» e non converte «Referente» in «Responsabile».
 Il telefono resta un campo testuale nella risposta chat, con i due numeri
 separati da virgola; la card li presenta come due link distinti.
+
+Verifica successiva: la scheda Anagrafe di Albano Laziale pubblica Simona
+Polizzano nella sezione «Persone», con il testo dell'incarico. Il suo markup
+WordPress differisce da Poggio Mirteto; l'estrattore ora legge entrambe le
+forme. Se una scheda WordPress è stata letta e non contiene persone, la card
+lo dice in modo circoscritto alla scheda. Se una sezione contiene link persona
+che l'estrattore non sa interpretare, non dichiara l'assenza.

@@ -46,6 +46,7 @@ from treasureiq.ufficio_estrattori import (
     estrai_persone,
     estrai_recapiti,
     estrai_responsabile,
+    persone_ispezionate,
 )
 
 logger = logging.getLogger(__name__)
@@ -67,7 +68,9 @@ GIORNI_VALIDITA = 6
 #:     da una fetch fallita — le voci v1 non hanno il bit, vanno rilette una volta
 #:     perché un `False` stantio direbbe «mai ispezionata» dove invece lo era.
 #: 3 = persone, recapiti diretti e sede dalla scheda WordPress AgID.
-VERSIONE_ESTRATTORI = 3
+#: 4 = secondo markup WordPress AgID per le persone (es. Albano Laziale).
+#: 5 = prova esplicita che la sezione persone è stata ispezionata.
+VERSIONE_ESTRATTORI = 5
 
 #: Tetto sui byte scaricati dalla pagina dell'ufficio (guardia, non un dato).
 MAX_BYTES_PAGINA = 2_000_000
@@ -100,6 +103,7 @@ class OrariUfficio(BaseModel):
     indirizzo: str | None = None
     responsabile: Responsabile | None = None
     persone: list[PersonaUfficio] = Field(default_factory=list)
+    persone_ispezionate: bool = False
     telefoni: list[str] = Field(default_factory=list)
     email: list[str] = Field(default_factory=list)
     #: La pagina-dettaglio è stata DAVVERO raggiunta e parsata (Slice 2). Falso
@@ -207,6 +211,7 @@ def leggi_orari_ufficio(
     indirizzo: str | None = None
     responsabile: Responsabile | None = None
     persone: list[PersonaUfficio] = []
+    persone_verificate = False
     telefoni: list[str] = []
     email: list[str] = []
     pagina_letta = False
@@ -234,6 +239,9 @@ def leggi_orari_ufficio(
             indirizzo = estrai_indirizzo(pagina, piattaforma=piattaforma)
             responsabile = estrai_responsabile(pagina, piattaforma=piattaforma)
             persone = estrai_persone(pagina, piattaforma=piattaforma, url=url)
+            persone_verificate = persone_ispezionate(
+                pagina, piattaforma=piattaforma, persone=persone
+            )
             telefoni, email = estrai_recapiti(pagina, piattaforma=piattaforma)
     except Exception:  # noqa: BLE001 — risorsa muta: esito negativo, mai un crash
         logger.info("lettura orari-ufficio fallita: %s", url)
@@ -247,6 +255,7 @@ def leggi_orari_ufficio(
         indirizzo=indirizzo,
         responsabile=responsabile,
         persone=persone,
+        persone_ispezionate=persone_verificate,
         telefoni=telefoni,
         email=email,
         pagina_letta=pagina_letta,

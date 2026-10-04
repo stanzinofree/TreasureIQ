@@ -914,6 +914,7 @@ class OfficeOut(BaseModel):
     #: `None` altrimenti (D-05); mai inferito da un LLM (D-07).
     responsabile: ResponsabileOut | None = None
     persone: list[PersonaUfficioOut] = Field(default_factory=list)
+    persone_ispezionate: bool = False
     #: La scheda-dettaglio è stata DAVVERO ispezionata da una famiglia con
     #: estrattore responsabile (Slice 2). Solo con `True` un `responsabile is
     #: None` significa «il Comune non lo pubblica» e la UI può dirlo; con
@@ -1207,6 +1208,7 @@ def to_info_out(info: InfoAnswer) -> InfoOut:
                     else None
                 ),
                 persone=[PersonaUfficioOut(**p.model_dump()) for p in info.office.persone],
+                persone_ispezionate=info.office.persone_ispezionate,
                 responsabile_ispezionato=info.office.responsabile_ispezionato,
             )
             if info.office is not None

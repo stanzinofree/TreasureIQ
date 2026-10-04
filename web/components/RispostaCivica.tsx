@@ -215,6 +215,14 @@ export default function RispostaCivica({
               </ul>
             </div>
           )}
+          {office.persone_ispezionate && !office.persone?.length && (
+            <p className="civica__responsabile civica__responsabile--assente">
+              <span className="civica__responsabile-label">Persone</span>
+              <span className="civica__responsabile-assente">
+                non indicate nella scheda dell’ufficio
+              </span>
+            </p>
+          )}
 
           {/* Chi risponde dell'ufficio (accountability, Ramo 1). Best-effort:
               solo dove la scheda lo pubblica, mai inferito (D-07). `email`

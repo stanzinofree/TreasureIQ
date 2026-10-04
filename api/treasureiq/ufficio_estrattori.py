@@ -204,7 +204,7 @@ def estrai_persone(
     persone: list[PersonaUfficio] = []
     visti: set[str] = set()
     for titolo, ruolo_html in re.findall(
-        r"<h4\b[^>]*>(.*?)</h4>\s*<p\b[^>]*>(.*?)</p>", blocco, re.I | re.S
+        r"<h4\b[^>]*>(.*?)</h4>(.*?)(?=</div>)", blocco, re.I | re.S
     ):
         anchor = re.search(r'<a\b[^>]*href=["\']([^"\']+)["\'][^>]*>(.*?)</a>',
                            titolo, re.I | re.S)
@@ -223,6 +223,18 @@ def estrai_persone(
             nome=nome, ruolo=_testo(ruolo_html) or None, url=persona_url,
         ))
     return persone
+
+
+def persone_ispezionate(
+    pagina: str, *, piattaforma: str | None, persone: list[PersonaUfficio]
+) -> bool:
+    """Assenza dichiarabile solo se nessuna scheda persona è rimasta illeggibile."""
+    if piattaforma != "wordpress_agid":
+        return False
+    blocco = _inner(pagina, "persone")
+    if blocco is None:
+        return True
+    return bool(persone) or re.search(r"<a\b[^>]*href=", blocco, re.I) is None
 
 
 def estrai_recapiti(
